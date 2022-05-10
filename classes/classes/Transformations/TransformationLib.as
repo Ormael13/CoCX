@@ -5047,7 +5047,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny black carapace</b>. You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
 	    }
 
-	    player.coatColor = "black";
+	    player.coatColor2 = "black";
 	    player.arms.type = Arms.SPIDER;
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.SPIDER));
@@ -6441,7 +6441,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs. From the waist down, your strength completely deserts you, leaving you to fall hard on your [butt] in the dirt. With nothing else to do, you look down, only to be mesmerized by the sight of black exoskeleton creeping up a perfectly human-looking calf. It crests up your knee to envelop the joint in a many-faceted onyx coating. Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton. From a distance it would look almost like a black, thigh-high boot, but you know the truth. <b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>";
 
-	    player.coatColor = "black";
+	    player.coatColor2 = "black";
 	    player.lowerBody = LowerBody.CHITINOUS_SPIDER_LEGS;
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.CHITINOUS_SPIDER_LEGS));
@@ -6464,7 +6464,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "You find yourself suddenly paralyzed below the waist. Your dark, reflective legs splay out and drop you flat on your back. Before you can sit up, you feel tiny feelers of pain mixed with warmth and tingling running through them. Terrified at the thought of all the horrible changes that could be wracking your body, you slowly sit up, expecting to find yourself turned into some incomprehensible monstrosity from the waist down. As if to confirm your suspicions, the first thing you see is that your legs have transformed into eight long, spindly legs. Instead of joining directly with your hips, they now connect with the spider-like body that has sprouted in place of where your legs would normally start. Your abdomen has gotten even larger as well. Once the strength returns to your new, eight-legged lower body, you struggle up onto your pointed 'feet', and wobble around, trying to get your balance. As you experiment with your new form, you find you're even able to twist the spider half of your body down between your legs in an emulation of your old, bipedal stance. That might prove useful should you ever want to engage in 'normal' sexual positions, particularly since your [butt] is still positioned just above the start of your arachnid half. <b>You're now a drider.</b>";
 
 	    player.legCount = 8;
-	    player.coatColor = "black";
+	    player.coatColor2 = "black";
 	    player.lowerBody = LowerBody.DRIDER;
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.DRIDER));
@@ -8419,7 +8419,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "A burst of pain hits you just above your [butt], coupled with a sensation of burning heat and pressure. You can feel your " + player.skinFurScales() + " tearing as something forces its way out of your body. Reaching back, you grab at it with your hands. It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape. The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen! With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones. That may prove useful. <b>You now have a spider's abdomen hanging from above your [butt]!</b>";
 
-	    player.coatColor = "black";
+	    player.coatColor2 = "black";
 	    player.tailVenom = 5;
 	    player.tailRecharge = 5;
 	    player.tailType = Tail.SPIDER_ADBOMEN;

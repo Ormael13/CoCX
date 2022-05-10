@@ -93,7 +93,6 @@ public class GoblinElderScene extends BaseContent
 		//[LOSS SEXAHNZ]
 		public function goblinElderBeatYaUp():void {
 			clearOutput();
-			if (doSFWloss()) return;
 			var x:int;
 			if(player.lust <= 99) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious elder saunters up, pink arousing flames glow in her left hand. She exposes your nether regions and throws the pink flames right into your groin! You are unable to fight back. \n\n");
 			if(player.cockThatFits(monster.vaginalCapacity()) >= 0 && player.hasCock() && (!player.hasVagina() || rand(2) == 0)) 
@@ -296,7 +295,7 @@ public class GoblinElderScene extends BaseContent
 				feeder = giveGoblinAMilkMustache;
 			}
 			if (player.lust >= 33 && player.gender > 0 && (fitsFuck != null || cuntFuck != null || tooBig != null ||
-					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null) && flags[kFLAGS.SFW_MODE] <= 0) {
+					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null)) {
 				outputText("\n\n<b>What do you do to her, and if anything, which of your body parts do you use?</b>");
 				menu();
 				if (fitsFuck != null) addButton(0, "Dick Fuck", fitsFuck);
@@ -368,7 +367,7 @@ public class GoblinElderScene extends BaseContent
 				feeder = giveGoblinAMilkMustache;
 			}
 			if (player.lust >= 33 && player.gender > 0 && (fitsFuck != null || cuntFuck != null || tooBig != null ||
-					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null) && flags[kFLAGS.SFW_MODE] <= 0) {
+					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null)) {
 				outputText("\n\n<b>What do you do to her, and if anything, which of your body parts do you use?</b>");
 				menu();
 				if (fitsFuck != null) addButton(0, "Dick Fuck", fitsFuck);

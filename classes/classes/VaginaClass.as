@@ -124,7 +124,6 @@ public class VaginaClass implements IOrifice {
 			return 10000;
 		}
 
-		//TODO call this in the setter? With new value > old value check?
 		/**
 		 * Resets the recovery counter.
 		 * The counter is used for looseness recovery over time, a reset usualy occurs when the looseness increases.

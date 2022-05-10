@@ -28,10 +28,10 @@ use namespace CoC;
 		
 		private function eyeTyrantOmnicast():void {
 			outputText("The gazer suddenly fixates you with all of its eye unleashing a barrage of rays at you! ");
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
+			eyeTyrantOmnicastD();
+			eyeTyrantOmnicastD();
+			eyeTyrantOmnicastD();
+			eyeTyrantOmnicastD();
 			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
 			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
 			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
@@ -41,8 +41,8 @@ use namespace CoC;
 			outputText("\n\n");
 		}
 		private function eyeTyrantOmnicastD():void {
-			var damage:Number = eBaseIntelligenceDamage() * 0.15;
-			damage += eBaseWisdomDamage() * 0.15;
+			var damage:Number = eBaseIntelligenceDamage() * 0.25;
+			damage += eBaseWisdomDamage() * 0.25;
 			damage = Math.round(damage);
 			damage = player.takeMagicDamage(damage, true);
 		}
@@ -74,8 +74,8 @@ use namespace CoC;
             this.bonusHP = mod == 0 ? 0 : 2500*(mod-1);
             this.bonusLust = 255 + 75*mod;
             this.level = 60 + 5*mod; //starts from 65 due to EL levelMod calculations;
-            this.gems = int((1300 + rand(260)) * Math.exp(0.2*mod));
-            this.additionalXP = int(6000 * Math.exp(0.2*mod));
+            this.gems = int((1300 + rand(260)) * Math.exp(0.3*mod));
+            this.additionalXP = int(6000 * Math.exp(0.3*mod));
             
 			this.a = "";
 			this.short = "Eye Tyrant";
@@ -91,8 +91,8 @@ use namespace CoC;
 			this.tallness = 10*12+10;
 			this.hips.type = Hips.RATING_AMPLE;
 			this.butt.type = Butt.RATING_NOTICEABLE + 1;
-			//this.lowerBody = LowerBody.HYDRA;
-			//this.faceType = Face.SNAKE_FANGS;
+			this.lowerBody = LowerBody.GAZER;
+			this.faceType = Face.ANIMAL_TOOTHS;
 			this.skinTone = "light grey";
 			this.hairColor = "black";
 			this.hairLength = 16;

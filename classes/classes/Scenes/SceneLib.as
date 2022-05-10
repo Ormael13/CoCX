@@ -169,6 +169,8 @@ public class SceneLib {
 
     public static var holliScene:HolliScene = new HolliScene();
 
+    public static var iridesianFollower:IridesianFollower = new IridesianFollower();
+
     public static var isabellaScene:IsabellaScene = new IsabellaScene();
 
     public static var isabellaFollowerScene:IsabellaFollowerScene = new IsabellaFollowerScene();
@@ -245,11 +247,11 @@ public class SceneLib {
 
     public static var vala:ValaScene = new ValaScene();
     
-    public static var valeria:Valeria = new Valeria();
+    public static var valeria:ValeriaScene = new ValeriaScene();
 
     public static var vapula:Vapula = new Vapula();
 
-    //public static var waizabi:WaizAbiFollower = new WaizAbiFollower();
+    public static var waizabi:WaizAbiFollower = new WaizAbiFollower();
 
     public static var woodElves:WoodElves = new WoodElves();
 
@@ -308,6 +310,8 @@ public class SceneLib {
 	public static var fleshGolemScenes:FleshGolemScene = new FleshGolemScene();
 
     public static var phyllaScene:PhyllaScene = new PhyllaScene();
+
+    public static var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
 
     public static var uniqueSexScene:UniqueSexScenes = new UniqueSexScenes();
 

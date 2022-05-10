@@ -19,8 +19,9 @@ import classes.Player;
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.tallness >= 80) return super.canUse();
-			outputText("You aren't tall enough to wear this kimono!  ");
+			if (game.player.tallness >= 80 || game.player.level >= 40) return super.canUse();
+			if (game.player.level >= 40) outputText("You try and wear the legendary armor but to your disapointment the item simply refuse to stay on your body. It would seem you yet lack the power and right to wield this item.");
+			else outputText("You aren't tall enough to wear this kimono!  ");
 			return false;
 		}
 

@@ -434,7 +434,7 @@ import classes.CoC;
 			//Various Errors preventing action
 			if (keyItems.length <= 0)
 			{
-				//trace("ERROR: KeyItem could not be removed because player has no key items.");
+				CoC_Settings.error("KeyItem could not be removed because player has no key items.");
 				return;
 			}
 			while (counter > 0)
@@ -455,8 +455,8 @@ import classes.CoC;
 			//Various Errors preventing action
 			if (keyItems.length <= 0)
 			{
+				CoC_Settings.error("Looking for keyitem '" + keyItemName + "' to change value " + statusValueNum + ", and player has no key items.");
 				return;
-					//trace("ERROR: Looking for keyitem '" + statusName + "' to change value " + statusValueNum + ", and player has no key items.");
 			}
 			while (counter > 0)
 			{
@@ -466,7 +466,7 @@ import classes.CoC;
 				{
 					if (statusValueNum < 1 || statusValueNum > 4)
 					{
-						//trace("ERROR: AddKeyValue called with invalid key value number.");
+						CoC_Settings.error("ERROR: AddKeyValue called with invalid key value number.");
 						return;
 					}
 					if (statusValueNum == 1)
@@ -480,82 +480,41 @@ import classes.CoC;
 					return;
 				}
 			}
-			//trace("ERROR: Looking for keyitem '" + statusName + "' to change value " + statusValueNum + ", and player does not have the key item.");
+			CoC_Settings.error("Looking for key item '" + keyItemName + "' to change value " + statusValueNum + ", and player does not have the key item.");
 		}
 
-		public function keyItemv1(keyItemName:String):Number
-		{
-			var counter:Number = keyItems.length;
-			//Various Errors preventing action
-			if (keyItems.length <= 0)
-			{
-				return 0;
-					//trace("ERROR: Looking for keyItem '" + statusName + "', and player has no key items.");
+		public function keyItemvX(keyItemName:String, keyValue:int):Number{
+			if (keyItems.length <= 0){	//If there's nothing, then it shouldn't be considered an error to report. Code handles it fine.
+				trace("ERROR: Looking for keyItem '" + keyItemName + "', and player has no key items.");
+				if (CoC.instance.debug){
+					EngineCore.outputText("ERROR: Looking for keyItem '" + keyItemName + "', and player has no key items.");
+				}
 			}
-			while (counter > 0)
-			{
-				counter--;
-				if (keyItems[counter].keyName == keyItemName)
-					return keyItems[counter].value1;
+			else{
+				var kItem:int = -1;
+				var counter:int = keyItems.length
+				while (counter > 0){
+					counter--;
+					if(keyItems[counter].keyName == keyItemName) {
+						kItem = counter;
+						break;
+					}
+				}
+				if (kItem != -1){
+					switch (keyValue){
+						case 1:
+							return keyItems[kItem].value1;
+						case 2:
+							return keyItems[kItem].value2;
+						case 3:
+							return keyItems[kItem].value3;
+						case 4:
+							return keyItems[kItem].value4;
+						default:
+							CoC_Settings.error("ERROR: Invalid keyValue requested for item " + keyItemName + ".");
+					}
+				}
 			}
-			//trace("ERROR: Looking for key item '" + statusName + "', but player does not have it.");
-			return 0;
-		}
-
-		public function keyItemv2(keyItemName:String):Number
-		{
-			var counter:Number = keyItems.length;
-			//Various Errors preventing action
-			if (keyItems.length <= 0)
-			{
-				return 0;
-					//trace("ERROR: Looking for keyItem '" + statusName + "', and player has no key items.");
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (keyItems[counter].keyName == keyItemName)
-					return keyItems[counter].value2;
-			}
-			//trace("ERROR: Looking for key item '" + statusName + "', but player does not have it.");
-			return 0;
-		}
-
-		public function keyItemv3(keyItemName:String):Number
-		{
-			var counter:Number = keyItems.length;
-			//Various Errors preventing action
-			if (keyItems.length <= 0)
-			{
-				return 0;
-					//trace("ERROR: Looking for keyItem '" + statusName + "', and player has no key items.");
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (keyItems[counter].keyName == keyItemName)
-					return keyItems[counter].value3;
-			}
-			//trace("ERROR: Looking for key item '" + statusName + "', but player does not have it.");
-			return 0;
-		}
-
-		public function keyItemv4(keyItemName:String):Number
-		{
-			var counter:Number = keyItems.length;
-			//Various Errors preventing action
-			if (keyItems.length <= 0)
-			{
-				return 0;
-					//trace("ERROR: Looking for keyItem '" + statusName + "', and player has no key items.");
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (keyItems[counter].keyName == keyItemName)
-					return keyItems[counter].value4;
-			}
-			//trace("ERROR: Looking for key item '" + statusName + "', but player does not have it.");
 			return 0;
 		}
 
@@ -584,27 +543,6 @@ import classes.CoC;
 			return -1;
 		}
 
-		//Grow
-
-		//BreastCup
-
-		/*OLD AND UNUSED
-		   public function breastCupS(rowNum:Number):String {
-		   if(breastRows[rowNum].breastRating < 1) return "tiny";
-		   else if(breastRows[rowNum].breastRating < 2) return "A";
-		   else if(breastRows[rowNum].breastRating < 3) return "B";
-		   else if(breastRows[rowNum].breastRating < 4) return "C";
-		   else if(breastRows[rowNum].breastRating < 5) return "D";
-		   else if(breastRows[rowNum].breastRating < 6) return "DD";
-		   else if(breastRows[rowNum].breastRating < 7) return "E";
-		   else if(breastRows[rowNum].breastRating < 8) return "F";
-		   else if(breastRows[rowNum].breastRating < 9) return "G";
-		   else if(breastRows[rowNum].breastRating < 10) return "GG";
-		   else if(breastRows[rowNum].breastRating < 11) return "H";
-		   else if(breastRows[rowNum].breastRating < 12) return "HH";
-		   else if(breastRows[rowNum].breastRating < 13) return "HHH";
-		   return "massive custom-made";
-		 }*/
 		public function viridianChange():Boolean
 		{
 			var count:int = cockTotal();
@@ -652,7 +590,7 @@ import classes.CoC;
 				if (hasPerk(MutationsLib.OrcAdrenalGlandsPrimitive)) min -= maxHP() * 0.02;
 			}
 			if (hasPerk(PerkLib.Rage)) min -= maxHP() * 0.05;
-			if (hasPerk(PerkLib.TooAngryToDie)) min += maxWrath();
+			if (hasPerk(PerkLib.TooAngryToDie)) min -= maxWrath();
 			if (hasPerk(PerkLib.DeityJobMunchkin)) {
 				min -= str;
 				min -= tou;
@@ -1010,6 +948,7 @@ import classes.CoC;
 			var multimaxven:Number = 1;
 			if (CoC.instance.transformations.FaceSnakeFangs.isPresent()) maxven += 200;
 			if (CoC.instance.transformations.FaceSpiderFangs.isPresent()) maxven += 200;
+			if (CoC.instance.transformations.FaceJabberwocky.isPresent()) maxven += 200;
 			if (game.player.tailType == Tail.BEE_ABDOMEN) maxven += 300;
 			if (game.player.tailType == Tail.SPIDER_ADBOMEN) maxven += 300;
 			if (game.player.tailType == Tail.SCORPION) maxven += 300;

@@ -282,7 +282,7 @@ use namespace CoC;
             else {
                 outputText("You feel something unlock within you as you drink the elixir, some of the veil of corruption being washed out of you as the liquid undo and counteract some of the vile demonic changes your body was afflicted with.");
                 outputText("\n\n<b>Minimum corruption lowered!</b>");
-                if (player.keyItemv1("Rathazul's Purity Elixir") > 1) player.addKeyValue("Rathazul's Purity Elixir", 1, -1);
+                if (player.keyItemvX("Rathazul's Purity Elixir", 1) > 1) player.addKeyValue("Rathazul's Purity Elixir", 1, -1);
                 else player.removeKeyItem("Rathazul's Purity Elixir");
                 if (player.hasPerk(PerkLib.PurityElixir)) player.addPerkValue(PerkLib.PurityElixir, 1, 1);
                 else player.createPerk(PerkLib.PurityElixir, 1, 0, 0, 0);
@@ -299,7 +299,7 @@ use namespace CoC;
 			if (player.armor == armors.HBARMOR) currentArmorSFDrainrate += 180;
 			if (player.vehicles == vehicles.HB_MECH) {
 				if (player.hasKeyItem("HB Internal Systems") >= 0) {
-					if (player.keyItemv1("HB Internal Systems") == 2) currentArmorSFDrainrate += 40;
+					if (player.keyItemvX("HB Internal Systems", 1) == 2) currentArmorSFDrainrate += 40;
 					else currentArmorSFDrainrate += 50;
 				}
 				else currentArmorSFDrainrate += 60;
@@ -317,7 +317,7 @@ use namespace CoC;
 			if (player.vehicles == vehicles.HB_MECH) {
 				maxSFCapacity += 1000;
 				if (player.hasKeyItem("HB Internal Systems") >= 0) {
-					if (player.keyItemv1("HB Internal Systems") == 2) maxSFCapacity += 5000;
+					if (player.keyItemvX("HB Internal Systems", 1) == 2) maxSFCapacity += 5000;
 					else maxSFCapacity += 2000;
 				}
 			}
@@ -743,7 +743,7 @@ use namespace CoC;
 			if (player.hasPerk(PerkLib.StrongBack)) slots++;
 			if (player.hasPerk(PerkLib.StrongBack2)) slots++;
 			if (player.hasPerk(PerkLib.StrongBack3)) slots++;
-			slots += player.keyItemv1("Backpack");
+			if (player.hasKeyItem("Backpack") >= 0) slots += player.keyItemvX("Backpack", 1);
 			//Constrain slots to between 5 and 20.
 			if (slots < 5) slots = 5;
 			if (slots > 20) slots = 20;
@@ -768,7 +768,7 @@ use namespace CoC;
 		//Clear storage slots
 		public function clearStorage():void {
 			//Various Errors preventing action
-			if (itemStorage == null) trace("ERROR: Cannot clear storage because storage does not exist.");
+			if (itemStorage == null) CoC_Settings.error("Cannot clear storage because storage does not exist.");
 			else {
 				trace("Attempted to remove " + itemStorage.length + " storage slots.");
 				itemStorage.splice(0, itemStorage.length);
@@ -777,7 +777,7 @@ use namespace CoC;
 
 		public function clearGearStorage():void {
 			//Various Errors preventing action
-			if (gearStorage == null) trace("ERROR: Cannot clear storage because storage does not exist.");
+			if (gearStorage == null) CoC_Settings.error("Cannot clear storage because storage does not exist.");
 			else {
 				trace("Attempted to remove " + gearStorage.length + " storage slots.");
 				gearStorage.splice(0, gearStorage.length);
@@ -786,7 +786,7 @@ use namespace CoC;
 
 		public function clearPearlStorage():void {
 			//Various Errors preventing action
-			if (pearlStorage == null) trace("ERROR: Cannot clear storage because storage does not exist.");
+			if (pearlStorage == null) CoC_Settings.error("Cannot clear storage because storage does not exist.");
 			else {
 				trace("Attempted to remove " + pearlStorage.length + " storage slots.");
 				pearlStorage.splice(0, pearlStorage.length);
@@ -795,7 +795,7 @@ use namespace CoC;
 
 		public function initializeGearStorage():void {
 			//Completely empty storage array
-			if (gearStorage == null) trace("ERROR: Cannot clear gearStorage because storage does not exist.");
+			if (gearStorage == null) CoC_Settings.error("Cannot clear gearStorage because storage does not exist.");
 			else {
 				trace("Attempted to remove " + gearStorage.length + " gearStorage slots.");
 				gearStorage.splice(0, gearStorage.length);
@@ -810,7 +810,7 @@ use namespace CoC;
 
 		public function initializePearlStorage():void {
 			//Completely empty storage array
-			if (pearlStorage == null) trace("ERROR: Cannot clear pearlStorage because storage does not exist.");
+			if (pearlStorage == null) CoC_Settings.error("Cannot clear pearlStorage because storage does not exist.");
 			else {
 				trace("Attempted to remove " + pearlStorage.length + " pearlStorage slots.");
 				pearlStorage.splice(0, pearlStorage.length);
@@ -1314,7 +1314,7 @@ use namespace CoC;
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipArmor():void {
-			if (player.armorName == "goo armor") { //Valeria belongs in the camp, not in your inventory!
+			if (player.armor == armors.GOOARMR) { //Valeria belongs in the camp, not in your inventory!
 				player.armor.removeText();
 				player.setArmor(ArmorLib.NOTHING);
 				manageEquipment(1);

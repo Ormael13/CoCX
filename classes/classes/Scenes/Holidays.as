@@ -69,7 +69,6 @@ public class Holidays {
             EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour);
         }
         EngineCore.simpleChoices("Fuck It", fuck, "Mount It", mount, "", null, "", null, "No Way", SceneLib.camp.returnToCampUseOneHour);
-        //addButton(3, "Smash It", pumpkinSmash);
         //[HOLY SHIT YOU BE FUCKING A PUMPKIN]
         function pumpkinFuck():void {
             EngineCore.clearOutput();
@@ -3426,7 +3425,7 @@ public class Holidays {
         EngineCore.clearOutput();
         if (flags[kFLAGS.KAMI_ENCOUNTER] == 1) {
             //[Player chooses 'Kami']
-            EngineCore.outputText("You give Kami a nod, heading out back as she punches out for a quick break.  The waitress is out quicker than you expect, already ripping out of her red and white uniform to expose her hungry phallus.  \"<i>I'm not gonna lie, doll, you wouldn't BELIEVE how frisky working in this outfit has gotten me.</i>\"  You eye over her bodacious figure, planning your course of action.  You can tell she's been sampling her own lust-inducing cakes, and as impossible as it sounds, she looks far more hornier than usual.");
+            EngineCore.outputText("You give Kami a nod, heading out back as she punches out for a quick break.  The waitress is out quicker than you expect, already ripping out of her red and white uniform to expose her hungry phallus.  \"<i>I'm not gonna lie, doll, you wouldn't BELIEVE how frisky working in this outfit has gotten me.</i>\"  You eye over her bodacious figure, planning your course of action.  You can tell she's been sampling her own lust-inducing cakes, and as impossible as it sounds, she looks far hornier than usual.");
             //[Player gets the 4 options again]
             //Give Anal (Requires cock and no naga or centaur legs.)
             //Receive Anal (Again, no naga or centaur legs.)
@@ -3434,11 +3433,11 @@ public class Holidays {
             //Double-Dick Fuck (requires at least 2 cocks)
             EngineCore.menu();
             if (player.hasCock() && player.cockThatFits(70) >= 0) EngineCore.addButton(0, "Give Anal", giveKamiTheChristmasRooAnal);
-            else EngineCore.addButtonDisabled(0, "Give Anal", "Req. cock with area < 70");
+            else EngineCore.addButtonDisabled(0, "Give Anal", "Req. cock with area smaller than 70");
             EngineCore.addButton(1, "Receive Anal", takeItRooButtStyle);
             EngineCore.addButton(2, "Give BJ", KamiBlowJob);
             if (player.cockTotal() > 1 && player.cockThatFits(70) >= 0 && player.cockThatFits2(70) >= 0) EngineCore.addButton(3, "Doube-Fuck", KamiDoubleDickFuck);
-            else EngineCore.addButtonDisabled(3, "Doube-Fuck", "Req. 2 cocks with area < 70");
+            else EngineCore.addButtonDisabled(3, "Doube-Fuck", "Req. 2 cocks with area smaller than 70");
         }
         else {
             EngineCore.outputText("You summon the buxom waitress over, getting a much better view of her gentle face now that she's found the time to sit and talk with you.  With hazelnut-brown eyes, a gorgeous set of lips and tousled blonde hair, her faux-rebellious look is the icing on the festive cake for this busty waitress, her cute little santa hat being the strawberry on top.  Smooth, olive skin runs halfway down her meaty thighs before fading into soft fur, while her frail forearms follow the same pattern. Her huge kangaroo tail wags idly throughout your conversation, and you've gained a pretty good rhythm whilst engaging her in it. Determined to make things go well, you pause to pull out a charming one-liner when her index finger meets your ");

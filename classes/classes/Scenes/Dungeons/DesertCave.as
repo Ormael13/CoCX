@@ -1115,8 +1115,8 @@ public class DesertCave extends DungeonAbstractContent
 			menu();
             //Male options
 			if(player.hasCock()) {
-				addButtonIfTrue(0,"Fuck Her",menFuckUpSomeCumWitch, "Req. cock with area < " + monster.vaginalCapacity(), player.cockThatFits(monster.vaginalCapacity()) >= 0);
-				addButtonIfTrue(1,"Too Big Fuck",maleTooBigVictorySex, "Req. cock with area > " + monster.vaginalCapacity(), player.biggestCockArea() > monster.vaginalCapacity());
+				addButtonIfTrue(0,"Fuck Her",menFuckUpSomeCumWitch, "Req. cock with area smaller than " + monster.vaginalCapacity(), player.cockThatFits(monster.vaginalCapacity()) >= 0);
+				addButtonIfTrue(1,"Too Big Fuck",maleTooBigVictorySex, "Req. cock with area larger than " + monster.vaginalCapacity(), player.biggestCockArea() > monster.vaginalCapacity());
                 addButtonIfTrue(2,"Tentacles",tentacleVictoryGangbangCumWitch, "Req. 3 tentacle/stamen cocks", player.countCocksWithType(CockTypesEnum.TENTACLE) >= 3).hint("Fuck the Cum Witch with your tentacle cocks.");
 			}
             //Female Victory Sex
@@ -1140,17 +1140,14 @@ public class DesertCave extends DungeonAbstractContent
 		//*Male Victory Sex
 		public function menFuckUpSomeCumWitch():void {
 			clearOutput();
-			var x:int = player.cockThatFits(monster.vaginalCapacity());
+			var x:int = player.cockThatFits(monster.vaginalCapacity()); //failsafe
 			var y:int = player.cockThatFits2(monster.vaginalCapacity());
 			outputText("You shuck out of your [armor] in eager anticipation, [eachCock] aleady ");
 			if(player.lust < 50) outputText("half-hard");
 			else outputText("rock-hard");
 			outputText(" and pulsing with growing readiness.  The cum witch looks up at you with disdain, but the rigidity of her shaft and sloppy wetness of her flushed quim leave no doubt as to her state.   Her body blushes honestly as you reposition her, spreading her legs nice and wide.  You have to lift her hefty sack to expose the thick, wet lips of her pussy.  Jumping in response, her fat cock oozes a trickle of precum onto her dusky belly, oiling her dusky skin into a sensual shine.");
 			
-			outputText("\n\n\"<i>You think THAT compares to m-my wondrous... perfect penis?  I've knocked up more women than youUUU-</i>\" she taunts until you cut her off with a well-placed thrust.  [OneCock] vanishes ");
-			if(player.cockThatFits(monster.vaginalCapacity()) < 0) outputText("most of");
-			else outputText("all of the way");
-			outputText(" inside her, sheathed deep in her under-used twat.  Her tight passage fits around your " + cockDescript(x) + " like a custom-made glove, a slippery warm embrace that threatens to rob you of your very reason.  The witch begins pumping her ebony cock along with the motions of your hips, throwing her head back in wordless pleasure that only a true hermaphrodite can experience.\n\n");
+			outputText("\n\n\"<i>You think THAT compares to m-my wondrous... perfect penis?  I've knocked up more women than youUUU-</i>\" she taunts until you cut her off with a well-placed thrust.  [OneCock] vanishes all the way inside her, sheathed deep in her under-used twat.  Her tight passage fits around your " + cockDescript(x) + " like a custom-made glove, a slippery warm embrace that threatens to rob you of your very reason.  The witch begins pumping her ebony cock along with the motions of your hips, throwing her head back in wordless pleasure that only a true hermaphrodite can experience.\n\n");
 			//Small SH advertisement
             if (!sceneHunter.uniHerms && y >= 0 && player.gender == 3)
                 outputText("<b>Want a DP option? Check SceneHunter in settings! :P</b>\n\n");
@@ -1170,8 +1167,7 @@ public class DesertCave extends DungeonAbstractContent
             //PARTS
             //==========================================================================================
             function mFUSCW_herm():void {
-                outputText("Two can play at that game.");
-                var x:int = player.cockThatFits(monster.vaginalCapacity());
+				outputText("Two can play at that game.");
                 outputText("\n\nYou pivot around so your [butt] is facing her and your dick is spearing straight down into her honeyed vise.  It's less pleasurable than your previous position, at least until you yank the dickgirl's cock out of her hands and ram it into your slit, fucking both her virile tool and fertile cunt at the same time.  Your futanari lover finally gives in the pleasures of the act and stops resisting.  She begs, \"<i>Yes, don't stop!  Fucking ride me!  By the mothers, that's good!</i>\" while her hips lift against your, slamming hard into your groin with echoing force.");
                 //cuntchange
                 player.cuntChange(monster.biggestCockArea(), true, true, false);
@@ -1193,8 +1189,8 @@ public class DesertCave extends DungeonAbstractContent
                 if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
                 else player.knockUp(PregnancyStore.PREGNANCY_SAND_WITCH, PregnancyStore.INCUBATION_SAND_WITCH, 90);
                 player.sexReward("cum", "Vaginal");
-                player.orgasm();
                 dynStats("lus", 5);
+				mFUSCW_end();
             }
 
             function mFUSCW_single():void {
@@ -3650,7 +3646,6 @@ public class DesertCave extends DungeonAbstractContent
 		//~ FUCK EM ALL
 		public function fuckAllThePregWitches():void {
 			clearOutput();
-			var x:int = player.cockThatFits(50);
 			outputText("The witches crawl forwards with their bellies and double rows of milk filled tits impeding their movements. Despite their glistening tanned bodies and highly toned legs they still amount to little more than lewd piles of fleshy orbs, each one with double pairs of cunts including ones insatiably starving for cum to fill their empty second wombs. Each of their light brown and sweaty bodies looks equally appetizing, and as [eachCock] slowly engorges it becomes clear that if you're going to fuck any of them then you're going have to fuck all of them.  Anything less than knocking up all of the witches simply won't do.  By the time you're done with them, half of the next generation of sand witches will call you 'father'.");
 			
 			outputText("\n\nAs [eachCock] starts rising in to the air, it isn't difficult to make your way behind the slow moving witches and encourage them to raise their dual pussies in to the air.  Each of their torsos are heavily weighted down to the ground, but this aids in their tilting their pelvises to ensure their dripping pussies are properly displayed between their toned thighs.  Two pairs of dark and swollen labia present themselves to you on each witch, and you can easily see how one pair of nether lips are gaping wide from the pressure built up in the womb it leads to.  The other pair is just as swollen but seems to be dripping pussy juices with greater desire as it thirsts to fill its empty womb with seed.  The rivers of pussy juice keep the thighs and undersides of the pregnant bellies on each of these whores incredibly wet and slick.");
@@ -4312,7 +4307,6 @@ public class DesertCave extends DungeonAbstractContent
 					//{START CUM WITCH FIGHT}
 					startCombat(new CumWitch());
 					doNext(playerMenu);
-					return;
 				}
 				//{CUM WITCH BEATEN}
 				else {

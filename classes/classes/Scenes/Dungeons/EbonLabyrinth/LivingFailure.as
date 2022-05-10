@@ -134,8 +134,8 @@ use namespace CoC;
             this.bonusHP = mod == 0 ? 0 : 2000*(mod-1);
             this.bonusLust = 395 + 75*mod;
             this.level = 60 + 5*mod; //starts from 65 due to EL levelMod calculations;
-            this.gems = int((1200 + rand(200)) * Math.exp(0.2*mod));
-            this.additionalXP = int(4000 * Math.exp(0.2*mod));
+            this.gems = int((1200 + rand(200)) * Math.exp(0.3*mod));
+            this.additionalXP = int(4000 * Math.exp(0.3*mod));
 			
 			this.a = " ";
 			this.short = "Living Failure";
@@ -164,6 +164,8 @@ use namespace CoC;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, (60 + 5*mod), 0, 0, 0);
 			this.checkMonster();
 		}
 	}

@@ -69,14 +69,13 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 35.001;
+    public var modSaveVersion:Number = 35.012;
     public var levelCap:Number = 185;
 
     //Used to restrict random drops from overlapping uniques
     public var plotFight:Boolean = false;
     public var timeQ:Number = 0; // Queued hours
     public var timeQmin:int = 0; // Queued minutes
-    //FIXME @OXDECEPTION Move above vars to more appropriate classes if possible
 
     /*private static var doCamp:Function; //Set by campInitialize, should only be called by playerMenu
     private static function campInitialize(passDoCamp:Function):void { doCamp = passDoCamp; }*/
@@ -252,7 +251,6 @@ public class CoC extends MovieClip
 
         //DEBUG, used all over the place
         debug = false;
-        //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_0.8s4";
@@ -418,7 +416,6 @@ public class CoC extends MovieClip
 
     public function spriteSelect(choice:Class = null):void {
         // Inlined call from lib/src/coc/view/MainView.as
-        // TODO: When flags goes away, if it goes away, replace this with the appropriate settings thing.
         if (choice == null || flags[kFLAGS.SHOW_SPRITES_FLAG] == 1)
             mainViewManager.hideSprite();
         else

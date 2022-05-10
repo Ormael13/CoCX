@@ -35,7 +35,7 @@ public class Syth extends Monster
 		
 		private function sythAttack1():void {
 			wrath -= 30;
-			var damage:Number = 0;
+			var damage:Number = this.weaponAttack;
 			damage += eBaseStrengthDamage();
 			damage *= 2;
 			outputText(capitalA + short + " lift it weapons with all his strength and smash them on your head. ");

@@ -80,25 +80,35 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 		private function flowerFun():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_corruptedGlade);
-			if (player.hasCock()) { //Sex scenes for those with cawks
-				if (player.cocks.length == 1) { //Single Cawk
-					outputText("You grin to yourself as you decide to see just how close to a pussy these perverted little flowers are.  The thick stem bends with ease as you grasp it and bend it towards your groin, your other hand fumbling to open your [armor].  In seconds you free yourself and gingerly bring the folds closer, the musky scent that fills the air rapidly bringing you to a full, throbbing hardness.  The first touch of petals to your skin slicks you with the flower's silky secretions, allowing you to easily slip between the petals.  Though the flower looks fairly deep, you quickly feel yourself bottom out inside the petal's slippery grip.  Shrugging, you decide to make the best of it and begin thrusting into the plant, enjoying the unusual sensations along the front-most parts of your [cock].  As you pound away, you begin to notice a change in the rear of the flower.\n\n");
 
-					outputText("It feels as if something is opening up, and the tip of your cock begins slipping through a tight ring, bulging the plant's stem noticeably.  The sudden change worries you enough to pull back for a moment, your [cock] nearly clearing the opening before dozens of tiny whip-like tendrils burst from the flower, wrapping your maleness with painful tightness.  They constrict further and with a burst of movement, slam the flower down onto your [cock], pulling you further and further into the stem with painful force.  You struggle briefly but the pain it causes your over-stimulated member is too much, so you just give up, letting the pussy-like plant draw the last of you inside its stem, the silken flowers cupping around your ");
-					if (player.balls > 0)
-						outputText("balls and gently squeezing them.\n\n");
-					else
-						outputText("groin and gently squeezing your taint.\n\n");
+			sceneHunter.selectGender(
+				curry(sceneHunter.selectSingleMulti, singleF, multiF),
+				null,
+				["Lick", oralF]
+			)
+			//=========================================================================================================
 
-					outputText("You feel a flood of wetness surge up from the depths of the plant, surrounding your member with even more fluid as the stem begins constricting and squeezing.  Gently at first, and then with increasing insistence, a suction builds inside the stem, drawing more and more blood into your [cock].  The stem, now heavily distended by your massive member, continues rippling, squeezing, and sucking your over-engorged meat-pole, overwhelming your mind with sensation far beyond normal.  You'd wonder just what kind of tactile-enhancing fluids that plant excretes, if you weren't already mindlessly pistoning against the tainted plant, still locked inside it by tight little tentacles.\n\n");
-				}
-				else { //Multicock
-					outputText("You grin to yourself as you decide to see just how close to a pussy these perverted little flowers are.  The thick stems bend with ease as you grab a few with your hand and pull them towards your groin, your other hand fumbling to open your [armor].  In seconds you free yourself, and gingerly bring the folds closer.  The musky scent filling the air rapidly brings your [cocks] to a full, throbbing hardness.  The first touch of petals to your skin slicks you with the flower's silky secretions, allowing you to easily slip between the petals.  Though the flowers look fairly deep, you quickly feel yourself bottom out inside the petals' slippery grip.  Shrugging, you decide to make the best of it and begin thrusting into the plant, enjoying the unusual sensations along the front-most parts of your [cocks].  As you pound away, you begin to notice a change in the rear of the flowers.\n\n");
+			function singleF():void { //Sex scenes for those with cawks
+				outputText("You grin to yourself as you decide to see just how close to a pussy these perverted little flowers are.  The thick stem bends with ease as you grasp it and bend it towards your groin, your other hand fumbling to open your [armor].  In seconds, you free yourself and gingerly bring the folds closer, the musky scent that fills the air rapidly bringing you to a full, throbbing hardness.  The first touch of petals to your skin slicks you with the flower's silky secretions, allowing you to easily slip between the petals.  Though the flower looks fairly deep, you quickly feel yourself bottom out inside the petal's slippery grip.  Shrugging, you decide to make the best of it and begin thrusting into the plant, enjoying the unusual sensations along the front-most parts of your [cock].  As you pound away, you begin to notice a change in the rear of the flower.\n\n");
 
-					outputText("They seem to be gradually opening up, allowing the smallest of your cock-tips to begin slipping through an opening in the backs of the flowers and into the stems.  Shocked by this unexpected development, you pull the bundle of flowers from your [cocks], but whiplike tendrils shoot forth from deep within the flowers, wrapping tightly around your manhoods, painfully squeezing as they drag your [cocks] back into the tight vaginal openings.  They pull tighter as they force you deeper inside the plant, pulling the full length of each of your members into the constricting stalks.   Wrapped tightly around your base, the tendrils form effective cock-rings, making each of your [cocks] overfill with blood.\n\n");
+				outputText("It feels as if something is opening up, and the tip of your cock begins slipping through a tight ring, bulging the plant's stem noticeably.  The sudden change worries you enough to pull back for a moment, your [cock] nearly clearing the opening before dozens of tiny whip-like tendrils burst from the flower, wrapping your maleness with painful tightness.  They constrict further and with a burst of movement, slam the flower down onto your [cock], pulling you further and further into the stem with painful force.  You struggle briefly, but the pain it causes your over-stimulated member is too much, so you just give up, letting the pussy-like plant draw the last of you inside its stem, the silken flowers cupping around your ");
+				if (player.balls > 0)
+					outputText("balls and gently squeezing them.\n\n");
+				else
+					outputText("groin and gently squeezing your taint.\n\n");
 
-					outputText("You briefly try to free yourself but the pain it causes your groin overwhelms you.  Resigned to your fate, you allow the plants to wrap their petals fully around your groin, encapsulating all of your maleness.  With surprising gentleness, you feel a suction and squeezing building around each and every one of your dicks.  You feel a flood of fluids around each over-engorged member, making them tingle with unnatural sensitivity.  The squeezing and sucking of the plant's stalks, combined with the sudden onset of strange sensation, is too much to bear.  You feel a churning pressure at the base of your groin, liquid heat filling every member as your body makes ready to give these plants what they want.\n\n");
-				}
+				outputText("You feel a flood of wetness surge up from the depths of the plant, surrounding your member with even more fluid as the stem begins constricting and squeezing.  Gently at first, and then with increasing insistence, a suction builds inside the stem, drawing more and more blood into your [cock].  The stem, now heavily distended by your massive member, continues rippling, squeezing, and sucking your over-engorged meat-pole, overwhelming your mind with sensation far beyond normal.  You'd wonder just what kind of tactile-enhancing fluids that plant excretes, if you weren't already mindlessly pistoning against the tainted plant, still locked inside it by tight little tentacles.\n\n");
+				cockEnd();
+			}
+			function multiF():void { //Multicock
+				outputText("You grin to yourself as you decide to see just how close to a pussy these perverted little flowers are.  The thick stems bend with ease as you grab a few with your hand and pull them towards your groin, your other hand fumbling to open your [armor].  In seconds, you free yourself, and gingerly bring the folds closer.  The musky scent filling the air rapidly brings your [cocks] to a full, throbbing hardness.  The first touch of petals to your skin slicks you with the flower's silky secretions, allowing you to easily slip between the petals.  Though the flowers look fairly deep, you quickly feel yourself bottom out inside the petals' slippery grip.  Shrugging, you decide to make the best of it and begin thrusting into the plant, enjoying the unusual sensations along the front-most parts of your [cocks].  As you pound away, you begin to notice a change in the rear of the flowers.\n\n");
+
+				outputText("They seem to be gradually opening up, allowing the smallest of your cock-tips to begin slipping through an opening in the backs of the flowers and into the stems.  Shocked by this unexpected development, you pull the bundle of flowers from your [cocks], but whiplike tendrils shoot forth from deep within the flowers, wrapping tightly around your manhoods, painfully squeezing as they drag your [cocks] back into the tight vaginal openings.  They pull tighter as they force you deeper inside the plant, pulling the full length of each of your members into the constricting stalks.   Wrapped tightly around your base, the tendrils form effective cock-rings, making each of your [cocks] overfill with blood.\n\n");
+
+				outputText("You briefly try to free yourself, but the pain it causes your groin overwhelms you.  Resigned to your fate, you allow the plants to wrap their petals fully around your groin, encapsulating all of your maleness.  With surprising gentleness, you feel a suction and squeezing building around each and every one of your dicks.  You feel a flood of fluids around each over-engorged member, making them tingle with unnatural sensitivity.  The squeezing and sucking of the plant's stalks, combined with the sudden onset of strange sensation, is too much to bear.  You feel a churning pressure at the base of your groin, liquid heat filling every member as your body makes ready to give these plants what they want.\n\n");
+				cockEnd();
+			}
+			function cockEnd():void {
 				outputText("You cum, and cum, and cum, the evidence of your pleasure devoured by the plant's sucking, squeezing gullet.  The orgasm drags on for what feels like forever, your [legs] eventually giving out, your hips the only muscle that seems to work as they twitch into the air, as if begging for more.  You are milked of a few last big spurts, at last collapsing.\n\n");
 
 				outputText("The tendrils encircling your genitals do not release; instead they pull tighter, one of " + (player.cocks.length > 1 ? "each plant's tiny" : "the tiny plant's") + " appendages penetrating your urethra" + (player.cocks.length > 1 ? "s" : "") + ", squirming up your cum slicked passage" + (player.cocks.length > 1 ? "s" : "") + " with uncomfortable slowness.  You lay there, too weak to resist it or fight, hoping that whatever the plants are doing won't hurt much.  You feel it twisting and coiling inside you... until it stops.  You feel a sharp pinch, and then it withdraws, seemingly satisfied.  The tendrils unwrap, allowing the plants to spring back up, exposing your still over-engorged and sensitive member" + (player.cocks.length > 1 ? "s" : "") + ".\n\n");
@@ -112,7 +122,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 					outputText("As you depart, you note the plants' stalks bulging obscenely, bits of your seed dripping from the flowers' opening.");
 				else outputText("As you depart, you note the plants' stalks bulging out obscenely, looking like overfull balloons.  They're stretched so thin as to be transparent, your cum sloshing about inside them as they attempt to digest their meals.  Steady streams of your jism leak from the flowers' lips, unable to keep it all inside.");
 				//Stat changes!
-				player.orgasm();
+				player.sexReward("vaginalFluids", "Dick");
 				dynStats("sen", 2);
 				var booster:int = 1;
 				if (player.balls == 0)
@@ -121,8 +131,9 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 					booster += 2;
 				if (player.hasPerk(PerkLib.MessyOrgasms) && player.cumMultiplier < 3) booster += 2;
 				player.cumMultiplier += booster;
+				doNext(camp.returnToCampUseOneHour);
 			}
-			else { //Oral sex for those without!
+			function oralF():void { //Oral sex for those without!
 				outputText("You grin to yourself and decide to sample the fine smelling nectar of the flowers. You grip the unusually thick stalk as you lean down, taking in the bright red and iridescent purples of the pussy-flower's petals. You give it an experimental lick, gaining a feeling for the flavor of the nectar. It's delicious, but leaves your tongue tingling and sensitive. A small budding protrusion emerges from between the petals, slick with more of the plants fluid, cherry red and looking very much like an engorged clit.\n\n");
 
 				outputText("Giddy from either the novelty of the situation or the chemicals in the flower's juices, you lick at the plant's bud-like clit and are immediately rewarded with a burst of fruity plant-nectar. The taste becomes the last thing on your mind as your tongue becomes even more sensitive, every touch and taste rapidly becoming highly erotic. You delve into its folds, seeking more nectar, your tongue slurping and licking, noisily tongue-fucking the little plant. The taste deepens, losing some of the sweetness as that clitty swells bigger, drops of tangy moisture oozing from it.\n\n");
@@ -130,19 +141,29 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 				outputText("Closing your eyes, it becomes easy to lose yourself in the feeling of plunging in and out of those petals, your tongue a tiny cock. You revel in the decadence of it all, your lips becoming equally sensitive and engorged, french kissing the pussy-flower with abandon, rubbing your puffy lips over its clit, tongue-fucking the flower with abandon. The petals curl around your face, as a sudden gush of fluid rushes out from deep within the flower, flooding your mouth with tangy sweetness. Your tongue quivers in pleasure as you feel your over-sensitized mouth orgasming, pleasurable and unlike anything else you've experienced. Swallowing instinctively, you collapse back on your haunches, licking your lips and squirming in satisfaction.");
 
 				outputText("You walk away, your lips and tongue feeling slightly puffy and sensitive, but none the worse for the wear.");
-				player.slimeFeed();
-				player.orgasm();
+				player.sexReward("vaginalFluids", "Lips");
 				dynStats("sen", 4, "cor", 1);
+				doNext(camp.returnToCampUseOneHour);
 			}
-			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function tentacleFun():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_corruptedGlade);
-			if (player.vaginas.length > 0 && rand(2) == 0) { //Vaginal Variant 50% of the time
-				outputText("You saunter over to a dangling group of perverted looking vines, discarding your [armor] along the way. Running your fingertips along the bulbous-tipped tentacle-like vines, you find one that looks ");
-				var tentacle:int = rand(3); //Big, medium or small size tentacle
+			sceneHunter.passCheckOnce();
+			sceneHunter.selectGender(null, vagF, ["Suck", suckF]);
+			//===============================================================================
+
+			function vagF():void { //Vaginal Variant 50% of the time
+				outputText("You saunter over to a dangling group of perverted looking vines, discarding your [armor] along the way. There's a LOT of tentacles with different sizes... Which will you pick?\n\n");
+				menu();
+				addButton(0, "Small", 	curry(vagScene, 0));
+				addButton(1, "Medium", curry(vagScene, 1));
+				addButton(2, "Big", 	curry(vagScene, 2));
+			}
+
+			function vagScene(tentacle:int):void {
+				outputText("Running your fingertips along the bulbous-tipped tentacle-like vines, you find one that looks ");
 				var tentacleSize:int = 0;
 				if (tentacle == 0) { //Small
 					outputText("a little small for your ");
@@ -190,9 +211,9 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 
 				outputText("The rest of the world disappears as your mind tries to cope with the sensation overload coming from your groin. You're dimly aware of your hands pumping the slippery vine in and out, in and out, over and over.  Hips bucking, " + vaginaDescript(0) + " squeezing, thighs trembling, you achieve the first of many orgasms.  Incredibly, the sensitivity of your groin redoubles, nearly blacking you out from the pleasure.  Cumming over and over, you writhe in the dirt, pumping the corrupted prick-vine in and out of your spasming cunt.  Your eyes roll back in your head when the vine begins pumping you full of its strange fluid, and you finally lose your battle to remain conscious.\n\n");
 
-				outputText("An hour or two later, you wake feeling very sore, but satisfied.  The vine must have popped free at some point and the bulb now rests on your pussy lips.  You go to brush it off and nearly orgasm from touching your nether-lips, still sensitive and parted from the overlarge tentacle they so recently took.  A rush of white goop escapes from between your thighs as you stand, soaking back into the soil immediately.   A quick stretch later, you don your gear and head back to camp with a smile.\n\n");
+				outputText("An hour or two later, you wake feeling very sore, but satisfied.  The vine must have popped free at some point, and the bulb now rests on your pussy lips.  You go to brush it off and nearly orgasm from touching your nether-lips, still sensitive and parted from the overlarge tentacle they so recently took.  A rush of white goop escapes from between your thighs as you stand, soaking back into the soil immediately.   A quick stretch later, you don your gear and head back to camp with a smile.\n\n");
 				//Normal stat changes
-				player.orgasm();
+				player.sexReward("cum", "Vaginal");
 				dynStats("sen", 5, "cor", 2);
 				//Xforms
 				if (rand(3) == 0 && player.hairColor != "green" && !player.blockingBodyTransformations()) { //Change hair to green sometimes
@@ -205,12 +226,12 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 					player.fertility++;
 				}
 			}
-			else {
+			function suckF():void {
 				outputText("You approach the swollen vines, noting a drizzle of fluid leaking from one of the bulbous and mushroom-like tips.   Licking your lips as you approach, you feel your heart beat faster in anticipation of sampling the tainted flora of the glade.   Grasping one gently, you lift it up, noting the pebbly texture along the curvature of its head, and the soft nubs on the underside where it rejoins the stalk.  The whole thing feels moist, just barely lubricated with some fluid that the plant seems to sweat.\n\n");
 
 				outputText("Pulling it closer, you open your mouth wide enough to take in the plant, slipping it between your lips.  The taste of the plant is starchy with a tangy aftertaste.  You run your tongue around it lewdly, your efforts swiftly rewarded by a spurt of salty cream.   The penis vine seems more receptive to your actions than the real thing, shifting color to a rapidly darkening pink.  You begin jacking the vine off with your hands, rubbing a fingertip where the 'bulb' joins the stalk.  In no time it starts spurting seed into your throat, bright crimson spreading back along the vine as thick bulges of goo are pumped down the vine.  The bulb in your mouth swells up like a balloon, wrenching your jaws apart and trapping itself behind your teeth.   You're forced to breathe through your nose as it rapidly plugs your oral opening, gulping down each load of throat-filling seed in an effort not to choke.\n\n");
 
-				outputText("You wonder if your efforts are in vain as time passes and your stomach fills with strange alien fluids.  Feeling faint from lack of oxygen, you drop to your knees, throat working overtime to swallow and breathe, only to immediately swallow another load.   Your whole body burns from the effort.  Your lungs hurt, your heart spasms, and your gut gurgles as it takes in the strange liquid.   Nearly unconscious, you sway, the vine pulled tight in your mouth, supporting the weight of your body.\n\n");
+				outputText("You wonder if your efforts are in vain as time passes, and your stomach fills with strange alien fluids.  Feeling faint from lack of oxygen, you drop to your knees, throat working overtime to swallow and breathe, only to immediately swallow another load.   Your whole body burns from the effort.  Your lungs hurt, your heart spasms, and your gut gurgles as it takes in the strange liquid.   Nearly unconscious, you sway, the vine pulled tight in your mouth, supporting the weight of your body.\n\n");
 
 				outputText("With a snap you feel consciousness return; the endless torrent of fluid has stopped, though your mouth is still pried wide open by the engorged bulb.  In panic, you thrash backwards, painfully yanking against the now-taut vine.  You struggle in vain  for a moment, the vine not giving an inch, until finally you feel the bulb start to soften.  Working it back and forth, you eventually manage to pry it free with a satisfying 'pop'.   Rubbing your hand against your sore jawline, you step away from the glade, spitting out some of the musky goop with every step.\n\n");
 				//Last PG includes change-texts
@@ -252,7 +273,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 					}
 				}
 			}
-			player.slimeFeed();
+			player.sexReward("cum", "Lips", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -261,9 +282,9 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_corruptedGlade);
 			outputText("Stepping carefully around the other hazards of the glade, you close on the strange trees with equal parts curiosity and desire.  Up close, it's easy to see the strange growths that sprout from the bark – dozens of full ripe-looking breasts, each capped with a swollen and leaking nipple.  You touch one, marveling at the smooth texture of its chocolate-colored skin.   In response a runner of sap oozes free of the nipple and slides down the curved surface.\n\n");
 			outputText("You lean forwards and lick around the nipple's surface, sampling the sweetness of the trickling sap.   The stuff nearly overpowers you with a taste like syrupy cream as more sap drips free of the fully-erect tree-nipple.  Unable to resist testing this nonsensical oddity, you engulf the entire nipple between your lips, suckling hard.   The tree seems to oblige your efforts with a fresh discharge of the sticky sap.   Your tongue tingles and vibrates with the sinfully sweet taste in your mouth, dancing in circles around the nipple, coaxing yet more nectar from swollen plant-jug.  It's easy to lose yourself in that taste, falling into a rhythm of alternatively sucking, swallowing, and licking.\n\n");
-			outputText("In time you realize the breast has long since been emptied by your hungry mouth, and you pull free with a pop, letting your tongue run over your now over-sensitive lips.  It seems your entire mouth has been affected by the tree's sap, and is now as sensitive and receptive as a maiden's box.  You don't think you could drink any more sap with how full you feel, and you make ready to depart this perverted place.");
+			outputText("In time, you realize the breast has long since been emptied by your hungry mouth, and you pull free with a pop, letting your tongue run over your now over-sensitive lips.  It seems your entire mouth has been affected by the tree's sap, and is now as sensitive and receptive as a maiden's box.  You don't think you could drink any more sap with how full you feel, and you make ready to depart this perverted place.");
 			dynStats("sen", 1, "lus", 15, "cor", .5);
-			player.slimeFeed();
+			player.sexReward("milk", "Lips", false);
 			if (!player.hasStatusEffect(StatusEffects.LustyTongue)) {
 				if (rand(4) == 0) { //25% Chance of sensitive mouth status – increased lust gain/hour due to licking your lips :3
 					outputText("  The feeling doesn't seem to fade, only becoming more and more intense over the coming hour.  It will be hard to keep from getting turned on any time you lick your lips or eat some food.");

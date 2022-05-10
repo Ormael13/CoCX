@@ -93,8 +93,8 @@ import classes.internals.*;
 						.add(consumables.MINOCUM, 1 / 5)
 						.add(consumables.MINOBLO, 1 / 2)
 						.elseDrop(null);
-			    this.gems = int((rand(15) + 85) * Math.exp(0.2*mod));
-                this.additionalXP = int(600 * Math.exp(0.2*mod));
+			    this.gems = int((rand(15) + 85) * Math.exp(0.3*mod));
+                this.additionalXP = int(600 * Math.exp(0.3*mod));
 			}
 			else {
 				this.short = "minotaur";

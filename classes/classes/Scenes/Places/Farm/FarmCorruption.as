@@ -3011,7 +3011,6 @@ import classes.display.SpriteDb;
 			outputText("\n\n\"<i>Undress,</i>\" she directs curtly, and you do so meekly, watching her do the same. She rips off her plain work clothes quickly as if she were irritated by them, not driven by any need to put on a show for you, simply overwhelmingly eager to begin. The now familiar sensation of feeling both warm and shaky returns; you would be lying if you said you didn’t welcome it.");
 		}
 
-		// TODO : Split this up
 		private function whitneyDomBondageOral():void
 		{
 			clearOutput();

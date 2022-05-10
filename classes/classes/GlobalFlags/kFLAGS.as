@@ -20,8 +20,8 @@ public static const TIMES_FUCKED_URTA:int                                       
 public static const URTA_COMFORTABLE_WITH_OWN_BODY:int                              =   12; // URTA - horsecock comfort level (-1 = hates self, no luvs)
 public static const URTA_TIME_SINCE_LAST_CAME:int                                   =   13; // URTA - hours until can be horny again
 public static const PC_SEEN_URTA_SEX_TOYS:int                                       =   14; // URTA - seen Urta's toyz?
-public static const PLAYER_RESISTED_AKBAL:int                                       =   15; // Akbal resisted?  - 1 means the PC has resisted at least once
-public static const AKBAL_SUBMISSION_COUNTER:int                                    =   16; // Akbal submission counter
+public static const UNKNOWN_FLAG_NUMBER_0015:int                                    =   15;
+public static const AKBAL_SUBMISSION_COUNTER:int                                    =   16; // Akbal submission counter (resisting resets it
 public static const AKBAL_SUBMISSION_STATE:int                                      =   17; // Akbal submission state. -1=Lost to him, 1=Beaten him, 2=Akbal is your bitch
 public static const MINOTAUR_CUM_ADDICTION_TRACKER:int                              =   18; // Minotaur cum Addiction Tracker
 public static const TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM:int                       =   19; // Time Since Last Minocum fix
@@ -147,7 +147,7 @@ public static const RAPHAEL_INTELLIGENCE_TRAINING:int                           
 public static const RAPHAEL_DISGUSTED_BY_PC_APPEARANCE:int                          =  139; // Raphael Disgusted by PC appearance
 public static const RAPHAEL_SECOND_DATE:int                                         =  140; // Raphael 2nd Date Happen?
 public static const HELLHOUND_MASTER_PROGRESS:int                                   =  141; // Hellhound Progression
-public static const UNKNOWN_FLAG_NUMBER_00142:int                                   =  142; // Can buy minotaur cum from goblins?
+public static const CAN_BUY_MINOCUM:int                                   			=  142; // Can buy minotaur cum from goblins?
 public static const URTA_SCYLLA_TIMES_CAUGHT:int                                    =  143; // How Many Times Have You Caught Urta + Scylla?
 public static const UNKNOWN_FLAG_NUMBER_00144:int                                   =  144; // Multitake Scylla meeting take advantage ever done?
 public static const URTA_TALKED_ABOUT_SCYLLA:int                                    =  145; // Urta confrontation about Scylla ever done?
@@ -275,14 +275,14 @@ public static const UNKNOWN_FLAG_NUMBER_00266:int                               
 public static const UNKNOWN_FLAG_NUMBER_00267:int                                   =  267; // Lilium Timed Boned
 public static const PLAYER_DISARMED_WEAPON_ID:int                                   =  268; // weapon storage
 public static const PLAYER_DISARMED_WEAPON_ATTACK:int                               =  269; // weapon damage
-public static const UNKNOWN_FLAG_NUMBER_00270:int                                   =  270; // Times encountered spiderbitches
+public static const TIMES_ENCOUNTERED_FEMALE_SPIDER:int                                   =  270; // Times encountered spiderbitches
 public static const FEMALE_SPIDERMORPH_PREGNANCY_INCUBATION:int                     =  271; // Spider Preggo Timer
 public static const TIMES_EXPLORED_SWAMP:int                                        =  272; // Times Explored Swamp
 public static const SHOW_SPRITES_FLAG:int                                           =  273; // Sprites off? toggle
 public static const RATHAZUL_SILK_ARMOR_COUNTDOWN:int                               =  274; // Rathazul silk armor queue - 1 = armor done!
 public static const UNKNOWN_FLAG_NUMBER_00275:int                                   =  275; // Rathazul armor type selector - 1=armor, 2=robes (3=bra, 4=panties, 5=loincloth)
-public static const UNKNOWN_FLAG_NUMBER_00276:int                                   =  276; // Times Encountered Basilisk
-public static const UNKNOWN_FLAG_NUMBER_00277:int                                   =  277; // Times Encountered Drider
+public static const TIMES_ENCOUNTERED_BASILISK:int                                   =  276; // Times Encountered Basilisk
+public static const TIMES_ENCOUNTERED_DRIDERS:int                                   =  277; // Times Encountered Drider
 public static const UNKNOWN_FLAG_NUMBER_00278:int                                   =  278; // LOTTIE DISABLED (1+ = YUS)
 public static const UNKNOWN_FLAG_NUMBER_00279:int                                   =  279; // LOTTIE FIGURE (HIGHER = SLIMMER)
 public static const UNKNOWN_FLAG_NUMBER_00280:int                                   =  280; // LOTTIE CONFIDENCE (HIGHER = AWESOMER)
@@ -330,13 +330,13 @@ public static const UNKNOWN_FLAG_NUMBER_00321:int                               
 public static const UNKNOWN_FLAG_NUMBER_00322:int                                   =  322; // LOTTIE: LA BOVA COUNTDOWN - counts down to 1 before she'll use it again.  Also used to track if LaBova has ever been used
 public static const UNKNOWN_FLAG_NUMBER_00323:int                                   =  323; // LOTTIE: HAS SHE USED REDUCTO?
 public static const UNKNOWN_FLAG_NUMBER_00324:int                                   =  324; // LOTTIE: HAM SAMMICH
-public static const UNKNOWN_FLAG_NUMBER_00325:int                                   =  325; // Times met minotaur mob
-public static const UNKNOWN_FLAG_NUMBER_00326:int                                   =  326; // Number of grown up minotaur offspring - TRIBE SIZE
-public static const UNKNOWN_FLAG_NUMBER_00327:int                                   =  327; // Number of minotaur sons pending growing up
-public static const UNKNOWN_FLAG_NUMBER_00328:int                                   =  328; // Grow up countdown
-public static const UNKNOWN_FLAG_NUMBER_00329:int                                   =  329; // Minos wasting a turn? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00330:int                                   =  330; // Cooldown on minotaur cum repeat messages
-public static const JOJO_TIMES_MILKED:int                                   =  331; // Times Jojo Milked
+public static const MINOTAUR_SONS_TIMES_MET:int                                   	=  325; // Times met minotaur mob
+public static const MINOTAUR_SONS_TRIBE_SIZE:int                                   	=  326; // Number of grown up minotaur offspring - TRIBE SIZE
+public static const MINOTAUR_SONS_CHILDREN:int                                   	=  327; // Number of minotaur sons pending growing up
+public static const MINOTAUR_SONS_GROW_COUNTDOWN:int                                =  328; // Grow up countdown
+public static const UNKNOWN_FLAG_NUMBER_00329:int                                   =  329;
+public static const MINOCUM_WARNING_COOLDOWN:int                                    =  330; // Cooldown on minotaur cum repeat messages
+public static const JOJO_TIMES_MILKED:int                                   		=  331; // Times Jojo Milked
 public static const JOJO_COCK_MILKING_COOLDOWN:int                                  =  332; // Jojo milk cooldown 4 hours
 public static const UNKNOWN_FLAG_NUMBER_00333:int                                   =  333; // Times PC been cock milked
 public static const FAP_ARENA_SESSIONS:int                                          =  334; // Times fap arena'ed
@@ -632,7 +632,7 @@ public static const RUBI_GOT_BIMBO_SKIRT:int                                    
 public static const RUBI_PROFIT:int                                                 =  624; //
 public static const RUBI_BIMBO_MINIDRESS:int                                        =  625; //
 public static const MANSION_VISITED:int                                             =  626; //
-public static const redheadIsFuta:int                                               =  627; //
+public static const REDHEAD_IS_FUTA:int                                               =  627; //
 public static const MET_KITSUNES:int                                                =  628; //
 public static const AMILY_OVIPOSITED_COUNT:int                                      =  629; //
 public static const AMILY_OVIPOSITED_COUNTDOWN:int                                  =  630; //
@@ -1925,16 +1925,16 @@ public static const UNKNOWN_FLAG_NUMBER_01916:int                               
 public static const UNKNOWN_FLAG_NUMBER_01917:int                                   = 1917;
 public static const UNKNOWN_FLAG_NUMBER_01918:int                                   = 1918;
 public static const UNKNOWN_FLAG_NUMBER_01919:int                                   = 1919;
-public static const UNKNOWN_FLAG_NUMBER_01920:int                                   = 1920;
+public static const UNKNOWN_FLAG_NUMBER_01920:int                                 	= 1920;
 public static const UNKNOWN_FLAG_NUMBER_01921:int                                   = 1921;
 public static const UNKNOWN_FLAG_NUMBER_01922:int                                   = 1922;
 public static const UNKNOWN_FLAG_NUMBER_01923:int                                   = 1923;
 public static const UNKNOWN_FLAG_NUMBER_01924:int                                   = 1924;
 public static const UNKNOWN_FLAG_NUMBER_01925:int                                   = 1925;
-public static const UNKNOWN_FLAG_NUMBER_01926:int                                   = 1926;
-public static const UNKNOWN_FLAG_NUMBER_01927:int                                   = 1927;
-public static const UNKNOWN_FLAG_NUMBER_01928:int                                   = 1928;
-public static const UNKNOWN_FLAG_NUMBER_01929:int                                   = 1929;
+public static const BELISA_DEFEATS_COUNTER:int                                   	= 1926;
+public static const BELISA_LVL_UP:int                                   			= 1927;
+public static const LILY_FLAG_DEFEATS_COUNTER:int                                  	= 1928;
+public static const LILY_FLAG_LVL_UP:int                                  			= 1929;
 public static const TYRANTIA_DEFEATS_COUNTER:int                                   	= 1930;
 public static const TYRANTIA_LVL_UP:int                                   			= 1931;
 public static const KITSUNES_DEFEATS_COUNTER:int                                   	= 1932;
@@ -2024,7 +2024,7 @@ public static const MET_MARAE:int                                               
 public static const MET_MARAE_CORRUPTED:int                                         = 2016;
 public static const MARAE_QUEST_START:int                                           = 2017;
 public static const MARAE_QUEST_COMPLETE:int                                        = 2018;
-public static const MARAE_LETHICITE:int                                             = 2019; //Not used anymore, may be reclaimed for later use.
+public static const UNKNOWN_FLAG_NUMBER_2019:int                                    = 2019; //Not used anymore
 public static const FACTORY_FOUND:int                                               = 2020;
 public static const FACTORY_SUCCUBUS_DEFEATED:int                                   = 2021;
 public static const FACTORY_INCUBUS_DEFEATED:int                                    = 2022;
@@ -2451,8 +2451,8 @@ public static const RYUBI_02442:int                                   = 2442; //
 public static const FOUND_TEMPLE_OF_THE_DIVINE:int                                  = 2443;
 public static const SAPPHIRE_AFFECTION:int                           		        = 2444;
 public static const SAPPHIRE_TALKS:int                       			            = 2445;
-public static const SAPPHIRE_SEX:int                                   				= 2446;
-public static const SAPPHIRE_02447:int                                   = 2447;							//Not Yet Used Flag
+public static const WEDDINGS_UNLOCKED:int                                   		= 2446; //SAPPHIRE_SEX before, now removed and replaced.
+public static const UNKNOWN_FLAG_NUMBER_02447:int                                   = 2447;							//Not Yet Used Flag
 public static const ONYX_PATH:int                                   				= 2448;//slave or free
 public static const UNKNOWN_FLAG_NUMBER_02449:int                                   = 2449;
 public static const ONYX_GENDER:int                                   				= 2450;
@@ -2806,7 +2806,7 @@ public static const UNKNOWN_FLAG_NUMBER_02797:int                               
 public static const UNKNOWN_FLAG_NUMBER_02798:int                                   = 2798;
 public static const UNKNOWN_FLAG_NUMBER_02799:int                                   = 2799;
 public static const LUNA_TRIED_WORKING_AS_BARMAID:int								= 2800; // if the player didn't hire Luna at first, they suggest she try working at the Wet Bitch. If so, the player can ask Aunt Nancy how *that* went to read a funny scene
-public static const UNKNOWN_FLAG_NUMBER_02801:int                                   = 2801;
+public static const SOUL_SENSE_MINOTAUR_SONS:int                                    = 2801;
 public static const UNKNOWN_FLAG_NUMBER_02802:int                                   = 2802;
 public static const UNKNOWN_FLAG_NUMBER_02803:int                                   = 2803;
 public static const UNKNOWN_FLAG_NUMBER_02804:int                                   = 2804;
@@ -2960,9 +2960,9 @@ public static const UNKNOWN_FLAG_NUMBER_02951:int                               
 public static const UNKNOWN_FLAG_NUMBER_02952:int                                   = 2952;
 public static const UNKNOWN_FLAG_NUMBER_02953:int                                   = 2953;
 public static const UNKNOWN_FLAG_NUMBER_02954:int                                   = 2954;
-public static const UNKNOWN_FLAG_NUMBER_02955:int                                   = 2955;
+public static const SCENEHUNTER_LOSS_SELECT:int                                   	= 2955;
 public static const SCENEHUNTER_PRINT_CHECKS:int                                    = 2956; //SceneHunter settings
-public static const SCENEHUNTER_OTHER:int                                    = 2957;
+public static const SCENEHUNTER_OTHER:int                                    		= 2957;
 public static const SCENEHUNTER_DICK_SELECT:int                                     = 2958;
 public static const SCENEHUNTER_UNI_HERMS:int                                       = 2959;
 public static const APEX_SELECTED_RACE:int                                   		= 2960;
@@ -2990,7 +2990,7 @@ public static const USE_OLD_INTERFACE:int                                       
 public static const IMAGEPACK_OFF:int                                               = 2982; // 1 if imagepack is disabled.
 public static const SPRITE_STYLE:int                                                = 2983; // 1 if old sprites are used.
 public static const AUTO_LEVEL:int                                                  = 2984; // 1 if automatic leveling is enabled.
-public static const SFW_MODE:int                                                    = 2985; // 1 if SFW is enabled.
+public static const UNKNOWN_FLAG_NUMBER_02985:int                                   = 2985; // formerly SFW mode, now unused
 public static const WATERSPORTS_ENABLED:int                                         = 2986; // 1 if watersport scenes are enabled.
 public static const USE_METRICS:int                                                 = 2987; // No longer used. Previously: 0 for imperial, 1 for metric.
 public static const USE_OLD_FONT:int                                                = 2988; // Side bar font.

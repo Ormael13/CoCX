@@ -94,7 +94,9 @@ package classes.Scenes
 			outputText("-New tier 0 intelligence lvl-up perk: Spellpower: Grey. Req. Grey Magic perk, 50+ int and lvl 3+. Effect: Increases grey spell strength by 15% and mana pool by 75.\n");
 			outputText("-New tier 1 intelligence lvl-up perk: Arcane Shielding. Req. Grey Magic perk, Mana Shield spell, 75+ int. Effect: Improving by fivefold mana shield resistance to magical attacks. (1:5 ratio for mana to magic damage)\n");
 			outputText("-New tier 3 intelligence lvl-up perk: Offensive Staff Channeling. Req. Staff Channeling and Grey Magic perks, knowing any attack spell, 120+ int. Effect: Allow to cast splited offensive spell without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (Effect will not activate if you already have ways to multicast spells at reduced power)\n");
+			outputText("-New tier 4 intelligence lvl-up perk: Selfbuffs Proficiency. Req. Job: Enchanter perk, 120+ int. Effect: Increase max selfbuff max cap by 30%.\n");
 			outputText("-New tier 4 intelligence lvl-up perk: Improved Mana Shield. Req. Arcane Shielding perk, 125+ int. Effect: Increasing fourfold amount of damage Mana Shield spell can withstand before deactivating. (1:4 ratio for physical attacks and 1:20 ratio for magical attacks)\n");
+			outputText("-New tier 5 wisdom lvl-up perk: Elemental Conjurer Knowledge (Ex). Req. Elemental Conjurer Knowledge and Elemental Contract Rank 4 perks, 150+ wis. Effect: Decrease chance to fail (by ~10%) when ranking up an elemental and replace mana/fatigue with elemental energy gained from sacrificing elemental shards to arcane circle. (if not enough energy stored it will check as before for mana/fatigue costs)\n");
 			outputText("-New tier 7 intelligence lvl-up perk: Super Convergence. Req. Convergence perk, 225+ int. Effect: Grey magic area of effect spells strike one more time (three times) against single targets. Against groups would deal 50-250% more dmg depending on size (250% for small groups, 100% for large groups).\n");
 			outputText("-New tier 10 intelligence lvl-up perk: Grand Grey Archmage (2nd Circle). Req. Grand Grey Archmage perk and 275+ int. Effect: Increases grey spell strength by 50%, mana pool by 900, lust bar by 320, regain it 150% faster. Grey spells costs lowered by 20%.\n");
 			outputText("-New tier 12 wisdom lvl-up perk: Greater shared power. Req. Elemental touch perk. Effect: Double the effect of Shared power.\n");
@@ -126,6 +128,8 @@ package classes.Scenes
 			outputText("-New armor (by Ormael): Green Diving Suit - buyable at Pinchou shop. Cost 1800 gems, 25 armor, 5 magic resistance.\n");
 			outputText("-New armor (by Liadri): Battle maiden armor - obtainable by giving Lusty Maiden Armor to Pure Celess to purify. Increase armor by an additional 30 but grant no armor if the character is not virgin. No longer grant sex scenes or slutty seduction but reduce lust by 2% each round.\n");
 			outputText("-New armor (by Liadri): Succubus armor - obtainable by giving Lusty Maiden Armor to Corrupted Celess to corrupt. Same base stat as lusty maiden armor +10 but double the originally added armor bonus each time PC has sex. Base slutty seduction set to 10.\n");
+			outputText("-New underwear (upper) (by Canadian Snas): Silky Drider-Weave Bra - buyable at Belisa shop. Cost 1800 gems, +4 sexiness, armor +2, magic resistance +3, +10% spellpower.\n");
+			outputText("-New underwear (lower) (by Canadian Snas): Silky Drider-Weave Panties - buyable at Belisa shop. Cost 2100 gems, +4 sexiness 4, armor +2, magic resistance +4, +10% spellpower.\n");
 			outputText("-New head accesory (by Ormael): Kabuto & Mempo set - buyable at Yvonne Armor Shop. Cost 100 gems, 3 armor. When worn with Samurai armor will give additionaly 4 armor.\n");
 			outputText("-New Grey Spell: Water Ball - learned from Grey Book. Cost 40 mana and deal water dmg. Have cooldown of 3 turns. (spell text by Pyromania & slight different text when used in water/underwater)\n");
 			outputText("-New Grey Spell: Water Sphere - learned from Grey Book. Cost 200 mana and deal AoE water dmg. Have cooldown of 3 turns. (spell text by Pyromania & slight different text when used in water/underwater)\n");
@@ -137,27 +141,26 @@ package classes.Scenes
 			outputText("-New Grey Spell: Corrosive Wave - learned from Grey Book. Cost 200 mana and deal AoE acid dmg. Have cooldown of 3 turns and apply DoT (similar to acid spit/hydra breath ones but ~half weaker). (spell text by Canadian Snas)\n");
 			outputText("-New Grey Spell: Hydro Acid - learned from Grey Book. Cost 100 mana and deal acid dmg and apply DoT (similar to acid spit/hydra breath ones). Have cooldown of 6 turns. It's Tier 2 spell. (spell text by Canadian Snas)\n");
 			outputText("-New Grey Spell: Acid Rain - learned from Grey Book. Cost 500 mana and deal AoE acid dmg. Have cooldown of 6 turns and apply DoT (similar to acid spit/hydra breath ones). It's Tier 2 spell. (spell text by Canadian Snas)\n");
-			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
-			//outputText("-New tier 9 strength lvl-up perk: Prestige Job: Stalker. Req. Job: Warrior and Hunter perks, 150+ str/spe. Effect: +60 to str multi and +20 to spe multi (scalable with NG tiers), +20% damage and critical damage with thrown weapon.\n");
-			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
-			//outputText("-New tier 5 wisdom lvl-up perk: Elemental Conjurer Knowledge (Ex). Req. Elemental Conjurer Knowledge and Elemental Contract Rank 4 perks, 150+ wis. Effect: .\n");
-			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
-			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
-			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
-			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			outputText("-2 new achievments. (2 shadow ones)\n");
 			outputText("-Added minor QoL option for minion using PC's to let those minions that can attack on their own (wisp or using simplified turn setup) even when PC itself is stunned or under fear effect. Cuz... well they had orders and pc been stunned not magicaly cause them to not able to follow orginal order to keep smashing enemy ^^\n");
 			outputText("-Diana and Luna forced partial/full body TF events won't proc if PC got TF immunity. As side effect it may cause their storyline progress to freeze.\n");
 			outputText("-Purity Blessing, Cold Blooded, Hot Blooded, Nymphomania perks, Omnibus' Gift, Luststick Adapted, Lycanthropy, Bimbo Body, Bro Body, Futa Form, Pierced: Crimstone, Pierced: Icestone, Pent Up effects for rise/lower minimum lust been changed from flat values to % ones.\n");
 			outputText("-Bimbo Champagne, Blessing of Divine Agency - Fera, Anemone Arousal, Infested, Harpy Lipstick, Drunken Power, Shouldra that been left unsatisfied too long, cumOmeter (manticore), MilkOMeter (displacer beast), having (spider) eggs effects and lusty maiden's armor, tentacled bark armor also have minimumm lust increase turned into % values from flat ones.\n");
-			outputText("-In Journey to the east appeared next weird person. Founded only at specific hours new npc can help limited time for any PC that feel too bloated with useless perk points (after getting all interesting stuff) and deeply lacking spare stat points. But be warned that this literal she-devil service not come cheap either... but what is few stones for such rich adventurer as your PC, right?\n");
 			outputText("-Some of minimum lust increase perks have lowered by half % values. Also manticore/displacer based 'hunger' will have % increase to min lust halfed.\n");
+			outputText("-In Journey to the east appeared next weird person. Founded only at specific hours new npc can help limited time for any PC that feel too bloated with useless perk points (after getting all interesting stuff) and deeply lacking spare stat points. But be warned that this literal she-devil service not come cheap either... but what is few stones for such rich adventurer as your PC, right?\n");
 			outputText("-Displacer feeding special can be now used after PC used Pounce on enemy and won't take combat turn then letting to pick one more action. (still can proc during Stranddle)\n");
 			outputText("-Displacer Metabolism mutation effect can proc (with bit lower magnitude) after drinking bottled milk from Marble, Isabella, Excellia or drinking bottle of sheep milk, succubus milk.\n");
 			outputText("-Strawberry shortcake & Big chocolate cake items would now refill 10 hunger.\n");
-			outputText("-Tons of Pyro text corrections in many places.\n");
 			outputText("-Water Dragon Breath dmg scaling now with progress in Dao of Water too.\n");
-			outputText("-2 new achievments. (2 shadow ones)\n");
 			outputText("-Katana and Dual Katana now would reduce enemy armor by 10% (or by 10 if enemy armor is below 100).\n");
+			outputText("-Tons of Pyro text corrections in many places.\n");
+			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
+			//outputText("-New tier 9 strength lvl-up perk: Prestige Job: Stalker. Req. Job: Warrior and Hunter perks, 150+ str/spe. Effect: +60 to str multi and +20 to spe multi (scalable with NG tiers), +20% damage and critical damage with thrown weapon.\n");
+			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
+			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
+			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
+			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
+			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-Dinah would provide PC with HB Mech upgrade options after it's bought. They could boost mech defences, attack or even provide with specials. As with all other items upgrades cost can vary depending on her mood ^^\n");
 			outputText("-Some of one shoot firearms would now allow more shoots than 1/2 when PC get perks to expand (magicaly ^^) ammo clip to hold more ammo than 1/2.\n");
 			outputText("-Succubus/Incubus step of demon score now have increased bonus compared to Succubus-kin/Incubus-kin step: +40% to spe multi, +60% to int multi, +140% to lib multi, +60% max lust, -45% max wrath, +150% max mana, max SF drops to 0. Two stages below it also have their lust bonus changed from flat values to +20/40% to max lust and added -15/30% to max wrath, +50/100% to max mana, -40/80% to max SF.\n");
@@ -188,7 +191,7 @@ package classes.Scenes
 			outputText("-Listed job perks would provide bonus to melee physical attacks multiplier: Warrior (+10%); Brawler / Swordsman / Dervish / Rogue / Monk / Beast Warrior (+20%); Berserker (+80%); Spell-Knight / Tempest / Soul Art Master (+40%)\n");
 			outputText("-Listed job perks would provide bonus to range physical attacks multiplier: Ranger (+10%); Hunter / Gunslinger (+20%); Arcane Archer (+40%)\n");
 			outputText("-When PC is lvl 90+ it would not apply penalty to exp gained. (Meaning that in calculation for EXP gain PC will be treated as having only lvl 90 not actual above 90 - this solution will be removed or adjusted to higher cutoff at later date)\n");
-			outputText("-Black leather armor surrounded by voluminous robes was moved from armor shop to Tailor shop in Tel'Adre.\n");
+			outputText("-Black leather armor surrounded by voluminous robes was moved from Armor shop to Tailor shop in Tel'Adre.\n");
 			outputText("-Listed perks would provide bonus to melee physical attacks multiplier: Thunderous Strikes / Brutal Blows / Furious strikes / Iron Fists I-III / Brute / Brawn (+5%), Iron Fists IV-VI / Unlimited rage / Improved Brute / Improved Brawn / Gigant's Grip (+10%), Thirst for blood / Gigant's Grip (Ex) / Greater Brute / Greater Brawn (+15%), ");
 			outputText("Epic Brute / Epic Brawn / War caster / Vampiric blade / Twin Riposte / Perfect strike (+20%), Legendary Brute / Legendary Brawn (+25%), Mythical Brute / Mythical Brawn (+30%) (Fuel for the Fire, Rage, Anger, Too Angry to Die, Endless Rage (+40% if wielding any large or massive weapon or +20% other weapons)\n");
 			outputText("-Listed perks would provide bonus to range physical attacks multiplier: Careful but Reckless Aim and Shooting / Sharpshooter / Power Shoot / Vital Shot / Deadly Aim / Alchemical cartridge (+5%), Cold Aim / Deadly Throw / Practiced Shot / Church of the gun / Explosive cartridge / Tainted Magazine (+10%), Anatomy expert / Eagle eye / Silver for monsters (+15%), Named Bullet / Elemental Arrows / Cupid (+20%)\n");
@@ -210,9 +213,7 @@ package classes.Scenes
 			outputText("-Buffed stat-boosting jewelry: now it increases stat multiplier. Still useless trash compared to resistances in the late game. Maybe one day someone will balance all this stuff properly... (Svalkash)\n");
 			outputText("-Fixes: Diana last encounter repeating after recruiting her, body lotions not working (at all), Phylla dick checks comparing area instead of length and vice versa (Svalkash)\n");
 			outputText("-Added: Grey Spellpower, Tier 1 & 2 cooldown info to Stats > Combat subpage.\n");
-			outputText("-Kitsune 2nd tier thyroid gland mutation would now give +20 mana regen and boost by 50% foxfire fire dmg at 9 tails as it says.\n");
-			outputText("-New underwear (upper) (by Canadian Snas): Silky Drider-Weave Bra - buyable at Belisa shop. Cost 1200 gems, +2 to sexiness, +20% spellpower.\n");
-			outputText("-New underwear (lower) (by Canadian Snas): Silky Drider-Weave Panties - buyable at Belisa shop. Cost 1400 gems, +2 to sexiness, +20% spellpower.\n");
+			outputText("-Kitsune 2nd tier thyroid gland mutation would now boost by 50% foxfire fire dmg at 9 tails as it says.\n");
 			outputText("-Added option to manualy toogle on/off Shift on attribute menu during level-up (mainly to make apk users live bit easier)\n");
 			outputText("-Added a button to disable 'Sleep With' to Ember. (Svalkash)\n");
 			outputText("-Sophie breastfeed scene properly restored, added bimbo hints and light corruption check. (Svalkash)\n");
@@ -227,11 +228,11 @@ package classes.Scenes
 			outputText("-Decreased Urta's passive affection loss. Increased Urta's 'hours since last cum' gains, fixed improper 'days without cum' counting for inflation BJ scene. Added talk options after most BJs for Urta, so you won't leave immediately after pleasing her. (Svalkash)\n");
 			outputText("-Minor Vapula fixes, new cock-finding function. Added chastity belt scene to sex menu (which was clearly intended from the beginning). (Svalkash)\n");
 			outputText("-Made Ted less annoying by disabling him after acquiring the talisman. (Svalkash) ((actualy i made another change that makes him disabled/stop appearing after he is beaten once more after dropping jade talisman (Ormael)))\n");
-			outputText("-USS optimization (changed menuGen, so touched Yara too. If she's broken, I'm the one to blame). Moved USS to SceneLib - please don't create MORE instances of it in every class. (Svalkash)\n");
-			outputText("-SceneHunter (new settings page) added. Checks are currently added only to Holidays, male and female cancers and demons from BlightRidge, Phouka, SandWitch, CumWitch, Naga, Chameleon, LizanRogue, Troll, Cavewyrm, Excelia (first slave scene), Sandtrap checks. (Svalkash)\n");
-			outputText("-Implemented 3 new scenes for regular imp. Implemented tentacle cock branch for centaur fuck (also imp). Reworked sex menu for imps. (Svalkash)\n");
+			outputText("-Reworked some sex menus to provide better choices and greyed out buttons-hints for unavailable scenes. (Svalkash)\n");
+			outputText("-SceneHunter (new settings page) added to make more scenes available and notify the player of hidden checks the game does." + sceneHunter.progress + " (Svalkash)\n");
+			outputText("-Implemented 3 new scenes for regular imp. Implemented tentacle cock branch for centaur fuck (also imp).\n");
 			outputText("-Improved isEaster() calculation - now it counts the first Easter day using some complicated Gaussian function, and gives a 7 days window after it. (Svalkash)\n");
-			outputText("-Reworked Sand Witch and Naga scene menus, adding more buttons instead of random routers and hidden checks. Added corruptionTolerance to their checks. Adapted Naga (and SandWitch) genderless scenes for non-genderless PCs. (Svalkash)\n");
+			outputText("-Added corruptionTolerance to Sand Witch and Naga scenes. Adapted Naga (and SandWitch) genderless scenes for non-genderless PCs. (Svalkash)\n");
 			outputText("-Grey Ink/Abyssal Ink would now be able to give Ink Spray perk too.\n");
 			outputText("-Bit increased Tentacle beast enc chances and lowered truffle find chance in forest.\n");
 			outputText("-New melee weapon (by Canadian Snas): The Phalluspear - craftable by Konstantine after PC have Tyrantia in camp and gather needed materials. Cost 1600 gems. Base atk is 40, it's Large spear type weapon. Can toggle between dealing 25% and 100% as lust dmg.\n");
@@ -253,16 +254,52 @@ package classes.Scenes
 			outputText("-Changed Hot Spring check for herms (now it considers your femininity, dick & breast size). (Svalkash)\n");
 			outputText("-Restore spell can't be casted with use of HP instead of mana.\n");
 			outputText("-New super perk: Munchkin@Work. Gained by having merely 1 super perk, having 'Munchkin@Gym' super munchkin perk, lvl 120+. Effect: +10% to OverMax HP / Lust / Wrath / Mana / Soulforce, +2 prestige job slots, +1 hidden job slot.\n");
-			outputText("-Fletching table accessable at Elven Village allows now to craft special arrows - 100 per unit of material used (they would be used first before normal ones) and Reinforce. Like improving string those options takes 8 hours.\n");
+			outputText("-Fletching table accessable at Elven Village allows now to craft special arrows - 100 per pack of arrowheads used (they would be used first before normal ones) and Reinforce. Like improving string those options takes 8 hours.\n");
 			outputText("-Ayane Worship Scene for Herms & pregnancy. (Daikael the fluff enthusiast)\n");
+			outputText("-Herm PCs now can ask Tamani for her dildo. (Svalkash)\n");
+			outputText("-Golems post combat options buttons locations slight moved. Troll post fight option to Leave moved to bottom right corner.\n");
+			outputText("-Elemental pearls perk checks added/fixed. (Svalkash)\n");
+			outputText("-Rest/Wait option in camp got few more options added.\n");
+			outputText("-You can now <b>deliberately</b> lose to Erlking or his hounds even when fast enough (requires 30+ corruption). (Svalkash)\n");
+			outputText("-Prestige Job: Tempest not req. anymore Job: Dervish perk.\n");
+			outputText("-Lactoblasters got bit diff msg in combat for enemy reaction to lust inducing effect of the weapon. Also atk scaling for super high milk productions been... adjusted.\n");
+			outputText("-New tier 6 intelligence lvl-up perk: Selfbuffs Proficiency (Ex). Req. Selfbuffs Proficiency & Long(er) Lasting Buffs I perks, 170+ int. Effect: Increase max selfbuff max cap by 70%(100%). Enable recasting all active buffs when they're about to expire.\n");
+			outputText("-New tier 8 intelligence lvl-up perk: Selfbuffs Proficiency (Su). Req. Selfbuffs Proficiency (Ex) & (Ever)Lasting Buffs perks, 220+ int. Effect: Increase max selfbuff max cap five times at the cost of using twice more mana to cast.\n");
+			outputText("-Minotaur Sons can be moved to Soul Sense now after meeting them 3 times.\n");
+			outputText("-Minerva - restored 'Get Licked' scene and adapted for purified Minerva. (Svalkash)\n");
+			outputText("-Reworked Sapphire affection counter (retroactive). Added a proper dialogue about wedding from Lia's gdocs. (Svalkash)\n");
+			outputText("-Now you NEED to rebuild Marae's altar for any wedding. When Marae is corrupted, you can do it too, although you still can't get any blessings from it. (Svalkash)\n");
+			outputText("-True Demon enemies getting innate OverMax HP effect. It would be % one with number matching enemy current lvl so factory bosses for ex. would have between 10 to 16 % OverMax HP bonus. They all would also receive 1% of max HP innate HP regen.\n");
+			outputText("-True Angel enemies getting innate Diehard effect. It would be % one with number matching enemy current lvl. They all would also receive 2% of max HP innate HP regen.\n");
+			outputText("-As Kaiba warned on some items been temporal offer ended. Inari Blessed Kimono, Tamamo no Mae Cursed Kimono, Oni Noble kimono, Oni Tyrant kimono, Centaur Blackguard Armor went into Celess/Tyrantia legendaries upgrade menu. Black / Blue / Purple / Red / White Kimono to Inari Blessed Kimono / Tamamo no Mae Cursed Kimono, ");
+			outputText("Sakura Petal Kimono to Oni Noble kimono / Oni Tyrant kimono and Centaur Armor to Centaur Blackguard Armor.\n");
+			outputText("-Moved Quest items bag button one menu higher (still the same place in menu layout but one menu earlier). Dummy training button was moved to middle of the bottom row.\n");
+			outputText("-New mutation perk: Kitsune Parathyroid Glands. Req. having Enlightened/Corrupted Kitsune perk, 2+ fox tails and free Parathyroid glands mutation slot. Effects: Lower cooldowns for Illusion and Terror by three turns, +5% spe multi, +5% inte multi\n");
+			outputText("-New mutation perk: Kitsune Parathyroid Glands (Primitive). Req. having Kitsune Parathyroid Glands perk. Effects: Increase mana and fatigue recovery. Decrease by 50% fatigue cost of Illusion and Terror specials, +5% spe multi, +10% inte multi\n");
+			outputText("-New mutation perk: Kitsune Parathyroid Glands (Evolved). Req. having Kitsune Parathyroid Glands (Primitive) perk. Effects: Grant bonus mana regeneration depending on your Star Sphere rank. Increase speed debuff of Terror to 70, increase evasion boost from Illusion to 30%, +5% spe multi, +20% inte multi\n");
+			outputText("-Kitsune Glands perks stat bonuses are changed to: +5% spe multi, +5% wis multi, +5% spe multi, +10% wis multi, +5% spe multi, +20% wis multi. They won't boost mana recovery anymore and sf recovery boosts are 33% stronger, they won't affect Ilusion/Terror specials. 1st perk would lower by 50% base cost of fox fire specials.\n");
+			outputText("-Monsters max wrath and soulforce would increase with each lvl (+5 per lvl for both).\n");
+			outputText("-When in camp Konstantine have new talk option that would unlock new option in his main menu: Smelthing. If PC would have 1 copper+tin ore or 1 ebonbloom he can smelt it into respectively 1 bronze bar or 1 ebon ignot.\n");
+			outputText("-New usable items: hundred of iron/moonstone/skymetal/ebonbloom arrowheads, moonstone (ore) and unicorn hair. Made by Konstantin after unlocking his Smelting option using matching material, ore can be mined at night in quarry located in mountains (req. lvl 2+ mining skill), hair is gained from any unicorn npc that is in camp (Celess, Diana). Whole pack cost 1 gem for each.\n");
+			outputText("-Mining at Quarry will now give exp to mining skill. Ores can be found starting from lvl 1 of that skill. Level of it would also affect in smaller or larger degree amount of mined stones/gems.\n");
+			outputText("-There is possible to veture outside camp at night now. Places have now daylight & night version. (currently only quarry is possible to visit now at night)\n");
+			outputText("-Revisiting Woodcutting area or Quarry area would start with slight different text (no you nto gonna feel agian like your PC stumbled on that area for the first time.... 1,234th first time :P\n");
+			outputText("-Added new skill: Mining. It level cap is 2 at lvl 0 and 20 at lvl 18+. Leveled by mining in various places in Mareth and the higher level the better ores or more material can be gained. Ocassionaly even chance to mine precious items will be boosted by higher level of that skill.\n");
+			outputText("-Atlach Nacha bonuses changed to +230% to Str racial multi, +265% to Tou racial multi, +300% to Int racial multi, +300% to Lib racial multi, -60% to Wis racial multi, +90 to Sens. It can now also reach Greater Atlach Nacha at 30+ pts with following bonuses: +340% to Str racial multi, +400% to Tou racial multi, +425% to Int racial multi, +425% to Lib racial multi, -90% to Wis racial multi, +150 to Sens. ");
+			outputText("Now it would additionaly could adccess Venom Glands internal mutation in addition to Arachnid Book Lung & Tracheal System.\n");
+			outputText("-New armor (by Canadian Snas): Green Diving Suit - buyable at Belisa shop. Cost 2,160 gems, 20 armor, 34 magic resistance, +30% magic power.\n");
+			outputText("-New armor (by Canadian Snas): Green Diving Suit - buyable at Belisa shop. Cost 13,200 gems, 8 armor, 58 magic resistance, 50% slutty seduction, Wizard’s endurance 60%, does tease damage when casting.\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -277,7 +314,8 @@ package classes.Scenes
 			outputText("putting B. Sword after picking Ecalibur disabling option to pick sword at Temple, all 3 Hall of Blade soulskill variants dealing phys not magical dmg, Lightning Claw lowering phys dmg when used as part of feral style attack, using goblin Cum Reservoir not empting it out, Yuki Onna Transform scene not making sure to give proper genitalia setup, Archer's Stamina perks not giving fatigue related to ");
 			outputText("current Speed value, Half-Frost Wyrm or Half Spider-morph racial bonus been attained super easy, Mysterious Seed not causing for misc items menu appear as inventory submenu, unable to add arcane circuits to 5th arcane circle, doppleganger fight won't drag unnecessary due to getting messly 1k lust after 5th round in fight, Gazer Eyes mutation not keeping True seeing perk, Magical Eye Drops as item ");
 			outputText("find in Caves instead of Eye Drops, raiju tf removing/humanizing raiju paws, picking no elemental during minions turn skipping many following up phases of the turn, epic/legendary/mythical perks for stats not affecting monsters, harpy wings not setting shark score to 0, Siren been excluded form races list for appearance screen, Minor Minerva and parsertag, Encaps. pod multicockdescript, ");
-			outputText("Elf hair mutation, holiday events appearing in Ingnam/prison, Minotaur-Dormammu bug for all damage sources, bee chitin/stripes mutation repeat\n");/*ostatni punkt changelogu
+			outputText("Elf hair mutation, holiday events appearing in Ingnam/prison, Minotaur-Dormammu bug for all damage sources, equipping at once specific combinations of melee weapon and shield when not meeting req. to do so, Blood Chains too long stun duration, cyclop/gazer scores not included in chimera race check, Wood Elf perks not adding extra shoot & not affecting Skypiercer");
+			outputText("\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -288,11 +326,6 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -374,23 +407,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -423,19 +440,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

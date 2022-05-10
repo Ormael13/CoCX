@@ -42,7 +42,7 @@ public class BloodChainsSpell extends AbstractBloodSpell {
 			outputText("You concentrate, focusing on the power of your blood before drawing it from your body, " + (player.HP < player.maxOverHP() ? "wounds" : "skin pores") + ". Blood starts to gather before your chest, coalescing into a crimson sphere. ");
 			outputText("The blood covering your chest splits into dozens of stems. The mass pushes off from your chest, launching at [themonster]. The threads of blood cover [monster him], tacky-wet strands binding them tight enought to prevent them from moving.");
 		}
-		monster.createStatusEffect(StatusEffects.Stunned, calcDuration(), 0, 0, 0);
+		monster.createStatusEffect(StatusEffects.Stunned, (calcDuration()-1), 0, 0, 0);
 	}
 }
 }

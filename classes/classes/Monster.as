@@ -1,6 +1,5 @@
 ﻿package classes
 {
-import classes.BaseContent;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Beard;
@@ -29,11 +28,7 @@ import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirlsPack;
 import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
-import classes.Scenes.Camp;
-import classes.Scenes.Combat.Combat;
-import classes.Scenes.Combat.CombatAbilities;
 import classes.Scenes.Combat.CombatAbility;
-import classes.Scenes.Combat.CombatMagic;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.EbonLabyrinth.Hydra;
@@ -41,15 +36,12 @@ import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
 import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
 import classes.Scenes.NPCs.ChiChi;
 import classes.Scenes.Places.Boat.Marae;
-import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
-import classes.internals.EnumValue;
 import classes.internals.RandomDrop;
 import classes.internals.Utils;
 import classes.internals.WeightedDrop;
-import classes.SceneHunter;
 
 import flash.utils.getQualifiedClassName;
 
@@ -357,6 +349,12 @@ import flash.utils.getQualifiedClassName;
 			//
 			if (hasPerk(PerkLib.BloodDemonIntelligence)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.MunchkinAtWork)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.OverMaxHP)) {
+				if (hasPerk(PerkLib.Enemy300Type)) maxOver2 += (0.15 * perkv1(PerkLib.OverMaxHP));
+				else if (hasPerk(PerkLib.EnemyLargeGroupType)) maxOver2 += (0.1 * perkv1(PerkLib.OverMaxHP));
+				else if (hasPerk(PerkLib.EnemyGroupType)) maxOver2 += (0.05 * perkv1(PerkLib.OverMaxHP));
+				else maxOver2 += (0.01 * perkv1(PerkLib.OverMaxHP));
+			}
 			maxOver *= maxOver2;//~180%
 			maxOver = Math.round(maxOver);
 			return maxOver;
@@ -393,6 +391,12 @@ import flash.utils.getQualifiedClassName;
 				min -= wis;
 				min -= lib;
 				min -= sens;
+			}
+			if (hasPerk(PerkLib.DieHardHP)) {
+				if (hasPerk(PerkLib.Enemy300Type)) min -= (maxHP() * 0.15 * perkv1(PerkLib.DieHardHP));
+				else if (hasPerk(PerkLib.EnemyLargeGroupType)) min -= (maxHP() * 0.1 * perkv1(PerkLib.DieHardHP));
+				else if (hasPerk(PerkLib.EnemyGroupType)) min -= (maxHP() * 0.05 * perkv1(PerkLib.DieHardHP));
+				else min -= (maxHP() * 0.01 * perkv1(PerkLib.DieHardHP));
 			}
 			min = Math.round(min);
 			return min;
@@ -536,7 +540,7 @@ import flash.utils.getQualifiedClassName;
 
 		public override function maxSoulforce():Number {
 			//Base soulforce
-			var temp:Number = 50 + this.bonusSoulforce;
+			var temp:Number = 50 + this.level * 5 + this.bonusSoulforce * 2;
 			if (hasPerk(PerkLib.JobSoulCultivator)) temp += 50;
 			if (hasPerk(PerkLib.SoulApprentice)) {
 				temp += 30;
@@ -602,7 +606,7 @@ import flash.utils.getQualifiedClassName;
 
 		public override function maxWrath():Number {
 			//Base wrath
-			var temp:Number = 500 + (this.bonusWrath * 5);
+			var temp:Number = 500 + this.level * 5 + this.bonusWrath * 5;
 			if (hasPerk(PerkLib.DoubleAttack)) temp += 50;
 			if (hasPerk(PerkLib.TripleAttack)) temp += 50;
 			if (hasPerk(PerkLib.QuadrupleAttack)) temp += 50;
@@ -697,7 +701,7 @@ import flash.utils.getQualifiedClassName;
 
 		public override function maxMana():Number {
 			//Base mana
-			var temp:Number = 300 + this.level * 10 + this.bonusMana;
+			var temp:Number = 300 + this.level * 10 + this.bonusMana * 3;
 			if (hasPerk(PerkLib.BasicSpirituality)) temp += 135;
 			if (hasPerk(PerkLib.HalfStepToImprovedSpirituality)) temp += 225;
 			if (hasPerk(PerkLib.ImprovedSpirituality)) temp += 360;
@@ -828,7 +832,9 @@ import flash.utils.getQualifiedClassName;
 				if (armorMod < 100) armorMod -= 10;
 				else armorMod *= 0.9;
 			}
+			if (game.player.weapon == game.weapons.SIM_SPR) armorMod *= 0.7;
 			if (game.player.weapon == game.weapons.HALBERD) armorMod *= 0.6;
+			if (game.player.weapon == game.weapons.G_SPEAR) armorMod *= 0.55;
 			if (game.player.weapon == game.weapons.GUANDAO) armorMod *= 0.4;
 			if (game.player.hasPerk(PerkLib.LungingAttacks)) armorMod *= 0.5;
 			if (armorMod < 0) armorMod = 0;
@@ -1435,14 +1441,14 @@ import flash.utils.getQualifiedClassName;
 
 		public function isFullyInit():Boolean {
 			for each (var phase:Object in initsCalled) {
-				if (phase is Boolean && phase == false) return false;
+				if (phase is Boolean && !phase) return false;
 			}
 			return true;
 		}
 		public function missingInits():String{
 			var result:String = "";
 			for (var phase:String in initsCalled){
-				if (initsCalled[phase] is Boolean && initsCalled[phase] == false){
+				if (initsCalled[phase] is Boolean && !initsCalled[phase]){
 					if (result == "") result = phase;
 					else result+=", "+phase;
 				}
@@ -1720,7 +1726,6 @@ import flash.utils.getQualifiedClassName;
 		private function playerDodged():Boolean
 		{
 			//Check if player has shadow clones or similar gimmick
-			var hasTargetedThePlayer:Boolean = false;
 			if (player.hasStatusEffect(StatusEffects.MirrorImage) && !hasPerk(PerkLib.TrueSeeing)) {
 			}
 			if (player.hasStatusEffect(StatusEffects.MirrorImage) && rand(1+player.statusEffectv1(StatusEffects.MirrorImage)) != 1){
@@ -1813,8 +1818,7 @@ import flash.utils.getQualifiedClassName;
 		}
 
 		public function monsterIsStunned():Boolean {
-			if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FrozenSolid) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Polymorphed) || hasStatusEffect(StatusEffects.HypnosisNaga) || hasStatusEffect(StatusEffects.Sleep) || hasStatusEffect(StatusEffects.InvisibleOrStealth) || hasStatusEffect(StatusEffects.Fascinated)) return true;
-			return false;
+			return hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FrozenSolid) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Polymorphed) || hasStatusEffect(StatusEffects.HypnosisNaga) || hasStatusEffect(StatusEffects.Sleep) || hasStatusEffect(StatusEffects.InvisibleOrStealth) || hasStatusEffect(StatusEffects.Fascinated);
 		}
 
 		public function doAI():void
@@ -1907,25 +1911,6 @@ import flash.utils.getQualifiedClassName;
 				createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 				return;
 			}
-			//If grappling... TODO implement grappling
-//			if (game.gameState == 2) {
-//				game.gameState = 1;
-				//temperment - used for determining grapple behaviors
-				//0 - avoid grapples/break grapple
-				//1 - lust determines > 50 grapple
-				//2 - random
-				//3 - love grapples
-				/*
-				 //		if(temperment == 0) eGrappleRetreat();
-				 if (temperment == 1) {
-				 //			if(lust < 50) eGrappleRetreat();
-				 mainClassPtr.doNext(3);
-				 return;
-				 }
-				 mainClassPtr.outputText("Lust Placeholder!!");
-				 mainClassPtr.doNext(3);
-				 return;*/
-//			}
 			performCombatAction();
 		}
 
@@ -2235,7 +2220,7 @@ import flash.utils.getQualifiedClassName;
             game.player.clearStatuses(false);
             var temp:Number = rand(10) + 1;
 			if(temp > player.gems) temp = player.gems;
-			outputText("\n\nYou'll probably wake up in eight hours or so, missing " + temp + " gems.");
+			outputText("\n\nYou'll probably wake up in six hours or so, missing " + temp + " gems.");
 			player.gems -= temp;
 			EngineCore.doNext(SceneLib.camp.returnToCampUseSixHours);
 		}
@@ -2283,7 +2268,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			if (lustDelta > 0) {
 				//Imp mob uber interrupt!
-			  	if(hasStatusEffect(StatusEffects.ImpUber)) { // TODO move to proper class
+			  	if(hasStatusEffect(StatusEffects.ImpUber)) {
 					outputText("\nThe imps in the back stumble over their spell, their loincloths tenting obviously as your display interrupts their casting.  One of them spontaneously orgasms, having managed to have his spell backfire.  He falls over, weakly twitching as a growing puddle of whiteness surrounds his defeated form.");
 					//(-5% of max enemy HP)
 					HP -= bonusHP * .05;
@@ -2436,63 +2421,6 @@ import flash.utils.getQualifiedClassName;
 			}
 			return result;
 		}
-		
-		public function scanningEnemy():String {
-			var result:String;
-			var be:String =plural?"are":"is";
-			var have:String = plural ? "have" : "has";
-			var Heis:String = Pronoun1+" "+be+" ";
-			var Hehas:String = Pronoun1 + " " + have + " ";
-			result = "You are inspecting "+a+short+" (imageName='"+imageName+"', class='"+getQualifiedClassName(this)+"'). You are fighting "+pronoun2+".\n\n";
-			result += Heis+(Appearance.DEFAULT_GENDER_NAMES[gender]||("gender#"+gender))+
-					" with "+Appearance.numberOfThings(cocks.length,"cock") +
-					", "+Appearance.numberOfThings(vaginas.length,"vagina")+
-					" and "+Appearance.numberOfThings(breastRows.length,"breast row")+".\n\n";
-			// APPEARANCE
-			result += Heis + Appearance.inchesAndFeetsAndInches(tallness) + " tall with " +
-			          Appearance.describeByScale(hips.type,Appearance.DEFAULT_HIP_RATING_SCALES,"thinner than","wider than") + " hips and " +
-			          Appearance.describeByScale(butt.type,Appearance.DEFAULT_BUTT_RATING_SCALES,"thinner than","wider than") + " butt.\n";
-			result += Pronoun3+" lower body is "+Object(LowerBody.Types[lowerBody]||{}).name;
-			result += ", "+pronoun3+" arms are "+Object(Arms.Types[arms.type]||{}).name;
-			result += ", "+pronoun1+" "+have+" "+skinTone+" "+skinAdj+" "+skinDesc+
-					  " (base "+Object(Skin.SkinTypes[skin.baseType()]||{}).id+")." +
-					  " (coat "+Object(Skin.SkinTypes[skin.coatType()]||{}).id+")." +
-					  "\n";
-			result += Hehas;
-			if (hairLength>0){
-				result += hairColor+" "+Appearance.inchesAndFeetsAndInches(hairLength)+" long "+Object(Hair.Types[hairType]||{}).name+" hair.\n";
-			} else {
-				result += "no hair.\n";
-			}
-			result += Hehas;
-			if (beardLength>0){
-				result += hairColor+" "+Appearance.inchesAndFeetsAndInches(beardLength)+" long "+Object(Beard.Types[beardStyle]||{}).name+" beard.\n";
-			} else {
-				result += "no beard.\n";
-			}
-			result += Hehas
-			          + Object(Face.Types[faceType]||{}).name + " face, "
-			          + Object(Ears.Types[ears.type]||{}).name + " ears, "
-			          + Object(Tongue.Types[tongue.type]||{}).name + " tongue and "
-			          + Object(Eyes.Types[eyes.type]||{}).name + " eyes.\n";
-			result += Hehas;
-			if (tailType == Tail.NONE) result += "no tail, ";
-			else result+=Object(Tail.Types[tailType]||{}).name+" "+tailCount+" tails with venom="+tailVenom+" and recharge="+tailRecharge+", ";
-			if (horns.type == Horns.NONE) result += "no horns, ";
-			else result += horns.count + " " + Object(Horns.Types[horns.type]||{}).name + " horns, ";
-			if (wings.type == Wings.NONE) result += "no wings, ";
-			else result += wings.desc + " wings (type " + Object(Wings.Types[wings.type]||{}).name + "), ";
-			if (antennae.type == Antennae.NONE) result += "no antennae.type.\n\n";
-			else result += Object(Antennae.Types[antennae.type]||{}).name + " antennae.type.\n\n";
-			// COMBAT AND OTHER STATS
-			result += Hehas + "str=" + str + ", tou=" + tou + ", spe=" + spe +", inte=" + inte +", wis=" + wis +", lib=" + lib + ", sens=" + sens + ", cor=" + cor + ".\n";
-			result += Pronoun1 + " can " + weaponVerb + " you with  " + weaponPerk + " " + weaponName+" (attack " + weaponAttack + ", value " + weaponValue+").\n";
-			result += Pronoun1 + " is guarded with " + armorPerk + " " + armorName+" (phys defense " + armorDef + ", mag defense " + armorMDef + ", value " + armorValue+").\n";
-			result += Hehas + HP + "/" + maxHP() + " HP, " + lust + "/" + maxLust() + " lust, " + fatigue + "/" + maxFatigue() + " fatigue, " + wrath + "/" + maxWrath() + " wrath, " + soulforce + "/" + maxSoulforce() + " soulforce, " + mana + "/" + maxMana() + " mana. ";
-			result += Pronoun3 + " bonus HP=" + bonusHP + ", bonus lust=" + bonusLust + ", bonus wrath=" + bonusWrath + ", bonus mana=" + bonusMana + ", bonus soulforce=" + bonusSoulforce + ", and lust vulnerability=" + lustVuln + ".\n"
-			result += Heis + "level " + level + " and " + have+" " + gems + " gems. You will be awarded " + XP + " XP.\n";
-			return result;
-		}
 
 		protected function clearOutput():void
 		{
@@ -2514,7 +2442,8 @@ import flash.utils.getQualifiedClassName;
 			//regeneration perks for monsters
 			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || hasPerk(MutationsLib.LizanMarrow) || hasPerk(MutationsLib.LizanMarrowPrimitive) || hasPerk(MutationsLib.LizanMarrowEvolved) || hasPerk(MutationsLib.DraconicHeartEvolved) || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.BodyCultivator) || hasPerk(PerkLib.MonsterRegeneration)
 			|| hasPerk(PerkLib.HydraRegeneration) || hasPerk(PerkLib.Lifeline) || hasPerk(PerkLib.ImprovedLifeline) || hasPerk(PerkLib.GreaterLifeline) || hasPerk(PerkLib.EpicLifeline) || hasPerk(PerkLib.IcyFlesh) || hasPerk(PerkLib.HclassHeavenTribulationSurvivor) || hasPerk(PerkLib.GclassHeavenTribulationSurvivor)
-			|| hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)) && this.HP < maxHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
+			|| hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2) || hasPerk(PerkLib.EnemyTrueAngel) || hasPerk(PerkLib.EnemyTrueDemon)) && this.HP < maxHP())
+			|| (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
 				var temp3:Number = 0;
@@ -2548,6 +2477,8 @@ import flash.utils.getQualifiedClassName;
 					else if (hasPerk(PerkLib.EnemyPlantType)) healingPercent *= 0.5;
 					else healingPercent *= 0.2;
 				}
+				if (hasPerk(PerkLib.EnemyTrueAngel)) healingPercent += 2;
+				if (hasPerk(PerkLib.EnemyTrueDemon)) healingPercent += 1;
 				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp3 += 0.55;
 				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp3 += 0.25;
 				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp3 += 0.15;
@@ -2602,9 +2533,9 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.SoulEmperor)) soulforceRecovery += 5;
 				if (hasPerk(PerkLib.SoulAncestor)) soulforceRecovery += 5;
 				if (hasPerk(PerkLib.DaoistCultivator)) soulforceRecoveryMulti += 0.5;
-				if (hasPerk(MutationsLib.DraconicHeart)) manaRecovery += 4;
-				if (hasPerk(MutationsLib.DraconicHeartPrimitive)) manaRecovery += 4;
-				if (hasPerk(MutationsLib.DraconicHeartEvolved)) manaRecovery += 4;
+				if (hasPerk(MutationsLib.DraconicHeart)) soulforceRecovery += 4;
+				if (hasPerk(MutationsLib.DraconicHeartPrimitive)) soulforceRecovery += 4;
+				if (hasPerk(MutationsLib.DraconicHeartEvolved)) soulforceRecovery += 4;
 				soulforceRecovery *= soulforceRecoveryMulti;
 				addSoulforce(soulforceRecovery);
 			}

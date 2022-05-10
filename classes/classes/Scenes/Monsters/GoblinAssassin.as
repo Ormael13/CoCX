@@ -107,7 +107,7 @@ public class GoblinAssassin extends Monster
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
+			if (player.gender == 0) {
 				outputText("You collapse in front of the goblin, too wounded to fight.  She growls and kicks you in the head, making your vision swim. As your sight fades, you hear her murmur, \"<i>Fucking dicks can't even bother to grow a dick or cunt.</i>\"");
 				SceneLib.combat.cleanupAfterCombatImpl();
 			} 
@@ -164,7 +164,7 @@ public class GoblinAssassin extends Monster
 							consumables.PINKDYE,
 							consumables.BLUEDYE,
 							consumables.ORANGDY,
-							consumables.PURPDYE);// TODO this is a copy of goblin drop. consider replacement with higher-lever stuff
+							consumables.PURPDYE);
 			this.abilities = [
 				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
 				{ call: goblinDrugAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_FLUID]},

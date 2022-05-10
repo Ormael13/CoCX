@@ -42,23 +42,6 @@ public class ErlKingScene extends BaseContent
 			trace("Int + Spd = " + String(player.inte + player.spe));
 			trace("Base = " + String((player.inte + player.spe) - (player.fatigue * 2)));
 			var baseVal:int = (player.inte + player.spe) - (player.fatigue * 2);
-
-			/*
-			Conditional modifiers: +20 for Evade
-                    +20 for Runner
-					+20 for Drider Half
-					+30 Enlightened/Corrupted Ninetails
-					+10 for each Akbal Blessing
-					+10 Fast Perk
-					+10 Incorporeality.  (Increases to +20 if player has wings)
-					+10 Lunging Attacks
-                    -20 for Kitsune traits
-					-20 for Rabbit traits
-					-20 for Harpy traits
-					-10 for Goo Half
-					-10 for Centaur Half
-			*/
-
 			if (player.hasPerk(PerkLib.Evade))
 			{
 				baseVal += 20;
@@ -172,7 +155,7 @@ public class ErlKingScene extends BaseContent
 			clearOutput();
 			spriteSelect(SpriteDb.s_erlking_clothed);
 
-			if (waited == false)
+			if (!waited)
 			{
 				outputText("You stumble your way through the woods, but no matter which way you turn, you are greeted by bone-chilling fog.  Soon, canine snarls come from all sides.\n\n");
 				outputText("You’re surrounded.\n\n");
@@ -190,7 +173,7 @@ public class ErlKingScene extends BaseContent
 				{
 					if (player.hasCock() && !player.hasVagina())
 					{
-						outputText("  You can't help but stiffen, yourself, at the sight of their eagerness.");
+						outputText("  You can't help but stiffen yourself, at the sight of their eagerness.");
 					}
 					else if (player.hasVagina() && !player.hasCock())
 					{
@@ -251,13 +234,25 @@ public class ErlKingScene extends BaseContent
 
 			outputText("The Erlking is coming for you!\n\n");
 
-			if (player.wings.type != Wings.NONE) outputText("You quickly glance from side to side, realizing that the trees here grow too close together for your to spread your [wings].\n\n");
+			if (player.wings.type != Wings.NONE) outputText("You quickly glance from side to side, realizing that the trees here grow too close together for you to spread your [wings].\n\n");
 
 			outputText("Do you make a run for it or stand your ground?\n\n");
-
 			menu();
 			addButton(0, "Run", repeatWildHuntChase);
 			addButton(1, "Wait", repeatWildHuntWait);
+			if (player.cor > 33 - player.corruptionTolerance) {
+				var canRunFast:Boolean = player.bunnyScore() >= 4 || player.kitsuneScore() >= 4 || player.harpyScore() >= 4 || playerHuntScore() > 100;
+				outputText("Actually... do you <i>really</i> need to run away? Actually, you're pretty sure that Erlking or his hellhounds will <i>definitely</i> do something <i>bad</i> to you if they manage to catch you. But if you run fast enough, maybe you'll even tire him out to get some 'reward'... or take your revenge and show this bully who's a <b>real</b> hunter here.");
+				addButton(2, "Mock-run(S)", mockSlow).hint("Play the worst possible imitation of a real chase. Erlking will probably be disappointed with your skills.");
+				addButtonIfTrue(3, "Mock-run(F)", mockFast,
+					"You're not fast enough to tire <b>him</b> down.", canRunFast,
+					"Run fast enough to keep the fog at some distance, but slow down after having enough fun.");
+			}
+			else {
+				sceneHunter.print("Failed check: need higher corruption!")
+				addButtonDisabled(2, "???", "Too pure...");
+				addButtonDisabled(3, "???", "Too pure...");
+			}
 		}
 
 		protected function repeatWildHuntWait():void
@@ -275,22 +270,14 @@ public class ErlKingScene extends BaseContent
 			outputText("It seems the Erlking has no interest in chasing prey that won’t run.\n\n");
 
 			if (player.inte < 80) dynStats("int+", 1);
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
 		protected function repeatWildHuntChase():void
 		{
 			var pScore:int = playerHuntScore();
-			if (pScore > 150)
-			{
-				repeatWildHuntEscaped();
-			}
-			else
-			{
-				repeatWildHuntCaught(pScore);
-			}
+			if (pScore > 150) repeatWildHuntEscaped();
+			else repeatWildHuntCaught(pScore);
 		}
 
 		protected function repeatWildHuntEscaped():void
@@ -309,33 +296,37 @@ public class ErlKingScene extends BaseContent
 			outputText("It looks like you’re in the clear... for now.\n\n");
 
 			fatigue(10);
-
-			if (rand(5) == 0)
-			{
-				if (rand(2) == 0)
-				{
-					dynStats("tou+", 1);
-				}
-				else
-				{
-					dynStats("spe+", 1);
-				}
+			if (rand(5) == 0) {
+				if (rand(2) == 0) dynStats("tou+", 1);
+				else dynStats("spe+", 1);
 			}
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
+		}
+
+		protected function mockSlow():void {
+			clearOutput();
+			outputText("You calmly jog through the forest, not paying any attention to the fog slowly enveloping you. After several minutes, you can't see anything through it... not that you care. Slowing down further, you wait for hellhounds to approach, swaying your butt from side to side. \n\n");
+			outputText("It doesn't take long for them to reach you, roughly throwing your body at the ground. You moan faintly and smile, trying not to give out that you planned these events all along. Changing your position to something more comfortable to wait for the Hunter, you by chance brush against the hound's cock, making it back away cautiously. You smirk at the poor doggo.\n\n");
+			repeatWildHuntGivenToTheHounds();
+		}
+
+		protected function mockFast():void {
+			clearOutput();
+			outputText("You pick up the speed, easily maneuvering around the woods. You try to stay at the edge of the fog, not outrunning it, but at the same time not inhaling the weird gas.\n\n");
+			outputText("You hear sounds of Erlking's hounds in a distance - they're completely absorbed by the chase, trying to reach you... but you won't give up so easily. You jump overa small rivulet and slow down sligtly, contendedly listening to the sounds of splashes and annoyed snarls.\n\n");
+			outputText("Despite the fact that you're still not tired (maybe because you didn't exhaust yourself with running at maximum speed?), you decide to slow down at last. Noticing a hound on your right, who clearly prepares to jump you, you jump first, knocking it on the ground and rolling over, escaping and running away. The poor dog loudly roars from frustration.\n\n");
+			outputText("Another two leap at you from both sides. Well, time to have fun. You leap too, dropping three of you on the soft grass. While the hounds are unsuccessfully trying to hold you in place, the third one hops on your back. Oops. You laugh, admitting your 'defeat'. So, where's the Hunter?");
+			repeatWildHuntAWinnerIsYou();
 		}
 
 		protected function repeatWildHuntCaught(pScore:int):void
 		{
 			clearOutput();
-
 			// Player Hunt Score < 150.  The Erlking captures you.
 			//If your score is above 100, the Erlking has his way with you.
 			// If your score is below 100, Gangbang by his Hounds (canine anthros).
 			// If the PC is a kitsune, bunny, or harpy, disregard Wild Points because the Erlking will ALWAYS opt to do the PC personally.
 			// The Erlking leaves the PC a nicely-wrapped gift of foxberries or canine peppers,  The Hunt reverts to 0 points.
-
 			outputText("You run through the woods, heart pounding so hard you feel it might leap out of your throat.  Despite your best efforts, though, the fog still closes in.  With it comes the sound of the hounds, running alongside you, hidden in the thick haze. \n\n");
 
 			outputText("With the Hounds on your right, you juke left, nearly running into a tree, but stumble past it, only to hear the Hounds again on your left.  You turn right, still running, unable to shake the feeling that you’re being driven, but too panicked to figure a way out. \n\n");
@@ -388,7 +379,7 @@ public class ErlKingScene extends BaseContent
 
 			outputText("You groan around the Hound’s dick as you feel a pressure against your [asshole].  The beast squeezes your [ass] cheeks as he shoves his foot-long doggie cock into your rear. ");
 			player.buttChange(12 * 3, true, false, false);
-			outputText(" You yelp, realizing what’s to come, and try to wriggle away, but, pinned between the two Hounds, there’s no escape.  The Hounds growl in unison and you freeze, cowed by the two powerful males who want their way with your frightened, vulnerable body.\n\n");
+			outputText(" You yelp, realizing what’s to come, and try to wriggle away, but, pinned between the two Hounds, there’s no escape.  The Hounds growl in unison, and you freeze, cowed by the two powerful males who want their way with your frightened, vulnerable body.\n\n");
 
 			outputText("After all, comes a thought in your fog-addled head, they’ve earned the right to do whatever they want to their prey.\n\n");
 
@@ -434,15 +425,13 @@ public class ErlKingScene extends BaseContent
 			outputText("You pause for a moment to consider his words and realize he might be offering you more. If you’re feeling brave, you could ask for him to stop the hunt once and for all.  Or, if the hunt has finally broken your will, you might just submit to the huntsman forever.\n\n");
 
 			outputText("Even with so many of these thoughts crowding your mind, there’s still a tiny spark of resentment burning.  You could rush him and turn the tables on this cocky asshole.\n\n");
-
-			//Sex	 	What’s my prize?		Stop the Madness 		Surrender Forever		How Dare You!
 			fatigue(10);
 			menu();
-			addButton(0, "Sex", predatoryPrey);
+			if (player.gender > 0) addButton(0, "Sex", predatoryPrey);
 			addButton(1, "Prize?", whatsMyPrize);
 			addButton(2, "Stop", stopTheMadness);
 			addButton(3, "Surrender", surrenderToTheHounds);
-			addButton(4, "Revenge", howDareYou);
+			if (player.gender > 0) addButton(4, "Revenge", howDareYou);
 
 		}
 
@@ -486,8 +475,6 @@ public class ErlKingScene extends BaseContent
 			outputText("\"<i>As you wish,</i>\" says the Erlking.  The fog rolls in once more, engulfing the Erlking and his steed.  It clears a moment later, leaving you alone in the forest.\n\n");
 
 			outputText("You get the feeling you won’t be seeing him anymore.\n\n");
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -581,15 +568,12 @@ public class ErlKingScene extends BaseContent
 
 			outputText("You whimper and groan in absolute bliss, and begin bucking without meaning to.  You want to stay still and submissive for the Master, but your body has other ideas.  You whine, wriggling and writhing against the Master’s hand.  He grunts, hand moving faster and faster, squeezing tighter around your doggie cock.\n\n");
 
-			outputText("With a woods-shaking howl, you climax, spraying your belly and chest with cum.  Your limbs go wobbly, and your eyes cross, barely able to see the Master’s spooge-spattered hand in front of your face.  You know what he wants and you obediently clean his glove with your tongue, slurping down your own cum from his fingers.\n\n");
+			outputText("With a woods-shaking howl, you climax, spraying your belly and chest with cum.  Your limbs go wobbly, and your eyes cross, barely able to see the Master’s spooge-spattered hand in front of your face.  You know what he wants, and you obediently clean his glove with your tongue, slurping down your own cum from his fingers.\n\n");
 
 			outputText("The Master stands up, and as you wobble to your feet, the two other Hounds move forwards, their broad tongue licking your chest, stomach, and dick, cleaning the cum from your fur.\n\n");
 
 			outputText("<b>The Master sounds his horns, and your ears perk up.  Astride his horse, he gallops off into the fog-haunted woods, and, like the rest of the Hounds, you follow.</b>\n\n");
 			EventParser.gameOver();
-
-//			menu();
-//			doNext(5025); // Find out the gameover shits
 		}
 
 		protected function predatoryPrey():void
@@ -605,108 +589,111 @@ public class ErlKingScene extends BaseContent
 
 			outputText("His warm mouth presses against your neck, his fingers undoing your [armor], letting it fall to the forest floor.  His touch sends warm shivers through you, and you moan as he walks you backward, pressing you firmly against a tree.\n\n");
 
-			if (!player.isTaur())
-			{
-				if (player.hasVagina() && !player.hasCock())
-				{
-					outputText("With your back against the tree, he guides your");
-					if (player.isBiped() || player.isDrider() || player.isGoo()) outputText(" [legs] up, letting them wrap around his back.");
-					else if (player.isNaga()) outputText(" tail up, letting your coils wrap around his back.");
-					outputText("  One hand grasps firmly under your [ass], holding you up, while the other plays softly across your chest, squeezing and caressing each of your [chest] in turn.  He tweaks your nipples, one by one, sending shockwaves of pleasure through your body.\n\n");
-
-					outputText("\"<i>Take me, Huntsman,</i>\" you moan.  His shaft is already poised, his equine dick sliding up into your [vagina], pushing deep inside you.");
-
-					player.cuntChange(12 * 3, true, true, false);
-					outputText("\n\n");
-
-					outputText("You gasp, shuddering in delight as he begins to push in and out of you.  His hands shift, holding you under the arms, fucking you against the tree.  The rough bark scratches your back as he thrusts deep inside you.  You feel the triple rings of his prepuce rubbing against your inner walls.\n\n");
-
-					outputText("His speed builds, and his strong arms lift you up, sliding you up and down his shaft, letting your own weight fuck you against his dick, over and over.  You moan, body quaking as you cum, his shaft grinding deep against your womb.  After several minutes of steady rhythm, he grunts, pushing you down, and a moment later, he climaxes inside you, pumping you full of hot, thick cum.  You shudder as he floods you with jet after jet of his thick seed.\n\n");
-
-					outputText("You wrap your arms around him, clinging to him as he shifts his grip, bearing you up as you quake with aftershocks of pleasure.  One arm holds you up, close to his muscular chest, his other gloved hand strokes your [hair], as the fog rolls in.\n\n");
-
-					outputText("You feel drowsy as the air thickens with chill fog, though the Erlking’s body keeps you warm.  Despite your best efforts, you find yourself drifting to sleep in his arms.  \n\n");
-
-					outputText("You wake up an hour later, head spinning, feeling slightly tougher for all of the... exercise.\n\n");
-				}
-				else if (player.hasCock())
-				{
-					outputText("With your back against the tree, he guides your");
-					if (player.isBiped()) outputText(" [legs] up, letting them wrap around his back.");
-					else if (player.isNaga()) outputText(" tail up, letting your coils wrap around his back.");
-					outputText("  One hand grasps firmly under your [ass], holding you up, while the other plays softly across your chest, tweaking each nipple before trailing down your stomach, grasping [oneCock]\n\n");
-
-					outputText("\"<i>Take me, Huntsman,</i>\" you groan.  His shaft is already at your [ass].  His equine dick pushing up into your [asshole], pushing deep inside you.");
-
-					player.buttChange(12 * 3, true, true, false);
-					outputText("\n\n");
-
-					outputText("You gasp, shuddering in delight as he begins to push in and out of you.  His hands shift, one at the small of your back, steadying you, fucking you against the tree.  The other squeezes tight around your dick, jacking you off, gloved hand stroking you roughly in time to his thrusts.  The coarse bark of the tree scratches at your back as you feel the triple rings of his prepuce rubbing against the inner walls of your [asshole].  \n\n");
-
-					outputText("You moan, body quaking as you cum, spurting cum over his chest and your own, his shaft grinding deep inside you.  He pushes you down, and a moment later, he climaxes inside you pumping you full of hot, thick cum.  He floods your bowels with jet after jet of his thick seed, your belly swelling slightly outward from the volume of cum.\n\n");
-
-					outputText("You wrap your arms around him, clinging to him as he shifts his grip, holding you up as you quake with aftershocks of pleasure.  One arm holds you up, close to his now-sticky, muscular chest, his other gloved hand still slowly stroking your cock, as the fog rolls in.\n\n");
-
-					outputText("You feel drowsy as the air thickens with chill fog, though the Erlking’s body keeps you warm.  Despite your best efforts, you find yourself drifting to sleep in his arms. \n\n");
-
-					outputText("You wake up an hour later, head spinning, feeling slightly tougher for all of the... exercise.\n\n");
-				}
-			}
-			else
-			{
+			if (player.isTaur()) {
 				outputText("The Erlking smiles at you, caressing your cheek.  \"<i>I pride myself in keeping a proper stable,</i>\" he says, delicately moving behind you.  With his strong hands on your flanks, he guides you to face up against a tree.\n\n");
-
-				if (player.hasVagina() && !player.hasCock())
-				{
-					outputText("With your [chest] against the rough bark, he lifts your [tail], exposing your [pussy] to the swelling head of his equine cock.  With a soft sound, he pushes between your lips, letting you feel each prepuce ring as they squeeze into you.");
-
-					player.cuntChange(12 * 3, true, true, false);
-					outputText("\n\n");
-
-					outputText("You wrap your arms around the trunk of the tree as his hands grip your flanks.  His own equine legs begin thrusting him against you, his ribbed cock sliding in and out of your [pussy], the ridges of his horselike shaft massaging you from the inside.  The force of his fucking ginds your [chest] against the tree.");
-					if (player.biggestLactation() > 0) outputText("  The friction begins milking you, making you ooze milk down the trunk.");
-					outputText("  The mild pain of abrasion couples with the pleasure of his forceful fucking and you feel your climax approaching.\n\n");
-
-					outputText("With a moan, you cum, hugging the tree with all your might, thrusting back with your hindquarters.  With gentlemanly demeanor, the Erlking continues pumping his thick cock in and out of you until your orgasm recedes.  He then cums himself, filling your insides with his hot spunk. \n\n");
-
-					outputText("He allows you a moment to catch your breath, the pulls out.  You hear his cock slap wetly against his thigh.  A strong hand takes yours, guiding you across the clearing to a fallen log. Dazed, you follow him, and he sits, guiding you to do the same next to him.  \n\n");
-
-					outputText("Reaching into his belt pouch, he pulls out a small bottle of salve.  One hand strokes your hair as the other begins to work the cream into your scratched [chest].  The cream is cool and soothing, and the Erlking is attentive.  You soon fall asleep, your head leaning against his chest.\n\n");
-
-					outputText("You wake up an hour later in the clearing, the Erlking gone and your chest unmarred.  You blink, sleepily, still feeling the Erlking’s arms around you and shakily climb to your feet, making your way back to camp.\n\n");
-				}
-				else if (player.hasCock())
-				{
-					outputText("With your [chest] against the rough bark, he crouches at your side, taking your already stiffening [oneCock] in his gloved hand.  From this angle, you feel, rather than see the cream he lathers on your [cock], working you to full hardness. One hand strokes your flank soothingly as the other wraps around your [cock], stroking you in his strong grip.\n\n");
-
-					outputText("You pant, fingertips gripping the bark of the tree as he jacks you off.  Your tongue lolls out as his gloved hand grips you firmly, moving faster and faster as he works his way up and down your length.  Whatever lube he used is incredible, and you feel a tingle on every down and up stroke.\n\n");
-
-					outputText("You can’t get enough of this feeling - being milked by the Erlking.  He even seems to be humming under his breath as he strokes your side and works you with deft fingers.  It’s like he’s calming some rutting stallion!  Your leg stamps reflexively, your [tail] swishing as your body announces your intent to cum.\n\n");
-
-					outputText("The Erlking responds by stroking you faster, his hand tightening, increasing the tingling pleasure from the cream.  You groan, gripping the tree trunk, rubbing your chest against it for extra stimulation, the rough bark scratching harshly against your [nipples].  \n\n");
-
-					outputText("The Erlking gives a final, tight squeeze, a fingertip pressed against the tip of your cock.  You moan, cumming in his hand, your cum jetting against his fingertips, spraying, hose-like, against the mossy forest floor.  \n\n");
-
-					outputText("You pant, exhausted, and you feel a damp cloth against your softening cock.  He wasn’t kidding about taking care of his mounts - the Erlking is cleaning you off.  He wipes your cock clean, even catching stray drops that spattered your underside.  The huntsman is thorough, and you yawn softly, dozing under his careful ministrations.  \n\n");
-
-					outputText("Sleepily, you’re only half aware as he guides you down to a grassy patch, where you quickly fall asleep.  You wake up an hour later in the clearing.  The Erlking is gone and but your cock gives a twitch as you remember his touch.  You shakily climb to your feet, making your way back to camp.\n\n");
-				}
+				sceneHunter.selectGender(taurDickF, taurVagF);
+			}
+			else {
+				sceneHunter.print("Failed check: Taur body");
+				sceneHunter.selectGender(dickF, vagF);
 			}
 
-			//[+10 Fatigue, +1 Toughness / +1 Strength, 100 hp healed]
-			if (player.tou < player.str) dynStats("toughness+", 1, "fatigue+", 10, "health+", 100, "lust=", 0);
-			else (dynStats("strength+", 1, "fatigue+", 10, "health+", 100, "lust=", 0));
-			player.sexReward("cum");
+			//=====================================================================================================
+			function vagF():void {
+				outputText("With your back against the tree, he guides your");
+				if (player.isBiped() || player.isDrider() || player.isGoo()) outputText(" [legs] up, letting them wrap around his back.");
+				else if (player.isNaga()) outputText(" tail up, letting your coils wrap around his back.");
+				outputText("  One hand grasps firmly under your [ass], holding you up, while the other plays softly across your chest, squeezing and caressing each of your [chest] in turn.  He tweaks your nipples, one by one, sending shockwaves of pleasure through your body.\n\n");
 
-			menu();
-			doNext(camp.returnToCampUseOneHour);
+				outputText("\"<i>Take me, Huntsman,</i>\" you moan.  His shaft is already poised, his equine dick sliding up into your [vagina], pushing deep inside you.");
+
+				player.cuntChange(12 * 3, true, true, false);
+				outputText("\n\n");
+
+				outputText("You gasp, shuddering in delight as he begins to push in and out of you.  His hands shift, holding you under the arms, fucking you against the tree.  The rough bark scratches your back as he thrusts deep inside you.  You feel the triple rings of his prepuce rubbing against your inner walls.\n\n");
+
+				outputText("His speed builds, and his strong arms lift you up, sliding you up and down his shaft, letting your own weight fuck you against his dick, over and over.  You moan, body quaking as you cum, his shaft grinding deep against your womb.  After several minutes of steady rhythm, he grunts, pushing you down, and a moment later, he climaxes inside you, pumping you full of hot, thick cum.  You shudder as he floods you with jet after jet of his thick seed.\n\n");
+
+				outputText("You wrap your arms around him, clinging to him as he shifts his grip, bearing you up as you quake with aftershocks of pleasure.  One arm holds you up, close to his muscular chest, his other gloved hand strokes your [hair], as the fog rolls in.\n\n");
+
+				outputText("You feel drowsy as the air thickens with chill fog, though the Erlking’s body keeps you warm.  Despite your best efforts, you find yourself drifting to sleep in his arms.  \n\n");
+
+				outputText("You wake up an hour later, head spinning, feeling slightly tougher for all of the... exercise.\n\n");
+				player.sexReward("cum", "Vaginal");
+				sharedEnd();
+			}
+			function dickF():void {
+				outputText("With your back against the tree, he guides your");
+				if (player.isBiped()) outputText(" [legs] up, letting them wrap around his back.");
+				else if (player.isNaga()) outputText(" tail up, letting your coils wrap around his back.");
+				outputText("  One hand grasps firmly under your [ass], holding you up, while the other plays softly across your chest, tweaking each nipple before trailing down your stomach, grasping [oneCock]\n\n");
+
+				outputText("\"<i>Take me, Huntsman,</i>\" you groan.  His shaft is already at your [ass].  His equine dick pushing up into your [asshole], pushing deep inside you.");
+
+				player.buttChange(12 * 3, true, true, false);
+				outputText("\n\n");
+
+				outputText("You gasp, shuddering in delight as he begins to push in and out of you.  His hands shift, one at the small of your back, steadying you, fucking you against the tree.  The other squeezes tight around your dick, jacking you off, gloved hand stroking you roughly in time to his thrusts.  The coarse bark of the tree scratches at your back as you feel the triple rings of his prepuce rubbing against the inner walls of your [asshole].  \n\n");
+
+				outputText("You moan, body quaking as you cum, spurting cum over his chest, and your own, his shaft grinding deep inside you.  He pushes you down, and a moment later, he climaxes inside you pumping you full of hot, thick cum.  He floods your bowels with jet after jet of his thick seed, your belly swelling slightly outward from the volume of cum.\n\n");
+
+				outputText("You wrap your arms around him, clinging to him as he shifts his grip, holding you up as you quake with aftershocks of pleasure.  One arm holds you up, close to his now-sticky, muscular chest, his other gloved hand still slowly stroking your cock, as the fog rolls in.\n\n");
+
+				outputText("You feel drowsy as the air thickens with chill fog, though the Erlking’s body keeps you warm.  Despite your best efforts, you find yourself drifting to sleep in his arms. \n\n");
+
+				outputText("You wake up an hour later, head spinning, feeling slightly tougher for all of the... exercise.\n\n");
+				player.sexReward("cum", "Anal");
+				sharedEnd();
+			}
+			function taurVagF():void {
+				outputText("With your [chest] against the rough bark, he lifts your [tail], exposing your [pussy] to the swelling head of his equine cock.  With a soft sound, he pushes between your lips, letting you feel each prepuce ring as they squeeze into you.");
+
+				player.cuntChange(12 * 3, true, true, false);
+				outputText("\n\n");
+
+				outputText("You wrap your arms around the trunk of the tree as his hands grip your flanks.  His own equine legs begin thrusting him against you, his ribbed cock sliding in and out of your [pussy], the ridges of his horselike shaft massaging you from the inside.  The force of his fucking ginds your [chest] against the tree.");
+				if (player.biggestLactation() > 0) outputText("  The friction begins milking you, making you ooze milk down the trunk.");
+				outputText("  The mild pain of abrasion couples with the pleasure of his forceful fucking and you feel your climax approaching.\n\n");
+
+				outputText("With a moan, you cum, hugging the tree with all your might, thrusting back with your hindquarters.  With gentlemanly demeanor, the Erlking continues pumping his thick cock in and out of you until your orgasm recedes.  He then cums himself, filling your insides with his hot spunk. \n\n");
+
+				outputText("He allows you a moment to catch your breath, the pulls out.  You hear his cock slap wetly against his thigh.  A strong hand takes yours, guiding you across the clearing to a fallen log. Dazed, you follow him, and he sits, guiding you to do the same next to him.  \n\n");
+
+				outputText("Reaching into his belt pouch, he pulls out a small bottle of salve.  One hand strokes your hair as the other begins to work the cream into your scratched [chest].  The cream is cool and soothing, and the Erlking is attentive.  You soon fall asleep, your head leaning against his chest.\n\n");
+
+				outputText("You wake up an hour later in the clearing, the Erlking gone and your chest unmarred.  You blink, sleepily, still feeling the Erlking’s arms around you and shakily climb to your feet, making your way back to camp.\n\n");
+				player.sexReward("cum", "Vaginal");
+				sharedEnd();
+			}
+			function taurDickF():void {
+				outputText("With your [chest] against the rough bark, he crouches at your side, taking your already stiffening [oneCock] in his gloved hand.  From this angle, you feel, rather than see the cream he lathers on your [cock], working you to full hardness. One hand strokes your flank soothingly as the other wraps around your [cock], stroking you in his strong grip.\n\n");
+
+				outputText("You pant, fingertips gripping the bark of the tree as he jacks you off.  Your tongue lolls out as his gloved hand grips you firmly, moving faster and faster as he works his way up and down your length.  Whatever lube he used is incredible, and you feel a tingle on every down and up stroke.\n\n");
+
+				outputText("You can’t get enough of this feeling - being milked by the Erlking.  He even seems to be humming under his breath as he strokes your side and works you with deft fingers.  It’s like he’s calming some rutting stallion!  Your leg stamps reflexively, your [tail] swishing as your body announces your intent to cum.\n\n");
+
+				outputText("The Erlking responds by stroking you faster, his hand tightening, increasing the tingling pleasure from the cream.  You groan, gripping the tree trunk, rubbing your chest against it for extra stimulation, the rough bark scratching harshly against your [nipples].  \n\n");
+
+				outputText("The Erlking gives a final, tight squeeze, a fingertip pressed against the tip of your cock.  You moan, cumming in his hand, your cum jetting against his fingertips, spraying, hose-like, against the mossy forest floor.  \n\n");
+
+				outputText("You pant, exhausted, and you feel a damp cloth against your softening cock.  He wasn’t kidding about taking care of his mounts - the Erlking is cleaning you off.  He wipes your cock clean, even catching stray drops that spattered your underside.  The huntsman is thorough, and you yawn softly, dozing under his careful ministrations.  \n\n");
+
+				outputText("Sleepily, you’re only half aware as he guides you down to a grassy patch, where you quickly fall asleep.  You wake up an hour later in the clearing.  The Erlking is gone, but your cock gives a twitch as you remember his touch.  You shakily climb to your feet, making your way back to camp.\n\n");
+				player.sexReward("Default", "Default", true, false);
+				sharedEnd();
+			}
+			function sharedEnd():void {
+				//[+10 Fatigue, +1 Toughness / +1 Strength, 100 hp healed]
+				if (player.tou < player.str) dynStats("toughness+", 1, "fatigue+", 10, "health+", 100, "lust=", 0);
+				else (dynStats("strength+", 1, "fatigue+", 10, "health+", 100, "lust=", 0));
+				doNext(camp.returnToCampUseOneHour);
+			}
 		}
 
-		protected function howDareYou():void
+		public function howDareYou():void
 		{
 			clearOutput();
 			spriteSelect(SpriteDb.s_erlking_nude);
-
 			//[ends the Hunt permanently, Opens Princess Option]
 			outputText("You’ve had more than enough of the Erlking and his insane hunt.  You rise to your [feet], slapping away his outstretched hand.  He frowns, but before he can react, you’ve charged forward and knocked the black wood cane out of his hand.  It spins off into the undergrowth, out of sight.  The light in his eyes dims, as does the glow from his antlers.\n\n");
 
@@ -719,9 +706,10 @@ public class ErlKingScene extends BaseContent
 			outputText("\"<i>You taunt me, you hunt me, and now you ask for favors?</i>\"  you snort.  \"<i>No, no, you’re about to be taught a very lasting lesson,</i>\" you snarl.\n\n");
 
 			outputText("\"<i>What do yo-</i>\" begins the Erlking, looking up at you.  You slap his face, cutting off the end of the question.\n\n");
+			sceneHunter.selectGender(dickF, vagF);
 
-			if (player.hasVagina() && !player.hasCock())
-			{
+			//===============================================================================================
+			function vagF():void {
 				outputText("You grab his horns, shoving him over backwards.  He seems to be getting weaker by the moment.  He can barely pick himself up off the ground.  You look down at the prone huntsman with disdain, striding to his head, your [feet] on either side of his head.\n\n");
 
 				outputText("\"<i>What are yo-</i>\" he tries to ask, before you crouch down, burying his deer-muzzle in your muff.  You grab the forward prongs of his antlers, steering his mouth against your dripping vagina.\n\n");
@@ -739,9 +727,9 @@ public class ErlKingScene extends BaseContent
 				outputText("You stand, looking down at the disgraced forest lord.  He lies there, gasping, smeared with your pussy juices, dirt ground into his fur, his antlers broken.  From the wetness staining his leathers and hips, it looks like he came at some point, and it’s now slowly oozing out of his clothes, matting his fur.  Maybe it’s the spunk, but it looks as if his fur has an odd tint to it - slightly pink?  You shrug it off as some trick of the light as you gather yourself and prepare to leave.\n\n");
 
 				outputText("As you turn away, the fog rolls in low, engulfing the prone huntsman.  You know he definitely won’t be bothering you anymore.\n\n");
+				sharedEnd();
 			}
-			else if (player.hasCock())
-			{
+			function dickF():void {
 				outputText("You undo your [armor], releasing your [cock].  Narrowing your eyes at the fallen hunter, you grab him by the antlers, shoving your cock in his face.\n\n");
 
 				outputText("\"<i>Lick it, huntsman.  Make me good and wet,</i>\" you growl.  \n\n");
@@ -775,17 +763,21 @@ public class ErlKingScene extends BaseContent
 				outputText("\"<i>I don’t expect we’ll have any more problems, will we?</i>\" you ask, sliding out of him.  You rise, watching as his fur takes on a curiously pink hue.\n\n");
 
 				outputText("\"<i>No, my Lord,</i>\" She croons, rising up to her knees, lapping at your dick.  Once she’s finished cleaning, she helps you with your [armor].  You nod a goodbye to her and begin walking, smirking in amusement at the trickle of cum running down her taut cheeks and down her legs as she waves farewell.\n\n");
+				sharedEnd();
 			}
-
-			player.createKeyItem("Golden Antlers", 0, 0, 0, 0);
-			player.sexReward("Default","Default",true,false);
-			dynStats("lust=", 0);
-			if (flags[kFLAGS.ERLKING_CANE_OBTAINED] == 0) {
-				inventory.takeItem(weapons.HNTCANE, camp.returnToCampUseOneHour);
-				flags[kFLAGS.ERLKING_CANE_OBTAINED] = 1;
-				return;
+			function sharedEnd():void {
+				if (!recalling) {
+					player.createKeyItem("Golden Antlers", 0, 0, 0, 0);
+					player.sexReward("Default", "Default", true, false);
+					dynStats("lust=", 0);
+					if (flags[kFLAGS.ERLKING_CANE_OBTAINED] == 0) {
+						inventory.takeItem(weapons.HNTCANE, camp.returnToCampUseOneHour);
+						flags[kFLAGS.ERLKING_CANE_OBTAINED] = 1;
+					}
+					else doNext(camp.returnToCampUseOneHour);
+				}
+				else doNext(camp.recallWakeUp);
 			}
-			doNext(camp.returnToCampUseOneHour);
 		}
 
 		protected function encounterPrincessGwynn():void
@@ -862,8 +854,6 @@ public class ErlKingScene extends BaseContent
 			//[Libido + 2]
 			dynStats("lib+", 2, "lus=", 0);
 			player.sexReward("Default","Default",true,false);
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -889,8 +879,6 @@ public class ErlKingScene extends BaseContent
 			//[Sensitivity -2]
 			dynStats("sen-", 2, "lus=", 0);
 			player.sexReward("Default","Default",true,false);
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -916,8 +904,6 @@ public class ErlKingScene extends BaseContent
 			//[Sensitivity -2, Libido +2]
 			dynStats("sen-", 2, "lib+", 2, "lus=", 0);
 			player.sexReward("Default","Default",true,false);
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -950,7 +936,6 @@ public class ErlKingScene extends BaseContent
 
 			//[Lust +20, Libido +2]
 			dynStats("lus+", 20, "lib+", 2);
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -983,8 +968,6 @@ public class ErlKingScene extends BaseContent
 		public function deerTFs():void {
 			var changes:int = 0;
 			var changeLimit:int = 2;
-			var temp:int = 0;
-			var x:int = 0;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			changeLimit += player.additionalTransformationChances;
@@ -994,8 +977,8 @@ public class ErlKingScene extends BaseContent
 			//------------
 			//Gain deer ears
 			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.ears.type != Ears.DEER) {
-				if (player.ears.type == -1) outputText("\n\nTwo painful lumps sprout on the top of your head, forming into tear-drop shaped ears, covered with short fur.  ");
-				if (player.ears.type == Ears.HUMAN) outputText("\n\nYour ears tug painfully on your face as they begin shifting, moving upwards to the top of your head and transforming into a upright animalistic ears.  ");
+				if (player.ears.type == -1) outputText("\n\nTwo painful lumps sprout on the top of your head, forming into teardrop shaped ears, covered with short fur.  ");
+				if (player.ears.type == Ears.HUMAN) outputText("\n\nYour ears tug painfully on your face as they begin shifting, moving upwards to the top of your head and transforming into upright animalistic ears.  ");
 				if (player.ears.type == Ears.DOG) outputText("\n\nYour ears change shape, morphing into from their doglike shape into deer-like ears!  ");
 				if (player.ears.type > Ears.DOG) outputText("\n\nYour ears change shape, morphing into teardrop-shaped deer ears!  ");
 				outputText("<b>You now have deer ears.</b>");
@@ -1063,30 +1046,8 @@ public class ErlKingScene extends BaseContent
 			// Genital Changes
 			//------------
 			//Morph dick to horsediiiiick
-			if (rand(3) == 0 && changes < changeLimit && player.cocks.length > 0) {
-				var selectedCockValue:int = -1; //Changed as selectedCock and i caused duplicate var warnings
-				for (var indexI:int = 0; indexI < player.cocks.length; indexI++)
-				{
-					if (player.cocks[indexI].cockType != CockTypesEnum.HORSE)
-					{
-						selectedCockValue = indexI;
-						break;
-					}
-				}
-				if (selectedCockValue != -1) {
-					//Text for humandicks or others
-					if (player.cocks[selectedCockValue].cockType == CockTypesEnum.HUMAN || player.cocks[selectedCockValue].cockType.Index > 2) outputText("\n\nYour " + player.cockDescript(selectedCockValue) + " begins to feel strange... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.");
-					//Text for dogdicks
-					if (player.cocks[selectedCockValue].cockType == CockTypesEnum.DOG) outputText("\n\nYour " + Appearance.cockNoun(CockTypesEnum.DOG) + " begins to feel odd...  You pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond its traditional size.  You notice your knot vanishing, the extra flesh pushing more fresh horsecock out from your sheath.  <b>Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + "</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.");
-					player.cocks[selectedCockValue].cockType = CockTypesEnum.HORSE;
-					player.increaseCock(selectedCockValue, 4);
-					dynStats("lib", 5, "sen", 4, "lus", 35);
-					outputText("<b>  You now have a");
-					if (player.horseCocks() > 1) outputText("nother");
-					outputText(" horse-penis.</b>");
-					changes++;
-				}
-			}
+			if (rand(3) == 0 && changes < changeLimit && player.cocks.length > 0)
+				if (consumables.MINOBLO.horseDickTF()) changes++;
 			// Body thickness/tone changes
 			//------------
 			if (rand(3) == 0 && player.tone > 20) {

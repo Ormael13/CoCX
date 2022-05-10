@@ -1,4 +1,6 @@
 package classes.Transformations {
+import classes.CoC_Settings;
+
 /**
  * Wrapper for several TFs organized into queue.
  * Every TF in queue requires previous step to be completed.
@@ -60,7 +62,7 @@ public class GradualTransformation extends Transformation {
 	override public function applyEffect(doOutput:Boolean = true):void {
 		var tf:Transformation = nextTierTf();
 		if (!tf) {
-			trace("ERROR: Multi-tier TF "+name+" apply called at max tier");
+			CoC_Settings.error("Multi-tier TF "+name+" apply called at max tier");
 			return;
 		}
 		tf.applyEffect(doOutput);

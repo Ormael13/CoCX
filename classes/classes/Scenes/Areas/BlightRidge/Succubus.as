@@ -44,8 +44,9 @@ use namespace CoC;
                 this.bonusHP = 960 + 960*mod;
                 this.bonusLust = 332 + 22*mod;
                 this.level = 62 + 5*mod;
-                this.additionalXP = int(500 * Math.exp(0.2*mod));
-                this.gems = int((60 + rand(30)) * Math.exp(0.2*mod));
+                this.additionalXP = int(500 * Math.exp(0.3*mod));
+                this.gems = int((60 + rand(30)) * Math.exp(0.3 * mod));
+				this.createPerk(PerkLib.OverMaxHP, (62 + 5*mod), 0, 0, 0);
             }
 			else {
 				this.short = "succubus";
@@ -58,7 +59,8 @@ use namespace CoC;
 				this.bonusLust = 206;
 				this.level = 26;
 				this.additionalXP = 50;
-			    this.gems = rand(30)+15;
+			    this.gems = rand(30) + 15;
+				this.createPerk(PerkLib.OverMaxHP, 26, 0, 0, 0);
 			}
 			this.a = "the ";
 			this.imageName = "succubus";

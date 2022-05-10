@@ -498,6 +498,8 @@ public class DebugMenu extends BaseContent
 			weaponArray.push(weaponsrange.LCROSBW);
 			weaponArray.push(weaponsrange.FLINTLK);
 			weaponArray.push(weapons.UGATANA);
+			weaponArray.push(weapons.DDAGGER);
+			weaponArray.push(weapons.D_LANCE);
 
 			//------------
 			// Shields
@@ -508,6 +510,8 @@ public class DebugMenu extends BaseContent
 			shieldArray.push(shields.GREATSH);
 			shieldArray.push(shields.KITE_SH);
 			shieldArray.push(shields.TOWERSH);
+			shieldArray.push(shields.SPI_FOC);
+			shieldArray.push(shields.BSHIELD);
 
 			//------------
 			// Armours
@@ -576,6 +580,8 @@ public class DebugMenu extends BaseContent
 			undergarmentArray.push(undergarments.SSPANTY);
 			undergarmentArray.push(undergarments.COW_BRA);
 			undergarmentArray.push(undergarments.COW_PANTY);
+			undergarmentArray.push(undergarments.DRI_BRA);
+			undergarmentArray.push(undergarments.DRI_PANTY);
 
 			//------------
 			// Accessories

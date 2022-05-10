@@ -2,7 +2,6 @@
 package classes.Scenes.Areas.Tundra 
 {
 	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.SceneLib;
 	
 	public class ValkyrieScene extends BaseContent
@@ -18,7 +17,7 @@ package classes.Scenes.Areas.Tundra
 			if (player.HP <= 0) outputText("her onslaught");
 			else outputText("your rising lust");
 			outputText(", you collapse to your knees, utterly at the valkyrie’s mercy.  She plants her spear in the ground, just inches from your head, and rolls you onto your back with her foot. \n\n");
-			if (monster.lust >= 70 && flags[kFLAGS.SFW_MODE] <= 0) loseToValkyrieForcedOral();
+			if (monster.lust >= 70) loseToValkyrieForcedOral();
 			else {
 				outputText("With one swift, contemptuous kick to the head, she knocks you right out.");
 				outputText("  You are utterly freezing after such long exposure to the cold.");
@@ -56,24 +55,17 @@ package classes.Scenes.Areas.Tundra
 			if (monster.HP <= 0) outputText("Beaten and bloodied, the valkyrie stumbles for a moment before dropping her spear and shield.  She kneels before you, head bowed low enough that her long hair brushes the icy ground. ");
 			else outputText("Unable to contain her arousal, the valkyrie drops her weapons and collapses onto her knees, slipping a hand into her short skirt. ");
 			outputText("\"<i>I submit,</i>\" she concedes weakly, avoiding eye contact with you.  \"<i>I was too weak to defeat you, it seems.  Do with me what you will. </i>\"");
-			//(Display Options:
-			//-If Male: [Aerial Fuck] [Fuck Anal] [Leave]
-			//-If Female: [Get Licked] [Scissor]
-			//-If Herm: All Options)
 			menu();
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
-				if (player.hasCock()) {
-					addButton(0, "Aerial Fuck", valkyrieAerialFuck);
-					addButton(1, "Anal Fuck", valkyrieAnalFuck);
-				}
-				if (player.hasVagina()) {
-					addButton(2, "Get Licked", valkyrieLicksYou);
-					addButton(3, "Scissor", valkyrieScissor);
-				}
-				addButton(14, "Leave", cleanupAfterCombat);
+			if (player.lust >= 33) {
+				addButtonIfTrue(0, "Aerial Fuck", valkyrieAerialFuck, "Req. a cock.", player.hasCock());
+				addButtonIfTrue(1, "Anal Fuck", valkyrieAnalFuck, "Req. a cock.", player.hasCock());
+				addButtonIfTrue(2, "Get Licked", valkyrieLicksYou, "Req. a vagina.", player.hasVagina());
+				addButtonIfTrue(3, "Scissor", valkyrieScissor, "Req. a vagina.", player.hasVagina());
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstValkyrie);
-							}
+				addButton(14, "Leave", cleanupAfterCombat);
+			}
 			else {
+				outputText("You're not aroused enough to rape her.")
 				cleanupAfterCombat();
 			}
 		}
@@ -93,7 +85,7 @@ package classes.Scenes.Areas.Tundra
 			outputText("You scream, half in pleasure and half in terror as your cock unloads inside her, pumping your hot load into her sodden box as the icy ground rises up to meet you. \n\n");
 			player.sexReward("vaginalFluids","Dick");
 			if (player.canFly())
-				outputText("You try to beat your own wings to save yourself, but you have too much momentum and the valkyrie in all her heavy armor is completely entwined around you, refusing to let go as you both cum.\n\n");
+				outputText("You try to beat your own wings to save yourself, but you have too much momentum, and the valkyrie in all her heavy armor is completely entwined around you, refusing to let go as you both cum.\n\n");
 			else outputText("You clutch at the valkyrie and brace for the inevitable, cumming more and more inside her despite your impending doom.\n\n");
 			outputText("Then suddenly, the valkyrie spreads her wings and flies, pulling up with so little room to spare that you can feel your cheek brush the snow. Panting, she flaps her wings one last time before setting the two of you down on the coast, overlooking the glacial drop into the frigid water.\n\n");
 			outputText("You shudder, reeling from the orgasm and near - death experience at the same time. No less exhausted, the valkyrie collapses onto you, her head coming to rest on your lap. It seems you made a good impression on the valkyrie as she drifts off to sleep, your cum and hers pooling between her legs. You fish a blanket (and a few gems) out of her pack, cover her up as best you can, and stumble on back to camp.");
@@ -137,7 +129,7 @@ package classes.Scenes.Areas.Tundra
 			outputText("You give her a little grin and begin to grind against her leg, rubbing your [vagina] along her thighs, feeling her smooth skin part your pussylips ever so slightly. Unwilling to just sit there, you’re gratified to see your partner begin to rub her own cunt against yours, returning your affections. Now that it’s a real two-way, you pick up the pace a little, settling into a good rhythm with the valkyrie.");
 			outputText("You reach over and, with a little help from your lover, unclasp her breastplate. Now guarded by only a thin shift, you grasp her perky breasts and begin to squeeze and fondle them, working in a few pinches to her tiny nipples and rough gropes as you play with her soft chest. She lets out a little gasp at each grope or tease, eventually returning the favor, sliding her hands into your [armor] and grabbing your [breasts]. She gives your nipples a hard tweak, eliciting a sharp hiss from your lips.");
 			outputText("You spend the next few minutes happily grinding and groping each other, but that doesn’t seem to quite do it for the valkyrie girl. She reaches up and, to your surprise, wraps you in a tight embrace. \"<i>Please... Faster. I need this so badly...</i>\" she admits, kissing your neck as she bucks her hips against you. Well, well. You happily agree to her request, picking up your pace until you’re well and truly fucking her, grinding your hips into each other as the valkyrie kisses and caresses you, surprisingly tender for someone who seemed so stoic and prideful a few minutes ago.");
-			outputText("You cup her cheeks and give her a kiss full on the lips. When you break it, she’s smiling beautifully. That smile, and her pussy stroking yours, sends you over the edge. You hold your winged lover tight and cum, moaning into her shoulder as you ride out a powerful orgasm. Still smiling, the valkyrie wraps her wings around you and lets out a little moan, and you feel her squirting onto you, soaking your already sodden crotch with her femspunk.");
+			outputText("You cup her cheeks and give her a kiss full on the lips. When you break it, she’s smiling beautifully. That smile and her pussy, stroking yours, sends you over the edge. You hold your winged lover tight and cum, moaning into her shoulder as you ride out a powerful orgasm. Still smiling, the valkyrie wraps her wings around you and lets out a little moan, and you feel her squirting onto you, soaking your already sodden crotch with her femspunk.");
 			outputText("Exhausted from the playful sex, the valkyrie collapses on her back, utterly spent. You give her a pat on the cheek and a quick kiss before grabbing a few gems and heading on back to camp. ");
 			player.sexReward("vaginalFluids","Vaginal");
 			cleanupAfterCombat();

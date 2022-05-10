@@ -152,8 +152,8 @@ use namespace CoC;
                 this.bonusMana = 100 + 50*mod;
                 this.bonusLust = 510 + 48*mod;
                 this.level = 60 + 5*mod;
-                this.gems = int((90 + rand(45)) * Math.exp(0.2*mod));
-                this.additionalXP = int(750 * Math.exp(0.2*mod));
+                this.gems = int((90 + rand(45)) * Math.exp(0.3*mod));
+                this.additionalXP = int(750 * Math.exp(0.3*mod));
 			}
 			else {
 				initStrTouSpeInte(154, 187, 92, 145);

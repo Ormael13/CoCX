@@ -1,6 +1,5 @@
-//Side Dungeon: Bee Hive
 /**
- * ...
+ * Side Dungeon: Bee Hive
  * @author Liadri and others
  */
 package classes.Scenes.Dungeons 

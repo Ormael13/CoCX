@@ -42,9 +42,9 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.KnowsIceFist)) {
 			bd = buttons.add("Ice Fist", IceFist).hint("A chilling strike that can freeze an opponent solid, leaving it vulnerable to shattering soul art and hindering its movement.  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(30 * soulskillCost() * soulskillcostmulti()));
 			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) {
-				bd.disable("Try as you want, you can’t call on the power of this technique due to your close affinity to fire.");
+				bd.disable("When you try to use this technique, you shudder in revulsion. Ice, that close to your body? You're a creature of fire!");
 			} else if (!player.isFistOrFistWeapon()) {
-				bd.disable("<b>Your current used weapon not allow to use this technique.</b>");
+				bd.disable("<b>Your [weapon] can't be used with this soulskill.</b>");
 			} else if ((player.soulforce < 30 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
 				bd.disable("<b>Your current soulforce is too low.</b>");
 			} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (30 * soulskillCost() * soulskillcostmulti())) {
@@ -54,9 +54,9 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.KnowsFirePunch)) {
 			bd = buttons.add("Fire Punch", FirePunch).hint("Ignite your opponents dealing fire damage and setting them ablaze.  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(30 * soulskillCost() * soulskillcostmulti()));
 			if (player.hasPerk(PerkLib.ColdAffinity)) {
-				bd.disable("Try as you want, you can’t call on the power of this technique due to your close affinity to cold.");
+				bd.disable("You call upon the power of flame...and you begin to sweat. You aren't built for the heat, and your body knows it. ");
 			} else if (!player.isFistOrFistWeapon()) {
-				bd.disable("<b>Your current used weapon not allow to use this technique.</b>");
+				bd.disable("<b>Your [weapon] can't be used with this soulskill.</b>");
 			} else if ((player.soulforce < 30 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
 				bd.disable("Your current soulforce is too low.");
 			} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (30 * soulskillCost() * soulskillcostmulti())) {
@@ -64,7 +64,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsHurricaneDance)) {
-			bd = buttons.add("Hurricane Dance", HurricaneDance).hint("Take on the aspect of the wind dodging attacks with aerial graces for a time.  \n\nWould go into cooldown after use for: 10 rounds  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(30 * soulskillCost() * soulskillcostmulti()));
+			bd = buttons.add("Hurricane Dance", HurricaneDance).hint("Take on the aspect of the wind, dodging attacks like a leaf in the wind.  \n\nWould go into cooldown after use for: 10 rounds  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(30 * soulskillCost() * soulskillcostmulti()));
 			if (player.hasStatusEffect(StatusEffects.CooldownHurricaneDance)) {
 				bd.disable("You need more time before you can use Hurricane Dance again.");
 			} else if ((player.soulforce < 30 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
@@ -74,7 +74,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsEarthStance)) {
-			bd = buttons.add("Earth Stance", EarthStance).hint("Take on the stability and strength of the earth gaining 30% damage reduction for the next 3 rounds.  \n\nWould go into cooldown after use for: 10 rounds  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(30 * soulskillCost() * soulskillcostmulti()));
+			bd = buttons.add("Earth Stance", EarthStance).hint("Take on the stability and strength of the earth, gaining 30% damage reduction for the next 3 rounds.  \n\nWould go into cooldown after use for: 10 rounds  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(30 * soulskillCost() * soulskillcostmulti()));
 			if (player.hasStatusEffect(StatusEffects.CooldownEarthStance)) {
 				bd.disable("You need more time before you can use Earth Stance again.");
 			} else if ((player.soulforce < 30 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
@@ -96,7 +96,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsSoulBlast)) {
-			bd = buttons.add("Soul Blast", SoulBlast).hint("Take in your reserve of soul force to unleash a torrent of devastating energy and obliterate your opponent.  \n\nWould go into cooldown after use for: 15 rounds  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(100 * soulskillCost() * soulskillcostmulti()));
+			bd = buttons.add("Soul Blast", SoulBlast).hint("Focus your reserves of soul force to unleash a torrent of devastating energy and obliterate your opponent.  \n\nWould go into cooldown after use for: 15 rounds  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(100 * soulskillCost() * soulskillcostmulti()));
 			if (player.hasStatusEffect(StatusEffects.CooldownSoulBlast)) {
 				bd.disable("You need more time before you can use Soul Blast again.");
 			} else if ((player.soulforce < 100 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
@@ -109,11 +109,11 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.Overlimit)) {
 				bd = buttons.add("Overlimit(Off)", deactivaterOverlimit).hint("Deactivate Overlimit.");
 			} else {
-				bd = buttons.add("Overlimit(On)", activaterOverlimit).hint("Strain your body to its limit to increase melee damage dealt by 100% at the cost of hurting yourself. This also increases lust resistance.");
+				bd = buttons.add("Overlimit(On)", activaterOverlimit).hint("Double your melee damage for a time, by ignoring your body's limits, pushing past them. This technique inflicts damage to you, but also increases lust resistance.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) {
-			bd = buttons.add("Triple Thrust", TripleThrust).hint("Use a little bit of soulforce to infuse your weapon and thrust three times toward your enemy.  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(30 * soulskillCost() * soulskillcostmulti()));
+			bd = buttons.add("Triple Thrust", TripleThrust).hint("Use a little bit of soulforce to infuse your weapon with power, striking your foe three times.  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(30 * soulskillCost() * soulskillcostmulti()));
 			if ((player.soulforce < 30 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
 				bd.disable("Your current soulforce is too low.");
 			} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (30 * soulskillCost() * soulskillcostmulti())) {
@@ -121,7 +121,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) {
-			bd = buttons.add("Sextuple Thrust", SextupleThrust).hint("Use a little bit of soulforce to infuse your weapon and thrust six times toward your enemy.  \n\nWould go into cooldown after use for: 1 round  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(70 * soulskillCost() * soulskillcostmulti()));
+			bd = buttons.add("Sextuple Thrust", SextupleThrust).hint("Use a little bit of soulforce to infuse your weapon with power, thrusting six times into your foe.  \n\nWould go into cooldown after use for: 1 round  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(70 * soulskillCost() * soulskillcostmulti()));
 			if (player.hasStatusEffect(StatusEffects.CooldownSextupleThrust)) {
 				bd.disable("You need more time before you can use Sextuple Thrust again.");
 			} else if ((player.soulforce < 70 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
@@ -131,7 +131,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsNonupleThrust)) {
-			bd = buttons.add("Nonuple Thrust", NonupleThrust).hint("Use a little bit of soulforce to infuse your weapon and thrust nine times toward your enemy.  \n\nWould go into cooldown after use for: 2 rounds  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(150 * soulskillCost() * soulskillcostmulti()));
+			bd = buttons.add("Nonuple Thrust", NonupleThrust).hint("Use a little bit of soulforce to infuse your weapon with power and thrust nine times toward your enemy.  \n\nWould go into cooldown after use for: 2 rounds  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(150 * soulskillCost() * soulskillcostmulti()));
 			if (player.hasStatusEffect(StatusEffects.CooldownNonupleThrust)) {
 				bd.disable("You need more time before you can use Nonuple Thrust again.");
 			} else if ((player.soulforce < 150 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
@@ -141,7 +141,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsDracoSweep)) {
-			bd = buttons.add("Draco Sweep", DracoSweep).hint("Use a little bit of soulforce to infuse your weapon and then sweep ahead hitting as many enemies as possible.  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(50 * soulskillCost() * soulskillcostmulti()));
+			bd = buttons.add("Draco Sweep", DracoSweep).hint("Use a little bit of soulforce to empower your weapon, then sweep ahead hitting as many enemies as possible.  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(50 * soulskillCost() * soulskillcostmulti()));
 			if ((player.soulforce < 50 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
 				bd.disable("Your current soulforce is too low.");
 			} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (50 * soulskillCost() * soulskillcostmulti())) {
@@ -149,7 +149,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
-			bd = buttons.add("Flames of Love", combat.flamesOfLove).hint("Use a little bit of lust to transform it into flames of love that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nLust cost: 30% of current lust");
+			bd = buttons.add("Flames of Love", combat.flamesOfLove).hint("Enfuse your magic with your burning lust, transfering it to your enemy as a barrage of flames.  \n\nWould go into cooldown after use for: 1 round  \n\nLust cost: 30% of current lust");
 			if (player.hasStatusEffect(StatusEffects.CooldownFlamesOfLove)) {
 				bd.disable("You need more time before you can use Flames of Love again.");
 			} else if (player.lust < 50) {
@@ -157,7 +157,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}/*
 		if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
-			bd = buttons.add("Flames of Love", combat.flamesOfLove).hint("Use a little bit of lust to transform it into flames of love that you throw at enemy.  \n\nWould go into cooldown after use for: 3 rounds  \n\nLust cost: 90% of current lust");
+			bd = buttons.add("Flames of Love", combat.flamesOfLove).hint("Enfuse your magic with your burning lust, transfering it to your enemy as a barrage of flames.  \n\nWould go into cooldown after use for: 3 rounds  \n\nLust cost: 90% of current lust");
 			if (player.hasStatusEffect(StatusEffects.CooldownFlamesOfLove)) {
 				bd.disable("You need more time before you can use Flames of Love again.");
 			} else if (player.lust < 50) {
@@ -165,7 +165,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}*/
 		if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
-			bd = buttons.add("Icicles of Love", combat.iciclesOfLove).hint("Use a little bit of lust to transform it into icicles of love that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nLust cost: 30% of current lust");
+			bd = buttons.add("Icicles of Love", combat.iciclesOfLove).hint("Weaponize your lust, crystalizing it into cold, sharp icicles.  \n\nWould go into cooldown after use for: 1 round  \n\nLust cost: 30% of current lust");
 			if (player.hasStatusEffect(StatusEffects.CooldownIciclesOfLove)) {
 				bd.disable("You need more time before you can use Icicles of Love again.");
 			} else if (player.lust < 50) {
@@ -173,7 +173,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}/*
 		if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
-			bd = buttons.add("Icicles of Love", combat.iciclesOfLove).hint("Use a little bit of lust to transform it into icicles of love that you throw at enemy.  \n\nWould go into cooldown after use for: 3 rounds  \n\nLust cost: 90% of current lust");
+			bd = buttons.add("Icicles of Love", combat.iciclesOfLove).hint("Weaponize your lust, crystalizing it into cold, sharp icicles.  \n\nWould go into cooldown after use for: 3 rounds  \n\nLust cost: 90% of current lust");
 			if (player.hasStatusEffect(StatusEffects.CooldownIciclesOfLove)) {
 				bd.disable("You need more time before you can use Icicles of Love again.");
 			} else if (player.lust < 50) {
@@ -181,7 +181,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}*/
 		if (player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
-			bd = buttons.add("Storm of Sisterhood", combat.stormOfSisterhood).hint("Use a little bit of wrath to transform it into storm of sisterhood that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nWrath cost: 30% of current wrath");
+			bd = buttons.add("Storm of Sisterhood", combat.stormOfSisterhood).hint("Transform your wrath into an electric storm, empowered by sisterhood.  \n\nWould go into cooldown after use for: 1 round  \n\nWrath cost: 30% of current wrath");
 			if (player.hasStatusEffect(StatusEffects.CooldownStormOfSisterhood)) {
 				bd.disable("You need more time before you can use Storm of Sisterhood again.");
 			} else if (player.wrath < 50) {
@@ -189,7 +189,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
-			bd = buttons.add("Night of Brotherhood", combat.nightOfBrotherhood).hint("Use a little bit of wrath to transform it into night of brotherhood that you throw at enemy.  \n\nWould go into cooldown after use for: 1 round  \n\nWrath cost: 30% of current wrath");
+			bd = buttons.add("Night of Brotherhood", combat.nightOfBrotherhood).hint("Let your wrath darken into a burst of darkness, fuelled by your brotherhood.  \n\nWould go into cooldown after use for: 1 round  \n\nWrath cost: 30% of current wrath");
 			if (player.hasStatusEffect(StatusEffects.CooldownNightOfBrotherhood)) {
 				bd.disable("You need more time before you can use Night of Brotherhood again.");
 			} else if (player.wrath < 50) {
@@ -295,7 +295,7 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd = buttons.add("Deactiv VPT", DeactivateVioletPupilTransformation)
 					   .hint("Deactivate Violet Pupil Transformation.");
 			} else {
-				bd = buttons.add("V P Trans", VioletPupilTransformation).hint("Violet Pupil Transformation is a regenerating oriented soul art that at the cost of constant using fixed amount of soulforce would be healing user.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>200 HP</b> per turn. (with some perks or races it could be more than 200)");
+				bd = buttons.add("V P Trans", VioletPupilTransformation).hint("Violet Pupil Transformation is a regenerating oriented soul art. While it drains your SoulForce constantly, it allows one to rapidly heal their injuries.  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>200 HP</b> per turn. (with some perks or races it could be more than 200)");
 				if (player.soulforce < 100) {
 					bd.disable("<b>Your current soulforce is too low.</b>");
 				}
@@ -303,7 +303,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.Trance)) {
 			if (!player.statStore.hasBuff("TranceTransformation")) {
-				bd = buttons.add("Trance", TranceTransformation).hint("Activate Trance state, which enhancing physical and mental abilities at constant cost of soulforce.  \n\n(MAGICAL SOULSKILL)  \n\nCost: 100 soulforce on activation and 50 soulforce per turn)");
+				bd = buttons.add("Trance", TranceTransformation).hint("Activate Trance state, which enhances your physical and mental abilities.  \n\n(MAGICAL SOULSKILL)  \n\nCost: 100 soulforce on activation and 50 soulforce per turn)");
 				if (player.soulforce < 100) {
 					bd.disable("Your current soulforce is too low.");
 				} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
@@ -331,7 +331,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodSwipeSF)) {
 			bd = buttons.add("Blood Swipe (SF)", bloodSwipeSF)
-					.hint("(Soulforce infused) Blood Swipe, which was infused by small amount of soulforce to enhance it power, will fire three red lines of blood energy from your hand.  " +
+					.hint("(Soulforce infused) Blood Swipe, infused by a small amount of soulforce. This skill will fire three red lines of blood energy from your hand.  " +
 							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(60) + "\n\nSoulforce cost: " + Math.round(60 * soulskillCost() * soulskillcostmulti()));
 			if ((bloodForBloodGod - 1) < spellCostBlood(60)) {
 				bd.disable("Your hp is too low to cast this soulskill.");
@@ -349,7 +349,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsHeartSeeker)) {
 			bd = buttons.add("Heart Seeker", heartSeeker)
-					.hint("Heart Seeker would hit vital point of enemy body dealing true damage.  " +
+					.hint("Heart Seeker will strike the vital points of your enemy, dealing true damage.  " +
 							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(120) + "");
 			if ((bloodForBloodGod - 1) < spellCostBlood(120)) {
 				bd.disable("Your hp is too low to cast this soulskill.");
@@ -365,7 +365,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsHeartSeekerSF)) {
 			bd = buttons.add("Heart Seeker (SF)", heartSeekerSF)
-					.hint("(Soulforce infused) Heart Seeker, which was infused by small amount of soulforce to enhance it power, would hit vital point of enemy body dealing true damage.  " +
+					.hint("(Soulforce infused) Heart Seeker, infused by a small amount of soulforce. This skill will hit the vital points of your foe.  " +
 							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(120) + "\n\nSoulforce cost: " + Math.round(120 * soulskillCost() * soulskillcostmulti()));
 			if ((bloodForBloodGod - 1) < spellCostBlood(120)) {
 				bd.disable("Your hp is too low to cast this soulskill.");
@@ -383,7 +383,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodDewdrops)) {
 			bd = buttons.add("Blood Dewdrops", bloodDewdrops)
-					.hint("Blood Dewdrops will fire many blood droplets from your hand.  " +
+					.hint("Blood Dewdrops will fire many bloody droplets from your hand.  " +
 							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(240) + "");
 			if ((bloodForBloodGod - 1) < spellCostBlood(240)) {
 				bd.disable("Your hp is too low to cast this soulskill.");
@@ -399,7 +399,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodDewdropsSF)) {
 			bd = buttons.add("Blood Dewdrops (SF)", bloodDewdropsSF)
-					.hint("(Soulforce infused) Blood Dewdrops, which was infused by small amount of soulforce to enhance it power, will fire many blood droplets from your hand.  " +
+					.hint("(Soulforce infused) Blood Dewdrops, infused by a small amount of soulforce. Blood Dewdrops will fire many blood droplets from your hand.  " +
 							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(240) + "\n\nSoulforce cost: " + Math.round(240 * soulskillCost() * soulskillcostmulti()));
 			if ((bloodForBloodGod - 1) < spellCostBlood(240)) {
 				bd.disable("Your hp is too low to cast this soulskill.");
@@ -417,7 +417,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodRequiem)) {
 			bd = buttons.add("Blood Requiem", bloodRequiem)
-					.hint("Blood Requiem will create pillars of blood that would deal damage and reduce recovery rate of enemies for a short time.  " +
+					.hint("Blood Requiem will create pillars of blood, dealing damage and reducing the recovery rate of enemies for a short time.  " +
 							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(150) + "");
 			if ((bloodForBloodGod - 1) < spellCostBlood(150)) {
 				bd.disable("Your hp is too low to cast this soulskill.");
@@ -433,7 +433,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodRequiemSF)) {
 			bd = buttons.add("Blood Requiem (SF)", bloodRequiemSF)
-					.hint("(Soulforce infused) Blood Requiem, which was infused by small amount of soulforce to enhance it power, will create pillars of blood that would deal damage and reduce recovery rate of enemies for a short time.  " +
+					.hint("(Soulforce infused) Blood Requiem, infused by a small amount of soulforce to enhance its power, will create pillars of blood that would deal damage and reduce the recovery rate of enemies for a short time.  " +
 							"\n\n(PHYSICAL/MAGICAL SOULSKILL)  \n\nBlood Cost: " + spellCostBlood(150) + "\n\nSoulforce cost: " + Math.round(150 * soulskillCost() * soulskillcostmulti()));
 			if ((bloodForBloodGod - 1) < spellCostBlood(150)) {
 				bd.disable("Your hp is too low to cast this soulskill.");
@@ -494,30 +494,18 @@ public class CombatSoulskills extends BaseCombatContent {
 		soulforcecost = Math.round(soulforcecost);
 		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
 		else player.soulforce -= soulforcecost;
+		var triTru:Number = 3;
+		if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) triTru += 3;
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) {
 			outputText("Your [weapon] hits the ice in three specific points, making it explode along with your frozen adversary!");
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) {
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-			}
+			while (triTru-->0) MultiThrustD();
 			monster.statStore.removeBuffs("FrozenSolid");
 			monster.removeStatusEffect(StatusEffects.FrozenSolid);
 			outputText(" damage!");
 		}
 		else {
 			outputText("Your [weapon] hits thrice against [themonster],");
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) {
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-			}
+			while (triTru-->0) MultiThrustD();
 			outputText(" damage!");
 		}
 		outputText("\n\n");
@@ -540,43 +528,19 @@ public class CombatSoulskills extends BaseCombatContent {
 		soulforcecost = Math.round(soulforcecost);
 		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
 		else player.soulforce -= soulforcecost;
+		var sexTru:Number = 6;
+		if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) sexTru += 6;
 		player.createStatusEffect(StatusEffects.CooldownSextupleThrust, 1, 0, 0, 0);
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) {
 			outputText("Your [weapon] hits the ice in three specific points, making it explode along with your frozen adversary!");
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) {
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-			}
+			while (sexTru-->0) MultiThrustD();
 			monster.statStore.removeBuffs("FrozenSolid");
 			monster.removeStatusEffect(StatusEffects.FrozenSolid);
 			outputText(" damage!");
 		}
 		else {
 			outputText("Your [weapon] hits sixfold against [themonster],");
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) {
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-			}
+			while (sexTru-->0) MultiThrustD();
 			outputText(" damage!");
 		}
 		outputText("\n\n");
@@ -599,55 +563,19 @@ public class CombatSoulskills extends BaseCombatContent {
 		soulforcecost = Math.round(soulforcecost);
 		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
 		else player.soulforce -= soulforcecost;
+		var nonTru:Number = 9;
+		if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) nonTru += 9;
 		player.createStatusEffect(StatusEffects.CooldownNonupleThrust, 2, 0, 0, 0);
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) {
 			outputText("Your [weapon] hits the ice in three specific points, making it explode along with your frozen adversary!");
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) {
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-			}
+			while (nonTru-->0) MultiThrustD();
 			monster.statStore.removeBuffs("FrozenSolid");
 			monster.removeStatusEffect(StatusEffects.FrozenSolid);
 			outputText(" damage!");
 		}
 		else {
 			outputText("Your [weapon] hits ninefold against [themonster],");
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) {
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-			}
+			while (nonTru-->0) MultiThrustD();
 			outputText(" damage!");
 		}
 		outputText("\n\n");
@@ -961,7 +889,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		damage *= (monster.damagePercent() / 100);
 		if (silly ()) {
 			outputText("You snap your fingers, and at once every bird lends their high pitched voice to a unified, glass shattering cry:");
-			outputText("\n\n\"<i>AAAAAAAAAAAAAAAAAAAAAAAAAAAAA</i>\" ([themonster] take ");
+			outputText("\n\n\"<i>AAAAAAAAAAAAAAAAAAAAAAAAAAAAA</i>\" ([themonster] takes ");
 			doMagicDamage(damage, true, true);
 			outputText(" damage) ");
 		}
@@ -1039,12 +967,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
 		else player.soulforce -= soulforcecost;
 		outputText("Weapons hits [themonster], dealing ");
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
+		var hob1:Number = 6;
+		while (hob1-->0) BladesD();
 		outputText(" damage!\n\n");
 		combat.heroBaneProc2();
 		combat.EruptingRiposte2();
@@ -1068,24 +992,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		else player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownGrandioseHailOfBlades, 3, 0, 0, 0);
 		outputText("Weapons hits [themonster], dealing ");
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
+		var hob2:Number = 18;
+		while (hob2-->0) BladesD();
 		outputText(" damage!\n\n");
 		combat.heroBaneProc2();
 		combat.EruptingRiposte2();
@@ -1095,7 +1003,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function HailOfBlades3():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		outputText("Letting soulforce leak out around you, you form fifty four ethereal two meter long weapons in four rows. You thrust your hand outwards and in the blink of an eye, weapons shoot forwards [themonster].  ");
+		outputText("Letting soulforce leak out around you, you form fifty-four ethereal two meter long weapons in four rows. You thrust your hand outwards and in the blink of an eye, weapons shoot forwards [themonster].  ");
 		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 20 && int(Math.random() * (((monster.spe - player.spe) / 6) + 60)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids weapons!");
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges weapons with superior quickness!");
@@ -1109,60 +1017,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		else player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownGrandioseHailOfMoonBlades, 9, 0, 0, 0);
 		outputText("Weapons hits [themonster], dealing ");
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
+		var hob3:Number = 54;
+		while (hob3-->0) BladesD();
 		outputText(" damage!\n\n");
 		combat.heroBaneProc2();
 		combat.EruptingRiposte2();
@@ -1252,7 +1108,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		damage *= corruptionMulti;
 		if (player.hasPerk(PerkLib.PerfectStrike) && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.FrozenSolid))) damage *= 1.5;
 		if (damage > 0) {
-			outputText("You thrust your palm forward, causing a blast of pure energy to slam against [themonster], tossing");
+			outputText("You thrust your palm forward, creating a blast of pure energy that erupts from your palm, slamming into [themonster], tossing");
 			if ((monster as Monster).plural) outputText(" them");
 			else outputText((monster as Monster).mfn(" him", " her", " it"));
 			outputText(" back a few feet.\n\n");
@@ -1316,7 +1172,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		//final touches
 		damage *= (monster.damagePercent() / 100);
 		monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
-		outputText("Air seems to lose all temperature around your fist as you dash at [themonster] and shove your palm on [monster him], [monster his] body suddenly is frozen solid, encased in a thick block of ice! ");
+		outputText("The air around your fist seems to lose all heat as you dash at [themonster]. You place your palm on [monster him], [monster his] body suddenly is frozen solid, encased in a thick block of ice! ");
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		doIceDamage(damage, true, true);
 		if (player.hasPerk(PerkLib.FlurryOfBlows)) {
@@ -1350,7 +1206,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			outputText("  <b>[Themonster] ");
 			if(!monster.plural) outputText("is ");
 			else outputText("are ");
-			outputText("too resolute to be frozen by your attack.</b>");
+			outputText("too sturdy to be frozen by your attack.</b>");
 		}
 		checkAchievementDamage(damage);
 		combat.WrathGenerationPerHit2(5);
@@ -1502,7 +1358,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		damage = Math.round(damage);
 		monster.createStatusEffect(StatusEffects.PunishingKick, 5, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.CooldownPunishingKick, 10, 0, 0, 0);
-		outputText("You lash out with a devastating kick, knocking your opponent back and disorienting it. [Themonster] will have a hard time recovering its balance for a while. ");
+		outputText("You lash out with a devastating kick, knocking your opponent back and disorienting it. [Themonster] is knocked off balance by the ferocious blow! ");
 		doDamage(damage, true, true);
 		if (player.hasPerk(PerkLib.FlurryOfBlows)) {
 			doDamage(damage, true, true);
@@ -1575,7 +1431,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	}
 	public function deactivaterOverlimit():void {
 		clearOutput();
-		outputText("You let your rage cool down, feeling relieved as the stress in your body diminish along with your power.\n\n");
+		outputText("You let your rage fade, your red aura and manic strength vanishing along with it. You wince, feeling the strain you put your body through. You \n\n");
 		player.removeStatusEffect(StatusEffects.Overlimit);
 		enemyAI();
 	}
@@ -1682,7 +1538,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		soulforcecost = Math.round(soulforcecost);
 		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
 		else player.soulforce -= soulforcecost;
-		outputText("You momentarily attune yourself to the song of the mother tree, and dance forward, darting your blade around your enemy.\n\n");
+		outputText("You momentarily attune yourself to the song of the mother tree, and dance forward, darting around your enemy, your blade slicing the air and foe alike.\n\n");
 		player.createStatusEffect(StatusEffects.BladeDance,0,0,0,0);
 		combat.basemeleeattacks();
 	}
@@ -1696,7 +1552,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function AvatarOfTheSong():void {
 		clearOutput();
 		player.soulforce -= 200;
-		outputText("You feel the song of the mother tree all around you, and using your staff as a beacon, you unify it with the flow of magic through your body,");
+		outputText("You feel the song of the mother tree all around you. Using your staff as a beacon, you unify it with the flow of magic through your body,");
 		if (!player.statStore.hasBuff("Might")) {
 			outputText("drawing strength from it");
 			CombatAbilities.Might.backfireEnabled = false;
@@ -1715,7 +1571,7 @@ public class CombatSoulskills extends BaseCombatContent {
 				CombatAbilities.ChargeWeapon.doEffect(false);
 			}
 			else {
-				outputText("makes your staff flare up, as the energy escapes as a radiant flash");
+				outputText("makes your staff flare up, as the energy escapes in a radiant flash");
 				CombatAbilities.Blind.doEffect(false);
 			}
 		}
@@ -1728,7 +1584,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		HPChange(-spellCostBlood(60), false);
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodSwipe,2,0,0,0);
-		outputText("You concentrate, focusing on the power of your blood before making somatic gestures with your hand. Within an instant, three red claw-like lines coalesce briefly before being shot from your hands, flying toward [themonster].\n\n");
+		outputText("You concentrate, focusing on the power of your blood. You swipe your hand across your chest. Three trails of blood pour from your fingertips, condensing into thin crimson blades. You point your clawlike blades at your foe, and they detach with a small crunch, flying toward [themonster].\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood();
 		if (damage < 10) damage = 10;
 		//Determine if critical hit!
@@ -1770,7 +1626,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		soulforcecost = Math.round(soulforcecost);
 		player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodSwipeSF,3,0,0,0);
-		outputText("You concentrate, focusing on the power of your blood. While maintaining concentration you infuse a bit of soulforce into the blood, before making swipe gesture with your hand. In instant three red claw-like lines, with soulfroce infused blood, leaves your hands flying toward [themonster].\n\n");
+		outputText("You concentrate, focusing on the power of your blood. You infuse a bit of soulforce into the blood, before swiping your hand across your chest. Three trails of blood pour from your fingertips, condensing into thin crimson blades. You point your clawlike blades at your foe, and they detach with a small crunch, flying toward [themonster].\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 3;
 		if (damage < 10) damage = 10;
 		//soulskill mod effect
@@ -1812,7 +1668,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		HPChange(-spellCostBlood(120), false);
 		player.createStatusEffect(StatusEffects.CooldownSpellHeartSeeker,3,0,0,0);
-		outputText("You concentrate, focusing on the power of your blood before making somatic gestures with your hand. Within an instant, large blood dripping spear coalesce briefly before being shot, flying toward [themonster] vital spot.\n\n");
+		outputText("You concentrate, focusing on the power of your blood. You infuse a bit of soulforce into the blood, spreading your fingers wide. Within an instant, a large blood dripping spear forms in your hand. You motion, sending the spear flying toward [themonster]'s vitals.\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 2;
 		if (damage < 10) damage = 10;
 		//Determine if critical hit!
@@ -1850,7 +1706,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		soulforcecost = Math.round(soulforcecost);
 		player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownSpellHeartSeekerSF,4,0,0,0);
-		outputText("You concentrate, focusing on the power of your blood. While maintaining concentration you infuse a bit of soulforce into the blood, before making somatic gesture with your hand. Within an instant, large blood dripping spear coalesce briefly before being shot, flying toward [themonster] vital spot.\n\n");
+		outputText("You concentrate, focusing on the power of your blood. You infuse a bit of soulforce into the blood, spreading your fingers wide. Within an instant, a large blood dripping spear forms in your hand. You motion, sending the spear flying toward [themonster]'s vitals.\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 6;
 		if (damage < 10) damage = 10;
 		//Determine if critical hit!
@@ -1886,7 +1742,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		HPChange(-spellCostBlood(240), false);
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodDewdrops,2,0,0,0);
-		outputText("You concentrate, focusing on the power of your blood before opening your hand and pointing it toward enem"+(monster.plural?"ies":"y")+". Within an instant, many small blood pellets shot from your hands, flying toward [themonster].\n\n");
+		outputText("You concentrate, focusing on the power of your blood before opening your hand and pointing it toward the enem"+(monster.plural?"ies":"y")+". Blood spurts from your fingertips, beads of crimson darkening as they harden. You flick your wrist, sending the blood pellets flying towards [themonster].\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 0.5;
 		if (damage < 10) damage = 10;
 		if (monster.plural) damage *= 5;
@@ -1931,7 +1787,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		soulforcecost = Math.round(soulforcecost);
 		player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodDewdropsSF,3,0,0,0);
-		outputText("You concentrate, focusing on the power of your blood. While maintaining concentration you infuse a bit of soulforce into the blood, before opening your hand and pointing it toward enem"+(monster.plural?"ies":"y")+". Within an instant, many small blood droplets shot from your hands, flying toward [themonster].\n\n");
+		outputText("You concentrate, focusing on the power of your blood before opening your hand and pointing it toward the enem"+(monster.plural?"ies":"y")+". Blood spurts from your fingertips, beads of crimson darkening as they harden. You close your eyes for a moment, sending soulforce into the pellets. You flick your wrist, sending the blood pellets flying towards [themonster].\n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 1.5;
 		if (damage < 10) damage = 10;
 		if (monster.plural) damage *= 5;
@@ -1976,7 +1832,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		clearOutput();
 		HPChange(-spellCostBlood(150), false);
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodRequiem,4,0,0,0);
-		outputText("You concentrate, focusing on the power of your blood before starting making gestures with your hands. They have something mysterious in them as if part of refined chereography rather than something you would do on battlefield. Within an instant, large blood dripping pillars coalesce above [themonster] and descends not giving time for [monster him] to react.\n\n");
+		outputText("You concentrate, focusing on the power of your blood before starting making gestures with your hands, precise movements sending power blazing through your body. Within an instant, large, blood dripping pillars form above [themonster]. The pillars begin to fall, and [themonster] looks up in shock, too late to dodge such a large projectile. \n\n");
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 2;
 		if (damage < 10) damage = 10;
 		//Determine if critical hit!
@@ -2016,8 +1872,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		soulforcecost = Math.round(soulforcecost);
 		player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownSpellBloodRequiemSF,5,0,0,0);
-		outputText("You concentrate, focusing on the power of your blood. While maintaining concentration you infuse a bit of soulforce into the blood, before starting making gestures with your hands. They have something mysterious in them as if part of refined chereography rather than something you would do on battlefield. ");
-		outputText("Within an instant, large blood dripping pillars coalesce above [themonster] and descends not giving time for [monster him] to react.\n\n");
+		outputText("You concentrate, focusing on the power of your blood before starting making gestures with your hands, precise movements sending power blazing through your body. You pour Soulforce into your hands, and they glow blue with each gesture, power pulsing with your heartbeat. Within an instant, large, blood dripping pillars form above [themonster]. The pillars begin to fall, and [themonster] looks up in shock, too late to dodge such a large projectile. \n\n");
+		
 		var damage:Number = scalingBonusWisdom() * spellModBlood() * 6;
 		if (damage < 10) damage = 10;
 		//Determine if critical hit!
@@ -2161,7 +2017,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 }
 	 else fatigue(24, USEFATG_PHYSICAL);
 	if (combat.checkConcentration()) return; //Amily concentration
-	 outputText("You ready your wrists mounted scythes and prepare to sweep them towards [themonster].\n\n");
+	 outputText("You ready your wrist-mounted scythes and prepare to sweep them towards [themonster].\n\n");
 	 if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
 	 if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attacks!\n\n");
 	 if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attacks with superior quickness!\n\n");

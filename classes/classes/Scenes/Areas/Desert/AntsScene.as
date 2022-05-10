@@ -879,7 +879,6 @@ import classes.display.SpriteDb;
 					//PC has one/two dick(s) not exceeding 4 inches in width total:
 					if (player.countCocks(-1, 2, "width") >= 2)
 						outputText("two of your [cocks], stroking them apologetically as she scissors you.  You feel her almost insatiable appetite for all parts of your body.  You feel Phylla's mind slowly becoming lost in pleasure.");
-					//TODO: "player.cocks[player.smallestCockIndex()] < 4" changed to cockLength. Not sure if it is the appropriate attribute.
 					else if (player.countCocks(-1, 4, "width") > 0) outputText("your " + cockDescript(player.smallestCockIndex()) + ", stroking it apologetically as she scissors you.  You feel her almost insatiable appetite for all parts of your body.  You feel Phylla's mind slowly becoming lost in pleasure.");
 					//PC only has a dick(s) that('s) (are) more than 4 inches in width:
 					else outputText("your " + cockDescript(player.smallestCockIndex()) + ", but she simply can't fit any number of her hands around the entirety of your glans; instead, she takes to caressing the head of your " + cockDescript(player.biggestCockIndex()) + ".");
@@ -903,7 +902,7 @@ import classes.display.SpriteDb;
 		private function waifuQuestOver():void
 		{
 			if (recalling) {
-				camp.recallScenes();
+				camp.recallWakeUp();
 				return;
 			}
 			clearOutput();

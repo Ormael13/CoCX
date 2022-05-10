@@ -1,8 +1,6 @@
 ﻿package classes.Scenes.Areas.Desert {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
-import classes.Scenes.SceneLib;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -435,8 +433,13 @@ private function centaurRape():void {
 }
 
 private function centaurDick():void {
-    var x:int = player.biggestCockIndex();
-    var tenta:Boolean = player.cockIsTentacle(x);
+	var cocks:int = player.cockTotal();
+	var x:int = player.findCockWithType(CockTypesEnum.TENTACLE); //try to find tentacle
+	var tenta:Boolean = (x >= 0 && cocks != 2); //twin cunts = no assfuck
+    if (!tenta) {
+		x = player.biggestCockIndex();
+		sceneHunter.print("Check failed (minor variations): Tentacle cock & cock count greater than 2")
+	} //otherwise, find ANY.
     outputText("Finished with your games, pre-cum starts pooling under your throbbing " + player.cockDescript(x) + ". ");
     //[largest cock is wide]
     if(player.cocks[x].cockThickness >= 3) {
@@ -448,13 +451,13 @@ private function centaurDick():void {
     if (tenta)
         outputText("Your " + player.cockDescript(x) + " caresses her anus teasingly, causing her to whimper in a mixture of arousal and denial.  ");
     //[1 cock, non-tentacle]
-    if(player.cockTotal() == 1) {
+    if(cocks == 1) {
         if (tenta)
             outputText("With a single savage thrust, you push past her clenched muscles, ");
         else
             outputText("With a single thrust, you push deep into one of her cunts, ");
     }
-    else if(player.cockTotal() == 2) outputText("After aligning your [cocks] to her twin cunts, you push yourself deeply into her, ");
+    else if(cocks == 2) outputText("After aligning your [cocks] to her twin cunts, you push yourself deeply into her, ");
     //[3+ cocks]
     else outputText("Lining up two of your cocks to her twin cunts and another to her anus, you thrust into her without pre-amble.  Her anal muscles try to keep you out, but they are no match for the strength of your legs.  You tear into her, ");
     //part 2
@@ -463,18 +466,17 @@ private function centaurDick():void {
     if(player.cocks[x].cockThickness >= 3)
         outputText("It is hard to believe just how tight she is, though if her cries serve as any indication, she will not be after you are through with her.  Turned on even more, you thrust in with increasing vigor and try to widen her as much as possible. ");
     //[2+ cocks]
-    if(player.cockTotal() >= 2)
+    if(cocks >= 2)
         outputText("The feeling of your [cocks] touching each other through the narrow layers of her body causes you to grunt in pleasure, experiencing the sensation anew during every thrust. ");
     //[largest cock is long, non-tentacle]
     if(player.cocks[x].cockLength >= 12) {
-        if(player.cockTotal() == 1) outputText("Her body surrenders more and more as your " + player.cockDescript(x) + " presses against her cervix. ");
+        if(cocks == 1) outputText("Her body surrenders more and more as your " + player.cockDescript(x) + " presses against her cervix. ");
         else outputText("Her body surrenders more and more as your [cocks]  press against her cervixes. ");
         outputText("Her mouth opens in a soundless and agonizing cry when you finally push past. ");
     }
-    //[tentacle] 
-    if(tenta) {
+    //[tentacle]
+    if(tenta)
         outputText("Her body surrenders more and more as your " + player.cockDescript(x) + " pushes deep into her bowels, snaking its way further into her body as it fucks her insides. ");
-    }
     outputText("It feels like you have been pushing yourself into her for hours");
     //[largest cock is wide and/or long]
     if(player.cocks[x].cockLength >= 12 || player.cocks[x].cockThickness >= 3) {
@@ -482,22 +484,18 @@ private function centaurDick():void {
     }
     //[largest cock is not wide and/or long]
     else outputText(", and her cries have long since turned into groans of pleasure. ");
-    outputText("You cannot hold off your orgasm any longer. Your [cocks] explode" + (player.cockTotal() == 1 ? "" : "s") + ", ");
+    outputText("You cannot hold off your orgasm any longer. Your [cocks] explode" + (cocks == 1 ? "" : "s") + ", ");
     //[large cum production] 
     if(player.cumQ() >= 250) outputText("gushing massive amounts of your cum ");
     //[regular cum production] 
     else outputText("pushing your sperm ");
     outputText("deep into her ");
     //[1 cock, tentacle]
-    if(player.cockTotal() == 1) {
-        if (tenta)
-            outputText("anus");
-        else
-            outputText("womb");
-    }
-    if (player.cockTotal() >= 2)
+    if(cocks == 1)
+        outputText(tenta ? "anus" : "womb");
+    if (cocks >= 2)
         outputText("cunts")
-    if(player.cockTotal() >= 3)
+    if(cocks >= 3)
         outputText(" and bowels");
     outputText(".  With a satisfied groan, you pull out and let your [cocks] dribble the last remnants of your cum over the ravished witch. Satisfied, you ride off into the desert.");
 	player.sexReward("vaginalFluids","Dick");
@@ -631,7 +629,7 @@ public function sexMenu():void {
         addButtonIfTrue(6, "Use Shouldra", SceneLib.shouldraFollower.sandWitchGetsGhostly, "Not for genderless...", player.gender != 0);
     else addButtonDisabled(6, "???", "Req. to be posessed by some ghost");
     addButtonIfTrue(7, "Ride", centaurRide, "Req. low corruption and centaur lower body", lowCor && player.isTaur());
-    addButtonIfTrue(8, "Taur Rape", centaurRide, "Req. high corruption and centaur lower body", hiCor && player.isTaur());
+    addButtonIfTrue(8, "Taur Rape", centaurRape, "Req. high corruption and centaur lower body", hiCor && player.isTaur());
 	addButtonIfTrue(9, "Lay Eggs", ovipositSandWitches, "Req. oviposition", player.gender > 0 && player.canOviposit());
     
 	SceneLib.uniqueSexScene.pcUSSPreChecksV2(sexMenu);

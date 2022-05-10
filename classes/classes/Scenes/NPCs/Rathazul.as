@@ -1,7 +1,6 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.NPCs.BelisaFollower;
 import classes.display.SpriteDb;
 
 public class Rathazul extends NPCAwareContent implements TimeAwareInterface {
@@ -173,14 +172,13 @@ private function rathazulWorkOffer():Boolean {
 	spriteSelect(SpriteDb.s_rathazul);
 	var totalOffers:int = 0;
 	var spoken:Boolean = false;
-	var purify:Boolean = false;
 	var debimbo:Boolean = false;
 	var lethiciteDefense:Function = null;
 	if (flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 1 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10) {
 		purificationByRathazulBegin();
 		return true;
 	}
-	if (BelisaFollower.BelisaQuestOn && BelisaFollower.BelisaRalthTalked == false) {
+	if (BelisaFollower.BelisaQuestOn && !BelisaFollower.BelisaRalthTalked) {
 		BelisaRalthazulTalk();
 		return true;
 	}
@@ -192,27 +190,22 @@ private function rathazulWorkOffer():Boolean {
 	var pCounter:int = 0;
 	//Item purification offer
 	if(player.hasItem(consumables.INCUBID)) {
-		purify = true;
 		totalOffers++;
 		pCounter++;
 	}
 	if(player.hasItem(consumables.SUCMILK)) {
-		purify = true;
 		totalOffers++;
 		pCounter++;
 	}
 	if(player.hasItem(consumables.SDELITE)) {
-		purify = true;
 		totalOffers++;
 		pCounter++;
 	}
 	if(player.hasItem(consumables.LABOVA_)) {
-		purify = true;
 		totalOffers++;
 		pCounter++;
 	}
 	if(player.hasItem(consumables.MINOCUM)) {
-		purify = true;
 		totalOffers++;
 		pCounter++;
 	}
@@ -221,7 +214,6 @@ private function rathazulWorkOffer():Boolean {
 			outputText("The rat mentions, \"<i>I see you have at least one tainted item on you... for 20 gems I could remove most of the taint, making it a good deal safer to use.  Of course, who knows what kind of freakish transformations it would cause...</i>\"\n\n");
 		else
 			outputText("The rat mentions, \"<i>I see you have a number of demonic items on your person.  For 20 gems I could attempt to remove the taint from one of them, rendering it a good deal safer for consumption.  Of course it would not remove most of the transformative properties of the item...</i>\"\n\n");
-		purify = true;
 		spoken = true;
 		totalOffers += pCounter;
 	}
@@ -261,7 +253,7 @@ private function rathazulWorkOffer():Boolean {
 		spoken = true;
 	}
 	//Vines
-	if(player.keyItemv1("Marae's Lethicite") > 0 && !player.hasStatusEffect(StatusEffects.DefenseCanopy) && player.hasStatusEffect(StatusEffects.CampRathazul)) {
+	if(player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemvX("Marae's Lethicite", 1) > 0 && !player.hasStatusEffect(StatusEffects.DefenseCanopy) && player.hasStatusEffect(StatusEffects.CampRathazul)) {
 		outputText("His eyes widen in something approaching shock when he sees the Lethicite crystal you took from Marae.  Rathazul stammers, \"<i>By the goddess... that's the largest piece of lethicite I've ever seen.  I don't know how you got it, but there is immense power in those crystals.  If you like, I know a way we could use its power to grow a canopy of thorny vines that would hide the camp and keep away imps.  Growing such a defense would use a third of that lethicite's power.</i>\"\n\n");
 		totalOffers++;
 		spoken = true;
@@ -308,35 +300,48 @@ private function rathazulWorkOffer():Boolean {
 		else
 			addButtonDisabled(0, "Shop", "You can't afford anything Rathazul has to offer.");
 		addButton(1, "Purify", purifySomething).hint("Ask him to purify any tainted potions. \n\nCost: 20 Gems.");
-		if (BelisaFollower.BelisaRalthTalked && BelisaFollower.BelisaFollowerStage == 0 && player.hasItem(consumables.SHARK_T) && player.hasItem(consumables.PPHILTR) && player.hasItem(consumables.VITAL_T)) addButton(3, "C.CurePotion", RathazulMakesToothCursePotion).hint("Ask him to make cure curse cure potion. \n\nNeeds shark tooth, purity philter and vitality tincture");
+		if (BelisaFollower.BelisaRalthTalked && BelisaFollower.BelisaFollowerStage == 0) {
+			if (player.hasItem(consumables.SHARK_T) && player.hasItem(consumables.PPHILTR) && player.hasItem(consumables.VITAL_T)) addButton(3, "C.CurePotion", RathazulMakesToothCursePotion).hint("Ask him to make cure curse cure potion. \n\nNeeds shark tooth, purity philter and vitality tincture");
+			else addButtonDisabled(3, "C.CurePotion", "Ask him to make cure curse cure potion. \n\nNeeds shark tooth, purity philter and vitality tincture");
+		}
 		if (dyes && player.hasItem(consumables.REPTLUM, 1) && flags[kFLAGS.ARIAN_SCALES] > 0) addButton(4, "Make Dye", makeDyes).hint("Ask him to make a special dye for you. (Only dyes here are for Arian) \n\nCost: 50 Gems.");
 		if (player.hasItem(consumables.BEEHONY)) addButton(5, consumables.PURHONY.shortName, rathazulMakesPureHoney).hint("Ask him to distill a vial of bee honey into a pure honey. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
-		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(6, "ProLactaid", rathazulMakesMilkPotion).hint("Ask him to brew a special lactation potion. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.");
-		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(7, "Scorpinum", rathazulMakesScorpioPotion).hint("Ask him to brew a special potion that could aid in gaining scorpion tail. \n\nCost: 100 Gems \nNeeds 2 vials of Bee Honey and 2 vials of Snake Oil.");
-		if (debimbo) addButton(8, "Debimbo", makeADeBimboDraft).hint("Ask Rathazul to make a debimbofying potion for you. \n\nCost: 250 Gems \nNeeds 5 Scholar Teas.");
+		if (debimbo) addButton(6, "Debimbo", makeADeBimboDraft).hint("Ask Rathazul to make a debimbofying potion for you. \n\nCost: 250 Gems \nNeeds 5 Scholar Teas.");
 		if (flags[kFLAGS.ELECTRA_FOLLOWER] > 2 && !player.hasStatusEffect(StatusEffects.ElectraOff)) {
-			if (player.hasItem(useables.RPLASMA, 2) && player.hasItem(consumables.L_DRAFT, 1)) addButton(9, "Alch.Thun.", makeAlchemicalThunder).hint("Ask him to help Mitzi. \n\nNeeds two raiju plasmas and one lust draft");
-			else addButtonDisabled(9, "Alch.Thun.", "Need to gather two raiju plasmas and one lust draft for this.");
+		if (player.hasItem(useables.RPLASMA, 2) && player.hasItem(consumables.L_DRAFT, 1)) addButton(7, "Alch.Thun.", makeAlchemicalThunder).hint("Ask him to help Mitzi. \n\nNeeds two raiju plasmas and one lust draft");
+			else addButtonDisabled(7, "Alch.Thun.", "Need to gather two raiju plasmas and one lust draft for this.");
 		}
 		if (flags[kFLAGS.MITZI_RECRUITED] == 2) {
-			if (player.hasItem(consumables.SMART_T, 5) && player.hasItem(consumables.VITAL_T, 5) && player.hasItem(consumables.S_WATER, 1) && player.hasItem(consumables.PURHONY, 1)) addButton(10, "Mitzi", cureMitzi).hint("Ask him to help Mitzi. \n\nNeeds five scholar teas, five vitality tinctures, one bottle of pure spring water, and one vial of pure honey");
-			else addButtonDisabled(10, "Mitzi", "Need to gather five scholar teas, five vitality tinctures, one bottle of pure spring water, and one vial of pure honey for this.");
+			if (player.hasItem(consumables.SMART_T, 5) && player.hasItem(consumables.VITAL_T, 5) && player.hasItem(consumables.S_WATER, 1) && player.hasItem(consumables.PURHONY, 1)) addButton(8, "Mitzi", cureMitzi).hint("Ask him to help Mitzi. \n\nNeeds five scholar teas, five vitality tinctures, one bottle of pure spring water, and one vial of pure honey");
+			else addButtonDisabled(8, "Mitzi", "Need to gather five scholar teas, five vitality tinctures, one bottle of pure spring water, and one vial of pure honey for this.");
 		}
 		if (flags[kFLAGS.SAMIRAH_FOLLOWER] == 7) {
-			if (player.hasItem(consumables.HUMMUS_, 1) && player.hasItem(consumables.REPTLUM, 1) && player.hasItem(consumables.OVIELIX, 1)) addButton(11, "ReptaTongue P", makeReptaTonguePotion).hint("Ask him to make Repta-Tongue Potion. \n\nNeeds 1 Hummus, 1 Reptilium and 1 Ovi Elixir");
-			else addButtonDisabled(11, "ReptaTongue P", "Need to gather 1 Hummus, 1 Reptilium and 1 Ovi Elixir for this potion.");
+			if (player.hasItem(consumables.HUMMUS_, 1) && player.hasItem(consumables.REPTLUM, 1) && player.hasItem(consumables.OVIELIX, 1)) addButton(9, "ReptaTongue P", makeReptaTonguePotion).hint("Ask him to make Repta-Tongue Potion. \n\nNeeds 1 Hummus, 1 Reptilium and 1 Ovi Elixir");
+			else addButtonDisabled(9, "ReptaTongue P", "Need to gather 1 Hummus, 1 Reptilium and 1 Ovi Elixir for this potion.");
 		}
 		if (player.hasItem(consumables.PURHONY, 1) && player.hasItem(consumables.C__MINT, 1) && player.hasItem(consumables.PURPEAC, 1) && player.hasKeyItem("Rathazul's Purity Potion") < 0 &&(flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 2 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10)) {
-			addButton(12, "Pure Potion", rathazulMakesPurifyPotion).hint("Ask him to brew a purification potion for Minerva.");
+			addButton(10, "Pure Potion", rathazulMakesPurifyPotion).hint("Ask him to brew a purification potion for Minerva.");
 		}
+		if (TyrantiaFollower.TyrantiaFollowerStage == 5) addButton(12, "Tyrantia", TyrantiaEggQuestRathazul);
 		if (lethiciteDefense != null) addButton(13, "Lethicite", lethiciteDefense).hint("Ask him if he can make use of that lethicite you've obtained from Marae.");
-		if(player.hasStatusEffect(StatusEffects.CampRathazul))
-			addButton(14,"Leave", camp.campFollowers);
-		else
-			addButton(14, "Leave", camp.returnToCampUseOneHour);
+		if (player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(14,"Leave", camp.campFollowers);
+		else addButton(14, "Leave", camp.returnToCampUseOneHour);
 		return true;
 	}
 	return false;
+}
+
+private function TyrantiaEggQuestRathazul():void {
+	clearOutput();
+	outputText("You walk to the old mouse alchemist, your heart slightly heavy. You know that Tyrantia’s been trying to purify herself through his Philters, and it hasn’t worked so far. Despite this, you feel like going to him is worth a shot.\n\n");
+	outputText("\"<i>What can I help you with, [name]?</i>\" The old alchemist asks. You tell him about Tyrantia’s conversation with you. Your desire to have a family with her, but the fear and doubt that your Drider lover has about foisting her corruption onto a child. Even worse, what that child or children could do to the world if someone without Tyrantia’s willpower was given the corrupting aura.\n\n");
+	outputText("\"<i>Ah, yes. I understand perfectly.</i>\" He thinks for a moment, then looks at you. \"<i>Well...As a matter of fact, I might be able to help.</i>\" He scratches the top of his head. \"<i>Spider eggs are permeable, and so if Drider eggs share similar properties, then I could potentially whip up a batch of my purity Philter that could purify any unborn within the egg.</i>\" ");
+	outputText("He smiles. \"<i>I’ve run studies with other people’s corruption. Children, while they’re very young, or at least have a young body, are very susceptible to corruption or purification, due to the fact that there’s less of them.</i>\" He rubs his hands together, somewhat excited. \"<i>I have every confidence that this will work.</i>\"\n\n");
+	outputText("You bring Ralthazul back to Tyrantia, and you ask him to fill her in. The old mouse puts a hand on Tyrantia’s leg, telling her what he told you. Your giantess looks at you, eyes gleaming, and both hands in front of her mouth.\n\n");
+	outputText("\"<i>Really?!</i>\" She pats the alchemist’s head, somewhat dazed. \"<i>...I...Okay.</i>\" She turns to you, inhaling nervously. \"<i>...I trust you. If you think Ralthzul can stop me from ruining our podlings, then...I’ll do it.</i>\"\n\n");
+	TyrantiaFollower.TyrantiaFollowerStage = 6;
+	eachMinuteCount(15);
+	doNext(playerMenu);
 }
 
 private function purifySomething():void {
@@ -679,6 +684,8 @@ private function rathazulShopMenu():void {
 		else addButtonDisabled(9, consumables.BH_PILL.shortName, "You can't afford to buy this.\n\n85 gems required.");
 	}
 	else addButtonDisabled(9, "???", "Required to be lvl 42+ for this.");
+	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(10, "ProLactaid", rathazulMakesMilkPotion).hint("Ask him to brew a special lactation potion. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.");
+	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(11, "Scorpinum", rathazulMakesScorpioPotion).hint("Ask him to brew a special potion that could aid in gaining scorpion tail. \n\nCost: 100 Gems \nNeeds 2 vials of Bee Honey and 2 vials of Snake Oil.");
 	addButton(14, "Back", returnToRathazulMenu);
 }
 //Hair dyes

@@ -9,7 +9,6 @@ import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
-import classes.IMutations.*;
 
 public class MutationsLib
 	{
@@ -40,14 +39,6 @@ public class MutationsLib
 		public static const CaveWyrmLungsEvolved:PerkType = mk("Cave Wyrm Lungs (Evolved)", "Cave Wyrm Lungs (Evolved)",
 				".");
 		public static const CaveWyrmLungsFinalForm:PerkType = mk("Cave Wyrm Lungs (Final Form)", "Cave Wyrm Lungs (Final Form)",
-				".");
-		public static const KitsuneParathyroidGlands:PerkType = mk("Kitsune Parathyroid Glands", "Kitsune Parathyroid Glands",
-				".");//decrease terror/ilussions cooldown instead of thyroid gland - rise wis or bonus sf regen or mana regen and thyroid gland instead regering sf?
-		public static const KitsuneParathyroidGlandsPrimitive:PerkType = mk("Kitsune Parathyroid Glands (Primitive)", "Kitsune Parathyroid Glands (Primitive)",
-				".");
-		public static const KitsuneParathyroidGlandsEvolved:PerkType = mk("Kitsune Parathyroid Glands (Evolved)", "Kitsune Parathyroid Glands (Evolved)",
-				".");
-		public static const KitsuneParathyroidGlandsFinalForm:PerkType = mk("Kitsune Parathyroid Glands (Final Form)", "Kitsune Parathyroid Glands (Final Form)",
 				".");
 		//accessable perks
 		public static const ArachnidBookLung:PerkType = mk("Arachnid Book Lung", "Arachnid Book Lung",
@@ -208,13 +199,20 @@ public class MutationsLib
 				"You can now freely feed on blood and other atypical fluids. (+5 max stack of Vampire Thirst, +7% more healed from Vampire Bite, each Vampire Bite giving 2 stacks and deal +50% lust dmg)").withBuffs({'tou.mult':0.15});
 		public static const HollowFangsFinalForm:PerkType = mk("Hollow Fangs (Final Form)", "Hollow Fangs (Final Form)",
 				".");
-		//public static const KitsuneThyroidGland:PerkType = new KitsuneThyroidGlandMutation().withBuffs(KitsuneThyroidGlandMutation.perkBuffs());
+		public static const KitsuneParathyroidGlands:PerkType = mk("Kitsune Parathyroid Glands", "Kitsune Parathyroid Glands",
+				"Kitsune Parathyroid Glands lower cooldowns for Illusion and Terror by three turns.").withBuffs({'spe.mult':0.05,'int.mult':0.05});
+		public static const KitsuneParathyroidGlandsPrimitive:PerkType = mk("Kitsune Parathyroid Glands (Primitive)", "Kitsune Parathyroid Glands (Primitive)",
+				"Kitsune Parathyroid Glands (Primitive) increase mana and fatigue recovery. Decrease by 50% fatigue cost of Illusion and Terror specials.").withBuffs({'spe.mult':0.05,'int.mult':0.10});
+		public static const KitsuneParathyroidGlandsEvolved:PerkType = mk("Kitsune Parathyroid Glands (Evolved)", "Kitsune Parathyroid Glands (Evolved)",
+				"Kitsune Parathyroid Glands (Evolved) grant bonus mana regeneration depending on your Star Sphere rank. Increase speed debuff of Terror to 70, increase evasion boost from Illusion to 30%.").withBuffs({'spe.mult':0.05,'int.mult':0.20});
+		public static const KitsuneParathyroidGlandsFinalForm:PerkType = mk("Kitsune Parathyroid Glands (Final Form)", "Kitsune Parathyroid Glands (Final Form)",
+				".");
 		public static const KitsuneThyroidGland:PerkType = mk("Kitsune Thyroid Gland", "Kitsune Thyroid Gland",
-				"Kitsune Thyroid Gland lower cooldowns for Illusion and Terror by three turns and increase speed of the recovery after using magic.").withBuffs({'spe.mult':0.05});
+				"Kitsune Thyroid Gland decrease by 50% base cost of fox fire specials.").withBuffs({'spe.mult':0.05,'wis.mult':0.05});
 		public static const KitsuneThyroidGlandPrimitive:PerkType = mk("Kitsune Thyroid Gland (Primitive)", "Kitsune Thyroid Gland (Primitive)",
-				"Kitsune Thyroid Gland (Primitive) increase the mana recovery and make fox fire specials 50% stronger when having 9 tails (both fire and lust damage).").withBuffs({'spe.mult':0.05,'wis.mult':0.05});
+				"Kitsune Thyroid Gland (Primitive) increase soulforce recovery and make fox fire specials 50% stronger when having 9 tails (both fire and lust damage).").withBuffs({'spe.mult':0.05,'wis.mult':0.10});
 		public static const KitsuneThyroidGlandEvolved:PerkType = mk("Kitsune Thyroid Gland (Evolved)", "Kitsune Thyroid Gland (Evolved)",
-				"Kitsune Thyroid Gland (Evolved) grant bonus soulforce/mana regeneration depending on your Star Sphere rank, increase max Star Sphere rank to 20. Increase speed debuff of Terror to 50, increase evasion boost from Illusion to 20%.").withBuffs({'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.05});
+				"Kitsune Thyroid Gland (Evolved) grant bonus soulforce regeneration depending on your Star Sphere rank, increase max Star Sphere rank by 10.").withBuffs({'spe.mult':0.05,'int.mult':0.20,'wis.mult':0.20});
 		public static const KitsuneThyroidGlandFinalForm:PerkType = mk("Kitsune Thyroid Gland (Final Form)", "Kitsune Thyroid Gland (Final Form)",
 				".");
 		public static const LactaBovinaOvaries:PerkType = mk("Lacta Bovina Ovaries", "Lacta Bovina Ovaries",
@@ -483,7 +481,7 @@ public class MutationsLib
 				//MutationsList.push([NekomataThyroidGland, NekomataThyroidGlandEvolved, NekomataThyroidGlandFinalForm]);
 			}
 			function mutationsParaThyroidGlands():void{
-				//MutationsList.push([KitsuneParathyroidGlands, KitsuneParathyroidGlandsEvolved, KitsuneParathyroidGlandsFinalForm]);
+				MutationsList.push([KitsuneParathyroidGlands, KitsuneParathyroidGlandsPrimitive, KitsuneParathyroidGlandsEvolved]);
 				//MutationsList.push([HellcatParathyroidGlands, HellcatParathyroidGlandsEvolved, HellcatParathyroidGlandsFinalForm]);
 			}
 			function mutationsAdaptations():void{
@@ -686,7 +684,12 @@ public class MutationsLib
 				.requireCustomFunction(function (player:Player):Boolean {
 					return player.vampireScore() >= 10;//potem dodać mosquito race i ew. inne co mogą wypijać krew
 				}, "Vampire race");
-				//KitsuneThyroidGlandMutation.mutationReqs();
+				KitsuneParathyroidGlands.requireParathyroidGlandMutationSlot().requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
+					return player.tailType == Tail.FOX && player.tailCount >= 2;
+				}, "2+ fox tails")
+				.requireCustomFunction(function (player:Player):Boolean {
+					return player.kitsuneScore() >= 9;
+				}, "Kitsune race");
 				KitsuneThyroidGland.requireThyroidGlandMutationSlot().requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
 					return player.tailType == Tail.FOX && player.tailCount >= 2;
 				}, "2+ fox tails")
@@ -778,7 +781,7 @@ public class MutationsLib
 					return player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS);
 				}, "Spider or Snake fangs")
 				.requireCustomFunction(function (player:Player):Boolean {
-					return player.spiderScore() >= 5 || player.apophisScore() >= 23 || player.nagaScore() >= 8 || player.gorgonScore() >= 11 || player.vouivreScore() >= 11 || player.couatlScore() >= 11 || player.hydraScore() >= 14;
+					return player.spiderScore() >= 5 || player.apophisScore() >= 23 || player.nagaScore() >= 8 || player.gorgonScore() >= 11 || player.vouivreScore() >= 11 || player.couatlScore() >= 11 || player.hydraScore() >= 14 || player.atlachNachaScore() >= 21;
 				}, "Spider or any snake-like race");
 				WhaleFat.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.orcaScore() >= 14 || player.leviathanScore() >= 20;
@@ -828,6 +831,8 @@ public class MutationsLib
 						.requirePerk(HinezumiBurningBlood);
 				HollowFangsPrimitive.requireLevel(30)
 						.requirePerk(HollowFangs);
+				KitsuneParathyroidGlandsPrimitive.requireLevel(30)
+						.requirePerk(KitsuneParathyroidGlands);
 				KitsuneThyroidGlandPrimitive.requireLevel(30)
 						.requirePerk(KitsuneThyroidGland);
 				LactaBovinaOvariesPrimitive.requireLevel(30)
@@ -915,6 +920,8 @@ public class MutationsLib
 						.requirePerk(HeartOfTheStormPrimitive);
 				HinezumiBurningBloodEvolved.requireLevel(60)
 						.requirePerk(HinezumiBurningBloodPrimitive);
+				KitsuneParathyroidGlandsEvolved.requireLevel(60)
+						.requirePerk(KitsuneParathyroidGlandsPrimitive);
 				KitsuneThyroidGlandEvolved.requireLevel(60)
 						.requirePerk(KitsuneThyroidGlandPrimitive);
 				LactaBovinaOvariesEvolved.requireLevel(60)

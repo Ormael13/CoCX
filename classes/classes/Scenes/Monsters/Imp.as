@@ -177,6 +177,7 @@ public class Imp extends Monster
 			];
 			this.wings.type = Wings.IMP;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 1, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyForBeginnersType, 0, 0, 0, 0);
 			checkMonster();
 		}

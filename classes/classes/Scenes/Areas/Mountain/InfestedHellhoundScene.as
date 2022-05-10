@@ -35,11 +35,6 @@ public class InfestedHellhoundScene extends BaseContent
 
 		public function infestedHellhoundLossRape():void
 		{
-            if (flags[kFLAGS.SFW_MODE] > 0 && CoC.instance.inCombat) { //No rape in SFW mode.
-                clearOutput();
-				cleanupAfterCombat();
-				return;
-			}
 			clearOutput();
 			//[BOTH INFESTED]
 			if (player.cockTotal() > 0 && player.hasStatusEffect(StatusEffects.Infested)) {

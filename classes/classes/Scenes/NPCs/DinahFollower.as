@@ -383,55 +383,55 @@ import classes.internals.Utils;
 			menu();
 			if (player.hasStatusEffect(StatusEffects.BuyedHowlingBansheMech)) {
 				if (player.hasKeyItem("HB Armor Plating") >= 0) {
-					if (player.keyItemv1("HB Armor Plating") == 1) addButton(0, "Armor Plating v2", buyHowlingBansheeMechUpgrade, "Armor Plating v2", 2500).hint("Increase armor by 25.");
-					if (player.keyItemv1("HB Armor Plating") == 2) addButton(0, "Armor Plating v3", buyHowlingBansheeMechUpgrade, "Armor Plating v3", 3500).hint("Increase armor by 35.");
-					if (player.keyItemv1("HB Armor Plating") == 3) addButton(0, "Armor Plating v3", buyHowlingBansheeMechUpgrade, "Armor Plating v4", 4500).hint("Increase armor by 45.");
-					if (player.keyItemv1("HB Armor Plating") == 4) addButtonDisabled(0, "Armor Plating v4", "Your HB Mech already have this upgrade.");
+					if (player.keyItemvX("HB Armor Plating", 1) == 1) addButton(0, "Armor Plating v2", buyHowlingBansheeMechUpgrade, "Armor Plating v2", 2500).hint("Increase armor by 25.");
+					if (player.keyItemvX("HB Armor Plating", 1) == 2) addButton(0, "Armor Plating v3", buyHowlingBansheeMechUpgrade, "Armor Plating v3", 3500).hint("Increase armor by 35.");
+					if (player.keyItemvX("HB Armor Plating", 1) == 3) addButton(0, "Armor Plating v3", buyHowlingBansheeMechUpgrade, "Armor Plating v4", 4500).hint("Increase armor by 45.");
+					if (player.keyItemvX("HB Armor Plating", 1) == 4) addButtonDisabled(0, "Armor Plating v4", "Your HB Mech already have this upgrade.");
 				}
 				else addButton(0, "Armor Plating v1", buyHowlingBansheeMechUpgrade, "Armor Plating v1", 1500).hint("Increase armor by 15.");
 				if (player.hasKeyItem("HB Leather Insulation") >= 0) {
-					if (player.keyItemv1("HB Leather Insulation") == 1) addButton(1, "Leather Insulation v2", buyHowlingBansheeMechUpgrade, "Leather Insulation v2", 2500).hint("Increase magic resistance by 25.");
-					if (player.keyItemv1("HB Leather Insulation") == 2) addButton(1, "Leather Insulation v3", buyHowlingBansheeMechUpgrade, "Leather Insulation v3", 3500).hint("Increase magic resistance by 35.");
-					if (player.keyItemv1("HB Leather Insulation") == 3) addButton(1, "Leather Insulation v4", buyHowlingBansheeMechUpgrade, "Leather Insulation v3", 4500).hint("Increase magic resistance by 45.");
-					if (player.keyItemv1("HB Leather Insulation") == 4) addButtonDisabled(1, "Leather Insulation v4", "Your HB Mech already have this upgrade.");
+					if (player.keyItemvX("HB Leather Insulation", 1) == 1) addButton(1, "Leather Insulation v2", buyHowlingBansheeMechUpgrade, "Leather Insulation v2", 2500).hint("Increase magic resistance by 25.");
+					if (player.keyItemvX("HB Leather Insulation", 1) == 2) addButton(1, "Leather Insulation v3", buyHowlingBansheeMechUpgrade, "Leather Insulation v3", 3500).hint("Increase magic resistance by 35.");
+					if (player.keyItemvX("HB Leather Insulation", 1) == 3) addButton(1, "Leather Insulation v4", buyHowlingBansheeMechUpgrade, "Leather Insulation v3", 4500).hint("Increase magic resistance by 45.");
+					if (player.keyItemvX("HB Leather Insulation", 1) == 4) addButtonDisabled(1, "Leather Insulation v4", "Your HB Mech already have this upgrade.");
 				}
 				else addButton(1, "Leather Insulation v1", buyHowlingBansheeMechUpgrade, "Leather Insulation v1", 1500).hint("Increase magic resistance by 15.");
 				if (player.hasKeyItem("HB Agility") >= 0) {
-					if (player.keyItemv1("HB Agility") == 1) addButtonDisabled(2, "Agility v2", "Your HB Mech already have this upgrade.");
+					if (player.keyItemvX("HB Agility", 1) == 1) addButtonDisabled(2, "Agility v2", "Your HB Mech already have this upgrade.");
 					else addButton(2, "Agility v2", buyHowlingBansheeMechUpgrade, "Agility v2", 1000).hint("Adding speed scaling similar to Quick Strike perk to melee mech attacks.");
 				}
 				else addButton(2, "Agility v1", buyHowlingBansheeMechUpgrade, "Agility v1", 500).hint("Adding speed scaling similar to Speed Demon perk to melee mech attacks.");
 				if (player.hasKeyItem("HB Rapid Reload") >= 0) {
-					if (player.keyItemv1("HB Rapid Reload") == 1) addButtonDisabled(3, "Rapid Reload v2", "Your HB Mech already have this upgrade.");
+					if (player.keyItemvX("HB Rapid Reload", 1) == 1) addButtonDisabled(3, "Rapid Reload v2", "Your HB Mech already have this upgrade.");
 					else addButton(3, "Rapid Reload v2", buyHowlingBansheeMechUpgrade, "Rapid Reload v2", 1500).hint("Adding speed scaling bonus to damage (half of normal bow dmg scaling based on speed) and increase base range atk by ~25%. +1 more range shoots per turn.");
 				}
 				else addButton(3, "Rapid Reload v1", buyHowlingBansheeMechUpgrade, "Rapid Reload v1", 750).hint("Adding dmg scaling similar to Sharpshooter perk to range mech attacks. +1 more range shoots per turn.");
 				//4 - for next button?
 				if (player.hasKeyItem("HB Internal Systems") >= 0) {
-					if (player.keyItemv1("HB Internal Systems") == 2) addButtonDisabled(5, "Internal Systems v2", "Your HB Mech already have this upgrade.");
+					if (player.keyItemvX("HB Internal Systems", 1) == 2) addButtonDisabled(5, "Internal Systems v2", "Your HB Mech already have this upgrade.");
 					else addButton(5, "Internal Systems v2", buyHowlingBansheeMechUpgrade, "Internal Systems v2", 1500).hint("Decrease mech SF reserves drain by 20 pts and max SF capacity by 5,000 (when PC wear Ayo armor).");
 				}
 				else addButton(5, "Internal Systems v1", buyHowlingBansheeMechUpgrade, "Internal Systems v1", 750).hint("Decrease mech SF reserves drain by 10 pts and max SF capacity by 2,000 (when PC wear Ayo armor).");
 				if (player.hasKeyItem("HB Dragon's Breath Flamer") >= 0) {
-					if (player.keyItemv1("Dragon's Breath Flamer") == 1) addButtonDisabled(6, "DB Flamer v2", "Your HB Mech already have this upgrade.");
+					if (player.keyItemvX("Dragon's Breath Flamer", 1) == 1) addButtonDisabled(6, "DB Flamer v2", "Your HB Mech already have this upgrade.");
 					else addButton(6, "DB Flamer v2", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v2", 3000).hint("Instal second Dragon's Breath Flamer weapon - adds second fire attack when using this special and cost of use increase twicefold.");
 				}
 				else addButton(6, "DB Flamer v1", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v1", 1500).hint("Add Dragon's Breath Flamer weapon - Allow to enter use special dealing fire damage.");
 				if (player.hasKeyItem("HB Scatter Laser") >= 0) {
-					if (player.keyItemv1("HB Scatter Laser") == 1) addButton(7, "Scatter Laser v2", buyHowlingBansheeMechUpgrade, "Scatter Laser v2", 2500).hint("Adds 2 more units that allow either double shot at lone targets or using all three against groups.");
-					if (player.keyItemv1("HB Scatter Laser") == 2) addButton(7, "Scatter Laser v3", buyHowlingBansheeMechUpgrade, "Scatter Laser v3", 3500).hint("Adding 3 more units that allow either four shots at lone targets or using all six against groups.");
-					if (player.keyItemv1("HB Scatter Laser") == 3) addButtonDisabled(7, "Scatter Laser v3", "Your HB Mech already have this upgrade.");
+					if (player.keyItemvX("HB Scatter Laser", 1) == 1) addButton(7, "Scatter Laser v2", buyHowlingBansheeMechUpgrade, "Scatter Laser v2", 2500).hint("Adds 2 more units that allow either double shot at lone targets or using all three against groups.");
+					if (player.keyItemvX("HB Scatter Laser", 1) == 2) addButton(7, "Scatter Laser v3", buyHowlingBansheeMechUpgrade, "Scatter Laser v3", 3500).hint("Adding 3 more units that allow either four shots at lone targets or using all six against groups.");
+					if (player.keyItemvX("HB Scatter Laser", 1) == 3) addButtonDisabled(7, "Scatter Laser v3", "Your HB Mech already have this upgrade.");
 				}
 				else addButton(7, "Scatter Laser v1", buyHowlingBansheeMechUpgrade, "Scatter Laser v1", 1500).hint("Add Scatter Laser weapon - Allow to enter use special dealing lightning damage.");
 				//8
 				//9 - for prev button?
 				if (player.hasKeyItem("HB Stealth System") >= 0) {
-					if (player.keyItemv1("HB Stealth System") >= 1) {
-						if (player.keyItemv1("HB Stealth System") == 1) {
+					if (player.keyItemvX("HB Stealth System", 1) >= 1) {
+						if (player.keyItemvX("HB Stealth System", 1) == 1) {
 							if (player.hasKeyItem("HB Internal Systems") >= 1) addButton(10, "Invisibility Mode v2", buyHowlingBansheeMechUpgrade, "Invisibility Mode v2", 10000).hint("Upgrades Invisibility Mode from v1 to v2. Decrease cost of activating and sustaining this mobe by 20%.");
 							else addButtonDisabled(10, "Invisibility Mode v2", "Your need to have installed Internal Systems v2 or better to unlock this upgrade.");
 						}
-						if (player.keyItemv1("HB Stealth System") == 2) addButtonDisabled(10, "Invisibility Mode v2", "Your HB Mech already have this upgrade.");
+						if (player.keyItemvX("HB Stealth System", 1) == 2) addButtonDisabled(10, "Invisibility Mode v2", "Your HB Mech already have this upgrade.");
 					}
 					else {
 						if (player.hasKeyItem("HB Internal Systems") >= 0) addButton(10, "Invisibility Mode v1", buyHowlingBansheeMechUpgrade, "Invisibility Mode v1", 5000).hint("Upgrades Camouflage Mode to Invisibility Mode. Allow to stay camouflaged without time limit. Sustaining this mode cost 100 SF per turn.");

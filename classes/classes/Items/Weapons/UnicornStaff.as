@@ -1,8 +1,6 @@
 package classes.Items.Weapons 
 {
 	import classes.PerkLib;
-	import classes.EventParser;
-    import classes.TimeAwareInterface;
 
 	public class UnicornStaff extends WeaponWithPerk
 	{
@@ -23,20 +21,19 @@ package classes.Items.Weapons
 		public function UnicornStaff()
 		{
 			super("U.Staff", "U. Staff", "unicorn staff", "a unicorn staff", "smack", 10, 1600,
-					"This blessed staff is made in pearl-white sandalwood and decorated with a golden spiral pattern, reminiscent of a unicorn’s horn. The magic within seems to greatly enhance the user’s healing spells, not unlike those of the fabled creature that it emulates. Furthermore the staff allows the user to preserve mana when casting using a minimal ammount of energy on each spell.",
+					"This blessed staff is made in pearl-white sandalwood and decorated with a golden spiral pattern, reminiscent of a unicorn’s horn. The magic within seems to greatly enhance the user’s healing spells, not unlike those of the fabled creature that it emulates. Furthermore, the staff allows the user to preserve mana when casting using a minimal ammount of energy on each spell.",
 					"Staff, Spell Cost -50% increases Spellpower based on purity", PerkLib.WizardsFocus, 0.6, 0, 0, 0, "", "Staff"
 			);
 		}
 
 		public function calcWizardsMult():Number {
-			var desc:String = "";
 			var multadd:Number = 0.6;
             if (game && game.player)
-                multadd += (100 - game.player.cor) * 0.34;
+                multadd += (100 - game.player.cor) * 0.034;
 			return multadd;
 		}
 
-        private static var lastCor:Number = 100; //optimization
+        private static var lastCor:Number = 100;
 
         public function updateWizardsMult():void {
             if (game.player.cor != lastCor) {
@@ -69,6 +66,11 @@ package classes.Items.Weapons
 			if (game.player.level >= 40) return super.canUse();
 			outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay put in your hands. It would seem you yet lack the power and right to wield this item.");
 			return false;
+		}
+
+		override public function get description():String {
+			updateWizardsMult(); //To display *correct* values
+			return super.description;
 		}
 	}
 }

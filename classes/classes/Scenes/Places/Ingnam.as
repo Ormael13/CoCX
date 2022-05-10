@@ -75,7 +75,7 @@ public class Ingnam extends BaseContent
 					removeButton(4);
 				}
 				addButton(8, "Masturbate", SceneLib.masturbation.masturbateMenu);
-				if ((((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", SceneLib.masturbation.masturbateMenu);
+				if ((((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0)) addButton(8, "Meditate", SceneLib.masturbation.masturbateMenu);
 			}
 			//Show wait/rest/sleep depending on conditions.
 			addButton(9, "Wait", SceneLib.camp.doWait);

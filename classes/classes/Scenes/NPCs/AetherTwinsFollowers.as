@@ -298,8 +298,8 @@ public function aethertwinsFollowersFeed():void {
 		outputText("\n-Tin ore ("+AetherTwinsFoodMenuTin+"/"+AetherTwinsFoodMenuTinCap+")");
 		outputText("\n-Copper ore ("+AetherTwinsFoodMenuCopper+"/"+AetherTwinsFoodMenuCopperCap+")");
 		outputText("\n-Iron ore ("+AetherTwinsFoodMenuIron+"/"+AetherTwinsFoodMenuIronCap+")");
-		outputText("\n-Amethyst ("+AetherTwinsFoodMenuAmethyst+"/"+AetherTwinsFoodMenuAmethystCap+")");
-		outputText("\n-Diamond ("+AetherTwinsFoodMenuDiamond+"/"+AetherTwinsFoodMenuDiamondCap+")");
+		//outputText("\n-Amethyst ("+AetherTwinsFoodMenuAmethyst+"/"+AetherTwinsFoodMenuAmethystCap+")");
+		//outputText("\n-Diamond ("+AetherTwinsFoodMenuDiamond+"/"+AetherTwinsFoodMenuDiamondCap+")");
 	}
 	outputText("\n\nEaten equipment:");
 	if (AetherTwinsFoodMenuBuckler) outputText("\n-Buckler");

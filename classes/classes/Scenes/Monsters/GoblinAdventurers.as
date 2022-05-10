@@ -120,7 +120,7 @@ import classes.internals.*;
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
+			if (player.gender == 0) {
 				outputText("You collapse in front of the goblins, too wounded to fight.  They growls and kicks you in the head, making your vision swim. As your sight fades, you hear them murmur, \"<i>Fucking dicks can't even bother to grow a dick or cunt.</i>\"");
 				SceneLib.combat.cleanupAfterCombatImpl();
 			} 

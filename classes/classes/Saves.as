@@ -638,7 +638,6 @@ public function savePermObject(isFile:Boolean):void {
 		saveFile.data.flags[kFLAGS.BACKGROUND_STYLE] = flags[kFLAGS.BACKGROUND_STYLE];
 		saveFile.data.flags[kFLAGS.IMAGEPACK_OFF] = flags[kFLAGS.IMAGEPACK_OFF];
 		saveFile.data.flags[kFLAGS.SPRITE_STYLE] = flags[kFLAGS.SPRITE_STYLE];
-		saveFile.data.flags[kFLAGS.SFW_MODE] = flags[kFLAGS.SFW_MODE];
 		saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] = flags[kFLAGS.WATERSPORTS_ENABLED];
 		saveFile.data.flags[kFLAGS.USE_12_HOURS] = flags[kFLAGS.USE_12_HOURS];
 		saveFile.data.flags[kFLAGS.USE_METRICS] = flags[kFLAGS.USE_METRICS];
@@ -705,7 +704,6 @@ public function loadPermObject():void {
 			if (saveFile.data.flags[kFLAGS.BACKGROUND_STYLE] != undefined) flags[kFLAGS.BACKGROUND_STYLE] = saveFile.data.flags[kFLAGS.BACKGROUND_STYLE];
 			if (saveFile.data.flags[kFLAGS.IMAGEPACK_OFF] != undefined) flags[kFLAGS.IMAGEPACK_OFF] = saveFile.data.flags[kFLAGS.IMAGEPACK_OFF];
 			if (saveFile.data.flags[kFLAGS.SPRITE_STYLE] != undefined) flags[kFLAGS.SPRITE_STYLE] = saveFile.data.flags[kFLAGS.SPRITE_STYLE];
-			if (saveFile.data.flags[kFLAGS.SFW_MODE] != undefined) flags[kFLAGS.SFW_MODE] = saveFile.data.flags[kFLAGS.SFW_MODE];
 			if (saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] != undefined) flags[kFLAGS.WATERSPORTS_ENABLED] = saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED];
 			if (saveFile.data.flags[kFLAGS.USE_12_HOURS] != undefined) flags[kFLAGS.USE_12_HOURS] = saveFile.data.flags[kFLAGS.USE_12_HOURS];
 			if (saveFile.data.flags[kFLAGS.USE_METRICS] != undefined) flags[kFLAGS.USE_METRICS] = saveFile.data.flags[kFLAGS.USE_METRICS];
@@ -1304,7 +1302,6 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 
 		// Keybinds
         saveFile.data.controls = CoC.instance.inputManager.SaveBindsToObj();
-        // TODO @Oxdeception recheck
 		saveFile.data.world = [];
 		saveFile.data.world.x = [];
 		for each(var npc:XXCNPC in XXCNPC.SavedNPCs){
@@ -2313,7 +2310,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 
 
 				// backwards compatibility
-				//TODO is there a better way to do this?
 				if(saveFile.data.vaginas[i].clitLength == undefined) {
 					player.vaginas[i].clitLength = VaginaClass.DEFAULT_CLIT_LENGTH;
 					trace("Clit length was not loaded, setting to default.");
@@ -2400,7 +2396,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			}
 
 			if (ptype == null) {
-				trace("ERROR: Unknown perk id=" + id);
+				CoC_Settings.error("Unknown perk id=" + id);
 				//(saveFile.data.perks as Array).splice(i,1);
 				// NEVER EVER EVER MODIFY DATA IN THE SAVE FILE LIKE THIS. EVER. FOR ANY REASON.
 			} else {
@@ -2804,7 +2800,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			game.inputManager.LoadBindsFromObj(saveFile.data.controls);
 		}
 
-		// TODO @Oxdeception recheck
 		XXCNPC.unloadSavedNPCs();
 		if(saveFile.data.world == undefined){saveFile.data.world = [];}
 		if(saveFile.data.world.x == undefined){saveFile.data.world.x = [];}

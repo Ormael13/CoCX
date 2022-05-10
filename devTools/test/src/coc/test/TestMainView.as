@@ -24,7 +24,6 @@ package coc.test {
 			this.gameModel.flags[kFLAGS. 273 ] = 0;
 			this.mainView.selectSprite( 2 );
 
-			// TODO: put in actual callbacks here because that be how we do, now.
 			this.mainView.setButton( 0, 'Lol' );
 			this.mainView.setButton( 4, 'Poop' );
 			this.mainView.setButton( 6, 'Penis' );

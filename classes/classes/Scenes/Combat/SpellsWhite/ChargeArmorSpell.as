@@ -1,6 +1,7 @@
 package classes.Scenes.Combat.SpellsWhite {
 import classes.PerkLib;
 import classes.Scenes.Combat.AbstractWhiteSpell;
+import classes.Scenes.Combat.CombatAbilities;
 import classes.StatusEffects;
 
 public class ChargeArmorSpell extends AbstractWhiteSpell {
@@ -36,7 +37,8 @@ public class ChargeArmorSpell extends AbstractWhiteSpell {
 		if (player.hasStatusEffect(StatusEffects.ChargeArmor)) {
 			if (player.statusEffectv2(StatusEffects.ChargeArmor) <= 0) {
 				player.removeStatusEffect(StatusEffects.ChargeArmor);
-				if (display) outputText("<b>Charged Armor effect wore off!</b>\n\n");
+				if (player.hasPerk(PerkLib.SelfbuffsProficiencyEx) && player.mana >= CombatAbilities.ChargeArmor.manaCost()) CombatAbilities.ChargeArmor.autocast();
+				else if (display) outputText("<b>Charged Armor effect wore off!</b>\n\n");
 			} else {
 				if (!player.hasPerk(PerkLib.PureMagic)) player.addStatusValue(StatusEffects.ChargeArmor, 2, -1);
 			}
@@ -57,7 +59,7 @@ public class ChargeArmorSpell extends AbstractWhiteSpell {
 	private function armorTypeMultiplier():Number {
 		var a12b:Number = 1;
 		if (player.armorPerk == "Medium") a12b *= 2;
-		if (player.armorPerk == "Heavy") a12b *= 3;
+		if (player.armorPerk == "Heavy" || player.armorName == "Drider-weave Armor") a12b *= 3;
 		if (player.armorPerk == "Light Ayo") a12b *= 4;
 		if (player.armorPerk == "Heavy Ayo") a12b *= 5;
 		if (player.armorPerk == "Ultra Heavy Ayo") a12b *= 7.5;
@@ -70,12 +72,19 @@ public class ChargeArmorSpell extends AbstractWhiteSpell {
 		if (player.hasStatusEffect(StatusEffects.SiegweirdTraining)) spellChargeArmorMultiplier *= 0.5;
 		if (player.hasPerk(PerkLib.EverLastingBuffs)) spellChargeArmorMultiplier *= 2;
 		if (player.hasPerk(PerkLib.EternalyLastingBuffs)) spellChargeArmorMultiplier *= 2;
+		if (player.hasPerk(PerkLib.SelfbuffsProficiencySu)) spellChargeArmorMultiplier *= 2;
 		return spellChargeArmorMultiplier;
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		var ChargeArmorBoostCap:Number = 4;
 		var ChargeArmorBoost:Number = 5;
+		if (player.hasPerk(PerkLib.SelfbuffsProficiency)) {
+			var capB:Number = 1.2;
+			if (player.hasPerk(PerkLib.SelfbuffsProficiencyEx)) capB += 0.8;
+			if (player.hasPerk(PerkLib.SelfbuffsProficiencySu)) capB *= 5;
+			ChargeArmorBoostCap *= capB;
+		}
 		ChargeArmorBoostCap *= ChargeArmorBoost;
 		if (player.hasPerk(PerkLib.DivineArmament)) {
 			ChargeArmorBoostCap *= 2;

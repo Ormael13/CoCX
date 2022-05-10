@@ -300,7 +300,7 @@ import classes.Scenes.SceneLib;
 			return SceneLib.urtaHeatRut;
 		}
 		// Valeria
-		protected function get valeria():Valeria
+		protected function get valeria():ValeriaScene
 		{
 			return SceneLib.valeria;
 		}

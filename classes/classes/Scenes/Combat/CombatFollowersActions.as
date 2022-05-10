@@ -167,7 +167,7 @@ import classes.StatusEffects;
 		public function etnaCombatActions1():void {
 			var lustDmg:Number = Math.round((player.statusEffectv2(StatusEffects.CombatFollowerEtna) / 6) * increasedEfficiencyOfAttacks());
 			outputText("Etna shoots a spike at [themonster], you can see the telltale sign of arousal in [monster his] movement. ");
-			monster.teased(lustDmg);
+			monster.teased(Math.round(monster.lustVuln * lustDmg));
 			outputText("\n\n");
 		}
 		public function etnaCombatActions2():void {
@@ -380,7 +380,7 @@ import classes.StatusEffects;
 			lustDmg + (rand(player.statusEffectv3(StatusEffects.CombatFollowerAlvina) - player.statusEffectv2(StatusEffects.CombatFollowerAlvina) * 2 + monster.cor) / 3);
 			lustDmg = Math.round(lustDmg * increasedEfficiencyOfAttacks());
 			outputText("Alvina incants a spell and a powerful wave of lust hits [themonster], leaving it more than aroused! ");
-			monster.teased(lustDmg);
+			monster.teased(Math.round(monster.lustVuln * lustDmg));
 			outputText("\n\n");
 		}
 		public function alvinaCombatActions3():void {
@@ -478,12 +478,12 @@ import classes.StatusEffects;
 		public function mitziCombatActions3():void {
 			var lustDmg:Number = Math.round((player.statusEffectv3(StatusEffects.CombatFollowerMitzi) / 6) * increasedEfficiencyOfAttacks());
 			outputText("Furxia throws out a barrage of aphrodisia laced needles at [themonster]. ");
-			monster.teased(lustDmg);
+			monster.teased(Math.round(monster.lustVuln * lustDmg));
 			outputText("\n\n");
 		}
 		public function mitziCombatActions4():void {
 			outputText("Roxy whips out two circular glass bottles filled with a pink liquid. She tosses them at [themonster] releasing a cloud of pink fog around [monster him]. ");
-			monster.teased(Math.round((rand(player.statusEffectv3(StatusEffects.CombatFollowerMitzi)/4)+20) * increasedEfficiencyOfAttacks()));
+			monster.teased(Math.round(monster.lustVuln * (rand(player.statusEffectv3(StatusEffects.CombatFollowerMitzi)/4)+20) * increasedEfficiencyOfAttacks()));
 			outputText("\n\n");
 			if (monster.hasStatusEffect(StatusEffects.LustDoTH)) monster.addStatusValue(StatusEffects.LustDoTH,1,1);
 			else monster.createStatusEffect(StatusEffects.LustDoTH,4,0.02,0,0);
@@ -866,7 +866,7 @@ import classes.StatusEffects;
 			doDamage(dmg14, true, true);
 			doDamage(dmg14, true, true);
 			doDamage(dmg14, true, true);
-			monster.teased(lustDmg);
+			monster.teased(Math.round(monster.lustVuln * lustDmg));
 			outputText("\n\n");
 		}
 		public function tyrantiaCombatActions2():void {
@@ -900,7 +900,7 @@ import classes.StatusEffects;
 			var lustDmg:Number = Math.round((25 + monster.lib / 5 + monster.sens / 5 + monster.cor / 5) * 4);
 			monster.statStore.addBuffObject({spe:-20}, "Web",{text:"Web"});
 			outputText("Tyrantia rushes forward, biting [themonster] and sinking her fangs into it. [Themonster] manages to get loose, but not before their blood coats her fangs. [Themonster] looks woozy, and slightly horny. ");
-			monster.teased(lustDmg);
+			monster.teased(Math.round(monster.lustVuln * lustDmg));
 			outputText("\n\n");
 		}
 		public function tyrantiaCombatActions5():void {

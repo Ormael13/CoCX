@@ -1,6 +1,6 @@
 /**
  * Original code by aimozg on 27.01.14.
- * Reworked for Mutations by Jtecx on 14.03.22.
+ * Extended for Mutations by Jtecx on 14.03.22.
  */
 package classes.IMutations
 {
@@ -14,7 +14,7 @@ package classes.IMutations
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.BlackHeartIM)
+            var pTier:int = player.perkv1(IMutationsLib.BlackHeartIM);
             if (pTier >= 1){
                 descS += "Increased Lust strike power, Empower Fascinate";
             }
@@ -72,7 +72,9 @@ package classes.IMutations
         //Mutations Buffs
         public function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            pBuffs['lib.mult'] =  0.05 * pTier;
+            if (pTier >= 1) pBuffs['lib.mult'] += 0.05;
+            if (pTier >= 2) pBuffs['lib.mult'] += 0.1;
+            if (pTier >= 3) pBuffs['lib.mult'] += 0.15;
             return pBuffs;
         }
 

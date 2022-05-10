@@ -106,6 +106,7 @@ import classes.internals.*;
 				this.lust = 40;
 				this.level = 1;
 				this.gems = rand(5) + 5;
+				this.createPerk(PerkLib.OverMaxHP, 1, 0, 0, 0);
 			}
 			if (flags[kFLAGS.GALIA_LVL_UP] == 2) {
 				initStrTouSpeInte(35, 5, 5, 5);
@@ -119,6 +120,7 @@ import classes.internals.*;
 				this.lust = 40;
 				this.level = 7;
 				this.gems = rand(5) + 5;
+				this.createPerk(PerkLib.OverMaxHP, 7, 0, 0, 0);
 			}
 			if (flags[kFLAGS.GALIA_LVL_UP] == 3) {
 				initStrTouSpeInte(35, 5, 5, 5);
@@ -132,6 +134,7 @@ import classes.internals.*;
 				this.lust = 40;
 				this.level = 13;
 				this.gems = rand(5) + 5;
+				this.createPerk(PerkLib.OverMaxHP, 13, 0, 0, 0);
 			}
 			if (flags[kFLAGS.GALIA_LVL_UP] == 4) {
 				initStrTouSpeInte(35, 5, 5, 5);
@@ -145,6 +148,7 @@ import classes.internals.*;
 				this.lust = 40;
 				this.level = 19;
 				this.gems = rand(5) + 5;
+				this.createPerk(PerkLib.OverMaxHP, 19, 0, 0, 0);
 			}
 			if (flags[kFLAGS.GALIA_LVL_UP] == 5) {//pierwsza specialna ewolucja/mutacja
 				initStrTouSpeInte(35, 5, 5, 5);

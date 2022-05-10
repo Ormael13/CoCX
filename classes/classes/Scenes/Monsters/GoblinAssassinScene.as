@@ -78,12 +78,12 @@ public class GoblinAssassinScene extends BaseContent
 			if(flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ASSASSIN] == 1)
 			{
 				outputText("A needle whizzes through the air and lands next to your foot. The fine craftsmanship along the side of the glass tube only brings you to one conclusion - it's owner has access to precision machinery and manufacturing capabilities uncommon in this land.");
-				outputText("\n\nYou ready your [weapon] as the needle's owner makes herself known, jumping down from on high into the dirt. Then few more jump down. They're a goblins, but ones with an air of confidence and poise, obviously an experienced fighters. Whether you planned on fighting or not, the goblins has no intention of letting you leave unspoiled.");
+				outputText("\n\nYou ready your [weapon] as the needle's owner makes herself known, jumping down from on high. Several more follow, spreading out to flank you. They're goblins, but ones with an air of confidence and poise. These shortstacks are clearly experienced fighters. Whether you planned on fighting or not, the goblins has no intention of letting you leave unspoiled.");
 				//[Initiate combat encounter – goblin assassin]
 			}
 			//Repeat Intro - Cell Chambers
 			else {
-				outputText("A familiar sight catches your attention as a shadowy blur lands in front of you - another group of goblin adventurers appears to be lurking around these parts. You ready your [weapon] as they straps on a belt loaded with various types of needles and assume a combat stances.");
+				outputText("A familiar sight catches your attention as a shadowy blur lands in front of you - another group of goblin adventurers, lurking around these parts. You ready your [weapon] as they drop their hands to their belts, each loaded with various types of needles. The group assume combat stances.");
 				//[Initiate combat encounter – goblin assassin]
 			}
 			flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ASSASSIN]++;
@@ -98,14 +98,12 @@ public class GoblinAssassinScene extends BaseContent
 		public function gobboAssassinBeatYaUp1():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_goblinAssassin);
-			if (doSFWloss()) return;
 			if(player.lust <= (player.maxLust() * 0.99)) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious assassin saunters up, a pair of fluid filled needles in her hands. She jams them into your [player.legs], emptying the contents into you before you can so much as stammer a protest. Burning lust pours through your veins unbidden, and you moan out loud as the chemicals have their way with you as easily as the goblin soon will.\n\n");
 			gobboAssassinBeatYaUp();
 		}
 		public function gobboAssassinBeatYaUp2():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_goblinAssassin);
-			if (doSFWloss()) return;
 			outputText("After you collapse on the ground, the goblins hold a short huddle to try and figure out what to do. It ends pretty quickly with the tallest one walking towards you. You don't have to be a genius to know she's going to have you all to herself.");
 			outputText(" To make sure you'll be easier to handle, the victorious assassin saunters up, a pair of fluid filled needles in her hands. She jams them into your [player.legs], emptying the contents into you before you can so much as stammer a protest. Burning lust pours through your veins unbidden, and you moan out loud as the chemicals have their way with you as easily as the goblin soon will.");
 			outputText("\n\n");
@@ -280,7 +278,7 @@ public class GoblinAssassinScene extends BaseContent
 				feeder = giveGoblinAMilkMustache;
 			}
 			if (player.lust >= 33 && player.gender > 0 && (fitsFuck != null || cuntFuck != null || tooBig != null ||
-					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null) && flags[kFLAGS.SFW_MODE] <= 0) {
+					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null)) {
 				outputText("\n\n<b>What do you do to her, and if anything, which of your body parts do you use?</b>");
 				menu();
 				if (fitsFuck != null) addButton(0, "Dick Fuck", fitsFuck);

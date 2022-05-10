@@ -296,7 +296,7 @@ package classes.Scenes.Places.HeXinDao
 				menu();
 				addButton(0, "Quest", BoardkeeperYangQuest);
 				addButton(1, "Talk", BoardkeeperYangTalk);
-				if (player.keyItemv1("Adventurer Guild: Copper plate") > 1)
+				if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0)
                     addButton(2, "Promotion", BoardkeeperYangPromotion).hint("Ask Yang for a promotion once you have completed enough jobs.");
                 else if (player.hasKeyItem("Adventurer Guild: Iron plate") >= 0)
                     addButtonDisabled(2, "Promotion", "Max level (NYI)");
@@ -451,12 +451,13 @@ package classes.Scenes.Places.HeXinDao
 					outputText("\"<i>Sorry [name] this job is only once per day. Come back tomorrow.</i>\"\n\n");
 				}
 				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 6) {
-					if (player.hasItem(useables.SEVTENT, 3)) {
+					if (player.hasItem(useables.SEVTENT, 3) || Slot05 >= 3) {
 						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
 						outputText("\"<i>Good job there. I hope those plants did not prove to much trouble. Here is your payment.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
-						player.destroyItems(useables.SEVTENT, 3);
+						if (Slot05 >= 3) Slot05 -= 3;
+						else player.destroyItems(useables.SEVTENT, 3);
 						flags[kFLAGS.SPIRIT_STONES] += 8;
 						statScreenRefresh();
 					}
@@ -467,12 +468,13 @@ package classes.Scenes.Places.HeXinDao
 					player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 2);
 				}
 				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 3) {
-					if (player.hasItem(useables.SEVTENT, 2)) {
+					if (player.hasItem(useables.SEVTENT, 2) || Slot05 >= 2) {
 						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
 						outputText("\"<i>Good job [name] here is your payment. along with a special training scroll.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
-						player.destroyItems(useables.SEVTENT, 2);
+						if (Slot05 >= 2) Slot05 -= 2;
+						else player.destroyItems(useables.SEVTENT, 2);
 						player.perkPoints += 1;
 					}
 					else outputText("You try turn in the quest, but Yang shakes her head. \"<i>You don't have enough tentacles, [name]. Why are you trying to turn this in? </i>\"\n\n");
@@ -482,7 +484,7 @@ package classes.Scenes.Places.HeXinDao
 					player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
 				}
 				else {
-					if (player.hasItem(useables.SEVTENT, 1)) {
+					if (player.hasItem(useables.SEVTENT, 1) || Slot05 >= 1) {
 						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
 						outputText("\"<i>My my, I wasn’t sure I would ever see you back.</i>\"\n\n");
 						outputText("Seems she misjudged you then?\n\n");
@@ -492,7 +494,8 @@ package classes.Scenes.Places.HeXinDao
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
 						player.createPerk(PerkLib.SenseWrath, 0, 0, 0, 0);
-						player.destroyItems(useables.SEVTENT, 1);
+						if (Slot05 >= 1) Slot05 -= 1;
+						else player.destroyItems(useables.SEVTENT, 1);
 					}
 					else outputText("You try turn in the quest but Yang tells you you don’t have enough tentacles yet.\n\n");
 				}
@@ -615,7 +618,7 @@ package classes.Scenes.Places.HeXinDao
 					player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 2);
 				}
 				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 3) {
-					if (player.hasItem(useables.FIMPSKL, 4) || Slot01 >= 4) {
+					if (player.hasItem(useables.FIMPSKL, 4) || Slot02 >= 4) {
 						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
 						outputText("\"<i>Good job there. I heard those creatures are actually out there killing instead of raping, it’s quite chilling. Here is your payment along with a special training scroll.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 2, 1);
@@ -631,7 +634,7 @@ package classes.Scenes.Places.HeXinDao
 					player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
 				}
 				else {
-					if (player.hasItem(useables.FIMPSKL, 3) || Slot01 >= 3) {
+					if (player.hasItem(useables.FIMPSKL, 3) || Slot02 >= 3) {
 						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
 						outputText("\"<i>My my, I wasn’t sure I would ever see you back.</i>\"\n\n");
 						outputText("Seems she misjudged you then?\n\n");
@@ -962,7 +965,7 @@ package classes.Scenes.Places.HeXinDao
 		}
 		public function BoardkeeperYangPromotion():void {
 			clearOutput();
-			if (player.keyItemv1("Adventurer Guild: Copper plate") > 1) {
+			if (player.keyItemvX("Adventurer Guild: Copper plate", 1) > 1) {
 				if (flags[kFLAGS.SPIRIT_STONES] >= 10) {
 					outputText("Yang nods, \"<i>Yep, it’s definitely time we promoted you. You pass from Copper plate to Iron, congratulations!</i>\"\n\n");
 					outputText("She hands you a new necklace, which you proceed to don up.\n\n");
@@ -978,7 +981,7 @@ package classes.Scenes.Places.HeXinDao
 					outputText("\"<i>Its ok just go to Moga Hen, he should be able to exchange those gem of yours for the local currency.</i>\"");
 				}
 			}
-			if (player.keyItemv1("Adventurer Guild: Iron plate") > 1) {
+			if (player.keyItemvX("Adventurer Guild: Iron plate", 1) > 1) {
 				if (flags[kFLAGS.SPIRIT_STONES] >= 15) {
 					outputText("Yang nod. \"<i>Yep it’s definitely time we promoted hou. You pass from Iron plate to Bronze, congratulations!</i>\"\n\n");
 					outputText("She hand you over a new necklace which you proceed to don up.\n\n");

@@ -21,7 +21,7 @@ private var daughtersCount:Number = 0;
 public function KitsuneShrine():void {
     var tailz:int = SceneLib.kitsuneScene.meditateAtKitsuneShrine();
     if (tailz == 9 && flags[kFLAGS.AYANE_FOLLOWER == 0]) {
-		outputText("\n\nYou see a form surging from the shadow of the shrine. It’s Ayane and you ponder how she found your camp.");
+		outputText("\n\nYou see a form surging from the shadow of the shrine. It’s Ayane. How did she find your camp?");
 		outputText("\n\nThe kitsune approaches and bows to you in reverence. \"<i>You have acquired a near deific status [name]. As a priestess of Taoth it would be an honor to serve as your attendant. That is, if you would allow me to follow and assist you.</i>\"");
 		outputText("\n\nA little surprised, you ask Ayane why she wants to serve you.");
 		outputText("\n\n\"<i>Nine-tailed kitsunes are, in every aspect, divine messengers of Taoth in the mortal world. By serving you I follow the fox god's teachings and uphold his will. It would be the highest honor for me.</i>\"");
@@ -88,16 +88,16 @@ public function HaveABoysBath():void {
 		    outputText(", your [cock biggest] makes it clear that you have the right to be amongst them.\n");
         else
             outputText(", they allow you to stay.\n")
-		outputText("\n\nThe bath didn't start yet, but you already bath in their glances. Some boys look slightly ucomfortable, others sneakily eye your treasures.");
+		outputText("\n\nThe bath hasn't started yet, but the boys are giving you odd looks. Some boys look slightly ucomfortable, others steal glances at your curves.");
 		if (player.cor < 33)
 			outputText("  You feel slightly nervous yourself under their hungry gazes, but try not to show your nervousness.\n\n");
 		else
-			outputText("You quickly notice their looks and even by chance show off your [breasts] and [butt].\n\n");
+			outputText("You quickly notice their glances, giving your boys a show of your [breasts] and [butt].\n\n");
 	}
 	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) outputText("Jojo isn’t exactly what you would call muscular, but his size and lean frame fits his mouse appearance.\n\n");
-	if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText("You're almost glad you don’t see any part of Rathazul’s body beyond the hip level. Though, you’re not particularly interested anyway.\n\n");
+	if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText("You're almost glad you don’t see any part of Rathazul’s body below the hips. Though, you’re not particularly interested anyway.\n\n");
 	if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] < 1 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) outputText("Arian doesn’t seem to hate the water. He's likely cold blooded and is probably enjoying it.\n\n");
-	if (flags[kFLAGS.IZMA_BROFIED] == 1) outputText("Since Izmael is a true guy now, he was allowed to bath with the boys.\n\n");
+	if (flags[kFLAGS.IZMA_BROFIED] == 1) outputText("Since Izmael is a true guy now, he was allowed to bathe with the boys.\n\n");
 	if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) outputText("Sitting near you, Konstantin relaxes and stretches his limbs. His large and thick build dwarf those from the other guys. While chit-chatting, he friendly puts one arm around you, and with the other he shamelessly washes his gigantic manhood, earning no few stares and some blushes from the other boys.\n\n");
     if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) {
 		outputText("Siegweird is at the edge of the hotspring, he's stripped down to his padded leather pants and only has his feet in the bubbling water");
@@ -163,7 +163,7 @@ public function PeepingTom3():void {
 		if (flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("While not entirely a girl, Izma is womanly enough that she was still accepted in the bath, her crotch well hidden behind a cloth.\n\n");
 		else outputText("While she was not always a girl, Izma is womanly enough that she was still accepted in the bath.\n\n");
 	}
-	if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) outputText("As a naga, Samirah takes a lot of space in the bath. You're glad you made it big enough to hold as many people as necessary.\n\n");
+	if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) outputText("As a naga, Samirah takes a lot of space in the bath. You're glad you made it big enough to hold as many people.\n\n");
 	if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) outputText("Diana is resting next to a set of medicinal and aromatic oils she regularly spray in the bath.\n\n");
 	//if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) Michiko
 	if (flags[kFLAGS.MITZI_RECRUITED] >= 4) outputText("Your resident goblin Mitzi saunters over, looking excited. She strips what little clothing she wears then climbs into the warm waters. Her large tits help her stay afloat as she lays back and relaxes, letting out a sigh of relief.\n\n");
@@ -173,9 +173,9 @@ public function PeepingTom3():void {
 	if (flags[kFLAGS.SIDONIE_FOLLOWER] >= 1) {
 		outputText("Sitting on a side of the spring that is spacious enough to accommodate her larger frame, Sidonie lies relaxed, among the girls. Most of them give her not-so subtle glances, some of them at her hefty bosom, but the most directed at the thick equine member dangling from the legs. Not caring too much about their looks, she simply lies and enjoy the bath.\n\n");
 	}
-	outputText("The girls are discussing womanly topics giving you a nice display of their assets.\n\n");
+	outputText("The girls are discussing womanly topics, giving you a nice display of their assets.\n\n");
 	if (emberScene.followerEmber() && (flags[kFLAGS.EMBER_GENDER] == 2 || flags[kFLAGS.EMBER_GENDER] == 3)) {
-		outputText("Something suddenly grabs you and lifts you by the leg. Turns out it’s Ember and she’s angry.\n\n");
+		outputText("Something suddenly grabs you and lifts you by the leg. You peer up at Ember and she’s angry.\n\n");
 		outputText("\"<i>Hey! What the hell are you doing [name]! I saw all of it, you were peeping!</i>\"\n\n");
 		outputText("All the girls leap out of the hot spring and rush toward you, calling you a jerk and a voyeur as they glare. One of them craftily suggests you deserve a proper punishment.\n\n");
 		outputText("\"<i>Since [name] wants to see us naked that badly, let’s offer him a show he won’t forget!</i>\"\n\n");
@@ -217,7 +217,7 @@ public function HaveAGirlBath():void {
 	if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_COCK_SIZE] < 1) outputText("Joy is quite silent for once, you expected her to constantly blabber lewd comments about everyone's nudity.\n\n");
 	if (followerKiha()) outputText("Kiha definitely doesn’t have a size complex, with her huge breasts leaving most of the other girls in the shade.\n\n");
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) outputText("Chi Chi, while small, easily sports a bigger cup than Amily.\n\n");
-	if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) outputText("Alvina does not seem to care about her breast size. Her dark charms and unholy attraction aura does everything for her. Naturally nobody but you can see she’s there as usual.\n\n");
+	if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) outputText("Alvina does not seem to care about her breast size. Her dark charms and unholy attraction aura does everything for her. Naturally, nobody but you can see she’s there.\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) outputText("Marble easily has the largest pair here, beating all of the other girls without contest, They’re probably the milkiest too.\n\n");
 	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) outputText("Isabella sings as she bathes, which is not surprising. You assume they’re folk songs from her home.\n\n");
 	if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
@@ -234,12 +234,12 @@ public function HaveAGirlBath():void {
 		if (player.kitsuneScore() >= 5) outputText(" and yours");
 		outputText(".\n\n");
 	}
-	if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) outputText("As a naga Samirah takes a lot of space in the bath. You're glad you made it big enough to hold as many people as necessary.\n\n");
+	if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) outputText("As a naga Samirah takes a lot of space in the bath. You're glad you made your pool as large as you could.\n\n");
 	if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) outputText("Diana is resting next to a set of medicinal and aromatic oils she regularly spray in the bath. Can’t say this is not welcome.\n\n");
 	//if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) Michiko
 	if (flags[kFLAGS.MITZI_RECRUITED] >= 4) outputText("Your resident goblin Mitzi saunters over, looking excited. She strips what little clothing she wears then climbs into the warm waters. Her large tits help her stay afloat as she lays back and relaxes, letting out a sigh of relief.\n\n");
 	if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) outputText("Excellia comes over to enjoy the soothing waters. She climbs in, letting out a content [exc moo] as she lays back letting the warm waters wash over her.\n\n");
-	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) outputText("Luna is enjoying a break relaxing for once as she is not on duty" + (flags[kFLAGS.LUNA_FOLLOWER] > 6 ? ", though for a few split second you imagined her doing doggy paddle in the water" : "") + ".\n\n");
+	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) outputText("Luna is enjoying a break, relaxing for once as she is not on duty" + (flags[kFLAGS.LUNA_FOLLOWER] > 6 ? ". You notice that she kicks off when she thinks nobody's watching, doing a doggy paddle in the water for a few moments. As she does, a childlike smile grows on her face." : "") + ".\n\n");
 	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
 		if (flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("While not entirely a girl, Izma is womanly enough that she was still accepted in the bath, her crotch well hidden behind a cloth.\n\n");
 		else outputText("While she was not always a girl, Izma is womanly enough that she was still accepted in the bath.\n\n");
@@ -270,11 +270,12 @@ public function HaveAGirlBath():void {
 public function HeavenTribulationThunderDoom():void {
 	clearOutput();
 	outputText("You failed. It wasn't even a struggle, having been defeated by a simple heavenly strike. Lightning courses through your body, wrecking untold destruction on your five viscera and six bowels.\n\n");
-	outputText("Whatever was the reason you not passed this tribulation you may have chance to correct them if you ever reincarnate to have second chance.\n\n");
+	outputText("Whatever the reason was, you not failed this tribulation. If you ever reincarnate you might have a second chance.\n\n");
 	//[GAME OVER]
 	EventParser.gameOver();
 }
 public function HclassHTintro():void {
+	spriteSelect(null);
 	outputText("\nAn expanse of ink-black clouds form from nowhere, engulfing the land in near-total darkness. You stand, looking up into the artificial night. You see a part of the clouds, directly above you, and from it, crimson lightning splits the sky, carving a trench in the ground in front of you. The unnatural lightning spreads, jagged webs across the black sky, the thunder roaring constantly in your ears. Your heart beats faster, your [skin] crawling with each crack.\n");
 	startCombat(new HclassHeavenTribulation());
 }
@@ -303,6 +304,7 @@ public function HclassHTsurvived():void {
 	cleanupAfterCombat();
 }
 public function GclassHTintro():void {
+	spriteSelect(null);
 	outputText("\nAn expanse of ink-black clouds form from nowhere, engulfing the land in near-total darkness. You stand, looking up into the artificial night. You see a part of the clouds, directly above you, and from it, crimson lightning splits the sky, carving a trench in the ground in front of you. The unnatural lightning spreads, jagged webs across the black sky, the thunder roaring constantly in your ears. Your heart beats faster, your [skin] crawling with each crack. The wind howls, and you break into a cold sweat. Your second tribulation starts now.\n");
 	startCombat(new GclassHeavenTribulation());
 }
@@ -335,13 +337,14 @@ public function GclassHTbeaten():void {
 }
 public function GclassHTsurvived():void {
 	clearOutput();
-	outputText("You survived, albeit in rough shape, but things could be worse. The Tribulations clouds disperse now that your trial has ended.\n\n");
+	outputText("You survived. You're in rough shape, but things could be worse. The Tribulation clouds disperse now that your trial has ended.\n\n");
 	outputText("<b>You can now freely fly.\n");
 	outputText("(Gained Perk: G class Heaven Tribulation Survivor)</b>\n");
 	player.createPerk(PerkLib.GclassHeavenTribulationSurvivor, 0, 0, 0, 0);
 	cleanupAfterCombat();
 }
 public function FclassHTintro():void {
+	spriteSelect(null);
 	outputText("\n An expanse of ink-black clouds form from nowhere, engulfing the land in near-total darkness. You stand, looking up into the artificial night. You see a part of the clouds, directly above you, and from it, crimson lightning splits the sky, carving a trench in the ground in front of you. The unnatural lightning spreads, jagged webs across the black sky, the thunder roaring constantly in your ears. Your heart beats faster, your [skin] crawling with each crack. The wind howls, and you break into a cold sweat. Your third tribulation starts now.\n");
 	startCombat(new FclassHeavenTribulation());
 }
@@ -383,8 +386,8 @@ public function FclassHTbeaten():void {
 }
 public function FclassHTsurvived():void {
 	clearOutput();
-	outputText("You survived, albeit in rough shape, but things could be worse. The Tribulations clouds disperse now that your trial has ended.\n\n");
-	outputText("<b>You can now create a clone, which could serve as main body replacement in case something bad happen to main body.\n");
+	outputText("You survived. You're in rough shape, but things could be worse. The Tribulation clouds disperse now that your trial has ended.\n\n");
+	outputText("<b>You can now create a clone. While this soulless husk can't be used now, should something happen to your main body, you can escape to this empty vessel.\n");
 	outputText("(Gained Perk: F class Heaven Tribulation Survivor)</b>\n");
 	player.createPerk(PerkLib.FclassHeavenTribulationSurvivor, 0, 0, 0, 0);
 	cleanupAfterCombat();
@@ -399,11 +402,11 @@ public function goblinsBirthScene():void {
 	}
 	outputText("A sudden gush of fluids erupts from your vagina - your water just broke. You moan in pleasure as you feel wriggling and squirming inside your belly, muscle contractions forcing it downwards.\n\n");
 	outputText("The pleasure only increase as your delivery continues... Arousal spikes through you as the contractions intensify, and as you feel something begin to pass you have a tiny orgasm. Yet this is only the beginning, and the contractions spike again, pushing you to orgasm as your daughter keeps moving forward. It repeats, over and over, nearly a dozen times she causes you to orgasm... this is even better then getting fucked! ");
-	if (daughtersCount > 1) outputText("Each new baby you pop is a new orgasm and by the end of it your tongue is panting out from pleasure, bet you look wonderful right now. ");
+	if (daughtersCount > 1) outputText("Each new baby you pop is a new orgasm and by the end of it your tongue is panting out from pleasure. ");
 	outputText("After an eternity of procreation and pleasure, you sense your ordeal is over and look for your newborn daughter"+(daughtersCount > 1 ? "s":"")+". ");
 	outputText(""+(daughtersCount > 1 ? "One of t":"T")+"he green skinned cutie is thankfully right there between your legs. You grab the newborn and cradle her against your breast. ");
 	if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] == 0) {
-		outputText("Still, since she is your firstborn, how will you name her?\n\n");
+		outputText("Still, since she is your firstborn, what will you name her?\n\n");
 		mainView.nameBox.text = "";
 		menu();
 		addButton(0, "Next", nameEldestGobo);
@@ -464,8 +467,6 @@ private function goblinsBirthScene2():void {
 	player.removeStatusEffect(StatusEffects.PCDaughters);
 	doNext(camp.returnToCampUseOneHour);
 }
-
-
 
 public function PCGoblinDaughters():void {
 	clearOutput();

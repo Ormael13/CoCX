@@ -21,8 +21,6 @@ import classes.PerkLib;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
-import classes.Transformations.PossibleEffect;
-import classes.Transformations.Transformation;
 import classes.Transformations.TransformationUtils;
 
 import classes.CoC;
@@ -198,24 +196,6 @@ public final class Mutations extends MutationsHelper {
         } else player.createStatusEffect(StatusEffects.Airweed, 24, 0, 0, 0);
     }
 
-    public function purePearlConfirm(player:Player):void {
-        clearOutput();
-        outputText("Are you sure you want to just eat the pearl?\n\n");
-        if (!player.hasStatusEffect(StatusEffects.SiegweirdTraining2) && flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 3
-        && (!player.hasStatusEffect(StatusEffects.AlvinaTraining2) || player.statusEffectv1(StatusEffects.AlvinaTraining2) < 3)
-        || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] < 1)
-            outputText("<i>You have a feeling that you might find more important uses for itin future.</i>")
-        doYesNo(curry(purePearl, player), playerMenu);
-    }
-
-    public function purePearl(player:Player):void {
-        clearOutput();
-        outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your core.");
-        dynStats("lus", -25, "cor", -10);
-        player.addCurse("lib", 10, 1);
-        if (!player.hasPerk(PerkLib.PurityBlessing)) player.createPerk(PerkLib.PurityBlessing, 0, 0, 0, 0);
-    }
-
     public function ezekielfruit(player:Player):void {
         clearOutput();
         outputText("You take first bite of fruit that Evangeline gave you.  Surprisingly it taste delicious as nothing else you tasted before so without thinking more you ate rest of the fruit.");
@@ -314,22 +294,6 @@ public final class Mutations extends MutationsHelper {
         HPChange(EngineCore.maxHP(), true);
         fatigue(-100);
         statScreenRefresh();
-    }
-
-    public function lowgradeelementalPearl(player:Player):void {
-        clearOutput();
-        outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of three steams of mystical energies spreading in your body.");
-        if (!player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolve)) player.createPerk(PerkLib.ElementalConjurerMindAndBodyResolve, 0, 0, 0, 0);
-    }
-    public function middlegradeelementalPearl(player:Player):void {
-        clearOutput();
-        outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of five steams of mystical energies spreading in your body.");
-        if (!player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedication)) player.createPerk(PerkLib.ElementalConjurerMindAndBodyDedication, 0, 0, 0, 0);
-    }
-    public function highgradeelementalPearl(player:Player):void {
-        clearOutput();
-        outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of seven steams of mystical energies spreading in your body.");
-        if (!player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice)) player.createPerk(PerkLib.ElementalConjurerMindAndBodySacrifice, 0, 0, 0, 0);
     }
 
     public function bagofcosmosA1(player:Player):void {
@@ -4685,7 +4649,7 @@ public final class Mutations extends MutationsHelper {
             else if (player.hasFur()) outputText("[pg]You sigh, suddenly feeling your fur become hot and wet.  You look down as your [armor] sinks partway into you.  With a start you realize your fur has melted away, melding into the slime-like coating that now serves as your skin.  You've become partly liquid and incredibly gooey!");
             else if (player.hasScales()) outputText("[pg]You sigh, feeling slippery wetness over your scales.  You reach to scratch it and come away with a slippery wet coating.  Your scales have transformed into a slimy goop!  Looking closer, you realize your entire body has become far more liquid in nature, and is semi-solid.  Your [armor] has even sunk partway into you.");
             else if (player.skin.base.type != Skin.GOO) outputText("[pg]You sigh, feeling your [armor] sink into you as your [skin] becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!");
-            player.skin.setBaseOnly({adj: "slimy", type: Skin.GOO});
+            player.skin.setBaseOnly({type: Skin.GOO, adj: "slimy"});
             if (!InCollection(player.skin.base.color, gooSkinColors) && type == 0) {
                 player.skin.base.color = randomChoice(gooSkinColors);
                 outputText("  Stranger still, your skintone changes to [skin color]!");
@@ -9532,7 +9496,7 @@ public final class Mutations extends MutationsHelper {
         //(Fur/Scales fall out replaced by chitin)
         if (!player.hasCoatOfType(Skin.CHITIN) && (player.ears.type == Ears.HUMAN || player.ears.type == Ears.ELFIN) && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
 			outputText("[pg]");
-			transformations.SkinChitin(Skin.COVERAGE_COMPLETE, {colors: ["pale white", "green"]}).applyEffect();
+            transformations.SkinChitin(Skin.COVERAGE_COMPLETE, {colors: ["pale white", "green"]}).applyEffect();
             changes++;
         }
         //(Gain human face)
@@ -9982,7 +9946,7 @@ public final class Mutations extends MutationsHelper {
         //Transparent skin
         if (player.hasPlainSkinOnly() && !player.hasGhostSkin() && !player.isGargoyle() && rand(3) == 0 && changes < changeLimit && type == 1) {
             outputText("[pg]You feel lightheaded all of a sudden. You bring your hands up to clutch your head only to find the color slowly fading from your skin or rather it’s losing its opacity altogether. You examine your body and see that you’ve become almost entirely transparent, adding to your ethereal appearance. <b>You now have transparent skin.</b>");
-            player.skin.setBaseOnly({adj: "transparent", type: Skin.TRANSPARENT});
+            player.skin.setBaseOnly({type: Skin.TRANSPARENT, adj: "transparent"});
             changes++;
         }
         //Skin pattern - black or white veins pattern - adv ghost tf

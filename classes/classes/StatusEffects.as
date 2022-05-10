@@ -702,7 +702,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const IncubusBribed:StatusEffectType           = mk("IncubusBribed");
 		public static const FactorySuccubusDefeated:StatusEffectType = mk("FactorySuccubusDefeated");
 		public static const MaraeComplete:StatusEffectType           = mk("Marae Complete");
-		public static const MaraesLethicite:StatusEffectType         = mk("Marae's Lethicite");
+		public static const MaraesLethicite:StatusEffectType         = mk("Marae's Lethicite"); //V1 - number of pieces remaining. DO NOT REMOVE THE EFFECT COMPLETELY!!!
 		public static const MaraesQuestStart:StatusEffectType        = mk("Marae's Quest Start");
 		public static const MetCorruptMarae:StatusEffectType         = mk("Met Corrupt Marae");
 		public static const MetMarae:StatusEffectType                = mk("Met Marae");
@@ -885,6 +885,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const AnemoneVenom:StatusEffectType              = AnemoneVenomDebuff.TYPE;
 		public static const ApophisVenom:StatusEffectType              = mkCombat("Apophis Venom");
 		public static const ArcaneWeb:StatusEffectType                 = mkCombat("Arcane Web");
+		public static const ATranscendentSoulField:StatusEffectType    = mkCombat("Absolute TranscendentSoul Field");
 		public static const AttackDisabled:StatusEffectType            = mkCombat("Attack Disabled");
 		public static const BalanceOfLife:StatusEffectType             = mkCombat("Balance of Life");
 		public static const Bammed1:StatusEffectType                   = mkCombat("Bammed1");//v1 - melee attack	v2 - range attack
@@ -1070,8 +1071,10 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Thunderstorm:StatusEffectType              = mkCombat("Thunderstorm");
 		public static const Titsmother:StatusEffectType                = mkCombat("Titsmother");
 		public static const TooAngryTooDie:StatusEffectType            = mkCombat("Too Angry Too Die");
+		public static const TranscendentSoulField:StatusEffectType     = mkCombat("TranscendentSoul Field");
 		public static const TranceTransformation:StatusEffectType      = mkCombat("Trance Transformation");
 		public static const TrollHold:StatusEffectType                 = mkCombat("Troll Hold");
+		public static const TrueFormAngel:StatusEffectType             = mkCombat("True Form (Angel)");
 		public static const TyrantState:StatusEffectType               = mkCombat("Tyrant State");
 		public static const UBERWEB:StatusEffectType                   = mkCombat("UBERWEB");
 		public static const UnderwaterAndIgnis:StatusEffectType        = mkCombat("UnderwaterAndIgnis");

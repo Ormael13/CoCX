@@ -196,18 +196,11 @@ public class Izumi extends Monster
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			flags[kFLAGS.IZUMI_TIMES_LOST_FIGHT]++;
+			this.cleanup();
 			if (player.hasStatusEffect(StatusEffects.Titsmother))
-			{
-				this.cleanup();
 				SceneLib.highMountains.izumiScenes.deathBySnuSnuIMeanGiantOniTits();
-				return;
-			}
 			else
-			{
-				this.cleanup();
 				SceneLib.highMountains.izumiScenes.fuckedUpByAFuckhugeOni();
-				return;
-			}
 		}
 		
 		// Override combat AI
@@ -430,7 +423,7 @@ public class Izumi extends Monster
 		{
 			outputText("Izumi raises one mighty foot and slams it to the ground with a victorious yell.  The ground itself actually shakes below your feet, threatening to knock you off balance.\n\n");
 			
-			if (player.getEvasionRoll()) // TODO: ensure this is correct
+			if (player.getEvasionRoll())
 			{
 				outputText("Leaping to the side, you manage to steady yourself against the wall, keeping your footing.");
 			}

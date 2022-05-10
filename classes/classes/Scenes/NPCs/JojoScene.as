@@ -129,7 +129,7 @@ public function corruptCampJojo():void {
 			return;
 		}
 		//Offer lethicite jojo tf if the player is ready
-		if(!player.hasStatusEffect(StatusEffects.JojoTFOffer) && player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemv2("Marae's Lethicite") < 3 && player.cor >= 75) {
+		if(!player.hasStatusEffect(StatusEffects.JojoTFOffer) && player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemvX("Marae's Lethicite", 1) > 0 && player.cor >= 75) {
 			jojoMutationOffer();
 			player.createStatusEffect(StatusEffects.JojoTFOffer,0,0,0,0);
 			return;
@@ -278,7 +278,7 @@ private function backToCamp():void
 
 private function jojoMutationOfferYes():void {
 	jojoSprite();
-	player.addKeyValue("Marae's Lethicite",2,1);
+	player.addKeyValue("Marae's Lethicite",1,-1);
 	clearOutput();
 	outputText("There's no question about it, this is a great idea.  It might be coming from the corruption in your blood, but why bother to fight it?  You take Marae's lethicite and grab one of the larger crystalline protrusions.  With a hard yank, you break it off from the main cluster, sending tiny crystalline shards over the campsite.  They vanish into the ground before you have a chance to gather them.\n\n");
 	outputText("Whether by luck or some unconscious demonic magic, the smaller piece of lethicite is rather phallic. If it weren't for the sharp corners and hard edges, it would look like a large dildo with a pair of balls at the base.  You put away the larger piece, focusing this tool and your plans for your pet.\n\n");
@@ -2247,7 +2247,16 @@ public function talkMenu():void
 	if (player.cor <= 10 && player.lust >= 33 && monk == -1) addButtonDisabled(9, "Sex?", "You need to spend more time with Jojo. \n\nTalk sessions: " + flags[kFLAGS.TIMES_TALKED_WITH_JOJO] + "/6 \nTraining sessions: " + flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] + "/10 \nMeditation sessions: " + player.statusEffectv1(StatusEffects.JojoMeditationCount) + "/10 \nYou must be pure enough and have sufficient lust as well.");
 	if (player.cor <= 10 && player.lust >= 33 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 6 && flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] >= 10 && player.statusEffectv1(StatusEffects.JojoMeditationCount) >= 10 && monk > -3) addButton(9, "Sex?", offerSexFirstTimeHighAffection).hint("You've spent quite the time with Jojo, maybe you can offer him if he's willing to have sex with you?"); //Will unlock consensual sex scenes.
 	if (monk <= -3) removeButton(9);
+	if (TyrantiaFollower.TyrantiaFollowerStage == 5) addButton(10, "Tyrantia", TyrantiaEggQuestJoJo);
 	addButton(14, "Back", jojoCamp);
+}
+
+private function TyrantiaEggQuestJoJo():void {
+	clearOutput();
+	outputText("You ask Jojo about his holy mantras and abilities, and if he could purify the unborn in such a way. You tell him about Tyrantia’s desire to have a family, and her guilt over her own corruption and how that’d affect a child.\n\n");
+	outputText("Jojo shakes his head, sending a ripple through his fur. \"<i>My methods draw upon a conscious desire to be free from taint and corruption.</i>\" He sits down. \"<i>I will meditate on your request, but I do not believe that I can help you.</i>\" You thank Jojo for his time and walk away, heavy-hearted.");
+	eachMinuteCount(15);
+	doNext(talkMenu);
 }
 
 //Talk
@@ -2547,7 +2556,6 @@ public function apparantlyJojoDOESlift():void
 		{
 			outputText("Jojo frowns, \"<i>I am willing to teach you [name], when I can.  However I am no master, therefore I am unworthy of taking a disciple.  But as your friend, I will teach you what I know so that you may protect yourself.  I believe our time would be better spent meditating.  There is very little you can do with these techniques without first finding your center.</i>\"\n\n");
 			// Kick back to previous menu
-			menu();
 			doNext(jojoCamp);
 			return;
 		}
@@ -2555,7 +2563,6 @@ public function apparantlyJojoDOESlift():void
 		{
 			outputText("Jojo smiles, \"<i>I am not a master, therefore I am unworthy of taking you on as a disciple... but as a friend I can teach you all I know.  Whenever you are ready, just ask.</i>.\"\n\n");
 			// Sounds like this should kick back to menu
-			menu();
 			doNext(jojoCamp);
 			return;
 		}
@@ -2567,7 +2574,6 @@ public function apparantlyJojoDOESlift():void
 		{
 			outputText("You ask the monk to continue your training; but he shakes his head.\n\n");
 			outputText("\"<i>Not yet [name]. Your body must be fit and rested before our training sessions. Rest first, and come back to me later.</i>\"\n\n");
-			menu();
 			doNext(jojoCamp);
 			return;
 		}
@@ -2652,7 +2658,10 @@ public function apparantlyJojoDOESlift():void
 		if (SceneLib.emberScene.followerEmber()) enlightenedBlurbs.push("You can hear Ember cleaning" + emberScene.emberMF("his", "her") + "scales.");
 		if (player.hasStatusEffect(StatusEffects.CampRathazul)) enlightenedBlurbs.push("You can hear Rathazul experimenting with surprisingly nimble fingers.");
 		if (sophieFollower()) enlightenedBlurbs.push("You can hear Sophie breathing as she sleeps.");
-		if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] > 0) enlightenedBlurbs.push("You can hear Izma flipping through the pages of a book."); // TODO: (if Izmael gets put in) you can hear Izmael doing push ups to stay fit.
+		if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] > 0) {
+			if (flags[kFLAGS.IZMA_BROFIED] > 0) enlightenedBlurbs.push("You can hear Izmael doing push-ups to stay fit.");
+			else enlightenedBlurbs.push("You can hear Izma flipping through the pages of a book.");
+		}
 		if (SceneLib.helScene.followerHel()) enlightenedBlurbs.push("You can hear Helia throwing her fists at nothing.");
 		outputText(enlightenedBlurbs[rand(enlightenedBlurbs.length)] + "\n\n");
 	}

@@ -89,6 +89,7 @@ import classes.Scenes.Dungeons.BeeHive.BeeGuards;
 					.elseDrop(useables.B_CHITN);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 35, 0, 0, 0);
 			checkMonster();
 		}
 		

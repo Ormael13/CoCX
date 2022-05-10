@@ -54,6 +54,8 @@ import classes.PerkLib;
 				case "dragonscale vest":
 				case "dragonscale loincloth":
 				case "dragonscale thong":
+				case "drider bra":
+				case "drider panties":
 					return 2;
 				case "ebonweave corset":
 				case "ebonweave vest":
@@ -88,7 +90,10 @@ import classes.PerkLib;
 					return 2;
 				case "HB shirt":
 				case "HB panties":
+				case "drider bra":
 					return 3;
+				case "drider panties":
+					return 4;
 				default:
 					return 0;
 			}
@@ -114,14 +119,15 @@ import classes.PerkLib;
 				case "ebonweave thong":
 				case "ebonweave jockstrap":
 				case "stockings and garters":
-				case "drider bra":
-				case "drider panties":
 					return 2;
 				case "rune thong":
 				case "rune jock":
 				case "cow girl bra":
 				case "cow girl panties":
 					return 3;
+				case "drider bra":
+				case "drider panties":
+					return 4;
 				default:
 					return 0;
 			}

@@ -5,8 +5,6 @@
 package classes.Scenes.Areas.Forest 
 {
 import classes.*;
-import classes.GlobalFlags.*;
-import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Holidays;
 import classes.internals.ChainedDrop;
 

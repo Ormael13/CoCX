@@ -95,16 +95,46 @@ import classes.internals.SaveableState;
 		//WaizAbiStory: 1 - x, 2 - x, 3 - x
 		public function bimboMonkey():void {
 			clearOutput();
-			outputText("\n\n");
+			outputText("\"<i>O Hai there,</i>\" she says looking over you from head to feet and back. \"<i>Mmmmm maybe you could put a good 'fight' or if not then at least good beatdown...</i>\" she trails out licking her lips slowly.\n\n");
+			outputText("Wait what fight she mean? Is that some nonsense that any bimbo here would say or is ther deeper meaning to this?\n\n");
+			outputText("\"<i>I not know. Maybe it's up to you te decide what it mean. Right?</i>\" She awaits your reaction while sipping some liquid from the glass she hold.\n\n");
 			menu();
-			addButton(4, "Back", curry(SceneLib.journeyToTheEast.enteringInn, false));
+			addButton(1, "Sex", bimboMonkeySex);//(Koshya appearance here)
+			addButton(2, "Fight", bimboMonkeyFight);//(And here)
+			//3 - Drink (but not he.... jk also here appears)
+			addButton(14, "Back", curry(SceneLib.journeyToTheEast.enteringInn, false));
+		}//outputText("\"<i></i>\"\n\n");
+		public function bimboMonkeySex():void {
+			clearOutput();
+			outputText("Then maybe a good 'fight'?\n\n");
+			outputText("\"<i>Really???</i>\" her eyes nearly shines as she puts away the glass. After getting up she grabs your hand and leads you toward the entrance.\n\n");
+			outputText("\"<i>Stop right there you sexual offender...</i>\" after leaving inn you hear someone calling you out. After turning around you see pale blue skinned female of averange look with snow white wings folded on her back. She walks to you and standing between you and monkey bimbo cast you contempting look.\n\n");
+			outputText("\"<i>Return alone miss. I have someone to teach a lesson.</i>\" Newcommer speaks to monkey which after very long moment of hesistation nods and starting to walk away. Meanwhile blue-skinned angel points toward direction of Soul Arena. \"<i>Would you go on your own or should i drag you there?</i>\"\n\n");
+			outputText("Slight annoyed by missed 'fight' you walks to the arena and enter one of it sections.\n\n");
+			outputText("\"<i>Now, shall we start education?</i>\" After asking angelic woman assunme combat pose unfolding her wings.\n\n");
+			startCombat(new Koshya());
+		}
+		public function bimboMonkeyFight():void {
+			clearOutput();
+			outputText("You're down for some good beatdown.\n\n");
+			outputText("\"<i>Ohhh beatdown. Well i can get behind that too.</i>\" she slowly puts away the glass. After getting up she grabs your hand and leads you toward the entrance.\n\n");
+			outputText("You follow her thou the village until both of you enter the Soul Arena. Picking one of empty parts of it both of you stand on oppposite of each others when pale blue skinned female of averange look with snow white wings folded on her back interrupts.\n\n");
+			outputText("\"<i>Miss. You shouldn't fight. Let this humble servant replace you in this brawl. I shall try my best to not dissapoint your opponent.</i>\" She speaks gently but you got some gut feeling she may get mroe forcefully as long her miss not agree to this request.\n\n");
+			outputText("\"<i>But why i can't even fight. No fuck no fights. You're such a boring servant.</i>\" Bimbo monkey pouts but still slowly walking toward the nearby stands. \"<i>Fine but next time you won;t interrupt my fight...</i>\"\n\n");
+			outputText("\"<i>Of course milady.</i>\" Replies angelic woman as she take the monkey spot before you unfolding her wings.\n\n");
+			startCombat(new Koshya());
+		}
+		public function bimboMonkeyDrink():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+			
 		}
 		
 		public function WaizAbiMainMenu():void {
 			
 		}
 		
-		public function c():void {
+		/*public function c():void {
 			
 		}
 		
@@ -114,6 +144,6 @@ import classes.internals.SaveableState;
 		
 		public function a():void {
 			
-		}
+		}*/
 	}
 }

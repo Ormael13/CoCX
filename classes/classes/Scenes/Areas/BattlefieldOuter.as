@@ -38,6 +38,11 @@ use namespace CoC;
 				else SceneLib.tyrania.firstEncounter();
 				return;
 			}
+			//
+			if (rand(3) == 0 && player.level >= 45) {// && 
+				SceneLib.iridesianFollower.firstMeetingIridesian();
+				return;
+			}
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helFollower.followerHel()) {
 				SceneLib.helScene.helSexualAmbush();

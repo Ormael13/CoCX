@@ -5,12 +5,8 @@ import classes.GlobalFlags.kFLAGS;
 import classes.ItemType;
 import classes.PregnancyStore;
 import classes.Scenes.Camp;
-import classes.Scenes.Areas.Forest.Nightmare;
-import classes.StatusEffects.HeatEffect;
 import classes.TimeAwareInterface;
 import classes.PerkLib;
-import classes.BodyParts.Horns;
-import classes.BodyParts.Wings;
 import classes.StatusEffects;
 import classes.display.SpriteDb;
 
@@ -29,6 +25,9 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	private static const _ageCanMeetNightmare:int = -3;
 	private static const _ageDidPregnancy:int = -4;
 	private static const _ageIsDeadOrRemoved:int = -5;
+
+	private static const _finishedUnicorn:int = 1;
+	private static const _finishedNightmare:int = -1;
 
 	private static var _instance:CelessScene;
 
@@ -75,6 +74,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		}
 	}
 
+	private var _questFinished:int = 0;
 	private var _age:int = 0;
 	private var _corruption:int = 0;
 	private var _name:String = "Celess";
@@ -101,6 +101,24 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		_age = _ageIsDeadOrRemoved;
 	}
 
+	public function get questFinishedUnicorn():Boolean {
+		return _questFinished == 1;
+	}
+	public function get questFinishedNightmare():Boolean {
+		return _questFinished == -1;
+	}
+
+	//Used for save update
+	public function fixQuestFinished():Boolean {
+		if (!canMeetNightmare() && !canMeetUnicorn() && _age != 0) {//can't meet anyone, but the quest is progressed.
+			if (player.hasPerk(PerkLib.BicornBlessing))
+				_questFinished = _finishedNightmare;
+			else _questFinished = _finishedUnicorn;
+			return true; //fixed
+		}
+		return false; //nothing to fix
+	}
+
 	public override function unload():void {
 		EventParser.timeAwareClassRemove(_instance);
 		Camp.removeFollower(_instance);
@@ -113,7 +131,8 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			age: _age,
 			corruption: _corruption,
 			name: _name,
-			armorFound: _armorFound
+			armorFound: _armorFound,
+			questFinished: _questFinished
 		}
 	}
 
@@ -128,6 +147,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			_corruption = loadfrom.celess.corruption;
 			_name = loadfrom.celess.name;
 			_armorFound = loadfrom.celess.armorFound;
+			_questFinished = loadfrom.celess.questFinished;
 		}
 	}
 
@@ -359,11 +379,18 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			[weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
 			[weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
 			[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD],
-			[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR]
+			[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR],
+			[armors.BLKIMONO, armors.IBKIMO, armors.TCKIMO],
+			[armors.BKIMONO, armors.IBKIMO, armors.TCKIMO],
+			[armors.PKIMONO, armors.IBKIMO, armors.TCKIMO],
+			[armors.RKIMONO, armors.IBKIMO, armors.TCKIMO],
+			[armors.WKIMONO, armors.IBKIMO, armors.TCKIMO],
+			[armors.SPKIMO, armors.OEKIMO, armors.OTKIMO],
+			[armors.CTPALAD, null, armors.CTBGUAR]
 		];
 		clearOutput();
 		outputText(""+_name+" can empower items using materials gems and her innate magic to bless or corrupt gear by using radiant shards and gems. Would you like her to create an epic item and in that case which?");// legendary
-		outputText("\n\n<b>You currently have "+player.keyItemv1("Radiant shard")+" radiant shards.</b>")
+		outputText("\n\n<b>You currently have "+player.keyItemvX("Radiant shard", 1)+" radiant shards.</b>")
 		//Celess
 		var selectfrom:int = isCorrupt ? 2 : 1;
 		var selectMenu:ButtonDataList = new ButtonDataList();
@@ -374,7 +401,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				var item:ItemType = improvableItems[i][selectfrom];
 				var from:ItemType = improvableItems[i][0];
 				selectMenu.add(item.id, curry(improveItem, item, from)).disableIf(!player.hasItem(from),"You need a "+from+" as a base to create this item")
-				.disableIf(player.keyItemv1("Radiant shard") < 3,"You need at least three radiant shards in order to create this item.")
+				.disableIf(player.keyItemvX("Radiant shard", 1) < 3,"You need at least three radiant shards in order to create this item.")
 				.disableIf(player.gems < 10000,"You need at least 20 000 gems in order to create this item");
 			}
 		}
@@ -396,7 +423,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				"A miracle happens, as the armament, gems and shards combines, changes shape and starts to glow with holy power.\n\n" +
 				"Finally done, she comes back to you and solemnly deposits the blessed armament in your hand.");
 			}
-			if(player.keyItemv1("Radiant shard") == 3) player.removeKeyItem("Radiant shard");
+			if(player.keyItemvX("Radiant shard", 1) == 3) player.removeKeyItem("Radiant shard");
 			else player.addKeyValue("Radiant shard",1,-3);
 			player.gems -= 20000;
 			player.destroyItems(from, 1);
@@ -408,6 +435,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		outputText("You ask " + _name + " what are radiant shards exactly."+
 				"\n\n<i>\"Well from what I think I may know they are the remains of artifacts of past legend. Items long lost to time that were probably used in the mythical age. They are useless by themselves, just small fragment of lost power, but if you were to bring in multiple, as well as a base for the shards to fuse with, I could weave back the lost item to life.\"</i>\n\n"+
 				"\n\n Truthfully, that your little girl talks about such grown up subject so early both makes you proud and creeps you out.");
+		doNext(campInteraction);
 	}
 
 	/*
@@ -553,6 +581,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
 				inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
 				_age = _ageDidPregnancy;
+				_questFinished = _finishedUnicorn;
 				break;
 			case 4:
 				celessGuardFuckHer();
@@ -610,6 +639,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				if (player.pregnancyIncubation == 0) player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
 				inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
 				_age = _ageDidPregnancy;
+				_questFinished = _finishedUnicorn;
 				break;
 			case 4:
 				celessGuardFuckHer();
@@ -745,7 +775,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		if (!isCorrupt)spriteSelect(SpriteDb.s_celessWhite);
 		clearOutput();
 		outputText("You stumble upon the forest grove where the shield used to be. "+
-		"The unicorn has long left but you spot a shine on the ground deeper in. "+
+		"The unicorn has long left, but you spot a shine on the ground deeper in. "+
 		"It looks like a set of untarnished silvery armor, likely an ancient treasure she left."+
 		"Upon unearthing the piece, you discover this full plate armor was clearly not made for a human but a centaur.\n\n"+
 		"The breastplate is ornamented with what you assume is a holy symbol, namely a blossoming oak tree" + (flags[kFLAGS.MET_MARAE] > 0?", obviously Marae's":"") + ". "+
@@ -757,6 +787,12 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	
 	public function nightmareDefeated():void {
 		_age = _ageDidPregnancy;
+		_questFinished = _finishedNightmare;
+		player.createPerk(PerkLib.BicornBlessing, 0, 0, 0, 0);
+		player.cor = 100;
+		player.sexReward("cum", "Vaginal");
+		player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
+		player.addStatusValue(StatusEffects.CanMeetNightmare, 1, 1);
 		cleanupAfterCombat();
 	}
 
@@ -771,7 +807,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			outputText("\"<i>Ahhhh so good… this feels way too good! …"+ player.mf("Dad", "Mom") +" please look!</i>\"\n\n");
 			outputText("Well, looks like it wasn’t pain, not at all. You watch spellbound as a duo of parallel horns, symbols of her corruption, push out of "+_name+"’s forehead. " +
 					"She holds her horns like a pair of dicks, playing her hands along their length as if trying to masturbate them. " +
-					"Speaking of which, her 25 inch long horse cock is now fully erect and throbbing, almost as if an invisible hand was toying with it, a thick flow of precum steadily seeping out already. " +
+					"Speaking of which, her 25-inch-long horse cock is now fully erect and throbbing, almost as if an invisible hand was toying with it, a thick flow of precum steadily seeping out already. " +
 					"Her breasts, currently D-cups, are progressively inflating, finally stopping somewhere around E-cups. " +
 					"And as her horns finish their growth, her horsecock explodes, splattering much of the ground, covering it in white. " +
 					"Your little girl seems to have matured to adulthood.\n\n" +

@@ -4,11 +4,9 @@ import classes.CoC;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Measurements;
-import classes.internals.Utils;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.Scenes.NPCs.Forgefather;
-import classes.PlayerAppearance;
 import classes.internals.Utils;
 
 public class ParserTags {
@@ -39,7 +37,7 @@ public class ParserTags {
         "ass"                   : function ():* { return CoC.instance.player.buttDescript(); },
         "asshole"               : function ():* { return CoC.instance.player.assholeDescript(); },
         "balls"                 : function ():* { return CoC.instance.player.ballsDescriptLight(); },
-        "ballsarticle"         : function ():* { return CoC.instance.player.ballsDescriptArticle(); },
+        "ballsarticle"          : function ():* { return CoC.instance.player.ballsDescriptArticle(); },
         "bodytype"              : function ():* { return CoC.instance.player.bodyType(); },
         "boyfriend"             : function ():* { return CoC.instance.player.mf("boyfriend", "girlfriend"); },
         "breasts"               : function ():* { return CoC.instance.player.breastDescript(0); },
@@ -114,7 +112,6 @@ public class ParserTags {
         "tallness"              : function ():* { return Measurements.footInchOrMetres(CoC.instance.player.tallness); },
         "doubletallness"        : function ():* { return Measurements.footInchOrMetres(CoC.instance.player.tallness * 2); },
         "quadrupletallness"     : function ():* { return Measurements.footInchOrMetres(CoC.instance.player.tallness * 2); },
-        "teasetext"             : function ():* { return SceneLib.combat.teaseText(); },
         "themonster"            : function ():* { return CoC.instance.monster.a + CoC.instance.monster.short; },
         "tongue"                : function ():* { return Appearance.tongueDescription(CoC.instance.player); },
         "uppergarment"          : function ():* { return CoC.instance.player.upperGarmentName; },
@@ -213,16 +210,16 @@ public class ParserTags {
      * arianMF("male","girly")
      */
     internal static var onyxLookups:Object = {
-        "man": function ():String {SceneLib.highMountains.templeofdivine.onyxMF("man", "woman"); },
+        "man": function ():String {SceneLib.templeofdivine.onyx.onyxMF("man", "woman"); },
         // argh! "Man" is the mass-noun for humanity, and I'm loathe to choose an even more esoteric variant.
         // Elverson/Spivak terminology is already esoteric enough, and it lacks a ungendered mass noun.
 
-        "ey"    : function ():String {return SceneLib.highMountains.templeofdivine.onyxMF("he", "she"); },
-        "em"    : function ():String {return SceneLib.highMountains.templeofdivine.onyxMF("him", "her"); },
-        "eir"   : function ():String {return SceneLib.highMountains.templeofdivine.onyxMF("his", "her"); },
-        "eirs"  : function ():String {return SceneLib.highMountains.templeofdivine.onyxMF("his", "hers"); },
-        "emself": function ():String {return SceneLib.highMountains.templeofdivine.onyxMF("himself", "herself"); },
-        "name"  : function ():String {return SceneLib.highMountains.templeofdivine.onyxName(); }
+        "ey"    : function ():String {return SceneLib.templeofdivine.onyx.onyxMF("he", "she"); },
+        "em"    : function ():String {return SceneLib.templeofdivine.onyx.onyxMF("him", "her"); },
+        "eir"   : function ():String {return SceneLib.templeofdivine.onyx.onyxMF("his", "her"); },
+        "eirs"  : function ():String {return SceneLib.templeofdivine.onyx.onyxMF("his", "hers"); },
+        "emself": function ():String {return SceneLib.templeofdivine.onyx.onyxMF("himself", "herself"); },
+        "name"  : function ():String {return SceneLib.templeofdivine.onyx.onyxName(); }
     };
 
     /** PC ASCII Aspect lookups for subject: "cock"*/

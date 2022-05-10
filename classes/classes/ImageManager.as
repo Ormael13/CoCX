@@ -157,7 +157,7 @@ import flash.display.Loader;
 			}
 			else
 			{
-				trace("Error in image loading. Tried to load image that was not tried to load? Wat.")
+				CoC_Settings.error("Error in image loading. Tried to load image that was not tried to load? Wat.")
 			}
 
 			//trace("Loaded file", e)

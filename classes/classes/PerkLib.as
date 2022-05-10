@@ -3,12 +3,8 @@
  */
 package classes
 {
-import classes.Player;
-import classes.BodyParts.Arms;
 import classes.BodyParts.Face;
-import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
-import classes.GlobalFlags.kFLAGS;
 import classes.Perks.*;
 
 public class PerkLib
@@ -16,7 +12,6 @@ public class PerkLib
 		public function get game():CoC{
 			return CoC.instance;
 		}
-		// UNSORTED perks TODO these are mostly incorrect perks: tested but never created
 		public static const Buttslut:PerkType = mk("Buttslut", "Buttslut",
 				"");
 		public static const Focused:PerkType = mk("Focused", "Focused",
@@ -472,15 +467,24 @@ public class PerkLib
 		public static const OffensiveStaffChanneling:PerkType = mk("Offensive Staff Channeling", "Offensive Staff Channeling",
 				"Allows you to cast splited offensive spell without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (Effect will not activate if you already have ways to multicast spells at reduced power)",
 				"You've chosen the 'Offensive Staff Channeling' perk. Allows you to cast splited offensive spell without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (Effect will not activate if you already have ways to multicast spells at reduced power)");
+		public static const SelfbuffsProficiency:PerkType = mk("Selfbuffs Proficiency", "Selfbuffs Proficiency",
+				"Increase max selfbuff max cap by 30%.",
+				"You've chosen the 'Selfbuffs Proficiency' perk. Increase max selfbuff max cap by 30%.");
+		public static const SelfbuffsProficiencyEx:PerkType = mk("Selfbuffs Proficiency (Ex)", "Selfbuffs Proficiency (Ex)",
+				"Increase max selfbuff max cap by 70%(100%). Enable recasting all active buffs when they're about to expire.",
+				"You've chosen the 'Selfbuffs Proficiency (Ex)' perk. Increase max selfbuff max cap by 70%(100%). Enable recasting all active buffs when they're about to expire.");
+		public static const SelfbuffsProficiencySu:PerkType = mk("Selfbuffs Proficiency (Su)", "Selfbuffs Proficiency (Su)",
+				"Increase max selfbuff max cap five times at the cost of using twice more mana to cast.",
+				"You've chosen the 'Selfbuffs Proficiency (Su)' perk. Increase max selfbuff max cap five times at the cost of using twice more mana to cast.");
 		public static const ElementalConjurerKnowledge:PerkType = mk("Elemental Conjurer Knowledge", "Elemental Conjurer Knowledge",
 				"You gained knowledge how to make elementals rank up process less resource consuming. (-40% needed mana/fatigue and 40% less HP lost during failure)",
 				"You've chosen the 'Elemental Conjurer Knowledge' perk, gaining knowledge on how to make the elemental rank up process less resource consuming. (-40% needed mana/fatigue and 40% less HP lost during failure)");
 		public static const ElementalConjurerKnowledgeEx:PerkType = mk("Elemental Conjurer Knowledge (Ex)", "Elemental Conjurer Knowledge (Ex)",
-				"Decrease chance to fail when ranking up an elemental or/and replace mana with elemental energy gained from sacrificing elemental shards to arcane circle.",
-				"You've chosen the 'Elemental Conjurer Knowledge (Ex)' perk, .");
+				"Decrease chance to fail (by ~10%) when ranking up an elemental and replace mana/fatigue with elemental energy gained from sacrificing elemental shards to arcane circle. (if not enough energy stored it will check as before for mana/fatigue costs)",
+				"You've chosen the 'Elemental Conjurer Knowledge (Ex)' perk. Decrease chance to fail (by ~10%) when ranking up an elemental and replace mana/fatigue with elemental energy gained from sacrificing elemental shards to arcane circle. (if not enough energy stored it will check as before for mana/fatigue costs)");
 		public static const ElementalConjurerKnowledgeSu:PerkType = mk("Elemental Conjurer Knowledge (Su)", "Elemental Conjurer Knowledge (Su)",
 				"Allows you to convert soulforce into elemental energy.",
-				"You've chosen the 'Elemental Conjurer Knowledge (Su)' perk, .");
+				"You've chosen the 'Elemental Conjurer Knowledge (Su)' perk. ");
 		public static const PartySynergy:PerkType = mk("Party Synergy", "Party Synergy",
 				"You and your companions in party will recieve multi bonus to basic stats like str or wis (+20% for PC and +50% for henchman). With each member beyond first bonus will increase arithmeticaly.",
 				"You've chosen the 'Party Synergy' perk. You and your companions in party will recieve multi bonus to basic stats like str or wis (+20% for PC and +50% for henchman). With each member beyond first bonus will increase arithmeticaly.");
@@ -496,9 +500,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -734,7 +735,7 @@ public class PerkLib
 				"Start every battle with Might enabled, if you meet Black Magic requirements before it starts.",
 				"You've chosen the 'Battlemage' perk. You start every battle with Might effect, as long as your Lust is sufficient to cast it before battle.");
 		public static const Battleshield:PerkType = mk("Battleshield", "Battleshield",
-				"Start every battle with Blink enabled, if you meet Black Magic requirements before it starts.",
+				"Start every battle with Mana Shield enabled, if you meet Lust requirements to cast it before battle.",
 				"You've chosen the 'Battleshield' perk. You start every battle with Mana Shield, as long as your Lust is sufficient to cast it before battle.");
 		public static const Bellows:PerkType = mk("Bellows", "Bellows",
 				"You've found an efficient way to keep the fire hot, allowing you to work faster. This increases your armor proficiency. (+5% phys/mag resistance)",
@@ -1661,7 +1662,7 @@ public class PerkLib
 		public static const HalfStepToAdvancedTranquilness:PerkType = mk("Half-step-to Advanced Tranquilness", "Half-step-to Advanced Tranquilness",
 				"Increases maximum wrath.",
 				"You've chosen the 'Half-step-to Advanced Tranquilness' perk. Thanks to your advanced anger managment training, your maximum wrath has been increased by 300!")
-				.withBuffs({'maxwrath_base':+300});;
+				.withBuffs({'maxwrath_base':+300});
 		public static const HalfStepToEpicEndurance:PerkType = mk("Half-step-to Epic Endurance", "Half-step-to Epic Endurance",
 				"Increases maximum fatigue by 3000.",
 				"You've chosen the 'Half-step-to Epic Endurance' perk. Thanks to your epic physical conditioning, your maximum fatigue has been increased by 3000!")
@@ -3719,6 +3720,8 @@ public class PerkLib
 		public static const Lustzerker:PerkType = mk("Lustzerker", "Lustzerker",
 				"Lustserking increases attack and physical defenses resistance but reduces lust resistance.")
 				.withBuffs({'maxwrath_base':+500});
+		public static const MagmaSlimeCore:PerkType = mk("Magma Slime Core", "Magma Slime Core",
+				"Grants more control over your slimy body, allowing you to go twice as long without fluids.");
 		public static const ManticoreCumAddict:PerkType = mk("Manticore Cum Addict", "Manticore Cum Addict",
 				"Causes you to crave cum frequently.  Yet at the same time grants you immunity to Minotaur Cum addiction.");
 		public static const MantisOvipositor:PerkType = mk("Mantis Ovipositor", "Mantis Ovipositor",
@@ -3729,7 +3732,6 @@ public class PerkLib
 		public static const MinotaurCumResistance:PerkType = mk("Minotaur Cum Resistance", "Minotaur Cum Resistance",
 				"You can never become a Minotaur Cum Addict. Grants immunity to Minotaur Cum addiction.");
 		public static const MindbreakerBrain1toX:MindBreakerBrain = new MindBreakerBrain();
-		//public static const ELFElvenSpearDancingFlurry1to4:ELFElvenSpearDancingFlurry = new ELFElvenSpearDancingFlurry();
 		public static const NaturalHerbalism:PerkType = mk("Natural herbalism", "Natural herbalism",
 				"Gain three times as many herbs and items from gathering and crafting. Poultice heals for 50% more. Gain herbalism experience faster.");
 		public static const Necromancy:PerkType = mk("Necromancy", "Necromancy",
@@ -3944,6 +3946,7 @@ public class PerkLib
 		public static const AlwaysSuccesfullRunaway:PerkType = mk("Always Succesfull Runaway", "Always Succesfull Runaway", "");
 		public static const DarknessNature:PerkType = mk("Darkness Nature", "Darkness Nature", "");
 		public static const DarknessVulnerability:PerkType = mk("Darkness Vulnerability", "Darkness Vulnerability", "");//NYU
+		public static const DieHardHP:PerkType = mk("DieHard HP", "DieHard HP", "");
 		public static const Enemy300Type:PerkType = mk("300-type enemy", "300-type enemy", "");
 		public static const EnemyBeastOrAnimalMorphType:PerkType = mk("Beast or Animal-morph enemy type", "Beast or Animal-morph enemy type", "");
 		public static const EnemyBossType:PerkType = mk("Boss-type enemy", "Boss-type enemy", "");
@@ -3963,6 +3966,7 @@ public class PerkLib
 		public static const EnemyHugeType:PerkType = mk("Huge-sized type enemy", "Huge-sized type enemy", "");//9+ ft. tall
 		public static const EnemyLargeGroupType:PerkType = mk("Large Group-type enemy", "Large Group-type enemy", "");
 		public static const EnemyPlantType:PerkType = mk("Plant-type enemy", "Plant-type enemy", "");
+		public static const EnemyTrueAngel:PerkType = mk("True Angel-type enemy", "True Angel-type enemy", "");
 		public static const EnemyTrueDemon:PerkType = mk("True Demon-type enemy", "True Demon-type enemy", "");
 		public static const EnemyResiliance:PerkType = mk("Resiliance Enemy", "Resiliance Enemy", "");
 		public static const FireNature:PerkType = mk("Fire Nature", "Fire Nature", "");
@@ -3974,14 +3978,12 @@ public class PerkLib
 		public static const MonsterRegeneration:PerkType = mk("Monster Regeneration", "Monster Regeneration", "");
 		public static const NoExpGained:PerkType = mk("No Exp Gained", "No Exp Gained", "");
 		public static const NoGemsLost:PerkType = mk("No Gems Lost", "No Gems Lost", "");
+		public static const OverMaxHP:PerkType = mk("OverMax HP", "OverMax HP", "");
 		public static const Sentience:PerkType = mk("Sentience", "Sentience", "");
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");//NYU
 		public static const UniqueNPC:PerkType = mk("Unique npc", "Unique npc", "");
 		//public static const Enemy_Type:PerkType = mk("-type enemy", "-type enemy", "");undead?
-		//public static const :PerkType = mk("", "", "");
-		//public static const :PerkType = mk("", "", "");
-		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", ""); na poźniej dopisane perki wzór
 //dodać także typy perków dla poszczególnych ras przeciwników tak, ze bedą mogły one mieć jakieś korzyści też (np. jak ma Dragon nature to bonusy jak PC miałby dragon score > 6))
@@ -4024,6 +4026,7 @@ public class PerkLib
 			ePerkL.push(MonsterRegeneration);
 			ePerkL.push(NoExpGained);
 			ePerkL.push(NoGemsLost);
+			ePerkL.push(OverMaxHP);
 			ePerkL.push(Sentience);
 			ePerkL.push(ShieldWielder);
 			ePerkL.push(TeaseResistance);
@@ -4925,7 +4928,7 @@ public class PerkLib
                     .requireInt(150)
                     .requireLevel(54);
             PrestigeJobTempest.requirePrestigeJobSlot()
-                    .requirePerks(JobDervish, JobWarrior, DualWield)
+                    .requirePerks(JobWarrior, DualWield)
                     .requireSpe(200)
                     .requireLevel(54);
 			//Tier 10 Speed Perks
@@ -5255,6 +5258,9 @@ public class PerkLib
             ImprovedManaShield.requirePerk(ArcaneShielding)
                     .requireInt(125)
                     .requireLevel(24);
+            SelfbuffsProficiency.requirePerk(JobEnchanter)
+                    .requireInt(120)
+                    .requireLevel(24);
             //Tier 5 Intelligence perks
             GrandArchmage2ndCircle.requirePerk(GrandArchmage)
                     .requireInt(150)
@@ -5319,6 +5325,9 @@ public class PerkLib
             GreyArchmage.requirePerk(GreyMage)
                     .requireInt(175)
                     .requireLevel(36);
+            SelfbuffsProficiencyEx.requirePerks(SelfbuffsProficiency, LongerLastingBuffsI)
+                    .requireInt(170)
+                    .requireLevel(36);
             //Tier 7 Intelligence perks
 			HalfStepToPeerlessSpirituality.requireWis(160)
                     .requireInt(240)
@@ -5334,6 +5343,9 @@ public class PerkLib
                     .requireLevel(48);
             GrandGreyArchmage.requirePerk(GreyArchmage)
                     .requireInt(225)
+                    .requireLevel(48);
+            SelfbuffsProficiencySu.requirePerks(SelfbuffsProficiencyEx, EverLastingBuffs)
+                    .requireInt(220)
                     .requireLevel(48);
             //Tier 9 Intelligence perks
         /*	PrestigeJobSeer.requirePrestigeJobSlot()
@@ -5610,9 +5622,9 @@ public class PerkLib
                     .requireLevel(30);
             FirstAttackElementalsEx.requirePerks(FirstAttackElementals, ElementalContractRank5)
                     .requireLevel(30);
-			/*ElementalConjurerKnowledgeEx.requirePerks(ElementalConjurerKnowledge, ElementalContractRank4)
+			ElementalConjurerKnowledgeEx.requirePerks(ElementalConjurerKnowledge, ElementalContractRank4)
 					.requireWis(150)
-                    .requireLevel(30);*/
+                    .requireLevel(30);
 			NamedBullet.requirePerk(ExpertGunslinger)
 					.requireWis(80)
                     .requireTou(75)
@@ -7046,4 +7058,4 @@ public class PerkLib
 	}
 	initDependencies();
 }
-}
+}

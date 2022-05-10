@@ -1,6 +1,6 @@
 /**
  * Original code by aimozg on 27.01.14.
- * Reworked for Mutations by Jtecx on 14.03.22.
+ * Extended for Mutations by Jtecx on 14.03.22.
  */
 package classes.IMutations
 {
@@ -14,7 +14,7 @@ public class DisplacerMetabolismMutation extends PerkType
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.DisplacerMetabolismIM)
+            var pTier:int = player.perkv1(IMutationsLib.DisplacerMetabolismIM);
             if (pTier >= 1){
                 descS += "Increase strength and speed, reduces int after consuming milk";
             }

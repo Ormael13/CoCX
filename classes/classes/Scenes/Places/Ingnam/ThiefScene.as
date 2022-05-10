@@ -46,7 +46,7 @@ package classes.Scenes.Places.Ingnam
 			monster.gems += flags[kFLAGS.THIEF_GEMS];
 			flags[kFLAGS.THIEF_GEMS] = 0;
 			menu();
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.lust >= 33) {
 				outputText("\n\nYou could punish the thief if you want to. If so, which parts would you use?");
 				if (player.hasCock()) {
 					if (player.cockThatFits(monster.analCapacity()) >= 0) addButton(0, "Anal Fuck", rapeThiefAnally).hint("The thief definitely needs to learn a lesson not to mess with you. Buttfuck the thief.");

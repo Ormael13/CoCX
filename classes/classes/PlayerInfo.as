@@ -6,6 +6,7 @@ import classes.GlobalFlags.*;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Scenes.NPCs.BelisaFollower;
+import classes.Scenes.NPCs.DriderTown;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.IsabellaScene;
@@ -1086,8 +1087,18 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.AMILY_MET] > 0)
 			childStats += "<b>Litters With Amily:</b> " + (flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]) + "\n";
 
-		if (flags[kFLAGS.BEHEMOTH_CHILDREN] > 0)
+		if (flags[kFLAGS.AYANE_CHILDREN_MALES] > 0)
+			childStats += "<b>Ayane Offspring (Males):</b> " + flags[kFLAGS.AYANE_CHILDREN_MALES] + "\n";
+		if (flags[kFLAGS.AYANE_CHILDREN_FEMALES] > 0)
+			childStats += "<b>Ayane Offspring (Females):</b> " + flags[kFLAGS.AYANE_CHILDREN_FEMALES] + "\n";
+		if (flags[kFLAGS.AYANE_CHILDREN_HERMS] > 0)
+			childStats += "<b>Ayane Offspring (Herms):</b> " + flags[kFLAGS.AYANE_CHILDREN_HERMS] + "\n";
+
+        if (flags[kFLAGS.BEHEMOTH_CHILDREN] > 0)
 			childStats += "<b>Children With Behemoth:</b> " + flags[kFLAGS.BEHEMOTH_CHILDREN] + "\n";
+
+		if (DriderTown.BelisaKids > 0)
+			childStats += "<b>Drider Children With Belisa:</b> " + DriderTown.BelisaKids + "\n";
 
 		if (flags[kFLAGS.BENOIT_EGGS] > 0)
 			childStats += "<b>Benoit Eggs Laid:</b> " + flags[kFLAGS.BENOIT_EGGS] + "\n";
@@ -1111,14 +1122,7 @@ public class PlayerInfo extends BaseContent {
         if (flags[kFLAGS.EMBER_EGGS] > 0)
 			childStats += "<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n";
 
-		if (flags[kFLAGS.AYANE_CHILDREN_MALES] > 0)
-			childStats += "<b>Ayane Offspring (Males):</b> " + flags[kFLAGS.AYANE_CHILDREN_MALES] + "\n";
-		if (flags[kFLAGS.AYANE_CHILDREN_FEMALES] > 0)
-			childStats += "<b>Ayane Offspring (Females):</b> " + flags[kFLAGS.AYANE_CHILDREN_FEMALES] + "\n";
-		if (flags[kFLAGS.AYANE_CHILDREN_HERMS] > 0)
-			childStats += "<b>Ayane Offspring (Herms):</b> " + flags[kFLAGS.AYANE_CHILDREN_HERMS] + "\n";
-
-        if (flags[kFLAGS.EXCELLIA_MALE_KIDS] > 0)
+		if (flags[kFLAGS.EXCELLIA_MALE_KIDS] > 0)
 			childStats += "<b>Excellia Offspring (Human Males):</b> " + flags[kFLAGS.EXCELLIA_MALE_KIDS] + "\n";
 		if (flags[kFLAGS.EXCELLIA_FEMALE_KIDS] > 0)
 			childStats += "<b>Excellia Offspring (Human Females):</b> " + flags[kFLAGS.EXCELLIA_FEMALE_KIDS] + "\n";
@@ -1168,7 +1172,11 @@ public class PlayerInfo extends BaseContent {
 			childStats += "<b>Kiha Offspring (Herms):</b> " + flags[kFLAGS.KIHA_CHILDREN_HERMS] + "\n";
         if (SceneLib.kihaFollower.totalKihaChildren() > 0)
             childStats += "<b>Total Children With Kiha:</b> " + SceneLib.kihaFollower.totalKihaChildren() + "\n";
-        if (SceneLib.mountain.salon.lynnetteApproval() != 0)
+        
+		if (DriderTown.LilyKidsPC > 0)
+			childStats += "<b>Drider Children With Lily:</b> " + DriderTown.LilyKidsPC + "\n";
+
+		if (SceneLib.mountain.salon.lynnetteApproval() != 0)
             childStats += "<b>Lynnette Children:</b> " + flags[kFLAGS.LYNNETTE_BABY_COUNT] + "\n";
 
 		if (flags[kFLAGS.MARBLE_KIDS] > 0)
@@ -1209,14 +1217,20 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 0)
 			childStats += "<b>Children With Tamani:</b> " + flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] + " (after all forms of natural selection)\n";
 
-        if (SceneLib.urtaPregs.urtaKids() > 0)
+        if ((DriderTown.TyrantiaFemaleKids + DriderTown.TyrantiaMaleKids) > 0) {
+			childStats += "<b>Drider Children With Tyrantia (total):</b> " + (DriderTown.TyrantiaFemaleKids + DriderTown.TyrantiaMaleKids) + "\n";
+			childStats += "<b>Drider Children With Tyrantia (females):</b> " + DriderTown.TyrantiaFemaleKids + "\n";
+			childStats += "<b>Drider Children With Tyrantia (males):</b> " + DriderTown.TyrantiaMaleKids + "\n";
+		}
+
+		if (SceneLib.urtaPregs.urtaKids() > 0)
             childStats += "<b>Children With Urta:</b> " + SceneLib.urtaPregs.urtaKids() + "\n";
 
 		if (flags[kFLAGS.ZENJI_KIDS] > 0)
             childStats += "<b>Kids with Zenji:</b> " + flags[kFLAGS.ZENJI_KIDS] + "\n";
         //Mino sons
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] > 0)
-			childStats += "<b>Number of Adult Minotaur Offspring:</b> " + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + "\n";
+		if (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] > 0)
+			childStats += "<b>Number of Adult Minotaur Offspring:</b> " + flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] + "\n";
 
 		//Alraune daughters
 		if (flags[kFLAGS.ALRAUNE_SEEDS] > 0)
@@ -1418,6 +1432,11 @@ public class PlayerInfo extends BaseContent {
 			masteryStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: " + player.teaseXP + " / " + combat.teaseExpToLevelUp() + ")\n";
 		else
 			masteryStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / " + combat.maxTeaseLevel() + " (Exp: MAX)\n";
+		masteryStats += "\n";
+		if (player.miningLevel < player.maxMiningLevel())
+			masteryStats += "<b>Mining Skill:</b>  " + player.miningLevel + " / " + player.maxMiningLevel() + " (Exp: " + player.miningXP + " / " + player.MiningExpToLevelUp() + ")\n";
+		else
+			masteryStats += "<b>Mining Skill:</b>  " + player.miningLevel + " / " + player.maxMiningLevel() + " (Exp: MAX)\n";
 		masteryStats += "\n";
 		if (player.herbalismLevel < player.maxHerbalismLevel())
 			masteryStats += "<b>Herbalism Skill:</b>  " + player.herbalismLevel + " / " + player.maxHerbalismLevel() + " (Exp: " + player.herbalismXP + " / " + player.HerbExpToLevelUp() + ")\n";
@@ -2001,20 +2020,21 @@ public class PlayerInfo extends BaseContent {
 				}
 				else addButtonDisabled(1, "M(at)G", "You need to reach level 105 first.");
 				if (player.level >= 120) {
-					if (player.hasPerk(PerkLib.MunchkinAtWork)) addButtonDisabled(1, "M(at)W", "You already have this perk.");
+					if (player.hasPerk(PerkLib.MunchkinAtWork)) addButtonDisabled(2, "M(at)W", "You already have this perk.");
 					else {
-						if (player.hasPerk(PerkLib.MunchkinAtGym)) addButton(1, "M(at)W", perkMunchkinAtWork).hint("Choose the 'Munchkin @Work' super munchkin perk. (+25% to Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, increase by 5% caps for mutagen, alchemic, knowledge multi)");
-						else addButtonDisabled(1, "M(at)W", "You do not have yet 'Munchkin @Gym' super munchkin perk.");
+						if (player.hasPerk(PerkLib.MunchkinAtGym)) addButton(2, "M(at)W", perkMunchkinAtWork).hint("Choose the 'Munchkin @Work' super munchkin perk. (+25% to Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, increase by 5% caps for mutagen, alchemic, knowledge multi)");
+						else addButtonDisabled(2, "M(at)W", "You do not have yet 'Munchkin @Gym' super munchkin perk.");
 					}
 				}
-				else addButtonDisabled(1, "M(at)W", "You need to reach level 120 first.");
+				else addButtonDisabled(2, "M(at)W", "You need to reach level 120 first.");
 			}
 			else {
 				if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButtonDisabled(0, "DJ:M", "You already have this perk.");
 				else addButtonDisabled(0, "DJ:M", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.MunchkinAtGym)) addButtonDisabled(1, "M(at)G", "You already have this perk.");
 				else addButtonDisabled(1, "M(at)G", "You do not have enough super perk points to obtain this perk.");
-				addButtonDisabled(2, "M(at)W", "Soon");
+				if (player.hasPerk(PerkLib.MunchkinAtWork)) addButtonDisabled(2, "M(at)W", "You already have this perk.");
+				else addButtonDisabled(2, "M(at)W", "You do not have enough super perk points to obtain this perk.");
 			}
 			addButton(12, "Next", superPerkBuyMenu, page + 1);
 			if (player.perkPoints > 2) addButton(13, "Convert", superPerkConvertMenu);

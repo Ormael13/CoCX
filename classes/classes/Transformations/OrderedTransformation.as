@@ -1,4 +1,6 @@
 package classes.Transformations {
+import classes.CoC_Settings;
+
 /**
  * Wrapper for several TFs organized into queue.
  * Every TF in queue requires all previous steps to be completed.
@@ -62,7 +64,7 @@ public class OrderedTransformation extends Transformation {
     override public function applyEffect(doOutput:Boolean = true):void {
         var tf:Transformation = nextTierTf();
         if (!tf) {
-            trace("ERROR: Ordered TF "+name+" apply called at max tier");
+            CoC_Settings.error("Ordered TF "+name+" apply called at max tier");
             return;
         }
         tf.applyEffect(doOutput);

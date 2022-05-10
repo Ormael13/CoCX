@@ -757,7 +757,7 @@ public class Creature extends Utils
 			if (game.player.demonScore() >= 11) maxmult += 0.4;
 			if (game.player.demonScore() >= 16) maxmult += 0.6;
 			if (TyrantiaFollower.TyrantiaTrainingSessions > 0.5) maxmult += 0.01 * TyrantiaFollower.TyrantiaTrainingSessions;
-			return 1;
+			return maxmult;
 		}
 		public function maxLust():Number {
 			var max:Number = Math.round(maxLust_base()*maxLust_mult());
@@ -1115,7 +1115,6 @@ public class Creature extends Utils
 		public var butt:Butt = new Butt();
 
 		//Piercings
-		//TODO: Pull this out into it's own class and enum.
 		public var nipplesPierced:Number = 0;
 		public var nipplesPShort:String = "";
 		public var nipplesPLong:String = "";
@@ -1149,7 +1148,6 @@ public class Creature extends Utils
 		//Sexual Stuff
 		//MALE STUFF
 		//public var cocks:Array;
-		//TODO: Tuck away into Male genital class?
 		public var cocks:Array;
 		//balls
 		public var balls:Number = 0;
@@ -1167,7 +1165,6 @@ public class Creature extends Utils
 		}
 
 		//FEMALE STUFF
-		//TODO: Box into Female genital class?
 		public var vaginas:Vector.<VaginaClass>;
 		//Fertility is a % out of 100.
 		public var fertility:Number = 10;
@@ -1177,7 +1174,7 @@ public class Creature extends Utils
 
 		public function get clitLength():Number {
 			if (vaginas.length==0) {
-				trace("[ERROR] get clitLength called with no vaginas present");
+				CoC_Settings.error("get clitLength called with no vaginas present");
 				return VaginaClass.DEFAULT_CLIT_LENGTH;
 			}
 			return vaginas[0].clitLength;
@@ -1185,7 +1182,7 @@ public class Creature extends Utils
 
 		public function set clitLength(value:Number):void {
 			if (vaginas.length==0) {
-				trace("[ERROR] set clitLength called with no vaginas present");
+				CoC_Settings.error("set clitLength called with no vaginas present");
 				return;
 			}
 			vaginas[0].clitLength = value;
@@ -1400,7 +1397,6 @@ public class Creature extends Utils
 
 		*/
 		//Monsters have few perks, which I think should be a status effect for clarity's sake.
-		//TODO: Move perks into monster status effects.
 		private var _perks:PerkManager;
 
 		public function get perkManager():PerkManager
@@ -1530,12 +1526,10 @@ public class Creature extends Utils
 
 		//Current status effects. This has got very muddy between perks and status effects. Will have to look into it.
 		//Someone call the grammar police!
-		//TODO: Move monster status effects into perks. Needs investigation though.
 		private var _statusEffects:StatusEffectManager;
 
 		//Current status effects. This has got very muddy between perks and status effects. Will have to look into it.
 		//Someone call the grammar police!
-		//TODO: Move monster status effects into perks. Needs investigation though.
 		/**
 		 * List of all status effects.
 		 */
@@ -1841,10 +1835,9 @@ public class Creature extends Utils
         * @param    minSize     Minimum size, 0/-1 = no checking
         * @param    maxSize     Maximum size, -1 = no checking
         * @param    compareBy   The measurement to compare by, "area", "length" or "thickness"
-        * @param    tentUnlim   If true, doesn't check the maximum size for tentacle cocks (you can twist them, makes sense?)
         * @return   The count of matching dicks
         */
-        public function countCocksWithType(type:CockTypesEnum, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
+        public function countCocksWithType(type:CockTypesEnum, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area"):int {
             if (compareBy != "area" && compareBy != "length" && compareBy != "thickness") //sanity check
                 throw new Error("Wrong compareBy value!");
             var cnt:int = 0;
@@ -1853,15 +1846,15 @@ public class Creature extends Utils
                 var isize:Number = compareBy == "length" ? cocks[i].cockLength :
                                 compareBy == "thickness" ? cocks[i].cockThickness :
                                 cockArea(i);
-                if ((isize >= minSize || minSize < 0) && (isize < maxSize || maxSize < 0 || tentUnlim && cockIsTentacle(i))
+                if ((isize >= minSize || minSize < 0) && (isize < maxSize || maxSize < 0)
                 && (cocks[i].cockType == type || tent && cockIsTentacle(i) || type == CockTypesEnum.UNDEFINED))
                     ++cnt;
             }
             return cnt;
         }
 		
-		public function countCocks(minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
-			return countCocksWithType(CockTypesEnum.UNDEFINED, minSize, maxSize, compareBy, tentUnlim);
+		public function countCocks(minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area"):int {
+			return countCocksWithType(CockTypesEnum.UNDEFINED, minSize, maxSize, compareBy);
 		}
 
         /**
@@ -1874,7 +1867,7 @@ public class Creature extends Utils
         * @param    compareBy   The measurement to compare by, "area", "length" or "thickness"
         * @return   The number of the biggest (comparing by 'compareBy') matching dick, -1 if no any
         */
-        public function findCockWithType(type:CockTypesEnum, biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
+        public function findCockWithType(type:CockTypesEnum, biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area"):int {
             if (compareBy != "area" && compareBy != "length" && compareBy != "thickness") //sanity check
                 throw new Error("Wrong compareBy value!");
             var sorted:Array = [];
@@ -1884,8 +1877,8 @@ public class Creature extends Utils
                 var nsize:Number = compareBy == "length" ? cocks[num].cockLength :
                                 compareBy == "thickness" ? cocks[num].cockThickness :
                                 cockArea(num);
-                if ((nsize >= minSize || minSize < 0) && (nsize < maxSize || maxSize < 0 || tentUnlim && cockIsTentacle(num))
-                && (cocks[num].cockType == type || tent && cockIsTentacle(num) || type == CockTypesEnum.UNDEFINED)) {
+                if ((nsize >= minSize || minSize < 0) && (nsize < maxSize || maxSize < 0)
+                && (type == CockTypesEnum.UNDEFINED || cocks[num].cockType == type || tent && cockIsTentacle(num))) {
                     var j:int;
                     for (j = 0; j < sorted.length; ++j) {
                         var jsize:Number = compareBy == "length" ? cocks[sorted[j]].cockLength :
@@ -1910,11 +1903,11 @@ public class Creature extends Utils
 			return sorted[0];
         }
 		
-		public function findCock(biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
-			return findCockWithType(CockTypesEnum.UNDEFINED, biggest, minSize, maxSize, compareBy, tentUnlim);
+		public function findCock(biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area"):int {
+			return findCockWithType(CockTypesEnum.UNDEFINED, biggest, minSize, maxSize, compareBy);
 		}
 
-        public function findCockWithTypeNotIn(arr:Array, type:CockTypesEnum, biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
+        public function findCockWithTypeNotIn(arr:Array, type:CockTypesEnum, biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area"):int {
             var ret:int = -1;
             var sign:int = (biggest >= 0) ? 1 : -1;
             var cnt:int = sign;
@@ -1922,7 +1915,7 @@ public class Creature extends Utils
             //correct 'biggest' value to account for zeros
             if (biggest == 0) biggest = 1;
             do {
-                ret = findCockWithType(type, cnt, minSize, maxSize, compareBy, tentUnlim); //find n-th cock
+                ret = findCockWithType(type, cnt, minSize, maxSize, compareBy); //find n-th cock
                 if (ret >= 0 && arr.indexOf(ret) == -1) { //count those outside of the array
                     if (biggest_cnt == biggest) //if found b-th cock, return it
                         return ret;
@@ -1934,8 +1927,8 @@ public class Creature extends Utils
             return -1;
         }
 
-		public function findCockNotIn(arr:Array, biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
-			return findCockWithTypeNotIn(arr, CockTypesEnum.UNDEFINED, biggest, minSize, maxSize, compareBy, tentUnlim);
+		public function findCockNotIn(arr:Array, biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area"):int {
+			return findCockWithTypeNotIn(arr, CockTypesEnum.UNDEFINED, biggest, minSize, maxSize, compareBy);
 		}
 
 		public function cockDescript(cockIndex:int = 0):String
@@ -2833,18 +2826,18 @@ public class Creature extends Utils
 			//Various Errors preventing action
 			if (arraySpot < 0 || totalRemoved <= 0)
 			{
-				//trace("ERROR: removeCock called but arraySpot is negative or totalRemoved is 0.");
+				CoC_Settings.error("removeCock called but arraySpot is negative or totalRemoved is 0.");
 				return;
 			}
 			if (cocks.length == 0)
 			{
-				//trace("ERROR: removeCock called but cocks do not exist.");
+				CoC_Settings.error("removeCock called but cocks do not exist.");
 			}
 			else
 			{
 				if (arraySpot > cocks.length - 1)
 				{
-					//trace("ERROR: removeCock failed - array location is beyond the bounds of the array.");
+					CoC_Settings.error("removeCock failed - array location is beyond the bounds of the array.");
 				}
 				else
 				{
@@ -2883,18 +2876,18 @@ public class Creature extends Utils
 			//Various Errors preventing action
 			if (arraySpot < -1 || totalRemoved <= 0)
 			{
-				//trace("ERROR: removeVagina called but arraySpot is negative or totalRemoved is 0.");
+				CoC_Settings.error("removeVagina called but arraySpot is negative or totalRemoved is 0.");
 				return;
 			}
 			if (vaginas.length == 0)
 			{
-				//trace("ERROR: removeVagina called but cocks do not exist.");
+				CoC_Settings.error("removeVagina called but cocks do not exist.");
 			}
 			else
 			{
 				if (arraySpot > vaginas.length - 1)
 				{
-					//trace("ERROR: removeVagina failed - array location is beyond the bounds of the array.");
+					CoC_Settings.error("removeVagina failed - array location is beyond the bounds of the array.");
 				}
 				else
 				{
@@ -2910,22 +2903,22 @@ public class Creature extends Utils
 			//Various Errors preventing action
 			if (arraySpot < -1 || totalRemoved <= 0)
 			{
-				//trace("ERROR: removeBreastRow called but arraySpot is negative or totalRemoved is 0.");
+				CoC_Settings.error("removeBreastRow called but arraySpot is negative or totalRemoved is 0.");
 				return;
 			}
 			if (breastRows.length == 0)
 			{
-				//trace("ERROR: removeBreastRow called but cocks do not exist.");
+				CoC_Settings.error("removeBreastRow called but cocks do not exist.");
 			}
 			else if (breastRows.length == 1 || breastRows.length - totalRemoved < 1)
 			{
-				//trace("ERROR: Removing the current breast row would break the Creature classes assumptions about breastRow contents.");
+				CoC_Settings.error("Removing the current breast row would break the Creature classes assumptions about breastRow contents.");
 			}
 			else
 			{
 				if (arraySpot > breastRows.length - 1)
 				{
-					//trace("ERROR: removeBreastRow failed - array location is beyond the bounds of the array.");
+					CoC_Settings.error("removeBreastRow failed - array location is beyond the bounds of the array.");
 				}
 				else
 				{
@@ -3835,7 +3828,7 @@ public class Creature extends Utils
 			if (game.player.hasKeyItem("Nitro Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 30;
 			if (hasPerk(PerkLib.JunglesWanderer)) chance += 35;
 			if (hasStatusEffect(StatusEffects.Illusion)) {
-				if (hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) chance += 20;
+				if (hasPerk(MutationsLib.KitsuneParathyroidGlandsEvolved)) chance += 30;
 				else chance += 10;
 			}
 			if (hasStatusEffect(StatusEffects.HurricaneDance)) chance += 25;
@@ -3922,7 +3915,7 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.AGILE) && (roll < 10)) return "Unhindered";
 			if (hasPerk(PerkLib.JunglesWanderer) && (roll < 35)) return "Jungle's Wanderer";
 			if (hasStatusEffect(StatusEffects.Illusion)) {
-				if (hasPerk(MutationsLib.KitsuneThyroidGlandEvolved) && roll < 20) return "Illusion";
+				if (hasPerk(MutationsLib.KitsuneParathyroidGlandsEvolved) && roll < 30) return "Illusion";
 				else if (roll < 10) return "Illusion";
 			}
 			if (hasStatusEffect(StatusEffects.Flying) && (roll < flyeavsion)) return "Flying";

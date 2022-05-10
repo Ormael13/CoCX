@@ -125,6 +125,7 @@ public class DemonPackBlightRidge extends Monster
 			if (TyrantiaFollower.TyrantiaFollowerStage == 2) this.createPerk(PerkLib.Enemy300Type, 0, 0, 0, 0);
 			else this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 30, 0, 0, 0);
 			checkMonster();
 		}
 		

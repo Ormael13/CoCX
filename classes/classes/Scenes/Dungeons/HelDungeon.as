@@ -256,7 +256,7 @@ use namespace CoC;
 			outputText("You reach out to grab the armor, but as soon as your finger brushes the shiny surface, a human-like face appears in the helm!  You recoil as a daintily feminine and bright blue face takes shape out of nowhere, staring at you with eyes afire with rage.  More of the gooey substance that makes up the girl's face fills out the armor, yanking it off the racks on feet made of goop.");
 			outputText("\n\nQuietly, the armored goo-girl growls, \"<i>You dare to disturb my rest, mortal? Prepare yourself for my vengeance!</i>\"");
 			outputText("\n\nWhat the fuck!? Oh well, looks like she wants a fight!");
-			startCombat(new GooArmor());
+			startCombat(new Valeria());
 			doNext(playerMenu);
 		}
 		
@@ -1272,7 +1272,7 @@ use namespace CoC;
 					outputText("There's a pile of drugged, unconscious harpies you've already defeated on the floor, as well as Kiri, the only one that didn't attack you.  You recall that she knows Hel and is here to help the both of you.");
 					//(Display Options: [Talk] [Sex] [Valeria](If Encountered) [Go Upstairs] [Go Downstairs])
 					var valeria:Number = 0;
-					if (player.armorName == "goo armor") addButton(1, "Valeria", talkToValeria).hint("Talk to Valeria about the current situation.");
+					if (player.armor == armors.GOOARMR) addButton(1, "Valeria", talkToValeria).hint("Talk to Valeria about the current situation.");
 					addButton(0, "Kiri", kiriInteraction).hint("Approach Kiri, the half-breed girl.");
 				}
 				else {

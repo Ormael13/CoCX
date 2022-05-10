@@ -234,7 +234,7 @@ public function alvinaMainCampMenu():void
 	if (player.hasStatusEffect(StatusEffects.AlvinaTraining) && player.statusEffectv1(StatusEffects.AlvinaTraining2) < 2) addButton(11, "Advanced Study", alvinaCampAdvancedStudy);
 	else {
 		if (player.hasStatusEffect(StatusEffects.AlvinaTraining) && player.statusEffectv1(StatusEffects.AlvinaTraining2) == 2) {
-			if (player.hasItem(useables.AMETIST, 1) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.SOULGEM, 5) && (player.hasKeyItem("Marae's Lethicite") >= 0 || player.hasKeyItem("Stone Statue Lethicite") >= 0)) addButton(11, "Advanced Study", alvinaCampAdvancedStudy);
+			if (player.hasItem(useables.AMETIST, 1) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.SOULGEM, 5) && (player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemvX("Marae's Lethicite", 1) > 0 || player.hasKeyItem("Stone Statue Lethicite") >= 0)) addButton(11, "Advanced Study", alvinaCampAdvancedStudy);
 			else addButtonDisabled(11, "Advanced Study", "You need to gather a flawless Amethyst necklace, five lust drafts, five soul gems, and a piece of very powerful Lethicite before you can progress.");
 		}
 		if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3) {
@@ -807,15 +807,12 @@ public function alvinaCampAdvancedStudy():void
 		inventory.takeItem(consumables.POL_MID, camp.campFollowers);
 		eachMinuteCount(5);
 	}
-	else if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 2 && player.hasItem(useables.AMETIST, 1) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.SOULGEM, 5) && (player.hasKeyItem("Marae's Lethicite") >= 0 || player.hasKeyItem("Stone Statue Lethicite") >= 0)) {
+	else if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 2 && player.hasItem(useables.AMETIST, 1) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.SOULGEM, 5) && (player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemvX("Marae's Lethicite", 1) > 0 || player.hasKeyItem("Stone Statue Lethicite") >= 0)) {
 		player.destroyItems(useables.AMETIST, 1);
 		player.destroyItems(consumables.L_DRAFT, 5);
 		player.destroyItems(useables.SOULGEM, 5);
 		if (player.hasKeyItem("Stone Statue Lethicite") >= 0) player.removeKeyItem("Stone Statue Lethicite");
-		else {
-			if (player.keyItemv1("Marae's Lethicite") > 1) player.addKeyValue("Marae's Lethicite", 1, -1);
-			else player.removeKeyItem("Marae's Lethicite");
-		}
+		else player.addKeyValue("Marae's Lethicite", 1, -1);
 		outputText("You show up with all the required items and the demoness smiles.\n\n");
 		outputText("\"<i>Good, I wasn’t expecting you to collect those items so quickly. Once again you’ve exceeded my expectations.</i>\"\n\n");
 		outputText("She arranges the soul gemes on the ground to form a magic circle, cutting herself with a dagger to draw the lines using her own blood she then hands you over the knife.\n\n");

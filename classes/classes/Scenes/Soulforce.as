@@ -11,32 +11,30 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
 import classes.Scenes.Areas.Forest.TamaniScene;
-import classes.Scenes.Areas.Forest.TentacleBeastRaging;
 import classes.Scenes.Areas.Forest.WorldTree;
 import classes.Scenes.Areas.HighMountains.IzumiScene;
+import classes.Scenes.Areas.HighMountains.MinotaurMobScene;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
-import classes.Scenes.Dungeons.RiverDungeon.QuatroElementalBoss;
 import classes.Scenes.Explore.Pierce;
 import classes.Scenes.Explore.TheDummy;
 import classes.Scenes.Monsters.Malikore;
-import classes.Scenes.Monsters.Oozaru;
 import classes.Scenes.NPCs.Alvina;
 import classes.Scenes.NPCs.Aria;
 import classes.Scenes.NPCs.Belisa;
 import classes.Scenes.NPCs.BelisaFollower;
+import classes.Scenes.NPCs.Carrera;
 import classes.Scenes.NPCs.DivaScene;
+import classes.Scenes.NPCs.DriderTown;
+import classes.Scenes.NPCs.Lilith;
 import classes.Scenes.NPCs.LilyFollower;
-import classes.Scenes.NPCs.Neisa;
 import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.NPCs.Sonya;
 import classes.Scenes.NPCs.TyrantiaFollower;
-import classes.Scenes.NPCs.Zenji;
-import classes.Scenes.NPCs.ZenjiScenes;
+import classes.Scenes.NPCs.WaizAbi;
 import classes.Scenes.Places.Boat.Marae;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Items.*;
-import classes.Scenes.Places.TrollVillage;
 import classes.Stats.Buff;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.GeneticMemories.*;
@@ -49,6 +47,7 @@ public class Soulforce extends BaseContent
 	public var tamaniScene:TamaniScene = new TamaniScene();
 	public var izumiScenes:IzumiScene = new IzumiScene();
 	public var worldtreeScene:WorldTree = new WorldTree();
+	public var minotaurSonsScene:MinotaurMobScene = new MinotaurMobScene();
 
 	public function accessSoulforceMenu():void {
 		clearOutput();
@@ -137,7 +136,7 @@ public class Soulforce extends BaseContent
 		}
 		//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
 		if (player.hasPerk(PerkLib.Metamorph)) {
-			if (player.hasPerk(PerkLib.TransformationImmunity) || player.hasPerk(PerkLib.Undeath)) addButtonDisabled(6, "Metamorph", "Your current body state prevents you from using Metamorph. (Either cure it or ascend to gain access to metamorph menu again)");
+			if (player.blockingBodyTransformations()) addButtonDisabled(6, "Metamorph", "Your current body state prevents you from using Metamorph. (Either cure it or ascend to gain access to metamorph menu again)");
 			else addButton(6, "Metamorph", SceneLib.metamorph.openMetamorph).hint("Use your soulforce to mold your body.");//używanie metamorfowania z użyciem soulforce
 		}
 		else addButtonDisabled(6, "???", "Req. Metamorph.");
@@ -232,7 +231,7 @@ public class Soulforce extends BaseContent
 		menuItems.push("Body State", BodyStateMenu, "For more precisely adjusting a few other body values or parts than Stats Adj option.");
 		menuItems.push("Test dynamic stat", TestDynamicStats, "Test Dynamic stats.");
 		menuItems.push("MetamorphFull", (player.hasPerk(PerkLib.Metamorph))? AllMetamorphOptionsUnlock: false, "Unlock all Metamorph options.");
-		menuItems.push("BelisaTest", (BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3 && BelisaFollower.BelisaEncounternum >= 1) ? belisatest : false, "Belisa Trigger");
+		menuItems.push("BelisaTest", (BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3) ? belisatest3 : false, "Belisa Trigger");
 		menuItems.push("BeliConfFix", (TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage >= 5 && BelisaFollower.BelisaEncounternum >= 5 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed) ? belisatest2 : false, "Belisa Confession Fix");
 		menuItems.push("LilyTest", !LilyFollower.LilyFollowerState ? lilytest : false, "Lily Trigger");
 		menuItems.push("FixJiangshi", jiangshiBuggedItemsCleanUpCrew0, "Shit! Here we go Again! Fixing Jiangshi! (better use it only once or may be some bugs i not plan to account for in case of using this more than once - i not blocked using it more than once so belive ppl will be reasonable to not click like mad this)");
@@ -255,8 +254,9 @@ public class Soulforce extends BaseContent
 		menuItems.push("Fix Shards", cheatFixShards, "Check player's quest and give the deserved shards");
 		menuItems.push("Add Shard", cheatAddShard, "Add 1 radiant shard");
 		menuItems.push("Remove Shard", cheatRemoveShard, "Remove 1 radiant shard");
-		//menuItems.push("ZenjiQ", ZenjiQ, "Zenji Expac 2 debug tool");
 		menuItems.push("LustBreath", (player.hasPerk(PerkLib.DragonPoisonBreath))? FairyTest: false, "Replacing 1 perk with another");
+		menuItems.push("TyrantPF", (TyrantiaFollower.TyrantiaFollowerStage == 5 && TyrantiaFollower.TyraniaCorrupteedLegendaries == 0)? FairyTest5: false, "Patching Tyrantia corrupted legendaries unlock");
+		menuItems.push("LilyPregF", (DriderTown.LilyKidsPCPregnancy != 0 && LilyFollower.LilyFollowerState)? FairyTest3: false, "Curing Lily Infertility ^^");
 		//menuItems.push("Mutationstest2", mutations2, "MutationsTest2");
 		//menuItems.push("Mutation test reset", resetMutations, "Reset Mutations");
 		menuGen(menuItems, page, accessSoulforceMenu);
@@ -268,17 +268,38 @@ public class Soulforce extends BaseContent
 		menu();
 		var page:int = 0;
 		var menuItems:Array = [];
+		outputText("MutationsApplicator");
 		for each (var pArray:Array in IMutationsLib.mutationsArray("Thyroid")){
 			var temp:Array = [];
-			temp = createDynamicPerk(pArray[0], pArray[1]);
+			temp = cDynPerk(pArray[0], pArray[1]);
+			if (temp[1] is Function){
+				temp.insertAt(1,curry(temp[1], testdone));
+				temp.removeAt(2);
+			}
+
 			for each (var i:* in temp){
 				menuItems.push(i);
 			}
-			menuItems.push(temp[0]);
+			//menuItems.push(temp[0]);
 		}
 		menuGen(menuItems, page, curry(SoulforceCheats1, 2));
+
+		function testdone():void{
+			clearOutput();
+			outputText("testDone!");
+			doNext(accessSoulforceMenu);
+		}
 	}
 
+	public function FairyTest3():void {
+		DriderTown.LilyKidsPCPregnancy = 0;
+		doNext(curry(SoulforceCheats1, 0));
+	}
+	public function FairyTest5():void {
+		TyrantiaFollower.TyrantiaFollowerStage = 4;
+		TyrantiaFollower.TyraniaCorrupteedLegendaries = 1;
+		doNext(curry(SoulforceCheats1, 0));
+	}
 	public function FairyTest():void {
 		player.removePerk(PerkLib.DragonPoisonBreath);
 		player.createPerk(PerkLib.DragonLustPoisonBreath, 0, 0, 0, 0);
@@ -287,6 +308,10 @@ public class Soulforce extends BaseContent
 	public function belisatest2():void{
 		BelisaFollower.BelisaConfessed = true;
 		doNext(curry(SoulforceCheats1,2));
+	}
+	public function belisatest3():void {
+		if (BelisaFollower.BelisaEncounternum >= 1) SceneLib.belisa.subsequentEncounters();
+		else SceneLib.belisa.firstEncounter();
 	}
 	public function resetMutations():void{
 		clearOutput();
@@ -349,47 +374,6 @@ public class Soulforce extends BaseContent
 			outputText("\nNo shards, go complete quests :(");
 	}
 
-	public function ZenjiQ():void{
-		clearOutput();
-		outputText("Zenji Debug Menu: \n");
-		outputText("ZenjiVillageStage: " + TrollVillage.ZenjiVillageStage + "\n" +
-		"JabalaUnlocked: " + TrollVillage.JabalaUnlocked + "\n" +
-		"YenzaUnlocked: " + TrollVillage.YenzaUnlocked + "\n" +
-		"KaljiUnlocked: " + TrollVillage.KaljiUnlocked + "\n" +
-		"ZenjiFollowing: " + TrollVillage.ZenjiFollowing + "\n" +
-		"KuruUnlocked: " + TrollVillage.KuruUnlocked + "\n" +
-		"HalkanoUnlocked: " + TrollVillage.HalkanoUnlocked + "\n" +
-		"ZenjiBerated: " + TrollVillage.ZenjiBerated + "\n" +
-		"YenzaLockdown: " + TrollVillage.YenzaLockdown + "\n" +
-		"ZenjiTrollVillageTimeChk: " + TrollVillage.ZenjiTrollVillageTimeChk + "\n" +
-		"YubiUnlocked: " + TrollVillage.YubiUnlocked + "\n" +
-		"KaljiMBJDeny: " + TrollVillage.KaljiMBJDeny + "\n" +
-		"ZenjiMoneyHelp: " + TrollVillage.ZenjiMoneyHelp + "\n" +
-		"JabalaLoveChat: " + TrollVillage.JabalaLoveChat + "\n" +
-		"ZenjiMarriageDress: " + TrollVillage.ZenjiMarriageDress + "\n"+
-		"Zenji Marriage Vars: \n" +
-		"ZenjiSleepCount: " + ZenjiScenes.ZenjiSleepCount + "\n" +
-		"ZenjiTalkCount: " + ZenjiScenes.ZenjiTalkCount + "\n" +
-		"ZenjiLoverDays: " + ZenjiScenes.ZenjiLoverDays
-		);
-		menu();
-		addButton(0, "Reset EventLine", reset).hint("Reset chain.");
-		addButton(1, "Force Village", villageNow).hint("Force encounters village");
-		addButton(14, "Leave", curry(SoulforceCheats1, 2));
-
-		function reset ():void{
-			clearOutput();
-			SceneLib.trollVillage.resetState();
-			outputText("All Parameters cleared!");
-			doNext(camp.doCamp);
-		}
-
-		function villageNow():void{
-			SceneLib.trollVillage.FirstEncountersoftheTrollKind();
-		}
-
-	}
-
 	public function cheatRemoveRP():void {
 		clearOutput();
 		if (player.removePerk(PerkLib.RacialParagon)) {
@@ -402,11 +386,11 @@ public class Soulforce extends BaseContent
 	}
 
 	public function cheatRemoveShard():void {
-		if(player.keyItemv1("Radiant shard") == 1)
+		if(player.keyItemvX("Radiant shard", 1) == 1)
 			player.removeKeyItem("Radiant shard");
 		else
 			player.addKeyValue("Radiant shard", 1, -1);
-		outputText("\n\n<b>You currently have "+ player.keyItemv1("Radiant shard") +" radiant shards.</b>");
+		outputText("\n\n<b>You currently have "+ player.keyItemvX("Radiant shard", 1) +" radiant shards.</b>");
 		doNext(curry(SoulforceCheats1, 2));
 	}
 
@@ -415,7 +399,7 @@ public class Soulforce extends BaseContent
 			player.addKeyValue("Radiant shard", 1, cnt);
 		else
 			player.createKeyItem("Radiant shard", cnt, 0, 0, 0);
-		outputText("\n\n<b>You currently have "+ player.keyItemv1("Radiant shard") + " radiant shards.</b>");
+		outputText("\n\n<b>You currently have "+ player.keyItemvX("Radiant shard", 1) + " radiant shards.</b>");
 		doNext(curry(SoulforceCheats1,2));
 	}
 
@@ -447,7 +431,7 @@ public class Soulforce extends BaseContent
 	}
 	private function jiangshiBuggedItemsCleanUpCrew3():void {
 		if (player.armor != ArmorLib.NOTHING) {
-			if (player.armorName == "goo armor") player.armor.removeText();
+			if (player.armor == armors.GOOARMR) player.armor.removeText();
 			inventory.takeItem(player.setArmor(armors.TRADITC), jiangshiBuggedItemsCleanUpCrew4);
 		}
 		else doNext(jiangshiBuggedItemsCleanUpCrew4);
@@ -628,11 +612,6 @@ public class Soulforce extends BaseContent
 		statScreenRefresh();
 		doNext(curry(SoulforceCheats1,0));
 	}
-	public function FightQuatroElementalBoss():void {
-		clearOutput();
-		outputText("Entering battle with Quatro Elemental Boss! Enjoy ^^");
-		startCombat(new QuatroElementalBoss());
-	}
 	public function FightAria():void {
 		clearOutput();
 		outputText("Entering battle with Melkie! Enjoy ^^");
@@ -642,11 +621,6 @@ public class Soulforce extends BaseContent
 		clearOutput();
 		outputText("Entering battle with Lethice! Enjoy ^^");
 		startCombat(new Lethice());
-	}
-	public function FightNeisa():void {
-		clearOutput();
-		outputText("Entering battle with Neisa! Enjoy ^^");
-		startCombat(new Neisa());
 	}
 	public function FightAlvina():void {
 		clearOutput();
@@ -821,6 +795,10 @@ public class Soulforce extends BaseContent
 		if (!player.hasPerk(PerkLib.SensualLover)) {
 			player.createPerk(PerkLib.SensualLover, 0, 0, 0, 0);
 			outputText("\n\n<b>(Gained Perk: Sensual Lover!)</b>");
+		}
+		if (!player.hasPerk(PerkLib.ThickSkin)) {
+			player.createPerk(PerkLib.ThickSkin, 0, 0, 0, 0);
+			outputText("\n\n<b>(Gained Perk: Thick Skin!)</b>");
 		}
 		if (player.hasPerk(PerkLib.Perfection) && !player.hasPerk(PerkLib.Creationism)) {
 			player.createPerk(PerkLib.Creationism, 0, 0, 0, 0);
@@ -1678,7 +1656,6 @@ public class Soulforce extends BaseContent
 			addButton(13, "-1-", EquipmentMenu, page - 1);
 			addButton(14, "Back", curry(SoulforceCheats1, 0));
 		}
-
 	}
 	public function NonEquipmentMenu(page:int = 1):void {
 		menu();
@@ -1719,7 +1696,7 @@ public class Soulforce extends BaseContent
 			addButton(11, "Midnight gossamer", AddGossa).hint("Add 1 Midnight Gossamer.");
 			addButton(12, consumables.VAMPBLD.shortName, addConsumable, consumables.VAMPBLD).hint("Add 1 " + consumables.VAMPBLD.longName + ".");
 			//addButton(11, "", ).hint("Add 1 .");
-			if (!player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice)) addButton(12, "E.Pearls", AddThePearls).hint("Add all three Elemental Pearls.");
+			addButton(12, "E.Pearls", AddThePearls).hint("Add all three Elemental Pearls.");
 			addButton(13, "-1-", NonEquipmentMenu, page - 1);
 			addButton(14, "Back", curry(SoulforceCheats1, 0));
 		}
@@ -1745,22 +1722,22 @@ public class Soulforce extends BaseContent
 			addButton(9, "DragonScale", AddDragonscale).hint("Add 1 Dragonscale.");
 			addButton(10, "S.Shard", AddShard).hint("Add 1 S.Shard.");//addButton(10, "", ).hint("Add 1 .");
 			addButton(11, "HEALHERB", AddHerb).hint("Add 1 HEALHERB.");
-			//addButton(12, "", ).hint("Add 1 .");
+			addButton(12, "Copp+Tin", AddCooperTinOre).hint("Add 1 Cooper and Tin ore.");
 			addButton(13, "-2-", MaterialMenu, page + 1);
 			addButton(14, "Back", curry(SoulforceCheats1, 0));
 		}
 		if (page == 2) {
-			addButton(0, "GolemCore", AddGolemCore).hint("Add 1 Golem Core.");
-			addButton(1, "BronzeBar", AddBronzeBar).hint("Add 1 Bronse bar.");
-			addButton(2, "EbonIngot", AddEbonIngot).hint("Add 1 Ebon Ingot.");
-			addButton(3, "Skymetal", AddSkymetalOre).hint("Add 1 Skymetal Ore.");
-			addButton(4, "Moonstone", AddMoonstone).hint("Add 1 Moonstone.");
-			addButton(5, "Mechanism", AddMechanism).hint("Add 1 Mechanism.");
-			//addButton(6, "", ).hint("Add 1 .");
-			//addButton(7, "", ).hint("Add 1 .");
-			//addButton(8, "", ).hint("Add 1 .");
-			addButton(9, "F.Imp S.", AddFeralImpSkull).hint("Add 1 Feral Imp Skull.");
-			addButton(10, "EnergyCore", AddEnergyCore).hint("Add 1 Energy Core.");
+			addButton(0, "Skymetal", AddSkymetalOre).hint("Add 1 Skymetal Ore.");
+			addButton(1, "Moonstone", AddMoonstone).hint("Add 1 Moonstone.");
+			//addButton(2, "", ).hint("Add 1 .");
+			//addButton(3, "", ).hint("Add 1 .");
+			//addButton(4, "", ).hint("Add 1 .");
+			//addButton(5, "", ).hint("Add 1 .");
+			addButton(6, "UnicornHair", AddUnicornHair).hint("Add 1 Unicorn Hair.");
+			addButton(7, "GolemCore", AddGolemCore).hint("Add 1 Golem Core.");
+			addButton(8, "Mechanism", AddMechanism).hint("Add 1 Mechanism.");
+			addButton(9, "EnergyCore", AddEnergyCore).hint("Add 1 Energy Core.");
+			addButton(10, "F.Imp S.", AddFeralImpSkull).hint("Add 1 Feral Imp Skull.");
 			addButton(11, "MetShoTom", AddMeteorShowerTome).hint("Add 1 Meteor Shower tome.");
 			addButton(12, "PolMidScr", AddPolarMidnightScroll).hint("Add 1 Polar Midnight scroll.");
 			addButton(13, "-1-", MaterialMenu, page - 1);
@@ -1771,18 +1748,18 @@ public class Soulforce extends BaseContent
 		menu();
 		if (page == 1) {
 			addButton(0, "FightForPearl", FightForPearl).hint("Test fight to get Sky Poison Pearl legally (aside we cheat to start fight)");
-			addButton(1, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
-			addButton(2, "Pierce", FightPierce).hint("Test fight with Pierce.");
-			addButton(3, "SuccGard", FightSuccubusGardener).hint("Test fight with Succubus Gardener. (Also it will glitch right after fight so not start this fight if you got unsaved progress that you not wanna loose as only way to handle post fight glitch is restarting game)");
+			addButton(1, "M.WSeaver", FightBelisa).hint("Test fight with Mana Weaver.");
+			if (player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame) addButton(2, "D.Giantess", FightTyrantia).hint("Test fight with Drider Giantess.");
+			addButton(3, "B.Monke", FightWaizAbi).hint("You not even want to let the innocent bimbo monke free? <i>*sigh*</i>");
 			addButton(4, "The Dummy", FightTheDummy).hint("Fight with The Dummy.");
-			addButton(5, "M.WSeaver", FightBelisa).hint("Test fight with Mana Weaver.");
-			if (player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame) addButton(6, "D.Giantess", FightTyrantia).hint("Test fight with Drider Giantess.");
-			addButton(7, "Zenji", FightZenji).hint("Test fight with Zenji.");
+			//5
+			addButton(6, "GothGirl", FightLilith).hint("Fight with devilish cute goth girl.");
+			if (player.level >= 45) addButton(7, "Oculicorn", FightIridesian).hint("Test fight with Oculicorn.");
 			addButton(8, "Sonya", FightSonya).hint("Test fight with Sonya.");
 			addButton(9, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
-			addButton(10, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
-			addButton(11, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
-			addButton(12, "FeralT.Beast", FightFeralBeast).hint("Test fight with feral tentacle beast.");
+			addButton(10, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
+			addButton(11, "SuccGard", FightSuccubusGardener).hint("Test fight with Succubus Gardener. (Also it will glitch right after fight so not start this fight if you got unsaved progress that you not wanna loose as only way to handle post fight glitch is restarting game)");
+			addButton(12, "Lethice", FightLethice).hint("Test fight with Lethice.");
 			addButton(13, "-2-", EnemiesMenu, page + 1);
 			addButton(14, "Back", curry(SoulforceCheats1, 0));
 		}
@@ -1791,14 +1768,14 @@ public class Soulforce extends BaseContent
 			addButton(1, "Hydra", FightHydra).hint("Test fight with Hydra.");
 			addButton(2, "HellfireSnail", FightHellfireSnail).hint("Test fight with Hellfire Snail.");
 			addButton(3, "ChaosChimera", FightChaosChimera).hint("Test fight with Chaos Chimera.");
-			addButton(4, "Q. E. Boss", FightQuatroElementalBoss).hint("Test fight with Quatro Elemental Boss.");
-			//addButton(5, "", ).hint("Test fight with .");
-			addButton(6, "Aria", FightAria).hint("Test fight with melkie huntress Aria.");
-			addButton(7, "Neisa", FightNeisa).hint("Test fight with Neisa.");
-			addButton(8, "SomeMalikore", FightRandomnMalikore).hint("Test fight with some malikore.");
-			addButton(9, "Lethice", FightLethice).hint("Test fight with Lethice.");
-			addButton(10, "LvLUP Aurora", LvLUPAurora).hint("LvL UP forcefully Aurora for testing purpose up to the limit.");
-			addButton(11, "DELvL Aurora", DELvLAurora).hint("DE LvL forcefully Aurora for testing purpose down toward the lvl 1.");
+			addButton(4, "AnotSucc", FightCarrera).hint("Fight with probably another succubus out there...");
+			addButton(5, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
+			addButton(6, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
+			addButton(7, "LvLUP Aurora", LvLUPAurora).hint("LvL UP forcefully Aurora for testing purpose up to the limit.");
+			addButton(8, "DELvL Aurora", DELvLAurora).hint("DE LvL forcefully Aurora for testing purpose down toward the lvl 1.");
+			addButton(9, "Aria", FightAria).hint("Test fight with melkie huntress Aria.");
+			addButton(10, "SomeMalikore", FightRandomnMalikore).hint("Test fight with some malikore.");
+			addButton(11, "Pierce", FightPierce).hint("Test fight with Pierce.");
 			addButton(12, "Alvina", FightAlvina).hint("Test fight with Alvina.");
 			addButton(13, "-1-", EnemiesMenu, page - 1);
 			addButton(14, "Back", curry(SoulforceCheats1, 0));
@@ -2034,6 +2011,14 @@ public class Soulforce extends BaseContent
 		outputText("\n\n<b>(Gained 1 Healing Herb!)</b>\n\n");
 		inventory.takeItem(consumables.HEALHERB, curry(MaterialMenu, 1));
 	}
+	public function AddCooperTinOre():void {
+		outputText("\n\n<b>(Gained 1 Copper Ore!)</b>\n\n");
+		inventory.takeItem(useables.COP_ORE, AddCooperTinOre1);
+	}
+	public function AddCooperTinOre1():void {
+		outputText("\n\n<b>(Gained 1 Tin Ore!)</b>\n\n");
+		inventory.takeItem(useables.TIN_ORE, curry(MaterialMenu, 1));
+	}
 	public function AddEnergyCore():void {
 		outputText("\n\n<b>(Gained 1 Energy Core!)</b>\n\n");
 		flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += 1;
@@ -2050,14 +2035,6 @@ public class Soulforce extends BaseContent
 		outputText("\n\n<b>(Gained 1 Golem Core!)</b>\n\n");
 		inventory.takeItem(useables.GOLCORE, curry(MaterialMenu, 2));
 	}
-	public function AddBronzeBar():void {
-		outputText("\n\n<b>(Gained 1 Bronze bar!)</b>\n\n");
-		inventory.takeItem(useables.BRONZEB, curry(MaterialMenu, 2));
-	}
-	public function AddEbonIngot():void {
-		outputText("\n\n<b>(Gained 1 Ebon Ingot!)</b>\n\n");
-		inventory.takeItem(useables.EBONING, curry(MaterialMenu, 2));
-	}
 	public function AddSkymetalOre():void {
 		outputText("\n\n<b>(Gained 1 Skymetal Ore!)</b>\n\n");
 		inventory.takeItem(useables.SKYMETA, curry(MaterialMenu, 2));
@@ -2065,6 +2042,10 @@ public class Soulforce extends BaseContent
 	public function AddMoonstone():void {
 		outputText("\n\n<b>(Gained 1 Moonstone!)</b>\n\n");
 		inventory.takeItem(useables.MOONSTO, curry(MaterialMenu, 2));
+	}
+	public function AddUnicornHair():void {
+		outputText("\n\n<b>(Gained 1 Unicorn Hair!)</b>\n\n");
+		inventory.takeItem(useables.UNICORNH, curry(MaterialMenu, 2));
 	}
 	public function AddPolarMidnightScroll():void {
 		outputText("\n\n<b>(Gained 1 Polar Midnight scroll!)</b>\n\n");
@@ -2766,7 +2747,7 @@ public class Soulforce extends BaseContent
 	}
 	public function AddThePearls1():void {
 		outputText("\n\n");
-		inventory.takeItem(consumables.E_PEARL, AddThePearls2);
+		inventory.takeItem(consumables.E5PEARL, AddThePearls2);
 	}
 	public function AddThePearls2():void {
 		outputText("\n\n");
@@ -2810,11 +2791,24 @@ public class Soulforce extends BaseContent
 		outputText("Entering battle with Mana Weaver! Enjoy ^^");
 		startCombat(new Belisa());
 	}
-	public function FightZenji():void {
+	public function FightIridesian():void {
+		SceneLib.iridesianFollower.firstMeetingIridesian();
+	}
+	public function FightLilith():void {
 		clearOutput();
-		outputText("Entering battle with Zenji! Enjoy ^^");
-		flags[kFLAGS.ZENJI_PROGRESS] = 1;
-		startCombat(new Zenji());
+		outputText("Entering battle with devilish cute goth girl! Enjoy ^^");
+		startCombat(new Lilith());
+	}
+	public function FightCarrera():void {
+		clearOutput();
+		outputText("Entering battle with another succubus or maybe not your every succubus? Enjoy ^^");
+		startCombat(new Carrera());
+	}
+	public function FightWaizAbi():void {
+		clearOutput();
+		flags[kFLAGS.WAIZABI_LVL_UP] = 0;
+		outputText("So you cheating and skipping guardian agnel gaze to beat poor Bimbo Monke? You're a Sexual Predator... <i>Start to dial local police number</i>");
+		startCombat(new WaizAbi());
 	}
 	public function FightSonya():void {
 		clearOutput();
@@ -2850,11 +2844,6 @@ public class Soulforce extends BaseContent
 		outputText("\n\n<b>Evangeline get weaker! (cheat stop working when she reach lvl 12)</b>");
 		if (flags[kFLAGS.EVANGELINE_LVL_UP] > 6) flags[kFLAGS.EVANGELINE_LVL_UP]--;
 		EnemiesMenu(1);
-	}
-	public function FightFeralBeast():void {
-		clearOutput();
-		outputText("Entering battle with feral tentacle beast! Enjoy ^^");
-		startCombat(new TentacleBeastRaging());
 	}
 	public function RevertCabinProgress():void {
 		flags[kFLAGS.CAMP_CABIN_PROGRESS] = 2;
@@ -4256,7 +4245,14 @@ public class Soulforce extends BaseContent
 		//next page button?
 		if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] >= 3) addButton(5, "Priscilla", PriscillaEnc).hint("Req. 320+ soulforce");
 		else addButtonDisabled(5, "Priscilla", "");
-		addButtonDisabled(6, "Mino Sons", "");
+		if (flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] >= 3) {
+			if (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] >= 3) {
+				if (player.hasVagina()) addButton(6, "Mino Sons", MinotaurSonsEnc).hint("Req. at least 260+ soulforce (more sons will increase needed SF)");
+				else addButtonDisabled(6, "Mino Sons", "Req. to have vagina.");
+			}
+			else addButtonDisabled(6, "Mino Sons", "Req. to have 3+ (still alive) minotaur sons.");
+		}
+		else addButtonDisabled(6, "Mino Sons", "");
 		//button 7 - Sheila (non demon ver) find
 		//button 8 - ?Behemoth find?
 		//previous page button?
@@ -4323,7 +4319,17 @@ public class Soulforce extends BaseContent
 			doNext(SoulSense);
 		}
 	}
-	//button 6
+	public function MinotaurSonsEnc():void {
+		if (player.soulforce >= 10 * (26 + Math.round((flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2))) {
+			player.soulforce -= 10 * (26 + Math.round((flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2));
+			statScreenRefresh();
+			minotaurSonsScene.meetMinotaurSons();
+		}
+		else {
+			outputText("\n\nYour current soulforce is too low.");
+			doNext(SoulSense);
+		}
+	}
 	//button 7
 	//button 8
 	public function findWorldTree():void {

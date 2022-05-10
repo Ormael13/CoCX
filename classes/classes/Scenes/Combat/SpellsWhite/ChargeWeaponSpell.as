@@ -1,6 +1,7 @@
 package classes.Scenes.Combat.SpellsWhite {
 import classes.PerkLib;
 import classes.Scenes.Combat.AbstractWhiteSpell;
+import classes.Scenes.Combat.CombatAbilities;
 import classes.StatusEffects;
 
 public class ChargeWeaponSpell extends AbstractWhiteSpell {
@@ -28,15 +29,14 @@ public class ChargeWeaponSpell extends AbstractWhiteSpell {
 	}
 	
 	override public function manaCost():Number {
-		return super.manaCost() * costMultiplier()
+		return super.manaCost() * costMultiplier();
 	}
 	
 	override public function advance(display:Boolean):void {
 		if (player.statusEffectv2(StatusEffects.ChargeWeapon) <= 0) {
 			player.removeStatusEffect(StatusEffects.ChargeWeapon);
-			if (display) {
-				outputText("<b>Charged Weapon effect wore off!</b>\n\n");
-			}
+			if (player.hasPerk(PerkLib.SelfbuffsProficiencyEx) && player.mana >= CombatAbilities.ChargeWeapon.manaCost()) CombatAbilities.ChargeWeapon.autocast();
+			else if (display) outputText("<b>Charged Weapon effect wore off!</b>\n\n");
 		} else {
 			if (!player.hasPerk(PerkLib.PureMagic)) player.addStatusValue(StatusEffects.ChargeWeapon, 2, -1);
 		}
@@ -79,12 +79,19 @@ public class ChargeWeaponSpell extends AbstractWhiteSpell {
 		if (player.hasStatusEffect(StatusEffects.SiegweirdTraining)) spellChargeWeaponMultiplier *= 0.5;
 		if (player.hasPerk(PerkLib.EverLastingBuffs)) spellChargeWeaponMultiplier *= 2;
 		if (player.hasPerk(PerkLib.EternalyLastingBuffs)) spellChargeWeaponMultiplier *= 2;
+		if (player.hasPerk(PerkLib.SelfbuffsProficiencySu)) spellChargeWeaponMultiplier *= 2;
 		return spellChargeWeaponMultiplier;
 	}
 	
 	override protected function doSpellEffect(output:Boolean = true):void {
 		var ChargeWeaponBoostCap:Number = 4;
 		var ChargeWeaponBoost:Number = 5;
+		if (player.hasPerk(PerkLib.SelfbuffsProficiency)) {
+			var capB:Number = 1.2;
+			if (player.hasPerk(PerkLib.SelfbuffsProficiencyEx)) capB += 0.8;
+			if (player.hasPerk(PerkLib.SelfbuffsProficiencySu)) capB *= 5;
+			ChargeWeaponBoostCap *= capB;
+		}
 		ChargeWeaponBoostCap *= ChargeWeaponBoost;
 		if (player.hasPerk(PerkLib.DivineArmament)) {
 			ChargeWeaponBoostCap *= 2;

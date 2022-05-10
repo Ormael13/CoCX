@@ -47,7 +47,7 @@ public class GoblinShaman extends Goblin
 					player.createStatusEffect(StatusEffects.Blind, 1 + rand(3), 0, 0, 0);
 				}
 				else if (player.hasPerk(MutationsLib.GorgonsEyes)) {
-					outputText("Your mutated eyes not been affected at all by this flash!");
+					outputText("Your mutated eyes are uneffected by the blinding light!");
 				}
 				else {
 					outputText("You manage to blink in the nick of time!");
@@ -60,7 +60,7 @@ public class GoblinShaman extends Goblin
 				var damage:int = inte + rand(50) * spellMultiplier();
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 				player.addStatusValue(StatusEffects.Blizzard, 1, -1);
-				outputText("Luckly protective ice maelstorm still surrounding you lessening amount of damage.  ");
+				outputText("Luckily, your ice maelstorm still surrounds you, reducing the damage you take.  ");
 				damage *= 0.2;
 				}
 				if (player.isGoo()) {
@@ -95,7 +95,7 @@ public class GoblinShaman extends Goblin
 			//Might
 			else if (spellChooser == 5 && fatigue <= (100 - spellCostMight)) {
 				outputText("She flushes, drawing on her body's desires to empower her muscles and toughen her up.");
-				outputText("The rush of success and power flows through her body.  She feels like she can do anything!");
+				outputText("The rush of power flows through her body.");
 				statStore.addBuffObject({str:+20 * spellMultiplier(), tou:+20 * spellMultiplier()},"GoblinMight")
 				fatigue += spellCostMight;
 			}
@@ -121,8 +121,8 @@ public class GoblinShaman extends Goblin
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
-				outputText("You collapse in front of the goblin, too wounded to fight.  She growls and kicks you in the head, making your vision swim. As your sight fades, you hear her murmur, \"<i>Fucking dicks can't even bother to grow a dick or cunt.</i>\"");
+			if (player.gender == 0) {
+				outputText("You collapse in front of the goblin, too wounded to fight.  She growls and kicks you in the head, making your vision swim. As your sight fades, you hear her murmur, \"<i>Fucking dumbasses. You can't even bother to grow something?</i>\"");
 				SceneLib.combat.cleanupAfterCombatImpl();
 			} 
 			else {
@@ -135,8 +135,8 @@ public class GoblinShaman extends Goblin
 			this.a = "the ";
 			this.short = "goblin shaman";
 			this.imageName = "goblinshaman";
-			this.long = "The goblin before you stands approximately three feet and a half. Her ears appear to be pierced more times than the amount of piercings a typical goblin has. Her hair is deep indigo. She’s unlike most of the goblins you’ve seen. She’s wielding a staff in her right hand. In addition to the straps covering her body, she’s wearing a necklace seemingly carved with what looks like shark teeth. She’s also wearing a tattered loincloth, unlike most goblins who would show off their pussies. From the looks of one end of her staff glowing, she’s clearly a shaman!";
-			if (player.hasCock()) this.long += "  She's clearly intent on casting you into submission just so she can forcibly make you impregnate her.";
+			this.long = "The goblin before you stands approximately three and a half feet tall. Her ears appear to be pierced more than most goblins. Her hair is deep indigo. She’s wielding a staff in her right hand. In addition to the straps covering her body, she’s wearing a necklace seemingly carved with what looks like shark teeth. She’s also wearing a tattered loincloth, unlike most goblins, who would show off their pussies. From the looks of one end of her staff glowing, she’s clearly a shaman!";
+			if (player.hasCock()) this.long += "  She's clearly intent on casting you into submission, to forcibly make you impregnate her.";
 			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));

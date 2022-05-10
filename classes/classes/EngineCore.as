@@ -577,20 +577,7 @@ public class EngineCore {
             return btn.hide();
         }
         var callback:Function;
-        /*
-            Let the mainView decide if index is valid
-            if(pos > 14) {
-                trace("INVALID BUTTON");
-                return;
-            }
-        */
         //Removes sex-related button in SFW mode.
-        if (CoC.instance.flags[kFLAGS.SFW_MODE] > 0) {
-            if (text.indexOf("Sex") != -1 || text.indexOf("Threesome") != -1 || text.indexOf("Foursome") != -1 || text == "Watersports" || text == "Make Love" || text == "Use Penis" || text == "Use Vagina" || text.indexOf("Fuck") != -1 || text.indexOf("Ride") != -1 || (text.indexOf("Mount") != -1 && text.indexOf("Mountain") == -1) || text.indexOf("Vagina") != -1) {
-                trace("Button removed due to SFW mode.");
-                return btn.hide();
-            }
-        }
         callback = createCallBackFunction(func1, arg1, arg2, arg3);
 
         if (toolTipText == "") toolTipText = getButtonToolTipText(text);
@@ -620,14 +607,6 @@ public class EngineCore {
 
     public static function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):CoCButton {
         var btn:CoCButton = button(pos);
-        //Removes sex-related button in SFW mode.
-        if (CoC.instance.flags[kFLAGS.SFW_MODE] > 0) {
-            if (text.indexOf("Sex") != -1 || text.indexOf("Threesome") != -1 || text.indexOf("Foursome") != -1 || text == "Watersports" || text == "Make Love" || text == "Use Penis" || text == "Use Vagina" || text.indexOf("Fuck") != -1 || text.indexOf("Ride") != -1 || (text.indexOf("Mount") != -1 && text.indexOf("Mountain") == -1) || text.indexOf("Vagina") != -1) {
-                trace("Button removed due to SFW mode.");
-                return btn.hide();
-            }
-        }
-
         if (toolTipText == "") toolTipText = getButtonToolTipText(text);
         if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);
         btn.showDisabled(text, toolTipText, toolTipHeader);
@@ -635,11 +614,9 @@ public class EngineCore {
         return btn;
     }
 
-    public static function addButtonIfTrue(pos:int, text:String, func1:Function, toolTipText:String, condition:Boolean):CoCButton {
-        if (condition)
-            return addButton(pos, text, func1);
-        else
-            return addButtonDisabled(pos, text, toolTipText);
+    public static function addButtonIfTrue(pos:int, text:String, func1:Function, toolTipDisabled:String, condition:Boolean, toolTipText:String = ""):CoCButton {
+        if (condition) return addButton(pos, text, func1, null, null, null, toolTipText);
+        else return addButtonDisabled(pos, text, toolTipDisabled);
     }
 
     public static function button(pos:int):CoCButton {
@@ -1084,21 +1061,6 @@ public class EngineCore {
                 CoC.instance.player.vaginas[vIndex].vaginalLooseness++;
             }
         }
-    }
-
-    /**
-     * Returns true if you're on SFW mode.
-     */
-    public static function doSFWloss():Boolean {
-        clearOutput();
-        if (CoC.instance.flags[kFLAGS.SFW_MODE] > 0) {
-            if (CoC.instance.player.HP <= 0) outputText("You collapse from your injuries.");
-            else outputText("You collapse from your overwhelming desires.");
-            if (CoC.instance.inCombat) SceneLib.combat.cleanupAfterCombatImpl();
-            else doNext(SceneLib.camp.returnToCampUseOneHour);
-            return true;
-        }
-        else return false;
     }
 
     public static function doNothing():void {

@@ -39,7 +39,7 @@ public class AbstractSpell extends CombatAbility {
 		
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		
-		if (isBloodMagicApplicable && player.hasStatusEffect(StatusEffects.BloodMage)) {
+		if (isBloodMagicApplicable && (player.hasStatusEffect(StatusEffects.BloodMage) || player.hasPerk(PerkLib.BloodMage))) {
 			player.HP -= realManaCost;
 		} else if (isLastResortApplicable && player.hasPerk(PerkLib.LastResort) && player.mana < realManaCost) {
 			player.HP -= realManaCost;
@@ -62,7 +62,7 @@ public class AbstractSpell extends CombatAbility {
 		
 		// Run our checks
 		var manaCost:Number = this.manaCost();
-		if (isBloodMagicApplicable && player.hasStatusEffect(StatusEffects.BloodMage)) {
+		if (isBloodMagicApplicable && (player.hasStatusEffect(StatusEffects.BloodMage) || player.hasPerk(PerkLib.BloodMage))) {
 			if (player.HP - player.minHP() <= manaCost) {
 				return "Your hp is too low to cast this spell."
 			}
@@ -96,6 +96,10 @@ public class AbstractSpell extends CombatAbility {
 		throw new Error("Method performSpellEffect() not implemented for ability " + name);
 	}
 	
+	protected function preSpellEffect():void {
+		MagicPrefixEffect();
+	}
+	
 	protected function postSpellEffect():void {
 		MagicAddonEffect();
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
@@ -107,6 +111,7 @@ public class AbstractSpell extends CombatAbility {
 				outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			}
 		} else {
+			preSpellEffect();
 			doSpellEffect(display);
 			postSpellEffect();
 			if (display) {
@@ -130,6 +135,10 @@ public class AbstractSpell extends CombatAbility {
 	///////////////////////////
 	// Shortcuts and utilities
 	///////////////////////////
+	
+	protected function MagicPrefixEffect():void {
+		combat.magic.MagicPrefixEffect();
+	}
 	
 	protected function MagicAddonEffect(numberOfProcs:Number = 1):void {
 		combat.magic.MagicAddonEffect(numberOfProcs);
@@ -232,6 +241,7 @@ public class AbstractSpell extends CombatAbility {
 					if (monster.short == "goo-girl") damage *= 1.5;
 					if (monster.short == "tentacle beast") damage *= 1.2;
 				}
+				if (player.statStore.hasBuff("AjidAji")) damage *= 1.3;
 				if (Forgefather.channelInlay == "ruby" && Forgefather.refinement == 4) damage *= 1.25
 				if (Forgefather.channelInlay == "ruby" && Forgefather.refinement == 5) damage *= 1.5
 				if (Forgefather.gem == "ruby" && Forgefather.refinement == 4) damage *= 1.12

@@ -21,6 +21,11 @@
 		 */
 		public static function error(description:String=""):void {
 			trace("ERROR "+description);
+			CONFIG::debug
+			{
+				if (CoC.instance && CoC.instance.mainView)
+					EngineCore.outputText("\n\n<b>ERROR: " + description + "</b>\n\n");
+			}
 			if (haltOnErrors) throw Error(description);
 		}
 

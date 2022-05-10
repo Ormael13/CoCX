@@ -16,11 +16,9 @@ import classes.GlobalFlags.*;
 import classes.Items.*;
 import classes.Scenes.Camp.CampScenes;
 import classes.Scenes.Camp.HarvestMoonScenes;
-import classes.Scenes.Camp.HclassHeavenTribulation;
 import classes.Scenes.Camp.UniqueCampScenes;
 import classes.Scenes.Dungeons.DeepCave.ValaScene;
 import classes.Scenes.NPCs.BelisaFollower;
-import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.DriderTown;
 import classes.Scenes.NPCs.LilyFollower;
@@ -45,7 +43,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		private var campScenes:CampScenes = new CampScenes();
 		private var checkedTurkey:int; //Make sure we test each of these events just once in timeChangeLarge
 		private var checkedDream:int;
-		private var displayedBeeCock:Boolean;
 		private var dreams:Dreams = new Dreams();
 
 		//Implementation of TimeAwareInterface
@@ -263,6 +260,19 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.statusEffectv1(StatusEffects.DinahGift) <= 0) player.removeStatusEffect(StatusEffects.DinahGift);
 				else player.addStatusValue(StatusEffects.DinahGift, 1, -1);
 			}
+			//Spooders pregnancy
+			if (DriderTown.BelisaPregnancy > 1) DriderTown.BelisaPregnancy -= 1;
+			if (DriderTown.BelisaKidsEggsHatching > 1) DriderTown.BelisaKidsEggsHatching -= 1;
+			if (DriderTown.BelisaKidsEggsHatching1 > 1) DriderTown.BelisaKidsEggsHatching1 -= 1;
+			if (DriderTown.BelisaKidsEggsHatching2 > 1) DriderTown.BelisaKidsEggsHatching2 -= 1;
+			if (DriderTown.LilyKidsPCPregnancy > 1) DriderTown.LilyKidsPCPregnancy -= 1;
+			if (DriderTown.LilyKidsPCEggsHatching > 1) DriderTown.LilyKidsPCEggsHatching -= 1;
+			if (DriderTown.LilyKidsPCEggsHatching1 > 1) DriderTown.LilyKidsPCEggsHatching1 -= 1;
+			if (DriderTown.LilyKidsPCEggsHatching2 > 1) DriderTown.LilyKidsPCEggsHatching2 -= 1;
+			if (DriderTown.TyrantiaPregnancy > 1) DriderTown.TyrantiaPregnancy -= 1;
+			if (DriderTown.TyrantiaKidsEggsHatching > 1) DriderTown.TyrantiaKidsEggsHatching -= 1;
+			if (DriderTown.TyrantiaKidsEggsHatching1 > 1) DriderTown.TyrantiaKidsEggsHatching1 -= 1;
+			if (DriderTown.TyrantiaKidsEggsHatching2 > 1) DriderTown.TyrantiaKidsEggsHatching2 -= 1;
 			//Alter max speed if you have oversized parts. (Realistic mode)
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
 			{
@@ -478,7 +488,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (player.hasPerk(PerkLib.SlimeCore)) { //Lose slime core perk
-				if (player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || !LowerBody.isGoo(player)) {
+				if (player.vaginalCapacity() < 9000 || player.rearBody.type != RearBody.METAMORPHIC_GOO || player.arms.type != Arms.GOO || !LowerBody.isGoo(player)) {
                     outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into [skin] while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + CoC.instance.player.chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + Appearance.buttDescription(player) + ".  A delicious pressure pulses in your abdomen and you loosen your [armor] as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n");
                     outputText("\nPanting, you open your eyes and see that, for once, the source of your climax wasn't your loins.  Feeling a warm, wetness on your abs, you investigate and find the small, heart-shaped nucleus that used to be inside your body has somehow managed to pass through your belly button. Exposed to the open air, the crimson organ slowly crystallizes, shrinking and hardening into a tiny ruby.  Rubbing the stone with your thumb, you're surprised to find that you can still feel a pulse within its glittering facets.  You stow the ruby heart, in case you need it again.\n");
 					player.createKeyItem("Ruby Heart", 0, 0, 0, 0); //[Add 'Ruby Heart' to key items. Player regains slime core if returning to goo body]
@@ -487,9 +497,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.hasKeyItem("Ruby Heart") >= 0) { //Regain slime core
-				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.SlimeCore) && player.isGoo() && player.gooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.skinAdj == "slimy" && player.skinDesc == "skin" && LowerBody.isGoo(player)) {
+				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.SlimeCore) && player.isGoo() && player.gooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.arms.type == Arms.GOO && LowerBody.isGoo(player)) {
 					outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n");
-
 					outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n");
 					//(Reduces Fluid Addiction to a 24 hour intake requirement).
 					outputText("(<b>Gained New Perk: Slime Core - Moisture craving builds at a greatly reduced rate.</b>\n)");
@@ -499,7 +508,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.hasPerk(PerkLib.DarkSlimeCore)) { //Lose DARK slime core perk
-				if (player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || !LowerBody.isGoo(player)) {
+				if (player.vaginalCapacity() < 9000 || player.rearBody.type != RearBody.METAMORPHIC_GOO || player.arms.type != Arms.GOO || !LowerBody.isGoo(player)) {
 					outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into [skin] while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + CoC.instance.player.chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + Appearance.buttDescription(player) + ".  A delicious pressure pulses in your abdomen and you loosen your [armor] as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n");
 					outputText("\nPanting, you open your eyes and see that, for once, the source of your climax wasn't your loins.  Feeling a warm, wetness on your abs, you investigate and find the small, heart-shaped nucleus that used to be inside your body has somehow managed to pass through your belly button. Exposed to the open air, the crimson organ slowly crystallizes, shrinking and hardening into a tiny ruby.  Rubbing the stone with your thumb, you're surprised to find that you can still feel a pulse within its glittering facets.  You stow the ruby heart, in case you need it again.\n");
 					player.createKeyItem("Ruby Orb", 0, 0, 0, 0); //[Add 'Ruby Heart' to key items. Player regains slime core if returning to goo body]
@@ -508,7 +517,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.hasKeyItem("Ruby Orb") >= 0) { //Regain DARK slime core
-				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.DarkSlimeCore) && player.isGoo() && player.gooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.skinAdj == "slimy" && player.skinDesc == "skin" && LowerBody.isGoo(player)) {
+				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.DarkSlimeCore) && player.isGoo() && player.darkgooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.arms.type == Arms.GOO && LowerBody.isGoo(player)) {
 					outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n");
 					outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n");
 					//(Reduces Fluid Addiction to a 24 hour intake requirement).
@@ -519,7 +528,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.SlimeCraving)) { //Slime craving stuff
-				if (player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || !LowerBody.isGoo(player)) {
+				if (player.vaginalCapacity() < 9000 || player.rearBody.type != RearBody.METAMORPHIC_GOO || player.arms.type != Arms.GOO || !LowerBody.isGoo(player)) {
 					outputText("\n<b>You no longer feel the need to stockpile fluids in your body. Geeze just how much of a slut did this make you?</b>\n");
 					player.removeStatusEffect(StatusEffects.SlimeCraving);
 					player.removeStatusEffect(StatusEffects.SlimeCravingFeed);
@@ -553,12 +562,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (!player.hasPerk(PerkLib.FluidBody) && player.isGoo() && (player.gooScore() >= 11 || player.magmagooScore() >= 13 || player.darkgooScore() >= 13)) {
-				outputText("\nWoa your body is so malleable now attacks running through you can't damage you much anymore. This said the feeling of being penetrated by just anything leaves you with mind melting pleasure.\n(<b>Gained New Perk: Fluid Body.</b>\n)");
+				outputText("\nWoa your body is so malleable now attacks running through you can't damage you much anymore. This said the feeling of being penetrated by just anything leaves you with mind melting pleasure.\n(<b>Gained New Perk: Fluid Body.</b>)\n");
 				player.createPerk(PerkLib.FluidBody, 0, 0, 0, 0);
 				needNext = true;
 			}
 			if (player.hasPerk(PerkLib.FluidBody) && !player.isGoo() && (player.gooScore() < 11 || player.magmagooScore() < 13 || player.darkgooScore() < 13)) {
-				outputText("\nYour body no longer being slime enough you worry that weapon will draw blood the next time they strike you as you lose your fluidic nature.\n(<b>Lost Perk: Fluid Body.</b>\n)");
+				outputText("\nYour body no longer being slime enough you worry that weapon will draw blood the next time they strike you as you lose your fluidic nature.\n(<b>Lost Perk: Fluid Body.</b>)\n");
 				player.removePerk(PerkLib.FluidBody);
 				needNext = true;
 			}
@@ -1210,13 +1219,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.armor == armors.CTPALAD && !player.isTaur())
 			{
 				outputText("Due to your current body shape you are no longer able to wear the centaur armor and thus you drop the over encumbering equipment back into your inventory");
-				SceneLib.inventory.takeItem(player.setArmor(armors.NOTHING), playerMenu);
+				SceneLib.inventory.takeItem(player.setArmor(ArmorLib.NOTHING), playerMenu);
 				needNext = true;
 			}
 			if (player.armor == armors.KBDRESS && !player.isScylla() && !player.isKraken())
 			{
 				outputText("Due to your current body shape you are no longer able to wear the Kraken black dress and thus you put the over item back into your inventory");
-				SceneLib.inventory.takeItem(player.setArmor(armors.NOTHING), playerMenu);
+				SceneLib.inventory.takeItem(player.setArmor(ArmorLib.NOTHING), playerMenu);
 				needNext = true;
 			}
 
@@ -1773,7 +1782,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (player.rearBody.type != RearBody.TENTACLE_EYESTALKS && player.hasPerk(PerkLib.Omnicaster)) {
 				if (player.hasStatusEffect(StatusEffects.GazerEyeStalksPlayer)) player.removeStatusEffect(StatusEffects.GazerEyeStalksPlayer);
-				outputText("\nNo text yet. \n\n(<b>Lost Perk: Omnicaster</b>)");
+				outputText("\nLacking the occulatory prowess of many eyes you also lose the ability to omnicast. \n\n(<b>Lost Perk: Omnicaster</b>)");
 				player.removePerk(PerkLib.Omnicaster);
 				needNext = true;
 			}
@@ -2656,7 +2665,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
             if (SceneLib.mountain.minotaurScene.minoCumUpdate()) {
                 needNext = true;
 			}
-            else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2 && CoC.instance.model.time.hours % 13 == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] == 0) { //Repeated warnings!
+            else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2 && CoC.instance.model.time.hours % 13 == 0 && flags[kFLAGS.MINOCUM_WARNING_COOLDOWN] == 0) { //Repeated warnings!
                 if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2)
 					outputText("\n<b>You shiver, feeling a little cold. Maybe you ought to get some more minotaur cum? You just don't feel right without that pleasant buzz in the back of your mind.</b>\n");
 				else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3)
@@ -2664,8 +2673,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Decrement mino withdrawal symptoms display cooldown
-			//flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] prevents PC getting two of the same notices overnite
-			else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330]--;
+			//flags[kFLAGS.MINOCUM_WARNING_COOLDOWN] prevents PC getting two of the same notices overnite
+			else if (flags[kFLAGS.MINOCUM_WARNING_COOLDOWN] > 0) flags[kFLAGS.MINOCUM_WARNING_COOLDOWN]--;
 			if (player.statusEffectv1(StatusEffects.Airweed) >= 1) {
 				if (player.statusEffectv1(StatusEffects.Airweed) == 1) {
 					player.removeStatusEffect(StatusEffects.Airweed);
