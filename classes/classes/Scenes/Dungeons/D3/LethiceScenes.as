@@ -87,6 +87,7 @@ public class LethiceScenes extends BaseContent
 		public function defeated(hpVictory:Boolean):void
 		{
 			clearOutput();
+			if (!recalling) outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
 
 			if (hpVictory)
 			{

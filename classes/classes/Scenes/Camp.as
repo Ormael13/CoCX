@@ -4768,14 +4768,8 @@ public function rebirthFromBadEnd():void {
         //Marble scene
 		if (flags[kFLAGS.MARBLE_PURIFIED] == 1)
 			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight, false).hint("The punishment for Marble's bitchy sister.");
-        else
-			addButtonDisabled(0, "M & C", "Requires completing Marble's purification quest.");
-        //Excellia slave first scene
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2)
 			addButton(1, "Excellia Slv", SceneLib.excelliaFollower.ExcelliaPathChoiceMakeSlave).hint("Excellia acknowledges herself as your slave.");
-        else
-			addButtonDisabled(1, "E. Slv", "Requires enslaving a certain cow-slut.");
-        
         //Phylla demon fuck
 		if (flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] || flags[kFLAGS.PHYLLA_SAVED]) {
             if (player.cor >= 66 - player.corruptionTolerance && player.gender > 0)
@@ -4810,29 +4804,37 @@ public function rebirthFromBadEnd():void {
 		//Venus cock scenes
 		if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && flags[kFLAGS.KAIJU_COCK] == 1)
 			addButton(9, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus).hint("Venus discovers her new cock.");
-		else addButtonDisabled(9, "V. Cock", "Overload the factory and meet your old friend at the lake.");
+		else addButtonDisabled(9, "V. C.", "Overload the factory and meet your old friend at the lake.");
 		//Doppel
 		if (flags[kFLAGS.D3_MIRRORS_SHATTERED])
 			addButton(10, "Doppelganger", SceneLib.d3.doppleganger.punchYourselfInTheBalls).hint("Go fuck yourself!");
 		else addButtonDisabled(10, "M. Mirror", "Check the mirror room in the stronghold to unlock.");
+
+
+		//if (flags[kFLAGS.D3_DISCOVERED] > 0)
+		addButton(13, "Dungeons", recallScenes_dungeons);
+		addButton(14, "Wake Up", recallWakeUp);
+	}
+
+	public function recallScenes_dungeons():void {
 		//DriderIncubus
 		if (flags[kFLAGS.DRIDERINCUBUS_DEFEATED])
-			addButton(11, "DriderI & M", SceneLib.d3.driderIncubus.beatTheSpooderbutt, false).hint("Recall the glorious defeat of the drider-incubus and maybe take your 'reward'.");
-		else addButtonDisabled(11, "DI & M", "Unlocked after the final battle.");
+			addButton(0, "DriderI & M", SceneLib.d3.driderIncubus.beatTheSpooderbutt, false).hint("Recall the glorious defeat of the drider-incubus and maybe take your 'reward'.");
+		else addButtonDisabled(0, "DI & M", "Unlocked after the final battle.");
 		//HermCentaur
 		if (flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0)
-			addButton(11, "HermCentaur", SceneLib.d3.hermCentaur.beatThePony, false).hint("Get your 'reward' for beating the herm centaur in the stronghold.");
-		else addButtonDisabled(11, "HC", "Req. beating a demonic centaur.");
+			addButton(1, "HermCentaur", SceneLib.d3.hermCentaur.beatThePony, false).hint("Get your 'reward' for beating the herm centaur in the stronghold.");
+		else addButtonDisabled(1, "HC", "Req. beating a demonic centaur.");
 		//MinoKing
 		if (flags[kFLAGS.MINOTAURKING_DEFEATED] > 0)
-			addButton(12, "M.King & Exc", SceneLib.d3.minotaurKing.theKingIsDeadLongLiveTheKing).hint("If you didn't have time or the mood for using 2 cowsluts before fighting Lethice, you can do it in your imagination!");
-		else addButtonDisabled(12, "L.", "Req. defeating the strongest minotaur.");
+			addButton(2, "M.King & Exc", SceneLib.d3.minotaurKing.theKingIsDeadLongLiveTheKing).hint("If you didn't have time or the mood for using 2 cowsluts before fighting Lethice, you can do it in your imagination!");
+		else addButtonDisabled(2, "MK & E", "Req. defeating the strongest minotaur.");
 		//Lethice
-		if (flags[kFLAGS.GAME_END] > 0)
-			addButton(13, "Lethice", SceneLib.d3.lethice.defeated, false).hint("While you can't make her your eternal slave, you can punish her for her arrogance in your memories as much as you want.");
-		else addButtonDisabled(13, "L.", "Req. completing the game :)");
-        addButton(14, "Wake Up", recallWakeUp);
-    }
+		if (flags[kFLAGS.LETHICE_DEFEATED] > 0)
+			addButton(3, "Lethice", SceneLib.d3.lethice.defeated, false).hint("While you can't make her your eternal slave, you can punish her for her arrogance in your memories as much as you want.");
+		else addButtonDisabled(3, "L.", "Req. completing the game :)");
+		addButton(14, "Back", recallScenes);
+	}
 
 
     public function recallWakeUp():void {

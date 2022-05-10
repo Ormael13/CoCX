@@ -207,6 +207,7 @@ public class DriderIncubusScenes extends BaseContent
 			if (!recalling) flags[kFLAGS.DRIDERINCUBUS_DEFEATED] = 1;
 
 			clearOutput();
+			if (!recalling) outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
 			var m:DriderIncubus = monster as DriderIncubus;
 			//HP
 			if (hpVictory)

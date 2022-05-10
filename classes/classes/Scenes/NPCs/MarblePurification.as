@@ -933,6 +933,8 @@ public class MarblePurification extends NPCAwareContent{
 		if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0) outputText("egg Marble into violating Clara with her cock, ");
 	 	outputText(" or try to calm Marble down so that she doesn't do anything to her sister.");
 
+		if (!recalling) outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+
 		menu();
 		//PC chooses what kind of victory scene they want to do to Clara.
 		//options are: Spank (can always do), Threesome (if the PC has a cock that is under 20 area, or a vagina), "NTR" (if PC has a cock that will fit Marble, or a vagina), Marble cock (if Marble has a cock), and Calm down (always possible).

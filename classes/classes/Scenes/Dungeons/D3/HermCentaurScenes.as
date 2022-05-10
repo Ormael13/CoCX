@@ -36,6 +36,7 @@ import classes.Scenes.SceneLib;
 		public function beatThePony(hpVictory:Boolean):void
 		{
 			clearOutput();
+			if (!recalling) outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
 			outputText("With a heavy 'thud', the demonic red-head slumps onto her side in the grass.  Her tail flails fitfully");
 			if (hpVictory) outputText(" as she tries to rise");
 			else outputText(" as she tries to stretch for her pulsating, cum-dripping member");
