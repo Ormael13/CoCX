@@ -287,19 +287,28 @@ package classes.Scenes
 			outputText("-Added new skill: Mining. It level cap is 2 at lvl 0 and 20 at lvl 18+. Leveled by mining in various places in Mareth and the higher level the better ores or more material can be gained. Ocassionaly even chance to mine precious items will be boosted by higher level of that skill.\n");
 			outputText("-Atlach Nacha bonuses changed to +230% to Str racial multi, +265% to Tou racial multi, +300% to Int racial multi, +300% to Lib racial multi, -60% to Wis racial multi, +90 to Sens. It can now also reach Greater Atlach Nacha at 30+ pts with following bonuses: +340% to Str racial multi, +400% to Tou racial multi, +425% to Int racial multi, +425% to Lib racial multi, -90% to Wis racial multi, +150 to Sens. ");
 			outputText("Now it would additionaly could adccess Venom Glands internal mutation in addition to Arachnid Book Lung & Tracheal System.\n");
-			outputText("-New armor (by Canadian Snas): Green Diving Suit - buyable at Belisa shop. Cost 2,160 gems, 20 armor, 34 magic resistance, +30% magic power.\n");
-			outputText("-New armor (by Canadian Snas): Green Diving Suit - buyable at Belisa shop. Cost 13,200 gems, 8 armor, 58 magic resistance, 50% slutty seduction, Wizard’s endurance 60%, does tease damage when casting.\n");
+			outputText("-New armor (by Canadian Snas): Drider-weave Armor - buyable at Belisa shop. Cost 2,160 gems, 20 armor, 34 magic resistance, +30% magic power. (also would count for check with heavy armor type)\n");
+			outputText("-New armor (by Canadian Snas): Drider-Weave Sheer Robe - buyable at Belisa shop. Cost 13,200 gems, 8 armor, 58 magic resistance, 50% slutty seduction, Wizard’s endurance 60%, does tease damage when casting.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -326,9 +335,6 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -403,12 +409,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -440,7 +441,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
