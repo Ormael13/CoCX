@@ -10,8 +10,6 @@ import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 import classes.StatusEffects;
 
-import flash.net.SharedObject;
-
 public class LethiceScenes extends BaseContent
 	{
 		public static const GAME_END_REDEMPTION:uint = 1;
@@ -29,47 +27,15 @@ public class LethiceScenes extends BaseContent
 			menu();
 			//addButton(0, "Export", exportSaveData).hint("Export your save for possible use in CoC2.");
 			if (flags[kFLAGS.GAME_END] == GAME_END_CONSORT)
-				addButtonDisabled(1, "Continue", "Nuh-uh. Mareth is too fucked up to let you continue and it's all due to the consequences you've made.");
+				addButtonDisabled(1, "Continue", "Nuh-uh. Mareth is too fucked up to let you continue, and it's all due to the consequences you've made.");
 			else
-				addButton(1, "Continue", postEndingReturn).hint("Continue the game so you complete anything you've missed.");
+				addButton(1, "Continue", postEndingReturn).hint("Continue the game to complete anything you've missed.");
 			addButton(4, "Quit", quitToMenu).hint("Quit and return to the main menu?");
-		}
-		
-		private function exportSaveData():void
-		{
-			// This is turbo wankle style shit, but it'll work well enough for now.
-			
-			// 1. This will be a nightmare to get into CoC2 directly...
-			// 2. But I could throw down a shitty little converter SWF as an interim step.
-			// 3. It also avoids having to rewrite all the fuckin save code all over again to get the shit out in a better format *right now*
-			
-			var foundFreeFile:Boolean = false;
-			var baseFileName:String = "CoC_EndExport_";
-			var currFileName:String;
-			var attemptNum:int = 1;
-			
-			while (!foundFreeFile)
-			{
-				currFileName = baseFileName + String(attemptNum);
-				var sharedObject:SharedObject = SharedObject.getLocal(currFileName, "/");
-				if (sharedObject.size <= 100) foundFreeFile = true;
-				sharedObject.close();
-				attemptNum++;
-			}
-			
-			// Found a free file, throw it at the base save code by abusing the fuck out of Slot
-            CoC.instance.saves.saveGameObject(currFileName, false);
-            // Now would be a good time to pray this shit works.
-			
-			clearOutput();
-			outputText("<b>The End...</b>");
-			menu();
-			addButton(0, "Game Over", quitToMenu);
 		}
 		
 		private function postEndingReturn():void {
 			clearOutput();
-			outputText("You may have defeated Lethice and completed the main story but the fun isn't over! It's time for you to return to the game and begin a new era of Mareth.");
+			outputText("You may have defeated Lethice and completed the main story, but the fun isn't over! It's time for you to return to the game and begin a new era of Mareth.");
 			awardAchievement("Demon Slayer", kACHIEVEMENTS.STORY_FINALBOSS, true, true, false);
 			cleanupAfterCombat();
 			if (flags[kFLAGS.LETHICE_DEFEATED] <= 0) flags[kFLAGS.LETHICE_DEFEATED] = 1;
@@ -88,10 +54,8 @@ public class LethiceScenes extends BaseContent
 
 		public function encounterLethice():void
 		{
-			if (player.cor < 90)
-			{
+			if (player.cor < 90 - player.corruptionTolerance)
 				goFight();
-			}
 			else
 			{
 				menu();
@@ -136,16 +100,13 @@ public class LethiceScenes extends BaseContent
 			outputText("\n\nThe question remains - what to do with her?");
 			
 			menu();
-			if (player.hasCock()) addButton(0, "Plow Her", plowHer);
-			if (player.hasVagina()) addButton(1, "Queen Her", queenHer);
+			addButtonIfTrue(0, "Plow Her", plowHer, "Req. a cock.", player.hasCock(), "Use your dick.");
+			addButtonIfTrue(1, "Queen Her", queenHer, "Req. a vagina.", player.hasVagina(), "Use your vagina.");
 			addButton(2, "Boob Play", boobPlay, hpVictory);
 
-			//var hasLethicite:Boolean = (player.hasKeyItem("Sheila's Lethicite") > 0) || (player.hasKeyItem("Stone Statue Lethicite") > 0);
-			//if (hasLethicite && player.hasStatusEffect(StatusEffects.MetMarae) && !player.hasStatusEffect(StatusEffects.FactoryOverload))
-			if ((player.hasKeyItem("Sheila's Lethicite") > 0) || (player.hasKeyItem("Stone Statue Lethicite") > 0) && flags[kFLAGS.MET_MARAE] == 1 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1)
-			{
-				addButton(5, "Redemption", redemption, hpVictory);
-			}
+			addButtonIfTrue(5, "Redemption", curry(redemption, hpVictory),
+				"Requires to have any lethicite shard, and purify Marae by shutting down the factory in a safe way.",
+				(player.hasKeyItem("Sheila's Lethicite") > 0) || (player.hasKeyItem("Stone Statue Lethicite") > 0) && flags[kFLAGS.MET_MARAE] == 1 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1);
 		}
 
 		private function plowHer():void
@@ -165,7 +126,7 @@ public class LethiceScenes extends BaseContent
 			
 			outputText("\n\nYou reward her weak insult with a slap on the ass, as hard as you can make it. The demoness yelps, rocking forward with the impact; her ass jiggles and sways hypnotically, reddening where you hit her until you can see your hand print glistening on her ass. Practically a mark of ownership! Grinning to yourself, you do it again on the other cheek, swatting the queen hard enough that she can’t hold back a cry of... of pleasure?");
 			
-			outputText("\n\nGlancing down between her legs, you can see clear as day that her puffy pink pussy is glistening with moisture. Oh-ho, for such a haughty queen, Lethice might just have a hidden fetish deep down there... You give her another swat, and another, alternating cheeks as you make the Demon Queen croon with agonizing ecstasy. She fucking loves it! Ten spanks in and her crotch is a swamp, thighs bathed in glistening rivulets of her excitement. Ten more, and you’re fairly sure she orgasms, giving off a shrill cry of pleasure that echoes through the throne room. Every other demon in the place is silent for once, locked in a rapture of confusion and arousal.");
+			outputText("\n\nGlancing down between her legs, you can see clear as day that her puffy pink pussy is glistening with moisture. Oh-ho, for such a haughty queen, Lethice might just have a hidden fetish deep down there... You give her another swat, and another, alternating cheeks as you make the Demon Queen croons with agonizing ecstasy. She fucking loves it! Ten spanks in, and her crotch is a swamp, thighs bathed in glistening rivulets of her excitement. Ten more, and you’re fairly sure she orgasms, giving off a shrill cry of pleasure that echoes through the throne room. Every other demon in the place is silent for once, locked in a rapture of confusion and arousal.");
 			
 			outputText("\n\nAnd Lethice? Lethice is panting and gasping, whining with the lingering sting you’ve left on her bubble butt. You’re half sure she’s used her shapeshifting powers to pad her rump out, making her ass as full and soft as a cow-girl’s - and as sensitive as a clit, if the way just running your fingers across her bare behind makes her gasp and bite at her lip, wings batting weakly under your firm grasp.");
 			
@@ -174,19 +135,14 @@ public class LethiceScenes extends BaseContent
 			else outputText(" cocks");
 			outputText(" [cocks] pushing uncomfortably against your [armor]. Deciding she’s had enough of an ass-beating, you shrug out of your gear and grab your prick, letting it flop mightily between Lethice’s up-turned cheeks. She gasps, clawing her fingers into the seat of her throne but finding no purchase as your [hips] bear down on her. After the spanking you’ve given her, though, Lethice is too lust-addled and weak-kneed to do anything but whimper and lift her spaded tail like a bitch in heat, all but inviting you to plow your cock into her sweet demon’s cunny.");
 
+			menu();
+			addButton(0, "Fuck Pussy", plowHerPussy);
+			addButton(1, "Fuck Butt", plowHerButt);
 			if (player.cocks.length == 1)
-			{
 				outputText("\n\nUnless you have better plans...");
-				menu();
-				addButton(0, "Fuck Pussy", plowHerPussy);
-				addButton(1, "Fuck Butt", plowHerButt);
-				return;
-			}
-			else
-			{
+			else {
 				outputText("\n\nOf course, with more than one cock, you can easily take advantage of everything the queen bitch has to offer...");
-				menu();
-				addButton(0, "Next", plowHerDouble);
+				addButton(2, "Double", plowHerDouble);
 			}
 		}
 
@@ -217,8 +173,8 @@ public class LethiceScenes extends BaseContent
 			
 			outputText("\n\nAnd now, you’ve got a choice to make...");
 
-			menu();
-			addButton(0, "Next", theChoiceDunDunDun);
+			if (!recalling) player.sexReward("vaginalFluids", "Dick");
+			theChoiceDunDunDun();
 		}
 
 		private function plowHerButt():void
@@ -252,6 +208,7 @@ public class LethiceScenes extends BaseContent
 			
 			outputText("\n\nAnd now, you’ve got a choice to make...");
 
+			if (!recalling) player.sexReward("Default", "Dick", true, false);
 			theChoiceDunDunDun();
 		}
 
@@ -282,6 +239,10 @@ public class LethiceScenes extends BaseContent
 			
 			outputText("\n\nAnd now, you’ve got a choice to make...");
 
+			if (!recalling) {
+				player.sexReward("vaginalFluids", "Dick");
+				player.sexReward("Default", "Dick", true, false);
+			}
 			theChoiceDunDunDun();
 		}
 
@@ -331,6 +292,7 @@ public class LethiceScenes extends BaseContent
 			
 			outputText("\n\nAnd now, you’ve got a choice to make...");
 
+			if (!recalling) player.sexReward("vaginalFluids", "Vaginal");
 			theChoiceDunDunDun();
 		}
 
@@ -351,8 +313,11 @@ public class LethiceScenes extends BaseContent
 			outputText("\n\nYour eyes go wide, staring at Lethice’s rapidly-growing chest. Your fallen foes gives you a teasing look, fluttering her eyelashes like an innocent maiden - she’s not even taking this seriously! Giving her a fearsome scowl, you rear back and give one of her swelling teats a rough slap. The sound echoes throughout the throne room, a thunderous sound that lays a hush over the crowd of demons. Lethice gasps, but her chest seems to hop up a whole cup size the moment you strike her alabaster flesh.");
 			if (player.hasCock()) outputText(" They’re easily big enough to fuck now!");
 			outputText("\n\nYou’re half sure now that Lethice is just trying to entice you, but after all you’ve been through... everything you’ve done to get here... you don’t really care. You’re going to take your just rewards from the queen, whether she likes it or not.");
-			if (player.hasCock())
-			{
+			sceneHunter.selectGender(dickF,
+				player.hasVagina() ? vagAssF : null,
+				player.hasVagina() ? null : vagAssF);
+
+			function dickF():void {
 				outputText("\n\nYanking off your [armor], you grab your [cock] and let the hardening slab of meat flop into the growing valley of Lethice’s cleavage. The Demon Queen licks her lips at the sight of it, her dark eyes gleaming hungrily. You have to give her another rough push down, putting the demoness back in her place: she’s not in charge here!");
 				outputText("\n\nHer back goes flat against the flagstone, making her grunt with surprise, but she just giggles and cups her breasts, inviting you to ravish the slip of flesh between them. Her tits are two plump orbs now, sinfully soft and jiggling with every one of their owner’s quickened breaths. You ram your hips forward, more than happy to take advantage of the quivering valley you’ve brought into existence. Each thrust between the Demon Queen’s tits just makes them grow more and more, at first lovingly caressing your [cock], then enveloping it completely. She’s quickly surrounded your entire member in her ever-expanding titflesh, and shows no sign of stopping! The once petite queen looks positively cowgirl-like now, and you’re starting to feel liquid sloshing around in her chest too! She gasps, and a squirt of pale purple milk squirts out of her now saucer-sized teats. Geysers of corrupted cream spurt out of her every time your [hips] slam into Lethice’s jiggling underside, eliciting a sensual moan from the soulless faux-nun with each mighty thrust.");
 				outputText("\n\n<i>\"So strong... so <b>vigorous</b>!\"</i> Lethice moans, lifting herself onto her elbows to get a look at you over the still-inflating mass of her breasts. <i>\"You fought so hard to get here, and now all you can think about is a pair of tits! It’s almost funny, Champion.\"</i>");
@@ -367,10 +332,11 @@ public class LethiceScenes extends BaseContent
 				outputText("\n\nYour hands close firmly on Lethice’s thick, pink teats, clutching hard enough to make her back arch beneath you. The added sensation of her tits grinding against your shaft, pinched between her writhing body and your firm hands, is just what you needed to send you over the edge. You feel a rush of spunk surging through your meaty shaft, rushing up to meet the Demon Queen’s lush red lips. The next thing you hear is a familiar choking, gasping cough as Lethice’s mouth is flooded with your seed. You keep pistoning your hips, hammering the queen’s corrupted mouth until you’ve spent every drop you have left into her.");
 				outputText("\n\nWhen you’re done with her, the Demon Queen looks like any other well-used whore: ragged, gasping, drooling with your cum. She wasn’t so tough after all - just another demon that stood in your way. Sated, you stagger up and to the nearest place to rest: her throne. You collapse upon it, assured of your victory as you look out upon the defeated host of demons you plowed through to get here.");
 				outputText("\n\nBut now... now you have a choice to make.");
+				if (!recalling) player.sexReward("milk", "Dick");
+				theChoiceDunDunDun();
 			}
-			else
-			{
-				outputText("\n\nOf course, she doesn’t have much to offer you right now. So plain, so... human. Were it not for the wings and horns, she might be just any other girl. But she <i>is</i> a demon - a shapeshifter, a being that exists as consummate pleasure incarnate. She can be anything you want her to be: and you want a whole new way to play with those growing tits of hers. You latch your hands around her nipples and give both swollen pink peaks a rough yank, making the queen croon in pleasure.");
+			function vagAssF():void {
+				outputText("\n\nOf course, she doesn’t have much to offer you right now. So plain, so... human. Were it not for the wings and horns, she might be just any other girl. But she <i>is</i> a demon - a shapeshifter, a being that exists as consummate pleasure incarnate. She can be anything you want her to be, and you want a whole new way to play with those growing tits of hers. You latch your hands around her nipples and give both swollen pink peaks a rough yank, making the queen croon in pleasure.");
 				outputText("\n\n<i>\"Ah! You’re positively <b>obsessed</b>, aren’t you, Champion?\"</i> Lethice moans, chewing her lower lip seductively. <i>\"You’ve come all this way, just to play with my tits. Why, if that’s all you wanted, you could have just asked. I’d have been more than happy to let a big, strong "+ player.mf("man", "woman") +" like you crawl into my lap and play with me until you came your soul right out for me.\"</i>");
 				outputText("\n\nYou give the Demon Queen a rueful grin. No way she’s getting your soul - not while she’s on her back, completely at your mercy. To the victor go the spoils...");
 				outputText("\n\nYour hands keep groping and pulling on Lethice’s exposed nipples, and sure enough, they keep growing just like her tits were a moment ago, eagerly responding to your rough caresses. It’s like her body wants this, wants to mold itself into the perfect fuck-toy for you! A few more vindictive seconds of teasing and Lethice’s teats look like a pair of great big pink dicks: two pillars of flesh jutting up from her teats and drooling with purple-tainted demon-milk.");
@@ -408,9 +374,9 @@ public class LethiceScenes extends BaseContent
 				outputText(".");
 				outputText("\n\nWhen you’re done with her, the Demon Queen looks like any other well-used whore: ragged, gasping, slathered with sexual fluids and milk. She wasn’t so tough after all - just another demon that stood in your way. Sated, you stagger up and to the nearest place to rest: her throne. You collapse upon it, assured of your victory as you look out upon the defeated host of demons you plowed through to get here.");
 				outputText("\n\nBut now... now you have a choice to make.");
+				if (!recalling) player.sexReward("milk", player.hasVagina() ? "Vaginal" : "Anal");
+				theChoiceDunDunDun();
 			}
-
-			theChoiceDunDunDun();
 		}
 
 		private function redemption(hpVictory:Boolean):void
@@ -432,8 +398,7 @@ public class LethiceScenes extends BaseContent
 			
 			outputText("\n\nTaking Lethice by the shoulder, you march the defeated demon out of the grandiose hall and out towards the winding path down the mountain. You’ve got an important meeting with a certain tree-goddess.");
 
-			menu();
-			addButton(0, "Next", redemptionII);
+			doNext(redemptionII);
 		}
 
 		private function redemptionII():void
@@ -499,11 +464,10 @@ public class LethiceScenes extends BaseContent
 			
 			outputText("\n\nWhat do you tell her?");
 
-			menu();
-			addButton(0, "Next", redemptionIII);
+			doNext(!recalling ? redemptionIIISelectName : redemptionIII);
 		}
 
-		private function redemptionIII():void
+		private function redemptionIIISelectName():void
 		{
 			clearOutput();
 
@@ -514,28 +478,26 @@ public class LethiceScenes extends BaseContent
 			mainView.nameBox.x = mainView.mainText.x + 5;
 			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 
-			menu();
-			addButton(0, "Next", redemptionIIIGoName);
+			doNext(redemptionIIIGoName);
 		}
 
-		private function redemptionIIIGoName():void
-		{
-			if(mainView.nameBox.text == "") 
-			{
+		private function redemptionIIIGoName():void {
+			if (mainView.nameBox.text == "") {
 				clearOutput();
 				outputText("<b>You must select a name.</b>");
 				mainView.nameBox.x = mainView.mainText.x + 5;
 				mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
-				menu();
-				addButton(0,"Next",redemptionIII);
+				doNext(redemptionIII);
 				return;
 			}
 
 			flags[kFLAGS.LETHICE_NAME] = mainView.nameBox.text;
 			mainView.nameBox.visible = false;
+			redemptionIII();
+		}
 
+		private function redemptionIII():void {
 			clearOutput();
-
 			if (flags[kFLAGS.LETHICE_NAME] == "Lethice")
 			{
 				outputText("You decide to tell her the truth - to give her back the name she bore as the Demon Queen. Trying to hide who and what she was from her - and from the world - will do you no good. The rest of the demons, and those who fight against them, deserve to see that there is hope. That even the Demon Queen could be made whole again.");
@@ -552,8 +514,7 @@ public class LethiceScenes extends BaseContent
 						   ", and tell her that she’s a creation of the goddess Marae, a redeemed soul made manifest. She stares at you with wide eyes as you half-explain and half-lie about her origins, who she is now and what world she’s been born into. The very mention of demons, creatures running wild across the tainted realm, sends shivers through her, and recounting their deeds to destroy her <i>\"mother\"</i> and the pure beings of Mareth brings tears to her eyes.");
 			}
 
-			menu();
-			addButton(0, "Next", redemptionIV);
+			doNext(redemptionIV);
 		}
 
 		private function redemptionIV():void
@@ -580,9 +541,12 @@ public class LethiceScenes extends BaseContent
 			
 			outputText("\n\n<b>THE END</b>");
 
-			flags[kFLAGS.GAME_END] = GAME_END_REDEMPTION;
-			player.createStatusEffect(StatusEffects.LethiceRedemed, 0, 0, 0, 0);
-			saveExport();
+			if (!recalling) {
+				flags[kFLAGS.GAME_END] = GAME_END_REDEMPTION;
+				player.createStatusEffect(StatusEffects.LethiceRedemed, 0, 0, 0, 0);
+				saveExport();
+			}
+			else doNext(camp.recallWakeUp);
 		}
 
 		private function joinHer():void
@@ -630,7 +594,7 @@ public class LethiceScenes extends BaseContent
 			
 			outputText("\n\nIt’s an easy choice. One that will pay out a thousand times over, earning you every pleasure of the flesh you’ve become so utterly addicted to since your first arrived in this tainted world. What do you need a soul for anyway, if that’s what’s holding you back. Trading it away is a small price for the power and pleasure that Lethice’s court commands with such mastery. The knowledge you’ll soon be just like these creatures fills you with a mix of dread and excitement, wondering just what it must feel like to be a creature whose entire existence is nothing but sex, and the search for more and more extreme and hedonistic expressions of it.");
 			
-			outputText("\n\nYou approach the throne and slink down to your knees, placing your hands firmly on the Demon Queen’s creamy thighs. She smiles regally, hungrily, down upon you while you explore the gulf between her legs, moving ever closer to her alluring hole. Eventually, your lips close with hers, gently teasing your way until the you taste the first sweet droplets of corrupted, feminine excitement.");
+			outputText("\n\nYou approach the throne and slink down to your knees, placing your hands firmly on the Demon Queen’s creamy thighs. She smiles regally, hungrily, down upon you while you explore the gulf between her legs, moving ever closer to her alluring hole. Eventually, your lips close with hers, gently teasing your way until you taste the first sweet droplets of corrupted, feminine excitement.");
 			
 			outputText("\n\nAn explosion of sensation erupts through your [tongue], spreading as a tingling warmth all through your mouth, throat, and beyond. You’ve barely gotten your tongue out of your mouth before the alien feeling has spread through your entire body, infusing you with renewed lust above and beyond anything you’ve felt for the statuesque demoness. Like a "+ player.mf("man", "woman") +" starving, you dig in with desperate abandon, munching that demonic rug with everything you have.");
 			
@@ -642,8 +606,7 @@ public class LethiceScenes extends BaseContent
 			
 			outputText("\n\nYou wouldn’t have it any other way.");
 
-			menu();
-			addButton(0, "Next", joinHerII);
+			doNext(joinHerII);
 		}
 
 		private function joinHerII():void
@@ -695,8 +658,11 @@ public class LethiceScenes extends BaseContent
 			
 			outputText("\n\n<b>THE END</b>");
 
-			flags[kFLAGS.GAME_END] = GAME_END_CONSORT;
-			saveExport();
+			if (!recalling) {
+				flags[kFLAGS.GAME_END] = GAME_END_CONSORT;
+				saveExport();
+			}
+			else doNext(camp.recallWakeUp);
 		}
 
 		public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -729,8 +695,7 @@ public class LethiceScenes extends BaseContent
 			else outputText(" not to let her see how weak you are, how easy it really would be for her to kill you... or worse");
 			outputText(". The Demon Queen just smiles all the wider as she turns from you, striding towards her throne. She stops after a few long-legged paces, casting a gaze over her shoulder to you. <i>\"What are you waiting for, </i>dog<i>? Come along...\"</i>");
 
-			menu();
-			addButton(0, "Next", woofwoof);
+			doNext(woofwoof);
 		}
 
 		private function woofwoof():void
@@ -778,8 +743,7 @@ public class LethiceScenes extends BaseContent
 				outputText("}’s fingers, I wonder? Tsk, more punishments to deal out, I suppose. Isn’t that right, "+ player.mf("boy", "girl") +"?\"</i>");
 			}
 
-			menu();
-			addButton(0, "Next", woofwoofII);
+			doNext(woofwoofII);
 		}
 
 		private function woofwoofII():void
@@ -851,9 +815,12 @@ public class LethiceScenes extends BaseContent
 
 		private function theChoiceDunDunDun():void
 		{
-			menu();
-			addButton(0, "Kill Her", killHer);
-			addButton(1, "Leave Her", leaveHer);
+			if (!recalling) {
+				menu();
+				addButton(0, "Kill Her", killHer);
+				addButton(1, "Leave Her", leaveHer);
+			}
+			else doNext(camp.recallWakeUp);
 		}
 
 		private function killHer():void
@@ -897,8 +864,7 @@ public class LethiceScenes extends BaseContent
 			outputText("\n\nYou’d almost feel bad for them if they weren’t responsible for so much pain and death, but you’ve more to worry about than your foes’ origins. Arcane diagrams and portal construction techniques are everywhere. Sorting them out is going to take weeks.");
 			outputText("\n\nSighing, you grab a book and sit down to study it. Maybe they figured it out before you drove them out?");
 
-			menu();
-			addButton(0, "Next", goHomeII);
+			doNext(goHomeII);
 		}
 
 		private function goHomeII():void
@@ -917,7 +883,7 @@ public class LethiceScenes extends BaseContent
 		{
 			clearOutput();
 
-			outputText("<b>Later...\n</b>Tales of the Champion’s return are rarely told, not in the open anyway. "+ player.mf("He", "She") +" blew into town with all the subtlety of a cyclone, laying waste to the village’s elders and all who dared defend them. Every villager remembers that night, the night that their leadership was put to the torch - literally. Each of them was left to die inside his own burning mans, bathed in the scorching heat until naught remained but ashes and memories.");
+			outputText("<b>Later...\n</b>Tales of the Champion’s return are rarely told, not in the open anyway. "+ player.mf("He", "She") +" blew into town with all the subtlety of a cyclone, laying waste to the village’s elders and all who dared defend them. Every villager remembers that night, the night that their leadership was put to the torch - literally. Each of them was left to die inside his own burning men, bathed in the scorching heat until naught remained but ashes and memories.");
 			outputText("\n\nAfter that night, there wasn’t a rebellious soul left alive to oppose to the Champion’s rule. "+ player.mf("He", "She") +" became the defacto "+ player.mf("King", "Queen") +" of the village, the breaker of the old ways and forger of the new.");
 			if (player.cor <= 33) outputText(" Despite the fear and terror of "+ player.mf("his", "her") +" arrival, "+ player.mf("he", "she") +" proved a fair and wise monarch. The village soon became a town, and that town a city. Prosperity came to those who lived in the valley, guided by the strength of its unshakable ruler.");
 			else if (player.cor <= 66) outputText(" Despite the fear and terror of "+ player.mf("his", "her") +" arrival, "+ player.mf("he", "she") +" proved a competent, if harsh monarch. The village’s prosperity was marred only by its limited liberties. Still, it was soon a town, and later a city. Most folk were willing to sacrifice their freedoms for the safety "+ player.mf("he", "she") +" provided.");
@@ -1060,28 +1026,27 @@ public class LethiceScenes extends BaseContent
 
 		private function hasChildren():Boolean
 		{
-			if (player.statusEffectv1(StatusEffects.Birthed) > 0) return true;
-			if (flags[kFLAGS.AMILY_BIRTH_TOTAL] > 0 || flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] > 0) return true;
-			if (flags[kFLAGS.BENOIT_EGGS] > 0) return true;
-			if (flags[kFLAGS.COTTON_KID_COUNT] > 0) return true;
-			if (flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) return true;
-			if (flags[kFLAGS.EMBER_CHILDREN_MALES] > 0) return true;
-			if (flags[kFLAGS.EMBER_CHILDREN_FEMALES] > 0) return true;
-			if (flags[kFLAGS.EMBER_CHILDREN_HERMS] > 0) return true;
-			if (flags[kFLAGS.EMBER_EGGS] > 0) return true;
-			if (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0) return true;
-			if (flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0) return true;
-			if (flags[kFLAGS.KELLY_KIDS_MALE] > 0 || flags[kFLAGS.KELLY_KIDS] > 0) return true;
-			if (flags[kFLAGS.MARBLE_KIDS] > 0) return true;
-			if (flags[kFLAGS.ANT_KIDS] > 0) return true;
-			if (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0) return true;
-			if (flags[kFLAGS.SHEILA_JOEYS] > 0) return true;
-			if (flags[kFLAGS.SHEILA_IMPS] > 0) return true;
-			if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0 || flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) return true;
-			if (flags[kFLAGS.SOPHIE_EGGS_LAID] > 0) return true;
-			if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 0) return true;
-            if (SceneLib.urtaPregs.urtaKids() > 0) return true;
-            return false;
+			return player.statusEffectv1(StatusEffects.Birthed) > 0
+				|| flags[kFLAGS.AMILY_BIRTH_TOTAL] > 0 || flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] > 0
+				|| flags[kFLAGS.BENOIT_EGGS] > 0
+				|| flags[kFLAGS.COTTON_KID_COUNT] > 0
+				|| flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0
+				|| flags[kFLAGS.EMBER_CHILDREN_MALES] > 0
+				|| flags[kFLAGS.EMBER_CHILDREN_FEMALES] > 0
+				|| flags[kFLAGS.EMBER_CHILDREN_HERMS] > 0
+				|| flags[kFLAGS.EMBER_EGGS] > 0
+				|| flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] > 0
+				|| flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS] > 0
+				|| flags[kFLAGS.KELLY_KIDS_MALE] > 0 || flags[kFLAGS.KELLY_KIDS] > 0
+				|| flags[kFLAGS.MARBLE_KIDS] > 0
+				|| flags[kFLAGS.ANT_KIDS] > 0
+				|| flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0
+				|| flags[kFLAGS.SHEILA_JOEYS] > 0
+				|| flags[kFLAGS.SHEILA_IMPS] > 0
+				|| flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0 || flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0
+				|| flags[kFLAGS.SOPHIE_EGGS_LAID] > 0
+				|| flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 0
+				|| SceneLib.urtaPregs.urtaKids() > 0;
 		}
 
 		private function purgeShit():void
@@ -1213,7 +1178,7 @@ public class LethiceScenes extends BaseContent
 		private function putBackLethiciteArmor():void {
 			flags[kFLAGS.LETHICITE_ARMOR_TAKEN] = 0;
 			clearOutput();
-			outputText("Unfortunately, you don't have enough space in your inventory so you put the armor back where it was.");
+			outputText("Unfortunately, you don't have enough space in your inventory, so you put the armor back where it was.");
             doNext(SceneLib.d3.resumeFromFight);
         }
 	}

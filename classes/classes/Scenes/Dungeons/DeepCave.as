@@ -48,7 +48,6 @@ use namespace CoC;
 				clearOutput();
 				outputText("The door won't budge.");
 				doNext(roomGatheringHall);
-				return;
 			}
 			else roomZetazChamber();
 		}
@@ -57,7 +56,6 @@ use namespace CoC;
 				clearOutput();
 				outputText("The door appears to be locked as if by magic! You'll have to defeat Zetaz before you can leave.");
 				doNext(roomGatheringHall);
-				return;
 			}
 			else roomTunnel();
 		}
