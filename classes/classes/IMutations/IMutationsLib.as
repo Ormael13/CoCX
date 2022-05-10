@@ -63,6 +63,9 @@ public class IMutationsLib
 		public static const KitsuneThyroidGlandIM:PerkType = new KitsuneThyroidGlandMutation();
 		public static const LactaBovinaOvariesIM:PerkType = new LactaBovinaOvariesMutation();
 		public static const LizanMarrowIM:PerkType = new LizanMarrowMutation();
+		public static const ManticoreMetabolismIM:PerkType = new ManticoreMetabolismMutation();
+		public static const MantislikeAgilityIM:PerkType = new MantislikeAgilityMutation();
+		public static const MelkieLungIM:PerkType = new MelkieLungMutation();
 		public static const TrachealSystemIM:PerkType = new TrachealSystemMutation();
 		public static const VampiricBloodstreamIM:PerkType = new VampiricBloodstreamMutation();
 
@@ -82,7 +85,7 @@ public class IMutationsLib
 				IMutationsList.push([HeartOfTheStormIM,HeartOfTheStormMutation]);
 			}
 			function IMutationsMuscle():void{
-
+				IMutationsList.push([MantislikeAgilityIM,MantislikeAgilityMutation]);
 			}
 			function IMutationsMouth():void{
 				IMutationsList.push([HollowFangsIM,HollowFangsMutation]);
@@ -101,9 +104,11 @@ public class IMutationsLib
 			function IMutationsLungs():void{
 				IMutationsList.push([DraconicLungIM,DraconicLungMutation]);
 				IMutationsList.push([DrakeLungIM,DrakeLungMutation]);
+				IMutationsList.push([MelkieLungIM, MelkieLungMutation]);
 			}
 			function IMutationsMetabolism():void{
 				IMutationsList.push([DisplacerMetabolismIM,DisplacerMetabolismMutation]);
+				IMutationsList.push([ManticoreMetabolismIM,ManticoreMetabolismMutation]);
 				//IMutationsList.push([SlimeMetabolismIM,SlimeMetabolismMutation]);
 			}
 			function IMutationsOvaries():void{

@@ -454,7 +454,7 @@ package classes.Scenes.Places.HeXinDao
 				if (player.hasCock()) outputText(" This said the transformation doesn't end there as heat begins to move down to your crotch.");
 			}
 			if (player.gender == 1) {
-				outputText(" Your penis suddenly begins to drip pre as you immediately go erect, the blood vessels pulsing purple as if your cock was possessed while your member inflates in size, gaining five extra inches!");
+				outputText(" Your penis suddenly begins to drip pre as you immediately go erect, the blood vessels pulsing purple as if your cock was possessed while your member inflates in size, gaining " + (player.cocks[0].cockLength <= 12? "five": "two and a half")+" extra inches!");
 				player.increaseCock(0, 5);
 			}
 			if (player.femininity > 50) player.femininity = 100;
