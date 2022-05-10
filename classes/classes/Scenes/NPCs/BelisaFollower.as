@@ -592,9 +592,12 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		menu();
 		//addButton(0, "Bands", BuyHolyBands);
 		addButton(1, useables.T_SSILK.shortName, belisaBuy, useables.T_SSILK, 300);
-		addButton(2, undergarments.DRI_PANTY.shortName, belisaBuy, undergarments.DRI_PANTY, 1400);
-		addButton(3, undergarments.DRI_BRA.shortName, belisaBuy, undergarments.DRI_BRA, 1200);
-		addButton(4, "Nevermind", Encounterback);
+		addButton(2, undergarments.DRI_PANTY.shortName, belisaBuy, undergarments.DRI_PANTY, 2100);
+		addButton(3, undergarments.DRI_BRA.shortName, belisaBuy, undergarments.DRI_BRA, 1800);
+		addButton(5, armors.DWSROBE.shortName, belisaBuy, armors.DWSROBE, 13200);
+		addButton(6, armors.DWARMOR.shortName, belisaBuy, armors.DWARMOR, 2160);
+		if (BelisaInCamp) addButton(14, "Back", BelisaMainCampMenu);
+		else addButton(14, "Nevermind", Encounterback);
 	}
 	public function BuyHolyBands():void {
 		clearOutput();

@@ -734,7 +734,7 @@ use namespace CoC;
 				}
 			}
 			if (hasPerk(PerkLib.ArmorMaster)) {
-				if (armorPerk == "Heavy") speedBonus += Math.round(spe / 50);
+				if (armorPerk == "Heavy" || _armor.name == "Drider-weave Armor") speedBonus += Math.round(spe / 50);
 			}
 			armorDef += speedBonus;
 			//Feral armor boosts armor ratings!
@@ -752,7 +752,7 @@ use namespace CoC;
 				toughnessBonus += Math.round(ballSize);
 			}
 			armorDef += toughnessBonus;
-			if (hasPerk(PerkLib.PrestigeJobSentinel) && armorPerk == "Heavy") armorDef += _armor.def;
+			if (hasPerk(PerkLib.PrestigeJobSentinel) && (armorPerk == "Heavy" || _armor.name == "Drider-weave Armor")) armorDef += _armor.def;
 			if (hasPerk(PerkLib.ShieldExpertise) && shieldName != "nothing" && isShieldsForShieldBash()) {
 				if (shieldBlock >= 4) armorDef += Math.round(shieldBlock * 0.25);
 				else armorDef += 1;
@@ -971,7 +971,7 @@ use namespace CoC;
 				}
 			}
 			if (hasPerk(PerkLib.ArmorMaster)) {
-				if (armorPerk == "Heavy") speedBonus += Math.round(spe / 50);
+				if (armorPerk == "Heavy" || _armor.name == "Drider-weave Armor") speedBonus += Math.round(spe / 50);
 			}
 			armorDef += speedBonus;
 			//Feral armor boosts armor ratings!
@@ -980,7 +980,7 @@ use namespace CoC;
 				toughnessBonus += Math.round(tou / 20);
 			}
 			armorDef += toughnessBonus;
-			if (hasPerk(PerkLib.PrestigeJobSentinel) && armorPerk == "Heavy") armorDef += _armor.def;
+			if (hasPerk(PerkLib.PrestigeJobSentinel) && (armorPerk == "Heavy" || _armor.name == "Drider-weave Armor")) armorDef += _armor.def;
 			if (hasPerk(PerkLib.ShieldExpertise) && shieldName != "nothing") {
 				if (shieldBlock >= 4) armorDef += Math.round(shieldBlock);
 				else armorDef += 1;
@@ -2551,7 +2551,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.FenrirSpikedCollar)) {
 				mult -= 15;
 			}
-			if (hasPerk(PerkLib.Juggernaut) && tou >= 100 && armorPerk == "Heavy") {
+			if (hasPerk(PerkLib.Juggernaut) && tou >= 100 && (armorPerk == "Heavy" || _armor.name == "Drider-weave Armor")) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.ImmovableObject) && tou >= 75) {
@@ -2560,7 +2560,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.AyoArmorProficiency) && tou >= 100 && (armorPerk == "Light Ayo" || armorPerk == "Heavy Ayo" || armorPerk == "Ultra Heavy Ayo")) {
 				mult -= 10;
 			}
-			if (hasPerk(PerkLib.HeavyArmorProficiency) && tou >= 75 && armorPerk == "Heavy") {
+			if (hasPerk(PerkLib.HeavyArmorProficiency) && tou >= 75 && (armorPerk == "Heavy" || _armor.name == "Drider-weave Armor")) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.ShieldHarmony) && tou >= 100 && isShieldsForShieldBash() && shieldName != "nothing" && !hasStatusEffect(StatusEffects.Stunned)) {
@@ -10534,15 +10534,13 @@ use namespace CoC;
 				score++;
 			// Perk +3 (TransformationImmunity)
 			if (hasPerk(PerkLib.TransformationImmunityAtlach))
-				score+=3;/*
-			// Perk +6 (Arachnid book lung)
+				score+=3;
 			if (hasPerk(MutationsLib.ArachnidBookLung))
 				score+=2;
 			if (hasPerk(MutationsLib.ArachnidBookLungPrimitive))
 				score+=2;
 			if (hasPerk(MutationsLib.ArachnidBookLungEvolved))
 				score+=2;
-			// Perk +3 (Tracheal)
 			if (hasPerk(MutationsLib.TrachealSystem))
 				score++;
 			if (hasPerk(MutationsLib.TrachealSystemPrimitive))
@@ -10551,13 +10549,12 @@ use namespace CoC;
 				score++;
 			if (hasPerk(MutationsLib.TrachealSystemFinalForm))
 				score++;
-			// Perk +3 (VenomGland)
 			if (hasPerk(MutationsLib.VenomGlands))
 				score++;
 			if (hasPerk(MutationsLib.VenomGlandsPrimitive))
 				score++;
 			if (hasPerk(MutationsLib.VenomGlandsEvolved))
-				score++;*/
+				score++;
 			if (isGargoyle()) score = 0;
 			if (hasPerk(PerkLib.ElementalBody)) score = 0;
 			End("Player","racialScore");
@@ -13154,26 +13151,26 @@ use namespace CoC;
 			}//+10/10-20
 			score = atlachNachaScore();
 			if (score >= 30) {
-				//30 Greater Atlach Nacha(360) +115 Strength +135 Toughness +150 Intelligence +150 Libido -50 wisdom +50 min/max sensitivity
-				maxStrCap2 += 115;
-				maxTouCap2 += 135;
-				maxIntCap2 += 150;
-				maxLibCap2 += 150;
-				maxWisCap2 -= 50;
-				currentSen += 50;
+				//30 Greater Atlach Nacha(1350)
+				maxStrCap2 += 340;
+				maxTouCap2 += 400;
+				maxIntCap2 += 425;
+				maxLibCap2 += 425;
+				maxWisCap2 -= 90;
+				currentSen += 150;
 			} else if (score >= 21) {
-				//21 Atlach Nacha(945) +80 Strength +90 Toughness +100 Intelligence +100 Libido -50 wisdom +50 sensitivity
-				maxStrCap2 += 280;
-				maxTouCap2 += 315;
-				maxIntCap2 += 350;
-				maxLibCap2 += 350;
-				maxWisCap2 -= 50;
+				//21 Atlach Nacha(945)
+				maxStrCap2 += 230;
+				maxTouCap2 += 265;
+				maxIntCap2 += 300;
+				maxLibCap2 += 300;
+				maxWisCap2 -= 60;
 				currentSen += 90;
 			} else if (score >= 14) {
-				//14 Incomplete Atlach Nacha(190) +50 toughness +75 intelligence +20 Libido -20 wisdom
+				//14 Incomplete Atlach Nacha(190)
 				maxTouCap2 += 60;
 				maxIntCap2 += 100;
-				maxLibCap2 += 40;
+				maxLibCap2 += 60;
 				maxWisCap2 -= 10;
 			}
 			if (hasPerk(PerkLib.ElementalBody)) {

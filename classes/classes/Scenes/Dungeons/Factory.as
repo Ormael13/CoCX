@@ -123,7 +123,7 @@ use namespace CoC;
 			}
 			else {
 				outputText(" While most of this stuff is either dangerous to use or just plain junk, you stumble on a book of spells.  This appears to be a tome on the theories behind magical wards.  This could be useful!");
-                outputText("You open the tome and begin to read.  The first chapter is a primer on white magic, while most of it is already familiar to you it briefly goes over a handful of theories that are new to you.");
+                outputText(" You open the tome and begin to read.  The first chapter is a primer on white magic, while most of it is already familiar to you it briefly goes over a handful of theories that are new to you.");
                 if (player.inte < 100) {
                     outputText(" You feel yourself smarter for this.");
                     dynStats("int", 1 + rand(4));

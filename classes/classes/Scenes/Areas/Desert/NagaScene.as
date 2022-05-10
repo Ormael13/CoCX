@@ -135,7 +135,8 @@ private function nagaNaga():void {
         doNext(camp.returnToCampUseOneHour);
 
     }
-    function nofitF(x:int):void {
+    function nofitF():void {
+        var x:int = player.biggestCockIndex();
         outputText("The kiss continues as both of your bodies rub together sensually, your tails continuing to wrap around one another. There is a pulsing in your " + player.cockDescript(x) + " as it starts to grow hard against the naga's soft belly. Feeling this, the naga gently pulls away, slowly letting your tongue out of her mouth as she does so. Her hands make their way over your shoulders, down your abs, and stop at your [cocks].\n\n");
         outputText("\"<i>You're quite the big boy, aren't you?</i>\" she says as she wraps both of her hands around your now throbbing " + player.cockDescript(x) + ". She starts to slide her hands up and down your length. Sticking out her tongue, she wraps it around the tip and licks at the pre that is starting to leak out.\n\n");
         outputText("A hiss of pleasure escapes your lips as the naga strokes and licks at your " + player.cockDescript(x) + ", her talented fingers and tongue bringing you into a further state of arousal. The naga stops her caressing and brings your " + player.cockDescript(x) + " to her chest, pressing her breasts around it. She slowly starts to slide her body up and down your shaft, using her tongue to bring some of your pre and lubricate her body. Once she is satisfied with her body's slickness, she quickens her pace.\n\n");

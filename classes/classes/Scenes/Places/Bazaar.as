@@ -598,229 +598,161 @@ private function browseDemSocksSon():void {
 	outputText("What type of cock-sock do you want to look at?");
 	//Cock-sock Menu
 	menu();
-	addButton(0,"Wool",woolCockSock);
-	addButton(1,"Alabaster",alabasterCockSock);
-	addButton(2,"Cockring",cockringCockSock);
-	addButton(3,"Viridian",viridianCockSock);
-	addButton(4,"Scarlet",scarletCockSocK);
-	addButton(5,"Cobalt",cobaltCockSock);
-	addButton(6,"Gilded",gildedCockSock);
-	addButton(7,"Purple",amaranthineCockSock);
-	addButton(8, "Green", greenCockSock);
-	addButton(9, "Red", redCockSock);
-	addButton(10, "Blue", blueCockSock);
-	addButton(14,"Back",gretasGarments);
-}
+	var menuList:Array = [];
+	var cockSocksVariant:Array = ["wool", "alabaster", "viridian", "scarlet", "cobalt", "gilded", "amaranthine", "green", "red", "blue", "cockring"];
+	menuList.push("Wool",curry(cockSockType, 0), "");
+	menuList.push("Alabaster",curry(cockSockType, 1), "");
+	menuList.push("Viridian",curry(cockSockType, 2), "");
+	menuList.push("Scarlet",curry(cockSockType, 3), "");
+	menuList.push("Cobalt",curry(cockSockType, 4), "");
+	menuList.push("Gilded",curry(cockSockType, 5), "");
+	menuList.push("Purple",curry(cockSockType, 6), "");
+	menuList.push("Green", curry(cockSockType, 7), "");
+	menuList.push( "Red", curry(cockSockType, 8), "");
+	menuList.push( "Blue", curry(cockSockType, 9), "");
+	menuList.push("Cockring",curry(cockSockType, 10), "");
+	menuGen(menuList, 0, gretasGarments);
 
-//Wool Cock-sock
-private function woolCockSock():void {
-	clearOutput();
-	outputText("You spy a thick, woolen sock sitting on a counter and take it up to Greta.  \"<i>Ah, yes.  That's our basic sock.  Warm and cozy, great for those chilly nights.  That one's a mere 10 gems.  A steal, of course.</i>\"");
-	flags[kFLAGS.SOCK_HOLDING] = "wool";
-	cockSelectionMenu();
-}
-
-//Alabaster Cock-sock
-private function alabasterCockSock():void {
-	clearOutput();
-	outputText("You pick up a one sock and inspect it.  It's a pure white cock sock, edged with delicate lace.  It almost appears to be some kind of bridal wear... although you don't know of any kind of bride that would wear something like this.  \"<i>Ah yeah, that's a popular one.  Some folks like the purity that it suggests... though I can't guess why.  It's 25 gems, though.</i>\"");
-	//[Buy] [Back]
-	flags[kFLAGS.SOCK_HOLDING] = "alabaster";
-	cockSelectionMenu();
-}
-
-//Cockring Cock-sock
-private function cockringCockSock():void {
-	clearOutput();
-	outputText("You pick up one sock, surprised to find how heavy it is.  Large metal rings encircle the base of the smooth cock-sock, with one loose ring dangling down, no doubt intending to wrap around the base of your ball sack.  \"<i>Oh yes, that's a fun one. Those rings will constantly constrict your manhood, so you'll always be hard and ready to go.</i>\" She giggles and waves a hand, \"<i>That's actually a very popular sock... so many demons come in to get these for their harems.  It's 100 gems.</i>\"");
-	flags[kFLAGS.SOCK_HOLDING] = "cockring";
-	cockSelectionMenu();
-}
-
-//Viridian Cock-sock
-private function viridianCockSock():void {
-	clearOutput();
-	outputText("You pick up one sock and inspect it.  The whole thing is a rich, natural green color and completely lace, accentuated with vivid red roses.  Just touching it makes you feel healthier and more alive.  \"<i>Ahh, that's a fun one right there.  It hastens your natural healing.  Very useful, and pretty, too, if I say so myself.  It's 1,000 gems.</i>\"  You pale at the price, but Greta waves a hand, \"<i>Trust me, honey, it's worth it.</i>\"");
-	flags[kFLAGS.SOCK_HOLDING] = "viridian";
-	cockSelectionMenu();
-}
-
-//Scarlet Cock-sock
-private function scarletCockSocK():void {
-	clearOutput();
-	outputText("You pick up one sock and inspect it.  It's an incredible plush red, and made of soft satin and detailed with red lace.  It seems smaller than the other socks you've seen, and you can't help but wonder how tight it will feel on your dick.  \"<i>Mmm, that one's special.  It increases the blood flow to your little dick, enabling it to grow a lot faster.  This one goes quick.  Everyone wants to be a minotaur!  It's 250 gems.</i>\"");
-	flags[kFLAGS.SOCK_HOLDING] = "scarlet";
-	cockSelectionMenu();
-}
-
-//Cobalt Cock-sock
-private function cobaltCockSock():void {
-	clearOutput();
-	outputText("You pick up one sock and inspect it.  It's a cool, soft blue color, made from satin and detailed in light blue lace.  It seems extremely small, compared to the other socks in the shop, and you can't help but think it must be extremely uncomfortable to wear.  \"<i>Oho, that's a fun one right there.  The cute little femboys go crazy for it.  As you can see, it's a bit small, and it will actually inhibit your cock from growing too big.  It's 250 gems.</i>\"");
-	flags[kFLAGS.SOCK_HOLDING] = "cobalt";
-	cockSelectionMenu();
-}
-//Gilded Cock-sock
-private function gildedCockSock():void {
-	clearOutput();
-	outputText("You pick up one sock and inspect it, surprised to see how rigid and heavy it is.  Unlike the others in the shop, this one seems to be made of a cool golden metallic material.  Glittering gems are embedded into the top side, while the bottom is cinched closed with leather cords.  \"<i>You've got a good eye,</i>\" Greta says, her eyes twinkling greedily.  \"<i>With that bad boy, you can actually convert some of your... sweet cum into even sweeter gems.  Of course, with that kind of awesome power, you've got to understand that it'll cost you 3,000 gems.</i>\"");
-	flags[kFLAGS.SOCK_HOLDING] = "gilded";
-	cockSelectionMenu();
-}
-
-//Amaranthine
-private function amaranthineCockSock():void {
-	clearOutput();
-	outputText("You pick up one sock and inspect it.  It's a silky smooth lavish purple color, with fine lace depicting some kind of six-legged wolf-like creature.  Overall, though, the sock is an odd shape, seemingly intended for someone with a knot AND some kind of equine-like flare.  Greta's eyebrows raise as she sees the item you're holding,  \"<i>Ohh, that one.  That, honey, was an experiment.  I took some magic channeled down from the stars themselves and infused it into a new sock, and that was the result.  Truth be told, I'm not entirely sure what it does, but I'll sell it to you for 1,000 gems.</i>\"");
-	//Increase fertility by a small amount
-	flags[kFLAGS.SOCK_HOLDING] = "amaranthine";
-	cockSelectionMenu();
-}
-
-//Green, new cocksock from mod.
-private function greenCockSock():void {
-	clearOutput();
-	outputText("You pick up one sock and inspect it.  It's dark green in color and interlaced with brighter green highlights.  Greta's eyebrows raise as she sees the item you're holding,  \"<i>Ohh, that one.   It's one of my newest lineup of cock-socks.  If you're unsure of your endurance, this might help.  I'll sell it to you for 500 gems.</i>\"");
-	//Increase HP by 2%, stacks additively.
-	flags[kFLAGS.SOCK_HOLDING] = "green";
-	cockSelectionMenu();
-}
-private function redCockSock():void {
-	clearOutput();
-	outputText("You pick up one sock and inspect it.  It's dark red in color and interlaced with brighter red highlights.  Overall, it looks a bit menacing.  Greta's eyebrows raise as she sees the item you're holding,  \"<i>Ohh, that one.  It's one of my newest lineup of cock-socks.  This cock-sock will enhance your power so you can physically beat tougher opponents.  I'll sell it to you for 500 gems.</i>\"");
-	//Increase attack power by 2%, stacks additively.
-	flags[kFLAGS.SOCK_HOLDING] = "red";
-	cockSelectionMenu();
-}
-private function blueCockSock():void {
-	clearOutput();
-	outputText("You pick up one sock and inspect it.  It's dark blue in color and interlaced with brighter blue highlights that seems to glow in the dark.  Greta's eyebrows raise as she sees the item you're holding,  \"<i>Ohh, that one.   It's one of my newest lineup of cock-socks.  This cock-sock will enhance your spellpower.  I'll sell it to you for 500 gems.</i>\"");
-	//Increase spell power by 5%, stacks additively.
-	flags[kFLAGS.SOCK_HOLDING] = "blue";
-	cockSelectionMenu();
-}
-
-private function cockSelectionMenu():void {
-	menu();
-	if((flags[kFLAGS.SOCK_HOLDING] == "amaranthine" && player.gems >= 1000) || (flags[kFLAGS.SOCK_HOLDING] == "gilded" && player.gems >= 3000) || (flags[kFLAGS.SOCK_HOLDING] == "cobalt" && player.gems >= 250) || (flags[kFLAGS.SOCK_HOLDING] == "scarlet" && player.gems >= 250) || (flags[kFLAGS.SOCK_HOLDING] == "viridian" && player.gems >= 1000) || (flags[kFLAGS.SOCK_HOLDING] == "cockring" && player.gems >= 100) || (flags[kFLAGS.SOCK_HOLDING] == "alabaster" && player.gems >= 25) || (flags[kFLAGS.SOCK_HOLDING] == "wool" && player.gems >= 10) || (flags[kFLAGS.SOCK_HOLDING] == "green" && player.gems >= 500) || (flags[kFLAGS.SOCK_HOLDING] == "red" && player.gems >= 500) || (flags[kFLAGS.SOCK_HOLDING] == "blue" && player.gems >= 500)) addButton(0,"Buy",pickACockForSock);
-	else outputText("\n\n<b>You can't afford that.</b>");
-	addButton(4,"Back",browseDemSocksSon);
-}
-
-private function pickACockForSock():void {
-	//Buy Cock-sock
-	clearOutput();
-	outputText("You take the cock-sock over to the counter where Greta sits, knitting even more garments and place down the gems required.  \"<i>Aha, good choice, honey!</i>\" the succubus says, snatching up the money and stashing it away.  \"<i>Now let's get that bad boy fitted on you.</i>\"");
-
-	//[If PC only has one cock, jump immediately to Putting It On, else:
-	if(player.cockTotal() == 1) {
-		menu();
-		addButton(0,"Next",cockSockTarget,0);
-	}
-	else {
-		outputText("\n\nWhich cock would you like to put it on?");
-		var button:int = 0;
-		menu();
-		while(button < player.cockTotal()) {
-			if(player.cocks[button].sock == "") addButton(button,String(button+1),cockSockTarget,button);
-			button++;
+	function cockSockType(type:int):void{
+		var cost:int = 0;
+		clearOutput();
+		switch (type) {
+			case 0:
+				outputText("You spy a thick, woolen sock sitting on a counter and take it up to Greta.  \"<i>Ah, yes.  That's our basic sock.  Warm and cozy, great for those chilly nights.  That one's a mere 10 gems.  A steal, of course.</i>\"");
+				cost = 10;
+				break;
+			case 1:
+				outputText("You pick up a one sock and inspect it.  It's a pure white cock sock, edged with delicate lace.  It almost appears to be some kind of bridal wear... although you don't know of any kind of bride that would wear something like this.  \"<i>Ah yeah, that's a popular one.  Some folks like the purity that it suggests... though I can't guess why.  It's 25 gems, though.</i>\"");
+				cost = 25;
+				break;
+			case 2:
+				outputText("You pick up one sock and inspect it.  The whole thing is a rich, natural green color and completely lace, accentuated with vivid red roses.  Just touching it makes you feel healthier and more alive.  \"<i>Ahh, that's a fun one right there.  It hastens your natural healing.  Very useful, and pretty, too, if I say so myself.  It's 1,000 gems.</i>\"  You pale at the price, but Greta waves a hand, \"<i>Trust me, honey, it's worth it.</i>\"");
+				cost = 1000;
+				break;
+			case 3:
+				outputText("You pick up one sock and inspect it.  It's an incredible plush red, and made of soft satin and detailed with red lace.  It seems smaller than the other socks you've seen, and you can't help but wonder how tight it will feel on your dick.  \"<i>Mmm, that one's special.  It increases the blood flow to your little dick, enabling it to grow a lot faster.  This one goes quick.  Everyone wants to be a minotaur!  It's 250 gems.</i>\"");
+				cost = 250;
+				break;
+			case 4:
+				outputText("You pick up one sock and inspect it.  It's a cool, soft blue color, made from satin and detailed in light blue lace.  It seems extremely small, compared to the other socks in the shop, and you can't help but think it must be extremely uncomfortable to wear.  \"<i>Oho, that's a fun one right there.  The cute little femboys go crazy for it.  As you can see, it's a bit small, and it will actually inhibit your cock from growing too big.  It's 250 gems.</i>\"");
+				cost = 250;
+				break;
+			case 5:
+				outputText("You pick up one sock and inspect it, surprised to see how rigid and heavy it is.  Unlike the others in the shop, this one seems to be made of a cool golden metallic material.  Glittering gems are embedded into the top side, while the bottom is cinched closed with leather cords.  \"<i>You've got a good eye,</i>\" Greta says, her eyes twinkling greedily.  \"<i>With that bad boy, you can actually convert some of your... sweet cum into even sweeter gems.  Of course, with that kind of awesome power, you've got to understand that it'll cost you 3,000 gems.</i>\"");
+				cost = 3000;
+				break;
+			case 6:
+				outputText("You pick up one sock and inspect it.  It's a silky smooth lavish purple color, with fine lace depicting some kind of six-legged wolf-like creature.  Overall, though, the sock is an odd shape, seemingly intended for someone with a knot AND some kind of equine-like flare.  Greta's eyebrows raise as she sees the item you're holding,  \"<i>Ohh, that one.  That, honey, was an experiment.  I took some magic channeled down from the stars themselves and infused it into a new sock, and that was the result.  Truth be told, I'm not entirely sure what it does, but I'll sell it to you for 1,000 gems.</i>\"");
+				cost = 1000;
+				break;
+			case 7:
+				outputText("You pick up one sock and inspect it.  It's dark green in color and interlaced with brighter green highlights.  Greta's eyebrows raise as she sees the item you're holding,  \"<i>Ohh, that one.   It's one of my newest lineup of cock-socks.  If you're unsure of your endurance, this might help.  I'll sell it to you for 500 gems.</i>\"");
+				cost = 500;
+				break;
+			case 8:
+				outputText("You pick up one sock and inspect it.  It's dark red in color and interlaced with brighter red highlights.  Overall, it looks a bit menacing.  Greta's eyebrows raise as she sees the item you're holding,  \"<i>Ohh, that one.  It's one of my newest lineup of cock-socks.  This cock-sock will enhance your power so you can physically beat tougher opponents.  I'll sell it to you for 500 gems.</i>\"");
+				cost = 500;
+				break;
+			case 9:
+				outputText("You pick up one sock and inspect it.  It's dark blue in color and interlaced with brighter blue highlights that seems to glow in the dark.  Greta's eyebrows raise as she sees the item you're holding,  \"<i>Ohh, that one.   It's one of my newest lineup of cock-socks.  This cock-sock will enhance your spellpower.  I'll sell it to you for 500 gems.</i>\"");
+				cost = 500;
+				break;
+			case 10:
+				outputText("You pick up one sock, surprised to find how heavy it is.  Large metal rings encircle the base of the smooth cock-sock, with one loose ring dangling down, no doubt intending to wrap around the base of your ball sack.  \"<i>Oh yes, that's a fun one. Those rings will constantly constrict your manhood, so you'll always be hard and ready to go.</i>\" She giggles and waves a hand, \"<i>That's actually a very popular sock... so many demons come in to get these for their harems.  It's 100 gems.</i>\"");
+				cost = 100;
+				break;
 		}
-	}
-}
-
-private function cockSockTarget(target:int):void {
-	clearOutput();
-	flags[kFLAGS.SOCKS_BOUGHT]++;
-	//Putting it On - First Time
-	if(flags[kFLAGS.SOCKS_BOUGHT] == 1) {
-		outputText("The gravity-defying succubus gestures towards your crotch.  \"<i>Well, come on then, let's see the tasty cock getting all dressed up,</i>\" she says, her voice becoming a deep purr.  You raise your eyebrow, questioning why she needs to see that.");
-		outputText("\n\n\"<i>Oh, don't you know?  These aren't your ordinary garments,</i>\" she cackles lightly.  \"<i>These are quite special cock-socks.  They won't slip or slide.  No matter what, they'll remain in place until you want me to take it off.</i>\"");
-		outputText("\n\nYou balk a little.  These things are going to be permanently attached to you?");
-		outputText("\n\nSeeing your reaction, Greta calmly explains, \"<i>Don't worry, it's just a simple little spell.  You can still use your dick, cum and all that delicious fun stuff.  This spell will just prevent it from slipping off no matter if you're limp or hard, and it will keep the material clean and repaired.  Before I learned this spell, you wouldn't <b>believe</b> how many socks I had to wash and stitch back together. I had no time to make new ones!</i>\"");
-		outputText("\n\nYou gulp.  Do you want this cock-sock attached to your penis semi-permanently?");
-	}
-	//Putting It On - Additional Times
-	else {
-		outputText("Greta motions with her hand, a movement that causes her mountainous cleavage to jiggle hypnotically.  \"<i>Well, come on then, let's see the tasty cock getting all dressed up,</i>\" she says, her voice becoming a deep purr.");
-		outputText("\n\nWell?  Do you want this cock-sock attached to your penis semi-permanently?");
-	}
-	menu();
-	addButton(0,"Yes",yesPutDatSockOnMe,target);
-	addButton(1,"No",noCockSock);
-}
-
-//Yes
-private function yesPutDatSockOnMe(target:int):void {
-	clearOutput();
-
-	var conflict:Boolean = false;
-
-	if(flags[kFLAGS.SOCK_HOLDING] == "amaranthine") player.gems -= 1000;
-
-	if(flags[kFLAGS.SOCK_HOLDING] == "gilded") player.gems -= 3000;
-
-
-	if(flags[kFLAGS.SOCK_HOLDING] == "cobalt") {
-		player.gems -= 250;
-		// if(!player.hasPerk(PerkLib.PhallicRestraint)) player.createPerk(PerkLib.PhallicRestraint,0,0,0,0);
+		prePurchase(type, cost);
 	}
 
-	if(flags[kFLAGS.SOCK_HOLDING] == "scarlet") {
-		//if(!player.hasPerk(PerkLib.PhallicPotential)) player.createPerk(PerkLib.PhallicPotential,0,0,0,0);
-		player.gems -= 250;
+	function prePurchase(type:int, cost:int):void{
+		menu();
+		if (player.gems >= cost) addButton(0, "Buy it!", pickACockForSock, type, cost);
+		else addButtonDisabled(0, "Buy It!", "You can't afford it!");
+		addButton(4,"Back",browseDemSocksSon);
+
 	}
 
-	if(flags[kFLAGS.SOCK_HOLDING] == "viridian") {
-		if(!player.hasPerk(PerkLib.LustyRegeneration)) {
-			player.createPerk(PerkLib.LustyRegeneration,0,0,0,0);
-			player.gems -= 1000;
+	function pickACockForSock(type:int, cost:int):void {
+		//Buy Cock-sock
+		clearOutput();
+		outputText("You take the cock-sock over to the counter where Greta sits, knitting even more garments and place down the gems required.  \"<i>Aha, good choice, honey!</i>\" the succubus says, snatching up the money and stashing it away.  \"<i>Now let's get that bad boy fitted on you.</i>\"");
+
+		//[If PC only has one cock, jump immediately to Putting It On, else:
+		if(player.cockTotal() == 1) {
+			menu();
+			addButton(0,"Next",lastchance2backout,type, cost);
 		}
 		else {
-			conflict = true;
+			outputText("\n\nWhich cock would you like to put it on?");
+			var button:int = 0;
+			menu();
+			while(button < player.cockTotal()) {
+				if(player.cocks[button].sock == "") addButton(button,String(button+1),lastchance2backout, type, cost, button);
+				button++;
+			}
 		}
 	}
 
-	if(flags[kFLAGS.SOCK_HOLDING] == "cockring") {
-		player.gems -= 100;
-		if(!player.hasPerk(PerkLib.PentUp)) player.createPerk(PerkLib.PentUp,10,0,0,0);
-		else player.addPerkValue(PerkLib.PentUp,1,5);
+	function lastchance2backout(type:int, cost:int, cockChosen:int = 0):void{
+		flags[kFLAGS.SOCKS_BOUGHT]++;
+		//Putting it On - First Time
+		if(flags[kFLAGS.SOCKS_BOUGHT] == 1) {
+			outputText("The gravity-defying succubus gestures towards your crotch.  \"<i>Well, come on then, let's see the tasty cock getting all dressed up,</i>\" she says, her voice becoming a deep purr.  You raise your eyebrow, questioning why she needs to see that.");
+			outputText("\n\n\"<i>Oh, don't you know?  These aren't your ordinary garments,</i>\" she cackles lightly.  \"<i>These are quite special cock-socks.  They won't slip or slide.  No matter what, they'll remain in place until you want me to take it off.</i>\"");
+			outputText("\n\nYou balk a little.  These things are going to be permanently attached to you?");
+			outputText("\n\nSeeing your reaction, Greta calmly explains, \"<i>Don't worry, it's just a simple little spell.  You can still use your dick, cum and all that delicious fun stuff.  This spell will just prevent it from slipping off no matter if you're limp or hard, and it will keep the material clean and repaired.  Before I learned this spell, you wouldn't <b>believe</b> how many socks I had to wash and stitch back together. I had no time to make new ones!</i>\"");
+			outputText("\n\nYou gulp.  Do you want this cock-sock attached to your penis semi-permanently?");
+		}
+		//Putting It On - Additional Times
+		else {
+			outputText("Greta motions with her hand, a movement that causes her mountainous cleavage to jiggle hypnotically.  \"<i>Well, come on then, let's see the tasty cock getting all dressed up,</i>\" she says, her voice becoming a deep purr.");
+			outputText("\n\nWell?  Do you want this cock-sock attached to your penis semi-permanently?");
+		}
+		menu();
+		addButton(0,"Yes",cockSockInstall, type, cost, cockChosen);
+		addButton(1,"No",noCockSock);
 	}
 
-	if(flags[kFLAGS.SOCK_HOLDING] == "alabaster") player.gems -= 25;
-
-	if(flags[kFLAGS.SOCK_HOLDING] == "wool") player.gems -= 10;
-
-	outputText("You nod to the busty succubus and strip off your [armor], revealing your naked body.  Greta's eyes light up as she looks over your body with barely-contained lust.  Finally her eyes settle onto your " + cockDescript(target) + ", and she licks her lips.  ");
-
-	if (!conflict) { // There's no conflict. DO IT!!!
-		player.cocks[target].sock = flags[kFLAGS.SOCK_HOLDING];
-		statScreenRefresh();
-
-		outputText("With one hand she lifts your limp cock up, giving it a pleasant little stroke.");
-
-		outputText("\n\nHer other hand approaches, her thumb, fore- and middle-fingers holding the sock open as she slips it over your " + player.cockHead(target) + ".  She pulls it snugly into place and then gives your penis a little kiss.  The second her lips make contact with your flesh, a chill runs across your body, followed by a flood of warmth.");
-
-		outputText("\n\nGreta smiles knowingly and returns to her chair behind the counter.");
-		//(Cock-sock get! +2 Corruption, +5 Arousal)
-		dynStats("lus", 5, "cor", 2);
+	function cockSockInstall(type:int, cost:int, cockChosen:int = 0):void{
+		var conflict:Boolean = false;
+		if(cockSocksVariant[type] == "viridian") {
+			if(!player.hasPerk(PerkLib.LustyRegeneration)) {
+				player.createPerk(PerkLib.LustyRegeneration,0,0,0,0);
+			}
+			else {
+				conflict = true;
+			}
+		}
+		if(cockSocksVariant[type] == "cockring") {
+			if(!player.hasPerk(PerkLib.PentUp)) player.createPerk(PerkLib.PentUp,10,0,0,0);
+			else player.addPerkValue(PerkLib.PentUp,1,5);
+		}
+		outputText("You nod to the busty succubus and strip off your [armor], revealing your naked body.  Greta's eyes light up as she looks over your body with barely-contained lust.  Finally her eyes settle onto your " + cockDescript(cockChosen) + ", and she licks her lips.  ");
+		player.gems -= cost;
+		if (!conflict) { // There's no conflict. DO IT!!!
+			player.cocks[cockChosen].sock = cockSocksVariant[type];
+			statScreenRefresh();
+			outputText("With one hand she lifts your limp cock up, giving it a pleasant little stroke.");
+			outputText("\n\nHer other hand approaches, her thumb, fore- and middle-fingers holding the sock open as she slips it over your " + player.cockHead(cockChosen) + ".  She pulls it snugly into place and then gives your penis a little kiss.  The second her lips make contact with your flesh, a chill runs across your body, followed by a flood of warmth.");
+			outputText("\n\nGreta smiles knowingly and returns to her chair behind the counter.");
+			//(Cock-sock get! +2 Corruption, +5 Arousal)
+			dynStats("lus", 5, "cor", 2);
+		}
+		else { // Conflict! NOOOOO! Pull up! Pull up!
+			outputText("Then she suddenly stops, staring at your groin.\n\n\"<i>Oh, dear...</i>\" she says, \"<i>As much as I would love to take your money honey, I can't be mixing magics like that.</i>\"");
+		}
 		menu();
 		addButton(0,"Next",gretasGarments);
 	}
-	else { // Conflict! NOOOOO! Pull up! Pull up!
 
-		outputText("Then she suddenly stops, staring at your groin.\n\n\"<i>Oh, dear...</i>\" she says, \"<i>As much as I would love to take your money honey, I can't be mixing magics like that.</i>\"");
+	function noCockSock():void {
+		clearOutput();
+		outputText("You shake your head.  Greta sighs, \"<i>Figures. Come back when you change your mind.</i>\"");
 		menu();
 		addButton(0,"Next",gretasGarments);
 	}
-}
 
-private function noCockSock():void {
-	clearOutput();
-	flags[kFLAGS.SOCK_HOLDING] = 0;
-	outputText("You shake your head.  Greta sighs, \"<i>Figures.  Here's your money back, honey.  Come back when you change your mind.</i>\"");
-	//(Back to menu)
-	menu();
-	addButton(0,"Next",gretasGarments);
 }
 
 //Remove Cock-sock

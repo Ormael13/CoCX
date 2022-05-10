@@ -6,24 +6,23 @@ package classes.IMutations
 {
 import classes.BodyParts.Tail;
 import classes.PerkClass;
-import classes.PerkLib;
-import classes.PerkType;
+    import classes.PerkType;
 import classes.Player;
 
-public class KitsuneParathyroidGlandMutation extends PerkType
+public class ManticoreMetabolismMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.KitsuneParathyroidGlandIM);
+            var pTier:int = player.perkv1(IMutationsLib.ManticoreMetabolismIM);
             if (pTier >= 1){
-                descS += "Illusion and Terror cooldown reduced by 3 turns";
+                descS += "Speed is increased with cum intake for a few hours, and allows you to attack with multiple spikes at once";
             }
             if (pTier >= 2){
-                descS += ", Mana and fatigue recovery increased, 50% reduced costs for Illusion and Terror";
+                descS += ", further increases speed by 100% per NG+ for 5 hours longer, venom recharge when using Manticore feed is twice as effective and increases max hunger by 50";
             }
             if (pTier >= 3){
-                descS += ", further boost mana regen based on star sphere rank, speed debuff from Terror increased to 70, evasion boost from Illusion increased by 30%";
+                descS += ", spikes deal twice as much damage and lust, speed is increased by another 100%, and if you have manticore tail, straddle damage is greatly increased and direct tail feeding is twice as difficult to remove.";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -32,7 +31,7 @@ public class KitsuneParathyroidGlandMutation extends PerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.KitsuneParathyroidGlandIM)){
+            switch (player.perkv1(IMutationsLib.ManticoreMetabolismIM)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -42,27 +41,23 @@ public class KitsuneParathyroidGlandMutation extends PerkType
                 default:
                     sufval = "";
             }
-            return "Kitsune Parathyroid Gland" + sufval;
+            return "Manticore Metabolism" + sufval;
         }
 
         //Mutation Requirements
         public static function pReqs(pTier:int = 0):void{
             try{
                 //This helps keep the requirements output clean.
-                IMutationsLib.KitsuneParathyroidGlandIM.requirements = [];
+                IMutationsLib.ManticoreMetabolismIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.KitsuneParathyroidGlandIM.requireParathyroidGlandMutationSlot()
-                    .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune)
+                    IMutationsLib.ManticoreMetabolismIM.requireMetabolismMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.tailType == Tail.FOX && player.tailCount >= 2;
-                    }, "2+ fox tails")
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.kitsuneScore() >= 9;
-                    }, "Kitsune race");
+                        return player.manticoreScore() >= 15 && player.tailType == Tail.MANTICORE_PUSSYTAIL;
+                    }, "Manticore race and tail");
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.KitsuneParathyroidGlandIM.requireLevel(pLvl);
+                    IMutationsLib.ManticoreMetabolismIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
@@ -78,23 +73,11 @@ public class KitsuneParathyroidGlandMutation extends PerkType
         //Mutations Buffs
         public function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            if (pTier >= 1) {
-                pBuffs['spe.mult'] += 0.05;
-                pBuffs['int.mult'] += 0.05;
-            }
-            if (pTier >= 2) {
-                pBuffs['spe.mult'] += 0.05;
-                pBuffs['int.mult'] += 0.1;
-            }
-            if (pTier >= 3) {
-                pBuffs['spe.mult'] += 0.05;
-                pBuffs['int.mult'] += 0.2;
-            }
             return pBuffs;
         }
 
-        public function KitsuneParathyroidGlandMutation() {
-            super("Kitsune Parathyroid Gland IM", "Kitsune Parathyroid Gland", ".");
+        public function ManticoreMetabolismMutation() {
+            super("Manticore Metabolism IM", "Manticore Metabolism", ".");
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {
