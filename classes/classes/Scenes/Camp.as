@@ -4824,4 +4824,4 @@ public function rebirthFromBadEnd():void {
         doNext(returnToCampUseOneHour);
     }
 	}
-}
+}
