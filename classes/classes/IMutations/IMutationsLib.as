@@ -65,7 +65,7 @@ public class IMutationsLib
 		public static const LizanMarrowIM:PerkType = new LizanMarrowMutation();
 		public static const ManticoreMetabolismIM:PerkType = new ManticoreMetabolismMutation();
 		public static const MantislikeAgilityIM:PerkType = new MantislikeAgilityMutation();
-
+		public static const MelkieLungIM:PerkType = new MelkieLungMutation();
 		public static const TrachealSystemIM:PerkType = new TrachealSystemMutation();
 		public static const VampiricBloodstreamIM:PerkType = new VampiricBloodstreamMutation();
 
@@ -104,6 +104,7 @@ public class IMutationsLib
 			function IMutationsLungs():void{
 				IMutationsList.push([DraconicLungIM,DraconicLungMutation]);
 				IMutationsList.push([DrakeLungIM,DrakeLungMutation]);
+				IMutationsList.push([MelkieLungIM, MelkieLungMutation]);
 			}
 			function IMutationsMetabolism():void{
 				IMutationsList.push([DisplacerMetabolismIM,DisplacerMetabolismMutation]);
