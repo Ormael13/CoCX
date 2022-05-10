@@ -51,14 +51,6 @@ use namespace CoC;
 			}
 			else roomZetazChamber();
 		}
-		private function checkExit():void {
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && flags[kFLAGS.ZETAZ_DEFEATED_AND_KILLED] <= 0) {
-				clearOutput();
-				outputText("The door appears to be locked as if by magic! You'll have to defeat Zetaz before you can leave.");
-				doNext(roomGatheringHall);
-			}
-			else roomTunnel();
-		}
 
 		private function takeBondageStraps():void {
 			clearOutput();
@@ -80,7 +72,7 @@ use namespace CoC;
 		private function seanDeal():void {
 			spriteSelect(SpriteDb.s_sean);
 			clearOutput();
-			outputText("\"<i>Excellent!  Give me a few moments to gather my things and I'll be open for business!</i>\" exclaims the strange demon.  If his story is true it's no wonder he doesn't get along with the rest of his kind.");
+			outputText("\"<i>Excellent!  Give me a few moments to gather my things, and I'll be open for business!</i>\" exclaims the strange demon.  If his story is true, it's no wonder he doesn't get along with the rest of his kind.");
 
 			//[Next – to room]
 			flags[kFLAGS.ZETAZ_LAIR_DEMON_VENDOR_PRESENT] = 1;
@@ -957,28 +949,58 @@ use namespace CoC;
 		}
 
 		public function loseToThisShitPartII():void {
+			var canEscapeCum:Boolean = player.cumQ() > 3500;
+			var canEscapeMilk:Boolean = player.lactationQ() > 3500 || player.lactationQ() + player.cumQ() > 4500;
+
 			hideUpDown();
 			clearOutput();
-			//[OPTIONAL CUM ESCAPE]
-			if(player.cumQ() > 3500) {
-				outputText("Your orgasm drags on for so long that you begin to feel pressure from the cum-slime surrounding you.  It doesn't seem to matter to " + sMultiCockDesc() + ", which is too busy sending bliss to your brain and squirting cum for the tentacles to care.  It actually kind of hurts.  The oscillating purple ambiance flashes brighter in protest for a second, and then everything releases all at once.  The pressure is gone and you're sliding down on a wave of fungal-slime cum, feeling the tentacles being pulled from you by the sudden shift of position.  Moist cave air tickles at your [skin.type] as you come to rest on another spongy petal and begin to cough out the sludge.\n\n");
+			if (sceneHunter.lossSelect) {
+				//good
+				if (canEscapeCum)
+					outputText("Will you try to stimulate yourself further so you could flood the entire pod with your cum?");
+				addButtonIfTrue(0, "Escape-Cum", escapeCum, "Req. to have higher cum amount.", canEscapeCum);
+				if (canEscapeMilk)
+					outputText("You can try to use your overproductive mammaries to overload the pod.");
+				addButtonIfTrue(1, "Escape-Milk", escapeMilk, "Req. to have higher milk+cum amounts.", canEscapeMilk);
+				if (player.gender == 0) addButton(2, "Surrender?", escapeGless);
+				//bad
+				else {
+					addButtonIfTrue(2, "Surrender(M)", surrenderMale, "Req. a cock.", player.hasCock());
+					addButtonIfTrue(3, "Surrender(F)", surrenderFemale, "Req. a vagina.", player.hasVagina());
+				}
+			}
+			else {
+				if (canEscapeCum) escapeCum();
+				else if (canEscapeMilk) escapeMilk();
+				else if (player.gender == 0) escapeGless();
+				else if (player.gender == 1 || player.gender == 3 && rand(2) == 0) surrenderMale();
+				else surrenderFemale();
+			}
 
-				outputText("Over the next minute your head clears and your strength returns.  You push yourself up on something hard, then glance down and realize you washed up next to the skeleton!  The bleached bone leers up at you knowingly, and everything you can see is covered in a thick layer of your spooge.  " + SMultiCockDesc() + " is still dripping more spunk.  Clearly your ruined orgasm didn't pump it ALL out.  You look down at the rapier and pick it up out of your mess, examining it.  The blade shines keenly, and the sword is balanced to perfection.  Though you succumbed to the same fate as its owner, your warped body saved you from sharing his fate.  Thankfully potential pods that carpet the floor don't even twitch at you.  Perhaps your orgasm was enough to sate them all?  Or maybe they've learned their lesson.");
+			//[OPTIONAL CUM ESCAPE]
+			function escapeCum():void {
+				outputText("Your orgasm drags on for so long that you begin to feel pressure from the cum-slime surrounding you.  It doesn't seem to matter to " + sMultiCockDesc() + ", which is too busy sending bliss to your brain and squirting cum for the tentacles to care.  It actually kind of hurts.  The oscillating purple ambiance flashes brighter in protest for a second, and then everything releases all at once.  The pressure is gone, and you're sliding down on a wave of fungal-slime cum, feeling the tentacles being pulled from you by the sudden shift of position.  Moist cave air tickles at your [skin.type] as you come to rest on another spongy petal and begin to cough out the sludge.\n\n");
+
+				outputText("Over the next minute your head clears, and your strength returns.  You push yourself up on something hard, then glance down and realize you washed up next to the skeleton!  The bleached bone leers up at you knowingly, and everything you can see is covered in a thick layer of your spooge.  " + SMultiCockDesc() + " is still dripping more spunk.  Clearly your ruined orgasm didn't pump it ALL out.  You look down at the rapier and pick it up out of your mess, examining it.  The blade shines keenly, and the sword is balanced to perfection.  Though you succumbed to the same fate as its owner, your warped body saved you from sharing his fate.  Thankfully potential pods that carpet the floor don't even twitch at you.  Perhaps your orgasm was enough to sate them all?  Or maybe they've learned their lesson.");
 				//(switch from loss to victory, sword loot)
 				monster.lust = monster.maxLust();
 				player.orgasm();
+				flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED]++;
+				cleanupAfterCombat();
 			}
 			//[OPTIONAL MILK ESCAPE]
-			else if(player.lactationQ() > 3500 || (player.lactationQ() + player.cumQ() > 4500)) {
-				outputText("Your milk-spouting " + nippleDescript(0) + "s continuously pour your breast-milk into the soupy fluids surrounding you.  Once you let down your milk, there was no stopping it.  Pressure backs up inside the flesh-pod, pressing down on you with near painful intensity, but your [allbreasts] refuse to give up or slow down.  Even though each squirt jacks up the force on your body, your unholy milk production will not relent.  The oscillating purple ambience flashes bright in protest, then gives out entirely, along with the pressure.  At once you're pulled away by a wave of milk-laced fungus-slime, yanking the tentacles away from your body with the change in position.\n\n");
+			function escapeMilk():void {
+				outputText("Your milk-spouting " + nippleDescript(0) + "s continuously pour your breast-milk into the soupy fluids surrounding you.  Once you let down your milk, there was no stopping it.  Pressure backs up inside the flesh-pod, pressing down on you with near painful intensity, but your [allbreasts] refuse to give up or slow down.  Even though each squirt jacks up the force on your body, your unholy milk production will not relent.  The oscillating purple ambience flashes bright in protest, then gives out entirely, along with the pressure.  At once, you're pulled away by a wave of milk-laced fungus-slime, yanking the tentacles away from your body with the change in position.\n\n");
 
 				outputText("Over the next minute your head clears and your strength returns.  You push yourself up on something hard, then glance down and realize you washed up next to the skeleton!  The bleached bone leers up at you knowingly, and everything you can see is covered in a thick layer of slime and milk.  Your " + breastDescript(0) + " are still pouring out milk.  Clearly you weren't even close to done with your pleasure-induced lactation.  You look down at the rapier and pick it up out of your mess, examining it.  The blade shines keenly, and the sword is balanced to perfection.  Though you succumbed to the same fate as its owner, your warped body saved you from sharing his fate.  Thankfully potential pods that carpet the floor don't even twitch at you.  Perhaps your milk was enough to sate them all?  Or maybe they've learned their lesson.");
 				//(switch from loss to victory, sword loot)
 				monster.lust = monster.maxLust();
 				player.orgasm();
+				flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED]++;
+				cleanupAfterCombat();
 			}
 			//(GENDERLESS)
-			else if(player.gender == 0) {
+			function escapeGless():void {
 				outputText("You orgasm around the tentacle in your " + assholeDescript() + " for what feels like hours, though some dim, half forgotten whisper of your mind tells you it can't possibly have gone on for that long.  It feels so right and so perfect that resistance is almost a foreign concept to you at this point.  How could you have tried to fight off this heaven?  You're completely limp, totally helpless, and happier than you ever remember.  The pulsing lights of your womb-like prison continue their steady beat in time with the tentacle buried in your ass, soothing you while your body is played like a violin heading towards its latest crescendo.\n\n");
 
 				outputText("In spite of the constant stimulation, it unceremoniously comes to a halt.  The tentacle in your " + assholeDescript() + " yanks out with near-spiteful force, and the fluid starts to drain from around you.  With so many strange chemicals pumping in your blood, it's too hard to stand, so you lie down on the fleshy 'floor' as the last of the pod's ooze empties out.  The petals unfold, returning the view of the outside world to your drug and orgasm riddled mind.  Over the next minute your head clears and your strength slowly returns.\n\n");
@@ -987,16 +1009,12 @@ use namespace CoC;
 				monster.lust = monster.maxLust();
 				monster.XP = 1;
 				player.orgasm();
-			}
-			//Done if escaped
-			if(monster.lust == monster.maxLust()) {
 				flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED]++;
 				cleanupAfterCombat();
-				return;
 			}
 			//[BAD-END GO]
 			//(MALE)
-			if(player.gender == 1 || (player.gender == 3 && rand(2) == 0)) {
+			function surrenderMale():void {
 				outputText("The orgasm squirts and drips from " + sMultiCockDesc() + " for what seems like forever.  It feels so right, so perfect, that you actually whine in disappointment when it finally does end.  You can't even be bothered to reach down and stroke yourself.  The softening in your loins is nothing compared to your flaccid, listless muscles.  You couldn't make your arms reach down to touch yourself even if you could work up the motivation to try.  Thankfully the slippery tentacles curl back around your ");
 				if(!player.hasSheath()) outputText("base");
 				else outputText("sheath");
@@ -1014,9 +1032,9 @@ use namespace CoC;
 				//GAME OVER
 			}
 			//(FEM)
-			else {
+			function surrenderFemale():void {
 				outputText("You orgasm around the tentacles in your " + vaginaDescript(0) + " and " + assholeDescript() + " for what feels like hours, though some dim, half forgotten whisper of your mind tells you it can't possibly have gone on for that long.  It feels so right and so perfect that resistance is almost a foreign concept to you at this point.  How could you have tried to fight off this heaven?  You're completely limp, totally helpless, and happier than you ever remember.  The pulsing lights of your womb-like prison continue their steady beat in time with the tentacles buried in your snatch, soothing you while your body is played like a violin heading towards its latest crescendo.\n\n");
-				outputText("The steady rhythm of your penetration sends rockets of bliss-powered pleasure up your spinal cord and straight into your brain, where it explodes in orgasm.  Your body barely twitches, too relaxed to work up any muscle response, involuntary or otherwise.  A moment to rest never presents itself.  The cruel fungus never relents.  It never slows, unless it's only the briefest pause to intensify the next thrust.  Were you in the open air, away from the strange fluid you're now breathing, you'd be twisting and screaming with pleasure.  Instead you float and cum in silence.\n\n");
+				outputText("The steady rhythm of your penetration sends rockets of bliss-powered pleasure up your spinal cord and straight into your brain, where it explodes in orgasm.  Your body barely twitches, too relaxed to work up any muscle response, involuntary or otherwise.  A moment to rest never presents itself.  The cruel fungus never relents.  It never slows, unless it's only the briefest pause to intensify the next thrust.  Were you in the open air, away from the strange fluid you're now breathing, you'd be twisting and screaming with pleasure.  Instead, you float and cum in silence.\n\n");
 				outputText("Fluids gurgle and shift inside the pod as they are exchanged.  If you were capable of noticing the sound or change, you might wonder if it's harvesting your sexual fluids, but even those thoughts are beyond you now. You've lost yourself to mindless pleasure, and repeated, endless orgasms.  The rest of your life is spent floating in an artificial womb, orgasming over and over to feed your fungus prison, and enjoying the pleasure that long ago eroded your ability to reason.");
 				EventParser.gameOver();
 				//GAME OVER
