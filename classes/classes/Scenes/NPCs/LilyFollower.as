@@ -733,7 +733,10 @@ import classes.display.SpriteDb;
 			outputText("Her moans intensify, and you can see tears running down past the blindfold, Lily’s tongue sticking out past the silky gag as she thrusts her hips in time with your thrusts. Suddenly, her front legs tighten, pinning you against her as she bucks. Her walls tighten, almost painfully tight on your [cock], and you yank her chain, pulling her pierced tits. You choose one at random, biting down on the sensitive titflesh, and you feel your [cock] twitch as Lily’s pussy spasms, walls writhing as a stream of femcum passes over your shaft, trickling down your thighs. This last bit of stimulation sets you off, and you thrust as deep as you can, [cock] twitching as you fire a load of your baby batter into Lily’s still orgasming pussy. Lily’s wails give way to a low moan, and you take the gag off.\n\n");
 			outputText("Lily breathes heavily, tongue hanging out. <i>\"FuuuuUuuuuuuuck,\"</i> she moans, hips twitching. <i>\"You…Really…\"</i> You take the blindfold off, and Lily looks down at you, six eyes barely focused. <i>\"Mmmmm…\"</i> You pull your [cock] out, getting a full-body shudder from Lily as her legs give out, and she falls to the grass, humanoid upper body laid across her Spidery lower half. Her pussy gapes with the fuck you just gave it, blushing black lips drooling a mixture of clear and white. She closes her eyes, a blissed-out smile on her face, and she starts snoring.\n\n");
 			outputText("You decide to let her sleep her post-sex exhaustion off, wiping your [cock] off in her hair before heading back to camp.\n\n");
-			player.sexReward("vaginalFluids","Dick");
+			player.sexReward("vaginalFluids", "Dick");
+			lilySubmissiveness(5);
+			lilyAffection(5);
+            if (CoC.instance.inCombat) cleanupAfterCombat();
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
