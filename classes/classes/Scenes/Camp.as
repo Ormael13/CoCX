@@ -4805,6 +4805,13 @@ public function rebirthFromBadEnd():void {
 	}
 
 	public function recallScenes_dungeons():void {
+		menu();
+		addButton(0, "Stronghold", recallScenes_d3);
+		addButton(14, "Back", recallScenes);
+	}
+
+	public function recallScenes_d3():void {
+		menu();
 		//Doppel
 		if (flags[kFLAGS.D3_MIRRORS_SHATTERED])
 			addButton(0, "Doppelganger", SceneLib.d3.doppleganger.punchYourselfInTheBalls).hint("Go fuck yourself!");
@@ -4820,7 +4827,7 @@ public function rebirthFromBadEnd():void {
 		//Lethice
 		if (flags[kFLAGS.LETHICE_DEFEATED] > 0)
 			addButton(4, "Lethice", SceneLib.d3.lethice.defeated, false).hint("While you can't make her your eternal slave, you can punish her for her arrogance in your memories as much as you want.");
-		addButton(14, "Back", recallScenes);
+		addButton(14, "Back", recallScenes_dungeons);
 	}
 
     public function recallWakeUp():void {
