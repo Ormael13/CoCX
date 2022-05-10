@@ -588,7 +588,7 @@ import classes.StatusEffects;
 		}
 		public function defeatDarknessElementalSubBoss():void {
 			clearOutput();
-			outputText("Beaten unique darkness elemental starting to slowly disperse. The only thing that remains is a piece of black object, lying on the ground.\n\n");
+			outputText("Beaten, the Darkness Elemental slowly begins to disperse. The only thing that remains is a piece of a black object lying on the ground.\n\n");
 			if (player.hasKeyItem("Key Of Darkness (2/3)") >= 0) {
 				player.removeKeyItem("Key Of Darkness (2/3)");
 				player.createKeyItem("Key Of Darkness", 0, 0, 0, 0);
