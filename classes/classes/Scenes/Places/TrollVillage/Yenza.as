@@ -248,7 +248,7 @@ public class Yenza extends TrollVillageAbstractContent{
                 "\n" +
                 "\"<i>Not the best... I can tell you’re not from around here… Ah, well, perhaps I’ll just need to train my pet a little more.</i>\" She says with a snicker.\n" +
                 "\n" +
-                "The air grows thicker as her sweet scent becomes overpowering. Her smug aura mocks you as you blackout.\n" +
+                "The air grows thicker as her sweet scent becomes overpowering. Her smug aura mocks you as you black out.\n" +
                 "\n" +
                 "You wake up with all of your possessions at your camp. You’re unsure what happened, but you’re not missing anything.\n");
         TrollVillage.YenzaUnlocked += 1;
