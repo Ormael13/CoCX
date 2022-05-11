@@ -10,7 +10,7 @@ public class SandMother extends Monster
 		//Notes:
 		//Starts combat with sandstorm.  GigaFire's every fifth round.
 		//Whispers every fourth.
-		public function sandWitchMotherAI():void {
+		override public function doAI():void {
 			if(!hasStatusEffect(StatusEffects.Sandstorm)) {
 				sandStormAttack();
 				return;
