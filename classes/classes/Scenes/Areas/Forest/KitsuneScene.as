@@ -762,7 +762,7 @@ public class KitsuneScene extends BaseContent
 		{
 			clearOutput();
 			//[LOSE FIGHT]
-			if (!sceneHunter.other) { //old behavior
+			if (!sceneHunter.lossSelect) { //old behavior
 				var scene:Array = [];
 				outputText("<b>If you tired of this randomizer with 3 conditional scenes, you can replace it with a selector in Scene settings.</b> ");
 				//Shared Scenes
@@ -2225,7 +2225,7 @@ public class KitsuneScene extends BaseContent
 			}
 			flags[kFLAGS.KITSUNE_SHRINE_VISIT]++;
 			var SphereMastery:Number = 10;
-			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) SphereMastery += 15;
+			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) SphereMastery += 10;
 			//[Read Books] [Meditate] [Steal Statue] - [Leave]
 			menu();
 			addButton(0, "Read Books", readKitsuneBooks);

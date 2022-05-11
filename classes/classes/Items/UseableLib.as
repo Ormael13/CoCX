@@ -91,6 +91,9 @@ use namespace CoC;
 		public const MOONSTO:SimpleUseable = new SimpleUseable("Moonsto", "Moonstone" , "a Moonstone", 900,
 			"A Moonstone.",
 			"You gaze at the Moonstone. Likely usefull to making some weapons.");
+		public const UNICORNH:SimpleUseable = new SimpleUseable("UnicornH", "UnicornHair" , "an Unicorn Hair", 900,
+			"An Unicorn Hair.",
+			"You gaze at the Unicorn Hair. Likely usefull to making some weapons stronger.");
 		public const AMEGEM:SimpleUseable = new SimpleUseable("Amet.Gem", "Amethyst Gem" , "an Amethyst Gem", 1200,
 			"An Amethyst Gem.",
 			"You gaze at the Amethyst Gem. It would make for great ornamentation, if one knew how to use it.");
@@ -170,6 +173,18 @@ use namespace CoC;
 		public const S_SHARD:SimpleUseable = new SimpleUseable("S_SHARD", "S.Shard", "a tarnished shard of metal wich may have been part of a golden weapon", 200,
 			"These appears to be the shards of a shattered weapon.",
 			"These appears to be the shards of a shattered weapon though which one you do not know. You are no smith and thus have no idea how to reforge this item. From what Vala told you it might have been part of the scepter of the fairy queen. You recall that you will need 15 shards in total to start...");
+		public const IARROWHEAD:SimpleUseable = new SimpleUseable("IArrowHead", "IArrowHeads", "an iron arrowheads", 1, 
+			"Hundred iron arrowheads.",
+			"You look at hundred iron arrowheads.  They could be used to craft special arrows.");
+		public const MARROWHEAD:SimpleUseable = new SimpleUseable("MArrowHead", "MArrowHeads", "a moonstone arrowheads", 1, 
+			"Hundred moonstone arrowheads.",
+			"You look at hundred moonstone arrowheads.  They could be used to craft special arrows.");
+		public const SARROWHEAD:SimpleUseable = new SimpleUseable("SArrowHead", "SArrowHeads", "a skymetal arrowheads", 1, 
+			"Hundred skymetal arrowheads.",
+			"You look at hundred skymetal arrowheads.  They could be used to craft special arrows.");
+		public const EARROWHEAD:SimpleUseable = new SimpleUseable("EArrowHead", "EArrowHeads", "an ebonbloom arrowheads", 1, 
+			"Hundred ebonbloom arrowheads.",
+			"You look at hundred ebonbloom arrowheads.  They could be used to craft special arrows.");
 		//CHEAT ITEM
 		public const DBGWAND:DebugWand = new DebugWand();
 	}

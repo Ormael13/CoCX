@@ -39,7 +39,7 @@ public class AbstractSpell extends CombatAbility {
 		
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		
-		if (isBloodMagicApplicable && player.hasStatusEffect(StatusEffects.BloodMage)) {
+		if (isBloodMagicApplicable && (player.hasStatusEffect(StatusEffects.BloodMage) || player.hasPerk(PerkLib.BloodMage))) {
 			player.HP -= realManaCost;
 		} else if (isLastResortApplicable && player.hasPerk(PerkLib.LastResort) && player.mana < realManaCost) {
 			player.HP -= realManaCost;
@@ -62,7 +62,7 @@ public class AbstractSpell extends CombatAbility {
 		
 		// Run our checks
 		var manaCost:Number = this.manaCost();
-		if (isBloodMagicApplicable && player.hasStatusEffect(StatusEffects.BloodMage)) {
+		if (isBloodMagicApplicable && (player.hasStatusEffect(StatusEffects.BloodMage) || player.hasPerk(PerkLib.BloodMage))) {
 			if (player.HP - player.minHP() <= manaCost) {
 				return "Your hp is too low to cast this spell."
 			}

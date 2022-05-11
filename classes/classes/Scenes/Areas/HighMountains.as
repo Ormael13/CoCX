@@ -134,7 +134,7 @@ use namespace CoC;
                     SceneLib.mountain.minotaurScene.minoAddictionFuck();
                     return;
 				}
-                SceneLib.mountain.minotaurScene.getRapedByMinotaur(true);
+                SceneLib.mountain.minotaurScene.minotaurAutorape();
                 spriteSelect(SpriteDb.s_minotaur);
 				return;
 			}

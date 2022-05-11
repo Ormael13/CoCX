@@ -1158,7 +1158,14 @@ public function itemImproveMenuCorrupt():void {
 		[weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
 		[weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
 		[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD],
-		[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR]
+		[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR],
+		[armors.BLKIMONO, armors.IBKIMO, armors.TCKIMO],
+		[armors.BKIMONO, armors.IBKIMO, armors.TCKIMO],
+		[armors.PKIMONO, armors.IBKIMO, armors.TCKIMO],
+		[armors.RKIMONO, armors.IBKIMO, armors.TCKIMO],
+		[armors.WKIMONO, armors.IBKIMO, armors.TCKIMO],
+		[armors.SPKIMO, armors.OEKIMO, armors.OTKIMO],
+		[armors.CTPALAD, null, armors.CTBGUAR]
 	];
 	clearOutput();
 	outputText("You ask your Drider lover if she’d be willing to upgrade a piece of your gear. She nods simply, bringing out a trough on wheels, filled with ebony liquid that bubbles, despite being under no heat.\n\n");// legendary

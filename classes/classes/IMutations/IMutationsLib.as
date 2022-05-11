@@ -6,15 +6,24 @@
  */
 package classes.IMutations
 {
-import classes.*;
+import classes.CoC;
+import classes.PerkType;
 
 /**
+ * The goal of Mutations 3.0 is to allow for everything related to the mutation itself to be hosted within its own file, and to reduce the number of perks being created for the player.
+ *
  * Mutations 3.0 Handles perk creation slightly differently in a few ways.
- * .withBuffs is not used here, instead, buffs are created in a pBuffs function within the mutation file itself, and must return an object.
- * Requirements, as seen below compared to PerkLib/MutationsLib, are also not handled below, and are instead dynamically loaded in, via pReqs function, also stored within the mutations file itself.
+ *
+ * First, .withBuffs is not used here, instead, buffs are created in a pBuffs function within the mutation file itself, and must return an object.
+ *
+ * Requirements, as seen below compared to PerkLib/MutationsLib, are also not handled below, and are instead dynamically created, via pReqs function, also stored within the mutations file itself.
+ * These can be checked seperately, or when sent to createDynamicPerks, will handle it as well.
+ *
  * Mutations are themselves handling their iterations via v1 checks.
- * The goal of this is to allow for everything related to the mutation itself to be hosted within its own file, and to reduce the number of perks being created for the player.
+ *
  * Refer to Basecontent's createDynamicPerk function to see how they are used.
+ *
+ * Refer to Basecontent's updateDynamicPerkBuff function to see how to update buffs associated with perks created by createDynamicBuffs.
  */
 public class IMutationsLib
 	{
@@ -27,9 +36,8 @@ public class IMutationsLib
 		//Disabled mutations here.
 		public static const SlimeMetabolismIM:PerkType = new SlimeMetabolismMutation();
 		//public static const NekomataThyroidGlandIM:PerkType = new NekomataThyroidGlandMutation();
-		//public static const HellcatParathyroidGlandsIM:PerkType = new HellcatParathyroudGlandMutation();
+		//public static const HellcatParathyroidGlandsIM:PerkType = new HellcatParathyroidGlandMutation();
 		//public static const CaveWyrmLungsIM:PerkType = new CaveWyrmLungsMutation();
-		//public static const KitsuneParathyroidGlandIM:PerkType = new KitsuneParathyroidGlandMutation();
 		//Mutations start here.
 		public static const ArachnidBookLungIM:PerkType = new ArachnidBookLungMutation();
 		public static const BlackHeartIM:PerkType = new BlackHeartMutation();
@@ -41,8 +49,22 @@ public class IMutationsLib
 		public static const DrakeLungIM:PerkType = new DrakeLungMutation();
 		public static const EasterBunnyEggBagIM:PerkType = new EasterBunnyEggBagMutation();
 		public static const EclipticMindIM:PerkType = new EclipticMindMutation();
+		public static const ElvishPeripheralNervSysIM:PerkType = new ElvishPeripheralNervSysMutation();
+		public static const FeyArcaneBloodstreamIM:PerkType = new FeyArcaneBloodstreamMutation();
+		public static const FloralOvariesIM:PerkType = new FloralOvariesMutation();
+		public static const FrozenHeartIM:PerkType = new FrozenHeartMutation();
+		public static const GazerEyesIM:PerkType = new GazerEyesMutation();
+		public static const GorgonEyesIM:PerkType = new GorgonEyesMutation();
+		public static const HarpyHollowBonesIM:PerkType = new HarpyHollowBonesMutation();
+		public static const HeartOfTheStormIM:PerkType = new HeartOfTheStormMutation();
+		public static const HinezumiBurningBloodIM:PerkType = new HinezumiBurningBloodMutation();
+		public static const HollowFangsIM:PerkType = new HollowFangsMutation();
+		public static const KitsuneParathyroidGlandIM:PerkType = new KitsuneParathyroidGlandMutation();
 		public static const KitsuneThyroidGlandIM:PerkType = new KitsuneThyroidGlandMutation();
+		public static const LactaBovinaOvariesIM:PerkType = new LactaBovinaOvariesMutation();
+		public static const LizanMarrowIM:PerkType = new LizanMarrowMutation();
 		public static const TrachealSystemIM:PerkType = new TrachealSystemMutation();
+		public static const VampiricBloodstreamIM:PerkType = new VampiricBloodstreamMutation();
 
 
 		/**
@@ -53,132 +75,141 @@ public class IMutationsLib
 		*/
 		public static function mutationsArray(spec:String = "", merge:Boolean = false):Array {
 			var IMutationsList:Array = []
-			function mutationsHeart():void{
-				IMutationsList.push([BlackHeartIM, BlackHeartMutation]);
-				IMutationsList.push([DraconicHeartIM, DraconicHeartMutation]);
+			function IMutationsHeart():void{
+				IMutationsList.push([BlackHeartIM,BlackHeartMutation]);
+				IMutationsList.push([DraconicHeartIM,DraconicHeartMutation]);
+				IMutationsList.push([FrozenHeartIM,FrozenHeartMutation]);
+				IMutationsList.push([HeartOfTheStormIM,HeartOfTheStormMutation]);
 			}
-			function mutationsMuscle():void{
+			function IMutationsMuscle():void{
 
 			}
-			function mutationsMouth():void{
+			function IMutationsMouth():void{
+				IMutationsList.push([HollowFangsIM,HollowFangsMutation]);
+			}
+			function IMutationsAdrGland():void{
 
 			}
-			function mutationsAdrGland():void{
+			function IMutationsBloodStream():void{
+				IMutationsList.push([FeyArcaneBloodstreamIM,FeyArcaneBloodstreamMutation]);
+				IMutationsList.push([HinezumiBurningBloodIM,HinezumiBurningBloodMutation]);
+				IMutationsList.push([VampiricBloodstreamIM,VampiricBloodstreamMutation]);
+			}
+			function IMutationsFaT():void{
 
 			}
-			function mutationsBloodStream():void{
-
+			function IMutationsLungs():void{
+				IMutationsList.push([DraconicLungIM,DraconicLungMutation]);
+				IMutationsList.push([DrakeLungIM,DrakeLungMutation]);
 			}
-			function mutationsFaT():void{
-
-			}
-			function mutationsLungs():void{
-				IMutationsList.push([DraconicLungIM, DraconicLungMutation]);
-				IMutationsList.push([DrakeLungIM, DrakeLungMutation]);
-			}
-			function mutationsMetabolism():void{
-				IMutationsList.push([DisplacerMetabolismIM, DisplacerMetabolismMutation]);
+			function IMutationsMetabolism():void{
+				IMutationsList.push([DisplacerMetabolismIM,DisplacerMetabolismMutation]);
 				//IMutationsList.push([SlimeMetabolismIM,SlimeMetabolismMutation]);
 			}
-			function mutationsOvaries():void{
-
+			function IMutationsOvaries():void{
+				IMutationsList.push([FloralOvariesIM,FloralOvariesMutation]);
+				IMutationsList.push([LactaBovinaOvariesIM,LactaBovinaOvariesMutation]);
 			}
-			function mutationsTesticles():void{
+			function IMutationsTesticles():void{
 				IMutationsList.push([EasterBunnyEggBagIM,EasterBunnyEggBagMutation]);
 			}
-			function mutationsEyes():void{
-
+			function IMutationsEyes():void{
+				IMutationsList.push([GazerEyesIM,GazerEyesMutation]);
+				IMutationsList.push([GorgonEyesIM,GorgonEyesMutation]);
 			}
-			function mutationsPeriNervSys():void{
-				IMutationsList.push([EclipticMindIM, EclipticMindMutation]);
+			function IMutationsPeriNervSys():void{
+				IMutationsList.push([EclipticMindIM,EclipticMindMutation]);
+				IMutationsList.push([ElvishPeripheralNervSysIM,ElvishPeripheralNervSysMutation]);
 			}
-			function mutationsBone():void{
-				IMutationsList.push([DraconicBonesIM, DraconicBonesMutation]);
+			function IMutationsBone():void{
+				IMutationsList.push([DraconicBonesIM,DraconicBonesMutation]);
+				IMutationsList.push([HarpyHollowBonesIM,HarpyHollowBonesMutation]);
+				IMutationsList.push([LizanMarrowIM,LizanMarrowMutation]);
 			}
-			function mutationsThyroidGlands():void{
-				IMutationsList.push([KitsuneThyroidGlandIM, KitsuneThyroidGlandMutation]);
+			function IMutationsThyroidGlands():void{
+				IMutationsList.push([KitsuneThyroidGlandIM,KitsuneThyroidGlandMutation]);
 			}
-			function mutationsParaThyroidGlands():void{
-
+			function IMutationsParaThyroidGlands():void{
+				IMutationsList.push([KitsuneParathyroidGlandIM,KitsuneParathyroidGlandMutation])
 			}
-			function mutationsAdaptations():void{
-				IMutationsList.push([ArachnidBookLungIM, ArachnidBookLungMutation]);
-				IMutationsList.push([CatLikeNimblenessIM, CatLikeNimblenessMutation]);
-				IMutationsList.push([TrachealSystemIM, TrachealSystemMutation]);
+			function IMutationsAdaptations():void{
+				IMutationsList.push([ArachnidBookLungIM,ArachnidBookLungMutation]);
+				IMutationsList.push([CatLikeNimblenessIM,CatLikeNimblenessMutation]);
+				IMutationsList.push([TrachealSystemIM,TrachealSystemMutation]);
 			}
-			function mutationsDeprecated():void{
-				IMutationsList.push([MutationsTemplateIM, MutationTemplate]);
+			function IMutationsDeprecated():void{
+				IMutationsList.push([MutationsTemplateIM,MutationTemplate]);
 			}
 
 			switch(spec){
 				case "Heart":
-					mutationsHeart();
+					IMutationsHeart();
 					break;
 				case "Muscle":
-					mutationsMuscle();
+					IMutationsMuscle();
 					break;
 				case "Mouth":
-					mutationsMouth();
+					IMutationsMouth();
 					break;
 				case "Adrenals":
-					mutationsAdrGland();
+					IMutationsAdrGland();
 					break;
 				case "Bloodstream":
-					mutationsBloodStream();
+					IMutationsBloodStream();
 					break;
 				case "FaT":
-					mutationsFaT();
+					IMutationsFaT();
 					break;
 				case "Lungs":
-					mutationsLungs();
+					IMutationsLungs();
 					break;
 				case "Metabolism":
-					mutationsMetabolism();
+					IMutationsMetabolism();
 					break;
 				case "Ovaries":
-					mutationsOvaries();
+					IMutationsOvaries();
 					break;
 				case "Testicles":
-					mutationsTesticles();
+					IMutationsTesticles();
 					break;
 				case "Eyes":
-					mutationsEyes();
+					IMutationsEyes();
 					break;
 				case "Bone":
-					mutationsBone();
+					IMutationsBone();
 					break;
 				case "Nerv/Sys":
-					mutationsPeriNervSys();
+					IMutationsPeriNervSys();
 					break;
 				case "Thyroid":
-					mutationsThyroidGlands();
+					IMutationsThyroidGlands();
 					break;
 				case "PThyroid":
-					mutationsParaThyroidGlands();
+					IMutationsParaThyroidGlands();
 					break;
 				case "Adaptations":
-					mutationsAdaptations();
+					IMutationsAdaptations();
 					break;
 				case "Deprecated":
-					mutationsDeprecated();
+					IMutationsDeprecated();
 					break;
 				default:
-					mutationsHeart();
-					mutationsMuscle();
-					mutationsMouth();
-					mutationsAdrGland();
-					mutationsBloodStream();
-					mutationsFaT();
-					mutationsLungs();
-					mutationsMetabolism();
-					mutationsOvaries();
-					mutationsTesticles();
-					mutationsEyes();
-					mutationsBone();
-					mutationsPeriNervSys();
-					mutationsThyroidGlands();
-					mutationsParaThyroidGlands();
-					mutationsAdaptations();
+					IMutationsHeart();
+					IMutationsMuscle();
+					IMutationsMouth();
+					IMutationsAdrGland();
+					IMutationsBloodStream();
+					IMutationsFaT();
+					IMutationsLungs();
+					IMutationsMetabolism();
+					IMutationsOvaries();
+					IMutationsTesticles();
+					IMutationsEyes();
+					IMutationsBone();
+					IMutationsPeriNervSys();
+					IMutationsThyroidGlands();
+					IMutationsParaThyroidGlands();
+					IMutationsAdaptations();
 			}
 
 			if (merge){

@@ -7,7 +7,7 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
-import classes.BodyParts.Tail;
+//import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 
 use namespace CoC;
@@ -34,10 +34,14 @@ use namespace CoC;
 			if (flags[kFLAGS.WAIZABI_LVL_UP] == 2) {
 				
 			}
-			this.a = "";
+			/*this.a = "";
 			this.short = "Waiz'abi";
 			this.imageName = "waizabi";
-			this.long = "You are fighting Waiz'abi. She's a female Sayian.";
+			this.long = "You are fighting Waiz'abi. She's a female Sayian.";*/
+			this.a = "the ";
+			this.short = "bimbo monkey";
+			this.imageName = "waizabi";
+			this.long = "You are fighting a Bimbo Monkey. Don't let her curves decieve you ;)";
 			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,75,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("G"));
@@ -56,8 +60,10 @@ use namespace CoC;
 			this.armorName = "skimpy black bikini";
 			this.lust = 30;
 			this.lustVuln = .8;
-			
-			this.tailType = Tail.MONKEY;
+			this.drop = NO_DROP;
+			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
+			//this.tailType = Tail.MONKEY;
+			checkMonster();
 		}
 	}
 }

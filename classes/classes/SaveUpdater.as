@@ -5,11 +5,13 @@ import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
 import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
+import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
+import classes.Scenes.Crafting;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 
@@ -207,10 +209,13 @@ public class SaveUpdater extends NPCAwareContent {
 		if (flags[kFLAGS.SPIRIT_STONES] >= 20000000) awardAchievement("Meng Hao", kACHIEVEMENTS.WEALTH_MENG_HAO);
 
 		//Combat
-		if (player.hasStatusEffect(StatusEffects.KnowsCharge) && player.hasStatusEffect(StatusEffects.KnowsChargeA) && player.hasStatusEffect(StatusEffects.KnowsBlind) && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && player.hasStatusEffect(StatusEffects.KnowsBlizzard) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt) && player.hasStatusEffect(StatusEffects.KnowsChainLighting) && player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) awardAchievement("Gandalf", kACHIEVEMENTS.COMBAT_GANDALF);
-		if (player.hasStatusEffect(StatusEffects.KnowsArouse) && player.hasStatusEffect(StatusEffects.KnowsHeal) && player.hasStatusEffect(StatusEffects.KnowsMight) && player.hasStatusEffect(StatusEffects.KnowsBlink) && player.hasStatusEffect(StatusEffects.KnowsIceSpike) && player.hasStatusEffect(StatusEffects.KnowsDarknessShard) && player.hasStatusEffect(StatusEffects.KnowsDuskWave) && player.hasStatusEffect(StatusEffects.KnowsArcticGale)) awardAchievement("Sauron", kACHIEVEMENTS.COMBAT_SAURON);
-		if (player.hasStatusEffect(StatusEffects.KnowsCharge) && player.hasStatusEffect(StatusEffects.KnowsChargeA) && player.hasStatusEffect(StatusEffects.KnowsBlind) && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && player.hasStatusEffect(StatusEffects.KnowsBlizzard) && player.hasStatusEffect(StatusEffects.KnowsArouse) && player.hasStatusEffect(StatusEffects.KnowsHeal) && player.hasStatusEffect(StatusEffects.KnowsMight) && player.hasStatusEffect(StatusEffects.KnowsBlink) &&
-			player.hasStatusEffect(StatusEffects.KnowsIceSpike) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt) && player.hasStatusEffect(StatusEffects.KnowsDarknessShard) && player.hasStatusEffect(StatusEffects.KnowsChainLighting) && player.hasStatusEffect(StatusEffects.KnowsPyreBurst) && player.hasStatusEffect(StatusEffects.KnowsDuskWave) && player.hasStatusEffect(StatusEffects.KnowsArcticGale)) awardAchievement("Merlin", kACHIEVEMENTS.COMBAT_WIZARD);
+		if (player.hasStatusEffect(StatusEffects.KnowsCharge) && player.hasStatusEffect(StatusEffects.KnowsChargeA) && player.hasStatusEffect(StatusEffects.KnowsBlind) && player.hasStatusEffect(StatusEffects.KnowsHeal) && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && player.hasStatusEffect(StatusEffects.KnowsBlizzard) &&
+			player.hasStatusEffect(StatusEffects.KnowsLightningBolt) && player.hasStatusEffect(StatusEffects.KnowsChainLighting) && player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) awardAchievement("Gandalf", kACHIEVEMENTS.COMBAT_GANDALF);
+		if (player.hasStatusEffect(StatusEffects.KnowsArouse) && player.hasStatusEffect(StatusEffects.KnowsRegenerate) && player.hasStatusEffect(StatusEffects.KnowsMight) && player.hasStatusEffect(StatusEffects.KnowsBlink) && player.hasStatusEffect(StatusEffects.KnowsIceSpike) && player.hasStatusEffect(StatusEffects.KnowsDarknessShard) &&
+			player.hasStatusEffect(StatusEffects.KnowsDuskWave) && player.hasStatusEffect(StatusEffects.KnowsArcticGale)) awardAchievement("Sauron", kACHIEVEMENTS.COMBAT_SAURON);
+		if (player.hasStatusEffect(StatusEffects.KnowsCharge) && player.hasStatusEffect(StatusEffects.KnowsChargeA) && player.hasStatusEffect(StatusEffects.KnowsBlind) && player.hasStatusEffect(StatusEffects.KnowsHeal) && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && player.hasStatusEffect(StatusEffects.KnowsBlizzard) &&
+			player.hasStatusEffect(StatusEffects.KnowsArouse) && player.hasStatusEffect(StatusEffects.KnowsRegenerate) && player.hasStatusEffect(StatusEffects.KnowsMight) && player.hasStatusEffect(StatusEffects.KnowsBlink) && player.hasStatusEffect(StatusEffects.KnowsIceSpike) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt) &&
+			player.hasStatusEffect(StatusEffects.KnowsDarknessShard) && player.hasStatusEffect(StatusEffects.KnowsChainLighting) && player.hasStatusEffect(StatusEffects.KnowsPyreBurst) && player.hasStatusEffect(StatusEffects.KnowsDuskWave) && player.hasStatusEffect(StatusEffects.KnowsArcticGale)) awardAchievement("Merlin", kACHIEVEMENTS.COMBAT_WIZARD);
 		if (flags[kFLAGS.SPELLS_CAST] >= 1) awardAchievement("Are you a Wizard?", kACHIEVEMENTS.COMBAT_ARE_YOU_A_WIZARD);
 
 		//Realistic
@@ -295,7 +300,7 @@ public class SaveUpdater extends NPCAwareContent {
 		if (flags[kFLAGS.TIMES_MASTURBATED] >= 100) awardAchievement("Master-bation", kACHIEVEMENTS.GENERAL_FAPSTER);
 		if (flags[kFLAGS.TIMES_MASTURBATED] >= 1000) awardAchievement("Grand Master-bation", kACHIEVEMENTS.GENERAL_FAPSTER_2);
 
-		if (player.armorName == "goo armor") awardAchievement("Goo Armor", kACHIEVEMENTS.GENERAL_GOO_ARMOR);
+		if (player.armor == armors.GOOARMR) awardAchievement("Goo Armor", kACHIEVEMENTS.GENERAL_GOO_ARMOR);
 		if (helspawnFollower()) awardAchievement("Helspawn", kACHIEVEMENTS.GENERAL_HELSPAWN);
 		if (flags[kFLAGS.URTA_KIDS_MALES] + flags[kFLAGS.URTA_KIDS_FEMALES] + flags[kFLAGS.URTA_KIDS_HERMS] > 0) awardAchievement("Urta's True Lover", kACHIEVEMENTS.GENERAL_URTA_TRUE_LOVER);
 		if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0) awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER);
@@ -563,10 +568,10 @@ public class SaveUpdater extends NPCAwareContent {
 		}
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 9) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 10;
-			if (flags[kFLAGS.MARAE_LETHICITE] > 0 && player.hasKeyItem("Marae's Lethicite") >= 0) {
+			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2019] > 0 && player.hasKeyItem("Marae's Lethicite") >= 0) {
 				player.removeKeyItem("Marae's Lethicite"); //Remove the old.
-				player.createKeyItem("Marae's Lethicite", flags[kFLAGS.MARAE_LETHICITE], 0, 0, 0);
-				flags[kFLAGS.MARAE_LETHICITE] = 0; //Reclaim the flag.
+				player.createKeyItem("Marae's Lethicite", flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2019], 0, 0, 0);
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2019] = 0; //Reclaim the flag.
 			}
 		}
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 10) {
@@ -1676,6 +1681,9 @@ public class SaveUpdater extends NPCAwareContent {
 		if (int(flags[kFLAGS.MOD_SAVE_VERSION]) == 35) { //now using float to store versions!
 			clearOutput();
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.001) {
+				//SH announcement
+				outputText("\n\n<b>New settings page added: SceneHunter. Here, you can enable some flags, making some scenes easier to discover or select.</b>");
+				outputText("\n\n<b>If you don't like the view of your armor, you can disable most armors with new button in Display settings.</b>");
 				//Labyrinth reward fix
 				if (flags[kFLAGS.EBON_LABYRINTH] >= 11)
 					flags[kFLAGS.EBON_LABYRINTH] = 600;
@@ -1748,6 +1756,40 @@ public class SaveUpdater extends NPCAwareContent {
 				if (flags[kFLAGS.SAPPHIRE_TALKS] > 3)
 					flags[kFLAGS.SAPPHIRE_TALKS] -= 4;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.008;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.009) {
+				if (player.lowerBody == LowerBody.GOO && player.arms.type == Arms.GOO && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.skinAdj != "slimy") player.skinAdj = "slimy";
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.009;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.010) {
+				if (Forgefather.gender > 0) Forgefather.statueProgress++;
+				if (Forgefather.wings > 0) Forgefather.statueProgress++;
+				if (Forgefather.tail > 0) Forgefather.statueProgress++;
+				if (Forgefather.lowerBody > 0) Forgefather.statueProgress++;
+				if (Forgefather.arms > 0) Forgefather.statueProgress++;
+				if (Forgefather.hairLength > 0) Forgefather.statueProgress++;
+				if (Forgefather.chest > 0) Forgefather.statueProgress++;
+				if (Forgefather.vagina > 0) Forgefather.statueProgress++;
+				if (Forgefather.cock > 0) Forgefather.statueProgress++;
+				if (Forgefather.balls > 0) Forgefather.statueProgress++;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.010;
+			}
+			//TODO: disable this before the next major update, public ver. players don't need to see this.
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.011) {
+				flags[kFLAGS.SCENEHUNTER_LOSS_SELECT] = flags[kFLAGS.SCENEHUNTER_OTHER];
+				outputText("\n\nSceneHunter update: new <b>Select Loss</b> feature. Set equal to the 'Other' flag by default. You can toggle its value in settings.");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.011;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.012) {
+				if (player.hasKeyItem("Old Pickaxe") >= 0 && Crafting.BagSlot01Cap < 1) {
+					outputText("\n\nSmall present from unnamed person for those that missed precious bag at the time of picking Old Pickaxe ;)");
+					Crafting.BagSlot01Cap = 5;
+					Crafting.BagSlot02Cap = 5;
+					Crafting.BagSlot03Cap = 5;
+					Crafting.BagSlot04Cap = 5;
+				}
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2019] = 0; // Reclaim lethicite flag AGAIN.
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.012;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
@@ -1886,7 +1928,7 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 		}
 		if (player.armor != ArmorLib.NOTHING) {
-			if (player.armorName == "goo armor") player.armor.removeText();
+			if (player.armor == armors.GOOARMR) player.armor.removeText();
 			inventory.takeItem(player.setArmor(armors.TRADITC), jiangshiBuggedItemsCleanUpCrew);
 			return;
 		}

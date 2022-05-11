@@ -44,6 +44,7 @@ public class DriderIncubus extends AbstractSpiderMorph
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 44, 0, 0, 0);//v1 = enemy lvl
 			this.drop = NO_DROP;
 			this.checkMonster();
 		}

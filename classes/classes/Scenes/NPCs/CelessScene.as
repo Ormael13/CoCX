@@ -379,7 +379,14 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			[weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
 			[weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
 			[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD],
-			[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR]
+			[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR],
+			[armors.BLKIMONO, armors.IBKIMO, armors.TCKIMO],
+			[armors.BKIMONO, armors.IBKIMO, armors.TCKIMO],
+			[armors.PKIMONO, armors.IBKIMO, armors.TCKIMO],
+			[armors.RKIMONO, armors.IBKIMO, armors.TCKIMO],
+			[armors.WKIMONO, armors.IBKIMO, armors.TCKIMO],
+			[armors.SPKIMO, armors.OEKIMO, armors.OTKIMO],
+			[armors.CTPALAD, null, armors.CTBGUAR]
 		];
 		clearOutput();
 		outputText(""+_name+" can empower items using materials gems and her innate magic to bless or corrupt gear by using radiant shards and gems. Would you like her to create an epic item and in that case which?");// legendary

@@ -480,8 +480,8 @@ public class PerkLib
 				"You gained knowledge how to make elementals rank up process less resource consuming. (-40% needed mana/fatigue and 40% less HP lost during failure)",
 				"You've chosen the 'Elemental Conjurer Knowledge' perk, gaining knowledge on how to make the elemental rank up process less resource consuming. (-40% needed mana/fatigue and 40% less HP lost during failure)");
 		public static const ElementalConjurerKnowledgeEx:PerkType = mk("Elemental Conjurer Knowledge (Ex)", "Elemental Conjurer Knowledge (Ex)",
-				"Decrease chance to fail (by ~10%) when ranking up an elemental and replace mana/fatigue with elemental energy gained from sacrificing elemental shards to arcane circle.",
-				"You've chosen the 'Elemental Conjurer Knowledge (Ex)' perk. Decrease chance to fail (by ~10%) when ranking up an elemental and replace mana/fatigue with elemental energy gained from sacrificing elemental shards to arcane circle.");
+				"Decrease chance to fail (by ~10%) when ranking up an elemental and replace mana/fatigue with elemental energy gained from sacrificing elemental shards to arcane circle. (if not enough energy stored it will check as before for mana/fatigue costs)",
+				"You've chosen the 'Elemental Conjurer Knowledge (Ex)' perk. Decrease chance to fail (by ~10%) when ranking up an elemental and replace mana/fatigue with elemental energy gained from sacrificing elemental shards to arcane circle. (if not enough energy stored it will check as before for mana/fatigue costs)");
 		public static const ElementalConjurerKnowledgeSu:PerkType = mk("Elemental Conjurer Knowledge (Su)", "Elemental Conjurer Knowledge (Su)",
 				"Allows you to convert soulforce into elemental energy.",
 				"You've chosen the 'Elemental Conjurer Knowledge (Su)' perk. ");
@@ -3732,7 +3732,6 @@ public class PerkLib
 		public static const MinotaurCumResistance:PerkType = mk("Minotaur Cum Resistance", "Minotaur Cum Resistance",
 				"You can never become a Minotaur Cum Addict. Grants immunity to Minotaur Cum addiction.");
 		public static const MindbreakerBrain1toX:MindBreakerBrain = new MindBreakerBrain();
-		//public static const ELFElvenSpearDancingFlurry1to4:ELFElvenSpearDancingFlurry = new ELFElvenSpearDancingFlurry();
 		public static const NaturalHerbalism:PerkType = mk("Natural herbalism", "Natural herbalism",
 				"Gain three times as many herbs and items from gathering and crafting. Poultice heals for 50% more. Gain herbalism experience faster.");
 		public static const Necromancy:PerkType = mk("Necromancy", "Necromancy",
@@ -3947,6 +3946,7 @@ public class PerkLib
 		public static const AlwaysSuccesfullRunaway:PerkType = mk("Always Succesfull Runaway", "Always Succesfull Runaway", "");
 		public static const DarknessNature:PerkType = mk("Darkness Nature", "Darkness Nature", "");
 		public static const DarknessVulnerability:PerkType = mk("Darkness Vulnerability", "Darkness Vulnerability", "");//NYU
+		public static const DieHardHP:PerkType = mk("DieHard HP", "DieHard HP", "");
 		public static const Enemy300Type:PerkType = mk("300-type enemy", "300-type enemy", "");
 		public static const EnemyBeastOrAnimalMorphType:PerkType = mk("Beast or Animal-morph enemy type", "Beast or Animal-morph enemy type", "");
 		public static const EnemyBossType:PerkType = mk("Boss-type enemy", "Boss-type enemy", "");
@@ -3966,6 +3966,7 @@ public class PerkLib
 		public static const EnemyHugeType:PerkType = mk("Huge-sized type enemy", "Huge-sized type enemy", "");//9+ ft. tall
 		public static const EnemyLargeGroupType:PerkType = mk("Large Group-type enemy", "Large Group-type enemy", "");
 		public static const EnemyPlantType:PerkType = mk("Plant-type enemy", "Plant-type enemy", "");
+		public static const EnemyTrueAngel:PerkType = mk("True Angel-type enemy", "True Angel-type enemy", "");
 		public static const EnemyTrueDemon:PerkType = mk("True Demon-type enemy", "True Demon-type enemy", "");
 		public static const EnemyResiliance:PerkType = mk("Resiliance Enemy", "Resiliance Enemy", "");
 		public static const FireNature:PerkType = mk("Fire Nature", "Fire Nature", "");
@@ -3983,8 +3984,6 @@ public class PerkLib
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");//NYU
 		public static const UniqueNPC:PerkType = mk("Unique npc", "Unique npc", "");
 		//public static const Enemy_Type:PerkType = mk("-type enemy", "-type enemy", "");undead?
-		//public static const :PerkType = mk("", "", "");
-		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", ""); na poźniej dopisane perki wzór
 //dodać także typy perków dla poszczególnych ras przeciwników tak, ze bedą mogły one mieć jakieś korzyści też (np. jak ma Dragon nature to bonusy jak PC miałby dragon score > 6))
@@ -5622,10 +5621,10 @@ public class PerkLib
                     .requireWis(150)
                     .requireLevel(30);
             FirstAttackElementalsEx.requirePerks(FirstAttackElementals, ElementalContractRank5)
-                    .requireLevel(30);/*
+                    .requireLevel(30);
 			ElementalConjurerKnowledgeEx.requirePerks(ElementalConjurerKnowledge, ElementalContractRank4)
 					.requireWis(150)
-                    .requireLevel(30);*/
+                    .requireLevel(30);
 			NamedBullet.requirePerk(ExpertGunslinger)
 					.requireWis(80)
                     .requireTou(75)

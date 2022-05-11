@@ -20,7 +20,7 @@ public class CombatTeases extends BaseCombatContent {
 		//Worms are immune!
 		else if (monster.short == "worms") {
 			clearOutput();
-			outputText("Thinking to take advantage of its humanoid form, you wave your cock and slap your ass in a rather lewd manner. However, the creature fails to react to your suggestive actions.\n\n");
+			outputText("Thinking to take advantage of its humanoid form, you wave your cock and slap your ass. However, the creature fails to react to your suggestive actions.\n\n");
 			enemyAI();
 		}
 		else {
@@ -41,11 +41,11 @@ public class CombatTeases extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 1) {
 			clearOutput();
-			outputText("You do your best to tease [themonster] with your body.  Your artless twirls have no effect, as <b>your ability to tease is sealed.</b>\n\n");
+			outputText("You do your best to tease [themonster] with your body.  Your artless twirls have no effect, as <b>your ability to tease has been sealed.</b>\n\n");
 			return;
 		}
 		if (monster.short == "Sirius, a naga hypnotist") {
-			outputText("He is too focused on your eyes to pay any attention to your teasing moves, <b>looks like you'll have to beat him up.</b>\n\n");
+			outputText("He is too focused on your eyes to pay any attention to your teasing, <b>looks like you'll have to beat him up.</b>\n\n");
 			return;
 		}
 		combat.wrathregeneration1();
@@ -53,7 +53,7 @@ public class CombatTeases extends BaseCombatContent {
 		combat.manaregeneration1();
 		combat.soulforceregeneration1();
 		if (monster.lustVuln == 0) {
-			outputText("You do your best to tease [themonster] with your body but it has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
+			outputText("You do your best to tease [themonster] with your body but it has no effect!  Your foe clearly does not experience lust the same way as you.\n\n");
 			enemyAI();
 			return;
 		}
@@ -754,8 +754,8 @@ public class CombatTeases extends BaseCombatContent {
 					else outputText("sexy ");
 					outputText("body turn you on?</i>\"  ");
 				}
-				if (monster.plural) outputText(monster.capitalA + monster.short + "' gazes are riveted on your groin as you run your fingers up and down your folds seductively.");
-				else outputText(monster.capitalA + monster.short + "'s gaze is riveted on your groin as you run your fingers up and down your folds seductively.");
+				if (monster.plural) outputText(monster.capitalA + monster.short + "' gazes are riveted on your groin as you run your fingers up and down your folds.");
+				else outputText(monster.capitalA + monster.short + "'s gaze is riveted on your groin as you run your fingers up and down your folds.");
 				if (player.clitLength > 3) outputText("  You smile as your " + clitDescript() + " swells out from the folds and stands proudly, begging to be touched.");
 				else outputText("  You smile and pull apart your lower-lips to expose your " + clitDescript() + ", giving the perfect view.");
 				if (player.cockTotal() > 0) outputText("  Meanwhile, [eachcock] bobs back and forth with your gyrating hips, adding to the display.");
@@ -925,8 +925,8 @@ public class CombatTeases extends BaseCombatContent {
 					outputText("You whip out your massive horsecock, and are immediately surrounded by a massive, heady musk.  Your enemy swoons, nearly falling to her knees under your oderous assault.  Grinning, you grab her shoulders and force her to her knees.  Before she can defend herself, you slam your horsecock onto her head, running it up and down on her face, her nose acting like a sexy bump in an onahole.  You fuck her face -- literally -- for a moment before throwing her back and sheathing your cock.");
 				}
 				else {
-					outputText("Panting with your unstoppable lust for the delicious, impregnable cunt before you, you yank off your [armor] with strength born of your inhuman rut, and quickly wave your fully erect cock at your enemy.  She flashes with lust, quickly feeling the heady effect of your man-musk.  You rush up, taking advantage of her aroused state and grab her shoulders.  ");
-					outputText("Before she can react, you push her down until she's level with your cock, and start to spin it in a circle, slapping her right in the face with your musky man-meat.  Her eyes swim, trying to follow your meatspin as you swat her in the face with your cock!  Satisfied, you release her and prepare to fight!");
+					outputText("Panting with your unstoppable lust for the delicious cunt before you, you yank off your [armor] with strength born of your inhuman rut, and quickly wave your fully erect cock at your enemy.  She flashes with lust, quickly feeling the heady effect of your man-musk.  You rush up, taking advantage of her aroused state, and grab her shoulders.  ");
+					outputText("Before she can react, you push her down until she's level with your cock, and start to spin it in a circle, slapping her right in the face with your musky man-meat.  Her eyes swim, trying to follow your tool as you swat her in the face with your cock!  Satisfied, you release her and prepare to fight!");
 				}
 				penis = true;
 				break;
@@ -1066,7 +1066,7 @@ public class CombatTeases extends BaseCombatContent {
 				}
 				//Tease #2:
 				else {
-					outputText("You turn partially around and then bend over, swaying your tail from side to side in your most flirtatious manner and wiggling your hips seductively, your skirt fluttering with the motions.  \"<i>Come on then, what are you waiting for?  This is a fine piece of ass here,</i>\" you grin, spanking yourself with an audible slap.");
+					outputText("You turn around and bend over, swaying your tail from side to side in your most flirtatious manner and wiggling your hips seductively, your skirt fluttering with the motions.  \"<i>Come on then, what are you waiting for?  This is a fine piece of ass here,</i>\" you grin, spanking yourself with an audible slap.");
 					ass = true;
 					chance += 6;
 					damage += 9;
@@ -1129,7 +1129,7 @@ public class CombatTeases extends BaseCombatContent {
 				damage += 15;
 				chance += 9;
 				if (maiden == 0) {
-					outputText("Confidently sauntering forward, you thrust your chest out with your back arched in order to enhance your [chest].  You slowly begin to shake your torso back and forth, slapping your chain-clad breasts against each other again and again.  One of your hands finds its way to one of the pillowy expanses and grabs hold, fingers sinking into the soft tit through the fine, mail covering.  You stop your shaking to trace a finger down through the exposed center of your cleavage, asking, \"<i>Don't you just want to snuggle inside?</i>\"");
+					outputText("Confidently sauntering forward, you thrust your chest out, arching your back in order to enhance your [chest].  You slowly begin to shake your torso back and forth, slapping your chain-clad breasts against each other again and again.  One of your hands finds its way to one of the pillowy expanses and grabs hold, fingers sinking into the soft tit through the fine, mail covering.  You stop your shaking to trace a finger down through the exposed center of your cleavage, asking, \"<i>Don't you just want to snuggle inside?</i>\"");
 					breasts = true;
 				}
 				else if (maiden == 1) {
@@ -1196,9 +1196,9 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//alraune teases
 			case 46:
-				outputText("You let your vines crawl around your opponent, teasing all of [themonster] erogenous zones.  [Themonster] gasps in involuntary arousal at your ministrations, relishing the way your vines seek out all [themonster] pleasurable spots and relentlessly assaults them.");
+				outputText("You let your vines crawl around your opponent, teasing all of [themonster]'s erogenous zones.  [Themonster] gasps in involuntary arousal at your ministrations, relishing the way your vines seek out all [themonster] pleasurable spots and relentlessly assaults them.");
 				if (player.isLiliraune()) {
-					outputText(" Meanwhile you and your twin smile in understanding coming up with the same idea as you begin to kiss, slathering your respective bodies with sweet syrupy nectar and mashing your breasts against each other in order to give a lewd show to [themonster] as the both of you pull a nectar dripping hand out in invitation to your entangled opponent.\n\n");
+					outputText(" Meanwhile you and your twin smile in understanding. You begin to make out, slathering your respective bodies with sweet syrupy nectar and mashing your breasts against each other in order to give a lewd show to [themonster] as the both of you pull a nectar dripping hand out in invitation to your entangled opponent.\n\n");
 				 	outputText("\"<i>Can't you see what delights you're missing out on?</i>\"\n\n");
 				 	outputText("\"<i>Just give up and we'll give you a good time.</i>\"\n\n");
 				 	outputText("\"<i>If you think you have the stamina to take both of us, that is.</i>\"\n\n");
@@ -1217,7 +1217,7 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//naga races belly dance teases
 			case 48:
-				outputText("You give [themonster] a belly dance show, moving your hip from a side to another and displaying your assets.  [Themonster] is so distracted by your dancing it doesn’t realise the two of you are still in battle for a few seconds before snapping out only in time to realise [monster he] did absolutely nothing for the last six seconds.");
+				outputText("You give [themonster] a belly dance, moving your hip from a side to another and displaying your assets.  [Themonster] is so distracted by your dancing it doesn’t realise the two of you are still in battle for a few seconds before snapping out. [monster he] did absolutely nothing for the last six seconds.");
 				monster.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 				chance += 9;
 				damage += 9;
@@ -1298,19 +1298,19 @@ public class CombatTeases extends BaseCombatContent {
 					bonusChance += 2;
 					bonusDamage += 3;
 				}
-				if (player.clitLength > 1.5) {
+				if (player.hasVagina() && player.clitLength > 1.5) {
 					bonusChance += 2;
 					bonusDamage += 3;
 				}
-				if (player.clitLength > 3.5) {
+				if (player.hasVagina() && player.clitLength > 3.5) {
 					bonusChance += 2;
 					bonusDamage += 3;
 				}
-				if (player.clitLength > 7) {
+				if (player.hasVagina() && player.clitLength > 7) {
 					bonusChance += 2;
 					bonusDamage += 3;
 				}
-				if (player.clitLength > 12) {
+				if (player.hasVagina() && player.clitLength > 12) {
 					bonusChance += 2;
 					bonusDamage += 3;
 				}

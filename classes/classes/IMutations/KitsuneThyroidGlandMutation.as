@@ -15,7 +15,7 @@ package classes.IMutations
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.KitsuneThyroidGlandIM)
+            var pTier:int = player.perkv1(IMutationsLib.KitsuneThyroidGlandIM);
             if (pTier >= 1){
                 descS += "Illusion & Terror -3CD";
             }

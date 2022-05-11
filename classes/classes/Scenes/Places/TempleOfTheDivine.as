@@ -78,7 +78,7 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 				addButton(0, "Pray", PlayerPrayAtTemple).hint("Offer your prayer to one of the temple altars.");
 				addButton(1, "Repair", TempleAltairsRebuildMenu).hint("Restore the temple.");
 			}
-			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) {
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1) { //req. PURE Marae
 				if (havingOrUsingBSwordOrExcalibur()) addButton(2, "Put Sword", puttingBSwordOrExcaliburOnAltair);
 				if (player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 2 || player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 3) addButton(2, "Take Sword", takingExcaliburFromAltair);
 				if (player.hasItem(consumables.P_PEARL, 1)) addButton(3, "Pearl", puttingPurePearlOnAltair);
@@ -97,7 +97,7 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 			if (anyOfAltairsRepaired()) {
 				outputText("Would you like to pray, and if yes, to whom?");
 				menu();
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae))
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) //req. PURE Marae
 					addButtonIfTrue(0, "Marae", PlayerPrayAtTempleMaraeAltair,
 						"Marae can't help you anymore in her current condition...",
 						flags[kFLAGS.FACTORY_SHUTDOWN] == 1, "Pray to Marae for empowered white magic.");
@@ -297,8 +297,7 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 		public function rebuildGodsAltairs():void {
 			menu();
 			addRebuildButton(0, "Marae", rebuildMaraeAltair,
-				flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] < 1, flags[kFLAGS.FACTORY_SHUTDOWN] > 0,
-				"Marae is corrupted. You need to <i>at least try to</i> clean her from the corruption... if it's still possible.");
+				flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] < 1, true, "");
 			addRebuildButton(1, "Taoth", rebuildTaothAltair,
 				flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] < 1, flags[kFLAGS.URTA_QUEST_STATUS] == 1,
 				"Urta might find out something about this one in the future. But you'll need to treat her VERY well and <b>often</b> for that...");
@@ -313,7 +312,8 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 
 		public function rebuildMaraeAltair():void {
 			clearOutput();
-			outputText("You work for 8 hours, sculpting stone and repairing the altar of Marae. By the time you're done you can feel divine power amass around it anew.");
+			outputText("You work for 8 hours, sculpting stone and repairing the altar of Marae.");
+            if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) outputText(" By the time you're done you can feel divine power amass around it anew.");
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
 			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] = 1;
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 3) flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS]++;
@@ -346,8 +346,10 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 
 		public function rebuildStatueOfMarae():void {
 			clearOutput();
-			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 4) outputText("You work for the entire day sculpting stone and repairing the statue of Marae. It looks slightly better, but it is far from finished.");
-			else outputText("You work for the entire day sculpting stone and repairing the statue of Marae. By the time you're done you can feel divine power radiate from it empowering the entire temple.");
+                outputText("You work for the entire day sculpting stone and repairing the statue of Marae. ");
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 4) outputText("It looks slightly better, but it is far from finished.");
+			else if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) outputText("By the time you're done you can feel divine power radiating from it.");
+            else outputText("Even though the altar is dysfunctional, the repaired statue looks like a nice addition to the temple.");
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 150;
 			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS]++;
 			doNext(camp.returnToCampUseEightHours);
@@ -379,8 +381,15 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) {
 				if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1)
 					outputText("shines, illuminated by a ray of light as if beckoning the faithful. A single white flower trails its way up one side, assuring her divine presence is there.");
-				else
-					outputText("glows dimly, sometimes gleaming with purplish colors. It definitely doesn't fit for any kind of prayer - the best blessing you can get from it is tentacle slap across your face. But it's still an altar, so you can use it for different kinds of ceremonies.");
+                else if (flags[kFLAGS.CORRUPTED_MARAE_KILLED])
+                    outputText("is dark and colorless. Its surface is covered in myriads of small cracks, and even Sapphire looks slightly worried about its state. Good thing she doesn't know what happened to Marae...");
+				else if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2)
+					outputText("glows dimly, sometimes gleaming with purplish color. It definitely doesn't fit for any kind of prayer - the best blessing you can get from Marae right now is a tentacle slap across your face. But it's still an altar, so you can use it for different kinds of ceremonies.");
+                else {
+                    outputText("is restored, but doesn't seem to function. ");
+                    if (flags[kFLAGS.MET_MARAE]) outputText("You're not sure if Marae knows about the restored altar at all - she spends whatever power she has left to protect herself from lake's corruption.");
+                    else outputText("Maybe something is still broken.");
+                }
 			}
 			outputText("\n\nTo the left of Marae's Altar, the Altar of Taoth");
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] < 1) outputText(" lies shattered into pieces. The trickster god cannot even be visualised from the rubble that once made up his effigy.");
@@ -439,12 +448,9 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 			else player.addStatusValue(StatusEffects.TempleOfTheDivineTracker, 2, -1);
 			inventory.takeItem(weapons.EXCALIB, templeMainMenu);
 		}
-
 		private function havingOrUsingBSwordOrExcalibur():Boolean {
 			return player.weapon == weapons.B_SWORD || player.weapon == weapons.EXCALIB || player.hasItem(weapons.B_SWORD, 1) || player.hasItem(weapons.EXCALIB, 1);
-
 		}
-
 		public function puttingPurePearlOnAltair():void {
 			clearOutput();
 			outputText("You pull out the Pure Pearl Marae gave you from your bag. Such a relic should rest in holy ground, and you indeed notice a slot in the altar for an orb like object such as the pearl. Will you place the Pure Pearl on the altar?");
@@ -452,42 +458,34 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 			addButton(0, "No", puttingPurePearlOnAltairNo);
 			addButton(1, "Yes", puttingPurePearlOnAltairYes);
 		}
-
 		public function puttingPurePearlOnAltairYes():void {
-			outputText("\n\nAs you place the pearl on the altar, you feel the holy power radiating from the temple increase a step further. The place practically radiates purity now. A horde of imps, attracted by the aura emanating from the temple, attempts to enter the building with the intention to put out the offending light. You prepare yourself for a fight, but end up watching in stunned silence as the corrupt beings catch fire and are reduced to ashes as soon as they fly inside the temple’s boundaries. It would seem the temple divine protections have increased.");
+			outputText("\n\nAs you place the pearl on the altar, you feel the holy power radiating from the temple increase. The place practically radiates purity now. A horde of imps, attracted by the aura emanating from the temple, attempts to enter the building with the intention to destroy the holy energy. You prepare yourself for a fight, but as the corrupt beings enter the sacred grounds, they catch fire, flailing madly as their bodies burn from the inside with golden light. They disintegrate midair, ashes raining down onto the temple floor. It would seem the temple's divine protections have increased.");
 			player.destroyItems(consumables.P_PEARL, 1);
 			if (player.hasStatusEffect(StatusEffects.TempleOfTheDivineTracker)) player.addStatusValue(StatusEffects.TempleOfTheDivineTracker, 3, 2);
 			else player.createStatusEffect(StatusEffects.TempleOfTheDivineTracker, 0, 0, 2, 0);
 			doNext(templeMainMenu);
 		}
-
 		public function puttingPurePearlOnAltairNo():void {
 			outputText("\n\nWhile it seems a good idea at first, you think you would prefer to keep the pearl for now.");
 			doNext(templeMainMenu);
 		}
-
 		public function takingPurePearlFromAltair():void {
 			clearOutput();
-			outputText("You recover the pearl from the Altar. The temple's power dimms slightly.");
+			outputText("You recover the pearl from the Altar. The temple's light dims.");
 			player.addStatusValue(StatusEffects.TempleOfTheDivineTracker, 3, -2);
 			inventory.takeItem(consumables.P_PEARL, templeMainMenu);
 		}
-
 		public function templeBasement():void {
 			clearOutput();
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 2) {
 				outputText("You wander back into the Temple basement atelier.");
-
 				menu();
 				addButton(0, "Statue", playerBuilder.currentStateOfStatue).hint("Check on the statue.");
 				addButton(1, "Strange Book", playerBuilder.strangeBookOfGolems).hint("Examine the strange book.");
-				if (player.hasKeyItem("Black Soul Gem") >= 0 && flags[kFLAGS.ONYX_PATH] < 1) addButton(2, "Spare Statue", onyx.makingNewGargoyle).hint("Check on the spare statue.");
-				addButton(4, "Back", templeMainMenu);
 			}
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 1) {
-				outputText("As you wander down into the basement of the temple, you find what looks like an old abandoned Atelier. Down there is a plinth, surrounded by various depictions of what looks like gargoyles. One could follow their examples and create a gargoyle of their own.\n\n");
+				outputText("As you wander down into the basement of the temple, you find what looks like an old abandoned Altar. Down there is a plinth, surrounded by various depictions of what looks like gargoyles. One could follow their examples and create a gargoyle of their own.\n\n");
 				flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE]++;
-				outputText("There is a plinth, surrounded by what looks to be depictions of various gargoyles, of all materials and forms. You're pretty sure that using these as a refernce, you could craft a gargoyle statue of your own, albeit of raw stone.");
 				menu();
 				addButton(0, "Begin", playerBuilder.chooseToWorkOnStoneStatue);
 				addButton(4, "Back", templeMainMenu);

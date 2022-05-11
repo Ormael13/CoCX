@@ -14,7 +14,7 @@ public class ArachnidBookLungMutation extends PerkType
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.ArachnidBookLungIM)
+            var pTier:int = player.perkv1(IMutationsLib.ArachnidBookLungIM);
             if (pTier >= 1){
                 descS += "Increase web and poison capacity by " + 100 * pTier + "%";
             }
@@ -74,7 +74,9 @@ public class ArachnidBookLungMutation extends PerkType
         //Mutations Buffs
         public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            pBuffs['int.mult'] = 0.05 * pTier;
+            if (pTier >= 1) pBuffs['int.mult'] += 0.05;
+            if (pTier >= 2) pBuffs['int.mult'] += 0.1;
+            if (pTier >= 3) pBuffs['int.mult'] += 0.15;
             return pBuffs
         }
 

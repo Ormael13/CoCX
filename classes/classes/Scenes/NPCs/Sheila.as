@@ -312,6 +312,7 @@ public class Sheila extends Monster
 				//-now totally okay with taking gems and riding the player so hard he passes out for 8 hours regardless
 				//-drops shitty kangaroo item and imp food
 				this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+				this.createPerk(PerkLib.OverMaxHP, 19, 0, 0, 0);
 			}
 			this.weaponName = "foot";
 			this.weaponVerb="kick";

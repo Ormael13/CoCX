@@ -562,12 +562,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (!player.hasPerk(PerkLib.FluidBody) && player.isGoo() && (player.gooScore() >= 11 || player.magmagooScore() >= 13 || player.darkgooScore() >= 13)) {
-				outputText("\nWoa your body is so malleable now attacks running through you can't damage you much anymore. This said the feeling of being penetrated by just anything leaves you with mind melting pleasure.\n(<b>Gained New Perk: Fluid Body.</b>\n)");
+				outputText("\nWoa your body is so malleable now attacks running through you can't damage you much anymore. This said the feeling of being penetrated by just anything leaves you with mind melting pleasure.\n(<b>Gained New Perk: Fluid Body.</b>)\n");
 				player.createPerk(PerkLib.FluidBody, 0, 0, 0, 0);
 				needNext = true;
 			}
 			if (player.hasPerk(PerkLib.FluidBody) && !player.isGoo() && (player.gooScore() < 11 || player.magmagooScore() < 13 || player.darkgooScore() < 13)) {
-				outputText("\nYour body no longer being slime enough you worry that weapon will draw blood the next time they strike you as you lose your fluidic nature.\n(<b>Lost Perk: Fluid Body.</b>\n)");
+				outputText("\nYour body no longer being slime enough you worry that weapon will draw blood the next time they strike you as you lose your fluidic nature.\n(<b>Lost Perk: Fluid Body.</b>)\n");
 				player.removePerk(PerkLib.FluidBody);
 				needNext = true;
 			}

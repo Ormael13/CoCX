@@ -92,7 +92,7 @@ public class PhoenixScene extends BaseContent
 			outputText("\n\nHer voice slowly builds as you slip into her slick, tight tunnel" + (player.cocks.length > 1 ? " and even tighter ass": "") + ", her hips trying to thrust against you in hopes of speeding up your torturously slow intrusion. You resist her, stopping your movement completely as you firmly hold her lower body still. She cries out as you remain motionless inside her, your throat rumbling as her body quakes around you, almost overcome by the blissful feeling of her spasming pussy " + (player.cocks.length > 1 ? " and back passage": "") + ". ");
 			outputText("\n\nHer eyes shoot open and stare into yours pleadingly, seconds ticking by with no movement except for her body trying to coax you further inside, grasping and squeezing your " + (y1 < 1 ? " [cock "+x1+"]": "rods") + ". You simply hold her gaze, watching her face intently as the desperation builds, her expression imploring you to continue. She tries to wrap her legs around your hips, the move spreading her entrance" + (player.cocks.length > 1 ? "s": "") + " slightly wider as her surprisingly strong thighs tighten about your waist.");
 			outputText("\n\nWith her new position she tries to pull you into her, legs tensing with effort. Your grip on her hips increases, fingers sinking into the soft, feathered flesh as you hold her hips away from you. Her snatch quivers around your length as her legs begin to tremble, though you manage to stop yourself from sliding any further into the incredibly horny girl. She must still be exhausted from the fight, considering that it feels as if it takes almost no effort to keep her at bay.");
-			doNext(missionaryWithPhoenixPart2);
+			doNext(curry(missionaryWithPhoenixPart2, x1,y1));
 		}
 		
 		public function missionaryWithPhoenixPart2(x1:int, y1:int):void {
@@ -122,12 +122,12 @@ public class PhoenixScene extends BaseContent
 			var x:int = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = 0;
 			outputText("With your mind made up, you're definitely in control. You tell the phoenix that you're going to fuck her ass. You quickly yank her scimitar away so she's defenseless and loincloth off to expose her tailhole and firm butt-cheeks. You give her a hard shove on the grounds and step on her back like you're dominating. She gives you a glare and yells, \"<i>I'll never submit to you! I never will!</i>\"");
-			if (player.armorName == "goo armor") outputText("\n\nThe goo opens up to reveal your " + player.cockDescript(x) + ". ");
+			if (player.armor == armors.GOOARMR) outputText("\n\nThe goo opens up to reveal your " + player.cockDescript(x) + ". ");
 			else outputText("\n\nYou take off the bottom half of your [armor] to reveal your " + player.cockDescript(x) + ". ");
 			outputText("You grab her by her rump and lift her tail, caress her butt-cheeks and tell her to get ready for the ordeal ahead.");
 			outputText("\n\nYou push your " + player.cockDescript(x) + " into her rear entrance, inch by inch until " + (player.cocks[x].cockLength < 12 ? "you hilt into her": "you can push in no more") + ".  You begin to thrust back and forth with abandon as each thrust brings pleasure to the phoenix.  Precum leaks from her reptilian cock and femjuice drips from her vagina. She gives you a glare and yells, \"<i>I still w— yes, fuck my ass harder!</i>\"");
 			outputText("\n\nAs if spurred, you slam harder into her anus, bringing her to a massive pleasure. Her breasts bounce with each thrust, giving her even more pleasure. You fuck her ass hard until you can hold back no more. You arch your back and unleash torrents of cum into the phoenix's bowels.  Your orgasm triggers the phoenix's orgasm as she unleashes her cum and femspunk, forming a puddle of mixed fluids.  Your ejaculates slow down to a halt, and you lay down exhausted.");
-			if (player.armorName == "goo armor") outputText("\n\nThe goo closes up around your nether regions.  ");
+			if (player.armor == armors.GOOARMR) outputText("\n\nThe goo closes up around your nether regions.  ");
 			else outputText("\n\nYou take the time to re-dress your lower half.  ");
 			outputText("Satisfied, you make your way back to your camp.");
 			player.sexReward("Default","Default",true,false);

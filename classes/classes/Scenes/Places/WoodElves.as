@@ -7,10 +7,11 @@ package classes.Scenes.Places{
 	import classes.BodyParts.Tail;
 	import classes.BodyParts.Wings;
 	import classes.GlobalFlags.kFLAGS;
-import classes.Items.ArmorLib;
+	import classes.Items.ArmorLib;
+	import classes.Scenes.Crafting;
 	import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
     import classes.display.SpriteDb;
-import classes.internals.SaveableState;
+	import classes.internals.SaveableState;
 	import classes.CoC;
 
 	public class WoodElves extends BaseContent implements SaveableState {
@@ -95,11 +96,11 @@ import classes.internals.SaveableState;
 			spriteSelect(SpriteDb.s_WoodElves);
 			WoodElvesQuest = QUEST_STAGE_METELF;
 			outputText("As you explore the woods, you find a grove with a small pond in the middle and a large, vibrant tree growing in the corner. The tree isn’t a kind you recall seeing in the past. You examine the tree and fail to properly remember which variety it belongs to, not to mention the small green lights that dance around it, a bit like the faerie fires in a bog. As you are examining the tree you hear a crystal clear, beautiful laugh to your left, followed by the sounds of shuffling leaves. You ready yourself for combat and turn around just in time to see a blonde woman with pointed ears and green eyes staring at you from the middle of the clearing. She wears an outfit of white silk that covers her but does little to hide her feminine curves, which stand out on her delicate and ethereal frame in a way no human could match. You imagine even most succubi would be jealous of the natural way she wears her beauty, as if some goddess had sculpted her form from marble stone, clear water and living wood, then animated it with the lithe spirit of a fairy. You are still gazing, spellbound by her appearance, when she calls out to you in a clear, musical voice." +
-					"\n\n\"<i>Welcome to our sacred grove traveler. Are you perhaps lost?</i>\"\n\n" +
-					"Not lost, you reply, though you don’t recall ever seeing this grove before; but you were simply wandering the forest looking for whatever might cross your path. You ask her who or what she may be." +
+					"\n\n\"<i>Welcome to our sacred grove, traveler. Are you perhaps lost?</i>\"\n\n" +
+					"Not lost, you reply, though you don’t recall ever seeing this grove before. You were simply wandering the forest looking for whatever might cross your path. You ask her who or what she is." +
 					"\n\n\"<i>We have our own name for ourselves, but others call us elves. And, a question for a question: who might you be, and what is the aim of your wandering?</i>\"\n\n" +
 					"You briefly explain your origin and quest to the beautiful woman, her peaceful bearing and unearthly beauty having allayed your usual suspicion. As you do, you hear more chime-like laughter to both sides, and notice that you have more company now. More light-skinned, blonde, green-eyed elven girls seem to pop out of nowhere all around you, some perched in the trees, others standing right behind the bushes." +
-					"\n\n\"<i>Such a valiant quest! How noble of you!</i>\", the lovely elf who first addressed you says unctuously.");
+					"\n\n\"<i>Such a valiant quest! How noble of you!</i>\", the lovely elf who first addressed you says, clasping her hands together.");
 			//[Ask about elves] [Leave]
 			menu();
 			addButton(0, "About elves", AskAboutElves);
@@ -108,7 +109,7 @@ import classes.internals.SaveableState;
 		public function findElvesRematch():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_WoodElves);
-			outputText("As you explore the forest you hear giggling. You feel a rush of air and barely have time to duck before an arrow misses you by an inch. It's the elves again! You try and run for it but a tree vine has firmly attached itself to your left leg holding you in place and slowly attempting to drag you toward what is likely an unsavory moment.");
+			outputText("As you explore the forest you hear giggling. You feel a rush of air and barely have time to duck before an arrow misses you by an inch. It's the elves again! You try and run for it but a tree vine has firmly attached itself to your left leg, holding you in place and slowly attempting to drag you towards the giggling elves.");
 			outputText("\n\n\"<i>Good day mister adventurer, how kind of you to come to us. Just sit down and relax; let us take great care of you.~♥</i>\"");
 			outputText("\n\nHell no! <b>IT'S A FIGHT!</b>");
 			startCombat(new WoodElvesHuntingParty());
@@ -121,10 +122,10 @@ import classes.internals.SaveableState;
 					"While the word is familiar enough to you from stories even in your old world, you’ve never met one, even in Mareth, and know nothing of their nature or goals. " +
 					"How have they remained hidden from the demonic threat even in these tainted woods?." +
 					"\n\n\"<i>Oh goodness, what a curious little darling you are! But how should we answer so freely in such dangerous times? If our positions were reversed, would you tell a stranger about yourself, and maybe endanger your friends and way of life?</i>\"\n\n" +
-					"She casts a meaningful look at a pair of elves in the tree above you, which you follow. One is cupping her cheeks with her hands, her face filled with mocking surprise, while the other grins widely and nods back to her companion in front of you, who addresses you once more, now sporting a less benevolent smile than previously." +
-					"\n\n\"<i>Ah, but it seems there is a way for you to find out what you wish to know! You can simply see for yourself. Although, I’m afraid once you do you likely won’t be going back.</i>\"\n\n" +
-					"As soon as she finishes speaking a pair of green vines grapple your torso from behind and you turn just in time to cry out as a normal-looking knot on the tree grows tentacles that begin to crawl toward you. " +
-					"This must be yet another damn breed of tentacle plant, one you haven’t seen yet! Will you resist despite your disadvantage, outnumbered and restrained, or will you submit to your capture, though the elves are clearly planning something untoward?");
+					"She casts a meaningful look at a pair of elves in the tree above you, which you follow. One is cupping her cheeks with her hands, her face filled with mocking surprise, while the other grins widely and nods back to her companion in front of you, who addresses you once more, now sporting a more sadistic smile." +
+					"\n\n\"<i>I cannot tell you what you wish to know...But I can show you. Come with me, and We'll let you experience it for yourself! Although, I’m afraid once you do you likely won’t be going back.</i>\"\n\n" +
+					"As soon as she finishes speaking a pair of green vines grapple your torso from behind. You turn just in time to cry out as a normal-looking knot on the tree grows tentacles that begin to crawl toward you. " +
+					"This must be yet another damn breed of tentacle plant, one you haven’t seen yet! Will you resist, despite your disadvantage? Or will you submit to your capture, though the elves are clearly planning something untoward?");
 			//[Ask about elves] [Leave]
 			menu();
 			addButton(0, "Submit", YouAreAlreadyElfSubmit);
@@ -145,13 +146,13 @@ import classes.internals.SaveableState;
 		public function StartElfFight():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_WoodElves);
-			outputText("Realising that there is no peaceful way out of this you ready your weapon and prepare for battle. The elves don't seem all too worried after all its you versus an entire group of them and they likely think they can easily overwhelm you. That and they have archers ready to shoot from all directions. This is not going to be a fun fight.");
+			outputText("Realising that there is no peaceful way out of this you ready your [weapon] and prepare for battle. The elves don't seem all too worried, after all its you versus an entire group of them. They likely think they can easily overwhelm you. They have archers surrounding you, and the ones on the ground have elegant, yet deadly-looking spears. This is not going to be a fun fight.");
 			startCombat(new WoodElvesHuntingParty());
 		}
 		public function ElfFightWin():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_WoodElves);
-			outputText("This battle is out of your hands. The moment you manage to defeat an elf another jumps in while a battle medic moves from the back to heal the fallen. You merely manage to create an exit amidst the mayhem and escape safe and sound from them. You will need to be wary of trees and blonde girls from now on seeing as this is unlikely to be the last time you run into them.");
+			outputText("This battle is out of your hands. The moment you manage to defeat an elf another jumps in while a battle medic moves from the back to heal the fallen. You merely manage to create an exit amidst the mayhem, running as fast as you can. You will need to be wary of trees and blonde girls from now on. This is unlikely to be the last time you run into them.");
 			WoodElvesQuest = QUEST_STAGE_METELFSANDEVENBEATSTHEM;
 			doNext(cleanupAfterCombat);
 		}
@@ -170,15 +171,15 @@ import classes.internals.SaveableState;
 		public function YouAreAlreadyElfLose():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_WoodElves);
-			outputText("Bested in combat and unable to continue fighting, the horde of elven ladies encroach upon you. The elf leader raises an arm as tentacle-like vines whip around you while the elves circling you titter");
+			outputText("Bested in combat and unable to continue fighting, the horde of elven ladies encroach upon you. The elf leader raises an arm as tentacle-like vines whip around you. The elves circling you titter, clearly eager to watch.");
 			YouAreAlreadyElf1();
 		}
 
 		public function YouAreAlreadyElf1():void {
 			outputText(" among each other. \n\n\"<i>See you again soon, my cute little adventurer.</i>\" says the leader playfully. \"<i>Try not to struggle too much, you’ll spoil the fun~♥</i>\"\n\n" +
 					"A vine wraps around your mouth, silencing any further objections you might have. Your restraints prevent you from looking anywhere but straight ahead, but you feel a great load of sticky resin fall on you from above," +
-					" presumably from the tree; you feel it even more than you might have expected, because somehow the vines grappling you stripped you naked! As if galvanized by the warm" +
-					", golden ooze now covering you the vines begin swirling and slithering over your body, teasing and tickling you until you begin to feel sensitive and aroused despite your situation." +
+					" presumably from the tree. you feel it even more than you might have expected, as the vines grappling you are joined by more, smaller tendrils. They begin removing your clothing, sliding underneath and peeling it off you. As if galvanized by the warm" +
+					", golden ooze now covering you the vines begin swirling and slithering over your now naked body, teasing and tickling you until you begin to feel sensitive and aroused despite your situation." +
 					" You clench in anticipation as one explores between the cheeks of your "+player.assDescript()+", then pushes its way into your "+player.assholeDescript()+"" +
 					", its tapered end swirling about provocatively inside. The vine already gagging you stifles your cry of indignation as it works its way into your mouth, acting much the same way.\n\n As it does, it begins releasing a sticky, faintly sweet sap that trickles down your throat and coats your tongue, making you feel dizzy and flushed.");
 			if (player.hasVagina()) outputText("You continue to thrash helplessly as a third tentacle winds its way into your "+player.vaginaDescript()+", and despite yourself your hips start to twitch and buck as it eagerly explores your wet cavity, tickling your sensitive places and slowly filling you with  more sticky fluid; it clings to your walls and makes them feel warm and tingly, and before long your slit is engorged and drooling with a mixture of the plant’s secretions and your own feminine fluids.");
@@ -264,14 +265,14 @@ import classes.internals.SaveableState;
 			outputText("You awaken a short while later. Still dazed, you crawl your way to the pond to take a look at yourself, only to find a stunningly beautiful elf girl looking back at you. " +
 					"She has "+player.breastCup(0)+" breasts, round and firm and tipped with pink, blushing nipples, and clear, smooth skin as unblemished as the crystal waters of a forest stream, fairer than any mortal. " +
 					"Her "+ Appearance.hairDescription(player) +" are like silk, " +
-					"and her eyes are the emerald green of fresh leaves in early spring. Slowly your waking mind begins to piece together that this beautiful elven girl is actualy you, the ressemblance with the elves who found you earlyer is shocking! " +
+					"and her eyes are the emerald green of fresh leaves in early spring. Slowly your waking mind begins to piece together that this beautiful elven girl is actually you, the resemblance with the elves who found you earlyer is shocking! " +
 					"\n\n\"<i>Oh heavens, Alyssa was right: you turned out just adorable<b>~♥</b></i>\"\n\n" +
 					"The elf girl who seemed to be the leader of the others speaks from behind you, and you turn to face her. " +
 					"She is gazing at you with eyes full of affection and approval. She is also alone; the other elves seem to have already left. " +
 					"As you gaze up at her she reaches a hand out to you. With no real reason not to, you accept her offer and she helps you to your feet. " +
 					"Then, gently but firmly holding your hand, the elf woman leads you out of the clearing. Still dazed, you ask her where she's taking you. " +
 					"\n\n\"<i>Why, silly girl, I'm taking you home, of course! You wanted to see what elvish life is like, and now you will, little sister! Besides, the others are dying to see you. Oh, right! My name is Merisiel.</i></b>\"\n\n" +
-					"Far, far back in the recesses of your mind a little fly buzzes; is it worry? Alarm? What could be causing that? After all, your big sister is finally taking you home! Everything is going to be okay now. With a shake of your head you dismiss the strange fancy and listen to Merisiel as she tells you how cute you look now. You smile and blush shyly at your big sister’s praise, happier than you’ve ever been that she thinks so highly of you.\n\n" +
+					"Far, far back in the recesses of your mind a little fly buzzes; is it worry? Alarm? What could be causing that? After all, your big sister is finally taking you home! Everything is going to be okay now. With a shake of your head you dismiss the strange fancy and listen to Merisiel as she tells you how cute you look. You smile and blush shyly at your big sister’s praise, happier than you’ve ever been that she thinks so highly of you.\n\n" +
 					"After a few minutes’ walk the two of you reach a clearing filled with small tents, tables, soft mats for resting, and, most of all: elves!" +
 					" So many beautiful, lithe, smooth-skinned elves, and not an ugly male in sight to mar the beauty! Most of them have stopped what they were doing," +
 					" turning their lovely faces your way to give you quiet, curious stares. For a moment you feel the icy grip of fear on your heart;" +
@@ -369,8 +370,8 @@ import classes.internals.SaveableState;
 					"\n\nMerisiel responds first. \"<i>We have been here since ancient times its just that we don't like to mingle with outsiders and this holds twice as true since the demon invasion happened.</i>\"" +
 					"\n\nAlyssa continues. \"<i>Whoever somehow finds us tends to stay here and keep shut about our existance we mind our business and prefer to keep to ourselves.</i>\"" +
 					"\n\nElenwen takes over. \"<i>Idealy only those we 'invite' in can find the village so most people don't even know we exist.</i>\"" +
-					"\n\nMerisiel finishes the story as her sisters trail into sad silence. \"<i>I guess since we tend to kidnap people we wouldn't exactly receive a warm welcome amonst the other civilised race let alone that our cousins the dark elves have a very bad reputation as slavers. Well we used to be cleaner then this but ever since the demon messed up our sacred trees lust is prety much one of the few things up our mind these days.</i>\"\n\n" +
-					"She glances at her sisters, a mixture of emotion visible in her face in which lust plays no small part. Clearly the priority among these elves of the wood is no longer on exploration and diplomacy - you’ve experienced that much yourself by now.");
+					"\n\nMerisiel finishes the story as her sisters trail into sad silence. \"<i>I guess since we tend to kidnap people we wouldn't exactly receive a warm welcome amonst the other civilised races. Then there's our cousins the dark elves... They have an...unfortunately well-earned reputation as slavers. We used to be cleaner then this... But ever since the demons defiled our sacred trees, lust is one of the only things we can focus on.</i>\"\n\n" +
+					"She glances at her sisters, a mixture of emotions visible in her face. Clearly the priority among these elves of the wood is no longer on exploration and diplomacy - you’ve experienced that much yourself by now.");
 			menu();
 			addButton(1, "The Tree", TheTreeTopic);
 			addButton(2, "The Grove", TheGroveTopic);
@@ -388,8 +389,8 @@ import classes.internals.SaveableState;
 			clearOutput();
 			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("You tell them to explain what is going on with that bizarre tree." +
-					"\n\nAlyssa responds first. \"<i>The Sacred Tree grew from a sapling that dates back to the genesis days of mareth. It is, or it was, I suppose, a core part of our culture; we elves are forest spirits deeply connected to the trees and animals of the woods, and the Sacred Tree was like our patron. When a new elf was born, we would place it underneath the tree, and it would be blessed with the spirit of the forest, growing into a true elf.</i>\"" +
-					"\n\nElenwen continues. \"<i>When the demons found it, though, they changed all that. They corrupted it, turned it into… something else. They also corrupted us. You may have noticed that there are no male elves here; or at least none you would easily recognize as such without… checking. The truth is that male wood elves are so rare thanks to how the tree proceed that regardless of weither we have males or not our only means of increasing our numbers nowaday is to either tie that one guy to a tree and take turn raping him or abduct peoples. You can guess wich choice we prefer.</i>\"" +
+					"\n\nAlyssa responds first. \"<i>The Sacred Tree grew from a sapling that dates back to the first days of Mareth. It is, or it was, I suppose, a core part of our culture; we elves are forest spirits deeply connected to the trees and animals of the woods, and the Sacred Tree was like our patron. When a new elf was born, we would place it underneath the tree, and it would be blessed with the spirit of the forest, growing into a true elf.</i>\"" +
+					"\n\nElenwen continues. \"<i>When the demons found it, though, they changed all that. They corrupted it, turned it into… something else. They also corrupted us. You may have noticed that there are no male elves here; or at least none you would easily recognize as such without… checking. The truth is that male wood elves are so rare, thanks to those...Demons... That our males...well... Our only means of increasing our numbers nowadays is to abduct people.</i>\"" +
 					"\n\nMerisiel nods. \"<i>The Sacred Tree, or I suppose the Corrupted Tree, now... it eats men. Or, it eats the ‘male’ out of men, I guess… in the process changing them into one of us. We can’t reproduce among ourselves anymore - the few of us that still have some of the right equipment are sterile. And when we breed with other races, the children aren’t elves. So the only way we can replenish our numbers from losses is by letting the Tree have its way with travelers we find… like we did with you.</i>\"" +
 					"\n\n\"<i>But we really do care for them afterward!</i>\" Alyssa interjects. \"<i>Just like we did with you… or tried to, at least. We really did consider you to be one of us. I still do… little sister.</i>\" She trails off as she looks away from you sadly.");
 			menu();
@@ -409,7 +410,7 @@ import classes.internals.SaveableState;
 			clearOutput();
 			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("You ask about the Grove." +
-					"\n\n\"<i>It’s been our home for years, of course,</i>\" says Elenwen. \"<i>Well truth be told its one of the few remaining if not the last wood elf community across mareth since our species is mostly extinct due to ahem... reproduction issues.</i>\"" +
+					"\n\n\"<i>It’s been our home for years, of course,</i>\" says Elenwen. \"<i>Well truth be told its one of the few remaining if not the last wood elf community across mareth since our species is mostly extinct due to our ahem... reproduction issues.</i>\"" +
 					"\n\nMerisiel adds, \"<i>It’s a beautiful place, even after the corruption, I think. Nature thrives here; the plants and animals are healthy and free, and we live mostly in peace, aside from catching an adventurer every so often to replenish our numbers.</i>\"\n\n" +
 					"Like they did with you, you add." +
 					"\n\nThe three girls look a little guilty for a minute and nod. Alyssa says \"<i>We really did love you though. I… I still love you, and I wish you would stay with us. It’s not so bad here, is it?</i>\"\n\n" +
@@ -452,7 +453,7 @@ import classes.internals.SaveableState;
 			clearOutput();
 			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("You ask Merisiel what this naming ceremony is about. She uncomfortably shifts in place before answering you." +
-					"\n\n\"<i>Well it's a big event first and foremost, all new elves get a name given to them by the sacred trees. As we told you before, we elves are bonded to the forests. When a sister is ready to become a true wood elf she must undergo the naming ceremony which consists in fully bonding with an offshoot of the sacred tree in body and soul. Your elven name is something that will come to you naturally though in exchange you will fully bond with the sacred tree and your soul will merge with that of the forest.</i>\"\n\n" +
+					"\n\n\"<i>Well it's a big event first and foremost, all new elves get a name given to them by the sacred trees. As we told you before, we elves are bonded to the forests. When a sister is ready to become a true wood elf she must undergo the naming ceremony which consists in fully bonding with an offshoot of the sacred tree, both in body and soul. Your elven name is something that will come to you naturally, and your soul will merge with that of the forest.</i>\"\n\n" +
 					"Merge with the forest? She could not possibly mean... Sensing your confusion Merisiel, with an almost ironic, somewhat deadpan soulless glare clarifies the rest for you." +
 					"\n\n\"<i>If I was not clear enough your soul will safely stay bound within the tree, out of your body. So long as the forest lives you will never age again.</i>\"\n\n" +
 					"You think for a moment, unite your soul with the forest in exchange for a timeless body and a new elven name? Is this what you truly want?");
@@ -499,9 +500,9 @@ import classes.internals.SaveableState;
 			clearOutput();
 			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("While you do want to continue your quest you feel a strong tie to your sisters. Maybe it's the elven brainwashing magic that compels you ");
-			if (flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] > 0) outputText(", maybe it's your disillusion toward mankind after the elders of your village almost sold you into slavery to fiends all for their own gain ");
-			outputText("or maybe it's just that you really love your elder sis that much. Regardless, your old name holds little meaning to you now and you are more than ready to discard it, just as you would your past as a human. If relinquishing your soul to the forest can make you that much closer to your dear sisters then all the better. You announce your decision to take on the naming ceremony and become a true elf like them, however you will pursue your original quest as well; if not for Ingnam who never deserved your efforts in the first place then for the elves so they can one day be free of demonic influence." +
-					"\n\nAlyssa claps her hand togueter overjoyed \"<i>Sister, you are the best, you know that? Despite everything that happened you still haven't given up on living together with us.</i>\"\n\n" +
+			if (flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] > 0) outputText(", maybe it's your disillusion toward mankind, after all, the elders of your village sold you into slavery.");
+			outputText("or maybe it's just that you really love your elder sister that much. Regardless, your old name holds little meaning to you now and you are more than ready to discard it, just as you would your past as a human. If relinquishing your soul to the forest can make you that much closer to your dear sisters, then all the better. You announce your decision to take on the naming ceremony and become a true elf like them, however you will pursue your original quest as well; if not for Ingnam, which never deserved your efforts, then for the elves so they can one day be free of demonic influence." +
+					"\n\nAlyssa claps her hands, overjoyed \"<i>Sister, you are the best, you know that? Despite everything that happened you still haven't given up on living together with us.</i>\"\n\n" +
 					"As if you would. This little paradise is what's truly worth fighting for.");
 			doNext(Ceremony2);
 		}
@@ -534,7 +535,7 @@ import classes.internals.SaveableState;
 					"\n\nIt is a slow but gentle penetration as the vine parts your lips, inserting itself into you with several inches, following the pulse of your heartbeat." +
 					" A second vine fondles the entryway to your anus before it proceeds softly digging into you." +
 					" Your mind trails, lost in the thought of giving yourself to the gentleness of the tree." +
-					"\n\nYou open your eyes, barely spying a faint green glow coming from your pussy where the vine is embedded as the glow from your cunt slowly transfers to the vine then through the tree." +
+					"\n\nYou open your eyes, barely spying a faint green glow coming from your pussy where the vine is embedded as the glow from your cunt slowly transfers to the vine, then through the tree." +
 					" The tree permeates with a warm, green glow as foreign yet incredible sensations overwhelm your entire body." +
 					"\n\nYou can hear the pulse of the sap, the slow movement of a tainted source of water underground." +
 					" The mating calls of faraway birds, the breeze caressing a whole field of open flowers, pistils brushing against one another as pollen flies in the air. You hear the forest, or rather, you are the forest." +
@@ -585,7 +586,7 @@ import classes.internals.SaveableState;
 			clearOutput();
 			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("[name]! Yes, that is you. You are [name], beloved child of the forest, and this is the tree which initiated you." +
-					" The tree is now vibrant with green light, your soul in the safekeeping of its woods along those of the many elves who came here before you, your body having none left to give." +
+					" The tree is now vibrant with green light, your soul in the safekeeping of its woods along those of the many elves who came here before you." +
 					" With tender care, the vines slowly disentangle you from its embrace before allowing you to escape." +
 					"\n\nYou can still feel the connection between you and the forest, leaving you with enhanced senses. The overwhelming sensations dim down over time," +
 					" becoming easier to bear and allowing you to regain a semblance of control over yourself, though it never dies out completely." +
@@ -600,10 +601,10 @@ import classes.internals.SaveableState;
 			clearOutput();
 			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("Alyssa welcomes you back with a loving hug as you come running out of the woods toward her. Her hand pleasantly ruffles through your hairs while the upcoming uninitiated head for the woods." +
-					"\n\n\"<i>See? That wasn't too bad, and now we truly are connected both by blood and soul; that of the forest. I will clean you up so you can be ready for the evening meal. I know you will likely want to resume your old quest tomorrow. Merisiel, Elenwen, and I have already retrieved your things. You will be ready and up for adventure again in no time.</i>\"\n\n" +
+					"\n\n\"<i>See? That wasn't too bad. Now we truly are connected both by blood and soul; that of the forest. I will clean you up so you can be ready for the evening meal. I know you will likely want to resume your old quest tomorrow. Merisiel, Elenwen, and I have already retrieved your things. You will be up and ready for adventure again in no time.</i>\"\n\n" +
 					"What about home, though? Is this goodbye?" +
 					"\n\n\"<i>You're joking aren't you? You're free to take a break from your world trekking anytime and come back here to visit. No one here will judge you if you truly decided to retire from adventuring and stay here permanently. Honestly, I think a cute girl like you doesn't belong out there fighting monsters and demons. But since this is the choice you made, all we can do is make sure this adventure won't cost you anything. And should things become impossible, you can always come back here and lay on your big sister's shoulder for moral support.</i>\"\n\n" +
-					"This evening, you eat fresh fishes caught from the stream and berries, sharing this final meal with your sisters. Knowing you might not see them for a long while, you want to spend another moment of intimacy with them. The four of you playfully share the comfy pillow bed one last time. You doze off within your sisters' arms, feeling both bliss and security." +
+					"This evening, you eat fresh fish caught from the stream and berries, sharing this final meal with your sisters. Knowing you might not see them for a long while, you want to spend another moment of intimacy with them. The four of you playfully share the comfy pillow bed one last time. You doze off within your sisters' arms, feeling both bliss and security." +
 					"\n\nThe day after, you pick up your gear and get ready to resume your quest. With a heartfelt goodbye for now to the three girls, you leave the elven grove." +
 					" The voices of your sisters fade into the forest behind you as you return to your camp. The paths slowly become familiar while you tread as the last of your brainwashing fades. " +
 					"As you pass a nearby running river, you look into it as your reflection stares back at you. Your reflection carries two bright green eyes, like shining emeralds." +
@@ -629,13 +630,13 @@ import classes.internals.SaveableState;
 						"\n\n\"<i>Sister [name]! You came back, we all thought you would get captured by demons or worse out there!</i>");
 			if(player.elfScore() < 11 && player.woodElfScore() < 22) outputText("<i> Well... you did change a little, but that doesn't matter. You're still, and forever will be family!.</i>");
 				outputText("\"" +
-				"\n\nUnsurprisingly, Elenwen is not so far behind acting a little confused." +
+				"\n\nUnsurprisingly, Elenwen is not so far behind, a little confused." +
 						"\n\n\"<i>Alyssa, what's going on? </i>");
 				if(player.elfScore() < 11 && player.woodElfScore() < 22) outputText("<i>Who's this?</i>");
 				outputText("<i> Wait, that's actually [name]?! You finally came home! Merisiel is going to be overjoyed!</i>\"" +
 						"\n\nYou pause briefly; that's slightly concerning. You ask what happened with Merisiel." +
 						"\n\n\"<i>Well, ever since you left she's been kind of depressed. She's constantly asking herself over and over if the memory incident was her fault. </i>");
-				if(player.elfScore() < 11 && player.woodElfScore() < 22) outputText("<i> Doesn't matter if you've changed t</i>");
+				if(player.elfScore() < 11 && player.woodElfScore() < 22) outputText("<i> Doesn't matter if you've changed, t</i>");
 				else outputText("<i>T</i>");
 				outputText("<i>he mere fact that you are here despite everything is going to cheer her up.</i>\"" +
 						"Before you know it, they organize a whole party just for you. Wine, food, and more discreet pleasures included. Perhaps coming back once in a while would be nice." +
@@ -652,26 +653,26 @@ import classes.internals.SaveableState;
 		///ELF VILLAGE SECTION///
 		public function GroveLayout2(isFirstTime:Boolean = false):void {
 			spriteSelect(SpriteDb.s_WoodElves);
-			if (!isFirstTime)outputText("The elven village is at its usual calm today. Your sisters are playfully frolicking around in the grove. Sewing, swimming, playing music, or in some rare cases training with weapons in the small area dedicated to archery and more martial pursuit." +
+			if (!isFirstTime)outputText("The elven village is at its usual calm today. Your sisters are playfully frolicking around in the grove. Sewing, swimming, playing music, or in some rare cases training with weapons in the small area dedicated to archery and more martial pursuits." +
 					" This grove is a small oasis of innocence cut away from the rest of Mareth. The elves living their long hedonistic existence on a day-to-day basis without worry or fear." +
-					"\n\nThe only stain amidst this beautiful scenery is the 'blessed' trees at the edge of this settlement which reminds you all too well that if no one steps up and does the fighting even this haven will eventually become corrupted and defiled beyond repair before disappearing from the face of Mareth. You try and keep your mind joyful however not to darken the light of day.");
+					"\n\nThe only stain amidst this beautiful scenery is the 'blessed' trees at the edge of this settlement, which reminds you all too well that if no one steps up and does the fighting, even this haven will eventually become corrupted and defiled beyond repair before disappearing from the face of Mareth. You try and keep your mind joyful however not to darken the light of day.");
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) outputText(" Well, what's left of it… it's hard to get any sun with those damn clouds covering the sky.");
 			menu();
 			addButton(0, "River", River);
 			if ((player.elfScore() <=10 && player.woodElfScore() <=16)) addButtonDisabled(0,"River","You need to be an elf in order to go bath with the girls.");
-			else if (!player.hasVagina()) addButtonDisabled(0,"River","You can't seriously go back naked with girls as a guy! Just what where you thinking You degenerate pervert!?");
+			else if (!player.hasVagina()) addButtonDisabled(0,"River","You can't seriously go back naked with girls as a guy! Just what were you thinking, You degenerate pervert!?");
 			addButton(1, "Tent", Tent);
 			if ((player.elfScore() <=10 && player.woodElfScore() <=16)) addButtonDisabled(1,"Tent","You need to be an elf.");
 			else if (!player.hasVagina()) addButtonDisabled(1,"Tent","You need to be female or herm in order to use the tents.");
 			addButton(2, "Fletching table", Fletching);
 			addButton(3, "Elenwen", Elenwen);
 			if (hasTrainedToday) addButtonDisabled(3,"Elenwen","You need a break from your recent training before you can train again.");
-		    else if (!player.isElf()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train, maybe you should make yourself more elf like.");
-			else if (!player.hasVagina()) addButtonDisabled(3,"Elenwen","Elenwen has personnal preference in regards to people she will train with... it's not like archery is a girl only thing but considering the fact that she's practicing naked...");
+		    else if (!player.isElf()) addButtonDisabled(3,"Elenwen","Elenwen has personal preferences in regards to the people she will train, maybe you should make yourself more elf like.");
+			else if (!player.hasVagina()) addButtonDisabled(3,"Elenwen","Elenwen has personal preferences in regards to the people she will train with... it's not like archery is just for girls, but considering the fact that she's practicing naked...");
 			addButton(4, "Alyssa", Alyssa);
 			if (hasTrainedToday) addButtonDisabled(4,"Alyssa","You need a break from your recent training before you can train again.");
-			else if (!player.isElf()) addButtonDisabled(4,"Alyssa","Alyssa has personnal preference in regards to people she will train, maybe you should make yourself more elf like.");
-			else if (!player.hasVagina()) addButtonDisabled(4,"Alyssa","Alyssa has personnal preference in regards to people she will train with... it's not like the spear is a girl only discipline but the way she use it might as well be...");
+			else if (!player.isElf()) addButtonDisabled(4,"Alyssa","Alyssa has personal preferences in regards to the people she will train, maybe you should make yourself more elf like.");
+			else if (!player.hasVagina()) addButtonDisabled(4,"Alyssa","Alyssa has personal preferences in regards to the people she will train with... it's not like the spear is a girl only discipline but the way she use it might as well be...");
 			addButton(5, "Leave", camp.returnToCampUseOneHour);
 		}
 
@@ -770,7 +771,7 @@ import classes.internals.SaveableState;
 					" she says teasingly, slipping the toy inside her sister and twisting it around a bit before sliding it halfway in. Alyssa moans pleasurably into your mouth as the toy slides home. " +
 					"\"<i>Okay, okay, Alyssa, you have to sit up now, or you’ll never get the other end in. Besides,</i>\"" +
 					" she adds, fingering her own dripping pussy with her free hand, " +
-					"\"<i>[name]’s going to need that mouth of hers free so big sister Elenwen doesn’t feel left out.</i>\"" +
+					"\"<i>[name]’s going to need that mouth of hers free, so big sister Elenwen doesn’t feel left out.</i>\"" +
 					"\n\nAlyssa nods, blushing and biting her lower lip as she tries to endure the pleasure of the toy filling her. She rears up until she is straddling you, and you see the remaining six inches of the toy protruding from her glistening lips, twitching almost like a real cock as her pleasured spasms move it up and down." +
 					" Elenwen uses a hand to guide the tip to your own hungry opening. " +
 					"\"<i>H-here I come, [name]...</i>\"" +
@@ -818,7 +819,7 @@ import classes.internals.SaveableState;
 			clearOutput();
 			spriteSelect(SpriteDb.s_WoodElves);
 			if (!player.hasStatusEffect(StatusEffects.FletchingTable)) player.createStatusEffect(StatusEffects.FletchingTable,0,0,0,0);
-			outputText("You approach the fletching table. Here you can craft improved arrowheads using elven tools.");
+			outputText("You approach the fletching table. Here you can craft improved arrows using elven tools.");
 			menu();
 			addButton(1, "CraftArrows", FletchingCraftArrows);
 			addButton(2, "AdjustString", FletchingAdjustString);
@@ -829,34 +830,35 @@ import classes.internals.SaveableState;
 		public function FletchingCraftArrows():void {
 			outputText("What kind of arrows would you like to create?");
 			menu();
-			if (player.hasItem(useables.IRONORE, 1)) addButton(0, "Iron", FletchingCraftArrows2, useables.IRONORE, 1).hint("Use iron to craft arrows.");
-			if (player.hasItem(useables.MOONSTO, 1)) addButton(1, "Moonstone", FletchingCraftArrows2, useables.MOONSTO, 2).hint("Use moonstone to craft arrows.");
-			if (player.hasItem(useables.SKYMETA, 1)) addButton(2, "Skymetal", FletchingCraftArrows2, useables.SKYMETA, 3).hint("Use moonstone to craft arrows.");
-			if (player.hasItem(useables.EBONING, 1)) addButton(3, "EbonIng", FletchingCraftArrows2, useables.EBONING, 4).hint("Use ebonbloom ignot to craft arrows.");
-			//Iron(Can be gathered by mining) +10 % Damage
+			if (player.hasItem(useables.IARROWHEAD, 1)) addButton(0, "Iron", FletchingCraftArrows2, "iron", 1).hint("Use iron arrowheads to craft arrows.");
+			if (player.hasItem(useables.MARROWHEAD, 1)) addButton(1, "Moonstone", FletchingCraftArrows2, "moonstone", 2).hint("Use moonstone arrowheads to craft arrows.");
+			if (player.hasItem(useables.SARROWHEAD, 1)) addButton(2, "Skymetal", FletchingCraftArrows2, "skymetal", 3).hint("Use skymetal arrowheads to craft arrows.");
+			if (player.hasItem(useables.EARROWHEAD, 1)) addButton(3, "Ebonbloom", FletchingCraftArrows2, "ebonbloom", 4).hint("Use ebonbloom arrowheads to craft arrows.");
 			//Moonstone(Obtained by mining at night) +20 % Damage
 			//Skymetal(Found in glacial rift) +30% Damage
-			//Ebonbloom(Requires Ebonbloom) +40% Damage
 			addButton(14, "Back", Fletching);
 		}
-		private function FletchingCraftArrows2(itype:ItemType, type:Number):void {
-			outputText("You work for 8 hours crafting a full quiver of " + itype.shortName + " arrows. Those will serve you well in your adventures.");
+		private function FletchingCraftArrows2(itype:String, type:Number):void {
+			outputText("You work for 8 hours crafting a full quiver of " + itype + " arrows. Those will serve you well in your adventures.");
 			if (!player.hasPerk(PerkLib.CraftedArrows)) player.createPerk(PerkLib.CraftedArrows,0,0,0,0);
 			switch (type) {
 				case 1:
+					player.destroyItems(useables.IARROWHEAD, 1);
 					player.addPerkValue(PerkLib.CraftedArrows, 1, 100);
 					break;
 				case 2:
+					player.destroyItems(useables.MARROWHEAD, 1);
 					player.addPerkValue(PerkLib.CraftedArrows, 2, 100);
 					break;
 				case 3:
+					player.destroyItems(useables.SARROWHEAD, 1);
 					player.addPerkValue(PerkLib.CraftedArrows, 3, 100);
 					break;
 				case 4:
+					player.destroyItems(useables.EARROWHEAD, 1);
 					player.addPerkValue(PerkLib.CraftedArrows, 4, 100);
 					break;
 			}
-			player.destroyItems(itype, 1);
 			doNext(camp.returnToCampUseEightHours);
 		}
 
@@ -876,9 +878,14 @@ import classes.internals.SaveableState;
 				}
 				else addButtonDisabled(1, "Ebonbloom", "You need ebonbloom.");
 			}
-			//Spider silk(Can be gathered from spider enemy) +10 % Damage
-			//Ebonbloom(Requires Ebonbloom) +20% Damage
-			//Unicorn hair(Obtained from Celess) +30 % Damage
+			if (player.statusEffectv2(StatusEffects.FletchingTable) > 2) addButtonDisabled(2, "UnicornHair", "You already used this for improving bow string.");
+			else {
+				if (player.hasItem(useables.UNICORNH, 1)) {
+					if (player.statusEffectv2(StatusEffects.FletchingTable) < 2) addButtonDisabled(2, "UnicornHair", "You need to improve string with ebonbloom first.");
+					else addButton(2, "UnicornHair", FletchingAdjustString2, useables.UNICORNH);
+				}
+				else addButtonDisabled(2, "UnicornHair", "You need unicron hair.");
+			}
 			addButton(14, "Back", Fletching);
 		}
 		private function FletchingAdjustString2(itype:ItemType):void {
@@ -893,52 +900,66 @@ import classes.internals.SaveableState;
 			menu();
 			if (player.statusEffectv1(StatusEffects.FletchingTable) > 0) addButtonDisabled(0, "Bronze", "You already used this for reinforcing bow.");
 			else {
-				if (player.hasItem(useables.BRONZEB, 1)) addButton(0, "Bronze", FletchingReinforce2, useables.BRONZEB);
+				if (player.hasItem(useables.BRONZEB, 1) || Crafting.BagSlot03 > 0) addButton(0, "Bronze", FletchingReinforce2, useables.BRONZEB, 1);
 				else addButtonDisabled(0, "Bronze", "You need bronze bar.");
 			}
 			if (player.statusEffectv1(StatusEffects.FletchingTable) > 1) addButtonDisabled(1, "Iron", "You already used this for reinforcing bow.");
 			else {
-				if (player.hasItem(useables.IRONORE, 1)) {
+				if (player.hasItem(useables.IRONORE, 1) || Crafting.BagSlot04 > 0) {
 					if (player.statusEffectv1(StatusEffects.FletchingTable) < 1) addButtonDisabled(1, "Iron", "You need to reinforce bow with bronze first.");
-					else addButton(1, "Iron", FletchingReinforce2, useables.IRONORE);
+					else addButton(1, "Iron", FletchingReinforce2, useables.IRONORE, 2);
 				}
 				else addButtonDisabled(1, "Iron", "You need iron ore.");
 			}
 			if (player.statusEffectv1(StatusEffects.FletchingTable) > 2) addButtonDisabled(2, "Moonstone", "You already used this for reinforcing bow.");
 			else {
-				if (player.hasItem(useables.MOONSTO, 1)) {
+				if (player.hasItem(useables.MOONSTO, 1) || Crafting.BagSlot07 > 0) {
 					if (player.statusEffectv1(StatusEffects.FletchingTable) < 2) addButtonDisabled(2, "Moonstone", "You need to reinforce bow with iron first.");
-					else addButton(2, "Moonstone", FletchingReinforce2, useables.MOONSTO);
+					else addButton(2, "Moonstone", FletchingReinforce2, useables.MOONSTO, 3);
 				}
 				else addButtonDisabled(2, "Moonstone", "You need moonstone.");
 			}
 			if (player.statusEffectv1(StatusEffects.FletchingTable) > 3) addButtonDisabled(3, "EbonIng", "You already used this for reinforcing bow.");
 			else {
-				if (player.hasItem(useables.EBONING, 1)) {
+				if (player.hasItem(useables.EBONING, 1) || Crafting.BagSlot06 > 0) {
 					if (player.statusEffectv1(StatusEffects.FletchingTable) < 3) addButtonDisabled(3, "EbonIng", "You need to reinforce bow with moonstone first.");
-					else addButton(3, "EbonIng", FletchingReinforce2, useables.EBONING);
+					else addButton(3, "EbonIng", FletchingReinforce2, useables.EBONING, 4);
 				}
 				else addButtonDisabled(3, "EbonIng", "You need ebon ingot.");
 			}
-			//Bronze(Can be gathered by mining) +10 % Damage)
-			//Iron(Can be gathered by mining) +20 % Damage
 			//Moonstone(Obtained by mining at night) +30 % Damage
-			//Ebonbloom(Ebony ingot)(Requires Ebonbloom) +40% Damage
 			//Divine Ice(Requires Divine ice, found in glacial rift) +50% Damage
 			//Orichalcum(Found in deep sea) +60% Damage
 			//Skymetal(Found in End game zone) +70% Damage
 			addButton(14, "Back", Fletching);
 		}
-		private function FletchingReinforce2(itype:ItemType):void {
+		private function FletchingReinforce2(itype:ItemType, type:Number):void {
 			outputText("You work for 8 hours applying your new " + itype.shortName + " reinforcement to your bow. This will serve you well in your adventures.");
 			player.addStatusValue(StatusEffects.FletchingTable, 1, 1);
-			player.destroyItems(itype, 1);
+			switch (type) {
+				case 1:
+					if (Crafting.BagSlot03 > 0) Crafting.BagSlot03 -= 1;
+					else player.destroyItems(itype, 1);
+					break;
+				case 2:
+					if (Crafting.BagSlot04 > 0) Crafting.BagSlot04 -= 1;
+					else player.destroyItems(itype, 1);
+					break;
+				case 3:
+					if (Crafting.BagSlot07 > 0) Crafting.BagSlot07 -= 1;
+					else player.destroyItems(itype, 1);
+					break;
+				case 4:
+					if (Crafting.BagSlot06 > 0) Crafting.BagSlot06 -= 1;
+					else player.destroyItems(itype, 1);
+					break;
+			}
 			doNext(camp.returnToCampUseEightHours);
 		}
 
 		//unused
 		/*
-		//Elenwen is nearly as skilled as Kindra but is very picky on who she teaches to. Better be an elf also her training is slower as she tends to fool around
+		//Elenwen is nearly as skilled as Kindra, but is very picky on who she teaches to. Better be an elf. Also her training is slower as she tends to fool around.
 		private function bowSkill(diff:Number):Number {
 			player.addStatusValue(StatusEffects.Kelt,1,diff);
 			if (player.statusEffectv1(StatusEffects.Kelt) >= 100) player.changeStatusValue(StatusEffects.Kelt,1,100);//Kelt track basic archery skill that caps on 100 not 150 so not need to thanks me for fixing too high cap on this training ;)
@@ -1124,10 +1145,5 @@ import classes.internals.SaveableState;
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}
-
-
-
-
-
 	}
 }

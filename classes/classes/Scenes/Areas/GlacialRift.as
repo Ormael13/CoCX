@@ -17,7 +17,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.GlacialRift.*;
 import classes.Scenes.Areas.Tundra.Valkyrie;
 import classes.Scenes.Holidays;
-import classes.Scenes.NPCs.GooArmor;
+import classes.Scenes.NPCs.Valeria;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -255,7 +255,7 @@ use namespace CoC;
 			clearOutput();
 			outputText("You ready your [weapon] for a fight!");
 			GlacialRiftConditions();
-			startCombat(new GooArmor());
+			startCombat(new Valeria());
 		}
 
 		private function FenrirRuinedShrine():void {

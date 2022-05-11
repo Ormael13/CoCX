@@ -3,7 +3,7 @@ import classes.GlobalFlags.kFLAGS;
 
 public class SceneHunter extends BaseContent {
     public function get progress():String {
-        return "<i>Selectors, menus and checks are currently added to: Holidays, Beach, BlightRidge, Desert, Forest, GlacialRift encounters (not including some unique NPCs and dungeons yet).</i>";
+        return "<i>Selectors, menus and checks are currently added to: Holidays, Beach, BlightRidge, Desert, Forest, GlacialRift, HighMountains, Mountains, Ocean, Plains, Swamp encounters (not including some unique NPCs and dungeons yet).</i>";
     }
 
     public function settingsPage():void {
@@ -39,20 +39,18 @@ public class SceneHunter extends BaseContent {
             outputText("\nThe biggest <b>fitting</b> dick is always used. Multicocks too.");
         }
 
-        addButton(2, "Other", toggle, kFLAGS.SCENEHUNTER_OTHER);
-        outputText("\n\n<b>Other changes:</b> ");
-        if (flags[kFLAGS.SCENEHUNTER_OTHER])
+        addButton(2, "LossSelect", toggle, kFLAGS.SCENEHUNTER_LOSS_SELECT);
+        outputText("\n\n<b>Loss Select:</b> ");
+        if (flags[kFLAGS.SCENEHUNTER_LOSS_SELECT]) {
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
-        else
+            outputText("\nSome scenes with many loss variations will allow you to select the specific scene. Works best in conjunction with UniHerms or Dick select, which open more scenes.");
+            outputText("\n<i>Wait, it's illegal, the monster should choose how to rape you... fuck the RNG!</i>");
+        }
+        else {
             outputText("<b><font color=\"#800000\">DISABLED</font></b>");
-        outputText("\nTweaks, which didn't fit into the previous categories. Full list goes here.");
-        outputText("\nChristmas elf: enabled sex option even when corrupt.");
-        outputText("\nLizan Rogue: medium-corrupt PCs now can persuade Lizan Rogue.");
-        outputText("\nNaga <b>after</b> Samirah recruitment: enabled scenes. They're too good to miss.");
-        outputText("\nKitsune, Basilisk scenes: replace lose scene randomizer with a selector. I hate randomizers.");
-        outputText("\n<i>This opens up more scenes. They are lore-accurate and still explained in the game (so you won't get Amily living with corrupt Jojo or other nonsense), but be warned that the original writers intended some details to work the other way.</i>");
-        outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
-        //Scene list link
+            outputText("\nAll loss scenes are selected randomly. PrintChecks feature will <b>not</b> print anything for some.");
+        }
+
         addButton(3, "PrintChecks", toggle, kFLAGS.SCENEHUNTER_PRINT_CHECKS);
         outputText("\n\n<b>Print Checks:</b> ");
         if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) {
@@ -62,18 +60,33 @@ public class SceneHunter extends BaseContent {
         }
         else {
             outputText("<b><font color=\"#800000\">DISABLED</font></b>");
-            outputText("\nNo extra information is printed, you'll have to find new race-specific scenes yourself");
+            outputText("\nNo extra information is printed, you'll have to find new race-specific scenes yourself.");
         }
 
-        addButton(5, "Scene List", openURL, "https://cocxianxia.fandom.com/wiki/Conditional_Scenes");
+        addButton(4, "Other", toggle, kFLAGS.SCENEHUNTER_OTHER);
+        outputText("\n\n<b>Other changes:</b> ");
+        if (flags[kFLAGS.SCENEHUNTER_OTHER])
+            outputText("<b><font color=\"#008000\">ENABLED</font></b>");
+        else
+            outputText("<b><font color=\"#800000\">DISABLED</font></b>");
+        outputText("\nTweaks, which didn't fit into the previous categories. Full list goes here.");
+        outputText("\nChristmas elf: enabled sex option even when corrupt.");
+        outputText("\nLizan Rogue: medium-corrupt PCs now can persuade Lizan Rogue.");
+        outputText("\nNaga <b>after</b> Samirah recruitment: enabled scenes. They're too good to miss.");
+        outputText("\nGreen slime: removed rape corruption checks.");
+        outputText("\nGnoll: disabled dick size requirements in multicock anal. Because why not?");
+        outputText("\n<i>This opens up more scenes. They are lore-accurate and still explained in the game (so you won't get Amily living with corrupt Jojo or other nonsense), but be warned that the original writers intended some details to work the other way.</i>");
+        outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
+
+        addButton(10, "Scene List", openURL, "https://cocxianxia.fandom.com/wiki/Conditional_Scenes");
         outputText("\n\n<b>Conditional Scenes list:</b> <u><a href='https://cocxianxia.fandom.com/wiki/Conditional_Scenes'>https://cocxianxia.fandom.com/wiki/Conditional_Scenes</a></u>");
         outputText("\n<i>This list contains minor spoilers for the entirety of the game. You've been warned.</i>");
 
-        addButton(6, "Reference", openURL, "https://cocxianxia.fandom.com/wiki/Scene_Reference");
+        addButton(11, "Reference", openURL, "https://cocxianxia.fandom.com/wiki/Scene_Reference");
         outputText("\n\n<b>Scene Reference:</b> <u><a href='https://cocxianxia.fandom.com/wiki/Scene_Reference'>https://cocxianxia.fandom.com/wiki/Scene_Reference</a></u>");
         outputText("\n<i>This list contains <b>major</b> spoilers for the entirety of the game. You've been warned.</i>");
 
-        addButton(9, "Back", CoC.instance.gameSettings.settingsScreenMain);
+        addButton(14, "Back", CoC.instance.gameSettings.settingsScreenMain);
     }
 
 	public function toggle(flag:int):void {
@@ -360,6 +373,60 @@ public class SceneHunter extends BaseContent {
     }
 
     //--------------------------------------------------------------------------------------------------
+    // SelectLoss
+    //--------------------------------------------------------------------------------------------------
+
+    public function get lossSelect():Boolean {
+        return _passCheck || flags[kFLAGS.SCENEHUNTER_LOSS_SELECT];
+    }
+
+    /**
+     * Loss scene selection menu. Selects the scene randomly if disabled. Each array item can be composed as:
+     * Button: [position, "Name", function]
+     * Disabled button: [position, "Name", null]
+     * Button with condition: [position, "Name", function, "disabled tooltip", condition, "enabled tooltip"]
+     * @param    options    Scene array
+     * @param    msg        Message to print before menu
+     */
+    public function selectLossMenu(options:Array, msg:String = ""):void {
+        var choices:Array = []; //enabled functions
+        //init when enabled
+        if (lossSelect) {
+            outputText(msg);
+            menu();
+        }
+        //select choices or add buttons
+        for (var i:int = 0; i < options.length; ++i) {
+            var arr:Array = options[i] as Array;
+            if (arr == null) throw new Error("selectLossMenu called with non-array arguments!");
+            //button
+            if (arr.length == 3) {
+                if (lossSelect) {
+                    if (arr[2] == null) addButtonDisabled(arr[0], arr[1], "");
+                    else addButton.apply(this, arr);
+                }
+                else if (arr[2] != null)
+                    choices.push(arr[2]);
+            }
+            //condition
+            else if (arr.length >= 5 && arr.length <= 6) {
+                if (lossSelect)
+                    addButtonIfTrue.apply(this, arr);
+                else {
+                    if (arr[4]) //check condition
+                        choices.push(arr[2]);
+                    else print("Loss scene (random) check failed: " + arr[3]); //print msg if printer is enabled
+                }
+            }
+            else throw new Error("selectLossMenu - argument length mismatch!");
+        }
+        //if disabled, just select random choice
+        if (!lossSelect)
+            choices[rand(choices.length)]();
+        _passCheck = false; //reset one-time check skipper
+    }
+
+    //--------------------------------------------------------------------------------------------------
     // Other
     //--------------------------------------------------------------------------------------------------
 
@@ -445,15 +512,6 @@ public class SceneHunter extends BaseContent {
     }
     public function checkDick(minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", moreText:String = ""):void {
         checkDickWithType(CockTypesEnum.UNDEFINED, minSize, maxSize, compareBy, moreText);
-    }
-
-    //Prints dick requirements if not found
-    public function check_race(race:String):void {
-        if (printChecks && player.race() != race) {
-            outputText("\n\n<b>FAILED RACE CHECK:")
-            outputText("\n    Expected: " + race);
-            outputText("</b>\n\n")
-        }
     }
 }
 }

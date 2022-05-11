@@ -93,6 +93,7 @@ import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 					.elseDrop(useables.B_CHITN);
 			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 40, 0, 0, 0);
 			checkMonster();
 		}
 		

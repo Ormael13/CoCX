@@ -337,7 +337,8 @@ use namespace CoC;
 		public function SecondPartOfSculptingText():void {
 			clearOutput();
 			outputText("You work for six hours, sculpting the statue part to your liking with an artist's passion, then head back to camp for a break.");
-			Forgefather.statueProgress++;
+			if (Forgefather.statueProgress > 0) Forgefather.statueProgress++;
+			else Forgefather.statueProgress = 1;
 			doNext(camp.returnToCampUseSixHours);
 		}
 

@@ -147,7 +147,7 @@ public static const RAPHAEL_INTELLIGENCE_TRAINING:int                           
 public static const RAPHAEL_DISGUSTED_BY_PC_APPEARANCE:int                          =  139; // Raphael Disgusted by PC appearance
 public static const RAPHAEL_SECOND_DATE:int                                         =  140; // Raphael 2nd Date Happen?
 public static const HELLHOUND_MASTER_PROGRESS:int                                   =  141; // Hellhound Progression
-public static const UNKNOWN_FLAG_NUMBER_00142:int                                   =  142; // Can buy minotaur cum from goblins?
+public static const CAN_BUY_MINOCUM:int                                   			=  142; // Can buy minotaur cum from goblins?
 public static const URTA_SCYLLA_TIMES_CAUGHT:int                                    =  143; // How Many Times Have You Caught Urta + Scylla?
 public static const UNKNOWN_FLAG_NUMBER_00144:int                                   =  144; // Multitake Scylla meeting take advantage ever done?
 public static const URTA_TALKED_ABOUT_SCYLLA:int                                    =  145; // Urta confrontation about Scylla ever done?
@@ -275,14 +275,14 @@ public static const UNKNOWN_FLAG_NUMBER_00266:int                               
 public static const UNKNOWN_FLAG_NUMBER_00267:int                                   =  267; // Lilium Timed Boned
 public static const PLAYER_DISARMED_WEAPON_ID:int                                   =  268; // weapon storage
 public static const PLAYER_DISARMED_WEAPON_ATTACK:int                               =  269; // weapon damage
-public static const UNKNOWN_FLAG_NUMBER_00270:int                                   =  270; // Times encountered spiderbitches
+public static const TIMES_ENCOUNTERED_FEMALE_SPIDER:int                                   =  270; // Times encountered spiderbitches
 public static const FEMALE_SPIDERMORPH_PREGNANCY_INCUBATION:int                     =  271; // Spider Preggo Timer
 public static const TIMES_EXPLORED_SWAMP:int                                        =  272; // Times Explored Swamp
 public static const SHOW_SPRITES_FLAG:int                                           =  273; // Sprites off? toggle
 public static const RATHAZUL_SILK_ARMOR_COUNTDOWN:int                               =  274; // Rathazul silk armor queue - 1 = armor done!
 public static const UNKNOWN_FLAG_NUMBER_00275:int                                   =  275; // Rathazul armor type selector - 1=armor, 2=robes (3=bra, 4=panties, 5=loincloth)
 public static const TIMES_ENCOUNTERED_BASILISK:int                                   =  276; // Times Encountered Basilisk
-public static const UNKNOWN_FLAG_NUMBER_00277:int                                   =  277; // Times Encountered Drider
+public static const TIMES_ENCOUNTERED_DRIDERS:int                                   =  277; // Times Encountered Drider
 public static const UNKNOWN_FLAG_NUMBER_00278:int                                   =  278; // LOTTIE DISABLED (1+ = YUS)
 public static const UNKNOWN_FLAG_NUMBER_00279:int                                   =  279; // LOTTIE FIGURE (HIGHER = SLIMMER)
 public static const UNKNOWN_FLAG_NUMBER_00280:int                                   =  280; // LOTTIE CONFIDENCE (HIGHER = AWESOMER)
@@ -2024,7 +2024,7 @@ public static const MET_MARAE:int                                               
 public static const MET_MARAE_CORRUPTED:int                                         = 2016;
 public static const MARAE_QUEST_START:int                                           = 2017;
 public static const MARAE_QUEST_COMPLETE:int                                        = 2018;
-public static const MARAE_LETHICITE:int                                             = 2019; //Not used anymore, may be reclaimed for later use.
+public static const UNKNOWN_FLAG_NUMBER_2019:int                                    = 2019; //Not used anymore
 public static const FACTORY_FOUND:int                                               = 2020;
 public static const FACTORY_SUCCUBUS_DEFEATED:int                                   = 2021;
 public static const FACTORY_INCUBUS_DEFEATED:int                                    = 2022;
@@ -2960,9 +2960,9 @@ public static const UNKNOWN_FLAG_NUMBER_02951:int                               
 public static const UNKNOWN_FLAG_NUMBER_02952:int                                   = 2952;
 public static const UNKNOWN_FLAG_NUMBER_02953:int                                   = 2953;
 public static const UNKNOWN_FLAG_NUMBER_02954:int                                   = 2954;
-public static const UNKNOWN_FLAG_NUMBER_02955:int                                   = 2955;
+public static const SCENEHUNTER_LOSS_SELECT:int                                   	= 2955;
 public static const SCENEHUNTER_PRINT_CHECKS:int                                    = 2956; //SceneHunter settings
-public static const SCENEHUNTER_OTHER:int                                    = 2957;
+public static const SCENEHUNTER_OTHER:int                                    		= 2957;
 public static const SCENEHUNTER_DICK_SELECT:int                                     = 2958;
 public static const SCENEHUNTER_UNI_HERMS:int                                       = 2959;
 public static const APEX_SELECTED_RACE:int                                   		= 2960;

@@ -12,7 +12,7 @@ package classes.IMutations
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.MutationsTemplateIM)
+            var pTier:int = player.perkv1(IMutationsLib.MutationsTemplateIM);
             if (pTier >= 1){
                 descS += "";
             }
@@ -46,13 +46,13 @@ package classes.IMutations
         public static function pReqs(pTier:int = 0):void{
             try{
                 //This helps keep the requirements output clean.
-                IMutationsLib.BlackHeartIM.requirements = [];
+                IMutationsLib.MutationsTemplateIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.BlackHeartIM.requireHeartMutationSlot();
+                    IMutationsLib.MutationsTemplateIM.requireHeartMutationSlot();
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.BlackHeartIM.requireLevel(pLvl);
+                    IMutationsLib.MutationsTemplateIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());

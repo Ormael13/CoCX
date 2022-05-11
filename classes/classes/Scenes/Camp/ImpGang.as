@@ -28,11 +28,13 @@ public class ImpGang extends Imp
 			this.a = "a ";
 			this.short = "mob of imps";
 			this.plural = true;
+			/*
 			this.removeStatuses();
 			this.removePerks();
 			this.removeCock(0, this.cocks.length);
 			this.removeVagina(0, this.vaginas.length);
 			this.removeBreastRow(0, this.breastRows.length);
+			 */
 			this.createBreastRow();
 			this.createCock(12,1.5);
 			this.createCock(25,2.5);
@@ -70,6 +72,7 @@ public class ImpGang extends Imp
 			this.special1 = lustMagicAttack;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 14, 0, 0, 0);
 			checkMonster();
 		}
 		

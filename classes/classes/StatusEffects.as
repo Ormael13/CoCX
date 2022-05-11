@@ -695,7 +695,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const IncubusBribed:StatusEffectType           = mk("IncubusBribed");
 		public static const FactorySuccubusDefeated:StatusEffectType = mk("FactorySuccubusDefeated");
 		public static const MaraeComplete:StatusEffectType           = mk("Marae Complete");
-		public static const MaraesLethicite:StatusEffectType         = mk("Marae's Lethicite");
+		public static const MaraesLethicite:StatusEffectType         = mk("Marae's Lethicite"); //V1 - number of pieces remaining. DO NOT REMOVE THE EFFECT COMPLETELY!!!
 		public static const MaraesQuestStart:StatusEffectType        = mk("Marae's Quest Start");
 		public static const MetCorruptMarae:StatusEffectType         = mk("Met Corrupt Marae");
 		public static const MetMarae:StatusEffectType                = mk("Met Marae");

@@ -97,7 +97,7 @@ use namespace CoC;
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 300, 0, 0, 0);
-			createBreastRow(Appearance.breastCupInverse("Z"));
+			createBreastRow(Appearance.breastCupInverse("ZZ"));
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.tallness = 84;
@@ -136,6 +136,7 @@ use namespace CoC;
 			this.special3 = whipAttack;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 31, 0, 0, 0);
 			checkMonster();
 		}
 

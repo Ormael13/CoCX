@@ -15,7 +15,7 @@ public class DraconicLungMutation extends PerkType
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.DraconicLungIM)
+            var pTier:int = player.perkv1(IMutationsLib.DraconicLungIM);
             if (pTier >= 1){
                 descS = "Allows you to use breath attacks more often. (All dragon breaths usable once per combat)";
             }
@@ -75,7 +75,9 @@ public class DraconicLungMutation extends PerkType
         //Mutations Buffs
         public function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            pBuffs['spe.mult'] = 0.05*2^pTier-1
+            if (pTier >= 1) pBuffs['spe.mult'] += 0.05;
+            if (pTier >= 2) pBuffs['spe.mult'] += 0.1;
+            if (pTier >= 3) pBuffs['spe.mult'] += 0.2;
             return pBuffs;
         }
 

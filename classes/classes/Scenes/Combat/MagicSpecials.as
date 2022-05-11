@@ -176,18 +176,18 @@ public class MagicSpecials extends BaseCombatContent {
 			var terror:Number = 9;
 			if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) terror -= 1;
 			if (player.hasPerk(PerkLib.NaturalInstincts)) terror -= 1;
-			if (player.tailCount == 9 && player.hasPerk(MutationsLib.KitsuneThyroidGland)) {
+			if (player.tailCount == 9 && player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
 				bd.toolTipText += "\nWould go into cooldown after use for: "+(terror-4)+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
-				bd.requireFatigue(200);
-			} else if (player.tailCount == 9 || player.hasPerk(MutationsLib.KitsuneThyroidGland)) {
+				bd.requireFatigue(200 * kitsuneskill2Cost());
+			} else if (player.tailCount == 9 || player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
 				bd.toolTipText += "\nWould go into cooldown after use for: "+(terror-2)+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
-				bd.requireFatigue(100);
+				bd.requireFatigue(100 * kitsuneskill2Cost());
 			} else {
 				bd.toolTipText += "\nWould go into cooldown after use for: "+terror+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
-				bd.requireFatigue(50);
+				bd.requireFatigue(50 * kitsuneskill2Cost());
 			}
 			if (player.hasStatusEffect(StatusEffects.CooldownTerror)) {
 				bd.disable("<b>You need more time before you can use Terror again.</b>\n\n");
@@ -208,18 +208,18 @@ public class MagicSpecials extends BaseCombatContent {
 			var illusion:Number = 9;
 			if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) illusion -= 1;
 			if (player.hasPerk(PerkLib.NaturalInstincts)) illusion -= 1;
-			if (player.tailType == 13 && player.tailCount == 9 && player.hasPerk(MutationsLib.KitsuneThyroidGland)) {
+			if (player.tailType == 13 && player.tailCount == 9 && player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
 				bd.toolTipText += "\nWould go into cooldown after use for: "+(illusion-4)+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
-				bd.requireFatigue(200);
-			} else if ((player.tailType == 13 && player.tailCount == 9) || player.hasPerk(MutationsLib.KitsuneThyroidGland)) {
+				bd.requireFatigue(200 * kitsuneskill2Cost());
+			} else if ((player.tailType == 13 && player.tailCount == 9) || player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
 				bd.toolTipText += "\nWould go into cooldown after use for: "+(illusion-2)+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
-				bd.requireFatigue(100);
+				bd.requireFatigue(100 * kitsuneskill2Cost());
 			} else {
 				bd.toolTipText += "\nWould go into cooldown after use for: "+illusion+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
-				bd.requireFatigue(50);
+				bd.requireFatigue(50 * kitsuneskill2Cost());
 			}
 			if (player.hasStatusEffect(StatusEffects.CooldownIllusion)) {
 				bd.disable("You need more time before you can use Illusion again.");
@@ -1194,7 +1194,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) lustDmgF *= 1.3;
 			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
-			lustDmgF = Math.round(lustDmgF);
+			lustDmgF = Math.round(monster.lustVuln * lustDmgF);
 			monster.teased(lustDmgF);
 			if (crit) outputText(" <b>Critical!</b>");
 			outputText("\n\n");
@@ -1388,7 +1388,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.hasPerk(MutationsLib.HeartOfTheStorm)) CumLustDmg *= 1.20;
 				if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) CumLustDmg *= 1.20;
 				if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) CumLustDmg *= 1.20;
-				monster.teased(CumLustDmg);
+				monster.teased(Math.round(monster.lustVuln * CumLustDmg));
 				combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 			}
 			player.lust += (player.lust100 * 0.05);
@@ -1410,7 +1410,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.hasPerk(MutationsLib.HeartOfTheStorm)) MilkLustDmg *= 1.20;
 				if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) MilkLustDmg *= 1.20;
 				if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) MilkLustDmg *= 1.20;
-				monster.teased(MilkLustDmg);
+				monster.teased(Math.round(monster.lustVuln * MilkLustDmg));
 				combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 			}
 			player.lust += (player.lust100 * 0.05);
@@ -1434,7 +1434,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.hasPerk(MutationsLib.HeartOfTheStorm)) MilkCumLustDmg *= 1.20;
 				if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) MilkCumLustDmg *= 1.20;
 				if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) MilkCumLustDmg *= 1.20;
-				monster.teased(MilkCumLustDmg);
+				monster.teased(Math.round(monster.lustVuln * MilkCumLustDmg));
 				combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 			}
 			player.lust += (player.lust100 * 0.1);
@@ -1759,7 +1759,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
 			}
 		}
-		monster.teased(lustDmg);
+		monster.teased(Math.round(monster.lustVuln * lustDmg));
 		outputText("  ");
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		doIceDamage(damage, true, true);
@@ -2749,7 +2749,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if(monster.lustVuln > 0) {
 					outputText("  Your foe cries out in surprise and then gives a sensual moan as the flames of your passion surround them and fill their body with unnatural lust.");
 					if (player.hasPerk(PerkLib.EromancyExpert)) damage *= 1.5;
-					monster.teased(monster.lustVuln * damage / 6);
+					monster.teased(Math.round(monster.lustVuln * (damage / 6)));
 					outputText("\n");
 					if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 				}
@@ -3471,7 +3471,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//ew. bonusy do lust dmg tutaj
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
-		lustDmg = Math.round(lustDmg);
+		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg);
 		outputText(" ");
 		doFireDamage(damage, true, true);
@@ -3581,7 +3581,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 1.4;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
-		lustDmg = Math.round(lustDmg);
+		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg);
 		outputText(" ");
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
@@ -3703,7 +3703,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
-		lustDmg = Math.round(lustDmg);
+		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg);
 		outputText(" ");
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
@@ -3819,7 +3819,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 1.4;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
-		lustDmg = Math.round(lustDmg);
+		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg);
 		outputText(" ");
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
@@ -3940,7 +3940,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 1.4;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
-		lustDmg = Math.round(lustDmg);
+		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg);
 		outputText(" ");
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
@@ -3964,12 +3964,18 @@ public class MagicSpecials extends BaseCombatContent {
 
 	public function kitsuneskillCost():Number {
 		var modksc:Number = 1;
+		if (player.hasPerk(MutationsLib.KitsuneThyroidGland)) modksc -= 0.5;
 		if (player.tailCount == 9 && player.tailType == Tail.FOX) {
-			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) modksc += 2;
-			else if (player.hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive)) modksc += 1;
+			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) modksc *= 3;
+			else if (player.hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive)) modksc *= 2;
 			else modksc += 0.5;
 		}
 		return modksc;
+	}
+	public function kitsuneskill2Cost():Number {
+		var modks2c:Number = 1;
+		if (player.hasPerk(MutationsLib.KitsuneParathyroidGlandsPrimitive)) modks2c -= 0.5;
+		return modks2c;
 	}
 
 	//Terror
@@ -3995,24 +4001,24 @@ public class MagicSpecials extends BaseCombatContent {
 		var ItemMod:Number = 0;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) ItemMod += 1;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) ItemMod += 1;
-		if (player.tailCount == 9 && player.tailType == Tail.FOX && player.hasPerk(MutationsLib.KitsuneThyroidGland)) {
+		if (player.tailCount == 9 && player.tailType == Tail.FOX && player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
 			player.createStatusEffect(StatusEffects.CooldownTerror, 5-ItemMod, 0, 0, 0);
-			fatigue(200, USEFATG_MAGIC_NOBM);
+			fatigue((200 * kitsuneskill2Cost()), USEFATG_MAGIC_NOBM);
 		}
-		else if ((player.tailCount == 9 && player.tailType == Tail.FOX) || player.hasPerk(MutationsLib.KitsuneThyroidGland)) {
+		else if ((player.tailCount == 9 && player.tailType == Tail.FOX) || player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
 			player.createStatusEffect(StatusEffects.CooldownTerror, 7-ItemMod, 0, 0, 0);
-			fatigue(100, USEFATG_MAGIC_NOBM);
+			fatigue((100 * kitsuneskill2Cost()), USEFATG_MAGIC_NOBM);
 		}
 		else {
 			player.createStatusEffect(StatusEffects.CooldownTerror, 9-ItemMod, 0, 0, 0);
-			fatigue(50, USEFATG_MAGIC_NOBM);
+			fatigue((50 * kitsuneskill2Cost()), USEFATG_MAGIC_NOBM);
 		}
 		//Inflicts fear and reduces enemy SPD.
 		outputText("The world goes dark, an inky shadow blanketing everything in sight as you fill [themonster]'s mind with visions of otherworldly terror that defy description.  They cower in horror as they succumb to your illusion, believing themselves beset by eldritch horrors beyond their wildest nightmares.\n\n");
 		var speedDebuff:Number = 0;
-		if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) {
-			if (monster.spe >= 51) speedDebuff += 50;
-			else speedDebuff += 50 - monster.spe;
+		if (player.hasPerk(MutationsLib.KitsuneParathyroidGlandsEvolved)) {
+			if (monster.spe >= 71) speedDebuff += 70;
+			else speedDebuff += 70 - monster.spe;
 		}
 		else {
 			if (monster.spe >= 21) speedDebuff += 20;
@@ -4044,17 +4050,17 @@ public class MagicSpecials extends BaseCombatContent {
 		var ItemMod:Number = 0;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) ItemMod += 1;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) ItemMod += 1;
-		if (player.tailCount == 9 && player.tailType == Tail.FOX && player.hasPerk(MutationsLib.KitsuneThyroidGland)) {
+		if (player.tailCount == 9 && player.tailType == Tail.FOX && player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
 			player.createStatusEffect(StatusEffects.CooldownIllusion,5-ItemMod,0,0,0);
-			fatigue(200, USEFATG_MAGIC_NOBM);
+			fatigue((200 * kitsuneskill2Cost()), USEFATG_MAGIC_NOBM);
 		}
-		else if ((player.tailCount == 9 && player.tailType == Tail.FOX) || player.hasPerk(MutationsLib.KitsuneThyroidGland)) {
+		else if ((player.tailCount == 9 && player.tailType == Tail.FOX) || player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
 			player.createStatusEffect(StatusEffects.CooldownIllusion,7-ItemMod,0,0,0);
-			fatigue(100, USEFATG_MAGIC_NOBM);
+			fatigue((100 * kitsuneskill2Cost()), USEFATG_MAGIC_NOBM);
 		}
 		else {
 			player.createStatusEffect(StatusEffects.CooldownIllusion,9-ItemMod,0,0,0);
-			fatigue(50, USEFATG_MAGIC_NOBM);
+			fatigue((50 * kitsuneskill2Cost()), USEFATG_MAGIC_NOBM);
 		}
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
@@ -4117,7 +4123,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 2;
 		lustDmg *= 0.1;
-		lustDmg = Math.round(lustDmg);
+		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg);
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
@@ -4221,7 +4227,7 @@ public class MagicSpecials extends BaseCombatContent {
 		lustDmgF = lustDmgF * monster.lustVuln;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
-		lustDmgF = Math.round(lustDmgF);
+		lustDmgF = Math.round(monster.lustVuln * lustDmgF);
 		monster.teased(lustDmgF);
 		if (critL) outputText(" <b>Critical!</b>");
 		monster.statStore.addBuffObject({spe:-15}, "Poison",{text:"Poison"});
@@ -4301,7 +4307,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText(" ");
 				var lustDmg:Number = monster.lustVuln * ((player.inte + (player.wis * 0.50)) / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 				if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
-				monster.teased(lustDmg);
+				monster.teased(monster.lustVuln * lustDmg);
 				if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 			}
 			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
@@ -4418,11 +4424,9 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	private function FaeStormLust(damage:Number):void{
 		var lustDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
-		if(monster.plural) {
-			outputText("are magically aroused by the spell");
-		}
+		if(monster.plural) outputText("are magically aroused by the spell");
 		else outputText("is magically aroused by the spell");
-		monster.teased(lustDmg, false);
+		monster.teased(Math.round(lustDmg), false);
 	}
 	private function FaeStormSleep(damage:Number):void{
 		if (monster.plural) outputText("are sent straight to the dream lands by the spell’s powerful hypnotic effects");
@@ -4552,7 +4556,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
 			}
 		}
-		monster.teased(lustDmg);
+		monster.teased(Math.round(monster.lustVuln * lustDmg));
 		if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
 			outputText(" <b>Your erotic show aside slight arousing manages to put [themonster] into dazze caused by too strong sexual stimulation!</b> ");
 			if (player.hasPerk(MutationsLib.BlackHeartEvolved)) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
@@ -4623,7 +4627,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(player.armorName == "Scandalous Succubus Clothing") {
 			lustDmg *= 1.25;
 		}
-		monster.teased(lustDmg);
+		monster.teased(Math.round(monster.lustVuln * lustDmg));
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		doNext(playerMenu);
@@ -4746,7 +4750,7 @@ public class MagicSpecials extends BaseCombatContent {
 				damage += Math.round(player.lust * 0.1);
 				player.lust -= Math.round(player.lust * 0.1);
 			}
-			monster.teased(monster.lustVuln * damage);
+			monster.teased(Math.round(monster.lustVuln * damage));
 			outputText("\n\n");
 			if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 			if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownPossess,1,0,0,0);
@@ -5128,7 +5132,7 @@ public class MagicSpecials extends BaseCombatContent {
 			case 5:
 				outputText(monster.capitalA + monster.short + "  is magically aroused by the eyebeam. ");
 				var lustDmg:Number = player.lib / 10;
-				monster.teased(lustDmg);
+				monster.teased(Math.round(monster.lustVuln * lustDmg));
 				break;
 			case 6:
 				outputText("The eyebeam’s powerful hypnotic effects send your target straight to the dream lands! ");
@@ -5823,7 +5827,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 2) lustdamage += 1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 1);
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 9) lustdamage += 1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 8);
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 21) lustdamage += 1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 20);
-		monster.teased(monster.lustVuln * lustdamage);
+		monster.teased(Math.round(monster.lustVuln * lustdamage));
 		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();

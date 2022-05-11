@@ -1314,7 +1314,7 @@ use namespace CoC;
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipArmor():void {
-			if (player.armorName == "goo armor") { //Valeria belongs in the camp, not in your inventory!
+			if (player.armor == armors.GOOARMR) { //Valeria belongs in the camp, not in your inventory!
 				player.armor.removeText();
 				player.setArmor(ArmorLib.NOTHING);
 				manageEquipment(1);
