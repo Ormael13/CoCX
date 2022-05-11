@@ -4816,7 +4816,7 @@ public function rebirthFromBadEnd():void {
 		if (flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED])
 			addButton(0, "Imp Horde", SceneLib.d3.deepcave.impGangVICTORY).hint("I'll never stop at one. YOU'LL TAKE THEM ALL ON!");
         if (flags[kFLAGS.DEFEATED_ZETAZ])
-			addButton(0, "Zetaz", SceneLib.d3.deepcave.defeatZetaz).hint("Maybe the little asshole should have been tortured a bit more?");
+			addButton(1, "Zetaz", SceneLib.d3.deepcave.defeatZetaz).hint("Maybe the little asshole should have been tortured a bit more?");
 		addButton(14, "Back", recallScenes_dungeons);
 	}
 
