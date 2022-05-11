@@ -15,8 +15,6 @@ use namespace CoC;
 	public class AnzuPalace extends DungeonAbstractContent
 	{
 		public var anzuScene:AnzuScene = new AnzuScene();
-		private var anzuLocationTimes:Array = []; //First is 12am. Uses room IDs. 
-		private var anzuLocationInitialized:Boolean = false;
 		
 		public function AnzuPalace() {}
 		
@@ -28,7 +26,7 @@ use namespace CoC;
 			}
 			//outputText(images.showImage("dungeon-entrance-palace"));
 			inDungeon = true;
-			outputText("You make your way through the frigid climates and your memory takes you back to Anzu's palace.");
+			outputText("You make your way through the frigid climates, and your memory takes you back to Anzu's palace.");
 			doNext(roomEntrance);
 		}
 		
@@ -37,12 +35,6 @@ use namespace CoC;
 			clearOutput();
 			outputText("You leave the palace behind and take off through the glacial rift back towards camp.");
 			doNext(camp.returnToCampUseOneHour);	
-		}
-		
-		internal function setAnzuButton():void {
-			if (dungeonLoc == anzuLocationTimes[model.time.hours] && dungeonLoc >= DUNGEON_ANZU_OUTSIDE && dungeonLoc < DUNGEON_RIVER_FLOOR_02_ROOM_01) {
-				addButton(0, "Anzu", anzuScene.anzuMenus).hint("Interact with Anzu the avian deity.");
-			}
 		}
 		
 		//ROOMS
@@ -80,17 +72,20 @@ use namespace CoC;
 			outputText("\n\nComfortable armchairs, with soft cushions, covered in red velvet provide a good place to rest. On the left part of the room, are several shelves containing books about the story of Mittani and other similar things.");
 			outputText("\n\nTo the east is the hall which connects the rest of the rooms in this floor. In a corner, on the end of the room, leading to the north, a door leads to the baths.");
 			dungeons.setDungeonButtons(roomBathroom, null, null, roomFoyer);
-			if ((model.time.hours >= 10 && model.time.hours < 13) || model.time.hours == 19) addButton(0, "Anzu", anzuScene.anzuMenus).hint("Interact with Anzu the avian deity.");
+			if (model.time.hours > 9 && model.time.hours < 13) addButton(0, "Anzu", anzuScene.anzuMenus).hint("Interact with Anzu the avian deity.");
 		}
 		public function roomBathroom():void {
 			dungeonLoc = DUNGEON_ANZU_BATHROOM;
 			clearOutput();
+			if (model.time.hours == 19) {
+				anzuScene.anzuBathTimeBeginning();
+				return;
+			}
 			outputText("<b><u>Bathroom</u></b>\n");
 			outputText("A central round pool, with almost thirty feet of diameter, dominates the center of the room. The warm water of the pool is so clear that you can see the light blue colored tiles of its bottom. Several columns in a light golden marble surround the pool, and give the room a cozy feeling. They’re eleven in total, now that you can count them well.");
 			outputText("\n\nThe rest of the room is covered with light brown tiles on the floor and the lower part of the walls, and a pattern of golden tiles and gold inlaids on the upper walls, separated by a band of mosaics displaying fish in exotic colors, sea serpents and aquatic monsters of a kind that you can’t recognize.");
 			outputText("\n\nSome lamps around the room keep the bath well illuminated, and a door to the south leads back to living room.");
 			dungeons.setDungeonButtons(null, roomLivingRoom, null, null);
-			if (model.time.hours == 22) addButton(0, "Anzu", anzuScene.anzuMenus).hint("Interact with Anzu the avian deity.");
 		}
 		public function roomDiningRoom():void {
 			dungeonLoc = DUNGEON_ANZU_DINING_ROOM;
@@ -100,24 +95,27 @@ use namespace CoC;
 			outputText("\n\nDecorating the corners are vases with violets, whose smell perfumes the air. The columns in golden marble and the colorful decorations in silk hanging from them complete the room atmosphere.");
 			outputText("\n\nTo the north, there is a door that leads to the kitchen. Another, leading to the west, goes back to the principal hall.");
 			dungeons.setDungeonButtons(roomKitchen, null, roomFoyer, null);
-			if (model.time.hours == 9 || model.time.hours == 14 || model.time.hours == 21) addButton(0, "Anzu", anzuScene.anzuMenus).hint("Interact with Anzu the avian deity.");
+			if (model.time.hours == 9 || model.time.hours == 14) addButton(0, "Anzu", anzuScene.anzuMenus).hint("Interact with Anzu the avian deity.");
 		}
 		public function roomKitchen():void {
 			dungeonLoc = DUNGEON_ANZU_KITCHEN;
 			clearOutput();
+			if (model.time.hours == 8 || model.time.hours == 13 || model.time.hours == 18) {
+				anzuScene.dinnerWithAnzu();
+				return;
+			}
 			outputText("<b><u>Kitchen</u></b>\n");
 			outputText("A big oven made of iron dominates the kitchen. To the sides many drawers contain a wide variety of cooking utensils. Knives, spoons, forks, dishes, glasses, all stored in their respective place. A place for cleaning the utensils and a stove have a place too on opposite sides of the kitchen.");
 			outputText("\n\nIn the back of the room, a wooden door leads to the place where Anzu stores food. Inside are grains, bread, cheese, several crates containing wine, and in some containers, wrapped inside snow and ice, are big pieces of meat.");
 			outputText("\n\nThe constant heat from the oven and the stove makes this room as warm as the bedroom or the living room.");
 			dungeons.setDungeonButtons(null, roomDiningRoom, null, null);
-			if (model.time.hours == 8 || model.time.hours == 13 || model.time.hours == 20) addButton(0, "Anzu", anzuScene.anzuMenus).hint("Interact with Anzu the avian deity.");
 		}
 		//Floor 2
 		public function roomHallFloor2():void {
 			dungeonLoc = DUNGEON_ANZU_HALL_FLOOR2;
 			clearOutput();
 			outputText("<b><u>Hall, Floor 2</u></b>\n");
-			outputText("The second floor is in U-shaped, with two different rooms on each side and one at the end. The remaining space is occupied by the staircases which go to the third floor and to the first floor, with the hall connecting the three rooms. This hall is decorated too with a red rug and golden columns.");
+			outputText("The second floor is in U-shaped, with two different rooms on each side and one at the end. The remaining space is occupied by the staircases, which go to the third floor and to the first floor, with the hall connecting the three rooms. This hall is decorated too with a red rug and golden columns.");
 			outputText("\n\nThe room in the west is Anzu’s bedroom. A calm and peaceful sensation emanates from the door that leads to it.");
 			outputText("\n\nThe room located at the end of the floor is the palace’s library and study. Judging by its size,  looks like Anzu brought with him half of books of Mittani.");
 			outputText("\n\nAnzu has stated that the third room is not currently in use...");
@@ -128,12 +126,17 @@ use namespace CoC;
 		public function roomBedroom():void {
 			dungeonLoc = DUNGEON_ANZU_BEDROOM;
 			clearOutput();
+			if (model.time.hours >= 20) {
+				anzuScene.sleepWithAnzuInvitation();
+				return;
+			}
 			outputText("<b><u>Bedroom</u></b>\n");
 			outputText("The golden columns decorate this room too. More silken colorful decorations cover them, with the mosaics doing the same to the bedroom walls. In a similar fashion of the living room, vases with violets and alabaster statues complete the room ornaments, with some armchairs giving place of rest.");
 			outputText("\n\nAnzu’s bed is huge, even for Marethian standards. Soft cushions and linen sheets cover the mattress. The bed itself releases an aromatic smell. You have the temptation of climb in and sleep on it all day.");
 			outputText("\n\nAnother fireplace, smaller than the one in the living room, warms the place atmosphere.");
 			dungeons.setDungeonButtons(null, null, null, roomHallFloor2);
-			if (model.time.hours <= 7 || model.time.hours >= 23) addButton(0, "Anzu", anzuScene.anzuMenus).hint("Interact with Anzu the avian deity.");
+			if (model.time.hours <= 7)
+				addButton(0, "Anzu", anzuScene.anzuMenus).hint("Interact with Anzu the avian deity.");
 		}
 		public function roomLibrary():void {
 			dungeonLoc = DUNGEON_ANZU_LIBRARY;
@@ -143,7 +146,7 @@ use namespace CoC;
 			outputText("\n\nOn the end of the place, is Anzu’s private study. A desk, a chair, some bookcases next to it. Nothing extraordinary.");
 			outputText("\n\nTo the south is the exit to the hall, that connects all rooms in the third floor.");
 			dungeons.setDungeonButtons(null, roomHallFloor2, null, null);
-			if (model.time.hours >= 15 && model.time.hours < 18) addButton(0, "Anzu", anzuScene.anzuMenus).hint("Interact with Anzu the avian deity.");
+			if (model.time.hours > 14 && model.time.hours < 18) addButton(0, "Anzu", anzuScene.anzuMenus).hint("Interact with Anzu the avian deity.");
 		}
 		public function roomMultiuse():void {
 			dungeonLoc = DUNGEON_ANZU_MULTIUSE_ROOM;

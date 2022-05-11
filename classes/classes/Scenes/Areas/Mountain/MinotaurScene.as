@@ -462,7 +462,7 @@ public function minoPheromones():void {
 				[1, "Hotdog", getMinoHawtDawged, "Req. thicc (15) ass and low (60) muscle tone.", player.butt.type >= 15 && player.tone < 60], //removed the third req. because it's almost impossible here
 				[2, "Oral", getOralRapedByMinotaur, "Req. not taur-like lower body.", !player.isTaur()]
 			],
-			"<i>The mino is approaching you quickly, preparing his dick for some fun. Will you make the choice yourself?</i>\n\n"
+			"The mino is approaching you quickly, preparing his dick for some fun. Will you make the choice yourself?\n\n"
 		);
 	}
 

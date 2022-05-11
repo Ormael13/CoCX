@@ -10,7 +10,6 @@ import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.Places.WoodElves;
 import classes.Scenes.Camp.*;
-import classes.Scenes.Crafting;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.lists.Gender;
@@ -4769,53 +4768,82 @@ public function rebirthFromBadEnd():void {
         //Marble scene
 		if (flags[kFLAGS.MARBLE_PURIFIED] == 1)
 			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight, false).hint("The punishment for Marble's bitchy sister.");
-        else
-			addButtonDisabled(0, "M & C", "Requires completing Marble's purification quest.");
-        //Excellia slave first scene
+		//Excellia slave first scene
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2)
 			addButton(1, "Excellia Slv", SceneLib.excelliaFollower.ExcelliaPathChoiceMakeSlave).hint("Excellia acknowledges herself as your slave.");
-        else
-			addButtonDisabled(1, "E. Slv", "Requires enslaving a certain cow-slut.");
-        
         //Phylla demon fuck
 		if (flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] || flags[kFLAGS.PHYLLA_SAVED]) {
             if (player.cor >= 66 - player.corruptionTolerance && player.gender > 0)
                 addButton(2, "PhyllaCart", SceneLib.desert.antsScene.demonsFuckAntgirl).hint("Maybe you should have left Phylla to demons and watch them having fun?");
             else addButtonDisabled(2, "PhyllaCart", "You must be corrupted and not genderless to recall this.");
         }
-        else addButtonDisabled(2, "P. Cart", "Requires saving one ant-girl.");
 		//Phylla keks
 		if (flags[kFLAGS.ANT_WAIFU] || flags[kFLAGS.PHYLLA_STAY_HOME])
 			addButton(3, "PhyFirstTime", SceneLib.desert.antsScene.antGirlGoodEnd).hint("Your first time with Phylla.");
-		else addButtonDisabled(3, "P. First", "Requires winning in the coliseum.");
         //Tamani first time
 		if (flags[kFLAGS.TAMANI_MET] == 1 && player.hasCock())
 			addButton(4, "TamaniFirst", SceneLib.forest.tamaniScene.tamaniFirstTimeConsentual).hint("First time with Tamani.");
-		else addButtonDisabled(4, "T. First", "Requires fucking a certain goblin the first time you see her (+ having a cock).");
 		//Tamani first time
 		if (player.hasKeyItem("Deluxe Dildo") >= 0 && player.hasVagina())
 			addButton(5, "TamaniLes", SceneLib.forest.tamaniScene.preferTamaniFemdom).hint("Girl-on-girl event with Tamani.");
-		else addButtonDisabled(5, "T. Les.", "Requires accepting a dildo from a certain goblin (+ having a vagina).");
 		//Erlking revenge
 		if (player.hasKeyItem("Golden Antlers") >= 0 && player.gender > 0)
 			addButton(6, "Erlk.Revenge", SceneLib.forest.erlkingScene.howDareYou).hint("You show Erlking <b>who</b> is the hunter here.");
-		else addButtonDisabled(6, "Ek.Rev", "Requires taking your revenge on some cocky hunter. <i>Don't get cocky, kid...</i>");
 		//Nightmare
 		if (celessScene.questFinishedNightmare)
 			addButton(7, "Nightmare", SceneLib.forest.nightmareScene.nightmareVictory).hint("Demonic bicorn fucks you into a pile of mess.");
-		else addButtonDisabled(7, "Nm.", "Unlocked after you are impregnated by a certain corrupted centauress.");
 		//Sapphire
 		if (flags[kFLAGS.SAPPHIRE_AFFECTION] == 100)
 			addButton(8, "SapphireFirst", SceneLib.templeofdivine.sapphire.sapphireFirstTime).hint("Sapphire discovers carnal pleasures");
-		else addButtonDisabled(8, "S. First", "Spend some more time with a certain gargoyle. NOT THIS ONE!!!");
 		//Venus cock scenes
 		if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && flags[kFLAGS.KAIJU_COCK] == 1)
 			addButton(9, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus).hint("Venus discovers her new cock.");
-		else addButtonDisabled(9, "V. Cock", "Overload the factory and meet your old friend at the lake.")
-		//bruh
-		addButtonDisabled(13, "BadEnds", "SH is too lazy to add them");
-        addButton(14, "Wake Up", recallWakeUp);
-    }
+
+		addButton(13, "Dungeons", recallScenes_dungeons);
+		addButton(14, "Wake Up", recallWakeUp);
+	}
+
+	public function recallScenes_dungeons():void {
+		menu();
+        if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(0, "Deep Cave", recallScenes_deepCave);
+		if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(1, "Stronghold", recallScenes_d3);
+		addButton(14, "Back", recallScenes);
+	}
+
+	public function recallScenes_deepCave():void {
+		menu();
+		//Doppel
+		if (flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED])
+			addButton(0, "Imp Horde", SceneLib.dungeons.deepcave.impGangVICTORY).hint("I'll never stop at one. YOU'LL TAKE THEM ALL ON!");
+		if (flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 0 || flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON] > 0)
+			addButton(1, "Vala (Freed)", SceneLib.vala.freeValazLooseCoochie).hint("Vala tries to enjoy her freedom and fuck the first person she sees.");
+        if (flags[kFLAGS.DEFEATED_ZETAZ])
+			addButton(2, "Zetaz", SceneLib.dungeons.deepcave.defeatZetaz).hint("Maybe the little asshole should have been tortured a bit more?");
+		if (flags[kFLAGS.INVESTIGATED_VALA_AFTER_ZETAZ_DEFEATED])
+			addButton(3, "Vala (Later)", SceneLib.vala.leftValaAlone).hint("Vala has spent some time alone and is VERY bored..");
+		addButton(14, "Back", recallScenes_dungeons);
+	}
+
+	public function recallScenes_d3():void {
+		menu();
+		//Doppel
+		if (flags[kFLAGS.D3_MIRRORS_SHATTERED])
+			addButton(0, "Doppelganger", SceneLib.d3.doppleganger.punchYourselfInTheBalls).hint("Go fuck yourself!");
+		//DriderIncubus
+		if (flags[kFLAGS.DRIDERINCUBUS_DEFEATED])
+			addButton(1, "DriderI & M", SceneLib.d3.driderIncubus.beatTheSpooderbutt, false).hint("Recall the glorious defeat of the drider-incubus and maybe take your 'reward'.");
+		//HermCentaur
+		if (flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0)
+			addButton(2, "HermCentaur", SceneLib.d3.hermCentaur.beatThePony, false).hint("Get your 'reward' for beating the herm centaur in the stronghold.");
+		//MinoKing
+		if (flags[kFLAGS.MINOTAURKING_DEFEATED] > 0)
+			addButton(3, "M.King & Exc", SceneLib.d3.minotaurKing.theKingIsDeadLongLiveTheKing).hint("If you didn't have time or the mood for using 2 cowsluts before fighting Lethice, you can do it in your imagination!");
+		//Lethice
+		if (flags[kFLAGS.LETHICE_DEFEATED] > 0)
+			addButton(4, "Lethice", SceneLib.d3.lethice.defeated, false).hint("While you can't make her your eternal slave, you can punish her for her arrogance in your memories as much as you want.");
+
+		addButton(14, "Back", recallScenes_dungeons);
+	}
 
     public function recallWakeUp():void {
 		clearOutput();

@@ -478,7 +478,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 				],
 				CoC.instance.inCombat ?
 					"You've almost lost. The spider-girl seems horny, but reasonable, maybe you could make the upcoming rape pleasuring for both of you? Don't expect her going too light on you though...\n\n" :
-					"The spider-girl stands before you, waiting. <i>So, what do you have in mind? We can do a lot of things together...</i>"
+					"The spider-girl stands before you, waiting. <i>So, what do you have in mind? We can do a lot of things together..."
 			);
 		}
 

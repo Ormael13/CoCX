@@ -109,7 +109,7 @@ use namespace CoC;
 						"Req. a dick with area fitting " + monster.vaginalCapacity(),
 						player.cockThatFits(monster.vaginalCapacity()) >= 0]
 				],
-				"<i>The drider smirks, crawling closer. You can't do anything - in a moment she'll web you to the ground and fuck like no tomorrow. But her corrupted eyes betray her - she wants it as much as you do. Maybe you could slightly change the course of actions?</i>\n\n"
+				"The drider smirks, crawling closer. You can't do anything - in a moment she'll web you to the ground and fuck like no tomorrow. But her corrupted eyes betray her - she wants it as much as you do. Maybe you could slightly change the course of actions?\n\n"
 			);
 		}
 

@@ -50,6 +50,7 @@ public class NightmareScene extends BaseContent
 
 		public function nightmareVictory():void {
 			clearOutput();
+			if (!recalling) outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
 			if (silly()) {
 				outputText("\"<i>That's it now give in..to your desire...</i>\"\n\n");
 				outputText("You put on a pair of black shades and reply:\n\n");
