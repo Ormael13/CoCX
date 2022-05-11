@@ -197,7 +197,6 @@ private function pureValaAndShouldraMacroMax():void {
 
 //corrupt vala
 public function shouldraMeetsCorruptVala():void {
-	spriteSelect(SpriteDb.s_ghostGirl2);
 	clearOutput();
 	outputText("An idea strikes you as you gaze down at the chained-up fae creature.  You call to Shouldra, pointing her toward her newest toy.  You hear a delighted coo in your mind, and you feel the ghost inside of you take control.  The specter saunters up to Vala's helpless form, appraising the prisoner like a show dog. The bound creature gives little reaction as Shouldra fondles her unusually large breasts, and only gives a slight moan when the ghost parts her legs.  \"<i>Such an interesting little oddity!  Say what you want about those imps, but they sure can get awful creative when it comes to fucking.</i>\"");
 	outputText("\n\nShe unchains the fairy, which seems to bring her back to the real world.  She looks up at you, and begins pawing at your armor, trying her best to take it off in her addled state.  \"<i>Bitch is happy Master came by!  Bitch will be a good girl for Master, so that Master can get off!</i>\"");

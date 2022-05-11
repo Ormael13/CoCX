@@ -4814,9 +4814,13 @@ public function rebirthFromBadEnd():void {
 		menu();
 		//Doppel
 		if (flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED])
-			addButton(0, "Imp Horde", SceneLib.d3.deepcave.impGangVICTORY).hint("I'll never stop at one. YOU'LL TAKE THEM ALL ON!");
+			addButton(0, "Imp Horde", SceneLib.dungeons.deepcave.impGangVICTORY).hint("I'll never stop at one. YOU'LL TAKE THEM ALL ON!");
+		if (flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 0 || flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON] > 0)
+			addButton(1, "Vala (Freed)", SceneLib.vala.freeValazLooseCoochie).hint("Vala tries to enjoy her freedom and fuck the first person she sees.");
         if (flags[kFLAGS.DEFEATED_ZETAZ])
-			addButton(1, "Zetaz", SceneLib.d3.deepcave.defeatZetaz).hint("Maybe the little asshole should have been tortured a bit more?");
+			addButton(2, "Zetaz", SceneLib.dungeons.deepcave.defeatZetaz).hint("Maybe the little asshole should have been tortured a bit more?");
+		if (flags[kFLAGS.INVESTIGATED_VALA_AFTER_ZETAZ_DEFEATED])
+			addButton(3, "Vala (Later)", SceneLib.vala.leftValaAlone).hint("Vala has spent some time alone and is VERY bored..");
 		addButton(14, "Back", recallScenes_dungeons);
 	}
 
