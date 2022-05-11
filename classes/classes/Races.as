@@ -20,7 +20,7 @@ public class Races {
 	public static const RACCOON:Race = new Race("Raccoon",11,"raccoonScore", 8);
 	public static const DOG:Race = new Race("Dog",12,"dogScore", 4);
 	public static const WOLF: Race = new WolfRace(13);
-	public static const WEREWOLF:Race = new Race("Werewolf",14, "werewolfScore", 12);
+	public static const WEREWOLF:Race = new WerewolfRace(14);
 	public static const FOX:Race = new Race("Fox",15,"foxScore", 7);
 	public static const FERRET:Race = new Race("Ferret",16,"ferretScore", 4);
 	public static const KITSUNE:Race = new KitsuneRace(17);
@@ -65,8 +65,8 @@ public class Races {
 	public static const PIG:Race = new Race("Pig",56, "pigScore", 10);
 	public static const SATYR:Race = new Race("Satyr",57, "satyrScore", 4);
 	public static const RHINO:Race = new Race("Rhino",58, "rhinoScore", 4);
-	public static const ECHIDNA:Race = new Race("Echnida",59, "echidnaScore", 4);
-	public static const DEER:Race = new Race("Deer",60, "deerScore", 4);
+	public static const ECHIDNA:Race = new EchidnaRace(59);
+	public static const DEER:Race = new DeerRace(60);
 	public static const MANTICORE:Race = new ManticoreRace(61);
 	public static const REDPANDA:Race = new RedPandaRace(62);
 	public static const BEARANDPANDA:Race = new Race("Bear and Panda",63,"bearpandaScore", 10);
@@ -78,9 +78,9 @@ public class Races {
 	public static const JABBERWOCKY:Race = new Race("Jabberwocky",69, "jabberwockyScore", 10);
 	public static const AVIAN:Race = new AvianRace(70);
 	public static const GARGOYLE:Race = new GargoyleRace(71);
-	public static const SLIME:Race = new Race("Slime",72, "gooScore", 11);
-	public static const MAGMASLIME:Race = new Race("Magma slime",73, "magmagooScore", 13);
-	public static const DARKSLIME:Race = new Race("Dark slime",74, "darkgooScore", 13);
+	public static const SLIME:Race = new SlimeRace(72);
+	public static const MAGMASLIME:Race = new MagmaSlimeRace(73);
+	public static const DARKSLIME:Race = new DarkSlimeRace(74);
 	public static const JIANGSHI:Race = new JiangshiRace(75);
 	public static const POLTERGEIST:Race = new Race("Poltergeist",76, "poltergeistScore", 6);
 	public static const BANSHEE:Race = new Race("Banshee",77, "bansheeScore", 4);
@@ -89,7 +89,7 @@ public class Races {
 	public static const CENTIPEDE:Race = new Race("Centipede",80, "centipedeScore", 8);
 	public static const FROSTWYRM:Race = new Race("Frost Wyrm",81, "frostWyrmScore", 18);
 	public static const CANCER:Race = new Race("Cancer",82, "cancerScore", 13);
-	public static const USHIONNA:Race = new Race("Ushi-Onna",83, "ushionnaScore", 11);
+	public static const USHIONNA:Race = new UshiOniRace(83);
 	public static const FAIRY:Race = new Race("Fairy",84,"fairyScore", 23);
 	public static const GREMLIN:Race = new Race("Gremlin",85,"gremlinScore", 15);
 	public static const KAMAITACHI:Race = new Race("Kamaitachi",86, "kamaitachiScore", 14);
@@ -99,13 +99,13 @@ public class Races {
 	public static const TROLL:Race        = new Race("Troll",90, "trollScore", 10);
 	public static const ATLACH_NACHA:Race = new AtlachNachaRace(91);
 	public static const WOODELF:Race      = new Race("Wood Elf",92, "woodElfScore", 22);
-	public static const SEA_DRAGON:Race = new Race("Sea Dragon",93, "leviathanScore", 20);
+	public static const SEA_DRAGON:Race = new SeaDragonRace(93);
 	public static const FMINDBREAKER:Race = new FemaleMindbreakerRace(94);
 	public static const MMINDBREAKER:Race = new MaleMindbreakerRace(95);
 	public static const ELEMENTALFUSION:Race = new Race("Elemental Fusion",96, "fusedElementalScore", 5);
 	public static const GRYPHON:Race = new GryphonRace(97);
 	public static const PEACOCK:Race = new PeacockRace(98);
-	public static const ANGEL:Race = new Race("Angel",99, "angelScore", 11);
+	public static const ANGEL:Race = new AngelRace(99);
 	public static const APOPHIS:Race = new Race("Apophis",100, "apophisScore", 23);
 	public static const CYCLOP:Race = new Race("Cyclop",101, "cyclopScore", 12);
 	public static const ALICORN:Race = new Race("Alicorn",102, "alicornScore", 8);

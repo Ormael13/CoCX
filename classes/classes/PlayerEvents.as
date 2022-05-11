@@ -561,12 +561,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.changeStatusValue(StatusEffects.SlimeCraving, 2, 0); //Reset stored hp/toughness values
 				needNext = true;
 			}
-			if (!player.hasPerk(PerkLib.FluidBody) && player.isGoo() && (player.gooScore() >= 11 || player.magmagooScore() >= 13 || player.darkgooScore() >= 13)) {
+			if (!player.hasPerk(PerkLib.FluidBody) && player.isGoo() && (player.isRace(Races.SLIME) || player.isRace(Races.MAGMASLIME) || player.isRace(Races.DARKSLIME))) {
 				outputText("\nWoa your body is so malleable now attacks running through you can't damage you much anymore. This said the feeling of being penetrated by just anything leaves you with mind melting pleasure.\n(<b>Gained New Perk: Fluid Body.</b>)\n");
 				player.createPerk(PerkLib.FluidBody, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if (player.hasPerk(PerkLib.FluidBody) && !player.isGoo() && (player.gooScore() < 11 || player.magmagooScore() < 13 || player.darkgooScore() < 13)) {
+			if (player.hasPerk(PerkLib.FluidBody) && !player.isGoo() && (!player.isRace(Races.SLIME) || !player.isRace(Races.MAGMASLIME) || !player.isRace(Races.DARKSLIME))) {
 				outputText("\nYour body no longer being slime enough you worry that weapon will draw blood the next time they strike you as you lose your fluidic nature.\n(<b>Lost Perk: Fluid Body.</b>)\n");
 				player.removePerk(PerkLib.FluidBody);
 				needNext = true;
@@ -576,13 +576,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.rearBody.type = RearBody.NONE;
 				needNext = true;
 			}
-			if (!player.hasPerk(PerkLib.MorphicWeaponry) && (player.darkgooScore() >= 17 || player.gooScore() >= 15 || player.magmagooScore() >= 17) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") > 50){
+			if (!player.hasPerk(PerkLib.MorphicWeaponry) && (player.isRace(Races.DARKSLIME, 2) || player.isRace(Races.SLIME,2) || player.isRace(Races.MAGMASLIME, 2)) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") > 50){
 				player.createPerk(PerkLib.MorphicWeaponry,0,0,0,0);
 				outputText("\nYour body has become so bloated with fluids and so large that you gain the ability to use your excess mass to form any number of additionnal tendrils wich you can use to attack your opponents.\n(<b>Gained New Perk: Morphic Weaponry.</b>\n>\n");
 			}
-			if (player.hasPerk(PerkLib.MorphicWeaponry) && ((player.darkgooScore() < 17 && player.gooScore() < 15 && player.magmagooScore() < 17) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") <= 50)){
+			if (player.hasPerk(PerkLib.MorphicWeaponry) && ((!player.isRace(Races.DARKSLIME, 2) && !player.isRace(Races.SLIME,2) && !player.isRace(Races.MAGMASLIME, 2)) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") <= 50)){
 				player.removePerk(PerkLib.MorphicWeaponry);
-				if((player.darkgooScore() < 17 && player.gooScore() < 15 && player.magmagooScore() < 17)){
+				if((!player.isRace(Races.DARKSLIME, 2) && !player.isRace(Races.SLIME,2) && !player.isRace(Races.MAGMASLIME,2))){
 					outputText("\nAs you are mo longer a slime, you can't use the morphic weaponry ability anymore.\n(<b>Lost Perk: Morphic Weaponry.</b>\n>\n");
 				}
 				else{
@@ -1678,7 +1678,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Lightning Affinity
-			if ((player.leviathanScore() >= 20) && !player.hasPerk(PerkLib.LightningAffinity)) {
+			if ((player.isRace(Races.SEA_DRAGON)) && !player.hasPerk(PerkLib.LightningAffinity)) {
 				outputText("\nYou suddenly feel a rush of electricity run across your skin as your biolight goes crazy! It would seem you gained the ability to generate and control electricity not unlike an electric eel or more specificaly a sea dragon\n");
 				outputText("\n(<b>Gained the lightning affinity perk and Electric discharge ability!</b>)\n");
 				player.createPerk(PerkLib.LightningAffinity, 0, 0, 0, 0);
@@ -1713,7 +1713,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.ElectrifiedDesire);
 				needNext = true;
 			}
-			else if (player.leviathanScore() < 20 && player.hasPerk(PerkLib.LightningAffinity) && !player.hasStatusEffect(StatusEffects.IsThunderbird) && !player.hasStatusEffect(StatusEffects.IsRaiju)) {
+			else if (!player.isRace(Races.SEA_DRAGON) && player.hasPerk(PerkLib.LightningAffinity) && !player.hasStatusEffect(StatusEffects.IsThunderbird) && !player.hasStatusEffect(StatusEffects.IsRaiju)) {
 				outputText("\nYour natural electricity production starts dropping at a dramatic rate until finally there is no more. You realise you likely aren’t a sea dragon enough to build electricity anymore.\n\n<b>(Lost the lightning affinity perk and electric discharge ability!!)</b>\n");
 				player.removePerk(PerkLib.LightningAffinity);
 				needNext = true;
@@ -1852,12 +1852,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Titanic Strength
-			if ((player.hydraScore() >= 14 || player.oniScore() >= 12 || player.orcaScore() >= 17 || player.scyllaScore() >= 12 || player.frostWyrmScore() >= 10 || player.cyclopScore() >= 12 || player.leviathanScore() >= 20) && player.tallness >= 80 && !player.hasPerk(PerkLib.TitanicStrength)) {
+			if ((player.hydraScore() >= 14 || player.oniScore() >= 12 || player.orcaScore() >= 17 || player.scyllaScore() >= 12 || player.frostWyrmScore() >= 10 || player.cyclopScore() >= 12 || player.isRace(Races.SEA_DRAGON)) && player.tallness >= 80 && !player.hasPerk(PerkLib.TitanicStrength)) {
 				outputText("\nWhoa, you've grown so big its a sheer miracle you don't damage the landscape while moving. That said, your size now contributes to your strength as well.\n\n<b>(Gained Titanic Strength perk!)</b>\n");
 				player.createPerk(PerkLib.TitanicStrength, 0, 0, 0, 0);
 				needNext = true;
 			}
-				if (((player.hydraScore() < 14 && player.oniScore() < 12 && player.orcaScore() < 17 && player.scyllaScore() < 12 && player.frostWyrmScore() < 10 && player.cyclopScore() < 12 && player.leviathanScore() < 20) || player.tallness < 80) && player.hasPerk(PerkLib.TitanicStrength)) {
+				if (((player.hydraScore() < 14 && player.oniScore() < 12 && player.orcaScore() < 17 && player.scyllaScore() < 12 && player.frostWyrmScore() < 10 && player.cyclopScore() < 12 && !player.isRace(Races.SEA_DRAGON)) || player.tallness < 80) && player.hasPerk(PerkLib.TitanicStrength)) {
 				if (player.tallness < 80) outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
 				else outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
 				player.removePerk(PerkLib.TitanicStrength);

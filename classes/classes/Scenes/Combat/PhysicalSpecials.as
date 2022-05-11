@@ -359,7 +359,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd.requireFatigue(physicalCost(50));
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.gooScore() >= 11 || player.magmagooScore() >= 13 || player.darkgooScore() >= 13) {
+			if (player.isRace(Races.SLIME) || player.isRace(Races.MAGMASLIME) || player.isRace(Races.DARKSLIME)) {
 				bd = buttons.add("Sling Goo", slinggoo).hint("Throw slime at your opponent, lacing it with your aphrodisiac compound and reduce their speed.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
@@ -491,7 +491,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.requireFatigue(physicalCost(30));
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if ((player.orcaScore() >= 10 || player.leviathanScore() >= 20) && player.faceType == Face.ORCA) {
+			if ((player.orcaScore() >= 10 || player.isRace(Races.SEA_DRAGON)) && player.faceType == Face.ORCA) {
 				bd = buttons.add("Play", orcaPlay).hint("Begin toying with your prey by tossing it in the air, initiating a juggling combo.");
 				bd.requireFatigue(physicalCost(30));
 				if (!monster.hasStatusEffect(StatusEffects.Stunned)) bd.disable("<b>You need the ennemy to be stunned in order to use this ability.</b>\n\n");

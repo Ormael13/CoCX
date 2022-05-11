@@ -609,12 +609,12 @@ public class MutationsLib
 					return (Tail.hasDraconicTail(player) || LowerBody.hasDraconicLegs(player) && LowerBody.hasTail(player));
 				}, "Dragon race or its variants tail")
 				.requireCustomFunction(function (player:Player):Boolean {
-					return (player.isRace(Races.DRAGON) || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
+					return (player.isRace(Races.DRAGON) || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10 || player.isRace(Races.SEA_DRAGON));
 				}, "Dragon race or its variants");
 				DraconicHeart.requireHeartMutationSlot()
 				.requirePerk(DraconicBones)
 				.requireCustomFunction(function (player:Player):Boolean {
-					return (player.isRace(Races.DRAGON) || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
+					return (player.isRace(Races.DRAGON) || player.frostWyrmScore() >= 10 || player.isRace(Races.SEA_DRAGON));
 				}, "Dragon race or its variants");
 				DraconicLungs.requireLungsMutationSlot()
 				.requirePerks(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath)
@@ -624,7 +624,7 @@ public class MutationsLib
 				DrakeLungs.requireLungsMutationSlot()
 				.requireAnyPerk(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath, PerkLib.DragonWaterBreath)
 				.requireCustomFunction(function (player:Player):Boolean {
-					return (player.frostWyrmScore() >= 10 || player.jabberwockyScore() >= 10 || player.vouivreScore() >= 11 || player.leviathanScore() >= 20);
+					return (player.frostWyrmScore() >= 10 || player.jabberwockyScore() >= 10 || player.vouivreScore() >= 11 || player.isRace(Races.SEA_DRAGON));
 				}, "Variants of the dragon race");
 				EasterBunnyEggBag.requireBallsMutationSlot().requirePerk(PerkLib.EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
 					return player.easterbunnyScore() >= 12;
@@ -784,7 +784,7 @@ public class MutationsLib
 					return player.spiderScore() >= 5 || player.apophisScore() >= 23 || player.nagaScore() >= 8 || player.gorgonScore() >= 11 || player.vouivreScore() >= 11 || player.couatlScore() >= 11 || player.hydraScore() >= 14;
 				}, "Spider or any snake-like race");
 				WhaleFat.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.orcaScore() >= 14 || player.leviathanScore() >= 20;
+					return player.orcaScore() >= 14 || player.isRace(Races.SEA_DRAGON);
 				}, "Orca race");
 				YetiFat.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.yetiScore() >= 14;

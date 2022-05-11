@@ -68,7 +68,7 @@ public class BodyData {
 	EnumValue.add(Slots,SLOT_EYE_COLOR, "EYE_COLOR", {
 		name:"eye color"
 	});
-	public function get eyeColor():int {
+	public function get eyeColor():String {
 		return data[SLOT_EYE_COLOR];
 	}
 	
@@ -109,7 +109,7 @@ public class BodyData {
 	EnumValue.add(Slots,SLOT_HAIR_COLOR, "HAIR_COLOR", {
 		name:"hair color"
 	});
-	public function get hairColor():int {
+	public function get hairColor():String {
 		return data[SLOT_HAIR_COLOR];
 	}
 	
@@ -122,6 +122,18 @@ public class BodyData {
 	});
 	public function get hornType():int {
 		return data[SLOT_HORN_TYPE];
+	}
+	
+	public static const SLOT_HORN_COUNT:int = _slotid++;
+	EnumValue.add(Slots,SLOT_HORN_COUNT, "HORN_COUNT", {
+		name:"horns",
+		nameFn: function(value:int):String {
+			if (value === 0) return "no";
+			return ""+value;
+		}
+	});
+	public function get hornCount():int {
+		return data[SLOT_HORN_COUNT];
 	}
 	
 	public static const SLOT_LEG_TYPE:int = _slotid++;
@@ -174,7 +186,7 @@ public class BodyData {
 	EnumValue.add(Slots,SLOT_SKIN_BASE_COLOR, "SKIN_BASE_COLOR", {
 		name:"skin color"
 	});
-	public function get skinBaseColor():int {
+	public function get skinBaseColor():String {
 		return data[SLOT_SKIN_BASE_COLOR];
 	}
 	
@@ -194,7 +206,7 @@ public class BodyData {
 	EnumValue.add(Slots,SLOT_SKIN_BASE_ADJ, "SKIN_BASE_ADJ", {
 		name:"skin"
 	});
-	public function get skinBaseAdj():int {
+	public function get skinBaseAdj():String {
 		return data[SLOT_SKIN_BASE_ADJ];
 	}
 	
@@ -213,7 +225,7 @@ public class BodyData {
 	EnumValue.add(Slots,SLOT_SKIN_COAT_COLOR, "SKIN_COAT_COLOR", {
 		name:"coat color"
 	});
-	public function get skinCoatColor():int {
+	public function get skinCoatColor():String {
 		return data[SLOT_SKIN_COAT_COLOR];
 	}
 	
@@ -362,6 +374,7 @@ public class BodyData {
 		data[SLOT_HAIR_TYPE] = player.hairType;
 		data[SLOT_HAIR_COLOR] = player.hairColor;
 		data[SLOT_HORN_TYPE] = player.horns.type;
+		data[SLOT_HORN_COUNT] = player.horns.count;
 		data[SLOT_LEG_TYPE] = player.lowerBodyPart.type;
 		data[SLOT_REAR_TYPE] = player.rearBody.type;
 		data[SLOT_SKIN_COVERAGE] = player.skin.coverage;

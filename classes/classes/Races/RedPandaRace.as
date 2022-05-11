@@ -19,11 +19,8 @@ public class RedPandaRace extends Race{
 				.skinCoatType(Skin.FUR, +1);
 		
 		buildTier(8, "red panda")
-				.customNamingFunction(function(body:BodyData):String {
-					if (body.isTaur) return "red-panda-taur";
-					if (body.faceType == Face.HUMAN) return "red-panda-"+body.mf("boy","girl");
-					return "red-panda-morph"
-				})
+				.namesMaleFemaleMorphTaur("red-panda-boy","red-panda-girl",
+						"red-panda-morph","red-panda-taur")
 				.buffs({
 					"str.mult": +0.15,
 					"spe.mult": +0.75,

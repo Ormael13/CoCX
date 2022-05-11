@@ -79,11 +79,8 @@ public class DragonRace extends Race {
 		;
 		addBloodline([PerkLib.DragonsDescendant, PerkLib.BloodlineDragon]);
 		buildTier(16, "dragon")
-				.customNamingFunction(function (body:BodyData):String {
-					if (body.isTaur) return "dragon-taur";
-					if (body.faceType == Face.HUMAN) return "dragon-" + body.mf("man", "girl");
-					return "dragon";
-				})
+				.namesMaleFemaleMorphTaur("dragon-man","dragon-girl",
+						"dragon","dragon-taur")
 				.buffs({
 					"maxhp_mult": +0.10,
 					"str.mult": +0.50,
@@ -97,11 +94,8 @@ public class DragonRace extends Race {
 				.withExtraBonuses("+1 Armor / Magic Resistance")
 				.end();
 		buildTier(24, "elder dragon")
-				.customNamingFunction(function (body:BodyData):String {
-					if (body.isTaur) return "elder dragon-taur";
-					if (body.faceType == Face.HUMAN) return "elder dragon-" + body.mf("man", "girl");
-					return "elder dragon";
-				})
+				.namesMaleFemaleMorphTaur("elder dragon-man","elder dragon-girl",
+						"elder dragon","elder dragon-taur")
 				.buffs({
 					"maxfatigue_base": +100,
 					"maxlust_base": +25,
@@ -117,11 +111,8 @@ public class DragonRace extends Race {
 				.withExtraBonuses("+4 Armor / Magic Resistance")
 				.end();
 		buildTier(32, "ancient dragon")
-				.customNamingFunction(function (body:BodyData):String {
-					if (body.isTaur) return "ancient dragon-taur";
-					if (body.faceType == Face.HUMAN) return "ancient dragon-" + body.mf("man", "girl");
-					return "ancient dragon";
-				})
+				.namesMaleFemaleMorphTaur("ancient dragon-man","ancient dragon-girl",
+						"ancient dragon","ancient dragon-taur")
 				.buffs({
 					"maxfatigue_base": +200,
 					"maxlust_base": +50,

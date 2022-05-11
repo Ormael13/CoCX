@@ -1085,11 +1085,6 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.apophisScore() >= 23) outputText("\n<font color=\"#0000a0\">Apophis: " + player.apophisScore() + " (+"+(player.isNaga() ? "85":"70")+"% to Str racial multi,+70% to Tou racial multi, +"+(player.isNaga() ? "115":"100")+"% to Spe racial multi, +105% to lib racial multi)</font>");
 		else if (player.apophisScore() >= 1) outputText("\n<font color=\"#008000\">Apophis: " + player.apophisScore() + "</font>");
 		else if (player.apophisScore() < 1) outputText("\n<font color=\"#ff0000\">Apophis: 0</font>");
-		//Angel
-		//if (player.demonScore() >= 16 && player.hasPerk(PerkLib.Phylactery)) outputText("\n<font color=\"#0000a0\">Angel: " + player.angelScore() + " (+30% to Spe racial multi, +35% to Int racial multi, +100% to Lib racial multi, +" + (100 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-		if (player.angelScore() >= 11) outputText("\n<font color=\"#0000a0\">Angel-kin: " + player.angelScore() + " (+15% to Str racial multi, +15% to Tou racial multi, +45% to Wis racial multi, -15% max Lust, +20% max Wrath, -40% max mana, +40% max SF)</font>");
-		else if (player.angelScore() >= 1) outputText("\n<font color=\"#008000\">Angel-kin: " + player.angelScore() + "</font>");
-		else if (player.angelScore() < 1) outputText("\n<font color=\"#ff0000\">Angel-kin: 0</font>");
 		//Bear/Panda
 		if (player.bearpandaScore() >= 10) outputText("\n<font color=\"#0000a0\">Bear/Panda-morph: " + player.bearpandaScore() + " (+100% to Str racial multi, +70% to Tou racial multi, -20% to Int racial multi)</font>");
 		else if (player.bearpandaScore() >= 1) outputText("\n<font color=\"#008000\">Bear/Panda-morph: " + player.bearpandaScore() + "</font>");
@@ -1143,15 +1138,6 @@ public class PlayerAppearance extends BaseContent {
 		if (player.cyclopScore() >= 12) outputText("\n<font color=\"#0000a0\">Cyclop: " + player.cyclopScore() + " (+90% to Str racial multi, +90% to Tou racial multi)</font>");
 		else if (player.cyclopScore() >= 1) outputText("\n<font color=\"#008000\">Cyclop: " + player.cyclopScore() + "</font>");
 		else if (player.cyclopScore() < 1) outputText("\n<font color=\"#ff0000\">Cyclop: 0</font>");
-		//Dark Goo
-		if (player.darkgooScore() >= 17) outputText("\n<font color=\"#0000a0\">Dark Slime Queen: " + player.darkgooScore() + " (+115% to Tou racial multi, -50% to Spe racial multi, +45% to Int racial multi, +145% to Lib racial multi)</font>");
-		else if (player.darkgooScore() >= 13) outputText("\n<font color=\"#0000a0\">Dark Slime: " + player.darkgooScore() + " (+90% to Tou racial multi, -40% to Spe racial multi, +45% to Int racial multi, +100% to Lib racial multi)</font>");
-		else if (player.darkgooScore() >= 1) outputText("\n<font color=\"#008000\">Dark Slime: " + player.darkgooScore() + "</font>");
-		else if (player.darkgooScore() < 1) outputText("\n<font color=\"#ff0000\">Dark Slime: 0</font>");
-		//Deer
-		if (player.deerScore() >= 4) outputText("\n<font color=\"#0000a0\">Deer-morph: " + player.deerScore() + " (+20% to Spe racial multi)</font>");
-		else if (player.deerScore() >= 1) outputText("\n<font color=\"#008000\">Deer-morph: " + player.deerScore() + "</font>");
-		else if (player.deerScore() < 1) outputText("\n<font color=\"#ff0000\">Deer-morph: 0</font>");
 		//Demon
 		if (player.demonScore() >= 16 && player.hasPerk(PerkLib.Soulless)) outputText("\n<font color=\"#0000a0\">Succub/Incubus: " + player.demonScore() + " (+40% to Spe racial multi, +60% to Int racial multi, +140% to Lib racial multi, +60% max Lust, -45% max Wrath, +120% max mana, max SF drops to 0)</font>");
 		else if (player.demonScore() >= 11) outputText("\n<font color=\"#0000a0\">Succubi-kin/Incubi-kin: " + player.demonScore() + " (+30% to Spe racial multi, +35% to Int racial multi, +100% to Lib racial multi, +40% max Lust, -30% max Wrath, +80% max mana, -80% max SF)</font>");
@@ -1184,8 +1170,6 @@ public class PlayerAppearance extends BaseContent {
 			else outputText("\n<font color=\"#ff0000\">Easter Bunny (Require Easter bunny balls): " + player.easterbunnyScore() + "</font>");
 		}
 		else if (player.easterbunnyScore() < 1) outputText("\n<font color=\"#ff0000\">Easter Bunny (Require Easter bunny balls): 0</font>");
-		//Echidna
-		outputText("\nEchidna: " + player.echidnaScore());
 		//Elf
 		if (player.elfScore() >= 11) outputText("\n<font color=\"#0000a0\">Elf: " + player.elfScore() + " (-10% to Str racial multi, -15% to Tou racial multi, +80% to Spe / Int racial multi, +60% to Wis racial multi, +30 min Sens, +20% max Mana)</font>");
 		else if (player.elfScore() >= 1) outputText("\n<font color=\"#008000\">Elf: " + player.elfScore() + "</font>");
@@ -1229,11 +1213,6 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.gremlinScore() >= 15) outputText("\n<font color=\"#0000a0\">Gremlin: " + player.gremlinScore() + " (-50% to Str racial multi, +75% to Spe racial multi, +120% to Int racial multi, +115% to Lib racial multi, +20 min sens)</font>");
 		else if (player.gremlinScore() >= 1) outputText("\n<font color=\"#008000\">Gremlin: " + player.gremlinScore() + "</font>");
 		else if (player.gremlinScore() < 1) outputText("\n<font color=\"#ff0000\">Gremlin: 0</font>");
-		//Goo
-		if (player.gooScore() >= 15) outputText("\n<font color=\"#0000a0\">Slime Queen: " + player.gooScore() + " (+115% to Tou racial multi, -50% to Spe racial multi, +160% to Lib racial multi)</font>");
-		else if (player.gooScore() >= 11) outputText("\n<font color=\"#0000a0\">Slime: " + player.gooScore() + " (+105% to Tou racial multi, -40% to Spe racial multi, +100% to Lib racial multi)</font>");
-		else if (player.gooScore() >= 1) outputText("\n<font color=\"#008000\">Slime: " + player.gooScore() + "</font>");
-		else if (player.gooScore() < 1) outputText("\n<font color=\"#ff0000\">Slime: 0</font>");
 		//Gorgon
 		if (player.gorgonScore() >= 17) outputText("\n<font color=\"#0000a0\">Greater Gorgon: " + player.gorgonScore() + " (+"+(player.isNaga() ? "95":"80")+"% to Str racial multi, +65% to Tou racial multi, +"+(player.isNaga() ? "125":"110")+"% to Spe racial multi, +" + (100 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 		if (player.gorgonScore() >= 11) outputText("\n<font color=\"#0000a0\">Gorgon: " + player.gorgonScore() + " (+"+(player.isNaga() ? "65":"50")+"% to Str racial multi, +45% to Tou racial multi, +"+(player.isNaga() ? "85":"70")+"% to Spe racial multi, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
@@ -1325,11 +1304,6 @@ public class PlayerAppearance extends BaseContent {
 		if (player.lizardScore() >= 8) outputText("\n<font color=\"#0000a0\">Lizard-morph: " + player.lizardScore() + " (+70% to Tou racial multi, +50% to Int racial multi, +" + (100 * (1 + player.newGamePlusMod())) + " max Fatigue)</font>");
 		else if (player.lizardScore() >= 1) outputText("\n<font color=\"#008000\">Lizard-morph: " + player.lizardScore() + "</font>");
 		else if (player.lizardScore() < 1) outputText("\n<font color=\"#ff0000\">Lizard-morph: 0</font>");
-		//Magma Goo
-		if (player.magmagooScore() >= 17) outputText("\n<font color=\"#0000a0\">Magma Slime Queen: " + player.magmagooScore() + " (+45% to Str racial multi, +115% to Tou racial multi, -50% to Spe racial multi, +145% to Lib racial multi)</font>");
-		else if (player.magmagooScore() >= 13) outputText("\n<font color=\"#0000a0\">Magma Slime: " + player.magmagooScore() + " (+35% to Str racial multi, +100% to Tou racial multi, -40% to Spe racial multi, +100% to Lib racial multi)</font>");
-		else if (player.magmagooScore() >= 1) outputText("\n<font color=\"#008000\">Magma Slime: " + player.magmagooScore() + "</font>");
-		else if (player.magmagooScore() < 1) outputText("\n<font color=\"#ff0000\">Magma Slime: 0</font>");
 		//Mantis
 		if (player.mantisScore() >= 12) {
 			outputText("\n<font color=\"#0000a0\">Mantis-morph: " + player.mantisScore() + " (-40% to Str racial multi, +60% to Tou racial multi, +");
@@ -1473,11 +1447,6 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.scyllaScore() >= 7 && player.isScylla()) outputText("\n<font color=\"#0000a0\">Scylla: " + player.scyllaScore() + " (+"+(95+scyllakrakengland)+"% to Str racial multi, +40% to Int racial multi, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 		else if (player.scyllaScore() >= 1) outputText("\n<font color=\"#008000\">Scylla: " + player.scyllaScore() + "</font>");
 		else if (player.scyllaScore() < 1) outputText("\n<font color=\"#ff0000\">Scylla: 0</font>");
-		//Sea dragon
-		if (player.leviathanScore() >= 30) outputText("\n<font color=\"#0000a0\">Leviathan-boy/girl: " + player.leviathanScore() + " (+200% to Str racial multi, +100% to Tou racial multi, +100% to Spe racial multi, +50% to Int racial multi, +" + (5 * (1 + player.newGamePlusMod())) + " Armor / Magic Resistance)</font>");
-		else if (player.leviathanScore() >= 20) outputText("\n<font color=\"#0000a0\">Sea dragon-boy/girl: " + player.leviathanScore() + " (+110% to Str racial multi, +70% to Tou racial multi, +70% to Spe racial multi, +50% to Int racial multi, +" + (1 * (1 + player.newGamePlusMod())) + " Armor / Magic Resistance)</font>");
-		else if (player.leviathanScore() >= 1) outputText("\n<font color=\"#008000\">Sea dragon-boy/girl: " + player.leviathanScore() + "</font>");
-		else if (player.leviathanScore() < 1) outputText("\n<font color=\"#ff0000\">Sea dragon-boy/girl: 0</font>");
 		//Shark
 		if (player.sharkScore() >= 11 && player.vaginas.length > 0 && player.cocks.length > 0) outputText("\n<font color=\"#0000a0\">Tigershark-morph: " + player.sharkScore() + " (+60% to Str racial multi, +100% to Spe racial multi, +20% to Lib racial multi, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 		else if (player.sharkScore() >= 10) outputText("\n<font color=\"#0000a0\">Shark-morph: " + player.sharkScore() + " (+40% to Str racial multi, +100% to Spe racial multi, +10% to Lib racial multi)</font>");
@@ -1507,28 +1476,11 @@ public class PlayerAppearance extends BaseContent {
 		if (player.trollScore() >= 10) outputText("\n<font color=\"#0000a0\">Troll: " + player.trollScore() + " (+30% to Str racial multi, +40% to Spe racial multi, +30% to Int racial multi, +50% to Wis racial multi)</font>");
 		else if (player.trollScore() >= 1) outputText("\n<font color=\"#008000\">Troll: " + player.trollScore() + "</font>");
 		else if (player.trollScore() < 1) outputText("\n<font color=\"#ff0000\">Troll: 0</font>");
-		//Ushi Onna
-		if (player.ushionnaScore() >= 11) {
-			outputText("\n<font color=\"#0000a0\">");
-			if (player.statusEffectv1(StatusEffects.UshiOnnaVariant) == 1) outputText("Fiery Ushi-" + player.mf("oni", "onna") + "");
-			else if (player.statusEffectv1(StatusEffects.UshiOnnaVariant) == 2) outputText("Frozen Ushi-" + player.mf("oni", "onna") + "");
-			else if (player.statusEffectv1(StatusEffects.UshiOnnaVariant) == 3) outputText("Sandy Ushi-" + player.mf("oni", "onna") + "");
-			else if (player.statusEffectv1(StatusEffects.UshiOnnaVariant) == 4) outputText("Pure Ushi-" + player.mf("oni", "onna") + "");
-			else if (player.statusEffectv1(StatusEffects.UshiOnnaVariant) == 5) outputText("Wicked Ushi-" + player.mf("oni", "onna") + "");
-			else outputText("Ushi-" + player.mf("oni", "onna") + "");
-			outputText(": " + player.ushionnaScore() + " (+80% to Str racial multi, +70% to Tou racial multi, -40% to Int racial multi, -40% to Wis racial multi, +95% to Lib racial multi)</font>");
-		}
-		else if (player.ushionnaScore() >= 1) outputText("\n<font color=\"#008000\">Ushi-Onna: " + player.ushionnaScore() + "</font>");
-		else if (player.ushionnaScore() < 1) outputText("\n<font color=\"#ff0000\">Ushi-Onna: 0</font>");
 		//Wendigo
 		if (player.wendigoScore() >= 25) outputText("\n<font color=\"#0000a0\">Greater Wendigo: " + player.wendigoScore() + " (+70% to Str racial multi, +70% to Tou racial multi, +60% to Int racial multi, -50% to Wis racial multi, +50% to Lib racial multi, +50 min sens)</font>");
 		else if (player.wendigoScore() >= 10) outputText("\n<font color=\"#0000a0\">Wendigo: " + player.wendigoScore() + " (+70% to Str racial multi, +70% to Tou racial multi, +60% to Int racial multi, -50% to Wis racial multi, +50% to Lib racial multi, +50 min sens)</font>");
 		else if (player.wendigoScore() >= 1) outputText("\n<font color=\"#008000\">Wendigo: " + player.wendigoScore() + "</font>");
 		else if (player.wendigoScore() < 1) outputText("\n<font color=\"#ff0000\">Wendigo: 0</font>");
-		//Werewolf
-		if (player.werewolfScore() >= 12) outputText("\n<font color=\"#0000a0\">Werewolf: " + player.werewolfScore() + " (+100% to Str racial multi, +40% to Tou racial multi, +60% to Spe racial multi, -20% to Int racial multi)</font>");
-		else if (player.werewolfScore() >= 1) outputText("\n<font color=\"#008000\">Werewolf: " + player.werewolfScore() + "</font>");
-		else if (player.werewolfScore() < 1) outputText("\n<font color=\"#ff0000\">Werewolf: 0</font>");
 		//Unicorn
 		if (player.unicornScore() >= 27) outputText("\n<font color=\"#0000a0\">True Unicorn/True Bicorn: " + player.unicornScore() + " (+60% to Str racial multi, +90% to Tou racial multi, +115% to Spe racial multi, +140% to Int racial multi)</font>");
 		else if (player.unicornScore() >= 18) outputText("\n<font color=\"#0000a0\">Unicorn/Bicorn: " + player.unicornScore() + " (+55% to Tou racial multi, +90% to Spe racial multi, +125% to Int racial multi)</font>");

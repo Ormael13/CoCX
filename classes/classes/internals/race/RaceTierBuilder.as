@@ -1,5 +1,6 @@
 package classes.internals.race {
 import classes.BodyData;
+import classes.BodyParts.Face;
 import classes.PerkType;
 import classes.Race;
 import classes.RaceTier;
@@ -50,6 +51,26 @@ public class RaceTierBuilder {
 		this.nameFn = function(body:BodyData):String {
 			if (body.isTaur) return body.looksFemale ? name : femaleName;
 			return oldNameFn(body);
+		}
+		return this;
+	}
+	
+	/**
+	 * Configure tier naming function as:
+	 * {@param taurName} for taurs
+	 * {@param maleName}/{@param femaleName} for non-taurs with human face
+	 * {@param morphName} otherwise
+	 */
+	public function namesMaleFemaleMorphTaur(
+			maleName:String,
+			femaleName:String,
+			morphName:String,
+			taurName:String
+	): RaceTierBuilder {
+		this.nameFn = function(body:BodyData):String {
+			if (body.isTaur) return taurName;
+			if (body.faceType == Face.HUMAN) return body.mf(maleName, femaleName);
+			return morphName;
 		}
 		return this;
 	}

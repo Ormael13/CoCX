@@ -6,6 +6,8 @@ import classes.CockTypesEnum;
 import classes.PerkLib;
 import classes.PerkType;
 import classes.Race;
+import classes.StatusEffectClass;
+import classes.StatusEffectType;
 
 public class RaceScoreBuilder {
 	internal var race:Race;
@@ -84,6 +86,17 @@ public class RaceScoreBuilder {
 	}
 	public function hornType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_HORN_TYPE, type, score, failScore, customName);
+		return this;
+	}
+	public function hornTypeAndCount(type:*, count:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addRequirement(
+				RacialRequirement.joinAnd(
+						"horn",
+						" ",
+						slotRequirement(BodyData.SLOT_HORN_COUNT, count, score, failScore, "$name"),
+						slotRequirement(BodyData.SLOT_HORN_TYPE, type, score, failScore)
+				), customName
+		)
 		return this;
 	}
 	public function noHorns(score:int):RaceScoreBuilder {
@@ -254,6 +267,20 @@ public class RaceScoreBuilder {
 				failScore,
 				minScore
 		), customName)
+		return this;
+	}
+	
+	public function hasStatusEffect(effect:StatusEffectType, name:String, score:int, failScore:int =0):RaceScoreBuilder {
+		addRequirement(new RacialRequirement(
+				"",
+				name,
+				function(body:BodyData):Boolean {
+					return body.player.hasStatusEffect(effect);
+				},
+				score,
+				failScore,
+				minScore
+		));
 		return this;
 	}
 	

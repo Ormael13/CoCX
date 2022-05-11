@@ -20,11 +20,11 @@ public class DragonneRace extends Race{
 				.skinCoatType(Skin.SCALES, +1);
 		
 		buildTier(6, "dragonne")
-				.customNamingFunction(function (body:BodyData):String {
-					if (body.isTaur) return "dragonne-taur";
-					if (body.faceType == Face.HUMAN) return "dragonne-"+body.mf("man","girl");
-					return "dragonne";
-				})
+				.namesMaleFemaleMorphTaur(
+						"dragonne-man",
+						"dragonne-girl",
+						"dragonne",
+						"dragonne-taur")
 				.end();
 	}
 }
