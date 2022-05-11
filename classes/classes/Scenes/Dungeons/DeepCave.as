@@ -204,15 +204,19 @@ use namespace CoC;
 		//Vala
 		public function loseToVala():void {
 			spriteSelect(SpriteDb.s_valaSlave);
-			if(player.gender == 3) loseToValaAsHerm();
-			if(player.gender == 1) loseToValaAsMale();
-			if(player.gender == 2) loseToValaFemale();
 			if(player.gender == 0) {
 				clearOutput();
 				outputText("Vala forces a bottle into your throat before your defeated form has a chance to react, and you grunt with pleasure as a new gash opens between your [legs]!");
 				player.createVagina();
 				doNext(loseToValaFemale);
 			}
+            else sceneHunter.selectLossMenu([
+					[0, "Dick", loseToValaAsMale, "Req. a cock", player.hasCock()],
+					[1, "Vagina", loseToValaFemale, "Req. a vagina", player.hasVagina()],
+					[2, "Both!", loseToValaAsHerm, "Req. to be a herm", player.isHerm()]
+				],
+				"You've underestimated her. And it seems like the lust-addled fairy will use your body now... Which part do you prefer? You still can entice her enough to make her forget about the other.\n\n"
+			);
 		}
 		//Fight Loss-
 		//(Herm)
@@ -242,6 +246,7 @@ use namespace CoC;
 			outputText("You collapse, no longer able to stand, and gasp weakly. The fairy took entirely too much delight in the fight, and her wet pussy is practically squirting with every heartbeat as she hovers over you, rubbing herself in anticipation. \"<i>Bitch will show you the masters' pleasures. They will reward it with cum.</i>\" Her mouth drools as much as her slavering snatch. \"<i>Oh so much cum, and all for their good little slut.</i>\"\n\n");
 			outputText("You are powerless to stop the fairy as she drags you to the south wall and up to the wooden rail secured a couple of feet off the ground. \"<i>When she was still growing, Bitch was too small and tight for the masters,</i>\" your captor tells you. \"<i>They blessed her with this ladder to make us big enough. You will feel their generosity.</i>\" Gripping you under the arms, the fairy's lust-fuelled strength lifts you off the ground and flies you directly over the bristling peg ladder.\n\n");
 			//[Next]
+			if (player.ass.analLooseness >= 2) sceneHunter.print("Check failed: tight ass.");
 			if(player.ass.analLooseness < 2) doNext(loseToValaAsMaleIITight);
 			else if(player.ass.analLooseness < 3) doNext(loseToValaMaleIILoose);
 			else if(player.ass.analLooseness < 5) doNext(loseToValaMaleIIVeryLoose);
@@ -330,16 +335,20 @@ use namespace CoC;
 		public function impGangVICTORY():void {
 			clearOutput();
 			//Flag them defeated!
-			flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED] = 1;
-			if(monster.HP <= monster.minHP()) outputText("The last of the imps collapses into the pile of his defeated comrades.  You're not sure how you managed to win a lopsided fight, but it's a testament to your new-found prowess that you succeeded at all.");
+			if (!recalling) {
+                flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED] = 1;
+                outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+            }
+			if(!recalling && monster.HP <= monster.minHP()) outputText("The last of the imps collapses into the pile of his defeated comrades.  You're not sure how you managed to win a lopsided fight, but it's a testament to your new-found prowess that you succeeded at all.");
 			else outputText("The last of the imps collapses, pulling its demon-prick free from the confines of its loincloth.  Surrounded by masturbating imps, you sigh as you realize how enslaved by their libidos the foul creatures are.");
-			if(player.lust >= 33 && player.gender > 0) {
+			menu();
+            addButton(4, "Leave", !recalling ? cleanupAfterCombat : camp.recallWakeUp);
+            if(player.lust >= 33) {
 				outputText("\n\nFeeling a bit horny, you wonder if you should use them to sate your budding urges before moving on.  Do you rape them?");
-				if(player.gender == 1) simpleChoices("Rape",impGangGetsRapedByMale,"", null,"", null,"", null,"Leave",cleanupAfterCombat);
-				if(player.gender == 2) simpleChoices("Rape",impGangGetsRapedByFemale,"", null,"", null,"", null,"Leave",cleanupAfterCombat);
-				if(player.gender == 3) simpleChoices("Male Rape",impGangGetsRapedByMale,"Female Rape",impGangGetsRapedByFemale,"", null,"", null,"Leave",cleanupAfterCombat);
+                addButtonIfTrue(0, "Male Rape", impGangGetsRapedByMale, "Req. a cock.", player.hasCock());
+                addButtonIfTrue(1, "Female Rape", impGangGetsRapedByFemale, "Req. a vagina.", player.hasVagina());
 			}
-			else cleanupAfterCombat();
+			else outputText("You're not aroused enough to rape them.");
 		}
 		public function impGangGetsRapedByMale():void {
 			clearOutput();
@@ -363,9 +372,13 @@ use namespace CoC;
 			outputText("\n\n");
 
 			outputText("Satisfied, you redress and prepare to continue with your exploration of the cave.");
-			player.orgasm();
-			cleanupAfterCombat();
+            if (!recalling) {
+                player.sexReward("Default","Dick", true, false);
+                cleanupAfterCombat();
+            }
+            else doNext(camp.recallWakeUp);
 		}
+
 		public function impGangGetsRapedByFemale():void {
 			clearOutput();
 			outputText("You walk around to one of the demons and push him onto his back.  Your [armor] falls to the ground around you as you disrobe, looking over your tiny conquest.  A quick ripping motion disposes of his tiny loincloth, leaving his thick demon-tool totally unprotected. You grab and squat down towards it, rubbing the corrupted tool between your legs ");
@@ -385,11 +398,14 @@ use namespace CoC;
 
 			outputText("Sated for now, you rise up, your body dripping gooey whiteness.  Though in retrospect it isn't nearly as much as was pumped into your womb.");
 			if (player.pregnancyIncubation == 0) outputText("  You'll probably get pregnant.");
-			player.orgasm();
-			player.sexReward("cum","Vaginal");
-			if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 50);
-			cleanupAfterCombat();
+            if (!recalling) {
+                player.sexReward("cum","Vaginal");
+                if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 50);
+                cleanupAfterCombat();
+            }
+            else doNext(camp.recallWakeUp);
 		}
+
 		public function loseToImpMob():void {
 			clearOutput();
 			//(HP)
@@ -494,17 +510,20 @@ use namespace CoC;
 				outputText("You barely register his monologue.  You're far too busy cumming hard on the vibrating intruder that's currently giving your stuffed snatch the workout of a lifetime.  Zetaz chuckles at your vacant stare and massages your temples gently, and you feel the touch of his dark magic INSIDE you.  It feels warm and wet, matching the feel of your body's other intrusion.   You try to fight it, and for a moment you feel like you might push the demon out of your mind.  Then your body cums, and your resistance melts away.  You violently thrash against your restraints, caving in to the pleasure as the imp rapes your body and mind as one.\n\n");
 				outputText("The desire to protect your village drips out between your legs, and thoughts of your independence are fucked away into nothing.  It feels good to cum, and your eyes cross when you see the bulge at your master's crotch, indicative of how well you're pleasing him.  It feels so good to obey!  Zetaz suddenly kisses you, and you enthusiastically respond in between orgasms.\n\n");
 				outputText("You gladly live out the rest of your life, fucking and birthing imps over and over as their live-in broodmother.");
-				player.orgasm();
+				player.sexReward("cum");
 				player.HP += 100;
 				//GAME OVER NERD
 				EventParser.gameOver();
 			}
 		}
 		public function defeatZetaz():void {
-			flags[kFLAGS.DEFEATED_ZETAZ]++;
+			if (!recalling) {
+                flags[kFLAGS.DEFEATED_ZETAZ]++;
+                outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+            }
 			clearOutput();
 			//[VICTORY HP]
-			if(monster.HP <= monster.minHP()) outputText("Zetaz sinks down on his knees, too wounded to continue.  He looks up at you with helpless rage in his eyes and asks, \"<i>Are you satisfied now?  Go ahead then, kill me.  My life hasn't been worth living since I met you anyway.</i>\"\n\n");
+			if(!recalling && monster.HP <= monster.minHP()) outputText("Zetaz sinks down on his knees, too wounded to continue.  He looks up at you with helpless rage in his eyes and asks, \"<i>Are you satisfied now?  Go ahead then, kill me.  My life hasn't been worth living since I met you anyway.</i>\"\n\n");
 			//[VICTORY LUST]
 			else outputText("Zetaz sinks down on his knees and fishes his massive, pre-drooling member from under his loincloth.  He looks up at you, nearly crying and moans, \"<i>Why? Ruining my life wasn't enough?  You had to make me jerk off at your feet too?  Just kill me, I don't want to live anymore.</i>\"\n\n");
 
@@ -513,14 +532,21 @@ use namespace CoC;
 			//( or take her place)
 			if(player.cor > 66) outputText(" or take her place");
 			outputText(", you need to find her and bring her down.  What do you do?");
-			outputText("\n\n(Sexually Interrogate, Kill Him, or Offer Safety for Information?)\n");
 			//[Sexual Interrogation] [Brutal Interrogation] [Release for Info]
 			menu();
 			addButton(0, "Sexual", sexualInterrogation).hint("Chain the imp up and sexually interrogate him.");
 			addButton(1, "End Him", endZetaz).hint("Kill the imp. After all, he deserves to be bad-ended.");
 			addButton(2, "Safety", releaseZForInfo).hint("Release the imp after you get the information you need.");
-			//addButton(3, "Rape", rapeZetaz);
 		}
+
+        private function zetazRecallFork():void {
+            if (!recalling) {
+                outputText("\n\n<b>(Key Item Acquired: Zetaz's Map!)</b>");
+                player.createKeyItem("Zetaz's Map",0,0,0,0);
+                cleanupAfterCombat();
+            }
+            else doNext(camp.recallWakeUp);
+        }
 
 		//[Release Zetaz 4 Info Win]
 		public function releaseZForInfo():void {
@@ -548,9 +574,7 @@ use namespace CoC;
 				outputText("You sigh and rub at your temples as the little jerk scrabbles to pack his life away.  In spite of yourself, you actually feel a little bad about the situation");
 			}
 			outputText(".  Zetaz scrambles out the south door, never once looking back at the tattered remnants of his old home.");
-			outputText("\n\n<b>(Key Item Acquired: Zetaz's Map!)</b>");
-			player.createKeyItem("Zetaz's Map",0,0,0,0);
-			cleanupAfterCombat();
+            zetazRecallFork();
 		}
 
 		//[Sexual Interrogation]
@@ -609,9 +633,7 @@ use namespace CoC;
 
 			outputText("You hear the faint scrabble of claws on stone and turn around, alarmed, but there's nothing there.  Not even Zetaz.  You imagine the cum-slicked imp sprinting from his own cave and into the deep woods, and the absurd image brings a smile to your face.\n\n");
 
-			outputText("<b>(Key Item Acquired: Zetaz's Map!)</b>");
-			player.createKeyItem("Zetaz's Map",0,0,0,0);
-			cleanupAfterCombat();
+			zetazRecallFork();
 		}
 
 		//[Tighten Strap]
@@ -638,11 +660,8 @@ use namespace CoC;
 			outputText("You grab his head in both hands and twist violently, popping his neck in an instant.  Glaring down at the corpse of your first demonic foe, you utter, \"<i>Wish granted.</i>\"\n\n");
 			outputText("With him dead, you'll have to see if there's anything here that could lead you to this 'Lethice', so that you can put an end to the ridiculous plague affecting Mareth once and for all.  Perhaps you'll even get to go home, see your family, and have a rather violent talk with certain elders?  You tear through every drawer, pack, and chest in the place, but all you find are loincloths, extraordinairily fetishist porn, and junk.  Desperate for any clue, you even search under the bed and move the furniture, but it doesn't help.  You take your displeasure out on Zetaz's furnishings, slamming them into one another with all your might.\n\n");
 			outputText("The chair in your hands disintegrates, the desk it impacts splinters apart, and you feel a little bit better.  A piece of parchment flutters back and forth in the middle of it all, freed from some hidden compartment and mostly unscathed.  One of the corners is ripped off, and it has a tear half way across, but it's still perfectly legible.  It's a map!  Though the secret diagram is quite crude, it depicts a winding trail that bypasses numerous harpy nests, minotaur caves, and various unrecognizable pitfalls to reach the cloud-shrouded mountain peak.  The drawing loses much of its detail once it gets to the demon fortifications at the top, but it can't be that hard to track down Lethice once you've entered the seat of her power, can it?\n\n");
-			outputText("<b>(Key Item Acquired: Zetaz's Map!)</b>");
-			player.createKeyItem("Zetaz's Map",0,0,0,0);
-			//(ZETAZ IS DEAD)
-			flags[kFLAGS.ZETAZ_DEFEATED_AND_KILLED]++;
-			cleanupAfterCombat();
+			if (!recalling) flags[kFLAGS.ZETAZ_DEFEATED_AND_KILLED]++;
+            zetazRecallFork();
 		}
 
 		//[Lose to Zetaz]
@@ -659,10 +678,13 @@ use namespace CoC;
 				outputText("Zetaz grabs a bottle, uncorks it, and crams it against your lips while you're still too dazed to resist.  He massages your throat to make you swallow the milk-like fluid, and in seconds the skin of your groin splits to form a new, virgin pussy.\n\n");
 				player.createVagina();
 			}
-			//(fork to male/female/herm)
-			if(player.gender == 1) malesZetazOver();
-			if(player.gender == 2) femaleZetazOver();
-			if(player.gender == 3) hermZetazOver();
+            else sceneHunter.selectLossMenu([
+					[0, "Dick", malesZetazOver, "Req. a cock", player.hasCock()],
+					[1, "Vagina", femaleZetazOver, "Req. a vagina", player.hasVagina()],
+					[2, "Both", hermZetazOver, "Req. to be a herm", player.isHerm()]
+				],
+				"He's right - this is sad. And you have no way other that just accept your defeat and become a submissive toy for demons. All you can do right now is ask... no, beg for him to be fucked the way you like more. Maybe he'll listen. Maybe.\n\n"
+			);
 		}
 
 		public function femaleZetazOver():void {
@@ -736,11 +758,8 @@ use namespace CoC;
 			outputText("Zetaz grunts and bottoms out, punching his tip into your cervix and blasting a thick rope of seed into your empty, ready womb.  You climax immediately from the act, and moan into the dog-cock that fills your mouth, using it like a ballgag.  There wasn't any natural buildup, just spunk hitting your womb and then a climax strong enough to make you see white.  Your " + vaginaDescript(0) + " clenches tightly, hugging and squeezing Zetaz's potent prick as it dumps more and more of his corrupt demon-spoo into your fertile breeding grounds.  The thick goop tingles in a way that makes you sure you'll be giving him a litter of horny little sons before long.  Maybe they'll fuck you like they do Vala?\n\n");
 
 			outputText("The knot in your mouth pops out, and your belly gurgles, feeling very full.  The second imp must have come while his master was fertilizing your pussy.  You sigh and sag against your restraints as Zetaz steps away and lines begin to form.  In a few seconds, you've got a rubbery, spined cat-cock twitching inside your cunt, and are wrapping your sensitive lips around a horse-cock.  This must be what nirvana feels like.");
-			player.orgasm();
-			dynStats("cor", 50);
-
-			//[Epilogue]
-			doNext(zetazBadEndEpilogue);
+			player.sexReward("cum", "Vaginal");
+			doNext(zetazBadEndEpilogue_female);
 		}
 
 		//[HERMS]
@@ -822,9 +841,9 @@ use namespace CoC;
 			outputText("Glancing down at him, you remark that the little bastard is quite handsome for an imp.  With his perfect jawline and marvelous cock, you find yourself hard-pressed to justify resisting him so long ago.    How did you resist his charms?  His cock feels soooo fucking good inside you.  With an explosive burst, " + sMultiCockDesc() + " erupts again, squirting thick arousal and submission into the milker while your " + vaginaDescript(0) + " wrings Zetaz's nodule-ringed cock incessantly.  His turgid member bulges obscenely, and he starts to cum inside you, squirting master's thick seed into your breeding hole.  Breeding hole?  Why would you call your slutty fuck-hole a breeding hole?  Something seems off about that last thought, but you can't place it.\n\n");
 
 			outputText("Your master finishes squirting inside you and withdraws, pawing at your milk-leaking teats for a moment as you continue to shudder and cum like a good bitch.  Wow, you really are a good bitch aren't you?  Pride wells in your breast as the imp's chanting reaches a crescendo and a relaxed smile forms on your [face].  Yes, you're a good, breeding bitch.   Master is smiling up at you and you know you've made him feel very happy.  Hopefully he'll come back soon and fuck you some more.  Your pussy feels so empty without him.");
-			player.orgasm();
-			dynStats("cor", 50);
-			doNext(zetazBadEndEpilogue);
+			player.sexReward("cum", "Vaginal");
+			player.sexReward("Default", "Dick", true, false);
+			doNext(zetazBadEndEpilogue_herm);
 		}
 
 		//M-Males – drugged & pegged, slowly have their memories erased/brainwashed.
@@ -893,9 +912,8 @@ use namespace CoC;
 			outputText("Before he gets started, Zetaz picks up another needle of GroPlus and jams it into your clit, making the love-button swell up to the size of a large, veiny prick.  He strokes it hard and slides himself into you, spearing you while you're distracted by the sensations of your over-sized buzzer.   The sudden penetration makes your eyes cross and your tongue loll out from its ring-gag prison.  You moan and pant, shaking against him, still dripping the last of your male orgasms from your tiny, under-sized dick onto your long, thick clit.\n\n");
 
 			outputText("Zetaz laughs and pumps at the huge button; even though it's quite lacking in femininity, it still makes you squeal like a little girl.  Your [legs] shake wildly, trembling against the wall while your juicy snatch gets fucked good and hard and the mixed jism boils out around the imp lord's massive, swollen member.   The fucking is hard, fast, and so brutal that you get off multiple times in the span of a few minutes, though the imps don't even try to dose you for each one.  Zetaz slaps your [ass] a few times before he pushes himself to the hilt, stretching your well-fucked cunt to its limits.  He twitches and grunts, and a blast of gooey heat suffuses your core with corrupt pleasure.  Somehow you know, just know, that you'll be pregnant from this, but you have a hard time caring.  It feels too good...\n\n");
-
-			dynStats("lib", 100, "sen", 100, "lus=", 1000, "cor", 50);
-			doNext(zetazBadEndEpilogue);
+			player.sexReward("cum", "Default");
+			doNext(zetazBadEndEpilogue_male);
 		}
 		//BAD ENDS
 		public function badEndValaNumber1():void {
@@ -984,7 +1002,7 @@ use namespace CoC;
 				outputText("Over the next minute your head clears, and your strength returns.  You push yourself up on something hard, then glance down and realize you washed up next to the skeleton!  The bleached bone leers up at you knowingly, and everything you can see is covered in a thick layer of your spooge.  " + SMultiCockDesc() + " is still dripping more spunk.  Clearly your ruined orgasm didn't pump it ALL out.  You look down at the rapier and pick it up out of your mess, examining it.  The blade shines keenly, and the sword is balanced to perfection.  Though you succumbed to the same fate as its owner, your warped body saved you from sharing his fate.  Thankfully potential pods that carpet the floor don't even twitch at you.  Perhaps your orgasm was enough to sate them all?  Or maybe they've learned their lesson.");
 				//(switch from loss to victory, sword loot)
 				monster.lust = monster.maxLust();
-				player.orgasm();
+			    player.sexReward("Default", "Default");
 				flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED]++;
 				cleanupAfterCombat();
 			}
@@ -995,7 +1013,7 @@ use namespace CoC;
 				outputText("Over the next minute your head clears and your strength returns.  You push yourself up on something hard, then glance down and realize you washed up next to the skeleton!  The bleached bone leers up at you knowingly, and everything you can see is covered in a thick layer of slime and milk.  Your " + breastDescript(0) + " are still pouring out milk.  Clearly you weren't even close to done with your pleasure-induced lactation.  You look down at the rapier and pick it up out of your mess, examining it.  The blade shines keenly, and the sword is balanced to perfection.  Though you succumbed to the same fate as its owner, your warped body saved you from sharing his fate.  Thankfully potential pods that carpet the floor don't even twitch at you.  Perhaps your milk was enough to sate them all?  Or maybe they've learned their lesson.");
 				//(switch from loss to victory, sword loot)
 				monster.lust = monster.maxLust();
-				player.orgasm();
+			    player.sexReward("Default", "Default");
 				flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED]++;
 				cleanupAfterCombat();
 			}
@@ -1008,7 +1026,7 @@ use namespace CoC;
 				outputText("You walk over to the skeleton and get a good look at it.  The bleached bone leers up at you knowingly, and its jaw is locked in a rictus grin.  Looking down at the rapier, you decide to pick it up out of your mess and examine it.  The blade shines keenly, and the sword is balanced to perfection.  Though you succumbed to the same fate as its owner, your genderless body must have saved you from sharing his fate.  The potential pods that carpet the floor don't even twitch at you, and you breathe a silent prayer of thanks while a dark part of you curses.");
 				monster.lust = monster.maxLust();
 				monster.XP = 1;
-				player.orgasm();
+			    player.sexReward("Default", "Default");
 				flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED]++;
 				cleanupAfterCombat();
 			}
@@ -1041,38 +1059,37 @@ use namespace CoC;
 			}
 		}
 
-		public function zetazBadEndEpilogue():void {
+        public function zetazBadEndEpilogue_female():void {
 			clearOutput();
-			if (player.isAlraune())
-			{
-				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
-			}
-			else {
-				if (player.gender == 2) {
-					outputText("The once-champion, [name] was raped repeatedly by every imp that survived her initial assault.  Her mind never recovered from the initial orgy, and she found herself happy to be named 'Fuck-cow'.  She quickly became a favorite of Zetaz's ever growing brood, and surprised them all with her fertility and rapidly decreasing incubation times.  Within a few months, she was popping out litters of tiny masters even faster than Vala.  Within a year, her body was so well trained and her womb so stretched that she could keep multiple litters growing within at all times.\n\n");
+            outputText("The once-champion, [name] was raped repeatedly by every imp that survived her initial assault.  Her mind never recovered from the initial orgy, and she found herself happy to be named 'Fuck-cow'.  She quickly became a favorite of Zetaz's ever growing brood, and surprised them all with her fertility and rapidly decreasing incubation times.  Within a few months, she was popping out litters of tiny masters even faster than Vala.  Within a year, her body was so well trained and her womb so stretched that she could keep multiple litters growing within at all times.\n\n");
+            outputText("It was rare for Fuck-cow's cunt or mouth to be empty, and she delighted in servicing any male she was presented with.  Her masters even captured bee-girls, so that fuck-cow's ass could be kept as pregnant as her belly.  Fuck-cow came to love her masters dearly, and with her constantly growing ability to birth imps, she was able to incubate enough troops for Zetaz to challenge Lethice's armies.  The imps never managed to overthrow the old demon lord, but the land was eventually divided in half, split between two growing demonic empires.");
+            player.sexReward("cum", "Vaginal");
+			EventParser.gameOver();
+        }
 
-					outputText("It was rare for Fuck-cow's cunt or mouth to be empty, and she delighted in servicing any male she was presented with.  Her masters even captured bee-girls, so that fuck-cow's ass could be kept as pregnant as her belly.  Fuck-cow came to love her masters dearly, and with her constantly growing ability to birth imps, she was able to incubate enough troops for Zetaz to challenge Lethice's armies.  The imps never managed to overthrow the old demon lord, but the land was eventually divided in half, split between two growing demonic empires.");
-				} else if (player.gender == 3) {
-					//[Epilogue]
-					outputText("The champion was fucked and brainwashed repeatedly for a few more days until Zetaz was sure she understood her place in the world.  Once rendered completely obedient, they released her from her bindings.  It was time she was turned over to Lethice.  ");
-					if (player.wings.type != Wings.BAT_LIKE_TINY || player.wings.type != Wings.BAT_LIKE_LARGE) outputText("Zetaz gave her one of the weaker imps to penetrate and taught her to fly with her new, demonic wings.  ");
-					else outputText("Zetaz gave her one of the weaker imps to penetrate during the journey.  ");
-					outputText("With preparations complete, Zetaz, the champion, and a few dozen imps flew to the mountain peak.\n\n");
+        public function zetazBadEndEpilogue_herm():void {
+			clearOutput();
+            outputText("The champion was fucked and brainwashed repeatedly for a few more days until Zetaz was sure she understood her place in the world.  Once rendered completely obedient, they released her from her bindings.  It was time she was turned over to Lethice.  ");
+            if (player.wings.type != Wings.BAT_LIKE_TINY || player.wings.type != Wings.BAT_LIKE_LARGE) outputText("Zetaz gave her one of the weaker imps to penetrate and taught her to fly with her new, demonic wings.  ");
+            else outputText("Zetaz gave her one of the weaker imps to penetrate during the journey.  ");
+            outputText("With preparations complete, Zetaz, the champion, and a few dozen imps flew to the mountain peak.\n\n");
+            outputText("The champion was presented to Lethice, and the demonic mistress was so pleased with Zetaz's gift that she gave him a pair of nubile slave-girls and promoted him over a small army of his own kind.  Once the imps departed, Lethice put the champion through her paces, using her as a fucktoy whenever the mood took her.  The rest of the time the champion was kept bound and unable to orgasm, tortured with unholy levels of arousal, but she didn't mind.  When Lethice allowed her to cum, the champion's orgasms were long and intense enough for her to love her mistress in spite of having to be so pent up.");
+            player.sexReward("Default", "Dick", true, false);
+            player.sexReward("cum", "Vaginal");
+            EventParser.gameOver();
+        }
 
-					outputText("The champion was presented to Lethice, and the demonic mistress was so pleased with Zetaz's gift that she gave him a pair of nubile slave-girls and promoted him over a small army of his own kind.  Once the imps departed, Lethice put the champion through her paces, using her as a fucktoy whenever the mood took her.  The rest of the time the champion was kept bound and unable to orgasm, tortured with unholy levels of arousal, but she didn't mind.  When Lethice allowed her to cum, the champion's orgasms were long and intense enough for her to love her mistress in spite of having to be so pent up.");
-				} else {
-					outputText("The imps never released the champion from that chamber after that.  'He' gave birth to a healthy litter of imps a few weeks later, and the hormones from the pregnancy ");
-					if (player.biggestTitSize() < 1) outputText("created a decent set of chest-bumps.");
-					else outputText("swelled her already impressive rack with milk.");
-					outputText("  After that, the imps really took a liking to her, and she was let down from her restraints.  She never got much chance to get up though; she was well and truly fucked at every opportunity.  She was already hooked.  With her incredible libido and the constant fucking, staying was the easy choice.\n\n");
+        public function zetazBadEndEpilogue_male():void {
+			clearOutput();
+            outputText("The imps never released the champion from that chamber after that.  'He' gave birth to a healthy litter of imps a few weeks later, and the hormones from the pregnancy ");
+            if (player.biggestTitSize() < 1) outputText("created a decent set of chest-bumps.");
+            else outputText("swelled her already impressive rack with milk.");
+            outputText("  After that, the imps really took a liking to her, and she was let down from her restraints.  She never got much chance to get up though; she was well and truly fucked at every opportunity.  She was already hooked.  With her incredible libido and the constant fucking, staying was the easy choice.\n\n");
+            outputText("After a few months the champion started to become acclimated to her new life, and began birthing imps in larger broods with shorter gestations.  She had become the ideal broodmother, and her worldview shrank down to two powerful priorities: acquiring cum, and birthing.");
+            player.sexReward("cum", "Default");
+            EventParser.gameOver();
+        }
 
-					outputText("After a few months the champion started to become acclimated to her new life, and began birthing imps in larger broods with shorter gestations.  She had become the ideal broodmother, and her worldview shrank down to two powerful priorities: acquiring cum, and birthing.");
-				}
-				player.orgasm();
-				player.HP += 150;
-				EventParser.gameOver();
-			}
-		}
 		//ROOMS
 		public function roomEntrance():void {
 			dungeonLoc = DUNGEON_CAVE_ENTRANCE;
@@ -1161,12 +1178,10 @@ use namespace CoC;
 					outputText("It isn't until you get closer that you notice the large, dragon-fly wings attached to her back and the ephemeral glow of sunlight faintly radiating from her pale skin. If the girl wasn't almost 4' tall, you'd swear she was a fairy, like the ones you've met in the forest. If the cum-clogged drain in the center of the room is any indication, the imps must be using her for their perverted desires. You begin to get an appreciation for what she's endured when you get near enough to see the small, black marks staining her luminance. On her right shoulder blade, the imps have tattooed \"pussy\" and on the left, \"ass.\" All along her back, the imps have tattooed two columns of hash marks, from her shoulders all the way down her ribs, over her ass, down her legs, and even onto the soles of her feet.\n\n");
 					outputText("You step around her and are startled to see that while the fey girl is whip-thin, her breasts are disproportionately huge. They'd be at least a DD-cup on a normal human, but for her height and body type, they're practically as large as her head. They jiggle at her slow, uneven breathing, tiny drops of milk bubbling at her nipples with every heartbeat. If she weren't chained to the ceiling, you suspect she wouldn't even be able to stand under her own power. Her eyes are open, but she's staring blankly ahead, unaware of the world around her, pupils constricted to pinpricks amid the ocean of her dulled pink irises. Like this, she's no threat to anybody. You suppose you could let her go, though it's unclear if she's self-aware enough to even move. Alternately, you could blow off a little steam.");
 					//[Free] [Use] [Leave]
-					if (player.gender > 0) {
-						addButton(0, "Free", SceneLib.vala.freeValazLooseCoochie)
-					}
-					if (player.lust >= 33 && SceneLib.shouldraFollower.followerShouldra()) {
+					addButton(0, "Free", SceneLib.vala.freeValazLooseCoochie);
+					if (SceneLib.shouldraFollower.followerShouldra())
 						addButton(1, "ShouldraVala", SceneLib.shouldraFollower.shouldraMeetsCorruptVala);
-					}
+                    else addButtonDisabled(1, "???", "Req. to have a certain ghostly follower with you.");
 				}
 				//Zetaz defeated
 				else {

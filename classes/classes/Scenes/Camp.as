@@ -4799,15 +4799,25 @@ public function rebirthFromBadEnd():void {
 		if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && flags[kFLAGS.KAIJU_COCK] == 1)
 			addButton(9, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus).hint("Venus discovers her new cock.");
 
-		//if (flags[kFLAGS.D3_DISCOVERED] > 0)
 		addButton(13, "Dungeons", recallScenes_dungeons);
 		addButton(14, "Wake Up", recallWakeUp);
 	}
 
 	public function recallScenes_dungeons():void {
 		menu();
-		addButton(0, "Stronghold", recallScenes_d3);
+        if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(0, "Deep Cave", recallScenes_deepCave);
+		if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(1, "Stronghold", recallScenes_d3);
 		addButton(14, "Back", recallScenes);
+	}
+
+	public function recallScenes_deepCave():void {
+		menu();
+		//Doppel
+		if (flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED])
+			addButton(0, "Imp Horde", SceneLib.d3.deepcave.impGangVICTORY).hint("I'll never stop at one. YOU'LL TAKE THEM ALL ON!");
+        if (flags[kFLAGS.DEFEATED_ZETAZ])
+			addButton(0, "Zetaz", SceneLib.d3.deepcave.defeatZetaz).hint("Maybe the little asshole should have been tortured a bit more?");
+		addButton(14, "Back", recallScenes_dungeons);
 	}
 
 	public function recallScenes_d3():void {
@@ -4827,6 +4837,7 @@ public function rebirthFromBadEnd():void {
 		//Lethice
 		if (flags[kFLAGS.LETHICE_DEFEATED] > 0)
 			addButton(4, "Lethice", SceneLib.d3.lethice.defeated, false).hint("While you can't make her your eternal slave, you can punish her for her arrogance in your memories as much as you want.");
+
 		addButton(14, "Back", recallScenes_dungeons);
 	}
 
