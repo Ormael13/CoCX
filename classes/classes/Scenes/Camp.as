@@ -3032,8 +3032,7 @@ public class Camp extends NPCAwareContent{
 		startCombat(new TrainingDummy());
 	}
 
-	private function SparrableNPCsMenu():void {
-		clearOutput();
+	private function SparrableNPCsMenuText():void {
 		outputText("Champion party composition: [name]");
 		if (player.hasPerk(PerkLib.BasicLeadership)) {
 			if (flags[kFLAGS.PLAYER_COMPANION_1] != "") outputText(", " + flags[kFLAGS.PLAYER_COMPANION_1]);
@@ -3062,6 +3061,12 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.LunaOff)) outputText("\nLuna: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.TedOff)) outputText("\nDragon Boi: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.SpoodersOff)) outputText("\Spooders: <font color=\"#800000\"><b>Disabled</b></font>");
+		if (player.hasStatusEffect(StatusEffects.CalluOff)) outputText("\nCallu (Otter girl): <font color=\"#800000\"><b>Disabled</b></font>");
+		if (player.hasStatusEffect(StatusEffects.VenusOff)) outputText("\nVenus (Gigantic Turtle): <font color=\"#800000\"><b>Disabled</b></font>");
+	}
+	private function SparrableNPCsMenu():void {
+		clearOutput();
+		SparrableNPCsMenuText();
 		menu();
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) addButton(10, "Train", NPCsTrain);
@@ -3075,8 +3080,17 @@ public class Camp extends NPCAwareContent{
 		addButton(5, "Luna", toggleLunaMenu).hint("Enable or Disable Luna. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(6, "DragonBoi", toggleTedMenu).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
 		//since this section is WIP anyway, let her be here too, lol
-        addButton(7, "Spooders", toggleSpoodersMenu).hint("Enable or Disable spooder followers. This will remove them ONLY from enc table.");
+        addButton(12, "Spooders", toggleSpoodersMenu).hint("Enable or Disable spooder followers. This will remove them ONLY from enc table.");
+		addButton(13, "Others", SparrableNPCsMenuOthers).hint("Out of camp encounters only.");
 		addButton(14, "Back", campActions);
+	}
+	private function SparrableNPCsMenuOthers():void {
+		clearOutput();
+		SparrableNPCsMenuText();
+		menu();
+		addButton(0, "Callu", toggleCalluMenu).hint("Enable or Disable Callu (Otter girl). This will remove her from enc table.");
+		addButton(1, "Venus", toggleVenusMenu).hint("Enable or Disable Venus (Gigantic Turtle). This will remove her from enc table.");
+		addButton(14, "Back", SparrableNPCsMenu);
 	}
 
 	private function NPCsTrain():void {
@@ -3084,7 +3098,6 @@ public class Camp extends NPCAwareContent{
 		flags[kFLAGS.SPARRABLE_NPCS_TRAINING] = 2;
 		doNext(SparrableNPCsMenu);
 	}
-
 	private function NPCsRelax():void {
 		outputText("\n\nPlaceholder text about telling NPC's to relax.");
 		flags[kFLAGS.SPARRABLE_NPCS_TRAINING] = 1;
@@ -3096,31 +3109,26 @@ public class Camp extends NPCAwareContent{
 		else player.createStatusEffect(StatusEffects.ChiChiOff, 0, 0, 0, 0);
 		SparrableNPCsMenu();
 	}
-
 	private function toggleDianaMenu():void {
 		if (player.hasStatusEffect(StatusEffects.DianaOff)) player.removeStatusEffect(StatusEffects.DianaOff);
 		else player.createStatusEffect(StatusEffects.DianaOff, 0, 0, 0, 0);
 		SparrableNPCsMenu();
 	}
-
 	private function toggleDivaMenu():void {
 		if (player.hasStatusEffect(StatusEffects.DivaOff)) player.removeStatusEffect(StatusEffects.DivaOff);
 		else player.createStatusEffect(StatusEffects.DivaOff, 0, 0, 0, 0);
 		SparrableNPCsMenu();
 	}
-
 	private function toggleElectraMenu():void {
 		if (player.hasStatusEffect(StatusEffects.ElectraOff)) player.removeStatusEffect(StatusEffects.ElectraOff);
 		else player.createStatusEffect(StatusEffects.ElectraOff, 0, 0, 0, 0);
 		SparrableNPCsMenu();
 	}
-
 	private function toggleEtnaMenu():void {
 		if (player.hasStatusEffect(StatusEffects.EtnaOff)) player.removeStatusEffect(StatusEffects.EtnaOff);
 		else player.createStatusEffect(StatusEffects.EtnaOff, 0, 0, 0, 0);
 		SparrableNPCsMenu();
 	}
-
 	private function toggleLunaMenu():void {
 		if (player.hasStatusEffect(StatusEffects.LunaOff)) player.removeStatusEffect(StatusEffects.LunaOff);
 		else {
@@ -3129,7 +3137,6 @@ public class Camp extends NPCAwareContent{
 		}
 		SparrableNPCsMenu();
 	}
-
 	private function toggleTedMenu():void {
 		if (player.hasStatusEffect(StatusEffects.TedOff)) player.removeStatusEffect(StatusEffects.TedOff);
 		else player.createStatusEffect(StatusEffects.TedOff, 0, 0, 0, 0);
@@ -3140,6 +3147,17 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.SpoodersOff)) player.removeStatusEffect(StatusEffects.SpoodersOff);
 		else player.createStatusEffect(StatusEffects.SpoodersOff, 0, 0, 0, 0);
 		SparrableNPCsMenu();
+	}
+
+	private function toggleCalluMenu():void {
+		if (player.hasStatusEffect(StatusEffects.CalluOff)) player.removeStatusEffect(StatusEffects.CalluOff);
+		else player.createStatusEffect(StatusEffects.CalluOff, 0, 0, 0, 0);
+		SparrableNPCsMenuOthers();
+	}
+	private function toggleVenusMenu():void {
+		if (player.hasStatusEffect(StatusEffects.VenusOff)) player.removeStatusEffect(StatusEffects.VenusOff);
+		else player.createStatusEffect(StatusEffects.VenusOff, 0, 0, 0, 0);
+		SparrableNPCsMenuOthers();
 	}
 
 	private function swimInStream():void {

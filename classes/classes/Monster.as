@@ -600,7 +600,7 @@ import flash.utils.getQualifiedClassName;
 			temp *= multimax;
 			temp *= stats_multi_based_on_misc();
 			temp = Math.round(temp);
-			if ((hasPerk(PerkLib.EnemyTrueDemon) && !hasPerk(PerkLib.Phylactery)) || (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience))) temp = 0;
+			if ((hasPerk(PerkLib.EnemyTrueDemon) && (!hasPerk(PerkLib.Phylactery) || !hasPerk(PerkLib.EnemyTrueAngel))) || (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience))) temp = 0;
 			return temp;
 		}
 

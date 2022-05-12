@@ -50,7 +50,7 @@ use namespace CoC;
 				return;
 			}
 			//Belisa
-			if (BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3 && BelisaFollower.BelisaEncounternum >= 1 && rand(5) == 0) {
+			if (BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3 && BelisaFollower.BelisaEncounternum >= 2 && rand(5) == 0) {
 				SceneLib.belisa.subsequentEncounters();
 				return;
 			}
@@ -66,7 +66,7 @@ use namespace CoC;
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
-			if (player.exploredLake % 15 == 0) {
+			if (player.exploredLake % 15 == 0 && !player.hasStatusEffect(StatusEffects.CalluOff)) {
 				calluScene.ottahGirl();
 				return;
 			}
