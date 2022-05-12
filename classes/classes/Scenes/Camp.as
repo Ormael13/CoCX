@@ -4823,17 +4823,11 @@ public function rebirthFromBadEnd():void {
 
 	public function recallScenes_dungeons():void {
 		menu();
-        if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(0, "Deep Cave", recallScenes_deepCave);
-		if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(1, "Stronghold", recallScenes_d3);
-		addButton(14, "Back", recallScenes);
-	}
-
-	public function recallScenes_desertCave():void {
-		menu();
-		//Doppel
 		if (flags[kFLAGS.SANDWITCH_MOB_DEFEATED])
 			addButton(0, "SandWitchMob", SceneLib.dungeons.desertcave.yoYouBeatUpSomeSandWitchesYOUMONSTER).hint("Punish some sand witches for attacking you.");
-
+		if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1, "Deep Cave", recallScenes_deepCave);
+		if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(2, "Stronghold", recallScenes_d3);
+		addButton(14, "Back", recallScenes);
 	}
 
 	public function recallScenes_deepCave():void {

@@ -1799,6 +1799,16 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2019] = 0; // Reclaim lethicite flag AGAIN.
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.012;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.013) {
+				//resetting Sanura riddle flags
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0842] = 0;
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0843] = 0;
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0844] = 0;
+				//autofix
+				if (player.statStore.hasBuff("Tribulation Vestiges"))
+					player.statStore.removeBuffs("Tribulation Vestiges");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.013;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;
@@ -1954,4 +1964,4 @@ public class SaveUpdater extends NPCAwareContent {
 	}
 
 }
-}
+}
