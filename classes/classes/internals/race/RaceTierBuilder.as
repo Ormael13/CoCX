@@ -25,6 +25,12 @@ public class RaceTierBuilder {
 	
 	private static var currentBuilder:RaceTierBuilder = null;
 	
+	public static function ensureEndCalled():void {
+		if (currentBuilder != null) {
+			trace('[ERROR] Race tier '+currentBuilder.name+" end() was not called.");
+		}
+	}
+	
 	public function RaceTierBuilder(
 			race: Race,
 			tierNumber: int,
@@ -32,9 +38,7 @@ public class RaceTierBuilder {
 			maleName: String,
 			femaleName: String
 	) {
-		if (currentBuilder != null) {
-			trace('[ERROR] Race tier '+currentBuilder.name+" end() was not called.");
-		}
+		ensureEndCalled();
 		currentBuilder = this;
 		this.race = race;
 		this.tierNumber = tierNumber;

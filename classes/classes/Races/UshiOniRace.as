@@ -47,6 +47,7 @@ public class UshiOniRace extends Race{
 					"wis.mult": -0.40,
 					"lib.mult": +0.95
 				})
+				.end();
 	}
 }
 }

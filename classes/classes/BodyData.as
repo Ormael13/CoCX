@@ -2,6 +2,7 @@ package classes {
 import classes.BodyParts.*;
 import classes.internals.EnumValue;
 import classes.internals.Utils;
+import classes.lists.BreastCup;
 import classes.lists.Gender;
 
 /**
@@ -34,6 +35,7 @@ public class BodyData {
 	public function get antennaeType():int {
 		return data[SLOT_ANTENNAE_TYPE];
 	}
+	
 	public static const SLOT_ARM_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_ARM_TYPE, "ARM_TYPE", {
 		name:"arms",
@@ -44,6 +46,18 @@ public class BodyData {
 	public function get armType():int {
 		return data[SLOT_ARM_TYPE];
 	}
+	
+	public static const SLOT_BIGGEST_TIT_SIZE:int = _slotid++;
+	EnumValue.add(Slots,SLOT_BIGGEST_TIT_SIZE, "BIGGEST_TIT_SIZE", {
+		name:"chest",
+		nameFn: function(value:int):String {
+			return Appearance.breastCup(value);
+		}
+	});
+	public function get biggestTitSize():int {
+		return data[SLOT_BIGGEST_TIT_SIZE];
+	}
+	
 	public static const SLOT_EAR_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_EAR_TYPE, "EAR_TYPE", {
 		name:"ears",
@@ -366,6 +380,7 @@ public class BodyData {
 		
 		data[SLOT_ANTENNAE_TYPE] = player.antennae.type;
 		data[SLOT_ARM_TYPE] = player.arms.type;
+		data[SLOT_BIGGEST_TIT_SIZE] = player.biggestTitSize();
 		data[SLOT_EAR_TYPE] = player.ears.type;
 		data[SLOT_EYE_TYPE] = player.eyes.type;
 		data[SLOT_EYE_COLOR] = player.eyes.colour;
@@ -395,6 +410,7 @@ public class BodyData {
 		data[SLOT_TAIL_COUNT] = player.tail.count;
 		data[SLOT_VAGINA_TYPE] = player.vaginaType();
 		data[SLOT_WING_TYPE] = player.wings.type;
+		
 		data[SLOT_GENDER]    = player.gender;
 		data[SLOT_HEIGHT]    = player.tallness;
 	}

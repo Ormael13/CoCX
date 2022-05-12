@@ -31,6 +31,10 @@ public class RaceScoreBuilder {
 	public function noAntennae(score:int):RaceScoreBuilder {
 		return antennaeType(Antennae.NONE, score);
 	}
+	public function biggestTitSize(size:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_BIGGEST_TIT_SIZE, size, score, failScore, customName);
+		return this;
+	}
 	public function earType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_EAR_TYPE, type, score, failScore, customName);
 		return this;
@@ -105,6 +109,13 @@ public class RaceScoreBuilder {
 	public function legType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_LEG_TYPE, type, score, failScore, customName);
 		return this;
+	}
+	public function isTaur(score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		return customRequirement("legs",customName||"is taur",
+				function (body:BodyData):Boolean {
+					return body.isTaur;
+				},
+				score, failScore);
 	}
 	public function rearType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_REAR_TYPE, type, score, failScore, customName);
@@ -205,6 +216,19 @@ public class RaceScoreBuilder {
 				"stats",
 				"$value corruption",
 				function (body:BodyData):* { return body.player.cor},
+				null,
+				value,
+				score,
+				failScore,
+				customName
+				)
+		return this;
+	}
+	public function breastRowCount(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addOperatorRequirement(
+				"breasts",
+				value === 1 ? "$value breast row" : "$value breast rows",
+				function (body:BodyData):* { return body.player.breastRows.length},
 				null,
 				value,
 				score,
@@ -347,7 +371,10 @@ public class RaceScoreBuilder {
 	public function mutationPerks(perks:/*PerkType*/Array, scorePerPerk:int=+1):RaceScoreBuilder {
 		return customScoreRequirement(
 				"perk",
-				"Mutations",
+				"Mutations (" +
+				perks.length + " total" +
+				(scorePerPerk == 1 ? "" : "+" + scorePerPerk + " each") +
+				")",
 				RaceUtils.hasAnyPerkFn(perks),
 				function (body:BodyData):int {
 					var score:int = 0;

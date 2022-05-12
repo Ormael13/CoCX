@@ -4707,11 +4707,11 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		var maxIntCapForFail:Number = player.inte;
 		var luckyNumber:Number = rand(7);
-		if (player.poltergeistScore() >= 12) {
+		if (player.isRace(Races.POLTERGEIST,2)) {
 			maxIntCapForFail += Math.round(player.inte * 0.5);
 			luckyNumber += 3 + rand(4);
 		}
-		if (player.poltergeistScore() >= 18) {
+		if (player.isRace(Races.POLTERGEIST,3)) {
 			maxIntCapForFail += player.inte;
 			luckyNumber += 6 + rand(7);
 		}
@@ -4729,11 +4729,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Success!
 		else if (player.inte + luckyNumber - monster.armorMDef >= monster.inte) {
-			if (player.poltergeistScore() >= 18) {
+			if (player.isRace(Races.POLTERGEIST,3)) {
 				outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into your opponent’s frame. Before they can regain the initiative, you take control of their entire body, though still facing a form of resistance, making you unable to take certain drastic actions, though there is one tried method that definitely works, based on your experience. ");
 				outputText("With great vigor you begin masturbating as you see yourself most fit with your current temporary host, rubbing your adversary’s body all over for several seconds before you’re finally thrown out. Recorporealizing, you see a puddle of fluids around your enemy, and know your efforts were quite more than successful. You feel as if your own lust has subsided somewhat.");
 			}
-			else if (player.poltergeistScore() >= 12) {
+			else if (player.isRace(Races.POLTERGEIST,2)) {
 				outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into your opponent’s frame. Before they can regain the initiative, you take control of both of their arms, vigorously masturbating with both hands for several seconds before you’re finally thrown out. ");
 				outputText("Recorporealizing, you notice your enemy’s blush and arousal, and know your efforts were definitely successful.");
 			}
@@ -4746,7 +4746,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.EromancyExpert)) damage *= 1.5;
-			if (player.poltergeistScore() >= 18) {
+			if (player.isRace(Races.POLTERGEIST,3)) {
 				damage += Math.round(player.lust * 0.1);
 				player.lust -= Math.round(player.lust * 0.1);
 			}

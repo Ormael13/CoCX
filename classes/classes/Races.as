@@ -2,13 +2,14 @@ package classes {
 import classes.BodyParts.*;
 import classes.Races.*;
 import classes.internals.Utils;
+import classes.internals.race.RaceTierBuilder;
 
 public class Races {
 	
 	private static const raceClass:Class = Race;
 	
 	public static const HUMAN:Race = new Race("Human",1, "humanScore", 1);
-	public static const CAT:Race = new Race("Cat",2,"catScore", 8);
+	public static const CAT:Race = new CatRace(2);
 	public static const NEKOMATA:Race = new Race("Nekomata",3,"nekomataScore", 10);
 	public static const CHESHIRE:Race = new Race("Cheshire",4, "cheshireScore", 11);
 	public static const HELLCAT:Race = new Race("Hellcat",5, "hellcatScore", 10);
@@ -82,13 +83,13 @@ public class Races {
 	public static const MAGMASLIME:Race = new MagmaSlimeRace(73);
 	public static const DARKSLIME:Race = new DarkSlimeRace(74);
 	public static const JIANGSHI:Race = new JiangshiRace(75);
-	public static const POLTERGEIST:Race = new Race("Poltergeist",76, "poltergeistScore", 6);
+	public static const POLTERGEIST:Race = new PoltergeistRace(76);
 	public static const BANSHEE:Race = new Race("Banshee",77, "bansheeScore", 4);
 	public static const MELKIE:Race = new Race("Melkie",78, "melkieScore", 18);
 	public static const EASTERBUNNY:Race = new Race("Easter Bunny",79, "easterbunnyScore", 12);
 	public static const CENTIPEDE:Race = new Race("Centipede",80, "centipedeScore", 8);
 	public static const FROSTWYRM:Race = new Race("Frost Wyrm",81, "frostWyrmScore", 18);
-	public static const CANCER:Race = new Race("Cancer",82, "cancerScore", 13);
+	public static const CANCER:Race = new CancerRace(82);
 	public static const USHIONNA:Race = new UshiOniRace(83);
 	public static const FAIRY:Race = new Race("Fairy",84,"fairyScore", 23);
 	public static const GREMLIN:Race = new Race("Gremlin",85,"gremlinScore", 15);
@@ -108,13 +109,14 @@ public class Races {
 	public static const ANGEL:Race = new AngelRace(99);
 	public static const APOPHIS:Race = new Race("Apophis",100, "apophisScore", 23);
 	public static const CYCLOP:Race = new Race("Cyclop",101, "cyclopScore", 12);
-	public static const ALICORN:Race = new Race("Alicorn",102, "alicornScore", 8);
+	public static const ALICORN:Race = new AlicornRace(102);
 	
 	function Races() {
 	}
 	
 	public static function load():void {
 		// all loading is done in static inits, here we just sort them by name
+		RaceTierBuilder.ensureEndCalled();
 		
 		Race.AllRacesByName = Race.AllRaces.slice()
 				.filter(function(e:Race,...rest:Array):Boolean {

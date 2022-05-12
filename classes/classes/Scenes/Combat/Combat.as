@@ -8780,7 +8780,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.ManaAffinityIV)) multi += 0.25;
         if (player.hasPerk(PerkLib.ManaAffinityV)) multi += 0.25;
         if (player.hasPerk(PerkLib.ManaAffinityVI)) multi += 0.25;
-        if (player.alicornScore() >= 12) multi += 0.1;
+        if (player.isRace(Races.ALICORN,2)) multi += 0.1;
         if (player.kitsuneScore() >= 5) {
             if (player.kitsuneScore() >= 10) multi += 1;
             else multi += 0.5;
@@ -10054,7 +10054,7 @@ public class Combat extends BaseContent {
                 player.soulforce -= soulforcecost;
                 var hpChange1:int = 200;
                 if (player.unicornScore() >= 10) hpChange1 += 150;
-                if (player.alicornScore() >= 12) hpChange1 += 200;
+                if (player.isRace(Races.ALICORN, 2)) hpChange1 += 200;
                 outputText("<b>As your soulforce is drained you can feel Violet Pupil Transformation's regenerative power spreading throughout your body. (<font color=\"#008000\">+" + hpChange1 + "</font>)</b>\n\n");
                 HPChange(hpChange1, false);
             }
@@ -11076,11 +11076,8 @@ public class Combat extends BaseContent {
         var multi:Number = 1;
         if (player.hasPerk(PerkLib.DaoistCultivator)) multi += 0.5;
         if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
-        if (player.alicornScore() >= 12) multi += 0.1;
-        if (player.kitsuneScore() >= 5) {
-            if (player.kitsuneScore() >= 10) multi += 1;
-            else multi += 0.5;
-        }
+        if (player.isRace(Races.ALICORN, 2)) multi += 0.1;
+        if (player.isRace(Races.KITSUNE)) multi += 1;
         if (player.unicornScore() >= 10) multi += 0.05;
         return multi;
     }

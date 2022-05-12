@@ -96,6 +96,9 @@ public class KitsuneRace extends Race {
 					"maxsf_mult": +0.20,
 					"maxfatigue_base": +100
 				})
+				.withExtraBonuses([
+						"+100% SF Regeneration"
+				])
 				.end();
 		buildTier(16, "nine tailed kitsune")
 				.tauricName("nine tailed kitsune-taur")
@@ -111,6 +114,9 @@ public class KitsuneRace extends Race {
 					"maxsf_mult": +0.40,
 					"maxfatigue_base": +300
 				})
+				.withExtraBonuses([
+					"+100% SF Regeneration"
+				])
 				.end();
 		buildTier(21, "nine tailed kitsune of balance")
 				.tauricName("nine tailed kitsune-taur of balance")
@@ -126,6 +132,9 @@ public class KitsuneRace extends Race {
 					"maxsf_mult": +0.65,
 					"maxfatigue_base": +500
 				})
+				.withExtraBonuses([
+					"+100% SF Regeneration"
+				])
 				.end();
 		buildTier(26, "Inari")
 				.tauricName("Inari-taur")
@@ -140,6 +149,9 @@ public class KitsuneRace extends Race {
 					"maxsf_mult": +1.00,
 					"maxfatigue_base": +1000
 				})
+				.withExtraBonuses([
+					"+100% SF Regeneration"
+				])
 				.end()
 	}
 }

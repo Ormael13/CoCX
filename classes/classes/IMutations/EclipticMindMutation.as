@@ -7,6 +7,7 @@ package classes.IMutations
     import classes.PerkClass;
     import classes.PerkType;
     import classes.Player;
+import classes.Races;
 
 public class EclipticMindMutation extends PerkType
     {
@@ -51,7 +52,7 @@ public class EclipticMindMutation extends PerkType
                 if (pTier == 0){
                     IMutationsLib.EclipticMindIM.requirePeripheralNervSysMutationSlot()
                             .requireCustomFunction(function (player:Player):Boolean {
-                        return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10 || player.unicornkinScore() >= 10;
+                        return player.isRace(Races.ALICORN, 2) || player.unicornScore() >= 12 || player.alicornkinScore() >= 10 || player.unicornkinScore() >= 10;
                     }, "Unicorn or Bicorn race");
                 }
                 else{

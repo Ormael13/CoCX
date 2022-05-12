@@ -6,9 +6,14 @@
 * Check scores checking non-tiers
 * Inline `xxxxScore` functions
 * `allRacialScores`/`allRacialTiers` functions
+* fangs in `-morph/boy/girl`
+* iterate in chimeras
+* kill array of objects in `race()`
+* alicorn tiers
+* solve unicornkin/alicornkin races
 * Future:
   * racial score caching
-  * Race.`onGetTier`/`onLoseTier`
+  * Race.`onTierUp`/`onTierDown`
 
 ## Architecture
 
