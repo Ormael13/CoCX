@@ -21,6 +21,7 @@ import coc.view.ButtonData;
 import coc.view.ButtonDataList;
 
 public class CombatSoulskills extends BaseCombatContent {
+	private var multiTrustDNLag:Number = 0;
 	public function CombatSoulskills() {
 	}
 	//------------
@@ -278,7 +279,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfMoonBlades)) {
-			bd = buttons.add("G.Hail of M.Blades", HailOfBlades3).hint("Form fifty four weapons from your soulforce traveling at extreme speeds.  \n\nWould go into cooldown after use for: 9 rounds  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(800 * soulskillCost() * soulskillcostmulti()));
+			bd = buttons.add("G.Hail of M.Blades", HailOfBlades3).hint("Form fifty six weapons from your soulforce traveling at extreme speeds.  \n\nWould go into cooldown after use for: 9 rounds  \n\n(MAGICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(800 * soulskillCost() * soulskillcostmulti()));
 			if (player.hasStatusEffect(StatusEffects.CooldownGrandioseHailOfMoonBlades)) {
 				bd.disable("You need more time before you can use Grandiose Hail of Moon Blades again.");
 			} else if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathMagicalAbilities()) {
@@ -494,6 +495,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		soulforcecost = Math.round(soulforcecost);
 		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
 		else player.soulforce -= soulforcecost;
+		multiTrustDNLag = 0;
 		var triTru:Number = 3;
 		if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) triTru += 3;
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) {
@@ -528,6 +530,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		soulforcecost = Math.round(soulforcecost);
 		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
 		else player.soulforce -= soulforcecost;
+		multiTrustDNLag = 0;
 		var sexTru:Number = 6;
 		if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) sexTru += 6;
 		player.createStatusEffect(StatusEffects.CooldownSextupleThrust, 1, 0, 0, 0);
@@ -563,6 +566,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		soulforcecost = Math.round(soulforcecost);
 		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
 		else player.soulforce -= soulforcecost;
+		multiTrustDNLag = 0;
 		var nonTru:Number = 9;
 		if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) nonTru += 9;
 		player.createStatusEffect(StatusEffects.CooldownNonupleThrust, 2, 0, 0, 0);
@@ -584,7 +588,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
-	private function MultiThrustD():void {
+	private function MultiThrustDSingle():Number {
 		var damage:Number = player.str;
 		damage += scalingBonusStrength() * 0.5;
 		if (damage < 10) damage = 10;
@@ -652,6 +656,15 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) damage *= 2;
+		return damage;
+	}
+	private function MultiThrustD():void {
+		var damage:Number = 0;
+		if (multiTrustDNLag != 0) damage += multiTrustDNLag;
+		else {
+			multiTrustDNLag += MultiThrustDSingle();
+			damage += MultiThrustDSingle();
+		}
 		var d2:Number = 0.9;
 		d2 += (rand(21) * 0.01);
 		damage *= d2;
@@ -992,8 +1005,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		else player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownGrandioseHailOfBlades, 3, 0, 0, 0);
 		outputText("Weapons hits [themonster], dealing ");
-		var hob2:Number = 18;
-		while (hob2-->0) BladesD();
+		var hob2:Number = 9;
+		while (hob2-->0) BladesD(2);
 		outputText(" damage!\n\n");
 		combat.heroBaneProc2();
 		combat.EruptingRiposte2();
@@ -1003,7 +1016,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function HailOfBlades3():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		outputText("Letting soulforce leak out around you, you form fifty-four ethereal two meter long weapons in four rows. You thrust your hand outwards and in the blink of an eye, weapons shoot forwards [themonster].  ");
+		outputText("Letting soulforce leak out around you, you form fifty-six ethereal two meter long weapons in four rows. You thrust your hand outwards and in the blink of an eye, weapons shoot forwards [themonster].  ");
 		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 20 && int(Math.random() * (((monster.spe - player.spe) / 6) + 60)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids weapons!");
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges weapons with superior quickness!");
@@ -1017,15 +1030,15 @@ public class CombatSoulskills extends BaseCombatContent {
 		else player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownGrandioseHailOfMoonBlades, 9, 0, 0, 0);
 		outputText("Weapons hits [themonster], dealing ");
-		var hob3:Number = 54;
-		while (hob3-->0) BladesD();
+		var hob3:Number = 19;
+		while (hob3-->0) BladesD(4);
 		outputText(" damage!\n\n");
 		combat.heroBaneProc2();
 		combat.EruptingRiposte2();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
-	private function BladesD():void {
+	private function BladesD(hits:Number = 1):void {
 		var damage:Number = player.wis * 0.5;
 		damage += scalingBonusWisdom() * 0.5;
 		if (damage < 10) damage = 10;
@@ -1050,6 +1063,24 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText(" ");
 		doMagicDamage(damage, true, true);
 		if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+		if (hits == 2) {
+			outputText(" ");
+			doMagicDamage(damage, true, true);
+			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+			damage *= 2;
+		}
+		if (hits == 4) {
+			outputText(" ");
+			doMagicDamage(damage, true, true);
+			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+			outputText(" ");
+			doMagicDamage(damage, true, true);
+			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+			outputText(" ");
+			doMagicDamage(damage, true, true);
+			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+			damage *= 4;
+		}
 		checkAchievementDamage(damage);
 		if (player.hasStatusEffect(StatusEffects.HeroBane)) flags[kFLAGS.HERO_BANE_DAMAGE_BANK] += damage;
 		if (player.hasStatusEffect(StatusEffects.EruptingRiposte)) flags[kFLAGS.ERUPTING_RIPOSTE_DAMAGE_BANK] += monster.tou + monster.inte + monster.wis;

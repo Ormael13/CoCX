@@ -2807,8 +2807,22 @@ public class Soulforce extends BaseContent
 	}
 	public function FightWaizAbi():void {
 		clearOutput();
-		flags[kFLAGS.WAIZABI_LVL_UP] = 0;
 		outputText("So you cheating and skipping guardian angel gaze to beat poor Bimbo Monke? You're a Sexual Predator... <i>Start to dial local police number</i>");
+		menu();
+		addButton(1, "LvL18", FightWaizAbi18);
+		addButton(2, "LvL24", FightWaizAbi24);
+		addButton(3, "LvL30", FightWaizAbi30);
+	}
+	public function FightWaizAbi18():void {
+		flags[kFLAGS.WAIZABI_LVL_UP] = 0;
+		startCombat(new WaizAbi());
+	}
+	public function FightWaizAbi24():void {
+		flags[kFLAGS.WAIZABI_LVL_UP] = 1;
+		startCombat(new WaizAbi());
+	}
+	public function FightWaizAbi30():void {
+		flags[kFLAGS.WAIZABI_LVL_UP] = 2;
 		startCombat(new WaizAbi());
 	}
 	public function FightSandMother():void {
