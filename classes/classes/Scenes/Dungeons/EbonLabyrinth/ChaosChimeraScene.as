@@ -6,7 +6,6 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.BaseContent;
 import classes.Scenes.SceneLib;
 import classes.EventParser;
-import classes.Scenes.Dungeons.EbonLabyrinth.ChaosChimera;
 
 public class ChaosChimeraScene extends BaseContent {
     public function ChaosChimeraScene() {}

@@ -101,44 +101,48 @@ public class DesertCave extends DungeonAbstractContent
 				return true;
 			}
 		}
-		
-		/*Sand Witch Mob
-		Very high hit points, not much stronger than a regular sand witch
-		{Standard Descript} You are surrounded by a veritable tribe of sand witches. Having cast off their protective, concealing robes in the safety of their den they stand before you almost completely naked, little more than double-bikinis and loincloths protecting their modesty.  They glower at you hatefully, outraged that you would invade their home, and ready themselves to drag you down with sheer numbers.
-		{Bonus Lust Descripts}
-		(40) You are surrounded by myriad flushed faces and erect nipples as your licentious temptations begin working their way through the rage of the sand witches.
-		(60) Loincloths are soaked all around and milk trickles from quadruplet breasts almost in sympathy. A number of the sand witches seem more interested in their sisters than in facing you, but there's still plenty of them with their mind on your defeat.
-		(80) There's not much fight left in these sand witches now; they have other things on their mind. Maybe a third of them are starting to openly jill themselves off or make out with their fellows, distracting those who are still trying to fight with their licentious acts. You doubt it will take much more to drive them all over the edge...
-		*/
 
-
-		//*Females & Small-DIcked Males Lose:
-		//https://docs.google.com/document/d/1UnXTFRvGS7TJF8KqMo2XSRo9qSpG8JM2aHc9c5RwPP8/edit#
 		//PC Loses
 		public function loseToSammitchMob():void {
-			if(player.hasCock() && player.biggestCockArea() >= 6) {
-				memeberedFolksFindTrueWuv();
-				return;
+			if (sceneHunter.lossSelect) {
+				outputText("\n\nYeah, you're falling, and what's of it? There are so much hot witches around you! Even if they don't like you, you must have <b>something</b> to show them to make them shut up. Unless you <i>want</i> to be mocked?");
+				menu();
+				if (player.gender == 0) {//forced
+					outputText("\n\nAh, right. You don't have anything.");
+					addButton(0, "Nothing", femaleGirlsLoseToSammitches).hint("Will this fact stop them?");
+				}
+				else {
+					addButtonIfTrue(0, "Dick", memeberedFolksFindTrueWuv, "Req. at least 6-inches-long dick.", player.findCock(1, 6, -1, "length") >= 0);
+					addButtonIfTrue(1, "SmallDick", getMockedForSmallDongBySammitchMob, "Req. a dick shorter than 6 inches.", player.findCock(-1, -1, 6, "length") >= 0, "Explain your smolness.");
+					addButtonIfTrue(2, "Vagina", femaleGirlsLoseToSammitches, "Req. a vagina.", player.hasVagina());
+				}
 			}
+			else {
+				if (player.hasCock() && player.biggestCockArea() >= 6)
+					memeberedFolksFindTrueWuv();
+				else if (player.hasCock()) getMockedForSmallDongBySammitchMob();
+				else femaleGirlsLoseToSammitches();
+			}
+		}
+
+		private function badEndStart_noBigDick():void {
 			clearOutput();
 			//[If defeated by HP loss]
 			if(player.HP < 1) outputText("You fall to the dirt floor, beaten and bruised, no longer having the will to keep fighting.  The sand witches all gather around you, snickering on how weak you are.  Your vision is blurry as you look up at the dark figures towering over your prone form, you can only wonder what they'll do to you.");
 			//[If defeated by Lust gain]
 			else outputText("Your frustration is too much to bear and you fall over, using your [weapon] to support yourself.  Your vision is blurry and your loins ache to be touched as all of the sand-witches gather around you.  One of them walks up to your panting form and kicks your [weapon] out from under you, making you fall flat on your face, producing a few laughs and giggles out of these girls.  You turn onto your back and look up at the figures looming over you.");
-			
+
 			outputText("\n\nThey rip off every piece of your [armor] and throw it ");
 			if(flags[kFLAGS.SAND_WITCHES_FRIENDLY] == 0) outputText("into the fire like it was trash");
 			else outputText("off to the side");
 			outputText(", leaving you naked and exposed before these ravishing women.");
-			
-			if(player.hasCock()) getMockedForSmallDongBySammitchMob();
-			else femaleGirlsLoseToSammitches();
 		}
 
 		//Loss Orgies
 		//Male
 		//-Small cock, they all mock your size and each takes a turn making the PC cum
 		public function getMockedForSmallDongBySammitchMob():void {
+			badEndStart_noBigDick();
 			outputText("\n\nOne witch yells out \"<i>Look how small " + player.mf("his","her") + " cock is!</i>\"  All their eyes are directed to your crotch and grins of mockery crack their faces.  \"<i>It could fit in the palm of my hand.</i>\" \"<i>My nipples are bigger than that!</i>\" \"<i>Do we have a magnifying glass, I can't see it.</i>\"  They keep on this teasing of you until one kneels down and squeezes your [cock smallest] between her middle and index finger.  \"<i>Let's see if this tiny dick can even cum at all...</i>\"");
 			
 			outputText("\n\nShe starts massaging your cock, not really a stroke, more like flicking her wrist so her fingers can go down your small shaft.  All the other sand-witches look on, amused as your tiny hardness tries to look big and intimidating.  They even make cute kissy faces at your itsy-bitsy [cock smallest], the kind of expression you give to small animals.");
@@ -180,9 +184,9 @@ public class DesertCave extends DungeonAbstractContent
 			else if(player.balls > 0) outputText("  She even cups your tender [balls] and lightly massages them.");
 			else if(player.hasVagina()) outputText("  She even lightly caresses the lips of your pussy.");
 			
-			outputText("\n\nYou cum a hot shot down the sand-witch's throat.  She swallows the seed and opens her mouth, but not to show you how good of a slut she is.  No, she does it to show her \"<i>friends</i>\" she did their dare.  The girls cheer at the cock sucking whore as she stands with the smell of cum on her breath and joins them in spectating.");
+			outputText("\n\nYou cum a hot shot down the sand-witch's throat.  She swallows the seed and opens her mouth, but not to show you how good of a slut she is.  No, she does it to show her \"<i>friends</i>\" she did their dare.  The girls cheer at the cocksucking whore as she stands with the smell of cum on her breath and joins them in spectating.");
 			
-			outputText("\n\nThe sand witches keep taking turns humiliating you by making your little cock shoot and leak out cum, draining of you of all your seed until you finally black-out from dehydration.");
+			outputText("\n\nThe sand witches keep taking turns humiliating you by making your little cock shoot and leak out cum, draining of you of all your seed until you finally black out from dehydration.");
 			
 			//[if for fun]
 			if(flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0) {
@@ -198,7 +202,7 @@ public class DesertCave extends DungeonAbstractContent
 			}
 			else {
 				//[Bad end for small cocks]
-				outputText("\n\nYou spend the rest of your life being a bitch to the sand witches.  Kept naked and hard all the time, you're chained-up like an animal in the chamber with your hands tied behind your back, making sure you don't play with yourself.  The witches do mess with you from time to time, but mostly they just let you drown in your lust.  Many nights you yearn to feel the touch of your mistresses. You want them to humiliate you if it means they'll pleasure your little cock.  Sometimes, when a group of witches walk by, you try to look as wanting as possible.  They just walk by, saying how desperate and sad you look, leave you alone with that raging hard-on.");
+				outputText("\n\nYou spend the rest of your life being a bitch to the sand witches.  Kept naked and hard all the time, you're chained-up like an animal in the chamber with your hands tied behind your back, making sure you don't play with yourself.  The witches do mess with you from time to time, but mostly they just let you drown in your lust.  Many nights you yearn to feel the touch of your mistresses. You want them to humiliate you if it means they'll pleasure your little cock.  Sometimes, when a group of witches walks by, you try to look as wanting as possible.  They just walk by, saying how desperate and sad you look, leave you alone with that raging hard-on.");
 
 				outputText("\n\nYour only saving grace are the new witches who came of age throughout the years and join the rest of their sisters in the fun.  A lot of them seem to like you, and sometimes they use you to practice spells.  Your hair has been sandy blond for a long time now, and your chest has been leaking milk too.  Besides the spells, they like to practice fucking with you.  They are nice and gentle at first but become more demanding and demeaning as time goes on, up until they forget about you.");
 
@@ -213,6 +217,7 @@ public class DesertCave extends DungeonAbstractContent
 		//Female
 		//Lesbian gang-bang
 		public function femaleGirlsLoseToSammitches():void {
+			badEndStart_noBigDick();
 			//Lesbian gang-bang, some leave and come back with sex toys.
 			outputText("\n\nTwo witches spread your [legs] and hold them apart.  You're about to yell out in protest, but one witch plants her two cunts over your face and begins riding your [face], quickly muffling you before you can make a peep.");
 			if(player.hasMuzzle()) outputText("  She fucks your muzzle like a cock as it goes into one cunt while she plays with the other one.");
@@ -230,7 +235,7 @@ public class DesertCave extends DungeonAbstractContent
 
 			outputText("\n\nHowever these girls hold you from that pleasure, leaking their juices all over your limbs, as they moan with the bliss you so want to feel right now.  The other witches, how you envy them, are able to feed their wanting with light strokes and gropes as they watch their sisters in action.  Some even lend a helping hand to the more lusty witches, fingering their wet pussies and groping their milk-filled teats as the horny whore holds onto them in her lust filled daze.  If only you were so lucky.");
 			
-			outputText("\n\nYour [vagina] is so hungry to feel the touch of anything right now, \"<i>They're doing this to you on purpose,</i>\" you think as your [vagina] trembles with cock-milking clutches.  Your eyes are dazed in agonizing lust, and you see the two witches who left have came back through an archway into the chamber, carrying bundles of something in their arms.  The other witches all look glad to see those two girls.");
+			outputText("\n\nYour [vagina] is so hungry to feel the touch of anything right now, \"<i>They're doing this to you on purpose,</i>\" you think as your [vagina] trembles with cock-milking clutches.  Your eyes are dazed in agonizing lust, and you see the two witches who left have come back through an archway into the chamber, carrying bundles of something in their arms.  The other witches all look glad to see those two girls.");
 
 			outputText("\n\n\"<i>Sorry it took so long, the pregnant slut wanted to do some role-playing,</i>\" one sand-witch says as she drops her bundle to reveal that she's fully naked and wearing a huge dragon cock strap-on.  The dropped bundle is a variety of attachable sex-toys.  Many have multiple shafts and come in shapes from standard to canine to obscenely equine.");
 			
@@ -273,7 +278,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\nYou cum, seemingly without any build-up, and then it happens again, and again... It just comes and keeps coming.");
 
 			outputText("\n\nThe next few hours are a blur.  You remember being on your knees then sucking a cock while your pussy is licked, stroking three cocks with your hands and [feet] and even being completely upside down at one point.  Then things gradually fade to black...");
-			player.orgasm();
+			player.sexReward("cum", "Lips");
 			dynStats("lib", 1);
 			//[Next]
 			menu();
@@ -297,7 +302,7 @@ public class DesertCave extends DungeonAbstractContent
 			if (player.isAlraune())
 				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			else {
-				outputText("When your mind finally starts straightening things out, you wake up on a bed with your ass, cunt, and more sore than you can remember.  You rub the achy bits as you notice a cloaked figured with a wide-brimmed pointy hat sitting by your bedside, reading a white book.  When the figure sees you've awaken from your slumber, she places a bookmark in the volume and sets it on the nearby nightstand.");
+				outputText("When your mind finally starts straightening things out, you wake up on a bed with your ass, cunt, and more sore than you can remember.  You rub the achy bits as you notice a cloaked figured with a wide-brimmed pointy hat sitting by your bedside, reading a white book.  When the figure sees you've awakened from your slumber, she places a bookmark in the volume and sets it on the nearby nightstand.");
 				outputText("\n\n\"<i>Good morning sister, did you have a nice nap?</i>\"");
 
 				outputText("\n\nSister? You're not related to this girl... are you?");
@@ -311,7 +316,7 @@ public class DesertCave extends DungeonAbstractContent
 				outputText("\n\nShe helps you out of the bed, and you get a better look at her face, which is almost as dark as the cloak and hat she wears.  The ebony girl reminds you that you can't leave the sanctuary until you've learned your spells and then, pulls you in close, explaining that you'll never get to experience a proper fucking or taste her cum until then.  You look down at the crotch of her robes and see she's pitching a very big cock-tent.  You promise the well-endowed herm that you'll try to do your best, and she gives you a nice pat and grab on your [butt] as you run back to start studying.");
 
 				outputText("\n\n<b>A few months later...</b>\n");
-				outputText("After weeks of studying hard, you've finally learned everything there is to know about being a sand-witch. You've been given your desert-colored robes and are allowed to join the other witches in the commons, and can even leave the sanctuary.  After your first appointment with the Cum-Witch, you take a nice walk outside with cum drooling from both your cunts, travelling down your legs and leaving a soaked trail to follow. It feels a bit like deja vu as you take your first steps into the world.  You just shake it off.");
+				outputText("After weeks of studying hard, you've finally learned everything there is to know about being a sand-witch. You've been given your desert-colored robes and are allowed to join the other witches in the commons, and can even leave the sanctuary.  After your first appointment with the Cum-Witch, you take a nice walk outside with cum drooling from both your cunts, travelling down your legs and leaving a soaked trail to follow. It feels a bit like déjà vu as you take your first steps into the world.  You just shake it off.");
 				outputText("\n\nYou wander around the desert for a while, muttering an introduction of who you are and what you want to do.  Then, you see a figure walking along the dunes. Okay, time to show them your stuff.  Getting to the figure, you announce yourself:");
 				outputText("\n\n\"<i>Excuse me, I'm a sand witch, may I cast a spell on you?</i>\"");
 				player.HP = player.maxHP();
@@ -389,7 +394,7 @@ public class DesertCave extends DungeonAbstractContent
 			
 			outputText("\n\nA slobbery cunt trails its moist juices on your cheek tenderly, and her voices proudly say, \"<i>You must really like me!  Wow, what a relief.  You seem pretty busy, and ummm... that feels really, REALLY good, so I think I'll just- unghhhhh...</i>\"  She pants a few times.  \"<i>...uh, feed you while you feed me!  My juices are supposed to make you cummy and horny enough to keep up with me.  Isn't that great?</i>\"");
 			outputText("\n\nYou nod into her pussy as the immense, swelling load inside you grows larger yet.  Feeding her is going to be lots of fun...");
-			player.orgasm();
+			player.sexReward("vaginalFluids", "Dick");
 			dynStats("lib", 5);
 			//[Nest]
 			menu();
@@ -399,7 +404,7 @@ public class DesertCave extends DungeonAbstractContent
 		public function memeberedFolksFindTrueWuv2():void {
 			clearOutput();
 			outputText("<b><u>One week later...</u></b>\n");
-			outputText("The door cracks open, shedding light on the sordid, coiled scene that you've spend the past few days languishing in.  At some point, you learned that your companion had been named Ophelia by the sisters, and as your cum-spurting, pussy-licking, cock-milking orgy continued, you were drawn closer and closer to her.  Sure, the first night you slept alone (or as alone as you can be with a bundle of tentacles ");
+			outputText("The door cracks open, shedding light on the sordid, coiled scene that you've spent the past few days languishing in.  At some point, you learned that your companion had been named Ophelia by the sisters, and as your cum-spurting, pussy-licking, cock-milking orgy continued, you were drawn closer and closer to her.  Sure, the first night you slept alone (or as alone as you can be with a bundle of tentacles ");
 			if(player.cockTotal() == 1) outputText("fighting over your cock");
 			else outputText("milking your cocks");
 			outputText(", forcing you to wet dream after wet dream), but she was always kind to you, even if you didn't get a choice in how often you'd be brought to orgasm.  The second night you slept in her coils.  The third night, you had begun to genuinely like her.  The fourth, she showed you her primary vagina, and you slept beneath her, letting her ride you through the night.");
@@ -407,9 +412,8 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\nNow, you're cum-drunk on love and the tender affections of your aphrodisiac-drugging lover.  You've fed on nothing but her juices this whole time, but she has LOTS of juices, all of varying flavors and consistencies.  You've sampled every one of her tentacles orally and phallically, and you still haven't picked a favorite.  Well, her primary cunt, on the bottom of her bulb is a maestro that can direct a sexual symphony around [oneCock], but it doesn't taste as great as some of the others.  Your waist is pinned in there right now, though you're sitting up and hugging her smooth, moist mass, grinning dopily at the doorway as Dara smells the scent of a week of solid sex.");
 			outputText("\n\nJuice gushes out between her thighs as her nostrils flare, drinking down days of distilled pheromones.  Her skin flushes red and her knees quake.  Grabbing hold of the doorway for support, she meekly gurgles, \"<i>Oh gods,</i>\" before cumming again, splattering her juices all over the floor.  With her tongue lolling out, she maintains the strength of mind to advance through the fuck-mist and grab you around the shoulders.  Ophelia plucks a number of bottles from Dara's waist with her limbs, but otherwise, she doesn't resist.  Her voice bubbles happily even as you're pulled out of her cunt, \"<i>I'll see you soon, love.  I'm sure our owners have some more things to teach us both before we meet again!</i>\"");
 			outputText("\n\nDara slams the door and collapses onto you, both bodies tumbling to the floor.  Her face lands on your hips, just close enough that her lips and nose rub along [oneCock].  The tanned, tattooed beauty moans out loud, shivering with untapped need while her dual cunts drool like sieves.  She climbs atop you with a second thought, taking you in the middle of the hall while her sisters watch, many of them already jilling off after catching a hint of the sealed-off breeding aroma.  \"<i>Fuckfuckfuckfuckohgodsitssogooooood....</i>\" Dara cries.  Her sexual utterances are muffled by a second pair of curvy hips when Bernice sits on your face, rubbing your nose against her stiff clit while her juices gush down your throat.");
-			outputText("\n\nYour body is well trained by its time in captivity, and you immediately and messily orgasm for your feminine overlords.  Your hands are stuffed up waiting, well-stretched pussies as you thrash in sensual ecstasy.  Bliss and conditioning take over, forcing you to slurp and lick, to please the pussy before you while cumming for another.  The Sand Witches seemed to have expected something like this, but not to such a powerful degree.  They make the most of the situation by fucking you, one after another.  Sometimes they fist their creamed-cunts on you or make out with you while you're breeding their sisters.  Other times, you're only dealing with fresh, unfucked pussies.");
-			player.orgasm();
-			dynStats("lib", 5);
+			outputText("\n\nYour body is well-trained by its time in captivity, and you immediately and messily orgasm for your feminine overlords.  Your hands are stuffed up waiting, well-stretched pussies as you thrash in sensual ecstasy.  Bliss and conditioning take over, forcing you to slurp and lick, to please the pussy before you while cumming for another.  The Sand Witches seemed to have expected something like this, but not to such a powerful degree.  They make the most of the situation by fucking you, one after another.  Sometimes they fist their creamed-cunts on you or make out with you while you're breeding their sisters.  Other times, you're only dealing with fresh, unfucked pussies.");
+			player.sexReward("vaginalFluids", "Dick");
 			//[Next]
 			menu();
 			addButton(0,"Next",memeberedFolksFindTrueWuv3);	
@@ -432,8 +436,12 @@ public class DesertCave extends DungeonAbstractContent
 
 		//PC Wins
 		public function yoYouBeatUpSomeSandWitchesYOUMONSTER():void {
+			if (recalling) {
+				monster = new SandWitchMob();
+				monster.lust = monster.maxLust();
+			}
 			clearOutput();
-			flags[kFLAGS.SANDWITCH_MOB_DEFEATED] = 1;
+			if (!recalling) flags[kFLAGS.SANDWITCH_MOB_DEFEATED] = 1;
 			outputText("The sand witches all collapse to the floor in a vast puddle of milk and pussy juice, ");
 			if(monster.HP <= monster.minHP()) outputText("nursing their wounds");
 			else outputText("frantically making out with each other, huddling into a squirming orgy on the floor");
@@ -442,9 +450,10 @@ public class DesertCave extends DungeonAbstractContent
 			menu();
 			if(player.lust >= 33) {
 				outputText("\n\nThen again, given you've now proven your superiority over these witches, maybe it's time to blow off a little steam, hmm?");
-				if(player.hasCock()) addButton(0,"Fuck One",dicksHaveSexWithAWitch);
-				if(player.hasVagina()) addButton(1,"Forced Lick",forceCunnilingusRimjobClitAndNipple);
+				addButtonIfTrue(0,"Fuck One",dicksHaveSexWithAWitch, "Req. a cock.", player.hasCock());
+				addButtonIfTrue(1,"Forced Lick",forceCunnilingusRimjobClitAndNipple, "Req. a vagina.", player.hasVagina());
 			}
+			else outputText("You're not aroused enough to rape them.");
 			//Present PC with Leave and Orgy options
 			addButton(14,"Leave",cleanupAfterCombat);
 		}
@@ -454,7 +463,7 @@ public class DesertCave extends DungeonAbstractContent
 			clearOutput();
 			outputText("Looking over the ");
 			if(monster.HP <= monster.minHP()) outputText("painfully ");
-			outputText("writhing pile of female flesh, you place your hands on your [hips] and survey the pile for the prettiest of the litter.  They're all gorgeously tanned with lustrous, blonde hair, but there's enough variety in facial features, hair style, breast size, and hips for you to narrow down which one you'd like to take the most.  She's a true beauty in the classical sense, at least facially.  She has a small, button nose, ripe lips, and hair that's tied back in a waist-length ponytail.  Her four breasts are well-rounded E-cups, big and round enough for your fingers to sink into but just barely pert enough not to show any sag.");
+			outputText("writhing pile of female flesh, you place your hands on your [hips] and survey the pile for the prettiest of the litter.  They're all gorgeously tanned with lustrous, blonde hair, but there's enough variety in facial features, hairstyles, breast sizes, and hips for you to narrow down which one you'd like to take the most.  She's a true beauty in the classical sense, at least facially.  She has a small, button nose, ripe lips, and hair that's tied back in a waist-length ponytail.  Her four breasts are well-rounded E-cups, big and round enough for your fingers to sink into but just barely pert enough not to show any sag.");
 			
 			outputText("\n\nBig, brown eyes look up at you with obvious fear as you approach.  Well, that won't do.  You hold your hand out to her calmly, putting as welcoming a smile as you can for your fallen foe.  She looks around her ");
 			if(monster.lust >= monster.maxLust()) outputText("masturbating companions");
@@ -473,9 +482,10 @@ public class DesertCave extends DungeonAbstractContent
 			if(monster.lust >= monster.maxLust()) outputText("well-soaked");
 			else outputText("rapidly-moistening");
 			outputText(" cunts in order to make sure she's prepared.  The witch bites her lip to stifle a lewd moan, so you drag the pads of your fingers across each of her clits simultaneously.  This shatters whatever restraint she was showing into a little more than slick cunt-juice.  Even now, it's dripping down her inner thighs.  She's properly moaning with your strokes now, and you judge she's ready.");
+			sceneHunter.selectFitNofit(fitF, nofitF, monster.vaginalCapacity());
 			
-			//DAT SHIT FITS
-			if(player.smallestCockArea() <= monster.vaginalCapacity()) {
+			//==========================================================
+			function fitF():void {
 				var x:int = player.cockThatFits(monster.vaginalCapacity());
 				var y:int = player.cockThatFits2(monster.vaginalCapacity());
 				outputText("\n\nPutting her down on all fours, you admire the curve of her bouncy bottom and the glossy moisture that's beading on her numerous, plump cunt-lips.  The witch's pussy is tinged red with her feverish lust and totally engorged.  You can see her twin clits peeking out of her their hoods, just begging to be touched.  Who are you to deny them?  Reaching around her hip, you start to circle a finger around one of the lucky buzzers while you get your " + cockDescript(x) + " lined up with one of her cunts");
@@ -511,9 +521,15 @@ public class DesertCave extends DungeonAbstractContent
 				outputText(" onto the floor as an example of just what you're capable of.  You can beat the best they have and fuck them into a twitching puddle in the dirt.  Though the mob seems cowed by your display of authority, they're still fucking themselves to the sight of what you've done to their sister.  You make the rest of them take turns licking your spent spunk and caked-on cunt-juice from your phallus");
 				if(y >= 0) outputText("es");
 				outputText(" before getting dressed and getting back to business.");
+				if (!recalling) {
+					player.sexReward("vaginalFluids", "Dick");
+					dynStats("sen", -1);
+					cleanupAfterCombat();
+				}
+				else doNext(camp.recallWakeUp);
 			}
 			//Too Big For Fucks
-			else {
+			function nofitF():void {
 				outputText("\n\nYou spin her around without a single word of warning, gently bearing her to the ground.  She groans in disappointment when your fingers leave her silky slits, but when you climb on top of her, her attitude changes.  Your [cock biggest] drops down onto her chest, nudging aside her four pillowy boobs.  Once you're in position, you take her arms and press them down towards her juicy clefts, positioning her forearms on both sides of her busts so that her soft flesh is cushioned and squeezed around your length.  Of course, the extra pressure releases four trickles of milk that dribble onto your [cock biggest] from all sides and turn the witch's chest into a four-piece cock-sleeve for your dick to traverse.");
 				outputText("\n\nThe pretty girl goes knuckle-deep in her multiple vaginas.  Parting in a wordless sigh of pleasure, her lips slowly open, just in time to receive your cock when you make your first thrust.  Your [cockHead biggest] butts past those very same lips, pushing just far enough to bump her teeth before you saw your [hips] back for the next push.  The blonde's legs twitch whenever she hits a particularly sensitive spot.  Grabbing hold of her leaky teats, you start to fuck her quartette of jiggly breasts faster and faster, watching the big boobs jiggle from the fierce tit-fucking you're dishing out, twisting the nipples slightly until she whimpers and groans, all four of her udders fountaining milk.");
 				outputText("\n\nThe splattering boob geysers provide even more lubrication for your furious tit-fucking.  You groan as the hot moisture wicks into your skin and hers alike, revelling in the hot, wet, sloppy tit-fuck.  Dripping with pre-cum, your [cockHead biggest] smashes into her pursed lips again and again, and the witch seems to love it, because she has her tongue swirl in circles around you every time you get within range of her gasping, moaning lips.  The simmering warmth just behind your package incites you to go faster and faster.  You move so quickly that you've broken out in a fresh sheen of sweat, and the heat grows hotter, accompanied by a telltale clenching a surging heat that indicate you're about to crest over the edge of orgasm and cum this girl's pretty face white.");
@@ -526,10 +542,13 @@ public class DesertCave extends DungeonAbstractContent
 				else outputText("The cute woman's cheeks flood with your obscene cum-flow.  She tries to swallow it down, but no matter how fast her fevered gulps are, the stuff still floods in with such force that it squirts from the corners of her mouth.  She just gives up after a few moments and lets it run down her chin in a waterfall.  Most of the jism puddles on the floor below her, soaking into her ponytail and matting it with salty spunk.");
 				
 				outputText("\n\nFinishing up, you pull yourself out of her tits wipe up with her robes, tossing the musky robes on her face as she begins to sluttily keen in an orgasm of her own.  Now to explore the rest of this desert rat cellar.");
+				if (!recalling) {
+					player.sexReward("Default", "Dick", true, false);
+					dynStats("sen", -1);
+					cleanupAfterCombat();
+				}
+				else doNext(camp.recallWakeUp);
 			}
-			player.orgasm();
-			dynStats("sen", -1);
-			cleanupAfterCombat();
 		}
 			
 		//*Sapphic Win Sex
@@ -544,13 +563,7 @@ public class DesertCave extends DungeonAbstractContent
 			else if(player.cor < 66) outputText("be a little over-zealous in defending their home");
 			else outputText("be crappy fighters");
 			outputText(", but feeling a stirring in your nethers, you can think of at least one good use for them.  You start to strip out of your [armor], groping your butt with one hand; maybe there's a second purpose they can serve...");
-			outputText("\n\n\"<i>Oi, milk bitches!  Get over here!</i>\" you call.  The defeated women morosely respond, though there's more than one gaze simmering with lust as it takes in your nude form.  You ");
-			if(player.isNaga()) outputText("slither");
-			else if(player.isTaur()) outputText("clop");
-			else if(player.isGoo()) outputText("ooze");
-			else if(player.isDrider()) outputText("clatter");
-			else outputText("stride");
-			outputText(" up to the nearest one and grab her amber tresses in your hand, pulling her face into your [vagina], her nose squishing partway into your cleft as you grind on her pretty, young mouth.  Oh, that's the stuff.  Her tongue flutters out almost immediately to lap at your moisture.  You'd swear she absolutely loved it if it wasn't for the angry cast of her eyebrows.  No matter.");
+			outputText("\n\n\"<i>Oi, milk bitches!  Get over here!</i>\" you call.  The defeated women morosely respond, though there's more than one gaze simmering with lust as it takes in your nude form.  You " + (player.isNaga() ? "slither" : player.isTaur() ? "clop" : player.isGoo() ? "ooze" : player.isDrider() ? "clatter" : "stride") + " up to the nearest one and grab her amber tresses in your hand, pulling her face into your [vagina], her nose squishing partway into your cleft as you grind on her pretty, young mouth.  Oh, that's the stuff.  Her tongue flutters out almost immediately to lap at your moisture.  You'd swear she absolutely loved it if it wasn't for the angry cast of her eyebrows.  No matter.");
 			outputText("\n\nLike the director of a play, you begin to direct the rest of the girls.  First, you want this bitch to enjoy herself like a proper sapphic slave, so you command two of her sisters to eat her out.  They seem reluctant, but they dig into the moist quims all the same.  Oh gods, the difference is night and day.  The tanned sorceress's eyes drift closed, lulled into complacency by the lapping licks her sisters are giving her.  Boldly stroking across your folds, her tongue is eagerly attending to your needs, stirring your body to secrete more of your sticky love-juice, a treat she consumes with gusto.  You pat her head as she settles into a rhythm and try your best to focus on standing upright.");
 			outputText("\n\nThere's still quite a few of them left, so you spread them around in similar fashion - two mouths per witch crotch in an ever-widening pyramid of cunnilingual ecstasy.  You save the lustiest of the pack for last; they're turned on enough to savage their own aching boxes with their fingers while they munch on clam, no stimulation necessary.  Two of them make the twat-centric pyramid look off-balance, so you call them back to you.");
 			outputText("\n\nThe shortest one is going to get the most humiliating job today.  Putting your hands on your [butt], you pull your cheeks apart and command, \"<i>Lick it.</i>\"");
@@ -586,9 +599,12 @@ public class DesertCave extends DungeonAbstractContent
 			else if(player.lactationQ() < 200) outputText(" slowly suckle you");
 			outputText(" while you come down from your high.  Why couldn't they have just done this to start?");
 			outputText("\n\nAfter that morale boost, you climb out of the writhing orgy of fem-flesh and dust yourself off, ready to explore further inside this den of inequity.");
-			player.orgasm();
-			dynStats("sen", -1);
-			cleanupAfterCombat();
+			if (!recalling) {
+				player.sexReward("saliva", "Vaginal");
+				dynStats("sen", -1);
+				cleanupAfterCombat();
+			}
+			else doNext(camp.recallWakeUp);
 		}
 
 		public function volunteerConfirmation():void {
@@ -682,8 +698,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\nThe other woman looks a little confused at this, but when she sees your wide, excited eyes, she reluctantly nods.  There's a flash of irritation at your presence, but it fades when your lover offers, \"<i>Don't be sour, I saved some for you, hun.  Why don't you take your sister to the mother, and when you come back, I'll make sure to pack all three of your cunts, okay?</i>\"");
 			
 			outputText("\n\nThis seems to placate the four-breasted, three-pussied woman, a wide grin breaking out on her face.  She helps you up and leads you from the room to your new life, the last thing you see as you go a subtle wink from the Cum Witch...");
-			player.orgasm();
-			dynStats("lib", 100, "sen", 100);
+			player.sexReward("cum", "Vaginal");
 			//Next
 			menu();
 			addButton(0,"Next",chicksLoseToSandWitchesBadEndFinale);

@@ -6,12 +6,7 @@ package classes.Scenes.Dungeons.EbonLabyrinth
 {
 import classes.*;
 import classes.BodyParts.Butt;
-import classes.BodyParts.Face;
 import classes.BodyParts.Hips;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.Skin;
-import classes.GlobalFlags.kFLAGS;
-import classes.Items.ConsumableLib;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 import classes.StatusEffects.Combat.WebDebuff;
@@ -144,8 +139,8 @@ use namespace CoC;
             this.bonusHP = mod == 0 ? 0 : 2000*(mod-1);
             this.bonusLust = 415 + 75*mod;
             this.level = 60 + 5*mod; //starts from 65 due to EL levelMod calculations;
-            this.gems = int((1500 + rand(300)) * Math.exp(0.3*mod));
-            this.additionalXP = int(6500 * Math.exp(0.3*mod));
+            this.gems = mod > 50 ? 0 : Math.floor((1500 + rand(300)) * Math.exp(0.3*mod));
+            this.additionalXP = mod > 50 ? 0 : Math.floor(6500 * Math.exp(0.3*mod));
             
 			this.a = " ";
 			this.short = "Atlach Nacha";
@@ -161,7 +156,6 @@ use namespace CoC;
 			this.weaponName = "fangs";
 			this.weaponVerb = "bite";
 			this.armorName = "chitin";
-			this.additionalXP = 1500;
 			this.lustVuln = 0.45;
 			this.createStatusEffect(StatusEffects.AuraOfMadness, 0.20, 0.20, 0, 0);
 			this.createPerk(PerkLib.DarknessNature, 0, 0, 0, 0);

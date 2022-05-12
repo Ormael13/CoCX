@@ -2,15 +2,12 @@
 package classes.Scenes.Dungeons.EbonLabyrinth
 {
 import classes.BaseContent;
-import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.display.SpriteDb;
 import classes.PerkLib;
 import classes.BodyParts.Tail;
 import classes.BodyParts.LowerBody;
 import classes.EventParser;
-import classes.Scenes.Dungeons.EbonLabyrinth.AtlachNacha;
 
 public class AtlachNachaScene extends BaseContent {
     public function AtlachNachaScene() {}

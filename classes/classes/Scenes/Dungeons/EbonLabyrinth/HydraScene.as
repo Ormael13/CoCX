@@ -3,11 +3,9 @@ package classes.Scenes.Dungeons.EbonLabyrinth
 {
 import classes.GlobalFlags.kFLAGS;
 import classes.BaseContent;
-import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.display.SpriteDb;
 import classes.EventParser;
-import classes.Scenes.Dungeons.EbonLabyrinth.Hydra;
 
 public class HydraScene extends BaseContent {
     public function HydraScene() {}
