@@ -16,6 +16,7 @@ import classes.Scenes.Areas.HighMountains.IzumiScene;
 import classes.Scenes.Areas.HighMountains.MinotaurMobScene;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
+import classes.Scenes.Dungeons.DesertCave.SandMother;
 import classes.Scenes.Explore.Pierce;
 import classes.Scenes.Explore.TheDummy;
 import classes.Scenes.Monsters.Malikore;
@@ -1752,7 +1753,7 @@ public class Soulforce extends BaseContent
 			if (player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame) addButton(2, "D.Giantess", FightTyrantia).hint("Test fight with Drider Giantess.");
 			addButton(3, "B.Monke", FightWaizAbi).hint("You not even want to let the innocent bimbo monke free? <i>*sigh*</i>");
 			addButton(4, "The Dummy", FightTheDummy).hint("Fight with The Dummy.");
-			//5
+			addButton(5, "Sand Mother", FightSandMother).hint("Test fight with Sand Mother.");
 			addButton(6, "GothGirl", FightLilith).hint("Fight with devilish cute goth girl.");
 			if (player.level >= 45) addButton(7, "Oculicorn", FightIridesian).hint("Test fight with Oculicorn.");
 			addButton(8, "Sonya", FightSonya).hint("Test fight with Sonya.");
@@ -2807,9 +2808,14 @@ public class Soulforce extends BaseContent
 	public function FightWaizAbi():void {
 		clearOutput();
 		flags[kFLAGS.WAIZABI_LVL_UP] = 0;
-		outputText("So you cheating and skipping guardian agnel gaze to beat poor Bimbo Monke? You're a Sexual Predator... <i>Start to dial local police number</i>");
+		outputText("So you cheating and skipping guardian angel gaze to beat poor Bimbo Monke? You're a Sexual Predator... <i>Start to dial local police number</i>");
 		startCombat(new WaizAbi());
 	}
+	public function FightSandMother():void {
+		clearOutput();
+		outputText("Entering battle with Sand Mother! Enjoy ^^");
+		startCombat(new SandMother(), true)
+	};
 	public function FightSonya():void {
 		clearOutput();
 		outputText("Entering battle with Sonya! Enjoy ^^");

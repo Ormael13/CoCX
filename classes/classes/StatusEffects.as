@@ -716,6 +716,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const PrisonRestraints:StatusEffectType        = mk("prisonRestraint");
 		public static const PrisonCaptorEllyScratch:StatusEffectType = mk("prisonCaptorEllyScatch");
 
+		public static const CalluOff:StatusEffectType            = mk("Callu Off");
 		public static const ChiChiOff:StatusEffectType           = mk("Chi Chi Off");
 		public static const DianaOff:StatusEffectType            = mk("Diana Off");
 		public static const DivaOff:StatusEffectType             = mk("Diva Off");
@@ -723,7 +724,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const EtnaOff:StatusEffectType             = mk("Etna Off");
 		public static const LunaOff:StatusEffectType             = mk("Luna Off");
 		public static const TedOff:StatusEffectType              = mk("Ted Off");
-		public static const SpoodersOff:StatusEffectType           = mk("Belisa Off");
+		public static const VenusOff:StatusEffectType            = mk("Venus Off");
+		public static const SpoodersOff:StatusEffectType         = mk("Belisa Off");
 		public static const ThereCouldBeOnlyOne:StatusEffectType = mk("There Could Be Only One");
 		public static const UmasMassage:StatusEffectType         = mk("Uma's Massage"); //v1 = bonus index; v2 = bonus value; v3 = remaining time
 		public static const Uniball:StatusEffectType             = mk("Uniball");
