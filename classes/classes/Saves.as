@@ -936,6 +936,9 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.dualWLXP = player.dualWLXP;
 		saveFile.data.dualWFLevel = player.dualWFLevel;
 		saveFile.data.dualWFXP = player.dualWFXP;
+		//Mining
+		saveFile.data.miningLevel = player.miningLevel;
+		saveFile.data.miningXP = player.miningXP;
 		//Herbalism
 		saveFile.data.herbalismLevel = player.herbalismLevel;
 		saveFile.data.herbalismXP = player.herbalismXP;
@@ -2045,6 +2048,15 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.dualWFLevel = 0;
 		else
 			player.dualWFLevel = saveFile.data.dualWFLevel;
+		//Mining
+		if (saveFile.data.miningXP == undefined)
+			player.miningXP = 0;
+		else
+			player.miningXP = saveFile.data.miningXP;
+		if (saveFile.data.miningLevel == undefined)
+			player.miningLevel = 0;
+		else
+			player.miningLevel = saveFile.data.miningLevel;
 		//Herbalism
 		if (saveFile.data.herbalismXP == undefined)
 			player.herbalismXP = 0;
