@@ -5915,10 +5915,16 @@ public class Combat extends BaseContent {
         if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) accMelee -= flags[kFLAGS.ATTACKS_ACCURACY];
         if (player.weaponName == "Truestrike sword") accMelee = 100;
     	if (rand(100) < accMelee) {
-			if (meleeDamageNoLag != 0) damage += meleeDamageNoLagSingle();
+			if (meleeDamageNoLag != 0) damage += meleeDamageNoLag;
 			else {
-				if (IsFeralCombat) damage += meleeDamageNoLagSingle(IsFeralCombat);
-				else damage += meleeDamageNoLagSingle();
+				if (IsFeralCombat) {
+					meleeDamageNoLag += meleeDamageNoLagSingle(IsFeralCombat);
+					damage += meleeDamageNoLagSingle(IsFeralCombat);
+				}
+				else {
+					meleeDamageNoLag += meleeDamageNoLagSingle();
+					damage += meleeDamageNoLagSingle();
+				}
 			}
 			//Determine if critical hit!
             var crit:Boolean = false;

@@ -355,6 +355,9 @@ import flash.utils.getQualifiedClassName;
 				else if (hasPerk(PerkLib.EnemyGroupType)) maxOver2 += (0.05 * perkv1(PerkLib.OverMaxHP));
 				else maxOver2 += (0.01 * perkv1(PerkLib.OverMaxHP));
 			}
+			if (hasPerk(PerkLib.EnemyEliteType)) maxOver2 += 0.05;
+			if (hasPerk(PerkLib.EnemyChampionType)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.EnemyBossType)) maxOver2 += 0.15;
 			maxOver *= maxOver2;//~180%
 			maxOver = Math.round(maxOver);
 			return maxOver;
@@ -397,6 +400,18 @@ import flash.utils.getQualifiedClassName;
 				else if (hasPerk(PerkLib.EnemyLargeGroupType)) min -= (maxHP() * 0.1 * perkv1(PerkLib.DieHardHP));
 				else if (hasPerk(PerkLib.EnemyGroupType)) min -= (maxHP() * 0.05 * perkv1(PerkLib.DieHardHP));
 				else min -= (maxHP() * 0.01 * perkv1(PerkLib.DieHardHP));
+			}
+			if (hasPerk(PerkLib.EnemyEliteType)) {
+				min -= maxHP() * 0.025;
+				min -= (750 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
+			if (hasPerk(PerkLib.EnemyChampionType)) {
+				min -= maxHP() * 0.05;
+				min -= (1500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
+			if (hasPerk(PerkLib.EnemyBossType)) {
+				min -= maxHP() * 0.075;
+				min -= (2250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			min = Math.round(min);
 			return min;

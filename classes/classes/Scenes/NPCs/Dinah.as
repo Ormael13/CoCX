@@ -98,17 +98,17 @@ import classes.internals.*;
 			soulforce -= soulskillCostHailofBlades();
 			var hobD:Number = 6;
 			while (hobD-->0) bladesD();
-			outputText(" damage!");
+			outputText("damage!");
 		}
 		public function castGrandioseHailOfBladesSoulskillDinah():void {
 			outputText("Letting soulforce leak out around her, Dinah form eighteen ethereal two meter long weapons in two rows. Then she thrust her hand outwards and in the blink of an eye, weapons shoot forwards you. Weapons hits you, dealing ");
 			soulforce -= soulskillCostGrandioseHailofBlades();
 			createStatusEffect(StatusEffects.AbilityCooldown2, 3, 0, 0, 0);
-			var ghobD:Number = 18;
-			while (ghobD-->0) bladesD();
-			outputText(" damage!");
+			var ghobD:Number = 9;
+			while (ghobD-->0) bladesD(2);
+			outputText("damage!");
 		}
-		private function bladesD():void {
+		private function bladesD(hits:Number = 1):void {
 			var bd:Number = 0;
 			bd += this.wis * 0.5;
 			bd += wisdomscalingbonus() * 0.5;
@@ -129,6 +129,11 @@ import classes.internals.*;
 			bd = player.takeMagicDamage(bd, true);
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 			outputText(" ");
+			if (hits == 2) {
+				bd = player.takeMagicDamage(bd, true);
+				if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+				outputText(" ");
+			}
 		}
 		
 		public function castWhiteFireSpellDinah():void {

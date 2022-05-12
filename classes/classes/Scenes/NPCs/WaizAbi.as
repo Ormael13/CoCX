@@ -29,10 +29,26 @@ use namespace CoC;
 				this.level = 18;
 			}
 			if (flags[kFLAGS.WAIZABI_LVL_UP] == 1) {
-				
+				initStrTouSpeInte(30, 30, 30, 55);
+				initWisLibSensCor(55, 225, 125, 50);
+				this.weaponAttack = 15;
+				this.armorDef = 15;
+				this.armorMDef = 15;
+				this.bonusHP = 120;
+				this.bonusWrath = 15;
+				this.bonusLust = 374;
+				this.level = 24;
 			}
 			if (flags[kFLAGS.WAIZABI_LVL_UP] == 2) {
-				
+				initStrTouSpeInte(40, 40, 40, 60);
+				initWisLibSensCor(60, 250, 150, 50);
+				this.weaponAttack = 25;
+				this.armorDef = 25;
+				this.armorMDef = 25;
+				this.bonusHP = 220;
+				this.bonusWrath = 25;
+				this.bonusLust = 430;
+				this.level = 30;
 			}
 			/*this.a = "";
 			this.short = "Waiz'abi";
