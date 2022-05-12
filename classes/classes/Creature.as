@@ -3845,11 +3845,11 @@ public class Creature extends Utils
 			}
 			if (hasStatusEffect(StatusEffects.HurricaneDance)) chance += 25;
 			if (hasStatusEffect(StatusEffects.BladeDance)) chance += 30;
-			if (game.player.cheshireScore() >= 11) {
+			if (game.player.isRace(Races.CHESHIRE)) {
 				if (hasStatusEffect(StatusEffects.EverywhereAndNowhere)) chance += 80;
 				else chance += 30;
 			}
-			if (game.player.displacerbeastScore() >= 11) {
+			if (game.player.isRace(Races.DISPLACERBEAST) >= 11) {
 				if (hasStatusEffect(StatusEffects.Displacement)) chance += 80;
 				else chance += 30;
 			}
@@ -3933,9 +3933,9 @@ public class Creature extends Utils
 			if (hasStatusEffect(StatusEffects.Flying) && (roll < flyeavsion)) return "Flying";
 			if (hasStatusEffect(StatusEffects.HurricaneDance) && (roll < 25)) return "Hurricane Dance";
 			if (hasStatusEffect(StatusEffects.BladeDance) && (roll < 30)) return "Blade Dance";
-			if (game.player.cheshireScore() >= 11 && ((!hasStatusEffect(StatusEffects.Minimise) && (roll < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 80)))) return "Minimise";
-			if (game.player.cheshireScore() >= 11 && ((!hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 80)))) return "Phasing";
-			if (game.player.displacerbeastScore() >= 11 && ((!hasStatusEffect(StatusEffects.Displacement) && (roll < 30)) || (hasStatusEffect(StatusEffects.Displacement) && (roll < 80)))) return "Displacing";
+			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.Minimise) && (roll < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 80)))) return "Minimise";
+			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 80)))) return "Phasing";
+			if (game.player.isRace(Races.DISPLACERBEAST) && ((!hasStatusEffect(StatusEffects.Displacement) && (roll < 30)) || (hasStatusEffect(StatusEffects.Displacement) && (roll < 80)))) return "Displacing";
 			return null;
 		}
 

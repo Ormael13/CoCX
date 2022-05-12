@@ -3038,24 +3038,18 @@ public class Soulforce extends BaseContent
 	}
 	private function SoulforceRegeneration00():Number {
 		var SFR00:Number = 0;
-		var kitsuneTier:int = player.racialTierNumber(Races.KITSUNE);
-		if (player.kitsuneScore() >= 5) {
-			if (kitsuneTier >= 1) {
-				if (kitsuneTier >= 2) {
-					if (kitsuneTier >= 3) {
-						if (kitsuneTier >= 4) SFR00 += 200;
-						else SFR00 += 150;
-					}
-					else SFR00 += 80;
-				}
-				else SFR00 += 40;
-			}
-			else SFR00 += 20;
-		}
-		if (player.nekomataScore() >= 10) {
-			if (player.tailType == 8 && player.tailCount >= 2 && player.nekomataScore() >= 12) SFR00 += 40;
-			else SFR00 += 20;
-		}
+		var tier:int;
+		
+		tier = player.racialTierNumber(Races.KITSUNE);
+		if (tier >= 4) SFR00 += 200;
+		else if (tier == 3) SFR00 += 150;
+		else if (tier == 2) SFR00 += 80;
+		else if (tier == 1) SFR00 += 40;
+		
+		tier = player.racialTierNumber(Races.NEKOMATA);
+		if (tier >= 2) SFR00 += 40;
+		else if (tier == 1) SFR00 += 20;
+		
 		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) SFR00 += 20;
 		if (player.hasPerk(PerkLib.DaoistWarriorStage)) SFR00 += 20;
 		if (player.hasPerk(PerkLib.DaoistElderStage)) SFR00 += 20;
@@ -3478,24 +3472,18 @@ public class Soulforce extends BaseContent
 	}
 	public function AmountOfSoulforceRecoveredDuringCultivation(mod:Number):Number {
 		var costPercent:Number = 100;
-		var kitsuneTier:int = player.racialTierNumber(Races.KITSUNE);
-		if (player.kitsuneScore() >= 5) {
-			if (kitsuneTier >= 1) {
-				if (kitsuneTier >= 2) {
-					if (kitsuneTier >= 3) {
-						if (kitsuneTier >= 4) costPercent += 1000;
-						else costPercent += 650;
-					}
-					else costPercent += 400;
-				}
-				else costPercent += 200;
-			}
-			else costPercent += 100;
-		}
-		if (player.nekomataScore() >= 10) {
-			if (player.tailType == 8 && player.tailCount >= 2 && player.nekomataScore() >= 12) costPercent += 200;
-			else costPercent += 100;
-		}
+		var tier:int;
+		
+		tier = player.racialTierNumber(Races.KITSUNE);
+		if (tier >= 4) costPercent += 1000;
+		else if (tier == 3) costPercent += 650;
+		else if (tier == 2) costPercent += 400;
+		else if (tier == 1) costPercent += 200;
+		
+		tier = player.racialTierNumber(Races.NEKOMATA);
+		if (tier >= 2) costPercent += 200;
+		else if (tier == 1) costPercent += 100;
+		
 		if (player.hasPerk(PerkLib.DaoistCultivator)) costPercent += 100;
 		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) costPercent += 100;
 		if (player.hasPerk(PerkLib.DaoistWarriorStage)) costPercent += 100;

@@ -8,6 +8,7 @@ package classes.IMutations
     import classes.PerkClass;
     import classes.PerkType;
     import classes.Player;
+import classes.Races;
 
 public class DisplacerMetabolismMutation extends PerkType
     {
@@ -53,7 +54,7 @@ public class DisplacerMetabolismMutation extends PerkType
                 if (pTier == 0){
                     IMutationsLib.DisplacerMetabolismIM.requireMetabolismMutationSlot()
                             .requireCustomFunction(function (player:Player):Boolean {
-                        return player.displacerbeastScore() >= 14;
+                        return player.isRace(Races.DISPLACERBEAST);
                     }, "Displacer beast");
                 }
                 else{

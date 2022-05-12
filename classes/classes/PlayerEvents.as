@@ -453,14 +453,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			if ((player.salamanderScore()>=7 || player.hasStatusEffect(StatusEffects.HinezumiCoat) || player.hellcatScore() >= 10) && !player.hasStatusEffect(StatusEffects.Overheat))
+			if ((player.salamanderScore()>=7 || player.hasStatusEffect(StatusEffects.HinezumiCoat) || player.isRace(Races.HELLCAT)) && !player.hasStatusEffect(StatusEffects.Overheat))
 			{
 				//Argument 1 is weither pc is in heat stage or not 1 means active
 				//Argument 2 is how many day left before player enter heats again typicaly 3;
 				//Argument 3 tells if player had sex and satisfied its overheat set to 1 when true;
 				outputText("\n\nWoa your body is heating up like crazy. You suddenly realise that due to being a");
 				if (player.salamanderScore()>=7) outputText(" salamander");
-				else if (player.hellcatScore() >= 10) outputText(" hellcat");
+				else if (player.isRace(Races.HELLCAT)) outputText(" hellcat");
 				else if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) outputText(" hinezumi");
 				outputText(" your body has started overheating with lust. You will have to constantly sate your uncontrollable burning need for sex if only to stay sane long enough not to jump on everything that moves.");
 				player.createStatusEffect(StatusEffects.Overheat, 1, 0, 0,0);
@@ -468,7 +468,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				else if (player.hasVagina()) player.goIntoHeat(false);
 				needNext = true;
 			}
-			if ((player.salamanderScore()<7 && !player.hasStatusEffect(StatusEffects.HinezumiCoat) && player.hellcatScore() < 10) && player.hasStatusEffect(StatusEffects.Overheat))
+			if ((player.salamanderScore()<7 && !player.hasStatusEffect(StatusEffects.HinezumiCoat) && !player.isRace(Races.HELLCAT)) && player.hasStatusEffect(StatusEffects.Overheat))
 			{
 				outputText("\n\nYour body finally calms down. It would seem you are no longer as hot as you used to be, which might be a good thing as you won't have to deal with heat problems... for now.");
 				player.removeStatusEffect(StatusEffects.Overheat);
@@ -1667,12 +1667,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Fire Affinity
-			if ((player.salamanderScore() >= 4 || player.phoenixScore() >= 10 || player.hellcatScore() >= 10 || player.firesnailScore() >= 15 || (player.mouseScore() >= 12 && player.lowerBody == LowerBody.HINEZUMI && player.arms.type == Arms.HINEZUMI && player.tailType == Tail.HINEZUMI)) && !player.hasPerk(PerkLib.FireAffinity)) {
+			if ((player.salamanderScore() >= 4 || player.phoenixScore() >= 10 || player.isRace(Races.HELLCAT) || player.firesnailScore() >= 15 || (player.mouseScore() >= 12 && player.lowerBody == LowerBody.HINEZUMI && player.arms.type == Arms.HINEZUMI && player.tailType == Tail.HINEZUMI)) && !player.hasPerk(PerkLib.FireAffinity)) {
 				outputText("\nYou suddenly feels your body temperature rising to ridiculus level. You pant for several minutes until you're finally at ease with your bodily heat. You doubt any more heat is going to make you more uncomfortable then this as you quietly soak in the soothing warmth your body naturally produce. It's like your body is made out of living fire.\n\n(<b>Gained Perk: Fire Affinity</b>)\n");
 				player.createPerk(PerkLib.FireAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((player.salamanderScore() < 4 && player.phoenixScore() < 10 && player.hellcatScore() < 10 && player.firesnailScore() < 15 && player.mouseScore() < 12 && player.lowerBody != LowerBody.HINEZUMI && player.arms.type != Arms.HINEZUMI && player.tailType != Tail.HINEZUMI) && player.hasPerk(PerkLib.FireAffinity)) {
+			else if ((player.salamanderScore() < 4 && player.phoenixScore() < 10 && !player.isRace(Races.HELLCAT) && player.firesnailScore() < 15 && player.mouseScore() < 12 && player.lowerBody != LowerBody.HINEZUMI && player.arms.type != Arms.HINEZUMI && player.tailType != Tail.HINEZUMI) && player.hasPerk(PerkLib.FireAffinity)) {
 				outputText("\nYou suddenly feel chilly as your bodily temperature drop down to human level. You lost your natural warmth reverting to that of a standard human.\n\n<b>(Lost Perk: Fire Affinity)</b>\n");
 				player.removePerk(PerkLib.FireAffinity);
 				needNext = true;
@@ -1875,12 +1875,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Enigma
-			if (player.sphinxScore() >= 14 && !player.hasPerk(PerkLib.Enigma)) {
+			if (player.isRace(Races.SPHINX) && !player.hasPerk(PerkLib.Enigma)) {
 				outputText("\nBeing a sphinx has granted you insight on many things including various secrets to martial combat, guess this is what they mean about using your smarts before your brawn.\n\n<b>(Gained Enigma perk!)</b>\n");
 				player.createPerk(PerkLib.Enigma, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if (player.sphinxScore() < 14 && player.hasPerk(PerkLib.Enigma)) {
+			if (!player.isRace(Races.SPHINX) && player.hasPerk(PerkLib.Enigma)) {
 				outputText("\nAs you no longer possess the insight of a sphinx you no longer have the ability to fully use your smarts to improve your martial prowess.\n\n<b>(Lost the Enigma perk!)</b>\n");
 				player.removePerk(PerkLib.Enigma);
 				needNext = true;
@@ -2121,7 +2121,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Loosing hellcat body parts
-			if (player.hellcatScore() >= 10 && flags[kFLAGS.WITCHES_SABBATH] > 1) {
+			if (player.isRace(Races.HELLCAT) && flags[kFLAGS.WITCHES_SABBATH] > 1) {
 				var hellcatparts:Number = 3;
 				if (player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA) hellcatparts -= 1;
 				if (player.hairType != Hair.BURNING) hellcatparts -= 1;

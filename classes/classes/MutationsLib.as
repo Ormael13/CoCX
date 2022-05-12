@@ -593,10 +593,10 @@ public class MutationsLib
 					return player.demonScore() >= 11;
 				}, "Demon race");
 				CatlikeNimbleness.requirePerk(PerkLib.Flexibility).requireCustomFunction(function (player:Player):Boolean {
-					return player.isRace(Races.CAT) || player.nekomataScore() >= 10 || player.displacerbeastScore() >= 14 || player.hellcatScore() >= 10 || player.cheshireScore() >= 11 || player.sphinxScore() >= 14;
+					return player.isRace(Races.CAT) || player.isRace(Races.NEKOMATA) || player.isRace(Races.DISPLACERBEAST) || player.isRace(Races.HELLCAT) || player.isRace(Races.CHESHIRE) || player.isRace(Races.SPHINX);
 				}, "Any cat race");
 				DisplacerMetabolism.requireMetabolismMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.displacerbeastScore() >= 14;
+					return player.isRace(Races.DISPLACERBEAST);
 				}, "Displacer beast");
 				DraconicBones.requireBonesAndMarrowMutationSlot()
 				.requireCustomFunction(function (player:Player):Boolean {
@@ -769,7 +769,7 @@ public class MutationsLib
 					return player.beeScore() >= 14 || player.mantisScore() >= 12 || player.scorpionScore() >= 4 || player.spiderScore() >= 5 || player.isRace(Races.CANCER) || player.isRace(Races.ATLACH_NACHA,2);
 				}, "Any insect race");
 				TwinHeart.requireAdaptationsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.centaurScore() >= 8 || player.unicornScore() >= 12 || player.sphinxScore() >= 14 || player.isRace(Races.CANCER) || player.isTaur() || player.isDrider();
+					return player.centaurScore() >= 8 || player.unicornScore() >= 12 || player.isRace(Races.SPHINX) || player.isRace(Races.CANCER) || player.isTaur() || player.isDrider();
 				}, "Taur/Drider or Unicorn/Bicorn race");
 				VampiricBloodsteam.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.hasStatusEffect(StatusEffects.VampireThirst);

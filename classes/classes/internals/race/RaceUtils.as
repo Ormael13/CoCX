@@ -61,7 +61,17 @@ public class RaceUtils {
 		var operatorFn:Function;
 		var name:String;
 		
-		if (typeof op === "object" && op && "operator" in op) {
+		if (typeof op === "object") {
+			if (!op || !("operator" in op)) {
+				if (op is Array) {
+					trace('[ERROR] '+errorContext+"Array provided not wrapped in ANY/NONE")
+					return parseOperatorObject({
+						operator: "any",
+						options: op
+					}, nameProvider, errorContext);
+				}
+				throw new Error(errorContext+" Invalid operator")
+			}
 			var operator:* = op["operator"];
 			switch (operator) {
 				case "any":

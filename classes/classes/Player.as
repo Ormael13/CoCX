@@ -3572,42 +3572,6 @@ use namespace CoC;
 					if (perkv2(PerkLib.ElementalBody) == 4) race = "primordial undine";
 				}
 			}
-			if (TopRace == "nekomata") {
-				if (TopScore >= 10) {
-					if (tailType == 8 && tailCount >= 2 && TopScore >= 12) race = "elder nekomata";
-					else race = "nekomata";
-				}
-			}
-			if (TopRace == "cheshire") {
-				if (TopScore >= 11) {
-					race = "cheshire cat";
-				}
-			}
-			if (TopRace == "hellcat") {
-				if (TopScore >= 10) {
-					if (TopScore >= 17) {
-						race = "Kasha";
-					} else {
-						race = "hellcat";
-					}
-				}
-			}
-			if (TopRace == "displacer beast") {
-				if (TopScore >= 14) {
-					race = "displacer beast";
-				}
-			}
-			if (TopRace == "sphinx") {
-				if (TopScore >= 30) {
-					race = "noble sphinx";
-				}
-				if (TopScore >= 21) {
-					race = "greater sphinx";
-				}
-				if (TopScore >= 14) {
-					race = "sphinx";
-				}
-			}
 			if (TopRace == "centipede") {
 				race = "centipede-" + mf("man", "girl");
 			}
@@ -4278,15 +4242,15 @@ use namespace CoC;
 		public function chimeraScore():Number {
 			Begin("Player","racialScore","chimera");
 			var chimeraCounter:Number = 0;
-			if (isRace(Races.CAT) >= 8)
+			if (isRace(Races.CAT))
 				chimeraCounter++;
-			if (nekomataScore() >= 10)
+			if (isRace(Races.NEKOMATA))
 				chimeraCounter++;
-			if (cheshireScore() >= 11)
+			if (isRace(Races.CHESHIRE))
 				chimeraCounter++;
-			if (hellcatScore() >= 10)
+			if (isRace(Races.HELLCAT))
 				chimeraCounter++;
-			if (displacerbeastScore() >= 14)
+			if (isRace(Races.DISPLACERBEAST))
 				chimeraCounter++;
 			if (lizardScore() >= 8)
 				chimeraCounter++;
@@ -4458,7 +4422,7 @@ use namespace CoC;
 		public function grandchimeraScore():Number {
 			Begin("Player","racialScore","grandchimera");
 			var grandchimeraCounter:Number = 0;
-			if (nekomataScore() >= 12)
+			if (isRace(Races.NEKOMATA, 2))
 				grandchimeraCounter++;
 			if (isRace(Races.DRAGON, 2))
 				grandchimeraCounter++;
@@ -5047,199 +5011,6 @@ use namespace CoC;
 			return racialScore(Races.CAT);
 		}
 
-		//Determine nekomata Rating
-		public function nekomataScore():Number {
-			Begin("Player","racialScore","nekomata");
-			var nekomataCounter:Number = 0;
-			if (faceType == Face.CAT_CANINES)
-				nekomataCounter++;
-			if (eyes.type == Eyes.CAT)
-				nekomataCounter++;
-			if (ears.type == Ears.CAT)
-				nekomataCounter++;
-			if (tongue.type == Tongue.CAT)
-				nekomataCounter++;
-			if (tailType == Tail.CAT)
-				nekomataCounter++;
-			if (rearBody.type == RearBody.LION_MANE)
-				nekomataCounter++;
-			if (tailType == Tail.NEKOMATA_FORKED_1_3)
-				nekomataCounter += 2;
-			if (tailType == Tail.NEKOMATA_FORKED_2_3)
-				nekomataCounter += 3;
-			if (tailType == Tail.CAT && tailCount == 2)
-				nekomataCounter += 4;
-			if (arms.type == Arms.CAT)
-				nekomataCounter++;
-			if (lowerBody == LowerBody.CAT)
-				nekomataCounter++;
-			if (hasPartialCoat(Skin.FUR))
-				nekomataCounter++;
-			if (hasPerk(PerkLib.Flexibility))
-				nekomataCounter++;
-			if (hasPerk(PerkLib.Necromancy))
-				nekomataCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimbleness))
-				nekomataCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimblenessPrimitive))
-				nekomataCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimblenessEvolved))
-				nekomataCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimbleness) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				nekomataCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimblenessPrimitive) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				nekomataCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimblenessEvolved) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				nekomataCounter++;
-			if (isRace(Races.CAT) || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING || eyes.type == Eyes.DISPLACER || ears.type == Ears.DISPLACER || arms.type == Arms.DISPLACER || rearBody.type == RearBody.DISPLACER_TENTACLES) nekomataCounter = 0;
-			nekomataCounter = finalRacialScore(nekomataCounter, Races.NEKOMATA);
-			End("Player","racialScore");
-			return nekomataCounter;
-		}
-
-		//Determine cheshire Rating
-		public function cheshireScore():Number {
-			Begin("Player","racialScore","cheshire");
-			var cheshireCounter:Number = 0;
-			if (faceType == Face.CHESHIRE || faceType == Face.CHESHIRE_SMILE)
-				cheshireCounter += 2;
-			if (eyes.type == Eyes.CAT)
-				cheshireCounter++;
-			if (ears.type == Ears.CAT)
-				cheshireCounter++;
-			if (tongue.type == Tongue.CAT)
-				cheshireCounter++;
-			if (tailType == Tail.CAT)
-				cheshireCounter++;
-			if (arms.type == Arms.CAT)
-				cheshireCounter++;
-			if (lowerBody == LowerBody.CAT)
-				cheshireCounter++;
-			if (hasFur() || hasPartialCoat(Skin.FUR))
-				cheshireCounter++;
-			if (hairColor == "lilac and white striped" && coatColor == "lilac and white striped")
-				cheshireCounter += 2;
-			if (hasPerk(PerkLib.Flexibility))
-				cheshireCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimbleness))
-				cheshireCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimblenessPrimitive))
-				cheshireCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimblenessEvolved))
-				cheshireCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimbleness) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				cheshireCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimblenessPrimitive) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				cheshireCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimblenessEvolved) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				cheshireCounter++;
-			if (isRace(Races.CAT) || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING || tailType == Tail.TWINKASHA
-			 || eyes.type == Eyes.DISPLACER || ears.type == Ears.DISPLACER || arms.type == Arms.DISPLACER || rearBody.type == RearBody.DISPLACER_TENTACLES) cheshireCounter = 0;
-			cheshireCounter = finalRacialScore(cheshireCounter, Races.CHESHIRE);
-			End("Player","racialScore");
-			return cheshireCounter;
-		}
-
-		//Determine hellcat Rating
-		public function hellcatScore():Number {
-			Begin("Player","racialScore","hellcat");
-			var hellcatCounter:Number = 0;
-			if (faceType == Face.CAT || faceType == Face.CAT_CANINES)
-				hellcatCounter++;
-			if (eyes.type == Eyes.INFERNAL)
-				hellcatCounter++;
-			if (ears.type == Ears.CAT)
-				hellcatCounter++;
-			if (tongue.type == Tongue.CAT)
-				hellcatCounter++;
-			if (hairType == Hair.BURNING)
-				hellcatCounter++;
-			if (tailType == Tail.BURNING)
-				hellcatCounter++;
-			if (tailType == Tail.TWINKASHA && tailCount == 2)
-				hellcatCounter+=3;
-			if (arms.type == Arms.CAT)
-				hellcatCounter++;
-			if (lowerBody == LowerBody.CAT)
-				hellcatCounter++;
-			if (hasFur() || hasPartialCoat(Skin.FUR))
-				hellcatCounter++;
-			if (coatColor == "midnight black")
-				hellcatCounter++;
-			if (skin.base.color == "ashen")
-				hellcatCounter++;
-			if (hasPerk(PerkLib.Flexibility))
-				hellcatCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimbleness))
-				hellcatCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimblenessPrimitive))
-				hellcatCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimblenessEvolved))
-				hellcatCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimbleness) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				hellcatCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimblenessPrimitive) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				hellcatCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimblenessEvolved) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				hellcatCounter++;
-			if (isRace(Races.CAT) || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type != Eyes.INFERNAL || hairType != Hair.BURNING || (tailType != Tail.BURNING && tailType != Tail.TWINKASHA)
-			 || eyes.type == Eyes.DISPLACER || ears.type == Ears.DISPLACER || arms.type == Arms.DISPLACER || rearBody.type == RearBody.DISPLACER_TENTACLES) hellcatCounter = 0;
-			hellcatCounter = finalRacialScore(hellcatCounter, Races.HELLCAT);
-			End("Player","racialScore");
-			return hellcatCounter;
-		}
-
-		//Determine displacer beast Rating
-		public function displacerbeastScore():Number {
-			Begin("Player","racialScore","displacerbeast");
-			var displacerbeastCounter:Number = 0;
-			if (faceType == Face.CAT || faceType == Face.CAT_CANINES)
-				displacerbeastCounter++;
-			if (eyes.type == Eyes.DISPLACER && eyes.colour == "yellow")
-				displacerbeastCounter++;
-			if (tongue.type == Tongue.CAT)
-				displacerbeastCounter++;
-			if (ears.type == Ears.DISPLACER)
-				displacerbeastCounter++;
-			if (tailType == Tail.CAT)
-				displacerbeastCounter++;
-			if (lowerBody == LowerBody.LION)
-				displacerbeastCounter++;
-			if (arms.type == Arms.DISPLACER)
-				displacerbeastCounter += 3;
-			if (rearBody.type == RearBody.DISPLACER_TENTACLES)
-				displacerbeastCounter += 2;
-			if (hasFur() || hasPartialCoat(Skin.FUR))
-				displacerbeastCounter++;
-			if (InCollection(coatColor, ["black", "midnight black", "midnight"]))
-				displacerbeastCounter++;
-			if (skin.base.color == "dark gray")
-				displacerbeastCounter++;
-			if (hasPerk(PerkLib.Flexibility))
-				displacerbeastCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimbleness))
-				displacerbeastCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimblenessPrimitive))
-				displacerbeastCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimblenessEvolved))
-				displacerbeastCounter++;
-			if (hasPerk(MutationsLib.DisplacerMetabolism))
-				displacerbeastCounter++;
-			if (hasPerk(MutationsLib.DisplacerMetabolismPrimitive))
-				displacerbeastCounter++;
-			if ((hasPerk(MutationsLib.CatlikeNimbleness) || hasPerk(MutationsLib.DisplacerMetabolism)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				displacerbeastCounter++;
-			if ((hasPerk(MutationsLib.CatlikeNimblenessPrimitive) || hasPerk(MutationsLib.DisplacerMetabolismPrimitive)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				displacerbeastCounter++;
-			if (hasPerk(MutationsLib.LactaBovinaOvariesEvolved) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				displacerbeastCounter++;
-			if (isRace(Races.CAT) || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || rearBody.type == RearBody.LION_MANE || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING) displacerbeastCounter = 0;
-			if (arms.type != Arms.DISPLACER || rearBody.type != RearBody.DISPLACER_TENTACLES) displacerbeastCounter = 0;
-			displacerbeastCounter = finalRacialScore(displacerbeastCounter, Races.DISPLACERBEAST);
-			End("Player","racialScore");
-			return displacerbeastCounter;
-		}
-
 		//Determine lizard rating
 		public function lizardScore():Number {
 			Begin("Player","racialScore","lizard");
@@ -5386,12 +5157,10 @@ use namespace CoC;
 			return horseCounter;
 		}
 
-		//Determine kitsune Rating
 		public function kitsuneScore():Number {
 			return racialScore(Races.KITSUNE);
 		}
 
-		//Determine Dragon Rating
 		public function dragonScore():Number {
 			return racialScore(Races.DRAGON);
 		}
@@ -5516,9 +5285,7 @@ use namespace CoC;
 			return jabberwockyCounter;
 		}
 
-		//Goblin score
-		public function goblinScore():Number
-		{
+		public function goblinScore():Number {
 			return racialScore(Races.GOBLIN);
 		}
 
@@ -5603,15 +5370,11 @@ use namespace CoC;
 			return gremlinCounter;
 		}
 
-		//Goo score
-		public function gooScore():Number
-		{
+		public function gooScore():Number {
 			return racialScore(Races.SLIME);
 		}
 
-		//Dark Goo score
-		public function darkgooScore():Number
-		{
+		public function darkgooScore():Number {
 			return racialScore(Races.DARKSLIME);
 		}
 
@@ -6261,11 +6024,9 @@ use namespace CoC;
 			return orcaCounter;
 		}
 
-		//Leviathan score
 		public function leviathanScore():Number {
 			return racialScore(Races.SEA_DRAGON);
 		}
-
 
 		//Oni score
 		public function oniScore():Number {
@@ -7417,71 +7178,6 @@ use namespace CoC;
 			return centaurCounter;
 		}
 
-		public function sphinxScore():Number
-		{
-			Begin("Player","racialScore","sphinx");
-			var sphinxCounter:Number = 0;
-			var SphinxSkinColor:Array = ["dark", "tan"];
-			if (isTaur()) {
-				if (lowerBody == LowerBody.CAT)
-					sphinxCounter += 2;
-				if (tailType == Tail.CAT && (lowerBody == LowerBody.CAT))
-					sphinxCounter++;
-				if (skinType == 0 && (lowerBody == LowerBody.CAT))
-					sphinxCounter++;
-				if (arms.type == Arms.SPHINX && (lowerBody == LowerBody.CAT))
-					sphinxCounter++;
-				if (ears.type == Ears.LION && (lowerBody == LowerBody.CAT))
-					sphinxCounter++;
-				if (faceType == Face.CAT_CANINES && (lowerBody == LowerBody.CAT))
-					sphinxCounter++;
-			}
-			if (InCollection(skinTone, SphinxSkinColor))
-				sphinxCounter++;
-			if (eyes.type == Eyes.CAT)
-				sphinxCounter++;
-			if (tongue.type == Tongue.CAT)
-				sphinxCounter++;
-			if (tailType == Tail.CAT)
-				sphinxCounter++;
-			if (tailType == Tail.LION)
-				sphinxCounter++;
-			if (lowerBody == LowerBody.CAT)
-				sphinxCounter++;
-			if (faceType == Face.CAT_CANINES)
-				sphinxCounter++;
-			if (wings.type == Wings.FEATHERED_SPHINX)
-				sphinxCounter += 4;
-			if (catCocks() > 0 || hasVagina())
-				sphinxCounter++;
-			if (hasPartialCoat(Skin.FUR) || hasPlainSkinOnly())
-				sphinxCounter++;
-			if (hasPerk(MutationsLib.TwinHeart))
-				sphinxCounter += 2;
-			if (hasPerk(MutationsLib.TwinHeartPrimitive))
-				sphinxCounter += 2;
-			if (hasPerk(MutationsLib.TwinHeartEvolved))
-				sphinxCounter += 2;
-			if (hasPerk(PerkLib.Flexibility))
-				sphinxCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimbleness))
-				sphinxCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimblenessPrimitive))
-				sphinxCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimblenessEvolved))
-				sphinxCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimbleness) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				sphinxCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimblenessPrimitive) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				sphinxCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimblenessEvolved) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				sphinxCounter++;
-			if (arms.type != Arms.SPHINX || wings.type != Wings.FEATHERED_SPHINX) sphinxCounter = 0;
-			sphinxCounter = finalRacialScore(sphinxCounter, Races.SPHINX);
-			End("Player","racialScore");
-			return sphinxCounter;
-		}
-
 		//Determine Unicornkin Rating
 		public function unicornkinScore():Number {
 			var bicornColorPalette:Array = ["black", "midnight black", "midnight"];
@@ -7717,10 +7413,6 @@ use namespace CoC;
 			alicornCounter = finalRacialScore(alicornCounter, Races.UNICORN);
 			End("Player","racialScore");
 			return alicornCounter;
-		}
-
-		public function alicornScore():Number {
-			return racialScore(Races.ALICORN);
 		}
 
 		//Determine Phoenix Rating
@@ -9438,84 +9130,6 @@ use namespace CoC;
 				maxStrCap2 -= 30;
 				maxSpeCap2 += 80;
 				maxIntCap2 += 55;
-			}
-			if (sphinxScore() >= 14) {
-				if (sphinxScore() >= 30) {
-					maxStrCap2 += 110;
-					maxTouCap2 -= 20;
-					if (hasPerk(PerkLib.Flexibility)) maxSpeCap2 += 70;
-					else maxSpeCap2 += 60;
-					maxIntCap2 += 150;
-					maxWisCap2 += 150;
-				}
-				if (sphinxScore() >= 21) {
-					maxStrCap2 += 90;
-					maxTouCap2 -= 20;
-					if (hasPerk(PerkLib.Flexibility)) maxSpeCap2 += 60;
-					else maxSpeCap2 += 50;
-					maxIntCap2 += 100;
-					maxWisCap2 += 95;
-				}
-				else {
-					maxStrCap2 += 50;
-					maxTouCap2 -= 10;
-					if (hasPerk(PerkLib.Flexibility)) maxSpeCap2 += 50;
-					else maxSpeCap2 += 40;
-					maxIntCap2 += 90;
-					maxWisCap2 += 40;
-				}
-			}//+50/-20/+40/+100/+40
-			if (nekomataScore() >= 10) {
-				if (hasPerk(PerkLib.Flexibility)) maxSpeCap2 += 50;
-				else maxSpeCap2 += 40;
-				if (tailType == 8 && tailCount >= 2 && nekomataScore() >= 12) {
-					maxIntCap2 += 40;
-					maxWisCap2 += 100;
-				}
-				else {
-					maxIntCap2 += 30;
-					maxWisCap2 += 80;
-				}
-			}
-			if (cheshireScore() >= 11) {
-				if (hasPerk(PerkLib.Flexibility)) maxSpeCap2 += 70;
-				else maxSpeCap2 += 60;
-				maxIntCap2 += 80;
-				currentSen += 25;
-			}
-			if (hellcatScore() >= 10) {
-				if (hellcatScore() >= 17) {
-					if (hasPerk(PerkLib.Flexibility)) maxSpeCap2 += 80;
-					else maxSpeCap2 += 70;
-					maxIntCap2 += 135;
-					maxLibCap2 += 100;
-					currentSen += 50;
-				}
-				else {
-					if (hasPerk(PerkLib.Flexibility)) maxSpeCap2 += 50;
-					else maxSpeCap2 += 40;
-					maxIntCap2 += 85;
-					maxLibCap2 += 50;
-					currentSen += 25;
-				}
-			}
-			if (displacerbeastScore() >= 14){
-				if (displacerbeastScore() >= 20) {
-					maxStrCap2 += 140
-					if (hasPerk(PerkLib.Flexibility)) maxSpeCap2 += 150;
-					else maxSpeCap2 += 140;
-					maxIntCap2 -= 30;
-					maxWisCap2 -= 30;
-					maxLibCap2 += 80;
-				}
-				else{
-					maxStrCap2 += 95
-					if (hasPerk(PerkLib.Flexibility)) maxSpeCap2 += 110;
-					else maxSpeCap2 += 100;
-					maxIntCap2 -= 25;
-					maxWisCap2 -= 20;
-					maxLibCap2 += 60;
-				}
 			}
 			if (bunnyScore() >= 10) {
 					maxStrCap2 -= 20;

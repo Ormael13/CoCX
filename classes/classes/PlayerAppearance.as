@@ -1019,10 +1019,10 @@ public class PlayerAppearance extends BaseContent {
 				outputText("[/font]");
 			}
 			if (race == clickedRace) {
-				flushOutputTextToGUI();
-				mainView.mainText.scrollV = mainView.mainText.textHeight;
 				outputText("\n");
 				outputText(race.printDetails(body));
+				flushOutputTextToGUI();
+				mainView.mainText.scrollV = mainView.mainText.textHeight;
 			}
 		}
 		mainView.linkHandler = function(event:String):void {
@@ -1102,11 +1102,7 @@ public class PlayerAppearance extends BaseContent {
 		//Centipede
 		if (player.centipedeScore() >= 8) outputText("\n<font color=\"#0000a0\">Centipede: " + player.centipedeScore() + " (+60% to Str racial multi, +80% to Spe racial multi)</font>");
 		else if (player.centipedeScore() >= 1) outputText("\n<font color=\"#008000\">Centipede: " + player.centipedeScore() + "</font>");
-		else if (player.centipedeScore() < 1) outputText("\n<font color=\"#ff0000\">Centipede: 0</font>");
-		//Cheshire cat
-		if (player.cheshireScore() >= 11) outputText("\n<font color=\"#0000a0\">Cheshire cat: " + player.cheshireScore() + " (+"+(player.hasPerk(PerkLib.Flexibility) ? "60":"70")+"% to Spe racial multi, +80% to Int racial multi, +25 max Sens)</font>");
-		else if (player.cheshireScore() >= 1) outputText("\n<font color=\"#008000\">Cheshire cat: " + player.cheshireScore() + "</font>");
-		else if (player.cheshireScore() < 1) outputText("\n<font color=\"#ff0000\">Cheshire cat: 0</font>");
+		else if (player.centipedeScore() < 1) outputText("\n<font color=\"#ff0000\">Centipede: 0</font>")
 		//CHIMERA
 		outputText("\nCHIMERA: " + player.chimeraScore());
 		//Couatl
@@ -1136,11 +1132,6 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.devilkinScore() >= 11) outputText("\n<font color=\"#0000a0\">Devilkin: " + player.devilkinScore() + " (+55% to Str racial multi, -20% to Spe racial multi, +80% to Int racial multi, +65% to Lib racial multi, +15 min Sens, +" + (150 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 		else if (player.devilkinScore() >= 1) outputText("\n<font color=\"#008000\">Fiend: " + player.devilkinScore() + "</font>");
 		else if (player.devilkinScore() < 1) outputText("\n<font color=\"#ff0000\">Fiend: 0</font>");
-		//Displacer beast
-		if (player.displacerbeastScore() >= 20) outputText("\n<font color=\"#0000a0\">Displacer Beast: " + player.displacerbeastScore() + " (+140% to Str racial multi, +"+(player.hasPerk(PerkLib.Flexibility) ? "150":"140")+"% to Spe racial multi, -30% to Int racial multi, -30% to Wis racial multi, +80% to Lib racial multi)</font>");
-		else if (player.displacerbeastScore() >= 14) outputText("\n<font color=\"#0000a0\">Displacer Beast: " + player.displacerbeastScore() + " (+95% to Str racial multi, +"+(player.hasPerk(PerkLib.Flexibility) ? "100":"110")+"% to Spe racial multi, -25% to Int racial multi, -20% to Wis racial multi, +60% to Lib racial multi)</font>");
-		else if (player.displacerbeastScore() >= 1) outputText("\n<font color=\"#008000\">Displacer Beast: " + player.displacerbeastScore() + "</font>");
-		else if (player.displacerbeastScore() < 1) outputText("\n<font color=\"#ff0000\">Displacer Beast: 0</font>");
 		//Dog
 		if (player.dogScore() >= 4) outputText("\n<font color=\"#0000a0\">Dog-morph: " + player.dogScore() + " (+15% to Spe racial multi, -5% to Int racial multi)</font>");
 		else if (player.dogScore() >= 1) outputText("\n<font color=\"#008000\">Dog-morph: " + player.dogScore() + "</font>");
@@ -1210,27 +1201,6 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.harpyScore() >= 8) outputText("\n<font color=\"#0000a0\">Harpy: " + player.harpyScore() + " (-20% to Tou racial multi, +80% to Spe racial multi, +60% to Lib racial multi)</font>");
 		else if (player.harpyScore() >= 1) outputText("\n<font color=\"#008000\">Harpy: " + player.harpyScore() + "</font>");
 		else if (player.harpyScore() < 1) outputText("\n<font color=\"#ff0000\">Harpy: 0</font>");
-		//Hellcat
-		if (player.hellcatScore() >= 17 && player.tailType == Tail.TWINKASHA && player.tailCount == 2) {
-			outputText("\n<font color=\"#0000a0\">Kasha: " + player.hellcatScore() + " (+");
-			if (player.hasPerk(PerkLib.Flexibility)) {
-				if (player.hasPerk(MutationsLib.CatlikeNimblenessEvolved)) outputText("100");
-				else if (player.hasPerk(MutationsLib.CatlikeNimblenessPrimitive)) outputText("90");
-				else outputText("80");
-			} else outputText("70");
-			outputText("% to Spe racial multi, +135% to Int racial multi, +100% to Lib racial multi, +50 min/max Sens)</font>");
-		}
-		else if (player.hellcatScore() >= 10) {
-			outputText("\n<font color=\"#0000a0\">Hellcat: " + player.hellcatScore() + " (+");
-			if (player.hasPerk(PerkLib.Flexibility)) {
-				if (player.hasPerk(MutationsLib.CatlikeNimblenessEvolved)) outputText("70");
-				else if (player.hasPerk(MutationsLib.CatlikeNimblenessPrimitive)) outputText("60");
-				else outputText("50");
-			} else outputText("40");
-			outputText("% to Spe racial multi, +70% to Int racial multi, +40% to Lib racial multi, +25 min/max Sens)</font>");
-		}
-		else if (player.hellcatScore() >= 1 && player.hellcatScore() < 10) outputText("\n<font color=\"#008000\">Hellcat: " + player.hellcatScore() + "</font>");
-		else if (player.hellcatScore() < 1) outputText("\n<font color=\"#ff0000\">Hellcat: 0</font>");
 		//Horse
 		if (player.horseScore() >= 7) outputText("\n<font color=\"#0000a0\">Horse-morph: " + player.horseScore() + " (+35% to Tou racial multi, +70% to Spe racial multi, +" + (70 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 		else if (player.horseScore() >= 1) outputText("\n<font color=\"#008000\">Horse-morph: " + player.horseScore() + "</font>");
@@ -1334,16 +1304,6 @@ public class PlayerAppearance extends BaseContent {
 		if (player.nagaScore() >= 8) outputText("\n<font color=\"#0000a0\">Naga: " + player.nagaScore() + " (+"+(player.isNaga() ? "55":"40")+"% to Str racial multi, +20% to Tou racial multi, +"+(player.isNaga() ? "75":"60")+"% to Spe racial multi)</font>");
 		else if (player.nagaScore() >= 1) outputText("\n<font color=\"#008000\">Naga: " + player.nagaScore() + "</font>");
 		else if (player.nagaScore() < 1) outputText("\n<font color=\"#ff0000\">Naga: 0</font>");
-		//Nekomata
-		if (player.nekomataScore() >= 10) {
-			if (player.tailType == 8 && player.tailCount >= 2 && player.nekomataScore() >= 12) outputText("\n<font color=\"#0000a0\">Elder Nekomata: " + player.nekomataScore() + " (+");
-			else outputText("\n<font color=\"#0000a0\">Nekomata: " + player.nekomataScore() + " (+");
-			outputText(""+(player.hasPerk(PerkLib.Flexibility) ? "40":"50")+"");
-			if (player.tailType == 8 && player.tailCount >= 2 && player.nekomataScore() >= 12) outputText("% to Spe racial multi, +40% to Int racial multi, +100% to Wis racial multi, +20% max Soulforce)</font>");
-			else outputText("% to Spe racial multi, +30% to Int racial multi, +80% to Wis racial multi, +10% max Soulforce)</font>");
-		}
-		else if (player.nekomataScore() >= 1) outputText("\n<font color=\"#008000\">Nekomata: " + player.nekomataScore() + "</font>");
-		else if (player.nekomataScore() < 1) outputText("\n<font color=\"#ff0000\">Nekomata: 0</font>");
 		//Oni
 		if (player.oniScore() >= 18) outputText("\n<font color=\"#0000a0\">Elder Oni: " + player.oniScore() + " (+150% to Str racial multi, +90% to Tou racial multi, -30% to Int racial multi, +60% to Wis racial multi)</font>");
 		else if (player.oniScore() >= 12) outputText("\n<font color=\"#0000a0\">Oni: " + player.oniScore() + " (+100% to Str racial multi, +60% to Tou racial multi, -20% to Int racial multi, +40% to Wis racial multi)</font>");
@@ -1436,12 +1396,6 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.sirenScore() >= 10) outputText("\n<font color=\"#0000a0\">Siren: " + player.sirenScore() + " (+50% to Str racial multi, +70% to Spe racial multi, +30% to Lib racial multi)</font>");
 		else if (player.sirenScore() >= 1) outputText("\n<font color=\"#008000\">Siren: " + player.sirenScore() + "</font>");
 		else if (player.sirenScore() < 1) outputText("\n<font color=\"#ff0000\">Siren: 0</font>");
-		//Sphinx
-		if (player.sphinxScore() >= 30) outputText("\n<font color=\"#0000a0\">Noble Sphinx: " + player.sphinxScore() + " (+110% to Str racial multi, -20% to Tou racial multi, +"+(player.hasPerk(PerkLib.Flexibility) ? "70":"60")+"% to Spe racial multi, +150% to Int racial multi, +150% to Wis racial multi)</font>");
-		else if (player.sphinxScore() >= 21) outputText("\n<font color=\"#0000a0\">Elder Sphinx: " + player.sphinxScore() + " (+90% to Str racial multi, -20% to Tou racial multi, +"+(player.hasPerk(PerkLib.Flexibility) ? "60":"50")+"% to Spe racial multi, +100% to Int racial multi, +95% to Wis racial multi)</font>");
-		else if (player.sphinxScore() >= 14) outputText("\n<font color=\"#0000a0\">Sphinx: " + player.sphinxScore() + " (+50% to Str racial multi, -10% to Tou racial multi, +"+(player.hasPerk(PerkLib.Flexibility) ? "50":"40")+"% to Spe racial multi, +90% to Int racial multi, +40% to Wis racial multi)</font>");
-		else if (player.sphinxScore() >= 1) outputText("\n<font color=\"#008000\">Sphinx: " + player.sphinxScore() + "</font>");
-		else if (player.sphinxScore() < 1) outputText("\n<font color=\"#ff0000\">Sphinx: 0</font>");
 		//Spider
 		if (player.spiderScore() >= 7) outputText("\n<font color=\"#0000a0\">Spider-morph: " + player.spiderScore() + " (-20% to Str racial multi, +50% to Tou racial multi, +75% to Int racial multi)</font>");
 		else if (player.spiderScore() >= 1) outputText("\n<font color=\"#008000\">Spider-morph: " + player.spiderScore() + "</font>");

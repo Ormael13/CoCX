@@ -53,7 +53,7 @@ public class CatLikeNimblenessMutation extends PerkType
                 if (pTier == 0){
                     IMutationsLib.CatLikeNimblenessIM.requirePerk(PerkLib.Flexibility)
                             .requireCustomFunction(function (player:Player):Boolean {
-                        return player.isRace(Races.CAT) || player.nekomataScore() >= 10 || player.displacerbeastScore() >= 14 || player.hellcatScore() >= 10 || player.cheshireScore() >= 11 || player.sphinxScore() >= 14;
+                        return player.isRace(Races.CAT) || player.isRace(Races.NEKOMATA) || player.isRace(Races.DISPLACERBEAST) || player.isRace(Races.HELLCAT) || player.isRace(Races.CHESHIRE) || player.isRace(Races.SPHINX);
                     }, "Any cat race");
                 }
                 else{

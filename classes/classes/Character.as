@@ -699,8 +699,6 @@ import classes.CoC;
 				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) multimax += (.35);
 				if (Forgefather.refinement == 5) multimax += (.5);
 			}
-			if (game.player.nekomataScore() >= 10) multimax += 0.1;
-			if (game.player.nekomataScore() >= 12 && game.player.tailType == 8 && game.player.tailCount == 2) multimax += 0.2;
 			if (game.player.unicornScore() >= 10) multimax += 0.1;
 			if (hasPerk(PerkLib.HistoryCultivator) || hasPerk(PerkLib.PastLifeCultivator)) multimax += 0.1;
 			if (hasPerk(PerkLib.JobSoulCultivator)) {//8005-9005 soulforce na razie przed liczeniem mnożnika jest

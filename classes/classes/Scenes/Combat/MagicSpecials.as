@@ -97,7 +97,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("<b>You need more time before you can use Compelling Aria again.</b>\n\n");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
-		if (player.sphinxScore() >= 14) {
+		if (player.isRace(Races.SPHINX)) {
 			bd = buttons.add("Cursed Riddle", CursedRiddle, "Weave a curse in the form of a magical riddle. If the victims fails to answer it, it will be immediately struck by the curse. Intelligence determines the odds and damage.");
 			bd.requireFatigue(spellCost(50));
 			if (player.hasStatusEffect(StatusEffects.CooldownCursedRiddle)) {
@@ -277,7 +277,7 @@ public class MagicSpecials extends BaseCombatContent {
 			else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			else bd.requireMana(spellCost(40),true);
 		}
-		if (player.hellcatScore() >= 10) {
+		if (player.isRace(Races.HELLCAT)) {
 			//Feline Curse
 			bd = buttons.add("Feline curse", FelineCurse, "Turn the victim into a small domestic cat for 3 rounds at the cost of arousing yourself. \n");
 			if (player.hasStatusEffect(StatusEffects.CooldownFelineCurse)) {
@@ -645,7 +645,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You already empowered with corrupt power!");
 			}
 		}
-		if (player.cheshireScore() >= 11) {
+		if (player.isRace(Races.CHESHIRE)) {
 			bd = buttons.add("Ever&Nowhere", EverywhereAndNowhere).hint("Periodically phase out of reality increasing your invasion as well as granting you the ability to surprise your opponent denying their defences.  \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "9":"10")+" rounds");
 			bd.requireFatigue(physicalCost(30));
 			if (player.hasStatusEffect(StatusEffects.CooldownEveryAndNowhere)) {
@@ -678,7 +678,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You need more time before you can use Baleful Polymorph again.\n\n");
 			}
 		}
-		if (player.displacerbeastScore() >= 11) {
+		if (player.isRace(Races.DISPLACERBEAST)) {
 			bd = buttons.add("Displacement", Displacement).hint("Teleport around to avoid your opponents attacks. \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "9":"10")+" rounds");
 			bd.requireFatigue(physicalCost(30));
 			if (player.hasStatusEffect(StatusEffects.CooldownDisplacement)) {

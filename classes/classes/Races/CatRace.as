@@ -30,21 +30,13 @@ public class CatRace extends Race {
 				.breastRowCount(LESS_THAN(4), 0, -1)
 				.customRequirement("","not magical feline race",
 						function (body:BodyData):Boolean {
-							return !(body.armType == Arms.SPHINX
-									|| body.wingType == Wings.FEATHERED_SPHINX
+							return !(isSphinxLike(body)
 									|| body.tailType == Tail.MANTICORE_PUSSYTAIL
-									|| body.tailType == Tail.NEKOMATA_FORKED_1_3
-									|| body.tailType == Tail.NEKOMATA_FORKED_2_3
-									|| (body.tailType == Tail.CAT && body.tailCount > 1)
+									|| isNekomataLike(body)
 									|| body.rearType == RearBody.LION_MANE
-									|| (body.hairColor == "lilac and white striped" && body.skinCoatColor == "lilac and white striped")
-									|| body.eyeType == Eyes.INFERNAL
-									|| body.hairType == Hair.BURNING
-									|| body.tailType == Tail.BURNING
-									|| body.eyeType == Eyes.DISPLACER
-									|| body.earType == Ears.DISPLACER
-									|| body.armType == Arms.DISPLACER
-									|| body.rearType == RearBody.DISPLACER_TENTACLES);
+									|| isCheshireLike(body)
+									|| isHellcatLike(body)
+									|| isDisplacerLike(body));
 						},0,-100
 						)
 				.hasPerk(PerkLib.Flexibility, +1)
@@ -75,6 +67,31 @@ public class CatRace extends Race {
 					"lib.mult": +0.60
 				})
 				.end();
+	}
+	
+	public static function isNekomataLike(body:BodyData):Boolean {
+		return body.tailType == Tail.NEKOMATA_FORKED_1_3
+				|| body.tailType == Tail.NEKOMATA_FORKED_2_3
+				|| (body.tailType == Tail.CAT && body.tailCount > 1);
+	}
+	public static function isHellcatLike(body:BodyData):Boolean {
+		return body.eyeType == Eyes.INFERNAL
+				|| body.hairType == Hair.BURNING
+				|| body.tailType == Tail.BURNING
+				|| body.tailType == Tail.TWINKASHA;
+	}
+	public static function isCheshireLike(body:BodyData):Boolean {
+		return (body.hairColor == "lilac and white striped" && body.skinCoatColor == "lilac and white striped");
+	}
+	public static function isSphinxLike(body:BodyData):Boolean {
+		return body.armType == Arms.SPHINX
+				|| body.wingType == Wings.FEATHERED_SPHINX;
+	}
+	public static function isDisplacerLike(body:BodyData):Boolean {
+		return body.eyeType == Eyes.DISPLACER
+				|| body.earType == Ears.DISPLACER
+				|| body.armType == Arms.DISPLACER
+				|| body.rearType == RearBody.DISPLACER_TENTACLES;
 	}
 }
 }

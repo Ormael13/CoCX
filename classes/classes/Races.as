@@ -1,20 +1,16 @@
 package classes {
-import classes.BodyParts.*;
 import classes.Races.*;
-import classes.internals.Utils;
 import classes.internals.race.RaceTierBuilder;
 
 public class Races {
 	
-	private static const raceClass:Class = Race;
-	
 	public static const HUMAN:Race = new Race("Human",1, "humanScore", 1);
 	public static const CAT:Race = new CatRace(2);
-	public static const NEKOMATA:Race = new Race("Nekomata",3,"nekomataScore", 10);
-	public static const CHESHIRE:Race = new Race("Cheshire",4, "cheshireScore", 11);
-	public static const HELLCAT:Race = new Race("Hellcat",5, "hellcatScore", 10);
-	public static const DISPLACERBEAST:Race = new Race("Displacer beast",6, "displacerbeastScore", 14);
-	public static const SPHINX:Race = new Race("Sphinx",7, "sphinxScore", 14);
+	public static const NEKOMATA:Race = new NekomataRace(3);
+	public static const CHESHIRE:Race = new CheshireRace(4);
+	public static const HELLCAT:Race = new HellcatRace(5);
+	public static const DISPLACERBEAST:Race = new DisplacerBeastRace(6);
+	public static const SPHINX:Race = new SphinxRace(7);
 	public static const LIZARD:Race = new Race("Lizard",8, "lizardScore", 8);
 	public static const DRAGON:Race = new DragonRace(9);
 	public static const DRAGONNE:Race = new DragonneRace(10);
