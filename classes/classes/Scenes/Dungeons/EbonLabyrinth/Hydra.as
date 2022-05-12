@@ -9,8 +9,6 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Face;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
-import classes.BodyParts.Skin;
-import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -96,8 +94,8 @@ use namespace CoC;
             this.bonusHP = 1000 + 1000*mod;
             this.bonusLust = 480 + 50*mod;
             this.level = 60 + 5*mod; //starts from 65 due to EL levelMod calculations;
-            this.gems = int((2000 + rand(400)) * Math.exp(0.3*mod));
-            this.additionalXP = int(9000 * Math.exp(0.3*mod));
+            this.gems = mod > 50 ? 0 : Math.floor((2000 + rand(400)) * Math.exp(0.3*mod));
+            this.additionalXP = mod > 50 ? 0 : Math.floor(9000 * Math.exp(0.3*mod));
 
 			this.a = "";
 			this.short = "Hydra";

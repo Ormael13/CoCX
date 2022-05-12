@@ -1,12 +1,9 @@
 
 package classes.Scenes.Dungeons.EbonLabyrinth
 {
-import classes.GlobalFlags.kFLAGS;
 import classes.BaseContent;
-import classes.Scenes.SceneLib;
 import classes.EventParser;
 import classes.StatusEffects;
-import classes.Scenes.Dungeons.EbonLabyrinth.DarkSlimeEmpress;
 
 public class DarkSlimeEmpressScene extends BaseContent {
     public function DarkSlimeEmpressScene() {}

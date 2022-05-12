@@ -3,11 +3,9 @@ package classes.Scenes.Dungeons.EbonLabyrinth
 {
 import classes.GlobalFlags.kFLAGS;
 import classes.BaseContent;
-import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.PerkLib;
 import classes.EventParser;
-import classes.Scenes.Dungeons.EbonLabyrinth.HellfireSnail;
 
 public class HellfireSnailScene extends BaseContent {
     public function HellfireSnailScene() {}

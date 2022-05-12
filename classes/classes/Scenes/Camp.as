@@ -4810,6 +4810,14 @@ public function rebirthFromBadEnd():void {
 		addButton(14, "Back", recallScenes);
 	}
 
+	public function recallScenes_desertCave():void {
+		menu();
+		//Doppel
+		if (flags[kFLAGS.SANDWITCH_MOB_DEFEATED])
+			addButton(0, "SandWitchMob", SceneLib.dungeons.desertcave.yoYouBeatUpSomeSandWitchesYOUMONSTER).hint("Punish some sand witches for attacking you.");
+
+	}
+
 	public function recallScenes_deepCave():void {
 		menu();
 		//Doppel
