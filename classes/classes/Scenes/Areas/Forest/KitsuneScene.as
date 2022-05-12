@@ -672,7 +672,7 @@ public class KitsuneScene extends BaseContent
 			CoC.instance.timeQ = 30 - model.time.hours;
 			camp.sleepRecovery(true);
 			CoC.instance.timeQ = 0;
-			player.addCurse("tou", 2);
+			player.addCurse("tou", 2, 2);
 			if (!CoC.instance.inCombat)
 				doNext(camp.returnToCampUseOneHour);
 			else cleanupAfterCombat();
