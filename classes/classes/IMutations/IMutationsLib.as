@@ -66,6 +66,8 @@ public class IMutationsLib
 		public static const ManticoreMetabolismIM:PerkType = new ManticoreMetabolismMutation();
 		public static const MantislikeAgilityIM:PerkType = new MantislikeAgilityMutation();
 		public static const MelkieLungIM:PerkType = new MelkieLungMutation();
+		public static const MinotaurTesticlesIM:PerkType = new MinotaurTesticlesMutation();
+
 		public static const TrachealSystemIM:PerkType = new TrachealSystemMutation();
 		public static const VampiricBloodstreamIM:PerkType = new VampiricBloodstreamMutation();
 
@@ -117,6 +119,7 @@ public class IMutationsLib
 			}
 			function IMutationsTesticles():void{
 				IMutationsList.push([EasterBunnyEggBagIM,EasterBunnyEggBagMutation]);
+				IMutationsList.push([MinotaurTesticlesIM, MinotaurTesticlesMutation]);
 			}
 			function IMutationsEyes():void{
 				IMutationsList.push([GazerEyesIM,GazerEyesMutation]);
