@@ -467,10 +467,8 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 				menu();
 				addButton(0, "Statue", playerBuilder.currentStateOfStatue).hint("Check on the statue.");
 				addButton(1, "Strange Book", playerBuilder.strangeBookOfGolems).hint("Examine the strange book.");
-                if (flags[kFLAGS.ONYX_PATH] < 1)
-                    addButtonIfTrue(2, "Spare Statue", makingNewGargoyle, "You can't do anything with it... unless you manage to find a filled soul gem somewhere?",
-                        player.hasKeyItem("Black Soul Gem") >= 0, "Check on the spare statue.");
-				addButton(4, "Back", templemainmenu);
+                if (flags[kFLAGS.ONYX_PATH] < 1) addButtonIfTrue(2, "Spare Statue", onyx.makingNewGargoyle, "You can't do anything with it... unless you manage to find a filled soul gem somewhere?", player.hasKeyItem("Black Soul Gem") >= 0, "Check on the spare statue.");
+				addButton(4, "Back", templeMainMenu);
 			}
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 1) {
 				outputText("As you wander down into the basement of the temple you find what looks like an old abandoned Atelier. Down there is a plinth, surrounded by various depictions of what looks like gargoyles. One could follow their examples and create a gargoyle of their own.");

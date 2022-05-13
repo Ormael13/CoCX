@@ -292,8 +292,8 @@ package classes.Scenes
 			outputText("-Added 'Others' submenu in Camp Actions > NPC's for disabling some out of camp npc's: Callu (Otter girl) & Venus (Gigantic Turtle).\n");
 			outputText("-Grandiose Hail of Moon Blades soulskill would create 56 not 54 weapons.\n");
 			outputText("-Boss type enemies gained additional bonuses: Diehard effect of 7,5% of max HP + 2,250 HP * NG tier, OverMax HP effect of 15% magnitude.\n");
-			//outputText("-New tag for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
-			//outputText("-New tag for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
+			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
+			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
