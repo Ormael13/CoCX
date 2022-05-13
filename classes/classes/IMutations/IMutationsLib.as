@@ -9,6 +9,8 @@ package classes.IMutations
 import classes.CoC;
 import classes.PerkType;
 
+import flash.net.navigateToURL;
+
 /**
  * The goal of Mutations 3.0 is to allow for everything related to the mutation itself to be hosted within its own file, and to reduce the number of perks being created for the player.
  *
@@ -69,6 +71,9 @@ public class IMutationsLib
 		public static const MinotaurTesticlesIM:PerkType = new MinotaurTesticlesMutation();
 		public static const NaturalPunchingBagIM:PerkType = new NaturalPunchingBagMutation();
 		public static const NukiNutsIM:PerkType = new NukiNutsMutation();
+		public static const ObsidianHeartIM:PerkType = new ObsidianHeartMutation();
+		public static const OniMusculatureIM:PerkType = new OniMusculatureMutation();
+		public static const OrcAdrenalGlandsIM:PerkType = new OrcAdrenalGlandsMutation();
 		public static const TrachealSystemIM:PerkType = new TrachealSystemMutation();
 		public static const VampiricBloodstreamIM:PerkType = new VampiricBloodstreamMutation();
 
@@ -86,15 +91,17 @@ public class IMutationsLib
 				IMutationsList.push([DraconicHeartIM,DraconicHeartMutation]);
 				IMutationsList.push([FrozenHeartIM,FrozenHeartMutation]);
 				IMutationsList.push([HeartOfTheStormIM,HeartOfTheStormMutation]);
+				IMutationsList.push([ObsidianHeartIM,ObsidianHeartMutation]);
 			}
 			function IMutationsMuscle():void{
 				IMutationsList.push([MantislikeAgilityIM,MantislikeAgilityMutation]);
+				IMutationsList.push([OniMusculatureIM,OniMusculatureMutation]);
 			}
 			function IMutationsMouth():void{
 				IMutationsList.push([HollowFangsIM,HollowFangsMutation]);
 			}
 			function IMutationsAdrGland():void{
-
+				IMutationsList.push([OrcAdrenalGlandsIM,OrcAdrenalGlandsMutation]);
 			}
 			function IMutationsBloodStream():void{
 				IMutationsList.push([FeyArcaneBloodstreamIM,FeyArcaneBloodstreamMutation]);
