@@ -91,10 +91,10 @@ public class MainMenu extends BaseContent {
 		//Disclaimer
 		outputText("\n\n<b><u>DISCLAIMER</u></b>");
 		outputText("<li>There are many strange and odd fetishes contained in this flash.  Peruse at own risk.</li>");
-		outputText("<li>Please be 18 or the legal age to view porn before playing. If not, enable SFW Mode.</li>");
+		outputText("<li>Please be 18 or the legal age to view porn before playing.</li>");
 		outputText("<li>Try to keep your keyboard clean.  Think of the children!</li>");
 		//Other Info
-		outputText("\n<b>Fall of Eden</b> is worth a try too ^^");
+		//outputText("\n<b>Fall of Eden</b> is worth a try too ^^");	//Does it even have any progress?
 		if (debug)
 			outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>");
 		if (flags[kFLAGS.SHOW_SPRITES_FLAG])

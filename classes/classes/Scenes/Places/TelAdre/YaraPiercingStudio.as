@@ -4,8 +4,6 @@ import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.StatusEffects;
 import classes.display.SpriteDb;
-
-import coc.view.ButtonData;
 import coc.view.ButtonDataList;
 
 public class YaraPiercingStudio extends TelAdreAbstractContent {
@@ -351,7 +349,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
                     }
                 }
                 else {
-                    if (player.hasPerk(PerkLib.PiercedCrimstone)) {
+                    if (!player.hasPerk(PerkLib.PiercedCrimstone)) {
                         player.createPerk(PerkLib.PiercedCrimstone, 5, 0, 0, 0);
                     } else {
                         player.addPerkValue(PerkLib.PiercedCrimstone, 1, 5);
@@ -368,7 +366,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
                     }
                 }
                 else {
-                    if (player.hasPerk(PerkLib.PiercedIcestone)) {
+                    if (!player.hasPerk(PerkLib.PiercedIcestone)) {
                         player.createPerk(PerkLib.PiercedIcestone, 5, 0, 0, 0);
                     } else {
                         player.addPerkValue(PerkLib.PiercedIcestone, 1, 5);

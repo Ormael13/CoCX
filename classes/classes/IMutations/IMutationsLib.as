@@ -66,6 +66,9 @@ public class IMutationsLib
 		public static const ManticoreMetabolismIM:PerkType = new ManticoreMetabolismMutation();
 		public static const MantislikeAgilityIM:PerkType = new MantislikeAgilityMutation();
 		public static const MelkieLungIM:PerkType = new MelkieLungMutation();
+		public static const MinotaurTesticlesIM:PerkType = new MinotaurTesticlesMutation();
+		public static const NaturalPunchingBagIM:PerkType = new NaturalPunchingBagMutation();
+		public static const NukiNutsIM:PerkType = new NukiNutsMutation();
 		public static const TrachealSystemIM:PerkType = new TrachealSystemMutation();
 		public static const VampiricBloodstreamIM:PerkType = new VampiricBloodstreamMutation();
 
@@ -99,12 +102,12 @@ public class IMutationsLib
 				IMutationsList.push([VampiricBloodstreamIM,VampiricBloodstreamMutation]);
 			}
 			function IMutationsFaT():void{
-
+				IMutationsList.push([NaturalPunchingBagIM,NaturalPunchingBagMutation]);
 			}
 			function IMutationsLungs():void{
 				IMutationsList.push([DraconicLungIM,DraconicLungMutation]);
 				IMutationsList.push([DrakeLungIM,DrakeLungMutation]);
-				IMutationsList.push([MelkieLungIM, MelkieLungMutation]);
+				IMutationsList.push([MelkieLungIM,MelkieLungMutation]);
 			}
 			function IMutationsMetabolism():void{
 				IMutationsList.push([DisplacerMetabolismIM,DisplacerMetabolismMutation]);
@@ -117,6 +120,8 @@ public class IMutationsLib
 			}
 			function IMutationsTesticles():void{
 				IMutationsList.push([EasterBunnyEggBagIM,EasterBunnyEggBagMutation]);
+				IMutationsList.push([MinotaurTesticlesIM,MinotaurTesticlesMutation]);
+				IMutationsList.push([NukiNutsIM,NukiNutsMutation]);
 			}
 			function IMutationsEyes():void{
 				IMutationsList.push([GazerEyesIM,GazerEyesMutation]);
