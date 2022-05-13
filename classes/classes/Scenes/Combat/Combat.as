@@ -9376,7 +9376,7 @@ public class Combat extends BaseContent {
             }
         }
         //Apophis Unholy Aura
-        if (player.apophisScore() >= 23){
+        if (player.isRace(Races.APOPHIS)){
             outputText("Your unholy aura seeps into [monster a] [monster name], slowly and insidiously eroding its resiliance to your unholy charms.\n\n");
             monster.lustVuln += 0.10;
         }

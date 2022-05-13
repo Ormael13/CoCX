@@ -126,6 +126,13 @@ public class RaceUtils {
 		}
 	}
 	
+	public static function checkSlotFn(slot:int, value:*, errorContext:String=""): Function {
+		return composeOpArg(
+				argumentSlotFn(slot),
+				parseOperatorObject(value, BodyData.Slots[slot].nameFn, errorContext).operatorFn
+		);
+	}
+	
 	/**
 	 * @return `(input) => options.indexOf(input) >= 0`
 	 */

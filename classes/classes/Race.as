@@ -7,8 +7,22 @@ import classes.internals.race.RaceTierBuilder;
 import classes.internals.race.RacialRequirement;
 
 public class Race {
-	public static const RaceById:Object = {};
-	public static const AllRaces:/*Race*/Array = [];
+	public static const RaceById:Object                    = {};
+	/**
+	 * All races, including disabled
+	 */
+	public static const AllRacesWithDisabled:/*Race*/Array = [];
+	/**
+	 * All races except disabled; use this array to calc racial scores and apply bonuses
+	 */
+	public static var AllEnabledRaces:/*Race*/Array      = [];
+	/**
+	 * All races except disabled and hidden
+	 */
+	public static var AllVisibleRaces:/*Race*/Array = [];
+	/**
+	 * All visible enabled races, sorted by name
+	 */
 	public static var AllRacesByName:/*Race*/Array = [];
 	
 	public static function byId(id:int):Race {
@@ -22,6 +36,16 @@ public class Race {
 	public var requirements:/*RacialRequirement*/Array = [];
 	public var tiers:/*RaceTier*/Array = [];
 	private var _minScore:int;
+	
+	/**
+	 * true - do not display the race in menus
+	 */
+	public var hidden:Boolean = false;
+	
+	/**
+	 * true - do not apply any bonuses
+	 */
+	public var disabled:Boolean = false;
 
     /**
      * @param _name Display name of the race
@@ -34,7 +58,7 @@ public class Race {
         this.id = _id;
         this.playerFunctionName = _playerFunctionName;
         RaceById[_id] = this;
-		AllRaces.push(this);
+		AllRacesWithDisabled.push(this);
 		this._minScore = _minScore;
     }
 	

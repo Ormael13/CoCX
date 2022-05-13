@@ -104,13 +104,13 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("<b>You need some time to think of a new riddle.</b>\n\n");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
-		if (player.wendigoScore() >= 10) {
+		if (player.isRace(Races.WENDIGO)) {
 			bd = buttons.add("Spectral scream", SpectralScream, "Let out a soul-chilling scream to stun your opponent and damage their sanity and soul. \n");
 			if (player.hasStatusEffect(StatusEffects.CooldownSpectralScream)) {
 				bd.disable("<b>You need more time before you can use Spectral scream again.</b>\n\n");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
-		if ((player.hasPerk(PerkLib.Incorporeality) || player.wendigoScore() >= 10) && !player.hasPerk(PerkLib.ElementalBody)) {
+		if ((player.hasPerk(PerkLib.Incorporeality) || player.isRace(Races.WENDIGO)) && !player.hasPerk(PerkLib.ElementalBody)) {
 			bd = buttons.add("Possess", possess).hint("Attempt to temporarily possess a foe and force them to raise their own lusts.\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "1 round":"2 rounds")+"\n");
 			if (player.hasStatusEffect(StatusEffects.CooldownPossess)) {
 				bd.disable("<b>You need more time before you can use Possess again.</b>\n\n");
@@ -695,7 +695,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.gems < 100) bd.disable("You need more gems in order to use Money Strike.");
 			else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
-		if (player.ratatoskrScore() >= 12) {
+		if (player.isRace(Races.RATATOSKR)) {
 			var cdko:Number = 12;
 			if (player.hasPerk(MutationsLib.RatatoskrSmartsPrimitive)) cdko -= 1;
 			if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) cdko -= 1;
@@ -714,7 +714,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You need more time before you can use Provoke again.\n\n");
 			}
 		}
-		if (player.ratatoskrScore() >= 12 || player.hasPerk(MutationsLib.RatatoskrSmarts)) {
+		if (player.isRace(Races.RATATOSKR) || player.hasPerk(MutationsLib.RatatoskrSmarts)) {
 			var cdww:Number = 4;
 			if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) cdww -= 1;
 			if (player.hasPerk(PerkLib.NaturalInstincts)) cdww -= 1;

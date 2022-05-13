@@ -3106,7 +3106,7 @@ public class Creature extends Utils
 		public function isAlraune():Boolean { return lowerBodyPart.isAlraune(); }
 		public function isLiliraune():Boolean { return lowerBodyPart.isLiliraune(); }
 		public function isElf():Boolean {
-			return hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved) || game.player.elfScore() >= 10 || game.player.woodElfScore() >= 17;
+			return hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved) || game.player.elfScore() >= 10 || game.player.isRace(Races.WOODELF);
 		}
 
 		public function isFlying():Boolean {

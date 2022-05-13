@@ -633,7 +633,7 @@ public class MutationsLib
 					return player.isRace(Races.ALICORN, 2) || player.unicornScore() >= 12 || player.alicornkinScore() >= 10 || player.unicornkinScore() >= 10;
 				}, "Unicorn or Bicorn race");
 				ElvishPeripheralNervSys.requirePeripheralNervSysMutationSlot().requirePerk(PerkLib.ElvenSense).requireCustomFunction(function (player:Player):Boolean {
-					return player.elfScore() >= 11 || player.woodElfScore() >= 22;
+					return player.elfScore() >= 11 || player.isRace(Races.WOODELF);
 				}, "Elf race");
 				FeyArcaneBloodstream.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.fairyScore() >= 23;
@@ -754,7 +754,7 @@ public class MutationsLib
 					return player.raijuScore() >= 10;
 				}, "Raiju race");
 				RatatoskrSmarts.requirePeripheralNervSysMutationSlot().requirePerk(PerkLib.KnowledgeIsPower).requireCustomFunction(function (player:Player):Boolean {
-					return player.ratatoskrScore() >= 12;
+					return player.isRace(Races.RATATOSKR);
 				}, "Squirrel/Ratatoskr race");
 				SalamanderAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(PerkLib.Lustzerker).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 7 || player.phoenixScore() >= 11;
@@ -781,7 +781,7 @@ public class MutationsLib
 					return player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS);
 				}, "Spider or Snake fangs")
 				.requireCustomFunction(function (player:Player):Boolean {
-					return player.spiderScore() >= 5 || player.apophisScore() >= 23 || player.nagaScore() >= 8 || player.gorgonScore() >= 11 || player.vouivreScore() >= 11 || player.couatlScore() >= 11 || player.hydraScore() >= 14;
+					return player.spiderScore() >= 5 || player.isRace(Races.APOPHIS) || player.nagaScore() >= 8 || player.gorgonScore() >= 11 || player.vouivreScore() >= 11 || player.couatlScore() >= 11 || player.hydraScore() >= 14;
 				}, "Spider or any snake-like race");
 				WhaleFat.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.orcaScore() >= 14 || player.isRace(Races.SEA_DRAGON);

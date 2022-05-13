@@ -856,10 +856,6 @@ import classes.CoC;
 			if (game.player.demonScore() >= 16 && hasPerk(PerkLib.Phylactery)) multimax += 0.4;
 			if (game.player.elfScore() >= 5) multimax += 0.1;
 			if (game.player.elfScore() >= 11) multimax += 0.1;
-			if (game.player.woodElfScore() >= 22) multimax += 0.1;
-			if (game.player.woodElfScore() >= 25) multimax += 0.1;
-			if (game.player.woodElfScore() >= 28) multimax += 0.1;
-			if (game.player.woodElfScore() >= 31) multimax += 0.1;
 			if (hasPerk(PerkLib.HistoryScholar) || hasPerk(PerkLib.PastLifeScholar)) multimax += 0.1;
 			if (hasPerk(PerkLib.ArcaneRegenerationMinor) && inte >= 50) {
 				multimax += 0.05;

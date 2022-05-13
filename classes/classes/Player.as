@@ -3609,9 +3609,6 @@ use namespace CoC;
 					}
 				}
 			}
-			if (TopRace == "cyclop") {
-				race = "cyclop";
-			}
 			if (TopRace == "gazer") {
 				if (TopScore >= 21 && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) race = "Eye Tyrant";
 				else race = "gazer";
@@ -3664,9 +3661,6 @@ use namespace CoC;
 						race = "kitshoo";
 					}
 				}
-			}
-			if (TopRace == "troll") {
-				race = "troll";
 			}
 			if (TopRace == "horse") {
 				race = "equine-morph";
@@ -3916,12 +3910,6 @@ use namespace CoC;
 			if (TopRace == "naga") {
 				race = "naga";
 			}
-			if (TopRace == "apophis") {
-				if (lowerBody == 3 && TopScore >= 23) {
-					if (TopScore >= 26) race = "unhallowed apophis";
-					else race = "apophis";
-				}
-			}
 			if (TopRace == "fire snail") {
 				if (TopScore >= 15) {
 					race = "fire snail";
@@ -3982,17 +3970,6 @@ use namespace CoC;
 				if (isTaur()) race = "elf-taur";
 				else race = "elf";
 			}
-			if (TopRace == "wood elf") {
-				if (TopScore >= 17) {
-					if (TopScore >= 25) {
-						if (isTaur()) race = "wood elf-taur";
-						else race = "wood elf";
-					} else {
-						if (isTaur()) race = "Wood Elf-taur";
-						else race = "Wood elf little sister";
-					}
-				}
-			}
 			if (TopRace == "frost wyrm") {
 				if (TopScore >= 29) race = "greater frost wyrm";
 				else race = "frost wyrm";
@@ -4010,21 +3987,6 @@ use namespace CoC;
 					else race = "kamaitachi";
 				}
 			}
-			if (TopRace == "ratatoskr") {
-				if (TopScore >= 18) {
-					if (isTaur()) race = "ratatoskr-taur";
-					else race = "ratatoskr";
-				} else {
-					if (isTaur()) race = "squirrel-taur";
-					else race = "squirrel morph";
-				}
-			}
-			if (TopRace == "wendigo") {
-				if (TopScore >= 10) {
-					if (TopScore >= 22) race = "greater wendigo";
-					else race = "wendigo";
-				}
-			}
 			if (TopRace == "raiju") {
 				if (TopScore >= 19) {
 					if (isTaur()) race = "greater raiju-taur";
@@ -4039,7 +4001,6 @@ use namespace CoC;
 				if (TopScore >= 21) race = "greater thunderbird";
 				else race = "thunderbird";
 			}
-			//<mod>
 			if (TopRace == "pig") {
 				if (TopScore >= 15) {
 					race = "boar-morph";
@@ -4302,7 +4263,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (elfScore() >= 11)
 				chimeraCounter++;
-			if (woodElfScore() >= 22)
+			if (isRace(Races.WOODELF))
 				chimeraCounter++;
 			if (orcScore() >= 11)
 				chimeraCounter++;
@@ -4322,7 +4283,7 @@ use namespace CoC;
 //				chimeraCounter++;
 			if (mouseScore() >= 8)
 				chimeraCounter++;
-			if (trollScore() >= 10)
+			if (isRace(Races.TROLL))
 				chimeraCounter++;
 //			if (scorpionScore() >= 4)
 //				chimeraCounter++;
@@ -4379,7 +4340,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (yukiOnnaScore() >= 14)
 				chimeraCounter++;
-			if (wendigoScore() >= 10)
+			if (isRace(Races.WENDIGO))
 				chimeraCounter++;
 			if (melkieScore() >= 18)
 				chimeraCounter++;
@@ -4405,11 +4366,11 @@ use namespace CoC;
 				chimeraCounter++;
 			if (kamaitachiScore() >= 14)
 				chimeraCounter++;
-			if (ratatoskrScore() >= 12)
+			if (isRace(Races.RATATOSKR))
 				chimeraCounter++;
 			if (isRace(Races.ATLACH_NACHA))
 				chimeraCounter++;
-			if (cyclopScore() >= 12)
+			if (isRace(Races.CYCLOP) >= 12)
 				chimeraCounter++;
 			if (gazerScore() >= 14 && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 6)
 				chimeraCounter++;
@@ -4462,7 +4423,7 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (pigScore() >= 15)
 				grandchimeraCounter++;
-			if (wendigoScore() >= 25)
+			if (isRace(Races.WENDIGO, 2))
 				grandchimeraCounter++;
 			if (melkieScore() >= 21)
 				grandchimeraCounter++;
@@ -4474,7 +4435,7 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (kamaitachiScore() >= 18)
 				grandchimeraCounter++;
-			if (ratatoskrScore() >= 18)
+			if (isRace(Races.RATATOSKR, 2))
 				grandchimeraCounter++;
 			if (isRace(Races.CANCER, 2))
 				grandchimeraCounter++;
@@ -5419,63 +5380,6 @@ use namespace CoC;
 			return nagaCounter;
 		}
 
-		//Naga score
-		public function apophisScore():Number {
-			Begin("Player","racialScore","apophis");
-			var ApophisCounter:Number = 0;
-			if (isNaga()) {
-				ApophisCounter += 3;
-				if (arms.type == Arms.HUMAN)
-					ApophisCounter++;
-			}
-			if (InCollection(hairColor, ("black", "midnight","midnight black")))
-				ApophisCounter++;
-			if (skinTone == "light purple")
-				ApophisCounter++;
-			if (InCollection(coatColor, ["black", "midnight", "midnight black"]))
-				ApophisCounter++;
-			if (tongue.type == Tongue.SNAKE)
-				ApophisCounter++;
-			if (faceType == Face.SNAKE_FANGS)
-				ApophisCounter++;
-			if (hasPartialCoat(Skin.SCALES))
-				ApophisCounter++;
-			if (eyes.type == Eyes.SNAKEFIENDISH && InCollection(eyes.colour,"yellow"))
-				ApophisCounter+=2;
-			if (ears.type == Ears.SNAKE)
-				ApophisCounter++;
-			if (rearBody.type == RearBody.COBRA_HOOD)
-				ApophisCounter++;
-			if (wings.type == Wings.NONE)
-				ApophisCounter+=4;
-			if (hasVagina() && (vaginaType() == VaginaClass.NAGA) || (lizardCocks() > 0))
-				ApophisCounter++;
-			if (cor >= 20)
-				ApophisCounter++;
-			if (cor >= 50)
-				ApophisCounter++;
-			if (cor >= 100)
-				ApophisCounter+=2;
-			if (hasPerk(MutationsLib.VenomGlands))
-				ApophisCounter++;
-			if (hasPerk(MutationsLib.VenomGlandsPrimitive))
-				ApophisCounter++;
-			if (hasPerk(MutationsLib.VenomGlandsEvolved))
-				ApophisCounter++;
-			if (hasPerk(MutationsLib.VenomGlands) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				ApophisCounter++;
-			if (hasPerk(MutationsLib.VenomGlandsPrimitive) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				ApophisCounter++;
-			if (hasPerk(MutationsLib.VenomGlandsEvolved) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				ApophisCounter++;
-			if (!isNaga() || hairType == Hair.GORGON || eyes.type == Eyes.GORGON || horns.type == Horns.DRACONIC_X4_12_INCH_LONG || horns.type == Horns.DRACONIC_X2 || tongue.type == Tongue.DRACONIC || wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE || hairType == Hair.FEATHER || arms.type == Arms.HARPY || wings.type == Wings.FEATHERED_LARGE
-					|| lowerBody == LowerBody.HYDRA || arms.type == Arms.HYDRA)
-				ApophisCounter = 0;
-			ApophisCounter = finalRacialScore(ApophisCounter, Races.APOPHIS);
-			End("Player","racialScore");
-			return ApophisCounter;
-		}
-
 		//Gorgon score
 		public function gorgonScore():Number {
 			Begin("Player","racialScore","gorgon");
@@ -6180,63 +6084,6 @@ use namespace CoC;
 			return elfCounter;
 		}
 
-		//WoodElf score
-		public function woodElfScore():Number {
-			Begin("Player","racialScore","wood elf");
-			var WoodElfCounter:Number = 0;
-			if (hasPerk(PerkLib.BlessingOfTheAncestorTree)) {
-				WoodElfCounter += 4;
-				if (ears.type == Ears.ELVEN)
-					WoodElfCounter++;
-				if (eyes.type == Eyes.ELF)
-					WoodElfCounter++;
-				if (faceType == Face.ELF)
-					WoodElfCounter++;
-				if (tongue.type == Tongue.ELF)
-					WoodElfCounter++;
-				if (arms.type == Arms.ELF)
-					WoodElfCounter++;
-				if (lowerBody == LowerBody.ELF)
-					WoodElfCounter++;
-				if (hairType == Hair.SILKEN)
-					WoodElfCounter++;
-				if (wings.type == Wings.NONE)
-					WoodElfCounter++;
-				if (InCollection(hairColor, ["golden blonde"]))
-					WoodElfCounter++;
-				if (eyes.colour == "light green")
-					WoodElfCounter++;
-				if (InCollection(skin.base.color, ["light"]))
-					WoodElfCounter++;
-				if (skinType == Skin.PLAIN && skinAdj == "flawless")
-					WoodElfCounter++;
-				if (tone <= 60)
-					WoodElfCounter++;
-				if (thickness <= 50)
-					WoodElfCounter++;
-				if ((hasCock() && cocks.length < 6) || (hasVagina() && biggestTitSize() >= 3))
-					WoodElfCounter++;
-				if (cor >= 50)
-					WoodElfCounter++;
-				if (hasPerk(PerkLib.FlawlessBody))
-					WoodElfCounter++;
-				if (hasPerk(PerkLib.ElvenSense))
-					WoodElfCounter++;
-			}
-			if (hasPerk(MutationsLib.ElvishPeripheralNervSys))
-				WoodElfCounter += 3;
-			if (hasPerk(MutationsLib.ElvishPeripheralNervSysPrimitive))
-				WoodElfCounter += 3;
-			if (hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved))
-				WoodElfCounter += 3;
-			if (hasPerk(PerkLib.ElfsDescendant) || hasPerk(PerkLib.BloodlineElf))
-				WoodElfCounter += increaseFromBloodlinePerks();
-			if (cor < 50 || eyes.colour != "light green" || !InCollection(hairColor, ["golden blonde"])) WoodElfCounter = 0;
-			WoodElfCounter = finalRacialScore(WoodElfCounter, Races.WOODELF);
-			End("Player","racialScore");
-			return WoodElfCounter;
-		}
-
 		//Frost Wyrm score
 		public function frostWyrmScore():Number {
 			Begin("Player","racialScore","frost wyrm");
@@ -6449,59 +6296,6 @@ use namespace CoC;
 			return raijuCounter;
 		}
 
-		//Ratatoskr score
-		public function ratatoskrScore():Number {
-			Begin("Player","racialScore","ratatoskr");
-			var ratatoskrCounter:Number = 0;
-			if (ears.type == Ears.SQUIRREL)
-				ratatoskrCounter++;
-			if (eyes.type == Eyes.RATATOSKR)
-				ratatoskrCounter++;
-			if (eyes.colour == "green" || eyes.colour == "light green" || eyes.colour == "emerald")
-				ratatoskrCounter++;
-			if (faceType == Face.SMUG || faceType == Face.SQUIRREL)
-				ratatoskrCounter++;
-			if (arms.type == Arms.SQUIRREL)
-				ratatoskrCounter++;
-			if (tongue.type == Tongue.RATATOSKR)
-				ratatoskrCounter++;
-			if (lowerBody == LowerBody.SQUIRREL)
-				ratatoskrCounter++;
-			if (tailType == Tail.SQUIRREL)
-				ratatoskrCounter++;
-			if (wings.type == Wings.NONE)
-				ratatoskrCounter++;
-			if (rearBody.type == RearBody.NONE)
-				ratatoskrCounter++;
-			if (hairType == Hair.RATATOSKR)
-				ratatoskrCounter++;
-			if (InCollection(hairColor, ["brown", "light brown", "caramel", "chocolate", "russet"]))
-				ratatoskrCounter++;
-			if (InCollection(coatColor, ["brown", "light brown", "caramel", "chocolate", "russet"]))
-				ratatoskrCounter++;
-			if (hasCoatOfType(Skin.FUR) || hasPartialCoat(Skin.FUR))
-				ratatoskrCounter++;
-			if (tallness < 48)
-				ratatoskrCounter++;
-			if (hasPerk(MutationsLib.RatatoskrSmarts))
-				ratatoskrCounter++;
-			if (hasPerk(MutationsLib.RatatoskrSmartsPrimitive))
-				ratatoskrCounter++;
-			if (hasPerk(MutationsLib.RatatoskrSmartsEvolved))
-				ratatoskrCounter++;
-			if (hasPerk(MutationsLib.RatatoskrSmarts) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				ratatoskrCounter++;
-			if (hasPerk(MutationsLib.RatatoskrSmartsPrimitive) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				ratatoskrCounter++;
-			if (hasPerk(MutationsLib.RatatoskrSmartsEvolved) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				ratatoskrCounter++;
-			//if (hasPerk(PerkLib.RatatoskrsDescendant) || hasPerk(PerkLib.BloodlineRatatoskr))
-			//	ratatoskrCounter += increaseFromBloodlinePerks();
-			ratatoskrCounter = finalRacialScore(ratatoskrCounter, Races.RATATOSKR);
-			End("Player","racialScore");
-			return ratatoskrCounter;
-		}
-
 		//Thunderbird score
 		public function thunderbirdScore():Number {
 			Begin("Player","racialScore","thunderbird");
@@ -6601,42 +6395,6 @@ use namespace CoC;
 			return KamaitachiCounter;
 		}
 
-		//Cyclop score
-		public function cyclopScore():Number {
-			Begin("Player","racialScore","cyclop");
-			var cyclopCounter:Number = 0;
-			if (hasCoatOfType(Skin.COVERAGE_NONE))
-				cyclopCounter++;
-			if (eyes.type == Eyes.MONOEYE) {
-				cyclopCounter += 3;
-				if (arms.type == Arms.HUMAN)
-					cyclopCounter++;
-				if (lowerBody == LowerBody.HUMAN)
-					cyclopCounter++;
-			}
-			if (faceType == Face.ANIMAL_TOOTHS)
-				cyclopCounter++;
-			if (wings.type == Wings.NONE)
-				cyclopCounter++;
-			if (tailType == Tail.NONE)
-				cyclopCounter++;
-			if (tone >= 90)
-				cyclopCounter++;
-			if (tone >= 120 && cyclopCounter >= 4)
-				cyclopCounter++;
-			if (tallness > 72 && cyclopCounter >= 4)
-				cyclopCounter++;
-			if (tallness > 96 && cyclopCounter >= 6)
-				cyclopCounter++;
-			if (tallness > 120 && cyclopCounter >= 8)
-				cyclopCounter++;
-			if (rearBody.type == RearBody.TENTACLE_EYESTALKS && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 2)
-				cyclopCounter -= 10;
-			cyclopCounter = finalRacialScore(cyclopCounter, Races.CYCLOP);
-			End("Player","racialScore");
-			return cyclopCounter;
-		}
-
 		//Gazer score
 		public function gazerScore():Number {
 			Begin("Player","racialScore","gazer");
@@ -6725,25 +6483,6 @@ use namespace CoC;
 			}
 			End("Player","racialScore");
 			return mutantCounter;
-		}
-
-		//Troll score
-		public function trollScore():Number {
-			Begin("Player","racialScore","troll");
-			var trollCounter:Number = 0;
-		//	if (hasCoatOfType(Skin.CHITIN))
-		//		trollCounter++;
-		//	if (tailType == Tail.SCORPION)
-		//		trollCounter++;
-		//	if (scorpionCounter > 0 && hasPerk(PerkLib.TrachealSystem))
-		//		trollCounter++;
-		//	if (scorpionCounter > 4 && hasPerk(PerkLib.TrachealSystemEvolved))
-		//		trollCounter++;
-		//	if (scorpionCounter > 8 && hasPerk(PerkLib.TrachealSystemFinalForm))
-		//		trollCounter++;
-			trollCounter = finalRacialScore(trollCounter, Races.TROLL);
-			End("Player","racialScore");
-			return trollCounter;
 		}
 
 		//Scorpion score
@@ -7023,49 +6762,6 @@ use namespace CoC;
 			yukiOnnaCounter = finalRacialScore(yukiOnnaCounter, Races.YUKIONNA);
 			End("Player","racialScore");
 			return yukiOnnaCounter;
-		}
-
-		//Wendigo score
-		public function wendigoScore():Number {
-			Begin("Player","racialScore","wendigo");
-			var wendigoCounter:Number = 0;
-			if (hairColor == "silver-white")
-				wendigoCounter++;
-			if (coatColor == "snow white")
-				wendigoCounter++;
-			if (eyes.type == Eyes.DEAD)
-				wendigoCounter++;
-			if (eyes.colour == "spectral blue")
-				wendigoCounter++;
-			if (tongue.type == Tongue.RAVENOUS_TONGUE)
-				wendigoCounter++;
-			if (horns.type == Horns.ANTLERS && horns.count >= 4)
-				wendigoCounter += 2;
-			if (ears.type == Ears.DEER)
-				wendigoCounter++;
-			if (tailType == Tail.WENDIGO)
-				wendigoCounter++;
-			if (lowerBody == LowerBody.WENDIGO)
-				wendigoCounter++;
-			if (arms.type == Arms.WENDIGO)
-				wendigoCounter++;
-			if (faceType == Face.DEER || faceType == Face.ANIMAL_TOOTHS)
-				wendigoCounter++;
-			if (rearBody.type == RearBody.FUR_COAT)
-				wendigoCounter += 2;
-			if (wings.type == Wings.LEVITATION)
-				wendigoCounter += 3;
-			if (hasPlainSkinOnly() || hasPartialCoat(Skin.FUR))
-				wendigoCounter++;
-			if ((hasVagina() && biggestTitSize() >= 8) || biggestTitSize() == 0)
-				wendigoCounter++;
-			if (horseCocks() > 0 || (hasVagina() && vaginaType() == VaginaClass.EQUINE))
-				wendigoCounter++;
-			if (hasPerk(PerkLib.EndlessHunger))
-				wendigoCounter++;
-			wendigoCounter = finalRacialScore(wendigoCounter, Races.WENDIGO);
-			End("Player","racialScore");
-			return wendigoCounter;
 		}
 
 		//Melkie score
@@ -9120,7 +8816,7 @@ use namespace CoC;
 					maxWisCap2 += 50;
 				}
 			}
-			for each (var race:Race in Race.AllRaces) {
+			for each (var race:Race in Race.AllEnabledRaces) {
 				var tier:RaceTier = race.getTier(body);
 				if (tier && tier.hasBuffs()) {
 					StatUtils.mergeBuffObjects(buffs, tier.buffs(body));
@@ -9263,10 +8959,6 @@ use namespace CoC;
 					currentSen += 25;
 				}
 			}
-			if (cyclopScore() >= 12) {
-				maxStrCap2 += 90;
-				maxTouCap2 += 90;
-			}
 			if (gazerScore() >= 14 && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 6) {
 				if (gazerScore() >= 21 && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
 					maxTouCap2 += 80;
@@ -9279,18 +8971,6 @@ use namespace CoC;
 					maxSpeCap2 -= 65;
 					maxIntCap2 += 130;
 					maxLibCap2 += 90;
-				}
-			}
-			if (ratatoskrScore() >= 12) {
-				if (ratatoskrScore() >= 18) {
-					maxStrCap2 -= 25;
-					maxSpeCap2 += 140;
-					maxIntCap2 += 155;
-				}
-				else {
-					maxStrCap2 -= 20;
-					maxSpeCap2 += 95;
-					maxIntCap2 += 105;
 				}
 			}
 			if (sirenScore() >= 10) {
@@ -9338,37 +9018,6 @@ use namespace CoC;
 				maxIntCap2 += 80;
 				maxWisCap2 += 60;
 				currentSen += 30;
-			}
-			if (woodElfScore() >= 22) {
-				if (woodElfScore() >= 31) {
-					maxStrCap2 -= 10;
-					maxTouCap2 -= 15;
-					maxSpeCap2 += 550;
-					maxIntCap2 += 495;
-					maxLibCap2 += 455;
-					currentSen += 80;
-				} else if (woodElfScore() >= 28) {
-					maxStrCap2 -= 10;
-					maxTouCap2 -= 15;
-					maxSpeCap2 += 495;
-					maxIntCap2 += 445;
-					maxLibCap2 += 415;
-					currentSen += 70;
-				} else if (woodElfScore() >= 25) {
-					maxStrCap2 -= 10;
-					maxTouCap2 -= 15;
-					maxSpeCap2 += 430;
-					maxIntCap2 += 405;
-					maxLibCap2 += 375;
-					currentSen += 60;
-				} else {
-					maxStrCap2 -= 10;
-					maxTouCap2 -= 15;
-					maxSpeCap2 += 375;
-					maxIntCap2 += 355;
-					maxLibCap2 += 335;
-					currentSen += 50;
-				}
 			}
 			if (frostWyrmScore() >= 18) {
 				if (frostWyrmScore() >= 26) {
@@ -9487,12 +9136,6 @@ use namespace CoC;
 					maxIntCap2 -= 10;
 					maxWisCap2 -= 5;
 				}
-			}
-			if (trollScore() >= 10) {
-				maxStrCap2 += 30;
-				maxSpeCap2 += 40;
-				maxIntCap2 += 30;
-				maxWisCap2 += 50;
 			}
 			if (mantisScore() >= 12) {
 				maxStrCap2 -= 40;
@@ -9644,23 +9287,6 @@ use namespace CoC;
 				maxWisCap2 += 70;
 				maxLibCap2 += 50;
 			}
-			if (wendigoScore() >= 10) {
-				if (wendigoScore() >= 22) {
-					maxStrCap2 += 70;
-					maxTouCap2 += 70;
-					maxIntCap2 += 60;
-					maxWisCap2 -= 50;
-					maxLibCap2 += 50;
-					currentSen += 50;
-				} else {
-					maxStrCap2 += 70;
-					maxTouCap2 += 70;
-					maxIntCap2 += 60;
-					maxWisCap2 -= 50;
-					maxLibCap2 += 50;
-					currentSen += 50;
-				}
-			}
 			if (melkieScore() >= 18) {
 				if (melkieScore() >= 21) {
 					maxSpeCap2 += 140;
@@ -9753,19 +9379,6 @@ use namespace CoC;
 				maxStrCap2 += 40;
 				maxTouCap2 += 20;
 				maxSpeCap2 += 60;
-			}
-			if (apophisScore() >= 23) {
-				if (apophisScore() >= 26) {
-					maxStrCap2 += 80;
-					maxTouCap2 += 80;
-					maxSpeCap2 += 100;
-					maxLibCap2 += 130;
-				} else {
-					maxStrCap2 += 70;
-					maxTouCap2 += 70;
-					maxSpeCap2 += 100;
-					maxLibCap2 += 105;
-				}
 			}
 			if (centaurScore() >= 8) {
 				maxTouCap2 += 80;

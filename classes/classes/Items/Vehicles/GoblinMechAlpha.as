@@ -2,18 +2,19 @@
  * ...
  * @author Liadri
  */
-package classes.Items.Vehicles 
+package classes.Items.Vehicles
 {
 	import classes.BodyParts.Tail;
 	import classes.BodyParts.Wings;
 	import classes.Items.Vehicles;
 	import classes.PerkLib;
 	import classes.Player;
+import classes.Races;
 
-	public class GoblinMechAlpha extends Vehicles
+public class GoblinMechAlpha extends Vehicles
 	{
 		
-		public function GoblinMechAlpha() 
+		public function GoblinMechAlpha()
 		{
 			super("GobMAlp", "GoblinMechAlpha", "Goblin Mech Alpha", "a Goblin Mech Alpha", 0, 0, 500, "A customisable goblin invention, this six-legged, large mech is equipped with a comfortable seat, fit for a goblin or a rather small person. \n\nType: Goblin Mech \nBase value: 500","Mech");
 		}
@@ -22,7 +23,7 @@ package classes.Items.Vehicles
 			if (!super.canUse()) {
 				return false;
 			}
-			if (game.player.elfScore() >= 11 || game.player.woodElfScore() >= 22) { //Elf
+			if (game.player.elfScore() >= 11 || game.player.isRace(Races.WOODELF)) { //Elf
 				outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				return false;
 			}

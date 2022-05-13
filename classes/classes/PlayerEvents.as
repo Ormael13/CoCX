@@ -1292,12 +1292,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Knowledge is power
-			if (player.ratatoskrScore() >= 12 && !player.hasPerk(PerkLib.KnowledgeIsPower)) {
+			if (player.isRace(Races.RATATOSKR) && !player.hasPerk(PerkLib.KnowledgeIsPower)) {
 				outputText("\nBecoming more of a Ratatoskr your memory seems to have grown and as such the ability the analyze and properly catalogue your opponents many weaknesses as well as new fighting skills you gained the Knowledge is Power perk!\n\n(<b>Gained Perk: Knowledge is power</b>)");
 				player.createPerk(PerkLib.KnowledgeIsPower, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (player.ratatoskrScore() < 12 && player.hasPerk(PerkLib.KnowledgeIsPower)) {// && !player.hasPerk(MutationsLib.LizanMarrow)
+			else if (!player.isRace(Races.RATATOSKR) && player.hasPerk(PerkLib.KnowledgeIsPower)) {// && !player.hasPerk(MutationsLib.LizanMarrow)
 				outputText("\nBecoming less of a Ratatoskr your memory has become hazy, your wits slowing down to that of a standard human.\n\n(<b>Lost Perk: Knowledge is power</b>)");
 				player.removePerk(PerkLib.KnowledgeIsPower);
 				needNext = true;
@@ -1563,12 +1563,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Dark Affinity
-			if ((player.vampireScore() >= 15 || player.apophisScore() >= 23) && (!player.hasPerk(PerkLib.DarknessAffinity))) {
+			if ((player.vampireScore() >= 15 || player.isRace(Races.APOPHIS)) && (!player.hasPerk(PerkLib.DarknessAffinity))) {
 				outputText("\nYou at home in darkness seeing as clearly in the shadows wich you find comforting as in broad daylight.\n\n(<b>Gained Perks: Darkness Affinity</b>)\n");
 				player.createPerk(PerkLib.DarknessAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (player.vampireScore() < 15 && player.apophisScore() < 23 && player.hasPerk(PerkLib.DarknessAffinity)) {
+			else if (player.vampireScore() < 15 && !player.isRace(Races.APOPHIS) && player.hasPerk(PerkLib.DarknessAffinity)) {
 				outputText("\nThe pitch black darkness becomes hostile toward you again as you lose your affinity toward it.\n\n<b>(Lost Perks: Darkness Affinity");
 				player.removePerk(PerkLib.DarknessAffinity);
 				outputText(")</b>\n");
@@ -1852,12 +1852,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Titanic Strength
-			if ((player.hydraScore() >= 14 || player.oniScore() >= 12 || player.orcaScore() >= 17 || player.scyllaScore() >= 12 || player.frostWyrmScore() >= 10 || player.cyclopScore() >= 12 || player.isRace(Races.SEA_DRAGON)) && player.tallness >= 80 && !player.hasPerk(PerkLib.TitanicStrength)) {
+			if ((player.hydraScore() >= 14 || player.oniScore() >= 12 || player.orcaScore() >= 17 || player.scyllaScore() >= 12 || player.frostWyrmScore() >= 10 || player.isRace(Races.CYCLOP) || player.isRace(Races.SEA_DRAGON)) && player.tallness >= 80 && !player.hasPerk(PerkLib.TitanicStrength)) {
 				outputText("\nWhoa, you've grown so big its a sheer miracle you don't damage the landscape while moving. That said, your size now contributes to your strength as well.\n\n<b>(Gained Titanic Strength perk!)</b>\n");
 				player.createPerk(PerkLib.TitanicStrength, 0, 0, 0, 0);
 				needNext = true;
 			}
-				if (((player.hydraScore() < 14 && player.oniScore() < 12 && player.orcaScore() < 17 && player.scyllaScore() < 12 && player.frostWyrmScore() < 10 && player.cyclopScore() < 12 && !player.isRace(Races.SEA_DRAGON)) || player.tallness < 80) && player.hasPerk(PerkLib.TitanicStrength)) {
+				if (((player.hydraScore() < 14 && player.oniScore() < 12 && player.orcaScore() < 17 && player.scyllaScore() < 12 && player.frostWyrmScore() < 10 && !player.isRace(Races.CYCLOP) && !player.isRace(Races.SEA_DRAGON)) || player.tallness < 80) && player.hasPerk(PerkLib.TitanicStrength)) {
 				if (player.tallness < 80) outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
 				else outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
 				player.removePerk(PerkLib.TitanicStrength);
@@ -1997,8 +1997,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				inventory.takeItem(vehicles.GOBMPRI, null);
 				needNext = true;
 			}
-			if (player.vehiclesName == "Giant Slayer Mech" && (player.elfScore() >= 11 || player.woodElfScore() >= 22 || player.tallness > 66 || player.haveWingsForWingSlap())) { //Elf OR Taller than 5'5" ft or having large wings
-				if (player.elfScore() >= 11 || player.woodElfScore() >= 22) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+			if (player.vehiclesName == "Giant Slayer Mech" && (player.elfScore() >= 11 || player.isRace(Races.WOODELF) || player.tallness > 66 || player.haveWingsForWingSlap())) { //Elf OR Taller than 5'5" ft or having large wings
+				if (player.elfScore() >= 11 || player.isRace(Races.WOODELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
 				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0 || player.hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) {
 					var RHP:Number = 1;
@@ -2322,13 +2322,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Gain venomancy if utherly toxic
-			if ((player.apophisScore() >= 23) && player.cor > 50 && !player.hasPerk(PerkLib.Venomancy)) {
+			if ((player.isRace(Races.APOPHIS)) && player.cor > 50 && !player.hasPerk(PerkLib.Venomancy)) {
 				outputText("\nYour inborn toxicity has reached such a peak that even your spells are now charged with venom. \n\n(<b>Gained Perk: Venomancy</b>)\"");
 				player.createPerk(PerkLib.Venomancy, 0, 0, 0, 0);
 				needNext = true;
 			}
 			//Lose venomancy if not toxic
-			if ((player.apophisScore() < 23) && player.cor < 89 && player.hasPerk(PerkLib.Venomancy)) {
+			if (!player.isRace(Races.APOPHIS) && player.cor < 89 && player.hasPerk(PerkLib.Venomancy)) {
 				outputText("\nYour mystical powers over poison and toxins have waned. \n\n(<b>Lost Perk: Venomancy</b>)\"");
 				player.removePerk(PerkLib.Venomancy);
 				needNext = true;

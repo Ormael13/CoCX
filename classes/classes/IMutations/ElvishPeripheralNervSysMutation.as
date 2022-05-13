@@ -8,6 +8,7 @@ package classes.IMutations
 import classes.PerkLib;
 import classes.PerkType;
 import classes.Player;
+import classes.Races;
 
 public class ElvishPeripheralNervSysMutation extends PerkType
     {
@@ -55,7 +56,7 @@ public class ElvishPeripheralNervSysMutation extends PerkType
                     IMutationsLib.ElvishPeripheralNervSysIM.requirePeripheralNervSysMutationSlot()
                             .requirePerk(PerkLib.ElvenSense)
                             .requireCustomFunction(function (player:Player):Boolean {
-                        return player.elfScore() >= 11 || player.woodElfScore() >= 22;
+                        return player.elfScore() >= 11 || player.isRace(Races.WOODELF);
                     }, "Elf race");
                 }
                 else{

@@ -1,19 +1,17 @@
 # TODO @aimozg
-* README!
-* Validate operator objects
-* Check generated names
-* Hidden/Disabled races
-* Check scores checking non-tiers
-* Inline `xxxxScore` functions
+* write README!
+* Check generated requirement names
+* Check score functions checking non-tiers
+* Inline `xxxxScore` functions?
 * `allRacialScores`/`allRacialTiers` functions
 * fangs in `-morph/boy/girl`
 * iterate in chimeras
 * kill array of objects in `race()`
-* alicorn tiers
 * solve unicornkin/alicornkin races
 * Future:
   * racial score caching
-  * Race.`onTierUp`/`onTierDown`
+  * `Race.onTierUp`/`onTierDown`
+  * "Racial form" maybe? (gargoyles, alicorn/nightmare, elementals - same tier, diff. requirements/bonuses)
 
 ## Architecture
 

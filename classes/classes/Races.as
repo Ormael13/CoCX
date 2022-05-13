@@ -91,34 +91,37 @@ public class Races {
 	public static const GREMLIN:Race = new Race("Gremlin",85,"gremlinScore", 15);
 	public static const KAMAITACHI:Race = new Race("Kamaitachi",86, "kamaitachiScore", 14);
 	public static const GAZER:Race = new Race("Gazer",87, "gazerScore", 14);
-	public static const RATATOSKR:Race = new Race("Ratatoskr",88, "ratatoskrScore", 12);
-	public static const WENDIGO:Race = new Race("Wendigo",89, "wendigoScore", 10);
-	public static const TROLL:Race        = new Race("Troll",90, "trollScore", 10);
-	public static const ATLACH_NACHA:Race = new AtlachNachaRace(91);
-	public static const WOODELF:Race      = new Race("Wood Elf",92, "woodElfScore", 22);
-	public static const SEA_DRAGON:Race = new SeaDragonRace(93);
-	public static const FMINDBREAKER:Race = new FemaleMindbreakerRace(94);
-	public static const MMINDBREAKER:Race = new MaleMindbreakerRace(95);
+	public static const RATATOSKR:Race       = new RatatoskrRace(88);
+	public static const WENDIGO:Race         = new WendigoRace(89);
+	public static const TROLL:Race           = new TrollRace(90);
+	public static const ATLACH_NACHA:Race    = new AtlachNachaRace(91);
+	public static const WOODELF:Race         = new WoodElfRace(92);
+	public static const SEA_DRAGON:Race      = new SeaDragonRace(93);
+	public static const FMINDBREAKER:Race    = new FemaleMindbreakerRace(94);
+	public static const MMINDBREAKER:Race    = new MaleMindbreakerRace(95);
 	public static const ELEMENTALFUSION:Race = new Race("Elemental Fusion",96, "fusedElementalScore", 5);
-	public static const GRYPHON:Race = new GryphonRace(97);
-	public static const PEACOCK:Race = new PeacockRace(98);
-	public static const ANGEL:Race = new AngelRace(99);
-	public static const APOPHIS:Race = new Race("Apophis",100, "apophisScore", 23);
-	public static const CYCLOP:Race = new Race("Cyclop",101, "cyclopScore", 12);
-	public static const ALICORN:Race = new AlicornRace(102);
+	public static const GRYPHON:Race         = new GryphonRace(97);
+	public static const PEACOCK:Race         = new PeacockRace(98);
+	public static const ANGEL:Race           = new AngelRace(99);
+	public static const APOPHIS:Race         = new ApophisRace(100);
+	public static const CYCLOP:Race          = new CyclopRace(101);
+	public static const ALICORN:Race         = new AlicornRace(102);
 	
 	function Races() {
 	}
 	
 	public static function load():void {
-		// all loading is done in static inits, here we just sort them by name
 		RaceTierBuilder.ensureEndCalled();
 		
-		Race.AllRacesByName = Race.AllRaces.slice()
-				.filter(function(e:Race,...rest:Array):Boolean {
-					return !!e
-				})
-				.sortOn("name");
+		Race.AllEnabledRaces = Race.AllRacesWithDisabled.filter(
+				function(e:Race,...rest:Array):Boolean {
+					return !e.disabled;
+				});
+		Race.AllVisibleRaces = Race.AllRacesWithDisabled.filter(
+				function(e:Race,...rest:Array):Boolean {
+					return !e.disabled && !e.hidden;
+				});
+		Race.AllRacesByName = Race.AllVisibleRaces.slice().sortOn("name");
 	}
 }
 }

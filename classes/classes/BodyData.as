@@ -47,17 +47,6 @@ public class BodyData {
 		return data[SLOT_ARM_TYPE];
 	}
 	
-	public static const SLOT_BIGGEST_TIT_SIZE:int = _slotid++;
-	EnumValue.add(Slots,SLOT_BIGGEST_TIT_SIZE, "BIGGEST_TIT_SIZE", {
-		name:"chest",
-		nameFn: function(value:int):String {
-			return Appearance.breastCup(value);
-		}
-	});
-	public function get biggestTitSize():int {
-		return data[SLOT_BIGGEST_TIT_SIZE];
-	}
-	
 	public static const SLOT_EAR_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_EAR_TYPE, "EAR_TYPE", {
 		name:"ears",
@@ -185,6 +174,26 @@ public class BodyData {
 		return data[SLOT_SKIN_COVERAGE];
 	}
 	
+	public static const SLOT_SKIN_TYPE:int = _slotid++;
+	EnumValue.add(Slots,SLOT_SKIN_TYPE, "SKIN_TYPE", {
+		name:"skin",
+		nameFn: function(value:int):String {
+			if (value === Skin.PLAIN) return "plain";
+			return Skin.SkinTypes[value].name;
+		}
+	});
+	public function get skinType():int {
+		return data[SLOT_SKIN_TYPE];
+	}
+	
+	public static const SLOT_SKIN_COLOR:int = _slotid++;
+	EnumValue.add(Slots,SLOT_SKIN_COLOR, "SKIN_COLOR", {
+		name:"skin color"
+	});
+	public function get skinColor():String {
+		return data[SLOT_SKIN_COLOR];
+	}
+	
 	public static const SLOT_SKIN_BASE_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_SKIN_BASE_TYPE, "SKIN_BASE_TYPE", {
 		name:"skin",
@@ -196,6 +205,7 @@ public class BodyData {
 	public function get skinBaseType():int {
 		return data[SLOT_SKIN_BASE_TYPE];
 	}
+	
 	public static const SLOT_SKIN_BASE_COLOR:int = _slotid++;
 	EnumValue.add(Slots,SLOT_SKIN_BASE_COLOR, "SKIN_BASE_COLOR", {
 		name:"skin color"
@@ -341,11 +351,62 @@ public class BodyData {
 		return data[SLOT_HEIGHT];
 	}
 	
+	public static const SLOT_TONE:int = _slotid++;
+	EnumValue.add(Slots,SLOT_TONE, "TONE", {
+		name: "muscle tone",
+		nameFn: function (value:Number):String {
+			if (value > 75) return ""+value+" (muscular)"
+			if (value > 25) return ""+value+" (average)";
+			return ""+value+" (soft)"
+		}
+	});
+	public function get tone():int {
+		return data[SLOT_TONE];
+	}
+	
+	public static const SLOT_THICKNESS:int = _slotid++;
+	EnumValue.add(Slots,SLOT_THICKNESS, "THICKESS", {
+		name: "thickness",
+		nameFn: function (value:Number):String {
+			if (value > 75) return ""+value+" (thick)"
+			if (value > 25) return ""+value+" (average)";
+			return ""+value+" (thin)"
+		}
+	});
+	public function get thickness():int {
+		return data[SLOT_THICKNESS];
+	}
+	
+	public static const SLOT_BIGGEST_COCK_LENGTH:int = _slotid++;
+	EnumValue.add(Slots,SLOT_BIGGEST_COCK_LENGTH, "BIGGEST_COCK_LENGTH", {
+		name:"long cock",
+		nameFn: function(value:Number):String {
+			return Measurements.inchesOrCentimetres(value);
+		}
+	});
+	public function get biggestCockSize():int {
+		return data[SLOT_BIGGEST_COCK_LENGTH];
+	}
+	
+	public static const SLOT_BIGGEST_TIT_SIZE:int = _slotid++;
+	EnumValue.add(Slots,SLOT_BIGGEST_TIT_SIZE, "BIGGEST_TIT_SIZE", {
+		name:"chest",
+		nameFn: function(value:int):String {
+			return Appearance.breastCup(value);
+		}
+	});
+	public function get biggestTitSize():int {
+		return data[SLOT_BIGGEST_TIT_SIZE];
+	}
+	
 	public var player:Player;
 	public var data:Array = [];
 	
 	public function get isTaur():Boolean {
 		return player.isTaur();
+	}
+	public function get isNaga():Boolean {
+		return player.isNaga();
 	}
 	public function get looksMale():Boolean {
 		return player.looksMale();
@@ -378,41 +439,46 @@ public class BodyData {
 		//noinspection JSMismatchedCollectionQueryUpdate
 		var data:Array = this.data;
 		
-		data[SLOT_ANTENNAE_TYPE] = player.antennae.type;
-		data[SLOT_ARM_TYPE] = player.arms.type;
-		data[SLOT_BIGGEST_TIT_SIZE] = player.biggestTitSize();
-		data[SLOT_EAR_TYPE] = player.ears.type;
-		data[SLOT_EYE_TYPE] = player.eyes.type;
-		data[SLOT_EYE_COLOR] = player.eyes.colour;
-		data[SLOT_FACE_TYPE] = player.facePart.type;
-		data[SLOT_GILLS_TYPE] = player.gills.type;
-		data[SLOT_HAIR_TYPE] = player.hairType;
-		data[SLOT_HAIR_COLOR] = player.hairColor;
-		data[SLOT_HORN_TYPE] = player.horns.type;
-		data[SLOT_HORN_COUNT] = player.horns.count;
-		data[SLOT_LEG_TYPE] = player.lowerBodyPart.type;
-		data[SLOT_REAR_TYPE] = player.rearBody.type;
-		data[SLOT_SKIN_COVERAGE] = player.skin.coverage;
-		data[SLOT_SKIN_BASE_TYPE] = player.skin.base.type;
-		data[SLOT_SKIN_BASE_COLOR] = player.skin.base.color;
+		data[SLOT_ANTENNAE_TYPE]     = player.antennae.type;
+		data[SLOT_ARM_TYPE]          = player.arms.type;
+		data[SLOT_EAR_TYPE]          = player.ears.type;
+		data[SLOT_EYE_TYPE]          = player.eyes.type;
+		data[SLOT_EYE_COLOR]         = player.eyes.colour;
+		data[SLOT_FACE_TYPE]         = player.facePart.type;
+		data[SLOT_GILLS_TYPE]        = player.gills.type;
+		data[SLOT_HAIR_TYPE]         = player.hairType;
+		data[SLOT_HAIR_COLOR]        = player.hairColor;
+		data[SLOT_HORN_TYPE]         = player.horns.type;
+		data[SLOT_HORN_COUNT]        = player.horns.count;
+		data[SLOT_LEG_TYPE]          = player.lowerBodyPart.type;
+		data[SLOT_REAR_TYPE]         = player.rearBody.type;
+		data[SLOT_SKIN_COVERAGE]     = player.skin.coverage;
+		data[SLOT_SKIN_TYPE]         = player.skin.type;
+		data[SLOT_SKIN_COLOR]        = player.skin.color;
+		data[SLOT_SKIN_BASE_TYPE]    = player.skin.base.type;
+		data[SLOT_SKIN_BASE_COLOR]   = player.skin.base.color;
 		data[SLOT_SKIN_BASE_PATTERN] = player.skin.base.pattern;
-		data[SLOT_SKIN_BASE_ADJ] = player.skin.base.adj;
+		data[SLOT_SKIN_BASE_ADJ]     = player.skin.base.adj;
 		if (player.skin.coverage > Skin.COVERAGE_NONE) {
-			data[SLOT_SKIN_COAT_TYPE]  = player.skin.coat.type;
-			data[SLOT_SKIN_COAT_COLOR] = player.skin.coat.color;
+			data[SLOT_SKIN_COAT_TYPE]    = player.skin.coat.type;
+			data[SLOT_SKIN_COAT_COLOR]   = player.skin.coat.color;
 			data[SLOT_SKIN_COAT_PATTERN] = player.skin.coat.pattern;
 		} else {
-			data[SLOT_SKIN_COAT_TYPE]  = -1;
-			data[SLOT_SKIN_COAT_COLOR] = "no";
+			data[SLOT_SKIN_COAT_TYPE]    = -1;
+			data[SLOT_SKIN_COAT_COLOR]   = "no";
 			data[SLOT_SKIN_COAT_PATTERN] = Skin.PATTERN_NONE;
 		}
-		data[SLOT_TAIL_TYPE] = player.tail.type;
-		data[SLOT_TAIL_COUNT] = player.tail.count;
+		data[SLOT_TAIL_TYPE]   = player.tail.type;
+		data[SLOT_TAIL_COUNT]  = player.tail.count;
 		data[SLOT_VAGINA_TYPE] = player.vaginaType();
-		data[SLOT_WING_TYPE] = player.wings.type;
+		data[SLOT_WING_TYPE]   = player.wings.type;
 		
-		data[SLOT_GENDER]    = player.gender;
-		data[SLOT_HEIGHT]    = player.tallness;
+		data[SLOT_GENDER]              = player.gender;
+		data[SLOT_HEIGHT]              = player.tallness;
+		data[SLOT_TONE]                = player.tone;
+		data[SLOT_THICKNESS]           = player.thickness;
+		data[SLOT_BIGGEST_COCK_LENGTH] = player.biggestCockLength();
+		data[SLOT_BIGGEST_TIT_SIZE]    = player.biggestTitSize();
 	}
 	
 	public function equals(other:BodyData):Boolean {

@@ -117,12 +117,27 @@ public class RaceScoreBuilder {
 				},
 				score, failScore);
 	}
+	public function isNaga(score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		return customRequirement("legs",customName||"is naga",
+				function (body:BodyData):Boolean {
+					return body.isNaga;
+				},
+				score, failScore);
+	}
 	public function rearType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_REAR_TYPE, type, score, failScore, customName);
 		return this;
 	}
 	public function noRearBody(score:int, failScore:int=0):RaceScoreBuilder {
 		return rearType(RearBody.NONE, score, failScore);
+	}
+	public function skinType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_SKIN_TYPE, type, score, failScore, customName);
+		return this;
+	}
+	public function skinColor(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_SKIN_COLOR, value, score, failScore, customName);
+		return this;
 	}
 	public function skinBaseType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_SKIN_BASE_TYPE, type, score, failScore, customName);
@@ -209,6 +224,14 @@ public class RaceScoreBuilder {
 	}
 	public function height(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_HEIGHT, value, score, failScore, customName);
+		return this;
+	}
+	public function thickness(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_THICKNESS, value, score, failScore, customName);
+		return this;
+	}
+	public function tone(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_TONE, value, score, failScore, customName);
 		return this;
 	}
 	public function corruption(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
