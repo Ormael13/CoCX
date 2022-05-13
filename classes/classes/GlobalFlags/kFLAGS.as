@@ -847,9 +847,9 @@ public static const SAND_WITCHES_FRIENDLY:int                                   
 public static const CUM_WITCH_DEFEATED:int                                          =  839; //
 public static const ENTERED_SANDWITCH_DUNGEON:int                                   =  840; //
 public static const PAWJOBS:int                                                     =  841; //
-public static const RIDDLE_ONE:int                                                  =  842; //
-public static const RIDDLE_TWO:int                                                  =  843; //
-public static const RIDDLE_THREE:int                                                =  844; //
+public static const UNKNOWN_FLAG_NUMBER_0842:int                                    =  842; //
+public static const UNKNOWN_FLAG_NUMBER_0843:int                            		=  843; //
+public static const UNKNOWN_FLAG_NUMBER_0844:int                                    =  844; //
 public static const TIMES_SUBMITTED_TO_SANURA:int                                   =  845; //
 public static const TIMES_WINFUCKED_SANURA:int                                      =  846; //
 public static const SAND_MOTHER_DEFEATED:int                                        =  847; //
