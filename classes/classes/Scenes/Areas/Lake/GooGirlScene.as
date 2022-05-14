@@ -352,7 +352,7 @@ public class GooGirlScene extends AbstractLakeContent
 				addButtonIfTrue(0, "DickSex", gooMaleRape, "Req. a cock shorter than 24\"",
 					player.findCock(1, -1, 24, "length") >= 0);
 				addButtonIfTrue(1, "BigDickSex", gooTooBigRape, "Req. a cock longer than 24\"",
-					player.findCock(1, -1, 24, "length") >= 0);
+					player.findCock(1, 24, -1, "length") >= 0);
 				addButtonIfTrue(2, "Herm Sex", victoryHermSex, "Req. to be a herm", player.isHerm());
 				addButtonIfTrue(3, "Vag Fuck", normalFemaleRapesAGooGirl, "Req. a vagina", player.hasVagina());
 				addButtonIfTrue(4, "Exhib. Fuck", exhibitionismGooGirlVictoryRape,
