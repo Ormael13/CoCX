@@ -6,22 +6,27 @@ package classes.IMutations
 {
     import classes.PerkClass;
     import classes.PerkType;
+import classes.Player;
 
-    public class MutationTemplate extends PerkType
+public class SharkOlfactorySystemMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.MutationsTemplateIM);
+            var perkCent:int = 0;
+            var pTier:int = player.perkv1(IMutationsLib.SharkOlfactorySystemIM);
             if (pTier >= 1){
-                descS += "";
+                descS += "Increase bleed damage by 50%, allows non-sharks to use blood frenzy";
+                perkCent += 10;
             }
-            if (pTier >= 2){
-                descS += ", ";
+            if (pTier == 2){
+                perkCent += 15;
             }
             if (pTier >= 3){
-                descS += ", ";
+                descS += ", Bite becomes free and increases bleed damage by" + (pTier == 2)?"50%":(pTier == 3)?"100%":"" + "";
+                perkCent += 25;
             }
+            descS += "and increase melee damage against bleeding enemies by" + perkCent + "%";
             if (descS != "")descS += ".";
             return descS;
         }
@@ -29,7 +34,7 @@ package classes.IMutations
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.MutationsTemplateIM)){
+            switch (player.perkv1(IMutationsLib.SharkOlfactorySystemIM)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -39,20 +44,23 @@ package classes.IMutations
                 default:
                     sufval = "";
             }
-            return "PerkName Here" + sufval;
+            return "Shark Olfactory System" + sufval;
         }
 
         //Mutation Requirements
         public static function pReqs(pTier:int = 0):void{
             try{
                 //This helps keep the requirements output clean.
-                IMutationsLib.MutationsTemplateIM.requirements = [];
+                IMutationsLib.SharkOlfactorySystemIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.MutationsTemplateIM.requireHeartMutationSlot();
+                    IMutationsLib.SharkOlfactorySystemIM.requirePeripheralNervSysMutationSlot()
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.sharkScore() >= 8;
+                    }, "Shark race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.MutationsTemplateIM.requireLevel(pLvl);
+                    IMutationsLib.SharkOlfactorySystemIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
@@ -68,14 +76,23 @@ package classes.IMutations
         //Mutations Buffs
         public function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            if (pTier == 1) pBuffs['int.mult'] = 0;
-            else if (pTier == 2) pBuffs['int.mult'] = 0;
-            else if (pTier == 3) pBuffs['int.mult'] = 0;
+            if (pTier == 1) {
+                pBuffs['spe.mult'] = 0.05;
+            }
+            else if (pTier == 2) {
+                pBuffs['wis.mult'] = 0.05;
+                pBuffs['spe.mult'] = 0.1;
+            }
+            else if (pTier == 3) {
+                pBuffs['int.mult'] = 0.05;
+                pBuffs['wis.mult'] = 0.1;
+                pBuffs['spe.mult'] = 0.15;
+            }
             return pBuffs;
         }
 
-        public function MutationTemplate() {
-            super("PerkName Here IM", "PerkName Here", ".");
+        public function SharkOlfactorySystemMutation() {
+            super("Shark Olfactory System IM", "Shark Olfactory System", ".");
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {

@@ -9,8 +9,6 @@ package classes.IMutations
 import classes.CoC;
 import classes.PerkType;
 
-import flash.net.navigateToURL;
-
 /**
  * The goal of Mutations 3.0 is to allow for everything related to the mutation itself to be hosted within its own file, and to reduce the number of perks being created for the player.
  *
@@ -75,10 +73,17 @@ public class IMutationsLib
 		public static const OniMusculatureIM:PerkType = new OniMusculatureMutation();
 		public static const OrcAdrenalGlandsIM:PerkType = new OrcAdrenalGlandsMutation();
 		public static const PigBoarFatIM:PerkType = new PigBoarFatMutation();
-
+		public static const RaijuCathodeIM:PerkType = new RaijuCathodeMutation();
+		public static const RatatoskrSmartsIM:PerkType = new RatatoskrSmartsMutation();
+		public static const SalamanderAdrenalGlandsIM:PerkType = new SalamanderAdrenalGlandsMutation();
+		public static const ScyllaInkGlandsIM:PerkType = new ScyllaInkGlandsMutation();
+		public static const SharkOlfactorySystemIM:PerkType = new SharkOlfactorySystemMutation();
 		public static const TrachealSystemIM:PerkType = new TrachealSystemMutation();
+		public static const TwinHeartIM:PerkType = new TwinHeartMutation();
 		public static const VampiricBloodstreamIM:PerkType = new VampiricBloodstreamMutation();
-
+		public static const VenomGlandsIM:PerkType = new VenomGlandsMutation();
+		public static const WhaleFatIM:PerkType = new WhaleFatMutation();
+		public static const YetiFatIM:PerkType = new YetiFatMutation();
 
 		/**
 		*Returns an array of arrays of mutation body parts in PerkType type.
@@ -101,9 +106,11 @@ public class IMutationsLib
 			}
 			function IMutationsMouth():void{
 				IMutationsList.push([HollowFangsIM,HollowFangsMutation]);
+				IMutationsList.push([VenomGlandsIM,VenomGlandsMutation]);
 			}
 			function IMutationsAdrGland():void{
 				IMutationsList.push([OrcAdrenalGlandsIM,OrcAdrenalGlandsMutation]);
+				IMutationsList.push([SalamanderAdrenalGlandsIM,SalamanderAdrenalGlandsMutation]);
 			}
 			function IMutationsBloodStream():void{
 				IMutationsList.push([FeyArcaneBloodstreamIM,FeyArcaneBloodstreamMutation]);
@@ -113,6 +120,8 @@ public class IMutationsLib
 			function IMutationsFaT():void{
 				IMutationsList.push([NaturalPunchingBagIM,NaturalPunchingBagMutation]);
 				IMutationsList.push([PigBoarFatIM,PigBoarFatMutation]);
+				IMutationsList.push([WhaleFatIM,WhaleFatMutation]);
+				IMutationsList.push([YetiFatIM,YetiFatMutation]);
 			}
 			function IMutationsLungs():void{
 				IMutationsList.push([DraconicLungIM,DraconicLungMutation]);
@@ -140,6 +149,9 @@ public class IMutationsLib
 			function IMutationsPeriNervSys():void{
 				IMutationsList.push([EclipticMindIM,EclipticMindMutation]);
 				IMutationsList.push([ElvishPeripheralNervSysIM,ElvishPeripheralNervSysMutation]);
+				IMutationsList.push([RatatoskrSmartsIM,RatatoskrSmartsMutation]);
+				IMutationsList.push([RaijuCathodeIM,RaijuCathodeMutation]);
+				IMutationsList.push([SharkOlfactorySystemIM,SharkOlfactorySystemMutation]);
 			}
 			function IMutationsBone():void{
 				IMutationsList.push([DraconicBonesIM,DraconicBonesMutation]);
@@ -155,7 +167,9 @@ public class IMutationsLib
 			function IMutationsAdaptations():void{
 				IMutationsList.push([ArachnidBookLungIM,ArachnidBookLungMutation]);
 				IMutationsList.push([CatLikeNimblenessIM,CatLikeNimblenessMutation]);
+				IMutationsList.push([ScyllaInkGlandsIM,ScyllaInkGlandsMutation]);
 				IMutationsList.push([TrachealSystemIM,TrachealSystemMutation]);
+				IMutationsList.push([TwinHeartIM,TwinHeartMutation]);
 			}
 			function IMutationsDeprecated():void{
 				IMutationsList.push([MutationsTemplateIM,MutationTemplate]);

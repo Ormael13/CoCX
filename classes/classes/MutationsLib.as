@@ -1,6 +1,7 @@
 /**
  * Created by JTecx on 21.08.21.
  * Based on PerkLib, created by Aimozg.
+ * NOTE: THIS IS DEPRECATED. DO NOT USE THIS FILE FOR FUTURE MUTATIONS -JTecx
  */
 package classes
 {

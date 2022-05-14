@@ -6,21 +6,22 @@ package classes.IMutations
 {
     import classes.PerkClass;
     import classes.PerkType;
+import classes.Player;
 
-    public class MutationTemplate extends PerkType
+public class YetiFatMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
-            var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.MutationsTemplateIM);
+            var descS:String = "Gain damage reduction against attacks";
+            var pTier:int = player.perkv1(IMutationsLib.YetiFatIM);
             if (pTier >= 1){
-                descS += "";
+                descS += ", increase strength of yeti ice breath by 50%";
             }
             if (pTier >= 2){
-                descS += ", ";
+                descS += ", potency of Big Hand and Feet by 50%";
             }
             if (pTier >= 3){
-                descS += ", ";
+                descS += ", duration of yeti breath stun by 1 round and reduce cooldown by 3 rounds.";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -29,7 +30,7 @@ package classes.IMutations
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.MutationsTemplateIM)){
+            switch (player.perkv1(IMutationsLib.YetiFatIM)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -39,20 +40,23 @@ package classes.IMutations
                 default:
                     sufval = "";
             }
-            return "PerkName Here" + sufval;
+            return "Yeti Fat" + sufval;
         }
 
         //Mutation Requirements
         public static function pReqs(pTier:int = 0):void{
             try{
                 //This helps keep the requirements output clean.
-                IMutationsLib.MutationsTemplateIM.requirements = [];
+                IMutationsLib.YetiFatIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.MutationsTemplateIM.requireHeartMutationSlot();
+                    IMutationsLib.YetiFatIM.requireFatTissueMutationSlot()
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.yetiScore() >= 14;
+                    }, "Yeti race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.MutationsTemplateIM.requireLevel(pLvl);
+                    IMutationsLib.YetiFatIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
@@ -68,14 +72,11 @@ package classes.IMutations
         //Mutations Buffs
         public function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            if (pTier == 1) pBuffs['int.mult'] = 0;
-            else if (pTier == 2) pBuffs['int.mult'] = 0;
-            else if (pTier == 3) pBuffs['int.mult'] = 0;
             return pBuffs;
         }
 
-        public function MutationTemplate() {
-            super("PerkName Here IM", "PerkName Here", ".");
+        public function YetiFatMutation() {
+            super("Yeti Fat IM", "Yeti Fat", ".");
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {

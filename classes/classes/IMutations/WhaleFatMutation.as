@@ -6,22 +6,26 @@ package classes.IMutations
 {
     import classes.PerkClass;
     import classes.PerkType;
+import classes.Player;
 
-    public class MutationTemplate extends PerkType
+public class WhaleFatMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
-            var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.MutationsTemplateIM);
-            if (pTier >= 1){
-                descS += "";
+            var descS:String = "Increased damage reduction against physical damage and grants cold resistance permanently";
+            var pTier:int = player.perkv1(IMutationsLib.WhaleFatIM);
+            var pHunger:int = 0;
+            if (pTier == 2){
+                descS += ", juggle duration is increased by 1";
             }
-            if (pTier >= 2){
-                descS += ", ";
+            if (pTier == 3){
+                descS += ", juggle duration is increased by 2";
             }
-            if (pTier >= 3){
-                descS += ", ";
+            while (pTier != 0){
+                pHunger += 5*pTier;
+                pTier--;
             }
+            descS += ", Increase max hunger cap by " + pHunger + "";
             if (descS != "")descS += ".";
             return descS;
         }
@@ -29,7 +33,7 @@ package classes.IMutations
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.MutationsTemplateIM)){
+            switch (player.perkv1(IMutationsLib.WhaleFatIM)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -39,20 +43,23 @@ package classes.IMutations
                 default:
                     sufval = "";
             }
-            return "PerkName Here" + sufval;
+            return "Whale Fat" + sufval;
         }
 
         //Mutation Requirements
         public static function pReqs(pTier:int = 0):void{
             try{
                 //This helps keep the requirements output clean.
-                IMutationsLib.MutationsTemplateIM.requirements = [];
+                IMutationsLib.WhaleFatIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.MutationsTemplateIM.requireHeartMutationSlot();
+                    IMutationsLib.WhaleFatIM.requireFatTissueMutationSlot()
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.orcaScore() >= 14 || player.leviathanScore() >= 20;
+                    }, "Orca race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.MutationsTemplateIM.requireLevel(pLvl);
+                    IMutationsLib.WhaleFatIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
@@ -68,14 +75,14 @@ package classes.IMutations
         //Mutations Buffs
         public function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            if (pTier == 1) pBuffs['int.mult'] = 0;
-            else if (pTier == 2) pBuffs['int.mult'] = 0;
-            else if (pTier == 3) pBuffs['int.mult'] = 0;
+            if (pTier == 1) pBuffs['tou.mult'] = 0.05;
+            else if (pTier == 2) pBuffs['tou.mult'] = 0.15;
+            else if (pTier == 3) pBuffs['tou.mult'] = 0.3;
             return pBuffs;
         }
 
-        public function MutationTemplate() {
-            super("PerkName Here IM", "PerkName Here", ".");
+        public function WhaleFatMutation() {
+            super("Whale Fat IM", "Whale Fat", ".");
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {

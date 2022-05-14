@@ -6,21 +6,22 @@ package classes.IMutations
 {
     import classes.PerkClass;
     import classes.PerkType;
+import classes.Player;
 
-    public class MutationTemplate extends PerkType
+public class RaijuCathodeMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.MutationsTemplateIM);
-            if (pTier >= 1){
-                descS += "";
+            var pTier:int = player.perkv1(IMutationsLib.RaijuCathodeIM);
+            if (pTier == 1){
+                descS = "Your Raiju Cathode provides an increase in speed by 10% and increase lust damage from weapons and natural weapons by 50%";
             }
-            if (pTier >= 2){
-                descS += ", ";
+            if (pTier == 2){
+                descS = "Your Raiju Cathode provides an increase in speed by 25% and increase lust damage from weapons and natural weapons by 100%, All lightning damage is increased by 20%";
             }
-            if (pTier >= 3){
-                descS += ", ";
+            if (pTier == 3){
+                descS = "Your Raiju Cathode provides an increase in speed by 50% and increase lust damage from weapons and natural weapons by 200%, All lightning damage is increased by 20%, Supercharged bonuses are twice as strong";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -29,7 +30,7 @@ package classes.IMutations
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.MutationsTemplateIM)){
+            switch (player.perkv1(IMutationsLib.RaijuCathodeIM)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -39,20 +40,23 @@ package classes.IMutations
                 default:
                     sufval = "";
             }
-            return "PerkName Here" + sufval;
+            return "Raiju Cathode" + sufval;
         }
 
         //Mutation Requirements
         public static function pReqs(pTier:int = 0):void{
             try{
                 //This helps keep the requirements output clean.
-                IMutationsLib.MutationsTemplateIM.requirements = [];
+                IMutationsLib.RaijuCathodeIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.MutationsTemplateIM.requireHeartMutationSlot();
+                    IMutationsLib.RaijuCathodeIM.requirePeripheralNervSysMutationSlot()
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.raijuScore() >= 10;
+                    }, "Raiju race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.MutationsTemplateIM.requireLevel(pLvl);
+                    IMutationsLib.RaijuCathodeIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
@@ -68,14 +72,14 @@ package classes.IMutations
         //Mutations Buffs
         public function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            if (pTier == 1) pBuffs['int.mult'] = 0;
-            else if (pTier == 2) pBuffs['int.mult'] = 0;
-            else if (pTier == 3) pBuffs['int.mult'] = 0;
+            if (pTier == 1) pBuffs['spe.mult'] = 0.1;
+            else if (pTier == 2) pBuffs['spe.mult'] = 0.25;
+            else if (pTier == 3) pBuffs['spe.mult'] = 0.5;
             return pBuffs;
         }
 
-        public function MutationTemplate() {
-            super("PerkName Here IM", "PerkName Here", ".");
+        public function RaijuCathodeMutation() {
+            super("Raiju Cathode IM", "Raiju Cathode", ".");
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {
