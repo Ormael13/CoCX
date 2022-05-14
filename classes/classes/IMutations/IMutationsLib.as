@@ -74,6 +74,8 @@ public class IMutationsLib
 		public static const ObsidianHeartIM:PerkType = new ObsidianHeartMutation();
 		public static const OniMusculatureIM:PerkType = new OniMusculatureMutation();
 		public static const OrcAdrenalGlandsIM:PerkType = new OrcAdrenalGlandsMutation();
+		public static const PigBoarFatIM:PerkType = new PigBoarFatMutation();
+
 		public static const TrachealSystemIM:PerkType = new TrachealSystemMutation();
 		public static const VampiricBloodstreamIM:PerkType = new VampiricBloodstreamMutation();
 
@@ -110,6 +112,7 @@ public class IMutationsLib
 			}
 			function IMutationsFaT():void{
 				IMutationsList.push([NaturalPunchingBagIM,NaturalPunchingBagMutation]);
+				IMutationsList.push([PigBoarFatIM,PigBoarFatMutation]);
 			}
 			function IMutationsLungs():void{
 				IMutationsList.push([DraconicLungIM,DraconicLungMutation]);

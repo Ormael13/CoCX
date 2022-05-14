@@ -6,22 +6,21 @@ package classes.IMutations
 {
     import classes.PerkClass;
     import classes.PerkType;
-import classes.Player;
 
-public class OniMusculatureMutation extends PerkType
+    public class PigBoarFatMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
-            var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.OniMusculatureIM);
+            var descS:String = "Your altered fat tissue allows to increase your natural resistance to damage, toughness and thickness";
+            var pTier:int = player.perkv1(IMutationsLib.PigBoarFatIM);
             if (pTier == 1){
-                descS = "Your altered musculature allows to increase your natural strength and tone. Oni Rampage and Drunker Power can be used at Half-Oni score";
+                descS = "Increase max Hunger cap by 5 (if PC have Hunger bar active)";
             }
             if (pTier == 2){
-                descS = "Your musculature continue to increase your natural strength and tone gained from previous change. Oni Rampage and Drunker Power req. only 3+ pts in Oni score and dmg multi from Oni Rampage increased to 4x";
+                descS = "Body Slam req. lower thickness to be used, increase max Hunger cap by 15 (if PC have Hunger bar active)";
             }
             if (pTier == 3){
-                descS = "Your musculature increased again your natural strength and tone limit. Dmg multi from Oni Rampage increased to 6x, it duration increased by 3 turns and cooldown decreased by 3 turns. Drunken Power boost increased to 6x";
+                descS = "Body Slam req. lower thickness and doubled power, pig/boar req. removed, thickness requirement lowered, increase max Hunger cap by 35 (if PC have Hunger bar active)";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -30,7 +29,7 @@ public class OniMusculatureMutation extends PerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.OniMusculatureIM)){
+            switch (player.perkv1(IMutationsLib.PigBoarFatIM)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -40,26 +39,20 @@ public class OniMusculatureMutation extends PerkType
                 default:
                     sufval = "";
             }
-            return "Oni Musculature" + sufval;
+            return "Pig Boar Fat" + sufval;
         }
 
         //Mutation Requirements
         public static function pReqs(pTier:int = 0):void{
             try{
                 //This helps keep the requirements output clean.
-                IMutationsLib.OniMusculatureIM.requirements = [];
+                IMutationsLib.PigBoarFatIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.OniMusculatureIM.requireMusclesMutationSlot()
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.tone >= 100;
-                    }, "100+ tone")
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.oniScore() >= 12;
-                    }, "Oni race");
+                    IMutationsLib.PigBoarFatIM.requireHeartMutationSlot();
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.OniMusculatureIM.requireLevel(pLvl);
+                    IMutationsLib.PigBoarFatIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
@@ -75,14 +68,14 @@ public class OniMusculatureMutation extends PerkType
         //Mutations Buffs
         public function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            if (pTier >= 1) pBuffs['str.mult'] += 0.05;
-            if (pTier >= 2) pBuffs['str.mult'] += 0.1;
-            if (pTier >= 3) pBuffs['str.mult'] += 0.15;
+            if (pTier >= 1) pBuffs['tou.mult'] += 0.05;
+            if (pTier >= 2) pBuffs['tou.mult'] += 0.1;
+            if (pTier >= 3) pBuffs['tou.mult'] += 0.15;
             return pBuffs;
         }
 
-        public function OniMusculatureMutation() {
-            super("Oni Musculature IM", "Oni Musculature", ".");
+        public function PigBoarFatMutation() {
+            super("Pig Boar Fat IM", "Pig Boar Fat", ".");
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {
