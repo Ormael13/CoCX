@@ -4,6 +4,7 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.GlobalFlags.*;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -43,11 +44,11 @@ public class GoblinElder extends Goblin
 			//Blind
 			else if (spellChooser == 1 && (mana + spellCostBlind) <= maxMana()) {
 				outputText("The goblin glares at you and points at you! A bright flash erupts before you!  ");
-				if ((!player.hasPerk(MutationsLib.GorgonsEyes) && rand(player.inte / 5) <= 4) && !player.hasPerk(PerkLib.BlindImmunity)) {
+				if ((!player.perkv1(IMutationsLib.GorgonEyesIM) >= 1 && rand(player.inte / 5) <= 4) && !player.hasPerk(PerkLib.BlindImmunity)) {
 					outputText("<b>You are blinded!</b>");
 					player.createStatusEffect(StatusEffects.Blind, 1 + rand(3), 0, 0, 0);
 				}
-				else if (player.hasPerk(MutationsLib.GorgonsEyes)) {
+				else if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 1) {
 					outputText("Your mutated eyes not been affected at all by this flash!");
 				}
 				else {

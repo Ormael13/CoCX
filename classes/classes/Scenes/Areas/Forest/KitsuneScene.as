@@ -8,6 +8,7 @@ import classes.BodyParts.Ears;
 import classes.BodyParts.SkinLayer;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Scenes.Monsters.Imp;
 import classes.Scenes.SceneLib;
@@ -2224,7 +2225,7 @@ public class KitsuneScene extends BaseContent
 			}
 			flags[kFLAGS.KITSUNE_SHRINE_VISIT]++;
 			var SphereMastery:Number = 10;
-			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) SphereMastery += 10;
+			if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3) SphereMastery += 10;
 			//[Read Books] [Meditate] [Steal Statue] - [Leave]
 			menu();
 			addButton(0, "Read Books", readKitsuneBooks);

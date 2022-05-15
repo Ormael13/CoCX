@@ -7,6 +7,7 @@ import classes.CockTypesEnum;
 import classes.EngineCore;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.*;
 import classes.ItemType;
 import classes.Items.JewelryLib;
 import classes.Items.Weapon;
@@ -993,7 +994,7 @@ public class Combat extends BaseContent {
 		buttons.add("Surrender(H)", combat.surrenderByHP, "Stop defending youself. You'll take a hell of a beating. Why would you do this?");
         buttons.add("Surrender(L)", combat.surrenderByLust, "Fantasize about your opponent in a sexual way so much it would fill up your lust. You'll end up getting raped...But is it rape if you get what you want?");
         if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || (player.hasPerk(PerkLib.JobBeastWarrior) && (player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon())) ||
-            ((player.hasPerk(PerkLib.Berzerker) || (player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved))) || player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) || player.hasStatusEffect(StatusEffects.SoulDrill1) || player.hasStatusEffect(StatusEffects.ThePhalluspear1)) {
+            ((player.hasPerk(PerkLib.Berzerker) || (player.hasPerk(PerkLib.Lustzerker)) && player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3)) || player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) || player.hasStatusEffect(StatusEffects.SoulDrill1) || player.hasStatusEffect(StatusEffects.ThePhalluspear1)) {
             buttons.add("Melee Opt", CoC.instance.perkMenu.doubleAttackOptions, "You can adjust your melee attack settings.");
         }
         if (player.hasPerk(PerkLib.DoubleStrike) || player.hasPerk(PerkLib.ElementalArrows) || player.hasPerk(PerkLib.Cupid) || player.hasPerk(PerkLib.EnvenomedBolt) || player.hasPerk(PerkLib.AmateurGunslinger)) {
@@ -1083,7 +1084,7 @@ public class Combat extends BaseContent {
                 bd.disable("You need more time before you can use Devourer again.");
             }
         }
-		if ((monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.Polymorphed) || monster.hasStatusEffect(StatusEffects.Sleep) || monster.hasStatusEffect(StatusEffects.Fascinated)) && (player.fatigueLeft() > combat.physicalCost(20)) && player.hasPerk(MutationsLib.HollowFangsPrimitive)) {
+		if ((monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.Polymorphed) || monster.hasStatusEffect(StatusEffects.Sleep) || monster.hasStatusEffect(StatusEffects.Fascinated)) && (player.fatigueLeft() > combat.physicalCost(20)) && player.perkv1(IMutationsLib.HollowFangsIM) >= 2) {
 			bd = buttons.add("Bite", VampiricBite).hint("Suck on the blood of an opponent. \n\nFatigue Cost: " + physicalCost(20) + "");
 		}// || monster.hasStatusEffect(StatusEffects.InvisibleOrStealth)
 		if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji) && (player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 3)) {
@@ -1629,17 +1630,17 @@ public class Combat extends BaseContent {
         if (player.arms.type == Arms.MANTIS || player.arms.type == Arms.KAMAITACHI) unarmed += 15 * (1 + player.newGamePlusMod());
         if (player.arms.type == Arms.DISPLACER) {
             unarmed += 6 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(MutationsLib.DisplacerMetabolism)) unarmed += 6 * (1 + player.newGamePlusMod());
-            if (player.hasPerk(MutationsLib.DisplacerMetabolismPrimitive)) unarmed += 6 * (1 + player.newGamePlusMod());
+            if (player.perkv1(IMutationsLib.DisplacerMetabolismIM) >= 1) unarmed += 6 * (1 + player.newGamePlusMod());
+            if (player.perkv1(IMutationsLib.DisplacerMetabolismIM) >= 2) unarmed += 6 * (1 + player.newGamePlusMod());
         }
         if (player.lowerBody == LowerBody.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
         if (player.lowerBody == LowerBody.BEAR) unarmed += 5 * (1 + player.newGamePlusMod());
         if (player.lowerBody == LowerBody.CAT || player.lowerBody == LowerBody.LION) unarmed += 6 * (1 + player.newGamePlusMod());
         if (player.lowerBody == LowerBody.CANCER) unarmed += 12 * (1 + player.newGamePlusMod());
         if (player.tailType == Tail.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
-        if (player.hasPerk(MutationsLib.DraconicBones)) unarmed += 10 * (1 + player.newGamePlusMod());
-        if (player.hasPerk(MutationsLib.DraconicBonesPrimitive)) unarmed += 10 * (1 + player.newGamePlusMod());
-        if (player.hasPerk(MutationsLib.DraconicBonesEvolved)) unarmed += 20 * (1 + player.newGamePlusMod());
+        if (player.perkv1(IMutationsLib.DraconicBonesIM) >= 1) unarmed += 10 * (1 + player.newGamePlusMod());
+        if (player.perkv1(IMutationsLib.DraconicBonesIM) >= 2) unarmed += 10 * (1 + player.newGamePlusMod());
+        if (player.perkv1(IMutationsLib.DraconicBonesIM) >= 3) unarmed += 20 * (1 + player.newGamePlusMod());
         if (player.hasKeyItem("Rocket Boots") >= 0) unarmed += 2;
         if (player.hasKeyItem("Nitro Boots") >= 0) unarmed += 4;
         if (player.hasPerk(PerkLib.Brawn)) unarmedMulti += .05;
@@ -1648,7 +1649,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.EpicBrawn)) unarmedMulti += .2;
         if (player.hasPerk(PerkLib.LegendaryBrawn)) unarmedMulti += .25;
         if (player.hasPerk(PerkLib.MythicalBrawn)) unarmedMulti += .3;
-        if (player.hasPerk(MutationsLib.DraconicBonesEvolved)) unarmedMulti += .5;
+        if (player.perkv1(IMutationsLib.DraconicBonesIM) >= 3) unarmedMulti += .5;
         unarmed *= unarmedMulti;
         unarmed = Math.round(unarmed);
         return unarmed;
@@ -2953,7 +2954,7 @@ public class Combat extends BaseContent {
 
     public function meleeAccuracyPenalty():Number {
         var accmmodpenalty:Number = 10;
-        if (player.hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) accmmodpenalty -= 5;
+        if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) accmmodpenalty -= 5;
 		//if (player.statStore.hasBuff("AsuraForm") && player.hasPerk(PerkLib.)) accmmodpenalty -= 5;
         if (accmmodpenalty < 0) accmmodpenalty = 0;
         return accmmodpenalty;
@@ -3043,7 +3044,7 @@ public class Combat extends BaseContent {
     public function arrowsAccuracyPenalty():Number {
         var accrmodpenalty:Number = 15;
         if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) accrmodpenalty -= 10;
-        if (player.hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) accrmodpenalty -= 5;
+        if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) accrmodpenalty -= 5;
         if (player.weaponRangeName == "Avelynn") accrmodpenalty -= 5;
         if (accrmodpenalty < 0) accrmodpenalty = 0;
         return accrmodpenalty;
@@ -3759,9 +3760,9 @@ public class Combat extends BaseContent {
 		if (player.weapon == weapons.MGSWORD) {
 			damage += scalingBonusIntelligence() * 0.2;
 			if (player.isFlying()){
-				if (player.hasPerk(MutationsLib.HarpyHollowBones)) damage *= 1.2;
-				if (player.hasPerk(MutationsLib.HarpyHollowBonesPrimitive)) damage *= 1.3;
-				if (player.hasPerk(MutationsLib.HarpyHollowBonesEvolved)) damage *= 1.5;
+				if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 1) damage *= 1.2;
+				if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 2) damage *= 1.3;
+				if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 3) damage *= 1.5;
 			}
 			if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
 			if (damage < 10) damage = 10;
@@ -5766,14 +5767,14 @@ public class Combat extends BaseContent {
 			}
 		}
 		if (player.isFlying()){
-			if (player.hasPerk(MutationsLib.HarpyHollowBones)) damage *= 1.2;
-			if (player.hasPerk(MutationsLib.HarpyHollowBonesPrimitive)) damage *= 1.3;
-			if (player.hasPerk(MutationsLib.HarpyHollowBonesEvolved)) damage *= 1.5;
+			if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 1) damage *= 1.2;
+			if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 2) damage *= 1.3;
+			if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 3) damage *= 1.5;
 		}
 		if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()){
 			damage *= 2;
-			if (player.hasPerk(MutationsLib.YetiFatPrimitive)) damage *= 1.5;
-			if (player.hasPerk(MutationsLib.YetiFatEvolved)) damage *= 1.5;
+			if (player.perkv1(IMutationsLib.YetiFatIM) >= 2) damage *= 1.5;
+			if (player.perkv1(IMutationsLib.YetiFatIM) >= 3) damage *= 1.5;
 		}
 		if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
 			damage += player.spe;
@@ -6094,9 +6095,9 @@ public class Combat extends BaseContent {
                         if (player.hasPerk(PerkLib.ElectrifiedDesire)) damagemultiplier += player.lust100 * 0.01;
                         if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
                         if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
-                        if (player.hasPerk(MutationsLib.RaijuCathode)) damagemultiplier += 0.5;
-                        if (player.hasPerk(MutationsLib.RaijuCathodePrimitive)) damagemultiplier += 0.5;
-                        if (player.hasPerk(MutationsLib.RaijuCathodeEvolved)) damagemultiplier += 1;
+                        if (player.perkv1(IMutationsLib.RaijuCathodeIM) >= 1) damagemultiplier += 0.5;
+                        if (player.perkv1(IMutationsLib.RaijuCathodeIM) >= 2) damagemultiplier += 0.5;
+                        if (player.perkv1(IMutationsLib.RaijuCathodeIM) >= 3) damagemultiplier += 1;
                         if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
                         if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
                         damageLC *= damagemultiplier;
@@ -6666,9 +6667,9 @@ public class Combat extends BaseContent {
                 damage += scalingBonusStrength() * 0.25;
             }
             if (player.isFlying()){
-                if (player.hasPerk(MutationsLib.HarpyHollowBones)) damage *= 1.2;
-                if (player.hasPerk(MutationsLib.HarpyHollowBonesPrimitive)) damage *= 1.3;
-                if (player.hasPerk(MutationsLib.HarpyHollowBonesPrimitive)) damage *= 1.5;
+                if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 1) damage *= 1.2;
+                if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 2) damage *= 1.3;
+                if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 2) damage *= 1.5;
             }
             if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
             if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
@@ -6823,9 +6824,9 @@ public class Combat extends BaseContent {
                     if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
                     if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
                     if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
-                    if (player.hasPerk(MutationsLib.RaijuCathode)) damagemultiplier += 0.5;
-                    if (player.hasPerk(MutationsLib.RaijuCathodePrimitive)) damagemultiplier += 0.5;
-                    if (player.hasPerk(MutationsLib.RaijuCathodeEvolved)) damagemultiplier += 1;
+                    if (player.perkv1(IMutationsLib.RaijuCathodeIM) >= 1) damagemultiplier += 0.5;
+                    if (player.perkv1(IMutationsLib.RaijuCathodeIM) >= 2) damagemultiplier += 0.5;
+                    if (player.perkv1(IMutationsLib.RaijuCathodeIM) >= 3) damagemultiplier += 1;
                     damage *= damagemultiplier;
                     //Determine if critical tease!
                     var crit1:Boolean = false;
@@ -6848,7 +6849,7 @@ public class Combat extends BaseContent {
                     outputText(" ");
                     if (player.hasPerk(PerkLib.SuperSensual) && player.hasPerk(PerkLib.Sensual)) teaseXP(2);
                     else teaseXP(1);
-                    if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)){
+                    if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3){
                         if (rand(100) < 5) {
                             if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
                         }
@@ -6889,7 +6890,7 @@ public class Combat extends BaseContent {
         damage = combat.magic.calcVoltageModImpl(damage, true);
         if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
-        if (player.hasPerk(MutationsLib.FloralOvaries)) damage *= 1.25;
+        if (player.perkv1(IMutationsLib.FloralOvariesIM) >= 1) damage *= 1.25;
         if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
         damage *= 2;
         damage = Math.round(damage);
@@ -6956,10 +6957,10 @@ public class Combat extends BaseContent {
         }
         if (player.hasPerk(PerkLib.ChiReflowLust)) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
         if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) lustDmgF *= 1.5;
-        if (player.hasPerk(MutationsLib.HeartOfTheStorm)) damage *= 1.1;
-        if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) damage *= 1.2;
-        if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) damage *= 1.3;
-        if (player.hasPerk(MutationsLib.RaijuCathodePrimitive)) damage *= 1.2;
+        if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) damage *= 1.1;
+        if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) damage *= 1.2;
+        if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) damage *= 1.3;
+        if (player.perkv1(IMutationsLib.RaijuCathodeIM) >= 2) damage *= 1.2;
         if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= RacialParagonAbilityBoost();
         if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
         lustDmgF = lustDmgF * monster.lustVuln;
@@ -6969,7 +6970,7 @@ public class Combat extends BaseContent {
         if (crit2) outputText(" <b>Critical!</b>");
         if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
         if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
-        if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)){
+        if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3){
             if (rand(100) < stunChance) {
                 if (monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
             }
@@ -7800,7 +7801,7 @@ public class Combat extends BaseContent {
         }
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
 		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
-			if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) damage *= (1 + (Math.round(codex.checkUnlocked() / 100) * 3));
+			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) damage *= (1 + (Math.round(codex.checkUnlocked() / 100) * 3));
 			else damage *= (1 + Math.round(codex.checkUnlocked() / 100));
 		}
 		if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) damage *= (1+(0.1*player.perkv1(PerkLib.SharedPower)));
@@ -7854,9 +7855,9 @@ public class Combat extends BaseContent {
     }
 
     public function doPhysicalDamage(damage:Number, apply:Boolean = true, display:Boolean = false):void {
-        if (player.hasPerk(MutationsLib.SharkOlfactorySystem) && MonsterIsBleeding()) damage *= 1.1;
-        if (player.hasPerk(MutationsLib.SharkOlfactorySystemPrimitive) && MonsterIsBleeding()) damage *= 1.15;
-        if (player.hasPerk(MutationsLib.SharkOlfactorySystemEvolved) && MonsterIsBleeding()) damage *= 1.25;
+        if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 && MonsterIsBleeding()) damage *= 1.1;
+        if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2 && MonsterIsBleeding()) damage *= 1.15;
+        if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3 && MonsterIsBleeding()) damage *= 1.25;
         doDamage(damage, apply, display);
     }
 
@@ -8149,10 +8150,10 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.DragonWaterBreath)) damage *= 5;
         if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
         if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 2;
-        if (player.hasPerk(MutationsLib.RaijuCathodePrimitive)) damage *= 1.20;
-        if (player.hasPerk(MutationsLib.HeartOfTheStorm)) damage *= 1.1;
-        if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) damage *= 1.2;
-        if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) damage *= 1.3;
+        if (player.perkv1(IMutationsLib.RaijuCathodeIM) >= 2) damage *= 1.20;
+        if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) damage *= 1.1;
+        if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) damage *= 1.2;
+        if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) damage *= 1.3;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage *= 2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage = damage / 100;
 		damage *= EyesOfTheHunterDamageBonus();
@@ -8660,7 +8661,7 @@ public class Combat extends BaseContent {
         }
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
 		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
-			if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) damage *= (1 + (Math.round(codex.checkUnlocked() / 100) * 3));
+			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) damage *= (1 + (Math.round(codex.checkUnlocked() / 100) * 3));
 			else damage *= (1 + Math.round(codex.checkUnlocked() / 100));
 		}
 		damage *= EyesOfTheHunterDamageBonus();
@@ -8865,12 +8866,12 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.NaturesSpringIV)) multi += 0.05;
         if (player.hasPerk(PerkLib.NaturesSpringV)) multi += 0.05;
         if (player.hasPerk(PerkLib.NaturesSpringVI)) multi += 0.05;
-        if (player.hasPerk(MutationsLib.TwinHeart)) multi += 0.4;
-        if (player.hasPerk(MutationsLib.TwinHeartPrimitive)) multi += 0.4;
-        if (player.hasPerk(MutationsLib.TwinHeartEvolved)) multi += 0.4;
-        if (player.hasPerk(MutationsLib.TwinHeart) && (player.isTaur() || player.isDrider())) multi += 0.6;
-        if (player.hasPerk(MutationsLib.TwinHeartPrimitive) && (player.isTaur() || player.isDrider())) multi += 0.6;
-        if (player.hasPerk(MutationsLib.TwinHeartEvolved) && (player.isTaur() || player.isDrider())) multi += 0.6;
+        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1) multi += 0.4;
+        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 2) multi += 0.4;
+        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 3) multi += 0.4;
+        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1 && (player.isTaur() || player.isDrider())) multi += 0.6;
+        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 2 && (player.isTaur() || player.isDrider())) multi += 0.6;
+        if (player.perkv1(IMutationsLib.TwinHeartIM) >= 3 && (player.isTaur() || player.isDrider())) multi += 0.6;
         return multi;
     }
 
@@ -9461,12 +9462,12 @@ public class Combat extends BaseContent {
                 else damage = Math.round(damage * 1.4); //30% more damage against very high corruption.
                 var corruptionModifier:Number = ((100 - player.cor) / 50);
                 if (corruptionModifier < 1) corruptionModifier = 1;
-                if (player.hasPerk(MutationsLib.EclipticMind)) damage *= corruptionModifier;
-                if (player.hasPerk(MutationsLib.EclipticMindPrimitive)) damage *= corruptionModifier;
-                if (player.hasPerk(MutationsLib.EclipticMindEvolved)) damage *= corruptionModifier;
+                if (player.perkv1(IMutationsLib.EclipticMindIM) >= 1) damage *= corruptionModifier;
+                if (player.perkv1(IMutationsLib.EclipticMindIM) >= 2) damage *= corruptionModifier;
+                if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3) damage *= corruptionModifier;
                 if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
-                if (player.hasPerk(MutationsLib.EclipticMindPrimitive) && monster.cor > player.cor / 2) damage = Math.round(damage * 2);
-                else if (player.hasPerk(MutationsLib.EclipticMindEvolved) && monster.cor > player.cor / 2) damage = Math.round(damage * 3);
+                if (player.perkv1(IMutationsLib.EclipticMindIM) >= 2 && monster.cor > player.cor / 2) damage = Math.round(damage * 2);
+                else if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3 && monster.cor > player.cor / 2) damage = Math.round(damage * 3);
 				damage *= fireDamageBoostedByDao();
                 damage = Math.round(damage);
                 if (damage > (monster.maxHP()/10)) damage = Math.round(monster.maxHP()/10);
@@ -9496,13 +9497,13 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") lustDmg *= (1 + ((10 + rand(11)) / 100));
             if (player.hasPerk(PerkLib.ElectrifiedDesire)) lustDmg *= (1 + (player.lust100 * 0.01));
             if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) lustDmg *= (1 + combat.historyWhoreBonus());
-            if (player.hasPerk(MutationsLib.EclipticMind)) lustDmg *= ((player.cor / 50 / 100)+1);
-            if (player.hasPerk(MutationsLib.EclipticMindPrimitive)) lustDmg *= ((player.cor / 50 / 100)+1);
-            if (player.hasPerk(MutationsLib.EclipticMindEvolved)) lustDmg *= ((player.cor / 50 / 100)+1);
+            if (player.perkv1(IMutationsLib.EclipticMindIM) >= 1) lustDmg *= ((player.cor / 50 / 100)+1);
+            if (player.perkv1(IMutationsLib.EclipticMindIM) >= 2) lustDmg *= ((player.cor / 50 / 100)+1);
+            if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3) lustDmg *= ((player.cor / 50 / 100)+1);
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= RacialParagonAbilityBoost();
             if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
-            if (player.hasPerk(MutationsLib.EclipticMindPrimitive) && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 2);
-            else if (player.hasPerk(MutationsLib.EclipticMindEvolved) && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 3);
+            if (player.perkv1(IMutationsLib.EclipticMindIM) >= 2 && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 2);
+            else if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3 && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 3);
             if (lustDmg > (monster.maxLust()/10)) lustDmg = Math.round(monster.maxLust()/10);
             outputText("[monster A] [monster name] slowly succumbs to [monster his] basest desires as your aura of corruption seeps through [monster him].");
             if (monster.cor < 100) outputText("Your victims purity is slowly becoming increasingly eroded by your seeping corruption.");
@@ -9528,12 +9529,12 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ElectrifiedDesire)) lustDmgA *= (1 + (player.lust100 * 0.01));
             if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) lustDmgA *= (1 + combat.historyWhoreBonus());
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmgA *= RacialParagonAbilityBoost();
-            if (player.hasPerk(MutationsLib.FloralOvaries)) lustDmgA *= 1.2;
-            if (player.hasPerk(MutationsLib.FloralOvariesPrimitive)) {
+            if (player.perkv1(IMutationsLib.FloralOvariesIM) >= 1) lustDmgA *= 1.2;
+            if (player.perkv1(IMutationsLib.FloralOvariesIM) >= 2) {
                 if (monster.isMaleOrHerm()) lustDmgA *= 1.5;
                 lustDmgA *= 1.25;
             }
-            if (player.hasPerk(MutationsLib.FloralOvariesEvolved)) {
+            if (player.perkv1(IMutationsLib.FloralOvariesIM) >= 3) {
                 if (rand(100) > 69) monster.createStatusEffect(StatusEffects.Fascinated,0,0,0,0);
                 lustDmgA *= 1.3;
             }
@@ -9646,7 +9647,7 @@ public class Combat extends BaseContent {
             outputText(" as a bolt falls from the sky!\n\n");
             combat.bonusExpAfterSuccesfullTease();
             if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-            if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)){
+            if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3){
                 if (rand(100) < 10) {
                     if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
                 }
@@ -10161,7 +10162,7 @@ public class Combat extends BaseContent {
         //Flying
         if (player.isFlying()) {
 			if (player.statusEffectv2(StatusEffects.Flying) == 0) {
-				if (!player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) player.addStatusValue(StatusEffects.Flying, 1, -1);
+				if (!player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) player.addStatusValue(StatusEffects.Flying, 1, -1);
 			}
             if (player.statusEffectv2(StatusEffects.Flying) == 1) {
 				if (player.soulforce < flyingSwordUseCost()) {
@@ -10449,7 +10450,7 @@ public class Combat extends BaseContent {
             }
         }
         //Milk Blast
-        if (player.hasStatusEffect(StatusEffects.CooldownMilkBlast) && player.hasPerk(MutationsLib.LactaBovinaOvariesEvolved)) {
+        if (player.hasStatusEffect(StatusEffects.CooldownMilkBlast) && player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3) {
             if (player.statusEffectv1(StatusEffects.CooldownMilkBlast) <= 0) {
                 player.removeStatusEffect(StatusEffects.CooldownMilkBlast);
             } else {
@@ -10457,7 +10458,7 @@ public class Combat extends BaseContent {
             }
         }
         //Cum Cannon
-        if (player.hasStatusEffect(StatusEffects.CooldownCumCannon) && player.hasPerk(MutationsLib.MinotaurTesticlesEvolved)) {
+        if (player.hasStatusEffect(StatusEffects.CooldownCumCannon) && player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3) {
             if (player.statusEffectv1(StatusEffects.CooldownCumCannon) <= 0) {
                 player.removeStatusEffect(StatusEffects.CooldownCumCannon);
             } else {
@@ -10465,7 +10466,7 @@ public class Combat extends BaseContent {
             }
         }
         //Plasma blast
-        if (player.hasStatusEffect(StatusEffects.CooldownPlasmaBlast) && (player.hasPerk(MutationsLib.LactaBovinaOvariesEvolved) || player.hasPerk(MutationsLib.MinotaurTesticlesEvolved))) {
+        if (player.hasStatusEffect(StatusEffects.CooldownPlasmaBlast) && (player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3 || player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3)) {
             if (player.statusEffectv1(StatusEffects.CooldownPlasmaBlast) <= 0) {
                 player.removeStatusEffect(StatusEffects.CooldownPlasmaBlast);
             } else {
@@ -10868,15 +10869,15 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.SecondWindRegen)) healingPercent += 5;
             if (player.hasStatusEffect(StatusEffects.Cauterize)) {
                 healingPercent += 1.5;
-                if (player.hasPerk(MutationsLib.HinezumiBurningBlood)) healingPercent += 0.5;
-                if (player.hasPerk(MutationsLib.HinezumiBurningBloodPrimitive)) healingPercent += 0.5;
-                if (player.hasPerk(MutationsLib.HinezumiBurningBloodEvolved)) healingPercent += 0.5;
+                if (player.perkv1(IMutationsLib.HinezumiBurningBloodIM) >= 1) healingPercent += 0.5;
+                if (player.perkv1(IMutationsLib.HinezumiBurningBloodIM) >= 2) healingPercent += 0.5;
+                if (player.perkv1(IMutationsLib.HinezumiBurningBloodIM) >= 3) healingPercent += 0.5;
             }
             if (player.headJewelry == headjewelries.CUNDKIN && player.HP < 1) healingPercent += 1;
             if (player.hasStatusEffect(StatusEffects.Overlimit)) healingPercent -= 10;
             if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) negativeHPRegen -= 1;
             if (player.hasPerk(PerkLib.Diehard) && !player.hasPerk(PerkLib.EpicDiehard) && player.HP < 1) negativeHPRegen -= 1;
-            if (player.hasPerk(MutationsLib.LizanMarrowEvolved) && player.HP < 1) negativeHPRegen -= 1;
+            if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 3 && player.HP < 1) negativeHPRegen -= 1;
 			if (negativeHPRegen < 0 && !player.hasPerk(PerkLib.BloodDemonToughness)) healingPercent += negativeHPRegen;
             if (healingPercent > maximumRegeneration()) healingPercent = maximumRegeneration();
             HPChange(Math.round((player.maxHP() * healingPercent / 100) + nonPercentBasedRegeneration()), false);
@@ -10910,14 +10911,14 @@ public class Combat extends BaseContent {
         if (player.weapon == weapons.SESPEAR) maxPercentRegen += 2;
         if (player.hasPerk(PerkLib.LustyRegeneration)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.LizanRegeneration)) maxPercentRegen += 1.5;
-        if (player.hasPerk(MutationsLib.LizanMarrow)) maxPercentRegen += 0.5;
-        if (player.hasPerk(MutationsLib.LizanMarrowPrimitive)) maxPercentRegen += 1;
-        if (player.hasPerk(MutationsLib.LizanMarrowEvolved)) {
+        if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 1) maxPercentRegen += 0.5;
+        if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 2) maxPercentRegen += 1;
+        if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 3) {
 			maxPercentRegen += 1.5;
 			if (player.HP < (player.maxHP() * 0.25)) maxPercentRegen += 4.5;
 		}
-		if (player.hasPerk(MutationsLib.DraconicHeartEvolved)) maxPercentRegen += 1;
-        if (player.hasPerk(MutationsLib.EclipticMindEvolved)) maxPercentRegen += 1.5;
+		if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) maxPercentRegen += 1;
+        if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3) maxPercentRegen += 1.5;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         if (player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 1;
         if (player.hasPerk(PerkLib.BodyCultivator)) maxPercentRegen += 0.5;
@@ -10949,13 +10950,13 @@ public class Combat extends BaseContent {
         if (player.newGamePlusMod() >= 4) maxRegen += 1;
         if (player.newGamePlusMod() >= 5) maxRegen += 1;
         if (player.hasPerk(PerkLib.LizanRegeneration)) maxRegen += 1.5;
-        if (player.hasPerk(MutationsLib.LizanMarrow)) maxRegen += 0.5;
-        if (player.hasPerk(MutationsLib.LizanMarrowPrimitive)) maxRegen += 1;
-        if (player.hasPerk(MutationsLib.LizanMarrowEvolved)) {
+        if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 1) maxRegen += 0.5;
+        if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 2) maxRegen += 1;
+        if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 3) {
 			maxRegen += 1.5;
 			if (player.HP < (player.maxHP() * 0.25)) maxRegen += 4.5;
 		}
-		if (player.hasPerk(MutationsLib.DraconicHeartEvolved)) maxRegen += 1;
+		if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) maxRegen += 1;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         if ((player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater)) && (player.hasPerk(PerkLib.AquaticAffinity) || player.hasPerk(PerkLib.AffinityUndine)) && player.necklaceName == "Magic coral and pearl necklace") maxRegen += 1;
         //if (player.hasStatusEffect(StatusEffects.GnomeHomeBuff) && player.statusEffectv1(StatusEffects.GnomeHomeBuff) == 1) maxRegen += 15;
@@ -10963,9 +10964,9 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.SecondWindRegen)) maxRegen += 5;
         if (player.hasStatusEffect(StatusEffects.Cauterize)) {
             maxRegen += 1.5;
-            if (player.hasPerk(MutationsLib.HinezumiBurningBlood)) maxRegen += 0.5;
-            if (player.hasPerk(MutationsLib.HinezumiBurningBloodPrimitive)) maxRegen += 0.5;
-            if (player.hasPerk(MutationsLib.HinezumiBurningBloodEvolved)) maxRegen += 0.5;
+            if (player.perkv1(IMutationsLib.HinezumiBurningBloodIM) >= 1) maxRegen += 0.5;
+            if (player.perkv1(IMutationsLib.HinezumiBurningBloodIM) >= 2) maxRegen += 0.5;
+            if (player.perkv1(IMutationsLib.HinezumiBurningBloodIM) >= 3) maxRegen += 0.5;
         }
         if (player.hasPerk(PerkLib.IcyFlesh)) maxRegen += 1;
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) maxRegen += 0.5;
@@ -11003,10 +11004,10 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.CorruptedKitsune)) fatiguecombatrecovery += 1;
         if (player.hasPerk(PerkLib.MasteredDefenceStance)) fatiguecombatrecovery += 1;
         if (player.hasPerk(PerkLib.PerfectDefenceStance)) fatiguecombatrecovery += 1;
-        if (player.hasPerk(MutationsLib.DraconicHeart)) fatiguecombatrecovery += 1;
-        if (player.hasPerk(MutationsLib.DraconicHeartPrimitive)) fatiguecombatrecovery += 1;
-        if (player.hasPerk(MutationsLib.DraconicHeartEvolved)) fatiguecombatrecovery += 1;
-		if (player.hasPerk(MutationsLib.KitsuneParathyroidGlandsPrimitive)) fatiguecombatrecovery += 5;
+        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 1) fatiguecombatrecovery += 1;
+        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 2) fatiguecombatrecovery += 1;
+        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) fatiguecombatrecovery += 1;
+		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2) fatiguecombatrecovery += 5;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) fatiguecombatrecovery += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         if (player.hasPerk(PerkLib.JobGunslinger)) fatiguecombatrecovery += 1;
 		if (player.hasPerk(PerkLib.AmateurGunslinger)) fatiguecombatrecovery += 1;
@@ -11069,11 +11070,11 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.SoulKing)) soulforceregen += 5;
         if (player.hasPerk(PerkLib.SoulEmperor)) soulforceregen += 5;
         if (player.hasPerk(PerkLib.SoulAncestor)) soulforceregen += 5;
-        if (player.hasPerk(MutationsLib.DraconicHeart)) soulforceregen += 4;
-        if (player.hasPerk(MutationsLib.DraconicHeartPrimitive)) soulforceregen += 4;
-        if (player.hasPerk(MutationsLib.DraconicHeartEvolved)) soulforceregen += 4;
-		if (player.hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive)) soulforceregen += 40;
-        if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved) && player.hasPerk(PerkLib.StarSphereMastery)) soulforceregen += (player.perkv1(PerkLib.StarSphereMastery) * 4);
+        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 1) soulforceregen += 4;
+        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 2) soulforceregen += 4;
+        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceregen += 4;
+		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2) soulforceregen += 40;
+        if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3 && player.hasPerk(PerkLib.StarSphereMastery)) soulforceregen += (player.perkv1(PerkLib.StarSphereMastery) * 4);
         return soulforceregen;
     }
 
@@ -11141,14 +11142,14 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.StrongestElementalBond)) manaregen += 14;
         if (player.hasPerk(PerkLib.StrongestElementalBondEx)) manaregen += 16;
         if (player.hasPerk(PerkLib.StrongestElementalBondSu)) manaregen += 18;
-        if (player.hasPerk(MutationsLib.DraconicHeart)) manaregen += 5;
-        if (player.hasPerk(MutationsLib.DraconicHeartPrimitive)) manaregen += 5;
-        if (player.hasPerk(MutationsLib.DraconicHeartEvolved)) manaregen += 5;
-        if (player.hasPerk(MutationsLib.FeyArcaneBloodstream)) manaregen += 5;
-        if (player.hasPerk(MutationsLib.FeyArcaneBloodstream)) manaregen += 10;
-        if (player.hasPerk(MutationsLib.FeyArcaneBloodstream)) manaregen += 15;
-		if (player.hasPerk(MutationsLib.KitsuneParathyroidGlandsPrimitive)) manaregen += 30;
-        if (player.hasPerk(MutationsLib.KitsuneParathyroidGlandsEvolved) && player.hasPerk(PerkLib.StarSphereMastery)) manaregen += (player.perkv1(PerkLib.StarSphereMastery) * 3);
+        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 1) manaregen += 5;
+        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 2) manaregen += 5;
+        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) manaregen += 5;
+        if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 1) manaregen += 5;
+        if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 2) manaregen += 10;
+        if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) manaregen += 15;
+		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2) manaregen += 30;
+        if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3 && player.hasPerk(PerkLib.StarSphereMastery)) manaregen += (player.perkv1(PerkLib.StarSphereMastery) * 3);
         if (player.miscJewelry == miscjewelries.DMAGETO || player.miscJewelry2 == miscjewelries.DMAGETO) manaregen += Math.round(player.maxMana()*0.02);
         return manaregen;
     }
@@ -11209,11 +11210,11 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.PrimalFuryIV)) wrathregen += 2;
         if (player.hasPerk(PerkLib.PrimalFuryV)) wrathregen += 2;
         if (player.hasPerk(PerkLib.PrimalFuryVI)) wrathregen += 2;
-        if (player.hasPerk(MutationsLib.DraconicHeart)) wrathregen += 1;
-        if (player.hasPerk(MutationsLib.DraconicHeartPrimitive)) wrathregen += 1;
-        if (player.hasPerk(MutationsLib.DraconicHeartEvolved)) wrathregen += 1;
-        if (player.hasPerk(MutationsLib.OrcAdrenalGlandsEvolved)) wrathregen += 4;
-        if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) wrathregen += 4;
+        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 1) wrathregen += 1;
+        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 2) wrathregen += 1;
+        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) wrathregen += 1;
+        if (player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 3) wrathregen += 4;
+        if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) wrathregen += 4;
         if (player.necklace == necklaces.CSNECK) {
             var csneckb:Number = 2;
             if (player.wrath >= player.wrath100 * 0.2) csneckb += 2;
@@ -11278,8 +11279,8 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.ImprovedVenomGland)) venomCRecharge += 2.5;
 			if (player.hasPerk(PerkLib.ImprovedVenomGlandEx)) venomCRecharge += 7.5;
 			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) venomCRecharge += 22.5;
-			if (player.hasPerk(MutationsLib.VenomGlandsPrimitive)) venomCRecharge += 1;
-			if (player.hasPerk(MutationsLib.VenomGlandsEvolved)) venomCRecharge += 4;
+			if (player.perkv1(IMutationsLib.VenomGlandsIM) >= 2) venomCRecharge += 1;
+			if (player.perkv1(IMutationsLib.VenomGlandsIM) >= 3) venomCRecharge += 4;
 			if (player.hasPerk(PerkLib.VenomousDiet)) {
 				if (player.hunger > 1400) venomCRecharge += 15;
 				else if (player.hunger > 1200) venomCRecharge += 14;
@@ -12007,12 +12008,12 @@ public class Combat extends BaseContent {
 
     public function OrcaJuggle():void {
         clearOutput();
-        if (player.statusEffectv1(StatusEffects.OrcaCanJuggleStill) == 2 && !player.hasPerk(MutationsLib.WhaleFatEvolved)) {
+        if (player.statusEffectv1(StatusEffects.OrcaCanJuggleStill) == 2 && !player.perkv1(IMutationsLib.WhaleFatIM) >= 3) {
             outputText("You have already juggled twice.");
             addButton(0, "Next", combatMenu, false);
             return;
         }
-        if (player.statusEffectv1(StatusEffects.OrcaCanJuggleStill) == 3 && player.hasPerk(MutationsLib.WhaleFatEvolved)) {
+        if (player.statusEffectv1(StatusEffects.OrcaCanJuggleStill) == 3 && player.perkv1(IMutationsLib.WhaleFatIM) >= 3) {
             outputText("You have already juggled three time.");
             addButton(0, "Next", combatMenu, false);
             return;
@@ -12056,17 +12057,17 @@ public class Combat extends BaseContent {
                 return;
             }
             player.addStatusValue(StatusEffects.OrcaPlayRoundLeft, 1, +2);
-            if (player.hasPerk(MutationsLib.WhaleFatPrimitive)) player.addStatusValue(StatusEffects.OrcaPlayRoundLeft, 1, +1);
+            if (player.perkv1(IMutationsLib.WhaleFatIM) >= 2) player.addStatusValue(StatusEffects.OrcaPlayRoundLeft, 1, +1);
             player.addStatusValue(StatusEffects.OrcaCanJuggleStill, 1, +1);
             if (player.statusEffectv1(StatusEffects.OrcaCanJuggleStill) == 1) {
-                if (!player.hasPerk(MutationsLib.WhaleFatEvolved)) {
+                if (!player.perkv1(IMutationsLib.WhaleFatIM) >= 3) {
                     outputText("\n\nYou can still juggle one more time. ");
                 } else {
                     outputText("\n\nYou can still juggle two more time. ");
                 }
             }
             if (player.statusEffectv1(StatusEffects.OrcaCanJuggleStill) == 2) {
-                if (!player.hasPerk(MutationsLib.WhaleFatEvolved)) {
+                if (!player.perkv1(IMutationsLib.WhaleFatIM) >= 3) {
                     outputText("\n\nYou cannot juggle any further. ");
                 } else {
                     outputText("\n\nYou can still juggle one more time. ");
@@ -12561,7 +12562,7 @@ public class Combat extends BaseContent {
         clearOutput();
         var bonusDamage:int = 10;
         StraddleDamage = calculateBasicTeaseDamage(20+rand(bonusDamage));
-        if (player.hasPerk(MutationsLib.ManticoreMetabolismEvolved) && player.tail.type == Tail.MANTICORE_PUSSYTAIL) StraddleDamage *= 2;
+        if (player.perkv1(IMutationsLib.ManticoreMetabolismIM) >= 3 && player.tail.type == Tail.MANTICORE_PUSSYTAIL) StraddleDamage *= 2;
         //Determine if critical tease!
         Randomcrit = false;
         var critChance:int = 5;
@@ -12600,7 +12601,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.DragonLustPoisonBreath) && player.tailVenom >= player.VenomWebCost()) TeaseFunctionList.push(RandomTeaseJabberwocky);
         if (player.harpyScore() >= 8  || player.thunderbirdScore() >= 10 || player.phoenixScore() >= 10) TeaseFunctionList.push(RandomTeaseHarpy);
         if (player.kitsuneScore() >= 8) TeaseFunctionList.push(RandomTeaseKitsune);
-        if (player.hasPerk(MutationsLib.BlackHeart)) TeaseFunctionList.push(RandomTeaseLustStrike);
+        if (player.hasPerk(IMutationsLib.BlackHeartIM)) TeaseFunctionList.push(RandomTeaseLustStrike);
         if (monster.hasBreasts()) TeaseFunctionList.push(RandomTeaseViolateOpponentBreast);
         if (monster.hasVagina()) {
             TeaseFunctionList.push(RandomTeaseViolateOpponentPussy);
@@ -12725,7 +12726,7 @@ public class Combat extends BaseContent {
         outputText("Taking advantage of your opponent's precarious position, you reach back and grab one of your back-spikes. " +
                 "You grin widely as you bring your hand down, stabbing your opponent with your venomous spike. You bat aside their clumsy attempt at a block, stabbing them again and again. With each stab, venom frothes from the spike, and blood spills from the deep injuries." +
                 "Your victim eventually rallies, blocking your wrist, then knocking the spike from your hand. You jump off them before they can strike you, but as they fight their way upright, you can tell that it was worth it");
-        if (player.hasPerk(MutationsLib.ManticoreMetabolismEvolved) && player.tail.type == Tail.MANTICORE_PUSSYTAIL) StraddleDamage *= 2;
+        if (player.perkv1(IMutationsLib.ManticoreMetabolismIM) >= 3 && player.tail.type == Tail.MANTICORE_PUSSYTAIL) StraddleDamage *= 2;
         monster.teased(StraddleDamage, false);
         if (Randomcrit) outputText(" <b>Critical!</b>");
 		var dam4Ba:Number = 1;
@@ -12742,7 +12743,7 @@ public class Combat extends BaseContent {
         outputText("You lick your lips and hold your victim down as you get into position,  engulfing [monster a] [monster name] juicy " + monster.cockDescriptShort() + " with your tail pussy. You’re going to milk that cumpump for what its worth.");
         var DurationLeft:int = player.statusEffectv1(StatusEffects.StraddleRoundLeft);
         var BasePlugDuration:int = 1;
-        if (player.hasPerk(MutationsLib.ManticoreMetabolismEvolved)) BasePlugDuration += 3;
+        if (player.perkv1(IMutationsLib.ManticoreMetabolismIM) >= 3) BasePlugDuration += 3;
         monster.createStatusEffect(StatusEffects.ManticorePlug, BasePlugDuration + rand(3), DurationLeft, 0, 0);
         player.removeStatusEffect(StatusEffects.StraddleRoundLeft);
         monster.removeStatusEffect(StatusEffects.Straddle);
@@ -12762,10 +12763,10 @@ public class Combat extends BaseContent {
         var dam4Ba:Number = 1;
         var Multiplier:Number = 1;
         if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) Multiplier += 1;
-        if (player.hasPerk(MutationsLib.DrakeLungs)) Multiplier += 2;
-        if (player.hasPerk(MutationsLib.DrakeLungsPrimitive)) Multiplier += 2;
-        if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) Multiplier += 2;
-        if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) Multiplier += 2;
+        if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) Multiplier += 2;
+        if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) Multiplier += 2;
+        if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) Multiplier += 2;
+        if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 4) Multiplier += 2;
         if (player.hasPerk(PerkLib.RacialParagon)) Multiplier += 0.5;
         if (player.hasPerk(PerkLib.Apex)) Multiplier += 0.5;
         if (player.hasPerk(PerkLib.AlphaAndOmega)) Multiplier += 0.5;
@@ -13658,7 +13659,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.DazzlingDisplay)) damagemultiplier += 0.2;
             if (player.hasPerk(PerkLib.SuperSensual)) damagemultiplier += 0.5;
             if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= RacialParagonAbilityBoost();
-            if (player.hasPerk(MutationsLib.ManticoreMetabolismEvolved)) damagemultiplier *= 2;
+            if (player.perkv1(IMutationsLib.ManticoreMetabolismIM) >= 3) damagemultiplier *= 2;
             if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
             damage *= damagemultiplier;
             //Determine if critical tease!
@@ -13939,8 +13940,8 @@ public class Combat extends BaseContent {
         }
         outputText("You bite [monster a] [monster name] drinking deep of [monster his] blood ");
         var damage:int = player.maxHP() * 0.05;
-        if (player.hasPerk(MutationsLib.HollowFangsPrimitive)) damage += player.maxHP() * 0.02;
-        if (player.hasPerk(MutationsLib.HollowFangsEvolved)) damage += player.maxHP() * 0.08;
+        if (player.perkv1(IMutationsLib.HollowFangsIM) >= 2) damage += player.maxHP() * 0.02;
+        if (player.perkv1(IMutationsLib.HollowFangsIM) >= 3) damage += player.maxHP() * 0.08;
         if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
         damage = Math.round(damage);
@@ -13949,11 +13950,11 @@ public class Combat extends BaseContent {
         if (player.HP > player.maxHP()) player.HP = player.maxHP();
         outputText(" damage. You feel yourself grow stronger with each drop. ");
         var thirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
-        if (player.hasPerk(MutationsLib.HollowFangsEvolved)) thirst.drink(2);
+        if (player.perkv1(IMutationsLib.HollowFangsIM) >= 3) thirst.drink(2);
         else thirst.drink(1);
         if (monster.gender != 0 && monster.lustVuln != 0) {
             var lustDmg:int = (10 + (player.lib * 0.1)) * monster.lustVuln;
-            if (player.hasPerk(MutationsLib.HollowFangsEvolved)) lustDmg *= 1.5;
+            if (player.perkv1(IMutationsLib.HollowFangsIM) >= 3) lustDmg *= 1.5;
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= RacialParagonAbilityBoost();
             lustDmg = Math.round(monster.lustVuln * lustDmg);
             outputText(" [monster he] can’t help but moan, aroused from the aphrodisiac in your saliva for ");
@@ -14737,9 +14738,9 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
         if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
-        if (player.hasPerk(MutationsLib.HarpyHollowBones)) damage *= 1.2;
-        if (player.hasPerk(MutationsLib.HarpyHollowBonesPrimitive)) damage *= 1.5;
-        if (player.hasPerk(MutationsLib.HarpyHollowBonesEvolved)) damage *= 2;
+        if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 1) damage *= 1.2;
+        if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 2) damage *= 1.5;
+        if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 3) damage *= 2;
 		if (Forgefather.channelInlay == "emerald" && Forgefather.refinement == 4) damage *= 1.25;
 		if (Forgefather.channelInlay == "emerald" && Forgefather.refinement == 5) damage *= 1.5;
 		if (Forgefather.gem == "emerald" && Forgefather.refinement == 4) damage *= 1.12;
@@ -14828,7 +14829,7 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 70) player.addStatusValue(StatusEffects.Rage, 1, 10);
             else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
         }
-        if (((!player.hasPerk(MutationsLib.HarpyHollowBonesEvolved) || (!Forgefather.channelInlay == "emerald")) && player.statusEffectv1(StatusEffects.Flying) == 0) || player.statusEffectv2(StatusEffects.Flying) != 3) {
+        if (((!player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 3 || (!Forgefather.channelInlay == "emerald")) && player.statusEffectv1(StatusEffects.Flying) == 0) || player.statusEffectv2(StatusEffects.Flying) != 3) {
             if (player.isFlying()) player.removeStatusEffect(StatusEffects.Flying);
             if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
                 player.removeStatusEffect(StatusEffects.FlyingNoStun);
@@ -15527,8 +15528,8 @@ public class Combat extends BaseContent {
 
     public function oniRampagePowerMulti():Number {
         var oniRampagePowerMulti:Number = 3;
-        if (player.hasPerk(MutationsLib.OniMusculaturePrimitive)) oniRampagePowerMulti += 1;
-        if (player.hasPerk(MutationsLib.OniMusculatureEvolved)) oniRampagePowerMulti += 2;
+        if (player.perkv1(IMutationsLib.OniMusculatureIM) >= 2) oniRampagePowerMulti += 1;
+        if (player.perkv1(IMutationsLib.OniMusculatureIM) >= 3) oniRampagePowerMulti += 2;
         return oniRampagePowerMulti;
     }
 
@@ -15856,9 +15857,9 @@ public class Combat extends BaseContent {
     public function BleedDamageBoost(isARacialAbility:Boolean = false):Number {
         var BleedMod:Number = 1.0;
         if (player.hasPerk(PerkLib.ThirstForBlood)) BleedMod += 0.5;
-        if (player.hasPerk(MutationsLib.SharkOlfactorySystem)) BleedMod += 0.5;
-        if (player.hasPerk(MutationsLib.SharkOlfactorySystemPrimitive)) BleedMod += 0.5;
-        if (player.hasPerk(MutationsLib.SharkOlfactorySystemEvolved)) BleedMod += 0.5;
+        if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) BleedMod += 0.5;
+        if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) BleedMod += 0.5;
+        if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) BleedMod += 0.5;
         if (isARacialAbility) BleedMod *= combat.RacialParagonAbilityBoost();
         return BleedMod;
     }
@@ -15879,11 +15880,11 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.EpicBrawn)) ghostStrMulti2 += .25;
         if (player.hasPerk(PerkLib.LegendaryBrawn)) ghostStrMulti2 += .3;
         if (player.hasPerk(PerkLib.MythicalBrawn)) ghostStrMulti2 += .35;
-        if (player.hasPerk(MutationsLib.DraconicHeartPrimitive)) ghostStrMulti += 0.05;
-        if (player.hasPerk(MutationsLib.DraconicHeartEvolved)) ghostStrMulti += 0.1;
-        if (player.hasPerk(MutationsLib.OrcAdrenalGlands)) ghostStrMulti += 0.05;
-        if (player.hasPerk(MutationsLib.OrcAdrenalGlandsPrimitive)) ghostStrMulti += 0.1;
-        if (player.hasPerk(MutationsLib.OrcAdrenalGlandsEvolved)) ghostStrMulti += 0.15;
+        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 2) ghostStrMulti += 0.05;
+        if (player.perkv1(IMutationsLib.DraconicHeartIM) >= 3) ghostStrMulti += 0.1;
+        if (player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 1) ghostStrMulti += 0.05;
+        if (player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 2) ghostStrMulti += 0.1;
+        if (player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 3) ghostStrMulti += 0.15;
         ghostStr *= ghostStrMulti;
         ghostStr *= ghostStrMulti2;
         ghostStr = Math.round(ghostStr);
@@ -15930,12 +15931,12 @@ public class Combat extends BaseContent {
     public function ghostSpeed():Number {
         var ghostSpe:Number = player.speStat.core.value;
         var ghostSpeMulti:Number = 0;
-        if (player.hasPerk(MutationsLib.DraconicLungsPrimitive)) ghostSpeMulti += 0.05;
-        if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) ghostSpeMulti += 0.1;
-        if (player.hasPerk(MutationsLib.ElvishPeripheralNervSys)) ghostSpeMulti += 0.05;
-        if (player.hasPerk(MutationsLib.ElvishPeripheralNervSysPrimitive)) ghostSpeMulti += 0.1;
-        if (player.hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) ghostSpeMulti += 0.15;
-        if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) ghostSpeMulti += 0.3;
+        if (player.perkv1(IMutationsLib.DraconicLungIM) >= 2) ghostSpeMulti += 0.05;
+        if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) ghostSpeMulti += 0.1;
+        if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 1) ghostSpeMulti += 0.05;
+        if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) ghostSpeMulti += 0.1;
+        if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) ghostSpeMulti += 0.15;
+        if (player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 3) ghostSpeMulti += 0.3;
         ghostSpe *= ghostSpeMulti;
         ghostSpe = Math.round(ghostSpe);
         return ghostSpe;
@@ -15949,8 +15950,8 @@ public class Combat extends BaseContent {
 	public function ghostToughness():Number {
 		var ghostTou:Number = player.touStat.core.value;
         var ghostTouMulti:Number = 0;
-        if (player.hasPerk(MutationsLib.DraconicBonesPrimitive)) ghostTouMulti += 0.05;
-        if (player.hasPerk(MutationsLib.DraconicBonesEvolved)) ghostTouMulti += 0.1;
+        if (player.perkv1(IMutationsLib.DraconicBonesIM) >= 2) ghostTouMulti += 0.05;
+        if (player.perkv1(IMutationsLib.DraconicBonesIM) >= 3) ghostTouMulti += 0.1;
 		ghostTou *= ghostTouMulti;
         ghostTou = Math.round(ghostTou);
         return ghostTou;

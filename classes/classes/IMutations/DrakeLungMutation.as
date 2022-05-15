@@ -14,7 +14,7 @@ public class DrakeLungMutation extends PerkType
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.DrakeLungIM);
+            var pTier:int = player.perkv1(IMutationsLib.DrakeLungsIM);
             if (pTier >= 1){
                 descS = "Increases the power of dragon breath attack. (+300% to dragon breath damage that race is using)";
             }
@@ -31,7 +31,7 @@ public class DrakeLungMutation extends PerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.DrakeLungIM)){
+            switch (player.perkv1(IMutationsLib.DrakeLungsIM)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -48,9 +48,9 @@ public class DrakeLungMutation extends PerkType
         public static function pReqs(pTier:int = 0):void{
             try{
                 //This helps keep the requirements output clean.
-                IMutationsLib.DrakeLungIM.requirements = [];
+                IMutationsLib.DrakeLungsIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.DrakeLungIM.requireLungsMutationSlot()
+                    IMutationsLib.DrakeLungsIM.requireLungsMutationSlot()
                     .requireAnyPerk(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath, PerkLib.DragonWaterBreath)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return (player.frostWyrmScore() >= 10 || player.jabberwockyScore() >= 10 || player.vouivreScore() >= 11 || player.leviathanScore() >= 20);
@@ -58,7 +58,7 @@ public class DrakeLungMutation extends PerkType
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.DrakeLungIM.requireLevel(pLvl);
+                    IMutationsLib.DrakeLungsIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());

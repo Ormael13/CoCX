@@ -4,6 +4,7 @@
 package classes.Scenes.Combat {
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.IMutations.*;
 import classes.Items.HeadJewelryLib;
 import classes.Items.JewelryLib;
 import classes.Items.NecklaceLib;
@@ -282,7 +283,7 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv2(PerkLib.Ambition);
 		}
 		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
-			if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) mod += (Math.round(codex.checkUnlocked() / 100) * 3);
+			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) mod += (Math.round(codex.checkUnlocked() / 100) * 3);
 			else mod += Math.round(codex.checkUnlocked() / 100);
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) mod += .3;
@@ -296,8 +297,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.headJewelry == headjewelries.SPHINXAS) mod += .5;
         if (player.hasStatusEffect(StatusEffects.Maleficium)) {
-			if (player.hasPerk(MutationsLib.ObsidianHeartPrimitive)) {
-				if (player.hasPerk(MutationsLib.ObsidianHeartEvolved)) mod += 2.5;
+			if (player.perkv1(IMutationsLib.ObsidianHeartIM) >= 2) {
+				if (player.perkv1(IMutationsLib.ObsidianHeartIM) >= 3) mod += 2.5;
 				else mod += 1.25;
 			} else mod += 1;
 		}
@@ -343,7 +344,7 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv1(PerkLib.Obsession);
 		}
 		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
-			if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) mod += (Math.round(codex.checkUnlocked() / 100) * 3);
+			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) mod += (Math.round(codex.checkUnlocked() / 100) * 3);
 			else mod += Math.round(codex.checkUnlocked() / 100);
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) mod += .3;
