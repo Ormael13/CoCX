@@ -87,7 +87,7 @@ public class DesertCave extends DungeonAbstractContent
 		}
 		
 		private function checkExit():Boolean {
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] <= 0) {
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && flags[kFLAGS.SAND_WITCHES_COWED] <= 0 && flags[kFLAGS.SAND_WITCHES_FRIENDLY] <= 0) {
 				clearOutput();
 				outputText("The magical barrier blocks your way! Looks like you can't get out until you find the leader of the Sand Witches!");
 				doNext(roomCaveCommons);
@@ -2273,13 +2273,15 @@ public class DesertCave extends DungeonAbstractContent
 			//toggle withc attacking
 			if(flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] == 0) addButton(0,"StopAttacking",unfriendlyWitchToggle).hint("You've had enough with the Sand Witches. They should leave you alone.", "Talk: Stop Attacking");
 			else addButton(0,"StartAttacking",unfriendlyWitchToggle).hint("Tell the Sand Mother that you want to encounter the Sand Witches again.", "Talk: Start Attacking");
-			addButtonIfTrue(1,"Sex", sexWithEnemyMother, "Not aroused enough.", player.lust >= 33, "Remind her who's the boss here.");
+			if (flags[kFLAGS.MORE_CUM_WITCHES] == 0) addButton(1, "Cum Witches", talkToEnemySMaboutCW).hint("Request Sand Mother to send some Cum Witches to the desert. Maybe you'll be able to encounter and fuck one?");
+			else addButtonDisabled(1, "<<====", "You can toogle Cum Witch encounters at the same time with regular Sand Witches.");
+			addButtonIfTrue(2,"Sex", sexWithEnemyMother, "Not aroused enough.", player.lust >= 33, "Remind her who's the boss here.");
 			if(flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] < 10) {
-				addButton(2,"Get LaBova",takeLaBovaOrLactaid, false, null, null, consumables.LABOVA_.description);
-				addButton(3,"Get Lactaid",takeLaBovaOrLactaid, true, null, null, consumables.LACTAID.description);
+				addButton(3,"Get LaBova",takeLaBovaOrLactaid, false, null, null, consumables.LABOVA_.description);
+				addButton(4,"Get Lactaid",takeLaBovaOrLactaid, true, null, null, consumables.LACTAID.description);
 			}
-			if(canFreeEssy()) addButton(4,"Essrayle",SceneLib.forest.essrayle.askMotherToReleaseEssy).hint("Request the Sand Mother to release Essrayle.");
-			//TODO: add 'evil' options for Milky and CumWitches
+			if(canFreeEssy()) addButton(5,"Essrayle",SceneLib.forest.essrayle.askMotherToReleaseEssy).hint("Request the Sand Mother to release Essrayle.");
+			if (canFreeMilkSlave()) addButton(6, "Milk-Slave", talkToEnemySMaboutMilk).hint("Request the Sand Mother to release the milk slave you've found in the bathroom.");
 			addButton(14,"Leave",playerMenu);
 		}
 
@@ -3259,6 +3261,7 @@ public class DesertCave extends DungeonAbstractContent
 				outputText("  Slapping her on the shoulder, you congratulate her on seeing good sense.  Her eyes narrow dangerously as she twists away from your touch.");
 				outputText("\n\n\"<i>Just... just, leave us be,</i>\" the Sand Mother's reedy voice pleads.");
 				flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] = 1;
+				if (flags[kFLAGS.MORE_CUM_WITCHES]) flags[kFLAGS.CUM_WITCHES_FIGHTABLE] = 0;
 			}
 			//TURN EM ON
 			else {
@@ -3266,12 +3269,104 @@ public class DesertCave extends DungeonAbstractContent
 				outputText("\n\n\"<i>No,</i>\" the tanned enchantress mumbles, sitting back down.  \"<i>I can't... fine.  I'll tell them they can pursue you if they dare.  Do not expect us to fall before you without a struggle.</i>\"");
 				outputText("\n\nYou reply, \"<i>I wouldn't dream of it.</i>\"");
 				flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] = 0;
+				if (flags[kFLAGS.MORE_CUM_WITCHES]) flags[kFLAGS.CUM_WITCHES_FIGHTABLE] = 1;
 			}
 			doNext(playerMenu);
 		}
 
-		//addButton(5,"Get LaBova",takeLaBovaOrLactaid, false);
-		//addButton(6,"Get Lactaid",takeLaBovaOrLactaid);
+
+		//New enemy options by Svalkash ---------------
+		//SAND_WITCHES_COWED == 2 -> dungeon disabled!
+
+		public function talkToEnemySMaboutCW():void {
+			clearOutput();
+			outputText("You recall the big-membered futanari you've seen in the eastern section of the cave. While the Desert is overflowing with Sand Witches (you're already starting to think that their only reason for existence is to annoy you with their spells and stones), none of them are SO happy to fuck and be fucked, and, of course, you've never seen any witch with such a perfect dick. Seeing your mind wandering, Sand Mother attracts your attention: \"<i>What do you want this time? What should I do for you to leave us alone?</i>\"\n\n");
+			outputText("\"<i>Well, that's simple. Your girls in the desert are sweet and really help to blow off some steam.</i>\" She frowns, realizing where this is going. \"<i>Or just to blow.</i>\", you laugh at your own joke.\n\n");
+			outputText("The Sand Mother reacts immediately. \"<i>They are innocent! You rape my girls, fill them up with your corrupted seed, and after that you say you're not a demon?!</i>\"\n\n");
+			outputText("\"<i>All I say is 'I don't give a fuck'. And, by the way... I didn't know that some of your witches have cocks. Why don't you send them in the wild too? Besides... You probably know yourself just <b>how</b> good they are, doesn't you?</i>\" - you wink, making her shiver.\n\n");
+			outputText("\"<i>No!! We barely have enough Cum Witches to keep up our numbers! We still need to fight <b>actual</b> demons, you know.</i>\"\n\n");
+			outputText("You sigh. Seems like this time you have to explain the dumb hag some basics. \"<i>All your girls are already fucked to the limit, and that cum pump is literally dying from boredom in her office. You send some out, this girl will have more job to do, and others will run around the desert fucking everything with their huge, slick cocks.</i>\" You intentionally spend some time describing their dicks to make the poor sorceress even more frustrated and wet.\n\n");
+			outputText("\"<i>I'll never let them out - they might be killed or raped by... demons.</i>\" She stares you again with eyes full of hate. You sigh and lean in closer to stare her in return. \"<i>This is not a friendly request. You WILL do that or suffer consequences. How about each time I want to use a Cum Witch, I will just come here and fuck YOU instead? Would you like this more?</i>\" you grin.\n\n");
+			outputText("\"<i>Yes... I mean, no! Fine... I'll release them. Maybe it'll give us at least some time before you return with another nonsensical request</i>\", she responds meekly..\n\n");
+			outputText("You stand up and smile at the ‘ruler’. \"<i>Good. Besides, you don't have to worry - your dick-witch was more eager than some succubi when I fucked her. And I'm sure that you already saw her face when she gets to use her dick instead of cunt. Even the imps are not THAT happy.</i>\" The witch is clearly disgusted by you comparing her people to demons, so you continue, of course. \"<i>And do you think these waves of spunk produced by them are 'normal'? I can hardly find any minotaur to match. And after all that, you call ME a demon? I'm the purest of angels in comparison!</i>\"\n\n");
+			outputText("\"<i>But what if they try to attack and rape you? You might have already noticed: when a Cum Witch can't have a release for some time, she becomes... less reasonable. But our lives depend on their numbers. Please... don't kill them.</i>\" the sorceress is ashamed of her own behavior, but her fear is stronger. Good.\n\n");
+			outputText("You remember the perfect body of the witch you encountered here and smile. \"<i>While they don't try to convert me into one of your own, I don't care. Who knows, maybe I'm even looking forward to it.</i>\" You leave, hearing quiet sigh from behind. The desert will be slightly more crowded since now.\n\n");
+			flags[kFLAGS.MORE_CUM_WITCHES] = 1;
+			flags[kFLAGS.CUM_WITCHES_FIGHTABLE] = 1; //changed together with sand witches
+			doNext(playerMenu);
+		}
+
+		public function talkToEnemySMaboutMilk():void {
+			clearOutput();
+			outputText("Approaching the Sand Mother, you remember one person you haven’t taken care of... yet. That woman in bathrooms, which was constantly leaking milk. ");
+			if (player.cor >= 66)
+				outputText("The poor girl is kept there as a slave while being transformed into some mindless milk-production machine. How do can they keep slaves and dare to call YOU a demon? You tell the Sand Mother as such.");
+			else
+				outputText("Although nothing really prevents you from relaxing and fucking with the girl, this milk bath ability is useful. You might need such slave for your own personal use. Why won't she just give one to you?");
+			outputText("\n\nThe sorceress looks at you desperately and groans. \"<i>First you beat up half of my people, and now you want to take our slaves as well? We need them, their existence are vital for the coven. The girls are treated well: they are happy and none of them wants any changes. And most importantly, we don’t allow any *demons* to attack them. We cannot do this. Please, ask for something else.</i>\"\n\n");
+			menu();
+			addButton(0, "Insist", enemyMilkInsist);
+			if (player.inte <= 20)
+				outputText("You’re sure that there is another way, but you’re too stupid to come up with something. Though maybe you could just make her obey by force? You’re the boss here, after all.");
+			else {
+				outputText("You could try to force the unruly bitch to do as you wish or try to bargain.");
+				addButton(1, "Bargain", enemyMilkBargain);
+			}
+		}
+
+		private function enemyMilkBargain():void {
+			clearOutput();
+			outputText("How much?\n\n");
+			outputText("The witch is totally baffled; she looks at you trying to understand what exactly you asked. You sigh, \"<i>The girl. Gems. Are you even familiar with the concept of trade? Or all you can do is to stuff people with chemicals to make them squirt pools of milk?</i>\"\n\n");
+			outputText("The Sand Mother narrows her eyes and responds in a cold tone, completely ignoring your offence. \"<i>The chemicals are rare and expensive. We’ll need to transport the girl to your place somehow. Also, she’ll need a bath to sit in.</i>\" Noticing your questioning expression, she elaborates. \"<i>We still care about our slaves. If we must release her, I want to make sure that she’ll not sit in a pile of mud but live in more-or-less good conditions. So, this will be… 4000 gems for one woman.</i>\"\n\n");
+			outputText("Four thousand?! She’s clearly mad. You’re sure she just tries to get at least some revenge on you...\n\n");
+			menu();
+			addButton(0, "Insist!!", enemyMilkInsist);
+			addButtonIfTrue(1, "Agree", enemyMilkAgree, "Not enough gems.", player.gems >= 4000);
+			addButton(2, "Leave", playerMenu);
+		}
+
+		private function enemyMilkAgree():void {
+			clearOutput();
+			player.gems -= 4000;
+			outputText("You spit and toss a pouch with gems at the woman. She nods and smiles. \"I’ll send people to bring the girl to your camp. You can meet them outside – they’ll need some directions. And…\" – her voice falters – \"Thank you for understanding.\n\n");
+			outputText("When you return to your camp, you see some witches leaving, trying not to make eye contact with you or anyone else. Their work here is done – a small part of the camp's perimeter has been cleared away, your belongings moved aside to make room for a large pool, its radius easily ten feet, buried in the hard-packed dirt of the wasteland.  A metallic brim surrounds the pool, just wide enough to sit or lie on with your [legs] dangling into the milky waters that will soon be filling it.\n\n");
+			outputText("The slave girlsits in the pool already, smiling with glee as she notices you. She tries to make space for you in the pool, but stumbles and collapses onto all fours, chest resting on her massive tits and ass up in the air, bare for all to see.  \"<i>Bath Slut milk time?</i>\" she asks, her bright brown eyes looking up at yours pleadingly.\n\n");
+			if (player.cor >= 66)
+				outputText("Well, the name is fitting. You didn’t buy the slut for nothing, after all. But maybe you would look to find even better name for the girl?\n\n");
+			else
+				outputText("Speaking of which, you don't really have anything to call her. She doesn’t even understand the meaning of her name right now, but you will probably feel bad if you continue to call her like that after freeing her from the coven.\n\n");
+			doNext(SceneLib.milkWaifu.nameZeMilkBath);
+			mainView.nameBox.text = "";
+		}
+
+		private function enemyMilkInsist():void {
+			clearOutput();
+			outputText("You take a deep breath, trying to control your anger, and then dash to the Sand Mother in instant, grabbing her by her neck. Maybe she <b>was</b> strong before, but right now she must understand, <b>who</b> is in charge now. Bringing your face closer to hers, you ask, looking into her widely opened eyes: \"<i>Are you sure about that? I don’t remember asking for your permission. If I recall correctly, your entire coven is still alive just because I decided to fuck you instead of killing or raping everyone else. But if you want, you can choose. Option one – you give me the slave, everyone is happy. Option two – you don’t do what I say, and your people die. Don’t think you will be able to stop me this time – I won’t hold back my attacks. I’ll probably use some of your girls for my own pleasure, maybe even the dicked one. Or maybe I’ll just lead demons from the closest oasis to this place instead of killing everyone. It will definitely be easier. After that, I’ll take my slave. But not this girl, no. She has only two breasts, and <b>you</b> would make even better slave. Do you want to spend the rest of your life living in a milk pool and being fucked in your two cunts? Or maybe you’ll just give me the damn girl?</i>\"\n\n");
+			outputText("The sorceress glares at you in anger, her fists clenched and her face stern. You start preparing for her attack, but she just sits back in her throne and responds submissively: \"<i>Fine. You’ll get the girl. My witches will make sure that she arrives in your camp safely. Just please leave us… alone.\"\n" +
+				"You turn your back to her without saying a word.</i>\n\n");
+			outputText("\n\n"); //some whitespace
+			outputText("When you return to your camp, you notice two witches doing something. They show you the result of their work – a pool prepared for your new slave. The 'slave', by the way, is sitting in the pool, waiting you obediently. To your surprise, the witches don’t leave – one of them suggests you try out the bath and pleasures it can provide, ready to keep you company.\n\n");
+			outputText("After an hour of relaxing in the bath with you, the girls even eagerly accept your advances on them and do whatever you ask. You start to think that the damn Mother has finally asked them all to be nice and obedient when one witch kisses you and you notice a strange glint in her eyes. When you look to your right, you notice a pebble flying right at your head. Fuck.\n\n");
+			player.HP = 20;
+			cheatTime(6);
+			doNext(enemyMilkInsist2);
+		}
+
+		private function enemyMilkInsist2():void {
+			clearOutput();
+			outputText("You wake up near the bath with your head aching – seems like the girls didn’t try to kill you, but instead made sure that you’re knocked out for some time. The ‘Bath Slut’ is left unharmed – she sits near you and smiles. Well, time to teach the bitches a lesson. You had warned the sorceress, but she has decided to bring more troubles on her coven.\n\n");
+			outputText("You reach the desert in no time but spend almost an hour trying to find the familiar entrance. You check the landmarks again. And again – still nothing. You don’t even see the sphinx girl anywhere! Trying to find any witches doesn’t help too – even though the desert was swarmed with them yesterday, now they all just… disappeared. Or maybe they just avoid you at all costs, who knows.\n\n");
+			outputText("Shit. Seems like the sorceress was *really* desperate after the last time and planned everything ahead. Not that you need her anyway – you already have your own milk machine. Speaking of which – you probably should return and give the girl a new name.\n\n");
+			flags[kFLAGS.DESERT_CAVE_DISABLED] = 1; //no more cave
+			flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] = 1; //no more encounters
+			flags[kFLAGS.CUM_WITCHES_FIGHTABLE] = 0;
+			doNext(SceneLib.milkWaifu.nameZeMilkBath);
+			mainView.nameBox.text = "";
+		}
+
+		//---------------------------------------------
+
 		//*Raid LaBova/Lactaid
 		public function takeLaBovaOrLactaid(lactaid:Boolean = true):void {
 			clearOutput();

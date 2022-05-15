@@ -39,8 +39,9 @@ public function arriveWithLacticWaifuAtCamp():void {
 	mainView.nameBox.text = "";
 }
 
+//for 'enemy' options new functions were added to DesertCave.as
 
-private function nameZeMilkBath():void 
+public function nameZeMilkBath():void
 {
 	if (CoC.instance.testingBlockExiting)
 	{

@@ -849,7 +849,7 @@ public static const ENTERED_SANDWITCH_DUNGEON:int                               
 public static const PAWJOBS:int                                                     =  841; //
 public static const UNKNOWN_FLAG_NUMBER_0842:int                                    =  842; //
 public static const UNKNOWN_FLAG_NUMBER_0843:int                            		=  843; //
-public static const UNKNOWN_FLAG_NUMBER_0844:int                                    =  844; //
+public static const DESERT_CAVE_DISABLED:int                                    	=  844; //Set after the player insists about MilkGirl
 public static const TIMES_SUBMITTED_TO_SANURA:int                                   =  845; //
 public static const TIMES_WINFUCKED_SANURA:int                                      =  846; //
 public static const SAND_MOTHER_DEFEATED:int                                        =  847; //

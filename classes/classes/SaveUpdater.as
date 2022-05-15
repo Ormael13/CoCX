@@ -1804,7 +1804,7 @@ public class SaveUpdater extends NPCAwareContent {
 				//resetting Sanura riddle flags
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0842] = 0;
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0843] = 0;
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0844] = 0;
+				flags[kFLAGS.DESERT_CAVE_DISABLED] = 0;
 				//autofix
 				if (player.statStore.hasBuff("Tribulation Vestiges"))
 					player.statStore.removeBuffs("Tribulation Vestiges");
