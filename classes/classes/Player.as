@@ -5523,13 +5523,13 @@ use namespace CoC;
 				catCounter++;
 			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1)
 				catCounter++;
-			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3)
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 2)
 				catCounter++;
 			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3)
 				catCounter++;
 			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				catCounter++;
-			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				catCounter++;
 			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				catCounter++;
@@ -5632,13 +5632,13 @@ use namespace CoC;
 				cheshireCounter++;
 			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1)
 				cheshireCounter++;
-			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3)
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 2)
 				cheshireCounter++;
 			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3)
 				cheshireCounter++;
 			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				cheshireCounter++;
-			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				cheshireCounter++;
 			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				cheshireCounter++;
