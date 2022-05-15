@@ -1,5 +1,6 @@
 package classes.Scenes.Combat {
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Monster;
 import classes.MutationsLib;
 import classes.PerkLib;
@@ -346,8 +347,8 @@ public class AbstractSpell extends CombatAbility {
     
     public static function omnicasterDamageFactor_gazer():Number {
         if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.hasPerk(MutationsLib.GazerEyeEvolved)) return 0.5;
-			else if (player.hasPerk(MutationsLib.GazerEyePrimitive)) return 0.3;
+			if (player.perkv1(IMutationsLib.GazerEyesIM) >= 3) return 0.5;
+			else if (player.perkv1(IMutationsLib.GazerEyesIM) >= 2) return 0.3;
 			else return 0.2;
 		}
         else return 0.0;

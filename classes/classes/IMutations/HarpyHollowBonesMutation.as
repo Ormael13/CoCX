@@ -72,17 +72,22 @@ public class HarpyHollowBonesMutation extends PerkType
         //Mutations Buffs
         public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            pBuffs['tou.mult'] = -0.05 * pTier;
-            pBuffs['spe.mult'] = pSpeVal();
-            return pBuffs;
+            if (pTier == 1) {
+                pBuffs['spe.mult'] = 0.2;
+                pBuffs['tou.mult'] = -0.05;
 
-            function pSpeVal():Number{
-                var temp:Number = 0;
-                if (pTier >= 1) temp += 0.2;
-                if (pTier >= 2) temp += 0.25;
-                if (pTier >= 3) temp += 0.45;
-                return temp;
             }
+            if (pTier == 2) {
+                pBuffs['spe.mult'] = 0.45;
+                pBuffs['tou.mult'] = -0.1;
+
+            }
+            if (pTier == 3) {
+                pBuffs['spe.mult'] = 0.9;
+                pBuffs['tou.mult'] = -0.15;
+
+            }
+            return pBuffs;
         }
 
         public function HarpyHollowBonesMutation() {

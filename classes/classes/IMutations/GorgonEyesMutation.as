@@ -75,13 +75,13 @@ public class GorgonEyesMutation extends PerkType
         //Mutations Buffs
         public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            if (pTier >= 1) {
-                pBuffs['spe.mult'] += 0.05;
-                pBuffs['sens'] += 5
+            if (pTier == 1) {
+                pBuffs['spe.mult'] = 0.05;
+                pBuffs['sens'] = 5
             }
-            if (pTier >= 2) {
-                pBuffs['spe.mult'] += 0.1;
-                pBuffs['sens'] += 10;
+            if (pTier == 2) {
+                pBuffs['spe.mult'] += 0.15;
+                pBuffs['sens'] = 15;
             }
             return pBuffs;
         }

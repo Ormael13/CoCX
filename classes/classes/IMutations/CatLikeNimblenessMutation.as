@@ -73,8 +73,8 @@ public class CatLikeNimblenessMutation extends PerkType
         //Mutations Buffs
         public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            if (pTier >= 1) pBuffs['spe.mult'] += 0.1;
-            if (pTier >= 2) pBuffs['spe.mult'] += 0.2;
+            if (pTier == 2) pBuffs['spe.mult'] = 0.1;
+            if (pTier == 3) pBuffs['spe.mult'] = 0.3;
             return pBuffs;
         }
 

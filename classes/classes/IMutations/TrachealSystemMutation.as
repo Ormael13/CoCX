@@ -78,6 +78,25 @@ public class TrachealSystemMutation extends PerkType
         //Mutations Buffs
         public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
+            if (pTier == 1){
+                pBuffs['str.mult'] = 0.01;
+                pBuffs['spe.mult'] = 0.02;
+            }
+            else if (pTier == 2){
+                pBuffs['str.mult'] = 0.03;
+                pBuffs['spe.mult'] = 0.05;
+                pBuffs['tou.mult'] = 0.01;
+            }
+            else if (pTier == 3){
+                pBuffs['str.mult'] = 0.07;
+                pBuffs['spe.mult'] = 0.1;
+                pBuffs['tou.mult'] = 0.04;
+            }
+            else if (pTier == 4){
+                pBuffs['str.mult'] = 0.15;
+                pBuffs['spe.mult'] = 0.2;
+                pBuffs['tou.mult'] = 0.1;
+            }
             return pBuffs;
         }
 

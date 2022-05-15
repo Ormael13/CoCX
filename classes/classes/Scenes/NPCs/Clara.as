@@ -5,6 +5,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.SceneLib;
 
 public class Clara extends Monster
@@ -61,12 +62,12 @@ public class Clara extends Monster
 		{
 			outputText("Clara glares at you, clearly being worn down.  Then strange lights start dancing around her hand and she points it in your direction.");
 			//Successful: 
-			if((!player.hasPerk(MutationsLib.GorgonsEyes) && player.inte / 5 + rand(20) + 1 < 14) && !player.hasPerk(PerkLib.BlindImmunity))
+			if((!player.perkv1(IMutationsLib.GorgonEyesIM) >= 1 && player.inte / 5 + rand(20) + 1 < 14) && !player.hasPerk(PerkLib.BlindImmunity))
 			{
 				outputText("\nA bright flash of light erupts in your face, blinding you!  You desperately blink and rub your eyes while Clara cackles with glee.");
 				player.createStatusEffect(StatusEffects.Blind,1,0,0,0);
 			}
-			else if (player.hasPerk(MutationsLib.GorgonsEyes)) {
+			else if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 1) {
 					outputText("Your mutated eyes not been affected at all by this flash!");
 				}
 			else outputText("\nYou manage to close your eyes just in time to avoid being blinded by the bright flash of light that erupts in your face!  Clara curses when she see's you're unaffected by her magic.");

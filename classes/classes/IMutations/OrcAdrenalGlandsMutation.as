@@ -73,6 +73,8 @@ public class OrcAdrenalGlandsMutation extends PerkType
         //Mutations Buffs
         public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
+            if (pTier == 2) pBuffs['str.mult'] = 0.5;
+            else if (pTier == 3) pBuffs['str.mult'] = 1;
             return pBuffs;
         }
 

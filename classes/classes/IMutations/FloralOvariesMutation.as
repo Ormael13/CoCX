@@ -72,9 +72,9 @@ public class FloralOvariesMutation extends PerkType
         //Mutations Buffs
         public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            if (pTier >= 1) pBuffs['lib.mult'] += 0.05;
-            if (pTier >= 2) pBuffs['lib.mult'] += 0.1;
-            if (pTier >= 3) pBuffs['lib.mult'] += 0.2;            return pBuffs;
+            if (pTier == 1) pBuffs['lib.mult'] = 0.05;
+            if (pTier == 2) pBuffs['lib.mult'] = 0.15;
+            if (pTier == 3) pBuffs['lib.mult'] = 0.35;            return pBuffs;
         }
 
         public function FloralOvariesMutation() {

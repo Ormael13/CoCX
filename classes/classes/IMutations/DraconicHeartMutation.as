@@ -73,9 +73,9 @@ public class DraconicHeartMutation extends PerkType
         //Mutations Buffs
         public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {}; //0.05, 0.1, 0.2
-            if (pTier >= 1) pBuffs['str.mult'] += 0.05;
-            if (pTier >= 2) pBuffs['str.mult'] += 0.1;
-            if (pTier >= 3) pBuffs['str.mult'] += 0.2;
+            if (pTier == 1) pBuffs['str.mult'] = 0.05;
+            if (pTier == 2) pBuffs['str.mult'] = 0.15;
+            if (pTier == 3) pBuffs['str.mult'] = 0.35;
             return pBuffs;
         }
 
