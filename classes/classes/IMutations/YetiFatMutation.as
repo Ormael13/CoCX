@@ -12,10 +12,10 @@ public class YetiFatMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
-            var descS:String = "Gain damage reduction against attacks";
+            var descS:String = "";
             var pTier:int = player.perkv1(IMutationsLib.YetiFatIM);
             if (pTier >= 1){
-                descS += ", increase strength of yeti ice breath by 50%";
+                descS += "Gain damage reduction against attacks, increase strength of yeti ice breath by 50%";
             }
             if (pTier >= 2){
                 descS += ", potency of Big Hand and Feet by 50%";
@@ -70,7 +70,7 @@ public class YetiFatMutation extends PerkType
         }
 
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
             return pBuffs;
         }

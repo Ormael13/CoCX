@@ -12,9 +12,10 @@ public class WhaleFatMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
-            var descS:String = "Increased damage reduction against physical damage and grants cold resistance permanently";
+            var descS:String = "";
             var pTier:int = player.perkv1(IMutationsLib.WhaleFatIM);
             var pHunger:int = 0;
+            if (pTier >= 1) descS += "Increased damage reduction against physical damage and grants cold resistance permanently";
             if (pTier == 2){
                 descS += ", juggle duration is increased by 1";
             }
@@ -25,7 +26,7 @@ public class WhaleFatMutation extends PerkType
                 pHunger += 5*pTier;
                 pTier--;
             }
-            descS += ", Increase max hunger cap by " + pHunger + "";
+            if (pTier >= 1) descS += ", Increase max hunger cap by " + pHunger + "";
             if (descS != "")descS += ".";
             return descS;
         }
@@ -73,7 +74,7 @@ public class WhaleFatMutation extends PerkType
         }
 
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
             if (pTier == 1) pBuffs['tou.mult'] = 0.05;
             else if (pTier == 2) pBuffs['tou.mult'] = 0.15;

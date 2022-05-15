@@ -5,9 +5,11 @@
 package classes.IMutations
 {
     import classes.PerkClass;
-    import classes.PerkType;
+import classes.PerkLib;
+import classes.PerkType;
+import classes.Player;
 
-    public class DrakeLungMutation extends PerkType
+public class DrakeLungMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
@@ -48,7 +50,11 @@ package classes.IMutations
                 //This helps keep the requirements output clean.
                 IMutationsLib.DrakeLungIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.DrakeLungIM.requireHeartMutationSlot();
+                    IMutationsLib.DrakeLungIM.requireLungsMutationSlot()
+                    .requireAnyPerk(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath, PerkLib.DragonWaterBreath)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return (player.frostWyrmScore() >= 10 || player.jabberwockyScore() >= 10 || player.vouivreScore() >= 11 || player.leviathanScore() >= 20);
+                    }, "Variants of the dragon race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -66,7 +72,7 @@ package classes.IMutations
         }
 
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
             if (pTier >= 1) pBuffs['spe.mult'] += 0.05;
             if (pTier >= 2) pBuffs['spe.mult'] += 0.1;

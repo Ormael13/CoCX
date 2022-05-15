@@ -6,13 +6,15 @@ package classes.IMutations
 {
     import classes.PerkClass;
     import classes.PerkType;
+import classes.Player;
 
-    public class TrachealSystemMutation extends PerkType
+public class TrachealSystemMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
-            var descS:String = "Your body possesses a ";
+            var descS:String = "";
             var pTier:int = player.perkv1(IMutationsLib.TrachealSystemIM);
+            if (pTier >= 1) descS += "Your body possesses a ";
             if (pTier == 1){
                 descS += "rudimentary";
             }
@@ -54,7 +56,9 @@ package classes.IMutations
                 //This helps keep the requirements output clean.
                 IMutationsLib.TrachealSystemIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.TrachealSystemIM.requireHeartMutationSlot();
+                    IMutationsLib.TrachealSystemIM.requireCustomFunction(function (player:Player):Boolean {
+                        return player.beeScore() >= 14 || player.mantisScore() >= 12 || player.scorpionScore() >= 4 || player.spiderScore() >= 5 || player.cancerScore() >= 13 || player.atlachNachaScore() >= 21;
+                    }, "Any insect race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -72,7 +76,7 @@ package classes.IMutations
         }
 
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
             return pBuffs;
         }

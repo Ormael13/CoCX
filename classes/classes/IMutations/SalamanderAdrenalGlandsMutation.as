@@ -13,8 +13,9 @@ public class SalamanderAdrenalGlandsMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
-            var descS:String = "Your Salamander adrenal glands are giving you slight boost to your natural stamina";
+            var descS:String = "";
             var pTier:int = player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM);
+            if (pTier >= 1) descS += "Your Salamander adrenal glands are giving you slight boost to your natural stamina";
             if (pTier == 1){
                 descS += "and libido";
             }
@@ -71,7 +72,7 @@ public class SalamanderAdrenalGlandsMutation extends PerkType
         }
 
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
             if (pTier == 1) {
                 pBuffs['tou.mult'] = 0.05;

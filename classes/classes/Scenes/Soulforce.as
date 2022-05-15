@@ -272,7 +272,7 @@ public class Soulforce extends BaseContent
 		outputText("MutationsApplicator");
 		for each (var pArray:Array in IMutationsLib.mutationsArray("Thyroid")){
 			var temp:Array = [];
-			temp = cDynPerk(pArray[0], pArray[1]);
+			temp = Creature.cDynPerk(pArray[0], pArray[1], player);
 			if (temp[1] is Function){
 				temp.insertAt(1,curry(temp[1], testdone));
 				temp.removeAt(2);
@@ -2829,7 +2829,7 @@ public class Soulforce extends BaseContent
 		clearOutput();
 		outputText("Entering battle with Sand Mother! Enjoy ^^");
 		startCombat(new SandMother(), true)
-	};
+	}
 	public function FightSonya():void {
 		clearOutput();
 		outputText("Entering battle with Sonya! Enjoy ^^");

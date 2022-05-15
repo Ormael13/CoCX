@@ -53,18 +53,18 @@ public class DraconicBonesMutation extends PerkType
                 IMutationsLib.DraconicBonesIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.DraconicBonesIM.requireBonesAndMarrowMutationSlot()
-                            .requireCustomFunction(function (player:Player):Boolean {
-                                return (player.arms.type == Arms.DRACONIC || player.arms.type == Arms.FROSTWYRM || player.arms.type == Arms.SEA_DRAGON);
-                            }, "Dragon race or its variants arms")
-                            .requireCustomFunction(function (player:Player):Boolean {
-                                return (LowerBody.hasDraconicLegs(player));
-                            }, "Dragon race or its variants legs")
-                            .requireCustomFunction(function (player:Player):Boolean {
-                                return (Tail.hasDraconicTail(player) || LowerBody.hasDraconicLegs(player) && LowerBody.hasTail(player));
-                            }, "Dragon race or its variants tail")
-                            .requireCustomFunction(function (player:Player):Boolean {
-                                return (player.dragonScore() >= 8 || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
-                            }, "Dragon race or its variants");
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return (player.arms.type == Arms.DRACONIC || player.arms.type == Arms.FROSTWYRM || player.arms.type == Arms.SEA_DRAGON);
+                    }, "Dragon race or its variants arms")
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return (LowerBody.hasDraconicLegs(player));
+                    }, "Dragon race or its variants legs")
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return (Tail.hasDraconicTail(player) || LowerBody.hasDraconicLegs(player) && LowerBody.hasTail(player));
+                    }, "Dragon race or its variants tail")
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return (player.dragonScore() >= 8 || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
+                    }, "Dragon race or its variants");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -82,7 +82,7 @@ public class DraconicBonesMutation extends PerkType
         }
 
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
             if (pTier >= 1) pBuffs['tou.mult'] += 0.05;
             if (pTier >= 2) pBuffs['tou.mult'] += 0.1;

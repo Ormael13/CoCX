@@ -49,11 +49,10 @@ package classes.IMutations
                 //This helps keep the requirements output clean.
                 IMutationsLib.ArachnidBookLungIM.requirements = [];
                 if (pTier == 0){
-
                     IMutationsLib.ArachnidBookLungIM.requireAdaptationsMutationSlot()
-                            .requireCustomFunction(function (player:Player):Boolean {
-                                return player.spiderScore() >= 5 || player.atlachNachaScore() >= 21;
-                            }, "Arachnid race");
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.spiderScore() >= 5 || player.atlachNachaScore() >= 21;
+                    }, "Arachnid race");
                 }
                 else{
                     var pLvl:int = pTier * 30;

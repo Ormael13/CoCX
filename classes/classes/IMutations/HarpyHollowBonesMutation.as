@@ -6,8 +6,9 @@ package classes.IMutations
 {
     import classes.PerkClass;
     import classes.PerkType;
+import classes.Player;
 
-    public class HarpyHollowBonesMutation extends PerkType
+public class HarpyHollowBonesMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
@@ -48,7 +49,10 @@ package classes.IMutations
                 //This helps keep the requirements output clean.
                 IMutationsLib.HarpyHollowBonesIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.HarpyHollowBonesIM.requireHeartMutationSlot();
+                    IMutationsLib.HarpyHollowBonesIM.requireBonesAndMarrowMutationSlot()
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.harpyScore() >= 8 || player.sirenScore() >= 10 || player.thunderbirdScore() >= 12 || player.phoenixScore() >= 10 || player.couatlScore() >= 11;
+                    }, "Harpy winged race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -66,7 +70,7 @@ package classes.IMutations
         }
 
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
             pBuffs['tou.mult'] = -0.05 * pTier;
             pBuffs['spe.mult'] = pSpeVal();

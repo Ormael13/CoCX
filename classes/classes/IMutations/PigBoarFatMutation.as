@@ -6,13 +6,15 @@ package classes.IMutations
 {
     import classes.PerkClass;
     import classes.PerkType;
+import classes.Player;
 
-    public class PigBoarFatMutation extends PerkType
+public class PigBoarFatMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
-            var descS:String = "Your altered fat tissue allows to increase your natural resistance to damage, toughness and thickness";
+            var descS:String = "";
             var pTier:int = player.perkv1(IMutationsLib.PigBoarFatIM);
+            if (pTier >= 1) descS += "Your altered fat tissue allows to increase your natural resistance to damage, toughness and thickness";
             if (pTier == 1){
                 descS = "Increase max Hunger cap by 5 (if PC have Hunger bar active)";
             }
@@ -48,7 +50,13 @@ package classes.IMutations
                 //This helps keep the requirements output clean.
                 IMutationsLib.PigBoarFatIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.PigBoarFatIM.requireHeartMutationSlot();
+                    IMutationsLib.PigBoarFatIM.requireFatTissueMutationSlot()
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.thickness >= 100;
+                    }, "100+ thickness")
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.pigScore() >= 10;
+                    }, "Pig/Boar race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -66,7 +74,7 @@ package classes.IMutations
         }
 
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
             if (pTier >= 1) pBuffs['tou.mult'] += 0.05;
             if (pTier >= 2) pBuffs['tou.mult'] += 0.1;

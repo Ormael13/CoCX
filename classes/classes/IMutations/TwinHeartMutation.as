@@ -70,7 +70,7 @@ public class TwinHeartMutation extends PerkType
         }
 
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
             if (pTier == 1) {
                 pBuffs['tou.mult'] = 0.05;

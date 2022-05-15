@@ -52,10 +52,10 @@ package classes.IMutations
                 IMutationsLib.KitsuneThyroidGlandIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.KitsuneThyroidGlandIM.requireThyroidGlandMutationSlot()
-                            .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune)
-                            .requireCustomFunction(function (player:Player):Boolean {
-                                return player.tailType == Tail.FOX && player.tailCount >= 2;
-                            }, "2+ fox tails");
+                    .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.tailType == Tail.FOX && player.tailCount >= 2;
+                    }, "2+ fox tails");
                 }
                 else{
                     var pLvl:int = pTier * 30;

@@ -72,7 +72,7 @@ public class NaturalPunchingBagMutation extends PerkType
         }
 
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
             var buffVal:Number = 0;
             if (pTier >= 1) buffVal += 0.05;

@@ -1,4 +1,5 @@
 ﻿package classes {
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.*;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Eyes;
@@ -1808,6 +1809,53 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.statStore.hasBuff("Tribulation Vestiges"))
 					player.statStore.removeBuffs("Tribulation Vestiges");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.013;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.014) {
+				//MutationsPorting
+				updateMutationsv3("Heart");
+				updateMutationsv3("Muscle");
+				updateMutationsv3("Mouth");
+				updateMutationsv3("Adrenals");
+				updateMutationsv3("Bloodstream");
+				updateMutationsv3("FaT");
+				updateMutationsv3("Lungs");
+				updateMutationsv3("Metabolism");
+				updateMutationsv3("Ovaries");
+				updateMutationsv3("Testicles");
+				updateMutationsv3("Eyes");
+				updateMutationsv3("Bone");
+				updateMutationsv3("Nerv/Sys");
+				updateMutationsv3("Thyroid");
+				updateMutationsv3("PThyroid");
+				updateMutationsv3("Adaptations");
+				
+				function updateMutationsv3(type:String):void{
+					var arrayVal:int = 0;
+					var arrayValY:Boolean = false;
+					var array1:Array = MutationsLib.mutationsArray(type);
+					var array2:Array = IMutationsLib.mutationsArray(type);
+					for each(var pPerkArray:Array in array1){
+						var x:int = pPerkArray.length;
+						while (x > 0){
+							if (player.hasPerk(pPerkArray[x-1])){
+								player.createPerk(array2[arrayVal][0],x,0,0,0);
+								Creature.updateDynamicPerkBuffs(array2[arrayVal][0], array2[arrayVal][1], player);
+								arrayVal++;
+								arrayValY = true;
+								x--;
+								break;
+							}
+							x--;
+						}
+						while (x > 0){
+							player.removePerk(pPerkArray[x]);
+							x--;
+						}
+						if (!arrayValY) arrayVal++;
+					}
+				}
+				outputText("Updated to 35.014");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.014;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

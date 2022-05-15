@@ -51,7 +51,7 @@ public class CatLikeNimblenessMutation extends PerkType
                 IMutationsLib.CatLikeNimblenessIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.CatLikeNimblenessIM.requirePerk(PerkLib.Flexibility)
-                            .requireCustomFunction(function (player:Player):Boolean {
+                    .requireCustomFunction(function (player:Player):Boolean {
                         return player.catScore() >= 8 || player.nekomataScore() >= 10 || player.displacerbeastScore() >= 14 || player.hellcatScore() >= 10 || player.cheshireScore() >= 11 || player.sphinxScore() >= 14;
                     }, "Any cat race");
                 }
@@ -71,7 +71,7 @@ public class CatLikeNimblenessMutation extends PerkType
 
         //Perk Max Level
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
             if (pTier >= 1) pBuffs['spe.mult'] += 0.1;
             if (pTier >= 2) pBuffs['spe.mult'] += 0.2;

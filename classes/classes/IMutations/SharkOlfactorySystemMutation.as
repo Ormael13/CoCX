@@ -26,7 +26,7 @@ public class SharkOlfactorySystemMutation extends PerkType
                 descS += ", Bite becomes free and increases bleed damage by" + (pTier == 2)?"50%":(pTier == 3)?"100%":"" + "";
                 perkCent += 25;
             }
-            descS += "and increase melee damage against bleeding enemies by" + perkCent + "%";
+            if (pTier >= 1) descS += "and increase melee damage against bleeding enemies by " + perkCent + " %";
             if (descS != "")descS += ".";
             return descS;
         }
@@ -74,7 +74,7 @@ public class SharkOlfactorySystemMutation extends PerkType
         }
 
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
             if (pTier == 1) {
                 pBuffs['spe.mult'] = 0.05;

@@ -50,7 +50,9 @@ package classes.IMutations
                 //This helps keep the requirements output clean.
                 IMutationsLib.BlackHeartIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.BlackHeartIM.requireHeartMutationSlot().requirePerk(PerkLib.DarkCharm).requireCor(100).requireCustomFunction(function (player:Player):Boolean {
+                    IMutationsLib.BlackHeartIM.requireHeartMutationSlot()
+                    .requirePerk(PerkLib.DarkCharm).requireCor(100)
+                    .requireCustomFunction(function (player:Player):Boolean {
                         return player.demonScore() >= 11;
                     }, "Demon race");
                 }
@@ -70,7 +72,7 @@ package classes.IMutations
         }
 
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
             if (pTier >= 1) pBuffs['lib.mult'] += 0.05;
             if (pTier >= 2) pBuffs['lib.mult'] += 0.1;
