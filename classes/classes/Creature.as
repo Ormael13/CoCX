@@ -22,6 +22,7 @@ import classes.BodyParts.Tongue;
 import classes.BodyParts.UnderBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutationPerkType;
 import classes.IMutations.*;
 import classes.Items.ItemTags;
 import classes.Items.JewelryLib;
@@ -1519,6 +1520,112 @@ public class Creature extends Utils
 		{
 			return this._perks.getPerkValue(ptype, 4);
 		}
+
+
+		/*
+
+		[     M U T A T I O N S     ]
+
+		*/
+		//Monsters have few mutations, which I think should be a status effect for clarity's sake.
+		private var _mutations:IMutationManager;
+
+		public function get mutationManager():IMutationManager {
+			return this._mutations;
+		}
+
+		public function mutation(i:int):IMutationPerkClass {
+			return _mutations.asArray()[i];
+		}
+
+		/**
+		 * Mutations as an array. Only use this when needing a full list of active mutations.
+		 * If searching for a mutation, use hasMutation/getMutation instead.
+		 */
+		public function get mutations():Array {
+			return _mutations.asArray();
+		}
+
+		/**
+		 * Get count of active mutations
+		 * @return {Number} Number of active mutations.
+		 */
+		public function get numMutations():int {
+			return _mutations.count();
+		}
+
+		//Functions
+
+		//Create a mutation
+		public function createMutation(mtype:IMutationPerkType, value1:Number, value2:Number, value3:Number, value4:Number):void {
+			this._mutations.createMutation(mtype, value1, value2, value3, value4);
+		}
+
+		public function addMutationInstance(mclass:IMutationPerkClass):void {
+			this._mutations.add(mclass);
+		}
+
+		/**
+		 * Remove perk. Return true if there was such perk
+		 */
+		public function removeMutation(mtype:IMutationPerkType):Boolean {
+			return this._mutations.remove(mtype);
+		}
+
+		/**
+		 * Check if this creature has a perk.
+		 * @param ptype {PerkType}
+		 * @return {Boolean} True if creature has the perk, otherwise false.
+		 */
+		public function hasMutation(mtype:IMutationPerkType):Boolean {
+			return this._mutations.has(mtype);
+		}
+
+		/**
+		 * Get the instance of a mutation.
+		 * @param {IMutationPerkType} mtype
+		 */
+		public function getMutation(mtype:IMutationPerkType):IMutationPerkClass {
+			return this._mutations.get(mtype);
+		}
+
+		/**
+		 * Check if a perk is duplicated.
+		 * Always returns false as MutationManager forbids duplicates. Attempting to add an existing mutation keeps the original
+		 * mutation and aborts adding the new one.
+		 * @deprecated
+		 * @return {Boolean} False.
+		 */
+		public function mutationDuplicated(mtype:IMutationPerkType):Boolean
+		{
+			return false;
+		}
+
+		//remove all perks
+		public function removeMutations():void
+		{
+			for each(var impc:IMutationPerkClass in _mutations.asArray()){
+				this._mutations.remove(impc.mtype);
+			}
+			_mutations.clear(); // Clean up anything else, just in case.
+		}
+
+		public function addMutationValue(mtype:IMutationPerkType, valueIdx:Number = 1, bonus:Number = 0): void
+		{
+			this._mutations.addMutationValue(mtype, valueIdx, bonus);
+		}
+
+		public function setMutationValue(mtype:IMutationPerkType, valueIdx:Number = 1, newNum:Number = 0): void
+		{
+			this._mutations.setMutationValue(mtype, valueIdx, newNum);
+		}
+
+		public function mutationsvX(mType:IMutationPerkType, valueIdx):Number
+		{
+			return this._mutations.getMutationValue(mType,valueIdx);
+		}
+
+
 		/*
 
 		[    S T A T U S   E F F E C T S    ]

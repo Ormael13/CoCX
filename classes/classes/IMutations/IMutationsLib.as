@@ -7,6 +7,7 @@
 package classes.IMutations
 {
 import classes.CoC;
+import classes.IMutationPerkType;
 import classes.PerkType;
 
 /**
@@ -32,6 +33,7 @@ public class IMutationsLib
 		}
 		//Example -v
 		//This one does nothing, and is simply to showcase.
+		public static const KTG2:IMutationPerkType = new KitsuneThyroidGlandMutation2();
 		public static const MutationsTemplateIM:PerkType = new MutationTemplate();
 		//Disabled mutations here. The contents are not filled. Please fill them in first.
 		public static const SlimeMetabolismIM:PerkType = new SlimeMetabolismMutation();
@@ -178,6 +180,9 @@ public class IMutationsLib
 				IMutationsList.push([NekomataThyroidGlandIM,NekomataThyroidGlandMutation]);
 				IMutationsList.push([CaveWyrmLungsIM,CaveWyrmLungsMutation]);
 			}
+			function IMutationsTest():void{
+				IMutationsList.push([KTG2])
+			}
 
 			switch(spec){
 				case "Heart":
@@ -230,6 +235,9 @@ public class IMutationsLib
 					break;
 				case "Deprecated":
 					IMutationsDeprecated();
+					break;
+				case "test":
+					IMutationsTest();
 					break;
 				default:
 					IMutationsHeart();

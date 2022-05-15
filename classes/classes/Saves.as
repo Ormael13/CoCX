@@ -2400,13 +2400,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			}
 
 			var ptype:PerkType = PerkType.lookupPerk(id);
-
-			//This below is some weird witchcraft.... It doesn't update/swap anything, but somehow this fixes the id mismatch from mutations?
-			var mutationsShift:Array = [];
-			for each (var pperk1:PerkType in MutationsLib.mutationsArray("",true)){
-				mutationsShift.push(pperk1.id);
-			}
-
 			if (ptype == null) {
 				CoC_Settings.error("Unknown perk id=" + id);
 				//(saveFile.data.perks as Array).splice(i,1);
@@ -2433,6 +2426,12 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				}
 				player.addPerkInstance(cperk);
 			}
+		}
+
+		//This below is some weird witchcraft.... It doesn't update/swap anything, but somehow this fixes the id mismatch from mutations?
+		var mutationsShift:Array = [];
+		for each (var pperk1:PerkType in MutationsLib.mutationsArray("",true)){
+			mutationsShift.push(pperk1.id);
 		}
 
 		// Fixup missing History: Whore perk IF AND ONLY IF the flag used to track the prior selection of a history perk has been set
