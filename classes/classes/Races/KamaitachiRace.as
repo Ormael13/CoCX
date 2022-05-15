@@ -1,8 +1,6 @@
 package classes.Races {
-import classes.BodyData;
 import classes.BodyParts.*;
-import classes.MutationsLib;
-import classes.PerkLib;
+import classes.IMutations.IMutationsLib;
 import classes.Race;
 
 public class KamaitachiRace extends Race {
@@ -24,21 +22,9 @@ public class KamaitachiRace extends Race {
 				.skinBasePattern(Skin.PATTERN_SCAR_WINDSWEPT, +1)
 				.hairType(Hair.WINDSWEPT, +1)
 				.hairColor(ANY(KamaitachiHairColors), +1)
-				.skinCoatColor(ANY(KamaitachiHairColors), +1)
-				.mutationPerks([
-					MutationsLib.HeartOfTheStorm,
-					MutationsLib.HeartOfTheStormPrimitive,
-					MutationsLib.HeartOfTheStormEvolved
-				])
-				.chimericalBodyPerks1([
-					MutationsLib.HeartOfTheStorm
-				])
-				.chimericalBodyPerks2([
-					MutationsLib.HeartOfTheStormPrimitive
-				])
-				.chimericalBodyPerks3([
-					MutationsLib.HeartOfTheStormEvolved
-				])
+				.skinCoatColor(ANY(KamaitachiHairColors), +1);
+		
+		addMutation(IMutationsLib.HeartOfTheStormIM);
 		
 		buildTier(14, "kamaitachi")
 				.tauricName("kamaitachi-taur")

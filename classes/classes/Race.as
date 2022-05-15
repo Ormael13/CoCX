@@ -1,6 +1,5 @@
 package classes {
 import classes.internals.Utils;
-import classes.internals.race.BloodlineRacialRequirement;
 import classes.internals.race.ConditionedRaceScoreBuilder;
 import classes.internals.race.RaceScoreBuilder;
 import classes.internals.race.RaceTierBuilder;
@@ -29,12 +28,16 @@ public class Race {
 		return RaceById[id];
 	}
 	
-	
     public var name:String;
     public var id:int;
     private var playerFunctionName:String;
 	public var requirements:/*RacialRequirement*/Array = [];
 	public var tiers:/*RaceTier*/Array = [];
+	public var bloodlinePerks:/*PerkType*/Array = [];
+	/**
+	 * Array of pairs: `[mutationPerk:PerkType, scorePerStage:int]`
+	 */
+	public var mutations:/*Array*/Array = [];
 	private var _minScore:int;
 	
 	/**
@@ -84,24 +87,85 @@ public class Race {
 		return finalizeScore(body, basicScore(body));
 	}
 	
-	public function finalizeScore(body:BodyData, score:int):int {
+	/**
+	 * Complete racial score calculation
+	 * @param body
+	 * @param score basic score
+	 * @param outputText Optional function `(reason:String, scoreChange:int)=>void` to print reason of score changes.
+	 * @return final racial score
+	 */
+	public function finalizeScore(
+			body:BodyData,
+			score:int,
+			outputText:Function = null
+	):int {
 		var player:Player = body.player;
+		var bonus:int;
+		
+		if (bloodlinePerks.length > 0) {
+			bonus = 0;
+			for each (var perk:PerkType in bloodlinePerks) {
+				if (body.player.hasPerk(perk)) {
+					bonus += body.player.increaseFromBloodlinePerks();
+					break;
+				}
+			}
+			if (outputText != null) outputText("Bloodline", bonus);
+			score += bonus;
+		}
+		if (mutations.length > 0) {
+			bonus = 0;
+			var maxStage:int = 0;
+			for each (var entry:Array in mutations) {
+				// entry: [mutationPerk:PerkType, scorePerStage:int]
+				var stage:Number = body.player.perkv1(entry[0]);
+				bonus += stage*entry[1];
+				maxStage = Math.max(maxStage, stage);
+			}
+			if (outputText != null) outputText("Mutations", bonus);
+			score += bonus;
+			if (body.player.hasPerk(PerkLib.ChimericalBodySemiImprovedStage)) {
+				bonus = maxStage >= 1 ? +1 : 0;
+				if (outputText != null) outputText("Chimerical Body: Semi-Improved Stage", bonus);
+				score += bonus;
+			}
+			if (body.player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage)) {
+				bonus = maxStage >= 2 ? +1 : 0;
+				if (outputText != null) outputText("Chimerical Body: Semi-Superior Stage", bonus);
+				score += bonus;
+			}
+			if (body.player.hasPerk(PerkLib.ChimericalBodySemiEpicStage)) {
+				bonus = maxStage >= 3 ? +1 : 0;
+				if (outputText != null) outputText("Chimerical Body: Semi-Epic Stage", bonus);
+				score += bonus;
+			}
+		}
+		
 		if (player.hasPerk(PerkLib.RacialParagon) && this != player.racialParagonSelectedRace()) {
+			if (outputText != null) outputText("Racial Paragon",-score);
 			return 0;
 		}
 		if (player.isGargoyle() && this != Races.GARGOYLE) {
+			if (outputText != null) outputText("Gargoyle",-score);
 			return 0;
 		}
 		if (player.hasPerk(PerkLib.ElementalBody) && this != Races.ELEMENTALFUSION) {
+			if (outputText != null) outputText("Elemental",-score);
 			return 0;
 		}
 		if (this != Races.HUMAN && this != Races.ELEMENTALFUSION && this != Races.GARGOYLE) {
-			if (player.hasPerk(PerkLib.AscensionCruelChimerasThesis) && score >= minScore-2)
+			if (player.hasPerk(PerkLib.AscensionCruelChimerasThesis) && score >= minScore-2) {
+				if (outputText != null) outputText("Ascension: Cruel Chimera's Thesis", +1);
 				score += 1;
-			if (player.hasPerk(PerkLib.AscensionHybridTheory) && score >= minScore-1)
+			}
+			if (player.hasPerk(PerkLib.AscensionHybridTheory) && score >= minScore-1) {
+				if (outputText != null) outputText("Ascension: Hybrid Theory", +1);
 				score += 1;
-			if (player.hasPerk(PerkLib.ChimericalBodyUltimateStage))
+			}
+			if (player.hasPerk(PerkLib.ChimericalBodyUltimateStage)) {
+				if (outputText != null) outputText("Chimerical Body: Ultimate Stage", +50);
 				score += 50;
+			}
 		}
 		return score;
 	}
@@ -173,6 +237,20 @@ public class Race {
 			}
 			s += "[/font]\n";
 		}
+		var hasFinalizer:Boolean = false;
+		function finalizerOutput(reason:String, change:int):void {
+			if (!hasFinalizer) {
+				s += "\t<b>Other:</b>\n";
+				hasFinalizer = true;
+			}
+			s += "\t";
+			if (change > 0) s += "[font-green]"
+			else if (change < 0) s += "[font-green]"
+			else s += "[font-default]"
+			s += reason+" ("+(change>0?"+"+change:change)+")";
+			s += "[/font]\n";
+		}
+		finalizeScore(body, score, finalizerOutput);
 		if (tiers.length>0) {
 			s += "\t<b>Tiers:</b>\n";
 		}
@@ -236,7 +314,10 @@ public class Race {
 		return new ConditionedRaceScoreBuilder(this,conditionFn, conditionName, minScore);
 	}
 	protected function addBloodline(bloodlinePerks:/*PerkType*/Array):void {
-		requirements.unshift(new BloodlineRacialRequirement(this.name+" bloodline",bloodlinePerks));
+		Utils.pushAll(this.bloodlinePerks, bloodlinePerks);
+	}
+	protected function addMutation(perkType:PerkType, scorePerStage:int=+1):void {
+		this.mutations.push([perkType,scorePerStage]);
 	}
 	protected function buildTier(minScore:int, name:String, femaleName:String =""):RaceTierBuilder {
 		return new RaceTierBuilder(this, tiers.length+1, minScore, name, femaleName||name);

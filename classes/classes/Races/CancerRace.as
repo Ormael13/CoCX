@@ -1,8 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
-import classes.MutationsLib;
-import classes.PerkLib;
+import classes.IMutations.IMutationsLib;
 import classes.Race;
 import classes.StatusEffects;
 import classes.VaginaClass;
@@ -26,26 +25,8 @@ public class CancerRace extends Race{
 							return body.player.foamingCocks()>0 || body.vaginaType == VaginaClass.CANCER
 						}, +1
 						)
-				.biggestTitSize(AT_MOST(3), +1)
-				.mutationPerks([
-					MutationsLib.TwinHeart,
-					MutationsLib.TwinHeartPrimitive,
-					MutationsLib.TwinHeartEvolved,
-				], +2)
-				.chimericalBodyPerks1([
-					MutationsLib.TwinHeart,
-					MutationsLib.TrachealSystem
-				])
-				.chimericalBodyPerks2([
-					MutationsLib.TwinHeartPrimitive,
-					MutationsLib.TrachealSystemPrimitive
-				])
-				.chimericalBodyPerks3([
-					MutationsLib.TwinHeartEvolved,
-					MutationsLib.TrachealSystemEvolved
-				])
-		;
-		
+				.biggestTitSize(AT_MOST(3), +1);
+		addMutation(IMutationsLib.TwinHeartIM, +2);
 		
 		buildTier(13, "lesser cancer")
 				.buffs({

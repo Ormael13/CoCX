@@ -8,7 +8,7 @@
 * iterate in chimeras
 * kill array of objects in `race()`
 * solve unicornkin/alicornkin races
-* racial paragon and like
+* racial paragon and like stat buffs
 * `requireRace` for perks
 * Future:
   * racial score caching
@@ -56,7 +56,7 @@ To get racial score and check if it is enough:
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
-import classes.MutationsLib;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 

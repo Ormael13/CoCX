@@ -1,8 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
-import classes.MutationsLib;
-import classes.PerkLib;
+import classes.IMutations.IMutationsLib;
 import classes.Race;
 import classes.VaginaClass;
 
@@ -27,27 +26,10 @@ public class ManticoreRace extends Race {
 				.wingType(Wings.MANTICORE_LARGE, +4)
 				.noCock(+1, -3)
 				.vaginaType(VaginaClass.MANTICORE, +1)
-				.corruption(AT_LEAST(20), +1)
-				.mutationPerks([
-					MutationsLib.CatlikeNimbleness,
-					MutationsLib.CatlikeNimblenessPrimitive,
-					MutationsLib.CatlikeNimblenessEvolved,
-					MutationsLib.ManticoreMetabolism,
-					MutationsLib.ManticoreMetabolismPrimitive,
-					MutationsLib.ManticoreMetabolismEvolved
-				])
-				.chimericalBodyPerks1([
-					MutationsLib.CatlikeNimbleness,
-					MutationsLib.ManticoreMetabolism
-				])
-				.chimericalBodyPerks2([
-					MutationsLib.CatlikeNimblenessPrimitive,
-					MutationsLib.ManticoreMetabolismPrimitive
-				])
-				.chimericalBodyPerks3([
-					MutationsLib.CatlikeNimblenessEvolved,
-					MutationsLib.ManticoreMetabolismEvolved
-				]);
+				.corruption(AT_LEAST(20), +1);
+		
+		addMutation(IMutationsLib.CatLikeNimblenessIM);
+		addMutation(IMutationsLib.ManticoreMetabolismIM);
 		
 		buildTier(15, "manticore")
 				.customNamingFunction(function(body:BodyData):String {

@@ -1,7 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
-import classes.MutationsLib;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 
@@ -22,16 +22,8 @@ public class GoblinRace extends Race {
 				.height(LESS_THAN(48), +1)
 				.hasPerk(PerkLib.GoblinoidBlood, +1)
 				.hasPerk(PerkLib.BouncyBody, +1)
-				.mutationPerks([
-					MutationsLib.NaturalPunchingBag,
-					MutationsLib.NaturalPunchingBagPrimitive,
-					MutationsLib.NaturalPunchingBagEvolved
-				])
 				.skinPlainOnly(+1)
 				.skinBaseColor(ANY(GoblinSkinColors), +1, -100)
-				.chimericalBodyPerks1([MutationsLib.NaturalPunchingBag])
-				.chimericalBodyPerks2([MutationsLib.NaturalPunchingBagPrimitive])
-				.chimericalBodyPerks3([MutationsLib.NaturalPunchingBagEvolved])
 				.hasVagina(+1);
 		addConditionedScores(
 				function (body:BodyData):Boolean {
@@ -53,6 +45,7 @@ public class GoblinRace extends Race {
 				})
 				.end();
 		
+		addMutation(IMutationsLib.NaturalPunchingBagIM);
 		addBloodline([PerkLib.GoblinsDescendant, PerkLib.BloodlineGoblin]);
 	}
 }

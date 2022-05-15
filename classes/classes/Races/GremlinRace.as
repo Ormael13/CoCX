@@ -1,9 +1,10 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
-import classes.MutationsLib;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+
 public class GremlinRace extends Race {
 	public static const GremlinEyeColors:/*String*/Array = ["red", "yellow", "purple", "orange"];
 	public static const GremlinSkinColors:/*String*/Array = ["light", "tan", "dark"];
@@ -24,20 +25,6 @@ public class GremlinRace extends Race {
 				.corruption(AT_LEAST(20), +1)
 				.hasPerk(PerkLib.GoblinoidBlood, +1)
 				.hasPerk(PerkLib.BouncyBody, +1)
-				.mutationPerks([
-					MutationsLib.NaturalPunchingBag,
-					MutationsLib.NaturalPunchingBagPrimitive,
-					MutationsLib.NaturalPunchingBagEvolved
-				])
-				.chimericalBodyPerks1([
-					MutationsLib.NaturalPunchingBag
-				])
-				.chimericalBodyPerks2([
-					MutationsLib.NaturalPunchingBagPrimitive
-				])
-				.chimericalBodyPerks3([
-					MutationsLib.NaturalPunchingBagEvolved
-				]);
 		/*	if (hasPerk(PerkLib.Phylactery))
 				gremlinCounter += 5;
 			if (hasPerk(MutationsLib.BlackHeart))
@@ -69,6 +56,7 @@ public class GremlinRace extends Race {
 			PerkLib.GoblinsDescendant,
 			PerkLib.BloodlineGoblin
 		]);
+		addMutation(IMutationsLib.NaturalPunchingBagIM);
 		
 		buildTier(15, "gremlin")
 				.buffs({

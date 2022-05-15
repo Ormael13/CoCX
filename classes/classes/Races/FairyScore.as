@@ -1,7 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
-import classes.MutationsLib;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 
@@ -24,15 +24,12 @@ public class FairyScore extends Race {
 						function (body:BodyData):Boolean {
 							return body.player.skinType == Skin.PLAIN && body.skinBaseAdj == "flawless"
 						}, +1)
-				.mutationPerks([
-					MutationsLib.FeyArcaneBloodstream,
-					MutationsLib.FeyArcaneBloodstreamPrimitive,
-					MutationsLib.FeyArcaneBloodstreamEvolved
-				], +3)
 				.hasPerk(PerkLib.TransformationImmunityFairy, +5);
 		addScoresAfter(1)
 				.skinPlainOnly(+1)
 				.noCock(+1);
+		
+		addMutation(IMutationsLib.FeyArcaneBloodstreamIM, +3);
 		
 		buildTier(23, "great fairy")
 				.buffs({

@@ -3,13 +3,9 @@ import classes.BodyParts.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
-import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
-import classes.internals.race.BloodlineRacialRequirement;
-import classes.internals.race.CustomRacialRequirement;
-import classes.internals.race.RacialRequirement;
 
 import coc.xxc.BoundStory;
 import coc.xxc.Story;

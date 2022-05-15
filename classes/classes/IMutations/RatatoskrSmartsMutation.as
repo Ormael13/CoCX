@@ -8,6 +8,7 @@ package classes.IMutations
 import classes.PerkLib;
 import classes.PerkType;
 import classes.Player;
+import classes.Races;
 
 public class RatatoskrSmartsMutation extends PerkType
     {
@@ -52,7 +53,7 @@ public class RatatoskrSmartsMutation extends PerkType
                 if (pTier == 0){
                     IMutationsLib.RatatoskrSmartsIM.requirePeripheralNervSysMutationSlot()
                     .requirePerk(PerkLib.KnowledgeIsPower).requireCustomFunction(function (player:Player):Boolean {
-                        return player.ratatoskrScore() >= 12;
+                        return player.isRace(Races.RATATOSKR);
                     }, "Squirrel/Ratatoskr race");
                 }
                 else{

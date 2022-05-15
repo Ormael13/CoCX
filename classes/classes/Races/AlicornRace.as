@@ -2,7 +2,7 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
-import classes.MutationsLib;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 import classes.VaginaClass;
@@ -28,28 +28,6 @@ public class AlicornRace extends Race{
 				.skinPlainOnly(+1)
 				.hasCockOfType(CockTypesEnum.HORSE, +1)
 				.vaginaType(VaginaClass.EQUINE, +1)
-				.mutationPerks([
-					MutationsLib.TwinHeart,
-					MutationsLib.TwinHeartPrimitive,
-					MutationsLib.TwinHeartEvolved
-				], +2)
-				.mutationPerks([
-					MutationsLib.EclipticMind,
-					MutationsLib.EclipticMindPrimitive,
-					MutationsLib.EclipticMindEvolved
-				])
-				.chimericalBodyPerks1([
-					MutationsLib.TwinHeart,
-					MutationsLib.EclipticMind
-				])
-				.chimericalBodyPerks2([
-					MutationsLib.TwinHeartPrimitive,
-					MutationsLib.EclipticMindPrimitive
-				])
-				.chimericalBodyPerks3([
-					MutationsLib.TwinHeartEvolved,
-					MutationsLib.EclipticMindEvolved
-				])
 				.hornTypeAndCount(Horns.UNICORN, LESS_THAN(6), +1, 0, "Alicorn branch - size 1-5 unicorn horn")
 				.hornTypeAndCount(Horns.UNICORN, AT_LEAST(6), +2, 0, "Alicorn branch - size 6+ unicorn horn")
 				.hornTypeAndCount(Horns.UNICORN, LESS_THAN(6), +1, 0, "Nightmare branch - size 1-5 bicorn horns")
@@ -61,6 +39,10 @@ public class AlicornRace extends Race{
 							if (body.hornType == Horns.BICORN) return body.wingType == Wings.NIGHTMARE;
 							return true;
 						}, 0, -100);
+		
+		addMutation(IMutationsLib.TwinHeartIM, +2);
+		addMutation(IMutationsLib.EclipticMindIM, +1);
+		
 		addConditionedScores(
 				function(body:BodyData):Boolean {
 					return body.hornType == Horns.UNICORN;

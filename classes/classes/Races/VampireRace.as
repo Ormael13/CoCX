@@ -1,6 +1,6 @@
 package classes.Races {
 import classes.BodyParts.*;
-import classes.MutationsLib;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 
@@ -22,22 +22,13 @@ public class VampireRace extends Race {
 				.skinBaseColor("pale", +1)
 				.noTail(+1)
 				.noHorns(+1)
-				.noAntennae(+1)
-				.mutationPerks([
-					MutationsLib.VampiricBloodsteam,
-					MutationsLib.VampiricBloodsteamPrimitive,
-					MutationsLib.VampiricBloodsteamEvolved,
-					MutationsLib.HollowFangs,
-					MutationsLib.HollowFangsPrimitive,
-					MutationsLib.HollowFangsEvolved
-				])
-				.chimericalBodyPerks1([MutationsLib.VampiricBloodsteam, MutationsLib.HollowFangs])
-				.chimericalBodyPerks2([MutationsLib.VampiricBloodsteamPrimitive, MutationsLib.HollowFangsPrimitive])
-				.chimericalBodyPerks3([MutationsLib.VampiricBloodsteamEvolved, MutationsLib.HollowFangsEvolved])
+				.noAntennae(+1);
 		addScoresAfter(8)
 				.armType(Arms.HUMAN, +1)
 				.legType(LowerBody.HUMAN, +1)
 		addBloodline([PerkLib.VampiresDescendant,PerkLib.BloodlineVampire])
+		addMutation(IMutationsLib.VampiricBloodstreamIM);
+		addMutation(IMutationsLib.HollowFangsIM);
 		
 		buildTier(10, "vampire")
 				.buffs({

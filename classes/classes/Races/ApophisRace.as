@@ -1,7 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
-import classes.MutationsLib;
+import classes.IMutations.IMutationsLib;
 import classes.Race;
 import classes.VaginaClass;
 
@@ -32,20 +32,6 @@ public class ApophisRace extends Race {
 				.corruption(AT_LEAST(20), +1)
 				.corruption(AT_LEAST(50), +1)
 				.corruption(AT_LEAST(100), +2)
-				.mutationPerks([
-					MutationsLib.VenomGlands,
-					MutationsLib.VenomGlandsPrimitive,
-					MutationsLib.VenomGlandsEvolved,
-				])
-				.chimericalBodyPerks1([
-					MutationsLib.VenomGlands
-				])
-				.chimericalBodyPerks2([
-					MutationsLib.VenomGlandsPrimitive
-				])
-				.chimericalBodyPerks3([
-					MutationsLib.VenomGlandsEvolved
-				])
 				.customRequirement("","not another snake-like race",
 						function (body:BodyData):Boolean {
 							return !(body.hairType == Hair.GORGON
@@ -61,7 +47,9 @@ public class ApophisRace extends Race {
 									|| body.wingType == Wings.FEATHERED_LARGE
 									|| body.legType == LowerBody.HYDRA
 									|| body.armType == Arms.HYDRA);
-						}, 0, -100)
+						}, 0, -100);
+		
+		addMutation(IMutationsLib.VenomGlandsIM);
 		
 		buildTier(23, "apophis")
 				.buffs({

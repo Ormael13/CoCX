@@ -1,8 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
-import classes.MutationsLib;
-import classes.PerkLib;
+import classes.IMutations.IMutationsLib;
 import classes.Race;
 import classes.StatusEffects;
 
@@ -25,20 +24,6 @@ public class GazerRace extends Race {
 				.legType(LowerBody.GAZER, +1)
 				.noTail(+1)
 				.wingType(Wings.LEVITATION, +1)
-				.mutationPerks([
-					MutationsLib.GazerEye,
-					MutationsLib.GazerEyePrimitive,
-					MutationsLib.GazerEyeEvolved
-				])
-				.chimericalBodyPerks1([
-					MutationsLib.GazerEye
-				])
-				.chimericalBodyPerks2([
-					MutationsLib.GazerEyePrimitive
-				])
-				.chimericalBodyPerks3([
-					MutationsLib.GazerEyeEvolved
-				])
 				.customScoreRequirement("rear",
 						"tentacle eyestalks",
 						function(body:BodyData):Boolean {
@@ -54,6 +39,8 @@ public class GazerRace extends Race {
 							return 0;
 						}
 				);
+		
+		addMutation(IMutationsLib.GazerEyesIM);
 		
 		buildTier(14, "gazer")
 				.require("6+ eye stalks",

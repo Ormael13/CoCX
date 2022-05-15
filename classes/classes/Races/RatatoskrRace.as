@@ -1,9 +1,8 @@
 package classes.Races {
-import classes.BodyData;
 import classes.BodyParts.*;
-import classes.MutationsLib;
-import classes.PerkLib;
+import classes.IMutations.IMutationsLib;
 import classes.Race;
+
 public class RatatoskrRace extends Race{
 	public static const RatatoskrHairColors:/*String*/Array = ["brown", "light brown", "caramel", "chocolate", "russet"];
 	
@@ -25,23 +24,11 @@ public class RatatoskrRace extends Race{
 				.hairColor(ANY(RatatoskrHairColors), +1)
 				.skinCoatType(Skin.FUR, +1)
 				.skinCoatColor(ANY(RatatoskrHairColors), +1)
-				.height(LESS_THAN(48), +1)
-				.mutationPerks([
-					MutationsLib.RatatoskrSmarts,
-					MutationsLib.RatatoskrSmartsPrimitive,
-					MutationsLib.RatatoskrSmartsEvolved
-				])
-				.chimericalBodyPerks1([
-					MutationsLib.RatatoskrSmarts
-				])
-				.chimericalBodyPerks2([
-					MutationsLib.RatatoskrSmartsPrimitive
-				])
-				.chimericalBodyPerks3([
-					MutationsLib.RatatoskrSmartsEvolved
-				]);
+				.height(LESS_THAN(48), +1);
 		//if (hasPerk(PerkLib.RatatoskrsDescendant) || hasPerk(PerkLib.BloodlineRatatoskr))
 		//	ratatoskrCounter += increaseFromBloodlinePerks();
+		
+		addMutation(IMutationsLib.RatatoskrSmartsIM);
 		
 		buildTier(12, "squirrel morph")
 				.tauricName("squirrel-taur")

@@ -7,6 +7,7 @@ package classes.IMutations
     import classes.PerkClass;
     import classes.PerkType;
 import classes.Player;
+import classes.Races;
 
 public class TrachealSystemMutation extends PerkType
     {
@@ -57,7 +58,7 @@ public class TrachealSystemMutation extends PerkType
                 IMutationsLib.TrachealSystemIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.TrachealSystemIM.requireCustomFunction(function (player:Player):Boolean {
-                        return player.beeScore() >= 14 || player.mantisScore() >= 12 || player.scorpionScore() >= 4 || player.spiderScore() >= 5 || player.cancerScore() >= 13 || player.atlachNachaScore() >= 21;
+                        return player.beeScore() >= 14 || player.mantisScore() >= 12 || player.scorpionScore() >= 4 || player.spiderScore() >= 5 || player.isRace(Races.CANCER) || player.isRace(Races.ATLACH_NACHA);
                     }, "Any insect race");
                 }
                 else{

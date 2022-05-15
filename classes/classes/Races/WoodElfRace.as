@@ -1,7 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
-import classes.MutationsLib;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 
@@ -35,14 +35,10 @@ public class WoodElfRace extends Race{
 						}, +1)
 				.corruption(AT_LEAST(50), +1, -100)
 				.hasPerk(PerkLib.FlawlessBody, +1)
-				.hasPerk(PerkLib.ElvenSense, +1)
-				.mutationPerks([
-					MutationsLib.ElvishPeripheralNervSys,
-					MutationsLib.ElvishPeripheralNervSysPrimitive,
-					MutationsLib.ElvishPeripheralNervSysEvolved,
-				], +3);
+				.hasPerk(PerkLib.ElvenSense, +1);
 		
 		addBloodline([PerkLib.ElfsDescendant,PerkLib.BloodlineElf]);
+		addMutation(IMutationsLib.ElvishPeripheralNervSysIM, +3);
 		
 		buildTier(22, "wood elf little sister")
 				.tauricName("wood elf-taur little sister")

@@ -1,7 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
-import classes.MutationsLib;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 
@@ -24,26 +24,6 @@ public class DisplacerBeastRace extends Race {
 				.skinCoatColor(ANY(DisplacerFurColors), +1)
 				.skinBaseColor("dark gray", +1)
 				.hasPerk(PerkLib.Flexibility, +1)
-				.mutationPerks([
-					MutationsLib.CatlikeNimbleness,
-					MutationsLib.CatlikeNimblenessPrimitive,
-					MutationsLib.CatlikeNimblenessEvolved,
-					MutationsLib.DisplacerMetabolism,
-					MutationsLib.DisplacerMetabolismPrimitive,
-					MutationsLib.DisplacerMetabolismEvolved,
-				])
-				.chimericalBodyPerks1([
-					MutationsLib.CatlikeNimbleness,
-					MutationsLib.DisplacerMetabolism
-				])
-				.chimericalBodyPerks2([
-					MutationsLib.CatlikeNimblenessPrimitive,
-					MutationsLib.DisplacerMetabolismPrimitive
-				])
-				.chimericalBodyPerks3([
-					MutationsLib.CatlikeNimblenessEvolved,
-					MutationsLib.DisplacerMetabolismEvolved
-				])
 				.customRequirement("","not other magical feline race",
 						function (body:BodyData):Boolean {
 							return !(CatRace.isSphinxLike(body)
@@ -54,6 +34,10 @@ public class DisplacerBeastRace extends Race {
 									|| CatRace.isHellcatLike(body));
 						},0,-100
 				);
+		
+		addMutation(IMutationsLib.CatLikeNimblenessIM);
+		addMutation(IMutationsLib.DisplacerMetabolismIM);
+		
 		// TODO @aimozg extra +10% speed if has Flexibility perk
 		buildTier(14, "displacer beast")
 				.buffs({

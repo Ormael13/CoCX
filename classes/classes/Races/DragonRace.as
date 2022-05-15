@@ -1,8 +1,7 @@
 package classes.Races {
-import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
-import classes.MutationsLib;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 import classes.lists.Gender;
@@ -35,18 +34,6 @@ public class DragonRace extends Race {
 				.hornType(Horns.FROSTWYRM, -3)
 				.hasCockOfType(CockTypesEnum.DRAGON, +1)
 				.gender(Gender.GENDER_FEMALE, +1);
-		addScoresAfter(5)
-				.mutationPerks([
-						MutationsLib.DraconicBones,
-						MutationsLib.DraconicBonesPrimitive,
-						MutationsLib.DraconicBonesEvolved,
-						MutationsLib.DraconicHeart,
-						MutationsLib.DraconicHeartPrimitive,
-						MutationsLib.DraconicHeartEvolved,
-						MutationsLib.DraconicLungs,
-						MutationsLib.DraconicLungsPrimitive,
-						MutationsLib.DraconicLungsEvolved
-				]);
 		addScoresAfter(8)
 				.height(GREATER_THAN(120), +1)
 				.hasAnyPerk([
@@ -60,24 +47,13 @@ public class DragonRace extends Race {
 					PerkLib.DragonIceBreath,
 					PerkLib.DragonLightningBreath,
 					PerkLib.DragonDarknessBreath
-				], +1)
-				.chimericalBodyPerks1([
-					MutationsLib.DraconicBones,
-					MutationsLib.DraconicHeart,
-					MutationsLib.DraconicLungs
-				])
-				.chimericalBodyPerks2([
-					MutationsLib.DraconicBonesPrimitive,
-					MutationsLib.DraconicHeartPrimitive,
-					MutationsLib.DraconicLungsPrimitive
-				])
-				.chimericalBodyPerks3([
-					MutationsLib.DraconicBonesEvolved,
-					MutationsLib.DraconicHeartEvolved,
-					MutationsLib.DraconicLungsEvolved
-				])
-		;
+				], +1);
+		
 		addBloodline([PerkLib.DragonsDescendant, PerkLib.BloodlineDragon]);
+		addMutation(IMutationsLib.DraconicBonesIM);
+		addMutation(IMutationsLib.DraconicHeartIM);
+		addMutation(IMutationsLib.DraconicLungIM);
+		
 		buildTier(16, "dragon")
 				.namesMaleFemaleMorphTaur("dragon-man","dragon-girl",
 						"dragon","dragon-taur")

@@ -1,7 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
-import classes.MutationsLib;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 
@@ -39,27 +39,11 @@ public class SeaDragonRace extends Race{
 									body.player.dragonCocks() > 0
 						},
 						+1)
-				.mutationPerks([
-					MutationsLib.DrakeLungs,
-					MutationsLib.DrakeLungsPrimitive,
-					MutationsLib.DrakeLungsEvolved,
-					MutationsLib.DraconicBones,
-					MutationsLib.DraconicBonesPrimitive,
-					MutationsLib.DraconicBonesEvolved,
-					MutationsLib.WhaleFat,
-					MutationsLib.WhaleFatPrimitive,
-					MutationsLib.WhaleFatEvolved,
-				])
-				.hasPerk(PerkLib.DragonWaterBreath, +1)
-				.chimericalBodyPerks1([
-					MutationsLib.WhaleFat
-				])
-				.chimericalBodyPerks2([
-					MutationsLib.WhaleFatPrimitive
-				])
-				.chimericalBodyPerks3([
-					MutationsLib.WhaleFatEvolved
-				]);
+				.hasPerk(PerkLib.DragonWaterBreath, +1);
+		
+		addMutation(IMutationsLib.DraconicBonesIM);
+		addMutation(IMutationsLib.WhaleFatIM);
+		addMutation(IMutationsLib.DrakeLungsIM);
 		
 		buildTier(20,"sea dragon-boy", "sea dragon-girl")
 				.tauricName("sea dragon-taur")

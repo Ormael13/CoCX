@@ -1,7 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
-import classes.MutationsLib;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 
@@ -59,28 +59,10 @@ public class KitsuneRace extends Race {
 						+1)
 				.hasPerk(PerkLib.StarSphereMastery, +1)
 				.hasAnyPerk([PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune], +1)
-				.hasPerk(PerkLib.NinetailsKitsuneOfBalance, +1)
-				.mutationPerks([
-					MutationsLib.KitsuneThyroidGland,
-					MutationsLib.KitsuneThyroidGlandPrimitive,
-					MutationsLib.KitsuneThyroidGlandEvolved,
-					MutationsLib.KitsuneParathyroidGlands,
-					MutationsLib.KitsuneParathyroidGlandsEvolved,
-					MutationsLib.KitsuneParathyroidGlandsFinalForm
-				])
-				.chimericalBodyPerks1([
-					MutationsLib.KitsuneThyroidGland,
-					MutationsLib.KitsuneParathyroidGlands
-				])
-				.chimericalBodyPerks2([
-					MutationsLib.KitsuneThyroidGlandPrimitive,
-					MutationsLib.KitsuneParathyroidGlandsEvolved
-				])
-				.chimericalBodyPerks3([
-					MutationsLib.KitsuneThyroidGlandEvolved,
-					MutationsLib.KitsuneParathyroidGlandsFinalForm
-				]);
+				.hasPerk(PerkLib.NinetailsKitsuneOfBalance, +1);
 		addBloodline([PerkLib.KitsunesDescendant, PerkLib.BloodlineKitsune]);
+		addMutation(IMutationsLib.KitsuneThyroidGlandIM);
+		addMutation(IMutationsLib.KitsuneParathyroidGlandsIM);
 		buildTier(9, "kitsune")
 				.tauricName("kitsune-taur")
 				.require("2+ fox tails", function (body:BodyData):Boolean {

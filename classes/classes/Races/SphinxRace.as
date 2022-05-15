@@ -1,10 +1,9 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
-import classes.MutationsLib;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
-import classes.internals.race.RaceUtils;
 
 public class SphinxRace extends Race {
 	public static const SphinxSkinColor:/*String*/Array = ["dark", "tan"];
@@ -44,26 +43,11 @@ public class SphinxRace extends Race {
 				.earType(Ears.LION, +1)
 				.faceType(Face.CAT_CANINES, +1);
 		addScores()
-				.hasPerk(PerkLib.Flexibility, +1)
-				.mutationPerks([
-					MutationsLib.TwinHeart,
-					MutationsLib.TwinHeartPrimitive,
-					MutationsLib.TwinHeartEvolved
-				], +2)
-				.mutationPerks([
-					MutationsLib.CatlikeNimbleness,
-					MutationsLib.CatlikeNimblenessPrimitive,
-					MutationsLib.CatlikeNimblenessEvolved
-				])
-				.chimericalBodyPerks1([
-					MutationsLib.CatlikeNimbleness
-				])
-				.chimericalBodyPerks2([
-					MutationsLib.CatlikeNimblenessPrimitive
-				])
-				.chimericalBodyPerks3([
-					MutationsLib.CatlikeNimblenessEvolved
-				])
+				.hasPerk(PerkLib.Flexibility, +1);
+		
+		addMutation(IMutationsLib.TwinHeartIM, +2);
+		addMutation(IMutationsLib.CatLikeNimblenessIM, +1);
+		
 		// TODO @aimozg extra +10% speed for Flexibility
 		buildTier(14, "sphinx")
 				.buffs({

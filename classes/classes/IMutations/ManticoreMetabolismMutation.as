@@ -8,6 +8,7 @@ import classes.BodyParts.Tail;
 import classes.PerkClass;
     import classes.PerkType;
 import classes.Player;
+import classes.Races;
 
 public class ManticoreMetabolismMutation extends PerkType
     {
@@ -52,7 +53,7 @@ public class ManticoreMetabolismMutation extends PerkType
                 if (pTier == 0){
                     IMutationsLib.ManticoreMetabolismIM.requireMetabolismMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.manticoreScore() >= 15 && player.tailType == Tail.MANTICORE_PUSSYTAIL;
+                        return player.isRace(Races.MANTICORE) && player.tailType == Tail.MANTICORE_PUSSYTAIL;
                     }, "Manticore race and tail");
                 }
                 else{

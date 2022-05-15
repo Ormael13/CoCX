@@ -2,7 +2,7 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
-import classes.MutationsLib;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 
@@ -39,22 +39,9 @@ public class CatRace extends Race {
 									|| isDisplacerLike(body));
 						},0,-100
 						)
-				.hasPerk(PerkLib.Flexibility, +1)
-				.mutationPerks([
-					MutationsLib.CatlikeNimbleness,
-					MutationsLib.CatlikeNimblenessPrimitive,
-					MutationsLib.CatlikeNimblenessEvolved
-				])
-				.chimericalBodyPerks1([
-					MutationsLib.CatlikeNimbleness
-				])
-				.chimericalBodyPerks2([
-					MutationsLib.CatlikeNimblenessPrimitive
-				])
-				.chimericalBodyPerks3([
-					MutationsLib.CatlikeNimblenessEvolved
-				])
-		;
+				.hasPerk(PerkLib.Flexibility, +1);
+		
+		addMutation(IMutationsLib.CatLikeNimblenessIM);
 		
 		buildTier(8, "cat")
 				.customNamingFunction(function(body:BodyData):String {

@@ -2,9 +2,10 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
-import classes.MutationsLib;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+
 public class FrostWyrmRace extends Race {
 	public static const FrostWyrmHairColors:/*String*/Array = ["white", "snow white", "glacial white", "silver", "platinum silver"];
 	public static const FrostWyrmScaleColos:/*String*/Array = ["bluish black", "dark gray", "black", "midnight black", "midnight"];
@@ -33,37 +34,14 @@ public class FrostWyrmRace extends Race {
 							return body.hasCock && body.biggestCockSize > 6
 									|| body.hasVagina && body.biggestTitSize >= 3
 						}, +1)
-				.hasPerk(PerkLib.DragonIceBreath, +1)
-				.mutationPerks([
-					MutationsLib.DraconicBones,
-					MutationsLib.DraconicBonesPrimitive,
-					MutationsLib.DraconicBonesEvolved,
-					MutationsLib.DraconicHeart,
-					MutationsLib.DraconicHeartPrimitive,
-					MutationsLib.DraconicHeartEvolved,
-					MutationsLib.DrakeLungs,
-					MutationsLib.DrakeLungsPrimitive,
-					MutationsLib.DrakeLungsEvolved
-				])
-				.chimericalBodyPerks1([
-					MutationsLib.DraconicBones,
-					MutationsLib.DraconicHeart,
-					MutationsLib.DrakeLungs
-				])
-				.chimericalBodyPerks2([
-					MutationsLib.DraconicBonesPrimitive,
-					MutationsLib.DraconicHeartPrimitive,
-					MutationsLib.DrakeLungsPrimitive
-				])
-				.chimericalBodyPerks3([
-					MutationsLib.DraconicBonesEvolved,
-					MutationsLib.DraconicHeartEvolved,
-					MutationsLib.DrakeLungsEvolved
-				]);
+				.hasPerk(PerkLib.DragonIceBreath, +1);
 		addScoresAfter(10)
 				.height(GREATER_THAN(120), +1);
 		
 		addBloodline([PerkLib.DragonsDescendant,PerkLib.BloodlineDragon]);
+		addMutation(IMutationsLib.DraconicBonesIM);
+		addMutation(IMutationsLib.DraconicHeartIM);
+		addMutation(IMutationsLib.DrakeLungsIM);
 		
 		buildTier(18, "frost wyrm")
 				.buffs({

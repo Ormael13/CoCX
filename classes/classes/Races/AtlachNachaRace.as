@@ -1,5 +1,6 @@
 package classes.Races {
 import classes.BodyParts.*;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 
@@ -28,25 +29,11 @@ public class AtlachNachaRace extends Race{
 				.corruption(AT_LEAST(50), +1)
 				.hasPerk(PerkLib.Insanity, +1)
 				.hasPerk(PerkLib.SpiderOvipositor, +1)
-				.hasPerk(PerkLib.TransformationImmunityAtlach, +3)
-				/* these were commented in Player.atlachNachaScore()
-				.mutationPerks([
-					MutationsLib.ArachnidBookLung,
-					MutationsLib.ArachnidBookLungPrimitive,
-					MutationsLib.ArachnidBookLungEvolved,
-				], +2)
-				.mutationPerks([
-					MutationsLib.TrachealSystem,
-					MutationsLib.TrachealSystemPrimitive,
-					MutationsLib.TrachealSystemEvolved,
-					MutationsLib.TrachealSystemFinalForm
-				], +1)
-				.mutationPerks([
-					MutationsLib.VenomGlands,
-					MutationsLib.VenomGlandsPrimitive,
-					MutationsLib.VenomGlandsEvolved
-				], +1)
-				*/
+				.hasPerk(PerkLib.TransformationImmunityAtlach, +3);
+		
+		addMutation(IMutationsLib.ArachnidBookLungIM)
+		addMutation(IMutationsLib.TrachealSystemIM);
+		addMutation(IMutationsLib.VenomGlandsIM);
 		
 		buildTier(14, "incomplete Atlach Nacha")
 				.buffs({
@@ -68,19 +55,16 @@ public class AtlachNachaRace extends Race{
 				})
 				.end()
 		
-		/* Not Yet Implemented
 		buildTier(30, "greater Atlach Nacha")
 				.buffs({
-					"str.mult": +1.15,
-					"tou.mult": +1.35,
-					"int.mult": +1.50,
-					"lib.mult": +1.50,
-					"wis.mult": -0.50,
-					"sens": +50
+					"str.mult": +3.40,
+					"tou.mult": +4.00,
+					"int.mult": +4.25,
+					"lib.mult": +4.25,
+					"wis.mult": -0.90,
+					"sens": +150
 				})
 				.end()
-				
-		 */
 	}
 }
 }

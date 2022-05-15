@@ -1,9 +1,10 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
-import classes.MutationsLib;
+import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+
 public class HellcatRace extends Race{
 	public function HellcatRace(id:int) {
 		super("Hellcat", id);
@@ -22,20 +23,6 @@ public class HellcatRace extends Race{
 				.skinCoatColor("midnight black", +1)
 				.skinBaseColor("ashen", +1)
 				.hasPerk(PerkLib.Flexibility, +1)
-				.mutationPerks([
-					MutationsLib.CatlikeNimbleness,
-					MutationsLib.CatlikeNimblenessPrimitive,
-					MutationsLib.CatlikeNimblenessEvolved
-				])
-				.chimericalBodyPerks1([
-					MutationsLib.CatlikeNimbleness
-				])
-				.chimericalBodyPerks2([
-					MutationsLib.CatlikeNimblenessPrimitive
-				])
-				.chimericalBodyPerks3([
-					MutationsLib.CatlikeNimblenessEvolved
-				])
 				.customRequirement("","not other magical feline race",
 						function (body:BodyData):Boolean {
 							return !(CatRace.isSphinxLike(body)
@@ -46,6 +33,7 @@ public class HellcatRace extends Race{
 									|| CatRace.isDisplacerLike(body));
 						},0,-100
 				);
+		addMutation(IMutationsLib.CatLikeNimblenessIM);
 		// TODO @aimozg +10% speed if has Flexibility perk
 		buildTier(10, "hellcat")
 				.buffs({
