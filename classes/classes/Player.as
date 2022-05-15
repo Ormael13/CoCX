@@ -8482,15 +8482,15 @@ use namespace CoC;
 				cavewyrmCounter++;
 			if (perkv1(IMutationsLib.CaveWyrmLungsIM) >= 1)
 				cavewyrmCounter++;
-			if (perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3)
+			if (perkv1(IMutationsLib.CaveWyrmLungsIM) >= 2)
 				cavewyrmCounter++;
-			if (perkv1(IMutationsLib.CaveWyrmLungsIM) >= 4)
+			if (perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3)
 				cavewyrmCounter++;
 			if (perkv1(IMutationsLib.CaveWyrmLungsIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				cavewyrmCounter++;
-			if (perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+			if (perkv1(IMutationsLib.CaveWyrmLungsIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				cavewyrmCounter++;
-			if (perkv1(IMutationsLib.CaveWyrmLungsIM) >= 4 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+			if (perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				cavewyrmCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				cavewyrmCounter += 50;
