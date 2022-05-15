@@ -5,7 +5,6 @@ package classes.StatusEffects {
 import classes.IMutations.IMutationsLib;
 import classes.StatusEffectClass;
 import classes.StatusEffectType;
-import classes.MutationsLib;
 
 public class VampireThirstEffect extends StatusEffectClass {
 	public static const TYPE:StatusEffectType = register("Vampire Thirst", VampireThirstEffect);

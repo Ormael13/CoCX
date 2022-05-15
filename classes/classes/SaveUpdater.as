@@ -1295,7 +1295,7 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] == 1) flags[kFLAGS.DINAH_ASS_HIPS_SIZE] = 1;
 			if (flags[kFLAGS.TOUGHNESS_SCALING] != 0) flags[kFLAGS.TOUGHNESS_SCALING] = 0;
 			if (!player.hasPerk(MutationsLib.GorgonsEyesFinalForm)) {
-				if (player.hasPerk(MutationsLib.ArachnidBookLungEvolved)) {
+				if (player.perkv1(IMutationsLib.ArachnidBookLungIM) >= 3) {
 					player.removePerk(MutationsLib.ArachnidBookLungEvolved);
 					player.createPerk(MutationsLib.ArachnidBookLungPrimitive, 0, 0, 0, 0);
 				}
@@ -1303,7 +1303,7 @@ public class SaveUpdater extends NPCAwareContent {
 					player.removePerk(MutationsLib.ArachnidBookLungFinalForm);
 					player.createPerk(MutationsLib.ArachnidBookLungEvolved, 0, 0, 0, 0);
 				}
-				if (player.hasPerk(MutationsLib.BlackHeartEvolved)) {
+				if (player.perkv1(IMutationsLib.BlackHeartIM) >= 3) {
 					player.removePerk(MutationsLib.BlackHeartEvolved);
 					player.createPerk(MutationsLib.BlackHeartPrimitive, 0, 0, 0, 0);
 				}
@@ -1343,7 +1343,7 @@ public class SaveUpdater extends NPCAwareContent {
 					player.removePerk(MutationsLib.DrakeLungsEvolved);
 					player.createPerk(MutationsLib.DrakeLungsPrimitive, 0, 0, 0, 0);
 				}
-				if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) {
+				if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 4) {
 					player.removePerk(MutationsLib.DrakeLungsFinalForm);
 					player.createPerk(MutationsLib.DrakeLungsEvolved, 0, 0, 0, 0);
 				}
@@ -1459,11 +1459,11 @@ public class SaveUpdater extends NPCAwareContent {
 					player.removePerk(MutationsLib.ManticoreMetabolismEvolved);
 					player.createPerk(MutationsLib.ManticoreMetabolismPrimitive, 0, 0, 0, 0);
 				}
-				if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) {
+				if (player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 3) {
 					player.removePerk(MutationsLib.MantislikeAgilityEvolved);
 					player.createPerk(MutationsLib.MantislikeAgilityPrimitive, 0, 0, 0, 0);
 				}
-				if (player.hasPerk(MutationsLib.MantislikeAgilityFinalForm)) {
+				if (player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 4) {
 					player.removePerk(MutationsLib.MantislikeAgilityFinalForm);
 					player.createPerk(MutationsLib.MantislikeAgilityEvolved, 0, 0, 0, 0);
 				}
@@ -1854,7 +1854,7 @@ public class SaveUpdater extends NPCAwareContent {
 						if (!arrayValY) arrayVal++;
 					}
 				}
-				outputText("Updated to 35.014");
+				outputText("Mutations backend updated.");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.014;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");

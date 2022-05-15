@@ -6,7 +6,6 @@ package classes.Perks
 {
 import classes.IMutations.IMutationsLib;
 import classes.PerkClass;
-	import classes.MutationsLib;
 	import classes.PerkType;
 
 	public class StarSphereMasteryPerk extends PerkType
@@ -18,7 +17,7 @@ import classes.PerkClass;
 			var sr:String = "";
 			var mr:String = "";
 			if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3) sr = ", " + (params.value1 * 4) + " soulforce";
-			if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandIM) >= 3) mr = ", " + (params.value1 * 3) + " mana";
+			if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3) mr = ", " + (params.value1 * 3) + " mana";
 			return "Regenerate " + (params.value1 * fr) + " fatigue"+sr+mr+" every round. Increase Fox Fire damage by " + (params.value1 * 5) + "%. (Rank: " + params.value1 + ")";
 		}
 		

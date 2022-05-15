@@ -5,7 +5,6 @@ import classes.IMutations.IMutationsLib;
 import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
 import classes.PerkLib;
-import classes.MutationsLib;
 
 /**
 	 * Moderate boost to HP.

@@ -2,7 +2,6 @@ package classes.Scenes.Combat {
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Monster;
-import classes.MutationsLib;
 import classes.PerkLib;
 import classes.StatusEffects;
 import classes.lists.Gender;
