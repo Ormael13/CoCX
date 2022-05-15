@@ -178,8 +178,63 @@ import classes.internals.*;
 				this.armorDef = 60;
 				this.armorMDef = 6;
 				this.bonusHP = 400;
-				this.bonusLust = 152;
-				this.level = 22;
+				this.bonusLust = 158;
+				this.level = 28;
+			}
+			if (flags[kFLAGS.LILY_LVL_UP] == 3) {
+				initStrTouSpeInte(70, 75, 110, 100);
+				initWisLibSensCor(100, 80, 50, 90);
+				this.weaponAttack = 3;
+				this.weaponRangeAttack = 30;
+				this.armorDef = 60;
+				this.armorMDef = 6;
+				this.bonusHP = 400;
+				this.bonusLust = 164;
+				this.level = 34;
+			}
+			if (flags[kFLAGS.LILY_LVL_UP] == 4) {
+				initStrTouSpeInte(70, 75, 110, 100);
+				initWisLibSensCor(100, 80, 50, 90);
+				this.weaponAttack = 3;
+				this.weaponRangeAttack = 30;
+				this.armorDef = 60;
+				this.armorMDef = 6;
+				this.bonusHP = 400;
+				this.bonusLust = 170;
+				this.level = 40;
+			}
+			if (flags[kFLAGS.LILY_LVL_UP] == 5) {
+				initStrTouSpeInte(70, 75, 110, 100);
+				initWisLibSensCor(100, 80, 50, 90);
+				this.weaponAttack = 3;
+				this.weaponRangeAttack = 30;
+				this.armorDef = 60;
+				this.armorMDef = 6;
+				this.bonusHP = 400;
+				this.bonusLust = 176;
+				this.level = 46;
+			}
+			if (flags[kFLAGS.LILY_LVL_UP] == 6) {
+				initStrTouSpeInte(70, 75, 110, 100);
+				initWisLibSensCor(100, 80, 50, 90);
+				this.weaponAttack = 3;
+				this.weaponRangeAttack = 30;
+				this.armorDef = 60;
+				this.armorMDef = 6;
+				this.bonusHP = 400;
+				this.bonusLust = 182;
+				this.level = 52;
+			}
+			if (flags[kFLAGS.LILY_LVL_UP] == 7) {
+				initStrTouSpeInte(70, 75, 110, 100);
+				initWisLibSensCor(100, 80, 50, 90);
+				this.weaponAttack = 3;
+				this.weaponRangeAttack = 30;
+				this.armorDef = 60;
+				this.armorMDef = 6;
+				this.bonusHP = 400;
+				this.bonusLust = 188;
+				this.level = 58;
 			}
 			this.imageName = "corrupteddrider";
 			if (LilyFollower.LilyTalked > 0) { 

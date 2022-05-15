@@ -29,12 +29,15 @@ public class Belisa extends Monster
 		}
 		private function spellCostHeal():Number {
 			var cost:Number = 30;
+			if (hasPerk(PerkLib.NaturalHealingMinor)) cost -= 3;
+			if (hasPerk(PerkLib.WisenedHealer)) cost *= 2;
 			return cost;
 		}
 		
 		private function HealMod():Number {
 			var mod1:Number = 1;
 			if (hasPerk(PerkLib.SpellpowerHealing)) mod1 += .2;
+			if (hasPerk(PerkLib.NaturalHealingMinor)) mod1 += .3;
 			return mod1;
 		}
 		private function SpellMod():Number {
@@ -46,7 +49,11 @@ public class Belisa extends Monster
 		}
 		
 		private function belisaBasicAttack():void {
-			outputText("The nimble drider-girl leaps towards you. You raise your [weapon] to intercept, but she shoots a web above and into the trees with a sharp thwip, nimbly evading your block. She gets inside your guard. \"<i>Hya, Hya! Heeeyah!!</i>\" She slashes six times, cutting cleanly through your [skin.color] [skin.type] before leaping backwards and out of your reach. Blood begins to flow from your injuries.");
+			var slashes:String = "six";
+			if (flags[kFLAGS.BELISA_LVL_UP] >= 2) slashes = "eight";
+			if (flags[kFLAGS.BELISA_LVL_UP] >= 4) slashes = "ten";
+			if (flags[kFLAGS.BELISA_LVL_UP] >= 4) slashes = "twelve";
+			outputText("The nimble drider-girl leaps towards you. You raise your [weapon] to intercept, but she shoots a web above and into the trees with a sharp thwip, nimbly evading your block. She gets inside your guard. \"<i>Hya, Hya! Heeeyah!!</i>\" She slashes "+slashes+" times, cutting cleanly through your [skin.color] [skin.type] before leaping backwards and out of your reach. Blood begins to flow from your injuries.");
 			var dmg0:Number = 0;
 			dmg0 += this.str;
 			dmg0 += eBaseStrengthDamage();
@@ -58,6 +65,18 @@ public class Belisa extends Monster
 			player.takePhysDamage(dmg0, true);
 			player.takePhysDamage(dmg0, true);
 			player.takePhysDamage(dmg0, true);
+			if (flags[kFLAGS.BELISA_LVL_UP] >= 2) {
+				player.takePhysDamage(dmg0, true);
+				player.takePhysDamage(dmg0, true);
+			}
+			if (flags[kFLAGS.BELISA_LVL_UP] >= 4) {
+				player.takePhysDamage(dmg0, true);
+				player.takePhysDamage(dmg0, true);
+			}
+			if (flags[kFLAGS.BELISA_LVL_UP] >= 6) {
+				player.takePhysDamage(dmg0, true);
+				player.takePhysDamage(dmg0, true);
+			}
 			if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
 			else player.createStatusEffect(StatusEffects.Hemorrhage,2+rand(2),0.05,0,0);
 		}
@@ -134,6 +153,7 @@ public class Belisa extends Monster
 			outputText("She puts her hands together, and you notice the telltale sign of holy magic coursing through her body. The injuries you left on her chitin begin to close, and an aura of health surrounds Belisa’s body. The light from within lights up the silk, temporarily letting you see right through it. Your eyes are drawn to her petite breasts, pressed gently together by her folding arms, and she opens her eyes, realizing what you can see. \"<i>Pervert!</i>\" She yells, letting the light fade.");
 			var temp:Number = 0;
 			temp += inteligencescalingbonus() * 2;
+			if (hasPerk(PerkLib.WisenedHealer)) temp += wisdomscalingbonus() * 2;
 			temp *= HealMod();
 			temp = Math.round(temp);
 			addHP(temp);
@@ -183,6 +203,37 @@ public class Belisa extends Monster
 		
 		public function Belisa() 
 		{
+			if (flags[kFLAGS.BELISA_LVL_UP] < 1) {
+				initStrTouSpeInte(80, 90, 100, 250);
+				initWisLibSensCor(100, 80, 100, 0);
+				this.weaponAttack = 60;
+				this.armorDef = 60;
+				this.armorMDef = 200;
+				this.bonusHP = 200;
+				this.bonusLust = 200;
+				this.level = 20;
+			}
+			if (flags[kFLAGS.BELISA_LVL_UP] >= 1 && flags[kFLAGS.BELISA_LVL_UP] < 6) {
+				var mod:int = flags[kFLAGS.BELISA_LVL_UP];
+				initStrTouSpeInte(80 + 6*mod, 90 + 8*mod, 100 + 10*mod, 250 + 15*mod);
+				initWisLibSensCor(100 + 10*mod, 80 + 5*mod, 100 + 5*mod, 0);
+				this.weaponAttack = 60 + 3*mod;
+				this.armorDef = 60 + 3*mod;
+				this.armorMDef = 200 + 10*mod;
+				this.bonusHP = 200 + 25*mod;
+				this.bonusLust = 200 + 16*mod;
+				this.level = 20 + 6*mod;
+			}
+			if (flags[kFLAGS.BELISA_LVL_UP] == 6) {
+				initStrTouSpeInte(118, 138, 160, 340);
+				initWisLibSensCor(160, 110, 130, 0);
+				this.weaponAttack = 78;
+				this.armorDef = 78;
+				this.armorMDef = 260;
+				this.bonusHP = 350;
+				this.bonusLust = 296;
+				this.level = 56;
+			}
 			this.a = "";
 			this.short = "Belisa";
 			this.imageName = "puredrider";
@@ -200,19 +251,11 @@ public class Belisa extends Monster
 			this.skinTone = "pale";
 			this.hairColor = "black";
 			this.hairLength = 24;
-			initStrTouSpeInte(80, 90, 100, 250);
-			initWisLibSensCor(100, 80, 100, 0);
 			this.weaponName = "daggers";
 			this.weaponVerb="slash";
-			this.weaponAttack = 60;
 			this.armorName = "silken robe";
-			this.armorDef = 60;
-			this.armorMDef = 200;
-			this.bonusHP = 200;
-			this.bonusLust = 200;
 			this.lustVuln = .2;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 20;
 			this.gems = rand(10) + 20;
 			this.drop = new WeightedDrop().add(consumables.B_GOSSR,1)
 					.add(useables.T_SSILK,3)
@@ -226,6 +269,21 @@ public class Belisa extends Monster
 			this.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobHealer, 0, 0, 0, 0);
 			this.createPerk(PerkLib.BasicSpirituality, 0, 0, 0, 0);
+			if (flags[kFLAGS.BELISA_LVL_UP] >= 1) {
+				this.createPerk(PerkLib.HalfStepToImprovedSpirituality, 0, 0, 0, 0);
+				this.createPerk(PerkLib.WisenedHealer, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.BELISA_LVL_UP] >= 2) this.createPerk(PerkLib.ImprovedSpirituality, 0, 0, 0, 0);
+			if (flags[kFLAGS.BELISA_LVL_UP] >= 3) {
+				this.createPerk(PerkLib.HalfStepToAdvancedSpirituality, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SpellpowerHealing, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.BELISA_LVL_UP] >= 4) this.createPerk(PerkLib.AdvancedSpirituality, 0, 0, 0, 0);
+			if (flags[kFLAGS.BELISA_LVL_UP] >= 5) {
+				this.createPerk(PerkLib.HalfStepToSuperiorSpirituality, 0, 0, 0, 0);
+				this.createPerk(PerkLib.NaturalHealingMinor, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.BELISA_LVL_UP] >= 6) this.createPerk(PerkLib.SuperiorSpirituality, 0, 0, 0, 0);
 			checkMonster();	
 		}
 		

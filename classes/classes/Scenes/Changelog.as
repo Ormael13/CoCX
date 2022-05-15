@@ -128,6 +128,7 @@ package classes.Scenes
 			outputText("-New armor (by Ormael): Green Diving Suit - buyable at Pinchou shop. Cost 1800 gems, 25 armor, 5 magic resistance.\n");
 			outputText("-New armor (by Liadri): Battle maiden armor - obtainable by giving Lusty Maiden Armor to Pure Celess to purify. Increase armor by an additional 30 but grant no armor if the character is not virgin. No longer grant sex scenes or slutty seduction but reduce lust by 2% each round.\n");
 			outputText("-New armor (by Liadri): Succubus armor - obtainable by giving Lusty Maiden Armor to Corrupted Celess to corrupt. Same base stat as lusty maiden armor +10 but double the originally added armor bonus each time PC has sex. Base slutty seduction set to 10.\n");
+			outputText("-New armor (by Canadian Snas): Drider-weave Armor - buyable at Belisa shop. Cost 2,160 gems, 20 armor, 34 magic resistance, +30% magic power. (also would count for check with heavy armor type)\n");
 			outputText("-New underwear (upper) (by Canadian Snas): Silky Drider-Weave Bra - buyable at Belisa shop. Cost 1800 gems, +4 sexiness, armor +2, magic resistance +3, +10% spellpower.\n");
 			outputText("-New underwear (lower) (by Canadian Snas): Silky Drider-Weave Panties - buyable at Belisa shop. Cost 2100 gems, +4 sexiness 4, armor +2, magic resistance +4, +10% spellpower.\n");
 			outputText("-New head accesory (by Ormael): Kabuto & Mempo set - buyable at Yvonne Armor Shop. Cost 100 gems, 3 armor. When worn with Samurai armor will give additionaly 4 armor.\n");
@@ -287,7 +288,6 @@ package classes.Scenes
 			outputText("-Added new skill: Mining. It level cap is 2 at lvl 0 and 20 at lvl 18+. Leveled by mining in various places in Mareth and the higher level the better ores or more material can be gained. Ocassionaly even chance to mine precious items will be boosted by higher level of that skill.\n");
 			outputText("-Atlach Nacha bonuses changed to +230% to Str racial multi, +265% to Tou racial multi, +300% to Int racial multi, +300% to Lib racial multi, -60% to Wis racial multi, +90 to Sens. It can now also reach Greater Atlach Nacha at 30+ pts with following bonuses: +340% to Str racial multi, +400% to Tou racial multi, +425% to Int racial multi, +425% to Lib racial multi, -90% to Wis racial multi, +150 to Sens. ");
 			outputText("Now it would additionaly could adccess Venom Glands internal mutation in addition to Arachnid Book Lung & Tracheal System.\n");
-			outputText("-New armor (by Canadian Snas): Drider-weave Armor - buyable at Belisa shop. Cost 2,160 gems, 20 armor, 34 magic resistance, +30% magic power. (also would count for check with heavy armor type)\n");
 			outputText("-New armor (by Canadian Snas): Drider-Weave Sheer Robe - buyable at Belisa shop. Cost 13,200 gems, 8 armor, 58 magic resistance, 50% slutty seduction, Wizard’s endurance 60%, does tease damage when casting.\n");
 			outputText("-Added 'Others' submenu in Camp Actions > NPC's for disabling some out of camp npc's: Callu (Otter girl) & Venus (Gigantic Turtle).\n");
 			outputText("-Grandiose Hail of Moon Blades soulskill would create 56 not 54 weapons.\n");
