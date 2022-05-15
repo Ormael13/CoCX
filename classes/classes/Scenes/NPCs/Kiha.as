@@ -9,6 +9,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.*;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
 
@@ -391,7 +392,7 @@ public class Kiha extends Monster
 				this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 6) {
-				this.createPerk(MutationsLib.LizanMarrow, 0, 0, 0, 0);
+				this.createPerk(IMutationsLib.LizanMarrowIM, 1, 0, 0, 0);
 				this.createPerk(PerkLib.ImprovedTranquilness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 7) {
@@ -403,7 +404,7 @@ public class Kiha extends Monster
 				this.createPerk(PerkLib.HalfStepToAdvancedTranquilness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 9) {
-				this.createPerk(MutationsLib.LizanMarrowPrimitive, 0, 0, 0, 0);
+				this.setPerkValue(IMutationsLib.LizanMarrowIM, 1,2);
 				this.createPerk(PerkLib.EpicLibido, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 10) {
@@ -415,7 +416,7 @@ public class Kiha extends Monster
 				this.createPerk(PerkLib.LegendaryToughness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 12) {
-				this.createPerk(MutationsLib.LizanMarrowEvolved, 0, 0, 0, 0);
+				this.setPerkValue(IMutationsLib.LizanMarrowIM, 1,3);
 				this.createPerk(PerkLib.HalfStepToSuperiorTranquilness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 13) {
@@ -423,6 +424,7 @@ public class Kiha extends Monster
 				this.createPerk(PerkLib.LegendaryLibido, 0, 0, 0, 0);
 			}
 			this.createPerk(PerkLib.Lifeline, 0, 0, 0, 0);
+			updateDynamicPerkBuffs(IMutationsLib.LizanMarrowIM, LizanMarrowMutation, this);
 			checkMonster();
 		}
 

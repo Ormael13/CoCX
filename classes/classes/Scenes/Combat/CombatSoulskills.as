@@ -2056,8 +2056,8 @@ public class CombatSoulskills extends BaseCombatContent {
 	 enemyAI();
 	 return;
 	 if (monster.plural) {
-	 if (player.hasPerk(MutationsLib.MantislikeAgility)) {
-	 if (player.hasPerk(MutationsLib.MantislikeAgilityPrimitive) && player.hasPerk(PerkLib.TrachealSystemEvolved)) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 10;
+	 if (player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 1) {
+	 if (player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 2 && player.hasPerk(PerkLib.TrachealSystemEvolved)) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 10;
 	 else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 6;
 	 }
 	 else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 3;
@@ -2070,11 +2070,11 @@ public class CombatSoulskills extends BaseCombatContent {
 	 damage += speedscalingbonus() * 0.5;
 	 if (damage < 10) damage = 10;
 	 //adjusting to be used 60/100% of base speed while attacking depending on insect-related perks possesed
-	 if (!player.hasPerk(MutationsLib.MantislikeAgility)) damage *= 0.6;
+	 if (!player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 1) damage *= 0.6;
 	 //bonuses if fighting multiple enemies
 	 if (monster.plural) {
-	 if (!player.hasPerk(MutationsLib.MantislikeAgility) && !player.hasPerk(PerkLib.TrachealSystemEvolved)) damage *= 1.1;
-	 if (player.hasPerk(MutationsLib.MantislikeAgility) && player.hasPerk(PerkLib.TrachealSystemEvolved)) damage *= 1.5;
+	 if (!player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 1 && !player.hasPerk(PerkLib.TrachealSystemEvolved)) damage *= 1.1;
+	 if (player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 1 && player.hasPerk(PerkLib.TrachealSystemEvolved)) damage *= 1.5;
 	 }
 	 //weapon bonus
 	 if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.04));

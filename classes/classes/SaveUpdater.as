@@ -1,4 +1,5 @@
 ﻿package classes {
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.*;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Eyes;
@@ -1294,7 +1295,7 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] == 1) flags[kFLAGS.DINAH_ASS_HIPS_SIZE] = 1;
 			if (flags[kFLAGS.TOUGHNESS_SCALING] != 0) flags[kFLAGS.TOUGHNESS_SCALING] = 0;
 			if (!player.hasPerk(MutationsLib.GorgonsEyesFinalForm)) {
-				if (player.hasPerk(MutationsLib.ArachnidBookLungEvolved)) {
+				if (player.perkv1(IMutationsLib.ArachnidBookLungIM) >= 3) {
 					player.removePerk(MutationsLib.ArachnidBookLungEvolved);
 					player.createPerk(MutationsLib.ArachnidBookLungPrimitive, 0, 0, 0, 0);
 				}
@@ -1302,7 +1303,7 @@ public class SaveUpdater extends NPCAwareContent {
 					player.removePerk(MutationsLib.ArachnidBookLungFinalForm);
 					player.createPerk(MutationsLib.ArachnidBookLungEvolved, 0, 0, 0, 0);
 				}
-				if (player.hasPerk(MutationsLib.BlackHeartEvolved)) {
+				if (player.perkv1(IMutationsLib.BlackHeartIM) >= 3) {
 					player.removePerk(MutationsLib.BlackHeartEvolved);
 					player.createPerk(MutationsLib.BlackHeartPrimitive, 0, 0, 0, 0);
 				}
@@ -1342,7 +1343,7 @@ public class SaveUpdater extends NPCAwareContent {
 					player.removePerk(MutationsLib.DrakeLungsEvolved);
 					player.createPerk(MutationsLib.DrakeLungsPrimitive, 0, 0, 0, 0);
 				}
-				if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) {
+				if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 4) {
 					player.removePerk(MutationsLib.DrakeLungsFinalForm);
 					player.createPerk(MutationsLib.DrakeLungsEvolved, 0, 0, 0, 0);
 				}
@@ -1458,11 +1459,11 @@ public class SaveUpdater extends NPCAwareContent {
 					player.removePerk(MutationsLib.ManticoreMetabolismEvolved);
 					player.createPerk(MutationsLib.ManticoreMetabolismPrimitive, 0, 0, 0, 0);
 				}
-				if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) {
+				if (player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 3) {
 					player.removePerk(MutationsLib.MantislikeAgilityEvolved);
 					player.createPerk(MutationsLib.MantislikeAgilityPrimitive, 0, 0, 0, 0);
 				}
-				if (player.hasPerk(MutationsLib.MantislikeAgilityFinalForm)) {
+				if (player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 4) {
 					player.removePerk(MutationsLib.MantislikeAgilityFinalForm);
 					player.createPerk(MutationsLib.MantislikeAgilityEvolved, 0, 0, 0, 0);
 				}
@@ -1808,6 +1809,53 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.statStore.hasBuff("Tribulation Vestiges"))
 					player.statStore.removeBuffs("Tribulation Vestiges");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.013;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.014) {
+				//MutationsPorting
+				updateMutationsv3("Heart");
+				updateMutationsv3("Muscle");
+				updateMutationsv3("Mouth");
+				updateMutationsv3("Adrenals");
+				updateMutationsv3("Bloodstream");
+				updateMutationsv3("FaT");
+				updateMutationsv3("Lungs");
+				updateMutationsv3("Metabolism");
+				updateMutationsv3("Ovaries");
+				updateMutationsv3("Testicles");
+				updateMutationsv3("Eyes");
+				updateMutationsv3("Bone");
+				updateMutationsv3("Nerv/Sys");
+				updateMutationsv3("Thyroid");
+				updateMutationsv3("PThyroid");
+				updateMutationsv3("Adaptations");
+				
+				function updateMutationsv3(type:String):void{
+					var arrayVal:int = 0;
+					var arrayValY:Boolean = false;
+					var array1:Array = MutationsLib.mutationsArray(type);
+					var array2:Array = IMutationsLib.mutationsArray(type);
+					for each(var pPerkArray:Array in array1){
+						var x:int = pPerkArray.length;
+						while (x > 0){
+							if (player.hasPerk(pPerkArray[x-1])){
+								player.createPerk(array2[arrayVal][0],x,0,0,0);
+								Creature.updateDynamicPerkBuffs(array2[arrayVal][0], array2[arrayVal][1], player);
+								arrayVal++;
+								arrayValY = true;
+								x--;
+								break;
+							}
+							x--;
+						}
+						while (x > 0){
+							player.removePerk(pPerkArray[x]);
+							x--;
+						}
+						if (!arrayValY) arrayVal++;
+					}
+				}
+				outputText("Mutations backend updated.");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.014;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
