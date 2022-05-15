@@ -15,13 +15,6 @@ package classes.Scenes.NPCs
 		{}//between 6 and 15 she get her counter go up by 1 each night and if it hit 15 she leave at the morning xD
 		//neisa follower flag: 1-3 - first exploring river dungeon, 4 i 5 - after first exploring, 6 - left camp due to not paid weekly paycheck (to make her return to camp req. to pay her that mercenary fee with all costs for delay so 10 days of fee not 7 - also her affection should drop to 0/pretty low after leaving camp due to not paid weekly paycheck),
 		//7 to 16 - hired and staying in camp (7 to 13 - with PC having not yet paid her weekly paycheck - up to 3 days after deadline stays this way, 14 to 16 - when she's paid in time), 18 - after her affection rise high enough and she move from mercenary to camp member
-		public function neisaAffection(changes:Number = 0):Number
-		{
-			flags[kFLAGS.NEISA_AFFECTION] += changes;
-			if (flags[kFLAGS.NEISA_AFFECTION] > 50) flags[kFLAGS.NEISA_AFFECTION] = 50;
-			if (flags[kFLAGS.NEISA_AFFECTION] > 150 && flags[kFLAGS.NEISA_FOLLOWER] >= 18) flags[kFLAGS.NEISA_AFFECTION] = 150;
-			return flags[kFLAGS.NEISA_AFFECTION];
-		}
 	
 //Implementation of TimeAwareInterface
 public function timeChange():Boolean
@@ -42,6 +35,13 @@ public function timeChangeLarge():Boolean {
 		return true;
 	}
 	return false;
+}
+public function neisaAffection(changes:Number = 0):Number
+{
+	flags[kFLAGS.NEISA_AFFECTION] += changes;
+	if (flags[kFLAGS.NEISA_AFFECTION] > 50) flags[kFLAGS.NEISA_AFFECTION] = 50;
+	if (flags[kFLAGS.NEISA_AFFECTION] > 150 && flags[kFLAGS.NEISA_FOLLOWER] >= 18) flags[kFLAGS.NEISA_AFFECTION] = 150;
+	return flags[kFLAGS.NEISA_AFFECTION];
 }
 //Morning Paycheck Call
 public function neisaMorningPaycheckCall():void {
@@ -129,18 +129,21 @@ public function neisaAppearance():void {
 
 public function neisaSpar():void {
 	clearOutput();
-	outputText("Neisa is now following you around.\n\n");
+	outputText("You ask Neisa to spar with you, and she gives you an odd look. \"<i>[name], I’m a merc, not a combat instructor. If you want to fight, I’ll fight…But don’t expect me to teach you anything you can’t learn in a real scrap.</i>\" You nod, and she rolls her eyes, getting up.\n\n");
+	outputText("\"<i>Alright, if you insist."+(silly()?" I am sworn to carry your burdens.":"")+"</i>\"\n\n");
 	startCombat(new Neisa());
 }
 public function neisaSparWon():void {
 	clearOutput();
-	outputText("Neisa is now following you around.\n\n");//beating neisa
+	outputText("Neisa falls back, rolling to her feet. She holds out a hand, shaking her head. \"<i>Alright, that’s enough.</i>\" She rolls her shoulders, wincing. \"<i>Neither of us would benefit from going any further.</i>\" You ask her if she’s just sore about losing, and she rolls her eyes. \"<i>I can’t collect my payment if I’m</i>\"\n\n");
 	neisaAffection(3);
 	doNext(cleanupAfterCombat);
 }
 public function neisaSparLost():void {
 	clearOutput();
-	outputText("Neisa is now following you around.\n\n");//been beaten by neisa
+	outputText("Neisa gets in close, knocking your [weapon] aside and cracking you on the head with her shield. You fall back, and she stands over you.\n\n");
+	outputText("\"<i>Alright, that’s enough.</i>\" She shakes her head. \"<i>It’s a good thing I’m on your side, boss.</i>\"\n\n");
+	outputText("You need to rest for a few hours before returning to your journey.\n\n");
 	neisaAffection(1);
 	doNext(cleanupAfterCombat);
 }

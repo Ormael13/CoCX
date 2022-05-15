@@ -854,5 +854,49 @@ import classes.display.SpriteDb;
 			outputText("\"<i>Oh, just like before, huh?</i>\" Lily stretches, drawing an arrow from her quiver. \"<i>I hope you’re prepared for what happens after~</i>\" Lily sinks into a shooter’s stance.\n\n");
 			startCombat(new Lily());
 		}
+		public function LilySparLost():void {
+			//if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) LevelingHerself();
+			cleanupAfterCombat();
+		}
+		private function LevelingHerself():void {
+			if (flags[kFLAGS.LILY_DEFEATS_COUNTER] >= 1) flags[kFLAGS.LILY_DEFEATS_COUNTER]++;
+			else flags[kFLAGS.LILY_DEFEATS_COUNTER] = 1;
+			if (flags[kFLAGS.LILY_DEFEATS_COUNTER] == 4 && flags[kFLAGS.LILY_LVL_UP] == 0) {
+				if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4));
+				else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4), 0, 0);
+				flags[kFLAGS.LILY_DEFEATS_COUNTER] = 0;
+				flags[kFLAGS.LILY_LVL_UP] = 1;
+			}
+			if (flags[kFLAGS.LILY_DEFEATS_COUNTER] == 5 && flags[kFLAGS.LILY_LVL_UP] == 1) {
+				if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5));
+				else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5), 0, 0);
+				flags[kFLAGS.LILY_DEFEATS_COUNTER] = 0;
+				flags[kFLAGS.LILY_LVL_UP] = 2;
+			}
+			if (flags[kFLAGS.LILY_DEFEATS_COUNTER] == 6 && flags[kFLAGS.LILY_LVL_UP] == 2) {
+				if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6));
+				else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6), 0, 0);
+				flags[kFLAGS.LILY_DEFEATS_COUNTER] = 0;
+				flags[kFLAGS.LILY_LVL_UP] = 3;
+			}/*
+			if (flags[kFLAGS.LILY_DEFEATS_COUNTER] == 7 && flags[kFLAGS.LILY_LVL_UP] == 3) {
+				if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7));
+				else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7), 0, 0);
+				flags[kFLAGS.LILY_DEFEATS_COUNTER] = 0;
+				flags[kFLAGS.LILY_LVL_UP] = 4;
+			}
+			if (flags[kFLAGS.LILY_DEFEATS_COUNTER] == 8 && flags[kFLAGS.LILY_LVL_UP] == 4) {
+				if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8));
+				else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8), 0, 0);
+				flags[kFLAGSLILY_DEFEATS_COUNTERR] = 0;
+				flags[kFLAGS.LILY_LVL_UP] = 5;
+			}
+			if (flags[kFLAGSLILY_DEFEATS_COUNTERR] == 9 && flags[kFLAGS.LILY_LVL_UP] == 5) {
+				if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14));
+				else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5), 0, 0);
+				flags[kFLAGSLILY_DEFEATS_COUNTERR] = 0;
+				flags[kFLAGS.LILY_LVL_UP] = 6;
+			}*/
+		}
 	}
 }

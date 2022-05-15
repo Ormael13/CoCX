@@ -1405,8 +1405,8 @@ public static const UNKNOWN_FLAG_NUMBER_01396:int                               
 public static const UNKNOWN_FLAG_NUMBER_01397:int                                   = 1397;
 public static const UNKNOWN_FLAG_NUMBER_01398:int                                   = 1398;
 public static const UNKNOWN_FLAG_NUMBER_01399:int                                   = 1399;
-public static const LILY_DEFEATS_COUNTER:int                                   		= 1400;
-public static const LILY_LVL_UP:int                                   				= 1401;
+public static const UNKNOWN_FLAG_NUMBER_01400:int                                   = 1400;
+public static const UNKNOWN_FLAG_NUMBER_01401:int                                   = 1401;
 public static const UNKNOWN_FLAG_NUMBER_01402:int                                 	= 1402;
 public static const UNKNOWN_FLAG_NUMBER_01403:int                                   = 1403;
 public static const UNKNOWN_FLAG_NUMBER_01404:int                                   = 1404;
@@ -1933,8 +1933,8 @@ public static const UNKNOWN_FLAG_NUMBER_01924:int                               
 public static const UNKNOWN_FLAG_NUMBER_01925:int                                   = 1925;
 public static const BELISA_DEFEATS_COUNTER:int                                   	= 1926;
 public static const BELISA_LVL_UP:int                                   			= 1927;
-public static const LILY_FLAG_DEFEATS_COUNTER:int                                  	= 1928;
-public static const LILY_FLAG_LVL_UP:int                                  			= 1929;
+public static const LILY_DEFEATS_COUNTER:int                                  		= 1928;
+public static const LILY_LVL_UP:int                                  				= 1929;
 public static const TYRANTIA_DEFEATS_COUNTER:int                                   	= 1930;
 public static const TYRANTIA_LVL_UP:int                                   			= 1931;
 public static const KITSUNES_DEFEATS_COUNTER:int                                   	= 1932;
