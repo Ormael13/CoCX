@@ -67,10 +67,7 @@ package classes.IMutations
         }
 
         //Perk Max Level
-        //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
-        public static function perkLvl(useless:int = 0):int{
-            return 3;
-        }
+        public static var _perkLvl:int = 3;
 
         public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
@@ -98,5 +95,6 @@ package classes.IMutations
         override public function keepOnAscension(respec:Boolean = false):Boolean {
             return true;
         }
+
     }
 }

@@ -4169,13 +4169,16 @@ public class Creature extends Utils
 		public static function cDynPerk(pPerk:PerkType, pClass:Class, target:*):*{
 			target = CoC.instance.player;
 			var pLvl:int = target.perkv1(pPerk);	//Gets Mutation Level if it exists.
-			var pMax:int = extPerkTrigger(pClass.perkLvl, 0);	//Max Mutation Level
+			var pMax:int = pClass._perkLvl;	//Max Mutation Level
 			//outputText(""+pPerk.name() + " Perk Tier: " + pLvl + "\n");
 			extPerkTrigger(pClass.pReqs, pLvl);	//Requirements Loading.
 			//trace("Requirements loaded in.");
 			if (pPerk.available(target) && pMax > pLvl){
 				//trace("Requirements met, adding in.");
 				return([pPerk.name(), acquirePerk, pPerk.desc()]);	//This is witchcraft, not sure how acquirePerk still recalls which perk to give, but it does.
+			}
+			else if(pMax == pLvl){
+				return([pPerk.name(), false, "You already have the highest tier!"]);
 			}
 			else{
 				//trace("Unable to meet requirements/requirements borked.");

@@ -1,5 +1,5 @@
 ﻿package classes {
-import classes.IMutations.IMutationsLib;
+import classes.IMutations.*;
 import classes.Scenes.*;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Eyes;

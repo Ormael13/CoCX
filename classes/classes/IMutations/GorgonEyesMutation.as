@@ -67,10 +67,7 @@ public class GorgonEyesMutation extends PerkType
         }
 
         //Perk Max Level
-        //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
-        public static function perkLvl(useless:int = 0):int{
-            return 2;
-        }
+        public static var _perkLvl:int = 2;
 
         //Mutations Buffs
         public static function pBuffs(pTier:int = 1):Object{

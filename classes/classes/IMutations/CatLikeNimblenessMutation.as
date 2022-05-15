@@ -64,10 +64,7 @@ public class CatLikeNimblenessMutation extends PerkType
             }
         }
 
-        //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
-        public static function perkLvl(useless:int = 0):int{
-            return 3;
-        }
+        public static var _perkLvl:int = 3;
 
         //Perk Max Level
         //Mutations Buffs

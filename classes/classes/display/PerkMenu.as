@@ -1095,7 +1095,7 @@ public class PerkMenu extends BaseContent {
 
 	//Mutations check helper. Cloned + stripped requirements logic from PerkMenuDB.
 	public function mutationsDatabaseVerify(perkName:Array, acquireReq:String = ""):void {
-		var perkCount:int = perkName[1].perkLvl();
+		var perkCount:int = perkName[1]._perkLvl;
 		var pPerk:PerkType = perkName[0];
 		if (flags[kFLAGS.MUTATIONS_SPOILERS]) { //Help On
 			if (player.hasPerk(perkName[0])) {	//Just checking if you have the base.
