@@ -689,32 +689,32 @@ private function LevelingHerself():void {
 	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER]++;
 	else flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 1;
 	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.TYRANTIA_LVL_UP] == 1) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10));
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction), 0, 0);
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10), 0, 0, 0);
 		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.TYRANTIA_LVL_UP] = 2;
 	}
 	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.TYRANTIA_LVL_UP] == 2) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 2), 0, 0);
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11), 0, 0, 0);
 		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.TYRANTIA_LVL_UP] = 3;
 	}/*
 	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.TYRANTIA_LVL_UP] == 3) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12));
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 3), 0, 0);
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12), 0, 0, 0);
 		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.TYRANTIA_LVL_UP] = 4;
 	}
 	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.TYRANTIA_LVL_UP] == 4) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13));
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4), 0, 0);
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13), 0, 0, 0);
 		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.TYRANTIA_LVL_UP] = 5;
 	}
 	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 14 && flags[kFLAGS.TYRANTIA_LVL_UP] == 5) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14));
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5), 0, 0);
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14), 0, 0, 0);
 		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.TYRANTIA_LVL_UP] = 6;
 	}*/

@@ -50,11 +50,10 @@ public class ArachnidBookLungMutation extends PerkType
                 //This helps keep the requirements output clean.
                 IMutationsLib.ArachnidBookLungIM.requirements = [];
                 if (pTier == 0){
-
                     IMutationsLib.ArachnidBookLungIM.requireAdaptationsMutationSlot()
-                            .requireCustomFunction(function (player:Player):Boolean {
-                                return player.spiderScore() >= 5 || player.isRace(Races.ATLACH_NACHA,2);
-                            }, "Arachnid race");
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.spiderScore() >= 5 || player.isRace(Races.ATLACH_NACHA,2);
+                    }, "Arachnid race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -74,9 +73,9 @@ public class ArachnidBookLungMutation extends PerkType
         //Mutations Buffs
         public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            if (pTier >= 1) pBuffs['int.mult'] += 0.05;
-            if (pTier >= 2) pBuffs['int.mult'] += 0.1;
-            if (pTier >= 3) pBuffs['int.mult'] += 0.15;
+            if (pTier == 1) pBuffs['int.mult'] = 0.05;
+            else if (pTier == 2) pBuffs['int.mult'] = 0.15;
+            else if (pTier == 3) pBuffs['int.mult'] = 0.3;
             return pBuffs
         }
 

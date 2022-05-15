@@ -22,10 +22,12 @@ import classes.BodyParts.Tongue;
 import classes.BodyParts.UnderBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.*;
 import classes.Items.ItemTags;
 import classes.Items.JewelryLib;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.NPCs.TyrantiaFollower;
+import classes.Scenes.SceneLib;
 import classes.Stats.BuffBuilder;
 import classes.Stats.BuffableStat;
 import classes.Stats.PrimaryStat;
@@ -518,7 +520,7 @@ public class Creature extends Utils
 				if (inte >= 61) max += Math.round(inte);
 				if (inte >= 81) max += Math.round(inte);
 				if (inte >= 101) max += Math.round(inte) * Math.floor( (inte-100)/50 + 1);
-				if (hasPerk(MutationsLib.FrozenHeartEvolved)) max *= 1.5;
+				if (perkv1(IMutationsLib.FrozenHeartIM) >= 3) max *= 1.5;
 			}
 			else if (hasPerk(PerkLib.HaltedVitals)) {
 				max += int(lib * 2 + 50);
@@ -537,7 +539,7 @@ public class Creature extends Utils
 				if (tou >= 101) max += Math.round(tou) * Math.floor( (tou-100)/50 + 1);
 			}
 			if (hasPerk(PerkLib.IcyFlesh)) {
-				if (hasPerk(MutationsLib.FrozenHeartEvolved)) {
+				if (perkv1(IMutationsLib.FrozenHeartIM) >= 3) {
 					if (hasPerk(PerkLib.TankI)) max += Math.round(inte*18);
 					if (hasPerk(PerkLib.TankII)) max += Math.round(inte*18);
 					if (hasPerk(PerkLib.TankIII)) max += Math.round(inte*18);
@@ -2253,7 +2255,7 @@ public class Creature extends Utils
 				quantity *= 2;
 			if (hasPerk(PerkLib.OneTrackMind))
 				quantity *= 1.1;
-			if (hasPerk(MutationsLib.MinotaurTesticlesEvolved))
+			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3)
 				quantity *= 2.5;
 			if (hasPerk(PerkLib.MaraesGiftStud))
 				quantity += 350;
@@ -2263,15 +2265,15 @@ public class Creature extends Utils
 				quantity += 200 + (perkv1(PerkLib.MagicalVirility) * 100);
 			if (hasPerk(PerkLib.FerasBoonSeeder))
 				quantity += 1000;
-			if (hasPerk(MutationsLib.MinotaurTesticlesPrimitive))
+			if (perkv1(IMutationsLib.MinotaurTesticlesIM) >= 2)
 				quantity += 200;
-			if (hasPerk(MutationsLib.NukiNutsPrimitive))
+			if (perkv1(IMutationsLib.NukiNutsIM) >= 2)
 				quantity += 200;
-			if (hasPerk(MutationsLib.NukiNutsEvolved))
+			if (perkv1(IMutationsLib.NukiNutsIM) >= 3)
 				quantity *= 2;
-			if (hasPerk(MutationsLib.EasterBunnyEggBagPrimitive))
+			if (perkv1(IMutationsLib.EasterBunnyEggBagIM) >= 2)
 				quantity *= 1.5;
-			if (hasPerk(MutationsLib.EasterBunnyEggBagEvolved))
+			if (perkv1(IMutationsLib.EasterBunnyEggBagIM) >= 3)
 				quantity *= 3;
 			if (hasPerk(PerkLib.ProductivityDrugs))
 				quantity += (perkv3(PerkLib.ProductivityDrugs));
@@ -3106,7 +3108,7 @@ public class Creature extends Utils
 		public function isAlraune():Boolean { return lowerBodyPart.isAlraune(); }
 		public function isLiliraune():Boolean { return lowerBodyPart.isLiliraune(); }
 		public function isElf():Boolean {
-			return hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved) || game.player.elfScore() >= 10 || game.player.isRace(Races.WOODELF);
+			return perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3 || game.player.elfScore() >= 10 || game.player.isRace(Races.WOODELF);
 		}
 
 		public function isFlying():Boolean {
@@ -3816,7 +3818,7 @@ public class Creature extends Utils
 			var flychance:Number = 20;
 			if (hasPerk(PerkLib.AdvancedAerialCombat)) flychance += 5;
 			if (hasPerk(PerkLib.GreaterAerialCombat)) flychance += 15;
-			if (hasPerk(MutationsLib.HarpyHollowBonesPrimitive)) flychance += 10;
+			if (perkv1(IMutationsLib.HarpyHollowBonesIM) >= 2) flychance += 10;
 			if ((game.player.hasKeyItem("Jetpack") >= 0 || game.player.hasKeyItem("MK2 Jetpack") >= 0) && game.player.isInGoblinMech()) flychance += 25;
 			if (hasPerk(PerkLib.Evade)) {
 				chance += 5;
@@ -3827,8 +3829,8 @@ public class Creature extends Utils
 			}
 			if (hasPerk(PerkLib.ElvenSense)) {
 				chance += 5;
-				if (hasPerk(MutationsLib.ElvishPeripheralNervSysPrimitive)) chance += 10;
-				if (hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) chance += 15;
+				if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) chance += 10;
+				if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) chance += 15;
 			}
 			if (hasPerk(PerkLib.Flexibility)) chance += 6;
 			if (hasPerk(PerkLib.Misdirection) && (armorName == "red, high-society bodysuit" || armorName == "Fairy Queen Regalia")) chance += 10;
@@ -3840,7 +3842,7 @@ public class Creature extends Utils
 			if (game.player.hasKeyItem("Nitro Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 30;
 			if (hasPerk(PerkLib.JunglesWanderer)) chance += 35;
 			if (hasStatusEffect(StatusEffects.Illusion)) {
-				if (hasPerk(MutationsLib.KitsuneParathyroidGlandsEvolved)) chance += 30;
+				if (perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3) chance += 30;
 				else chance += 10;
 			}
 			if (hasStatusEffect(StatusEffects.HurricaneDance)) chance += 25;
@@ -3911,8 +3913,8 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.JobRogue)) generalevasion += 5;
 			if (hasPerk(PerkLib.Spectre) && hasPerk(PerkLib.Incorporeality)) generalevasion += 10;
 			if (hasPerk(PerkLib.ElvenSense)) generalevasion += 5;
-			if (hasPerk(MutationsLib.ElvishPeripheralNervSysPrimitive)) generalevasion += 10;
-			if (hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) generalevasion += 15;
+			if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 2) generalevasion += 10;
+			if (perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) generalevasion += 15;
 			if (generalevasion > 0) flyeavsion += generalevasion;
 			if (hasPerk(PerkLib.AdvancedAerialCombat)) flyeavsion += 5;
 			if (hasPerk(PerkLib.GreaterAerialCombat)) flyeavsion += 15;
@@ -3927,7 +3929,7 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.AGILE) && (roll < 10)) return "Unhindered";
 			if (hasPerk(PerkLib.JunglesWanderer) && (roll < 35)) return "Jungle's Wanderer";
 			if (hasStatusEffect(StatusEffects.Illusion)) {
-				if (hasPerk(MutationsLib.KitsuneParathyroidGlandsEvolved) && roll < 30) return "Illusion";
+				if (perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3 && roll < 30) return "Illusion";
 				else if (roll < 10) return "Illusion";
 			}
 			if (hasStatusEffect(StatusEffects.Flying) && (roll < flyeavsion)) return "Flying";
@@ -4161,6 +4163,144 @@ public class Creature extends Utils
 				scale   : argDefs.scale[0],
 				max     : argDefs.max[0]
 			};
+		}
+
+		/**Creates Dynamic Perks that fulfill three criteria, returned in menuGen format.
+		 *
+		 * 1.Will use perkV1 to store variants of the same perk.
+		 *
+		 * 2.Has a changing Buff state due to the variants.
+		 *
+		 * 3.Has a changing Requirement state due to the varients.
+		 *
+		 * @param pPerk: Takes in the perk to be augmented.
+		 * @param pClass: Perk file/Class name, to simplify and unify called functions.
+		 * @return Array: Two item Array consisting of perk name[0], and a prepared function that will create/modify the perk/mutation[1].
+		 *
+		 */
+		public static function cDynPerk(pPerk:PerkType, pClass:Class, target:*):*{
+			target = CoC.instance.player;
+			var pLvl:int = target.perkv1(pPerk);	//Gets Mutation Level if it exists.
+			var pMax:int = extPerkTrigger(pClass.perkLvl, 0);	//Max Mutation Level
+			//outputText(""+pPerk.name() + " Perk Tier: " + pLvl + "\n");
+			extPerkTrigger(pClass.pReqs, pLvl);	//Requirements Loading.
+			//trace("Requirements loaded in.");
+			if (pPerk.available(target) && pMax > pLvl){
+				//trace("Requirements met, adding in.");
+				return([pPerk.name(), acquirePerk, pPerk.desc()]);	//This is witchcraft, not sure how acquirePerk still recalls which perk to give, but it does.
+			}
+			else{
+				//trace("Unable to meet requirements/requirements borked.");
+				return([pPerk.name(), false, "You don't meet the requirements for this!"]);
+			}
+
+			/*	//Requirements debug.
+			var reqs:Array = [];
+			for each (var cond:Object in pPerk.requirements) {
+				var reqStr:String = cond.text;
+				var color:String = "";
+				if (!(reqStr.indexOf("Mutation") >= 0)) { //Ignores the "free mutation slot" note.
+					if (cond.fn(player)) {
+						color = "#008000";
+					}
+					else {
+						color = "#800000";
+					}
+					reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
+				}
+			}
+			outputText("Requirements: " + reqs.join(", "));*/
+
+			//Functions that need to be triggered externally go here. I.E. Requirements/Buffs due to circular dependency.
+			function extPerkTrigger(fTrigger:Function, pLvl2:int):*{
+				try{
+					var result:* = fTrigger(pLvl2);
+					//trace("External Function Trigger Success");
+					return result;
+				}
+				catch (e:Error){
+					//trace("External Function Trigger Failed. \n" + e.getStackTrace());
+				}
+			}
+
+			//Gives the player the actual mutation itself.
+			function acquirePerk(nextFunc:Function = null):void{
+				try{
+					if (nextFunc == null){
+						//trace("Missing nextFunc, aborting perk adding.");
+						EngineCore.outputText("Someone forgot to add a nextFunc to their acquirePerk. Please report which perk you selected. The perk was not applied.");
+						nextFunc = SceneLib.camp.returnToCampUseOneHour;
+					}
+					else{
+						if (!target.hasPerk(pPerk)){
+							target.createPerk(pPerk, 1,0,0,0);
+						}
+						else{
+							target.setPerkValue(pPerk,1,pLvl + 1);
+						}
+						setBuffs();
+						//trace("Perk applied.");
+					}
+				} catch(e:Error){
+					trace(e.getStackTrace());
+					EngineCore.outputText("Something has gone wrong with Dynamic Perks. Please report this to JTecx along with which perk/mutation was selected, along with the bonk stick.");
+					EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour);
+				}
+				nextFunc();
+			}
+
+			//Sets up the buff for the perk.
+			function setBuffs():void{
+				var stname:String = "perk_" + pPerk.id;
+				var pBuff:Object = extPerkTrigger(pClass.pBuffs, pLvl + 1);
+				if (target.statStore.hasBuff(stname)){
+					target.statStore.removeBuffs(stname);
+				}
+				target.statStore.addBuffObject(
+						pBuff,
+						stname,
+						{text:pPerk.name(), save:false}
+				);
+				//trace("Perk Buffs Applied.");
+			}
+		}
+
+		//Use if a Dynamic Perk's buffs have been updated.
+		public static function updateDynamicPerkBuffs(pPerk:PerkType, pClass:Class, target:*):*{
+			target = CoC.instance.player;
+			var stname:String = "perk_" + pPerk.id;
+			var pLvl:int = target.perkv1(pPerk);
+			var pBuff:Object = extPerkTrigger(pClass.pBuffs, pLvl);
+			if (target.statStore.hasBuff(stname)){
+				target.statStore.removeBuffs(stname);
+			}
+			else{
+				trace("Warning: Perk Buff update failed either due to perk not existing, or buff was never applied in the first place.");
+			}
+			trace(pPerk.name() + ": ");
+			for(var id:String in pBuff) {
+				var value:Object = pBuff[id];
+
+				trace(id + " = " + value);
+			}
+			trace("^^^^^^^^^^^^^^^^^^^^^^^^^^^^PERK")
+			target.statStore.addBuffObject(
+					pBuff,
+					stname,
+					{text:pPerk.name(), save:false}
+			);
+			trace("Perk Buffs Updated.");
+
+			function extPerkTrigger(fTrigger:Function, pLvl2:int):*{
+				try{
+					var result:* = fTrigger(pLvl2);
+					trace("External Function Trigger Success");
+					return result
+				}
+				catch (e:Error){
+					trace("External Function Trigger Failed. \n" + e.getStackTrace());
+				}
+			}
 		}
 	}
 }

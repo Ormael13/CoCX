@@ -5,12 +5,8 @@
 package classes.Scenes.Dungeons.BeeHive 
 {
 import classes.*;
-import classes.BodyParts.Horns;
-import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
-import classes.Scenes.Dungeons.BeeHive;
-import classes.Scenes.Dungeons.BeeHive.BeeGuards;
 	
 	public class DemonicBee extends BeeGuards {
 		
@@ -53,7 +49,7 @@ import classes.Scenes.Dungeons.BeeHive.BeeGuards;
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			beehive.defeatedByDemonicBee();
+			SceneLib.dungeons.beehive.defeatedByDemonicBee();
 		}
 		
 		public function DemonicBee() 

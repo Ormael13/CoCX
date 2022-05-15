@@ -733,7 +733,10 @@ import classes.display.SpriteDb;
 			outputText("Her moans intensify, and you can see tears running down past the blindfold, Lily’s tongue sticking out past the silky gag as she thrusts her hips in time with your thrusts. Suddenly, her front legs tighten, pinning you against her as she bucks. Her walls tighten, almost painfully tight on your [cock], and you yank her chain, pulling her pierced tits. You choose one at random, biting down on the sensitive titflesh, and you feel your [cock] twitch as Lily’s pussy spasms, walls writhing as a stream of femcum passes over your shaft, trickling down your thighs. This last bit of stimulation sets you off, and you thrust as deep as you can, [cock] twitching as you fire a load of your baby batter into Lily’s still orgasming pussy. Lily’s wails give way to a low moan, and you take the gag off.\n\n");
 			outputText("Lily breathes heavily, tongue hanging out. <i>\"FuuuuUuuuuuuuck,\"</i> she moans, hips twitching. <i>\"You…Really…\"</i> You take the blindfold off, and Lily looks down at you, six eyes barely focused. <i>\"Mmmmm…\"</i> You pull your [cock] out, getting a full-body shudder from Lily as her legs give out, and she falls to the grass, humanoid upper body laid across her Spidery lower half. Her pussy gapes with the fuck you just gave it, blushing black lips drooling a mixture of clear and white. She closes her eyes, a blissed-out smile on her face, and she starts snoring.\n\n");
 			outputText("You decide to let her sleep her post-sex exhaustion off, wiping your [cock] off in her hair before heading back to camp.\n\n");
-			player.sexReward("vaginalFluids","Dick");
+			player.sexReward("vaginalFluids", "Dick");
+			lilySubmissiveness(5);
+			lilyAffection(5);
+            if (CoC.instance.inCombat) cleanupAfterCombat();
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -850,6 +853,50 @@ import classes.display.SpriteDb;
 			outputText("You tell your kinky Drider to get her bow and follow you. Lily is slightly confused, but as you lead her just outside of camp, she smiles slightly.\n\n");
 			outputText("\"<i>Oh, just like before, huh?</i>\" Lily stretches, drawing an arrow from her quiver. \"<i>I hope you’re prepared for what happens after~</i>\" Lily sinks into a shooter’s stance.\n\n");
 			startCombat(new Lily());
+		}
+		public function LilySparLost():void {
+			//if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) LevelingHerself();
+			cleanupAfterCombat();
+		}
+		private function LevelingHerself():void {
+			if (flags[kFLAGS.LILY_DEFEATS_COUNTER] >= 1) flags[kFLAGS.LILY_DEFEATS_COUNTER]++;
+			else flags[kFLAGS.LILY_DEFEATS_COUNTER] = 1;
+			if (flags[kFLAGS.LILY_DEFEATS_COUNTER] == 4 && flags[kFLAGS.LILY_LVL_UP] == 0) {
+				if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4));
+				else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4), 0, 0);
+				flags[kFLAGS.LILY_DEFEATS_COUNTER] = 0;
+				flags[kFLAGS.LILY_LVL_UP] = 1;
+			}
+			if (flags[kFLAGS.LILY_DEFEATS_COUNTER] == 5 && flags[kFLAGS.LILY_LVL_UP] == 1) {
+				if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5));
+				else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5), 0, 0);
+				flags[kFLAGS.LILY_DEFEATS_COUNTER] = 0;
+				flags[kFLAGS.LILY_LVL_UP] = 2;
+			}
+			if (flags[kFLAGS.LILY_DEFEATS_COUNTER] == 6 && flags[kFLAGS.LILY_LVL_UP] == 2) {
+				if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6));
+				else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6), 0, 0);
+				flags[kFLAGS.LILY_DEFEATS_COUNTER] = 0;
+				flags[kFLAGS.LILY_LVL_UP] = 3;
+			}/*
+			if (flags[kFLAGS.LILY_DEFEATS_COUNTER] == 7 && flags[kFLAGS.LILY_LVL_UP] == 3) {
+				if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7));
+				else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7), 0, 0);
+				flags[kFLAGS.LILY_DEFEATS_COUNTER] = 0;
+				flags[kFLAGS.LILY_LVL_UP] = 4;
+			}
+			if (flags[kFLAGS.LILY_DEFEATS_COUNTER] == 8 && flags[kFLAGS.LILY_LVL_UP] == 4) {
+				if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8));
+				else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8), 0, 0);
+				flags[kFLAGSLILY_DEFEATS_COUNTERR] = 0;
+				flags[kFLAGS.LILY_LVL_UP] = 5;
+			}
+			if (flags[kFLAGSLILY_DEFEATS_COUNTERR] == 9 && flags[kFLAGS.LILY_LVL_UP] == 5) {
+				if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14));
+				else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5), 0, 0);
+				flags[kFLAGSLILY_DEFEATS_COUNTERR] = 0;
+				flags[kFLAGS.LILY_LVL_UP] = 6;
+			}*/
 		}
 	}
 }

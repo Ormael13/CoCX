@@ -242,7 +242,7 @@ public class BasiliskScene extends BaseContent
 					[3, "Goblin", basiliskAdvantageGoblin],
 					[4, "Minotaur", basiliskAdvantageMinotaur],
 				],
-				"<i>Or maybe you hope for the exact opposite? Perhaps, you're not even trying to move on purpose, waiting for someone to find and fuck you like a proper slut? Who would it be?</i>\n\n"
+				"Or maybe you hope for the exact opposite? Perhaps, you're not even trying to move on purpose, waiting for someone to find and fuck you like a proper slut? Who would it be?\n\n"
 			);
 		}
 

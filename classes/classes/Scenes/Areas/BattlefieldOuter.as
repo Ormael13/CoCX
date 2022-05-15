@@ -38,11 +38,11 @@ use namespace CoC;
 				else SceneLib.tyrania.firstEncounter();
 				return;
 			}
-			//
-			if (rand(3) == 0 && player.level >= 45) {// && 
+			//Iridesian
+			/*if (rand(3) == 0 && player.level >= 45 && ) {
 				SceneLib.iridesianFollower.firstMeetingIridesian();
 				return;
-			}
+			}*/
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helFollower.followerHel()) {
 				SceneLib.helScene.helSexualAmbush();
@@ -150,7 +150,7 @@ use namespace CoC;
 				default:
 					clearOutput();
 					if (rand(4) == 0) {
-						outputText("You spend almost hour exploring this deserted battlefield but you don't manage to find anything interesting. Adter checking another pile of weapons you hear some noise comming from nearby. Intrigued you cautiously approach source of it, which turns to be... "+(rand(2) == 0?"demons":"imps")+". Whole group of them running straight at you. ");
+						outputText("You spend almost an hour exploring this deserted battlefield but you don't manage to find anything interesting. After checking another pile of weapons you hear some noise coming from nearby. Intrigued you cautiously approach source of it, which turns to be... "+(rand(2) == 0?"demons":"imps")+". Whole group of them running straight at you. ");
 						outputText("As they approach you ready your [weapon] but... the first ones after reaching you jsut give you a short glance and just pass by. Then another one and one more pass you by almost looking like they just seen you as merely obstacle to avoid during their run. Then you hear some fragments of the words they seems to talks form time to time.\n\n");
 						outputText("\"<i>...ster or the fog will catch up to u...</i>\", \"<i>...ut there is <b>SOMETHING</b> insid...</i>\", \"<i>...us..t reeee....port b...</i>\"\n\n");
 						outputText("After last one of them pass you by they soon vanish into distance behind you. What just happened? Usualy laidback and horny " + (rand(2) == 0?"demons":"imps") + " was actualy running away? From fog? As you thinking over it you notice something moving slightly in the direction they came. ");

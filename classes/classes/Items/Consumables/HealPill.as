@@ -1,10 +1,10 @@
 package classes.Items.Consumables 
 {
 import classes.EngineCore;
+import classes.IMutations.IMutationsLib;
 import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
 import classes.PerkLib;
-import classes.MutationsLib;
 
 /**
 	 * Moderate boost to HP.
@@ -24,8 +24,8 @@ import classes.MutationsLib;
 			outputText("You pop the small pill into your mouth and swallow. ");
 			
 			if (player.HP < player.maxOverHP()) {
-				if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) EngineCore.HPChange(Math.round((50 + player.tou) * 2), true);
-				else if ((player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagPrimitive)) || player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) EngineCore.HPChange(Math.round((50 + player.tou) * 1.5), true);
+				if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) EngineCore.HPChange(Math.round((50 + player.tou) * 2), true);
+				else if ((player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 2) || player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) EngineCore.HPChange(Math.round((50 + player.tou) * 1.5), true);
 				else EngineCore.HPChange(50 + player.tou, true);
 				outputText("Some of your wounds are healed. ");
 			}

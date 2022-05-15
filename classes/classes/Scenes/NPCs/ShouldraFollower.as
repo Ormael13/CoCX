@@ -197,7 +197,6 @@ private function pureValaAndShouldraMacroMax():void {
 
 //corrupt vala
 public function shouldraMeetsCorruptVala():void {
-	spriteSelect(SpriteDb.s_ghostGirl2);
 	clearOutput();
 	outputText("An idea strikes you as you gaze down at the chained-up fae creature.  You call to Shouldra, pointing her toward her newest toy.  You hear a delighted coo in your mind, and you feel the ghost inside of you take control.  The specter saunters up to Vala's helpless form, appraising the prisoner like a show dog. The bound creature gives little reaction as Shouldra fondles her unusually large breasts, and only gives a slight moan when the ghost parts her legs.  \"<i>Such an interesting little oddity!  Say what you want about those imps, but they sure can get awful creative when it comes to fucking.</i>\"");
 	outputText("\n\nShe unchains the fairy, which seems to bring her back to the real world.  She looks up at you, and begins pawing at your armor, trying her best to take it off in her addled state.  \"<i>Bitch is happy Master came by!  Bitch will be a good girl for Master, so that Master can get off!</i>\"");
@@ -221,7 +220,7 @@ public function shouldraMeetsCorruptVala():void {
 	outputText("\n\nEach motion sends a chill up your spine as the fairy uses you as a dildo.  Every time you're pushed back in, a torrent of fluids gushes out, washing you in her scent.  The smell makes you dizzy, and soon you find yourself moaning in time with her, with the ghost girl following soon after.  In your daze you notice your hands reaching out to grasp at the giant fairy's oversized clit. With Shouldra busy soaking in the sensations, you realize this must be your own doing, and the revelation ends what little resistance you were putting up before.  The sounds of your lower half being thrust in and out become the only thing you can focus on, each plunge bringing you closer and closer to your limit; you feel her walls around you become tighter and tighter as the fairy begins to near hers as well.  Soon, her pussy begins to spasm, the sharp motions sending you flying over the edge, releasing your seed into her oversized cunt.  The fairy gives a loud moan of satisfaction, and the geyser of resulting fluids sends you flying out of your soft prison, and into the now ankle pool below.  With the last bits of your strength, you manage to crawl out of the puddle, and bask in the satisfying feeling of release ebbing throughout your body.  As you lay on your side, you see feel Shouldra oozing out of your mouth, regaining her form beside you.");
 	
 	outputText("\n\nYou stare at each other for a little while, still half-drunk from the fragrant secretions that have filled up the room.  Looking over to the fae, you see Vala returned to her normal size as she weakly tries to redo the chains that held her.  Shouldra giggles again at the poor fairy, and tries her best to stand. Pulling you up, she helps you gather your things.");
-	player.orgasm();
+	player.sexReward("vaginalFluids", "Default");
 	shouldraSleeping(10+rand(15),true);
 	doNext(playerMenu);
 }

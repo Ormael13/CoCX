@@ -27,7 +27,7 @@ public class EasterBunnyEggBagMutation extends PerkType
             if (pTier == 1) descS += " x2";
             if (pTier == 2) descS += " x3";
             if (pTier == 3) descS += " x6";
-            descS += " cum production";
+            if (pTier >= 1) descS += " cum production";
             if (descS != "")descS += ".";
             return descS;
         }
@@ -55,7 +55,8 @@ public class EasterBunnyEggBagMutation extends PerkType
                 IMutationsLib.EasterBunnyEggBagIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.EasterBunnyEggBagIM.requireBallsMutationSlot()
-                            .requirePerk(PerkLib.EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
+                    .requirePerk(PerkLib.EasterBunnyBalls)
+                    .requireCustomFunction(function (player:Player):Boolean {
                         return player.easterbunnyScore() >= 12;
                     }, "Easter Bunny race and Easter bunny balls.");
                 }
@@ -75,7 +76,7 @@ public class EasterBunnyEggBagMutation extends PerkType
         }
 
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
             return pBuffs;
         }

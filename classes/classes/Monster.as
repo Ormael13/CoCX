@@ -14,6 +14,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Items.ArmorLib;
 import classes.Items.ConsumableLib;
 import classes.Items.HeadJewelryLib;
@@ -355,6 +356,9 @@ import flash.utils.getQualifiedClassName;
 				else if (hasPerk(PerkLib.EnemyGroupType)) maxOver2 += (0.05 * perkv1(PerkLib.OverMaxHP));
 				else maxOver2 += (0.01 * perkv1(PerkLib.OverMaxHP));
 			}
+			if (hasPerk(PerkLib.EnemyEliteType)) maxOver2 += 0.05;
+			if (hasPerk(PerkLib.EnemyChampionType)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.EnemyBossType)) maxOver2 += 0.15;
 			maxOver *= maxOver2;//~180%
 			maxOver = Math.round(maxOver);
 			return maxOver;
@@ -377,9 +381,9 @@ import flash.utils.getQualifiedClassName;
 				min -= maxHP() * 0.08;
 				min -= (2400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}//nastepny diehard to 10% i 3000
-			if (hasPerk(MutationsLib.LizanMarrowEvolved)) min -= maxHP() * 0.05;
-			if (hasPerk(MutationsLib.OrcAdrenalGlands)) min -= maxHP() * 0.01;
-			if (hasPerk(MutationsLib.OrcAdrenalGlandsPrimitive)) min -= maxHP() * 0.02;
+			if (perkv1(IMutationsLib.LizanMarrowIM) >= 3) min -= maxHP() * 0.05;
+			if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 1) min -= maxHP() * 0.01;
+			if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 2) min -= maxHP() * 0.02;
 			if (hasPerk(PerkLib.Ferocity)) min -= maxHP() * 0.07;
 			if (hasPerk(PerkLib.Rage)) min -= maxHP() * 0.05;
 			if (hasPerk(PerkLib.TooAngryToDie)) min -= this.maxWrath();
@@ -397,6 +401,18 @@ import flash.utils.getQualifiedClassName;
 				else if (hasPerk(PerkLib.EnemyLargeGroupType)) min -= (maxHP() * 0.1 * perkv1(PerkLib.DieHardHP));
 				else if (hasPerk(PerkLib.EnemyGroupType)) min -= (maxHP() * 0.05 * perkv1(PerkLib.DieHardHP));
 				else min -= (maxHP() * 0.01 * perkv1(PerkLib.DieHardHP));
+			}
+			if (hasPerk(PerkLib.EnemyEliteType)) {
+				min -= maxHP() * 0.025;
+				min -= (750 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
+			if (hasPerk(PerkLib.EnemyChampionType)) {
+				min -= maxHP() * 0.05;
+				min -= (1500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
+			if (hasPerk(PerkLib.EnemyBossType)) {
+				min -= maxHP() * 0.075;
+				min -= (2250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			min = Math.round(min);
 			return min;
@@ -600,7 +616,7 @@ import flash.utils.getQualifiedClassName;
 			temp *= multimax;
 			temp *= stats_multi_based_on_misc();
 			temp = Math.round(temp);
-			if ((hasPerk(PerkLib.EnemyTrueDemon) && !hasPerk(PerkLib.Phylactery)) || (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience))) temp = 0;
+			if ((hasPerk(PerkLib.EnemyTrueDemon) && (!hasPerk(PerkLib.Phylactery) || !hasPerk(PerkLib.EnemyTrueAngel))) || (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience))) temp = 0;
 			return temp;
 		}
 
@@ -2440,7 +2456,7 @@ import flash.utils.getQualifiedClassName;
 		{
 
 			//regeneration perks for monsters
-			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || hasPerk(MutationsLib.LizanMarrow) || hasPerk(MutationsLib.LizanMarrowPrimitive) || hasPerk(MutationsLib.LizanMarrowEvolved) || hasPerk(MutationsLib.DraconicHeartEvolved) || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.BodyCultivator) || hasPerk(PerkLib.MonsterRegeneration)
+			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || perkv1(IMutationsLib.LizanMarrowIM) >= 1 || perkv1(IMutationsLib.DraconicHeartIM) >= 3 || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.BodyCultivator) || hasPerk(PerkLib.MonsterRegeneration)
 			|| hasPerk(PerkLib.HydraRegeneration) || hasPerk(PerkLib.Lifeline) || hasPerk(PerkLib.ImprovedLifeline) || hasPerk(PerkLib.GreaterLifeline) || hasPerk(PerkLib.EpicLifeline) || hasPerk(PerkLib.IcyFlesh) || hasPerk(PerkLib.HclassHeavenTribulationSurvivor) || hasPerk(PerkLib.GclassHeavenTribulationSurvivor)
 			|| hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2) || hasPerk(PerkLib.EnemyTrueAngel) || hasPerk(PerkLib.EnemyTrueDemon)) && this.HP < maxHP())
 			|| (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
@@ -2452,13 +2468,13 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.VladimirRegalia) && !isNightTime()) healingPercent -= 5;
 				if (hasPerk(PerkLib.VladimirRegalia) && isNightTime()) healingPercent += 5;
 				if (hasPerk(PerkLib.LizanRegeneration) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1.5;
-				if (hasPerk(MutationsLib.LizanMarrow) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 0.5;
-				if (hasPerk(MutationsLib.LizanMarrowPrimitive) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1;
-				if (hasPerk(MutationsLib.LizanMarrowEvolved) && !hasStatusEffect(StatusEffects.RegenInhibitor)) {
+				if (perkv1(IMutationsLib.LizanMarrowIM) >= 1 && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 0.5;
+				if (perkv1(IMutationsLib.LizanMarrowIM) >= 2 && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1;
+				if (perkv1(IMutationsLib.LizanMarrowIM) >= 3 && !hasStatusEffect(StatusEffects.RegenInhibitor)) {
 					healingPercent += 1.5;
 					if (this.HP < (this.maxHP() * 0.25)) healingPercent += 4.5;
 				}
-				if (hasPerk(MutationsLib.DraconicHeartEvolved)) healingPercent += 1;
+				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) healingPercent += 1;
 				if (hasPerk(PerkLib.HydraRegeneration) && !hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) healingPercent += 1 * perkv1(PerkLib.HydraRegeneration);
 				if (hasPerk(PerkLib.IcyFlesh)) healingPercent += 1;
 				if (hasPerk(PerkLib.BodyCultivator)) healingPercent += 0.5;
@@ -2471,7 +2487,7 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.MonsterRegeneration) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += perkv1(PerkLib.MonsterRegeneration);
 				if (hasStatusEffect(StatusEffects.MonsterRegen)) healingPercent += statusEffectv2(StatusEffects.MonsterRegen);
 				if (hasPerk(PerkLib.Diehard) && !hasPerk(PerkLib.EpicDiehard) && this.HP < 1) healingPercent -= 1;
-				if (hasPerk(MutationsLib.LizanMarrowEvolved) && this.HP < 1) healingPercent -= 1;
+				if (perkv1(IMutationsLib.LizanMarrowIM) >= 3 && this.HP < 1) healingPercent -= 1;
 				if (hasStatusEffect(StatusEffects.BloodRequiem) && healingPercent > 0) {
 					if (hasPerk(PerkLib.EnemyConstructType) || hasPerk(PerkLib.EnemyElementalType) || hasPerk(PerkLib.EnemyFleshConstructType) || hasPerk(PerkLib.EnemyGhostType)) healingPercent *= 0.8;
 					else if (hasPerk(PerkLib.EnemyPlantType)) healingPercent *= 0.5;
@@ -2533,9 +2549,9 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.SoulEmperor)) soulforceRecovery += 5;
 				if (hasPerk(PerkLib.SoulAncestor)) soulforceRecovery += 5;
 				if (hasPerk(PerkLib.DaoistCultivator)) soulforceRecoveryMulti += 0.5;
-				if (hasPerk(MutationsLib.DraconicHeart)) soulforceRecovery += 4;
-				if (hasPerk(MutationsLib.DraconicHeartPrimitive)) soulforceRecovery += 4;
-				if (hasPerk(MutationsLib.DraconicHeartEvolved)) soulforceRecovery += 4;
+				if (perkv1(IMutationsLib.DraconicHeartIM) >= 1) soulforceRecovery += 4;
+				if (perkv1(IMutationsLib.DraconicHeartIM) >= 2) soulforceRecovery += 4;
+				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceRecovery += 4;
 				soulforceRecovery *= soulforceRecoveryMulti;
 				addSoulforce(soulforceRecovery);
 			}
@@ -2548,9 +2564,9 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.ArcaneRegenerationEpic)) manaRecovery += 30;
 				if (hasPerk(PerkLib.ArcaneRegenerationLegendary)) manaRecovery += 40;
 				if (hasPerk(PerkLib.ArcaneRegenerationMythical)) manaRecovery += 50;
-				if (hasPerk(MutationsLib.DraconicHeart)) manaRecovery += 5;
-				if (hasPerk(MutationsLib.DraconicHeartPrimitive)) manaRecovery += 5;
-				if (hasPerk(MutationsLib.DraconicHeartEvolved)) manaRecovery += 5;
+				if (perkv1(IMutationsLib.DraconicHeartIM) >= 1) manaRecovery += 5;
+				if (perkv1(IMutationsLib.DraconicHeartIM) >= 2) manaRecovery += 5;
+				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) manaRecovery += 5;
 				if (hasPerk(PerkLib.WarMageApprentice)) manaRecovery += 10;
 				if (hasPerk(PerkLib.WarMageAdept)) manaRecovery += 15;
 				if (hasPerk(PerkLib.GreyMageApprentice)) manaRecoveryMulti += 0.25;
@@ -2761,9 +2777,9 @@ import flash.utils.getQualifiedClassName;
 				else {
 					var procentvalue:Number = (4 + rand(7));
 					if (game.player.hasPerk(PerkLib.ThirstForBlood)) procentvalue *= 1.5;
-					if (player.hasPerk(MutationsLib.SharkOlfactorySystem)) procentvalue *= 1.5;
-					if (player.hasPerk(MutationsLib.SharkOlfactorySystemPrimitive)) procentvalue *= 1.5;
-					if (player.hasPerk(MutationsLib.SharkOlfactorySystemEvolved)) procentvalue *= 1.5;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) procentvalue *= 1.5;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) procentvalue *= 1.5;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) procentvalue *= 1.5;
 					if (statusEffectv2(StatusEffects.IzmaBleed) > 0) procentvalue += statusEffectv2(StatusEffects.IzmaBleed);
 					procentvalue = Math.round(procentvalue);
 					var store:Number = maxHP() * (procentvalue) / 100;
@@ -2785,9 +2801,9 @@ import flash.utils.getQualifiedClassName;
 				else {
 					var store3:Number = (player.str + player.spe) * 2;
 					if (player.hasPerk(PerkLib.ThirstForBlood)) store3 *= 1.5;
-					if (player.hasPerk(MutationsLib.SharkOlfactorySystem)) store3 *= 1.5;
-					if (player.hasPerk(MutationsLib.SharkOlfactorySystemPrimitive)) store3 *= 1.5;
-					if (player.hasPerk(MutationsLib.SharkOlfactorySystemEvolved)) store3 *= 1.5;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) store3 *= 1.5;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) store3 *= 1.5;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) store3 *= 1.5;
 					if (player.hasPerk(PerkLib.RacialParagon)) store3 *= 1.5;
 					if (player.hasPerk(PerkLib.Apex)) store3 *= 1.5;
 					if (player.hasPerk(PerkLib.AlphaAndOmega)) store3 *= 1.5;
@@ -2841,9 +2857,9 @@ import flash.utils.getQualifiedClassName;
 				else {
 					var store5:Number = (player.str + player.spe) * 2;
 					if (player.hasPerk(PerkLib.ThirstForBlood)) store5 *= 1.5;
-					if (player.hasPerk(MutationsLib.SharkOlfactorySystem)) store5 *= 1.5;
-					if (player.hasPerk(MutationsLib.SharkOlfactorySystemPrimitive)) store5 *= 1.5;
-					if (player.hasPerk(MutationsLib.SharkOlfactorySystemEvolved)) store5 *= 1.5;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) store5 *= 1.5;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) store5 *= 1.5;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) store5 *= 1.5;
 					if (player.hasPerk(PerkLib.RacialParagon)) store5 *= 1.5;
 					if (player.hasPerk(PerkLib.Apex)) store5 *= 1.5;
 					if (player.hasPerk(PerkLib.AlphaAndOmega)) store5 *= 1.5;
@@ -3328,8 +3344,8 @@ import flash.utils.getQualifiedClassName;
 		}
 		public function prepareForCombat():void {
 			var bonusStatsAmp:Number = 0.6;
-			if (hasPerk(MutationsLib.MantislikeAgility)) this.speStat.core.value += (10 * (1 + newGamePlusMod()));
-			if (hasPerk(MutationsLib.MantislikeAgilityPrimitive)) this.speStat.core.value += (20 * (1 + newGamePlusMod()));
+			if (perkv1(IMutationsLib.MantislikeAgilityIM) >= 1) this.speStat.core.value += (10 * (1 + newGamePlusMod()));
+			if (perkv1(IMutationsLib.MantislikeAgilityIM) >= 2) this.speStat.core.value += (20 * (1 + newGamePlusMod()));
 			if (level > 25) bonusStatsAmp += 0.3*((int)(level-1)/25);
 			bonusAscStr += bonusStatsAmp * str * newGamePlusMod();
 			bonusAscTou += bonusStatsAmp * tou * newGamePlusMod();

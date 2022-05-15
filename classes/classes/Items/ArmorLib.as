@@ -41,6 +41,8 @@ package classes.Items
 		public const DSCLARM:Armor = new Armor("DSclArm", "D.Scale Armor", "dragonscale armor", "a suit of dragonscale armor", 10, 10, 800, "This armor is cleverly fashioned from dragon scales. It offers high protection while at the same time, quite flexible.", "Medium");
 		public const DSCLROB:Armor = new ArmorWithPerk("DSclRob", "D.Scale Robes", "dragonscale robes", "a dragonscale robes", 0, 10, 500, "This robe is expertly made from dragon scales. It offers high protection while being lightweight and should be comfortable to wear all day.", "Light",
 				PerkLib.WizardsEndurance,20,0,0,0);
+		public const DWARMOR:Armor = new Armor("DWArmor","D-wArmor","Drider-weave Armor","a Drider-weave Armor",20,34,2160,"This set of white armor shimmers in the light, rippling strands of silk pumping mana through them. The chestpiece is thick, padded with multiple layers of overlapping strands, and as you poke it, you can feel it’s been reinforced with many small pieces of metal, silk strands woven through holes in the steel.","Light");
+		public const DWSROBE:DriderWeaveSheerRobe = new DriderWeaveSheerRobe();
 		public const EHGARB_:EbonweaveHereticsGarb = new EbonweaveHereticsGarb();
 		public const ERA:ArmorWithPerk = new ElvenRangerArmor();
 		public const EWJACK_:ArmorWithPerk = new ArmorWithPerk("EWJack","E.W. Jacket","ebonweave jacket","an ebonweave jacket",12,12,960,"This outfit is ebonweave, created using refined ebonbloom petals. The outfit consists of a leatherlike jacket, a mesh breastplate and a set of arrowproof clothing. Between them all, the outfit provide layers of protection rivaling heavier, more traditional armor.","Light",

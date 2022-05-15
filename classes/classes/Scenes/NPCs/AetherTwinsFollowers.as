@@ -260,7 +260,7 @@ public function aethertwinsFollowersTalkEvolutions():void {
 	outputText("\"<i>That's what makes "+(AetherTwinsCount > 1 ? "us":"me")+" special, right? To keep devouring and evolving reaching our pinnacle.</i>\" Reaching your pinnacle? But why? \"<i>That's a silly question isn't it? Because...</i>\" "+(AetherTwinsCount > 1 ? "they":"she")+" fall silent for very long moment as if trying recall a reason. \"<i>... because it's the purpose of ");
 	outputText((AetherTwinsCount > 1 ? "our":"my")+" existance.</i>\"\n\nJust like that? Merely existing to devour and evolve? Nothing more to "+(AetherTwinsCount > 1 ? "their":"her")+" evolutions than this?\n\n");
 	outputText("\"<i>Haven't you also changed since coming to this realm? You also evolve in your own way, so why do you think "+(AetherTwinsCount > 1 ? "our":"my")+" evolutions have no purpose? Survival of the fittest, right?</i>\"\n\n");
-	outputText("You fall silent thinking that over. Yes, you changed since comming here. Before you can continue conversation "+(AetherTwinsCount > 1 ? "they end":"she ends")+" it, \"<i>"+(AetherTwinsCount > 1 ? "We're":"I'm")+" bored, let's find someone to beat or something to eat. Come on... talking is so boring!!!</i>\"\n\n");
+	outputText("You fall silent thinking that over. Yes, you changed since coming here. Before you can continue conversation "+(AetherTwinsCount > 1 ? "they end":"she ends")+" it, \"<i>"+(AetherTwinsCount > 1 ? "We're":"I'm")+" bored, let's find someone to beat or something to eat. Come on... talking is so boring!!!</i>\"\n\n");
 	doNext(aethertwinsFollowersTalk);
 	cheatTime(1/4);
 }
@@ -487,7 +487,7 @@ private function aethertwinsFollowersEvolutionsToHumanTierGaunlets():void {
 	AetherTwinsFoodMenuGold = 0;
 	AetherTwinsFoodMenuGoldCap = 2;
 	AetherTwinsTalkMenu = 1;
-	doNext(aethertwinsFollowersMorphMain);
+	doNext(aethertwinsFollowers);
 	cheatTime(1/6);
 }
 private function aethertwinsFollowersEvolutionsToSkyTierGaunlets():void {

@@ -8,7 +8,6 @@ import classes.Items.WeaponLib;
 import classes.PerkLib;
 import classes.PregnancyStore;
 import classes.Scenes.SceneLib;
-import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 
 public class DriderIncubusScenes extends BaseContent
@@ -43,7 +42,7 @@ public class DriderIncubusScenes extends BaseContent
 			//HP Fork (no new PG):
 			if (hpVictory)
 			{
-				outputText(" You don’t even remember dropping. One moment you were fighting an eight-legged demonic aberration, and the next you were face down on polished granite, your head throbbing.");
+				outputText(" You don’t even remember dropping. One moment you were fighting an eight-legged demonic aberration, and the next you were face-down on polished granite, your head throbbing.");
 				outputText("\n\nKinariel’s insectile legs clatter noisily as he circles you. <i>\"I told you this would happen. It would have been better if you hadn’t struggled. The Demon Queen does not like her prey to bear bruises from capture.\"</i> He clicks his jaw closed in consternation. <i>\"There’s no helping it, I suppose. Cease your struggles and accept your fate.\"</i>");
 			}
 			//Lust Fork (no new PG):
@@ -63,7 +62,7 @@ public class DriderIncubusScenes extends BaseContent
 			if (!player.isTaur() && !player.isDrider()) outputText(" and across the top portion of his spidery back");
 			if (m.goblinFree) outputText(" while his goblin slave remounts his dick");
 			outputText(". <i>\"I must confess, I wondered what Lethice would choose to do with such a prize. Would she try to turn you into a loyal demonic footsoldier or break you into a beast of burden, suitable only to serve our whims and salacious desires?\"</i> He skitters through the throng of spectating demons. <i>\"Time to find out.\"</i>");
-			outputText("\n\nA deathly silence falls over the assembled corruptors and their slaves while you are carried to the throne at the end of the hall. A gigantic minotaur and his big-breasted cow-slave even make way for Kinariel.");
+			outputText("\n\nA deathly silence falls over the assembled corruptors and their slaves, while you are carried to the throne at the end of the hall. A gigantic minotaur and his big-breasted cow-slave even make way for Kinariel.");
 
 			menu();
 			addButton(0, "Next", spooderbuttGetsANewCockSleeveII);
@@ -110,7 +109,7 @@ public class DriderIncubusScenes extends BaseContent
 			outputText(", but unwilling to admit as much to your long-time foe.");
 			outputText("\n\n<i>\"Good "+ player.mf("boy", "girl") +".\"</i> Lethice strokes your hair, ignoring the tears at the corners of your eyes. <i>\"You deserve a reward I rarely give.\"</i> She breaks your gaze, allowing you to watch her lift long black skirt, almost like something a nun would wear, if a nun had holes cut in the top to display her rigid, pierced nipples. Higher and higher, the fabric ascends up her perfectly smooth legs until a dewy, pink slit is revealed. <i>\"You will be permitted to lick me as a free "+ player.mf("man", "woman") +", before you go in the submission tanks.\"</i>");
 			outputText("\n\nYou look back up at her in shock, accidentally meeting her gaze once more. It’s even easier to fall into her trapped eyes than the last time.");
-			outputText("\n\n<i>\"If you do a good job, I’ll instruct them to maintain as much of your personality as possible.\"</i> Lethice’s voice rings with as much truth as it does authority. <i>\"Displease me and you shall be an empty-headed husk, fit only for reproduction.\"</i> She giggles, <i>\"But there’s no way a </i>good "+ player.mf("boy", "girl") +"<i> like you would fail to please, is there?\"</i>");
+			outputText("\n\n<i>\"If you do a good job, I’ll instruct them to maintain as much of your personality as possible.\"</i> Lethice’s voice rings with as much truth as it does authority. <i>\"Displease me, and you shall be an empty-headed husk, fit only for reproduction.\"</i> She giggles, <i>\"But there’s no way a </i>good "+ player.mf("boy", "girl") +"<i> like you would fail to please, is there?\"</i>");
 
 			menu();
 			addButton(0, "Next", spooderbuttGetsANewCockSleeveIV);
@@ -205,9 +204,10 @@ public class DriderIncubusScenes extends BaseContent
 
 		public function beatTheSpooderbutt(hpVictory:Boolean):void
 		{
-			flags[kFLAGS.DRIDERINCUBUS_DEFEATED] = 1;
+			if (!recalling) flags[kFLAGS.DRIDERINCUBUS_DEFEATED] = 1;
 
 			clearOutput();
+			if (!recalling) outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
 			var m:DriderIncubus = monster as DriderIncubus;
 			//HP
 			if (hpVictory)
@@ -257,47 +257,40 @@ public class DriderIncubusScenes extends BaseContent
 			var doneGoblin:Boolean = false;
 			
 			menu();
-			if (flags[kFLAGS.DRIDERINCUBUS_KILLED] != 1 && flags[kFLAGS.DRIDERINCUBUS_FUCKED] != 1)
-			{
-				addButton(0, "Kill Drider", killDrider);
-				if (player.vaginas.length > 0) addButton(1, "Ride Drider", rideDrider);
-				if (player.cocks.length > 0) addButton(2, "Buttfuck Drider", buttfuckDrider);
+			if (flags[kFLAGS.DRIDERINCUBUS_KILLED] != 1 && flags[kFLAGS.DRIDERINCUBUS_FUCKED] != 1 || recalling) {
+				if (!recalling) addButton(0, "Kill Drider", killDrider);
+				addButtonIfTrue(1, "Ride Drider", rideDrider, "Req. a vagina.", player.hasVagina());
+				addButtonIfTrue(2, "Buttfuck Drider", buttfuckDrider, "Req. a cock.", player.hasCock());
 			}
-			else
-			{
-				doneDriderbus = true;
-			}
+			else doneDriderbus = true;
 
-			if (flags[kFLAGS.MITZI_RECRUITED] != 1)
-			{
-				if (flags[kFLAGS.MITZI_FUCKED] != 1)
-				{
-					if (player.cocks.length > 0)
-					{
-						addButton(5, "Fuck Goblin", fuckMitzi);
-						addButton(6, "Goblin Tittyfuck", titfuckMitzi);
-					}
-					if (player.vaginas.length > 0) addButton(7, "Goblin Licks", mitziEatsPussy);
+			if (flags[kFLAGS.MITZI_RECRUITED] != 1 || recalling) {
+				if (flags[kFLAGS.MITZI_FUCKED] != 1 || recalling) {
+					addButtonIfTrue(5, "Fuck Goblin", fuckMitzi, "Req. a cock.", player.hasCock());
+					addButtonIfTrue(6, "Goblin Tittyfuck", titfuckMitzi, "Req. a cock.", player.hasCock());
+					addButtonIfTrue(7, "Goblin Licks", mitziEatsPussy, "Req. a vagina.", player.hasVagina());
 				}
-				addButton(8, "Recruit Goblin", recruitMitzi);
+				if (!recalling) addButton(8, "Recruit Goblin", recruitMitzi);
 				
-				if (doneDriderbus)
-				{
+				if (doneDriderbus && !recalling)
 					addButton(9, "Leave Goblin", afterDriderbuttFight);
-				}
 			}
-			else
-			{
-				doneGoblin = true;
-			}
-			
-			if (doneDriderbus && doneGoblin) afterDriderbuttFight();
+			else doneGoblin = true;
+
+			if (recalling)
+				addButton(14, "Wake Up", camp.recallWakeUp);
+			else if (doneDriderbus && doneGoblin)
+				afterDriderbuttFight();
+
+
+			addButtonIfTrue(5, "Fuck Goblin", fuckMitzi, "Req. a cock.", player.hasCock());
+			addButtonIfTrue(6, "Goblin Tittyfuck", titfuckMitzi, "Req. a cock.", player.hasCock());
+			addButtonIfTrue(7, "Goblin Licks", mitziEatsPussy, "Req. a vagina.", player.hasVagina());
 		}
 
 		public function afterDriderbuttFight():void
 		{
-
-cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			cleanupAfterCombat(SceneLib.d3.resumeFromFight);
         }
 
 		public function killDrider():void
@@ -315,7 +308,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 
 		public function fuckMitzi():void
 		{
-			flags[kFLAGS.MITZI_FUCKED] = 1;
+			if (!recalling) flags[kFLAGS.MITZI_FUCKED] = 1;
 			clearOutput();
 
 			outputText("You shrug and start stripping out of your [armor] while you have the chance. Demons aren’t exactly known for their trustworthiness, but she’s doing this as a show of strength. Resorting to trickery to beat a simple mortal might lower her subordinates’ opinions of her. If there’s one thing you’ve learned to count on with demons");
@@ -345,7 +338,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			outputText("\n\nMitzi’s elfin ears perk right up at your words, and she even");
 			if (player.balls > 0) outputText(" wraps her tail around your [sack], giving eager little tugs.");
 			else outputText(" wraps her tail around your [leg], giving you eager little tugs.");
-			outputText(" She doesn’t need to pull you in - you can handle that all on your own. Grabbing her petite waist one handed, you pull her down onto your [cock biggest] using your free hand to keep your aim true.");
+			outputText(" She doesn’t need to pull you in - you can handle that all on your own. Grabbing her petite waist one-handed, you pull her down onto your [cock biggest] using your free hand to keep your aim true.");
 			outputText("\n\nKnowing that a girl’s pussy is overflowing is one thing; experiencing the sodden reality is another. Her pumped-up petals kiss your [cockHead biggest], slowly giving as you try to thread yourself between them. Ribbons of wetness run down the underside of your [cock biggest], thickening the longer you’re in contact with the fountaining love-slave. The obscene plushness of her labia majora actually holds you back, but at a certain amount of force, they bow around you, allowing you to slip your first few inches into Mitzi’s silken vice.");
 			outputText("\n\nWith what she looks like on the outside, falling somewhere between high class call-girl and short, stacked succubus, you expected her slit to be equally pleasing. The slippery, heated heaven into which you now sheath yourself is beyond any expectations. She feels molded to you, her entrance designed to welcome cocks deep inside its deepest recesses. Even compared to other goblins and succubi, Mitzi’s cunt is exceptional. Her silky folds squeeze down on you the further you thrust in, tending to your budding pleasure with excess of slickened sensation.");
 			//Hugedix
@@ -359,7 +352,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			else outputText("Filling her with as much as she can take");
 			outputText(" is too much for little Mitzi. Her slender arms buckle, dropping her onto her tits. Her head lays sideways against the floor, her exquisitely long tongue hanging out, drooling. She’s not really talking anymore, just kind of idly grunting with every movement you make. Her brain cells are either too busy controlling the fluttering muscles in her cunt or routing pleasure signals to form cogent thoughts.");
 			outputText("\n\nYou don’t see any point in giving her any warning. Grabbing hold of her plump ass with both hands, you pull yourself back until she’s almost entirely empty. A disappointed little mewl escapes her lips. Then, you thrust back in, letting your veiny mass revel in its slick back-and-forth journey. Your [cock biggest] twitches happily within the living dicksheath, dumping a few hot globs of pre-seed into her furthest recesses with every pump.");
-			outputText("\n\nThe demons in the area have either gone back to their own hedonistic pleasures or started masturbating to the show you and Mitzi are giving. Kinarial isn’t even visible any more. There’s only a puddle of cum amongst a few discarded webs where you left him. You’ve missed your chance to deal with him permanently, but who cares? Lethice isn’t too far away, and you’re getting the fuck of a lifetime.");
+			outputText("\n\nThe demons in the area have either gone back to their own hedonistic pleasures or started masturbating to the show you and Mitzi are giving. Kinarial isn’t even visible anymore. There’s only a puddle of cum amongst a few discarded webs where you left him. You’ve missed your chance to deal with him permanently, but who cares? Lethice isn’t too far away, and you’re getting the fuck of a lifetime.");
 			outputText("\n\nJust looking at the goblin’s smiling face as you smear it back and forth through puddles of demon-cum has you almost ready to go off. You swat her cushy heiny in between rapid-fire thrusts, wondering if you should keep her while your orgasm rises up like a slumbering beast.");
 
 			//Followers
@@ -370,9 +363,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
 			//No Followers
 			else
-			{
 				outputText("\n\nYou certainly wouldn’t mind having a well-practiced goblin cooze around. She’s too obedient to be a problem.");
-			}
 			//Continue from both forks, no new PG
 			outputText("\n\n");
 			if (player.cor <= 33) outputText(" You could even try to help her cope with her excessive sexual desires, maybe see what she’s like when she doesn’t want to be plugged with dick.");
@@ -392,7 +383,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			outputText(". She’s slowly rousing back to consciousness, but do you really need a goblin distracting you? You could tell her to wait for you outside, or forget about her and move on.");
 
 			menu();
-			addButton(0, "Recruit Mitzi", recruitMitzi);
+			if (!recalling) addButton(0, "Recruit Mitzi", recruitMitzi);
 			addButton(1, "Next", driderDefeatMenu);
 		}
 
@@ -449,7 +440,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			outputText("\n\nYou don’t have time to join in on the debauchery here, but you’ve got to come to a decision about this goblin now. Otherwise, she might distract you while you confront Lethice. Do you tell her that you’ll keep her and send her back to camp?");
 
 			menu();
-			addButton(0, "Recruit Mitzi", recruitMitzi);
+			if (!recalling) addButton(0, "Recruit Mitzi", recruitMitzi);
 			addButton(1, "Next", driderDefeatMenu);
 		}
 
@@ -544,7 +535,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
 			outputText(". You’re so close; you can feel it, can feel that hot load bubbling up your urethra");
 			if (player.cocks.length > 1) outputText("s");
-			outputText(", on the cusp of firing everywhere. Mitzi’s licking her lips and tugging on her ardor-distended nipples, her jaw open so that you can admire the ridiculously plushness of her lower lip and just how good it would look coated in a layer of virile love.");
+			outputText(", on the cusp of firing everywhere. Mitzi’s licking her lips and tugging on her ardor-distended nipples, her jaw open so that you can admire the ridiculous plushness of her lower lip and just how good it would look coated in a layer of virile love.");
 			outputText("\n\n<i>\"Mmmm,\"</i> the green slut moans. Gingerly, she extends that same wet digit in your direction. It smells heavily of feminine arousal. At some point, she must have found time to rub it around inside her gushing box. Slowly - too slowly - she presses her soft fingertip against the underside of your [cockHead biggest]. <i>\"You’re ready, finally. I could take you over the edge just by exhaling on you, couldn’t I?\"</i>");
 			outputText("\n\nGods, she’s right. Your eyes roll back as you nod, the feeling of a single digit against your pulsating shaft taking you to the teetering edge of explosive orgasm.");
 			outputText("\n\nMitzi husks, <i>\"Good. Now let Mitzi give it to you.\"</i> She drags her fingertip down your flexing urethra, closer and closer to where the cum is bubbling within you, setting off explosions of heat and lust within your mind. A yawning, infinite abyss of ejaculation and relief stares back at you, and can do naught but fall into it. Powerful contractions wrack your body, increasing your desire and pleasure exponentially. You couldn’t stop yourself if you wanted to.");
@@ -569,7 +560,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			outputText("\n\nBut... you’ve got a demon queen to face down. If you want to have the goblin as your own, all you have to do is tell her to wait for you outside... Do you keep her?");
 
 			menu();
-			addButton(0, "Recruit Mitzi", recruitMitzi);
+			if (!recalling) addButton(0, "Recruit Mitzi", recruitMitzi);
 			addButton(1, "Next", driderDefeatMenu);
 		}
 
@@ -581,7 +572,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			outputText("\n\nMitzi presses your [cock biggest] against the side of her face and looks up at you, her eyes wide and excitement and lust. <i>\"You’re going to love this [Master]. You won’t be able to resist taking Mitzi home with you after.\"</i>");
 			outputText("\n\nThe confident slut rises up, arching her back to bring her pendulous breasts up against your [cocks]");
 			if (player.balls > 0) outputText(", her nipples dragging over the skin of your [sack]");
-			outputText(". Matter of factly, she grabs her own tits and pulls them apart, revealing an expanse of green flesh made slippery by her own sweat. [EachCock] sinks right into the welcoming valley a second before she brings her girls back to close around you, enveloping your length");
+			outputText(". Matter-of-factly, she grabs her own tits and pulls them apart, revealing an expanse of green flesh made slippery by her own sweat. [EachCock] sinks right into the welcoming valley a second before she brings her girls back to close around you, enveloping your length");
 			if (player.cocks.length > 1) outputText("s");
 			outputText(" in slick, soft boobflesh. Her chest feels almost molded to your [cocks], designed to press evenly on every sensitive place. You can’t help but give a little throb of excitement.");
 			outputText("\n\nThe keen little slut picks up on it and flashes you another knowing smile, following it up by dropping to her knees and sliding [eachCock] through her love-pillows until the tip");
@@ -618,7 +609,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			outputText("\n\nYou should probably decide if you’re going to keep her before moving on. Do you want a goblin slave at camp? She could wait outside for you. It’d be easy. [EachCock] tingles with aftershocks, subtly agreeing.");
 
 			menu();
-			addButton(0, "Recruit Mitzi", recruitMitzi);
+			if (!recalling) addButton(0, "Recruit Mitzi", recruitMitzi);
 			addButton(1, "Next", driderDefeatMenu);
 		}
 
@@ -669,7 +660,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			else outputText("I’m going to work your dick better than that goblin hussy ever could. You’re going to beg like a bitch to the pathetic </i>mortal<i> in front of all your cohorts. They’ll never respect you again.");
 			outputText("\"</i>");
 			outputText("\n\nKinariel looks up with a mix of terror and arousal, suddenly aware of just how precarious his position in the demonic hierarchy was. He trembles while you loop his own silk around his wrists, and his cock weeps liquid excitement. You smear some of it down the length of his cock, making him gasp and twitch on the floor, writhing in forced ecstasy while his peers laugh, jeer, and masturbate to his humiliation.");
-			outputText("\n\nNo amount of heckling seems to diminish the rigidness of his phallus against your palm. If anything, it’s having the opposite effect. You can feel his heartbeat pumping him bigger and firmer after a particularly lewd insult from a four-breasted nun, or what was once a nun. He throbs with unspoken delight, his eyes half rolled back in their sockets. High pitched whines slip from his suddenly vocal throat. You wrap your fingers tightly around his quivering boner and give it a few rewarding pumps to reward him for letting out his inner slut.");
+			outputText("\n\nNo amount of heckling seems to diminish the rigidness of his phallus against your palm. If anything, it’s having the opposite effect. You can feel his heartbeat pumping him bigger and firmer after a particularly lewd insult from a four-breasted nun, or what was once a nun. He throbs with unspoken delight, his eyes half rolled back in their sockets. High-pitched whines slip from his suddenly vocal throat. You wrap your fingers tightly around his quivering boner and give it a few rewarding pumps to reward him for letting out his inner slut.");
 			outputText("\n\n<i>\"That’s my good little spider,\"</i> you coo in his ear, <i>\"It feels good not to fight, doesn’t it - to give in?\"</i> You kiss his cheek when he whimpers something to the affirmative. <i>\"I’m going to fuck you sooo good, but you’ve got to let me know how much you like it, okay?\"</i>");
 			outputText("\n\nKinarial shudders and moans louder. Atta boy.");
 			outputText("\n\nYou stroke his underside from base to tip before breaking contact, playfully eyeing the strand of sticky juice that momentarily connects his bloated phallus to your wiggling digit. Once it snaps, you playfully lick yourself clean, hollowing your cheeks with the force of the suction. His vocalizations turn plaintive and whiny from the lack of contact, but you silence him by bringing the exterior of your [vagina] to rest against him. There’s no way he can ignore the feeling of your slick,");
@@ -731,7 +722,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			//Low corruption
 			if (player.cor <= 33)
 			{
-				outputText("\n\nYou stagger up feeling more than a little dirty. Demonic seed slides down your thighs in thick streams, but at least you’re not horny any more. You should be ready for whatever comes next so long as you can keep yourself from scoping out all the other hard cocks in the room. They seem to call to you...");
+				outputText("\n\nYou stagger up feeling more than a little dirty. Demonic seed slides down your thighs in thick streams, but at least you’re not horny anymore. You should be ready for whatever comes next so long as you can keep yourself from scoping out all the other hard cocks in the room. They seem to call to you...");
 			}
 			//Middle corr
 			else if (player.cor <= 75)
@@ -743,22 +734,19 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			{
 				outputText("\n\nYou make sure to give the drider a full, french kiss on the lips before standing back up. He performed above and beyond the call of duty, filling your [vagina] so full that you can hear it slosh whenever you move. Now that you can think straight, you should be able to take down your next foe. Hopefully you’ll get a chance to fuck them too.");
 			}
-
-			//+20 corruption.
-			//Orgasm
-			//Pass an hour.
-			flags[kFLAGS.DRIDERINCUBUS_FUCKED] = 1;
-			player.dynStats("cor+", 20);
-			player.orgasm();
-			player.sexReward("cum", "Vaginal");
-			if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
+			if (!recalling) {
+				flags[kFLAGS.DRIDERINCUBUS_FUCKED] = 1;
+				player.dynStats("cor+", 20);
+				player.sexReward("cum", "Vaginal");
+				if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
+			}
 			driderDefeatMenu();
 		}
 	
 		public function buttfuckDrider():void
 		{
 			clearOutput();
-			flags[kFLAGS.DRIDERINCUBUS_FUCKED] = 1;
+			if (!recalling) flags[kFLAGS.DRIDERINCUBUS_FUCKED] = 1;
 
 			outputText("You look the defeated drider over, contemplating what <i>\"reward\"</i> you intend to take from him. Your eyes trace over his semi-human form, a twisted cavalcade of humanity and pitch-black demonic corruption. Your hands trace over his curling, razor-edged horns, making the defeated spider-man recoil in... not fear, but something else. Anticipation, maybe?");
 			if ((monster as DriderIncubus).goblinFree) outputText(" You can see his turgid rod hanging between his legs jump at your touch, spurting a thick, viscous trickle of corrupted spunk across the marble floor.");
@@ -816,9 +804,10 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 
 			outputText("\n\nMoaning weakly, the spunk-bloated demon slumps forward. You withdraw from him with a wet <i>pop</i> the echoes throughout the court, silencing the demon host. You make eye contact with Lethice, holding her gaze as you gather your [armor]. Behind you, the drider is helpless but to moan and leak spooge from his well-fucked ass.");
 			if (player.cor >= 75) outputText(" You can't wait to see how the Demon Queen feels when she's skewered on your rod!");
-
-			player.dynStats("cor+", 20);
-			player.orgasm();
+			if (!recalling) {
+				player.dynStats("cor+", 20);
+				player.sexReward("Default", "Dick", true, false);
+			}
 			driderDefeatMenu();
 		}
 	}

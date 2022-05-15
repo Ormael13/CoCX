@@ -301,7 +301,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CampSparingNpcsTimers2:StatusEffectType			= mk("Camp Sparing Npc's Timers 2");//Kindra / Chi Chi / Ceani / Diana
 		public static const CampSparingNpcsTimers3:StatusEffectType			= mk("Camp Sparing Npc's Timers 3");//Luna / Galia / Dinah /?Cai'Lin?
 		public static const CampSparingNpcsTimers4:StatusEffectType			= mk("Camp Sparing Npc's Timers 4");//Ted / Aurora / Electra / x
-		public static const CampSparingNpcsTimers5:StatusEffectType			= mk("Camp Sparing Npc's Timers 5");//x / x / x / x
+		public static const CampSparingNpcsTimers5:StatusEffectType			= mk("Camp Sparing Npc's Timers 5");//Tyrantia / Lily / Belisa / x
 		public static const CampSparingNpcsTimers6:StatusEffectType			= mk("Camp Sparing Npc's Timers 6");//x / x / x / x
 		public static const ClaraCombatRounds:StatusEffectType              = mk("Clara Combat Rounds");
 		public static const ClaraFoughtInCamp:StatusEffectType              = mk("Clara Fought In Camp");
@@ -709,6 +709,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const PrisonRestraints:StatusEffectType        = mk("prisonRestraint");
 		public static const PrisonCaptorEllyScratch:StatusEffectType = mk("prisonCaptorEllyScatch");
 
+		public static const CalluOff:StatusEffectType            = mk("Callu Off");
 		public static const ChiChiOff:StatusEffectType           = mk("Chi Chi Off");
 		public static const DianaOff:StatusEffectType            = mk("Diana Off");
 		public static const DivaOff:StatusEffectType             = mk("Diva Off");
@@ -716,7 +717,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const EtnaOff:StatusEffectType             = mk("Etna Off");
 		public static const LunaOff:StatusEffectType             = mk("Luna Off");
 		public static const TedOff:StatusEffectType              = mk("Ted Off");
-		public static const SpoodersOff:StatusEffectType           = mk("Belisa Off");
+		public static const VenusOff:StatusEffectType            = mk("Venus Off");
+		public static const SpoodersOff:StatusEffectType         = mk("Belisa Off");
 		public static const ThereCouldBeOnlyOne:StatusEffectType = mk("There Could Be Only One");
 		public static const UmasMassage:StatusEffectType         = mk("Uma's Massage"); //v1 = bonus index; v2 = bonus value; v3 = remaining time
 		public static const Uniball:StatusEffectType             = mk("Uniball");

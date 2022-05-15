@@ -131,18 +131,31 @@ package classes.Scenes.NPCs
 		public function usingHailOfBlades1Soulskill():void {
 			outputText("placing her palms together, Diana's aura flares. soulforce leaks out around her, and she brings her palms out to her sides. Eyes focused on you, Diana forms six ethereal swords nearly six feet long, splaying out behind her like a fan of blades. She thrusts her hand outwards and in the blink of an eye, the etherial blades shoot towards you. ");
 			soulforce -= soulskillCostHailOfBlades1();
-			outputText("The blades cut deep, inflicting");
+			outputText("The blades cut deep, inflicting ");
 			var hob1:Number = 6;
 			while (hob1-->0) BladesD();
-			outputText(" damage!");
+			outputText("damage!");
 		}
 		private function BladesD():void {
 			var damage:Number = this.wis * 0.5;
 			damage += wisdomscalingbonus() * 0.5;
 			if (damage < 10) damage = 10;
 			damage *= SoulskillMod();
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			if (this.wis <= 200) critChance += this.wis / 10;
+			if (this.wis > 200) critChance += 20;
+			if (rand(100) < critChance) {
+				crit = true;
+				damage *= 1.75;
+			}
+			var bd2:Number = 0.9;
+			bd2 += (rand(21) * 0.01);
+			damage *= bd2;
 			damage = Math.round(damage);
 			player.takeMagicDamage(damage, true);
+			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+			outputText(" ");
 		}
 		
 		public function usingMagicBoltsBarrageSpell():void {

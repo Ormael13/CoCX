@@ -13,8 +13,9 @@ public class VampiricBloodstreamMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
-            var descS:String = "Your bloodstream has started to adapt to the presence of vampiric blood.";
+            var descS:String = "";
             var pTier:int = player.perkv1(IMutationsLib.VampiricBloodstreamIM);
+            if (pTier >= 1) descS += "Your bloodstream has started to adapt to the presence of vampiric blood";
             if (pTier >= 2){
                 descS += " Vampire Thirst stack now decays every 2 days.";
             }
@@ -79,11 +80,11 @@ public class VampiricBloodstreamMutation extends PerkType
         }
 
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            if (pTier >= 1) pBuffs['lib.mult'] += 0.05;
-            if (pTier >= 2) pBuffs['lib.mult'] += 0.1;
-            if (pTier >= 3) pBuffs['lib.mult'] += 0.15;
+            if (pTier == 1) pBuffs['lib.mult'] = 0.05;
+            if (pTier == 2) pBuffs['lib.mult'] = 0.15;
+            if (pTier == 3) pBuffs['lib.mult'] = 0.3;
             return pBuffs;
         }
 

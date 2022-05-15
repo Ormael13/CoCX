@@ -328,7 +328,7 @@ public class DungeonEngine extends DungeonAbstractContent {
         if (eastFunction != null) addButton(12, "East", navigateToRoom, eastFunction);
         if (player.lust >= 30) addButton(8, "Masturbate", SceneLib.masturbation.masturbateGo);
         else addButtonDisabled(8, "Masturbate", "Req. 30+ lust.");
-        addButton(13, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
+        addButton(13, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful, as this leaves you open to a counterattack when in combat.");
         addButton(14, "Map", map.displayMap).hint("View the map of this dungeon.");
         setTopButtons();
     }

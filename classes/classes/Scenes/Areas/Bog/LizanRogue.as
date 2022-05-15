@@ -4,6 +4,7 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.Skin;
+import classes.IMutations.*;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.LizanBlowpipeDebuff;
 import classes.internals.*;
@@ -120,11 +121,12 @@ public class LizanRogue extends Monster
 			this.createPerk(PerkLib.ResistanceI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Tactician, 0, 0, 0, 0);
 			this.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
-			this.createPerk(MutationsLib.LizanMarrow, 0, 0, 0, 0);
+			this.createPerk(IMutationsLib.LizanMarrowIM, 1, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.special1 = chooseBlowpipe;
 			this.special2 = wingstickThrow;
 			this.special3 = tongueAttack;
+			updateDynamicPerkBuffs(IMutationsLib.LizanMarrowIM,LizanMarrowMutation, this);
 			checkMonster();
 		}
 		

@@ -6,14 +6,11 @@ package classes.Scenes.Dungeons.BeeHive
 {
 import classes.*;
 import classes.GlobalFlags.*;
-import classes.internals.ChainedDrop;
 import classes.Scenes.SceneLib;
-import classes.Scenes.Dungeons.BeeHive;
+import classes.internals.ChainedDrop;
 import classes.Scenes.Areas.Forest.BeeGirl;
 
 	public class BeeGuards extends BeeGirl {
-		
-		public var beehive:BeeHive = new BeeHive();
 		
 		public function beeGuardsStinger():void {
 			outputText("One of the guards strikes through your defenses, trying to burrow her stinger in. ");
@@ -55,7 +52,7 @@ import classes.Scenes.Areas.Forest.BeeGirl;
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			beehive.room1LostToGuards();
+			SceneLib.dungeons.beehive.room1LostToGuards();
 		}
 		
 		public function BeeGuards() 

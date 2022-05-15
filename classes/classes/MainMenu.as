@@ -91,10 +91,10 @@ public class MainMenu extends BaseContent {
 		//Disclaimer
 		outputText("\n\n<b><u>DISCLAIMER</u></b>");
 		outputText("<li>There are many strange and odd fetishes contained in this flash.  Peruse at own risk.</li>");
-		outputText("<li>Please be 18 or the legal age to view porn before playing. If not, enable SFW Mode.</li>");
+		outputText("<li>Please be 18 or the legal age to view porn before playing.</li>");
 		outputText("<li>Try to keep your keyboard clean.  Think of the children!</li>");
 		//Other Info
-		outputText("\n<b>Fall of Eden</b> is worth a try too ^^");
+		//outputText("\n<b>Fall of Eden</b> is worth a try too ^^");	//Does it even have any progress?
 		if (debug)
 			outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>");
 		if (flags[kFLAGS.SHOW_SPRITES_FLAG])
@@ -126,8 +126,8 @@ public class MainMenu extends BaseContent {
 		outputText("\n\n<b>Edited by:</b> Ashi, SoS, Prisoner416, Zeikfried, et al"); //Edited By
 		outputText("\n\n<b>Created by:</b> Fenoxo\n"); //The Original Creator
 		//Github for Mod
-		outputText("\n<b>Modded Game Source Code:</b> <u><a href='https://github.com/Ormael7/Corruption-of-Champions'>https://github.com/Ormael7/Corruption-of-Champions</a></u>");
-		outputText("\n<b>Modded Game Bug Tracker:</b> <u><a href='https://github.com/Ormael7/Corruption-of-Champions/issues'>https://github.com/Ormael7/Corruption-of-Champions/issues</a></u>");
+		outputText("\n<b>Modded Game Source Code:</b> <u><a href='https://github.com/Ormael13/CoCX'>https://github.com/Ormael13/CoCX</a></u>");
+		outputText("\n<b>Modded Game Bug Tracker:</b> <u><a href='https://github.com/Ormael13/CoCX/issues'>https://github.com/Ormael13/CoCX/issues</a></u>");
 		//Github for Original
 		outputText("\n\n<b>Original Game Source Code:</b> <u><a href='https://github.com/OXOIndustries/Corruption-of-Champions'>https://github.com/OXOIndustries/Corruption-of-Champions</a></u>");
 	}

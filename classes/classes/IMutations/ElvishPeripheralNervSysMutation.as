@@ -16,11 +16,9 @@ public class ElvishPeripheralNervSysMutation extends PerkType
         override public function desc(params:PerkClass = null):String {
             var pTier:int = player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM);
             var perChg:int = 5 * pTier
-            var descS:String = "Your Elvish Peripheral NervSys is giving you +" + perChg +"% of max core Spe as phantom Spe and allows you to keep Elven Sense even without elf arms/legs";
+            var descS:String = "";
+            if (pTier >= 1) descS += "Your Elvish Peripheral NervSys is giving you +" + perChg +"% of max core Spe as phantom Spe and allows you to keep Elven Sense even without elf arms/legs";
             /*
-            if (pTier >= 1){
-                descS += "";
-            }
             if (pTier >= 2){
                 descS += ", ";
             }*/
@@ -54,8 +52,8 @@ public class ElvishPeripheralNervSysMutation extends PerkType
                 IMutationsLib.ElvishPeripheralNervSysIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.ElvishPeripheralNervSysIM.requirePeripheralNervSysMutationSlot()
-                            .requirePerk(PerkLib.ElvenSense)
-                            .requireCustomFunction(function (player:Player):Boolean {
+                    .requirePerk(PerkLib.ElvenSense)
+                    .requireCustomFunction(function (player:Player):Boolean {
                         return player.elfScore() >= 11 || player.isRace(Races.WOODELF);
                     }, "Elf race");
                 }
@@ -75,10 +73,11 @@ public class ElvishPeripheralNervSysMutation extends PerkType
         }
 
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            if (pTier >= 2) pBuffs['int.mult'] += 0.05;
-            if (pTier >= 3) pBuffs['int.mult'] += 0.05;            return pBuffs;
+            if (pTier == 2) pBuffs['spe.mult'] = 0.05;
+            if (pTier == 3) pBuffs['spe.mult'] = 0.1;
+            return pBuffs;
         }
 
         public function ElvishPeripheralNervSysMutation() {

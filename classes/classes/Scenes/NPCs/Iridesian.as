@@ -65,29 +65,26 @@ import classes.internals.*;
 			outputText("Letting soulforce leak out around him, oculicorn form eighteen ethereal two meter long weapons in two rows. Then he thrust his hand outwards and in the blink of an eye, weapons shoot forwards you. Weapons hits you, dealing ");
 			soulforce -= soulskillCostGrandioseHailofBlades();
 			createStatusEffect(StatusEffects.AbilityCooldown2, 3, 0, 0, 0);
-			var ghobI:Number = 18;
-			while (ghobI-->0) bladesD();
+			var ghobI:Number = 9;
+			while (ghobI-->0) bladesD(2);
 			outputText(" damage!");
 		}
 		public function castGrandioseHailOfMoonBladesSoulskillIridesian():void {
-			outputText("Letting soulforce leak out around him, oculicorn form fifty four ethereal two meter long weapons in four rows. Then he thrust his hand outwards and in the blink of an eye, weapons shoot forwards you. Weapons hits you, dealing ");
+			outputText("Letting soulforce leak out around him, oculicorn form fifty six ethereal two meter long weapons in four rows. Then he thrust his hand outwards and in the blink of an eye, weapons shoot forwards you. Weapons hits you, dealing ");
 			soulforce -= soulskillCostGrandioseHailofMoonBlades();
 			createStatusEffect(StatusEffects.AbilityCooldown3, 9, 0, 0, 0);
-			var ghombI:Number = 54;
-			while (ghombI-->0) bladesD();
+			var ghombI:Number = 19;
+			while (ghombI-->0) bladesD(4);
 			outputText(" damage!");
 		}
-		private function bladesD():void {
+		private function bladesD(hits:Number = 1):void {
 			var bd:Number = 0;
 			bd += this.wis * 0.5;
 			bd += wisdomscalingbonus() * 0.5;
 			if (bd < 10) bd = 10;
 			bd *= SoulskillMod();
 			var crit:Boolean = false;
-			var critChance:int = 5;
-			if (this.wis <= 200) critChance += this.wis / 10;
-			if (this.wis > 200) critChance += 20;
-			if (rand(100) < critChance) {
+			if (rand(100) < 25) {
 				crit = true;
 				bd *= 1.75;
 			}
@@ -98,6 +95,22 @@ import classes.internals.*;
 			bd = player.takeMagicDamage(bd, true);
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 			outputText(" ");
+			if (hits == 2) {
+				bd = player.takeMagicDamage(bd, true);
+				if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+				outputText(" ");
+			}
+			if (hits == 4) {
+				bd = player.takeMagicDamage(bd, true);
+				if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+				outputText(" ");
+				bd = player.takeMagicDamage(bd, true);
+				if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+				outputText(" ");
+				bd = player.takeMagicDamage(bd, true);
+				if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+				outputText(" ");
+			}
 		}
 		
 		public function castEnergyProjectionIridesian():void {

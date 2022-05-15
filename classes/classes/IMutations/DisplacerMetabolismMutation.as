@@ -53,7 +53,7 @@ public class DisplacerMetabolismMutation extends PerkType
                 IMutationsLib.DisplacerMetabolismIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.DisplacerMetabolismIM.requireMetabolismMutationSlot()
-                            .requireCustomFunction(function (player:Player):Boolean {
+                    .requireCustomFunction(function (player:Player):Boolean {
                         return player.isRace(Races.DISPLACERBEAST);
                     }, "Displacer beast");
                 }
@@ -73,7 +73,7 @@ public class DisplacerMetabolismMutation extends PerkType
         }
 
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
             return pBuffs;
         }

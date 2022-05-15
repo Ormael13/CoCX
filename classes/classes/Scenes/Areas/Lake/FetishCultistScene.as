@@ -510,10 +510,10 @@ public class FetishCultistScene extends AbstractLakeContent
 		public function cultistDefeated():void{
 			if (monster.HP < 1) outputText("Hurt too much to continue controlling her powers, the cultist collapses helplessly.");
 			else outputText("Overwhelmed by her lusts, the cultist loses the ability to control herself and collapses.");
-			if (player.lust >= 33 && player.gender > 0) {
+			if (player.lust >= 33) {
 				outputText("\n\nDo you want to take advantage of her vulnerable state to sate your lusts?");
 				menu();
-				addButton(0, "Yes", playerRapesCultist);
+				addButtonIfTrue(0, "Yes", playerRapesCultist, "Not genderless!", player.gender > 0);
 				addButtonIfTrue(2, "B.Feed", fetishCultistHasAMilkFetish,"Req. 'Feeder' perk",
 					player.hasStatusEffect(StatusEffects.Feeder),"Empty your heavy jugs.");
 				addButtonIfTrue(3, "Mindbreak", mindbreakFemaleCultist, "You don't know how and why... yet?", Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB, "Toy with the cultist's brain.");
@@ -521,7 +521,7 @@ public class FetishCultistScene extends AbstractLakeContent
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else {
-				outputText("\n\nYou can't think of anything to do with her.");
+				outputText("\n\nYou're not aroused enough to rape her.");
 				cleanupAfterCombat();
 			}
 		}
@@ -648,6 +648,7 @@ public class FetishCultistScene extends AbstractLakeContent
 					outputText("Filled with new determination, you push your [cock] into her love hole and start to rape her roughly.  Despite the tears, she starts moaning, clearly enjoying the rough treatment.  A little while into the rape, she starts to move against you, almost lovingly.  It is quite clear that she has a lot of experience, but is giving you free rein to do whatever you want.   Feeling in complete control, you decide that this game isn't too bad.  Before long you reach your orgasm, and you blow your load deep inside her.");
 					outputText("\n\nYou get dressed and notice that the cultist is still lying on the ground with her farm hand outfit torn from her, with a look of utter bliss on her face.  Satisfied, you continue on your way.");
 					player.sexReward("vaginalFluids","Dick");
+					cleanupAfterCombat();
 				}
 				function vagF():void {
 					outputText("Telling her that she is going to please you whether she wants to or not, you reveal your " + vaginaDescript(0) + ".  Pushing your " + clitDescript() + " to her mouth, you order her to lick you if she wants you to leave her mother alone.  ");
@@ -656,6 +657,7 @@ public class FetishCultistScene extends AbstractLakeContent
 					outputText("With new determination, you yell at her to lick harder, and to push in as much as she can, or her mother will die.  This time when she starts licking you, she does it almost lovingly.  It is quite clear that she has a lot of experience and, regardless of her words, she obviously wants this.  Feeling in complete control, you think that this game isn't too bad.  Under her expert flicks, you quickly reach a climax.  You pull her head back and tell her that now she has to clean you up.  You specify that she can't just lick this time, she has to drink your excretions.\n\n");
 					outputText("A few minutes later, you close your [armor] back up, and look back at the cultist.  She is lying on the ground in her farm hand outfit with a look of utter bliss on her face.  Satisfied, you continue on your way.");
 					player.sexReward("saliva","Vaginal");
+					cleanupAfterCombat();
 				}
 			}
 		}

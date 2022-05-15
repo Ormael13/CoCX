@@ -606,7 +606,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				doNext(bookMenu);
 			}
 			else {
-				outputText("The crazy merchant nods satisfied when you hand him over a one hundred twenty five gems and in exchange gives you a red manuscript.");
+				outputText("The crazy merchant nods satisfied when you hand him over a one hundred twenty five gems and in exchange gives you a Crimson Jade.");
 				player.gems -= 125;
 				statScreenRefresh();
 				inventory.takeItem(consumables.CRIMS_J, bookMenu);

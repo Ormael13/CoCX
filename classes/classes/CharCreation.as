@@ -1563,7 +1563,7 @@ import coc.view.MainView;
 			hideUpDown();
 			dynStats("lus", 40, "cor", 2);
 			model.time.hours = 18;
-			outputText("You wake with a splitting headache and a body full of burning desire.  A shadow darkens your view momentarily and your training kicks in.  You roll to the side across the bare ground and leap to your feet.  A surprised looking imp stands a few feet away, holding an empty vial.  He's completely naked, an improbably sized pulsing red cock hanging between his spindly legs.  You flush with desire as a wave of lust washes over you, your mind reeling as you fight ");
+			outputText("You wake with a splitting headache and a body full of burning desire.  A shadow darkens your view momentarily and your training kicks in.  You roll to the side across the bare ground and leap to your feet.  A surprised-looking imp stands a few feet away, holding an empty vial.  He's completely naked, an improbably sized pulsing red cock hanging between his spindly legs.  You flush with desire as a wave of lust washes over you, your mind reeling as you fight ");
 			if (player.gender == Gender.GENDER_FEMALE)
 				outputText("the urge to chase down his rod and impale yourself on it.\n\n");
 			else
@@ -2544,7 +2544,7 @@ import coc.view.MainView;
 
 			else {
 				clearOutput();
-				outputText("You not have any Descendant perk to change into Bloodline perk.");
+				outputText("You not have any Descendant perks to change into Bloodline perks.");
 			}
 			doNext(ascensionMenu);
 		}

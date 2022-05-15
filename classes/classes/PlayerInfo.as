@@ -3,6 +3,7 @@ package classes {
 import classes.BodyParts.Face;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Scenes.NPCs.BelisaFollower;
@@ -598,6 +599,13 @@ public class PlayerInfo extends BaseContent {
 		
 		if (BelisaFollower.BelisaEncounternum > 0) {
 			interpersonStats += "<b>Belisa Affection:</b> " + BelisaFollower.BelisaAffectionMeter + "%\n";
+			if (flags[kFLAGS.BELISA_LVL_UP] == 6) interpersonStats += "<b>Belisa lvl:</b> 56 (current max lvl)\n";
+			if (flags[kFLAGS.BELISA_LVL_UP] == 5) interpersonStats += "<b>Belisa lvl:</b> 50\n";
+			if (flags[kFLAGS.BELISA_LVL_UP] == 4) interpersonStats += "<b>Belisa lvl:</b> 44\n";
+			if (flags[kFLAGS.BELISA_LVL_UP] == 3) interpersonStats += "<b>Belisa lvl:</b> 38\n";
+			if (flags[kFLAGS.BELISA_LVL_UP] == 2) interpersonStats += "<b>Belisa lvl:</b> 32\n";
+			if (flags[kFLAGS.BELISA_LVL_UP] == 1) interpersonStats += "<b>Belisa lvl:</b> 26\n";
+			if (flags[kFLAGS.BELISA_LVL_UP] < 1) interpersonStats += "<b>Belisa lvl:</b> 20\n";
 		}
 
 		if (SceneLib.bazaar.benoit.benoitAffection() > 0)
@@ -821,6 +829,8 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.LILY_LVL_UP] > 0) {
 			interpersonStats += "<b>Lily Affection:</b> " + LilyFollower.LilyAffectionMeter + "%\n";
 			interpersonStats += "<b>Lily Submissiveness:</b> " + LilyFollower.LilySubmissivenessMeter + "%\n";
+			if (flags[kFLAGS.LILY_LVL_UP] == 7) interpersonStats += "<b>Lily lvl:</b> 58\n";
+			if (flags[kFLAGS.LILY_LVL_UP] == 6) interpersonStats += "<b>Lily lvl:</b> 52\n";
 			if (flags[kFLAGS.LILY_LVL_UP] == 5) interpersonStats += "<b>Lily lvl:</b> 46\n";
 			if (flags[kFLAGS.LILY_LVL_UP] == 4) interpersonStats += "<b>Lily lvl:</b> 40\n";
 			if (flags[kFLAGS.LILY_LVL_UP] == 3) interpersonStats += "<b>Lily lvl:</b> 34\n";
@@ -1876,8 +1886,10 @@ public class PlayerInfo extends BaseContent {
 		var temp:Array = [];
 		var compMutate:Array = MutationsLib.mutationsArray("", true);
 		var compMutate2:Array = MutationsLib.mutationsArray("Deprecated");
+		var compMutate3:Array = IMutationsLib.mutationsArray("", true);
+		var compMutate4:Array = IMutationsLib.mutationsArray("Deprecated");
 		for each (var playerPerk:PerkType in perks){
-			if (!(compMutate.indexOf(playerPerk) >= 0) && !(compMutate2.indexOf(playerPerk) >= 0)){
+			if (!(compMutate.indexOf(playerPerk) >= 0) && !(compMutate2.indexOf(playerPerk) >= 0) && !(compMutate3.indexOf(playerPerk) >= 0) && !(compMutate4.indexOf(playerPerk) >= 0)){
 				temp.push(playerPerk);
 			}
 		}
@@ -2266,4 +2278,4 @@ public class PlayerInfo extends BaseContent {
 		doNext(curry(superPerkBuyMenu, 3));
 	}
 }
-}
+}

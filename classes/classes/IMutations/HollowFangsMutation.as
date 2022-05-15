@@ -50,13 +50,13 @@ public class HollowFangsMutation extends PerkType
                 IMutationsLib.HollowFangsIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.HollowFangsIM.requireMouthMutationSlot()
-                            .requirePerk(IMutationsLib.VampiricBloodstreamIM)
-                            .requireCustomFunction(function (player:Player):Boolean {
-                                return player.facePart.type == 34;//player.facePart.isAny(Face.VAMPIRE, Face.)
-                            }, "Vampire fangs")
-                            .requireCustomFunction(function (player:Player):Boolean {
-                                return player.vampireScore() >= 10;//potem dodać mosquito race i ew. inne co mogą wypijać krew
-                            }, "Vampire race");
+                    .requirePerk(IMutationsLib.VampiricBloodstreamIM)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.facePart.type == 34;//player.facePart.isAny(Face.VAMPIRE, Face.)
+                    }, "Vampire fangs")
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.vampireScore() >= 10;//potem dodać mosquito race i ew. inne co mogą wypijać krew
+                    }, "Vampire race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -74,11 +74,11 @@ public class HollowFangsMutation extends PerkType
         }
 
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            if (pTier >= 1) pBuffs['tou.mult'] += 0.05;
-            if (pTier >= 2) pBuffs['tou.mult'] += 0.1;
-            if (pTier >= 3) pBuffs['tou.mult'] += 0.15;
+            if (pTier == 1) pBuffs['tou.mult'] = 0.05;
+            if (pTier == 2) pBuffs['tou.mult'] = 0.15;
+            if (pTier == 3) pBuffs['tou.mult'] = 0.3;
             return pBuffs;
         }
 

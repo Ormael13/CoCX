@@ -2,6 +2,7 @@ package classes {
 import classes.BodyParts.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
@@ -1219,17 +1220,17 @@ public class PlayerAppearance extends BaseContent {
 		//Mantis
 		if (player.mantisScore() >= 12) {
 			outputText("\n<font color=\"#0000a0\">Mantis-morph: " + player.mantisScore() + " (-40% to Str racial multi, +60% to Tou racial multi, +");
-			if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) {
+			if (player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 3) {
 				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("185");
 				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("170");
 				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("155");
 				else outputText("140");
-			} else if (player.hasPerk(MutationsLib.MantislikeAgilityPrimitive)) {
+			} else if (player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 2) {
 				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("170");
 				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("160");
 				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("150");
 				else outputText("140");
-			} else if (player.hasPerk(MutationsLib.MantislikeAgility)) {
+			} else if (player.perkv1(IMutationsLib.MantislikeAgilityIM) >= 1) {
 				if (player.hasCoatOfType(Skin.CHITIN) && player.hasPerk(PerkLib.ThickSkin)) outputText("155");
 				else if ((player.skinType == Skin.SCALES && player.hasPerk(PerkLib.ThickSkin)) || player.hasCoatOfType(Skin.CHITIN)) outputText("150");
 				else if (player.skinType == Skin.SCALES || player.hasPerk(PerkLib.ThickSkin)) outputText("145");
@@ -1326,7 +1327,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("\nScorpion-morph: " + player.scorpionScore());
 		//Scylla
 		var scyllakrakengland:Number = 0;
-		if (player.hasPerk(MutationsLib.ScyllaInkGlands)) scyllakrakengland += 10;
+		if (player.perkv1(IMutationsLib.ScyllaInkGlandsIM) >= 1) scyllakrakengland += 10;
 		if (player.scyllaScore() >= 12 && player.isKraken()) {
 			if (player.scyllaScore() >= 17) outputText("\n<font color=\"#0000a0\">Elder Kraken: " + player.scyllaScore() + " (+"+(195+scyllakrakengland)+"% to Str racial multi, +60% to Tou racial multi, +60% to Int racial multi, +15 min sens, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 			else outputText("\n<font color=\"#0000a0\">Kraken: " + player.scyllaScore() + " (+"+(180+scyllakrakengland)+"% to Str racial multi, +60% to Int racial multi, +15 min sens, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");

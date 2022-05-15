@@ -6,8 +6,6 @@ import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.PregnancyStore;
-import classes.Scenes.SceneLib;
-import classes.StatusEffects;
 import classes.Scenes.Dungeons.Factory.IncubusMechanic;
 import classes.Scenes.SceneLib;
 
@@ -210,7 +208,7 @@ doNext(SceneLib.d3.exitD3);
 		
 		public function beatDaMechanic(hpVictory:Boolean):void
 		{
-			flags[kFLAGS.D3_MECHANIC_LAST_GREET] = MECHANIC_FOUGHT;
+			if (!recalling) flags[kFLAGS.D3_MECHANIC_LAST_GREET] = MECHANIC_FOUGHT;
 
 			clearOutput();
 			outputText("The mechanic collapses, his overalls");
@@ -221,21 +219,23 @@ doNext(SceneLib.d3.exitD3);
 			menu();
 			addButton(0, "Kill", killMechanic);
 			addButton(1, "Let Go", letMechanicGo, hpVictory);
-			if (player.hasCock()) addButton(2, "Buttfuck", buttfuckTheMechanic, hpVictory);
-			if (player.hasVagina()) addButton(3, "Ride Cock", rideMechanicsCock);
+			addButtonIfTrue(2, "Buttfuck", curry(buttfuckTheMechanic, hpVictory), "Req. a cock with area smaller than 200", player.cockThatFits(200) >= 0);
+			addButtonIfTrue(3, "Ride Cock", rideMechanicsCock, "Req. a vagina", player.hasVagina());
 		}
 
 		private function killMechanic():void
 		{
-			flags[kFLAGS.D3_MECHANIC_FIGHT_RESULT] = MECHANIC_KILLED;
+			if (!recalling) flags[kFLAGS.D3_MECHANIC_FIGHT_RESULT] = MECHANIC_KILLED;
 			clearOutput();
 			outputText("He proves blessedly easy to kill, and you roll the body off the cliffs to avoid alerting any of Lethice's other ilk.");
-            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+
+			if (!recalling) cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			else camp.recallWakeUp();
         }
 
 		private function letMechanicGo(hpVictory:Boolean):void
 		{
-			flags[kFLAGS.D3_MECHANIC_FIGHT_RESULT] = MECHANIC_RELEASED;
+			if (!recalling) flags[kFLAGS.D3_MECHANIC_FIGHT_RESULT] = MECHANIC_RELEASED;
 			clearOutput();
 			outputText("Feeling merciful, you point off the side of the cliff. <i>\"Leave this place and never return. If you do, I might have to kill you. I'd rather not shed any more blood than necessary, but I will do what I have to in order to cleanse this land. Leave and never return. Maybe you can find your own peace without driving everything around you to corruption.\"</i>");
 
@@ -246,15 +246,14 @@ doNext(SceneLib.d3.exitD3);
 	
 			outputText("\n\nThe incubus mechanic flies away for good, though you can’t can say whether he will wreak havoc or live quietly.");
 
-cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			if (!recalling) cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			else camp.recallWakeUp();
         }
 		
 		private function buttfuckTheMechanic(hpVictory:Boolean):void
 		{
-			flags[kFLAGS.D3_MECHANIC_FIGHT_RESULT] = MECHANIC_FUCKED;
-
 			var x:int = player.cockThatFits(200);
-			if (x == -1) x = 0;
+			if (!recalling) flags[kFLAGS.D3_MECHANIC_FIGHT_RESULT] = MECHANIC_FUCKED;
 
 			clearOutput();
 			outputText("\n\nThe incubus may have done his best to seduce you with his");
@@ -281,13 +280,13 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 
 			outputText("\n\nThe incubus's now-slickened pucker quivers, and that's all the opening you need. Your " + player.cockHead(x) + " slips in during a moment of looseness. In that second, you turn his crinkly rosebud into a smoothly stretched o-ring. The incubus moans, though whether in pleasure or pain, you cannot tell. You slap his ass and feel him clamp down on you with renewed vigor, briefly arresting your progress, but he can't squeeze that hard all the time. His asshole relaxes after a few seconds and lets another inch in.");
 			
-			outputText("\n\n\"<i>Just relax and let it happen,</i>\" you instruct as you slowly squeeze another inch inside him. The incubus' insides are just so... so tight around your length and so warm compared to the outside air. You lean down over him, listening to him grunt, enjoying the feel of his entrance slowly slackening as he obeys. A huge blob of pre or cum (you can't be sure which) splatters into the growing puddle below him as your " + player.cockHead(x) + " inexpertly milks his prostate. The incubus shakes from head to toe, and you feed yourself in to the halfway point.");
+			outputText("\n\n\"<i>Just relax and let it happen,</i>\" you instruct as you slowly squeeze another inch inside him. The incubus' insides are just so... so tight around your length and so warm compared to the outside air. You lean down over him, listening to him grunt, enjoying the feel of his entrance slowly slackening as he obeys. A huge blob of pre or cum (you can't be sure, which) splatters into the growing puddle below him as your " + player.cockHead(x) + " inexpertly milks his prostate. The incubus shakes from head to toe, and you feed yourself in to the halfway point.");
 
 			outputText("\n\nYou enjoy the muscular tightness of the demon's tainted anus for a moment, but he has ideas of his own. An inch of cock vanishes inside him, pulled inside by contractions a human could never manage. Gods, it feels good, and he's just getting started. He's pulling you inside him like some kind of sucking vacuum, drawing the entirety of your length inside him in seconds. You gasp, barely having the presence of mind to paddle his rosy asscheeks for his disobedience, but that only encourages him. Muscular ripples roll around your " + cockDescript(x) + " in a way that conjures up the image of the inside of a tornado - a suckling, insatiable vortex that's twisting and stroking until it pulls everything inside it.");
 
 			outputText("\n\nThe demon has the audacity to smile back over his shoulder at you. \"<i>You didn't honestly think I wouldn't find the pleasure in a little buttlove, did you?</i>\" He smirks and squeezes you so expertly that you feel ready to explode.");
 
-			outputText("\n\nNo! He's not going to win, even if him 'winning' is just making you cum into his asshole. You put your hands on his near-bruised bottom and pull away, struggling with all your might to extract your " + cockDescript(x) + " from his hungry asshole. It's slow going, and tremendously pleasurable, but you manage to extract yourself with a noisy 'schliiiiiiiiick' that never seems to end. When you finally pop your " + player.cockHead(x) + " out, you adjust your positioning and thrust with all your might, slapping your [hips] into his curvy backside with enough force to audibly slap. You hear the echo of your dominance rebound off the walls of Lethice's fortress, washing over her prone lieutenant.");
+			outputText("\n\nNo! He's not going to win, even if him 'winning' is just making you cum into his asshole. You put your hands on his near-bruised bottom and pull away, struggling with all your might to extract your " + cockDescript(x) + " from his hungry asshole. It's slow-going, and tremendously pleasurable, but you manage to extract yourself with a noisy 'schliiiiiiiiick' that never seems to end. When you finally pop your " + player.cockHead(x) + " out, you adjust your positioning and thrust with all your might, slapping your [hips] into his curvy backside with enough force to audibly slap. You hear the echo of your dominance rebound off the walls of Lethice's fortress, washing over her prone lieutenant.");
 
 			outputText("\n\nYou can actually feel your " + player.cockHead(x) + " nearly mashing his prostate flat as it grinds past. Shuddering, the incubus loses his focus, and his butthole slackens. You don't give him a chance for a second wind, bouncing back off and immediately starting your next thrust. Your hold is firm, and your strokes sure. His ass bounces beautifully with each prick-hilting slam against it. Down below, the demon's nubby phallus is bobbing back and forth like a pendulum, practically pissing out streams of pre-cum each time you bottom out. He's getting awful close, and all he can do is gasp and drool.");
 
@@ -338,11 +337,12 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			outputText("The incubus slumps down into the puddled semen, gasping in exhaustion.");
 
 			outputText("\n\nYou wipe your " + cockDescript(x) + " off on his practically glowing bottom before turning to re-dress. When you turn back, he's gone, though a trail of white drops indicates the direction of his flight. It looks like he fled towards the cliff, perhaps growing wings. Oh well, that's one less obstacle between you and Lethice.");
-
-			player.orgasm();
-			dynStats("cor+", 5);
-
-			cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			if (!recalling) {
+				player.sexReward("Default", "Dick", true, false);
+				dynStats("cor+", 5);
+				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			}
+			else doNext(camp.recallWakeUp);
         }
 		
 		private const MECHANIC_DEMON_COCK:int = 0;
@@ -351,7 +351,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 		
 		private function rideMechanicsCock():void
 		{
-			flags[kFLAGS.D3_MECHANIC_FIGHT_RESULT] = MECHANIC_FUCKED_YOU;
+			if (!recalling) flags[kFLAGS.D3_MECHANIC_FIGHT_RESULT] = MECHANIC_FUCKED_YOU;
 
 			clearOutput();
 			outputText("Well, he does have quite the thick, throbbing piece of male genitalia on display for you.... There's no sense in letting a good cock go to waste, right? You stalk over to him, looming over the defeated demon with a predatory grin. Your tongue flicks out to lick your lips. Meanwhile, your lower ones go suddenly and irrevocably slick, excited and instantly ready for a helping of thick demon-cock. Your [vagina] is getting warmer and warmer as you tease the poor demon, leaving him to wonder if you're going to kill him or fuck him. The worry is as obvious on his face as the upraised tumescence that jabs spear-like out from his crotch, aimed straight at you.");
@@ -382,7 +382,8 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 		
 		private function rideMechanicsCockII(cType:int):void
 		{
-			flags[kFLAGS.D3_MECHANIC_COCK_TYPE_SELECTION] = cType;
+			if (!recalling) flags[kFLAGS.D3_MECHANIC_COCK_TYPE_SELECTION] = cType;
+			else monster = new IncubusMechanic(); //to allow cock changes
 
 			clearOutput();
 
@@ -410,7 +411,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			{
 				outputText("Giving the incubus's sweaty tool an affectionate squeeze, you decide, \"<i>Grow a dog-cock. Let's see if I can take the knot, shall we, pet?</i>\"");
 				outputText("\n\nA little breathlessly, the incubus responds, \"<i>Your wish is my command. How fitting that the former predator take on such a wolf-like aspect.</i>\" He closes his eyes to focus, and his dick lurches so hard that it wrenches itself out of your grip. Before you can snatch it up again, it begins to shrink, withdrawing back into itself; the only evidence of its former size is a growing bundle of folded skin at its base. It's almost like some of his length is being converted into the swelling, canine-looking sheath, not stopping until his tip vanishes into the recessed entrance.");
-				outputText("\n\nYou frown at him, looking over your shoulder so that he can see your displeasure writ large across your face. He doesn't. His eyes are closed and he's grunting with effort, obviously concentrating hard on something. You look back down to his crotch and immediately notice a welcome change. His small, wolf-like sheath has practically tripled in size. It dominates his crotch, covered in a thin layer of gray fur that extends down to cover his sack, now stretched by nuts that look to have grown half again their original size.");
+				outputText("\n\nYou frown at him, looking over your shoulder so that he can see your displeasure writ large across your face. He doesn't. His eyes are closed, and he's grunting with effort, obviously concentrating hard on something. You look back down to his crotch and immediately notice a welcome change. His small, wolf-like sheath has practically tripled in size. It dominates his crotch, covered in a thin layer of gray fur that extends down to cover his sack, now stretched by nuts that look to have grown half again their original size.");
 				outputText("\n\nSmiling, you reach down to the fuzzy bulge and rub it. You move your hand in slow, circular motions around the canine cock-cozy, teasing it while slowly murmuring, \"<i>Good puppy... come out and play, pet....</i>\" Your encouraging coos and gentle strokes soon have the incubus whining like a naughty puppy, and the crimson tip of his wolfish phallus emerges from hiding. It's bright red and covered with so many veins! You cradle the exposed portion, feeling it jump out into your hand. The more dick that slides out, the thicker it gets. It stops once you have ten inches of thick, throbbing dock-cock in your grip, pulsing and ready. It seems like more is trying to come out, but it just can't make it.");
 				outputText("\n\nYou give your pet an encouraging tug, grinning as a huge knot slips out and stretches the sheath on the way. Your demonic slut-puppy moans happily, leaking ropes of pre onto his belly as his immense dog-cock points skyward, ready to be used.");
 
@@ -465,7 +466,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 				tightFit = true;
 				outputText(" and feel the immensely girthy boner butt up against your lips, too wide to slip even the tiniest bit inside. Grunting in frustration, you grind against him, slicking his head further and applying more force. You push harder and harder, actually bending his rigid shaft slightly from the force. He groans in pain and pleasure. Suddenly, your voice joins his. His " + monster.cockHead() + " finally powers through your sopping gates and into your tunnel, stretching it painfully wide as it goes. The intensity of the combined pain and pleasure shocks you so badly that you nearly faint, and your [legs] go limp, forcing your body to slide down the belly-stretching meat-pole. You quiver and cry, sobbing words that sometimes sound like no and sometimes sound like yes, filled with more cock than you ever hoped to handle.");
 			}
-			player.cuntChange(monster.cockArea(0), false, false, false);
+			if (!recalling) player.cuntChange(monster.cockArea(0), false, false, false);
 			
 			//Merge together
 			outputText("\n\nYou hold yourself atop him and let your abdominal muscles flutter around the incubus' "+monster.cockDescriptShort()+" like an organic sextoy, getting used to holding him inside you. Turning to look back over your shoulders, you place a hand upon his chest feel his well-defined muscles. You stop to admire his nipple, tugging at it a little bit. He growls in irritation, but you just squeeze his dick with your");
@@ -473,7 +474,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			else outputText(" stuffed");
 			outputText(" twat to silence him.");
 
-			outputText("\n\n\"<i>Are all demons controlled this easily?</i>\" you muse out loud. \"<i>A few squeezes from a cunt and you're content to let me do whatever I want to you. I could probably slap a collar around your neck and take you back to camp without hearing a word of complaint. Perhaps 'please fuck me,' but I doubt I'd hear any legitimate desire to come back here.</i>\" You lift yourself up an inch and glide back down, teasing him. \"<i>Poor boy, they keep you so pent up, don't they?");
+			outputText("\n\n\"<i>Are all demons controlled this easily?</i>\" you muse out loud. \"<i>A few squeezes from a cunt and you're content to let me do whatever I want to you. I could probably slap a collar around your neck and take you back to camp without hearing a word of complaint. Perhaps 'please fuck me,' but I doubt I'd hear any legitimate desire to come back here.</i>\" You lift yourself up an inch and glide back down, teasing him. \"<i>Poor boy, they keep you so pent-up, don't they?");
 			if (flags[kFLAGS.FACTORY_INCUBUS_BRIBED] > 0) outputText(" Nothing but hentai mags for you to drain your balls with....");
 			outputText("</i>\"");
 
@@ -488,7 +489,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			else outputText(" You thumb at it, rubbing in slow circles around it. Sometimes you push on its hood. Other times you oh-so-gently squeeze at it. It feels so good that the touches drive you crazy with ecstasy, and your walls flutter excitedly around your demonic lover.");
 			outputText(" His only reaction is to gasp and groan, balls lurching in his sack.");
 
-			outputText("\n\n\"<i>Getting close?</i>\" you ask. The question could have easily been directed to you. It's getting hard to hold back, even if you want this perfect, cunt-filling fullness to remain with you forever. Tainted demon pre is running out with your juices in steady trickles as you climb the to the peak of orgasm together, your sweat-slicked bodies writhing against one each other. Your mask of composure slips, and moan like a whore, begging the incubus to nut inside you, to pump you full of his hot, creamy seed. You don't mind a little corruption, after all, but you'll always be the champion - just a champion who really likes getting her pussy fucked full of succulent demon-cum.");
+			outputText("\n\n\"<i>Getting close?</i>\" you ask. The question could have easily been directed to you. It's getting hard to hold back, even if you want this perfect, cunt-filling fullness to remain with you forever. Tainted demon pre is running out with your juices in steady trickles as you climb them to the peak of orgasm together, your sweat-slicked bodies writhing against one each other. Your mask of composure slips, and moan like a whore, begging the incubus to nut inside you, to pump you full of his hot, creamy seed. You don't mind a little corruption, after all, but you'll always be the champion - just a champion who really likes getting her pussy fucked full of succulent demon-cum.");
 
 			outputText("\n\nHis dick suddenly expands even more, stretching you tight");
 			if (cType == MECHANIC_HORZ_GOG) outputText(", the head flaring to seal itself against your cervix");
@@ -498,7 +499,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 				outputText(" Your empty womb drinks up the virile, seed-filled sludge with abandon.");
 				if (cType == MECHANIC_HORZ_GOG) outputText(" After all, that bestial horse-cock doesn't really leave it anywhere else to go. The demonic animal-cunt just continues spurting straight on in to have its way with your eggs, and you're sure there isn't a contraceptive this side of Mareth that could stop you from having his imps.");
 				else if (cType == MECHANIC_DOG_COCK) outputText(" After all, that immense knot doesn't really leave it anywhere else to go. Once every fold is bathed in alabaster doggie-cream, the continued ejaculations start pouring in after your eggs. His knot is so big and stretching you so wide; you don't think he would pop out even if he filled your belly to look nine months pregnant. Worse, or perhaps better, you're sure with how thick and virile his seed feels that you'll be getting pregnant with his imps from this.");
-				if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
+				if (!player.isGoblinoid() && !recalling) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			}
 			else {
 				outputText(" Your blocked womb deflects the seed, forcing it all to stay in your channel");
@@ -520,23 +521,22 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			outputText("\n\nHe's a demon. Maybe he'll actually find his way to your camp to be your fucktoy. More likely he was just saying whatever would save his hide and sharing his excessive perversions with you. You wouldn't mind him fucking you every morning, would you?");
 
 			outputText("\n\nShaking your head, you clear away the errant thoughts and focus on the battles to come.");
-			player.sexReward("cum","Vaginal");
-			player.orgasm();
-			dynStats("cor+", 5);
-
-cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			if (!recalling) {
+				player.sexReward("cum", "Vaginal");
+				dynStats("cor+", 5);
+				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			}
+			else doNext(camp.recallWakeUp);
         }
 		
 		public function mechanicFuckedYouUp(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.hasCock() && !player.hasVagina())
-			{
-				maleLossToMechanic(hpVictory);
-			}
-			else
-			{
-				errybodyelseLossToMechanic(hpVictory);
-			}
+			sceneHunter.selectLossMenu([
+					[0, "Gloryhole", maleLossToMechanic, "Req. a cock.", player.hasCock()],
+					[1, "Cumslut", errybodyelseLossToMechanic]
+				],
+				"It's over. You don't have a chance to survive here, in Lethice's stronghold... but how do you want it to be ended?\n\n"
+			);
 		}
 		
 		private function maleLossToMechanic(hpVictory:Boolean):void

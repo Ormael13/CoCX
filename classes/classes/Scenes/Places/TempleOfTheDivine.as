@@ -148,32 +148,24 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 			doNext(PlayerPrayAtTemple);
 		}
 
-		public function loosingMaraeBlessing():void {
-			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) {
+        //clears all blessings but the selected one
+		public function loseBlessing(newBlessing:String = ""):void {
+			if (newBlessing != "Marae" && player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) {
 				outputText("You chose to pray a different Deity losing the favor of the first to gain the bonus of the other.\n");
 				outputText("<b>You lost the Blessing of Divine Agency - Marae</b>\n");
 				player.removeStatusEffect(StatusEffects.BlessingOfDivineMarae);
 			}
-		}
-
-		public function loosingTaothBlessing():void {
-			if (player.statStore.hasBuff("TaothBlessing")) {
+			if (newBlessing != "Taoth" && player.statStore.hasBuff("TaothBlessing")) {
 				outputText("You chose to pray a different Deity losing the favor of the first to gain the bonus of the other.\n");
 				outputText("<b>You lost the Blessing of Divine Agency - Taoth</b>\n");
 				player.statStore.removeBuffs("TaothBlessing");
 			}
-		}
-
-		public function loosingFenrirBlessing():void {
-			if (player.statStore.hasBuff("FenrirBlessing")) {
+			if (newBlessing != "Fenrir" && player.statStore.hasBuff("FenrirBlessing")) {
 				outputText("You chose to pray a different Deity losing the favor of the first to gain the bonus of the other.\n");
 				outputText("<b>You lost the Blessing of Divine Agency - Fenrir</b>\n");
 				player.statStore.removeBuffs("FenrirBlessing");
 			}
-		}
-
-		public function loosingFeraBlessing():void {
-			if (player.hasStatusEffect(StatusEffects.BlessingOfDivineFera)) {
+			if (newBlessing != "Fera" && player.hasStatusEffect(StatusEffects.BlessingOfDivineFera)) {
 				outputText("You chose to pray a different Deity losing the favor of the first to gain the bonus of the other.\n");
 				outputText("<b>You lost the Blessing of Divine Agency - Fera</b>\n");
 				player.removeStatusEffect(StatusEffects.BlessingOfDivineFera);
@@ -183,9 +175,7 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 		public function PlayerPrayAtTempleMaraeAltair():void {
 			clearOutput();
 			outputText("You pray to Marae. As you speak your prayer, you feel the warmth of the goddess' serenity flow through you, her motherly love for this land swaddling you; healing your wounds and washing away corrupt thoughts. You also feel the blessing of the deity empowering your white magic.\n");
-			loosingTaothBlessing();
-			loosingFenrirBlessing();
-			loosingFeraBlessing();
+			loseBlessing("Marae");
 			outputText("<b>You gained the Blessing of Divine Agency - Marae for 7 days</b>");
 			var blessingPower:Number = 0;
 			blessingPower += 0.1;
@@ -206,9 +196,7 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 		public function PlayerPrayAtTempleTaothAltair():void {
 			clearOutput();
 			outputText("You pray to the trickster patron Taoth. As you word out your prayer, suggestions of pranks flow into your mind, both playful and troublemaking, as you feel the laughter of the god cheer you up, healing your wounds and washing away corrupt thoughts. You also feel the blessing of the deity empowering your agility.\n");
-			loosingMaraeBlessing();
-			loosingFenrirBlessing();
-			loosingFeraBlessing();
+			loseBlessing("Taoth");
 			outputText("<b>You gained the Blessing of Divine Agency - Taoth for 7 days</b>");
 			player.createStatusEffect(StatusEffects.BlessingOfDivineTaoth, 169, 0, 0, 0);
 			mainView.statsView.showStatUp('spe');
@@ -226,9 +214,7 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 		public function PlayerPrayAtTempleFenrirAltair():void {
 			clearOutput();
 			outputText("You pray to yourself. Truthfully, it's almost funny how you rebuilt your own altar just so you could be your own follower, but still, the altar functions as a catalyst for your power; and catalyze it, it does. As you word out your prayer, you feel the cold countenance of the magic of the god of winter filling you, healing your wounds and washing away corrupt thoughts. You also feel your boons empowering your might.\n");
-			loosingMaraeBlessing();
-			loosingTaothBlessing();
-			loosingFeraBlessing();
+			loseBlessing("Fenrir");
 			outputText("<b>You gained the Blessing of Divine Agency - Fenrir for 7 days</b>");
 			player.statStore.replaceBuffObject({
 				'str.mult': 0.1,
@@ -245,9 +231,7 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 		public function PlayerPrayAtTempleFeraAltair():void {
 			clearOutput();
 			outputText("You pray to the huntress patron Fera. As you word out your prayer, lewd fantasies of all kind flow into your mind. Fera delicious caress pleases you, healing your wounds and washing away your pure thoughts. You also feel the blessing of the deity empowering your \"talents\".\n");
-			loosingMaraeBlessing();
-			loosingTaothBlessing();
-			loosingFenrirBlessing();
+			loseBlessing("Fera");
 			outputText("<b>You gained the Blessing of Divine Agency - Fera for 7 days</b>");
 			player.createStatusEffect(StatusEffects.BlessingOfDivineFera, 169, 0, 0, 0);
 			if (player.HP < player.maxHP()) player.HP = player.maxHP();
@@ -478,13 +462,16 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 		public function templeBasement():void {
 			clearOutput();
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 2) {
-				outputText("You wander back into the Temple basement atelier.");
+				outputText("You wander back into the Temple basement atelier.\n\n");
+				outputText("There is a plinth, surrounded by what looks to be depictions of various gargoyles, of all materials and forms. You're pretty sure that using these as a refernce, you could craft a gargoyle statue of your own, albeit of raw stone.");
 				menu();
 				addButton(0, "Statue", playerBuilder.currentStateOfStatue).hint("Check on the statue.");
 				addButton(1, "Strange Book", playerBuilder.strangeBookOfGolems).hint("Examine the strange book.");
+                if (flags[kFLAGS.ONYX_PATH] < 1) addButtonIfTrue(2, "Spare Statue", onyx.makingNewGargoyle, "You can't do anything with it... unless you manage to find a filled soul gem somewhere?", player.hasKeyItem("Black Soul Gem") >= 0, "Check on the spare statue.");
+				addButton(4, "Back", templeMainMenu);
 			}
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 1) {
-				outputText("As you wander down into the basement of the temple, you find what looks like an old abandoned Altar. Down there is a plinth, surrounded by various depictions of what looks like gargoyles. One could follow their examples and create a gargoyle of their own.\n\n");
+				outputText("As you wander down into the basement of the temple you find what looks like an old abandoned Atelier. Down there is a plinth, surrounded by various depictions of what looks like gargoyles. One could follow their examples and create a gargoyle of their own.");
 				flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE]++;
 				menu();
 				addButton(0, "Begin", playerBuilder.chooseToWorkOnStoneStatue);

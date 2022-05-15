@@ -161,7 +161,7 @@ private function tamaniFemaleYes():void {
 	else outputText("Oh, and remember — Tamani owns all the cocks around here, so if you ever grow one, come pay your dues!</i>\"\n\n");
 	outputText("(<b>Deluxe Dildo acquired!</b>)");
 	player.createKeyItem("Deluxe Dildo",0,0,0,0);
-	outputText("\n\n<b>The scene unlocked in 'Recall' menu!</b>");
+	outputText("\n\n<b>New scene is unlocked in 'Recall' menu!</b>");
 	doNext(camp.returnToCampUseOneHour);
 }
 //[No]
@@ -242,7 +242,7 @@ public function tamaniFirstTimeConsentual():void {
 			if (player.cor > 66) outputText("  Your [cock " + x + "] twitches at the thought, ready and wanting more.");
 		}
 		if (!recalling) {
-			outputText("\n\n<b>The scene unlocked in 'Recall' menu!</b>");
+			outputText("\n\n<b>New scene is unlocked in 'Recall' menu!</b>");
 			player.sexReward("vaginalFluids", "Dick");
 			dynStats("lib", .5, "sen", -1, "cor", .5);
 			player.trainStat("lib", 2, 100);
