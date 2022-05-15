@@ -5159,7 +5159,8 @@ public class PerkLib
                     .requireLevel(12);
             //Tier 3 Intelligence perks
             Archmage.requirePerk(GrandMage)
-                    .requireInt(100).requireLevel(18);
+                    .requireInt(100)
+					.requireLevel(18);
             // Battleflash: auto-use Blink
             Battleflash.requireLevel(18)
                     .requirePerk(Battlemage)

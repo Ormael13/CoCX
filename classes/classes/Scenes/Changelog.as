@@ -284,7 +284,7 @@ package classes.Scenes
 			outputText("-New usable items: hundred of iron/moonstone/skymetal/ebonbloom arrowheads, moonstone (ore) and unicorn hair. Made by Konstantin after unlocking his Smelting option using matching material, ore can be mined at night in quarry located in mountains (req. lvl 2+ mining skill), hair is gained from any unicorn npc that is in camp (Celess, Diana). Whole pack cost 1 gem for each.\n");
 			outputText("-Mining at Quarry will now give exp to mining skill. Ores can be found starting from lvl 1 of that skill. Level of it would also affect in smaller or larger degree amount of mined stones/gems.\n");
 			outputText("-There is possible to veture outside camp at night now. Places have now daylight & night version. (currently only quarry is possible to visit now at night)\n");
-			outputText("-Revisiting Woodcutting area or Quarry area would start with slight different text (no you nto gonna feel agian like your PC stumbled on that area for the first time.... 1,234th first time :P\n");
+			outputText("-Revisiting Woodcutting area or Quarry area would start with slight different text (no you not gonna feel agian like your PC stumbled on that area for the first time.... 1,234th first time :P\n");
 			outputText("-Added new skill: Mining. It level cap is 2 at lvl 0 and 20 at lvl 18+. Leveled by mining in various places in Mareth and the higher level the better ores or more material can be gained. Ocassionaly even chance to mine precious items will be boosted by higher level of that skill.\n");
 			outputText("-Atlach Nacha bonuses changed to +230% to Str racial multi, +265% to Tou racial multi, +300% to Int racial multi, +300% to Lib racial multi, -60% to Wis racial multi, +90 to Sens. It can now also reach Greater Atlach Nacha at 30+ pts with following bonuses: +340% to Str racial multi, +400% to Tou racial multi, +425% to Int racial multi, +425% to Lib racial multi, -90% to Wis racial multi, +150 to Sens. ");
 			outputText("Now it would additionaly could adccess Venom Glands internal mutation in addition to Arachnid Book Lung & Tracheal System.\n");
@@ -294,20 +294,28 @@ package classes.Scenes
 			outputText("-Boss type enemies gained additional bonuses: Diehard effect of 7,5% of max HP + 2,250 HP * NG tier, OverMax HP effect of 15% magnitude.\n");
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-When finding Old Pickaxe at Quarry site PC would also get Tarnished Ore Bag (Lowest grade).\n");
+			outputText("-When having Tarnished Ore Bag (Lowest grade) and visiting Giacomo he can offer PC exchange to Ore Bag (Lowest grade) at (low) price of: 600 gems and current tarnished ore bag.\n");
+			outputText("-New key Item (by Ormael): Tarnished Ore Bag (Lowest grade) - Allow to store up to 5 pieces of: copper ore, tin ore, iron ore, bronze bar.\n");
+			outputText("-New key Item (by Ormael): Ore Bag (Lowest grade) - Allow to store up to 10 pieces of: copper ore, tin ore, iron ore, bronze bar, ebon ingot, moonstone.\n");
+			outputText("-When exploring swamp PC can meet drider girl chased by other driders. After fighting off enemy drider it's possible to find silken ball during exploring lake with Boat. As long option Never is chosen it's possible to interact with the person living inside that silken house. After that second interactions next meeting with drider girl that identify herself as Belisa can be triggered by exploring Lake area.\n");
+			outputText("-After rising high enough affection with Belisa new options opens up including shop with few nto found otherwise items or talk options. It even include short mini quest option that allow to open recrtutiment option for her.\n");
+			outputText("-When in camp Belisa have following interaction options: Appearance, Talk, Hang, Shop, Sex (req. special event to happen before it unlock), Holy Bands (allowing to equip or deequip bought Holy Bands with her help). During sex there is chance to impregnate her, which lead to her laying eggs that need few days to hatch.\n");
+			outputText("-New item (by Canadain Snas): Crimson Band - cost 1500 gems and PC can buy max 3 of them. Effect: +10% to damage reduction, -10% to max Mana.\n");
+			outputText("-New item (by Canadain Snas): Pink Band - cost 1500 gems and PC can buy max 3 of them. Effect: +10% to lust resistance, -10% to max Soulforce.\n");
+			outputText("-New item (by Canadain Snas): Yellow Band - cost 1500 gems and PC can buy max 3 of them. Effect: +10% to speed multi, -10% to max Soulforce.\n");
+			outputText("-New item (by Canadain Snas): Turquoise Band - cost 3000 gems and PC can buy only 1. Effect: First hit you take in combat does 0 damage and stuns enemy for 1 turn, -10% to max Soulforce.\n");
+			outputText("-New item (by Canadain Snas): Yellow Band - cost 4000 gems and PC can buy only 1. Effect: Reduces Corruption by 1/hour, halves damage from bleeding, fire, poison and other DoTs. Halves the duration of stuns and similar statuses to a minimum of 1 turn, -10% to max Mana.\n");
+			outputText("-New item (by Canadain Snas): Brown and Beige Band - cost 7000 gems and PC can buy only 1. Effect: +15% to str/spe multi, +15% to feral attacks damage, -10% to max Soulforce.\n");
+			outputText("-New item (by Canadain Snas): Royal Blue Band - cost 2000 gems and PC can buy max 2 of them. Effect: +5% to magic resistance, -10% to max Mana.\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -335,8 +343,6 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -407,11 +413,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -441,8 +443,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

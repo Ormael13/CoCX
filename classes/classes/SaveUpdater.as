@@ -1809,6 +1809,10 @@ public class SaveUpdater extends NPCAwareContent {
 					player.statStore.removeBuffs("Tribulation Vestiges");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.013;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.014) {
+				if (Crafting.BagSlot01Cap > 0) player.createKeyItem("Tarnished Ore Bag (Lowest grade)", 0, 0, 0, 0);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.014;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;

@@ -44,7 +44,7 @@ use namespace CoC;
 			damage = player.takeFireDamage(damage, true);
 			if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) {
 				if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
-				else player.createStatusEffect(StatusEffects.BurnDoT,3,0.05,0,0);
+				else player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(3),0.05,0,0);
 				outputText(" You’re on fire!!!");
 			}
 			outputText("\n\n");

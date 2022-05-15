@@ -29,14 +29,20 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 	public static var BelisaConfessed:Boolean;
 	public static var BelisaToldTyrantia:Boolean;
 	public static var BelisaInCamp:Boolean;
-	/*public static var HolyBand1:Number;
-	public static var HolyBand2:Number;*/
+	public static var HolyBand1:Number;
+	public static var HolyBand1Cap:Number;
+	public static var HolyBand2:Number;
+	public static var HolyBand2Cap:Number;
 	public static var HolyBand3:Number;
 	public static var HolyBand3Cap:Number;
-	/*public static var HolyBand4:Number;
+	public static var HolyBand4:Number;
+	public static var HolyBand4Cap:Number;
 	public static var HolyBand5:Number;
+	public static var HolyBand5Cap:Number;
 	public static var HolyBand6:Number;
-	public static var HolyBand7:Number;*/
+	public static var HolyBand6Cap:Number;
+	public static var HolyBand7:Number;
+	public static var HolyBand7Cap:Number;
 	
 	public function stateObjectName():String {
 		return "BelisaFollower";
@@ -55,14 +61,20 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		BelisaConfessed = false;
 		BelisaToldTyrantia = false;
 		BelisaInCamp = false;
-		/*HolyBand1 = 0;
-		HolyBand2 = 0;*/
+		HolyBand1 = 0;
+		HolyBand1Cap = 0;
+		HolyBand2 = 0;
+		HolyBand2Cap = 0;
 		HolyBand3 = 0;
 		HolyBand3Cap = 0;
-		/*HolyBand4 = 0;
+		HolyBand4 = 0;
+		HolyBand4Cap = 0;
 		HolyBand5 = 0;
+		HolyBand5Cap = 0;
 		HolyBand6 = 0;
-		HolyBand7 = 0;*/
+		HolyBand6Cap = 0;
+		HolyBand7 = 0;
+		HolyBand7Cap = 0;
 	}
 	
 	public function saveToObject():Object {
@@ -78,15 +90,21 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 			"BelisaQuestComp": BelisaQuestComp,
 			"BelisaConfessed": BelisaConfessed,
 			"BelisaToldTyrantia": BelisaToldTyrantia,
-			"BelisaInCamp": BelisaInCamp,/*
+			"BelisaInCamp": BelisaInCamp,
 			"HolyBand1": HolyBand1,
-			"HolyBand2": HolyBand2,*/
+			"HolyBand1Cap": HolyBand1Cap,
+			"HolyBand2": HolyBand2,
+			"HolyBand2Cap": HolyBand2Cap,
 			"HolyBand3": HolyBand3,
-			"HolyBand3Cap": HolyBand3Cap/*,
+			"HolyBand3Cap": HolyBand3Cap,
 			"HolyBand4": HolyBand4,
+			"HolyBand4Cap": HolyBand4Cap,
 			"HolyBand5": HolyBand5,
+			"HolyBand5Cap": HolyBand5Cap,
 			"HolyBand6": HolyBand6,
-			"HolyBand7": HolyBand7*/
+			"HolyBand6Cap": HolyBand6Cap,
+			"HolyBand7": HolyBand7,
+			"HolyBand7Cap": HolyBand7Cap
 		};
 	}
 	
@@ -103,15 +121,21 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 			BelisaQuestComp = o["BelisaQuestComp"];
 			BelisaConfessed = o["BelisaConfessed"];
 			BelisaToldTyrantia = o["BelisaToldTyrantia"];
-			BelisaInCamp = o["BelisaInCamp"];/*
+			BelisaInCamp = o["BelisaInCamp"];
 			HolyBand1 = valueOr(o["HolyBand1"], 0);
-			HolyBand2 = valueOr(o["HolyBand2"], 0);*/
+			HolyBand1Cap = valueOr(o["HolyBand1Cap"], 0);
+			HolyBand2 = valueOr(o["HolyBand2"], 0);
+			HolyBand2Cap = valueOr(o["HolyBand2Cap"], 0);
 			HolyBand3 = valueOr(o["HolyBand3"], 0);
-			HolyBand3Cap = valueOr(o["HolyBand3Cap"], 0);/*
+			HolyBand3Cap = valueOr(o["HolyBand3Cap"], 0);
 			HolyBand4 = valueOr(o["HolyBand4"], 0);
+			HolyBand4Cap = valueOr(o["HolyBand4Cap"], 0);
 			HolyBand5 = valueOr(o["HolyBand5"], 0);
+			HolyBand5Cap = valueOr(o["HolyBand5Cap"], 0);
 			HolyBand6 = valueOr(o["HolyBand6"], 0);
-			HolyBand7 = valueOr(o["HolyBand7"], 0);*/
+			HolyBand6Cap = valueOr(o["HolyBand6Cap"], 0);
+			HolyBand7 = valueOr(o["HolyBand7"], 0);
+			HolyBand7Cap = valueOr(o["HolyBand7Cap"], 0);
 		} else {
 			// loading from old save
 			resetState();
@@ -597,10 +621,22 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 			flags[kFLAGS.BELISA_LVL_UP] = 5;
 		}
 		if (flags[kFLAGS.BELISA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.BELISA_LVL_UP] == 5) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5), 0);
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9), 0);
 			flags[kFLAGS.BELISA_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.BELISA_LVL_UP] = 6;
+		}
+		if (flags[kFLAGS.BELISA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.BELISA_LVL_UP] == 6) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10), 0);
+			flags[kFLAGS.BELISA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.BELISA_LVL_UP] = 7;
+		}
+		if (flags[kFLAGS.BELISA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.BELISA_LVL_UP] == 7) {
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11), 0);
+			flags[kFLAGS.BELISA_DEFEATS_COUNTER] = 0;
+			flags[kFLAGS.BELISA_LVL_UP] = 8;
 		}
 	}
 	
@@ -685,24 +721,31 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		outputText("You ask the petite Drider about the holy energy you feel coming off of the leftmost box. <i>\"O-oh!\"</i> She seems happy you asked about that.\n\n");
 		outputText("<i>\"Those are bands, made from my silk, and imbued with holy magic! I made the enchantments myself, and I’ve been able to produce a few different effects!\"</i> She bobs up and down on her Drider legs, and her eyes sparkle with holy light. <i>\"I hope you like them!\"</i>\n\n");
 		menu();
-		//addButton(0, "Crimson", BuyCrimsonBand);
-		//addButton(1, "Pink",BuyPinkBand);
+		if (HolyBand1Cap > 2) addButtonDisabled(0, "Crimson", "You can wear at most 3 of them at once so it's pointless to buy another one.");
+		else addButton(0, "Crimson", BuyCrimsonBand).hint("Cost: 1,500 gems");
+		if (HolyBand2Cap > 2) addButtonDisabled(1, "Pink", "You can wear at most 3 of them at once so it's pointless to buy another one.");
+		else addButton(1, "Pink",BuyPinkBand).hint("Cost: 1,500 gems");
 		if (HolyBand3Cap > 2) addButtonDisabled(2, "Yellow", "You can wear at most 3 of them at once so it's pointless to buy another one.");
 		else addButton(2, "Yellow", BuyYellowBand).hint("Cost: 1,500 gems");
-		//addButton(3, "Turqouise", BuyTurquoiseBand);
-		//addButton(4, "Crossed", BuyCrossedBand);
-		//addButton(5, "R.Blue", BuyBlueBand);
+		if (HolyBand4Cap > 0) addButtonDisabled(3, "Turqouise", "You can wear only one so it's pointless to buy another one.");
+		else addButton(3, "Turqouise", BuyTurqouiseBand).hint("Cost: 3,000 gems");
+		if (HolyBand5Cap > 0) addButtonDisabled(4, "Crossed", "You can wear only one so it's pointless to buy another one.");
+		else addButton(4, "Crossed", BuyCrossedBand).hint("Cost: 4,000 gems");
+		if (HolyBand6Cap > 0) addButtonDisabled(5, "Brown&Beige", "You can wear only one so it's pointless to buy another one.");
+		else addButton(5, "Brown&Beige", BuyBrownAndBeigeBand).hint("Cost: 7,000 gems");
+		if (HolyBand7Cap > 1) addButtonDisabled(6, "R.Blue", "You can wear at most 2 of them at once so it's pointless to buy another one.");
+		else addButton(6, "R.Blue", BuyBlueBand).hint("Cost: 2,000 gems");
 		addButton(14, "Back", BelisaShop);
 	}
 	public function BuyCrimsonBand():void {
 		clearOutput();
 		outputText("<i>\"Oh, this one’s nice!\"</i> Belisa smiles, taking the band out and showing it to you. <i>\"It’s woven with a fortification enchantment. While you’re wearing it, you’ll take less damage from physical sources, like swords or bows...But it will reduce your mystical capacity when worn.\"</i>\n\n");
-		//HolyBand1
+		doYesNo(Utils.curry(belisaBuyBand,1,1500), BuyHolyBands);
 	}
 	public function BuyPinkBand():void {
 		clearOutput();
 		outputText("<i>\"You have a good eye, [name], this one’s my favorite. It protects you from dark magics a little, but its main purpose is reducing lust magic’s effects in particular. If you’re having issues with demon mages, this should be on the top of your shopping list!\"</i>\n\n");
-		//HolyBand2
+		doYesNo(Utils.curry(belisaBuyBand,2,1500), BuyHolyBands);
 	}
 	public function BuyYellowBand():void {
 		clearOutput();
@@ -712,12 +755,17 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 	public function BuyTurqouiseBand():void {
 		clearOutput();
 		outputText("<i>\"Oh, this little fella is great in a pinch!\"</i> Belisa slides it on, and almost immediately a bubble of energy forms around her. <i>\"The first hit you take, no matter what, is negated by this beauty...Only problem is that it's a hard magic to play around with, and forming two bubbles in the same space...It doesn’t end well.\"</i> She perks back up. <i>\"But wearing one of these babies can still be very useful!\"</i>\n\n");
-		//HolyBand4
+		doYesNo(Utils.curry(belisaBuyBand,4,3000), BuyHolyBands);
 	}
 	public function BuyCrossedBand():void {
 		clearOutput();
 		outputText("<i>\"This one is really useful if you find yourself against a tricky opponent.\"</i> Belisa smiles. <i>\"It’s a little bit of smart magic I cooked up. Once I attune it to you, it’ll be constantly working to nudge your body back towards an unimpeded state. Basically, it works as a stabilizer for your body and mind.\"</i>\n\n");
-		//HolyBand5
+		doYesNo(Utils.curry(belisaBuyBand,5,4000), BuyHolyBands);
+	}
+	public function BuyBrownAndBeigeBand():void {
+		clearOutput();
+		outputText("<i>\"Honestly, I have no idea what this one will do.\"</i> Belisa looks at the band, slightly apprehensively. <i>\"I was trying to mix an adrenaline enchantment with a strength enchant, but I used an alternative source of mana for the strength, and the result...Well...It’s this thing. It didn’t do anything when I tried it on, but...It felt animalistic, feral. If that’s your thing, it could show you what it does.\"</i>\n\n");
+		doYesNo(Utils.curry(belisaBuyBand,6,7000), BuyHolyBands);
 	}
 	public function BuyBlueBand():void {
 		clearOutput();
@@ -759,25 +807,25 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		clearOutput();
 		switch (type) {
 			case 1:
-				//HolyBand1 += 1;
+				HolyBand1Cap += 1;
 				break;
 			case 2:
-				//HolyBand2 += 1;
+				HolyBand2Cap += 1;
 				break;
 			case 3:
 				HolyBand3Cap += 1;
 				break;
 			case 4:
-				//HolyBand4 += 1;
+				HolyBand4Cap += 1;
 				break;
 			case 5:
-				//HolyBand5 += 1;
+				HolyBand5Cap += 1;
 				break;
 			case 6:
-				//HolyBand6 += 1;
+				HolyBand6Cap += 1;
 				break;
 			case 7:
-				//HolyBand7 += 1;
+				HolyBand7Cap += 1;
 				break;
 			default:
 				outputText("You have encounterd a BUG and i not mean drider-bug but just... BUG. Report to Ormale/Aimozg this (not at all drider) BUG.");
@@ -788,10 +836,66 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 	}
 	private function BelisaHolyBandsManagment():void {
 		menu();
+		if (HolyBand1 < 3 && HolyBand1Cap > 0 && HolyBand1 < HolyBand1Cap) addButton(0, "Crimson", BelisaHolyBandsManagmentCrimsonAdd).hint("Put on one Crimson Holy Band.");
+		if (HolyBand1 > 0) addButton(1, "Crimson", BelisaHolyBandsManagmentCrimsonRemove).hint("Take off one Crimson Holy Band.");
+		if (HolyBand2 < 3 && HolyBand2Cap > 0 && HolyBand2 < HolyBand2Cap) addButton(2, "Pink", BelisaHolyBandsManagmentPinkAdd).hint("Put on one Pink Holy Band.");
+		if (HolyBand2 > 0) addButton(3, "Pink", BelisaHolyBandsManagmentPinkRemove).hint("Take off one Pink Holy Band.");
 		if (HolyBand3 < 3 && HolyBand3Cap > 0 && HolyBand3 < HolyBand3Cap) addButton(5, "Yellow", BelisaHolyBandsManagmentYellowAdd).hint("Put on one Yellow Holy Band.");
 		if (HolyBand3 > 0) addButton(6, "Yellow", BelisaHolyBandsManagmentYellowRemove).hint("Take off one Yellow Holy Band.");
+		if (HolyBand4 == 0 && HolyBand4Cap == 0) addButton(7, "Turqouise", BelisaHolyBandsManagmentTurqouiseAdd).hint("Put on Turqouise Holy Band.");
+		if (HolyBand4 > 0) addButton(8, "Turqouise", BelisaHolyBandsManagmentTurqouiseRemove).hint("Take off Turqouise Holy Band.");
+		if (HolyBand5 == 0 && HolyBand5Cap == 0) addButton(10, "Crossed", BelisaHolyBandsManagmentCrossedAdd).hint("Put on Crossed Holy Band.");
+		if (HolyBand5 > 0) addButton(11, "Crossed", BelisaHolyBandsManagmentCrossedRemove).hint("Take off Crossed Holy Band.");
+		if (HolyBand6 == 0 && HolyBand6Cap == 0) addButton(12, "Royal Blue", BelisaHolyBandsManagmentBrownAndBeigeAdd).hint("Put on Brown and Beige Holy Band.");
+		if (HolyBand6 > 0) addButton(13, "Royal Blue", BelisaHolyBandsManagmentBrownAndBeigeRemove).hint("Take off Brown and Beige Holy Band.");
+		if (HolyBand7 < 2 && HolyBand7Cap > 0 && HolyBand7 < HolyBand7Cap) addButton(4, "Royal Blue", BelisaHolyBandsManagmentRoyalBlueAdd).hint("Put on one Royal Blue Holy Band.");
+		if (HolyBand7 > 0) addButton(9, "Royal Blue", BelisaHolyBandsManagmentRoyalBlueRemove).hint("Take off one Royal Blue Holy Band.");
 		if (BelisaInCamp) addButton(14, "Back", BelisaMainCampMenu);
 		else addButton(14, "Nevermind", Encounterback);
+	}
+	private function BelisaHolyBandsManagmentCrimsonAdd():void {
+		if (HolyBand1 == 0) {
+			HolyBand1 += 1;
+			player.statStore.addBuffObject({"maxmana_mult":-0.1}, "Crimson Holy Band", {text:"Crimson Holy Band"});
+		}
+		else {
+			HolyBand1 += 1;
+			player.statStore.replaceBuffObject({'maxmana_mult': (-0.1 * HolyBand1)}, 'Crimson Holy Band', {text: 'Crimson Holy Band'});
+		}
+		doNext(BelisaHolyBandsManagment);
+	}
+	private function BelisaHolyBandsManagmentCrimsonRemove():void {
+		if (HolyBand1 == 1) {
+			HolyBand1 -= 1;
+			player.statStore.removeBuffs('Crimson Holy Band');
+		}
+		else {
+			HolyBand1 -= 1;
+			player.statStore.replaceBuffObject({'maxmana_mult': (-0.1 * HolyBand1)}, 'Crimson Holy Band', { text: 'Crimson Holy Band' });
+		}
+		doNext(BelisaHolyBandsManagment);
+	}
+	private function BelisaHolyBandsManagmentPinkAdd():void {
+		if (HolyBand2 == 0) {
+			HolyBand2 += 1;
+			player.statStore.addBuffObject({"maxsf_mult":-0.1}, "Pink Holy Band", {text:"Pink Holy Band"});
+		}
+		else {
+			HolyBand2 += 1;
+			player.statStore.replaceBuffObject({'maxsf_mult': (-0.1 * HolyBand2)}, 'Pink Holy Band', {text: 'Pink Holy Band'});
+		}
+		doNext(BelisaHolyBandsManagment);
+	}
+	private function BelisaHolyBandsManagmentPinkRemove():void {
+		if (HolyBand2 == 1) {
+			HolyBand2 -= 1;
+			player.statStore.removeBuffs('Pink Holy Band');
+		}
+		else {
+			HolyBand2 -= 1;
+			player.statStore.replaceBuffObject({'maxsf_mult': (-0.1 * HolyBand2)}, 'Pink Holy Band', { text: 'Pink Holy Band' });
+		}
+		doNext(BelisaHolyBandsManagment);
 	}
 	private function BelisaHolyBandsManagmentYellowAdd():void {
 		if (HolyBand3 == 0) {
@@ -812,6 +916,58 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		else {
 			HolyBand3 -= 1;
 			player.statStore.replaceBuffObject({'spe.mult':(0.1 * HolyBand3), 'maxsf_mult': (-0.1 * HolyBand3)}, 'Yellow Holy Band', { text: 'Yellow Holy Band' });
+		}
+		doNext(BelisaHolyBandsManagment);
+	}
+	private function BelisaHolyBandsManagmentTurqouiseAdd():void {
+		HolyBand4 += 1;
+		player.statStore.addBuffObject({"maxsf_mult":-0.1}, "Turqouise Holy Band", {text:"Turqouise Holy Band"});
+		doNext(BelisaHolyBandsManagment);
+	}
+	private function BelisaHolyBandsManagmentTurqouiseRemove():void {
+		HolyBand4 -= 1;
+		player.statStore.removeBuffs('Turqouise Holy Band');
+		doNext(BelisaHolyBandsManagment);
+	}
+	private function BelisaHolyBandsManagmentCrossedAdd():void {
+		HolyBand5 += 1;
+		player.statStore.addBuffObject({"maxmana_mult":-0.1}, "Crossed Holy Band", {text:"Crossed Holy Band"});
+		doNext(BelisaHolyBandsManagment);
+	}
+	private function BelisaHolyBandsManagmentCrossedRemove():void {
+		HolyBand5 -= 1;
+		player.statStore.removeBuffs('Crossed Holy Band');
+		doNext(BelisaHolyBandsManagment);
+	}
+	private function BelisaHolyBandsManagmentBrownAndBeigeAdd():void {
+		HolyBand6 += 1;
+		player.statStore.addBuffObject({"str.mult":0.15,"spe.mult":0.15,"maxsf_mult":-0.1}, "Brown and Beige Holy Band", {text:"Brown and Beige Holy Band"});
+		doNext(BelisaHolyBandsManagment);
+	}
+	private function BelisaHolyBandsManagmentBrownAndBeigeRemove():void {
+		HolyBand6 -= 1;
+		player.statStore.removeBuffs('Brown and Beige Holy Band');
+		doNext(BelisaHolyBandsManagment);
+	}
+	private function BelisaHolyBandsManagmentRoyalBlueAdd():void {
+		if (HolyBand7 == 0) {
+			HolyBand7 += 1;
+			player.statStore.addBuffObject({"maxmana_mult":-0.1}, "Royal Blue Holy Band", {text:"Royal Blue Holy Band"});
+		}
+		else {
+			HolyBand7 += 1;
+			player.statStore.replaceBuffObject({'maxmana_mult': (-0.1 * HolyBand7)}, 'Royal Blue Holy Band', {text: 'Royal Blue Holy Band'});
+		}
+		doNext(BelisaHolyBandsManagment);
+	}
+	private function BelisaHolyBandsManagmentRoyalBlueRemove():void {
+		if (HolyBand7 == 1) {
+			HolyBand7 -= 1;
+			player.statStore.removeBuffs('Royal Blue Holy Band');
+		}
+		else {
+			HolyBand7 -= 1;
+			player.statStore.replaceBuffObject({'maxmana_mult': (-0.1 * HolyBand7)}, 'Royal Blue Holy Band', { text: 'Royal Blue Holy Band' });
 		}
 		doNext(BelisaHolyBandsManagment);
 	}
