@@ -308,7 +308,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CampSparingNpcsTimers2:StatusEffectType			= mk("Camp Sparing Npc's Timers 2");//Kindra / Chi Chi / Ceani / Diana
 		public static const CampSparingNpcsTimers3:StatusEffectType			= mk("Camp Sparing Npc's Timers 3");//Luna / Galia / Dinah /?Cai'Lin?
 		public static const CampSparingNpcsTimers4:StatusEffectType			= mk("Camp Sparing Npc's Timers 4");//Ted / Aurora / Electra / x
-		public static const CampSparingNpcsTimers5:StatusEffectType			= mk("Camp Sparing Npc's Timers 5");//x / x / x / x
+		public static const CampSparingNpcsTimers5:StatusEffectType			= mk("Camp Sparing Npc's Timers 5");//Tyrantia / Lily / Belisa / x
 		public static const CampSparingNpcsTimers6:StatusEffectType			= mk("Camp Sparing Npc's Timers 6");//x / x / x / x
 		public static const ClaraCombatRounds:StatusEffectType              = mk("Clara Combat Rounds");
 		public static const ClaraFoughtInCamp:StatusEffectType              = mk("Clara Fought In Camp");
