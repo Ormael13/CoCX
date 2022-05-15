@@ -54,10 +54,10 @@ public class SeaDragonRace extends Race{
 				.chimericalBodyPerks1([
 					MutationsLib.WhaleFat
 				])
-				.chimericalBodyPerks1([
+				.chimericalBodyPerks2([
 					MutationsLib.WhaleFatPrimitive
 				])
-				.chimericalBodyPerks1([
+				.chimericalBodyPerks3([
 					MutationsLib.WhaleFatEvolved
 				]);
 		

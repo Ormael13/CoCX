@@ -351,6 +351,19 @@ public class BodyData {
 		return data[SLOT_HEIGHT];
 	}
 	
+	public static const SLOT_FEMININITY:int = _slotid++;
+	EnumValue.add(Slots,SLOT_FEMININITY, "FEMININITY", {
+		name: "femininity",
+		nameFn: function (value:Number):String {
+			if (value > 55) return ""+value+" (femininie)"
+			if (value > 45) return ""+value+" (androgynous)";
+			return ""+value+" (masculine)"
+		}
+	});
+	public function get femininity():int {
+		return data[SLOT_FEMININITY];
+	}
+	
 	public static const SLOT_TONE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_TONE, "TONE", {
 		name: "muscle tone",
@@ -475,6 +488,7 @@ public class BodyData {
 		
 		data[SLOT_GENDER]              = player.gender;
 		data[SLOT_HEIGHT]              = player.tallness;
+		data[SLOT_FEMININITY]          = player.femininity;
 		data[SLOT_TONE]                = player.tone;
 		data[SLOT_THICKNESS]           = player.thickness;
 		data[SLOT_BIGGEST_COCK_LENGTH] = player.biggestCockLength();

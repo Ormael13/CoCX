@@ -609,12 +609,12 @@ public class MutationsLib
 					return (Tail.hasDraconicTail(player) || LowerBody.hasDraconicLegs(player) && LowerBody.hasTail(player));
 				}, "Dragon race or its variants tail")
 				.requireCustomFunction(function (player:Player):Boolean {
-					return (player.isRace(Races.DRAGON) || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10 || player.isRace(Races.SEA_DRAGON));
+					return (player.isRace(Races.DRAGON) || player.jabberwockyScore() >= 10 || player.isRace(Races.FROSTWYRM) || player.isRace(Races.SEA_DRAGON));
 				}, "Dragon race or its variants");
 				DraconicHeart.requireHeartMutationSlot()
 				.requirePerk(DraconicBones)
 				.requireCustomFunction(function (player:Player):Boolean {
-					return (player.isRace(Races.DRAGON) || player.frostWyrmScore() >= 10 || player.isRace(Races.SEA_DRAGON));
+					return (player.isRace(Races.DRAGON) || player.isRace(Races.FROSTWYRM) || player.isRace(Races.SEA_DRAGON));
 				}, "Dragon race or its variants");
 				DraconicLungs.requireLungsMutationSlot()
 				.requirePerks(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath)
@@ -624,7 +624,7 @@ public class MutationsLib
 				DrakeLungs.requireLungsMutationSlot()
 				.requireAnyPerk(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath, PerkLib.DragonWaterBreath)
 				.requireCustomFunction(function (player:Player):Boolean {
-					return (player.frostWyrmScore() >= 10 || player.jabberwockyScore() >= 10 || player.vouivreScore() >= 11 || player.isRace(Races.SEA_DRAGON));
+					return (player.isRace(Races.FROSTWYRM) || player.jabberwockyScore() >= 10 || player.vouivreScore() >= 11 || player.isRace(Races.SEA_DRAGON));
 				}, "Variants of the dragon race");
 				EasterBunnyEggBag.requireBallsMutationSlot().requirePerk(PerkLib.EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
 					return player.easterbunnyScore() >= 12;
@@ -636,7 +636,7 @@ public class MutationsLib
 					return player.elfScore() >= 11 || player.isRace(Races.WOODELF);
 				}, "Elf race");
 				FeyArcaneBloodstream.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.fairyScore() >= 23;
+					return player.isRace(Races.FAIRY);
 				}, "Fairy race");
 				FloralOvaries.requireOvariesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.alrauneScore() >= 13;
@@ -651,7 +651,7 @@ public class MutationsLib
 					return player.rearBody.type == RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 2;
 				}, "2+ eyestalks")
 				.requireCustomFunction(function (player:Player):Boolean {
-					return player.gazerScore() >= 7;
+					return player.isRace(Races.GAZER);
 				}, "Gazer race");
 				GorgonsEyes.requireEyesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.eyes.type == 4;
@@ -675,7 +675,7 @@ public class MutationsLib
 					return player.harpyScore() >= 8 || player.sirenScore() >= 10 || player.thunderbirdScore() >= 12 || player.phoenixScore() >= 10 || player.couatlScore() >= 11;
 				}, "Harpy winged race");
 				HeartOfTheStorm.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.raijuScore() >= 10 || player.thunderbirdScore() >= 12 || player.kamaitachiScore() >= 14 || player.couatlScore() >= 11;
+					return player.raijuScore() >= 10 || player.thunderbirdScore() >= 12 || player.isRace(Races.KAMAITACHI) || player.couatlScore() >= 11;
 				}, "Stormborn race");
 				HollowFangs.requireMouthMutationSlot().requirePerk(VampiricBloodsteam)
 				.requireCustomFunction(function (player:Player):Boolean {

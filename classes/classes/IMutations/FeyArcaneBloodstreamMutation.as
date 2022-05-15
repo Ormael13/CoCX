@@ -7,6 +7,7 @@ package classes.IMutations
     import classes.PerkClass;
     import classes.PerkType;
 import classes.Player;
+import classes.Races;
 
 public class FeyArcaneBloodstreamMutation extends PerkType
     {
@@ -51,7 +52,7 @@ public class FeyArcaneBloodstreamMutation extends PerkType
                 if (pTier == 0){
                     IMutationsLib.FeyArcaneBloodstreamIM.requireBloodsteamMutationSlot()
                             .requireCustomFunction(function (player:Player):Boolean {
-                        return player.fairyScore() >= 23;
+                        return player.isRace(Races.FAIRY);
                     }, "Fairy race");
                 }
                 else{

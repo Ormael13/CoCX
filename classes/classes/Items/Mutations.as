@@ -15191,7 +15191,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (player.frostWyrmScore() >= 10 && changes < changeLimit && !player.hasPerk(PerkLib.DragonIceBreath)) {
+        if (player.isRace(Races.FROSTWYRM) && changes < changeLimit && !player.hasPerk(PerkLib.DragonIceBreath)) {
             outputText("[pg]You feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
             outputText("[pg]It seems the fafnir tear has awaked some kind of power within you... your throat and chest feel very cold, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon ice breath!</b>)");
             player.createPerk(PerkLib.DragonIceBreath, 0, 0, 0, 0);
@@ -15199,7 +15199,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //BREEDING TIME
-        if (player.frostWyrmScore() >= 10 && rand(3) == 0 && player.gender > 0) {
+        if (player.isRace(Races.FROSTWYRM) && rand(3) == 0 && player.gender > 0) {
             outputText("[pg]A sudden swell of lust races through your ");
             if (player.hasCock()) {
                 outputText(cockDescript(0));

@@ -1547,12 +1547,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.FreezingBreathYeti, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if ((player.melkieScore() >= 8 || player.frostWyrmScore() >= 10) && !player.hasPerk(PerkLib.ColdAffinity)) {
+			if ((player.melkieScore() >= 8 || player.isRace(Races.FROSTWYRM)) && !player.hasPerk(PerkLib.ColdAffinity)) {
 				outputText("\nYou suddenly no longer feel the cold so you guess you finally got acclimated to the icy winds of the glacial rift. You feel at one with the cold. So well that you actually developed icy power of your own.\n\n(<b>Gained Perks: Cold Affinity</b>)\n");
 				player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (player.yetiScore() < 6 && player.yukiOnnaScore() < 14 && player.melkieScore() < 8 && player.frostWyrmScore() < 10 && !player.hasPerk(MutationsLib.WhaleFat) && player.hasPerk(PerkLib.ColdAffinity)) {
+			else if (player.yetiScore() < 6 && player.yukiOnnaScore() < 14 && player.melkieScore() < 8 && !player.isRace(Races.FROSTWYRM) && !player.hasPerk(MutationsLib.WhaleFat) && player.hasPerk(PerkLib.ColdAffinity)) {
 				outputText("\nYou suddenly feel a chill in the air. You guess you somehow no longer resist the cold.\n\n<b>(Lost Perks: Cold Affinity");
 				player.removePerk(PerkLib.ColdAffinity);
 				if (player.hasPerk(PerkLib.FreezingBreathYeti)){
@@ -1638,7 +1638,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.CursedWound);
 				needNext = true;
 			}
-			if (player.kamaitachiScore() >=10 && !player.hasPerk(PerkLib.NaturalHerbalism)){
+			if (player.isRace(Races.KAMAITACHI) && !player.hasPerk(PerkLib.NaturalHerbalism)){
 				outputText("\nGreat knowledges flows throught you mind as you become more Kamaitachi like. " +
 						"It dawns on you that you have aquired a natural affinity for medicine and herbalism, " +
 						"something your species is famous for, heck you can identify every single plant near your camp by name and species now. " +
@@ -1646,7 +1646,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.NaturalHerbalism, 0,0,0,0);
 				needNext = true;
 			}
-			if (player.kamaitachiScore() <10 && player.hasPerk(PerkLib.NaturalHerbalism)){
+			if (!player.isRace(Races.KAMAITACHI) && player.hasPerk(PerkLib.NaturalHerbalism)){
 				outputText("\nNo longer a Kamaitachi, you seem to have lost your knack for herbs and medicines. <b>Lost Perks: Natural Herbalism</b>)\n");
 				player.removePerk(PerkLib.NaturalHerbalism);
 				needNext = true;
@@ -1852,12 +1852,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Titanic Strength
-			if ((player.hydraScore() >= 14 || player.oniScore() >= 12 || player.orcaScore() >= 17 || player.scyllaScore() >= 12 || player.frostWyrmScore() >= 10 || player.isRace(Races.CYCLOP) || player.isRace(Races.SEA_DRAGON)) && player.tallness >= 80 && !player.hasPerk(PerkLib.TitanicStrength)) {
+			if ((player.hydraScore() >= 14 || player.oniScore() >= 12 || player.orcaScore() >= 17 || player.scyllaScore() >= 12 || player.isRace(Races.FROSTWYRM) || player.isRace(Races.CYCLOP) || player.isRace(Races.SEA_DRAGON)) && player.tallness >= 80 && !player.hasPerk(PerkLib.TitanicStrength)) {
 				outputText("\nWhoa, you've grown so big its a sheer miracle you don't damage the landscape while moving. That said, your size now contributes to your strength as well.\n\n<b>(Gained Titanic Strength perk!)</b>\n");
 				player.createPerk(PerkLib.TitanicStrength, 0, 0, 0, 0);
 				needNext = true;
 			}
-				if (((player.hydraScore() < 14 && player.oniScore() < 12 && player.orcaScore() < 17 && player.scyllaScore() < 12 && player.frostWyrmScore() < 10 && !player.isRace(Races.CYCLOP) && !player.isRace(Races.SEA_DRAGON)) || player.tallness < 80) && player.hasPerk(PerkLib.TitanicStrength)) {
+				if (((player.hydraScore() < 14 && player.oniScore() < 12 && player.orcaScore() < 17 && player.scyllaScore() < 12 && !player.isRace(Races.FROSTWYRM) && !player.isRace(Races.CYCLOP) && !player.isRace(Races.SEA_DRAGON)) || player.tallness < 80) && player.hasPerk(PerkLib.TitanicStrength)) {
 				if (player.tallness < 80) outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
 				else outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
 				player.removePerk(PerkLib.TitanicStrength);

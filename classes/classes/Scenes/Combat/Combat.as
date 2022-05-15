@@ -5644,7 +5644,7 @@ public class Combat extends BaseContent {
             }
         }
         //Unique attack Kamaitachi Three way Cut
-        if (player.kamaitachiScore() >= 12 && player.arms.type == Arms.KAMAITACHI){
+        if (player.isRace(Races.KAMAITACHI) && player.arms.type == Arms.KAMAITACHI){
             outputText("You strike at blinding speed, seeming to divide yourself into multiple copies, and slash with your scythes again. You cut once, twice, then finish it with a double scythe strike for a three-hit combo. \n");
             ExtraNaturalWeaponAttack(1, "KamaitachiScythe");
             if (player.hasABiteAttack()) {

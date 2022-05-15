@@ -31,6 +31,10 @@ public class RaceScoreBuilder {
 	public function noAntennae(score:int):RaceScoreBuilder {
 		return antennaeType(Antennae.NONE, score);
 	}
+	public function biggestCockLength(length:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_BIGGEST_COCK_LENGTH, length, score, failScore, customName);
+		return this;
+	}
 	public function biggestTitSize(size:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_BIGGEST_TIT_SIZE, size, score, failScore, customName);
 		return this;
@@ -245,6 +249,10 @@ public class RaceScoreBuilder {
 				failScore,
 				customName
 				)
+		return this;
+	}
+	public function femininity(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_FEMININITY, value, score, failScore, customName);
 		return this;
 	}
 	public function breastRowCount(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
