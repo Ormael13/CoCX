@@ -259,7 +259,7 @@ public class Soulforce extends BaseContent
 		menuItems.push("TyrantPF", (TyrantiaFollower.TyrantiaFollowerStage == 5 && TyrantiaFollower.TyraniaCorrupteedLegendaries == 0)? FairyTest5: false, "Patching Tyrantia corrupted legendaries unlock");
 		menuItems.push("LilyPregF", (DriderTown.LilyKidsPCPregnancy != 0 && LilyFollower.LilyFollowerState)? FairyTest3: false, "Curing Lily Infertility ^^");
 		//menuItems.push("Mutationstest2", mutations2, "MutationsTest2");
-		menuItems.push("Mutation test reset", resetMutations, "Reset Mutations");
+		//menuItems.push("Mutation test reset", resetMutations, "Reset Mutations");
 		menuGen(menuItems, page, accessSoulforceMenu);
 	}
 
