@@ -424,7 +424,7 @@ public class EventParser {
                 ]
             ];
 
-            var sEgg:ItemType = null;
+            var sEgg:ItemType;
 
             if (player.hasStatusEffect(StatusEffects.Eggs)) {
                 var size:int = player.statusEffectv2(StatusEffects.Eggs);
@@ -647,7 +647,7 @@ public class EventParser {
 
     public static function cheatTime(time:Number, needNext:Boolean = false):void {
         //Advance minutes
-        var minutesToPass:Number = (time -= Math.floor(time)) * 60;
+        var minutesToPass:Number = (time - Math.floor(time)) * 60;
         minutesToPass = Math.round(minutesToPass);
         CoC.instance.model.time.minutes += minutesToPass;
         if (CoC.instance.model.time.minutes > 59) {
@@ -800,7 +800,7 @@ public class EventParser {
     }
 
     public static function set doCamp(value:Function):void {
-        if(_campSet){throw new Error("Multiple Docamp Inits");return;}
+        if(_campSet){throw new Error("Multiple Docamp Inits");}
         _doCamp = value;
         _campSet = true;
     }
