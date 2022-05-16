@@ -30,6 +30,7 @@ public class HydraScene extends BaseContent {
             addButton(3, "Fight", startCombat, new Hydra(), true);
         }
         else {
+            sceneHunter.print("Check failed: Naga lower body.");
             outputText("She hisses in perfect coordination with the snakes, her slitted eyes fixating you obsessively, as a drooling gaping slit at the junction between the snakes and her human body tells you exactly what she wants from you. You don't feel you should indulge her however and as such ready to battle.\n\n");
             startCombat(new Hydra(), true);
         }
