@@ -1521,6 +1521,10 @@ public class Creature extends Utils
 			return this._perks.getPerkValue(ptype, 4);
 		}
 
+		public function hasMutation(mutate:IMutationPerkType):Boolean{
+			return perkv1(mutate) > 0;
+		}
+
 
 		/*
 
