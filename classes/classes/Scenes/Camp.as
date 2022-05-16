@@ -4,6 +4,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Items.Consumables.SimpleConsumable;
 import classes.Scenes.Places.Mindbreaker;
@@ -1068,6 +1069,10 @@ public class Camp extends NPCAwareContent{
 		}
 		if (flags[kFLAGS.MOD_SAVE_VERSION] < CoC.instance.modSaveVersion) {
 			saveUpdater.promptSaveUpdate();
+			return;
+		}
+		if (!player.hasPerk(IMutationsLib.MutationsTemplateIM)){
+			CoC.instance.charCreation.setupMutations();
 			return;
 		}
 		//Massive Balls Bad End (Realistic Mode only)

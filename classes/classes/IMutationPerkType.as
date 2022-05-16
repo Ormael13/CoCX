@@ -35,7 +35,7 @@ public class IMutationPerkType extends PerkType
 			return _pBuffs;
 		}
 
-		public function acquireMutation(target:* = null, nextFunc:* = null, pTier:int = 1):void{
+		public function acquireMutation(target:*, nextFunc:*, pTier:int = 1):void{
 			var mutations:IMutationPerkType = this;
 			//trace(mutations.name() + "<--------ACQUIREMUTATIONS RESULT");
 
@@ -92,20 +92,17 @@ public class IMutationPerkType extends PerkType
 				target = player;
 			}
 			var stname:String = "mutation_" + this.id;
-			var pBuff:Object = this.pBuffs;
+			var pBuff:Object = this.pBuffs(target);
 			if (target.statStore.hasBuff(stname)){
 				target.statStore.removeBuffs(stname);
 			}
-			else{
-				trace("Warning: Perk Buff update failed either due to perk not existing, or buff was never applied in the first place.");
-			}
-			trace(this.name() + ": ");
+			//trace(this.name() + ": ");
 			for(var id:String in pBuff) {
 				var value:Object = pBuff[id];
 
-				trace(id + " = " + value);
+				//trace(id + " = " + value);
 			}
-			trace("^^^^^^^^^^^^^^^^^^^^^^^^^^^^PERK")
+			//trace("^^^^^^^^^^^^^^^^^^^^^^^^^^^^PERK")
 			target.statStore.addBuffObject(
 					pBuff,
 					stname,

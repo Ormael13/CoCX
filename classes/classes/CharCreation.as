@@ -1811,7 +1811,7 @@ import coc.view.MainView;
 					player.createPerk(mutation,0,0,0,0);
 				}
 			}
-			//player.createPerk(IMutationsLib.KTG2,0,0,0,0);
+			player.createPerk(IMutationsLib.MutationsTemplateIM,0,0,0,0);
 			trace("Mutations setup charcreation done");
 		}
 
