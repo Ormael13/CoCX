@@ -31,7 +31,7 @@ public class IMutationsLib
 			return CoC.instance;
 		}
 		//Example -v
-		//This one does nothing, and is simply to showcase.
+		//This one does nothing, and is simply to showcase and used as a dummy mutation to use for buffs..
 		public static const MutationsTemplateIM:IMutationPerkType = new MutationTemplate();
 		//Disabled mutations here. The contents are not filled. Please fill them in first.
 		public static const SlimeMetabolismIM:IMutationPerkType = new SlimeMetabolismMutation();

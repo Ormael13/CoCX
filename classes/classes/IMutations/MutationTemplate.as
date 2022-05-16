@@ -50,7 +50,10 @@ import classes.PerkClass;
                     target = player;
                 }
                 var params:PerkClass = target.getPerk(this);
+
+                //This can return a null, thus why all mutations are provided to the player with v1 value of 0 on initial loading.
                 var pTier:int = params.value1;
+
                 //This helps keep the requirements output clean.
                 IMutationsLib.MutationsTemplateIM.requirements = [];
                 if (pTier == 0){

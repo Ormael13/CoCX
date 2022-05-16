@@ -5881,8 +5881,8 @@ use namespace CoC;
 				spiderCounter++;
 			if (hasPerk(PerkLib.SpiderOvipositor))
 				spiderCounter++;
-			if (hasPerk(IMutationsLib.VenomGlandsIM)) spiderCounter += perkv1(IMutationsLib.VenomGlandsIM)
-			if (hasPerk(IMutationsLib.ArachnidBookLungIM)) spiderCounter2 += perkv1(IMutationsLib.ArachnidBookLungIM)*2
+			if (perkv1(IMutationsLib.VenomGlandsIM) > 0) spiderCounter += perkv1(IMutationsLib.VenomGlandsIM)
+			if (perkv1(IMutationsLib.ArachnidBookLungIM) > 0) spiderCounter2 += perkv1(IMutationsLib.ArachnidBookLungIM)*2
 			if (spiderCounter > 0 && perkv1(IMutationsLib.TrachealSystemIM) >= 1)
 				spiderCounter++;
 			if (spiderCounter > 3 && perkv1(IMutationsLib.TrachealSystemIM) >= 2)
@@ -10541,9 +10541,9 @@ use namespace CoC;
 			// Perk +3 (TransformationImmunity)
 			if (hasPerk(PerkLib.TransformationImmunityAtlach))
 				score+=3;
-			if (hasPerk(IMutationsLib.ArachnidBookLungIM)) score += perkv1(IMutationsLib.ArachnidBookLungIM)*2
-			if (hasPerk(IMutationsLib.TrachealSystemIM)) score += perkv1(IMutationsLib.TrachealSystemIM)
-			if (hasPerk(IMutationsLib.VenomGlandsIM)) score += perkv1(IMutationsLib.VenomGlandsIM)
+			if (perkv1(IMutationsLib.ArachnidBookLungIM) > 0) score += perkv1(IMutationsLib.ArachnidBookLungIM)*2
+			if (perkv1(IMutationsLib.TrachealSystemIM) > 0) score += perkv1(IMutationsLib.TrachealSystemIM)
+			if (perkv1(IMutationsLib.VenomGlandsIM) > 0) score += perkv1(IMutationsLib.VenomGlandsIM)
 			if (isGargoyle()) score = 0;
 			if (hasPerk(PerkLib.ElementalBody)) score = 0;
 			End("Player","racialScore");
@@ -15335,4 +15335,4 @@ use namespace CoC;
 			}
 		}
 	}
-}
+}

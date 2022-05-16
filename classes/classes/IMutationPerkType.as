@@ -4,12 +4,7 @@
  */
 package classes
 {
-import classes.GlobalFlags.kFLAGS;
-import classes.IMutationPerkType;
 import classes.Scenes.SceneLib;
-import classes.Stats.StatUtils;
-
-import flash.utils.Dictionary;
 
 public class IMutationPerkType extends PerkType
 	{
@@ -35,6 +30,7 @@ public class IMutationPerkType extends PerkType
 			return _pBuffs;
 		}
 
+		//handles Mutations assignment.
 		public function acquireMutation(target:*, nextFunc:*, pTier:int = 1):void{
 			var mutations:IMutationPerkType = this;
 			//trace(mutations.name() + "<--------ACQUIREMUTATIONS RESULT");
@@ -50,13 +46,13 @@ public class IMutationPerkType extends PerkType
 					EngineCore.outputText("Someone forgot to put a target for this perk in acquireMutation. Please report this. Perk: " + this.name());
 					target = player;
 				}
-				if (!target.hasPerk(mutations)){
+				if (!target.hasPerk(mutations)){	//Create if player doesn't have it
 					target.createPerk(mutations, 1,0,0,0);
 				}
-				else if(pTier > 1){
+				else if(pTier > 1){	//Used for NPCs to directly set perkTier
 					target.createPerk(mutations, pTier,0,0,0);
 				}
-				else{
+				else{	//increments tier by 1 for player.
 					target.setPerkValue(mutations,1,target.perkv1(mutations) + 1);
 				}
 				setBuffs();
@@ -84,6 +80,8 @@ public class IMutationPerkType extends PerkType
 				//trace("Perk Buffs Applied.");
 			}
 		}
+
+		//Updates existing mutations with new buff values.
 		public function updateDynamicPerkBuffs(target:*):*{
 			if(target == null){
 				trace("Missing target, defaulting to player.");
@@ -95,19 +93,12 @@ public class IMutationPerkType extends PerkType
 			if (target.statStore.hasBuff(stname)){
 				target.statStore.removeBuffs(stname);
 			}
-			//trace(this.name() + ": ");
-			for(var id:String in pBuff) {
-				var value:Object = pBuff[id];
-
-				//trace(id + " = " + value);
-			}
-			//trace("^^^^^^^^^^^^^^^^^^^^^^^^^^^^PERK")
 			target.statStore.addBuffObject(
 					pBuff,
 					stname,
 					{text:this.name(), save:false}
 			);
-			trace("Perk Buffs Updated.");
+			//trace("Perk Buffs Updated.");
 		}
 	}
 }
