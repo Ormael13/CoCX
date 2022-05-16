@@ -35,7 +35,7 @@ public class UnderwaterSharkGirl extends Monster
 			damage += eBaseDamage();
 			player.takePhysDamage(damage, true);
 			if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
-			else player.createStatusEffect(StatusEffects.Hemorrhage,3,0.05,0,0);
+			else player.createStatusEffect(StatusEffects.Hemorrhage,SceneLib.combat.debuffsOrDoTDuration(3),0.05,0,0);
 		}
 		
 		override public function defeated(hpVictory:Boolean):void

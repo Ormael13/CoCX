@@ -15,7 +15,7 @@ public class YukiOnna extends Monster
 	{
 		public function IcyKiss():void {
 			outputText("Suddenly the Yuki Onna flies down and forcefully pulls you into a kiss. At first you’re confused but you quickly shove her away in panic as you begin freezing from the inside. She giggles as she takes back to the air, leaving you aroused and colder at the same time. Your lungs feel like they’re freezing, only accelerating your demise! ");
-			player.createStatusEffect(StatusEffects.FrozenLung, 2, 0.03, 0, 0);
+			player.createStatusEffect(StatusEffects.FrozenLung, SceneLib.combat.debuffsOrDoTDuration(2), 0.03, 0, 0);
 			var kissdmg:Number = this.inte + this.wis + this.lib;
 			player.takeIceDamage(kissdmg, true);
 			var kisslust:Number = (inte / 5) + rand(10);
@@ -47,7 +47,7 @@ public class YukiOnna extends Monster
 				player.addStatusValue(StatusEffects.FrostburnDoT,1,1);
 				player.addStatusValue(StatusEffects.FrostburnDoT,3,1);
 			}
-			else player.createStatusEffect(StatusEffects.FrostburnDoT,4,0.02,0,0);
+			else player.createStatusEffect(StatusEffects.FrostburnDoT, SceneLib.combat.debuffsOrDoTDuration(4), 0.02, 0, 0);
 		}
 		
 		override protected function performCombatAction():void

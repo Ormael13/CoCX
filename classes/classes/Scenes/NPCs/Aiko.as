@@ -29,7 +29,7 @@ import classes.internals.*;
 				player.takePhysDamage(damage - rand(9), true);
 				player.addCombatBuff("spe", -4, "Combat Debuff", "CombatDebuffSpe");
 				if (!player.hasStatusEffect(StatusEffects.IzmaBleed))
-					player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
 				else (player.addStatusValue(StatusEffects.IzmaBleed, 1, 2));
 			}
 			//Determine if evaded
@@ -47,7 +47,7 @@ import classes.internals.*;
 				player.takePhysDamage(damage, true);
 				player.addCombatBuff("spe", -4, "Combat Debuff", "CombatDebuffSpe");
 				if (!player.hasStatusEffect(StatusEffects.IzmaBleed))
-					player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
 				else
 					player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
 			}
@@ -145,7 +145,7 @@ import classes.internals.*;
 				player.takePhysDamage(damage, true);
 				player.addCombatBuff("spe", -4, "Combat Debuff", "CombatDebuffSpe");
 				if (!player.hasStatusEffect(StatusEffects.IzmaBleed))
-					player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
 				else (player.addStatusValue(StatusEffects.IzmaBleed, 1, 1));
 			}
 		}
@@ -294,7 +294,7 @@ import classes.internals.*;
 			+"You fall to the ground, your legs giving in once the initial shock lets up.  ");
 			player.takeLightningDamage(45+25/(rand(3)+1), true);
 			if (!player.hasStatusEffect(StatusEffects.AikoLightningArrow)) {
-				player.createStatusEffect(StatusEffects.AikoLightningArrow, 4, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.AikoLightningArrow, SceneLib.combat.debuffsOrDoTDuration(4), 0, 0, 0);
 				player.addCombatBuff('str',-25,"Lightning Arrow","LightningArrowStr");
 				player.addCombatBuff('spe',-25,"Lightning Arrow","LightningArrowSpe");
 			}
@@ -346,7 +346,7 @@ import classes.internals.*;
 				outputText(" ");
 				player.addCombatBuff("spe", -2, "Combat Debuff", "CombatDebuffSpe");
 				if (!player.hasStatusEffect(StatusEffects.IzmaBleed))
-					player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.IzmaBleed, SceneLib.combat.debuffsOrDoTDuration(2), 0, 0, 0);
 				else (player.addStatusValue(StatusEffects.IzmaBleed, 1, 1));
 			}
 		}

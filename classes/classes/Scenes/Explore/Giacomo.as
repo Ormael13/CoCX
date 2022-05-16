@@ -27,6 +27,7 @@ package classes.Scenes.Explore {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
+import classes.Scenes.Crafting;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
@@ -183,6 +184,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			menu();
+			if (player.hasKeyItem("Tarnished Ore Bag (Lowest grade)") >= 0) addButton(10, "Ore Bag (LowG)", pitchOreBag).hint("Ore Bag (Lowest Grade)");
 			if (Holidays.nieveHoliday()) {
 				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 0) addButton(11, "Mysterious Seed", pitchMysteriousSeed);
 				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 5) addButton(12, "Decorations", pitchDecorations);
@@ -425,6 +427,36 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				statScreenRefresh();
 			}
 			doNext(bookMenu);
+		}
+		
+		private function pitchOreBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			outputText("\"<i>I see you have some pretty tarnished bag to store ores. Why not you buy this new one bag that is much better even if it's not better grade than the one you have now? Only 600 gems and i even gonna take your current bag. I assure you not gonna find such good offer anywhere else...</i>\"");
+			doYesNo(buyOreBag, miscMenu);
+		}
+		
+		private function buyOreBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.gems < 600) {
+				outputText("\n\nGiacomo sighs, indicating you need 600 gems to purchase this item.");
+				doNext(miscMenu);
+			}
+			else {
+				outputText("\n\nYou decided to buy the bag. It looking much better the one you had and checking inside it appears to have bit more space. As part of the deal you hand over current one to Giacomo. <b>You acquired Ore Bag (Lowest grade).</b>");
+				player.gems -= 600;
+				statScreenRefresh();
+				player.removeKeyItem("Tarnished Ore Bag (Lowest grade)");
+				player.createKeyItem("Ore Bag (Lowest grade)", 0, 0, 0, 0);
+				Crafting.BagSlot01Cap = 10;
+				Crafting.BagSlot02Cap = 10;
+				Crafting.BagSlot03Cap = 10;
+				Crafting.BagSlot04Cap = 10;
+				Crafting.BagSlot06Cap = 10;
+				Crafting.BagSlot07Cap = 10;
+				doNext(miscMenu);
+			}
 		}
 		
 		private function pitchMysteriousSeed():void {
