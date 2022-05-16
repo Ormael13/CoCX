@@ -671,6 +671,7 @@ public class KitsuneScene extends BaseContent
 				outputText("\n\n<b>You have been in mansion enough times to be able to find it in the future when using soul sense. (Removes Kitsunes from deepwoods explore encounters pool!)</b>");
 			}
 			CoC.instance.timeQ = 30 - model.time.hours;
+			outputText("\n\n");
 			camp.sleepRecovery(true);
 			CoC.instance.timeQ = 0;
 			player.addCurse("tou", 2, 2);

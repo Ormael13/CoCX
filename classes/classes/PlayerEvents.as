@@ -558,7 +558,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\n<b>You feel revitalized from your recent intake, but soon you'll need more...</b>\n");
 				player.dynStats( "spe", player.statusEffectv3(StatusEffects.SlimeCraving)); //Boost speed and restore half the player's lost strength
 				player.removeStatusEffect(StatusEffects.SlimeCravingFeed); //Remove feed succuss status so it can be reset
-				player.removeCurse("str",1)
+				player.removeCurse("str",1, 2);
 				player.changeStatusValue(StatusEffects.SlimeCraving, 2, 0); //Reset stored hp/toughness values
 				needNext = true;
 			}

@@ -122,7 +122,7 @@ public class BasiliskScene extends BaseContent
 				function dickEnd():void {
 					outputText("You look beatifically down at it when you are finished and notice that despite itself the basilisk has got more than a bit turned on by your fairly callous treatment of it; the creature is finding it difficult to kneel properly with its long, purple erection poking against the ground.  You smile with satisfaction at how successfully you've managed to paint its face white with your seed.  \"<i>That's a good look for you.  We really must do this again,</i>\" you say as you loosen its blindfold just a little before taking your leave.  You chance a look back.  The creature is staggering in the opposite direction, wiping its face with a claw and trying not to bump its cock into anything, looking very dazed indeed.  You grin and make your way back to camp.");
 					player.sexReward("saliva", "Dick");
-					player.addCurse("lib", 1);
+					player.addCurse("lib", 1,2);
 					cleanupAfterCombat();
 				}
 			}
@@ -138,7 +138,7 @@ public class BasiliskScene extends BaseContent
 
 				outputText("You look beatifically down at it and notice that despite itself the basilisk has got more than a bit turned on by your fairly callous treatment of it; the creature is finding it difficult to kneel properly with its long, purple erection poking against the ground.  Its tongue flops weakly out of its girl-cum-spattered mouth, evidently too weak to even curl back up, and you grin as you imagine how much it must ache from the workout you gave it.  \"<i>That's a good look for you.  We really must do this again,</i>\" you say breezily as you loosen its blindfold just a little before taking your leave, shaking the weariness out of your knees as you go.  You chance a look back; the creature is staggering in the opposite direction, wiping its face with a claw and trying not to bump its cock into anything, looking very dazed indeed. You grin and make your way back to camp.");
 				player.sexReward("saliva","Vaginal");
-				player.addCurse("lib", 1);
+				player.addCurse("lib", 1,2);
 				cleanupAfterCombat();
 			}
 		}

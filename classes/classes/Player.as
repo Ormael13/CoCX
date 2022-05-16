@@ -15147,7 +15147,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.MunchkinAtGym)) cap += 0.05;
             if (bonus == 0)
                 return false; //no bonus - no effect
-            if (removeCurse(statName, bonus))
+            if (removeCurse(statName, bonus, 1) > 0)
                 return false; //remove existing curses
             var current:Number = buff("Mutagen").getValueOfStatBuff(statName + ".mult");
             var bonus_sign:Number = (bonus > 0) ? 1 : -1;
@@ -15173,7 +15173,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Perfection)) ABCap += 0.02;
 			if (hasPerk(PerkLib.Creationism)) ABCap += 0.02;
 			if (hasPerk(PerkLib.MunchkinAtGym)) ABCap += 0.05;
-			removeCurse(statName, bonus);
+			removeCurse(statName, bonus, -2);
 			if (buff("Alchemical").getValueOfStatBuff(""+statName+".mult") < ABCap){
 				buff("Alchemical").addStat(""+statName+".mult",0.01);
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
@@ -15185,7 +15185,7 @@ use namespace CoC;
 		{
 			var KBCap:Number = 0.2;
 			if (hasPerk(PerkLib.MunchkinAtGym)) KBCap += 0.05;
-			removeCurse(statName, bonus);
+			removeCurse(statName, bonus, -2);
 			if (buff("Knowledge").getValueOfStatBuff(""+statName+".mult") < KBCap){
 				buff("Knowledge").addStat(""+statName+".mult",0.01);
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
@@ -15197,9 +15197,9 @@ use namespace CoC;
 		{
 			var MBCap:Number = 1;
 			if (hasPerk(PerkLib.MindbreakerBrain1toX)) MBCap += 0.50*perkv1(PerkLib.MindbreakerBrain1toX);
-			removeCurse("inte", 5);
-			removeCurse("wis", 5);
-			removeCurse("lib", 5);
+			removeCurse("inte", -3);
+			removeCurse("wis", -3);
+			removeCurse("lib", -3);
 			if (buff("Devoured Mind").getValueOfStatBuff("int.mult") < MBCap){
 				buff("Devoured Mind").addStat("int.mult",0.05);
 				buff("Devoured Mind").addStat("wis.mult",0.05);

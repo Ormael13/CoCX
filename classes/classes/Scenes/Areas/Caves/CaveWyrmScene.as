@@ -106,7 +106,7 @@ public function winningOverCaveWyrmWithCaveWyrmDick():void {
 	player.sexReward("vaginalFluids");
 	outputText("\n\nThe residual effect of her vaginal acid seems to have enhanced your member's sensitivity as well as your libido by a notch.");
 	dynStats("lib",+5);
-	player.addCurse('sens',+1)
+	player.addCurse('sens',+1, 2);
 	cleanupAfterCombat();
 }
 
