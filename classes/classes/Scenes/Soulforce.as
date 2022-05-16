@@ -302,20 +302,28 @@ public class Soulforce extends BaseContent
 			mutations.pReqs(player);
 			if (mutations.available(target) && mutations.maxLvl > target.perkv1(mutations)){
 				trace("Requirements met, adding in.");
-				menuItems.push([mutations.name(), acquirePerk, mutations.desc()]);	//This is witchcraft, not sure how acquirePerk still recalls which perk to give, but it does.
+				menuItems.push(mutations.name(), curry(acquirePerk, tempdesc), mutations.desc());	//This is witchcraft, not sure how acquirePerk still recalls which perk to give, but it does.
+				//trace("TypeOf: "+typeof(acquirePerk));
 			}
 			else if(mutations.maxLvl == target.perkv1(mutations)){
 				trace("MaxTier acquired");
-				menuItems.push([mutations.name(), false, "You already have the highest tier!"]);
+				menuItems.push(mutations.name(), false, "You already have the highest tier!");
 			}
 			else{
 				trace("Unable to meet requirements/requirements borked.");
-				if (mutations.available(target)) trace("\nAvailable: True");
-				if (mutations.maxLvl > target.perkv1(mutations)) trace("MaxLvl: True");
-				menuItems.push([mutations.name(), false, "You don't meet the requirements for this!"]);
+				//if (mutations.available(target)) trace("\nAvailable: True");
+				//if (mutations.maxLvl > target.perkv1(mutations)) trace("MaxLvl: True");
+				menuItems.push(mutations.name(), false, "You don't meet the requirements for this!");
 			}
 		}
 		menuGen(menuItems, page, curry(SoulforceCheats1, 3));
+
+		function tempdesc():void{
+			clearOutput();
+			menu();
+			outputText("Evangelinetalkshere");
+			addButton(14, "Next", playerMenu);
+		}
 
 		function acquirePerk(nextFunc:Function = null):void{
 			try{

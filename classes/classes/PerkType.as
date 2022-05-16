@@ -45,7 +45,7 @@ public class PerkType extends BaseContent
 		 * If this is perk player has, `params` is not-null and has value1-4 properties
 		 */
 		public function name(params:PerkClass=null):String {
-			return _name
+			return _name;
 		}
 
 		/**
