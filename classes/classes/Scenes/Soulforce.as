@@ -261,7 +261,7 @@ public class Soulforce extends BaseContent
 		menuItems.push("LilyPregF", (DriderTown.LilyKidsPCPregnancy != 0 && LilyFollower.LilyFollowerState)? FairyTest3: false, "Curing Lily Infertility ^^");
 		//menuItems.push("Check Mutation", mutations3, "Check Mutation");
 		//menuItems.push("Add Mutation", mutations2, "Add Mutation");
-		menuItems.push("Reset Mutation", mutations1, "Reset Mutations");
+		//menuItems.push("Reset Mutation", mutations1, "Reset Mutations");
 		menuGen(menuItems, page, accessSoulforceMenu);
 	}
 
