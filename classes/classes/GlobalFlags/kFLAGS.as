@@ -2385,7 +2385,7 @@ public static const JENIFFER_02376:int                                   = 2376;
 public static const UNKNOWN_FLAG_NUMBER_02377:int                                  		        = 2377; //Not Yet Used
 public static const DIANA_FOLLOWER:int     			                                = 2378;
 public static const DIANA_LVL_UP:int                      			                = 2379;
-public static const UNKNOWN_FLAG_NUMBER_02380:int                                   	= 2380;
+public static const DIANA_CURE_COOLDOWN:int                                   		= 2380;
 public static const DIANA_SPELLS_CASTED:int                                   		= 2381;
 public static const UNKNOWN_FLAG_NUMBER_02385:int                                   = 2382;				//Not Yet Used Flag
 public static const CAMILLA_AFFECTION:int                                  		    = 2383;	//Not Yet Used Flag
@@ -2633,7 +2633,7 @@ public static const GALIA_HIPS_ASS_SIZE:int                                   		
 public static const GALIA_TALKS:int                                   				= 2625;
 public static const AYANE_PREGNANCY_TYPE:int                                   		= 2626;//This is a placeholder for the pregnancy type.
 public static const AYANE_INCUBATION:int                                   			= 2627;
-public static const UNKNOWN_FLAG_NUMBER_02628:int                                   = 2628;//Not Yet Used Flag
+public static const AYANE_CURE_COOLDOWN:int                                  		= 2628;//Not Yet Used Flag
 public static const DINAH_LVL_UP:int                                   				= 2629;
 public static const DINAH_DEFEATS_COUNTER:int                                   	= 2630;
 public static const DINAH_AFFECTION:int                                   			= 2631;
