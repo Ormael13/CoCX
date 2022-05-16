@@ -1860,7 +1860,7 @@ public class SaveUpdater extends NPCAwareContent {
 					}
 				}
 				CoC.instance.charCreation.setupMutations();
-				outputText("Mutations backend updated.");
+				outputText("\n\nMutations backend updated.");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.015;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
