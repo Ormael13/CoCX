@@ -1179,20 +1179,23 @@ public class PerkMenu extends BaseContent {
 				}
 			}
 			else{
-				if (player.hasPerk(mutation)) {
-					outputText("\n" + mutation.name() + ": <font color=\"#008000\">Acquired.</font>");
-					outputText("\nTier: " + player.perkv1(mutation));
-					outputText("\nDescription: ");
-					if (mutation.desc().length == 1) {	//Some desc. contains only "."
-						outputText("No description available.");
-					} else {
-						outputText(mutation.desc());
+				for each(var mutation:IMutationPerkType in mutationsArray){
+					if (player.hasPerk(mutation)) {
+						outputText("\n" + mutation.name() + ": <font color=\"#008000\">Acquired.</font>");
+						outputText("\nTier: " + player.perkv1(mutation));
+						outputText("\nDescription: ");
+						if (mutation.desc().length <= 1) {	//Some desc. contains only "."
+							if (player.perkv1(mutation) == 0) outputText("You don't have this Mutation yet.");
+							else outputText("No description available.");
+						} else {
+							outputText(mutation.desc());
+						}
 					}
+					else
+						{
+							outputText("\n???" + "\n Tier: ?" + "\nDescription: ???");
+						}
 				}
-				else
-					{
-						outputText("\n???" + "\n Tier: ?" + "\nDescription: ???");
-					}
 			}
 			outputText("\n");
 	}

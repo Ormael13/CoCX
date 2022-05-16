@@ -2382,6 +2382,18 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		var hasLustyRegenPerk:Boolean = false;
 		var addedSensualLover:Boolean = false;
 
+		//This below is some weird witchcraft.... It doesn't update/swap anything, but somehow this fixes the id mismatch from mutations?
+		var mutationsShift:Array = [];
+		for each (var pperk1:PerkType in MutationsLib.mutationsArray("",true)){
+			mutationsShift.push(pperk1.id);
+		}
+		for each (var pPerk2:IMutationPerkType in IMutationsLib.mutationsArray("")){
+			mutationsShift.push(pPerk2.id);
+		}
+		mutationsShift.push(IMutationsLib.MutationsTemplateIM.id);
+		//Possibly ID updating.
+
+
 		//Populate Perk Array
 		for (i = 0; i < saveFile.data.perks.length; i++)
 		{
@@ -2408,12 +2420,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			// Some shit checking to track if the incoming data has an available History perk
 			if (id.indexOf("History:") != -1) {
 				hasHistoryPerk = true;
-			}
-
-			//This below is some weird witchcraft.... It doesn't update/swap anything, but somehow this fixes the id mismatch from mutations?
-			var mutationsShift:Array = [];
-			for each (var pperk1:PerkType in MutationsLib.mutationsArray("",true)){
-				mutationsShift.push(pperk1.id);
 			}
 
 			var ptype:PerkType = PerkType.lookupPerk(id);
@@ -2443,6 +2449,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				}
 				player.addPerkInstance(cperk);
 			}
+		}
+
+		for each (var mutations:IMutationPerkType in IMutationsLib.mutationsArray("")){
+			if (player.hasPerk(mutations) && !player.statStore.hasBuff("perk_" + mutations.id)) mutations.updateDynamicPerkBuffs(player);
 		}
 
 		// Fixup missing History: Whore perk IF AND ONLY IF the flag used to track the prior selection of a history perk has been set

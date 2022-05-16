@@ -4490,7 +4490,7 @@ use namespace CoC;
 			Begin("Player","racialScore","internalChimeraScore");
 			var internalChimeraCounter:Number = 0;
 			var pMutations:Array = IMutationsLib.mutationsArray("");
-			for each (var pPerk:PerkType in pMutations){
+			for each (var pPerk:IMutationPerkType in pMutations){
 				if (hasPerk(pPerk)) internalChimeraCounter += perkv1(pPerk);
 			}
 			End("Player","racialScore");
@@ -13252,7 +13252,7 @@ use namespace CoC;
 		}
 
 		public function removeAllRacialMutation():void {
-			for each (var pPerks:PerkType in IMutationsLib.mutationsArray("")){
+			for each (var pPerks:IMutationPerkType in IMutationsLib.mutationsArray("")){
 				if (hasPerk(pPerks)){
 					removePerk(pPerks);
 					//perkPoints += 1;

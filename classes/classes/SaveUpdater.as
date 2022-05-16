@@ -1841,7 +1841,6 @@ public class SaveUpdater extends NPCAwareContent {
 						while (x > 0){
 							if (player.hasPerk(pPerkArray[x-1])){
 								player.createPerk(array2[arrayVal],x,0,0,0);
-								//Creature.updateDynamicPerkBuffs(array2[arrayVal], array2[arrayVal][1], player);
 								array2[arrayVal].updateDynamicPerkBuffs(player);
 								arrayVal++;
 								arrayValY = true;

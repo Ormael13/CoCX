@@ -71,7 +71,7 @@ public class IMutationPerkType extends PerkType
 
 			//Sets up the buff for the perk.
 			function setBuffs():void{
-				var stname:String = "mutation_" + mutations.id;
+				var stname:String = "perk_" + mutations.id;
 				var pBuff:Object = mutations.pBuffs(target)
 				if (target.statStore.hasBuff(stname)){
 					target.statStore.removeBuffs(stname);
@@ -84,14 +84,13 @@ public class IMutationPerkType extends PerkType
 				//trace("Perk Buffs Applied.");
 			}
 		}
-
 		public function updateDynamicPerkBuffs(target:*):*{
 			if(target == null){
 				trace("Missing target, defaulting to player.");
 				EngineCore.outputText("Someone forgot to put a target for this perk in updateDynamicPerkBuffs. Please report this. Perk: " + this.name());
 				target = player;
 			}
-			var stname:String = "mutation_" + this.id;
+			var stname:String = "perk_" + this.id;
 			var pBuff:Object = this.pBuffs(target);
 			if (target.statStore.hasBuff(stname)){
 				target.statStore.removeBuffs(stname);
