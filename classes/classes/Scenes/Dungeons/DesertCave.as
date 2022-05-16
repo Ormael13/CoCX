@@ -2274,7 +2274,7 @@ public class DesertCave extends DungeonAbstractContent
 			if(flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] == 0) addButton(0,"StopAttacking",unfriendlyWitchToggle).hint("You've had enough with the Sand Witches. They should leave you alone.", "Talk: Stop Attacking");
 			else addButton(0,"StartAttacking",unfriendlyWitchToggle).hint("Tell the Sand Mother that you want to encounter the Sand Witches again.", "Talk: Start Attacking");
 			if (flags[kFLAGS.MORE_CUM_WITCHES] == 0) addButton(1, "Cum Witches", talkToEnemySMaboutCW).hint("Request Sand Mother to send some Cum Witches to the desert. Maybe you'll be able to encounter and fuck one?");
-			else addButtonDisabled(1, "<<====", "You can toogle Cum Witch encounters at the same time with regular Sand Witches.");
+			else addButtonDisabled(1, "Cum Witches", "You can toggle Cum Witch encounters simultaneously with regular Sand Witches.", "Cum Witches");
 			addButtonIfTrue(2,"Sex", sexWithEnemyMother, "Not aroused enough.", player.lust >= 33, "Remind her who's the boss here.");
 			if(flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] < 10) {
 				addButton(3,"Get LaBova",takeLaBovaOrLactaid, false, null, null, consumables.LABOVA_.description);
@@ -3303,7 +3303,7 @@ public class DesertCave extends DungeonAbstractContent
 				outputText("The poor girl is kept there as a slave while being transformed into some mindless milk-production machine. How do can they keep slaves and dare to call YOU a demon? You tell the Sand Mother as such.");
 			else
 				outputText("Although nothing really prevents you from relaxing and fucking with the girl, this milk bath ability is useful. You might need such slave for your own personal use. Why won't she just give one to you?");
-			outputText("\n\nThe sorceress looks at you desperately and groans. \"<i>First you beat up half of my people, and now you want to take our slaves as well? We need them, their existence are vital for the coven. The girls are treated well: they are happy and none of them wants any changes. And most importantly, we don’t allow any *demons* to attack them. We cannot do this. Please, ask for something else.</i>\"\n\n");
+			outputText("\n\nThe sorceress looks at you desperately and groans. \"<i>First you beat up half of my people, and now you want to take our slaves as well? We need them, their existence are vital for the coven. The girls are treated well: they are happy and none of them wants any changes. And most importantly, we don’t allow any <b>demons</b> to attack them. We cannot do this. Please, ask for something else.</i>\"\n\n");
 			menu();
 			addButton(0, "Insist", enemyMilkInsist);
 			if (player.inte <= 20)
@@ -3316,7 +3316,7 @@ public class DesertCave extends DungeonAbstractContent
 
 		private function enemyMilkBargain():void {
 			clearOutput();
-			outputText("How much?\n\n");
+			outputText("<i>How much?</i>\n\n");
 			outputText("The witch is totally baffled; she looks at you trying to understand what exactly you asked. You sigh, \"<i>The girl. Gems. Are you even familiar with the concept of trade? Or all you can do is to stuff people with chemicals to make them squirt pools of milk?</i>\"\n\n");
 			outputText("The Sand Mother narrows her eyes and responds in a cold tone, completely ignoring your offence. \"<i>The chemicals are rare and expensive. We’ll need to transport the girl to your place somehow. Also, she’ll need a bath to sit in.</i>\" Noticing your questioning expression, she elaborates. \"<i>We still care about our slaves. If we must release her, I want to make sure that she’ll not sit in a pile of mud but live in more-or-less good conditions. So, this will be… 4000 gems for one woman.</i>\"\n\n");
 			outputText("Four thousand?! She’s clearly mad. You’re sure she just tries to get at least some revenge on you...\n\n");
@@ -3348,13 +3348,13 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\n"); //some whitespace
 			outputText("When you return to your camp, you notice two witches doing something. They show you the result of their work – a pool prepared for your new slave. The 'slave', by the way, is sitting in the pool, waiting you obediently. To your surprise, the witches don’t leave – one of them suggests you try out the bath and pleasures it can provide, ready to keep you company.\n\n");
 			outputText("After an hour of relaxing in the bath with you, the girls even eagerly accept your advances on them and do whatever you ask. You start to think that the damn Mother has finally asked them all to be nice and obedient when one witch kisses you and you notice a strange glint in her eyes. When you look to your right, you notice a pebble flying right at your head. Fuck.\n\n");
-			player.HP = 20;
-			cheatTime(6);
 			doNext(enemyMilkInsist2);
 		}
 
 		private function enemyMilkInsist2():void {
 			clearOutput();
+			player.HP = 20;
+			cheatTime(6);
 			outputText("You wake up near the bath with your head aching – seems like the girls didn’t try to kill you, but instead made sure that you’re knocked out for some time. The ‘Bath Slut’ is left unharmed – she sits near you and smiles. Well, time to teach the bitches a lesson. You had warned the sorceress, but she has decided to bring more troubles on her coven.\n\n");
 			outputText("You reach the desert in no time but spend almost an hour trying to find the familiar entrance. You check the landmarks again. And again – still nothing. You don’t even see the sphinx girl anywhere! Trying to find any witches doesn’t help too – even though the desert was swarmed with them yesterday, now they all just… disappeared. Or maybe they just avoid you at all costs, who knows.\n\n");
 			outputText("Shit. Seems like the sorceress was *really* desperate after the last time and planned everything ahead. Not that you need her anyway – you already have your own milk machine. Speaking of which – you probably should return and give the girl a new name.\n\n");
