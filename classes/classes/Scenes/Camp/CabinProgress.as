@@ -273,6 +273,7 @@ import classes.Scenes.SceneLib;
 		private function quarrySitePickaxe():void {
 			outputText("\n\nYou pick up the old mining tool. This should prove useful when digging up gems, ore or stone from the landscape. Also inspecting leather bag it turns oput to be some lowest quality bag enchanted to store ores and other crafting materials in it. (It can store up to 5 pieces of 4 types of crafting materials)");
 			player.createKeyItem("Old Pickaxe", 0, 0, 0, 0);
+			player.createKeyItem("Tarnished Ore Bag (Lowest grade)", 0, 0, 0, 0);
 			Crafting.BagSlot01Cap = 5;
 			Crafting.BagSlot02Cap = 5;
 			Crafting.BagSlot03Cap = 5;

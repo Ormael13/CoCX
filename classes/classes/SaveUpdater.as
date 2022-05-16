@@ -1811,6 +1811,10 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.013;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.014) {
+				if (Crafting.BagSlot01Cap > 0) player.createKeyItem("Tarnished Ore Bag (Lowest grade)", 0, 0, 0, 0);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.014;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.015) {
 				//MutationsPorting
 				updateMutationsv3("Heart");
 				updateMutationsv3("Muscle");
@@ -1828,7 +1832,7 @@ public class SaveUpdater extends NPCAwareContent {
 				updateMutationsv3("Thyroid");
 				updateMutationsv3("PThyroid");
 				updateMutationsv3("Adaptations");
-				
+
 				function updateMutationsv3(type:String):void{
 					var arrayVal:int = 0;
 					var arrayValY:Boolean = false;
@@ -1855,7 +1859,7 @@ public class SaveUpdater extends NPCAwareContent {
 					}
 				}
 				outputText("Mutations backend updated.");
-				flags[kFLAGS.MOD_SAVE_VERSION] = 35.014;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.015;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
@@ -2012,4 +2016,4 @@ public class SaveUpdater extends NPCAwareContent {
 	}
 
 }
-}
+}
