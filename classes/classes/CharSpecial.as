@@ -14,6 +14,8 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.BlackHeartMutation;
+import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 
 /**
@@ -1685,7 +1687,8 @@ import classes.Items.*;
 			player.createPerk(PerkLib.Mage, 0, 0, 0, 0);
 			player.createPerk(PerkLib.SoulApprentice, 0, 0, 0, 0);
 			player.createPerk(PerkLib.DarkCharm, 0, 0, 0, 0);
-			player.createPerk(MutationsLib.BlackHeart, 0, 0, 0, 0);
+			player.createPerk(IMutationsLib.BlackHeartIM, 1, 0, 0, 0);
+			Creature.updateDynamicPerkBuffs(IMutationsLib.BlackHeartIM, BlackHeartMutation, player);
 			player.createPerk(PerkLib.Pervert, 0, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.KnowsArouse,0,0,0,0);
 			player.createStatusEffect(StatusEffects.KnowsHeal,0,0,0,0);

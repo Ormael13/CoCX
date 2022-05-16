@@ -15,7 +15,7 @@ public class KitsuneParathyroidGlandMutation extends PerkType
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.KitsuneParathyroidGlandIM);
+            var pTier:int = player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM);
             if (pTier >= 1){
                 descS += "Illusion and Terror cooldown reduced by 3 turns";
             }
@@ -32,7 +32,7 @@ public class KitsuneParathyroidGlandMutation extends PerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.KitsuneParathyroidGlandIM)){
+            switch (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -49,9 +49,9 @@ public class KitsuneParathyroidGlandMutation extends PerkType
         public static function pReqs(pTier:int = 0):void{
             try{
                 //This helps keep the requirements output clean.
-                IMutationsLib.KitsuneParathyroidGlandIM.requirements = [];
+                IMutationsLib.KitsuneParathyroidGlandsIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.KitsuneParathyroidGlandIM.requireParathyroidGlandMutationSlot()
+                    IMutationsLib.KitsuneParathyroidGlandsIM.requireParathyroidGlandMutationSlot()
                     .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.tailType == Tail.FOX && player.tailCount >= 2;
@@ -62,7 +62,7 @@ public class KitsuneParathyroidGlandMutation extends PerkType
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.KitsuneParathyroidGlandIM.requireLevel(pLvl);
+                    IMutationsLib.KitsuneParathyroidGlandsIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
@@ -76,19 +76,19 @@ public class KitsuneParathyroidGlandMutation extends PerkType
         }
 
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            if (pTier >= 1) {
-                pBuffs['spe.mult'] += 0.05;
-                pBuffs['int.mult'] += 0.05;
+            if (pTier == 1) {
+                pBuffs['spe.mult'] = 0.05;
+                pBuffs['int.mult'] = 0.05;
             }
-            if (pTier >= 2) {
-                pBuffs['spe.mult'] += 0.05;
-                pBuffs['int.mult'] += 0.1;
+            if (pTier == 2) {
+                pBuffs['spe.mult'] = 0.1;
+                pBuffs['int.mult'] = 0.15;
             }
-            if (pTier >= 3) {
-                pBuffs['spe.mult'] += 0.05;
-                pBuffs['int.mult'] += 0.2;
+            if (pTier == 3) {
+                pBuffs['spe.mult'] = 0.15;
+                pBuffs['int.mult'] = 0.35;
             }
             return pBuffs;
         }

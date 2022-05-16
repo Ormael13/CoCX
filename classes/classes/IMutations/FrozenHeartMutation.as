@@ -6,8 +6,9 @@ package classes.IMutations
 {
     import classes.PerkClass;
     import classes.PerkType;
+import classes.Player;
 
-    public class FrozenHeartMutation extends PerkType
+public class FrozenHeartMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
@@ -22,7 +23,7 @@ package classes.IMutations
             else if (pTier >= 2){
                 descS += "hungering cold last for 1 additional turn and recharge 1 turn faster";
             }
-            descS += "and increase their damage by" + 10 * pTier + "%";
+            if (pTier >= 1) descS += "and increase their damage by" + 10 * pTier + "%";
             if (descS != "")descS += ".";
             return descS;
         }
@@ -49,7 +50,10 @@ package classes.IMutations
                 //This helps keep the requirements output clean.
                 IMutationsLib.FrozenHeartIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.FrozenHeartIM.requireHeartMutationSlot();
+                    IMutationsLib.FrozenHeartIM.requireHeartMutationSlot()
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.yukiOnnaScore() >= 14;
+                    }, "Yuki onna race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -67,7 +71,7 @@ package classes.IMutations
         }
 
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
             return pBuffs;
         }

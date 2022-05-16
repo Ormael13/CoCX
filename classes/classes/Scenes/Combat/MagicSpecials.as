@@ -12,6 +12,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
 import classes.Scenes.Dungeons.D3.Doppleganger;
@@ -42,8 +43,8 @@ public class MagicSpecials extends BaseCombatContent {
 				player.wrath -= 50;
 				berzerkDuration += 10;
 			}
-			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsPrimitive)) berzerkDuration += 2;
-			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) berzerkDuration += 8;
+			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 2) berzerkDuration += 2;
+			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) berzerkDuration += 8;
 			player.createStatusEffect(StatusEffects.Berzerking,berzerkDuration,0,0,0);
 			outputText("<b>Berzerking was used successfully.</b>\n\n");
 		}
@@ -54,8 +55,8 @@ public class MagicSpecials extends BaseCombatContent {
 				player.wrath -= 50;
 				lustzerkDuration += 10;
 			}
-			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsPrimitive)) lustzerkDuration += 2;
-			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) lustzerkDuration += 8;
+			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 2) lustzerkDuration += 2;
+			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) lustzerkDuration += 8;
 			player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,0,0,0);
 			outputText("<b>Lustzerking was used successfully.</b>\n\n");
 		}
@@ -122,10 +123,10 @@ public class MagicSpecials extends BaseCombatContent {
 			if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			bd = buttons.add("Pleasure bolt", PleasureBolt, "Release a discharge of your lust inducing electricity. It will rise your lust by 2% of max lust after each use.", "Pleasure bolt");
 			if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
-			if ((player.hasVagina() && (player.cowScore() >= 9 || player.hasPerk(MutationsLib.LactaBovinaOvaries))) || (player.hasCock() && (player.minotaurScore() >= 9 || player.hasPerk(MutationsLib.MinotaurTesticles)))) {
+			if ((player.hasVagina() && (player.cowScore() >= 9 || player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 1)) || (player.hasCock() && (player.minotaurScore() >= 9 || player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 1))) {
 				bd = buttons.add("Plasma blast", PlasmaBlast, "Masturbate to unleash a massive discharge of milk/cum mized with plasma.", "Plasma blast");
 				if (player.hasStatusEffect(StatusEffects.CooldownPlasmaBlast)) {
-					if (player.hasPerk(MutationsLib.LactaBovinaOvariesEvolved) || player.hasPerk(MutationsLib.MinotaurTesticlesEvolved)) bd.disable("\n<b>You need more time before you can do it again.</b>");
+					if (player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3 || player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3) bd.disable("\n<b>You need more time before you can do it again.</b>");
 					else bd.disable("You can't use it more than once during fight.");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
@@ -177,11 +178,11 @@ public class MagicSpecials extends BaseCombatContent {
 			var terror:Number = 9;
 			if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) terror -= 1;
 			if (player.hasPerk(PerkLib.NaturalInstincts)) terror -= 1;
-			if (player.tailCount == 9 && player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
+			if (player.tailCount == 9 && player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 1) {
 				bd.toolTipText += "\nWould go into cooldown after use for: "+(terror-4)+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
 				bd.requireFatigue(200 * kitsuneskill2Cost());
-			} else if (player.tailCount == 9 || player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
+			} else if (player.tailCount == 9 || player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 1) {
 				bd.toolTipText += "\nWould go into cooldown after use for: "+(terror-2)+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
 				bd.requireFatigue(100 * kitsuneskill2Cost());
@@ -209,11 +210,11 @@ public class MagicSpecials extends BaseCombatContent {
 			var illusion:Number = 9;
 			if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) illusion -= 1;
 			if (player.hasPerk(PerkLib.NaturalInstincts)) illusion -= 1;
-			if (player.tailType == 13 && player.tailCount == 9 && player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
+			if (player.tailType == 13 && player.tailCount == 9 && player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 1) {
 				bd.toolTipText += "\nWould go into cooldown after use for: "+(illusion-4)+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
 				bd.requireFatigue(200 * kitsuneskill2Cost());
-			} else if ((player.tailType == 13 && player.tailCount == 9) || player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
+			} else if ((player.tailType == 13 && player.tailCount == 9) || player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 1) {
 				bd.toolTipText += "\nWould go into cooldown after use for: "+(illusion-2)+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
 				bd.requireFatigue(100 * kitsuneskill2Cost());
@@ -256,9 +257,9 @@ public class MagicSpecials extends BaseCombatContent {
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			// Lust Strike
 			bd = buttons.add("Lust Strike", LustStrike);
-			var word1:String = player.hasPerk(MutationsLib.BlackHeart) ? ", intelligence" : "";
-			var word2:String = player.hasPerk(MutationsLib.BlackHeartPrimitive) ? ", wisdom" : "";
-			var word3:String = player.hasPerk(MutationsLib.BlackHeartEvolved) ? ", sensitivity" : "";
+			var word1:String = player.perkv1(IMutationsLib.BlackHeartIM) >= 1? ", intelligence" : "";
+			var word2:String = player.perkv1(IMutationsLib.BlackHeartIM) >= 2? ", wisdom" : "";
+			var word3:String = player.perkv1(IMutationsLib.BlackHeartIM) >= 3? ", sensitivity" : "";
 			bd.hint("Use arcane gestures to flare up enemy lust. The higher your libido" + word3 + word2 + word1 + " and horny you're at the moment the higher enemy lust will rise. \n");
 			bd.requireFatigue(50, true);
 			if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
@@ -272,9 +273,9 @@ public class MagicSpecials extends BaseCombatContent {
 			else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			else bd.requireFatigue(spellCost(40),true);
 		}
-		if (player.devilkinScore() >= 10 || player.hasPerk(MutationsLib.ObsidianHeart)) {
+		if (player.devilkinScore() >= 10 || player.perkv1(IMutationsLib.ObsidianHeartIM) >= 1) {
 			bd = buttons.add("Infernal flare", infernalflare).hint("Use corrupted flames to burn your opponent. \n");
-			if (player.hasPerk(MutationsLib.ObsidianHeartEvolved)) bd.requireMana(spellCost(50),true);
+			if (player.perkv1(IMutationsLib.ObsidianHeartIM) >= 3) bd.requireMana(spellCost(50),true);
 			else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			else bd.requireMana(spellCost(40),true);
 		}
@@ -336,7 +337,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DragonFireBreath)) {
 			bd = buttons.add("Dragon(Fire)", dragonfireBreath);
-			if (player.hasPerk(MutationsLib.DraconicLungs) || player.hasPerk(MutationsLib.DrakeLungsEvolved)) {
+			if (player.perkv1(IMutationsLib.DraconicLungIM) >= 1 || player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) {
 				bd.hint("Unleash fire from your mouth. This can only be done once per fight. \n", "Dragon Fire Breath");
 			} else {
 				bd.hint("Unleash fire from your mouth. This can only be done once a day. \n", "Dragon Fire Breath");
@@ -349,7 +350,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DragonIceBreath)) {
 			bd = buttons.add("Dragon(Ice)", dragoniceBreath);
-			if (player.hasPerk(MutationsLib.DraconicLungs) || player.hasPerk(MutationsLib.DrakeLungsEvolved)) {
+			if (player.perkv1(IMutationsLib.DraconicLungIM) >= 1 || player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) {
 				bd.hint("Unleash ice from your mouth. This can only be done once per fight. \n", "Dragon Ice Breath");
 			} else {
 				bd.hint("Unleash ice from your mouth. This can only be done once a day. \n", "Dragon Ice Breath");
@@ -362,7 +363,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DragonLightningBreath)) {
 			bd = buttons.add("Dragon(Light)", dragonlightningBreath);
-			if (player.hasPerk(MutationsLib.DraconicLungs) || player.hasPerk(MutationsLib.DrakeLungsEvolved)) {
+			if (player.perkv1(IMutationsLib.DraconicLungIM) >= 1 || player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) {
 				bd.hint("Unleash lightning from your mouth. This can only be done once per fight. \n", "Dragon Lightning Breath");
 			} else {
 				bd.hint("Unleash lightning from your mouth. This can only be done once a day. \n", "Dragon Lightning Breath");
@@ -375,7 +376,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DragonDarknessBreath)) {
 			bd = buttons.add("Dragon(Dark)", dragondarknessBreath);
-			if (player.hasPerk(MutationsLib.DraconicLungs) || player.hasPerk(MutationsLib.DrakeLungsEvolved)) {
+			if (player.perkv1(IMutationsLib.DraconicLungIM) >= 1 || player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) {
 				bd.hint("Unleash darkness from your mouth. This can only be done once per fight. \n", "Dragon Darkness Breath");
 			} else {
 				bd.hint("Unleash darkness from your mouth. This can only be done once a day. \n", "Dragon Darkness Breath");
@@ -388,7 +389,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.DragonWaterBreath)) {
 			bd = buttons.add("Dragon(Water)", dragonWaterBreath);
-			if (player.hasPerk(MutationsLib.DraconicLungs) || player.hasPerk(MutationsLib.DrakeLungsEvolved)) {
+			if (player.perkv1(IMutationsLib.DraconicLungIM) >= 1 || player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) {
 				bd.hint("Unleash water from your mouth. This can only be done once per fight. Massively increase lightning damage taken by the target\n", "Dragon Water Breath");
 			} else {
 				bd.hint("Unleash water from your mouth. This can only be done once a day. Massively increase lightning damage taken by the target \n", "Dragon Water Breath");
@@ -399,9 +400,9 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
-		if (player.hasPerk(MutationsLib.DraconicLungsEvolved) || (player.dragonScore() >= 16 && player.hasPerk(MutationsLib.DraconicLungs))) {
+		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3 || (player.dragonScore() >= 16 && player.perkv1(IMutationsLib.DraconicLungIM) >= 1)) {
 			bd = buttons.add("TrueDragonBreath", trueDragonBreath);
-			if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) {
+			if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) {
 				bd.hint("Unleash all four elements fused together from your mouth. This can only be done once per fight. \n", "True Dragon Breath");
 			} else {
 				bd.hint("Unleash all four elements fused together from your mouth. This can only be done once a day. \n", "True Dragon Breath");
@@ -409,7 +410,7 @@ public class MagicSpecials extends BaseCombatContent {
 			bd.requireFatigue(spellCost(200));
 			//Not Ready Yet:
 			if(player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) {
-				if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) bd.disable("Your throat is incredibly sore and hoarse. You aren’t sure you can talk let alone try that attack for a while.");
+				if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) bd.disable("Your throat is incredibly sore and hoarse. You aren’t sure you can talk let alone try that attack for a while.");
 				else bd.disable("Your throat is incredibly sore and hoarse. You aren’t sure you can talk let alone try that attack for more than a day.");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
@@ -427,12 +428,12 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You need more time before you can use Freezing Breath again.");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
-		if ((player.yukiOnnaScore() >= 14 && player.hasPerk(PerkLib.ColdAffinity)) || player.hasPerk(MutationsLib.FrozenHeart)) {
+		if ((player.yukiOnnaScore() >= 14 && player.hasPerk(PerkLib.ColdAffinity)) || player.perkv1(IMutationsLib.FrozenHeartIM) >= 1) {
 			bd = buttons.add("Ice Barrage", iceBarrage).hint("Call up a frigid storm to freeze and bombard your enemies.", "Ice Barrage");
 			bd.requireFatigue(spellCost(40));
 			var HCCDv:Number = 10;
-			if (player.hasPerk(MutationsLib.FrozenHeartPrimitive)) HCCDv -= 1;
-			if (player.hasPerk(MutationsLib.FrozenHeartEvolved)) HCCDv -= 3;
+			if (player.perkv1(IMutationsLib.FrozenHeartIM) >= 2) HCCDv -= 1;
+			if (player.perkv1(IMutationsLib.FrozenHeartIM) >= 3) HCCDv -= 3;
 			if (player.hasPerk(PerkLib.NaturalInstincts)) HCCDv -= 1;
 			bd = buttons.add("HungeringCold", hungeringCold).hint("Freeze the air around your target, encasing it in ice and dealing hypothermia damage. Weakens opponents ice resistance to further attacks damage by 50% stacking up to 3 times. \n\nWould go into cooldown after use for: " + HCCDv + " rounds", "Hungering cold");
 			bd.requireFatigue(spellCost(40));
@@ -495,7 +496,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("Your natural weapons are already generating cold!");
 			}
 		}
-		if ((player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI) || player.hasPerk(MutationsLib.HinezumiBurningBloodEvolved)) {
+		if ((player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI) || player.perkv1(IMutationsLib.HinezumiBurningBloodIM) >= 3) {
 			bd = buttons.add("Cauterize", cauterize).hint("Flash burn your wounds to cause them to close. Take damage but recover over time. \n", "Cauterize");
 			if(player.hasStatusEffect(StatusEffects.Cauterize)) {
 				bd.disable("You already cauterizing your wounds!");
@@ -528,7 +529,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You're already pretty goddamn mad!");
 			}
 		}
-		if (player.hasPerk(MutationsLib.SharkOlfactorySystem) || player.sharkScore() >= 9) {
+		if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 || player.sharkScore() >= 9) {
 			bd = buttons.add("Blood Frenzy", bloodFrenzy);
 			if (combat.MonsterIsBleeding()) {
 				bd.hint("Lose yourself to a blood fueled trance increasing your speed, libido and weakening your inteligence. The trance last for as long as the opponent is bleeding and cannot be disangaged willingly.\n");
@@ -620,7 +621,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You already rampaging!");
 			}
 		}
-		if (((player.eyes.type == Eyes.GORGON && player.hairType == Hair.GORGON) || player.hasPerk(MutationsLib.GorgonsEyes)) && !player.hasPerk(PerkLib.ElementalBody)) {
+		if (((player.eyes.type == Eyes.GORGON && player.hairType == Hair.GORGON) || player.perkv1(IMutationsLib.GorgonEyesIM) >= 1) && !player.hasPerk(PerkLib.ElementalBody)) {
 			bd = buttons.add("Petrify", petrify).hint("Use your gaze to temporally turn your enemy into a stone. \n");
 			bd.requireFatigue(spellCost(100),true);
 			if (monster is LivingStatue) {
@@ -640,7 +641,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You cannot focus to reach the enemy's mind while you're having so much difficult breathing.");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
-		if (player.devilkinScore() >= 10 || player.hasPerk(MutationsLib.ObsidianHeart)) {
+		if (player.devilkinScore() >= 10 || player.perkv1(IMutationsLib.ObsidianHeartIM) >= 1) {
 			bd = buttons.add("Maleficium", maleficium).hint("Infuse yourself with corrupt power empowering your magic but reducing your resistance to carnal assault.");
 			if(player.hasStatusEffect(StatusEffects.Maleficium)) {
 				bd.disable("You already empowered with corrupt power!");
@@ -698,8 +699,8 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.ratatoskrScore() >= 12) {
 			var cdko:Number = 12;
-			if (player.hasPerk(MutationsLib.RatatoskrSmartsPrimitive)) cdko -= 1;
-			if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) cdko -= 1;
+			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 2) cdko -= 1;
+			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) cdko -= 1;
 			if (player.hasPerk(PerkLib.NaturalInstincts)) cdko -= 1;
 			bd = buttons.add("Knowledge overload", KnowledgeOverload).hint("Stun your opponents by overflowing their head with knowledge. \n\nWould go into cooldown after use for: "+cdko+" rounds", "Knowledge overload");
 			bd.requireMana(spellCost(80));
@@ -707,7 +708,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You need more time before you can use Knowledge overload again.\n\n");
 			}
 			var cdp:Number = 6;
-			if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) cdp -= 1;
+			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) cdp -= 1;
 			if (player.hasPerk(PerkLib.NaturalInstincts)) cdp -= 1;
 			bd = buttons.add("Provoke", Provoke).hint("Insult your opponent and cause it to fly into a murderous rage increasing its damage but negating its defences and ability to do anything but attack blindly with physical strikes. \n\nWould go into cooldown after use for: "+cdp+" rounds", "Provoke");
 			bd.requireMana(spellCost(80));
@@ -715,9 +716,9 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You need more time before you can use Provoke again.\n\n");
 			}
 		}
-		if (player.ratatoskrScore() >= 12 || player.hasPerk(MutationsLib.RatatoskrSmarts)) {
+		if (player.ratatoskrScore() >= 12 || player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 1) {
 			var cdww:Number = 4;
-			if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) cdww -= 1;
+			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) cdww -= 1;
 			if (player.hasPerk(PerkLib.NaturalInstincts)) cdww -= 1;
 			bd = buttons.add("Weird words", WeirdWords).hint("Strike at your opponent with weird sentences charged with magic, so hard to comprehend it hurts. More potent based on your personal knowledge. \n\nWould go into cooldown after use for: "+cdww+" rounds", "Weird words");
 			bd.requireMana(spellCost(80));
@@ -940,7 +941,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		fatigue(50, USEFATG_MAGIC_NOBM);
 		var cooldown:Number = 10;
-		if (player.hasPerk(MutationsLib.YetiFatEvolved)) cooldown -= 3;
+		if (player.perkv1(IMutationsLib.YetiFatIM) >= 3) cooldown -= 3;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) cooldown -= 1;
 		player.createStatusEffect(StatusEffects.CooldownFreezingBreathYeti,cooldown,0,0,0);
 		var damage:Number = 0;
@@ -971,7 +972,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
-		if (player.hasPerk(MutationsLib.YetiFat)) damage *= 1.50;
+		if (player.perkv1(IMutationsLib.YetiFatIM) >= 1) damage *= 1.50;
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		outputText("You inhale deeply, then blow a freezing breath attack at your opponent, encasing it in ice!");
 		//Shell
@@ -1013,7 +1014,7 @@ public class MagicSpecials extends BaseCombatContent {
 				else outputText("are");
 				outputText(" frozen solid!");
 				var freezetime:Number = 3;
-				if (player.hasPerk(MutationsLib.YetiFatEvolved)) freezetime += 1;
+				if (player.perkv1(IMutationsLib.YetiFatIM) >= 3) freezetime += 1;
 				monster.createStatusEffect(StatusEffects.FrozenSolid,freezetime,0,0,0);
 			}
 			else {
@@ -1041,8 +1042,8 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		var IntligenceModifier:Number = 0;
-		if (player.hasPerk(MutationsLib.MelkieLungPrimitive)) IntligenceModifier += scalingBonusIntelligence();
-		if (player.hasPerk(MutationsLib.MelkieLungEvolved)) IntligenceModifier += scalingBonusIntelligence();
+		if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) IntligenceModifier += scalingBonusIntelligence();
+		if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) IntligenceModifier += scalingBonusIntelligence();
 		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
 			outputText("You end your theme with a powerful finale compelling everyone around to adore and love you.");
 			var lustDmgF:Number = monster.lustVuln * 3 * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
@@ -1054,9 +1055,9 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
-			if (player.hasPerk(MutationsLib.MelkieLung)) lustDmgF *= 1.2;
-			if (player.hasPerk(MutationsLib.MelkieLungPrimitive)) lustDmgF *= 1.3;
-			if (player.hasPerk(MutationsLib.MelkieLungEvolved)) lustDmgF *= 1.4;
+			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) lustDmgF *= 1.2;
+			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) lustDmgF *= 1.3;
+			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) lustDmgF *= 1.4;
 			lustDmgF = Math.round(lustDmgF);
 			monster.teased(lustDmgF);
 			if(!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,4,0,0,0);
@@ -1083,9 +1084,9 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg2 *= 1.5;
 			if (player.hasPerk(PerkLib.RacialParagon)) lustDmg2 *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg2 *= 1.50;
-			if (player.hasPerk(MutationsLib.MelkieLung)) lustDmg2 *= 1.2;
-			if (player.hasPerk(MutationsLib.MelkieLungPrimitive)) lustDmg2 *= 1.3;
-			if (player.hasPerk(MutationsLib.MelkieLungEvolved)) lustDmg2 *= 1.4;
+			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) lustDmg2 *= 1.2;
+			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) lustDmg2 *= 1.3;
+			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) lustDmg2 *= 1.4;
 			lustDmg2 = Math.round(lustDmg2);
 			monster.teased(lustDmg2);
 			player.addStatusValue(StatusEffects.ChanneledAttack, 1, 1);
@@ -1101,9 +1102,9 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
 			if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
-			if (player.hasPerk(MutationsLib.MelkieLung)) lustDmg *= 1.2;
-			if (player.hasPerk(MutationsLib.MelkieLungPrimitive)) lustDmg *= 1.3;
-			if (player.hasPerk(MutationsLib.MelkieLungEvolved)) lustDmg *= 1.4;
+			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 1) lustDmg *= 1.2;
+			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) lustDmg *= 1.3;
+			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) lustDmg *= 1.4;
 			lustDmg = Math.round(lustDmg);
 			monster.teased(lustDmg);
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
@@ -1190,9 +1191,9 @@ public class MagicSpecials extends BaseCombatContent {
 				crit = true;
 				lustDmgF *= 1.75;
 			}
-			if (player.hasPerk(MutationsLib.HeartOfTheStorm)) lustDmgF *= 1.1;
-			if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) lustDmgF *= 1.2;
-			if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) lustDmgF *= 1.3;
+			if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) lustDmgF *= 1.1;
+			if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) lustDmgF *= 1.2;
+			if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) lustDmgF *= 1.3;
 			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
 			lustDmgF = Math.round(monster.lustVuln * lustDmgF);
@@ -1245,7 +1246,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = calcVoltageMod(damage, true);
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(MutationsLib.FloralOvaries)) damage *= 1.25;
+		if (player.perkv1(IMutationsLib.FloralOvariesIM) >= 1) damage *= 1.25;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 		doLightingDamage(damage, true, true);
@@ -1272,9 +1273,9 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.ChiReflowLust)) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 		if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) lustDmgF *= 1.5;
-		if (player.hasPerk(MutationsLib.HeartOfTheStorm)) damage *= 1.1;
-		if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) damage *= 1.2;
-		if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) damage *= 1.3;
+		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) damage *= 1.1;
+		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) damage *= 1.2;
+		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) damage *= 1.3;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
 		lustDmgF = lustDmgF * monster.lustVuln;
@@ -1290,7 +1291,7 @@ public class MagicSpecials extends BaseCombatContent {
 		statScreenRefresh();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
-		if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved) && rand(100) < 10 && !monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
+		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3 && rand(100) < 10 && !monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
 		enemyAI();
 	}
 
@@ -1333,9 +1334,9 @@ public class MagicSpecials extends BaseCombatContent {
 			crit2 = true;
 			lustDmgF *= 1.75;
 		}
-		if (player.hasPerk(MutationsLib.HeartOfTheStorm)) lustDmgF *= 1.1;
-		if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) lustDmgF *= 1.2;
-		if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) lustDmgF *= 1.3;
+		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) lustDmgF *= 1.1;
+		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) lustDmgF *= 1.2;
+		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) lustDmgF *= 1.3;
 		lustDmgF = lustDmgF * monster.lustVuln;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
@@ -1348,7 +1349,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-		if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)){
+		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3){
 			if (rand(100) < 10) {
 				if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
 			}
@@ -1365,7 +1366,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function PlasmaBlast():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if (player.hasPerk(MutationsLib.LactaBovinaOvariesEvolved) || player.hasPerk(MutationsLib.MinotaurTesticlesEvolved)) {
+		if (player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3 || player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3) {
 			if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownPlasmaBlast,3,0,0,0);
 			else player.createStatusEffect(StatusEffects.CooldownPlasmaBlast, 4, 0, 0, 0);
 		}
@@ -1386,9 +1387,9 @@ public class MagicSpecials extends BaseCombatContent {
 				var CumLustDmg:Number = combat.calculateBasicTeaseDamage();
 				CumLustDmg += player.cumQ()/100;
 				CumLustDmg *= (player.lust100 * 0.01);
-				if (player.hasPerk(MutationsLib.HeartOfTheStorm)) CumLustDmg *= 1.20;
-				if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) CumLustDmg *= 1.20;
-				if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) CumLustDmg *= 1.20;
+				if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) CumLustDmg *= 1.20;
+				if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) CumLustDmg *= 1.20;
+				if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) CumLustDmg *= 1.20;
 				monster.teased(Math.round(monster.lustVuln * CumLustDmg));
 				combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 			}
@@ -1408,9 +1409,9 @@ public class MagicSpecials extends BaseCombatContent {
 				var MilkLustDmg:Number = combat.calculateBasicTeaseDamage();
 				MilkLustDmg += player.lactationQ()/100;
 				MilkLustDmg *= (player.lust100 * 0.01);
-				if (player.hasPerk(MutationsLib.HeartOfTheStorm)) MilkLustDmg *= 1.20;
-				if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) MilkLustDmg *= 1.20;
-				if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) MilkLustDmg *= 1.20;
+				if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) MilkLustDmg *= 1.20;
+				if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) MilkLustDmg *= 1.20;
+				if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) MilkLustDmg *= 1.20;
 				monster.teased(Math.round(monster.lustVuln * MilkLustDmg));
 				combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 			}
@@ -1432,9 +1433,9 @@ public class MagicSpecials extends BaseCombatContent {
 				var MilkCumLustDmg:Number = combat.calculateBasicTeaseDamage();
 				MilkCumLustDmg += player.lactationQ()/100;
 				MilkCumLustDmg += player.cumQ()/100;
-				if (player.hasPerk(MutationsLib.HeartOfTheStorm)) MilkCumLustDmg *= 1.20;
-				if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) MilkCumLustDmg *= 1.20;
-				if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) MilkCumLustDmg *= 1.20;
+				if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) MilkCumLustDmg *= 1.20;
+				if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) MilkCumLustDmg *= 1.20;
+				if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) MilkCumLustDmg *= 1.20;
 				monster.teased(Math.round(monster.lustVuln * MilkCumLustDmg));
 				combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 			}
@@ -1453,7 +1454,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("A terrifying red aura of power shroud your body as you shout a loud thundering war cry and enter a murderous rampage.");
 			var onirampageDuration:Number = 6;
 			var onirampageCooldown:Number = 10;
-			if (player.hasPerk(MutationsLib.OniMusculatureEvolved)) {
+			if (player.perkv1(IMutationsLib.OniMusculatureIM) >= 3) {
 				onirampageDuration += 3;
 				onirampageCooldown -= 1;
 			}
@@ -1481,8 +1482,8 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function minOniScoreReq():Number {
 		var miniOniscored:Number = 12;
-		if (player.hasPerk(MutationsLib.OniMusculature)) miniOniscored -= 6;
-		if (player.hasPerk(MutationsLib.OniMusculaturePrimitive)) miniOniscored -= 3;
+		if (player.perkv1(IMutationsLib.OniMusculatureIM) >= 1) miniOniscored -= 6;
+		if (player.perkv1(IMutationsLib.OniMusculatureIM) >= 2) miniOniscored -= 3;
 		return miniOniscored;
 	}
 
@@ -1602,10 +1603,10 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		fatigue(40, USEFATG_MAGIC_NOBM);
 		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 4;
-		if (player.hasPerk(MutationsLib.FrozenHeart)) {
+		if (player.perkv1(IMutationsLib.FrozenHeartIM) >= 1) {
 			var IBM:Number = 1.1;
-			if (player.hasPerk(MutationsLib.FrozenHeartPrimitive)) IBM += 0.2;
-			if (player.hasPerk(MutationsLib.FrozenHeartEvolved)) IBM += 0.3;
+			if (player.perkv1(IMutationsLib.FrozenHeartIM) >= 2) IBM += 0.2;
+			if (player.perkv1(IMutationsLib.FrozenHeartIM) >= 3) IBM += 0.3;
 			damage *= IBM;
 		}
 		//Determine if critical hit!
@@ -1658,21 +1659,21 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(40, USEFATG_MAGIC_NOBM);
 		var HCCD:Number = 10;
 		var HCD:Number = 8;
-		if (player.hasPerk(MutationsLib.FrozenHeartPrimitive)) {
+		if (player.perkv1(IMutationsLib.FrozenHeartIM) >= 2) {
 			HCCD -= 1;
 			HCD += 1;
 		}
-		if (player.hasPerk(MutationsLib.FrozenHeartEvolved)) {
+		if (player.perkv1(IMutationsLib.FrozenHeartIM) >= 3) {
 			HCCD -= 3;
 			HCD += 3;
 		}
 		if (player.hasPerk(PerkLib.NaturalInstincts)) HCCD -= 1;
 		player.createStatusEffect(StatusEffects.CooldownHungeringCold,HCCD,0,0,0);
 		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 0.8;
-		if (player.hasPerk(MutationsLib.FrozenHeart)) {
+		if (player.perkv1(IMutationsLib.FrozenHeartIM) >= 1) {
 			var HCM:Number = 1.1;
-			if (player.hasPerk(MutationsLib.FrozenHeartPrimitive)) HCM += 0.2;
-			if (player.hasPerk(MutationsLib.FrozenHeartEvolved)) HCM += 0.3;
+			if (player.perkv1(IMutationsLib.FrozenHeartIM) >= 2) HCM += 0.2;
+			if (player.perkv1(IMutationsLib.FrozenHeartIM) >= 3) HCM += 0.3;
 			damage *= HCM;
 		}
 		//Determine if critical hit!
@@ -1961,11 +1962,11 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(MutationsLib.DraconicLungsPrimitive)) damult += 3;
-		if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) damult += 6;
-		if (player.hasPerk(MutationsLib.DrakeLungs)) damult += 3;
-		if (player.hasPerk(MutationsLib.DrakeLungsPrimitive)) damult += 3;
-		if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
+		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 2) damult += 3;
+		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) damult += 6;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) damult += 3;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 3;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage *= 4;
@@ -2083,11 +2084,11 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(MutationsLib.DraconicLungsPrimitive)) damult += 3;
-		if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) damult += 6;
-		if (player.hasPerk(MutationsLib.DrakeLungs)) damult += 3;
-		if (player.hasPerk(MutationsLib.DrakeLungsPrimitive)) damult += 3;
-		if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
+		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 2) damult += 3;
+		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) damult += 6;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) damult += 3;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 3;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -2171,11 +2172,11 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(MutationsLib.DraconicLungsPrimitive)) damult += 3;
-		if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) damult += 6;
-		if (player.hasPerk(MutationsLib.DrakeLungs)) damult += 3;
-		if (player.hasPerk(MutationsLib.DrakeLungsPrimitive)) damult += 3;
-		if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
+		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 2) damult += 3;
+		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) damult += 6;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) damult += 3;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 3;
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -2259,11 +2260,11 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(MutationsLib.DraconicLungsPrimitive)) damult += 3;
-		if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) damult += 6;
-		if (player.hasPerk(MutationsLib.DrakeLungs)) damult += 3;
-		if (player.hasPerk(MutationsLib.DrakeLungsPrimitive)) damult += 3;
-		if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
+		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 2) damult += 3;
+		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) damult += 6;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) damult += 3;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 3;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage *= 4;
@@ -2345,11 +2346,11 @@ public class MagicSpecials extends BaseCombatContent {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
-		if (player.hasPerk(MutationsLib.DraconicLungsPrimitive)) damult += 3;
-		if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) damult += 6;
-		if (player.hasPerk(MutationsLib.DrakeLungs)) damult += 3;
-		if (player.hasPerk(MutationsLib.DrakeLungsPrimitive)) damult += 3;
-		if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
+		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 2) damult += 3;
+		if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) damult += 6;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) damult += 3;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
+		if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 3;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage *= 4;
@@ -2442,11 +2443,11 @@ public class MagicSpecials extends BaseCombatContent {
 				player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 				damage *= 3;
 			}
-			if (player.hasPerk(MutationsLib.DraconicLungsPrimitive)) damult += 3;
-			if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) damult += 6;
-			if (player.hasPerk(MutationsLib.DrakeLungs)) damult += 3;
-			if (player.hasPerk(MutationsLib.DrakeLungsPrimitive)) damult += 3;
-			if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
+			if (player.perkv1(IMutationsLib.DraconicLungIM) >= 2) damult += 3;
+			if (player.perkv1(IMutationsLib.DraconicLungIM) >= 3) damult += 6;
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) damult += 3;
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) damult += 3;
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) damult += 3;
 			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 1.25;
@@ -2783,8 +2784,8 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		player.wrath -= 50;
 		var berzerkDuration:Number = 10;
-		if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsPrimitive)) berzerkDuration += 2;
-		if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) berzerkDuration += 8;
+		if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 2) berzerkDuration += 2;
+		if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) berzerkDuration += 8;
 		if (player.hasPerk(PerkLib.ColderFury)) {
 			outputText("You roar and unleash your savage fury in order to destroy your foe!\n\n");
 		}
@@ -2799,7 +2800,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function bloodFrenzy():void {
 		clearOutput();
 		var MultiplierBonus:Number = 0.5;
-		if (player.hasPerk(MutationsLib.SharkOlfactorySystemEvolved)) MultiplierBonus = 2;
+		if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) MultiplierBonus = 2;
 		outputText("You inhale deeply the smell of running blood in the air, mouth");
 		if(!player.isHerm()) outputText(" and");
 		else outputText(",");
@@ -2815,8 +2816,8 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		player.wrath -= 50;
 		var lustzerkDuration:Number = 10;
-		if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsPrimitive)) lustzerkDuration += 2;
-		if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) lustzerkDuration += 8;
+		if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 2) lustzerkDuration += 2;
+		if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) lustzerkDuration += 8;
 		if (player.hasPerk(PerkLib.ColderLust)) {
 			outputText("You roar and unleash your lustful fury in order to destroy your foe!\n\n");
 		}
@@ -2831,9 +2832,9 @@ public class MagicSpecials extends BaseCombatContent {
 	public function blazingBattleSpirit():void {
 		clearOutput();
 		var blazingBattleSpiritDuration:Number = 10;
-		if (player.hasPerk(MutationsLib.HinezumiBurningBlood)) blazingBattleSpiritDuration += 1;
-		if (player.hasPerk(MutationsLib.HinezumiBurningBloodPrimitive)) blazingBattleSpiritDuration += 2;
-		if (player.hasPerk(MutationsLib.HinezumiBurningBloodEvolved)) blazingBattleSpiritDuration += 7;
+		if (player.perkv1(IMutationsLib.HinezumiBurningBloodIM) >= 1) blazingBattleSpiritDuration += 1;
+		if (player.perkv1(IMutationsLib.HinezumiBurningBloodIM) >= 2) blazingBattleSpiritDuration += 2;
+		if (player.perkv1(IMutationsLib.HinezumiBurningBloodIM) >= 3) blazingBattleSpiritDuration += 7;
 		outputText("Your bodily flames begin to rage as you enter a passionate battle fury.\n\n");
 		player.createStatusEffect(StatusEffects.BlazingBattleSpirit,blazingBattleSpiritDuration,0,0,0);
 		statScreenRefresh();
@@ -2852,9 +2853,9 @@ public class MagicSpecials extends BaseCombatContent {
 	public function WinterClaws():void {
 		clearOutput();
 		var WinterClawsDuration:Number = 10
-		//if (player.hasPerk(MutationsLib.HinezumiBurningBlood)) blazingBattleSpiritDuration += 1;
-		//if (player.hasPerk(MutationsLib.HinezumiBurningBloodPrimitive)) blazingBattleSpiritDuration += 2;
-		//if (player.hasPerk(MutationsLib.HinezumiBurningBloodEvolved)) blazingBattleSpiritDuration += 7;
+		//if (player.perkv1(IMutationsLib.HinezumiBurningBloodIM) >= 1) blazingBattleSpiritDuration += 1;
+		//if (player.perkv1(IMutationsLib.HinezumiBurningBloodIM) >= 2) blazingBattleSpiritDuration += 2;
+		//if (player.perkv1(IMutationsLib.HinezumiBurningBloodIM) >= 3) blazingBattleSpiritDuration += 7;
 		outputText("Your bodily flames begin to rage as you enter a passionate battle fury.\n\n");
 		player.createStatusEffect(StatusEffects.WinterClaw,WinterClawsDuration,0,0,0);
 		statScreenRefresh();
@@ -2864,9 +2865,9 @@ public class MagicSpecials extends BaseCombatContent {
 	public function flameBlade():void {
 		clearOutput();
 		var flameBladeDuration:Number = 10;
-		if (player.hasPerk(MutationsLib.SalamanderAdrenalGlands)) flameBladeDuration += 1;
-		if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsPrimitive)) flameBladeDuration += 2;
-		if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) flameBladeDuration += 7;
+		if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 1) flameBladeDuration += 1;
+		if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 2) flameBladeDuration += 2;
+		if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) flameBladeDuration += 7;
 		outputText("Your run your tail across your weapon igniting it with raging flames.\n\n");
 		player.createStatusEffect(StatusEffects.FlameBlade,flameBladeDuration,0,0,0);
 		statScreenRefresh();
@@ -3041,8 +3042,8 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		useMana(80, Combat.USEMANA_MAGIC);
 		var KOCD:Number = 12;
-		if (player.hasPerk(MutationsLib.RatatoskrSmartsPrimitive)) KOCD -= 1;
-		if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) KOCD -= 1;
+		if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 2) KOCD -= 1;
+		if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) KOCD -= 1;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) KOCD -= 1;
 		else player.createStatusEffect(StatusEffects.CooldownKnowledgeOverload,KOCD,0,0,0);
 		outputText("You share some of your well earned knowledge with [themonster] who stands there blankly listening to your spiel in confusion. It's going to take [monster him] a moment to come down from the absurd amount of info you forced into [monster his] tiny head"+(monster.plural?"s":"")+".\n\n");
@@ -3057,7 +3058,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		useMana(80, Combat.USEMANA_MAGIC);
 		var PCD:Number = 6;
-		if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) PCD -= 1;
+		if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) PCD -= 1;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) PCD -= 1;
 		player.createStatusEffect(StatusEffects.CooldownProvoke,PCD,0,0,0);
 		outputText("You start out right away with the classic introduction of \"<i>You know, there's a rumor about you, it says that…</i>\" sharing with [themonster] the nastiest rumors about [monster him]. In disbelief and absolute rage [monster he] attacks relentlessly in an effort to shut you up. ");
@@ -3075,13 +3076,13 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		useMana(80, Combat.USEMANA_MAGIC);
 		var WWCD:Number = 4;
-		if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) WWCD -= 1;
+		if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) WWCD -= 1;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) WWCD -= 1;
 		player.createStatusEffect(StatusEffects.CooldownWeirdWords,WWCD,0,0,0);
 		var damage:Number = scalingBonusIntelligence() * spellMod() * 4;
 		damage *= 1 + (codex.checkUnlocked() * 0.01);
-		if (player.hasPerk(MutationsLib.RatatoskrSmartsPrimitive)) damage *= 1.2;
-		if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) damage *= 1.25;
+		if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 2) damage *= 1.2;
+		if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) damage *= 1.25;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -3121,7 +3122,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage += player.gems;
-		if (player.hasPerk(MutationsLib.NukiNutsEvolved)) damage *= 2;
+		if (player.perkv1(IMutationsLib.NukiNutsIM) >= 3) damage *= 2;
 		damage = Math.round(damage);
 		outputText("You grab some of your gems imbuing your Tanuki golden magics in them before throwing them at your foe, the gems your makeshift projectiles exploding upon impact.");
 		doDamage(damage, true, true);
@@ -3202,9 +3203,9 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		player.lust += 50;
 		var maleficiumDuration:Number = 10;
-		if (player.hasPerk(MutationsLib.ObsidianHeartPrimitive)) maleficiumDuration += 5;
+		if (player.perkv1(IMutationsLib.ObsidianHeartIM) >= 2) maleficiumDuration += 5;
 		outputText("You moan in delight as your body fills with profane powers, empowering your spells and making you blush with barely contained desire.\n\n");
-		if (player.cor < 60 && player.hasPerk(MutationsLib.ObsidianHeart)) dynStats("cor", 0.3);
+		if (player.cor < 60 && player.perkv1(IMutationsLib.ObsidianHeartIM) >= 1) dynStats("cor", 0.3);
 		player.createStatusEffect(StatusEffects.Maleficium,maleficiumDuration,0,0,0);
 		enemyAI();
 	}
@@ -3214,9 +3215,9 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		doNext(combatMenu);
-		if (player.hasPerk(MutationsLib.ObsidianHeartEvolved)) useMana(50, Combat.USEMANA_MAGIC);
+		if (player.perkv1(IMutationsLib.ObsidianHeartIM) >= 3) useMana(50, Combat.USEMANA_MAGIC);
 		else useMana(40, Combat.USEMANA_MAGIC);
-		if (player.cor < 60 && player.hasPerk(MutationsLib.ObsidianHeart)) dynStats("cor", 0.3);
+		if (player.cor < 60 && player.perkv1(IMutationsLib.ObsidianHeartIM) >= 1) dynStats("cor", 0.3);
 		if (monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your attack touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your attack!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
@@ -3234,14 +3235,14 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		outputText("You grin malevolently and weave an arcane sign, causing an infernal fire to surges from below and scorching your opponent ");
 		var damage:Number = scalingBonusIntelligence() * 3.2;
-		if (player.hasPerk(MutationsLib.ObsidianHeartPrimitive)) damage += scalingBonusIntelligence() * 0.8;
-		if (player.hasPerk(MutationsLib.ObsidianHeartEvolved)) damage += scalingBonusIntelligence() * 1.6;
+		if (player.perkv1(IMutationsLib.ObsidianHeartIM) >= 2) damage += scalingBonusIntelligence() * 0.8;
+		if (player.perkv1(IMutationsLib.ObsidianHeartIM) >= 3) damage += scalingBonusIntelligence() * 1.6;
 		damage *= spellMod();
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combatMagicalCritical();
-		if (player.hasPerk(MutationsLib.ObsidianHeartEvolved)) critChance += 20;
+		if (player.perkv1(IMutationsLib.ObsidianHeartIM) >= 3) critChance += 20;
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 		if (rand(100) < critChance) {
 			crit = true;
@@ -3300,7 +3301,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hairType == Hair.GORGON) outputText(" and awaken normaly dormant snake hair that starts to hiss");
 			outputText(" and then casual glance at enemies. Due to many of them your petrifying power spread on too many targets to be much effective. Still few of them petrified for a short moment and rest scared or suprised by such turn of events also refrain from attacking you for a moment.\n\n");
 			if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
-				if (player.hasPerk(MutationsLib.GorgonsEyesPrimitive)) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+				if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 2) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 				else monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			}
 		}
@@ -3309,7 +3310,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hairType == Hair.GORGON) outputText(" and awaken normaly dormant snake hair that starts to hiss");
 			outputText(" and then casual glance at enemy. Caught off guard [themonster] petrify.\n\n");
 			if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
-				if (player.hasPerk(MutationsLib.GorgonsEyesPrimitive)) monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
+				if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 2) monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
 				else monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 			}
 		}
@@ -3376,8 +3377,8 @@ public class MagicSpecials extends BaseCombatContent {
 	public function nekomataPuppeteer():void {
 		clearOutput();
 		var soulforcecost:int = 10 * soulskillCost() * soulskillcostmulti();/*
-		if (player.tailCount == 2 && player.tailType == Tail.CAT && player.hasPerk(MutationsLib.KitsuneThyroidGland)) soulforcecost *= 3;*/
-		if (player.tailCount == 2 && player.tailType == Tail.CAT) soulforcecost *= 2;// || player.hasPerk(MutationsLib.KitsuneThyroidGland)
+		if (player.tailCount == 2 && player.tailType == Tail.CAT && player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) soulforcecost *= 3;*/
+		if (player.tailCount == 2 && player.tailType == Tail.CAT) soulforcecost *= 2;// || player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1
 		player.soulforce -= soulforcecost;
 		nekomataPuppeteer2();
 	}
@@ -3389,14 +3390,14 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();/*
-		if (player.tailCount == 2 && player.tailType == Tail.CAT && player.hasPerk(MutationsLib.KitsuneThyroidGland)) soulforcecost *= 3;*/
-		if (player.tailCount == 2 && player.tailType == Tail.CAT) soulforcecost *= 2;// || player.hasPerk(MutationsLib.KitsuneThyroidGland)
+		if (player.tailCount == 2 && player.tailType == Tail.CAT && player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) soulforcecost *= 3;*/
+		if (player.tailCount == 2 && player.tailType == Tail.CAT) soulforcecost *= 2;// || player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1
 		player.soulforce -= soulforcecost;
 		nekomataGhostFire2();
 	}
 	public function nekomataGhostFire2():void {
-		/*if (player.tailCount == 2 && player.tailType == Tail.CAT && player.hasPerk(MutationsLib.KitsuneThyroidGland)) useMana((150), 3);
-		else */if (player.tailCount == 2 && player.tailType == Tail.CAT) useMana((80), Combat.USEMANA_MAGIC_NOBM);// || player.hasPerk(MutationsLib.KitsuneThyroidGland)
+		/*if (player.tailCount == 2 && player.tailType == Tail.CAT && player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) useMana((150), 3);
+		else */if (player.tailCount == 2 && player.tailType == Tail.CAT) useMana((80), Combat.USEMANA_MAGIC_NOBM);// || player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1
 		else useMana((40), Combat.USEMANA_MAGIC_NOBM);
 		outputText("Holding out your palm, you conjure ghastly greenish flame that dances across your fingertips.  You launch it at [themonster] with a ferocious throw, and it bursts on impact, showering dazzling emerald sparks everywhere.  ");
 		var damage:Number = (scalingBonusWisdom() * 0.6) + (scalingBonusIntelligence() * 0.4);
@@ -3529,7 +3530,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.StarSphereMastery)) basicfoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) basicfoxfiredmgmulti += .5;
 		//Hosohi No Tama and bonus damage
-		if (player.hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive)) basicfoxfiredmgmulti += 1;
+		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2) basicfoxfiredmgmulti += 1;
 		damage *= basicfoxfiredmgmulti;
 		//High damage to goes.
 		if(monster.short == "goo-girl") damage = Math.round(damage * 1.5);
@@ -3643,7 +3644,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.StarSphereMastery)) corruptedfoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) corruptedfoxfiredmgmulti += .25;
 		//Hosohi No Tama bonus damage
-		if (player.hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive) && player.tailType == Tail.FOX && player.tailCount == 9) corruptedfoxfiredmgmulti += .5;
+		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2 && player.tailType == Tail.FOX && player.tailCount == 9) corruptedfoxfiredmgmulti += .5;
 		damage *= corruptedfoxfiredmgmulti;
 		if (monster.cor >= 66) damage = Math.round(damage * 1.0);
 		else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
@@ -3699,7 +3700,7 @@ public class MagicSpecials extends BaseCombatContent {
 		lustDmg *= 0.5;
 		if (player.hasPerk(PerkLib.EnlightenedNinetails) && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 2;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.tailType == Tail.FOX && player.tailCount == 9)  lustDmg *= 1.2;
-		if (player.hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive) && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 1.5;
+		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2 && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 1.5;
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
@@ -3764,7 +3765,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.StarSphereMastery)) fusedfoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) fusedfoxfiredmgmulti += .5;
 		//Hosohi No Tama and Fusion bonus damage
-		if (player.hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive) && player.tailType == Tail.FOX && player.tailCount == 9) fusedfoxfiredmgmulti += 1;
+		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2 && player.tailType == Tail.FOX && player.tailCount == 9) fusedfoxfiredmgmulti += 1;
 		damage *= fusedfoxfiredmgmulti;
 		damage = Math.round(damage * 2);
 		//High damage to goes.
@@ -3814,7 +3815,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
 		lustDmg *= 0.5;
 		if (player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 2.8;
-		if (player.hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive) && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 1.5;
+		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2 && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 1.5;
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 1.4;
@@ -3880,7 +3881,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.StarSphereMastery)) purefoxfiredmgmulti += player.perkv1(PerkLib.StarSphereMastery) * 0.05;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) purefoxfiredmgmulti += .25;
 		//Hosohi No Tama bonus damage
-		if (player.hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive) && player.tailType == Tail.FOX && player.tailCount == 9) purefoxfiredmgmulti += .5;
+		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2 && player.tailType == Tail.FOX && player.tailCount == 9) purefoxfiredmgmulti += .5;
 		damage *= purefoxfiredmgmulti;
 		if (monster.cor < 33) damage = Math.round(damage * 1.0);
 		else if (monster.cor < 50) damage = Math.round(damage * 1.1);
@@ -3935,7 +3936,7 @@ public class MagicSpecials extends BaseCombatContent {
 		lustDmg *= 0.125;
 		if (player.hasPerk(PerkLib.EnlightenedNinetails) && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 0.5;
 		if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 1.2;
-		if (player.hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive) && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 1.5;
+		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2 && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 1.5;
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 1.4;
@@ -3965,17 +3966,17 @@ public class MagicSpecials extends BaseCombatContent {
 
 	public function kitsuneskillCost():Number {
 		var modksc:Number = 1;
-		if (player.hasPerk(MutationsLib.KitsuneThyroidGland)) modksc -= 0.5;
+		if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) modksc -= 0.5;
 		if (player.tailCount == 9 && player.tailType == Tail.FOX) {
-			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) modksc *= 3;
-			else if (player.hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive)) modksc *= 2;
+			if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3) modksc *= 3;
+			else if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 2) modksc *= 2;
 			else modksc += 0.5;
 		}
 		return modksc;
 	}
 	public function kitsuneskill2Cost():Number {
 		var modks2c:Number = 1;
-		if (player.hasPerk(MutationsLib.KitsuneParathyroidGlandsPrimitive)) modks2c -= 0.5;
+		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 2) modks2c -= 0.5;
 		return modks2c;
 	}
 
@@ -4002,11 +4003,11 @@ public class MagicSpecials extends BaseCombatContent {
 		var ItemMod:Number = 0;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) ItemMod += 1;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) ItemMod += 1;
-		if (player.tailCount == 9 && player.tailType == Tail.FOX && player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
+		if (player.tailCount == 9 && player.tailType == Tail.FOX && player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 1) {
 			player.createStatusEffect(StatusEffects.CooldownTerror, 5-ItemMod, 0, 0, 0);
 			fatigue((200 * kitsuneskill2Cost()), USEFATG_MAGIC_NOBM);
 		}
-		else if ((player.tailCount == 9 && player.tailType == Tail.FOX) || player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
+		else if ((player.tailCount == 9 && player.tailType == Tail.FOX) || player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 1) {
 			player.createStatusEffect(StatusEffects.CooldownTerror, 7-ItemMod, 0, 0, 0);
 			fatigue((100 * kitsuneskill2Cost()), USEFATG_MAGIC_NOBM);
 		}
@@ -4017,7 +4018,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//Inflicts fear and reduces enemy SPD.
 		outputText("The world goes dark, an inky shadow blanketing everything in sight as you fill [themonster]'s mind with visions of otherworldly terror that defy description.  They cower in horror as they succumb to your illusion, believing themselves beset by eldritch horrors beyond their wildest nightmares.\n\n");
 		var speedDebuff:Number = 0;
-		if (player.hasPerk(MutationsLib.KitsuneParathyroidGlandsEvolved)) {
+		if (player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3) {
 			if (monster.spe >= 71) speedDebuff += 70;
 			else speedDebuff += 70 - monster.spe;
 		}
@@ -4051,11 +4052,11 @@ public class MagicSpecials extends BaseCombatContent {
 		var ItemMod:Number = 0;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) ItemMod += 1;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) ItemMod += 1;
-		if (player.tailCount == 9 && player.tailType == Tail.FOX && player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
+		if (player.tailCount == 9 && player.tailType == Tail.FOX && player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 1) {
 			player.createStatusEffect(StatusEffects.CooldownIllusion,5-ItemMod,0,0,0);
 			fatigue((200 * kitsuneskill2Cost()), USEFATG_MAGIC_NOBM);
 		}
-		else if ((player.tailCount == 9 && player.tailType == Tail.FOX) || player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
+		else if ((player.tailCount == 9 && player.tailType == Tail.FOX) || player.perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 1) {
 			player.createStatusEffect(StatusEffects.CooldownIllusion,7-ItemMod,0,0,0);
 			fatigue((100 * kitsuneskill2Cost()), USEFATG_MAGIC_NOBM);
 		}
@@ -4154,11 +4155,11 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("A second later [monster he] is firmly tied up by your enchanted thread.");
 			monster.createStatusEffect(StatusEffects.MysticWeb, 4 + rand(2),0,0,0);
 			var Multiplier:Number = 1;
-			if(player.hasPerk(MutationsLib.ArachnidBookLungPrimitive)) Multiplier += 0.5;
-			if(player.hasPerk(MutationsLib.ArachnidBookLungEvolved)) Multiplier += 0.5;
+			if(player.perkv1(IMutationsLib.ArachnidBookLungIM) >= 2) Multiplier += 0.5;
+			if(player.perkv1(IMutationsLib.ArachnidBookLungIM) >= 3) Multiplier += 0.5;
 			if(player.hasPerk(PerkLib.RacialParagon)) Multiplier += (combat.RacialParagonAbilityBoost() - 1);
 			monster.statStore.addBuffObject({spe:-45*Multiplier}, "Web",{text:"Web"});
-			if(player.hasPerk(MutationsLib.ArachnidBookLungEvolved) && rand(100) > 50) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+			if(player.perkv1(IMutationsLib.ArachnidBookLungIM) >= 3 && rand(100) > 50) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 			awardAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB);
 		}
 		//Failure
@@ -4341,7 +4342,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
-		if (player.hasPerk(MutationsLib.FeyArcaneBloodstreamEvolved)) damage *= 1.50;
+		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) damage *= 1.50;
 		damage = Math.round(damage);
 		doMagicDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -4356,8 +4357,8 @@ public class MagicSpecials extends BaseCombatContent {
 		EffectList.push(FaeStormSleep);
 		var ProcChance:Number = 50;
 		if (player.hasPerk(PerkLib.FairyQueenRegalia)) ProcChance = 25;
-		if (player.hasPerk(MutationsLib.FeyArcaneBloodstreamPrimitive)) ProcChance -= 5;
-		if (player.hasPerk(MutationsLib.FeyArcaneBloodstreamEvolved)) ProcChance -= 5;
+		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 2) ProcChance -= 5;
+		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) ProcChance -= 5;
 		var procCount:int = 0;
 		for (var i:int = 0; i < 6; i++) {
 			if (rand(100) >= ProcChance) {
@@ -4514,12 +4515,12 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		fatigue(30, USEFATG_PHYSICAL);
 		var FascCD:Number = 4;
-		if (player.hasPerk(MutationsLib.BlackHeartPrimitive)) FascCD -= 1;
+		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 2) FascCD -= 1;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) FascCD -= 1;
 		else player.createStatusEffect(StatusEffects.CooldownFascinate,FascCD,0,0,0);
 		outputText("You start with first pose to attract [themonster] attention.  Then you follow with second and then third pose of your enchanting dance.");
 		var lustDmg:Number = 5;
-		if (player.hasPerk(MutationsLib.BlackHeart)) lustDmg += 5;
+		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 1) lustDmg += 5;
 		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
 		if(monster.lustVuln == 0) {
 			outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
@@ -4560,7 +4561,7 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.teased(Math.round(monster.lustVuln * lustDmg));
 		if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
 			outputText(" <b>Your erotic show aside slight arousing manages to put [themonster] into dazze caused by too strong sexual stimulation!</b> ");
-			if (player.hasPerk(MutationsLib.BlackHeartEvolved)) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
+			if (player.perkv1(IMutationsLib.BlackHeartIM) >= 3) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 			else monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			if (!monster.hasStatusEffect(StatusEffects.TimesCharmed)) monster.createStatusEffect(StatusEffects.TimesCharmed, player.hasPerk(PerkLib.DarkCharm) ? 0.5 : 1, 0, 0, 0);
 			else monster.addStatusValue(StatusEffects.TimesCharmed, 1, player.hasPerk(PerkLib.DarkCharm) ? 0.5 : 1);
@@ -4583,9 +4584,9 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(50, USEFATG_MAGIC_NOBM);
 		outputText("You start drawing symbols in the air toward [themonster].");
 		var lustDmg:Number = player.lust / 10 + player.lib / 10;
-		if (player.hasPerk(MutationsLib.BlackHeart)) lustDmg += player.inte / 10;
-		if (player.hasPerk(MutationsLib.BlackHeartPrimitive)) lustDmg += player.wis / 10;
-		if (player.hasPerk(MutationsLib.BlackHeartEvolved)) lustDmg += player.sens / 10;
+		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 1) lustDmg += player.inte / 10;
+		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 2) lustDmg += player.wis / 10;
+		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 3) lustDmg += player.sens / 10;
 		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
 		if(monster.lustVuln == 0) {
 			outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
@@ -4896,9 +4897,9 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusSpeed() * 2;
 		damage += scalingBonusIntelligence() * 2;
 		damage += rand(player.level + player.couatlScore());
-		if (player.hasPerk(MutationsLib.HeartOfTheStorm)) damage *= 1.5;
-		if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) damage *= 1.5;
-		if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) damage *= 1.5;
+		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) damage *= 1.5;
+		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) damage *= 1.5;
+		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) damage *= 1.5;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage * combat.windDamageBoostedByDao());
@@ -4984,9 +4985,9 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusSpeed() * 2;
 		damage += scalingBonusWisdom() * 2;
 		damage += rand(player.level + player.kamaitachiScore());
-		if (player.hasPerk(MutationsLib.HeartOfTheStorm)) damage *= 1.5;
-		if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) damage *= 1.5;
-		if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) damage *= 1.5;
+		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) damage *= 1.5;
+		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) damage *= 1.5;
+		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) damage *= 1.5;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage * combat.windDamageBoostedByDao());

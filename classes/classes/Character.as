@@ -4,6 +4,7 @@ import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Items.JewelryLib;
 import classes.Items.NecklaceLib;
 import classes.Scenes.NPCs.Forgefather;
@@ -583,11 +584,11 @@ import classes.CoC;
 				min -= maxHP() * 0.08;
 				min -= (2400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}//nastepny diehard to 10% i 3000 a potem 12% i 3600
-			if (hasPerk(MutationsLib.LizanMarrowEvolved)) min -= maxHP() * 0.05;
-			if (hasPerk(MutationsLib.OrcAdrenalGlandsEvolved) || game.player.orcScore() >= 11) {
+			if (perkv1(IMutationsLib.LizanMarrowIM) >= 3) min -= maxHP() * 0.05;
+			if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 3 || game.player.orcScore() >= 11) {
 				if (hasPerk(PerkLib.Ferocity)) min -= maxHP() * 0.07;
-				if (hasPerk(MutationsLib.OrcAdrenalGlands)) min -= maxHP() * 0.01;
-				if (hasPerk(MutationsLib.OrcAdrenalGlandsPrimitive)) min -= maxHP() * 0.02;
+				if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 1) min -= maxHP() * 0.01;
+				if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 2) min -= maxHP() * 0.02;
 			}
 			if (hasPerk(PerkLib.Rage)) min -= maxHP() * 0.05;
 			if (hasPerk(PerkLib.TooAngryToDie)) min -= maxWrath();
@@ -958,9 +959,9 @@ import classes.CoC;
 			if (hasPerk(PerkLib.ImprovedVenomGland)) maxven += 100;
 			if (hasPerk(PerkLib.ImprovedVenomGlandEx)) maxven += 200;
 			if (hasPerk(PerkLib.ImprovedVenomGlandSu)) maxven += 400;
-			if (hasPerk(MutationsLib.VenomGlands)) maxven += 100;
-			if (hasPerk(MutationsLib.VenomGlandsPrimitive)) maxven += 400;
-			if (hasPerk(MutationsLib.VenomGlandsEvolved)) {
+			if (perkv1(IMutationsLib.VenomGlandsIM) >= 1) maxven += 100;
+			if (perkv1(IMutationsLib.VenomGlandsIM) >= 2) maxven += 400;
+			if (perkv1(IMutationsLib.VenomGlandsIM) >= 3) {
 				maxven += 700;
 				multimaxven += 1;
 			}
@@ -986,9 +987,7 @@ import classes.CoC;
 				if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) multimaxven += 0.2;
 				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) multimaxven += 0.25;
 			}
-			if (hasPerk(MutationsLib.ArachnidBookLung)) multimaxven += 1;
-			if (hasPerk(MutationsLib.ArachnidBookLungPrimitive)) multimaxven += 1;
-			if (hasPerk(MutationsLib.ArachnidBookLungEvolved)) multimaxven += 1;
+			if (hasPerk(IMutationsLib.ArachnidBookLungIM)) multimaxven += perkv1(IMutationsLib.ArachnidBookLungIM);
 			maxven *= multimaxven;
 			maxven = Math.round(maxven);
 			return maxven;
@@ -1021,14 +1020,14 @@ import classes.CoC;
 			if (game.player.orcaScore() >= 14) max += 35;
 			if (game.player.orcaScore() >= 20) max += 25;
 			if (hasPerk(PerkLib.EzekielBlessing)) max += 50;
-			if (hasPerk(MutationsLib.DisplacerMetabolismPrimitive)) max += 50;
-			if (hasPerk(MutationsLib.ManticoreMetabolismPrimitive)) max += 50;
-			if (hasPerk(MutationsLib.PigBoarFat)) max += 5;
-			if (hasPerk(MutationsLib.PigBoarFatPrimitive)) max += 10;
-			if (hasPerk(MutationsLib.PigBoarFatEvolved)) max += 20;
-			if (hasPerk(MutationsLib.WhaleFat)) max += 5;
-			if (hasPerk(MutationsLib.WhaleFatPrimitive)) max += 10;
-			if (hasPerk(MutationsLib.WhaleFatEvolved)) max += 20;
+			if (perkv1(IMutationsLib.DisplacerMetabolismIM) >= 2) max += 50;
+			if (perkv1(IMutationsLib.ManticoreMetabolismIM) >= 2) max += 50;
+			if (perkv1(IMutationsLib.PigBoarFatIM) >= 1) max += 5;
+			if (perkv1(IMutationsLib.PigBoarFatIM) >= 2) max += 10;
+			if (perkv1(IMutationsLib.PigBoarFatIM) >= 3) max += 20;
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 1) max += 5;
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 2) max += 10;
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 3) max += 20;
 			// (hasPerk(PerkLib.) && game.player.humanScore() < 5) max += 100;
 			// jak bedzie mieć chimeryczna nature to kolejny boost to max hunger moze...150 lub nawet 200 ^^
 			if (hasPerk(PerkLib.IronStomach)) max += 50;

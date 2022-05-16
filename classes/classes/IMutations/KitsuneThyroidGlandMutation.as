@@ -52,10 +52,10 @@ package classes.IMutations
                 IMutationsLib.KitsuneThyroidGlandIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.KitsuneThyroidGlandIM.requireThyroidGlandMutationSlot()
-                            .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune)
-                            .requireCustomFunction(function (player:Player):Boolean {
-                                return player.tailType == Tail.FOX && player.tailCount >= 2;
-                            }, "2+ fox tails");
+                    .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.tailType == Tail.FOX && player.tailCount >= 2;
+                    }, "2+ fox tails");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -74,9 +74,19 @@ package classes.IMutations
 
         public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            pBuffs['spe.mult'] = 0.05 * pTier;
-            if (pTier - 1 >= 0) pBuffs['wis.mult'] = 0.05 * (pTier - 1);
-            if (pTier - 2 >= 0) pBuffs['int.mult'] = 0.05 * (pTier - 1);
+            if (pTier == 1) {
+                pBuffs['spe.mult'] = 0.05;
+                pBuffs['wis.mult'] = 0.05
+            }
+            if (pTier == 2){
+                pBuffs['spe.mult'] = 0.1;
+                pBuffs['wis.mult'] = 0.15;
+            }
+            if (pTier == 3){
+                pBuffs['spe.mult'] = 0.15;
+                pBuffs['wis.mult'] = 0.35;
+                pBuffs['int.mult'] = 0.2;
+            }
             return pBuffs
         }
 

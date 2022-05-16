@@ -12,8 +12,9 @@ public class EclipticMindMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
-            var descS:String = "Allows you to retain an aura at all time, gaining whichever corresponds to your alignment. Empower the effect of your aura based on your purity or corruption score";
+            var descS:String = "";
             var pTier:int = player.perkv1(IMutationsLib.EclipticMindIM);
+            if (pTier >= 1) descS += "Allows you to retain an aura at all time, gaining whichever corresponds to your alignment. Empower the effect of your aura based on your purity or corruption score";
             if (pTier >= 3){
                 descS += " x3";
             }
@@ -50,7 +51,7 @@ public class EclipticMindMutation extends PerkType
                 IMutationsLib.EclipticMindIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.EclipticMindIM.requirePeripheralNervSysMutationSlot()
-                            .requireCustomFunction(function (player:Player):Boolean {
+                    .requireCustomFunction(function (player:Player):Boolean {
                         return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10 || player.unicornkinScore() >= 10;
                     }, "Unicorn or Bicorn race");
                 }
@@ -70,7 +71,7 @@ public class EclipticMindMutation extends PerkType
         }
 
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
             return pBuffs;
         }

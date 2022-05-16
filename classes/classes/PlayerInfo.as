@@ -3,6 +3,7 @@ package classes {
 import classes.BodyParts.Face;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Scenes.NPCs.BelisaFollower;
@@ -1885,8 +1886,10 @@ public class PlayerInfo extends BaseContent {
 		var temp:Array = [];
 		var compMutate:Array = MutationsLib.mutationsArray("", true);
 		var compMutate2:Array = MutationsLib.mutationsArray("Deprecated");
+		var compMutate3:Array = IMutationsLib.mutationsArray("", true);
+		var compMutate4:Array = IMutationsLib.mutationsArray("Deprecated");
 		for each (var playerPerk:PerkType in perks){
-			if (!(compMutate.indexOf(playerPerk) >= 0) && !(compMutate2.indexOf(playerPerk) >= 0)){
+			if (!(compMutate.indexOf(playerPerk) >= 0) && !(compMutate2.indexOf(playerPerk) >= 0) && !(compMutate3.indexOf(playerPerk) >= 0) && !(compMutate4.indexOf(playerPerk) >= 0)){
 				temp.push(playerPerk);
 			}
 		}

@@ -15,8 +15,9 @@ public class HinezumiBurningBloodMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
-            var descS:String = "Increase the healing from the cauterize ability by 0.5%";
+            var descS:String = "";
             var pTier:int = player.perkv1(IMutationsLib.HinezumiBurningBloodIM);
+            if (pTier >= 1) descS += "Increase the healing from the cauterize ability by 0.5%";
             if (pTier >= 3){
                 descS += ", allows you to use Cauterize even if you're no longer a Hinezumi";
             }
@@ -86,8 +87,11 @@ public class HinezumiBurningBloodMutation extends PerkType
         }
 
         //Mutations Buffs
-        public function pBuffs(pTier:int = 1):Object{
+        public static function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
+            if (pTier == 1) pBuffs['tou.mult'] = 0.05;
+            if (pTier == 2) pBuffs['tou.mult'] = 0.15;
+            if (pTier == 3) pBuffs['tou.mult'] = 0.3;
             return pBuffs;
         }
 
