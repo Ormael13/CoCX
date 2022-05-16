@@ -2522,8 +2522,8 @@ public class Masturbation extends BaseContent {
 			if (player.sens > 40) player.removeCurse('sens',1, 2)
 			if (player.sens > 60) player.removeCurse('sens',1, 2)
 			if (player.sens > 80) player.removeCurse('sens',1, 2)
-			if (player.tou > 50) dynStats("tou", -1);
-			if (player.tou > 75) dynStats("tou", -1);
+			if (player.tou > 50) player.addCurse("tou", 1, 2);
+			if (player.tou > 75) player.addCurse("tou", 1, 2);
 			doNext(camp.returnToCampUseOneHour);
 		}
 

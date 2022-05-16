@@ -474,7 +474,7 @@ public function etnaRapeYandere():void
 	if (player.hasCock()) outputText("as she prepares to feast");
 	else outputText("at the mere thought of finally having sex with you");
 	outputText(".\n\n\"<i>You are mine [name] whether you like it or not! I’ve been unable to think of anything but you for days and it is obvious that we were made for each others body. No one else can douse the fire burning in me like you do!</i>\"\n\n");
-	dynStats("tou", -5);
+	player.addCurse("tou", 5, 2);
 	statScreenRefresh();
 	etnaRapesPlayer();
 	if (player.tou >= 30) {
@@ -482,7 +482,6 @@ public function etnaRapeYandere():void
 		if (player.hasCock()) player.sexReward("vaginalFluids","Dick",true,false);
 		player.sexReward("vaginalFluids");
 		cleanupAfterCombat();
-		return;
 	}
 	else etnaRapeYandereBadEnd();
 }

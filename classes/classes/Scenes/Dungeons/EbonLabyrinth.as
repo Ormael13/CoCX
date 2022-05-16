@@ -289,9 +289,10 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         }
         //Marble withdrawl
         if(player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
-            outputText("\nYour sleep is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n");
+            outputText("\nYour sleep is very troubled, and you aren't able to settle down. You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n");
             multiplier *= 0.5;
-            dynStats("tou", -.1, "int", -.1);
+            player.addCurse("tou", 0.1, 2);
+            player.addCurse("int", 0.1, 2);
         }
         //Mino withdrawal
         else if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) {

@@ -385,7 +385,7 @@ private function bunbun69():void {
 			outputText("Before you can return with a witty remark, the bunny has hopped off, leaving you alone in the field with your face in your palm.\n\n");
 			//- Intelligence
 			//+ Lust
-			dynStats("int", -2);
+			player.addCurse("int", 2, 2);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		else {
@@ -401,7 +401,7 @@ private function bunbun69():void {
 
 			outputText("You wipe off what you can of the sticky goop and trot off with a scowl, leaving the hysterical rabbit to calm herself down.\n\n");
 			//- Intelligence
-			dynStats("int", -2);
+			player.addCurse("int", 2, 2);
 			//+ Lust
 			//+ Pink Egg
 			inventory.takeItem(consumables.NPNKEGG, camp.returnToCampUseOneHour);

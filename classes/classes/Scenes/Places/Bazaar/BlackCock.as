@@ -1555,7 +1555,7 @@ import classes.CoC;
 			}
 			if (rand(2) == 0 && player.spe > 80 && player.str >= 50) {
 				outputText("\n\nYou begin to feel that the size of your muscles is starting to slow you down.");
-				dynStats("spe", -1);
+				player.addCurse("spe", 1, 1);
 			}
 			if (rand(3) == 0 && player.tou < 50 && changes < changeLimit) {
 				outputText("\n\nYour skin feels clammy and a little rubbery. You touch yourself experimentally and notice that you can barely feel the pressure from your fingertips. Consumed with curiosity, you punch yourself lightly in the arm; the most you feel is a dull throb!");
@@ -1563,7 +1563,7 @@ import classes.CoC;
 			}
 			if (rand(3) == 0 && player.inte > 15 && player.faceType == Face.RHINO && player.horns.count == 2) {
 				outputText("\n\nYou shake your head and struggle to gather your thoughts, feeling a bit slow.");
-				dynStats("int", -1);
+				player.addCurse("int", 1, 1);
 			}
 			if (rand(3) == 0 && player.rhinoScore() >= 2 && (rand(2) == 0 || !player.inRut) && player.hasCock()) {
 				player.goIntoRut(true);

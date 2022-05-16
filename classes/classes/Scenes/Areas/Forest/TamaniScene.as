@@ -878,7 +878,8 @@ internal function getRapedByTamaniYouHypnoSlut():void {
 			outputText("A surge of pride spreads through you at her praise, and you lean down to give your wife a long french kiss before heading back to camp.  On the way back your head slowly clears, and you wonder what came over you back there?!");
 			tamaniKnockUp();
 			player.sexReward("vaginalFluids", "Dick");
-			dynStats("int", -.5, "sen", -1);
+			dynStats("sen", -1);
+			player.addCurse("int", 0.5, 2);
 		}
 		//[DOESNT FIT]
 		else {
@@ -927,7 +928,8 @@ internal function getRapedByTamaniYouHypnoSlut():void {
 			outputText("A surge of pride spreads through you at her praise, and you get up to give your wife a long french kiss before heading back to camp.  On the way back your head slowly clears, and you wonder what came over you back there?!");
 			tamaniKnockUp();
 			player.sexReward("vaginalFluids", "Dick");
-			dynStats("int", -.5, "sen", -1);
+			dynStats("sen", -1);
+			player.addCurse("int", 0.5, 2);
 		}
 		if (CoC.instance.inCombat) cleanupAfterCombat();
 		else doNext(camp.returnToCampUseOneHour);

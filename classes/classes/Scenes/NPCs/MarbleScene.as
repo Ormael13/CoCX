@@ -148,7 +148,8 @@ public function timeChange():Boolean
                     else outputText("\nThe euphoria from Marble's milk has faded, and you need more milk.  It's almost impossible not to run straight back to her and beg her to let you drink from her breasts again.\n");
                     //If the player is addicted to her milk, they gain the withdrawal effect when it wears off, reducing player's inte and tou by 5
                     player.createStatusEffect(StatusEffects.MarbleWithdrawl,0,0,0,0);
-                    dynStats("tou", -5, "int", -5);
+                    player.addCurse("tou", 5, 2);
+                    player.addCurse("int", 5, 2);
                 }
             }
         }			
@@ -1161,12 +1162,13 @@ private function playerAgreesToDrinkMarbleMilkBottled():void {
 private function playerRefusesToDrinkBottledMilk():void {
 	marbleSprite();
 	clearOutput();
-	outputText("You decide not to drink the milk and force yourself to hand it back to Marble.  She looks at you for a moment before her face falls. \"<i>You didn't even try to drink it!</i>\"  In response, you say that you would prefer to suckle her breasts directly.  She lets out a slight sigh and closes her eyes, before shaking her head and telling you that you'll just have to wait until later since you refused her request.  She goes back inside the barn and you're left to go back to your camp.  For some reason, your shakes seem to have calmed slightly, but you feel kind of sore.");
+	outputText("You decide not to drink the milk and force yourself to hand it back to Marble. She looks at you for a moment before her face falls. \"<i>You didn't even try to drink it!</i>\" In response, you say that you would prefer to suckle her breasts directly. She lets out a slight sigh and closes her eyes, before shaking her head and telling you that you'll just have to wait until later since you refused her request. She goes back inside the barn and you're left to go back to your camp. For some reason, your shakes seem to have calmed slightly, but you feel kind of sore.");
 	//(decrease affection by 5)
 	//(decrease addiction by 5)
 	marbleStatusChange(-5,-5);
 	//(decrease player str and tou by 1.5)
-	dynStats("str", 1,"tou", -1);
+    player.addCurse("tou", 1.5, 2);
+    player.addCurse("str", 1.5, 2);
 	//(delay withdrawal effect)
 	//If the player is addicted, this item negates the withdrawal effects for a few hours (suggest 6), there will need to be a check here to make sure the withdrawal effect doesn't reactivate while the player is under the effect of 'Marble's Milk'.
 	if(player.hasStatusEffect(StatusEffects.BottledMilk)) {
@@ -1253,9 +1255,10 @@ private function marbleChoreHelpChooseMarble():void {
 private function marbleChoreRefusal():void {
 	marbleSprite();
 	clearOutput();
-	outputText("You angrily tell her that you aren't going to work for her milk and turn away, leaving her visibly upset.  Your body seems to be upset at your refusal too, feeling painful all over.  Fortunately, you also feel a temporary reprieve from the symptoms of your withdrawal.");
+	outputText("You angrily tell her that you aren't going to work for her milk and turn away, leaving her visibly upset. Your body seems to be upset at your refusal too, feeling painful all over. Fortunately, you also feel a temporary reprieve from the symptoms of your withdrawal.");
 	//(decrease str and tou by 1.5)
-	dynStats("str", -1,"tou", -1);
+    player.addCurse("tou", 1, 2);
+    player.addCurse("str", 1, 2);
 	//(decrease affection by 5)
 	//(decrease addiction by 5)
 	marbleStatusChange(-5,-5);
@@ -1362,11 +1365,12 @@ private function resistAddiction():void {
 	marbleSprite();
 	//(player fight it)
 	clearOutput();
-	outputText("You strain yourself through this difficult trial, but manage to hold as Marble finally stops caressing herself. She smiles and gives you a big hug in celebration, not realizing she's almost pushing you over the edge in the process, and hands you a very small glass of milk. \"<i>To take the edge off and give you a little relief,</i>\" she tells you.  It does calm your nerves, but still leaves you feeling wholly unsatisfied.");
+	outputText("You strain yourself through this difficult trial, but manage to hold as Marble finally stops caressing herself. She smiles and gives you a big hug in celebration, not realizing she's almost pushing you over the edge in the process, and hands you a very small glass of milk. \"<i>To take the edge off and give you a little relief,</i>\" she tells you. It does calm your nerves, but still leaves you feeling wholly unsatisfied.");
 	//(decrease addiction by 5)
 	marbleStatusChange(0,-5);
 	//(decrease player str and tou by 1.5)
-	dynStats("str", -1,"tou", -1);
+    player.addCurse("tou", 1, 2);
+    player.addCurse("str", 1, 2);
 	//(delay withdrawal for a few hours)
 	if(player.hasStatusEffect(StatusEffects.BottledMilk)) {
 		player.addStatusValue(StatusEffects.BottledMilk,1,(1 + rand(6)));

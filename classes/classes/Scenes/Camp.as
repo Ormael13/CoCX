@@ -3451,8 +3451,9 @@ public class Camp extends NPCAwareContent{
 			}
 			//Marble withdrawal
 			if (player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
-				outputText("\nYour rest is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n");
-				dynStats("tou", -.1, "int", -.1);
+				outputText("\nYour rest is very troubled, and you aren't able to settle down. You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n");
+				player.addCurse("tou", 0.1, 2);
+				player.addCurse("int", 0.1, 2);
 			}
 			//Bee cock
 			if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) {

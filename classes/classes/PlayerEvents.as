@@ -543,11 +543,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18) {
 						if (!player.hasStatusEffect(StatusEffects.SlimeCravingOutput)) { //Protects against this warning appearing multiple times in the output
 							player.createStatusEffect(StatusEffects.SlimeCravingOutput, 0, 0, 0, 0);
-							outputText("\n<b>Bigger... stronger, each intake of fluid you takes only makes you more starved for the next as you grow in power each time, the need to fuck and feed slowly overwriting any other desire you may have.</b>\n");
+							outputText("\n<b>Bigger... stronger, each intake of fluid you take only makes you more starved for the next as you grow in power each time, the need to fuck and feed slowly overwriting any other desire you may have.</b>\n");
 							needNext = true;
 						}
 						if (player.spe > 1) player.addStatusValue(StatusEffects.SlimeCraving, 3, 0.1); //Keep track of how much has been taken from speed
-						player.dynStats("str",-1,"spe", -0.1, "lus", 2);
+						player.addCurse("str", 1, 2);
+						player.addCurse("spe", 0.1, 2);
+						player.dynStats("lus", 2);
 						player.buff("Fluid Growth").addStat("tou.mult",-0.04,0).withText("Fluid Growth!");
 						player.buff("Fluid Growth").addStat("int.mult",-0.04,0).withText("Fluid Growth!");
 						player.addStatusValue(StatusEffects.SlimeCraving, 2, 0.1); //Keep track of how much has been taken from strength
@@ -1175,8 +1177,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 							if (player.thickness < 25) {
 								player.takePhysDamage(player.maxHP() / 25);
 								fatigue(2);
-								dynStats("tou", -0.5);
-								dynStats("str", -0.5);
+								player.addCurse("tou", 0.5, 2);
+								player.addCurse("str", 0.5, 2);
 							}
 							else if ((model.time.hours + 2) % 4 == 0) { //Lose thickness 2x as fast.
 								player.modThickness(1, 1);
@@ -2533,7 +2535,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 							outputText("\nYour bee half has become so heavy that it's difficult to move now, the weight of your eggs bearing down on your lust-addled frame.  Your ovipositor pokes from its hiding place, dripping its sweet, slick lubrication in anticipation of filling something, anything with its burden.  You're going to have to find someone to help relieve you of your load, and soon...");
 						}
 						outputText("\n\n<b>Minimum Lust raised!</b>\n");
-						player.dynStats("spe", -1);
+						player.addCurse("spe", 1, 1);
 						needNext = true;
 					}
 				}
@@ -2759,7 +2761,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties))
 						outputText("\nWhoah!  As you move, your [hips] sway farther and farther to each side, expanding with every step, soft new flesh filling in as your hips spread into something more appropriate on a tittering bimbo.  You giggle when you realize you can't walk any other way.  At least it makes you look, like, super sexy!\n");
 					else outputText("\nOh, no!  As you move, your [hips] sway farther and farther to each side, expanding with every step, soft new flesh filling in as your hips spread into something more appropriate for a bimbo.  Once you realize that you can't walk any other way, you sigh heavily, your only consolation the fact that your widened hips can be used to tease more effectively.\n");
-					player.dynStats("int", -1);
+					player.addCurse("int", 1, 1);
 					player.hips.type = 12;
 					needNext = true;
 				}

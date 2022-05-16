@@ -852,16 +852,16 @@ public function getMilked():void {
 		//Being a cow makes you less dumb
 		//Somehow
 		if(player.hasStatusEffect(StatusEffects.Feeder)) {
-			dynStats("int", -1);
-			if(liters > 5) dynStats("int", -1);
-			if(liters > 10) dynStats("int", -1);
-			if(liters > 20) dynStats("int", -1);
+			player.addCurse("int", 1, 2);
+			if(liters > 5) player.addCurse("int", 1, 2);
+			if(liters > 10)player.addCurse("int", 1, 2);
+			if(liters > 20) player.addCurse("int", 1, 2);
 		}
 		//not a cow, bimbotize me!
 		else {
-			if(liters/2 > 10) dynStats("int", -10);
-			else dynStats("int", -liters/2);
-			if(liters > 30) dynStats("int", -2);
+			if(liters/2 > 10) player.addCurse("int", 10, 2);
+			else player.addCurse("int", liters/2, 2);
+			if(liters > 30) player.addCurse("int", 2, 2);
 		}
 		if(player.inte < 10) {
 			doNext(cowBadEnd1);
