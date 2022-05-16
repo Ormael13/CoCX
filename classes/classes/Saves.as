@@ -12,6 +12,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Scenes.Areas.Desert.SandWitchScene;
 import classes.Scenes.NPCs.JojoScene;
@@ -1082,6 +1083,10 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			saveFile.data.breastRows[i].milkFullness = player.breastRows[i].milkFullness;
 			saveFile.data.breastRows[i].fuckable = player.breastRows[i].fuckable;
 			saveFile.data.breastRows[i].fullness = player.breastRows[i].fullness;
+		}
+		//removing extra mutations from save
+		for each(var mutation:PerkType in IMutationsLib.mutationsArray("", true)){
+			if (player.perkv1(mutation) == 0) player.removePerk(mutation);
 		}
 		//Set Perk Array
 		//Populate Perk Array
@@ -2399,6 +2404,12 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				hasHistoryPerk = true;
 			}
 
+			//This below is some weird witchcraft.... It doesn't update/swap anything, but somehow this fixes the id mismatch from mutations?
+			var mutationsShift:Array = [];
+			for each (var pperk1:PerkType in MutationsLib.mutationsArray("",true)){
+				mutationsShift.push(pperk1.id);
+			}
+
 			var ptype:PerkType = PerkType.lookupPerk(id);
 			if (ptype == null) {
 				CoC_Settings.error("Unknown perk id=" + id);
@@ -2426,12 +2437,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				}
 				player.addPerkInstance(cperk);
 			}
-		}
-
-		//This below is some weird witchcraft.... It doesn't update/swap anything, but somehow this fixes the id mismatch from mutations?
-		var mutationsShift:Array = [];
-		for each (var pperk1:PerkType in MutationsLib.mutationsArray("",true)){
-			mutationsShift.push(pperk1.id);
 		}
 
 		// Fixup missing History: Whore perk IF AND ONLY IF the flag used to track the prior selection of a history perk has been set

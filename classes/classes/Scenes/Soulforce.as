@@ -258,38 +258,110 @@ public class Soulforce extends BaseContent
 		menuItems.push("LustBreath", (player.hasPerk(PerkLib.DragonPoisonBreath))? FairyTest: false, "Replacing 1 perk with another");
 		menuItems.push("TyrantPF", (TyrantiaFollower.TyrantiaFollowerStage == 5 && TyrantiaFollower.TyraniaCorrupteedLegendaries == 0)? FairyTest5: false, "Patching Tyrantia corrupted legendaries unlock");
 		menuItems.push("LilyPregF", (DriderTown.LilyKidsPCPregnancy != 0 && LilyFollower.LilyFollowerState)? FairyTest3: false, "Curing Lily Infertility ^^");
-		//menuItems.push("Mutationstest2", mutations2, "MutationsTest2");
-		//menuItems.push("Mutation test reset", resetMutations, "Reset Mutations");
+		menuItems.push("Check Mutation", mutations3, "Check Mutation");
+		menuItems.push("Add Mutation", mutations2, "Add Mutation");
+		menuItems.push("Reset Mutation", mutations1, "Reset Mutations");
 		menuGen(menuItems, page, accessSoulforceMenu);
 	}
 
+	public function mutations3():void{
+		menu();
+		clearOutput();
+		var mPerk:IMutationPerkType = IMutationsLib.KTG2;
+		outputText("" + mPerk.name() + "\n\n");
+		//trace("\npBuffs check ktg2 <------------\n")
+		var test:Object = mPerk.pBuffs();
+		for (var key:String in test){
+			var value:Object = test[key];
+			//outputText("Key: " + key + "\nValue: " + value + "\n------------------\n");
+			outputText(key + "=" + value + "\n");
+		}
+		outputText("Max Lvl: "+mPerk.maxLvl);
+		outputText("\n\nCurrent tier: " + player.perkv1(mPerk));
+		//addButton(0, "Add1", m1);
+		addButton(4, "Back", SoulforceCheats1, 3);
+
+		function m1():void{
+			menu();
+			clearOutput();
+			player.setPerkValue(mPerk, 1, player.perkv1(mPerk) + 1);
+			outputText("Done");
+			addButton(4, "Back", SoulforceCheats1, 3);
+
+		}
+	}
 
 	public function mutations2():void{
 		clearOutput();
 		menu();
 		var page:int = 0;
 		var menuItems:Array = [];
-		outputText("MutationsApplicator");
-		for each (var pArray:Array in IMutationsLib.mutationsArray("Thyroid")){
-			var temp:Array = [];
-			temp = Creature.cDynPerk(pArray[0], pArray[1], player);
-			if (temp[1] is Function){
-				temp.insertAt(1,curry(temp[1], testdone));
-				temp.removeAt(2);
+		var target:* = player;
+		outputText("Mutations Applicator");
+		for each (var mutations:IMutationPerkType in IMutationsLib.mutationsArray("test")){
+			mutations.pReqs(player);
+			if (mutations.available(target) && mutations.maxLvl > target.perkv1(mutations)){
+				trace("Requirements met, adding in.");
+				menuItems.push([mutations.name(), acquirePerk, mutations.desc()]);	//This is witchcraft, not sure how acquirePerk still recalls which perk to give, but it does.
 			}
-
-			for each (var i:* in temp){
-				menuItems.push(i);
+			else if(mutations.maxLvl == target.perkv1(mutations)){
+				trace("MaxTier acquired");
+				menuItems.push([mutations.name(), false, "You already have the highest tier!"]);
 			}
-			//menuItems.push(temp[0]);
+			else{
+				trace("Unable to meet requirements/requirements borked.");
+				if (mutations.available(target)) trace("\nAvailable: True");
+				if (mutations.maxLvl > target.perkv1(mutations)) trace("MaxLvl: True");
+				menuItems.push([mutations.name(), false, "You don't meet the requirements for this!"]);
+			}
 		}
-		menuGen(menuItems, page, curry(SoulforceCheats1, 2));
+		menuGen(menuItems, page, curry(SoulforceCheats1, 3));
 
-		function testdone():void{
-			clearOutput();
-			outputText("testDone!");
-			doNext(accessSoulforceMenu);
+		function acquirePerk(nextFunc:Function = null):void{
+			try{
+				if (nextFunc == null){
+					//trace("Missing nextFunc, aborting perk adding.");
+					EngineCore.outputText("Someone forgot to add a nextFunc to their acquirePerk. Please report which perk you selected. The perk was not applied.");
+					nextFunc = SceneLib.camp.returnToCampUseOneHour;
+				}
+				else{
+					if (!target.hasPerk(mutations)){
+						target.createPerk(mutations, 1,0,0,0);
+					}
+					else{
+						target.setPerkValue(mutations,1,target.perkv1(mutations) + 1);
+					}
+					setBuffs();
+					//trace("Perk applied.");
+				}
+			} catch(e:Error){
+				trace(e.getStackTrace());
+				EngineCore.outputText("Something has gone wrong with Dynamic Perks. Please report this to JTecx along with which perk/mutation was selected, along with the bonk stick.");
+				EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour);
+			}
+			nextFunc();
 		}
+
+		//Sets up the buff for the perk.
+		function setBuffs():void{
+			var stname:String = "perk_" + mutations.id;
+			var pBuff:Object = mutations.pBuffs(target)
+			if (target.statStore.hasBuff(stname)){
+				target.statStore.removeBuffs(stname);
+			}
+			target.statStore.addBuffObject(
+					pBuff,
+					stname,
+					{text:mutations.name(), save:false}
+			);
+			//trace("Perk Buffs Applied.");
+		}
+	}
+	public function mutations1():void{
+		clearOutput();
+		player.removePerk(IMutationsLib.KitsuneThyroidGlandIM);
+		outputText("Reset done!");
+		doNext(curry(SoulforceCheats1,3));
 	}
 
 	public function FairyTest3():void {
@@ -313,12 +385,6 @@ public class Soulforce extends BaseContent
 	public function belisatest3():void {
 		if (BelisaFollower.BelisaEncounternum >= 1) SceneLib.belisa.subsequentEncounters();
 		else SceneLib.belisa.firstEncounter();
-	}
-	public function resetMutations():void{
-		clearOutput();
-		player.removePerk(IMutationsLib.KitsuneThyroidGlandIM);
-		outputText("Reset done!");
-		doNext(curry(SoulforceCheats1,2));
 	}
     public function cheatFixShards():void { //wrapper for fixShards to use it in cheat menu
 		clearOutput();

@@ -181,7 +181,7 @@ public class IMutationsLib
 				IMutationsList.push([CaveWyrmLungsIM,CaveWyrmLungsMutation]);
 			}
 			function IMutationsTest():void{
-				IMutationsList.push([KTG2])
+				IMutationsList.push(KTG2);
 			}
 
 			switch(spec){

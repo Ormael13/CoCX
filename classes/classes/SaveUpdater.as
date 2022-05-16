@@ -1810,6 +1810,7 @@ public class SaveUpdater extends NPCAwareContent {
 					player.statStore.removeBuffs("Tribulation Vestiges");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.013;
 			}
+
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.014) {
 				//MutationsPorting
 				updateMutationsv3("Heart");
@@ -1854,6 +1855,7 @@ public class SaveUpdater extends NPCAwareContent {
 						if (!arrayValY) arrayVal++;
 					}
 				}
+				CoC.instance.charCreation.setupMutations();
 				outputText("Mutations backend updated.");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.014;
 			}

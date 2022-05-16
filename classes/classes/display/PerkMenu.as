@@ -849,7 +849,7 @@ public class PerkMenu extends BaseContent {
 				var mCount:int = 0
 				var mPerkarray:Array = IMutationsLib.mutationsArray(bodyPart);
 				for each (var pPerk:Array in mPerkarray){
-					if (player.hasPerk(pPerk[0])){
+					if (player.perkv1(pPerk[0]) > 0){
 						mCount++;
 						if (bodyPart == "Adaptations") mutationCount++;
 					}
@@ -1098,7 +1098,7 @@ public class PerkMenu extends BaseContent {
 		var perkCount:int = perkName[1]._perkLvl;
 		var pPerk:PerkType = perkName[0];
 		if (flags[kFLAGS.MUTATIONS_SPOILERS]) { //Help On
-			if (player.hasPerk(perkName[0])) {	//Just checking if you have the base.
+			if (player.perkv1(perkName[0]) > 0) {	//Just checking if you have the base.
 				outputText("\n" + pPerk.name() + ": <font color=\"#008000\">Acquired.</font>");
 			} else {
 				outputText("\n" + pPerk.name() + ": <font color=\"#800000\">Missing.</font>");

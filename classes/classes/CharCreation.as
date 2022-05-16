@@ -18,6 +18,7 @@ import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Scenes.Areas.Desert.SandWitchScene;
 import classes.Scenes.NPCs.JojoScene;
@@ -1777,6 +1778,7 @@ import coc.view.MainView;
 				player.createPerk(PerkLib.Metamorph, 0, 0, 0, 0);
 			}
 			player.perkPoints += 1;
+			setupMutations();
 			clearOutput();
 			statScreenRefresh();
 			outputText("Would you like to play through the " + (1 * (1 + player.newGamePlusMod())) + "-day"+(player.newGamePlusMod() > 0 ? "s":"")+" prologue in Ingnam or just skip?");
@@ -1800,6 +1802,16 @@ import coc.view.MainView;
 			model.time.hours = 8;
 			flags[kFLAGS.IN_INGNAM] = 1;
 			playerMenu();
+		}
+
+		public function setupMutations():void{
+			for each(var mutation:PerkType in IMutationsLib.mutationsArray("", true)){
+				if (!player.hasPerk(mutation)){
+					player.createPerk(mutation,0,0,0,0);
+				}
+			}
+			player.createPerk(IMutationsLib.KTG2,0,0,0,0);
+			trace("Mutations setup charcreation done");
 		}
 
 		//-----------------

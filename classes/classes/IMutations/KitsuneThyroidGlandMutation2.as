@@ -4,18 +4,18 @@
  */
 package classes.IMutations
 {
-import classes.IMutationPerkClass;
-import classes.IMutationPerkType;
-    import classes.PerkLib;
+import classes.IMutationPerkType
+import classes.PerkClass;
+import classes.PerkLib;
     import classes.Player;
     import classes.BodyParts.Tail;
 
     public class KitsuneThyroidGlandMutation2 extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:IMutationPerkClass = null):String {
+        override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.mutationsvX(IMutationsLib.KTG2, 1);
+            var pTier:int = player.perkv1(IMutationsLib.KTG2);
             if (pTier >= 1){
                 descS += "Illusion & Terror -3CD";
             }
@@ -30,9 +30,9 @@ import classes.IMutationPerkType;
         }
 
         //Name. Need it say more?
-        override public function name(params:IMutationPerkClass=null):String {
+        override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.mutationsvX(IMutationsLib.KTG2, 1)) {
+            switch (player.perkv1(IMutationsLib.KTG2)) {
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -42,12 +42,18 @@ import classes.IMutationPerkType;
                 default:
                     sufval = "";
             }
-            return "Kitsune Thyroid Gland2 " + sufval;
+            return "Kitsune Thyroid Gland 2 " + sufval;
         }
 
         //Mutation Requirements
-        public static function pReqs(pTier:int = 0):void{
+        override public function pReqs(target:* = null):void{
             try{
+                if (target == null){
+                    trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
+                    target = player;
+                }
+                var params:PerkClass = target.getPerk(this);
+                var pTier:int = params.value1;
                 //This helps keep the requirements output clean.
                 IMutationsLib.KTG2.requirements = [];
                 if (pTier == 0){
@@ -66,9 +72,13 @@ import classes.IMutationPerkType;
             }
         }
 
-
-        public function pBuffs(pTier:int = 1):Object{
+        override public function pBuffs(target:* = null):Object{
             var pBuffs:Object = {};
+            if (target == null){
+                trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
+                target = player;
+            }
+            var pTier:int = target.perkv1(IMutationsLib.KTG2);
             if (pTier == 1) {
                 pBuffs['spe.mult'] = 0.05;
                 pBuffs['wis.mult'] = 0.05;
@@ -82,12 +92,13 @@ import classes.IMutationPerkType;
                 pBuffs['wis.mult'] = 0.35;
                 pBuffs['int.mult'] = 0.2;
             }
-            return pBuffs
+            return pBuffs;
         }
 
         //Mutations Buffs
         public function KitsuneThyroidGlandMutation2() {
-            super("Kitsune Thyroid Gland IM2", "Kitsune Thyroid Gland2", 3, ".");
+            super("Kitsune Thyroid Gland IM3", "Kitsune Thyroid Gland2", ".")
+            maxLvl = 3;
         }
 
         /*
