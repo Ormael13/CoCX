@@ -295,7 +295,7 @@ package classes.Scenes
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
 			outputText("-When finding Old Pickaxe at Quarry site PC would also get Tarnished Ore Bag (Lowest grade).\n");
-			outputText("-When having Tarnished Ore Bag (Lowest grade) and visiting Giacomo he can offer PC exchange to Ore Bag (Lowest grade) at (low) price of: 600 gems and current tarnished ore bag.\n");
+			outputText("-When having 'Tarnished Ore Bag (Lowest grade)' and visiting Giacomo he can offer PC exchange it to 'Ore Bag (Lowest grade)' at (low) price of: 600 gems and current tarnished ore bag.\n");
 			outputText("-New key Item (by Ormael): Tarnished Ore Bag (Lowest grade) - Allow to store up to 5 pieces of: copper ore, tin ore, iron ore, bronze bar.\n");
 			outputText("-New key Item (by Ormael): Ore Bag (Lowest grade) - Allow to store up to 10 pieces of: copper ore, tin ore, iron ore, bronze bar, ebon ingot, moonstone.\n");
 			outputText("-When exploring swamp PC can meet drider girl chased by other driders. After fighting off enemy drider it's possible to find silken ball during exploring lake with Boat. As long option Never is chosen it's possible to interact with the person living inside that silken house. After that second interactions next meeting with drider girl that identify herself as Belisa can be triggered by exploring Lake area.\n");
@@ -305,27 +305,27 @@ package classes.Scenes
 			outputText("-New item (by Canadain Snas): Pink Band - cost 1500 gems and PC can buy max 3 of them. Effect: +10% to lust resistance, -10% to max Soulforce.\n");
 			outputText("-New item (by Canadain Snas): Yellow Band - cost 1500 gems and PC can buy max 3 of them. Effect: +10% to speed multi, -10% to max Soulforce.\n");
 			outputText("-New item (by Canadain Snas): Turquoise Band - cost 3000 gems and PC can buy only 1. Effect: First hit you take in combat does 0 damage and stuns enemy for 1 turn, -10% to max Soulforce.\n");
-			outputText("-New item (by Canadain Snas): Yellow Band - cost 4000 gems and PC can buy only 1. Effect: Reduces Corruption by 1/hour, halves damage from bleeding, fire, poison and other DoTs. Halves the duration of stuns and similar statuses to a minimum of 1 turn, -10% to max Mana.\n");
+			outputText("-New item (by Canadain Snas): Crossed Band - cost 4000 gems and PC can buy only 1. Effect: Reduces Corruption by 1/hour, halves damage from bleeding, fire, poison and other DoTs. Halves the duration of stuns and similar statuses to a minimum of 1 turn, -10% to max Mana.\n");
 			outputText("-New item (by Canadain Snas): Brown and Beige Band - cost 7000 gems and PC can buy only 1. Effect: +15% to str/spe multi, +15% to feral attacks damage, -10% to max Soulforce.\n");
 			outputText("-New item (by Canadain Snas): Royal Blue Band - cost 2000 gems and PC can buy max 2 of them. Effect: +5% to magic resistance, -10% to max Mana.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed Bugs: One of Ingnam Tavern food options having wrong price listed on menu, unique sex scenes accesable during Druid fusion, Wisp potentialy softlocking Mino King fight, selfsucking in masturbation menu restoring max 100 hunger, Swift Casting not usable when having Giant's Grip and Large weapon, White or Black magic buffs autocastable when having perk that disable use of white/black magic, ");
 			outputText("putting B. Sword after picking Ecalibur disabling option to pick sword at Temple, all 3 Hall of Blade soulskill variants dealing phys not magical dmg, Lightning Claw lowering phys dmg when used as part of feral style attack, using goblin Cum Reservoir not empting it out, Yuki Onna Transform scene not making sure to give proper genitalia setup, Archer's Stamina perks not giving fatigue related to ");
