@@ -17,7 +17,7 @@ public class HydraScene extends BaseContent {
             outputText("<b>New codex entry unlocked: Hydra!</b>\n\n");
         }
         spriteSelect(SpriteDb.s_hydra_16bit);
-        outputText("The first telltale that something might have gone really wrong is the hissing which seems to come from all around the room. The only warning you get of the impending attack is a sudden move of the shadows as a massive snake head bites the air mere inches from your face. You ready for battle as several huge snakes comes out of the shadow, each connected to a single junction to what appears to be the body of a very tall woman.\n\n");
+        outputText("The first telltale that something might have gone really wrong is the hissing, which seems to come from all around the room. The only warning you get of the impending attack is a sudden move of the shadows as a massive snake head bites the air mere inches from your face. You ready for battle as several huge snakes comes out of the shadow, each connected to a single junction to what appears to be the body of a very tall woman.\n\n");
         if (player.isNaga()) {
             outputText("\"<i>Why, would you look at that, how did you little grass snake make it all the way here. Are you perhaps lost?</i>\"\n\n");
             outputText("Sometimes you forget that as a naga your body language allows you to understand snakes of all kinds. You reply to the hydra that you're exploring the labyrinth in search of power and treasures.\n\n");
@@ -27,7 +27,7 @@ public class HydraScene extends BaseContent {
             menu();
             addButton(1, "Sex", sex);
             addButton(2, "Pass", pass);
-            addButton(3, "Fight", fight);
+            addButton(3, "Fight", startCombat, new Hydra(), true);
         }
         else {
             outputText("She hisses in perfect coordination with the snakes, her slitted eyes fixating you obsessively, as a drooling gaping slit at the junction between the snakes and her human body tells you exactly what she wants from you. You don't feel you should indulge her however and as such ready to battle.\n\n");
@@ -47,11 +47,6 @@ public class HydraScene extends BaseContent {
     public function pass():void {
         outputText("You decline politely but say you will think about it. The semi disappointed hydra shrugs and lets you exit the room.\n\n");
         doNext(playerMenu);
-    }
-    
-    public function fight():void {
-        outputText("Wearing a crown seemingly made of goop, this regal purple woman sits on a pair of stone slabs which serves it as a makeshift throne.\n\n");
-        startCombat(new Hydra(), true);
     }
     
     public function defeatedBy():void {

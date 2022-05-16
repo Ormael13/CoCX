@@ -17,12 +17,12 @@ public class HellfireSnailScene extends BaseContent {
             outputText("\"<i>Hey it's you again. Having fun down there?</i>\"\n\n");
             outputText("Well you could say that, in a way, yes you are having fun down there.\n\n");
             outputText("\"<i>So uh I've been getting antsy of late could you help me out with…</i>\"\n\n");
-            outputText("You shut her up right away with a smoldering kiss of your own. Burning pleasure running down your spine as she cover you with her blanket like undercarriage. You return her hug by gently imprinting your hands into her generous breasts. ");
+            outputText("You shut her up right away with a smoldering kiss of your own. Burning pleasure running down your spine as she covers you with her blanket like undercarriage. You return her hug by gently imprinting your hands into her generous breasts. ");
             hellfireSnailSex();
             inventory.takeItem(consumables.FSNAILS, playerMenu);
             return;
         }
-        outputText("As you turn the corner you run into what appears to be a massive rock blocking the passage. You try to move it but"+(player.tallness < 120 ? " to no avail the thing is as heavy as it looks. Your hand begins to burn up as":"")+" the rock suddenly raise in temperature and you swiftly remove them before being burnt. You are set on your guard as a feminine voice calls out.\n\n");
+        outputText("As you turn the corner, you run into what appears to be a massive rock blocking the passage. You try to move it but"+(player.tallness < 120 ? " to no avail the thing is as heavy as it looks. Your hand begins to burn up as":"")+" the rock suddenly raise in temperature and you swiftly remove them before being burnt. You are set on your guard as a feminine voice calls out.\n\n");
         outputText("\"<i>Hey who's the pervert molesting my ass!?! This is most unfair! Share back the fun!</i>\"\n\n");
         outputText("The rock now red with heat begins to seethe magma as something not unlike a reddish tail slides out from beneath it. On the other side the torso of a comely humanoid woman appears or you would call it human if not for the red skin, glowing ember eyes, drooling mouth and two antenna poking from the front atop her blazing hair! ");
         outputText("The volcanic snail girl eyes you with the kind of drooly obsessed expression you've only seen on slime girls and her intentions become clear as day, she intends to force herself on you!");
@@ -57,7 +57,7 @@ public class HellfireSnailScene extends BaseContent {
 
     public function hellfireSnailSex():void {
         eachMinuteCount(15);
-        outputText("The she snail giggle at your pleasant attention and begin to grind her lubricated pussy against "+(player.hasCock() ? "your burning cock" : "yours")+" in earnest. Blazing goop and other fluids begins to mingle as the two of you make it out the other residents of the labyrinth either oblivious or too scared to interfere with your smoldering mating session. ");
+        outputText("The snail giggles at your pleasant attention and begin to grind her lubricated pussy against "+(player.hasCock() ? "your burning cock" : "yours")+" in earnest. Blazing goop and other fluids begins to mingle as the two of you make it out the other residents of the labyrinth either oblivious or too scared to interfere with your smoldering mating session. ");
         outputText("This might also be because the both of you spray fire and lava everywhere as part of mating and despite you both being immune to each other the unlooker likely wouldn't. The mating is deliberately slow, gentle and calculated with no single movement wasted as unlike most of Mareth denizen your current partner likes it nice and slow taking her time to make everything count.\n\n");
         outputText("You reach your peak and erupt in orgasm, your partner following short mere seconds after");
         if (player.hasCock()) outputText(" as you fill her smoldering lovehole with "+player.race()+" seeds");
