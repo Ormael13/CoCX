@@ -308,7 +308,7 @@ package classes.Scenes
 			outputText("-New item (by Canadain Snas): Crossed Band - cost 4000 gems and PC can buy only 1. Effect: Reduces Corruption by 1/hour, halves damage from bleeding, fire, poison and other DoTs. Halves the duration of stuns and similar statuses to a minimum of 1 turn, -10% to max Mana.\n");
 			outputText("-New item (by Canadain Snas): Brown and Beige Band - cost 7000 gems and PC can buy only 1. Effect: +15% to str/spe multi, +15% to feral attacks damage, -10% to max Soulforce.\n");
 			outputText("-New item (by Canadain Snas): Royal Blue Band - cost 2000 gems and PC can buy max 2 of them. Effect: +5% to magic resistance, -10% to max Mana.\n");
-			outputText("-\n");
+			outputText("-Beaside limit on how many Holy Bands of each type PC can buy there is also limit on how many bands PC can wear at once and it's 4.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

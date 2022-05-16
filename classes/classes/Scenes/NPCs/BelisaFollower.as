@@ -834,21 +834,43 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		statScreenRefresh();
 		doNext(BelisaShop);
 	}
+	private function BelisaHolyBandsManagmentCap():Number {
+		var BHBMC:Number = 0;
+		if (HolyBand1 > 0) BHBMC += HolyBand1;
+		if (HolyBand2 > 0) BHBMC += HolyBand2;
+		if (HolyBand3 > 0) BHBMC += HolyBand3;
+		if (HolyBand4 > 0) BHBMC += HolyBand4;
+		if (HolyBand5 > 0) BHBMC += HolyBand5;
+		if (HolyBand6 > 0) BHBMC += HolyBand6;
+		if (HolyBand7 > 0) BHBMC += HolyBand7;
+		return BHBMC;
+	}
 	private function BelisaHolyBandsManagment():void {
 		menu();
-		if (HolyBand1 < 3 && HolyBand1Cap > 0 && HolyBand1 < HolyBand1Cap) addButton(0, "Crimson", BelisaHolyBandsManagmentCrimsonAdd).hint("Put on one Crimson Holy Band.");
+		if (BelisaHolyBandsManagmentCap() < 4) {
+			if (HolyBand1 < 3 && HolyBand1Cap > 0 && HolyBand1 < HolyBand1Cap) addButton(0, "Crimson", BelisaHolyBandsManagmentCrimsonAdd).hint("Put on one Crimson Holy Band.");
+			if (HolyBand2 < 3 && HolyBand2Cap > 0 && HolyBand2 < HolyBand2Cap) addButton(2, "Pink", BelisaHolyBandsManagmentPinkAdd).hint("Put on one Pink Holy Band.");
+			if (HolyBand3 < 3 && HolyBand3Cap > 0 && HolyBand3 < HolyBand3Cap) addButton(5, "Yellow", BelisaHolyBandsManagmentYellowAdd).hint("Put on one Yellow Holy Band.");
+			if (HolyBand4 == 0 && HolyBand4Cap == 0) addButton(7, "Turqouise", BelisaHolyBandsManagmentTurqouiseAdd).hint("Put on Turqouise Holy Band.");
+			if (HolyBand5 == 0 && HolyBand5Cap == 0) addButton(10, "Crossed", BelisaHolyBandsManagmentCrossedAdd).hint("Put on Crossed Holy Band.");
+			if (HolyBand6 == 0 && HolyBand6Cap == 0) addButton(12, "Royal Blue", BelisaHolyBandsManagmentBrownAndBeigeAdd).hint("Put on Brown and Beige Holy Band.");
+			if (HolyBand7 < 2 && HolyBand7Cap > 0 && HolyBand7 < HolyBand7Cap) addButton(4, "Royal Blue", BelisaHolyBandsManagmentRoyalBlueAdd).hint("Put on one Royal Blue Holy Band.");
+		}
+		else {
+			addButtonDisabled(0, "Crimson", "You can't put any more Holy Bands on your arms.");
+			addButtonDisabled(2, "Pink", "You can't put any more Holy Bands on your arms.");
+			addButtonDisabled(5, "Yellow", "You can't put any more Holy Bands on your arms.");
+			addButtonDisabled(7, "Turqouise", "You can't put any more Holy Bands on your arms.");
+			addButtonDisabled(10, "Crossed", "You can't put any more Holy Bands on your arms.");
+			addButtonDisabled(12, "Royal Blue", "You can't put any more Holy Bands on your arms.");
+			addButtonDisabled(4, "Royal Blue", "You can't put any more Holy Bands on your arms.");
+		}
 		if (HolyBand1 > 0) addButton(1, "Crimson", BelisaHolyBandsManagmentCrimsonRemove).hint("Take off one Crimson Holy Band.");
-		if (HolyBand2 < 3 && HolyBand2Cap > 0 && HolyBand2 < HolyBand2Cap) addButton(2, "Pink", BelisaHolyBandsManagmentPinkAdd).hint("Put on one Pink Holy Band.");
 		if (HolyBand2 > 0) addButton(3, "Pink", BelisaHolyBandsManagmentPinkRemove).hint("Take off one Pink Holy Band.");
-		if (HolyBand3 < 3 && HolyBand3Cap > 0 && HolyBand3 < HolyBand3Cap) addButton(5, "Yellow", BelisaHolyBandsManagmentYellowAdd).hint("Put on one Yellow Holy Band.");
 		if (HolyBand3 > 0) addButton(6, "Yellow", BelisaHolyBandsManagmentYellowRemove).hint("Take off one Yellow Holy Band.");
-		if (HolyBand4 == 0 && HolyBand4Cap == 0) addButton(7, "Turqouise", BelisaHolyBandsManagmentTurqouiseAdd).hint("Put on Turqouise Holy Band.");
 		if (HolyBand4 > 0) addButton(8, "Turqouise", BelisaHolyBandsManagmentTurqouiseRemove).hint("Take off Turqouise Holy Band.");
-		if (HolyBand5 == 0 && HolyBand5Cap == 0) addButton(10, "Crossed", BelisaHolyBandsManagmentCrossedAdd).hint("Put on Crossed Holy Band.");
 		if (HolyBand5 > 0) addButton(11, "Crossed", BelisaHolyBandsManagmentCrossedRemove).hint("Take off Crossed Holy Band.");
-		if (HolyBand6 == 0 && HolyBand6Cap == 0) addButton(12, "Royal Blue", BelisaHolyBandsManagmentBrownAndBeigeAdd).hint("Put on Brown and Beige Holy Band.");
 		if (HolyBand6 > 0) addButton(13, "Royal Blue", BelisaHolyBandsManagmentBrownAndBeigeRemove).hint("Take off Brown and Beige Holy Band.");
-		if (HolyBand7 < 2 && HolyBand7Cap > 0 && HolyBand7 < HolyBand7Cap) addButton(4, "Royal Blue", BelisaHolyBandsManagmentRoyalBlueAdd).hint("Put on one Royal Blue Holy Band.");
 		if (HolyBand7 > 0) addButton(9, "Royal Blue", BelisaHolyBandsManagmentRoyalBlueRemove).hint("Take off one Royal Blue Holy Band.");
 		if (BelisaInCamp) addButton(14, "Back", BelisaMainCampMenu);
 		else addButton(14, "Nevermind", Encounterback);
@@ -1407,4 +1429,4 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		return false;
 	}
 	}
-}
+}
