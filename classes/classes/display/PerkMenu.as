@@ -1179,16 +1179,16 @@ public class PerkMenu extends BaseContent {
 				}
 			}
 			else{
-				for each(var mutation:IMutationPerkType in mutationsArray){
-					if (player.hasPerk(mutation)) {
-						outputText("\n" + mutation.name() + ": <font color=\"#008000\">Acquired.</font>");
-						outputText("\nTier: " + player.perkv1(mutation));
+				for each(var mutation2:IMutationPerkType in mutationsArray){
+					if (player.hasPerk(mutation2)) {
+						outputText("\n" + mutation2.name() + ": <font color=\"#008000\">Acquired.</font>");
+						outputText("\nTier: " + player.perkv1(mutation2));
 						outputText("\nDescription: ");
-						if (mutation.desc().length <= 1) {	//Some desc. contains only "."
-							if (player.perkv1(mutation) == 0) outputText("You don't have this Mutation yet.");
+						if (mutation2.desc().length <= 1) {	//Some desc. contains only "."
+							if (player.perkv1(mutation2) == 0) outputText("You don't have this Mutation yet.");
 							else outputText("No description available.");
 						} else {
-							outputText(mutation.desc());
+							outputText(mutation2.desc());
 						}
 					}
 					else
