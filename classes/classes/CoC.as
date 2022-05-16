@@ -382,9 +382,10 @@ public class CoC extends MovieClip
 
     public function run():void
     {
-        trace("Loading races");
-        // to make error msgs appear here rather than after game load
+        trace("Initializing races");
         Races.load();
+        trace("Initializing perks");
+        PerkLib.initDependencies();
         mainMenu.mainMenu();
         this.stop();
 

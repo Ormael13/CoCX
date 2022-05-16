@@ -1000,7 +1000,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) == 0 && player.statusEffectv4(StatusEffects.PCClone) == 0) player.removeStatusEffect(StatusEffects.PCClone);
 			}
 			//Easter bunny egg balls Loosing
-			if (player.easterbunnyScore() < 10 && player.hasPerk(PerkLib.EasterBunnyBalls) && !player.perkv1(IMutationsLib.EasterBunnyEggBagIM) >= 1) {
+			if (!player.isRace(Races.EASTERBUNNY) && player.hasPerk(PerkLib.EasterBunnyBalls) && !player.perkv1(IMutationsLib.EasterBunnyEggBagIM) >= 1) {
 				outputText("\nSomething changes in your balls you can feel them as if they stopped growing. Guess you're no longer enough of a easter bunny to produce eggs.\n\n");
 				player.removePerk(PerkLib.EasterBunnyBalls)
 			}
@@ -1548,12 +1548,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.FreezingBreathYeti, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if ((player.melkieScore() >= 8 || player.isRace(Races.FROSTWYRM)) && !player.hasPerk(PerkLib.ColdAffinity)) {
+			if ((player.isRace(Races.MELKIE) || player.isRace(Races.FROSTWYRM)) && !player.hasPerk(PerkLib.ColdAffinity)) {
 				outputText("\nYou suddenly no longer feel the cold so you guess you finally got acclimated to the icy winds of the glacial rift. You feel at one with the cold. So well that you actually developed icy power of your own.\n\n(<b>Gained Perks: Cold Affinity</b>)\n");
 				player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (player.yetiScore() < 6 && player.yukiOnnaScore() < 14 && player.melkieScore() < 8 && !player.isRace(Races.FROSTWYRM) && !player.perkv1(IMutationsLib.WhaleFatIM) >= 1 && player.hasPerk(PerkLib.ColdAffinity)) {
+			else if (player.yetiScore() < 6 && player.yukiOnnaScore() < 14 && !player.isRace(Races.MELKIE) && !player.isRace(Races.FROSTWYRM) && !player.perkv1(IMutationsLib.WhaleFatIM) >= 1 && player.hasPerk(PerkLib.ColdAffinity)) {
 				outputText("\nYou suddenly feel a chill in the air. You guess you somehow no longer resist the cold.\n\n<b>(Lost Perks: Cold Affinity");
 				player.removePerk(PerkLib.ColdAffinity);
 				if (player.hasPerk(PerkLib.FreezingBreathYeti)){

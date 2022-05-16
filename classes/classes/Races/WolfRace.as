@@ -29,8 +29,8 @@ public class WolfRace extends Race {
 				.rearType(RearBody.FENRIR_ICE_SPIKES, +6)
 				.hasPerk(PerkLib.FreezingBreath, +3)
 				.hasCockOfType(CockTypesEnum.WOLF, +1);
-		buildTier(8, "wolf-boy", "wolf-girl")
-				.tauricName("wolf-taur")
+		buildTier(8, "wolf")
+				.namesMaleFemaleTaur("wolf-boy", "wolf-girl", "wolf-taur")
 				.buffs({
 					"str.mult": +0.50,
 					"tou.mult": +0.30,
@@ -39,7 +39,7 @@ public class WolfRace extends Race {
 				})
 				.end();
 		buildTier(10, "winter wolf")
-				.tauricName("winter wolf-taur")
+				.namesMaleFemaleTaur("winter wolf", "winter wolf", "winter wolf-taur")
 				.requireSkinCoatType(Skin.FUR)
 				.requireSkinCoatColor("glacial white")
 				.buffs({

@@ -52,9 +52,7 @@ public class DraconicHeartMutation extends PerkType
                 if (pTier == 0){
                     IMutationsLib.DraconicHeartIM.requireHeartMutationSlot()
                     .requirePerk(IMutationsLib.DraconicBonesIM)
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return (player.isRace(Races.DRAGON) || player.isRace(Races.FROSTWYRM) || player.isRace(Races.SEA_DRAGON));
-                    }, "Dragon race or its variants");
+                    .requireAnyRace(Races.DRAGON,Races.FROSTWYRM,Races.SEA_DRAGON);
                 }
                 else{
                     var pLvl:int = pTier * 30;

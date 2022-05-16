@@ -10,6 +10,7 @@ public class UshiOniRace extends Race{
 	
 	public function UshiOniRace(id:int) {
 		super("Ushi-Onna", id);
+		disabled = true;
 		
 		addScores()
 				.earType(Ears.COW, +1)
@@ -28,7 +29,7 @@ public class UshiOniRace extends Race{
 		)
 				.skinBaseColor(ANY(UshiOniSkinColors), +1);
 		
-		buildTier(11, "ushi-oni", "ushi-onna")
+		buildTier(11, "ushi-oni")
 				.customNamingFunction(function(body:BodyData):String {
 					var prefix:String = "";
 					switch (body.player.statusEffectv1(StatusEffects.UshiOnnaVariant)) {

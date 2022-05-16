@@ -8,6 +8,7 @@ package classes.IMutations
 import classes.PerkLib;
 import classes.PerkType;
 import classes.Player;
+import classes.Races;
 
 public class EasterBunnyEggBagMutation extends PerkType
     {
@@ -56,9 +57,7 @@ public class EasterBunnyEggBagMutation extends PerkType
                 if (pTier == 0){
                     IMutationsLib.EasterBunnyEggBagIM.requireBallsMutationSlot()
                     .requirePerk(PerkLib.EasterBunnyBalls)
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.easterbunnyScore() >= 12;
-                    }, "Easter Bunny race and Easter bunny balls.");
+                    .requireRace(Races.EASTERBUNNY);
                 }
                 else{
                     var pLvl:int = pTier * 30;

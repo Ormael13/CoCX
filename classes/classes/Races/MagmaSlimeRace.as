@@ -40,7 +40,8 @@ public class MagmaSlimeRace extends Race {
 				.noWings(+1)
 				.noGills(+1);
 		
-		buildTier(13, "magma slime boi", "magma slime girl")
+		buildTier(13, "magma slime")
+				.namesMaleFemale("magma slime boi", "magma slime girl")
 				.buffs({
 					"str.mult": +0.35,
 					"tou.mult": +1.00,

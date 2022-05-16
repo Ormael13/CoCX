@@ -7,6 +7,7 @@ package classes.IMutations
     import classes.PerkClass;
     import classes.PerkType;
 import classes.Player;
+import classes.Races;
 
 public class MelkieLungMutation extends PerkType
     {
@@ -50,9 +51,7 @@ public class MelkieLungMutation extends PerkType
                 IMutationsLib.MelkieLungIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.MelkieLungIM.requireLungsMutationSlot()
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.melkieScore() >= 18;
-                    }, "Melkie race");
+                    .requireRace(Races.MELKIE);
                 }
                 else{
                     var pLvl:int = pTier * 30;

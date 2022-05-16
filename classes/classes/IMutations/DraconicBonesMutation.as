@@ -63,9 +63,7 @@ public class DraconicBonesMutation extends PerkType
                     .requireCustomFunction(function (player:Player):Boolean {
                         return (Tail.hasDraconicTail(player) || LowerBody.hasDraconicLegs(player) && LowerBody.hasTail(player));
                     }, "Dragon race or its variants tail")
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return (player.isRace(Races.DRAGON) || player.jabberwockyScore() >= 10 || player.isRace(Races.FROSTWYRM) || player.isRace(Races.SEA_DRAGON));
-                    }, "Dragon race or its variants");
+                    .requireAnyRace(Races.DRAGON, Races.JABBERWOCKY, Races.FROSTWYRM, Races.SEA_DRAGON);
                 }
                 else{
                     var pLvl:int = pTier * 30;

@@ -6,6 +6,7 @@ import classes.Race;
 public class TrollRace extends Race {
 	public function TrollRace(id:int) {
 		super("Troll", id);
+		disabled = true;
 		
 		buildTier(10, "troll")
 				.buffs({

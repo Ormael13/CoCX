@@ -254,17 +254,25 @@ public class Race {
 		if (tiers.length>0) {
 			s += "\t<b>Tiers:</b>\n";
 		}
+		var actualTier:RaceTier = getTier(body, score);
 		for each(var tier:RaceTier in tiers) {
 			s += "\t<b>";
 			var present:Boolean = tier.check(body, score);
-			if (present) {
-				s += "[font-blue]"+tier.nameFor(body)+"[/font]";
+			if (tier == actualTier) {
+				s += "[font-lblue]"+tier.nameFor(body);
+			} else if (present) {
+				s += "[font-green]"+tier.nameFor(body);
 			} else {
-				s += tier.nameFor(body);
+				s += "[font-default]"+tier.name;
 			}
-			s += " ("+tier.minScore+") </b>";
+			s += " ("+tier.minScore+")[/font] </b>";
+			if (tier == actualTier) {
+				s += "[font-lblue]"
+			} else {
+				s += "[font-default]"
+			}
 			s += tier.describeBuffs(present ? body : null);
-			s += "\n";
+			s += "[/font]\n";
 		}
 		return s;
 	}
@@ -319,8 +327,8 @@ public class Race {
 	protected function addMutation(perkType:PerkType, scorePerStage:int=+1):void {
 		this.mutations.push([perkType,scorePerStage]);
 	}
-	protected function buildTier(minScore:int, name:String, femaleName:String =""):RaceTierBuilder {
-		return new RaceTierBuilder(this, tiers.length+1, minScore, name, femaleName||name);
+	protected function buildTier(minScore:int, name:String):RaceTierBuilder {
+		return new RaceTierBuilder(this, tiers.length+1, minScore, name);
 	}
 
     }

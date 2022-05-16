@@ -30,8 +30,8 @@ public class RatatoskrRace extends Race{
 		
 		addMutation(IMutationsLib.RatatoskrSmartsIM);
 		
-		buildTier(12, "squirrel morph")
-				.tauricName("squirrel-taur")
+		buildTier(12, "squirrel")
+				.namesTauric("squirrel-morph", "squirrel-taur")
 				.buffs({
 					"str.mult": -0.20,
 					"spe.mult": +0.95,
@@ -40,7 +40,7 @@ public class RatatoskrRace extends Race{
 				.end();
 		
 		buildTier(18, "ratatoskr")
-				.tauricName("ratatoskr-taur")
+				.namesTauric("ratatoskr", "ratatoskr-taur")
 				.buffs({
 					"str.mult": -0.25,
 					"spe.mult": +1.40,

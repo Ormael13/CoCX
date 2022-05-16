@@ -64,7 +64,7 @@ public class KitsuneRace extends Race {
 		addMutation(IMutationsLib.KitsuneThyroidGlandIM);
 		addMutation(IMutationsLib.KitsuneParathyroidGlandsIM);
 		buildTier(9, "kitsune")
-				.tauricName("kitsune-taur")
+				.namesTauric("kitsune", "kitsune-taur")
 				.require("2+ fox tails", function (body:BodyData):Boolean {
 					return body.tailType == Tail.FOX && body.tailCount >= 2
 				})
@@ -83,7 +83,7 @@ public class KitsuneRace extends Race {
 				])
 				.end();
 		buildTier(16, "nine tailed kitsune")
-				.tauricName("nine tailed kitsune-taur")
+				.namesTauric("nine tailed kitsune", "nine tailed kitsune-taur")
 				.requirePreviousTier()
 				.requireTailCount(9)
 				.buffs({
@@ -101,7 +101,7 @@ public class KitsuneRace extends Race {
 				])
 				.end();
 		buildTier(21, "nine tailed kitsune of balance")
-				.tauricName("nine tailed kitsune-taur of balance")
+				.namesTauric("nine tailed kitsune of balance", "nine tailed kitsune-taur of balance")
 				.requirePreviousTier()
 				.requirePerk(PerkLib.NinetailsKitsuneOfBalance)
 				.buffs({
@@ -119,7 +119,7 @@ public class KitsuneRace extends Race {
 				])
 				.end();
 		buildTier(26, "Inari")
-				.tauricName("Inari-taur")
+				.namesTauric("Inari", "Inari-taur")
 				.requirePreviousTier()
 				.buffs({
 					"str.mult": -0.50,

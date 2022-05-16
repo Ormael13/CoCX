@@ -9,7 +9,6 @@
 * kill array of objects in `race()`
 * solve unicornkin/alicornkin races
 * racial paragon and like stat buffs
-* `requireRace` for perks
 * Future:
   * racial score caching
   * `Race.onTierUp`/`onTierDown`

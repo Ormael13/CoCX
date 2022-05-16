@@ -17,6 +17,7 @@ public class RhinoRace extends Race {
 				.hasCockOfType(CockTypesEnum.RHINO, +1);
 		
 		buildTier(4, "rhino")
+				.namesMaleFemaleMorphTaur("rhino-man","rhino-girl","rhino-morph","rhino-morph")
 				.buffs({
 					"str.mult": +0.15,
 					"tou.mult": +0.15,

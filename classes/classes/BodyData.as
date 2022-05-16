@@ -15,9 +15,80 @@ public class BodyData {
 	 * - id: name of the constant ("FACE_TYPE")
 	 * - name: human-readable name ("face")
 	 *
-	 * - nameFn (optional): function(value:*):String converting values stored in this slot to readable name
+	 * - nameFn (optional): `function(value:*):String` converting values stored in this slot to readable name (minus name of the entry itself)
+	 * - phraseFn (optional): `function(operator:String value:*):String` to create text definition of a requirement phrase
+	 *
+	 * phraseFn semantics
+	 * ==================
+	 *
+	 * Equality (x == value)
+	 * - call: phraseFn("eq", value).
+	 * - default: nameFn(value) + " " + slot.name
+	 * - example (face): phraseFn("eq", Face.HUMAN), default is "human face"
+	 *
+	 * Inequality (x != value)
+	 * - call: phraseFn("ne", value)
+	 * - default: "not " + nameFn(value) + " " + slot.name
+	 * - example (face): phraseFn("eq", Face.HUMAN), default is "not human face"
+	 *
+	 * Other comparison operators: > "gt", < "lt", >= "ge", <= "le"
+	 * - call: phraseFn("gt"|"lt"|"ge"|"le", value)
+	 * - default: "more than/less than/at least/at most" + nameFn(value) + " " + slot.name
+	 * - example (tail count): phraseFn("ge", 2), default "at least 2 tail(s)"
+	 *
+	 * Inclusion: values.indexOf(x) >= 0
+	 * - call: phraseFn("any", values)
+	 * - default: (values converted with nameFn joined with ", " and " or ") + " " + slot.name
+	 * - example: phraseFn("any", [Ears.WOLF, Ears.FOX, Ears.CAT]),
+	 *            default would be "wolf, fox or cat ears"
+	 *
+	 * Inclusion: values.indexOf(x) >= 0
+	 * - call: phraseFn("any", values)
+	 * - default: "neither " + (values converted with nameFn joined with ", " and " nor ") + " " + slot.name
+	 * - example: phraseFn("none", [Ears.WOLF, Ears.FOX, Ears.CAT]),
+	 *            default would be "neither wolf, fox nor cat ears"
 	 */
 	public static const Slots:/*EnumValue*/Array = [];
+	
+	public static function defaultPhrase(operator:String, value:*, nameFn:Function, suffix:String):String {
+		switch (operator) {
+			case "eq":
+				return nameFn(value)+" "+suffix;
+			case "ne":
+				return "not "+nameFn(value)+" "+suffix;
+			case "ge":
+			case "le":
+			case "gt":
+			case "lt":
+				return {
+					"gt": "more than",
+					"lt": "less than",
+					"ge": "at least",
+					"le": "at most"
+				}[operator] + nameFn(value)+" "+suffix;
+			case "any":
+			case "none":
+				var any:Boolean = operator === "any";
+				return (any?"":"neither ") +
+						Utils.mergeSentences(
+								(value as Array).map(Utils.varargify(nameFn)),
+								(any?" or ":" nor "),
+								", ",
+								false
+						) + " " + suffix;
+		}
+		throw new Error("Invalid operator "+operator);
+	}
+	public static function slotPhraseFn(slotid:int):Function {
+		if (Slots[slotid].phraseFn) return Slots[slotid].phraseFn;
+		var slotName:String = Slots[slotid].name;
+		var nameFn:Function = Slots[slotid].nameFn || function (value:*):String {
+			return ""+value;
+		};
+		return function(operator:String, value:*):String {
+			return defaultPhrase(operator, value, nameFn, slotName);
+		}
+	}
 	
 	// Numbers are never saved, so can be changed between game versions without any problems.
 	// As long as they are proper 0..N sequence
@@ -167,7 +238,17 @@ public class BodyData {
 	EnumValue.add(Slots,SLOT_SKIN_COVERAGE, "SKIN_BASE_TYPE", {
 		name:"covered skin",
 		nameFn: function(value:int):String {
-			return Skin.CoverageTypes[value].name;
+			return [
+					"not",
+					"partially",
+					"medium",
+					"mostly",
+					"fully"
+			][value];
+		},
+		phraseFn: function(operator:String, value:*):String {
+			if (operator == "eq" && value == Skin.COVERAGE_NONE) return "no coat";
+			return defaultPhrase(operator, value, this.nameFn, "covered skin");
 		}
 	});
 	public function get skinCoverage():int {
@@ -239,6 +320,10 @@ public class BodyData {
 		name:"coat",
 		nameFn: function(value:int):String {
 			return Skin.SkinTypes[value].name;
+		},
+		phraseFn: function(operator:String, value:*):String {
+			// "scales coat" -> simply "scales"
+			return Utils.trimRight(defaultPhrase(operator, value, this.nameFn, ""));
 		}
 	});
 	public function get skinCoatType():int {
@@ -282,6 +367,13 @@ public class BodyData {
 		nameFn: function(value:int):String {
 			if (value == 0) return "no";
 			return Utils.num2Text(value);
+		},
+		phraseFn: function (operator:String, value:*):String {
+			if (value is Number) {
+				if (value == 0) return defaultPhrase(operator, value, this.nameFn, "tail");
+				if (value == 1) return defaultPhrase(operator, value, this.nameFn, "tail");
+			}
+			return defaultPhrase(operator, value, this.nameFn, "tails");
 		}
 	});
 	public function get tailCount():int {

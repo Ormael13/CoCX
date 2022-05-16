@@ -52,9 +52,7 @@ public class RatatoskrSmartsMutation extends PerkType
                 IMutationsLib.RatatoskrSmartsIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.RatatoskrSmartsIM.requirePeripheralNervSysMutationSlot()
-                    .requirePerk(PerkLib.KnowledgeIsPower).requireCustomFunction(function (player:Player):Boolean {
-                        return player.isRace(Races.RATATOSKR);
-                    }, "Squirrel/Ratatoskr race");
+                    .requireRace(Races.RATATOSKR);
                 }
                 else{
                     var pLvl:int = pTier * 30;

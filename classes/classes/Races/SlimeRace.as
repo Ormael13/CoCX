@@ -40,7 +40,8 @@ public class SlimeRace extends Race {
 				.noWings(+1)
 				.noGills(+1);
 		
-		buildTier(11, "slime boi", "slime girl")
+		buildTier(11, "slime")
+				.namesMaleFemale("slime boi", "slime girl")
 				.buffs({
 					"tou.mult": +1.00,
 					"spe.mult": -0.40,

@@ -4044,7 +4044,7 @@ public class PerkLib
 		}
 
 	// Perk requirements
-	private static function initDependencies():void {
+	public static function initDependencies():void {
         try {
 			//------------
             // STRENGTH
@@ -6323,15 +6323,9 @@ public class PerkLib
 					.requireMaxVenom(100);
 			VenomousAdiposeTissue.requireTou(10)
 					.requireMaxVenom(100);
-			CursedTag.requireCustomFunction(function (player:Player):Boolean {
-                return player.isRace(Races.JIANGSHI);
-            }, "Jiangshi race");
-			ImprovedCursedTag.requirePerk(CursedTag).requireCustomFunction(function (player:Player):Boolean {
-				return player.isRace(Races.JIANGSHI);
-            }, "Jiangshi race");
-			GreaterCursedTag.requirePerk(ImprovedCursedTag).requireCustomFunction(function (player:Player):Boolean {
-				return player.isRace(Races.JIANGSHI);
-            }, "Jiangshi race");
+			CursedTag.requireRace(Races.JIANGSHI);
+			ImprovedCursedTag.requirePerk(CursedTag).requireRace(Races.JIANGSHI);
+			GreaterCursedTag.requirePerk(ImprovedCursedTag).requireRace(Races.JIANGSHI);
             //Tier 1
 			ChimericalBodyInitialStage.requireLevel(6)
                     .requireCustomFunction(function (player:Player):Boolean {
@@ -7060,6 +7054,5 @@ public class PerkLib
             trace(e.getStackTrace());
         }
 	}
-	initDependencies();
 }
 }

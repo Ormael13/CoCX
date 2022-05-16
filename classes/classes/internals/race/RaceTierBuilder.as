@@ -35,30 +35,57 @@ public class RaceTierBuilder {
 			race: Race,
 			tierNumber: int,
 			minScore: int,
-			maleName: String,
-			femaleName: String
+			name: String
 	) {
 		ensureEndCalled();
 		currentBuilder = this;
 		this.race = race;
 		this.tierNumber = tierNumber;
 		this.minScore = minScore;
-		this.name = maleName;
+		this.name = name;
 		this.nameFn = function(body:BodyData):String {
-			return body.looksFemale ? femaleName : maleName;
+			return name;
 		}
 	}
 	
-	public function tauricName(name:String, femaleName:String=""):RaceTierBuilder {
-		femaleName ||=name;
-		var oldNameFn:Function = this.nameFn;
+	public function namesTauric(nonTaurName:String, taurName:String, femaleTaurName:String=""):RaceTierBuilder {
+		femaleTaurName ||= taurName;
 		this.nameFn = function(body:BodyData):String {
-			if (body.isTaur) return body.looksFemale ? name : femaleName;
-			return oldNameFn(body);
+			if (body.isTaur) return body.looksFemale ? taurName : femaleTaurName;
+			return nonTaurName;
 		}
 		return this;
 	}
 	
+	/**
+	 * Configure gender-dependent naming function
+	 */
+	public function namesMaleFemale(
+			maleName:String,
+			femaleName:String
+	): RaceTierBuilder {
+		this.nameFn = function(body:BodyData):String {
+			return body.mf(maleName, femaleName);
+		}
+		return this;
+	}
+	
+	/**
+	 * Configure tier naming function as:
+	 * {@param taurName} for taurs
+	 * {@param maleName}/{@param femaleName} for non-taurs
+	 */
+	public function namesMaleFemaleTaur(
+			maleName:String,
+			femaleName:String,
+			taurName:String
+	): RaceTierBuilder {
+		this.nameFn = function(body:BodyData):String {
+			if (body.isTaur) return taurName;
+			return body.mf(maleName, femaleName);
+		}
+		return this;
+	}
 	/**
 	 * Configure tier naming function as:
 	 * {@param taurName} for taurs

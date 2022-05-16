@@ -40,7 +40,8 @@ public class DarkSlimeRace extends Race {
 				.noWings(+1)
 				.noGills(+1);
 		
-		buildTier(13, "dark slime boi", "dark slime girl")
+		buildTier(13, "dark slime")
+				.namesMaleFemale("dark slime boi", "dark slime girl")
 				.buffs({
 					"tou.mult": +1.15,
 					"spe.mult": -0.50,

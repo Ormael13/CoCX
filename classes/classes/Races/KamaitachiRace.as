@@ -27,7 +27,7 @@ public class KamaitachiRace extends Race {
 		addMutation(IMutationsLib.HeartOfTheStormIM);
 		
 		buildTier(14, "kamaitachi")
-				.tauricName("kamaitachi-taur")
+				.namesTauric("kamaitachi", "kamaitachi-taur")
 				.buffs({
 					"str.mult": -0.20,
 					"spe.mult": +1.40,
@@ -38,7 +38,7 @@ public class KamaitachiRace extends Race {
 				.end();
 		
 		buildTier(18, "greater kamaitachi")
-				.tauricName("greater kamaitachi-taur")
+				.namesTauric("greater kamaitachi", "greater kamaitachi-taur")
 				.buffs({
 					"str.mult": -0.35,
 					"spe.mult": +2.00,

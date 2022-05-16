@@ -53,9 +53,7 @@ public class DisplacerMetabolismMutation extends PerkType
                 IMutationsLib.DisplacerMetabolismIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.DisplacerMetabolismIM.requireMetabolismMutationSlot()
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.isRace(Races.DISPLACERBEAST);
-                    }, "Displacer beast");
+                    .requireRace(Races.DISPLACERBEAST);
                 }
                 else{
                     var pLvl:int = pTier * 30;

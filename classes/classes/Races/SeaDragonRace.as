@@ -45,8 +45,8 @@ public class SeaDragonRace extends Race{
 		addMutation(IMutationsLib.WhaleFatIM);
 		addMutation(IMutationsLib.DrakeLungsIM);
 		
-		buildTier(20,"sea dragon-boy", "sea dragon-girl")
-				.tauricName("sea dragon-taur")
+		buildTier(20,"sea dragon")
+				.namesMaleFemaleTaur("sea dragon-boy", "sea dragon-girl","sea dragon-taur")
 				.buffs({
 					"str.mult": +2.00,
 					"spe.mult": +1.00,
@@ -58,8 +58,8 @@ public class SeaDragonRace extends Race{
 				])
 				.end();
 		
-		buildTier(30,"leviathan-boy", "leviathan-girl")
-				.tauricName("leviathan-taur")
+		buildTier(30,"leviathan")
+				.namesMaleFemaleTaur("leviathan-boy", "leviathan-girl","leviathan-taur")
 				.buffs({
 					"str.mult": +1.10,
 					"spe.mult": +0.70,

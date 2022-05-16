@@ -3565,9 +3565,6 @@ use namespace CoC;
 					if (perkv2(PerkLib.ElementalBody) == 4) race = "primordial undine";
 				}
 			}
-			if (TopRace == "centipede") {
-				race = "centipede-" + mf("man", "girl");
-			}
 			if (TopRace == "oomukade") {
 				if (TopScore >= 15) {
 					if (TopScore >= 18) {
@@ -3714,12 +3711,6 @@ use namespace CoC;
 			if (TopRace == "bee") {
 				race = "bee-morph";
 			}
-			if (TopRace == "gremlin") {
-				if (TopScore >= 15) {
-					if (TopScore >= 18) race = "high gremlin";
-					else race = "gremlin";
-				}
-			}
 			//if (humanScore() >= 5 && race == "corrupted mutant")
 			//	race = "somewhat human mutant";
 			if (TopRace == "demon") {
@@ -3775,12 +3766,6 @@ use namespace CoC;
 			}
 			if (TopRace == "bunny") {
 				if (TopScore >= 10) race = "bunny-" + mf("boy", "girl");
-			}
-			if (TopRace == "easter bunny") {
-				if (TopScore >= 12) {
-					if (TopScore >= 15) race = "true easter bunny-" + mf("boy", "girl");
-					else race = "easter bunny-" + mf("boy", "girl");
-				}
 			}
 			if (TopRace == "harpy") {
 				if (gender >= 2) race = "harpy";
@@ -3848,10 +3833,6 @@ use namespace CoC;
 				if (TopScore >= 14) {
 					race = "Yuki Onna";
 				}
-			}
-			if (TopRace == "melkie") {
-				if (TopScore >= 21) race = "elder melkie";
-				else race = "melkie";
 			}
 			if (TopRace == "couatl") {
 				if (TopScore >= 11) {
@@ -3978,12 +3959,6 @@ use namespace CoC;
 			}
 			if (TopRace == "satyr") {
 				if (TopScore >= 4) race = "satyr";
-			}
-			if (TopRace == "rhino") {
-				if (TopScore >= 4) {
-					race = "rhino-morph";
-					if (faceType == Face.HUMAN) race = "rhino-" + mf("man", "girl");
-				}
 			}
 			if (TopRace == "bear and panda") {
 				if (faceType == Face.PANDA) race = "panda-morph";
@@ -4241,7 +4216,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (bunnyScore() >= 10)
 				chimeraCounter++;
-			if (easterbunnyScore() >= 12)
+			if (isRace(Races.EASTERBUNNY))
 				chimeraCounter++;
 			if (harpyScore() >= 8)
 				chimeraCounter++;
@@ -4310,13 +4285,13 @@ use namespace CoC;
 				chimeraCounter++;
 			if (isRace(Races.WENDIGO))
 				chimeraCounter++;
-			if (melkieScore() >= 18)
+			if (isRace(Races.MELKIE))
 				chimeraCounter++;
 			if (isRace(Races.BAT))
 				chimeraCounter++;
 			if (isRace(Races.VAMPIRE))
 				chimeraCounter++;
-			if (jabberwockyScore() >= 10)
+			if (isRace(Races.JABBERWOCKY))
 				chimeraCounter++;
 			if (isRace(Races.AVIAN))
 				chimeraCounter++;
@@ -4355,7 +4330,7 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (isRace(Races.DRAGON, 2))
 				grandchimeraCounter++;
-			if (jabberwockyScore() >= 20)
+			if (isRace(Races.JABBERWOCKY, 2))
 				grandchimeraCounter++;
 			if (isRace(Races.WOLF, 2))
 				grandchimeraCounter++;
@@ -4393,7 +4368,7 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (isRace(Races.WENDIGO, 2))
 				grandchimeraCounter++;
-			if (melkieScore() >= 21)
+			if (isRace(Races.MELKIE, 2))
 				grandchimeraCounter++;
 			if (isRace(Races.SLIME, 2))
 				grandchimeraCounter++;
@@ -5047,126 +5022,6 @@ use namespace CoC;
 			return racialScore(Races.DRAGON);
 		}
 
-		//Determine Jabberwocky Rating
-		public function jabberwockyScore():Number {
-			Begin("Player","racialScore","jabberwocky");
-			var jabberwockyCounter:Number = 0;
-			var jabberwockyCounter2:Number = 0;
-			if (faceType == Face.JABBERWOCKY || faceType == Face.BUCKTOOTH) {
-				jabberwockyCounter++;
-				jabberwockyCounter2++;
-			}
-			if (faceType == Face.DRAGON || faceType == Face.DRAGON_FANGS)
-				jabberwockyCounter -= 10;
-			if (eyes.type == Eyes.DRACONIC) {
-				jabberwockyCounter++;
-				jabberwockyCounter2++;
-			}
-			if (eyes.colour == "red") {
-				jabberwockyCounter++;
-				jabberwockyCounter2++;
-			}
-			if (InCollection(hairColor, ["purplish-pink"])) {
-				jabberwockyCounter++;
-				jabberwockyCounter2++;
-			}
-			if (InCollection(coatColor, ["magenta"])) {
-				jabberwockyCounter++;
-				jabberwockyCounter2++;
-			}
-			if (InCollection(skinTone, ["caramel"])) {
-				jabberwockyCounter++;
-				jabberwockyCounter2++;
-			}
-			if (ears.type == Ears.BUNNY) {
-				jabberwockyCounter++;
-				jabberwockyCounter2++;
-			}
-			if (tailType == Tail.DRACONIC) {
-				jabberwockyCounter++;
-				jabberwockyCounter2++;
-			}
-			if (tongue.type == Tongue.DRACONIC) {
-				jabberwockyCounter++;
-				jabberwockyCounter2++;
-			}
-			if (antennae.type == Antennae.JABBERWOCKY) {
-				jabberwockyCounter++;
-				jabberwockyCounter2++;
-			}
-			if (wings.type == Wings.FEY_DRAGON) {
-				jabberwockyCounter += 4;
-				jabberwockyCounter2 += 4;
-			}
-			if (wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE)
-				jabberwockyCounter -= 10;
-			if (lowerBody == LowerBody.JABBERWOCKY) {
-				jabberwockyCounter++;
-				jabberwockyCounter2++;
-			}
-			if (arms.type == Arms.JABBERWOCKY) {
-				jabberwockyCounter++;
-				jabberwockyCounter2++;
-			}
-			if (tallness > 120 && jabberwockyCounter >= 10)
-				jabberwockyCounter++;
-			if (hasPartialCoat(Skin.DRAGON_SCALES) || hasCoatOfType(Skin.DRAGON_SCALES)) {
-				jabberwockyCounter++;
-				jabberwockyCounter2++;
-			}
-			if (InCollection(coatColor, ["pink"])) {
-				jabberwockyCounter++;
-				jabberwockyCounter2++;
-			}
-			if (horns.type == Horns.JABBERWOCKY) {
-				jabberwockyCounter += 2;
-				jabberwockyCounter2 += 2;
-			}
-			if (dragonCocks() > 0 || hasVagina())
-				jabberwockyCounter++;
-			if (jabberwockyCounter >= 5 && (hasPerk(PerkLib.DragonLustPoisonBreath)))
-				jabberwockyCounter++;
-			if (hasPerk(PerkLib.Insanity))
-				jabberwockyCounter++;
-			//if (hasPerk(PerkLib.JabberwockyMarrow)) (regeneration)
-			//	jabberwockyCounter++;
-			//if (hasPerk(PerkLib.JabberwockyMarrowEvolved)) (regeneration)
-			//	jabberwockyCounter++;
-			//if (hasPerk(PerkLib.JabberwockyMarrowFinalForm)) (regeneration)
-			//	jabberwockyCounter++;
-			if (perkv1(IMutationsLib.DraconicBonesIM) >= 1)
-				jabberwockyCounter++;
-			if (perkv1(IMutationsLib.DraconicBonesIM) >= 2)
-				jabberwockyCounter++;
-			if (perkv1(IMutationsLib.DraconicBonesIM) >= 3)
-				jabberwockyCounter++;
-			if (perkv1(IMutationsLib.DraconicHeartIM) >= 1)
-				jabberwockyCounter++;
-			if (perkv1(IMutationsLib.DraconicHeartIM) >= 2)
-				jabberwockyCounter++;
-			if (perkv1(IMutationsLib.DraconicHeartIM) >= 3)
-				jabberwockyCounter++;
-			if (perkv1(IMutationsLib.DrakeLungsIM) >= 1)
-				jabberwockyCounter++;
-			if (perkv1(IMutationsLib.DrakeLungsIM) >= 2)
-				jabberwockyCounter++;
-			if (perkv1(IMutationsLib.DrakeLungsIM) >= 3)
-				jabberwockyCounter++;
-			if ((perkv1(IMutationsLib.DraconicBonesIM) >= 1 || perkv1(IMutationsLib.DraconicHeartIM) >= 1 || perkv1(IMutationsLib.DrakeLungsIM) >= 1) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				jabberwockyCounter++;
-			if ((perkv1(IMutationsLib.DraconicBonesIM) >= 2 || perkv1(IMutationsLib.DraconicHeartIM) >= 2 || perkv1(IMutationsLib.DrakeLungsIM) >= 2) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				jabberwockyCounter++;
-			if ((perkv1(IMutationsLib.DraconicBonesIM) >= 3 || perkv1(IMutationsLib.DraconicHeartIM) >= 3 || perkv1(IMutationsLib.DrakeLungsIM) >= 3) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				jabberwockyCounter++;
-			if (hasPerk(PerkLib.DragonsDescendant) || hasPerk(PerkLib.BloodlineDragon))
-				jabberwockyCounter += increaseFromBloodlinePerks();
-			if ((faceType != Face.JABBERWOCKY && faceType != Face.BUCKTOOTH) || wings.type != Wings.FEY_DRAGON || lowerBody == LowerBody.FROSTWYRM) jabberwockyCounter = 0;
-			if (jabberwockyCounter2 < 5) jabberwockyCounter = jabberwockyCounter2;
-			jabberwockyCounter = finalRacialScore(jabberwockyCounter, Races.JABBERWOCKY);
-			End("Player","racialScore");
-			return jabberwockyCounter;
-		}
-
 		public function goblinScore():Number {
 			return racialScore(Races.GOBLIN);
 		}
@@ -5482,17 +5337,6 @@ use namespace CoC;
 			return racialScore(Races.POLTERGEIST);
 		}
 
-		//Banshee score
-		public function bansheeScore():Number {
-			Begin("Player","racialScore","banshee");
-			var bansheeCounter:Number = 0;
-			if (hairType == Hair.GHOST)
-				bansheeCounter++;
-			bansheeCounter = finalRacialScore(bansheeCounter, Races.BANSHEE);
-			End("Player","racialScore");
-			return bansheeCounter;
-		}
-
 		//Bunny score
 		public function bunnyScore():Number {
 			Begin("Player","racialScore","bunny");
@@ -5530,78 +5374,6 @@ use namespace CoC;
 			bunnyCounter = finalRacialScore(bunnyCounter, Races.BUNNY);
 			End("Player","racialScore");
 			return bunnyCounter;
-		}
-
-		//Centipede score
-		public function centipedeScore():Number {
-			Begin("Player","racialScore","centipede");
-			var centipedeCounter:Number = 0;
-			if (faceType == Face.ANIMAL_TOOTHS)
-				centipedeCounter++;
-			if (lowerBody == LowerBody.CENTIPEDE)
-				centipedeCounter += 2;
-			if (hasCoatOfType(Skin.COVERAGE_NONE))
-				centipedeCounter++;
-			if (arms.type == Arms.HUMAN)
-				centipedeCounter++;
-			if (antennae.type == Antennae.CENTIPEDE)
-				centipedeCounter++;
-			if (rearBody.type == RearBody.CENTIPEDE)
-				centipedeCounter++;
-			if (ears.type == Ears.ELFIN)
-				centipedeCounter++;
-			if (hasPerk(PerkLib.EasterBunnyBalls) && balls >= 2)
-				centipedeCounter = 0;
-			centipedeCounter = finalRacialScore(centipedeCounter, Races.CENTIPEDE);
-			End("Player","racialScore");
-			return centipedeCounter;
-		}
-
-		//Easter Bunny score
-		public function easterbunnyScore():Number {
-			Begin("Player","racialScore","bunny");
-			var EbunnyCounter:Number = 0;
-			if (faceType == Face.BUNNY || faceType == Face.BUCKTEETH)
-				EbunnyCounter++;
-			if (ears.type == Ears.BUNNY)
-				EbunnyCounter++;
-			if (lowerBody == LowerBody.BUNNY)
-				EbunnyCounter++;
-			if (hasPartialCoat(Skin.FUR) || hasFullCoatOfType(Skin.FUR) || hasFur())
-				EbunnyCounter++;
-			if (tailType == Tail.RABBIT)
-				EbunnyCounter++;
-			if (eyes.type == Eyes.HUMAN)
-				EbunnyCounter++;
-			if (arms.type == Arms.HUMAN)
-				EbunnyCounter++;
-			if (antennae.type == 0)
-				EbunnyCounter++;
-			if (wings.type == Wings.NONE)
-				EbunnyCounter++;
-			if (tallness < 72)
-				EbunnyCounter++;
-			if (hasCock() && normalCocks())
-				EbunnyCounter++;
-			if (hasPerk(PerkLib.EasterBunnyBalls) && balls >= 2)
-				EbunnyCounter++;
-			if (perkv1(IMutationsLib.EasterBunnyEggBagIM) >= 1 && balls >= 2)
-				EbunnyCounter++;
-			if (perkv1(IMutationsLib.EasterBunnyEggBagIM) >= 2 && balls >= 2)
-				EbunnyCounter++;
-			if (perkv1(IMutationsLib.EasterBunnyEggBagIM) >= 3 && balls >= 2)
-				EbunnyCounter++;
-			if (perkv1(IMutationsLib.EasterBunnyEggBagIM) >= 1 && balls >= 2 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				EbunnyCounter++;
-			if (perkv1(IMutationsLib.EasterBunnyEggBagIM) >= 2 && balls >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				EbunnyCounter++;
-			if (perkv1(IMutationsLib.EasterBunnyEggBagIM) >= 3 && balls >= 2 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				EbunnyCounter++;
-			if (ears.type != Ears.BUNNY)
-				EbunnyCounter = 0;
-			EbunnyCounter = finalRacialScore(EbunnyCounter, Races.EASTERBUNNY);
-			End("Player","racialScore");
-			return EbunnyCounter;
 		}
 
 		//Harpy score
@@ -6412,63 +6184,6 @@ use namespace CoC;
 			yukiOnnaCounter = finalRacialScore(yukiOnnaCounter, Races.YUKIONNA);
 			End("Player","racialScore");
 			return yukiOnnaCounter;
-		}
-
-		//Melkie score
-		public function melkieScore():Number {
-			Begin("Player","racialScore","melkie");
-			var melkieCounter:Number = 0;
-			if (InCollection(skin.base.color, ["light", "fair", "pale"]))
-				melkieCounter++;
-			if (InCollection(coatColor, ["grey", "silver", "white", "glacial white", "light gray"]))
-				melkieCounter++;
-			if (hairType == Hair.NORMAL)
-				melkieCounter++;
-			if (InCollection(hairColor, ["blonde", "platinum blonde"]))
-				melkieCounter++;
-			if (eyes.type == Eyes.HUMAN)
-				melkieCounter++;
-			if (eyes.colour == "blue")
-				melkieCounter++;
-			if (faceType == Face.ANIMAL_TOOTHS)
-				melkieCounter++;
-			if (ears.type == Ears.MELKIE)
-				melkieCounter++;
-			if (tongue.type == Tongue.MELKIE)
-				melkieCounter++;
-			if (lowerBody == LowerBody.MELKIE)
-				melkieCounter += 3;
-			if (arms.type == Arms.MELKIE)
-				melkieCounter++;
-			if (femininity > 80)
-				melkieCounter++;
-			if (hasVagina())
-				melkieCounter++;
-			if (hasPartialCoat(Skin.FUR))
-				melkieCounter++;
-			if (biggestTitSize() > 3)
-				melkieCounter++;
-			if (tallness >= 73)
-				melkieCounter++;
-			if (perkv1(IMutationsLib.MelkieLungIM) >= 1)
-				melkieCounter++;
-			if (perkv1(IMutationsLib.MelkieLungIM) >= 2)
-				melkieCounter++;
-			if (perkv1(IMutationsLib.MelkieLungIM) >= 3)
-				melkieCounter++;
-			if (lowerBody != LowerBody.MELKIE)
-				melkieCounter = 0;
-			if (perkv1(IMutationsLib.MelkieLungIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				melkieCounter++;
-			if (perkv1(IMutationsLib.MelkieLungIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				melkieCounter++;
-			if (perkv1(IMutationsLib.MelkieLungIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				melkieCounter++;
-			if (hasPerk(PerkLib.MelkiesDescendant) || hasPerk(PerkLib.BloodlineMelkie))
-				melkieCounter += increaseFromBloodlinePerks();
-			melkieCounter = finalRacialScore(melkieCounter, Races.MELKIE);
-			End("Player","racialScore");
-			return melkieCounter;
 		}
 
 		//Centaur score
@@ -8393,40 +8108,6 @@ use namespace CoC;
 				maxTouCap2 += 70;
 				maxIntCap2 += 50;
 			}//+10/10-20
-			if (jabberwockyScore() >= 10) {
-				if (jabberwockyScore() >= 30) {
-					maxStrCap2 += 125;
-					maxTouCap2 += 95;
-					maxSpeCap2 += 100;
-					maxIntCap2 += 40;
-					maxWisCap2 -= 50;
-					maxLibCap2 += 140;
-				}
-				else if (jabberwockyScore() >= 25) {
-					maxStrCap2 += 105;
-					maxTouCap2 += 80;
-					maxSpeCap2 += 90;
-					maxIntCap2 += 40;
-					maxWisCap2 -= 40;
-					maxLibCap2 += 100;
-				}
-				else if (jabberwockyScore() >= 20) {
-					maxStrCap2 += 90;
-					maxTouCap2 += 70;
-					maxSpeCap2 += 80;
-					maxIntCap2 += 30;
-					maxWisCap2 -= 30;
-					maxLibCap2 += 60;
-				}
-				else {
-					maxStrCap2 += 50;
-					maxTouCap2 += 40;
-					maxSpeCap2 += 50;
-					maxIntCap2 += 20;
-					maxWisCap2 -= 20;
-					maxLibCap2 += 10;
-				}
-			}
 			if (dogScore() >= 4) {
 				maxSpeCap2 += 15;
 				maxIntCap2 -= 5;
@@ -8467,20 +8148,6 @@ use namespace CoC;
 					maxSpeCap2 += 90;
 					maxLibCap2 += 90;
 			}
-			if (easterbunnyScore() >= 12 && hasPerk(PerkLib.EasterBunnyBalls)) {
-				if (easterbunnyScore() >= 15) {
-					maxStrCap2 -= 20;
-					maxTouCap2 -= 10;
-					maxSpeCap2 += 105;
-					maxLibCap2 += 150;
-				}
-				else {
-					maxStrCap2 -= 20;
-					maxTouCap2 -= 10;
-					maxSpeCap2 += 90;
-					maxLibCap2 += 120;
-				}
-			}//-20/-10+105+150
 			if (raccoonScore() >= 8) {
 				if (raccoonScore() >= 17) {
 					maxSpeCap2 += 105;
@@ -8852,23 +8519,6 @@ use namespace CoC;
 				maxWisCap2 += 70;
 				maxLibCap2 += 50;
 			}
-			if (melkieScore() >= 18) {
-				if (melkieScore() >= 21) {
-					maxSpeCap2 += 140;
-					maxIntCap2 += 140;
-					maxLibCap2 += 100;
-					currentSen += 65;
-				} else {
-					maxSpeCap2 += 120;
-					maxIntCap2 += 120;
-					maxLibCap2 += 80;
-					currentSen += 50;
-				}
-			}
-
-			if (bansheeScore() >= 4) {
-
-			}
 			if (firesnailScore() >= 15) {
 				maxStrCap2 += 70;
 				maxTouCap2 += 175;
@@ -8949,10 +8599,6 @@ use namespace CoC;
 				maxTouCap2 += 80;
 				maxSpeCap2 += 40;
 			}//+40/30-40
-			if (centipedeScore() >= 8) {
-				maxStrCap2 += 60;
-				maxSpeCap2 += 80;
-			}
 			if (oomukadeScore() >= 15) {
 				if (oomukadeScore() >= 18) {
 					maxStrCap2 += 125;

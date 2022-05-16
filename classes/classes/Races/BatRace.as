@@ -16,7 +16,8 @@ public class BatRace extends Race {
 		addScoresAfter(8)
 				.legType(LowerBody.HUMAN, +1);
 		
-		buildTier(10,"bat boy","bat girl")
+		buildTier(10,"bat")
+				.namesMaleFemale("bat boy","bat girl")
 				.buffs({
 					"str.mult": +0.35,
 					"spe.mult": +0.35,

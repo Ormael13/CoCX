@@ -52,9 +52,7 @@ public class ManticoreMetabolismMutation extends PerkType
                 IMutationsLib.ManticoreMetabolismIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.ManticoreMetabolismIM.requireMetabolismMutationSlot()
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.isRace(Races.MANTICORE) && player.tailType == Tail.MANTICORE_PUSSYTAIL;
-                    }, "Manticore race and tail");
+                    .requireRace(Races.MANTICORE);
                 }
                 else{
                     var pLvl:int = pTier * 30;

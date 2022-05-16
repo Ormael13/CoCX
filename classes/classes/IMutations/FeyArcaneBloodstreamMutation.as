@@ -51,9 +51,7 @@ public class FeyArcaneBloodstreamMutation extends PerkType
                 IMutationsLib.FeyArcaneBloodstreamIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.FeyArcaneBloodstreamIM.requireBloodsteamMutationSlot()
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.isRace(Races.FAIRY);
-                    }, "Fairy race");
+                    .requireRace(Races.FAIRY);
                 }
                 else{
                     var pLvl:int = pTier * 30;

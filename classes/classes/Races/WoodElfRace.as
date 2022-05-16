@@ -41,7 +41,7 @@ public class WoodElfRace extends Race{
 		addMutation(IMutationsLib.ElvishPeripheralNervSysIM, +3);
 		
 		buildTier(22, "wood elf little sister")
-				.tauricName("wood elf-taur little sister")
+				.namesTauric("wood elf little sister", "wood elf-taur little sister")
 				.buffs({
 					"str.mult": -0.10,
 					"tou.mult": -0.15,
@@ -53,7 +53,7 @@ public class WoodElfRace extends Race{
 				})
 				.end()
 		buildTier(25, "wood elf young sister")
-				.tauricName("wood elf-taur young sister")
+				.namesTauric("wood elf young sister", "wood elf-taur little sister")
 				.buffs({
 					"str.mult": -0.10,
 					"tou.mult": -0.15,
@@ -65,7 +65,7 @@ public class WoodElfRace extends Race{
 				})
 				.end()
 		buildTier(28, "wood elf sister")
-				.tauricName("wood elf-taur sister")
+				.namesTauric("wood elf sister", "wood elf-taur sister")
 				.buffs({
 					"str.mult": -0.10,
 					"tou.mult": -0.15,
@@ -77,7 +77,7 @@ public class WoodElfRace extends Race{
 				})
 				.end()
 		buildTier(31, "wood elf elder sister")
-				.tauricName("wood elf-taur elder sister")
+				.namesTauric("wood elf elder sister", "wood elf-taur elder sister")
 				.buffs({
 					"str.mult": -0.10,
 					"tou.mult": -0.15,

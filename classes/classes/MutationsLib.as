@@ -593,12 +593,9 @@ public class MutationsLib
 				BlackHeart.requireHeartMutationSlot().requirePerk(PerkLib.DarkCharm).requireCor(100).requireCustomFunction(function (player:Player):Boolean {
 					return player.demonScore() >= 11;
 				}, "Demon race");
-				CatlikeNimbleness.requirePerk(PerkLib.Flexibility).requireCustomFunction(function (player:Player):Boolean {
-					return player.isRace(Races.CAT) || player.isRace(Races.NEKOMATA) || player.isRace(Races.DISPLACERBEAST) || player.isRace(Races.HELLCAT) || player.isRace(Races.CHESHIRE) || player.isRace(Races.SPHINX);
-				}, "Any cat race");
-				DisplacerMetabolism.requireMetabolismMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.isRace(Races.DISPLACERBEAST);
-				}, "Displacer beast");
+				CatlikeNimbleness.requirePerk(PerkLib.Flexibility)
+						.requireRacialGroup(Races.FelineRaces, "Any cat race");
+				DisplacerMetabolism.requireMetabolismMutationSlot().requireRace(Races.DISPLACERBEAST);
 				DraconicBones.requireBonesAndMarrowMutationSlot()
 				.requireCustomFunction(function (player:Player):Boolean {
 					return (player.arms.type == Arms.DRACONIC || player.arms.type == Arms.FROSTWYRM || player.arms.type == Arms.SEA_DRAGON);
@@ -609,36 +606,26 @@ public class MutationsLib
 				.requireCustomFunction(function (player:Player):Boolean {
 					return (Tail.hasDraconicTail(player) || LowerBody.hasDraconicLegs(player) && LowerBody.hasTail(player));
 				}, "Dragon race or its variants tail")
-				.requireCustomFunction(function (player:Player):Boolean {
-					return (player.isRace(Races.DRAGON) || player.jabberwockyScore() >= 10 || player.isRace(Races.FROSTWYRM) || player.isRace(Races.SEA_DRAGON));
-				}, "Dragon race or its variants");
+				.requireAnyRace([Races.DRAGON,Races.JABBERWOCKY,Races.FROSTWYRM,Races.SEA_DRAGON]);
 				DraconicHeart.requireHeartMutationSlot()
 				.requirePerk(DraconicBones)
-				.requireCustomFunction(function (player:Player):Boolean {
-					return (player.isRace(Races.DRAGON) || player.isRace(Races.FROSTWYRM) || player.isRace(Races.SEA_DRAGON));
-				}, "Dragon race or its variants");
+				.requireAnyRace(Races.DRAGON,Races.FROSTWYRM,Races.SEA_DRAGON);
 				DraconicLungs.requireLungsMutationSlot()
 				.requirePerks(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath)
-				.requireCustomFunction(function (player:Player):Boolean {
-					return (player.isRace(Races.DRAGON));
-				}, "Dragon race");
+				.requireRace(Races.DRAGON);
 				DrakeLungs.requireLungsMutationSlot()
 				.requireAnyPerk(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath, PerkLib.DragonWaterBreath)
 				.requireCustomFunction(function (player:Player):Boolean {
-					return (player.isRace(Races.FROSTWYRM) || player.jabberwockyScore() >= 10 || player.vouivreScore() >= 11 || player.isRace(Races.SEA_DRAGON));
+					return (player.isRace(Races.FROSTWYRM) || player.isRace(Races.JABBERWOCKY) || player.vouivreScore() >= 11 || player.isRace(Races.SEA_DRAGON));
 				}, "Variants of the dragon race");
-				EasterBunnyEggBag.requireBallsMutationSlot().requirePerk(PerkLib.EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
-					return player.easterbunnyScore() >= 12;
-				}, "Easter Bunny race and Easter bunny balls.");
+				EasterBunnyEggBag.requireBallsMutationSlot().requirePerk(PerkLib.EasterBunnyBalls).requireRace(Races.EASTERBUNNY);
 				EclipticMind.requirePeripheralNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.isRace(Races.ALICORN, 2) || player.unicornScore() >= 12 || player.alicornkinScore() >= 10 || player.unicornkinScore() >= 10;
 				}, "Unicorn or Bicorn race");
 				ElvishPeripheralNervSys.requirePeripheralNervSysMutationSlot().requirePerk(PerkLib.ElvenSense).requireCustomFunction(function (player:Player):Boolean {
 					return player.elfScore() >= 11 || player.isRace(Races.WOODELF);
 				}, "Elf race");
-				FeyArcaneBloodstream.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.isRace(Races.FAIRY);
-				}, "Fairy race");
+				FeyArcaneBloodstream.requireBloodsteamMutationSlot().requireRace(Races.FAIRY);
 				FloralOvaries.requireOvariesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.alrauneScore() >= 13;
 				}, "Alraune race");
@@ -648,12 +635,7 @@ public class MutationsLib
 				GazerEye.requireEyesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.eyes.type == 36;
 				}, "Monoeye")
-				.requireCustomFunction(function (player:Player):Boolean {
-					return player.rearBody.type == RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 2;
-				}, "2+ eyestalks")
-				.requireCustomFunction(function (player:Player):Boolean {
-					return player.isRace(Races.GAZER);
-				}, "Gazer race");
+				.requireRace(Races.GAZER);
 				GorgonsEyes.requireEyesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.eyes.type == 4;
 				}, "Gorgon eyes")
@@ -682,9 +664,7 @@ public class MutationsLib
 				.requireCustomFunction(function (player:Player):Boolean {
 					return player.facePart.type == 34;//player.facePart.isAny(Face.VAMPIRE, Face.)
 				}, "Vampire fangs")
-				.requireCustomFunction(function (player:Player):Boolean {
-					return player.isRace(Races.VAMPIRE);//potem dodać mosquito race i ew. inne co mogą wypijać krew
-				}, "Vampire race");
+				.requireRace(Races.VAMPIRE);//potem dodać mosquito race i ew. inne co mogą wypijać krew
 				KitsuneParathyroidGlands.requireParathyroidGlandMutationSlot().requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
 					return player.tailType == Tail.FOX && player.tailCount >= 2;
 				}, "2+ fox tails")
@@ -694,9 +674,7 @@ public class MutationsLib
 				KitsuneThyroidGland.requireThyroidGlandMutationSlot().requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
 					return player.tailType == Tail.FOX && player.tailCount >= 2;
 				}, "2+ fox tails")
-				.requireCustomFunction(function (player:Player):Boolean {
-					return player.isRace(Races.KITSUNE);
-				}, "Kitsune race");
+				.requireRace(Races.KITSUNE);
 				LactaBovinaOvaries.requireOvariesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.hasVagina();
 				}, "is Female")
@@ -709,15 +687,11 @@ public class MutationsLib
 				LizanMarrow.requireBonesAndMarrowMutationSlot().requirePerk(PerkLib.LizanRegeneration).requireCustomFunction(function (player:Player):Boolean {
 					return player.lizardScore() >= 8;
 				}, "Lizan race");
-				ManticoreMetabolism.requireMetabolismMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.isRace(Races.MANTICORE);
-				}, "Manticore race and tail");
+				ManticoreMetabolism.requireMetabolismMutationSlot().requireRace(Races.MANTICORE);
 				MantislikeAgility.requireMusclesMutationSlot().requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
 					return player.mantisScore() >= 12;
 				}, "Mantis race");
-				MelkieLung.requireLungsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.melkieScore() >= 18;
-				}, "Melkie race");
+				MelkieLung.requireLungsMutationSlot().requireRace(Races.MELKIE);
 				MinotaurTesticles.requireBallsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.hasCock();
 				}, "is Male")
@@ -754,9 +728,7 @@ public class MutationsLib
 				RaijuCathode.requirePeripheralNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.raijuScore() >= 10;
 				}, "Raiju race");
-				RatatoskrSmarts.requirePeripheralNervSysMutationSlot().requirePerk(PerkLib.KnowledgeIsPower).requireCustomFunction(function (player:Player):Boolean {
-					return player.isRace(Races.RATATOSKR);
-				}, "Squirrel/Ratatoskr race");
+				RatatoskrSmarts.requirePeripheralNervSysMutationSlot().requirePerk(PerkLib.KnowledgeIsPower).requireRace(Races.RATATOSKR);
 				SalamanderAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(PerkLib.Lustzerker).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 7 || player.phoenixScore() >= 11;
 				}, "Salamander race");
@@ -775,9 +747,7 @@ public class MutationsLib
 				VampiricBloodsteam.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.hasStatusEffect(StatusEffects.VampireThirst);
 				}, "Vampire Thirst")
-				.requireCustomFunction(function (player:Player):Boolean {
-					return player.isRace(Races.VAMPIRE);//potem dodać mosquito race i ew. inne co mogą wypijać krew
-				}, "Vampire race");
+				.requireRace(Races.VAMPIRE);//potem dodać mosquito race i ew. inne co mogą wypijać krew
 				VenomGlands.requireMouthMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS);
 				}, "Spider or Snake fangs")

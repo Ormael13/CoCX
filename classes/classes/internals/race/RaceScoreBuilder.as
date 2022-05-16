@@ -135,6 +135,10 @@ public class RaceScoreBuilder {
 	public function noRearBody(score:int, failScore:int=0):RaceScoreBuilder {
 		return rearType(RearBody.NONE, score, failScore);
 	}
+	public function skinCoverage(coverage:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_SKIN_COVERAGE, coverage, score, failScore, customName);
+		return this;
+	}
 	public function skinType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_SKIN_TYPE, type, score, failScore, customName);
 		return this;

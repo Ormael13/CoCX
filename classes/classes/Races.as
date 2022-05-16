@@ -72,7 +72,7 @@ public class Races {
 	public static const YUKIONNA:Race = new Race("Yuki Onna",66, "yukiOnnaScore", 14);
 	public static const BAT:Race             = new BatRace(67);
 	public static const VAMPIRE:Race         = new VampireRace(68);
-	public static const JABBERWOCKY:Race = new Race("Jabberwocky",69, "jabberwockyScore", 10);
+	public static const JABBERWOCKY:Race     = new JabberwockyRace(69);
 	public static const AVIAN:Race           = new AvianRace(70);
 	public static const GARGOYLE:Race        = new GargoyleRace(71);
 	public static const SLIME:Race           = new SlimeRace(72);
@@ -80,10 +80,10 @@ public class Races {
 	public static const DARKSLIME:Race       = new DarkSlimeRace(74);
 	public static const JIANGSHI:Race        = new JiangshiRace(75);
 	public static const POLTERGEIST:Race     = new PoltergeistRace(76);
-	public static const BANSHEE:Race = new Race("Banshee",77, "bansheeScore", 4);
-	public static const MELKIE:Race = new Race("Melkie",78, "melkieScore", 18);
-	public static const EASTERBUNNY:Race = new Race("Easter Bunny",79, "easterbunnyScore", 12);
-	public static const CENTIPEDE:Race = new Race("Centipede",80, "centipedeScore", 8);
+	public static const BANSHEE:Race         = new BansheeRace(77);
+	public static const MELKIE:Race          = new MelkieRace(78);
+	public static const EASTERBUNNY:Race     = new EasterBunnyRace(79);
+	public static const CENTIPEDE:Race       = new CentipedeRace(80);
 	public static const FROSTWYRM:Race       = new FrostWyrmRace(81);
 	public static const CANCER:Race          = new CancerRace(82);
 	public static const USHIONNA:Race        = new UshiOniRace(83);
@@ -106,6 +106,11 @@ public class Races {
 	public static const APOPHIS:Race         = new ApophisRace(100);
 	public static const CYCLOP:Race          = new CyclopRace(101);
 	public static const ALICORN:Race         = new AlicornRace(102);
+	
+	// Racial groups
+	public static const FelineRaces:/*Race*/Array = [
+			CAT, NEKOMATA, DISPLACERBEAST, HELLCAT, CHESHIRE, SPHINX
+	];
 	
 	function Races() {
 	}
