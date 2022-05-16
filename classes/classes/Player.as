@@ -47,6 +47,7 @@ import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Combat.CombatAbilities;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.NPCs.AetherTwinsFollowers;
+import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.TyrantiaFollower;
@@ -2235,6 +2236,7 @@ use namespace CoC;
 			if(headjewelryEffectId == HeadJewelryLib.MODIFIER_LUST_R) lust -= headjewelryEffectMagnitude;
 			if(necklaceEffectId == NecklaceLib.MODIFIER_LUST_R) lust -= necklaceEffectMagnitude;
 			if(jewelryEffectId == JewelryLib.MODIFIER_LUST_R && jewelryEffectId2 == JewelryLib.MODIFIER_LUST_R && jewelryEffectId3 == JewelryLib.MODIFIER_LUST_R && jewelryEffectId4 == JewelryLib.MODIFIER_LUST_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_LUST_R && necklaceEffectId == NecklaceLib.MODIFIER_LUST_R) lust -= 15;
+			if(BelisaFollower.HolyBand2 > 0) lust -= 10 * BelisaFollower.HolyBand2;
 			if(lust < minLustCap) lust = minLustCap;
 			if(statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
 				if(lust >= 80) lust = 100;
@@ -2423,7 +2425,11 @@ use namespace CoC;
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
-				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
+				if (henchmanBasedInvulnerabilityFrame() || hasStatusEffect(StatusEffects.TurquoiseBandProtection)) {
+					if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
+					else SceneLib.combat.triggeredTurquoiseBandProtectionTexts();
+					damage = 0;
+				}
 				else if (hasStatusEffect(StatusEffects.ManaShield)) {
 					if (hasPerk(PerkLib.ArcaneShielding)) {
 						if (damagetype < 4) damage = manaShieldAbsorb(damage, display);
@@ -2658,6 +2664,11 @@ use namespace CoC;
 				damage -= dr;
 				damage = Math.round(damage);
 			}
+			if (BelisaFollower.HolyBand1 > 0) {
+				var hdr:Number = damage * (1 - (0.1 * BelisaFollower.HolyBand1));
+				damage -= hdr;
+				damage = Math.round(damage);
+			}
 			//Apply damage resistance percentage.
 			damage *= damagePercent() / 100;
 			return damage;
@@ -2668,6 +2679,7 @@ use namespace CoC;
 			var armorMMod:Number = armorMDef;
 			//--BASE--
 			mult -= armorMMod;
+			if (mult < 20) mult = 20;
 			//--PERKS--
 			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemTags.REVEALING)) {
 				mult -= 10;
@@ -2749,6 +2761,11 @@ use namespace CoC;
 			if (hasPerk(PerkLib.BouncyBody) && damage > (maxHP() * 0.5)) {
 				var dr:Number = damage * bouncybodyDR();
 				damage -= dr;
+				damage = Math.round(damage);
+			}
+			if (BelisaFollower.HolyBand7 > 0) {
+				var hdr:Number = damage * (1 - (0.05 * BelisaFollower.HolyBand7));
+				damage -= hdr;
 				damage = Math.round(damage);
 			}
 			//Apply magic damage resistance percentage.
@@ -4999,13 +5016,13 @@ use namespace CoC;
 				demonCounter += 5;
 			if (horns.type == Horns.GOAT)
 				demonCounter -= 10;
-			if (hasPerk(MutationsLib.BlackHeart))
+			if (perkv1(IMutationsLib.BlackHeartIM) >= 1)
 				angelCounter++;
 			if (perkv1(IMutationsLib.BlackHeartIM) >= 2)
 				angelCounter++;
 			if (perkv1(IMutationsLib.BlackHeartIM) >= 3)
 				angelCounter++;
-			if (hasPerk(MutationsLib.BlackHeart) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+			if (perkv1(IMutationsLib.BlackHeartIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				angelCounter++;
 			if (perkv1(IMutationsLib.BlackHeartIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				angelCounter++;
@@ -5211,6 +5228,12 @@ use namespace CoC;
 			if (beeCounter > 6 && perkv1(IMutationsLib.TrachealSystemIM) >= 3)
 				beeCounter++;
 			if (beeCounter > 9 && perkv1(IMutationsLib.TrachealSystemIM) >= 4)
+				beeCounter++;
+			if (perkv1(IMutationsLib.TrachealSystemIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+				beeCounter++;
+			if (perkv1(IMutationsLib.TrachealSystemIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+				beeCounter++;
+			if (perkv1(IMutationsLib.TrachealSystemIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				beeCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				beeCounter += 50;
@@ -6395,21 +6418,7 @@ use namespace CoC;
 				gremlinCounter += increaseFromBloodlinePerks();
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				gremlinCounter += 50;
-		/*	if (hasPerk(PerkLib.Phylactery))
-				gremlinCounter += 5;
-			if (hasPerk(MutationsLib.BlackHeart))
-				gremlinCounter++;
-			if (perkv1(IMutationsLib.BlackHeartIM) >= 2)
-				gremlinCounter++;
-			if (perkv1(IMutationsLib.BlackHeartIM) >= 3)
-				gremlinCounter++;
-			if (hasPerk(MutationsLib.BlackHeart) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				gremlinCounter++;
-			if (perkv1(IMutationsLib.BlackHeartIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				gremlinCounter++;
-			if (hasPerk(PerkLib.DemonicLethicite))
-				gremlinCounter+=1;
-		*/	if (!InCollection(skin.base.color, ["light", "tan", "dark"]))
+			if (!InCollection(skin.base.color, ["light", "tan", "dark"]))
 				gremlinCounter=0;
 			if (ears.type != Ears.GREMLIN)
 				gremlinCounter=0;
@@ -7227,6 +7236,12 @@ use namespace CoC;
 				harpy++;
 			if (perkv1(IMutationsLib.HarpyHollowBonesIM) >= 3)
 				harpy++;
+			if (perkv1(IMutationsLib.HarpyHollowBonesIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+				harpy++;
+			if (perkv1(IMutationsLib.HarpyHollowBonesIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+				harpy++;
+			if (perkv1(IMutationsLib.HarpyHollowBonesIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+				harpy++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				harpy += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && harpy >= 4)
@@ -7451,11 +7466,11 @@ use namespace CoC;
 				LeviathanCounter++;
 			if (hasPerk(PerkLib.DragonWaterBreath))
 				LeviathanCounter++;
-			if (perkv1(IMutationsLib.WhaleFatIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+			if ((perkv1(IMutationsLib.DrakeLungsIM) >= 1 || perkv1(IMutationsLib.DraconicBonesIM) >= 1 || perkv1(IMutationsLib.WhaleFatIM) >= 1) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				LeviathanCounter++;
-			if (perkv1(IMutationsLib.WhaleFatIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+			if ((perkv1(IMutationsLib.DrakeLungsIM) >= 2 || perkv1(IMutationsLib.DraconicBonesIM) >= 2 || perkv1(IMutationsLib.WhaleFatIM) >= 2) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				LeviathanCounter++;
-			if (perkv1(IMutationsLib.WhaleFatIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+			if ((perkv1(IMutationsLib.DrakeLungsIM) >= 3 || perkv1(IMutationsLib.DraconicBonesIM) >= 3 || perkv1(IMutationsLib.WhaleFatIM) >= 3) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				LeviathanCounter++;
 			if (faceType != Face.ORCA)
 				LeviathanCounter = 0;
@@ -7930,11 +7945,11 @@ use namespace CoC;
 				raijuCounter++;
 			if (perkv1(IMutationsLib.HeartOfTheStormIM) >= 3)
 				raijuCounter++;
-			if (perkv1(IMutationsLib.HeartOfTheStormIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+			if ((perkv1(IMutationsLib.RaijuCathodeIM) >= 1 || perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				raijuCounter++;
-			if (perkv1(IMutationsLib.HeartOfTheStormIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+			if ((perkv1(IMutationsLib.RaijuCathodeIM) >= 2 || perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				raijuCounter++;
-			if (perkv1(IMutationsLib.HeartOfTheStormIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+			if ((perkv1(IMutationsLib.RaijuCathodeIM) >= 3 || perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				raijuCounter++;
 			if (hasPerk(PerkLib.RaijusDescendant) || hasPerk(PerkLib.BloodlineRaiju))
 				raijuCounter += increaseFromBloodlinePerks();
@@ -8897,11 +8912,11 @@ use namespace CoC;
 				sphinxCounter++;
 			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3)
 				sphinxCounter++;
-			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+			if ((perkv1(IMutationsLib.TwinHeartIM) >= 1 || perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				sphinxCounter++;
-			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+			if ((perkv1(IMutationsLib.TwinHeartIM) >= 2 || perkv1(IMutationsLib.CatLikeNimblenessIM) >= 2) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				sphinxCounter++;
-			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+			if ((perkv1(IMutationsLib.TwinHeartIM) >= 3 || perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				sphinxCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				sphinxCounter += 50;
@@ -10039,7 +10054,7 @@ use namespace CoC;
 				manticoreCounter++;
 			if ((perkv1(IMutationsLib.ManticoreMetabolismIM) >= 2 || perkv1(IMutationsLib.CatLikeNimblenessIM) >= 2) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				manticoreCounter++;
-			if (perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+			if ((perkv1(IMutationsLib.ManticoreMetabolismIM) >= 3 || perkv1(IMutationsLib.CatLikeNimblenessIM) >= 3) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				manticoreCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				manticoreCounter += 50;
@@ -15320,4 +15335,4 @@ use namespace CoC;
 			}
 		}
 	}
-}
+}
