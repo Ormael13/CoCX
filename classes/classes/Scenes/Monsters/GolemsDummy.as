@@ -5,16 +5,10 @@
 package classes.Scenes.Monsters 
 {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
-import classes.internals.*;
-import classes.Scenes.Camp.CampMakeWinions;
 import classes.Scenes.SceneLib;
 
 public class GolemsDummy extends AbstractGolem
 	{
-		public var campMake:CampMakeWinions = new CampMakeWinions();
-		
 		public function backhand():void {
 			outputText("The golems visage twists into a grimace of irritation, and few of them swings their hands at you in a vicious backhand.");
 			var damage:Number = int (((str + weaponAttack) * 5) - rand(player.tou) - player.armorDef);
@@ -50,7 +44,7 @@ public class GolemsDummy extends AbstractGolem
 			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) SceneLib.hexindao.gaunletchallange1fight2();
 			else {
 				if (player.hasStatusEffect(StatusEffects.SoulArena)) SceneLib.combat.finishCombat();
-				else campMake.postFightGolemOptions2();
+				else SceneLib.camp.campMake.postFightGolemOptions2();
 			}
 		}
 		
