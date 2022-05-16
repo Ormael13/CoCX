@@ -547,9 +547,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 							needNext = true;
 						}
 						if (player.spe > 1) player.addStatusValue(StatusEffects.SlimeCraving, 3, 0.1); //Keep track of how much has been taken from speed
-						player.addCurse("str", 1, 2);
-						player.addCurse("spe", 0.1, 2);
-						player.dynStats("lus", 2);
+						player.dynStats("str",-1,"spe", -0.1, "lus", 2);
 						player.buff("Fluid Growth").addStat("tou.mult",-0.04,0).withText("Fluid Growth!");
 						player.buff("Fluid Growth").addStat("int.mult",-0.04,0).withText("Fluid Growth!");
 						player.addStatusValue(StatusEffects.SlimeCraving, 2, 0.1); //Keep track of how much has been taken from strength
@@ -1177,8 +1175,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 							if (player.thickness < 25) {
 								player.takePhysDamage(player.maxHP() / 25);
 								fatigue(2);
-								player.addCurse("tou", 0.5, 2);
-								player.addCurse("str", 0.5, 2);
+								dynStats("tou", -0.5);
+								dynStats("str", -0.5);
 							}
 							else if ((model.time.hours + 2) % 4 == 0) { //Lose thickness 2x as fast.
 								player.modThickness(1, 1);
