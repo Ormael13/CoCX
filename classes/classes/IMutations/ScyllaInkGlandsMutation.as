@@ -4,12 +4,12 @@
  */
 package classes.IMutations
 {
-    import classes.PerkClass;
+import classes.PerkClass;
 import classes.PerkLib;
-import classes.PerkType;
+import classes.IMutationPerkType;
 import classes.Player;
 
-public class ScyllaInkGlandsMutation extends PerkType
+public class ScyllaInkGlandsMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
@@ -45,8 +45,14 @@ public class ScyllaInkGlandsMutation extends PerkType
         }
 
         //Mutation Requirements
-        public static function pReqs(pTier:int = 0):void{
+        override public function pReqs(target:* = null):void{
             try{
+                if (target == null){
+                    trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
+                    target = player;
+                }
+                var params:PerkClass = target.getPerk(this);
+                var pTier:int = params.value1;
                 //This helps keep the requirements output clean.
                 IMutationsLib.ScyllaInkGlandsIM.requirements = [];
                 if (pTier == 0){
@@ -64,12 +70,15 @@ public class ScyllaInkGlandsMutation extends PerkType
             }
         }
 
-        //Perk Max Level
-        public static var _perkLvl:int = 1;
-
         //Mutations Buffs
-        public static function pBuffs(pTier:int = 1):Object{
+        override public function pBuffs(target:* = null):Object{
             var pBuffs:Object = {};
+            if (target == null){
+                trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
+                target = player;
+            }
+            var params:PerkClass = target.getPerk(this);
+            var pTier:int = params.value1;
             if (pTier == 1) pBuffs['str.mult'] = 0.1;
             //else if (pTier == 2) pBuffs['int.mult'] = 0;
             //else if (pTier == 3) pBuffs['int.mult'] = 0;
@@ -78,6 +87,7 @@ public class ScyllaInkGlandsMutation extends PerkType
 
         public function ScyllaInkGlandsMutation() {
             super("Scylla Ink Glands IM", "Scylla Ink Glands", ".");
+            maxLvl = 1;
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {

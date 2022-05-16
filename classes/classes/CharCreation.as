@@ -18,6 +18,7 @@ import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutationPerkType;
 import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Scenes.Areas.Desert.SandWitchScene;
@@ -1805,12 +1806,12 @@ import coc.view.MainView;
 		}
 
 		public function setupMutations():void{
-			for each(var mutation:PerkType in IMutationsLib.mutationsArray("", true)){
+			for each(var mutation:IMutationPerkType in IMutationsLib.mutationsArray("")){
 				if (!player.hasPerk(mutation)){
 					player.createPerk(mutation,0,0,0,0);
 				}
 			}
-			player.createPerk(IMutationsLib.KTG2,0,0,0,0);
+			//player.createPerk(IMutationsLib.KTG2,0,0,0,0);
 			trace("Mutations setup charcreation done");
 		}
 

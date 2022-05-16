@@ -8,6 +8,7 @@ import classes.BodyParts.Tail;
 import classes.CoC;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutationPerkType;
 import classes.MutationsLib;
 import classes.IMutations.*;
 import classes.PerkClass;
@@ -848,8 +849,8 @@ public class PerkMenu extends BaseContent {
 			for each (var bodyPart:String in bPartlist){
 				var mCount:int = 0
 				var mPerkarray:Array = IMutationsLib.mutationsArray(bodyPart);
-				for each (var pPerk:Array in mPerkarray){
-					if (player.perkv1(pPerk[0]) > 0){
+				for each (var mutations:IMutationPerkType in mPerkarray){
+					if (player.perkv1(mutations) > 0){
 						mCount++;
 						if (bodyPart == "Adaptations") mutationCount++;
 					}
@@ -888,9 +889,7 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Heart Mutations
 			displayHeader("Heart Mutations:");
-			for each (var mutate:Array in IMutationsLib.mutationsArray("Heart")){
-				mutationsDatabaseVerify(mutate);
-			}
+			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Heart"));
 			mutationsDatabase();
 		}
 
@@ -898,9 +897,7 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Muscle Mutations
 			displayHeader("Muscle Mutations:");
-			for each (var mutate:Array in IMutationsLib.mutationsArray("Muscle")){
-				mutationsDatabaseVerify(mutate);
-			}
+			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Muscle"));
 			mutationsDatabase();
 		}
 
@@ -908,9 +905,7 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Mouth Mutations
 			displayHeader("Mouth Mutations:");
-			for each (var mutate:Array in IMutationsLib.mutationsArray("Mouth")){
-				mutationsDatabaseVerify(mutate);
-			}
+			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Mouth"));
 			mutationsDatabase();
 		}
 
@@ -918,9 +913,7 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Adrenal Glands Mutations
 			displayHeader("Adrenal Gland Mutations");
-			for each (var mutate:Array in IMutationsLib.mutationsArray("Adrenals")){
-				mutationsDatabaseVerify(mutate);
-			}
+			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Adrenals"));
 			mutationsDatabase();
 		}
 
@@ -928,9 +921,7 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
 			displayHeader("Bloodstream Mutations");
-			for each (var mutate:Array in IMutationsLib.mutationsArray("Bloodstream")){
-				mutationsDatabaseVerify(mutate);
-			}
+			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Bloodstream"));
 			mutationsDatabase();
 		}
 
@@ -938,9 +929,7 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Fat tissue Mutations
 			displayHeader("Fat and Tissue Mutations");
-			for each (var mutate:Array in IMutationsLib.mutationsArray("FaT")){
-				mutationsDatabaseVerify(mutate);
-			}
+			mutationsDatabaseVerify(IMutationsLib.mutationsArray("FaT"));
 			mutationsDatabase();
 		}
 
@@ -948,9 +937,7 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Lungs Mutations
 			displayHeader("Lungs Mutations");
-			for each (var mutate:Array in IMutationsLib.mutationsArray("Lungs")){
-				mutationsDatabaseVerify(mutate);
-			}
+			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Lungs"));
 			mutationsDatabase();
 		}
 
@@ -958,9 +945,7 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Metabolism Mutations
 			displayHeader("Metabolism Mutations");
-			for each (var mutate:Array in IMutationsLib.mutationsArray("Metabolism")){
-				mutationsDatabaseVerify(mutate);
-			}
+			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Metabolism"));
 			mutationsDatabase();
 		}
 
@@ -968,9 +953,7 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Ovaries Mutations
 			displayHeader("Ovaries Mutations");
-			for each (var mutate:Array in IMutationsLib.mutationsArray("Ovaries")){
-				mutationsDatabaseVerify(mutate);
-			}
+			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Ovaries"));
 			mutationsDatabase();
 		}
 
@@ -978,9 +961,7 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Testicle Mutations
 			displayHeader("Balls Mutations");
-			for each (var mutate:Array in IMutationsLib.mutationsArray("Testicles")){
-				mutationsDatabaseVerify(mutate);
-			}
+			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Testicles"));
 			mutationsDatabase();
 		}
 
@@ -988,9 +969,7 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Eyes Mutations
 			displayHeader("Eye Mutations");
-			for each (var mutate:Array in IMutationsLib.mutationsArray("Eyes")){
-				mutationsDatabaseVerify(mutate);
-			}
+			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Eyes"));
 			mutationsDatabase();
 		}
 
@@ -998,9 +977,7 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Bones and Marrow Mutations
 			displayHeader("Bones and Marrow Mutations");
-			for each (var mutate:Array in IMutationsLib.mutationsArray("Bone")){
-				mutationsDatabaseVerify(mutate);
-			}
+			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Bone"));
 			mutationsDatabase();
 		}
 
@@ -1008,9 +985,7 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Peripheral/NervSys Mutations
 			displayHeader("Peripheral Nervous System Mutations");
-			for each (var mutate:Array in IMutationsLib.mutationsArray("Nerv/Sys")){
-				mutationsDatabaseVerify(mutate);
-			}
+			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Nerv/Sys"));
 			mutationsDatabase(1);
 		}
 
@@ -1018,9 +993,7 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Thyroid Glands Mutations
 			displayHeader("Thyroid Gland Mutations");
-			for each (var mutate:Array in IMutationsLib.mutationsArray("Thyroid")){
-				mutationsDatabaseVerify(mutate);
-			}
+			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Thyroid"));
 			mutationsDatabase(1);
 		}
 
@@ -1028,9 +1001,7 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//ParaThyroid Glands Mutations.
 			displayHeader("ParaThyroid Glands Mutations");
-			for each (var mutate:Array in IMutationsLib.mutationsArray("PThyroid")){
-				mutationsDatabaseVerify(mutate);
-			}
+			mutationsDatabaseVerify(IMutationsLib.mutationsArray("PThyroid"));
 			mutationsDatabase(1);
 		}
 
@@ -1038,9 +1009,7 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Adaptation Mutations.
 			displayHeader("Adaptation Mutations");
-			for each (var mutate:Array in IMutationsLib.mutationsArray("Adaptations")){
-				mutationsDatabaseVerify(mutate);
-			}
+			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Adaptations"));
 			mutationsDatabase(1);
 		}
 
@@ -1050,9 +1019,7 @@ public class PerkMenu extends BaseContent {
 			displayHeader("Dragon Mutations");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++");
-			mutationsDatabaseVerify([IMutationsLib.DraconicBonesIM, DraconicBonesMutation]);
-			mutationsDatabaseVerify([IMutationsLib.DraconicHeartIM, DraconicHeartMutation]);
-			mutationsDatabaseVerify([IMutationsLib.DraconicLungIM, DraconicLungMutation]);
+			mutationsDatabaseVerify([IMutationsLib.DraconicBonesIM, IMutationsLib.DraconicHeartIM, IMutationsLib.DraconicLungIM]);
 			mutationsDatabase(1);
 		}
 
@@ -1061,8 +1028,7 @@ public class PerkMenu extends BaseContent {
 			//Kitsune Mutations
 			displayHeader("Kitsune Mutations");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
-			mutationsDatabaseVerify([IMutationsLib.KitsuneThyroidGlandIM, KitsuneThyroidGlandMutation]);
-			mutationsDatabaseVerify([IMutationsLib.KitsuneParathyroidGlandsIM, KitsuneParathyroidGlandMutation]);
+			mutationsDatabaseVerify([IMutationsLib.KitsuneThyroidGlandIM, IMutationsLib.KitsuneParathyroidGlandsIM]);
 			mutationsDatabase(1);
 		}
 
@@ -1094,8 +1060,8 @@ public class PerkMenu extends BaseContent {
 	}
 
 	//Mutations check helper. Cloned + stripped requirements logic from PerkMenuDB.
-	public function mutationsDatabaseVerify(perkName:Array, acquireReq:String = ""):void {
-		var perkCount:int = perkName[1]._perkLvl;
+	public function mutationsDatabaseVerifyOld(perkName:Array, acquireReq:String = ""):void {
+		var perkCount:int = perkName[1].maxLvl;
 		var pPerk:PerkType = perkName[0];
 		if (flags[kFLAGS.MUTATIONS_SPOILERS]) { //Help On
 			if (player.perkv1(perkName[0]) > 0) {	//Just checking if you have the base.
@@ -1167,11 +1133,74 @@ public class PerkMenu extends BaseContent {
 		outputText("\n");
 	}
 
+	public function mutationsDatabaseVerify(mutationsArray:Array):void{
+			if(flags[kFLAGS.MUTATIONS_SPOILERS]){
+				for each(var mutation:IMutationPerkType in mutationsArray){
+					if (player.perkv1(mutation) > 0) {	//Just checking if you have the base.
+						outputText("\n" + mutation.name() + ": <font color=\"#008000\">Acquired.</font>");
+					} else {
+						outputText("\n" + mutation.name() + ": <font color=\"#800000\">Missing.</font>");
+					}
+					outputText("\nTier: " + player.perkv1(mutation) + " of " + mutation.maxLvl + ".");
+					var reqs:Array = [];
+					if (mutation.maxLvl != player.perkv1(mutation)) {
+						mutation.pReqs(player)	//Forces requirements to load up
+						if (mutation.requirements.length == 0) reqs.push("Missing data. Perhaps Unacquirable?");
+						else{
+							for each (var cond:Object in mutation.requirements){
+								var reqStr:String = cond.text;
+								var color:String = "";
+								if (!(reqStr.indexOf("Mutation") >= 0)) { //Ignores the "free mutation slot" note.
+									if (cond.fn(player)) {
+										color = "#008000";
+									}
+									else {
+										color = "#800000";
+									}
+									reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
+								}
+
+							}
+						}
+					}
+					if (mutation.maxLvl == player.perkv1(mutation)){	//Highest tier.
+						reqs.push("You already have the highest tier.");
+					}
+					outputText("\nRequirements for next tier: " + reqs.join(", "));
+					outputText("\nDescription: ");
+					if(mutation.desc().length <= 1) {	//Some desc. contains only "."
+						if (player.perkv1(mutation) == 0) outputText("You don't have this Mutation yet.");
+						else outputText("No description available.");
+					}
+					else{
+						outputText(mutation.desc());
+					}
+					outputText("\n");
+				}
+			}
+			else{
+				if (player.hasPerk(mutation)) {
+					outputText("\n" + mutation.name() + ": <font color=\"#008000\">Acquired.</font>");
+					outputText("\nTier: " + player.perkv1(mutation));
+					outputText("\nDescription: ");
+					if (mutation.desc().length == 1) {	//Some desc. contains only "."
+						outputText("No description available.");
+					} else {
+						outputText(mutation.desc());
+					}
+				}
+				else
+					{
+						outputText("\n???" + "\n Tier: ?" + "\nDescription: ???");
+					}
+			}
+			outputText("\n");
+	}
 
 	public function perkDatabase(page:int=0, count:int=50):void {
 		var allPerks:Array = PerkTree.obtainablePerks().sort();
 		var mutationList:Array = MutationsLib.mutationsArray("",true);
-		var mutationList2:Array = IMutationsLib.mutationsArray("",true);
+		var mutationList2:Array = IMutationsLib.mutationsArray("");
 
 		var temp:Array = [];
 		for each(var pPerks:PerkType in allPerks) {
@@ -1240,7 +1269,7 @@ public class PerkMenu extends BaseContent {
 			var pList4:Array = PerkLib.weaPerks();	//No Weapons Perks.
 			//function pSpecialRem = No Ascension/History/Bloodline/PastLife Perks
 			var pList5:Array = IMutationsLib.mutationsArray("Deprecated");
-			var pList6:Array = IMutationsLib.mutationsArray("",true);
+			var pList6:Array = IMutationsLib.mutationsArray("");
 			var pList7:Array = IMutationsLib.mutationsArray("Deprecated");
 			for each (var perkTrue:PerkType in perkDict){
 				if (!(pList1.indexOf(perkTrue) >= 0) && !(pList2.indexOf(perkTrue) >= 0) && !(pList3.indexOf(perkTrue) >= 0) && !(pList4.indexOf(perkTrue) >= 0) && !(pList5.indexOf(perkTrue) >= 0) && !(pList6.indexOf(perkTrue) >= 0) && !(pList7.indexOf(perkTrue) >= 0) && pSpecialRem(perkTrue)){
@@ -1526,7 +1555,7 @@ public class PerkMenu extends BaseContent {
 		function initSet():void {
 			var mutationList:Array = MutationsLib.mutationsArray("",true);
 			var mutationList2:Array = MutationsLib.mutationsArray("Deprecated");
-			var mutationList3:Array = IMutationsLib.mutationsArray("",true);
+			var mutationList3:Array = IMutationsLib.mutationsArray("");
 			var mutationList4:Array = IMutationsLib.mutationsArray("Deprecated");
 
 

@@ -188,7 +188,7 @@ use namespace CoC;
 			this.createPerk(IMutationsLib.LizanMarrowIM, 1, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
-			updateDynamicPerkBuffs(IMutationsLib.LizanMarrowIM, LizanMarrowMutation, this)
+			IMutationsLib.LizanMarrowIM.acquireMutation(this, "none");
 			checkMonster();
 		}
 		

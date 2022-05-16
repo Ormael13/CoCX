@@ -1085,7 +1085,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			saveFile.data.breastRows[i].fullness = player.breastRows[i].fullness;
 		}
 		//removing extra mutations from save
-		for each(var mutation:PerkType in IMutationsLib.mutationsArray("", true)){
+		for each(var mutation:PerkType in IMutationsLib.mutationsArray("")){
 			if (player.perkv1(mutation) == 0) player.removePerk(mutation);
 		}
 		//Set Perk Array

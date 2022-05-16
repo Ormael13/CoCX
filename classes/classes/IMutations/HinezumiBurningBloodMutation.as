@@ -8,10 +8,10 @@ import classes.BodyParts.Arms;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.PerkClass;
-    import classes.PerkType;
+import classes.IMutationPerkType;
 import classes.Player;
 
-public class HinezumiBurningBloodMutation extends PerkType
+public class HinezumiBurningBloodMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
@@ -21,7 +21,7 @@ public class HinezumiBurningBloodMutation extends PerkType
             if (pTier >= 3){
                 descS += ", allows you to use Cauterize even if you're no longer a Hinezumi";
             }
-            descS += "and raise Blazing battle spirit duration by "
+            if (pTier >= 1) descS += "and raise Blazing battle spirit duration by "
             if (pTier == 1){ //Could have used tier....
                 descS += "1";
             }
@@ -52,8 +52,14 @@ public class HinezumiBurningBloodMutation extends PerkType
         }
 
         //Mutation Requirements
-        public static function pReqs(pTier:int = 0):void{
+        override public function pReqs(target:* = null):void{
             try{
+                if (target == null){
+                    trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
+                    target = player;
+                }
+                var params:PerkClass = target.getPerk(this);
+                var pTier:int = params.value1;
                 //This helps keep the requirements output clean.
                 IMutationsLib.HinezumiBurningBloodIM.requirements = [];
                 if (pTier == 0){
@@ -80,12 +86,15 @@ public class HinezumiBurningBloodMutation extends PerkType
             }
         }
 
-        //Perk Max Level
-        public static var _perkLvl:int = 3;
-
         //Mutations Buffs
-        public static function pBuffs(pTier:int = 1):Object{
+        override public function pBuffs(target:* = null):Object{
             var pBuffs:Object = {};
+            if (target == null){
+                trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
+                target = player;
+            }
+            var params:PerkClass = target.getPerk(this);
+            var pTier:int = params.value1;
             if (pTier == 1) pBuffs['tou.mult'] = 0.05;
             if (pTier == 2) pBuffs['tou.mult'] = 0.15;
             if (pTier == 3) pBuffs['tou.mult'] = 0.3;
@@ -94,6 +103,7 @@ public class HinezumiBurningBloodMutation extends PerkType
 
         public function HinezumiBurningBloodMutation() {
             super("Hinezumi Burning Blood IM", "Hinezumi Burning Blood IM", ".");
+            maxLvl = 3;
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {

@@ -4,10 +4,10 @@
  */
 package classes.IMutations
 {
-    import classes.PerkClass;
-    import classes.PerkType;
+import classes.IMutationPerkType;
+import classes.PerkClass;
 
-    public class MutationTemplate extends PerkType
+    public class MutationTemplate extends IMutationPerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
@@ -43,8 +43,14 @@ package classes.IMutations
         }
 
         //Mutation Requirements
-        public static function pReqs(pTier:int = 0):void{
+        override public function pReqs(target:* = null):void{
             try{
+                if (target == null){
+                    trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
+                    target = player;
+                }
+                var params:PerkClass = target.getPerk(this);
+                var pTier:int = params.value1;
                 //This helps keep the requirements output clean.
                 IMutationsLib.MutationsTemplateIM.requirements = [];
                 if (pTier == 0){
@@ -59,20 +65,30 @@ package classes.IMutations
             }
         }
 
-        //Perk Max Level
-        public static var _perkLvl:int = 3;
 
         //Mutations Buffs
-        public static function pBuffs(pTier:int = 1):Object{
+        override public function pBuffs(target:* = null):Object{
             var pBuffs:Object = {};
-            if (pTier == 1) pBuffs['int.mult'] = 0;
-            else if (pTier == 2) pBuffs['int.mult'] = 0;
-            else if (pTier == 3) pBuffs['int.mult'] = 0;
+            if (target == null){
+                trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
+                target = player;
+            }
+            var pTier:int = target.perkv1(IMutationsLib.MutationsTemplateIM);
+            if (pTier == 1) {
+                pBuffs['spe.mult'] = 0;
+            }
+            if (pTier == 2){
+                pBuffs['spe.mult'] = 0;
+            }
+            if (pTier == 3){
+                pBuffs['spe.mult'] = 0;
+            }
             return pBuffs;
         }
 
         public function MutationTemplate() {
             super("PerkName Here IM", "PerkName Here", ".");
+            maxLvl = 3;
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {

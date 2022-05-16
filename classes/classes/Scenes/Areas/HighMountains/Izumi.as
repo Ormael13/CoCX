@@ -182,8 +182,7 @@ public class Izumi extends Monster
 			if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) this.createPerk(PerkLib.LegendaryToughness, 0, 0, 0, 0);
 			if (flags[kFLAGS.IZUMI_LVL_UP] >= 9) this.createPerk(PerkLib.PrestigeJobBerserker, 0, 0, 0, 0);
 			if (flags[kFLAGS.IZUMI_LVL_UP] >= 10) this.createPerk(PerkLib.MythicalStrength, 0, 0, 0, 0);
-			if (flags[kFLAGS.IZUMI_LVL_UP] >= 11) this.createPerk(IMutationsLib.OniMusculatureIM, 1, 0, 0, 0);
-			updateDynamicPerkBuffs(IMutationsLib.OniMusculatureIM,OniMusculatureMutation, this);
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 11) IMutationsLib.OniMusculatureIM.acquireMutation(this, "none");
 			checkMonster();
 		}
 

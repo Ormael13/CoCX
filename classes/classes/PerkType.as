@@ -316,7 +316,7 @@ public class PerkType extends BaseContent
 		public function requireBloodsteamMutationSlot():PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {
-					return player.maxBloodsteamMutations() > 0;
+					return player.maxBloodstreamMutations() > 0;
 				},
 				text: "Free Bloodsteam Mutation Slot",
 				type: "bloodsteammutation"

@@ -4,11 +4,11 @@
  */
 package classes.IMutations
 {
-    import classes.PerkClass;
-    import classes.PerkType;
+import classes.PerkClass;
+import classes.IMutationPerkType;
 import classes.Player;
 
-public class HeartOfTheStormMutation extends PerkType
+public class HeartOfTheStormMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
@@ -46,8 +46,14 @@ public class HeartOfTheStormMutation extends PerkType
         }
 
         //Mutation Requirements
-        public static function pReqs(pTier:int = 0):void{
+        override public function pReqs(target:* = null):void{
             try{
+                if (target == null){
+                    trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
+                    target = player;
+                }
+                var params:PerkClass = target.getPerk(this);
+                var pTier:int = params.value1;
                 //This helps keep the requirements output clean.
                 IMutationsLib.HeartOfTheStormIM.requirements = [];
                 if (pTier == 0){
@@ -65,12 +71,15 @@ public class HeartOfTheStormMutation extends PerkType
             }
         }
 
-        //Perk Max Level
-        public static var _perkLvl:int = 3;
-
         //Mutations Buffs
-        public static function pBuffs(pTier:int = 1):Object{
+        override public function pBuffs(target:* = null):Object{
             var pBuffs:Object = {};
+            if (target == null){
+                trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
+                target = player;
+            }
+            var params:PerkClass = target.getPerk(this);
+            var pTier:int = params.value1;
             if (pTier == 1) pBuffs['spe.mult'] = 0.05;
             if (pTier == 2) pBuffs['spe.mult'] = 0.15;
             if (pTier == 3) pBuffs['spe.mult'] = 0.35;
@@ -79,6 +88,7 @@ public class HeartOfTheStormMutation extends PerkType
 
         public function HeartOfTheStormMutation() {
             super("Heart Of The Storm IM", "Heart Of The Storm", ".");
+            maxLvl = 3;
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {
