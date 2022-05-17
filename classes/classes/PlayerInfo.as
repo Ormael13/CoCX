@@ -1887,7 +1887,7 @@ public class PlayerInfo extends BaseContent {
 		var temp:Array = [];
 		var compMutate:Array = MutationsLib.mutationsArray("", true);
 		var compMutate2:Array = MutationsLib.mutationsArray("Deprecated");
-		var compMutate3:Array = IMutationsLib.mutationsArray("", true);
+		var compMutate3:Array = IMutationsLib.mutationsArray("");
 		var compMutate4:Array = IMutationsLib.mutationsArray("Deprecated");
 		for each (var playerPerk:PerkType in perks){
 			if (!(compMutate.indexOf(playerPerk) >= 0) && !(compMutate2.indexOf(playerPerk) >= 0) && !(compMutate3.indexOf(playerPerk) >= 0) && !(compMutate4.indexOf(playerPerk) >= 0)){

@@ -1488,7 +1488,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			else if (player.hasPerk(PerkLib.DarkCharm) && player.perkv4(PerkLib.DarkCharm) == 0 && !player.hasPerk(IMutationsLib.BlackHeartIM)) {
+			else if (player.hasPerk(PerkLib.DarkCharm) && player.perkv4(PerkLib.DarkCharm) == 0 && player.perkv1(IMutationsLib.BlackHeartIM) == 0) {
 				outputText("\nWith some of your demon-like traits gone, so does your ability to use charm attacks.\n\n(<b>Lost Perk: Dark Charm</b>)\n");
 				player.removePerk(PerkLib.DarkCharm);
 				needNext = true;
