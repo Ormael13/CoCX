@@ -41,6 +41,7 @@ public class PerkMenu extends BaseContent {
 					perkList.splice(mIndex, 1);
 				}
 			}
+			perkList.splice(perkList.indexOf(player.getPerk(IMutationsLib.MutationsTemplateIM)), 1);
 			for each (var temp:PerkClass in perkList){
 				try{
 					outputText("<b>" + temp.perkName + "</b> - " + temp.perkDesc + "\n");
