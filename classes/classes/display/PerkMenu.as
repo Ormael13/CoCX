@@ -37,7 +37,7 @@ public class PerkMenu extends BaseContent {
 			var perkList:Array = player.perks;
 			for each (var mutations:IMutationPerkType in IMutationsLib.mutationsArray("")){
 				var mIndex:int = perkList.indexOf(player.getPerk(mutations));
-				if (mIndex < 0){
+				if (mIndex >= 0){
 					perkList.splice(mIndex, 1);
 				}
 			}
