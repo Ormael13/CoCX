@@ -711,7 +711,7 @@ public class CombatMagic extends BaseCombatContent {
 	public function MagicPrefixEffect():void {
 		if (player.armorName == "Drider-Weave Sheer Robe") {
 			outputText("As your mana flows through your body, culminating in your hands, your sheer robe glows, giving [themonster] a good, long look at you.\n\n");
-			if (player.gender == 1 || (player.gender == 3 && rand(2) == 0)) {
+			if (player.gender == 2 || (player.gender == 3 && rand(2) == 0)) {
 				outputText("You lean forward, moving your [breasts] from side to side. As your mana focuses, you roll your shoulders back and your hips forward, giving the [enemy] a little moan, biting your lip, your arms behind your back. Their gaze drops to your snatch, but as they gaze at your delta, you finish your spell, robes turning back to normal. ");
 			}
 			else {
