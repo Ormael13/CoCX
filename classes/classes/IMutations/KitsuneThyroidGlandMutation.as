@@ -103,9 +103,7 @@ import classes.BodyParts.Tail;
         }
 
         /*
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
-        }*/
+        */
 
     }
 }

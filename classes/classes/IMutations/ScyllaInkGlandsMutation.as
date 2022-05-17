@@ -90,8 +90,6 @@ public class ScyllaInkGlandsMutation extends IMutationPerkType
             maxLvl = 1;
         }
 
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
-        }
+        
     }
 }

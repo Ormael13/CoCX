@@ -13,7 +13,6 @@ import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
 import classes.Items.WeaponRangeLib;
-import classes.Scenes.Places.WoodElves;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 

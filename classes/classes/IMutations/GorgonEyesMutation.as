@@ -97,8 +97,6 @@ public class GorgonEyesMutation extends IMutationPerkType
             maxLvl = 2;
         }
 
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
-        }
+        
     }
 }

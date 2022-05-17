@@ -4508,7 +4508,7 @@ use namespace CoC;
 			var internalChimeraCounter:Number = 0;
 			var pMutations:Array = IMutationsLib.mutationsArray("");
 			for each (var pPerk:IMutationPerkType in pMutations){
-				if (hasPerk(pPerk)) internalChimeraCounter += perkv1(pPerk);
+				if (hasMutation(pPerk)) internalChimeraCounter += perkv1(pPerk);
 			}
 			End("Player","racialScore");
 			return internalChimeraCounter;
@@ -10709,112 +10709,112 @@ use namespace CoC;
 		public function maxHeartMutations():Number {
 			var heartMutations:Number = 1 + maxAscensionBoost();
 			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Heart")){
-				if (hasPerk(mutation)) heartMutations--;
+				if (hasMutation(mutation)) heartMutations--;
 			}
 			return heartMutations;
 		}
 		public function maxMusclesMutations():Number {
 			var musclesMutations:Number = 1 + maxAscensionBoost();
 			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Muscle")){
-				if (hasPerk(mutation)) musclesMutations--;
+				if (hasMutation(mutation)) musclesMutations--;
 			}
 			return musclesMutations;
 		}
 		public function maxMouthMutations():Number {
 			var mouthMutations:Number = 1 + maxAscensionBoost();
 			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Mouth")){
-				if (hasPerk(mutation)) mouthMutations--;
+				if (hasMutation(mutation)) mouthMutations--;
 			}
 			return mouthMutations;
 		}
 		public function maxAdrenalGlandsMutations():Number {
 			var adrenalglandsMutations:Number = 1  + maxAscensionBoost();
 			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Adrenals")){
-				if (hasPerk(mutation)) adrenalglandsMutations--;
+				if (hasMutation(mutation)) adrenalglandsMutations--;
 			}
 			return adrenalglandsMutations;
 		}
 		public function maxBloodstreamMutations():Number {
 			var bloodstreamMutations:Number = 1 + maxAscensionBoost();
 			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Bloodstream")){
-				if (hasPerk(mutation)) bloodstreamMutations--;
+				if (hasMutation(mutation)) bloodstreamMutations--;
 			}
 			return bloodstreamMutations;
 		}
 		public function maxFatTissueMutations():Number {
 			var fattissueMutations:Number = 1 + maxAscensionBoost();
 			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("FaT")){
-				if (hasPerk(mutation)) fattissueMutations--;
+				if (hasMutation(mutation)) fattissueMutations--;
 			}
 			return fattissueMutations;
 		}
 		public function maxLungsMutations():Number {
 			var lungsMutations:Number = 1 + maxAscensionBoost();
 			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Lungs")){
-				if (hasPerk(mutation)) lungsMutations--;
+				if (hasMutation(mutation)) lungsMutations--;
 			}
 			return lungsMutations;
 		}
 		public function maxMetabolismMutations():Number {
 			var metabolismMutations:Number = 1 + maxAscensionBoost();
 			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Metabolism")){
-				if (hasPerk(mutation)) metabolismMutations--;
+				if (hasMutation(mutation)) metabolismMutations--;
 			}
 			return metabolismMutations;
 		}
 		public function maxOvariesMutations():Number {
 			var ovariesMutations:Number = 1 + maxAscensionBoost();
 			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Ovaries")){
-				if (hasPerk(mutation)) ovariesMutations--;
+				if (hasMutation(mutation)) ovariesMutations--;
 			}
 			return ovariesMutations;
 		}
 		public function maxBallsMutations():Number {
 			var ballsMutations:Number = 1 + maxAscensionBoost();
 			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Testicles")){
-				if (hasPerk(mutation)) ballsMutations--;
+				if (hasMutation(mutation)) ballsMutations--;
 			}
 			return ballsMutations;
 		}
 		public function maxEyesMutations():Number {
 			var eyesMutations:Number = 1 + maxAscensionBoost();
 			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Eyes")){
-				if (hasPerk(mutation)) eyesMutations--;
+				if (hasMutation(mutation)) eyesMutations--;
 			}
 			return eyesMutations;
 		}
 		public function maxPeripheralNervSysMutations():Number {
 			var nervsysMutations:Number = 1 + maxAscensionBoost();
 			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Nerv/Sys")){
-				if (hasPerk(mutation)) nervsysMutations--;
+				if (hasMutation(mutation)) nervsysMutations--;
 			}
 			return nervsysMutations;
 		}
 		public function maxBonesAndMarrowMutations():Number {
 			var bonesandmarrowMutations:Number = 1 + maxAscensionBoost();
 			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Bone")){
-				if (hasPerk(mutation)) bonesandmarrowMutations--;
+				if (hasMutation(mutation)) bonesandmarrowMutations--;
 			}
 			return bonesandmarrowMutations;
 		}
 		public function maxThyroidGlandMutations():Number {
 			var thyroidglandMutations:Number = 1 + maxAscensionBoost();
 			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Thyroid")){
-				if (hasPerk(mutation)) thyroidglandMutations--;
+				if (hasMutation(mutation)) thyroidglandMutations--;
 			}
 			return thyroidglandMutations;
 		}
 		public function maxParathyroidGlandMutations():Number {
 			var parathyroidglandMutations:Number = 1 + maxAscensionBoost();
 			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("PThyroid")){
-				if (hasPerk(mutation)) parathyroidglandMutations--;
+				if (hasMutation(mutation)) parathyroidglandMutations--;
 			}
 			return parathyroidglandMutations;
 		}
 		public function maxAdaptationsMutations():Number {
 			var adaptationsMutations:Number = 2 + maxAscensionBoost();
 			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Adaptations")){
-				if (hasPerk(mutation)) adaptationsMutations--;
+				if (hasMutation(mutation)) adaptationsMutations--;
 			}
 			return adaptationsMutations;
 		}

@@ -95,8 +95,6 @@ import classes.PerkClass;
             maxLvl = 3;
         }
 
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
-        }
+        
     }
 }
