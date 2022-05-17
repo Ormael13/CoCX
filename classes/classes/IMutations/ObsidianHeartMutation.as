@@ -4,11 +4,11 @@
  */
 package classes.IMutations
 {
-    import classes.PerkClass;
-    import classes.PerkType;
+import classes.PerkClass;
+import classes.IMutationPerkType;
 import classes.Player;
 
-public class ObsidianHeartMutation extends PerkType
+public class ObsidianHeartMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
@@ -44,8 +44,14 @@ public class ObsidianHeartMutation extends PerkType
         }
 
         //Mutation Requirements
-        public static function pReqs(pTier:int = 0):void{
+        override public function pReqs(target:* = null):void{
             try{
+                if (target == null){
+                    trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
+                    target = player;
+                }
+                var params:PerkClass = target.getPerk(this);
+                var pTier:int = params.value1;
                 //This helps keep the requirements output clean.
                 IMutationsLib.ObsidianHeartIM.requirements = [];
                 if (pTier == 0){
@@ -63,15 +69,15 @@ public class ObsidianHeartMutation extends PerkType
             }
         }
 
-        //Perk Max Level
-        //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
-        public static function perkLvl(useless:int = 0):int{
-            return 3;
-        }
-
         //Mutations Buffs
-        public static function pBuffs(pTier:int = 1):Object{
+        override public function pBuffs(target:* = null):Object{
             var pBuffs:Object = {};
+            if (target == null){
+                trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
+                target = player;
+            }
+            var params:PerkClass = target.getPerk(this);
+            var pTier:int = params.value1;
             if (pTier == 3) {
                 pBuffs['str.mult'] = 0.05;
                 pBuffs['tou.mult'] = 0.05;
@@ -82,6 +88,7 @@ public class ObsidianHeartMutation extends PerkType
 
         public function ObsidianHeartMutation() {
             super("Obsidian Heart IM", "Obsidian Heart", ".");
+            maxLvl = 3;
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {

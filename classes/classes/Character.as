@@ -987,7 +987,7 @@ import classes.CoC;
 				if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) multimaxven += 0.2;
 				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) multimaxven += 0.25;
 			}
-			if (hasPerk(IMutationsLib.ArachnidBookLungIM)) multimaxven += perkv1(IMutationsLib.ArachnidBookLungIM);
+			if (perkv1(IMutationsLib.ArachnidBookLungIM) > 0) multimaxven += perkv1(IMutationsLib.ArachnidBookLungIM);
 			maxven *= multimaxven;
 			maxven = Math.round(maxven);
 			return maxven;

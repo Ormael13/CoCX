@@ -45,7 +45,7 @@ public class PerkType extends BaseContent
 		 * If this is perk player has, `params` is not-null and has value1-4 properties
 		 */
 		public function name(params:PerkClass=null):String {
-			return _name
+			return _name;
 		}
 
 		/**
@@ -316,7 +316,7 @@ public class PerkType extends BaseContent
 		public function requireBloodsteamMutationSlot():PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {
-					return player.maxBloodsteamMutations() > 0;
+					return player.maxBloodstreamMutations() > 0;
 				},
 				text: "Free Bloodsteam Mutation Slot",
 				type: "bloodsteammutation"

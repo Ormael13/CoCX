@@ -125,7 +125,7 @@ public class Evangeline2 extends Monster
 		
 		public function BlindSpell():void {
 			outputText("Evangeline glare at you and point at you.  A bright flash erupts before you!\n");
-			if ((!player.hasPerk(IMutationsLib.GorgonEyesIM) && rand(100) > 20) && !player.hasPerk(PerkLib.BlindImmunity)) {
+			if ((player.perkv1(IMutationsLib.ArachnidBookLungIM) == 0 && rand(100) > 20) && !player.hasPerk(PerkLib.BlindImmunity)) {
 				player.createStatusEffect(StatusEffects.Blind,2,0,0,0);
 			}
 			else if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 1) {
