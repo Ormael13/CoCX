@@ -77,6 +77,7 @@ import classes.PerkClass;
                 target = player;
             }
             var pTier:int = target.perkv1(IMutationsLib.MutationsTemplateIM);
+            /*
             if (pTier == 1) {
                 pBuffs['spe.mult'] = 0;
             }
@@ -85,7 +86,7 @@ import classes.PerkClass;
             }
             if (pTier == 3){
                 pBuffs['spe.mult'] = 0;
-            }
+            }*/
             return pBuffs;
         }
 

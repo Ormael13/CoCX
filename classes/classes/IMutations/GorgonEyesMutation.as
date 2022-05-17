@@ -86,7 +86,7 @@ public class GorgonEyesMutation extends IMutationPerkType
                 pBuffs['sens'] = 5
             }
             if (pTier == 2) {
-                pBuffs['spe.mult'] += 0.15;
+                pBuffs['spe.mult'] = 0.15;
                 pBuffs['sens'] = 15;
             }
             return pBuffs;

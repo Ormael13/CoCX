@@ -35,6 +35,12 @@ public class PerkMenu extends BaseContent {
 		}
 		else{
 			var perkList:Array = player.perks;
+			for each (var mutations:IMutationPerkType in IMutationsLib.mutationsArray("")){
+				var mIndex:int = perkList.indexOf(player.getPerk(mutations));
+				if (mIndex < 0){
+					perkList.splice(mIndex, 1);
+				}
+			}
 			for each (var temp:PerkClass in perkList){
 				try{
 					outputText("<b>" + temp.perkName + "</b> - " + temp.perkDesc + "\n");

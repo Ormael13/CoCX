@@ -1863,6 +1863,13 @@ public class SaveUpdater extends NPCAwareContent {
 				outputText("\n\nMutations backend updated.");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.015;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.016) {
+					if (player.hasMutation(IMutationsLib.GorgonEyesIM)){
+						player.HP = player.maxOverHP();
+						player.fatigue = 0;
+					}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.016;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;
