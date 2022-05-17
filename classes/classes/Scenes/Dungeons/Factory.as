@@ -1860,5 +1860,27 @@ use namespace CoC;
 			//outputText("Do you use?")
 			//addButton(2, "Use", useBathroom);
 		}
+
+		public function secretarialSuccubusDefeated(hpVictory:Boolean):void {
+			if (player.gender > 0) {
+				if (hpVictory) {
+					clearOutput();
+					outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you rape her?");
+					player.dynStats("lus", 1);
+					EngineCore.simpleChoices("Yes", doRapeSuccubus, "", null, "", null, "", null, "No", doLeaveSuccubus);
+					if (player.hasKeyItem("Deluxe Dildo") >= 0) EngineCore.addButton(1, "Dildo Rape", dildoSuccubus);
+				} else if (player.lust>=33){
+					clearOutput();
+					outputText("You smile in satisfaction as the " + monster.short + " gives up on fighting you and starts masturbating, begging for you to fuck her.  Now would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you fuck her?");
+					player.dynStats("lus", 1);
+					EngineCore.simpleChoices("Yes", doRapeSuccubus, "", null, "", null, "", null, "No", doLeaveSuccubus);
+					if (player.hasKeyItem("Deluxe Dildo") >= 0) EngineCore.addButton(1, "Dildo Rape", dildoSuccubus);
+				} else {
+					doNext(doLeaveSuccubus);
+				}
+			} else {
+				doNext(doLeaveSuccubus);
+			}
+		}
 	}
 }

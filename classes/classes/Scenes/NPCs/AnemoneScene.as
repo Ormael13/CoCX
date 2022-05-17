@@ -857,7 +857,8 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 			}
 			//end scene, reset hours since cum and lust, reduce libido and sens a little
 			player.sexReward("Default", "Default", true, false);
-			dynStats("lib", -.5, "sen", -.5);
+			dynStats("sen", -.5);
+			player.addCurse("lib", 0.5, 2);
 			cleanupAfterCombat();
 		}
 
@@ -918,7 +919,8 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 
 			//end scene, reset hours since cum and lust, reduce libido and sens a bit
 			player.sexReward("Default", "Default", true, false);
-			dynStats("lib", -.5, "sen", -.5);
+			dynStats("sen", -.5);
+			player.addCurse("lib", 0.5, 2);
 			cleanupAfterCombat();
 		}
 

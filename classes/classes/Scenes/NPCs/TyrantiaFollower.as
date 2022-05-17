@@ -1052,7 +1052,7 @@ public function TyrantiaCavFuck():void {
 	player.trainStat("str",1,100);
 	player.trainStat("tou",1,100);
 	player.trainStat("lib",1,100);
-	player.removeCurse("sens", 5);
+	player.removeCurse("sens", 5, 2);
 	menu();
 	if (player.hasCock()) {
 		addButton(1, "DickSex", TyrantiaFuck);

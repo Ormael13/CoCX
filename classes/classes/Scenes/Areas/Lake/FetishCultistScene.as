@@ -389,7 +389,7 @@ public class FetishCultistScene extends AbstractLakeContent
 				else outputText("You are still wearing the [armor] that she gave you, and there is no sign of your old clothes.  ");
 				outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.");
 				player.sexReward("Default", "Default", true, false);
-				dynStats("int", -2);
+				player.addCurse("int", 2, 2);
 				dynStats("lus", 10);
 				cleanupAfterCombat();
 			}

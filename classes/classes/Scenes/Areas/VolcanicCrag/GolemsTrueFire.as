@@ -5,15 +5,10 @@
 package classes.Scenes.Areas.VolcanicCrag 
 {
 	import classes.*;
-	import classes.internals.*;
-	import classes.CoC;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Camp.CampMakeWinions;
-	
-	public class GolemsTrueFire extends Monster
+import classes.Scenes.SceneLib;
+
+public class GolemsTrueFire extends Monster
 	{
-		public var campMake:CampMakeWinions = new CampMakeWinions();
-		
 		public function backhand():void {
 			outputText("The golems visage twists into a grimace of irritation, and few of them swings their hands at you in a vicious backhand.");
 			var damage:Number = int (((str + weaponAttack) * 5) - rand(player.tou) - player.armorDef);
@@ -87,7 +82,7 @@ package classes.Scenes.Areas.VolcanicCrag
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			campMake.postFightGolemOptions2();
+			SceneLib.camp.campMake.postFightGolemOptions2();
 		}
 		
 		public function GolemsTrueFire() 

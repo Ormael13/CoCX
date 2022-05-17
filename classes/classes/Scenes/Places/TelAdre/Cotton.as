@@ -858,7 +858,6 @@ private function cottonFucksYouInShowerRepeat():void {
 
 		outputText("After a moment, Cotton pulls you up, letting her shrinking member flop to the floor, and sets you down. You share a deep kiss again and wash each other up before redressing and leaving the gym.");
 		player.orgasm();
-		dynStats("sen", -1);
 	}*/
 	//(Repeat get fucked, for centaurs)
 	if(player.isTaur()) {

@@ -4715,7 +4715,8 @@ private function katDoubleHelixCraziness():void {
 	orgasm();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	experience(KBIT_TRIED_DOUBLE_HELIX);
-	dynStats("lib", -1, "sen", -1);
+	dynStats("sen", -1);
+	player.addCurse("lib", 1, 2);
 	doNext(camp.returnToCampUseOneHour);
 }
 

@@ -472,7 +472,7 @@ public class BeeGirlScene extends BaseContent
 			}
 			outputText("Once the last of the eggs are pushed deep inside your bowels, the bee girl sighs and slowly removes the knotted implement that was filling your [ass].  She sets you back down on the flower and gives you a full mouth kiss before saying <i>\"Zzzee you next time...\"</i>  In a few moments, you drift off to sleep.  You wake up several hours later, feeling giddy, and you notice that something wet is leaking from your anus.\n\n");
 			player.sexReward("Default", "Anal");
-			player.addCurse("int", 0.5);
+			player.addCurse("int", 0.5,2);
 			player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1); //Anal bee pregnancy!
 			player.buttChange(25, true);
 			doNext(camp.returnToCampUseFourHours);
@@ -779,7 +779,7 @@ public class BeeGirlScene extends BaseContent
 			}
 			//SHARED END ===============================================================================================
 			function sharedEnd():void {
-				player.addCurse("int", 0.5);
+				player.addCurse("int", 0.5,2);
 				//Anal bee pregnancy!
 				if (rand(3) == 0) player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1);
 				player.buttChange(25, true);
@@ -1238,7 +1238,7 @@ public class BeeGirlScene extends BaseContent
 				//epilogue
 				outputText("You awaken, your nose full of a honey like scent, some strange fluid on your back, and the feeling of something leaking from you.");
 				player.sexReward("Default","Dick");
-				player.addCurse("int", 0.5);
+				player.addCurse("int", 0.5,2);
 				//Anal bee pregnancy!
 				if (rand(3) == 0) player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1);
 				player.buttChange(25, true, true, false);
@@ -1464,7 +1464,7 @@ public class BeeGirlScene extends BaseContent
 				player.buttKnockUp(PregnancyStore.PREGNANCY_BEE_EGGS, PregnancyStore.INCUBATION_BEE, 1, 1);
 			}
 			player.sexReward("Default","Default",true,false);
-			player.addCurse("int", .5);
+			player.addCurse("int", .5,2);
 			cleanupAfterCombat();
 		}
 

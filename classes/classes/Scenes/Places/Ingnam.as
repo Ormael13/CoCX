@@ -523,7 +523,7 @@ public class Ingnam extends BaseContent
 			if (!player.hasStatusEffect(StatusEffects.Drunk)) {
 				player.createStatusEffect(StatusEffects.Drunk, 2, 1, 1, 0);
 				dynStats("str", 0.1);
-				dynStats("inte", -0.5);
+				player.addCurse("inte", 0.5, 1);
 				dynStats("lib", 0.25);
 			}
 			else {

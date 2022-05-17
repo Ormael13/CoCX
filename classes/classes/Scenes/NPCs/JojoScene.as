@@ -2706,7 +2706,6 @@ public function wormRemoval():void {
 	//Infestation purged. Hit Points reduced to 10% of MAX. Corruption -20.
 	if (player.HP > int(player.maxHP() * .5)) player.HP = int(player.maxHP() * .5);
 	player.damageHunger(30);
-	player.removeCurse("sens", 100);
 	player.removeStatusEffect(StatusEffects.Infested);
 	dynStats("lus", -99, "cor", -15);
 	player.orgasm();

@@ -289,9 +289,9 @@ private function futaTentacleEpilogue():void {
 		player.sexReward("cum","Anal")
 		player.sexReward("cum","Lips")
 		dynStats("str", 0.5, "lib", 1, "cor", 1);
-		player.addCurse("spe", 0.5);
-		player.addCurse("int", 1);
-		player.addCurse("sen", 1);
+		player.addCurse("spe", 0.5,2);
+		player.addCurse("int", 1,2);
+		player.addCurse("sen", 1,2);
 		monster.HP = 0;
 		if (player.HP == 0) player.HP++;
 		if (CoC.instance.inCombat) cleanupAfterCombat();
@@ -388,9 +388,9 @@ private function futaTentacleEpilogue():void {
 			player.sexReward("cum","Anal")
 			player.sexReward("cum","Lips")
 			dynStats("tou", 2, "lib", 1, "cor", 1);
-			player.addCurse("spe", 0.5);
-			player.addCurse("int", 0.5);
-			player.addCurse("sen", 1);
+			player.addCurse("spe", 0.5,2);
+			player.addCurse("int", 0.5,2);
+			player.addCurse("sen", 1,2);
 			monster.HP = 0;
 			if (player.HP == 0) player.HP++;
 			if (CoC.instance.inCombat) cleanupAfterCombat();
@@ -448,7 +448,7 @@ private function futaTentacleEpilogue():void {
 			player.sexReward("cum", "Lips");
 			dynStats("tou", 1, "lib", 1, "cor", 0.5);
 			player.addCurse("int", 0.5);
-			player.addCurse("sen", 1);
+			player.addCurse("sen", 1,2);
 			if (CoC.instance.inCombat) cleanupAfterCombat();
 			else doNext(camp.returnToCampUseTwoHours);
 		}
@@ -631,9 +631,9 @@ internal function tentacleLossRape():void {
 		outputText("\n\nHelpless and overwhelmed by the pleasure of such rough and primal stimulation, all you can do is give the creature what it wants; your hot cum. Your body only responds to the sensations from your ");
 		outputText(multiCockDescriptLight() + " and ass and in a very short time, your " + (player.cockTotal() == 1 ? "phallus explodes" : "dicks explode") + ", launching stream upon stream of hot, thick cum into the horror. Your hips and pelvis buck violently with each thrust as the creature masterfully strokes your [cocks]  and milks your prostate of your fluids. You cry with each orgasm, prompting the thing to milk you harder. After an eternity of successive ejaculations, the creature withdraws its unholy arms and leaves you in a bruised, lacerated, overfucked heap on the ground, discarded like a person throws away a corn cob after a meal.");
 		dynStats("cor", 1);
-		player.addCurse("str", 1);
-		player.addCurse("int", 1);
-		player.addCurse("sen", 2);
+		player.addCurse("str", 1,2);
+		player.addCurse("int", 1,2);
+		player.addCurse("sen", 2,2);
 		player.sexReward("Default", "Dick", true, false);
 		if (CoC.instance.inCombat)
 			cleanupAfterCombat();
@@ -664,9 +664,9 @@ internal function tentacleLossRape():void {
 		outputText(" and your mouth. You are being inseminated by the abomination, but you do not care. The fucking is too good. The hot, musky fluids pour into your mouth. The taste crushes your last bit of resistance, and you NEED MORE, not just to swallow, but to devour with your womb. You manage to free one hand, only to grasp the tentacle in your mouth to coax more semen inside you. You feel your stomach distend from the amount of cum you greedily swallow. The beast floods you with more cum than you can handle and proceeds to soak you from head to toe in its fluids as it runs from your overwhelmed orifices.");
 		player.boostLactation(.3);
 		dynStats("lib", 1, "cor", 1);
-		player.addCurse("spe", 1);
-		player.addCurse("int", 1);
-		player.addCurse("sen", 3);
+		player.addCurse("spe", 1,2);
+		player.addCurse("int", 1,2);
+		player.addCurse("sen", 3,2);
 		player.sexReward("cum", "Lips");
 		player.sexReward("cum", "Vaginal");
 		player.sexReward("Default", "Nipples", true, false);
@@ -682,11 +682,11 @@ internal function tentacleLossRape():void {
 		outputText("After a while the creature withdraws its tentacles from you. It poises the tentacle-cock over your face and lets out one last load, covering your face in hot, thick sperm. You reflexively open your mouth and allow loads of the salty juice down your throat. Once spent, the creature shambles off, leaving you well milked and cum-soaked.");
 		player.boostLactation(.3);
 		dynStats("lib", 3, "cor", 1);
-		player.addCurse("str", 1);
-		player.addCurse("tou", 1);
-		player.addCurse("spe", 1);
-		player.addCurse("int", 1);
-		player.addCurse("sen", 4);
+		player.addCurse("str", 1,2);
+		player.addCurse("tou", 1,2);
+		player.addCurse("spe", 1,2);
+		player.addCurse("int", 1,2);
+		player.addCurse("sen", 4,2);
 		player.sexReward("Default", "Dick", true, false);
 		player.sexReward("cum", "Vaginal");
 		player.sexReward("cum", "Lips");
