@@ -1239,7 +1239,13 @@ private function InternalMutations0(page:int = 0, GoM:int = 0):void {
 				menuItems.push(mutations.name(), false, "You already have the highest tier!");
 			}
 			else{
-				trace("Unable to meet requirements/requirements borked.");
+				if (mutations.requirements.length == 0){
+					trace("Requirements empty.");
+				}
+				else{
+					trace("Did not meet requirements.");
+				}
+				//trace("Unable to meet requirements/requirements borked.");
 				//if (mutations.available(target)) trace("\nAvailable: True");
 				//if (mutations.maxLvl > target.perkv1(mutations)) trace("MaxLvl: True");
 				menuItems.push(mutations.name(), false, "You don't meet the requirements for this!");
