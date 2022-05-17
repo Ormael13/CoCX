@@ -4508,7 +4508,7 @@ use namespace CoC;
 			var internalChimeraCounter:Number = 0;
 			var pMutations:Array = IMutationsLib.mutationsArray("");
 			for each (var pPerk:IMutationPerkType in pMutations){
-				if (hasPerk(pPerk)) internalChimeraCounter += perkv1(pPerk);
+				if (hasMutation(pPerk)) internalChimeraCounter += perkv1(pPerk);
 			}
 			End("Player","racialScore");
 			return internalChimeraCounter;
