@@ -1,9 +1,14 @@
 package classes {
 import classes.BodyParts.Hair;
 import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.ArmorLib;
+import classes.Items.Armors.BattleMaidenArmor;
+import classes.Items.Armors.LustyMaidensArmor;
+import classes.Items.Armors.SuccubusArmor;
+import classes.Items.MiscJewelryLib;
 import classes.Items.ShieldLib;
 import classes.Items.UndergarmentLib;
 import classes.Items.WeaponLib;
@@ -97,34 +102,6 @@ public class EventParser {
         CoC.instance.mainView.hideMenuButton(MainView.MENU_APPEARANCE);
         CoC.instance.mainView.hideMenuButton(MainView.MENU_LEVEL);
         CoC.instance.mainView.hideMenuButton(MainView.MENU_PERKS);
-    }
-
-    public static function getCurrentStackTrace():String		// Fuck, stack-traces only work in the debug player.
-    {
-        var tempError:Error = new Error();
-        var stackTrace:String = tempError.getStackTrace();
-        return stackTrace;
-    }
-
-    public static function errorPrint(details:* = null):void {
-        EngineCore.rawOutputText("<b>Congratulations, you've found a bug!</b>", true);
-        EngineCore.rawOutputText("\nError: Unknown event!");
-        EngineCore.rawOutputText("\n\nPlease report that you had an issue with code: \"" + details + "\" ");
-        EngineCore.rawOutputText("\nGame version: \"" + CoC.instance.ver + "\" (<b>THIS IS IMPORTANT! Please be sure you include it!</b>) ");
-
-        var sTrace:String = getCurrentStackTrace();
-
-        if (sTrace)	// Fuck, stack-traces only work in the debug player.
-            EngineCore.rawOutputText("and stack-trace: \n <pre>" + sTrace + "</pre>\n");
-        EngineCore.rawOutputText("to fake-name on the forums or better yet, file a bug report on github: ");
-        EngineCore.rawOutputText("\nhttps://github.com/herp-a-derp/Corruption-of-Champions");
-
-        EngineCore.rawOutputText("\nPlease try to include the details of what you were doing when you encountered this bug ");
-        if (sTrace)
-            EngineCore.rawOutputText(" (including the above stack trace copy&pasted into the details),");
-        EngineCore.rawOutputText(" to make tracking the issue down easier. Thanks!");
-
-        EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour);
     }
 
     public static function goNext(needNext:Boolean):Boolean {
@@ -290,16 +267,15 @@ public class EventParser {
             SceneLib.inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
             return true;
         }
-//	if (player.weapon == weapons.CLAYMOR && player.str < 40) {
-//		outputText("\n<b>You aren't strong enough to handle the weight of your weapon any longer, and you're forced to stop using it.</b>\n");
-//		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
-//		return true;
-//	}
-//	if (player.weapon == weapons.WARHAMR && player.str < 80) {
-//		outputText("\n<b>You aren't strong enough to handle the weight of your weapon any longer!</b>\n");
-//		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
-//		return true;
-//	}
+        //Remove tail ornament if no demonic tail
+        if (player.miscJewelry == CoC.instance.miscjewelries.DMAGETO && player.tailType != Tail.DEMONIC) {
+            EngineCore.outputText("<b>\nSince you don't have a demonic tail anymore, your beautiful ornament becomes useless.</b>\n");
+            SceneLib.inventory.takeItem(player.setMiscJewelry(MiscJewelryLib.NOTHING), playerMenu);
+        }
+        if (player.miscJewelry2 == CoC.instance.miscjewelries.DMAGETO && player.tailType != Tail.DEMONIC) {
+            EngineCore.outputText("<b>\nSince you don't have a demonic tail anymore, your beautiful ornament becomes useless.</b>\n");
+            SceneLib.inventory.takeItem(player.setMiscJewelry2(MiscJewelryLib.NOTHING), playerMenu);
+        }
         //Drop Excalibur / beautiful sword / beautiful staff if corrupted!
         if ((player.weapon == CoC.instance.weapons.EXCALIB || player.weapon == CoC.instance.weapons.B_SWORD || player.weapon == CoC.instance.weapons.B_STAFF) && player.cor >= (33 + player.corruptionTolerance)) {
             EngineCore.outputText("<b>\nThe <u>[weapon]</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this weapon appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the hilt, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n");
@@ -328,7 +304,7 @@ public class EventParser {
             return true;
         }
         //Unequip Lusty maiden armor
-        if (player.armorName == "lusty maiden's armor") {
+        if (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor || player.armor is BattleMaidenArmor) {
             //Removal due to no longer fitting:
             //Grew Cock or Balls
             if ((player.hasCock() && !player.hasSheath()) || player.balls > 0) {
@@ -455,48 +431,13 @@ public class EventParser {
 
     private static function pregnancyProgress():int {
         var needNext:Boolean = false;
-        //No diapause?  Normal!
         var player:Player = CoC.instance.player;
         var flags:DefaultDict = CoC.instance.flags;
-        if (!player.hasPerk(PerkLib.Diapause)) {
-            if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
-            //DOUBLE PREGGERS SPEED
-            if (player.hasPerk(PerkLib.MaraesGiftFertility)) {
-                if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            }
-            //DOUBLE PREGGERS SPEED
-            if (player.hasPerk(PerkLib.MagicalFertility)) {
-                if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            }
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
-            if (player.hasPerk(PerkLib.FerasBoonBreedingBitch)) {
-                if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            }
-            if (player.hasPerk(PerkLib.FerasBoonWideOpen) || player.hasPerk(PerkLib.FerasBoonMilkingTwat)) {
-                if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            }
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
-            //DOUBLE PREGGERS SPEED
-            if (player.hasPerk(PerkLib.BroodMother)) {
-                if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            }
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
-        }
-        //Diapause!
-        else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] > 0 && (player.pregnancyIncubation > 0 || player.buttPregnancyIncubation > 0)) {
+
+        if (player.hasPerk(PerkLib.Diapause)) {
+            if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] <= 0 || player.pregnancyIncubation <= 0 && player.buttPregnancyIncubation <= 0) //no pregnancy, I guess?
+                return 0;
+            //unique checks for diapause
             if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] == 1) {
                 flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 0;
                 EngineCore.outputText("\n\nYour body reacts to the influx of nutrition, accelerating your pregnancy. Your belly bulges outward slightly.");
@@ -517,41 +458,42 @@ public class EventParser {
                 flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
                 return 2;
             }
+        }
+        //checks not depending on diapause
+        if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+        if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
+            flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
+            return 2;
+        }
+        //DOUBLE PREGGERS SPEED
+        if (player.hasPerk(PerkLib.MaraesGiftFertility)) {
             if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
-            //DOUBLE PREGGERS SPEED
-            if (player.hasPerk(PerkLib.MaraesGiftFertility)) {
-                if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            }
-            //DOUBLE PREGGERS SPEED
-            if (player.hasPerk(PerkLib.MagicalFertility)) {
-                if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            }
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
-            if (player.hasPerk(PerkLib.FerasBoonBreedingBitch)) {
-                if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            }
-            if (player.hasPerk(PerkLib.FerasBoonWideOpen) || player.hasPerk(PerkLib.FerasBoonMilkingTwat)) {
-                if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            }
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
-            //DOUBLE PREGGERS SPEED
-            if (player.hasPerk(PerkLib.BroodMother)) {
-                if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            }
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
+        }
+        //DOUBLE PREGGERS SPEED
+        if (player.hasPerk(PerkLib.MagicalFertility)) {
+            if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+        }
+        if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
+            flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
+            return 2;
+        }
+        if (player.hasPerk(PerkLib.FerasBoonBreedingBitch)) {
+            if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+        }
+        if (player.hasPerk(PerkLib.FerasBoonWideOpen) || player.hasPerk(PerkLib.FerasBoonMilkingTwat)) {
+            if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+        }
+        if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
+            flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
+            return 2;
+        }
+        //DOUBLE PREGGERS SPEED
+        if (player.hasPerk(PerkLib.BroodMother)) {
+            if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+        }
+        if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
+            flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
+            return 2;
         }
         return needNext ? 1 : 0;
     }
