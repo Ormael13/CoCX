@@ -1868,8 +1868,6 @@ public class SaveUpdater extends NPCAwareContent {
 				outputText("\n\nSmall fix to Gorgon Eyes Mutation causing NaN in speed, health and fatigue");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.016;
 			}
-				flags[kFLAGS.MOD_SAVE_VERSION] = 35.016;
-			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.017) {
 				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0){
 					player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
