@@ -231,7 +231,7 @@ import classes.Scenes.SceneLib;
 				outputText("\n\n");
 				//FUCKKKING
 				//Female paragraph
-				if (otherF) {
+				if (useVag) {
 					outputText("[Themonster] at last decides to tend to your over-aroused body and pulls you off the ground with [monster his] tentacles, suspending you in mid-air.  ");
 					if (player.cor < 80) outputText("You feel your [legs] lifted and pulled tight as countless demonic cocks encircle your body, binding and constraining you further.  You whimper as a demonic tentacle probes your back door while a thicker one lines itself up just below your " + clitDescript() + ".  ");
 					else outputText("As [monster he] lifts you, you spread your legs, showing [monster him] your cunt, which is dripping wet from anticipation, and grabbing your ass to give [monster him] a perfect view of your " + assholeDescript() + ".  You then beg [monster him], between lecherous moans, to use his three biggest tentacles, as you want to have the most sensations.  With a sadistic smile, [monster he] lines up two tentacle cocks about as big as your arm over your " + vaginaDescript(0) + " and your " + assholeDescript() + ".  ");
