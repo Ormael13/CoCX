@@ -1870,6 +1870,15 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.016;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.017) {
+				//reset flags
+				flags[kFLAGS.AYANE_CURE_COOLDOWN] = 0;
+				flags[kFLAGS.DIANA_CURE_COOLDOWN] = 0;
+				//autofix for old curse bug - AGAIN
+				if (player.statStore.hasBuff("Tribulation Vestiges"))
+					player.statStore.removeBuffs("Tribulation Vestiges");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.017;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.018) {
 				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0){
 					player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
 					flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
@@ -1883,16 +1892,7 @@ public class SaveUpdater extends NPCAwareContent {
 					player.removePerk(mutation);
 				}
 				outputText("Also, remove old mutations again.")
-				flags[kFLAGS.MOD_SAVE_VERSION] = 35.016;
-			}
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.017) {
-				//reset flags
-				flags[kFLAGS.AYANE_CURE_COOLDOWN] = 0;
-				flags[kFLAGS.DIANA_CURE_COOLDOWN] = 0;
-				//autofix for old curse bug - AGAIN
-				if (player.statStore.hasBuff("Tribulation Vestiges"))
-					player.statStore.removeBuffs("Tribulation Vestiges");
-				flags[kFLAGS.MOD_SAVE_VERSION] = 35.017;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.018;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
