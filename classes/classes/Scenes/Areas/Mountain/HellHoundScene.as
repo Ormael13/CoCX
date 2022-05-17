@@ -103,7 +103,7 @@ public class HellHoundScene extends BaseContent
 				addButton(0, "Get Licked", hellHoundGetsRaped);
 				addButtonIfTrue(1, "Fuck", hellHoundPropahRape, "Req. a vagina and NOT naga lower body.", player.hasVagina() && !player.isNaga());
 				addButtonIfTrue(2, "TakeBothIn", takeBothIn, "Req. to be a liliraune.", player.isLiliraune());
-				SceneLib.uniqueSexScene.pcUSSPreChecksV2(hellHoundPostFightOptions);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(curry(hellHoundPostFightOptions, hpVictory));
 			}
 			else {
 				if (hpVictory)

@@ -1099,17 +1099,9 @@ public class KitsuneScene extends BaseContent
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
 				if (flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] >= 1) flags[kFLAGS.KITSUNES_DEFEATS_COUNTER]++;
 				else flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] = 1;
-				if (flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] == 1 && flags[kFLAGS.MET_KITSUNES] == 1) {
+				if (flags[kFLAGS.MET_KITSUNES] < 4 && flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] == flags[kFLAGS.MET_KITSUNES]) {
 					flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.MET_KITSUNES] = 2;
-				}
-				if (flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] == 2 && flags[kFLAGS.MET_KITSUNES] == 2) {
-					flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.MET_KITSUNES] = 3;
-				}
-				if (flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] == 3 && flags[kFLAGS.MET_KITSUNES] == 3) {
-					flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.MET_KITSUNES] = 4;
+					++flags[kFLAGS.MET_KITSUNES];
 				}
 			}
 			sceneHunter.print("Maybe another kitsune has better options?");

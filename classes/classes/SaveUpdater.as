@@ -15,7 +15,6 @@ import classes.Items.*;
 import classes.Scenes.Crafting;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
-import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 
 use namespace CoC;
 

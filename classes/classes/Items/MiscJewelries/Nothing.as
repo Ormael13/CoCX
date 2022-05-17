@@ -4,9 +4,7 @@
  */
 package classes.Items.MiscJewelries 
 {
-	import classes.ItemType;
 	import classes.Items.MiscJewelry;
-	import classes.Player;
 	
 	public class Nothing extends MiscJewelry
 	{

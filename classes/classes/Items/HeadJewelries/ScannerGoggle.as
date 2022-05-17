@@ -6,7 +6,6 @@ package classes.Items.HeadJewelries
 {
 	import classes.Items.HeadJewelry;
 	import classes.PerkLib;
-	import classes.Player;
 
 	public class ScannerGoggle extends HeadJewelry
 	{
