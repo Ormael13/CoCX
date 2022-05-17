@@ -657,7 +657,7 @@ import classes.Stats.Buff;
 		// Urtadicks itt
 		protected function surrenderLargeCock():void
 		{
-			var x1:int = player.findCock(1, 14, -1, "length");
+			var x1:int = player.findCock(1, 14, -1, "length") + 1;
 			outputText("Izumi grunts in surprise as your [cock "+x1+"] flops free of its confinement.  \"<i>Damn.  This is pretty impressive, you know?</i>\"  She frowns, running an exploratory hand across the length of your flesh.  \"<i>Let me guess, you got a bit too frisky with one of the natives?  Maybe didn’t think to boil the water before you drank it?  Look, no offence, but there is no way this thing is legit, "+ this.heightDesc() +".</i>\"\n\n");
  
 			outputText("Izumi continues to frown as she inspects you, turning your stiffening cock this way and that in her hands, apparently indifferent to the way her touch has begun to coax you towards full hardness.  She murmurs to herself under her breath, tapping a finger to her lips whilst absentmindedly wringing your cock with her other hand.  Eventually, she appears to reach a decision.  \"<i>Alright!</i>\"  She announces, loudly.  \"<i>Let’s try it like this, shall we?!</i>\"\n\n");
@@ -1534,7 +1534,7 @@ import classes.Stats.Buff;
 
 			//======================================================================
 			function smallF():void {
-				var x1:int = player.findCock(-1, -1, 6, "length");
+				var x1:int = player.findCock(-1, -1, 6, "length") + 1;
 				outputText("There’s a moment of silence as you unveil yourself to the captive Oni, your [cock "+x1+"] on full display.  She stares at your crotch blankly, then her eyes flick up to meet your own.\n\n");
 
 				outputText("\"<i>Are you serious?</i>\"  She says, flatly.  \"<i>You are, aren’t you?  You’re actually going to try and rape me with... </i>that.<i>  Seriously kid, I hate to break it to you, but most women prefer dicks they can actually, you know, feel. Or </i>see.\"  You scowl at her in response and step up to her backside; she can talk trash all she wants for now, but she’s going to be the one begging for another taste of your dick by the end of the time you’re through with her.\n\n");
@@ -1598,7 +1598,7 @@ import classes.Stats.Buff;
 			}
 			// Regular dicks
 			function mediumF():void {
-				var x1:int = player.findCock(1, 6, 14, "length");
+				var x1:int = player.findCock(1, 6, 14, "length") + 1;
 				outputText("\"<i>Tch, I should have known...</i>\"  Izumi grumbles.  \"<i>Well, whatever.  Just hurry up and blow your load before- H-Hey wait, what are you doing back there?!</i>\"  She raises her voice in alarm as your intent becomes clear, lining your [cock "+x1+"] up not with her obediently displayed pussy, but with her asshole.\n\n");
 
 				outputText("\"<i>Hey!  W-Who said you could use that hole?!</i>\" she yells.  You just flash her a charming smile, then return to the much more interesting business of getting ready to fuck her ass raw.  She glares at you for a moment, then turns back to the wall with a snort.  \"<i>Whatever.  I won’t lose,</i>\"  she growls.\n\n");
@@ -1649,7 +1649,7 @@ import classes.Stats.Buff;
 			}
 			// Urtadicks plz
 			function bigF():void {
-				var x1:int = player.findCock(1, 14, -1, "length");
+				var x1:int = player.findCock(1, 14, -1, "length") + 1;
 				outputText("Her expression soon changes as you unveil your [cock "+x1+"], however.  One look at your thickening meat is all it takes to evaporate the last of her bad attitude, replacing it with fear.\n\n");
 
 				outputText("\"<i>N-No way!</i>\" she stammers.  \"<i>That’s not real, right?!</i>\"  You just grin, raising your hefty rod and slapping it down between her soft, pliable cheeks, taking the opportunity to run your hands over the contours of her ass.  You squeeze and grope her backside, enjoying the warm feeling of her bare skin rubbing against your rising erection as you rock your hips backwards and forwards in preparation.\n\n");

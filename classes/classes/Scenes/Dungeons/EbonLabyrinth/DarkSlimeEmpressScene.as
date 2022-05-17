@@ -10,8 +10,8 @@ public class DarkSlimeEmpressScene extends BaseContent {
 
     public function encounter():void {
         clearOutput();
-        outputText("As you enter the next room the first thing you hear are the moans. You’re greeted to quite a sight for before you hundreds of slimy shape are making out, fucking each other in the most blatently obsene display you've ever seen. Confused, you try and figure if you stepped into some kind of orgy until you notice one slime at the back of the room who stands out. ");
-        outputText("Wearing a crown seemingly made of goop, this regal purple woman sits on a pair of stone slabs which serves it as a makeshift throne.\n\n");
+        outputText("As you enter the next room, the first thing you hear are the moans. You’re greeted to quite a sight for before you hundreds of slimy shape are making out, fucking each other in the most blatently obsene display you've ever seen. Confused, you try and figure if you stepped into some kind of orgy until you notice one slime at the back of the room who stands out. ");
+        outputText("Wearing a crown seemingly made of goop, this regal purple woman sits on a pair of stone slabs, which serves it as a makeshift throne.\n\n");
         outputText("\"<i>Why now my loyal subjects, it seems we have a guest, welcome to my domain intruder I hope you intend on joining the feast in my honor of course. Guests… are always welcome.</i>\"\n\n");
         outputText("All of the slime suddenly drop their activities, drooling at you with keen interest. You've got a very bad feeling. This is when you notice that all of them are linked to one another through small trails of slime on the ground. The slimes take on a makeshift formation, drawing what appears to be slimy spears and bows all pointed at you.\n\n");
         outputText("Seeing this, you try to run for it but the purple empress waves her hand, slime sealing shut the exit behind you, the only exit out of this room. The slime giggles, the crowd imitating it shortly.\n\n");

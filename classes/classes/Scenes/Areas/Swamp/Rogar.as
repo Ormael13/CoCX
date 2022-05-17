@@ -738,7 +738,7 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 			player.ballSize = 3;
 		}
 		if(player.inte > 35) {
-			dynStats("int", -0.1);
+			player.addCurse("int", -0.1, 2);
 		}
 		player.trainStat("lib", 1, 75);
 		outputText("\n\n");

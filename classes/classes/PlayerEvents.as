@@ -543,7 +543,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18) {
 						if (!player.hasStatusEffect(StatusEffects.SlimeCravingOutput)) { //Protects against this warning appearing multiple times in the output
 							player.createStatusEffect(StatusEffects.SlimeCravingOutput, 0, 0, 0, 0);
-							outputText("\n<b>Bigger... stronger, each intake of fluid you takes only makes you more starved for the next as you grow in power each time, the need to fuck and feed slowly overwriting any other desire you may have.</b>\n");
+							outputText("\n<b>Bigger... stronger, each intake of fluid you take only makes you more starved for the next as you grow in power each time, the need to fuck and feed slowly overwriting any other desire you may have.</b>\n");
 							needNext = true;
 						}
 						if (player.spe > 1) player.addStatusValue(StatusEffects.SlimeCraving, 3, 0.1); //Keep track of how much has been taken from speed
@@ -558,7 +558,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\n<b>You feel revitalized from your recent intake, but soon you'll need more...</b>\n");
 				player.dynStats( "spe", player.statusEffectv3(StatusEffects.SlimeCraving)); //Boost speed and restore half the player's lost strength
 				player.removeStatusEffect(StatusEffects.SlimeCravingFeed); //Remove feed succuss status so it can be reset
-				player.removeCurse("str",1)
+				player.removeCurse("str",1, 2);
 				player.changeStatusValue(StatusEffects.SlimeCraving, 2, 0); //Reset stored hp/toughness values
 				needNext = true;
 			}
@@ -2533,7 +2533,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 							outputText("\nYour bee half has become so heavy that it's difficult to move now, the weight of your eggs bearing down on your lust-addled frame.  Your ovipositor pokes from its hiding place, dripping its sweet, slick lubrication in anticipation of filling something, anything with its burden.  You're going to have to find someone to help relieve you of your load, and soon...");
 						}
 						outputText("\n\n<b>Minimum Lust raised!</b>\n");
-						player.dynStats("spe", -1);
+						player.addCurse("spe", 1, 1);
 						needNext = true;
 					}
 				}
@@ -2759,7 +2759,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties))
 						outputText("\nWhoah!  As you move, your [hips] sway farther and farther to each side, expanding with every step, soft new flesh filling in as your hips spread into something more appropriate on a tittering bimbo.  You giggle when you realize you can't walk any other way.  At least it makes you look, like, super sexy!\n");
 					else outputText("\nOh, no!  As you move, your [hips] sway farther and farther to each side, expanding with every step, soft new flesh filling in as your hips spread into something more appropriate for a bimbo.  Once you realize that you can't walk any other way, you sigh heavily, your only consolation the fact that your widened hips can be used to tease more effectively.\n");
-					player.dynStats("int", -1);
+					player.addCurse("int", 1, 1);
 					player.hips.type = 12;
 					needNext = true;
 				}
@@ -2816,6 +2816,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				ValaScene.ValaFairyQueenQuest = ValaScene.QUEST_STAGE_STARTED;
 				needNext = true;
 			}
+			//Other removeCurse cooldowns
+			if (flags[kFLAGS.AYANE_CURE_COOLDOWN] > 0) --flags[kFLAGS.AYANE_CURE_COOLDOWN];
+			if (flags[kFLAGS.DIANA_CURE_COOLDOWN] > 0) --flags[kFLAGS.DIANA_CURE_COOLDOWN];
 			//Luna nursing reset
 			if (LunaFollower.Nursed) {
 				LunaFollower.NursedCooldown -= 1

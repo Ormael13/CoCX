@@ -1091,7 +1091,6 @@ public class Camp extends NPCAwareContent{
 		//Min Lust Bad End (Must not have any removable/temporary min lust.)
 		if (player.minLust() >= player.maxLust() && !flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= 168 && !player.eggs() >= 20 && !player.hasStatusEffect(StatusEffects.BimboChampagne) && !player.hasStatusEffect(StatusEffects.Luststick) && player.jewelryEffectId != 1) {
 			badEndMinLust();
-			return;
 		}
 	}
 
@@ -2685,7 +2684,6 @@ public class Camp extends NPCAwareContent{
 			outputText(" and murmur a incantation.  Gradually, the power within the stones fade as they go dormant. Soon, the glow of the glyphs adorning the stones has gone dark.");
 			flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] = 2;
 			doNext(campMiscActions);
-			return;
 		}
 	}
 	
@@ -3026,9 +3024,6 @@ public class Camp extends NPCAwareContent{
 		var olddao:Number = player.statusEffectv1(StatusEffects.PCClone);
 		player.addStatusValue(StatusEffects.PCClone,1,(newdao-olddao));
 		doNext(CloneContemplateDao);
-	}
-	private function CloneTrainWaponMastery():void {
-
 	}
 
 	private function DummyTraining():void {
@@ -3461,8 +3456,9 @@ public class Camp extends NPCAwareContent{
 			}
 			//Marble withdrawal
 			if (player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
-				outputText("\nYour rest is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n");
-				dynStats("tou", -.1, "int", -.1);
+				outputText("\nYour rest is very troubled, and you aren't able to settle down. You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n");
+				player.addCurse("tou", 0.1, 2);
+				player.addCurse("int", 0.1, 2);
 			}
 			//Bee cock
 			if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) {
@@ -3970,16 +3966,14 @@ public class Camp extends NPCAwareContent{
 			if (flags[kFLAGS.FARM_DISABLED] == 0) return true;
 			if (player.cor >= 70 && player.level >= 12 && SceneLib.farm.farmCorruption.corruptFollowers() >= 2 && flags[kFLAGS.FARM_CORRUPTION_DISABLED] == 0) return true;
 		}
-		if (flags[kFLAGS.FARM_CORRUPTION_STARTED]) return true;
-		return false;
+		return flags[kFLAGS.FARM_CORRUPTION_STARTED];
 	}
 
 //-----------------
 //-- PLACES MENU
 //-----------------
 	private function placesKnown():Boolean { //Returns true as soon as any known place is found
-		if (placesCount() > 0) return true;
-		return false;
+		return placesCount() > 0;
 	}
 
 	public function placesCount():int {
@@ -4156,7 +4150,8 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(2, "Stronghold", SceneLib.d3.enterD3).hint("Visit the stronghold in the high mountains that belongs to Lethice, the demon queen." + ((flags[kFLAGS.LETHICE_DEFEATED] > 0) ? "\n\nYou have slain Lethice and put an end to the demonic threats. Congratulations, you've beaten the main story!" : "") + (SceneLib.dungeons.checkLethiceStrongholdClear() ? "\n\nCLEARED!" : ""));
 		else addButtonDisabled(2, "???", "???");
 		//Side dungeons
-		if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", SceneLib.dungeons.desertcave.enterDungeon).hint("Visit the cave you've found in the desert." + (flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0 ? "\n\nFrom what you've known, this is the source of the Sand Witches." : "") + (SceneLib.dungeons.checkSandCaveClear() ? "\n\nCLEARED!" : ""));
+		if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0 && !flags[kFLAGS.DESERT_CAVE_DISABLED]) addButton(5, "Desert Cave", SceneLib.dungeons.desertcave.enterDungeon).hint("Visit the cave you've found in the desert." + (flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0 ? "\n\nFrom what you've known, this is the source of the Sand Witches." : "") + (SceneLib.dungeons.checkSandCaveClear() ? "\n\nCLEARED!" : ""));
+		else if (flags[kFLAGS.DESERT_CAVE_DISABLED]) addButtonDisabled(5, "Desert Cave", "You can't find the entrance. Maybe it's hidden. Or locked forever. Who knows?");
 		else addButtonDisabled(5, "???", "???");
 		if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] > 0) addButton(6, "Bee Hive", SceneLib.dungeons.beehive.enterDungeon).hint("Visit the bee hive you've found in the forest." + (flags[kFLAGS.TIFA_FOLLOWER] > 5 ? "\n\nYou've defeated all corrupted bees." : "") + (SceneLib.dungeons.checkBeeHiveClear() ? "\n\nCLEARED!" : ""));
 		else addButtonDisabled(6, "???", "???");

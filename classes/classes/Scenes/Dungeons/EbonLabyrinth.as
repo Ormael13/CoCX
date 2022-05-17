@@ -105,7 +105,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         flags[kFLAGS.EBON_LABYRINTH] = 1;
         clearOutput();
         outputText("You find the entrance to what appears to be a tunnel made of stone. This place looks man made as if carved by humanoid hands yet sports no decoration. Just empty linear corridors and corners dimly lit by magical torches. On a wall you find a sign reading ");
-        outputText("-Woe to who seeketh the black rose. Thy who enter beware, while riches you may find, death lurks in the Labyrinth deepest reaches. It ever hungers.- how charming. The ruin of an old campfire is all that's left of the previous adventurers to come here.\n\n");
+        outputText("-Woe to whom seeketh the black rose. Thy who enter beware, while riches you may find, death lurks in the Labyrinth deepest reaches. It ever hungers.- how charming. The ruin of an old campfire is all that's left of the previous adventurers to come here.\n\n");
         outputText("<b>You found the Ebon Labyrinth.</b>\n\n");
         doNext(enterDungeon);
     }
@@ -179,7 +179,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             else if (direction == DIR_UP || direction == DIR_DOWN || newDir == direction) //going forward
                 outputText("You walk into an empty corridor. Thankfully, it seems to be void of monsters so far.");
             else
-                outputText("You turn the corner wandering into a new corridor which, thankfully, seems to be void of monsters so far.");
+                outputText("You turn the corner wandering into a new corridor, which, thankfully, seems to be void of monsters so far.");
             //save the direction we're going to
             direction = newDir;
         }
@@ -289,9 +289,10 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         }
         //Marble withdrawl
         if(player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
-            outputText("\nYour sleep is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n");
+            outputText("\nYour sleep is very troubled, and you aren't able to settle down. You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n");
             multiplier *= 0.5;
-            dynStats("tou", -.1, "int", -.1);
+            player.addCurse("tou", 0.1, 2);
+            player.addCurse("int", 0.1, 2);
         }
         //Mino withdrawal
         else if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) {
@@ -446,7 +447,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
             if (print) {
                 clearOutput();
-                outputText("As you wander into a new corridor you come face to face with a purplish jelly-like woman. She giggles upon spotting you, her small, sphere-shaped core emitting an ominous light as she surges toward you with a gooey smile.\n\n");
+                outputText("As you wander into a new corridor, you come face to face with a purplish jelly-like woman. She giggles upon spotting you, her small, sphere-shaped core emitting an ominous light as she surges toward you with a gooey smile.\n\n");
                 outputText("\"<i>Dinner is served! Your fluids are mine, so surrender them now intruder and I promise to make it very pleasurable for you!</i>\"");
             }
             startCombat(new DarkSlime(), true);
@@ -487,7 +488,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
     private function minotaurEL(print:Boolean = true):void {
         if (print) {
             clearOutput();
-            outputText("Just as you turn the corner, you come face to face with a towering minotaur armed with a pair of huge battle axes and equipped with a full plate armor. The beast smirks as his cock hardens in anticipation. It must’ve been months since he last fucked something!");
+            outputText("Just as you turn the corner, you come face to face with a towering minotaur armed with a pair of huge battleaxes and equipped with a full plate armor. The beast smirks as his cock hardens in anticipation. It must’ve been months since he last fucked something!");
         }
         startCombat(new Minotaur(), true);
     }
@@ -503,10 +504,10 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
             return;
         }
-        outputText("Defeated you fall to the ground and look up just in time to see a mace coming for your head. When you wake up you're standing on a podium somewhere else. There's demon everywhere around you screaming numbers. Those demons are brandishing gems around for some reasons.\n\n");
+        outputText("Defeated you fall to the ground and look up just in time to see a mace coming for your head. When you wake up, you're standing on a podium somewhere else. There's demon everywhere around you screaming numbers. Those demons are brandishing gems around for some reasons.\n\n");
         outputText("\"<i>One hundred did I hear one hundred for this " + (player.gender == 3 ? "herm" : player.gender == 1 ? "man" : "woman") + "? One hundred one?!</i>\"\n\n");
-        outputText("You realise what's going on now, they're actually auctioning you at the slave market! You try and break free but your bonds are to tight. Eventually you're sold to an Omnibus who just so happen to be collecting human pets. As time passes she eventually sells you to a new master and then you're sold again to another. It never ends. ");
-        outputText("Guess you will spend the rest of your life in bondage pleasing some demon until it gets bored and sell you off. Maybe, if your lucky, one will fuck you hard enough that you will cum your soul out and you will actualy get to enjoy rather then loath your slave status.\n\n");
+        outputText("You realise what's going on now, they're actually auctioning you at the slave market! You try and break free but your bonds are too tight. Eventually you're sold to an Omnibus who just so happen to be collecting human pets. As time passes she eventually sells you to a new master and then you're sold again to another. It never ends. ");
+        outputText("Guess you will spend the rest of your life in bondage pleasing some demon until it gets bored and sell you off. Maybe, if your lucky, one will fuck you hard enough that you will cum your soul out and you will actualy get to enjoy rather than loath your slave status.\n\n");
         EventParser.gameOver();
     }
 }

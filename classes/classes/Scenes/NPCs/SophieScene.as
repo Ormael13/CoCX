@@ -1284,7 +1284,8 @@ private function SophieLossRapeNoDonguuuu():void {
 	outputText("Utterly defeated, you collapse.   Sophie doesn't let up, and batters you mercilessly with her wings until you lose consciousness.\n\n");
 
 	outputText("By the time you wake up, you're at the bottom of the mountain, and you feel as if you've fallen down the entire thing.  Obviously Sophie had enough care not to drop you to your death, but she didn't do you any favors on the ride either.   Yeesh.");
-	dynStats("str", -1,"tou", -1);
+	player.addCurse("tou", 1, 2);
+	player.addCurse("str", 1, 2);
 	cleanupAfterCombat();
 	//If not pissed increment times pissed
 	if(flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] <= 0) {

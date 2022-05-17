@@ -2,8 +2,6 @@ package classes.Scenes
 {
 	import classes.*;
 	import classes.BaseContent;
-	import classes.GlobalFlags.*;
-	import classes.Items.*;
 	import classes.internals.SaveableState;
 
 	public class Crafting extends BaseContent implements SaveableState
@@ -238,26 +236,26 @@ package classes.Scenes
 				"BagSlot29Cap": BagSlot29Cap,
 				"BagSlot30": BagSlot30,
 				"BagSlot30Cap": BagSlot30Cap,
-				"BagSlot21": BagSlot31,
-				"BagSlot21Cap": BagSlot31Cap,
-				"BagSlot22": BagSlot32,
-				"BagSlot22Cap": BagSlot32Cap,
-				"BagSlot23": BagSlot33,
-				"BagSlot23Cap": BagSlot33Cap,
-				"BagSlot24": BagSlot34,
-				"BagSlot24Cap": BagSlot34Cap,
-				"BagSlot25": BagSlot35,
-				"BagSlot25Cap": BagSlot35Cap,
-				"BagSlot26": BagSlot36,
-				"BagSlot26Cap": BagSlot36Cap,
-				"BagSlot27": BagSlot37,
-				"BagSlot27Cap": BagSlot37Cap,
-				"BagSlot28": BagSlot38,
-				"BagSlot28Cap": BagSlot38Cap,
-				"BagSlot29": BagSlot39,
-				"BagSlot29Cap": BagSlot39Cap,
-				"BagSlot30": BagSlot40,
-				"BagSlot30Cap": BagSlot40Cap
+				"BagSlot31": BagSlot31,
+				"BagSlot31Cap": BagSlot31Cap,
+				"BagSlot32": BagSlot32,
+				"BagSlot32Cap": BagSlot32Cap,
+				"BagSlot33": BagSlot33,
+				"BagSlot33Cap": BagSlot33Cap,
+				"BagSlot34": BagSlot34,
+				"BagSlot34Cap": BagSlot34Cap,
+				"BagSlot35": BagSlot35,
+				"BagSlot35Cap": BagSlot35Cap,
+				"BagSlot36": BagSlot36,
+				"BagSlot36Cap": BagSlot36Cap,
+				"BagSlot37": BagSlot37,
+				"BagSlot37Cap": BagSlot37Cap,
+				"BagSlot38": BagSlot38,
+				"BagSlot38Cap": BagSlot38Cap,
+				"BagSlot39": BagSlot39,
+				"BagSlot39Cap": BagSlot39Cap,
+				"BagSlot40": BagSlot40,
+				"BagSlot40Cap": BagSlot40Cap
 			};
 		}
 
@@ -323,26 +321,26 @@ package classes.Scenes
 				BagSlot29Cap = o["BagSlot29Cap"];
 				BagSlot30 = o["BagSlot30"];
 				BagSlot30Cap = o["BagSlot30Cap"];
-				BagSlot21 = o["BagSlot31"];
-				BagSlot21Cap = o["BagSlot31Cap"];
-				BagSlot22 = o["BagSlot32"];
-				BagSlot22Cap = o["BagSlot32Cap"];
-				BagSlot23 = o["BagSlot33"];
-				BagSlot23Cap = o["BagSlot33Cap"];
-				BagSlot24 = o["BagSlot34"];
-				BagSlot24Cap = o["BagSlot34Cap"];
-				BagSlot25 = o["BagSlot35"];
-				BagSlot25Cap = o["BagSlot35Cap"];
-				BagSlot26 = o["BagSlot36"];
-				BagSlot26Cap = o["BagSlot36Cap"];
-				BagSlot27 = o["BagSlot37"];
-				BagSlot27Cap = o["BagSlot37Cap"];
-				BagSlot28 = o["BagSlot38"];
-				BagSlot28Cap = o["BagSlot38Cap"];
-				BagSlot29 = o["BagSlot39"];
-				BagSlot29Cap = o["BagSlot39Cap"];
-				BagSlot30 = o["BagSlot40"];
-				BagSlot30Cap = o["BagSlot40Cap"];
+				BagSlot31 = o["BagSlot31"];
+				BagSlot31Cap = o["BagSlot31Cap"];
+				BagSlot32 = o["BagSlot32"];
+				BagSlot32Cap = o["BagSlot32Cap"];
+				BagSlot33 = o["BagSlot33"];
+				BagSlot33Cap = o["BagSlot33Cap"];
+				BagSlot34 = o["BagSlot34"];
+				BagSlot34Cap = o["BagSlot34Cap"];
+				BagSlot35 = o["BagSlot35"];
+				BagSlot35Cap = o["BagSlot35Cap"];
+				BagSlot36 = o["BagSlot36"];
+				BagSlot36Cap = o["BagSlot36Cap"];
+				BagSlot37 = o["BagSlot37"];
+				BagSlot37Cap = o["BagSlot37Cap"];
+				BagSlot38 = o["BagSlot38"];
+				BagSlot38Cap = o["BagSlot38Cap"];
+				BagSlot39 = o["BagSlot39"];
+				BagSlot39Cap = o["BagSlot39Cap"];
+				BagSlot40 = o["BagSlot40"];
+				BagSlot40Cap = o["BagSlot40Cap"];
 			} else {
 				// loading from old save
 				resetState();

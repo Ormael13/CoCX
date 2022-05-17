@@ -4153,7 +4153,7 @@ public final class Mutations extends MutationsHelper {
         dynStats("cor", 2);
         //Stronger
         if (player.str > 50 && rand(3) == 0 && changes < changeLimit) {
-            dynStats("str", -1);
+            player.addCurse("str", 1, 1);
             if (player.str > 70) player.addCurse("str", 1, 1);
             if (player.str > 90) player.addCurse("str", 2, 1);
             outputText("[pg]You feel a little weaker, but maybe it's just the alcohol.");
@@ -4162,7 +4162,7 @@ public final class Mutations extends MutationsHelper {
         ///Less tough
         if (player.tou > 50 && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]Giggling, you poke yourself, which only makes you giggle harder when you realize how much softer you feel.");
-            dynStats("tou", -1);
+            player.addCurse("tou", 1, 1);
             if (player.tou > 70) player.addCurse("tou", 1, 1);
             if (player.tou > 90) player.addCurse("tou", 2, 1);
             changes++;
@@ -4378,7 +4378,7 @@ public final class Mutations extends MutationsHelper {
         dynStats("lus", 15);
         //Stronger
         if (player.str > 50 && rand(3) == 0 && changes < changeLimit) {
-            dynStats("str", -1);
+            player.addCurse("str", 1, 1);
             if (player.str > 70) player.addCurse("str", 2, 1);
             if (player.str > 90) player.addCurse("str", 2, 1);
             outputText("[pg]You feel a little weaker, but maybe it's just the alcohol.");
@@ -4387,7 +4387,7 @@ public final class Mutations extends MutationsHelper {
         ///Less tough
         if (player.tou > 50 && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]Giggling, you poke yourself, which only makes you giggle harder when you realize how much softer you feel.");
-            dynStats("tou", -1);
+            player.addCurse("tou", 1, 1);
             if (player.tou > 70) player.addCurse("tou", 1, 1);
             if (player.tou > 90) player.addCurse("tou", 2, 1);
             changes++;
@@ -11922,7 +11922,7 @@ public final class Mutations extends MutationsHelper {
             if (player.tou <= 66) outputText("[pg]You feel your " + player.skinFurScales() + " becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your " + player.skinFurScales() + " won't offer you much protection.");
             //from 66 or greater toughness
             else outputText("[pg]You feel your " + player.skinFurScales() + " becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your hide isn't quite as tough as it used to be.");
-            dynStats("tou", -1);
+            player.addCurse("tou", 1, 1);
             if (player.tou > 66) player.addCurse("tou", 1, 1);
         });
         mutationStep(mystic && player.cor < 100, 2, function ():void {
@@ -15721,7 +15721,7 @@ public final class Mutations extends MutationsHelper {
         if (!player.hasStatusEffect(StatusEffects.Drunk)) {
             player.createStatusEffect(StatusEffects.Drunk, 2, 1, 1, 0);
             MutagenBonus("str", 0.1);
-            dynStats("inte", -0.5);
+            player.addCurse("inte", 0.5, 1);
             MutagenBonus("lib", 0.25);
         } else {
             player.addStatusValue(StatusEffects.Drunk, 2, 1);
@@ -17230,7 +17230,7 @@ public final class Mutations extends MutationsHelper {
                         "Heck, why do you even make the effort to smile and wink? It's way easier to keep a passive face all the time. " +
                         "The more you think about it, the more you lose your ability to display your emotions, your voice’s tone starts becoming somewhat empty. " +
                         "Well what your face won't show, your body will.");
-                dynStats("spe", -5);
+                player.addCurse("spe", 5, 1);
                 if (player.faceType == Face.HUMAN && player.faceType != Face.KUDERE) {
                     outputText("[pg]");
                     transformations.FaceKudere.applyEffect();
