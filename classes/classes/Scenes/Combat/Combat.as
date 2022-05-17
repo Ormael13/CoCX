@@ -12,6 +12,8 @@ import classes.ItemType;
 import classes.Items.JewelryLib;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
+import classes.Items.WeaponRange;
+import classes.Items.WeaponRangeLib;
 import classes.Monster;
 import classes.PerkLib;
 import classes.PotionType;
@@ -14205,6 +14207,16 @@ public class Combat extends BaseContent {
     }
 
     public function runAway(callHook:Boolean = true):void {
+        if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0){
+            //outputText("Now that the fight's over, you go and retrieve your melee weapon from the ground where they knocked it out your hands.\n");
+            player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
+            flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
+        }
+        if(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0){
+            //outputText("Now that the fight's over, you go and retrieve your ranged weapon from the ground where they knocked it out your hands.\n");
+            player.setWeaponRange(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID]) as WeaponRange);
+            flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = 0;
+        }
         if (callHook && monster.onPcRunAttempt != null) {
             monster.onPcRunAttempt();
             return;
