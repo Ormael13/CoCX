@@ -15,6 +15,7 @@ import classes.Items.*;
 import classes.Scenes.Crafting;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
+import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 
 use namespace CoC;
 
@@ -1882,6 +1883,9 @@ public class SaveUpdater extends NPCAwareContent {
 					player.removePerk(mutation);
 				}
 				outputText("Also, remove old mutations again.")
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.016;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.017) {
 				//reset flags
 				flags[kFLAGS.AYANE_CURE_COOLDOWN] = 0;
 				flags[kFLAGS.DIANA_CURE_COOLDOWN] = 0;
