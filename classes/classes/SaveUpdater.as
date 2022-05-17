@@ -15,6 +15,7 @@ import classes.Items.*;
 import classes.Scenes.Crafting;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
+import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 
 use namespace CoC;
 
@@ -1861,21 +1862,20 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.015;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.016) {
-        if (player.hasMutation(IMutationsLib.GorgonEyesIM)){
-						player.HP = player.maxOverHP();
-						player.fatigue = 0;
-					}
-
+				if (player.hasMutation(IMutationsLib.GorgonEyesIM)){
+					player.HP = player.maxOverHP();
+					player.fatigue = 0;
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.016;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.017) {
 				//reset flags
 				flags[kFLAGS.AYANE_CURE_COOLDOWN] = 0;
 				flags[kFLAGS.DIANA_CURE_COOLDOWN] = 0;
 				//autofix for old curse bug - AGAIN
 				if (player.statStore.hasBuff("Tribulation Vestiges"))
 					player.statStore.removeBuffs("Tribulation Vestiges");
-				flags[kFLAGS.MOD_SAVE_VERSION] = 35.016;
-			}
-	
-				flags[kFLAGS.MOD_SAVE_VERSION] = 35.016;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.017;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
