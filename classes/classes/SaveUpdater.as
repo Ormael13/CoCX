@@ -1881,6 +1881,10 @@ public class SaveUpdater extends NPCAwareContent {
 					flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = 0;
 				}
 				outputText("\n\n Weapons duplication from woodelves hunting party should now be fixed.... again.");
+				for each (var mutation:PerkType in MutationsLib.mutationsArray("", true)){
+					player.removePerk(mutation);
+				}
+				outputText("Also, remove old mutations again.")
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.017;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");

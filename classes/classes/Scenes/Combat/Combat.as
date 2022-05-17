@@ -14384,7 +14384,8 @@ public class Combat extends BaseContent {
 			outputText("As you retreat the training dummy just stands there. ");
 		}
 		else if (player.canFly()) {
-            if(player.wings.type != Wings.ETHEREAL || player.wings.type != Wings.LEVITATION || player.wings.type != Wings.THUNDEROUS_AURA){
+            var wingsNoFlap:Array = [Wings.ETHEREAL, Wings.LEVITATION, Wings.THUNDEROUS_AURA, Wings.WINDY_AURA];
+            if(!(wingsNoFlap.indexOf(player.wings.type) >= 0)){
                 outputText("Gritting your teeth with effort, you beat your wings quickly and lift off!  ");
             }
             else{

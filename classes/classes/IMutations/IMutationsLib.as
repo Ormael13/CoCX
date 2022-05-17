@@ -214,6 +214,7 @@ public class IMutationsLib
 					IMutationsThyroidGlands();
 					IMutationsParaThyroidGlands();
 					IMutationsAdaptations();
+					IMutationsList.sort();
 			}
 			return IMutationsList;
 		}

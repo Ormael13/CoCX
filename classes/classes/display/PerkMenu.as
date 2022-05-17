@@ -5,6 +5,7 @@ package classes.display {
 import classes.BaseContent;
 import classes.BodyParts.Face;
 import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
 import classes.CoC;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
@@ -35,20 +36,21 @@ public class PerkMenu extends BaseContent {
 		}
 		else{
 			var perkList:Array = player.perks;
-			for each (var mutations:IMutationPerkType in IMutationsLib.mutationsArray("")){
-				var mIndex:int = perkList.indexOf(player.getPerk(mutations));
-				if (mIndex >= 0){
-					perkList.splice(mIndex, 1);
-				}
-			}
-			perkList.splice(perkList.indexOf(player.getPerk(IMutationsLib.MutationsTemplateIM)), 1);
+			var mutationsArray:Array = IMutationsLib.mutationsArray("");
+			mutationsArray.push(IMutationsLib.MutationsTemplateIM);
+			//for each (var oldMutate:PerkType in MutationsLib.mutationsArray("", true)){
+			//	mutationsArray.push(oldMutate)
+			//}
 			for each (var temp:PerkClass in perkList){
-				try{
-					outputText("<b>" + temp.perkName + "</b> - " + temp.perkDesc + "\n");
+				if (!(mutationsArray.indexOf(temp.ptype) >= 0))
+				{
+					try{
+						outputText("<b>" + temp.perkName + "</b> - " + temp.perkDesc + "\n");
 
-				} catch (error:Error) {
-					outputText(temp.perkName + " has encountered a problem. PLEASE REPORT THIS.");
-					trace("Something about " + temp.perkName + " is broken. Might wanna check that?");
+					} catch (error:Error) {
+						outputText(temp.perkName + " has encountered a problem. PLEASE REPORT THIS.");
+						trace("Something about " + temp.perkName + " is broken. Might wanna check that?");
+					}
 				}
 			}
 		}
