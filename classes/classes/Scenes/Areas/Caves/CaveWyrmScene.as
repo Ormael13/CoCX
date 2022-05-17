@@ -56,7 +56,7 @@ public function winningOverCaveWyrm():void {
 		outputText(" might end up like if any of these fluids gets in contact with them. Deciding against it you smash the " + (flags[kFLAGS.HERM_CAVE_WYRM] > 0 ?"herm":"female") + " unconscious instead and get your spoils. The locals will better use her then you would.");
 		addButton(0, "Leave", cleanupAfterCombat);
 		SceneLib.uniqueSexScene.pcUSSPreChecksV2(winningOverCaveWyrm);
-			}
+	}
 }	
 public function winningOverCaveWyrmDMelting():void {
 	clearOutput();
