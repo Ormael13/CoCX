@@ -1868,7 +1868,20 @@ public class SaveUpdater extends NPCAwareContent {
 						player.HP = player.maxOverHP();
 						player.fatigue = 0;
 					}
+				outputText("\n\nSmall fix to Gorgon Eyes Mutation causing NaN in speed, health and fatigue");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.016;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.017) {
+				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0){
+					player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
+					flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
+				}
+				if(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0){
+					player.setWeaponRange(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID]) as WeaponRange);
+					flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = 0;
+				}
+				outputText("\n\n Weapons duplication from woodelves hunting party should now be fixed.... again.");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.017;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
