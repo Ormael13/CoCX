@@ -1861,10 +1861,10 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.015;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.016) {
-        if (player.hasMutation(IMutationsLib.GorgonEyesIM)){
-						player.HP = player.maxOverHP();
-						player.fatigue = 0;
-					}
+				if (player.hasMutation(IMutationsLib.GorgonEyesIM)){
+					player.HP = player.maxOverHP();
+					player.fatigue = 0;
+				}
 				outputText("\n\nSmall fix to Gorgon Eyes Mutation causing NaN in speed, health and fatigue");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.016;
 			}
@@ -1882,7 +1882,7 @@ public class SaveUpdater extends NPCAwareContent {
 					player.removePerk(mutation);
 				}
 				outputText("Also, remove old mutations again.")
-        //reset flags
+				//reset flags
 				flags[kFLAGS.AYANE_CURE_COOLDOWN] = 0;
 				flags[kFLAGS.DIANA_CURE_COOLDOWN] = 0;
 				//autofix for old curse bug - AGAIN
