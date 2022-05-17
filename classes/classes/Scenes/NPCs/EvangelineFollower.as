@@ -1267,7 +1267,7 @@ private function InternalMutations0(page:int = 0, GoM:int = 0):void {
 		outputText("\"<i>This might sting a little… bear it with me [name].</i>\"\n\n");
 		outputText("You don't have the time to gasp before she pushes the injection in. The transformative in the wound burns at first but then spreads to your organ as it slowly changes to acquire new inhuman property. The transformation was successful.");
 		eachMinuteCount(15);
-		doNext(playerMenu);
+		doNext(InternalMutations);
 	}
 }
 

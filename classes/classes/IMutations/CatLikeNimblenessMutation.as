@@ -89,8 +89,6 @@ public class CatLikeNimblenessMutation extends IMutationPerkType
             maxLvl = 3;
         }
 
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
-        }
+        
     }
 }

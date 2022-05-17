@@ -85,9 +85,5 @@ public class YetiFatMutation extends IMutationPerkType
             super("Yeti Fat IM", "Yeti Fat", ".");
             maxLvl = 3;
         }
-
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
-        }
     }
 }

@@ -93,8 +93,6 @@ public class NaturalPunchingBagMutation extends IMutationPerkType
             maxLvl = 3;
         }
 
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
-        }
+        
     }
 }

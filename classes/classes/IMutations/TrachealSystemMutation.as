@@ -111,8 +111,6 @@ public class TrachealSystemMutation extends IMutationPerkType
             maxLvl = 4;
         }
 
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
-        }
+        
     }
 }
