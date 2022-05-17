@@ -56,7 +56,7 @@ public class PhoukaWhiskey extends Consumable {
 			if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= mutations.DrunkenPowerEmpowerOni()) mutations.DrunkenPowerEmpower();
 			game.flags[kFLAGS.PREGNANCY_CORRUPTION]++; //Faerie or phouka babies become more corrupted, no effect if the player is not pregnant or on other types of babies
 			phoukaWhiskeyAddStatus(game.player);
-			return(false);
+			return false;
         }
         
 		public function phoukaWhiskeyAcceptable(player:Player):int

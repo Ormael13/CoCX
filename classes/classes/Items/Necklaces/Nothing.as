@@ -1,8 +1,6 @@
 package classes.Items.Necklaces 
 {
-	import classes.ItemType;
 	import classes.Items.Necklace;
-	import classes.Player;
 	
 	public class Nothing extends Necklace
 	{
