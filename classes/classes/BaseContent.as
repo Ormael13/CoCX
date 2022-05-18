@@ -644,7 +644,7 @@ import coc.xxc.StoryContext;
 			player.dynStats.apply(player, args);
 		}
 
-		protected function MutagenBonus(statName: String, bonus: Number):void
+		protected function MutagenBonus(statName: String, bonus: Number):Boolean
 		{
 			player.MutagenBonus(statName,bonus);
 		}
@@ -987,7 +987,7 @@ import coc.xxc.StoryContext;
                 if (bList[i + 1] is Function)
 					addButton(i/3, bList[i], bList[i + 1]). hint(bList[i + 2] is Array ? bList[i+2][0]: bList[i+2]);
                 else if (bList[i + 1] == "ignore") //Not sure when this would ever be used, but in case.
-                    continue;
+                    trace("MenuGen ignored " + bList[i] + " when creating the button menu.\n");
                 else if (!bList[i + 1]) //hope it works
 					addButtonDisabled(i/3, bList[i], (bList[i + 2] is Array) ? bList[i+2][1]: bList[i+2]);
 				else
