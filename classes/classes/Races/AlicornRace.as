@@ -16,10 +16,13 @@ public class AlicornRace extends Race{
 	
 	public function AlicornRace(id:int) {
 		super("Alicorn", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
-				.faceType(Face.HUMAN, +1, -100)
-				.hornType(ANY(Horns.UNICORN, Horns.BICORN), 0, -100)
+				.faceType(Face.HUMAN, +1, -1000)
+				.hornType(ANY(Horns.UNICORN, Horns.BICORN), 0, -1000)
 				.earType(Ears.HORSE, +1)
 				.tailType(Tail.HORSE, +1)
 				.legType(LowerBody.HOOFED, +1)
@@ -38,7 +41,7 @@ public class AlicornRace extends Race{
 							if (body.hornType == Horns.UNICORN) return body.wingType == Wings.FEATHERED_ALICORN;
 							if (body.hornType == Horns.BICORN) return body.wingType == Wings.NIGHTMARE;
 							return true;
-						}, 0, -100);
+						}, 0, -1000);
 		
 		addMutation(IMutationsLib.TwinHeartIM, +2);
 		addMutation(IMutationsLib.EclipticMindIM, +1);

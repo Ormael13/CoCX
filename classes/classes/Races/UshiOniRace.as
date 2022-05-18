@@ -11,6 +11,9 @@ public class UshiOniRace extends Race{
 	public function UshiOniRace(id:int) {
 		super("Ushi-Onna", id);
 		disabled = true;
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.earType(Ears.COW, +1)

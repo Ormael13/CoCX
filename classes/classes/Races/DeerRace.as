@@ -6,6 +6,9 @@ import classes.Race;
 public class DeerRace extends Race{
 	public function DeerRace(id:int) {
 		super("Deer", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.earType(Ears.DEER, +1)

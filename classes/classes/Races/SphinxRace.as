@@ -10,6 +10,9 @@ public class SphinxRace extends Race {
 	
 	public function SphinxRace(id:int) {
 		super("Sphinx", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.skinBaseColor(ANY(SphinxSkinColor), +1)

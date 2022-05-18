@@ -8,6 +8,9 @@ import classes.Race;
 public class WoodElfRace extends Race{
 	public function WoodElfRace(id:int) {
 		super("Wood Elf", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.hasPerk(PerkLib.BlessingOfTheAncestorTree, +4, -100)

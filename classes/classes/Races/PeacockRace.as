@@ -6,6 +6,9 @@ import classes.Race;
 public class PeacockRace extends Race{
 	public function PeacockRace(id:int) {
 		super("Peacock", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.hairType(Hair.FEATHER, +1)

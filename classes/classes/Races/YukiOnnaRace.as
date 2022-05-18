@@ -9,6 +9,9 @@ public class YukiOnnaRace extends Race {
 	
 	public function YukiOnnaRace(id: int) {
 		super("Yuki Onna", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.skinBaseColor(ANY(YukiOnnaSkinColors), +1)

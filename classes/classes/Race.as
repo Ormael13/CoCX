@@ -51,6 +51,8 @@ public class Race {
 	public var disabled:Boolean = false;
 
     /**
+	 * TODO @aimozg remove last 2 params
+	 *
      * @param _name Display name of the race
      * @param _id Unique number id
      * @param _playerFunctionName (old system) Function in Player class that returns score for this race
@@ -67,6 +69,13 @@ public class Race {
 		AllRacesWithDisabled.push(this);
 		this._minScore = _minScore;
     }
+	
+	/**
+	 * Configure tiers, requirements & other stuff
+	 */
+	public function setup():void {
+	
+	}
 	
 	public function basicScore(body:BodyData):int {
 		if (playerFunctionName) {
@@ -221,20 +230,30 @@ public class Race {
 			}
 			score += rscore;
 			s += rr.name;
-			if (rr.varyingScore() && !rr.check(body, score)) {
+			if (rr.varyingScore() && !pass) {
 				// do not display (+X) for requirements that have varying values and
 				// didn't pass, because value could be incorrect
-				if (rscore != 0) {
+				if (rscore <= -1000) {
+					s += " [/font][font-red](required)";
+				} else if (rscore != 0) {
 					s += " [/font][font-red]("+rscore+" penalty)";
 				}
 			} else {
 				rscore = rr.passScore(body);
 				s += " (" + (rscore>0?"+"+rscore:rscore)+")";
 				if (rr.failScore < 0) {
-					if (pass) {
-						s += "[/font][font-default] (" + rr.failScore + " penalty)";
+					s += "[/font]"
+					if (!pass) {
+						s += "[font-red]";
+					} else if (rr.failScore <= -1000) {
+						s += "[font-green]";
 					} else {
-						s += "[/font][font-red] (" + rr.failScore + " penalty)";
+						s += "[font-default]";
+					}
+					if (rr.failScore <= -1000) {
+						s += " (required)"
+					} else {
+						s += " (" + rr.failScore + " penalty)";
 					}
 				}
 			}

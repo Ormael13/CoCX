@@ -56,10 +56,10 @@ public class Races {
 	public static const FIRESNAILS:Race = new Race("Fire snails",50, "firesnailScore", 15);
 	public static const PHOENIX:Race = new Race("Phoenix",51, "phoenixScore", 10);
 	public static const SCYLLA:Race = new Race("Scylla",52, "scyllaScore", 7);
-	public static const PLANT:Race = new Race("Plant",53, "plantScore", 4);
-	public static const ALRAUNE:Race = new Race("Alraune",54, "alrauneScore", 13);
-	public static const YGGDRASIL:Race = new Race("Yggdrassil",55, "yggdrasilScore", 10);
-	public static const PIG:Race = new Race("Pig",56, "pigScore", 10);
+	public static const PLANT:PlantRace                    = new PlantRace(53);
+	public static const ALRAUNE:AlrauneRace                = new AlrauneRace(54);
+	public static const YGGDRASIL:YgddrasilRace            = new YgddrasilRace(55);
+	public static const PIG:PigRace                        = new PigRace(56);
 	public static const SATYR:SatyrRace                    = new SatyrRace(57);
 	public static const RHINO:RhinoRace                    = new RhinoRace(58);
 	public static const ECHIDNA:EchidnaRace                = new EchidnaRace(59);
@@ -118,14 +118,14 @@ public class Races {
 	public static function load():void {
 		RaceTierBuilder.ensureEndCalled();
 		
-		Race.AllEnabledRaces = Race.AllRacesWithDisabled.filter(
-				function(e:Race,...rest:Array):Boolean {
-					return !e.disabled;
-				});
-		Race.AllVisibleRaces = Race.AllRacesWithDisabled.filter(
-				function(e:Race,...rest:Array):Boolean {
-					return !e.disabled && !e.hidden;
-				});
+		for each (var race:Race in Race.AllRacesWithDisabled) {
+			race.setup();
+			if (race.disabled) continue;
+			Race.AllEnabledRaces.push(race);
+			if (race.hidden) continue;
+			Race.AllVisibleRaces.push(race);
+		}
+		
 		Race.AllRacesByName = Race.AllVisibleRaces.slice().sortOn("name");
 	}
 }

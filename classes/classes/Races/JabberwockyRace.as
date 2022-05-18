@@ -12,9 +12,12 @@ public class JabberwockyRace extends Race {
 	
 	public function JabberwockyRace(id:int) {
 		super("Jabberwocky", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
-				.faceType(ANY(Face.JABBERWOCKY, Face.BUCKTOOTH), +1, -100)
+				.faceType(ANY(Face.JABBERWOCKY, Face.BUCKTOOTH), +1, -1000)
 				.faceType(NONE(Face.DRAGON, Face.DRAGON_FANGS), 0, -10)
 				.eyeType(Eyes.DRACONIC, +1)
 				.eyeColor("red", +1)
@@ -27,9 +30,9 @@ public class JabberwockyRace extends Race {
 				.tailType(Tail.DRACONIC, +1)
 				.tongueType(Tongue.DRACONIC, +1)
 				.antennaeType(Antennae.JABBERWOCKY, +1)
-				.wingType(Wings.FEY_DRAGON, +4, -100)
+				.wingType(Wings.FEY_DRAGON, +4, -1000)
 				.legType(LowerBody.JABBERWOCKY, +1)
-				.legType(NOT(LowerBody.FROSTWYRM), 0, -100)
+				.legType(NOT(LowerBody.FROSTWYRM), 0, -1000)
 				.armType(Arms.JABBERWOCKY, +1)
 				.hasCockOfType(CockTypesEnum.DRAGON, +1)
 				.gender(Gender.GENDER_FEMALE, +1)
@@ -45,6 +48,7 @@ public class JabberwockyRace extends Race {
 		addBloodline(PerkLib.DragonsDescendant,PerkLib.BloodlineDragon);
 		
 		buildTier(10, "lesser jabberwocky")
+				.namesTauric("lesser jabberwocky", "lesser jabberwocky-taur")
 				.buffs({
 					"str.mult": +0.50,
 					"tou.mult": +0.40,
@@ -56,6 +60,7 @@ public class JabberwockyRace extends Race {
 				.end();
 		
 		buildTier(20, "jabberwocky")
+				.namesTauric("jabberwocky", "jabberwocky-taur")
 				.buffs({
 					"str.mult": +0.90,
 					"tou.mult": +0.70,
@@ -67,6 +72,7 @@ public class JabberwockyRace extends Race {
 				.end();
 		
 		buildTier(25, "greater jabberwocky")
+				.namesTauric("greater jabberwocky", "greater jabberwocky-taur")
 				.buffs({
 					"str.mult": +1.05,
 					"tou.mult": +0.80,
@@ -78,6 +84,7 @@ public class JabberwockyRace extends Race {
 				.end();
 		
 		buildTier(30, "primal jabberwocky")
+				.namesTauric("primal jabberwocky", "primal jabberwocky-taur")
 				.buffs({
 					"str.mult": +1.25,
 					"tou.mult": +0.95,

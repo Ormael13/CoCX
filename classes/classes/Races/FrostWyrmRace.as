@@ -12,6 +12,9 @@ public class FrostWyrmRace extends Race {
 	
 	public function FrostWyrmRace(id:int) {
 		super("Frost Wyrm", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.earType(ANY(Ears.SNAKE,Ears.DRAGON), +1)

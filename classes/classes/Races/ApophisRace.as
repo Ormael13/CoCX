@@ -11,9 +11,12 @@ public class ApophisRace extends Race {
 	
 	public function ApophisRace(id:int) {
 		super("Apophis", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
-				.isNaga(+3, -100)
+				.isNaga(+3, -1000)
 				.armType(Arms.HUMAN, +1)
 				.hairColor(ANY(ApophisHairColors), +1)
 				.skinBaseColor("light purple", +1)
@@ -47,7 +50,7 @@ public class ApophisRace extends Race {
 									|| body.wingType == Wings.FEATHERED_LARGE
 									|| body.legType == LowerBody.HYDRA
 									|| body.armType == Arms.HYDRA);
-						}, 0, -100);
+						}, 0, -1000);
 		
 		addMutation(IMutationsLib.VenomGlandsIM);
 		

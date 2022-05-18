@@ -11,6 +11,9 @@ public class GazerRace extends Race {
 	
 	public function GazerRace(id:int) {
 		super("Gazer", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.hairColor(ANY(GazerHairColors), +1)

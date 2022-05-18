@@ -8,6 +8,9 @@ import classes.Race;
 public class FairyScore extends Race {
 	public function FairyScore(id:int) {
 		super("Fairy", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.faceType(Face.FAIRY, +2)

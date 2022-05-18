@@ -12,12 +12,15 @@ import classes.VaginaClass;
 public class ManticoreRace extends Race {
 	public function ManticoreRace(id:int) {
 		super("Manticore", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.faceType(Face.MANTICORE, +1)
 				.eyeType(Eyes.MANTICORE, +1)
 				.earType(Ears.LION, +1)
-				.tailType(Tail.MANTICORE_PUSSYTAIL, +2, -100)
+				.tailType(Tail.MANTICORE_PUSSYTAIL, +2, -1000)
 				.rearType(RearBody.LION_MANE, +1)
 				.armType(Arms.LION, +1)
 				.legType(LowerBody.LION, +1)

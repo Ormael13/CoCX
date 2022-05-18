@@ -208,6 +208,18 @@ public class RaceScoreBuilder {
 				failScore
 		);
 	}
+	public function plainSkinOfColor(color:*, score:int, failScore:int=0):RaceScoreBuilder {
+		var oo:Object = RaceUtils.parseOperatorObject(color);
+		return customRequirement(
+				"skin",
+				oo.name,
+				function(body:BodyData):Boolean {
+					return body.player.hasPlainSkinOnly() && oo.operatorFn(body.skinBaseColor);
+				},
+				score,
+				failScore
+		);
+	}
 	public function tailType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_TAIL_TYPE, type, score, failScore, customName);
 		return this;

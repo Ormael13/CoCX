@@ -9,6 +9,9 @@ import classes.VaginaClass;
 public class CancerRace extends Race{
 	public function CancerRace(id:int) {
         super("Cancer", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.earType(Ears.HUMAN, +1)
@@ -16,7 +19,7 @@ public class CancerRace extends Race{
 				.eyeType(Eyes.CANCER, +1)
 				.faceType(Face.KUDERE, +1)
 				.hasStatusEffect(StatusEffects.CancerCrabStance, "Crab stance", +1)
-				.legType(ANY(LowerBody.CRAB, LowerBody.CANCER), +1, -100)
+				.legType(ANY(LowerBody.CRAB, LowerBody.CANCER), +1, -1000)
 				.legType(LowerBody.CANCER, +3)
 				.noWings(+1)
 				.eyeColor("orange", +1)

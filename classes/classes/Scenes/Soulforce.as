@@ -3060,13 +3060,13 @@ public class Soulforce extends BaseContent
 		var SFR00:Number = 0;
 		var tier:int;
 		
-		tier = player.racialTierNumber(Races.KITSUNE);
+		tier = player.racialTier(Races.KITSUNE);
 		if (tier >= 4) SFR00 += 200;
 		else if (tier == 3) SFR00 += 150;
 		else if (tier == 2) SFR00 += 80;
 		else if (tier == 1) SFR00 += 40;
 		
-		tier = player.racialTierNumber(Races.NEKOMATA);
+		tier = player.racialTier(Races.NEKOMATA);
 		if (tier >= 2) SFR00 += 40;
 		else if (tier == 1) SFR00 += 20;
 		
@@ -3494,13 +3494,13 @@ public class Soulforce extends BaseContent
 		var costPercent:Number = 100;
 		var tier:int;
 		
-		tier = player.racialTierNumber(Races.KITSUNE);
+		tier = player.racialTier(Races.KITSUNE);
 		if (tier >= 4) costPercent += 1000;
 		else if (tier == 3) costPercent += 650;
 		else if (tier == 2) costPercent += 400;
 		else if (tier == 1) costPercent += 200;
 		
-		tier = player.racialTierNumber(Races.NEKOMATA);
+		tier = player.racialTier(Races.NEKOMATA);
 		if (tier >= 2) costPercent += 200;
 		else if (tier == 1) costPercent += 100;
 		

@@ -11,6 +11,9 @@ public class MelkieRace extends Race {
 	
 	public function MelkieRace(id:int) {
 		super("Melkie", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.skinBaseColor(ANY(MelkieSkinColors), +1)
@@ -23,7 +26,7 @@ public class MelkieRace extends Race {
 				.faceType(Face.ANIMAL_TOOTHS, +1)
 				.earType(Ears.MELKIE, +1)
 				.tongueType(Tongue.MELKIE, +1)
-				.legType(LowerBody.MELKIE, +3, -100)
+				.legType(LowerBody.MELKIE, +3, -1000)
 				.armType(Arms.MELKIE, +1)
 				.femininity(GREATER_THAN(80), +1)
 				.hasVagina(+1)

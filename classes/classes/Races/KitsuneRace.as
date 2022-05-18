@@ -24,6 +24,9 @@ public class KitsuneRace extends Race {
 	
 	public function KitsuneRace(id:int) {
 		super("Kitsune", id);
+	}
+	
+	public override function setup():void {
 		addScores()
 				.eyeType(Eyes.FOX, +1)
 				.earType(Ears.FOX, +1, -1)

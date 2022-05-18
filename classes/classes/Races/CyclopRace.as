@@ -8,6 +8,9 @@ import classes.internals.race.RaceUtils;
 public class CyclopRace extends Race {
 	public function CyclopRace(id:int) {
 		super("Cyclop", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.skinPlainOnly(+1)

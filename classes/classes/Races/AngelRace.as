@@ -9,6 +9,9 @@ public class AngelRace extends Race {
 	public function AngelRace(id:int) {
 		super("Angel", id);
 		disabled = true;
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				//start ctrl-spacing here

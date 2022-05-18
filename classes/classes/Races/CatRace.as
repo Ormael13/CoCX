@@ -10,6 +10,9 @@ public class CatRace extends Race {
 	
 	public function CatRace(id:int) {
 		super("Cat", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.faceType(ANY(Face.CAT,Face.CAT_CANINES), +1)
@@ -37,7 +40,7 @@ public class CatRace extends Race {
 									|| isCheshireLike(body)
 									|| isHellcatLike(body)
 									|| isDisplacerLike(body));
-						},0,-100
+						},0,-1000
 						)
 				.hasPerk(PerkLib.Flexibility, +1);
 		

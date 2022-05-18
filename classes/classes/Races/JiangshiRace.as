@@ -12,6 +12,9 @@ public class JiangshiRace extends Race {
 	
 	public function JiangshiRace(id:int) {
 		super("Jiangshi", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.skinPlainOnly(+1)

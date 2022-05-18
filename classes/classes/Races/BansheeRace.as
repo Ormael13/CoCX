@@ -8,6 +8,9 @@ public class BansheeRace extends Race {
 	public function BansheeRace(id:int) {
 		super("Banshee", id);
 		disabled = true;
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.hairType(Hair.GHOST, +1)

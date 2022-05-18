@@ -12,6 +12,9 @@ public class MaleMindbreakerRace extends Race{
 	
 	public function MaleMindbreakerRace(id:int) {
 		super("Male Mind Breaker", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.faceType(Face.HUMAN, +1)
@@ -25,7 +28,7 @@ public class MaleMindbreakerRace extends Race{
 				.tongueType(Tongue.MINDBREAKERMALE, +1)
 				.noWings(+3)
 				.hasCockOfType(CockTypesEnum.MINDBREAKER, +1)
-				.noVagina(0, -100)
+				.noVagina(0, -1000)
 				.hairTypeAndColor(Hair.MINDBREAKERMALE, "purple", +1)
 				.skinPlainOnly(0, -1)
 				.skinBaseColor("eldritch purple", +1)

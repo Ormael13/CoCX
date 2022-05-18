@@ -8,6 +8,9 @@ public class WerewolfRace extends Race {
 	
 	public function WerewolfRace(id:int) {
 		super("Werewolf", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.faceType(Face.WOLF_FANGS, +1)

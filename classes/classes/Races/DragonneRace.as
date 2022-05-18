@@ -7,6 +7,9 @@ import classes.Race;
 public class DragonneRace extends Race{
 	public function DragonneRace(id:int) {
 		super("Dragonne", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.faceType(Face.CAT, +1)

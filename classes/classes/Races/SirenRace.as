@@ -9,6 +9,9 @@ public class SirenRace extends Race {
 	
 	public function SirenRace(id: int) {
 		super("Siren", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.faceType(Face.SHARK_TEETH, +1)

@@ -7,6 +7,9 @@ public class EchidnaRace extends Race {
 	
 	public function EchidnaRace(id:int) {
 		super("Echidna", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.earType(Ears.ECHIDNA, +1)

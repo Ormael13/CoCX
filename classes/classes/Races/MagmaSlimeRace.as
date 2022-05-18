@@ -10,6 +10,9 @@ public class MagmaSlimeRace extends Race {
 	
 	public function MagmaSlimeRace(id:int) {
 		super("Magma slime", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.skinBaseColor(ANY(MagmaSlimeSkinColors), +1)

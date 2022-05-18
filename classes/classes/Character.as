@@ -981,8 +981,8 @@ import classes.CoC;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 46) max += 12 * (flags[kFLAGS.SOUL_CULTIVATION] - 45);//Soul Immortal
 			if (game.player.isRace(Races.DRAGON, 1)) max += 50;
 			if (game.player.isRace(Races.DRAGON,2)) max += 50;
-			if (game.player.pigScore() >= 10) max += 25;
-			if (game.player.pigScore() >= 15) max += 20;
+			if (game.player.isRace(Races.PIG, 1)) max += 25;
+			if (game.player.isRace(Races.PIG, 1)) max += 20;
 			if (game.player.orcaScore() >= 14) max += 35;
 			if (game.player.orcaScore() >= 20) max += 25;
 			if (hasPerk(PerkLib.EzekielBlessing)) max += 50;

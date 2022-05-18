@@ -8,6 +8,9 @@ import classes.Race;
 public class CheshireRace extends Race{
 	public function CheshireRace(id:int) {
 		super("Cheshire", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.faceType(Face.CHESHIRE, +2)
@@ -31,7 +34,7 @@ public class CheshireRace extends Race{
 									|| body.rearType == RearBody.LION_MANE
 									|| CatRace.isHellcatLike(body)
 									|| CatRace.isDisplacerLike(body));
-						},0,-100
+						},0,-1000
 				);
 		
 		addMutation(IMutationsLib.CatLikeNimblenessIM);

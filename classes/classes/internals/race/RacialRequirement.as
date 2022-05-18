@@ -44,9 +44,10 @@ public class RacialRequirement {
 	}
 	
 	public function check(body:BodyData, currentScore:int):Boolean {
-		return currentScore >= minScore && checkFn(body);
+		return (minScore === 0 || currentScore >= minScore) && checkFn(body);
 	}
 	public function calcScore(body: BodyData, currentScore:int):int {
+		if (minScore > 0 && currentScore < minScore) return 0;
 		return check(body, currentScore) ? passScore(body) : failScore;
 	}
 	public function describe(body: BodyData):String {

@@ -10,6 +10,9 @@ public class YetiRace extends Race {
 	
 	public function YetiRace(id: int) {
 		super("Yeti", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.skinBaseColor(ANY(YetiSkinColors), +1)

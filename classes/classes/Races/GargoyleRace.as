@@ -12,6 +12,9 @@ public class GargoyleRace extends Race {
 	
 	public function GargoyleRace(id:int) {
 		super("Gargoyle", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.hairColor(ANY(GargoyleHairColors), +1)

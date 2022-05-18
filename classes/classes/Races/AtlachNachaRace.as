@@ -12,6 +12,9 @@ import classes.Race;
 public class AtlachNachaRace extends Race{
 	public function AtlachNachaRace(id:int) {
 		super("Atlach Nacha", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.legType(LowerBody.CHITINOUS_SPIDER_LEGS, +1)

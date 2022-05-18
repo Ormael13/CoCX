@@ -6,6 +6,9 @@ import classes.Race;
 public class RhinoRace extends Race {
 	public function RhinoRace(id:int) {
 		super("Rhino", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.earType(Ears.RHINO, +1)

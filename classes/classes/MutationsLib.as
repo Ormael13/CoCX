@@ -626,9 +626,7 @@ public class MutationsLib
 					return player.elfScore() >= 11 || player.isRace(Races.WOODELF);
 				}, "Elf race");
 				FeyArcaneBloodstream.requireBloodsteamMutationSlot().requireRace(Races.FAIRY);
-				FloralOvaries.requireOvariesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.alrauneScore() >= 13;
-				}, "Alraune race");
+				FloralOvaries.requireOvariesMutationSlot().requireRace(Races.ALRAUNE);
 				FrozenHeart.requireHeartMutationSlot().requireRace(Races.YUKIONNA);
 				GazerEye.requireEyesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.eyes.type == 36;
@@ -720,9 +718,7 @@ public class MutationsLib
 				PigBoarFat.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.thickness >= 100;
 				}, "100+ thickness")
-				.requireCustomFunction(function (player:Player):Boolean {
-					return player.pigScore() >= 10;
-				}, "Pig/Boar race");
+				.requireRace(Races.PIG);
 				RaijuCathode.requirePeripheralNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.raijuScore() >= 10;
 				}, "Raiju race");

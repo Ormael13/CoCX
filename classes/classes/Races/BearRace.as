@@ -9,6 +9,9 @@ public class BearRace extends Race {
 	
 	public function BearRace(id: int) {
 		super("Bear", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.faceType(ANY(Face.BEAR, Face.PANDA), +1)

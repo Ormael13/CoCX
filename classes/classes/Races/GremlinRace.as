@@ -12,10 +12,13 @@ public class GremlinRace extends Race {
 	
 	public function GremlinRace(id:int) {
 		super("Gremlin", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.faceType(Face.CRAZY, +1)
-				.earType(Ears.GREMLIN, +1, -100)
+				.earType(Ears.GREMLIN, +1, -1000)
 				.hairType(Hair.CRAZY, +1)
 				.eyeColor(ANY(GremlinEyeColors), +1)
 				.height(LESS_THAN(48), +2)
@@ -45,7 +48,7 @@ public class GremlinRace extends Race {
 					return body.player.hasPlainSkinOnly();
 				},
 				"plain skin; ")
-				.skinBaseColor(ANY(GremlinSkinColors), +1, -100)
+				.skinBaseColor(ANY(GremlinSkinColors), +1, -1000)
 				.skinBaseColor(ANY(GremlinHairColos), +1)
 				.armType(Arms.HUMAN, +1)
 				.legType(LowerBody.HUMAN, +1)

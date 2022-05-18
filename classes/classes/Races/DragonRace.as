@@ -14,6 +14,9 @@ import classes.lists.Gender;
 public class DragonRace extends Race {
 	public function DragonRace(id:int) {
 		super("Dragon", id);
+	}
+	
+	public override function setup():void {
 		addScores()
 				.faceType(ANY(Face.DRAGON, Face.DRAGON_FANGS), +1)
 				.faceType(ANY(Face.JABBERWOCKY, Face.BUCKTOOTH), -10)
@@ -67,7 +70,9 @@ public class DragonRace extends Race {
 					"lib.mult": +0.30,
 					"sens": +20
 				})
-				.withExtraBonuses("+1 Armor / Magic Resistance")
+				.withExtraBonuses(
+						"+1 Armor / Magic Resistance",
+						"+50 Max Hunger")
 				.end();
 		buildTier(24, "elder dragon")
 				.namesMaleFemaleMorphTaur("elder dragon-man","elder dragon-girl",
@@ -84,7 +89,8 @@ public class DragonRace extends Race {
 					"lib.mult": +0.40,
 					"sens": +30
 				})
-				.withExtraBonuses("+4 Armor / Magic Resistance")
+				.withExtraBonuses("+4 Armor / Magic Resistance",
+						"+100 Max Hunger")
 				.end();
 		buildTier(32, "ancient dragon")
 				.namesMaleFemaleMorphTaur("ancient dragon-man","ancient dragon-girl",
@@ -101,7 +107,8 @@ public class DragonRace extends Race {
 					"lib.mult": +0.60,
 					"sens": +40
 				})
-				.withExtraBonuses("+10 Armor / Magic Resistance")
+				.withExtraBonuses("+10 Armor / Magic Resistance",
+						"+100 Max Hunger")
 				.end();
 	}
 }

@@ -11,6 +11,9 @@ import classes.Race;
 public class VampireRace extends Race {
 	public function VampireRace(id:int) {
 		super("Vampire", id)
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.earType(NOT(Ears.BAT), 0, -10)

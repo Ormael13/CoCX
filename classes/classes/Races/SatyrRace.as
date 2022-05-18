@@ -7,6 +7,9 @@ public class SatyrRace extends Race {
 	
 	public function SatyrRace(id: int) {
 		super("Satyr", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.legType(LowerBody.HOOFED, +1)

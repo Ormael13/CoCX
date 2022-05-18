@@ -7,6 +7,9 @@ public class TrollRace extends Race {
 	public function TrollRace(id:int) {
 		super("Troll", id);
 		disabled = true;
+	}
+	
+	public override function setup():void {
 		
 		buildTier(10, "troll")
 				.buffs({

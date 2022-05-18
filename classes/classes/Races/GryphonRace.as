@@ -8,6 +8,9 @@ import classes.Race;
 public class GryphonRace extends Race{
 	public function GryphonRace(id:int) {
 		super("Gryphon", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.hairType(Hair.FEATHER, +1)

@@ -15,15 +15,18 @@ public class GoblinRace extends Race {
 	
 	public function GoblinRace(id:int) {
 		super("Goblin", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.faceType(ANY(Face.HUMAN, Face.ANIMAL_TOOTHS), +1)
-				.earType(Ears.ELFIN, +1, -100)
+				.earType(Ears.ELFIN, +1, -1000)
 				.height(LESS_THAN(48), +1)
 				.hasPerk(PerkLib.GoblinoidBlood, +1)
 				.hasPerk(PerkLib.BouncyBody, +1)
 				.skinPlainOnly(+1)
-				.skinBaseColor(ANY(GoblinSkinColors), +1, -100)
+				.skinBaseColor(ANY(GoblinSkinColors), +1, -1000)
 				.hasVagina(+1);
 		addConditionedScores(
 				function (body:BodyData):Boolean {

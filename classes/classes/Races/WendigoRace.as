@@ -8,6 +8,9 @@ import classes.VaginaClass;
 public class WendigoRace extends Race {
 	public function WendigoRace(id:int) {
 		super("Wendigo", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.hairColor("silver-white", +1)

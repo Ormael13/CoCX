@@ -8,6 +8,9 @@ import classes.Race;
 public class NekomataRace extends Race{
 	public function NekomataRace(id:int) {
 		super("Nekomata", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.faceType(Face.CAT_CANINES, +1)
@@ -32,7 +35,7 @@ public class NekomataRace extends Race{
 									|| CatRace.isCheshireLike(body)
 									|| CatRace.isHellcatLike(body)
 									|| CatRace.isDisplacerLike(body));
-						},0,-100
+						},0,-1000
 				);
 		
 		addMutation(IMutationsLib.CatLikeNimblenessIM);

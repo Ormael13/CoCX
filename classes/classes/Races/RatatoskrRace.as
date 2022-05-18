@@ -8,6 +8,9 @@ public class RatatoskrRace extends Race{
 	
 	public function RatatoskrRace(id:int) {
 		super("Ratatoskr", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.earType(Ears.SQUIRREL, +1)

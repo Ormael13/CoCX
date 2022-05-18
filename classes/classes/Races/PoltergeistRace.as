@@ -12,6 +12,9 @@ import classes.Race;
 public class PoltergeistRace extends Race{
 	public function PoltergeistRace(id:int) {
 		super("Poltergeist", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.hairType(Hair.GHOST, +1)

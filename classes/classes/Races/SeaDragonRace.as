@@ -10,6 +10,9 @@ public class SeaDragonRace extends Race{
 	
 	public function SeaDragonRace(id:int) {
 		super("Sea Dragon", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.hornType(Horns.SEA_DRAGON, +1)

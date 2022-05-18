@@ -597,6 +597,7 @@ use namespace CoC;
 			var armorDef:Number = _armor.def;
 			armorDef += upperGarment.armorDef;
 			armorDef += lowerGarment.armorDef;
+			var tier:int;
 			//Blacksmith history!
 			if (armorDef > 0 && (hasPerk(PerkLib.HistorySmith) || hasPerk(PerkLib.PastLifeSmith))) {
 				var smithPBonus:Number = 1.05;
@@ -630,27 +631,25 @@ use namespace CoC;
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorDef += (1 * newGamePlusMod);
 			//Plant races score bonuses
-			if (plantScore() >= 4) {
-				if (plantScore() >= 7) armorDef += (10 * newGamePlusMod);
-				else if (plantScore() == 6) armorDef += (8 * newGamePlusMod);
-				else if (plantScore() == 5) armorDef += (4 * newGamePlusMod);
-				else armorDef += (2 * newGamePlusMod);
-			}
-			if (yggdrasilScore() >= 10 || alrauneScore() >= 13) armorDef += (10 * newGamePlusMod);
-			var tier:int;
+			tier = racialTier(Races.PLANT);
+			if (tier >= 4) armorDef += (10 * newGamePlusMod);
+			else if (tier >= 3) armorDef += (8 * newGamePlusMod);
+			else if (tier >= 2) armorDef += (4 * newGamePlusMod);
+			else if (tier >= 1) armorDef += (2 * newGamePlusMod);
+			if (isRace(Races.YGGDRASIL) || isRace(Races.ALRAUNE)) armorDef += (10 * newGamePlusMod);
 			
 			//Dragon score bonuses
-			tier = racialTierNumber(Races.DRAGON);
+			tier = racialTier(Races.DRAGON);
 			if (tier >= 3) armorDef += (10 * newGamePlusMod);
 			else if (tier >= 2) armorDef += (4 * newGamePlusMod);
 			else if (tier >= 1) armorDef += (1 * newGamePlusMod);
 			
-			tier = racialTierNumber(Races.FROSTWYRM);
+			tier = racialTier(Races.FROSTWYRM);
 			/*if (tier >= 3) armorDef += (10 * newGamePlusMod);
 			else */if (tier >= 2) armorDef += (4 * newGamePlusMod);
 			else if (tier >= 1) armorDef += (1 * newGamePlusMod);
 			
-			tier = racialTierNumber(Races.SEA_DRAGON);
+			tier = racialTier(Races.SEA_DRAGON);
 			if (tier >= 2) armorDef += (5 * newGamePlusMod);
 			else if (tier >= 1) armorDef += (1 * newGamePlusMod);
 			
@@ -879,21 +878,21 @@ use namespace CoC;
 				else if (plantScore() == 5) armorDef += (4 * newGamePlusMod);
 				else armorDef += (2 * newGamePlusMod);
 			}*/
-			if (yggdrasilScore() >= 10) armorMDef += (10 * newGamePlusMod);
+			if (isRace(Races.YGGDRASIL)) armorMDef += (10 * newGamePlusMod);
 			var tier:int;
 			
 			//Dragon score bonuses
-			tier = racialTierNumber(Races.DRAGON);
+			tier = racialTier(Races.DRAGON);
 			if (tier >= 3) armorMDef += (10 * newGamePlusMod);
 			else if (tier >= 2) armorMDef += (4 * newGamePlusMod);
 			else if (tier > 1) armorMDef += (1 * newGamePlusMod);
 			
-			tier = racialTierNumber(Races.FROSTWYRM);
+			tier = racialTier(Races.FROSTWYRM);
 			if (tier >= 2) armorMDef += (4 * newGamePlusMod);
 			else if (tier >= 1) armorMDef += (1 * newGamePlusMod);
 			
 			
-			tier = racialTierNumber(Races.SEA_DRAGON);
+			tier = racialTier(Races.SEA_DRAGON);
 			if (tier >= 2) armorMDef += (5 * newGamePlusMod);
 			else if (tier > 1) armorMDef += (1 * newGamePlusMod);
 			
@@ -3406,8 +3405,36 @@ use namespace CoC;
 		}
 
 		public function bodyData():BodyData {
-			// TODO caching
+			// TODO @aimozg caching?
 			return new BodyData(this);
+		}
+		
+		/**
+		 * Array of [race:Race, score:int, tier:int], indexed by race id
+		 */
+		public var racialScores:Array = [];
+		public function needToUpdateRacialCache():Boolean {
+			// TODO @aimozg caching
+			return true;
+		}
+		public function updateRacialCache():void {
+			var body:BodyData = bodyData();
+			for each (var race:Race in Race.AllEnabledRaces) {
+				var score:int = race.totalScore(body);
+				var tier:int = race.getTierNumber(body, score);
+				racialScores[race.id] = [race, score, tier];
+			}
+		}
+		public function updateRacialCacheIfNeeded():void {
+			if (needToUpdateRacialCache()) {
+				updateRacialCache();
+			}
+		}
+		public function racialTierCached(race:Race):int {
+			return racialScores[race.id][2];
+		}
+		public function isRaceCached(race:Race, minTier:int=1):Boolean {
+			return racialTierCached(race) >= minTier;
 		}
 		
 		public function race(generalType:Boolean = false):String {
@@ -3578,26 +3605,6 @@ use namespace CoC;
 			if (TopRace == "lizard") {
 				if (isTaur()) race = "lizan-taur";
 				else race = "lizan";
-			}
-			if (TopRace == "jabberwocky") {
-				if (TopScore >= 10) {
-					if (TopScore >= 30) {
-						if (isTaur()) race = "primal jabberwocky-taur";
-						else race = "primal jabberwocky";
-					}
-					else if (TopScore >= 25) {
-						if (isTaur()) race = "greater jabberwocky-taur";
-						else race = "greater jabberwocky";
-					}
-					else if (TopScore >= 20) {
-						if (isTaur()) race = "jabberwocky-taur";
-						else race = "jabberwocky";
-					}
-					else {
-						if (isTaur()) race = "lesser jabberwocky-taur";
-						else race = "lesser jabberwocky";
-					}
-				}
 			}
 			if (TopRace == "raccoon") {
 				if (TopScore >= 4) {
@@ -3890,19 +3897,6 @@ use namespace CoC;
 					}
 				}
 			}
-			if (TopRace == "alraune") {
-				if (TopScore >= 10 && lowerBody == LowerBody.PLANT_FLOWER) {
-					race = "alraune";
-				}
-				else if (TopScore >= 10 && lowerBody == LowerBody.FLOWER_LILIRAUNE) {
-					race = "liliraune";
-				}
-			}
-			if (TopRace == "yggdrasil") {
-				if (TopScore >= 10) {
-					race = "yggdrasil";
-				}
-			}
 			if (TopRace == "oni") {
 				if (TopScore >= 18) {
 					if (isTaur()) race = "elder oni-taur";
@@ -3934,13 +3928,6 @@ use namespace CoC;
 			if (TopRace == "thunderbird") {
 				if (TopScore >= 21) race = "greater thunderbird";
 				else race = "thunderbird";
-			}
-			if (TopRace == "pig") {
-				if (TopScore >= 15) {
-					race = "boar-morph";
-				} else {
-					race = "pig-morph";
-				}
 			}
 			//if (lowerBody == LowerBody.HOOFED && isTaur() && wings.type == Wings.FEATHERED_LARGE) {
 			//	race = "pegataur";
@@ -4019,17 +4006,14 @@ use namespace CoC;
 			return race.finalizeScore(bodyData(), score);
 		}
 		
-		public function racialScore(race:Race, bodyData:BodyData = null):int {
-			if (!bodyData) bodyData = this.bodyData();
-			return race.totalScore(bodyData);
+		public function racialScore(race:Race):int {
+			return race.totalScore(bodyData());
 		}
-		public function racialTierNumber(race:Race, bodyData:BodyData = null):int {
-			if (!bodyData) bodyData = this.bodyData();
-			return race.getTierNumber(bodyData);
+		public function racialTier(race:Race):int {
+			return race.getTierNumber(bodyData());
 		}
-		public function racialTier(race:Race, bodyData:BodyData = null):RaceTier {
-			if (!bodyData) bodyData = this.bodyData();
-			return race.getTier(bodyData);
+		public function racialTierObject(race:Race):RaceTier {
+			return race.getTier(bodyData());
 		}
 		
 		/**
@@ -4037,7 +4021,7 @@ use namespace CoC;
 		 * DOES NOT mean that this is player's top race!
 		 */
 		public function isRace(race:Race, minTier:int=1):Boolean {
-			return racialTierNumber(race) >= minTier;
+			return racialTier(race) >= minTier;
 		}
 
 		public function racialParagonSelectedRace():Race {
@@ -4221,11 +4205,11 @@ use namespace CoC;
 				chimeraCounter++;
 //			if (plantScore() >= 6)
 //				chimeraCounter++;
-			if (alrauneScore() >= 13)
+			if (isRace(Races.ALRAUNE))
 				chimeraCounter++;
-			if (yggdrasilScore() >= 10)
+			if (isRace(Races.YGGDRASIL))
 				chimeraCounter++;
-			if (pigScore() >= 10)
+			if (isRace(Races.PIG))
 				chimeraCounter++;
 /*			if (satyrScore() >= 4)
 				chimeraCounter++;
@@ -4331,7 +4315,7 @@ use namespace CoC;
 //				grandchimeraCounter++;
 			if (scyllaScore() >= 12)
 				grandchimeraCounter++;
-			if (pigScore() >= 15)
+			if (isRace(Races.PIG, 2))
 				grandchimeraCounter++;
 			if (isRace(Races.WENDIGO, 2))
 				grandchimeraCounter++;
@@ -6519,118 +6503,12 @@ use namespace CoC;
 			return kitshooCounter;
 		}
 
-		//plant score
 		public function plantScore():Number {
-			Begin("Player","racialScore","plant");
-			var plantCounter:Number = 0;
-			if (faceType == Face.HUMAN)
-				plantCounter++;
-			if (faceType == Face.PLANT_DRAGON)
-				plantCounter--;
-			if (horns.type == Horns.OAK || horns.type == Horns.ORCHID)
-				plantCounter++;
-			if (ears.type == Ears.ELFIN)
-				plantCounter++;
-			if (ears.type == Ears.LIZARD)
-				plantCounter--;
-			if ((hairType == Hair.LEAF || hairType == Hair.GRASS) && hairColor == "green")
-				plantCounter++;
-			if (hasPlainSkinOnly() && (InCollection(skin.base.color, ["leaf green", "lime green", "turquoise", "light green"])))
-				plantCounter++;
-		//	if (skinType == 6)/zielona skóra +1, bark skin +2
-		//		plantCounter += 2;
-			if (arms.type == Arms.PLANT)
-				plantCounter++;
-			if (lowerBody == LowerBody.PLANT_HIGH_HEELS || lowerBody == LowerBody.PLANT_ROOT_CLAWS) {
-				if (tentacleCocks() > 0) {
-					plantCounter++;
-				}
-				plantCounter++;
-			}
-			if (wings.type == Wings.PLANT)
-				plantCounter++;
-			if (alrauneScore() >= 13)
-				plantCounter -= 7;
-			if (yggdrasilScore() >= 10)
-				plantCounter -= 4;
-		//	if (scorpionCounter > 0 && perkv1(IMutationsLib.TrachealSystemIM) >= 3)
-		//		plantCounter++;
-			plantCounter = finalRacialScore(plantCounter, Races.PLANT);
-			End("Player","racialScore");
-			return plantCounter;
-		}
-
-		public function alrauneScore():Number {
-			Begin("Player","racialScore","alraune");
-			var alrauneCounter:Number = 0;
-			if (faceType == Face.HUMAN)
-				alrauneCounter++;
-			if (eyes.type == Eyes.HUMAN)
-				alrauneCounter++;
-			if (eyes.colour == "light purple" || "green" || "light green")
-				alrauneCounter++;
-			if (ears.type == Ears.ELFIN)
-				alrauneCounter++;
-			if ((hairType == Hair.LEAF || hairType == Hair.GRASS) && (InCollection(skin.base.color, ["green", "light purple"])))
-				alrauneCounter++;
-			if (hasPlainSkinOnly() && (InCollection(skin.base.color, ["leaf green", "lime green", "turquoise", "light green"])))
-				alrauneCounter++;
-			if (arms.type == Arms.PLANT)
-				alrauneCounter++;
-			if (wings.type == Wings.NONE)
-				alrauneCounter++;
-			if (isAlraune())
-				alrauneCounter += 5;
-			if (stamenCocks() > 0)
-				alrauneCounter++;
-			if (hasVagina() && (vaginaType() == VaginaClass.ALRAUNE))
-				alrauneCounter++;
-			if (perkv1(IMutationsLib.FloralOvariesIM) >= 1)
-				alrauneCounter++;
-			if (perkv1(IMutationsLib.FloralOvariesIM) >= 2)
-				alrauneCounter++;
-			if (perkv1(IMutationsLib.FloralOvariesIM) >= 3)
-				alrauneCounter++;
-			if (perkv1(IMutationsLib.FloralOvariesIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				alrauneCounter++;
-			if (perkv1(IMutationsLib.FloralOvariesIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				alrauneCounter++;
-			if (perkv1(IMutationsLib.FloralOvariesIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				alrauneCounter++;
-			alrauneCounter = finalRacialScore(alrauneCounter, Races.ALRAUNE);
-			End("Player","racialScore");
-			return alrauneCounter;
+			return racialScore(Races.PLANT);
 		}
 
 		public function yggdrasilScore():Number {
-			Begin("Player","racialScore","yggdrasil");
-			var yggdrasilCounter:Number = 0;
-			if (faceType == Face.PLANT_DRAGON)
-				yggdrasilCounter += 2;
-			if ((hairType == Hair.ANEMONE || hairType == Hair.LEAF || hairType == Hair.GRASS) && hairColor == "green")
-				yggdrasilCounter++;
-			if (ears.type == Ears.LIZARD)
-				yggdrasilCounter++;
-			if (ears.type == Ears.ELFIN)
-				yggdrasilCounter -= 2;
-			if (arms.type == Arms.PLANT || arms.type == Arms.PLANT2)
-				yggdrasilCounter += 2;//++ - untill claws tf added arms tf will count for both arms and claws tf
-			//claws?
-
-			if (wings.type == Wings.PLANT)
-				yggdrasilCounter++;
-			//skin(fur(moss), scales(bark))
-			if (skinType == Skin.SCALES)
-				yggdrasilCounter++;
-			if (tentacleCocks() > 0 || stamenCocks() > 0)
-				yggdrasilCounter++;
-			if (lowerBody == LowerBody.YGG_ROOT_CLAWS)
-				yggdrasilCounter++;
-			if (tailType == Tail.YGGDRASIL)
-				yggdrasilCounter++;
-			yggdrasilCounter = finalRacialScore(yggdrasilCounter, Races.YGGDRASIL);
-			End("Player","racialScore");
-			return yggdrasilCounter;
+			return racialScore(Races.YGGDRASIL);
 		}
 
 		public function wolfScore():Number {
@@ -6642,59 +6520,7 @@ use namespace CoC;
 		}
 
 		public function pigScore():Number {
-			Begin("Player","racialScore","pig");
-			var pigCounter:Number = 0;
-			if (ears.type == Ears.PIG)
-				pigCounter++;
-			if (tailType == Tail.PIG)
-				pigCounter++;
-			if (faceType == Face.PIG)
-				pigCounter++;
-			if (arms.type == Arms.PIG)
-				pigCounter += 2;
-			if (lowerBody == LowerBody.CLOVEN_HOOFED)
-				pigCounter++;
-			if (hasPlainSkinOnly())
-				pigCounter++;
-			if (InCollection(skin.base.color, ["pink", "tan", "sable"]))
-				pigCounter++;
-			if (thickness >= 75)
-				pigCounter++;
-			if (pigCocks() > 0)
-				pigCounter++;
-			if (pigCounter >= 4) {
-				if (arms.type == Arms.HUMAN)
-					pigCounter++;
-				if (wings.type == Wings.NONE)
-					pigCounter++;
-				if (thickness >= 150)
-					pigCounter++;
-			}
-			if (faceType == Face.BOAR || arms.type == Arms.BOAR) {
-				if (faceType == Face.BOAR)
-					pigCounter += 2;
-				if (arms.type == Arms.BOAR)
-					pigCounter += 2;
-				if (InCollection(skin.base.color, ["pink", "dark blue"]))
-					pigCounter += 2;
-				if (hasFur() && (InCollection(coatColor, ["dark brown", "brown", "black", "red", "grey"])))
-					pigCounter += 2;
-			}
-			if (perkv1(IMutationsLib.PigBoarFatIM) >= 1)
-				pigCounter++;
-			if (perkv1(IMutationsLib.PigBoarFatIM) >= 2)
-				pigCounter++;
-			if (perkv1(IMutationsLib.PigBoarFatIM) >= 3)
-				pigCounter++;
-			if (perkv1(IMutationsLib.PigBoarFatIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				pigCounter++;
-			if (perkv1(IMutationsLib.PigBoarFatIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				pigCounter++;
-			if (perkv1(IMutationsLib.PigBoarFatIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				pigCounter++;
-			pigCounter = finalRacialScore(pigCounter, Races.PIG);
-			End("Player","racialScore");
-			return pigCounter;
+			return racialScore(Races.PIG);
 		}
 
 		public function rhinoScore():Number {
@@ -8104,20 +7930,6 @@ use namespace CoC;
 					currentSen += 15;
 				}
 			}//+60/50-60
-			if (pigScore() >= 10) {
-				if (pigScore() >= 15) {
-					maxStrCap2 += 125;
-					maxTouCap2 += 125;
-					maxSpeCap2 -= 15;
-					maxIntCap2 -= 10;
-				} else {
-					maxStrCap2 += 60;
-					maxTouCap2 += 120;
-					maxSpeCap2 -= 15;
-					maxIntCap2 -= 10;
-					maxWisCap2 -= 5;
-				}
-			}
 			if (mantisScore() >= 12) {
 				maxStrCap2 -= 40;
 				maxTouCap2 += 60;
@@ -8211,42 +8023,6 @@ use namespace CoC;
 					maxIntCap2 += 40;
 				}
 			}//+30/30-40
-			if (plantScore() >= 4) {
-				if (plantScore() >= 7) {
-					maxStrCap2 += 25;
-					maxTouCap2 += 100;
-					maxSpeCap2 -= 50;
-				} else if (plantScore() == 6) {
-					maxStrCap2 += 20;
-					maxTouCap2 += 80;
-					maxSpeCap2 -= 40;
-				} else if (plantScore() == 5) {
-					maxStrCap2 += 10;
-					maxTouCap2 += 50;
-					maxSpeCap2 -= 20;
-				} else {
-					maxTouCap2 += 30;
-					maxSpeCap2 -= 10;
-				}
-			}//+20(40)(60)(75)/10-20(30-40)(50-60)(70-80)
-			if (alrauneScore() >= 13) {
-				if (alrauneScore() >= 17) {
-					maxTouCap2 += 115;
-					maxSpeCap2 -= 60;
-					maxLibCap2 += 200;
-				}
-				maxTouCap2 += 100;
-				maxSpeCap2 -= 50;
-				maxLibCap2 += 145;
-			}
-			if (yggdrasilScore() >= 10) {
-				maxStrCap2 += 50;
-				maxTouCap2 += 70;
-				maxSpeCap2 -= 50;
-				maxIntCap2 += 50;
-				maxWisCap2 += 80;
-				maxLibCap2 -= 50;
-			}//+150
 			if (firesnailScore() >= 15) {
 				maxStrCap2 += 70;
 				maxTouCap2 += 175;

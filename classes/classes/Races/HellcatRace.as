@@ -8,14 +8,17 @@ import classes.Race;
 public class HellcatRace extends Race{
 	public function HellcatRace(id:int) {
 		super("Hellcat", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.faceType(ANY(Face.CAT, Face.CAT_CANINES), +1)
-				.eyeType(Eyes.INFERNAL, +1, -100)
+				.eyeType(Eyes.INFERNAL, +1, -1000)
 				.earType(Ears.CAT, +1)
 				.tongueType(Tongue.CAT, +1)
-				.hairType(Hair.BURNING, +1, -100)
-				.tailType(ANY(Tail.BURNING, Tail.TWINKASHA), +1, -100)
+				.hairType(Hair.BURNING, +1, -1000)
+				.tailType(ANY(Tail.BURNING, Tail.TWINKASHA), +1, -1000)
 				.tailTypeAndCount(Tail.TWINKASHA, 2, +2)
 				.armType(Arms.CAT, +1)
 				.legType(LowerBody.CAT, +1)
@@ -31,7 +34,7 @@ public class HellcatRace extends Race{
 									|| CatRace.isNekomataLike(body)
 									|| CatRace.isCheshireLike(body)
 									|| CatRace.isDisplacerLike(body));
-						},0,-100
+						},0,-1000
 				);
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
 		// TODO @aimozg +10% speed if has Flexibility perk

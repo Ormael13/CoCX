@@ -10,6 +10,9 @@ public class DarkSlimeRace extends Race {
 	
 	public function DarkSlimeRace(id:int) {
 		super("Dark slime", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.skinBaseColor(ANY(DarkSlimeSkinColors), +1)

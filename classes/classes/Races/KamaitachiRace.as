@@ -6,8 +6,12 @@ import classes.Race;
 public class KamaitachiRace extends Race {
 	public static const KamaitachiHairColors:/*String*/Array = ["blonde", "yellow", "caramel", "brown", "emerald"];
 	public static const KamaitachiFurColors:/*String*/Array = KamaitachiHairColors;
+	
 	public function KamaitachiRace(id:int) {
 		super("Kamaitachi", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.earType(Ears.WEASEL, +1)

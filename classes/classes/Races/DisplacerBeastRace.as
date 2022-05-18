@@ -10,6 +10,9 @@ public class DisplacerBeastRace extends Race {
 	
 	public function DisplacerBeastRace(id:int) {
 		super("Displacer beast", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.faceType(ANY(Face.CAT,Face.CAT_CANINES), +1)
@@ -18,8 +21,8 @@ public class DisplacerBeastRace extends Race {
 				.earType(Ears.DISPLACER, +1)
 				.tailType(Tail.CAT, +1)
 				.legType(LowerBody.LION, +1)
-				.armType(Arms.DISPLACER, +3, -100)
-				.rearType(RearBody.DISPLACER_TENTACLES, +2, -100)
+				.armType(Arms.DISPLACER, +3, -1000)
+				.rearType(RearBody.DISPLACER_TENTACLES, +2, -1000)
 				.skinCoatType(Skin.FUR, +1)
 				.skinCoatColor(ANY(DisplacerFurColors), +1)
 				.skinBaseColor("dark gray", +1)
@@ -32,7 +35,7 @@ public class DisplacerBeastRace extends Race {
 									|| body.rearType == RearBody.LION_MANE
 									|| CatRace.isCheshireLike(body)
 									|| CatRace.isHellcatLike(body));
-						},0,-100
+						},0,-1000
 				);
 		
 		addMutation(IMutationsLib.CatLikeNimblenessIM);

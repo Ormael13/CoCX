@@ -7,6 +7,9 @@ import classes.Race;
 public class CentipedeRace extends Race {
 	public function CentipedeRace(id:int) {
 		super("Centipede", id);
+	}
+	
+	public override function setup():void {
 		
 		addScores()
 				.faceType(Face.ANIMAL_TOOTHS, +1)
