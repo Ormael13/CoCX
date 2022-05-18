@@ -40,7 +40,7 @@ public class MinotaurKingScenes extends BaseContent
 		{
 			if (!recalling) {
 				flags[kFLAGS.MINOTAURKING_DEFEATED] = 1;
-				outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+				outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			}
 			//Cannot be defeated by HP loss, so only writing lust win texts.
 			clearOutput();
