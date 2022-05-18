@@ -1830,7 +1830,6 @@ public class SaveUpdater extends NPCAwareContent {
 				updateMutationsv3("Thyroid");
 				updateMutationsv3("PThyroid");
 				updateMutationsv3("Adaptations");
-
 				function updateMutationsv3(type:String):void{
 					var arrayVal:int = 0;
 					var arrayValY:Boolean = false;
@@ -1886,11 +1885,11 @@ public class SaveUpdater extends NPCAwareContent {
 					player.setWeaponRange(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID]) as WeaponRange);
 					flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = 0;
 				}
-				outputText("\n\n Weapons duplication from woodelves hunting party should now be fixed.... again.");
+				outputText("\n\nWeapons duplication from woodelves hunting party should now be fixed.... again.");
 				for each (var mutation:PerkType in MutationsLib.mutationsArray("", true)){
 					player.removePerk(mutation);
 				}
-				outputText("Also, remove old mutations again.")
+				outputText(" Also, remove old mutations again.")
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.018;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
@@ -2048,4 +2047,4 @@ public class SaveUpdater extends NPCAwareContent {
 	}
 
 }
-}
+}
