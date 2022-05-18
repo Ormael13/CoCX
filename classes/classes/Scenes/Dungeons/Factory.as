@@ -512,7 +512,7 @@ use namespace CoC;
 					dynStats("cor", 5);
 					cleanupAfterCombat();
 				}
-				else doNext(camp.recallWakeUp);
+				else doNext(recallWakeUp);
 			}
 			//FEMSAUCE
 			function vagF():void {
@@ -536,7 +536,7 @@ use namespace CoC;
 				dynStats("cor", 1);
 				cleanupAfterCombat();
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		public function doForcefeedSuccubus():void {
@@ -587,7 +587,7 @@ use namespace CoC;
 				dynStats("lus", -50);
 				cleanupAfterCombat();
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		public function dildoSuccubus():void {
@@ -607,7 +607,7 @@ use namespace CoC;
 				dynStats("lus", (20 + (player.lib/5) + (player.cor/10)));
 				cleanupAfterCombat();
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		//can be called for generic succubi
@@ -872,7 +872,7 @@ use namespace CoC;
 				dynStats("cor", 2);
 				cleanupAfterCombat();
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		public function incubusButtfuck():void {
@@ -911,7 +911,7 @@ use namespace CoC;
 				player.sexReward("Default", "Dick", true, false);
 				cleanupAfterCombat();
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		public function incubusGetVaginal():void {
@@ -938,7 +938,7 @@ use namespace CoC;
 				dynStats("cor", 2);
 				cleanupAfterCombat();
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		public function doOralIncubus():void {
@@ -957,7 +957,7 @@ use namespace CoC;
 				player.sexReward("cum", "Lips");
 				cleanupAfterCombat();
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		//Omnibus Overseer
@@ -1899,7 +1899,7 @@ use namespace CoC;
 		}
 
 		public function secretarialSuccubusDefeated(hpVictory:Boolean = false):void {
-			var leave:Function = recalling ? camp.recallWakeUp : cleanupAfterCombat;
+			var leave:Function = recalling ? recallWakeUp : cleanupAfterCombat;
 			clearOutput();
 			if (!recalling) {
 				flags[kFLAGS.FACTORY_SUCCUBUS_DEFEATED] = 1;

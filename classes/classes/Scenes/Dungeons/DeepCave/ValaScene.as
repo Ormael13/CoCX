@@ -134,7 +134,7 @@ public class ValaScene extends BaseContent implements SaveableState
                     flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
                     doNext(playerMenu);
                 }
-                else doNext(camp.recallWakeUp);
+                else doNext(recallWakeUp);
                 
             }
             function vagF_2():void {
@@ -151,7 +151,7 @@ public class ValaScene extends BaseContent implements SaveableState
                     flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
                     doNext(playerMenu);
                 }
-                else doNext(camp.recallWakeUp);
+                else doNext(recallWakeUp);
 			}
 		}
 
@@ -218,7 +218,7 @@ public class ValaScene extends BaseContent implements SaveableState
 				flags[kFLAGS.FREED_VALA] = 1;
 				doNext(playerMenu);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 
         public function healValaPearl():void {
@@ -236,7 +236,7 @@ public class ValaScene extends BaseContent implements SaveableState
 				flags[kFLAGS.FREED_VALA] = 1;
 				doNext(playerMenu);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 
 		//Vala
@@ -296,7 +296,7 @@ public class ValaScene extends BaseContent implements SaveableState
 					flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
 					doNext(playerMenu);
 				}
-				else doNext(camp.recallWakeUp);
+				else doNext(recallWakeUp);
 			}
 		}
 
@@ -388,7 +388,7 @@ public class ValaScene extends BaseContent implements SaveableState
 					flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
 					doNext(playerMenu);
 				}
-				else doNext(camp.recallWakeUp);
+				else doNext(recallWakeUp);
 			}
 		}
 
@@ -494,7 +494,7 @@ public class ValaScene extends BaseContent implements SaveableState
 					flags[kFLAGS.TIMES_PC_DEFEATED_VALA_AND_RAEPED]++;
 					cleanupAfterCombat();
 				}
-				else doNext(camp.recallWakeUp);
+				else doNext(recallWakeUp);
 			}
 		}
 

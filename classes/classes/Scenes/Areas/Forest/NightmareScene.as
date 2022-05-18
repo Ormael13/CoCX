@@ -243,7 +243,7 @@ public class NightmareScene extends BaseContent
 			}
 			//should be reached ONLY with recall
 			if (!recalling) throw new Error("Bruh, SH messed up the returns. Report this pls.");
-			doNext(camp.recallWakeUp);
+			doNext(recallWakeUp);
 		}
 	}
 }

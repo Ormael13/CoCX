@@ -472,7 +472,7 @@ use namespace CoC;
 			menu();
 			addButton(0, "Talk", talkToKiri).hint("Have some talk with Kiri.");
 			addButton(1, "Sex", kiriSexIntro).hint("Use Kiri to sate your lusts. After all, your lust can make a difference between your success and failure.");
-			addButton(4, "Back", recalling ? camp.recallWakeUp : playerMenu);
+			addButton(4, "Back", recalling ? recallWakeUp : playerMenu);
 		}
 		
 		//Kiri -- [Talk]
@@ -579,7 +579,7 @@ use namespace CoC;
 				cheatTime(1 / 3, true);
 				doNext(playerMenu);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		//Kiri -- [Sex] -- [Get Licked]
@@ -598,7 +598,7 @@ use namespace CoC;
 				cheatTime(1 / 3, true);
 				doNext(playerMenu);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		//[Valeria]
@@ -1082,7 +1082,7 @@ use namespace CoC;
 			//removed checks - should be called ONLY with a cock.
 			addButton(1, "Anal", harpyQueenSexAnal);
 			addButton(2, "Vaginal", vaginalHarpyQueenSex);
-			addButton(4, "Back", recalling ? camp.recallWakeUp : playerMenu);
+			addButton(4, "Back", recalling ? recallWakeUp : playerMenu);
 		}
 		//Harpy Queen Sex -- [Dick in Anal]
 		public function harpyQueenSexAnal():void {
@@ -1105,7 +1105,7 @@ use namespace CoC;
 				cheatTime(1 / 3, true);
 				doNext(playerMenu);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		//Harpy Queen Sex -- [Vaginal]
@@ -1142,7 +1142,7 @@ use namespace CoC;
 				cheatTime(1 / 3, true);
 				doNext(playerMenu);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		//Throne Room -- [Harpy Queen] -- [Interrogate]

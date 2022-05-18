@@ -283,7 +283,7 @@ public class DriderIncubusScenes extends BaseContent
 			else doneGoblin = true;
 
 			if (recalling)
-				addButton(14, "Wake Up", camp.recallWakeUp);
+				addButton(14, "Wake Up", recallWakeUp);
 			else if (doneDriderbus && doneGoblin)
 				afterDriderbuttFight();
 

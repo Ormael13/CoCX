@@ -65,7 +65,7 @@ import classes.Scenes.SceneLib;
 				flags[kFLAGS.D3_CENTAUR_DEFEATED] = CENTAUR_KILLED;
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 
 		private function letHerGo():void
@@ -76,7 +76,7 @@ import classes.Scenes.SceneLib;
 				flags[kFLAGS.D3_CENTAUR_DEFEATED] = CENTAUR_RELEASED;
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 
 		private function maleFuckHer():void
@@ -126,7 +126,7 @@ import classes.Scenes.SceneLib;
 				dynStats("cor+", 5);
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 
 		private static const HORZGOG:int = 0;
@@ -256,7 +256,7 @@ import classes.Scenes.SceneLib;
 				if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 		
 		public function inSovietCoCPonyRidesYou(hpVictory:Boolean, pcCameWorms:Boolean):void
