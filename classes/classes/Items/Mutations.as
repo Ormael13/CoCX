@@ -12035,23 +12035,18 @@ public final class Mutations extends MutationsHelper {
         mutationStep(nFoxTails == 6 && player.level >= 30 && player.inte >= 90 && player.wis >= 90 && (!player.hasPerk(PerkLib.EnlightenedKitsune) || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (!player.hasPerk(PerkLib.EnlightenedNinetails) || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 3, function ():void {
             outputText("[pg]");
             transformations.TailFox(7).applyEffect();
-            if (!player.hasPerk(PerkLib.CorruptedKitsune)) {
-                outputText("[pg]But something is wrong...  The cosmic power radiating from your body feels... tainted somehow. The corruption pouring off your body feels... good.</b>");
-                outputText("[pg](Perk Gained: Corrupted Kitsune - Grants Corrupted Fox Fire and Terror special attacks.)");
-                player.createPerk(PerkLib.CorruptedKitsune, 0, 0, 0, 0);
-                dynStats("lus", 5, "cor", 5);
-                MutagenBonus("lib", 1);
-            }
+            corruptKitsunecheck();
         });
         mutationStep(nFoxTails == 7 && player.level >= 36 && player.inte >= 105 && player.wis >= 105 && (!player.hasPerk(PerkLib.EnlightenedKitsune) || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (!player.hasPerk(PerkLib.EnlightenedNinetails) || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 4, function ():void {
             outputText("[pg]");
             transformations.TailFox(8).applyEffect();
+            corruptKitsunecheck();
         });
         //[Grow 9th tail and gain Corrupted Nine-tails perk]
         mutationStep(nFoxTails == 8 && player.level >= 42 && player.inte >= 120 && player.wis >= 120 && (!player.hasPerk(PerkLib.EnlightenedNinetails) || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 4, function ():void {
             outputText("[pg]");
             transformations.TailFox(9).applyEffect();
-
+            corruptKitsunecheck();
             if (!player.hasPerk(PerkLib.CorruptedNinetails)) {
                 outputText("[pg]But something is strange...  The cosmic power radiating from your body feels... somehow more tainted than before. The corruption pouring off your body feels... amazingly good.</b>");
                 outputText("[pg]You have the inexplicable urge to set fire to the world, just to watch it burn. With your newfound power, it's a goal that is well within reach.");
@@ -12062,6 +12057,15 @@ public final class Mutations extends MutationsHelper {
             }
 
         });
+        function corruptKitsunecheck():void{
+            if (!player.hasPerk(PerkLib.CorruptedKitsune)) {
+                outputText("[pg]But something is wrong...  The cosmic power radiating from your body feels... tainted somehow. The corruption pouring off your body feels... good.</b>");
+                outputText("[pg](Perk Gained: Corrupted Kitsune - Grants Corrupted Fox Fire and Terror special attacks.)");
+                player.createPerk(PerkLib.CorruptedKitsune, 0, 0, 0, 0);
+                dynStats("lus", 5, "cor", 5);
+                MutagenBonus("lib", 1);
+            }
+        }
         //Kitsune Human face
         mutationStep(player.faceType != Face.FOX && player.faceType != Face.HUMAN, 3, function ():void {
             outputText("[pg]");
