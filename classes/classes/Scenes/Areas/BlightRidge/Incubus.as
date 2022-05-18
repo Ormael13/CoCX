@@ -30,37 +30,9 @@ use namespace CoC;
 			else SceneLib.dungeons.factory.doLossIncubus(false);
 		}
 		
-		private function cockTripAttack():void {
-			if (hasStatusEffect(StatusEffects.Blind)) { //Blind dodge change
-				outputText(capitalA + short + " suddenly grows it's dick to obscene lengths and tries to trip you with it.  Thankfully he's so blind he wasn't aiming anywhere near you!");
-				return;
-			}
-			outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + Appearance.buttDescription(player) + " and pull your [legs] out from under you.");
-			if ((player.spe-30) > rand(60)) {
-				outputText("  You spin as you fall, twisting your [legs] free and springing back to your [feet] unharmed.");
-			}
-			else { //Fall down go boom
-				outputText("  You land hard on your ass, momentarily stunned as the demonic cock-tentacle curls around your [legs], smearing them with oozing demonic fluids.");
-				if (player.lust >= 80 || player.cor >= 80) {
-					outputText("  Moaning with desire, you lick your lips as you slide your well-lubricated [legs] free.  You gather a dollop of cum and lick it seductively, winking at the incubus and hoping to make him cave into his desire.");
-					player.dynStats("lus", 13, "cor", 1);
-				}
-				else if (player.lust >= 50 || player.cor >= 50) {
-					outputText("  Blushing at the scent and feel of cum on your [legs], you twist and pull free.  You find yourself wondering what this demon's dick would taste like.");
-					player.dynStats("lus", 8 + player.cor / 20);
-				}
-				else {
-					outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed [legs].");
-					player.dynStats("lus", 5 + player.cor / 20);
-				}
-				player.takePhysDamage(5);
-			}
-			outputText("\nThe incubus gives an overconfident smile as his cock retracts away from you, returning to its normal size.");
-		}
-		
 		private function cockTripAttack2():void {
 			if (hasStatusEffect(StatusEffects.Blind)) { //Blind dodge change
-				outputText(capitalA + short + " suddenly grows it's dick to obscene lengths and tries to trip you with it.  Thankfully he's so blind he wasn't aiming anywhere near you!");
+				outputText(capitalA + short + " suddenly grows its dick to obscene lengths and tries to trip you with it.  Thankfully he's so blind he wasn't aiming anywhere near you!");
 				return;
 			}
 			outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + Appearance.buttDescription(player) + " and pull your [legs] out from under you.");

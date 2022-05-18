@@ -7,7 +7,6 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.Armors.LustyMaidensArmor;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -50,7 +49,6 @@ public class IncubusMechanic extends Monster {
 			}
 		}
 
-	//todo: try to adapt those for regular incubus
 		private function cockTripAttack():void {
 			if (hasStatusEffect(StatusEffects.Blind)) { //Blind dodge change
 				outputText(capitalA + short + " suddenly grows it's dick to obscene lengths and tries to trip you with it.  Thankfully he's so blind he wasn't aiming anywhere near you!");
