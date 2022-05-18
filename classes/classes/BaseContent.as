@@ -646,7 +646,7 @@ import coc.xxc.StoryContext;
 
 		protected function MutagenBonus(statName: String, bonus: Number):Boolean
 		{
-			player.MutagenBonus(statName,bonus);
+			return player.MutagenBonus(statName,bonus);
 		}
 
 		protected function AlchemyBonus(statName: String, bonus: Number):void
