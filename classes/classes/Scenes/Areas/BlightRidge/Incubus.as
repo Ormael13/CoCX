@@ -27,7 +27,7 @@ use namespace CoC;
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
 			if (inDungeon) SceneLib.dungeons.ebonlabyrinth.defeatedByStrayDemon();
-			else SceneLib.defiledravine.demonScene.loseToIncubusOmnibus();
+			else SceneLib.dungeons.factory.doLossIncubus(false);
 		}
 		
 		private function cockTripAttack():void {

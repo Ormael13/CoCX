@@ -7,6 +7,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Items.Consumables.SimpleConsumable;
+import classes.Scenes.Dungeons.D3.IncubusMechanicScenes;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.Places.WoodElves;
@@ -3132,7 +3133,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.LunaOff)) player.removeStatusEffect(StatusEffects.LunaOff);
 		else {
 			player.createStatusEffect(StatusEffects.LunaOff, 0, 0, 0, 0);
-			flags[kFLAGS.SLEEP_WITH] == "";
+			if (flags[kFLAGS.SLEEP_WITH] == "Luna") flags[kFLAGS.SLEEP_WITH] = "";
 		}
 		SparrableNPCsMenu();
 	}
@@ -4759,7 +4760,7 @@ public function rebirthFromBadEnd():void {
         menu();
         //Marble scene
 		if (flags[kFLAGS.MARBLE_PURIFIED] == 1)
-			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight, false).hint("The punishment for Marble's bitchy sister.");
+			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight).hint("The punishment for Marble's bitchy sister.");
 		//Excellia slave first scene
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2)
 			addButton(1, "Excellia Slv", SceneLib.excelliaFollower.ExcelliaPathChoiceMakeSlave).hint("Excellia acknowledges herself as your slave.");
@@ -4797,11 +4798,20 @@ public function rebirthFromBadEnd():void {
 
 	public function recallScenes_dungeons():void {
 		menu();
-		if (flags[kFLAGS.SANDWITCH_MOB_DEFEATED])
-			addButton(0, "SandWitchMob", SceneLib.dungeons.desertcave.yoYouBeatUpSomeSandWitchesYOUMONSTER).hint("Punish some sand witches for attacking you.");
-		if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1, "Deep Cave", recallScenes_deepCave);
-		if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(2, "Stronghold", recallScenes_d3);
+		if (flags[kFLAGS.SANDWITCH_MOB_DEFEATED]) addButton(0, "SandWitchMob", SceneLib.dungeons.desertcave.yoYouBeatUpSomeSandWitchesYOUMONSTER).hint("Punish some sand witches for attacking you.");
+		if (flags[kFLAGS.FACTORY_FOUND]) addButton(1, "Factory", recallScenes_factory);
+		if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(2, "Deep Cave", recallScenes_deepCave);
+		if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(3, "Stronghold", recallScenes_d3);
 		addButton(14, "Back", recallScenes);
+	}
+
+	public function recallScenes_factory():void {
+		menu();
+		if (flags[kFLAGS.FACTORY_SUCCUBUS_DEFEATED])
+			addButton(0, "Sec.Succubus", SceneLib.dungeons.factory.secretarialSuccubusDefeated).hint("Do you have a fetish for sharply-dressed demon girls?");
+		if (flags[kFLAGS.FACTORY_INCUBUS_DEFEATED])
+			addButton(1, "Inc.Mechanic", SceneLib.dungeons.factory.incubusMechanicDefeated).hint("What, again?");
+		addButton(14, "Back", recallScenes_dungeons);
 	}
 
 	public function recallScenes_deepCave():void {
@@ -4820,22 +4830,18 @@ public function rebirthFromBadEnd():void {
 
 	public function recallScenes_d3():void {
 		menu();
-		//Doppel
 		if (flags[kFLAGS.D3_MIRRORS_SHATTERED])
 			addButton(0, "Doppelganger", SceneLib.d3.doppleganger.punchYourselfInTheBalls).hint("Go fuck yourself!");
-		//DriderIncubus
 		if (flags[kFLAGS.DRIDERINCUBUS_DEFEATED])
-			addButton(1, "DriderI & M", SceneLib.d3.driderIncubus.beatTheSpooderbutt, false).hint("Recall the glorious defeat of the drider-incubus and maybe take your 'reward'.");
-		//HermCentaur
+			addButton(1, "DriderI & M", SceneLib.d3.driderIncubus.beatTheSpooderbutt).hint("Recall the glorious defeat of the drider-incubus and maybe take your 'reward'.");
 		if (flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0)
-			addButton(2, "HermCentaur", SceneLib.d3.hermCentaur.beatThePony, false).hint("Get your 'reward' for beating the herm centaur in the stronghold.");
-		//MinoKing
+			addButton(2, "HermCentaur", SceneLib.d3.hermCentaur.beatThePony).hint("Get your 'reward' for beating the herm centaur in the stronghold.");
 		if (flags[kFLAGS.MINOTAURKING_DEFEATED] > 0)
 			addButton(3, "M.King & Exc", SceneLib.d3.minotaurKing.theKingIsDeadLongLiveTheKing).hint("If you didn't have time or the mood for using 2 cowsluts before fighting Lethice, you can do it in your imagination!");
-		//Lethice
 		if (flags[kFLAGS.LETHICE_DEFEATED] > 0)
-			addButton(4, "Lethice", SceneLib.d3.lethice.defeated, false).hint("While you can't make her your eternal slave, you can punish her for her arrogance in your memories as much as you want.");
-
+			addButton(4, "Lethice", SceneLib.d3.lethice.defeated).hint("While you can't make her your eternal slave, you can punish her for her arrogance in your memories as much as you want.");
+		if (flags[kFLAGS.D3_MECHANIC_LAST_GREET] == IncubusMechanicScenes.MECHANIC_FOUGHT)
+			addButton(5, "Inc.Mechanic", SceneLib.d3.incubusMechanic.beatDaMechanic).hint("What, again?");
 		addButton(14, "Back", recallScenes_dungeons);
 	}
 
@@ -4845,5 +4851,6 @@ public function rebirthFromBadEnd():void {
         recalling = false; //EVERY recall scene must return here to clear the flag.
         doNext(returnToCampUseOneHour);
     }
-	}
+
+}
 }
