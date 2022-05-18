@@ -1952,9 +1952,9 @@ public class Combat extends BaseContent {
 		addButton(0, "Next", combatMenu, false);
 	}
 
-    public function willothewispattacks():void {
+    public function willothewispattacks(noSkip:Boolean = false):void {
         outputText("\n\n");
-		willothewispattacks0();
+		if (noSkip) willothewispattacks0();
         if (flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1 && flags[kFLAGS.WILL_O_THE_WISP] == 0) {
             flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] = 1;
             menu();
@@ -1962,13 +1962,12 @@ public class Combat extends BaseContent {
         } else enemyAI();
     }
 	private function willothewispattacks0():void {
-		var willothewispDamage:Number = 0;
+		var willothewispDamage:Number = 10;
         willothewispDamage += intwisscaling() * 0.4;
         /*bonus do dmgh wisp-a jeśli sa inne pety/miniony ^^ im wiecej podwładnych ma tym mocniej sam bedzie bił (jak efekt perku później w drzewie Job: Leader ^^)
 	if (summonedElementals >= 1) elementalDamage += baseDamage;
 	if (summonedElementals >= 5) elementalDamage += baseDamage;
 	if (summonedElementals >= 9) elementalDamage += baseDamage;*/
-        if (willothewispDamage < 10) willothewispDamage = 10;
         if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) willothewispDamage *= historyTacticianBonus();
         var willothewispamplification:Number = 1;
         if (player.weapon == weapons.SCECOMM) willothewispamplification += 0.5;

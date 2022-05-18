@@ -60,7 +60,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		public function freeValazLooseCoochie():void {
             spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
-			if (!recalling) outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			outputText("You search the room for a way to free the fairy from her shackles and find an ugly, iron key that looks like a promising candidate. Opening the rusted metal with a teeth-clenching screech, the girl slumps to the ground in an ungainly heap. The fall seems to have roused her, at least, because she blinks, slowly, several times before lifting her head to stare blankly at you. You try to explain that she's free, but it's clear that thoughts are travelling through a pretty thick haze of abuse, so you take a moment to let her gather herself. When she's managed to assemble what wits are left to her, she slowly curls her mouth into a hopeful smile. \"<i>How can Bitch please Master?</i>\" she asks in an innocent voice tainted by husky desire.\n\n");
 			outputText("You bend down to comfort the girl and offer her a shoulder to lean on as you help her to her feet. As you expected, the weight of her milky tits nearly surpasses the rest of her body. She clings to you happily, stroking and rubbing her bare skin against your body. She is adamantly ignoring your efforts to dissuade her amorous advances, merely cooing \"<i>master</i>\" and \"<i>pleasure</i>\" over and over again.\n\n");
 			menu();
@@ -158,7 +158,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		public function leftValaAlone():void {
 			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
-			if (!recalling) outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			//first post meeting
 			if(flags[kFLAGS.INVESTIGATED_VALA_AFTER_ZETAZ_DEFEATED] == 0 || flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] == 0) {
 				outputText("Having dispatched the foul master of this cavern, you return to the broken fairy. She is lying as you left her, apparently still as oblivious to the world beyond her pussy and asshole as before. You try to rouse the girl from her near comatose state, but she responds only in terse, disjointed phrases. When you urge her to leave the dungeon, she seems confused and refuses. When you offer to shelter her at your camp, she grows panicked, apparently so inured to her captivity that the thought of freedom frightens her into paralysis. Nothing you say seems to reach her dulled brain and you realize that even if she were willing to come with you, having a broken, drugged, branded fairy at your camp might alienate your friends or send the wrong message to potential allies. There's nothing for it- you're going to have to leave her here.\n\n");

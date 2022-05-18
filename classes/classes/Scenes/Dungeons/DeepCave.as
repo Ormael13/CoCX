@@ -337,7 +337,7 @@ use namespace CoC;
 			//Flag them defeated!
 			if (!recalling) {
                 flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED] = 1;
-                outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+                outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
             }
 			if(!recalling && monster.HP <= monster.minHP()) outputText("The last of the imps collapses into the pile of his defeated comrades.  You're not sure how you managed to win a lopsided fight, but it's a testament to your new-found prowess that you succeeded at all.");
 			else outputText("The last of the imps collapses, pulling its demon-prick free from the confines of its loincloth.  Surrounded by masturbating imps, you sigh as you realize how enslaved by their libidos the foul creatures are.");
@@ -519,7 +519,7 @@ use namespace CoC;
 		public function defeatZetaz():void {
 			if (!recalling) {
                 flags[kFLAGS.DEFEATED_ZETAZ]++;
-                outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+                outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
             }
 			clearOutput();
 			//[VICTORY HP]

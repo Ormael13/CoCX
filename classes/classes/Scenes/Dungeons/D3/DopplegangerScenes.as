@@ -55,7 +55,7 @@ import classes.PerkLib;
 			if (!recalling) {
 				flags[kFLAGS.D3_DOPPLEGANGER_DEFEATED] = 1;
 				player.createKeyItem("Laybans", 0, 0, 0, 0);
-				outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+				outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			}
 			
 			clearOutput();
