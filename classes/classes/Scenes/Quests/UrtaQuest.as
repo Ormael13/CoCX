@@ -295,9 +295,9 @@ public function startUrtaQuest():void {
 	player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_DROOLING;
 	player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_NORMAL;
 	player.clitLength = 1;
-	player.strStat.core.value = 163;
-	player.touStat.core.value = 183;
-	player.speStat.core.value = 198;
+	player.strStat.core.value = 187;
+	player.touStat.core.value = 203;
+	player.speStat.core.value = 218;
 	player.intStat.core.value = 80;
 	player.wisStat.core.value = 70;
 	player.libStat.core.value = 120;
@@ -310,9 +310,9 @@ public function startUrtaQuest():void {
 	player.gems = 183;
 	player.level = 30;
 	player.teaseLevel = 15;
-	player.strStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 34);
-	player.touStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 37);
-	player.speStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 40);
+	player.strStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 39);
+	player.touStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 43);
+	player.speStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 46);
 	player.intStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 20);
 	player.wisStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 18);
 	player.libStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 30);
@@ -1048,7 +1048,7 @@ private function urtaGameOver():void {
 //PC could perhaps use some of these with proper training, maybe Urta would teach them some moves?
 
 //1-2 round stun, 1-2 round blind, throat punch (2-3 round silence?)
-//Side Winder: 70% damage + stun chance
+//Side Winder: 75% damage + stun chance
 //Vault: 250% damage vs stunned
 //Combo: 3x attack, guaranteed hit vs blind
 //Dirt Kick: Blind 1-3 rounds
@@ -1064,12 +1064,12 @@ public function urtaSpecials():void {
         return;
 	}
 	menu();
-	addButton(0, "Combo", urtaComboAttack).hint("Make a three-hit combo.  Each attack has an extra 33% chance to miss, unless the target is blind. \n\nFatigue cost: 75");
+	addButton(0, "Combo", urtaComboAttack).hint("Make a four-hit combo.  Each attack has an extra 33% chance to miss, unless the target is blind. \n\nFatigue cost: 75");
 	addButton(1, "Vault", urtaVaultAttack).hint("Make a vaulting attack for an extra 50% damage.  Automatically crits stunned foes. \n\nFatigue cost: 60");
 	addButton(2, "Sidewinder", urtaSidewinder).hint("An attack that hits for reduced damage but can stun enemy. \n\nFatigue cost: 100");
-	addButton(3, "Dirt Kick", urtaDirtKick).hint("Attempt to blind your foe with a spray of kicked dirt. \n\nFatigue cost: 15");
-	addButton(4, "Metabolize", urtaMetabolize).hint("Convert 5% of your maximum HP into fatigue.");
-	addButton(5, "SecondWind", urtaSecondWind).hint("Regain 50% of your HP, 200 fatigue, and reduce lust by 200.", "Second Wind");
+	addButton(3, "Dirt Kick", urtaDirtKick).hint("Attempt to blind your foe with a spray of kicked dirt. \n\nFatigue cost: 25");
+	addButton(5, "Metabolize", urtaMetabolize).hint("Convert 5% of your maximum HP into fatigue.");
+	addButton(6, "SecondWind", urtaSecondWind).hint("Regain 75% of your HP, 200 fatigue, and reduce lust by 200.", "Second Wind");
 	addButton(14, "Back", combat.combatMenu, false);
 }
 
@@ -1102,8 +1102,8 @@ private function berzerk():void {
 
 private function urtaMetabolize():void {
 	clearOutput();
-	var damage:int = player.takePhysDamage(Math.round(player.maxHP()/5));
-	outputText("You work your body as hard as you can, restoring your fatigue at the cost of health. (" + damage + ")\nRestored 25 fatigue!\n\n");
+	var damage:int = player.takePhysDamage(Math.round(player.maxHP()/20));
+	outputText("You work your body as hard as you can, restoring your fatigue at the cost of health. (" + damage + ")\nRestored 100 fatigue!\n\n");
 	fatigue(-100);
     SceneLib.combat.enemyAIImpl();
 }
@@ -1119,7 +1119,7 @@ private function urtaSecondWind():void {
 		return;
 	}
 	monster.createStatusEffect(StatusEffects.UrtaSecondWinded,3,0,0,0);
-	HPChange(Math.round(player.maxHP()*0.5),false);
+	HPChange(Math.round(player.maxHP()*0.75),false);
 	fatigue(-200);
 	dynStats("lus", -200);
 	outputText("Closing your eyes for a moment, you focus all of your willpower on pushing yourself to your absolute limits, forcing your lusts down and drawing on reserves of energy you didn't know you had!\n\n");
@@ -1140,7 +1140,7 @@ private function urtaComboAttack():void {
 		}
 		fatigue(75);
 	}
-	if (!player.hasStatusEffect(StatusEffects.Attacks)) player.createStatusEffect(StatusEffects.Attacks,3,0,0,0);
+	if (!player.hasStatusEffect(StatusEffects.Attacks)) player.createStatusEffect(StatusEffects.Attacks,4,0,0,0);
 	else {
 		player.addStatusValue(StatusEffects.Attacks,1,-1);
 		trace("DECREMENDED ATTACKS");
@@ -1226,7 +1226,7 @@ private function urtaComboAttack():void {
 //Dirt Kick
 private function urtaDirtKick():void {
 	clearOutput();
-	if(player.fatigue + 15 > player.maxFatigue()) {
+	if(player.fatigue + 25 > player.maxFatigue()) {
 		outputText("You are too fatigued to use that ability!");
 //Gone		menuLoc = 3;
 //		doNext(combat.combatMenu);
@@ -1234,7 +1234,7 @@ private function urtaDirtKick():void {
 		addButton(0, "Next", combat.combatMenu, false);
 		return;
 	}
-	fatigue(15);
+	fatigue(25);
 	//Blind
 	if (player.hasStatusEffect(StatusEffects.Blind)) outputText("You attempt to dirt kick, but as blinded as you are right now, you doubt you'll have much luck!  ");
 	else outputText("Spinning about, you drag your footpaw through the dirt, kicking a wave of debris towards [themonster]!  ");
@@ -1247,12 +1247,12 @@ private function urtaDirtKick():void {
 	else if (monster.hasStatusEffect(StatusEffects.Blind)) outputText(monster.mf("He","She") + "'s already blinded.  What a waste.\n\n");
 	else {
 		outputText(monster.mf("He","She") + "'s blinded!\n\n");
-		monster.createStatusEffect(StatusEffects.Blind, 2 + rand(3),0,0,0);
+		monster.createStatusEffect(StatusEffects.Blind, 3 + rand(2),0,0,0);
 	}
     SceneLib.combat.enemyAIImpl();
 }
 
-//SideWinder: 50% damage + 80% chance for stun
+//SideWinder: 75% damage + 80% chance for stun
 private function urtaSidewinder():void {
 	clearOutput();
 	if(player.fatigue + 100 > player.maxFatigue()) {
@@ -1282,8 +1282,8 @@ private function urtaSidewinder():void {
 	//Weapon addition!
 	if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.05));
 	else damage *= (3.5 + ((player.weaponAttack - 50) * 0.04));
-	//50% crappier than normal attack.
-	damage *= 0.5;
+	//25% crappier than normal attack.
+	damage *= 0.75;
 	//Determine if critical hit!
 	var crit:Boolean = false;
 	var critChance:int = 15;
@@ -1377,8 +1377,8 @@ private function urtaVaultAttack():void {
 	//Weapon addition!
 	if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.05));
 	else damage *= (3.5 + ((player.weaponAttack - 50) * 0.04));
-	//50% better than normal attack.
-	damage *= 1.5;
+	//100% better than normal attack.
+	damage *= 2;
 	//Determine if critical hit!
 	var crit:Boolean = false;
 	var critChance:int = 15;

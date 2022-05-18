@@ -314,7 +314,7 @@ package classes.Scenes
 			outputText("-Added separate options for curing different curse tiers at the Temple. (Svalkash)\n");
 			outputText("-Added cooldowns for Ayane's and Diana's cure buttons. (Svalkash)\n");
 			outputText("-Demonic Mage Tail Ornament now unequips itself if no tail is present. Thanks for the report, Sacremas! :P (Svalkash)\n");
-			outputText("-\n");
+			outputText("-Urta Quest PC got bit better phys stats and her specials got bit more punch added.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -417,7 +417,12 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -445,6 +450,7 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
