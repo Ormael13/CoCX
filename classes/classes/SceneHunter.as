@@ -6,6 +6,12 @@ public class SceneHunter extends BaseContent {
         return "<i>Selectors, menus and checks are currently added to: Holidays, Beach, BlightRidge, Desert, Forest, GlacialRift, HighMountains, Mountains, Ocean, Plains, Swamp encounters (not including some unique NPCs and dungeons yet).</i>";
     }
 
+    /*
+    * TODO list:
+    *  Valeria first fight - lose and win. Add results to spar?
+    *
+    * */
+
     public function settingsPage():void {
         clearOutput();
         menu();

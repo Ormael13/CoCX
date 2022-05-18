@@ -4802,6 +4802,8 @@ public function rebirthFromBadEnd():void {
 		if (flags[kFLAGS.FACTORY_FOUND]) addButton(1, "Factory", recallScenes_factory);
 		if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(2, "Deep Cave", recallScenes_deepCave);
 		if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(3, "Stronghold", recallScenes_d3);
+		if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(3, "Stronghold", recallScenes_d3);
+		if (SceneLib.dungeons.checkPhoenixTowerClear()) addButton(4, "PhoenixTower", recallScenes_phoenixTower);
 		addButton(14, "Back", recallScenes);
 	}
 
@@ -4844,6 +4846,23 @@ public function rebirthFromBadEnd():void {
 			addButton(5, "Inc.Mechanic", SceneLib.d3.incubusMechanic.beatDaMechanic).hint("What, again?");
 		addButton(14, "Back", recallScenes_dungeons);
 	}
+
+	public function recallScenes_phoenixTower():void {
+		menu();
+		if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED]) {//Kiri disappears after the win
+			addButton(0, "Kiri", /*clearWrapper,*/ SceneLib.dungeons.heltower.kiriInteraction).hint("If you were too busy slaughtering phoenixes and didn't have time to properly 'interact' with Kiri, here's your new chance.");
+			addButton(1, "HarpyQueen", SceneLib.dungeons.heltower.fuckHarpyQueen).hint("Oops. Harpy queen is dead already. But she'll live forever in your memories. For <i>any</i> purposes.")
+		}
+	}
+
+	//I'll delete it if I won't find another way to use it.
+	/*
+	//clears output before going to menu
+	public function clearWrapper(fun:Function, ...args):void {
+		clearOutput();
+		fun.apply(null,args);
+	}
+	*/
 
     public function recallWakeUp():void {
 		clearOutput();
