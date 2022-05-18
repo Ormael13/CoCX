@@ -531,10 +531,11 @@ public class SceneHunter extends BaseContent {
         outputText("You close your eyes, remembering all this life put you through. All your fights, friends... lovers.\n\n");
         outputText("Though many things are still repeatable, you still remember some unique events of your life, and one question bothers you - what would happen if you were different at the moment? How would you and your companions look and behave right now?\n");
         outputText("Falling asleep, you think about it, recalling the exact time and place...\n\n");
-        outputText("\n\n<b>This part is WIP, and will be updated with SceneHunter.</b>");
-        outputText("\n<i>All scenes listed here are unique one-timers that contained multiple choices or different variations for player's - or even followers' - race or body parts. When recalling, your <b>current</b> body and game state is used, so you can try to explore more options for yourself!");
+        outputText("\n\n<i><b>This part is WIP, and will be updated with SceneHunter.</b>");
+        outputText("\nAll scenes listed here are unique one-timers that contained multiple choices or different variations for player's race or bodyparts. When recalling, your <b>current</b> body and game state is used, so you can try to explore more options for yourself!");
         outputText("\nOf course, you need to unlock the scene in the game first. The hints are provided above the buttons.");
-        outputText("\nIt's recommended to enable SceneHunter 'Print Checks' feature to keep track of all hidden checks during these scenes.</i>");
+        outputText("\nIt's recommended to enable SceneHunter 'Print Checks' feature to keep track of all hidden checks during these scenes.");
+        outputText("\n<b>Recalling wastes some in-game time, but it will never change any of your stats. If such occasion occurs, please report it as a bug.</b></i>");
         recalling = true; //Setting the flag to disable everything but text
         menu();
         //Marble scene
@@ -582,7 +583,7 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(2, "Deep Cave", recallScenes_deepCave);
         if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(3, "Stronghold", recallScenes_d3);
         if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(3, "Stronghold", recallScenes_d3);
-        if (SceneLib.dungeons.checkPhoenixTowerClear()) addButton(4, "PhoenixTower", recallScenes_phoenixTower);
+        if (flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED]) addButton(4, "PhoenixTower", recallScenes_phoenixTower);
         addButton(14, "Back", recallScenes);
     }
 
@@ -628,10 +629,9 @@ public class SceneHunter extends BaseContent {
 
     private function recallScenes_phoenixTower():void {
         menu();
-        if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED]) {//Kiri disappears after the win
-            addButton(0, "Kiri", /*clearWrapper,*/ SceneLib.dungeons.heltower.kiriInteraction).hint("If you were too busy slaughtering phoenixes and didn't have time to properly 'interact' with Kiri, here's your new chance.");
-            addButton(1, "HarpyQueen", SceneLib.dungeons.heltower.fuckHarpyQueen).hint("Oops. Harpy queen is dead already. But she'll live forever in your memories. For <i>any</i> purposes.");
-        }
+        //Harpy defeat is checked earlier. Kiri disappears after it too.
+        addButton(0, "Kiri", /*clearWrapper,*/ SceneLib.dungeons.heltower.kiriInteraction).hint("If you were too busy slaughtering phoenixes and didn't have time to properly 'interact' with Kiri, here's your new chance.");
+        addButton(1, "HarpyQueen", SceneLib.dungeons.heltower.fuckHarpyQueen).hint("Oops. Harpy queen is dead already. But she'll live forever in your memories. For <i>any</i> purposes.");
         addButton(14, "Back", recallScenes_dungeons);
     }
 

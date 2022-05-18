@@ -901,6 +901,7 @@ use namespace CoC;
 			//(Acquired Key Item: \"<i>Harpy Key B</i>\")
 			player.createKeyItem("Harpy Key B",0,0,0,0);
 			flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] = 1;
+			outputText("\n\n<b>New scenes are unlocked in 'Recall' menu!</b>");
 			//(PC moves to Throne Room Main Menu:)
 			cleanupAfterCombat();
 		}

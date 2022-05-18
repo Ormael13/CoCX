@@ -918,7 +918,7 @@ import coc.xxc.StoryContext;
 			CoC.instance.gameSettings.sceneHunter_inst._recalling = val;
 		}
 		protected function recallWakeUp():void {
-			CoC.instance.gameSettings.sceneHunter_inst.recallWakeUp();
+			CoC.instance.gameSettings.sceneHunter_inst.recallWakeUpImpl();
 		}
 		//============================
 
