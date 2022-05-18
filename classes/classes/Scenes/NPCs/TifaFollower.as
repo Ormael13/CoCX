@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Antennae;
@@ -14,11 +14,11 @@ import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
-	
+
 public class TifaFollower extends NPCAwareContent
 	{
 		
-		public function TifaFollower() 
+		public function TifaFollower()
 		{
 		}
 
@@ -97,7 +97,7 @@ public function tifaMainMenuTalkBeeLife():void {
 }
 public function tifaMainMenuTalkRelations():void {
 	clearOutput();
-	outputText("What's the standing of relations between bees and the other races."+(player.phoenixScore() >= 10 ? " You overheard that the sand witches and harpies had very close relationships with the hives.":"")+"\n\n");
+	outputText("What's the standing of relations between bees and the other races."+(player.isRace(Races.PHOENIX) ? " You overheard that the sand witches and harpies had very close relationships with the hives.":"")+"\n\n");
 	outputText("\"<i>While the hivezzz are open to any alliance that may involve willing incubatorzzz for our eggzzz, outsiderzzz aren’t allowed in the hivezzz proper and are limited to parley with the queen’zzz emizzzary, often a handmaiden. Thizzz helpzzz keep threats to the hive outzzzide, however azzz you might have notizzzed thizzz izzz not a failproof zzzolution and ");
 	outputText("zzzometimezzz a corrupted bee hazzz to be put down for the good of everyone.</i>\"\n\nWhat does it take for outsiders to gain entry then?\n\n");
 	outputText("\"<i>Outsiderzzz don’t gain entry. They never do. However zzzome bee morphzzz who aren’t affiliated to a hive are zzzometimezzz allowed the gift of bonding. As you may know pure bee honey hazzz powerful tranzzzformative capabilitiezzz and can fully transform even a native marethian into a bee morph. For mozzzt thizzz izzz azzz far azzz it goezzz azzz even thizzz tranzzzformativezzz cannot fully grant you our anatomy. ");

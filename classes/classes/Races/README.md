@@ -3,18 +3,20 @@
 * Check generated requirement names
 * Check score functions checking non-tiers
 * Inline `xxxxScore` functions?
-* `allRacialScores`/`allRacialTiers` functions
 * fangs in `-morph/boy/girl`
 * iterate in chimeras
 * kill array of objects in `race()`
 * solve unicornkin/alicornkin races
 * racial paragon and like stat buffs
 * RSB.hasFur/hasFurOfColor
+* consider moving naming function from tier to race
 * Future:
   * racial score caching
   * `Race.onTierUp`/`onTierDown` - see `PlayerEvents:1500`
   * "Racial form" maybe? (gargoyles, alicorn/nightmare, elementals - same tier, diff. requirements/bonuses)
   * manifest race/tier (for testing)
+  * add buffable stats: armor, magic resistance, evasion, unarmed dmg
+  * finish converting elemental stuff? eh...
 
 # New Race system
 
@@ -132,6 +134,23 @@ Examples:
 To penalize race for having certain part, it is better to add `NOT`-requirement with `0` score and negative `failScore`.
 
 Fail score of -1000 means that this is an absolute requirement.
+
+### Custom requirements
+
+TODO @aimozg
+
+### Group wrappers
+
+To gate a requirement(s) behind minimum score from previous requirements, use `addScoresAfter()`:
+
+```as
+addScoresAfter(4)
+  .faceType(Face.FOX, +1);
+
+=> +1 score for fox face, but only if already has score 4 
+```
+
+TODO @aimozg addConditionedScores
 
 ### Mutations and bloodline bonuses
 

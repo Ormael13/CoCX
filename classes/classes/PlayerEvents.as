@@ -1425,14 +1425,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Lustzerker perk
-			if ((player.salamanderScore() >= 9 || player.phoenixScore() >= 10) && (!player.hasPerk(PerkLib.Lustzerker))) { //Check for gain of lustzerker - requires legs, arms and tail
+			if ((player.salamanderScore() >= 9 || player.isRace(Races.PHOENIX)) && (!player.hasPerk(PerkLib.Lustzerker))) { //Check for gain of lustzerker - requires legs, arms and tail
 				if (!player.hasPerk(PerkLib.Lustzerker)) {
 					outputText("\nAfter drinking the last drop another hip flask of firewater you starts to feel a weird, maybe slightly unpleasant feeling inside your body.  Like many tiny flames cursing inside your veins making you ponder whats just happening with your body.  Remembering about salamanders natural talent to enter a berserk-like state you quess that should be it.\n\n(<b>Gained Perk: Lustzerker</b>)");
 					player.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
 					needNext = true;
 				}
 			}
-			else if (player.salamanderScore() < 9 && player.phoenixScore() < 10 && player.hasPerk(PerkLib.Lustzerker) && player.perkv4(PerkLib.Lustzerker) == 0 && !player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 1) { //Remove lustzerker perk if not meeting requirements
+			else if (player.salamanderScore() < 9 && !player.isRaceCached(Races.PHOENIX) && player.hasPerk(PerkLib.Lustzerker) && player.perkv4(PerkLib.Lustzerker) == 0 && !player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 1) { //Remove lustzerker perk if not meeting requirements
 				outputText("\nAll of sudden something change inside your body.  You think about a long while, until it dawned on you.  You can't feel that slight warm feeling inside your body anymore meaning for now no more lustzerking.\n\n(<b>Lost Perk: Lustzerker</b>)");
 				player.removePerk(PerkLib.Lustzerker);
 				needNext = true;
@@ -1576,7 +1576,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText(")</b>\n");
 				needNext = true;
 			}
-			if ((player.isRaceCached(Races.SIREN) || player.harpyScore() >=  8 || player.phoenixScore() >=  10 || player.thunderbirdScore() >=  10) && !player.hasPerk(PerkLib.HarpySong)) {
+			if ((player.isRaceCached(Races.SIREN) || player.harpyScore() >=  8 || player.isRaceCached(Races.PHOENIX) || player.thunderbirdScore() >=  10) && !player.hasPerk(PerkLib.HarpySong)) {
 				outputText("\n Your voice sound like magicaly entrancing music to your ears now, it would seem you have gained the infamous magicaly compeling voices common to harpies. <b>Gained Perks: Harpy Song</b>)\n");
 				player.createPerk(PerkLib.HarpySong, 0, 0, 0, 0);
 				needNext = true;
@@ -1587,7 +1587,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.MelkieSong);
 				needNext = true;
 			}
-			if (!player.isRaceCached(Races.SIREN) && player.harpyScore() < 8 && player.phoenixScore() < 10 && player.thunderbirdScore() <  10 && player.hasPerk(PerkLib.HarpySong) && !player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 1) {
+			if (!player.isRaceCached(Races.SIREN) && player.harpyScore() < 8 && !player.isRaceCached(Races.PHOENIX) && player.thunderbirdScore() <  10 && player.hasPerk(PerkLib.HarpySong) && !player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 1) {
 				outputText("\n Your voice no longer carries the magical power it used to and thus you are no longer able to use your compelling aria. <b>Lost Perks: Harpy Song</b>)\n");
 				player.removePerk(PerkLib.HarpySong);
 				needNext = true;
@@ -1669,12 +1669,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Fire Affinity
-			if ((player.salamanderScore() >= 4 || player.phoenixScore() >= 10 || player.isRaceCached(Races.HELLCAT) || player.firesnailScore() >= 15 || (player.mouseScore() >= 12 && player.lowerBody == LowerBody.HINEZUMI && player.arms.type == Arms.HINEZUMI && player.tailType == Tail.HINEZUMI)) && !player.hasPerk(PerkLib.FireAffinity)) {
+			if ((player.salamanderScore() >= 4 || player.isRaceCached(Races.PHOENIX) || player.isRaceCached(Races.HELLCAT) || player.isRaceCached(Races.FIRESNAILS) || (player.mouseScore() >= 12 && player.lowerBody == LowerBody.HINEZUMI && player.arms.type == Arms.HINEZUMI && player.tailType == Tail.HINEZUMI)) && !player.hasPerk(PerkLib.FireAffinity)) {
 				outputText("\nYou suddenly feels your body temperature rising to ridiculus level. You pant for several minutes until you're finally at ease with your bodily heat. You doubt any more heat is going to make you more uncomfortable then this as you quietly soak in the soothing warmth your body naturally produce. It's like your body is made out of living fire.\n\n(<b>Gained Perk: Fire Affinity</b>)\n");
 				player.createPerk(PerkLib.FireAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((player.salamanderScore() < 4 && player.phoenixScore() < 10 && !player.isRaceCached(Races.HELLCAT) && player.firesnailScore() < 15 && player.mouseScore() < 12 && player.lowerBody != LowerBody.HINEZUMI && player.arms.type != Arms.HINEZUMI && player.tailType != Tail.HINEZUMI) && player.hasPerk(PerkLib.FireAffinity)) {
+			else if ((player.salamanderScore() < 4 && !player.isRaceCached(Races.PHOENIX) && !player.isRaceCached(Races.HELLCAT) && !player.isRaceCached(Races.FIRESNAILS) && player.mouseScore() < 12 && player.lowerBody != LowerBody.HINEZUMI && player.arms.type != Arms.HINEZUMI && player.tailType != Tail.HINEZUMI) && player.hasPerk(PerkLib.FireAffinity)) {
 				outputText("\nYou suddenly feel chilly as your bodily temperature drop down to human level. You lost your natural warmth reverting to that of a standard human.\n\n<b>(Lost Perk: Fire Affinity)</b>\n");
 				player.removePerk(PerkLib.FireAffinity);
 				needNext = true;
@@ -1854,12 +1854,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Titanic Strength
-			if ((player.hydraScore() >= 14 || player.oniScore() >= 12 || player.orcaScore() >= 17 || player.scyllaScore() >= 12 || player.isRaceCached(Races.FROSTWYRM) || player.isRaceCached(Races.CYCLOP) || player.isRaceCached(Races.SEA_DRAGON)) && player.tallness >= 80 && !player.hasPerk(PerkLib.TitanicStrength)) {
+			if ((player.isRace(Races.HYDRA) || player.oniScore() >= 12 || player.orcaScore() >= 17 || player.isRace(Races.SCYLLA, 2) || player.isRaceCached(Races.FROSTWYRM) || player.isRaceCached(Races.CYCLOP) || player.isRaceCached(Races.SEA_DRAGON)) && player.tallness >= 80 && !player.hasPerk(PerkLib.TitanicStrength)) {
 				outputText("\nWhoa, you've grown so big its a sheer miracle you don't damage the landscape while moving. That said, your size now contributes to your strength as well.\n\n<b>(Gained Titanic Strength perk!)</b>\n");
 				player.createPerk(PerkLib.TitanicStrength, 0, 0, 0, 0);
 				needNext = true;
 			}
-				if (((player.hydraScore() < 14 && player.oniScore() < 12 && player.orcaScore() < 17 && player.scyllaScore() < 12 && !player.isRaceCached(Races.FROSTWYRM) && !player.isRaceCached(Races.CYCLOP) && !player.isRaceCached(Races.SEA_DRAGON)) || player.tallness < 80) && player.hasPerk(PerkLib.TitanicStrength)) {
+				if (((!player.isRace(Races.HYDRA) && player.oniScore() < 12 && player.orcaScore() < 17 && !player.isRace(Races.SCYLLA, 2) && !player.isRaceCached(Races.FROSTWYRM) && !player.isRaceCached(Races.CYCLOP) && !player.isRaceCached(Races.SEA_DRAGON)) || player.tallness < 80) && player.hasPerk(PerkLib.TitanicStrength)) {
 				if (player.tallness < 80) outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
 				else outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
 				player.removePerk(PerkLib.TitanicStrength);

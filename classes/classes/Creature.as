@@ -25,6 +25,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
 import classes.Items.ItemTags;
 import classes.Items.JewelryLib;
+import classes.Races.ElementalRace;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
@@ -3863,17 +3864,35 @@ public class Creature extends Utils
 			}
 			if (game.player.hasStatusEffect(StatusEffects.Snow) && game.player.tallness < 84) chance -= 50;
 			if (hasPerk(PerkLib.ElementalBody)) {
-				if (perkv1(PerkLib.ElementalBody) == 1) {
-					if (perkv2(PerkLib.ElementalBody) == 1) chance += 10;
-					if (perkv2(PerkLib.ElementalBody) == 2) chance += 20;
-					if (perkv2(PerkLib.ElementalBody) == 3) chance += 30;
-					if (perkv2(PerkLib.ElementalBody) == 4) chance += 40;
-				}
-				if (perkv1(PerkLib.ElementalBody) == 3 || perkv1(PerkLib.ElementalBody) == 4)  {
-					if (perkv2(PerkLib.ElementalBody) == 1) chance += 5;
-					if (perkv2(PerkLib.ElementalBody) == 2) chance += 10;
-					if (perkv2(PerkLib.ElementalBody) == 3) chance += 15
-					if (perkv2(PerkLib.ElementalBody) == 4) chance += 20;
+				switch (ElementalRace.getElementAndTier(this)) {
+					case ElementalRace.SYLPH_1:
+						chance += 10;
+						break;
+					case ElementalRace.SYLPH_2:
+						chance += 20;
+						break;
+					case ElementalRace.SYLPH_3:
+						chance += 30;
+						break;
+					case ElementalRace.SYLPH_4:
+						chance += 40;
+						break;
+					case ElementalRace.IGNIS_1:
+					case ElementalRace.UNDINE_1:
+						chance += 5;
+						break;
+					case ElementalRace.IGNIS_2:
+					case ElementalRace.UNDINE_2:
+						chance += 10;
+						break;
+					case ElementalRace.IGNIS_3:
+					case ElementalRace.UNDINE_3:
+						chance += 15;
+						break;
+					case ElementalRace.IGNIS_4:
+					case ElementalRace.UNDINE_4:
+						chance += 20;
+						break;
 				}
 			}
 			if (hasStatusEffect(StatusEffects.Flying)) chance += flychance;

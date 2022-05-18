@@ -195,6 +195,9 @@ public class Race {
 		if (!tier) return 0;
 		return tier.tierNumber;
 	}
+	public function tier(tierNumber:int):RaceTier {
+		return this.tiers[tierNumber-1];
+	}
 	
 	public function nameFor(body:BodyData, score:int=-1):String {
 		if (score < 0) score = this.totalScore(body);

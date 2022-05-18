@@ -16,6 +16,7 @@ import classes.Monster;
 import classes.PerkLib;
 import classes.PotionType;
 import classes.Races;
+import classes.Races.ElementalRace;
 import classes.Scenes.Areas.Beach.Gorgon;
 import classes.Scenes.Areas.Bog.CorruptedMaleTroll;
 import classes.Scenes.Areas.Caves.DisplacerBeast;
@@ -1214,7 +1215,8 @@ public class Combat extends BaseContent {
 			else bd = buttons.add("No limiter", noLimiterState).hint("Toggle on No limiter. (STR+++, ?Lib-?)");
 		}
 		if (player.hasPerk(PerkLib.ElementalBody)) {
-			if (player.perkv1(PerkLib.ElementalBody) == 1) {//sylph
+            var element:int = ElementalRace.getElement(player);
+			if (element == ElementalRace.ELEMENT_SYLPH) {
 				bd = buttons.add("Wind Blade", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsAirE), 1)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
 				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 					bd.disable("Your current soulforce is too low.");
@@ -1230,7 +1232,7 @@ public class Combat extends BaseContent {
 					//True Evasion
 				}
 			}
-			if (player.perkv1(PerkLib.ElementalBody) == 2) {//gnome
+			if (element == ElementalRace.ELEMENT_GNOME) {
 				bd = buttons.add("Wild Growth", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsEarthE), 2)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
 				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 					bd.disable("Your current soulforce is too low.");
@@ -1246,7 +1248,7 @@ public class Combat extends BaseContent {
 					//Adamantine Shell
 				}
 			}
-			if (player.perkv1(PerkLib.ElementalBody) == 3) {//ignis
+			if (element == ElementalRace.ELEMENT_IGNIS) {
 				bd = buttons.add("Pyroblast", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsFireE), 3)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
 				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 					bd.disable("Your current soulforce is too low.");
@@ -1259,7 +1261,7 @@ public class Combat extends BaseContent {
 					//Fiery Rage
 				}
 			}
-			if (player.perkv1(PerkLib.ElementalBody) == 4) {//undine
+			if (element == ElementalRace.ELEMENT_UNDINE) {
 				bd = buttons.add("Hydraulic Torrent", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
 				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 					bd.disable("Your current soulforce is too low.");
@@ -1595,23 +1597,31 @@ public class Combat extends BaseContent {
             else unarmed += 2 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
         }
 		if (player.hasPerk(PerkLib.ElementalBody)) {
-			if (player.perkv1(PerkLib.ElementalBody) == 1) {
-				if (player.perkv2(PerkLib.ElementalBody) == 1) unarmedMulti += .05;
-				if (player.perkv2(PerkLib.ElementalBody) == 2) unarmedMulti += .1;
-				if (player.perkv2(PerkLib.ElementalBody) == 3) unarmedMulti += .15;
-				if (player.perkv2(PerkLib.ElementalBody) == 4) unarmedMulti += .2;
-			}
-			if (player.perkv1(PerkLib.ElementalBody) == 2) {
-				if (player.perkv2(PerkLib.ElementalBody) == 1) unarmedMulti += .05;
-				if (player.perkv2(PerkLib.ElementalBody) == 2) unarmedMulti += .1;
-				if (player.perkv2(PerkLib.ElementalBody) == 3) unarmedMulti += .15;
-				if (player.perkv2(PerkLib.ElementalBody) == 4) unarmedMulti += .2;
-			}
-			if (player.perkv1(PerkLib.ElementalBody) == 3) {
-				if (player.perkv2(PerkLib.ElementalBody) == 1) unarmedMulti += .1;
-				if (player.perkv2(PerkLib.ElementalBody) == 2) unarmedMulti += .2;
-				if (player.perkv2(PerkLib.ElementalBody) == 3) unarmedMulti += .3;
-				if (player.perkv2(PerkLib.ElementalBody) == 4) unarmedMulti += .4;
+			switch (ElementalRace.getElementAndTier(player)) {
+				case ElementalRace.SYLPH_1:
+					unarmedMulti += .05;
+					break;
+				case ElementalRace.SYLPH_2:
+					unarmedMulti += .1;
+					break;
+				case ElementalRace.SYLPH_3:
+					unarmedMulti += .15;
+					break;
+				case ElementalRace.SYLPH_4:
+					unarmedMulti += .2;
+					break;
+				case ElementalRace.IGNIS_1:
+					unarmedMulti += .1;
+					break;
+				case ElementalRace.IGNIS_2:
+					unarmedMulti += .2;
+					break;
+				case ElementalRace.IGNIS_3:
+					unarmedMulti += .3;
+					break;
+				case ElementalRace.IGNIS_4:
+					unarmedMulti += .4;
+					break;
 			}
 		}
 		if (player.isGargoyle() && Forgefather.material == "marble")
@@ -1890,10 +1900,11 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.permanentgolemsendcost()) combat.pspecials.sendPermanentGolem1();
 		if (player.hasPerk(PerkLib.FirstAttackElementalsSu) && player.statusEffectv2(StatusEffects.SummonedElementals) > 0 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 1) {
 			if (player.hasPerk(PerkLib.ElementalBody)) {
-				if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE) && player.perkv1(PerkLib.ElementalBody) != 1) baseelementalattacks(Combat.AIR_E);
-				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE) && player.perkv1(PerkLib.ElementalBody) != 2) baseelementalattacks(Combat.EARTH_E);
-				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE) && player.perkv1(PerkLib.ElementalBody) != 3) baseelementalattacks(Combat.FIRE_E);
-				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE) && player.perkv1(PerkLib.ElementalBody) != 4) baseelementalattacks(Combat.WATER_E);
+				var element:int = ElementalRace.getElement(player);
+				if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE) && element != ElementalRace.ELEMENT_SYLPH) baseelementalattacks(Combat.AIR_E);
+				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE) && element != ElementalRace.ELEMENT_GNOME) baseelementalattacks(Combat.EARTH_E);
+				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE) && element != ElementalRace.ELEMENT_IGNIS) baseelementalattacks(Combat.FIRE_E);
+				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE) && element != ElementalRace.ELEMENT_UNDINE) baseelementalattacks(Combat.WATER_E);
 				else baseelementalattacks(Combat.NONE_E);
 			}
 			else {
@@ -3866,22 +3877,22 @@ public class Combat extends BaseContent {
 		}
         damage = Math.round(damage);
         checkAchievementDamage(damage);
-		var elementalVariant:Number = player.perkv1(PerkLib.ElementalBody);
+		var elementalVariant:Number = ElementalRace.getElement(player);
 		if (player.weapon == weapons.MGSWORD) elementalVariant = 5;
         switch (elementalVariant) {
-            case 1:
+            case ElementalRace.ELEMENT_SYLPH:
                 outputText("You form and unleash a wind blade. ");
 				doWindDamage(damage, true, true);
                 break;
-            case 2:
+            case ElementalRace.ELEMENT_GNOME:
                 outputText("You launch a huge rock. ");
 				doEarthDamage(damage, true, true);
                 break;
-            case 3:
+            case ElementalRace.ELEMENT_IGNIS:
                 outputText("You charge and toss a fireball. ");
 				doFireDamage(damage, true, true);
                 break;
-            case 4:
+            case ElementalRace.ELEMENT_UNDINE:
                 outputText("You unleash an arrow of lethally pressurized water. ");
 				doWaterDamage(damage, true, true);
                 break;
@@ -12596,7 +12607,7 @@ public class Combat extends BaseContent {
         if (player.countCocksOfType(CockTypesEnum.ANEMONE) > 0) TeaseFunctionList.push(RandomTeaseAnemone);
         if (player.hasPerk(PerkLib.ElectrifiedDesire)) TeaseFunctionList.push(RandomTeaseRaiju);
         if (player.hasPerk(PerkLib.DragonLustPoisonBreath) && player.tailVenom >= player.VenomWebCost()) TeaseFunctionList.push(RandomTeaseJabberwocky);
-        if (player.harpyScore() >= 8  || player.thunderbirdScore() >= 10 || player.phoenixScore() >= 10) TeaseFunctionList.push(RandomTeaseHarpy);
+        if (player.harpyScore() >= 8  || player.thunderbirdScore() >= 10 || player.isRace(Races.PHOENIX)) TeaseFunctionList.push(RandomTeaseHarpy);
         if (player.kitsuneScore() >= 8) TeaseFunctionList.push(RandomTeaseKitsune);
         if (player.hasPerk(IMutationsLib.BlackHeartIM)) TeaseFunctionList.push(RandomTeaseLustStrike);
         if (monster.hasBreasts()) TeaseFunctionList.push(RandomTeaseViolateOpponentBreast);

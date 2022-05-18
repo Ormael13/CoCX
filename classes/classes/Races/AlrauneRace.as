@@ -26,7 +26,10 @@ public class AlrauneRace extends Race {
 				.plainSkinOfColor(ANY(AlrauneSkinColor), +1)
 				.armType(Arms.PLANT, +1)
 				.noWings(+1)
-				.legType(ANY(LowerBody.FLOWER_LILIRAUNE,LowerBody.PLANT_FLOWER), +5)
+				.customRequirement("legs","alraune-like lower body",
+						function (body:BodyData): Boolean {
+							return body.player.isAlraune();
+						}, +5)
 				.hasCockOfType(CockTypesEnum.STAMEN, +1)
 				.vaginaType(VaginaClass.ALRAUNE,1);
 		

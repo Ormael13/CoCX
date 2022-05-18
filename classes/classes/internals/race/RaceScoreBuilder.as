@@ -208,11 +208,23 @@ public class RaceScoreBuilder {
 				failScore
 		);
 	}
+	public function plainSkinOfAdj(adj:*, score:int, failScore:int=0):RaceScoreBuilder {
+		var oo:Object = RaceUtils.parseOperatorObject(adj);
+		return customRequirement(
+				"skin",
+				oo.name+" plain skin",
+				function(body:BodyData):Boolean {
+					return body.player.hasPlainSkinOnly() && oo.operatorFn(body.skinBaseAdj);
+				},
+				score,
+				failScore
+		);
+	}
 	public function plainSkinOfColor(color:*, score:int, failScore:int=0):RaceScoreBuilder {
 		var oo:Object = RaceUtils.parseOperatorObject(color);
 		return customRequirement(
 				"skin",
-				oo.name,
+				oo.name+" plain skin",
 				function(body:BodyData):Boolean {
 					return body.player.hasPlainSkinOnly() && oo.operatorFn(body.skinBaseColor);
 				},

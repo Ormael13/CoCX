@@ -5,8 +5,8 @@ import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 
-public class FairyScore extends Race {
-	public function FairyScore(id:int) {
+public class FairyRace extends Race {
+	public function FairyRace(id:int) {
 		super("Fairy", id);
 	}
 	

@@ -50,40 +50,39 @@ public class GargoyleRace extends Race {
 	}
 	
 	private function calcBuffs(body:BodyData):Object {
-		var maxStrCap2:int=0,
-			maxTouCap2:int=0,
-			maxSpeCap2:int=0,
-			maxIntCap2:int=0,
-			maxWisCap2:int=0,
-			maxLibCap2:int=0,
-			currentSen:int=0
-		;
+		var strBuff:int=0,
+			touBuff:int=0,
+			speBuff:int=0,
+			intBuff:int=0,
+			wisBuff:int=0,
+			libBuff:int=0,
+			sensBuff:int=0;
 		switch (Forgefather.material){
 			case "stone":
 				switch(Forgefather.refinement){
 					case 1:
-						maxStrCap2 += 50;
-						maxTouCap2 += 50;
-						maxSpeCap2 += 50;
-						maxIntCap2 += 50;
-						maxWisCap2 += 50;
-						maxLibCap2 += 50;
+						strBuff += 50;
+						touBuff += 50;
+						speBuff += 50;
+						intBuff += 50;
+						wisBuff += 50;
+						libBuff += 50;
 						break;
 					case 2:
-						maxStrCap2 += 75;
-						maxTouCap2 += 75;
-						maxSpeCap2 += 75;
-						maxIntCap2 += 75;
-						maxWisCap2 += 75;
-						maxLibCap2 += 75;
+						strBuff += 75;
+						touBuff += 75;
+						speBuff += 75;
+						intBuff += 75;
+						wisBuff += 75;
+						libBuff += 75;
 						break;
 					case 3:
-						maxStrCap2 += 100;
-						maxTouCap2 += 100;
-						maxSpeCap2 += 100;
-						maxIntCap2 += 100;
-						maxWisCap2 += 100;
-						maxLibCap2 += 100;
+						strBuff += 100;
+						touBuff += 100;
+						speBuff += 100;
+						intBuff += 100;
+						wisBuff += 100;
+						libBuff += 100;
 						break;
 				}
 				break;
@@ -91,199 +90,199 @@ public class GargoyleRace extends Race {
 				//Alabaster - Magic (Int+100%, +20% max mana, +15% spell dmg)
 				switch(Forgefather.refinement){
 					case 1:
-						maxIntCap2 += 100;
-						maxWisCap2 += 50;
-						maxStrCap2 -= 10;
-						maxTouCap2 -= 10;
+						intBuff += 100;
+						wisBuff += 50;
+						strBuff -= 10;
+						touBuff -= 10;
 						break;
 					case 2:
-						maxIntCap2 += 150;
-						maxWisCap2 += 75;
-						maxStrCap2 -= 15;
-						maxTouCap2 -= 15;
+						intBuff += 150;
+						wisBuff += 75;
+						strBuff -= 15;
+						touBuff -= 15;
 						break;
 					case 3:
-						maxIntCap2 += 200;
-						maxWisCap2 += 100;
-						maxStrCap2 -= 20;
-						maxTouCap2 -= 20;
+						intBuff += 200;
+						wisBuff += 100;
+						strBuff -= 20;
+						touBuff -= 20;
 						break;
 					case 4:
-						maxIntCap2 += 200;
-						maxWisCap2 += 100;
-						maxStrCap2 -= 20;
-						maxTouCap2 -= 20;
+						intBuff += 200;
+						wisBuff += 100;
+						strBuff -= 20;
+						touBuff -= 20;
 						break;
 					case 5:
-						maxIntCap2 += 500;
-						maxWisCap2 += 250;
-						maxStrCap2 -= 30;
-						maxTouCap2 -= 30;
+						intBuff += 500;
+						wisBuff += 250;
+						strBuff -= 30;
+						touBuff -= 30;
 						break;
 				}
 				break;
 			case "marble":
 				switch(Forgefather.refinement){
 					case 1:
-						maxWisCap2 += 100;
-						maxStrCap2 += 50;
-						maxIntCap2 -= 10;
+						wisBuff += 100;
+						strBuff += 50;
+						intBuff -= 10;
 						break;
 					case 2:
-						maxWisCap2 += 150;
-						maxStrCap2 += 75;
-						maxIntCap2 -= 15;
+						wisBuff += 150;
+						strBuff += 75;
+						intBuff -= 15;
 						break;
 					case 3:
-						maxWisCap2 += 200;
-						maxStrCap2 += 100;
-						maxIntCap2 -= 20;
+						wisBuff += 200;
+						strBuff += 100;
+						intBuff -= 20;
 						break;
 					case 4:
-						maxWisCap2 += 200;
-						maxStrCap2 += 100;
-						maxIntCap2 -= 20;
+						wisBuff += 200;
+						strBuff += 100;
+						intBuff -= 20;
 						break;
 					case 5:
-						maxWisCap2 += 500;
-						maxStrCap2 += 200;
-						maxIntCap2 -= 30;
+						wisBuff += 500;
+						strBuff += 200;
+						intBuff -= 30;
 						break;
 				}
 				break;
 			case "granite":
 				switch(Forgefather.refinement){
 					case 1:
-						maxTouCap2 += 100;
-						maxStrCap2 += 50;
-						maxIntCap2 -= 10;
-						maxWisCap2 -= 10;
+						touBuff += 100;
+						strBuff += 50;
+						intBuff -= 10;
+						wisBuff -= 10;
 						break;
 					case 2:
-						maxTouCap2 += 150;
-						maxStrCap2 += 75;
-						maxIntCap2 -= 15;
-						maxWisCap2 -= 15;
+						touBuff += 150;
+						strBuff += 75;
+						intBuff -= 15;
+						wisBuff -= 15;
 						break;
 					case 3:
-						maxTouCap2 += 200;
-						maxStrCap2 += 100;
-						maxIntCap2 -= 20;
-						maxWisCap2 -= 20;
+						touBuff += 200;
+						strBuff += 100;
+						intBuff -= 20;
+						wisBuff -= 20;
 						break;
 					case 4:
-						maxTouCap2 += 200;
-						maxStrCap2 += 100;
-						maxIntCap2 -= 20;
-						maxWisCap2 -= 20;
+						touBuff += 200;
+						strBuff += 100;
+						intBuff -= 20;
+						wisBuff -= 20;
 						break;
 					case 5:
-						maxTouCap2 += 500;
-						maxStrCap2 += 250;
-						maxIntCap2 -= 30;
-						maxWisCap2 -= 30;
+						touBuff += 500;
+						strBuff += 250;
+						intBuff -= 30;
+						wisBuff -= 30;
 						break;
 				}
 				break;
 			case "ebony":
 				switch(Forgefather.refinement){
 					case 1:
-						maxStrCap2 += 100;
-						maxSpeCap2 += 50;
-						maxIntCap2 -= 10;
-						maxWisCap2 -= 10;
+						strBuff += 100;
+						speBuff += 50;
+						intBuff -= 10;
+						wisBuff -= 10;
 						break;
 					case 2:
-						maxStrCap2 += 150;
-						maxSpeCap2 += 75;
-						maxIntCap2 -= 15;
-						maxWisCap2 -= 15;
+						strBuff += 150;
+						speBuff += 75;
+						intBuff -= 15;
+						wisBuff -= 15;
 						break;
 					case 3:
-						maxStrCap2 += 200;
-						maxSpeCap2 += 100;
-						maxIntCap2 -= 20;
-						maxWisCap2 -= 20;
+						strBuff += 200;
+						speBuff += 100;
+						intBuff -= 20;
+						wisBuff -= 20;
 						break;
 					case 4:
-						maxStrCap2 += 200;
-						maxSpeCap2 += 100;
-						maxIntCap2 -= 20;
-						maxWisCap2 -= 20;
+						strBuff += 200;
+						speBuff += 100;
+						intBuff -= 20;
+						wisBuff -= 20;
 						break;
 					case 5:
-						maxStrCap2 += 500;
-						maxSpeCap2 += 250;
-						maxIntCap2 -= 30;
-						maxWisCap2 -= 30;
+						strBuff += 500;
+						speBuff += 250;
+						intBuff -= 30;
+						wisBuff -= 30;
 						break;
 				}
 				break;
 			case "sandstone":
 				switch(Forgefather.refinement){
 					case 1:
-						maxSpeCap2 += 100;
-						maxStrCap2 += 25;
-						maxIntCap2 += 25;
-						maxWisCap2 -= 10;
+						speBuff += 100;
+						strBuff += 25;
+						intBuff += 25;
+						wisBuff -= 10;
 						break;
 					case 2:
-						maxSpeCap2 += 150;
-						maxStrCap2 += 35;
-						maxIntCap2 += 35;
-						maxWisCap2 -= 15;
+						speBuff += 150;
+						strBuff += 35;
+						intBuff += 35;
+						wisBuff -= 15;
 						break;
 					case 3:
-						maxSpeCap2 += 200;
-						maxStrCap2 += 50;
-						maxIntCap2 += 50;
-						maxWisCap2 -= 20;
+						speBuff += 200;
+						strBuff += 50;
+						intBuff += 50;
+						wisBuff -= 20;
 						break;
 					case 4:
-						maxSpeCap2 += 200;
-						maxStrCap2 += 50;
-						maxIntCap2 += 50;
-						maxWisCap2 -= 20;
+						speBuff += 200;
+						strBuff += 50;
+						intBuff += 50;
+						wisBuff -= 20;
 						break;
 					case 5:
-						maxSpeCap2 += 500;
-						maxStrCap2 += 125;
-						maxIntCap2 += 125;
-						maxWisCap2 -= 30;
+						speBuff += 500;
+						strBuff += 125;
+						intBuff += 125;
+						wisBuff -= 30;
 						break;
 				}
 				break;
 			
 		}
 		if (body.player.hasPerk(PerkLib.GargoylePure)) {
-			maxWisCap2 += 130;
-			maxLibCap2 -= 20;
-			currentSen -= 10;
+			wisBuff += 130;
+			libBuff -= 20;
+			sensBuff -= 10;
 		}
 		if (body.player.hasPerk(PerkLib.GargoyleCorrupted)) {
-			maxWisCap2 -= 20;
-			maxLibCap2 += 140;
+			wisBuff -= 20;
+			libBuff += 140;
 		}
 		switch (Forgefather.channelInlay){
 			case "emerald":
-				if (Forgefather.refinement == 5) maxSpeCap2 += 100;
-				else maxSpeCap2 += 50;
+				if (Forgefather.refinement == 5) speBuff += 100;
+				else speBuff += 50;
 				break;
 		}
 		switch (Forgefather.gem){
 			case "emerald":
-				if (Forgefather.refinement == 5) maxSpeCap2 += 50;
-				else maxSpeCap2 += 25;
+				if (Forgefather.refinement == 5) speBuff += 50;
+				else speBuff += 25;
 				break;
 		}
 		return {
-			"str.mult": maxStrCap2/100,
-			"tou.mult": maxTouCap2/100,
-			"spe.mult": maxSpeCap2/100,
-			"int.mult": maxIntCap2/100,
-			"wis.mult": maxWisCap2/100,
-			"lib.mult": maxLibCap2/100,
-			"sens": currentSen
+			"str.mult": strBuff/100,
+			"tou.mult": touBuff/100,
+			"spe.mult": speBuff/100,
+			"int.mult": intBuff/100,
+			"wis.mult": wisBuff/100,
+			"lib.mult": libBuff/100,
+			"sens": sensBuff
 		}
 	}
 }

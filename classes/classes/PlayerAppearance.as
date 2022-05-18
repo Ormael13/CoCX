@@ -3,6 +3,7 @@ import classes.BodyParts.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
+import classes.Races.ElementalRace;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
@@ -230,17 +231,18 @@ public class PlayerAppearance extends BaseContent {
 	public function describeRace():void {
 		// story.display("race");
 		if (player.hasPerk(PerkLib.ElementalBody)) {
-			if (player.perkv1(PerkLib.ElementalBody) == 4) {
+			var element:int = ElementalRace.getElement(player);
+			if (element == ElementalRace.ELEMENT_UNDINE) {
 				outputText("You have currently fusioned with an water elemental spirit as an undine. Your body is humanoid in shape but many of your traits remind of water. You have light blue skin the color of azure while your "+Hair.getHairLength(player)+" blue liquid hair are human at a first glance but drips into a vanishing trail of water toward the end. ");
 				outputText("Your eyes are the color sea water and your expression albeit serene mask the violent mood swing your element can be subject to. Calm like a pond or raging like the sea amidst a storm you can just as easily move from one to the other in a blink.\n\n");
 				outputText("Your body, while mostly unified like a pool of water, is ornamented by a number of energy runes that allows you to maintain a solid shape somewhat. Your arms are human-like in shape, but just as the rest of your body, you can extend and shift your arms into churning water at any will. The skin is like water and can be semi seen through. ");
 				outputText("Your legs are human-like in shape, though they occasionally drip water to the ground. Just like the rest of your semi liquid body, it's translucent as if staring through a pool of water. Your semi liquid form allows you to pleasantly float in the air like condensation, though you cannot outright fly.");
 			}
-			else if (player.perkv1(PerkLib.ElementalBody) == 3) {
+			else if (element == ElementalRace.ELEMENT_IGNIS) {
 				outputText("You have currently fusioned with an fire elemental spirit as a ignis. Your body is humanoid in shape but many of your traits remind of fire. You have tan skin as if spending too much time under the sun while your "+Hair.getHairLength(player)+" burning, raging flame like hair flow like raging flames. Your eyes are the color of blazing embers while your vicious expression mirrors the raging fire in your heart. You feel like going violent and reckless might solve some of your problems.\n\n");
 				outputText("Your arms are human-like in shape, but at the junction of your wrists, fire wicks about in the palm of your hands. Your legs are human-like in shape, but a raging fire starts at your ankles, coating your feet entirely. You levitate by burning the ambient air around you. Wreathed in a corona of flame, you can fly freely as long as you have oxygen to propel you.");
 			}
-			else if (player.perkv1(PerkLib.ElementalBody) == 2) {
+			else if (element == ElementalRace.ELEMENT_GNOME) {
 				outputText("You have currently fusioned with an earth elemental spirit as a gnome. Your body is humanoid in shape but many of your traits remind of the solid stone. You have dark brown skin the color of stone and fertile earth while your "+Hair.getHairLength(player)+" polished stone, golem like, straight hair are decorated with a single budding vine. ");
 				outputText("Your eyes are the color of emerald and verdant greenery, brimming with life while your calm serene expression mirrors the stone near infinite patience but can abruptly turn to violent quaking anger when provoked.\n\n");
 				outputText("Your arms are human-like in shape, at least up to your elbow. Past your elbows, your arms shift into something large, sturdy and golem-like, capable of crushing anything. Beneath your torso, your legs turn to solid rock, fully fusing with the ground beneath you. While anybody could assume you have no mobility, you can simply move by sliding across the solid ground as if you were merely swimming.");
@@ -1027,33 +1029,6 @@ public class PlayerAppearance extends BaseContent {
 			if (clickedRace2 == clickedRace) clickedRace2 = null;
 			RacialScores(clickedRace2);
 		}
-		//Druid fusions
-		if (player.hasPerk(PerkLib.ElementalBody)) {
-			if (player.perkv1(PerkLib.ElementalBody) == 1) {
-				if (player.perkv2(PerkLib.ElementalBody) == 1) outputText("\n<font color=\"#0000a0\">Lesser Sylph: +100% to Str racial multi, +75% to Int racial multi, +50% to Wis racial multi, +5% Unarmed damage multi, +5% Spell/Soulskill power, +10% Evasion</font>");
-				if (player.perkv2(PerkLib.ElementalBody) == 2) outputText("\n<font color=\"#0000a0\">Adept Sylph: +125% to Str racial multi, +100 to Int racial multi, +75% to Wis racial multi, +10% Unarmed damage multi, +10% Spell/Soulskill power, +20% Evasion</font>");
-				if (player.perkv2(PerkLib.ElementalBody) == 3) outputText("\n<font color=\"#0000a0\">Greater Sylph: +150% to Str racial multi, +125% to Int racial multi, +100% to Wis racial multi, +15% Unarmed damage multi, +15% Spell/Soulskill power, +30% Evasion</font>");
-				if (player.perkv2(PerkLib.ElementalBody) == 4) outputText("\n<font color=\"#0000a0\">Primordial Sylph: +175% to Str racial multi, +150% to Int racial multi, +125% to Wis racial multi, +20% Unarmed damage multi, +20% Spell/Soulskill power, +40% Evasion</font>");
-			}
-			if (player.perkv1(PerkLib.ElementalBody) == 2) {
-				if (player.perkv2(PerkLib.ElementalBody) == 1) outputText("\n<font color=\"#0000a0\">Lesser Gnome: +50% to Str racial multi, +100% to Tou racial multi, +75% to Wis racial multi, +5% Unarmed damage multi, +10 natural armor/magic resistance (scal), +5% Spell/Soulskill power</font>");
-				if (player.perkv2(PerkLib.ElementalBody) == 2) outputText("\n<font color=\"#0000a0\">Adept Gnome: +75% to Str racial multi, +125% to Tou racial multi, +100% to Wis racial multi, +10% Unarmed damage multi, +20 natural armor/magic resistance (scal), +10% Spell/Soulskill power</font>");
-				if (player.perkv2(PerkLib.ElementalBody) == 3) outputText("\n<font color=\"#0000a0\">Greater Gnome: +125% to Str racial multi, +150% to Tou racial multi, +125% to Wis racial multi, +15% Unarmed damage multi, +35 natural armor/magic resistance (scal), +15% Spell/Soulskill power</font>");
-				if (player.perkv2(PerkLib.ElementalBody) == 4) outputText("\n<font color=\"#0000a0\">Primordial Gnome: +150% to Str racial multi, +175% to Tou racial multi, +150% to Wis racial multi, +20% Unarmed damage multi, +40 natural armor/magic resistance (scal), +20% Spell/Soulskill power</font>");
-			}
-			if (player.perkv1(PerkLib.ElementalBody) == 3) {
-				if (player.perkv2(PerkLib.ElementalBody) == 1) outputText("\n<font color=\"#0000a0\">Lesser Ignis: +75% to Str racial multi, +100% to Spe racial multi, +25% to Wis racial multi, +10% Unarmed damage multi, +5% Spell/Soulskill power, +5% Evasion</font>");
-				if (player.perkv2(PerkLib.ElementalBody) == 2) outputText("\n<font color=\"#0000a0\">Adept Ignis: +100% to Str racial multi, +125% to Spe racial multi, +50% to Wis racial multi, +20% Unarmed damage multi, +10% Spell/Soulskill power, +10% Evasion</font>");
-				if (player.perkv2(PerkLib.ElementalBody) == 3) outputText("\n<font color=\"#0000a0\">Greater Ignis: +125% to Str racial multi, +150% to Spe racial multi, +75% to Wis racial multi, +30% Unarmed damage multi, +15% Spell/Soulskill power, +15% Evasion</font>");
-				if (player.perkv2(PerkLib.ElementalBody) == 4) outputText("\n<font color=\"#0000a0\">Primordial Ignis: +150% to Str racial multi, +175% to Spe racial multi, +100% to Wis racial multi, +40% Unarmed damage multi, +20% Spell/Soulskill power, +20% Evasion</font>");
-			}
-			if (player.perkv1(PerkLib.ElementalBody) == 4) {
-				if (player.perkv2(PerkLib.ElementalBody) == 1) outputText("\n<font color=\"#0000a0\">Lesser Undine: +75% to Str racial multi, +50% to Tou racial multi, +100% to Wis racial multi, +5 natural armor/magic resistance (scal), +10% Spell/Soulskill power, +5% Evasion</font>");
-				if (player.perkv2(PerkLib.ElementalBody) == 2) outputText("\n<font color=\"#0000a0\">Adept Undine: +100% to Str racial multi, +75% to Tou racial multi, +125% to Wis racial multi, +10 natural armor/magic resistance (scal), +20% Spell/Soulskill power +10% Evasion</font>");
-				if (player.perkv2(PerkLib.ElementalBody) == 3) outputText("\n<font color=\"#0000a0\">Greater Undine: +125% to Str racial multi, +100% to Tou racial multi, +150% to Wis racial multi, +15 natural armor/magic resistance (scal), +30% Spell/Soulskill power, +15% Evasion</font>");
-				if (player.perkv2(PerkLib.ElementalBody) == 4) outputText("\n<font color=\"#0000a0\">Primordial Undine: +150% to Str racial multi, +125% to Tou racial multi, +175% to Wis racial multi, +20 natural armor/magic resistance (scal), +40% Spell/Soulskill power, +20% Evasion</font>");
-			}
-		}
 		//AlicornKin
 		if (player.alicornkinScore() >= 12) outputText("\n<font color=\"#0000a0\">Alicornkin/Nightmarekin: " + player.alicornkinScore() + " (+45% to Tou racial multi, +60% to Spe racial multi, +75% to Int racial multi)</font>");
 		else if (player.alicornkinScore() >= 1) outputText("\n<font color=\"#008000\">Alicornkin/Nightmarekin: " + player.alicornkinScore() + "</font>");
@@ -1109,10 +1084,6 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.elfScore() < 1) outputText("\n<font color=\"#ff0000\">Elf: 0</font>");
 		//Ferret
 		outputText("\nFerret-morph: " + player.ferretScore());
-		//Fire snail
-		if (player.firesnailScore() >= 15) outputText("\n<font color=\"#0000a0\">Fire Snail: " + player.firesnailScore() + " (+70% to Str racial multi, +175% to Tou racial multi, -80% to Spe racial multi, +110% to Lib racial multi, +50 min Sens)</font>");
-		else if (player.firesnailScore() >= 1) outputText("\n<font color=\"#008000\">Fire Snail: " + player.firesnailScore() + "</font>");
-		else if (player.firesnailScore() < 1) outputText("\n<font color=\"#ff0000\">Fire Snail: 0</font>");
 		//Fox
 		if (player.foxScore() >= 7) outputText("\n<font color=\"#0000a0\">Fox-morph: " + player.foxScore() + " (-30% to Str racial multi, +80% to Spe racial multi, +55% to Int racial multi, +" + (20 * (1 + player.newGamePlusMod())) + " max Fatigue)</font>");
 		else if (player.foxScore() >= 1) outputText("\n<font color=\"#008000\">Fox-morph: " + player.foxScore() + "</font>");
@@ -1145,17 +1116,6 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.humanScore() == player.humanMaxScore() - 8) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 8) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
 		else if (player.humanScore() == player.humanMaxScore() - 9) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 9) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
 		else if (player.humanScore() < player.humanMaxScore() - 9) outputText("\n<font color=\"#008000\">HUMANITY: " + player.humanScore() + "</font>");
-		//Hydra
-		if (player.hydraScore() >= 14) {
-			if (player.lowerBody == LowerBody.HYDRA) {
-				if (player.hydraScore() >= 29) outputText("\n<font color=\"#0000a0\">Legendary Hydra: " + player.hydraScore() + " (+"+(player.isNaga() ? "175":"160")+"% to Str racial multi, +145% to Tou racial multi, +"+(player.isNaga() ? "145":"130")+"% to Spe racial multi)</font>");
-				else if (player.hydraScore() >= 24) outputText("\n<font color=\"#0000a0\">Ancient Hydra: " + player.hydraScore() + " (+"+(player.isNaga() ? "145":"130")+"% to Str racial multi, +125% to Tou racial multi, +"+(player.isNaga() ? "120":"105")+"% to Spe racial multi)</font>");
-				else if (player.hydraScore() >= 19) outputText("\n<font color=\"#0000a0\">Greater Hydra: " + player.hydraScore() + " (+"+(player.isNaga() ? "135":"120")+"% to Str racial multi, +105% to Tou racial multi, +"+(player.isNaga() ? "75":"60")+"% to Spe racial multi)</font>");
-				else outputText("\n<font color=\"#0000a0\">Hydra: " + player.hydraScore() + " (+"+(player.isNaga() ? "115":"100")+"% to Str racial multi, +50% to Tou racial multi, +"+(player.isNaga() ? "75":"60")+"% to Spe racial multi)</font>");
-			} else outputText("\n<font color=\"#008000\">Hydra: " + player.hydraScore() + "</font>");
-		}
-		else if (player.hydraScore() >= 1) outputText("\n<font color=\"#008000\">Hydra: " + player.hydraScore() + "</font>");
-		else if (player.hydraScore() < 1) outputText("\n<font color=\"#ff0000\">Hydra: 0</font>");
 		//INTERNAL CHIMERICAL DISPOSITION
 		if (player.internalChimeraScore() >= 1) {
             outputText("\n<font color=\"#0000a0\">INTERNAL CHIMERICAL DISPOSITION: (" + player.internalChimeraRating() + ") " + player.internalChimeraScore())
@@ -1236,11 +1196,6 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.orcaScore() >= 14) outputText("\n<font color=\"#0000a0\">Orca-boy/girl: " + player.orcaScore() + " (+100% to Str racial multi, +40% to Tou racial multi, +70% to Spe racial multi)</font>");
 		else if (player.orcaScore() >= 1) outputText("\n<font color=\"#008000\">Orca-boy/girl: " + player.orcaScore() + "</font>");
 		else if (player.orcaScore() < 1) outputText("\n<font color=\"#ff0000\">Orca-boy/girl: 0</font>");
-		//Phoenix
-		if (player.phoenixScore() >= 21) outputText("\n<font color=\"#0000a0\">Greater Phoenix: " + player.phoenixScore() + " (+40% to Str racial multi, +20% to Tou racial multi, +150% to Spe racial multi, +105% to Lib racial multi, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-		else if (player.phoenixScore() >= 10) outputText("\n<font color=\"#0000a0\">Phoenix: " + player.phoenixScore() + " (+20% to Str racial multi, +20% to Tou racial multi, +70% to Spe racial multi, +40% to Lib racial multi, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-		else if (player.phoenixScore() >= 1) outputText("\n<font color=\"#008000\">Phoenix: " + player.phoenixScore() + "</font>");
-		else if (player.phoenixScore() < 1) outputText("\n<font color=\"#ff0000\">Phoenix: 0</font>");
 		//Raccon
 		if (player.raccoonScore() >= 17 && player.balls > 0 && player.ballSize > 5) outputText("\n<font color=\"#0000a0\">Greater Tanuki: " + player.raccoonScore() + " (+105% to Spe racial multi, +150% to Int racial multi)</font>");
 		else if (player.raccoonScore() >= 14 && player.balls > 0 && player.ballSize > 5) outputText("\n<font color=\"#0000a0\">Tanuki: " + player.raccoonScore() + " (+90% to Spe racial multi, +120% to Int racial multi)</font>");
@@ -1264,16 +1219,6 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.scorpionScore() < 1) outputText("\n<font color=\"#ff0000\">Half Scorpion-morph: 0</font>");
 		*/
 		outputText("\nScorpion-morph: " + player.scorpionScore());
-		//Scylla
-		var scyllakrakengland:Number = 0;
-		if (player.perkv1(IMutationsLib.ScyllaInkGlandsIM) >= 1) scyllakrakengland += 10;
-		if (player.scyllaScore() >= 12 && player.isKraken()) {
-			if (player.scyllaScore() >= 17) outputText("\n<font color=\"#0000a0\">Elder Kraken: " + player.scyllaScore() + " (+"+(195+scyllakrakengland)+"% to Str racial multi, +60% to Tou racial multi, +60% to Int racial multi, +15 min sens, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-			else outputText("\n<font color=\"#0000a0\">Kraken: " + player.scyllaScore() + " (+"+(180+scyllakrakengland)+"% to Str racial multi, +60% to Int racial multi, +15 min sens, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-		}
-		else if (player.scyllaScore() >= 7 && player.isScylla()) outputText("\n<font color=\"#0000a0\">Scylla: " + player.scyllaScore() + " (+"+(95+scyllakrakengland)+"% to Str racial multi, +40% to Int racial multi, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-		else if (player.scyllaScore() >= 1) outputText("\n<font color=\"#008000\">Scylla: " + player.scyllaScore() + "</font>");
-		else if (player.scyllaScore() < 1) outputText("\n<font color=\"#ff0000\">Scylla: 0</font>");
 		//Shark
 		if (player.sharkScore() >= 11 && player.vaginas.length > 0 && player.cocks.length > 0) outputText("\n<font color=\"#0000a0\">Tigershark-morph: " + player.sharkScore() + " (+60% to Str racial multi, +100% to Spe racial multi, +20% to Lib racial multi, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 		else if (player.sharkScore() >= 10) outputText("\n<font color=\"#0000a0\">Shark-morph: " + player.sharkScore() + " (+40% to Str racial multi, +100% to Spe racial multi, +10% to Lib racial multi)</font>");

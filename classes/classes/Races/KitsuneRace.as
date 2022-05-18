@@ -30,7 +30,7 @@ public class KitsuneRace extends Race {
 		addScores()
 				.eyeType(Eyes.FOX, +1)
 				.earType(Ears.FOX, +1, -1)
-				.customScoreRequirement("tail", "2+ fox tails",
+				.customScoreRequirement("tail", "multiple fox tails, +1 per tail",
 						function (body:BodyData):Boolean {
 							return body.tailType == Tail.FOX && body.tailCount >= 2;
 						},

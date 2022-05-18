@@ -7,6 +7,7 @@ package classes.IMutations
     import classes.PerkClass;
     import classes.PerkType;
 import classes.Player;
+import classes.Races;
 import classes.StatusEffects;
 
 public class VampiricBloodstreamMutation extends PerkType
@@ -60,9 +61,7 @@ public class VampiricBloodstreamMutation extends PerkType
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.VampireThirst);
                     }, "Vampire Thirst")
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.vampireScore() >= 10;//potem dodać mosquito race i ew. inne co mogą wypijać krew
-                    }, "Vampire race");
+                    .requireRace(Races.VAMPIRE);//potem dodać mosquito race i ew. inne co mogą wypijać krew
                 }
                 else{
                     var pLvl:int = pTier * 30;

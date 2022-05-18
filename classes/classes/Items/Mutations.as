@@ -5558,7 +5558,7 @@ public final class Mutations extends MutationsHelper {
             player.createPerk(PerkLib.DragonDarknessBreath, 0, 0, 0, 0);
             changes++;
         }*/
-        if (type == 3 && player.hydraScore() >= 14 && changes < changeLimit && !player.hasPerk(PerkLib.HydraAcidBreath)) {
+        if (type == 3 && player.isRace(Races.HYDRA) && changes < changeLimit && !player.hasPerk(PerkLib.HydraAcidBreath)) {
             outputText("[pg]You feel sick, like very sick as if your stomach was bubbling up. You spontaneously vomit from all the heads below your waist but what comes out is not vomit. Your hydra heads retches out on the ground in front of you which is doused with smoking green fluids which begins to smoke right away as your powerful acid begin to dissolve whatever is beneath it. <b>It would seem you have developed the ability to use the hydra's infamous breath weapon.</b>  (<b>Gained Perk: Hydra acid breath!</b>)");
             player.createPerk(PerkLib.HydraAcidBreath, 0, 0, 0, 0);
             changes++;

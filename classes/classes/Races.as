@@ -52,10 +52,10 @@ public class Races {
 	public static const GORGON:Race = new Race("Gorgon",46, "gorgonScore", 11);
 	public static const VOUIVRE:Race = new Race("Vouivre",47, "vouivreScore", 11);
 	public static const COUATL:Race = new Race("Couatl",48, "couatlScore", 11);
-	public static const HYDRA:Race = new Race("Hydra",49, "hydraScore", 14);
-	public static const FIRESNAILS:Race = new Race("Fire snails",50, "firesnailScore", 15);
-	public static const PHOENIX:Race = new Race("Phoenix",51, "phoenixScore", 10);
-	public static const SCYLLA:Race = new Race("Scylla",52, "scyllaScore", 7);
+	public static const HYDRA:HydraRace                    = new HydraRace(49);
+	public static const FIRESNAILS:FireSnailRace           = new FireSnailRace(50);
+	public static const PHOENIX:PhoenixRace                = new PhoenixRace(51);
+	public static const SCYLLA:ScyllaRace                  = new ScyllaRace(52);
 	public static const PLANT:PlantRace                    = new PlantRace(53);
 	public static const ALRAUNE:AlrauneRace                = new AlrauneRace(54);
 	public static const YGGDRASIL:YgddrasilRace            = new YgddrasilRace(55);
@@ -87,7 +87,7 @@ public class Races {
 	public static const FROSTWYRM:FrostWyrmRace            = new FrostWyrmRace(81);
 	public static const CANCER:CancerRace                  = new CancerRace(82);
 	public static const USHIONNA:UshiOniRace               = new UshiOniRace(83);
-	public static const FAIRY:FairyScore                   = new FairyScore(84);
+	public static const FAIRY:FairyRace                    = new FairyRace(84);
 	public static const GREMLIN:GremlinRace                = new GremlinRace(85);
 	public static const KAMAITACHI:KamaitachiRace          = new KamaitachiRace(86);
 	public static const GAZER:GazerRace                    = new GazerRace(87);
@@ -99,7 +99,7 @@ public class Races {
 	public static const SEA_DRAGON:SeaDragonRace           = new SeaDragonRace(93);
 	public static const FMINDBREAKER:FemaleMindbreakerRace = new FemaleMindbreakerRace(94);
 	public static const MMINDBREAKER:MaleMindbreakerRace   = new MaleMindbreakerRace(95);
-	public static const ELEMENTALFUSION:Race               = new Race("Elemental Fusion", 96, "fusedElementalScore", 5);
+	public static const ELEMENTALFUSION:ElementalRace      = new ElementalRace(96);
 	public static const GRYPHON:GryphonRace                = new GryphonRace(97);
 	public static const PEACOCK:PeacockRace                = new PeacockRace(98);
 	public static const ANGEL:AngelRace                    = new AngelRace(99);

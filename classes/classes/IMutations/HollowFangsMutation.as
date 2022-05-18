@@ -7,6 +7,7 @@ package classes.IMutations
     import classes.PerkClass;
     import classes.PerkType;
     import classes.Player;
+import classes.Races;
 
 public class HollowFangsMutation extends PerkType
     {
@@ -54,9 +55,7 @@ public class HollowFangsMutation extends PerkType
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.facePart.type == 34;//player.facePart.isAny(Face.VAMPIRE, Face.)
                     }, "Vampire fangs")
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.vampireScore() >= 10;//potem dodać mosquito race i ew. inne co mogą wypijać krew
-                    }, "Vampire race");
+                    .requireRace(Races.VAMPIRE);//potem dodać mosquito race i ew. inne co mogą wypijać krew
                 }
                 else{
                     var pLvl:int = pTier * 30;
