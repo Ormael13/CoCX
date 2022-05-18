@@ -644,7 +644,7 @@ import coc.xxc.StoryContext;
 			player.dynStats.apply(player, args);
 		}
 
-		protected function MutagenBonus(statName: String, bonus: Number):void
+		protected function MutagenBonus(statName: String, bonus: Number):Boolean
 		{
 			player.MutagenBonus(statName,bonus);
 		}
