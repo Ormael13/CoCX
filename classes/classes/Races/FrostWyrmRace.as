@@ -38,7 +38,7 @@ public class FrostWyrmRace extends Race {
 		addScoresAfter(10)
 				.height(GREATER_THAN(120), +1);
 		
-		addBloodline([PerkLib.DragonsDescendant,PerkLib.BloodlineDragon]);
+		addBloodline(PerkLib.DragonsDescendant,PerkLib.BloodlineDragon);
 		addMutation(IMutationsLib.DraconicBonesIM);
 		addMutation(IMutationsLib.DraconicHeartIM);
 		addMutation(IMutationsLib.DrakeLungsIM);

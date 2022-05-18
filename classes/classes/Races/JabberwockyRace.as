@@ -42,7 +42,7 @@ public class JabberwockyRace extends Race {
 		addMutation(IMutationsLib.DraconicBonesIM);
 		addMutation(IMutationsLib.DraconicHeartIM);
 		addMutation(IMutationsLib.DrakeLungsIM);
-		addBloodline([PerkLib.DragonsDescendant,PerkLib.BloodlineDragon]);
+		addBloodline(PerkLib.DragonsDescendant,PerkLib.BloodlineDragon);
 		
 		buildTier(10, "lesser jabberwocky")
 				.buffs({

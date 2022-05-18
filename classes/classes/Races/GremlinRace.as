@@ -52,10 +52,7 @@ public class GremlinRace extends Race {
 				.noWings(+1)
 				.noTail(+1);
 		
-		addBloodline([
-			PerkLib.GoblinsDescendant,
-			PerkLib.BloodlineGoblin
-		]);
+		addBloodline(PerkLib.GoblinsDescendant, PerkLib.BloodlineGoblin);
 		addMutation(IMutationsLib.NaturalPunchingBagIM);
 		
 		buildTier(15, "gremlin")

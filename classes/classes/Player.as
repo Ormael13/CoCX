@@ -3819,21 +3819,6 @@ use namespace CoC;
 				if (isTaur()) race = "cave wyrm-taur";
 				else race = "cave wyrm";
 			}
-			if (TopRace == "yeti") {
-				if (TopScore >= 17) {
-					if (isTaur()) race = "true yeti-taur";
-					else race = "true yeti";
-				}
-				else {
-					if (isTaur()) race = "yeti-taur";
-					else race = "yeti";
-				}
-			}
-			if (TopRace == "yuki onna") {
-				if (TopScore >= 14) {
-					race = "Yuki Onna";
-				}
-			}
 			if (TopRace == "couatl") {
 				if (TopScore >= 11) {
 					if (TopScore >= 19) race = "greater couatl";
@@ -3955,24 +3940,6 @@ use namespace CoC;
 					race = "boar-morph";
 				} else {
 					race = "pig-morph";
-				}
-			}
-			if (TopRace == "satyr") {
-				if (TopScore >= 4) race = "satyr";
-			}
-			if (TopRace == "bear and panda") {
-				if (faceType == Face.PANDA) race = "panda-morph";
-				else race = "bear-morph";
-			}
-			if (TopRace == "siren") {
-				if (TopScore >= 10) {
-					if (TopScore >= 20) {
-						if (isTaur()) race = "Greater siren-taur";
-						else race = "Greater siren";
-					} else {
-						if (isTaur()) race = "siren-taur";
-						else race = "siren";
-					}
 				}
 			}
 			//if (lowerBody == LowerBody.HOOFED && isTaur() && wings.type == Wings.FEATHERED_LARGE) {
@@ -4275,13 +4242,13 @@ use namespace CoC;
 				chimeraCounter += 2;
 			if (isRace(Races.REDPANDA))
 				chimeraCounter++;
-			if (bearpandaScore() >= 10)
+			if (isRace(Races.BEARANDPANDA))
 				chimeraCounter++;
-			if (sirenScore() >= 10)
+			if (isRace(Races.SIREN))
 				chimeraCounter++;
-			if (yetiScore() >= 14)
+			if (isRace(Races.YETI))
 				chimeraCounter++;
-			if (yukiOnnaScore() >= 14)
+			if (isRace(Races.YUKIONNA))
 				chimeraCounter++;
 			if (isRace(Races.WENDIGO))
 				chimeraCounter++;
@@ -6090,102 +6057,6 @@ use namespace CoC;
 			return cavewyrmCounter;
 		}
 
-		//Yeti score
-		public function yetiScore():Number {
-			Begin("Player","racialScore","yeti");
-			var yetiCounter:Number = 0;
-			if (skin.base.color == "dark" || skin.base.color == "tan")
-				yetiCounter++;
-			if (eyes.colour == "silver" || eyes.colour == "grey" || eyes.colour == "gray")
-				yetiCounter++;
-			if (lowerBody == LowerBody.YETI)
-				yetiCounter++;
-			if (arms.type == Arms.YETI)
-				yetiCounter++;
-			if (rearBody.type == RearBody.YETI_FUR)
-				yetiCounter++;
-			if (eyes.type == Eyes.HUMAN)
-				yetiCounter++;
-			if (ears.type == Ears.YETI)
-				yetiCounter++;
-			if (faceType == Face.YETI_FANGS)
-				yetiCounter++;
-			if (hairType == Hair.FLUFFY)
-				yetiCounter++;
-			if (hairColor == "white")
-				yetiCounter++;
-			if (hasPartialCoat(Skin.FUR))
-				yetiCounter++;
-			if (hasFur() && coatColor == "white")
-				yetiCounter++;
-			if (tallness >= 78)
-				yetiCounter++;
-			if (butt.type >= 10)
-				yetiCounter++;
-			if (perkv1(IMutationsLib.YetiFatIM) >= 1)
-				yetiCounter++;
-			if (perkv1(IMutationsLib.YetiFatIM) >= 2)
-				yetiCounter++;
-			if (perkv1(IMutationsLib.YetiFatIM) >= 3)
-				yetiCounter++;
-			if (perkv1(IMutationsLib.YetiFatIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				yetiCounter++;
-			if (perkv1(IMutationsLib.YetiFatIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				yetiCounter++;
-			if (perkv1(IMutationsLib.YetiFatIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				yetiCounter++;
-			yetiCounter = finalRacialScore(yetiCounter, Races.YETI);
-			End("Player","racialScore");
-			return yetiCounter;
-		}
-
-		//Yuki Onna score
-		public function yukiOnnaScore():Number {
-			Begin("Player","racialScore","yuki onna");
-			var yukiOnnaCounter:Number = 0;
-			if (InCollection(skin.base.color, ["snow white", "light blue", "glacial white"]))
-				yukiOnnaCounter++;
-			if (skinAdj == "cold")
-				yukiOnnaCounter++;
-			if (eyes.colour == "light purple")
-				yukiOnnaCounter++;
-			if (InCollection(hairColor, ["snow white", "silver white", "platinum blonde", "quartz white"]))
-				yukiOnnaCounter++;
-			if (hairType == Hair.SNOWY)
-				yukiOnnaCounter++;
-			if (lowerBody == LowerBody.YUKI_ONNA)
-				yukiOnnaCounter++;
-			if (arms.type == Arms.YUKI_ONNA)
-				yukiOnnaCounter++;
-			if (faceType == Face.YUKI_ONNA)
-				yukiOnnaCounter++;
-			if (rearBody.type == RearBody.GLACIAL_AURA)
-				yukiOnnaCounter += 2;
-			if (wings.type == Wings.LEVITATION)
-				yukiOnnaCounter += 3;
-			if (femininity > 99)
-				yukiOnnaCounter++;
-			if (!hasCock())
-				yukiOnnaCounter++;
-			if (hasVagina())
-				yukiOnnaCounter++;
-			if (perkv1(IMutationsLib.FrozenHeartIM) >= 1)
-				yukiOnnaCounter++;
-			if (perkv1(IMutationsLib.FrozenHeartIM) >= 2)
-				yukiOnnaCounter++;
-			if (perkv1(IMutationsLib.FrozenHeartIM) >= 3)
-				yukiOnnaCounter++;
-			if (perkv1(IMutationsLib.FrozenHeartIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				yukiOnnaCounter++;
-			if (perkv1(IMutationsLib.FrozenHeartIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				yukiOnnaCounter++;
-			if (perkv1(IMutationsLib.FrozenHeartIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				yukiOnnaCounter++;
-			yukiOnnaCounter = finalRacialScore(yukiOnnaCounter, Races.YUKIONNA);
-			End("Player","racialScore");
-			return yukiOnnaCounter;
-		}
-
 		//Centaur score
 		public function centaurScore():Number
 		{
@@ -6770,58 +6641,6 @@ use namespace CoC;
 			return racialScore(Races.WEREWOLF)
 		}
 
-		public function sirenScore():Number {
-			Begin("Player","racialScore","siren");
-			var sirenCounter:Number = 0;
-			if (faceType == Face.SHARK_TEETH)
-				sirenCounter++;
-			if (hairType == Hair.FEATHER)
-				sirenCounter++;
-			if (hairColor == "silver")
-				sirenCounter++;
-			if (ears.type == Ears.SHARK || ears.type == Ears.HUMAN || ears.type == Ears.ELFIN)
-				sirenCounter++;
-			if (tailType == Tail.SHARK)
-				sirenCounter++;
-			if (wings.type == Wings.FEATHERED_LARGE)
-				sirenCounter += 4;
-			if (arms.type == Arms.HARPY || arms.type == Arms.SHARK)
-				sirenCounter++;
-			if (lowerBody == LowerBody.SHARK || lowerBody == LowerBody.HARPY)
-				sirenCounter++;
-			if (skinType == Skin.AQUA_SCALES && (InCollection(coatColor, ["rough gray", "orange", "dark gray", "grayish-blue", "iridescent gray", "ashen grayish-blue", "gray"])))
-				sirenCounter += 2;
-			if (gills.type == Gills.FISH)
-				sirenCounter++;
-			if (eyes.type == Eyes.HUMAN)
-				sirenCounter++;
-			if (vaginaType() == VaginaClass.SHARK)
-				sirenCounter++;
-			if (perkv1(IMutationsLib.HarpyHollowBonesIM) >= 1)
-				sirenCounter++;
-			if (perkv1(IMutationsLib.HarpyHollowBonesIM) >= 2)
-				sirenCounter++;
-			if (perkv1(IMutationsLib.HarpyHollowBonesIM) >= 3)
-				sirenCounter++;
-			if (perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1)
-				sirenCounter++;
-			if (perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2)
-				sirenCounter++;
-			if (perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3)
-				sirenCounter++;
-			if ((perkv1(IMutationsLib.HarpyHollowBonesIM) >= 1 || perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				sirenCounter++;
-			if ((perkv1(IMutationsLib.HarpyHollowBonesIM) >= 2 || perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				sirenCounter++;
-			if ((perkv1(IMutationsLib.HarpyHollowBonesIM) >= 3 || perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				sirenCounter++;
-			if (wings.type != Wings.FEATHERED_LARGE)
-				sirenCounter = 0;
-			sirenCounter = finalRacialScore(sirenCounter, Races.SIREN);
-			End("Player","racialScore");
-			return sirenCounter;
-		}
-
 		public function pigScore():Number {
 			Begin("Player","racialScore","pig");
 			var pigCounter:Number = 0;
@@ -6878,28 +6697,6 @@ use namespace CoC;
 			return pigCounter;
 		}
 
-		public function satyrScore():Number {
-			Begin("Player","racialScore","satyr");
-			var satyrCounter:Number = 0;
-			if (lowerBody == LowerBody.HOOFED)
-				satyrCounter++;
-			if (tailType == Tail.GOAT)
-				satyrCounter++;
-			if (ears.type == Ears.ELFIN)
-				satyrCounter++;
-			if (satyrCounter >= 3) {
-				if (faceType == Face.HUMAN)
-					satyrCounter++;
-				if (countCocksOfType(CockTypesEnum.HUMAN) > 0)
-					satyrCounter++;
-				if (balls > 0 && ballSize >= 3)
-					satyrCounter++;
-			}
-			satyrCounter = finalRacialScore(satyrCounter, Races.SATYR);
-			End("Player","racialScore");
-			return satyrCounter;
-		}
-
 		public function rhinoScore():Number {
 			return racialScore(Races.RHINO);
 		}
@@ -6910,33 +6707,6 @@ use namespace CoC;
 
 		public function dragonneScore():Number {
 			return racialScore(Races.DRAGONNE);
-		}
-
-		//Bear or Panda
-		public function bearpandaScore():Number {
-			Begin("Player","racialScore","bearpanda");
-			var bearpandaCounter:Number = 0;
-			if (faceType == Face.BEAR || faceType == Face.PANDA)
-				bearpandaCounter++;
-			if (ears.type == Ears.BEAR || ears.type == Ears.PANDA)
-				bearpandaCounter++;
-			if (tailType == Tail.BEAR)
-				bearpandaCounter++;
-			if (arms.type == Arms.BEAR)
-				bearpandaCounter++;
-			if (lowerBody == LowerBody.BEAR)
-				bearpandaCounter++;
-			if (eyes.type == Eyes.BEAR)
-				bearpandaCounter++;
-			if (skinType == Skin.FUR)
-				bearpandaCounter++;
-			if (InCollection(skin.coat.color, "black","brown","white") || (skin.coat.color == "white" && skin.coat.color2 == "black"))
-				bearpandaCounter++;
-			if (tallness > 72)
-				bearpandaCounter += 2;
-			bearpandaCounter = finalRacialScore(bearpandaCounter, Races.BEARANDPANDA);
-			End("Player","racialScore");
-			return bearpandaCounter;
 		}
 
 		public function avianScore():Number {
@@ -8226,18 +7996,6 @@ use namespace CoC;
 					maxLibCap2 += 60;
 				}
 			}//+10/10-20
-			if (sirenScore() >= 10) {
-				if (sirenScore() >= 20) {
-					maxStrCap2 += 80;
-					maxSpeCap2 += 120;
-					maxLibCap2 += 100;
-				}
-				else {
-					maxStrCap2 += 50;
-					maxSpeCap2 += 70;
-					maxLibCap2 += 30;
-				}
-			}//+20/10-20
 			if (orcaScore() >= 14) {
 				if (orcaScore() >= 20) {
 					maxStrCap2 += 140;
@@ -8346,15 +8104,6 @@ use namespace CoC;
 					currentSen += 15;
 				}
 			}//+60/50-60
-			if (satyrScore() >= 4) {
-				maxStrCap2 += 5;
-				maxSpeCap2 += 5;
-			}//+10/10-20
-			if (bearpandaScore() >= 10) {
-				maxStrCap2 += 100;
-				maxTouCap2 += 70;
-				maxIntCap2 -= 20;
-			}
 			if (pigScore() >= 10) {
 				if (pigScore() >= 15) {
 					maxStrCap2 += 125;
@@ -8498,27 +8247,6 @@ use namespace CoC;
 				maxWisCap2 += 80;
 				maxLibCap2 -= 50;
 			}//+150
-			if (yetiScore() >= 14) {
-				if (yetiScore() >= 17) {
-					maxStrCap2 += 130;
-					maxTouCap2 += 100;
-					maxSpeCap2 += 65;
-					maxIntCap2 -= 90;
-					maxLibCap2 += 50;
-				} else {
-					maxStrCap2 += 100;
-					maxTouCap2 += 80;
-					maxSpeCap2 += 50;
-					maxIntCap2 -= 70;
-					maxLibCap2 += 50;
-				}
-			}
-			if (yukiOnnaScore() >= 14) {
-				maxSpeCap2 += 70;
-				maxIntCap2 += 140;
-				maxWisCap2 += 70;
-				maxLibCap2 += 50;
-			}
 			if (firesnailScore() >= 15) {
 				maxStrCap2 += 70;
 				maxTouCap2 += 175;

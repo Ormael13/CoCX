@@ -7,6 +7,7 @@ package classes.IMutations
     import classes.PerkClass;
     import classes.PerkType;
 import classes.Player;
+import classes.Races;
 
 public class FrozenHeartMutation extends PerkType
     {
@@ -51,9 +52,7 @@ public class FrozenHeartMutation extends PerkType
                 IMutationsLib.FrozenHeartIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.FrozenHeartIM.requireHeartMutationSlot()
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.yukiOnnaScore() >= 14;
-                    }, "Yuki onna race");
+                    .requireRace(Races.YUKIONNA)
                 }
                 else{
                     var pLvl:int = pTier * 30;

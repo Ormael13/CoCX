@@ -31,6 +31,10 @@ public class RaceScoreBuilder {
 	public function noAntennae(score:int):RaceScoreBuilder {
 		return antennaeType(Antennae.NONE, score);
 	}
+	public function ballSize(size:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_BALL_SIZE, size, score, failScore, customName);
+		return this;
+	}
 	public function biggestCockLength(length:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_BIGGEST_COCK_LENGTH, length, score, failScore, customName);
 		return this;
@@ -169,6 +173,17 @@ public class RaceScoreBuilder {
 	}
 	public function skinCoatColor(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_SKIN_COAT_COLOR, type, score, failScore, customName);
+		return this;
+	}
+	public function skinCoatColorPair(color1:*, color2:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addRequirement(
+				RacialRequirement.joinAnd(
+						"skin coat",
+						" and ",
+						slotRequirement(BodyData.SLOT_SKIN_COAT_COLOR, color1, score, failScore, "$name"),
+						slotRequirement(BodyData.SLOT_SKIN_COAT_COLOR2, color2, score, failScore, "$name coat")
+				)
+		);
 		return this;
 	}
 	public function skinCoatTypeAndColor(type:*, color:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {

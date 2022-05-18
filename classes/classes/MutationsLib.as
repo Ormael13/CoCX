@@ -629,9 +629,7 @@ public class MutationsLib
 				FloralOvaries.requireOvariesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.alrauneScore() >= 13;
 				}, "Alraune race");
-				FrozenHeart.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.yukiOnnaScore() >= 14;
-				}, "Yuki onna race");
+				FrozenHeart.requireHeartMutationSlot().requireRace(Races.YUKIONNA);
 				GazerEye.requireEyesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.eyes.type == 36;
 				}, "Monoeye")
@@ -655,7 +653,7 @@ public class MutationsLib
 					return player.mouseScore() >= 12;
 				}, "Hinezumi race (Mouse 12+)");
 				HarpyHollowBones.requireBonesAndMarrowMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.harpyScore() >= 8 || player.sirenScore() >= 10 || player.thunderbirdScore() >= 12 || player.phoenixScore() >= 10 || player.couatlScore() >= 11;
+					return player.harpyScore() >= 8 || player.isRace(Races.SIREN) || player.thunderbirdScore() >= 12 || player.phoenixScore() >= 10 || player.couatlScore() >= 11;
 				}, "Harpy winged race");
 				HeartOfTheStorm.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.raijuScore() >= 10 || player.thunderbirdScore() >= 12 || player.isRace(Races.KAMAITACHI) || player.couatlScore() >= 11;
@@ -757,9 +755,7 @@ public class MutationsLib
 				WhaleFat.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.orcaScore() >= 14 || player.isRace(Races.SEA_DRAGON);
 				}, "Orca race");
-				YetiFat.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.yetiScore() >= 14;
-				}, "Yeti race");
+				YetiFat.requireFatTissueMutationSlot().requireRace(Races.YETI)
 				//Tier 2
 				ArachnidBookLungPrimitive.requireLevel(30)
 						.requirePerk(ArachnidBookLung);

@@ -11,7 +11,7 @@
 * racial paragon and like stat buffs
 * Future:
   * racial score caching
-  * `Race.onTierUp`/`onTierDown`
+  * `Race.onTierUp`/`onTierDown` - see `PlayerEvents:1500`
   * "Racial form" maybe? (gargoyles, alicorn/nightmare, elementals - same tier, diff. requirements/bonuses)
 
 ## Architecture

@@ -338,6 +338,14 @@ public class BodyData {
 		return data[SLOT_SKIN_COAT_COLOR];
 	}
 	
+	public static const SLOT_SKIN_COAT_COLOR2:int = _slotid++;
+	EnumValue.add(Slots,SLOT_SKIN_COAT_COLOR2, "SKIN_COAT_COLOR2", {
+		name:"coat secondary color"
+	});
+	public function get skinCoatColor2():String {
+		return data[SLOT_SKIN_COAT_COLOR2];
+	}
+	
 	public static const SLOT_SKIN_COAT_PATTERN:int = _slotid++;
 	EnumValue.add(Slots,SLOT_SKIN_COAT_PATTERN, "SKIN_COAT_PATTERN", {
 		name:"coat pattern",
@@ -482,6 +490,17 @@ public class BodyData {
 		return data[SLOT_THICKNESS];
 	}
 	
+	public static const SLOT_BALL_SIZE:int = _slotid++;
+	EnumValue.add(Slots,SLOT_BALL_SIZE, "BALL_SIZE", {
+		name:"balls size",
+		nameFn: function(value:Number):String {
+			return Measurements.inchesOrCentimetres(value);
+		}
+	});
+	public function get ballSize():int {
+		return data[SLOT_BALL_SIZE];
+	}
+	
 	public static const SLOT_BIGGEST_COCK_LENGTH:int = _slotid++;
 	EnumValue.add(Slots,SLOT_BIGGEST_COCK_LENGTH, "BIGGEST_COCK_LENGTH", {
 		name:"long cock",
@@ -567,10 +586,12 @@ public class BodyData {
 		if (player.skin.coverage > Skin.COVERAGE_NONE) {
 			data[SLOT_SKIN_COAT_TYPE]    = player.skin.coat.type;
 			data[SLOT_SKIN_COAT_COLOR]   = player.skin.coat.color;
+			data[SLOT_SKIN_COAT_COLOR2]  = player.skin.coat.color2;
 			data[SLOT_SKIN_COAT_PATTERN] = player.skin.coat.pattern;
 		} else {
 			data[SLOT_SKIN_COAT_TYPE]    = -1;
 			data[SLOT_SKIN_COAT_COLOR]   = "no";
+			data[SLOT_SKIN_COAT_COLOR2]  = "no";
 			data[SLOT_SKIN_COAT_PATTERN] = Skin.PATTERN_NONE;
 		}
 		data[SLOT_TAIL_TYPE]   = player.tail.type;
@@ -583,6 +604,7 @@ public class BodyData {
 		data[SLOT_FEMININITY]          = player.femininity;
 		data[SLOT_TONE]                = player.tone;
 		data[SLOT_THICKNESS]           = player.thickness;
+		data[SLOT_BALL_SIZE]           = player.balls ? player.ballSize : 0;
 		data[SLOT_BIGGEST_COCK_LENGTH] = player.biggestCockLength();
 		data[SLOT_BIGGEST_TIT_SIZE]    = player.biggestTitSize();
 	}

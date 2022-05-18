@@ -48,10 +48,9 @@ public class RaceTierBuilder {
 		}
 	}
 	
-	public function namesTauric(nonTaurName:String, taurName:String, femaleTaurName:String=""):RaceTierBuilder {
-		femaleTaurName ||= taurName;
+	public function namesTauric(nonTaurName:String, taurName:String):RaceTierBuilder {
 		this.nameFn = function(body:BodyData):String {
-			if (body.isTaur) return body.looksFemale ? taurName : femaleTaurName;
+			if (body.isTaur) return taurName;
 			return nonTaurName;
 		}
 		return this;

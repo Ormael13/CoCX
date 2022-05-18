@@ -36,6 +36,10 @@ public class GoblinRace extends Race {
 				.armType(Arms.HUMAN, +1)
 				.legType(LowerBody.HUMAN, +1)
 				.noAntennae(+1);
+		
+		addMutation(IMutationsLib.NaturalPunchingBagIM);
+		addBloodline(PerkLib.GoblinsDescendant, PerkLib.BloodlineGoblin);
+		
 		buildTier(10, "goblin")
 				.buffs({
 					"str.mult": -0.50,
@@ -44,9 +48,6 @@ public class GoblinRace extends Race {
 					"lib.mult": +0.25
 				})
 				.end();
-		
-		addMutation(IMutationsLib.NaturalPunchingBagIM);
-		addBloodline([PerkLib.GoblinsDescendant, PerkLib.BloodlineGoblin]);
 	}
 }
 }

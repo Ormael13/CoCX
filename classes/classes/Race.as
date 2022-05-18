@@ -60,6 +60,9 @@ public class Race {
         this.name = _name;
         this.id = _id;
         this.playerFunctionName = _playerFunctionName;
+		if (_id in RaceById) {
+			trace("[ERROR] Duplicate race id "+_id);
+		}
         RaceById[_id] = this;
 		AllRacesWithDisabled.push(this);
 		this._minScore = _minScore;
@@ -321,8 +324,9 @@ public class Race {
 	):RaceScoreBuilder {
 		return new ConditionedRaceScoreBuilder(this,conditionFn, conditionName, minScore);
 	}
-	protected function addBloodline(bloodlinePerks:/*PerkType*/Array):void {
-		Utils.pushAll(this.bloodlinePerks, bloodlinePerks);
+	protected function addBloodline(descendantPerk:PerkType, bloodlinePerk:PerkType):void {
+		bloodlinePerks.push(descendantPerk);
+		bloodlinePerks.push(bloodlinePerk);
 	}
 	protected function addMutation(perkType:PerkType, scorePerStage:int=+1):void {
 		this.mutations.push([perkType,scorePerStage]);

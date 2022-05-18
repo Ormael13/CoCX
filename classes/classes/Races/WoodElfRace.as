@@ -37,7 +37,7 @@ public class WoodElfRace extends Race{
 				.hasPerk(PerkLib.FlawlessBody, +1)
 				.hasPerk(PerkLib.ElvenSense, +1);
 		
-		addBloodline([PerkLib.ElfsDescendant,PerkLib.BloodlineElf]);
+		addBloodline(PerkLib.ElfsDescendant,PerkLib.BloodlineElf);
 		addMutation(IMutationsLib.ElvishPeripheralNervSysIM, +3);
 		
 		buildTier(22, "wood elf little sister")

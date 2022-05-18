@@ -23,7 +23,7 @@ public class YukiOnnaScene extends BaseContent
 			clearOutput();
 			spriteSelect(SpriteDb.s_YukiOnna);
 			if (player.hasStatusEffect(StatusEffects.MetYukiOnna)) {
-				if (player.yukiOnnaScore() >= 14 && player.hasPerk(PerkLib.IcyFlesh)) {
+				if (player.isRace(Races.YUKIONNA) && player.hasPerk(PerkLib.IcyFlesh)) {
 					outputText("As you explore the glacial rift the weather begins to take a turn for the worse, your visibility dimming out until you can barely see a few meters ahead of yourself. You begin considering going back to camp when a sweet female voice begins to sing amidst the blizzard. You know this song, melancholic, tragic even and something stirs you to fellow the song to its source, a Yuki Onna enjoying the blizzard standing next to a cliff, her snowish white silk like hair floating softly in the wind. She turns to you smiling, waving you to come closer.\n\n");
 					outputText("\"<i>Why hello there snow sister. I just can't find anything to warm me up, and I have been singing for hours, so how about we had some sisterly bonding, just you and I?</i>\"\n\n");
 					outputText("You catch her meaning right away, smiling coyly in approval as you toss your equipment to the snow bank on the side. Who needs a bed really? The snow is comfy enough, and it's certainly not like you or her is gonna die from the cold, though others might.\n\n");

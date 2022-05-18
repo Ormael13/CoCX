@@ -401,7 +401,7 @@ public class SaveUpdater extends NPCAwareContent {
 		//atlach nacha achiev
 		//handmaiden achiev
 		if (player.isRace(Races.JIANGSHI)) awardAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER);
-		if (player.yukiOnnaScore() >= 14) awardAchievement("Let It Go", kACHIEVEMENTS.EPIC_LET_IT_GO);
+		if (player.isRace(Races.YUKIONNA)) awardAchievement("Let It Go", kACHIEVEMENTS.EPIC_LET_IT_GO);
 		//wendigo achiev
 
 		if (player.hasStatusEffect(StatusEffects.AchievementsNormalShadowTotal)) {

@@ -7,6 +7,7 @@ package classes.IMutations
     import classes.PerkClass;
     import classes.PerkType;
 import classes.Player;
+import classes.Races;
 
 public class HarpyHollowBonesMutation extends PerkType
     {
@@ -51,7 +52,7 @@ public class HarpyHollowBonesMutation extends PerkType
                 if (pTier == 0){
                     IMutationsLib.HarpyHollowBonesIM.requireBonesAndMarrowMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.harpyScore() >= 8 || player.sirenScore() >= 10 || player.thunderbirdScore() >= 12 || player.phoenixScore() >= 10 || player.couatlScore() >= 11;
+                        return player.harpyScore() >= 8 || player.isRace(Races.SIREN) || player.thunderbirdScore() >= 12 || player.phoenixScore() >= 10 || player.couatlScore() >= 11;
                     }, "Harpy winged race");
                 }
                 else{

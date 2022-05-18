@@ -45,10 +45,10 @@ public class KitsuneRace extends Race {
 				.legType(ANY(LowerBody.FOX, LowerBody.HUMAN), +1, -1)
 				.faceType(ANY(Face.ANIMAL_TOOTHS, Face.HUMAN, Face.FOX), +1, -1);
 		addScoresAfter(5)
-				.customRequirement("skin coat", "skin coat other than fur",
+				.customRequirement("skin coat", "fur or no coat",
 						function (body:BodyData):Boolean {
-							return body.hasCoat && body.skinCoatType != Skin.FUR;
-						}, -2
+							return !body.hasCoat && body.skinCoatType == Skin.FUR;
+						}, 0, -2
 				)
 				.skinBaseType(Skin.PLAIN, +1, -3)
 				.hairColor(ANY(KitsuneHairColors), +1)
@@ -60,9 +60,11 @@ public class KitsuneRace extends Race {
 				.hasPerk(PerkLib.StarSphereMastery, +1)
 				.hasAnyPerk([PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune], +1)
 				.hasPerk(PerkLib.NinetailsKitsuneOfBalance, +1);
-		addBloodline([PerkLib.KitsunesDescendant, PerkLib.BloodlineKitsune]);
+		
+		addBloodline(PerkLib.KitsunesDescendant, PerkLib.BloodlineKitsune);
 		addMutation(IMutationsLib.KitsuneThyroidGlandIM);
 		addMutation(IMutationsLib.KitsuneParathyroidGlandsIM);
+		
 		buildTier(9, "kitsune")
 				.namesTauric("kitsune", "kitsune-taur")
 				.require("2+ fox tails", function (body:BodyData):Boolean {

@@ -26,7 +26,8 @@ public class VampireRace extends Race {
 		addScoresAfter(8)
 				.armType(Arms.HUMAN, +1)
 				.legType(LowerBody.HUMAN, +1)
-		addBloodline([PerkLib.VampiresDescendant,PerkLib.BloodlineVampire])
+		
+		addBloodline(PerkLib.VampiresDescendant,PerkLib.BloodlineVampire);
 		addMutation(IMutationsLib.VampiricBloodstreamIM);
 		addMutation(IMutationsLib.HollowFangsIM);
 		

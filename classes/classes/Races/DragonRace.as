@@ -49,7 +49,7 @@ public class DragonRace extends Race {
 					PerkLib.DragonDarknessBreath
 				], +1);
 		
-		addBloodline([PerkLib.DragonsDescendant, PerkLib.BloodlineDragon]);
+		addBloodline(PerkLib.DragonsDescendant, PerkLib.BloodlineDragon);
 		addMutation(IMutationsLib.DraconicBonesIM);
 		addMutation(IMutationsLib.DraconicHeartIM);
 		addMutation(IMutationsLib.DraconicLungIM);
