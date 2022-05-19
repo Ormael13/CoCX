@@ -6,6 +6,7 @@ package classes.Scenes
 {
 import classes.*;
 import classes.BodyParts.*;
+import classes.GeneticMemories.*;
 import classes.IMutationPerkType;
 import classes.IMutations.IMutationsLib;
 import classes.GlobalFlags.kFLAGS;
