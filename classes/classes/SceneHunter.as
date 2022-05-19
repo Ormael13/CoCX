@@ -6,7 +6,7 @@ import classes.Scenes.SceneLib;
 
 public class SceneHunter extends BaseContent {
     public function get progress():String {
-        return "<i>Selectors, menus and checks are currently added to: Areas, Dungeons.</i>";
+        return "<i>Selectors, menus and check printers are currently added to: Areas, Dungeons.</i>";
     }
 
     /*
@@ -18,10 +18,11 @@ public class SceneHunter extends BaseContent {
     public function settingsPage():void {
         clearOutput();
         menu();
-		displayHeader("SceneHunter Settings - WIP");
+		displayHeader("SceneHunter Settings");
         outputText("The following are QoL improvements meant to make some scenes (and their variations) easier to access.");
         outputText("\nAll these features blend into the game (almost) seamlessly, are lore-accurate and don't change anything gameplay-related.");
         outputText("\n\n" + progress);
+        outputText("\n\n<b>If you notice any bugs (missing options, weirdness in scenes, dead ends) caused by enabling/disabling any of SH options (or ANY new issues in the scenes listed above), please report it in Discord and it will be fixed quickly. A lot of code was moved whiile setting SH up, so it was very easy to miss something.</b>");
 
         addButton(0, "UniHerms", toggle, kFLAGS.SCENEHUNTER_UNI_HERMS);
         outputText("\n\n<b>Universal Herms:</b> ");
