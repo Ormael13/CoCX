@@ -4478,11 +4478,11 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const EyesRaijuColors: Transformation = new SimpleTransformation("Raiju Eye Colors",
 	  // apply effect
 	  function (doOutput: Boolean): void {
-	    transformations.EyesChangeColor(["blue", "green", "turquoise", "light green"]).applyEffect(doOutput);
+	    transformations.EyesChangeColor(["blue", "green", "teal"]).applyEffect(doOutput);
 	  },
 	  // is present
 	  function (): Boolean {
-	    return InCollection(player.eyes.colour, ["blue", "green", "turquoise", "light green"]);
+	    return InCollection(player.eyes.colour, ["blue", "green", "teal"]);
 	  }
 	);
 
