@@ -420,8 +420,8 @@ internal function sharkLossRape():void {
 		else outputText("horny ");
 		outputText("to fight on.\n\n");
 		outputText("The shark girl does a little victory dance, swaying her hips to and fro before moving over to you. She quickly removes your [armor], but her smile fades to a blank expression when she notices you lack any genitalia. \"<i>What the...</i>\" she mumbles, poking you in the groin. Finding you completely useless, she growls in frustration and stomps on your face in anger. The sudden pain makes you pass out.");
-		cleanupAfterCombat();
-		dynStats("tou", -2);
+		cleanupAfterCombat()
+		player.addCurse("tou", 2, 2);
 		return;
 	}
 	//Female:

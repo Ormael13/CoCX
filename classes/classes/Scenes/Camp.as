@@ -4,8 +4,10 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Items.Consumables.SimpleConsumable;
+import classes.Scenes.Dungeons.D3.IncubusMechanicScenes;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.Places.WoodElves;
@@ -116,7 +118,6 @@ public class Camp extends NPCAwareContent{
 
 	public var IsSleeping: Boolean = false;
 	public var CanDream: Boolean = false;
-	public var HadNightEvent: Boolean = false;
 	public var IsWaitingResting: Boolean = false;
 
 	public function doCamp():void { //Only called by playerMenu
@@ -1070,6 +1071,10 @@ public class Camp extends NPCAwareContent{
 			saveUpdater.promptSaveUpdate();
 			return;
 		}
+		if (!player.hasPerk(IMutationsLib.MutationsTemplateIM)){
+			CoC.instance.charCreation.setupMutations();
+			return;
+		}
 		//Massive Balls Bad End (Realistic Mode only)
 		if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && player.ballSize > (18 + (player.str / 2) + (player.tallness / 4))) {
 			badEndGIANTBALLZ();
@@ -1086,7 +1091,6 @@ public class Camp extends NPCAwareContent{
 		//Min Lust Bad End (Must not have any removable/temporary min lust.)
 		if (player.minLust() >= player.maxLust() && !flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= 168 && !player.eggs() >= 20 && !player.hasStatusEffect(StatusEffects.BimboChampagne) && !player.hasStatusEffect(StatusEffects.Luststick) && player.jewelryEffectId != 1) {
 			badEndMinLust();
-			return;
 		}
 	}
 
@@ -2680,7 +2684,6 @@ public class Camp extends NPCAwareContent{
 			outputText(" and murmur a incantation.  Gradually, the power within the stones fade as they go dormant. Soon, the glow of the glyphs adorning the stones has gone dark.");
 			flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] = 2;
 			doNext(campMiscActions);
-			return;
 		}
 	}
 	
@@ -3022,9 +3025,6 @@ public class Camp extends NPCAwareContent{
 		player.addStatusValue(StatusEffects.PCClone,1,(newdao-olddao));
 		doNext(CloneContemplateDao);
 	}
-	private function CloneTrainWaponMastery():void {
-
-	}
 
 	private function DummyTraining():void {
 		clearOutput();
@@ -3133,7 +3133,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.LunaOff)) player.removeStatusEffect(StatusEffects.LunaOff);
 		else {
 			player.createStatusEffect(StatusEffects.LunaOff, 0, 0, 0, 0);
-			flags[kFLAGS.SLEEP_WITH] == "";
+			if (flags[kFLAGS.SLEEP_WITH] == "Luna") flags[kFLAGS.SLEEP_WITH] = "";
 		}
 		SparrableNPCsMenu();
 	}
@@ -3456,8 +3456,9 @@ public class Camp extends NPCAwareContent{
 			}
 			//Marble withdrawal
 			if (player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
-				outputText("\nYour rest is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n");
-				dynStats("tou", -.1, "int", -.1);
+				outputText("\nYour rest is very troubled, and you aren't able to settle down. You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n");
+				player.addCurse("tou", 0.1, 2);
+				player.addCurse("int", 0.1, 2);
 			}
 			//Bee cock
 			if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) {
@@ -3920,31 +3921,6 @@ public class Camp extends NPCAwareContent{
 		removeButton(1); //Can't wake up, must load.
 	}
 
-	public function allNaturalSelfStimulationBeltContinuation():void {
-		clearOutput();
-		outputText("In shock, you scream as you realize the nodule has instantly grown into a massive, organic dildo. It bottoms out easily and rests against your cervix as you recover from the initial shock of its penetration. As the pangs subside, the infernal appendage begins working itself. It begins undulating in long, slow strokes. It takes great care to adjust itself to fit every curve of your womb. Overwhelmed, your body begins reacting against your conscious thought and slowly thrusts your pelvis in tune to the thing.\n\n");
-		outputText("As suddenly as it penetrated you, it shifts into a different phase of operation. It buries itself as deep as it can and begins short, rapid strokes. The toy hammers your insides faster than any man could ever hope to do. You orgasm immediately and produce successive climaxes. Your body loses what motor control it had and bucks and undulates wildly as the device pistons your cunt without end. You scream at the top of your lungs. Each yell calls to creation the depth of your pleasure and lust.\n\n");
-		outputText("The fiendish belt shifts again. It buries itself as deep as it can go and you feel pressure against the depths of your womanhood. You feel a hot fluid spray inside you. Reflexively, you shout, \"<b>IT'S CUMMING! IT'S CUMMING INSIDE ME!</b>\" Indeed, each push of the prodding member floods your box with juice. It cums... and cums... and cums... and cums...\n\n");
-		outputText("An eternity passes, and your pussy is sore. It is stretched and filled completely with whatever this thing shoots for cum. It retracts itself from your hole and you feel one last pang of pressure as your body now has a chance to force out all of the spunk that it cannot handle. Ooze sprays out from the sides of the belt and leaves you in a smelly, sticky mess. You feel the belt's tension ease up as it loosens. The machine has run its course. You immediately pass out.");
-		player.slimeFeed();
-		player.orgasm();
-		dynStats("lib", 1, "sen", (-0.5));
-		doNext(camp.returnToCampUseOneHour);
-	}
-
-	public function allNaturalSelfStimulationBeltBadEnd():void {
-		spriteSelect(SpriteDb.s_giacomo);
-		clearOutput();
-		outputText("Whatever the belt is, whatever it does, it no longer matters to you.  The only thing you want is to feel the belt and its creature fuck the hell out of you, day and night.  You quickly don the creature again and it begins working its usual lustful magic on your insatiable little box.  An endless wave of orgasms take you.  All you now know is the endless bliss of an eternal orgasm.\n\n");
-		outputText("Your awareness hopelessly compromised by the belt and your pleasure, you fail to notice a familiar face approach your undulating form.  It is the very person who sold you this infernal toy.  The merchant, Giacomo.\n\n");
-		outputText("\"<i>Well, well,</i>\" Giacomo says.  \"<i>The Libertines are right.  The creature's fluids are addictive. This poor " + player.mf("man", "woman") + " is a total slave to the beast!</i>\"\n\n");
-		outputText("Giacomo contemplates the situation as you writhe in backbreaking pleasure before him.  His sharp features brighten as an idea strikes him.\n\n");
-		outputText("\"<i>AHA!</i>\" the hawkish purveyor cries.  \"<i>I have a new product to sell! I will call it the 'One Woman Show!'</i>\"\n\n");
-		outputText("Giacomo cackles smugly at his idea.  \"<i>Who knows how much someone will pay me for a live " + player.mf("man", "woman") + " who can't stop cumming!</i>\"\n\n");
-		outputText("Giacomo loads you up onto his cart and sets off for his next sale.  You do not care.  You do not realize what has happened.  All you know is that the creature keeps cumming and it feels... sooooo GODDAMN GOOD!");
-		EventParser.gameOver();
-	}
-
 	private function dungeonFound():Boolean { //Returns true as soon as any known dungeon is found
 		if (flags[kFLAGS.FACTORY_FOUND] > 0) return true;
 		if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) return true;
@@ -3965,16 +3941,14 @@ public class Camp extends NPCAwareContent{
 			if (flags[kFLAGS.FARM_DISABLED] == 0) return true;
 			if (player.cor >= 70 && player.level >= 12 && SceneLib.farm.farmCorruption.corruptFollowers() >= 2 && flags[kFLAGS.FARM_CORRUPTION_DISABLED] == 0) return true;
 		}
-		if (flags[kFLAGS.FARM_CORRUPTION_STARTED]) return true;
-		return false;
+		return flags[kFLAGS.FARM_CORRUPTION_STARTED];
 	}
 
 //-----------------
 //-- PLACES MENU
 //-----------------
 	private function placesKnown():Boolean { //Returns true as soon as any known place is found
-		if (placesCount() > 0) return true;
-		return false;
+		return placesCount() > 0;
 	}
 
 	public function placesCount():int {
@@ -4151,7 +4125,8 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(2, "Stronghold", SceneLib.d3.enterD3).hint("Visit the stronghold in the high mountains that belongs to Lethice, the demon queen." + ((flags[kFLAGS.LETHICE_DEFEATED] > 0) ? "\n\nYou have slain Lethice and put an end to the demonic threats. Congratulations, you've beaten the main story!" : "") + (SceneLib.dungeons.checkLethiceStrongholdClear() ? "\n\nCLEARED!" : ""));
 		else addButtonDisabled(2, "???", "???");
 		//Side dungeons
-		if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", SceneLib.dungeons.desertcave.enterDungeon).hint("Visit the cave you've found in the desert." + (flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0 ? "\n\nFrom what you've known, this is the source of the Sand Witches." : "") + (SceneLib.dungeons.checkSandCaveClear() ? "\n\nCLEARED!" : ""));
+		if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0 && !flags[kFLAGS.DESERT_CAVE_DISABLED]) addButton(5, "Desert Cave", SceneLib.dungeons.desertcave.enterDungeon).hint("Visit the cave you've found in the desert." + (flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0 ? "\n\nFrom what you've known, this is the source of the Sand Witches." : "") + (SceneLib.dungeons.checkSandCaveClear() ? "\n\nCLEARED!" : ""));
+		else if (flags[kFLAGS.DESERT_CAVE_DISABLED]) addButtonDisabled(5, "Desert Cave", "You can't find the entrance. Maybe it's hidden. Or locked forever. Who knows?");
 		else addButtonDisabled(5, "???", "???");
 		if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] > 0) addButton(6, "Bee Hive", SceneLib.dungeons.beehive.enterDungeon).hint("Visit the bee hive you've found in the forest." + (flags[kFLAGS.TIFA_FOLLOWER] > 5 ? "\n\nYou've defeated all corrupted bees." : "") + (SceneLib.dungeons.checkBeeHiveClear() ? "\n\nCLEARED!" : ""));
 		else addButtonDisabled(6, "???", "???");
@@ -4785,7 +4760,7 @@ public function rebirthFromBadEnd():void {
         menu();
         //Marble scene
 		if (flags[kFLAGS.MARBLE_PURIFIED] == 1)
-			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight, false).hint("The punishment for Marble's bitchy sister.");
+			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight).hint("The punishment for Marble's bitchy sister.");
 		//Excellia slave first scene
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2)
 			addButton(1, "Excellia Slv", SceneLib.excelliaFollower.ExcelliaPathChoiceMakeSlave).hint("Excellia acknowledges herself as your slave.");
@@ -4823,11 +4798,20 @@ public function rebirthFromBadEnd():void {
 
 	public function recallScenes_dungeons():void {
 		menu();
-		if (flags[kFLAGS.SANDWITCH_MOB_DEFEATED])
-			addButton(0, "SandWitchMob", SceneLib.dungeons.desertcave.yoYouBeatUpSomeSandWitchesYOUMONSTER).hint("Punish some sand witches for attacking you.");
-		if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1, "Deep Cave", recallScenes_deepCave);
-		if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(2, "Stronghold", recallScenes_d3);
+		if (flags[kFLAGS.SANDWITCH_MOB_DEFEATED]) addButton(0, "SandWitchMob", SceneLib.dungeons.desertcave.yoYouBeatUpSomeSandWitchesYOUMONSTER).hint("Punish some sand witches for attacking you.");
+		if (flags[kFLAGS.FACTORY_FOUND]) addButton(1, "Factory", recallScenes_factory);
+		if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(2, "Deep Cave", recallScenes_deepCave);
+		if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(3, "Stronghold", recallScenes_d3);
 		addButton(14, "Back", recallScenes);
+	}
+
+	public function recallScenes_factory():void {
+		menu();
+		if (flags[kFLAGS.FACTORY_SUCCUBUS_DEFEATED])
+			addButton(0, "Sec.Succubus", SceneLib.dungeons.factory.secretarialSuccubusDefeated).hint("Do you have a fetish for sharply-dressed demon girls?");
+		if (flags[kFLAGS.FACTORY_INCUBUS_DEFEATED])
+			addButton(1, "Inc.Mechanic", SceneLib.dungeons.factory.incubusMechanicDefeated).hint("What, again?");
+		addButton(14, "Back", recallScenes_dungeons);
 	}
 
 	public function recallScenes_deepCave():void {
@@ -4846,22 +4830,18 @@ public function rebirthFromBadEnd():void {
 
 	public function recallScenes_d3():void {
 		menu();
-		//Doppel
 		if (flags[kFLAGS.D3_MIRRORS_SHATTERED])
 			addButton(0, "Doppelganger", SceneLib.d3.doppleganger.punchYourselfInTheBalls).hint("Go fuck yourself!");
-		//DriderIncubus
 		if (flags[kFLAGS.DRIDERINCUBUS_DEFEATED])
-			addButton(1, "DriderI & M", SceneLib.d3.driderIncubus.beatTheSpooderbutt, false).hint("Recall the glorious defeat of the drider-incubus and maybe take your 'reward'.");
-		//HermCentaur
+			addButton(1, "DriderI & M", SceneLib.d3.driderIncubus.beatTheSpooderbutt).hint("Recall the glorious defeat of the drider-incubus and maybe take your 'reward'.");
 		if (flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0)
-			addButton(2, "HermCentaur", SceneLib.d3.hermCentaur.beatThePony, false).hint("Get your 'reward' for beating the herm centaur in the stronghold.");
-		//MinoKing
+			addButton(2, "HermCentaur", SceneLib.d3.hermCentaur.beatThePony).hint("Get your 'reward' for beating the herm centaur in the stronghold.");
 		if (flags[kFLAGS.MINOTAURKING_DEFEATED] > 0)
 			addButton(3, "M.King & Exc", SceneLib.d3.minotaurKing.theKingIsDeadLongLiveTheKing).hint("If you didn't have time or the mood for using 2 cowsluts before fighting Lethice, you can do it in your imagination!");
-		//Lethice
 		if (flags[kFLAGS.LETHICE_DEFEATED] > 0)
-			addButton(4, "Lethice", SceneLib.d3.lethice.defeated, false).hint("While you can't make her your eternal slave, you can punish her for her arrogance in your memories as much as you want.");
-
+			addButton(4, "Lethice", SceneLib.d3.lethice.defeated).hint("While you can't make her your eternal slave, you can punish her for her arrogance in your memories as much as you want.");
+		if (flags[kFLAGS.D3_MECHANIC_LAST_GREET] == IncubusMechanicScenes.MECHANIC_FOUGHT)
+			addButton(5, "Inc.Mechanic", SceneLib.d3.incubusMechanic.beatDaMechanic).hint("What, again?");
 		addButton(14, "Back", recallScenes_dungeons);
 	}
 
@@ -4871,5 +4851,6 @@ public function rebirthFromBadEnd():void {
         recalling = false; //EVERY recall scene must return here to clear the flag.
         doNext(returnToCampUseOneHour);
     }
-	}
+
+}
 }

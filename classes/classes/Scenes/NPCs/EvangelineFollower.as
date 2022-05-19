@@ -1226,15 +1226,29 @@ private function InternalMutations0(page:int = 0, GoM:int = 0):void {
 
 	function mutationsAssistant(pArray:Array, menuButton:int = 0):* {
 		var menuItems:Array = [];
-		for each(var pArray2:Array in pArray){
-			var temp:Array;
-			temp = Creature.cDynPerk(pArray2[0], pArray2[1], player);
-			if (temp[1] is Function){
-				temp.insertAt(1,curry(temp[1], costTaker));
-				temp.removeAt(2);
+		var target:* = player;
+		for each (var mutations:IMutationPerkType in pArray){
+			mutations.pReqs(player);
+			trace("" + mutations.name() + ": Checking requirements. v");
+			if (mutations.available(target) && mutations.maxLvl > target.perkv1(mutations)){
+				trace("Requirements met, adding in.");
+				menuItems.push(mutations.name(), curry(mutations.acquireMutation, player, costTaker), mutations.desc());	//This is witchcraft, not sure how acquirePerk still recalls which perk to give, but it does.
 			}
-			for each (var i:* in temp){
-				menuItems.push(i);
+			else if(mutations.maxLvl == target.perkv1(mutations)){
+				trace("MaxTier acquired");
+				menuItems.push(mutations.name(), false, "You already have the highest tier!");
+			}
+			else{
+				if (mutations.requirements.length == 0){
+					trace("Requirements empty.");
+				}
+				else{
+					trace("Did not meet requirements.");
+				}
+				//trace("Unable to meet requirements/requirements borked.");
+				//if (mutations.available(target)) trace("\nAvailable: True");
+				//if (mutations.maxLvl > target.perkv1(mutations)) trace("MaxLvl: True");
+				menuItems.push(mutations.name(), false, "You don't meet the requirements for this!");
 			}
 		}
 		menuGen(menuItems, page, curry(meetEvangeline, 2));
@@ -1253,7 +1267,7 @@ private function InternalMutations0(page:int = 0, GoM:int = 0):void {
 		outputText("\"<i>This might sting a little… bear it with me [name].</i>\"\n\n");
 		outputText("You don't have the time to gasp before she pushes the injection in. The transformative in the wound burns at first but then spreads to your organ as it slowly changes to acquire new inhuman property. The transformation was successful.");
 		eachMinuteCount(15);
-		doNext(playerMenu);
+		doNext(InternalMutations);
 	}
 }
 

@@ -187,7 +187,7 @@ public class YukiOnnaScene extends BaseContent
 			clearOutput();
 			outputText("In defeat the Yuki Onna screams before vanishing in the intensifying blizzard covers her escape as the world around you turns white with snow, ice and sleet. This said she doesn't leave without warning, likely you will meet her again sooner or later.\n\n");
 			outputText("\"<i>This is just a setback! The wolf god be my witness I will freeze your soul sooner or later.</i>\"\n\n");
-			outputText("Eventually the storm finally calms down, leaving you somewhat alive and fine in the middle of the rift. You head back to camp, satisfied with having defeated your opponent and truth be told, with how freezing you are right now, the last thing on your mind is sex, least of all with a ice spirit bent on doing you harm.\n\n");
+			outputText("Eventually the storm finally calms down, leaving you somewhat alive and fine in the middle of the rift. You head back to camp, satisfied with having defeated your opponent and truth be told, with how freezing you are right now, the last thing on your mind is sex, least of all with an ice spirit bent on doing you harm.\n\n");
 			if (player.statusEffectv1(StatusEffects.MetYukiOnna) == 2) player.addStatusValue(StatusEffects.MetYukiOnna, 1, 1);
 			player.lust = player.minLust();
 			cleanupAfterCombat();

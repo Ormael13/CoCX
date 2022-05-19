@@ -6,7 +6,6 @@ package classes.Items.Undergarments
 {
 	import classes.Items.Undergarment;
 	import classes.PerkLib;
-	import classes.Player;
 
 	public class DriderPanties extends Undergarment
 	{

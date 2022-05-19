@@ -1,13 +1,8 @@
 package classes.Items.Consumables
 {
-    import classes.Items.Consumable;
     import classes.CoC;
-    import classes.CockTypesEnum;
-    import classes.GlobalFlags.*;
     import classes.Items.Consumable;
-    import classes.PerkLib;
     import classes.Player;
-    import classes.PregnancyStore;
     import classes.StatusEffects;
     import classes.internals.Utils;
 
@@ -16,8 +11,6 @@ package classes.Items.Consumables
     */
     public class Ambrosia extends Consumable
     {
-        private static const ITEM_VALUE:int = 150;
-
         public function Ambrosia()
         {
             super("Ambrosa","Ambrosia", "a small crystal vial filled with a glittering amber fluid you got from the Sand Mother. You can smell a sweet scent, even though it is tightly corked");
@@ -81,7 +74,7 @@ package classes.Items.Consumables
 				outputText("\n\nYou spend a few moments analyzing the taste and texture of the fluid residue, feeling awfully smart for it.");
 				changes++;
 			}
-            return (false);
+            return false;
         }
     }
 }

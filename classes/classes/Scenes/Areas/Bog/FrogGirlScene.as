@@ -194,7 +194,7 @@ private function lessonFollowup():void {
 	clearOutput();
 	outputText("You wake up two hours later, floating alone in the pool, with a migraine and soggy clothes.  You slog your way out, clutching your head, and head back to camp.");
 	//[Toughness -1]
-	dynStats("tou", -1);
+	player.addCurse("tou", 1, 2);
 	doNext(camp.returnToCampUseTwoHours);
 }
 

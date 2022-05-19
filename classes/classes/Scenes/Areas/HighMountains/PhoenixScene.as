@@ -262,7 +262,7 @@ public class PhoenixScene extends BaseContent
 			outputText("\n\nToo pained to redress yourself, the spunk dripping from you marks out your path back down the mountain, almost as if the gods are making sure you have a way of finding the route back for another round.");
 			player.addCurse("str",2,2);
 			player.sexReward("cum","Anal");
-			dynStats("tou", -2);
+			player.addCurse("tou", 2, 2);
 			doNext(camp.returnToCampUseFourHours);
 		}
 		

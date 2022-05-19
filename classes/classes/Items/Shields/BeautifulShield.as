@@ -3,11 +3,7 @@
  */
 package classes.Items.Shields 
 {
-	import classes.CoC_Settings;
-	import classes.Creature;
-	import classes.CoC;
 	import classes.Items.Shield;
-	import classes.Player;
 
 	public class BeautifulShield extends Shield {
 		

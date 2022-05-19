@@ -5,7 +5,6 @@
 package classes.Items.HeadJewelries 
 {
 	import classes.Items.HeadJewelry;
-	import classes.Player;
 	import classes.StatusEffects;
 
 	public class SnowflakeHairpin extends HeadJewelry

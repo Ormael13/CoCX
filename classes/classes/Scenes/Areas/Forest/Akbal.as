@@ -250,10 +250,9 @@ public class Akbal extends Monster
 			if (flags[kFLAGS.AKBAL_LVL_UP] >= 8) this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
 			if (flags[kFLAGS.AKBAL_LVL_UP] >= 9) this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			if (flags[kFLAGS.AKBAL_LVL_UP] >= 10) this.createPerk(PerkLib.PrestigeJobTempest, 0, 0, 0, 0);
-			if (flags[kFLAGS.AKBAL_LVL_UP] >= 11) this.createPerk(IMutationsLib.CatLikeNimblenessIM, 2, 0, 0, 0);
+			if (flags[kFLAGS.AKBAL_LVL_UP] >= 11) IMutationsLib.CatLikeNimblenessIM.acquireMutation(this, "none", 2);
 			if (flags[kFLAGS.AKBAL_LVL_UP] >= 12) this.createPerk(PerkLib.MythicalSpeed, 0, 0, 0, 0);
-			if (flags[kFLAGS.AKBAL_LVL_UP] >= 13) this.setPerkValue(IMutationsLib.CatLikeNimblenessIM,1,3);
-			updateDynamicPerkBuffs(IMutationsLib.CatLikeNimblenessIM, CatLikeNimblenessMutation, this);
+			if (flags[kFLAGS.AKBAL_LVL_UP] >= 13) IMutationsLib.CatLikeNimblenessIM.acquireMutation(this, "none", 3);
 			checkMonster();
 		}
 

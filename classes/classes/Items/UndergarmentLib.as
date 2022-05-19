@@ -16,7 +16,6 @@ package classes.Items
 		public static const TYPE_LOWERWEAR:int = 1;
 		public static const TYPE_FULLWEAR:int  = 2;
 		
-		//public static const COMFORTABLE_UNDERCLOTHES:Undergarment = new ComfortableUnderclothes();
 		public static const NOTHING:Undergarment = new Nothing();
 		
 		//Upper

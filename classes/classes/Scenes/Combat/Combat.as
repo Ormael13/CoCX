@@ -12,6 +12,8 @@ import classes.ItemType;
 import classes.Items.JewelryLib;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
+import classes.Items.WeaponRange;
+import classes.Items.WeaponRangeLib;
 import classes.Monster;
 import classes.PerkLib;
 import classes.PotionType;
@@ -1962,9 +1964,9 @@ public class Combat extends BaseContent {
 		addButton(0, "Next", combatMenu, false);
 	}
 
-    public function willothewispattacks():void {
+    public function willothewispattacks(noSkip:Boolean = false):void {
         outputText("\n\n");
-		willothewispattacks0();
+		if (noSkip) willothewispattacks0();
         if (flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1 && flags[kFLAGS.WILL_O_THE_WISP] == 0) {
             flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] = 1;
             menu();
@@ -1972,13 +1974,12 @@ public class Combat extends BaseContent {
         } else enemyAI();
     }
 	private function willothewispattacks0():void {
-		var willothewispDamage:Number = 0;
+		var willothewispDamage:Number = 10;
         willothewispDamage += intwisscaling() * 0.4;
         /*bonus do dmgh wisp-a jeśli sa inne pety/miniony ^^ im wiecej podwładnych ma tym mocniej sam bedzie bił (jak efekt perku później w drzewie Job: Leader ^^)
 	if (summonedElementals >= 1) elementalDamage += baseDamage;
 	if (summonedElementals >= 5) elementalDamage += baseDamage;
 	if (summonedElementals >= 9) elementalDamage += baseDamage;*/
-        if (willothewispDamage < 10) willothewispDamage = 10;
         if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) willothewispDamage *= historyTacticianBonus();
         var willothewispamplification:Number = 1;
         if (player.weapon == weapons.SCECOMM) willothewispamplification += 0.5;
@@ -6794,6 +6795,7 @@ public class Combat extends BaseContent {
                 }
                 //Damage is delivered HERE
                 damage *= FeraldamageMultiplier;
+				if (BelisaFollower.HolyBand6 > 0) damage *= 1.25;
 				if (SpecialEffect == "fire") doFireDamage(damage, true, true);
 				else if (SpecialEffect == "ice") doIceDamage(damage, true, true);
 				else if (SpecialEffect == "lightning") doLightingDamage(damage, true, true);
@@ -6887,7 +6889,8 @@ public class Combat extends BaseContent {
 
     public function LustyEnergyNaturalWeaponAttack(FeraldamageMultiplier:Number = 1, stunChance:Number = 10):void {
         var damage:Number = scalingBonusIntelligence() * spellModWhite();
-        damage = damage*FeraldamageMultiplier;
+        damage = damage * FeraldamageMultiplier;
+		if (BelisaFollower.HolyBand6 > 0) damage *= 1.25;
         //Determine if critical hit!
         var crit1:Boolean = false;
         var critChance1:int = 5;
@@ -9298,6 +9301,7 @@ public class Combat extends BaseContent {
             //Bleed effect:
             else {
                 var bleed:Number = (4 + rand(7)) / 100;
+				if (player.statStore.hasBuff("Crossed Holy Band")) bleed *= 0.5;
                 bleed *= player.HP;
                 bleed = player.takePhysDamage(bleed);
                 outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. (<font color=\"#800000\">" + bleed + "</font>)</b>\n\n");
@@ -9313,6 +9317,7 @@ public class Combat extends BaseContent {
             else {
                 var hemorrhage:Number = 0;
                 hemorrhage += player.maxHP() * player.statusEffectv2(StatusEffects.Hemorrhage);
+				if (player.statStore.hasBuff("Crossed Holy Band")) hemorrhage *= 0.5;
                 hemorrhage = player.takePhysDamage(hemorrhage);
                 outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. (<font color=\"#800000\">" + hemorrhage + "</font>)</b>\n\n");
             }
@@ -9327,6 +9332,7 @@ public class Combat extends BaseContent {
             else {
                 var burndot:Number = 0;
                 burndot += player.maxHP() * player.statusEffectv2(StatusEffects.BurnDoT);
+				if (player.statStore.hasBuff("Crossed Holy Band")) burndot *= 0.5;
                 burndot = player.takeFireDamage(burndot);
                 outputText("<b>You gasp and wince in pain, feeling fire still searing your wounds. (<font color=\"#800000\">" + burndot + "</font>)</b>\n\n");
             }
@@ -9381,6 +9387,8 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.AcidSlap)) {
             var slap:Number = 3 + (player.maxHP() * 0.02);
+			if (player.statStore.hasBuff("Crossed Holy Band")) slap *= 0.5;
+			slap = player.takeAcidDamage(slap);
             outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"#800000\">" + slap + "</font>)</b></b>\n\n");
         }
         if (monster.hasStatusEffect(StatusEffects.AuraOfMadness) && !player.hasPerk(PerkLib.Insanity) && !player.hasStatusEffect(StatusEffects.AlterBindScroll3)) {
@@ -9758,7 +9766,8 @@ public class Combat extends BaseContent {
             //Shock effect:
             else {
                 outputText("You fall to one knee as Aiko's Lighting pulses through your limbs, Oh how this hurts...");
-                player.takeLightningDamage(15, true);
+				if (player.statStore.hasBuff("Crossed Holy Band")) player.takeLightningDamage(8, true);
+				else player.takeLightningDamage(15, true);
                 outputText("\n\n");
             }
         }
@@ -9873,7 +9882,8 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.Poison);
             } else {
                 outputText("The poison continues to work on your body, wracking you with pain!\n\n");
-                player.takePhysDamage(8 + rand(player.maxHP() / 20) * player.statusEffectv2(StatusEffects.Poison));
+				if (player.statStore.hasBuff("Crossed Holy Band")) player.takePhysDamage((8 + rand(player.maxHP() / 20) * player.statusEffectv2(StatusEffects.Poison)) * 0.5);
+                else player.takePhysDamage(8 + rand(player.maxHP() / 20) * player.statusEffectv2(StatusEffects.Poison));
             }
         }
         //Bondage straps + bondage fetish
@@ -9930,6 +9940,7 @@ public class Combat extends BaseContent {
             } else {
                 var frostburnPlayer:Number = (monster.str + monster.spe + monster.tou) * 2.5;
                 frostburnPlayer += player.maxHP() * player.statusEffectv2(StatusEffects.FrostburnDoT);
+				if (player.statStore.hasBuff("Crossed Holy Band")) frostburnPlayer *= 0.5;
                 outputText("You are hurt by lingering Frostburn after-effect. ");
                 player.takeIceDamage(frostburnPlayer, true);
                 outputText("\n\n");
@@ -9944,6 +9955,7 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.FrozenLung);
             } else {
                 var frozenlung:Number = player.maxHP() * player.statusEffectv2(StatusEffects.FrozenLung);
+				if (player.statStore.hasBuff("Crossed Holy Band")) frozenlung *= 0.5;
                 outputText("You are hurt by lingering Frozen Lung after-effect. ");
                 player.takeIceDamage(frozenlung, true);
                 outputText("\n\n");
@@ -10166,7 +10178,7 @@ public class Combat extends BaseContent {
                 player.takePhysDamage(500);
             } else */if (EvangelineFollower.EvangelineAffectionMeter >= 2) {
                 outputText("<b>You feel your lifeforce slipping away, leaving you weaker, slower, your mind reeling.  You better finsh this fight fast, or find a way to cure this ailment...You know you can't keep this up forever.</b>\n\n");
-                if (player.maxHP() < 1000) player.takePhysDamage(player.maxHP() * 0.1);
+                if (player.maxHP() < 1000) player.takePhysDamage(player.maxHP() * 0.1);//maybe make them true damage?
                 else player.takePhysDamage(100);
 			}
         }
@@ -11466,6 +11478,7 @@ public class Combat extends BaseContent {
             player.removeStatusEffect(StatusEffects.SoulDrill1);
             player.createStatusEffect(StatusEffects.SoulDrill1, 0, 0, 0, 0);
         }
+		if (player.statStore.hasBuff("Turqouise Holy Band")) player.createStatusEffect(StatusEffects.TurquoiseBandProtection, 0, 0, 0, 0);
 	}
 
     public function display():void {
@@ -12609,7 +12622,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.DragonLustPoisonBreath) && player.tailVenom >= player.VenomWebCost()) TeaseFunctionList.push(RandomTeaseJabberwocky);
         if (player.harpyScore() >= 8  || player.thunderbirdScore() >= 10 || player.isRace(Races.PHOENIX)) TeaseFunctionList.push(RandomTeaseHarpy);
         if (player.kitsuneScore() >= 8) TeaseFunctionList.push(RandomTeaseKitsune);
-        if (player.hasPerk(IMutationsLib.BlackHeartIM)) TeaseFunctionList.push(RandomTeaseLustStrike);
+        if (player.perkv1(IMutationsLib.BlackHeartIM) > 0) TeaseFunctionList.push(RandomTeaseLustStrike);
         if (monster.hasBreasts()) TeaseFunctionList.push(RandomTeaseViolateOpponentBreast);
         if (monster.hasVagina()) {
             TeaseFunctionList.push(RandomTeaseViolateOpponentPussy);
@@ -14202,6 +14215,16 @@ public class Combat extends BaseContent {
     }
 
     public function runAway(callHook:Boolean = true):void {
+        if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0){
+            //outputText("Now that the fight's over, you go and retrieve your melee weapon from the ground where they knocked it out your hands.\n");
+            player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
+            flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
+        }
+        if(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0){
+            //outputText("Now that the fight's over, you go and retrieve your ranged weapon from the ground where they knocked it out your hands.\n");
+            player.setWeaponRange(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID]) as WeaponRange);
+            flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = 0;
+        }
         if (callHook && monster.onPcRunAttempt != null) {
             monster.onPcRunAttempt();
             return;
@@ -14369,7 +14392,8 @@ public class Combat extends BaseContent {
 			outputText("As you retreat the training dummy just stands there. ");
 		}
 		else if (player.canFly()) {
-            if(player.wings.type != Wings.ETHEREAL || player.wings.type != Wings.LEVITATION || player.wings.type != Wings.THUNDEROUS_AURA){
+            var wingsNoFlap:Array = [Wings.ETHEREAL, Wings.LEVITATION, Wings.THUNDEROUS_AURA, Wings.WINDY_AURA];
+            if(!(wingsNoFlap.indexOf(player.wings.type) >= 0)){
                 outputText("Gritting your teeth with effort, you beat your wings quickly and lift off!  ");
             }
             else{
@@ -15871,6 +15895,21 @@ public class Combat extends BaseContent {
         if (isARacialAbility) BleedMod *= combat.RacialParagonAbilityBoost();
         return BleedMod;
     }
+	
+	public function triggeredTurquoiseBandProtectionTexts():void {
+		outputText(" [Themonster] tries to attack you, but their strike is repelled by your magical bubble. They reel back at the unexpected pushback. The skein of magic around you lets out a soft hiss, and the scent of cinnamon fills the air as the magic dissipates.");
+		player.removeStatusEffect(StatusEffects.TurquoiseBandProtection);
+		monster.createStatusEffect(StatusEffects.Stunned,0,0,0,0);
+	}
+	
+	public function debuffsOrDoTDuration(duration:Number):Number {
+		var duration:Number = duration;
+		if (player.statStore.hasBuff("Crossed Holy Band")) {
+			duration *= 0.5;
+			Math.round(duration);
+		}
+		return duration;
+	}
 
     public function ghostStrength():Number {
         var ghostStr:Number = player.strStat.core.value;

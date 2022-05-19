@@ -19,7 +19,7 @@ package classes.Scenes.Areas.GlacialRift
 
 		public function encounterWendigo():void {
 			clearOutput();
-			outputText("As you explore the rift you hear an unsettling scream in the far distance. Unsure about what that was you keep going along your current path until the scream happens again somewhat closer now. Now persuaded that something is stalking you, you look around for your opponent.\n\n");
+			outputText("As you explore the rift, you hear an unsettling scream in the far distance. Unsure about what that was you keep going along your current path until the scream happens again somewhat closer now. Now persuaded that something is stalking you, you look around for your opponent.\n\n");
 			outputText("Not too far away, a feminine figure clad with a fur coat approaches you. You know better than to trust a random wanderer, especially in the middle of such an inhospitable land. Initially, you assume it to be a human girl who got lost in the snow, her voice pleading for help. She sounds miserable. Should you help her?\n\n");
 			menu();
 			addButton(1, "Help", encounterWendigo2);

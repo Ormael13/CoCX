@@ -644,19 +644,19 @@ import coc.xxc.StoryContext;
 			player.dynStats.apply(player, args);
 		}
 
-		protected function MutagenBonus(statName: String, bonus: Number):void
+		protected function MutagenBonus(statName: String, bonus: Number):Boolean
 		{
-			player.MutagenBonus(statName,bonus);
+			return player.MutagenBonus(statName,bonus);
 		}
 
 		protected function AlchemyBonus(statName: String, bonus: Number):void
 		{
-			player.AlchemyBonus(statName,bonus);
+			return player.AlchemyBonus(statName,bonus);
 		}
 
 		protected function KnowledgeBonus(statName: String, bonus: Number):void
 		{
-			player.KnowledgeBonus(statName,bonus);
+			return player.KnowledgeBonus(statName,bonus);
 		}
 
 		protected function silly():Boolean
@@ -983,13 +983,14 @@ import coc.xxc.StoryContext;
 				bList = menuItems;
             menu();
 			for (var i:int = 0; i < bList.length; i += 3){
-                if (!bList[i + 1])
-                    addButtonDisabled(i/3, bList[i], (bList[i + 2] is Array) ? bList[i+2][1]: bList[i+2]);
+				//trace("BC Name: "+ bList[i] + "\nBC Typeof: "+typeof(bList[i+1])  + "\n");
+                if (bList[i + 1] is Function)
+					addButton(i/3, bList[i], bList[i + 1]). hint(bList[i + 2] is Array ? bList[i+2][0]: bList[i+2]);
                 else if (bList[i + 1] == "ignore") //Not sure when this would ever be used, but in case.
-                    continue;
-                else if (bList[i + 1] is Function) //hope it works
-                    addButton(i/3, bList[i], bList[i + 1]). hint(bList[i + 2] is Array ? bList[i+2][0]: bList[i+2]);
-                else
+                    trace("MenuGen ignored " + bList[i] + " when creating the button menu.\n");
+                else if (!bList[i + 1]) //hope it works
+					addButtonDisabled(i/3, bList[i], (bList[i + 2] is Array) ? bList[i+2][1]: bList[i+2]);
+				else
                     CoC_Settings.error("Non-function in menuGen!")
 			}
             if (multipage) {

@@ -711,15 +711,25 @@ public class CombatMagic extends BaseCombatContent {
 	public function MagicPrefixEffect():void {
 		if (player.armorName == "Drider-Weave Sheer Robe") {
 			outputText("As your mana flows through your body, culminating in your hands, your sheer robe glows, giving [themonster] a good, long look at you.\n\n");
-			if (player.gender == 1 || (player.gender == 3 && rand(2) == 0)) {
-				outputText("You lean forward, moving your [breasts] from side to side. As your mana focuses, you roll your shoulders back and your hips forward, giving the [enemy] a little moan, biting your lip, your arms behind your back. Their gaze drops to your snatch, but as they gaze at your delta, you finish your spell, robes turning back to normal. ");
+			if (player.gender == 2 || (player.gender == 3 && rand(2) == 0)) {
+				outputText("You lean forward, moving your [breasts] from side to side. As your mana focuses, you roll your shoulders back and your hips forward, giving the [themonster] a little moan, biting your lip, your arms behind your back. Their gaze drops to your snatch, but as they gaze at your delta, you finish your spell, robes turning back to normal. ");
 			}
 			else {
 				outputText("You spread your hands, letting mana flow through you. Your robe all but vanishes, and you thrust your hips forward, [cock] hardening slightly, your bulge standing up straight and tenting the sheer silk. Giving your enemy a cocky grin, you lick your lips, giving them a few thrusts of your hips. ");
 				outputText("[Themonster], stunned by the sudden change in your bearing and…manhood, gives you more than enough time to finish your spell. ");
 			}
-			var damage:Number = 1;
+			var damage:Number = 9 + rand(3);
 			var damagemultiplier:Number = 1;
+			if (player.hasPerk(PerkLib.SensualLover)) damage += 3;
+			if (player.hasPerk(PerkLib.Seduction)) damage += 10;
+			if (player.hasPerk(PerkLib.SluttySeduction)) damage += player.perkv1(PerkLib.SluttySeduction);
+			if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+			if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) damage += 10;
+			if (player.hasPerk(PerkLib.FlawlessBody)) damage += 10;
+			damage += scalingBonusLibido() * 0.1;
+			if (player.hasPerk(PerkLib.JobSeducer)) damage += player.teaseLevel * 2;
+			else damage += player.teaseLevel;
+			if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.2;
 			if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
 			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
 			if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;

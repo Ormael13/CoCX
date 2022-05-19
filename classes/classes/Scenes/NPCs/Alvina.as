@@ -91,7 +91,7 @@ import classes.internals.*;
 			//outputText(". (" + damage + ")");
 			player.takeFireDamage(damage, true);//, true
 			if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
-			else player.createStatusEffect(StatusEffects.BurnDoT,5,0.05,0,0);
+			else player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(5),0.05,0,0);
 			statScreenRefresh();
 			outputText("\n");
 		}
@@ -142,7 +142,7 @@ import classes.internals.*;
 			outputText("Large crystalline shards of ice form in a fan around Alvina. She waves her scythe in an arc launching them in a barrage at you. You are impaled several times over, your wounds bleeding grievously. ");
 			player.takeIceDamage(damage, true);
 			if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed,1,1);
-			else player.createStatusEffect(StatusEffects.IzmaBleed,5,0,0,0);
+			else player.createStatusEffect(StatusEffects.IzmaBleed,SceneLib.combat.debuffsOrDoTDuration(5),0,0,0);
 			statScreenRefresh();
 			outputText("\n");
 		}

@@ -12,6 +12,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Scenes.Areas.Desert.SandWitchScene;
 import classes.Scenes.NPCs.JojoScene;
@@ -298,6 +299,11 @@ public function saveScreen():void
 	mainView.nameBox.text = "";
 	mainView.nameBox.maxChars = 54;
 	mainView.nameBox.visible = true;
+	//removing extra mutations from save
+	for each(var mutation:PerkType in IMutationsLib.mutationsArray("")){
+		if (player.perkv1(mutation) == 0) player.removePerk(mutation);
+	}
+	player.removePerk(IMutationsLib.MutationsTemplateIM);
 
 	// var test; // Disabling this variable because it seems to be unused.
 	if (flags[kFLAGS.HARDCORE_MODE] > 0)
@@ -1083,6 +1089,11 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			saveFile.data.breastRows[i].fuckable = player.breastRows[i].fuckable;
 			saveFile.data.breastRows[i].fullness = player.breastRows[i].fullness;
 		}
+		//removing extra mutations from save
+		for each(var mutation:PerkType in IMutationsLib.mutationsArray("")){
+			if (player.perkv1(mutation) == 0) player.removePerk(mutation);
+		}
+		player.removePerk(IMutationsLib.MutationsTemplateIM);
 		//Set Perk Array
 		//Populate Perk Array
 		player.perks.forEach(function (perk:PerkClass, ...args):void {
@@ -2371,6 +2382,18 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		var hasLustyRegenPerk:Boolean = false;
 		var addedSensualLover:Boolean = false;
 
+		//This below is some weird witchcraft.... It doesn't update/swap anything, but somehow this fixes the id mismatch from mutations?
+		var mutationsShift:Array = [];
+		for each (var pperk1:PerkType in MutationsLib.mutationsArray("",true)){
+			mutationsShift.push(pperk1.id);
+		}
+		for each (var pPerk2:IMutationPerkType in IMutationsLib.mutationsArray("")){
+			mutationsShift.push(pPerk2.id);
+		}
+		mutationsShift.push(IMutationsLib.MutationsTemplateIM.id);
+		//Possibly ID updating.
+
+
 		//Populate Perk Array
 		for (i = 0; i < saveFile.data.perks.length; i++)
 		{
@@ -2400,13 +2423,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			}
 
 			var ptype:PerkType = PerkType.lookupPerk(id);
-
-			//This below is some weird witchcraft.... It doesn't update/swap anything, but somehow this fixes the id mismatch from mutations?
-			var mutationsShift:Array = [];
-			for each (var pperk1:PerkType in MutationsLib.mutationsArray("",true)){
-				mutationsShift.push(pperk1.id);
-			}
-
 			if (ptype == null) {
 				CoC_Settings.error("Unknown perk id=" + id);
 				//(saveFile.data.perks as Array).splice(i,1);
@@ -2433,6 +2449,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				}
 				player.addPerkInstance(cperk);
 			}
+		}
+
+		for each (var mutations:IMutationPerkType in IMutationsLib.mutationsArray("")){
+			if (player.hasPerk(mutations) && !player.statStore.hasBuff("perk_" + mutations.id)) mutations.updateDynamicPerkBuffs(player);
 		}
 
 		// Fixup missing History: Whore perk IF AND ONLY IF the flag used to track the prior selection of a history perk has been set

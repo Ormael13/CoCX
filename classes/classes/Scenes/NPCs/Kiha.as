@@ -424,7 +424,7 @@ public class Kiha extends Monster
 				this.createPerk(PerkLib.LegendaryLibido, 0, 0, 0, 0);
 			}
 			this.createPerk(PerkLib.Lifeline, 0, 0, 0, 0);
-			updateDynamicPerkBuffs(IMutationsLib.LizanMarrowIM, LizanMarrowMutation, this);
+			IMutationsLib.LizanMarrowIM.acquireMutation(this, "none");
 			checkMonster();
 		}
 

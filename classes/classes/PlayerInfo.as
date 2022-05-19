@@ -599,7 +599,9 @@ public class PlayerInfo extends BaseContent {
 		
 		if (BelisaFollower.BelisaEncounternum > 0) {
 			interpersonStats += "<b>Belisa Affection:</b> " + BelisaFollower.BelisaAffectionMeter + "%\n";
-			if (flags[kFLAGS.BELISA_LVL_UP] == 6) interpersonStats += "<b>Belisa lvl:</b> 56 (current max lvl)\n";
+			if (flags[kFLAGS.BELISA_LVL_UP] == 8) interpersonStats += "<b>Belisa lvl:</b> 68 (current max lvl)\n";
+			if (flags[kFLAGS.BELISA_LVL_UP] == 7) interpersonStats += "<b>Belisa lvl:</b> 62\n";
+			if (flags[kFLAGS.BELISA_LVL_UP] == 6) interpersonStats += "<b>Belisa lvl:</b> 56\n";
 			if (flags[kFLAGS.BELISA_LVL_UP] == 5) interpersonStats += "<b>Belisa lvl:</b> 50\n";
 			if (flags[kFLAGS.BELISA_LVL_UP] == 4) interpersonStats += "<b>Belisa lvl:</b> 44\n";
 			if (flags[kFLAGS.BELISA_LVL_UP] == 3) interpersonStats += "<b>Belisa lvl:</b> 38\n";
@@ -868,11 +870,11 @@ public class PlayerInfo extends BaseContent {
 			interpersonStats += "<b>Marble Affection:</b> " + Math.round(player.statusEffectv1(StatusEffects.Marble)) + "%\n";
 
 		if (flags[kFLAGS.NEISA_FOLLOWER] >= 7)  {
-			if (flags[kFLAGS.NEISA_AFFECTION] < 50) interpersonStats += "<b>Neisa Loyalty:</b> " + Math.round(flags[kFLAGS.NEISA_AFFECTION]) * 2 + "%\n";
+			if (flags[kFLAGS.NEISA_AFFECTION] > 50) interpersonStats += "<b>Neisa Affection:</b> " + (flags[kFLAGS.NEISA_AFFECTION] - 50) + "%\n";
+			if (flags[kFLAGS.NEISA_AFFECTION] <= 50) interpersonStats += "<b>Neisa Loyalty:</b> " + Math.round(flags[kFLAGS.NEISA_AFFECTION]) * 2 + "%\n";
 			else interpersonStats += "<b>Neisa Loyalty:</b> 100%\n";
 			if (flags[kFLAGS.NEISA_FOLLOWER] >= 14)  interpersonStats += "<b>Days that passed since last paycheck for Neisa:</b> " + (Math.round(flags[kFLAGS.NEISA_FOLLOWER]) - 7) + " days (If you not pay before 10th day she would leave)\n";
 			else interpersonStats += "<b>Days that passed since last paycheck for Neisa:</b> " + (Math.round(flags[kFLAGS.NEISA_FOLLOWER]) - 7) + " days\n";
-			//interpersonStats += "<b>Luna Affection:</b> " + Math.round(flags[kFLAGS.LUNA_AFFECTION]) + "%\n";
 			if (flags[kFLAGS.NEISA_LVL_UP] == 4) interpersonStats += "<b>Neisa lvl:</b> 21\n";
 			if (flags[kFLAGS.NEISA_LVL_UP] == 3) interpersonStats += "<b>Neisa lvl:</b> 15\n";
 			if (flags[kFLAGS.NEISA_LVL_UP] == 2) interpersonStats += "<b>Neisa lvl:</b> 9\n";
@@ -1886,7 +1888,7 @@ public class PlayerInfo extends BaseContent {
 		var temp:Array = [];
 		var compMutate:Array = MutationsLib.mutationsArray("", true);
 		var compMutate2:Array = MutationsLib.mutationsArray("Deprecated");
-		var compMutate3:Array = IMutationsLib.mutationsArray("", true);
+		var compMutate3:Array = IMutationsLib.mutationsArray("");
 		var compMutate4:Array = IMutationsLib.mutationsArray("Deprecated");
 		for each (var playerPerk:PerkType in perks){
 			if (!(compMutate.indexOf(playerPerk) >= 0) && !(compMutate2.indexOf(playerPerk) >= 0) && !(compMutate3.indexOf(playerPerk) >= 0) && !(compMutate4.indexOf(playerPerk) >= 0)){

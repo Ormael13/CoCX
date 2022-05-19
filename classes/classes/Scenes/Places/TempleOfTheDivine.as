@@ -134,17 +134,26 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 
 		public function PlayerRemoveCurses():void {
 			clearOutput();
-			outputText("You approach one of the many altars, would you like to give a donation of 5000 gems to be freed from your curses or hexes?");
-			doYesNo(PlayerRemoveCursesYes, PlayerPrayAtTemple);
+			outputText("You approach one of the many altars, would you like to give a donation of to be freed from your curses or hexes?\n\n");
+			outputText("<b>Weakened - 1250 gems.</b>\n");
+			outputText("<b>Drained - 2500 gems.</b>\n");
+			outputText("<b>Damaged - 5000 gems.</b>\n");
+			menu();
+			if (player.statStore.hasBuff("Weakened")) addButtonIfTrue(0, "\"Weakened\"", curry(PlayerRemoveCursesYes, "Weakened", 1250),
+				"Not enough gems!", player.gems >= 1250);
+			if (player.statStore.hasBuff("Drained")) addButtonIfTrue(1, "\"Drained\"", curry(PlayerRemoveCursesYes, "Drained", 2500),
+				"Not enough gems!", player.gems >= 2500);
+			if (player.statStore.hasBuff("Damaged")) addButtonIfTrue(2, "\"Damaged\"", curry(PlayerRemoveCursesYes, "Damaged", 5000),
+				"Not enough gems!", player.gems >= 5000);
+			addButton(4, "Back", PlayerPrayAtTemple);
 		}
 
-		public function PlayerRemoveCursesYes():void {
+		public function PlayerRemoveCursesYes(tierPower:String, cost:Number):void {
 			clearOutput();
 			outputText("Divine powers radiate from the altar banishing the evil that has taken a grip on your body to the void.");
-			player.gems -= 5000;
-			if (player.statStore.hasBuff("Weakened")) player.statStore.removeBuffs("Weakened");
-			else if (!player.statStore.hasBuff("Drained")) player.statStore.removeBuffs("Drained");
-			else player.statStore.removeBuffs("Damaged");
+			player.gems -= cost;
+			player.statStore.removeBuffs(tierPower);
+			statScreenRefresh();
 			doNext(PlayerPrayAtTemple);
 		}
 

@@ -359,12 +359,15 @@ private function fuckYoDaughtersHomie():void {
 			//(20+ daughters:
 			else if (daughters < 30) {
 				outputText("A glass vial is slipped into your mouth as you lose consciousness, and you reflexively swallow.  You swear you could hear something about, \"<i>not done yet,</i>\" but you pass out.  Your dreams are far from restful, but full of pleasure.");
-				dynStats("tou", -.5, "int", -.5);
+				player.addCurse("tou", 0.5, 2);
+				player.addCurse("int", 0.5, 2);
 			}
 			//(30+ Daughters:
 			else {
 				outputText("Vial after vial is pressed against your mouth as liquids are poured down your throat.  Your body reflexively swallows and the massive jump in arousal prevents you from totally passing out.  You can't remember much before you truly lose consciousness, but one thing that sticks in your mind is some of your daughters asking, \"<i>Why don't we just bring Daddy back to camp and then we can fuck him whenever we want?</i>\"\n\nYou passed out before you could hear the answer.");
-				dynStats("tou", -.75, "int", -1, "lib", .5);
+				dynStats("lib", .5);
+				player.addCurse("int", 1, 2);
+				player.addCurse("tou", 0.75, 2);
 			}
 		}
 		player.sexReward("vaginalFluids")

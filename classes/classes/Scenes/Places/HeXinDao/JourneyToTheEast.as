@@ -174,6 +174,8 @@ package classes.Scenes.Places.HeXinDao
 		}
 
 		private function tableNo5():void {
+			clearOutput();
+			outputText("You can see many people enjoying a meal or drink in the dining hall. Behind his counter, a barman moves to and fro, serving drinks or polishing a glass in front of him with a rag.");//later make more exclusive text here
 			menu();
 			if (workHoursMadam()) {
 				if (AhriTavernTalks) addButton(0, "Madam", visitMadam).hint("You see the 'Madam' sitting at the table.");
@@ -182,7 +184,7 @@ package classes.Scenes.Places.HeXinDao
 			else if (AhriTavernTalks) addButtonDisabled(0, "Madam", "'Madam' isn't currently at her usual spot at table in the inn.");
 			if (workHoursTemptress()) {
 				if (EvelynnTavernTalks) addButton(1, "Temptress", visitTemptress).hint("You see 'Temptress' sitting at the table.");
-				else addButtonDisabled(1, "???", "You see mysterious looking devil sitting at the table.");//Evelynn
+				else addButton(1, "???", visitTemptress).hint("You see mysterious looking devil sitting at the table.");//Evelynn
 			}
 			else if (EvelynnTavernTalks) addButtonDisabled(1, "Temptress", "'Temptress' isn't currently at her usual spot at table in the inn.");
 			addButton(14, "Back", curry(enteringInn,false));
@@ -243,7 +245,7 @@ package classes.Scenes.Places.HeXinDao
 			if (EvelynnTavernTalks) outputText("\"<i>Did you came back longing for more?</i>\" Her eyes glow for a moment under the hood, her gaze piercing through you. \"<i>Another touch? You wish to exchange your experiences and skills for additional potential?</i>\"\n\n");
 			else {
 				outputText("You see a person covered entirely by a loose robe. She looks around until she finally notice you staring at her.\n\n");
-				outputText("\"A sultry voice, feminine and sizzling, interrupts the silence. <i>Hello, customer. I'm Temptress,</i>\" She smiles slightly, beckoning to you with one hand. \"<i>You came to this table seeking my services? I can provide you with 'change'.</i>\"\n\n");
+				outputText("A sultry voice, feminine and sizzling, interrupts the silence. \"<i>Hello, customer. I'm Temptress,</i>\" She smiles slightly, beckoning to you with one hand. \"<i>You came to this table seeking my services? I can provide you with 'change'.</i>\"\n\n");
 				outputText("Change? Seeing your puzzle expression she continues, \"<i>I would take a bit of your ability to develop mystical abilities to exchange it for increased grown potential. But...</i>\" she make a gesture with one of her hands showing briefly her hand with five outstretched fingers ending with long, sharp finger claws \"<i>...I would only do this five times.</i>\"\n\n");
 				outputText("Just like that? Without any strings attatched?\n\n");
 				outputText("\"<i>Of course there would be additional price for myu services. Ten spirit stones.</i>\" She pauses before asking \"<i>So are you here to be mesmerized or not?</i>\"\n\n");

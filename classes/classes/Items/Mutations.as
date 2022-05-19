@@ -3700,61 +3700,51 @@ public final class Mutations extends MutationsHelper {
             if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Mana Shield.</b>");
                 player.createStatusEffect(StatusEffects.KnowsManaShield, 0, 0, 0, 0);
-				return;
             }
             //Smart enough for Water Ball and doesnt have it
             if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsWaterBall)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Water Ball.</b>");
                 player.createStatusEffect(StatusEffects.KnowsWaterBall, 0, 0, 0, 0);
-                return;
             }
             //Smart enough for Wind Bullet and doesnt have it
             if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsWindBullet)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Wind Bullet.</b>");
                 player.createStatusEffect(StatusEffects.KnowsWindBullet, 0, 0, 0, 0);
-                return;
             }
             //Smart enough for Stalagmite and doesnt have it
             if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsStalagmite)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Stalagmite.</b>");
                 player.createStatusEffect(StatusEffects.KnowsStalagmite, 0, 0, 0, 0);
-                return;
             }
             //Smart enough for Acid Spray and doesnt have it
             if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsAcidSpray)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Acid Spray.</b>");
                 player.createStatusEffect(StatusEffects.KnowsAcidSpray, 0, 0, 0, 0);
-                return;
             }
             //Smart enough for Clear Mind and doesnt have it
             if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsClearMind)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Clear Mind.</b>");
                 player.createStatusEffect(StatusEffects.KnowsClearMind, 0, 0, 0, 0);
-                return;
             }
             //Smart enough for Water Sphere and doesnt have it
             if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsWaterSphere)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Water Sphere.</b>");
                 player.createStatusEffect(StatusEffects.KnowsWaterSphere, 0, 0, 0, 0);
-                return;
             }
             //Smart enough for Wind Blast and doesnt have it
             if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsWindBlast)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Wind Blast.</b>");
                 player.createStatusEffect(StatusEffects.KnowsWindBlast, 0, 0, 0, 0);
-                return;
             }
             //Smart enough for Shatterstone and doesnt have it
             if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsShatterstone)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Shatterstone.</b>");
                 player.createStatusEffect(StatusEffects.KnowsShatterstone, 0, 0, 0, 0);
-                return;
             }
             //Smart enough for Corrosive Wave and doesnt have it
             if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsCorrosiveWave)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Corrosive Wave.</b>");
                 player.createStatusEffect(StatusEffects.KnowsCorrosiveWave, 0, 0, 0, 0);
-                return;
             }
             //Smart enough for Turbulence and doesnt have it
             /*if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.)) {
@@ -3772,31 +3762,26 @@ public final class Mutations extends MutationsHelper {
             if (player.inte >= 75 && !player.hasStatusEffect(StatusEffects.KnowsHydroAcid)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Hydro Acid.</b>");
                 player.createStatusEffect(StatusEffects.KnowsHydroAcid, 0, 0, 0, 0);
-                return;
             }
             //Smart enough for Energy Drain and doesnt have it
             if (player.inte >= 80 && !player.hasStatusEffect(StatusEffects.KnowsEnergyDrain)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Energy Drain.</b>");
                 player.createStatusEffect(StatusEffects.KnowsEnergyDrain, 0, 0, 0, 0);
-                return;
             }
             //Smart enough for Acid Rain and doesnt have it
             if (player.inte >= 85 && !player.hasStatusEffect(StatusEffects.KnowsAcidRain)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Acid Rain.</b>");
                 player.createStatusEffect(StatusEffects.KnowsAcidRain, 0, 0, 0, 0);
-                return;
             }
             //Smart enough for Restore and doesnt have it
             if (player.inte >= 90 && !player.hasStatusEffect(StatusEffects.KnowsRestore)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Restore.</b>");
                 player.createStatusEffect(StatusEffects.KnowsRestore, 0, 0, 0, 0);
-                return;
             }
             //Smart enough for Balance of Life and doesnt have it
             if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsBalanceOfLife)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Balance of Life.</b>");
                 player.createStatusEffect(StatusEffects.KnowsBalanceOfLife, 0, 0, 0, 0);
-                return;
             }
         }
     }
@@ -3943,43 +3928,36 @@ public final class Mutations extends MutationsHelper {
 			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsBloodMissiles)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Missiles.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodMissiles, 0, 0, 0, 0);
-				return;
 			}
 			//Smart enough for Blood Shield and doesnt have it
 			if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsBloodShield)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Shield.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodShield, 0, 0, 0, 0);
-				return;
 			}
 			//Smart enough for Blood Explosion and doesnt have it
 			if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsBloodExplosion)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Explosion.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodExplosion, 0, 0, 0, 0);
-				return;
 			}
 			//Smart enough for Blood Chains and doesnt have it
 			if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodChains)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Chains.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodChains, 0, 0, 0, 0);
-				return;
 			}
 			//Smart enough for Blood Wave and doesnt have it
 			if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBloodWave)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Wave.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodWave, 0, 0, 0, 0);
-				return;
 			}
 			//Smart enough for Lifesteal Enchantment and doesnt have it
 			if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsLifestealEnchantment)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Lifesteal Enchantment.</b>");
 				player.createStatusEffect(StatusEffects.KnowsLifestealEnchantment, 0, 0, 0, 0);
-				return;
 			}
 			//Smart enough for Blood Field and doesnt have it
 			if (player.inte >= 80 && !player.hasStatusEffect(StatusEffects.KnowsBloodField)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Field.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodField, 0, 0, 0, 0);
-				return;
 			}
 		}
 	}
@@ -4006,25 +3984,21 @@ public final class Mutations extends MutationsHelper {
 			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.KnowsBloodSwipe)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Swipe.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodSwipe, 0, 0, 0, 0);
-				return;
 			}
 			//Smart enough for Heart Seeker and doesnt have it
 			if (player.wis >= 30 && !player.hasStatusEffect(StatusEffects.KnowsHeartSeeker)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Heart Seeker.</b>");
 				player.createStatusEffect(StatusEffects.KnowsHeartSeeker, 0, 0, 0, 0);
-				return;
 			}
 			//Smart enough for Blood Dewdrops and doesnt have it
 			if (player.wis >= 40 && !player.hasStatusEffect(StatusEffects.KnowsBloodDewdrops)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Dewdrops.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodDewdrops, 0, 0, 0, 0);
-				return;
 			}
 			//Smart enough for Blood Requiem and doesnt have it
 			if (player.wis >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodRequiem)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Requiem.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodRequiem, 0, 0, 0, 0);
-				return;
 			}/*
 			//Smart enough for Scarlet Spirit Charge and doesnt have it
 			if (player.wis >= 60 && !player.hasStatusEffect(StatusEffects.KnowsScarletSpiritCharge)) {
@@ -4038,25 +4012,21 @@ public final class Mutations extends MutationsHelper {
 			if (player.wis >= 30 && !player.hasStatusEffect(StatusEffects.KnowsBloodSwipeSF)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Swipe.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodSwipeSF, 0, 0, 0, 0);
-				return;
 			}
 			//Smart enough for SF Infused Heart Seeker and doesnt have it
 			if (player.wis >= 40 && !player.hasStatusEffect(StatusEffects.KnowsHeartSeekerSF)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Heart Seeker.</b>");
 				player.createStatusEffect(StatusEffects.KnowsHeartSeekerSF, 0, 0, 0, 0);
-				return;
 			}
 			//Smart enough for SF Infused Blood Dewdrops and doesnt have it
 			if (player.wis >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodDewdropsSF)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Dewdrops.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodDewdropsSF, 0, 0, 0, 0);
-				return;
 			}
 			//Smart enough for SF Infused Blood Requiem and doesnt have it
 			if (player.wis >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBloodRequiemSF)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Requiem.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodRequiemSF, 0, 0, 0, 0);
-				return;
 			}/*
 			//Smart enough for SF Infused Scarlet Spirit Charge and doesnt have it
 			if (player.wis >= 70 && !player.hasStatusEffect(StatusEffects.KnowsScarletSpiritChargeSF)) {
@@ -4150,7 +4120,7 @@ public final class Mutations extends MutationsHelper {
         dynStats("cor", 2);
         //Stronger
         if (player.str > 50 && rand(3) == 0 && changes < changeLimit) {
-            dynStats("str", -1);
+            player.addCurse("str", 1, 1);
             if (player.str > 70) player.addCurse("str", 1, 1);
             if (player.str > 90) player.addCurse("str", 2, 1);
             outputText("[pg]You feel a little weaker, but maybe it's just the alcohol.");
@@ -4159,7 +4129,7 @@ public final class Mutations extends MutationsHelper {
         ///Less tough
         if (player.tou > 50 && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]Giggling, you poke yourself, which only makes you giggle harder when you realize how much softer you feel.");
-            dynStats("tou", -1);
+            player.addCurse("tou", 1, 1);
             if (player.tou > 70) player.addCurse("tou", 1, 1);
             if (player.tou > 90) player.addCurse("tou", 2, 1);
             changes++;
@@ -4375,7 +4345,7 @@ public final class Mutations extends MutationsHelper {
         dynStats("lus", 15);
         //Stronger
         if (player.str > 50 && rand(3) == 0 && changes < changeLimit) {
-            dynStats("str", -1);
+            player.addCurse("str", 1, 1);
             if (player.str > 70) player.addCurse("str", 2, 1);
             if (player.str > 90) player.addCurse("str", 2, 1);
             outputText("[pg]You feel a little weaker, but maybe it's just the alcohol.");
@@ -4384,7 +4354,7 @@ public final class Mutations extends MutationsHelper {
         ///Less tough
         if (player.tou > 50 && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]Giggling, you poke yourself, which only makes you giggle harder when you realize how much softer you feel.");
-            dynStats("tou", -1);
+            player.addCurse("tou", 1, 1);
             if (player.tou > 70) player.addCurse("tou", 1, 1);
             if (player.tou > 90) player.addCurse("tou", 2, 1);
             changes++;
@@ -5177,7 +5147,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         // Scale color
-        if (type == 1 && rand(4) == 0 && !InCollection(player.coatColor, ("black", "midnight", "midnight black")) && changes < changeLimit) {
+        if (type == 1 && rand(4) == 0 && !InCollection(player.coatColor, ["black", "midnight", "midnight black"]) && changes < changeLimit) {
             outputText("[pg]");
             color = randomChoice("black", "midnight", "midnight black");
             transformations.SkinScales(Skin.COVERAGE_LOW, {color: color}).applyEffect();
@@ -5186,7 +5156,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         // Hair color
-        if (type == 1 && rand(4) == 0 && !InCollection(player.hairColor, ("black", "midnight", "midnight black")) && changes < changeLimit) {
+        if (type == 1 && rand(4) == 0 && !InCollection(player.hairColor, ["black", "midnight", "midnight black"]) && changes < changeLimit) {
             outputText("[pg]");
             color = randomChoice("black", "midnight", "midnight black");
             outputText("[pg]Your hair suddenly tingles as "+color+" strands begins to cover your entire skalp and before long all of them are of same dark color.");
@@ -9665,7 +9635,6 @@ public final class Mutations extends MutationsHelper {
                 player.ballSize = 3;
             }
             outputText("Finally, you feel the transformation skittering to a halt, leaving you to openly roam your new chiseled and sex-ready body.  So what if you can barely form coherent sentences anymore?  A body like this does all the talking you need, you figure!");
-            var boost:Number = (player.inte - 35) / 5;
             MutagenBonus("lib", .1);
             outputText("[pg]<b>(Lost Perk - ");
             if (player.hasPerk(PerkLib.BimboBrains)) outputText("Bimbo Brains, ");
@@ -10149,7 +10118,6 @@ public final class Mutations extends MutationsHelper {
         //Stats
         if (rand(3) == 0 && changes < changeLimit && MutagenBonus("str", 1)) {
             outputText("[pg]Your fill your muscles filling with orc might.");
-            ;
             changes++;
         }
         if (rand(2) == 0 && changes < changeLimit && MutagenBonus("tou", 1)) {
@@ -10158,7 +10126,6 @@ public final class Mutations extends MutationsHelper {
         }
         if (rand(2) == 0 && changes < changeLimit && MutagenBonus("spe", 1)) {
             outputText("[pg]Hearing a suddent sound you suddently move by reflex to the side with such speed you nearly trip.  Seems your reaction speed has increased as well as your mobile execution.");
-            ;
             changes++;
         }
         if (player.inte > 15 && rand(3) == 0 && changes < changeLimit) {
@@ -10620,7 +10587,6 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         var changes:Number = 0;
         var changeLimit:Number = 2;
-        var temp2:Number = 0;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
@@ -10750,7 +10716,6 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         var changes:Number = 0;
         var changeLimit:Number = 1;
-        var temp2:Number = 0;
         var Ratatoskr_Colour:Array = ["brown","light brown","caramel","chocolate","russet"];
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
@@ -10879,7 +10844,6 @@ public final class Mutations extends MutationsHelper {
         if (itemused) clearOutput();
         var changes:Number = 0;
         var changeLimit:Number = 1;
-        var temp2:Number = 0;
         var kamaitachi_hair:Array = ["blonde","yellow","caramel","brown","emerald"];
         if (itemused) {
             if (rand(2) == 0) changeLimit++;
@@ -11919,7 +11883,7 @@ public final class Mutations extends MutationsHelper {
             if (player.tou <= 66) outputText("[pg]You feel your " + player.skinFurScales() + " becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your " + player.skinFurScales() + " won't offer you much protection.");
             //from 66 or greater toughness
             else outputText("[pg]You feel your " + player.skinFurScales() + " becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your hide isn't quite as tough as it used to be.");
-            dynStats("tou", -1);
+            player.addCurse("tou", 1, 1);
             if (player.tou > 66) player.addCurse("tou", 1, 1);
         });
         mutationStep(mystic && player.cor < 100, 2, function ():void {
@@ -12032,23 +11996,18 @@ public final class Mutations extends MutationsHelper {
         mutationStep(nFoxTails == 6 && player.level >= 30 && player.inte >= 90 && player.wis >= 90 && (!player.hasPerk(PerkLib.EnlightenedKitsune) || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (!player.hasPerk(PerkLib.EnlightenedNinetails) || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 3, function ():void {
             outputText("[pg]");
             transformations.TailFox(7).applyEffect();
-            if (!player.hasPerk(PerkLib.CorruptedKitsune)) {
-                outputText("[pg]But something is wrong...  The cosmic power radiating from your body feels... tainted somehow. The corruption pouring off your body feels... good.</b>");
-                outputText("[pg](Perk Gained: Corrupted Kitsune - Grants Corrupted Fox Fire and Terror special attacks.)");
-                player.createPerk(PerkLib.CorruptedKitsune, 0, 0, 0, 0);
-                dynStats("lus", 5, "cor", 5);
-                MutagenBonus("lib", 1);
-            }
+            corruptKitsunecheck();
         });
         mutationStep(nFoxTails == 7 && player.level >= 36 && player.inte >= 105 && player.wis >= 105 && (!player.hasPerk(PerkLib.EnlightenedKitsune) || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (!player.hasPerk(PerkLib.EnlightenedNinetails) || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 4, function ():void {
             outputText("[pg]");
             transformations.TailFox(8).applyEffect();
+            corruptKitsunecheck();
         });
         //[Grow 9th tail and gain Corrupted Nine-tails perk]
         mutationStep(nFoxTails == 8 && player.level >= 42 && player.inte >= 120 && player.wis >= 120 && (!player.hasPerk(PerkLib.EnlightenedNinetails) || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 4, function ():void {
             outputText("[pg]");
             transformations.TailFox(9).applyEffect();
-
+            corruptKitsunecheck();
             if (!player.hasPerk(PerkLib.CorruptedNinetails)) {
                 outputText("[pg]But something is strange...  The cosmic power radiating from your body feels... somehow more tainted than before. The corruption pouring off your body feels... amazingly good.</b>");
                 outputText("[pg]You have the inexplicable urge to set fire to the world, just to watch it burn. With your newfound power, it's a goal that is well within reach.");
@@ -12059,6 +12018,15 @@ public final class Mutations extends MutationsHelper {
             }
 
         });
+        function corruptKitsunecheck():void{
+            if (!player.hasPerk(PerkLib.CorruptedKitsune)) {
+                outputText("[pg]But something is wrong...  The cosmic power radiating from your body feels... tainted somehow. The corruption pouring off your body feels... good.</b>");
+                outputText("[pg](Perk Gained: Corrupted Kitsune - Grants Corrupted Fox Fire and Terror special attacks.)");
+                player.createPerk(PerkLib.CorruptedKitsune, 0, 0, 0, 0);
+                dynStats("lus", 5, "cor", 5);
+                MutagenBonus("lib", 1);
+            }
+        }
         //Kitsune Human face
         mutationStep(player.faceType != Face.FOX && player.faceType != Face.HUMAN, 3, function ():void {
             outputText("[pg]");
@@ -14663,7 +14631,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         outputText("You eat the weird kelp seed and suddenly feel like singing. It seems like your talent for music are skyrocketing as you embrace the changes within you!");
 
-        if (player.blockingBodyTransformations()) changeLimit = 0;
+        //if (player.blockingBodyTransformations()) changeLimit = 0;
         //FAILSAFE CHANGE
         if (changes == 0) outputText("[pg]Remarkably, the seed has no effect.  Maybe next time?");
         player.refillHunger(10);
@@ -14737,7 +14705,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         if (changes < changeLimit && player.dragonCocks() < player.cockTotal() && type == 1 && rand(3) == 0) {
-            var temp:int = 0;
+            var temp:int;
             var choices:Array = [];
             var select:int;
             temp = player.cockTotal();
@@ -15515,7 +15483,7 @@ public final class Mutations extends MutationsHelper {
                     if (player.cocks[0].cockType == CockTypesEnum.HUMAN) {
                         outputText("[pg]Your [cock] begins to feel strange... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.");
                         temp = player.addHorseCock();
-                        temp2 = player.increaseCock(temp, rand(4) + 4);
+                        //temp2 = player.increaseCock(temp, rand(4) + 4);
                         temp3 = 1;
                         dynStats("lus", 35);
                         player.addCurse("sen", 4, 1);
@@ -15524,7 +15492,7 @@ public final class Mutations extends MutationsHelper {
                     if (player.cocks[0].cockType == CockTypesEnum.DOG) {
                         temp = player.addHorseCock();
                         outputText("[pg]Your " + Appearance.cockNoun(CockTypesEnum.DOG) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond it's traditional size.  You notice your knot vanishing, the extra flesh pushing more horsecock out from your sheath.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
-                        temp2 = player.increaseCock(temp, rand(4) + 4);
+                        //temp2 = player.increaseCock(temp, rand(4) + 4);
                         temp3 = 1;
                         dynStats("lus", 35);
                         player.addCurse("sen", 4, 1);
@@ -15533,7 +15501,7 @@ public final class Mutations extends MutationsHelper {
                     if (player.cocks[0].cockType == CockTypesEnum.TENTACLE) {
                         temp = player.addHorseCock();
                         outputText("[pg]Your [cock] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your [cock] as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
-                        temp2 = player.increaseCock(temp, rand(4) + 4);
+                        //temp2 = player.increaseCock(temp, rand(4) + 4);
                         temp3 = 1;
                         dynStats("sen", 4, "lus", 35);
                         MutagenBonus("lib", 5);
@@ -15541,7 +15509,7 @@ public final class Mutations extends MutationsHelper {
                     if (player.cocks[0].cockType.Index > 4) {
                         outputText("[pg]Your [cock] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your [cock] as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
                         temp = player.addHorseCock();
-                        temp2 = player.increaseCock(temp, rand(4) + 4);
+                        //temp2 = player.increaseCock(temp, rand(4) + 4);
                         temp3 = 1;
                         dynStats("sen", 4, "lus", 35);
                         MutagenBonus("lib", 5);
@@ -15559,7 +15527,7 @@ public final class Mutations extends MutationsHelper {
                     }
                     if (player.horseCocks() > 1 || player.dogCocks() > 0) outputText("  Your sheath tingles and begins growing larger as the cock's base shifts to lie inside it.");
                     else outputText("  You feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your " + cockDescript(temp) + "'s root, tightening and pulling your " + cockDescript(temp) + " inside its depths.");
-                    temp2 = player.increaseCock(temp, rand(4) + 4);
+                    //temp2 = player.increaseCock(temp, rand(4) + 4);
                     outputText("  The shaft suddenly explodes with movement, growing longer and developing a thick flared head leaking steady stream of animal-cum.");
                     outputText("  <b>You now have a horse-cock.</b>");
                 }
@@ -15717,7 +15685,7 @@ public final class Mutations extends MutationsHelper {
         if (!player.hasStatusEffect(StatusEffects.Drunk)) {
             player.createStatusEffect(StatusEffects.Drunk, 2, 1, 1, 0);
             MutagenBonus("str", 0.1);
-            dynStats("inte", -0.5);
+            player.addCurse("inte", 0.5, 1);
             MutagenBonus("lib", 0.25);
         } else {
             player.addStatusValue(StatusEffects.Drunk, 2, 1);
@@ -16396,9 +16364,7 @@ public final class Mutations extends MutationsHelper {
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
-        var changeLimit:Number = 1;
-        var boobsGrew:Boolean = false;
-        //Temporary storage
+        var changeLimit:Number = 1;//Temporary storage
         var temp:Number = 0;
         var temp2:Number = 0;
         var temp3:Number = 0;
@@ -16435,7 +16401,7 @@ public final class Mutations extends MutationsHelper {
                 player.growTits(1 + rand(2), 1, false, 3);
                 changes++;
                 dynStats("sen", .5);
-                boobsGrew = true;
+                //boobsGrew = true;
             }
             if (player.breastRows.length == 0 && changes < changeLimit) {
                 outputText("A perfect pair of A cup breasts, complete with tiny nipples, form on your chest.");
@@ -16574,7 +16540,7 @@ public final class Mutations extends MutationsHelper {
                 player.growTits(1 + rand(2), 1, false, 3);
                 changes++;
                 dynStats("sen", .5);
-                boobsGrew = true;
+                //boobsGrew = true;
             }
             if (player.breastRows.length == 0 && changes < changeLimit) {
                 outputText("A perfect pair of A cup breasts, complete with tiny nipples, form on your chest.");
@@ -16696,7 +16662,6 @@ public final class Mutations extends MutationsHelper {
                 else {
                     //temp2 = amount changed
                     //temp3 = counter
-                    temp = 0;
                     temp2 = 0;
                     temp3 = 0;
                     if (player.biggestTitSize() >= 1) outputText("\n");
@@ -16922,11 +16887,6 @@ public final class Mutations extends MutationsHelper {
         //init variables
         var changes:Number = 0;
         var changeLimit:Number = 1;
-        var boobsGrew:Boolean = false;
-        //Temporary storage
-        var temp:Number = 0;
-        var temp2:Number = 0;
-        var temp3:Number = 0;
         //Randomly choose affects limit
         if (rand(4) == 0) changeLimit++;
         if (rand(4) == 0) changeLimit++;
@@ -17163,7 +17123,6 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
             //Partial fur
-            var color:String;
             var melkie_FurColor:Array = ["gray", "silver", "white", "glacial white", "light gray"];
             if (!player.hasPartialCoat(Skin.FUR) && player.lowerBody == LowerBody.MELKIE && changes < changeLimit && rand(4) == 0) {
                 outputText("[pg]");
@@ -17226,7 +17185,7 @@ public final class Mutations extends MutationsHelper {
                         "Heck, why do you even make the effort to smile and wink? It's way easier to keep a passive face all the time. " +
                         "The more you think about it, the more you lose your ability to display your emotions, your voice’s tone starts becoming somewhat empty. " +
                         "Well what your face won't show, your body will.");
-                dynStats("spe", -5);
+                player.addCurse("spe", 5, 1);
                 if (player.faceType == Face.HUMAN && player.faceType != Face.KUDERE) {
                     outputText("[pg]");
                     transformations.FaceKudere.applyEffect();
@@ -17382,7 +17341,7 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(15);
         var HE:Number = 5 + player.level;
 		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
-		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE * 2;
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
 		player.herbXP(HE);
     }
 
@@ -17394,7 +17353,7 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(15);
         var HE:Number = 5 + player.level;
 		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
-		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE * 2;
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
 		player.herbXP(HE);
     }
 
@@ -17405,7 +17364,7 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(15);
         var HE:Number = 5 + player.level;
 		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
-		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE * 2;
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
 		player.herbXP(HE);
     }
 
@@ -17420,20 +17379,20 @@ public final class Mutations extends MutationsHelper {
         player.createStatusEffect(StatusEffects.AlchIronweed, 6, 0, 0, 0);
         var HE:Number = 5 + player.level;
 		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
-		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE * 2;
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
 		player.herbXP(HE);
     }
 
     public function BladeFerns(player:Player):void {
         clearOutput();
-        var power:Number = 10; //needs to be calculated in game
-        var duration:Number = Math.round(power/100)+5;
+        //var power:Number = 10; //needs to be calculated in game
+        //var duration:Number = Math.round(power/100)+5;
         outputText("You eat up the fern, feeling stronger and more agile already.");
         player.refillHunger(15);
         player.createStatusEffect(StatusEffects.AlchBladeFerns, 6, 0, 0, 0);
         var HE:Number = 5 + player.level;
 		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
-		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE * 2;
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
 		player.herbXP(HE);
     }
 
@@ -17468,7 +17427,7 @@ public final class Mutations extends MutationsHelper {
         }
         var HE:Number = 5 + player.level;
 		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
-		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE * 2;
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
 		player.herbXP(HE);
     }
 }

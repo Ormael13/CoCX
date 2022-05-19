@@ -48,6 +48,7 @@ import classes.Scenes.Areas.Forest.BeeGirlScene;
 import classes.Scenes.Combat.CombatAbilities;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.NPCs.AetherTwinsFollowers;
+import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.TyrantiaFollower;
@@ -2266,6 +2267,7 @@ use namespace CoC;
 			if(headjewelryEffectId == HeadJewelryLib.MODIFIER_LUST_R) lust -= headjewelryEffectMagnitude;
 			if(necklaceEffectId == NecklaceLib.MODIFIER_LUST_R) lust -= necklaceEffectMagnitude;
 			if(jewelryEffectId == JewelryLib.MODIFIER_LUST_R && jewelryEffectId2 == JewelryLib.MODIFIER_LUST_R && jewelryEffectId3 == JewelryLib.MODIFIER_LUST_R && jewelryEffectId4 == JewelryLib.MODIFIER_LUST_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_LUST_R && necklaceEffectId == NecklaceLib.MODIFIER_LUST_R) lust -= 15;
+			if(BelisaFollower.HolyBand2 > 0) lust -= 10 * BelisaFollower.HolyBand2;
 			if(lust < minLustCap) lust = minLustCap;
 			if(statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
 				if(lust >= 80) lust = 100;
@@ -2454,7 +2456,11 @@ use namespace CoC;
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
-				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
+				if (henchmanBasedInvulnerabilityFrame() || hasStatusEffect(StatusEffects.TurquoiseBandProtection)) {
+					if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
+					else SceneLib.combat.triggeredTurquoiseBandProtectionTexts();
+					damage = 0;
+				}
 				else if (hasStatusEffect(StatusEffects.ManaShield)) {
 					if (hasPerk(PerkLib.ArcaneShielding)) {
 						if (damagetype < 4) damage = manaShieldAbsorb(damage, display);
@@ -2689,6 +2695,11 @@ use namespace CoC;
 				damage -= dr;
 				damage = Math.round(damage);
 			}
+			if (BelisaFollower.HolyBand1 > 0) {
+				var hdr:Number = damage * (1 - (0.1 * BelisaFollower.HolyBand1));
+				damage -= hdr;
+				damage = Math.round(damage);
+			}
 			//Apply damage resistance percentage.
 			damage *= damagePercent() / 100;
 			return damage;
@@ -2699,6 +2710,7 @@ use namespace CoC;
 			var armorMMod:Number = armorMDef;
 			//--BASE--
 			mult -= armorMMod;
+			if (mult < 20) mult = 20;
 			//--PERKS--
 			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemTags.REVEALING)) {
 				mult -= 10;
@@ -2780,6 +2792,11 @@ use namespace CoC;
 			if (hasPerk(PerkLib.BouncyBody) && damage > (maxHP() * 0.5)) {
 				var dr:Number = damage * bouncybodyDR();
 				damage -= dr;
+				damage = Math.round(damage);
+			}
+			if (BelisaFollower.HolyBand7 > 0) {
+				var hdr:Number = damage * (1 - (0.05 * BelisaFollower.HolyBand7));
+				damage -= hdr;
 				damage = Math.round(damage);
 			}
 			//Apply magic damage resistance percentage.
@@ -4014,9 +4031,9 @@ use namespace CoC;
 		public function internalChimeraScore():Number {
 			Begin("Player","racialScore","internalChimeraScore");
 			var internalChimeraCounter:Number = 0;
-			var pMutations:Array = IMutationsLib.mutationsArray("", true);
-			for each (var pPerk:PerkType in pMutations){
-				if (hasPerk(pPerk)) internalChimeraCounter += perkv1(pPerk);
+			var pMutations:Array = IMutationsLib.mutationsArray("");
+			for each (var pPerk:IMutationPerkType in pMutations){
+				if (hasMutation(pPerk)) internalChimeraCounter += perkv1(pPerk);
 			}
 			End("Player","racialScore");
 			return internalChimeraCounter;
@@ -4841,8 +4858,8 @@ use namespace CoC;
 				spiderCounter++;
 			if (hasPerk(PerkLib.SpiderOvipositor))
 				spiderCounter++;
-			if (hasPerk(IMutationsLib.VenomGlandsIM)) spiderCounter += perkv1(IMutationsLib.VenomGlandsIM)
-			if (hasPerk(IMutationsLib.ArachnidBookLungIM)) spiderCounter2 += perkv1(IMutationsLib.ArachnidBookLungIM)*2
+			if (perkv1(IMutationsLib.VenomGlandsIM) > 0) spiderCounter += perkv1(IMutationsLib.VenomGlandsIM)
+			if (perkv1(IMutationsLib.ArachnidBookLungIM) > 0) spiderCounter2 += perkv1(IMutationsLib.ArachnidBookLungIM)*2
 			if (spiderCounter > 0 && perkv1(IMutationsLib.TrachealSystemIM) >= 1)
 				spiderCounter++;
 			if (spiderCounter > 3 && perkv1(IMutationsLib.TrachealSystemIM) >= 2)
@@ -5393,11 +5410,11 @@ use namespace CoC;
 				raijuCounter++;
 			if (perkv1(IMutationsLib.HeartOfTheStormIM) >= 3)
 				raijuCounter++;
-			if (perkv1(IMutationsLib.HeartOfTheStormIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+			if ((perkv1(IMutationsLib.RaijuCathodeIM) >= 1 || perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				raijuCounter++;
-			if (perkv1(IMutationsLib.HeartOfTheStormIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+			if ((perkv1(IMutationsLib.RaijuCathodeIM) >= 2 || perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				raijuCounter++;
-			if (perkv1(IMutationsLib.HeartOfTheStormIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+			if ((perkv1(IMutationsLib.RaijuCathodeIM) >= 3 || perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				raijuCounter++;
 			if (hasPerk(PerkLib.RaijusDescendant) || hasPerk(PerkLib.BloodlineRaiju))
 				raijuCounter += increaseFromBloodlinePerks();
@@ -5670,15 +5687,15 @@ use namespace CoC;
 				cavewyrmCounter++;
 			if (perkv1(IMutationsLib.CaveWyrmLungsIM) >= 1)
 				cavewyrmCounter++;
-			if (perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3)
+			if (perkv1(IMutationsLib.CaveWyrmLungsIM) >= 2)
 				cavewyrmCounter++;
-			if (perkv1(IMutationsLib.CaveWyrmLungsIM) >= 4)
+			if (perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3)
 				cavewyrmCounter++;
 			if (perkv1(IMutationsLib.CaveWyrmLungsIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				cavewyrmCounter++;
-			if (perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+			if (perkv1(IMutationsLib.CaveWyrmLungsIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				cavewyrmCounter++;
-			if (perkv1(IMutationsLib.CaveWyrmLungsIM) >= 4 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+			if (perkv1(IMutationsLib.CaveWyrmLungsIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				cavewyrmCounter++;
 			cavewyrmCounter = finalRacialScore(cavewyrmCounter, Races.CAVEWYRM);
 			End("Player","racialScore");
@@ -6236,163 +6253,115 @@ use namespace CoC;
 		}
 
 		public function maxHeartMutations():Number {
-			var heartMutations:Number = 1;
-			for each (var pPerk:Array in IMutationsLib.mutationsArray("Heart")){
-				if (hasPerk(pPerk[0])) {
-					heartMutations--;
-				}
+			var heartMutations:Number = 1 + maxAscensionBoost();
+			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Heart")){
+				if (hasMutation(mutation)) heartMutations--;
 			}
-			heartMutations = heartMutations += maxAscensionBoost()
 			return heartMutations;
 		}
 		public function maxMusclesMutations():Number {
-			var musclesMutations:Number = 1;
-			for each (var pPerk:Array in IMutationsLib.mutationsArray("Muscle")){
-				if (hasPerk(pPerk[0])) {
-					musclesMutations--;
-				}
+			var musclesMutations:Number = 1 + maxAscensionBoost();
+			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Muscle")){
+				if (hasMutation(mutation)) musclesMutations--;
 			}
-			musclesMutations = musclesMutations += maxAscensionBoost()
 			return musclesMutations;
 		}
 		public function maxMouthMutations():Number {
-			var mouthMutations:Number = 1;
-			for each (var pPerk:Array in IMutationsLib.mutationsArray("Mouth")){
-				if (hasPerk(pPerk[0])) {
-					mouthMutations--;
-				}
+			var mouthMutations:Number = 1 + maxAscensionBoost();
+			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Mouth")){
+				if (hasMutation(mutation)) mouthMutations--;
 			}
-			mouthMutations = mouthMutations += maxAscensionBoost()
 			return mouthMutations;
 		}
 		public function maxAdrenalGlandsMutations():Number {
-			var adrenalglandsMutations:Number = 1;
-			for each (var pPerk:Array in IMutationsLib.mutationsArray("Adrenals")){
-				if (hasPerk(pPerk[0])) {
-					adrenalglandsMutations--;
-				}
+			var adrenalglandsMutations:Number = 1  + maxAscensionBoost();
+			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Adrenals")){
+				if (hasMutation(mutation)) adrenalglandsMutations--;
 			}
-			adrenalglandsMutations = adrenalglandsMutations += maxAscensionBoost()
 			return adrenalglandsMutations;
 		}
-		public function maxBloodsteamMutations():Number {
-			var bloodsteamMutations:Number = 1;
-			for each (var pPerk:Array in IMutationsLib.mutationsArray("Bloodstream")){
-				if (hasPerk(pPerk[0])) {
-					bloodsteamMutations--;
-				}
+		public function maxBloodstreamMutations():Number {
+			var bloodstreamMutations:Number = 1 + maxAscensionBoost();
+			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Bloodstream")){
+				if (hasMutation(mutation)) bloodstreamMutations--;
 			}
-			bloodsteamMutations = bloodsteamMutations += maxAscensionBoost()
-			return bloodsteamMutations;
+			return bloodstreamMutations;
 		}
 		public function maxFatTissueMutations():Number {
-			var fattissueMutations:Number = 1;
-			for each (var pPerk:Array in IMutationsLib.mutationsArray("FaT")){
-				if (hasPerk(pPerk[0])) {
-					fattissueMutations--;
-				}
+			var fattissueMutations:Number = 1 + maxAscensionBoost();
+			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("FaT")){
+				if (hasMutation(mutation)) fattissueMutations--;
 			}
-			fattissueMutations = fattissueMutations += maxAscensionBoost()
 			return fattissueMutations;
 		}
 		public function maxLungsMutations():Number {
-			var lungsMutations:Number = 1;
-			for each (var pPerk:Array in IMutationsLib.mutationsArray("Lungs")){
-				if (hasPerk(pPerk[0])) {
-					lungsMutations--;
-				}
+			var lungsMutations:Number = 1 + maxAscensionBoost();
+			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Lungs")){
+				if (hasMutation(mutation)) lungsMutations--;
 			}
-			lungsMutations = lungsMutations += maxAscensionBoost()
 			return lungsMutations;
 		}
 		public function maxMetabolismMutations():Number {
-			var metabolismMutations:Number = 1;
-			for each (var pPerk:Array in IMutationsLib.mutationsArray("Metabolism")){
-				if (hasPerk(pPerk[0])) {
-					metabolismMutations--;
-				}
+			var metabolismMutations:Number = 1 + maxAscensionBoost();
+			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Metabolism")){
+				if (hasMutation(mutation)) metabolismMutations--;
 			}
-			metabolismMutations = metabolismMutations += maxAscensionBoost()
 			return metabolismMutations;
 		}
 		public function maxOvariesMutations():Number {
-			var ovariesMutations:Number = 1;
-			for each (var pPerk:Array in IMutationsLib.mutationsArray("Ovaries")){
-				if (hasPerk(pPerk[0])) {
-					ovariesMutations--;
-				}
+			var ovariesMutations:Number = 1 + maxAscensionBoost();
+			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Ovaries")){
+				if (hasMutation(mutation)) ovariesMutations--;
 			}
-			ovariesMutations = ovariesMutations += maxAscensionBoost()
 			return ovariesMutations;
 		}
 		public function maxBallsMutations():Number {
-			var ballsMutations:Number = 1;
-			for each (var pPerk:Array in IMutationsLib.mutationsArray("Testicles")){
-				if (hasPerk(pPerk[0])) {
-					ballsMutations--;
-				}
+			var ballsMutations:Number = 1 + maxAscensionBoost();
+			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Testicles")){
+				if (hasMutation(mutation)) ballsMutations--;
 			}
-			ballsMutations = ballsMutations += maxAscensionBoost()
 			return ballsMutations;
 		}
 		public function maxEyesMutations():Number {
-			var eyesMutations:Number = 1;
-			for each (var pPerk:Array in IMutationsLib.mutationsArray("Eyes")){
-				if (hasPerk(pPerk[0])) {
-					eyesMutations--;
-				}
+			var eyesMutations:Number = 1 + maxAscensionBoost();
+			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Eyes")){
+				if (hasMutation(mutation)) eyesMutations--;
 			}
-			eyesMutations = eyesMutations += maxAscensionBoost()
 			return eyesMutations;
 		}
 		public function maxPeripheralNervSysMutations():Number {
-			var nervsysMutations:Number = 1;
-			for each (var pPerk:Array in IMutationsLib.mutationsArray("Nerv/Sys")){
-				if (hasPerk(pPerk[0])) {
-					nervsysMutations--;
-				}
+			var nervsysMutations:Number = 1 + maxAscensionBoost();
+			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Nerv/Sys")){
+				if (hasMutation(mutation)) nervsysMutations--;
 			}
-			nervsysMutations = nervsysMutations += maxAscensionBoost()
 			return nervsysMutations;
 		}
 		public function maxBonesAndMarrowMutations():Number {
-			var bonesandmarrowMutations:Number = 1;
-			for each (var pPerk:Array in IMutationsLib.mutationsArray("Bone")){
-				if (hasPerk(pPerk[0])) {
-					bonesandmarrowMutations--;
-				}
+			var bonesandmarrowMutations:Number = 1 + maxAscensionBoost();
+			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Bone")){
+				if (hasMutation(mutation)) bonesandmarrowMutations--;
 			}
-			bonesandmarrowMutations = bonesandmarrowMutations += maxAscensionBoost()
 			return bonesandmarrowMutations;
 		}
 		public function maxThyroidGlandMutations():Number {
-			var thyroidglandMutations:Number = 1;
-			for each (var pPerk:Array in IMutationsLib.mutationsArray("Thyroid")){
-				if (hasPerk(pPerk[0])) {
-					thyroidglandMutations--;
-				}
+			var thyroidglandMutations:Number = 1 + maxAscensionBoost();
+			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Thyroid")){
+				if (hasMutation(mutation)) thyroidglandMutations--;
 			}
-			thyroidglandMutations = thyroidglandMutations += maxAscensionBoost()
 			return thyroidglandMutations;
 		}
 		public function maxParathyroidGlandMutations():Number {
-			var parathyroidglandMutations:Number = 1;
-			for each (var pPerk:Array in IMutationsLib.mutationsArray("PThyroid")){
-				if (hasPerk(pPerk[0])) {
-					parathyroidglandMutations--;
-				}
+			var parathyroidglandMutations:Number = 1 + maxAscensionBoost();
+			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("PThyroid")){
+				if (hasMutation(mutation)) parathyroidglandMutations--;
 			}
-			parathyroidglandMutations = parathyroidglandMutations += maxAscensionBoost()
 			return parathyroidglandMutations;
 		}
 		public function maxAdaptationsMutations():Number {
-			var adaptationsMutations:Number = 2;
-			for each (var pPerk:Array in IMutationsLib.mutationsArray("Adaptations")){
-				if (hasPerk(pPerk[0])) {
-					adaptationsMutations--;
-				}
+			var adaptationsMutations:Number = 2 + maxAscensionBoost();
+			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Adaptations")){
+				if (hasMutation(mutation)) adaptationsMutations--;
 			}
-			adaptationsMutations = adaptationsMutations += maxAscensionBoost()
 			return adaptationsMutations;
 		}
 		public function maxDragonMutations():Number {
@@ -7693,7 +7662,7 @@ use namespace CoC;
 		}
 
 		public function removeAllRacialMutation():void {
-			for each (var pPerks:PerkType in IMutationsLib.mutationsArray("", true)){
+			for each (var pPerks:IMutationPerkType in IMutationsLib.mutationsArray("")){
 				if (hasPerk(pPerks)){
 					removePerk(pPerks);
 					//perkPoints += 1;
@@ -9529,7 +9498,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.MunchkinAtGym)) cap += 0.05;
             if (bonus == 0)
                 return false; //no bonus - no effect
-            if (removeCurse(statName, bonus))
+            if (removeCurse(statName, bonus, 1) > 0)
                 return false; //remove existing curses
             var current:Number = buff("Mutagen").getValueOfStatBuff(statName + ".mult");
             var bonus_sign:Number = (bonus > 0) ? 1 : -1;
@@ -9555,7 +9524,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Perfection)) ABCap += 0.02;
 			if (hasPerk(PerkLib.Creationism)) ABCap += 0.02;
 			if (hasPerk(PerkLib.MunchkinAtGym)) ABCap += 0.05;
-			removeCurse(statName, bonus);
+			removeCurse(statName, bonus, -2);
 			if (buff("Alchemical").getValueOfStatBuff(""+statName+".mult") < ABCap){
 				buff("Alchemical").addStat(""+statName+".mult",0.01);
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
@@ -9567,7 +9536,7 @@ use namespace CoC;
 		{
 			var KBCap:Number = 0.2;
 			if (hasPerk(PerkLib.MunchkinAtGym)) KBCap += 0.05;
-			removeCurse(statName, bonus);
+			removeCurse(statName, bonus, -2);
 			if (buff("Knowledge").getValueOfStatBuff(""+statName+".mult") < KBCap){
 				buff("Knowledge").addStat(""+statName+".mult",0.01);
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
@@ -9579,9 +9548,9 @@ use namespace CoC;
 		{
 			var MBCap:Number = 1;
 			if (hasPerk(PerkLib.MindbreakerBrain1toX)) MBCap += 0.50*perkv1(PerkLib.MindbreakerBrain1toX);
-			removeCurse("inte", 5);
-			removeCurse("wis", 5);
-			removeCurse("lib", 5);
+			removeCurse("inte", -3);
+			removeCurse("wis", -3);
+			removeCurse("lib", -3);
 			if (buff("Devoured Mind").getValueOfStatBuff("int.mult") < MBCap){
 				buff("Devoured Mind").addStat("int.mult",0.05);
 				buff("Devoured Mind").addStat("wis.mult",0.05);

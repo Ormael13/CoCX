@@ -29,7 +29,7 @@ use namespace CoC;
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
 			if (inDungeon) SceneLib.dungeons.ebonlabyrinth.defeatedByStrayDemon();
-			else SceneLib.defiledravine.demonScene.loseToAOmnibus();
+			else SceneLib.dungeons.factory.doLossIncubus(false); //it's alright, the scene uses [themonster] and [monster he] to specify.
 		}
 		
 		public function Omnibus()

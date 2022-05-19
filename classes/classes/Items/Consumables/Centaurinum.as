@@ -12,7 +12,6 @@ import classes.CoC_Settings;
 import classes.CockTypesEnum;
 import classes.EngineCore;
 import classes.Items.Consumable;
-import classes.PerkLib;
 import classes.StatusEffects;
 import classes.VaginaClass;
 import classes.CoC;

@@ -8,7 +8,6 @@ import classes.*;
 import classes.Items.Useable;
 import classes.display.SpriteDb;
 import classes.GlobalFlags.*;
-import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.SceneLib;
 
 //AYANE_FOLLOWER:int                               			    = 2401;
@@ -63,8 +62,10 @@ public function ayaneCampMenu():void
 	addButton(1, "Talk", ayaneTalkMenu).hint("Ask Ayane about something.");
 	addButton(2, "Shop", ayaneShop).hint("Check Ayane shop.");
 	addButton(3, "Sex", ayaneSexMenu).hint("Have some sex with Ayane.");
-	if (player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained") || player.statStore.hasBuff("Damaged")) addButton(5, "Cure C.", ayaneCuringCurse).hint("WIP tooltip: Cure curse effect.");
-	else addButtonDisabled(5, "Cure C.", "WIP tooltip: You not have any curses to cure.");
+	if (player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained") || player.statStore.hasBuff("Damaged"))
+		addButtonIfTrue(5, "Cure C.", ayaneCuringCurse, "Ayane is not yet ready to cure your curses again.",
+			flags[kFLAGS.AYANE_CURE_COOLDOWN] <= 0, "Cure curse effects.");
+	else addButtonDisabled(5, "Cure C.", "You not have any curses to cure.");
 	if (BelisaFollower.BelisaQuestOn && !BelisaFollower.BelisaQuestComp) addButton(13, "ToothacheQ", BelisaAyaneTalk);
 	addButton(14, "Back", camp.campFollowers);
 }
@@ -77,7 +78,7 @@ public function ayaneAppearance():void
 	outputText("Her arms and legs are covered in a set of mystical tattoos running seamlessly all over her tan skin. Around her neck is tied a black and yellow ribbon collar with the holy symbol of the fox god Taoth engraved inside. She currently wears a formal, white, shrine maiden kimono, trimmed with purple flower design.\n\n");
 	outputText("From her perfectly shaped ass flow no fewer than six silky fox tails, moving enticingly to taunt or tease.\n\n");
 	outputText("She has a pair of well-shaped D cup breasts and nice hips that look great under her clothes.\n\n");
-	outputText("Ayane's pussy, well hidden under her kimono, seems to be always ready for sex, although she is too well mannered to ask for it openly.");
+	outputText("Ayane's pussy, well hidden under her kimono, seems to be always ready for sex, although she is too well-mannered to ask for it openly.");
 	menu();
 	addButton(14, "Back", ayaneCampMenu);
 }
@@ -347,6 +348,7 @@ public function ayaneAnal():void
 
 public function ayaneCuringCurse():void {
 	clearOutput();
+	flags[kFLAGS.AYANE_CURE_COOLDOWN] = 24;
 	outputText("You tell Ayane that you are in dire need of healing to lift the power of a curse and request that she use her magic on you at once.\n\n");
 	outputText("\"<i>With due haste my " + player.mf("lord", "lady") + " I will alleviate your wounds and break some of the curses afflicting you.</i>\"\n\n");
 	outputText("On this she lifts her staff and begins a ritual. A few seconds later you feel infinitely better as the kitsune shrine maiden curative magic does its work alleviating your wounds both physical and spiritual.\n\n");

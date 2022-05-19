@@ -2,8 +2,6 @@ package classes.Scenes
 {
 	import classes.*;
 	import classes.BaseContent;
-	import classes.GlobalFlags.*;
-	import classes.Items.*;
 	import classes.internals.SaveableState;
 
 	public class Crafting extends BaseContent implements SaveableState
@@ -25,9 +23,9 @@ package classes.Scenes
 		public static var BagSlot08:Number;
 		public static var BagSlot08Cap:Number;//Skymetal
 		public static var BagSlot09:Number;
-		public static var BagSlot09Cap:Number;
+		public static var BagSlot09Cap:Number;//Divine Ice
 		public static var BagSlot10:Number;
-		public static var BagSlot10Cap:Number;
+		public static var BagSlot10Cap:Number;//Orichalcum
 		public static var BagSlot11:Number;
 		public static var BagSlot11Cap:Number;
 		public static var BagSlot12:Number;
@@ -238,26 +236,26 @@ package classes.Scenes
 				"BagSlot29Cap": BagSlot29Cap,
 				"BagSlot30": BagSlot30,
 				"BagSlot30Cap": BagSlot30Cap,
-				"BagSlot21": BagSlot31,
-				"BagSlot21Cap": BagSlot31Cap,
-				"BagSlot22": BagSlot32,
-				"BagSlot22Cap": BagSlot32Cap,
-				"BagSlot23": BagSlot33,
-				"BagSlot23Cap": BagSlot33Cap,
-				"BagSlot24": BagSlot34,
-				"BagSlot24Cap": BagSlot34Cap,
-				"BagSlot25": BagSlot35,
-				"BagSlot25Cap": BagSlot35Cap,
-				"BagSlot26": BagSlot36,
-				"BagSlot26Cap": BagSlot36Cap,
-				"BagSlot27": BagSlot37,
-				"BagSlot27Cap": BagSlot37Cap,
-				"BagSlot28": BagSlot38,
-				"BagSlot28Cap": BagSlot38Cap,
-				"BagSlot29": BagSlot39,
-				"BagSlot29Cap": BagSlot39Cap,
-				"BagSlot30": BagSlot40,
-				"BagSlot30Cap": BagSlot40Cap
+				"BagSlot31": BagSlot31,
+				"BagSlot31Cap": BagSlot31Cap,
+				"BagSlot32": BagSlot32,
+				"BagSlot32Cap": BagSlot32Cap,
+				"BagSlot33": BagSlot33,
+				"BagSlot33Cap": BagSlot33Cap,
+				"BagSlot34": BagSlot34,
+				"BagSlot34Cap": BagSlot34Cap,
+				"BagSlot35": BagSlot35,
+				"BagSlot35Cap": BagSlot35Cap,
+				"BagSlot36": BagSlot36,
+				"BagSlot36Cap": BagSlot36Cap,
+				"BagSlot37": BagSlot37,
+				"BagSlot37Cap": BagSlot37Cap,
+				"BagSlot38": BagSlot38,
+				"BagSlot38Cap": BagSlot38Cap,
+				"BagSlot39": BagSlot39,
+				"BagSlot39Cap": BagSlot39Cap,
+				"BagSlot40": BagSlot40,
+				"BagSlot40Cap": BagSlot40Cap
 			};
 		}
 
@@ -323,26 +321,26 @@ package classes.Scenes
 				BagSlot29Cap = o["BagSlot29Cap"];
 				BagSlot30 = o["BagSlot30"];
 				BagSlot30Cap = o["BagSlot30Cap"];
-				BagSlot21 = o["BagSlot31"];
-				BagSlot21Cap = o["BagSlot31Cap"];
-				BagSlot22 = o["BagSlot32"];
-				BagSlot22Cap = o["BagSlot32Cap"];
-				BagSlot23 = o["BagSlot33"];
-				BagSlot23Cap = o["BagSlot33Cap"];
-				BagSlot24 = o["BagSlot34"];
-				BagSlot24Cap = o["BagSlot34Cap"];
-				BagSlot25 = o["BagSlot35"];
-				BagSlot25Cap = o["BagSlot35Cap"];
-				BagSlot26 = o["BagSlot36"];
-				BagSlot26Cap = o["BagSlot36Cap"];
-				BagSlot27 = o["BagSlot37"];
-				BagSlot27Cap = o["BagSlot37Cap"];
-				BagSlot28 = o["BagSlot38"];
-				BagSlot28Cap = o["BagSlot38Cap"];
-				BagSlot29 = o["BagSlot39"];
-				BagSlot29Cap = o["BagSlot39Cap"];
-				BagSlot30 = o["BagSlot40"];
-				BagSlot30Cap = o["BagSlot40Cap"];
+				BagSlot31 = o["BagSlot31"];
+				BagSlot31Cap = o["BagSlot31Cap"];
+				BagSlot32 = o["BagSlot32"];
+				BagSlot32Cap = o["BagSlot32Cap"];
+				BagSlot33 = o["BagSlot33"];
+				BagSlot33Cap = o["BagSlot33Cap"];
+				BagSlot34 = o["BagSlot34"];
+				BagSlot34Cap = o["BagSlot34Cap"];
+				BagSlot35 = o["BagSlot35"];
+				BagSlot35Cap = o["BagSlot35Cap"];
+				BagSlot36 = o["BagSlot36"];
+				BagSlot36Cap = o["BagSlot36Cap"];
+				BagSlot37 = o["BagSlot37"];
+				BagSlot37Cap = o["BagSlot37Cap"];
+				BagSlot38 = o["BagSlot38"];
+				BagSlot38Cap = o["BagSlot38Cap"];
+				BagSlot39 = o["BagSlot39"];
+				BagSlot39Cap = o["BagSlot39Cap"];
+				BagSlot40 = o["BagSlot40"];
+				BagSlot40Cap = o["BagSlot40Cap"];
 			} else {
 				// loading from old save
 				resetState();
@@ -375,11 +373,12 @@ public function accessCraftingMaterialsBag():void {
 	if (BagSlot02Cap > 0) outputText("<b>Tin Ore:</b> "+BagSlot02+" / "+BagSlot02Cap+"\n");
 	if (BagSlot03Cap > 0) outputText("<b>Bronze Bar:</b> "+BagSlot03+" / "+BagSlot03Cap+"\n");
 	if (BagSlot04Cap > 0) outputText("<b>Iron Ore:</b> "+BagSlot04+" / "+BagSlot04Cap+"\n");
-	if (BagSlot05Cap > 0) outputText("<b>Ebonbloom:</b> "+BagSlot05+" / "+BagSlot05Cap+"\n");
+	//if (BagSlot05Cap > 0) outputText("<b>Ebonbloom:</b> "+BagSlot05+" / "+BagSlot05Cap+"\n");
 	if (BagSlot06Cap > 0) outputText("<b>Ebon Ingot:</b> "+BagSlot06+" / "+BagSlot06Cap+"\n");
-	//if (BagSlot07Cap > 0) outputText("<b>Moonstone:</b> "+BagSlot07+" / "+BagSlot07Cap+"\n");
+	if (BagSlot07Cap > 0) outputText("<b>Moonstone:</b> "+BagSlot07+" / "+BagSlot07Cap+"\n");
 	//if (BagSlot08Cap > 0) outputText("<b>Skymetal:</b> "+BagSlot08+" / "+BagSlot08Cap+"\n");
 	menu();
+	//Cooper Ore
 	if (BagSlot01 < BagSlot01Cap) {
 		if (player.hasItem(useables.COP_ORE, 1)) addButton(0, "CopperOre", craftingMaterialsCopperOre1UP);
 		else addButtonDisabled(0, "CopperOre", "You not have any copper ore to store.");
@@ -387,6 +386,7 @@ public function accessCraftingMaterialsBag():void {
 	else addButtonDisabled(0, "CopperOre", "You can't store more copper ore in your bag.");
 	if (BagSlot01 > 0) addButton(1, "CopperOre", craftingMaterialsCopperOre1Down);
 	else addButtonDisabled(1, "CopperOre", "You not have any copper ore in your bag.");
+	//Tin Ore
 	if (BagSlot02 < BagSlot02Cap) {
 		if (player.hasItem(useables.TIN_ORE, 1)) addButton(2, "TinOre", craftingMaterialsTinOre1UP);
 		else addButtonDisabled(2, "TinOre", "You not have any tin ore to store.");
@@ -394,6 +394,7 @@ public function accessCraftingMaterialsBag():void {
 	else addButtonDisabled(2, "TinOre", "You can't store more tin ore in your bag.");
 	if (BagSlot02 > 0) addButton(3, "TinOre", craftingMaterialsTinOre1Down);
 	else addButtonDisabled(3, "TinOre", "You not have any tin ore in your bag.");
+	//Bronze Bar
 	if (BagSlot03 < BagSlot03Cap) {
 		if (player.hasItem(useables.BRONZEB, 1)) addButton(5, "BronzeBar", craftingMaterialsBronzeBar1UP);
 		else addButtonDisabled(5, "BronzeBar", "You not have any bronze bar to store.");
@@ -401,13 +402,33 @@ public function accessCraftingMaterialsBag():void {
 	else addButtonDisabled(5, "BronzeBar", "You can't store more copper ore in your bag.");
 	if (BagSlot03 > 0) addButton(6, "BronzeBar", craftingMaterialsBronzeBar1Down);
 	else addButtonDisabled(6, "BronzeBar", "You not have any bronze bar in your bag.");
+	//Iron Ore
 	if (BagSlot04 < BagSlot04Cap) {
 		if (player.hasItem(useables.IRONORE, 1)) addButton(7, "IronOre", craftingMaterialsIronOre1UP);
 		else addButtonDisabled(7, "IronOre", "You not have any iron ore to store.");
 	}
 	else addButtonDisabled(7, "IronOre", "You can't store more iron ore in your bag.");
+	
 	if (BagSlot04 > 0) addButton(8, "IronOre", craftingMaterialsIronOre1Down);
 	else addButtonDisabled(8, "IronOre", "You not have any iron ore in your bag.");
+	//Ebon Ingot
+	if (BagSlot06 < BagSlot06Cap) {
+		if (player.hasItem(useables.EBONING, 1)) addButton(10, "EbonIngot", craftingMaterialsEbonIngot1UP);
+		else addButtonDisabled(10, "EbonIngot", "You not have any ebon ingot to store.");
+	}
+	else addButtonDisabled(10, "EbonIngot", "You can't store more ebon ingots in your bag.");
+	
+	if (BagSlot06 > 0) addButton(11, "EbonIngot", craftingMaterialsEbonIngot1Down);
+	else addButtonDisabled(11, "EbonIngot", "You not have any ebon ingot in your bag.");
+	//Moonstone
+	if (BagSlot07 < BagSlot07Cap) {
+		if (player.hasItem(useables.MOONSTO, 1)) addButton(12, "Moonstone", craftingMaterialsMoonstone1UP);
+		else addButtonDisabled(12, "Moonstone", "You not have any moonstone to store.");
+	}
+	else addButtonDisabled(12, "Moonstone", "You can't store more moonstones in your bag.");
+	
+	if (BagSlot07 > 0) addButton(13, "Moonstone", craftingMaterialsMoonstone1Down);
+	else addButtonDisabled(13, "Moonstone", "You not have any moonstone in your bag.");
 	addButton(14, "Back", camp.campActions);
 }
 private function craftingMaterialsCopperOre1UP():void {
@@ -421,14 +442,14 @@ private function craftingMaterialsCopperOre1Down():void {
 	inventory.takeItem(useables.COP_ORE, accessCraftingMaterialsBag);
 }
 private function craftingMaterialsTinOre1UP():void {
-	player.destroyItems(useables.COP_ORE, 1);
+	player.destroyItems(useables.TIN_ORE, 1);
 	BagSlot02 += 1;
 	doNext(accessCraftingMaterialsBag);
 }
 private function craftingMaterialsTinOre1Down():void {
 	outputText("\n");
 	BagSlot02 -= 1;
-	inventory.takeItem(useables.COP_ORE, accessCraftingMaterialsBag);
+	inventory.takeItem(useables.TIN_ORE, accessCraftingMaterialsBag);
 }
 private function craftingMaterialsBronzeBar1UP():void {
 	player.destroyItems(useables.BRONZEB, 1);
@@ -449,6 +470,26 @@ private function craftingMaterialsIronOre1Down():void {
 	outputText("\n");
 	BagSlot04 -= 1;
 	inventory.takeItem(useables.IRONORE, accessCraftingMaterialsBag);
+}
+private function craftingMaterialsEbonIngot1UP():void {
+	player.destroyItems(useables.EBONING, 1);
+	BagSlot06 += 1;
+	doNext(accessCraftingMaterialsBag);
+}
+private function craftingMaterialsEbonIngot1Down():void {
+	outputText("\n");
+	BagSlot06 -= 1;
+	inventory.takeItem(useables.EBONING, accessCraftingMaterialsBag);
+}
+private function craftingMaterialsMoonstone1UP():void {
+	player.destroyItems(useables.MOONSTO, 1);
+	BagSlot07 += 1;
+	doNext(accessCraftingMaterialsBag);
+}
+private function craftingMaterialsMoonstone1Down():void {
+	outputText("\n");
+	BagSlot07 -= 1;
+	inventory.takeItem(useables.MOONSTO, accessCraftingMaterialsBag);
 }
 		/*
 		public function accessCraftingMenu(type:int, page:int = 1):void {

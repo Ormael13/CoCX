@@ -22,6 +22,7 @@ import classes.BodyParts.Tongue;
 import classes.BodyParts.UnderBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutationPerkType;
 import classes.IMutations.*;
 import classes.Items.ItemTags;
 import classes.Items.JewelryLib;
@@ -407,12 +408,17 @@ public class Creature extends Utils
 			}
 		}
 
-		public function addCurse(statName:String, power:Number, tier:Number = 0):void{
-			var tierPower:String = "NOT PROPERLY ADDED STAT!";
-			if (tier == 0) tierPower = "Tribulation Vestiges";
-			if (tier == 1) tierPower = "Weakened";
-			if (tier == 2) tierPower = "Drained";
-			if (tier == 3) tierPower = "Damaged";
+		/**
+		 * Adds a curse effect to the creature.
+		 * @param statName 	Name of the stat, like "str" or "spe.mult"
+		 * @param power		Curse power to substract from or add to (cor or sens) stat.
+		 * @param tier		Effect tier (1,2,3). 1 - mutagen debuffs. 2 - caused by monsters. 3 - high-level attack effects.
+		 */
+		public function addCurse(statName:String, power:Number, tier:int = 2):void{
+			if (tier < 1 || tier > 3) CoC_Settings.error("Invalid curse tier!");
+			var tierPower:String = 	tier == 1 ? "Weakened" :
+									tier == 2 ? "Drained" :
+												"Damaged";
 			if (this.hasPerk(PerkLib.ZenjisInfluence2)) power *= 0.60;
 			if (statName == "sens" || statName == "cor") {
 				statStore.addBuff(statName, power, tierPower, {text: tierPower});
@@ -424,33 +430,51 @@ public class Creature extends Utils
 				CoC.instance.mainView.statsView.showStatDown(statName);
 			}
 		}
-		public function removeCurse(statName:String, power:Number, tier:Number = 0):Boolean {
-			var tierPower:String = "NOT PROPERLY ADDED STAT!";
-			if (tier == 0) tierPower = "Tribulation Vestiges";
-			if (tier == 1) tierPower = "Weakened";
-			if (tier == 2) tierPower = "Drained";
-			if (tier == 3) tierPower = "Damaged";
+
+		/**
+		 * Weakens or removes the curse from the creature. Each tier removes only the curse of its level!
+		 * @param statName 	Name of the stat, like "str" or "spe.mult"
+		 * @param power		Curse power to substract from or add to (cor or sens) stat.
+		 * @param tier		Effect tier (1,2,3). 1 - mutagen debuffs. 2 - caused by monsters. 3 - high-level attack effects. Negative - removes the highest (-2 => 2 or 1), then part of the lowest (2=0.5, 1=1.0, power=1. Removed 2, decreased 1=0.5)
+		 * @return			Change magnitude (always >0)
+		 */
+		public function removeCurse(statName:String, power:Number, tier:int = -2):Number {
+			if (tier > 3) CoC_Settings.error("Invalid curse tier!");
+			var tierPower:String;
+			if (tier == 0) tier = -3; //set to (-max)
+			if (tier < 0) {
+				var remPower:Number = power;
+				var curTier:Number = -tier;
+				while (remPower > 0 && curTier > 0) { //while power left
+					remPower -= removeCurse(statName, remPower, curTier); //change current tier
+					--curTier; //decrease tier
+				}
+				return power - remPower;
+			}
+			tierPower = tier == 1 ? "Weakened" :
+				tier == 2 ? "Drained" :
+					"Damaged";
 			var stat:BuffableStat = statStore.findBuffableStat(statName);
 			if (!stat) {
 				// Error? No stat with such name
 				throw new Error("No such stat "+statName);
 			}
 			var current:Number = stat.valueOfBuff(tierPower);
+			var change:Number = 0;
 			if (statName == "sens" || statName == "cor") {
 				if (current > 0) {
 					if (power >= current) {
 						stat.removeBuff(tierPower);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatDown(statName);
+						change = current;
 					} else if (power < current) {
 						stat.addOrIncreaseBuff(tierPower, -power);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatUp(statName);
+						change = power;
 					}
-                    return true; //changed
 				}
-                else
-                    return false;
 			}
 			else {
 				if (current < 0) {
@@ -458,16 +482,16 @@ public class Creature extends Utils
 						stat.removeBuff(tierPower);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatUp(statName);
+						change = -current;
 					} else if (power < -current) {
 						stat.addOrIncreaseBuff(tierPower, power);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatDown(statName);
+						change = power;
 					}
-                    return true; //changed
 				}
-                else
-                    return false;
 			}
+			return change;
 		}
 
 		//Primary stats
@@ -1514,6 +1538,12 @@ public class Creature extends Utils
 		{
 			return this._perks.getPerkValue(ptype, 4);
 		}
+
+		public function hasMutation(mutate:IMutationPerkType):Boolean{
+			return perkv1(mutate) > 0;
+		}
+
+
 		/*
 
 		[    S T A T U S   E F F E C T S    ]
@@ -4200,13 +4230,16 @@ public class Creature extends Utils
 		public static function cDynPerk(pPerk:PerkType, pClass:Class, target:*):*{
 			target = CoC.instance.player;
 			var pLvl:int = target.perkv1(pPerk);	//Gets Mutation Level if it exists.
-			var pMax:int = extPerkTrigger(pClass.perkLvl, 0);	//Max Mutation Level
+			var pMax:int = pClass._perkLvl;	//Max Mutation Level
 			//outputText(""+pPerk.name() + " Perk Tier: " + pLvl + "\n");
 			extPerkTrigger(pClass.pReqs, pLvl);	//Requirements Loading.
 			//trace("Requirements loaded in.");
 			if (pPerk.available(target) && pMax > pLvl){
 				//trace("Requirements met, adding in.");
 				return([pPerk.name(), acquirePerk, pPerk.desc()]);	//This is witchcraft, not sure how acquirePerk still recalls which perk to give, but it does.
+			}
+			else if(pMax == pLvl){
+				return([pPerk.name(), false, "You already have the highest tier!"]);
 			}
 			else{
 				//trace("Unable to meet requirements/requirements borked.");
