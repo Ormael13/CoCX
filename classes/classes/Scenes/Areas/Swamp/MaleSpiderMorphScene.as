@@ -63,28 +63,27 @@ public class MaleSpiderMorphScene extends BaseContent
 		public function defeatSpiderBoy():void
 		{
 			clearOutput();
+			menu();
 			spriteSelect(SpriteDb.s_spiderguy);
 			outputText("The male spider-morph collapses onto his hands and knees, ");
 			if (monster.lust >= monster.maxLust()) outputText("masturbating with furious abandon, working his ebon dick with such vigor that the spider's pre-cum-slicked dick-skin noisily slides itself back and forth over his fattened glans; it becomes apparent just how much foreskin he truly has at this point, as even with his frenzied rubbing his glans remains shrouded in the thick excess skin while his fist slaps lewdly against his groin.  Dribbles of pre-cum leak from between his fingers to spill on the ground.");
 			else outputText("wobbling back and forth as he tries to stay up and fight.  There's no way he can oppose you, as beaten as he is now.");
 			if (player.gender > 0 && player.lust >= 33) {
-				outputText("\n\nYou're not aroused enough to rape him.");
-				cleanupAfterCombat();
-				return;
+				outputText("\n\nWhat do you do?");
+				addButtonIfTrue(0, "Mount", victoryCowgirlRidingOnSpiderBoi,
+						"Req. a vagina.", player.hasVagina());
+				addButtonIfTrue(1, "FuckHisButt", victoryButtFuck,
+						"Req. dick with area smaller than " + monster.analCapacity(),
+						player.findCock(1, -1, monster.analCapacity()) >= 0);
+				addButtonIfTrue(2, "Frot", victoryFrotTheSpoidah,
+						"Req. dick with area smaller than " + monster.analCapacity(),
+						player.findCock(1, monster.analCapacity(), -1) >= 0);
+				LustyMaidensArmor.addTitfuckButton(3);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatSpiderBoy);
+				addButton(14, "Leave", cleanupAfterCombat);
 			}
-			outputText("\n\nWhat do you do?");
-			menu();
-			addButtonIfTrue(0, "Mount", victoryCowgirlRidingOnSpiderBoi,
-				"Req. a vagina.", player.hasVagina());
-			addButtonIfTrue(1, "FuckHisButt", victoryButtFuck,
-				"Req. dick with area smaller than " + monster.analCapacity(),
-				player.findCock(1, -1, monster.analCapacity()) >= 0);
-			addButtonIfTrue(2, "Frot", victoryFrotTheSpoidah,
-				"Req. dick with area smaller than " + monster.analCapacity(),
-				player.findCock(1, monster.analCapacity(), -1) >= 0);
-			LustyMaidensArmor.addTitfuckButton(3);
-			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatSpiderBoy);
-			addButton(14, "Leave", cleanupAfterCombat);
+			outputText("\n\nYou're not aroused enough to rape him.");
+			cleanupAfterCombat();
 		}
 
 //Loss selector
