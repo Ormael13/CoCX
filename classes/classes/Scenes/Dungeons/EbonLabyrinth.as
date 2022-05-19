@@ -119,7 +119,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         dungeonLoc = DUNGEON_EBON_LABYRINTH; //one 'room' for all directions. Make things simpler!
         direction = DIR_NORTH;
         //reset all
-        room = 299;
+        room = 1;
         depth = 0;
         bossTracker = 0;
         playerMenu(); //calls checkRoom -> roomStatic
