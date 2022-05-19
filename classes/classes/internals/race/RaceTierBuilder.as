@@ -71,16 +71,18 @@ public class RaceTierBuilder {
 	
 	/**
 	 * Configure tier naming function as:
-	 * {@param taurName} for taurs
+	 * {@param taurName}/{@param femaleTaurName} for taurs
 	 * {@param maleName}/{@param femaleName} for non-taurs
 	 */
 	public function namesMaleFemaleTaur(
 			maleName:String,
 			femaleName:String,
-			taurName:String
+			taurName:String,
+			femaleTaurName:String=""
 	): RaceTierBuilder {
+		femaleTaurName ||= taurName;
 		this.nameFn = function(body:BodyData):String {
-			if (body.isTaur) return taurName;
+			if (body.isTaur) return body.mf(taurName, femaleTaurName);
 			return body.mf(maleName, femaleName);
 		}
 		return this;

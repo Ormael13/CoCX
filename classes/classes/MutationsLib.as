@@ -594,7 +594,7 @@ public class MutationsLib
 					return player.demonScore() >= 11;
 				}, "Demon race");
 				CatlikeNimbleness.requirePerk(PerkLib.Flexibility)
-						.requireRacialGroup(Races.FelineRaces, "Any cat race");
+						.requireRacialGroup(Races.CatlikeRaces, "Any cat race");
 				DisplacerMetabolism.requireMetabolismMutationSlot().requireRace(Races.DISPLACERBEAST);
 				DraconicBones.requireBonesAndMarrowMutationSlot()
 				.requireCustomFunction(function (player:Player):Boolean {
@@ -615,9 +615,7 @@ public class MutationsLib
 				.requireRace(Races.DRAGON);
 				DrakeLungs.requireLungsMutationSlot()
 				.requireAnyPerk(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath, PerkLib.DragonWaterBreath)
-				.requireCustomFunction(function (player:Player):Boolean {
-					return (player.isRace(Races.FROSTWYRM) || player.isRace(Races.JABBERWOCKY) || player.vouivreScore() >= 11 || player.isRace(Races.SEA_DRAGON));
-				}, "Variants of the dragon race");
+				.requireAnyRace(Races.FROSTWYRM,Races.JABBERWOCKY,Races.VOUIVRE,Races.SEA_DRAGON);
 				EasterBunnyEggBag.requireBallsMutationSlot().requirePerk(PerkLib.EasterBunnyBalls).requireRace(Races.EASTERBUNNY);
 				EclipticMind.requirePeripheralNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.isRace(Races.ALICORN, 2) || player.unicornScore() >= 12 || player.alicornkinScore() >= 10 || player.unicornkinScore() >= 10;
@@ -635,9 +633,7 @@ public class MutationsLib
 				GorgonsEyes.requireEyesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.eyes.type == 4;
 				}, "Gorgon eyes")
-				.requireCustomFunction(function (player:Player):Boolean {
-					return player.gorgonScore() >= 11;
-				}, "Gorgon race");
+				.requireRace(Races.GORGON);
 				HinezumiBurningBlood.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.arms.type == Arms.HINEZUMI;
 				}, "Hinezumi arms")
@@ -651,10 +647,10 @@ public class MutationsLib
 					return player.mouseScore() >= 12;
 				}, "Hinezumi race (Mouse 12+)");
 				HarpyHollowBones.requireBonesAndMarrowMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.harpyScore() >= 8 || player.isRace(Races.SIREN) || player.thunderbirdScore() >= 12 || player.isRace(Races.PHOENIX) || player.couatlScore() >= 11;
+					return player.harpyScore() >= 8 || player.isRace(Races.SIREN) || player.thunderbirdScore() >= 12 || player.isRace(Races.PHOENIX) || player.isRace(Races.COUATL);
 				}, "Harpy winged race");
 				HeartOfTheStorm.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.raijuScore() >= 10 || player.thunderbirdScore() >= 12 || player.isRace(Races.KAMAITACHI) || player.couatlScore() >= 11;
+					return player.raijuScore() >= 10 || player.thunderbirdScore() >= 12 || player.isRace(Races.KAMAITACHI) || player.isRace(Races.COUATL);
 				}, "Stormborn race");
 				HollowFangs.requireMouthMutationSlot().requirePerk(VampiricBloodsteam)
 				.requireCustomFunction(function (player:Player):Boolean {
@@ -744,7 +740,7 @@ public class MutationsLib
 					return player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS);
 				}, "Spider or Snake fangs")
 				.requireCustomFunction(function (player:Player):Boolean {
-					return player.spiderScore() >= 7 || player.isRace(Races.APOPHIS) || player.nagaScore() >= 8 || player.gorgonScore() >= 11 || player.vouivreScore() >= 11 || player.couatlScore() >= 11 || player.isRace(Races.HYDRA) || player.isRace(Races.ATLACH_NACHA);
+					return player.spiderScore() >= 7 || player.isRace(Races.APOPHIS) || player.isRace(Races.NAGA) || player.isRace(Races.GORGON) >= 11 || player.isRace(Races.VOUIVRE) || player.isRace(Races.COUATL) || player.isRace(Races.HYDRA) || player.isRace(Races.ATLACH_NACHA);
 				}, "Spider or any snake-like race");
 				WhaleFat.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.orcaScore() >= 14 || player.isRace(Races.SEA_DRAGON);

@@ -52,7 +52,7 @@ public class CatLikeNimblenessMutation extends PerkType
                 IMutationsLib.CatLikeNimblenessIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.CatLikeNimblenessIM.requirePerk(PerkLib.Flexibility)
-                            .requireRacialGroup(Races.FelineRaces, "Any cat race");
+                            .requireRacialGroup(Races.CatlikeRaces, "Any cat race");
                 }
                 else{
                     var pLvl:int = pTier * 30;

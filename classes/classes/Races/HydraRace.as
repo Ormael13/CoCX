@@ -4,6 +4,7 @@ import classes.BodyParts.*;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+import classes.Races.VouivreRace;
 import classes.StatusEffects;
 import classes.VaginaClass;
 
@@ -42,17 +43,9 @@ public class HydraRace extends Race {
 				.customRequirement("","not another snake-like race",
 						function (body:BodyData):Boolean {
 							return !(body.player.nagaScore() > 10
-									|| body.hairType == Hair.GORGON
-									|| body.eyeType == Eyes.GORGON
-									|| body.hornType == Horns.DRACONIC_X4_12_INCH_LONG
-									|| body.hornType == Horns.DRACONIC_X2
-									|| body.tongueType == Tongue.DRACONIC
-									|| body.wingType == Wings.DRACONIC_SMALL
-									|| body.wingType == Wings.DRACONIC_LARGE
-									|| body.wingType == Wings.DRACONIC_HUGE
-									|| body.hairType == Hair.FEATHER
-									|| body.armType == Arms.HARPY
-									|| body.wingType == Wings.FEATHERED_LARGE);
+									|| GorgonRace.isGorgonLike(body)
+									|| VouivreRace.isVouivreLike(body)
+									|| CouatlRace.isCouatlLike(body));
 						}, 0, -1000);
 		
 		addMutation(IMutationsLib.VenomGlandsIM);
@@ -88,6 +81,11 @@ public class HydraRace extends Race {
 					"spe.mult": +1.30
 				})
 				.end();
+	}
+	
+	public static function isHydraLike(body:BodyData):Boolean {
+		return body.legType == LowerBody.HYDRA
+				|| body.armType == Arms.HYDRA;
 	}
 }
 }

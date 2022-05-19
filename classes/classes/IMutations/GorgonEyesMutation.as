@@ -7,6 +7,7 @@ package classes.IMutations
     import classes.PerkClass;
     import classes.PerkType;
 import classes.Player;
+import classes.Races;
 
 public class GorgonEyesMutation extends PerkType
     {
@@ -53,9 +54,7 @@ public class GorgonEyesMutation extends PerkType
                         .requireCustomFunction(function (player:Player):Boolean {
                             return player.eyes.type == 4;
                         }, "Gorgon eyes")
-                        .requireCustomFunction(function (player:Player):Boolean {
-                            return player.gorgonScore() >= 11;
-                        }, "Gorgon race");
+                        .requireRace(Races.GORGON);
                 }
                 else{
                     var pLvl:int = pTier * 30;

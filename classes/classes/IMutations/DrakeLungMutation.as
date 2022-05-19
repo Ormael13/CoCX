@@ -53,9 +53,7 @@ public class DrakeLungMutation extends PerkType
                 if (pTier == 0){
                     IMutationsLib.DrakeLungsIM.requireLungsMutationSlot()
                     .requireAnyPerk(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath, PerkLib.DragonWaterBreath)
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return (player.isRace(Races.FROSTWYRM) || player.isRace(Races.JABBERWOCKY) || player.vouivreScore() >= 11 || player.leviathanScore() >= 20);
-                    }, "Variants of the dragon race");
+                    .requireAnyRace(Races.FROSTWYRM, Races.JABBERWOCKY, Races.VOUIVRE, Races.SEA_DRAGON);
                 }
                 else{
                     var pLvl:int = pTier * 30;

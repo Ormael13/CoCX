@@ -3832,52 +3832,6 @@ use namespace CoC;
 				if (isTaur()) race = "cave wyrm-taur";
 				else race = "cave wyrm";
 			}
-			if (TopRace == "couatl") {
-				if (TopScore >= 11) {
-					if (TopScore >= 19) race = "greater couatl";
-					else {
-						race = "couatl";
-					}
-				}
-			}
-			if (TopRace == "vouivre") {
-				if (TopScore >= 11) {
-					if (TopScore >= 21) race = "greater vouivre";
-					else {
-						if (TopScore >= 16) race = "vouivre";
-						else {
-							race = "lesser vouivre";
-						}
-					}
-				}
-			}
-			if (TopRace == "gorgon") {
-				if (TopScore >= 11) {
-					if (TopScore >= 19) race = "greater gorgon";
-					else {
-						race = "gorgon";
-					}
-				}
-			}
-			if (TopRace == "naga") {
-				race = "naga";
-			}
-			if (TopRace == "fire snail") {
-				if (TopScore >= 15) {
-					race = "fire snail";
-				}
-			}
-			if (TopRace == "plant") {
-				if (TopScore >= 4) {
-					if (isTaur()) {
-						if (TopScore >= 6) race = mf("treant-taur", "dryad-taur");
-						else race = "plant-taur";
-					} else {
-						if (TopScore >= 6) race = mf("treant", "dryad");
-						else race = "plant-morph";
-					}
-				}
-			}
 			if (TopRace == "oni") {
 				if (TopScore >= 18) {
 					if (isTaur()) race = "elder oni-taur";
@@ -4168,13 +4122,13 @@ use namespace CoC;
 				chimeraCounter++;
 			if (cavewyrmScore() >= 10)
 				chimeraCounter++;
-			if (nagaScore() >= 8)
+			if (isRace(Races.NAGA))
 				chimeraCounter++;
-			if (gorgonScore() >= 11)
+			if (isRace(Races.GORGON))
 				chimeraCounter++;
-			if (vouivreScore() >= 11)
+			if (isRace(Races.VOUIVRE))
 				chimeraCounter++;
-			if (couatlScore() >= 11)
+			if (isRace(Races.COUATL))
 				chimeraCounter++;
 			if (isRace(Races.HYDRA))
 				chimeraCounter++;
@@ -4966,196 +4920,12 @@ use namespace CoC;
 			return racialScore(Races.DARKSLIME);
 		}
 
-		//Naga score
 		public function nagaScore():Number {
-			Begin("Player","racialScore","naga");
-			var nagaCounter:Number = 0;
-			if (isNaga()) {
-				nagaCounter += 3;
-				if (arms.type == Arms.HUMAN)
-					nagaCounter++;
-			}
-			if (tongue.type == Tongue.SNAKE)
-				nagaCounter++;
-			if (faceType == Face.SNAKE_FANGS)
-				nagaCounter++;
-			if (hasPartialCoat(Skin.SCALES))
-				nagaCounter++;
-			if (eyes.type == Eyes.SNAKE)
-				nagaCounter++;
-			if (ears.type == Ears.SNAKE)
-				nagaCounter++;
-			if (hasVagina() && (vaginaType() == VaginaClass.NAGA) || (lizardCocks() > 0))
-				nagaCounter++;
-			if (perkv1(IMutationsLib.VenomGlandsIM) >= 1)
-				nagaCounter++;
-			if (perkv1(IMutationsLib.VenomGlandsIM) >= 2)
-				nagaCounter++;
-			if (perkv1(IMutationsLib.VenomGlandsIM) >= 3)
-				nagaCounter++;
-			if (perkv1(IMutationsLib.VenomGlandsIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				nagaCounter++;
-			if (perkv1(IMutationsLib.VenomGlandsIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				nagaCounter++;
-			if (perkv1(IMutationsLib.VenomGlandsIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				nagaCounter++;
-			if (!isNaga() || hairType == Hair.GORGON || eyes.type == Eyes.GORGON || horns.type == Horns.DRACONIC_X4_12_INCH_LONG || horns.type == Horns.DRACONIC_X2 || tongue.type == Tongue.DRACONIC || wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE || hairType == Hair.FEATHER || arms.type == Arms.HARPY || wings.type == Wings.FEATHERED_LARGE
-			 || lowerBody == LowerBody.HYDRA || arms.type == Arms.HYDRA)
-				nagaCounter = 0;
-			nagaCounter = finalRacialScore(nagaCounter, Races.NAGA);
-			End("Player","racialScore");
-			return nagaCounter;
+			return racialScore(Races.NAGA);
 		}
 
-		//Gorgon score
-		public function gorgonScore():Number {
-			Begin("Player","racialScore","gorgon");
-			var gorgonCounter:Number = 0;
-			if (isNaga())
-				gorgonCounter += 3;
-			if (tongue.type == Tongue.SNAKE)
-				gorgonCounter++;
-			if (faceType == Face.SNAKE_FANGS)
-				gorgonCounter++;
-			if (arms.type == Arms.HUMAN)
-				gorgonCounter++;
-			if (hasCoatOfType(Skin.SCALES) || hasPartialCoat(Skin.SCALES))
-				gorgonCounter++;
-			if (ears.type == Ears.SNAKE)
-				gorgonCounter++;
-			if (eyes.type == Eyes.SNAKE)
-				gorgonCounter++;
-			if (eyes.type == Eyes.GORGON)
-				gorgonCounter += 2;
-			if (hairType == Hair.GORGON)
-				gorgonCounter += 2;
-			if (hasVagina() && (vaginaType() == VaginaClass.NAGA) || (lizardCocks() > 0))
-				gorgonCounter++;
-			if (perkv1(IMutationsLib.GorgonEyesIM) >= 1)
-				gorgonCounter++;
-			if (perkv1(IMutationsLib.GorgonEyesIM) >= 2)
-				gorgonCounter++;
-			if (perkv1(IMutationsLib.VenomGlandsIM) >= 1)
-				gorgonCounter++;
-			if (perkv1(IMutationsLib.VenomGlandsIM) >= 2)
-				gorgonCounter++;
-			if (perkv1(IMutationsLib.VenomGlandsIM) >= 3)
-				gorgonCounter++;
-			if ((perkv1(IMutationsLib.GorgonEyesIM) >= 1 || perkv1(IMutationsLib.VenomGlandsIM) >= 1) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				gorgonCounter++;
-			if ((perkv1(IMutationsLib.GorgonEyesIM) >= 2 || perkv1(IMutationsLib.VenomGlandsIM) >= 2) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				gorgonCounter++;
-			if (nagaScore() > 10 || horns.type == Horns.DRACONIC_X4_12_INCH_LONG || horns.type == Horns.DRACONIC_X2 || tongue.type == Tongue.DRACONIC || wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE || hairType == Hair.FEATHER || arms.type == Arms.HARPY || wings.type == Wings.FEATHERED_LARGE
-			 || lowerBody == LowerBody.HYDRA || arms.type == Arms.HYDRA)
-				gorgonCounter = 0;
-			if (lowerBody != LowerBody.NAGA || wings.type == Wings.FEATHERED_LARGE || wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE) gorgonCounter = 0;
-			gorgonCounter = finalRacialScore(gorgonCounter, Races.GORGON);
-			End("Player","racialScore");
-			return gorgonCounter;
-		}
-
-		//Vouivre score
-		public function vouivreScore():Number {
-			Begin("Player","racialScore","vouivre");
-			var vouivreCounter:Number = 0;
-			if (isNaga())
-				vouivreCounter += 3;
-			if (tongue.type == Tongue.SNAKE || tongue.type == Tongue.DRACONIC)
-				vouivreCounter++;
-			if (faceType == Face.SNAKE_FANGS)
-				vouivreCounter++;
-			if (arms.type == Arms.DRACONIC)
-				vouivreCounter++;
-			if (hasCoatOfType(Skin.DRAGON_SCALES))
-				vouivreCounter++;
-			if (eyes.type == Eyes.SNAKE)
-				vouivreCounter++;
-			if (ears.type == Ears.DRAGON)
-				vouivreCounter++;
-			if (horns.type == Horns.DRACONIC_X4_12_INCH_LONG)
-				vouivreCounter+= 2;
-			if (horns.type == Horns.DRACONIC_X2)
-				vouivreCounter++;
-			if (wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE)
-				vouivreCounter += 4;
-			if (hasVagina() && (vaginaType() == VaginaClass.NAGA) || (lizardCocks() > 0))
-				vouivreCounter++;
-			if (vouivreCounter >= 11 && hasPerk(PerkLib.DragonFireBreath))
-				vouivreCounter++;
-			if (perkv1(IMutationsLib.DrakeLungsIM) >= 1)
-				vouivreCounter++;
-			if (perkv1(IMutationsLib.DrakeLungsIM) >= 2)
-				vouivreCounter++;
-			if (perkv1(IMutationsLib.DrakeLungsIM) >= 3)
-				vouivreCounter++;
-			if (perkv1(IMutationsLib.VenomGlandsIM) >= 1)
-				vouivreCounter++;
-			if (perkv1(IMutationsLib.VenomGlandsIM) >= 2)
-				vouivreCounter++;
-			if (perkv1(IMutationsLib.VenomGlandsIM) >= 3)
-				vouivreCounter++;
-			if ((perkv1(IMutationsLib.DrakeLungsIM) >= 1 || perkv1(IMutationsLib.VenomGlandsIM) >= 1) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				vouivreCounter++;
-			if ((perkv1(IMutationsLib.DrakeLungsIM) >= 2 || perkv1(IMutationsLib.VenomGlandsIM) >= 2) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				vouivreCounter++;
-			if ((perkv1(IMutationsLib.DrakeLungsIM) >= 3 || perkv1(IMutationsLib.VenomGlandsIM) >= 3) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				vouivreCounter++;
-			if (nagaScore() > 10 || hairType == Hair.GORGON || eyes.type == Eyes.GORGON || hairType == Hair.FEATHER || arms.type == Arms.HARPY || wings.type == Wings.FEATHERED_LARGE || lowerBody == LowerBody.HYDRA || arms.type == Arms.HYDRA)
-				vouivreCounter = 0;
-			if (lowerBody != LowerBody.NAGA || wings.type == Wings.FEATHERED_LARGE || (wings.type != Wings.DRACONIC_SMALL && wings.type != Wings.DRACONIC_LARGE && wings.type != Wings.DRACONIC_HUGE)) vouivreCounter = 0;
-			vouivreCounter = finalRacialScore(vouivreCounter, Races.VOUIVRE);
-			End("Player","racialScore");
-			return vouivreCounter;
-		}
-
-		//Couatl score
 		public function couatlScore():Number {
-			Begin("Player","racialScore","couatl");
-			var couatlCounter:Number = 0;
-			if (isNaga())
-				couatlCounter += 3;
-			if (tongue.type == Tongue.SNAKE)
-				couatlCounter++;
-			if (faceType == Face.SNAKE_FANGS)
-				couatlCounter++;
-			if (arms.type == Arms.HARPY)
-				couatlCounter++;
-			if (hasCoatOfType(Skin.SCALES))
-				couatlCounter++;
-			if (ears.type == Ears.SNAKE)
-				couatlCounter++;
-			if (eyes.type == Eyes.SNAKE)
-				couatlCounter++;
-			if (hairType == Hair.FEATHER)
-				couatlCounter++;
-			if (wings.type == Wings.FEATHERED_LARGE)
-				couatlCounter += 4;
-			if (hasVagina() && (vaginaType() == VaginaClass.NAGA) || (lizardCocks() > 0))
-				couatlCounter++;
-			if (perkv1(IMutationsLib.VenomGlandsIM) >= 1)
-				couatlCounter++;
-			if (perkv1(IMutationsLib.VenomGlandsIM) >= 2)
-				couatlCounter++;
-			if (perkv1(IMutationsLib.VenomGlandsIM) >= 3)
-				couatlCounter++;
-			if (perkv1(IMutationsLib.HeartOfTheStormIM) >= 1)
-				couatlCounter++;
-			if (perkv1(IMutationsLib.HeartOfTheStormIM) >= 2)
-				couatlCounter++;
-			if (perkv1(IMutationsLib.HeartOfTheStormIM) >= 3)
-				couatlCounter++;
-			if ((perkv1(IMutationsLib.VenomGlandsIM) >= 1 || perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				couatlCounter++;
-			if ((perkv1(IMutationsLib.VenomGlandsIM) >= 2 || perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				couatlCounter++;
-			if ((perkv1(IMutationsLib.VenomGlandsIM) >= 3 || perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				couatlCounter++;
-			if (nagaScore() > 10 || hairType == Hair.GORGON || eyes.type == Eyes.GORGON || horns.type == Horns.DRACONIC_X4_12_INCH_LONG || horns.type == Horns.DRACONIC_X2 || tongue.type == Tongue.DRACONIC || wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE || lowerBody == LowerBody.HYDRA || arms.type == Arms.HYDRA)
-				couatlCounter = 0;
-			if (lowerBody != LowerBody.NAGA || wings.type != Wings.FEATHERED_LARGE || wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE) couatlCounter = 0;
-			couatlCounter = finalRacialScore(couatlCounter, Races.COUATL);
-			End("Player","racialScore");
-			return couatlCounter;
+			return racialScore(Races.COUATL);
 		}
 
 		public function poltergeistScore():Number {
@@ -7755,56 +7525,6 @@ use namespace CoC;
 				maxSpeCap2 += 60;
 				maxIntCap2 += 75;
 			}//+(30)55/(30-40)50-60
-			if (couatlScore() >= 11) {
-				if (couatlScore() >= 19) {
-					maxStrCap2 += 50;
-					maxTouCap2 += 45;
-					maxSpeCap2 += 140;
-					maxIntCap2 += 50;
-				} else {
-					maxStrCap2 += 30;
-					maxTouCap2 += 25;
-					maxSpeCap2 += 80;
-					maxIntCap2 += 30;
-				}
-			}//+30/30-40
-			if (vouivreScore() >= 11) {
-				if (vouivreScore() >= 21) {
-					maxStrCap2 += 130;
-					maxTouCap2 += 80;
-					maxSpeCap2 += 100;
-					maxIntCap2 += 20;
-					maxWisCap2 -= 20;
-				} else if (vouivreScore() >= 16) {
-					maxStrCap2 += 100;
-					maxTouCap2 += 65;
-					maxSpeCap2 += 70;
-					maxIntCap2 += 15;
-					maxWisCap2 -= 15;
-				} else {
-					maxStrCap2 += 70;
-					maxTouCap2 += 45;
-					maxSpeCap2 += 45;
-					maxIntCap2 += 10;
-					maxWisCap2 -= 10;
-				}
-			}
-			if (gorgonScore() >= 11) {
-				if (gorgonScore() >= 17) {
-					maxStrCap2 += 80;
-					maxTouCap2 += 65;
-					maxSpeCap2 += 110;
-				} else {
-					maxStrCap2 += 50;
-					maxTouCap2 += 45;
-					maxSpeCap2 += 70;
-				}
-			}//+30/30-40
-			if (nagaScore() >= 8) {
-				maxStrCap2 += 40;
-				maxTouCap2 += 20;
-				maxSpeCap2 += 60;
-			}
 			if (centaurScore() >= 8) {
 				maxTouCap2 += 80;
 				maxSpeCap2 += 40;
@@ -9759,8 +9479,6 @@ use namespace CoC;
 				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) max *= (1.35);
 				if (Forgefather.refinement == 5) max *= (1.5);
 			}
-			if (gorgonScore() >= 11) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (gorgonScore() >= 17) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (horseScore() >= 7) max += (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (unicornScore() >= 12) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.ElementalBondFlesh) && statusEffectv1(StatusEffects.SummonedElementals) >= 2) max += maxHP_ElementalBondFleshMulti() * statusEffectv1(StatusEffects.SummonedElementals);

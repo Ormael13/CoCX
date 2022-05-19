@@ -48,10 +48,10 @@ public class Races {
 	public static const MANTIS:Race = new Race("Mantis",42, "mantisScore", 12);
 	public static const SALAMANDER:Race = new Race("Salamander",43, "salamanderScore", 7);
 	public static const CAVEWYRM:Race = new Race("Cave wyrm",44, "cavewyrmScore", 10);
-	public static const NAGA:Race = new Race("Naga",45, "nagaScore", 8);
-	public static const GORGON:Race = new Race("Gorgon",46, "gorgonScore", 11);
-	public static const VOUIVRE:Race = new Race("Vouivre",47, "vouivreScore", 11);
-	public static const COUATL:Race = new Race("Couatl",48, "couatlScore", 11);
+	public static const NAGA:NagaRace                      = new NagaRace(45);
+	public static const GORGON:GorgonRace                  = new GorgonRace(46);
+	public static const VOUIVRE:VouivreRace                = new VouivreRace(47);
+	public static const COUATL:CouatlRace                  = new CouatlRace(48);
 	public static const HYDRA:HydraRace                    = new HydraRace(49);
 	public static const FIRESNAILS:FireSnailRace           = new FireSnailRace(50);
 	public static const PHOENIX:PhoenixRace                = new PhoenixRace(51);
@@ -108,8 +108,14 @@ public class Races {
 	public static const ALICORN:AlicornRace                = new AlicornRace(102);
 	
 	// Racial groups
-	public static const FelineRaces:/*Race*/Array = [
+	public static const CatlikeRaces:/*Race*/Array   = [
 			CAT, NEKOMATA, DISPLACERBEAST, HELLCAT, CHESHIRE, SPHINX
+	];
+	public static const SnakelikeRaces:/*Race*/Array = [
+			NAGA, GORGON, VOUIVRE, COUATL, HYDRA, APOPHIS
+	];
+	public static const InsectRaces:/*Race*/Array = [
+			BEE, MANTIS, SCORPION, SPIDER, CANCER, ATLACH_NACHA
 	];
 	
 	function Races() {

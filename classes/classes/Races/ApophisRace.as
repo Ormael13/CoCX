@@ -37,19 +37,10 @@ public class ApophisRace extends Race {
 				.corruption(AT_LEAST(100), +2)
 				.customRequirement("","not another snake-like race",
 						function (body:BodyData):Boolean {
-							return !(body.hairType == Hair.GORGON
-									|| body.eyeType == Eyes.GORGON
-									|| body.hornType == Horns.DRACONIC_X4_12_INCH_LONG
-									|| body.hornType == Horns.DRACONIC_X2
-									|| body.tongueType == Tongue.DRACONIC
-									|| body.wingType == Wings.DRACONIC_SMALL
-									|| body.wingType == Wings.DRACONIC_LARGE
-									|| body.wingType == Wings.DRACONIC_HUGE
-									|| body.hairType == Hair.FEATHER
-									|| body.armType == Arms.HARPY
-									|| body.wingType == Wings.FEATHERED_LARGE
-									|| body.legType == LowerBody.HYDRA
-									|| body.armType == Arms.HYDRA);
+							return !(GorgonRace.isGorgonLike(body)
+									|| CouatlRace.isCouatlLike(body)
+									|| HydraRace.isHydraLike(body)
+									|| VouivreRace.isVouivreLike(body));
 						}, 0, -1000);
 		
 		addMutation(IMutationsLib.VenomGlandsIM);

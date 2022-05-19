@@ -54,7 +54,7 @@ public class HeartOfTheStormMutation extends PerkType
                 if (pTier == 0){
                     IMutationsLib.HeartOfTheStormIM.requireHeartMutationSlot()
                         .requireCustomFunction(function (player:Player):Boolean {
-                            return player.raijuScore() >= 10 || player.thunderbirdScore() >= 12 || player.isRace(Races.KAMAITACHI) || player.couatlScore() >= 11;
+                            return player.raijuScore() >= 10 || player.thunderbirdScore() >= 12 || player.isRace(Races.KAMAITACHI) || player.isRace(Races.COUATL);
                         }, "Stormborn race");
                 }
                 else{

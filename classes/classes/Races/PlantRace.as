@@ -54,7 +54,7 @@ public class PlantRace extends Race {
 				.end();
 		
 		buildTier(6, "treant")
-				.namesMaleFemale("treant", "dryad")
+				.namesMaleFemaleTaur("treant", "dryad", "treant-taur", "dryad-taur")
 				.buffs({
 					"str.mult": +0.20,
 					"tou.mult": +0.80,
@@ -64,7 +64,7 @@ public class PlantRace extends Race {
 				.end();
 		
 		buildTier(7, "treant")
-				.namesMaleFemale("treant", "dryad")
+				.namesMaleFemaleTaur("treant", "dryad", "treant-taur", "dryad-taur")
 				.buffs({
 					"str.mult": +0.25,
 					"tou.mult": +1.00,
