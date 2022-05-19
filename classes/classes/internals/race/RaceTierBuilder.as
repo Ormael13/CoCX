@@ -90,7 +90,7 @@ public class RaceTierBuilder {
 	/**
 	 * Configure tier naming function as:
 	 * {@param taurName} for taurs
-	 * {@param maleName}/{@param femaleName} for non-taurs with human face
+	 * {@param maleName}/{@param femaleName} for non-taurs with human/human-like face
 	 * {@param morphName} otherwise
 	 */
 	public function namesMaleFemaleMorphTaur(
@@ -101,7 +101,7 @@ public class RaceTierBuilder {
 	): RaceTierBuilder {
 		this.nameFn = function(body:BodyData):String {
 			if (body.isTaur) return taurName;
-			if (body.faceType == Face.HUMAN) return body.mf(maleName, femaleName);
+			if (Face.isHumanShaped(body.faceType)) return body.mf(maleName, femaleName);
 			return morphName;
 		}
 		return this;
@@ -159,6 +159,14 @@ public class RaceTierBuilder {
 	}
 	public function requireTailCount(count:*):RaceTierBuilder {
 		addSlotRequirement(BodyData.SLOT_TAIL_COUNT, count);
+		return this;
+	}
+	public function requireArmType(type:*):RaceTierBuilder {
+		addSlotRequirement(BodyData.SLOT_ARM_TYPE, type);
+		return this;
+	}
+	public function requireLegType(type:*):RaceTierBuilder {
+		addSlotRequirement(BodyData.SLOT_LEG_TYPE, type);
 		return this;
 	}
 	public function requirePerk(perk:PerkType):RaceTierBuilder {

@@ -1,4 +1,5 @@
 package classes.Races {
+import classes.BodyData;
 import classes.BodyParts.*;
 import classes.IMutations.IMutationsLib;
 import classes.Race;
@@ -47,6 +48,11 @@ public class SirenRace extends Race {
 					"lib.mult": +0.30
 				})
 				.end();
+	}
+	
+	public static function isSirenLike(body:BodyData):Boolean {
+		return body.tailType == Tail.SHARK
+				|| body.faceType == Face.SHARK_TEETH;
 	}
 }
 }

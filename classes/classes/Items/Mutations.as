@@ -9323,7 +9323,7 @@ public final class Mutations extends MutationsHelper {
         }
         //UBEROOOO
         //kangaroo perk: - any liquid or food intake will accelerate a pregnancy, but it will not progress otherwise
-        if (!player.hasPerk(PerkLib.Diapause) && player.kangaScore() > 4 && rand(4) == 0 && changes < changeLimit && player.hasVagina()) {
+        if (!player.hasPerk(PerkLib.Diapause) && player.isRace(Races.KANGAROO) && rand(4) == 0 && changes < changeLimit && player.hasVagina()) {
             //Perk name and description:
             player.createPerk(PerkLib.Diapause, 0, 0, 0, 0);
             outputText("[pg]Your womb rumbles as something inside it changes.\n<b>(You have gained the Diapause perk.  Pregnancies will not progress when fluid intake is scarce, and will progress much faster when it isn't.)</b>");
@@ -9404,7 +9404,7 @@ public final class Mutations extends MutationsHelper {
         //(decrease strength to 70)
         if (player.str > 70 && rand(3) == 0) {
             outputText("[pg]Lethargy rolls through you while you burp noisily.  You rub at your muscles and sigh, wondering why you need to be strong when you could just sew up a nice sticky web to catch your enemies.  ");
-            if (player.spiderScore() < 4) outputText("Wait, you're not a spider, that doesn't make any sense!");
+            if (!player.isRace(Races.SPIDER)) outputText("Wait, you're not a spider, that doesn't make any sense!");
             else outputText("Well, maybe you should put your nice, heavy abdomen to work.");
             player.addCurse("str", 1, 1);
             changes++;

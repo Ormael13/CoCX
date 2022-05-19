@@ -10,6 +10,7 @@ import classes.BodyParts.Tail;
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Player;
+import classes.Races;
 
 public class HinezumiBurningBloodMutation extends IMutationPerkType
     {
@@ -65,17 +66,9 @@ public class HinezumiBurningBloodMutation extends IMutationPerkType
                 if (pTier == 0){
                     IMutationsLib.HinezumiBurningBloodIM.requireBloodsteamMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.arms.type == Arms.HINEZUMI;
-                    }, "Hinezumi arms")
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.lowerBody == LowerBody.HINEZUMI;
-                    }, "Hinezumi legs")
-                    .requireCustomFunction(function (player:Player):Boolean {
                         return player.tailType == Tail.HINEZUMI;
                     }, "Hinezumi tail")
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.mouseScore() >= 12;
-                    }, "Hinezumi race (Mouse 12+)");
+                    .requireRace(Races.MOUSE, 2);
                 }
                 else{
                     var pLvl:int = pTier * 30;

@@ -3,10 +3,8 @@ package classes.internals.race {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
-import classes.PerkLib;
 import classes.PerkType;
 import classes.Race;
-import classes.StatusEffectClass;
 import classes.StatusEffectType;
 
 public class RaceScoreBuilder {

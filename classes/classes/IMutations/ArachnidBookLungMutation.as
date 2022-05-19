@@ -58,7 +58,7 @@ import classes.Races;
                 if (pTier == 0){
                     IMutationsLib.ArachnidBookLungIM.requireAdaptationsMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.spiderScore() >= 5 || player.isRace(Races.ATLACH_NACHA,2);
+                        return player.isRace(Races.SPIDER) || player.isRace(Races.ATLACH_NACHA,2);
                     }, "Arachnid race");
                 }
                 else{

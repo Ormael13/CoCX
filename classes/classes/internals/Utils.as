@@ -533,6 +533,38 @@ public class Utils extends Object
 
 			return false;
 		}
+		
+		/**
+		 * Sort the {@param collection} according to natural sort order of the value returned by {@param selector} `(value:*)=>*` function.
+		 * @param descending Sort descending
+		 * @return A new collection, {@param collection} is unmodified.
+		 *
+		 * @example
+		 * sortedBy(
+		 *     ["a","quickest","brown","fox"],
+		 *     function(s:String):int { return s.length; }
+		 * ) -> ["a", "fox", "brown", "quickest"]
+		 */
+		public static function sortedBy(
+				collection:Array,
+				selector:Function,
+				descending:Boolean = false):Array {
+			if (collection.length == 0) return [];
+			/**
+			 * array of `{ v: original collection element, s: value to sort on }
+			 */
+			var selection:Array = [];
+			for (var i:int=0; i<collection.length; i++) {
+				selection[i] = {s:selector(collection[i]),v:collection[i]};
+			}
+			var flags:int = descending?Array.DESCENDING:0;
+			if (selection[0].s is Number) flags |= Array.NUMERIC;
+			selection.sortOn("s",flags);
+			for (i=0; i<collection.length; i++) {
+				selection[i] = selection[i].v;
+			}
+			return selection;
+		}
 
 		public static function rand(max:Number):int
 		{

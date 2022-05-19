@@ -1,0 +1,42 @@
+package classes.Races {
+import classes.BodyData;
+import classes.BodyParts.*;
+import classes.IMutations.IMutationsLib;
+import classes.PerkLib;
+import classes.Race;
+public class MantisRace extends Race {
+	public static const MantisChitinColors:/*String*/Array = ["green", "emerald", "turquoise"];
+	
+	public function MantisRace(id:int) {
+		super("Mantis", id);
+	}
+	
+	public override function setup():void {
+		addScores()
+				.skinCoatType(Skin.CHITIN, +3)
+				.skinCoatColor(ANY(MantisChitinColors), +1)
+				.antennaeType(Antennae.MANTIS, +1)
+				.faceType(Face.HUMAN, +1)
+				.armType(Arms.MANTIS, +1)
+				.legType(LowerBody.MANTIS, +1)
+				.tailType(Tail.MANTIS_ABDOMEN, +1)
+				.wingType(Wings.MANTIS_SMALL, +1)
+				.wingType(Wings.MANTIS_LARGE, +2)
+				.wingType(Wings.MANTIS_LARGE_2, +4)
+				.hasPerk(PerkLib.MantisOvipositor, +1);
+		
+		addMutation(IMutationsLib.MantislikeAgilityIM);
+		addMutation(IMutationsLib.TrachealSystemIM);
+		
+		buildTier(12, "mantis-morph")
+				.namesTauric("mantis-morph","mantis-taur")
+				.buffs({
+					"str.mult": -0.40,
+					"tou.mult": +0.60,
+					"spe.mult": +1.40,
+					"int.mult": +0.20
+				})
+				.end();
+	}
+}
+}

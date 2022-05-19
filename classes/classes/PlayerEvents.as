@@ -454,13 +454,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			if ((player.salamanderScore()>=7 || player.hasStatusEffect(StatusEffects.HinezumiCoat) || player.isRace(Races.HELLCAT)) && !player.hasStatusEffect(StatusEffects.Overheat))
+			if ((player.isRace(Races.SALAMANDER) || player.hasStatusEffect(StatusEffects.HinezumiCoat) || player.isRace(Races.HELLCAT)) && !player.hasStatusEffect(StatusEffects.Overheat))
 			{
 				//Argument 1 is weither pc is in heat stage or not 1 means active
 				//Argument 2 is how many day left before player enter heats again typicaly 3;
 				//Argument 3 tells if player had sex and satisfied its overheat set to 1 when true;
 				outputText("\n\nWoa your body is heating up like crazy. You suddenly realise that due to being a");
-				if (player.salamanderScore()>=7) outputText(" salamander");
+				if (player.isRace(Races.SALAMANDER)) outputText(" salamander");
 				else if (player.isRace(Races.HELLCAT)) outputText(" hellcat");
 				else if (player.hasStatusEffect(StatusEffects.HinezumiCoat)) outputText(" hinezumi");
 				outputText(" your body has started overheating with lust. You will have to constantly sate your uncontrollable burning need for sex if only to stay sane long enough not to jump on everything that moves.");
@@ -469,7 +469,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				else if (player.hasVagina()) player.goIntoHeat(false);
 				needNext = true;
 			}
-			if ((player.salamanderScore()<7 && !player.hasStatusEffect(StatusEffects.HinezumiCoat) && !player.isRace(Races.HELLCAT)) && player.hasStatusEffect(StatusEffects.Overheat))
+			if ((!player.isRace(Races.SALAMANDER) && !player.hasStatusEffect(StatusEffects.HinezumiCoat) && !player.isRace(Races.HELLCAT)) && player.hasStatusEffect(StatusEffects.Overheat))
 			{
 				outputText("\n\nYour body finally calms down. It would seem you are no longer as hot as you used to be, which might be a good thing as you won't have to deal with heat problems... for now.");
 				player.removeStatusEffect(StatusEffects.Overheat);
@@ -1577,7 +1577,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText(")</b>\n");
 				needNext = true;
 			}
-			if ((player.isRaceCached(Races.SIREN) || player.harpyScore() >=  8 || player.isRaceCached(Races.PHOENIX) || player.thunderbirdScore() >=  10) && !player.hasPerk(PerkLib.HarpySong)) {
+			if ((player.isRaceCached(Races.SIREN) || player.isRaceCached(Races.HARPY) || player.isRaceCached(Races.PHOENIX) || player.thunderbirdScore() >=  10) && !player.hasPerk(PerkLib.HarpySong)) {
 				outputText("\n Your voice sound like magicaly entrancing music to your ears now, it would seem you have gained the infamous magicaly compeling voices common to harpies. <b>Gained Perks: Harpy Song</b>)\n");
 				player.createPerk(PerkLib.HarpySong, 0, 0, 0, 0);
 				needNext = true;
@@ -1588,7 +1588,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.MelkieSong);
 				needNext = true;
 			}
-			if (!player.isRaceCached(Races.SIREN) && player.harpyScore() < 8 && !player.isRaceCached(Races.PHOENIX) && player.thunderbirdScore() <  10 && player.hasPerk(PerkLib.HarpySong) && !player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 1) {
+			if (!player.isRaceCached(Races.SIREN) && !player.isRaceCached(Races.HARPY) && !player.isRaceCached(Races.PHOENIX) && player.thunderbirdScore() <  10 && player.hasPerk(PerkLib.HarpySong) && !player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 1) {
 				outputText("\n Your voice no longer carries the magical power it used to and thus you are no longer able to use your compelling aria. <b>Lost Perks: Harpy Song</b>)\n");
 				player.removePerk(PerkLib.HarpySong);
 				needNext = true;
@@ -1670,12 +1670,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Fire Affinity
-			if ((player.salamanderScore() >= 4 || player.isRaceCached(Races.PHOENIX) || player.isRaceCached(Races.HELLCAT) || player.isRaceCached(Races.FIRESNAILS) || (player.mouseScore() >= 12 && player.lowerBody == LowerBody.HINEZUMI && player.arms.type == Arms.HINEZUMI && player.tailType == Tail.HINEZUMI)) && !player.hasPerk(PerkLib.FireAffinity)) {
+			if ((player.salamanderScore() >= 4 || player.isRaceCached(Races.PHOENIX) || player.isRaceCached(Races.HELLCAT) || player.isRaceCached(Races.FIRESNAILS) || (player.isRaceCached(Races.MOUSE, 2))) && !player.hasPerk(PerkLib.FireAffinity)) {
 				outputText("\nYou suddenly feels your body temperature rising to ridiculus level. You pant for several minutes until you're finally at ease with your bodily heat. You doubt any more heat is going to make you more uncomfortable then this as you quietly soak in the soothing warmth your body naturally produce. It's like your body is made out of living fire.\n\n(<b>Gained Perk: Fire Affinity</b>)\n");
 				player.createPerk(PerkLib.FireAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((player.salamanderScore() < 4 && !player.isRaceCached(Races.PHOENIX) && !player.isRaceCached(Races.HELLCAT) && !player.isRaceCached(Races.FIRESNAILS) && player.mouseScore() < 12 && player.lowerBody != LowerBody.HINEZUMI && player.arms.type != Arms.HINEZUMI && player.tailType != Tail.HINEZUMI) && player.hasPerk(PerkLib.FireAffinity)) {
+			else if ((player.salamanderScore() < 4 && !player.isRaceCached(Races.PHOENIX) && !player.isRaceCached(Races.HELLCAT) && !player.isRaceCached(Races.FIRESNAILS) && !player.isRace(Races.MOUSE, 2)) && player.hasPerk(PerkLib.FireAffinity)) {
 				outputText("\nYou suddenly feel chilly as your bodily temperature drop down to human level. You lost your natural warmth reverting to that of a standard human.\n\n<b>(Lost Perk: Fire Affinity)</b>\n");
 				player.removePerk(PerkLib.FireAffinity);
 				needNext = true;
@@ -1922,13 +1922,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Hinezumi Coat
-			if (player.mouseScore() >= 12 && player.lowerBody == LowerBody.HINEZUMI && player.arms.type == Arms.HINEZUMI && player.tailType == Tail.HINEZUMI && !player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
+			if (player.isRace(Races.MOUSE, 2) && !player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 				outputText("\nYour body suddenly coats itself with fire turning incandescent as your lust and body heat spikes up reaching a critical point, this must be the infamous hinezumi coat. You gasp as your lust begins to overwelm you, the flare of desire burns in you and you need to vent it one way or another. ");
 				outputText("Feeling inspired you try and expel it through kick and punch on a tree and indeed it works the more you discharge your flames the clearer your mind get. Your hinezumi coat finally stable you sigh in relief.\n\n<b>(Gained Hinezumi Coat!)</b>\n");
 				player.createStatusEffect(StatusEffects.HinezumiCoat, 1, 0, 0, 0);
 				needNext = true;
 			}
-			if (player.mouseScore() < 12 && (player.lowerBody != LowerBody.HINEZUMI || player.arms.type != Arms.HINEZUMI || player.tailType != Tail.HINEZUMI) && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
+			if (!player.isRace(Races.MOUSE, 2) && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 				outputText("\nFor one reason or another your inner flames suddenly die down leaving you penting but clear of mind. Seems you no longer are hinezumi enough for the coat to maintain itself.\n\n<b>(Lost the Hinezumi Coat!)</b>\n");
 				player.removeStatusEffect(StatusEffects.HinezumiCoat);
 				needNext = true;

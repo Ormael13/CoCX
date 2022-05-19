@@ -54,5 +54,9 @@ public class PhoenixRace extends Race {
 				})
 				.end();
 	}
+	
+	public static function isPhoenixLike(body:BodyData):Boolean {
+		return body.wingType == Wings.FEATHERED_PHOENIX;
+	}
 }
 }

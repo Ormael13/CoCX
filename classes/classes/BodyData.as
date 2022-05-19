@@ -532,6 +532,9 @@ public class BodyData {
 	public function get isNaga():Boolean {
 		return player.isNaga();
 	}
+	public function get isDrider():Boolean {
+		return player.isDrider();
+	}
 	public function get looksMale():Boolean {
 		return player.looksMale();
 	}

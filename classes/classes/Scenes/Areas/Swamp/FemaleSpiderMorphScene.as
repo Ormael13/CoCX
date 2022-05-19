@@ -96,7 +96,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			if (rand(2) == 0) {
 				outputText("You hold up your hands non-threateningly and ask the spider-girl why she's trying to sneak up on you.  Her eyes go wide, and she claps her chitinous hands over her mouth in shock before she cries, \"<i>Omigosh, I'm so sorry!</i>\"  You smirk at the decidedly girlish response while she recovers and continues to speak, \"<i>I didn't mean to scare you!  I've been living out here by myself for so long... ever since the demons destroyed our village.  C-could we just... umm... talk for a little while?</i>\"\n\n");
 				outputText("The spider-girl twiddles her fingers nervously for a moment until you give her a nod.  You did mean to talk to her, and it seems that it's worked out a little better than you intended.  She takes a few tiny steps forward before sitting down cross-legged on some ferns.  Feeling no threat from the strange monster-girl, you sit down across from her and let her ply you with questions about your adventures, and once she's finished, you do the same.\n\n");
-				//(OPTION 1 - SEX) 
+				//(OPTION 1 - SEX)
 				if (rand(2) == 0) {
 					outputText("After you've both had your fill of talk, the spider-girl asks, \"<i>I-I w-was wondering if you'd do me a favor... I have certain... urges, and");
 					if (player.gender == 0) {
@@ -108,7 +108,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 					outputText("Do you let her fuck you?");
 					doYesNo(voluntaryFemaleSpiderMorphRapesYou, declinedCrazyFemaleSpiderMorphSexFunTimes);
 				}
-				//(OPTION 2 - GIFT) 
+				//(OPTION 2 - GIFT)
 				else {
 					outputText("After you've both had your fill of talk, the spider-girl smiles and gives you a gentle hug.  She trills, \"<i>Thank you so much for talking to me!  It feels so good to actually... communicate with someone again.  I can't thank you enough, but here, take this.  Maybe it will help you on your journey.</i>\"\n\n");
 					inventory.takeItem(consumables.S_GOSSR, camp.returnToCampUseOneHour);
@@ -284,7 +284,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			spriteSelect(SpriteDb.s_spidergirl);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = 0;
-			//(Noncombat Intro:) 
+			//(Noncombat Intro:)
 
             if (!CoC.instance.inCombat) {
                 outputText("You shuck your [armor] and toss it aside, feeling " + sMultiCockDesc() + " ");
@@ -292,7 +292,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 				else outputText("twitch, already hard and aching for the touch of the beautiful spider-maid.");
 				outputText("  Striding forward, you close to an arms-length away before she stops you with an outstretched palm.  She says, \"<i>Not yet, lie down over there so I can take you properly.</i>\"\n\n");
 			}
-			//(All:) 
+			//(All:)
 
             if (!CoC.instance.inCombat) outputText("You shrug and step back to lay down in the soft moss,");
             else if (player.HP < 1) outputText("You collapse into the soft moss,");
@@ -324,7 +324,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			outputText("You wince from the onset of tightness and wonder if you'll be able to cum like this, but she immediately shoots out more of her silky strands, sealing a perfect sheath of non-sticky fibers around your " + cockDescript(x) + ", anchored to the ring.\n\n");
 
 			outputText("\"<i>We wouldn't want me to get pregnant from a ");
-			if (player.spiderScore() < 4) outputText("beast's seed");
+			if (!player.isRace(Races.SPIDER)) outputText("beast's seed");
 			else outputText("strange, itinerate spider's seed");
 			outputText(", would we?</i>\" asks your captor.  Your eyes go wide, and you start to plead with her, but she quickly muffles you with a spray of webbing that blocks your mouth, but leaves your nose open.  A carapace-covered hand");
 			if (player.cockTotal() > 1) {
@@ -384,7 +384,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 		}
 
 		//*Defeat Male - Too Big
-		//Summary: web-spooling around dick, then webjob.  
+		//Summary: web-spooling around dick, then webjob.
 		private function femaleSpiderMorphTooBigWebRape():void
 		{
 			clearOutput();
@@ -636,7 +636,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 		}
 
 		//*Victory Anal:
-		//Summary: Fuck her ass until she loses control of her spinnerets and starts spraying webs willy-nilly. 
+		//Summary: Fuck her ass until she loses control of her spinnerets and starts spraying webs willy-nilly.
 		private function evilSpiderGirlVictoryAnal():void
 		{
 			var x:Number = player.cockThatFits(monster.analCapacity());

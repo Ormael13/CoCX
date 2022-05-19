@@ -695,9 +695,9 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			//Update chitin
 			if (player.hasCoatOfType(Skin.CHITIN)) {
-				if (player.mantisScore() >= 5) player.skin.coat.color = "green";
-				if (player.spiderScore() >= 5) player.skin.coat.color = "pale white";
-				if (player.mantisScore() < 5 && player.spiderScore() < 5) {
+				if (player.isRace(Races.MANTIS)) player.skin.coat.color = "green";
+				if (player.isRace(Races.SPIDER)) player.skin.coat.color = "pale white";
+				if (player.isRace(Races.MANTIS) && !player.isRace(Races.SPIDER)) {
 					if (rand(2) == 1) player.skin.coat.color = "green";
 					else player.skin.coat.color = "pale white";
 				}

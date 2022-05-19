@@ -64,7 +64,7 @@ public class TrachealSystemMutation extends IMutationPerkType
                 IMutationsLib.TrachealSystemIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.TrachealSystemIM.requireCustomFunction(function (player:Player):Boolean {
-                        return player.beeScore() >= 14 || player.mantisScore() >= 12 || player.scorpionScore() >= 4 || player.spiderScore() >= 5 || player.isRace(Races.CANCER) || player.isRace(Races.ATLACH_NACHA);
+                        return player.beeScore() >= 14 || player.isRace(Races.MANTIS) || player.isRace(Races.SCORPION) || player.isRace(Races.SPIDER) || player.isRace(Races.CANCER) || player.isRace(Races.ATLACH_NACHA);
                     }, "Any insect race");
                 }
                 else{

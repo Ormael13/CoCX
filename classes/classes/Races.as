@@ -40,14 +40,14 @@ public class Races {
 	public static const RAIJU:Race = new Race("Raiju",34, "raijuScore", 10);
 	public static const THUNDERBIRD:Race = new Race("Thunderbird",35, "thunderbirdScore", 16);
 	public static const BUNNY:Race = new Race("Bunny",36, "bunnyScore", 10);
-	public static const HARPY:Race = new Race("Harpy",37, "harpyScore", 8);
-	public static const SPIDER:Race = new Race("Spider",38, "spiderScore", 7);
-	public static const KANGAROO:Race = new Race("Kangaroo",39, "kangaScore", 4);
-	public static const MOUSE:Race = new Race("Mouse and hinezumi",40,"mouseScore", 8);
-	public static const SCORPION:Race = new Race("Scorpion",41, "scorpionScore", 4);
-	public static const MANTIS:Race = new Race("Mantis",42, "mantisScore", 12);
-	public static const SALAMANDER:Race = new Race("Salamander",43, "salamanderScore", 7);
-	public static const CAVEWYRM:Race = new Race("Cave wyrm",44, "cavewyrmScore", 10);
+	public static const HARPY:HarpyRace                    = new HarpyRace(37);
+	public static const SPIDER:SpiderRace                  = new SpiderRace(38);
+	public static const KANGAROO:KangarooRace              = new KangarooRace(39);
+	public static const MOUSE:MouseRace                    = new MouseRace(40);
+	public static const SCORPION:ScorpionRace              = new ScorpionRace(41);
+	public static const MANTIS:MantisRace                  = new MantisRace(42);
+	public static const SALAMANDER:SalamanderRace          = new SalamanderRace(43);
+	public static const CAVEWYRM:CaveWyrmRace              = new CaveWyrmRace(44);
 	public static const NAGA:NagaRace                      = new NagaRace(45);
 	public static const GORGON:GorgonRace                  = new GorgonRace(46);
 	public static const VOUIVRE:VouivreRace                = new VouivreRace(47);
@@ -117,6 +117,12 @@ public class Races {
 	public static const InsectRaces:/*Race*/Array = [
 			BEE, MANTIS, SCORPION, SPIDER, CANCER, ATLACH_NACHA
 	];
+	public static const GoblinoidRaces:/*Race*/Array = [
+			GOBLIN, GREMLIN
+	];
+	public static const HarpylikeRaces:/*Race*/Array = [
+			HARPY, THUNDERBIRD, PHOENIX
+	];
 	
 	function Races() {
 	}
@@ -126,9 +132,15 @@ public class Races {
 		
 		for each (var race:Race in Race.AllRacesWithDisabled) {
 			race.setup();
-			if (race.disabled) continue;
+			if (race.disabled) {
+				trace("Race "+race.name+" (#"+race.id+") is disabled")
+				continue;
+			}
 			Race.AllEnabledRaces.push(race);
-			if (race.hidden) continue;
+			if (race.hidden) {
+				trace("Race "+race.name+" (#"+race.id+") is hidden")
+				continue;
+			}
 			Race.AllVisibleRaces.push(race);
 		}
 		

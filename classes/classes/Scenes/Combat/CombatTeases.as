@@ -407,7 +407,7 @@ public class CombatTeases extends BaseCombatContent {
 			choices[choices.length] = 22;
 			choices[choices.length] = 22;
 			choices[choices.length] = 22;
-			if (player.spiderScore() >= 4) {
+			if (player.isRace(Races.SPIDER)) {
 				choices[choices.length] = 22;
 				choices[choices.length] = 22;
 				choices[choices.length] = 22;

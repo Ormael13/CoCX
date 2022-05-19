@@ -588,7 +588,7 @@ public class MutationsLib
 				//Perk związany ze skórą
 				//Tier 1
 				ArachnidBookLung.requireAdaptationsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.spiderScore() >= 7 || player.isRace(Races.ATLACH_NACHA, 2);
+					return player.isRace(Races.SPIDER) || player.isRace(Races.ATLACH_NACHA, 2);
 				}, "Arachnid race");
 				BlackHeart.requireHeartMutationSlot().requirePerk(PerkLib.DarkCharm).requireCor(100).requireCustomFunction(function (player:Player):Boolean {
 					return player.demonScore() >= 11;
@@ -634,20 +634,9 @@ public class MutationsLib
 					return player.eyes.type == 4;
 				}, "Gorgon eyes")
 				.requireRace(Races.GORGON);
-				HinezumiBurningBlood.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.arms.type == Arms.HINEZUMI;
-				}, "Hinezumi arms")
-				.requireCustomFunction(function (player:Player):Boolean {
-					return player.lowerBody == LowerBody.HINEZUMI;
-				}, "Hinezumi legs")
-				.requireCustomFunction(function (player:Player):Boolean {
-					return player.tailType == Tail.HINEZUMI;
-				}, "Hinezumi tail")
-				.requireCustomFunction(function (player:Player):Boolean {
-					return player.mouseScore() >= 12;
-				}, "Hinezumi race (Mouse 12+)");
+				HinezumiBurningBlood.requireBloodsteamMutationSlot().requireRace(Races.MOUSE, 2);
 				HarpyHollowBones.requireBonesAndMarrowMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.harpyScore() >= 8 || player.isRace(Races.SIREN) || player.thunderbirdScore() >= 12 || player.isRace(Races.PHOENIX) || player.isRace(Races.COUATL);
+					return player.isRace(Races.HARPY) || player.isRace(Races.SIREN) || player.thunderbirdScore() >= 12 || player.isRace(Races.PHOENIX) || player.isRace(Races.COUATL);
 				}, "Harpy winged race");
 				HeartOfTheStorm.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.raijuScore() >= 10 || player.thunderbirdScore() >= 12 || player.isRace(Races.KAMAITACHI) || player.isRace(Races.COUATL);
@@ -680,9 +669,7 @@ public class MutationsLib
 					return player.lizardScore() >= 8;
 				}, "Lizan race");
 				ManticoreMetabolism.requireMetabolismMutationSlot().requireRace(Races.MANTICORE);
-				MantislikeAgility.requireMusclesMutationSlot().requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
-					return player.mantisScore() >= 12;
-				}, "Mantis race");
+				MantislikeAgility.requireMusclesMutationSlot().requirePerk(TrachealSystem).requireRace(Races.MANTIS);
 				MelkieLung.requireLungsMutationSlot().requireRace(Races.MELKIE);
 				MinotaurTesticles.requireBallsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.hasCock();
@@ -719,15 +706,13 @@ public class MutationsLib
 					return player.raijuScore() >= 10;
 				}, "Raiju race");
 				RatatoskrSmarts.requirePeripheralNervSysMutationSlot().requirePerk(PerkLib.KnowledgeIsPower).requireRace(Races.RATATOSKR);
-				SalamanderAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(PerkLib.Lustzerker).requireCustomFunction(function (player:Player):Boolean {
-					return player.salamanderScore() >= 7 || player.isRace(Races.PHOENIX);
-				}, "Salamander race");
+				SalamanderAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(PerkLib.Lustzerker).requireAnyRace(Races.SALAMANDER, Races.PHOENIX);
 				SharkOlfactorySystem.requirePeripheralNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.sharkScore() >= 8;
 				}, "Shark race");
 				ScyllaInkGlands.requirePerk(PerkLib.InkSpray).requireRace(Races.SCYLLA);
 				TrachealSystem.requireCustomFunction(function (player:Player):Boolean {
-					return player.beeScore() >= 14 || player.mantisScore() >= 12 || player.scorpionScore() >= 4 || player.spiderScore() >= 7 || player.isRace(Races.CANCER) || player.isRace(Races.ATLACH_NACHA,2);
+					return player.beeScore() >= 14 || player.isRace(Races.MANTIS) || player.isRace(Races.SCORPION) || player.isRace(Races.SPIDER) || player.isRace(Races.CANCER) || player.isRace(Races.ATLACH_NACHA,2);
 				}, "Any insect race");
 				TwinHeart.requireAdaptationsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.centaurScore() >= 8 || player.unicornScore() >= 12 || player.isRace(Races.SPHINX) || player.isRace(Races.CANCER) || player.isTaur() || player.isDrider();
@@ -739,9 +724,7 @@ public class MutationsLib
 				VenomGlands.requireMouthMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS);
 				}, "Spider or Snake fangs")
-				.requireCustomFunction(function (player:Player):Boolean {
-					return player.spiderScore() >= 7 || player.isRace(Races.APOPHIS) || player.isRace(Races.NAGA) || player.isRace(Races.GORGON) >= 11 || player.isRace(Races.VOUIVRE) || player.isRace(Races.COUATL) || player.isRace(Races.HYDRA) || player.isRace(Races.ATLACH_NACHA);
-				}, "Spider or any snake-like race");
+				.requireAnyRace(Races.SPIDER, Races.APOPHIS, Races.NAGA, Races.GORGON, Races.VOUIVRE, Races.COUATL, Races.HYDRA, Races.ATLACH_NACHA);
 				WhaleFat.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.orcaScore() >= 14 || player.isRace(Races.SEA_DRAGON);
 				}, "Orca race");

@@ -1,4 +1,4 @@
-package classes.Scenes.Areas.HighMountains 
+package classes.Scenes.Areas.HighMountains
 {
 import classes.*;
 import classes.BodyParts.Horns;
@@ -8,15 +8,15 @@ import classes.Stats.Buff;
 
 /**
 	 * Izumi, the fuckhuge Oni. TOUCH THE FLUFFY HORN.
-	 * 
+	 *
 	 * @author FeatureCreep
 	 * @editor Gedan
 	 * @programmer Gedan
 	 */
 	public class IzumiScene extends BaseContent
 	{
-				
-		public function IzumiScene() 
+		
+		public function IzumiScene()
 		{
 		}
 		
@@ -209,7 +209,7 @@ import classes.Stats.Buff;
 				else if (player.dogScore() > 3) outputText("plus it looks like you'd actually be able to resist chasing down a stick, if I threw one outta' the cave.  ");
 				else if (player.isGoblinoid()) outputText("plus you don't seem to be as insufferable as the rest of those little green whores trolloping around these parts, hunting their next lay.  ");
 				else if (player.demonScore() > 3) outputText("plus you're not forever going on about corruption this, enslavement that, demonic taint the other, unlike the insufferable clods who usually wander around these parts.  ");
-				else if (player.harpyScore() > 3) outputText("plus you're not screeching incessantly, like the feathery sluts who usually flap their way around these parts.  They're lucky they </i>can<i> fly, 'cause I'd give them something to really squawk about if I could get my hands on them.  ");
+				else if (player.isRace(Races.HARPY)) outputText("plus you're not screeching incessantly, like the feathery sluts who usually flap their way around these parts.  They're lucky they </i>can<i> fly, 'cause I'd give them something to really squawk about if I could get my hands on them.  ");
 				else if (player.lizardScore() > 3) outputText("plus, you don't have the same creepy eyes that the scaley idiots from around these parts keep trying to use on me.  ");
 				else outputText("plus you don’t look like the troglodytes who usually wander around these parts.  ");
 				outputText("Sit down, sit down!</i>\"\n\n");
@@ -219,7 +219,7 @@ import classes.Stats.Buff;
 			{
 				outputText(" a");
 			}
-			else 
+			else
 			{
 				outputText(" the");
 			}
@@ -539,7 +539,7 @@ import classes.Stats.Buff;
 				else if (player.cumQ() > 250)
 				{
 					outputText(" shoots out rope after rope of hot, sticky cum across the cold cavern floor");
-					if (player.cumQ() > 500) 
+					if (player.cumQ() > 500)
 					{
 						outputText(", a small puddle of creamy-white forming between you and the cavern wall");
 						if (player.cumQ() > 1000) outputText(", slowly expanding into a small lake....\n\n");
@@ -628,19 +628,19 @@ import classes.Stats.Buff;
 			outputText("Sick of Izumi and the strange, uncomfortable feelings the Oni keeps forcing you to experience, you defy her command.  Instead, you thrust more vigorously into the air, turning this way and that, trying to force some form of stimulation from the hand mercilessly gripping your member.\n\n");
 
 			outputText("\"<i>Fine.</i>\"  Izumi says, apparently unconcerned.  \"<i>Go ahead and try.  It won’t do you any good.</i>\"\n\n");
-			 
+			
 			outputText("Ignoring her, you continue thrusting, twisting and turning, but always Izumi follows you effortlessly, thwarting every twist and turn you make in a desperate attempt to fuck her hand.  Finally, after an eternity of painful stalemate, you give in, collapsing to the ground, momentarily exhausted.\n\n");
-			 
+			
 			outputText("\"<i>All done?</i>\"  She asks.  You glare at her, and her grin widens.  \"<i>So, you wanna cum, huh?  Well then, let’s do that.</i>\"  She announces, happily.  Suddenly, she begins stroking you again - this time at a speed far beyond her previous unhurried pace.  Her hand flies up and down your shaft, stimulating you just as much as before, but at easily three times the speed!  It is, without a doubt, the most amazing handjob you’ve ever experienced.\n\n");
 
 			outputText("The insane feeling is just too much, and you feel your orgasm boiling up within you.  Just as you feel yourself rising to crest the orgamsic wave and hit sweet release... Izumi lets go.\n\n");
-			 
+			
 			outputText("You cry out in anger and pain as you find your impending orgasm so cruelly denied, your [cock "+x1+"] twitching and throbbing painfully");
 			if (player.hasVagina()) outputText(", [vagina] spasming in sympathy");
 			outputText(", desperate for release.  Somehow, she could sense you were on the verge of orgasm, and she chose to deny you that pleasure, you just <b>know</b> it.  You shoot Izumi a vicious, hateful glare, only to see her laying there quite calmly, her expression blank.\n\n");
-			 
+			
 			outputText("\"<i>Hm?</i>\"  She grunts, looking surprised.  \"<i>Oh, do you want some help?  Sure; here, let me handle this for you.</i>\"  She says, her tone even.  She reaches out and, very deliberately, softly flicks your [cockhead "+x1+"] with a single finger.\n\n");
-			 
+			
 			outputText("The sensation is almost nothing, but as close as you are, it’s just enough.  You groan in a mix of pleasure and heartbroken anguish as the tiny amount of contact forces you over the edge, your load forcing its way up through your cock with agonizing slowness until finally");
 			if (player.cumQ() <= 250) outputText(" spurting free, spattering down randomly over you as Izumi watches, happily observing the effects of your ruined orgasm.");
 			else if (player.cumQ() <= 500) outputText(" sputtering freely from your [cock "+x1+"], glob after glob of thick jizz showering down randomly over you as Izumi watches, mildly amused with the results of your ruined orgasm.");
@@ -661,15 +661,15 @@ import classes.Stats.Buff;
 			outputText("Izumi grunts in surprise as your [cock "+x1+"] flops free of its confinement.  \"<i>Damn.  This is pretty impressive, you know?</i>\"  She frowns, running an exploratory hand across the length of your flesh.  \"<i>Let me guess, you got a bit too frisky with one of the natives?  Maybe didn’t think to boil the water before you drank it?  Look, no offence, but there is no way this thing is legit, "+ this.heightDesc() +".</i>\"\n\n");
  
 			outputText("Izumi continues to frown as she inspects you, turning your stiffening cock this way and that in her hands, apparently indifferent to the way her touch has begun to coax you towards full hardness.  She murmurs to herself under her breath, tapping a finger to her lips whilst absentmindedly wringing your cock with her other hand.  Eventually, she appears to reach a decision.  \"<i>Alright!</i>\"  She announces, loudly.  \"<i>Let’s try it like this, shall we?!</i>\"\n\n");
-			 
+			
 			outputText("Izumi releases you from the floor, allowing you to sit");
 			if (player.isTaur()) outputText(" back on your haunches, front end raised");
 			outputText(" up as she makes her way around to sit cross-legged between your legs.  Once settled into position, she smirks suggestively at you around the throbbing meat now standing at insistent attention between the two of you.  \"<i>Get ready,</i>\" She warns, \"<i>because this is going to be a hell of a ride... and you wouldn’t want to disappoint me now, would you?</i>\"\n\n");
 
 			outputText("\"<i>Six!</i>\"  She shouts, suddenly, making you flinch in surprise as her right hand snaps out and latches onto your cock, just below the sensitive [cockHead "+x1+"].  Izumi grins, slowly rotating her wrist and wringing her hand around in place, but she doesn’t start up any kind of up-and-down motion - yet.\n\n");
-			 
+			
 			outputText("\"<i>Five!</i>\"  She yells, and her left hand joins the first in gripping your cock, this time about halfway down your shaft.  Again, her wrist rotates gently as she massages the area, but her hand doesn’t actually go anywhere.  Her grin widens into a truly ominous smile as she leans forwards conspiratorially.\n\n");
-			 
+			
 			outputText("\"<i>Four.</i>\"  She whispers, and without warning her legs unfold, both feet flying out from beneath her and latching onto the [sheath] of your [cock "+x1+"]!  Izumi leers at you with undisguised amusement as she watches your reaction to the sensation of her bare soles rolling over the [sheath] of your shaft");
 			if (player.balls > 0 && !player.hasVagina()) outputText(", occasionally sliding down to massage your [balls] before returning to your cock.");
 			else if (player.balls == 0 && player.hasVagina()) outputText(", occasionally sliding down to tease at the lips of your [vagina].");
@@ -677,17 +677,17 @@ import classes.Stats.Buff;
 			outputText("\n\n");
 
 			outputText("The strange sensation causes you to quiver, your towering erection twitching ominously.  \"<i>Hey, don’t give up just yet!</i>\" Izumi quips. \"<i>We’re just about to get to the fun part...</i>\"  Already beginning to sweat as the mind-addling smoke fogs your brain with lust, you briefly wonder what exactly ‘the fun part’ entails....\n\n");
-			 
+			
 			outputText("\"<i>Three.</i>\"  She announces casually, and then begins to move.  You groan in equal parts pleasure and surprise; Izumi’s feet are surprisingly dextrous, and you can’t help but be amazed at how warm and soft her soles feel as they glide across your skin.  Incredibly, there seems to be almost no difference in sensation between her feet and her hands; if you close your eyes, it almost feels as though you’re being stroked along your entire length by four hands at once....\n\n");
-			 
+			
 			outputText("\"<i>It’s good, right?</i>\"  Izumi’s voice penetrates your thoughts, and you open your eyes to see her gazing up at you, amber irises glittering in the half-light of the fire.  \"<i>You know, there’s one more level to this... but looking at the state you’re in, there’s no way you could endure it for long.  In terms of pleasure, it outclasses what I’ve been doing up to now completely. Do you want to see it?</i>\"  You don’t even have to think about it.  You nod your head, unsure if you can manage the difficult task of speaking, and Izumi giggles.  \"<i>Alright, "+ this.heightDesc() +", but don’t say I didn’t warn you.  Here we go...</i>\"\n\n");
-			 
+			
 			outputText("\"<i>Two.</i>\"  She teases, her technique changing completely.  Rather than just running her hands and feet gently over your flesh, she grips on tightly, her hands clenching around your [cock "+x1+"] like vices.  Her movements change completely, instead of the simple, slow up-and-down motion she had been using, she begins to alternate the motions of her left and right angles of attack - while her left hand rolls up your shaft, the right slides down to meet it.  Even her feet seem to somehow press in tighter against your flesh, mirroring her hands; the strange technique creating a unique wave-like rolling sensation that feels quite unlike anything you’ve experienced on Mareth before. You wonder briefly if there might be a little bit of magic involved here before your thoughts are obliterated by an avalanche of pleasure - Izumi has begun to speed up.\n\n");
-			 
+			
 			outputText("You can only grunt and shiver under the onslaught as Izumi works you over with this bizarre new approach.  There’s no gentleness here, you realize; no playful teasing or long, drawn out pauses.  This move is designed for one thing, and one thing only - to force you to cum.");
 			if (player.balls > 0) outputText("  You groan, your aching balls coming to the same conclusion as you have, twitching under a passing stroke from one of Izumi’s soles and tensing up in readiness.");
 			outputText("  You understand now why Izumi warned you about this technique; you are no longer being teased, gently coaxed towards the edge and then pulled back at the last minute.  As of now, you are being milked.\n\n");
-			 
+			
 			outputText("\"<i>One.</i>\"  She commands, her tone demanding.  After only a few moments, you throw back your head and let out a long, ecstatic moan as you cum, your orgasm fountaining up through you and exploding free of your [cockhead "+x1+"].  As the first jet of semen surges free of your cock and thrusts up into the air, Izumi gasps.  A split second later, she releases you and launches herself backwards in a powerful roll that catapults her across the cave. Your first load splatters explosively down where she had been sitting moments ago, but you’re too busy firing off a second to care.\n\n");
 
 			if (player.cumQ() > 500) outputText("You remain sat there for a crippling eternity, unable to do anything but moan as you inexplicably continue to cum, your aching erection firing out shot after shot of hot, dripping goo as Izumi watches you from the safety of the shadows, grinning happily like the cat that got the cream.  ");
@@ -698,7 +698,7 @@ import classes.Stats.Buff;
 			outputText(" onto the ground, staring up at the roof of the cave in a daze.  After a few seconds, Izumi’s face appears in your field of vision, albeit upside down.\n\n");
 
 			outputText("\"<i>Haha... Sorry about that, but I didn’t want you to ruin my clothes, you know?</i>\"  She half-apologizes, giggling.  \"<i>Hmm... maybe that move was a little much to try on a [race].  I just thought that since you were a little more... <i>robust</i> than most others of your kind that I’ve met, you’d be able to take it.  I did try to warn you, although... It seems like you enjoyed yourself anyway, hmm?</i>\"  She beams.  You can barely find the energy to blink, let alone to muster a response.\n\n");
-			 
+			
 			outputText("Izumi returns to her tent and lights up her pipe, unceremoniously abandoning you there on the cave floor, apparently done with you for now.  Still, it’s some time before you are able to drag yourself to your feet and stumble home to your camp, wondering how long it’ll be before you can see straight again...\n\n");
 
 			player.sexReward("Default","Dick",true,false);
@@ -1319,11 +1319,11 @@ import classes.Stats.Buff;
 			else outputText(" momentarily staggered by your furious onslaught.\n\n");
  
 			outputText("\"<i>Alright, alright! Hold it a second!</i>\" she yells, scowling as she pulls herself back to her feet.  Warily, you remain in your combat stance just out of reach, waiting to see if she’ll try anything.  Instead of launching some kind of surprise attack, however, she just dusts herself off, glaring at you thoughtfully.  The two of you exchange stares for a long, tense moment, before finally Izumi lets out a quiet grunt.\n\n");
-			 
+			
 			outputText("\"<i>Hmph. Okay, okay; I admit it.  You’re pretty good, kid. So, if ya want, we’ll call this one a draw. Go on, get outta here, before I change my mind.</i>\"  It seems like she talks a big game, but the second things stop going her way, she wants to back out.  Izumi catches sight of your surprised expression and chuckles.  \"<i>What, you actually think you can take </i>me?<i> Full force, without some cheap gimmick?  I’m not normally in the business of granting death wishes, so I’ll give ya one last chance to walk out nice and peaceful before I decide I gotta teach you a lesson.</i>\"  She folds her arms and smirks at you expectantly, clearly expecting you to take the hint and run.\n\n");
-			 
+			
 			outputText("But you don’t.  After her performance in the last fight, you’re pretty sure you can take her – and besides, her smug attitude is beginning to get on your nerves.  You stand your ground, glaring daggers at the busty giantess.  Izumi’s smirk widens slowly into a full-force leer as she realizes you’re not just going to cut and run.\n\n");
-			 
+			
 			outputText("\"<i>You’re really gonna try your luck, aren’t ya?</i>\"  Izumi asks. When you nod in response, she throws back her head and lets out a booming, uproarious laugh.  \"<i>I love it! I </i>love<i> this attitude!  Fighting you is more exciting than anything else I’ve encountered on this godawful rock!  Alright, here – I’ll give you a gift! A glimpse of my full strength, no gimmicks, no holding back. And remember, you asked for this, so I don’t want to see you crying when you lose!</i>\" \n\n");
 
 			outputText("Without warning, Izumi suddenly brings one leg up, swings it wide and smashes it back down onto the ground. A second later, she does the same with her other leg, assuming some kind of strange, half-crouching stance.  You ready yourself for an attack, but instead Izumi takes a deep breath, clenches her fists, and then....\n\n");

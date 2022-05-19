@@ -7,9 +7,9 @@
 * iterate in chimeras
 * kill array of objects in `race()`
 * solve unicornkin/alicornkin races
-* racial paragon and like stat buffs
-* RSB.hasFur/hasFurOfColor
 * consider moving naming function from tier to race
+* NG+ & paragon-like scale buffs in race itself
+* search for `isRace(..) >=/< `
 * Future:
   * racial score caching
   * `Race.onTierUp`/`onTierDown` - see `PlayerEvents:1500`
