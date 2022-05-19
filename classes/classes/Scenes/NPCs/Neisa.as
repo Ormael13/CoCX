@@ -22,9 +22,18 @@ import classes.Scenes.SceneLib;
 
 	public class Neisa extends Monster
 	{
+		override public function defeated(hpVictory:Boolean):void
+		{
+			SceneLib.neisaFollower.neisaSparWon();
+		}
+
+		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
+		{
+			SceneLib.neisaFollower.neisaSparLost();
+		}
 		
 		public function Neisa() 
-		{//  She's snarling at you from behind her massive shield, stamping her hooves in irritation as she prepares to lay into you.  Her skin is dusky, nearly chocolate except for a few white spots spattered over her body.  She wears a tight silk shirt and a corset that barely supports her bountiful breasts, but it's hard to get a good look at them behind her giant shield.
+		{//  Her skin is dusky, nearly chocolate except for a few white spots spattered over her body.
 			if (flags[kFLAGS.NEISA_LVL_UP] == 1) {
 				initStrTouSpeInte(50, 80, 50, 44);
 				initWisLibSensCor(44, 52, 25, 50);
@@ -35,55 +44,16 @@ import classes.Scenes.SceneLib;
 				this.bonusLust = 80;
 				this.level = 3;
 			}
-			if (flags[kFLAGS.NEISA_LVL_UP] == 2) {
-				initStrTouSpeInte(65, 102, 60, 52);
-				initWisLibSensCor(52, 58, 30, 50);
-				this.weaponAttack = 15;
-				this.armorDef = 8;
-				this.armorMDef = 2;
-				this.bonusHP = 400;
-				this.bonusLust = 97;
-				this.level = 9;
-			}
-			if (flags[kFLAGS.NEISA_LVL_UP] == 3) {
-				initStrTouSpeInte(80, 124, 70, 60);
-				initWisLibSensCor(60, 64, 35, 50);
-				this.weaponAttack = 18;
-				this.armorDef = 16;
-				this.armorMDef = 4;
-				this.bonusHP = 600;
-				this.bonusLust = 114;
-				this.level = 15;
-			}
-			if (flags[kFLAGS.NEISA_LVL_UP] == 4) {
-				initStrTouSpeInte(95, 146, 80, 68);
-				initWisLibSensCor(68, 70, 40, 50);
-				this.weaponAttack = 21;
-				this.armorDef = 24;
-				this.armorMDef = 6;
-				this.bonusHP = 800;
-				this.bonusLust = 131;
-				this.level = 21;
-			}
-			if (flags[kFLAGS.NEISA_LVL_UP] == 5) {
-				initStrTouSpeInte(110, 168, 90, 76);
-				initWisLibSensCor(76, 76, 45, 50);
-				this.weaponAttack = 24;
-				this.armorDef = 32;
-				this.armorMDef = 8;
-				this.bonusHP = 1000;
-				this.bonusLust = 148;
-				this.level = 27;
-			}
-			if (flags[kFLAGS.NEISA_LVL_UP] == 6) {
-				initStrTouSpeInte(125, 190, 100, 84);
-				initWisLibSensCor(84, 82, 50, 50);
-				this.weaponAttack = 27;
-				this.armorDef = 40;
-				this.armorMDef = 10;
-				this.bonusHP = 1200;
-				this.bonusLust = 165;
-				this.level = 33;
+			if (flags[kFLAGS.NEISA_LVL_UP] >= 2 && flags[kFLAGS.NEISA_LVL_UP] < 7) {
+				var mod:int = (flags[kFLAGS.NEISA_LVL_UP] - 1);
+				initStrTouSpeInte(50 + 15*mod, 80 + 22*mod, 50 + 10*mod, 44 + 8*mod);
+				initWisLibSensCor(44 + 8*mod, 52 + 6*mod, 25 + 5*mod, 50);
+				this.weaponAttack = 12 + 3*mod;
+				this.armorDef = 0 + 8*mod;
+				this.armorMDef = 0 + 2*mod;
+				this.bonusHP = 200 + 200*mod;
+				this.bonusLust = 80 + 17*mod;
+				this.level = 3 + 6*mod;
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] == 7) {
 				initStrTouSpeInte(140, 212, 110, 92);
@@ -128,7 +98,7 @@ import classes.Scenes.SceneLib;
 			this.a = "";
 			this.short = "Neisa";
 			this.imageName = "Neisa";
-			this.long = "Neisa is a seven foot tall, raven-haired shield maiden.";
+			this.long = "Neisa is a seven foot tall, raven-haired shield maiden. Her full plate armor and giant shield makes it hard to have a good look at her. And if you would try to peek at her you have to be vary of her bastard sword that may swing your way.";
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_WET, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 45, 0, 0, 0);
@@ -163,9 +133,19 @@ import classes.Scenes.SceneLib;
 			this.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 2) {
 				this.createPerk(PerkLib.Diehard, 0, 0, 0, 0);
+				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.NEISA_LVL_UP] >= 3) {
+				this.createPerk(PerkLib.JobKnight, 0, 0, 0, 0);
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 4) {
 				this.createPerk(PerkLib.ImprovedDiehard, 0, 0, 0, 0);
+				this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+			}
+			if (flags[kFLAGS.NEISA_LVL_UP] >= 5) {
+				this.createPerk(PerkLib.JobDefender, 0, 0, 0, 0);
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 6) {
 				IMutationsLib.CatLikeNimblenessIM.acquireMutation(this, "none", 2);
