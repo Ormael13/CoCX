@@ -163,7 +163,6 @@ import classes.Scenes.SceneLib;
 			this.createPerk(PerkLib.LizanRegeneration, 0, 0, 0, 0);
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 2) {
 				this.createPerk(PerkLib.Diehard, 0, 0, 0, 0);
-				//this.createPerk(PerkLib., 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 4) {
 				this.createPerk(PerkLib.ImprovedDiehard, 0, 0, 0, 0);
@@ -174,24 +173,25 @@ import classes.Scenes.SceneLib;
 				this.createPerk(PerkLib.GreaterDiehard, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 7) {
-				IMutationsLib.DraconicLungIM.acquireMutation(this, "none", 2);
-				IMutationsLib.LizanMarrowIM.acquireMutation(this, "none", 2);
+				IMutationsLib.DraconicLungIM.acquireMutation(this, "none");
+				IMutationsLib.LizanMarrowIM.acquireMutation(this, "none");
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 8) {
-				IMutationsLib.OniMusculatureIM.acquireMutation(this, "none", 2);
-				IMutationsLib.OrcAdrenalGlandsIM.acquireMutation(this, "none", 2);
+				IMutationsLib.OniMusculatureIM.acquireMutation(this, "none");
+				IMutationsLib.OrcAdrenalGlandsIM.acquireMutation(this, "none");
 				this.createPerk(PerkLib.EpicDiehard, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 9) {
 				IMutationsLib.LactaBovinaOvariesIM.acquireMutation(this, "none", 2);
-				IMutationsLib.PigBoarFatIM.acquireMutation(this, "none", 2);
+				IMutationsLib.PigBoarFatIM.acquireMutation(this, "none");
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 11) {
-				IMutationsLib.DraconicLungIM.acquireMutation(this, "none", 3);
-				IMutationsLib.OniMusculatureIM.acquireMutation(this, "none", 3);
-				IMutationsLib.OrcAdrenalGlandsIM.acquireMutation(this, "none", 3);
-				IMutationsLib.PigBoarFatIM.acquireMutation(this, "none", 3);
+				IMutationsLib.DraconicLungIM.acquireMutation(this, "none");
+				IMutationsLib.OniMusculatureIM.acquireMutation(this, "none");
+				IMutationsLib.OrcAdrenalGlandsIM.acquireMutation(this, "none");
+				IMutationsLib.PigBoarFatIM.acquireMutation(this, "none");
 			}
+			/*
 			updateDynamicPerkBuffs(IMutationsLib.DraconicLungIM, DraconicLungMutation, this);
 			updateDynamicPerkBuffs(IMutationsLib.OniMusculatureIM, OniMusculatureMutation, this);
 			updateDynamicPerkBuffs(IMutationsLib.PigBoarFatIM, PigBoarFatMutation, this);
@@ -201,6 +201,7 @@ import classes.Scenes.SceneLib;
 			updateDynamicPerkBuffs(IMutationsLib.GorgonEyesIM, GorgonEyesMutation, this);
 			updateDynamicPerkBuffs(IMutationsLib.DraconicLungIM, DraconicLungMutation, this);
 			updateDynamicPerkBuffs(IMutationsLib.LactaBovinaOvariesIM, LactaBovinaOvariesMutation, this);
+			*/
 			checkMonster();//make her lvl 3 starting with internal mutation for: cat, dragon, gorgon, lacta bovina, lizard, oni, orc, pig/boar - plus job: guardian perk
 		}
 
