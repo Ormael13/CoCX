@@ -251,7 +251,7 @@ public static const UNKNOWN_FLAG_NUMBER_00242:int                               
 public static const UNKNOWN_FLAG_NUMBER_00243:int                                   =  243; // Counter for minotaur chef baker procs - Maddie present at bakery.    Mod%8=0, present
 public static const COTTON_UNUSUAL_YOGA_BOOK_TRACKER:int                            =  244; // Cotton Unusual Yoga Guidebook tracker
 public static const COTTON_BREAKFAST_CLUB:int                                       =  245; // Cotton Breakfast Club
-public static const GOT_STOOTH_FROM_IZMA_TODAY:int                                   =  246; // Tiger Tooth Countdown
+public static const GOT_STOOTH_FROM_IZMA_TODAY:int                                  =  246; // Tiger Tooth Countdown
 public static const UNKNOWN_FLAG_NUMBER_00247:int                                   =  247; // Genderless centaur madness
 public static const IZMA_PREGNANCY_DISCUSSED:int                                   	=  248; // Izma Preggers Discussion
 public static const IZMA_PREGNANCY_ENABLED:int                                   	=  249; // Pregnancy Enabled (1 = yes)
@@ -263,11 +263,11 @@ public static const UNKNOWN_FLAG_NUMBER_00254:int                               
 public static const UNKNOWN_FLAG_NUMBER_00255:int                                   =  255; // Armor Rack owned? (2 = yes) (NO LONGER USED)
 public static const ISABELLA_CAMP_APPROACHED:int                                    =  256; // PC decided to approach Isabella's camp yet? 1
 public static const ISABELLA_MET:int                                                =  257; // Met Isabella?
-public static const ISABELLA_OKAY_WITH_TALL_FOLKS:int                                   =  258; // Is Isabella okay with tall folks?
-public static const ISABELLA_MET_SHORT_PC:int                                   =  259; // Has Isabella ever met the PC while PC is short?
+public static const ISABELLA_OKAY_WITH_TALL_FOLKS:int                               =  258; // Is Isabella okay with tall folks?
+public static const ISABELLA_MET_SHORT_PC:int                                   	=  259; // Has Isabella ever met the PC while PC is short?
 public static const ISABELLA_ANGRY_AT_PC_COUNTER:int                                =  260; // Isabella angry counter
 public static const UNKNOWN_FLAG_NUMBER_00261:int                                   =  261; // Isabella Sleep rape counter
-public static const ISABELLA_TALKS:int                                   =  262; // TImes talked with Isabella
+public static const ISABELLA_TALKS:int                                   			=  262; // TImes talked with Isabella
 public static const UNKNOWN_FLAG_NUMBER_00263:int                                   =  263; // Met nancy
 public static const UNKNOWN_FLAG_NUMBER_00264:int                                   =  264; // Nancy relationship level
 public static const UNKNOWN_FLAG_NUMBER_00265:int                                   =  265; // Talk Nancy
@@ -275,29 +275,29 @@ public static const UNKNOWN_FLAG_NUMBER_00266:int                               
 public static const UNKNOWN_FLAG_NUMBER_00267:int                                   =  267; // Lilium Timed Boned
 public static const PLAYER_DISARMED_WEAPON_ID:int                                   =  268; // weapon storage
 public static const PLAYER_DISARMED_WEAPON_ATTACK:int                               =  269; // weapon damage
-public static const TIMES_ENCOUNTERED_FEMALE_SPIDER:int                                   =  270; // Times encountered spiderbitches
+public static const TIMES_ENCOUNTERED_FEMALE_SPIDER:int                             =  270; // Times encountered spiderbitches
 public static const FEMALE_SPIDERMORPH_PREGNANCY_INCUBATION:int                     =  271; // Spider Preggo Timer
 public static const TIMES_EXPLORED_SWAMP:int                                        =  272; // Times Explored Swamp
 public static const SHOW_SPRITES_FLAG:int                                           =  273; // Sprites off? toggle
 public static const RATHAZUL_SILK_ARMOR_COUNTDOWN:int                               =  274; // Rathazul silk armor queue - 1 = armor done!
 public static const UNKNOWN_FLAG_NUMBER_00275:int                                   =  275; // Rathazul armor type selector - 1=armor, 2=robes (3=bra, 4=panties, 5=loincloth)
-public static const TIMES_ENCOUNTERED_BASILISK:int                                   =  276; // Times Encountered Basilisk
+public static const TIMES_ENCOUNTERED_BASILISK:int                                  =  276; // Times Encountered Basilisk
 public static const TIMES_ENCOUNTERED_DRIDERS:int                                   =  277; // Times Encountered Drider
 public static const UNKNOWN_FLAG_NUMBER_00278:int                                   =  278; // LOTTIE DISABLED (1+ = YUS)
 public static const UNKNOWN_FLAG_NUMBER_00279:int                                   =  279; // LOTTIE FIGURE (HIGHER = SLIMMER)
 public static const UNKNOWN_FLAG_NUMBER_00280:int                                   =  280; // LOTTIE CONFIDENCE (HIGHER = AWESOMER)
 public static const UNKNOWN_FLAG_NUMBER_00281:int                                   =  281; // TIMES ENCOUNTERED LOTTIE
-public static const SOPHIE_BIMBO_ACCEPTED:int                                   =  282; // Sophie Bimbo Follower?
-public static const SOPHIE_DISABLED:int                                   =  283; // Sophie Disabled Forever
+public static const SOPHIE_BIMBO_ACCEPTED:int                                   	=  282; // Sophie Bimbo Follower?
+public static const SOPHIE_DISABLED:int                                  	 		=  283; // Sophie Disabled Forever
 public static const TIMES_SOPHIE_HAS_DRUNK_OVI_ELIXIR:int                           =  284; // Has Ovi Event Procced?
-public static const LUSTSTICK_RESISTANCE:int                                   =  285; // Luststick Resistance builder - decrements by 1 every day, incremented by 1 for every 2 hours of luststick
-public static const CERAPH_FOLLOWER_PIERCING:int                                   =  286; // Have Ceraph's belly-button piercing
-public static const CERAPH_FOLLOWER_CARRY:int                                   =  287; // Carrying Careph's token?
+public static const LUSTSTICK_RESISTANCE:int                                   		=  285; // Luststick Resistance builder - decrements by 1 every day, incremented by 1 for every 2 hours of luststick
+public static const CERAPH_FOLLOWER_PIERCING:int                                   	=  286; // Have Ceraph's belly-button piercing
+public static const CERAPH_FOLLOWER_CARRY:int                                   	=  287; // Carrying Careph's token?
 public static const CERAPH_HIDING_DICK:int                                          =  288; // Ceraph Cock Hidden (1 = yes, 0 = cock floppin') - Ceraph's Demon Dong status 0=Visible, 1=Not visible
 public static const UNKNOWN_FLAG_NUMBER_00289:int                                   =  289; // Times Ceraph Licked You Out
 public static const UNKNOWN_FLAG_NUMBER_00290:int                                   =  290; // Punished Ceraph?
-public static const TIMES_BEATEN_SERAPH_WITHOUT_LOSING:int                                   =  291; // Times Beaten Ceraph And Raped Her Without Losing
-public static const UNKNOWN_FLAG_NUMBER_00292:int                                   =  292; // Times listened in on demons
+public static const TIMES_BEATEN_SERAPH_WITHOUT_LOSING:int                          =  291; // Times Beaten Ceraph And Raped Her Without Losing
+public static const BAZAAR_DEMONS_CONVERSATION:int                                  =  292; // Times listened in on demons
 public static const UNKNOWN_FLAG_NUMBER_00293:int                                   =  293; // Disabled Ceraph Faux Corruption - Ceraph Corruption Scene
 public static const UNKNOWN_FLAG_NUMBER_00294:int                                   =  294; // Times Done 'SWEETIE NO!' Ceraph Marble RP
 public static const UNKNOWN_FLAG_NUMBER_00295:int                                   =  295; // In Ceraph's SWEETIE NO!, is Utter Moo disabled?
@@ -353,9 +353,9 @@ public static const KIHA_TALK_STAGE:int                                         
 public static const PC_WIN_LAST_KIHA_FIGHT:int                                      =  345; //
 public static const AMILY_VISITING_URTA:int                                         =  346; // AMILY_VISITING_URTA (1 = amily is gone, 2 = they fucked), (3 = DICK MODE) (4 = THREESOME MODE)
 public static const AMILY_NEED_TO_FREAK_ABOUT_URTA:int                              =  347; // AMILY_NEED_TO_FREAK_ABOUT_URTA (1= yes)
-public static const UNKNOWN_FLAG_NUMBER_00348:int                                   =  348; // Joey Big balls counter
-public static const UNKNOWN_FLAG_NUMBER_00349:int                                   =  349; // Times told joey to masturbate his big balls.
-public static const AMILY_URTA_FOLLOWUP:int                                   =  350; // Urta x Amily Urta followup needed?  (1 = cue Urta angst, 2 = done)
+public static const JOEY_BIG_BALLS_COUNT:int                                   		=  348; // Joey Big balls counter
+public static const JOEY_BIG_BALLS_MASTURBATED:int                                  =  349; // Times told joey to masturbate his big balls.
+public static const AMILY_URTA_FOLLOWUP:int                                   		=  350; // Urta x Amily Urta followup needed?  (1 = cue Urta angst, 2 = done)
 public static const TIMES_MET_SHOULDRA:int                                          =  351; //
 public static const TIMES_BEATEN_SHOULDRA:int                                       =  352; //
 public static const TIMES_POSSESSED_BY_SHOULDRA:int                                 =  353; //

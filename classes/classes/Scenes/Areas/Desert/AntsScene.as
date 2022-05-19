@@ -164,7 +164,7 @@ import classes.display.SpriteDb;
                     player.sexReward("Default","Default",true,false);
                     dynStats("sen", -1,  "cor", 3);
                 }
-                doNext(recalling ? camp.recallWakeUp : camp.returnToCampUseOneHour);
+                doNext(recalling ? recallWakeUp : camp.returnToCampUseOneHour);
             }
 		}
 
@@ -479,7 +479,7 @@ import classes.display.SpriteDb;
 				flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] = 1;
 				doNext(camp.returnToCampUseOneHour);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 //►Male Continuation
@@ -903,7 +903,7 @@ import classes.display.SpriteDb;
 		private function waifuQuestOver():void
 		{
 			if (recalling) {
-				camp.recallWakeUp();
+				recallWakeUp();
 				return;
 			}
 			clearOutput();

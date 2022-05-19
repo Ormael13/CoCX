@@ -145,18 +145,7 @@ public function RoxanneChooseApproachOrRepeat():void {
 		flags[kFLAGS.CODEX_ENTRY_LIZANS] = 1;
 		outputText("\n\n<b>New codex entry unlocked: Lizans!</b>")
 	}
-	simpleChoices("Yes", roxanneDrinkingContest, "No", roxanneDrinkingContestNo, "Lose", roxanneDrinkingContestLoseDeliberately, "", null, "", null);
-}
-
-private function roxanneDrinkingContestNo():void {
-	if (model.time.hours == 19 || model.time.hours == 20) {
-		flags[kFLAGS.COUNTDOWN_TO_NIGHT_RAPE]++;
-		if (flags[kFLAGS.COUNTDOWN_TO_NIGHT_RAPE] % 4 == 0 && player.gender == 1) {
-			bazaar.nightBazaarButtfuck();
-			return;
-		}
-	}
-	bazaar.enterTheBazaarAndMenu();
+	simpleChoices("Yes", roxanneDrinkingContest, "No", bazaar.enterTheBazaar, "Lose", roxanneDrinkingContestLoseDeliberately, "", null, "", null);
 }
 
 private function roxanneDrinkingContestLoseDeliberately():void {

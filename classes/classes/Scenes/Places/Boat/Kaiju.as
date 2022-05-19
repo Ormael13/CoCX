@@ -542,7 +542,7 @@ public class Kaiju extends AbstractLakeContent {
 		clearOutput();
 		kaijuSprite();
 		outputText("You shake your head no, politely responding that you do not want to get her off right now.  \"<i>Oh, okay. I understand,</i>\" the giantess states, looking somewhat crestfallen.  You row away, leaving her and her new addition to themselves for the time being.");
-		doNext(recalling ? camp.recallWakeUp : camp.returnToCampUseOneHour);
+		doNext(recalling ? recallWakeUp : camp.returnToCampUseOneHour);
 	}
 
 	//[If Mock]
@@ -570,7 +570,7 @@ public class Kaiju extends AbstractLakeContent {
 		if(player.hasCock()) outputText(" as you cum in your [armor]");
 		outputText(".  You can feel the spasming of the giant's cock as you feel the pressure from her shaft increase as a load of cum rushes through it, erupting out of her tip like a volcano with globs of white lava.  \"<i>Well, that's a hell of a load,</i>\" she says, seeming quite proud of herself.  She sets you back down in your boat and roughly shoves it out further into the lake.  \"<i>Learn some manners you meanie!</i>\" she calls out.");
 		//[Lust is decreased, Venus is removed from the game]
-		if (recalling) doNext(camp.recallWakeUp);
+		if (recalling) doNext(recallWakeUp);
 		else {
 			player.sexReward("cum", "Default");
 			dynStats("cor", 1);
@@ -604,7 +604,7 @@ public class Kaiju extends AbstractLakeContent {
 
 		outputText("\n\nYou clean yourself up, get dressed, and wave goodbye before leaving the giantess, who's still blissed out from her intense orgasm.");
 		//[Corruption increases slightly, lust is decreased]
-		if (recalling) doNext(camp.recallWakeUp)
+		if (recalling) doNext(recallWakeUp)
 		else {
 			player.sexReward("cum", "Default");
 			dynStats("cor", 1);

@@ -512,7 +512,7 @@ use namespace CoC;
 					dynStats("cor", 5);
 					cleanupAfterCombat();
 				}
-				else doNext(camp.recallWakeUp);
+				else doNext(recallWakeUp);
 			}
 			//FEMSAUCE
 			function vagF():void {
@@ -536,7 +536,7 @@ use namespace CoC;
 				dynStats("cor", 1);
 				cleanupAfterCombat();
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		public function doForcefeedSuccubus():void {
@@ -587,7 +587,7 @@ use namespace CoC;
 				dynStats("lus", -50);
 				cleanupAfterCombat();
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		public function dildoSuccubus():void {
@@ -607,7 +607,7 @@ use namespace CoC;
 				dynStats("lus", (20 + (player.lib/5) + (player.cor/10)));
 				cleanupAfterCombat();
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		//can be called for generic succubi
@@ -872,7 +872,7 @@ use namespace CoC;
 				dynStats("cor", 2);
 				cleanupAfterCombat();
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		public function incubusButtfuck():void {
@@ -911,7 +911,7 @@ use namespace CoC;
 				player.sexReward("Default", "Dick", true, false);
 				cleanupAfterCombat();
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		public function incubusGetVaginal():void {
@@ -938,11 +938,10 @@ use namespace CoC;
 				dynStats("cor", 2);
 				cleanupAfterCombat();
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		public function doOralIncubus():void {
-			player.slimeFeed();
 			clearOutput();
 			outputText("You lick your lips, moistening them as you decide that the demon will provide your next 'snack'.  Touching the defeated incubus' soft skin, you grab him by the wrists and yank him to his clawed feet. Leaning him back against the wall as he sways unsteadily, you tenderly slide down his body and take the measure of his monstrous meat with your hands. The smooth skin and tiny bumps slide between each finger as his manhood firms and twitches in response.  You glance up and grab his baseball size nuts, caressing the smooth hairless sack that contains them, watching the demon-man sigh and relax with equal parts desire and relief.\n\n");
 			outputText("You lean forwards, opening your mouth ");
@@ -958,7 +957,7 @@ use namespace CoC;
 				player.sexReward("cum", "Lips");
 				cleanupAfterCombat();
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		//Omnibus Overseer
@@ -1900,7 +1899,7 @@ use namespace CoC;
 		}
 
 		public function secretarialSuccubusDefeated(hpVictory:Boolean = false):void {
-			var leave:Function = recalling ? camp.recallWakeUp : cleanupAfterCombat;
+			var leave:Function = recalling ? recallWakeUp : cleanupAfterCombat;
 			clearOutput();
 			if (!recalling) {
 				flags[kFLAGS.FACTORY_SUCCUBUS_DEFEATED] = 1;
