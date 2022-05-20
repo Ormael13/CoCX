@@ -7,6 +7,7 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Player;
+import classes.Races;
 
 public class RaijuCathodeMutation extends IMutationPerkType
     {
@@ -56,9 +57,7 @@ public class RaijuCathodeMutation extends IMutationPerkType
                 IMutationsLib.RaijuCathodeIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.RaijuCathodeIM.requirePeripheralNervSysMutationSlot()
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.raijuScore() >= 10;
-                    }, "Raiju race");
+                    .requireRace(Races.RAIJU);
                 }
                 else{
                     var pLvl:int = pTier * 30;

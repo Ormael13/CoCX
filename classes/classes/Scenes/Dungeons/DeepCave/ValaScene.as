@@ -790,7 +790,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			menu();
-			if (player.isFemaleOrHerm() && (player.humanScore() >= (player.humanMaxScore() - player.internalChimeraScore())) || player.elfScore() >= 11) {
+			if (player.isFemaleOrHerm() && (player.humanScore() >= (player.humanMaxScore() - player.internalChimeraScore())) || player.isRace(Races.ELF)) {
 				outputText("Vala spots you from a distance and flies to you right away.\n\n" +
 						"\"<i>[name] I have great news! The new fairy queen has finally been chosen!</i>\"\n\n" +
 						"You idly ask if you could meet her.\n\n" +

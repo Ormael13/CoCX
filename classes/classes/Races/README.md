@@ -10,10 +10,11 @@
 * consider moving naming function from tier to race
 * NG+ & paragon-like scale buffs in race itself
 * search for `isRace(..) >=/< `
+* error reporting utility
 * Future:
   * racial score caching
   * `Race.onTierUp`/`onTierDown` - see `PlayerEvents:1500`
-  * "Racial form" maybe? (gargoyles, alicorn/nightmare, elementals - same tier, diff. requirements/bonuses)
+  * "Racial form" maybe? (gargoyles, alicorn/nightmare, elementals - same tier, diff. requirements/bonuses) Could be done by customizing tier number and simply renaming RaceTier -> RaceForm.
   * manifest race/tier (for testing)
   * add buffable stats: armor, magic resistance, evasion, unarmed dmg
   * finish converting elemental stuff? eh...
@@ -46,11 +47,21 @@ Notes:
 * If player qualifies for a higher tier, they don't get lower tier bonuses.
 * By default, lower tier custom requirements are not copied to higher tier. Use `.requirePreviousTier()` if needed.
 
-### BodyData class
+## BodyData class
 
 `BodyData` class stores a copy of most important player body data (body part types, colors, sizes). It can be used to quickly check if player has been transformed. It also holds a reference to player to check for perks and other parts not stored in `BodyData` itself.
 
 All `BodyData` information is stored in a single array, its indices are called "slots".
+
+### Difference from Player properties
+
+1. "legs" is used instead of "lower body".
+2. If player has no coat, coat-related slots like `body.skinCoatType` have invalid values. Therefore, you can simplify check "if has coat and coat type/color is X" to "if coat type/color is X". 
+3. Similarly, if player has no vagina, `body.vaginaType` holds invalid value, and "if has vagina and its type is X" check can be simplified to "if vagina type is X". 
+
+### Adding new slots
+
+TODO @aimozg write me
 
 ## Overview of new & replaced functions
 
@@ -131,10 +142,6 @@ Examples:
 * `.faceType(NONE(Face.CHESHIRE,Face.CHESHIRE_SMILE), 0, -7)` -> "neither cheshire nor cheshire smile face (-7 penalty)"
 * `.height(LESS_THAN(48), +2)` -> "height less than 4 feet"
 
-To penalize race for having certain part, it is better to add `NOT`-requirement with `0` score and negative `failScore`.
-
-Fail score of -1000 means that this is an absolute requirement.
-
 ### Custom requirements
 
 TODO @aimozg
@@ -165,3 +172,49 @@ addMutation(IMutationsLib.TwinHeartIM, +2);
 ## Tiers
 
 TODO @aimozg write me
+
+### Extra requirements
+
+TODO 
+
+### Naming function
+
+TODO
+
+### Buffs
+
+TODO
+
+#### Extra bonuses
+
+TODO
+
+#### Dynamic buffs
+
+TODO
+
+### Racial forms
+
+For racial forms that don't have clear tier order (for example, Gargoyle materials), there are two ways of implementing them.
+
+1. Different tiers.
+Pros: Integrates well into existing scheme. Better auto-generated description.
+Cons: This might mess the concept of "tier number" for that race.
+
+2. Single tier with dynamic buffs & naming.
+Pros: Preserves tier numbering. Most flexible way.
+Cons: Requires more complex code. Buffs and requirements won't properly show in race DB menu.
+
+There is no "best way" to do it; currently such races - Gargoyle, Alicorn, Elemental - use (2).
+
+## Recommendations
+
+Fail score of -1000 means that this is an absolute requirement. They are displayed is a special way in racial menu.
+
+Racial requirements are printed and applied in the order of their declaration.
+
+To penalize race for having certain part, it is better to add `NOT`-requirement with `0` score and negative `failScore`.
+
+Color lists that can be shared between race check and mutation should be stored in race subclass as public static members (see for example `KitsuneRace.BasicKitsuneHairColors`).
+
+Checking other racial score should be avoided. If race AAA should check for being partially a race BBB and penalize for it, add a `BBB.isBbbLike(body:BodyData):Boolean` function and use it in AAA. See for example Gorgon and other snake-like races.  

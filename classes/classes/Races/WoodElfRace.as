@@ -31,7 +31,7 @@ public class WoodElfRace extends Race{
 						}, +1)
 				.tone(AT_MOST(60), +1)
 				.thickness(AT_MOST(50), +1)
-				.customRequirement("","small cock; or vagina and small tits",
+				.customRequirement("","small cock; or vagina and big tits",
 						function (body:BodyData):Boolean {
 							return body.hasCock && body.biggestCockSize < 6 ||
 									body.hasVagina && body.biggestTitSize >= 3

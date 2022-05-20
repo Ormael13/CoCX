@@ -1577,7 +1577,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText(")</b>\n");
 				needNext = true;
 			}
-			if ((player.isRaceCached(Races.SIREN) || player.isRaceCached(Races.HARPY) || player.isRaceCached(Races.PHOENIX) || player.thunderbirdScore() >=  10) && !player.hasPerk(PerkLib.HarpySong)) {
+			if ((player.isRaceCached(Races.SIREN) || player.isRaceCached(Races.HARPY) || player.isRaceCached(Races.PHOENIX) || player.isRaceCached(Races.THUNDERBIRD)) && !player.hasPerk(PerkLib.HarpySong)) {
 				outputText("\n Your voice sound like magicaly entrancing music to your ears now, it would seem you have gained the infamous magicaly compeling voices common to harpies. <b>Gained Perks: Harpy Song</b>)\n");
 				player.createPerk(PerkLib.HarpySong, 0, 0, 0, 0);
 				needNext = true;
@@ -1588,7 +1588,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.MelkieSong);
 				needNext = true;
 			}
-			if (!player.isRaceCached(Races.SIREN) && !player.isRaceCached(Races.HARPY) && !player.isRaceCached(Races.PHOENIX) && player.thunderbirdScore() <  10 && player.hasPerk(PerkLib.HarpySong) && !player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 1) {
+			if (!player.isRaceCached(Races.SIREN) && !player.isRaceCached(Races.HARPY) && !player.isRaceCached(Races.PHOENIX) && !player.isRaceCached(Races.THUNDERBIRD) && player.hasPerk(PerkLib.HarpySong) && !player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 1) {
 				outputText("\n Your voice no longer carries the magical power it used to and thus you are no longer able to use your compelling aria. <b>Lost Perks: Harpy Song</b>)\n");
 				player.removePerk(PerkLib.HarpySong);
 				needNext = true;
@@ -1687,11 +1687,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.LightningAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if ((player.raijuScore() >= 7 || player.thunderbirdScore() >= 12) && !player.hasPerk(PerkLib.LightningAffinity)) {
+			if ((player.isRace(Races.RAIJU) || player.isRace(Races.THUNDERBIRD)) && !player.hasPerk(PerkLib.LightningAffinity)) {
 				outputText("\nYou suddenly feel a rush of electricity run across your skin as your arousal builds up and begin to masturbate in order to get rid of your creeping desire. However even after achieving orgasm not only are you still aroused but you are even hornier than before! You realise deep down that the only way for you to be freed from this jolting pleasure is to have sex with a partner!\n");
 				outputText("\n(<b>Gained the lightning affinity perk, electrified desire perk, Lightning claw perk, Pleasure bolt ability and Orgasmic lightning strike ability!</b>)\n");
-				if (player.thunderbirdScore() >= 12) player.createStatusEffect(StatusEffects.IsThunderbird,0,0,0,0);
-				if (player.raijuScore() >= 7) {
+				if (player.isRace(Races.THUNDERBIRD)) player.createStatusEffect(StatusEffects.IsThunderbird,0,0,0,0);
+				if (!player.isRace(Races.RAIJU)) {
 					player.createStatusEffect(StatusEffects.IsRaiju,0,0,0,0);
 					player.createPerk(PerkLib.LightningClaw,0,0,0,0);
 					player.createPerk(PerkLib.Supercharged,0,0,0,0);
@@ -1700,7 +1700,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.ElectrifiedDesire, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (player.raijuScore() < 7 && player.thunderbirdScore() < 12 && player.hasPerk(PerkLib.LightningAffinity) && player.hasStatusEffect(StatusEffects.IsRaiju) && !player.hasStatusEffect(StatusEffects.IsThunderbird)) {
+			else if (!player.isRace(Races.RAIJU) && !player.isRace(Races.THUNDERBIRD) && player.hasPerk(PerkLib.LightningAffinity) && player.hasStatusEffect(StatusEffects.IsRaiju) && !player.hasStatusEffect(StatusEffects.IsThunderbird)) {
 				outputText("\nYour natural electricity production start dropping at a dramatic rate until finally there is no more. You realise you likely aren’t raiju enough to build electricity anymore which, considering you can reach satisfaction again, might not be a bad thing.\n\n<b>(Lost the lightning affinity perk, electrified desire perk, Lightning claw perk, Pleasure bolt ability and Orgasmic lightning strike ability!)</b>\n");
 				player.removeStatusEffect(StatusEffects.IsRaiju);
 				player.removePerk(PerkLib.LightningAffinity);
@@ -1709,7 +1709,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Supercharged);
 				needNext = true;
 			}
-			else if (player.thunderbirdScore() < 12 && player.hasPerk(PerkLib.LightningAffinity) && player.hasStatusEffect(StatusEffects.IsThunderbird) && !player.hasStatusEffect(StatusEffects.IsRaiju)) {
+			else if (!player.isRace(Races.THUNDERBIRD) && player.hasPerk(PerkLib.LightningAffinity) && player.hasStatusEffect(StatusEffects.IsThunderbird) && !player.hasStatusEffect(StatusEffects.IsRaiju)) {
 				outputText("\nYour natural electricity production starts dropping at a dramatic rate until finally there is no more. You realise you likely aren’t thunderbird enough to build electricity anymore which, considering you can reach satisfaction again, might not be a bad thing.\n\n<b>(Lost the lightning affinity perk, electrified desire perk, Lightning claw perk, Pleasure bolt ability and Orgasmic lightning strike ability!)</b>\n");
 				player.removeStatusEffect(StatusEffects.IsThunderbird);
 				player.removePerk(PerkLib.LightningAffinity);
@@ -1721,16 +1721,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.LightningAffinity);
 				needNext = true;
 			}
-			if (player.raijuScore() >= 7 && player.hasPerk(PerkLib.LightningAffinity) && !player.hasStatusEffect(StatusEffects.IsRaiju)) {
+			if (player.isRace(Races.RAIJU) && player.hasPerk(PerkLib.LightningAffinity) && !player.hasStatusEffect(StatusEffects.IsRaiju)) {
 				player.createStatusEffect(StatusEffects.IsRaiju,0,0,0,0);
 			}
-			if (player.raijuScore() < 7 && player.hasStatusEffect(StatusEffects.IsThunderbird) && player.hasStatusEffect(StatusEffects.IsRaiju)) {
+			if (!player.isRace(Races.RAIJU) && player.hasStatusEffect(StatusEffects.IsThunderbird) && player.hasStatusEffect(StatusEffects.IsRaiju)) {
 				player.removeStatusEffect(StatusEffects.IsRaiju);
 			}
-			if (player.thunderbirdScore() >= 12 && player.hasPerk(PerkLib.LightningAffinity) && !player.hasStatusEffect(StatusEffects.IsThunderbird)) {
+			if (player.isRace(Races.THUNDERBIRD) && player.hasPerk(PerkLib.LightningAffinity) && !player.hasStatusEffect(StatusEffects.IsThunderbird)) {
 				player.createStatusEffect(StatusEffects.IsThunderbird,0,0,0,0);
 			}
-			if (player.thunderbirdScore() < 12 && player.hasStatusEffect(StatusEffects.IsRaiju) && player.hasStatusEffect(StatusEffects.IsThunderbird)) {
+			if (!player.isRace(Races.THUNDERBIRD) && player.hasStatusEffect(StatusEffects.IsRaiju) && player.hasStatusEffect(StatusEffects.IsThunderbird)) {
 				player.removeStatusEffect(StatusEffects.IsThunderbird);
 			}/*
 			if (player.thundermantis() >= 10 && player.tailType == Tail.THUNDERBIRD && !player.hasPerk(PerkLib.LightningAffinity)) {
@@ -1842,7 +1842,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//Ferocity
-			if (player.orcScore() < 11 && player.hasPerk(PerkLib.Ferocity) && !player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 3) {
+			if (!player.isRace(Races.ORC) && player.hasPerk(PerkLib.Ferocity) && !player.perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 3) {
 				outputText("\nYour natural ferocity starts vanishing at a dramatic rate until finally there is no more. You realise you likely aren’t orc enough anymore, considering you felt so invincible with it, which might not be a good thing.\n\n<b>(Lost the Ferocity perk!)</b>\n");
 				player.removePerk(PerkLib.Ferocity);
 				needNext = true;
@@ -1978,8 +1978,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.BouncyBody);
 				needNext = true;
 			}
-			if (player.vehiclesName == "Goblin Mech Alpha" && (player.elfScore() >= 11 || player.tallness > 48 || player.tailType != Tail.NONE || player.wings.type != Wings.NONE)) { //Elf OR Taller than 4 ft or having wings/tail
-				if (player.elfScore() >= 11) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+			if (player.vehiclesName == "Goblin Mech Alpha" && (player.isRace(Races.ELF) || player.tallness > 48 || player.tailType != Tail.NONE || player.wings.type != Wings.NONE)) { //Elf OR Taller than 4 ft or having wings/tail
+				if (player.isRace(Races.ELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
 				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.2;
 				if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) player.HP /= 1.35;
@@ -1989,8 +1989,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				inventory.takeItem(vehicles.GOBMALP, null);
 				needNext = true;
 			}
-			if (player.vehiclesName == "Goblin Mech Prime" && (player.elfScore() >= 11 || player.tallness > 48 || player.tailType != Tail.NONE || player.wings.type != Wings.NONE)) { //Elf OR Taller than 4 ft or having wings/tail
-				if (player.elfScore() >= 11) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+			if (player.vehiclesName == "Goblin Mech Prime" && (player.isRace(Races.ELF) || player.tallness > 48 || player.tailType != Tail.NONE || player.wings.type != Wings.NONE)) { //Elf OR Taller than 4 ft or having wings/tail
+				if (player.isRace(Races.ELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
 				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) player.HP /= 1.4;
 				if (player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) player.HP /= 1.7;
@@ -2000,8 +2000,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				inventory.takeItem(vehicles.GOBMPRI, null);
 				needNext = true;
 			}
-			if (player.vehiclesName == "Giant Slayer Mech" && (player.elfScore() >= 11 || player.isRaceCached(Races.WOODELF) || player.tallness > 66 || player.haveWingsForWingSlap())) { //Elf OR Taller than 5'5" ft or having large wings
-				if (player.elfScore() >= 11 || player.isRaceCached(Races.WOODELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
+			if (player.vehiclesName == "Giant Slayer Mech" && (player.isRace(Races.ELF) || player.isRaceCached(Races.WOODELF) || player.tallness > 66 || player.haveWingsForWingSlap())) { //Elf OR Taller than 5'5" ft or having large wings
+				if (player.isRace(Races.ELF) || player.isRaceCached(Races.WOODELF)) outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				else outputText("Your current anatomy or size prevents you from properly entering the small compact cockpit of the vehicle.\n\n");
 				if (player.hasKeyItem("Upgraded Armor plating 1.0") >= 0 || player.hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) {
 					var RHP:Number = 1;

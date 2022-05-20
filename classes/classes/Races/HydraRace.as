@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.CockTypesEnum;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
@@ -33,10 +34,7 @@ public class HydraRace extends Race {
 				.earType(Ears.SNAKE, +1)
 				.noWings(+2)
 				.height(AT_LEAST(120), +1)
-				.customRequirement("","naga vagina or lizard cock",
-						function (body:BodyData):Boolean {
-							return body.vaginaType == VaginaClass.NAGA || body.player.lizardCocks() > 0
-						}, +1)
+				.cockOrVaginaOfType(CockTypesEnum.LIZARD, VaginaClass.NAGA, +1)
 				.hasPerk(PerkLib.LizanRegeneration, +1)
 				.hasPerk(PerkLib.HydraRegeneration, +1)
 				.hasPerk(PerkLib.HydraAcidBreath, +1)

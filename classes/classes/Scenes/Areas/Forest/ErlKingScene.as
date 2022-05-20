@@ -241,7 +241,7 @@ public class ErlKingScene extends BaseContent
 			addButton(0, "Run", repeatWildHuntChase);
 			addButton(1, "Wait", repeatWildHuntWait);
 			if (player.cor > 33 - player.corruptionTolerance) {
-				var canRunFast:Boolean = player.bunnyScore() >= 4 || player.isRace(Races.KITSUNE) || player.isRace(Races.HARPY) || playerHuntScore() > 100;
+				var canRunFast:Boolean = player.isAnyRace(Races.BUNNY, Races.KITSUNE, Races.HARPY) || playerHuntScore() > 100;
 				outputText("Actually... do you <i>really</i> need to run away? Actually, you're pretty sure that Erlking or his hellhounds will <i>definitely</i> do something <i>bad</i> to you if they manage to catch you. But if you run fast enough, maybe you'll even tire him out to get some 'reward'... or take your revenge and show this bully who's a <b>real</b> hunter here.");
 				addButton(2, "Mock-run(S)", mockSlow).hint("Play the worst possible imitation of a real chase. Erlking will probably be disappointed with your skills.");
 				addButtonIfTrue(3, "Mock-run(F)", mockFast,
@@ -337,7 +337,7 @@ public class ErlKingScene extends BaseContent
 
 			outputText("The ropes are thicker than your wrist, and you could probably untie them, given time, but the spin of the net, combined with the mind-bending terror of the fog has left you no room to think.  The hounds are snarling, the world is spinning, you’re prey, and you’ve been caught.\n\n");
 
-			if (player.bunnyScore() >= 4 || player.kitsuneScore() >= 4 || player.isRace(Races.HARPY) || pScore > 100) repeatWildHuntAWinnerIsYou();
+			if (player.isAnyRace(Races.BUNNY, Races.KITSUNE, Races.HARPY) || pScore > 100) repeatWildHuntAWinnerIsYou();
 			else repeatWildHuntGivenToTheHounds();
 		}
 

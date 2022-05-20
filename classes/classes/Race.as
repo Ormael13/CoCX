@@ -35,7 +35,7 @@ public class Race {
 	public var tiers:/*RaceTier*/Array = [];
 	public var bloodlinePerks:/*PerkType*/Array = [];
 	/**
-	 * Array of pairs: `[mutationPerk:PerkType, scorePerStage:int]`
+	 * Array of pairs: `[mutationPerk:IMutationPerkType, scorePerStage:int]`
 	 */
 	public var mutations:/*Array*/Array = [];
 	private var _minScore:int;
@@ -350,8 +350,8 @@ public class Race {
 		bloodlinePerks.push(descendantPerk);
 		bloodlinePerks.push(bloodlinePerk);
 	}
-	protected function addMutation(perkType:PerkType, scorePerStage:int=+1):void {
-		this.mutations.push([perkType,scorePerStage]);
+	protected function addMutation(mutation:IMutationPerkType, scorePerStage:int=+1):void {
+		this.mutations.push([mutation,scorePerStage]);
 	}
 	protected function buildTier(minScore:int, name:String):RaceTierBuilder {
 		return new RaceTierBuilder(this, tiers.length+1, minScore, name);

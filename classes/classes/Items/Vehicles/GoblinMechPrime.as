@@ -23,7 +23,7 @@ public class GoblinMechPrime extends Vehicles
 			if (!super.canUse()) {
 				return false;
 			}
-			if (game.player.elfScore() >= 11 || game.player.isRace(Races.WOODELF)) { //Elf
+			if (game.player.isRace(Races.ELF) || game.player.isRace(Races.WOODELF)) { //Elf
 				outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				return false;
 			}

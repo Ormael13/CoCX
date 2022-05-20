@@ -585,7 +585,7 @@ import classes.CoC;
 				min -= (2400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}//nastepny diehard to 10% i 3000 a potem 12% i 3600
 			if (perkv1(IMutationsLib.LizanMarrowIM) >= 3) min -= maxHP() * 0.05;
-			if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 3 || game.player.orcScore() >= 11) {
+			if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 3 || game.player.isRace(Races.ORC)) {
 				if (hasPerk(PerkLib.Ferocity)) min -= maxHP() * 0.07;
 				if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 1) min -= maxHP() * 0.01;
 				if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 2) min -= maxHP() * 0.02;
@@ -758,7 +758,7 @@ import classes.CoC;
 			//~194,455
 			if (game.player.demonScore() >= 11) multimax -= 0.3;
 			if (game.player.demonScore() >= 16 && hasPerk(PerkLib.Phylactery)) multimax -= 0.15;
-			if (game.player.orcScore() >= 11) multimax += 0.2;
+			if (game.player.isRace(Races.ORC)) multimax += 0.2;
 			if (vehiclesName == "Giant Slayer Mech") {
 				multimax += 0.1;
 				//if (upgrade mecha) multimax += 0.1;
@@ -855,8 +855,6 @@ import classes.CoC;
 			if (hasPerk(PerkLib.EromancyMaster)) max += Math.round(inte*6);
 			if (game.player.demonScore() >= 11) multimax += 0.8;
 			if (game.player.demonScore() >= 16 && hasPerk(PerkLib.Phylactery)) multimax += 0.4;
-			if (game.player.elfScore() >= 5) multimax += 0.1;
-			if (game.player.elfScore() >= 11) multimax += 0.1;
 			if (hasPerk(PerkLib.HistoryScholar) || hasPerk(PerkLib.PastLifeScholar)) multimax += 0.1;
 			if (hasPerk(PerkLib.ArcaneRegenerationMinor) && inte >= 50) {
 				multimax += 0.05;

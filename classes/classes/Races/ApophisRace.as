@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.CockTypesEnum;
 import classes.IMutations.IMutationsLib;
 import classes.Race;
 import classes.VaginaClass;
@@ -28,10 +29,7 @@ public class ApophisRace extends Race {
 				.earType(Ears.SNAKE, +1)
 				.rearType(RearBody.COBRA_HOOD, +1)
 				.noWings(+4)
-				.customRequirement("","naga vagina or lizard cock",
-						function (body:BodyData):Boolean {
-							return body.vaginaType == VaginaClass.NAGA || body.player.lizardCocks() > 0;
-						}, +1)
+				.cockOrVaginaOfType(CockTypesEnum.LIZARD, VaginaClass.NAGA, +1)
 				.corruption(AT_LEAST(20), +1)
 				.corruption(AT_LEAST(50), +1)
 				.corruption(AT_LEAST(100), +2)

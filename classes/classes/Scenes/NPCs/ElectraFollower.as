@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
@@ -11,8 +11,8 @@ package classes.Scenes.NPCs
 	
 	public class ElectraFollower extends NPCAwareContent
 	{
-				
-		public function ElectraFollower() 
+		
+		public function ElectraFollower()
 		{}
 		
 //flag ELECTRA_TALKED_ABOUT_HER]: 0,1 - not know her name, 3 - know her name, 2/4+ - male sex scene variant for knowing or not what pour it all out mean ^^
@@ -50,7 +50,7 @@ public function repeatPlainsEnc():void {
 	spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("As you wander the plains you hear the sound of echoing thunder...But the rains have long since been stopped here. You see multiple imps and even a satyr run away from the spot where the sound was heard. ");
-	repeatElectraEnc();	
+	repeatElectraEnc();
 }
 public function repeatDeepwoodsEnc():void {
 	spriteSelect(SpriteDb.s_electra);
@@ -64,7 +64,7 @@ public function repeatElectraEnc():void {
 	else outputText("the Raiju girl");
 	outputText(" again. She's panting on the ground with a hand under her dress and masturbating like there is no tomorrow.\n\n");
 	outputText("\"<i>Ahhhh someone... someone help me get rid of this maddening desire... rape me... fuck me I don’t care how you do it. Gah why are they all fleeing!...come back! Come back so I can get rid of my itches... Come back so we can FUCK!</i>\"\n\n");
-	if (player.raijuScore() >= 10) repeatEncAsRaijuPC();
+	if (player.isRace(Races.RAIJU)) repeatEncAsRaijuPC();
 	else {
 		outputText("Shit! If she sees you now she will definitely attack. Just as you are about to leave, she realizes you're there and her eyes glimmer with a hint of barely contained madness. She stands up, still playing with her pussy, and eyes you up with a manic smile on her face as electricity starts to dance in the air around her.\n\n");
 		outputText("\"<i>Just who I need for relief!  Now stay still, I will make it short!!!</i>\"");
@@ -98,7 +98,7 @@ public function ElectraRecruiting():void {
 	clearOutput();
 	outputText("You run into Electra again this time around. Shockingly, she ain't chasing after the locals for sex. Instead she walks straight up to you, looking somewhat troubled. While she isn't sparking, she fidgets. It's almost as if she needs to say something to you.\n\n");
 	outputText("\"<i>I've have been looking for you");
-	if (player.raijuScore() >= 10) outputText(""+player.mf("kinsman","kinswoman")+"");
+	if (player.isRace(Races.RAIJU)) outputText(""+player.mf("kinsman","kinswoman")+"");
 	outputText(". I'm kind of sorry for coming up to you like that all the time. Don't worry, I already discharged myself, this isn't what I wanted to see you for. See uh as it is I've been considering...us. you've been helping me out so often by now I've become dependant on your touch. ");
 	outputText("When I see you I can feel the surge running down my spine, the fondness of every attention you gave me imprinted in my mind and I… can I have your name please?</i>\"\n\n");
 	outputText("You tell her your name and that you are the Champion of Ignam, sent to protect your realm from demon invasion.\n\n");
@@ -260,9 +260,9 @@ public function electraSpar():void {
 public function electraSex():void {
 	clearOutput();
 	outputText("Electra is smiling wide with that weaselly, naughty grin of hers.\n\n");
-	outputText("\"<i>Oh my… so how do you plan to take me?"+((player.raijuScore() < 10 || player.thunderbirdScore() < 12) ? " Keep in mind any bodily contact will result in a discharge, I can't help it." : "")+"</i>\"");
+	outputText("\"<i>Oh my… so how do you plan to take me?"+(!(player.isRace(Races.RAIJU) || player.isRace(Races.THUNDERBIRD)) ? " Keep in mind any bodily contact will result in a discharge, I can't help it." : "")+"</i>\"");
 	menu();
-	if (player.raijuScore() >= 10 || player.thunderbirdScore() >= 12) {
+	if (player.isRace(Races.RAIJU) || player.isRace(Races.THUNDERBIRD)) {
 		addButton(0, "Charge up", ElectraSeXChargeUp);
 		addButton(1, "Volt Transfer", ElectraVoltTransfer);
 	}
@@ -423,7 +423,7 @@ public function ElectraSeXYesM():void {
 		outputText("Where's the crazy girl from before?\n\n");
 		outputText("\"<i>I have to go, but here. Take this jewel and these gems for your trouble. I hope we see each other again.</i>\"");
 		outputText("She hands you a yellow jewel and a good amount of gems before leaving. ");
-		if (player.raijuScore() >= 10) outputText("Well your own energy management isn't getting any better, seems you will have to expel that on someone else.\n\n");
+		if (player.isRace(Races.RAIJU)) outputText("Well your own energy management isn't getting any better, seems you will have to expel that on someone else.\n\n");
 		else {
 			outputText("As for you, your entire body feels sensitive and achesto be touched. Something however tells you that indulging yourself would be a bad idea.\n\n");
 			player.sexReward("vaginalFluids","Dick");
@@ -438,7 +438,7 @@ public function ElectraSeXYesM():void {
 		outputText("Electra sighs in absolute relief, a happy look in her eyes as she grips your shoulders.\n\n");
 		outputText("\"<i>You have no idea how satisfying that was [name] thanks again for helping me get relief.</i>\"");
 		outputText("Well you're no better than she was earlier, but you're glad you could be of some help. You redress and ready back for your adventures. Ugh, where are those goblin sluts when you need one?\n\n");
-		if (player.raijuScore() < 10) {
+		if (!player.isRace(Races.RAIJU)) {
 			player.sexReward("vaginalFluids","Dick");
 			if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
@@ -470,7 +470,7 @@ public function ElectraSeXYesF():void {
 		outputText("Where's the crazy girl from before?\n\n");
 		outputText("\"<i>I have to go, but here. Take this jewel and these gems for your trouble. I hope we see each others again.</i>\"");
 		outputText("She hands you a yellow jewel and a good amount of gems before leaving. ");
-		if (player.raijuScore() >= 10) outputText("Welp your own energy management isn't getting any better, seems you will have to expel that on someone else.\n\n");
+		if (!player.isRace(Races.RAIJU)) outputText("Welp your own energy management isn't getting any better, seems you will have to expel that on someone else.\n\n");
 		else {
 			outputText("As for you, your entire body feels sensitive and aches for touch from the slowly receding voltage. Something however tells you that indulging yourself would be a bad idea.\n\n");
 			player.sexReward("vaginalFluids");
@@ -485,7 +485,7 @@ public function ElectraSeXYesF():void {
 		outputText("Electra sighs in absolute relief, thankful.\n\n");
 		outputText("\"<i>You have no idea how satisfying that was [name] thanks again for helping me get relief.</i>\"");
 		outputText("Well you're in no better than she was earlier but your glad you could be of some help. You redress and ready back for your adventures. Ugh where are those goblin sluts when you need one.\n\n");
-		if (player.raijuScore() < 10) {
+		if (!player.isRace(Races.RAIJU)) {
 			player.sexReward("vaginalFluids");
 			if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
 				player.removeStatusEffect(StatusEffects.RaijuLightningStatus);

@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.CockTypesEnum;
 import classes.PerkLib;
 import classes.Race;
 import classes.VaginaClass;
@@ -27,10 +28,7 @@ public class WendigoRace extends Race {
 				.rearType(RearBody.FUR_COAT, +2)
 				.wingType(Wings.LEVITATION, +3)
 				.skinType(ANY(Skin.PLAIN,Skin.FUR), +1)
-				.customRequirement("","horse cock/pussy",
-						function (body:BodyData):Boolean {
-							return body.player.horseCocks() > 0 || (body.vaginaType == VaginaClass.EQUINE)
-						}, +1)
+				.cockOrVaginaOfType(CockTypesEnum.HORSE, VaginaClass.EQUINE, +1)
 				.customRequirement("","big E-cup if has vagina, flat chest otherwise",
 						function (body:BodyData):Boolean {
 							return body.hasVagina && body.biggestTitSize >= 8 || !body.hasVagina && body.biggestTitSize == 0

@@ -553,6 +553,9 @@ public class BodyData {
 	public function get hasCock():Boolean {
 		return gender === Gender.GENDER_MALE || gender === Gender.GENDER_HERM;
 	}
+	public function get hasBalls():Boolean {
+		return player.balls > 0;
+	}
 	
 	public function BodyData(player:Player, update:Boolean = true) {
 		this.player = player;

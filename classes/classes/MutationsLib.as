@@ -620,9 +620,7 @@ public class MutationsLib
 				EclipticMind.requirePeripheralNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.isRace(Races.ALICORN, 2) || player.unicornScore() >= 12 || player.alicornkinScore() >= 10 || player.unicornkinScore() >= 10;
 				}, "Unicorn or Bicorn race");
-				ElvishPeripheralNervSys.requirePeripheralNervSysMutationSlot().requirePerk(PerkLib.ElvenSense).requireCustomFunction(function (player:Player):Boolean {
-					return player.elfScore() >= 11 || player.isRace(Races.WOODELF);
-				}, "Elf race");
+				ElvishPeripheralNervSys.requirePeripheralNervSysMutationSlot().requirePerk(PerkLib.ElvenSense).requireAnyRace(Races.ELF, Races.WOODELF);
 				FeyArcaneBloodstream.requireBloodsteamMutationSlot().requireRace(Races.FAIRY);
 				FloralOvaries.requireOvariesMutationSlot().requireRace(Races.ALRAUNE);
 				FrozenHeart.requireHeartMutationSlot().requireRace(Races.YUKIONNA);
@@ -635,12 +633,8 @@ public class MutationsLib
 				}, "Gorgon eyes")
 				.requireRace(Races.GORGON);
 				HinezumiBurningBlood.requireBloodsteamMutationSlot().requireRace(Races.MOUSE, 2);
-				HarpyHollowBones.requireBonesAndMarrowMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.isRace(Races.HARPY) || player.isRace(Races.SIREN) || player.thunderbirdScore() >= 12 || player.isRace(Races.PHOENIX) || player.isRace(Races.COUATL);
-				}, "Harpy winged race");
-				HeartOfTheStorm.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.raijuScore() >= 10 || player.thunderbirdScore() >= 12 || player.isRace(Races.KAMAITACHI) || player.isRace(Races.COUATL);
-				}, "Stormborn race");
+				HarpyHollowBones.requireBonesAndMarrowMutationSlot().requireAnyRace(Races.HARPY, Races.SIREN, Races.THUNDERBIRD, Races.PHOENIX, Races.COUATL);
+				HeartOfTheStorm.requireHeartMutationSlot().requireAnyRace(Races.RAIJU, Races.THUNDERBIRD, Races.KAMAITACHI, Races.COUATL);
 				HollowFangs.requireMouthMutationSlot().requirePerk(VampiricBloodsteam)
 				.requireCustomFunction(function (player:Player):Boolean {
 					return player.facePart.type == 34;//player.facePart.isAny(Face.VAMPIRE, Face.)
@@ -695,16 +689,12 @@ public class MutationsLib
 				.requireCustomFunction(function (player:Player):Boolean {
 					return player.oniScore() >= 12;
 				}, "Oni race");
-				OrcAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(PerkLib.Ferocity).requireCustomFunction(function (player:Player):Boolean {
-					return player.orcScore() >= 11;
-				}, "Orc race");
+				OrcAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(PerkLib.Ferocity).requireRace(Races.ORC);
 				PigBoarFat.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.thickness >= 100;
 				}, "100+ thickness")
 				.requireRace(Races.PIG);
-				RaijuCathode.requirePeripheralNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.raijuScore() >= 10;
-				}, "Raiju race");
+				RaijuCathode.requirePeripheralNervSysMutationSlot().requireRace(Races.RAIJU);
 				RatatoskrSmarts.requirePeripheralNervSysMutationSlot().requirePerk(PerkLib.KnowledgeIsPower).requireRace(Races.RATATOSKR);
 				SalamanderAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(PerkLib.Lustzerker).requireAnyRace(Races.SALAMANDER, Races.PHOENIX);
 				SharkOlfactorySystem.requirePeripheralNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {

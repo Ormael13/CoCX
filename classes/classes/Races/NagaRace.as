@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.CockTypesEnum;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
@@ -21,10 +22,7 @@ public class NagaRace extends Race {
 				.skinCoatType(Skin.SCALES, +1)
 				.earType(Ears.SNAKE, +1)
 				.eyeType(Eyes.SNAKE, +1)
-				.customRequirement("","naga vagina or lizard cock",
-						function (body:BodyData):Boolean {
-							return body.vaginaType == VaginaClass.NAGA || body.player.lizardCocks() > 0
-						}, +1)
+				.cockOrVaginaOfType(CockTypesEnum.LIZARD, VaginaClass.NAGA, +1)
 				.customRequirement("","not another snake-like race",
 						function (body:BodyData):Boolean {
 							return !(GorgonRace.isGorgonLike(body)

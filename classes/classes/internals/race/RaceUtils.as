@@ -238,7 +238,21 @@ public class RaceUtils {
 		}
 	}
 	/**
-	 * @return `(body) => body.player.hasVagina() == test`
+	 * @return `(body) => body.hasBalls == test`
+	 */
+	public static function hasBallsFn(test:Boolean):Function {
+		if (test) {
+			return function (body:BodyData):Boolean {
+				return body.hasBalls;
+			}
+		} else {
+			return function (body:BodyData):Boolean {
+				return !body.hasBalls;
+			}
+		}
+	}
+	/**
+	 * @return `(body) => body.hasVagina == test`
 	 */
 	public static function hasVaginaFn(test:Boolean):Function {
 		if (test) {

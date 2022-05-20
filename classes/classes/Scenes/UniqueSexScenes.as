@@ -282,7 +282,7 @@ package classes.Scenes
         }
         private function USSVoltTsf():Array{
             var btnSet:Array = ["Volt Transfer"];
-            if ((player.raijuScore() >= 10 || player.thunderbirdScore() >= 12) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) btnSet.push(raijuVoltTransfer, "");
+            if ((player.isRace(Races.RAIJU) || player.isRace(Races.THUNDERBIRD)) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) btnSet.push(raijuVoltTransfer, "");
             else btnSet.push(false, "Req. to be Raiju and enemy must be non-gigant humanoid.");
             return btnSet;
         }

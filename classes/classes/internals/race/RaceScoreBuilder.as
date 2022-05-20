@@ -6,6 +6,7 @@ import classes.CockTypesEnum;
 import classes.PerkType;
 import classes.Race;
 import classes.StatusEffectType;
+import classes.VaginaClass;
 
 public class RaceScoreBuilder {
 	internal var race:Race;
@@ -309,12 +310,52 @@ public class RaceScoreBuilder {
 				)
 		return this;
 	}
-	
+	public function cockOrVaginaOfType(cockType:CockTypesEnum,vaginaType:int,score:int,failScore:int=0,customName:String=""):RaceScoreBuilder {
+		if (!customName) {
+			var c:String = cockType.DisplayName;
+			var v:String = VaginaClass.Types[vaginaType].name;
+			if (c == v) {
+				customName = c+" cock or vagina";
+			} else {
+				customName = c+" cock or "+v+" vagina";
+			}
+		}
+		return customRequirement("genitals",
+				customName,
+				function (body:BodyData):Boolean {
+					return body.vaginaType == vaginaType || body.player.countCocksWithType(cockType)>=0;
+				},
+				score,
+				failScore
+				);
+	}
 	public function hasCockOfType(type:CockTypesEnum, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addRequirement(new RacialRequirement(
 				"cock",
 				type.DisplayName+" cock",
 				RaceUtils.hasCockOfTypeFn(type),
+				score,
+				failScore,
+				minScore
+		), customName)
+		return this;
+	}
+	public function hasBalls(score: int, failScore:int=0, customName:String = ""): RaceScoreBuilder {
+		addRequirement(new RacialRequirement(
+				"balls",
+				"has balls",
+				RaceUtils.hasBallsFn(true),
+				score,
+				failScore,
+				minScore
+		), customName)
+		return this;
+	}
+	public function noBalls(score: int, failScore:int=0, customName:String = ""): RaceScoreBuilder {
+		addRequirement(new RacialRequirement(
+				"balls",
+				"no balls",
+				RaceUtils.hasBallsFn(false),
 				score,
 				failScore,
 				minScore

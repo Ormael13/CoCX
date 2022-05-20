@@ -35,11 +35,11 @@ public class Races {
 	public static const ORCA:Race = new Race("Orca",29, "orcaScore", 14);
 	public static const OOMUKADE:Race = new Race("Oomukade",30, "oomukadeScore", 15);
 	public static const ONI:Race = new Race("Oni",31, "oniScore", 12);
-	public static const ELF:Race = new Race("Elf",32, "elfScore", 11);
-	public static const ORC:Race = new Race("Orc",33, "orcScore", 11);
-	public static const RAIJU:Race = new Race("Raiju",34, "raijuScore", 10);
-	public static const THUNDERBIRD:Race = new Race("Thunderbird",35, "thunderbirdScore", 16);
-	public static const BUNNY:Race = new Race("Bunny",36, "bunnyScore", 10);
+	public static const ELF:ElfRace                        = new ElfRace(32);
+	public static const ORC:OrcRace                        = new OrcRace(33);
+	public static const RAIJU:RaijuRace                    = new RaijuRace(34);
+	public static const THUNDERBIRD:ThunderbirdRace        = new ThunderbirdRace(35);
+	public static const BUNNY:BunnyRace                    = new BunnyRace(36);
 	public static const HARPY:HarpyRace                    = new HarpyRace(37);
 	public static const SPIDER:SpiderRace                  = new SpiderRace(38);
 	public static const KANGAROO:KangarooRace              = new KangarooRace(39);
@@ -129,6 +129,8 @@ public class Races {
 	
 	public static function load():void {
 		RaceTierBuilder.ensureEndCalled();
+		// log scary numbers for fun
+		var nreq:int=0,nt:int=0,nr:int=0;
 		
 		for each (var race:Race in Race.AllRacesWithDisabled) {
 			race.setup();
@@ -136,6 +138,9 @@ public class Races {
 				trace("Race "+race.name+" (#"+race.id+") is disabled")
 				continue;
 			}
+			nr++;
+			nreq += race.requirements.length;
+			nt += race.tiers.length;
 			Race.AllEnabledRaces.push(race);
 			if (race.hidden) {
 				trace("Race "+race.name+" (#"+race.id+") is hidden")
@@ -143,6 +148,7 @@ public class Races {
 			}
 			Race.AllVisibleRaces.push(race);
 		}
+		trace("Loaded "+nr+" races, "+nt+" tiers, "+nreq+" requirements");
 		
 		Race.AllRacesByName = Race.AllVisibleRaces.slice().sortOn("name");
 	}

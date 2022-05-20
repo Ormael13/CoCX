@@ -50,6 +50,7 @@ public class MouseRace extends Race {
 				.namesTauric("hinezumi","hinezumi-taur")
 				.requireArmType(Arms.HINEZUMI)
 				.requireLegType(LowerBody.HINEZUMI)
+				.requireTailType(Tail.HINEZUMI)
 				.buffs({
 					"str.mult": +0.60,
 					"tou.mult": -0.10,

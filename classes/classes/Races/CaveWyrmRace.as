@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.CockTypesEnum;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
@@ -30,10 +31,7 @@ public class CaveWyrmRace extends Race {
 						function (body:BodyData):Boolean {
 							return body.player.hasStatusEffect(StatusEffects.GlowingNipples) || body.player.hasStatusEffect(StatusEffects.GlowingAsshole);
 						}, +1)
-				.customRequirement("","cave wyrm genitals",
-						function (body:BodyData):Boolean {
-							return body.vaginaType == VaginaClass.CAVE_WYRM || body.player.cavewyrmCocks() > 0;
-						}, +1)
+				.cockOrVaginaOfType(CockTypesEnum.CAVE_WYRM, VaginaClass.CAVE_WYRM, +1)
 				.hasPerk(PerkLib.AcidSpit, +1)
 				.hasPerk(PerkLib.AzureflameBreath, +1);
 		

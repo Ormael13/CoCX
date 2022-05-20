@@ -106,6 +106,22 @@ public class RaceTierBuilder {
 		}
 		return this;
 	}
+	/**
+	 * Configure tier naming function as:
+	 * {@param maleName}/{@param femaleName} for human/human-like face
+	 * {@param morphName} otherwise
+	 */
+	public function namesMaleFemaleMorph(
+			maleName:String,
+			femaleName:String,
+			morphName:String
+	): RaceTierBuilder {
+		this.nameFn = function(body:BodyData):String {
+			if (Face.isHumanShaped(body.faceType)) return body.mf(maleName, femaleName);
+			return morphName;
+		}
+		return this;
+	}
 	
 	/**
 	 * @param fn `function (body:BodyData):String` returning gendered/tauric/otherwise special name

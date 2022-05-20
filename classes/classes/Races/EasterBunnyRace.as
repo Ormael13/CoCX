@@ -26,7 +26,7 @@ public class EasterBunnyRace extends Race {
 				.hasCockOfType(CockTypesEnum.HUMAN, +1)
 				.customRequirement("","Easter bunny balls",
 						function (body:BodyData): Boolean {
-							return body.player.hasPerk(PerkLib.EasterBunnyBalls) && body.player.balls >= 2
+							return body.player.hasPerk(PerkLib.EasterBunnyBalls) && body.hasBalls
 						}, +1);
 		
 		addMutation(IMutationsLib.EasterBunnyEggBagIM);

@@ -11,7 +11,6 @@ public class BansheeRace extends Race {
 	}
 	
 	public override function setup():void {
-		
 		addScores()
 				.hairType(Hair.GHOST, +1)
 		
