@@ -55,10 +55,8 @@ import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Pregnancy;
 import classes.Scenes.SceneLib;
-import classes.StatusEffects;
 import classes.StatusEffects.HeatEffect;
 import classes.StatusEffects.RutEffect;
-import classes.StatusEffects.VampireThirstEffect;
 import classes.internals.Utils;
 import classes.lists.BreastCup;
 

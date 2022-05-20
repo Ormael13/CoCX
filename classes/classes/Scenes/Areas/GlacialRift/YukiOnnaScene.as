@@ -67,7 +67,7 @@ public class YukiOnnaScene extends BaseContent
 			if (player.wis > 30) {
 				outputText(" Do you let her?");
 				menu();
-				addButton(1, "Yes", encounterYukiOnnaYes);
+				addButton(1, "Yes", encounterYukiOnnaYes).hint("Are you sure?");
 				addButton(3, "No", encounterYukiOnnaNo);
 			}
 			else doNext(encounterYukiOnnaYes);
