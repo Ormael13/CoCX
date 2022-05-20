@@ -19,7 +19,7 @@ public class DisplacerMetabolismMutation extends IMutationPerkType
                 descS += "Increase strength and speed, reduces int after consuming milk";
             }
             if (pTier >= 2){
-                descS += ", further increase max capacity of strength and speed by 100% * NG+, int reduction lasts 5 hours longer and adds 50% extra duration";
+                descS += ", increase the milk STR and SPD boost by 100% * NG+, int reduction lasts 5 hours longer and adds 50% extra duration";
             }
             if (flags[kFLAGS.HUNGER_ENABLED] > 0) descS += ", increases max hunger cap by 50";
             if (descS != ""){
