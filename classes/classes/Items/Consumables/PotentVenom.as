@@ -29,19 +29,8 @@ public class PotentVenom extends Consumable {
 
 	override public function useItem():Boolean {
 		var changes:Number = 0;
-		var changeLimit:Number = 1;
+		var changeLimit:Number = 2 + player.additionalTransformationChances;
 		var temp2:Number = 0;
-		if (rand(3) == 0) changeLimit++;
-		if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
-		if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
-		if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
-		if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
-		if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
-		if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
-		if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
-		if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
-		if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
-		if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
 		player.slimeFeed();
 		clearOutput();
 		outputText("You pop the cork on the vial and quickly chug the clear liquid. It tastes somewhat sweet, leaving your body feeling warm all over.");

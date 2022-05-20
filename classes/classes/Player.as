@@ -55,10 +55,8 @@ import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Pregnancy;
 import classes.Scenes.SceneLib;
-import classes.StatusEffects;
 import classes.StatusEffects.HeatEffect;
 import classes.StatusEffects.RutEffect;
-import classes.StatusEffects.VampireThirstEffect;
 import classes.internals.Utils;
 import classes.lists.BreastCup;
 
@@ -15096,6 +15094,13 @@ use namespace CoC;
 		public function get additionalTransformationChances():Number {
 			var additionalTransformationChancesCounter:Number = 0;
 			if (hasPerk(PerkLib.HistoryAlchemist) || hasPerk(PerkLib.PastLifeAlchemist)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Enhancement)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Fusion)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Enchantment)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Refinement)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Saturation)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Perfection)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Creationism)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.EzekielBlessing)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.TransformationResistance)) additionalTransformationChancesCounter--;
 			return additionalTransformationChancesCounter;

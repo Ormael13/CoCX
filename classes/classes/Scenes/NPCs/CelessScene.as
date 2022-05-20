@@ -219,7 +219,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		locals["$dangerousPlants"] = player.hasKeyItem("Dangerous Plants") >= 0;
 		clearOutput();
 		if (isCorrupt){
-			outputText(""+_name+" seems somewhat bored, and it occurs to you that being a mother comes before being the Champion." +
+			outputText(""+_name+" seems somewhat bored, and it occurs to you that being a "+ player.mf("father", "mother") +" comes before being the Champion." +
 					"You decide to bring your girl on an excursion, but the pair of you stumble upon a gang of imps." +
 					"You defeat them all to keep your daughter safe, but as you prepare to leave, you’re suddenly hit by a splash on your back." +
 					"You turn around and notice "+_name+" is making a naughty smile, holding one of the imps by the dick, the other hand on his torso.\n\n<i>\"Tehehe. Got you, "+ player.mf("Dad", "Mom") +" !\"</i>\n\nOoooh reeeeally? Well then, it’s time you teach your daughter a lesson! " +
@@ -409,18 +409,18 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 
 		function improveItem(item:ItemType, from:ItemType):void {
 			outputText("You ask " + _name + " if she could imbue an item with her power.\n\n"+
-			"<i>\"Certainly mother! Just leave the items on the ground and let me get to work.\"</i>\n\n"+
+			"<i>\"Certainly, "+ player.mf("father", "mother") +"! Just leave the items on the ground and let me get to work.\"</i>\n\n"+
 			_name + " trots over to the item and starts channeling power.");
 			if (isCorrupt){
 				outputText("You see her twin horns blazing with a dark purple aura of corruption as her horse cock goes erect. "+
-				"She start to massage her breasts then moans, her eyes rolling out as she spontaneously orgasms, a river of black cum flooding out of her flare right unto the item. "+
+				"She starts massaging her breasts, then moans, her eyes rolling out as she spontaneously orgasms, a river of black cum flooding out of her flare right unto the item. "+
 				"You see the item, gems and shards transforming as fluid corruption seeps into the material, infusing it with unholy power.\n\n"+
 				"She sighs in relief, shakes out the few last drops of corrupt cum, then steps away, leaving you to examine the fruit of her work.");
 			}
 			else{
-				outputText("Her horns starts to glow with a white halo of purity. "+
+				outputText("Her horns start to glow with a white halo of purity. "+
 				"She cradles the item within her hands like a newborn baby, then finally touches it with her horn, transferring the light into it. "+
-				"A miracle happens, as the armament, gems and shards combines, changes shape and starts to glow with holy power.\n\n" +
+				"A miracle happens, as the armament, gems and shards combine, changing shape and starting to glow with holy power.\n\n" +
 				"Finally done, she comes back to you and solemnly deposits the blessed armament in your hand.");
 			}
 			if(player.keyItemvX("Radiant shard", 1) == 3) player.removeKeyItem("Radiant shard");
@@ -433,43 +433,10 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 
 	public function AboutRadiantShard():void {
 		outputText("You ask " + _name + " what are radiant shards exactly."+
-				"\n\n<i>\"Well from what I think I may know they are the remains of artifacts of past legend. Items long lost to time that were probably used in the mythical age. They are useless by themselves, just small fragment of lost power, but if you were to bring in multiple, as well as a base for the shards to fuse with, I could weave back the lost item to life.\"</i>\n\n"+
+				"\n\n<i>\"Well, from what I think I may know, they are the remains of artifacts of past legend. Items long-lost to time that were probably used in the mythical age. They are useless by themselves, just small fragment of lost power, but if you were to bring in multiple, as well as a base for the shards to fuse with, I could weave back the lost item to life.\"</i>\n\n"+
 				"\n\n Truthfully, that your little girl talks about such grown up subject so early both makes you proud and creeps you out.");
 		doNext(campInteraction);
 	}
-
-	/*
-	public function armourImproveMenu():void {
-		if (isCorrupt)spriteSelect(SpriteDb.s_celessBlack);
-		if (!isCorrupt)spriteSelect(SpriteDb.s_celessWhite);
-		var improvableArmours:Array = [
-			[armors., armors., armors.],
-			//	[armors.CTPALAD,		null,					armors.CTBGUAR], 	//This was already here from above.
-			//	[armors.LMARMOR,		armors.,			armors.]
-		];
-		clearOutput();
-		outputText("<b>"+_name+" can empower items using materials gems and her innate magic to bless/corrupt gear. Would you like her to create an epic item and in that case which?</b>");// legendary
-//Celess
-		var selectfrom:int = isCorrupt ? 2 : 1;										// Everything below should actually be fine, funny enough.
-		var selectMenu:ButtonDataList = new ButtonDataList();
-		for (var i:int = 0; i < improvableArmours.length; i++) {
-			if (improvableArmours[i][selectfrom] == null) {//do nothing
-			}
-			else {
-				var item:ItemType = improvableArmours[i][selectfrom];
-				var from:ItemType = improvableArmours[i][0];
-				selectMenu.add(item.id, curry(improveItem, item, from)).disableIf(!player.hasItem(from));
-			}
-		}
-		submenu(selectMenu, campInteraction);
-
-		function improveItem(item:ItemType, from:ItemType):void {
-			scene("strings/itemImprove/improveThatItem", myLocals);
-			player.destroyItems(from, 1);
-			inventory.takeItem(item, camp.returnToCampUseOneHour);
-		}
-	}
-	*/
 
 	public function celessUnicornIntro():void {
 		spriteSelect(SpriteDb.s_celessWhite);
@@ -817,7 +784,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			outputText("\"<i>Oww! It hurts!..."+ player.mf("Dad", "Mom") +"… don’t look!</i>\"\n\n");
 			outputText("You see your daughter is holding a large horn on her forehead. It seems she finally reached adulthood, her breasts inflating to E-cups only confirms your suspicion. She seems to be in pain");
 			if (silly()) outputText(", kinda obvious, what with her outright telling you less than two seconds ago,");
-			outputText(" and it’s your duty as her mother to do all you can to help her. You hug her, trying your best to comfort and distract her from the pain as the horn pushes forward, eventually growing to a length just shy of her sire’s own horn." +
+			outputText(" and it’s your duty as her "+ player.mf("father", "mother") +" to do all you can to help her. You hug her, trying your best to comfort and distract her from the pain as the horn pushes forward, eventually growing to a length just shy of her sire’s own horn." +
 					"\"<i>"+ player.mf("Dad", "Mom") +"… It’s terrible! I've grown this weird bony stump on my head, what do I do?</i>\"\n\n" +
 					"You explain to your daughter that it's normal for unicorns to have a horn on their forehead and that you love her all the same, horn or not. " +
 					"She calms down and hugs you warmly like she always does. This time, however, you can’t help but notice the large horsecock between her leg rising to full mast. " +
@@ -877,7 +844,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	private function incestSuckHerOff():void{
 		clearOutput();
 		outputText("It's been a while since you last had a taste of her, thus you decide to give your daughter a sweet, loving blowjob! " + _name + " coos, delighted at the proposal.\n"+
-		"<i>\"Oh… so mommy wants a taste of my delicious lower horns? Please, "+ player.mf("dad", "mom") +", feel free to indulge yourself.\"</i>\n"+
+		"<i>\"Oh… so "+ player.mf("daddy", "mommy") +" wants a taste of my delicious lower horns? Please, "+ player.mf("dad", "mom") +", feel free to indulge yourself.\"</i>\n"+
 		"You approach your girl’s massive tool and give it a few experimental strokes, making " + _name + " gasp in surprise."+
 		"You lick the flared tip to get a taste.\n"+
 		"Satisfied with it you then proceed to put the thing in your mouth proper. " + _name + " moans as her horse dong throbs in appreciation for the attention you’re giving it. "+
