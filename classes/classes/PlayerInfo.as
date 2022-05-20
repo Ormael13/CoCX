@@ -831,13 +831,15 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.LILY_LVL_UP] > 0) {
 			interpersonStats += "<b>Lily Affection:</b> " + LilyFollower.LilyAffectionMeter + "%\n";
 			interpersonStats += "<b>Lily Submissiveness:</b> " + LilyFollower.LilySubmissivenessMeter + "%\n";
+			if (flags[kFLAGS.LILY_LVL_UP] == 9) interpersonStats += "<b>Lily lvl:</b> 70 (current max lvl)\n";
+			if (flags[kFLAGS.LILY_LVL_UP] == 8) interpersonStats += "<b>Lily lvl:</b> 64\n";
 			if (flags[kFLAGS.LILY_LVL_UP] == 7) interpersonStats += "<b>Lily lvl:</b> 58\n";
 			if (flags[kFLAGS.LILY_LVL_UP] == 6) interpersonStats += "<b>Lily lvl:</b> 52\n";
 			if (flags[kFLAGS.LILY_LVL_UP] == 5) interpersonStats += "<b>Lily lvl:</b> 46\n";
 			if (flags[kFLAGS.LILY_LVL_UP] == 4) interpersonStats += "<b>Lily lvl:</b> 40\n";
 			if (flags[kFLAGS.LILY_LVL_UP] == 3) interpersonStats += "<b>Lily lvl:</b> 34\n";
 			if (flags[kFLAGS.LILY_LVL_UP] == 2) interpersonStats += "<b>Lily lvl:</b> 28\n";
-			if (flags[kFLAGS.LILY_LVL_UP] < 2) interpersonStats += "<b>Lily lvl:</b> 22 (current max lvl)\n";
+			if (flags[kFLAGS.LILY_LVL_UP] < 2) interpersonStats += "<b>Lily lvl:</b> 22\n";
 		}
 
 		//Lottie stuff
@@ -875,12 +877,12 @@ public class PlayerInfo extends BaseContent {
 			else interpersonStats += "<b>Neisa Loyalty:</b> 100%\n";
 			if (flags[kFLAGS.NEISA_FOLLOWER] >= 14)  interpersonStats += "<b>Days that passed since last paycheck for Neisa:</b> " + (Math.round(flags[kFLAGS.NEISA_FOLLOWER]) - 7) + " days (If you not pay before 10th day she would leave)\n";
 			else interpersonStats += "<b>Days that passed since last paycheck for Neisa:</b> " + (Math.round(flags[kFLAGS.NEISA_FOLLOWER]) - 7) + " days\n";
-			if (flags[kFLAGS.NEISA_LVL_UP] == 6) interpersonStats += "<b>Neisa lvl:</b> 33 (current max lvl)\n";
+			if (flags[kFLAGS.NEISA_LVL_UP] == 6) interpersonStats += "<b>Neisa lvl:</b> 33\n";
 			if (flags[kFLAGS.NEISA_LVL_UP] == 5) interpersonStats += "<b>Neisa lvl:</b> 27\n";
 			if (flags[kFLAGS.NEISA_LVL_UP] == 4) interpersonStats += "<b>Neisa lvl:</b> 21\n";
 			if (flags[kFLAGS.NEISA_LVL_UP] == 3) interpersonStats += "<b>Neisa lvl:</b> 15\n";
 			if (flags[kFLAGS.NEISA_LVL_UP] == 2) interpersonStats += "<b>Neisa lvl:</b> 9\n";
-			if (flags[kFLAGS.NEISA_LVL_UP] == 1) interpersonStats += "<b>Neisa lvl:</b> 3\n";
+			if (flags[kFLAGS.NEISA_LVL_UP] == 1) interpersonStats += "<b>Neisa lvl:</b> 3 (current max lvl)\n";
 		}
 		if (flags[kFLAGS.OWCAS_ATTITUDE] > 0)
 			interpersonStats += "<b>Owca's Attitude:</b> " + flags[kFLAGS.OWCAS_ATTITUDE] + "\n";

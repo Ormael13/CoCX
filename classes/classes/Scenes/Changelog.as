@@ -315,8 +315,8 @@ package classes.Scenes
 			outputText("-Added cooldowns for Ayane's and Diana's cure buttons. (Svalkash)\n");
 			outputText("-Demonic Mage Tail Ornament now unequips itself if no tail is present. Thanks for the report, Sacremas! :P (Svalkash)\n");
 			outputText("-Urta Quest PC got bit better phys stats and her specials got bit more punch added.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Added fountains to Ebon Labyrinth. You can find them near boss rooms at some depth/room count (after clearing the dungeon). You can use them to make legendary items, just like Celess. The type of the fountain (pure/corrupt) is selected randomly. (Svalkash)\n");
+			outputText("-Base tease damage was increased by 50%. All the bonus flat and % bonuses are unchanged.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
