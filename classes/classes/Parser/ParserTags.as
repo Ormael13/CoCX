@@ -203,23 +203,29 @@ public class ParserTags {
     /**
      * provides lookups for subject: "onyx" (Onyx/Krystal, second gargoyle in the TempleOfTheDivine)
      * note that these are only used in doubleArgLookups
-     *
-     * unhandled terms (I have not decided how to support them yet):
-     * arianMF("mas","mis")
-     * arianMF("master","mistress")
-     * arianMF("male","girly")
      */
     internal static var onyxLookups:Object = {
-        "man": function ():String {SceneLib.templeofdivine.onyx.onyxMF("man", "woman"); },
-        // argh! "Man" is the mass-noun for humanity, and I'm loathe to choose an even more esoteric variant.
-        // Elverson/Spivak terminology is already esoteric enough, and it lacks a ungendered mass noun.
-
+        "man"   : function ():String {return SceneLib.templeofdivine.onyx.onyxMF("man", "woman"); },
         "ey"    : function ():String {return SceneLib.templeofdivine.onyx.onyxMF("he", "she"); },
         "em"    : function ():String {return SceneLib.templeofdivine.onyx.onyxMF("him", "her"); },
         "eir"   : function ():String {return SceneLib.templeofdivine.onyx.onyxMF("his", "her"); },
         "eirs"  : function ():String {return SceneLib.templeofdivine.onyx.onyxMF("his", "hers"); },
         "emself": function ():String {return SceneLib.templeofdivine.onyx.onyxMF("himself", "herself"); },
         "name"  : function ():String {return SceneLib.templeofdivine.onyx.onyxName(); }
+    };
+
+    /**
+     * provides lookups for subject: "benoit"
+     * note that these are only used in doubleArgLookups
+     */
+    internal static var benoitLookups:Object = {
+        "man"   : function ():String {return SceneLib.bazaar.benoit.benoitMF("man", "woman"); },
+        "ey"    : function ():String {return SceneLib.bazaar.benoit.benoitMF("he", "she"); },
+        "em"    : function ():String {return SceneLib.bazaar.benoit.benoitMF("him", "her"); },
+        "eir"   : function ():String {return SceneLib.bazaar.benoit.benoitMF("his", "her"); },
+        "eirs"  : function ():String {return SceneLib.bazaar.benoit.benoitMF("his", "hers"); },
+        "emself": function ():String {return SceneLib.bazaar.benoit.benoitMF("himself", "herself"); },
+        "name"  : function ():String {return SceneLib.bazaar.benoit.benoitMF("Benoit","Benoite"); }
     };
 
     /** PC ASCII Aspect lookups for subject: "cock"*/
@@ -468,6 +474,7 @@ public class ParserTags {
         "arian" : arianLookups,
         "exc"   : excelliaLookups,
         "onyx"  : onyxLookups,
+        "benoit": benoitLookups,
 
         "monster": monsterLookups,
 

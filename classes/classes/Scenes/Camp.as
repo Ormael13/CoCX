@@ -117,7 +117,6 @@ public class Camp extends NPCAwareContent{
 
 	public var IsSleeping: Boolean = false;
 	public var CanDream: Boolean = false;
-	public var HadNightEvent: Boolean = false;
 	public var IsWaitingResting: Boolean = false;
 
 	public function doCamp():void { //Only called by playerMenu
@@ -2081,7 +2080,7 @@ public class Camp extends NPCAwareContent{
 		if (AdventurerGuild.Slot01Cap > 0) addButton(9, "Quest Loot", questItemsBag).hint("Manage your bag with quest items.");
 		else addButtonDisabled(9, "Quest Loot", "You have to join Adventure Guild to have bag for quest items.");
 		addButton(10, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
-		addButton(11, "Recall", recallScenes).hint("Recall some of the unique events happened during your adventure.");
+		addButton(11, "Recall", sceneHunter.recallScenes).hint("Recall some of the unique events happened during your adventure.");
 		if (player.explored >= 1) addButton(12, "Dummy", DummyTraining).hint("Train your mastery level on this dummy.");
 		if (flags[kFLAGS.LETHICE_DEFEATED] > 0) addButton(13, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures with your items, and gems carried over. The game will also get harder.");
 		else addButtonDisabled(13, "Ascension", "Don't you have a job to finish first. Like... to defeat someone, maybe Lethice?");
@@ -3133,7 +3132,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.LunaOff)) player.removeStatusEffect(StatusEffects.LunaOff);
 		else {
 			player.createStatusEffect(StatusEffects.LunaOff, 0, 0, 0, 0);
-			flags[kFLAGS.SLEEP_WITH] == "";
+			if (flags[kFLAGS.SLEEP_WITH] == "Luna") flags[kFLAGS.SLEEP_WITH] = "";
 		}
 		SparrableNPCsMenu();
 	}
@@ -3689,7 +3688,7 @@ public class Camp extends NPCAwareContent{
 				} else outputText("Luna hugs you tightly, almost possessively so as you both doze off to sleep.");
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Samirah" && flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) {
 				outputText("As you both head to sleep, Samirah slithers to you and coils her tail around " + ((player.lowerBody == 3)? "yours" : "your lower half") + ", wrapping her arms around your torso as she rests her head on your shoulder. Her body is cold and she looks at you as if in a daze.");
-				if (player.isNaga()) outputText(" She’s not alone either. It indeed took you a while to realise that you are also cold blooded now. The cold night air sure puts you in a similar state as of late.");
+				if (player.isNaga()) outputText(" She’s not alone either. It indeed took you a while to realise that you are also cold-blooded now. The cold night air sure puts you in a similar state as of late.");
 				outputText("\n\n\"<i>Sweet dreams [name], till morning and sunshine come.</i>\"\n");
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Belisa" && BelisaFollower.BelisaInCamp) {
 				outputText("You decide to sleep with Belisa tonight. You help her close up her shop, packing the bands away, and climb into her hammock/bed, putting a hand on her cheek. Belisa pulls you towards her, resting one of her pillows under each of your heads. She hugs your arm, head on your shoulder, and you can’t help but feel safe as she expertly pulls a light blanket over the two of you. ");
@@ -3919,31 +3918,6 @@ public class Camp extends NPCAwareContent{
 		player.orgasm();
 		EventParser.gameOver();
 		removeButton(1); //Can't wake up, must load.
-	}
-
-	public function allNaturalSelfStimulationBeltContinuation():void {
-		clearOutput();
-		outputText("In shock, you scream as you realize the nodule has instantly grown into a massive, organic dildo. It bottoms out easily and rests against your cervix as you recover from the initial shock of its penetration. As the pangs subside, the infernal appendage begins working itself. It begins undulating in long, slow strokes. It takes great care to adjust itself to fit every curve of your womb. Overwhelmed, your body begins reacting against your conscious thought and slowly thrusts your pelvis in tune to the thing.\n\n");
-		outputText("As suddenly as it penetrated you, it shifts into a different phase of operation. It buries itself as deep as it can and begins short, rapid strokes. The toy hammers your insides faster than any man could ever hope to do. You orgasm immediately and produce successive climaxes. Your body loses what motor control it had and bucks and undulates wildly as the device pistons your cunt without end. You scream at the top of your lungs. Each yell calls to creation the depth of your pleasure and lust.\n\n");
-		outputText("The fiendish belt shifts again. It buries itself as deep as it can go and you feel pressure against the depths of your womanhood. You feel a hot fluid spray inside you. Reflexively, you shout, \"<b>IT'S CUMMING! IT'S CUMMING INSIDE ME!</b>\" Indeed, each push of the prodding member floods your box with juice. It cums... and cums... and cums... and cums...\n\n");
-		outputText("An eternity passes, and your pussy is sore. It is stretched and filled completely with whatever this thing shoots for cum. It retracts itself from your hole and you feel one last pang of pressure as your body now has a chance to force out all of the spunk that it cannot handle. Ooze sprays out from the sides of the belt and leaves you in a smelly, sticky mess. You feel the belt's tension ease up as it loosens. The machine has run its course. You immediately pass out.");
-		player.slimeFeed();
-		player.orgasm();
-		dynStats("lib", 1, "sen", (-0.5));
-		doNext(camp.returnToCampUseOneHour);
-	}
-
-	public function allNaturalSelfStimulationBeltBadEnd():void {
-		spriteSelect(SpriteDb.s_giacomo);
-		clearOutput();
-		outputText("Whatever the belt is, whatever it does, it no longer matters to you.  The only thing you want is to feel the belt and its creature fuck the hell out of you, day and night.  You quickly don the creature again and it begins working its usual lustful magic on your insatiable little box.  An endless wave of orgasms take you.  All you now know is the endless bliss of an eternal orgasm.\n\n");
-		outputText("Your awareness hopelessly compromised by the belt and your pleasure, you fail to notice a familiar face approach your undulating form.  It is the very person who sold you this infernal toy.  The merchant, Giacomo.\n\n");
-		outputText("\"<i>Well, well,</i>\" Giacomo says.  \"<i>The Libertines are right.  The creature's fluids are addictive. This poor " + player.mf("man", "woman") + " is a total slave to the beast!</i>\"\n\n");
-		outputText("Giacomo contemplates the situation as you writhe in backbreaking pleasure before him.  His sharp features brighten as an idea strikes him.\n\n");
-		outputText("\"<i>AHA!</i>\" the hawkish purveyor cries.  \"<i>I have a new product to sell! I will call it the 'One Woman Show!'</i>\"\n\n");
-		outputText("Giacomo cackles smugly at his idea.  \"<i>Who knows how much someone will pay me for a live " + player.mf("man", "woman") + " who can't stop cumming!</i>\"\n\n");
-		outputText("Giacomo loads you up onto his cart and sets off for his next sale.  You do not care.  You do not realize what has happened.  All you know is that the creature keeps cumming and it feels... sooooo GODDAMN GOOD!");
-		EventParser.gameOver();
 	}
 
 	private function dungeonFound():Boolean { //Returns true as soon as any known dungeon is found
@@ -4772,104 +4746,5 @@ public function rebirthFromBadEnd():void {
 		return undpop;
 	}
 
-    public function recallScenes():void {
-        clearOutput();
-        outputText("You close your eyes, remembering all this life put you through. All your fights, friends... lovers.\n\n");
-        outputText("Though many things are still repeatable, you still remember some unique events of your life, and one question bothers you - what would happen if you were different at the moment? How would you and your companions look and behave right now?\n");
-		outputText("Falling asleep, you think about it, recalling the exact time and place...\n\n");
-		outputText("\n\n<b>This part is WIP, and will be updated with SceneHunter.</b>");
-		outputText("\n<i>All scenes listed here are unique one-timers that contained multiple choices or different variations for player's - or even followers' - race or body parts. When recalling, your <b>current</b> body and game state is used, so you can try to explore more options for yourself!");
-		outputText("\nOf course, you need to unlock the scene in the game first. The hints are provided above the buttons.");
-		outputText("\nIt's recommended to enable SceneHunter 'Print Checks' feature to keep track of all hidden checks during these scenes.</i>");
-        recalling = true; //Setting the flag to disable everything but text
-        menu();
-        //Marble scene
-		if (flags[kFLAGS.MARBLE_PURIFIED] == 1)
-			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight, false).hint("The punishment for Marble's bitchy sister.");
-		//Excellia slave first scene
-		if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2)
-			addButton(1, "Excellia Slv", SceneLib.excelliaFollower.ExcelliaPathChoiceMakeSlave).hint("Excellia acknowledges herself as your slave.");
-        //Phylla demon fuck
-		if (flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] || flags[kFLAGS.PHYLLA_SAVED]) {
-            if (player.cor >= 66 - player.corruptionTolerance && player.gender > 0)
-                addButton(2, "PhyllaCart", SceneLib.desert.antsScene.demonsFuckAntgirl).hint("Maybe you should have left Phylla to demons and watch them having fun?");
-            else addButtonDisabled(2, "PhyllaCart", "You must be corrupted and not genderless to recall this.");
-        }
-		//Phylla keks
-		if (flags[kFLAGS.ANT_WAIFU] || flags[kFLAGS.PHYLLA_STAY_HOME])
-			addButton(3, "PhyFirstTime", SceneLib.desert.antsScene.antGirlGoodEnd).hint("Your first time with Phylla.");
-        //Tamani first time
-		if (flags[kFLAGS.TAMANI_MET] == 1 && player.hasCock())
-			addButton(4, "TamaniFirst", SceneLib.forest.tamaniScene.tamaniFirstTimeConsentual).hint("First time with Tamani.");
-		//Tamani first time
-		if (player.hasKeyItem("Deluxe Dildo") >= 0 && player.hasVagina())
-			addButton(5, "TamaniLes", SceneLib.forest.tamaniScene.preferTamaniFemdom).hint("Girl-on-girl event with Tamani.");
-		//Erlking revenge
-		if (player.hasKeyItem("Golden Antlers") >= 0 && player.gender > 0)
-			addButton(6, "Erlk.Revenge", SceneLib.forest.erlkingScene.howDareYou).hint("You show Erlking <b>who</b> is the hunter here.");
-		//Nightmare
-		if (celessScene.questFinishedNightmare)
-			addButton(7, "Nightmare", SceneLib.forest.nightmareScene.nightmareVictory).hint("Demonic bicorn fucks you into a pile of mess.");
-		//Sapphire
-		if (flags[kFLAGS.SAPPHIRE_AFFECTION] == 100)
-			addButton(8, "SapphireFirst", SceneLib.templeofdivine.sapphire.sapphireFirstTime).hint("Sapphire discovers carnal pleasures");
-		//Venus cock scenes
-		if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && flags[kFLAGS.KAIJU_COCK] == 1)
-			addButton(9, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus).hint("Venus discovers her new cock.");
-
-		addButton(13, "Dungeons", recallScenes_dungeons);
-		addButton(14, "Wake Up", recallWakeUp);
-	}
-
-	public function recallScenes_dungeons():void {
-		menu();
-		if (flags[kFLAGS.SANDWITCH_MOB_DEFEATED])
-			addButton(0, "SandWitchMob", SceneLib.dungeons.desertcave.yoYouBeatUpSomeSandWitchesYOUMONSTER).hint("Punish some sand witches for attacking you.");
-		if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1, "Deep Cave", recallScenes_deepCave);
-		if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(2, "Stronghold", recallScenes_d3);
-		addButton(14, "Back", recallScenes);
-	}
-
-	public function recallScenes_deepCave():void {
-		menu();
-		//Doppel
-		if (flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED])
-			addButton(0, "Imp Horde", SceneLib.dungeons.deepcave.impGangVICTORY).hint("I'll never stop at one. YOU'LL TAKE THEM ALL ON!");
-		if (flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 0 || flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON] > 0)
-			addButton(1, "Vala (Freed)", SceneLib.vala.freeValazLooseCoochie).hint("Vala tries to enjoy her freedom and fuck the first person she sees.");
-        if (flags[kFLAGS.DEFEATED_ZETAZ])
-			addButton(2, "Zetaz", SceneLib.dungeons.deepcave.defeatZetaz).hint("Maybe the little asshole should have been tortured a bit more?");
-		if (flags[kFLAGS.INVESTIGATED_VALA_AFTER_ZETAZ_DEFEATED])
-			addButton(3, "Vala (Later)", SceneLib.vala.leftValaAlone).hint("Vala has spent some time alone and is VERY bored..");
-		addButton(14, "Back", recallScenes_dungeons);
-	}
-
-	public function recallScenes_d3():void {
-		menu();
-		//Doppel
-		if (flags[kFLAGS.D3_MIRRORS_SHATTERED])
-			addButton(0, "Doppelganger", SceneLib.d3.doppleganger.punchYourselfInTheBalls).hint("Go fuck yourself!");
-		//DriderIncubus
-		if (flags[kFLAGS.DRIDERINCUBUS_DEFEATED])
-			addButton(1, "DriderI & M", SceneLib.d3.driderIncubus.beatTheSpooderbutt, false).hint("Recall the glorious defeat of the drider-incubus and maybe take your 'reward'.");
-		//HermCentaur
-		if (flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0)
-			addButton(2, "HermCentaur", SceneLib.d3.hermCentaur.beatThePony, false).hint("Get your 'reward' for beating the herm centaur in the stronghold.");
-		//MinoKing
-		if (flags[kFLAGS.MINOTAURKING_DEFEATED] > 0)
-			addButton(3, "M.King & Exc", SceneLib.d3.minotaurKing.theKingIsDeadLongLiveTheKing).hint("If you didn't have time or the mood for using 2 cowsluts before fighting Lethice, you can do it in your imagination!");
-		//Lethice
-		if (flags[kFLAGS.LETHICE_DEFEATED] > 0)
-			addButton(4, "Lethice", SceneLib.d3.lethice.defeated, false).hint("While you can't make her your eternal slave, you can punish her for her arrogance in your memories as much as you want.");
-
-		addButton(14, "Back", recallScenes_dungeons);
-	}
-
-    public function recallWakeUp():void {
-		clearOutput();
-		outputText("You wake up from your dreams, satisfied. Well, this was a fun ride. But you still a lot ahead, so daydreaming is not the best way to waste your time. So... time to experience a few fresh adventures, so you'll have more to recall later?");
-        recalling = false; //EVERY recall scene must return here to clear the flag.
-        doNext(returnToCampUseOneHour);
-    }
-	}
+}
 }

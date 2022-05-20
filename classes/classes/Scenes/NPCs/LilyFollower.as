@@ -804,7 +804,8 @@ import classes.display.SpriteDb;
 				else addButtonDisabled(2, "Sex", "Not for genderless.");
 			}
 			else addButtonDisabled(2, "Sex", "Your lust is too low.");
-			//addButton(3, "House", LilyHouse);
+			if (LilyTalked > 4) addButton(3, "Learning", LearningWithLily).hint("Learning with Lily.");
+			else addButton(3, "House", LearningWithLily);
 			addButton(4, "Spar", LilySpar);
 			if (DriderTown.DriderTownComplete) addButton(13, "Back", SceneLib.dridertown.DriderTownEnter).hint("Return to main DriderTown menu.");
 			addButton(14, "Leave", camp.campLoversMenu);
@@ -832,7 +833,8 @@ import classes.display.SpriteDb;
 				else addButtonDisabled(2, "Sex", "Not for genderless.");
 			}
 			else addButtonDisabled(2, "Sex", "Your lust is too low.");
-			//addButton(3, "House", LilyHouse);
+			if (LilyTalked > 4) addButton(3, "Learning", LearningWithLily).hint("Learning with Lily.");
+			else addButton(3, "House", LearningWithLily);
 			addButton(4, "Spar", LilySpar);
 			if (DriderTown.DriderTownComplete) addButton(13, "Back", SceneLib.dridertown.DriderTownEnter).hint("Return to main DriderTown menu.");
 			addButton(14, "Leave", camp.campLoversMenu);
@@ -845,6 +847,73 @@ import classes.display.SpriteDb;
 			outputText("Her Spider-half has eight spindly legs, and her spinnerets are visibly active. Lily occasionally leans back, using her fingers to pull silk from her spinnerets, quickly braiding the strands into crude, yet serviceable rope.\n\n");
 			outputText("As she sees you looking at her, Lily gives you a sly three-eyed wink, sliding a hand down her waist, making eye contact with you as she rubs her rapidly swelling ebony pussy lips with one hand.\n\n");
 			doNext(LilyCampBack);
+		}
+		
+		public function LearningWithLily():void {
+			clearOutput();
+			if (LilyTalked > 4) {
+				outputText("You ask your Drider about the books in her home, and whether or not she’d be willing to let you read them with her.\n\n");
+				outputText("Lily seems slightly taken aback, but she smiles, nodding. \"<i>I’d love to read with you!</i>\" You follow her up into her silky home.\n\n");
+				outputText("Inside, Lily pulls out a few books, putting them on a table in front of you, motioning to them.\n\n");
+				outputText("A light-red tome with golden trim. It’s small, but the text is compact. “Basic Ballistics” is written on it, with a crossed gun and bow in the same golden color.\n\n");
+				outputText("A blue book, larger than the others, with stylized stars on it. “Magical Malpractice: A history of Sloppy Sorcerers.”\n\n");
+				outputText("A little black book, with nothing on the cover. As you look at it, Lily blushes, turning her head.\n\n");
+				outputText("A red book, worn and water-damaged, with a hard cover. “Blades, Blunts and Beauty: Warfare complicated”.\n\n");
+				outputText("“A Pirate King and his favorite Booty”.\n\n");
+				menu();
+				addButton(0, "1st book", LearningWithLilyYes, 1).hint("“Basic Ballistics”");
+				addButton(1, "2nd book", LearningWithLilyYes, 2).hint("“Magical Malpractice: A history of Sloppy Sorcerers.”");
+				addButton(2, "3rd book", LearningWithLilyYes, 3).hint("A little black book, with nothing on the cover.");
+				addButton(3, "4th book", LearningWithLilyYes, 4).hint("“Blades, Blunts and Beauty: Warfare complicated”");
+				addButton(4, "5th book", LearningWithLilyYes, 5).hint("“A Pirate King and his favorite Booty”");
+				addButton(14, "Back", LilyCampBack);
+			}
+			else {
+				outputText("You ask to see the inside of Lily’s house. She tilts her head, rather confused by your request. She shrugs after a few seconds. \"<i>Sure. If that will satisfy your curiosity, then of course.</i>\" You follow her up the tree, into a ball of webbing, sticks and some other hard material. It’s not rock, and it has an odd, almost organic look to it. You ask her, and Lily nods. \n\n");
+				outputText("\"<i>Oh, that is coral, gathered from the beach. Little bits of it add structural integrity to the building, and they give me solid points to anchor webbing to.</i>\" She smiles at you. \"<i>Very often, Driders who lived by the ocean would make boats out of these, since they’re quite light.</i>\"\n\n");
+				outputText("She flicks a switch embedded into the wall, and a small light flickers on. To your surprise, the dwelling isn’t that small, and appears to encompass most of the tree’s inner canopy. However, the most shocking part of it, to you at least, is the cubbyholes that line most of the oblong dwelling. They’re filled with scrolls, books and other reading materials.\n\n");
+				outputText("\"<i>Oh yes, my collection.</i>\" Lily gives you a sad look. \"<i>Or at least, what I could salvage. In addition to hunting for food...I must admit, I have a love for knowledge.</i>\" A single book catches your eye, by a crude mat on the far side of the dwelling. It’s clearly been recently read, and it’s tattered, beaten up. Clearly this book is a favorite. You walk over, picking the book up. The lettering is simple, but… \"<i>The Pirate King and his favorite Booty</i>\" with a ‘b’ clearly designed to be an ass.\n\n");
+				outputText("Your turn back, giving Lily a smug grin, and she blushes, snatching the book from your hands. \"<i>Okay, so it’s not all Wizardry, Engineering and Kingdoms, but…</i>\" She blushes, almost bashful. \"<i>What? It’s...Educational.</i>\"\n\n");
+				outputText("From the look on her face, it’s clear she’d rather not talk about the 500ish pages of well-worn smut in her hands. You ask about the light, intent on changing the subject, and she takes the topic eagerly.\n\n");
+				outputText("\"<i>Oh, that little number is Goblin work! Runs on a little bit of alcohol, and it hasn’t caught fire in years! I recovered it from one of my old hideouts when I realized your camp was so well-defended.</i>\" Lily gives you a clear ‘come hither’ look, tugging on her chain and letting her breasts jiggle enticingly. \"<i>But enough of lights and imaginary fun...Wouldn’t you rather have some real fun?</i>\"\n\n");
+				LilyTalked = 5;
+				menu();
+				if (player.lust >= 33 && player.gender > 0) addButton(1, "Yes", LilyFollowerSex);
+				else addButtonDisabled(1, "Yes", "Your lust is too low or you're genderless. (or both?)");
+				addButton(3, "No", LearningWithLilyNo);
+			}
+		}
+		public function LearningWithLilyNo():void {
+			outputText("You tell Lily that you’d rather not right now, and that you wanted to get to know her better. Your lover-toy nods, shuddering.\n\n");
+			outputText("\"<i>I want...Are you sure?</i>\"\n\n");
+			outputText("You assure her that you’re not interested in plundering her booty right now. Lily throws a glob of old webbing at you, and you chuckle to yourself as you climb down the tree, walking away from Lily’s home.\n\n");
+			eachMinuteCount(10);
+			doNext(playerMenu);
+		}
+		public function LearningWithLilyYes(book:Number):void {
+			outputText("You select your book, and Lily takes another off the shelf behind her. You sit down, leaning against the wall, and Lily lies down in front of you, positioning herself to place her breasts underneath your book. You chuckle at her antics, resting your book on her chest as you read.\n\n");
+			if (player.statStore.hasBuff("Learning with Lily")) player.statStore.removeBuffs('Learning with Lily');
+			switch (book) {
+				case 1:
+					player.buff("Learning with Lily").withText("Learning with Lily").setStats({"spe.mult":0.2}).forHours(384);
+					break;
+				case 2:
+					player.buff("Learning with Lily").withText("Learning with Lily").setStats({"int.mult":0.2}).forHours(384);
+					break;
+				case 3:
+					player.buff("Learning with Lily").withText("Learning with Lily").setStats({"lib.mult":0.2}).forHours(384);
+					break;
+				case 4:
+					player.buff("Learning with Lily").withText("Learning with Lily").setStats({"str.mult":0.2}).forHours(384);
+					break;
+				case 5:
+					if (player.lust < Math.round(player.maxLust() * 0.7)) player.lust = Math.round(player.maxLust() * 0.7);
+					break;
+				default:
+					outputText("You have encounterd a BUG and i not mean drider-bug but just... BUG. Report to Ormale/Aimozg this (not at all drider) BUG.");
+			}
+			eachMinuteCount(30);
+			doNext(playerMenu);
 		}
 		
 		public function LilySpar():void {

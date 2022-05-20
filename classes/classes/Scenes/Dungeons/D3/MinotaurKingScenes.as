@@ -40,7 +40,7 @@ public class MinotaurKingScenes extends BaseContent
 		{
 			if (!recalling) {
 				flags[kFLAGS.MINOTAURKING_DEFEATED] = 1;
-				outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+				outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			}
 			//Cannot be defeated by HP loss, so only writing lust win texts.
 			clearOutput();
@@ -68,7 +68,7 @@ public class MinotaurKingScenes extends BaseContent
 				addButton(13, flags[kFLAGS.EXCELLIA_RECRUITED] ? "Kill Him" : "Kill Them", murderhobo);
 				addButton(14, flags[kFLAGS.EXCELLIA_RECRUITED] ? "Leave Him" : "Leave Them", leavethem);
 			}
-			else addButton(14, "Wake Up", camp.recallWakeUp);
+			else addButton(14, "Wake Up", recallWakeUp);
 		}
 
         private function recruitExcellia():void {
@@ -145,7 +145,7 @@ public class MinotaurKingScenes extends BaseContent
 					flags[kFLAGS.MINOTAURKING_FUCKED] = 1;
 					cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 				}
-				else doNext(camp.recallWakeUp);
+				else doNext(recallWakeUp);
             }
 			else
 			{
@@ -170,7 +170,7 @@ public class MinotaurKingScenes extends BaseContent
 				flags[kFLAGS.MINOTAURKING_FUCKED] = 1;
 				EventParser.gameOver();
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 	
 		private function buttufucku():void
@@ -230,7 +230,7 @@ public class MinotaurKingScenes extends BaseContent
 				flags[kFLAGS.MINOTAURKING_FUCKED] = 1;
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 
 		private function mechanicalbullhue():void
@@ -328,7 +328,7 @@ public class MinotaurKingScenes extends BaseContent
 				flags[kFLAGS.MINOTAURKING_FUCKED] = 1;
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 
 		private function titfuckCowslut():void
@@ -363,7 +363,7 @@ public class MinotaurKingScenes extends BaseContent
 				flags[kFLAGS.MINOTAURKINGSSLUT_FUCKED] = 1;
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 
 		private function sloppySeconds():void
@@ -418,7 +418,7 @@ public class MinotaurKingScenes extends BaseContent
 				flags[kFLAGS.MINOTAURKINGSSLUT_FUCKED] = 1;
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 		
 		public function hailToTheKingBaby(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -503,7 +503,7 @@ public class MinotaurKingScenes extends BaseContent
 				flags[kFLAGS.MINOTAURKING_ALIVE] = 1;
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 	}
 }

@@ -514,7 +514,7 @@ public class DesertCave extends DungeonAbstractContent
 					dynStats("sen", -1);
 					cleanupAfterCombat();
 				}
-				else doNext(camp.recallWakeUp);
+				else doNext(recallWakeUp);
 			}
 			//Too Big For Fucks
 			function nofitF():void {
@@ -535,7 +535,7 @@ public class DesertCave extends DungeonAbstractContent
 					dynStats("sen", -1);
 					cleanupAfterCombat();
 				}
-				else doNext(camp.recallWakeUp);
+				else doNext(recallWakeUp);
 			}
 		}
 			
@@ -592,7 +592,7 @@ public class DesertCave extends DungeonAbstractContent
 				dynStats("sen", -1);
 				cleanupAfterCombat();
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		public function volunteerConfirmation():void {

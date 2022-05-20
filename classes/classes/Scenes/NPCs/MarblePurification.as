@@ -891,7 +891,7 @@ public class MarblePurification extends NPCAwareContent{
 	 	outputText("\n\nMarble looks at her hands in horror, just barely above a whisper you manage to hear her say, \"<i>His hands were shaking, just like [name]'s...</i>\"");
 	 	outputText("\n\n\"<i>Finally you're getting it.  Damn it sis, I can't believe that it took you this long to realize it.  Mom used threats on dad to get him to do what she wanted all the time.  I mean seriously, don't you feel an incredible urge to nurse people?  Find a good mate and get them addicted to you?</i>\"  Clara leans forward, \"<i>Tell me, did you ever consider starting a loving relationship with someone who didn't nurse from you?</i>\"");
 	 	outputText("\n\nMarble clenches her hands and seethes at Clara.  \"<i>I, I...</i>\"");
-	 	outputText("\n\n\"<i>Admit it, you don't feel like '" + player.mf("lover-boy","lover-girl") + "' here actually cares for you.  How could they if they won't drink your milk?  You're a Lacta Bovine, giving your milk is the most important thing in the world to you.  This isn't love.  Without " + player.mf("him","her") + " actually being addicted to you, it's just a one sided infatuation.  I was doing you a favor by taking " + player.mf("him","her") + " away from you.</i>\"");
+	 	outputText("\n\n\"<i>Admit it, you don't feel like '" + player.mf("lover-boy","lover-girl") + "' here actually cares for you.  How could they if they won't drink your milk?  You're a Lacta Bovine, giving your milk is the most important thing in the world to you.  This isn't love.  Without " + player.mf("him","her") + " actually being addicted to you, it's just a one-sided infatuation.  I was doing you a favor by taking " + player.mf("him","her") + " away from you.</i>\"");
 	 	outputText("\n\nYour cow-girl companion continues to shake in anger, but also fear and frustration.  \"<i>I, I, YES!  I want to addict [name] to my milk!  I want to so much!  I'm so afraid that " + player.mf("he","she") + " won't stay by my side, but I also feel so bottled up.  "); //no new paragraph
 
 		//if (PC has another lover in camp)
@@ -932,9 +932,7 @@ public class MarblePurification extends NPCAwareContent{
 		//(if Marble is a futa)
 		if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0) outputText("egg Marble into violating Clara with her cock, ");
 	 	outputText(" or try to calm Marble down so that she doesn't do anything to her sister.");
-
-		if (!recalling) outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
-
+		if (!recalling) outputText("\n\n<b>New scene is unlocked in 'Recall' menu!</b>");
 		menu();
 		//PC chooses what kind of victory scene they want to do to Clara.
 		//options are: Spank (can always do), Threesome (if the PC has a cock that is under 20 area, or a vagina), "NTR" (if PC has a cock that will fit Marble, or a vagina), Marble cock (if Marble has a cock), and Calm down (always possible).
@@ -1121,7 +1119,7 @@ public class MarblePurification extends NPCAwareContent{
         if (!recalling)
             doNext(calmMurblesFatAssDown);
         else
-            doNext(camp.recallWakeUp);
+            doNext(recallWakeUp);
     }
 
 	//Calm Marble down

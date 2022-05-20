@@ -5,7 +5,6 @@
 package classes.Scenes.Dungeons 
 {
 import classes.EventParser;
-import classes.Scenes.Areas.GlacialRift.Yeti;
 import classes.Scenes.Dungeons.RiverDungeon.Vegot;
 import classes.display.SpriteDb;
 import classes.GlobalFlags.kFLAGS;
@@ -59,8 +58,7 @@ import classes.StatusEffects;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		private function encountersRulette():Boolean {
-			if ((rand(100) < player.statusEffectv1(StatusEffects.RiverDungeonA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) return true;
-			else return false;
+			return (rand(100) < player.statusEffectv1(StatusEffects.RiverDungeonA)) && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
 		}
 		
 		private function encountersRuletteA():void {

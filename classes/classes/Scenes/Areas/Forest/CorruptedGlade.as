@@ -225,6 +225,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 					player.hips.type += rand(3) + 1;
 					player.fertility++;
 				}
+				doNext(camp.returnToCampUseOneHour);
 			}
 			function suckF():void {
 				outputText("You approach the swollen vines, noting a drizzle of fluid leaking from one of the bulbous and mushroom-like tips.   Licking your lips as you approach, you feel your heart beat faster in anticipation of sampling the tainted flora of the glade.   Grasping one gently, you lift it up, noting the pebbly texture along the curvature of its head, and the soft nubs on the underside where it rejoins the stalk.  The whole thing feels moist, just barely lubricated with some fluid that the plant seems to sweat.\n\n");
@@ -247,6 +248,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 				//Finish sentance
 				outputText(" tingle.  ");
 				//Simple stat changes - + lust.
+				player.sexReward("cum", "Lips", false);
 				dynStats("lus", 25 + player.lib / 10, "cor", 2);
 				//Change hair to green sometimes
 				if (rand(3) == 0 && player.hairColor != "green" && !player.blockingBodyTransformations()) {
@@ -272,9 +274,8 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 						}
 					}
 				}
+				doNext(camp.returnToCampUseOneHour);
 			}
-			player.sexReward("cum", "Lips", false);
-			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function treeBoobFun():void {

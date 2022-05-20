@@ -101,11 +101,11 @@ public function neisaCampMenu():void {
 	outputText("Neisa noticing your approach slashes the dummy a final time before stopping her training. She sits on a nearby wooden log and looks straight at you.\n\n");
 	outputText("\"<i>Well what's up [name] how can I help you?</i>\"\n\n");
 	menu();
-	addButton(0, "Appearance", neisaAppearance).hint("Examine Neisa appearance.");/*
+	addButton(0, "Appearance", neisaAppearance).hint("Examine Neisa appearance.");
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
 		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") addButtonDisabled(1, "Spar", "You can't fight against her as long she's in your team.");
 		else addButton(1, "Spar", neisaSpar).hint("Do a quick battle with Neisa!");
-	}*/
+	}
 	//addButton(2, "Talk", talkWithValeria).hint("Discuss with Valeria.");
 	//if (player.lust >= 33) addButton(3, "Sex", followersValeriaSex).hint("Initiate sexy time with the armor-goo.");
 	if (player.hasPerk(PerkLib.BasicLeadership)) {
@@ -135,8 +135,9 @@ public function neisaSpar():void {
 }
 public function neisaSparWon():void {
 	clearOutput();
-	outputText("Neisa falls back, rolling to her feet. She holds out a hand, shaking her head. \"<i>Alright, that’s enough.</i>\" She rolls her shoulders, wincing. \"<i>Neither of us would benefit from going any further.</i>\" You ask her if she’s just sore about losing, and she rolls her eyes. \"<i>I can’t collect my payment if I’m</i>\"\n\n");
+	outputText("Neisa falls back, rolling to her feet. She holds out a hand, shaking her head. \"<i>Alright, that’s enough.</i>\" She rolls her shoulders, wincing. \"<i>Neither of us would benefit from going any further.</i>\" You ask her if she’s just sore about losing, and she rolls her eyes. \"<i>I can’t collect my payment if I’m too injured to do my job. Consider yourself lucky.</i>\"\n\n");
 	neisaAffection(3);
+	//if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) LevelingHerself();
 	doNext(cleanupAfterCombat);
 }
 public function neisaSparLost():void {
@@ -146,6 +147,28 @@ public function neisaSparLost():void {
 	outputText("You need to rest for a few hours before returning to your journey.\n\n");
 	neisaAffection(1);
 	doNext(cleanupAfterCombat);
+}
+private function LevelingHerself():void {
+	if (flags[kFLAGS.NEISA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.NEISA_DEFEATS_COUNTER]++;
+	else flags[kFLAGS.NEISA_DEFEATS_COUNTER] = 1;
+	if (flags[kFLAGS.NEISA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.NEISA_LVL_UP] == 5) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9), 0);
+		flags[kFLAGS.NEISA_DEFEATS_COUNTER] = 0;
+		flags[kFLAGS.NEISA_LVL_UP] = 6;
+	}
+	if (flags[kFLAGS.NEISA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.NEISA_LVL_UP] == 6) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10), 0);
+		flags[kFLAGS.NEISA_DEFEATS_COUNTER] = 0;
+		flags[kFLAGS.NEISA_LVL_UP] = 7;
+	}
+	if (flags[kFLAGS.NEISA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.NEISA_LVL_UP] == 7) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11), 0);
+		flags[kFLAGS.NEISA_DEFEATS_COUNTER] = 0;
+		flags[kFLAGS.NEISA_LVL_UP] = 8;
+	}
 }
 
 public function neisaHenchmanOption():void {

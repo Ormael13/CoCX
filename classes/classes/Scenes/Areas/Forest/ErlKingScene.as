@@ -694,7 +694,7 @@ public class ErlKingScene extends BaseContent
 		{
 			clearOutput();
 			spriteSelect(SpriteDb.s_erlking_nude);
-			if (!recalling) outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			//[ends the Hunt permanently, Opens Princess Option]
 			outputText("You’ve had more than enough of the Erlking and his insane hunt.  You rise to your [feet], slapping away his outstretched hand.  He frowns, but before he can react, you’ve charged forward and knocked the black wood cane out of his hand.  It spins off into the undergrowth, out of sight.  The light in his eyes dims, as does the glow from his antlers.\n\n");
 
@@ -777,7 +777,7 @@ public class ErlKingScene extends BaseContent
 					}
 					else doNext(camp.returnToCampUseOneHour);
 				}
-				else doNext(camp.recallWakeUp);
+				else doNext(recallWakeUp);
 			}
 		}
 

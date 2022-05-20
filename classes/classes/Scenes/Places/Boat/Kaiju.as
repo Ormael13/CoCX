@@ -524,7 +524,7 @@ public class Kaiju extends AbstractLakeContent {
 		if (!recalling) flags[kFLAGS.KAIJU_COCK] = 1;
 		clearOutput();
 		kaijuSprite();
-		if (!recalling) outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+		if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 		outputText("While rowing across the lake, you come across a familiar green face emerging from the tainted waters.  It's Venus, the gigantic turtle girl from before.  Spotting you with lust filled eyes she waves you over and begins speaking, \"<i>You wouldn't believe what happened to me!  It was the oddest thing, I was bathing at the spot where the fluid corruption first enters the lake when suddenly I heard a loud noise and then WHOOSH!  An incredible torrent of the tainted stuff poured into the lake.  I've never witnessed anything like it!</i>\"  You nod your head in understanding, explaining to the green girl about your recent activities at the demons’ factory.");
 
 		outputText("\n\n\"<i>Wow, you did that?  I'm impressed,</i>\" she says, appraising you with her eyes, the usual lust in them replaced by a different kind of curiosity, even if only for a moment before once more going back to the haze of desire.  \"<i>Well, since you're the one responsible, maybe you would like to help me with something?</i>\" she asks as she slowly begins to rise from the lake, her flowing locks of red hair clinging wetly to her head and the back of her neck, with a few red curls coming down to cling around her large bountiful tits, her perky pink nipples stiff and hard from the cold water.  She continues to rise, drops of moisture sliding down the smooth green skin of her torso as her body ascends from the lake until she's up only to her waist, then up further so that her well trimmed pubic hair is on display, the red carpet clearly matching the curtains.  Then finally her sex emerges from the lake, dripping with water and sexual fluids, and you can clearly see that where once she had only the normal, albeit giant sized, sex of the female gender she now also has a lewd, throbbing dick above her vaginal opening, placed exactly where her pink clitoris once rested.  \"<i>What do you think?  Isn't it great?  I can't believe it just grew there.  It must have been all that excess corruption that was released.  And it's been making me so horny I can hardly walk straight!  Hey, want to help me give my brand-new cock a test drive?</i>\" she eagerly asks you, her new member starting to bounce a little as she shivers with desire.");
@@ -542,7 +542,7 @@ public class Kaiju extends AbstractLakeContent {
 		clearOutput();
 		kaijuSprite();
 		outputText("You shake your head no, politely responding that you do not want to get her off right now.  \"<i>Oh, okay. I understand,</i>\" the giantess states, looking somewhat crestfallen.  You row away, leaving her and her new addition to themselves for the time being.");
-		doNext(recalling ? camp.recallWakeUp : camp.returnToCampUseOneHour);
+		doNext(recalling ? recallWakeUp : camp.returnToCampUseOneHour);
 	}
 
 	//[If Mock]
@@ -570,7 +570,7 @@ public class Kaiju extends AbstractLakeContent {
 		if(player.hasCock()) outputText(" as you cum in your [armor]");
 		outputText(".  You can feel the spasming of the giant's cock as you feel the pressure from her shaft increase as a load of cum rushes through it, erupting out of her tip like a volcano with globs of white lava.  \"<i>Well, that's a hell of a load,</i>\" she says, seeming quite proud of herself.  She sets you back down in your boat and roughly shoves it out further into the lake.  \"<i>Learn some manners you meanie!</i>\" she calls out.");
 		//[Lust is decreased, Venus is removed from the game]
-		if (recalling) doNext(camp.recallWakeUp);
+		if (recalling) doNext(recallWakeUp);
 		else {
 			player.sexReward("cum", "Default");
 			dynStats("cor", 1);
@@ -604,7 +604,7 @@ public class Kaiju extends AbstractLakeContent {
 
 		outputText("\n\nYou clean yourself up, get dressed, and wave goodbye before leaving the giantess, who's still blissed out from her intense orgasm.");
 		//[Corruption increases slightly, lust is decreased]
-		if (recalling) doNext(camp.recallWakeUp)
+		if (recalling) doNext(recallWakeUp)
 		else {
 			player.sexReward("cum", "Default");
 			dynStats("cor", 1);

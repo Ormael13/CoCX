@@ -29,13 +29,13 @@ public class HiddenCave extends DungeonAbstractContent
 		
 		public function defeatedByLoliBatGolem():void {
 			clearOutput();
-			outputText("As you fall defeated to the ground the construct continue to pummel you to death. By the time it's done there will be nothing left of you but a bloodstain on the stone floor.\n\n");
+			outputText("As you fall defeated to the ground, the construct continue to pummel you to death. By the time it's done there will be nothing left of you but a bloodstain on the stone floor.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
 		}
 		public function defeatedByGuardianGolems():void {
 			clearOutput();
-			outputText("As you fall defeated to the ground the constructs continue to pummel you to death. By the time they are done there will be nothing left of you but a bloodstain on the stone floor.\n\n");
+			outputText("As you fall defeated to the ground, the constructs continue to pummel you to death. By the time they are done there will be nothing left of you but a bloodstain on the stone floor.\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
 		}
@@ -44,12 +44,6 @@ public class HiddenCave extends DungeonAbstractContent
 			outputText("As you fall defeated, with barely any time to collapse to the ground as the constructs continue to smash or slash you to death with their tails. By the time they are done with you there will be nothing left but a bloodstain on the stone floor...and some of you on the walls and maybe a little bit on cave roof too. Wait how did part of you get there?\n\n");
 			//[GAME OVER]
 			EventParser.gameOver();
-		}
-		public function defeatedBossGolems():void {
-			clearOutput();
-			outputText("You sigh in relief as the last guardian statue fall to rubble. Its arm tries to grab your leg but you step on it and smash the fingers. All that's left of the squad of golden is a piles of rocks.\n\n");
-			flags[kFLAGS.HIDDEN_CAVE_BOSSES] = 2;
-			cleanupAfterCombat();
 		}
 		
 		//Rooms
@@ -339,7 +333,7 @@ public class HiddenCave extends DungeonAbstractContent
 			clearOutput();
 			outputText("<b><u>Ted's Lair</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 4) {
-				outputText("\n\n\"<i>You come to worship me mortal?</i>\" A dommering, neither masculine nor feminine voice reached your ears the very moment you enter the room. Suprised you stopped to look around to find it source.");
+				outputText("\n\n\"<i>You come to worship me mortal?</i>\" A dommering, neither masculine nor feminine voice reached your ears the very moment you enter the room. Suprised you stopped to look around to find its source.");
 				outputText("\n\n\"<i>So you're not my worshiper YET... but my BAM HAMMER will make sure you will be!!!</i>\"");
 				startCombat(new Ted(), true);
 				flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] = 5;
@@ -391,7 +385,7 @@ public class HiddenCave extends DungeonAbstractContent
 			dungeonLoc = DUNGEON_HIDDEN_CAVE_MEDIUM_CAVE;
 			clearOutput();
 			outputText("<b><u>Medium Cave</u></b>\n");
-			outputText("This medium sized cave is decorated with many silent statues. You somehow have the impression that they are watching you or maybe watching... ");
+			outputText("This medium-sized cave is decorated with many silent statues. You somehow have the impression that they are watching you or maybe watching... ");
 			/*if(flags[kFLAGS.HIDDEN_CAVE_BOSSES] >= 1) outputText("empty space in the middle with some resin remains.");
 			else */outputText("something embeded in half translucent resin in the middle.");
 			dungeons.setDungeonButtons(roomSmallCaveN, roomTunnel01, roomSmallCaveW, roomSmallCaveE);//north(6), south(11), west(10), east(12), up(5), down(7)
@@ -399,7 +393,6 @@ public class HiddenCave extends DungeonAbstractContent
 				outputText("\n\nA few of unusualy shaped golem figures standing near cave walls on your right and left suddenly starting to move forming a small group encirling you.");
 				startCombat(new BossGolems(), true);
 				doNext(playerMenu);
-				return;
 			}
 		}
 		public function roomSmallCaveE():void {
@@ -473,13 +466,13 @@ public class HiddenCave extends DungeonAbstractContent
 				outputText("And nothing happens... for minute or two. When you start to doubt if it was the key...The wall gently trembles as it opens itself, revealing another room behind it. Almost fully covered in shadows and the only light that disperses the darkness is the light coming through the opened doors. Keeping your guard up you slowly enter inside. While your eyes slowly adapt to the darkness, ");
 				outputText("you see a pair of faint glowing green lights deeper inside. The moment when you look directly in the direction of the glowing lights, your hand touches something. Looking to the side you see it's something that begins in the nearby floor and runs across the room towards the direction of the glowing green lights. From touch, it feels like some sort of metal and it’s shape ");
 				outputText("looks like some sort of thick chain. Looking carefully around you, you start to distinguish other objects in darkness that seems to start on the nearby floor and they all go towards one point. They also look like chains but why are they here?\n\n");
-				outputText("Thinking over this probably important question, you seem to step on something, moments later the floor near your legs start to shine with some sort of runes. One after another, new runes start to glow, spreading outwards from your position toward the sides of the chamber. After a moment or two when you stop moving, preparing for what may come, some of runes start to glow on the walls. ");
+				outputText("Thinking over this probably important question, you seem to step on something, moments later the floor near your legs start to shine with some sort of runes. One after another, new runes start to glow, spreading outwards from your position toward the sides of the chamber. After a moment or two when you stop moving, preparing for what may come, some of the runes start to glow on the walls. ");
 				outputText("Then you see some shadow before you or more accurately, you cast a shadow on the nearby wall due to a new source of light lightening up somewhere behind you. This causes the gradual vanishing of shadows and darkness inside, revealing the place where before you’ve seen glowing green lights.\n\n");
 				outputText("The source of this light gradually reveals itself to be ");
 				if (player.tallness < 72) outputText("towering above you");
 				else if (player.tallness >= 72 && player.tallness < 85) outputText("closely to your own height");
 				else outputText("shorter than you");
-				outputText(", a crouching figure sitting on some sort of wide pillar. It has a pair of quite big wings that stick out a bit from behind and on the left side you see something that looks like an end of a tail. When another two sources of light light up on the sides of the room, you can see the beings shape more clearly and it seems it's female or so you suspect due her chest rivaling many lower succubi ");
+				outputText(", a crouching figure sitting on some sort of wide pillar. It has a pair of quite big wings that stick out a bit from behind and on the left side you see something that looks like an end of a tail. When two lanterns light up on the sides of the room, you can see the beings shape more clearly and it seems it's female or so you suspect due her chest rivaling many lower succubi ");
 				outputText("with its size, emphasized by fact she holds her hands to her sides, further squeezing them between them. What you took before as the dark grey color of her skin, after the room got brighter, it turns out to be light turquoise with blue markings and a white belly. Her face and head looks like one of those bat golems you fought before but looking much more mature and the pair of glowing lights ");
 				outputText("was her glowing eyes. She still stays motionlessly despite you being here for a longer moment, so you cautiously make a  few steps closer. Then you notice above her shapeful chest some mark. With all the light present in chamber it looks like black tattoo of the letter A above 3 lines, forming the Roman numeral 3.\n\n");
 				outputText("\"<i>Master?</i>\" your examination is interrupted when a low and much more mature voice than that of the other bat golems resounds in the chamber. To your surprise, sitting on the pedestal, the figure’s head is now looking at you with her glowing eyes, which dim a bit to show her normal looking green eyes without that glow that made them look alien a moment ago. What will you do now?\n\n");
@@ -498,7 +491,7 @@ public class HiddenCave extends DungeonAbstractContent
 			doNext(playerMenu);
 		}
 		private function putInTheJadeTalisman2():void {
-			outputText("Wait she think you're her master? But wouldn't that be that weird and arrogant dragon boy?\n\n");
+			outputText("Wait, she thinks you're her master? But wouldn't that be that weird and arrogant dragon boy?\n\n");
 			outputText("\"<i>No. He ran away like a coward</i>\" you speak the truth. Hearing this she seems stay silent for a longer moment before speaking again. \"<i>Are you my new master?</i>\"\n\n");
 			outputText("New master? Confused, you ask her what she means. She straightforwardly replies. \"<i>Since you came here, which required Master’s jade talisman, Master wouldn't give it to noone not his servant, so that makes you my new master, right?</i>\"\n\n");
 			outputText("You think for a moment. She looks like some sort of golem so having one in camp wouldn't be harmful. \"<i>Yes I’m your new Master</i>\" you reply with a confident voice.\n\n");

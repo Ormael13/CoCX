@@ -55,7 +55,7 @@ import classes.PerkLib;
 			if (!recalling) {
 				flags[kFLAGS.D3_DOPPLEGANGER_DEFEATED] = 1;
 				player.createKeyItem("Laybans", 0, 0, 0, 0);
-				outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+				outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			}
 			
 			clearOutput();
@@ -210,7 +210,7 @@ import classes.PerkLib;
 					flags[kFLAGS.D3_MIRRORS_SHATTERED] = 1;
 					cleanupAfterCombat(d3.resumeFromFight);
 				}
-				else doNext(camp.recallWakeUp);
+				else doNext(recallWakeUp);
 			}
 		}
 		
@@ -224,7 +224,7 @@ import classes.PerkLib;
 				menu();
 				cleanupAfterCombat(d3.resumeFromFight);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 		
 		public function inSovietCoCSelfFucksYou():void

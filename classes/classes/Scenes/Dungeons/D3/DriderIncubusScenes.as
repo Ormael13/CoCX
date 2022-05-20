@@ -202,12 +202,17 @@ public class DriderIncubusScenes extends BaseContent
 			}
 		}
 
-		public function beatTheSpooderbutt(hpVictory:Boolean):void
+		public function beatTheSpooderbutt(hpVictory:Boolean = false):void
 		{
-			if (!recalling) flags[kFLAGS.DRIDERINCUBUS_DEFEATED] = 1;
-
 			clearOutput();
-			if (!recalling) outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
+			if (!recalling) {
+				flags[kFLAGS.DRIDERINCUBUS_DEFEATED] = 1;
+				outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
+			}
+			else {
+				monster = new DriderIncubus();
+				monster.lust = monster.maxLust();
+			}
 			var m:DriderIncubus = monster as DriderIncubus;
 			//HP
 			if (hpVictory)
@@ -278,7 +283,7 @@ public class DriderIncubusScenes extends BaseContent
 			else doneGoblin = true;
 
 			if (recalling)
-				addButton(14, "Wake Up", camp.recallWakeUp);
+				addButton(14, "Wake Up", recallWakeUp);
 			else if (doneDriderbus && doneGoblin)
 				afterDriderbuttFight();
 

@@ -84,27 +84,19 @@ public class LethiceScenes extends BaseContent
 			startCombat(m);
 		}
 
-		public function defeated(hpVictory:Boolean):void
+		public function defeated(hpVictory:Boolean = false):void
 		{
 			clearOutput();
-			if (!recalling) outputText("\n<b>New scene is unlocked in 'Recall' menu!</b>\n");
-
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			if (hpVictory)
-			{
 				outputText("<i>\"No,\"</i> Lethice cries, dropping onto all fours, barely able to support herself. <i>\"How c-can this be...\"</i> She shakes her head, tries to stand, and collapses once more. <i>\"My reign was to be eternal and unquestioned.\"</i> Hatred burns in her eyes. <i>\"You ruined it all.\"</i> She spits on the ground, then struggles not to collapse into it.");
-			}
 			else
-			{
 				outputText("<i>\"No,\"</i> Lethice cries, shaking her head in denial. <i>\"How c-can this be? How can you do this to me.\"</i> She shudders, dropping onto all fours, barely keeping a hand out of her cunt by sheer force of will. It dances across the slip of fabric at her crotch, threatening to rebel at any moment. <i>\"I’m not some ditsy, succubus slut.\"</i> A whole-body shiver wracks her from head to toe. <i>\"Gods, am I?\"</i>");
-			}
-
 			outputText("\n\nThe question remains - what to do with her?");
-			
 			menu();
 			addButtonIfTrue(0, "Plow Her", plowHer, "Req. a cock.", player.hasCock(), "Use your dick.");
 			addButtonIfTrue(1, "Queen Her", queenHer, "Req. a vagina.", player.hasVagina(), "Use your vagina.");
 			addButton(2, "Boob Play", boobPlay, hpVictory);
-
 			addButtonIfTrue(5, "Redemption", curry(redemption, hpVictory),
 				"Requires to have any lethicite shard, and purify Marae by shutting down the factory in a safe way.",
 				(player.hasKeyItem("Sheila's Lethicite") > 0) || (player.hasKeyItem("Stone Statue Lethicite") > 0) && flags[kFLAGS.MET_MARAE] == 1 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1);
@@ -113,13 +105,9 @@ public class LethiceScenes extends BaseContent
 		private function plowHer():void
 		{
 			clearOutput();
-
 			outputText("After all you’ve been through, after everything you’ve fought and every enemy you’ve made... it all has come down to this: Lethice, the so-called Demon Queen, on her knees before you like any corrupted slut, helpless but to be just another sheathe for your cock. The realization fills your heart with a sense of pride and joy. Your quest is over, and now it’s time to reap your rewards.");
 
-			outputText("\n\nYou");
-			if (!player.isNaga()) outputText(" step");
-			else outputText(" slither");
-			outputText(" forward, looming over the demoness’s defeated body, and grin down at her. She knows how this goes - who knows how many poor, innocent people have been in this same position before her? Now that the tables are turned, the demon just eyes the floor, refusing to meet your eyes until you reach down and grab her chin, forcing her to look at you.");
+			outputText("\n\nYou " + (!player.isNaga() ? "step" : "slither") + " forward, looming over the demoness’s defeated body, and grin down at her. She knows how this goes - who knows how many poor, innocent people have been in this same position before her? Now that the tables are turned, the demon just eyes the floor, refusing to meet your eyes until you reach down and grab her chin, forcing her to look at you.");
 
 			outputText("\n\nAll the hatred, resentment, and indignation in her dragon’s eyes just makes you harder. She sneers at you, some last measure of defiance - so you pick her up and hurl her against the throne, putting her face-first where her ass was sat just a few minutes ago, thinking she was the biggest, baddest thing in Mareth. Lethice yelps, thrusting her wings around and grabbing at her arm rests to steady herself, try and stand back up. You put a stop to that in a hurry, planting a firm hand on her back between her draconic wings, and using the other to grab at the sheer fabric of her nun’s habit. It rips away easily, like it was designed to be torn away at a moment’s notice, leaving her flawless pink flesh bare to your inspection. Her small little breasts bob as the clothing supporting them is torn off, swaying and jiggling as you roughly position their owner just as you want her.");
 			
@@ -547,7 +535,7 @@ public class LethiceScenes extends BaseContent
 				player.createStatusEffect(StatusEffects.LethiceRedemed, 0, 0, 0, 0);
 				saveExport();
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		private function joinHer():void
@@ -663,7 +651,7 @@ public class LethiceScenes extends BaseContent
 				flags[kFLAGS.GAME_END] = GAME_END_CONSORT;
 				saveExport();
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -821,7 +809,7 @@ public class LethiceScenes extends BaseContent
 				addButton(0, "Kill Her", killHer);
 				addButton(1, "Leave Her", leaveHer);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		private function killHer():void
