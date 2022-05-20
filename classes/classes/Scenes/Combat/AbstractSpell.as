@@ -20,6 +20,7 @@ public class AbstractSpell extends CombatAbility {
 	protected var isLastResortApplicable:Boolean = true;
 	protected var useManaType:int;
 	protected var canBackfire:Boolean = false;
+	protected var isAutocasting:Boolean = false;
 	
 	function AbstractSpell(
 			name:String,
@@ -111,9 +112,9 @@ public class AbstractSpell extends CombatAbility {
 				outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			}
 		} else {
-			preSpellEffect();
+			if (!isAutocasting) preSpellEffect();
 			doSpellEffect(display);
-			postSpellEffect();
+			if (!isAutocasting) postSpellEffect();
 			if (display) {
 				outputText("\n\n");
 			}
@@ -127,8 +128,10 @@ public class AbstractSpell extends CombatAbility {
 	 */
 	public function autocast():void {
 		backfireEnabled = false;
+		isAutocasting = true;
 		perform(false,false,false);
 		backfireEnabled = canBackfire;
+		isAutocasting = false;
 		outputText("<b>"+name+" was autocasted successfully.</b>\n\n");
 	}
 	

@@ -211,9 +211,12 @@ public function DriderTownEnter():void {
 public function DriderTownSisters():void {
 	outputText("You decide to have a visit with one of your three lovely Driders. The only question is, which one?\n\n");
 	menu();
-	addButton(1, "Belisa", SceneLib.belisa.BelisaMainCampMenu);
-	addButton(2, "Lily", SceneLib.lily.LilyCampFollower);
-	addButton(3, "Tyrantia", SceneLib.tyrania.TyrantiaAtCamp);
+	if (player.statusEffectv3(StatusEffects.CampSparingNpcsTimers5) > 0) addButtonDisabled(1, "Belisa", "Training.")
+	else addButton(1, "Belisa", SceneLib.belisa.BelisaMainCampMenu);
+	if (player.statusEffectv2(StatusEffects.CampSparingNpcsTimers5) > 0) addButtonDisabled(2, "Lily", "Training.")
+	else addButton(2, "Lily", SceneLib.lily.LilyCampFollower);
+	if (player.statusEffectv1(StatusEffects.CampSparingNpcsTimers5) > 0) addButtonDisabled(3, "Tyrantia", "Training.")
+	else addButton(3, "Tyrantia", SceneLib.tyrania.TyrantiaAtCamp);
 	addButton(14, "Leave", camp.campLoversMenu);
 }
 
