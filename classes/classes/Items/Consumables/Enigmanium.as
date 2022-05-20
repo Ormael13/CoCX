@@ -33,16 +33,9 @@ package classes.Items.Consumables {
     public override function useItem(): Boolean {
       var choice: int;
       var changes: Number = 0;
-      var changeLimit: Number = 1;
+      var changeLimit: Number = player.additionalTransformationChances;
       var temp2: Number = 0;
       var temp3: Number = 0;
-      if (rand(2) == 0) changeLimit++;
-      if (rand(2) == 0) changeLimit++;
-      if (rand(3) == 0) changeLimit++;
-      if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
-      if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
-      if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
-      changeLimit = 1000;
       //Text go!
       clearOutput();
       outputText("You chug down the potion pinching your nose and hoping for the best. Knowledge flood your mind. Hey you could as well get to making riddles as a pastime.");
@@ -63,7 +56,6 @@ package classes.Items.Consumables {
       if (rand(3) == 0 && changes < changeLimit && player.MutagenBonus("str", 1)) {
         if (rand(2) == 0) outputText("\n\nYour muscles feel taut, like a coiled spring, and a bit more on edge.");
         else outputText("\n\nYou arch your back as your muscles clench painfully.  The cramp passes swiftly, leaving you feeling like you've gotten a bit stronger.");
-        ;
         changes++;
       }
       //Toughness drops if over 50
@@ -75,8 +67,6 @@ package classes.Items.Consumables {
       //IntelliWisGain
       if (rand(4) == 0 && changes < changeLimit && (player.MutagenBonus("int", 2) || player.MutagenBonus("wis", 2))) {
         outputText("\n\nThousands of glowing symbols, hieroglyphics you remember them being denoted as, appear in vast arrays in your mind. Miraculously, you can make sense of them, as if they were in your own language. Shifting them, you giggle to yourself as you begin crafting a riddle that will surely baffle great minds. The visions end, and you feel incredibly enlightened! Is this how Sanurah feels?");
-        ;
-        ;
         changes++;
       }
       //Libido gain
@@ -84,7 +74,7 @@ package classes.Items.Consumables {
         //Cat dicked folks
         if (player.catCocks() > 0) {
           choice = player.findFirstCockType(CockTypesEnum.CAT);
-          outputText("\n\nYou feel your [cock] growing hard, the barbs becoming more sensitive. You gently run your hands down them and imagine the feeling of raking the insides of a cunt as you pull.  The fantasy continues, and after ejaculating and hearing the female yowl with pleasure, you shake your head and try to drive off the image.  ");
+          outputText("\n\nYou feel your [cock"+(choice+1)+"] growing hard, the barbs becoming more sensitive. You gently run your hands down them and imagine the feeling of raking the insides of a cunt as you pull.  The fantasy continues, and after ejaculating and hearing the female yowl with pleasure, you shake your head and try to drive off the image.  ");
           if (player.cor < 33) outputText("You need to control yourself better.");
           else if (player.cor < 66) outputText("You're not sure how you feel about the fantasy.");
           else outputText("You hope to find a willing partner to make this a reality.");
