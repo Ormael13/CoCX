@@ -343,5 +343,51 @@ public class DungeonEngine extends DungeonAbstractContent {
         );
         addButton(14, "Map", map.displayMapOnlyOne).hint("View the map of this dungeon."); //replace map button with this "only one" thing
     }
+
+    public function setDungeonButtonsRD3D(northFunction:Function = null, southFunction:Function = null, westFunction:Function = null, eastFunction:Function = null, upFunction:Function = null, downFunction:Function = null):void {
+        setDungeonButtonsRD(northFunction, southFunction, westFunction, eastFunction);
+        //add Up/Down buttons
+        if (upFunction != null) addButton(5, "Up", navigateToRoomRD, upFunction);
+        if (downFunction != null) addButton(7, "Down", navigateToRoomRD, downFunction);
+    }
+
+    //Old button function here. The function itself was moved into EL, but can be brought back for new dungeons.
+	
+	//IT"S FOR NEW DUNGEON SIMILAR TO BOTH EL AND RD SO PLEASE NOT KEEP TRYING TO DELETE THAT CODE -.-
+    /*
+    public function navigateToRoomEL(room:Function = null):void {
+        if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
+        player.addStatusValue(StatusEffects.EbonLabyrinthB, 1, 1);
+        eachMinuteCount(15);
+        room();
+    }
+    public function setDungeonButtonsEL(northFunction:Function = null, southFunction:Function = null, westFunction:Function = null, eastFunction:Function = null, upFunction:Function = null, downFunction:Function = null):void {
+        statScreenRefresh();
+        hideUpDown();
+        spriteSelect(null);
+        menu();
+        addButton(2, "North", navigateToRoomEL, northFunction);
+        addButton(12, "South", navigateToRoomEL, southFunction);
+        addButton(6, "West", navigateToRoomEL, westFunction);
+        addButton(8, "East", navigateToRoomEL, eastFunction);
+        addButton(1, "Up", navigateToRoomEL, upFunction);
+        addButton(13, "Down", navigateToRoomEL, downFunction);
+        if (model.time.hours >= 21 || model.time.hours < 6) addButton(0, "Sleep", ebonlabyrinth.doSleepEL).hint("Turn yourself in for the night. May result in monster ambush!");
+        else addButtonDisabled(0, "Sleep", "It's still too early to go to sleep.");
+        if (player.lust >= 30) addButton(5, "Masturbate", SceneLib.masturbation.masturbateGo);
+        else addButtonDisabled(5, "Masturbate", "Req. 30+ lust.");
+        addButton(9, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
+        addButton(14, "Exit", AreYouSureAboutThat);
+        setTopButtons();
+    }
+    private function AreYouSureAboutThat():void {
+        clearOutput();
+        outputText("\"<i>Are you sure about that?</i>\"");
+        menu();
+        addButton(1, "No", playerMenu);
+        addButton(3, "Yes", ebonlabyrinth.exitDungeon);
+    }
+    */
+
 }
 }
