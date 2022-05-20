@@ -6,6 +6,7 @@ package classes.Scenes.Dungeons
 {
 import classes.CockTypesEnum;
 import classes.EventParser;
+import classes.ItemType;
 import classes.PerkLib;
 import classes.Races;
 import classes.Scenes.SceneLib;
@@ -21,6 +22,8 @@ import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.StatusEffects;
 import classes.display.SpriteDb;
+
+import coc.view.ButtonDataList;
 
 public class EbonLabyrinth extends DungeonAbstractContent {
     //FLAGS:
@@ -106,7 +109,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         flags[kFLAGS.EBON_LABYRINTH] = 1;
         clearOutput();
         outputText("You find the entrance to what appears to be a tunnel made of stone. This place looks man made as if carved by humanoid hands yet sports no decoration. Just empty linear corridors and corners dimly lit by magical torches. On a wall you find a sign reading ");
-        outputText("-Woe to whom seeketh the black rose. Thy who enter beware, while riches you may find, death lurks in the Labyrinth deepest reaches. It ever hungers.- how charming. The ruin of an old campfire is all that's left of the previous adventurers to come here.\n\n");
+        outputText("-Woe to whom seeketh the black rose. Thy who enter beware, while riches you may find, death lurks in the Labyrinth's deepest reaches. It ever hungers.- how charming. The ruin of an old campfire is all that's left of the previous adventurers to come here.\n\n");
         outputText("<b>You found the Ebon Labyrinth.</b>\n\n");
         doNext(enterDungeon);
     }
@@ -189,12 +192,6 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             outputText("\n\n<b>You have a strange feeling that monsters here will be stronger than before. Maybe it's not too late to come back?</b>");
         else if (direction == DIR_UP)
             outputText("\n\n<b>The air here is cleaner. You hope that the monsters won't be too much of a problem anymore.</b>");
-        //check if unlocked
-        if (room == dungeons.clearRoomEL()) {
-            outputText("\n\nYou notice the familiar patterns in the corridors. Seems like there's nothing new to find here. Or not? The corridor slowly but inevitably leads you underground, and the monsters slowly become stronger.")
-            outputText("\nInvestigating your surroundings, you notice a small ladder leading down. You're sure the room below is still a part of the labyrinth, but loud noices hint you that that part is much deeper. The ladder is durable though - you can always return back up... unless you go even deeper through these intertwined corridors.");
-            outputText("\n\n<b>Labyrinth is (semi-)cleared. Endless mode unlocked!</b>");
-        }
         outputText("\n\nRooms explored: " + room);
         outputText("\n\nCurrent depth : " + depth);
         setDungeonButtonsEL();
@@ -246,6 +243,13 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             //award checking
             if (dungeons.checkEbonLabyrinthNotAwarded())
                 outputText("<b>New awards are available in 'Questlog' menu!</b>\n\n");
+            //cleared message
+            //check if unlocked
+            if (room == dungeons.clearRoomEL()) { //first time level 300
+                outputText("\n\nYou notice the familiar patterns in the corridors. Seems like you won't be able to find anything special down there. Or will you? The corridor slowly but inevitably leads you deeper underground, and the monsters slowly become stronger there. You're sure you'll still encounter big ones sometimes, no matter if you're looking forward to it or not. Focusing your attention, you can even hear the faint sounds of water far ahead - could it be that the fountain you just stumbled upon wasn't the only one in the labyrinth?");
+                outputText("\n\nInvestigating your surroundings, you notice a small ladder leading down. You're sure the room below is still a part of the labyrinth, but loud noices warn you that that part is much deeper. The ladder is durable though - you can always return back up... unless you descend even deeper through these intertwined corridors.");
+                outputText("\n\n<b>Labyrinth is (semi-)cleared. Endless mode unlocked!</b>");
+            }
         }
     }
 
@@ -346,13 +350,21 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             return true;
         }
         //Special encounters
+        //Room 49 - Alvina's quest chimera
         else if (room >= 49 && flags[kFLAGS.ALVINA_FOLLOWER] == 17) {
             chaosChimeraScene.encounter();
             return true;
         }
+        //Room 295 - Rathazul's joke fountain
         else if (room >= 295 && player.hasStatusEffect(StatusEffects.RathazulAprilFool) && player.statusEffectv3(StatusEffects.RathazulAprilFool) == 0) {
             incEncChance();
             encountersFountainOfPurity();
+            return true;
+        }
+        //Rooms AFTER boss, difficulty > 300 (max level).
+        else if (enemyLevelMod >= 6 && room > 50 && room % 50 == 1) {
+            incEncChance();
+            encountersUpgradeFountain(rand(2) == 0);
             return true;
         }
         //If passed - enemy
@@ -364,6 +376,76 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         //Increase chance otherwise
         incEncChance();
         return false;
+    }
+
+    private function encountersUpgradeFountain(isCorrupt:Boolean):void {
+        clearOutput();
+        outputText("While exploring the labyrinth you run into a strange fountain, which radiates " + (isCorrupt ? "black" : "white") + " magic like you have never seen before, the water flowing with gittering " + (isCorrupt ? "purple corruption" : "starlight") + ". Dipping an object and some additional materials into the font could have... unforeseen consequences.\n\n");
+        outputText("You can use the fountain's magic to bless or corrupt gear by using radiant shards and gems.");
+        menu();
+        addButton(0, "Dip Item", dipItemMenu, isCorrupt);
+        addButton(4, "Leave", playerMenu);
+
+        //=================================
+        function dipItemMenu(isCorrupt:Boolean):void {
+            var improvableItems:Array = [
+                [weapons.BFSWORD, weapons.NPHBLDE, weapons.EBNYBLD],
+                [weapons.DBFSWO, weapons.T_HEART, weapons.DORSOUL],
+                [weapons.MASTGLO, weapons.KARMTOU, weapons.YAMARG],
+                [weapons.KATANA, weapons.MASAMUN, weapons.BLETTER],
+                [weapons.W_STAFF, weapons.U_STAFF, weapons.N_STAFF],
+                [weapons.DEMSCYT, weapons.LHSCYTH, null],
+                [weapons.UGATANA, weapons.MOONLIT, weapons.C_BLADE],
+                [weapons.L__AXE, weapons.WG_GAXE, weapons.DE_GAXE],
+                [weapons.SPEAR, weapons.SESPEAR, weapons.DSSPEAR],
+                [weapons.JRAPIER, weapons.Q_GUARD, weapons.B_WIDOW],
+                [weapons.OTETSU, weapons.POCDEST, weapons.DOCDEST],
+                [weapons.BFTHSWORD, weapons.ARMAGED, weapons.CHAOSEA],
+                [weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
+                [weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
+                [shields.SANCTYN, shields.SANCTYL, shields.SANCTYD],
+                [armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR],
+                [armors.BLKIMONO, armors.IBKIMO, armors.TCKIMO],
+                [armors.BKIMONO, armors.IBKIMO, armors.TCKIMO],
+                [armors.PKIMONO, armors.IBKIMO, armors.TCKIMO],
+                [armors.RKIMONO, armors.IBKIMO, armors.TCKIMO],
+                [armors.WKIMONO, armors.IBKIMO, armors.TCKIMO],
+                [armors.SPKIMO, armors.OEKIMO, armors.OTKIMO],
+                [armors.CTPALAD, null, armors.CTBGUAR]
+            ];
+            clearOutput();
+            //TODO: gargoyle shit not added... yet? not my problem anyway, got scenes to hunt.
+            //https://docs.google.com/document/d/1SFSVm9A6431McXUq1B3R_47xme1owodcZSEDdma3r6U/
+            outputText("What item would you like to dip in the " + (isCorrupt ? "unholy" : "holy") + " waters?");
+            outputText("\n\n<b>You currently have " + player.keyItemvX("Radiant shard", 1) + " radiant shards.</b>")
+            //Celess
+            var selectfrom:int = isCorrupt ? 2 : 1;
+            var selectMenu:ButtonDataList = new ButtonDataList();
+            for (var i:int = 0; i < improvableItems.length; i++) {
+                if (improvableItems[i][selectfrom] == null) {/*do nothing*/
+                }
+                else {
+                    var item:ItemType = improvableItems[i][selectfrom];
+                    var from:ItemType = improvableItems[i][0];
+                    selectMenu.add(item.id, curry(improveItem, item, from)).disableIf(!player.hasItem(from), "You need a " + from + " as a base to create this item")
+                        .disableIf(player.keyItemvX("Radiant shard", 1) < 3, "You need at least three radiant shards in order to create this item.")
+                        .disableIf(player.gems < 10000, "You need at least 20 000 gems in order to create this item");
+                }
+            }
+            submenu(selectMenu, playerMenu);
+        }
+
+        function improveItem(item:ItemType, from:ItemType):void {
+            if (isCorrupt)
+                outputText("As you dip " + from.shortName + " in purple waters, corruption begins to cling to it like tar staining the material and transforming it into an unholy abomination. A few seconds later you finally retrieve the " + item.shortName + " from the fountain of corruption, highly satisfied with the results as it radiates with blasphemous power to defile anything it touches.");
+            else
+                outputText("As you dip " + from.shortName + " in the fountain, it begins to radiate with light the material transforming into a tool of divine power. A few seconds later you finally retrieve the " + item.shortName + " from the water, highly satisfied with the results as it radiates with power to scour the evil that plagues this land. ");
+            if(player.keyItemvX("Radiant shard", 1) == 3) player.removeKeyItem("Radiant shard");
+            else player.addKeyValue("Radiant shard",1,-3);
+            player.gems -= 20000;
+            player.destroyItems(from, 1);
+            inventory.takeItem(item, camp.returnToCampUseOneHour);
+        }
     }
 	
     private function encountersFountainOfPurity():void {

@@ -328,7 +328,7 @@ use namespace CoC;
 			if (!recalling)
 				addButton(4, "Leave", cleanupAfterCombat);
 			else
-				addButton(4, "Wake Up", camp.recallWakeUp);
+				addButton(4, "Wake Up", recallWakeUp);
 		}
 
 		//Imp gang
@@ -342,7 +342,7 @@ use namespace CoC;
 			if(!recalling && monster.HP <= monster.minHP()) outputText("The last of the imps collapses into the pile of his defeated comrades.  You're not sure how you managed to win a lopsided fight, but it's a testament to your new-found prowess that you succeeded at all.");
 			else outputText("The last of the imps collapses, pulling its demon-prick free from the confines of its loincloth.  Surrounded by masturbating imps, you sigh as you realize how enslaved by their libidos the foul creatures are.");
 			menu();
-            addButton(4, "Leave", !recalling ? cleanupAfterCombat : camp.recallWakeUp);
+            addButton(4, "Leave", !recalling ? cleanupAfterCombat : recallWakeUp);
             if(player.lust >= 33) {
 				outputText("\n\nFeeling a bit horny, you wonder if you should use them to sate your budding urges before moving on.  Do you rape them?");
                 addButtonIfTrue(0, "Male Rape", impGangGetsRapedByMale, "Req. a cock.", player.hasCock());
@@ -376,7 +376,7 @@ use namespace CoC;
                 player.sexReward("Default","Dick", true, false);
                 cleanupAfterCombat();
             }
-            else doNext(camp.recallWakeUp);
+            else doNext(recallWakeUp);
 		}
 
 		public function impGangGetsRapedByFemale():void {
@@ -403,7 +403,7 @@ use namespace CoC;
                 if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 50);
                 cleanupAfterCombat();
             }
-            else doNext(camp.recallWakeUp);
+            else doNext(recallWakeUp);
 		}
 
 		public function loseToImpMob():void {
@@ -545,7 +545,7 @@ use namespace CoC;
                 player.createKeyItem("Zetaz's Map",0,0,0,0);
                 cleanupAfterCombat();
             }
-            else doNext(camp.recallWakeUp);
+            else doNext(recallWakeUp);
         }
 
 		//[Release Zetaz 4 Info Win]

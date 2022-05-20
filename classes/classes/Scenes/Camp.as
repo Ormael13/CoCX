@@ -7,7 +7,6 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Items.Consumables.SimpleConsumable;
-import classes.Scenes.Dungeons.D3.IncubusMechanicScenes;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.Places.WoodElves;
@@ -2081,7 +2080,7 @@ public class Camp extends NPCAwareContent{
 		if (AdventurerGuild.Slot01Cap > 0) addButton(9, "Quest Loot", questItemsBag).hint("Manage your bag with quest items.");
 		else addButtonDisabled(9, "Quest Loot", "You have to join Adventure Guild to have bag for quest items.");
 		addButton(10, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
-		addButton(11, "Recall", recallScenes).hint("Recall some of the unique events happened during your adventure.");
+		addButton(11, "Recall", sceneHunter.recallScenes).hint("Recall some of the unique events happened during your adventure.");
 		if (player.explored >= 1) addButton(12, "Dummy", DummyTraining).hint("Train your mastery level on this dummy.");
 		if (flags[kFLAGS.LETHICE_DEFEATED] > 0) addButton(13, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures with your items, and gems carried over. The game will also get harder.");
 		else addButtonDisabled(13, "Ascension", "Don't you have a job to finish first. Like... to defeat someone, maybe Lethice?");
@@ -3689,7 +3688,7 @@ public class Camp extends NPCAwareContent{
 				} else outputText("Luna hugs you tightly, almost possessively so as you both doze off to sleep.");
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Samirah" && flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) {
 				outputText("As you both head to sleep, Samirah slithers to you and coils her tail around " + ((player.lowerBody == 3)? "yours" : "your lower half") + ", wrapping her arms around your torso as she rests her head on your shoulder. Her body is cold and she looks at you as if in a daze.");
-				if (player.isNaga()) outputText(" She’s not alone either. It indeed took you a while to realise that you are also cold blooded now. The cold night air sure puts you in a similar state as of late.");
+				if (player.isNaga()) outputText(" She’s not alone either. It indeed took you a while to realise that you are also cold-blooded now. The cold night air sure puts you in a similar state as of late.");
 				outputText("\n\n\"<i>Sweet dreams [name], till morning and sunshine come.</i>\"\n");
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Belisa" && BelisaFollower.BelisaInCamp) {
 				outputText("You decide to sleep with Belisa tonight. You help her close up her shop, packing the bands away, and climb into her hammock/bed, putting a hand on her cheek. Belisa pulls you towards her, resting one of her pillows under each of your heads. She hugs your arm, head on your shoulder, and you can’t help but feel safe as she expertly pulls a light blanket over the two of you. ");
@@ -4746,111 +4745,6 @@ public function rebirthFromBadEnd():void {
 		if (flags[kFLAGS.ANT_KIDS] > 0 || flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] > 0) undpop += (flags[kFLAGS.ANT_KIDS] + flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT]);
 		return undpop;
 	}
-
-    public function recallScenes():void {
-        clearOutput();
-        outputText("You close your eyes, remembering all this life put you through. All your fights, friends... lovers.\n\n");
-        outputText("Though many things are still repeatable, you still remember some unique events of your life, and one question bothers you - what would happen if you were different at the moment? How would you and your companions look and behave right now?\n");
-		outputText("Falling asleep, you think about it, recalling the exact time and place...\n\n");
-		outputText("\n\n<b>This part is WIP, and will be updated with SceneHunter.</b>");
-		outputText("\n<i>All scenes listed here are unique one-timers that contained multiple choices or different variations for player's - or even followers' - race or body parts. When recalling, your <b>current</b> body and game state is used, so you can try to explore more options for yourself!");
-		outputText("\nOf course, you need to unlock the scene in the game first. The hints are provided above the buttons.");
-		outputText("\nIt's recommended to enable SceneHunter 'Print Checks' feature to keep track of all hidden checks during these scenes.</i>");
-        recalling = true; //Setting the flag to disable everything but text
-        menu();
-        //Marble scene
-		if (flags[kFLAGS.MARBLE_PURIFIED] == 1)
-			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight).hint("The punishment for Marble's bitchy sister.");
-		//Excellia slave first scene
-		if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2)
-			addButton(1, "Excellia Slv", SceneLib.excelliaFollower.ExcelliaPathChoiceMakeSlave).hint("Excellia acknowledges herself as your slave.");
-        //Phylla demon fuck
-		if (flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] || flags[kFLAGS.PHYLLA_SAVED]) {
-            if (player.cor >= 66 - player.corruptionTolerance && player.gender > 0)
-                addButton(2, "PhyllaCart", SceneLib.desert.antsScene.demonsFuckAntgirl).hint("Maybe you should have left Phylla to demons and watch them having fun?");
-            else addButtonDisabled(2, "PhyllaCart", "You must be corrupted and not genderless to recall this.");
-        }
-		//Phylla keks
-		if (flags[kFLAGS.ANT_WAIFU] || flags[kFLAGS.PHYLLA_STAY_HOME])
-			addButton(3, "PhyFirstTime", SceneLib.desert.antsScene.antGirlGoodEnd).hint("Your first time with Phylla.");
-        //Tamani first time
-		if (flags[kFLAGS.TAMANI_MET] == 1 && player.hasCock())
-			addButton(4, "TamaniFirst", SceneLib.forest.tamaniScene.tamaniFirstTimeConsentual).hint("First time with Tamani.");
-		//Tamani first time
-		if (player.hasKeyItem("Deluxe Dildo") >= 0 && player.hasVagina())
-			addButton(5, "TamaniLes", SceneLib.forest.tamaniScene.preferTamaniFemdom).hint("Girl-on-girl event with Tamani.");
-		//Erlking revenge
-		if (player.hasKeyItem("Golden Antlers") >= 0 && player.gender > 0)
-			addButton(6, "Erlk.Revenge", SceneLib.forest.erlkingScene.howDareYou).hint("You show Erlking <b>who</b> is the hunter here.");
-		//Nightmare
-		if (celessScene.questFinishedNightmare)
-			addButton(7, "Nightmare", SceneLib.forest.nightmareScene.nightmareVictory).hint("Demonic bicorn fucks you into a pile of mess.");
-		//Sapphire
-		if (flags[kFLAGS.SAPPHIRE_AFFECTION] == 100)
-			addButton(8, "SapphireFirst", SceneLib.templeofdivine.sapphire.sapphireFirstTime).hint("Sapphire discovers carnal pleasures");
-		//Venus cock scenes
-		if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && flags[kFLAGS.KAIJU_COCK] == 1)
-			addButton(9, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus).hint("Venus discovers her new cock.");
-
-		addButton(13, "Dungeons", recallScenes_dungeons);
-		addButton(14, "Wake Up", recallWakeUp);
-	}
-
-	public function recallScenes_dungeons():void {
-		menu();
-		if (flags[kFLAGS.SANDWITCH_MOB_DEFEATED]) addButton(0, "SandWitchMob", SceneLib.dungeons.desertcave.yoYouBeatUpSomeSandWitchesYOUMONSTER).hint("Punish some sand witches for attacking you.");
-		if (flags[kFLAGS.FACTORY_FOUND]) addButton(1, "Factory", recallScenes_factory);
-		if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(2, "Deep Cave", recallScenes_deepCave);
-		if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(3, "Stronghold", recallScenes_d3);
-		addButton(14, "Back", recallScenes);
-	}
-
-	public function recallScenes_factory():void {
-		menu();
-		if (flags[kFLAGS.FACTORY_SUCCUBUS_DEFEATED])
-			addButton(0, "Sec.Succubus", SceneLib.dungeons.factory.secretarialSuccubusDefeated).hint("Do you have a fetish for sharply-dressed demon girls?");
-		if (flags[kFLAGS.FACTORY_INCUBUS_DEFEATED])
-			addButton(1, "Inc.Mechanic", SceneLib.dungeons.factory.incubusMechanicDefeated).hint("What, again?");
-		addButton(14, "Back", recallScenes_dungeons);
-	}
-
-	public function recallScenes_deepCave():void {
-		menu();
-		//Doppel
-		if (flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED])
-			addButton(0, "Imp Horde", SceneLib.dungeons.deepcave.impGangVICTORY).hint("I'll never stop at one. YOU'LL TAKE THEM ALL ON!");
-		if (flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 0 || flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON] > 0)
-			addButton(1, "Vala (Freed)", SceneLib.vala.freeValazLooseCoochie).hint("Vala tries to enjoy her freedom and fuck the first person she sees.");
-        if (flags[kFLAGS.DEFEATED_ZETAZ])
-			addButton(2, "Zetaz", SceneLib.dungeons.deepcave.defeatZetaz).hint("Maybe the little asshole should have been tortured a bit more?");
-		if (flags[kFLAGS.INVESTIGATED_VALA_AFTER_ZETAZ_DEFEATED])
-			addButton(3, "Vala (Later)", SceneLib.vala.leftValaAlone).hint("Vala has spent some time alone and is VERY bored..");
-		addButton(14, "Back", recallScenes_dungeons);
-	}
-
-	public function recallScenes_d3():void {
-		menu();
-		if (flags[kFLAGS.D3_MIRRORS_SHATTERED])
-			addButton(0, "Doppelganger", SceneLib.d3.doppleganger.punchYourselfInTheBalls).hint("Go fuck yourself!");
-		if (flags[kFLAGS.DRIDERINCUBUS_DEFEATED])
-			addButton(1, "DriderI & M", SceneLib.d3.driderIncubus.beatTheSpooderbutt).hint("Recall the glorious defeat of the drider-incubus and maybe take your 'reward'.");
-		if (flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0)
-			addButton(2, "HermCentaur", SceneLib.d3.hermCentaur.beatThePony).hint("Get your 'reward' for beating the herm centaur in the stronghold.");
-		if (flags[kFLAGS.MINOTAURKING_DEFEATED] > 0)
-			addButton(3, "M.King & Exc", SceneLib.d3.minotaurKing.theKingIsDeadLongLiveTheKing).hint("If you didn't have time or the mood for using 2 cowsluts before fighting Lethice, you can do it in your imagination!");
-		if (flags[kFLAGS.LETHICE_DEFEATED] > 0)
-			addButton(4, "Lethice", SceneLib.d3.lethice.defeated).hint("While you can't make her your eternal slave, you can punish her for her arrogance in your memories as much as you want.");
-		if (flags[kFLAGS.D3_MECHANIC_LAST_GREET] == IncubusMechanicScenes.MECHANIC_FOUGHT)
-			addButton(5, "Inc.Mechanic", SceneLib.d3.incubusMechanic.beatDaMechanic).hint("What, again?");
-		addButton(14, "Back", recallScenes_dungeons);
-	}
-
-    public function recallWakeUp():void {
-		clearOutput();
-		outputText("You wake up from your dreams, satisfied. Well, this was a fun ride. But you still a lot ahead, so daydreaming is not the best way to waste your time. So... time to experience a few fresh adventures, so you'll have more to recall later?");
-        recalling = false; //EVERY recall scene must return here to clear the flag.
-        doNext(returnToCampUseOneHour);
-    }
 
 }
 }

@@ -1119,7 +1119,7 @@ public class MarblePurification extends NPCAwareContent{
         if (!recalling)
             doNext(calmMurblesFatAssDown);
         else
-            doNext(camp.recallWakeUp);
+            doNext(recallWakeUp);
     }
 
 	//Calm Marble down

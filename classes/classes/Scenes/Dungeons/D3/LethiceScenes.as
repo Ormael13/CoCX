@@ -535,7 +535,7 @@ public class LethiceScenes extends BaseContent
 				player.createStatusEffect(StatusEffects.LethiceRedemed, 0, 0, 0, 0);
 				saveExport();
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		private function joinHer():void
@@ -651,7 +651,7 @@ public class LethiceScenes extends BaseContent
 				flags[kFLAGS.GAME_END] = GAME_END_CONSORT;
 				saveExport();
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -809,7 +809,7 @@ public class LethiceScenes extends BaseContent
 				addButton(0, "Kill Her", killHer);
 				addButton(1, "Leave Her", leaveHer);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		private function killHer():void

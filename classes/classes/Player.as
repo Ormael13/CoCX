@@ -8721,6 +8721,13 @@ use namespace CoC;
 		public function get additionalTransformationChances():Number {
 			var additionalTransformationChancesCounter:Number = 0;
 			if (hasPerk(PerkLib.HistoryAlchemist) || hasPerk(PerkLib.PastLifeAlchemist)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Enhancement)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Fusion)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Enchantment)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Refinement)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Saturation)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Perfection)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.Creationism)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.EzekielBlessing)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.TransformationResistance)) additionalTransformationChancesCounter--;
 			return additionalTransformationChancesCounter;

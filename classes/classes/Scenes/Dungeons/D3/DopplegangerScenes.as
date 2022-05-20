@@ -210,7 +210,7 @@ import classes.PerkLib;
 					flags[kFLAGS.D3_MIRRORS_SHATTERED] = 1;
 					cleanupAfterCombat(d3.resumeFromFight);
 				}
-				else doNext(camp.recallWakeUp);
+				else doNext(recallWakeUp);
 			}
 		}
 		
@@ -224,7 +224,7 @@ import classes.PerkLib;
 				menu();
 				cleanupAfterCombat(d3.resumeFromFight);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 		
 		public function inSovietCoCSelfFucksYou():void

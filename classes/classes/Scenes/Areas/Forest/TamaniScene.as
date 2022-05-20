@@ -248,7 +248,7 @@ public function tamaniFirstTimeConsentual():void {
 			player.trainStat("lib", 2, 100);
 			doNext(camp.returnToCampUseOneHour);
 		}
-		else doNext(camp.recallWakeUp);
+		else doNext(recallWakeUp);
 	}
 }
 
@@ -1035,7 +1035,7 @@ private function acceptTamaniFacesits():void {
 		dynStats("lus", 20 + player.lib / 20);
 		doNext(camp.returnToCampUseOneHour);
 	}
-	else doNext(camp.recallWakeUp);
+	else doNext(recallWakeUp);
 }
 }
 }

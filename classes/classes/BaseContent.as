@@ -906,6 +906,8 @@ import coc.xxc.StoryContext;
 			CoC.instance.achievements = val;
 		}
 
+		//==========================
+		//SceneHunter shortcuts
         protected function get sceneHunter():SceneHunter {
             return CoC.instance.gameSettings.sceneHunter_inst;
         }
@@ -915,6 +917,10 @@ import coc.xxc.StoryContext;
 		protected function set recalling(val:Boolean):void {
 			CoC.instance.gameSettings.sceneHunter_inst._recalling = val;
 		}
+		protected function recallWakeUp():void {
+			CoC.instance.gameSettings.sceneHunter_inst.recallWakeUpImpl();
+		}
+		//============================
 
 		protected function showStatDown(arg:String):void
 		{

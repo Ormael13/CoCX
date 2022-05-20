@@ -3905,7 +3905,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.EyesHuman, doOutput);
 
-	    TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["blue", "green", "teal"]), doOutput);
+	    TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["blue", "green", "turquoise", "light green"]), doOutput);
 
 	    desc += "Bright lights flash into your vision as your eyes glow with electric light. Blinded, you rapidly shake your head around, trying to clear your vision. It takes a moment, but your vision eventually returns to normal. Curious, you go over to a nearby puddle and find <b>glowing [eyecolor] bestial slitted eyes staring back at you.</b>";
 

@@ -30,23 +30,12 @@ public class EmberTF extends BaseContent
 
 public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	var changes:int = 0;
-	var changeLimit:int = 2;
-	if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
-	if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
-	if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
-	if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
-	if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
-	if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
-	if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
-	if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
-	if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
-	if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
+	var changeLimit:int = 2 + player.additionalTransformationChances;
 	//Temporary storage
 	var temp:Number = 0;
 	if (player.blockingBodyTransformations()) changeLimit = 0;
 	//Gain Dragon Dick
 	if (changes < changeLimit && player.dragonCocks() < player.cockTotal() && rand(3) == 0) {
-		temp = 0;
 		var choices:Array = [];
 		var select:int;
 		temp = player.cockTotal();

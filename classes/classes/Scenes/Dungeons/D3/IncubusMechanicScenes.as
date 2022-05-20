@@ -186,7 +186,7 @@ doNext(SceneLib.d3.exitD3);
 				dynStats("lib+", 5, "cor+", 5, "lus+", 100);
 				doNext(SceneLib.d3.exitD3);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 
 		public function beatDaMechanic(hpVictory:Boolean = false):void
@@ -214,7 +214,7 @@ doNext(SceneLib.d3.exitD3);
 			outputText("He proves blessedly easy to kill, and you roll the body off the cliffs to avoid alerting any of Lethice's other ilk.");
 
 			if (!recalling) cleanupAfterCombat(SceneLib.d3.resumeFromFight);
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 
 		private function letMechanicGo(hpVictory:Boolean):void
@@ -231,7 +231,7 @@ doNext(SceneLib.d3.exitD3);
 			outputText("\n\nThe incubus mechanic flies away for good, though you can’t can say whether he will wreak havoc or live quietly.");
 
 			if (!recalling) cleanupAfterCombat(SceneLib.d3.resumeFromFight);
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 
 		private function buttfuckTheMechanic(hpVictory:Boolean):void
@@ -326,7 +326,7 @@ doNext(SceneLib.d3.exitD3);
 				dynStats("cor+", 5);
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 
 		private static const MECHANIC_DEMON_COCK:int = 0;
@@ -510,7 +510,7 @@ doNext(SceneLib.d3.exitD3);
 				dynStats("cor+", 5);
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
         }
 
 		public function mechanicFuckedYouUp(hpVictory:Boolean, pcCameWorms:Boolean):void

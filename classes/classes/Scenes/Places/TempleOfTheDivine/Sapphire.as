@@ -165,7 +165,7 @@ use namespace CoC;
 				sapphireAffection(100); //jump to max - failsafe.
 				doNext(camp.returnToCampUseOneHour);
 			}
-			else doNext(camp.recallWakeUp);
+			else doNext(recallWakeUp);
 		}
 
 		public function SapphireGargoyleDoubleTailfuck():void {

@@ -1429,4 +1429,4 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		return false;
 	}
 	}
-}
+}

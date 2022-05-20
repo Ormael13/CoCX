@@ -777,7 +777,7 @@ public class ErlKingScene extends BaseContent
 					}
 					else doNext(camp.returnToCampUseOneHour);
 				}
-				else doNext(camp.recallWakeUp);
+				else doNext(recallWakeUp);
 			}
 		}
 

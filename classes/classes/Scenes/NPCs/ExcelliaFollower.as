@@ -143,7 +143,7 @@ public function ExcelliaPathChoiceMakeSlave():void {
             doNext(camp.returnToCampUseFourHours);
         }
         else
-            doNext(camp.recallWakeUp);
+            doNext(recallWakeUp);
     }
 }
 

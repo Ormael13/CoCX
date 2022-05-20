@@ -261,7 +261,7 @@ public class DungeonEngine extends DungeonAbstractContent {
 
     //returns the room required for clearing
     public function clearRoomEL():int {
-        return 300;
+        return 301;
     }
     //returns the room required for the next award
     public function nextAwardEL():int {
@@ -352,6 +352,8 @@ public class DungeonEngine extends DungeonAbstractContent {
     }
 
     //Old button function here. The function itself was moved into EL, but can be brought back for new dungeons.
+	
+	//IT"S FOR NEW DUNGEON SIMILAR TO BOTH EL AND RD SO PLEASE NOT KEEP TRYING TO DELETE THAT CODE -.-
     /*
     public function navigateToRoomEL(room:Function = null):void {
         if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
@@ -386,6 +388,6 @@ public class DungeonEngine extends DungeonAbstractContent {
         addButton(3, "Yes", ebonlabyrinth.exitDungeon);
     }
     */
-    
+
 }
 }
