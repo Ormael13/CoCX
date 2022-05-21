@@ -13,7 +13,6 @@ import classes.Items.JewelryLib;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
-import classes.Items.WeaponRangeLib;
 import classes.Monster;
 import classes.PerkLib;
 import classes.PotionType;
@@ -2249,7 +2248,7 @@ public class Combat extends BaseContent {
 				if (flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 2 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4)) {
 					if (summonedEpicElemental) {
 						flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 1;
-						summonedEpicElemental = false;
+						//summonedEpicElemental = false;
 					}
 					else flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 2;
 					if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
@@ -5963,7 +5962,7 @@ public class Combat extends BaseContent {
                     outputText("Seeing your [weapon] raised, the anemone looks down at the water, angles her eyes up at you, and puts out a trembling lip.  ");
                     if (player.cor < 75) {
                         outputText("You stare into her hangdog expression and lose most of the killing intensity you had summoned up for your attack, stopping a few feet short of hitting her.\n");
-                        damage = 0;
+                        //damage = 0;
                         //Kick back to main if no damage occured!
                         if (monster.HP > 0 && monster.lust < monster.maxLust()) {
                             if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
@@ -5986,7 +5985,7 @@ public class Combat extends BaseContent {
                     outputText("Seeing your [weapon] raised, the anemone looks down at the ocean, angles her eyes up at you, and puts out a trembling lip.  ");
                     if (player.cor < 75) {
                         outputText("You stare into her hangdog expression and lose most of the killing intensity you had summoned up for your attack, stopping a few feet short of hitting her.\n");
-                        damage = 0;
+                        //damage = 0;
                         //Kick back to main if no damage occured!
                         if (monster.HP > 0 && monster.lust < monster.maxLust()) {
                             if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
@@ -6061,7 +6060,7 @@ public class Combat extends BaseContent {
                     //DOING BASIC EXTRA NATURAL ATTACKS
                     outputText("You savagely rend [monster a] [monster name] with your natural weapons.");
                     if (player.hasPerk(PerkLib.LightningClaw)) {
-						var damageLC:Number = 0;
+						var damageLC:Number;
                         damageLC = 6 + rand(3);
                         if (player.hasPerk(PerkLib.SensualLover)) damageLC += 2;
                         if (player.hasPerk(PerkLib.Seduction)) damageLC += 5;
@@ -6748,7 +6747,7 @@ public class Combat extends BaseContent {
                 // Stunning the doppleganger should now "buy" you another round.
             }
             if ((damage <= 0) && ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll))) {
-                damage = 0;
+                //damage = 0;
                 outputText("Your attacks are deflected or blocked by [monster a] [monster name].");
             } else {
                 if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= historyFighterBonus();
@@ -12606,7 +12605,7 @@ public class Combat extends BaseContent {
         if (player.rearBody.type == RearBody.DISPLACER_TENTACLES) TeaseFunctionList.push(RandomTeaseDisplacerMilkingInitiate);
         if (player.lowerBody == LowerBody.GOO){
             TeaseFunctionList.push(RandomTeaseSlime);
-            TeaseFunctionList.push(RandomTeaseSlimeInsert());
+            TeaseFunctionList.push(RandomTeaseSlimeInsert);
         }
         if (player.countCocksOfType(CockTypesEnum.ANEMONE) > 0) TeaseFunctionList.push(RandomTeaseAnemone);
         if (player.hasPerk(PerkLib.ElectrifiedDesire)) TeaseFunctionList.push(RandomTeaseRaiju);
@@ -14630,8 +14629,7 @@ public class Combat extends BaseContent {
 		if (flags[kFLAGS.PLAYER_COMPANION_1] != "") partySize += 1;
 		if (flags[kFLAGS.PLAYER_COMPANION_2] != "") partySize += 1;
 		if (flags[kFLAGS.PLAYER_COMPANION_3] != "") partySize += 1;
-		if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji) && partySize == 2) return true;
-		else return false;
+		return player.hasStatusEffect(StatusEffects.CombatFollowerZenji) && partySize == 2;
 	}
 
     public function struggleCreepingDoom():void {
@@ -15894,7 +15892,7 @@ public class Combat extends BaseContent {
 	}
 	
 	public function debuffsOrDoTDuration(duration:Number):Number {
-		var duration:Number = duration;
+		//var duration:Number = duration;
 		if (player.statStore.hasBuff("Crossed Holy Band")) {
 			duration *= 0.5;
 			Math.round(duration);
