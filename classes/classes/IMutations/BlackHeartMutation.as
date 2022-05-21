@@ -19,10 +19,10 @@ import classes.Player;
                 descS += "Increased Lust strike power, Empower Fascinate";
             }
             if (pTier >= 2){
-                descS += ", Adds extra Lust damage to Lust strike dependent on Wisdom (Wis/10) and lowers Fascinate CD by 1";
+                descS += ", Adds extra Lust damage to Lust strike scaling with Wisdom (Wis/10). Lowers Fascinate Cooldown by 1";
             }
             if (pTier >= 3){
-                descS += ", Adds extra Lust damage to Lust strike dependent on Sensitivity (Sensitivity/10) and extends Facinate Stun to 2 turns";
+                descS += ", Adds extra Lust damage to Lust strike, scaling with Sensitivity (Sensitivity/10). Facinate Stun lasts 2 turns";
             }
             if (descS != "")descS += ".";
             return descS;
