@@ -28,7 +28,7 @@ public class LifetapSpell extends AbstractHexSpell {
 	}
 	
 	public override function hpCost():Number {
-		return Math.round(player.maxHP() * .25);
+		return Math.round(player.maxOverHP() * .25);
 	}
 	
 	override protected function usabilityCheck():String {
