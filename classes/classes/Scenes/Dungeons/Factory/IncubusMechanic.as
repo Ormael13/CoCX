@@ -7,6 +7,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -14,20 +15,16 @@ public class IncubusMechanic extends Monster {
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (flags[kFLAGS.D3_DISCOVERED] == 0) SceneLib.dungeons.factory.incubusMechanicDefeated(hpVictory);
+			if (DungeonAbstractContent.dungeonLoc == DungeonAbstractContent.DUNGEON_FACTORY_FURNACE_ROOM) SceneLib.dungeons.factory.incubusMechanicDefeated(hpVictory);
 			else SceneLib.d3.incubusMechanic.beatDaMechanic(hpVictory);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (flags[kFLAGS.D3_DISCOVERED] == 0)
-			{
+			if (DungeonAbstractContent.dungeonLoc == DungeonAbstractContent.DUNGEON_FACTORY_FURNACE_ROOM)
 				wonInDungeon1(hpVictory, pcCameWorms);
-			}
 			else
-			{
 				wonInDungeon3(hpVictory, pcCameWorms);
-			}
 		}
 		
 		private function wonInDungeon1(hpVictory:Boolean, pcCameWorms:Boolean):void
