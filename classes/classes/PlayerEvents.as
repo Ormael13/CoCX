@@ -231,8 +231,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (flags[kFLAGS.SIDONIE_RECOLLECTION] > 0) flags[kFLAGS.SIDONIE_RECOLLECTION]--;
 			if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) {
 				if (flags[kFLAGS.LUNA_JEALOUSY] < 400) flags[kFLAGS.LUNA_JEALOUSY]++;
-				if ((flags[kFLAGS.LUNA_FOLLOWER] == 6 || flags[kFLAGS.LUNA_FOLLOWER] == 8 || flags[kFLAGS.LUNA_FOLLOWER] == 10 || flags[kFLAGS.LUNA_FOLLOWER] == 12 || flags[kFLAGS.LUNA_FOLLOWER] == 14 || flags[kFLAGS.LUNA_FOLLOWER] == 16) && flags[kFLAGS.LUNA_JEALOUSY] < 100) flags[kFLAGS.LUNA_FOLLOWER]--;
-				if ((flags[kFLAGS.LUNA_FOLLOWER] == 5 || flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 9 || flags[kFLAGS.LUNA_FOLLOWER] == 11 || flags[kFLAGS.LUNA_FOLLOWER] == 13 || flags[kFLAGS.LUNA_FOLLOWER] == 15) && flags[kFLAGS.LUNA_JEALOUSY] >= 100 && (CoC.instance.model.time.hours > 6 && CoC.instance.model.time.hours < 23)) SceneLib.lunaFollower.warrningAboutJelously();
+				if ((flags[kFLAGS.LUNA_FOLLOWER] %2 == 0 && flags[kFLAGS.LUNA_FOLLOWER] > 4) && flags[kFLAGS.LUNA_JEALOUSY] < 100) flags[kFLAGS.LUNA_FOLLOWER]--;
+				if ((flags[kFLAGS.LUNA_FOLLOWER] %2 == 1) && flags[kFLAGS.LUNA_JEALOUSY] >= 100 && (CoC.instance.model.time.hours > 6 && CoC.instance.model.time.hours < 23)) SceneLib.lunaFollower.warrningAboutJelously();
 			}
 			//Zenji loneliness
 			if (flags[kFLAGS.ZENJI_PROGRESS] == 11) player.addStatusValue(StatusEffects.ZenjiModificationsList, 1, 1);
@@ -834,52 +834,48 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				flags[kFLAGS.LUNA_MOON_CYCLE]++;
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] > 8) flags[kFLAGS.LUNA_MOON_CYCLE] = 1;
 				if (player.hasPerk(PerkLib.Lycanthropy)) {
-					var changeV:Number = 10 * (player.newGamePlusMod() + 1);
-					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 5) {
-						outputText("<b>\nYou can’t help but notice the moon is almost full as it rises up.  It seems transfixing like it is calling to you.");
-						outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>\n");
-						player.statStore.replaceBuffObject({ 'str': 10,'tou': 10,'spe': 10}, 'Lycanthropy', { text: 'Lycanthropy'});
-						player.setPerkValue(PerkLib.Lycanthropy,1,10);
+					var changeV:Number = (player.newGamePlusMod() + 1);
+					switch (flags[kFLAGS.LUNA_MOON_CYCLE]) {
+						case 1:
+							changeV *= 30;
+							outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
+							break;
+						case 2:
+							changeV *= 20;
+							outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
+							break;
+						case 3:
+							changeV *= 10;
+							outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
+							break;
+						case 4:
+							changeV = 0;
+							outputText("<b>\nIt's a new moon tonight, you feel somewhat weak.</b>\n");
+							break;
+						case 5:
+							changeV *= 10;
+							outputText("<b>\nYou can’t help but notice the waxing moon as it rises up.  It seems transfixing like it is calling to you.");
+							outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>\n");
+							break;
+						case 6:
+							changeV *= 20;
+							outputText("<b>\nWhen the half-moon appears it causes your heart to race with excitement.  You hearing seems better than ever.  Every breath brings a rush of smells through your nose that seem much more pronounced than they should.");
+							outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>\n");
+							break;
+						case 7:
+							changeV *= 30;
+							outputText("<b>\nYou gaze at the moon and it seems to gaze back into you.   Something is coming and it won’t be long now.   You feel like your skin is crawling.  It feels like tear out of your body and be born anew.");
+							outputText("\n\nYou feel your might increasing as the moon draws closer to fullness. It's almost time.</b>\n");
+							break;
+						case 8:
+							changeV *= 40;
+							outputText("<b>\nYou are at the peak of your strength, it's a full moon tonight and you feel yourself burning with maddening desire as you go into " + player.mf("rut your cock hardening and dripping precum at the prospect of impregnating a bitch womb full of your lupine seeds","heat your womb aching for the fresh semen of a virile male.") + "</b>\n.");
+							if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
+							else if (player.hasVagina()) player.goIntoHeat(false);
+							break;
 					}
-					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 6) {
-						outputText("<b>\nWhen the almost-full moon appears it causes your heart to race with excitement.  You hearing seems better than ever.  Every breath brings a rush of smells through your nose that seem much more pronounced than they should.");
-						outputText("\n\nYou feel your might increasing as the moon draws closer to fullness.</b>\n");
-						player.statStore.replaceBuffObject({ 'str': 20,'tou': 20,'spe': 20}, 'Lycanthropy', { text: 'Lycanthropy'});
-						player.setPerkValue(PerkLib.Lycanthropy,1,20);
-					}
-					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 7) {
-						outputText("<b>\nYou gaze at the moon and it seems to gaze back into you.   Something is coming and it won’t be long now.   You feel like you are crawling in your skin.  It feels like tear out of your body and be born anew.");
-						outputText("\n\nYou feel your might increasing as the moon draws closer to fullness. It's almost time.</b>\n");
-						player.statStore.replaceBuffObject({ 'str': 30,'tou': 30,'spe': 30}, 'Lycanthropy', { text: 'Lycanthropy'});
-						player.setPerkValue(PerkLib.Lycanthropy,1,30);
-					}
-					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) {
-						outputText("<b>\nYou are at the peak of your strength, it's a full moon tonight and you feel yourself burning with maddening desire as you go into " + player.mf("rut your cock hardening and dripping precum at the prospect of impregnating a bitch womb full of your lupine seeds","heat your womb aching for the fresh semen of a virile male.") + "</b>\n.");
-						player.statStore.replaceBuffObject({ 'str': 40,'tou': 40,'spe': 40}, 'Lycanthropy', { text: 'Lycanthropy'});
-						player.setPerkValue(PerkLib.Lycanthropy,1,40);
-						if (player.hasCock() || (player.gender == 3 && rand(2) == 0)) player.goIntoRut(false);
-						else if (player.hasVagina()) player.goIntoHeat(false);
-					}
-					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1) {
-						outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
-						player.statStore.replaceBuffObject({ 'str': 30,'tou': 30,'spe': 30}, 'Lycanthropy', { text: 'Lycanthropy'});
-						player.setPerkValue(PerkLib.Lycanthropy,1,30);
-					}
-					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2) {
-						outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
-						player.statStore.replaceBuffObject({ 'str': 20,'tou': 20,'spe': 20}, 'Lycanthropy', { text: 'Lycanthropy'});
-						player.setPerkValue(PerkLib.Lycanthropy,1,20);
-					}
-					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3) {
-						outputText("<b>\nThe moon is waning, you are feeling less powerful.</b>\n");
-						player.statStore.replaceBuffObject({ 'str': 10,'tou': 10,'spe': 10}, 'Lycanthropy', { text: 'Lycanthropy'});
-						player.setPerkValue(PerkLib.Lycanthropy,1,10);
-					}
-					if (flags[kFLAGS.LUNA_MOON_CYCLE] == 4) {
-						outputText("<b>\nIt's a new moon tonight, you feel somewhat weak.</b>\n");
-						player.statStore.replaceBuffObject({ 'str': 0,'tou': 0,'spe': 0}, 'Lycanthropy', { text: 'Lycanthropy'});
-						player.setPerkValue(PerkLib.Lycanthropy,1,0);
-					}
+					player.statStore.replaceBuffObject({ 'str': changeV,'tou': changeV,'spe': changeV}, 'Lycanthropy', { text: 'Lycanthropy'});
+					player.setPerkValue(PerkLib.Lycanthropy,1,changeV);
 					needNext = true;
 				}
 				if (player.hasStatusEffect(StatusEffects.MitziIzmaDaughters)) player.removeStatusEffect(StatusEffects.MitziIzmaDaughters);
