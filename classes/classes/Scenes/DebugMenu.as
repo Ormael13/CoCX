@@ -788,9 +788,9 @@ public class DebugMenu extends BaseContent
 			var body:BodyData = player.bodyData();
 			for each (var race:Race in Race.AllRacesByName) {
 				var score:int = race.totalScore(body);
-				//if (score == 0) continue;
+				if (score == 0) continue;
 				outputText("<b>"+race.name+" score: "+score+"</b>\n");
-				outputText(race.printDetails(body));
+				//outputText(race.printDetails(body));
 			}
 			flushOutputTextToGUI();
 		}

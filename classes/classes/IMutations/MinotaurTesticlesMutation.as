@@ -7,6 +7,7 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Player;
+import classes.Races;
 
 public class MinotaurTesticlesMutation extends IMutationPerkType
     {
@@ -62,9 +63,7 @@ public class MinotaurTesticlesMutation extends IMutationPerkType
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.femininity <= 5;
                     }, "5- feminity")
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.minotaurScore() >= 10;
-                    }, "Minotaur race");
+                    .requireRace(Races.MINOTAUR)
                 }
                 else{
                     var pLvl:int = pTier * 30;

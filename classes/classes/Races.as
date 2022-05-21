@@ -21,11 +21,11 @@ public class Races {
 	public static const FOX:FoxRace                        = new FoxRace(15);
 	public static const FERRET:FerretRace                  = new FerretRace(16);
 	public static const KITSUNE:KitsuneRace                = new KitsuneRace(17);
-	public static const HORSE:Race = new Race("Horse",18, "horseScore", 7);
-	public static const UNICORN:Race = new Race("Unicorn",19,"unicornScore", 8);
-	public static const CENTAUR:Race = new Race("Centaur",20, "centaurScore", 8);
-	public static const MINOTAUR:Race = new Race("Minotaur",21,"minotaurScore", 10);
-	public static const COW:Race = new Race("Cow",22,"cowScore", 10);
+	public static const HORSE:HorseRace                    = new HorseRace(18);
+	public static const UNICORN:UnicornRace                = new UnicornRace(19);
+	public static const CENTAUR:CentaurRace                = new CentaurRace(20);
+	public static const MINOTAUR:MinotaurRace              = new MinotaurRace(21);
+	public static const COW:CowRace                        = new CowRace(22);
 	public static const SANDTRAP:SandTrapRace              = new SandTrapRace(23);
 	public static const BEE:BeeRace                        = new BeeRace(24);
 	public static const GOBLIN:GoblinRace                  = new GoblinRace(25);

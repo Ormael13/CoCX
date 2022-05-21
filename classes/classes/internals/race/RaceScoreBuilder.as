@@ -124,6 +124,13 @@ public class RaceScoreBuilder {
 				},
 				score, failScore);
 	}
+	public function isNotTaur(score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		return customRequirement("legs",customName||"is not taur",
+				function (body:BodyData):Boolean {
+					return !body.isTaur;
+				},
+				score, failScore);
+	}
 	public function isNaga(score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		return customRequirement("legs",customName||"is naga",
 				function (body:BodyData):Boolean {
@@ -261,8 +268,8 @@ public class RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_WING_TYPE, type, score, failScore, customName);
 		return this;
 	}
-	public function noWings(score:int):RaceScoreBuilder {
-		return wingType(Wings.NONE, score);
+	public function noWings(score:int, failScore:int=0):RaceScoreBuilder {
+		return wingType(Wings.NONE, score, failScore);
 	}
 	public function gender(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_GENDER, value, score, failScore, customName);

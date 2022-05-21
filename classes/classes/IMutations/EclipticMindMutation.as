@@ -59,7 +59,7 @@ public class EclipticMindMutation extends IMutationPerkType
                 if (pTier == 0){
                     IMutationsLib.EclipticMindIM.requirePeripheralNervSysMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.isRace(Races.ALICORN, 2) || player.unicornScore() >= 12 || player.alicornkinScore() >= 10 || player.unicornkinScore() >= 10;
+                        return player.isRace(Races.ALICORN, 2) || player.isRace(Races.UNICORN, 2) || player.alicornkinScore() >= 10 || player.unicornkinScore() >= 10;
                     }, "Unicorn or Bicorn race");
                 }
                 else{

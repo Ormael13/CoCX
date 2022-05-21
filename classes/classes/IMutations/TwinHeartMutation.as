@@ -58,7 +58,7 @@ public class TwinHeartMutation extends IMutationPerkType
                 if (pTier == 0){
                     IMutationsLib.TwinHeartIM.requireAdaptationsMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.centaurScore() >= 8 || player.unicornScore() >= 12 || player.isRace(Races.SPHINX) || player.isRace(Races.CANCER) || player.isTaur() || player.isDrider();
+                        return player.isRace(Races.CENTAUR) || player.isRace(Races.UNICORN, 2) || player.isRace(Races.SPHINX) || player.isRace(Races.CANCER) || player.isTaur() || player.isDrider();
                     }, "Taur/Drider or Unicorn/Bicorn race");
                 }
                 else{

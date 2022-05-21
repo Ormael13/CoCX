@@ -614,7 +614,6 @@ import classes.CoC;
 			var max:Number = maxFatigueBaseStat.value;
 			var multimax:Number = maxFatigueMultStat.value;
 			max += maxFatiguePerSpeStat.value*spe;
-			if (game.player.unicornScore() >= 10) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.EromancyBeginner)) max += Math.round(lib);
 			if (hasPerk(PerkLib.EromancyExpert)) max += Math.round(lib*2);
 			if (hasPerk(PerkLib.EromancyMaster)) max += Math.round(lib * 2);
@@ -697,7 +696,6 @@ import classes.CoC;
 				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) multimax += (.35);
 				if (Forgefather.refinement == 5) multimax += (.5);
 			}
-			if (game.player.unicornScore() >= 10) multimax += 0.1;
 			if (hasPerk(PerkLib.HistoryCultivator) || hasPerk(PerkLib.PastLifeCultivator)) multimax += 0.1;
 			if (hasPerk(PerkLib.JobSoulCultivator)) {//8005-9005 soulforce na razie przed liczeniem mnożnika jest
 				if (hasPerk(PerkLib.Dantain)) {

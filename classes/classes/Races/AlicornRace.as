@@ -9,10 +9,10 @@ import classes.VaginaClass;
 import classes.internals.Utils;
 
 public class AlicornRace extends Race{
-	public static const NightmareFurColors:/*String*/Array  = ["silver", "black", "midnight black", "midnight"];
-	public static const NightmareHairColors:/*String*/Array = ["silver","black", "midnight black", "midnight"];
-	public static const AlicornFurColors:/*String*/Array  = ["white", "pure white"];
-	public static const AlicornHairColors:/*String*/Array = ["platinum blonde","silver", "white", "pure white"];
+	public static const NightmareFurColors:/*String*/Array  = UnicornRace.BicornFurColors;
+	public static const NightmareHairColors:/*String*/Array = UnicornRace.BicornHairColors;
+	public static const AlicornFurColors:/*String*/Array  = UnicornRace.UnicornFurColors;
+	public static const AlicornHairColors:/*String*/Array = UnicornRace.UnicornHairColors;
 	
 	public function AlicornRace(id:int) {
 		super("Alicorn", id);
@@ -43,14 +43,11 @@ public class AlicornRace extends Race{
 							return true;
 						}, 0, -1000);
 		
-		addMutation(IMutationsLib.TwinHeartIM, +2);
-		addMutation(IMutationsLib.EclipticMindIM, +1);
-		
 		addConditionedScores(
 				function(body:BodyData):Boolean {
 					return body.hornType == Horns.UNICORN;
 				}, "Alicorn branch;")
-				.wingType(Wings.FEATHERED_ALICORN, +4) // can't -100 here because condition is &&'d with the horn type
+				.wingType(Wings.FEATHERED_ALICORN, +4) // can't -1000 here because condition is &&'d with the horn type
 				.customRequirement(
 						"",
 						"hair color: "+AlicornHairColors.join("/")+
@@ -60,8 +57,8 @@ public class AlicornRace extends Race{
 									Utils.InCollection(body.skinCoatColor, AlicornFurColors)
 						},
 						+1)
-				.eyeColor("red", +1)
-				.hasPerk(PerkLib.AvatorOfCorruption, +1);
+				.eyeColor("blue", +1)
+				.hasPerk(PerkLib.AvatorOfPurity, +1);
 		addConditionedScores(
 				function(body:BodyData):Boolean {
 					return body.hornType == Horns.BICORN;
@@ -76,8 +73,11 @@ public class AlicornRace extends Race{
 									Utils.InCollection(body.skinCoatColor, NightmareFurColors)
 						},
 						+1)
-				.eyeColor("blue", +1)
-				.hasPerk(PerkLib.AvatorOfPurity, +1);
+				.eyeColor("red", +1)
+				.hasPerk(PerkLib.AvatorOfCorruption, +1);
+		
+		addMutation(IMutationsLib.TwinHeartIM, +2);
+		addMutation(IMutationsLib.EclipticMindIM, +1);
 		
 		buildTier(8, "Half Alicorn/Nightmare")
 				.customNamingFunction(function(body:BodyData):String {

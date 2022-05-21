@@ -1897,27 +1897,27 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Lacta bovine immunities
-			if (player.cowScore() >= 10 && !player.hasPerk(PerkLib.LactaBovineImmunity)) {
+			if (player.isRaceCached(Races.COW) && !player.hasPerk(PerkLib.LactaBovineImmunity)) {
 				outputText("\nAs you become more of a lacta bovine you become increasingly obsessed with thoughts of horsecocks and cum sloshing balls, namely minotaur balls. While you are aware you naturally became addicted to minotaur cum you also know your nature as a lacta bovine will protect you from most of its harmful effects allowing you to sample the substance to your heart's content without risks.");
 				outputText(".\n\n<b>(Gained the Lacta Bovine Immunity perk!)</b>\n");
 				player.createPerk(PerkLib.LactaBovineImmunity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if (player.cowScore() < 10 && player.hasPerk(PerkLib.LactaBovineImmunity)) {
+			if (!player.isRaceCached(Races.COW) && player.hasPerk(PerkLib.LactaBovineImmunity)) {
 				outputText("\nYour mind clears up as you cease to obsess over minotaur dicks. This is also a sign that you are no longer considered a cow enough to be immune to the addictive effects of minotaur cum.\n\n<b>(Lost the Lacta Bovine Immunity perk!)</b>\n");
 				player.removePerk(PerkLib.LactaBovineImmunity);
 				needNext = true;
 			}
 			//Bull Strength
-			if ((player.minotaurScore() >= 15 || player.cowScore() >= 15) && !player.hasPerk(PerkLib.BullStrength)) {
+			if ((player.isRaceCached(Races.MINOTAUR, 2) || player.isRaceCached(Races.COW, 2)) && !player.hasPerk(PerkLib.BullStrength)) {
 				outputText("\nWhoa, you feel tremendous power accumulate in ");
-				if (player.minotaurScore() >= 15) outputText("your balls. It fills your body with bovine strength, nourishing your muscles with manly power. They say having big balls makes you stronger... Well its not like you can deny the correlation anymore!");
-				if (player.cowScore() >= 15) outputText("your mammaries. It fills your body with bovine strength, nourishing your muscles with milky power. Talk about storing all your might into your jugs!");
+				if (player.isRaceCached(Races.MINOTAUR, 2)) outputText("your balls. It fills your body with bovine strength, nourishing your muscles with manly power. They say having big balls makes you stronger... Well its not like you can deny the correlation anymore!");
+				if (player.isRaceCached(Races.COW, 2)) outputText("your mammaries. It fills your body with bovine strength, nourishing your muscles with milky power. Talk about storing all your might into your jugs!");
 				outputText(".\n\n<b>(Gained Bull Strength perk!)</b>\n");
 				player.createPerk(PerkLib.BullStrength, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if ((player.minotaurScore() < 15 && player.cowScore() < 15) && player.hasPerk(PerkLib.BullStrength)) {
+			if ((!player.isRaceCached(Races.MINOTAUR, 2) && !player.isRaceCached(Races.COW, 2)) && player.hasPerk(PerkLib.BullStrength)) {
 				outputText("\nYou feel weaker, it looks like you lost the benefit of your bull strength. Probably because you are no longer bovine enough.\n\n<b>(Lost the Bull Strength perk!)</b>\n");
 				player.removePerk(PerkLib.BullStrength);
 				needNext = true;
@@ -2079,8 +2079,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Cow bell
-			if (player.necklace == necklaces.COWBELL && player.cowScore() >= 10 && !player.statStore.hasBuff('Cow bell')) player.statStore.replaceBuffObject({'str.mult':0.2, 'lib.mult':0.2}, 'Cow bell', { text: 'Cow bell' });
-			if (player.cowScore() < 10 && player.statStore.hasBuff('Cow bell')) player.statStore.removeBuffs('Cow bell');
+			if (player.necklace == necklaces.COWBELL && player.isRace(Races.COW) && !player.statStore.hasBuff('Cow bell')) player.statStore.replaceBuffObject({'str.mult':0.2, 'lib.mult':0.2}, 'Cow bell', { text: 'Cow bell' });
+			if (!player.isRace(Races.COW) && player.statStore.hasBuff('Cow bell')) player.statStore.removeBuffs('Cow bell');
 			//Jiangshi cursed tag
 			if (player.headJewelry == headjewelries.JIANGCT && player.isRaceCached(Races.JIANGSHI) && !player.statStore.hasBuff('Jiangshi Curse Tag')) player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
 			//Hot Spring

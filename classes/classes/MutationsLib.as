@@ -616,7 +616,7 @@ public class MutationsLib
 				.requireAnyRace(Races.FROSTWYRM,Races.JABBERWOCKY,Races.VOUIVRE,Races.SEA_DRAGON);
 				EasterBunnyEggBag.requireBallsMutationSlot().requirePerk(PerkLib.EasterBunnyBalls).requireRace(Races.EASTERBUNNY);
 				EclipticMind.requirePeripheralNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.isRace(Races.ALICORN, 2) || player.unicornScore() >= 12 || player.alicornkinScore() >= 10 || player.unicornkinScore() >= 10;
+					return player.isRace(Races.ALICORN, 2) || player.isRace(Races.UNICORN, 2) || player.alicornkinScore() >= 10 || player.unicornkinScore() >= 10;
 				}, "Unicorn or Bicorn race");
 				ElvishPeripheralNervSys.requirePeripheralNervSysMutationSlot().requirePerk(PerkLib.ElvenSense).requireAnyRace(Races.ELF, Races.WOODELF);
 				FeyArcaneBloodstream.requireBloodsteamMutationSlot().requireRace(Races.FAIRY);
@@ -654,9 +654,7 @@ public class MutationsLib
 				.requireCustomFunction(function (player:Player):Boolean {
 					return player.femininity >= 95;
 				}, "95+ feminity")
-				.requireCustomFunction(function (player:Player):Boolean {
-					return player.cowScore() >= 10;
-				}, "Lacta Bovine race");
+				.requireRace(Races.COW)
 				LizanMarrow.requireBonesAndMarrowMutationSlot().requirePerk(PerkLib.LizanRegeneration).requireRace(Races.LIZARD)
 				ManticoreMetabolism.requireMetabolismMutationSlot().requireRace(Races.MANTICORE);
 				MantislikeAgility.requireMusclesMutationSlot().requirePerk(TrachealSystem).requireRace(Races.MANTIS);
@@ -667,9 +665,7 @@ public class MutationsLib
 				.requireCustomFunction(function (player:Player):Boolean {
 					return player.femininity <= 5;
 				}, "5- feminity")
-				.requireCustomFunction(function (player:Player):Boolean {
-					return player.minotaurScore() >= 10;
-				}, "Minotaur race");
+				.requireRace(Races.MINOTAUR);
 				NaturalPunchingBag.requireFatTissueMutationSlot().requirePerk(PerkLib.BouncyBody).requireCustomFunction(function (player:Player):Boolean {
 					return player.isGoblinoid();
 				}, "Goblin race");
@@ -693,7 +689,7 @@ public class MutationsLib
 				ScyllaInkGlands.requirePerk(PerkLib.InkSpray).requireRace(Races.SCYLLA);
 				TrachealSystem.requireAnyRace(Races.BEE, Races.MANTIS, Races.SCORPION, Races.SPIDER, Races.CANCER, Races.ATLACH_NACHA);
 				TwinHeart.requireAdaptationsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.centaurScore() >= 8 || player.unicornScore() >= 12 || player.isRace(Races.SPHINX) || player.isRace(Races.CANCER) || player.isTaur() || player.isDrider();
+					return player.isRace(Races.CENTAUR) || player.isRace(Races.UNICORN, 2) || player.isRace(Races.SPHINX) || player.isRace(Races.CANCER) || player.isTaur() || player.isDrider();
 				}, "Taur/Drider or Unicorn/Bicorn race");
 				VampiricBloodsteam.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.hasStatusEffect(StatusEffects.VampireThirst);

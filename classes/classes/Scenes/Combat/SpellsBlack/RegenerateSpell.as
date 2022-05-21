@@ -36,7 +36,7 @@ public class RegenerateSpell extends AbstractBlackSpell {
 		var hpChange2:Number = player.inte;
 		if (player.hasPerk(PerkLib.WisenedHealer)) hpChange2 += player.wis;
 		hpChange2 *= healModBlack();
-		if (player.unicornScore() >= 10) hpChange2 *= 3;
+		if (player.isRace(Races.UNICORN, 2)) hpChange2 *= 3;
 		if (player.isRace(Races.ALICORN)) hpChange2 *= 4;
 		if (player.armor == armors.NURSECL) hpChange2 *= 1.2;
 		if (player.weapon == weapons.U_STAFF) hpChange2 *= 1.5;
