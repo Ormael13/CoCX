@@ -264,8 +264,13 @@ public class CombatUI extends BaseCombatContent {
 		} else if (isPlayerStunned() || isPlayerPowerStunned() || isPlayerFeared()) {
 			if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn) && player.statusEffectv1(StatusEffects.SimplifiedNonPCTurn) == 0) {
 				combat.simplifiedPrePCTurn();
-			} else if (player.hasPerk(PerkLib.JobLeader) && flags[kFLAGS.WILL_O_THE_WISP] == 0 && flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1) {
-				combat.willothewispattacks();
+			} else if (player.hasPerk(PerkLib.JobLeader) && flags[kFLAGS.WILL_O_THE_WISP] < 2 && flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1) {
+				if (flags[kFLAGS.WILL_O_THE_WISP] == 0) combat.willothewispattacks(true);
+				else {
+					menu();
+					addButton(0, "Skip", combat.willothewispattacks).hint("You forfeit potential attack of wisp. Would skip to next minion attack/your main turn.");
+					addButton(1, "Attack", combat.willothewispattacks, true);
+				}
 			}
 			menu();
 			addButton(0, "Recover", combat.wait);
@@ -445,11 +450,13 @@ public class CombatUI extends BaseCombatContent {
 			addButton(4, "Release", combat.BearLeggoMyEggo);
 		} else if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn) && player.statusEffectv1(StatusEffects.SimplifiedNonPCTurn) == 0) {
 			combat.simplifiedPrePCTurn();
-		} else if (player.hasPerk(PerkLib.JobLeader) && flags[kFLAGS.WILL_O_THE_WISP] == 0 && flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1) {
-			menu();
-			addButton(0, "No", combat.willothewispattacks).hint("You forfeit potential attack of wisp. Would skip to next minion attack/your main turn.");
-			addButton(1, "Yes", combat.willothewispattacks, true);
-			//combat.willothewispattacks();
+		} else if (player.hasPerk(PerkLib.JobLeader) && flags[kFLAGS.WILL_O_THE_WISP] < 2 && flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1) {
+			if (flags[kFLAGS.WILL_O_THE_WISP] == 0) combat.willothewispattacks(true);
+			else {
+				menu();
+				addButton(0, "Skip", combat.willothewispattacks).hint("You forfeit potential attack of wisp. Would skip to next minion attack/your main turn.");
+				addButton(1, "Attack", combat.willothewispattacks, true);
+			}
 		} else if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.permanentgolemsendcost()) {
 			menu();
 			addButton(0, "None", combat.pspecials.notSendAnyGolem).hint("You forfeit potential attack of golem(s). Would skip to next minion attack/your main turn.");

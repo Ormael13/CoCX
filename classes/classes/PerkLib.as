@@ -6001,30 +6001,26 @@ public class PerkLib
 					.requireLevel(36)
                     .requireLib(150);
             //Tier 7 Libido Perks
-            PrestigeJobBindmaster.requirePrestigeJobSlot()
-                    .requirePerks(JobEromancer, JobGuardian)
-                    .requireLib(200)
-                    .requireLevel(42);
         	HalfStepToPeerlessSelfControl.requireLib(240)
                     .requireInt(160)
                     .requirePerk(SuperiorSelfControl)
                     .requireLevel(42);
             //Tier 8 Libido Perks
-            UnbreakableBind.requirePerk(PrestigeJobBindmaster)
-                    .requireLevel(48);
             PeerlessSelfControl.requireLib(270)
                     .requireInt(180)
                     .requirePerk(HalfStepToPeerlessSelfControl)
                     .requireLevel(48);
             //Tier 9 Libido Perks
-            Sadomasochism.requirePerk(UnbreakableBind)
+            PrestigeJobBindmaster.requirePrestigeJobSlot()
+                    .requirePerks(JobEromancer, JobGuardian)
+                    .requireLib(300)
                     .requireLevel(54);
             HalfStepToInhumanSelfControl.requireLib(300)
                     .requireInt(200)
                     .requirePerk(PeerlessSelfControl)
                     .requireLevel(54);
             //Tier 10 Libido Perks
-            ControlFreak.requirePerk(Sadomasochism)
+            UnbreakableBind.requirePerk(PrestigeJobBindmaster)
                     .requireLevel(60);
             InhumanSelfControl.requireLib(330)
                     .requireInt(220)
@@ -6034,6 +6030,8 @@ public class PerkLib
                     .requireLib(230)
                     .requireLevel(60);
             //Tier 11 Libido Perks
+            Sadomasochism.requirePerk(UnbreakableBind)
+                    .requireLevel(66);
             HalfStepToEpicSelfControl.requireLib(360)
                     .requireInt(240)
                     .requirePerk(InhumanSelfControl)
@@ -6042,6 +6040,8 @@ public class PerkLib
                     .requirePerk(EpicLibido)
                     .requireLevel(66);
             //Tier 12 Libido Perks
+            ControlFreak.requirePerk(Sadomasochism)
+                    .requireLevel(72);
             EpicSelfControl.requireLib(390)
                     .requireInt(260)
                     .requirePerk(HalfStepToEpicSelfControl)

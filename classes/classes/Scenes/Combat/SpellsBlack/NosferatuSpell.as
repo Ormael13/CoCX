@@ -49,6 +49,7 @@ public class NosferatuSpell extends AbstractBlackSpell {
 				outputText(", gorging on its owner’s life force to replenish your own. Soon enough the spell is over and your shadow returns to you, leaving you better for the wear. <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 			monster.HP -= damage;
+			if (damage > int.MAX_VALUE) damage = player.maxOverHP() - player.HP; //Hope this prevents value overflow.
 			HPChange(damage, false);
 			checkAchievementDamage(damage);
 			combat.heroBaneProc(damage);

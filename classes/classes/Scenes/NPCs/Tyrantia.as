@@ -205,15 +205,16 @@ public class Tyrantia extends Monster
 				this.bonusLust = 438;
 				this.level = 58;
 			}
-			if (flags[kFLAGS.TYRANTIA_LVL_UP] == 2) {
-				initStrTouSpeInte(315, 335, 205, 160);
-				initWisLibSensCor(105, 300, 120, 100);
-				this.weaponAttack = 160;
-				this.armorDef = 320;
-				this.armorMDef = 320;
-				this.bonusHP = 3000;
-				this.bonusLust = 484;
-				this.level = 64;
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 2 && flags[kFLAGS.TYRANTIA_LVL_UP] < 3) {
+				var mod:int = (flags[kFLAGS.TYRANTIA_LVL_UP] - 1);
+				initStrTouSpeInte(295 + 20*mod, 310 + 25*mod, 190 + 15*mod, 150 + 10*mod);
+				initWisLibSensCor(100 + 5*mod, 280 + 20*mod, 100 + 20*mod, 100);
+				this.weaponAttack = 150 + 10*mod;
+				this.armorDef = 300 + 20*mod;
+				this.armorMDef = 300 + 20*mod;
+				this.bonusHP = 2000 + 1000*mod;
+				this.bonusLust = 438 + 46*mod;
+				this.level = 58 + 6*mod;
 			}
 			if (flags[kFLAGS.TYRANTIA_LVL_UP] == 3) {
 				initStrTouSpeInte(335, 360, 220, 170);

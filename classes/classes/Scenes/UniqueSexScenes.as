@@ -252,7 +252,7 @@ package classes.Scenes
 				else{
 					clearOutput();
 					menu();
-					if(!player.hasVagina() || !player.hasCock()) raijuVoltTransfer();
+					if(!player.hasVagina() && !player.hasCock()) raijuVoltTransfer();
 					else RaijuRapeSupercharged();
 				}
             }

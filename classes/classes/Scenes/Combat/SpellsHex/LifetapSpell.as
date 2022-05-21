@@ -28,7 +28,7 @@ public class LifetapSpell extends AbstractHexSpell {
 	}
 	
 	public override function hpCost():Number {
-		return Math.round(player.maxHP() * .25);
+		return Math.round(player.maxOverHP() * .25);
 	}
 	
 	override protected function usabilityCheck():String {
@@ -49,7 +49,7 @@ public class LifetapSpell extends AbstractHexSpell {
 				outputText("You proceed to cut your hand and draw a small pattern. You feel your magical reservoirs fill back up by a significant amount.");
 			}
 			HPChange(-lifetap, false);
-			EngineCore.ManaChange(lifetap, false);
+			EngineCore.ManaChange(player.maxOverMana() *.25, false);
 		}
 	}
 }

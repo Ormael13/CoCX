@@ -29,6 +29,37 @@ public class CombatTeases extends BaseCombatContent {
 			enemyAI();
 		}
 	}
+	
+	public function teaseBaseLustDamage():Number {
+		var tBLD:Number = 27 + rand(9);
+		if (player.hasPerk(PerkLib.SensualLover)) tBLD += 6;
+		if (player.hasPerk(PerkLib.Seduction)) tBLD += 15;
+		if (player.hasPerk(PerkLib.SluttySeduction)) tBLD += (2 * player.perkv1(PerkLib.SluttySeduction));
+		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) tBLD += (2 * player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction));
+		if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) tBLD += 15;
+		if (player.hasPerk(PerkLib.FlawlessBody)) tBLD += 20;
+		tBLD += scalingBonusLibido() * 0.2;
+		if (player.hasPerk(PerkLib.JobSeducer)) tBLD += player.teaseLevel * 3;
+		else tBLD += player.teaseLevel * 2;
+		if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) tBLD *= 1.2;
+		switch (player.coatType()) {
+			case Skin.FUR:
+				tBLD += (2 * (1 + player.newGamePlusMod()));
+				break;
+			case Skin.SCALES:
+				tBLD += (4 * (1 + player.newGamePlusMod()));
+				break;
+			case Skin.CHITIN:
+				tBLD += (6 * (1 + player.newGamePlusMod()));
+				break;
+			case Skin.BARK:
+				tBLD += (8 * (1 + player.newGamePlusMod()));
+				break;
+		}
+		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") tBLD *= (1 + ((10 + rand(11)) / 100));
+		if (player.isElf() && player.hasPerk(PerkLib.ELFElvenSpearDancingTechnique) && player.isSpearTypeWeapon()) tBLD += scalingBonusSpeed() * 0.1;
+		return tBLD;
+	}
 
 	// Just text should force the function to purely emit the test text to the output display, and not have any other side effects
 	public function tease(justText:Boolean = false):void {
@@ -113,36 +144,8 @@ public class CombatTeases extends BaseCombatContent {
 		//==============================
 		//Determine basic damage.
 		//==============================
-		damage = 18 + rand(6);
-		if (player.hasPerk(PerkLib.SensualLover)) damage += 6;
-		if (player.hasPerk(PerkLib.Seduction)) damage += 15;
-		if (player.hasPerk(PerkLib.SluttySeduction)) damage += (2 * player.perkv1(PerkLib.SluttySeduction));
-		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += (2 * player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction));
-		if (bimbo || bro || futa) {
-			damage += 15;
-			bimbo = true;
-		}
-		if (player.hasPerk(PerkLib.FlawlessBody)) damage += 20;
-		damage += scalingBonusLibido() * 0.2;
-		if (player.hasPerk(PerkLib.JobSeducer)) damage += player.teaseLevel * 3;
-		else damage += player.teaseLevel * 2;
-		if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.2;
-		switch (player.coatType()) {
-			case Skin.FUR:
-				damage += (2 * (1 + player.newGamePlusMod()));
-				break;
-			case Skin.SCALES:
-				damage += (4 * (1 + player.newGamePlusMod()));
-				break;
-			case Skin.CHITIN:
-				damage += (6 * (1 + player.newGamePlusMod()));
-				break;
-			case Skin.BARK:
-				damage += (8 * (1 + player.newGamePlusMod()));
-				break;
-		}
-		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") damage *= (1 + ((10 + rand(11)) / 100));
-		if (player.isElf() && player.hasPerk(PerkLib.ELFElvenSpearDancingTechnique) && player.isSpearTypeWeapon()) damage += scalingBonusSpeed() * 0.1;
+		damage = 0;
+		damage += teaseBaseLustDamage();
 		//==============================
 		//TEASE SELECT CHOICES
 		//==BASICS========
