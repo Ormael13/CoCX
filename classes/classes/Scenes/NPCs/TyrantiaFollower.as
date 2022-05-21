@@ -679,10 +679,14 @@ public function TyrantiaAllOut():void {
 	doNext(playerMenu);
 }
 
-public function TyrantiaLostSparring():void {
+public function TyrantiaLostSparring(hpVictory:Boolean):void {
 	clearOutput();
-	//outputText(".");
-	//if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) LevelingHerself();
+	if (hpVictory) outputText("Tyrantia is driven back by your last attack, and she holds up a single hand in a classic ‘stop’ gesture. Her armor battered, she sighs heavily. <i>“That’s enough.”</i> Her black aura flickers, and Tyrantia shudders. <i>“I…Don’t want to continue.”</i> She takes her head in both hands, letting her spear fall to the ground.");
+	else {
+		outputText("The giantess groans, her spider-legs shaking. Now drooling from her cunt-flap, she slowly falls, resting her lower-half on the ground. She shakes her helmet off, cheeks bright red as she flicks her flap aside.\n\n");
+		outputText("<i>“Gods…Damn it…”</i> She whispers, looking at you. <i>“Stupid Sexy asshole.”</i> Another full-body shudder wracks your giantess. <i>“Well…If you’re going to fight like this…Least you could do is help me deal with it after.”</i>\n\n");
+	}
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) LevelingHerself();
 	cleanupAfterCombat();
 }
 private function LevelingHerself():void {
@@ -699,13 +703,13 @@ private function LevelingHerself():void {
 		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11), 0, 0, 0);
 		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.TYRANTIA_LVL_UP] = 3;
-	}/*
+	}
 	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.TYRANTIA_LVL_UP] == 3) {
 		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12));
 		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12), 0, 0, 0);
 		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.TYRANTIA_LVL_UP] = 4;
-	}
+	}/*
 	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.TYRANTIA_LVL_UP] == 4) {
 		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13));
 		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13), 0, 0, 0);
