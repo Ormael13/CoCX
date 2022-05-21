@@ -199,7 +199,7 @@ public function tamaniFirstTimeConsentual():void {
 	//PARTS
 	//==================================================================================================================
 	function scene(x:int):void {
-		outputText("\nYour dick: "+x+", descript: [cock "+(x+1)+"]|[Cock "+(x+1)+"]\n");
+		//outputText("\nYour dick: "+x+", descript: [cock "+(x+1)+"]|[Cock "+(x+1)+"]\n");
 		outputText("As if to emphasize her point, she curls her toes around your [cock " + (x+1) + "], squeezing as she slides her feet up and down your length, milking out a few large drops of pre-cum.  You groan and kiss her again – too turned on to care if the drug-laced lipstick turns your orgasm into a pregnancy-inducing flood. ");
 		if (player.balls > 0) outputText("Your [balls] swell with seed, spurring your desire to new heights.");
 		else outputText("Something inside you swells up with seed, spurring your desire to new heights.");
@@ -220,7 +220,7 @@ public function tamaniFirstTimeConsentual():void {
 		}
 		//(TOO BIG)
 		else {
-			outputText("Tamani breaks your sloppy kiss and shimmies down your body, clutching tightly to your [cock " + x + "] and [skin.type] as she settles down lower on your groin.  The goblin somehow manages to turn herself around so that is she is hanging upside-down, with her legs and arms clutching tightly to your member while her tongue ");
+			outputText("Tamani breaks your sloppy kiss and shimmies down your body, clutching tightly to your [cock " + (x+1) + "] and [skin.type] as she settles down lower on your groin.  The goblin somehow manages to turn herself around so that is she is hanging upside-down, with her legs and arms clutching tightly to your member while her tongue ");
 			if (player.hasSheath()) {
 				outputText("licks the edges of your sheath");
 				if (player.balls > 0) outputText(" and balls");
