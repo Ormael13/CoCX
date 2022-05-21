@@ -718,18 +718,9 @@ public class CombatMagic extends BaseCombatContent {
 				outputText("You spread your hands, letting mana flow through you. Your robe all but vanishes, and you thrust your hips forward, [cock] hardening slightly, your bulge standing up straight and tenting the sheer silk. Giving your enemy a cocky grin, you lick your lips, giving them a few thrusts of your hips. ");
 				outputText("[Themonster], stunned by the sudden change in your bearing and…manhood, gives you more than enough time to finish your spell. ");
 			}
-			var damage:Number = 9 + rand(3);
+			var damage:Number = 0;
 			var damagemultiplier:Number = 1;
-			if (player.hasPerk(PerkLib.SensualLover)) damage += 3;
-			if (player.hasPerk(PerkLib.Seduction)) damage += 10;
-			if (player.hasPerk(PerkLib.SluttySeduction)) damage += player.perkv1(PerkLib.SluttySeduction);
-			if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
-			if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) damage += 10;
-			if (player.hasPerk(PerkLib.FlawlessBody)) damage += 10;
-			damage += scalingBonusLibido() * 0.1;
-			if (player.hasPerk(PerkLib.JobSeducer)) damage += player.teaseLevel * 2;
-			else damage += player.teaseLevel;
-			if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.2;
+			damage += combat.teases.teaseBaseLustDamage();
 			if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
 			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
 			if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
