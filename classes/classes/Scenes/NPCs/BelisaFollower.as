@@ -15,7 +15,7 @@ import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
 import classes.internals.Utils;
 
-public class BelisaFollower extends NPCAwareContent implements TimeAwareInterface, SaveableState
+public class BelisaFollower extends NPCAwareContent implements SaveableState
 {
 	public static var BelisaEncounternum:Number;
 	public static var BelisaAffectionMeter:Number;
@@ -385,27 +385,47 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		if (BelisaAffectionMeter >= 50 && !BelisaQuestComp) addButton(2, "Injuries", BelisaTalkInjuries);
 		else if (BelisaQuestComp) addButtonDisabled(2, "Injuries", "You've already solved her tooth problem!");
 		else addButtonDisabled(2, "???", "Req. 50+ affection.");
-		if (BelisaAffectionMeter >= 50) addButton(3, "Family", BelisaTalkHerFamily);
+		if (BelisaAffectionMeter >= 50) {
+			if (BelisaInCamp) {
+				if (LilyFollower.LilyFollowerState || TyrantiaFollower.TyrantiaFollowerStage >= 4) addButton(3, "Family", BelisaTalkHerFamily);
+				else addButtonDisabled(3, "Family", "Not avialable until you find one of her sisters.");
+			}
+			else addButton(3, "Family", BelisaTalkHerFamily);
+		}
 		else addButtonDisabled(3, "???", "Req. 50+ affection.");
 		addButton(4, "Back", BelisaTalk);
 	}
 	public function BelisaTalkHerFamily():void {
 		clearOutput();
-		outputText("Her eyes narrow, and Belisa looks away from you. <i>\"...If you’re asking about my family before the demons came...that’s a subject I’ve been avoiding for some time.\"</i> She sighs. \"<i>I suppose I can tell you. It’s not like you can do much with the information anyways.</i>\" Belisa rests her spider-half on the ground, looking down at the dirt in front of her.\n\n");
-		outputText("\"<i>I had two pod-mates. Most races of Mareth refer to them as ‘Siblings’, or ‘Sisters’.</i>\" She fidgets nervously. \"<i>When the demons first started to conquer, my tribe stayed neutral. Our elders assumed that, like many other conflicts, this was just other races being stupid. They thought that our people staying out of the conflict was the best chance we had…</i>\" She shivers.\n\n");
-		outputText("\"<i>They were wrong. The demons, once they’d hit our closest trading partners, immediately attacked our village. They came from all sides, releasing thick mists and magics designed to ensnare us, to turn our own bodies against us…</i>\" She hugs herself. ");
-		outputText("\"<i>Lily, our huntress, the middle of my podmates, she and Tyrantia, the largest of us…Our fiercest warrior…They carved a path through them. They made a gap in their ranks, and…A few of us escaped. We scattered, leading them away…But when I got to the place we were supposed to meet up…I was the only one.</i>\"\n\n");
-		outputText("Belisa looks up at you, sighing. \"<i>Thank you for listening…It’s not something I like to revisit…But sometimes I don’t really have a choice.</i>\"\n\n");
-		BelisaAffection(5);
-		if (LilyFollower.LilyTalked > 0) {
-			outputText("Lily…You recognize that name! A drider named Lily, an archer and huntress? She fits the description perfectly! Do you tell her about your discovery?\n\n");
-			menu();
-			addButton(1, "Don't", BelisaTalkHerFamilyDont).hint("Don’t tell her");
-			addButton(3, "Do", BelisaTalkHerFamilyDo).hint("Tell her");
-		}
-		else {
+		if (BelisaInCamp) {
+			outputText("\"<i>...I honestly never expected to see any of them alive again.</i>\" Belisa smiles at you, her hazel eyes warm with clear affection. \"<i>But…You found a way.</i>\" She looks down at the ground. \"<i>Honestly, I don’t know how you even survive out here…but…</i>\"\n\n");
+			if (TyrantiaFollower.TyrantiaFollowerStage >= 4) {
+				outputText("\"<i>Tyrantia’s…changed. She tries to hide it, but I can tell she’s different. She’s…hornier than before, and those horns…</i>\" Belisa bites her lip. \"<i>She’s still my sister, and I can’t blame her. She’s been through so much worse than me…But those horns pulse with dark energy. I fear for her soul, [name].</i>\"\n\n");
+				outputText("You sit beside Belisa, putting a hand on her shoulder. You tell Belisa that Tyrantia might be corrupt, but her soul still burns bright. Her body might be changed, but her mind and soul are unchanged. You tell your nervous Drider that Tyrantia might need some help, but she’s in no real danger of turning, as long as she has people worth fighting for.\n\n");
+				outputText("\"<i>...Thank you.</i>\" Belisa seems to cheer up at that. \"<i>She’s really in good hands now, isn’t she?</i>\" She gives you a direct look, and you give Belisa a grin. \"<i>Tyrantia is really bad at hiding anything. That hasn’t changed.</i>\"\n\n");
+				if ((DriderTown.TyrantiaMaleKids + DriderTown.TyrantiaFemaleKids) > 0) outputText("\"<i>Her kids are surprisingly soft.</i>\" Belisa chuckles. \"<i>Mischievous, but not aggressive or warlike. Not like their mom.</i>\" She smiles down at the meadow, where Tyrantia plays with your kids. \"<i>Unicorn-Driders. Who would’ve thought?</i>\"\n\n");
+			}
+			if (LilyFollower.LilyFollowerState) outputText("\"<i>Lily…Doesn’t look the same as she did before, but that’s going around, it would seem.</i>\" Belisa rubs one of her legs idly. \"<i>Most Driders looked like me, before the demons. She also…Developed some rather odd tastes in the years we spent apart.</i>\"\n\n");
 			eachMinuteCount(15);
 			doNext(BelisaTalk);
+		}
+		else {
+			outputText("Her eyes narrow, and Belisa looks away from you. <i>\"...If you’re asking about my family before the demons came...that’s a subject I’ve been avoiding for some time.\"</i> She sighs. \"<i>I suppose I can tell you. It’s not like you can do much with the information anyways.</i>\" Belisa rests her spider-half on the ground, looking down at the dirt in front of her.\n\n");
+			outputText("\"<i>I had two pod-mates. Most races of Mareth refer to them as ‘Siblings’, or ‘Sisters’.</i>\" She fidgets nervously. \"<i>When the demons first started to conquer, my tribe stayed neutral. Our elders assumed that, like many other conflicts, this was just other races being stupid. They thought that our people staying out of the conflict was the best chance we had…</i>\" She shivers.\n\n");
+			outputText("\"<i>They were wrong. The demons, once they’d hit our closest trading partners, immediately attacked our village. They came from all sides, releasing thick mists and magics designed to ensnare us, to turn our own bodies against us…</i>\" She hugs herself. ");
+			outputText("\"<i>Lily, our huntress, the middle of my podmates, she and Tyrantia, the largest of us…Our fiercest warrior…They carved a path through them. They made a gap in their ranks, and…A few of us escaped. We scattered, leading them away…But when I got to the place we were supposed to meet up…I was the only one.</i>\"\n\n");
+			outputText("Belisa looks up at you, sighing. \"<i>Thank you for listening…It’s not something I like to revisit…But sometimes I don’t really have a choice.</i>\"\n\n");
+			BelisaAffection(5);
+			if (LilyFollower.LilyTalked > 0) {
+				outputText("Lily…You recognize that name! A drider named Lily, an archer and huntress? She fits the description perfectly! Do you tell her about your discovery?\n\n");
+				menu();
+				addButton(1, "Don't", BelisaTalkHerFamilyDont).hint("Don’t tell her");
+				addButton(3, "Do", BelisaTalkHerFamilyDo).hint("Tell her");
+			}
+			else {
+				eachMinuteCount(15);
+				doNext(BelisaTalk);
+			}
 		}
 	}
 	public function BelisaTalkHerFamilyDo():void {
@@ -713,6 +733,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		addButton(3, undergarments.DRI_BRA.shortName, belisaBuy, undergarments.DRI_BRA, 1800);
 		addButton(5, armors.DWSROBE.shortName, belisaBuy, armors.DWSROBE, 13200);
 		addButton(6, armors.DWARMOR.shortName, belisaBuy, armors.DWARMOR, 2160);
+		addButton(7, weapons.TKNIVES.shortName, belisaBuy, weapons.TKNIVES, 800);
 		if (BelisaInCamp) addButton(14, "Back", BelisaMainCampMenu);
 		else addButton(14, "Nevermind", Encounterback);
 	}
@@ -834,7 +855,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		statScreenRefresh();
 		doNext(BelisaShop);
 	}
-	private function BelisaHolyBandsManagmentCap():Number {
+	private function BelisaHolyBandsManagmentCurrent():Number {
 		var BHBMC:Number = 0;
 		if (HolyBand1 > 0) BHBMC += HolyBand1;
 		if (HolyBand2 > 0) BHBMC += HolyBand2;
@@ -845,9 +866,13 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		if (HolyBand7 > 0) BHBMC += HolyBand7;
 		return BHBMC;
 	}
+	private function BelisaHolyBandsManagmentCap():Number {
+		var BHBMCap:Number = 4;
+		return BHBMCap;
+	}
 	private function BelisaHolyBandsManagment():void {
 		menu();
-		if (BelisaHolyBandsManagmentCap() < 4) {
+		if (BelisaHolyBandsManagmentCurrent() < BelisaHolyBandsManagmentCap()) {
 			if (HolyBand1 < 3 && HolyBand1Cap > 0 && HolyBand1 < HolyBand1Cap) addButton(0, "Crimson", BelisaHolyBandsManagmentCrimsonAdd).hint("Put on one Crimson Holy Band.");
 			if (HolyBand2 < 3 && HolyBand2Cap > 0 && HolyBand2 < HolyBand2Cap) addButton(2, "Pink", BelisaHolyBandsManagmentPinkAdd).hint("Put on one Pink Holy Band.");
 			if (HolyBand3 < 3 && HolyBand3Cap > 0 && HolyBand3 < HolyBand3Cap) addButton(5, "Yellow", BelisaHolyBandsManagmentYellowAdd).hint("Put on one Yellow Holy Band.");
@@ -875,7 +900,27 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		if (BelisaInCamp) addButton(14, "Back", BelisaMainCampMenu);
 		else addButton(14, "Nevermind", Encounterback);
 	}
+	private function BelisaHolyBandsManagmentAdd():void {
+		clearOutput();
+		outputText("Belisa nods, smiling at you. \"<i>So…These bands attach to you magically. They need to have contact to work, so having them move around could really hurt…or even get you killed, if you lose the enchantment at the wrong time. </i>\" She rubs her back legs together. \"<i>I can undo the attachment later, but this will be attached until I undo it.</i>\"\n\n");
+		outputText("Do you want this band attached semi-permanently?\n\n");
+	}
+	private function BelisaHolyBandsManagmentAddYes():void {
+		outputText("Belisa nods, looking seriously down at you. \"<i></i>\"\n\n");
+		outputText("Electricity seems to shoot from the band to your body, for a brief moment, you grimace, forcing yourself to stay still. The unpleasant sensation fades, leaving you with one of Belisa’s bands stuck tight to your arm. The band seems to pulse with your heartbeat, flexing as you move.\n\n");
+		outputText("\"<i>Sorry.</i>\" Belisa winces. \"<i>Was that more than a sting?</i>\" You give the little Drider a nod, and she sighs.\n\n");
+		//outputText("\"<i></i>\"\n\n");
+	}
+	private function BelisaHolyBandsManagmentAddNo():void {
+		outputText("Belisa nods, giving you back your gems and putting the band away.\n\n");
+		doNext(BelisaHolyBandsManagment);
+	}
 	private function BelisaHolyBandsManagmentCrimsonAdd():void {
+		BelisaHolyBandsManagmentAdd();
+		doYesNo(BelisaHolyBandsManagmentCrimsonAdd2, BelisaHolyBandsManagmentAddNo);
+	}
+	private function BelisaHolyBandsManagmentCrimsonAdd2():void {
+		BelisaHolyBandsManagmentAddYes();
 		if (HolyBand1 == 0) {
 			HolyBand1 += 1;
 			player.statStore.addBuffObject({"maxmana_mult":-0.1}, "Crimson Holy Band", {text:"Crimson Holy Band"});
@@ -898,6 +943,10 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		doNext(BelisaHolyBandsManagment);
 	}
 	private function BelisaHolyBandsManagmentPinkAdd():void {
+		BelisaHolyBandsManagmentAdd();
+		doYesNo(BelisaHolyBandsManagmentPinkAdd2, BelisaHolyBandsManagmentAddNo);
+	}
+	private function BelisaHolyBandsManagmentPinkAdd2():void {
 		if (HolyBand2 == 0) {
 			HolyBand2 += 1;
 			player.statStore.addBuffObject({"maxsf_mult":-0.1}, "Pink Holy Band", {text:"Pink Holy Band"});
@@ -920,6 +969,10 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		doNext(BelisaHolyBandsManagment);
 	}
 	private function BelisaHolyBandsManagmentYellowAdd():void {
+		BelisaHolyBandsManagmentAdd();
+		doYesNo(BelisaHolyBandsManagmentYellowAdd2, BelisaHolyBandsManagmentAddNo);
+	}
+	private function BelisaHolyBandsManagmentYellowAdd2():void {
 		if (HolyBand3 == 0) {
 			HolyBand3 += 1;
 			player.statStore.addBuffObject({"spe.mult":0.1,"maxsf_mult":-0.1}, "Yellow Holy Band", {text:"Yellow Holy Band"});
@@ -942,6 +995,10 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		doNext(BelisaHolyBandsManagment);
 	}
 	private function BelisaHolyBandsManagmentTurqouiseAdd():void {
+		BelisaHolyBandsManagmentAdd();
+		doYesNo(BelisaHolyBandsManagmentTurqouiseAdd2, BelisaHolyBandsManagmentAddNo);
+	}
+	private function BelisaHolyBandsManagmentTurqouiseAdd2():void {
 		HolyBand4 += 1;
 		player.statStore.addBuffObject({"maxsf_mult":-0.1}, "Turqouise Holy Band", {text:"Turqouise Holy Band"});
 		doNext(BelisaHolyBandsManagment);
@@ -952,6 +1009,10 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		doNext(BelisaHolyBandsManagment);
 	}
 	private function BelisaHolyBandsManagmentCrossedAdd():void {
+		BelisaHolyBandsManagmentAdd();
+		doYesNo(BelisaHolyBandsManagmentCrossedAdd2, BelisaHolyBandsManagmentAddNo);
+	}
+	private function BelisaHolyBandsManagmentCrossedAdd2():void {
 		HolyBand5 += 1;
 		player.statStore.addBuffObject({"maxmana_mult":-0.1}, "Crossed Holy Band", {text:"Crossed Holy Band"});
 		doNext(BelisaHolyBandsManagment);
@@ -962,6 +1023,10 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		doNext(BelisaHolyBandsManagment);
 	}
 	private function BelisaHolyBandsManagmentBrownAndBeigeAdd():void {
+		BelisaHolyBandsManagmentAdd();
+		doYesNo(BelisaHolyBandsManagmentBrownAndBeigeAdd2, BelisaHolyBandsManagmentAddNo);
+	}
+	private function BelisaHolyBandsManagmentBrownAndBeigeAdd2():void {
 		HolyBand6 += 1;
 		player.statStore.addBuffObject({"str.mult":0.15,"spe.mult":0.15,"maxsf_mult":-0.1}, "Brown and Beige Holy Band", {text:"Brown and Beige Holy Band"});
 		doNext(BelisaHolyBandsManagment);
@@ -972,6 +1037,10 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		doNext(BelisaHolyBandsManagment);
 	}
 	private function BelisaHolyBandsManagmentRoyalBlueAdd():void {
+		BelisaHolyBandsManagmentAdd();
+		doYesNo(BelisaHolyBandsManagmentRoyalBlueAdd2, BelisaHolyBandsManagmentAddNo);
+	}
+	private function BelisaHolyBandsManagmentRoyalBlueAdd2():void {
 		if (HolyBand7 == 0) {
 			HolyBand7 += 1;
 			player.statStore.addBuffObject({"maxmana_mult":-0.1}, "Royal Blue Holy Band", {text:"Royal Blue Holy Band"});
@@ -1030,6 +1099,22 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 	public function BelisaSetUp():void {
 		clearOutput();
 		outputText("You tell Belisa that she’ll need to set up her house before nightfall...Unless she’d rather sleep in your "+(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 ? "Cabin":"Tent")+" tonight. She blinks once, twice, then the Drider launches herself off the silky house-boat and into the water, screaming in embarrassment. You decide to leave her to it, laughing to yourself as you walk off and onto dry land.\n\n");
+		if (LilyFollower.LilyFollowerState) {
+			outputText("As you leave Belisa to set up her silky home, Lily approaches you, a serious look on your Drider-pet’s face.\n\n");
+			outputText("<i>\"" + player.mf("Master", "Mistress") + "...You didn’t tell me that you’d be bringing another Drider home.\"</i> She almost sounds…Jealous? You assure your pet that this Drider isn’t like her. You tell Lily about how you met Belisa, and how she’d been surviving on her own for so long.\n\n");
+			outputText("<i>\"Alright. I suppose that’s fair…Although there’s one thing I’d like to ask you.\"</i> Lily fidgets, back-legs tapping nervously. <i>\"What’s the new girl’s name?\"</i>\n\n");
+			outputText("You tell Lily, and her eyes widen. She takes a step back from you, and wordlessly sprints over to the silken dome. You follow at a distance, a small smile on your face.\n\n");
+			outputText("Belisa watches nervously as Lily sprints, stopping at the riverbank. <i>\"Belisa!\"</i> She calls, eyes wide. Four of her back legs skitter as your Drider-pet looks down, trying to think of something to say. <i>\"I forgot the sailor’s braid again!\"</i>\n\n");
+			outputText("Belisa stares, clearly confused, but her eyes widen in realization. She leaps from her silken home, wading to shore. <i>\"I-I told you that I-I’d smack you if you forgot it.\"</i> Belisa approaches cautiously, then playfully smacks Lily upside the head. <i>\"I taught you that braid twelve times!\"</i>\n\n");
+			outputText("<i>\"Thirteen.\"</i> Lily responds warmly. <i>\"...Sister…It really is you.\"</i> She wraps her arms around Belisa’s waist, pulling the smaller Drider into a warm embrace. Belisa tears up, hugging back as fiercely as she can.\n\n");
+			outputText("The embrace lasts a minute, before Belisa steps back. <i>\"Sister…You’ve been changed.\"</i> She sounds worried, almost saddened.\n\n");
+			outputText("<i>\"Actions have consequences.\"</i> Lily says back. <i>\"I knew what would happen to me, when I chose to stop them from catching you.\"</i> She ruffles Belisa’s hair fondly. <i>\"And look at you. You’re unchanged. You’ve seen some shit, but…They didn’t catch you.\"</i>\n\n");
+			outputText("This makes Belisa start to cry, wrapping her arms around Lily’s neck. <i>\"I’m sorry, sister! I couldn’t find you!\"</i> This gets Lily crying, and she hugs back.\n\n");
+			outputText("<i>\"Idiot, that was my job. To find you!\"</i> She sniffles. <i>\"In the end, at least [name] was able to bring us back together.\"</i>\n\n");
+			outputText("<i>\"That reminds me…How did you meet them?\"</i> Belisa smiles, not really understanding what she asked. Lily’s cheeks burst into a blush, and she looks back, easily seeing you.\n\n");
+			outputText("<i>\"You first, sis.\"</i> Lily blinks. <i>\"And why don’t we get you set up?\"</i>\n\n");
+			outputText("Your two Driders walk towards the silky bubble, side-by side. Moments like this make you feel like a champion!\n\n");
+		}
 		outputText("<b>Belisa has joined you as a lover.</b>\n\n");
 		BelisaFollowerStage = 3;
 		BelisaInCamp = true;
@@ -1039,24 +1124,31 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 
 	public function BelisaMainCampMenu():void {
 		clearOutput();
-		outputText("You decide to go see your bashful Drider, Belisa. As you get near, you ");
-		var visit:Number = rand(3);
-		switch (visit) {
-			case 0:
-				outputText("notice that Belisa is nowhere to be seen. You walk to her home, and as you expected, you can see a “Fishing” sign on her door. You go to the river, and easily catch sight of Belisa underwater. You toss a rock down, and she looks up and sees you, swimming to the surface as fast as she can.");
-				break;
-			case 1:
-				outputText("notice that Belisa is relaxing just outside her home, needles busy at work. As you approach, she puts the needles and silkwork down, giving you a smile.");
-				break;
-			case 2:
-				outputText("can hear a faint humming from inside her home, golden light spilling through the silk. The light and sound flares, then stops, seemingly at random. You knock on the door, and you can hear a faint <i>\"Coming!\"</i> From inside. Belisa comes over to the door, opening it for you. Inside, one of her silk bands sits on her desk, a few arcane-looking tools holding it in place.");
-				break;
-			default:
-				outputText("notice that Belisa is relaxing just outside her home, needles busy at work. As you approach, she puts the needles and silkwork down, giving you a smile.");
+		if (SceneLib.amilyScene.amilyFollower() && !SceneLib.amilyScene.amilyCorrupt() && rand(5) == 0) {
+			outputText("As you’re walking to your Drider lover, you’re pleasantly surprised to see that she’s got company.\n\n");
+			outputText("\"<i>-And if you need anything else repaired, just drop by my dome, alright?</i>\" Belisa asks. \"<i>I also have spare silk bundles if you want to buy them, and if you want to-</i>\" Belisa sees you, and perks up. \"<i>Oh, [name]! Sorry if I’m in your way!</i>\"\n\n");
+			outputText("You assure her that she’s not in your way, that you came to see her, after all. Belisa brightens up at that, her back feet tapping the ground excitedly. Amily nods, excusing herself and walking away.\n\n");
 		}
-		outputText("<i>\"Oh, hello!\"</i> Belisa says brightly, her lower-half bobbing slightly. <i>\"What’s brought you over here?\"</i>");
-		if (BelisaConfessed) outputText("<i>\"...Anything I can help you with?\"</i> When she thinks you aren’t looking, she takes a glance down, beads of drool forming on her fangs.");
-		outputText("\n\n");
+		else {
+			outputText("You decide to go see your bashful Drider, Belisa. As you get near, you ");
+			var visit:Number = rand(3);
+			switch (visit) {
+				case 0:
+					outputText("notice that Belisa is nowhere to be seen. You walk to her home, and as you expected, you can see a “Fishing” sign on her door. You go to the river, and easily catch sight of Belisa underwater. You toss a rock down, and she looks up and sees you, swimming to the surface as fast as she can.");
+					break;
+				case 1:
+					outputText("notice that Belisa is relaxing just outside her home, needles busy at work. As you approach, she puts the needles and silkwork down, giving you a smile.");
+					break;
+				case 2:
+					outputText("can hear a faint humming from inside her home, golden light spilling through the silk. The light and sound flares, then stops, seemingly at random. You knock on the door, and you can hear a faint <i>\"Coming!\"</i> From inside. Belisa comes over to the door, opening it for you. Inside, one of her silk bands sits on her desk, a few arcane-looking tools holding it in place.");
+					break;
+				default:
+					outputText("notice that Belisa is relaxing just outside her home, needles busy at work. As you approach, she puts the needles and silkwork down, giving you a smile.");
+			}
+			outputText("<i>\"Oh, hello!\"</i> Belisa says brightly, her lower-half bobbing slightly. <i>\"What’s brought you over here?\"</i>");
+			if (BelisaConfessed) outputText("<i>\"...Anything I can help you with?\"</i> When she thinks you aren’t looking, she takes a glance down, beads of drool forming on her fangs.");
+			outputText("\n\n");
+		}
 		menu();
 		addButton(0, "Appearance", BelisaAppearance);
 		addButton(1, "Talk", BelisaTalk);
@@ -1086,7 +1178,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		if (player.hasCock()) {
 			addButton(1, "Fuck", BelisaFuck);
 			addButton(2, "Anal", BelisaAnal);
-			//addButton(3, "Silkjob", BelisaSilkjob);
+			addButton(3, "Silkjob", BelisaSilkjob);
 		}
 		if (player.hasVagina()) {
 			//addButton(5, "69", BelisaFunnyNumber);
@@ -1112,7 +1204,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 				if (player.hasCock()) {
 					addButton(1, "Fuck", BelisaFuck);
 					addButton(2, "Anal", BelisaAnal);
-					//addButton(3, "Silkjob", BelisaSilkjob);
+					addButton(3, "Silkjob", BelisaSilkjob);
 				}
 				if (player.hasVagina()) {
 					//addButton(5, "69", BelisaFunnyNumber);
@@ -1180,7 +1272,22 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 	
 	public function BelisaSilkjob():void {
 		clearOutput();
-		outputText("\n\n");
+		outputText("You tell Belisa that you want to try something a little different. She nods, looking down at your endowments. She idly chews on one finger for a moment before nodding once. <i>\"I have an idea.\"</i> She says, a small smile forming on her face. Belisa turns, exposing her spinnerets, and the silk-hole in the middle. <i>\"But this will require some…Precise movements.\"</i> She makes a silken blindfold, covering your eyes. <i>\"Let me guide you.\"</i> She takes your hand, and you feel a warm, wet sensation on each of your fingers. Curious, you curl one, and you hear Belisa gasp. <i>\"Hey…Hold still please.\"</i>\n\n");
+		outputText("You hear a rustling, and Belisa’s hands gently grasp your [cock]. She gives you a few tugs, making sure you’re fully erect, and you feel a warm gooey sensation, starting at your tip, working its way down your shaft. You feel Belisa’s fingers working, and after a few moments, she pulls the blindfold off.\n\n");
+		outputText("Your shaft is covered in a thin layer of silk, and you see strands wrapping around your [cock], trailing up to each of her fingers. Belisa pulls gently with her left thumb, and the silk around your [cockhead] tightens.\n\n");
+		outputText("Looking down at your own fingers, you see strands of silk on your own hands, thin lines wrapped snugly around Belisa’s bare nipples. Your right hand has more silk, trailing down to your Drider lover’s juicy snatch. Experimentally, you pull a few fingers back, tugging Belisa’s left nipple. She bites her lip, smiling, and you feel the strands around your [cockhead] tighten. Unlike you, Belisa’s strands are all wrapped around your shaft.\n\n");
+		outputText("Belisa starts moving, pulling on the strands. The silken wrappings around you move, undulating with each movement of her slender fingers. You pull, tightening the silk around Belisa’s perky nipples. This gets a gasp from your Drider lover, and she grins, leaning in. You pull, tightening the line between her legs, and you look down, realizing the silk there’s been augmented, bumpy nodules running between her lips with each pull. Belisa leans in, bringing her lips to yours. You open your mouth, letting her tongue enter, and she tweaks the line, your [cock] twitching at the increased stimulation.\n\n");
+		outputText("She pulls her head back, and you pull at her nipple-lines, getting a moan from her, lips moist with your saliva. <i>\"Look at me.\"</i> Belisa so rarely gives an order, but you look her in the eyes almost instinctively. <i>\"Perfect.\"</i> She stares back, until you pull on her pussy-line, running the bumpy silk along her lips.\n\n");
+		outputText("You pick up the pace, still looking into Belisa’s wide, hazel eyes. Steadily, her gaze glazes over, her breathing quickening. Her pale cheeks flush, but she keeps her eyes open, letting little gasps free with each movement of your fingers.\n\n");
+		outputText("Your [cock], bound in its silken prison, begins to pulse with lust, Belisa’s reactions and expert manipulation of the silk steadily building you towards orgasm.\n\n");
+		outputText("<i>\"...[name]...\"</i> Belisa whispers, her voice rising. <i>\"I…I’m close.\"</i> She closes one eye, biting her lip, and you grin, picking up the pace. This gets an immediate reaction, her legs shaking. <i>\"Mmm…Mmmyeah…\"</i> Her cheeks are redder than a tomato now, and she arches her back, accidentally pulling on her nipple-lines. <i>\"O-oh…Aghn…Not…Yet…\"</i> She pulls on your [cock], silk tightening, the walls rippling with her movements. You twitch, barely holding your own voice back as you edge closer to your own release.\n\n");
+		outputText("<i>\"Yes…Make me…!\"</i> Belisa’s tongue hangs out of her mouth, and you feel a dampness hit your [leg] as Belisa cums. Shaking, lost in her orgasm, she pulls her hands back, tightening the lines almost painfully on your shaft. You moan, thrusting your hips forward as your load shoots from your [cock], covering Belisa’s hips in your spooge.\n\n");
+		outputText("You take a minute to recover from your respective orgasms, and Belisa begins dismantling the silk lines, winding them up and gently peeling them off your sensitive bits.\n\n");
+		outputText("<i>\"You enjoyed yourself.\"</i> Belisa teases, tossing the bits of silk to one side and taking your shoulders in her hands. <i>\"Now I need to wash off.\"</i> You shrug, and she gives you a little smile. <i>\"Join me?\"</i>\n\n");
+		outputText("You and Belisa leave her house and jump into the river. You help your drider lover clean up, and the two of you redress in her silken home. \n\n");
+		outputText("<i>\"Come back soon, [name],\"</i> Belisa says softly as you leave. You turn back around, giving your lover a kiss on the cheek before heading back to your section of camp.\n\n");
+		player.sexReward("Default", "Default",true,false);
+		doNext(BelisaAfterSex1);
 	}
 	
 	public function BelisaFunnyNumber():void {
@@ -1412,21 +1519,5 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		chance += Math.min(player.virilityQ() * 100, 50);
 		return chance;
 	}
-
-	public function timeChange():Boolean {
-		/*if (pregnancy.isPregnant) {
-			pregnancy.pregnancyAdvance();
-			if (pregnancy.incubation == 0) {
-				BelisaEggLyaing();
-				pregnancy.knockUpForce(); //Clear Pregnancy
-				return true;
-			}
-		}*/
-		return false;
-	}
-
-	public function timeChangeLarge():Boolean {
-		return false;
-	}
-	}
+}
 }

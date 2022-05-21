@@ -141,6 +141,7 @@ package classes.Items
 		public const T_HEART:TrullHeart = new TrullHeart();
 		public const T_STAFF:TopazStaff = new TopazStaff();
 		public const TCLAYMO:TopazClaymore = new TopazClaymore();
+		public const TKNIVES:TaintlessKnives = new TaintlessKnives();
 		public const TODAGGER:Weapon = new Weapon("ToDagger","T.Dagger","topaz dagger","an topaz dagger","stab",3,240,"This dagger is made of eversteel and richly decorated with yellow topazes and copper engravings. The magic within this shining blade will oversaturate the metal with electricity when charged with magic.", "Small", "Dagger");
 		public const TDAGGER:Weapon = new Weapon("TDagger","ThrowDagger","throwing dagger","a throwing dagger","stab",2,160,"A small blade that could be thrown.  Preferred weapon for the rogues.", "Small", "Dagger, Thrown");
 		public const TRIDAG :Weapon = new Weapon("TriDag ","TriDagger","tri-dagger","a tri-dagger","stab",4,320,"A dagger whose blade is shaped like a perfect equilateral triangle.  It has chance to leave bleeding wounds.", "Small, Bleed25", "Dagger");

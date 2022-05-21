@@ -375,7 +375,7 @@ import classes.display.SpriteDb;
 			addButton(4, "M.Her", LilyJillOff);
 			addButton(5, "R.Play", LilyRape);
 			if (LilyFollowerState) addButton(6, "3Somes", Lily3Somes);
-			//if (LilySubmissivenessMeter == 100) addButton(7, "Exhibition", LilyExhibition);
+			if (LilySubmissivenessMeter == 100) addButton(7, "Exhibition", LilyExhibition);
 		}
 
 		public function LilyRape():void {
@@ -451,9 +451,9 @@ import classes.display.SpriteDb;
 			outputText("Now blind, gagged and her hands bound, the Drider woman spins her head around, letting out muffled distressed sounds. You take her ear again, whispering for her not to worry, that you’re still there. You explain that this is part of the reward, and rub her sopping wet pussy for good measure. You pull back, letting her muffled cries of protest fill your ears as you decide what to do with her, now that you’ve got her all tied up properly.\n\n");
 			menu();
 			if (LilyFollowerState) {
-				addButton(1, "Cabin", LilyBondageCabin);/*
-				if (LilySubmissiveness == 100) addButton(3, "Exhibition", LilyExhibition);
-				else addButtonDisabled(3, "???", "Req. 100% submissiveness.");*/
+				addButton(1, "Cabin", LilyBondageCabin);
+				if (LilySubmissivenessMeter >= 100) addButton(3, "Exhibition", LilyExhibition);
+				else addButtonDisabled(3, "???", "Req. 100% submissiveness.");
 			}
 			else addButton(2, "Tree", LilyBondageTree);
 		}
@@ -570,7 +570,7 @@ import classes.display.SpriteDb;
 		public function Lily3Somes():void {
 			clearOutput();
 			outputText("You grin at your submissive Drider-bitch, telling her to hold on a second. You know that she wants some fun, but you grin, telling her that she’s going to have some other company tonight. Lily’s eyes widen in excitement, and she rubs her hands together.\n\n");
-			outputText("\"Oh, "+ player.mf("master", "mistress") +", I love you!\" She cries, rushing over to your cabin. \"I’ll be trussed up for you before you get back! Please don’t keep me waiting…\" She closes the cabin door behind her, and you can all but hear the sound of her webbing being made. Who do you want to be your other partner tonight?\n\n");
+			outputText("<i>\"Oh, "+ player.mf("master", "mistress") +", I love you!\"</i> She cries, rushing over to your cabin. <i>\"I’ll be trussed up for you before you get back! Please don’t keep me waiting…\"</i> She closes the cabin door behind her, and you can all but hear the sound of her webbing being made. Who do you want to be your other partner tonight?\n\n");
 			menu();
 			//addButton(1, "Sidonie",LilySidonie3Some);
 			//addButton(2, "Izma",LilyIzma3Some);
@@ -673,58 +673,77 @@ import classes.display.SpriteDb;
 			menu();
 			addButton (1, " ", );
 		}
-		
+		*/
 		public function LilyExhibition():void {
 			clearOutput();
 			outputText("You take your spider-slut to the camp wall, and with a few swift motions, you tie her back legs up, binding her back-half to the wall. You throw the rope on her hands over an outcropping, forcing the Drider’s hands over her head. The wind picks up, and Lily realizes that she’s outside.\n\n");
-			outputText("\"Mmm? MMMMHM?!\" She begins to struggle, but you step in, kissing your little slut on the mouth. She leans in, but you quickly back your head away, sinking your fingers into her already soaking twat. Running your fingers along her pussy, teasing her mercilessly, you bring your lips to her ear.\n\n");
+			outputText("<i>\"Mmm? MMMMHM?!\"</i> She begins to struggle, but you step in, kissing your little slut on the mouth. She leans in, but you quickly back your head away, sinking your fingers into her already soaking twat. Running your fingers along her pussy, teasing her mercilessly, you bring your lips to her ear.\n\n");
 			outputText("You ask Lily if she knows where she is. She shakes her head, and you lean in, letting your voice drop. You tell her that she’s tied to the wall. The Drider begins poking around with her unbound legs. You tell her that it’s time for your itsy bitsy spider slut to come out to the camp. You tell Lily that you’re going to give her the best reward she’s ever gotten, and it’s happening right here, right now. Now frozen in place, Lily begins to whimper through the gag. Despite this, she isn’t giving you her usual signal to stop, so…\n\n");
 			outputText("You raise your voice, yelling for the entire camp to hear. You declare that someone needs to introduce themselves to everyone, and that she’s promised to take care of everyone’s needs for today. You slap the insides of Lily’s frontmost legs, forcing them open so that everyone present can see your Drider-toy’s sopping wet muff.\n\n");
-			//Various NPCs reactions here: Need to use Kflags for most, and IDK what those Kflags are. Not interested NPCs here
-			// Pure Amily
-			outputText("Amily notices Lily tied up, she looks as if she wants to say something, but instead grimaces slightly before walking off.\n\n");
-			//Arian
-			outputText("Arian pokes [his/her] head out from [his/her] tent, sees the tied up Drider, and blinks twice. Apparently realizing that [he/she]’s not seeing things, [he/she] shakes [his/her] head disapprovingly. A small bubble of translucent energy forms around the tent, and you have the feeling it’s some kind of soundproofing spell.\n\n");
-			//Belisa
-			outputText("Belisa sees you take Lily, and her eyes widen. She fans herself, blushing wildly, before going into her house and shutting the silk door behind her. Something tells you she’ll be in there until you’re done.\n\n");
-			//Chi Chi
-			outputText("Chi Chi looks up from her training, sees your Drider-slut, and exhales angrily. She punches one of her dummies so hard she shatters the thing, then strides away into the woods.\n\n");
+			if (SceneLib.amilyScene.amilyFollower() && !SceneLib.amilyScene.amilyCorrupt()) outputText("Amily notices Lily tied up, she looks as if she wants to say something, but instead grimaces slightly before walking off.\n\n");
+			if (arianScene.arianFollower()) outputText("Arian pokes [Arian Eir] head out from [Arian Eir] tent, sees the tied up Drider, and blinks twice. Apparently realizing that [Arian Ey]’s not seeing things, [Arian Ey] shakes [Arian Eir] head disapprovingly. A small bubble of translucent energy forms around the tent, and you have the feeling it’s some kind of soundproofing spell.\n\n");
+			if (BelisaFollower.BelisaInCamp) outputText("Belisa sees you take Lily, and her eyes widen. She fans herself, blushing wildly, before going into her house and shutting the silk door behind her. Something tells you she’ll be in there until you’re done.\n\n");
+			if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) outputText("Chi Chi looks up from her training, sees your Drider-slut, and exhales angrily. She punches one of her dummies so hard she shatters the thing, then strides away into the woods.\n\n");
 			//Diva
-			outputText("Diva hears the ruckus, poking her head out, then rolls her eyes. \"Thou art making a mockery of both lovemaking and Dungeons\". She then goes back to sleep. \"Wake me at thoust peril\".\n\n");
-			//Pure Jojo
-			outputText("Jojo notices your display before shielding his eyes and turning away, wanting none of your lewd nonsense.\n\n");
-			//Siegward
-			outputText("Siegweird gives a disapproving glower, but otherwise, the paladin does not approach\n\n");
-			//Zenji
-			outputText("Zenji remains on top of his tree, peering at you and your bound accomplice, he seems disinterested in the proceedings.\n\n");
-			//Ember
-			outputText("Ember sticks her head out of her lair, seeing you establish your dominance. She rolls his/her eyes at the crass display, taking off.\n\n");
-
-			//Interested NPCs here.
-
-			//Kiha
-			outputText("Kiha stares at your display, mouth wide open, then harrumphs, turning her head away. When she thinks you aren’t looking, she turns her head back, rubbing her knees together nervously. You can see the moisture dripping from her legs.\n\n");
-			//Joy
-			outputText("Joy sees the tied up Drider, and her eyes light up. Joy walks closer to the display, bobbing back and forth, her little tail waggling as she raises her hand to get your attention. Something tells you she’s not really interested carnally, but she could be entertaining, nonetheless.\n\n");
-			//Corrupt Amily
-			outputText("Amily's tail slides up and down her legs, stroking herself eagerly, but the obedient slut won't approach unless it's demanded of her.\n\n");
-			//Electra
-			outputText("Electra sees the scene unfolding, her ears perking up with interest. She slides over, static sparking across her body as she sees the helpless Drider.\n\n");
-			//Etna
-			outputText("Etna perks up at the lewd display, scampering over and rubbing her pussy-tail on her thigh. \"Nyaaa, how fun!\"\n\n");
-			//Tyrantia
-			outputText("Tyrantia grins, grabbing her Dick and standing not far away. Something tells you she wants to stick her Dick in her little sister.\n\n");
-			//Izma w/dick
-			outputText("Your shark-lover, Izma(el) surfaces, seeing your display. Already rock-hard, [he/she] approaches, a grin on [his/her] face. \"Having some fun, my Alpha?\"\n\n");
-			//Sidonie
-			outputText("Sidonie sees the tied up Drider, waggling her eyebrows at you. You notice that she already has a tent in her pants, and she walks over, eyeing up Lily. \"Interesting. Caught some fresh meat for us, [name]?\n\n");
+			//outputText("Diva hears the ruckus, poking her head out, then rolls her eyes. <i>\"Thou art making a mockery of both lovemaking and Dungeons.\"</i> She then goes back to sleep. <i>\"Wake me at thoust peril.\"</i>\n\n");
+			if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) outputText("Jojo notices your display before shielding his eyes and turning away, wanting none of your lewd nonsense.\n\n");
+			if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) outputText("Siegweird gives a disapproving glower, but otherwise, the paladin does not approach\n\n");
+			if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9 || flags[kFLAGS.ZENJI_PROGRESS] == 11) outputText("Zenji remains on top of his tree, peering at you and your bound accomplice, he seems disinterested in the proceedings.\n\n");
+			if (emberScene.followerEmber()) outputText("Ember sticks "+((flags[kFLAGS.EMBER_GENDER] == 2 || flags[kFLAGS.EMBER_GENDER] == 3)?"her":"his")+" head out of "+((flags[kFLAGS.EMBER_GENDER] == 2 || flags[kFLAGS.EMBER_GENDER] == 3)?"her":"his")+" lair, seeing you establish your dominance. She rolls "+((flags[kFLAGS.EMBER_GENDER] == 2 || flags[kFLAGS.EMBER_GENDER] == 3)?"her":"his")+" eyes at the crass display, taking off.\n\n");
+			if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) outputText("Luna sees the Drider tied up, and is almost disappointed. <i>“"+ player.mf("master", "mistress") +", if you wanted…”</i> She cuts herself off, shaking her head. She doesn’t leave, however, instead walking to your cabin and coming back with a paddle, a whip, and some other crude toys. She stands not far from you, apparently intending to pass you an implement, should you want one.\n\n");
+			if (followerKiha()) outputText("Kiha stares at your display, mouth wide open, then harrumphs, turning her head away. When she thinks you aren’t looking, she turns her head back, rubbing her knees together nervously. You can see the moisture dripping from her legs.\n\n");
+			if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_COCK_SIZE] < 1) outputText("Joy sees the tied up Drider, and her eyes light up. Joy walks closer to the display, bobbing back and forth, her little tail waggling as she raises her hand to get your attention. Something tells you she’s not really interested carnally, but she could be entertaining, nonetheless.\n\n");
+			if (SceneLib.amilyScene.amilyFollower() && SceneLib.amilyScene.amilyCorrupt()) outputText("Amily's tail slides up and down her legs, stroking herself eagerly, but the obedient slut won't approach unless it's demanded of her.\n\n");
+			if (flags[kFLAGS.ELECTRA_FOLLOWER] > 1 && !player.hasStatusEffect(StatusEffects.ElectraOff)) outputText("Electra sees the scene unfolding, her ears perking up with interest. She slides over, static sparking across her body as she sees the helpless Drider.\n\n");
+			if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("Etna perks up at the lewd display, scampering over and rubbing her pussy-tail on her thigh. <i>\"Nyaaa, how fun!\"</i>\n\n");
+			if (TyrantiaFollower.TyrantiaFollowerStage >= 4) outputText("Tyrantia grins, grabbing her Dick and standing not far away. Something tells you she wants to stick her Dick in her little sister.\n\n");
+			if (izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) outputText("Your shark-lover, Izma"+(flags[kFLAGS.IZMA_BROFIED] == 1?"el":"")+" surfaces, seeing your display. Already rock-hard, "+(flags[kFLAGS.IZMA_BROFIED] == 1?"":"s")+"he approaches, a grin on h"+(flags[kFLAGS.IZMA_BROFIED] == 1?"is":"er")+" face. <i>\"Having some fun, my Alpha?\"</i>\n\n");
+			if (flags[kFLAGS.SIDONIE_FOLLOWER] == 1) outputText("Sidonie sees the tied up Drider, waggling her eyebrows at you. You notice that she already has a tent in her pants, and she walks over, eyeing up Lily. <i>\"Interesting. Caught some fresh meat for us, [name]?\"</i>\n\n");
 			menu();
-			addButton(1, "Etna", LilyExEtna);
-			addButton(2, "Electra", LilyExElectra);
-			addButton(3, "Izma/el", LilyExIzma);
-			addButton(4, "Joy", LilyExJoy);
+			//addButton(1, "Etna", LilyExEtna);
+			if (flags[kFLAGS.ELECTRA_FOLLOWER] > 1 && !player.hasStatusEffect(StatusEffects.ElectraOff) && flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) {
+				if (player.hasCock()) addButton(2, "Electra/Luna", LilyExElectra);
+				else addButtonDisabled(2, "Electra/Luna", "Not for dickless ones.");
+			}
+			//addButton(3, "Izma/el", LilyExIzma);
+			if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_COCK_SIZE] < 1) addButton(4, "Joy", LilyExJoy);
 		}
-		*/
+		public function LilyExEtna():void {
+			clearOutput();
+			outputText("You just look at your Manticore catgirl, and she grins from ear to ear, bounding over to you. Her scorpion tail flicks back and forth, and her red eyes flash.\n\n");
+			outputText("<i>\"I can have some fun with her?\"</i>\n\n");
+			outputText("<i>\"\"</i>\n\n");
+			outputText("<i>\"\"</i>\n\n");
+		}
+		public function LilyExElectra():void {
+			clearOutput();
+			outputText("You call your sparky lover forward, and Electra looks at you, her eyes lit up. Her fluffy tail shivers, and her clawed hands paw the air as she nears you. \n\n");
+			outputText("<i>\"Oh, [name], does that mean you’re going to let me play with your toy?\"</i> Electra smiles, tapping Lily’s chain with one claw. A spark runs from Electra to Lily, sending a little puff of smoke up at each of Lily’s nipples. Lily gasps, but Electra’s nowhere near done. The Raiju slips a finger into Lily’s cunt, kissing the Drider’s breast.\n\n");
+			outputText("<i>\"Mm, such a reactive toy.\"</i> Sparks play, linking the two points of contact. Electra grins, slapping Lily’s thorax. <i>\"Down, please.\"</i> Removing her finger from the Drider’s twat, Electra saunters over to her spider-half, running her fluffed up tail along Lily’s flank, sending another small series of shocks into your Drider-toy.\n\n");
+			outputText("<i>\"Mmmm?!\"</i> Lily flinches as Electra takes a hold of one of her legs, swinging up onto Lily’s Spider-back. The raiju giggles as Lily moans, trying to see through her blindfold.\n\n");
+			outputText("<i>\"Shhhh,\"</i>you walk to Lily’s front, roughly sticking your fingers into her sopping pussy. You jill her off, feeling the little sparks of electricity intensify.\n\n");
+			outputText("Electra ups the juice, sending slight convulsions through Lily’s entire body. Your Drider-toy wails through the gag, painting your fingers with her fluids. Electra nuzzles her cheek into Lily’s back and neck, then with a mischievous look on her face, takes a hold of Lily’s chain, sticking the end-link into her pussy.\n\n");
+			outputText("Struck by a sudden, fun idea, you stop pleasuring Lily’s sopping box, asking Luna to make sure that Lily’s pussy receives plenty of attention. Your ever-obedient maid takes hold of Lily’s clit, rubbing and licking the sensitive button, while you make your way over to Electra. Your Raiju lover watches intently as you draw near, taking her hand and pulling her towards you, spreading her legs wide.\n\n");
+			outputText("Electra arches her back over Lily’s carapace, spreading even more sparks as you line your [cockhead] up with the Raiju’s quivering folds. As you insert yourself, Electra cries out, wrapping her legs around your waist and pulling you down on top of her. The chain is cold against your [cock], but the electricity running through it, combined with the slick warmth of Electra’s pussy, makes it far more bearable.\n\n");
+			outputText("Electra grins evilly, sticking her fingers into Lily’s bubble-butt, groping the Drider as you pick up the pace, sending more electricity coursing through the chain. Lily bucks, screaming through the gag as Luna’s ministrations, the electricity, and your Raiju lover’s teasing send her over the edge.\n\n");
+			outputText("The irregular bucking motions finally tip you over, and you let out a growl, cumming into Electra’s well-fucked Raiju pussy. Electra hums, her furry tail finally losing a good chunk of its staticy fluff, and she wails, spraying you with femspunk as you pull out. Your spooge leaks from Electra, and she slides off Lily and onto the ground, bobbing her head happily back and forth. The chain isn’t long enough to reach the ground, and it slides out of Electra.\n\n");
+			outputText("Luna takes her fingers out of Lily’s pussy as you approach. You slide your [cock] across her chitinous leg, wiping your Raiju lover’s juices off.\n\n");
+			player.sexReward("vaginalFluids","Dick");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function LilyExIzma():void {
+			clearOutput();
+			outputText("<i>\"\"</i>\n\n");
+		}
+		public function LilyExJoy():void {
+			clearOutput();
+			outputText("You point at Joy, somewhat curious as to what the bumbling bimbo will choose to do. Joy squeals with delight, leaping onto your Drider-toy’s back, grabbing her shoulders and slapping her spinnerets hard.\n\n");
+			outputText("<i>\"Cmon, try and throw me off!\"</i> She yells, and Lily is all too happy to comply. She throws herself into the air, wiggles from side to side, and keeps changing angles. Joy holds on for dear life, eyes widening and mouth wide open as her furry ass slams repeatedly into Lily’s hard carapace. After a particularly wide buck and hard jump, one of Joy’s hands is wrenched from Lily’s shoulder. Once that happens, it isn’t long before your mouse-bimbo is sent flying.\n\n");
+			outputText("<i>\"WHEEEEEEeeeee...\"</i> she’s thrown a good twenty feet, hitting the grass rolling. Bruised but unharmed, Joy springs back up, giggling as she dances from side to side.\n\n");
+			eachMinuteCount(15);
+			doNext(playerMenu);
+		}
+		
 		public function LilyBondageTreeVagfuck():void {
 			clearOutput();
 			outputText("You step in, slapping Lily’s front legs aside. Smiling, you disrobe, pulling your [cock] out. Taking your shaft in one hand, you rub yourself, blood rushing to your [cock]. Now rock-hard, you look at your tied up fucktoy as she moans, her pussy already dripping.\n\n");
