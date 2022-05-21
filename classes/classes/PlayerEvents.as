@@ -1233,15 +1233,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 			player.updateRacialCache();
 			//Demonic hunger perk
-			if (player.demonScore() >= 10 || player.hasPerk(PerkLib.Phylactery)) { //Check for being a demon enough
+			if (player.isRace(Races.DEMON) || player.hasPerk(PerkLib.Phylactery)) { //Check for being a demon enough
 				if (!player.hasPerk(PerkLib.DemonEnergyThirst)) {
 					outputText("\nYou begin fantasising about pussies and cocks foaming at the idea of fucking or getting fucked. It would look like you aquired the demons hunger for sex and can now feed from the orgasms of your partners. \n\n(<b>Gained Perk: Demonic Hunger</b>)\n");
 					player.createPerk(PerkLib.DemonEnergyThirst, 0, 0, 0, 0);
 					needNext = true;
 				}
-			}
-			//Demonic hunger perk loss
-			if (player.demonScore() < 10 && !player.hasPerk(PerkLib.Phylactery)) { //Check for being a demon enough
+			} else { //Check for being a demon enough
 				if (player.hasPerk(PerkLib.DemonEnergyThirst)) {
 					outputText("\nYour mind clears up as becoming less of a demon you also lost the demonic hunger only sex could sate. \n\n(<b>Lost Perk: Demonic Hunger</b>)\n");
 					player.removePerk(PerkLib.DemonEnergyThirst);
@@ -1407,7 +1405,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Hydra heads
 			if (player.lowerBody != LowerBody.HYDRA && player.hasStatusEffect(StatusEffects.HydraTailsPlayer)) player.removeStatusEffect(StatusEffects.HydraTailsPlayer);
 			//Greed Perk
-			if (player.raccoonScore() >= 13 && !player.hasPerk(PerkLib.Greedy)) {
+			if (player.isRace(Races.RACCOON, 2) && !player.hasPerk(PerkLib.Greedy)) {
 				outputText("\nYou are feeling absurdly lucky today so lucky there's no way fortune could turn against you. You nature as a tanuki has improved your ability to generate wealth, wherever there is more gems to make you will find and collect them. \n\n(<b>Gained Perk: Greedy</b>)");
 				player.createPerk(PerkLib.Greedy, 0, 0, 0, 0);
 				needNext = true;
@@ -1482,7 +1480,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//DarkCharm
-			if (player.demonScore() >= 6) {
+			if (player.isRace(Races.DEMON)) {
 				if (!player.hasPerk(PerkLib.DarkCharm)) {
 					outputText("\nYou feel a strange sensation in your body. With you looking like a demon, you have unlocked the potential to use demonic charm attacks!\n\n(<b>Gained Perk: Dark Charm</b>)\n");
 					player.createPerk(PerkLib.DarkCharm, 0, 0, 0, 0);

@@ -774,9 +774,6 @@ public class Creature extends Utils
 		}
 		public function maxLust_mult():Number {
 			var maxmult:Number = 1;
-			if (game.player.demonScore() >= 5) maxmult += 0.2;
-			if (game.player.demonScore() >= 11) maxmult += 0.4;
-			if (game.player.demonScore() >= 16) maxmult += 0.6;
 			if (TyrantiaFollower.TyrantiaTrainingSessions > 0.5) maxmult += 0.01 * TyrantiaFollower.TyrantiaTrainingSessions;
 			return maxmult;
 		}

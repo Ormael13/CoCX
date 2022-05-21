@@ -272,7 +272,7 @@ public class MagicSpecials extends BaseCombatContent {
 			else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			else bd.requireFatigue(spellCost(40),true);
 		}
-		if (player.devilkinScore() >= 10 || player.perkv1(IMutationsLib.ObsidianHeartIM) >= 1) {
+		if (player.isRace(Races.DEVIL) || player.perkv1(IMutationsLib.ObsidianHeartIM) >= 1) {
 			bd = buttons.add("Infernal flare", infernalflare).hint("Use corrupted flames to burn your opponent. \n");
 			if (player.perkv1(IMutationsLib.ObsidianHeartIM) >= 3) bd.requireMana(spellCost(50),true);
 			else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -640,7 +640,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You cannot focus to reach the enemy's mind while you're having so much difficult breathing.");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
-		if (player.devilkinScore() >= 10 || player.perkv1(IMutationsLib.ObsidianHeartIM) >= 1) {
+		if (player.isRace(Races.DEVIL) || player.perkv1(IMutationsLib.ObsidianHeartIM) >= 1) {
 			bd = buttons.add("Maleficium", maleficium).hint("Infuse yourself with corrupt power empowering your magic but reducing your resistance to carnal assault.");
 			if(player.hasStatusEffect(StatusEffects.Maleficium)) {
 				bd.disable("You already empowered with corrupt power!");
@@ -686,7 +686,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You need more time before you can use Displacement again.\n\n");
 			}
 		}
-		if (player.raccoonScore() >= 14 && !monster.plural) {
+		if (player.isRace(Races.RACCOON, 2) && !monster.plural) {
 			bd = buttons.add("Prank", Prank).hint("Distract the enemy for 1 round interupting its action. \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "4":"5")+" rounds", "Prank");
 			if (player.hasStatusEffect(StatusEffects.CooldownPrank)) {
 				bd.disable("You need more time before you can prank your opponent again.");

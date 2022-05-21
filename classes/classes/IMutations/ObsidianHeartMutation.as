@@ -7,6 +7,7 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Player;
+import classes.Races;
 
 public class ObsidianHeartMutation extends IMutationPerkType
     {
@@ -56,9 +57,7 @@ public class ObsidianHeartMutation extends IMutationPerkType
                 IMutationsLib.ObsidianHeartIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.ObsidianHeartIM.requireHeartMutationSlot()
-                    .requireCor(100).requireCustomFunction(function (player:Player):Boolean {
-                        return player.devilkinScore() >= 11;
-                    }, "Devil race");
+                    .requireCor(100).requireRace(Races.DEVIL);
                 }
                 else{
                     var pLvl:int = pTier * 30;

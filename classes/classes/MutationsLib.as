@@ -590,9 +590,7 @@ public class MutationsLib
 				ArachnidBookLung.requireAdaptationsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.isRace(Races.SPIDER) || player.isRace(Races.ATLACH_NACHA, 2);
 				}, "Arachnid race");
-				BlackHeart.requireHeartMutationSlot().requirePerk(PerkLib.DarkCharm).requireCor(100).requireCustomFunction(function (player:Player):Boolean {
-					return player.demonScore() >= 11;
-				}, "Demon race");
+				BlackHeart.requireHeartMutationSlot().requirePerk(PerkLib.DarkCharm).requireCor(100).requireRace(Races.DEMON);
 				CatlikeNimbleness.requirePerk(PerkLib.Flexibility)
 						.requireRacialGroup(Races.CatlikeRaces, "Any cat race");
 				DisplacerMetabolism.requireMetabolismMutationSlot().requireRace(Races.DISPLACERBEAST);
@@ -659,9 +657,7 @@ public class MutationsLib
 				.requireCustomFunction(function (player:Player):Boolean {
 					return player.cowScore() >= 10;
 				}, "Lacta Bovine race");
-				LizanMarrow.requireBonesAndMarrowMutationSlot().requirePerk(PerkLib.LizanRegeneration).requireCustomFunction(function (player:Player):Boolean {
-					return player.lizardScore() >= 8;
-				}, "Lizan race");
+				LizanMarrow.requireBonesAndMarrowMutationSlot().requirePerk(PerkLib.LizanRegeneration).requireRace(Races.LIZARD)
 				ManticoreMetabolism.requireMetabolismMutationSlot().requireRace(Races.MANTICORE);
 				MantislikeAgility.requireMusclesMutationSlot().requirePerk(TrachealSystem).requireRace(Races.MANTIS);
 				MelkieLung.requireLungsMutationSlot().requireRace(Races.MELKIE);
@@ -678,11 +674,9 @@ public class MutationsLib
 					return player.isGoblinoid();
 				}, "Goblin race");
 				NukiNuts.requireBallsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.raccoonScore() >= 4 && player.balls > 0 && player.ballSize > 5;
+					return player.isRace(Races.RACCOON) && player.balls > 0 && player.ballSize > 5;
 				}, "Tanuki race and large balls");
-				ObsidianHeart.requireHeartMutationSlot().requireCor(100).requireCustomFunction(function (player:Player):Boolean {
-					return player.devilkinScore() >= 11;
-				}, "Devil race");
+				ObsidianHeart.requireHeartMutationSlot().requireCor(100).requireRace(Races.DEVIL);
 				OniMusculature.requireMusclesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.tone >= 100;
 				}, "100+ tone")
@@ -697,9 +691,7 @@ public class MutationsLib
 				SalamanderAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(PerkLib.Lustzerker).requireAnyRace(Races.SALAMANDER, Races.PHOENIX);
 				SharkOlfactorySystem.requirePeripheralNervSysMutationSlot().requireRace(Races.SHARK);
 				ScyllaInkGlands.requirePerk(PerkLib.InkSpray).requireRace(Races.SCYLLA);
-				TrachealSystem.requireCustomFunction(function (player:Player):Boolean {
-					return player.beeScore() >= 14 || player.isRace(Races.MANTIS) || player.isRace(Races.SCORPION) || player.isRace(Races.SPIDER) || player.isRace(Races.CANCER) || player.isRace(Races.ATLACH_NACHA,2);
-				}, "Any insect race");
+				TrachealSystem.requireAnyRace(Races.BEE, Races.MANTIS, Races.SCORPION, Races.SPIDER, Races.CANCER, Races.ATLACH_NACHA);
 				TwinHeart.requireAdaptationsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.centaurScore() >= 8 || player.unicornScore() >= 12 || player.isRace(Races.SPHINX) || player.isRace(Races.CANCER) || player.isTaur() || player.isDrider();
 				}, "Taur/Drider or Unicorn/Bicorn race");

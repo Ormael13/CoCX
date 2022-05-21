@@ -5,7 +5,6 @@
 * Inline `xxxxScore` functions?
 * fangs in `-morph/boy/girl`
 * iterate in chimeras
-* kill array of objects in `race()`
 * solve unicornkin/alicornkin races
 * consider moving naming function from tier to race
 * NG+ & paragon-like scale buffs in race itself

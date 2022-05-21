@@ -7,6 +7,7 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Player;
+import classes.Races;
 
 public class NukiNutsMutation extends IMutationPerkType
     {
@@ -57,7 +58,7 @@ public class NukiNutsMutation extends IMutationPerkType
                 if (pTier == 0){
                     IMutationsLib.NukiNutsIM.requireBallsMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.raccoonScore() >= 4 && player.balls > 0 && player.ballSize > 5;
+                        return player.isRace(Races.RACCOON) && player.balls > 0 && player.ballSize > 5;
                     }, "Tanuki race and large balls");
                 }
                 else{

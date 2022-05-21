@@ -41,8 +41,6 @@ public class BeeGirlScene extends BaseContent
 		private function get conversation():int { return (flags[kFLAGS.BEE_GIRL_STATUS] & BEE_GIRL_CONVERSATION) >> 16; }
 
 		private function set conversation(value:int):void { flags[kFLAGS.BEE_GIRL_STATUS] = (flags[kFLAGS.BEE_GIRL_STATUS] & BEE_GIRL_ATTITUDE) + (value << 16); }
-		
-		public static var beeHair:Array = ["shiny black", "brown", "yellow"]; //"black and yellow", "brown and yellow"
 
 		//The Queen Bee
 		//location: Forest
@@ -156,7 +154,7 @@ public class BeeGirlScene extends BaseContent
 			else outputText("Come here little one, I’ll help you become a real bee boy");
 			outputText(",\"</i> she says opening her arms wide to accept you.");
 			//Chance to avoid raaaaeeeeep
-            
+   
 			if (player.lust < player.maxLust() * 0.60 || rand(3) == 0) {
                 var play:Function = null;
 
@@ -1480,7 +1478,7 @@ public class BeeGirlScene extends BaseContent
 			addButtonIfTrue(0, "Use Cock", rapeTheBeeGirlWithADick, "Req. cock area smaller than " + monster.vaginalCapacity(), dicksFit > 0, "Fuck her with your dick.");
 			addButtonIfTrue(1, "Multicock", rapeTheBeeMultiCockStuff, "Req. at least 2 cocks with area smaller than " + monster.vaginalCapacity(), dicksFit > 1, "More dicks, more fun!");
 			//vag
-			if (player.hasVagina) var tempVagDesc:String = vaginaDescript()
+			if (player.hasVagina()) var tempVagDesc:String = vaginaDescript()
 			addButtonIfTrue(2, "Use Vagina", rapeABeeGirlWithYourVagina, "Req. a vagina", player.hasVagina(), "You could make her get off your " + tempVagDesc + ".");
 			//herm
 			addButtonIfTrue(3, "Herm Style", futaRapesBeeGirl, "Req. a vagina and a dick", player.isHerm(), "You could try to please both your 'male' and 'female' halves on the bee."); //can be non-fitting and non-taur

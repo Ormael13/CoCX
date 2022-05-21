@@ -5,32 +5,32 @@ import classes.internals.race.RaceTierBuilder;
 public class Races {
 	
 	public static const HUMAN:Race = new Race("Human",1, "humanScore", 1);
-	public static const CAT:CatRace = new CatRace(2);
-	public static const NEKOMATA:NekomataRace = new NekomataRace(3);
-	public static const CHESHIRE:CheshireRace = new CheshireRace(4);
-	public static const HELLCAT:HellcatRace = new HellcatRace(5);
-	public static const DISPLACERBEAST:DisplacerBeastRace = new DisplacerBeastRace(6);
-	public static const SPHINX:SphinxRace = new SphinxRace(7);
-	public static const LIZARD:Race = new Race("Lizard",8, "lizardScore", 8);
-	public static const DRAGON:DragonRace = new DragonRace(9);
-	public static const DRAGONNE:DragonneRace = new DragonneRace(10);
-	public static const RACCOON:Race = new Race("Raccoon",11,"raccoonScore", 8);
-	public static const DOG:Race = new Race("Dog",12,"dogScore", 4);
-	public static const WOLF:WolfRace = new WolfRace(13);
-	public static const WEREWOLF:WerewolfRace = new WerewolfRace(14);
-	public static const FOX:Race = new Race("Fox",15,"foxScore", 7);
-	public static const FERRET:Race = new Race("Ferret",16,"ferretScore", 4);
-	public static const KITSUNE:KitsuneRace = new KitsuneRace(17);
+	public static const CAT:CatRace                        = new CatRace(2);
+	public static const NEKOMATA:NekomataRace              = new NekomataRace(3);
+	public static const CHESHIRE:CheshireRace              = new CheshireRace(4);
+	public static const HELLCAT:HellcatRace                = new HellcatRace(5);
+	public static const DISPLACERBEAST:DisplacerBeastRace  = new DisplacerBeastRace(6);
+	public static const SPHINX:SphinxRace                  = new SphinxRace(7);
+	public static const LIZARD:LizardRace                  = new LizardRace(8);
+	public static const DRAGON:DragonRace                  = new DragonRace(9);
+	public static const DRAGONNE:DragonneRace              = new DragonneRace(10);
+	public static const RACCOON:RaccoonRace                = new RaccoonRace(11);
+	public static const DOG:DogRace                        = new DogRace(12);
+	public static const WOLF:WolfRace                      = new WolfRace(13);
+	public static const WEREWOLF:WerewolfRace              = new WerewolfRace(14);
+	public static const FOX:FoxRace                        = new FoxRace(15);
+	public static const FERRET:FerretRace                  = new FerretRace(16);
+	public static const KITSUNE:KitsuneRace                = new KitsuneRace(17);
 	public static const HORSE:Race = new Race("Horse",18, "horseScore", 7);
 	public static const UNICORN:Race = new Race("Unicorn",19,"unicornScore", 8);
 	public static const CENTAUR:Race = new Race("Centaur",20, "centaurScore", 8);
 	public static const MINOTAUR:Race = new Race("Minotaur",21,"minotaurScore", 10);
 	public static const COW:Race = new Race("Cow",22,"cowScore", 10);
-	public static const SANDTRAP:SandTrapRace = new SandTrapRace(23);
-	public static const BEE:Race = new Race("Bee",24,"beeScore", 17);
-	public static const GOBLIN:GoblinRace = new GoblinRace(25);
-	public static const DEMON:Race = new Race("Demon",26,"demonScore", 11);
-	public static const DEVIL:Race = new Race("Devil",27,"devilkinScore", 11);
+	public static const SANDTRAP:SandTrapRace              = new SandTrapRace(23);
+	public static const BEE:BeeRace                        = new BeeRace(24);
+	public static const GOBLIN:GoblinRace                  = new GoblinRace(25);
+	public static const DEMON:DemonRace                    = new DemonRace(26);
+	public static const DEVIL:DevilRace                    = new DevilRace(27);
 	public static const SHARK:SharkRace                    = new SharkRace(28);
 	public static const ORCA:OrcaRace                      = new OrcaRace(29);
 	public static const OOMUKADE:OomukadeRace              = new OomukadeRace(30);
@@ -133,7 +133,13 @@ public class Races {
 		var nreq:int=0,nt:int=0,nr:int=0;
 		
 		for each (var race:Race in Race.AllRacesWithDisabled) {
-			race.setup();
+			try {
+				race.setup();
+			} catch (e:Error) {
+				trace("[ERROR] Error initializing race "+race.name);
+				trace(e.getStackTrace());
+				continue;
+			}
 			if (race.disabled) {
 				trace("Race "+race.name+" (#"+race.id+") is disabled")
 				continue;

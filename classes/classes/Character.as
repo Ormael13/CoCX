@@ -614,8 +614,6 @@ import classes.CoC;
 			var max:Number = maxFatigueBaseStat.value;
 			var multimax:Number = maxFatigueMultStat.value;
 			max += maxFatiguePerSpeStat.value*spe;
-			if (game.player.foxScore() >= 7) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.lizardScore() >= 8) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.unicornScore() >= 10) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.EromancyBeginner)) max += Math.round(lib);
 			if (hasPerk(PerkLib.EromancyExpert)) max += Math.round(lib*2);
@@ -692,7 +690,6 @@ import classes.CoC;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_SF) max += necklaceEffectMagnitude;//+100	 necklaceName == "soulmetal necklace"
 			max += level * maxSfPerLevelStat.value;
 			if (level <= 6) max += level * 5;
-			if (game.player.demonScore() >= 11) multimax -= 0.8;
 			if (isGargoyle() && Forgefather.material == "marble")
 			{
 				if (Forgefather.refinement == 1) multimax += (.15);
@@ -756,8 +753,6 @@ import classes.CoC;
 			if (level <= 6) max += level * 5;
 			else max += 30;
 			//~194,455
-			if (game.player.demonScore() >= 11) multimax -= 0.3;
-			if (game.player.demonScore() >= 16 && hasPerk(PerkLib.Phylactery)) multimax -= 0.15;
 			if (game.player.isRace(Races.ORC)) multimax += 0.2;
 			if (vehiclesName == "Giant Slayer Mech") {
 				multimax += 0.1;
@@ -853,8 +848,6 @@ import classes.CoC;
 			if (hasPerk(PerkLib.EromancyBeginner)) max += Math.round(inte*3);
 			if (hasPerk(PerkLib.EromancyExpert)) max += Math.round(inte*3);
 			if (hasPerk(PerkLib.EromancyMaster)) max += Math.round(inte*6);
-			if (game.player.demonScore() >= 11) multimax += 0.8;
-			if (game.player.demonScore() >= 16 && hasPerk(PerkLib.Phylactery)) multimax += 0.4;
 			if (hasPerk(PerkLib.HistoryScholar) || hasPerk(PerkLib.PastLifeScholar)) multimax += 0.1;
 			if (hasPerk(PerkLib.ArcaneRegenerationMinor) && inte >= 50) {
 				multimax += 0.05;

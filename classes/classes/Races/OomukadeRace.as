@@ -22,7 +22,7 @@ public class OomukadeRace extends Race {
 				.antennaeType(Antennae.CENTIPEDE, +1)
 				.rearType(RearBody.CENTIPEDE, +4)
 				.earType(Ears.ELFIN, +1)
-				.skinBaseType(Skin.PATTERN_VENOMOUS_MARKINGS, +2)
+				.skinBasePattern(Skin.PATTERN_VENOMOUS_MARKINGS, +2)
 				.cockOrVaginaOfType(CockTypesEnum.OOMUKADE, VaginaClass.VENOM_DRIPPING,2);
 		
 		buildTier(15, "oomukade")

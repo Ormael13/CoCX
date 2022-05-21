@@ -2,7 +2,7 @@
  * ...
  * @author Zakanard
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.*;
@@ -17,7 +17,7 @@ import classes.internals.*;
 	public class AikoScene extends BaseContent implements Encounter, TimeAwareInterface
 	{
 		
-		public function AikoScene() 
+		public function AikoScene()
 		{
 			EventParser.timeAwareClassAdd(this);//CoC.
 		}
@@ -40,23 +40,23 @@ import classes.internals.*;
 	//public static const AIKO_APOLOGY_SINCERE:int 		= 2364	//1=sincere, 2=trick apologize for fighting
 	//public static const AIKO_RAPE:int					= 2365	//1=raped Aiko in scene 2
 	//public static const AIKO_TALK_CULTURE:int 		= 2366	//1=first time 2+=repeated times
-	//public static const AIKO_TALK_AIKO:int			= 2367	//1=first time 2+=repeated times	
-	//public static const AIKO_TALK_ARCHERY:int			= 2368	//1=first time 2+=repeated times	
+	//public static const AIKO_TALK_AIKO:int			= 2367	//1=first time 2+=repeated times
+	//public static const AIKO_TALK_ARCHERY:int			= 2368	//1=first time 2+=repeated times
 	//public static const AIKO_BOSS_INTRO:int			= 2369	//1=Yamata scene introduction at lvl 24+ and Aiko 100 affection
 	//public static const AIKO_BOSS_COMPLETE:int		= 2370	//1=Yamata is dead 2 Yamata is released
 	//public static const AIKO_BOSS_OUTRO:int			= 2371	//
-	//public static const YAMATA_MASOCHIST:int			= 2372	//counter increases to 100, if not defeated 	
+	//public static const YAMATA_MASOCHIST:int			= 2372	//counter increases to 100, if not defeated
 	//public static const AIKO_SPAR_VICTORIES:int		= 2308;	//counter for sparring
 	
 private var talkAndSex:Boolean = false;
-	
+
 public function encounterChance():Number { return 0.35; }
 public function encounterName():String { return "aiko"; }
 public function execEncounter():void { encounterAiko(); }
-	
+
 //Encounter Aiko
 public function encounterAiko():void {
-	EventParser.timeAwareClassAdd(this);	
+	EventParser.timeAwareClassAdd(this);
 	clearOutput();
 	outputText(images.showImage("aiko-intro"));
 	spriteSelect(SpriteDb.s_aiko);
@@ -139,7 +139,7 @@ public function encounterAiko():void {
 	else if (flags[kFLAGS.AIKO_TIMES_MET] == 2) {
 		outputText("You have a vague sense of déjà vu as you explore deeper into the forest. You can’t place it, but you feel like you’ve been here before… even stranger still is the feeling that you’re being watched. Attempting to shrug it off, you keep on the trail, but the back of your neck continues to tingle with a nagging suspicion, and you begin to succumb to paranoia, looking over your shoulder nervously.\n\n"
 		+"You nearly jump out of your [skin] as you hear the leaves of a nearby tree rustling, dropping into a defensive position, your [weapon] at the ready. A flash of silver cuts through your field of vision as something small and furry darts down from the branches and tears off through the forest.\n\n"
-		+(player.dogScore() >= 4 ? "Your canine chase instinct overrides your previous sentiments of paranoia, and you dash headlong through" : "You hesitate at first, but then decide to give chase, dashing into") +" the bushes after it.\n\n"
+		+(player.isRace(Races.DOG) ? "Your canine chase instinct overrides your previous sentiments of paranoia, and you dash headlong through" : "You hesitate at first, but then decide to give chase, dashing into") +" the bushes after it.\n\n"
 		+"You emerge into a clearing dominated by a familiar, ancient-looking tree, just in time to see a small feral fox with lustrous silver fur. It stares at you, seeming to regard you with an air of "
 		+(flags[kFLAGS.AIKO_AFFECTION] >= 55 ? "fondness" : (flags[kFLAGS.AIKO_AFFECTION] > 50 ? "familiarity" : "contempt"))
 		+" beyond that of a simple beast. Realization finally dawns as you take note of the fox’s most striking features—its eyes are a beautiful crystal blue, and it has not one, but seven beautiful tails.\n\n"
@@ -356,7 +356,7 @@ public function encounterAiko():void {
 		}
 	}
 }
-	
+
 public function timeChange():Boolean
 {
 	if (player.hasStatusEffect(StatusEffects.AikoLustPrank)) {
@@ -443,7 +443,7 @@ private function aikoAggroGreeting():void {
 
 private function aikoPeaceGreeting():void {
 	clearOutput();
-	spriteSelect(SpriteDb.s_aiko);		
+	spriteSelect(SpriteDb.s_aiko);
 	outputText("You wonder if you should take that as a threat for a moment, until Aiko lets out a snorting laugh. <i>\"Nah, I’m just kidding. You seem legit. But seriously, gimme back my star sphere.\"</i>\n\n"
 	+"You give her a hesitant grin, laughing along awkwardly. Just your luck—even if she isn’t overly aggressive, you can’t help but feel that Aiko has a few screws loose upstairs. Then again, perhaps this is normal for her?\n\n"
 	+"<i>\"Okay, listen up, I’ll tell you what. I like you, so I’m willing to make a deal with you. Besides, it was fun messing with you, so… What’ll it take to get my star sphere back, hm? Riches? Power? Maybe a little… release?\"</i> she says coyly, turning around and slapping her own plump, juicy rear playfully, revealing two spiral-shaped tattoos on her buttocks.\n\n");
@@ -462,10 +462,10 @@ private function aikoPeaceGreeting():void {
 	addButton(4, "Fluffy Tail", aikoTouchFluffTail).hint("Those tails look so fluffy... GOTTA TOUCH THEM!!!");
 	addButton(9, "Corruption", initialCorruptionSetting).hint("Activate Aiko's Corruption");
 }
-	
+
 private function aikoE1Riches():void {
 	clearOutput();
-	spriteSelect(SpriteDb.s_aiko);		
+	spriteSelect(SpriteDb.s_aiko);
 	outputText("You consider her offer for a moment, and then tell her that you could always use a few extra gems.\n\n"
 	+"<i>\"Avaricious little scamp, aren’t you?\"</i> Aiko teases, smirking. <i>\"Alright, come with me,\"</i>she says, beckoning you to follow her to the base of the tree. <i>\"Wait right here,\"</i> she tells you, before adding, <i>\"And no peeking!\"</i>\n\n"
 	+"She gestures for you to turn around, and you consider protesting, but obey with a shrug when she shoots you a stern glance. You turn around when you hear her coughing, and find her standing there with a small wooden chest in her hand, waving her other hand to clear away a cloud of smoke that is rising from the chest."
@@ -487,7 +487,7 @@ private function aikoE1Riches():void {
 
 private function aikoE1Power():void {
 	clearOutput();
-	spriteSelect(SpriteDb.s_aiko);		
+	spriteSelect(SpriteDb.s_aiko);
 	outputText("After a little thought, you tell her that a little more power could go a long way toward helping you on your quest.\n\n"
 	+"<i>\"Teehee… Alright "+ player.mf("Mr.","Mrs.") +" Hero, your wish is my command,\"</i> Aiko teases, grinning mischievously. She thinks for a minute and then appears to be struck with inspiration, her face lighting up as she runs off, shouting to you, <i>\"Stay right here! Don’t move!\"</i>\n\n"
 	+"You wait patiently, wondering just what she is up to. A minute passes, and Aiko returns with a bundle in her arms, holding it aloft as she runs toward you. <i>\"Check it out! I wrapped it and everything! C’mon, open it!\"</i> she shouts, handing you the long bundle, wrapped in a purple cloth and tied with gold cord.\n\n"
@@ -506,7 +506,7 @@ private function aikoE1Power():void {
 
 private function aikoE1SexPart1():void {
 	clearOutput();
-	spriteSelect(SpriteDb.s_aiko);		
+	spriteSelect(SpriteDb.s_aiko);
 	outputText("You eye her lithe body up and down for a moment, licking your lips involuntarily as she slides her hands up and down her supple curves. A heat emanating from your loins tells you that your body has already made up your mind for you. You are about to give voice to your desires when Aiko saunters up to you, placing a finger to your lips and whispering, <i>\"Shh… naughty "+ player.mf("boy" , "girl") +"… I can see you undressing me with your eyes. I know what you want.\"</i>\n\n"
 	+"Before you can say anything, she drops to her knees in front of you, pulling your [armor] aside to expose your groin.\n\n");
 	flags[kFLAGS.AIKO_BALL_RETURNED] = 1;
@@ -528,10 +528,10 @@ private function aikoE1SexPart1():void {
 		doNext(aikoE1SexPart2);
 	}
 }
-	
+
 private function aikoE1SexPart2():void  {
 	clearOutput();
-	spriteSelect(SpriteDb.s_aiko);		
+	spriteSelect(SpriteDb.s_aiko);
 	outputText("<i>\"So… I don’t mean to be pushy, but…\"</i>"
 	+"You blink confusedly in your half-comatose state, and then are shaken back to reality as you remember your deal. Pleased with your <i>\"transaction\"</i>, you honor your end of the bargain, tossing her the star sphere."
 	+"She smiles lightly, stowing it in her cleavage, and saunters off into the woods, swinging her hips to and fro. Before she disappears from sight, she turns with a knowing grin and says, <i>\"Thanks for that, hon. Try not to get into too much trouble…\"</i> You wonder what she meant by that, but can’t waste too much time thinking about it as you collapse on the ground in exhaustion from your lustful encounter."
@@ -542,7 +542,7 @@ private function aikoE1SexPart2():void  {
 	doNext(applyAikoLustPrankEffect);
 }
 
-private function applyAikoLustPrankEffect():void 
+private function applyAikoLustPrankEffect():void
 {
 	player.createStatusEffect(StatusEffects.AikoLustPrank, rand(48)+24, 0, 0, 0);
 	dynStats("sen", 35);
@@ -551,7 +551,7 @@ private function applyAikoLustPrankEffect():void
 
 private function aikoE1Nothing():void {
 	clearOutput();
-	spriteSelect(SpriteDb.s_aiko);		
+	spriteSelect(SpriteDb.s_aiko);
 	outputText("You don’t know if it’s because you’re feeling charitable, or because of some nagging suspicion, but after some consideration, you decide to return her star sphere without asking for anything in return.\n\n"
 	+"You hand it to her and tell her as much, watching her face light up with surprise as she reaches out to retrieve it from you.\n\n"
 	+"<i>\"You’re… serious? You’re just giving it to me?\"</i> she says, taking it from you softly and stowing it in her cleavage. <i>\"I… don’t know what to say. I mean, you have NO idea how grateful I am, but… honestly, I’m shocked.\"</i>\n\n"
@@ -620,10 +620,10 @@ private function aikoTouchFluffTail():void {
 	player.dynStats("lus", 10+rand(11), "cor", -5);
 	doNext(camp.returnToCampUseOneHour);
 }
-		
+
 internal function aikoLosesIntro():void {
 	clearOutput();
-	spriteSelect(SpriteDb.s_aiko);		
+	spriteSelect(SpriteDb.s_aiko);
 	outputText("Aiko drops to one knee, panting heavily and supporting herself with her bow. Mustering up the last reserves of her willpower, she lines up one last arrow and releases it, but her strength is clearly spent—the arrow lobs through the air with all the grace of a drunken bumblebee, flying wide and clattering against the trunk of a tree.\n\n"
 	+"<i>\"You… you’re a lot stronger than I thought… I admit, I underestimated you...\"</i> she says between breaths, collapsing as her longbow disappears out from under her.\n\n"
 	+"<i>\"Wha… what are you going to do?\"</i>\n\n"
@@ -634,7 +634,7 @@ internal function aikoLosesIntro():void {
 
 internal function aikoWinsIntro():void {
 	clearOutput();
-	spriteSelect(SpriteDb.s_aiko);		
+	spriteSelect(SpriteDb.s_aiko);
 	outputText("You slump to the ground, [if (player.lust >= player.maxOverLust())crippled with desire|thoroughly thrashed], looking up at the fiery-eyed fox-woman.\n\n");
 	if (flags[kFLAGS.AIKO_TIMES_MET] == 1) {
 		if (player.kitsuneScore() > 0) {
@@ -666,7 +666,7 @@ internal function aikoWinsIntro():void {
 
 private function aikoRequestsBallAfterLose():void {
 	clearOutput();
-	spriteSelect(SpriteDb.s_aiko);		
+	spriteSelect(SpriteDb.s_aiko);
 	outputText("You turn away from the collapsed kitsune, ready to leave, but stop when you feel her hand clutching your [armor] desperately.\n\n"
 	+"<i>\"Wait! Please! I need... I need my star sphere... Without it, my village...\"</i>\n\n"
 	+""+ (player.cor >= 40 ? "You angrily swat her hand away, glaring at the impertinent girl.":"") +" Your hand moves instinctively to the pouch where you stowed the white star sphere you found earlier. She seems to be truly desperate to get it back... Will you give it to her?");
@@ -678,7 +678,7 @@ private function aikoRequestsBallAfterLose():void {
 
 private function aikoLoseGiveBall():void {
 	clearOutput();
-	spriteSelect(SpriteDb.s_aiko);		
+	spriteSelect(SpriteDb.s_aiko);
 	outputText("You look down at her pleading expression, "+ (player.cor >= 50 ? "and can’t help but get annoyed by the pitiful girl’s persistence":"and can’t help feel a twinge of remorse for the pitiful girl") +". Hesitantly, you reach into your pouch, pulling the star sphere out, and a small glimmer of hope shines in Aiko’s eyes at the sight of it.\n\n"
 	+""+ (player.cor <= 50 ? "You place the star sphere in her hand, feeling a little sorry for what you’d done to the poor creature":"You drop the star sphere in front of her, spitting on it, hoping that will be enough to shut her up") +""
 	+".\n\n<i>\"Th... thank you...\"</i> she whispers, clutching the star sphere to her chest. She drags herself to her feet and flees into the woods, only stopping to look back at you once.");
@@ -714,13 +714,13 @@ private function aikoTalkE2():void {
 	if (flags[kFLAGS.AIKO_CORRUPTION]<0) flags[kFLAGS.AIKO_CORRUPTION] = 0;
 	doNext(camp.returnToCampUseOneHour);
 }
-	
+
 private function aikoSexE2():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_aiko);
 	outputText("You smile and ask if she’d be interested in a little <i>\"roll in the grass.\"</i>\n\n");
 	if (flags[kFLAGS.AIKO_AFFECTION]>=55) {
-		outputText("She smiles a bit in return, giggling at your forwardness.\n\n" 
+		outputText("She smiles a bit in return, giggling at your forwardness.\n\n"
 		+"<i>\"Oh [name], what kind of girl do you take me for?\"</i> she teases, waving her hand nonchalantly. Seeing your slightly disappointed expression, she smiles and says, <i>\"Relax, I’m only kidding... Truthfully, I could use a little stress relief.\"</i>\n\n"
 		+"She walks over to you and [if ("+"[tallness]"+" >64)standing on tiptoes,] gives you a peck on your cheek that leaves behind a light tingling sensation as she starts to help you out of your [armor] carefully.");
 		aikoConsSex();
@@ -766,7 +766,7 @@ private function aikoApologySincere():void {
 	if (flags[kFLAGS.AIKO_CORRUPTION]<0) flags[kFLAGS.AIKO_CORRUPTION] = 0;
 	doNext(camp.returnToCampUseOneHour);
 }
-	
+
 private function aikoApologyTrick():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_aiko);
@@ -788,7 +788,7 @@ private function aikoApologyTrick():void {
 	}
 }
 
-private function aikoTalkE3():void {	
+private function aikoTalkE3():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_aiko);
 	var bowSkill:int = player.statusEffectv1(StatusEffects.Kelt);
@@ -871,7 +871,7 @@ private function aikoTalkAndSex():void {
 	spriteSelect(SpriteDb.s_aiko);
 	outputText("You tell Aiko you came to talk, but you’d also be interested in sex later on. \n\n"
 	+(flags[kFLAGS.AIKO_AFFECTION] >= 65? "She smiles cheerfully and approaches you, leaning in to give you a light peck on the cheek. <i>\"Sounds like a plan to me,\"</i> she says, grinning and backing up a bit. <i>\"What did you want to talk about?\"</i>":
-		(flags[kFLAGS.AIKO_AFFECTION] >= 50 ? "She smiles cheerfully, nodding a little. <i>\"Sure, we can talk. Play your cards right and I just might take you up on that second part,\"</i> she says, but from her playful tone you can tell she’s just teasing. <i>\"What did you have in mind?\"</i>": 
+		(flags[kFLAGS.AIKO_AFFECTION] >= 50 ? "She smiles cheerfully, nodding a little. <i>\"Sure, we can talk. Play your cards right and I just might take you up on that second part,\"</i> she says, but from her playful tone you can tell she’s just teasing. <i>\"What did you have in mind?\"</i>":
 			"<i>\"Alright, we’ll talk. We’ll see if I feel like that second part after.\"</i> she says, crossing her arms. <i>\"Well, what did you want to talk about?\"</i>")));
 	talkAndSex = true;
 	aikoTalk();
@@ -942,7 +942,7 @@ private function  talkTentacles():void {
 	} else {
 		outputText("Finally, you bid her farewell, telling her that you have to check in on your camp.");
 		doNext(camp.returnToCampUseOneHour);
-	}		
+	}
 }
 private function  talkGoblins():void {
 	clearOutput();
@@ -958,7 +958,7 @@ private function  talkGoblins():void {
 	} else {
 		outputText("bid her farewell, telling her you should be checking in on your camp again soon.");
 		doNext(camp.returnToCampUseOneHour);
-	}		
+	}
 }
 private function  talkAkbal():void {
 	clearOutput();
@@ -1001,7 +1001,7 @@ private function talkCulture():void {
 	} else {
 		outputText("While the experience has been educational, you should be heading back to check on your camp now.");
 		doNext(camp.returnToCampUseOneHour);
-	}		
+	}
 }
 private function  talkAiko():void {
 	clearOutput();
@@ -1134,7 +1134,7 @@ private function  talkArchery():void {
 			}
 			else if (player.statusEffectv1(StatusEffects.Kelt) < 90) {
 				outputText("In the end you give her a decent run for her money, but ultimately it is apparent you still have much to learn from her. You feel like you’ve picked up a few good tips and tricks from her.\n\n");
-				player.addStatusValue(StatusEffects.Kelt,1,1);	
+				player.addStatusValue(StatusEffects.Kelt,1,1);
 			} else {
 				outputText("In the end, she was right; you beat her fair and square, and you can’t say you learned anything new, but it was fun. And you feel a bit closer to her for the experience");
 			}
@@ -1151,7 +1151,7 @@ private function  talkArchery():void {
 		outputText(", but unfortunately, you should be getting back to camp now.");
 		doNext(camp.returnToCampUseOneHour);
 	}
-}	
+}
 
 /////////////////////////////////////////////////////////////////////
 /////////////////////SEX AND FIGHT OPTIONS///////////////////////////
@@ -1178,10 +1178,10 @@ private function aikoSex():void {	//same for e3 onward
 }
 
 private var playerchoice:Boolean = true;
-public function aikoConsSex():void {		
+public function aikoConsSex():void {
 	//[Missionary] [DoggyStyle] [BJ] [GetLicked] [Tailjob]--[Leave]
 	menu();
-	if (player.hasCock()) {		
+	if (player.hasCock()) {
 		addButton(0, "Missionary", aikoSexMissionary).hint("");
 		addButton(1, "DoggyStyle", aikoSexDoggy).hint("");
 		addButton(2, "BJ", aikoSexBJ).hint("Have her pleasure your dick with her mouth.");
@@ -1230,8 +1230,8 @@ public function sparWithAikoLose(aikoLust:int):void {
 	playerchoice = false;
 	//[Consensual] - Aiko’s choice - Based on Aiko’s current Lust score and/or Affection for the PC
 	var options:Array = [];
-	if (flags[kFLAGS.AIKO_AFFECTION] >= 60 && aikoLust >= 60) {			
-		if (player.hasCock()) {		
+	if (flags[kFLAGS.AIKO_AFFECTION] >= 60 && aikoLust >= 60) {
+		if (player.hasCock()) {
 			options.push(aikoSexMissionary);
 			options.push(aikoSexDoggy);
 			options.push(aikoSexBJ);
@@ -1267,7 +1267,7 @@ private function aikoFight():void {
 	player.createOrFindStatusEffect(StatusEffects.DomFight);
 	startCombat(new Aiko());
 }
-	
+
 public function pcWinsDomFight():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_aiko);
@@ -1323,12 +1323,12 @@ public function aikoRapeSex():void {
 	addButton(1, "Fuck Ass", aikoRapeFuckAss).hint("Get some of that tight, juicy ass!").disableIf(!player.hasCock(),"Requires a dick you moron!").disableIf(player.cockThatFits(50) < 0,"You dick too huge man, She be delicate in the heinie");
 	addButton(2, "Humiliate", aikoRapeHumiliate).hint("Make her your pet bitch!");
 	if (flags[kFLAGS.AIKO_BALL_RETURNED] == 1) {
-		addButton(3, "Fist Her", aikoFistHer).hint("Have a feel inside her pussy.");		
-		addButton(4, "Get Licked", aikoRapeGetLicked).hint("This time you want Aiko to eat you out!").disableIf(!player.hasVagina(), "This scene kind of needs some lady parts, you know...");			
+		addButton(3, "Fist Her", aikoFistHer).hint("Have a feel inside her pussy.");
+		addButton(4, "Get Licked", aikoRapeGetLicked).hint("This time you want Aiko to eat you out!").disableIf(!player.hasVagina(), "This scene kind of needs some lady parts, you know...");
 	}
 	if (flags[kFLAGS.AIKO_BALL_RETURNED] != 1)
 		addButton(14, "Leave", aikoRequestsBallAfterLose).hint("Leave the clearing without touching her.");
-	else 
+	else
 		addButton(14, "Leave", leave).hint("Leave the clearing without touching her.");
 }
 

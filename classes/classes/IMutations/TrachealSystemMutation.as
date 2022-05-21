@@ -63,9 +63,7 @@ public class TrachealSystemMutation extends IMutationPerkType
                 //This helps keep the requirements output clean.
                 IMutationsLib.TrachealSystemIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.TrachealSystemIM.requireCustomFunction(function (player:Player):Boolean {
-                        return player.beeScore() >= 14 || player.isRace(Races.MANTIS) || player.isRace(Races.SCORPION) || player.isRace(Races.SPIDER) || player.isRace(Races.CANCER) || player.isRace(Races.ATLACH_NACHA);
-                    }, "Any insect race");
+                    IMutationsLib.TrachealSystemIM.requireAnyRace(Races.MANTIS, Races.SCORPION, Races.SPIDER, Races.CANCER, Races.ATLACH_NACHA);
                 }
                 else{
                     var pLvl:int = pTier * 30;
