@@ -303,7 +303,5 @@ public class Belisa extends Monster
 			if (flags[kFLAGS.BELISA_LVL_UP] >= 8) this.createPerk(PerkLib.PeerlessSpirituality, 0, 0, 0, 0);
 			checkMonster();	
 		}
-		
 	}
-
 }
