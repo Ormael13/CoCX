@@ -237,10 +237,8 @@ public class Mountain extends BaseContent
 						call: partsofLactoBlasters
 					}, {
 						name: "ted",
-						when: function():Boolean {
-							return flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 2 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1;
-						},
-						call: SceneLib.tedScene.introPostHiddenCave
+						call: SceneLib.tedScene.introPostHiddenCave,
+						when: SceneLib.tedScene.canEncounterTed
 					}, {
 						name  : "mindbreaker",
 						call  : SceneLib.mindbreaker.findMindbreaker,
