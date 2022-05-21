@@ -488,10 +488,13 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 					"That meager consolation does little to numb the disappointment.");
 					menu();
 					addButton(0, "Okay", celessUnicornIntro1, (player.isMale() || player.isGenderless()) ? 2 : 3);
-					if (player.hasCock()) {
-						addButton(1, "Fuck Her", celessUnicornIntro1, 4);
-					}
-					addButton(5, "NoWay", celessUnicornIntro1, 1);
+					var warningStr:String = "You have a strange feeling that you can miss something very important by doing this.\n\n<b>You can still get Celess this way by enabling 'Other' in SceneHunter settings.</b>";
+					var hintStr:String = "\n\n<b>You can still get Celess this way by enabling 'Other' in SceneHunter settings.</b>";
+					var noteStr:String = "<b>SH: Now this works as alternative way to Celess.</b>";
+					if (player.hasCock())
+						addButton(1, "Fuck Her", celessUnicornIntro1, 4).hint(sceneHunter.other ? noteStr : warningStr + hintStr);
+					else addButtonDisabled(1, "Fuck Her", "Req. a cock.");
+					addButton(4, "NoWay", celessUnicornIntro1, 1).hint(warningStr);
 				} else {
 					outputText("You ask her why she is defending this relic and what it would take for you to gain access to it. "+
 					"She eyes you as if trying to figure out your intentions then sigh.\n\n"+
@@ -554,10 +557,13 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				celessGuardNightmareShowProof();
 				menu();
 				addButton(0, "Okay", celessUnicornIntro2, (player.isMale() || player.isGenderless()) ? 2 : 3);
-				if (player.hasCock()) {
-					addButton(1, "Fuck Her", celessUnicornIntro2, 4);
-				}
-				addButton(5, "NoWay", celessUnicornIntro2, 1);
+				var warningStr:String = "You have a strange feeling that you can miss something very important by doing this.\n\n<b>You can still get Celess this way by enabling 'Other' in SceneHunter settings.</b>";
+				var hintStr:String = "\n\n<b>You can still get Celess this way by enabling 'Other' in SceneHunter settings.</b>";
+				var noteStr:String = "<b>SH: Now this works as alternative way to Celess.</b>";
+				if (player.hasCock())
+					addButton(1, "Fuck Her", celessUnicornIntro2, 4).hint(sceneHunter.other ? noteStr : warningStr + hintStr);
+				else addButtonDisabled(1, "Fuck Her", "Req. a cock.");
+				addButton(4, "NoWay", celessUnicornIntro2, 1).hint(warningStr);
 				break;
 			case 1:
 				outputText("You give her the same answer you gave all others, a flat \"No\" that leaves no room for negotiation");
