@@ -3,7 +3,6 @@
 import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
-import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -56,7 +55,6 @@ public class GoblinAssassin extends Monster
 				outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n");
 				EngineCore.fatigue(10 + rand(25));
 			}
-			return;
 		}
 		//Lust Needle
 		protected function lustNeedle():void {
@@ -88,7 +86,7 @@ public class GoblinAssassin extends Monster
 				outputText("\nBefore you can do anything to stop her, she lifts her head and takes a swift lick of your crotch, taking a small moan from you and giving her enough time to stab into the back of your knees. She rolls out of the way just as you pluck the two needles out and throw them back to the ground. They didn’t seem to have anything in them, but the pain is enough to make you stagger. ");
 				//(Medium HP loss, small lust gain)
 				var damage:int = int((str + weaponAttack + 40) - rand(player.tou) - player.armorDef);
-				damage = player.takePhysDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 		//Explosion
@@ -98,7 +96,7 @@ public class GoblinAssassin extends Monster
 			//(High HP loss, no lust gain)
 			var damage:int = 25 + rand(75);
 			damage = Math.round(damage);
-			damage = player.takeFireDamage(damage, true);
+			player.takeFireDamage(damage, true);
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{
