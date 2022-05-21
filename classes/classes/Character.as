@@ -960,6 +960,7 @@ import classes.CoC;
 		public function maxHunger():Number
 		{
 			var max:Number = 100;
+			var tier:int;
 			if (hasPerk(PerkLib.JobSoulCultivator)) max += 20;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 1) max += 20 * flags[kFLAGS.SOUL_CULTIVATION];//Soul Apprentice
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 4) max += 1 * (flags[kFLAGS.SOUL_CULTIVATION] - 3);//Soul Personage
@@ -977,12 +978,15 @@ import classes.CoC;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 40) max += 10 * (flags[kFLAGS.SOUL_CULTIVATION] - 39);//Soul Saint
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 43) max += 12 * (flags[kFLAGS.SOUL_CULTIVATION] - 42);//Soul Paragon
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 46) max += 12 * (flags[kFLAGS.SOUL_CULTIVATION] - 45);//Soul Immortal
-			if (game.player.isRace(Races.DRAGON, 1)) max += 50;
-			if (game.player.isRace(Races.DRAGON,2)) max += 50;
-			if (game.player.isRace(Races.PIG, 1)) max += 25;
-			if (game.player.isRace(Races.PIG, 1)) max += 20;
-			if (game.player.orcaScore() >= 14) max += 35;
-			if (game.player.orcaScore() >= 20) max += 25;
+			tier = game.player.racialTier(Races.DRAGON);
+			if (tier == 1) max += 50;
+			else if (tier >= 2) max += 100;
+			tier = game.player.racialTier(Races.PIG);
+			if (tier == 1) max += 25;
+			else if (tier >= 2) max += 45;
+			tier = game.player.racialTier(Races.ORCA);
+			if (tier == 1) max += 35;
+			else if (tier >= 2) max += 60;
 			if (hasPerk(PerkLib.EzekielBlessing)) max += 50;
 			if (perkv1(IMutationsLib.DisplacerMetabolismIM) >= 2) max += 50;
 			if (perkv1(IMutationsLib.ManticoreMetabolismIM) >= 2) max += 50;

@@ -483,7 +483,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.requireFatigue(physicalCost(30));
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if ((player.orcaScore() >= 10 || player.isRace(Races.SEA_DRAGON)) && player.faceType == Face.ORCA) {
+			if ((player.isRace(Races.ORCA) || player.isRace(Races.SEA_DRAGON)) && player.faceType == Face.ORCA) {
 				bd = buttons.add("Play", orcaPlay).hint("Begin toying with your prey by tossing it in the air, initiating a juggling combo.");
 				bd.requireFatigue(physicalCost(30));
 				if (!monster.hasStatusEffect(StatusEffects.Stunned)) bd.disable("<b>You need the ennemy to be stunned in order to use this ability.</b>\n\n");

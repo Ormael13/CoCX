@@ -528,7 +528,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You're already pretty goddamn mad!");
 			}
 		}
-		if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 || player.sharkScore() >= 9) {
+		if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 || player.isRace(Races.SHARK)) {
 			bd = buttons.add("Blood Frenzy", bloodFrenzy);
 			if (combat.MonsterIsBleeding()) {
 				bd.hint("Lose yourself to a blood fueled trance increasing your speed, libido and weakening your inteligence. The trance last for as long as the opponent is bleeding and cannot be disangaged willingly.\n");

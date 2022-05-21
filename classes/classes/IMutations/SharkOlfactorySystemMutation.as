@@ -7,6 +7,7 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Player;
+import classes.Races;
 
 public class SharkOlfactorySystemMutation extends IMutationPerkType
     {
@@ -60,9 +61,7 @@ public class SharkOlfactorySystemMutation extends IMutationPerkType
                 IMutationsLib.SharkOlfactorySystemIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.SharkOlfactorySystemIM.requirePeripheralNervSysMutationSlot()
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.sharkScore() >= 8;
-                    }, "Shark race");
+                    .requireRace(Races.SHARK);
                 }
                 else{
                     var pLvl:int = pTier * 30;

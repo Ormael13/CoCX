@@ -1855,16 +1855,26 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Titanic Strength
-			if ((player.isRace(Races.HYDRA) || player.oniScore() >= 12 || player.orcaScore() >= 17 || player.isRace(Races.SCYLLA, 2) || player.isRaceCached(Races.FROSTWYRM) || player.isRaceCached(Races.CYCLOP) || player.isRaceCached(Races.SEA_DRAGON)) && player.tallness >= 80 && !player.hasPerk(PerkLib.TitanicStrength)) {
-				outputText("\nWhoa, you've grown so big its a sheer miracle you don't damage the landscape while moving. That said, your size now contributes to your strength as well.\n\n<b>(Gained Titanic Strength perk!)</b>\n");
-				player.createPerk(PerkLib.TitanicStrength, 0, 0, 0, 0);
-				needNext = true;
-			}
-				if (((!player.isRace(Races.HYDRA) && player.oniScore() < 12 && player.orcaScore() < 17 && !player.isRace(Races.SCYLLA, 2) && !player.isRaceCached(Races.FROSTWYRM) && !player.isRaceCached(Races.CYCLOP) && !player.isRaceCached(Races.SEA_DRAGON)) || player.tallness < 80) && player.hasPerk(PerkLib.TitanicStrength)) {
-				if (player.tallness < 80) outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
-				else outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
-				player.removePerk(PerkLib.TitanicStrength);
-				needNext = true;
+			if ((player.isRaceCached(Races.HYDRA)
+					|| player.isRaceCached(Races.ONI)
+					|| player.isRaceCached(Races.ORCA)
+					|| player.isRaceCached(Races.SCYLLA, 2)
+					|| player.isRaceCached(Races.FROSTWYRM)
+					|| player.isRaceCached(Races.CYCLOP)
+					|| player.isRaceCached(Races.SEA_DRAGON)
+			) && player.tallness >= 80) {
+				if (!player.hasPerk(PerkLib.TitanicStrength)) {
+					outputText("\nWhoa, you've grown so big its a sheer miracle you don't damage the landscape while moving. That said, your size now contributes to your strength as well.\n\n<b>(Gained Titanic Strength perk!)</b>\n");
+					player.createPerk(PerkLib.TitanicStrength, 0, 0, 0, 0);
+					needNext = true;
+				}
+			} else {
+				if (player.hasPerk(PerkLib.TitanicStrength)) {
+					if (player.tallness < 80) outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have shrunk to a smaller size.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
+					else outputText("\nYou sadly are no longer able to benefit from your size as much as you did before. Probably because you have transformed again.\n\n<b>(Lost the Titanic Strength perk!)</b>\n");
+					player.removePerk(PerkLib.TitanicStrength);
+					needNext = true;
+				}
 			}
 			//VerdantMight
 			if ((player.plantScore() >= 11 || player.isRaceCached(Races.ALRAUNE)) && !player.hasPerk(PerkLib.VerdantMight)) {

@@ -30,7 +30,6 @@ public final class Mutations extends MutationsHelper {
     public static const gooSkinColors:Array = ["green", "magenta", "blue", "cerulean", "emerald", "pink"];
     public static const magmagooSkinColors:Array = ["red", "orange", "reddish orange"];
     public static const darkgooSkinColors:Array = ["indigo", "light purple", "purple", "purplish black", "dark purple"];
-    public static const oniEyeColors:Array = ["red", "orange", "yellow", "green"];
     // import classes.ItemSlotClass;
 
     //const FOX_BAD_END_WARNING:int = 477;
@@ -12199,7 +12198,7 @@ public final class Mutations extends MutationsHelper {
         if (!CoC.instance.inCombat) outputText("You sit down and unbag your fresh fish. It's perfectly flaky, allowing you to break it off in bite-sized chunks.  The salty meal disappears quickly, and your stomach gives an appreciative gurgle.");
         //(In combat?)
         else {
-            if (player.orcaScore() >= 12 || player.leviathanScore() >= 12) outputText("You produce the fresh fish from your bag and prety much just open wide your hungry mouth and toss it in. Your salty meal is gone in a flash, your stomach giving an appreciative gurgle.  ");
+            if (player.isRace(Races.ORCA) || player.isRace(Races.SEA_DRAGON)) outputText("You produce the fresh fish from your bag and prety much just open wide your hungry mouth and toss it in. Your salty meal is gone in a flash, your stomach giving an appreciative gurgle.  ");
             else outputText("You produce the fresh fish from your bag. Instead of eating slowly it and savor the taste as you normally would, you take a large bite out of it.  In no time your salty meal is gone, your stomach giving an appreciative gurgle.  ");
         }
         //Increase HP by quite a bit!)

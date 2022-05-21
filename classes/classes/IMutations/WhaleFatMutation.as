@@ -61,9 +61,7 @@ public class WhaleFatMutation extends IMutationPerkType
                 IMutationsLib.WhaleFatIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.WhaleFatIM.requireFatTissueMutationSlot()
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.orcaScore() >= 14 || player.isRace(Races.SEA_DRAGON);
-                    }, "Orca race");
+                    .requireAnyRace(Races.ORCA, Races.SEA_DRAGON);
                 }
                 else{
                     var pLvl:int = pTier * 30;

@@ -13,7 +13,6 @@ public class SeaDragonRace extends Race{
 	}
 	
 	public override function setup():void {
-		
 		addScores()
 				.hornType(Horns.SEA_DRAGON, +1)
 				.antennaeType(Antennae.SEA_DRAGON, +1)
@@ -73,6 +72,10 @@ public class SeaDragonRace extends Race{
 						"+5 Armor / Magic Resistance"
 				])
 				.end();
+	}
+	
+	public static function isSeaDragonLike(body:BodyData):Boolean {
+		return body.wingType == Wings.SEA_DRAGON || body.legType == LowerBody.SEA_DRAGON || body.armType == Arms.SEA_DRAGON;
 	}
 }
 }

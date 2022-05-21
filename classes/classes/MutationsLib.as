@@ -686,9 +686,7 @@ public class MutationsLib
 				OniMusculature.requireMusclesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.tone >= 100;
 				}, "100+ tone")
-				.requireCustomFunction(function (player:Player):Boolean {
-					return player.oniScore() >= 12;
-				}, "Oni race");
+				.requireRace(Races.ONI);
 				OrcAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(PerkLib.Ferocity).requireRace(Races.ORC);
 				PigBoarFat.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.thickness >= 100;
@@ -697,9 +695,7 @@ public class MutationsLib
 				RaijuCathode.requirePeripheralNervSysMutationSlot().requireRace(Races.RAIJU);
 				RatatoskrSmarts.requirePeripheralNervSysMutationSlot().requirePerk(PerkLib.KnowledgeIsPower).requireRace(Races.RATATOSKR);
 				SalamanderAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(PerkLib.Lustzerker).requireAnyRace(Races.SALAMANDER, Races.PHOENIX);
-				SharkOlfactorySystem.requirePeripheralNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.sharkScore() >= 8;
-				}, "Shark race");
+				SharkOlfactorySystem.requirePeripheralNervSysMutationSlot().requireRace(Races.SHARK);
 				ScyllaInkGlands.requirePerk(PerkLib.InkSpray).requireRace(Races.SCYLLA);
 				TrachealSystem.requireCustomFunction(function (player:Player):Boolean {
 					return player.beeScore() >= 14 || player.isRace(Races.MANTIS) || player.isRace(Races.SCORPION) || player.isRace(Races.SPIDER) || player.isRace(Races.CANCER) || player.isRace(Races.ATLACH_NACHA,2);
@@ -715,9 +711,7 @@ public class MutationsLib
 					return player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS);
 				}, "Spider or Snake fangs")
 				.requireAnyRace(Races.SPIDER, Races.APOPHIS, Races.NAGA, Races.GORGON, Races.VOUIVRE, Races.COUATL, Races.HYDRA, Races.ATLACH_NACHA);
-				WhaleFat.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.orcaScore() >= 14 || player.isRace(Races.SEA_DRAGON);
-				}, "Orca race");
+				WhaleFat.requireFatTissueMutationSlot().requireAnyRace(Races.ORCA, Races.SEA_DRAGON);
 				YetiFat.requireFatTissueMutationSlot().requireRace(Races.YETI)
 				//Tier 2
 				ArachnidBookLungPrimitive.requireLevel(30)

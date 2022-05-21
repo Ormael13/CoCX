@@ -47,6 +47,7 @@ public class ElfRace extends Race {
 		addMutation(IMutationsLib.ElvishPeripheralNervSysIM);
 		
 		buildTier(11, "elf")
+				.namesTauric("elf", "elf-taur")
 				.buffs({
 					"str.mult": -0.10,
 					"tou.mult": -0.15,

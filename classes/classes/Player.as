@@ -3766,48 +3766,6 @@ use namespace CoC;
 					else race = "devilkin";
 				}
 			}
-			if (TopRace == "shark") {
-				if (TopScore >= 9 && vaginas.length > 0 && cocks.length > 0) {
-					if (isTaur()) race = "tigershark-taur";
-					else {
-						race = "tigershark-morph";
-					}
-				} else if (TopScore >= 8) {
-					if (isTaur()) race = "shark-taur";
-					else {
-						race = "shark-morph";
-					}
-				}
-			}
-			if (TopRace == "orca") {
-				if (TopScore >= 20) {
-					if (isTaur()) race = "great orca-taur";
-					else {
-						race = "great orca-";
-						race += mf("boy", "girl");
-					}
-				} else {
-					if (isTaur()) race = "orca-taur";
-					else {
-						race = "orca-";
-						race += mf("boy", "girl");
-					}
-				}
-			}
-			if (TopRace == "oni") {
-				if (TopScore >= 18) {
-					if (isTaur()) race = "elder oni-taur";
-					else race = "elder oni";
-				}
-				else {
-					if (isTaur()) race = "oni-taur";
-					else race = "oni";
-				}
-			}
-			if (TopRace == "elf") {
-				if (isTaur()) race = "elf-taur";
-				else race = "elf";
-			}
 			//if (lowerBody == LowerBody.HOOFED && isTaur() && wings.type == Wings.FEATHERED_LARGE) {
 			//	race = "pegataur";
 			//}
@@ -4043,17 +4001,17 @@ use namespace CoC;
 				chimeraCounter++;
 			if (devilkinScore() >= 11)
 				chimeraCounter++;
-			if (sharkScore() >= 10)
+			if (isRaceCached(Races.SHARK))
 				chimeraCounter++;
-			if (orcaScore() >= 14)
+			if (isRaceCached(Races.ORCA))
 				chimeraCounter++;
-			if (oniScore() >= 12)
+			if (isRaceCached(Races.ONI))
 				chimeraCounter++;
-			if (isRace(Races.ELF))
+			if (isRaceCached(Races.ELF))
 				chimeraCounter++;
 			if (isRaceCached(Races.WOODELF))
 				chimeraCounter++;
-			if (isRace(Races.ORC))
+			if (isRaceCached(Races.ORC))
 				chimeraCounter++;
 			if (isRaceCached(Races.RAIJU))
 				chimeraCounter++;
@@ -4193,13 +4151,13 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (devilkinScore() >= 16 && hasPerk(PerkLib.Phylactery))
 				grandchimeraCounter++;
-			if (sharkScore() >= 11 && vaginas.length > 0 && cocks.length > 0)
+			if (isRaceCached(Races.SHARK, 2))
 				grandchimeraCounter++;
 			if (isRaceCached(Races.HYDRA, 2))
 				grandchimeraCounter++;
-			if (oniScore() >= 18)
+			if (isRaceCached(Races.ONI, 2))
 				grandchimeraCounter++;
-			if (orcaScore() >= 20)
+			if (isRaceCached(Races.ORCA, 2))
 				grandchimeraCounter++;
 /*			if (elfScore() >= 11)
 				grandchimeraCounter++;
@@ -4482,25 +4440,8 @@ use namespace CoC;
 			return minoCounter;
 		}
 
-		//Determine Sand trap Rating
 		public function sandTrapScore():int {
-			Begin("Player","racialScore","sandTrap");
-			var counter:int = 0;
-			if (hasStatusEffect(StatusEffects.BlackNipples))
-				counter++;
-			if (hasStatusEffect(StatusEffects.Uniball))
-				counter++;
-			if (hasVagina() && vaginaType() == VaginaClass.BLACK_SAND_TRAP)
-				counter++;
-			if (eyes.type == Eyes.BLACK_EYES_SAND_TRAP)
-				counter++;
-			if (wings.type == Wings.GIANT_DRAGONFLY)
-				counter++;
-			if (hasStatusEffect(StatusEffects.Uniball))
-				counter++;
-			counter = finalRacialScore(counter, Races.SANDTRAP);
-			End("Player","racialScore");
-			return counter;
+			return racialScore(Races.SANDTRAP);
 		}
 
 		//Determine Bee Rating
@@ -4808,202 +4749,12 @@ use namespace CoC;
 			return racialScore(Races.KANGAROO);
 		}
 
-		//shark score
 		public function sharkScore():Number {
-			Begin("Player","racialScore","shark");
-			var sharkCounter:Number = 0;
-			if (faceType == Face.SHARK_TEETH)
-				sharkCounter++;
-			if (gills.type == Gills.FISH)
-				sharkCounter++;
-			if (ears.type == Ears.SHARK)
-				sharkCounter++;
-			if (rearBody.type == RearBody.SHARK_FIN)
-				sharkCounter++;
-			if (wings.type == Wings.SHARK_FIN)
-				sharkCounter -= 7;
-			if (arms.type == Arms.SHARK)
-				sharkCounter++;
-			if (lowerBody == LowerBody.SHARK)
-				sharkCounter++;
-			if (tailType == Tail.SHARK)
-				sharkCounter++;
-			if (hairType == Hair.NORMAL && hairColor == "silver")
-				sharkCounter++;
-			if (hasScales() && InCollection(skin.coat.color, "rough gray","orange","dark gray","iridescent gray","ashen grayish-blue","gray"))
-				sharkCounter++;
-			if (eyes.type == Eyes.HUMAN && hairType == Hair.NORMAL && hairColor == "silver" && hasScales() && InCollection(skin.coat.color, "rough gray","orange","dark gray","iridescent gray","ashen grayish-blue","gray"))
-				sharkCounter++;
-			if (vaginas.length > 0 && cocks.length > 0)
-				sharkCounter++;
-			if (vaginaType() == VaginaClass.SHARK)
-				sharkCounter++;
-			if (perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1)
-				sharkCounter++;
-			if (perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2)
-				sharkCounter++;
-			if (perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3)
-				sharkCounter++;
-			if (perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				sharkCounter++;
-			if (perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				sharkCounter++;
-			if (perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				sharkCounter++;
-			if (wings.type == Wings.FEATHERED_LARGE)
-				sharkCounter = 0;
-			sharkCounter = finalRacialScore(sharkCounter, Races.SHARK);
-			End("Player","racialScore");
-			return sharkCounter;
+			return racialScore(Races.SHARK);
 		}
 
-		//Orca score
-		public function orcaScore():Number {
-			Begin("Player","racialScore","orca");
-			var orcaCounter:Number = 0;
-			if (ears.type == Ears.ORCA || ears.type == Ears.ORCA2)
-				orcaCounter++;
-			if (tailType == Tail.ORCA)
-				orcaCounter++;
-			if (faceType == Face.ORCA)
-				orcaCounter++;
-			if (eyes.type == Eyes.HUMAN)
-				orcaCounter++;
-			if (eyes.colour == "orange")
-				orcaCounter++;
-			if (hairType == Hair.NORMAL)
-				orcaCounter++;
-			if (lowerBody == LowerBody.ORCA)
-				orcaCounter++;
-			if (arms.type == Arms.ORCA)
-				orcaCounter++;
-			if (rearBody.type == RearBody.ORCA_BLOWHOLE)
-				orcaCounter++;
-			if (hasPlainSkinOnly())
-				orcaCounter++;
-			if (skinAdj == "glossy")
-				orcaCounter++;
-			if (skin.base.pattern == Skin.PATTERN_ORCA_UNDERBODY)
-				orcaCounter++;
-			if (wings.type == Wings.NONE)
-				orcaCounter += 2;
-			if (tone < 10)
-				orcaCounter++;
-			if (tallness >= 84)
-				orcaCounter++;
-			if (biggestTitSize() > 19 || (cocks.length > 18))
-				orcaCounter++;
-			if (perkv1(IMutationsLib.WhaleFatIM) >= 1)
-				orcaCounter++;
-			if (perkv1(IMutationsLib.WhaleFatIM) >= 2)
-				orcaCounter++;
-			if (perkv1(IMutationsLib.WhaleFatIM) >= 3)
-				orcaCounter++;
-			if (perkv1(IMutationsLib.WhaleFatIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				orcaCounter++;
-			if (perkv1(IMutationsLib.WhaleFatIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				orcaCounter++;
-			if (perkv1(IMutationsLib.WhaleFatIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				orcaCounter++;
-			if (faceType != Face.ORCA)
-				orcaCounter = 0;
-			if (wings.type == Wings.SEA_DRAGON || lowerBody == LowerBody.SEA_DRAGON || arms.type == Arms.SEA_DRAGON)
-				orcaCounter = 0;
-			orcaCounter = finalRacialScore(orcaCounter, Races.ORCA);
-			End("Player","racialScore");
-			return orcaCounter;
-		}
-
-		public function leviathanScore():Number {
-			return racialScore(Races.SEA_DRAGON);
-		}
-
-		//Oni score
 		public function oniScore():Number {
-			Begin("Player","racialScore","oni");
-			var oniCounter:Number = 0;
-			if (ears.type == Ears.ONI)
-				oniCounter++;
-			if (faceType == Face.ONI_TEETH)
-				oniCounter++;
-			if (horns.type == Horns.ONI || horns.type == Horns.ONI_X2)
-				oniCounter++;
-			if (arms.type == Arms.ONI)
-				oniCounter++;
-			if (lowerBody == LowerBody.ONI)
-				oniCounter++;
-			if (eyes.type == Eyes.ONI && InCollection(eyes.colour,Mutations.oniEyeColors))
-				oniCounter++;
-			if (InCollection(skin.base.color, ["red", "reddish-orange","purple", "blue"]))
-				oniCounter++;
-			if (skin.base.pattern == Skin.PATTERN_BATTLE_TATTOO)
-				oniCounter++;
-			if (rearBody.type == RearBody.NONE)
-				oniCounter++;
-			if (tailType == Tail.NONE)
-				oniCounter++;
-			if (tone >= 80)
-				oniCounter++;
-			if (tone >= 120 && oniCounter >= 4)
-				oniCounter++;
-			if (tone >= 160 && oniCounter >= 8)
-				oniCounter++;
-			if ((hasVagina() && biggestTitSize() >= 19) || (cocks.length > 18))
-				oniCounter++;
-			if (tallness >= 108)
-				oniCounter++;
-			if (perkv1(IMutationsLib.OniMusculatureIM) >= 1)
-				oniCounter++;
-			if (perkv1(IMutationsLib.OniMusculatureIM) >= 2)
-				oniCounter++;
-			if (perkv1(IMutationsLib.OniMusculatureIM) >= 3)
-				oniCounter++;
-			if (perkv1(IMutationsLib.OniMusculatureIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				oniCounter++;
-			if (perkv1(IMutationsLib.OniMusculatureIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				oniCounter++;
-			if (perkv1(IMutationsLib.OniMusculatureIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				oniCounter++;
-			if (hasPerk(PerkLib.OnisDescendant) || hasPerk(PerkLib.BloodlineOni))
-				oniCounter += increaseFromBloodlinePerks();
-			oniCounter = finalRacialScore(oniCounter, Races.ONI);
-			End("Player","racialScore");
-			return oniCounter;
-		}
-
-		//Oomukade  score
-		public function oomukadeScore():Number {
-			Begin("Player","racialScore","oomukade");
-			var oomukadeCounter:Number = 0;
-			if (faceType == Face.ANIMAL_TOOTHS)
-				oomukadeCounter++;
-			if (eyes.type == Eyes.CENTIPEDE)
-				oomukadeCounter++;
-			if (lowerBody == LowerBody.CENTIPEDE)
-				oomukadeCounter++;
-			if (hasPlainSkinOnly())
-				oomukadeCounter++;
-			if (arms.type == Arms.CENTIPEDE)
-				oomukadeCounter++;
-			if (antennae.type == Antennae.CENTIPEDE)
-				oomukadeCounter++;
-			if (rearBody.type == RearBody.CENTIPEDE)
-				oomukadeCounter += 4;
-			if (ears.type == Ears.ELFIN)
-				oomukadeCounter++;
-			if (skin.hasVenomousMarking())
-				oomukadeCounter += 2;
-			if (hasCock() && countCocksOfType(CockTypesEnum.OOMUKADE) > 0 || hasVagina() && vaginaType() == VaginaClass.VENOM_DRIPPING)
-				oomukadeCounter += 2;
-			//if (hasPerk(PerkLib.OomukadeGlands)
-			//oomukadeCounter++;
-			//if (hasPerk(PerkLib.OomukadeGlandsEvolved)
-			//oomukadeCounter++;
-			//if (hasPerk(PerkLib.OomukadeGlandsFinalForm)
-			//oomukadeCounter++;
-			oomukadeCounter = finalRacialScore(oomukadeCounter, Races.OOMUKADE);
-			End("Player","racialScore");
-			return oomukadeCounter;
+			return racialScore(Races.ONI);
 		}
 
 		public function raijuScore():Number {
@@ -6623,44 +6374,6 @@ use namespace CoC;
 				maxIntCap2 += 50;
 				maxLibCap2 += 65;
 			}//+40/30-40
-			if (sharkScore() >= 10) {
-				if (sharkScore() >= 11 && vaginas.length > 0 && cocks.length > 0) {
-					maxStrCap2 += 60;
-					maxSpeCap2 += 100;
-					maxLibCap2 += 20;
-				}
-				else {
-					maxStrCap2 += 40;
-					maxSpeCap2 += 100;
-					maxLibCap2 += 10;
-				}
-			}//+10/10-20
-			if (orcaScore() >= 14) {
-				if (orcaScore() >= 20) {
-					maxStrCap2 += 140;
-					maxTouCap2 += 70;
-					maxSpeCap2 += 100;
-				}
-				else {
-					maxStrCap2 += 100;
-					maxTouCap2 += 40;
-					maxSpeCap2 += 70;
-				}
-			}//+10/10-20
-			if (oniScore() >= 12) {
-				if (oniScore() >= 18) {
-					maxStrCap2 += 150;
-					maxTouCap2 += 90;
-					maxIntCap2 -= 30;
-					maxWisCap2 += 60;
-				}
-				else {
-					maxStrCap2 += 100;
-					maxTouCap2 += 60;
-					maxIntCap2 -= 20;
-					maxWisCap2 += 40;
-				}
-			}//+10/10-20
 			if (demonScore() >= 11) {
 				if (demonScore() >= 16 && hasPerk(PerkLib.Soulless)) {
 					maxSpeCap2 += 40;
@@ -6740,21 +6453,6 @@ use namespace CoC;
 				maxTouCap2 += 80;
 				maxSpeCap2 += 40;
 			}//+40/30-40
-			if (oomukadeScore() >= 15) {
-				if (oomukadeScore() >= 18) {
-					maxStrCap2 += 125;
-					maxTouCap2 += 45;
-					maxSpeCap2 += 60;
-					maxLibCap2 += 110;
-					maxWisCap2 -= 50;
-				} else {
-					maxStrCap2 += 75;
-					maxTouCap2 += 40;
-					maxSpeCap2 += 50;
-					maxLibCap2 += 110;
-					maxWisCap2 -= 50;
-				}
-			}
 			if (isNaga()) {
 				if (lowerBody == LowerBody.FROSTWYRM) {
 					maxStrCap2 += 20;
@@ -8702,7 +8400,6 @@ use namespace CoC;
 			if (devilkinScore() >= 16) max += (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (devilkinScore() >= 21) max += (90 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (minotaurScore() >= 10) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (sharkScore() >= 9 && vaginas.length > 0 && cocks.length > 0) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.ElementalBondUrges) && statusEffectv1(StatusEffects.SummonedElementals) >= 2) max += maxLust_ElementalBondUrgesMulti() * statusEffectv1(StatusEffects.SummonedElementals);
 			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 1) max += (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3) max += (90 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
