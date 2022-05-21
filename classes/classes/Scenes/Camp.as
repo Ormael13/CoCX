@@ -310,6 +310,10 @@ public class Camp extends NPCAwareContent{
 			emberScene.postEmberSleep();
 			return;
 		}
+		if (sceneHunter.other && camp.IsSleeping && flags[kFLAGS.HACK_CELESS_INCUBATION] == 1) {
+			celessScene.hackCelessSpawn();
+			return;
+		}
 		if (flags[kFLAGS.JACK_FROST_PROGRESS] > 0) {
 			hideMenus();
 			Holidays.processJackFrostEvent();
@@ -3921,18 +3925,17 @@ public class Camp extends NPCAwareContent{
 	}
 
 	private function dungeonFound():Boolean { //Returns true as soon as any known dungeon is found
-		if (flags[kFLAGS.FACTORY_FOUND] > 0) return true;
-		if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) return true;
-		if (flags[kFLAGS.D3_DISCOVERED] > 0) return true;
-		if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) return true;
-		if (SceneLib.dungeons.checkPhoenixTowerClear()) return true;
-		if (flags[kFLAGS.EBON_LABYRINTH] > 0) return true;
-		if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) return true;
-		if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0) return true;
-		if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] > 0) return true;
-		if (flags[kFLAGS.LUMI_MET] > 0) return true;
-		if (flags[kFLAGS.ANZU_PALACE_UNLOCKED] > 0) return true;
-		return false;
+		return flags[kFLAGS.FACTORY_FOUND] > 0
+			|| flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0
+			|| flags[kFLAGS.D3_DISCOVERED] > 0
+			|| flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0
+			|| SceneLib.dungeons.checkPhoenixTowerClear()
+			|| flags[kFLAGS.EBON_LABYRINTH] > 0
+			|| flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0
+			|| flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0
+			|| flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] > 0
+			|| flags[kFLAGS.LUMI_MET] > 0
+			|| flags[kFLAGS.ANZU_PALACE_UNLOCKED] > 0;
 	}
 
 	private function farmFound():Boolean { //Returns true as soon as any known dungeon is found
@@ -3976,11 +3979,7 @@ public class Camp extends NPCAwareContent{
 	}
 	
 	private function placesKnownNight():Boolean {
-		if (player.hasStatusEffect(StatusEffects.ResourceNode1)) {
-			//if (player.statusEffectv1(StatusEffects.ResourceNode1) >= 5) return true;
-			if (player.statusEffectv2(StatusEffects.ResourceNode1) >= 5) return true;
-		}
-		return false;
+		return player.hasStatusEffect(StatusEffects.ResourceNode1) && player.statusEffectv2(StatusEffects.ResourceNode1) >= 5;
 	}
 
 //All cleaned up!
@@ -4747,4 +4746,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}
