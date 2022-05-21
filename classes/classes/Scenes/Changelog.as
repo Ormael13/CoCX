@@ -317,7 +317,7 @@ package classes.Scenes
 			outputText("-Urta Quest PC got bit better phys stats and her specials got bit more punch added.\n");
 			outputText("-Added fountains to Ebon Labyrinth. You can find them near boss rooms at some depth/room count (after clearing the dungeon). You can use them to make legendary items, just like Celess. The type of the fountain (pure/corrupt) is selected randomly. (Svalkash)\n");
 			outputText("-Base tease damage was increased by 50%. All the bonus flat and % bonuses are unchanged.\n");
-			outputText("-\n");
+			outputText("-New melee weapon (by Canadian Snas): Taintless Knives - buyable at Belisa shop. Cost 800 gems. Base atk is 5. It's Dual Small weapon belonging to dagger type. Similary to Beautiful weapoons the higher corruption the lower atk and when cor reach 33+ it will be not usable.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
