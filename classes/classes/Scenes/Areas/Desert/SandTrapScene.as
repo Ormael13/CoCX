@@ -150,7 +150,7 @@ public function sandtrapmentLoss(clear:Boolean = false):void {
 				[1, "Vagina", chicksLoseToSandTarp, "Req. a vagina.", player.hasVagina()],
 				[2, "Ass", genderlessLoss]
 			],
-			"\n\nThe creature stares at your groin, trying to figure out who you are you and how to deal with you. Might as well give it a hint?"
+			"\n\nThe creature stares at your groin, trying to figure out who you are and how to deal with you. Might as well give it a hint?"
 		);
 	}
 	else doNext(player.hasCock() ? dickwieldersLoseToSandTarps : player.hasVagina() ? chicksLoseToSandTarp : genderlessLoss);

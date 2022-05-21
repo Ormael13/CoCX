@@ -4,7 +4,6 @@ import classes.CoC_Settings;
 import classes.CockTypesEnum;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.Camp.CampScenes;
 import classes.PerkLib;
 import classes.PregnancyStore;
 import classes.Scenes.NPCs.CelessScene;
@@ -13,17 +12,7 @@ import classes.StatusEffects;
 import classes.VaginaClass;
 
 public class Pregnancy extends NPCAwareContent {
-    public function Pregnancy() {
-    }
-    //17 == EMBER
-//18 == PROPER BASILISKS (BENOIT ONLY)
-//19 == SATYR
-//20 == COTTON
-//21 == URTA
-//22 == SAND WITCH
-//23 == FROG BUTT EGG
-
-	public var campScenes:CampScenes = new CampScenes();
+    public function Pregnancy() {}
 
     public function updatePregnancy():Boolean {
         var displayedUpdate:Boolean = false;
