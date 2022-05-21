@@ -220,126 +220,16 @@ use namespace CoC;
 				this.level = 40;
 			}
 			else {
-				if (flags[kFLAGS.ELECTRA_LVL_UP] < 2) {
-					initStrTouSpeInte(60, 110, 100, 150);
-					initWisLibSensCor(150, 220, 160, 80);
-					this.weaponAttack = 12;
-					this.armorDef = 12;
-					this.armorMDef = 10;
-					this.bonusHP = 100;
-					this.bonusLust = 410;
-					this.level = 30;
-				}
-				if (flags[kFLAGS.ELECTRA_LVL_UP] == 2) {
-					initStrTouSpeInte(70, 125, 120, 160);
-					initWisLibSensCor(160, 250, 180, 80);
-					this.weaponAttack = 15;
-					this.armorDef = 18;
-					this.armorMDef = 20;
-					this.bonusHP = 150;
-					this.bonusLust = 466;
-					this.level = 36;
-				}
-				if (flags[kFLAGS.ELECTRA_LVL_UP] == 3) {
-					initStrTouSpeInte(80, 140, 140, 170);
-					initWisLibSensCor(170, 280, 200, 80);
-					this.weaponAttack = 18;
-					this.armorDef = 24;
-					this.armorMDef = 30;
-					this.bonusHP = 200;
-					this.bonusLust = 522;
-					this.level = 42;
-				}
-				if (flags[kFLAGS.ELECTRA_LVL_UP] == 4) {
-					initStrTouSpeInte(90, 165, 160, 180);
-					initWisLibSensCor(180, 310, 220, 80);
-					this.weaponAttack = 21;
-					this.armorDef = 30;
-					this.armorMDef = 40;
-					this.bonusHP = 250;
-					this.bonusLust = 578;
-					this.level = 48;
-				}
-				if (flags[kFLAGS.ELECTRA_LVL_UP] == 5) {
-					initStrTouSpeInte(100, 190, 180, 190);
-					initWisLibSensCor(190, 340, 240, 80);
-					this.weaponAttack = 24;
-					this.armorDef = 36;
-					this.armorMDef = 50;
-					this.bonusHP = 300;
-					this.bonusLust = 624;
-					this.level = 54;
-				}
-				if (flags[kFLAGS.ELECTRA_LVL_UP] == 6) {
-					initStrTouSpeInte(110, 215, 200, 200);
-					initWisLibSensCor(200, 370, 260, 80);
-					this.weaponAttack = 27;
-					this.armorDef = 42;
-					this.armorMDef = 60;
-					this.bonusHP = 350;
-					this.bonusLust = 690;
-					this.level = 60;
-				}
-				if (flags[kFLAGS.ELECTRA_LVL_UP] == 7) {
-					initStrTouSpeInte(120, 240, 220, 210);
-					initWisLibSensCor(210, 400, 280, 80);
-					this.weaponAttack = 30;
-					this.armorDef = 48;
-					this.armorMDef = 70;
-					this.bonusHP = 400;
-					this.bonusLust = 746;
-					this.level = 66;
-				}
-				if (flags[kFLAGS.ELECTRA_LVL_UP] == 8) {
-					initStrTouSpeInte(130, 265, 240, 220);
-					initWisLibSensCor(220, 430, 300, 80);
-					this.weaponAttack = 33;
-					this.armorDef = 54;
-					this.armorMDef = 80;
-					this.bonusHP = 450;
-					this.bonusLust = 802;
-					this.level = 72;
-				}
-				if (flags[kFLAGS.ELECTRA_LVL_UP] == 9) {
-					initStrTouSpeInte(140, 290, 260, 230);
-					initWisLibSensCor(230, 460, 320, 80);
-					this.weaponAttack = 36;
-					this.armorDef = 60;
-					this.armorMDef = 90;
-					this.bonusHP = 500;
-					this.bonusLust = 858;
-					this.level = 78;
-				}
-				if (flags[kFLAGS.ELECTRA_LVL_UP] == 10) {
-					initStrTouSpeInte(150, 315, 280, 240);
-					initWisLibSensCor(240, 490, 340, 80);
-					this.weaponAttack = 39;
-					this.armorDef = 66;
-					this.armorMDef = 100;
-					this.bonusHP = 550;
-					this.bonusLust = 914;
-					this.level = 84;
-				}
-				if (flags[kFLAGS.ELECTRA_LVL_UP] == 11) {
-					initStrTouSpeInte(150, 340, 300, 250);
-					initWisLibSensCor(250, 520, 340, 80);
-					this.weaponAttack = 42;
-					this.armorDef = 72;
-					this.armorMDef = 110;
-					this.bonusHP = 600;
-					this.bonusLust = 950;
-					this.level = 90;
-				}
-				if (flags[kFLAGS.ELECTRA_LVL_UP] == 12) {
-					initStrTouSpeInte(150, 365, 320, 260);
-					initWisLibSensCor(260, 550, 340, 80);
-					this.weaponAttack = 45;
-					this.armorDef = 78;
-					this.armorMDef = 120;
-					this.bonusHP = 650;
-					this.bonusLust = 986;
-					this.level = 96;
-				}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
+				var electraLvl:Number = flags[kFLAGS.ELECTRA_LVL_UP]-1;
+				initStrTouSpeInte(60 + 10*electraLvl, 110 + 15*electraLvl, 100 + 20*electraLvl, 150 + 10*electraLvl);
+				initWisLibSensCor(150 + 10*electraLvl, 220 + 30*electraLvl, 160 + 20*electraLvl, 80);
+				this.weaponAttack = 12 + 3*electraLvl;
+				this.armorDef = 12 + 5*electraLvl;
+				this.armorMDef = 10 + 10*electraLvl;
+				this.bonusHP = 100 + 50*electraLvl;
+				this.bonusLust = 410 + 56*electraLvl;
+				this.level = 30 + 6*electraLvl;
+				//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			}
 			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,60,0,0,0);
