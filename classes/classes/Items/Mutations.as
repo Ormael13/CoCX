@@ -3703,51 +3703,61 @@ public final class Mutations extends MutationsHelper {
             if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Mana Shield.</b>");
                 player.createStatusEffect(StatusEffects.KnowsManaShield, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Water Ball and doesnt have it
             if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsWaterBall)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Water Ball.</b>");
                 player.createStatusEffect(StatusEffects.KnowsWaterBall, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Wind Bullet and doesnt have it
             if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsWindBullet)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Wind Bullet.</b>");
                 player.createStatusEffect(StatusEffects.KnowsWindBullet, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Stalagmite and doesnt have it
             if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsStalagmite)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Stalagmite.</b>");
                 player.createStatusEffect(StatusEffects.KnowsStalagmite, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Acid Spray and doesnt have it
             if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsAcidSpray)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Acid Spray.</b>");
                 player.createStatusEffect(StatusEffects.KnowsAcidSpray, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Clear Mind and doesnt have it
             if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsClearMind)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Clear Mind.</b>");
                 player.createStatusEffect(StatusEffects.KnowsClearMind, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Water Sphere and doesnt have it
             if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsWaterSphere)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Water Sphere.</b>");
                 player.createStatusEffect(StatusEffects.KnowsWaterSphere, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Wind Blast and doesnt have it
             if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsWindBlast)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Wind Blast.</b>");
                 player.createStatusEffect(StatusEffects.KnowsWindBlast, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Shatterstone and doesnt have it
             if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsShatterstone)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Shatterstone.</b>");
                 player.createStatusEffect(StatusEffects.KnowsShatterstone, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Corrosive Wave and doesnt have it
             if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsCorrosiveWave)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Corrosive Wave.</b>");
                 player.createStatusEffect(StatusEffects.KnowsCorrosiveWave, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Turbulence and doesnt have it
             /*if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.)) {
@@ -3765,21 +3775,25 @@ public final class Mutations extends MutationsHelper {
             if (player.inte >= 75 && !player.hasStatusEffect(StatusEffects.KnowsHydroAcid)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Hydro Acid.</b>");
                 player.createStatusEffect(StatusEffects.KnowsHydroAcid, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Energy Drain and doesnt have it
             if (player.inte >= 80 && !player.hasStatusEffect(StatusEffects.KnowsEnergyDrain)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Energy Drain.</b>");
                 player.createStatusEffect(StatusEffects.KnowsEnergyDrain, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Acid Rain and doesnt have it
             if (player.inte >= 85 && !player.hasStatusEffect(StatusEffects.KnowsAcidRain)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Acid Rain.</b>");
                 player.createStatusEffect(StatusEffects.KnowsAcidRain, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Restore and doesnt have it
             if (player.inte >= 90 && !player.hasStatusEffect(StatusEffects.KnowsRestore)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Restore.</b>");
                 player.createStatusEffect(StatusEffects.KnowsRestore, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Balance of Life and doesnt have it
             if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsBalanceOfLife)) {

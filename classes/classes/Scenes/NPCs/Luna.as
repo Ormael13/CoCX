@@ -34,12 +34,14 @@ package classes.Scenes.NPCs
 			outputText("Luna pounces on you, pinning you to the ground as she gets in position, claws at the ready.");
 			player.createStatusEffect(StatusEffects.WolfHold,0,0,0,0);
 			if (player.hasPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
-				if (flags[kFLAGS.LUNA_LVL_UP] >= 15) player.takePhysDamage(18+rand(35));
-				else if (flags[kFLAGS.LUNA_LVL_UP] >= 12) player.takePhysDamage(16+rand(30));
-				else if (flags[kFLAGS.LUNA_LVL_UP] >= 9) player.takePhysDamage(14+rand(25));
-				else if (flags[kFLAGS.LUNA_LVL_UP] >= 6) player.takePhysDamage(12+rand(20));
-				else if (flags[kFLAGS.LUNA_LVL_UP] >= 3) player.takePhysDamage(10+rand(15));
-				else player.takePhysDamage(8+rand(10));
+				var takeD:Number;
+				if (flags[kFLAGS.LUNA_LVL_UP] >= 15) takeD = 18+rand(35);
+				else if (flags[kFLAGS.LUNA_LVL_UP] >= 12) takeD = 16+rand(30);
+				else if (flags[kFLAGS.LUNA_LVL_UP] >= 9) takeD = 14+rand(25);
+				else if (flags[kFLAGS.LUNA_LVL_UP] >= 6) takeD = 12+rand(20);
+				else if (flags[kFLAGS.LUNA_LVL_UP] >= 3) takeD = 10+rand(15);
+				else takeD = 8 + rand(10);
+				player.takePhysDamage(takeD, true);
 			}
 		}
 		
@@ -52,7 +54,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.LUNA_LVL_UP] >= 12) RavageDmg += eBaseStrengthDamage() * 0.5;
 			if (flags[kFLAGS.LUNA_LVL_UP] >= 15) RavageDmg += eBaseStrengthDamage() * 0.6;
 			RavageDmg = Math.round(RavageDmg);
-			player.takePhysDamage(RavageDmg);
+			player.takePhysDamage(RavageDmg, true);
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
