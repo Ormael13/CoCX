@@ -18,7 +18,6 @@ import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.IMutationPerkType;
 import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Scenes.Areas.Desert.SandWitchScene;
@@ -77,6 +76,7 @@ import coc.view.MainView;
 			newGameGo();
 		}
 
+		/*
 		public function newGamePlus():void {
 			flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = player.XP;
 			if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] == 0) flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = 1;
@@ -87,6 +87,7 @@ import coc.view.MainView;
 			flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] = player.gems;
 			newGameGo();
 		}
+		*/
 
 		public function newGameGo():void {
 			XXCNPC.unloadSavedNPCs();
@@ -110,36 +111,16 @@ import coc.view.MainView;
 
 			clearOutput();
 			outputText("You grew up in the small village of Ingnam, a remote village with rich traditions, buried deep in the wilds.  Every year for as long as you can remember, your village has chosen a champion to send to the cursed Demon Realm.  Legend has it that in years Ingnam has failed to produce a champion, chaos has reigned over the countryside.  Children disappear, crops wilt, and disease spreads like wildfire.  This year, <b>you</b> have been selected to be the champion.\n\n");
-			//if (showSpecialNames) outputText("\n\n\n\n");
 			outputText("What is your name?");
-
-			/*CODE FROM CMACLOAD HERE
-			Multiple line case. A text field GeneralTextField, positioning a movieclip AskQuestions below it
-			GeneralTextField.wordWrap = true;
-			GeneralTextField.autoSize = true;
-			GeneralTextField.htmlText = &quot;whatevevr.......&quot;;
-			AskQuestions._x = GeneralTextField._x;
-			AskQuestions._y = GeneralTextField._y + 3 + GeneralTextField._height;
-			again replace _x, _y, _width with x, y, width*/
-			//mainView.mainText.autoSize = true;
-
-			//mainView.mainText.autoSize = TextFieldAutoSize.LEFT;
 			menu();
 			addButton(0, "OK", chooseName);
-		//	simpleChoices("OK",10034,"",0,"",0,"",0,"",0);
 			mainView.nameBox.x = mainView.mainText.x + 5;
 			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
-
-			//OLD
-			//mainView.nameBox.x = 510;
-			//mainView.nameBox.y = 265;
 			mainView.nameBox.text = "";
 			mainView.nameBox.maxChars = 16;
 			mainView.nameBox.restrict = null;
 
 			var preList:Array = [];
-			//function _add(element:Array):void{preList.push({label: element[0], data:element});}
-			//if (CoC_Settings.debugBuild) preList.push( { label: "TestChar", data: [ "TestChar", customTestChar, true, "For debug." ]} );
 			for (var t:int = 0; t < specialCharacters.customs.length; t++) preList.push( { label: specialCharacters.customs[t][0], data:specialCharacters.customs[t] } );
 
 			if (showSpecialNames) {
@@ -151,13 +132,9 @@ import coc.view.MainView;
 			inDungeon = false;
 			inRoomedDungeon = false;
 			inRoomedDungeonResume = null;
-			//Hold onto old data for NG+
-			var oldPlayer:Player = player;
 			//Reset all standard stats
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) player = new Player();
-
-            //Reset autosave
-            if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
+				player = new Player();
                 player.slotName = "VOID";
                 player.autoSave = false;
             }
@@ -442,8 +419,6 @@ import coc.view.MainView;
 			//Carry over data if new game plus.
 			if (player.hasKeyItem("Ascension") >= 0) CoC.instance.flags = newFlags;
 			if (flags[kFLAGS.SPIRIT_STONES] > (100 * (1 + player.newGamePlusMod()))) flags[kFLAGS.SPIRIT_STONES] = (100 * (1 + player.newGamePlusMod()));
-			//Set that jojo debug doesn't need to run
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02999] = 3;
 			//Time reset
 			model.time.days = 0;
 			model.time.hours = 0;
@@ -2293,6 +2268,8 @@ import coc.view.MainView;
 			addButton(14, "Back", ascensionMenu);
 		}
 
+		//Unused for now
+		/*
 		private function perkMetamorphAscCheck(btn:int):void{
 			if (!player.hasPerk(PerkLib.AscensionNaturalMetamorph)){
 				if (player.ascensionPerkPoints < 30){
@@ -2336,6 +2313,7 @@ import coc.view.MainView;
 			}
 
 		}
+		*/
 
 		//Deprecating on next public build.
 		private function perkNaturalMetamorph():void {
@@ -2385,6 +2363,8 @@ import coc.view.MainView;
 			outputText("Your gained Transcendental Genetic Memory (Stage 5) perk.");
 			doNext(rarePerks2);
 		}
+		//Unused for now
+		/*
 		private function perkTranscendentalGeneticMemoryStage6():void {
 			player.ascensionPerkPoints -= 90;
 			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5, 0, 0, 0, 1);
@@ -2393,6 +2373,7 @@ import coc.view.MainView;
 			outputText("Your gained Transcendental Genetic Memory (Stage 6) perk.");
 			doNext(rarePerks2);
 		}
+		*/
 
 		//End of Deprecation.
 		private function perkUnderdog():void {
@@ -2870,10 +2851,7 @@ import coc.view.MainView;
 		private function accessLowerBodyMenu(currentPage: int = 0): void {
 			// Hides Taur variants of pre-existing TFs
 			var memArray: Array = LowerBodyMem.Memories.filter(function(element: *, index: int, array: Array): Boolean {
-				if (element && !element.taurVariant) {
-					return true;
-				}
-				return false;
+				return element && !element.taurVariant
 			});
 
 			memArray.unshift({
@@ -2926,10 +2904,7 @@ import coc.view.MainView;
 			};
 
 			memArray = memArray.filter(function(element: *, index: int, array: Array): Boolean {
-				if (element && element.id !== "Unlocked Metamorph") {
-					return true;
-				}
-				return false;
+				return element && element.id !== "Unlocked Metamorph"
 			});
 
 			const memsPerPage: int = memArray.length > 14 ? 12 : 14;
