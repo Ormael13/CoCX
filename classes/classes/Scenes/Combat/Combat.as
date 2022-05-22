@@ -1892,7 +1892,7 @@ public class Combat extends BaseContent {
     }
 
 	public function simplifiedPrePCTurn():void {
-		clearOutput();
+        outputText("\n\n");
 		player.addStatusValue(StatusEffects.SimplifiedNonPCTurn,1,1);
 		if (flags[kFLAGS.WILL_O_THE_WISP] < 2 && flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1) {
 			willothewispattacks0();
@@ -1959,8 +1959,7 @@ public class Combat extends BaseContent {
 				if (player.hasPerk(PerkLib.MotivationSu)) comfoll.zenjiCombatActions();
 			}
 		}
-		menu();
-		addButton(0, "Next", combatMenu, false);
+        flushOutputTextToGUI();
 	}
 
     public function willothewispattacks(noSkip:Boolean = false):void {
@@ -14635,7 +14634,8 @@ public class Combat extends BaseContent {
 		if (flags[kFLAGS.PLAYER_COMPANION_1] != "") partySize += 1;
 		if (flags[kFLAGS.PLAYER_COMPANION_2] != "") partySize += 1;
 		if (flags[kFLAGS.PLAYER_COMPANION_3] != "") partySize += 1;
-		return player.hasStatusEffect(StatusEffects.CombatFollowerZenji) && partySize == 2;
+		if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji) && partySize == 2) return true;
+		else return false;
 	}
 
     public function struggleCreepingDoom():void {

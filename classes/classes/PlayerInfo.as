@@ -1,7 +1,4 @@
 package classes {
-
-import classes.BodyParts.Face;
-import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
 import classes.IMutations.IMutationsLib;
 import classes.Scenes.Combat.CombatAbility;
@@ -16,7 +13,6 @@ import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
-import classes.Stats.StatUtils;
 import classes.StatusEffects.VampireThirstEffect;
 
 import coc.view.MainView;
@@ -924,10 +920,10 @@ public class PlayerInfo extends BaseContent {
 		if (TyrantiaFollower.TyrantiaFollowerStage > 0) {
 			interpersonStats += "<b>Tyrantia Affection:</b> " + TyrantiaFollower.TyrantiaAffectionMeter + "%\n";
 			if (TyrantiaFollower.TyrantiaTrainingSessions >= 1) interpersonStats += "<b>Training sessions with Tyrantia:</b> " + TyrantiaFollower.TyrantiaTrainingSessions + " / 25\n";
-			if (flags[kFLAGS.TYRANTIA_LVL_UP] == 4) interpersonStats += "<b>Tyrantia lvl:</b> 76\n";
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] == 4) interpersonStats += "<b>Tyrantia lvl:</b> 76 (current max lvl)\n";
 			if (flags[kFLAGS.TYRANTIA_LVL_UP] == 3) interpersonStats += "<b>Tyrantia lvl:</b> 70\n";
 			if (flags[kFLAGS.TYRANTIA_LVL_UP] == 2) interpersonStats += "<b>Tyrantia lvl:</b> 64\n";
-			if (flags[kFLAGS.TYRANTIA_LVL_UP] < 2) interpersonStats += "<b>Tyrantia lvl:</b> 58 (current max lvl)\n";
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] < 2) interpersonStats += "<b>Tyrantia lvl:</b> 58\n";
 		}
 
 		if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] != 0) {

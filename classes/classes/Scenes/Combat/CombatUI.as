@@ -453,14 +453,15 @@ public class CombatUI extends BaseCombatContent {
 		} else if (player.hasPerk(PerkLib.JobLeader) && flags[kFLAGS.WILL_O_THE_WISP] < 2 && flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1) {
 			if (flags[kFLAGS.WILL_O_THE_WISP] == 0) combat.willothewispattacks(true);
 			else {
+				var disablethisNote:String = "\n\n<b>The wisp can be toggled to attack automatically (Page 3).</b>";
 				menu();
-				addButton(0, "Skip", combat.willothewispattacks).hint("You forfeit potential attack of wisp. Would skip to next minion attack/your main turn.");
-				addButton(1, "Attack", combat.willothewispattacks, true);
+				addButton(0, "Skip", combat.willothewispattacks).hint("You forfeit this attack of the wisp. Would skip to next minion attack/your main turn." + disablethisNote);
+				addButton(1, "Attack", combat.willothewispattacks, true).hint("The wisp attacks your enemy." + disablethisNote);
 			}
 		} else if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.permanentgolemsendcost()) {
 			menu();
 			addButton(0, "None", combat.pspecials.notSendAnyGolem).hint("You forfeit potential attack of golem(s). Would skip to next minion attack/your main turn.");
-			addButton(1, "Send P.Gol/1", combat.pspecials.sendPermanentGolem1).hint("Mana cost of sending 1 pernament golem: "+combat.pspecials.permanentgolemsendcost());
+			addButton(1, "Send P.Gol/1", combat.pspecials.sendPermanentGolem1).hint("Mana cost of sending 1 permanent golem: "+combat.pspecials.permanentgolemsendcost());
 			if (monster.plural) {
 				if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 3) {
 					if (player.mana >= combat.pspecials.permanentgolemsendcost() * 3) addButton(6, "Send P.Gol/3", combat.pspecials.sendPermanentGolem3).hint("Mana cost of sending 3 pernament golems: "+(combat.pspecials.permanentgolemsendcost()*3));
@@ -568,6 +569,7 @@ public class CombatUI extends BaseCombatContent {
 			menu();
 			addButton(0, "Next", combatMenu, false);
 		} else if (flags[kFLAGS.PLAYER_COMPANION_2] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) {
+			clearOutput();
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina") combat.comfoll.alvinaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Amily") combat.comfoll.amilyCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Aurora") combat.comfoll.auroraCombatActions();
@@ -580,6 +582,7 @@ public class CombatUI extends BaseCombatContent {
 			menu();
 			addButton(0, "Next", combatMenu, false);
 		} else if (flags[kFLAGS.PLAYER_COMPANION_3] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) {
+			clearOutput();
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Alvina") combat.comfoll.alvinaCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Amily") combat.comfoll.amilyCombatActions();
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Aurora") combat.comfoll.auroraCombatActions();

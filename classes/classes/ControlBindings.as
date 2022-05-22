@@ -240,7 +240,7 @@ internal class ControlBindings {
                     "Show the perks page",
                     function ():void {
                         if (CoC.instance.mainView.menuButtonIsVisible(MainView.MENU_PERKS)) {
-                            CoC.instance.perkMenu.displayPerks(null);
+                            CoC.instance.perkMenu.displayPerks();
                         }
                     });
 

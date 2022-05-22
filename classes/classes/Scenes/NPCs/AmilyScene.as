@@ -2471,6 +2471,10 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				amilyIncest();
 				return;
 			}
+			if (BelisaFollower.BelisaInCamp && rand(5) == 0) {
+				amilyBelisa();
+				return;
+			}
 			amilySprite();
 			if(flags[kFLAGS.AMILY_CLOTHING] == 0) flags[kFLAGS.AMILY_CLOTHING] = "rags";
 			//Amily freakout
@@ -7498,6 +7502,17 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			flags[kFLAGS.TIMES_FUCKED_AMILYBUTT]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
+		
+		private function amilyBelisa():void {
+			clearOutput();
+			amilySprite();
+			outputText("As you’re walking to your mousey lover, you’re pleasantly surprised to see that she’s got company.\n\n");
+			outputText("\"<i>-And if you need anything else repaired, just drop by my dome, alright?</i>\" Belisa asks. \"<i>I also have spare silk bundles if you want to buy them, and if you want to-</i>\" Belisa sees you, and perks up. \"<i>Oh, [name]! Sorry if I’m in your way!</i>\"\n\n");
+			outputText("You tell Belisa that you’re here to talk to Amily. Belissa nods, apologizing again. You assure the nervous Drider that she was here first.\n\n");
+			outputText("\"<i>We were just about done.</i>\" Belissa says. \"<i>I’ll see you later?</i>\" Amily nods, and Belissa trots back to her silky bubble.\n\n");
+			outputText("\"<i>What is it, [name]?</i>\" Amily asks.\n\n");
+			amilyMenu(false);
+		}
 
 		//Scene 2: Amily Teaches Grown Corrupt Mice How To Sex (Z)
 		private function amilyIncest():void {
@@ -8301,3 +8316,4 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		}
 	}
 }
+

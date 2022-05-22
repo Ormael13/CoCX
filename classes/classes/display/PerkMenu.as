@@ -29,7 +29,7 @@ import flash.events.MouseEvent;
 public class PerkMenu extends BaseContent {
 	public function PerkMenu() {
 	}
-	public function displayPerks(e:MouseEvent = null):void {
+	public function displayPerks():void {
 		clearOutput();
 		displayHeader("Perks (Total: " + player.perks.length + ")");
 		if (flags[kFLAGS.NEWPERKSDISPLAY] >= 1){
@@ -87,25 +87,42 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can choose and adjust various effects related to your magic.</b>");
 			addButton(7, "Magic Opt",MagicOption);
 		}
+		if (player.hasPerk(PerkLib.LiftOff)) {
+			outputText("\n<b>You can choose and adjust various misc effects.</b>");
+			addButton(8, "Misc Opt",MiscOption);
+		}
+		addButton (9, "PerkDB2", perkDatabase2); //WIP.
 		if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
 			outputText("\n<b>You can adjust your elemental summons behaviour during combat.</b>");
-			addButton(8, "Elementals",summonsbehaviourOptions);
+			addButton(10, "Elementals",summonsbehaviourOptions);
 		}
 		if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] > 0 && player.hasPerk(PerkLib.FirstAttackGolems)) {
 			outputText("\n<b>You can adjust your permanent golems behaviour during combat.</b>");
-			addButton(9, "P.Golems",golemsbehaviourOptions);
+			addButton(11, "P.Golems",golemsbehaviourOptions);
+		}
+		if (player.hasPerk(PerkLib.JobLeader)) {
+			outputText("\n<b>You can adjust your Will-o'-the-wisp behaviour during combat.</b>");
+			addButton(12, "Will-o'-the-wisp",WOTWbehaviourOptions);
 		}
 		//addButton(10, "Number of", EngineCore.doNothing);
 		//addButton(11, "perks: " + player.perks.length, EngineCore.doNothing);
-		if (player.hasPerk(PerkLib.LiftOff)) {
-			outputText("\n<b>You can choose and adjust various misc effects.</b>");
-			addButton(12, "Misc Opt",MiscOption);
+		if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+			outputText("\n\n<b>Simplified Pre-Turn is enabled. Your allies will attack automatically, and you won't need to click through their turns.</b>");
+			addButton(13, "S.PTurn(On)", simplifiedPreTurnOff).hint("Click to disable Simplified Pre-Turn.");
 		}
-		addButton (13, "PerkDB2", perkDatabase2); //WIP.
-		if (player.hasPerk(PerkLib.JobLeader)) {
-			outputText("\n<b>You can adjust your Will-o'-the-wisp behaviour during combat.</b>");
-			addButton(14, "Will-o'-the-wisp",WOTWbehaviourOptions);
+		else {
+			outputText("\n\n<b>Simplified Pre-Turn is disabled. You'll need to click through your allies' turns, but you'll be able to choose their actions (if it's possible).\nNote: there is another switch for Will-o-Wisp in battle menu (page 3).</b>");
+			addButton(13, "S.PTurn(Off)", simplifiedPreTurnOn).hint("Click to enable Simplified Pre-Turn.");
 		}
+	}
+
+	private function simplifiedPreTurnOn():void {
+		player.createStatusEffect(StatusEffects.SimplifiedNonPCTurn,0,0,0,0);
+		displayPerks();
+	}
+	private function simplifiedPreTurnOff():void {
+		player.removeStatusEffect(StatusEffects.SimplifiedNonPCTurn);
+		displayPerks();
 	}
 
 	public function MagicOption(e:MouseEvent = null):void {
@@ -238,8 +255,8 @@ public class PerkMenu extends BaseContent {
 				case DARKNESS: outputText("Darkness Shard");break;
 				case WATER: outputText("Water Ball");break;
 				case WIND: outputText("Wind Bullet");break;
-				case EARTH: outputText("Darkness Shard");break;
-				case ACID: outputText("Darkness Shard");break;
+				case EARTH: outputText("Stalagmite");break;
+				case ACID: outputText("Acid Spray");break;
 			}
 			outputText("</b>");
 		}

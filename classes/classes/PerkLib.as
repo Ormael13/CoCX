@@ -4268,12 +4268,14 @@ public class PerkLib
                     .requireSpe(150)
                     .requireLevel(54);*/
             PrestigeJobSpellKnight.requirePrestigeJobSlot()
+                    .requirePerk(JobWarrior)
+                    .requirePerk(JobSorcerer)
                     .requireStr(200)
                     .requireInt(150)
                     .requireLevel(54)
 					.requireCustomFunction(function (player:Player):Boolean {
-                        return player.statusEffectv1(StatusEffects.AlvinaTraining2) >= 1 || player.statusEffectv1(StatusEffects.SiegweirdTraining2) >= 1;
-                    }, "Get menthorship from one of the two greatest mages in mareth.");
+                        return player.masteryDaggerLevel >= 50 || player.masterySwordLevel >= 50 || player.masteryAxeLevel >= 50 || player.masteryMaceHammerLevel >= 50 || player.masteryDuelingSwordLevel >= 50 || player.masteryPolearmLevel >= 50 || player.masterySpearLevel >= 50 || player.masteryWhipLevel >= 50 || player.masteryExoticLevel >= 50;
+                    }, "One of melee weapons mastery (excluding gauntlets) reaching lvl 50.");
             HalfStepToInhumanTranquilness.requireStr(300)
                     .requireTou(100)
                     .requireSpe(100)
@@ -4288,8 +4290,9 @@ public class PerkLib
             SwiftCasting.requireLevel(60)
                     .requirePerk(PrestigeJobSpellKnight)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.KnowsIceSpike) || player.hasStatusEffect(StatusEffects.KnowsLightningBolt) || player.hasStatusEffect(StatusEffects.KnowsDarknessShard);
-                    }, "Whitefire or Ice Spike or Lightning Bolt or Darkness Shard spell");
+                        return player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.KnowsIceSpike) || player.hasStatusEffect(StatusEffects.KnowsLightningBolt) || player.hasStatusEffect(StatusEffects.KnowsDarknessShard)
+						|| player.hasStatusEffect(StatusEffects.KnowsWaterBall) || player.hasStatusEffect(StatusEffects.KnowsWindBullet) || player.hasStatusEffect(StatusEffects.KnowsStalagmite) || player.hasStatusEffect(StatusEffects.KnowsAcidSpray);
+                    }, "Whitefire or Ice Spike or Lightning Bolt or Darkness Shard or Water Ball or Wind Bullet or Stalagmite or Acid Spray spell");
             InhumanTranquilness.requireStr(330)
                     .requireTou(110)
                     .requireSpe(110)

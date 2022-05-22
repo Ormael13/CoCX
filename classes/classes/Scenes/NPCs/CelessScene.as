@@ -38,6 +38,10 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		return _instance;
 	}
 
+	public function celessSprite():void {
+		spriteSelect(isCorrupt ? SpriteDb.s_celessBlack : SpriteDb.s_celessWhite);
+	}
+
 	public static function canMeetUnicorn():Boolean {
 		return (
 				CoC.instance.player.level >= 10
@@ -136,8 +140,6 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		}
 	}
 
-	//endregion
-
 	public override function load(loadfrom:*):void {
 		if (loadfrom == undefined || loadfrom.celess == undefined) {
 			unload();
@@ -161,8 +163,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	override public function isCompanion(type:int = -1):Boolean {
-		if (type == COMPANION || type == FOLLOWER) return _age > 0 || _age == _ageIsAdult;
-		return false;
+		return (type == COMPANION || type == FOLLOWER) && (_age > 0 || _age == _ageIsAdult);
 	}
 
 	override public function campDescription(buttons:ButtonDataList, menuType:int = -1):void {
@@ -173,8 +174,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	public override function campInteraction():void {
-		if (isCorrupt)spriteSelect(SpriteDb.s_celessBlack);
-		if (!isCorrupt)spriteSelect(SpriteDb.s_celessWhite);
+		celessSprite();
 		clearOutput();
 		doNext(camp.returnToCampUseOneHour);
 		outputText(_name + " sees you coming over, and smiles. She trots over happily, horn almost glowing.\n\n<i>\""+
@@ -278,9 +278,9 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 
 		//region INTERFACE classes.TimeAwareInterface
 	public function timeChange():Boolean {
-		if (_age > 0) {
-			_age++;
-		}
+		if (_age > 0) _age++;
+		if (sceneHunter.other && flags[kFLAGS.HACK_CELESS_INCUBATION] > 1)
+			--flags[kFLAGS.HACK_CELESS_INCUBATION];
 		return false;
 	}
 
@@ -303,66 +303,58 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			_age = _ageShouldDoBirth;
 		}
 		else {
-			if (player.cor > 50){
-				spriteSelect(SpriteDb.s_celessBlack);
-			}
-			else {
-				spriteSelect(SpriteDb.s_celessWhite);
-			}
+			_age = 1;
+			_corruption = player.cor > 50 ? 100 : 0;
+			celessSprite();
 			mainView.nameBox.text = "";
 			clearOutput();
-			outputText("You suddenly lose all strength from the waist down, forcing you to lay down on the moss as you go into labor. Unlike what you know of pregnancy, you don’t feel any pain from this, your daughter leaves your womb without trouble and, somehow, you even get an orgasm out of the deal. \n"+
-			" It starts with the head, then the torso. So far one would think you are giving birth to a human baby, but you know it’s otherwise. A horse body indeed follows suit right after, causing you to orgasm again as white fluids gush out of your happy love canal in a steady flow. She is finally out and starts her life as any and all babies do… with a lengthy and healthy cry!\n"+
-			"You cradle your newborn daughter and bring her to your [breasts], feeling like taking a nap next to your child. First, however, comes an important question.. what will you name her?");
+			outputText("You suddenly lose all strength from the waist down, forcing you to lay down on the moss as you go into labor. Unlike what you know of pregnancy, you don’t feel any pain from this, your daughter leaves your womb without trouble and, somehow, you even get an orgasm out of the deal. \n" +
+				" It starts with the head, then the torso. So far one would think you are giving birth to a human baby, but you know it’s otherwise. A horse body indeed follows suit right after, causing you to orgasm again as white fluids gush out of your happy love canal in a steady flow. She is finally out and starts her life as any and all babies do… with a lengthy and healthy cry!\n" +
+				"You cradle your newborn daughter and bring her to your [breasts], feeling like taking a nap next to your child. First, however, comes an important question.. what will you name her?");
 			doNext(nameScene);
-		}
-		function nameScene():void {
-			if (mainView.nameBox.text == "") {
-				clearOutput();
-				outputText("\n\n\n<b>You must name her.</b>");
-				mainView.nameBox.text = "Celess";
-				mainView.nameBox.visible = true;
-				mainView.nameBox.width = 165;
-				mainView.nameBox.x = mainView.mainText.x + 5;
-				mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
-				doNext(nameScene);
-				return;
-			}
-			_age = 1;
-			_name = mainView.nameBox.text;
-			_corruption = 0;
-			if (player.cor > 50) {
-				_corruption = 100;
-			}
-			mainView.nameBox.visible = false;
-			clearOutput();
-			outputText("<i>\"" + _name + "... this is a good name, right my child?\"\n</i>"+
-			_name + " stops crying and looks at you with her big eyes, letting out a cute laugh in response.\n"+
-			"You think she likes it. Having solved this important matter, you drift asleep with " + _name + " still hugging your chest.\n\n"+
-			"When you wake up, you're no longer holding a baby, but what looks like a centaur girl in her tender years.\n" +
-			"You are hardly surprised, already knowing how short most pregnancies are in Mareth. ");
-			if (player.inte > 50) outputText("Maybe it’s due to how time and space distort here? ");
-			outputText("Still, you had hoped this phase would have lasted at least a little bit longer. ");
-			if(isCorrupt) {
-				outputText("Your daughter wakes up as well, opening her beautiful crimson eyes to the world.\n" +
-				"She has silver hair and twilight black fur.");
-			}
-			else	{
-				outputText("Your daughter wakes up as well, opening her beautiful azure eyes to the world.\n" +
-				"She has platinum blonde hair and white fur as befits an unicorn.");
-			}
-			outputText("You expected her to have grown her horns by now, but strangely enough, her forehead is still clear, perhaps unicorns grow their horns when they grow older? ");
-			if (player.inte > 50) outputText("Does make sense, otherwise they would cause some nasty internal damage during birth. ");
-			outputText("<i>\""+ player.mf("Dad", "Mom") +", is something wrong?\"</i>\n" +
-			"You reply that no… Although you wistfully hope she will stay cute like this forever, despite knowing perfectly well that she will not.\n" +
-			"While you would like to spend more time enjoying your role as a parent you still have a lot of things to do, so you simply tell her to stay at camp for now whenever you're not here for her safety.");
-			doNext(camp.returnToCampUseFourHours);
 		}
 	}
 
+	private function nameScene():void {
+		if (mainView.nameBox.text == "") {
+			clearOutput();
+			outputText("\n\n\n<b>You must name her.</b>");
+			mainView.nameBox.text = "Celess";
+			mainView.nameBox.visible = true;
+			mainView.nameBox.width = 165;
+			mainView.nameBox.x = mainView.mainText.x + 5;
+			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
+			doNext(nameScene);
+			return;
+		}
+		_name = mainView.nameBox.text;
+		mainView.nameBox.visible = false;
+		clearOutput();
+		outputText("<i>\"" + _name + "... this is a good name, right my child?\"\n</i>"+
+		_name + " stops crying and looks at you with her big eyes, letting out a cute laugh in response.\n"+
+		"You think she likes it. Having solved this important matter, you drift asleep with " + _name + " still hugging your chest.\n\n"+
+		"When you wake up, you're no longer holding a baby, but what looks like a centaur girl in her tender years.\n" +
+		"You are hardly surprised, already knowing how short most pregnancies are in Mareth. ");
+		if (player.inte > 50) outputText("Maybe it’s due to how time and space distort here? ");
+		outputText("Still, you had hoped this phase would have lasted at least a little bit longer. ");
+		if(isCorrupt) {
+			outputText("Your daughter wakes up as well, opening her beautiful crimson eyes to the world.\n" +
+			"She has silver hair and twilight black fur.");
+		}
+		else	{
+			outputText("Your daughter wakes up as well, opening her beautiful azure eyes to the world.\n" +
+			"She has platinum blonde hair and white fur as befits an unicorn.");
+		}
+		outputText("You expected her to have grown her horns by now, but strangely enough, her forehead is still clear, perhaps unicorns grow their horns when they grow older? ");
+		if (player.inte > 50) outputText("Does make sense, otherwise they would cause some nasty internal damage during birth. ");
+		outputText("<i>\""+ player.mf("Dad", "Mom") +", is something wrong?\"</i>\n" +
+		"You reply that no… Although you wistfully hope she will stay cute like this forever, despite knowing perfectly well that she will not.\n" +
+		"While you would like to spend more time enjoying your role as a parent you still have a lot of things to do, so you simply tell her to stay at camp for now whenever you're not here for her safety.");
+		doNext(camp.returnToCampUseFourHours);
+	}
+
 	public function itemImproveMenu():void {
-		if (isCorrupt)spriteSelect(SpriteDb.s_celessBlack);
-		if (!isCorrupt)spriteSelect(SpriteDb.s_celessWhite);
+		celessSprite();
 		var improvableItems:Array = [
 			[weapons.BFSWORD, weapons.NPHBLDE, weapons.EBNYBLD],
 			[weapons.DBFSWO, weapons.T_HEART, weapons.DORSOUL],
@@ -496,10 +488,13 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 					"That meager consolation does little to numb the disappointment.");
 					menu();
 					addButton(0, "Okay", celessUnicornIntro1, (player.isMale() || player.isGenderless()) ? 2 : 3);
-					if (player.hasCock()) {
-						addButton(1, "Fuck Her", celessUnicornIntro1, 4);
-					}
-					addButton(5, "NoWay", celessUnicornIntro1, 1);
+					var warningStr:String = "You have a strange feeling that you can miss something very important by doing this.\n\n<b>You can still get Celess this way by enabling 'Other' in SceneHunter settings.</b>";
+					var hintStr:String = "\n\n<b>You can still get Celess this way by enabling 'Other' in SceneHunter settings.</b>";
+					var noteStr:String = "<b>SH: Now this works as alternative way to Celess.</b>";
+					if (player.hasCock())
+						addButton(1, "Fuck Her", celessUnicornIntro1, 4).hint(sceneHunter.other ? noteStr : warningStr + hintStr);
+					else addButtonDisabled(1, "Fuck Her", "Req. a cock.");
+					addButton(4, "NoWay", celessUnicornIntro1, 1).hint(warningStr);
 				} else {
 					outputText("You ask her why she is defending this relic and what it would take for you to gain access to it. "+
 					"She eyes you as if trying to figure out your intentions then sigh.\n\n"+
@@ -552,9 +547,6 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				break;
 			case 4:
 				celessGuardFuckHer();
-				if (player.hasKeyItem("Nightmare Horns")) player.removeKeyItem("Nightmare Horns");
-				findArmor();
-				inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
 				break;
 		}
 	}
@@ -565,10 +557,13 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				celessGuardNightmareShowProof();
 				menu();
 				addButton(0, "Okay", celessUnicornIntro2, (player.isMale() || player.isGenderless()) ? 2 : 3);
-				if (player.hasCock()) {
-					addButton(1, "Fuck Her", celessUnicornIntro2, 4);
-				}
-				addButton(5, "NoWay", celessUnicornIntro2, 1);
+				var warningStr:String = "You have a strange feeling that you can miss something very important by doing this.\n\n<b>You can still get Celess this way by enabling 'Other' in SceneHunter settings.</b>";
+				var hintStr:String = "\n\n<b>You can still get Celess this way by enabling 'Other' in SceneHunter settings.</b>";
+				var noteStr:String = "<b>SH: Now this works as alternative way to Celess.</b>";
+				if (player.hasCock())
+					addButton(1, "Fuck Her", celessUnicornIntro2, 4).hint(sceneHunter.other ? noteStr : warningStr + hintStr);
+				else addButtonDisabled(1, "Fuck Her", "Req. a cock.");
+				addButton(4, "NoWay", celessUnicornIntro2, 1).hint(warningStr);
 				break;
 			case 1:
 				outputText("You give her the same answer you gave all others, a flat \"No\" that leaves no room for negotiation");
@@ -593,7 +588,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 					addButton(0, "Next", celessUnicornIntro2, 3, true);
 					break;
 				} else {
-					if (player.hasKeyItem("Nightmare Horns")) player.removeKeyItem("Nightmare Horns");
+					if (player.hasKeyItem("Nightmare Horns") >= 0) player.removeKeyItem("Nightmare Horns");
 					findArmor();
 					inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
 					break;
@@ -610,9 +605,6 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				break;
 			case 4:
 				celessGuardFuckHer();
-				if (player.hasKeyItem("Nightmare Horns")) player.removeKeyItem("Nightmare Horns");
-				findArmor();
-				inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
 				break;
 		}
 	}
@@ -721,7 +713,11 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		"You proceed to wildly fuck the unicorn’s hole with aggressive thrusts in order to, at the very least, make her moan. "+
 		"You eventually reach your limit and flood her cunt with your cum, making her whine. " +
 		(player.cumQ() >= 1000?"You pump in liters of cum, enough for her to start looking concerned as you seal her twat between your bodies, and her own belly start to swell visibly outside. When you finally finish and pull out of her, her hole continues to ripple and gape,"+(silly()?" almost like a fish's mouth, ":"")+" allowing you to glance at her still intact hymen, though it does seem to slightly struggle to keep your output contained.":"You check the results, but to your surprise not only nothing spills out of her cunt, but her hymen is actually still intact!")+
-		"<i>\"I guess that will have to do… you can have the shield. Now get out of here, I have a pregnancy to manage.\"</i>");
+		"<i>\"I guess that will have to do… you can have the shield. Now get out of here, I have a pregnancy to manage.\"</i>\n\n");
+		if (player.hasKeyItem("Nightmare Horns") >= 0) player.removeKeyItem("Nightmare Horns");
+		findArmor();
+		inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
+		if (sceneHunter.other) flags[kFLAGS.HACK_CELESS_INCUBATION] = PregnancyStore.INCUBATION_CELESS / 2; //make the same shit, but shorter.
 	}
 
 	private function celessGuardNightmareShowProof():void{
@@ -738,8 +734,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	public function celessArmor():void {
-		if (isCorrupt)spriteSelect(SpriteDb.s_celessBlack);
-		if (!isCorrupt)spriteSelect(SpriteDb.s_celessWhite);
+		celessSprite();
 		clearOutput();
 		outputText("You stumble upon the forest grove where the shield used to be. "+
 		"The unicorn has long left, but you spot a shine on the ground deeper in. "+
@@ -764,9 +759,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 	}
 
 	private function growUpScene():void {
-		if (isCorrupt)spriteSelect(SpriteDb.s_celessBlack);
-		if (!isCorrupt)spriteSelect(SpriteDb.s_celessWhite);
-
+		celessSprite();
 		clearOutput();
 		outputText("As you wake up this morning, you check the space next to you where "+_name+" usually sleeps, and find it empty.\n\n" +
 				"You almost panic for a moment, before calming down and deciding to go look for her. When you finally find her by the stream, she’s holding her forehead, visibly in pain.\n\n");
@@ -882,7 +875,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		"You watch spellbound as her horns suddenly fissures by the center, dividing into a duo of parallel horns, a symbol of her newfound corruption.\n"+
 		"Her formerly pure white fur starts to darken to pitch black as her eyes’ irises lose their azure blue, changing shade towards a fiendish red. Even her hairs changes silks of silver replacing her former platinum blonde strands.\n" +
 		"She holds her horns like a pair of dicks, playing her hands along their length as if trying to masturbate them.\n"+
-		"Speaking of which, her 25 inch long horse cock is now fully erect and throbbing, almost as if an invisible hand was toying with it, a thick flow of precum steadily seeping out already.\n"+
+		"Speaking of which, her 25-inch-long horse cock is now fully erect and throbbing, almost as if an invisible hand was toying with it, a thick flow of precum steadily seeping out already.\n"+
 		"And as her horns finish repositioning on each side of her forehead, her horsecock explodes, splattering much of the ground, covering it in white. " + _name + " seems to have embraced her inner corruption.\n\n"+
 		"<i>\""+ player.mf("Dad", "Mom") +"… I feel so energised, and hot... please... help me get that throbbing thing to calm down.\"</i>\n\n"+
 		"This is a… somewhat unusual situation, but it’s something you can understand.\n"+
@@ -1001,6 +994,18 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			$isCorrupt : isCorrupt,
 			$isAdult : isAdult
 		}
+	}
+
+	//SceneHunter hack for Celess - spawns her after fucking the unicorn.
+	public function hackCelessSpawn():void {
+		flags[kFLAGS.HACK_CELESS_INCUBATION] = 0;
+		_age = 1;
+		_corruption = 0;
+		celessSprite();
+		mainView.nameBox.text = "";
+		clearOutput();
+		outputText("You wake up from a quiet rustle. Strange. " + (camp.followersCount() + camp.loversCount() + camp.slavesCount() > 0 ? "Your camp should be still sleeping, and a" : "A") + " ny invasion would sound much louder. When you go outside to check what is happening, a strange scene presents before your eyes. A unicorn child lies on a small blanket right near your " + (flags[kFLAGS.CAMP_BUILT_CABIN] >= 1 ? "cabin":"tent") + ". Inspecting the child more closely, you notice some resemblance to yourself... and to the unicorn you had sex in the forest with. The girl is very young: she can't be older than several days. Well, seems like damn horse wants you to take care of your child. First, however, comes an important question... how will you name her?");
+		doNext(nameScene);
 	}
 }
 }
