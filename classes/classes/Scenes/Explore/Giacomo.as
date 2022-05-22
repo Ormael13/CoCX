@@ -153,12 +153,14 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			addButton(1, "Traveler's Guide", pitchTravellersGuide);
 			addButton(2, "Hentai Comic", pitchHentaiComic);
 			if (flags[kFLAGS.COTTON_UNUSUAL_YOGA_BOOK_TRACKER] > 0) addButton(3, "Yoga Guide", pitchYogaGuide);
+			addButton(4, "E. Tome", pitchElementalistsTome).hint("Elementalist’s Tome");
 			addButton(5, "White Book", pitchWhiteBook);
 			addButton(6, "Black Book", pitchBlackBook);
 			addButton(7, "Grey Book", pitchGreyBook);
 			addButton(8, "Red Manuscript", pitchRedManuscript);
 			addButton(9, "Crimson Jade", pitchCrimsonJade);
-			addButton(10, "E. Tome", pitchElementalistsTome).hint("Elementalist’s Tome");
+			addButton(10, "TelAdreMagI5", pitchTelAdreMagazineIssue5).hint("Tel'Adre Magazine Issue 5");
+			addButton(11, "TelAdreMagI10", pitchTelAdreMagazineIssue10).hint("Tel'Adre Magazine Issue 10");
 			addButton(14, "Back", giacomoEncounter);
 			statScreenRefresh();
 		}
@@ -427,6 +429,62 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				statScreenRefresh();
 			}
 			doNext(bookMenu);
+		}
+		
+		private function pitchTelAdreMagazineIssue5():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) {
+				outputText("<b>You already own the magazine 'Tel'Adre Magazine Issue 5'.</b>");
+				doNext(bookMenu);
+				return;
+			}
+			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 5th issue of Tel'Adre Magazine.  I dive into matters of so called fifth finger or green thumb.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your herbalism horizons?</i>\"");
+			doYesNo(buyTelAdreMagazineIssue5, bookMenu);
+		}
+		
+		private function buyTelAdreMagazineIssue5():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.gems < 100) {
+				outputText("\n\nGiacomo sighs, indicating you need " + String(100 - player.gems) + " more gems to purchase this item.");
+				doNext(bookMenu);
+			}
+			else {
+				outputText("\n\nYou consider yourself fortunate to be quite literate in this day and age.  It certainly comes in handy with this magazine.  Obviously written by well-informed, would help you in herb cultivation. ");
+				doNext(bookMenu);
+				player.gems -= 100;
+				player.createKeyItem("Tel'Adre Magazine Issue 5", 0, 0, 0, 0);
+				statScreenRefresh();
+			}
+		}
+		
+		private function pitchTelAdreMagazineIssue10():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.hasKeyItem("Tel'Adre Magazine Issue 10") >= 0) {
+				outputText("<b>You already own the magazine 'Tel'Adre Magazine Issue 10'.</b>");
+				doNext(bookMenu);
+				return;
+			}
+			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 10th issue of Tel'Adre Magazine.  I dive into matters of so benefits of having all ten fingers... like to hold your pickaxe.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your mining horizons?</i>\"");
+			doYesNo(buyTelAdreMagazineIssue10, bookMenu);
+		}
+		
+		private function buyTelAdreMagazineIssue10():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.gems < 100) {
+				outputText("\n\nGiacomo sighs, indicating you need " + String(100 - player.gems) + " more gems to purchase this item.");
+				doNext(bookMenu);
+			}
+			else {
+				outputText("\n\nYou consider yourself fortunate to be quite literate in this day and age.  It certainly comes in handy with this magazine.  Obviously written by well-informed, would help you in diggin the hole.... err mining to your heart content. ");
+				doNext(bookMenu);
+				player.gems -= 100;
+				player.createKeyItem("Tel'Adre Magazine Issue 10", 0, 0, 0, 0);
+				statScreenRefresh();
+			}
 		}
 		
 		private function pitchOreBag():void {
@@ -1149,4 +1207,4 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			inventory.takeItem(consumables.CERUL_P, playerMenu);
 		}
 	}
-}
+}
