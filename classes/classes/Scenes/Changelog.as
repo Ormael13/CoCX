@@ -318,8 +318,8 @@ package classes.Scenes
 			outputText("-Added fountains to Ebon Labyrinth. You can find them near boss rooms at some depth/room count (after clearing the dungeon). You can use them to make legendary items, just like Celess. The type of the fountain (pure/corrupt) is selected randomly. (Svalkash)\n");
 			outputText("-Base tease damage was increased by 50%. All the bonus flat and % bonuses are unchanged.\n");
 			outputText("-New melee weapon (by Canadian Snas): Taintless Knives - buyable at Belisa shop. Cost 800 gems. Base atk is 5. It's Dual Small weapon belonging to dagger type. Similary to Beautiful weapoons the higher corruption the lower atk and when cor reach 33+ it will be not usable.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Prestige Job: Spell-Knight req. of mentorship of one of greatest magews in Mareth been replaced with having jobs: warrior & sorcerer and having one of melee weapons mastery (excluding gauntlets) reach lvl 50.\n");
+			outputText("-Swift Casting perk req. for known spells including now 4 new tier 1 spells from grey magic.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
