@@ -977,7 +977,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText('<u><a href="event:sort,0">name</a></u>, <b>score</b>. ');
 		}
 		outputText("Click on a race to view details.\n");
-		outputText("List legend: [font-lblue]active race[/font], [font-green]non-zero score[/font], zero score.\n");
+		outputText("List legend: [font-lblue]active race[/font], [font-green]positive score[/font], zero score.\n");
 		outputText("Details legend: [font-lblue]active tier[/font], [font-green]passed check[/font], failed check, [font-red]score penalty[/font].\n");
 		
 		player.updateRacialCache();

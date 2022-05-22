@@ -1,5 +1,5 @@
 /*
- LICENSE 
+ LICENSE
  
 This license grants Fenoxo, creator of this game usage of the works of
 Dxasmodeus in this product. Dxasmodeus grants Fenoxo and the coders assigned by him to this project permission to alter the text to conform with current and new game functions, only. Dxasmodeus retains exclusive rights to alter or change the core contents of the events and no other developer may alter, change or use the events without permission from dxasmodeus. Fenoxo agrees to include Dxasmodeus' name in the credits with indications to the specific contribution made to the licensor. This license must appear
@@ -26,7 +26,6 @@ For further information and license requests, Dxasmodeus may be contacted throug
 package classes.Scenes.Explore {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.Crafting;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
@@ -242,7 +241,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			outputText("Giacomo holds up a pouch of dried, fragrant leaves and begins his spiel, \"<i>Have you ever wondered how scholars and other smart folk keep up such a mental effort for so long?  They make a tea out of this fine mixture of quality plants and herbs.  Nothing but the best, this mysterious mixture of herbs in its Orange Pekoe base makes anyone, short of a lummox, as brainy as the finest minds of the land.  All you do is steep the leaves in some water and drink up!  Hot or cold, straight or sweetened with honey, your mind will run circles around itself once it has this for fuel.  Buy it now and I will throw in the strainer for free!  Interested?  Only <b>15 gems</b>!</i>\"  ");
 			doYesNo(buyScholarsTea, potionMenu);
 		}
-			
+		
 		private function buyScholarsTea():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			if (player.gems < 15) {
@@ -678,7 +677,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			outputText("Giacomo takes out a slender tube roughly over half a foot in length.  \"<i>Since you seek pleasure, this is as simple and effective as it gets.  This dildo is a healthy seven inches long and is suitable for most women and even adventurous men.  Pick a hole, stick it in and work it to your heart's content or your partner's pleasure.  The single-piece construction makes it solid, sturdy and straightforward.  For 20 gems, you can take matters into your own hands.  How about it?</i>\"");
 			doYesNo(buyDildo, eroticaMenu);
 		}
-			
+		
 		private function buyDildo():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
@@ -758,7 +757,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			player.gems -= 40;
 			statScreenRefresh();
 		}
-			
+		
 		private function pitchOnahole():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
@@ -785,7 +784,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			player.gems -= 20;
 			statScreenRefresh();
 		}
-			
+		
 		private function pitchDeluxeOnahole():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
@@ -969,7 +968,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			dynStats("tou", .3, "lib", .5, "sen", .5, "lus", 5, "cor", 1);
 			doNext(ceruleanSuccubusEncounterPart3);
 		}
-			
+		
 		private function ceruleanSuccubusEncounterPart3():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_cerulean_succubus);
@@ -1008,7 +1007,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			}
 			inventory.takeItem(consumables.CERUL_P, playerMenu);
 		}
-				
+		
 		private function nightSuccubiRepeat():void {
 			spriteSelect(SpriteDb.s_cerulean_succubus);
 			if(player.gender == 0) {
@@ -1117,8 +1116,8 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 					outputText("\"<i>Well, this was unexpected.</i>\", she says, \"<i>I did not expect you to change. Normally, men are susceptible to my milk, but apparently it works on herms, too.</i>\"\n\n");
 		
 					outputText("As you stand, you feel awkward as your body does not feel right. You look at the Succubus and she no longer appears as large as she once was. Quick to realize a problem, you look at your reflection in a small bucket at your campsite. Other than your own unique facial features, you see ANOTHER Cerulean Succubus looking back at you! You ARE a Cerulean Succubus!");
-					//[(if the player has a large number of transformations) 
-					if(player.horseScore() + player.dogScore() + player.nagaScore() + player.goblinScore() + player.sharkScore() + player.minotaurScore() + player.cowScore() > 5) outputText("  All of the other corruptions and changes to your body have faded away as your new form has taken shape.");
+					//[(if the player has a large number of transformations)
+					if(player.racialScore(Races.HORSE) + player.racialScore(Races.DOG) + player.racialScore(Races.NAGA) + player.racialScore(Races.GOBLIN) + player.racialScore(Races.SHARK) + player.racialScore(Races.MINOTAUR) + player.racialScore(Races.COW) > 5) outputText("  All of the other corruptions and changes to your body have faded away as your new form has taken shape.");
 					outputText("  As the reality soaks in, you feel a sharp pain in your stomach and your cock. You NEED to feed. Cum, milk, it doesn't matter. Likewise, your dick is hard and you need to cum. Despite your need, you cannot bring yourself to masturbate. You want ANOTHER'S attention.\n\n");
 		
 					outputText("Without further acknowledgement, you take up your on your demonic wings to find your first \"meal\". The Succubus left behind simply giggles as she sees another of her kind take up the night in search for more meals and pleasure.");

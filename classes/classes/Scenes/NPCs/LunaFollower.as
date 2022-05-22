@@ -17,8 +17,8 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.SceneLib;
 import classes.Items.MutationsHelper;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 import classes.internals.SaveableState;
 
@@ -594,7 +594,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			menu();
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) addButton(0, "Accept", fullMoonEventAccept2);
 			else addButton(0, "Accept", fullMoonEventAccept);
-			if (player.dogScore() > 5 || player.wolfScore() > 5) addButtonDisabled(1, "Resist", "The smell of a female wolf in heat drives your canine instincts into a frenzy. You must have her here and now!");
+			if (player.racialScore(Races.DOG) > 5 || player.racialScore(Races.WOLF) > 5) addButtonDisabled(1, "Resist", "The smell of a female wolf in heat drives your canine instincts into a frenzy. You must have her here and now!");
 			else addButton(1, "Resist", fullMoonEventResist);
 		}
 		public function fullMoonEventAccept():void {
@@ -1260,7 +1260,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			}
 			else {
 				//text for you and Luna continuing your rough, animalistic sex throughout the night
-				if (flags[kFLAGS.LUNA_FOLLOWER] < 7 && player.werewolfScore() > 6) {
+				if (flags[kFLAGS.LUNA_FOLLOWER] < 7 && player.racialScore(Races.WEREWOLF) > 6) {
 					//text for Luna being your bitch whom you intend to use freely until every dog in a ten mile radius knows she belongs only to you
 					flags[kFLAGS.LUNA_FOLLOWER] = 15;
 				}

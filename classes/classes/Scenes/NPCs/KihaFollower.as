@@ -717,7 +717,7 @@ private function lovingHugDickings():void {
 	if(player.cocks[player.biggestCockIndex()].cockLength >= 36) outputText(", even though you bump her repeatedly in the nose with your moist tip");
 	outputText(".  Kiha's soft breasts envelop as much of your dick as possible in cushiony chest-flesh, and though she isn't as well-endowed up there as many of the women in this land, her extra-warm body-heat suffuses your member with more than enough pleasure to let you blow your load.");
 	outputText("[pg]");
-	if(player.horseScore() > 4 || player.isRace(Races.DOG) || player.isRace(Races.CAT)) outputText("Growling");
+	if(player.isRace(Races.HORSE) || player.isRace(Races.DOG) || player.isRace(Races.CAT)) outputText("Growling");
 	else outputText("Grunting");
 	outputText(", you clench for a moment as climax works through your body, expelling ");
 	if(player.cumQ() > 400) outputText("thick ");

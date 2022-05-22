@@ -116,8 +116,8 @@ public class DivaScene extends XXCNPC{
     private function setupSexMenu():void{
         _sexMenu.clear();
         _sexMenu.add("Moonlight Sonata",moonlightSonata);
-        _sexMenu.add("Share A Meal",shareAMeal).disableIf((player.vampireScore() < 6)|| !(player.faceType == Face.VAMPIRE));
-        _sexMenu.add("Bloody Rose",bloodyRose).disableIf((player.vampireScore() < 6) || !(player.faceType == Face.VAMPIRE));
+        _sexMenu.add("Share A Meal",shareAMeal).disableIf((player.racialScore(Races.VAMPIRE) < 6)|| !(player.faceType == Face.VAMPIRE));
+        _sexMenu.add("Bloody Rose",bloodyRose).disableIf((player.racialScore(Races.VAMPIRE) < 6) || !(player.faceType == Face.VAMPIRE));
 
     }
 

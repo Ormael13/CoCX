@@ -97,25 +97,25 @@ public class ErlKingScene extends BaseContent
 			}
 
 			// Heavy penalty for prey features. The penalty is applied PER FEATURE.
-			if (player.kitsuneScore() > 0)
+			if (player.racialScore(Races.KITSUNE) > 0)
 			{
-				baseVal -= (player.kitsuneScore() * 20);
-				trace("-20 for each Kitsune part (-" + String(player.kitsuneScore() * 20) + ")");
+				baseVal -= (player.racialScore(Races.KITSUNE) * 20);
+				trace("-20 for each Kitsune part (-" + String(player.racialScore(Races.KITSUNE) * 20) + ")");
 			}
-			if (player.bunnyScore() > 0)
+			if (player.racialScore(Races.BUNNY) > 0)
 			{
-				baseVal -= (player.bunnyScore() * 20);
-				trace("-20 for each Bunny part (-" + String(player.bunnyScore() * 20) + ")");
+				baseVal -= (player.racialScore(Races.BUNNY) * 20);
+				trace("-20 for each Bunny part (-" + String(player.racialScore(Races.BUNNY) * 20) + ")");
 			}
-			if (player.harpyScore() > 0)
+			if (player.racialScore(Races.HARPY) > 0)
 			{
-				baseVal -= (player.harpyScore() * 20);
-				trace("-20 for each Harpy part (-" + String(player.harpyScore() * 20) + ")");
+				baseVal -= (player.racialScore(Races.HARPY) * 20);
+				trace("-20 for each Harpy part (-" + String(player.racialScore(Races.HARPY) * 20) + ")");
 			}
-			if (player.gooScore() > 0)
+			if (player.racialScore(Races.SLIME) > 0)
 			{
-				baseVal -= (player.gooScore() * 10);
-				trace("-10 for each Goo part (-" + String(player.gooScore() * 10) + ")");
+				baseVal -= (player.racialScore(Races.SLIME) * 10);
+				trace("-10 for each Goo part (-" + String(player.racialScore(Races.SLIME) * 10) + ")");
 			}
 
 			if (player.isTaur())

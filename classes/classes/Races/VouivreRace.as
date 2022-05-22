@@ -5,7 +5,7 @@ import classes.CockTypesEnum;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
-import classes.StatusEffects;
+import classes.Races;
 import classes.VaginaClass;
 
 public class VouivreRace extends Race {
@@ -28,7 +28,7 @@ public class VouivreRace extends Race {
 				.cockOrVaginaOfType(CockTypesEnum.LIZARD, VaginaClass.NAGA, +1)
 				.customRequirement("","not another snake-like race",
 						function (body:BodyData):Boolean {
-							return !(body.player.nagaScore() > 10
+							return !(body.player.racialScore(Races.NAGA) > 10
 									|| GorgonRace.isGorgonLike(body)
 									|| CouatlRace.isCouatlLike(body)
 									|| HydraRace.isHydraLike(body));

@@ -52,7 +52,7 @@ outputText("Whitney marches up to you as soon as you approach the farm, a stoic 
 		outputText("\n\n\"<i>What the fuck do you think you're doing here [name]? After what you did to Kelt you still think you're welcome here? Leave. <b>Now</b>.</i>\"");
 		doNext(camp.returnToCampUseOneHour);
 		return;
-	}	
+	}
 	
 	var temporary:Number = 0;
 	//Farm not yet discovered
@@ -122,8 +122,8 @@ outputText("Whitney marches up to you as soon as you approach the farm, a stoic 
 		if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(0,"Explore",exploreFarm);
 		if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(6,"Talk",talkWhitney);
 		if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(7,"Work",workFarm);
-		addButton(14,"Leave",camp.returnToCampUseOneHour);		
-	}		
+		addButton(14,"Leave",camp.returnToCampUseOneHour);
+	}
 }
 
 //[YES]
@@ -133,7 +133,7 @@ private function whitneyMilkerHookup(breast:Boolean = true):void {
 	outputText("Whitney takes the gear back to her farm after promising to have it working within the hour.  She did leave you with a cryptic warning to \"<i>leave the milkings to the beasts, lest you become one</i>.</i>\"\n\nYou shrug and head back to check up on camp.");
 	if(breast) {
 		player.createKeyItem("Breast Milker - Installed At Whitney's Farm",0,0,0,0);
-		player.removeKeyItem("Breast Milker");	
+		player.removeKeyItem("Breast Milker");
 	}
 	else {
 		player.createKeyItem("Cock Milker - Installed At Whitney's Farm",0,0,0,0);
@@ -218,7 +218,7 @@ private function talkWhitney():void {
 			// Both
 			outputText(" At the far end there is one alabaster cluster labelled ‘Jojo’, another labelled ‘Isabella’.");
 		}
-			
+		
 		outputText(" You ask her who she sells it all to.");
 
 		outputText("\n\n\"<i>Centaurs ‘n goblins mainly,</i>\" she replies. \"<i>Sometimes even get the mountain folk coming down here to trade. Milk’s a rare enough commodity to a harpy or basilisk to get 'em to stop ruttin' an' fighting for two minutes and buy some.</i>\" She sighs. \"<i>Used to be you could talk with em, get news, but they mostly don’t even bother doing that anymore - just point at what they want, throw their gems down and leave. Gnolls and imps like milk too,</i>\" she goes on in a harder tone, \"<i>but they prefer tryin' stealin' it. Marble and Kelt deal with them.</i>\"");
@@ -229,7 +229,7 @@ private function talkWhitney():void {
 			outputText("\n\nShe smiles at you. \"<i>I charge top gem for your produce, of course. Human milk is a very rare commodity these days, and it has a powerful calming effect on most anyone. Folks love it for their kids.</i>\"");
 		}
 		
-		//[PC has used cock milker: 
+		//[PC has used cock milker:
 		if (player.hasStatusEffect(StatusEffects.CockPumped))
 		{
 			if (!player.hasStatusEffect(StatusEffects.BreastsMilked)) outputText("\n\n");
@@ -451,8 +451,8 @@ public function workFarm():void {
 		outputText("You steel yourself, ignore your ");
 		if(player.faceType == Face.DOG) outputText("sensitive ");
 		outputText("nose, and set to work.");
-		//[Lust increase based on libido, degree of cow/mino features] 
-		dynStats("lus", player.cowScore() + player.minotaurScore());
+		//[Lust increase based on libido, degree of cow/mino features]
+		dynStats("lus", player.racialScore(Races.COW) + player.racialScore(Races.MINOTAUR));
 		outputText("\n\nAn hour later you can stand it no more and exit the milking barn. Gulping down the fresher air and dragging the tools back to their shed, you admit to yourself that Whitney is a much harder worker and has a stronger constitution than you thought. You promise yourself you'll come back and help her out some more -- as soon as your nose recovers.");
 		//always +1 str/tou till 25, then 50% chance.
 		if (player.str100 <= 25 || rand(2) == 0) dynStats("str", 1);
@@ -495,7 +495,7 @@ public function meetMarble():void {
 	if(player.statusEffectv3(StatusEffects.Marble) == 0) {
 		//Meet Marble while exploring version 1 (can occur anytime before the player becomes addicted):
 		//Higher chance after talk texts have been exhausted
-		if(flags[kFLAGS.MURBLE_FARM_TALK_LEVELS] >= 7) 
+		if(flags[kFLAGS.MURBLE_FARM_TALK_LEVELS] >= 7)
 			marbleScene.encounterMarbleExploring();
 		//Meet Marble while exploring version 2 (can occur anytime before the player becomes addicted):
 		else marbleScene.encounterMarbleExploring2();
@@ -555,7 +555,7 @@ public function exploreFarm():void {
 	if(rand(2) == 0 && !player.hasStatusEffect(StatusEffects.Kelt) && !player.hasStatusEffect(StatusEffects.KeltOff)) {
 		doNext(camp.returnToCampUseOneHour);
 		keltScene.keltEncounter();
-		return;		
+		return;
 	}
 	//In withdrawl odds are higher.
 	if(!player.hasStatusEffect(StatusEffects.NoMoreMarble) && player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
@@ -609,15 +609,15 @@ public function exploreFarm():void {
 	if(explore == 2) {
 		clearOutput();
 		outputText("Your explorations take you to the cow pasture. There's no bull here, so the cows are all placidly grazing, building up milk for Whitney to gather. One turns to face you, and you get the odd feeling that it's trying to tell you something.\n\n");
-		//[if have a horse dick and rape-high Lust] 
+		//[if have a horse dick and rape-high Lust]
 		if(player.horseCocks() > 0) {
 			outputText("Unbidden, the notion that a cow-slit would probably feel pretty good wrapped around your horse-prick flickers through your mind.  ");
 			//[if high corruption]
 			if(player.cor > 60) outputText("It makes you smile.");
 			if(player.cor < 30) outputText("It disgusts you.");
-			//[else/mid-corruption] 
+			//[else/mid-corruption]
 			else if(player.cor <= 60) outputText("You aren't sure how you feel about that.");
-			//[continue paragraph condition] 
+			//[continue paragraph condition]
 			outputText("  It for certain would get Whitney chasing you off with a pitchfork.\n\n");
 			dynStats("lus", 10);
 		}
@@ -636,8 +636,8 @@ public function exploreFarm():void {
 		return;
 	}
 	if(explore == 3) {
-		
-		
+	
+	
 	}
 	//[NOTHING]
 	else {
@@ -827,7 +827,7 @@ public function getMilked():void {
 	}
 	liters = int(player.lactationQ()* (rand(10) + 90) / 100)/1000;
 	if(liters < 0) liters = 1337;
-	//Pay 4 gem for every half-liter. 
+	//Pay 4 gem for every half-liter.
 	payout = int(liters*2*4);
 	outputText("The machinery displays " + liters + " liters of milk");
 	//If already at cap
@@ -937,7 +937,7 @@ public function cockPumping():void {
 	}
 	//Small/Medium/Large, 2x each
 	if(player.biggestCockArea() < 20) {
-		//Small 1 
+		//Small 1
 		if(rand(2) == 0) {
 			if(player.cockTotal() == 1) outputText("The hose's 'tip' is many times longer than your member, and about thrice as thick.  The 'opening' is filled with something wet and pink.  It squirms and wriggles, looking very much alive.  Where did Whitney get this stuff?    It tentatively presses against your [cock], sucking wetly as the material inside slurps you down.  The feeling is immediate and intense, like being surrounded by hundreds of eager tongues, all writhing together along your length.\n\n");
 			else outputText("The hoses' 'tips' are many times longer than your members, and about thrice as thick.  The openings are each filled with something wet and pink.  They squirm and wriggle, looking very much alive.  Where did Whitney get this stuff?   They tentatively press against your [cocks], sucking wetly as the material inside slurps you down.  The feeling is immediate and intense, like being surrounded by hundreds of eager tongues, all writhing together along your lengths at once.\n\n");
@@ -1009,7 +1009,7 @@ public function cockPumping():void {
 			outputText("spurts of spunk.  Wriggling cilia convulse around you, licking your head as it flares wide, filling with blood and pouring out cum.  You moan and scream with delight, babbling happily as you watch your cum wick up the clear tube and into the machinery in the wall.  All too soon the pleasure comes to an end; the harness lowers you to the ground and releases you, but the squishy walls of your demon machine lover don't cease their ministrations on your tender " + Appearance.cockNoun(CockTypesEnum.HUMAN));
 			if(player.cockTotal() > 1) outputText("s");
 			outputText(".\n\n");
-						
+			
 			outputText("A loud 'ding' sounds ");
 			//[(if enough for payout)
 			if(cumQ > 100) outputText("and a clatter of gems drop into the plate ");
@@ -1133,7 +1133,7 @@ public function cockPumping():void {
 	else if(flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] + payout >= cap) {
 		payout = cap - flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK];
 		outputText("It also shows a warning: <b>Not enough gems for full payment.  GEMS NOW EXHAUSTED.</b>  ");
-	}	
+	}
 	if(payout > 0) {
 		if (player.cumQ() < 1000) player.modCumMultiplier(1);
 		if (payout == 1) outputText(Num2Text(payout) + " gem rolls ");
@@ -1221,7 +1221,7 @@ private function milkerBadEnd1():void {
 	if(!tubes) outputText("it");
 	else outputText("one of them");
 	outputText(" inserts a rod-like end into your mouth and begins trickling salty fluids down your throat.");
-	//[(if vag)  
+	//[(if vag)
 	if(player.hasVagina()) {
 		outputText("  Another tube, likewise capped with a thick, firm end instead of a suction cup, reaches your " + vaginaDescript(0) + " and pushes inside, secreting more of the fluid.  ");
 		player.cuntChange(15,true);
@@ -1256,7 +1256,7 @@ private function milkerBadEnd1():void {
 		if(player.clitLength > 3) outputText(", and your clitoris twitches under the cup, threatening to black you out from the pleasure");
 		outputText(".");
 	}
-	//[(lactation) 
+	//[(lactation)
 	if(player.biggestTitSize() > 1) {
 		outputText("  Your milk sprays out of your " + nippleDescript(0) + "s");
 		//[(nipplecunts)
@@ -1283,7 +1283,7 @@ private function milkerBadEnd1():void {
 	outputText("It is at this point Whitney walks in.\n\n");
 
 	outputText("\"<i>What the FUCK!</i>\" the rancher says, her eyes bugging out at the spectacle of you tied to the machine with demonic tubing and the sheer volume of semen you've left in thick ropes all over her barn.");
-	//[(corruption < 90)  
+	//[(corruption < 90)
 	if(player.cor < 90) {
 		outputText("  You barely take notice of her as another explosive orgasm goes off, your enormously swollen penis");
 		if(player.cockTotal() > 1) outputText("es");

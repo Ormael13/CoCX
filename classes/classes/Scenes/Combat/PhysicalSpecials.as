@@ -346,7 +346,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					else bd.disable("You can't use it more than once during fight.");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if ((player.pigScore() >= 8 || player.perkv1(IMutationsLib.PigBoarFatIM) >= 3) && player.thickness >= minThicknessReq()) {
+			if ((player.isRace(Races.PIG) || player.perkv1(IMutationsLib.PigBoarFatIM) >= 3) && player.thickness >= minThicknessReq()) {
 				bd = buttons.add("Body Slam", bodySlam).hint("Body slam your opponent (small chance to stun). Damage scale with toughness and thickness.");
 				bd.requireFatigue(physicalCost(50));
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -1134,7 +1134,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damage1Bccc *= 2;
 						monster.statStore.addBuffObject({spe:-damage1Bccc}, "Poison",{text:"Poison"});
 						var venomType:StatusEffectType = StatusEffects.NagaVenom;
-						if (player.nagaScore() >= 23) venomType = StatusEffects.ApophisVenom;
+						if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
 						if (monster.hasStatusEffect(venomType))
 						{
 							monster.addStatusValue(venomType,2,0.4);
@@ -4270,7 +4270,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 			//Check weither its snakebite or apophis
 			var venomType:StatusEffectType = StatusEffects.NagaVenom;
-			if (player.nagaScore() >= 23) venomType = StatusEffects.ApophisVenom;
+			if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
 			if(monster.hasStatusEffect(venomType))
 			{
 				monster.addStatusValue(venomType,2,2);
@@ -5292,9 +5292,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function Drink():void {
 		clearOutput();
-		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore() >= CoC.instance.mutations.DrunkenPowerEmpowerOni()) CoC.instance.mutations.DrunkenPowerEmpower();
 		outputText("You merrily chug from the gourd quenching your thirst for sake.\n\n");
-		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore() >= CoC.instance.mutations.DrunkenPowerEmpowerOni()) outputText("OOOH YESHHHH! This is just what you needed. You smile doopily as you enter the famous oni drunken daze, your muscle filling with extra alchoholic might. Now that your thirst is quenched you're totaly going to destroy the puny thing who dared to challenge you.\n\n");
+		if (CoC.instance.mutations.CanDrunkenPowerEmpower()) {
+			outputText("OOOH YESHHHH! This is just what you needed. You smile doopily as you enter the famous oni drunken daze, your muscle filling with extra alchoholic might. Now that your thirst is quenched you're totaly going to destroy the puny thing who dared to challenge you.\n\n");
+			CoC.instance.mutations.DrunkenPowerEmpower();
+		}
 		enemyAI();
 	}
 
@@ -5773,7 +5775,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBdc4 *= 2;
 						monster.statStore.addBuffObject({spe:-dBdc4}, "Poison",{text:"Poison"});
 						var venomType:StatusEffectType = StatusEffects.NagaVenom;
-						if (player.nagaScore() >= 23) venomType = StatusEffects.ApophisVenom;
+						if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
 						if (monster.hasStatusEffect(venomType)) {
 							monster.addStatusValue(venomType, 2, 0.4);
 							monster.addStatusValue(venomType, 1, (dBdc4*0.4));

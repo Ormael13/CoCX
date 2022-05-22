@@ -5,7 +5,7 @@ import classes.CockTypesEnum;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
-import classes.Races.VouivreRace;
+import classes.Races;
 import classes.StatusEffects;
 import classes.VaginaClass;
 
@@ -40,7 +40,7 @@ public class HydraRace extends Race {
 				.hasPerk(PerkLib.HydraAcidBreath, +1)
 				.customRequirement("","not another snake-like race",
 						function (body:BodyData):Boolean {
-							return !(body.player.nagaScore() > 10
+							return !(body.player.racialScore(Races.NAGA) > 10
 									|| GorgonRace.isGorgonLike(body)
 									|| VouivreRace.isVouivreLike(body)
 									|| CouatlRace.isCouatlLike(body));

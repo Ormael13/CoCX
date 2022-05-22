@@ -18,7 +18,6 @@ import classes.PerkLib;
 import classes.PotionType;
 import classes.Races;
 import classes.Races.ElementalRace;
-import classes.Races.HumanRace;
 import classes.Scenes.Areas.Beach.Gorgon;
 import classes.Scenes.Areas.Bog.CorruptedMaleTroll;
 import classes.Scenes.Areas.Caves.DisplacerBeast;
@@ -29,13 +28,13 @@ import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
-import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
+import classes.Scenes.Codex;
 import classes.Scenes.Dungeons.D3.*;
+import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.TelAdre.UmasShop;
-import classes.Scenes.Codex;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.StatusEffectClass;
@@ -1205,7 +1204,7 @@ public class Combat extends BaseContent {
 				}
 			}
 		}
-		if (player.oniScore() >= mspecials.minOniScoreReq()) {
+		if (player.racialScore(Races.ONI) >= mspecials.minOniScoreReq()) {
 			bd = buttons.add("Oni Rampage", mspecials.startOniRampage).hint("Increase all damage done by a massive amount but silences you. While this is active, you cannot use spells or magical oriented soulskills.");
 			bd.requireFatigue(spellCost(50));
 			if(player.hasStatusEffect(StatusEffects.OniRampage)) {
@@ -3651,7 +3650,7 @@ public class Combat extends BaseContent {
 					if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPaaa *= 2;
                     monster.statStore.addBuffObject({spe:-DBPaaa}, "Poison",{text:"Poison"});
                     var venomType:StatusEffectType = StatusEffects.NagaVenom;
-                    if (player.nagaScore() >= 23) venomType = StatusEffects.ApophisVenom;
+                    if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
                     if (monster.hasStatusEffect(venomType)) {
                         monster.addStatusValue(venomType, 2, 0.4);
                         monster.addStatusValue(venomType, 1, (DBPaaa * 0.4));
@@ -5269,7 +5268,7 @@ public class Combat extends BaseContent {
                     if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPb *= 2;
                     monster.statStore.addBuffObject({spe:-DBPb}, "Poison",{text:"Poison"});
                     var venomType:StatusEffectType = StatusEffects.NagaVenom;
-                    if (player.nagaScore() >= 23) venomType = StatusEffects.ApophisVenom;
+                    if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
                     if (monster.hasStatusEffect(venomType)) {
                         monster.addStatusValue(venomType, 2, 0.4);
                         monster.addStatusValue(venomType, 1, (DBPb * 0.4));
@@ -6379,7 +6378,7 @@ public class Combat extends BaseContent {
 							if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPaaaa *= 2;
 							monster.statStore.addBuffObject({spe:-DBPaaaa}, "Poison",{text:"Poison"});
 							var venomType:StatusEffectType = StatusEffects.NagaVenom;
-							if (player.nagaScore() >= 23) venomType = StatusEffects.ApophisVenom;
+							if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
 							if (monster.hasStatusEffect(venomType)) {
 								monster.addStatusValue(venomType, 2, 0.4);
 								monster.addStatusValue(venomType, 1, (DBPaaaa*0.4));

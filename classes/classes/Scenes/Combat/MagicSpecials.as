@@ -501,7 +501,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You already cauterizing your wounds!");
 			}
 		}
-		if ((player.salamanderScore() >= 12 || player.phoenixScore() >= 15) && player.tail.type == Tail.SALAMANDER && (player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon())) {
+		if ((player.racialScore(Races.SALAMANDER) >= 12 || player.racialScore(Races.PHOENIX) >= 15) && player.tail.type == Tail.SALAMANDER && (player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon())) {
 			bd = buttons.add("Flame Blade", flameBlade).hint("Set your weapon on fire. \n", "Flame Blade");
 			if (player.hasStatusEffect(StatusEffects.FlameBlade)) {
 				bd.disable("Your weapon is already on fire!");
@@ -613,7 +613,7 @@ public class MagicSpecials extends BaseCombatContent {
 				}
 			}
 		}
-		if (player.oniScore() >= minOniScoreReq() && !player.hasPerk(PerkLib.ElementalBody)) {
+		if (player.racialScore(Races.ONI) >= minOniScoreReq() && !player.hasPerk(PerkLib.ElementalBody)) {
 			bd = buttons.add("Oni Rampage", startOniRampage).hint("Increase all damage done by a massive amount but silences you preventing using spells or magical oriented soulskills.");
 			bd.requireFatigue(spellCost(50));
 			if(player.hasStatusEffect(StatusEffects.OniRampage)) {
@@ -4743,7 +4743,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("Recorporealizing, you notice your enemy's blush, and know your efforts were somewhat successful.");
 			}
 			var damage:Number = Math.round(player.inte / 5) + rand(player.level) + player.level;
-			damage *= Math.round(1 + (0.1 * player.poltergeistScore()));
+			damage *= Math.round(1 + (0.1 * player.racialScore(Races.POLTERGEIST)));
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.EromancyExpert)) damage *= 1.5;
@@ -4895,7 +4895,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		damage += scalingBonusSpeed() * 2;
 		damage += scalingBonusIntelligence() * 2;
-		damage += rand(player.level + player.couatlScore());
+		damage += rand(player.level + player.racialScore(Races.COUATL));
 		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) damage *= 1.5;
 		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) damage *= 1.5;
 		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) damage *= 1.5;
@@ -4983,7 +4983,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		damage += scalingBonusSpeed() * 2;
 		damage += scalingBonusWisdom() * 2;
-		damage += rand(player.level + player.kamaitachiScore());
+		damage += rand(player.level + player.racialScore(Races.KAMAITACHI));
 		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) damage *= 1.5;
 		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) damage *= 1.5;
 		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) damage *= 1.5;

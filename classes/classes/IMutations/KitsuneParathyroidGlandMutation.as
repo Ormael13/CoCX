@@ -9,6 +9,7 @@ import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Player;
+import classes.Races;
 
 public class KitsuneParathyroidGlandMutation extends IMutationPerkType
     {
@@ -59,12 +60,7 @@ public class KitsuneParathyroidGlandMutation extends IMutationPerkType
                 if (pTier == 0){
                     IMutationsLib.KitsuneParathyroidGlandsIM.requireParathyroidGlandMutationSlot()
                     .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune)
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.tailType == Tail.FOX && player.tailCount >= 2;
-                    }, "2+ fox tails")
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.kitsuneScore() >= 9;
-                    }, "Kitsune race");
+                    .requireRace(Races.KITSUNE);
                 }
                 else{
                     var pLvl:int = pTier * 30;

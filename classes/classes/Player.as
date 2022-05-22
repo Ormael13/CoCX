@@ -3710,119 +3710,6 @@ use namespace CoC;
 			End("Player","racialScore");
 			return grandchimeraCounter;
 		}
-
-		public function demonScore():Number {
-			return racialScore(Races.DEMON);
-		}
-
-		public function cowScore():Number {
-			return racialScore(Races.COW);
-		}
-
-		public function minotaurScore():Number {
-			return racialScore(Races.MINOTAUR);
-		}
-
-		public function sandTrapScore():int {
-			return racialScore(Races.SANDTRAP);
-		}
-
-		public function beeScore():Number {
-			return racialScore(Races.BEE);
-		}
-
-		public function ferretScore():Number {
-			return racialScore(Races.FERRET);
-		}
-
-		public function dogScore():Number {
-			return racialScore(Races.DOG);
-		}
-
-		public function mouseScore():Number {
-			return racialScore(Races.MOUSE);
-		}
-
-		public function raccoonScore():Number {
-			return racialScore(Races.RACCOON);
-		}
-
-		public function foxScore():Number {
-			return racialScore(Races.FOX);
-		}
-
-		public function catScore():Number {
-			return racialScore(Races.CAT);
-		}
-
-		public function lizardScore():Number {
-			return racialScore(Races.LIZARD);
-		}
-
-		public function horseScore():Number {
-			return racialScore(Races.HORSE);
-		}
-
-		public function kitsuneScore():Number {
-			return racialScore(Races.KITSUNE);
-		}
-
-		public function dragonScore():Number {
-			return racialScore(Races.DRAGON);
-		}
-
-		public function goblinScore():Number {
-			return racialScore(Races.GOBLIN);
-		}
-
-		public function gooScore():Number {
-			return racialScore(Races.SLIME);
-		}
-
-		public function darkgooScore():Number {
-			return racialScore(Races.DARKSLIME);
-		}
-
-		public function nagaScore():Number {
-			return racialScore(Races.NAGA);
-		}
-
-		public function couatlScore():Number {
-			return racialScore(Races.COUATL);
-		}
-
-		public function poltergeistScore():Number {
-			return racialScore(Races.POLTERGEIST);
-		}
-
-		public function bunnyScore():Number {
-			return racialScore(Races.BUNNY);
-		}
-
-		public function harpyScore():Number {
-			return racialScore(Races.HARPY);
-		}
-
-		public function kangaScore():Number {
-			return racialScore(Races.KANGAROO);
-		}
-
-		public function sharkScore():Number {
-			return racialScore(Races.SHARK);
-		}
-
-		public function oniScore():Number {
-			return racialScore(Races.ONI);
-		}
-
-		public function raijuScore():Number {
-			return racialScore(Races.RAIJU);
-		}
-
-		public function kamaitachiScore():Number {
-			return racialScore(Races.KAMAITACHI)
-		}
-
 		//Determine Mutant Rating
 		public function mutantScore():Number{
 			Begin("Player","racialScore","mutant");
@@ -3857,18 +3744,6 @@ use namespace CoC;
 			}
 			End("Player","racialScore");
 			return mutantCounter;
-		}
-
-		//Thunder Mantis score
-		//4 eyes - adj spider 4 eyes desc
-		//var. of arms, legs, wings, tail, ears
-
-		public function salamanderScore():Number {
-			return racialScore(Races.SALAMANDER);
-		}
-
-		public function cavewyrmScore():Number {
-			return racialScore(Races.CAVEWYRM);
 		}
 
 		//Determine Unicornkin Rating
@@ -4025,56 +3900,6 @@ use namespace CoC;
 			alicornCounter = finalRacialScore(alicornCounter, Races.UNICORN);
 			End("Player","racialScore");
 			return alicornCounter;
-		}
-
-		public function phoenixScore():Number {
-			return racialScore(Races.PHOENIX);
-		}
-		
-		public function plantScore():Number {
-			return racialScore(Races.PLANT);
-		}
-
-		public function yggdrasilScore():Number {
-			return racialScore(Races.YGGDRASIL);
-		}
-
-		public function wolfScore():Number {
-			return racialScore(Races.WOLF);
-		}
-
-		public function werewolfScore():Number {
-			return racialScore(Races.WEREWOLF)
-		}
-
-		public function pigScore():Number {
-			return racialScore(Races.PIG);
-		}
-
-		public function rhinoScore():Number {
-			return racialScore(Races.RHINO);
-		}
-
-		public function echidnaScore():Number {
-			return racialScore(Races.ECHIDNA);
-		}
-
-		public function dragonneScore():Number {
-			return racialScore(Races.DRAGONNE);
-		}
-
-		public function avianScore():Number {
-			return racialScore(Races.AVIAN);
-		}
-
-		public function vampireScore():int {
-            return racialScore(Races.VAMPIRE);
-		}
-
-		public function atlachFullTfCheck():Boolean {
-			return lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS && arms.type == Arms.SPIDER && eyes.type == Eyes.SPIDER && ears.type == Ears.ELFIN
-			&& rearBody.type == RearBody.ATLACH_NACHA && faceType == Face.SPIDER_FANGS && hasCoatOfType(Skin.CHITIN)
-			&& eyes.colour == "red" && coatColor == "midnight purple" && hairColor == "midnight purple";
 		}
 
 		public function currentBasicJobs():Number {

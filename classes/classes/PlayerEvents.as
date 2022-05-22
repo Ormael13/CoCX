@@ -18,7 +18,9 @@ import classes.Items.*;
 import classes.Scenes.Camp.CampScenes;
 import classes.Scenes.Camp.HarvestMoonScenes;
 import classes.Scenes.Camp.UniqueCampScenes;
+import classes.Scenes.Dreams;
 import classes.Scenes.Dungeons.DeepCave.ValaScene;
+import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.DriderTown;
@@ -27,8 +29,6 @@ import classes.Scenes.NPCs.LunaFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.WoodElves;
-import classes.Scenes.Holidays;
-import classes.Scenes.Dreams;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.VampireThirstEffect;
 import classes.lists.BreastCup;
@@ -498,7 +498,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.hasKeyItem("Ruby Heart") >= 0) { //Regain slime core
-				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.SlimeCore) && player.isGoo() && player.gooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.arms.type == Arms.GOO && LowerBody.isGoo(player)) {
+				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.SlimeCore) && player.isGoo() && player.racialScore(Races.SLIME) >= 4 && player.vaginalCapacity() >= 9000 && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.arms.type == Arms.GOO && LowerBody.isGoo(player)) {
 					outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n");
 					outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n");
 					//(Reduces Fluid Addiction to a 24 hour intake requirement).
@@ -518,7 +518,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.hasKeyItem("Ruby Orb") >= 0) { //Regain DARK slime core
-				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.DarkSlimeCore) && player.isGoo() && player.darkgooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.arms.type == Arms.GOO && LowerBody.isGoo(player)) {
+				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.DarkSlimeCore) && player.isGoo() && player.racialScore(Races.DARKSLIME) >= 4 && player.vaginalCapacity() >= 9000 && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.arms.type == Arms.GOO && LowerBody.isGoo(player)) {
 					outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n");
 					outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n");
 					//(Reduces Fluid Addiction to a 24 hour intake requirement).
@@ -635,7 +635,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				else flags[kFLAGS.BIKINI_ARMOR_BONUS] = 0;
 			}
-			if (player.werewolfScore() >= 6 && player.hasPerk(PerkLib.LycanthropyDormant)) {
+			if (player.isRace(Races.WEREWOLF) && player.hasPerk(PerkLib.LycanthropyDormant)) {
 				outputText("\nAs you become wolf enough your mind recedes into increasingly animalistic urges. It will only get worse as the moon comes closer to full. <b>Gained Lycanthropy.</b>\n");
 				var bonusStats:Number = 0;
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats += 10;
@@ -647,7 +647,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.LycanthropyDormant);
 				needNext = true;
 			}
-			if (player.werewolfScore() < 6 && player.hasPerk(PerkLib.Lycanthropy)) {
+			if (!player.isRace(Races.WEREWOLF) && player.hasPerk(PerkLib.Lycanthropy)) {
 				outputText("\nYou feel your animalistic urges go dormant within you as you no longer are the werewolf you once were. <b>Gained Dormant lycanthropy.</b>\n");
 				player.createPerk(PerkLib.LycanthropyDormant,0,0,0,0);
 				player.statStore.removeBuffs("Lycanthropy");
@@ -1424,14 +1424,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Lustzerker perk
-			if ((player.salamanderScore() >= 9 || player.isRace(Races.PHOENIX)) && (!player.hasPerk(PerkLib.Lustzerker))) { //Check for gain of lustzerker - requires legs, arms and tail
+			if ((player.isRaceCached(Races.SALAMANDER) || player.isRaceCached(Races.PHOENIX)) && (!player.hasPerk(PerkLib.Lustzerker))) { //Check for gain of lustzerker - requires legs, arms and tail
 				if (!player.hasPerk(PerkLib.Lustzerker)) {
 					outputText("\nAfter drinking the last drop another hip flask of firewater you starts to feel a weird, maybe slightly unpleasant feeling inside your body.  Like many tiny flames cursing inside your veins making you ponder whats just happening with your body.  Remembering about salamanders natural talent to enter a berserk-like state you quess that should be it.\n\n(<b>Gained Perk: Lustzerker</b>)");
 					player.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
 					needNext = true;
 				}
 			}
-			else if (player.salamanderScore() < 9 && !player.isRaceCached(Races.PHOENIX) && player.hasPerk(PerkLib.Lustzerker) && player.perkv4(PerkLib.Lustzerker) == 0 && !player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 1) { //Remove lustzerker perk if not meeting requirements
+			else if (player.isRaceCached(Races.SALAMANDER) < 9 && !player.isRaceCached(Races.PHOENIX) && player.hasPerk(PerkLib.Lustzerker) && player.perkv4(PerkLib.Lustzerker) == 0 && !player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 1) { //Remove lustzerker perk if not meeting requirements
 				outputText("\nAll of sudden something change inside your body.  You think about a long while, until it dawned on you.  You can't feel that slight warm feeling inside your body anymore meaning for now no more lustzerking.\n\n(<b>Lost Perk: Lustzerker</b>)");
 				player.removePerk(PerkLib.Lustzerker);
 				needNext = true;
@@ -1564,12 +1564,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Dark Affinity
-			if ((player.vampireScore() >= 15 || player.isRaceCached(Races.APOPHIS)) && (!player.hasPerk(PerkLib.DarknessAffinity))) {
+			if ((player.racialScore(Races.VAMPIRE) >= 15 || player.isRaceCached(Races.APOPHIS)) && (!player.hasPerk(PerkLib.DarknessAffinity))) {
 				outputText("\nYou at home in darkness seeing as clearly in the shadows wich you find comforting as in broad daylight.\n\n(<b>Gained Perks: Darkness Affinity</b>)\n");
 				player.createPerk(PerkLib.DarknessAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if (player.vampireScore() < 15 && !player.isRaceCached(Races.APOPHIS) && player.hasPerk(PerkLib.DarknessAffinity)) {
+			else if (player.racialScore(Races.VAMPIRE) < 15 && !player.isRaceCached(Races.APOPHIS) && player.hasPerk(PerkLib.DarknessAffinity)) {
 				outputText("\nThe pitch black darkness becomes hostile toward you again as you lose your affinity toward it.\n\n<b>(Lost Perks: Darkness Affinity");
 				player.removePerk(PerkLib.DarknessAffinity);
 				outputText(")</b>\n");
@@ -1668,12 +1668,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Fire Affinity
-			if ((player.salamanderScore() >= 4 || player.isRaceCached(Races.PHOENIX) || player.isRaceCached(Races.HELLCAT) || player.isRaceCached(Races.FIRESNAILS) || (player.isRaceCached(Races.MOUSE, 2))) && !player.hasPerk(PerkLib.FireAffinity)) {
+			if ((player.racialScore(Races.SALAMANDER) >= 4 || player.isRaceCached(Races.PHOENIX) || player.isRaceCached(Races.HELLCAT) || player.isRaceCached(Races.FIRESNAILS) || (player.isRaceCached(Races.MOUSE, 2))) && !player.hasPerk(PerkLib.FireAffinity)) {
 				outputText("\nYou suddenly feels your body temperature rising to ridiculus level. You pant for several minutes until you're finally at ease with your bodily heat. You doubt any more heat is going to make you more uncomfortable then this as you quietly soak in the soothing warmth your body naturally produce. It's like your body is made out of living fire.\n\n(<b>Gained Perk: Fire Affinity</b>)\n");
 				player.createPerk(PerkLib.FireAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((player.salamanderScore() < 4 && !player.isRaceCached(Races.PHOENIX) && !player.isRaceCached(Races.HELLCAT) && !player.isRaceCached(Races.FIRESNAILS) && !player.isRace(Races.MOUSE, 2)) && player.hasPerk(PerkLib.FireAffinity)) {
+			else if ((player.racialScore(Races.SALAMANDER) < 4 && !player.isRaceCached(Races.PHOENIX) && !player.isRaceCached(Races.HELLCAT) && !player.isRaceCached(Races.FIRESNAILS) && !player.isRace(Races.MOUSE, 2)) && player.hasPerk(PerkLib.FireAffinity)) {
 				outputText("\nYou suddenly feel chilly as your bodily temperature drop down to human level. You lost your natural warmth reverting to that of a standard human.\n\n<b>(Lost Perk: Fire Affinity)</b>\n");
 				player.removePerk(PerkLib.FireAffinity);
 				needNext = true;
@@ -1846,7 +1846,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Acid Spit and Azureflame Breath
-			if (player.cavewyrmScore() < 7 && player.hasPerk(PerkLib.AcidSpit) && player.hasPerk(PerkLib.AzureflameBreath)) {// && !player.hasPerk(PerkLib.)
+			if (player.racialScore(Races.CAVEWYRM) < 7 && player.hasPerk(PerkLib.AcidSpit) && player.hasPerk(PerkLib.AzureflameBreath)) {// && !player.hasPerk(PerkLib.)
 				outputText("\nAs you become less of a cave wyrm your spit and fluids begins to lose their acidic properties until its back to being ordinary drool and fluids. With no acid to ignite it seems you also lost the ability to breath fire.\n\n<b>(Lost the Acid Spit and Azureflame Breath perks!)</b>\n");
 				player.removePerk(PerkLib.AcidSpit);
 				player.removePerk(PerkLib.AzureflameBreath);
@@ -1875,12 +1875,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//VerdantMight
-			if ((player.plantScore() >= 11 || player.isRaceCached(Races.ALRAUNE)) && !player.hasPerk(PerkLib.VerdantMight)) {
+			if ((player.isRaceCached(Races.PLANT) || player.isRaceCached(Races.ALRAUNE)) && !player.hasPerk(PerkLib.VerdantMight)) {
 				outputText("\nRaw green power flows throught your veins while being a plant hasnt done so much to improve your muscle your general sturdyness more then makes up for it allowing you to use your toughness instead of your strength when delivering blows. \n\n<b>(gained the Verdant Might perk!)</b>\n");
 				player.createPerk(PerkLib.VerdantMight,0,0,0,0);
 				needNext = true;
 			}
-			if (player.plantScore() < 11 && !player.isRaceCached(Races.ALRAUNE) && player.hasPerk(PerkLib.VerdantMight)) {
+			if (!player.isRaceCached(Races.PLANT) && !player.isRaceCached(Races.ALRAUNE) && player.hasPerk(PerkLib.VerdantMight)) {
 				outputText("\nBeing less of a plant you loose the ability to add your own sturdyness to your attacks.\n\n<b>(Lost the Verdant Might perk!)</b>\n");
 				player.removePerk(PerkLib.VerdantMight);
 				needNext = true;
@@ -2548,12 +2548,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.hasPerk(PerkLib.Oviposition) || player.hasPerk(PerkLib.BunnyEggs)) { //Oviposition perk for lizard and bunny folks
-				if ((player.nagaScore() + player.lizardScore() < 3) && player.hasPerk(PerkLib.Oviposition) && !player.hasPerk(PerkLib.BasiliskWomb)) { //--Lose Oviposition perk if lizard score gets below 3.
+				if ((player.racialScore(Races.NAGA) + player.racialScore(Races.LIZARD) < 3) && player.hasPerk(PerkLib.Oviposition) && !player.hasPerk(PerkLib.BasiliskWomb)) { //--Lose Oviposition perk if lizard score gets below 3.
 					outputText("\nAnother change in your uterus ripples through your reproductive systems.  Somehow you know you've lost a little bit of reptilian reproductive ability.\n(<b>Perk Lost: Oviposition</b>)\n");
 					player.removePerk(PerkLib.Oviposition);
 					needNext = true;
 				}
-				else if (player.bunnyScore() < 3 && player.hasPerk(PerkLib.BunnyEggs)) { //--Lose Oviposition perk if bunny score gets below 3.
+				else if (player.racialScore(Races.BUNNY) < 3 && player.hasPerk(PerkLib.BunnyEggs)) { //--Lose Oviposition perk if bunny score gets below 3.
 					outputText("\nAnother change in your uterus ripples through your reproductive systems.  Somehow you know you've lost your ability to spontaneously lay eggs.\n(<b>Perk Lost: Bunny Eggs</b>)\n");
 					player.removePerk(PerkLib.BunnyEggs);
 					needNext = true;

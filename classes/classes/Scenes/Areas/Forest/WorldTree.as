@@ -15,7 +15,6 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.MutationsHelper;
-import classes.CoC;
 
 public class WorldTree extends BaseContent
 	{
@@ -29,7 +28,7 @@ public class WorldTree extends BaseContent
 		public function YggdrasilDiscovery():void {
 			clearOutput();
 			outputText("With your soul sense, tracing the song back to it’s source is a simple task. Before long, you’re walking the same path in the deep woods as before, and soon you reach the same statuesque tree.\n\n");
-			if (!player.isRace(Races.PLANT) && player.yggdrasilScore() == 0) {
+			if (!player.isRace(Races.PLANT) && player.racialScore(Races.YGGDRASIL) == 0) {
 				outputText("You feel the song resonate within the tree, but you cannot discern its source, or anything about the tree. Its size aside, it appears perfectly normal, and you are certain there are even other trees of similar size elsewhere in the forest. When you take a break to meditate on the tree, you come to the realization that you only felt the song without the soul sense when you were a ");
 				outputText("" + player.mf("Treant", "Dryad") +". Perhaps if you regained that particular form, you could understand the true meaning behind this peculiar tree?\n\n");
 				doNext(camp.returnToCampUseOneHour);

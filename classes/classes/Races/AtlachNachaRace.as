@@ -2,6 +2,7 @@ package classes.Races {
 import classes.BodyParts.*;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
+import classes.Player;
 import classes.Race;
 
 /**
@@ -68,6 +69,19 @@ public class AtlachNachaRace extends Race{
 					"sens": +150
 				})
 				.end()
+	}
+	
+	public static function fullTfCheck(player:Player):Boolean {
+		return player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS
+				&& player.arms.type == Arms.SPIDER
+				&& player.eyes.type == Eyes.SPIDER
+				&& player.ears.type == Ears.ELFIN
+				&& player.rearBody.type == RearBody.ATLACH_NACHA
+				&& player.faceType == Face.SPIDER_FANGS
+				&& player.hasCoatOfType(Skin.CHITIN)
+				&& player.eyes.colour == "red"
+				&& player.coatColor == "midnight purple"
+				&& player.hairColor == "midnight purple";
 	}
 }
 }

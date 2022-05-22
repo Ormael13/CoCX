@@ -330,7 +330,7 @@ public class RaceScoreBuilder {
 		return customRequirement("genitals",
 				customName,
 				function (body:BodyData):Boolean {
-					return body.vaginaType == vaginaType || body.player.countCocksWithType(cockType)>=0;
+					return body.vaginaType == vaginaType || body.player.countCocksWithType(cockType) > 0;
 				},
 				score,
 				failScore

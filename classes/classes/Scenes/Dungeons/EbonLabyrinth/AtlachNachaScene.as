@@ -2,6 +2,8 @@
 package classes.Scenes.Dungeons.EbonLabyrinth
 {
 import classes.BaseContent;
+import classes.Player;
+import classes.Races.AtlachNachaRace;
 import classes.StatusEffects;
 import classes.display.SpriteDb;
 import classes.PerkLib;
@@ -21,7 +23,7 @@ public class AtlachNachaScene extends BaseContent {
             player.gems += 500;
             doNext(playerMenu);
         }
-        else if (player.atlachFullTfCheck()){
+        else if (AtlachNachaRace.fullTfCheck(player)){
             outputText("As you enter the next room, you immediately recognize the place. Several nearby webs catch your eye, you know you've been here before!" +
                     "\n\nBlazing red eyes open within the darkness at the other side of the vast room with a piercing gaze directed at you." +
                     " You feel a need to submit to this creature as if some deeply ingrained instincts told you it was the right and most just decision in the world and to go against it would be the worst decision in existence." +

@@ -638,12 +638,7 @@ public class MutationsLib
 					return player.facePart.type == 34;//player.facePart.isAny(Face.VAMPIRE, Face.)
 				}, "Vampire fangs")
 				.requireRace(Races.VAMPIRE);//potem dodać mosquito race i ew. inne co mogą wypijać krew
-				KitsuneParathyroidGlands.requireParathyroidGlandMutationSlot().requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
-					return player.tailType == Tail.FOX && player.tailCount >= 2;
-				}, "2+ fox tails")
-				.requireCustomFunction(function (player:Player):Boolean {
-					return player.kitsuneScore() >= 9;
-				}, "Kitsune race");
+				KitsuneParathyroidGlands.requireParathyroidGlandMutationSlot().requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune).requireRace(Races.KITSUNE);
 				KitsuneThyroidGland.requireThyroidGlandMutationSlot().requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
 					return player.tailType == Tail.FOX && player.tailCount >= 2;
 				}, "2+ fox tails")

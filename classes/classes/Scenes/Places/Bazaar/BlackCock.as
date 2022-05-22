@@ -16,7 +16,6 @@ import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.*;
 import classes.lists.Gender;
-import classes.CoC;
 
 /**
 	 * The Black Cock by Foxxling
@@ -1565,12 +1564,12 @@ import classes.CoC;
 				outputText("\n\nYou shake your head and struggle to gather your thoughts, feeling a bit slow.");
 				player.addCurse("int", 1, 1);
 			}
-			if (rand(3) == 0 && player.rhinoScore() >= 2 && (rand(2) == 0 || !player.inRut) && player.hasCock()) {
+			if (rand(3) == 0 && player.racialScore(Races.RHINO) >= 2 && (rand(2) == 0 || !player.inRut) && player.hasCock()) {
 				player.goIntoRut(true);
 			}
 			// Special TFs
 			//------------
-			if (rand(4) == 0 && changes < changeLimit && player.horns.type != Horns.UNICORN && player.horns.type != Horns.ORCHID && player.ears.type == Ears.HORSE && (player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.CLOVEN_HOOFED || player.horseScore() >= 3)) {
+			if (rand(4) == 0 && changes < changeLimit && player.horns.type != Horns.UNICORN && player.horns.type != Horns.ORCHID && player.ears.type == Ears.HORSE && (player.lowerBody == LowerBody.HOOFED || player.lowerBody == LowerBody.CLOVEN_HOOFED || player.racialScore(Races.HORSE) >= 3)) {
 				outputText("\n\nYou begin to feel an annoying tingling sensation at the top of your head. Reaching up to inspect it you find the <b>sharp nub of a horns protruding from the center of your forehead</b> and growing. Once it's complete you estimate it to be about six inches long.");
 				player.horns.type = Horns.UNICORN;
 				player.horns.count = 6;
@@ -2008,7 +2007,7 @@ import classes.CoC;
 				changes++;
 			}
 			//Gain Echidna tongue
-			if (rand(3) == 0 && changes < changeLimit && player.echidnaScore() >= 2 && player.lowerBody != LowerBody.GARGOYLE && player.tongue.type != Tongue.ECHIDNA) {
+			if (rand(3) == 0 && changes < changeLimit && player.racialScore(Races.ECHIDNA) >= 2 && player.lowerBody != LowerBody.GARGOYLE && player.tongue.type != Tongue.ECHIDNA) {
 				outputText("\n\nYou feel an uncomfortable pressure in your tongue as it begins to shift and change. Within moments, you are able to behold your long, thin tongue. It has to be at least a foot long. <b>You now have an echidna tongue!</b>");
 				player.tongue.type = Tongue.ECHIDNA;
 				changes++;
@@ -2028,7 +2027,7 @@ import classes.CoC;
 			// Other Changes
 			//------------
 			//Hair stops growing
-			if (rand(4) == 0 && changes < changeLimit && player.echidnaScore() >= 2 && flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
+			if (rand(4) == 0 && changes < changeLimit && player.racialScore(Races.ECHIDNA) >= 2 && flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
 				outputText("\n\nYour scalp tingles oddly. In a panic, you reach up to your " + hairDescript() + ", but thankfully it appears unchanged.\n");
 				outputText("(<b>Your hair has stopped growing.</b>)");
 				changes++;
@@ -2053,7 +2052,7 @@ import classes.CoC;
 				player.shrinkTits();
 				changes++;
 			}
-			if (rand(4) == 0 && changes < changeLimit && player.echidnaScore() >= 3 && player.hasVagina() && !player.hasPerk(PerkLib.Oviposition)) {
+			if (rand(4) == 0 && changes < changeLimit && player.racialScore(Races.ECHIDNA) >= 3 && player.hasVagina() && !player.hasPerk(PerkLib.Oviposition)) {
 				outputText("\n\nDeep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly.  Beyond that, you aren't sure exactly what just happened, but you are sure it originated from your womb.\n");
 				outputText("(<b>Perk Gained: Oviposition</b>)");
 				player.createPerk(PerkLib.Oviposition, 0, 0, 0, 0);
