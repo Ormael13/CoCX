@@ -2190,14 +2190,13 @@ public class Camp extends NPCAwareContent{
 		outputText("On which group of minions you want to check on?");
 		menu();
 		if (player.hasPerk(PerkLib.JobGolemancer)) addButton(0, "Make", campMake.accessMakeWinionsMainMenu).hint("Check your options for making some golems.");
-		else addButtonDisabled(0, "Make", "You need to be golemancer to use this option.");
+		else addButtonDisabled(0, "Make", "You need to be a golemancer to use this option.");
 		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) addButton(1, "Summon", campMake.accessSummonElementalsMainMenu).hint("Check your options for managing your elemental summons.");
 		else addButtonDisabled(1, "Summon", "You should first build Arcane Circle. Without some tools from the carpenter's toolbox it would be near impossible to do this.");
 		if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(5, "Skeletons", campMake.accessMakeSkeletonWinionsMainMenu).hint("Check your options for making some skeletons.");
-		else addButtonDisabled(5, "Skeletons", "You need to be necromancer to use this option.");
+		else addButtonDisabled(5, "Skeletons", "You need to be a necromancer to use this option.");
 		if (player.hasPerk(PerkLib.PrestigeJobDruid)) addButton(6, "Fusions", druidMenu);
-		else addButtonDisabled(6, "Fusions", "You need to be druid to use this option.");
-		if (((flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && (flags[kFLAGS.PLAYER_COMPANION_1] != "" || flags[kFLAGS.PLAYER_COMPANION_2] != "" || flags[kFLAGS.PLAYER_COMPANION_3] != "")) || player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) addButton(10, "SimpPreTurn", simplifiedPreTurn);
+		else addButtonDisabled(6, "Fusions", "You need to be a druid to use this option.");
 		addButton(14, "Back", campActions);
 	}
 	private function druidMenu():void {
@@ -2398,26 +2397,6 @@ public class Camp extends NPCAwareContent{
 		if (player.hasPerk(PerkLib.ElementalContractRank31)) dmSPPC += 1;
 		if (player.hasPerk(PerkLib.GreaterSharedPower)) dmSPPC *= 2;
 		return dmSPPC;
-	}
-	private function simplifiedPreTurn():void {
-		menu();
-		if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
-			addButtonDisabled(1, "On", "It's already On ^^");
-			addButton(2, "Off", simplifiedPreTurnOff);
-		}
-		else {
-			addButton(1, "On", simplifiedPreTurnOn);
-			addButtonDisabled(2, "Off", "It's already Off ^^");
-		}
-		addButton(3, "Back", campWinionsArmySim);
-	}
-	private function simplifiedPreTurnOn():void {
-		player.createStatusEffect(StatusEffects.SimplifiedNonPCTurn,0,0,0,0);
-		simplifiedPreTurn();
-	}
-	private function simplifiedPreTurnOff():void {
-		player.removeStatusEffect(StatusEffects.SimplifiedNonPCTurn);
-		simplifiedPreTurn();
 	}
 
 	private function HerbalismMenu():void {

@@ -33,7 +33,6 @@ import classes.StatusEffects;
 		}
 
 		public function neisaCombatActions():void {
-			clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerNeisa) > 0) {
 				var choice1:Number = rand(20);
 				if (player.hasPerk(PerkLib.MotivationEx)) {
@@ -128,7 +127,6 @@ import classes.StatusEffects;
 		}
 		
 		public function etnaCombatActions():void {
-			clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerEtna) > 0) {
 				var choice3:Number = rand(20);
 				if (player.hasPerk(PerkLib.MotivationEx)) {
@@ -184,7 +182,6 @@ import classes.StatusEffects;
 		}
 		
 		public function auroraCombatActions():void {
-			//clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerAurora) > 0) {
 				var choice4:Number = rand(20);
 				if (player.hasPerk(PerkLib.MotivationEx)) {
@@ -320,7 +317,6 @@ import classes.StatusEffects;
 		}*/
 		
 		public function alvinaCombatActions():void {
-			clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerAlvina) > 0) {
 				var choice8:Number = rand(20);
 				if (player.hasPerk(PerkLib.MotivationEx)) {
@@ -421,7 +417,6 @@ import classes.StatusEffects;
 		}
 		
 		public function mitziCombatActions():void {
-			clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerMitzi) > 0) {
 				var choice9:Number = rand(20);
 				if (player.hasPerk(PerkLib.MotivationEx)) {
@@ -490,7 +485,6 @@ import classes.StatusEffects;
 		}
 		
 		public function excelliaCombatActions():void {
-			clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerExcellia) > 0) {
 				if (player.HP < player.maxHP() * .5) excelliaCombatActions5();
 				else {
@@ -576,7 +570,6 @@ import classes.StatusEffects;
 		}
 		
 		public function amilyCombatActions():void {
-			clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerAmily) > 0) {
 				var choice11:Number = rand(20);
 				if (player.hasPerk(PerkLib.MotivationEx)) {
@@ -669,7 +662,6 @@ import classes.StatusEffects;
 		}
 		
 		public function zenjiCombatActions():void {
-			clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerZenji) > 0) {
 				if ((player.HP < player.maxHP() * 0.35) && player.statusEffectv3(StatusEffects.CombatFollowerZenji) < 4 && rand(10) > 1) zenjiCombatActions5();
 				else {
@@ -805,7 +797,6 @@ import classes.StatusEffects;
 		}
 		
 		public function tyrantiaCombatActions():void {
-			clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerTyrantia) > 0) {
 				//if (TyrantiaFollower.TyraniaPostFinalKissScene) tyrantiaCombatActions5();
 				if (monster.hasStatusEffect(StatusEffects.PouncedByCompanion)) tyrantiaCombatActions1();
