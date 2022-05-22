@@ -10,6 +10,8 @@ import classes.VaginaClass;
 public class OomukadeRace extends Race {
 	public function OomukadeRace(id:int) {
 		super("Oomukade", id);
+		chimeraTier = 0;
+		grandChimeraTier = 0;
 	}
 	
 	public override function setup():void {

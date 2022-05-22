@@ -632,7 +632,7 @@ import classes.CoC;
 					outputText("\n\n\"<i>I love doing this.</i>\" He says as after he exhales a tiny spinning sword, \"<i>...especially with friends. It's cool that you're here [name].</i>\"");
 					outputText("\n\nYou feel warmth streaming through your body, happy smokiness that blooms from your lungs and tingles until it gets to your fingers. A smile spreads across your [face] as you look over at Andy. You ask him about transformation. He doesn't seem to understand that, in most places, eating food doesn't cause your body to change as it does here.");
 					outputText("\n\n\"<i>Is that how you've always looked?</i>\" he asks.");
-					if (flags[kFLAGS.TIMES_TRANSFORMED] < 3 || player.humanScore() >= 5) outputText("You nod, telling him that you look the same as when you walked through the portal.");
+					if (flags[kFLAGS.TIMES_TRANSFORMED] < 3 || player.isRace(Races.HUMAN)) outputText("You nod, telling him that you look the same as when you walked through the portal.");
 					else outputText("You shake your head and tell the curious satyr you've changed since coming to Mareth.");
 					outputText("\n\n\"<i>I can't imagine not having the option to change. I was born here, I don't know anything else.</i>\" You tell him that he'd adjust just as you did when you walked through a portal into a world where what you eat can drastically change your appearance.");
 					outputText("\n\nAndy looks over and notices you taking another drag and holds out his hand. As he takes his turn you remark about how horny smoking is making you, a comment you're not sure you would have made otherwise.");

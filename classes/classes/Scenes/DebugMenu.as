@@ -786,7 +786,7 @@ public class DebugMenu extends BaseContent
 			CoC.instance.playerAppearance.appearance(true);
 			outputText("[pg]");
 			var body:BodyData = player.bodyData();
-			for each (var race:Race in Race.AllRacesByName) {
+			for each (var race:Race in Races.AllRacesByName) {
 				var score:int = race.totalScore(body);
 				if (score == 0) continue;
 				outputText("<b>"+race.name+" score: "+score+"</b>\n");

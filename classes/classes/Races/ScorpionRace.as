@@ -8,6 +8,8 @@ public class ScorpionRace extends Race {
 	
 	public function ScorpionRace(id:int) {
 		super("Scorpion", id);
+		chimeraTier = 0;
+		grandChimeraTier = 0;
 		disabled = true;
 	}
 	

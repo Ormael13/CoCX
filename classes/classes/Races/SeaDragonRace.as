@@ -10,6 +10,8 @@ public class SeaDragonRace extends Race{
 	
 	public function SeaDragonRace(id:int) {
 		super("Sea Dragon", id);
+		chimeraTier = 0;
+		grandChimeraTier = 0;
 	}
 	
 	public override function setup():void {

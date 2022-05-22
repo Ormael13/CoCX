@@ -8,6 +8,8 @@ import classes.internals.Utils;
 public class ElementalRace extends Race {
 	public function ElementalRace(id:int) {
 		super("Elemental Fusion", id);
+		chimeraTier = 0;
+		grandChimeraTier = 0;
 	}
 	
 	override public function setup():void {

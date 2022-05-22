@@ -16,6 +16,8 @@ public class UnicornRace extends Race{
 	
 	public function UnicornRace(id:int) {
 		super("Unicorn", id);
+		chimeraTier = 2;
+		grandChimeraTier = 3;
 	}
 	
 	public override function setup():void {

@@ -9,6 +9,8 @@ public class PlantRace extends Race {
 	
 	public function PlantRace(id:int) {
 		super("Plant", id);
+		chimeraTier = 0;
+		grandChimeraTier = 0;
 	}
 	
 	public override function setup():void {

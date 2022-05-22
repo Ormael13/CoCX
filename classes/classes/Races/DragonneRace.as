@@ -7,6 +7,8 @@ import classes.Race;
 public class DragonneRace extends Race{
 	public function DragonneRace(id:int) {
 		super("Dragonne", id);
+		chimeraTier = 0;
+		grandChimeraTier = 0;
 	}
 	
 	public override function setup():void {

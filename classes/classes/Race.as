@@ -7,22 +7,6 @@ import classes.internals.race.RacialRequirement;
 
 public class Race {
 	public static const RaceById:Object                    = {};
-	/**
-	 * All races, including disabled
-	 */
-	public static const AllRacesWithDisabled:/*Race*/Array = [];
-	/**
-	 * All races except disabled; use this array to calc racial scores and apply bonuses
-	 */
-	public static var AllEnabledRaces:/*Race*/Array      = [];
-	/**
-	 * All races except disabled and hidden
-	 */
-	public static var AllVisibleRaces:/*Race*/Array = [];
-	/**
-	 * All visible enabled races, sorted by name
-	 */
-	public static var AllRacesByName:/*Race*/Array = [];
 	
 	public static function byId(id:int):Race {
 		return RaceById[id];
@@ -30,7 +14,6 @@ public class Race {
 	
     public var name:String;
     public var id:int;
-    private var playerFunctionName:String;
 	public var requirements:/*RacialRequirement*/Array = [];
 	public var tiers:/*RaceTier*/Array = [];
 	public var bloodlinePerks:/*PerkType*/Array = [];
@@ -38,7 +21,6 @@ public class Race {
 	 * Array of pairs: `[mutationPerk:IMutationPerkType, scorePerStage:int]`
 	 */
 	public var mutations:/*Array*/Array = [];
-	private var _minScore:int;
 	
 	/**
 	 * true - do not display the race in menus
@@ -49,6 +31,14 @@ public class Race {
 	 * true - do not apply any bonuses
 	 */
 	public var disabled:Boolean = false;
+	/**
+	 * Tier to contribute to chimera score. 0 or -1 if this race doesn't contribute.
+	 */
+	public var chimeraTier:int = 1;
+	/**
+	 * Tier to contribute to grand chimera score. 0 or -1 if this race doesn't contribute.
+	 */
+	public var grandChimeraTier:int = 2;
 
     /**
 	 * TODO @aimozg remove last 2 params
@@ -58,16 +48,13 @@ public class Race {
      * @param _playerFunctionName (old system) Function in Player class that returns score for this race
 	 * @param _minScore (old system) Min score for player to be qualified as this race
      */
-    function Race(_name:String, _id:int, _playerFunctionName: String="", _minScore:int=0) {
+    function Race(_name:String, _id:int) {
         this.name = _name;
         this.id = _id;
-        this.playerFunctionName = _playerFunctionName;
 		if (_id in RaceById) {
 			trace("[ERROR] Duplicate race id "+_id);
 		}
         RaceById[_id] = this;
-		AllRacesWithDisabled.push(this);
-		this._minScore = _minScore;
     }
 	
 	/**
@@ -78,21 +65,17 @@ public class Race {
 	}
 	
 	public function basicScore(body:BodyData):int {
-		if (playerFunctionName) {
-			return body.player[playerFunctionName]();
-		} else {
-			var score:int = 0;
-			try {
-				Utils.Begin("Race", "basicScore", name);
-				for each(var req:RacialRequirement in requirements) {
-					score += req.calcScore(body, score);
-				}
-				if (score < 0) score = 0;
-			} finally {
-				Utils.End("Race", "basicScore");
+		var score:int = 0;
+		try {
+			Utils.Begin("Race", "basicScore", name);
+			for each(var req:RacialRequirement in requirements) {
+				score += req.calcScore(body, score);
 			}
-			return score;
+			if (score < 0) score = 0;
+		} finally {
+			Utils.End("Race", "basicScore");
 		}
+		return score;
 	}
 	
 	public function totalScore(body:BodyData):int {
@@ -198,6 +181,9 @@ public class Race {
 	public function tier(tierNumber:int):RaceTier {
 		return this.tiers[tierNumber-1];
 	}
+	public function get maxTier():int {
+		return (tiers.length === 0) ? 0 : tiers[tiers.length-1].tierNumber;
+	}
 	
 	public function nameFor(body:BodyData, score:int=-1):String {
 		if (score < 0) score = this.totalScore(body);
@@ -208,7 +194,7 @@ public class Race {
 	}
 	
 	public function get minScore():int {
-		if (this.tiers.length == 0) return _minScore;
+		if (this.tiers.length == 0) return 1;
 		return this.tiers[0].minScore;
 	}
 	

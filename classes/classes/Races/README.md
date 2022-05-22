@@ -3,11 +3,9 @@
 * Check generated requirement names
 * Check score functions checking non-tiers
 * Inline `xxxxScore` functions?
-* iterate in chimeras
 * solve unicornkin/alicornkin races
 * consider moving naming function from tier to race
 * NG+ & paragon-like scale buffs in race itself
-* search for `isRace(..) >=/< `
 * error reporting utility
 * Future:
   * racial score caching

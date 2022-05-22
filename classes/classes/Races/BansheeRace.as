@@ -8,6 +8,8 @@ public class BansheeRace extends Race {
 	public function BansheeRace(id:int) {
 		super("Banshee", id);
 		disabled = true;
+		chimeraTier = 0;
+		grandChimeraTier = 0;
 	}
 	
 	public override function setup():void {

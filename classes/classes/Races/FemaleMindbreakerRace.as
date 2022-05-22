@@ -13,6 +13,8 @@ public class FemaleMindbreakerRace extends Race{
 	
 	public function FemaleMindbreakerRace(id:int) {
 		super("Female Mind Breaker", id);
+		chimeraTier = 0;
+		grandChimeraTier = 0;
 	}
 	
 	public override function setup():void {

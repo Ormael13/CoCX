@@ -7,6 +7,8 @@ public class SatyrRace extends Race {
 	
 	public function SatyrRace(id: int) {
 		super("Satyr", id);
+		chimeraTier = 0;
+		grandChimeraTier = 0;
 	}
 	
 	public override function setup():void {

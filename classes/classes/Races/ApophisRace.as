@@ -12,6 +12,8 @@ public class ApophisRace extends Race {
 	
 	public function ApophisRace(id:int) {
 		super("Apophis", id);
+		chimeraTier = 0;
+		grandChimeraTier = 0;
 	}
 	
 	public override function setup():void {

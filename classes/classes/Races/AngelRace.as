@@ -8,6 +8,8 @@ public class AngelRace extends Race {
 	
 	public function AngelRace(id:int) {
 		super("Angel", id);
+		chimeraTier = 0;
+		grandChimeraTier = 0;
 		disabled = true;
 	}
 	

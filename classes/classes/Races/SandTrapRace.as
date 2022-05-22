@@ -10,6 +10,8 @@ import classes.VaginaClass;
 public class SandTrapRace extends Race {
 	public function SandTrapRace(id:int) {
 		super("Sand trap", id);
+		chimeraTier = 0;
+		grandChimeraTier = 0;
 	}
 	
 	public override function setup():void {

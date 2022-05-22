@@ -8,7 +8,7 @@ import classes.Race;
 import classes.VaginaClass;
 import classes.internals.Utils;
 
-public class AlicornRace extends Race{
+public class AlicornRace extends Race {
 	public static const NightmareFurColors:/*String*/Array  = UnicornRace.BicornFurColors;
 	public static const NightmareHairColors:/*String*/Array = UnicornRace.BicornHairColors;
 	public static const AlicornFurColors:/*String*/Array  = UnicornRace.UnicornFurColors;
@@ -16,6 +16,8 @@ public class AlicornRace extends Race{
 	
 	public function AlicornRace(id:int) {
 		super("Alicorn", id);
+		chimeraTier = 2;
+		grandChimeraTier = 3;
 	}
 	
 	public override function setup():void {

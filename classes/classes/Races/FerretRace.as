@@ -7,6 +7,8 @@ import classes.Race;
 public class FerretRace extends Race {
 	public function FerretRace(id:int) {
 		super("Ferret", id);
+		chimeraTier = 0;
+		grandChimeraTier = 0;
 	}
 	
 	public override function setup():void {

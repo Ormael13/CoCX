@@ -1698,7 +1698,7 @@ use namespace CoC;
 				}
 				sceneHunter.print("Check failed: high corruption & demon-morph.");
 				//Not recognized
-				if (player.humanScore() <= 3) {
+				if (!player.isRace(Races.HUMAN)) {
 					outputText("The busty succubus turns, her barely contained breasts jiggling obscenely as she notices you, \"<i>Oh, like hi there ");
 					if(player.gender == 1) outputText("stud");
 					else outputText("sexy");

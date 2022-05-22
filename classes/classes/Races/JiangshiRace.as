@@ -12,6 +12,8 @@ public class JiangshiRace extends Race {
 	
 	public function JiangshiRace(id:int) {
 		super("Jiangshi", id);
+		chimeraTier = 0;
+		grandChimeraTier = 0;
 	}
 	
 	public override function setup():void {

@@ -5623,7 +5623,7 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(100);
         outputText("[pg]");
         transformations.HairHuman.applyEffect(false);
-        if (player.humanScore() > 4) {
+        if (player.isRace(Races.HUMAN)) {
             outputText("[pg]You blink and the world twists around you.  You feel more like yourself than you have in a while, but exactly how isn't immediately apparent.  Maybe you should take a look at yourself?");
         } else {
             outputText("[pg]You cry out as the world spins around you.  You're aware of your entire body sliding and slipping, changing and morphing, but in the sea of sensation you have no idea exactly what's changing.  You nearly black out, and then it's over.  Maybe you had best have a look at yourself and see what changed?");
@@ -5714,7 +5714,7 @@ public final class Mutations extends MutationsHelper {
         outputText("You shovel the stuff into your face, not sure WHY you're eating it, but once you start, you just can't stop.  It tastes incredibly bland, and with a slight hint of cheese.");
         player.refillHunger(5);
         if (player.blockingBodyTransformations()) changeLimit = 0;
-        if (player.humanScore() > 6) {
+        if (player.isRace(Races.HUMAN)) {
             outputText("[pg]You blink and the world twists around you.  You feel more like yourself than you have in a while, but exactly how isn't immediately apparent.  Maybe you should take a look at yourself?");
         } else {
             outputText("[pg]You cry out as the world spins around you.  You're aware of your entire body sliding and slipping, changing and morphing, but in the sea of sensation you have no idea exactly what's changing.  You nearly black out, and then it's over.  Maybe you had best have a look at yourself and see what changed?");

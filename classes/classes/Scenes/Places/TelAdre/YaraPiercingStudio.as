@@ -2,6 +2,7 @@ package classes.Scenes.Places.TelAdre {
 import classes.BodyParts.Piercing;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
+import classes.Races;
 import classes.StatusEffects;
 import classes.display.SpriteDb;
 import coc.view.ButtonDataList;
@@ -102,7 +103,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
         player.createStatusEffect(StatusEffects.Yara, 0, 0, 0, 0);
         clearOutput();
         outputText("You introduce yourself and ask Yara about her past, noting that ");
-        if (player.humanScore() <= 2) {
+        if (!player.isRace(Races.HUMAN)) {
             outputText("you were once a human too.");
         } else {
             outputText("you haven't seen many other humans about.");

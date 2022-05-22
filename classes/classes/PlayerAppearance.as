@@ -125,7 +125,7 @@ public class PlayerAppearance extends BaseContent {
 		ApexRaceDisplayTextUpdate();
 		// Display selected race
 		var races:Array = [];
-		for each(var x:Race in Race.AllRacesByName) {
+		for each(var x:Race in Races.AllRacesByName) {
 			races.push( { label: x.name, race: x} );
 		}
 		// fill the races
@@ -981,7 +981,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("Details legend: [font-lblue]active tier[/font], [font-green]passed check[/font], failed check, [font-red]score penalty[/font].\n");
 		
 		player.updateRacialCache();
-		var list:/*Race*/Array = Race.AllRacesByName;
+		var list:/*Race*/Array = Races.AllRacesByName;
 		if (sortBy == 1) {
 			list = sortedBy(list, function (a:Race):int {
 				return player.racialScoreCached(a);
@@ -1030,37 +1030,88 @@ public class PlayerAppearance extends BaseContent {
 				RacialScores(clickedRace, parseInt(event.slice("sort,".length)));
 			}
 		}
+		var score:Number;
 		//AlicornKin
-		if (player.alicornkinScore() >= 12) outputText("\n<font color=\"#0000a0\">Alicornkin/Nightmarekin: " + player.alicornkinScore() + " (+45% to Tou racial multi, +60% to Spe racial multi, +75% to Int racial multi)</font>");
-		else if (player.alicornkinScore() >= 1) outputText("\n<font color=\"#008000\">Alicornkin/Nightmarekin: " + player.alicornkinScore() + "</font>");
-		else if (player.alicornkinScore() < 1) outputText("\n<font color=\"#ff0000\">Alicornkin/Nightmarekin: 0</font>");
+		score    = player.alicornkinScore();
+		if (score >= 12) outputText("\n<font color=\"#0000a0\">Alicornkin/Nightmarekin: " + score + " (+45% to Tou racial multi, +60% to Spe racial multi, +75% to Int racial multi)</font>");
+		else if (score >= 1) outputText("\n<font color=\"#008000\">Alicornkin/Nightmarekin: " + score + "</font>");
+		else if (score < 1) outputText("\n<font color=\"#ff0000\">Alicornkin/Nightmarekin: 0</font>");
+		//UnicornKin
+		score = player.unicornkinScore();
+		if (score >= 12) outputText("\n<font color=\"#0000a0\">Unicornkin/Bicornkin: " + score + " (+55% to Tou racial multi, +70% to Spe racial multi, +85% to Int racial multi)</font>");
+		else if (score >= 1) outputText("\n<font color=\"#008000\">Unicorn/Bicorn: " + score + "</font>");
+		else if (score < 1) outputText("\n<font color=\"#ff0000\">Unicornkin/Bicornkin: 0</font>");
 		//CHIMERA
 		outputText("\nCHIMERA: " + player.chimeraScore());
 		//GRAND CHIMERA
 		outputText("\nGRAND CHIMERA: " + player.grandchimeraScore());
-		//HUMANITY
-		if (player.humanScore() == player.humanMaxScore()) outputText("\n<font color=\"#0000a0\">HUMANITY: " + player.humanMaxScore() + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
-		else if (player.humanScore() == player.humanMaxScore() - 1) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 1) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
-		else if (player.humanScore() == player.humanMaxScore() - 2) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 2) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
-		else if (player.humanScore() == player.humanMaxScore() - 3) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 3) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
-		else if (player.humanScore() == player.humanMaxScore() - 4) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 4) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
-		else if (player.humanScore() == player.humanMaxScore() - 5) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 5) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
-		else if (player.humanScore() == player.humanMaxScore() - 6) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 6) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
-		else if (player.humanScore() == player.humanMaxScore() - 7) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 7) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
-		else if (player.humanScore() == player.humanMaxScore() - 8) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 8) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
-		else if (player.humanScore() == player.humanMaxScore() - 9) outputText("\n<font color=\"#0000a0\">HUMANITY: " + (player.humanMaxScore() - 9) + " (+" + monster.humanityBoostExpValue() + " bonus EXP gains)</font>");
-		else if (player.humanScore() < player.humanMaxScore() - 9) outputText("\n<font color=\"#008000\">HUMANITY: " + player.humanScore() + "</font>");
 		//INTERNAL CHIMERICAL DISPOSITION
-		if (player.internalChimeraScore() >= 1) {
-            outputText("\n<font color=\"#0000a0\">INTERNAL CHIMERICAL DISPOSITION: (" + player.internalChimeraRating() + ") " + player.internalChimeraScore())
-            if (player.hasPerk(PerkLib.RacialParagon)) outputText(" - no buffs because of the Racial Paragon perk</font>");
-            else outputText(" (+" + (5 * player.internalChimeraScore()) + "% to Str racial multi / Tou / Spe / Int / Wis / Lib and +" + (5 * player.internalChimeraScore()) + " to Sens)</font>");
-        }
-		else if (player.internalChimeraScore() < 1) outputText("\nINTERNAL CHIMERICAL DISPOSITION: 0</font>");
-		//UnicornKin
-		if (player.unicornkinScore() >= 12) outputText("\n<font color=\"#0000a0\">Unicornkin/Bicornkin: " + player.unicornkinScore() + " (+55% to Tou racial multi, +70% to Spe racial multi, +85% to Int racial multi)</font>");
-		else if (player.unicornkinScore() >= 1) outputText("\n<font color=\"#008000\">Unicorn/Bicorn: " + player.unicornkinScore() + "</font>");
-		else if (player.unicornkinScore() < 1) outputText("\n<font color=\"#ff0000\">Unicornkin/Bicornkin: 0</font>");
+		score = player.internalChimeraScore();
+		if (score >= 1) {
+			outputText("\n");
+			outputText(player.hasPerk(PerkLib.RacialParagon) ? "[font-green]" : "[font-lblue]");
+			outputText("INTERNAL CHIMERICAL DISPOSITION: (" + player.internalChimeraRating() + ") " + score)
+            if (player.hasPerk(PerkLib.RacialParagon)) outputText(" - no buffs because of the Racial Paragon perk");
+            else outputText(" (+" + (5 * score) + "% to Str racial multi / Tou / Spe / Int / Wis / Lib and +" + (5 * score) + " to Sens)");
+			outputText("[/font]")
+        } else {
+			outputText("\nINTERNAL CHIMERICAL DISPOSITION: 0");
+		}
+		
+		// Other body part-related buffs that contribute to the "Racial" buff object in Player.calcRacialBuffs
+		outputText("\n[font-lblue]");
+		
+		var factor:Number = 0;
+		if (player.hasCoatOfType(Skin.CHITIN)) factor += 2;
+		else if (player.hasCoatOfType(Skin.SCALES)) factor += 1;
+		if (player.hasPerk(PerkLib.ThickSkin)) factor += 1;
+		score = player.perkv1(IMutationsLib.MantislikeAgilityIM);
+		var bonus:Number = 0;
+		if (score >= 3) {
+			bonus = 30*factor;
+		} else if (score >= 2) {
+			bonus += 15*factor;
+		} else if (score >= 1) {
+			bonus += 5*factor;
+		}
+		if (bonus > 0) {
+			outputText("\nMantislike Agility: +"+bonus+"% Speed");
+		}
+		
+		if (player.isNaga()) {
+			if (player.lowerBody == LowerBody.FROSTWYRM) {
+				outputText("\nFrost wyrm lower body: +20% Strength, +10% Toughness.");
+			} else {
+				outputText("\nNaga lower body: +15% Strength, +15% Toughness.");
+			}
+		}
+		
+		if (player.isTaur()) {
+			outputText("\nTaur lower body: +20% Speed.")
+		}
+		
+		if (player.isDrider()) {
+			if (player.lowerBody == LowerBody.CANCER) {
+				outputText("\nCancer lower body: +15% Strength, +5% Speed, +10% Toughness.");
+			} else {
+				outputText("\nDrider lower body: +15% Toughness, +15% Speed.");
+			}
+		}
+		if (player.isScylla()) {
+			outputText("\nScylla lower body: +30% Strength.")
+		}
+		if (player.isKraken()) {
+			outputText("\nKraken lower body: +60% Strength, +15 Sensitivity");
+		}
+		if (player.lowerBody == LowerBody.CENTIPEDE) {
+			outputText("\nCentipede lower body: +15% Strength, +5% Toughness, +10% Speed.")
+		}
+		if (player.isAlraune()) {
+			outputText("\nAlraune lower body: +15% Toughness, +15% Libido.")
+		}
+		
+		outputText("[/font]");
+		
 		menu();
 		addButton(0, "Next", playerMenu);
 	}

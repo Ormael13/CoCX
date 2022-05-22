@@ -3,8 +3,24 @@ import classes.Races.*;
 import classes.internals.race.RaceTierBuilder;
 
 public class Races {
+	/**
+	 * All races, including disabled
+	 */
+	public static const AllRacesWithDisabled:/*Race*/Array = [];
+	/**
+	 * All races except disabled; use this array to calc racial scores and apply bonuses
+	 */
+	public static var AllEnabledRaces:/*Race*/Array      = [];
+	/**
+	 * All races except disabled and hidden
+	 */
+	public static var AllVisibleRaces:/*Race*/Array = [];
+	/**
+	 * All visible enabled races, sorted by name
+	 */
+	public static var AllRacesByName:/*Race*/Array = [];
 	
-	public static const HUMAN:Race = new Race("Human",1, "humanScore", 1);
+	public static const HUMAN:HumanRace                    = new HumanRace(1);
 	public static const CAT:CatRace                        = new CatRace(2);
 	public static const NEKOMATA:NekomataRace              = new NekomataRace(3);
 	public static const CHESHIRE:CheshireRace              = new CheshireRace(4);
@@ -132,7 +148,9 @@ public class Races {
 		// log scary numbers for fun
 		var nreq:int=0,nt:int=0,nr:int=0;
 		
-		for each (var race:Race in Race.AllRacesWithDisabled) {
+		for (var id:String in Race.RaceById) {
+			var race:Race = Race.RaceById[id];
+			AllRacesWithDisabled.push(race);
 			try {
 				race.setup();
 			} catch (e:Error) {
@@ -143,20 +161,24 @@ public class Races {
 			if (race.disabled) {
 				trace("Race "+race.name+" (#"+race.id+") is disabled")
 				continue;
+			} else if (race.tiers.length == 0) {
+				trace("[ERROR] Race "+race.name+" has no tiers, disabling it");
+				race.disabled = true;
+				continue;
 			}
 			nr++;
 			nreq += race.requirements.length;
 			nt += race.tiers.length;
-			Race.AllEnabledRaces.push(race);
+			AllEnabledRaces.push(race);
 			if (race.hidden) {
 				trace("Race "+race.name+" (#"+race.id+") is hidden")
 				continue;
 			}
-			Race.AllVisibleRaces.push(race);
+			AllVisibleRaces.push(race);
 		}
 		trace("Loaded "+nr+" races, "+nt+" tiers, "+nreq+" requirements");
 		
-		Race.AllRacesByName = Race.AllVisibleRaces.slice().sortOn("name");
+		AllRacesByName = AllVisibleRaces.slice().sortOn("name",Array.CASEINSENSITIVE);
 	}
 }
 }

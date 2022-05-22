@@ -3879,7 +3879,7 @@ public class Creature extends Utils
 				if (hasStatusEffect(StatusEffects.EverywhereAndNowhere)) chance += 80;
 				else chance += 30;
 			}
-			if (game.player.isRace(Races.DISPLACERBEAST) >= 11) {
+			if (game.player.isRace(Races.DISPLACERBEAST)) {
 				if (hasStatusEffect(StatusEffects.Displacement)) chance += 80;
 				else chance += 30;
 			}

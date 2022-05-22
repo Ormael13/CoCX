@@ -6,6 +6,8 @@ import classes.Race;
 public class PeacockRace extends Race{
 	public function PeacockRace(id:int) {
 		super("Peacock", id);
+		chimeraTier = 0;
+		grandChimeraTier = 0;
 	}
 	
 	public override function setup():void {

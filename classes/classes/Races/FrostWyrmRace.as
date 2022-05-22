@@ -12,6 +12,8 @@ public class FrostWyrmRace extends Race {
 	
 	public function FrostWyrmRace(id:int) {
 		super("Frost Wyrm", id);
+		chimeraTier = 0;
+		grandChimeraTier = 0;
 	}
 	
 	public override function setup():void {

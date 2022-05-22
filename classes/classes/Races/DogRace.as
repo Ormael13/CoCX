@@ -8,6 +8,8 @@ import classes.Race;
 public class DogRace extends Race {
 	public function DogRace(id:int) {
 		super("Dog", id);
+		chimeraTier = 0;
+		grandChimeraTier = 0;
 	}
 	
 	public override function setup():void {

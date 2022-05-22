@@ -269,7 +269,7 @@ import classes.Stats.Buff;
 			outputText(" so you give her your name, and, hesitant to discuss your true quest in any depth, detail some of your past encounters in this strange world.  Nodding encouragingly, she raises a long, elaborately carved pipe to her lips, puffing away as you tell your story....\n\n");
 			outputText("\"<i>Oh, so you’re the heroic type, yeah?  So, I guess it’s my turn now, huh?</i>\" She sighs and closes her eyes, reclining and crossing her legs.  You can’t help but notice the way her kimono slithers around her legs, mere inches from becoming truly indecent, nor the way her breasts threaten to burst free of their confinement as she stretches.\n\n");
 			outputText("\"<i>Ah, but where to begin?  My clan calls me ‘Izumi, <b>The Font Of All Strength’</b>.</i>\"  She snorts in amusement at your reaction to her name.  \"<i>I know, it’s a little pompous, right?  Just use Izumi, I always do.  Either way, I’m a traveller from another world.");
-			if (player.humanScore() > 3)
+			if (player.isRace(Races.HUMAN))
 			{
 				outputText("  I’ve met humans before a few times.  Back home, my people like to play games with them to see how they’ll react; show up, scare the locals, steal a sheep and run off giggling to yourself, that kind of thing.  Sometimes one of them is actually brave enough to come after us.  Sometimes we even slap ‘em on the back, give ‘em the sheep and then drink them under the table.</i>\" \n\n");
 				outputText("She takes a long, powerful drag on her pipe, her lips locked tight around the mouthpiece.  \"<i>It was fun for a while, but bothering goatherds for the next thousand years wasn’t my scene, frankly, so I left.  Bailed.  Disappeared.");

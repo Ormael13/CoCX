@@ -18,6 +18,7 @@ import classes.PerkLib;
 import classes.PotionType;
 import classes.Races;
 import classes.Races.ElementalRace;
+import classes.Races.HumanRace;
 import classes.Scenes.Areas.Beach.Gorgon;
 import classes.Scenes.Areas.Bog.CorruptedMaleTroll;
 import classes.Scenes.Areas.Caves.DisplacerBeast;
@@ -11895,9 +11896,9 @@ public class Combat extends BaseContent {
 
 	private function weaponmasteryXPMulti():Number {
 		var multi:Number = 1;
-		if (player.humanScore() >= player.humanMaxScore() - 9) {
+		if (player.isRace(Races.HUMAN)) {
 			multi += 1;
-			if (player.humanScore() == player.humanMaxScore()) multi += 1;
+			if (player.isPureHuman()) multi += 1;
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4) multi *= 3;
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3) multi *= 2;

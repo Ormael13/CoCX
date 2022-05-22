@@ -12,6 +12,8 @@ import classes.Race;
 public class PoltergeistRace extends Race{
 	public function PoltergeistRace(id:int) {
 		super("Poltergeist", id);
+		chimeraTier = 0;
+		grandChimeraTier = 0;
 	}
 	
 	public override function setup():void {
