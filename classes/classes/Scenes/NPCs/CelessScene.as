@@ -381,7 +381,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			[armors.CTPALAD, null, armors.CTBGUAR]
 		];
 		clearOutput();
-		outputText(""+_name+" can empower items using materials gems and her innate magic to bless or corrupt gear by using radiant shards and gems. Would you like her to create an epic item and in that case which?");// legendary
+		outputText(""+_name+" can empower items using materials gems and her innate magic to " + (isCorrupt ? "corrupt" : "bless") + " gear by using radiant shards and gems. Would you like her to create an epic item and in that case which?");// legendary
 		outputText("\n\n<b>You currently have "+player.keyItemvX("Radiant shard", 1)+" radiant shards.</b>")
 		//Celess
 		var selectfrom:int = isCorrupt ? 2 : 1;
