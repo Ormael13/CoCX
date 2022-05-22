@@ -322,9 +322,9 @@ package classes.Scenes
 			outputText("-Swift Casting perk req. for known spells including now 4 new tier 1 spells from grey magic.\n");
 			outputText("-SceneHunter -> 'Other' optional feature: fucking the unicorn now is an alternative way to get Celess. Meant for people who don't feel the overwhelming love for horsecocks and gender-changing, but still want their legendary equipment. (Svalkash)\n");
 			outputText("-'Simplified Pre-Turn' option moved to 'Perks' menu. Now it not only sets all allies' behaviors to automatic, but also skips right to the battle menu (so you don't need to press 'Next' several times each turn). (Svalkash)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Lacta Bovina enemies got new special attack: Milk Blast and most of their attacks got lust dmg claculation bit changed.\n");
+			outputText("-New key Item (by Ormael): Tel'Adre Magazine Issue 5 - Increase 2x Herbalism EXP gains. Costs 100 gems and buyable at Giacomo Books tab.\n");
+			outputText("-New key Item (by Ormael): Tel'Adre Magazine Issue 10 - Increase 2x Mining EXP gains. Costs 100 gems and buyable at Giacomo Books tab.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -346,7 +346,7 @@ package classes.Scenes
 			outputText("current Speed value, Half-Frost Wyrm or Half Spider-morph racial bonus been attained super easy, Mysterious Seed not causing for misc items menu appear as inventory submenu, unable to add arcane circuits to 5th arcane circle, doppleganger fight won't drag unnecessary due to getting messly 1k lust after 5th round in fight, Gazer Eyes mutation not keeping True seeing perk, Magical Eye Drops as item ");
 			outputText("find in Caves instead of Eye Drops, raiju tf removing/humanizing raiju paws, picking no elemental during minions turn skipping many following up phases of the turn, epic/legendary/mythical perks for stats not affecting monsters, harpy wings not setting shark score to 0, Siren been excluded form races list for appearance screen, Minor Minerva and parsertag, Encaps. pod multicockdescript, Elf hair ");
 			outputText("mutation, holiday events appearing in Ingnam/prison, Minotaur-Dormammu bug for all damage sources, equipping at once specific combinations of melee weapon and shield when not meeting req. to do so, Blood Chains too long stun duration, cyclop/gazer scores not included in chimera race check, Wood Elf perks not adding extra shoot & not affecting Skypiercer, Sand Mother finally remembered that she ");
-			outputText("can use spells\n");/*ostatni punkt changelogu
+			outputText("can use spells, some spell teaching items allowing to learn more than 1 spell pewr use, Oswald not selling PC backpack when PC got none\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
