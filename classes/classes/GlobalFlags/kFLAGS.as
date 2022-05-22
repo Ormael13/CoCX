@@ -3004,7 +3004,7 @@ public static const MEANINGLESS_CORRUPTION:int                                  
 public static const ITS_EVERY_DAY:int                                               = 2996; // all special calender events occur every day!
 public static const LOW_STANDARDS_FOR_ALL:int                                       = 2997;
 public static const HYPER_HAPPY:int                                                 = 2998;
-public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999; // ------------------------- Jojo Debug Flag?
+public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999;
 
 	}
 }

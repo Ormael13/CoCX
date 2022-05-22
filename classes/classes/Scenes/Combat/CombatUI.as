@@ -8,6 +8,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
+import classes.CoC_Settings;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
@@ -16,13 +17,11 @@ import classes.Scenes.Areas.Desert.SandTrap;
 import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 import classes.Scenes.Areas.HighMountains.Izumi;
-import classes.Scenes.Combat.PhysicalSpecials;
 import classes.Scenes.Dungeons.D3.DriderIncubus;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.MinotaurKing;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.NPCs.Ceraph;
-import classes.Scenes.NPCs.Luna;
 import classes.Scenes.NPCs.Tyrantia;
 import classes.Scenes.NPCs.Yamata;
 import classes.Scenes.SceneLib;
@@ -258,19 +257,24 @@ public class CombatUI extends BaseCombatContent {
 		else btnRun.show("Run", combat.runAway, "Choosing to run will let you try to escape from your enemy. However, it will be hard to escape enemies that are faster than you and if you fail, your enemy will get a free attack.");
 
 		// Modifications - full or partial replacements
-		if (isPlayerBound()) {
+		//==============================================================================================================
+		//ALLIES - 'smart' ones (wisps & henchmen). Do not depend on PC to do anything. Call them first!
+		if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn) && player.statusEffectv1(StatusEffects.SimplifiedNonPCTurn) == 0)
+			combat.simplifiedPrePCTurn_smart();
+		else if (isWispTurn())
+			doWispTurn();
+		else if (isCompanionTurn(0))
+			doCompanionTurn(0);
+		else if (isCompanionTurn(1))
+			doCompanionTurn(1);
+		else if (isCompanionTurn(2))
+			doCompanionTurn(2);
+		else if (isCompanionTurn(3))
+			doCompanionTurn(3);
+		//PC: is busy with something
+		else if (isPlayerBound()) {
 			mainMenuWhenBound();
 		} else if (isPlayerStunned() || isPlayerPowerStunned() || isPlayerFeared()) {
-			if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn) && player.statusEffectv1(StatusEffects.SimplifiedNonPCTurn) == 0) {
-				combat.simplifiedPrePCTurn();
-			} else if (player.hasPerk(PerkLib.JobLeader) && flags[kFLAGS.WILL_O_THE_WISP] < 2 && flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1) {
-				if (flags[kFLAGS.WILL_O_THE_WISP] == 0) combat.willothewispattacks(true);
-				else {
-					menu();
-					addButton(0, "Skip", combat.willothewispattacks).hint("You forfeit potential attack of wisp. Would skip to next minion attack/your main turn.");
-					addButton(1, "Attack", combat.willothewispattacks, true);
-				}
-			}
 			menu();
 			addButton(0, "Recover", combat.wait);
 			if (CombatAbilities.ClearMind.isKnown) {
@@ -433,7 +437,7 @@ public class CombatUI extends BaseCombatContent {
 			}
 			if (player.rearBody.type == RearBody.DISPLACER_TENTACLES) {
 				if (monster.hasStatusEffect(StatusEffects.DisplacerPlug)) addButton(1, "Feed", combat.displacerFeedContinue).hint("Feast on your foe breast milk.");
-				else addButton(1, "Attatch", combat.displacerCombatFeed).hint("Attach you tentacles to start feast on your foe breast milk. \n\nFatigue Cost: " + physicalCost(50) + "");
+				else addButton(1, "Attach", combat.displacerCombatFeed).hint("Attach you tentacles to start feast on your foe breast milk. \n\nFatigue Cost: " + physicalCost(50) + "");
 			}
 			vampireBiteDuringGrapple(3);
 			addButton(4, "Release", combat.PussyLeggoMyEggo);
@@ -447,156 +451,18 @@ public class CombatUI extends BaseCombatContent {
 				}
 			}
 			addButton(4, "Release", combat.BearLeggoMyEggo);
-		} else if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn) && player.statusEffectv1(StatusEffects.SimplifiedNonPCTurn) == 0) {
-			combat.simplifiedPrePCTurn();
-		} else if (player.hasPerk(PerkLib.JobLeader) && flags[kFLAGS.WILL_O_THE_WISP] < 2 && flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1) {
-			if (flags[kFLAGS.WILL_O_THE_WISP] == 0) combat.willothewispattacks(true);
-			else {
-				var disablethisNote:String = "\n\n<b>The wisp can be toggled to attack automatically (Page 3).</b>";
-				menu();
-				addButton(0, "Skip", combat.willothewispattacks).hint("You forfeit this attack of the wisp. Would skip to next minion attack/your main turn." + disablethisNote);
-				addButton(1, "Attack", combat.willothewispattacks, true).hint("The wisp attacks your enemy." + disablethisNote);
-			}
-		} else if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.permanentgolemsendcost()) {
-			menu();
-			addButton(0, "None", combat.pspecials.notSendAnyGolem).hint("You forfeit potential attack of golem(s). Would skip to next minion attack/your main turn.");
-			addButton(1, "Send P.Gol/1", combat.pspecials.sendPermanentGolem1).hint("Mana cost of sending 1 permanent golem: "+combat.pspecials.permanentgolemsendcost());
-			if (monster.plural) {
-				if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 3) {
-					if (player.mana >= combat.pspecials.permanentgolemsendcost() * 3) addButton(6, "Send P.Gol/3", combat.pspecials.sendPermanentGolem3).hint("Mana cost of sending 3 pernament golems: "+(combat.pspecials.permanentgolemsendcost()*3));
-					else addButtonDisabled(6, "Send P.Gol/3", "Not enough mana.");
-				}
-				if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 5) {
-					if (player.mana >= combat.pspecials.permanentgolemsendcost() * 5) addButton(11, "Send P.Gol/5", combat.pspecials.sendPermanentGolem5).hint("Mana cost of sending 5 pernament golems: "+(combat.pspecials.permanentgolemsendcost()*5));
-					else addButtonDisabled(11, "Send P.Gol/5", "Not enough mana.");
-				}
-			}
-			if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0) {
-				if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost()) addButton(2, "Send I.P.Gol/1", combat.pspecials.sendPermanentImprovedGolem1).hint("Mana cost of sending 1 improved pernament golem: "+combat.pspecials.permanentimprovedgolemsendcost());
-				else addButtonDisabled(2, "Send I.P.Gol/1", "Not enough mana.");
-				if (monster.plural) {
-					if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 3) {
-						if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost() * 3) addButton(7, "Send I.P.Gol/3", combat.pspecials.sendPermanentImprovedGolem3).hint("Mana cost of sending 3 improved pernament golems: "+(combat.pspecials.permanentimprovedgolemsendcost()*3));
-						else addButtonDisabled(7, "Send I.P.Gol/3", "Not enough mana.");
-					}
-					if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 5) {
-						if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost() * 5) addButton(12, "Send I.P.Gol/5", combat.pspecials.sendPermanentImprovedGolem5).hint("Mana cost of sending 5 improved pernament golems: "+(combat.pspecials.permanentimprovedgolemsendcost()*5));
-						else addButtonDisabled(12, "Send I.P.Gol/5", "Not enough mana.");
-					}
-				}
-			}
-			if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0) {
-				if (player.mana >= combat.pspecials.permanentsteelgolemsendcost()) addButton(3, "Send S.Gol/1", combat.pspecials.sendPermanentSteelGolem1).hint("Mana cost of sending 1 pernament steel golem: "+combat.pspecials.permanentsteelgolemsendcost());
-				else addButtonDisabled(2, "Send S.Gol/1", "Not enough mana.");
-			}
-		} else if (player.hasPerk(PerkLib.FirstAttackElementalsSu) && player.statusEffectv2(StatusEffects.SummonedElementals) > 0 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 1) {
-			menu();
-			addButton(0, "None", combat.baseelementalattacks, Combat.NONE_E).hint("You forfeit potential attack of epic elemental. Would skip to next minion attack/your main turn.");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE)) {
-				if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 1) addButtonDisabled(1, "Air(E)", "You can't command this elemental to attack (independently from you) when you're currently fused with it.");
-				else addButton(1, "Air(E)", combat.baseelementalattacks, Combat.AIR_E);
-			}
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) {
-				if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 2) addButtonDisabled(2, "Earth(E)", "You can't command this elemental to attack (independently from you) when you're currently fused with it.");
-				else addButton(2, "Earth(E)", combat.baseelementalattacks, Combat.EARTH_E);
-			}
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) {
-				if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 3) addButtonDisabled(3, "Fire(E)", "You can't command this elemental to attack (independently from you) when you're currently fused with it.");
-				else addButton(3, "Fire(E)", combat.baseelementalattacks, Combat.FIRE_E);
-			}
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) {
-				if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 4) addButtonDisabled(4, "Water(E)", "You can't command this elemental to attack (independently from you) when you're currently fused with it.");
-				else addButton(4, "Water(E)", combat.baseelementalattacks, Combat.WATER_E);
-			}
-		} else if (player.hasPerk(PerkLib.FirstAttackElementals) && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 2) {
-			menu();
-			addButton(0, "None", combat.baseelementalattacks, Combat.NONE).hint("You forfeit potential attack of normal elemental. Would skip to next minion attack/your main turn.");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(1, "Air", combat.baseelementalattacks, Combat.AIR);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) addButton(2, "Earth", combat.baseelementalattacks, Combat.EARTH);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) addButton(3, "Fire", combat.baseelementalattacks, Combat.FIRE);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) addButton(4, "Water", combat.baseelementalattacks, Combat.WATER);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) addButton(5, "Ether", combat.baseelementalattacks, Combat.ETHER);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood)) addButton(6, "Wood", combat.baseelementalattacks, Combat.WOOD);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal)) addButton(7, "Metal", combat.baseelementalattacks, Combat.METAL);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) addButton(8, "Ice", combat.baseelementalattacks, Combat.ICE);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) addButton(9, "Lightning", combat.baseelementalattacks, Combat.LIGHTNING);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) addButton(10, "Darkness", combat.baseelementalattacks, Combat.DARKNESS);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsPoison)) addButton(11, "Poison", combat.baseelementalattacks, Combat.POISON);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(12, "Purity", combat.baseelementalattacks, Combat.PURITY);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(13, "Corruption", combat.baseelementalattacks, Combat.CORRUPTION);
-		} else if (flags[kFLAGS.PLAYER_COMPANION_0] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_0_ACTION] != 1) {
-			clearOutput();
-			if (flags[kFLAGS.PLAYER_COMPANION_0] == "Tyrantia") {
-				combat.comfoll.tyrantiaCombatActions();
-				if (player.hasPerk(PerkLib.MotivationSu)) combat.comfoll.tyrantiaCombatActions();
-			}
-		} else if (flags[kFLAGS.PLAYER_COMPANION_1] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1 && !player.hasStatusEffect(StatusEffects.MinoKing)) {
-			clearOutput();
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") {
-				combat.comfoll.alvinaCombatActions();
-				if (player.hasPerk(PerkLib.MotivationSu)) combat.comfoll.alvinaCombatActions();
-			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") {
-				combat.comfoll.amilyCombatActions();
-				if (player.hasPerk(PerkLib.MotivationSu)) combat.comfoll.amilyCombatActions();
-			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") {
-				combat.comfoll.auroraCombatActions();
-				if (player.hasPerk(PerkLib.MotivationSu)) combat.comfoll.auroraCombatActions();
-			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") {
-				combat.comfoll.etnaCombatActions();
-				if (player.hasPerk(PerkLib.MotivationSu)) combat.comfoll.etnaCombatActions();
-			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia") {
-				combat.comfoll.excelliaCombatActions();
-				if (player.hasPerk(PerkLib.MotivationSu)) combat.comfoll.excelliaCombatActions();
-			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") {
-				combat.comfoll.mitziCombatActions();
-				if (player.hasPerk(PerkLib.MotivationSu)) combat.comfoll.mitziCombatActions();
-			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") {
-				combat.comfoll.neisaCombatActions();
-				if (player.hasPerk(PerkLib.MotivationSu)) combat.comfoll.neisaCombatActions();
-			}
-			//if (flags[kFLAGS.PLAYER_COMPANION_1] == "Siegweird") combat.comfoll.siegweirdCombatActions();
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji") {
-				combat.comfoll.zenjiCombatActions();
-				if (player.hasPerk(PerkLib.MotivationSu)) combat.comfoll.zenjiCombatActions();
-			}
-			menu();
-			addButton(0, "Next", combatMenu, false);
-		} else if (flags[kFLAGS.PLAYER_COMPANION_2] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) {
-			clearOutput();
-			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina") combat.comfoll.alvinaCombatActions();
-			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Amily") combat.comfoll.amilyCombatActions();
-			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Aurora") combat.comfoll.auroraCombatActions();
-			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Etna") combat.comfoll.etnaCombatActions();
-			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Excellia") combat.comfoll.excelliaCombatActions();
-			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Mitzi") combat.comfoll.mitziCombatActions();
-			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa") combat.comfoll.neisaCombatActions();
-			//if (flags[kFLAGS.PLAYER_COMPANION_2] == "Siegweird") combat.comfoll.siegweirdCombatActions();
-			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Zenji") combat.comfoll.zenjiCombatActions();
-			menu();
-			addButton(0, "Next", combatMenu, false);
-		} else if (flags[kFLAGS.PLAYER_COMPANION_3] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) {
-			clearOutput();
-			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Alvina") combat.comfoll.alvinaCombatActions();
-			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Amily") combat.comfoll.amilyCombatActions();
-			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Aurora") combat.comfoll.auroraCombatActions();
-			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Etna") combat.comfoll.etnaCombatActions();
-			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Excellia") combat.comfoll.excelliaCombatActions();
-			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Mitzi") combat.comfoll.mitziCombatActions();
-			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Neisa") combat.comfoll.neisaCombatActions();
-			//if (flags[kFLAGS.PLAYER_COMPANION_3] == "Siegweird") combat.comfoll.siegweirdCombatActions();
-			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Zenji") combat.comfoll.zenjiCombatActions();
-			menu();
-			addButton(0, "Next", combatMenu, false);
 		}
-
-		// Modifications - monster-special actions
-		if (!isPlayerPlayingWithElementalsOrGolems()) {
+		//ALLIES - 'stupid' ones (elem & golems). Requires PC to NOT be stunned or channel anything.
+		else if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn) && player.statusEffectv2(StatusEffects.SimplifiedNonPCTurn) == 0)
+			combat.simplifiedPrePCTurn_stupid();
+		else if (isGolemTurn())
+			doGolemTurn();
+		else if (isEpicElementalTurn())
+			doEpicElementalTurn();
+		else if (isElementalTurn())
+			doElementalTurn();
+		//UNIQUE OPTIONS - No changes applied, player turn, no status/CC
+		else {
 			if (monster is SandTrap) {
 				btnSpecial1.show("Climb", combat.wait2, "Climb the sand to move away from the sand trap.");
 			} else if (monster is Alraune) {
@@ -614,7 +480,7 @@ public class CombatUI extends BaseCombatContent {
 				if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles)) {
 					if (player.lust < combat.magic.getWhiteMagicLustCap() && player.hasStatusEffect(StatusEffects.KnowsWhitefire)
 						&& ((!player.hasPerk(PerkLib.BloodMage) && player.mana >= 30) || (player.hasStatusEffect(StatusEffects.BloodMage) && ((player.HP + 30) > (player.minHP() + 30))))) {
-						btnSpecial1.show("Dispell", lethice.dispellRapetacles);
+						btnSpecial1.show("Dispel", lethice.dispellRapetacles);
 					}
 				}
 			} else if (monster is WoodElvesHuntingParty) {
@@ -625,6 +491,170 @@ public class CombatUI extends BaseCombatContent {
 			if ((player.weaponRange == weaponsrange.GTHRSPE && player.ammo <= 15) || (player.weaponRange == weaponsrange.GTHRAXE && player.ammo <= 10) || (player.weaponRange == weaponsrange.TRJAVEL && player.ammo <= 10)) {
 				btnSpecial3.show("Pick", combat.pickUpThrownWeapons, "Pick up some of the thrown weapons.");
 			}
+		}
+	}
+
+	public function isWispTurn():Boolean {
+		return player.hasPerk(PerkLib.JobLeader) && flags[kFLAGS.WILL_O_THE_WISP] < 2 && flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1;
+	}
+
+	public function doWispTurn():void {
+		if (flags[kFLAGS.WILL_O_THE_WISP] == 0) combat.willothewispattacks();
+		else {
+			clearOutput();
+			outputText("Would you like your wisp to attack?");
+			outputText("\n<b>The wisp can be toggled to attack automatically (Page 3).</b>");
+			outputText("\n<b>You can also enable \"Simplified Pre-PC Turn\" in Perk menu to set all your allies' behaviour to automatic and avoid pressing the 'Next' button every time.</b>\n\n");
+			menu();
+			addButton(0, "Skip", combat.willothewispskip).hint("You forfeit this attack of the wisp. Would skip to next minion attack/your main turn.");
+			addButton(1, "Attack", combat.willothewispattacks).hint("The wisp attacks your enemy.");
+		}
+	}
+
+	public function isGolemTurn():Boolean {
+		return player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.permanentgolemsendcost();
+	}
+
+	public function doGolemTurn():void {
+		clearOutput();
+		outputText("\n\nWould you like your golems to attack?");
+		outputText("\n<b>You can  enable \"Simplified Pre-PC Turn\" in Perk menu to send your golems automatically and avoid pressing the button every time.</b>");
+		menu();
+		addButton(0, "None", combat.pspecials.notSendAnyGolem).hint("You forfeit potential attack of golem(s). Would skip to next minion attack/your main turn.");
+		addButton(1, "Send P.Gol/1", combat.pspecials.sendPermanentGolem, 1).hint("Send 1 golem.\n<b>Mana cost of sending 1 permanent golem: "+combat.pspecials.permanentgolemsendcost() + "</b>");
+		if (monster.plural) {
+			if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 3) {
+				if (player.mana >= combat.pspecials.permanentgolemsendcost() * 3) addButton(6, "Send P.Gol/3", combat.pspecials.sendPermanentGolem, 3).hint("Send 3 golems (deals 5x damage).\n<b>Mana cost of sending 3 pernament golems: "+(combat.pspecials.permanentgolemsendcost()*3) + "</b>");
+				else addButtonDisabled(6, "Send P.Gol/3", "Not enough mana.");
+			}
+			if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 5) {
+				if (player.mana >= combat.pspecials.permanentgolemsendcost() * 5) addButton(11, "Send P.Gol/5", combat.pspecials.sendPermanentGolem, 5).hint("Send 3 golems (deals 5x damage).\n<b>Mana cost of sending 5 pernament golems: "+(combat.pspecials.permanentgolemsendcost()*5));
+				else addButtonDisabled(11, "Send P.Gol/5", "Not enough mana.");
+			}
+		}
+		if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0) {
+			if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost()) addButton(2, "Send I.P.Gol/1", combat.pspecials.sendPermanentImprovedGolem, 1).hint("Send 1 improved golem (deals 5x damage).\n<b>Mana cost of sending 1 improved pernament golem: "+combat.pspecials.permanentimprovedgolemsendcost() + "</b>");
+			else addButtonDisabled(2, "Send I.P.Gol/1", "Not enough mana.");
+			if (monster.plural) {
+				if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 3) {
+					if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost() * 3) addButton(7, "Send I.P.Gol/3", combat.pspecials.sendPermanentImprovedGolem, 3).hint("Send 3 improved golems (deals 5x damage).\n<b>Mana cost of sending 3 improved pernament golems: "+(combat.pspecials.permanentimprovedgolemsendcost()*3) + "</b>");
+					else addButtonDisabled(7, "Send I.P.Gol/3", "Not enough mana.");
+				}
+				if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 5) {
+					if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost() * 5) addButton(12, "Send I.P.Gol/5", combat.pspecials.sendPermanentImprovedGolem, 5).hint("Send 3 improved golems (deals 5x damage).\n<b>Mana cost of sending 5 improved pernament golems: "+(combat.pspecials.permanentimprovedgolemsendcost()*5) + "</b>");
+					else addButtonDisabled(12, "Send I.P.Gol/5", "Not enough mana.");
+				}
+			}
+		}
+		if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0) {
+			if (player.mana >= combat.pspecials.permanentsteelgolemsendcost()) addButton(3, "Send S.Gol/1", combat.pspecials.sendPermanentSteelGolem1).hint("Mana cost of sending 1 pernament steel golem: "+combat.pspecials.permanentsteelgolemsendcost());
+			else addButtonDisabled(2, "Send S.Gol/1", "Not enough mana.");
+		}
+	}
+
+	public function isEpicElementalTurn():Boolean {
+		return player.hasPerk(PerkLib.FirstAttackElementalsSu) && player.statusEffectv2(StatusEffects.SummonedElementals) > 0 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 1;
+	}
+
+	public function doEpicElementalTurn():void {
+		clearOutput();
+		outputText("\n\nWould you like your <b>epic</b> elementals to attack?");
+		outputText("\n<b>You can  enable \"Simplified Pre-PC Turn\" in Perk menu to change their behavior to automatic and avoid pressing the button every time.</b>");
+		menu();
+		addButton(0, "None", combat.baseelementalattacks, Combat.NONE_E).hint("You forfeit potential attack of epic elemental. Would skip to next minion attack/your main turn.");
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE)) {
+			if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 1) addButtonDisabled(1, "Air(E)", "You can't command this elemental to attack (independently of you) when you're currently fused with it.");
+			else addButton(1, "Air(E)", combat.baseelementalattacks, Combat.AIR_E);
+		}
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) {
+			if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 2) addButtonDisabled(2, "Earth(E)", "You can't command this elemental to attack (independently of you) when you're currently fused with it.");
+			else addButton(2, "Earth(E)", combat.baseelementalattacks, Combat.EARTH_E);
+		}
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) {
+			if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 3) addButtonDisabled(3, "Fire(E)", "You can't command this elemental to attack (independently of you) when you're currently fused with it.");
+			else addButton(3, "Fire(E)", combat.baseelementalattacks, Combat.FIRE_E);
+		}
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) {
+			if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 4) addButtonDisabled(4, "Water(E)", "You can't command this elemental to attack (independently of you) when you're currently fused with it.");
+			else addButton(4, "Water(E)", combat.baseelementalattacks, Combat.WATER_E);
+		}
+	}
+
+	public function isElementalTurn():Boolean {
+		return player.hasPerk(PerkLib.FirstAttackElementals) && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 2;
+	}
+
+	public function doElementalTurn():void {
+		clearOutput();
+		outputText("\n\nWould you like your elementals to attack?");
+		outputText("\n<b>You can  enable \"Simplified Pre-PC Turn\" in Perk menu to change their behavior to automatic and avoid pressing the button every time.</b>");
+		menu();
+		addButton(0, "None", combat.baseelementalattacks, Combat.NONE).hint("You forfeit potential attack of normal elemental. Would skip to next minion attack/your main turn.");
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(1, "Air", combat.baseelementalattacks, Combat.AIR);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) addButton(2, "Earth", combat.baseelementalattacks, Combat.EARTH);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) addButton(3, "Fire", combat.baseelementalattacks, Combat.FIRE);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) addButton(4, "Water", combat.baseelementalattacks, Combat.WATER);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) addButton(5, "Ether", combat.baseelementalattacks, Combat.ETHER);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood)) addButton(6, "Wood", combat.baseelementalattacks, Combat.WOOD);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal)) addButton(7, "Metal", combat.baseelementalattacks, Combat.METAL);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) addButton(8, "Ice", combat.baseelementalattacks, Combat.ICE);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) addButton(9, "Lightning", combat.baseelementalattacks, Combat.LIGHTNING);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) addButton(10, "Darkness", combat.baseelementalattacks, Combat.DARKNESS);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPoison)) addButton(11, "Poison", combat.baseelementalattacks, Combat.POISON);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(12, "Purity", combat.baseelementalattacks, Combat.PURITY);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(13, "Corruption", combat.baseelementalattacks, Combat.CORRUPTION);
+	}
+
+	public function isCompanionTurn(num:int):Boolean {
+		var present:Boolean;
+		var acted:Boolean;
+		switch(num) {
+			case 0:
+				present = flags[kFLAGS.PLAYER_COMPANION_0] != "";
+				acted = flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_0_ACTION];
+				break;
+			case 1:
+				present = flags[kFLAGS.PLAYER_COMPANION_1] != "";
+				acted = flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION];
+				break;
+			case 2:
+				present = flags[kFLAGS.PLAYER_COMPANION_2] != "";
+				acted = flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION];
+				break;
+			case 3:
+				present = flags[kFLAGS.PLAYER_COMPANION_3] != "";
+				acted = flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION];
+				break;
+		}
+		return present && !acted && !player.hasStatusEffect(StatusEffects.MinoKing);
+	}
+
+	public function doCompanionTurn(num:int, clearAndNext:Boolean = true):void {
+		var companionName:String = num == 0 ? flags[kFLAGS.PLAYER_COMPANION_0]
+			: num == 1 ? flags[kFLAGS.PLAYER_COMPANION_1]
+				: num == 2 ? flags[kFLAGS.PLAYER_COMPANION_2]
+					: flags[kFLAGS.PLAYER_COMPANION_3];
+		var actFunction:Function = companionName == "Alvina" ? combat.comfoll.alvinaCombatActions
+			: companionName == "Amily" ? combat.comfoll.amilyCombatActions
+				: companionName == "Aurora" ? combat.comfoll.auroraCombatActions
+					: companionName == "Etna" ? combat.comfoll.etnaCombatActions
+						: companionName == "Excellia" ? combat.comfoll.excelliaCombatActions
+							: companionName == "Mitzi" ? combat.comfoll.mitziCombatActions
+								: companionName == "Neisa" ? combat.comfoll.neisaCombatActions
+									: companionName == "Tyrantia" ? combat.comfoll.tyrantiaCombatActions
+										: companionName == "Zenji" ? combat.comfoll.zenjiCombatActions : null;
+		//do action
+		if (clearAndNext) {
+			clearOutput();
+			outputText("Your follower attacks...");
+			outputText("\n<b>You can  enable \"Simplified Pre-PC Turn\" in Perk menu to avoid pressing the 'Next' button every time.</b>\n\n");
+		}
+		if (actFunction == null) CoC_Settings.error("Illegal companion " + num + ": " + companionName);
+		actFunction();
+		if (player.hasPerk(PerkLib.MotivationSu)) actFunction();
+		if (clearAndNext) {
+			menu();
+			addButton(0, "Next", combatMenu, false);
 		}
 	}
 
@@ -706,14 +736,6 @@ public class CombatUI extends BaseCombatContent {
 			}
 		}
 	}
-
-	private function isPlayerPlayingWithElementalsOrGolems():Boolean {
-		var dancingwithminions:Boolean = false;
-		if (player.hasPerk(PerkLib.FirstAttackElementalsSu) && player.statusEffectv2(StatusEffects.SummonedElementals) > 0 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 1) dancingwithminions = true;
-		if (player.hasPerk(PerkLib.FirstAttackElementals) && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 2) dancingwithminions = true;
-		if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.permanentgolemsendcost()) dancingwithminions = true;
-	return dancingwithminions;
-}
 
 	internal function mainMenuWhenBound():void {
 		menu();
