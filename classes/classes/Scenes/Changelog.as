@@ -241,7 +241,7 @@ package classes.Scenes
 			outputText("-Wolf and Winter wolf min. scores was rised to 8 and 10 with matching inc to stat bonuses (+50% to Str racial multi, +30% to Tou racial multi, +50% to Spe racial multi, -10% to Int racial multi / +65% to Str racial multi, +40% to Tou racial multi, +55% to Spe racial multi, -10% to Int racial multi)\n");
 			outputText("-Lizard morphs will recieve +100 fatigue as race bonus (up from +30).\n");
 			outputText("-Disabled purified Marble corruption flipouts. If she hass already left, she will return. (Svalkash)\n");
-			outputText("-EbonLabyrinth rework (Svalkash):\n");
+			outputText("-Ebon Labyrinth rework (Svalkash):\n");
 			outputText("1. Added enemy progression after LVL300. Bosses are random.\n");
 			outputText("2. After clearing the dungeon once, you can manually increase/decrease enemy level to adjust your difficulty. But the further you go, the higher the minimum level will be!\n");
 			outputText("3. Adjusted treasure rewards to scale with enemy levels.\n");
@@ -320,8 +320,8 @@ package classes.Scenes
 			outputText("-New melee weapon (by Canadian Snas): Taintless Knives - buyable at Belisa shop. Cost 800 gems. Base atk is 5. It's Dual Small weapon belonging to dagger type. Similary to Beautiful weapoons the higher corruption the lower atk and when cor reach 33+ it will be not usable.\n");
 			outputText("-Prestige Job: Spell-Knight req. of mentorship of one of greatest magews in Mareth been replaced with having jobs: warrior & sorcerer and having one of melee weapons mastery (excluding gauntlets) reach lvl 50.\n");
 			outputText("-Swift Casting perk req. for known spells including now 4 new tier 1 spells from grey magic.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-SceneHunter -> 'Other' optional feature: fucking the unicorn now is an alternative way to get Celess. Meant for people who don't feel the overwhelming love for horsecocks and gender-changing, but still want their legendary equipment. (Svalkash)\n");
+			outputText("-'Simplified Pre-Turn' option moved to 'Perks' menu. Now it not only sets all allies' behaviors to automatic, but also skips right to the battle menu (so you don't need to press 'Next' several times each turn). (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
