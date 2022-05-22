@@ -56,9 +56,9 @@ public class EbonLabyrinth extends DungeonAbstractContent {
     //Current direction. Used only for the text
     public var direction:int  = DIR_NORTH;
 
-    //Only one?
-    //Cute scene?
-    //Reuse flag?
+    //Fountain tracker. When fountain is found, but legendaries are not used, you can take them and use it again.
+    public var fountainRoom:Boolean = false;
+    public var fountainCorrupt:Boolean = false;
 
     //Scene instances
     public var chaosChimeraScene:ChaosChimeraScene = new ChaosChimeraScene();
@@ -122,6 +122,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         room = 1;
         depth = 0;
         bossTracker = 0;
+        fountainRoom = false;
         playerMenu(); //calls checkRoom -> roomStatic
     }
 
@@ -149,10 +150,9 @@ public class EbonLabyrinth extends DungeonAbstractContent {
                 addButtonDisabled(1, "Up", "Too late! Exit the dungeon, or descend deeper!");
             addButton(13, "Down", navigateToRoomEL, DIR_DOWN).hint("Descend even deeper. The monsters will be tougher, but you'll always be able to climb back.");
         }
-        if (model.time.hours >= 21 || model.time.hours < 6) addButton(0, "Sleep", doSleepEL).hint("Turn yourself in for the night. May result in monster ambush!");
-        else addButtonDisabled(0, "Sleep", "It's still too early to go to sleep.");
-        if (player.lust >= 30) addButton(5, "Masturbate", SceneLib.masturbation.masturbateGo);
-        else addButtonDisabled(5, "Masturbate", "Req. 30+ lust.");
+        addButtonIfTrue(0, "Sleep", doSleepEL, "It's still too early to go to sleep.",
+            model.time.hours >= 21 || model.time.hours < 6,  "Turn yourself in for the night. May result in monster ambush!");
+        addButtonIfTrue(5, "Masturbate", SceneLib.masturbation.masturbateGo, "Req. 30+ lust.", player.lust >= 30);
         addButton(9, "Inventory", inventory.inventoryMenu);
         addButton(14, "Exit", confirmExit);
         dungeons.setTopButtons();
@@ -172,8 +172,10 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         highScore();
         //text
         outputText("<b><u>Corridor</u></b>\n");
-        if (!move) //called from player menu
-            outputText("The corridor seems to be void of monsters so far.");
+        if (!move) {//called from player menu
+            outputText("The room seems to be void of monsters so far.");
+            if (fountainRoom) outputText("\nThe fountain stands in the center of the room, shining with its " + (fountainCorrupt ? "unholy" : "holy") + " water.");
+        }
         else { //called from 'navigate'
             if (newDir == DIR_UP)
                 outputText("You climb back to the upper floor. The corridor seems to be void of monsters so far.");
@@ -194,10 +196,15 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         outputText("\n\nRooms explored: " + room);
         outputText("\n\nCurrent depth : " + depth);
         setDungeonButtonsEL();
+        //unique buttons
+        if (fountainRoom) addButton(10, "Fountain", encountersUpgradeFountain, true);
     }
 	
     //Navigation function. Increments the counter and checks the encounters.
     public function navigateToRoomEL(newDir:int):void {
+        //clear room-specific
+        fountainRoom = false;
+        //move
         ++room;
         eachMinuteCount(15);
         //modify enemy level
@@ -363,7 +370,9 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         //Rooms AFTER boss, difficulty > 300 (max level).
         else if (enemyLevelMod >= 6 && room > 50 && room % 50 == 1) {
             incEncChance();
-            encountersUpgradeFountain(rand(2) == 0);
+            fountainRoom = true;
+            fountainCorrupt = rand(2) == 0;
+            encountersUpgradeFountain();
             return true;
         }
         //If passed - enemy
@@ -377,16 +386,17 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         return false;
     }
 
-    private function encountersUpgradeFountain(isCorrupt:Boolean):void {
+    private function encountersUpgradeFountain(repeat:Boolean = false):void {
         clearOutput();
-        outputText("While exploring the labyrinth you run into a strange fountain, which radiates " + (isCorrupt ? "black" : "white") + " magic like you have never seen before, the water flowing with gittering " + (isCorrupt ? "purple corruption" : "starlight") + ". Dipping an object and some additional materials into the font could have... unforeseen consequences.\n\n");
-        outputText("You can use the fountain's magic to bless or corrupt gear by using radiant shards and gems.");
+        if (!repeat)
+            outputText("While exploring the labyrinth you run into a strange fountain, which radiates " + (fountainCorrupt ? "black" : "white") + " magic like you have never seen before, the water flowing with gittering " + (fountainCorrupt ? "purple corruption" : "starlight") + ". Dipping an object and some additional materials into the font could have... unforeseen consequences.\n\n");
+        outputText("You can use the fountain's magic to bless or corrupt specific gear, making a legendary item using radiant shards and gems.");
         menu();
-        addButton(0, "Dip Item", dipItemMenu, isCorrupt);
-        addButton(4, "Leave", playerMenu);
+        addButton(0, "Dip Item", dipItemMenu);
+        addButton(4, "Back", playerMenu);
 
         //=================================
-        function dipItemMenu(isCorrupt:Boolean):void {
+        function dipItemMenu():void {
             var improvableItems:Array = [
                 [weapons.BFSWORD, weapons.NPHBLDE, weapons.EBNYBLD],
                 [weapons.DBFSWO, weapons.T_HEART, weapons.DORSOUL],
@@ -415,10 +425,10 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             clearOutput();
             //TODO: gargoyle shit not added... yet? not my problem anyway, got scenes to hunt.
             //https://docs.google.com/document/d/1SFSVm9A6431McXUq1B3R_47xme1owodcZSEDdma3r6U/
-            outputText("What item would you like to dip in the " + (isCorrupt ? "unholy" : "holy") + " waters?");
+            outputText("What item would you like to dip in the " + (fountainCorrupt ? "unholy" : "holy") + " waters?");
             outputText("\n\n<b>You currently have " + player.keyItemvX("Radiant shard", 1) + " radiant shards.</b>")
             //Celess
-            var selectfrom:int = isCorrupt ? 2 : 1;
+            var selectfrom:int = fountainCorrupt ? 2 : 1;
             var selectMenu:ButtonDataList = new ButtonDataList();
             for (var i:int = 0; i < improvableItems.length; i++) {
                 if (improvableItems[i][selectfrom] == null) {/*do nothing*/
@@ -435,7 +445,8 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         }
 
         function improveItem(item:ItemType, from:ItemType):void {
-            if (isCorrupt)
+            fountainRoom = false;
+            if (fountainCorrupt)
                 outputText("As you dip " + from.shortName + " in purple waters, corruption begins to cling to it like tar staining the material and transforming it into an unholy abomination. A few seconds later you finally retrieve the " + item.shortName + " from the fountain of corruption, highly satisfied with the results as it radiates with blasphemous power to defile anything it touches.");
             else
                 outputText("As you dip " + from.shortName + " in the fountain, it begins to radiate with light the material transforming into a tool of divine power. A few seconds later you finally retrieve the " + item.shortName + " from the water, highly satisfied with the results as it radiates with power to scour the evil that plagues this land. ");
