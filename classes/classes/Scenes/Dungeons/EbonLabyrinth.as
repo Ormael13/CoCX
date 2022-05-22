@@ -390,7 +390,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         clearOutput();
         if (!repeat)
             outputText("While exploring the labyrinth you run into a strange fountain, which radiates " + (fountainCorrupt ? "black" : "white") + " magic like you have never seen before, the water flowing with gittering " + (fountainCorrupt ? "purple corruption" : "starlight") + ". Dipping an object and some additional materials into the font could have... unforeseen consequences.\n\n");
-        outputText("You can use the fountain's magic to bless or corrupt specific gear, making a legendary item using radiant shards and gems.");
+        outputText("You can use the fountain's magic to " + (fountainCorrupt ? "corrupt" : "bless") + " specific gear, making a legendary item using radiant shards and gems.");
         menu();
         addButton(0, "Dip Item", dipItemMenu);
         addButton(4, "Back", playerMenu);
