@@ -254,8 +254,8 @@ public class PerkMenu extends BaseContent {
 				case DARKNESS: outputText("Darkness Shard");break;
 				case WATER: outputText("Water Ball");break;
 				case WIND: outputText("Wind Bullet");break;
-				case EARTH: outputText("Darkness Shard");break;
-				case ACID: outputText("Darkness Shard");break;
+				case EARTH: outputText("Stalagmite");break;
+				case ACID: outputText("Acid Spray");break;
 			}
 			outputText("</b>");
 		}

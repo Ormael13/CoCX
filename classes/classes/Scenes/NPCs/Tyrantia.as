@@ -286,12 +286,22 @@ public class Tyrantia extends Monster
 			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 3) {
 				this.createPerk(PerkLib.EpicToughness,0,0,0,0);
 				this.createPerk(PerkLib.GrandTactician,0,0,0,0);
-				this.createPerk(PerkLib.Juggernaut,0,0,0,0);
+				this.createPerk(PerkLib.ImmovableObject,0,0,0,0);
 			}
 			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 4) {
+				this.createPerk(PerkLib.Juggernaut,0,0,0,0);
+				this.createPerk(PerkLib.JobWarrior,0,0,0,0);
+				//this.createPerk(PerkLib.,0,0,0,0);
+			}
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 5) {
 				this.createPerk(PerkLib.LegendaryStrength,0,0,0,0);
 				this.createPerk(PerkLib.LegendarySpeed,0,0,0,0);
 				this.createPerk(PerkLib.NaturaljousterMastergrade,0,0,0,0);
+			}
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 6) {
+				this.createPerk(PerkLib.LegendaryToughness,0,0,0,0);
+				//this.createPerk(PerkLib.,0,0,0,0);
+				//this.createPerk(PerkLib.,0,0,0,0);
 			}
 			checkMonster();
 		}
