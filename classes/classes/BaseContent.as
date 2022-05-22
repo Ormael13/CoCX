@@ -688,14 +688,6 @@ import coc.xxc.StoryContext;
 			SceneLib.combat.useManaImpl(mod,type);
 		}
 
-
-/*
-		protected function get eventParser():Function
-		{
-			return CoC.instance.eventParser;
-		}
-*/
-
 		protected function playerMenu():void { EventParser.playerMenu(); }
 		protected static function get player():Player
 		{
