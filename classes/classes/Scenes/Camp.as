@@ -2623,6 +2623,7 @@ public class Camp extends NPCAwareContent{
 		var HE:Number = (20 + player.level)*player.itemCount(ItemID);
 		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
+		if (player.hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) HE *= 2;
 		player.herbXP(HE);
 		doNext(HerbalismMenu);
 	}
