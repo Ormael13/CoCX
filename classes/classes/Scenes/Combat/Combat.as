@@ -935,7 +935,10 @@ public class Combat extends BaseContent {
             flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 0;
             flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 0;
 			if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] = 0;
-			if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn) && player.statusEffectv1(StatusEffects.SimplifiedNonPCTurn) == 1) player.addStatusValue(StatusEffects.SimplifiedNonPCTurn, 1, -1);
+			if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+                player.changeStatusValue(StatusEffects.SimplifiedNonPCTurn, 1, 0);
+                player.changeStatusValue(StatusEffects.SimplifiedNonPCTurn, 2, 0);
+            }
 			if (player.armor == armors.BMARMOR) dynStats("lus", -(Math.round(player.maxLust() * 0.02)));
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) dynStats("lus", (Math.round(player.maxLust() * 0.05)));
         }
@@ -1317,23 +1320,23 @@ public class Combat extends BaseContent {
 				}
             }
 			else {
-				addButton(2, "Send P.Gol/1", combat.pspecials.sendPermanentGolem1)
+				addButton(2, "Send P.Gol/1", combat.pspecials.sendPermanentGolem)
 					.hint("Send one stone golem from your bag to attack the enemy.");
 				if (monster.plural) {
-					if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 3) addButton(7, "Send P.Gol/3", combat.pspecials.sendPermanentGolem3)
+					if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 3) addButton(7, "Send P.Gol/3", combat.pspecials.sendPermanentGolem, 3)
 						.hint("Send three stone golems from your bag to attack the enemy.");
-					if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 5) addButton(12, "Send P.Gol/5", combat.pspecials.sendPermanentGolem5)
+					if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 5) addButton(12, "Send P.Gol/5", combat.pspecials.sendPermanentGolem, 5)
 						.hint("Send five stone golems from your bag to attack the enemy.");
 				}
 			}
         }
         if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0) {
-            addButton(3, "Send I.P.Gol/1", combat.pspecials.sendPermanentImprovedGolem1)
+            addButton(3, "Send I.P.Gol/1", combat.pspecials.sendPermanentImprovedGolem, 1)
 				.hint("Send one improved stone golem from your bag to attack the enemy.");
 			if (monster.plural) {
-				if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 3) addButton(8, "Send I.P.Gol/3", combat.pspecials.sendPermanentImprovedGolem3)
+				if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 3) addButton(8, "Send I.P.Gol/3", combat.pspecials.sendPermanentImprovedGolem, 3)
 					.hint("Send three improved stone golems from your bag to attack the enemy.");
-				if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 5) addButton(13, "Send I.P.Gol/5", combat.pspecials.sendPermanentImprovedGolem5)
+				if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 5) addButton(13, "Send I.P.Gol/5", combat.pspecials.sendPermanentImprovedGolem, 5)
 					.hint("Send five improved stone golems from your bag to attack the enemy.");
 			}
         }
@@ -1880,92 +1883,108 @@ public class Combat extends BaseContent {
         attack();
     }
 
-	public function simplifiedPrePCTurn():void {
-        outputText("\n\n");
-		player.addStatusValue(StatusEffects.SimplifiedNonPCTurn,1,1);
-		if (flags[kFLAGS.WILL_O_THE_WISP] < 2 && flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1) {
-			willothewispattacks0();
-			if (flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1 && flags[kFLAGS.WILL_O_THE_WISP] < 2) flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] = 1;
-		}
-		if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.permanentgolemsendcost()) combat.pspecials.sendPermanentGolem1();
-		if (player.hasPerk(PerkLib.FirstAttackElementalsSu) && player.statusEffectv2(StatusEffects.SummonedElementals) > 0 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 1) {
-			if (player.hasPerk(PerkLib.ElementalBody)) {
-				if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE) && player.perkv1(PerkLib.ElementalBody) != 1) baseelementalattacks(Combat.AIR_E);
-				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE) && player.perkv1(PerkLib.ElementalBody) != 2) baseelementalattacks(Combat.EARTH_E);
-				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE) && player.perkv1(PerkLib.ElementalBody) != 3) baseelementalattacks(Combat.FIRE_E);
-				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE) && player.perkv1(PerkLib.ElementalBody) != 4) baseelementalattacks(Combat.WATER_E);
-				else baseelementalattacks(Combat.NONE_E);
-			}
-			else {
-				if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE)) baseelementalattacks(Combat.AIR_E);
-				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) baseelementalattacks(Combat.EARTH_E);
-				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) baseelementalattacks(Combat.FIRE_E);
-				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) baseelementalattacks(Combat.WATER_E);
-				else baseelementalattacks(Combat.NONE_E);
-			}
-		}
-		if (player.hasPerk(PerkLib.FirstAttackElementals) && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 2) {
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) baseelementalattacks(Combat.AIR);
-			else if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) baseelementalattacks(Combat.EARTH);
-			else if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) baseelementalattacks(Combat.FIRE);
-			else if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) baseelementalattacks(Combat.WATER);
-			else baseelementalattacks(Combat.NONE);
-		}
-		if (flags[kFLAGS.PLAYER_COMPANION_1] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1 && !player.hasStatusEffect(StatusEffects.MinoKing)) {
-			outputText("\n\n");
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") {
-				comfoll.alvinaCombatActions();
-				if (player.hasPerk(PerkLib.MotivationSu)) comfoll.alvinaCombatActions();
-			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily") {
-				comfoll.amilyCombatActions();
-				if (player.hasPerk(PerkLib.MotivationSu)) comfoll.amilyCombatActions();
-			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") {
-				comfoll.auroraCombatActions();
-				if (player.hasPerk(PerkLib.MotivationSu)) comfoll.auroraCombatActions();
-			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") {
-				comfoll.etnaCombatActions();
-				if (player.hasPerk(PerkLib.MotivationSu)) comfoll.etnaCombatActions();
-			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia") {
-				comfoll.excelliaCombatActions();
-				if (player.hasPerk(PerkLib.MotivationSu)) comfoll.excelliaCombatActions();
-			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") {
-				comfoll.mitziCombatActions();
-				if (player.hasPerk(PerkLib.MotivationSu)) comfoll.mitziCombatActions();
-			}
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") {
-				comfoll.neisaCombatActions();
-				if (player.hasPerk(PerkLib.MotivationSu)) comfoll.neisaCombatActions();
-			}
-			//if (flags[kFLAGS.PLAYER_COMPANION_1] == "Siegweird") comfoll.siegweirdCombatActions();
-			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji") {
-				comfoll.zenjiCombatActions();
-				if (player.hasPerk(PerkLib.MotivationSu)) comfoll.zenjiCombatActions();
-			}
-		}
+    //Calls actions for wisp and henchmen, no 'Next' buttons or choices.
+    //Can be used independently of PC
+    public function simplifiedPrePCTurn_smart():void {
+        if (ui.isWispTurn())
+            willothewispattacks();
+        for (var ci:int = 0; ci <= 3; ++ci)
+            if (ui.isCompanionTurn(ci))
+                ui.doCompanionTurn(ci, false);
         flushOutputTextToGUI();
-	}
-
-    public function willothewispattacks(noSkip:Boolean = false):void {
-        outputText("\n\n");
-		if (noSkip) willothewispattacks0();
-        if (flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1 && flags[kFLAGS.WILL_O_THE_WISP] < 2) {
-            flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] = 1;
-            menu();
-            addButton(0, "Next", combatMenu, false);
-        } else enemyAI();
     }
-	private function willothewispattacks0():void {
+
+    //Calls actions for golems and elementals, no 'Next' buttons or choices.
+    //Requires PC to not be stunned or channel anything
+    public function simplifiedPrePCTurn_stupid():void {
+        if (ui.isGolemTurn()) {
+            //array of possible golems. Sorted ascending by power.
+            // [Function, mana cost, requirements]
+            var golemArray:Array = [
+                [curry(pspecials.sendPermanentGolem, 1)         , pspecials.permanentgolemsendcost()            , true],
+                [pspecials.sendPermanentSteelGolem1                  , pspecials.permanentsteelgolemsendcost()       , flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0],
+                [curry(pspecials.sendPermanentGolem, 3)         , pspecials.permanentgolemsendcost() * 3        , monster.plural && flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 3],
+                [curry(pspecials.sendPermanentGolem, 5)         , pspecials.permanentgolemsendcost() * 5        , monster.plural && flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 5],
+                [curry(pspecials.sendPermanentImprovedGolem, 1) , pspecials.permanentimprovedgolemsendcost()    , flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0],
+                [curry(pspecials.sendPermanentImprovedGolem, 3) , pspecials.permanentimprovedgolemsendcost() * 3, monster.plural && flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 3],
+                [curry(pspecials.sendPermanentImprovedGolem, 5) , pspecials.permanentimprovedgolemsendcost() * 5, monster.plural && flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 5]
+                //new powerful golems go here.
+            ];
+            var bestGolem:Array = null;
+            for each (var golem:Array in golemArray)
+                if (golem[2] && player.mana >= golem[1])
+                    bestGolem = golem;
+            outputText("\n\n");
+            if (bestGolem == null) {
+                outputText("You don't have enough mana to send any golems.");
+                pspecials.notSendAnyGolem();
+            }
+            else bestGolem[0]();
+        }
+        if (ui.isEpicElementalTurn()) {
+            //array of epic elementals
+            // [Req. status, body type (Elemental), function type]
+            // Oversimplified?
+            var epicArray:Array = [
+                [StatusEffects.SummonedElementalsAirE   , 1, AIR_E],
+                [StatusEffects.SummonedElementalsEarthE , 2, EARTH_E],
+                [StatusEffects.SummonedElementalsFireE  , 3, FIRE_E],
+                [StatusEffects.SummonedElementalsWaterE , 4, WATER_E]
+            ]
+            //Find the best rank & elect possible sources
+            var epicRank:int = -1;
+            var epicChoices:Array = [];
+            for each (var epic:Array in epicArray)
+                if (player.hasStatusEffect(epic[0]) && (!player.hasPerk(PerkLib.ElementalBody) || player.perkv1(PerkLib.ElementalBody) != epic[1])) //can use
+                    //compare ranks
+                    if (player.statusEffectv2(epic[0]) > epicRank) {
+                        epicChoices = [epic[2]];
+                        epicRank = player.statusEffectv2(epic[0]);
+                    }
+                    else if (player.statusEffectv2(epic[0]) == epicRank)
+                        epicChoices.push(epic[2]);
+            outputText("\n\n");
+            if (epicChoices.length == 0) baseelementalattacks(NONE_E);
+            else baseelementalattacks(epicChoices[rand(epicChoices.length)]);
+        }
+        if (ui.isElementalTurn()) {
+            //array of elementals
+            // [Req. status, function type]
+            // Oversimplified?
+            var elemArray:Array = [
+                [StatusEffects.SummonedElementalsAir    , AIR],
+                [StatusEffects.SummonedElementalsEarth  , EARTH],
+                [StatusEffects.SummonedElementalsFire   , FIRE],
+                [StatusEffects.SummonedElementalsWater  , WATER]
+            ]
+            //Find the best rank & elect possible sources
+            var elemRank:int = -1;
+            var elemChoices:Array = [];
+            for each (var elem:Array in elemArray)
+                if (player.hasStatusEffect(elem[0]) && (!player.hasPerk(PerkLib.ElementalBody) || player.perkv1(PerkLib.ElementalBody) != elem[1])) //can use
+                    //compare ranks
+                    if (player.statusEffectv2(elem[0]) > elemRank) {
+                        elemChoices = [elem[2]];
+                        elemRank = player.statusEffectv2(elem[0]);
+                    }
+                    else if (player.statusEffectv2(elem[0]) == elemRank)
+                        elemChoices.push(elem[2]);
+            outputText("\n\n");
+            if (elemChoices.length == 0) baseelementalattacks(NONE);
+            else baseelementalattacks(elemChoices[rand(elemChoices.length)]);
+        }
+        flushOutputTextToGUI();
+    }
+
+    public function willothewispskip():void {
+        flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] = 1;
+        if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn))
+            combatMenu(false);
+    }
+
+    public function willothewispattacks():void {
 		var willothewispDamage:Number = 10;
         willothewispDamage += intwisscaling() * 0.4;
-        /*bonus do dmgh wisp-a jeśli sa inne pety/miniony ^^ im wiecej podwładnych ma tym mocniej sam bedzie bił (jak efekt perku później w drzewie Job: Leader ^^)
-	if (summonedElementals >= 1) elementalDamage += baseDamage;
-	if (summonedElementals >= 5) elementalDamage += baseDamage;
-	if (summonedElementals >= 9) elementalDamage += baseDamage;*/
         if (player.hasPerk(PerkLib.HistoryTactician) || player.hasPerk(PerkLib.PastLifeTactician)) willothewispDamage *= historyTacticianBonus();
         var willothewispamplification:Number = 1;
         if (player.weapon == weapons.SCECOMM) willothewispamplification += 0.5;
@@ -1975,18 +1994,20 @@ public class Combat extends BaseContent {
         var critChance:int = 5;
         var critChanceMulti:int = 1.75;
         critChance += combatMagicalCritical();
-        //dodać tu nieco szans na wyższą % szans crita - jak zwykle to z perków efekty
         if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-        //dodać tu nieco wyższy przelicznik do crit dmg - może nawet jak crit chance jest powyżej 100% to nadmiar bedzie dodawany do obrażeń krytycznych ^^ - jak zwykle to z perków efekty
         if (rand(100) < critChance) {
             crit = true;
             willothewispDamage *= critChanceMulti;
         }
         willothewispDamage = Math.round(willothewispDamage);
-        outputText("Your will-o'-the-wisp hit [monster a] [monster name]! ");
+        outputText("\n\nYour will-o'-the-wisp hit [monster a] [monster name]! ");
         doMagicDamage(willothewispDamage, true, true);
         if (crit) outputText(" <b>Critical! </b>");
-        //checkMinionsAchievementDamage(elementalDamage);
+        flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] = 1;
+        if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+            menu();
+            addButton(0, "Next", combatMenu, false);
+        }
 	}
 
     public function baseelementalattacks(elementType:int = -1):void {
@@ -2902,7 +2923,10 @@ public class Combat extends BaseContent {
         combatRoundOver();
     }
 
-    public function attacksAccuracy():Number {		//unused for now function - maybe use later for some other attacks accuracy or maybe spells? xD
+    //unused for now function - maybe use later for some other attacks accuracy or maybe spells? xD
+    //SH comment: THIS IS NOT FUCKING DND, HOW DO YOU MISS WITH A FIREBALL
+    /*
+    public function attacksAccuracy():Number {
         var atkmod:Number = 100;
         /*	if (player.inte > 50 && player.hasPerk(PerkLib.JobHunter)) {
 		if (player.inte <= 150) atkmod += (player.inte - 50);
@@ -2913,9 +2937,9 @@ public class Combat extends BaseContent {
 //	if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 //	if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 //	if (flags[kFLAGS.CUPID_ARROWS] == 1) onearrowcost += 5;
-*/
         return atkmod;
     }
+    */
 
     public function meleeAccuracy():Number {
         var accmod:Number = 128;
@@ -6380,7 +6404,7 @@ public class Combat extends BaseContent {
 								var damage4B:Number = 35 + rand(player.lib / 10);
 								var poisonScaling:Number = 1;
 								var damage4Ba:Number = 1;
-								if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPaaaa *= 2;
+								if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damage4B *= 2;
 								poisonScaling += player.lib/100;
 								poisonScaling += player.tou/100;
 								if (player.level < 10) damage4B += 20 + (player.level * 3);
@@ -6957,9 +6981,9 @@ public class Combat extends BaseContent {
         }
         if (player.hasPerk(PerkLib.ChiReflowLust)) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
         if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) lustDmgF *= 1.5;
-        if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) damage *= 1.1;
-        if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) damage *= 1.2;
-        if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) damage *= 1.3;
+        if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) lustDmgF *= 1.1;
+        if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) lustDmgF *= 1.2;
+        if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) lustDmgF *= 1.3;
         if (player.perkv1(IMutationsLib.RaijuCathodeIM) >= 2) damage *= 1.2;
         if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= RacialParagonAbilityBoost();
         if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
@@ -7150,6 +7174,8 @@ public class Combat extends BaseContent {
 		}
 	}
 
+    //unused atm
+    /*
     public function ArmorStatusProcs():void {
 		var bleed:Boolean = false;
         var bleedChance:int = 0;
@@ -7164,7 +7190,10 @@ public class Combat extends BaseContent {
             else outputText("\n[Themonster] bleeds profusely from the many bloody gashes your [armor] left behind.");
 		}
     }
+    */
 
+    //unused atm
+    /*
 	public function WrathGenerationPerHit(damage:int = 0):void {
 		if (damage > 0) {
 			var generatedWrath:Number = 0;
@@ -7174,6 +7203,7 @@ public class Combat extends BaseContent {
 			if (generatedWrath > 0) EngineCore.WrathChange(generatedWrath, false);
 		}
 	}
+	*/
 
 	public function WrathGenerationPerHit1(damage:int = 0):void {	//base melee/range attacks wrath generation
 		var addedWrath:Number = damage;
@@ -9577,7 +9607,7 @@ public class Combat extends BaseContent {
             //High damage to goes.
             damage0 = magic.calcVoltageModImpl(damage0, true);
             if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage0 *= (1 + (player.lust100 * 0.01));
-            if (player.hasPerk(PerkLib.RacialParagon)) lustDmgA *= RacialParagonAbilityBoost();
+            if (player.hasPerk(PerkLib.RacialParagon)) damage0 *= RacialParagonAbilityBoost();
             damage0 = Math.round(damage0);
             dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
             var lustDmgF:Number = 20 + rand(6);
@@ -15301,14 +15331,11 @@ public class Combat extends BaseContent {
 		}
 		damage *= dmgamp;
 		//Determine if critical hit!
-		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combatPhysicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-		if (rand(100) < critChance) {
-			crit = true;
+		if (rand(100) < critChance)
 			damage *= 1.75;
-		}
 		damage = Math.round(damage);
         doMinionPhysDamage(damage, true, true);
 		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 1) doMinionPhysDamage(damage, true, true);
@@ -15374,14 +15401,11 @@ public class Combat extends BaseContent {
 		damage *= dmgamp;
 		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 0) damage *= player.perkv2(PerkLib.PrestigeJobNecromancer);
 		//Determine if critical hit!
-		var crit:Boolean = false;
 		var critChance:int = 5;
 		critChance += combatPhysicalCritical();
 		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-		if (rand(100) < critChance) {
-			crit = true;
+		if (rand(100) < critChance)
 			damage *= 1.75;
-		}
 		damage = Math.round(damage);
 		doMinionPhysDamage(damage, true, true);
 		monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);

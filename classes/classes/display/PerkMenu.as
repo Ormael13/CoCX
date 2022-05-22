@@ -106,7 +106,7 @@ public class PerkMenu extends BaseContent {
 		//addButton(10, "Number of", EngineCore.doNothing);
 		//addButton(11, "perks: " + player.perks.length, EngineCore.doNothing);
 		if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
-			outputText("\n\n<b>Simplified Pre-Turn is enabled. Your allies will attack automatically, and you won't need to click through their turns.</b>");
+			outputText("\n\n<b>Simplified Pre-Turn is enabled. The strongest possible golems and elementals are selected to attack. The wisp always attacks.</b>");
 			addButton(13, "S.PTurn(On)", simplifiedPreTurnOff).hint("Click to disable Simplified Pre-Turn.");
 		}
 		else {
