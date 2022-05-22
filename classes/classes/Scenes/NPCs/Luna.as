@@ -80,17 +80,37 @@ package classes.Scenes.NPCs
 		
 		public function Luna() 
 		{
-			var lvlMulti:Number = flags[kFLAGS.LUNA_LVL_UP];
-			initStrTouSpeInte(30 + 7*lvlMulti, 100 + 20*lvlMulti, 40 + 7*lvlMulti, 50 + 2*lvlMulti);
-			initWisLibSensCor(50 + 2*lvlMulti, 80 + 10*lvlMulti, 40+10*lvlMulti, 75);
-			this.weaponAttack = 36 + 2*lvlMulti;
-			this.armorDef = 200 + 10*lvlMulti;
-			this.armorMDef = 5 + lvlMulti;
-			this.bonusHP = 800 + 50*lvlMulti;
-			this.bonusLust = 129 + 26*lvlMulti;
-			this.level = 9 + 6*lvlMulti;
-			//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
-
+			if (flags[kFLAGS.LUNA_LVL_UP] == 0) {
+				initStrTouSpeInte(30, 100, 40, 50);
+				initWisLibSensCor(50, 80, 40, 75);
+				this.weaponAttack = 36;
+				this.armorDef = 200;
+				this.armorMDef = 5;
+				this.bonusHP = 800;
+				this.bonusLust = 129;
+				this.level = 9;
+			}
+			else if (flags[kFLAGS.LUNA_LVL_UP] == 15) {
+				initStrTouSpeInte(135, 400, 145, 80);
+				initWisLibSensCor(80, 230, 190, 75);
+				this.weaponAttack = 66;
+				this.armorDef = 350;
+				this.armorMDef = 20;
+				this.bonusHP = 1600;
+				this.bonusLust = 519;
+				this.level = 99;
+			}
+			else {  //leave min and max levels to easily balance npc combat
+				var lvlMulti:Number = flags[kFLAGS.LUNA_LVL_UP];
+				initStrTouSpeInte(30 + 7*lvlMulti, 100 + 20*lvlMulti, 40 + 7*lvlMulti, 50 + 2*lvlMulti);
+				initWisLibSensCor(50 + 2*lvlMulti, 80 + 10*lvlMulti, 40+10*lvlMulti, 75);
+				this.weaponAttack = 36 + 2*lvlMulti;
+				this.armorDef = 200 + 10*lvlMulti;
+				this.armorMDef = 5 + lvlMulti;
+				this.bonusHP = 800 + 50*lvlMulti;
+				this.bonusLust = 129 + 26*lvlMulti;
+				this.level = 9 + 6*lvlMulti;
+			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			this.a = "";
 			this.short = "Luna";
 			this.imageName = "luna";

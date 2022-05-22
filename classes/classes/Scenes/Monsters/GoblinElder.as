@@ -171,108 +171,8 @@ public class GoblinElder extends Goblin
 				this.bonusLust = 132;
 				this.level = 32;
 			}
-			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 1) {
-				initStrTouSpeInte(135, 105, 98, 140);
-				initWisLibSensCor(140, 70, 40, 45);
-				this.weaponAttack = 40;
-				this.armorDef = 55;
-				this.armorMDef = 21;
-				this.bonusHP = 1050;
-				this.bonusLust = 148;
-				this.level = 38;
-			}
-			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 2) {
-				initStrTouSpeInte(155, 115, 116, 160);
-				initWisLibSensCor(160, 75, 45, 45);
-				this.weaponAttack = 45;
-				this.armorDef = 62;
-				this.armorMDef = 24;
-				this.bonusHP = 1200;
-				this.bonusLust = 164;
-				this.level = 44;
-			}
-			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 3) {
-				initStrTouSpeInte(175, 125, 134, 180);
-				initWisLibSensCor(180, 80, 50, 45);
-				this.weaponAttack = 50;
-				this.armorDef = 69;
-				this.armorMDef = 27;
-				this.bonusHP = 1350;
-				this.bonusLust = 180;
-				this.level = 50;
-			}
-			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 4) {
-				initStrTouSpeInte(195, 135, 152, 200);
-				initWisLibSensCor(200, 85, 55, 45);
-				this.weaponAttack = 55;
-				this.armorDef = 76;
-				this.armorMDef = 30;
-				this.bonusHP = 1500;
-				this.bonusLust = 196;
-				this.level = 56;
-			}
-			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 5) {
-				initStrTouSpeInte(215, 145, 170, 220);
-				initWisLibSensCor(220, 90, 60, 45);
-				this.weaponAttack = 60;
-				this.armorDef = 83;
-				this.armorMDef = 33;
-				this.bonusHP = 1650;
-				this.bonusLust = 212;
-				this.level = 62;
-			}
-			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 6) {
-				initStrTouSpeInte(235, 155, 188, 240);
-				initWisLibSensCor(240, 95, 65, 45);
-				this.weaponAttack = 65;
-				this.armorDef = 90;
-				this.armorMDef = 36;
-				this.bonusHP = 1800;
-				this.bonusLust = 228;
-				this.level = 68;
-			}
-			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 7) {
-				initStrTouSpeInte(255, 165, 206, 260);
-				initWisLibSensCor(260, 100, 70, 45);
-				this.weaponAttack = 70;
-				this.armorDef = 97;
-				this.armorMDef = 39;
-				this.bonusHP = 1950;
-				this.bonusLust = 244;
-				this.level = 74;
-			}
-			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 8) {
-				initStrTouSpeInte(275, 175, 224, 280);
-				initWisLibSensCor(280, 105, 75, 45);
-				this.weaponAttack = 75;
-				this.armorDef = 104;
-				this.armorMDef = 42;
-				this.bonusHP = 2100;
-				this.bonusLust = 260;
-				this.level = 80;
-			}
-			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 9) {
-				initStrTouSpeInte(295, 185, 242, 300);
-				initWisLibSensCor(300, 110, 80, 45);
-				this.weaponAttack = 80;
-				this.armorDef = 111;
-				this.armorMDef = 45;
-				this.bonusHP = 2250;
-				this.bonusLust = 276;
-				this.level = 86;
-			}
-			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 10) {
-				initStrTouSpeInte(315, 195, 250, 320);
-				initWisLibSensCor(320, 115, 85, 45);
-				this.weaponAttack = 85;
-				this.armorDef = 118;
-				this.armorMDef = 48;
-				this.bonusHP = 2400;
-				this.bonusLust = 292;
-				this.level = 92;
-			}
-			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 11) {
-				initStrTouSpeInte(335, 205, 258, 340);
+			else if (flags[kFLAGS.PRISCILLA_LVL_UP] == 11) {
+				initStrTouSpeInte(335, 205, 278, 340);
 				initWisLibSensCor(340, 120, 90, 45);
 				this.weaponAttack = 90;
 				this.armorDef = 125;
@@ -280,6 +180,17 @@ public class GoblinElder extends Goblin
 				this.bonusHP = 2550;
 				this.bonusLust = 308;
 				this.level = 98;
+			}
+			else {	//leave min and max levels to easily balance npc combat
+				var lvlMulti:Number = flags[kFLAGS.MINERVA_LVL_UP];
+				initStrTouSpeInte(115 + 20*lvlMulti, 95 + 10*lvlMulti, 80 + 18*lvlMulti, 120 + 20*lvlMulti);
+				initWisLibSensCor(120 + 20*lvlMulti, 65 + 5*lvlMulti, 35 + 5*lvlMulti, 45);
+				this.weaponAttack = 35 + 5*lvlMulti;
+				this.armorDef = 48 + 7*lvlMulti;
+				this.armorMDef = 18 + 3*lvlMulti;
+				this.bonusHP = 900 + 150*lvlMulti;
+				this.bonusLust = 132 + 16*lvlMulti;
+				this.level = 32 + 6*lvlMulti;
 			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			this.a = "the ";
 			this.short = "goblin elder";

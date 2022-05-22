@@ -220,16 +220,37 @@ use namespace CoC;
 				this.level = 40;
 			}
 			else {
-				var electraLvl:Number = flags[kFLAGS.ELECTRA_LVL_UP]-1;
-				initStrTouSpeInte(60 + 10*electraLvl, 110 + 15*electraLvl, 100 + 20*electraLvl, 150 + 10*electraLvl);
-				initWisLibSensCor(150 + 10*electraLvl, 220 + 30*electraLvl, 160 + 20*electraLvl, 80);
-				this.weaponAttack = 12 + 3*electraLvl;
-				this.armorDef = 12 + 5*electraLvl;
-				this.armorMDef = 10 + 10*electraLvl;
-				this.bonusHP = 100 + 50*electraLvl;
-				this.bonusLust = 410 + 56*electraLvl;
-				this.level = 30 + 6*electraLvl;
-				//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
+				if (flags[kFLAGS.ELECTRA_LVL_UP] < 2) {
+					initStrTouSpeInte(60, 110, 100, 150);
+					initWisLibSensCor(150, 220, 160, 80);
+					this.weaponAttack = 12;
+					this.armorDef = 12;
+					this.armorMDef = 10;
+					this.bonusHP = 100;
+					this.bonusLust = 410;
+					this.level = 30;
+				}
+				else if (flags[kFLAGS.ELECTRA_LVL_UP] == 12) {
+					initStrTouSpeInte(150, 365, 320, 260);
+					initWisLibSensCor(260, 550, 340, 80);
+					this.weaponAttack = 45;
+					this.armorDef = 78;
+					this.armorMDef = 120;
+					this.bonusHP = 650;
+					this.bonusLust = 986;
+					this.level = 96;
+				}
+				else {	//leave min and max levels to easily balance npc combat
+					var electraLvl:Number = flags[kFLAGS.ELECTRA_LVL_UP]-1;
+					initStrTouSpeInte(60 + 10*electraLvl, 110 + 15*electraLvl, 100 + 20*electraLvl, 150 + 10*electraLvl);
+					initWisLibSensCor(150 + 10*electraLvl, 220 + 30*electraLvl, 160 + 20*electraLvl, 80);
+					this.weaponAttack = 12 + 3*electraLvl;
+					this.armorDef = 12 + 5*electraLvl;
+					this.armorMDef = 10 + 10*electraLvl;
+					this.bonusHP = 100 + 50*electraLvl;
+					this.bonusLust = 410 + 56*electraLvl;
+					this.level = 30 + 6*electraLvl;
+				}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			}
 			createVagina(true,VaginaClass.WETNESS_NORMAL,VaginaClass.LOOSENESS_TIGHT);
 			this.createStatusEffect(StatusEffects.BonusVCapacity,60,0,0,0);
