@@ -887,14 +887,14 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.NEISA_FOLLOWER] >= 14)  interpersonStats += "<b>Days that passed since last paycheck for Neisa:</b> " + (Math.round(flags[kFLAGS.NEISA_FOLLOWER]) - 7) + " days (If you not pay before 10th day she would leave)\n";
 			else interpersonStats += "<b>Days that passed since last paycheck for Neisa:</b> " + (Math.round(flags[kFLAGS.NEISA_FOLLOWER]) - 7) + " days\n";
 			if (flags[kFLAGS.NEISA_LVL_UP] == 8) interpersonStats += "<b>Neisa lvl:</b> 45 (current max lvl)\n";
-			if (flags[kFLAGS.NEISA_LVL_UP] == 7) interpersonStats += "<b>Neisa lvl:</b> 39\n";
-			/*if (flags[kFLAGS.NEISA_LVL_UP] == 6) interpersonStats += "<b>Neisa lvl:</b> 33\n";
+			/*if (flags[kFLAGS.NEISA_LVL_UP] == 7) interpersonStats += "<b>Neisa lvl:</b> 39\n";
+			if (flags[kFLAGS.NEISA_LVL_UP] == 6) interpersonStats += "<b>Neisa lvl:</b> 33\n";
 			if (flags[kFLAGS.NEISA_LVL_UP] == 5) interpersonStats += "<b>Neisa lvl:</b> 27\n";
 			if (flags[kFLAGS.NEISA_LVL_UP] == 4) interpersonStats += "<b>Neisa lvl:</b> 21\n";
 			if (flags[kFLAGS.NEISA_LVL_UP] == 3) interpersonStats += "<b>Neisa lvl:</b> 15\n";
 			if (flags[kFLAGS.NEISA_LVL_UP] == 2) interpersonStats += "<b>Neisa lvl:</b> 9\n";*/
-			if (flags[kFLAGS.NEISA_LVL_UP] == 1) interpersonStats += "<b>Neisa lvl:</b> 3\n";
-			else interpersonStats += getNPCLevel("Neisa", 3, 1, 1, 6, flags[kFLAGS.NEISA_LVL_UP]);
+			else if (flags[kFLAGS.NEISA_LVL_UP] == 1) interpersonStats += "<b>Neisa lvl:</b> 3\n";
+			else interpersonStats += getNPCLevel("Neisa", 3, 1, 8, 6, flags[kFLAGS.NEISA_LVL_UP]);
 		}
 		if (flags[kFLAGS.OWCAS_ATTITUDE] > 0)
 			interpersonStats += "<b>Owca's Attitude:</b> " + flags[kFLAGS.OWCAS_ATTITUDE] + "\n";
@@ -1002,15 +1002,17 @@ public class PlayerInfo extends BaseContent {
 			evangelineStats += "<b>Evangeline Affection:</b> " + Math.round(EvangelineFollower.EvangelineAffectionMeter) + "%\n";
 		}
 		if (EvangelineFollower.EvangelineAffectionMeter >= 5) {
+			var spellsCasted:Number = flags[kFLAGS.EVANGELINE_SPELLS_CASTED];
 			evangelineStats += "<b>Gems Purse:</b> " + EvangelineFollower.EvangelineGemsPurse + " gems\n";
 			evangelineStats += "<b>Spells Casted:</b> " + flags[kFLAGS.EVANGELINE_SPELLS_CASTED] + "\n";
-			if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] >= 0) {
-				if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] < 10) evangelineStats += "<b>Spells Cost:</b> 100%\n";
-				if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] >= 10 && flags[kFLAGS.EVANGELINE_SPELLS_CASTED] < 30) evangelineStats += "<b>Spells Cost:</b> 90%\n";
-				if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] >= 30 && flags[kFLAGS.EVANGELINE_SPELLS_CASTED] < 70) evangelineStats += "<b>Spells Cost:</b> 80%\n";
-				if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] >= 70 && flags[kFLAGS.EVANGELINE_SPELLS_CASTED] < 150) evangelineStats += "<b>Spells Cost:</b> 70%\n";
-				if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] >= 150 && flags[kFLAGS.EVANGELINE_SPELLS_CASTED] < 310) evangelineStats += "<b>Spells Cost:</b> 60%\n";
-				if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] >= 310) evangelineStats += "<b>Spells Cost:</b> 50%\n";
+			evangelineStats += "<b>Spells Casted:</b> " + spellsCasted + "\n";
+			if (spellsCasted >= 0) {
+				if (spellsCasted >= 310) evangelineStats += "<b>Spells Cost:</b> 50%\n";
+				else if (spellsCasted >= 150) evangelineStats += "<b>Spells Cost:</b> 60%\n";
+				else if (spellsCasted >= 70) evangelineStats += "<b>Spells Cost:</b> 70%\n";
+				else if (spellsCasted >= 30) evangelineStats += "<b>Spells Cost:</b> 80%\n";
+				else if (spellsCasted >= 10) evangelineStats += "<b>Spells Cost:</b> 90%\n";
+				else evangelineStats += "<b>Spells Cost:</b> 100%\n";
 			}
 		}
 		if (evangelineStats != "")

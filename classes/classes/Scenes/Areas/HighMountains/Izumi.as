@@ -15,6 +15,7 @@ public class Izumi extends Monster
 		
 		public function Izumi() 
 		{
+			var lvlMulti:Number = flags[kFLAGS.IZUMI_LVL_UP];
 			if (flags[kFLAGS.IZUMI_LVL_UP] < 1) {
 				initStrTouSpeInte(230, 150, 110, 110);
 				initWisLibSensCor(110, 30, 25, 15);
@@ -27,7 +28,6 @@ public class Izumi extends Monster
 				this.additionalXP = 150;
 			}
 			else if (flags[kFLAGS.IZUMI_LVL_UP] <= 5) {	//leave min and max levels to easily balance npc combat
-				var lvlMulti:Number = flags[kFLAGS.IZUMI_LVL_UP];
 				initStrTouSpeInte(230 + 25*lvlMulti, 150 + 20*lvlMulti, 110 + 15*lvlMulti, 110 + 10*lvlMulti);
 				initWisLibSensCor(110 + 10*lvlMulti, 30 + 10*lvlMulti, 25 + 5*lvlMulti, 15);
 				this.weaponAttack = 50 + 5*lvlMulti;
@@ -39,7 +39,7 @@ public class Izumi extends Monster
 				this.additionalXP = 150 + 25*lvlMulti;
 			}
 			else if (flags[kFLAGS.IZUMI_LVL_UP] <= 9) {
-				var lvlMulti:Number = flags[kFLAGS.IZUMI_LVL_UP]-6;
+				lvlMulti -= 6;
 				initStrTouSpeInte(385 + 30*lvlMulti, 275 + 25*lvlMulti, 205 + 20*lvlMulti, 110 + 10*lvlMulti);
 				initWisLibSensCor(110 + 10*lvlMulti, 30 + 10*lvlMulti, 25 + 5*lvlMulti, 15);
 				this.weaponAttack = 80 + 10*lvlMulti;
