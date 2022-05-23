@@ -44,7 +44,7 @@ import classes.Scenes.SceneLib;
 				this.bonusLust = 80;
 				this.level = 3;
 			}
-			if (flags[kFLAGS.NEISA_LVL_UP] >= 2 && flags[kFLAGS.NEISA_LVL_UP] < 7) {
+			if (flags[kFLAGS.NEISA_LVL_UP] >= 2 && flags[kFLAGS.NEISA_LVL_UP] < 9) {
 				var mod:int = (flags[kFLAGS.NEISA_LVL_UP] - 1);
 				initStrTouSpeInte(50 + 15*mod, 80 + 22*mod, 50 + 10*mod, 44 + 8*mod);
 				initWisLibSensCor(44 + 8*mod, 52 + 6*mod, 25 + 5*mod, 50);
@@ -54,26 +54,6 @@ import classes.Scenes.SceneLib;
 				this.bonusHP = 200 + 200*mod;
 				this.bonusLust = 80 + 17*mod;
 				this.level = 3 + 6*mod;
-			}
-			if (flags[kFLAGS.NEISA_LVL_UP] == 7) {
-				initStrTouSpeInte(140, 212, 110, 92);
-				initWisLibSensCor(92, 88, 55, 50);
-				this.weaponAttack = 30;
-				this.armorDef = 48;
-				this.armorMDef = 12;
-				this.bonusHP = 1400;
-				this.bonusLust = 182;
-				this.level = 39;
-			}
-			if (flags[kFLAGS.NEISA_LVL_UP] == 8) {
-				initStrTouSpeInte(155, 234, 120, 100);
-				initWisLibSensCor(100, 94, 60, 50);
-				this.weaponAttack = 33;
-				this.armorDef = 56;
-				this.armorMDef = 14;
-				this.bonusHP = 1600;
-				this.bonusLust = 199;
-				this.level = 45;
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] == 9) {
 				initStrTouSpeInte(170, 256, 130, 108);
@@ -137,15 +117,18 @@ import classes.Scenes.SceneLib;
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 3) {
 				this.createPerk(PerkLib.JobKnight, 0, 0, 0, 0);
-				//this.createPerk(PerkLib., 0, 0, 0, 0);
+				this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
+				this.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 4) {
 				this.createPerk(PerkLib.ImprovedDiehard, 0, 0, 0, 0);
 				this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.ImmovableObject, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 5) {
 				this.createPerk(PerkLib.JobDefender, 0, 0, 0, 0);
-				//this.createPerk(PerkLib., 0, 0, 0, 0);
+				this.createPerk(PerkLib.Juggernaut, 0, 0, 0, 0);
+				this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 6) {
 				IMutationsLib.CatLikeNimblenessIM.acquireMutation(this, "none", 2);
@@ -155,6 +138,7 @@ import classes.Scenes.SceneLib;
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 7) {
 				IMutationsLib.DraconicLungIM.acquireMutation(this, "none");
 				IMutationsLib.LizanMarrowIM.acquireMutation(this, "none");
+				this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 8) {
 				IMutationsLib.OniMusculatureIM.acquireMutation(this, "none");
@@ -164,6 +148,10 @@ import classes.Scenes.SceneLib;
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 9) {
 				IMutationsLib.LactaBovinaOvariesIM.acquireMutation(this, "none", 2);
 				IMutationsLib.PigBoarFatIM.acquireMutation(this, "none");
+			}
+			if (flags[kFLAGS.NEISA_LVL_UP] >= 10) {
+				this.createPerk(PerkLib.EpicToughness, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 11) {
 				IMutationsLib.DraconicLungIM.acquireMutation(this, "none");
