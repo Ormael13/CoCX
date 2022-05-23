@@ -68,7 +68,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			outputText("The male spider-morph collapses onto his hands and knees, ");
 			if (monster.lust >= monster.maxLust()) outputText("masturbating with furious abandon, working his ebon dick with such vigor that the spider's pre-cum-slicked dick-skin noisily slides itself back and forth over his fattened glans; it becomes apparent just how much foreskin he truly has at this point, as even with his frenzied rubbing his glans remains shrouded in the thick excess skin while his fist slaps lewdly against his groin.  Dribbles of pre-cum leak from between his fingers to spill on the ground.");
 			else outputText("wobbling back and forth as he tries to stay up and fight.  There's no way he can oppose you, as beaten as he is now.");
-			if (player.gender > 0 && player.lust >= 33) {
+			if (player.lust >= 33) {
 				outputText("\n\nWhat do you do?");
 				addButtonIfTrue(0, "Mount", victoryCowgirlRidingOnSpiderBoi,
 						"Req. a vagina.", player.hasVagina());
@@ -82,8 +82,10 @@ public class MaleSpiderMorphScene extends BaseContent
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatSpiderBoy);
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
-			outputText("\n\nYou're not aroused enough to rape him.");
-			cleanupAfterCombat();
+			else {
+				outputText("\n\nYou're not aroused enough to rape him.");
+				cleanupAfterCombat();
+			}
 		}
 
 //Loss selector
