@@ -285,85 +285,24 @@ public function ElectraSexPlayer():void {
 	if (player.hasBreasts()) outputText(" and milk gushing nipples");
 	outputText(", the electricity sends all your pleasure nerves into overdrive as your sensitivity skyrockets. You barely see her taking her leave as you faint from the pleasure overdose.\n\n");
 	outputText("You wake up in a pool of your own fluids. After such mind wracking pleasure, your entire body feels sensitive and aches to be touched from the slowly receding voltage. You wince, knowing that indulging would be a bad idea. \n\n");
-	if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+	if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus))
 		player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
-		player.createStatusEffect(StatusEffects.RaijuLightningStatus,25,0,0,0);
-	}
-	else player.createStatusEffect(StatusEffects.RaijuLightningStatus,25,0,0,0);
+	player.createStatusEffect(StatusEffects.RaijuLightningStatus,25,0,0,0);
 	electraAffection(5);
 	player.orgasm();
 	cleanupAfterCombat();
-	return;
 }
 public function PlayerSexElectraPostSpar():void {
 	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
 		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.ELECTRA_DEFEATS_COUNTER]++;
 		else flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 1;
-		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.ELECTRA_LVL_UP] == 1) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5), 0);
-			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ELECTRA_LVL_UP] = 2;
-		}
-		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 6 && flags[kFLAGS.ELECTRA_LVL_UP] == 2) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6), 0);
-			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ELECTRA_LVL_UP] = 3;
-		}
-		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 7 && flags[kFLAGS.ELECTRA_LVL_UP] == 3) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7), 0);
-			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ELECTRA_LVL_UP] = 4;
-		}
-		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 8 && flags[kFLAGS.ELECTRA_LVL_UP] == 4) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8), 0);
-			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ELECTRA_LVL_UP] = 5;
-		}
-		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.ELECTRA_LVL_UP] == 5) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9), 0);
-			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ELECTRA_LVL_UP] = 6;
-		}
-		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.ELECTRA_LVL_UP] == 6) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10), 0);
-			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ELECTRA_LVL_UP] = 7;
-		}
-		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.ELECTRA_LVL_UP] == 7) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11), 0);
-			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ELECTRA_LVL_UP] = 8;
-		}
-		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.ELECTRA_LVL_UP] == 8) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12), 0);
-			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ELECTRA_LVL_UP] = 9;
-		}
-		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.ELECTRA_LVL_UP] == 9) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13), 0);
-			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ELECTRA_LVL_UP] = 10;
-		}
-		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 14 && flags[kFLAGS.ELECTRA_LVL_UP] == 10) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14), 0);
-			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ELECTRA_LVL_UP] = 11;
-		}
-		if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 15 && flags[kFLAGS.ELECTRA_LVL_UP] == 11) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15), 0);
-			flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ELECTRA_LVL_UP] = 12;
+		if (flags[kFLAGS.ELECTRA_LVL_UP] < 12) {
+			if (flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] == 4 + flags[kFLAGS.ELECTRA_LVL_UP]) {
+				if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4 + flags[kFLAGS.ELECTRA_LVL_UP]));
+				else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4 + flags[kFLAGS.ELECTRA_LVL_UP]), 0);
+				flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
+				flags[kFLAGS.ELECTRA_LVL_UP]++;
+			}
 		}
 	}
 	PlayerSexElectra();
@@ -427,11 +366,9 @@ public function ElectraSeXYesM():void {
 		else {
 			outputText("As for you, your entire body feels sensitive and achesto be touched. Something however tells you that indulging yourself would be a bad idea.\n\n");
 			player.sexReward("vaginalFluids","Dick");
-			if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus))
 				player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
-				player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
-			}
-			else player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
+			player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
 		}
 	}
 	else {
@@ -440,11 +377,9 @@ public function ElectraSeXYesM():void {
 		outputText("Well you're no better than she was earlier, but you're glad you could be of some help. You redress and ready back for your adventures. Ugh, where are those goblin sluts when you need one?\n\n");
 		if (player.raijuScore() < 10) {
 			player.sexReward("vaginalFluids","Dick");
-			if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus))
 				player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
-				player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
-			}
-			else player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
+			player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
 		}
 	}
 	electraAffection(10);
@@ -474,11 +409,9 @@ public function ElectraSeXYesF():void {
 		else {
 			outputText("As for you, your entire body feels sensitive and aches for touch from the slowly receding voltage. Something however tells you that indulging yourself would be a bad idea.\n\n");
 			player.sexReward("vaginalFluids");
-			if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus))
 				player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
-				player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
-			}
-			else player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
+			player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
 		}
 	}
 	else {
@@ -487,11 +420,9 @@ public function ElectraSeXYesF():void {
 		outputText("Well you're in no better than she was earlier but your glad you could be of some help. You redress and ready back for your adventures. Ugh where are those goblin sluts when you need one.\n\n");
 		if (player.raijuScore() < 10) {
 			player.sexReward("vaginalFluids");
-			if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+			if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus))
 				player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
-				player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
-			}
-			else player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
+			player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
 		}
 	}
 	electraAffection(10);
@@ -585,11 +516,9 @@ public function ElectraSeXHeadpat():void {
 		outputText("People on Mareth can't seem to appreciate the simplicity and kindness of a simple caress, pat on the head or hug nowaday. Those simple displays of affections are more direct and personal than any sex or kiss would be here.</i>\"");
 		outputText("You tell her it’s all fine, everyone needs a nice pat on the back or a comforting hug every now and then.\n\n");
 	}
-	if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+	if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus))
 		player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
-		player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
-	}
-	else player.createStatusEffect(StatusEffects.RaijuLightningStatus, 169, 0, 0, 0);
+	player.createStatusEffect(StatusEffects.RaijuLightningStatus, 169, 0, 0, 0);
 	electraAffection(10);
 	player.sexReward("Default","Default",true,false);
 	if (flags[kFLAGS.ELECTRA_FOLLOWER] < 2) {
