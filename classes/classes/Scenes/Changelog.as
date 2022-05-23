@@ -325,7 +325,7 @@ package classes.Scenes
 			outputText("-Lacta Bovina enemies got new special attack: Milk Blast and most of their attacks got lust dmg claculation bit changed.\n");
 			outputText("-New key Item (by Ormael): Tel'Adre Magazine Issue 5 - Increase 2x Herbalism EXP gains. Costs 100 gems and buyable at Giacomo Books tab.\n");
 			outputText("-New key Item (by Ormael): Tel'Adre Magazine Issue 10 - Increase 2x Mining EXP gains. Costs 100 gems and buyable at Giacomo Books tab.\n");
-			outputText("-\n");
+			outputText("-New tier 0 misc lvl-up perk: Melee Weapons Mastery. Req. 10+ str/tou/spe. Effect: Decrease by ~20% needed exp to level up each melee weapon mastery type and grants 200% more of base mastery exp gains.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
