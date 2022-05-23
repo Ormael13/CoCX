@@ -1109,6 +1109,18 @@ public class PlayerAppearance extends BaseContent {
 		if (player.isAlraune()) {
 			outputText("\nAlraune lower body: +15% Toughness, +15% Libido.")
 		}
+		if (player.hasPerk(PerkLib.RacialParagon)) {
+			outputText("\nRacial Paragon: +"+player.level+"% to core stats.")
+		}
+		if (player.hasPerk(PerkLib.Apex)) {
+			outputText("\nApex: +"+(2*player.level)+"% to core stats.")
+		}
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) {
+			outputText("\nAlpha And Omega: +"+(2*player.level)+"% to core stats.")
+		}
+		if (player.hasPerk(PerkLib.AscensionOneRaceToRuleThemAllX)) {
+			outputText("\nAscension: One Race To Rule Them All: +"+(2*player.perkv1(PerkLib.AscensionOneRaceToRuleThemAllX)*player.level)+"% to core stats.");
+		}
 		
 		outputText("[/font]");
 		

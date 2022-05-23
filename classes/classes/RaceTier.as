@@ -46,9 +46,23 @@ public class RaceTier {
 	
 	/**
 	 * @param body null if player doesn't have this tier, otherwise player body data
+	 * @return buffs, NG+ scaled
 	 */
 	public function buffs(body:BodyData):Object {
-		return _buffs;
+		var buffs:Object = unscaledBuffs(body);
+		var factor:Number = Player.NewGamePlusFactor();
+		if (factor == 1) return buffs;
+		for each(var buffName:String in StatUtils.NgScaledRacialBuffs) {
+			if (buffName in buffs) buffs[buffName] *= factor;
+		}
+		return buffs;
+	}
+	/**
+	 * @param body null if player doesn't have this tier, otherwise player body data
+	 * @return buffs, not NG+ scaled. The object could be modified, so a copy should be returned.
+	 */
+	public function unscaledBuffs(body:BodyData):Object {
+		return Utils.extend({}, _buffs);
 	}
 	public function hasBuffs():Boolean {
 		//noinspection LoopStatementThatDoesntLoopJS

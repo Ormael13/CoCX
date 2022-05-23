@@ -230,5 +230,17 @@ public class StatUtils {
 		['spellpower', "Spellpower"],
 	]);
 	public static const MultiplicativeStats:/*String*/Array = [];
+	
+	/**
+	 * List of racial buff names that should get scaled with NG+
+	 */
+	public static const  NgScaledRacialBuffs:/*String*/Array = [
+		"maxhp_base",
+		'maxlust_base',
+		'maxwrath_base',
+		'maxfatigue_base',
+		'maxmana_base',
+		'maxsf_base'
+	];
 }
 }

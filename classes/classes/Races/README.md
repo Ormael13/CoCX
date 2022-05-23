@@ -4,7 +4,6 @@
 * Check score functions checking non-tiers
 * solve unicornkin/alicornkin races
 * consider moving naming function from tier to race
-* NG+ & paragon-like scale buffs in race itself
 * error reporting utility
 * Future:
   * racial score caching
@@ -121,7 +120,7 @@ public class ZzzRace extends Race {
 
 ## Score calculation
 
-Racial scores are made with `RaceScoreBuilder` class. Start with one of `addScores()` functions in the Race constructor, and write a method chain.
+Racial scores are made with `RaceScoreBuilder` class. Start by adding one of `addScores()` functions in the `setup()` function, and write a method chain.
 
 Most builder methods have a signature `bodyPart(value, passScore, failScore=0, customName="")`. `customName` can be used to replace auto-generated requirement name.
 
@@ -139,7 +138,44 @@ Examples:
 
 ### Custom requirements
 
-TODO @aimozg
+If you need to add a requirement that doesn't have fitting built-in function, use `.customRequirement`:
+
+```as
+.customRequirement(
+        "skin", 
+        "fur or magical tatoo",
+        function (body:BodyData):Boolean {
+            return body.skinCoatType == Skin.FUR
+                    || body.skinBasePattern == Skin.PATTERN_MAGICAL_TATTOO
+        }, 
+        +1)
+```
+
+Arguments:
+* group name (not used yet)
+* displayed name
+* function, return true if requirement fulfilled
+* pass score
+* (optional) fail score, default 0
+
+### Custom score requirements
+
+You can add a requirement that gives varying bonus with `customScoreRequirement`:
+
+```as
+.customScoreRequirement(
+        "tail", 
+        "multiple fox tails, +1 per tail",
+        function (body:BodyData):Boolean {
+            return body.tailType == Tail.FOX && body.tailCount >= 2;
+        },
+        function (body:BodyData):int {
+            return body.tailCount;
+        },
+        -7
+)
+```
+Arguments - same as `customRequirement()` but pass score is a function.
 
 ### Group wrappers
 
@@ -152,7 +188,22 @@ addScoresAfter(4)
 => +1 score for fox face, but only if already has score 4 
 ```
 
-TODO @aimozg addConditionedScores
+You can also add a common condition to multiple requirements with `addConditionedScores()`:
+
+```as
+addConditionedScores(
+        function (body:BodyData):Boolean {
+            return body.player.hasPlainSkinOnly();
+        },
+        "plain skin; "
+)
+        .armType(Arms.HUMAN, +1)
+        .legType(LowerBody.HUMAN, +1)
+```
+
+would add requirements:
+* plain skin; human arms (+1)
+* plain skin; human legs (+1)
 
 ### Mutations and bloodline bonuses
 
@@ -163,6 +214,10 @@ addBloodline(PerkLib.KitsunesDescendant, PerkLib.BloodlineKitsune);
 addMutation(IMutationsLib.KitsuneThyroidGlandIM);
 addMutation(IMutationsLib.TwinHeartIM, +2);
 ```
+
+### finalizeScore
+
+TODO
 
 ## Tiers
 

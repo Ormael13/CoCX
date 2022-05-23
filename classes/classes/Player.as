@@ -4377,12 +4377,19 @@ use namespace CoC;
 			return minions;
 		}
 
-		public function newGamePlusMod():int {
-			var temp:int = flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+		public static function NewGamePlusMod():int {
+			var temp:int = CoC.instance.flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			//Constrains value between 0 and 5.
 			if (temp < 0) temp = 0;
 			if (temp > 5) temp = 5;
 			return temp;
+		}
+		public function newGamePlusMod():int {
+			return NewGamePlusMod();
+		}
+		
+		public static function NewGamePlusFactor():Number {
+			return NewGamePlusMod()+1;
 		}
 
 		public function buttChangeDisplay():void
@@ -4738,7 +4745,6 @@ use namespace CoC;
 		}
 
 		public override function getAllMinStats():Object {
-			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			var minStr:int = 1;
 			var minTou:int = 1;
 			var minSpe:int = 1;
@@ -4953,7 +4959,6 @@ use namespace CoC;
 		public function calcRacialBuffs(useCache:Boolean=false):Object {
 			var score:Number;
 			var body:BodyData = bodyData();
-			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			var buffStr:Number = 0;
 			var buffTou:Number = 0;
 			var buffSpe:Number = 0;
@@ -5063,20 +5068,6 @@ use namespace CoC;
 				"lib.mult": (buffLib+buffAll)/100,
 				"sens": currentSen
 			});
-			/**
-			 * List of racial buff names that should get scaled with NG+
-			 */
-			var ngScaledRacialBuffs:/*String*/Array = [
-				"maxhp_base",
-				'maxlust_base',
-				'maxwrath_base',
-				'maxfatigue_base',
-				'maxmana_base',
-				'maxsf_base'
-			];
-			for each(var buffName:String in ngScaledRacialBuffs) {
-				if (buffName in buffs) buffs[buffName] *= newGamePlusMod;
-			}
 			return buffs;
 		}
 
