@@ -73,11 +73,27 @@ public class Tyrantia extends Monster
 					player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 				}
 				var dmg2:Number = 0;
+				var crit:Boolean = false;
+				var critChance:int = 15;
+				var critMulti:Number = 1.75;
+				if (hasPerk(PerkLib.GrandTactician) && this.inte >= 150) {
+					if (this.inte <= 300) critChance += (this.inte - 150) / 5;
+					if (this.inte > 300) critChance += 30;
+				}
 				dmg2 += this.str * 4;
 				dmg2 += eBaseStrengthDamage() * 3;
 				dmg2 += this.weaponAttack * 4;
+				if (rand(100) < critChance) {
+					crit = true;
+					dmg2 *= critMulti;
+				}
+				if (hasPerk(PerkLib.Naturaljouster)) {
+					if (hasPerk(PerkLib.NaturaljousterMastergrade)) dmg2 *= 5;
+					else dmg2 *= 3;
+				}
 				dmg2 = Math.round(dmg2);
 				player.takePhysDamage(dmg2, true);
+				if (crit) outputText("<b> Critical!</b>");
 				player.dynStats("lus", lustFromHits());
 			}
 		}
@@ -178,7 +194,7 @@ public class Tyrantia extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.SparingTyrantia)) SceneLib.tyrania.TyrantiaLostSparring();
+			if (player.hasStatusEffect(StatusEffects.SparingTyrantia)) SceneLib.tyrania.TyrantiaLostSparring(hpVictory);
 			else SceneLib.tyrania.postFightOptions(hpVictory);
 		}
 		
@@ -205,7 +221,7 @@ public class Tyrantia extends Monster
 				this.bonusLust = 438;
 				this.level = 58;
 			}
-			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 2 && flags[kFLAGS.TYRANTIA_LVL_UP] < 3) {
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 2 && flags[kFLAGS.TYRANTIA_LVL_UP] < 4) {
 				var mod:int = (flags[kFLAGS.TYRANTIA_LVL_UP] - 1);
 				initStrTouSpeInte(295 + 20*mod, 310 + 25*mod, 190 + 15*mod, 150 + 10*mod);
 				initWisLibSensCor(100 + 5*mod, 280 + 20*mod, 100 + 20*mod, 100);
@@ -215,16 +231,6 @@ public class Tyrantia extends Monster
 				this.bonusHP = 2000 + 1000*mod;
 				this.bonusLust = 438 + 46*mod;
 				this.level = 58 + 6*mod;
-			}
-			if (flags[kFLAGS.TYRANTIA_LVL_UP] == 3) {
-				initStrTouSpeInte(335, 360, 220, 170);
-				initWisLibSensCor(110, 320, 140, 100);
-				this.weaponAttack = 170;
-				this.armorDef = 340;
-				this.armorMDef = 340;
-				this.bonusHP = 4000;
-				this.bonusLust = 530;
-				this.level = 70;
 			}
 			if (flags[kFLAGS.TYRANTIA_LVL_UP] == 4) {
 				initStrTouSpeInte(355, 385, 235, 180);
@@ -271,12 +277,33 @@ public class Tyrantia extends Monster
 			this.createPerk(PerkLib.EnemyHugeType,0,0,0,0);
 			this.createPerk(PerkLib.TankI,0,0,0,0);
 			this.createPerk(PerkLib.GoliathI,0,0,0,0);
-			this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
-			//if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 2) this.createPerk(PerkLib.,0,0,0,0);
-			//if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 3) this.createPerk(PerkLib.,0,0,0,0);
+			this.createPerk(PerkLib.CheetahI,0,0,0,0);
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 2) {
+				this.createPerk(PerkLib.EpicStrength,0,0,0,0);
+				this.createPerk(PerkLib.EpicSpeed,0,0,0,0);
+				this.createPerk(PerkLib.Naturaljouster,0,0,0,0);
+			}
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 3) {
+				this.createPerk(PerkLib.EpicToughness,0,0,0,0);
+				this.createPerk(PerkLib.GrandTactician,0,0,0,0);
+				this.createPerk(PerkLib.ImmovableObject,0,0,0,0);
+			}
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 4) {
+				this.createPerk(PerkLib.Juggernaut,0,0,0,0);
+				this.createPerk(PerkLib.JobWarrior,0,0,0,0);
+				//this.createPerk(PerkLib.,0,0,0,0);
+			}
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 5) {
+				this.createPerk(PerkLib.LegendaryStrength,0,0,0,0);
+				this.createPerk(PerkLib.LegendarySpeed,0,0,0,0);
+				this.createPerk(PerkLib.NaturaljousterMastergrade,0,0,0,0);
+			}
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 6) {
+				this.createPerk(PerkLib.LegendaryToughness,0,0,0,0);
+				//this.createPerk(PerkLib.,0,0,0,0);
+				//this.createPerk(PerkLib.,0,0,0,0);
+			}
 			checkMonster();
 		}
-		
 	}
-
 }

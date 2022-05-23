@@ -626,7 +626,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const SiegweirdSoup5:StatusEffectType              	= mk("Siegweird Soup 5");
 		public static const SiegweirdTraining:StatusEffectType              = mk("Siegweird Training");
 		public static const SiegweirdTraining2:StatusEffectType             = mk("Siegweird Training 2");
-		public static const SimplifiedNonPCTurn:StatusEffectType            = mk("Simplified NonPC Turn");
+		public static const SimplifiedNonPCTurn:StatusEffectType            = mk("Simplified NonPC Turn"); //v1 stands for smart allies, v2 for stupid
 		public static const SlimeCraving:StatusEffectType                   = mk("Slime Craving");
 		public static const SlimeCravingFeed:StatusEffectType               = mk("Slime Craving Feed");
 		public static const SlimeCravingOutput:StatusEffectType             = mk("Slime Craving Output");

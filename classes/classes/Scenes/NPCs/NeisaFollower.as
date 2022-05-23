@@ -137,7 +137,7 @@ public function neisaSparWon():void {
 	clearOutput();
 	outputText("Neisa falls back, rolling to her feet. She holds out a hand, shaking her head. \"<i>Alright, that’s enough.</i>\" She rolls her shoulders, wincing. \"<i>Neither of us would benefit from going any further.</i>\" You ask her if she’s just sore about losing, and she rolls her eyes. \"<i>I can’t collect my payment if I’m too injured to do my job. Consider yourself lucky.</i>\"\n\n");
 	neisaAffection(3);
-	//if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) LevelingHerself();
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) LevelingHerself();
 	doNext(cleanupAfterCombat);
 }
 public function neisaSparLost():void {
@@ -151,21 +151,45 @@ public function neisaSparLost():void {
 private function LevelingHerself():void {
 	if (flags[kFLAGS.NEISA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.NEISA_DEFEATS_COUNTER]++;
 	else flags[kFLAGS.NEISA_DEFEATS_COUNTER] = 1;
-	if (flags[kFLAGS.NEISA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.NEISA_LVL_UP] == 5) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9));
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9), 0);
+	if (flags[kFLAGS.NEISA_DEFEATS_COUNTER] == 1 && flags[kFLAGS.NEISA_LVL_UP] == 1) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 4, player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 0, player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction));
+		flags[kFLAGS.NEISA_DEFEATS_COUNTER] = 0;
+		flags[kFLAGS.NEISA_LVL_UP] = 2;
+	}
+	if (flags[kFLAGS.NEISA_DEFEATS_COUNTER] == 2 && flags[kFLAGS.NEISA_LVL_UP] == 2) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 4, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 2));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 2));
+		flags[kFLAGS.NEISA_DEFEATS_COUNTER] = 0;
+		flags[kFLAGS.NEISA_LVL_UP] = 3;
+	}
+	if (flags[kFLAGS.NEISA_DEFEATS_COUNTER] == 3 && flags[kFLAGS.NEISA_LVL_UP] == 3) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 4, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 3));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 3));
+		flags[kFLAGS.NEISA_DEFEATS_COUNTER] = 0;
+		flags[kFLAGS.NEISA_LVL_UP] = 4;
+	}
+	if (flags[kFLAGS.NEISA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.NEISA_LVL_UP] == 4) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 4, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4));
+		flags[kFLAGS.NEISA_DEFEATS_COUNTER] = 0;
+		flags[kFLAGS.NEISA_LVL_UP] = 5;
+	}
+	if (flags[kFLAGS.NEISA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.NEISA_LVL_UP] == 5) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 4, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5));
 		flags[kFLAGS.NEISA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.NEISA_LVL_UP] = 6;
 	}
-	if (flags[kFLAGS.NEISA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.NEISA_LVL_UP] == 6) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10));
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10), 0);
+	if (flags[kFLAGS.NEISA_DEFEATS_COUNTER] == 6 && flags[kFLAGS.NEISA_LVL_UP] == 6) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 4, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6));
 		flags[kFLAGS.NEISA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.NEISA_LVL_UP] = 7;
 	}
-	if (flags[kFLAGS.NEISA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.NEISA_LVL_UP] == 7) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11), 0);
+	if (flags[kFLAGS.NEISA_DEFEATS_COUNTER] == 7 && flags[kFLAGS.NEISA_LVL_UP] == 7) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 4, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, 0, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7));
 		flags[kFLAGS.NEISA_DEFEATS_COUNTER] = 0;
 		flags[kFLAGS.NEISA_LVL_UP] = 8;
 	}
