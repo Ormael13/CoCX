@@ -2255,4 +2255,3 @@ public class BeeGirlScene extends BaseContent
 		}
 	}
 }
-
