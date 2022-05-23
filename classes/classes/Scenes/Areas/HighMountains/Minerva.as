@@ -54,7 +54,7 @@ public class Minerva extends Monster
 			//[if attack lands]
 			else {
 				outputText("  She hits you square in the chest, knocking you to the ground as her entire weight lands on you.  The bombshell of a woman jumps off your chest, ready to keep fighting. ");
-				damage = player.takePhysDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 			speStat.core.value += 70;
 		}
@@ -224,128 +224,7 @@ public class Minerva extends Monster
 				this.level = 23;//potem zrobic jak purification udane to dostaje nieco lvl up i stat up tez
 				this.additionalXP = 50;
 			}
-			if (flags[kFLAGS.MINERVA_LVL_UP] == 1) {
-				initStrTouSpeInte(81, 100, 130, 90);
-				initWisLibSensCor(85, 41, 35, 45);
-				this.weaponAttack = 60;
-				this.armorDef = 9;
-				this.armorMDef = 3;
-				this.bonusHP = 940;
-				this.bonusLust = 105;
-				this.level = 29;
-				this.additionalXP = 100;
-			}
-			if (flags[kFLAGS.MINERVA_LVL_UP] == 2) {
-				initStrTouSpeInte(98, 120, 150, 105);
-				initWisLibSensCor(100, 52, 45, 45);
-				this.weaponAttack = 70;
-				this.armorDef = 11;
-				this.armorMDef = 4;
-				this.bonusHP = 1410;
-				this.bonusLust = 132;
-				this.level = 35;
-				this.additionalXP = 150;
-			}
-			if (flags[kFLAGS.MINERVA_LVL_UP] == 3) {
-				initStrTouSpeInte(115, 140, 170, 120);
-				initWisLibSensCor(115, 63, 55, 45);
-				this.weaponAttack = 80;
-				this.armorDef = 13;
-				this.armorMDef = 5;
-				this.bonusHP = 1880;
-				this.bonusLust = 159;
-				this.level = 41;
-				this.additionalXP = 200;
-			}
-			if (flags[kFLAGS.MINERVA_LVL_UP] == 4) {
-				initStrTouSpeInte(132, 160, 190, 135);
-				initWisLibSensCor(130, 74, 65, 45);
-				this.weaponAttack = 90;
-				this.armorDef = 15;
-				this.armorMDef = 6;
-				this.bonusHP = 2350;
-				this.bonusLust = 186;
-				this.level = 47;
-				this.additionalXP = 250;
-			}
-			if (flags[kFLAGS.MINERVA_LVL_UP] == 5) {
-				initStrTouSpeInte(149, 180, 210, 150);
-				initWisLibSensCor(145, 85, 75, 45);
-				this.weaponAttack = 100;
-				this.armorDef = 17;
-				this.armorMDef = 7;
-				this.bonusHP = 2820;
-				this.bonusLust = 213;
-				this.level = 53;
-				this.additionalXP = 300;
-			}
-			if (flags[kFLAGS.MINERVA_LVL_UP] == 6) {
-				initStrTouSpeInte(166, 200, 230, 165);
-				initWisLibSensCor(160, 96, 85, 45);
-				this.weaponAttack = 110;
-				this.armorDef = 19;
-				this.armorMDef = 8;
-				this.bonusHP = 3290;
-				this.bonusLust = 240;
-				this.level = 59;
-				this.additionalXP = 350;
-			}
-			if (flags[kFLAGS.MINERVA_LVL_UP] == 7) {
-				initStrTouSpeInte(183, 220, 250, 180);
-				initWisLibSensCor(175, 107, 95, 45);
-				this.weaponAttack = 120;
-				this.armorDef = 21;
-				this.armorMDef = 9;
-				this.bonusHP = 3760;
-				this.bonusLust = 267;
-				this.level = 65;
-				this.additionalXP = 400;
-			}
-			if (flags[kFLAGS.MINERVA_LVL_UP] == 8) {
-				initStrTouSpeInte(200, 240, 270, 195);
-				initWisLibSensCor(190, 118, 105, 45);
-				this.weaponAttack = 130;
-				this.armorDef = 23;
-				this.armorMDef = 10;
-				this.bonusHP = 4230;
-				this.bonusLust = 294;
-				this.level = 71;
-				this.additionalXP = 450;
-			}
-			if (flags[kFLAGS.MINERVA_LVL_UP] == 9) {
-				initStrTouSpeInte(217, 260, 290, 210);
-				initWisLibSensCor(205, 129, 115, 45);
-				this.weaponAttack = 140;
-				this.armorDef = 25;
-				this.armorMDef = 11;
-				this.bonusHP = 4700;
-				this.bonusLust = 321;
-				this.level = 77;
-				this.additionalXP = 500;
-			}
-			if (flags[kFLAGS.MINERVA_LVL_UP] == 10) {
-				initStrTouSpeInte(234, 280, 310, 225);
-				initWisLibSensCor(220, 140, 125, 45);
-				this.weaponAttack = 150;
-				this.armorDef = 27;
-				this.armorMDef = 12;
-				this.bonusHP = 5170;
-				this.bonusLust = 348;
-				this.level = 83;
-				this.additionalXP = 550;
-			}
-			if (flags[kFLAGS.MINERVA_LVL_UP] == 10) {
-				initStrTouSpeInte(251, 300, 330, 240);
-				initWisLibSensCor(235, 151, 135, 45);
-				this.weaponAttack = 160;
-				this.armorDef = 29;
-				this.armorMDef = 13;
-				this.bonusHP = 5640;
-				this.bonusLust = 375;
-				this.level = 83;
-				this.additionalXP = 550;
-			}
-			if (flags[kFLAGS.MINERVA_LVL_UP] == 10) {
+			else if (flags[kFLAGS.MINERVA_LVL_UP] == 12) {
 				initStrTouSpeInte(268, 320, 350, 255);
 				initWisLibSensCor(250, 162, 145, 45);
 				this.weaponAttack = 170;
@@ -353,8 +232,20 @@ public class Minerva extends Monster
 				this.armorMDef = 14;
 				this.bonusHP = 6110;
 				this.bonusLust = 402;
-				this.level = 83;
-				this.additionalXP = 550;
+				this.level = 95;
+				this.additionalXP = 650;
+			}
+			else {	//leave min and max levels to easily balance npc combat
+				var lvlMulti:Number = flags[kFLAGS.MINERVA_LVL_UP];
+				initStrTouSpeInte(64 + 17*lvlMulti, 80 + 20*lvlMulti, 110 + 20*lvlMulti, 75 + 15*lvlMulti);
+				initWisLibSensCor(70 + 15*lvlMulti, 30 + 11*lvlMulti, 25 + 10*lvlMulti, 45);
+				this.weaponAttack = 50 + 10*lvlMulti;
+				this.armorDef = 7 + 2*lvlMulti;
+				this.armorMDef = 2 + lvlMulti;
+				this.bonusHP = 470 + 470*lvlMulti;
+				this.bonusLust = 78 + 27*lvlMulti;
+				this.level = 23 + 6*lvlMulti;
+				this.additionalXP = 50 + 50*lvlMulti;
 			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			this.a = "";
 			this.short = "Minerva";

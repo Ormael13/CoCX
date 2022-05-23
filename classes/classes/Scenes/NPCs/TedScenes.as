@@ -16,6 +16,10 @@ public class TedScenes extends NPCAwareContent
 		{
 		}
 
+		public function canEncounterTed():Boolean {
+			return flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 2 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1;
+		}
+
 public function tedWrath(changes:Number = 0):Number {
 	flags[kFLAGS.TED_WRATH] += changes;
 	if (flags[kFLAGS.TED_WRATH] > 100) flags[kFLAGS.TED_WRATH] = 100;
