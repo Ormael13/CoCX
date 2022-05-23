@@ -1436,17 +1436,6 @@ public function femoitInitialTalk():void
 
 	outputText("\n\nThe basilisk is silent for a time, running [benoit eir] claws along the counter pensively.  \"<i>Yes,</i>\" [benoit ey] says eventually, in a quiet tone.  \"<i>I 'ave.  Away from ze mountains, I 'ave 'ad time to sink.  I am not ze demons' slave anymore, and I am a funny joke of a basilisk anyway, so I 'ave often thought about making certain... zacrifices.  If we 'ad just one female, away from zeir corruption, zen...</i>\" [benoit ey] tails off, shrugging unhappily.  \"<i>But I just torment myself sinking about zis, [name].  Ze demons made us very resistant to change.  I would need somesing very powerful for me to become... somesing useful.</i>\"");
 
-/*
-	if (player.hasItem(consumables.BIMBOLQ))
-	{
-		outputText("\n\nA certain pink, effervescent liqueur suddenly feels very heavy in your pouch.  That would certainly be powerful enough to give Benoit what [benoit ey] wants... along with a lot of side effects.");
-
-		outputText("\n\n(\"<i>Bimbofy</i>\" option added to " + benoitMF("Benoit's","Benoite's") + " menu.)");
-
-		flags[kFLAGS.BIMBO_FEMOIT_UNLOCKED] = 1;
-	}
-	*/
-
 	if (player.inte >= 60)
 	{
 		outputText("\n\nYou reckon that even a resistant creature could be made to transform to the opposite sex, with a strong enough potion, and ask [benoit name] about it.");

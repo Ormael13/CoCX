@@ -1848,7 +1848,6 @@ public class SaveUpdater extends NPCAwareContent {
 					}
 				}
 				CoC.instance.charCreation.setupMutations();
-				outputText("\n\nMutations backend updated.");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.015;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.016) {
@@ -1856,7 +1855,6 @@ public class SaveUpdater extends NPCAwareContent {
 					player.HP = player.maxOverHP();
 					player.fatigue = 0;
 				}
-				outputText("\n\nSmall fix to Gorgon Eyes Mutation causing NaN in speed, health and fatigue");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.016;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.017) {
@@ -1877,11 +1875,10 @@ public class SaveUpdater extends NPCAwareContent {
 					player.setWeaponRange(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID]) as WeaponRange);
 					flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = 0;
 				}
-				outputText("\n\nWeapons duplication from woodelves hunting party should now be fixed.... again.");
+				outputText("\nWeapons duplication from woodelves hunting party should now be fixed.... again.");
 				for each (var mutation:PerkType in MutationsLib.mutationsArray("", true)){
 					player.removePerk(mutation);
 				}
-				outputText(" Also, remove old mutations again.")
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.018;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
