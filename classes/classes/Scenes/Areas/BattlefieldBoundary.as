@@ -55,7 +55,7 @@ use namespace CoC;
 				return;
 			}
 			//Ted
-			if (SceneLib.tedScene.canEncounterTed && rand(10) == 0) {
+			if (SceneLib.tedScene.canEncounterTed() && rand(10) == 0) {
 				SceneLib.tedScene.introPostHiddenCave();
 				return;
 			}

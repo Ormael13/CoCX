@@ -2959,7 +2959,7 @@ public static const UNKNOWN_FLAG_NUMBER_02950:int                               
 public static const UNKNOWN_FLAG_NUMBER_02951:int                                   = 2951;
 public static const UNKNOWN_FLAG_NUMBER_02952:int                                   = 2952;
 public static const UNKNOWN_FLAG_NUMBER_02953:int                                   = 2953;
-public static const UNKNOWN_FLAG_NUMBER_02954:int                                   = 2954;
+public static const HACK_CELESS_INCUBATION:int                                   	= 2954;
 public static const SCENEHUNTER_LOSS_SELECT:int                                   	= 2955;
 public static const SCENEHUNTER_PRINT_CHECKS:int                                    = 2956; //SceneHunter settings
 public static const SCENEHUNTER_OTHER:int                                    		= 2957;
@@ -3004,7 +3004,7 @@ public static const MEANINGLESS_CORRUPTION:int                                  
 public static const ITS_EVERY_DAY:int                                               = 2996; // all special calender events occur every day!
 public static const LOW_STANDARDS_FOR_ALL:int                                       = 2997;
 public static const HYPER_HAPPY:int                                                 = 2998;
-public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999; // ------------------------- Jojo Debug Flag?
+public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999;
 
 	}
 }

@@ -3703,51 +3703,61 @@ public final class Mutations extends MutationsHelper {
             if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Mana Shield.</b>");
                 player.createStatusEffect(StatusEffects.KnowsManaShield, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Water Ball and doesnt have it
             if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsWaterBall)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Water Ball.</b>");
                 player.createStatusEffect(StatusEffects.KnowsWaterBall, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Wind Bullet and doesnt have it
             if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsWindBullet)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Wind Bullet.</b>");
                 player.createStatusEffect(StatusEffects.KnowsWindBullet, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Stalagmite and doesnt have it
             if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsStalagmite)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Stalagmite.</b>");
                 player.createStatusEffect(StatusEffects.KnowsStalagmite, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Acid Spray and doesnt have it
             if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsAcidSpray)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Acid Spray.</b>");
                 player.createStatusEffect(StatusEffects.KnowsAcidSpray, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Clear Mind and doesnt have it
             if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsClearMind)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Clear Mind.</b>");
                 player.createStatusEffect(StatusEffects.KnowsClearMind, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Water Sphere and doesnt have it
             if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsWaterSphere)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Water Sphere.</b>");
                 player.createStatusEffect(StatusEffects.KnowsWaterSphere, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Wind Blast and doesnt have it
             if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsWindBlast)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Wind Blast.</b>");
                 player.createStatusEffect(StatusEffects.KnowsWindBlast, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Shatterstone and doesnt have it
             if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsShatterstone)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Shatterstone.</b>");
                 player.createStatusEffect(StatusEffects.KnowsShatterstone, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Corrosive Wave and doesnt have it
             if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsCorrosiveWave)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Corrosive Wave.</b>");
                 player.createStatusEffect(StatusEffects.KnowsCorrosiveWave, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Turbulence and doesnt have it
             /*if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.)) {
@@ -3765,21 +3775,25 @@ public final class Mutations extends MutationsHelper {
             if (player.inte >= 75 && !player.hasStatusEffect(StatusEffects.KnowsHydroAcid)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Hydro Acid.</b>");
                 player.createStatusEffect(StatusEffects.KnowsHydroAcid, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Energy Drain and doesnt have it
             if (player.inte >= 80 && !player.hasStatusEffect(StatusEffects.KnowsEnergyDrain)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Energy Drain.</b>");
                 player.createStatusEffect(StatusEffects.KnowsEnergyDrain, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Acid Rain and doesnt have it
             if (player.inte >= 85 && !player.hasStatusEffect(StatusEffects.KnowsAcidRain)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Acid Rain.</b>");
                 player.createStatusEffect(StatusEffects.KnowsAcidRain, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Restore and doesnt have it
             if (player.inte >= 90 && !player.hasStatusEffect(StatusEffects.KnowsRestore)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Restore.</b>");
                 player.createStatusEffect(StatusEffects.KnowsRestore, 0, 0, 0, 0);
+				return;
             }
             //Smart enough for Balance of Life and doesnt have it
             if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsBalanceOfLife)) {
@@ -3931,31 +3945,37 @@ public final class Mutations extends MutationsHelper {
 			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsBloodMissiles)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Missiles.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodMissiles, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for Blood Shield and doesnt have it
 			if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsBloodShield)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Shield.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodShield, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for Blood Explosion and doesnt have it
 			if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsBloodExplosion)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Explosion.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodExplosion, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for Blood Chains and doesnt have it
 			if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodChains)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Chains.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodChains, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for Blood Wave and doesnt have it
 			if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBloodWave)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Wave.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodWave, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for Lifesteal Enchantment and doesnt have it
 			if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsLifestealEnchantment)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Lifesteal Enchantment.</b>");
 				player.createStatusEffect(StatusEffects.KnowsLifestealEnchantment, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for Blood Field and doesnt have it
 			if (player.inte >= 80 && !player.hasStatusEffect(StatusEffects.KnowsBloodField)) {
@@ -3987,21 +4007,25 @@ public final class Mutations extends MutationsHelper {
 			if (player.wis >= 20 && !player.hasStatusEffect(StatusEffects.KnowsBloodSwipe)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Swipe.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodSwipe, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for Heart Seeker and doesnt have it
 			if (player.wis >= 30 && !player.hasStatusEffect(StatusEffects.KnowsHeartSeeker)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Heart Seeker.</b>");
 				player.createStatusEffect(StatusEffects.KnowsHeartSeeker, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for Blood Dewdrops and doesnt have it
 			if (player.wis >= 40 && !player.hasStatusEffect(StatusEffects.KnowsBloodDewdrops)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Dewdrops.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodDewdrops, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for Blood Requiem and doesnt have it
 			if (player.wis >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodRequiem)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: Blood Requiem.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodRequiem, 0, 0, 0, 0);
+				return;
 			}/*
 			//Smart enough for Scarlet Spirit Charge and doesnt have it
 			if (player.wis >= 60 && !player.hasStatusEffect(StatusEffects.KnowsScarletSpiritCharge)) {
@@ -4015,21 +4039,25 @@ public final class Mutations extends MutationsHelper {
 			if (player.wis >= 30 && !player.hasStatusEffect(StatusEffects.KnowsBloodSwipeSF)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Swipe.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodSwipeSF, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for SF Infused Heart Seeker and doesnt have it
 			if (player.wis >= 40 && !player.hasStatusEffect(StatusEffects.KnowsHeartSeekerSF)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Heart Seeker.</b>");
 				player.createStatusEffect(StatusEffects.KnowsHeartSeekerSF, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for SF Infused Blood Dewdrops and doesnt have it
 			if (player.wis >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBloodDewdropsSF)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Dewdrops.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodDewdropsSF, 0, 0, 0, 0);
+				return;
 			}
 			//Smart enough for SF Infused Blood Requiem and doesnt have it
 			if (player.wis >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBloodRequiemSF)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Requiem.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodRequiemSF, 0, 0, 0, 0);
+				return;
 			}/*
 			//Smart enough for SF Infused Scarlet Spirit Charge and doesnt have it
 			if (player.wis >= 70 && !player.hasStatusEffect(StatusEffects.KnowsScarletSpiritChargeSF)) {
@@ -17346,6 +17374,7 @@ public final class Mutations extends MutationsHelper {
         var HE:Number = 5 + player.level;
 		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
+		if (player.hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) HE *= 2;
 		player.herbXP(HE);
     }
 
@@ -17358,6 +17387,7 @@ public final class Mutations extends MutationsHelper {
         var HE:Number = 5 + player.level;
 		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
+		if (player.hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) HE *= 2;
 		player.herbXP(HE);
     }
 
@@ -17369,6 +17399,7 @@ public final class Mutations extends MutationsHelper {
         var HE:Number = 5 + player.level;
 		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
+		if (player.hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) HE *= 2;
 		player.herbXP(HE);
     }
 
@@ -17384,6 +17415,7 @@ public final class Mutations extends MutationsHelper {
         var HE:Number = 5 + player.level;
 		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
+		if (player.hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) HE *= 2;
 		player.herbXP(HE);
     }
 
@@ -17397,6 +17429,7 @@ public final class Mutations extends MutationsHelper {
         var HE:Number = 5 + player.level;
 		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
+		if (player.hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) HE *= 2;
 		player.herbXP(HE);
     }
 
@@ -17432,7 +17465,8 @@ public final class Mutations extends MutationsHelper {
         var HE:Number = 5 + player.level;
 		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
+		if (player.hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) HE *= 2;
 		player.herbXP(HE);
     }
 }
-}
+}

@@ -344,7 +344,7 @@ private function oswaldPawnMenu(page:int = 1, refresh:Boolean = false):void { //
 private function oswaldPawnMenu2():void {
 	spriteSelect(SpriteDb.s_oswald);
 	menu();
-	if (player.hasKeyItem("Backpack") && player.keyItemvX("Backpack", 1) < 12) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
+	if (player.keyItemvX("Backpack", 1) < 4) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
 	switch (flags[kFLAGS.KATHERINE_UNLOCKED]) {
 		case 1:
 		case 2: addButton(10, "Kath's Alley", katherine.visitKatherine); break;

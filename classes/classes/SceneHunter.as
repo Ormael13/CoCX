@@ -80,12 +80,13 @@ public class SceneHunter extends BaseContent {
         else
             outputText("<b><font color=\"#800000\">DISABLED</font></b>");
         outputText("\nTweaks, which didn't fit into the previous categories. Full list goes here.");
-        outputText("\nChristmas elf: enabled sex option even when corrupt.");
-        outputText("\nLizan Rogue: medium-corrupt PCs now can persuade Lizan Rogue.");
-        outputText("\nNaga <b>after</b> Samirah recruitment: enabled scenes. They're too good to miss.");
-        outputText("\nGreen slime: removed rape corruption checks.");
-        outputText("\nGnoll: disabled dick size requirements in multicock anal. Because why not?");
-        outputText("\n<i>This opens up more scenes. They are lore-accurate and still explained in the game (so you won't get Amily living with corrupt Jojo or other nonsense), but be warned that the original writers intended some details to work the other way.</i>");
+        outputText("\n- Christmas elf: enabled sex option even when corrupt.");
+        outputText("\n- Lizan Rogue: medium-corrupt PCs now can persuade Lizan Rogue.");
+        outputText("\n- Naga <b>after</b> Samirah recruitment: enabled scenes. They're too good to miss.");
+        outputText("\n- Green slime: removed rape corruption checks.");
+        outputText("\n- Gnoll: disabled dick size requirements in multicock anal. Because why not?");
+        outputText("\n- Unicorn: Celess can be 'recruited' after fucking the unicorn. Meant for people who don't feel the overwhelming love for horsecocks and gender-changing, but still want their legendary equipment.");
+        outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical and you don't get nonsense like Amily living with corrupt Jojo), but be warned that the original writers probably intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
 
         addButton(10, "Scene List", openURL, "https://cocxianxia.fandom.com/wiki/Conditional_Scenes");
