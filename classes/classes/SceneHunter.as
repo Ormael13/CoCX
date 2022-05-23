@@ -86,6 +86,8 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Green slime: removed rape corruption checks.");
         outputText("\n- Gnoll: disabled dick size requirements in multicock anal. Because why not?");
         outputText("\n- Unicorn: Celess can be 'recruited' after fucking the unicorn. Meant for people who don't feel the overwhelming love for horsecocks and gender-changing, but still want their legendary equipment.");
+        outputText("\n- Benoit: can be feminized even after having sex with. The talk should start automatically when PC has a vagina & Benoit's affection is higher than 40.");
+        outputText("\n- Benoite / Femoit: when impregnating her, you can select the size of the resultant clutch.");
         outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical and you don't get nonsense like Amily living with corrupt Jojo), but be warned that the original writers probably intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
 
@@ -540,21 +542,14 @@ public class SceneHunter extends BaseContent {
         outputText("\n<b>Recalling wastes some in-game time, but it will never change any of your stats. If such occasion occurs, please report it as a bug.</b></i>");
         recalling = true; //Setting the flag to disable everything but text
         menu();
-        //Marble scene
-        if (flags[kFLAGS.MARBLE_PURIFIED] == 1)
-            addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight).hint("The punishment for Marble's bitchy sister.");
-        //Excellia slave first scene
-        if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2)
-            addButton(1, "Excellia Slv", SceneLib.excelliaFollower.ExcelliaPathChoiceMakeSlave).hint("Excellia acknowledges herself as your slave.");
-        //Phylla demon fuck
-        if (flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] || flags[kFLAGS.PHYLLA_SAVED]) {
-            if (player.cor >= 66 - player.corruptionTolerance && player.gender > 0)
-                addButton(2, "PhyllaCart", SceneLib.desert.antsScene.demonsFuckAntgirl).hint("Maybe you should have left Phylla to demons and watch them having fun?");
-            else addButtonDisabled(2, "PhyllaCart", "You must be corrupted and not genderless to recall this.");
-        }
-        //Phylla keks
-        if (flags[kFLAGS.ANT_WAIFU] || flags[kFLAGS.PHYLLA_STAY_HOME])
-            addButton(3, "PhyFirstTime", SceneLib.desert.antsScene.antGirlGoodEnd).hint("Your first time with Phylla.");
+        //Benoit stuff
+        if (flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] > 0)
+            addButton(0, "Benoit1stEgg", SceneLib.bazaar.benoit.eggySuggest).hint("Benoit's first egging.");
+        if (flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 1)
+            addButton(1, "BenoitBWomb", SceneLib.bazaar.benoit.tryToConvertToBassyWomb).hint("Your first Basilisk Womb test.");
+        if (flags[kFLAGS.TIMES_FUCKED_FEMOIT] > 0)
+            addButton(2, "Femoit1st", SceneLib.bazaar.benoit.femoitFirstTimeYes).hint("First Benoite experience.");
+        //2, 3 - empty
         //Tamani first time
         if (flags[kFLAGS.TAMANI_MET] == 1 && player.hasCock())
             addButton(4, "TamaniFirst", SceneLib.forest.tamaniScene.tamaniFirstTimeConsentual).hint("First time with Tamani.");
@@ -574,8 +569,30 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && flags[kFLAGS.KAIJU_COCK] == 1)
             addButton(9, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus).hint("Venus discovers her new cock.");
 
+
+        addButton(13, "CampNPCs", recallScenes_NPCs);
         addButton(13, "Dungeons", recallScenes_dungeons);
         addButton(14, "Wake Up", recallWakeUpImpl);
+    }
+
+    private function recallScenes_NPCs():void {
+        menu();
+        //Marble scene
+        if (flags[kFLAGS.MARBLE_PURIFIED] == 1)
+            addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight).hint("The punishment for Marble's bitchy sister.");
+        //Excellia slave first scene
+        if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2)
+            addButton(1, "Excellia Slv", SceneLib.excelliaFollower.ExcelliaPathChoiceMakeSlave).hint("Excellia acknowledges herself as your slave.");
+        //Phylla demon fuck
+        if (flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] || flags[kFLAGS.PHYLLA_SAVED]) {
+            if (player.cor >= 66 - player.corruptionTolerance && player.gender > 0)
+                addButton(2, "PhyllaCart", SceneLib.desert.antsScene.demonsFuckAntgirl).hint("Maybe you should have left Phylla to demons and watch them having fun?");
+            else addButtonDisabled(2, "PhyllaCart", "You must be corrupted and not genderless to recall this.");
+        }
+        //Phylla keks
+        if (flags[kFLAGS.ANT_WAIFU] || flags[kFLAGS.PHYLLA_STAY_HOME])
+            addButton(3, "PhyFirstTime", SceneLib.desert.antsScene.antGirlGoodEnd).hint("Your first time with Phylla.");
+        addButton(14, "Back", recallScenes);
     }
 
     private function recallScenes_dungeons():void {
