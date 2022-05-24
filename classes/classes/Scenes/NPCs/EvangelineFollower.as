@@ -1116,112 +1116,112 @@ private function InternalMutations0(page:int = 0, GoM:int = 0):void {
 		menu();
 		//Heart Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray("Heart"));
-		addButton(14, "Back", InternalMutations0);
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsMuscle():void{
 		menu();
 		//Muscle Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray("Muscle"));
-		addButton(14, "Back", InternalMutations0);
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsMouth():void{
 		menu();
 		//Mouth Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray("Mouth"));
-		addButton(14, "Back", InternalMutations0);
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsAdrenals():void{
 		menu();
 		//Adrenal Glands Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray("Adrenals"));
-		addButton(14, "Back", InternalMutations0);
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsBloodstream():void{
 		menu();
 		//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
 		mutationsAssistant(IMutationsLib.mutationsArray("Bloodstream"));
-		addButton(14, "Back", InternalMutations0);
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsFaTissue():void{
 		menu();
 		//Fat tissue Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray("FaT"));
-		addButton(14, "Back", InternalMutations0);
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsLungs():void{
 		menu();
 		//Lungs Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray("Lungs"));
-		addButton(14, "Back", InternalMutations0);
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsMetabolism():void{
 		menu();
 		//Metabolism Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray("Metabolism"));
-		addButton(14, "Back", InternalMutations0);
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsOvaries():void{
 		menu();
 		//Ovaries Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray("Ovaries"));
-		addButton(14, "Back", InternalMutations0);
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsTesticles():void{
 		menu();
 		//Testicle Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray("Testicles"));
-		addButton(14, "Back", InternalMutations0);
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsEyes():void {
 		menu();
 		//Eyes Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray("Eyes"));
-		addButton(14, "Back", InternalMutations0);
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsBoneMarrow():void{
 		menu();
 		//Bones and Marrow Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray("Bone"));
-		addButton(14, "Back", InternalMutations0);
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsPNervSys():void{
 		menu();
 		//Peripheral/NervSys Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray("Nerv/Sys"), 1);
-		addButton(14, "Back", curry(InternalMutations0, 1));
+		addButton(14, "Back", InternalMutations0, 1, GoM);
 	}
 
 	function InternalMutationsThyroidGlands():void{
 		menu();
 		//Thyroid Glands Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray("Thyroid"),1);
-		addButton(14, "Back", curry(InternalMutations0, 1));
+		addButton(14, "Back", InternalMutations0, 1, GoM);
 	}
 
 	function InternalMutationsParathyroid():void{
 		menu();
 		//ParaThyroid Glands Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray("PThyroid"),1);
-		addButton(14, "Back", curry(InternalMutations0, 1));
+		addButton(14, "Back", InternalMutations0, 1, GoM);
 	}
 
 	function InternalMutationsAdaptations():void{
 		menu();
 		//Adaptations Mutations
 		mutationsAssistant(IMutationsLib.mutationsArray("Adaptations"),1);
-		addButton(14, "Back", curry(InternalMutations0, 1));
+		addButton(14, "Back", InternalMutations0, 1, GoM);
 	}
 
 	function mutationsAssistant(pArray:Array, menuButton:int = 0):* {
