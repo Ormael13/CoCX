@@ -1,15 +1,10 @@
 # TODO @aimozg
-* write README!
 * Check generated requirement names
 * consider moving naming function from tier to race
 * error reporting utility
 * Future:
-  * racial score caching
-  * `Race.onTierUp`/`onTierDown` - see `PlayerEvents:1500`
-  * "Racial form" maybe? (gargoyles, alicorn/nightmare, elementals - same tier, diff. requirements/bonuses) Could be done by customizing tier number and simply renaming RaceTier -> RaceForm.
   * manifest race/tier (for testing)
   * add buffable stats: armor, magic resistance, evasion, unarmed dmg
-  * finish converting elemental stuff? eh...
 
 # New Race system
 
@@ -50,10 +45,6 @@ All `BodyData` information is stored in a single array, its indices are called "
 1. "legs" is used instead of "lower body".
 2. If player has no coat, coat-related slots like `body.skinCoatType` have invalid values. Therefore, you can simplify check "if has coat and coat type/color is X" to "if coat type/color is X". 
 3. Similarly, if player has no vagina, `body.vaginaType` holds invalid value, and "if has vagina and its type is X" check can be simplified to "if vagina type is X". 
-
-### Adding new slots
-
-TODO @aimozg write me
 
 ## Overview of new & replaced functions
 
@@ -215,31 +206,80 @@ addMutation(IMutationsLib.TwinHeartIM, +2);
 
 ### finalizeScore
 
-TODO
+`Race.finalizeScore` contains code that applies bonuses common to all races, or resets score to zero in certain conditions.
+
+Races don't need to override it; its superclass implementation contains the shared code.
+
+Possible scenario when you want to override it is varying fail score requirements (see HumanRace for example).
 
 ## Tiers
 
-TODO @aimozg write me
+Racial tiers are configured in `setup()` function. They SHOULD be written in ascending order.
+
+Tier configuration starts with `buildTier(minScore, name)` followed by a method chain. It MUST end with `.end()` function.
 
 ### Extra requirements
 
-TODO 
+When a tier requires more than having a score, use a `.requireXXXX()/.require()` functions.
+
+Example:
+```
+buildTier(16, "nine tailed kitsune")
+        .requireTailCount(9)
+```
+```
+buildTier(9, "kitsune")
+        .require("2+ fox tails", function (body:BodyData):Boolean {
+            return body.tailType == Tail.FOX && body.tailCount >= 2
+        })
+```
+
+Note that requirements are not propagated by default to higher tiers. To do that, add a `.requirePreviousTier()` to the higher tier declaration.
 
 ### Naming function
 
-TODO
+By default, a second argument of the `buildTier` function would be used to name a player. You can configure different names for differently shaped/gendered player using one of these functions:
+* `namesTauric(nonTaurName, taurName)`
+* `namesMaleFemale(maleName, femaleName)`
+* `namesMaleFemale(maleNonTaurName, femaleNonTaurName, maleTaurName[, femaleTaurName])` - if female taur name is omitted, it's same as male
+* `namesMaleFemaleMorph(maleName, femaleName, morphName)` - will use `maleName/femaleName` if player has human-shaped face, otherwise `morphName`
+* `namesMaleFemaleMorphTaur(maleName, femaleName, morphName, taurName)` - special name for taurs, otherwise same as above
+* `customNamingFunction` - when everything else is not flexible enough.
 
 ### Buffs
 
-TODO
+Buffs that are granted by a racial tier are configured with `.buffs(buffObject)` function. Note that lower-tier buffs are not applied, so for higher-tier buffs a total value must be provided and not an extra bonus.
+
+Example:
+```as
+buildTier(9, "kitsune")
+        .buffs({
+            "str.mult": -0.35,
+            "spe.mult": +0.25,
+            "int.mult": +0.60,
+            "wis.mult": +0.75,
+            "lib.mult": +0.30,
+            "sens": +20,
+            "maxsf_mult": +0.20,
+            "maxfatigue_base": +100
+        })
+```
 
 #### Extra bonuses
 
-TODO
+When a racial tier gives a bonus that is not a buff, you can add its description with `withExtraBonuses` so player would know about its existence.
+
+Example:
+```as
+buildTier(14, "orca")
+        .withExtraBonuses("+35 Max Hunger")
+```
 
 #### Dynamic buffs
 
-TODO
+When buffs depend on some other properties, you can use `withDynamicBuffs` function.
+
+For example, see Gargoyle and Elemental Fusion races.
 
 ### Racial forms
 

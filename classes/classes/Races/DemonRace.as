@@ -16,7 +16,7 @@ public class DemonRace extends Race {
 	
 	public override function setup():void {
 		addScores()
-				.hornTypeAndCount(Horns.DEMON, GREATER_THAN(0), +1)
+				.hornType(Horns.DEMON, +1)
 				.hornType(NOT(Horns.GOAT), 0, -10)
 				.tailType(Tail.DEMONIC, +1)
 				.wingType(Wings.BAT_LIKE_TINY, +2)

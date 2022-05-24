@@ -27,7 +27,6 @@ public class AlicornkinRace extends Race{
 				.legType(LowerBody.HOOFED, +1)
 				.eyeType(Eyes.HUMAN, +1)
 				.hornType(ANY(Horns.UNICORN, Horns.BICORN), 0, -1000)
-				
 				.skinCoatType(Skin.FUR, +1)
 				.hasCockOfType(CockTypesEnum.HORSE, +1)
 				.vaginaType(VaginaClass.EQUINE, +1)

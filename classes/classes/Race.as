@@ -301,10 +301,10 @@ public class Race {
 		return {operator:"gt",value:value};
 	}
 	protected static function AT_MOST(value:Number):* {
-		return {operator:"lte",value:value};
+		return {operator:"le",value:value};
 	}
 	protected static function AT_LEAST(value:Number):* {
-		return {operator:"gte",value:value};
+		return {operator:"ge",value:value};
 	}
 	protected static function NOT(value:*):* {
 		return {operator:"ne",value:value};

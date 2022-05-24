@@ -587,7 +587,7 @@ public class PerkType extends BaseContent
 		 */
 		public function requireRacialGroup(races:/*Race*/Array, text:String =""):PerkType {
 			races = flatten(races);
-			if (!text) text = mergeSentences(mapOneProp(races,"name"),", or ",", ",false);
+			if (!text) text = mergeSentences(mapOneProp(races,"name"),", or ",", ",false)+" race";
 			requirements.push({
 				fn : function (player:Player):Boolean {
 					for each (var race:Race in races) {

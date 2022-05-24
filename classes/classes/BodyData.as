@@ -2,6 +2,7 @@ package classes {
 import classes.BodyParts.*;
 import classes.internals.EnumValue;
 import classes.internals.Utils;
+import classes.internals.race.RaceUtils;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
 
@@ -51,21 +52,24 @@ public class BodyData {
 	public static const Slots:/*EnumValue*/Array = [];
 	
 	public static function defaultPhrase(operator:String, value:*, nameFn:Function, suffix:String):String {
+		if (nameFn == null) nameFn = function (value:*):String {
+			return ""+value;
+		}
 		switch (operator) {
 			case "eq":
-				return nameFn(value)+" "+suffix;
+				return nameFn(value)+suffix;
 			case "ne":
-				return "not "+nameFn(value)+" "+suffix;
+				return "not "+nameFn(value)+suffix;
 			case "ge":
 			case "le":
 			case "gt":
 			case "lt":
 				return {
-					"gt": "more than",
-					"lt": "less than",
-					"ge": "at least",
-					"le": "at most"
-				}[operator] + nameFn(value)+" "+suffix;
+					"gt": "more than ",
+					"lt": "less than ",
+					"ge": "at least ",
+					"le": "at most "
+				}[operator] + nameFn(value)+suffix;
 			case "any":
 			case "none":
 				var any:Boolean = operator === "any";
@@ -75,26 +79,32 @@ public class BodyData {
 								(any?" or ":" nor "),
 								", ",
 								false
-						) + " " + suffix;
+						) + suffix;
 		}
 		throw new Error("Invalid operator "+operator);
 	}
-	public static function slotPhraseFn(slotid:int):Function {
+	public static function defaultPhraseFn(suffix:String, nameFn:Function):Function {
+		return function(operator:String, value:*):String {
+			return defaultPhrase(operator, value, nameFn, suffix);
+		}
+	}
+	public static function slotPhraseFn(slotid:int, suffix:Boolean=true):Function {
 		if (Slots[slotid].phraseFn) return Slots[slotid].phraseFn;
 		var slotName:String = Slots[slotid].name;
 		var nameFn:Function = Slots[slotid].nameFn || function (value:*):String {
 			return ""+value;
 		};
 		return function(operator:String, value:*):String {
-			return defaultPhrase(operator, value, nameFn, slotName);
+			return defaultPhrase(operator, value, nameFn,suffix?" " + slotName:"");
 		}
 	}
 	
 	// Numbers are never saved, so can be changed between game versions without any problems.
 	// As long as they are proper 0..N sequence
+	// Don't forget to add a corresponding entry in update() function!
 	
 	private static var _slotid:int = 0;
-	// Basic body parts
+	// Basic body parts - sorted by name
 	public static const SLOT_ANTENNAE_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_ANTENNAE_TYPE, "ANTENNAE_TYPE", {
 		name:"antennae",
@@ -223,9 +233,9 @@ public class BodyData {
 	
 	public static const SLOT_REAR_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_REAR_TYPE, "REAR_TYPE", {
-		name:"rear",
+		name:"",
 		nameFn: function(value:int):String {
-			if (value == RearBody.NONE) return "ordinary";
+			if (value == RearBody.NONE) return "ordinary rear";
 			return RearBody.Types[value].name;
 		}
 	});
@@ -323,7 +333,7 @@ public class BodyData {
 		},
 		phraseFn: function(operator:String, value:*):String {
 			// "scales coat" -> simply "scales"
-			return Utils.trimRight(defaultPhrase(operator, value, this.nameFn, ""));
+			return Utils.trimRight(defaultPhrase(operator, value, Slots[SLOT_SKIN_COAT_TYPE].nameFn, ""));
 		}
 	});
 	public function get skinCoatType():int {
@@ -340,7 +350,7 @@ public class BodyData {
 	
 	public static const SLOT_SKIN_COAT_COLOR2:int = _slotid++;
 	EnumValue.add(Slots,SLOT_SKIN_COAT_COLOR2, "SKIN_COAT_COLOR2", {
-		name:"coat secondary color"
+		name:"coat color"
 	});
 	public function get skinCoatColor2():String {
 		return data[SLOT_SKIN_COAT_COLOR2];
@@ -378,10 +388,9 @@ public class BodyData {
 		},
 		phraseFn: function (operator:String, value:*):String {
 			if (value is Number) {
-				if (value == 0) return defaultPhrase(operator, value, this.nameFn, "tail");
-				if (value == 1) return defaultPhrase(operator, value, this.nameFn, "tail");
+				if (value == 0 || value == 1) return defaultPhrase(operator, value, Slots[SLOT_TAIL_COUNT].nameFn, "tail");
 			}
-			return defaultPhrase(operator, value, this.nameFn, "tails");
+			return defaultPhrase(operator, value, Slots[SLOT_TAIL_COUNT].nameFn, "tails");
 		}
 	});
 	public function get tailCount():int {

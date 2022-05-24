@@ -250,7 +250,7 @@ public class RaceTierBuilder {
 	):void {
 		var operatorObject:Object = RaceUtils.parseOperatorObject(
 				type,
-				BodyData.Slots[slot].nameFn,
+				BodyData.slotPhraseFn(slot),
 				"["+race.name+" "+BodyData.Slots[slot].name+"]"
 		);
 		var checkFn:Function = RaceUtils.composeOpArg(

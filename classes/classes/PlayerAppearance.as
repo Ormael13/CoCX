@@ -982,12 +982,14 @@ public class PlayerAppearance extends BaseContent {
 		
 		player.updateRacialCache();
 		var list:/*Race*/Array = Races.AllRacesByName;
+		var scrollPos:int = 0;
 		if (sortBy == 1) {
 			list = sortedBy(list, function (a:Race):int {
 				return player.racialScoreCached(a);
 			}, true);
 		}
-		for each(var race:Race in list) {
+		for (var i:int = 0; i<list.length; i++) {
+			var race:Race = list[i];
 			// skip "old" races
 			if (race.requirements.length == 0 || race.tiers.length == 0) continue;
 			
@@ -1017,8 +1019,7 @@ public class PlayerAppearance extends BaseContent {
 			if (race == clickedRace) {
 				outputText("\n");
 				outputText(race.printDetails(body));
-				flushOutputTextToGUI();
-				mainView.mainText.scrollV = mainView.mainText.textHeight;
+				scrollPos = Math.max(0, 6+i);
 			}
 		}
 		mainView.linkHandler = function(event:String):void {
@@ -1117,6 +1118,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("[/font]");
 		
 		menu();
+		if (scrollPos) mainView.mainText.scrollV = scrollPos;
 		addButton(0, "Next", playerMenu);
 	}
 

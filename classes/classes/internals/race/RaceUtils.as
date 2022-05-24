@@ -14,13 +14,17 @@ public class RaceUtils {
 	
 	// Most racial requirements are made through function composition
 	// Example.
-	// "fox ears" is composed of 2 parts:
+	// "fox ears" is composed of following parts:
 	// - argument function that returns ear type
 	// - operator function that checks that argument is "fox"
+	// - name function that converts ear type to readable name
+	// - phrase function that composes complex requirement into readable phrase
 	//
 	// argFn = (body) => body.earType
 	// opFn = (value) => value==Ears.FOX
 	// checkFn = (body) => opFn(argFn(body)) = body.earType==Ears.FOX
+	// nameFn = (value) => Ears.Types[value].name
+	// phraseFn("eq", Ears.FOX) => "fox ears"
 	
 	/**
 	 * Parses operator definition.
@@ -38,24 +42,24 @@ public class RaceUtils {
 	 * 			return ["red", "blue"].indexOf(value) >= 0
 	 * 		}
 	 * 	}
-	 * parseOperatorObject(6, faceTypeToNameFn) => {
-	 * 		name: "cat",
+	 * parseOperatorObject(6, facePhraseToNameFn) => {
+	 * 		name: "cat face",
 	 * 		operatorFn(value) {
 	 * 			return value == 6
 	 * 		}
 	 * 	}
 	 * 	```
 	 * @param op Operator definition. Simple value means "equal", otherwise should be operator definition object
-	 * @param nameProvider A function `(value:*,...rest:Array)=>String` to generate `name` field. Default is simple toString.
+	 * @param phraseFn A function `(operator:*,value:*)=>String` to generate `name` field. Default is BodyData.defaultPhraseFn.
 	 * @param errorContext Prepended to error message, to help debugging
 	 * @return `{name:String, operatorFn:(value:*)=>Boolean}`
 	 */
 	public static function parseOperatorObject(
 			op:*,
-			nameProvider:Function=null,
+			phraseProvider:Function=null,
 			errorContext:String=""
 	):Object {
-		if (nameProvider == null) nameProvider = function(input:*):String { return ""+input };
+		if (phraseProvider == null) phraseProvider = BodyData.defaultPhraseFn("",null);
 		errorContext += "["+Utils.stringify(op)+"] ";
 		
 		var operatorFn:Function;
@@ -68,7 +72,7 @@ public class RaceUtils {
 					return parseOperatorObject({
 						operator: "any",
 						options: op
-					}, nameProvider, errorContext);
+					}, phraseProvider, errorContext);
 				}
 				throw new Error(errorContext+" Invalid operator")
 			}
@@ -80,39 +84,33 @@ public class RaceUtils {
 					var anyOptions:Array = op["options"] as Array;
 					if (!anyOptions) throw new Error(errorContext+"Invalid operator");
 					operatorFn = none ? operatorNoneFn(anyOptions) : operatorAnyFn(anyOptions);
-					name = (none?"neither ":"") +
-							Utils.mergeSentences(
-									anyOptions.map(Utils.varargify(nameProvider)),
-									(none?" nor ":" or "),
-									", ", false
-							);
+					name = phraseProvider(operator, anyOptions);
 					break;
 				case "lt":
-				case "lte":
+				case "le":
 				case "gt":
-				case "gte":
+				case "ge":
 				case "ne":
 					var compValue:* = op["value"];
 					operatorFn = operatorCompareFn(operator, compValue);
-					name = {
-						"lt": "less than ",
-						"lte": "at most ",
-						"gt": "greater than ",
-						"gte": "at least ",
-						"ne": "not "
-					}[operator] + nameProvider(compValue);
+					name = phraseProvider(operator, compValue);
 					break;
 				default:
 					throw new Error(errorContext+"Unknown operator");
 			}
 		} else {
 			operatorFn = operatorEqFn(op);
-			name = nameProvider(op);
+			name = phraseProvider("eq", op);
 		}
 		return {
 			name: name,
 			operatorFn: operatorFn
 		}
+	}
+	
+	public static function slotPhrase(slotId:int, expr:*, suffix:Boolean=true):String {
+		if (suffix) return parseOperatorObject(expr, BodyData.slotPhraseFn(slotId)).name;
+		return parseOperatorObject(expr, BodyData.defaultPhraseFn("", BodyData.Slots[slotId].nameFn)).name;
 	}
 	
 	/**
@@ -129,7 +127,7 @@ public class RaceUtils {
 	public static function checkSlotFn(slot:int, value:*, errorContext:String=""): Function {
 		return composeOpArg(
 				argumentSlotFn(slot),
-				parseOperatorObject(value, BodyData.Slots[slot].nameFn, errorContext).operatorFn
+				parseOperatorObject(value, BodyData.slotPhraseFn(slot), errorContext).operatorFn
 		);
 	}
 	
@@ -166,7 +164,7 @@ public class RaceUtils {
 				return function (input:*):Boolean {
 					return input < value;
 				}
-			case "lte":
+			case "le":
 				return function (input:*):Boolean {
 					return input <= value;
 				}
@@ -174,7 +172,7 @@ public class RaceUtils {
 				return function (input:*):Boolean {
 					return input > value;
 				}
-			case "gte":
+			case "ge":
 				return function (input:*):Boolean {
 					return input >= value;
 				}

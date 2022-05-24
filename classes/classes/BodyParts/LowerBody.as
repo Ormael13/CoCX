@@ -229,7 +229,7 @@ public class LowerBody extends SaveableBodyPart {
 
 	public static const CHITINOUS_SPIDER_LEGS:int = 15;//button 0 on 2nd page of metamorph
 	EnumValue.add(Types, CHITINOUS_SPIDER_LEGS, "CHITINOUS_SPIDER_LEGS", {
-		name: "chitinous spider legs",
+		name: "chitinous spider",
 		appearanceDesc: "Your {legCount} legs are covered in a reflective [skin coat.color], insectile carapace up to your mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton."
 	});
 

@@ -54,14 +54,15 @@ public class RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_EYE_COLOR, type, score, failScore, customName);
 		return this;
 	}
-	public function eyeTypeAndColor(type:*, color:*, score:int, failScore:int =0):RaceScoreBuilder {
+	public function eyeTypeAndColor(type:*, color:*, score:int, failScore:int =0, customName:String=""):RaceScoreBuilder {
 		addRequirement(
 				RacialRequirement.joinAnd(
 						"eyes",
-						" ",
-						slotRequirement(BodyData.SLOT_EYE_COLOR, color, score, failScore, "$name"),
+						" colored ",
+						slotRequirement(BodyData.SLOT_EYE_COLOR, color, score, failScore, false),
 						slotRequirement(BodyData.SLOT_EYE_TYPE, type, score, failScore)
-				)
+				),
+				customName
 		)
 		return this;
 	}
@@ -88,10 +89,10 @@ public class RaceScoreBuilder {
 		addRequirement(
 				RacialRequirement.joinAnd(
 						"hair",
-						" ",
-						slotRequirement(BodyData.SLOT_HAIR_COLOR, color, score, failScore, "$name"),
+						" colored ",
+						slotRequirement(BodyData.SLOT_HAIR_COLOR, color, score, failScore, false),
 						slotRequirement(BodyData.SLOT_HAIR_TYPE, type, score, failScore)
-				)
+				), customName
 		);
 		return this;
 	}
@@ -104,7 +105,7 @@ public class RaceScoreBuilder {
 				RacialRequirement.joinAnd(
 						"horn",
 						" ",
-						slotRequirement(BodyData.SLOT_HORN_COUNT, count, score, failScore, "$name"),
+						slotRequirement(BodyData.SLOT_HORN_COUNT, count, score, failScore, false),
 						slotRequirement(BodyData.SLOT_HORN_TYPE, type, score, failScore)
 				), customName
 		)
@@ -186,8 +187,8 @@ public class RaceScoreBuilder {
 				RacialRequirement.joinAnd(
 						"skin coat",
 						" and ",
-						slotRequirement(BodyData.SLOT_SKIN_COAT_COLOR, color1, score, failScore, "$name"),
-						slotRequirement(BodyData.SLOT_SKIN_COAT_COLOR2, color2, score, failScore, "$name coat")
+						slotRequirement(BodyData.SLOT_SKIN_COAT_COLOR, color1, score, failScore, false),
+						slotRequirement(BodyData.SLOT_SKIN_COAT_COLOR2, color2, score, failScore, false)
 				)
 		);
 		return this;
@@ -196,10 +197,10 @@ public class RaceScoreBuilder {
 		addRequirement(
 				RacialRequirement.joinAnd(
 						"skin coat",
-						" ",
-						slotRequirement(BodyData.SLOT_SKIN_COAT_COLOR, color, score, failScore, "$name"),
+						" colored ",
+						slotRequirement(BodyData.SLOT_SKIN_COAT_COLOR, color, score, failScore, false),
 						slotRequirement(BodyData.SLOT_SKIN_COAT_TYPE, type, score, failScore)
-				)
+				), customName
 		);
 		return this;
 	}
@@ -215,7 +216,7 @@ public class RaceScoreBuilder {
 		);
 	}
 	public function plainSkinOfAdj(adj:*, score:int, failScore:int=0):RaceScoreBuilder {
-		var oo:Object = RaceUtils.parseOperatorObject(adj);
+		var oo:Object = RaceUtils.parseOperatorObject(adj, null);
 		return customRequirement(
 				"skin",
 				oo.name+" plain skin",
@@ -227,10 +228,10 @@ public class RaceScoreBuilder {
 		);
 	}
 	public function plainSkinOfColor(color:*, score:int, failScore:int=0):RaceScoreBuilder {
-		var oo:Object = RaceUtils.parseOperatorObject(color);
+		var oo:Object = RaceUtils.parseOperatorObject(color, BodyData.defaultPhraseFn(" plain skin",null));
 		return customRequirement(
 				"skin",
-				oo.name+" plain skin",
+				oo.name,
 				function(body:BodyData):Boolean {
 					return body.player.hasPlainSkinOnly() && oo.operatorFn(body.skinBaseColor);
 				},
@@ -250,7 +251,7 @@ public class RaceScoreBuilder {
 				RacialRequirement.joinAnd(
 						"tail",
 						" ",
-						slotRequirement(BodyData.SLOT_TAIL_COUNT, count, score, failScore, "$name"),
+						slotRequirement(BodyData.SLOT_TAIL_COUNT, count, score, failScore, false),
 						slotRequirement(BodyData.SLOT_TAIL_TYPE, type, score, failScore)
 				), customName
 		)
@@ -546,14 +547,13 @@ public class RaceScoreBuilder {
 			customName:String=""
 	):void {
 		var slotName:String = BodyData.Slots[slot].name;
-		var nameFn:Function = BodyData.Slots[slot].nameFn;
 		var argumentFn:Function = RaceUtils.argumentSlotFn(slot);
 		var req:Object = parseArgPair(
-				argumentFn, nameFn,
+				argumentFn, BodyData.slotPhraseFn(slot),
 				type, "["+race.name+" "+ slotName+"] ");
 		addRequirement(new RacialRequirement(
 				slotName,
-				customName || (req.name+" "+slotName),
+				customName || req.name,
 				req.check,
 				score,
 				failScore,
@@ -589,7 +589,7 @@ public class RaceScoreBuilder {
 			failScore:int,
 			customName:String=""
 	):void {
-		var oo:Object = RaceUtils.parseOperatorObject(value,nameFn,"["+race.name+" "+pattern+"]");
+		var oo:Object = RaceUtils.parseOperatorObject(value,BodyData.defaultPhraseFn("",nameFn),"["+race.name+" "+pattern+"]");
 		addRequirement(new RacialRequirement(
 				group,
 				customName || pattern.replace(/\$value/g,oo.name),
@@ -604,19 +604,18 @@ public class RaceScoreBuilder {
 			type:*,
 			score:int,
 			failScore:int,
-			namePattern:String = "$name $slot"
+			suffix:Boolean=true
 	):RacialRequirement {
 		var slotName:String = BodyData.Slots[slot].name;
-		var nameFn:Function = BodyData.Slots[slot].nameFn;
 		var argumentFn:Function = RaceUtils.argumentSlotFn(slot);
 		var operatorObject:Object = RaceUtils.parseOperatorObject(
 				type,
-				nameFn,
+				BodyData.slotPhraseFn(slot,suffix),
 				"["+race.name+" "+ slotName+"] "
 		);
 		return new RacialRequirement(
 				slotName,
-				namePattern.replace(/\$name/,operatorObject.name).replace(/\$slot/,slotName),
+				operatorObject.name,
 				RaceUtils.composeOpArg(argumentFn, operatorObject.operatorFn),
 				score,
 				failScore,
@@ -630,10 +629,10 @@ public class RaceScoreBuilder {
 	 *     check(body:BodyData, score:int): Boolean
 	 * }}
 	 */
-	private static function parseArgPair(argumentFn:Function, nameFn: Function, type:*, errorContext:String=""):Object {
+	private static function parseArgPair(argumentFn:Function, phraseFn: Function, type:*, errorContext:String=""):Object {
 		var operatorObject:Object = RaceUtils.parseOperatorObject(
 				type,
-				nameFn,
+				phraseFn,
 				errorContext
 		);
 		return {
