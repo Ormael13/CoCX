@@ -41,7 +41,6 @@ public class DisplacerBeastRace extends Race {
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
 		addMutation(IMutationsLib.DisplacerMetabolismIM);
 		
-		// TODO @aimozg extra +10% speed if has Flexibility perk
 		buildTier(14, "displacer beast")
 				.buffs({
 					"str.mult": +0.95,

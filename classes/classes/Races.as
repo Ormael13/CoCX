@@ -122,6 +122,8 @@ public class Races {
 	public static const APOPHIS:ApophisRace                = new ApophisRace(100);
 	public static const CYCLOP:CyclopRace                  = new CyclopRace(101);
 	public static const ALICORN:AlicornRace                = new AlicornRace(102);
+	public static const UNICORNKIN:UnicornkinRace          = new UnicornkinRace(103);
+	public static const ALICORNKIN:AlicornkinRace          = new AlicornkinRace(104);
 	
 	// Racial groups
 	public static const CatlikeRaces:/*Race*/Array   = [
@@ -138,6 +140,9 @@ public class Races {
 	];
 	public static const HarpylikeRaces:/*Race*/Array = [
 			HARPY, THUNDERBIRD, PHOENIX
+	];
+	public static const UnicornlikeRaces:/*Race*/Array = [
+			UNICORN, ALICORN, UNICORNKIN, ALICORNKIN
 	];
 	
 	function Races() {

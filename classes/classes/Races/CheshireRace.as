@@ -39,7 +39,6 @@ public class CheshireRace extends Race{
 		
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
 		
-		// TODO @aimozg +10% speed if Flexibility perk
 		buildTier(11, "cheshire cat")
 				.buffs({
 					"spe.mult": +0.60,

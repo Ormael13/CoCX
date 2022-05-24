@@ -37,7 +37,6 @@ public class HellcatRace extends Race{
 						},0,-1000
 				);
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
-		// TODO @aimozg +10% speed if has Flexibility perk
 		buildTier(10, "hellcat")
 				.buffs({
 					"spe.mult": +0.40,

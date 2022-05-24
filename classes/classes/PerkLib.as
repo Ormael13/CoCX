@@ -3655,7 +3655,7 @@ public class PerkLib
 		public static const FlawlessBody:PerkType = mk("Flawless Body", "Flawless Body",
 				"Your elven body with its flawless form and skin is so alluring it reinforces your ability to tease.");
 		public static const Flexibility:PerkType = mk("Flexibility", "Flexibility",
-				"Grants cat-like flexibility.  Useful for dodging and 'fun'.");
+				"Grants cat-like flexibility.  Useful for dodging and 'fun'. +10% Speed for cat-like races.")
 		public static const FreezingBreath:PerkType = mk("Freezing Breath (F)", "Freezing Breath (F)",
 				"Allows access to Fenrir (AoE) freezing breath attack.");
 		public static const FreezingBreathYeti:PerkType = mk("Freezing Breath (Y)", "Freezing Breath (Y)",

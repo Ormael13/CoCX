@@ -1,8 +1,6 @@
 # TODO @aimozg
 * write README!
 * Check generated requirement names
-* Check score functions checking non-tiers
-* solve unicornkin/alicornkin races
 * consider moving naming function from tier to race
 * error reporting utility
 * Future:

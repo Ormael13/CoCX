@@ -40,7 +40,6 @@ public class NekomataRace extends Race{
 		
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
 		
-		// TODO @aimozg extra +10% speed for Flexibility perk
 		buildTier(10, "nekomata")
 				.buffs({
 					"spe.mult": +0.40,

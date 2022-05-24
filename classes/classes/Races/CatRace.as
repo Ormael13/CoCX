@@ -53,7 +53,7 @@ public class CatRace extends Race {
 					return "cat-"+body.mf("boy","girl")
 				})
 				.buffs({
-					"spe.mult": +0.60, // TODO @aimozg +10 more if has PerkLib.Flexibility
+					"spe.mult": +0.60,
 					"lib.mult": +0.60
 				})
 				.end();

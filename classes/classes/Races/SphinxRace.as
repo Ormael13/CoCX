@@ -51,7 +51,6 @@ public class SphinxRace extends Race {
 		addMutation(IMutationsLib.TwinHeartIM, +2);
 		addMutation(IMutationsLib.CatLikeNimblenessIM, +1);
 		
-		// TODO @aimozg extra +10% speed for Flexibility
 		buildTier(14, "sphinx")
 				.buffs({
 					"str.mult": +0.50,

@@ -3511,38 +3511,6 @@ use namespace CoC;
 			var topScore:Number = racialScoreCached(topRace);
 			return topRace.nameFor(bodyData(), topScore);
 			/*
-			if (TopRace == "unicorn") {
-				if (TopScore >= 8) {
-					if (TopScore >= 27) {
-						if (horns.type == Horns.UNICORN) {
-							race = "true unicorn";
-						} else {
-							race = "true bicorn";
-						}
-					} else if (TopScore >= 18) {
-						if (horns.type == Horns.UNICORN) {
-							race = "unicorn";
-						} else {
-							race = "bicorn";
-						}
-					} else {
-						if (horns.type == Horns.UNICORN) {
-							race = "half unicorn";
-						} else {
-							race = "half bicorn";
-						}
-					}
-				}
-			}
-			if (TopRace == "unicornkin") {
-				if (TopScore >= 12) {
-					if (horns.type == Horns.UNICORN) {
-						race = "unicornkin";
-					} else {
-						race = "bicornkin";
-					}
-				}
-			}
 			if (TopRace == "alicornkin") {
 				if (TopScore >= 12) {
 					if (horns.type == Horns.UNICORN) {
@@ -3602,6 +3570,13 @@ use namespace CoC;
 			if (races.length == 1 && races[0] is Array) return isAnyRace(races[0]);
 			for each (var race:Race in races) {
 				if (isRace(race)) return true;
+			}
+			return false;
+		}
+		public function isAnyRaceCached(...races:/*Race*/Array):Boolean {
+			if (races.length == 1 && races[0] is Array) return isAnyRaceCached(races[0]);
+			for each (var race:Race in races) {
+				if (isRaceCached(race)) return true;
 			}
 			return false;
 		}
@@ -3744,162 +3719,6 @@ use namespace CoC;
 			}
 			End("Player","racialScore");
 			return mutantCounter;
-		}
-
-		//Determine Unicornkin Rating
-		public function unicornkinScore():Number {
-			var bicornColorPalette:Array = ["black", "midnight black", "midnight"];
-			var bicornHairPalette:Array = ["silver","black", "midnight black", "midnight"];
-			var unicornColorPalette:Array = ["white", "pure white"];
-			var unicornHairPalette:Array = ["platinum blonde","silver", "white", "pure white"];
-			Begin("Player","racialScore","unicornkin");
-			var unicornCounter:Number = 0;
-			if (faceType == Face.HORSE)
-				unicornCounter += 2;
-			if (ears.type == Ears.HORSE)
-				unicornCounter++;
-			if (tailType == Tail.HORSE)
-				unicornCounter++;
-			if (lowerBody == LowerBody.HOOFED)
-				unicornCounter++;
-			if (eyes.type == Eyes.HUMAN)
-				unicornCounter++;
-			if (wings.type == Wings.NONE)
-				unicornCounter += 4;
-			if (horns.type == Horns.UNICORN) {
-				if (horns.count < 6)
-					unicornCounter++;
-				if (horns.count >= 6)
-					unicornCounter += 2;
-				if (InCollection(hairColor, unicornHairPalette) && InCollection(coatColor, unicornColorPalette))
-					unicornCounter++;
-				if (eyes.colour == "blue")
-					unicornCounter++;
-				if (hasPerk(PerkLib.AvatorOfPurity))
-					unicornCounter++;
-			}
-			if (horns.type == Horns.BICORN) {
-				if (horns.count < 6)
-					unicornCounter++;
-				if (horns.count >= 6)
-					unicornCounter += 2;
-				if (InCollection(hairColor, bicornHairPalette) && InCollection(coatColor, bicornColorPalette))
-					unicornCounter++;
-				if (eyes.colour == "red")
-					unicornCounter++;
-				if (hasPerk(PerkLib.AvatorOfCorruption))
-					unicornCounter++;
-			}
-			if (hasFur())
-				unicornCounter++;
-			if (horseCocks() > 0)
-				unicornCounter++;
-			if (hasVagina() && vaginaType() == VaginaClass.EQUINE)
-				unicornCounter++;
-			if (horns.type != Horns.UNICORN && horns.type != Horns.BICORN && (wings.type == Wings.FEATHERED_ALICORN || wings.type == Wings.NIGHTMARE))
-				unicornCounter = 0;
-			if (perkv1(IMutationsLib.EclipticMindIM) >= 1)
-				unicornCounter++;
-			if (perkv1(IMutationsLib.EclipticMindIM) >= 2)
-				unicornCounter++;
-			if (perkv1(IMutationsLib.EclipticMindIM) >= 3)
-				unicornCounter++;
-			if (perkv1(IMutationsLib.EclipticMindIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				unicornCounter++;
-			if (perkv1(IMutationsLib.EclipticMindIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				unicornCounter++;
-			if (perkv1(IMutationsLib.EclipticMindIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				unicornCounter++;
-			if (wings.type == Wings.FEATHERED_ALICORN || wings.type == Wings.NIGHTMARE)
-				unicornCounter = 0;
-			if (faceType != Face.HORSE)
-				unicornCounter = 0;
-			if (horns.type != Horns.UNICORN && horns.type != Horns.BICORN)
-				unicornCounter = 0;
-			unicornCounter = finalRacialScore(unicornCounter, Races.UNICORN);
-			End("Player","racialScore");
-			return unicornCounter;
-		}
-
-		//Determine Alicornkin Rating
-		public function alicornkinScore():Number {
-			var bicornColorPalette:Array = ["silver", "black", "midnight black", "midnight"];
-			var bicornHairPalette:Array = ["silver","black", "midnight black", "midnight"];
-			var unicornColorPalette:Array = ["white", "pure white"];
-			var unicornHairPalette:Array = ["platinum blonde","silver", "white", "pure white"];
-			Begin("Player","racialScore","alicorn");
-			var alicornCounter:Number = 0;
-			if (faceType == Face.HORSE)
-				alicornCounter += 2;
-			if (ears.type == Ears.HORSE)
-				alicornCounter++;
-			if (tailType == Tail.HORSE)
-				alicornCounter++;
-			if (lowerBody == LowerBody.HOOFED)
-				alicornCounter++;
-			if (eyes.type == Eyes.HUMAN)
-				alicornCounter++;
-			if (horns.type == Horns.UNICORN) {
-				if (horns.count < 6)
-					alicornCounter++;
-				if (horns.count >= 6)
-					alicornCounter += 2;
-				if (wings.type == Wings.FEATHERED_ALICORN)
-					alicornCounter += 4;
-				if (InCollection(hairColor, unicornHairPalette) && InCollection(coatColor, unicornColorPalette))
-					alicornCounter++;
-				if (eyes.colour == "blue")
-					alicornCounter++;
-				if (hasPerk(PerkLib.AvatorOfPurity))
-					alicornCounter++;
-			}
-			if (horns.type == Horns.BICORN) {
-				if (horns.count < 6)
-					alicornCounter++;
-				if (horns.count >= 6)
-					alicornCounter += 2;
-				if (wings.type == Wings.NIGHTMARE)
-					alicornCounter += 4;
-				if (InCollection(hairColor, bicornHairPalette) && InCollection(coatColor, bicornColorPalette))
-					alicornCounter++;
-				if (eyes.colour == "red")
-					alicornCounter++;
-				if (hasPerk(PerkLib.AvatorOfCorruption))
-					alicornCounter++;
-			}
-			if (hasFur())
-				alicornCounter++;
-			if (horseCocks() > 0)
-				alicornCounter++;
-			if (hasVagina() && vaginaType() == VaginaClass.EQUINE)
-				alicornCounter++;
-			if (perkv1(IMutationsLib.EclipticMindIM) >= 1)
-				alicornCounter++;
-			if (perkv1(IMutationsLib.EclipticMindIM) >= 2)
-				alicornCounter++;
-			if (perkv1(IMutationsLib.EclipticMindIM) >= 3)
-				alicornCounter++;
-			if (perkv1(IMutationsLib.EclipticMindIM) >= 1 && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				alicornCounter++;
-			if (perkv1(IMutationsLib.EclipticMindIM) >= 2 && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				alicornCounter++;
-			if (perkv1(IMutationsLib.EclipticMindIM) >= 3 && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				alicornCounter++;
-			if (faceType != Face.HORSE)
-				alicornCounter = 0;
-			if (horns.type != Horns.BICORN && horns.type != Horns.UNICORN)
-				alicornCounter = 0;
-			if (horns.type == Horns.BICORN) {
-				if (wings.type != Wings.NIGHTMARE)
-					alicornCounter = 0;
-			}
-			if (horns.type == Horns.UNICORN) {
-				if (wings.type != Wings.FEATHERED_ALICORN)
-					alicornCounter = 0;
-			}
-			alicornCounter = finalRacialScore(alicornCounter, Races.UNICORN);
-			End("Player","racialScore");
-			return alicornCounter;
 		}
 
 		public function currentBasicJobs():Number {
@@ -4979,17 +4798,6 @@ use namespace CoC;
 				}
 			}
 			
-			if (unicornkinScore() >= 12) {
-				buffTou += 55;
-				buffSpe += 70;
-				buffInt += 75;
-			}//+(15)30/(10-20)30-40
-			if (alicornkinScore() >= 12) {
-				buffTou += 45;
-				buffSpe += 60;
-				buffInt += 75;
-			}//+(30)55/(30-40)50-60
-			
 			// These buffs below should be documented in PlayerAppearance.RacialScores section!
 			
 			var factor:Number = 0;
@@ -5005,6 +4813,9 @@ use namespace CoC;
 				buffSpe += 5*factor;
 			}
 			
+			if (hasPerk(PerkLib.Flexibility) && isAnyRaceCached(Races.CatlikeRaces)) {
+				buffSpe += 10;
+			}
 			if (isNaga()) {
 				if (lowerBody == LowerBody.FROSTWYRM) {
 					buffStr += 20;

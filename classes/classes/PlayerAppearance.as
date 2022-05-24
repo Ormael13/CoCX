@@ -1031,16 +1031,6 @@ public class PlayerAppearance extends BaseContent {
 			}
 		}
 		var score:Number;
-		//AlicornKin
-		score    = player.alicornkinScore();
-		if (score >= 12) outputText("\n<font color=\"#0000a0\">Alicornkin/Nightmarekin: " + score + " (+45% to Tou racial multi, +60% to Spe racial multi, +75% to Int racial multi)</font>");
-		else if (score >= 1) outputText("\n<font color=\"#008000\">Alicornkin/Nightmarekin: " + score + "</font>");
-		else if (score < 1) outputText("\n<font color=\"#ff0000\">Alicornkin/Nightmarekin: 0</font>");
-		//UnicornKin
-		score = player.unicornkinScore();
-		if (score >= 12) outputText("\n<font color=\"#0000a0\">Unicornkin/Bicornkin: " + score + " (+55% to Tou racial multi, +70% to Spe racial multi, +85% to Int racial multi)</font>");
-		else if (score >= 1) outputText("\n<font color=\"#008000\">Unicorn/Bicorn: " + score + "</font>");
-		else if (score < 1) outputText("\n<font color=\"#ff0000\">Unicornkin/Bicornkin: 0</font>");
 		//CHIMERA
 		outputText("\nCHIMERA: " + player.chimeraScore());
 		//GRAND CHIMERA
@@ -1077,7 +1067,9 @@ public class PlayerAppearance extends BaseContent {
 		if (bonus > 0) {
 			outputText("\nMantislike Agility: +"+bonus+"% Speed");
 		}
-		
+		if (player.hasPerk(PerkLib.Flexibility) && player.isAnyRaceCached(Races.CatlikeRaces)) {
+			outputText("\nCat-like race + Flexibility: +10% Speed.");
+		}
 		if (player.isNaga()) {
 			if (player.lowerBody == LowerBody.FROSTWYRM) {
 				outputText("\nFrost wyrm lower body: +20% Strength, +10% Toughness.");

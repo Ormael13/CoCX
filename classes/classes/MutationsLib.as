@@ -616,8 +616,8 @@ public class MutationsLib
 				.requireAnyRace(Races.FROSTWYRM,Races.JABBERWOCKY,Races.VOUIVRE,Races.SEA_DRAGON);
 				EasterBunnyEggBag.requireBallsMutationSlot().requirePerk(PerkLib.EasterBunnyBalls).requireRace(Races.EASTERBUNNY);
 				EclipticMind.requirePeripheralNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.isRace(Races.ALICORN, 2) || player.isRace(Races.UNICORN, 2) || player.alicornkinScore() >= 10 || player.unicornkinScore() >= 10;
-				}, "Unicorn or Bicorn race");
+					return player.isRace(Races.ALICORN, 2) || player.isRace(Races.UNICORN, 2) || player.isRace(Races.ALICORNKIN) || player.isRace(Races.UNICORNKIN);
+				}, "Any unicorn race (including bicorn, nightmare, and -kin variants)");
 				ElvishPeripheralNervSys.requirePeripheralNervSysMutationSlot().requirePerk(PerkLib.ElvenSense).requireAnyRace(Races.ELF, Races.WOODELF);
 				FeyArcaneBloodstream.requireBloodsteamMutationSlot().requireRace(Races.FAIRY);
 				FloralOvaries.requireOvariesMutationSlot().requireRace(Races.ALRAUNE);

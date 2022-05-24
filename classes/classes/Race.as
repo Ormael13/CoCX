@@ -41,12 +41,8 @@ public class Race {
 	public var grandChimeraTier:int = 2;
 
     /**
-	 * TODO @aimozg remove last 2 params
-	 *
      * @param _name Display name of the race
      * @param _id Unique number id
-     * @param _playerFunctionName (old system) Function in Player class that returns score for this race
-	 * @param _minScore (old system) Min score for player to be qualified as this race
      */
     function Race(_name:String, _id:int) {
         this.name = _name;
