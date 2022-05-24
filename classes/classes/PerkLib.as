@@ -6339,7 +6339,7 @@ public class PerkLib
 			GreaterCursedTag.requirePerk(ImprovedCursedTag).requireCustomFunction(function (player:Player):Boolean {
                 return player.jiangshiScore() >= 20;
             }, "Jiangshi race");
-			MeleeWeaponsMastery.requireStr(120)
+			MeleeWeaponsMastery.requireStr(10)
 					.requireTou(10)
 					.requireSpe(10);
             //Tier 1
