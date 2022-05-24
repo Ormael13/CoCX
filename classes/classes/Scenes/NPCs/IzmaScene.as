@@ -254,7 +254,6 @@ private function readSharkCuntManual2():void {
 	//(Izmacounter +1)
 	flags[kFLAGS.IZMA_ENCOUNTER_COUNTER]++;
 	doNext(camp.returnToCampUseOneHour);
-	return;
 }
 
 private function buyBookCombatManual():void {
@@ -313,7 +312,6 @@ private function readSharkEdgingGuideLOL():void {
 	//(Izmacounter +1)
 	flags[kFLAGS.IZMA_ENCOUNTER_COUNTER]++;
 	doNext(camp.returnToCampUseOneHour);
-	return;
 }
 
 private function buyBookEtiquetteGuide():void {
@@ -382,7 +380,6 @@ private function readSharkgirlPornzYouFuckingPervertAsshole():void {
 	//(Izmacounter +1)
 	flags[kFLAGS.IZMA_ENCOUNTER_COUNTER]++;
 	doNext(camp.returnToCampUseOneHour);
-	return;
 }
 
 private function buyBookPorn():void {
@@ -434,7 +431,6 @@ private function talkToASharkCoochie():void {
 	//(Izmacounter +1)
 	flags[kFLAGS.IZMA_ENCOUNTER_COUNTER]++;
 	doNext(camp.returnToCampUseOneHour);
-	return;
 }
 //[Leave]
 private function leaveSumSharkPussyOnTheBeach():void {
@@ -443,7 +439,6 @@ private function leaveSumSharkPussyOnTheBeach():void {
 	outputText("Having no business with Izma for the time being, you head off back to your camp.");
 
 	doNext(camp.returnToCampUseOneHour);
-	return;
 }
 
 //[Fight]
@@ -509,7 +504,6 @@ internal function IzmaWins():void {
 		flags[kFLAGS.IZMA_WORMS_SCARED] = 1;
 		player.orgasm();
 		doNext(cleanupAfterCombat);
-		return;
 	}
 	//(without worms)
 	else {
@@ -2332,7 +2326,6 @@ private function talkWivIzma():void {
 		outputText("She heaves a sigh, and you place a hand on her shoulder, bringing a small blush to her face.  \"<i>Thanks, but I don't mind. Really.</i>\"  She gives you a quick kiss. \"<i>Thanks for listening.</i>\"\n\n");
 		flags[kFLAGS.IZMA_TALK_LEVEL]++;
 		doNext(camp.returnToCampUseOneHour);
-		return;
 	}
 	//[Talk option 2]
 	else if(flags[kFLAGS.IZMA_TALK_LEVEL] == 1) {
@@ -2357,7 +2350,6 @@ private function talkWivIzma():void {
 		dynStats("lus", 5);
 		flags[kFLAGS.IZMA_TALK_LEVEL]++;
 		doNext(camp.returnToCampUseOneHour);
-		return;
 	}
 	//[Talk option 3]
 	else if(flags[kFLAGS.IZMA_TALK_LEVEL] == 2) {
@@ -2376,7 +2368,6 @@ private function talkWivIzma():void {
 		outputText("\"<i>Well... minotaurs taste like beef, unsurprisingly, but imps taste like a mile of burnt ass.</i>\"  With a laugh, you ask if she's ever eaten a goblin - or if she prefers to fuck those and then throw them back?  She blushes.  \"<i>They are pretty cute... it's hard to eat anything cute.  I could eat them out, though...</i>\"  You smile at that and, after teasing her about letting you watch next time, you leave her be.\n\n");
 		flags[kFLAGS.IZMA_TALK_LEVEL]++;
 		doNext(camp.returnToCampUseOneHour);
-		return;
 	}
 	//[Talk topic 4.]
 	else if(flags[kFLAGS.IZMA_TALK_LEVEL] == 3) {
@@ -2398,7 +2389,6 @@ private function talkWivIzma():void {
 		flags[kFLAGS.IZMA_TALK_LEVEL]++;
 		//[Leave] [Flirt]
 		simpleChoices("Flirt", chooseToFlirtWithIzma, "", null, "", null, "", null, "Leave", chooseNotToFlirtWithIzma);
-		return;
 	}
 	//[Talk option 5]
 	else if(flags[kFLAGS.IZMA_TALK_LEVEL] == 4) {
@@ -2415,7 +2405,6 @@ private function talkWivIzma():void {
 		outputText("  You release her, trying to avoid turning her on too much.  Thanking her for the talk, you leave as she buries herself back into her books.");
 		flags[kFLAGS.IZMA_TALK_LEVEL]++;
 		doNext(camp.returnToCampUseOneHour);
-		return;
 	}
 	//[Talk Option 6]
 	else {
@@ -2444,7 +2433,6 @@ private function talkWivIzma():void {
 		outputText("You thank Izma for talking to you, insisting that you didn't mean to hurt her by probing such painful memories.  She smiles warmly at you and hugs you tight.  \"<i>It's okay. It... it feels nice to be able to share that information with someone,</i>\" she says, giving you a small kiss as she slips her glasses back on.");
 		flags[kFLAGS.IZMA_TALK_LEVEL] = 0;
 		doNext(camp.returnToCampUseOneHour);
-		return;
 	}
 }
 //[Leave]
@@ -2586,10 +2574,6 @@ public function pcPopsOutASharkTot():void {
 	outputText("\n");
 	//If Izma is NOT a follower
 	if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] != 1) {
-		if(player.vaginas.length == 0) {
-			outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ");
-			player.createVagina();
-		}
 		outputText("You crumple suddenly; strong pains and pressures pulverize the nerves in your gut.  As your eyes shoot wide open, you look down to see your belly absurdly full and distended.  You can feel movement underneath the skin, and watch as its bulges and shifts reflect another living being moving independently inside you.  Instinctively, you spread your legs as you feel the creature press outward, parting your cervix and allowing a gush of water to spill forth - far more water than you thought you were holding.\n\n");
 
 		outputText("You cry out as the first wrenching labor pain begins in earnest, unthinkingly hoping for somebody to come and help you.  Much to your despair, no one does, leaving you alone to deliver the baby.  You double your focus, set on pushing in time with its own frantic attempts to escape.  Squeezing over and over, you try to force out the child before the pain robs you of consciousness; luckily it seems to oblige, sliding out of you legs-first after a few more pushes.  The shark-skin rasps your inflamed pussy, drawing gasps of shock from you as she squeezes past your lips in fits and starts.");
@@ -2613,10 +2597,6 @@ public function pcPopsOutASharkTot():void {
 		spriteSelect(SpriteDb.s_izma);
 		//Player Gives Birth (Izma in camp): (For the reason given above, this scene currently has a very high chance of being useless, so I wouldn't waste time on it yet. Also, it's a bit of a turd. Orgasm despite the pain of childbirth exists but the clumsy handling here wouldn't convince you even if you'd already seen it live. Oh, the pain is so intense I can't walk... but wait, she's touching my junk over and over in a vague manner so it becomes pretty great. Thank you, Shark Herm Jesus! I advise cutting the 'sexual' content and keeping a normal childbirth unless you want it rewritten from the foundations. But you've got time to decide. -Z)
 		outputText("You wake up suddenly to strong pains and pressures in your gut.  As your eyes shoot wide open, you look down to see your belly absurdly full and distended.  ");
-		if(player.vaginas.length == 0) {
-			outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ");
-			player.createVagina();
-		}
 		outputText("You can feel movement underneath the skin, and watch as it bulges and shifts as another living being moves independently inside you.  Instinctively, you spread your legs as you feel the creature press outward, parting your cervix and allowing a gush of water to spill forth - far more water than you thought you were holding.\n\n");
 
 		outputText("You cry out as the first wrenching labor pain begins in earnest, unthinkingly hoping for somebody to come and help you.  To your relief, Izma comes running over to you from out of the gloom.  \"<i>[name]!  You've gone into labor?</i>\" she asks; something of a stupid question, but she's evidently as off-guard as you are.\n\n");
@@ -3322,7 +3302,6 @@ private function radarFucksIzmasAss():void {
 			outputText(" a little loving from her; something that visibly registers on her face as her expression goes wide in shock, her eyes seemingly asking you where THIS one is going next.");
 			//[Dick]    [Blowjob]
 			simpleChoices("Dick", null, "Blowjob", null, "", null, "", null, "", null);
-			return;
 		}
 		//Go to buttsex
 		//analFuckRadarEnding();

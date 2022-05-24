@@ -1284,9 +1284,6 @@ public class Soulforce extends BaseContent
 	}
 	public function AddPussy():void {
 		player.createVagina();
-		player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
-		player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
-		player.vaginas[0].virgin = true;
 		player.clitLength = .25;
 		if (player.fertility <= 5) player.fertility = 6;
 		BodyStateMenu();
