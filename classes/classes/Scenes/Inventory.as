@@ -843,11 +843,11 @@ use namespace CoC;
 							+ "Do you use it, or destroy it?\n\n");
 					menu();	//Can't get the menu to pop up...
 					addButton(0, "Use it", handleItemInInventory, 0, item, slotNum);
-					addButton(1, "Discard it", handleItemInInventory, 1, item, slotNum);
+					addButton(1, "Discard it", deleteItemPrompt,  item, slotNum);
 				} else {
 					menu();
 					addButton(0, "Next", itemGoNext);
-					addButton(1, "Discard it", handleItemInInventory, 1, item, slotNum);
+					//addButton(1, "Discard it", deleteItemPrompt, item, slotNum);
 					//itemGoNext();
 				}
 				}
@@ -859,15 +859,8 @@ use namespace CoC;
 
 
 		private function handleItemInInventory(x:int, item:Useable, slotNum:int):void{
-			switch(x){
-				case 0:
-					if (!debug) player.itemSlots[slotNum].removeOneItem();
-					useItem(item, player.itemSlots[slotNum]);
-				return;
-				case 1:
-					deleteItemPrompt(item, slotNum);
-				return;
-			}
+			if (!debug) player.itemSlots[slotNum].removeOneItem();
+			useItem(item, player.itemSlots[slotNum]);
 		}
 
 
