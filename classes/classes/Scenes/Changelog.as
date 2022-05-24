@@ -325,7 +325,7 @@ package classes.Scenes
 			outputText("-Lacta Bovina enemies got new special attack: Milk Blast and most of their attacks got lust dmg claculation bit changed.\n");
 			outputText("-New key Item (by Ormael): Tel'Adre Magazine Issue 5 - Increase 2x Herbalism EXP gains. Costs 100 gems and buyable at Giacomo Books tab.\n");
 			outputText("-New key Item (by Ormael): Tel'Adre Magazine Issue 10 - Increase 2x Mining EXP gains. Costs 100 gems and buyable at Giacomo Books tab.\n");
-			outputText("-\n");
+			outputText("-New tier 0 misc lvl-up perk: Melee Weapons Mastery. Req. 10+ str/tou/spe. Effect: Decrease by ~20% needed exp to level up each melee weapon mastery type and grants 200% more of base mastery exp gains.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -346,7 +346,7 @@ package classes.Scenes
 			outputText("current Speed value, Half-Frost Wyrm or Half Spider-morph racial bonus been attained super easy, Mysterious Seed not causing for misc items menu appear as inventory submenu, unable to add arcane circuits to 5th arcane circle, doppleganger fight won't drag unnecessary due to getting messly 1k lust after 5th round in fight, Gazer Eyes mutation not keeping True seeing perk, Magical Eye Drops as item ");
 			outputText("find in Caves instead of Eye Drops, raiju tf removing/humanizing raiju paws, picking no elemental during minions turn skipping many following up phases of the turn, epic/legendary/mythical perks for stats not affecting monsters, harpy wings not setting shark score to 0, Siren been excluded form races list for appearance screen, Minor Minerva and parsertag, Encaps. pod multicockdescript, Elf hair ");
 			outputText("mutation, holiday events appearing in Ingnam/prison, Minotaur-Dormammu bug for all damage sources, equipping at once specific combinations of melee weapon and shield when not meeting req. to do so, Blood Chains too long stun duration, cyclop/gazer scores not included in chimera race check, Wood Elf perks not adding extra shoot & not affecting Skypiercer, Sand Mother finally remembered that she ");
-			outputText("can use spells, some spell teaching items allowing to learn more than 1 spell pewr use, Oswald not selling PC backpack when PC got none\n");/*ostatni punkt changelogu
+			outputText("can use spells, some spell teaching items allowing to learn more than 1 spell per use, Oswald not selling backpacks when PC got none\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD

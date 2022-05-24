@@ -13861,7 +13861,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
-			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
 			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
 			//-3;//5th
@@ -13902,7 +13902,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
-			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
 			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
 			//-3;//5th
@@ -13943,7 +13943,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
-			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
 			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
 			//-3;//5th
@@ -13984,7 +13984,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
-			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
 			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
 			//-3;//5th
@@ -14025,7 +14025,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
-			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
 			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
 			//-3;//5th
@@ -14066,7 +14066,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
-			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
 			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
 			//-3;//5th
@@ -14107,7 +14107,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
-			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
 			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
 			//-3;//5th
@@ -14148,7 +14148,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
-			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
 			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
 			//-3;//5th
@@ -14189,7 +14189,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
-			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
 			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
 			//-3;//5th
@@ -14230,7 +14230,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
-			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
 			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
 			//-3;//5th
@@ -14271,7 +14271,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
-			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
 			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
 			//-3;//5th
@@ -14435,7 +14435,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
-			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
 			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
 			//-3;//5th
@@ -14476,7 +14476,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
-			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
 			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
 			//-3;//5th
@@ -14517,7 +14517,7 @@ use namespace CoC;
 			//-2;//4th
 			//-3;//6th
 			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
-			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
 			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
 			//-3;//5th
@@ -14678,6 +14678,14 @@ use namespace CoC;
 			}
 		}
 
+		public function HerbalismMulti():Number {
+			var herbMlt:Number = 1;
+			if (hasPerk(PerkLib.PlantKnowledge)) herbMlt *= 2;
+			if (hasPerk(PerkLib.NaturalHerbalism)) herbMlt *= 2;
+			if (hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) herbMlt *= 2;
+			return herbMlt;
+		}
+		
 		public function usePotion(pt:PotionType):void {
 			pt.effect();
 			changeNumberOfPotions(pt, -1);
