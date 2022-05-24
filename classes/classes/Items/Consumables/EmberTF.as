@@ -19,7 +19,6 @@ import classes.CockTypesEnum;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.Scenes.SceneLib;
-import classes.StatusEffects;
 
 public class EmberTF extends BaseContent
 {

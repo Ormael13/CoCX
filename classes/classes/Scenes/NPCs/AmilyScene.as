@@ -214,12 +214,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			flags[kFLAGS.AMILY_VILLAGE_EXPLORED]++;
 			clearOutput();
 			//50% chance of ghost-girl
-			if((flags[kFLAGS.SHOULDRA_MAIDEN_COUNTDOWN] == 0 && rackCount() >= 2 && rand(10) <= 3) && !followerShouldra() && flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != .5) {
+			if ((flags[kFLAGS.SHOULDRA_MAIDEN_COUNTDOWN] == 0 && rackCount() >= 2 && rand(10) <= 3) && !followerShouldra() && flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != .5) {
 				shouldraScene.shouldraGreeting();
 				return;
 			}
 			//20% chance of playing with a rack
-			if(rand(5) == 0 && rackCount() < 3) {
+			if (rand(5) == 0 && rackCount() < 3) {
 				var rack:Number;
 				var rackArray:Array = [];
 				if (player.hasKeyItem("Equipment Rack - Armor") < 0) rackArray[rackArray.length] = 0;
@@ -227,7 +227,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				if (player.hasKeyItem("Equipment Rack - Shields") < 0) rackArray[rackArray.length] = 2;
 				rack = rackArray[rand(rackArray.length)];
 				outputText("While picking through the ruined houses and abandoned structures of this dilapidated village, you manage to find something useful!  There's an intact but empty ");
-				switch(rack) {
+				switch (rack) {
 					case 0:
 						outputText("armor");
 						break;
@@ -241,7 +241,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						outputText("undefined");
 				}
 				outputText(" rack here.  It looks like it could hold nine different ");
-				switch(rack) {
+				switch (rack) {
 					case 0:
 						outputText("armors");
 						break;
@@ -255,15 +255,15 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						outputText("undefined");
 				}
 				outputText(".  You check it over and spot an easy way to fold it up for transport.  This would be a fine addition to your camp, so you pack it up and haul it back.");
-				switch(rack) {
+				switch (rack) {
 					case 0:
-						player.createKeyItem("Equipment Rack - Armor",0,0,0,0);
+						player.createKeyItem("Equipment Rack - Armor", 0, 0, 0, 0);
 						break;
 					case 1:
-						player.createKeyItem("Equipment Rack - Weapons",0,0,0,0);
+						player.createKeyItem("Equipment Rack - Weapons", 0, 0, 0, 0);
 						break;
 					case 2:
-						player.createKeyItem("Equipment Rack - Shields",0,0,0,0);
+						player.createKeyItem("Equipment Rack - Shields", 0, 0, 0, 0);
 						break;
 					default:
 						outputText("  <b>Please let Ormael/Aimozg know about this bug.</b>");
@@ -272,9 +272,9 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				return;
 			}
 			//Initialize saved gender:
-			if(flags[kFLAGS.AMILY_MET] == 0) flags[kFLAGS.AMILY_PC_GENDER] = player.gender;
+			if (flags[kFLAGS.AMILY_MET] == 0) flags[kFLAGS.AMILY_PC_GENDER] = player.gender;
 			//Amily gone/hiding super hard
-			if(flags[kFLAGS.AMILY_IS_BATMAN] > 0 || flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] == 1  || flags[kFLAGS.AMILY_TREE_FLIPOUT] > 0) {
+			if (flags[kFLAGS.AMILY_IS_BATMAN] > 0 || flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] == 1 || flags[kFLAGS.AMILY_TREE_FLIPOUT] > 0) {
 				outputText("You enter the ruined village cautiously. There are burnt-down houses, smashed-in doorways, ripped-off roofs... everything is covered with dust and grime. You explore for an hour, but you cannot find any sign of another living being, or anything of value. The occasional footprint from an imp or a goblin turns up in the dirt, but you don't see any of the creatures themselves. It looks like time and passing demons have stripped the place bare since it was originally abandoned. Finally, you give up and leave. You feel much easier when you're outside of the village.");
 				doNext(camp.returnToCampUseOneHour);
 				return;
@@ -287,32 +287,32 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				return;
 			}
 			//Remove worm block if player got rid of worms.
-			if(flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] == 1) {
-				if(!player.hasStatusEffect(StatusEffects.Infested)) flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] = 0;
+			if (flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] == 1) {
+				if (!player.hasStatusEffect(StatusEffects.Infested)) flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] = 0;
 			}
 			//Corrupt blow up! - requires you've met Amily
-			if(flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] == 0 && flags[kFLAGS.AMILY_MET] > 0 && player.cor > 25 + player.corruptionTolerance) {
+			if (flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] == 0 && flags[kFLAGS.AMILY_MET] > 0 && player.cor > 25 + player.corruptionTolerance) {
 				meetAmilyAsACorruptAsshat();
 				return;
 			}
 			//CORRUPTIONZ
-			if(flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] > 0 && player.cor > 25) {
+			if (flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] > 0 && player.cor > 25) {
 				//Cook amily a snack if player doesnt have key item for it.
-				if(player.hasKeyItem("Potent Mixture") < 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] < 3) {
+				if (player.hasKeyItem("Potent Mixture") < 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] < 3) {
 					cookAmilyASnack();
 					return;
 				}
 				//Has snacks!
 				else {
-					if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] == 0) stalkingZeAmiliez();
-					else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] == 1) stalkingZeAmiliez2();
-					else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] == 2) stalkingZeAmiliez3();
+					if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] == 0) stalkingZeAmiliez();
+					else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] == 1) stalkingZeAmiliez2();
+					else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] == 2) stalkingZeAmiliez3();
 					else rapeCorruptAmily4Meeting();
 					return;
 				}
 			}
 			//Amily Un-encounterable (worms):
-			if(flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] == 1 || player.cor > 25 || flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] > 0) {
+			if (flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] == 1 || player.cor > 25 || flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] > 0) {
 				outputText("You enter the ruined village cautiously. There are burnt-down houses, smashed-in doorways, ripped-off roofs... everything is covered with dust and grime. For hours you explore, but you cannot find any sign of another living being, or anything of value. The occasional footprint from an imp or a goblin turns up in the dirt, but you don't see any of the creatures themselves. It looks like time and passing demons have stripped the place bare since it was originally abandoned. Finally, you give up and leave. You feel much easier when you're outside of the village – you had the strangest sensation of being watched while you were in there.");
 				doNext(camp.returnToCampUseOneHour);
 				return;
@@ -324,28 +324,26 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				pregnancy.knockUpForce(); //Clear Pregnancy
 				return;
 			}
-			if(amilyCanHaveTFNow())
-			{
+			if (amilyCanHaveTFNow()) {
 				amilyDefurrify();
 				return;
 			}
 			//meeting scenes for when PC is the same gender as when they last met Amily
-			if(flags[kFLAGS.AMILY_PC_GENDER] == player.gender) {
+			if (flags[kFLAGS.AMILY_PC_GENDER] == player.gender) {
 				//"bad" or "good" ends.
-				if(flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] >= 5 && flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] == 0)
-				{
-					if(flags[kFLAGS.AMILY_AFFECTION] < 40) thisIsAReallyShittyBadEnd();
+				if (flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] >= 5 && flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] == 0) {
+					if (flags[kFLAGS.AMILY_AFFECTION] < 40) thisIsAReallyShittyBadEnd();
 					else thisFunctionProbablySucksTooOhYeahAmilyFunction();
 
 					return;
 				}
 
 				//Man Meetinz!
-				if(player.gender == 1) {
+				if (player.gender == 1) {
 					//Desperate Plea
 					//(Amily reach Affection 50 without having had sex with the PC once.)
 					//Requires the PC have been male last time.
-					if(flags[kFLAGS.AMILY_AFFECTION] >= 50 && flags[kFLAGS.AMILY_FUCK_COUNTER] == 0 && flags[kFLAGS.AMILY_PC_GENDER] == 1) {
+					if (flags[kFLAGS.AMILY_AFFECTION] >= 50 && flags[kFLAGS.AMILY_FUCK_COUNTER] == 0 && flags[kFLAGS.AMILY_PC_GENDER] == 1) {
 						outputText("Wandering into the ruined village, you set off in search of Amily.\n\n");
 						/*NOPE!
 						[Player meets the requirements to stalk Amily]
@@ -364,12 +362,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						outputText("Amily scuffs the ground with one of her finger-like toe claws, looking down at it as if it was the most interesting thing in the world – or as if she doesn't dare to look you in the eyes. \"<i>I... You know what I've been asking of you; from you, and you keep turning me down... but you kept talking to me, asking me about myself. You wanted to get to know me, but... why don't you want to know ALL of me? I... I want to give myself to you. You're the nicest, kindest man I've met – even before the demons destroyed my village. I want to be with you... but you don't seem to want to be with me.</i>\" She looks up to you at last, her eyes wet with tears. \"<i>Is there something wrong with me? Can't you like me in that way?</i>\" she pleads.\n\n");
 						//Accept her / Turn her down gently / Turn her down bluntly
 						var fur:Function = null;
-						if(flags[kFLAGS.AMILY_NOT_FURRY] == 0) fur = amilyNoFur;
+						if (flags[kFLAGS.AMILY_NOT_FURRY] == 0) fur = amilyNoFur;
 						simpleChoices("Accept Her", desperateAmilyPleaAcceptHer, "RejectFurry", fur, "RejectGently", desperateAmilyPleaTurnDown, "BluntReject", desperateAmilyPleaTurnDownBlunt, "", null);
 						return;
 					}
 					//[First Meeting]
-					if(flags[kFLAGS.AMILY_MET] == 0) {
+					if (flags[kFLAGS.AMILY_MET] == 0) {
 						//Set flag for what she met the player as.
 						flags[kFLAGS.AMILY_MET_AS] = player.gender;
 						//set 'met' to true
@@ -379,7 +377,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						outputText("\"<i>Don't make any sudden moves!</i>\" A voice calls out, high pitched and a little squeaky, but firm and commanding. You freeze to avoid giving your assailant a reason to shoot at you again. \"<i>Stand up and turn around, slowly,</i>\" it commands again. You do as you are told.\n\n");
 
 						//[Jojo previously encountered]
-						if(monk != 0) {
+						if (monk != 0) {
 							outputText("The creature that has cornered you is clearly of the same race as Jojo, though notably a female member of his species. Her fur is thick with dust, but you can still easily make out its auburn color. Her limbs and midriff are wiry, hardened as much by meals that are less than frequent as by constant exercise and physical exertion. Her buttocks are non-existent, and her breasts can't be any larger than an A-cup. She wears a tattered pair of pants and an equally ragged-looking shirt. A very large and wicked-looking dagger – more of a short sword really – is strapped to her hip, and she is menacing you with a blowpipe.\n\n");
 						}
 						//[Jojo not previously encountered]
@@ -387,7 +385,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 							outputText("You have been cornered by a very strange being: a bipedal female humanoid with the unmistakable features of a giant mouse; paw-like feet, a muzzled head with long whiskers, large mouse ears, and a body covered in dust-caked auburn fur. It doesn't look like she has had a very easy life; her clothing consists of a dirty, tattered set of pants and shirt, while her limbs and midriff are wiry, hardened as much by meals that are less than frequent as by constant exercise and physical exertion. Her buttocks are non-existent, and her breasts can't be any larger than an A-cup. Still, she looks quite capable of defending herself; not only is she brandishing a blowpipe, clearly ready to spit another doubtlessly-poisoned dart at you, but she has a formidable-looking knife strapped to her hip.\n\n");
 						}
 						outputText("She looks at you for a few long moments, and then lowers her blowpipe, \"<i>I'm sorry about that, but I thought you were another demon. They destroyed this place years ago, but some of the damn scavengers still occasionally drift through. Not so much lately, of course. I've made something of an impression on them.</i>\" She grins malevolently, one hand caressing the blade of her knife in an almost sensual fashion. \"<i>My name is Amily, the last survivor of this village. All of my people are gone now; they're scattered, dead, enslaved, or worse. What about you? ");
-						if(player.humanScore() > 4) outputText("Are you ");
+						if (player.humanScore() > 4) outputText("Are you ");
 						else outputText("Were you ");
 						outputText("one of those... humans, I've heard sometimes wander into this world?</i>\"\n\n");
 
@@ -409,7 +407,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						return;
 					}
 					//[Remeeting if previously refused]
-					else if(player.gender == 1 && flags[kFLAGS.AMILY_OFFER_ACCEPTED] == 0) {
+					else if (player.gender == 1 && flags[kFLAGS.AMILY_OFFER_ACCEPTED] == 0) {
 						outputText("Wandering into the ruined village, you set off in search of Amily.\n\n");
 						/*NOPE!
 						//[Player meets the requirements to stalk Amily]
@@ -429,9 +427,9 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 					}
 				}
 				//GIRL MEETINZ
-				else if(player.gender == 2) {
+				else if (player.gender == 2) {
 					//First time
-					if(flags[kFLAGS.AMILY_MET] == 0) {
+					if (flags[kFLAGS.AMILY_MET] == 0) {
 						//Set flag for what she met the player as.
 						flags[kFLAGS.AMILY_MET_AS] = player.gender;
 						//set 'met' to true
@@ -441,7 +439,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						outputText("\"<i>Don't make any sudden moves!</i>\" A voice calls out, high pitched and a little squeaky, but firm and commanding. You freeze to avoid giving your assailant a reason to shoot at you again. \"<i>Stand up and turn around, slowly,</i>\" it commands again. You do as you are told.\n\n");
 
 						//[Jojo previously encountered]
-						if(monk > 0) {
+						if (monk > 0) {
 							outputText("The creature that has cornered you is clearly of the same race as Jojo, though notably a female member of his species. Her fur is thick with dust, but you can still easily make out its auburn color. Her limbs and midriff are wiry, hardened as much by meals that are less than frequent as by constant exercise and physical exertion. Her buttocks are non-existent, and her breasts can't be any larger than an A-cup. She wears a tattered pair of pants and an equally ragged-looking shirt. A very large and wicked-looking dagger – more of a short sword really – is strapped to her hip, and she is menacing you with a blowpipe.\n\n");
 						}
 						//[Jojo not previously encountered]
@@ -449,7 +447,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 							outputText("You have been cornered by a very strange being: a bipedal female humanoid with the unmistakable features of a giant mouse; paw-like feet, a muzzled head with long whiskers, large mouse ears, and a body covered in dust-caked auburn fur. It doesn't look like she has had a very easy life; her clothing consists of a dirty, tattered set of pants and shirt, while her limbs and midriff are wiry, hardened as much by meals that are less than frequent as by constant exercise and physical exertion. Her buttocks are non-existent, and her breasts can't be any larger than an A-cup. Still, she looks quite capable of defending herself; not only is she brandishing a blowpipe, clearly ready to spit another doubtlessly-poisoned dart at you, but she has a formidable-looking knife strapped to her hip.\n\n");
 						}
 						outputText("She looks at you for a few long moments, and then lowers her blowpipe, \"<i>I'm sorry about that, but I thought you were another demon. They destroyed this place years ago, but some of the damn scavengers still occasionally drift through. Not so much lately, of course. I've made something of an impression on them.</i>\" She grins malevolently, one hand caressing the blade of her knife in an almost sensual fashion. \"<i>My name is Amily, the last survivor of this village. All of my people are gone now; they're scattered, dead, enslaved, or worse. What about you? ");
-						if(player.humanScore() > 4) outputText("Are you ");
+						if (player.humanScore() > 4) outputText("Are you ");
 						else outputText("Were you ");
 						outputText("one of those... humans, I've heard sometimes wander into this world?</i>\"\n\n");
 
@@ -468,26 +466,26 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						return;
 					}
 					//Lesbo lovin confession!
-					if(flags[kFLAGS.AMILY_CONFESSED_LESBIAN] == 0 && flags[kFLAGS.AMILY_AFFECTION] >= 25) {
+					if (flags[kFLAGS.AMILY_CONFESSED_LESBIAN] == 0 && flags[kFLAGS.AMILY_AFFECTION] >= 25) {
 						amilyIsTotallyALesbo();
 						return;
 					}
 					//Amily totally grows a wang for you once she loves you
-					if(flags[kFLAGS.AMILY_CONFESSED_LESBIAN] == 2 && flags[kFLAGS.AMILY_WANG_LENGTH] == 0) {
+					if (flags[kFLAGS.AMILY_CONFESSED_LESBIAN] == 2 && flags[kFLAGS.AMILY_WANG_LENGTH] == 0) {
 						amilyPostConfessionGirlRemeeting();
 						return;
 					}
 					//If PC shot down love confession, cap affection at 35 and re-offer?
-					if(flags[kFLAGS.AMILY_AFFECTION] > 35 && flags[kFLAGS.AMILY_CONFESSED_LESBIAN] == 1) {
+					if (flags[kFLAGS.AMILY_AFFECTION] > 35 && flags[kFLAGS.AMILY_CONFESSED_LESBIAN] == 1) {
 						flags[kFLAGS.AMILY_AFFECTION] = 35;
 						amilyIsTotallyALesbo();
 						return;
 					}
 				}
 				//Herm Meetinz
-				else if(player.gender == 3) {
+				else if (player.gender == 3) {
 					//First time
-					if(flags[kFLAGS.AMILY_MET] == 0) {
+					if (flags[kFLAGS.AMILY_MET] == 0) {
 						//Set flag for what she met the player as.
 						flags[kFLAGS.AMILY_MET_AS] = player.gender;
 						//set 'met' to true
@@ -497,7 +495,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						outputText("\"<i>Don't make any sudden moves!</i>\" A voice calls out, high pitched and a little squeaky, but firm and commanding. You freeze to avoid giving your assailant a reason to shoot at you again. \"<i>Stand up and turn around, slowly,</i>\" it commands again. You do as you are told.\n\n");
 
 						//[Jojo previously encountered]
-						if(monk > 0) {
+						if (monk > 0) {
 							outputText("The creature that has cornered you is clearly of the same race as Jojo, though notably a female member of his species. Her fur is thick with dust, but you can still easily make out its auburn color. Her limbs and midriff are wiry, hardened as much by meals that are less than frequent as by constant exercise and physical exertion. Her buttocks are non-existent, and her breasts can't be any larger than an A-cup. She wears a tattered pair of pants and an equally ragged-looking shirt. A very large and wicked-looking dagger – more of a short sword really – is strapped to her hip, and she is menacing you with a blowpipe.\n\n");
 						}
 						//[Jojo not previously encountered]
@@ -505,7 +503,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 							outputText("You have been cornered by a very strange being: a bipedal female humanoid with the unmistakable features of a giant mouse; paw-like feet, a muzzled head with long whiskers, large mouse ears, and a body covered in dust-caked auburn fur. It doesn't look like she has had a very easy life; her clothing consists of a dirty, tattered set of pants and shirt, while her limbs and midriff are wiry, hardened as much by meals that are less than frequent as by constant exercise and physical exertion. Her buttocks are non-existent, and her breasts can't be any larger than an A-cup. Still, she looks quite capable of defending herself; not only is she brandishing a blowpipe, clearly ready to spit another doubtlessly-poisoned dart at you, but she has a formidable-looking knife strapped to her hip.\n\n");
 						}
 						outputText("She looks at you for a few long moments, and then lowers her blowpipe, \"<i>I'm sorry about that, but I thought you were another demon. They destroyed this place years ago, but some of the damn scavengers still occasionally drift through. Not so much lately, of course. I've made something of an impression on them.</i>\" She grins malevolently, one hand caressing the blade of her knife in an almost sensual fashion. \"<i>My name is Amily, the last survivor of this village. All of my people are gone now; they're scattered, dead, enslaved, or worse. What about you? ");
-						if(player.humanScore() > 4) outputText("Are you ");
+						if (player.humanScore() > 4) outputText("Are you ");
 						else outputText("Were you ");
 						outputText("one of those... humans, I've heard sometimes wander into this world?</i>\"\n\n");
 
@@ -515,7 +513,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 						outputText("She looks thoughtful. \"<i>You know...</i>\" She begins, but stops and ");
 						//[If breasts are flat, manly breasts]
-						if(player.biggestTitSize() < 1) outputText("sniffs the air intensely, her whiskers quivering. ");
+						if (player.biggestTitSize() < 1) outputText("sniffs the air intensely, her whiskers quivering. ");
 						//[If breasts are A-cup or bigger]
 						else outputText("stares at the bulge in your top, as well as the bulge in your bottom.  ");
 						outputText("\"<i>Never mind,</i>\" she says after a moment. \"<i>You're a hermaphrodite, aren't you? Forget I mentioned it.</i>\"\n\n");
@@ -528,19 +526,19 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 					}
 					//Medium affection 33% chance, guaranteed by 20.
 					//Requires she hasn't yet given this scene!
-					if(((flags[kFLAGS.AMILY_AFFECTION] >= 15 && rand(3) == 0) || flags[kFLAGS.AMILY_AFFECTION] >= 20) && flags[kFLAGS.AMILY_HERM_QUEST] == 0) {
+					if (((flags[kFLAGS.AMILY_AFFECTION] >= 15 && rand(3) == 0) || flags[kFLAGS.AMILY_AFFECTION] >= 20) && flags[kFLAGS.AMILY_HERM_QUEST] == 0) {
 						whyNotHerms();
 						return;
 					}
-					if(flags[kFLAGS.AMILY_HERM_QUEST] == 1) {
+					if (flags[kFLAGS.AMILY_HERM_QUEST] == 1) {
 						maybeHermsAintAllBadBITCH();
 						return;
 					}
 				}
 				//Genderless
-				else if(player.gender == 0) {
+				else if (player.gender == 0) {
 					//[First Meeting]
-					if(flags[kFLAGS.AMILY_MET] == 0) {
+					if (flags[kFLAGS.AMILY_MET] == 0) {
 						flags[kFLAGS.AMILY_MET_AS] = player.gender;
 						//set 'met' to true
 						flags[kFLAGS.AMILY_MET]++;
@@ -549,7 +547,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						outputText("\"<i>Don't make any sudden moves!</i>\" A voice calls out, high pitched and a little squeaky, but firm and commanding. You freeze to avoid giving your assailant a reason to shoot at you again. \"<i>Stand up and turn around, slowly,</i>\" it commands again. You do as you are told.\n\n");
 
 						//[Jojo previously encountered]
-						if(monk > 0) {
+						if (monk > 0) {
 							outputText("The creature that has cornered you is clearly of the same race as Jojo, though notably a female member of his species. Her fur is thick with dust, but you can still easily make out its auburn color. Her limbs and midriff are wiry, hardened as much by meals that are less than frequent as by constant exercise and physical exertion. Her buttocks are non-existent, and her breasts can't be any larger than an A-cup. She wears a tattered pair of pants and an equally ragged-looking shirt. A very large and wicked-looking dagger – more of a short sword really – is strapped to her hip, and she is menacing you with a blowpipe.\n\n");
 						}
 						//[Jojo not previously encountered]
@@ -557,7 +555,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 							outputText("You have been cornered by a very strange being: a bipedal female humanoid with the unmistakable features of a giant mouse; paw-like feet, a muzzled head with long whiskers, large mouse ears, and a body covered in dust-caked auburn fur. It doesn't look like she has had a very easy life; her clothing consists of a dirty, tattered set of pants and shirt, while her limbs and midriff are wiry, hardened as much by meals that are less than frequent as by constant exercise and physical exertion. Her buttocks are non-existent, and her breasts can't be any larger than an A-cup. Still, she looks quite capable of defending herself; not only is she brandishing a blowpipe, clearly ready to spit another doubtlessly-poisoned dart at you, but she has a formidable-looking knife strapped to her hip.\n\n");
 						}
 						outputText("She looks at you for a few long moments, and then lowers her blowpipe, \"<i>I'm sorry about that, but I thought you were another demon. They destroyed this place years ago, but some of the damn scavengers still occasionally drift through. Not so much lately, of course. I've made something of an impression on them.</i>\" She grins malevolently, one hand caressing the blade of her knife in an almost sensual fashion. \"<i>My name is Amily, the last survivor of this village. All of my people are gone now; they're scattered, dead, enslaved, or worse. What about you? ");
-						if(player.humanScore() > 4) outputText("Are you ");
+						if (player.humanScore() > 4) outputText("Are you ");
 						else outputText("Were you ");
 						outputText("one of those... humans, I've heard sometimes wander into this world?</i>\"\n\n");
 
@@ -566,7 +564,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						outputText("\"<i>I was born here, I grew up here, and I would have gotten married and settled down here if it hadn't been for those demons.</i>\" She spits the word 'demons' with contempt. \"<i>After it was all over, I had nowhere else to go. So I stayed here. I've still got nowhere else to go, to be honest. I haven't found any other settlements of my own people, and I'd sooner die than give myself over to the demons. But it seems that if I'm ever going to see more of my people living free, I'm going to have to take the leading role...</i>\"\n\n");
 
 						//(If breasts < A-Cup)
-						if(player.biggestTitSize() < 1) {
+						if (player.biggestTitSize() < 1) {
 							outputText("She stares at you intently, and you ask her what the matter is.\n\n");
 
 							outputText("\"<i>You see, that role I was talking about? I've had a long time to think about it, and there's no one else for it. If there are ever going to be more of my kind born into freedom, they're going to have to be born. Literally; I need to find a mate that is pure, one that can give me strong and pure children of my own kind,</i>\" she explains, one hand absently touching her flat belly. \"<i>The few males of my kind that I've managed to find are demon slaves – far too corrupt to make suitable mates, even if I could free them. I've heard, though, that humans are strangely weak breeders; your seed would be free of taint, and you would father more of my own kind. Unlike, say, an imp or a minotaur.</i>\"\n\n");
@@ -608,14 +606,14 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			}
 			//[Surprise Remeeting]
 			//(random chance of happening instead of [Normal Remeeting] if player meets 'requirements' for stalking Amily)
-			if(player.spe > 50 && player.inte > 40 && rand(4) == 0) {
+			if (player.spe > 50 && player.inte > 40 && rand(4) == 0) {
 				outputText("Deciding to find Amily first instead of waiting for her to find you, you set off into the ruins. Using all of your knowledge, skill and cunning to figure out where she is likely to be, you make your way there without giving yourself away.\n\n");
 				//[Amily is not pregnant]
-				if(flags[kFLAGS.AMILY_INCUBATION] == 0) {
+				if (flags[kFLAGS.AMILY_INCUBATION] == 0) {
 					outputText("Finally, you find her squatting down in front of a small bush. She's industriously picking it clean of berries, gulping down almost as many as she puts into a small sack at her side.\n\n");
 				}
 				//[Amily is slightly pregnant]
-				else if(flags[kFLAGS.AMILY_INCUBATION] >= 90) {
+				else if (flags[kFLAGS.AMILY_INCUBATION] >= 90) {
 					outputText("Finally, you find her rummaging through the contents of a home that has been torn open. She appears to be looking for as many old strips of cloth as she can find.\n\n");
 				}
 				//[Amily is heavily pregnant]
@@ -624,14 +622,14 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				}
 				outputText("How do you approach her?");
 				//Announce yourself / Scare her
-				simpleChoices("Announce",sneakyUberAmilyRemeetingsAnnounce,"Scare Her",scareAmilyRemeetingsProBaws,"",null,"",null,"",null);
+				simpleChoices("Announce", sneakyUberAmilyRemeetingsAnnounce, "Scare Her", scareAmilyRemeetingsProBaws, "", null, "", null, "", null);
 				return;
 			}
 
 			//[Normal Remeeting]
 			//Did the PC genderchange?  OH SHIT SON!
 			//Alternatively: get bitched at
-			if(flags[kFLAGS.AMILY_PC_GENDER] != player.gender) {
+			if (flags[kFLAGS.AMILY_PC_GENDER] != player.gender) {
 				amilyNewGenderConfrontation();
 				return;
 			}
@@ -643,25 +641,25 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				case 3:
 				case 4:
 				case 5: //Amily is slightly pregnant
-						outputText("Amily materializes out of the ruins somewhat slower than usual. You can see that your efforts together have taken; an undeniable bulge pokes out of her midriff, pushing up her tattered shirt slightly and seriously straining her belt. She idly rubs it with one hand, as if confirming its presence to herself.\n\n");
-						//[Low Affection]
-						if (flags[kFLAGS.AMILY_AFFECTION] < 15 || player.gender == 0) outputText("\"<i>Well, I guess despite whatever other faults you may have, you can get the job done.</i>\" She says, not looking directly at you.\n\n");
-						//[Medium Affection]
-						else if (flags[kFLAGS.AMILY_AFFECTION] < 40) outputText("\"<i>Thank you. With your help, my people will soon live again.</i>\" She strokes her belly, grinning happily. \"<i>Is there something you want to talk about?</i>\"\n\n");
-						//[High Affection]
-						else outputText("\"<i>Thank you, thank you! I couldn't have done this without you!</i>\" She exclaims. \"<i>You've done a wonderful, noble thing, and I'm glad I found you to be their father. So, not that it isn't great to see you again, but why did you come to visit?</i>\"\n\n");
-						break;
+					outputText("Amily materializes out of the ruins somewhat slower than usual. You can see that your efforts together have taken; an undeniable bulge pokes out of her midriff, pushing up her tattered shirt slightly and seriously straining her belt. She idly rubs it with one hand, as if confirming its presence to herself.\n\n");
+					//[Low Affection]
+					if (flags[kFLAGS.AMILY_AFFECTION] < 15 || player.gender == 0) outputText("\"<i>Well, I guess despite whatever other faults you may have, you can get the job done.</i>\" She says, not looking directly at you.\n\n");
+					//[Medium Affection]
+					else if (flags[kFLAGS.AMILY_AFFECTION] < 40) outputText("\"<i>Thank you. With your help, my people will soon live again.</i>\" She strokes her belly, grinning happily. \"<i>Is there something you want to talk about?</i>\"\n\n");
+					//[High Affection]
+					else outputText("\"<i>Thank you, thank you! I couldn't have done this without you!</i>\" She exclaims. \"<i>You've done a wonderful, noble thing, and I'm glad I found you to be their father. So, not that it isn't great to see you again, but why did you come to visit?</i>\"\n\n");
+					break;
 				case 6:
 				case 7:
 				case 8: //Amily is heavily pregnant
-						outputText("It takes several minutes before Amily appears, but when you see her, you marvel at how she got to you as quickly as she did. Her stomach is hugely swollen; one of her hands actually cradles underneath its rounded expanse, as if trying to hold it up. She is pants-less, evidently no longer able to fit into them. Her shirt drapes loosely, barely managing to cover the upper half of her firm orb of a belly. The belt where she hangs her blowpipe and dagger has been tied around her upper chest like a sash – between her breasts and her bulge – so she can still carry her weapons effectively.\n\n");
-						//[Low Affection]
-						if (flags[kFLAGS.AMILY_AFFECTION] < 15 || player.gender == 0) outputText("She seems to be paying more attention to her gravid midriff than to you, and it's several long moments before she finally speaks. \"<i>These children will be born soon. I guess I owe you my thanks for being willing to father them.</i>\"\n\n");
-						//[Medium Affection]
-						else if (flags[kFLAGS.AMILY_AFFECTION] < 40) outputText("She groans softly. \"<i>This isn't an easy task, you know. But I still want to thank you. Maybe, when these ones are born, you'll be willing to help me make some more?</i>\" She asks, her tail gently waving behind her.\n\n");
-						//[High Affection]
-						else outputText("\"<i>I should have known you were coming; they always start kicking up a storm when you're here – did you know that?</i>\" She smiles beatifically. \"<i>They know their daddy already, they do. With your help, a new generation of my people will have a chance to grow up free from the taint of demons. Was there something on your mind?</i>\"\n\n");
-						break;
+					outputText("It takes several minutes before Amily appears, but when you see her, you marvel at how she got to you as quickly as she did. Her stomach is hugely swollen; one of her hands actually cradles underneath its rounded expanse, as if trying to hold it up. She is pants-less, evidently no longer able to fit into them. Her shirt drapes loosely, barely managing to cover the upper half of her firm orb of a belly. The belt where she hangs her blowpipe and dagger has been tied around her upper chest like a sash – between her breasts and her bulge – so she can still carry her weapons effectively.\n\n");
+					//[Low Affection]
+					if (flags[kFLAGS.AMILY_AFFECTION] < 15 || player.gender == 0) outputText("She seems to be paying more attention to her gravid midriff than to you, and it's several long moments before she finally speaks. \"<i>These children will be born soon. I guess I owe you my thanks for being willing to father them.</i>\"\n\n");
+					//[Medium Affection]
+					else if (flags[kFLAGS.AMILY_AFFECTION] < 40) outputText("She groans softly. \"<i>This isn't an easy task, you know. But I still want to thank you. Maybe, when these ones are born, you'll be willing to help me make some more?</i>\" She asks, her tail gently waving behind her.\n\n");
+					//[High Affection]
+					else outputText("\"<i>I should have known you were coming; they always start kicking up a storm when you're here – did you know that?</i>\" She smiles beatifically. \"<i>They know their daddy already, they do. With your help, a new generation of my people will have a chance to grow up free from the taint of demons. Was there something on your mind?</i>\"\n\n");
+					break;
 				default: //Amily is not pregnant
 					outputText("It doesn't take long for Amily to materialize out of the ruins. Her blowpipe and dagger are both thrust into her belt, and she's still wearing the same tattered clothes as before.\n\n");
 					//[Low Affection]
@@ -692,27 +690,33 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						outputText("suggests that it's no joking matter.\n\n");
 					}
 			}
-			//Sex / Talk / Talk then sex
-			var efficiency:Function = null;
-			//Amily is not a herm but is ok with herm-daddying!
-			if(player.hasItem(consumables.P_DRAFT) && flags[kFLAGS.AMILY_WANG_LENGTH] == 0 && flags[kFLAGS.AMILY_HERM_QUEST] == 2 && flags[kFLAGS.AMILY_AFFECTION] >= 40 && player.gender == 3) {
-				efficiency = makeAmilyAHerm;
-				outputText("You could probably bring up the efficiency of having two hermaphrodite mothers, particularly since you have this purified incubi draft handy.\n\n");
-			}
-
-			var sex:Function = determineAmilySexEvent();
-			simpleChoices("Sex", sex, "Talk", talkToAmily, "Both", (sex == null ? null : talkThenSexWithAmily), "Efficiency", efficiency, "Leave", camp.returnToCampUseOneHour);
+			amilyVillageMenu();
 			//Set flag for 'last gender met as'
 			flags[kFLAGS.AMILY_PC_GENDER] = player.gender;
+		}
 
-			/*FAILSAFE - ALL GENDERS HAVE HAD THERE GO AN NOTHING HAPPENED!
-			outputText("You enter the ruined village cautiously. There are burnt-down houses, smashed-in doorways, ripped-off roofs... everything is covered with dust and grime. You explore for an hour, but you cannot find any sign of another living being, or anything of value. The occasional footprint from an imp or a goblin turns up in the dirt, but you don't see any of the creatures themselves. It looks like time and passing demons have stripped the place bare since it was originally abandoned. Finally, you give up and leave. You feel much easier when you're outside of the village – you had the strangest sensation of being watched while you were in there.");
-			doNext(13);
-			return;*/
+		/**
+		 * Generic encounter menu.
+		 */
+		private function amilyVillageMenu():void {
+			//Sex / Talk / Talk then sex
+			var sex:Function = determineAmilySexEvent();
+			menu();
+			addButtonIfTrue(0, "Sex", sex, "One of you is not ready.", sex != null);
+			addButton(1, "Talk", talkToAmily);
+			addButtonIfTrue(2, "Both", talkThenSexWithAmily, "One of you is not ready.", sex != null);
+			//Amily is not a herm but is ok with herm-daddying!
+			if (player.hasItem(consumables.P_DRAFT) && flags[kFLAGS.AMILY_WANG_LENGTH] == 0 && flags[kFLAGS.AMILY_HERM_QUEST] == 2 && flags[kFLAGS.AMILY_AFFECTION] >= 40 && player.gender == 3) {
+				outputText("You could probably bring up the efficiency of having two hermaphrodite mothers, particularly since you have this purified incubi draft handy.\n\n");
+				addButton(3, "Efficiency", makeAmilyAHerm);
+			} else {
+				addButtonDisabled(3, "Efficiency", "You could probably bring up the efficiency of having two hermaphrodite mothers, should you find a bottle of purified incubi draft.");
+			}
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 
 		private function determineAmilySexEvent(forced:Boolean = false):Function {
-			if (!forced && player.lust < 35) return null;
+			if (!forced && player.lust < 33) return null;
 			//If Amily is lesbo lover!
 			var sex:Function = forced ? amilySexHappens : sexWithAmily;
             var choices:Array = [];
@@ -5177,6 +5181,8 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						outputText("\"<i>I...</i>\" She swallows hard. \"<i>This is a great shock, I must confess, but... But I care too much to lose you. I don't care if you've got a pussy of your own, now. I still want to be with you.</i>\" She smiles at you, feebly. \"<i>So, as I was saying, what do you want to talk about?</i>\"\n\n");
 						//(The player is considered as having completed the herm-specific part of Amily's quest.)
 						flags[kFLAGS.AMILY_HERM_QUEST] = 2;
+						amilyVillageMenu();
+						return;
 					}
 				}
 				//[Any to Genderless]
@@ -5189,11 +5195,15 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 					else if(flags[kFLAGS.AMILY_AFFECTION] < 40) {
 						outputText("She shakes her head sadly. \"<i>I guess this kind of puts a kink in our relationship, doesn't it? Still, I'll always be willing to talk with you.</i>\"\n\n");
 						//(The player can only Talk with Amily on each remeeting until they have become a gender other than Genderless.)
+						amilyVillageMenu();
+						return;
 					}
 					//High Affection:
 					else {
 						outputText("She looks upset and concerned - but for your sake, not hers. \"<i>I can't imagine what catastrophe robbed you like this. Please, find a way to change yourself back? Man, woman, even herm, I can't bear to see you like this... but I'll give you all the support I can.</i>\"\n\n");
 						//(The player can only Talk with Amily on each remeeting until they have become a gender other than Genderless.)
+						amilyVillageMenu();
+						return;
 					}
 				}
 			}
@@ -5208,7 +5218,11 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						//FEN: Increase affection!
 						flags[kFLAGS.AMILY_AFFECTION] += 15;
 						//FEN: If PC has had any kids with her, set as good to go!
-						if(flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] > 0) flags[kFLAGS.AMILY_OFFER_ACCEPTED] = 1;
+						if (flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] > 0) {
+							flags[kFLAGS.AMILY_OFFER_ACCEPTED] = 1;
+							amilyVillageMenu();
+							return;
+						} // otherwise leave and proceed next time
 					}
 					//Medium Affection:
 					else if(flags[kFLAGS.AMILY_AFFECTION] < 40) {
@@ -5217,7 +5231,11 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						//FEN: Increase affection!
 						flags[kFLAGS.AMILY_AFFECTION] += 5;
 						//FEN: If PC has had any kids with her, set as good to go!
-						if(flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] > 0) flags[kFLAGS.AMILY_OFFER_ACCEPTED] = 1;
+						if (flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] > 0) {
+							flags[kFLAGS.AMILY_OFFER_ACCEPTED] = 1;
+							amilyVillageMenu();
+							return;
+						} // otherwise leave and proceed next time
 					}
 					//High Affection:
 					else {
@@ -5248,12 +5266,16 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 							outputText("She looks you up and down, swallows forcefully, then looks determined. \"<i>I... I never dreamed I would say this to a hermaphrodite, but... but I know you, and I love you. If you still want to be with me, I'll stay with you.</i>\" She gives you wry grin. \"<i>Besides, I guess this means that now you and I can have children, anyway.</i>\"");
 							//(Player counts as having finished the herm variant of Amily's quest.)
 							flags[kFLAGS.AMILY_HERM_QUEST] = 2;
+							amilyVillageMenu();
+							return;
 						}
 					}
 					//Amily grew a dick for you.
 					else {
 						outputText("Amily looks you up and down, blushes and says, \"<i>Did you get a little jealous of me and decide to have some fun for yourself?  I-I didn't want it to be this way, but I guess we can both repopulate my race now.  How wonderful.</i>\"");
 						flags[kFLAGS.AMILY_HERM_QUEST] = 2;
+						amilyVillageMenu();
+						return;
 
 					}
 				}
@@ -5294,9 +5316,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						//mark as agreed to preg-quest!
 						flags[kFLAGS.AMILY_OFFER_ACCEPTED] = 1;
 						//(Use the Remeeting scene options.)
-						if (player.lust >= 33) sex = sexWithAmily;
-						if (sex != null) simpleChoices("Sex", sex, "Talk", talkToAmily, "Both", determineAmilySexEvent() == null ? null : talkThenSexWithAmily, "", null, "", null);
-						else simpleChoices("", null, "Talk", talkToAmily, "", null, "", null, "", null);
+						amilyVillageMenu();
 						return;
 					}
 					//High Affection:
@@ -5307,9 +5327,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						//mark as agreed to preg-quest!
 						flags[kFLAGS.AMILY_OFFER_ACCEPTED] = 1;
 						//(Use the Remeeting scene options.)
-						if (player.lust >= 33) sex = sexWithAmily;
-						if (sex != null) simpleChoices("Sex", sex, "Talk", talkToAmily, "Both", determineAmilySexEvent() == null ? null : talkThenSexWithAmily, "", null, "", null);
-						else simpleChoices("", null, "Talk", talkToAmily, "", null, "", null, "", null);
+						amilyVillageMenu();
 						return;
 					}
 				}
@@ -5320,19 +5338,23 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						outputText("\"<i>Well, I guess it's nice to see another woman around... though I could have used you as all male. So, do you want to talk?</i>\" Amily asks.\n\n");
 						//(Amily gains a small amount of Affection, begin the Female variant of Amily's quest.)
 						flags[kFLAGS.AMILY_AFFECTION] += 2;
-						doNext(talkToAmily);
+						amilyVillageMenu();
 						return;
 					}
 					//Medium Affection:
 					else if(flags[kFLAGS.AMILY_AFFECTION] < 40) {
 						outputText("\"<i>You didn't need to change yourself for my sake... but, I do like having somebody who can really understand what life in this world is like.</i>\" Amily notes.");
 						//(Amily's affection remains unchanged, but the quest switches to the female variant.)
+						amilyVillageMenu();
+						return;
 					}
 					//High Affection:
 					else {
 						outputText("Amily looks kind of disappointed. \"<i>I will always love you no matter who you are, but... I was kind of used to that nice cock of yours, love.</i>\" She shakes her head. \"<i>Ah, well, if it's you, then sex is sex to me.</i>\" She smiles.");
 						//Set love confession to: GO!
 						flags[kFLAGS.AMILY_CONFESSED_LESBIAN] = 2;
+						amilyVillageMenu();
+						return;
 					}
 				}
 				//[Any to Genderless]
@@ -5345,11 +5367,15 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 					else if(flags[kFLAGS.AMILY_AFFECTION] < 40) {
 						outputText("She shakes her head sadly. \"<i>I guess this kind of puts a kink in our relationship, doesn't it? Still, I'll always be willing to talk with you.</i>\"\n\n");
 						//(The player can only Talk with Amily on each remeeting until they have become a gender other than Genderless.)
+						amilyVillageMenu();
+						return;
 					}
 					//High Affection:
 					else {
 						outputText("She looks upset and concerned - but for your sake, not hers. \"<i>I can't imagine what catastrophe robbed you like this. Please, find a way to change yourself back? Man, woman, even herm, I can't bear to see you like this... but I'll give you all the support I can.</i>\"\n\n");
 						//(The player can only Talk with Amily on each remeeting until they have become a gender other than Genderless.)
+						amilyVillageMenu();
+						return;
 					}
 				}
 			}
