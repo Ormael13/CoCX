@@ -6213,9 +6213,14 @@ public class Combat extends BaseContent {
                 if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) damage += Math.round(damage * 0.3);
 				var meleeMasteryEXPgains:Number = 1;
 				if (player.hasPerk(PerkLib.MeleeWeaponsMastery)) meleeMasteryEXPgains += 2;
+				if (monster.short == "training dummy" && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) {
+					meleeMasteryEXPgains *= 2;
+					if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 2) meleeMasteryEXPgains *= 2.5;
+					if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 3) meleeMasteryEXPgains *= 2;
+				}
 				if (crit) meleeMasteryEXPgains *= 2;
 				if (player.weapon == weapons.CHAOSEA) meleeMasteryEXPgains *= 3;
-				if (player.weaponName == "fists" && player.haveNaturalClaws()) feralCombatXP(meleeMasteryEXPgains);
+				if ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.weaponName == "fists") feralCombatXP(meleeMasteryEXPgains);
 				if (player.isGauntletWeapon()) gauntletXP(meleeMasteryEXPgains);
 				if (player.isSwordTypeWeapon()) swordXP(meleeMasteryEXPgains);
 				if (player.isAxeTypeWeapon()) axeXP(meleeMasteryEXPgains);
@@ -9474,7 +9479,7 @@ public class Combat extends BaseContent {
         }
         //Unicorn and Bicorn aura
         //Unicorn
-        if (player.hasPerk(PerkLib.AuraOfPurity)) {
+        if (player.hasPerk(PerkLib.AuraOfPurity) && !player.hasStatusEffect(StatusEffects.HornyHorseyAuraOff)) {
             if (monster.cor > 20) {
                 var damage:Number = (scalingBonusIntelligence() * 1);
                 //Determine if critical hit!
@@ -9517,7 +9522,7 @@ public class Combat extends BaseContent {
             }
         }
         //Bicorn
-        if (player.hasPerk(PerkLib.AuraOfCorruption) && monster.lustVuln > 0) {
+        if (player.hasPerk(PerkLib.AuraOfCorruption) && monster.lustVuln > 0 && !player.hasStatusEffect(StatusEffects.HornyHorseyAuraOff)) {
             var lustDmg:Number = ((scalingBonusIntelligence() * 0.30) + (scalingBonusLibido() * 0.30));
             if (player.hasPerk(PerkLib.SensualLover)) lustDmg += 2;
             if (player.hasPerk(PerkLib.Seduction)) lustDmg += 5;
@@ -11924,8 +11929,6 @@ public class Combat extends BaseContent {
 			multi += 1;
 			if (player.humanScore() == player.humanMaxScore()) multi += 1;
 		}
-		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4) multi *= 3;
-		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3) multi *= 2;
         return multi;
 	}
 

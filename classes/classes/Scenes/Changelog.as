@@ -326,9 +326,9 @@ package classes.Scenes
 			outputText("-New key Item (by Ormael): Tel'Adre Magazine Issue 5 - Increase 2x Herbalism EXP gains. Costs 100 gems and buyable at Giacomo Books tab.\n");
 			outputText("-New key Item (by Ormael): Tel'Adre Magazine Issue 10 - Increase 2x Mining EXP gains. Costs 100 gems and buyable at Giacomo Books tab.\n");
 			outputText("-New tier 0 misc lvl-up perk: Melee Weapons Mastery. Req. 10+ str/tou/spe. Effect: Decrease by ~20% needed exp to level up each melee weapon mastery type and grants 200% more of base mastery exp gains.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New tier 0 misc lvl-up perk: Melee Weapons Mastery (Ex). Req. Melee Weapons Mastery perk, lvl 2+ and 20+ str/tou/spe. Effect: Decrease by ~45% needed exp to level up each melee weapon mastery type and increase cap for melee masteries by 20.\n");
+			outputText("-Bonus to mastery exp gains for expanding sparring ring was moved to only apply to fighting training dummy. With this bonus was changed from 1x/2x/3x for each of three sizes of the ring to 2x/5x/10x.\n");
+			outputText("-Any PC that may have Aura of Corruption/Purity can now suppress it or release. At suppressed state it will no longer deal dmg to enemies.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
