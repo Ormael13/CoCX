@@ -18,22 +18,22 @@ public class DilapidatedShrine extends BaseContent
 		public function firstvisitshrineintro():void {
 			flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] = 2;
 			clearOutput();
-			outputText("As you explore the battlefield, you notice a dilapidated building not far from you. You cautiously approach as your curiosity takes hold of you. A sparse amount of trees surround a shrine. It almost sparkles within the faint ambient light.\n\n");
-			outputText("How could such a thing survive in a place where nothing but war has waged?\n\nYou enter what you can only assume to be the entreance. You push open the wooden door. ");
-			outputText("The vermillion hued gates are remarkably crafted, yet you remain wary of potential danger. As the entrance falls behind you, you notice at both your sides rest two statues of strange beings. They seem to be half-lion and half-dog, a creature the likes of which you've never seen. You marvel at their almost life-like features. One stands with its jaw agape, the other with its lips sealed.\n\n");
-			outputText("Deeper into the shrine is a large plaza with statues located on each of your cardinal directions.\n\n");
-			outputText("A voice rings, breaking your thoughts, \"<i>What brings you here, young one?</i>\" Its voice is slightly raspy, clearly aged."+(silly()?" That or they seriously need to stop smoking.":"")+"\n\n");
-			outputText("You turn to face an elderly person, judging by their voice and wear, not unlike something you'd expect a monk to be dressed in. Not an inch of skin is shown, everything is completely sealed within layers of fabric.\n\n");
-			outputText("\"<i>You looks confused. Oh, Don't mind little ol' me. I'm merely cleaning up here and there. I can't let the shrine of the four gods grow dusty, can I?</i>\"\n\n");
-			outputText("You only blink and in that instant, they've vanished. An apparition? Illusion? Best to keep your guard up, lest danger will get the best of you.\n\n");
+			outputText("As you explore the battlefield, you notice a gravel path, curiously well-maintained, unlike everything else in this crater-ridden wasteland. You decide to follow the path, and it leads to a decently sized green space. In the middle of this surprisingly calm place, a large square building stands. At first glance, it's a majestic old wooden structure, radiating old grandeur and spirituality...Until you look closer. Holes in the walls, shards of ceiling tile strewn through the grass, and sections of the roof entirely missing. The walls, blackened to charcoal in places...This place was not spared the war around it. You cautiously approach, the sparse trees and ancient building still calming compared to the wasteland around it. \n\n");
+			outputText("How could such a thing survive in such a war-torn place?\n\n You push open the chipped, charred wooden door as quietly as you can, but the soft scraping of the wood on the stone floor seems to carry throughout the place. ");
+			outputText("The vermillion hued gates are remarkably built, damage unable to hide the craftsmanship. As you step in, you notice two statues of strange beings, on either side of you. They seem to be half-lion and half-dog, a creature the likes of which you've never seen. You marvel at their almost life-like features. One stands with its jaw agape, the other with its lips sealed.\n\n");
+			outputText("Deeper into the shrine is a large plaza with statues located on each of your cardinal directions. Between the statues, the stones of the floor are carved, inlaid with ceramic, each tile depicting two or more of the statues, locked in combat or ordering smaller, less defined stick figures into battle. \n\n");
+			outputText("A voice echoes through the sanctum, breaking your thoughts, \"<i>What brings you here, young one?</i>\" Its voice is slightly raspy, clearly aged."+(silly()?" That or they seriously need to stop smoking.":"")+"\n\n");
+			outputText("You turn to face an odd person. They stand a little less than six feet tall, slumped over slightly and leaning on an old, worn broom. You can't make out anything beyond their height. The monk shows no skin, everything is completely sealed within dark layers of fabric.\n\n");
+			outputText("You stare for a moment, taken aback, and the old monk waves you off with one hand. \"<i>Oh, Don't mind me, traveller. I'm merely cleaning up here and there. I can't let the shrine of the four gods grow dusty, can I?</i>\" They shuffle their feet, sending a small bit of Dust up from the floor.\n\n");
+			outputText("You blink and when you open your eyes, they've vanished. An apparition? Illusion? You ready yourself for combat, backing away. Perhaps it's best to leave for now. \n\n");
 			outputText("<b>You have discovered Dilapidated Shrine. You can visit it from Places menu.</b>");
 			mainmenu();
 		}
 		public function repeatvisitshrineintro():void {
 			clearOutput();
 			outputText("You decide to make a trip to the shrine. Entering the sacred grounds, you walk through the vermillion gates, passing the guardian statues.\n\n");
-			if (shinshoku()) outputText("As you reach the yard, you hear a voice again, \"<i>Oh, is that you again? Don't mind me, I'm simply maintaining the dust. They can get so riled up sometimes.</i>\" As you notice them, the old person that greeted you has returned to sweeping the shrine like you aren't even here.\n\n");
-			outputText("Upon reaching the main plaza, you see four major sections located on each cardinal direction. There are three smaller places located between the major wings.\n\n");
+			if (shinshoku()) outputText("As you reach the yard, you hear a voice again, \"<i>Oh, is that you again? I apologize for the dust...This place isn't the easiest to care for.</i>\" As you notice them, the old person that greeted you returns to sweeping the shrine like you aren't even here.\n\n");
+			outputText("Upon reaching the main plaza, you see four major sections located on each cardinal direction. There are three smaller rooms located between the major wings.\n\n");
 			outputText("You consider where to go or what you should do.");
 			mainmenu();
 		}
@@ -78,8 +78,8 @@ public class DilapidatedShrine extends BaseContent
 		
 		private function northSection():void {
 			clearOutput();
-			outputText("Standing inside the building located on north direction you see a statue in middle of it, ");
-			outputText("Before it lays on the ground medium sized plate, probably used to put on offering at times there was more visitors.\n\n");
+			outputText("Standing inside the northern building is a large statue, several pillars on either side marking a clear path. ");
+			outputText("In front of the statue is a raised dais, with a bronze bowl laid directly into the brick. A few ancient coins sit in the bottom of the bowl, along with some pieces of dried fruit. Offerings from another time, you suppose.\n\n");
 			menu();
 			addButton(14, "Back", shrinemainmenu);
 		}
@@ -93,9 +93,9 @@ public class DilapidatedShrine extends BaseContent
 		
 		private function westSection():void {
 			clearOutput();
-			outputText("Westward within the building, you see a statue in an open clearing. The towering figure portrays a hideously mesmerizing creature frozen in an aggressive pose as if it were watching you with scorn. Each limb comes from a different animal you have seen in this realm, yet all together seems to create a harmonical whole despite the chaotic ensemble.\n\n");
-			outputText("Each arm extends into sharp points, much like a blade. Its left arm resembles what appears to be a mantis blade, while the right arm is a kamaitachi blade. The statue wields each arm, seemingly ready to make a move, yet almost inviting as if it wishes to guide you somewhere.\n\n");
-			outputText("Its eyes seem ordinarily human-like, with an x shaped cross for pupils.\n\n");
+			outputText("Westward within the building, you see a statue in an open clearing. The towering figure portrays a hideously mesmerizing creature frozen in an aggressive pose, eyes dark and lips curled into a frown. Each limb comes from a different animal you have seen in this realm, yet all together seems to create a harmonious whole despite the statues' chaotic nature.\n\n");
+			outputText("Each arm extends into sharp points, much like a blade. Its left arm resembles what appears to be a mantis blade, while the right arm is a kamaitachi blade. The statue brandishes each arm, ready to strike. You get a vague sense of impatience from the statue, like a sparring instructor waiting for a pupil to make the first move.\n\n");
+			outputText("Its eyes seem oddly human-like, except for the pupils, which are x shaped.\n\n");
 			outputText("At the base of the statue lies a metallic plaque. Given the rust coating it, the text is hard to decipher You can only make out, 'E.e.ie.'.\n\n");
 			outputText("Below the plaque lies two ornate wooden bowls, presumably used to put offerings in a time when this was a place people actively visited.\n\n");
             //The hint gives everything away. Remove it, and people won't understand what to do. Maybe no checks here?
@@ -153,7 +153,7 @@ public class DilapidatedShrine extends BaseContent
 		private function eastSection():void {
 			clearOutput();
 			outputText("Standing inside the building located on east direction you see a statue in middle of it, ");
-			outputText("Before it lays on the ground medium sized plate, probably used to put on offering at times there was more visitors.\n\n");
+			outputText("A single offering bowl sits, wood shimmering as if newly washed.\n\n");
 			menu();
 			addButton(14, "Back", shrinemainmenu);
 		}
@@ -167,11 +167,11 @@ public class DilapidatedShrine extends BaseContent
 		
 		private function southSection():void {
 			clearOutput();
-			outputText("Southward within the building, you see a group of statues in an open clearing. The largest one portrays a being, one of peak strength and power.\n\n");
-			outputText("It's magnificent, how crafter manages to capture traits of the being's power allows the statue to radiate awe as you gaze toward it. It's as if the figure is filled with the intent to slay and destroy anything that stands in its way.\n\n");
-			outputText("The surrounding statuettes wield weapons high. Each one carrying dual weapons of a different caliber. Axes, blades, warhammers, almost recklessly waving their weapons about.\n\n");
+			outputText("Southward within the building, you see a group of statues in an open clearing. The largest one portrays a being with bulging muscles, wearing fine armor.\n\n");
+			outputText("The marble statue shimmers, polished stone radiating power and strength. \n\n");
+			outputText("The surrounding statuettes depict a wide variety of warriors of a wide variety of Marethian races, each holding their weapons high. Each one carrying a variety of dual weapons. Axes, blades, warhammers...You could fill several armories with the blades in those statuettes' hands.\n\n");
 			outputText("At the base of the largest statue lies a metallic plaque. Given the rust coating it, the text is hard to decipher. You can only make out 'Krat..' within the text.\n\n");
-			outputText("Below the plaque lies an ornate wooden bowl, presumably used to put offerings in a time when this was a place people actively visited.\n\n");
+			outputText("Below the plaque lies an ornate wooden bowl, several rusted coins inside.\n\n");
 			menu();
 			addButton(0, "Offering", weaponsXPtrader);//southSectionOffering
 			addButton(14, "Back", shrinemainmenu);
@@ -183,7 +183,7 @@ public class DilapidatedShrine extends BaseContent
 			var weaponClasses:Array = ["Gauntlet", "Sword", "Axe", "Mace/Hammer", "Dueling", "Polearm", "Spear", "Dagger", "Whip", "Exotic"]; //, "Thrown",  "Scythe", "Staff", "Tetsubo", "Ribbon"
 			var btnInt:int = 0;
 			var tempAry:Array = [];
-			outputText("Welcome. Here, you can trade your weapons in for some mastery in the related weapon type.\n");
+			outputText("Welcome. Here, you can offer your weapons to the god of war, consuming the weapon to gain knowledge of the battles its seen.\n");
 			for (var i:int = 0; i < inventory.getMaxSlots(); i++){
 				var weaponType:String = "";
 				var itemClassReplace:*;
