@@ -262,73 +262,8 @@ public class Soulforce extends BaseContent
 		menuItems.push("LustBreath", (player.hasPerk(PerkLib.DragonPoisonBreath))? FairyTest: false, "Replacing 1 perk with another");
 		menuItems.push("TyrantPF", (TyrantiaFollower.TyrantiaFollowerStage == 5 && TyrantiaFollower.TyraniaCorrupteedLegendaries == 0)? FairyTest5: false, "Patching Tyrantia corrupted legendaries unlock");
 		menuItems.push("LilyPregF", (DriderTown.LilyKidsPCPregnancy != 0 && LilyFollower.LilyFollowerState)? FairyTest3: false, "Curing Lily Infertility ^^");
-		//menuItems.push("Check Mutation", mutations3, "Check Mutation");
-		//menuItems.push("Add Mutation", mutations2, "Add Mutation");
-		//menuItems.push("Reset Mutation", mutations1, "Reset Mutations");
+		//menuItems.push("WeaponsXPtest", SceneLib.dilapidatedShrine.weaponsXPtrader, "");
 		menuGen(menuItems, page, accessSoulforceMenu);
-	}
-
-	public function mutations3():void{
-		menu();
-		clearOutput();
-		var mPerk:IMutationPerkType = IMutationsLib.KitsuneThyroidGlandIM;
-		outputText("" + mPerk.name() + "\n\n");
-		//trace("\npBuffs check ktg2 <------------\n")
-		var test:Object = mPerk.pBuffs();
-		for (var key:String in test){
-			var value:Object = test[key];
-			//outputText("Key: " + key + "\nValue: " + value + "\n------------------\n");
-			outputText(key + "=" + value + "\n");
-		}
-		outputText("Max Lvl: "+mPerk.maxLvl);
-		outputText("\n\nCurrent tier: " + player.perkv1(mPerk));
-		//addButton(0, "Add1", m1);
-		addButton(4, "Back", SoulforceCheats1, 3);
-
-		function m1():void{
-			menu();
-			clearOutput();
-			player.setPerkValue(mPerk, 1, player.perkv1(mPerk) + 1);
-			outputText("Done");
-			addButton(4, "Back", SoulforceCheats1, 3);
-
-		}
-	}
-
-	public function mutations2():void{
-		clearOutput();
-		menu();
-		var page:int = 0;
-		var menuItems:Array = [];
-		var target:* = player;
-		outputText("Mutations Applicator");
-		for each (var mutations:IMutationPerkType in IMutationsLib.mutationsArray("test")){
-			mutations.pReqs(player);
-			trace("" + mutations.name() + ": Checking requirements. v");
-			if (mutations.available(target) && mutations.maxLvl > target.perkv1(mutations)){
-				trace("Requirements met, adding in.");
-				menuItems.push(mutations.name(), curry(mutations.acquireMutation, player), mutations.desc());	//This is witchcraft, not sure how acquirePerk still recalls which perk to give, but it does.
-			}
-			else if(mutations.maxLvl == target.perkv1(mutations)){
-				trace("MaxTier acquired");
-				menuItems.push(mutations.name(), false, "You already have the highest tier!");
-			}
-			else{
-				trace("Unable to meet requirements/requirements borked.");
-				//if (mutations.available(target)) trace("\nAvailable: True");
-				//if (mutations.maxLvl > target.perkv1(mutations)) trace("MaxLvl: True");
-				menuItems.push(mutations.name(), false, "You don't meet the requirements for this!");
-			}
-		}
-		menuGen(menuItems, page, curry(SoulforceCheats1, 3));
-	}
-
-	public function mutations1():void{
-		clearOutput();
-		player.removePerk(IMutationsLib.KitsuneThyroidGlandIM);
-		//player.createPerk(IMutationsLib.KitsuneThyroidGlandIM, 0,0,0,0);
-		outputText("Reset done!");
-		doNext(curry(SoulforceCheats1,3));
 	}
 
 	public function FairyTest3():void {

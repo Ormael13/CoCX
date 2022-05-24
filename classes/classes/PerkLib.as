@@ -489,6 +489,15 @@ public class PerkLib
 		public static const PartySynergy:PerkType = mk("Party Synergy", "Party Synergy",
 				"You and your companions in party will recieve multi bonus to basic stats like str or wis (+20% for PC and +50% for henchman). With each member beyond first bonus will increase arithmeticaly.",
 				"You've chosen the 'Party Synergy' perk. You and your companions in party will recieve multi bonus to basic stats like str or wis (+20% for PC and +50% for henchman). With each member beyond first bonus will increase arithmeticaly.");
+		public static const MeleeWeaponsMastery:PerkType = mk("Melee Weapons Mastery", "Melee Weapons Mastery",
+				"Decrease by ~20% needed exp to level up each melee weapon mastery type and grants 200% more of base mastery exp gains.",
+				"You've chosen the 'Melee Weapons Mastery' perk. Decrease by ~20% needed exp to level up each melee weapon mastery type and grants 200% more of base mastery exp gains.");
+		public static const MeleeWeaponsMasteryEx:PerkType = mk("Melee Weapons Mastery (Ex)", "Melee Weapons Mastery (Ex)",
+				"Decrease by ~45% needed exp to level up each melee weapon mastery type.",
+				"You've chosen the 'Melee Weapons Mastery (Ex)' perk. Decrease by ~45% needed exp to level up each melee weapon mastery type.");
+		public static const MeleeWeaponsMasterySu:PerkType = mk("Melee Weapons Mastery (Su)", "Melee Weapons Mastery (Su)",
+				".",
+				"You've chosen the 'Melee Weapons Mastery (Su)' perk. .");
 		/*public static const JobBeastlord:PerkType = mk("Job: Beastlord", "Job: Beastlord",
 				".",
 				"You've chosen the 'Job: Beastlord' perk, .");
@@ -501,12 +510,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -6330,6 +6333,9 @@ public class PerkLib
 			CursedTag.requireRace(Races.JIANGSHI);
 			ImprovedCursedTag.requirePerk(CursedTag).requireRace(Races.JIANGSHI);
 			GreaterCursedTag.requirePerk(ImprovedCursedTag).requireRace(Races.JIANGSHI);
+			MeleeWeaponsMastery.requireStr(10)
+					.requireTou(10)
+					.requireSpe(10);
             //Tier 1
 			ChimericalBodyInitialStage.requireLevel(6)
                     .requireCustomFunction(function (player:Player):Boolean {

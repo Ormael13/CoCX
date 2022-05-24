@@ -2502,8 +2502,7 @@ public class Camp extends NPCAwareContent{
 		outputText("into the fertile soil. It should grow back into several or more plants within a few days." +
 				" Sometime you ponder if you shouldve just became a farmer back home you definitively have a knack for this.");
 		var HE:Number = 20 + player.level;
-		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
-		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
+		HE *= player.HerbalismMulti();
 		player.herbXP(HE);
 		doNext(Seed);
 	}
@@ -2602,8 +2601,7 @@ public class Camp extends NPCAwareContent{
 		}
 		player.destroyItems(ItemID, 1);
 		var HE:Number = 20 + player.level;
-		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
-		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
+		HE *= player.HerbalismMulti();
 		player.herbXP(HE);
 		doNext(HerbalismMenu);
 	}
@@ -2621,9 +2619,7 @@ public class Camp extends NPCAwareContent{
 		}
 		player.destroyItems(ItemID, player.itemCount(ItemID));
 		var HE:Number = (20 + player.level)*player.itemCount(ItemID);
-		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
-		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
-		if (player.hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) HE *= 2;
+		HE *= player.HerbalismMulti();
 		player.herbXP(HE);
 		doNext(HerbalismMenu);
 	}

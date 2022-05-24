@@ -17366,7 +17366,7 @@ public final class Mutations extends MutationsHelper {
     }
 
     //ALCHEMICAL ITEMS
-    public function HealingHerb(player:Player):void {
+	public function HealingHerb(player:Player):void {
         clearOutput();
         outputText("You eat up the herb, your wounds closing at high speed.");
         var power:Number = 1;
@@ -17375,9 +17375,7 @@ public final class Mutations extends MutationsHelper {
         HPChange(power,false);
         player.refillHunger(15);
         var HE:Number = 5 + player.level;
-		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
-		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
-		if (player.hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) HE *= 2;
+		HE *= player.HerbalismMulti();
 		player.herbXP(HE);
     }
 
@@ -17388,9 +17386,7 @@ public final class Mutations extends MutationsHelper {
         outputText("You eat up the grass, feeling rejuvenated with newfound magical energy and stamina.");
         player.refillHunger(15);
         var HE:Number = 5 + player.level;
-		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
-		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
-		if (player.hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) HE *= 2;
+		HE *= player.HerbalismMulti();
 		player.herbXP(HE);
     }
 
@@ -17400,9 +17396,7 @@ public final class Mutations extends MutationsHelper {
         outputText("You eat up the flower, feeling relieved as the poison is expelled from your body.");
         player.refillHunger(15);
         var HE:Number = 5 + player.level;
-		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
-		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
-		if (player.hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) HE *= 2;
+		HE *= player.HerbalismMulti();
 		player.herbXP(HE);
     }
 
@@ -17416,9 +17410,7 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(15)
         player.createStatusEffect(StatusEffects.AlchIronweed, 6, 0, 0, 0);
         var HE:Number = 5 + player.level;
-		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
-		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
-		if (player.hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) HE *= 2;
+		HE *= player.HerbalismMulti();
 		player.herbXP(HE);
     }
 
@@ -17430,9 +17422,7 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(15);
         player.createStatusEffect(StatusEffects.AlchBladeFerns, 6, 0, 0, 0);
         var HE:Number = 5 + player.level;
-		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
-		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
-		if (player.hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) HE *= 2;
+		HE *= player.HerbalismMulti();
 		player.herbXP(HE);
     }
 
@@ -17466,9 +17456,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]");
         }
         var HE:Number = 5 + player.level;
-		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
-		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
-		if (player.hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) HE *= 2;
+		HE *= player.HerbalismMulti();
 		player.herbXP(HE);
     }
 }

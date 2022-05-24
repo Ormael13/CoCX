@@ -122,34 +122,45 @@ Every 200mls of cum the PC produces above the first 200mls equals 1 extra egg fe
 9-12 Eggs equates to a Very Heavy Pregnancy.
 13-16 Eggs equates to an Extremely Heavy Pregnancy.
 */
+public function numEggs():int {
+	var eggMod:int = 0;
+	if (player.hasPerk(PerkLib.ElvenBounty)) eggMod += 1;
+	if (player.hasPerk(PerkLib.MaraesGiftStud)) eggMod += 2;
+	if (player.hasPerk(PerkLib.FerasBoonAlpha)) eggMod += 1;
+	var numEggs:int = player.cumQ() / 200;
+	var minEggs:int = 1 + eggMod;
+	var maxEggs:int = 12 + eggMod;
+	if (numEggs < minEggs) numEggs = minEggs;
+	if (numEggs > maxEggs) numEggs = maxEggs;
+	return numEggs;
+}
+
 public function benoitKnockUp():Boolean
 {
-	if (benoitPreggers()) return false;
-	if (!benoitInClutch()) return false;
-
-	// Calc the number of eggs
-	var cumQ:int = player.cumQ();
-
-	var bounty:Boolean = (player.hasPerk(PerkLib.ElvenBounty));
-	var stud:Boolean = (player.hasPerk(PerkLib.MaraesGiftStud));
-	var alpha:Boolean = (player.hasPerk(PerkLib.FerasBoonAlpha));
-
-	var eggMod:int = 0;
-	if (bounty) eggMod += 1;
-	if (stud) eggMod += 2;
-	if (alpha) eggMod += 1;
-
-	var numEggs:int = cumQ / 200;
-	var minEggs:int = 1 + eggMod;
-	if (numEggs > 12) numEggs = 12;
-	if (numEggs < minEggs) numEggs = minEggs;
-
-	numEggs += eggMod;
-
-	flags[kFLAGS.FEMOIT_EGGS] = numEggs;
+	if (benoitPreggers() || !benoitInClutch()) return false;
+	flags[kFLAGS.FEMOIT_EGGS] = numEggs();
 	flags[kFLAGS.FEMOIT_INCUBATION] = 168;
-
 	return true;
+}
+
+public function benoitKnockUpSmart(next:Function):void {
+	if (benoitPreggers() || !benoitInClutch()) doNext(next);
+	outputText("\n\n<b>You somehow were able to <i>magically</i> control your cum flow. How much pregnant do you want to get Benoit?</b>");
+	outputText("\n\nHint: it changes some sex scenes.");
+	var eggs:int = numEggs();
+	menu();
+	addButton(0, "Regular", curry(benoitEggSet, Math.min(eggs, 4), next));
+	addButtonIfTrue(1, "Heavy", curry(benoitEggSet, Math.min(eggs, 8), next), "Not enough cum!", eggs >= 5);
+	addButtonIfTrue(2, "Very Heavy", curry(benoitEggSet, Math.min(eggs, 12), next), "Not enough cum!", eggs >= 9);
+	addButton(3, "Extreme", curry(benoitEggSet, eggs, next),
+		"Not enough cum (at least 2600) or no required perk (Fera's Boon / Marae's Gift - Stud / Elven Bounty) / lacks required\n(Don't worry though, the sex scene doesn't differ from 'Very Heavy').",
+		eggs >= 13);
+}
+
+public function benoitEggSet(eggs:int, next:Function):void {
+	flags[kFLAGS.FEMOIT_EGGS] = eggs;
+	flags[kFLAGS.FEMOIT_INCUBATION] = 168;
+	next();
 }
 
 public function clearBenoitPreggers():void
@@ -242,13 +253,9 @@ public function benoitIntro():void {
 
 			outputText("\n\nYour eyes are drawn almost magnetically to her now flat-again stomach and the realization sinks in just where she got the eggs. You ask how she could have done such a thing.");
 
-			// outputText("\n\n\"<i>What? Zey were never fertilised, so, waste not want not.</i>\" she shrugs. When you protest that they could have been her children, she gives you a blank look - though you imagine being blind helps a lot in that regard. \"</i>The, how you say, groinal bleeding of mammal girls could have been their children too; do they get upset about it?</i>\" she asks as a hint of mischievousness sneaks into her smirk. \"<i>Want some?</i>\" she innocently asks, offering you the skillet.");
-
 			outputText("\n\n\"<i>Do what exza- oh. Ooh. Aha, mon Dieu, [name]!</i>\" Benoite chokes out between a mix of chortles and guffaws. \"<i>Non [name], I know what it iz zat you are zinking. Aha,</i>\" she continues whilst still half laughing, but manages to calm herself down after a short pause, trying to return to some degree of seriousness. \"<i>I am just hungry. I am, how you say, having a craving for zees strange items one of my zuppliers has been selling lately. 'Cheeken eggz'? I guess my body knowz what it needs to replenish zat which it has lost?</i>\"");
 
 			outputText("\n\nShe pats her midriff and you start to put the pieces together. \"<i>Oh. Oooh,</i>\" you mumble back as a response.");
-
-			//outputText("\n\nYou turn her offer down and explain you came here for something else.");
 		}
 		else
 		{
@@ -594,6 +601,8 @@ public function updateBenoitInventory():void {
 	//Slot 6 Herbal Contraceptive - 30 gems.  Only becomes available through PC fem path.  Reduces fertility by 90% for a week if taken.
 }
 
+//Unused... I guess?
+/*
 private function buyFlintlock():void {
 	clearOutput();
 	outputText("You wander [benoit name]'s shop for a good while as you're searching for something interesting until you spot something interesting.");
@@ -616,6 +625,7 @@ private function buyFlintlockConfirmation():void {
 	statScreenRefresh();
 	inventory.takeItem(weaponsrange.FLINTLK, benoitsBuyMenu);
 }
+*/
 
 private function buyAlarmClock():void {
 	clearOutput();
@@ -767,7 +777,7 @@ private function talkToBenoit():void {
 
 		return;
 	}
-	else if (flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY] != 0 && benoitAffection() >= 40 && flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 0 && flags[kFLAGS.FEMOIT_UNLOCKED] == 0)
+	else if (flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY] != 0 && benoitAffection() >= 40 && (flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 0 || sceneHunter.other) && flags[kFLAGS.FEMOIT_UNLOCKED] == 0)
 	{
 		femoitInitialTalk();
 		doNext(camp.returnToCampUseOneHour);
@@ -944,13 +954,14 @@ private function benoitAndFemPCTalkAboutEggings():void {
 }
 
 //Suggest:
-private function eggySuggest():void {
+//Recall - first time
+public function eggySuggest():void {
 	clearOutput();
-	if(flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == .5) {
+	if(flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == .5 && !recalling) {
 		suggestSexAfterBasiWombed(true);
 		return;
 	}
-	if(flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] > 0) {
+	if(flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] > 0 && !recalling) {
 		if(player.isTaur()) {
 			outputText("You silently reach across the counter to squeeze [benoit eir] hands again.  [benoit name] grins with deep affection at you and, hand in hand, the two of you quietly debunk to the store room again.");
 			outputText("\n\nOnce again, you carefully inch your blind charge to a clear cranny and push [benoit em] against a wooden wall, standing back to slowly peel off your [armor].  You grin as you ostentatiously drop each piece onto the packed earth, allowing [benoit em] to guess what it is by the sound it makes.  [benoit Eir] breathing comes heavier as your undergarments make a feathery sound as they fall.  As you take [benoit eir] hands and lay them upon your naked skin, you think about how you want to go about this.");
@@ -963,7 +974,7 @@ private function eggySuggest():void {
 		simpleChoices("Let [benoit Em]",repeatSexWithBenoitLetHim,"Take Charge",repeatBenoitFuckTakeCharge, "", null, "", null, "", null);
 		return;
 	}
-	flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS]++;
+	if (!recalling) flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS]++;
 	if(player.isTaur()) {
 		//Suggest:
 		outputText("You reach your fingers across the counter and lightly touch [benoit name]'s hands, saying you don't mind working out a few natural urges, if [benoit ey]'s in the mood.");
@@ -984,7 +995,7 @@ private function eggySuggest():void {
 		if(player.inHeat) outputText("  By now your vagina is practically gushing, your bodies' own deep seated pheromone need stoked to blazing heights by the basilisk's gentle, painstaking exploration of your body.  You cannot stop thrusting yourself against [benoit eir] soaked hand, announcing how badly you want this with heavy moans.");
 
 		outputText("\n\nThe scent of your arousal is in the air and as [benoit name] breathes it in [benoit eir] own breath comes heavier.  [benoit Eir] erection bulges in [benoit eir] long johns and you decide it's time for you to take charge; you back up, butting [benoit em] insistently with your powerful body until you have [benoit em] pinned against a space upon the opposite wall.  You watch [benoit em] over your shoulder as [benoit ey] unbuckles himself and lets [benoit eir] trousers fall.  Stoked by the pheromones simmering off your body, [benoit eir] long, thin purple erection is straining and [benoit ey] arches [benoit eir] back and opens [benoit eir] mouth as you flare your [butt] and press yourself against it.  You know just from looking at [benoit eir] intense arousal you're going to have to go slow to stop [benoit em] from shooting [benoit eir] bolt straight away; with a wicked smile your partner can't see, you suppose such is your effect on [benoit em] it may not even matter if [benoit ey] does.  Still, as [benoit ey] lays [benoit eir] hands upon your flanks, and you lean back with a sigh and slowly slide [benoit eir] length into your moistened [vagina] as gently as you can.");
-		player.cuntChange(12,true,true,false);
+		if (!recalling) player.cuntChange(12,true,true,false);
 		outputText("\n\nBenoit's dick is incredibly smooth and you move down onto it with incredible, slick ease.  Rather than burying yourself onto it straight away you stop with only a third of it in your wet depths and slowly bring it out of you, dipping yourself slowly.  You stop with [benoit eir] sensitive head just inside and work your [hips] around deliberately, sighing as it rotates slowly around your slick walls.  [benoit name] moans dryly and you feel [benoit eir] body tense; immediately you stop your movements and wait, only gradually beginning to gyrate and thrust again when [benoit ey] has calmed down.  You slide more of [benoit em] into you when you bend forwards again, this time leaving only [benoit eir] base outside of you; you sigh as you feel [benoit em] creeping further into your moist depths.  [benoit Ey] makes a bestial noise and tries to thrust himself into you and upon you; tutting mockingly, you pull yourself away from [benoit em] and stop moving until, with what is evidently a huge force of will, the basilisk calms himself, backs himself against the wall and allows you to work [benoit em].");
 
 		//[Small capacity:
@@ -1000,6 +1011,7 @@ private function eggySuggest():void {
 		if(player.gender == 3) outputText("  [EachCock] thickens and spurts in sympathy to your female high, spattering the floor with white paint.");
 	}
 	else {
+		sceneHunter.print("Check failed: Taur body");
 		outputText("You reach your fingers across the counter and lightly touch [benoit name]'s hands, saying you don't mind working out a few natural urges, if [benoit ey]'s in the mood.");
 
 		outputText("\n\n\"<i>You - I - what?</i>\" [benoit ey] replies, looking slightly stunned. \"<i>You don't?  Are you... I do not know if...</i>\"  You reach across and squeeze [benoit name]'s hands until [benoit eir] nervous babble dies out and hesitantly, [benoit ey] squeezes back.  Still holding [benoit eir] hand, you move behind the crates and then gently lead [benoit em] behind the stall's canopy.");
@@ -1036,7 +1048,7 @@ private function eggySuggest():void {
 
 		outputText("\n\nThe scent of your arousal is in the air and as [benoit name] inhales it, [benoit eir] own breath comes heavier.  [benoit Eir] erection bulges in [benoit eir] long johns and you decide it's time for you to take charge; you push [benoit em] against the wall, unbuckle [benoit em] and let [benoit eir] trousers fall.  Stoked by the pheromones simmering off your body, [benoit eir] long, thin, purple erection is straining and [benoit ey] arches [benoit eir] back and opens [benoit eir] mouth as you lay a hand on it.  You know just from looking at [benoit eir] straining prick you're going to have to go slow for [benoit em] not to shoot [benoit eir] bolt straight away; with a wicked smile your partner can't see, you suppose that such is your body's effect on [benoit em] it may not even matter if [benoit ey] does.  As lost as the horny lizan is to the haze of [benoit eir] pleasure, you remind [benoit em] of reality the best way you know how, guiding [benoit eir] hands to your [hips] and with a sigh, slowly sliding [benoit eir] length into your moistened [vagina] with as much grace as your eagerness can stand.");
 
-		player.cuntChange(14,true,true,false);
+		if (!recalling) player.cuntChange(14,true,true,false);
 
 		outputText("\n\nBenoit's dick is incredibly smooth and you move down onto it with slick ease.  Rather than burying yourself onto it straight away, you stop with only a third of it in your wet depths and bring it out of you, dipping yourself slowly.  You stop with [benoit eir] sensitive head just inside and work your thighs around deliberately, sighing as it rotates around your slick walls.  [benoit name] moans and you feel [benoit eir] body tense; immediately you halt your movements and wait, only gradually beginning to gyrate and thrust again when [benoit ey] has calmed down.  You slide more inside when you bend forwards again, this time leaving only [benoit eir] base outside of you; a sigh rolls from you as you feel [benoit em] creeping further into your moist depths.  [benoit Ey] makes a bestial noise and tries to thrust himself into you and upon you; tutting mockingly, you pull yourself away from [benoit em] and stop moving until, with what is evidently a huge force of will, the basilisk calms himself, backs himself against the wall and allows you to work [benoit em].");
 
@@ -1060,10 +1072,15 @@ private function eggySuggest():void {
 			outputText(" with white.");
 		}
 	}
-	outputText("\n\nEventually, the two of you part, dripping your mixed fluids as you step back.  \"<i>Phew!</i>\" [benoit name] says after [benoit ey]'s managed to catch [benoit eir] breath.  \"<i>That was... somesing.  Mademoiselle, you are... amazing.</i>\"  You find yourself laughing at [benoit eir] slightly shell-shocked expression, and the light, happy sound seems to bring [benoit em] around a bit.  [benoit Ey] brushes your shoulder as [benoit ey] walks past you, feeling around the stock room until [benoit ey] finds a chest of drawers.  [benoit Ey] opens a compartment and withdraws a small woollen bag, stuffed with pungent green leaves.");
+	outputText("\n\nEventually, the two of you part, dripping your mixed fluids as you step back.  \"<i>Phew!</i>\" [benoit name] says after [benoit ey]'s managed to catch [benoit eir] breath.  \"<i>That was... somesing.  Mademoiselle, you are... amazing.</i>\"  You find yourself laughing at [benoit eir] slightly shell-shocked expression, and the light, happy sound seems to bring [benoit em] around a bit. ");
+	//fast exit for recalling
+	if (recalling) {
+		doNext(recallWakeUp);
+		return;
+	}
+	outputText("[benoit Ey] brushes your shoulder as [benoit ey] walks past you, feeling around the stockroom until [benoit ey] finds a chest of drawers.  [benoit Ey] opens a compartment and withdraws a small woollen bag, stuffed with pungent green leaves.");
 	outputText("\n\n\"<i>Ze shark ladies are always coming up from ze lake to sell me zis,</i>\" [benoit ey] says. \"<i>It is a very effective, 'ow you say, 'counter septic'?");
-	player.orgasm();
-	player.sexReward("cum");
+	player.sexReward("cum", "Vaginal");
 	if ((player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.hasPerk(PerkLib.HarpyWomb) || player.hasPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
 		outputText("  I would not inflict my children upon you.  Ere, take as much as you like.</i>\"");
 		simpleChoices("Take It", takeBenoitsContraceptives, "", null, "", null, "", null, "Leave", dontTakeEggtraceptives);
@@ -1080,18 +1097,13 @@ private function eggySuggest():void {
 private function takeBenoitsContraceptives():void {
 	clearOutput();
 	outputText("You gladly accept the herbal contraceptive and push it into your mouth, enjoying the pleasantly sharp, citrus flavour.");
-	//  \"<i>I can sell you ze stuff too,</i>\" he says, twiddling his claws.  \"<i>If you want.</i>\"
 	doNext(camp.returnToCampUseOneHour);
 }
 
-//No:
 private function dontTakeEggtraceptives():void {
 	clearOutput();
 	outputText("You smile and say you don't mind carrying and laying a few basilisk eggs. \"<i>You... you don't?</i>\" [benoit ey] says hesitantly.  [benoit Ey] faces you and for a moment looks like [benoit ey]'s going to say something else; but then [benoit ey] shakes [benoit eir] head and puts the bag back into the drawer.");
-	//\"<i>Well...if you are sure.  I can sell you ze stuff if you ever change your mind.</i>\"
 	outputText("\n\nIn the warm afterglow you redress at leisure before leading [benoit em] back inside the shop and, after squeezing [benoit eir] hand, take your leave.");
-	//[Herbal Contraceptive added to slot 4 of shop]
-	//Standard basilisk preg odds
 	benoitKnocksUpPCCheck();
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1107,7 +1119,6 @@ private function firstTimeAfterBoningEncounterBenoit():void {
 	outputText("\n\n\"<i>'Allo again, [name]</i>\"!</i>\" [benoit ey] says brightly.  \"<i>'Ow pleasant it is to see you.  'Ow are we zis very fine day?</i>\"  There's something imperceptibly different about [benoit name] today and it takes you a moment to work out what it is.  [benoit Ey] doesn't seem quite as shabby as [benoit ey] did before; [benoit eir] scales gleam dully and you wonder if [benoit ey]'s taken a bath recently.  There's something else, too.");
 
 	outputText("\n\n\"<i>Zis?  No.  Of course not!</i>\" [benoit ey] says, when you ask if [benoit ey]'s wearing the navy tie just for you.  \"<i>Is zere somesing wrong with a basilisk wanting to look 'is best?  Anyway, I am taking it off now.  It is very silly, I see zis now.  Now... what is it zat mademoiselle is after?</i>\" You try not to laugh at this display and consider what it is you're here for.");
-	//[defaults to regular 30+ affection visit afterwards]
 }
 
 //Let [benoit em](not for horses):
@@ -1130,7 +1141,7 @@ private function repeatSexWithBenoitLetHim():void {
 		//[Tight:
 		if(player.vaginalCapacity() < 30) outputText("You don't mind; your tight sex is a perfect fit for [benoit eir] smooth, thin dick, and you work with [benoit em] as [benoit ey] thrusts, pulling and pushing your walls in time with [benoit eir] length, your lubrication allowing [benoit em] to quickly increase the tempo until the two of you are once again bucking against each other gleefully, your fluids spattering against each other.");
 		//Loose:
-		else outputText("Although [benoit ey] is long [benoit ey] barely even touches the sides of your encompassing twat.  The sensation isn't great for you until [benoit ey] really starts to go to town, ramming into you with all [benoit ey]'s got, beating a wet staccato against your [butt], pushing against your [clit] as [benoit ey] sheaths himself in you.  Your fluids begin to dribble onto your hooves as your slick pleasure button bulges with increasing delight.");
+		else outputText("Although [benoit ey] is long, [benoit ey] barely even touches the sides of your encompassing twat.  The sensation isn't great for you until [benoit ey] really starts to go to town, ramming into you with all [benoit ey]'s got, beating a wet staccato against your [butt], pushing against your [clit] as [benoit ey] sheaths himself in you.  Your fluids begin to dribble onto your hooves as your slick pleasure button bulges with increasing delight.");
 		outputText("\n\nThe difference in the position makes [benoit eir] dick bend into you at a different angle, stroking a neglected spot which soon has you gasping with need.  [benoit name] is not as maddened as [benoit ey] was the first time, and [benoit ey] has the composure to draw himself out; [benoit ey] slows himself down and then back up again, fucking you magisterially, withdrawing himself almost all the way out of you before slamming firmly back in, stopping whilst hilted in you until you beg and moan for [benoit em] to continue.  You give yourself up to the dominant rut you've awoken in [benoit em], thrusting back into [benoit em] as you are fucked up to a second ecstatic height and then a third; everything disappearing underneath a timeless red haze, of having your [butt] in the air and being given what a mare needs.");
 
 		outputText("\n\nWhen [benoit name] finally cums [benoit ey] sounds almost pained; [benoit eir] aching cock delivers another load into your already packed womb, semen dribbling and spurting onto the floor.  You work [benoit eir] dick for as long as you can until it finally droops out of your abused cunt.  Finally you sit up, turn around and cuddle into the basilisk, who pools onto the floor and responds tentatively.");
@@ -1138,6 +1149,7 @@ private function repeatSexWithBenoitLetHim():void {
 		outputText("\n\n\"Zat was... wow,\" [benoit ey] manages.  With [benoit eir] dick wrung of every last drop of [benoit eir] seed you can see [benoit ey] is returning to himself, and [benoit eir] hand around your waist is cautious. \"Was zat... all right for you? I do not know if... I get zese smells in my 'ead and zen...\" You answer [benoit em] by kissing [benoit em] on the cheek and saying with teasing huskiness that it was good, but maybe next time [benoit ey] shouldn't hold back so much.  [benoit Ey] grins at this.  You spend a bit more time cuddling whilst recovering from the intense fuck, before finally clambering to your feet.  Your final act before dressing and taking your leave is to faintly brush your scent across [benoit name]'s nose again, telling [benoit em] you expect [benoit em] to be ready and primed the next time this naughty girl pays a visit.  [benoit Ey] doesn't respond- maybe [benoit ey] is still privately ashamed about losing [benoit eir] cool over you- but you can tell by the lines of [benoit eir] face and the way [benoit eir] head moves unconsciously to follow your path out of [benoit eir] shop that [benoit em] not being aroused by you isn't something you're ever going to have to worry about.");
 	}
 	else {
+		sceneHunter.print("Check failed: Taur body");
 		outputText("For the moment you don't do anything; you simply stand back and let [benoit eir] hands slowly move across your frame.  One of [benoit eir] hands comes to rest upon your " + nippleDescript(0) + "; as [benoit ey] gently teases and kneads the soft, sensitive flesh [benoit eir] other hand drift downwards, across your belly, around over the crack of your [butt] then down to cup your behind.  Although [benoit ey] is familiar with your frame by now, [benoit name] never seems to stop being enthralled by your body; there is an unconscious frown of concentration on [benoit eir] face as [benoit eir] smooth hands move across your warm skin, as if [benoit ey] were mapping you in [benoit eir] mind's eye.");
 
 		outputText("\n\nThis slow, gentle pressure is all very well, but you can't help but wonder if you can't awaken something a bit more bestial in the timid basilisk.  The thought of making [benoit em] lose [benoit eir] self-control over you causes you to grin, unseen, and tenderly but firmly you put your hands on [benoit eir] claws and tell [benoit em] to stop.  [benoit Ey] looks at you in puzzlement as you shift your bodies around, your hands sliding over [benoit eir] shoulders and chest as you change position so that it is you with your back to the wall.  [benoit Ey] begins to move [benoit eir] hands again and you tut mockingly, telling [benoit em] to be still for now.  Smiling, you begin to give [benoit em] some of [benoit eir] own treatment; your hands drift softly over [benoit eir] tight, smooth flesh, working down [benoit eir] washboard stomach until they reach [benoit eir] long johns.  You slowly unbuckle them and let them fall, releasing [benoit eir] long, thin erection.  With one hand you circle the base gently; even touching this least sensitive part of [benoit eir] dick makes [benoit em] grunt with need, the thump of [benoit eir] heart reverberating through [benoit eir] scales, and [benoit ey] involuntarily thrusts forwards, trying to get more of your hand upon [benoit em].  Again, you tell [benoit em] to be still.  You continue to almost-masturbate [benoit em], your one hand rubbing the very base of [benoit eir] cock and the slit from which it thrusts, whilst with the other you reach down and touch your own slickening [vagina].  You moan exaggeratedly as you dip first one finger and then two into your honey pot, gently frigging your [clit] until you are in full spate, dripping your fluids onto the packed earth beneath you.  [benoit name] is clenching [benoit eir] pointed teeth, trembling slightly like a pipe about to burst, as you lift your coated fingers up and smear your essence over [benoit eir] incredibly receptive nostrils.  [benoit Eir] tail thrashes fitfully as you continue to torment [benoit eir] dick, just barely touching [benoit eir] purple tip before returning to [benoit eir] base.  All [benoit ey] can smell is your own arousal as you begin to talk huskily, saying you've been a naughty girl playing in the mountains, you've teased and mocked and run away from every creature you've found but now a big bad basilisk has got you cornered, and what is the big bad basilisk going to do now it's got this naughty girl all to itself...?");
@@ -1163,10 +1175,9 @@ private function repeatSexWithBenoitLetHim():void {
 		outputText("\n\n\"<i>Zat was... wow,</i>\" [benoit ey] manages.  With [benoit eir] dick wrung of every last drop of [benoit eir] seed you can see [benoit ey] is returning to himself, and [benoit eir] hand on your shoulder is cautious.  \"<i>Was zat... alright for you?  I do not know if... I get zese smells in my 'ead and zen...</i>\"  You answer [benoit em] by kissing [benoit em] on the cheek and saying with teasing huskiness that it was good, but perhaps next time [benoit ey] shouldn't hold back so much.  [benoit Ey] grins at this.  You spend a bit more time cuddling whilst recovering from the intense fuck, before finally clambering to your feet.  Your final act before dressing and taking your leave is to dip a lazy finger into your cunt and faintly brush your scent across [benoit name]'s nose again, telling [benoit em] you expect [benoit em] to be ready and primed the next time this naughty girl pays a visit.  [benoit Ey] doesn't respond - maybe [benoit ey] is still privately ashamed about losing [benoit eir] cool over you - but you can tell by the lines of [benoit eir] face and the way [benoit eir] head moves unconsciously to follow your path out of [benoit eir] shop that [benoit em] not being aroused by you isn't something you're ever going to have to worry about.");
 	}
 	flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS]++;
-	player.sexReward("cum");
+	player.sexReward("cum", "Vaginal");
 	benoitKnocksUpPCCheck();
 	benoitAffection(2);
-	player.orgasm();
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1247,34 +1258,26 @@ private function repeatBenoitFuckTakeCharge():void {
 
 		outputText("\n\n\"<i>I am not really sure what I did to deserve you,</i>\" says [benoit name] eventually, [benoit eir] voice barely above a raspy murmur in [benoit eir] throat.  You give [benoit em] a playful dig in the ribs and say you're only in it for the counter sceptic.  [benoit Ey] grins and the two of you get up, get dressed, and go your separate ways.");
 	}
-	player.sexReward("cum");
+	player.sexReward("cum", "Vaginal");
 	benoitKnocksUpPCCheck();
 	benoitAffection(2);
 	flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS]++;
-	player.orgasm();
 	doNext(camp.returnToCampUseOneHour);
 }
 
-//Bas. Womb (not for horses)
-private function tryToConvertToBassyWomb():void {
+public function tryToConvertToBassyWomb():void {
 	clearOutput();
-	//[Ingredients not in inventory: ]
 	//A double dose of ovi-elixer, a bottle of reptilum, goblin ale and some basilisk blood would probably do...
-	if(!(player.hasItem(consumables.OVIELIX,2) && player.hasItem(consumables.REPTLUM) && player.hasItem(consumables.GOB_ALE))) {
+	if(!recalling && !(player.hasItem(consumables.OVIELIX,2) && player.hasItem(consumables.REPTLUM) && player.hasItem(consumables.GOB_ALE))) {
 		outputText("You don't have the necessary ingredients to attempt this yet.  You recall [benoit name] mentioning that you would need Reptilum, two Ovi Elixirs, and Goblin Ale.");
 		doNext(benoitIntro);
 	}
-	/*else if(player.isTaur()) {
-		outputText("\"<i>Forgive me, [name],</i>\" Benoit says, clearly troubled, as you begin hauling out the ingredients and announcing your plan.  \"<i>I sink your body is already stressed enough wis 'aving to pump so little blood so far... I would razer you not take furzer risks on my account until your form is more... compact.  I cannot be a part of zis... 'owever much I would like to.  You mean too much to me, you see.</i>\"");
-		outputText("\n\nLeft speechless by [benoit eir] frankness, you can only sweep the items back into your bag.");
-		//return to shop menu
-		doNext(benoitIntro);
-	}*/
-	//Ingredients in inventory:
 	else {
-		player.consumeItem(consumables.OVIELIX,2);
-		player.consumeItem(consumables.REPTLUM);
-		player.consumeItem(consumables.GOB_ALE);
+		if (!recalling) {
+			player.consumeItem(consumables.OVIELIX, 2);
+			player.consumeItem(consumables.REPTLUM);
+			player.consumeItem(consumables.GOB_ALE);
+		}
 		outputText("You ferret out the ingredients you have collected and begin to bang them onto the counter in front of [benoit name], telling [benoit em] that you've got what [benoit ey] needs.  Pierre barks excitedly at the noise.");
 
 		outputText("\n\n\"<i>And what is zat?</i>\" the basilisk says, bewildered. You explain you can whip something up which will give you a basilisk womb - and hence, female basilisk kids.  [benoit name] opens [benoit eir] mouth then closes it again; it takes [benoit em] a while to properly compute these words.  \"<i>But... but zat is completely impossible, [name]!</i>\" [benoit ey] says eventually, wringing [benoit eir] hands.  \"<i>'Ow do you know you won't just poison yourself?  Or, or turn yourself into a newt or somesing?  Please... don't 'urt... I should never 'ave said...</i>\"  [benoit Ey] lapses into silence as you grab a pewter bowl from a nearby shelf and a wooden spoon from a container full of old utensils, and begin to mix the various ingredients together.  You pour the ovi-elixers into the goblin ale, beating them together until a fairly unpleasant sulfuric smell fills the close market stall.  Carefully you dribble the reptilum in whilst continuing to stir, until the smell changes to that of cooking sherry.  You frown at the mixture.  It feels like it's missing something...  Casually, you ask [benoit name] to open [benoit eir] hand to you, whilst plucking a kitchen knife from the utensil container.  [benoit Ey] barks in pain as you run the blade across [benoit eir] palm and then hold [benoit eir] hand firmly over the bowl.  Drops of dark red blossom into the mixture, and as you carefully stir the potion turns a green-grey color: the color of [benoit name]'s scales.");
@@ -1291,10 +1294,10 @@ private function tryToConvertToBassyWomb():void {
 		outputText("\n\n\"<i>Really?</i>\"  The basilisk is off [benoit eir] feet and around the counter faster than you gave [benoit em] credit for.  \"<i>You are not just high from ze goblin ale?</i>\"  [benoit Ey] holds you around the waist and breathes you in slowly.  \"<i>You... you are not joking.</i>\"  [benoit Ey] sounds shell-shocked.  \"<i>You really did it.  You... really did mean to do zis.</i>\"");
 
 		//put some tag here to track dis shit.
-		flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] = .5;
+		if (!recalling) flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] = .5;
 
 		//[Lust 30 or more:
-		if(player.lust >= 33) {
+		if(player.lust >= 33 || recalling) {
 			outputText("  You grin and say you're not sure it worked, but you suppose there's only one real way of finding out...");
 			if(player.tallness <= 78 && !player.isTaur()) outputText("  The basilisk is still for a moment, and then with a sudden surge of movement, grabs you by the waist and hoists you over [benoit eir] shoulder.  You squeal in mock terror as [benoit ey] hauls you as fast as [benoit ey] can into the back room, knocking over half [benoit eir] stock as [benoit ey] does.");
 			else outputText("  The basilisk is still for a moment, and then with a sudden surge of movement, grabs you by the waist and frenetically attempts to hoist you over [benoit eir] shoulder.  You are far too big for [benoit em] though; after several valiant attempts, [benoit ey] collapses against a shelf.  Laughing, you pick the stricken, panting reptile up, hoist [benoit em] over your own shoulder, and navigate a path into the back room.");
@@ -1318,6 +1321,7 @@ private function suggestSexAfterBasiWombed(later:Boolean = true):void {
 		outputText("\n\n");
 	}
 	if(!player.isTaur()) {
+		sceneHunter.print("Check failed: Taur body");
 		//Both go to: [>6'6:
 		if(player.tallness > 78) outputText("You haul your lizard boy into the cramped space of the backroom before gently setting [benoit em] down.  Now that your gut has settled you feel imbued with an odd, ripe sensation; your belly bulges ever-so-slightly with unfertilized eggs and you feel red, soft and ready.  You begin to disrobe eagerly; having recovered himself slightly, [benoit name] shrugs out of [benoit eir] trousers, reaching out to you before stopping.  Grinning kindly at the emasculated basilisk, you lower yourself onto the floor, spread your [hips] casually and then ask if [benoit ey] see... smells anything interesting.");
 		else outputText("[benoit name] staggers into the back room, bumping into several things as [benoit ey] sets you down, thankfully onto a clear space on the ground.  [benoit Ey] leans into you, [benoit eir] weight pushing you onto the ground, hands flying over your [armor], fumbling off clasps and belts when [benoit ey] finds them.  Now that your gut has settled you feel imbued with an odd, ripe sensation; your belly bulges ever-so-slightly with unfertilized eggs and you feel red, soft and ready.  You work with [benoit em], wriggling out of your clothes and ripping [benoit eir] own trousers off, spreading your [hips] eagerly as [benoit eir] long, smooth prick springs to attention.");
@@ -1325,7 +1329,7 @@ private function suggestSexAfterBasiWombed(later:Boolean = true):void {
 		outputText("\n\nThe basilisk needs no further invitation.  In a moment [benoit ey] is upon you, [benoit eir] tight, muscled chest pressed against your [chest], [benoit eir] flat stomach rubbing over your own fertile belly and the head of [benoit eir] dick pushed against your moist lips.");
 		if(player.hasCock()) outputText("  [benoit Ey] deliberately rubs himself up and down your body, and the [cock] trapped between your warm bodies quickly hardens against the warm, smooth friction.");
 		outputText("  Despite [benoit eir] blindness, [benoit ey] slides straight into your moist depths, making you coo as [benoit eir] hard, smooth spur glides across your sensitive walls, slowly bringing himself out before thrusting himself in again, working more and more of [benoit eir] length into you.  Never quite able to control himself around your body, it's obvious in the strain in [benoit eir] face and the raggedness of [benoit eir] breath against your skin that [benoit ey] is exercising every restraint [benoit ey] has not to fuck you into the ground; [benoit ey] pushes [benoit eir] dick upwards with each return thrust to bump deliberately against your [clit], sending irresistible spasms of pleasure chiming through you.  Pushed inexorably upwards you curl an arm around [benoit eir] neck, kiss [benoit eir] nose and grit your teeth, then whisper into [benoit eir] ear to stop holding back.  [benoit name] pauses for a moment to gather [benoit eir] breath, hilted entirely in your wet cunt, then hooks [benoit eir] hips around yours, entrapping you around [benoit eir] body, before beginning to fuck your softened, ripe body like a jackhammer.  [benoit Ey] pounds into you with everything [benoit ey]'s got, clenching you as your gushing [vagina] deliriously spatters fluids across your entwined bodies.  Lost in rut now, [benoit name] licks your face with [benoit eir] long tongue, the soft, sticky pressure against your reddened cheeks only seeming to make the contrasting sensation of [benoit eir] long prick taking you deep even more overwhelming.");
-		player.cuntChange(14,true,true,false);
+		if (!recalling) player.cuntChange(14,true,true,false);
 
 		outputText("\n\nYou cannot stop yourself from screaming as your orgasm hits, your pussy clenching and wringing [benoit name]'s smooth dick as [benoit ey] continues to slam himself into you until [benoit ey] can take your milking no longer and cums in sympathy, clutching you as [benoit ey] fountains thick, warm cum into your fertile depths.  Having your lower body held in place like this makes your orgasm all the more overpowering; you wriggle futilely against the basilisk's strong legs, unable to thrash away the unbearable pleasure.");
 
@@ -1343,7 +1347,7 @@ private function suggestSexAfterBasiWombed(later:Boolean = true):void {
 		//[Herm:
 		if(player.hasCock()) outputText("  [benoit Ey] deliberately moves [benoit eir] hand over [oneCock] before trapping it in [benoit eir] warm grasp.   It quickly hardens against [benoit eir] warm, smooth friction.");
 		outputText("  Used to your body now despite [benoit eir] blindness, [benoit ey] slides straight into your moist depths, making you coo as [benoit eir] hard, smooth spur glides across your sensitive walls, slowly bringing himself out before thrusting himself in again, working more and more of [benoit eir] long length into you.   Never quite able to control himself around your body, it's obvious in the strain of the muscles pressed against you and the raggedness of [benoit eir] breath upon your skin that [benoit ey] is exercising every restraint [benoit ey] has not to fuck you into the ground; [benoit ey] pushes [benoit eir] dick downwards with each return thrust to bump deliberately against your [clit], sending irresistible spasms of pleasure chiming through you.  You slowly move forwards until your arms are braced against the wall, before gritting over your shoulder to [benoit em] to stop holding back.  [benoit name] pauses for a moment to gather [benoit eir] breath, hilted entirely in your wet cunt, then hooks [benoit eir] strong arms around your back end, entrapping you around [benoit eir] body, before beginning to fuck your softened, ripe body like a jackhammer.  [benoit Ey] pounds into you with everything [benoit ey]'s got, clenching you as your gushing [vagina] deliriously spatters fluids across your entwined bodies.");
-		player.cuntChange(14,true,true,false);
+		if (!recalling) player.cuntChange(14,true,true,false);
 
 		outputText("\n\nYou cannot stop yourself from screaming as your orgasm hits, your pussy clenching and wringing [benoit name]'s smooth dick as [benoit ey] continues to slam himself into you until [benoit ey] cannot take your milking any longer and cums in sympathy, clutching you as [benoit ey] fountains thick, warm cum into your fertile depths.  Having your lower body held in place like this makes your orgasm all the more overpowering; you wriggle futilely against the basilisk's strong legs, unable to thrash away the unbearable pleasure.");
 
@@ -1355,20 +1359,22 @@ private function suggestSexAfterBasiWombed(later:Boolean = true):void {
 
 		outputText("\n\n\"Bring ze eggs ere,\" [benoit ey] says huskily.  \"Owever zey turn out, I would be honored to raise ze shildren of such a woman as you.\"  You give [benoit em] a playful punch and say [benoit ey] may regret those words when [benoit ey]'s got a dozen tiny scaly yous tearing up [benoit eir] shop.  You part and take your leave, [benoit eir] hoarse, slightly scared laughter in your ears.");
 	}
-	flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] = 1;
-	benoitKnocksUpPCCheck();
-	//(Oviposition perk added)
-	player.createPerk(PerkLib.BasiliskWomb,0,0,0,0);
-	outputText("\n\n(<b>Perk Unlocked: Basilisk Womb - You can now give birth to female basilisks.</b>)");
-	if(!(player.hasPerk(PerkLib.Oviposition))) {
-		player.createPerk(PerkLib.Oviposition,0,0,0,0);
-		outputText("\n(<b>Perk Unlocked: Oviposition - You will now regularly lay unfertilized eggs.</b>)");
+	if (!recalling) {
+		flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] = 1;
+		benoitKnocksUpPCCheck();
+		//(Oviposition perk added)
+		player.createPerk(PerkLib.BasiliskWomb, 0, 0, 0, 0);
+		outputText("\n\n(<b>Perk Unlocked: Basilisk Womb - You can now give birth to female basilisks.</b>)");
+		if (!(player.hasPerk(PerkLib.Oviposition))) {
+			player.createPerk(PerkLib.Oviposition, 0, 0, 0, 0);
+			outputText("\n(<b>Perk Unlocked: Oviposition - You will now regularly lay unfertilized eggs.</b>)");
+		}
+		if (player.pregnancyType == PregnancyStore.PREGNANCY_BASILISK) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
+		player.sexReward("cum", "Vaginal");
+		doNext(camp.returnToCampUseOneHour);
+		dynStats("sen", -2);
 	}
-	if (player.pregnancyType == PregnancyStore.PREGNANCY_BASILISK) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
-	player.sexReward("cum","Vaginal");
-	doNext(camp.returnToCampUseOneHour);
-	player.orgasm();
-	dynStats("sen", -2);
+	else doNext(recallWakeUp);
 }
 
 //PC laying
@@ -1486,10 +1492,8 @@ public function benoitFeminise():void
 
 		outputText("\n\n\"<i>C... could you come back tomorrow?</i>\" says [benoit name] unevenly.  \"<i>Zis is... I need some time to get my 'ead around zis.</i>\"  You put the books back on the counter, scratch a terrified-looking Pierre behind the ear, and take your leave.");
 
-flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] = CoC.instance.model.time.days + 1;
+		flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] = CoC.instance.model.time.days + 1;
         flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] = 1;
-
-		menu();
 		doNext(camp.returnToCampUseOneHour);
 	}
 }
@@ -1522,13 +1526,12 @@ public function femoitFirstTimeNo():void
 	outputText("You let her down as kindly as you can.");
 	outputText("\n\n\"<i>No, you are right,</i>\" she says in a casual tone, although the color is still very high in her scales. \"<i>It would be way too weird zat, wouldn’t it? I will find someone though, never fear.  As I said before...</i>\" Benoite points two fingers at her blind eyes and then at the stall entrance.  There’s a distinct gleam in those cloudy grey depths you think would scare the hell out of most things with a penis. \"<i>I ‘ave a purpose now.</i>\"");
 	outputText("\n\nCatching a subtle tone of dissapointment in Benoite's voice, you bid her a quick farewell and head back to camp, deciding to give her some time to recover.");
-	menu();
 	doNext(camp.returnToCampUseOneHour);
 }
 
 public function femoitFirstTimeYes():void
 {
-	flags[kFLAGS.TIMES_FUCKED_FEMOIT]++;
+	if (!recalling) flags[kFLAGS.TIMES_FUCKED_FEMOIT]++;
 
 	clearOutput();
 	outputText("Smiling, you reach across the counter and squeeze Benoite's hands until her nervous babble dies out and she smiles back.  Still holding her hand, you move behind the crates and then gently lead her behind the stall's canopy.");
@@ -1575,8 +1578,7 @@ public function femoitFirstTimeYes():void
 
 	outputText("\n\n\"<i>Sank you for zat, [name],</i>\" she says huskily. \"<i>Of course, I will need you to do zat again if it doesn't take.  And again, once ze first clutch is done.  Basically we will be doing zis a lot.  Purely for ze purpose of procreation, you understand.</i>\"  Grinning, you lead her back inside the shop and after squeezing her hand, take your leave.");
 
-	player.orgasm();
-	menu();
+	player.sexReward("vaginalFluids", "Dick");
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1614,8 +1616,12 @@ public function femoitSexIntro():void
 
 		outputText("\n\n\"<i>Big, zilly stud,</i>\" she says fondly, as she moves her hands, painting a picture of you in this moment she can hold on the walls of her mind for days to come.  Eventually, you get up, redress and quietly take your leave.  In your haze you manage to feel glad that she didn't leave quite so many claw marks on your back this time.");
 
-		benoitKnockUp();
-		player.orgasm();
+		player.sexReward("vaginalFluids", "Dick");
+		if (sceneHunter.other) {
+			benoitKnockUpSmart(camp.returnToCampUseOneHour); //select the clutch size
+			return;
+		}
+		else benoitKnockUp();
 	}
 	else if (benoitRegularPreggers() && (!player.isTaur() || (player.isTaur() && (player.tallness * (5/6) < player.cocks[player.longestCock()].cockLength))))
 	{
@@ -1650,7 +1656,7 @@ public function femoitSexIntro():void
 		outputText("\n\nBenoite stirs first.  \"<i>Mmm... I guess being so pregnant is not such a bad sing if it means we can have sex like zis...</i>\" she murmurs, though it's quite obvious she intends for you to hear her. With a groan of effort, she heaves herself back upright.  \"<i>Come back and see me any time, lover-"+ player.mf("boy","girl") +",</i>\" she tells you.  \"<i>But don't sink zat you need me to be pregnant to give me a good time, okay?</i>\"  Benoite smirks, striding across the floor and giving you a hand up before delicately flicking her tongue across your lips in a reptilian kiss.");
 
 		outputText("\n\nYou redress yourself, give the trader a hand getting back to the front of the shop without knocking anything over - she may be familiar with her shop, but her distended belly still gives her problems - and then head back to camp.");
-		player.orgasm();
+		player.sexReward("vaginalFluids", "Dick");
 	}
 	else if (benoitVeryHeavyPreggers() || benoitExtremePreggers())
 	{
@@ -1705,12 +1711,9 @@ public function femoitSexIntro():void
 			outputText("\n\n\"<i>Now zat is what I am talking about,</i>\" Benoite sighs softly.  \"<i>...I may 'ave to close ze shop early today.</i>\"");
 
 			outputText("\n\nIn the end, it doesn't come to that, but it takes you quite a while to help Benoite get up, clean her off, tidy up the mess you made, and otherwise get her presentable again.  She gives you one of her reptilian kisses in appreciation, and sends you home again. ");
-
-			player.orgasm();
+			player.sexReward("vaginalFluids", "Dick");
 		}
 	}
-
-	menu();
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1800,10 +1803,7 @@ public function femoitSexIntro():void
 		outputText("\n\nYou insist on helping Benoite put the egg");
 		if (flags[kFLAGS.FEMOIT_EGGS] > 1) outputText("s");
 		outputText(" away safely, though, and the blind reptilian clearly appreciates the help.  Leaving her to admire her new clutch you head back to camp.");
-
 		clearBenoitPreggers();
-
-		menu();
 		doNext(camp.returnToCampUseOneHour);
 	}
 

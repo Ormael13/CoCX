@@ -522,7 +522,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	private function skinFormatOptions(options: *, hairy:Boolean = false): * {
         if (!options) options = {};
         if (!options.adj) options.adj = "";
-        if (!options.pattern) options.pattern == "";
+        if (!options.pattern) options.pattern = "";
         if (!options.color && !options.colors)
             if (player.coatColor == "" || (!player.skin.isHairy() && hairy) || (player.skin.isHairy() && !hairy)) {
                 //WHY THE F*** DOESN'T THIS TRASH LANGUAGE HAVE LOGICAL XOR?!
@@ -3024,6 +3024,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tongue.type = Tongue.MELKIE;
 	    player.createPerk(PerkLib.MelkieSong, 0, 0, 0, 0);
+		if (doOutput) outputText(desc);
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7173,7 +7174,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.tallness -= 3 + rand(2);
 	    if (player.tallness < 36) {
-	      player.tallness = 36;;
+	      player.tallness = 36;
 	    }
 	    player.legCount = 1;
 	    player.lowerBody = LowerBody.GOO;
@@ -9050,24 +9051,33 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      case 9:
 	        if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance))
 	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_9));
+				  break;
 	      case 8:
 	        if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance))
 	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_8));
+				  break;
 	      case 7:
 	        if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance))
 	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_7));
+				  break;
 	      case 6:
 	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_6));
+				  break;
 	      case 5:
 	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_5));
+				  break;
 	      case 4:
 	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_4));
+				  break;
 	      case 3:
 	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_3));
+				  break;
 	      case 2:
 	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_2));
+				  break;
 	      case 1:
 	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX));
+				  break;
 	      }
 	    },
 	    // is present
@@ -9075,7 +9085,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      return player.tailType == Tail.FOX && player.tailCount == tailCount;
 	    }
 	  )
-	};
+	}
 
 	public const TailSpinneretAtlach: Transformation = new SimpleTransformation("Spinneret Atlach Tail",
 	  // apply effect

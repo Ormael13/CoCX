@@ -6223,6 +6223,7 @@ public class Combat extends BaseContent {
                 JabbingStyleIncrement();
                 if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) damage += Math.round(damage * 0.3);
 				var meleeMasteryEXPgains:Number = 1;
+				if (player.hasPerk(PerkLib.MeleeWeaponsMastery)) meleeMasteryEXPgains += 2;
 				if (crit) meleeMasteryEXPgains *= 2;
 				if (player.weapon == weapons.CHAOSEA) meleeMasteryEXPgains *= 3;
 				if (player.weaponName == "fists" && player.haveNaturalClaws()) feralCombatXP(meleeMasteryEXPgains);

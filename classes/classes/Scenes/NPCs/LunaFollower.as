@@ -511,12 +511,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 		public function warrningAboutJelously():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
-			if (flags[kFLAGS.LUNA_FOLLOWER] == 5) flags[kFLAGS.LUNA_FOLLOWER] = 6;
-			else if (flags[kFLAGS.LUNA_FOLLOWER] == 7) flags[kFLAGS.LUNA_FOLLOWER] = 8;
-			else if (flags[kFLAGS.LUNA_FOLLOWER] == 9) flags[kFLAGS.LUNA_FOLLOWER] = 10;
-			else if (flags[kFLAGS.LUNA_FOLLOWER] == 11) flags[kFLAGS.LUNA_FOLLOWER] = 12;
-			else if (flags[kFLAGS.LUNA_FOLLOWER] == 13) flags[kFLAGS.LUNA_FOLLOWER] = 14;
-			else flags[kFLAGS.LUNA_FOLLOWER] = 16;
+			if (flags[kFLAGS.LUNA_FOLLOWER] >= 5 && flags[kFLAGS.LUNA_FOLLOWER] %2 == 1) flags[kFLAGS.LUNA_FOLLOWER]++;
 			outputText("Luna comes over to you.\n\n" +
 					"\"<i>" + player.mf("Master","Mistress") + " I know that you are busy with important work, but it's been a long time since you accepted my service. I wish to remind you that should you need anything, truly <b>anything</b>, all you need to do is call me. My greatest pleasure is to serve you.</i>\"\n\n" +
 					"With that she leaves to prepare today's food, which you that you indeed have not enjoyed recently. You feel a little guilty thinking of all the work she does for you. Perhaps you should spare her an hour today.\n\n");
