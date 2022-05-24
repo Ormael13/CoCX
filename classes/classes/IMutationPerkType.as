@@ -34,11 +34,11 @@ public class IMutationPerkType extends PerkType
 		/**
 		 * acquireMutation is used to handle adding Mutations to players/NPCs.
 		 *
-		 * @param target	Type: Character. Takes Player/enemy class as arg. Indicates if the mutation goes to Player or to an NPC.
+		 * @param target	Type: Creature. Takes Player/enemy class as arg. Indicates if the mutation goes to Player or to an NPC.
 		 * @param nextFunc	Type: *(String/function). Takes "none"/ function as arg. If NPC, put "none", else put in next function it should go to.
 		 * @param pTier		Type:Int. Takes perkTier as arg. If target is NPC, you can also directly assign a tier to them, to skip having to add the perk in x times.
 		 */
-		public function acquireMutation(target:Character, nextFunc:*, pTier:int = 1):void{
+		public function acquireMutation(target:Creature, nextFunc:*, pTier:int = 1):void{
 			var mutations:IMutationPerkType = this;
 			//trace(mutations.name() + "<--------ACQUIREMUTATIONS RESULT");
 
