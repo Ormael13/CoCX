@@ -1425,7 +1425,7 @@ use namespace CoC;
 		}
 		//First arg is weapon type. Second is override, in case you want to check specific weapon.
 		public function weaponClass(pWeaponClass:String = "", orWeaponCheck:* = null):Boolean {
-			var temp:Array = [];
+			var temp:Array;
 			if (orWeaponCheck != null){
 				temp = orWeaponCheck.type.split(", ");
 			}
@@ -1435,7 +1435,7 @@ use namespace CoC;
 			return (temp.indexOf(pWeaponClass) >= 0);
 		}
 		public function weaponSpecials(pWeaponSpecials:String = "", orWeaponCheck:* = null):Boolean {
-			var temp:Array = [];
+			var temp:Array;
 			if (orWeaponCheck != null){
 				temp = orWeaponCheck.perk.split(", ");
 			}
@@ -13991,6 +13991,7 @@ use namespace CoC;
 			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
 			return expToLevelUp;
 		}
+
 		public function axeXP(XP:Number = 0):void {
 			while (XP > 0) {
 				if (XP == 1) {
