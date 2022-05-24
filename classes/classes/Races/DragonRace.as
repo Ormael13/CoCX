@@ -69,11 +69,11 @@ public class DragonRace extends Race {
 					"int.mult": +0.40,
 					"wis.mult": +0.40,
 					"lib.mult": +0.30,
-					"sens": +20
+					"sens": +20,
+					"def": +1,
+					"mdef": +1
 				})
-				.withExtraBonuses(
-						"+1 Armor / Magic Resistance",
-						"+50 Max Hunger")
+				.withExtraBonuses("+50 Max Hunger")
 				.end();
 		buildTier(24, "elder dragon")
 				.namesMaleFemaleMorphTaur("elder dragon-man","elder dragon-girl",
@@ -88,10 +88,11 @@ public class DragonRace extends Race {
 					"int.mult": +0.70,
 					"wis.mult": +0.70,
 					"lib.mult": +0.40,
-					"sens": +30
+					"sens": +30,
+					"def": +4,
+					"mdef": +4
 				})
-				.withExtraBonuses("+4 Armor / Magic Resistance",
-						"+100 Max Hunger")
+				.withExtraBonuses("+100 Max Hunger")
 				.end();
 		buildTier(32, "ancient dragon")
 				.namesMaleFemaleMorphTaur("ancient dragon-man","ancient dragon-girl",
@@ -106,10 +107,11 @@ public class DragonRace extends Race {
 					"int.mult": +0.80,
 					"wis.mult": +0.80,
 					"lib.mult": +0.60,
-					"sens": +40
+					"sens": +40,
+					"def": +10,
+					"mdef": +10
 				})
-				.withExtraBonuses("+10 Armor / Magic Resistance",
-						"+100 Max Hunger")
+				.withExtraBonuses("+100 Max Hunger")
 				.end();
 	}
 }

@@ -210,6 +210,9 @@ public class StatUtils {
 		['maxfatigue_perlevel', "Max Fatigue per level"],
 		['maxmana_perlevel', "Max Mana per level"],
 		['maxsf_perlevel', "Max Soulforce per level"],
+		
+		['def', 'Armor'],
+		['mdef', 'Magic Resistance'],
 	]);
 	public static const PercentageStats:Object = Utils.createMapFromPairs([
 		// [StatNames.SPELLPOWER, 'Spellpower']
@@ -240,7 +243,8 @@ public class StatUtils {
 		'maxwrath_base',
 		'maxfatigue_base',
 		'maxmana_base',
-		'maxsf_base'
+		'maxsf_base',
+		'def'
 	];
 }
 }

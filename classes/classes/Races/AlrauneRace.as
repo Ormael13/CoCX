@@ -42,9 +42,9 @@ public class AlrauneRace extends Race {
 				.buffs({
 					"tou.mult": +1.00,
 					"spe.mult": -0.50,
-					"lib.mult": +1.45
+					"lib.mult": +1.45,
+					"def": +10
 				})
-				.withExtraBonuses("+10 Armor")
 				.end();
 		
 		buildTier(17, "greater alraune")
@@ -54,9 +54,9 @@ public class AlrauneRace extends Race {
 				.buffs({
 					"tou.mult": +1.15,
 					"spe.mult": -0.60,
-					"lib.mult": +2.00
+					"lib.mult": +2.00,
+					"def": +10
 				})
-				.withExtraBonuses("+10 Armor")
 				.end();
 	}
 }

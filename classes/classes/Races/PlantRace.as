@@ -41,18 +41,18 @@ public class PlantRace extends Race {
 		buildTier(4, "plant-morph")
 				.buffs({
 					"tou.mult": +0.30,
-					"spe.mult": -0.10
+					"spe.mult": -0.10,
+					"def": +2
 				})
-				.withExtraBonuses("+2 Armor")
 				.end();
 		
 		buildTier(5, "plant-morph")
 				.buffs({
 					"str.mult": +0.10,
 					"tou.mult": +0.50,
-					"spe.mult": -0.20
+					"spe.mult": -0.20,
+					"def": +4
 				})
-				.withExtraBonuses("+4 Armor")
 				.end();
 		
 		buildTier(6, "treant")
@@ -60,9 +60,9 @@ public class PlantRace extends Race {
 				.buffs({
 					"str.mult": +0.20,
 					"tou.mult": +0.80,
-					"spe.mult": -0.40
+					"spe.mult": -0.40,
+					"def": +8
 				})
-				.withExtraBonuses("+8 Armor")
 				.end();
 		
 		buildTier(7, "treant")
@@ -70,9 +70,9 @@ public class PlantRace extends Race {
 				.buffs({
 					"str.mult": +0.25,
 					"tou.mult": +1.00,
-					"spe.mult": -0.50
+					"spe.mult": -0.50,
+					"def": +10
 				})
-				.withExtraBonuses("+10 Armor")
 				.end();
 	}
 }

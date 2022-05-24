@@ -591,7 +591,8 @@ use namespace CoC;
 		}
 		override public function get armorDef():Number {
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
-			var armorDef:Number = _armor.def;
+			var armorDef:Number = super.armorDef;
+			armorDef += _armor.def;
 			armorDef += upperGarment.armorDef;
 			armorDef += lowerGarment.armorDef;
 			var tier:int;
@@ -627,29 +628,6 @@ use namespace CoC;
 			if (skin.hasBaseOnly(Skin.STONE)) armorDef += (10 * newGamePlusMod);
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorDef += (1 * newGamePlusMod);
-			//Plant races score bonuses
-			tier = racialTier(Races.PLANT);
-			if (tier >= 4) armorDef += (10 * newGamePlusMod);
-			else if (tier >= 3) armorDef += (8 * newGamePlusMod);
-			else if (tier >= 2) armorDef += (4 * newGamePlusMod);
-			else if (tier >= 1) armorDef += (2 * newGamePlusMod);
-			if (isRace(Races.YGGDRASIL) || isRace(Races.ALRAUNE)) armorDef += (10 * newGamePlusMod);
-			
-			//Dragon score bonuses
-			tier = racialTier(Races.DRAGON);
-			if (tier >= 3) armorDef += (10 * newGamePlusMod);
-			else if (tier >= 2) armorDef += (4 * newGamePlusMod);
-			else if (tier >= 1) armorDef += (1 * newGamePlusMod);
-			
-			tier = racialTier(Races.FROSTWYRM);
-			/*if (tier >= 3) armorDef += (10 * newGamePlusMod);
-			else */if (tier >= 2) armorDef += (4 * newGamePlusMod);
-			else if (tier >= 1) armorDef += (1 * newGamePlusMod);
-			
-			tier = racialTier(Races.SEA_DRAGON);
-			if (tier >= 2) armorDef += (5 * newGamePlusMod);
-			else if (tier >= 1) armorDef += (1 * newGamePlusMod);
-			
 			//Bonus defense
 			if (arms.type == Arms.YETI) armorDef += (1 * newGamePlusMod);
 			if (arms.type == Arms.SPIDER || arms.type == Arms.MANTIS || arms.type == Arms.BEE || arms.type == Arms.SALAMANDER) armorDef += (2 * newGamePlusMod);
@@ -679,34 +657,6 @@ use namespace CoC;
 				//if (faceType == Face.DEVIL_FANGS) armorDef += (30 * newGamePlusMod);
 			//}
 			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) armorDef += (25 * newGamePlusMod);
-			if (hasPerk(PerkLib.ElementalBody)) {
-				switch (ElementalRace.getElementAndTier(this)) {
-					case ElementalRace.GNOME_1:
-						armorDef += (10 * newGamePlusMod);
-						break;
-					case ElementalRace.GNOME_2:
-						armorDef += (20 * newGamePlusMod);
-						break;
-					case ElementalRace.GNOME_3:
-						armorDef += (30 * newGamePlusMod);
-						break;
-					case ElementalRace.GNOME_4:
-						armorDef += (40 * newGamePlusMod);
-						break;
-					case ElementalRace.UNDINE_1:
-						armorDef += (5 * newGamePlusMod);
-						break;
-					case ElementalRace.UNDINE_2:
-						armorDef += (10 * newGamePlusMod);
-						break;
-					case ElementalRace.UNDINE_3:
-						armorDef += (15 * newGamePlusMod);
-						break;
-					case ElementalRace.UNDINE_4:
-						armorDef += (20 * newGamePlusMod);
-						break;
-				}
-			}
 			//Soul Cultivators bonuses
 			if (hasPerk(PerkLib.BodyCultivator)) {
 				armorDef += (1 * newGamePlusMod);
@@ -847,7 +797,8 @@ use namespace CoC;
 		}
 		override public function get armorMDef():Number {
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
-			var armorMDef:Number = _armor.mdef;
+			var armorMDef:Number = super.armorMDef;
+			armorMDef = _armor.mdef;
 			armorMDef += upperGarment.armorMDef;
 			armorMDef += lowerGarment.armorMDef;
 			//Blacksmith history!
@@ -882,30 +833,7 @@ use namespace CoC;
 			if (skin.hasBaseOnly(Skin.STONE)) armorMDef += (10 * newGamePlusMod);/*
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorMDef += (1 * newGamePlusMod);/*
-			//Plant score bonuses
-			if (plantScore() >= 4) {
-				if (plantScore() >= 7) armorDef += (10 * newGamePlusMod);
-				else if (plantScore() == 6) armorDef += (8 * newGamePlusMod);
-				else if (plantScore() == 5) armorDef += (4 * newGamePlusMod);
-				else armorDef += (2 * newGamePlusMod);
-			}*/
-			if (isRace(Races.YGGDRASIL)) armorMDef += (10 * newGamePlusMod);
-			var tier:int;
-			
-			//Dragon score bonuses
-			tier = racialTier(Races.DRAGON);
-			if (tier >= 3) armorMDef += (10 * newGamePlusMod);
-			else if (tier >= 2) armorMDef += (4 * newGamePlusMod);
-			else if (tier > 1) armorMDef += (1 * newGamePlusMod);
-			
-			tier = racialTier(Races.FROSTWYRM);
-			if (tier >= 2) armorMDef += (4 * newGamePlusMod);
-			else if (tier >= 1) armorMDef += (1 * newGamePlusMod);
-			
-			
-			tier = racialTier(Races.SEA_DRAGON);
-			if (tier >= 2) armorMDef += (5 * newGamePlusMod);
-			else if (tier > 1) armorMDef += (1 * newGamePlusMod);
+			*/
 			
 			//Bonus defense
 			if (arms.type == Arms.YETI) armorMDef += (1 * newGamePlusMod);

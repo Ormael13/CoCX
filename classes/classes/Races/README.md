@@ -1,10 +1,5 @@
 # TODO @aimozg
 * Check generated requirement names
-* consider moving naming function from tier to race
-* error reporting utility
-* Future:
-  * manifest race/tier (for testing)
-  * add buffable stats: armor, magic resistance, evasion, unarmed dmg
 
 # New Race system
 
@@ -29,6 +24,7 @@ Each **Race** consists of:
   * "disabled" flag (do not display or apply bonuses)
   * optional list of bloodline perks
   * optional list of mutation perks
+  * a debug collection of forms to transform into that race from a cheat menu
 
 Notes:
 * If player qualifies for a higher tier, they don't get lower tier bonuses.
@@ -294,6 +290,18 @@ Pros: Preserves tier numbering. Most flexible way.
 Cons: Requires more complex code. Buffs and requirements won't properly show in race DB menu.
 
 There is no "best way" to do it; currently such races - Gargoyle, Alicorn, Elemental - use (2).
+
+## Debug forms
+
+_This is for easier debugging/testing._ You can define "debug forms" - lists of transformations/perks/statuses to quickly apply from `[Appearance] > [Racial Scores]` menu under that race.
+
+To do that, overwrite a `debugForms` race with a map. Each element is a debug form, its key is its name. A value should be a list of one of these objects:
+* transformations from TransformationLib (accessed via `game.transformations`)
+* StatusEffectType - added with zero values. To add a status effect with custom values, add a nested 5-element array `[effect type, value1, value2, value3, value4]`
+* IMutationPerkType - added with max stage. To add a different stage, add a nested 2-element array `[mutation type, stage]`
+* PerkType - added with zero values. To add a perk with custom values, add a nested 5-element array `[perk type, value1, value2, value3, value4]`.
+
+See Kitsune and Human races for example.
 
 ## Recommendations
 

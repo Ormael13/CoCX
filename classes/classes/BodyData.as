@@ -609,10 +609,11 @@ public class BodyData {
 			data[SLOT_SKIN_COAT_COLOR2]  = "no";
 			data[SLOT_SKIN_COAT_PATTERN] = Skin.PATTERN_NONE;
 		}
-		data[SLOT_TAIL_TYPE]   = player.tail.type;
-		data[SLOT_TAIL_COUNT]  = player.tail.count;
-		data[SLOT_VAGINA_TYPE] = player.vaginaType();
-		data[SLOT_WING_TYPE]   = player.wings.type;
+		data[SLOT_TAIL_TYPE]           = player.tail.type;
+		data[SLOT_TAIL_COUNT]          = player.tail.count;
+		data[SLOT_TONGUE_TYPE]         = player.tongue.type;
+		data[SLOT_VAGINA_TYPE]         = player.vaginaType();
+		data[SLOT_WING_TYPE]           = player.wings.type;
 		
 		data[SLOT_GENDER]              = player.gender;
 		data[SLOT_HEIGHT]              = player.tallness;

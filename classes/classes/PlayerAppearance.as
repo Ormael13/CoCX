@@ -1,17 +1,11 @@
 package classes {
 import classes.BodyParts.*;
-import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Races.ElementalRace;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
-
-import coc.xxc.BoundStory;
-import coc.xxc.Story;
-
-import flash.events.TextEvent;
 
 public class PlayerAppearance extends BaseContent {
 
@@ -972,10 +966,13 @@ public class PlayerAppearance extends BaseContent {
 		outputText("<b>Current racial scores (and bonuses to stats if applicable):</b>\n");
 		outputText("Sort by: ");
 		if (sortBy == 0) {
-			outputText('<b>name</b>, <u><a href="event:sort,1">score</a></u>. ');
+			outputText('<b>name</b>, ');
+			printLink("score", "sort,1");
 		} else {
-			outputText('<u><a href="event:sort,0">name</a></u>, <b>score</b>. ');
+			printLink('name',"sort,0");
+			outputText('<b>name</b>');
 		}
+		outputText(". ");
 		outputText("Click on a race to view details.\n");
 		outputText("List legend: [font-lblue]active race[/font], [font-green]positive score[/font], zero score.\n");
 		outputText("Details legend: [font-lblue]active tier[/font], [font-green]passed check[/font], failed check, [font-red]score penalty[/font].\n");
@@ -1004,8 +1001,7 @@ public class PlayerAppearance extends BaseContent {
 			} else {
 				outputText("[font-default]");
 			}
-			outputText('<u><a href="event:race,'+race.id+'">'+
-					Utils.capitalizeFirstLetter(rtier?rtier.nameFor(body):race.name)+"</a></u>");
+			printLink(Utils.capitalizeFirstLetter(rtier?rtier.nameFor(body):race.name), "race,"+race.id);
 			outputText(": "+rscore);
 			outputText("[/font]");
 			if (rtier) {
@@ -1020,15 +1016,32 @@ public class PlayerAppearance extends BaseContent {
 				outputText("\n");
 				outputText(race.printDetails(body));
 				scrollPos = Math.max(0, 6+i);
+				if (debug && race.debugFormNames().length > 0) {
+					outputText("Transform into");
+					for each (var tfname:String in race.debugFormNames()) {
+						outputText(" ");
+						printLink(tfname, "tf,"+race.id+","+tfname);
+					}
+				}
 			}
 		}
 		mainView.linkHandler = function(event:String):void {
-			if (event.indexOf("race,") == 0) {
-				var clickedRace2:Race = Race.byId(parseInt(event.slice("race,".length)));
-				if (clickedRace2 == clickedRace) clickedRace2 = null;
-				RacialScores(clickedRace2, sortBy);
-			} else if (event.indexOf("sort,") == 0) {
-				RacialScores(clickedRace, parseInt(event.slice("sort,".length)));
+			var parts:Array = event.split(",");
+			switch (parts[0]) {
+				case "race":
+					var clickedRace2:Race = Race.byId(parseInt(parts[1]));
+					if (clickedRace2 == clickedRace) clickedRace2 = null;
+					RacialScores(clickedRace2, sortBy);
+					break;
+				case "sort":
+					RacialScores(clickedRace, parseInt(parts[2]));
+					break;
+				case "tf":
+					clearOutput();
+					Race.byId(parseInt(parts[1])).takeForm(player, parts[2]);
+					mainViewManager.updateCharviewIfNeeded();
+					doNext(curry(RacialScores, clickedRace, sortBy));
+					break;
 			}
 		}
 		var score:Number;

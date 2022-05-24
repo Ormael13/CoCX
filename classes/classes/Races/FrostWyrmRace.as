@@ -54,11 +54,10 @@ public class FrostWyrmRace extends Race {
 					"tou.mult": +1.10,
 					"spe.mult": +0.70,
 					"int.mult": -0.90,
-					"lib.mult": +0.50
+					"lib.mult": +0.50,
+					"def": +1,
+					"mdef": +1
 				})
-				.withExtraBonuses(
-					"+1 Armor / Magic Resistance"
-				)
 				.end();
 		
 		buildTier(26, "greater frost wyrm")
@@ -67,11 +66,10 @@ public class FrostWyrmRace extends Race {
 					"tou.mult": +1.50,
 					"spe.mult": +0.90,
 					"int.mult": -1.00,
-					"lib.mult": +0.70
+					"lib.mult": +0.70,
+					"def": +1,
+					"mdef": +1
 				})
-				.withExtraBonuses(
-					"+4 Armor / Magic Resistance"
-				)
 				.end();
 	}
 }

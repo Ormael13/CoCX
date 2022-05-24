@@ -148,8 +148,12 @@ public class Creature extends Utils
 		private var _armorPerk:String = "";
 		private var _armorValue:Number = 0;
 		public function get armorName():String { return _armorName; }
-		public function get armorDef():Number { return _armorDef; }
-		public function get armorMDef():Number { return _armorMDef; }
+		public function get armorDef():Number {
+			return defStat.value + _armorDef;
+		}
+		public function get armorMDef():Number {
+			return mdefStat.value + _armorMDef;
+		}
 		public function get armorPerk():String { return _armorPerk; }
 		public function get armorValue():Number { return _armorValue; }
 		public function set armorValue(value:Number):void { _armorValue = value; }
@@ -377,6 +381,8 @@ public class Creature extends Utils
 		public var maxSfPerWisStat: BuffableStat;
 		public var maxSfMultStat: BuffableStat;
 		
+		public var defStat: BuffableStat;
+		public var mdefStat: BuffableStat;
 		public var spellpowerStat: BuffableStat;
 
 		private var _stats: StatStore;
@@ -1241,6 +1247,8 @@ public class Creature extends Utils
 			maxSfPerWisStat = new BuffableStat(this, 'maxsf_perwis', {base:0});
 			maxSfMultStat = new BuffableStat(this, 'maxsf_mult', {base:1});
 			
+			defStat = new BuffableStat(this, 'def', {base:0});
+			mdefStat = new BuffableStat(this, 'mdef', {base:0});
 			spellpowerStat = new BuffableStat(this, 'spellpower', {base:1});
 
 			_stats = new StatStore([
@@ -1560,9 +1568,9 @@ public class Creature extends Utils
 		public function get statusEffects():Array {
 			return this._statusEffects.asArray();
 		}
-		public function createOrFindStatusEffect(stype:StatusEffectType):StatusEffectClass
+		public function createOrFindStatusEffect(stype:StatusEffectType,value1:Number=0,value2:Number=0,value3:Number=0,value4:Number=0):StatusEffectClass
 		{
-			return this._statusEffects.createOrFindStatusEffect(stype);
+			return this._statusEffects.createOrFindStatusEffect(stype,value1,value2,value3,value4);
 		}
 		public function createStatusEffect(stype:StatusEffectType, value1:Number, value2:Number, value3:Number, value4:Number, fireEvent:Boolean = true):StatusEffectClass
 		{

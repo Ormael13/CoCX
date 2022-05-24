@@ -34,9 +34,10 @@ public class YgddrasilRace extends Race {
 					"spe.mult": -0.50,
 					"int.mult": +0.50,
 					"wis.mult": +0.80,
-					"lib.mult": -0.50
+					"lib.mult": -0.50,
+					"def": +10,
+					"mdef": +10
 				})
-				.withExtraBonuses("+10 Armor / Magical Resistance")
 				.end();
 	}
 }

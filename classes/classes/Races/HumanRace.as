@@ -38,6 +38,28 @@ public class HumanRace extends Race {
 						}, +1);
 		
 		tiers.push(new HumanRaceTier(maxScore-9));
+		
+		debugForms = {
+			"human": [
+					game.transformations.SkinPlain,
+					game.transformations.HairHuman,
+					game.transformations.FaceHuman,
+					game.transformations.EyesHuman,
+					game.transformations.EarsHuman,
+					game.transformations.TongueHuman,
+					game.transformations.GillsNone,
+					game.transformations.AntennaeNone,
+					game.transformations.HornsNone,
+					game.transformations.WingsNone,
+					game.transformations.TailNone,
+					game.transformations.ArmsHuman,
+					game.transformations.LowerBodyHuman,
+					game.transformations.RearBodyNone,
+					game.transformations.SkinPatternNone,
+					game.transformations.NipplesPerBreastOne,
+					game.transformations.BreastRowsRemoveToOne
+			]
+		}
 	}
 	
 	public static const maxScore:int = 17;

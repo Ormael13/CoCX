@@ -3,7 +3,10 @@ import classes.BodyData;
 import classes.BodyParts.*;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
+import classes.Player;
 import classes.Race;
+import classes.Transformations.Transformation;
+import classes.internals.Utils;
 
 /**
  * Tier 1: kitsune
@@ -50,7 +53,7 @@ public class KitsuneRace extends Race {
 		addScoresAfter(5)
 				.customRequirement("skin coat", "fur or no coat",
 						function (body:BodyData):Boolean {
-							return !body.hasCoat && body.skinCoatType == Skin.FUR;
+							return !body.hasCoat || body.skinCoatType == Skin.FUR;
 						}, 0, -2
 				)
 				.skinBaseType(Skin.PLAIN, +1, -3)
@@ -139,7 +142,44 @@ public class KitsuneRace extends Race {
 				.withExtraBonuses(
 					"+100% SF Regeneration"
 				)
-				.end()
+				.end();
+		
+		debugForms = {
+			"kitsune": [
+				game.transformations.EyesFox,
+				game.transformations.EarsFox,
+				game.transformations.TailFox(2),
+				game.transformations.SkinFur(Skin.COVERAGE_LOW, {colors:KitsuneFurColors}),
+				game.transformations.ArmsHuman,
+				game.transformations.LowerBodyHuman,
+				game.transformations.FaceHuman,
+				game.transformations.HairChangeColor(KitsuneHairColors),
+			],
+			"ninetails": [
+				game.transformations.EyesFox,
+				game.transformations.EarsFox,
+				game.transformations.TailFox(9),
+				game.transformations.SkinFur(Skin.COVERAGE_LOW, {colors:KitsuneFurColors}),
+				game.transformations.ArmsHuman,
+				game.transformations.LowerBodyHuman,
+				game.transformations.FaceHuman,
+				game.transformations.HairChangeColor(KitsuneHairColors)
+			],
+			"9TKoB": [
+				game.transformations.EyesFox,
+				game.transformations.EarsFox,
+				game.transformations.TailFox(9),
+				game.transformations.SkinFur(Skin.COVERAGE_LOW, {color:KitsuneFurColors}),
+				game.transformations.ArmsHuman,
+				game.transformations.LowerBodyHuman,
+				game.transformations.FaceHuman,
+				game.transformations.HairChangeColor(KitsuneHairColors),
+				PerkLib.StarSphereMastery,
+				PerkLib.EnlightenedKitsune,
+				PerkLib.CorruptedKitsune,
+				PerkLib.NinetailsKitsuneOfBalance
+			]
+		};
 	}
 }
 }

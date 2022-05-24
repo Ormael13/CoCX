@@ -1,4 +1,5 @@
 package classes {
+import classes.Transformations.Transformation;
 import classes.internals.Utils;
 import classes.internals.race.ConditionedRaceScoreBuilder;
 import classes.internals.race.RaceScoreBuilder;
@@ -338,6 +339,85 @@ public class Race {
 	protected function buildTier(minScore:int, name:String):RaceTierBuilder {
 		return new RaceTierBuilder(this, tiers.length+1, minScore, name);
 	}
-
+	
+	/**
+	 * Key: debug form name
+	 * Value: a list of elements of type:
+	 * - Transformation
+	 * - StatusEffectType
+	 * - IMutationPerkType
+	 * - PerkType
+	 * - array of form [StatusEffectType, value1, value2, value3, value4]
+	 * - array of form [IMutationPerkType, stage]
+	 * - array of form [PerkType, value1, value2, value3, value4]
+	 */
+	protected var debugForms:Object = {};
+	public function debugFormNames():/*String*/Array {
+		return Utils.keys(debugForms);
+	}
+	public function takeForm(player:Player, tfName:String):void {
+		for each (var o:* in debugForms[tfName]) {
+			var tf:Transformation = o as Transformation;
+			if (tf) {
+				if (tf.isPossible()) {
+					tf.applyEffect();
+				}
+				continue;
+			}
+			var st:StatusEffectType = o as StatusEffectType;
+			if (st) {
+				player.createOrFindStatusEffect(st,0,0,0,0);
+				continue;
+			}
+			var mt:IMutationPerkType = o as IMutationPerkType;
+			if (mt) {
+				mt.acquireMutation(player, "none", mt.maxLvl);
+				continue;
+			}
+			var pt:PerkType = o as PerkType;
+			if (pt) {
+				if (!player.hasPerk(pt)) {
+					player.createPerk(pt, 0, 0, 0, 0);
+				}
+				continue;
+			}
+			var a:Array = o as Array;
+			if (a && a.length>0) {
+				st = a[0] as StatusEffectType;
+				if (st && a.length == 5) {
+					var sec:StatusEffectClass = player.createOrFindStatusEffect(st,a[1],a[2],a[3],a[4]);
+					sec.value1 = a[1];
+					sec.value2 = a[2];
+					sec.value3 = a[3];
+					sec.value4 = a[4];
+					continue;
+				}
+				
+				mt = o[0] as IMutationPerkType;
+				if (mt && a.length == 2) {
+					mt.acquireMutation(player, "none", a[1]);
+					continue;
+				}
+				pt = a[0] as PerkType;
+				if (pt && a.length == 5) {
+					var pc:PerkClass = player.getPerk(pt);
+					if (!pc) {
+						player.createPerk(pt,a[1],a[2],a[3],a[4]);
+					} else {
+						pc.value1 = a[1];
+						pc.value2 = a[2];
+						pc.value3 = a[3];
+						pc.value4 = a[4];
+					}
+					continue;
+				}
+			}
+			trace("[ERROR] In "+name+".transform() element "+o);
+		}
+	}
+	
+	protected function get game():CoC {
+		return CoC.instance;
+	}
     }
 }
