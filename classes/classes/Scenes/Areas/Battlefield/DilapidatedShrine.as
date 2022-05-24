@@ -173,6 +173,7 @@ public class DilapidatedShrine extends BaseContent
 			outputText("At the base of the largest statue lies a metallic plaque. Given the rust coating it, the text is hard to decipher. You can only make out 'Krat..' within the text.\n\n");
 			outputText("Below the plaque lies an ornate wooden bowl, presumably used to put offerings in a time when this was a place people actively visited.\n\n");
 			menu();
+			addButton(0, "Offering", weaponsXPtrader);//southSectionOffering
 			addButton(14, "Back", shrinemainmenu);
 		}
 
@@ -214,7 +215,7 @@ public class DilapidatedShrine extends BaseContent
 				addButton(btnInt, arr1[0].shortName,conv2mastery,arr1);
 				btnInt++;
 			}
-			addButton(14, "Back", playerMenu);
+			addButton(14, "Back", southSection);
 
 
 			function conv2mastery(wType:Array, conf:Boolean = false):void{
@@ -259,7 +260,7 @@ public class DilapidatedShrine extends BaseContent
 						}
 					player.destroyItems(wType[0],1);
 					outputText("Item has been consumed.");
-					doNext(playerMenu);
+					doNext(southSection);
 				}
 			}
 		}
