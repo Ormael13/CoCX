@@ -56,9 +56,9 @@ public class FrostWyrmRace extends Race {
 					"int.mult": -0.90,
 					"lib.mult": +0.50
 				})
-				.withExtraBonuses([
+				.withExtraBonuses(
 					"+1 Armor / Magic Resistance"
-				])
+				)
 				.end();
 		
 		buildTier(26, "greater frost wyrm")
@@ -69,9 +69,9 @@ public class FrostWyrmRace extends Race {
 					"int.mult": -1.00,
 					"lib.mult": +0.70
 				})
-				.withExtraBonuses([
+				.withExtraBonuses(
 					"+4 Armor / Magic Resistance"
-				])
+				)
 				.end();
 	}
 }

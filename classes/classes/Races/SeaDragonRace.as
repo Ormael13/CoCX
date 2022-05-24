@@ -57,9 +57,9 @@ public class SeaDragonRace extends Race{
 					"tou.mult": +1.00,
 					"int.mult": +0.50
 				})
-				.withExtraBonuses([
+				.withExtraBonuses(
 					"+1 Armor / Magic Resistance"
-				])
+				)
 				.end();
 		
 		buildTier(30,"leviathan")
@@ -70,9 +70,9 @@ public class SeaDragonRace extends Race{
 					"tou.mult": +0.70,
 					"int.mult": +0.50
 				})
-				.withExtraBonuses([
+				.withExtraBonuses(
 						"+5 Armor / Magic Resistance"
-				])
+				)
 				.end();
 	}
 	

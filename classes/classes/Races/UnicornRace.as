@@ -23,7 +23,7 @@ public class UnicornRace extends Race{
 	public override function setup():void {
 		
 		addScores()
-				.faceType(Face.HUMAN, +1, -1000)
+				.faceType(ANY(Face.HUMAN, Face.HORSE), +1, -1000)
 				.earType(Ears.HORSE, +1)
 				.tailType(Tail.HORSE, +1)
 				.isTaur(+1)
@@ -76,10 +76,7 @@ public class UnicornRace extends Race{
 		addMutation(IMutationsLib.EclipticMindIM, +1);
 		
 		buildTier(8, "Half Unicorn/Bicorn")
-				.customNamingFunction(function(body:BodyData):String {
-					if (body.hornType == Horns.UNICORN) return "half unicorn";
-					return "half bicorn";
-				})
+				.customNamingFunction(Utils.curry(nameFn,1))
 				.buffs({
 					"tou.mult": +0.25,
 					"spe.mult": +0.40,
@@ -88,10 +85,7 @@ public class UnicornRace extends Race{
 				.end()
 		
 		buildTier(18, "Unicorn/Bicorn")
-				.customNamingFunction(function(body:BodyData):String {
-					if (body.hornType == Horns.UNICORN) return "unicorn";
-					return "bicorn";
-				})
+				.customNamingFunction(Utils.curry(nameFn,2))
 				.buffs({
 					"tou.mult": +0.55,
 					"spe.mult": +0.90,
@@ -100,18 +94,15 @@ public class UnicornRace extends Race{
 					"maxhp_base": +250,
 					"maxfatigue_base": +20
 				})
-				.withExtraBonuses([
+				.withExtraBonuses(
 						"Mana & SF recovery +5%",
 						"Combat HP regen +150",
 						"Regenerate Spell +200%"
-				])
+				)
 				.end()
 		
 		buildTier(27, "True Unicorn/Bicorn")
-				.customNamingFunction(function(body:BodyData):String {
-					if (body.hornType == Horns.UNICORN) return "true unicorn";
-					return "true bicorn";
-				})
+				.customNamingFunction(Utils.curry(nameFn,3))
 				.buffs({
 					"str.mult": +0.60,
 					"tou.mult": +0.90,
@@ -121,12 +112,25 @@ public class UnicornRace extends Race{
 					"maxhp_base": +250,
 					"maxfatigue_base": +20
 				})
-				.withExtraBonuses([
+				.withExtraBonuses(
 					"Mana & SF recovery +5%",
 					"Combat HP regen +150",
 					"Regenerate Spell +200%"
-				])
+				)
 				.end()
+	}
+	private function nameFn(tier:int, body:BodyData):String {
+		var s:String = "";
+		
+		if (tier == 1) s = "half "
+		else if (tier == 3) s = "true ";
+		
+		if (body.hornType == Horns.UNICORN) s += "unicorn";
+		else s += "bicorn";
+		
+		if (!body.isTaur) s += "-kin";
+		
+		return s;
 	}
 }
 }

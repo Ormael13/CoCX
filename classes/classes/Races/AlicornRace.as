@@ -23,7 +23,7 @@ public class AlicornRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.faceType(Face.HUMAN, +1, -1000)
+				.faceType(ANY(Face.HUMAN, Face.HORSE), +1, -1000)
 				.hornType(ANY(Horns.UNICORN, Horns.BICORN), 0, -1000)
 				.earType(Ears.HORSE, +1)
 				.tailType(Tail.HORSE, +1)
@@ -42,7 +42,7 @@ public class AlicornRace extends Race {
 						function (body:BodyData):Boolean {
 							if (body.hornType == Horns.UNICORN) return body.wingType == Wings.FEATHERED_ALICORN;
 							if (body.hornType == Horns.BICORN) return body.wingType == Wings.NIGHTMARE;
-							return true;
+							return false;
 						}, 0, -1000);
 		
 		addConditionedScores(
@@ -82,10 +82,7 @@ public class AlicornRace extends Race {
 		addMutation(IMutationsLib.EclipticMindIM, +1);
 		
 		buildTier(8, "Half Alicorn/Nightmare")
-				.customNamingFunction(function(body:BodyData):String {
-					if (body.hornType == Horns.UNICORN) return "half alicorn";
-					return "half nightmare";
-				})
+				.customNamingFunction(Utils.curry(nameFn,1))
 				.buffs({
 					"tou.mult": +0.15,
 					"spe.mult": +0.50,
@@ -94,10 +91,7 @@ public class AlicornRace extends Race {
 				.end()
 		
 		buildTier(18, "Alicorn/Nightmare")
-				.customNamingFunction(function(body:BodyData):String {
-					if (body.hornType == Horns.UNICORN) return "alicorn";
-					return "nightmare";
-				})
+				.customNamingFunction(Utils.curry(nameFn,2))
 				.buffs({
 					"tou.mult": +0.55,
 					"spe.mult": +1.20,
@@ -106,18 +100,15 @@ public class AlicornRace extends Race {
 					"maxfatigue_base": +50,
 					"maxsf_mult": +0.2
 				})
-				.withExtraBonuses([
+				.withExtraBonuses(
 						"Mana & SF recovery +10%",
 						"Combat HP regen +200",
 						"Regenerate Spell +300%"
-				])
+				)
 				.end()
 		
 		buildTier(27, "True Alicorn/Nightmare")
-				.customNamingFunction(function(body:BodyData):String {
-					if (body.hornType == Horns.UNICORN) return "true alicorn";
-					return "true nightmare";
-				})
+				.customNamingFunction(Utils.curry(nameFn,3))
 				.buffs({
 					"str.mult": +0.60,
 					"tou.mult": +0.70,
@@ -127,12 +118,25 @@ public class AlicornRace extends Race {
 					"maxfatigue_base": +50,
 					"maxsf_mult": +0.2
 				})
-				.withExtraBonuses([
+				.withExtraBonuses(
 					"Mana & SF recovery +10%",
 					"Combat HP regen +200",
 					"Regenerate Spell +300%"
-				])
+				)
 				.end()
+	}
+	private function nameFn(tier:int, body:BodyData):String {
+		var s:String = "";
+		
+		if (tier == 1) s = "half "
+		else if (tier == 3) s = "true ";
+		
+		if (body.hornType == Horns.UNICORN) s += "alicorn";
+		else s += "nightmare";
+		
+		if (!body.isTaur) s += "-kin";
+		
+		return s;
 	}
 }
 }

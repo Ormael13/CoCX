@@ -47,9 +47,9 @@ public class NekomataRace extends Race{
 					"wis.mult": +0.80,
 					"maxsf_mult": +0.1
 				})
-				.withExtraBonuses([
+				.withExtraBonuses(
 					"+20% SF Regeneration"
-				])
+				)
 				.end();
 		
 		buildTier(12, "elder nekomata")
@@ -61,9 +61,9 @@ public class NekomataRace extends Race{
 					"wis.mult": +1.00,
 					"maxsf_mult": +0.3
 				})
-				.withExtraBonuses([
+				.withExtraBonuses(
 					"+40% SF Regeneration"
-				])
+				)
 				.end();
 	}
 }
