@@ -16,7 +16,6 @@ import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.*;
 import classes.lists.Gender;
-import classes.CoC;
 
 /**
 	 * The Black Cock by Foxxling
@@ -911,7 +910,7 @@ import classes.CoC;
 		}
 
 		private function fuckAndyTheSatyr_selector():void {
-			if (player.isTaur)
+			if (player.isTaur())
 				sceneHunter.callBigSmall(fuckAndyTheSatyr, 13, 7);
 			else {
 				sceneHunter.print("Check failed: Taur body");

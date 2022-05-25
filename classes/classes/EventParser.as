@@ -65,7 +65,7 @@ public class EventParser {
                 "You just got Bad-Ended!", 
                 "Your adventures have come to an end...", 
                 //Silly Mode
-                "Don't lose hope... " + player.short + "! Stay determined!", 
+                "Don't lose hope... " + CoC.instance.player.short + "! Stay determined!",
                 "Wasted", 
                 "YOU DIED", 
                 "Git gud!", 
@@ -73,7 +73,7 @@ public class EventParser {
                 "OOF."];
             if (clear) EngineCore.clearOutput();
             EngineCore.outputText("\n\n<font color=\"#800000\">");
-            EngineCore.outputText("<b>" + textChoices[rand(silly() ? textChoices.length) : 4] + "</b>");
+            EngineCore.outputText("<b>" + textChoices[Utils.rand(EngineCore.silly() ? textChoices.length : 4)] + "</b>");
             EngineCore.outputText("</font>");
             //Delete save on hardcore.
             if (CoC.instance.flags[kFLAGS.HARDCORE_MODE] > 0) {
