@@ -493,8 +493,8 @@ public class PerkLib
 				"Decrease by ~20% needed exp to level up each melee weapon mastery type and grants 200% more of base mastery exp gains.",
 				"You've chosen the 'Melee Weapons Mastery' perk. Decrease by ~20% needed exp to level up each melee weapon mastery type and grants 200% more of base mastery exp gains.");
 		public static const MeleeWeaponsMasteryEx:PerkType = mk("Melee Weapons Mastery (Ex)", "Melee Weapons Mastery (Ex)",
-				"Decrease by ~45% needed exp to level up each melee weapon mastery type.",
-				"You've chosen the 'Melee Weapons Mastery (Ex)' perk. Decrease by ~45% needed exp to level up each melee weapon mastery type.");
+				"Decrease by ~45% needed exp to level up each melee weapon mastery type and increase cap for melee masteries by 20.",
+				"You've chosen the 'Melee Weapons Mastery (Ex)' perk. Decrease by ~45% needed exp to level up each melee weapon mastery type and increase cap for melee masteries by 20.");
 		public static const MeleeWeaponsMasterySu:PerkType = mk("Melee Weapons Mastery (Su)", "Melee Weapons Mastery (Su)",
 				".",
 				"You've chosen the 'Melee Weapons Mastery (Su)' perk. .");
@@ -6334,6 +6334,10 @@ public class PerkLib
 			ImprovedCursedTag.requirePerk(CursedTag).requireRace(Races.JIANGSHI);
 			GreaterCursedTag.requirePerk(ImprovedCursedTag).requireRace(Races.JIANGSHI);
 			MeleeWeaponsMastery.requireStr(10)
+					.requireTou(10)
+					.requireSpe(10);
+			MeleeWeaponsMasteryEx.requirePerk(MeleeWeaponsMastery)
+					.requireStr(10)
 					.requireTou(10)
 					.requireSpe(10);
             //Tier 1

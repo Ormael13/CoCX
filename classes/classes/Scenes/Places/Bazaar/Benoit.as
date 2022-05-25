@@ -152,7 +152,7 @@ public function benoitKnockUpSmart(next:Function):void {
 	addButton(0, "Regular", curry(benoitEggSet, Math.min(eggs, 4), next));
 	addButtonIfTrue(1, "Heavy", curry(benoitEggSet, Math.min(eggs, 8), next), "Not enough cum!", eggs >= 5);
 	addButtonIfTrue(2, "Very Heavy", curry(benoitEggSet, Math.min(eggs, 12), next), "Not enough cum!", eggs >= 9);
-	addButton(3, "Extreme", curry(benoitEggSet, eggs, next),
+	addButtonIfTrue(3, "Extreme", curry(benoitEggSet, eggs, next),
 		"Not enough cum (at least 2600) or no required perk (Fera's Boon / Marae's Gift - Stud / Elven Bounty) / lacks required\n(Don't worry though, the sex scene doesn't differ from 'Very Heavy').",
 		eggs >= 13);
 }

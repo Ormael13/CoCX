@@ -260,9 +260,13 @@ public class CombatUI extends BaseCombatContent {
 		// Modifications - full or partial replacements
 		//==============================================================================================================
 		//ALLIES - 'smart' ones (wisps & henchmen). Do not depend on PC to do anything. Call them first!
+		var playerBusy:Boolean = true; //changed to true if 'stupid' allies can help.
+		//no elses - Simpturn works without 'Next'!
 		if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn) && player.statusEffectv1(StatusEffects.SimplifiedNonPCTurn) == 0)
 			combat.simplifiedPrePCTurn_smart();
-		else if (isWispTurn())
+		//SimpTurn also sets some flags so if...Turn functions should return 'false' after it.
+		//Others
+		if (isWispTurn())
 			doWispTurn();
 		else if (isCompanionTurn(0))
 			doCompanionTurn(0);
@@ -453,44 +457,53 @@ public class CombatUI extends BaseCombatContent {
 			}
 			addButton(4, "Release", combat.BearLeggoMyEggo);
 		}
+		else playerBusy = false;
 		//ALLIES - 'stupid' ones (elem & golems). Requires PC to NOT be stunned or channel anything.
-		else if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn) && player.statusEffectv2(StatusEffects.SimplifiedNonPCTurn) == 0)
-			combat.simplifiedPrePCTurn_stupid();
-		else if (isGolemTurn())
-			doGolemTurn();
-		else if (isEpicElementalTurn())
-			doEpicElementalTurn();
-		else if (isElementalTurn())
-			doElementalTurn();
-		//UNIQUE OPTIONS - No changes applied, player turn, no status/CC
-		else {
-			if (monster is SandTrap) {
-				btnSpecial1.show("Climb", combat.wait2, "Climb the sand to move away from the sand trap.");
-			} else if (monster is Alraune) {
-				if (player.fatigueLeft() < 50) btnSpecial1.disable("You're too tired to struggle.");
-				else btnSpecial1.show("Struggle", combat.wait2, "Struggle to forcefully pull yourself a good distance away from plant woman.");
-			} else if (monster is DriderIncubus) {
-				var drider:DriderIncubus = monster as DriderIncubus;
-				if (!drider.goblinFree) btnSpecial1.show("Free Goblin", drider.freeGoblin);
-			} else if (monster is MinotaurKing) {
-				var minoking:MinotaurKing = monster as MinotaurKing;
-				if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", minoking.dishHelper);
-                else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of Excellia!");
-			} else if (monster is Lethice) {
-				var lethice:Lethice = monster as Lethice;
-				if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles)) {
-					if (player.lust < combat.magic.getWhiteMagicLustCap() && player.hasStatusEffect(StatusEffects.KnowsWhitefire)
-						&& ((!player.hasPerk(PerkLib.BloodMage) && player.mana >= 30) || (player.hasStatusEffect(StatusEffects.BloodMage) && ((player.HP + 30) > (player.minHP() + 30))))) {
-						btnSpecial1.show("Dispel", lethice.dispellRapetacles);
+		if (!playerBusy) {
+			if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn) && player.statusEffectv2(StatusEffects.SimplifiedNonPCTurn) == 0)
+				combat.simplifiedPrePCTurn_stupid();
+			//again, no else after - ally turns SHOULD be disabled.
+			if (isGolemTurn())
+				doGolemTurn();
+			else if (isEpicElementalTurn())
+				doEpicElementalTurn();
+			else if (isElementalTurn())
+				doElementalTurn();
+			//UNIQUE OPTIONS - No changes applied, player turn, no status/CC
+			else {
+				if (monster is SandTrap) {
+					btnSpecial1.show("Climb", combat.wait2, "Climb the sand to move away from the sand trap.");
+				}
+				else if (monster is Alraune) {
+					if (player.fatigueLeft() < 50) btnSpecial1.disable("You're too tired to struggle.");
+					else btnSpecial1.show("Struggle", combat.wait2, "Struggle to forcefully pull yourself a good distance away from plant woman.");
+				}
+				else if (monster is DriderIncubus) {
+					var drider:DriderIncubus = monster as DriderIncubus;
+					if (!drider.goblinFree) btnSpecial1.show("Free Goblin", drider.freeGoblin);
+				}
+				else if (monster is MinotaurKing) {
+					var minoking:MinotaurKing = monster as MinotaurKing;
+					if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", minoking.dishHelper);
+					else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of Excellia!");
+				}
+				else if (monster is Lethice) {
+					var lethice:Lethice = monster as Lethice;
+					if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles)) {
+						if (player.lust < combat.magic.getWhiteMagicLustCap() && player.hasStatusEffect(StatusEffects.KnowsWhitefire)
+							&& ((!player.hasPerk(PerkLib.BloodMage) && player.mana >= 30) || (player.hasStatusEffect(StatusEffects.BloodMage) && ((player.HP + 30) > (player.minHP() + 30))))) {
+							btnSpecial1.show("Dispel", lethice.dispellRapetacles);
+						}
 					}
 				}
-			} else if (monster is WoodElvesHuntingParty) {
-				var woodelves:WoodElvesHuntingParty = monster as WoodElvesHuntingParty;
-				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) btnSpecial1.show("Pick (M)", woodelves.pickUpMelee, "Pick up your melee weapon.");
-				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0) btnSpecial2.show("Pick (R)", woodelves.pickUpRange, "Pick up your range weapon.");
-			}
-			if ((player.weaponRange == weaponsrange.GTHRSPE && player.ammo <= 15) || (player.weaponRange == weaponsrange.GTHRAXE && player.ammo <= 10) || (player.weaponRange == weaponsrange.TRJAVEL && player.ammo <= 10)) {
-				btnSpecial3.show("Pick", combat.pickUpThrownWeapons, "Pick up some of the thrown weapons.");
+				else if (monster is WoodElvesHuntingParty) {
+					var woodelves:WoodElvesHuntingParty = monster as WoodElvesHuntingParty;
+					if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) btnSpecial1.show("Pick (M)", woodelves.pickUpMelee, "Pick up your melee weapon.");
+					if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0) btnSpecial2.show("Pick (R)", woodelves.pickUpRange, "Pick up your range weapon.");
+				}
+				if ((player.weaponRange == weaponsrange.GTHRSPE && player.ammo <= 15) || (player.weaponRange == weaponsrange.GTHRAXE && player.ammo <= 10) || (player.weaponRange == weaponsrange.TRJAVEL && player.ammo <= 10)) {
+					btnSpecial3.show("Pick", combat.pickUpThrownWeapons, "Pick up some of the thrown weapons.");
+				}
 			}
 		}
 	}
