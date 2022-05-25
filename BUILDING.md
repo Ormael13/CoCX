@@ -46,7 +46,7 @@ The main problem with it is that you still need the SDK, and you *can't* downloa
 #### Flex SDK - without FD, EragonX method
 You can download the 4.16.1 Flex sdk from [Apache](https://flex.apache.org/download-binaries.html), do not use the SDK Installer as it is broken.
 
-> Svalkash note: I haven't managed to get it working, so here's a [version](https://github.com/brrritssocold/CoC-build-dependencies) from Kitteh's mod. It also contains the player!
+> Svalkash note: I haven't managed to get it working, so here's a [version](https://github.com/brrritssocold/CoC-build-dependencies/tree/master/bin/flex) from Kitteh's mod.
 
 Extract it to your location of choice.
 Create a new environment variable `FLEX_HOME` and point it to the SDK folder e.g. 'C:\\files\apache-flex-sdk-4.16.1-bin'.
