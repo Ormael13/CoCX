@@ -539,6 +539,7 @@ private function applyHangover():void {
 	//v3 = speed taken
 	//v4 = intelligence
 
+	/*
 	//Already hungover?  Reset duration.
 	if(player.statStore.hasBuff("Hangover")) {
 		player.statStore.addBuff("str",-1,"Hangover",{text:"Hangover",time:Buff.RATE_HOURS, tick:8});
@@ -546,7 +547,13 @@ private function applyHangover():void {
 	//No hangover yet?  Create and yoink stats
 	else {
 		player.statStore.addBuffObject({"str":-5,"spe":-10,"int":-15},"Hangover",{text:"Hangover",time:Buff.RATE_HOURS, tick:8});
+	}*/
+
+	//previous implementation might not have worked.... this one should at least definitely reset it properly.
+	if(player.statStore.hasBuff("Hangover")) {
+		player.statStore.removeBuffs("Hangover");
 	}
+	player.statStore.addBuffObject({"str":-5,"spe":-10,"int":-15},"Hangover",{text:"Hangover",time:Buff.RATE_HOURS, tick:8});
 	statScreenRefresh();
 }
 
