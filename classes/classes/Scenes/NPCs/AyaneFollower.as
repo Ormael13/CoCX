@@ -369,7 +369,7 @@ public function ayaneGivesBirth():void {
 	var roll:int = rand(100); //Rolls for random child gender
 	outputText("Ayane is waiting for you, sipping from a flask of water, her hugely rounded orb of a belly exposed to you, as if showing it off.  She winces and rubs her belly with a grimace as you approach, which prompts you to ask if she's been feeling all right.");
 	outputText("\n\n\"<i>Just a little stomach pain,</i>\" she states, \"<i>I probably just pulled something.  This little one has been murder on my muscles.  I'll be fine, but can you get me more water?</i>\"  You nod, not entirely convinced, but you take her empty flask and go to fill it.");
-	outputText("\n\nYou're only just returning witht he flask when, with a sudden cry of pain from the kitsune, a gush of water spills forth from between Ayane's legs.  She looks down in a panic, nearly doubling over with her arms wrapped around her belly.  \"<i>Oh my god, the baby's coming!</i>\" she cries out, panic tinging her voice.");
+	outputText("\n\nYou're only just returning with the flask when, with a sudden cry of pain from the kitsune, a gush of water spills forth from between Ayane's legs.  She looks down in a panic, nearly doubling over with her arms wrapped around her belly.  \"<i>Oh my god, the baby's coming!</i>\" she cries out, panic tinging her voice.");
 	outputText("\n\nYou quickly move to support her, asking what you can do to help.");
 	outputText("\n\n\"We need someplace quiet and private.  There's no time to go to the doctor's...</i>\"  Her breath is heavy now, but with measured gasps.");
 	outputText("\n\nMind racing, you ask if she can make it to the stream.  You think you remember hearing something about it being easier to give birth in water or something.");
