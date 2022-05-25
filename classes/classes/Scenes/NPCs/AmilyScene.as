@@ -8,8 +8,8 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.lists.BreastCup;
 import classes.display.SpriteDb;
+import classes.lists.BreastCup;
 
 public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 	{
