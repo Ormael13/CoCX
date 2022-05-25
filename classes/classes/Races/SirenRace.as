@@ -20,7 +20,7 @@ public class SirenRace extends Race {
 				.hairColor("silver", +1)
 				.earType(ANY(Ears.SHARK, Ears.HUMAN, Ears.ELFIN), +1)
 				.tailType(Tail.SHARK, +1)
-				.wingType(Wings.FEATHERED_LARGE, +4, -100)
+				.wingType(Wings.FEATHERED_LARGE, +4, -1000)
 				.armType(ANY(Arms.HARPY, Arms.SHARK), +1)
 				.legType(ANY(LowerBody.SHARK, LowerBody.HARPY), +1)
 				.skinCoatTypeAndColor(Skin.AQUA_SCALES, ANY(SirenScaleColors), +2)

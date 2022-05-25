@@ -21,7 +21,7 @@ public class SalamanderRace extends Race {
 		addScores()
 				.skinCoatType(Skin.SCALES, +1)
 				.skinCoatTypeAndColor(Skin.SCALES, ANY(SalamanderScaleColors), +1)
-				.skinBaseType(ANY(SalamanderSkinColors), +1)
+				.skinBaseColor(ANY(SalamanderSkinColors), +1)
 				.faceType(Face.SALAMANDER_FANGS, +1)
 				.earType(ANY(Ears.HUMAN, Ears.LIZARD), +1)
 				.eyeType(Eyes.LIZARD, +1)
@@ -55,7 +55,7 @@ public class SalamanderRace extends Race {
 					"str.mult": +1.05,
 					"tou.mult": +0.80,
 					"lib.mult": +0.40,
-					"sens": +0.75,
+					"sens": +75,
 					"maxlust_base": +25
 				})
 				.end();

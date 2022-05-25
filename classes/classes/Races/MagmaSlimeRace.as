@@ -9,7 +9,7 @@ public class MagmaSlimeRace extends Race {
 	public static const MagmaSlimeSkinColors:/*String*/Array = ["red", "orange", "reddish orange"];
 	
 	public function MagmaSlimeRace(id:int) {
-		super("Magma slime", id);
+		super("Magma Slime", id);
 	}
 	
 	public override function setup():void {

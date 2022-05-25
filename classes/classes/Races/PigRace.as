@@ -19,25 +19,24 @@ public class PigRace extends Race{
 				.earType(Ears.PIG, +1)
 				.tailType(Tail.PIG, +1)
 				.faceType(Face.PIG, +1)
-				.armType(Arms.PIG, +2)
+				.faceType(Face.BOAR, +2)
+				.armType(ANY(Arms.PIG, Arms.BOAR), +2)
 				.legType(LowerBody.CLOVEN_HOOFED, +1)
 				.skinPlainOnly(+1)
 				.skinBaseColor(ANY(PigSkinColors), +1)
 				.thickness(AT_LEAST(75), +1)
 				.hasCockOfType(CockTypesEnum.PIG, +1)
+		addConditionedScores(
+				function(body:BodyData):Boolean {
+					return body.faceType === Face.BOAR || body.armType === Arms.BOAR
+				}, "boar arms or face;"
+		)
+				.skinBaseColor(ANY(BoarSkinColors), +2)
+				.skinCoatTypeAndColor(Skin.FUR, ANY(BoarFurColors), +2);
 		addScoresAfter(4)
 				.skinCoatType(Arms.HUMAN, +1)
 				.noWings(+1)
 				.thickness(AT_LEAST(150), +1);
-		addConditionedScores(
-				function(body:BodyData):Boolean {
-					return body.faceType === Face.BOAR || body.armType === Arms.BOAR
-				}, "boar arms or face"
-		)
-				.faceType(Face.BOAR, +2)
-				.armType(Arms.BOAR, +2)
-				.skinBaseColor(ANY(BoarSkinColors), +2)
-				.skinCoatTypeAndColor(Skin.FUR, ANY(BoarFurColors), +2);
 		
 		addMutation(IMutationsLib.PigBoarFatIM);
 		

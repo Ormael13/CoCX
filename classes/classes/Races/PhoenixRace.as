@@ -25,7 +25,7 @@ public class PhoenixRace extends Race {
 				.hasPerk(PerkLib.HarpyWomb, +2);
 		addConditionedScores(function (body:BodyData):Boolean {
 			return body.hairType === Hair.FEATHER;
-		}, "feather hair",3)
+		}, "feather hair;",3)
 				.faceType(ANY(Face.HUMAN, Face.SALAMANDER_FANGS), 2)
 				.earType(ANY(Ears.HUMAN, Ears.ELFIN, Ears.LIZARD), +1);
 		

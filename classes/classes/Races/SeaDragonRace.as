@@ -20,18 +20,18 @@ public class SeaDragonRace extends Race{
 				.antennaeType(Antennae.SEA_DRAGON, +1)
 				.earType(Ears.ORCA, +1)
 				.tailType(Tail.ORCA, +1)
-				.faceType(Face.ORCA, +1, -100)
+				.faceType(Face.ORCA, +1, -1000)
 				.tongueType(Tongue.DRACONIC, +1)
 				.eyeType(Eyes.DRACONIC, +1)
 				.eyeColor(ANY(SeaDragonEyeColors), +1)
 				.hairType(Hair.PRISMATIC, +1)
-				.legType(LowerBody.SEA_DRAGON, +1, -100)
-				.armType(Arms.SEA_DRAGON, +1, -100)
+				.legType(LowerBody.SEA_DRAGON, +1, -1000)
+				.armType(Arms.SEA_DRAGON, +1, -1000)
 				.rearType(RearBody.ORCA_BLOWHOLE, +1)
 				.skinPlainOnly(+1)
 				.skinBaseAdj("glossy", +1)
 				.skinBasePattern(Skin.PATTERN_SEA_DRAGON_UNDERBODY, +1)
-				.wingType(Wings.SEA_DRAGON, +4, -100)
+				.wingType(Wings.SEA_DRAGON, +4, -1000)
 				.customRequirement("body","not toned",
 						function (body:BodyData):Boolean {
 							return body.player.tone < 10;

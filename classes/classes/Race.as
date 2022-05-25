@@ -229,7 +229,10 @@ public class Race {
 				s += " (" + (rscore>0?"+"+rscore:rscore)+")";
 				if (rr.failScore < 0) {
 					s += "[/font]"
-					if (!pass) {
+					if (!pass && rscore == 0) {
+						// failScore < 0, rscore == 0 - this happens if requirement was skipped due to minScore
+						s += "[font-default]";
+					} else if (!pass) {
 						s += "[font-red]";
 					} else if (rr.failScore <= -1000) {
 						s += "[font-green]";

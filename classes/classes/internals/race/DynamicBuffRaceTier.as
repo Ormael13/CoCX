@@ -40,6 +40,10 @@ public class DynamicBuffRaceTier extends RaceTier {
 		this.dynamicBuffDescription = dynamicBuffDescription;
 	}
 	
+	override public function hasBuffs():Boolean {
+		return true;
+	}
+	
 	override public function unscaledBuffs(body:BodyData):Object {
 		if (!body) return _buffs;
 		return StatUtils.mergeBuffObjects(

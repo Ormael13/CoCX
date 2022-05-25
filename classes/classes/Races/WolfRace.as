@@ -19,7 +19,7 @@ public class WolfRace extends Race {
 		addScores()
 				.faceType(ANY(Face.WOLF, Face.ANIMAL_TOOTHS), +1)
 				.eyeType(Eyes.FENRIR, +3)
-				.eyeType(Eyes.FERAL, -11)
+				.eyeType(NOT(Eyes.FERAL),0, -11)
 				.eyeColor("glacial blue", +2)
 				.earType(Ears.WOLF, +1)
 				.armType(Arms.WOLF, +1)

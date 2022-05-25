@@ -120,6 +120,10 @@ class HumanRaceTier extends RaceTier {
 		);
 	}
 	
+	override public function hasBuffs():Boolean {
+		return true;
+	}
+	
 	override public function describeBuffs(
 			body:BodyData,
 			separator:String         = ", ",

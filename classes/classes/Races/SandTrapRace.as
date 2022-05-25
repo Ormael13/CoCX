@@ -9,7 +9,7 @@ import classes.VaginaClass;
 
 public class SandTrapRace extends Race {
 	public function SandTrapRace(id:int) {
-		super("Sand trap", id);
+		super("Sand Trap", id);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 	}

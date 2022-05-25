@@ -3422,7 +3422,7 @@ use namespace CoC;
 			scores[Races.HUMAN.id][2] = 1;
 			// drop races of tier 0
 			scores = scores.filter(varargify(function(e:Array):Boolean {
-				return e && e[2] >= 0;
+				return e && e[2] > 0;
 			}));
 			scores.sortOn("1", Array.NUMERIC|Array.DESCENDING);
 			return scores[0][0];

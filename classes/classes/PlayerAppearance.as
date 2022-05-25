@@ -278,10 +278,6 @@ public class PlayerAppearance extends BaseContent {
 
 		//Hip info only displays if you aren't a centaur.
 		if (player.isBiped() || player.isNaga()) {
-			trace ("Hips");
-			trace (player.hips.type);
-			trace ("Thickness");
-			trace (player.thickness);
 			if (player.thickness > 70) {
 				lowerBodyDesc += " You have " + hipDescript();
 				if (player.hips.type < 6) {
@@ -970,7 +966,7 @@ public class PlayerAppearance extends BaseContent {
 			printLink("score", "sort,1");
 		} else {
 			printLink('name',"sort,0");
-			outputText('<b>name</b>');
+			outputText(', <b>score</b>');
 		}
 		outputText(". ");
 		outputText("Click on a race to view details.\n");
@@ -1034,7 +1030,7 @@ public class PlayerAppearance extends BaseContent {
 					RacialScores(clickedRace2, sortBy);
 					break;
 				case "sort":
-					RacialScores(clickedRace, parseInt(parts[2]));
+					RacialScores(clickedRace, parseInt(parts[1]));
 					break;
 				case "tf":
 					clearOutput();

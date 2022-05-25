@@ -24,7 +24,7 @@ public class YukiOnnaRace extends Race {
 				.faceType(Face.YUKI_ONNA, +1)
 				.rearType(RearBody.GLACIAL_AURA, +1)
 				.wingType(Wings.LEVITATION, +3)
-				.femininity(GREATER_THAN(99), +1)
+				.femininity(100, +1)
 				.noCock(+1)
 				.hasVagina(+1);
 		

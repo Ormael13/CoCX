@@ -65,6 +65,7 @@ public class RaceTier {
 		return Utils.extend({}, _buffs);
 	}
 	public function hasBuffs():Boolean {
+		if (extraBonuses.length > 0) return true;
 		//noinspection LoopStatementThatDoesntLoopJS
 		for (var key:String in _buffs) {
 			return true;

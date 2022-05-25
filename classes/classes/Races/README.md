@@ -1,6 +1,3 @@
-# TODO @aimozg
-* Check generated requirement names
-
 # New Race system
 
 ## Architecture

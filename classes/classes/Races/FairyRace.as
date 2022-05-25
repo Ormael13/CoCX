@@ -4,6 +4,7 @@ import classes.BodyParts.*;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+import classes.lists.BreastCup;
 
 public class FairyRace extends Race {
 	public function FairyRace(id:int) {
@@ -24,7 +25,7 @@ public class FairyRace extends Race {
 				.legType(LowerBody.ELF, +1)
 				.tongueType(Tongue.ELF, +1)
 				.wingType(Wings.FAIRY, +3)
-				.breastRowCount(GREATER_THAN(0), +1)
+				.biggestTitSize(GREATER_THAN(BreastCup.A), +1)
 				.customRequirement("skin","flawless skin",
 						function (body:BodyData):Boolean {
 							return body.player.skinType == Skin.PLAIN && body.skinBaseAdj == "flawless"

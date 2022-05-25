@@ -58,8 +58,8 @@ public class RaceScoreBuilder {
 		addRequirement(
 				RacialRequirement.joinAnd(
 						"eyes",
-						" colored ",
-						slotRequirement(BodyData.SLOT_EYE_COLOR, color, score, failScore, false),
+						"; ",
+						slotRequirement(BodyData.SLOT_EYE_COLOR, color, score, failScore),
 						slotRequirement(BodyData.SLOT_EYE_TYPE, type, score, failScore)
 				),
 				customName
@@ -89,8 +89,8 @@ public class RaceScoreBuilder {
 		addRequirement(
 				RacialRequirement.joinAnd(
 						"hair",
-						" colored ",
-						slotRequirement(BodyData.SLOT_HAIR_COLOR, color, score, failScore, false),
+						"; ",
+						slotRequirement(BodyData.SLOT_HAIR_COLOR, color, score, failScore),
 						slotRequirement(BodyData.SLOT_HAIR_TYPE, type, score, failScore)
 				), customName
 		);
@@ -119,21 +119,21 @@ public class RaceScoreBuilder {
 		return this;
 	}
 	public function isTaur(score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
-		return customRequirement("legs",customName||"is taur",
+		return customRequirement("legs",customName||"taur lower body",
 				function (body:BodyData):Boolean {
 					return body.isTaur;
 				},
 				score, failScore);
 	}
 	public function isNotTaur(score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
-		return customRequirement("legs",customName||"is not taur",
+		return customRequirement("legs",customName||"not taur lower body",
 				function (body:BodyData):Boolean {
 					return !body.isTaur;
 				},
 				score, failScore);
 	}
 	public function isNaga(score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
-		return customRequirement("legs",customName||"is naga",
+		return customRequirement("legs",customName||"naga-like lower body",
 				function (body:BodyData):Boolean {
 					return body.isNaga;
 				},
@@ -188,7 +188,7 @@ public class RaceScoreBuilder {
 						"skin coat",
 						" and ",
 						slotRequirement(BodyData.SLOT_SKIN_COAT_COLOR, color1, score, failScore, false),
-						slotRequirement(BodyData.SLOT_SKIN_COAT_COLOR2, color2, score, failScore, false)
+						slotRequirement(BodyData.SLOT_SKIN_COAT_COLOR2, color2, score, failScore)
 				)
 		);
 		return this;

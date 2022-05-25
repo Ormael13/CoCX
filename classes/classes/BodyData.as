@@ -15,6 +15,7 @@ public class BodyData {
 	 * - value: numerical id
 	 * - id: name of the constant ("FACE_TYPE")
 	 * - name: human-readable name ("face")
+	 * - suffix: suffix appended to phrase about this type
 	 *
 	 * - nameFn (optional): `function(value:*):String` converting values stored in this slot to readable name (minus name of the entry itself)
 	 * - phraseFn (optional): `function(operator:String value:*):String` to create text definition of a requirement phrase
@@ -24,28 +25,28 @@ public class BodyData {
 	 *
 	 * Equality (x == value)
 	 * - call: phraseFn("eq", value).
-	 * - default: nameFn(value) + " " + slot.name
+	 * - default: nameFn(value) + " " + slot.suffix
 	 * - example (face): phraseFn("eq", Face.HUMAN), default is "human face"
 	 *
 	 * Inequality (x != value)
 	 * - call: phraseFn("ne", value)
-	 * - default: "not " + nameFn(value) + " " + slot.name
+	 * - default: "not " + nameFn(value) + " " + slot.suffix
 	 * - example (face): phraseFn("eq", Face.HUMAN), default is "not human face"
 	 *
 	 * Other comparison operators: > "gt", < "lt", >= "ge", <= "le"
 	 * - call: phraseFn("gt"|"lt"|"ge"|"le", value)
-	 * - default: "more than/less than/at least/at most" + nameFn(value) + " " + slot.name
+	 * - default: "more than/less than/at least/at most" + nameFn(value) + " " + slot.suffix
 	 * - example (tail count): phraseFn("ge", 2), default "at least 2 tail(s)"
 	 *
 	 * Inclusion: values.indexOf(x) >= 0
 	 * - call: phraseFn("any", values)
-	 * - default: (values converted with nameFn joined with ", " and " or ") + " " + slot.name
+	 * - default: (values converted with nameFn joined with ", " and " or ") + " " + slot.suffix
 	 * - example: phraseFn("any", [Ears.WOLF, Ears.FOX, Ears.CAT]),
 	 *            default would be "wolf, fox or cat ears"
 	 *
 	 * Inclusion: values.indexOf(x) >= 0
 	 * - call: phraseFn("any", values)
-	 * - default: "neither " + (values converted with nameFn joined with ", " and " nor ") + " " + slot.name
+	 * - default: "neither " + (values converted with nameFn joined with ", " and " nor ") + " " + slot.suffix
 	 * - example: phraseFn("none", [Ears.WOLF, Ears.FOX, Ears.CAT]),
 	 *            default would be "neither wolf, fox nor cat ears"
 	 */
@@ -89,9 +90,10 @@ public class BodyData {
 		}
 	}
 	public static function slotPhraseFn(slotid:int, suffix:Boolean=true):Function {
-		if (Slots[slotid].phraseFn) return Slots[slotid].phraseFn;
-		var slotName:String = Slots[slotid].name;
-		var nameFn:Function = Slots[slotid].nameFn || function (value:*):String {
+		var decl:Object = Slots[slotid];
+		if (decl.phraseFn) return decl.phraseFn;
+		var slotName:String = ("suffix" in decl) ? decl.suffix : decl.name;
+		var nameFn:Function = decl.nameFn || function (value:*):String {
 			return ""+value;
 		};
 		return function(operator:String, value:*):String {
@@ -150,7 +152,8 @@ public class BodyData {
 	}
 	public static const SLOT_EYE_COLOR:int = _slotid++;
 	EnumValue.add(Slots,SLOT_EYE_COLOR, "EYE_COLOR", {
-		name:"eye color"
+		name:"eye color",
+		suffix:"eyes"
 	});
 	public function get eyeColor():String {
 		return data[SLOT_EYE_COLOR];
@@ -191,7 +194,8 @@ public class BodyData {
 	}
 	public static const SLOT_HAIR_COLOR:int = _slotid++;
 	EnumValue.add(Slots,SLOT_HAIR_COLOR, "HAIR_COLOR", {
-		name:"hair color"
+		name:"hair color",
+		suffix:"hair"
 	});
 	public function get hairColor():String {
 		return data[SLOT_HAIR_COLOR];
@@ -201,6 +205,7 @@ public class BodyData {
 	EnumValue.add(Slots,SLOT_HORN_TYPE, "HORN_TYPE", {
 		name:"horns",
 		nameFn: function(value:int):String {
+			if (value == Horns.NONE) return "no ";
 			return Horns.Types[value].name;
 		}
 	});
@@ -210,7 +215,8 @@ public class BodyData {
 	
 	public static const SLOT_HORN_COUNT:int = _slotid++;
 	EnumValue.add(Slots,SLOT_HORN_COUNT, "HORN_COUNT", {
-		name:"horns",
+		name:"horn count/size",
+		suffix:"horns",
 		nameFn: function(value:int):String {
 			if (value === 0) return "no";
 			return ""+value;
@@ -233,7 +239,8 @@ public class BodyData {
 	
 	public static const SLOT_REAR_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_REAR_TYPE, "REAR_TYPE", {
-		name:"",
+		name:"rear",
+		suffix:"",
 		nameFn: function(value:int):String {
 			if (value == RearBody.NONE) return "ordinary rear";
 			return RearBody.Types[value].name;
@@ -245,8 +252,9 @@ public class BodyData {
 	
 	public static const SLOT_SKIN_COVERAGE:int = _slotid++;
 	
-	EnumValue.add(Slots,SLOT_SKIN_COVERAGE, "SKIN_BASE_TYPE", {
-		name:"covered skin",
+	EnumValue.add(Slots,SLOT_SKIN_COVERAGE, "SKIN_COVERATE", {
+		name:"skin coverage",
+		suffix:"covered skin",
 		nameFn: function(value:int):String {
 			return [
 					"not",
@@ -279,7 +287,8 @@ public class BodyData {
 	
 	public static const SLOT_SKIN_COLOR:int = _slotid++;
 	EnumValue.add(Slots,SLOT_SKIN_COLOR, "SKIN_COLOR", {
-		name:"skin color"
+		name:"skin color",
+		suffix:"skin"
 	});
 	public function get skinColor():String {
 		return data[SLOT_SKIN_COLOR];
@@ -299,7 +308,8 @@ public class BodyData {
 	
 	public static const SLOT_SKIN_BASE_COLOR:int = _slotid++;
 	EnumValue.add(Slots,SLOT_SKIN_BASE_COLOR, "SKIN_BASE_COLOR", {
-		name:"skin color"
+		name:"skin color",
+		suffix:"skin"
 	});
 	public function get skinBaseColor():String {
 		return data[SLOT_SKIN_BASE_COLOR];
@@ -308,6 +318,7 @@ public class BodyData {
 	public static const SLOT_SKIN_BASE_PATTERN:int = _slotid++;
 	EnumValue.add(Slots,SLOT_SKIN_BASE_PATTERN, "SKIN_BASE_PATTERN", {
 		name:"skin pattern",
+		suffix:"pattern",
 		nameFn: function(value:int):String {
 			if (value === Skin.PATTERN_NONE) return "no";
 			return Skin.PatternTypes[value].name;
@@ -328,12 +339,9 @@ public class BodyData {
 	public static const SLOT_SKIN_COAT_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_SKIN_COAT_TYPE, "SKIN_COAT_TYPE", {
 		name:"coat",
+		suffix:"",
 		nameFn: function(value:int):String {
 			return Skin.SkinTypes[value].name;
-		},
-		phraseFn: function(operator:String, value:*):String {
-			// "scales coat" -> simply "scales"
-			return Utils.trimRight(defaultPhrase(operator, value, Slots[SLOT_SKIN_COAT_TYPE].nameFn, ""));
 		}
 	});
 	public function get skinCoatType():int {
@@ -342,7 +350,8 @@ public class BodyData {
 	
 	public static const SLOT_SKIN_COAT_COLOR:int = _slotid++;
 	EnumValue.add(Slots,SLOT_SKIN_COAT_COLOR, "SKIN_COAT_COLOR", {
-		name:"coat color"
+		name:"coat color",
+		suffix:"coat"
 	});
 	public function get skinCoatColor():String {
 		return data[SLOT_SKIN_COAT_COLOR];
@@ -350,7 +359,8 @@ public class BodyData {
 	
 	public static const SLOT_SKIN_COAT_COLOR2:int = _slotid++;
 	EnumValue.add(Slots,SLOT_SKIN_COAT_COLOR2, "SKIN_COAT_COLOR2", {
-		name:"coat color"
+		name:"coat secondary color",
+		suffix: "coat"
 	});
 	public function get skinCoatColor2():String {
 		return data[SLOT_SKIN_COAT_COLOR2];
@@ -359,6 +369,7 @@ public class BodyData {
 	public static const SLOT_SKIN_COAT_PATTERN:int = _slotid++;
 	EnumValue.add(Slots,SLOT_SKIN_COAT_PATTERN, "SKIN_COAT_PATTERN", {
 		name:"coat pattern",
+		suffix:"pattern",
 		nameFn: function(value:int):String {
 			if (value === Skin.PATTERN_NONE) return "no";
 			return Skin.PatternTypes[value].name;
@@ -373,6 +384,8 @@ public class BodyData {
 		name:"tail",
 		nameFn: function(value:int):String {
 			if (value == Tail.NONE) return "no";
+			if (value == Tail.NEKOMATA_FORKED_1_3) return "forked at 1/3 cat";
+			if (value == Tail.NEKOMATA_FORKED_2_3) return "forked at 2/3 cat";
 			return Tail.Types[value].name;
 		}
 	});
@@ -381,17 +394,18 @@ public class BodyData {
 	}
 	public static const SLOT_TAIL_COUNT:int = _slotid++;
 	EnumValue.add(Slots,SLOT_TAIL_COUNT, "TAIL_COUNT", {
+		suffix:"tail count",
 		name:"tail(s)",
 		nameFn: function(value:int):String {
 			if (value == 0) return "no";
 			return Utils.num2Text(value);
-		},
+		}/*,
 		phraseFn: function (operator:String, value:*):String {
 			if (value is Number) {
-				if (value == 0 || value == 1) return defaultPhrase(operator, value, Slots[SLOT_TAIL_COUNT].nameFn, "tail");
+				if (value == 0 || value == 1) return defaultPhrase(operator, value, Slots[SLOT_TAIL_COUNT].nameFn, " tail");
 			}
-			return defaultPhrase(operator, value, Slots[SLOT_TAIL_COUNT].nameFn, "tails");
-		}
+			return defaultPhrase(operator, value, Slots[SLOT_TAIL_COUNT].nameFn, " tails");
+		}*/
 	});
 	public function get tailCount():int {
 		return data[SLOT_TAIL_COUNT];
@@ -435,6 +449,7 @@ public class BodyData {
 	public static const SLOT_GENDER:int = _slotid++;
 	EnumValue.add(Slots,SLOT_GENDER, "GENDER", {
 		name:"gender",
+		suffix:"",
 		nameFn: function(value:int):String {
 			switch(value) {
 				case Gender.GENDER_NONE: return "genderless";
@@ -454,6 +469,19 @@ public class BodyData {
 		name: "height",
 		nameFn: function (value:Number):String {
 			return Measurements.footInchOrMetres(value);
+		},
+		phraseFn: function (operator:String, value:*):String {
+			switch (operator) {
+				case "ge":
+					return Measurements.footInchOrMetres(value)+" tall or more";
+				case "gt":
+					return "taller than "+Measurements.footInchOrMetres(value);
+				case "le":
+					return Measurements.footInchOrMetres(value)+" tall or less";
+				case "lt":
+					return "shorter than "+Measurements.footInchOrMetres(value);
+			}
+			return defaultPhrase(operator, value, Measurements.footInchOrMetres, "height");
 		}
 	});
 	public function get height():int {
@@ -464,9 +492,14 @@ public class BodyData {
 	EnumValue.add(Slots,SLOT_FEMININITY, "FEMININITY", {
 		name: "femininity",
 		nameFn: function (value:Number):String {
-			if (value > 55) return ""+value+" (femininie)"
+			if (value == 100) return ""+value+" (maximum feminine)"
+			if (value > 55) return ""+value+" (feminine)"
 			if (value > 45) return ""+value+" (androgynous)";
+			if (value == 0) return ""+value+" (maximum masculine)"
 			return ""+value+" (masculine)"
+		},
+		phraseFn: function (operator:String, value:*):String {
+			return "femininity "+defaultPhrase(operator, value, Slots[SLOT_FEMININITY].nameFn, "");
 		}
 	});
 	public function get femininity():int {
@@ -512,7 +545,8 @@ public class BodyData {
 	
 	public static const SLOT_BIGGEST_COCK_LENGTH:int = _slotid++;
 	EnumValue.add(Slots,SLOT_BIGGEST_COCK_LENGTH, "BIGGEST_COCK_LENGTH", {
-		name:"long cock",
+		name:"cock length",
+		suffix:"long cock",
 		nameFn: function(value:Number):String {
 			return Measurements.inchesOrCentimetres(value);
 		}
@@ -523,9 +557,23 @@ public class BodyData {
 	
 	public static const SLOT_BIGGEST_TIT_SIZE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_BIGGEST_TIT_SIZE, "BIGGEST_TIT_SIZE", {
-		name:"chest",
+		name:"breast size",
+		suffix:"breasts",
 		nameFn: function(value:int):String {
 			return Appearance.breastCup(value);
+		},
+		phraseFn: function (operator:String, value:*):String {
+			switch (operator) {
+				case "gt":
+					return "bigger than "+Appearance.breastCup(value)+" breasts";
+				case "gte":
+					return "at least "+Appearance.breastCup(value)+" breasts";
+				case "lt":
+					return "smaller than "+Appearance.breastCup(value)+" breasts";
+				case "lte":
+					return "no bigger than "+Appearance.breastCup(value)+" breasts";
+			}
+			return defaultPhrase(operator, value, Appearance.breastCup, "breasts");
 		}
 	});
 	public function get biggestTitSize():int {

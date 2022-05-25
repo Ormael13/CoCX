@@ -87,7 +87,7 @@ public class RearBody extends BodyPart {
 	});
 	public static const METAMORPHIC_GOO: int = 13;
 	EnumValue.add(Types, METAMORPHIC_GOO, "METAMORPHIC_GOO", {
-		name: "metamorphic goo",
+		name: "metamorphic goo rear",
 		appearanceDesc: "Since your body is made of malleable goo you can reshape your form however you want to gain tentacle or any limb or appendage whenever you need one either for combat or for fun."
 	});
 	//public static const thundermantisrearbody: int = 14;//button 0 on 2nd page of metamorph

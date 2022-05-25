@@ -13,7 +13,7 @@ public class WoodElfRace extends Race{
 	public override function setup():void {
 		
 		addScores()
-				.hasPerk(PerkLib.BlessingOfTheAncestorTree, +4, -100)
+				.hasPerk(PerkLib.BlessingOfTheAncestorTree, +4, -1000)
 				.earType(Ears.ELVEN, +1)
 				.eyeType(Eyes.ELF, +1)
 				.faceType(Face.ELF, +1)
@@ -22,8 +22,8 @@ public class WoodElfRace extends Race{
 				.legType(LowerBody.ELF, +1)
 				.hairType(Hair.SILKEN, +1)
 				.noWings(+1)
-				.hairColor("golden blonde", +1, -100)
-				.eyeColor("light green",+1, -100)
+				.hairColor("golden blonde", +1, -1000)
+				.eyeColor("light green",+1, -1000)
 				.skinBaseColor("light", +1)
 				.customRequirement("skin","flawless skin",
 						function (body:BodyData):Boolean {
@@ -36,7 +36,7 @@ public class WoodElfRace extends Race{
 							return body.hasCock && body.biggestCockSize < 6 ||
 									body.hasVagina && body.biggestTitSize >= 3
 						}, +1)
-				.corruption(AT_LEAST(50), +1, -100)
+				.corruption(AT_LEAST(50), +1, -1000)
 				.hasPerk(PerkLib.FlawlessBody, +1)
 				.hasPerk(PerkLib.ElvenSense, +1);
 		

@@ -2428,7 +2428,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				//(saveFile.data.perks as Array).splice(i,1);
 				// NEVER EVER EVER MODIFY DATA IN THE SAVE FILE LIKE THIS. EVER. FOR ANY REASON.
 			} else {
-				trace("Creating perk : " + ptype);
+//				trace("Creating perk : " + ptype);
 				var cperk:PerkClass = new PerkClass(ptype, value1, value2, value3, value4);
 
 				if (isNaN(cperk.value1)) {

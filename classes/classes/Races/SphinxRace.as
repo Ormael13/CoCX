@@ -21,8 +21,8 @@ public class SphinxRace extends Race {
 				.tailType(ANY(Tail.CAT, Tail.LION), +1)
 				.legType(LowerBody.CAT, +1)
 				.faceType(Face.CAT_CANINES, +1)
-				.wingType(Wings.FEATHERED_SPHINX, +4, -100)
-				.armType(Arms.SPHINX, 0, -100)
+				.wingType(Wings.FEATHERED_SPHINX, +4, -1000)
+				.armType(Arms.SPHINX, 0, -1000)
 				.customRequirement("","cat cock or have a vagina",
 						function (body:BodyData):Boolean {
 							return body.player.catCocks() > 0 && body.hasVagina;
@@ -30,12 +30,11 @@ public class SphinxRace extends Race {
 				.customRequirement("","fur or plain skin",
 						function (body:BodyData):Boolean {
 							return body.skinCoatType == Skin.FUR || body.player.hasPlainSkinOnly();
+						}, +1)
+				.customRequirement("legs","cat-legged taur",
+						function (body:BodyData):Boolean {
+							return body.isTaur && body.legType == LowerBody.CAT
 						}, +1);
-		addConditionedScores(
-				function (body:BodyData):Boolean {
-					return body.isTaur;
-				},"taur;")
-				.legType(LowerBody.CAT, +2);
 		addConditionedScores(
 				function (body:BodyData):Boolean {
 					return body.isTaur && body.legType == LowerBody.CAT;
