@@ -544,8 +544,8 @@ private function applyHangover():void {
 	}
 	player.statStore.addBuffObject({'str':-5,'spe':-10,'int':-15},'Hangover',{text:'Hangover', rate:Buff.RATE_HOURS, tick: 8});
 	showStatDown('str');
-	showStatUp('spe');
-	showStatUp('int');
+	showStatDown('spe');
+	showStatDown('int');
 	statScreenRefresh();
 }
 
