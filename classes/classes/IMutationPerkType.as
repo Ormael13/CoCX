@@ -91,11 +91,11 @@ public class IMutationPerkType extends PerkType
 		/**
 		 * updateDynamicPerkBuffs is used in case mutation buffs need to be reapplied/refreshed.
 		 *
-		 * @param target	Type: Character. Takes Player/enemy class as arg. Indicates if the mutation goes to Player or to an NPC.
+		 * @param target	Type: Creature. Takes Player/enemy class as arg. Indicates if the mutation goes to Player or to an NPC.
 		 */
 
 		//Updates existing mutations with new buff values.
-		public function updateDynamicPerkBuffs(target:Character):void{
+		public function updateDynamicPerkBuffs(target:Creature):void{
 			if(target == null){
 				trace("Missing target, defaulting to player.");
 				EngineCore.outputText("Someone forgot to put a target for this perk in updateDynamicPerkBuffs. Please report this. Perk: " + this.name());
