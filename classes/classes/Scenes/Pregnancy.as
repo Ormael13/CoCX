@@ -1358,7 +1358,7 @@ public class Pregnancy extends NPCAwareContent {
                     player.createPerk(PerkLib.BroodMother,0,0,0,0);
                 }
             }
-            if(!player.hasVagina) {
+            if(!player.hasVagina()) {
                 outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold: a vagina");
                 player.createVagina();
             }
