@@ -381,7 +381,7 @@ import classes.internals.Utils;
 		
 		public function buyHowlingBansheeMechAndUpgrades():void {
 			menu();
-			if (player.hasStatusEffect(StatusEffects.BuyedHowlingBansheMech)) {
+			if (player.hasStatusEffect(StatusEffects.BuyedHowlingBansheMech)) {/*
 				if (player.hasKeyItem("HB Armor Plating") >= 0) {
 					if (player.keyItemvX("HB Armor Plating", 1) == 1) addButton(0, "Armor Plating v2", buyHowlingBansheeMechUpgrade, "Armor Plating v2", 2500).hint("Increase armor by 25.");
 					if (player.keyItemvX("HB Armor Plating", 1) == 2) addButton(0, "Armor Plating v3", buyHowlingBansheeMechUpgrade, "Armor Plating v3", 3500).hint("Increase armor by 35.");
@@ -438,7 +438,7 @@ import classes.internals.Utils;
 						else addButtonDisabled(10, "Invisibility Mode v1", "Your need to have installed Internal Systems v1 or better to unlock this upgrade.");
 					}
 				}
-				else addButton(10, "Camouflage Mode", buyHowlingBansheeMechUpgrade, "Camouflage Mode", 2000).hint("Enable Camouflage Mode - Allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials.");
+				else addButton(10, "Camouflage Mode", buyHowlingBansheeMechUpgrade, "Camouflage Mode", 2000).hint("Enable Camouflage Mode - Allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials.");*/
 				//11
 				//12
 				//13
