@@ -12,20 +12,16 @@ That said, let's start with the guideline.
 Curly braces
 ------------
 ### Packages, classes and functions
-Put the open curly brace into a new line:
+Put the open curly brace into the same line:
 
 ```as3
-package foo.bar.moo
-{
-	class FooBar extends Foo
-	{
-		public function foo(moo:int):void
-		{
+package foo.bar.moo {
+	class FooBar extends Foo {
+		public function foo(moo:int):void {
 			// ...
 		}
 
-		public function bar():void
-		{
+		public function bar():void {
 			// ...
 		}
 	}
@@ -35,7 +31,11 @@ package foo.bar.moo
 In addition to that use an empty line between function definitions like in the example above.
 
 ### Control structures (if/else if/else/while/for/switch/...)
-Put the opening curly brace into **the same** line:
+I'd go with something like this:
+* Single-statement if/else branch can be put on a same line or on an indented new line.
+* If both branches are single-statement, the style must match
+* New-line is preferred, but same-line is fine for return/break/continue/other short statements like x++ or no-arg function call.
+* If one branch is block, and other is a single-statement, the latter cannot be put on a new line (should be wrapped in {} or put on same line)
 
 ```as3
 if (foobar === "moo") {
@@ -65,35 +65,36 @@ If **both** the `if (expr)` and the `else`-branch contain a single expression yo
 
 ##### Do this
 ```as3
-
-if (foo === "bar")
-	outputText("foobar");
+if (cond)
+    aaa;
 else
-	outputText("moo");
+    bbb;
 
-if (foobar === "moo") {
-	outputText("blah, blah");
-} else {
-	outputText("blah, blah");
-	outputText("yadda, yadda");
-}
-```
+if (cond) aaa;
+else bbb;
 
-##### But dont't do this:
-```as3
-if (foo === "bar")
-	outputText("foobar");
-else outputText("moo");
-
-if (foobar === "moo")
-	outputText("blah, blah");
+if (cond) aaa;
 else {
-	outputText("blah, blah");
-	outputText("yadda, yadda");
+    bbb;
+    ccc;
+}
+
+if (cond) {
+    aaa;
+    bbbb;
+} else bbb;
+```
+
+##### But don't do this:
+```as3
+if (cond)
+    aaa;
+else {
+    bbb;
+    ccc;
 }
 ```
 
-**However:** If theres even the slightest possibility, that someone may add more expressions to it its recommended to add the curly braces anyway to avoid mistake like forgetting to add curly braces and to keep future diffs less noisy.
 
 #### Good practice for the `else` in conditionals
 Try keeping the `else`-part of a conditional as near as possible to the `if`
@@ -135,7 +136,7 @@ While mode IDEs and editors may have word wrapping, GitHub hasn't and not everyo
 Many editors allow setting up a vertical line to assist you with that task. In FlashDevelop for example the settting for this is called 'Print Margin Column'. I have set mine to 150.
 
 ### Use of spaces
-Operators should always be surrounded by spaces with the exception of `++` and `--`:
+Operators should always be surrounded by spaces except `++` and `--`:
 
 ```as3
 a = 1;

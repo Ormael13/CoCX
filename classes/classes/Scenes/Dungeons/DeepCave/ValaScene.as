@@ -11,8 +11,8 @@ import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.internals.SaveableState;
 import classes.display.SpriteDb;
+import classes.internals.SaveableState;
 
 public class ValaScene extends BaseContent implements SaveableState
 	{

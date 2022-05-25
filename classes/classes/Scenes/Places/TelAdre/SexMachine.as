@@ -1,8 +1,8 @@
 ﻿package classes.Scenes.Places.TelAdre{
-	import classes.GlobalFlags.kFLAGS;
-	import classes.*;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
 
-	public class SexMachine extends TelAdreAbstractContent{
+public class SexMachine extends TelAdreAbstractContent{
 
 	public function SexMachine()
 	{
