@@ -539,14 +539,13 @@ private function applyHangover():void {
 	//v3 = speed taken
 	//v4 = intelligence
 
-	//Already hungover?  Reset duration.
-	if(player.statStore.hasBuff("Hangover")) {
-		player.statStore.addBuff("str",-1,"Hangover",{text:"Hangover",time:Buff.RATE_HOURS, tick:8});
+	if(player.statStore.hasBuff('Hangover')) {
+		player.statStore.removeBuffs('Hangover');
 	}
-	//No hangover yet?  Create and yoink stats
-	else {
-		player.statStore.addBuffObject({"str":-5,"spe":-10,"int":-15},"Hangover",{text:"Hangover",time:Buff.RATE_HOURS, tick:8});
-	}
+	player.statStore.addBuffObject({'str':-5,'spe':-10,'int':-15},'Hangover',{text:'Hangover', rate:Buff.RATE_HOURS, tick: 8});
+	showStatDown('str');
+	showStatDown('spe');
+	showStatDown('int');
 	statScreenRefresh();
 }
 

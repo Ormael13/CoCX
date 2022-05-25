@@ -247,6 +247,9 @@ public class BuffableStat implements IStat, Jsonable {
 					changed = true;
 				}
 			}
+			//else{
+			//	trace(buff.text + ": " + buff.rate);
+			//}
 		}
 		if (changed) recalculate();
 	}
