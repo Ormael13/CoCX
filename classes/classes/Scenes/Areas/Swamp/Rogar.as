@@ -1,7 +1,9 @@
 ﻿package classes.Scenes.Areas.Swamp{
 import classes.*;
 import classes.BodyParts.Tail;
+import classes.GeneticMemories.BallsMem;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Metamorph;
 import classes.Scenes.Places.TelAdre;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
@@ -736,6 +738,7 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 		if(player.balls == 0) {
 			player.balls = 2;
 			player.ballSize = 3;
+			Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
 		}
 		if(player.inte > 35) {
 			player.addCurse("int", -0.1, 2);
@@ -766,6 +769,7 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 			if(player.balls == 0) {
 				player.balls = 2;
 				player.ballSize = 3;
+				Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
 			}
 		}
 		//(Pussy b gone)

@@ -8,9 +8,11 @@ import classes.BodyParts.Face;
 import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
+import classes.GeneticMemories.BallsMem;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Scenes.Dungeons.Factory.*;
+import classes.Scenes.Metamorph;
 import classes.lists.Gender;
 import classes.display.SpriteDb;
 
@@ -313,6 +315,7 @@ use namespace CoC;
 					player.cocks[0].cockType = CockTypesEnum.DEMON;
 					player.balls = 2;
 					player.ballSize = 3;
+					Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
 				}
 				else {
 					outputText("gushing with fluids as it shapes itself into a hungry demonic cunt.");

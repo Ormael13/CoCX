@@ -20,8 +20,10 @@ package classes.Items.Consumables {
   import classes.CoC_Settings;
   import classes.CockTypesEnum;
   import classes.EngineCore;
+import classes.GeneticMemories.BallsMem;
   import classes.Items.Consumable;
   import classes.PerkLib;
+import classes.Scenes.Metamorph;
   import classes.StatusEffects;
   import classes.VaginaClass;
   import classes.CoC;
@@ -341,6 +343,7 @@ package classes.Items.Consumables {
             outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.");
             dynStats("lus", 5);
             player.MutagenBonus("lib", 2);
+            Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
           } else {
             player.ballSize++;
             if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + Appearance.ballsDescription(false, true, player) + " have grown larger than a human's.");

@@ -14,7 +14,9 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
+import classes.GeneticMemories.BallsMem;
 import classes.GlobalFlags.*;
+import classes.Scenes.Metamorph;
 import classes.lists.Gender;
 import classes.CoC;
 
@@ -1451,6 +1453,7 @@ import classes.CoC;
 				outputText("Without warning your body begins to tremble as just below [eachCock] you feel a warm trickling sensation of fluid sliding down your body. Before you can check it, the sensation becomes ovewhelming as [eachCock] grows hard and ejaculates " + player.clothedOrNaked("into your [armor]", "all over the ground") + ". Once you've recovered from your intense orgasm you " + player.clothedOrNakedLower("remove your [armor] to ") + "clean yourself and find a <b>new pair of balls</b> hanging just below [eachCock].");
 				player.balls = 2;
 				player.ballSize = 1;
+				Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
 				player.orgasm();
 				changes++;
 			}

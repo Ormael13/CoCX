@@ -694,6 +694,22 @@ package classes.Scenes {
 				{
 					name: "Tail",
 					func: accessTailMenu
+				},
+//				{
+//					name: "Breasts",
+//					func: accessBreastsMenu
+//				},
+//				{
+//					name: "Penis",
+//					func: accessCocksMenu
+//				},
+				{
+					name: "Balls",
+					func: accessBallsMenu
+				},
+				{
+					name: "Vagina",
+					func: accessVaginaMenu
 				}
 			];
 
@@ -901,6 +917,32 @@ package classes.Scenes {
 			outputText("[pg]Perhaps you'd like to change this?");
 
 			openPaginatedMenu(title, accessTailMenu, currentPage, TailMem.Memories);
+		}
+
+		private function accessBallsMenu(currentPage: int = 0): void {	//TODO: convert to BodyPart, opt for none, duo, quad, trap-pouch
+			const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Balls</u></font>\n";
+
+			clearOutput();
+			outputText(title);
+
+			const ballsDesc: String = player.ballsDescriptArticle();
+			outputText(player.balls > 0 ?  ballsDesc : "You have no balls.");
+			outputText("[pg]Perhaps you'd like to change this?");
+
+			openPaginatedMenu(title, accessBallsMenu, currentPage, BallsMem.Memories);
+		}
+
+		private function accessVaginaMenu(currentPage: int = 0): void {	//TODO: convert to BodyPart, opt for human, horse, shark, raiju
+			const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Vagina</u></font>\n";
+
+			clearOutput();
+			outputText(title);
+
+			const vaginaDesc: String = CoC.instance.playerAppearance.describePussy();
+			outputText(player.hasVagina() ?  vaginaDesc : "You have no vagina.");
+			outputText("[pg]Perhaps you'd like to change this?");
+
+			openPaginatedMenu(title, accessVaginaMenu, currentPage, VaginaMem.Memories);
 		}
 
 		private function openPaginatedMenu (title: String, thisMenu: *, currentPage: int, memArray:Array): void {

@@ -9927,7 +9927,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 				player.vaginaType(VaginaClass.HUMAN, vagina);
 
-				//Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.HUMAN));
+				Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.HUMAN));
 			},
 			// is present
 			function ():Boolean {
@@ -9961,7 +9961,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.vaginaType(VaginaClass.EQUINE, vagina);
 					player.vaginas[vagina].vaginalLooseness = VaginaClass.LOOSENESS_GAPING;
 
-					//Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.EQUINE));
+					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.EQUINE));
 				},
 				// is present
 				function ():Boolean {
@@ -9998,7 +9998,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.BLACK_SAND_TRAP);
 
-					//Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.BLACK_SAND_TRAP));
+					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.BLACK_SAND_TRAP));
 				},
 				// is present
 				function ():Boolean {
@@ -10028,7 +10028,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.CAVE_WYRM);
 
-					//Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.CAVE_WYRM));
+					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.CAVE_WYRM));
 				},
 				// is present
 				function ():Boolean {
@@ -10068,7 +10068,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.VENOM_DRIPPING, vagina);
 
-					//Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.VENOM_DRIPPING));
+					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.VENOM_DRIPPING));
 				},
 				// is present
 				function ():Boolean {
@@ -10102,7 +10102,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.MANTICORE, vagina);
 
-					//Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.EQUINE));
+					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.EQUINE));
 				},
 				// is present
 				function ():Boolean {
@@ -10138,7 +10138,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 					player.vaginaType(VaginaClass.CANCER, vagina);
 
-					//Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.CANCER));
+					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.CANCER));
 				},
 				// is present
 				function ():Boolean {
@@ -10168,7 +10168,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.DEMONIC, vagina);
 
-					//Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.DEMONIC));
+					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.DEMONIC));
 				},
 				// is present
 				function ():Boolean {
@@ -10202,7 +10202,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.vaginaType(VaginaClass.SCYLLA, vagina);
 					player.vaginas[vagina].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
 
-					//Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.SCYLLA));
+					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.SCYLLA));
 				},
 				// is present
 				function ():Boolean {
@@ -10239,7 +10239,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.vaginas[vagina].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
 					player.vaginaType(VaginaClass.NAGA, vagina);
 
-					//Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.NAGA));
+					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.NAGA));
 				},
 				// is present
 				function ():Boolean {
@@ -10277,7 +10277,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.SHARK, vagina);
 
-					//Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.SHARK));
+					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.SHARK));
 				},
 				// is present
 				function ():Boolean {
@@ -10308,7 +10308,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.RAIJU, vagina);
 
-					//Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.RAIJU));
+					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.RAIJU));
 				},
 				// is present
 				function ():Boolean {

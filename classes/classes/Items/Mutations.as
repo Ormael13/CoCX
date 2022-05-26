@@ -14,12 +14,14 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
+import classes.GeneticMemories.BallsMem;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Consumables.EmberTF;
 import classes.PerkLib;
 import classes.Scenes.Areas.Forest.KitsuneScene;
+import classes.Scenes.Metamorph;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.Transformations.TransformationUtils;
@@ -4775,6 +4777,7 @@ public final class Mutations extends MutationsHelper {
                     outputText(" and a pair of balls");
                     player.balls = 2;
                     player.ballSize = 2;
+                    Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
                 }
                 outputText("!");
                 player.createCock(7, 1.4);
@@ -8048,6 +8051,7 @@ public final class Mutations extends MutationsHelper {
                 outputText(" and a pair of balls");
                 player.balls = 2;
                 player.ballSize = 2;
+                Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
             }
             outputText("!");
             player.createCock(7, 1.4);
@@ -8433,6 +8437,7 @@ public final class Mutations extends MutationsHelper {
                 outputText("a heavy flesh bag not unlike a pair of ball form beneath your cock. " +
                         "At first you think this is a standard set of balls but no this is something else altogether. ");
                 player.balls = 2;
+                Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
             }
             outputText("You are proven right a few second later when they begin to inflate, " +
                     "gaining in weight. Overcome by lust you begin jerking your cock, something large and pleasurable sliding out of your nuts and running down the length of your [cock]. " +
@@ -9625,12 +9630,14 @@ public final class Mutations extends MutationsHelper {
                     outputText("  Right on cue, two cum-laden testicles drop in behind it, their contents swirling and churning.");
                     player.balls = 2;
                     player.ballSize = 3;
+                    Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
                 }
                 outputText("[pg]");
             } else if (player.balls == 0) {
                 outputText("A swelling begins behind your man-meat, and you're assailed with an incredibly peculiar sensation as two sperm-filled balls drop into a newly-formed scrotum.  Frikkin' sweet![pg]");
                 player.balls = 2;
                 player.ballSize = 3;
+                Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
             }
             outputText("Finally, you feel the transformation skittering to a halt, leaving you to openly roam your new chiseled and sex-ready body.  So what if you can barely form coherent sentences anymore?  A body like this does all the talking you need, you figure!");
             MutagenBonus("lib", .1);
@@ -9704,6 +9711,7 @@ public final class Mutations extends MutationsHelper {
                 outputText("Two rounded orbs drop down below, filling out a new, fleshy sac above your [legs].  Sweet!  You can probably cum buckets with balls like these.");
                 player.balls = 2;
                 player.ballSize = 3;
+                Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
             }
             outputText("[pg]");
         }
@@ -9718,6 +9726,7 @@ public final class Mutations extends MutationsHelper {
             if (player.balls == 0) {
                 player.balls = 2;
                 player.ballSize = 3;
+                Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
             }
         }
         //(Pussy b gone)
@@ -12335,6 +12344,7 @@ public final class Mutations extends MutationsHelper {
                 //[Note: Balls description should no longer say \"swings heavily beneath\".  For simplicity's sake sex scenes should continue to assume two balls]
                 player.ballSize = 1;
                 player.createStatusEffect(StatusEffects.Uniball, 0, 0, 0, 0);
+                Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.TRAP));
             } else if (player.ballSize < 1) player.ballSize = 1;
             changes++;
         }
@@ -12536,6 +12546,7 @@ public final class Mutations extends MutationsHelper {
                 outputText("[pg]As you eat, you contemplate your masked appearance; it strikes you that you're dangerously close to the classic caricature of a thief.  Really, all it would take is a big, nondescript sack and a hurried gait and everyone would immediately think the worst of you.  In a brief fit of pique, you wish you had such a bag to store your things in, eager to challenge a few assumptions.  A few minutes into that line of thought, a twisting ache in your crotch bends you double, and you expose yourself hurriedly to examine the region.  As you watch, a balloon of flesh forms on your crotch, and two lumps migrate from below your navel down into it.  <b>Looks like you have a sack, after all.</b>");
                 player.balls = 2;
                 player.ballSize = 1;
+                Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
                 changes++;
             }
         }
