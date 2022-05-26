@@ -11522,7 +11522,7 @@ use namespace CoC;
 			//Hot blooded perk raises min lust!
 			if (hasPerk(PerkLib.HotBlooded)) min += Math.round(minCap * 0.2);
 			if (hasPerk(PerkLib.LuststickAdapted)) min += Math.round(minCap * 0.1);
-			if (hasStatusEffect(StatusEffects.Infested)) min += min += Math.round(minCap * 0.5);
+			if (hasStatusEffect(StatusEffects.Infested)) min += Math.round(minCap * 0.5);
 			//Add points for Crimstone
 			min += Math.round(minCap * perkv1(PerkLib.PiercedCrimstone) * 0.01);
 			//Subtract points for Icestone!

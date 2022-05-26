@@ -872,6 +872,15 @@ public class PerkMenu extends BaseContent {
 			outputText("You have " + mutationCount + " mutation slot" + (mutationCount > 1 ? "s":"") + " per part." +
 					"\nNote: Not all body parts will use all available slots.\n\n");
 
+			outputText("Mutations can be obtained by ");
+			if (flags[kFLAGS.MUTATIONS_SPOILERS] || EvangelineFollower.EvangelineAffectionMeter >= 3){
+				outputText("finding Evangeline and asking her about it.\n");
+			}
+			else{
+				outputText("looking around for an alchemist specializing in transformatives.\n");
+			}
+			outputText("Mutations Assistant is toggleable in settings, and hides/shows you available mutations. It is off by default.\n\n");
+
 			outputText("<b><i><u>Mutations used per bodypart:</u></i></b>\n");
 			var bPartlist:Array = ["Heart", "Muscle", "Mouth", "Adrenals", "Bloodstream", "FaT", "Lungs", "Metabolism", "Ovaries", "Testicles", "Eyes", "Bone", "Nerv/Sys", "Thyroid", "PThyroid", "Adaptations"]
 			for each (var bodyPart:String in bPartlist){
@@ -903,14 +912,6 @@ public class PerkMenu extends BaseContent {
 					}
 				}
 			}
-			outputText("Mutations can be obtained by ");
-			if (flags[kFLAGS.MUTATIONS_SPOILERS] || EvangelineFollower.EvangelineAffectionMeter >= 3){
-				outputText("finding Evangeline and asking her about it.\n");
-			}
-			else{
-				outputText("looking around for an alchemist specializing in transformatives.\n");
-			}
-			outputText("Mutations Assistant is toggleable in settings, and hides/shows you available mutations. It is off by default.\n");
 		}
 
 		function mutationsDBHeart():void{
@@ -1124,7 +1125,7 @@ public class PerkMenu extends BaseContent {
 					outputText("\nRequirements for next tier: " + reqs.join(", "));
 					outputText("\nDescription: ");
 					if(mutation.desc().length <= 1) {	//Some desc. contains only "."
-						if (player.perkv1(mutation) == 0) outputText("You don't have this Mutation yet.");
+						if (player.perkv1(mutation) == 0) outputText(mutation.desc());
 						else outputText("No description available.");
 					}
 					else{
@@ -1140,7 +1141,7 @@ public class PerkMenu extends BaseContent {
 			}
 			else{
 				for each(var mutation2:IMutationPerkType in mutationsArray){
-					if (player.hasPerk(mutation2)) {
+					if (player.hasMutation(mutation2)) {
 						outputText("\n" + mutation2.name() + ": <font color=\"#008000\">Acquired.</font>");
 						outputText("\nTier: " + player.perkv1(mutation2));
 						outputText("\nDescription: ");
