@@ -111,7 +111,7 @@ public class MinotaurBlood extends Consumable {
 					player.vaginas[0].vaginalLooseness--;
 				}
 				else {
-					outputText("\n\nA tightness in your groin is the only warning you get before your <b>" + Appearance.vaginaDescript(player,0) + " disappears forever</b>!");
+					outputText("\n\nA tightness in your groin is the only warning you get before your <b>[vagina] disappears forever</b>!");
 					//Goodbye womanhood!
 					player.removeVagina(0, 1);
 					if (player.cocks.length == 0) {

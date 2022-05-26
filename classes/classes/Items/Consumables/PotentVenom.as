@@ -144,7 +144,7 @@ public class PotentVenom extends Consumable {
 			//Male and herm area
 			if (player.cockTotal() > 1)//merge back cock into one
 			{
-				outputText("and watch spellbound as your cocks all merge togueter back into a single human one. ");
+				outputText("and watch spellbound as your cocks all merge together back into a single human one. ");
 				playerhadmorethenonecock = true;
 				player.cocks.length = 1;
 			}

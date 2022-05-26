@@ -4775,8 +4775,7 @@ public final class Mutations extends MutationsHelper {
             }
             //Shark Cunt
             if (changes < changeLimit && rand(3) == 0 && player.vaginaType() != VaginaClass.SHARK && player.hasVagina()) {
-                outputText("[pg]Something invisible brushes against your sex, making you twinge. Undoing your clothes, you take a look at your vagina. It looks normal at a first glance despite the odd sensation but inserting your fingers inside reveals that your walls are now covered with small sensitive tendril-like feelers. You blush as they instinctively drive your digits further in, attempting to milk them like they would a penis. <b>It looks like your vagina has turned into that of a shark girl.</b>");
-                player.vaginaType(15);
+                transformations.VaginaShark().applyEffect();
                 changes++;
             }
             //WANG GROWTH - TIGGERSHARK ONLY
@@ -5092,9 +5091,7 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
             if ((player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.HYDRA) && player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE) {
-                outputText("[pg]Something fundamental changes in your " + vaginaDescript() + " as the insides begins to heat up. Out of curiosity you take a peak and notice amazed that the interior of your cunt has deepened to ridiculus extent running all the way farther into your tail. Intrigued you literally shove your entire hand inside and gasp as your snatch instantly grips it and reflectively tries to pull it deeper in heck you could easily insert a good part of your own tail inside and still find space. It takes all of your willpower not to fist yourself to orgasm. <b>Your vagina is now like that of a naga and can take in lenghtier insertions.</b>");
-                player.vaginaType(13);
-                player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
+                transformations.VaginaNaga().applyEffect();
                 changes++;
             }
         }
@@ -5362,9 +5359,7 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
             if (player.lowerBody == LowerBody.NAGA && player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE && changes < changeLimit && rand(3) == 0) {
-                outputText("[pg]Something fundamental changes in your " + vaginaDescript() + " as the insides begins to heat up. Out of curiosity you take a peak and notice amazed that the interior of the gaping maw that is your cunt has changed in form and texture. For one you no longer have a clitoris, Instead, several concentric rings of small ultrasensitive nubs line up the walls of your cunt. Intrigued you literally shove your entire hand inside and gasp as your snatch instantly grips it and reflectively tries to pull it deeper in. It takes all of your willpower not to fist yourself to orgasm. <b>Your vagina is now like that of a naga and can take in lenghtier insertions.</b>");
-                player.vaginaType(12);
-                player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
+                transformations.VaginaNaga().applyEffect();
                 changes++;
             }
         }
@@ -7814,11 +7809,10 @@ public final class Mutations extends MutationsHelper {
             MutagenBonus("lib", 3);
         }
         //Vagina Turns Glowing:
-        if (player.hasVagina() && player.vaginaType() != 6 && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]You feel a sudden jolt in your pussy and undress as an irrepressible desire to masturbate takes hold of you. You keep fingering your itchy pussy moaning as you cum neon blue fluids. Wait, what? When you inspect your [vagina] you discover it has changed color to neon blue. Furthermore it seems to naturally glow in the dark like the fluids it now squirt.  <b>You now have a neon blue pussy that glow in the dark.</b>");
+        if (player.hasVagina() && player.vaginaType() != VaginaClass.CAVE_WYRM && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+            transformations.VaginaCaveWyrm().applyEffect();
             dynStats("lus", 10);
             player.addCurse("sen", 2, 1);
-            player.vaginaType(6);
             changes++;
         }
         //Physical changes:
@@ -10324,10 +10318,9 @@ public final class Mutations extends MutationsHelper {
         }
         //Vagina Turns Glowing:
         if (player.hasVagina() && player.vaginaType() != 16 && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]You feel a sudden jolt in your pussy and undress as an irrepressible desire to masturbate takes hold of you. You keep fingering your itchy pussy moaning as you cum neon blue plasma. Wait, what? When you inspect your [vagina] you discover it has changed color to neon blue. Furthermore it seems to naturally glow in the dark like the fluids it now squirt.  <b>You now have a neon blue raiju pussy that glow in the dark.</b>");
+            transformations.VaginaRaiju().applyEffect();
             dynStats("lus", 10);
             player.addCurse("sen", 2, 1);
-            player.vaginaType(16);
             changes++;
         }
         //Physical changes:
@@ -12469,17 +12462,10 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Vagina Turns Black:
-        if (player.hasVagina() && player.vaginaType() != 5 && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]Your [vagina] feels... odd.  You undo your clothes and gingerly inspect your nether regions.  The tender pink color of your sex has disappeared, replaced with smooth, marble blackness starting at your lips and working inwards.");
-            //(Wet:
-            if (player.wetness() >= 3) outputText("  Your natural lubrication makes it gleam invitingly.");
-            //(Corruption <50:
-            if (player.cor < 50) outputText("  After a few cautious touches you decide it doesn't feel any different- it does certainly look odd, though.");
-            else outputText("  After a few cautious touches you decide it doesn't feel any different - the sheer bizarreness of it is a big turn on though, and you feel it beginning to shine with anticipation at the thought of using it.");
-            outputText("  <b>Your vagina is now ebony in color.</b>");
+        if (player.hasVagina() && player.vaginaType() != VaginaClass.BLACK_SAND_TRAP && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+            transformations.VaginaSandTrap().applyEffect();
             dynStats("lus", 10);
             player.addCurse("sen", 2, 1);
-            player.vaginaType(5);
             changes++;
         }
         //Dragonfly Wings:
@@ -13494,8 +13480,7 @@ public final class Mutations extends MutationsHelper {
                     changes++;
                 }
                 if (player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE && changes < changeLimit && rand(3) == 0) {
-                    outputText("[pg]Something fundamental changes in your "+vaginaDescript()+" as the insides begins to heat up. Out of curiosity you take a peak and notice amazed that the interior of the gaping maw that is your cunt has changed in form and texture. For one you no longer have a clitoris, Instead, several concentric rings of small ultrasensitive nubs line up the walls of your cunt. Intrigued you literally shove your entire fist inside and gasp as the sensitive rings instantly grips it and reflectively tries to pull it deeper in. It takes all of your willpower not to fist yourself to orgasm.");
-                    player.vaginaType(12);
+                    transformations.VaginaScylla().applyEffect();
                     changes++;
                 }
             }
@@ -17245,9 +17230,7 @@ public final class Mutations extends MutationsHelper {
                     player.orgasm();
                 }
                 if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) {
-                    if (player.vaginas.length == 1) outputText("Your pussy starts foaming bubbles for a few seconds, juice slowly flowing out. You cannot resist as your hands dive into your [vagina]. Your pussy gushes, foaming more and more bubbles until you suddenly shoot a powerful bubble jet. You make a dopey smile at the many uses of this you can already think of. <b>You are now a squirter</b>.");
-                    if (player.vaginas.length > 1) outputText("Your pussy starts foaming bubbles for a few seconds, juice slowly flowing out. You cannot resist plunging your hands inside your [vagina]s. Your pussy gushes, foaming more and more bubbles until you suddenly shoot a powerful bubble jet. You make a dopey smile at the many uses of this you can already think of. The fluids quickly disappear into the dirt. <b>You are now a squirter</b>.");
-                    player.vaginaType(9);
+                    transformations.VaginaCancer().applyEffect();
                     player.orgasm();
                 }
                 if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) {

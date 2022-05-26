@@ -11,12 +11,14 @@ import classes.BodyParts.Tail;
 import classes.CoC_Settings;
 import classes.CockTypesEnum;
 import classes.EngineCore;
+import classes.GeneticMemories.BallsMem;
 import classes.Items.Consumable;
+import classes.Scenes.Metamorph;
 import classes.StatusEffects;
 import classes.VaginaClass;
 import classes.CoC;
 
-public class Centaurinum extends Consumable{
+public class Centaurinum extends Consumable {
 	public function Centaurinum() {
 		super("Centari", "Centari", "a vial of Centaurinum", 20, "This is a long flared vial with a small label that reads, \"<i>Centaurinum</i>\".  It is likely this potion is tied to centaurs in some way.");
 	}
@@ -59,7 +61,7 @@ public class Centaurinum extends Consumable{
 					//Use temp3 to track whether or not anything is changed.
 					temp3 = 0;
 					if (player.cocks[0].cockType == CockTypesEnum.HUMAN) {
-						outputText("\n\nYour [cock] begins to feel strange... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.");
+						outputText("\n\nYour [cock] begins to feel odd... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.");
 						temp = player.addHorseCock();
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
@@ -68,8 +70,8 @@ public class Centaurinum extends Consumable{
 						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType == CockTypesEnum.DOG) {
+						outputText("\n\nYour [cock] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond it's traditional size.  You notice your knot vanishing, the extra flesh pushing more horsecock out from your sheath.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
 						temp = player.addHorseCock();
-						outputText("\n\nYour " + Appearance.cockNoun(CockTypesEnum.DOG) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond it's traditional size.  You notice your knot vanishing, the extra flesh pushing more horsecock out from your sheath.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
 						dynStats("lus", 35);
@@ -77,8 +79,8 @@ public class Centaurinum extends Consumable{
 						player.MutagenBonus("lib", 5);
 					}
 					if (player.cocks[0].cockType == CockTypesEnum.TENTACLE) {
-						temp = player.addHorseCock();
 						outputText("\n\nYour [cock] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your [cock] as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
+						temp = player.addHorseCock();
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						temp3 = 1;
 						dynStats("lus", 35)
@@ -150,9 +152,9 @@ public class Centaurinum extends Consumable{
 					player.addCurse("sen", 1, 1);
 				}
 				outputText("\n\n");
-				if (temp2 > 2) outputText("Your " + player.cockDescript(temp) + " tightens painfully, inches of taut horse-flesh pouring out from your sheath as it grows longer.  Thick animal-pre forms at the flared tip, drawn out from the pleasure of the change.");
+				if (temp2 > 2) outputText("Your [cock "+ temp+1 +"] tightens painfully, inches of taut horse-flesh pouring out from your sheath as it grows longer.  Thick animal-pre forms at the flared tip, drawn out from the pleasure of the change.");
 				if (temp2 > 1 && temp2 <= 2) outputText("Aching pressure builds within your sheath, suddenly releasing as an inch or more of extra dick flesh spills out.  A dollop of pre beads on the head of your enlarged " + player.cockDescript(temp) + " from the pleasure of the growth.");
-				if (temp2 <= 1) outputText("A slight pressure builds and releases as your " + player.cockDescript(temp) + " pushes a bit further out of your sheath.");
+				if (temp2 <= 1) outputText("A slight pressure builds and releases as your [cock" + temp+1 + "] pushes a bit further out of your sheath.");
 				changes++;
 			}
 			//Chance of thickness + daydream
@@ -263,11 +265,7 @@ public class Centaurinum extends Consumable{
 		}
 		//Mare-gina
 		if (player.hasVagina() && player.vaginaType() != VaginaClass.EQUINE && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your " + Appearance.vaginaDescript(player,0) + " has grown larger, in depth AND size. To your absolute surprise it suddenly resume deepening inside your body. " +
-					"When you finally take a look you discover your vagina is now not unlike that of a horse, capable of taking the largest cock with ease." +
-					"<b>  You now have a equine vagina!</b>");
-			player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING;
-			player.vaginaType(VaginaClass.EQUINE);
+			CoC.instance.transformations.VaginaHorse().applyEffect();
 		}
 
 		//classic horse-taur version

@@ -389,12 +389,12 @@ public class AbstractEquinum extends Consumable {
 			//Single vag
 			if (player.vaginas.length == 1) {
 				if (player.vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_GAPING && changes < changeLimit && rand(2) == 0) {
-					outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your " + Appearance.vaginaDescript(player,0) + " has grown larger, in depth AND size.");
+					outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your [vagina] has grown larger, in depth AND size.");
 					player.vaginas[0].vaginalLooseness++;
 					changes++;
 				}
 				if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_NORMAL && changes < changeLimit && rand(2) == 0) {
-					outputText("\n\nYour " + Appearance.vaginaDescript(player,0) + " moistens perceptably, giving off an animalistic scent.");
+					outputText("\n\nYour [vagina] moistens perceptably, giving off an animalistic scent.");
 					player.vaginas[0].vaginalWetness++;
 					changes++;
 				}
@@ -498,11 +498,7 @@ public class AbstractEquinum extends Consumable {
 		//Hoofed legs
 
 		if (player.hasVagina() && player.vaginaType() != VaginaClass.EQUINE && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your " + Appearance.vaginaDescript(player,0) + " has grown larger, in depth AND size. To your absolute surprise it suddenly resume deepening inside your body. " +
-					"When you finally take a look you discover your vagina is now not unlike that of a horse, capable of taking the largest cock with ease." +
-					"<b>  You now have a equine vagina!</b>");
-			player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING;
-			player.vaginaType(VaginaClass.EQUINE);
+			CoC.instance.transformations.VaginaHorse().applyEffect();
 		}
 
 		if (player.lowerBody != LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE) {

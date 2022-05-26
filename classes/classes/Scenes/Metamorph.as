@@ -19,11 +19,9 @@ package classes.Scenes {
 	import classes.BodyParts.Tail;
 	import classes.BodyParts.Tongue;
 	import classes.BodyParts.Wings;
-	import classes.Items.MutationsHelper;
 
 	import classes.GeneticMemories.*;
 
-	import classes.internals.Utils;
 
 	use namespace CoC;
 
@@ -589,7 +587,6 @@ package classes.Scenes {
 			convertUnlockMetamorphFlags();
 			if (refundAscMetamorph()) {
 				CoC.instance.charCreation.updateAscension("<b>The way Metamorph saves TFs has been completely changed, and so all Perks related to it, with the exception of Natural Metamorph, have been taken away from the player and refunded to ensure a safer transition. Feel free to spend your points to reobtain them, and perhaps buy something else as well, before returning to your game.</b>\n\n");
-				return;
 			}
 		}
 
