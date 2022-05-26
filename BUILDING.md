@@ -44,7 +44,8 @@ java.args=-Xmx384m -Dsun.io.useCanonCaches=false
 The main problem with it is that you still need the SDK, and you *can't* download it with IJ. So you need to find it somewhere else, or download it using FlashDevelop first. The same goes for Adobe Flash Player.
 
 #### Flex SDK - without FD, EragonX method
-You can download the 4.16.1 Flex sdk from [Apache](https://flex.apache.org/download-binaries.html), do not use the SDK Installer as it is broken.
+You can download the 4.16.1 Flex SDK from [Apache](https://flex.apache.org/download-binaries.html), do not use the SDK Installer as it is broken.
+The player (both regular and debug versions) can be downloaded from Xianxia discord server.
 
 > Svalkash note: Although the method works in general, the provided SDK doesn't work for me. So here's a [version](https://github.com/brrritssocold/CoC-build-dependencies/tree/master/bin/flex) from Kitteh's mod. You (probably?) still need to add swfobject files to it and edit the xml...
 
@@ -57,9 +58,6 @@ look for the `installer.xml` file and remove the 4 lines for swfobject.url (sear
 For mobile builds get the Harman AIR SDK for Flex Developers v 33.1 from [Harman](https://airsdk.harman.com/download) and extract it into the Flex SDK directory.
 Create a new environment variable `AIR_HOME` and point it to the SDK folder e.g. 'C:\\files\apache-flex-sdk-4.16.1-bin'.
 Edit the Path variable and add an entry to `%AIR_HOME%\bin`
-
-#### Flex SDK - brrritssocold repository
-Kitteh's mod has a link to a . It contains Flex 4.16.1 SDK and flashplayer executable. You may use it as an alternative.
 
 #### IDEA configuration
 
