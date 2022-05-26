@@ -11522,7 +11522,7 @@ use namespace CoC;
 			//Hot blooded perk raises min lust!
 			if (hasPerk(PerkLib.HotBlooded)) min += Math.round(minCap * 0.2);
 			if (hasPerk(PerkLib.LuststickAdapted)) min += Math.round(minCap * 0.1);
-			if (hasStatusEffect(StatusEffects.Infested)) min += min += Math.round(minCap * 0.5);
+			if (hasStatusEffect(StatusEffects.Infested)) min += Math.round(minCap * 0.5);
 			//Add points for Crimstone
 			min += Math.round(minCap * perkv1(PerkLib.PiercedCrimstone) * 0.01);
 			//Subtract points for Icestone!
@@ -13850,7 +13850,7 @@ use namespace CoC;
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) maxLevel += 20;
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
 			return maxLevel;
 		}
 		public function FeralCombatExpToLevelUp():Number {
@@ -13858,7 +13858,9 @@ use namespace CoC;
 			var expToLevelUp00:Number = masteryFeralCombatLevel + 1;
 			var expToLevelUp01:Number = 5;
 			var expToLevelUp02:Number = masteryFeralCombatLevel + 1;
-			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
+			expToLevelUp00 = Math.round(expToLevelUp00);
+			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
 			expToLevelUp02 = Math.round(expToLevelUp02);
@@ -13897,7 +13899,9 @@ use namespace CoC;
 			var expToLevelUp00:Number = masteryGauntletLevel + 1;
 			var expToLevelUp01:Number = 5;
 			var expToLevelUp02:Number = masteryGauntletLevel + 1;
-			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
+			expToLevelUp00 = Math.round(expToLevelUp00);
+			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
 			expToLevelUp02 = Math.round(expToLevelUp02);
@@ -13936,7 +13940,9 @@ use namespace CoC;
 			var expToLevelUp00:Number = masterySwordLevel + 1;
 			var expToLevelUp01:Number = 5;
 			var expToLevelUp02:Number = masterySwordLevel + 1;
-			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
+			expToLevelUp00 = Math.round(expToLevelUp00);
+			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
 			expToLevelUp02 = Math.round(expToLevelUp02);
@@ -13975,7 +13981,9 @@ use namespace CoC;
 			var expToLevelUp00:Number = masteryAxeLevel + 1;
 			var expToLevelUp01:Number = 5;
 			var expToLevelUp02:Number = masteryAxeLevel + 1;
-			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
+			expToLevelUp00 = Math.round(expToLevelUp00);
+			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
 			expToLevelUp02 = Math.round(expToLevelUp02);
@@ -14015,7 +14023,9 @@ use namespace CoC;
 			var expToLevelUp00:Number = masteryMaceHammerLevel + 1;
 			var expToLevelUp01:Number = 5;
 			var expToLevelUp02:Number = masteryMaceHammerLevel + 1;
-			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
+			expToLevelUp00 = Math.round(expToLevelUp00);
+			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
 			expToLevelUp02 = Math.round(expToLevelUp02);
@@ -14054,7 +14064,9 @@ use namespace CoC;
 			var expToLevelUp00:Number = masteryDuelingSwordLevel + 1;
 			var expToLevelUp01:Number = 5;
 			var expToLevelUp02:Number = masteryDuelingSwordLevel + 1;
-			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
+			expToLevelUp00 = Math.round(expToLevelUp00);
+			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
 			expToLevelUp02 = Math.round(expToLevelUp02);
@@ -14093,7 +14105,9 @@ use namespace CoC;
 			var expToLevelUp00:Number = masteryPolearmLevel + 1;
 			var expToLevelUp01:Number = 5;
 			var expToLevelUp02:Number = masteryPolearmLevel + 1;
-			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
+			expToLevelUp00 = Math.round(expToLevelUp00);
+			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
 			expToLevelUp02 = Math.round(expToLevelUp02);
@@ -14132,7 +14146,9 @@ use namespace CoC;
 			var expToLevelUp00:Number = masterySpearLevel + 1;
 			var expToLevelUp01:Number = 5;
 			var expToLevelUp02:Number = masterySpearLevel + 1;
-			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
+			expToLevelUp00 = Math.round(expToLevelUp00);
+			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
 			expToLevelUp02 = Math.round(expToLevelUp02);
@@ -14171,7 +14187,9 @@ use namespace CoC;
 			var expToLevelUp00:Number = masteryDaggerLevel + 1;
 			var expToLevelUp01:Number = 5;
 			var expToLevelUp02:Number = masteryDaggerLevel + 1;
-			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
+			expToLevelUp00 = Math.round(expToLevelUp00);
+			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
 			expToLevelUp02 = Math.round(expToLevelUp02);
@@ -14210,7 +14228,9 @@ use namespace CoC;
 			var expToLevelUp00:Number = masteryWhipLevel + 1;
 			var expToLevelUp01:Number = 5;
 			var expToLevelUp02:Number = masteryWhipLevel + 1;
-			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
+			expToLevelUp00 = Math.round(expToLevelUp00);
+			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
 			expToLevelUp02 = Math.round(expToLevelUp02);
@@ -14249,7 +14269,9 @@ use namespace CoC;
 			var expToLevelUp00:Number = masteryExoticLevel + 1;
 			var expToLevelUp01:Number = 5;
 			var expToLevelUp02:Number = masteryExoticLevel + 1;
-			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
+			expToLevelUp00 = Math.round(expToLevelUp00);
+			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
 			expToLevelUp02 = Math.round(expToLevelUp02);
@@ -14411,7 +14433,9 @@ use namespace CoC;
 			var expToLevelUp00:Number = dualWSLevel + 1;
 			var expToLevelUp01:Number = 5;
 			var expToLevelUp02:Number = dualWSLevel + 1;
-			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
+			expToLevelUp00 = Math.round(expToLevelUp00);
+			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
 			expToLevelUp02 = Math.round(expToLevelUp02);
@@ -14450,7 +14474,9 @@ use namespace CoC;
 			var expToLevelUp00:Number = dualWNLevel + 1;
 			var expToLevelUp01:Number = 5;
 			var expToLevelUp02:Number = dualWNLevel + 1;
-			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
+			expToLevelUp00 = Math.round(expToLevelUp00);
+			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
 			expToLevelUp02 = Math.round(expToLevelUp02);
@@ -14489,7 +14515,9 @@ use namespace CoC;
 			var expToLevelUp00:Number = dualWLLevel + 1;
 			var expToLevelUp01:Number = 5;
 			var expToLevelUp02:Number = dualWLLevel + 1;
-			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
+			expToLevelUp00 = Math.round(expToLevelUp00);
+			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
 			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
 			expToLevelUp02 = Math.round(expToLevelUp02);

@@ -53,7 +53,8 @@ public class MantislikeAgilityMutation extends IMutationPerkType
                 IMutationsLib.MantislikeAgilityIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.MantislikeAgilityIM.requireMusclesMutationSlot()
-                    .requirePerk(IMutationsLib.TrachealSystemIM).requireCustomFunction(function (player:Player):Boolean {
+                    .requireMutation(IMutationsLib.TrachealSystemIM)
+                    .requireCustomFunction(function (player:Player):Boolean {
                         return player.mantisScore() >= 12;
                     }, "Mantis race");
                 }

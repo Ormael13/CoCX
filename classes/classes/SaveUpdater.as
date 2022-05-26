@@ -1889,6 +1889,10 @@ public class SaveUpdater extends NPCAwareContent {
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.018;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.019) {
+				if (flags[kFLAGS.NEISA_FOLLOWER] >= 10 && flags[kFLAGS.NEISA_FOLLOWER] < 17) flags[kFLAGS.NEISA_FOLLOWER] -= 3; 
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.019;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;
@@ -2044,4 +2048,4 @@ public class SaveUpdater extends NPCAwareContent {
 	}
 
 }
-}
+}
