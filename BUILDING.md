@@ -45,20 +45,23 @@ The main problem with it is that you still need the SDK, and you *can't* downloa
 
 #### Flex SDK - without FD, EragonX method
 You can download the 4.16.1 Flex sdk from [Apache](https://flex.apache.org/download-binaries.html), do not use the SDK Installer as it is broken.
+
+> Svalkash note: I haven't managed to get it working, so here's a [version](https://github.com/brrritssocold/CoC-build-dependencies) from Kitteh's mod. It also contains the player!
+
 Extract it to your location of choice.
 Create a new environment variable `FLEX_HOME` and point it to the SDK folder e.g. 'C:\\files\apache-flex-sdk-4.16.1-bin'.
-Edit the Path variable and add an entry to `%FLEX_HOME\bin%`
-
-
+Edit the Path variable and add an entry to `%FLEX_HOME%\bin`
 Get the SWFObject Source code zip from [here](https://github.com/swfobject/swfobject/releases/tag/2.2) and place it as is in the SDK folder.
 look for the `installer.xml` file and remove the 4 lines for swfobject.url (search for them) and replace with `<property file="${FLEX_HOME}/swfobject-2.2.zip"/>`
 
 For mobile builds get the Harman AIR SDK for Flex Developers v 33.1 from [Harman](https://airsdk.harman.com/download) and extract it into the Flex SDK directory.
 Create a new environment variable `AIR_HOME` and point it to the SDK folder e.g. 'C:\\files\apache-flex-sdk-4.16.1-bin'.
-Edit the Path variable and add an entry to `%AIR_HOME\bin%`
+Edit the Path variable and add an entry to `%AIR_HOME%\bin`
 
 #### Flex SDK - brrritssocold repository
-Kitteh's mod has a link to a [repo with all the requirements](https://github.com/brrritssocold/CoC-build-dependencies/tree/master/bin). It contains Flex 4.16.1 SDK and flashplayer executable. You may use it as an alternative.
+Kitteh's mod has a link to a . It contains Flex 4.16.1 SDK and flashplayer executable. You may use it as an alternative.
+
+#### IDEA configuration
 
 >Important: if you encounter any errors with memory allocation during the build, use the above advice for FlashDevelop to increase max memory for SDK. 
 
