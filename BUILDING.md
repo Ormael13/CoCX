@@ -43,30 +43,33 @@ java.args=-Xmx384m -Dsun.io.useCanonCaches=false
 ### IntelliJ Idea
 The main problem with it is that you still need the SDK, and you *can't* download it with IJ. So you need to find it somewhere else, or download it using FlashDevelop first. The same goes for Adobe Flash Player.
 
-#### Flex SDK
-You can download the 4.16.1 Flex sdk from [Apache](https://flex.apache.org/download-binaries.html), do not use the SDK Installer as it is broken.
+#### Flex SDK - without FD, EragonX method
+You can download the 4.16.1 Flex SDK from [Apache](https://flex.apache.org/download-binaries.html), do not use the SDK Installer as it is broken.
+The player (both regular and debug versions) can be downloaded from Xianxia discord server.
+
+> Svalkash note: Although the method works in general, the provided SDK doesn't work for me. So here's a [version](https://github.com/brrritssocold/CoC-build-dependencies/tree/master/bin/flex) from Kitteh's mod. You (probably?) still need to add swfobject files to it and edit the xml...
+
 Extract it to your location of choice.
 Create a new environment variable `FLEX_HOME` and point it to the SDK folder e.g. 'C:\\files\apache-flex-sdk-4.16.1-bin'.
-Edit the Path variable and add an entry to `%FLEX_HOME\bin%`
-
-
+Edit the Path variable and add an entry to `%FLEX_HOME%\bin`
 Get the SWFObject Source code zip from [here](https://github.com/swfobject/swfobject/releases/tag/2.2) and place it as is in the SDK folder.
 look for the `installer.xml` file and remove the 4 lines for swfobject.url (search for them) and replace with `<property file="${FLEX_HOME}/swfobject-2.2.zip"/>`
 
 For mobile builds get the Harman AIR SDK for Flex Developers v 33.1 from [Harman](https://airsdk.harman.com/download) and extract it into the Flex SDK directory.
 Create a new environment variable `AIR_HOME` and point it to the SDK folder e.g. 'C:\\files\apache-flex-sdk-4.16.1-bin'.
-Edit the Path variable and add an entry to `%AIR_HOME\bin%`
+Edit the Path variable and add an entry to `%AIR_HOME%\bin`
 
+#### IDEA configuration
 
 >Important: if you encounter any errors with memory allocation during the build, use the above advice for FlashDevelop to increase max memory for SDK. 
 
 The repository already contains a project for IJ Idea, but it needs to be adjusted for your system.
 1. Download, install, activate the IDE: https://www.jetbrains.com/idea/
-2. Install some extensions - Flash/Flex, Git toolbox, optionally a color theme to make everything look better. I really liked "Dracula".
+2. Install some extensions - Flash/Flex, Git toolbox, optionally a color theme to make everything look better.
 3. Fork the repository and paste the link into IDEA, it will download it itself.
 4. Now you can edit the project, but it probably has incorrect paths to SDKs. Open 'Project Structure' menu.
    * In 'Project' page, add the path to your FLEX SDK ("4.6.0" folder or something like that).
-   * In 'Modules' page, for every build configuration go to 'Dependencies' tab and select your SDK again. You may delete Mobile and/or Release configurations if you don't need them.
+   * In 'Modules' page, for every build configuration go to 'Dependencies' tab and select your SDK again. You may delete some configurations if you don't need them.
 5. Now, if everything is done right, IDEA should start indexing the project. It will take some time to complete.
 6. On above panel, you can see the "*Build*", "*Run*" and "*Debug*" buttons. Building will (obviously) build an .swf file (somewhere in the project folder), and "Debug" will build and start the game with debugger, meaning you will be able to view the trace messages (which can be really useful sometimes). But here's the issue - the debug configuration near these buttons is not working yet. Edit it and set the paths to your SDK and debug player version.
 7. (optional) If you don't want Liadri kill to you (by accidentally uploading your new IDEA configs), you can move them to a separate changelist.
