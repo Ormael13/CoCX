@@ -46,7 +46,7 @@ The main problem with it is that you still need the SDK, and you *can't* downloa
 #### Flex SDK - without FD, EragonX method
 You can download the 4.16.1 Flex sdk from [Apache](https://flex.apache.org/download-binaries.html), do not use the SDK Installer as it is broken.
 
-> Svalkash note: I haven't managed to get it working, so here's a [version](https://github.com/brrritssocold/CoC-build-dependencies/tree/master/bin/flex) from Kitteh's mod.
+> Svalkash note: Although the method works in general, the provided SDK doesn't work for me. So here's a [version](https://github.com/brrritssocold/CoC-build-dependencies/tree/master/bin/flex) from Kitteh's mod. You (probably?) still need to add swfobject files to it and edit the xml...
 
 Extract it to your location of choice.
 Create a new environment variable `FLEX_HOME` and point it to the SDK folder e.g. 'C:\\files\apache-flex-sdk-4.16.1-bin'.
