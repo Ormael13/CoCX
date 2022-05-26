@@ -1125,7 +1125,7 @@ public class PerkMenu extends BaseContent {
 					outputText("\nRequirements for next tier: " + reqs.join(", "));
 					outputText("\nDescription: ");
 					if(mutation.desc().length <= 1) {	//Some desc. contains only "."
-						if (player.perkv1(mutation) == 0) outputText("You don't have this Mutation yet.");
+						if (player.perkv1(mutation) == 0) outputText(mutation.desc());
 						else outputText("No description available.");
 					}
 					else{
