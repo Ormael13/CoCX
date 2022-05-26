@@ -56,7 +56,7 @@ public class DraconicHeartMutation extends IMutationPerkType
                 IMutationsLib.DraconicHeartIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.DraconicHeartIM.requireHeartMutationSlot()
-                    .requirePerk(IMutationsLib.DraconicBonesIM)
+                    .requireMutation(IMutationsLib.DraconicBonesIM)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return (player.dragonScore() >= 8 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
                     }, "Dragon race or its variants");
