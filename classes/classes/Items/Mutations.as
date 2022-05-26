@@ -1250,9 +1250,6 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.vaginas.length == 0 && (rand(3) == 0 || (rando > 75 && rando < 90))) {
             player.createVagina();
-            player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
-            player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
-            player.vaginas[0].virgin = true;
             player.clitLength = .25;
             if (player.fertility <= 5) player.fertility = 6;
             outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
@@ -1334,9 +1331,6 @@ public final class Mutations extends MutationsHelper {
                     player.addCurse("sens", 3, 1);
                 } else {
                     player.createVagina();
-                    player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
-                    player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
-                    player.vaginas[0].virgin = true;
                     player.clitLength = .25;
                     outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
                 }
@@ -4784,7 +4778,7 @@ public final class Mutations extends MutationsHelper {
                 player.addCurse("sen", 10, 1);
             }
             //Shark Cunt
-            if (changes < changeLimit && rand(3) == 0 && player.vaginaType() != 15 && player.hasVagina()) {
+            if (changes < changeLimit && rand(3) == 0 && player.vaginaType() != VaginaClass.SHARK && player.hasVagina()) {
                 outputText("[pg]Something invisible brushes against your sex, making you twinge. Undoing your clothes, you take a look at your vagina. It looks normal at a first glance despite the odd sensation but inserting your fingers inside reveals that your walls are now covered with small sensitive tendril-like feelers. You blush as they instinctively drive your digits further in, attempting to milk them like they would a penis. <b>It looks like your vagina has turned into that of a shark girl.</b>");
                 player.vaginaType(15);
                 changes++;
@@ -14529,9 +14523,6 @@ public final class Mutations extends MutationsHelper {
             //if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
             if (player.cocks.length == 0 && !player.hasVagina()) {
                 player.createVagina();
-                player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
-                player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
-                player.vaginas[0].virgin = true;
                 player.clitLength = .25;
                 outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
                 changes++;
@@ -16553,9 +16544,6 @@ public final class Mutations extends MutationsHelper {
                 //if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
                 if (player.cocks.length == 0 && !player.hasVagina()) {
                     player.createVagina();
-                    player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
-                    player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
-                    player.vaginas[0].virgin = true;
                     player.clitLength = .25;
                     outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
                     changes++;
@@ -17025,9 +17013,6 @@ public final class Mutations extends MutationsHelper {
                 //if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
                 if (player.cocks.length == 0 && !player.hasVagina()) {
                     player.createVagina();
-                    player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
-                    player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
-                    player.vaginas[0].virgin = true;
                     player.clitLength = .25;
                     outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
                     changes++;

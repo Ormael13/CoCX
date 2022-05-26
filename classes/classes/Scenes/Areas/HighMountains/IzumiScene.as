@@ -303,7 +303,7 @@ import classes.Stats.Buff;
 				lustMod *= 2;
 			}
 			player.statStore.addBuffObject({'spe':+deltaSpd,'sens':+deltaSns,'lib':+deltaLib},'IzumiSmoke',{text:'Izumi Pipe Smoke', rate:Buff.RATE_HOURS, tick: 24})
-			showStatDown('spe');
+			showStatUp('spe');
 			showStatUp('sens');
 			showStatUp('lib');
 			dynStats("lus", lustMod);

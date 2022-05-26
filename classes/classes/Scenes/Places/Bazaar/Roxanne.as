@@ -282,6 +282,7 @@ private function roxanneGivesABlowjob():void {
 	//(-100 lust, -1 int)
 	player.orgasm();
 	player.addCurse("int", 1, 2);
+	applyHangover();
 	doNext(camp.returnToCampUseOneHour);
 }
 //[Receive Oral – Vaginalingus]
@@ -328,6 +329,7 @@ private function roxanneCunnilingus():void {
 	//(-100 lust, -1 int)
 	player.orgasm();
 	player.addCurse("int", 1, 2);
+	applyHangover();
 	doNext(camp.returnToCampUseOneHour);
 }
 //[Receive Oral – SkyrRimjoooooooob]
@@ -381,6 +383,7 @@ private function roxanneRimjob():void {
 	//(-100 lust, -1 int
 	player.orgasm();
 	player.addCurse("int", 1, 2);
+	applyHangover();
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -532,24 +535,6 @@ private function roxanneFucksYourAssOHGODITSHUGE():void {
 	doNext(camp.returnToCampUseFourHours);
 }
 
-private function applyHangover():void {
-	//Status: Hangover.
-	//v1 = hours left.
-	//v2 = strength taken
-	//v3 = speed taken
-	//v4 = intelligence
-
-	//Already hungover?  Reset duration.
-	if(player.statStore.hasBuff("Hangover")) {
-		player.statStore.addBuff("str",-1,"Hangover",{text:"Hangover",time:Buff.RATE_HOURS, tick:8});
-	}
-	//No hangover yet?  Create and yoink stats
-	else {
-		player.statStore.addBuffObject({"str":-5,"spe":-10,"int":-15},"Hangover",{text:"Hangover",time:Buff.RATE_HOURS, tick:8});
-	}
-	statScreenRefresh();
-}
-
 //PC has a big butt and loses to normal Roxanne
 private function bigBootyRoxanneContestLoss():void {
 	spriteSelect(SpriteDb.s_poisontail);
@@ -584,6 +569,15 @@ private function bigBootyRoxanneContestLoss():void {
 	player.addCurse("int", 1, 2);
 	applyHangover();
 	doNext(camp.returnToCampUseFourHours);
+}
+
+private function applyHangover():void {
+	if(player.statStore.hasBuff('Hangover')) player.statStore.removeBuffs('Hangover');
+	player.statStore.addBuffObject({'str':-5,'spe':-10,'int':-15},'Hangover',{text:'Hangover', rate:Buff.RATE_HOURS, tick: 8});
+	showStatDown('str');
+	showStatDown('spe');
+	showStatDown('int');
+	statScreenRefresh();
 }
 }
 }

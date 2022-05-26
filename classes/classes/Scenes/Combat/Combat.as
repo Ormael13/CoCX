@@ -6229,7 +6229,10 @@ public class Combat extends BaseContent {
 					if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 2) meleeMasteryEXPgains *= 2.5;
 					if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 3) meleeMasteryEXPgains *= 2;
 				}
-				if (crit) meleeMasteryEXPgains *= 2;
+				if (crit) {
+					meleeMasteryEXPgains *= 2;
+					if (player.hasPerk(PerkLib.MeleeWeaponsMasteryEx)) meleeMasteryEXPgains *= 2;
+				}
 				if (player.weapon == weapons.CHAOSEA) meleeMasteryEXPgains *= 3;
 				if ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.weaponName == "fists") feralCombatXP(meleeMasteryEXPgains);
 				if (player.isGauntletWeapon()) gauntletXP(meleeMasteryEXPgains);

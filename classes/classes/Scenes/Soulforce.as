@@ -13,6 +13,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Scenes.Areas.DeepSea.Kraken;
+import classes.Scenes.Areas.Desert.NagaScene;
 import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
 import classes.Scenes.Areas.Forest.TamaniScene;
 import classes.Scenes.Areas.Forest.WorldTree;
@@ -51,6 +52,7 @@ public class Soulforce extends BaseContent
 	public var tamaniDaughtersScene:TamainsDaughtersScene = new TamainsDaughtersScene();
 	public var tamaniScene:TamaniScene = new TamaniScene();
 	public var izumiScenes:IzumiScene = new IzumiScene();
+	public var nagaScene:NagaScene = new NagaScene();
 	public var worldtreeScene:WorldTree = new WorldTree();
 	public var minotaurSonsScene:MinotaurMobScene = new MinotaurMobScene();
 
@@ -263,9 +265,27 @@ public class Soulforce extends BaseContent
 		menuItems.push("TyrantPF", (TyrantiaFollower.TyrantiaFollowerStage == 5 && TyrantiaFollower.TyraniaCorrupteedLegendaries == 0)? FairyTest5: false, "Patching Tyrantia corrupted legendaries unlock");
 		menuItems.push("LilyPregF", (DriderTown.LilyKidsPCPregnancy != 0 && LilyFollower.LilyFollowerState)? FairyTest3: false, "Curing Lily Infertility ^^");
 		//menuItems.push("WeaponsXPtest", SceneLib.dilapidatedShrine.weaponsXPtrader, "");
+		menuItems.push("HangoverTest", applyHangover, "");
 		menuGen(menuItems, page, accessSoulforceMenu);
 	}
 
+private function applyHangover():void {
+	//Status: Hangover.
+	//v1 = hours left.
+	//v2 = strength taken
+	//v3 = speed taken
+	//v4 = intelligence
+
+	if(player.statStore.hasBuff('Hangover')) {
+		player.statStore.removeBuffs('Hangover');
+	}
+	player.statStore.addBuffObject({'str':-5,'spe':-10,'int':-15},'Hangover',{text:'Hangover', rate:Buff.RATE_HOURS, tick: 8});
+	showStatDown('str');
+	showStatDown('spe');
+	showStatDown('int');
+	statScreenRefresh();
+	doNext(curry(SoulforceCheats1, 0));
+}
 	public function FairyTest3():void {
 		DriderTown.LilyKidsPCPregnancy = 0;
 		doNext(curry(SoulforceCheats1, 0));
@@ -1222,9 +1242,6 @@ public class Soulforce extends BaseContent
 	}
 	public function AddPussy():void {
 		player.createVagina();
-		player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
-		player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
-		player.vaginas[0].virgin = true;
 		player.clitLength = .25;
 		if (player.fertility <= 5) player.fertility = 6;
 		BodyStateMenu();
@@ -4349,6 +4366,7 @@ public class Soulforce extends BaseContent
 			if (player.level >= 3 && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0 && (flags[kFLAGS.IZMA_WORMS_SCARED] == 0 || !player.hasStatusEffect(StatusEffects.Infested)) && flags[kFLAGS.IZMA_FOLLOWER_STATUS] <= 0) addButton(3, "???", tigerSharkGal).hint("Tigershark Gal?");
 			if (player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff)) addButton(4, "???", shyHealer).hint("Shy Healer");
 			if (flags[kFLAGS.ISABELLA_PLAINS_DISABLED] == 0) addButton(5, "???", germanCow).hint("German Cow");
+			if (player.level >= 3 && flags[kFLAGS.SAMIRAH_FOLLOWER] <= 9) addButton(6, "???", sneakOnThePlane).hint("F**king ??? on the Plane.");
 			addButton(14, "Back", SoulSense);
 		}
 		else {
@@ -4379,6 +4397,9 @@ public class Soulforce extends BaseContent
 	}
 	public function germanCow():void {
 		SceneLib.isabellaScene.isabellaGreeting();
+	}
+	public function sneakOnThePlane():void {
+		nagaScene.nagaEncounter();
 	}
 	
 	private function canfaceTribulation():Boolean {

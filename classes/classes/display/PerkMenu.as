@@ -1237,7 +1237,7 @@ public class PerkMenu extends BaseContent {
 			var pList3:Array = PerkLib.gearPerks();	//No Gear Perks.
 			var pList4:Array = PerkLib.weaPerks();	//No Weapons Perks.
 			//function pSpecialRem = No Ascension/History/Bloodline/PastLife Perks
-			var pList5:Array = IMutationsLib.mutationsArray("Deprecated");
+			var pList5:Array = MutationsLib.mutationsArray("Deprecated");
 			var pList6:Array = IMutationsLib.mutationsArray("");
 			var pList7:Array = IMutationsLib.mutationsArray("Deprecated");
 			for each (var perkTrue:PerkType in perkDict){

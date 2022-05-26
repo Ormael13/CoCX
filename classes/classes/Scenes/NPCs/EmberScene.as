@@ -3772,10 +3772,6 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			if (flags[kFLAGS.EMBER_OVIPOSITION] == 0) {
 				//40% chance of boy, 40% chance of girl and 20% chance of both
 				//(If the PC has no pussy)
-				if (!player.hasVagina()) {
-					outputText("A terribly painful ripping feeling comes from your crotch. Reaching down to touch the tender spot you feel a spike of pleasure and moistness.  <b>You've grown a vagina!</b>\n\n");
-					player.createVagina();
-				}
 				outputText("You find yourself doubling over - well, as far as you can given your hugely gravid stomach, letting out a hollow cry of pain.  You can feel the muscles in your midriff starting to squeeze and ripple in a fashion you just know signifies the onset of labor.  You cry out for Ember to come and attend you.  Ember rushes towards you in a blur, stopping mere inches from you, panting.  \"<i>What is it?  Is it time!?  Are you in labor!?</i>\" " + emberMF("he", "she") + " asks in a hurry.  You nod and tell " + emberMF("him", "her") + " that you are.");
 
 				outputText("\n\nEmber wastes no time, " + emberMF("he", "she") + " hefts you into " + emberMF("his", "her") + " arms and takes you to " + emberMF("his", "her") + " den, gently setting you down on the soft leaves; then " + emberMF("he", "she") + " starts undressing you, stripping your [armor] as quickly as " + emberMF("he", "she") + " can.  \"<i>Okay, Okay...  What do you need?  W-what should I do!?  Do you need anything!?  How are you feeling!?</i>\" Ember asks in panic, the excitement of what's about to happen too much to bear for the dragon" + emberMF("-boy", "-girl") + ".");
@@ -3854,11 +3850,6 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			}
 			//PC Lays Egg
 			else {
-				//(If the PC has no pussy)
-				if (!player.hasVagina()) {
-					outputText("A terribly painful ripping feeling comes from your crotch. Reaching down to touch the tender spot you feel a spike of pleasure and moistness.  <b>You've grown a vagina!</b>\n\n");
-					player.createVagina();
-				}
 				outputText("You find yourself doubling over - well, as far as you can given your hugely gravid stomach, letting out a hollow cry of pain.  You can feel the muscles in your midriff starting to squeeze and ripple in a fashion you just know signifies the onset of labor.  You cry out for Ember to come and attend you.  Ember rushes towards you in a blur, stopping mere inches from you, panting.  \"<i>What is it? Is it time!? Are you ready to lay!?</i>\" " + emberMF("he", "she") + " asks in a hurry.  You nod and tell " + emberMF("him", "her") + " that you are.");
 
 				outputText("\n\nEmber wastes no time - " + emberMF("he", "she") + " hefts you into " + emberMF("his", "her") + " arms and takes you to " + emberMF("his", "her") + " den, gently setting you down on the soft leaves.  Then " + emberMF("he", "she") + " starts undressing you, stripping your [armor] as quickly as " + emberMF("he", "she") + " can.  \"<i>Okay, Okay...  What do you need?  W-what should I do!?  Do you need anything!?  How are you feeling!?</i>\" Ember asks in panic, the excitement of what's about to happen too much to bear for the dragon" + emberMF("-boy", "-girl") + ".");

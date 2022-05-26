@@ -1548,6 +1548,16 @@ public class Creature extends Utils
 			return perkv1(mutate) > 0;
 		}
 
+		public function hasMutationCount(invert:Boolean = false):int{
+			var total:int = 0;
+				for each (var iMutate:IMutationPerkType in IMutationsLib.mutationsArray("")){
+					if (hasMutation(iMutate)) total++;
+				}
+			if (invert) total = IMutationsLib.mutationsArray("").length - total;
+
+			return total;
+		}
+
 
 		/*
 
