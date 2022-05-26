@@ -1282,8 +1282,7 @@ public final class Mutations extends MutationsHelper {
                     player.orgasm();
                     if (tainted) dynStats("cor", 1);
                     if (player.vaginaType() != VaginaClass.DEMONIC){
-                        if (player.vaginas.length == 1) outputText("Pressure begins building within your loins and your first instinct is to start fiercely fingering yourself in an effort to improve the pleasure, and to your surprise, your vaginal lips seem to reflexively clench around your fingers to kiss you. Wait, no, they're LITERALLY kissing your fingers. Where the hell did your cunt acquire such dexterity? Just as you ponder this question, hunger seizes you over as the taste of sweat rushes to your mouth. Not your upper mouth, but the one between your legs has managed to taste the faint salty sweat coating your fingers! You can now taste and milk cum like never before using your <b>brand new succubus cunt!</b>");
-                        player.vaginaType(VaginaClass.DEMONIC);
+                        transformations.VaginaDemonic().applyEffect();
                     }
                 }
                 if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) {
@@ -1971,9 +1970,7 @@ public final class Mutations extends MutationsHelper {
         //GROW BALLS
         if (changes < changeLimit && type == 5) {
             if (player.balls <= 1) {
-                outputText("[pg]A spike of pain doubles you up, nearly making you vomit.  You stay like that, nearly crying, as a palpable sense of relief suddenly washes over you.  You look down and realize you now have a small sack, complete with two relatively small balls.");
-                player.balls = 2;
-                player.ballSize = 1;
+                transformations.BallsDuo.applyEffect();
                 dynStats("lus", -10);
                 MutagenBonus("lib", 2);
             } else {
@@ -2510,9 +2507,7 @@ public final class Mutations extends MutationsHelper {
         //Grow new balls!
         if (player.balls < 2 && changes < changeLimit && rand(4) == 0) {
             if (player.balls == 0) {
-                player.balls = 2;
-                outputText("[pg]Incredible pain scythes through your crotch, doubling you over.  You stagger around, struggling to pull open your [armor].  In shock, you barely register the sight before your eyes: <b>You have balls!</b>");
-                player.ballSize = 1;
+                transformations.BallsDuo.applyEffect();
             }
             changes++;
         }
@@ -2581,15 +2576,7 @@ public final class Mutations extends MutationsHelper {
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //NEW BALLZ
         if (player.balls < 4) {
-            if (player.balls > 0) {
-                player.balls = 4;
-                outputText("[pg]Incredible pain scythes through your crotch, doubling you over.  You stagger around, struggling to pull open your [armor].  In shock, you barely register the sight before your eyes: <b>You have four balls.</b>");
-            }
-            if (player.balls == 0) {
-                player.balls = 2;
-                outputText("[pg]Incredible pain scythes through your crotch, doubling you over.  You stagger around, struggling to pull open your [armor].  In shock, you barely register the sight before your eyes: <b>You have balls!</b>");
-                player.ballSize = 1;
-            }
+            transformations.BallsQuad().applyEffect();
             changes++;
         }
         //Makes your balls biggah! (Or cummultiplier higher if futa!)
@@ -4798,14 +4785,7 @@ public final class Mutations extends MutationsHelper {
             }
             //(Requires the player having two testicles)
             if (type == 1 && (player.balls == 0 || player.balls == 2) && player.hasCock() && changes < changeLimit && rand(3) == 0) {
-                if (player.balls == 2) {
-                    outputText("[pg]You gasp in shock as a sudden pain racks your abdomen. Within seconds, two more testes drop down into your [sack], your skin stretching out to accommodate them. Once the pain clears, you examine <b>your new quartet of testes.</b>");
-                    player.balls = 4;
-                } else if (player.balls == 0) {
-                    outputText("[pg]You gasp in shock as a sudden pain racks your abdomen. Within seconds, two balls drop down into a new sack, your skin stretching out to accommodate them. Once the pain clears, you examine <b>your new pair of testes.</b>");
-                    player.balls = 2;
-                    player.ballSize = 2;
-                }
+                transformations.BallsQuad(2).applyEffect();
                 dynStats("lus", 10);
                 player.addCurse("sen", 3, 1);
                 MutagenBonus("lib", 2);
@@ -5926,8 +5906,7 @@ public final class Mutations extends MutationsHelper {
                 player.ballSize -= 1;
                 outputText("[pg]Your scrotum slowly shrinks, settling down at a smaller size.  <b>Your [balls] are smaller now.</b>[pg]");
             } else {
-                player.balls = 2;
-                outputText("[pg]Your scrotum slowly shrinks until they seem to have reached a normal size. <b>You can feel as if your extra balls fused together, leaving you with a pair of balls.</b>[pg]");
+                transformations.BallsDuo.applyEffect();
             }
             changes++;
         }
@@ -12352,7 +12331,7 @@ public final class Mutations extends MutationsHelper {
             if (player.ballSize > 20) player.ballSize--;
             //Testicle Reduction final:
             if (player.ballSize < 1 && !player.hasStatusEffect(StatusEffects.Uniball)) {
-                outputText("  You whimper as once again, your balls tighten and shrink.  Your eyes widen when you feel the gentle weight of your testicles pushing against the top of your [hips], and a few hesitant swings of your rear confirm what you can feel - you've tightened your balls up so much they no longer hang beneath your [cocks], but press perkily upwards.  Heat ringing your ears, you explore your new sack with a careful hand.  You are deeply grateful you apparently haven't reversed puberty, but you discover that though you still have " + num2Text(player.balls) + ", your balls now look and feel like one: one cute, tight little sissy parcel, its warm, insistent pressure upwards upon the joining of your thighs a never-ending reminder of it.");
+                outputText("  You whimper as once again, your balls tighten and shrink.  Your eyes widen when you feel the gentle weight of your testicles pushing against your crotch, and a few hesitant swings of your rear confirm what you can feel - you've tightened your balls up so much they no longer hang beneath your [cocks], but press perkily upwards.  Heat ringing your ears, you explore your new sack with a careful hand.  You are deeply grateful you apparently haven't reversed puberty, but you discover that though you still have " + num2Text(player.balls) + ", your balls now look and feel like one: one cute, tight little sissy parcel, its warm, insistent pressure upwards upon the joining of your thighs a never-ending reminder of it.");
                 //[Note: Balls description should no longer say \"swings heavily beneath\".  For simplicity's sake sex scenes should continue to assume two balls]
                 player.ballSize = 1;
                 player.createStatusEffect(StatusEffects.Uniball, 0, 0, 0, 0);
@@ -12554,7 +12533,7 @@ public final class Mutations extends MutationsHelper {
             }
             //gain balls up to 2 (only if full-coon face and fur; no dick required)
             if (player.balls == 0 && player.hasFur() && 9999 == 9999 && rand(3) == 0 && changes < changeLimit) {
-                outputText("[pg]As you eat, you contemplate your masked appearance; it strikes you that you're dangerously close to the classic caricature of a thief.  Really, all it would take is a big, nondescript sack and a hurried gait and everyone would immediately think the worst of you.  In a brief fit of pique, you wish you had such a bag to store your things in, eager to challenge a few assumptions.  A few minutes into that line of thought, a twisting ache in your lower gut bends you double, and you expose yourself hurriedly to examine the region.  As you watch, a balloon of flesh forms on your crotch, and two lumps migrate from below your navel down into it.  <b>Looks like you have a sack, after all.</b>");
+                outputText("[pg]As you eat, you contemplate your masked appearance; it strikes you that you're dangerously close to the classic caricature of a thief.  Really, all it would take is a big, nondescript sack and a hurried gait and everyone would immediately think the worst of you.  In a brief fit of pique, you wish you had such a bag to store your things in, eager to challenge a few assumptions.  A few minutes into that line of thought, a twisting ache in your crotch bends you double, and you expose yourself hurriedly to examine the region.  As you watch, a balloon of flesh forms on your crotch, and two lumps migrate from below your navel down into it.  <b>Looks like you have a sack, after all.</b>");
                 player.balls = 2;
                 player.ballSize = 1;
                 changes++;
