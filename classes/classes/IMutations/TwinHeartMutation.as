@@ -11,9 +11,9 @@ import classes.Player;
 public class TwinHeartMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:PerkClass = null):String {
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.TwinHeartIM);
+            pTier = (pTier == -1)? currentTier(this): pTier;
             if (pTier == 1){
                 descS = "+40% fatigue recovery and +5 to max tou/spe (scalable). +100% fatigue recovery, reduce Charge fatigue cost by 10% as well as its cooldown by 1 round so long as your body is tauric/drider. (Also raise all Taur race score by 1, by 2 as long pc is tauric/drider)";
             }
@@ -30,7 +30,7 @@ public class TwinHeartMutation extends IMutationPerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.TwinHeartIM)){
+            switch (currentTier(this)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -44,25 +44,20 @@ public class TwinHeartMutation extends IMutationPerkType
         }
 
         //Mutation Requirements
-        override public function pReqs(target:* = null):void{
+        override public function pReqs():void{
             try{
-                if (target == null){
-                    trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
-                    target = player;
-                }
-                var params:PerkClass = target.getPerk(this);
-                var pTier:int = params.value1;
+                var pTier:int = currentTier(this);
                 //This helps keep the requirements output clean.
-                IMutationsLib.TwinHeartIM.requirements = [];
+                this.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.TwinHeartIM.requireAdaptationsMutationSlot()
+                    this.requireAdaptationsMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.centaurScore() >= 8 || player.unicornScore() >= 12 || player.sphinxScore() >= 14 || player.cancerScore() >= 13 || player.isTaur() || player.isDrider();
                     }, "Taur/Drider or Unicorn/Bicorn race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.TwinHeartIM.requireLevel(pLvl);
+                    this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
@@ -70,14 +65,9 @@ public class TwinHeartMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:* = null):Object{
+        override public function pBuffs():Object{
             var pBuffs:Object = {};
-            if (target == null){
-                trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
-                target = player;
-            }
-            var params:PerkClass = target.getPerk(this);
-            var pTier:int = params.value1;
+            var pTier:int = currentTier(this);
             if (pTier == 1) {
                 pBuffs['tou.mult'] = 0.05;
                 pBuffs['spe.mult'] = 0.05;
@@ -98,6 +88,5 @@ public class TwinHeartMutation extends IMutationPerkType
             maxLvl = 3;
         }
 
-        
     }
 }

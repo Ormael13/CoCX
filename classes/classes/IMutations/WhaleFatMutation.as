@@ -11,9 +11,9 @@ import classes.Player;
 public class WhaleFatMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:PerkClass = null):String {
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.WhaleFatIM);
+            pTier = (pTier == -1)? currentTier(this): pTier;
             var pHunger:int = 0;
             if (pTier >= 1) descS += "Increased damage reduction against physical damage and grants cold resistance permanently";
             if (pTier == 2){
@@ -34,7 +34,7 @@ public class WhaleFatMutation extends IMutationPerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.WhaleFatIM)){
+            switch (currentTier(this)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -48,25 +48,20 @@ public class WhaleFatMutation extends IMutationPerkType
         }
 
         //Mutation Requirements
-        override public function pReqs(target:* = null):void{
+        override public function pReqs():void{
             try{
-                if (target == null){
-                    trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
-                    target = player;
-                }
-                var params:PerkClass = target.getPerk(this);
-                var pTier:int = params.value1;
+                var pTier:int = currentTier(this);
                 //This helps keep the requirements output clean.
-                IMutationsLib.WhaleFatIM.requirements = [];
+                this.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.WhaleFatIM.requireFatTissueMutationSlot()
+                    this.requireFatTissueMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.orcaScore() >= 14 || player.leviathanScore() >= 20;
                     }, "Orca race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.WhaleFatIM.requireLevel(pLvl);
+                    this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
@@ -74,14 +69,9 @@ public class WhaleFatMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:* = null):Object{
+        override public function pBuffs():Object{
             var pBuffs:Object = {};
-            if (target == null){
-                trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
-                target = player;
-            }
-            var params:PerkClass = target.getPerk(this);
-            var pTier:int = params.value1;
+            var pTier:int = currentTier(this);
             if (pTier == 1) pBuffs['tou.mult'] = 0.05;
             else if (pTier == 2) pBuffs['tou.mult'] = 0.15;
             else if (pTier == 3) pBuffs['tou.mult'] = 0.3;
@@ -92,7 +82,6 @@ public class WhaleFatMutation extends IMutationPerkType
             super("Whale Fat IM", "Whale Fat", ".");
             maxLvl = 3;
         }
-
         
     }
 }

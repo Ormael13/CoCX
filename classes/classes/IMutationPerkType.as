@@ -23,11 +23,21 @@ public class IMutationPerkType extends PerkType
 			_maxLvl = Lvl;
 		}
 
-		public function pReqs(target:* = null):void{
+		public function pReqs():void{
 		}
 
-		public function pBuffs(target:* = null):Object{
+		public function pBuffs():Object{
 			return _pBuffs;
+		}
+
+		public function currentTier(mutate:IMutationPerkType):int{
+			try{
+				return player.getPerk(mutate).value1;
+			}
+			catch (e:Error) {	//If param returns a missing result, is likely because player doesn't have it so cannot query.
+				//trace(e);
+			}
+			return 0;
 		}
 
 		//handles Mutations assignment.
@@ -75,7 +85,7 @@ public class IMutationPerkType extends PerkType
 			//Sets up the buff for the perk.
 			function setBuffs():void{
 				var stname:String = "perk_" + mutations.id;
-				var pBuff:Object = mutations.pBuffs(target)
+				var pBuff:Object = mutations.pBuffs()
 				if (target.statStore.hasBuff(stname)){
 					target.statStore.removeBuffs(stname);
 				}
@@ -102,7 +112,7 @@ public class IMutationPerkType extends PerkType
 				target = player;
 			}
 			var stname:String = "perk_" + this.id;
-			var pBuff:Object = this.pBuffs(target);
+			var pBuff:Object = this.pBuffs();
 			if (target.statStore.hasBuff(stname)){
 				target.statStore.removeBuffs(stname);
 			}

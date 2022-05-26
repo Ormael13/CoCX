@@ -1074,10 +1074,10 @@ public class Camp extends NPCAwareContent{
 			saveUpdater.promptSaveUpdate();
 			return;
 		}
-		if (!player.hasPerk(IMutationsLib.MutationsTemplateIM)){
-			CoC.instance.charCreation.setupMutations();
-			return;
-		}
+		//if (!player.hasPerk(IMutationsLib.MutationsTemplateIM)){
+		//	CoC.instance.charCreation.setupMutations();
+		//	return;
+		//}
 		//Massive Balls Bad End (Realistic Mode only)
 		if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && player.ballSize > (18 + (player.str / 2) + (player.tallness / 4))) {
 			badEndGIANTBALLZ();

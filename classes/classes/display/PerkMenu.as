@@ -1092,15 +1092,16 @@ public class PerkMenu extends BaseContent {
 	public function mutationsDatabaseVerify(mutationsArray:Array):void{
 			if(flags[kFLAGS.MUTATIONS_SPOILERS]){
 				for each(var mutation:IMutationPerkType in mutationsArray){
-					if (player.perkv1(mutation) > 0) {	//Just checking if you have the base.
+					var pMutateLvl:int = player.perkv1(mutation);
+					if (pMutateLvl > 0) {	//Just checking if you have the base.
 						outputText("\n" + mutation.name() + ": <font color=\"#008000\">Acquired.</font>");
 					} else {
 						outputText("\n" + mutation.name() + ": <font color=\"#800000\">Missing.</font>");
 					}
-					outputText("\nTier: " + player.perkv1(mutation) + " of " + mutation.maxLvl + ".");
+					outputText("\nTier: " + pMutateLvl + " of " + mutation.maxLvl + ".");
 					var reqs:Array = [];
-					if (mutation.maxLvl != player.perkv1(mutation)) {
-						mutation.pReqs(player)	//Forces requirements to load up
+					if (mutation.maxLvl != pMutateLvl) {
+						mutation.pReqs()	//Forces requirements to load up
 						if (mutation.requirements.length == 0) reqs.push("Missing data. Perhaps Unacquirable?");
 						else{
 							for each (var cond:Object in mutation.requirements){
@@ -1119,20 +1120,35 @@ public class PerkMenu extends BaseContent {
 							}
 						}
 					}
-					if (mutation.maxLvl == player.perkv1(mutation)){	//Highest tier.
+					if (mutation.maxLvl == pMutateLvl){	//Highest tier.
 						reqs.push("You already have the highest tier.");
 					}
 					outputText("\nRequirements for next tier: " + reqs.join(", "));
-					outputText("\nDescription: ");
-					if(mutation.desc().length <= 1) {	//Some desc. contains only "."
-						if (player.perkv1(mutation) == 0) outputText(mutation.desc());
-						else outputText("No description available.");
+
+					if (mutation.maxLvl != pMutateLvl){
+						outputText("\nNext Tier Description: ");
+						if(mutation.mDesc(player.getPerk(mutation), pMutateLvl).length <= 1) {	//Some desc. contains only "."
+							if (!player.hasMutation(mutation)) outputText(mutation.mDesc(player.getPerk(mutation),1));
+							//outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl));
+							else outputText("Error in description for Mutation "+ mutation.name() +".");
+						}
+						else{
+							outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl + 1));
+						}
 					}
-					else{
-						outputText(mutation.desc());
+
+					if (pMutateLvl > 0){
+						outputText("\nCurrent Tier Description: ");
+						if(mutation.mDesc(player.getPerk(mutation), pMutateLvl).length <= 1) {	//Some desc. contains only "."
+							outputText("Error in description for Mutation "+ mutation.name() +".");
+						}
+						else{
+							outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl));
+						}
 					}
+
 					outputText("\n\n")
-					var tempObj:Object = mutation.pBuffs(player)
+					var tempObj:Object = mutation.pBuffs()
 					for (var key:String in tempObj){
 						outputText("Buffs " + key + ": " + tempObj[key] + "\n");
 					}
@@ -1152,7 +1168,7 @@ public class PerkMenu extends BaseContent {
 							outputText(mutation2.desc());
 						}
 						outputText("\n\n")
-						var tempObj2:Object = mutation2.pBuffs(player)
+						var tempObj2:Object = mutation2.pBuffs()
 						for (var key2:String in tempObj2){
 							outputText("Buffs " + key2 + ": " + tempObj2[key2] + "\n");
 						}

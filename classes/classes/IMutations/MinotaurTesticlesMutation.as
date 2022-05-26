@@ -11,9 +11,9 @@ import classes.Player;
 public class MinotaurTesticlesMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:PerkClass = null):String {
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.MinotaurTesticlesIM);
+            pTier = (pTier == -1)? currentTier(this): pTier;
             if (pTier >= 1){
                 descS += "Allows you to keep Cum Cannon special even if minotaur score is lower than 9, max Lust increased by 10.";
             }
@@ -30,7 +30,7 @@ public class MinotaurTesticlesMutation extends IMutationPerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.MinotaurTesticlesIM)){
+            switch (currentTier(this)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -44,18 +44,13 @@ public class MinotaurTesticlesMutation extends IMutationPerkType
         }
 
         //Mutation Requirements
-        override public function pReqs(target:* = null):void{
+        override public function pReqs():void{
             try{
-                if (target == null){
-                    trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
-                    target = player;
-                }
-                var params:PerkClass = target.getPerk(this);
-                var pTier:int = params.value1;
+                var pTier:int = currentTier(this);
                 //This helps keep the requirements output clean.
-                IMutationsLib.MinotaurTesticlesIM.requirements = [];
+                this.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.MinotaurTesticlesIM.requireBallsMutationSlot()
+                    this.requireBallsMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasCock();
                     }, "is Male")
@@ -68,7 +63,7 @@ public class MinotaurTesticlesMutation extends IMutationPerkType
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.MinotaurTesticlesIM.requireLevel(pLvl);
+                    this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
@@ -76,14 +71,9 @@ public class MinotaurTesticlesMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:* = null):Object{
+        override public function pBuffs():Object{
             var pBuffs:Object = {};
-            if (target == null){
-                trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
-                target = player;
-            }
-            var params:PerkClass = target.getPerk(this);
-            var pTier:int = params.value1;
+            var pTier:int = currentTier(this);
             if (pTier == 2) pBuffs['lib.mult'] = 0.1;
             if (pTier == 3){
                 pBuffs['str.mult'] = 0.1;
@@ -98,6 +88,5 @@ public class MinotaurTesticlesMutation extends IMutationPerkType
             maxLvl = 3;
         }
 
-        
     }
 }
