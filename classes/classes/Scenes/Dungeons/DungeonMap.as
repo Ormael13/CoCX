@@ -1,7 +1,7 @@
 package classes.Scenes.Dungeons {
-import classes.StatusEffects;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.StatusEffects;
 
 //derived to make access easier
 public class DungeonMap extends DungeonAbstractContent
@@ -10,11 +10,91 @@ public class DungeonMap extends DungeonAbstractContent
 		public function DungeonMap() 
 		{
 		}
-		
-		public function findLockedDoor1():void { //Door that requires iron key.
-			rawOutputText("\n     " + (player.hasKeyItem("Iron Key") >= 0 ? "|": "L") +"     ");
+
+		/*
+		Reworked map - Svalkash edition.
+		DON'T USE NUMERIC CONSTANTS.
+		Map layouts work the same way as before.
+		BUT, instead of writing maps for each room, you can make a map for dungeon (section), and then use letters and symbols to substitute.
+		'0'-'9' - special meaning, usually some alternating part or locked/unlocked doors
+		'a'-'z', then 'A'-'Z' - substitute for location codes.
+		---
+		Usual markers:
+		P - player
+		L - locked door
+		S - stairs
+		E - exit (NYI)
+		 */
+
+/*
+		public static const DUNGEON_FACTORY_FOYER:int				= 0;
+		public static const DUNGEON_FACTORY_BREAK_ROOM:int			= 1;
+		public static const DUNGEON_FACTORY_PUMP_ROOM:int			= 2;
+		public static const DUNGEON_FACTORY_FURNACE_ROOM:int		= 3;
+		public static const DUNGEON_FACTORY_REPAIR_CLOSET:int		= 4;
+		public static const DUNGEON_FACTORY_MAIN_CHAMBER:int		= 5;
+		public static const DUNGEON_FACTORY_FOREMANS_OFFICE:int	    = 6;
+		public static const DUNGEON_FACTORY_PUMP_CONTROL:int		= 7;
+		public static const DUNGEON_FACTORY_STORE_ROOM:int			= 8;
+		public static const DUNGEON_FACTORY_BATHROOM:int			= 9;
+		*/
+
+		//Function to be similar to 'special'
+		private var rooms_factory:Object = {
+			'a': DUNGEON_FACTORY_FOYER,
+			'b': DUNGEON_FACTORY_BREAK_ROOM,
+			'c': DUNGEON_FACTORY_PUMP_ROOM,
+			'd': DUNGEON_FACTORY_FURNACE_ROOM,
+			'e': DUNGEON_FACTORY_REPAIR_CLOSET,
+			'S': DUNGEON_FACTORY_MAIN_CHAMBER,
+			'f': DUNGEON_FACTORY_BATHROOM
+		};
+
+		//Function to calculate anything on the fly
+		private function get special_factory():Object {
+			return {
+				'L': player.hasKeyItem("Iron Key") >= 0 ? "|": "L"
+			};
 		}
 		
+		private var map_factory:Array = [
+			"    [e]    ",
+			"     |     ",
+			"[S]—[c]—[d]",
+			"     L     ",
+			"[f]—[a]—[b]",
+			"     |     ",
+		];
+
+		private var locName_factory:String = "Factory, 1F";
+
+		private var notSpaces_factory:Array = ["S"];
+
+		private function parseMap_factory():String {
+			//get basic map & associative objects
+			var locName:String = locName_factory;
+			var map:Array = map_factory;
+			var rooms:Object = rooms_factory;
+			var special:Object = special_factory;
+			var notSpaces:Array = notSpaces_factory;
+			//parse buffered map
+			var fullMap:String = locName + "\n\n";
+			for each (var line:String in map) {
+				//check each character
+				for (var i:int = 0; i < line.length; ++i) {
+					var char:String = line.charAt(i);
+					if (special.hasOwnProperty(char)) //replace special points (locked doors)
+						fullMap += special[char];
+					else if (rooms.hasOwnProperty(char)) //replace room contents (player or nothing.. if in 'notSpaces', not replaced by space)
+						fullMap += (dungeonLoc == rooms[char] ? "P" : notSpaces.indexOf(char) != -1 ? char : " ");
+					else fullMap += char;
+				}
+				//add \n to the end of the line
+				fullMap += "\n";
+			}
+			return fullMap;
+		}
+
 		public function findLockedDoor2():void { //Door that requires supervisors key.
 			rawOutputText("\n " + (player.hasKeyItem("Supervisor's Key") >= 0 ? "|": "L") + "        ");
 		}
@@ -38,56 +118,8 @@ public class DungeonMap extends DungeonAbstractContent
 		
 		public function chooseRoomToDisplay():void {
 			if (dungeonLoc >= DUNGEON_FACTORY_FOYER && dungeonLoc < DUNGEON_CAVE_ENTRANCE) { //Factory
-				outputText("Factory, " + (dungeonLoc >= DUNGEON_FACTORY_FOREMANS_OFFICE && dungeonLoc < DUNGEON_FACTORY_BATHROOM ? "2": "1") + "F");
-				if (dungeonLoc == DUNGEON_FACTORY_FOYER) {
-					rawOutputText("\n    [ ]    ");
-					rawOutputText("\n     |     ");
-					rawOutputText("\n[S]—[ ]—[ ]");
-					findLockedDoor1();
-					rawOutputText("\n[ ]—[P]—[ ]");
-					rawOutputText("\n     |     ");
-				}
-				else if (dungeonLoc == DUNGEON_FACTORY_BREAK_ROOM) {
-					rawOutputText("\n    [ ]    ");
-					rawOutputText("\n     |     ");
-					rawOutputText("\n[S]—[ ]—[ ]");
-					findLockedDoor1();
-					rawOutputText("\n[ ]—[ ]—[P]");
-					rawOutputText("\n     |     ");
-				}
-				else if (dungeonLoc == DUNGEON_FACTORY_PUMP_ROOM) {
-					rawOutputText("\n    [ ]    ");
-					rawOutputText("\n     |     ");
-					rawOutputText("\n[S]—[P]—[ ]");
-					findLockedDoor1();
-					rawOutputText("\n[ ]—[ ]—[ ]");
-					rawOutputText("\n     |     ");
-				}
-				else if (dungeonLoc == DUNGEON_FACTORY_FURNACE_ROOM) {
-					rawOutputText("\n    [ ]    ");
-					rawOutputText("\n     |     ");
-					rawOutputText("\n[S]—[ ]—[P]");
-					findLockedDoor1();
-					rawOutputText("\n[ ]—[ ]—[ ]");
-					rawOutputText("\n     |     ");
-				}
-				else if (dungeonLoc == DUNGEON_FACTORY_REPAIR_CLOSET) {
-					rawOutputText("\n    [P]    ");
-					rawOutputText("\n     |     ");
-					rawOutputText("\n[S]—[ ]—[ ]");
-					findLockedDoor1();
-					rawOutputText("\n[ ]—[ ]—[ ]");
-					rawOutputText("\n     |     ");
-				}
-				else if (dungeonLoc == DUNGEON_FACTORY_MAIN_CHAMBER) {
-					rawOutputText("\n    [ ]    ");
-					rawOutputText("\n     |     ");
-					rawOutputText("\n[P]—[ ]—[ ]");
-					findLockedDoor1();
-					rawOutputText("\n[ ]—[ ]—[ ]");
-					rawOutputText("\n     |     ");
-				}
-				else if (dungeonLoc == DUNGEON_FACTORY_FOREMANS_OFFICE) {
+				outputText("Factory, " + (dungeonLoc >= DUNGEON_FACTORY_FOREMANS_OFFICE ? "2": "1") + "F");
+				if (dungeonLoc == DUNGEON_FACTORY_FOREMANS_OFFICE) {
 					rawOutputText("\n[P]—[ ]    ");
 					findLockedDoor2();
 					rawOutputText("\n[ ]        ");
@@ -102,14 +134,7 @@ public class DungeonMap extends DungeonAbstractContent
 					findLockedDoor2();
 					rawOutputText("\n[P]        ");
 				}
-				else if (dungeonLoc == DUNGEON_FACTORY_BATHROOM) {
-					rawOutputText("\n    [ ]    ");
-					rawOutputText("\n     |     ");
-					rawOutputText("\n[S]—[ ]—[ ]");
-					findLockedDoor1();
-					rawOutputText("\n[P]—[ ]—[ ]");
-					rawOutputText("\n     |     ");
-				}
+				else rawOutputText(parseMap_factory());
 			}
 			else if (dungeonLoc >= DUNGEON_CAVE_ENTRANCE && dungeonLoc < DUNGEON_HEL_GUARD_HALL) { //Zetaz's Lair
 				rawOutputText("Zetaz's Lair");
