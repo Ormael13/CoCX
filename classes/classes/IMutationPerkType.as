@@ -65,18 +65,16 @@ public class IMutationPerkType extends PerkType
 					EngineCore.outputText("Someone forgot to add a nextFunc to their acquireMutation. Please report this. Perk: " + this.name());
 					nextFunc = playerMenu;
 				}
-				if(target == null){
+				if (target == null){
 					trace("Missing target, defaulting to player.");
 					EngineCore.outputText("Someone forgot to put a target for this perk in acquireMutation. Please report this. Perk: " + this.name());
 					target = player;
 				}
-				if (!target.hasPerk(mutations)){	//Create if player doesn't have it
-					target.createPerk(mutations, 1,0,0,0);
-				}
-				else if(pTier > 1){	//Used for NPCs to directly set perkTier
+				if (!target.hasPerk(mutations)) {	//No Perk, set to 1 or pTier.
 					target.createPerk(mutations, pTier,0,0,0);
-				}
-				else{	//increments tier by 1 for player.
+				} else if (pTier > 1) {				//Perk exists, but pTier is > 1.
+					target.setPerkValue(mutations, 1, pTier);
+				} else {							//Perk is incremented by 1.
 					target.setPerkValue(mutations,1,target.perkv1(mutations) + 1);
 				}
 				setBuffs();
@@ -84,7 +82,7 @@ public class IMutationPerkType extends PerkType
 
 			} catch(e:Error){
 				trace(e.getStackTrace());
-				EngineCore.outputText("Something has gone wrong with Dynamic Perks. Please report this to JTecx along with which perk/mutation was selected, along with the bonk stick.");
+				EngineCore.outputText("Something has gone wrong with acquireMutation. Please report this to JTecx along with which mutation was selected, along with the bonk stick.");
 				EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour);
 			}
 			if (nextFunc != "none") nextFunc();	//"none" is a much more explicit statement... though I suppose it can be replaced to a `false` instead....
