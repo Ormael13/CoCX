@@ -3,7 +3,7 @@ package classes.Scenes.Dungeons {
  * A map for **one** dungeon (or closed dungeon section.
  * Contains all necessary methods and information for checking the player location (INSIDE the dungeon) and printing the map.
  */
-public class DungeonMap extends BaseContent {
+public class DungeonMap {
     /*
     Reworked map - Svalkash edition.
     DON'T USE NUMERIC CONSTANTS.
@@ -78,7 +78,7 @@ public class DungeonMap extends BaseContent {
 
     //Checks if the player is in the dungeon by iterating over all possible rooms and comparing them to dungeonLoc
     public function playerIsHere(location:*):Boolean {
-        for each (var room:int in rooms)
+        for each (var room:* in rooms)
             if (location === room)
                 return true;
         return false;

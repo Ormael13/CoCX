@@ -27,7 +27,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					'd': DUNGEON_FACTORY_FURNACE_ROOM,
 					'e': DUNGEON_FACTORY_REPAIR_CLOSET,
 					'S': DUNGEON_FACTORY_MAIN_CHAMBER,
-					'f': DUNGEON_FACTORY_BATHROOM,
+					'f': DUNGEON_FACTORY_BATHROOM
 				},
                 //Unique symbols, replaced by another one after checking the condition
 				function():Object { return {
@@ -42,7 +42,7 @@ public class DungeonMaps extends DungeonAbstractContent
 				{
 					'S': DUNGEON_FACTORY_FOREMANS_OFFICE,
 					'a': DUNGEON_FACTORY_PUMP_CONTROL,
-					'b': DUNGEON_FACTORY_STORE_ROOM,
+					'b': DUNGEON_FACTORY_STORE_ROOM
 				},
 				function():Object { return {
 					'L': player.hasKeyItem("Supervisor's Key") >= 0 ? "|": "L"
@@ -50,7 +50,7 @@ public class DungeonMaps extends DungeonAbstractContent
 			),
 			new DungeonMap("Zetaz's Lair", [
 					"    [g]—[f]",
-                    "     L   | "
+                    "     L   | ",
 					"[d]—[c]—[e]",
 					"     |     ",
 					"    [b]    ",
@@ -65,7 +65,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					'd': DUNGEON_CAVE_FUNGUS_CAVERN,
 					'e': DUNGEON_CAVE_TORTURE_ROOM,
 					'f': DUNGEON_CAVE_SECRET_TUNNEL,
-					'g': DUNGEON_CAVE_ZETAZ_CHAMBER,
+					'g': DUNGEON_CAVE_ZETAZ_CHAMBER
 				},
 				function():Object { return {
 					'L': flags[kFLAGS.ZETAZ_DOOR_UNLOCKED] > 0 ? "|": "L"
@@ -80,7 +80,7 @@ public class DungeonMaps extends DungeonAbstractContent
 				],
 				{
 					'a': DUNGEON_HEL_GUARD_HALL,
-					'S': DUNGEON_HEL_STAIR_WELL,
+					'S': DUNGEON_HEL_STAIR_WELL
 				}
 			),
 			new DungeonMap("Tower of the Phoenix, basement", [
@@ -91,8 +91,8 @@ public class DungeonMaps extends DungeonAbstractContent
 				],
 				{
 					'W': DUNGEON_HEL_WINE_CELLAR,
-					's': DUNGEON_HEL_DUNGEON,
-				}
+					's': DUNGEON_HEL_DUNGEON
+				},
                 null,
                 ['s', 'W'] //don't replace 'W' with a space!
 			),
@@ -103,7 +103,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					"           ",
 				],
 				{
-					'S': DUNGEON_HEL_MEZZANINE,
+					'S': DUNGEON_HEL_MEZZANINE
 				}
 			),
 			new DungeonMap("Tower of the Phoenix, 3rd floor", [
@@ -114,7 +114,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					"           ",
 				],
 				{
-					'S': DUNGEON_HEL_MEZZANINE,
+					'S': DUNGEON_HEL_MEZZANINE
 				}
 			),
 			new DungeonMap("Cave of the Sand Witches", [
@@ -143,7 +143,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					'm': DUNGEON_WITCH_CUM_WITCH_BEDROOM,
 					'n': DUNGEON_WITCH_CUM_WITCH_OFFICE,
 					'o': DUNGEON_WITCH_SACRIFICIAL_ALTAR,
-					'p': DUNGEON_WITCH_THRONE_ROOM,
+					'p': DUNGEON_WITCH_THRONE_ROOM
 				},
 				function():Object { return {
 					'L': flags[kFLAGS.SANDWITCH_THRONE_UNLOCKED] > 0 ? "|": "L"
@@ -176,7 +176,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					'l': DUNGEON_HIDDEN_CAVE_NARROW_T,
 					'm': DUNGEON_HIDDEN_CAVE_NARROW_T_N,
 					'n': DUNGEON_HIDDEN_CAVE_L_STORAGE_W,
-					'o': DUNGEON_HIDDEN_CAVE_L_STORAGE_E,
+					'o': DUNGEON_HIDDEN_CAVE_L_STORAGE_E
 				},
 				function():Object { return {
 					'L': flags[kFLAGS.SANDWITCH_THRONE_UNLOCKED] > 0 ? "|": "L"
@@ -193,7 +193,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					'a': DUNGEON_HIDDEN_CAVE_TUNNEL_00,
 					'b': DUNGEON_HIDDEN_CAVE_TUNNEL_01,
 					'c': DUNGEON_HIDDEN_CAVE_TUNNEL_02,
-					'd': DUNGEON_HIDDEN_CAVE_TEDS_LAIR,
+					'd': DUNGEON_HIDDEN_CAVE_TEDS_LAIR
 				},
 				function():Object { return {
 					'?': flags[kFLAGS.HIDDEN_CAVE_2ND_FLOOR] > 0 ? "|": " "
@@ -209,7 +209,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					'a': DUNGEON_HIDDEN_CAVE_SMALL_CAVE_W,
 					'b': DUNGEON_HIDDEN_CAVE_MEDIUM_CAVE,
 					'c': DUNGEON_HIDDEN_CAVE_SMALL_CAVE_E,
-					'd': DUNGEON_HIDDEN_CAVE_SMALL_CAVE_N,
+					'd': DUNGEON_HIDDEN_CAVE_SMALL_CAVE_N
 				}
 			),
 			new DungeonMap("Den of Desire", [
@@ -226,7 +226,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					'a': DUNGEON_DEN_OF_DESIRE_ENTRANCE,
 					'b': DUNGEON_DEN_OF_DESIRE_GREAT_HALL_AREA,
 					'c': DUNGEON_DEN_OF_DESIRE_LABORATORY,
-					'd': DUNGEON_DEN_OF_DESIRE_HERO_SLAYER_OMNIBUS,
+					'd': DUNGEON_DEN_OF_DESIRE_HERO_SLAYER_OMNIBUS
 				}
 			),
 			new DungeonMap("River Dungeon, 1st floor", [
@@ -248,7 +248,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					'e': DUNGEON_RIVER_FLOOR_01_ROOM_07,
 					'f': DUNGEON_RIVER_FLOOR_01_ROOM_08,
 					'g': DUNGEON_RIVER_FLOOR_01_ROOM_09,
-					'h': DUNGEON_RIVER_FLOOR_01_ROOM_10,
+					'h': DUNGEON_RIVER_FLOOR_01_ROOM_10
 				}
 			),
 			new DungeonMap("River Dungeon, 1st floor, sub-area A", [
@@ -264,7 +264,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					'b': DUNGEON_RIVER_FLOOR_01_ROOM_12,
 					'c': DUNGEON_RIVER_FLOOR_01_ROOM_13,
 					'd': DUNGEON_RIVER_FLOOR_01_ROOM_14,
-					'e': DUNGEON_RIVER_FLOOR_01_ROOM_15,
+					'e': DUNGEON_RIVER_FLOOR_01_ROOM_15
 				}
 			),
 			new DungeonMap("River Dungeon, 1st floor, sub-area B", [
@@ -280,7 +280,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					'b': DUNGEON_RIVER_FLOOR_01_ROOM_17,
 					'c': DUNGEON_RIVER_FLOOR_01_ROOM_18,
 					'd': DUNGEON_RIVER_FLOOR_01_ROOM_19,
-					'e': DUNGEON_RIVER_FLOOR_01_ROOM_20,
+					'e': DUNGEON_RIVER_FLOOR_01_ROOM_20
 				}
 			),
 			new DungeonMap("River Dungeon, 2nd floor", [
@@ -309,7 +309,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					'k': DUNGEON_RIVER_FLOOR_02_ROOM_12,
 					'l': DUNGEON_RIVER_FLOOR_02_ROOM_13,
 					'm': DUNGEON_RIVER_FLOOR_02_ROOM_14,
-					'S': DUNGEON_RIVER_FLOOR_02_ROOM_15,
+					'S': DUNGEON_RIVER_FLOOR_02_ROOM_15
 				}
 			),
 			new DungeonMap("River Dungeon, 2nd floor, sub-area A", [
@@ -320,7 +320,7 @@ public class DungeonMaps extends DungeonAbstractContent
 				{
 					'a': DUNGEON_RIVER_FLOOR_02_ROOM_16,
 					'b': DUNGEON_RIVER_FLOOR_02_ROOM_17,
-					'c': DUNGEON_RIVER_FLOOR_02_ROOM_18,
+					'c': DUNGEON_RIVER_FLOOR_02_ROOM_18
 				}
 			),
 			new DungeonMap("River Dungeon, 2nd floor, sub-area B", [
@@ -331,7 +331,7 @@ public class DungeonMaps extends DungeonAbstractContent
 				{
 					'a': DUNGEON_RIVER_FLOOR_02_ROOM_19,
 					'b': DUNGEON_RIVER_FLOOR_02_ROOM_20,
-					'c': DUNGEON_RIVER_FLOOR_02_ROOM_21,
+					'c': DUNGEON_RIVER_FLOOR_02_ROOM_21
 				}
 			),
 			new DungeonMap("River Dungeon, 2nd floor, sub-area C", [
@@ -342,7 +342,7 @@ public class DungeonMaps extends DungeonAbstractContent
 				{
 					'a': DUNGEON_RIVER_FLOOR_02_ROOM_22,
 					'b': DUNGEON_RIVER_FLOOR_02_ROOM_23,
-					'c': DUNGEON_RIVER_FLOOR_02_ROOM_24,
+					'c': DUNGEON_RIVER_FLOOR_02_ROOM_24
 				}
 			),
 			new DungeonMap("River Dungeon, 2nd floor, sub-area D", [
@@ -353,7 +353,7 @@ public class DungeonMaps extends DungeonAbstractContent
 				{
 					'a': DUNGEON_RIVER_FLOOR_02_ROOM_25,
 					'b': DUNGEON_RIVER_FLOOR_02_ROOM_26,
-					'c': DUNGEON_RIVER_FLOOR_02_ROOM_27,
+					'c': DUNGEON_RIVER_FLOOR_02_ROOM_27
 				}
 			),
 			new DungeonMap("River Dungeon, 3rd floor", [
@@ -368,26 +368,26 @@ public class DungeonMaps extends DungeonAbstractContent
 					"[S]     [t]-[r]-[p]-[o]    ",
 				],
 				{
-					's': DUNGEON_RIVER_FLOOR_02_ROOM_01,
-					'a': DUNGEON_RIVER_FLOOR_02_ROOM_02,
-					'b': DUNGEON_RIVER_FLOOR_02_ROOM_03,
-					'c': DUNGEON_RIVER_FLOOR_02_ROOM_04,
-					'd': DUNGEON_RIVER_FLOOR_02_ROOM_05,
-					'e': DUNGEON_RIVER_FLOOR_02_ROOM_06,
-					'f': DUNGEON_RIVER_FLOOR_02_ROOM_07,
-					'g': DUNGEON_RIVER_FLOOR_02_ROOM_08,
-					'h': DUNGEON_RIVER_FLOOR_02_ROOM_09,
-					'i': DUNGEON_RIVER_FLOOR_02_ROOM_10,
-					'j': DUNGEON_RIVER_FLOOR_02_ROOM_11,
-					'k': DUNGEON_RIVER_FLOOR_02_ROOM_12,
-					'l': DUNGEON_RIVER_FLOOR_02_ROOM_13,
-					'm': DUNGEON_RIVER_FLOOR_02_ROOM_14,
-					'n': DUNGEON_RIVER_FLOOR_02_ROOM_15,
-					'o': DUNGEON_RIVER_FLOOR_02_ROOM_16,
-					'p': DUNGEON_RIVER_FLOOR_02_ROOM_17,
-					'r': DUNGEON_RIVER_FLOOR_02_ROOM_18, //s missed - used for stairs
-					't': DUNGEON_RIVER_FLOOR_02_ROOM_19,
-					'S': DUNGEON_RIVER_FLOOR_02_ROOM_20,
+					's': DUNGEON_RIVER_FLOOR_03_ROOM_01,
+					'a': DUNGEON_RIVER_FLOOR_03_ROOM_02,
+					'b': DUNGEON_RIVER_FLOOR_03_ROOM_03,
+					'c': DUNGEON_RIVER_FLOOR_03_ROOM_04,
+					'd': DUNGEON_RIVER_FLOOR_03_ROOM_05,
+					'e': DUNGEON_RIVER_FLOOR_03_ROOM_06,
+					'f': DUNGEON_RIVER_FLOOR_03_ROOM_07,
+					'g': DUNGEON_RIVER_FLOOR_03_ROOM_08,
+					'h': DUNGEON_RIVER_FLOOR_03_ROOM_09,
+					'i': DUNGEON_RIVER_FLOOR_03_ROOM_10,
+					'j': DUNGEON_RIVER_FLOOR_03_ROOM_11,
+					'k': DUNGEON_RIVER_FLOOR_03_ROOM_12,
+					'l': DUNGEON_RIVER_FLOOR_03_ROOM_13,
+					'm': DUNGEON_RIVER_FLOOR_03_ROOM_14,
+					'n': DUNGEON_RIVER_FLOOR_03_ROOM_15,
+					'o': DUNGEON_RIVER_FLOOR_03_ROOM_16,
+					'p': DUNGEON_RIVER_FLOOR_03_ROOM_17,
+					'r': DUNGEON_RIVER_FLOOR_03_ROOM_18, //s missed - used for stairs
+					't': DUNGEON_RIVER_FLOOR_03_ROOM_19,
+					'S': DUNGEON_RIVER_FLOOR_03_ROOM_20
 				}
 			),
 			new DungeonMap("River Dungeon, 3rd floor, hall", [
@@ -396,25 +396,25 @@ public class DungeonMaps extends DungeonAbstractContent
 					"[m]-[i]-[f]-[c]",
 					" |   |   |   | ",
 					"[l]-[h]-[e]-[b]",
-                    " L           | "
+                    " L           | ",
                     "[k]         [a]",
 					"             | ",
 				],
 				{
-					'a': DUNGEON_RIVER_FLOOR_02_ROOM_21,
-					'b': DUNGEON_RIVER_FLOOR_02_ROOM_22,
-					'c': DUNGEON_RIVER_FLOOR_02_ROOM_23,
-					'd': DUNGEON_RIVER_FLOOR_02_ROOM_24,
-					'e': DUNGEON_RIVER_FLOOR_02_ROOM_25,
-					'f': DUNGEON_RIVER_FLOOR_02_ROOM_26,
-					'g': DUNGEON_RIVER_FLOOR_02_ROOM_27,
-					'h': DUNGEON_RIVER_FLOOR_02_ROOM_28,
-					'i': DUNGEON_RIVER_FLOOR_02_ROOM_29,
-					'j': DUNGEON_RIVER_FLOOR_02_ROOM_20,
-					'k': DUNGEON_RIVER_FLOOR_02_ROOM_31,
-					'l': DUNGEON_RIVER_FLOOR_02_ROOM_32,
-					'm': DUNGEON_RIVER_FLOOR_02_ROOM_33,
-					'n': DUNGEON_RIVER_FLOOR_02_ROOM_34,
+					'a': DUNGEON_RIVER_FLOOR_03_ROOM_21,
+					'b': DUNGEON_RIVER_FLOOR_03_ROOM_22,
+					'c': DUNGEON_RIVER_FLOOR_03_ROOM_23,
+					'd': DUNGEON_RIVER_FLOOR_03_ROOM_24,
+					'e': DUNGEON_RIVER_FLOOR_03_ROOM_25,
+					'f': DUNGEON_RIVER_FLOOR_03_ROOM_26,
+					'g': DUNGEON_RIVER_FLOOR_03_ROOM_27,
+					'h': DUNGEON_RIVER_FLOOR_03_ROOM_28,
+					'i': DUNGEON_RIVER_FLOOR_03_ROOM_29,
+					'j': DUNGEON_RIVER_FLOOR_03_ROOM_20,
+					'k': DUNGEON_RIVER_FLOOR_03_ROOM_31,
+					'l': DUNGEON_RIVER_FLOOR_03_ROOM_32,
+					'm': DUNGEON_RIVER_FLOOR_03_ROOM_33,
+					'n': DUNGEON_RIVER_FLOOR_03_ROOM_34
 				},
 				function():Object { return {
 					'L': flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 7 ? "|": "L"
@@ -436,7 +436,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					'b': DUNGEON_ANZU_LIVING_ROOM,
 					'c': DUNGEON_ANZU_BATHROOM,
 					'd': DUNGEON_ANZU_DINING_ROOM,
-					'e': DUNGEON_ANZU_KITCHEN,
+					'e': DUNGEON_ANZU_KITCHEN
 				}
 			),
 			new DungeonMap("Anzu's Palace, 2nd floor", [
@@ -451,7 +451,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					'S': DUNGEON_ANZU_HALL_FLOOR2,
 					'a': DUNGEON_ANZU_BEDROOM,
 					'b': DUNGEON_ANZU_LIBRARY,
-					'c': DUNGEON_ANZU_MULTIUSE_ROOM,
+					'c': DUNGEON_ANZU_MULTIUSE_ROOM
 				}
 			),
 			new DungeonMap("Anzu's Palace, 3rd floor", [
@@ -465,7 +465,7 @@ public class DungeonMaps extends DungeonAbstractContent
 				{
 					'S': DUNGEON_ANZU_HALL_FLOOR3,
 					'a': DUNGEON_ANZU_PALACE_VAULTS,
-					'b': DUNGEON_ANZU_ALCHEMY_ROOM,
+					'b': DUNGEON_ANZU_ALCHEMY_ROOM
 				}
 			),
 			new DungeonMap("Anzu's Palace, roof", [
@@ -477,7 +477,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					"           ",
 				],
 				{
-					's': DUNGEON_ANZU_ROOF,
+					's': DUNGEON_ANZU_ROOF
 				}
 			),
 			new DungeonMap("Anzu's Palace, basement", [
@@ -490,7 +490,7 @@ public class DungeonMaps extends DungeonAbstractContent
 				],
 				{
 					's': DUNGEON_ANZU_BASEMENT,
-					'a': DUNGEON_ANZU_ARMORY,
+					'a': DUNGEON_ANZU_ARMORY
 				}
 			),
 			new DungeonMap("Ebon Labyrinth", [
@@ -500,7 +500,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					"Did you <i>REALLY</i> expect a to get a <b>map</b> of a <b>labyrinth</b>?",
 				],
 				{
-					'a': DUNGEON_EBON_LABYRINTH,
+					'a': DUNGEON_EBON_LABYRINTH
 				}
 			),
 			new DungeonMap("Bee Hive", [
@@ -516,7 +516,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					'b': DUNGEON_BEE_HIVE_2,
 					'c': DUNGEON_BEE_HIVE_3,
 					'd': DUNGEON_BEE_HIVE_4,
-					'e': DUNGEON_BEE_HIVE_5,
+					'e': DUNGEON_BEE_HIVE_5
 				}
 			),
             //D3 maps. Note that they use 'currentRoom' instead of 'dungeonLoc'
@@ -538,25 +538,25 @@ public class DungeonMaps extends DungeonAbstractContent
 					'd': "roomofmirrors",
 					'e': "magpiehalls",
 					'f': "magpiehalln",
-					'g': "tunnel2",
+					'g': "tunnel2"
 				}
 			),
 			new DungeonMap("Lethice's Keep", [
-                    "     [p]     ",
-                    "      L      ",
-                    " [h]—[i]—[j] ",
-                    "  |       |  ",
-                    "—[g]     [k]—",
-                    "  |       |  ",
-                    " [f]—[o]—[l] ",
-                    "  |       |  ",
-                    " [e]     [m] ",
-                    "  |       |  ",
-                    "—[d]—[c]—[n]—",
-                    "      |   |  ",
-                    "     [b] [p] ",
-                    "      |      ",
-                    "    —[a]     ",
+                    "    [r]    ",
+                    "     L     ",
+                    "[h]—[i]—[j]",
+                    " |       | ",
+                    "[g]     [k]",
+                    " |       | ",
+                    "[f]—[o]—[l]",
+                    " |       | ",
+                    "[e]     [m]",
+                    " |       | ",
+                    "[d]—[c]—[n]",
+                    "     |   | ",
+                    "    [b] [p]",
+                    "     |     ",
+                    "   —[a]    ",
 				],
 				{
 					'a': "edgeofkeep",
@@ -575,7 +575,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					'n': "southeastcourtyard",
 					'o': "courtyardsquare",
 					'p': "greatlift",
-					'p': "throneroom",
+					'r': "throneroom"
 				},
 				function():Object { return {
 					'L': SceneLib.d3.unlockedThroneRoom() ? "|": "L"
@@ -616,7 +616,7 @@ public class DungeonMaps extends DungeonAbstractContent
 			clearOutput();
 			outputText("<b><font face=\"_typewriter\">");
 			if (inRoomedDungeon)
-                chooseRoomToDisplay(SceneLib.d3._currentRoom);
+				chooseRoomToDisplay(SceneLib.d3._currentRoom);
 			else
                 chooseRoomToDisplay(dungeonLoc);
 			outputText("</font></b>");
