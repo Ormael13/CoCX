@@ -1847,7 +1847,7 @@ public class SaveUpdater extends NPCAwareContent {
 						if (!arrayValY) arrayVal++;
 					}
 				}
-				CoC.instance.charCreation.setupMutations();
+				//CoC.instance.charCreation.setupMutations();
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.015;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.016) {

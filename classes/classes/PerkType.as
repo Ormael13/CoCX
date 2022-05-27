@@ -682,5 +682,9 @@ public class PerkType extends BaseContent
 			return this;
 		}
 
+		public function mDesc(params:PerkClass, tier:int = 0):String	//Can't overload the function, and override won't do it.
+		{
+			return _desc;
+		}
 	}
 }

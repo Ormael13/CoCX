@@ -377,12 +377,9 @@ public function saveLoad(e:MouseEvent = null):void
 	//This is to clear the 'game over' block from stopping simpleChoices from working.  Loading games supercede's game over.
 
 	menu();
-	//addButton(0, "Save", saveScreen);
 	addButton(1, "Load", loadScreen);
 	addButton(2, "Delete", deleteScreen);
-	//addButton(5, "Save to File", saveToFile);
 	addButton(6, "Load File", openSave);
-	//addButton(8, "AutoSave: " + autoSaveSuffix, autosaveToggle);
 	addButton(14, "Back", EventParser.gameOver, true);
 
 	if (mainView.getButtonText( 0 ) == "Game Over")

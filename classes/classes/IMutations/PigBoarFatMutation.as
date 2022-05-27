@@ -6,15 +6,16 @@ package classes.IMutations
 {
 import classes.PerkClass;
 import classes.IMutationPerkType;
+import classes.Creature;
 import classes.Player;
 import classes.Races;
 
 public class PigBoarFatMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:PerkClass = null):String {
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.PigBoarFatIM);
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1) descS += "Your altered fat tissue allows to increase your natural resistance to damage, toughness and thickness";
             if (pTier == 1){
                 descS = "Increase max Hunger cap by 5 (if PC have Hunger bar active)";
@@ -32,7 +33,7 @@ public class PigBoarFatMutation extends IMutationPerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.PigBoarFatIM)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -46,18 +47,13 @@ public class PigBoarFatMutation extends IMutationPerkType
         }
 
         //Mutation Requirements
-        override public function pReqs(target:* = null):void{
+        override public function pReqs():void{
             try{
-                if (target == null){
-                    trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
-                    target = player;
-                }
-                var params:PerkClass = target.getPerk(this);
-                var pTier:int = params.value1;
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
-                IMutationsLib.PigBoarFatIM.requirements = [];
+                this.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.PigBoarFatIM.requireFatTissueMutationSlot()
+                    this.requireFatTissueMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.thickness >= 100;
                     }, "100+ thickness")
@@ -65,7 +61,7 @@ public class PigBoarFatMutation extends IMutationPerkType
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.PigBoarFatIM.requireLevel(pLvl);
+                    this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
@@ -73,14 +69,9 @@ public class PigBoarFatMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:* = null):Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
-            if (target == null){
-                trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
-                target = player;
-            }
-            var params:PerkClass = target.getPerk(this);
-            var pTier:int = params.value1;
+            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) pBuffs['tou.mult'] = 0.05;
             if (pTier == 2) pBuffs['tou.mult'] = 0.15;
             if (pTier == 3) pBuffs['tou.mult'] = 0.3;
@@ -92,6 +83,5 @@ public class PigBoarFatMutation extends IMutationPerkType
             maxLvl = 3;
         }
 
-        
     }
 }

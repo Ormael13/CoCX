@@ -7,14 +7,15 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
+import classes.Creature;
 import classes.Player;
 import classes.Races;
 
 public class ElvishPeripheralNervSysMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:PerkClass = null):String {
-            var pTier:int = player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM);
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             var perChg:int = 5 * pTier
             var descS:String = "";
             if (pTier >= 1) descS += "Your Elvish Peripheral NervSys is giving you +" + perChg +"% of max core Spe as phantom Spe and allows you to keep Elven Sense even without elf arms/legs";
@@ -32,7 +33,7 @@ public class ElvishPeripheralNervSysMutation extends IMutationPerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -46,24 +47,19 @@ public class ElvishPeripheralNervSysMutation extends IMutationPerkType
         }
 
         //Mutation Requirements
-        override public function pReqs(target:* = null):void{
+        override public function pReqs():void{
             try{
-                if (target == null){
-                    trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
-                    target = player;
-                }
-                var params:PerkClass = target.getPerk(this);
-                var pTier:int = params.value1;
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
-                IMutationsLib.ElvishPeripheralNervSysIM.requirements = [];
+                this.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.ElvishPeripheralNervSysIM.requirePeripheralNervSysMutationSlot()
+                    this.requirePeripheralNervSysMutationSlot()
                     .requirePerk(PerkLib.ElvenSense)
                     .requireAnyRace(Races.ELF, Races.WOODELF);
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.ElvishPeripheralNervSysIM.requireLevel(pLvl);
+                    this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
@@ -71,14 +67,9 @@ public class ElvishPeripheralNervSysMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:* = null):Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
-            if (target == null){
-                trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
-                target = player;
-            }
-            var params:PerkClass = target.getPerk(this);
-            var pTier:int = params.value1;
+            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 2) pBuffs['spe.mult'] = 0.05;
             if (pTier == 3) pBuffs['spe.mult'] = 0.1;
             return pBuffs;
@@ -89,6 +80,5 @@ public class ElvishPeripheralNervSysMutation extends IMutationPerkType
             maxLvl = 3;
         }
 
-        
     }
 }

@@ -1228,7 +1228,7 @@ private function InternalMutations0(page:int = 0, GoM:int = 0):void {
 		var menuItems:Array = [];
 		var target:* = player;
 		for each (var mutations:IMutationPerkType in pArray){
-			mutations.pReqs(player);
+			mutations.pReqs();
 			trace("" + mutations.name() + ": Checking requirements. v");
 			if (mutations.available(target) && mutations.maxLvl > target.perkv1(mutations)){
 				trace("Requirements met, adding in.");

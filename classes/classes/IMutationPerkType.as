@@ -23,20 +23,37 @@ public class IMutationPerkType extends PerkType
 			_maxLvl = Lvl;
 		}
 
-		public function pReqs(target:* = null):void{
+		public function pReqs():void{
 		}
 
-		public function pBuffs(target:* = null):Object{
+		public function pBuffs(target:Creature = null):Object{
 			return _pBuffs;
+		}
+
+		/**
+		 * Returns current target's mutation level. Also prevents circular dependency when checking for tier when mutation has not been initialized yet.
+		 *
+		 * @param mutate	Type:IMutationPerkType. Takes the mutation in question as arg.
+		 * @param target	Type:Creature. 			Takes the target(NPC or player) as arg.
+		 * @return			If Mutation exists, then the (int)tier of the mutation. Else, 0.
+		 */
+		public function currentTier(mutate:IMutationPerkType, target:Creature):int{
+			try{
+				return target.getPerk(mutate).value1;
+			}
+			catch (e:Error) {	//If param returns a missing result, is likely because player doesn't have it so cannot query.
+				//trace(e);
+			}
+			return 0;
 		}
 
 		//handles Mutations assignment.
 		/**
 		 * acquireMutation is used to handle adding Mutations to players/NPCs.
 		 *
-		 * @param target	Type: Creature. Takes Player/enemy class as arg. Indicates if the mutation goes to Player or to an NPC.
-		 * @param nextFunc	Type: *(String/function). Takes "none"/ function as arg. If NPC, put "none", else put in next function it should go to.
-		 * @param pTier		Type:Int. Takes perkTier as arg. If target is NPC, you can also directly assign a tier to them, to skip having to add the perk in x times.
+		 * @param target	Type: Creature. 					Takes Player/enemy class as arg. Indicates if the mutation goes to Player or to an NPC.
+		 * @param nextFunc	Type: *(String/function). 			Takes "none"/ function as arg. If NPC, put "none", else put in next function it should go to.
+		 * @param pTier		Type:Int. Takes perkTier as arg. 	If target is NPC, you can also directly assign a tier to them, to skip having to add the perk in x times.
 		 */
 		public function acquireMutation(target:Creature, nextFunc:*, pTier:int = 1):void{
 			var mutations:IMutationPerkType = this;

@@ -7,15 +7,16 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
+import classes.Creature;
 import classes.Player;
 import classes.Races;
 
 public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:PerkClass = null):String {
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM);
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1) descS += "Your Salamander adrenal glands are giving you slight boost to your natural stamina";
             if (pTier == 1){
                 descS += "and libido";
@@ -33,7 +34,7 @@ public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -47,23 +48,18 @@ public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
         }
 
         //Mutation Requirements
-        override public function pReqs(target:* = null):void{
+        override public function pReqs():void{
             try{
-                if (target == null){
-                    trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
-                    target = player;
-                }
-                var params:PerkClass = target.getPerk(this);
-                var pTier:int = params.value1;
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
-                IMutationsLib.SalamanderAdrenalGlandsIM.requirements = [];
+                this.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.SalamanderAdrenalGlandsIM.requireAdrenalGlandsMutationSlot()
+                    this.requireAdrenalGlandsMutationSlot()
                     .requirePerk(PerkLib.Lustzerker).requireAnyRace(Races.SALAMANDER, Races.PHOENIX);
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.SalamanderAdrenalGlandsIM.requireLevel(pLvl);
+                    this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
@@ -71,14 +67,9 @@ public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:* = null):Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
-            if (target == null){
-                trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
-                target = player;
-            }
-            var params:PerkClass = target.getPerk(this);
-            var pTier:int = params.value1;
+            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) {
                 pBuffs['tou.mult'] = 0.05;
                 pBuffs['lib.mult'] = 0.05;
@@ -103,6 +94,5 @@ public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
             maxLvl = 3;
         }
 
-        
     }
 }
