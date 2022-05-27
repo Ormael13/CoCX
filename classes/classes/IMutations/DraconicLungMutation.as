@@ -7,6 +7,7 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
+import classes.Creature;
 import classes.Player;
 
 public class DraconicLungMutation extends IMutationPerkType
@@ -14,7 +15,7 @@ public class DraconicLungMutation extends IMutationPerkType
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            pTier = (pTier == -1)? currentTier(this): pTier;
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
                 descS = "Allows you to use breath attacks more often. (All dragon breaths usable once per combat)";
             }
@@ -31,7 +32,7 @@ public class DraconicLungMutation extends IMutationPerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (currentTier(this)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -47,7 +48,7 @@ public class DraconicLungMutation extends IMutationPerkType
         //Mutation Requirements
         override public function pReqs():void{
             try{
-                var pTier:int = currentTier(this);
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
@@ -67,9 +68,9 @@ public class DraconicLungMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs():Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this);
+            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) pBuffs['spe.mult'] = 0.05;
             if (pTier == 2) pBuffs['spe.mult'] = 0.15;
             if (pTier == 3) pBuffs['spe.mult'] = 0.35;

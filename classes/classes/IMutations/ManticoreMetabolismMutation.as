@@ -7,6 +7,7 @@ package classes.IMutations
 import classes.BodyParts.Tail;
 import classes.PerkClass;
 import classes.IMutationPerkType;
+import classes.Creature;
 import classes.Player;
 
 public class ManticoreMetabolismMutation extends IMutationPerkType
@@ -14,7 +15,7 @@ public class ManticoreMetabolismMutation extends IMutationPerkType
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            pTier = (pTier == -1)? currentTier(this): pTier;
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
                 descS += "Speed is increased with cum intake for a few hours, and allows you to attack with multiple spikes at once";
             }
@@ -31,7 +32,7 @@ public class ManticoreMetabolismMutation extends IMutationPerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (currentTier(this)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -47,7 +48,7 @@ public class ManticoreMetabolismMutation extends IMutationPerkType
         //Mutation Requirements
         override public function pReqs():void{
             try{
-                var pTier:int = currentTier(this);
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
@@ -66,9 +67,9 @@ public class ManticoreMetabolismMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs():Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this);
+            var pTier:int = currentTier(this, (target == null)? player : target);
             return pBuffs;
         }
 

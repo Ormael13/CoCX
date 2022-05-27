@@ -6,6 +6,7 @@ package classes.IMutations
 {
 import classes.PerkClass;
 import classes.IMutationPerkType;
+import classes.Creature;
 import classes.Player;
 
 public class FrozenHeartMutation extends IMutationPerkType
@@ -13,7 +14,7 @@ public class FrozenHeartMutation extends IMutationPerkType
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            pTier = (pTier == -1)? currentTier(this): pTier;
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
                 descS += "Allow you to retain the ability Ice barrage and hungering cold at all times";
             }
@@ -31,7 +32,7 @@ public class FrozenHeartMutation extends IMutationPerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (currentTier(this)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -47,7 +48,7 @@ public class FrozenHeartMutation extends IMutationPerkType
         //Mutation Requirements
         override public function pReqs():void{
             try{
-                var pTier:int = currentTier(this);
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
@@ -66,9 +67,9 @@ public class FrozenHeartMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs():Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this);
+            var pTier:int = currentTier(this, (target == null)? player : target);
             return pBuffs;
         }
 

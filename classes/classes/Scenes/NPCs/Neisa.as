@@ -8,7 +8,16 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.CatLikeNimblenessMutation;
+import classes.IMutations.DraconicLungMutation;
+import classes.IMutations.GorgonEyesMutation;
 import classes.IMutations.IMutationsLib;
+import classes.IMutations.IMutationsLib;
+import classes.IMutations.LactaBovinaOvariesMutation;
+import classes.IMutations.LizanMarrowMutation;
+import classes.IMutations.OniMusculatureMutation;
+import classes.IMutations.OrcAdrenalGlandsMutation;
+import classes.IMutations.PigBoarFatMutation;
 import classes.Scenes.SceneLib;
 
 	public class Neisa extends Monster
@@ -150,6 +159,17 @@ import classes.Scenes.SceneLib;
 				IMutationsLib.OrcAdrenalGlandsIM.acquireMutation(this, "none");
 				IMutationsLib.PigBoarFatIM.acquireMutation(this, "none");
 			}
+			/*
+			updateDynamicPerkBuffs(IMutationsLib.DraconicLungIM, DraconicLungMutation, this);
+			updateDynamicPerkBuffs(IMutationsLib.OniMusculatureIM, OniMusculatureMutation, this);
+			updateDynamicPerkBuffs(IMutationsLib.PigBoarFatIM, PigBoarFatMutation, this);
+			updateDynamicPerkBuffs(IMutationsLib.OrcAdrenalGlandsIM, OrcAdrenalGlandsMutation, this);
+			updateDynamicPerkBuffs(IMutationsLib.LizanMarrowIM, LizanMarrowMutation, this);
+			updateDynamicPerkBuffs(IMutationsLib.CatLikeNimblenessIM, CatLikeNimblenessMutation, this);
+			updateDynamicPerkBuffs(IMutationsLib.GorgonEyesIM, GorgonEyesMutation, this);
+			updateDynamicPerkBuffs(IMutationsLib.DraconicLungIM, DraconicLungMutation, this);
+			updateDynamicPerkBuffs(IMutationsLib.LactaBovinaOvariesIM, LactaBovinaOvariesMutation, this);
+			*/
 			checkMonster();//make her lvl 3 starting with internal mutation for: cat, dragon, gorgon, lacta bovina, lizard, oni, orc, pig/boar - plus job: guardian perk
 		}
 

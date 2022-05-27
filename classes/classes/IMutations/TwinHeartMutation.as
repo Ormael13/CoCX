@@ -6,6 +6,7 @@ package classes.IMutations
 {
 import classes.PerkClass;
 import classes.IMutationPerkType;
+import classes.Creature;
 import classes.Player;
 
 public class TwinHeartMutation extends IMutationPerkType
@@ -13,7 +14,7 @@ public class TwinHeartMutation extends IMutationPerkType
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            pTier = (pTier == -1)? currentTier(this): pTier;
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier == 1){
                 descS = "+40% fatigue recovery and +5 to max tou/spe (scalable). +100% fatigue recovery, reduce Charge fatigue cost by 10% as well as its cooldown by 1 round so long as your body is tauric/drider. (Also raise all Taur race score by 1, by 2 as long pc is tauric/drider)";
             }
@@ -30,7 +31,7 @@ public class TwinHeartMutation extends IMutationPerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (currentTier(this)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -46,7 +47,7 @@ public class TwinHeartMutation extends IMutationPerkType
         //Mutation Requirements
         override public function pReqs():void{
             try{
-                var pTier:int = currentTier(this);
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
@@ -65,9 +66,9 @@ public class TwinHeartMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs():Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this);
+            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) {
                 pBuffs['tou.mult'] = 0.05;
                 pBuffs['spe.mult'] = 0.05;

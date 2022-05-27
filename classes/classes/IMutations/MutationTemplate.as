@@ -5,6 +5,7 @@
 package classes.IMutations
 {
 import classes.IMutationPerkType;
+import classes.Creature;
 import classes.PerkClass;
 
     public class MutationTemplate extends IMutationPerkType
@@ -12,7 +13,7 @@ import classes.PerkClass;
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            pTier = (pTier == -1)? currentTier(this): pTier;
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
                 descS += "";
             }
@@ -29,7 +30,7 @@ import classes.PerkClass;
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (currentTier(this)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -45,9 +46,7 @@ import classes.PerkClass;
         //Mutation Requirements
         override public function pReqs():void{
             try{
-                //This can return a null, thus why all mutations are provided to the player with v1 value of 0 on initial loading.
-                var pTier:int = currentTier(this);
-
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
@@ -64,9 +63,9 @@ import classes.PerkClass;
 
 
         //Mutations Buffs
-        override public function pBuffs():Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this);
+            var pTier:int = currentTier(this, (target == null)? player : target);
             /*
             if (pTier == 1) {
                 pBuffs['spe.mult'] = 0;

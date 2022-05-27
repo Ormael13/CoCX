@@ -7,6 +7,7 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
+import classes.Creature;
 import classes.Player;
 
 public class ScyllaInkGlandsMutation extends IMutationPerkType
@@ -14,7 +15,7 @@ public class ScyllaInkGlandsMutation extends IMutationPerkType
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            pTier = (pTier == -1)? currentTier(this): pTier;
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
                 descS += "Your Scylla Ink Glands increase rate at which your body produce ink and slight boost to your natural strength";
             }
@@ -31,7 +32,7 @@ public class ScyllaInkGlandsMutation extends IMutationPerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (currentTier(this)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -47,7 +48,7 @@ public class ScyllaInkGlandsMutation extends IMutationPerkType
         //Mutation Requirements
         override public function pReqs():void{
             try{
-                var pTier:int = currentTier(this);
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
@@ -66,9 +67,9 @@ public class ScyllaInkGlandsMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs():Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this);
+            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) pBuffs['str.mult'] = 0.1;
             //else if (pTier == 2) pBuffs['int.mult'] = 0;
             //else if (pTier == 3) pBuffs['int.mult'] = 0;

@@ -1148,7 +1148,7 @@ public class PerkMenu extends BaseContent {
 					}
 
 					outputText("\n\n")
-					var tempObj:Object = mutation.pBuffs()
+					var tempObj:Object = mutation.pBuffs(player)
 					for (var key:String in tempObj){
 						outputText("Buffs " + key + ": " + tempObj[key] + "\n");
 					}
@@ -1168,7 +1168,7 @@ public class PerkMenu extends BaseContent {
 							outputText(mutation2.desc());
 						}
 						outputText("\n\n")
-						var tempObj2:Object = mutation2.pBuffs()
+						var tempObj2:Object = mutation2.pBuffs(player)
 						for (var key2:String in tempObj2){
 							outputText("Buffs " + key2 + ": " + tempObj2[key2] + "\n");
 						}

@@ -7,13 +7,14 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
+import classes.Creature;
 import classes.Player;
 
 public class ElvishPeripheralNervSysMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
-            pTier = (pTier == -1)? currentTier(this): pTier;
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             var perChg:int = 5 * pTier
             var descS:String = "";
             if (pTier >= 1) descS += "Your Elvish Peripheral NervSys is giving you +" + perChg +"% of max core Spe as phantom Spe and allows you to keep Elven Sense even without elf arms/legs";
@@ -31,7 +32,7 @@ public class ElvishPeripheralNervSysMutation extends IMutationPerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (currentTier(this)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -47,7 +48,7 @@ public class ElvishPeripheralNervSysMutation extends IMutationPerkType
         //Mutation Requirements
         override public function pReqs():void{
             try{
-                var pTier:int = currentTier(this);
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
@@ -67,9 +68,9 @@ public class ElvishPeripheralNervSysMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs():Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this);
+            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 2) pBuffs['spe.mult'] = 0.05;
             if (pTier == 3) pBuffs['spe.mult'] = 0.1;
             return pBuffs;
