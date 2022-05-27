@@ -6,7 +6,6 @@ import classes.Scenes.Areas.Battlefield.DilapidatedShrine;
 import classes.Scenes.Areas.Bog.TrollScenes;
 import classes.Scenes.Areas.Caves.DisplacerBeastScene;
 import classes.Scenes.Areas.Forest.KitsuneScene;
-import classes.Scenes.Areas.GlacialRift.FrostGiantScene;
 import classes.Scenes.Areas.GlacialRift.YuWinterGearShop;
 import classes.Scenes.Areas.Ocean.ScyllaScene;
 import classes.Scenes.Camp.HarvestMoonScenes;
@@ -15,7 +14,6 @@ import classes.Scenes.Dungeons.AnzuPalace.AnzuScene;
 import classes.Scenes.Dungeons.D3.D3;
 import classes.Scenes.Dungeons.DeepCave.ValaScene;
 import classes.Scenes.Dungeons.DungeonEngine;
-import classes.Scenes.Dungeons.EbonLabyrinth;
 import classes.Scenes.Dungeons.HelDungeon.BrigidScene;
 import classes.Scenes.Explore.*;
 import classes.Scenes.Monsters.*;
@@ -94,12 +92,6 @@ public class SceneLib {
     public static var impScene:ImpScene = new ImpScene();
 
     public static var goblinScene:GoblinScene = new GoblinScene();
-
-    public static var goblinAssassinScene:GoblinAssassinScene = new GoblinAssassinScene();
-
-    public static var goblinWarriorScene:GoblinWarriorScene = new GoblinWarriorScene();
-
-    public static var goblinShamanScene:GoblinShamanScene = new GoblinShamanScene();
 
     public static var goblinElderScene:GoblinElderScene = new GoblinElderScene();
 

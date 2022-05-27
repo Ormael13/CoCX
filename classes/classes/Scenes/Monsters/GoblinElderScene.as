@@ -41,6 +41,7 @@ public class GoblinElderScene extends BaseContent
 		 */
 		public function goblinElderEncounter():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_goblinElder);
 			//First Time Intro
 			if(flags[kFLAGS.TIMES_ENCOUNTERED_PRISCILLA] == 0)
 			{
@@ -94,7 +95,7 @@ public class GoblinElderScene extends BaseContent
 		public function goblinElderBeatYaUp():void {
 			clearOutput();
 			var x:int;
-			if(player.lust <= 99) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious elder saunters up, pink arousing flames glow in her left hand. She exposes your nether regions and throws the pink flames right into your groin! You are unable to fight back. \n\n");
+			if(player.lust < player.maxLust()) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious elder saunters up, pink arousing flames glow in her left hand. She exposes your nether regions and throws the pink flames right into your groin! You are unable to fight back. \n\n");
 			if(player.cockThatFits(monster.vaginalCapacity()) >= 0 && player.hasCock() && (!player.hasVagina() || rand(2) == 0)) 
 			{
 				x = player.cockThatFits(monster.vaginalCapacity());
