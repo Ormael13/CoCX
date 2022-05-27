@@ -466,7 +466,7 @@ public function barTelAdre():void {
 	}
 	outputText(images.showImage("location-teladre-thewetbitch"));
 	outputText("The interior of The Wet Bitch is far different than the mental picture its name implied.  It looks like a normal tavern, complete with a large central hearth, numerous tables and chairs, and a polished dark wood bar.  The patrons all seem to be dressed and interacting like normal people, that is if normal people were mostly centaurs and dog-morphs of various sub-species.  The atmosphere is warm and friendly, and ");
-	if (player.humanScore() <= 3) outputText("despite your altered appearance, ");
+	if (!player.isRace(Races.HUMAN)) outputText("despite your altered appearance, ");
 	outputText("you hardly get any odd stares.  There are a number of rooms towards the back, as well as a stairway leading up to an upper level.");
 
 	scylla.scyllaBarSelectAction(); //Done before anything else so that other NPCs can check scylla.action to see what she's doing

@@ -117,7 +117,7 @@ use namespace CoC;
 					}
 					outputText("Hearing a thunderous roar, you ready yourself for a fight");
 					if (player.weaponName != "fists") outputText(", holding your [weapon] at the ready");
-					if (player.yetiScore() > 14 && player.hasVagina() && player.femininity > 40) {
+					if (player.isRace(Races.YETI) && player.hasVagina() && player.femininity > 40) {
 						yetiScene.FemalePCMeetYeti();
 						break;
 					}

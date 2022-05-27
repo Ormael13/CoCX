@@ -16,6 +16,8 @@ import classes.Items.WeaponRange;
 import classes.Monster;
 import classes.PerkLib;
 import classes.PotionType;
+import classes.Races;
+import classes.Races.ElementalRace;
 import classes.Scenes.Areas.Beach.Gorgon;
 import classes.Scenes.Areas.Bog.CorruptedMaleTroll;
 import classes.Scenes.Areas.Caves.DisplacerBeast;
@@ -26,13 +28,13 @@ import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
-import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
+import classes.Scenes.Codex;
 import classes.Scenes.Dungeons.D3.*;
+import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.TelAdre.UmasShop;
-import classes.Scenes.Codex;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.StatusEffectClass;
@@ -1205,7 +1207,7 @@ public class Combat extends BaseContent {
 				}
 			}
 		}
-		if (player.oniScore() >= mspecials.minOniScoreReq()) {
+		if (player.racialScore(Races.ONI) >= mspecials.minOniScoreReq()) {
 			bd = buttons.add("Oni Rampage", mspecials.startOniRampage).hint("Increase all damage done by a massive amount but silences you. While this is active, you cannot use spells or magical oriented soulskills.");
 			bd.requireFatigue(spellCost(50));
 			if(player.hasStatusEffect(StatusEffects.OniRampage)) {
@@ -1217,7 +1219,8 @@ public class Combat extends BaseContent {
 			else bd = buttons.add("No limiter", noLimiterState).hint("Toggle on No limiter. (STR+++, ?Lib-?)");
 		}
 		if (player.hasPerk(PerkLib.ElementalBody)) {
-			if (player.perkv1(PerkLib.ElementalBody) == 1) {//sylph
+            var element:int = ElementalRace.getElement(player);
+			if (element == ElementalRace.ELEMENT_SYLPH) {
 				bd = buttons.add("Wind Blade", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsAirE), 1)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
 				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 					bd.disable("Your current soulforce is too low.");
@@ -1233,7 +1236,7 @@ public class Combat extends BaseContent {
 					//True Evasion
 				}
 			}
-			if (player.perkv1(PerkLib.ElementalBody) == 2) {//gnome
+			if (element == ElementalRace.ELEMENT_GNOME) {
 				bd = buttons.add("Wild Growth", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsEarthE), 2)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
 				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 					bd.disable("Your current soulforce is too low.");
@@ -1249,7 +1252,7 @@ public class Combat extends BaseContent {
 					//Adamantine Shell
 				}
 			}
-			if (player.perkv1(PerkLib.ElementalBody) == 3) {//ignis
+			if (element == ElementalRace.ELEMENT_IGNIS) {
 				bd = buttons.add("Pyroblast", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsFireE), 3)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
 				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 					bd.disable("Your current soulforce is too low.");
@@ -1262,7 +1265,7 @@ public class Combat extends BaseContent {
 					//Fiery Rage
 				}
 			}
-			if (player.perkv1(PerkLib.ElementalBody) == 4) {//undine
+			if (element == ElementalRace.ELEMENT_UNDINE) {
 				bd = buttons.add("Hydraulic Torrent", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
 				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 					bd.disable("Your current soulforce is too low.");
@@ -1598,23 +1601,31 @@ public class Combat extends BaseContent {
             else unarmed += 2 * player.statusEffectv2(StatusEffects.SummonedElementalsMetal) * (1 + player.newGamePlusMod());
         }
 		if (player.hasPerk(PerkLib.ElementalBody)) {
-			if (player.perkv1(PerkLib.ElementalBody) == 1) {
-				if (player.perkv2(PerkLib.ElementalBody) == 1) unarmedMulti += .05;
-				if (player.perkv2(PerkLib.ElementalBody) == 2) unarmedMulti += .1;
-				if (player.perkv2(PerkLib.ElementalBody) == 3) unarmedMulti += .15;
-				if (player.perkv2(PerkLib.ElementalBody) == 4) unarmedMulti += .2;
-			}
-			if (player.perkv1(PerkLib.ElementalBody) == 2) {
-				if (player.perkv2(PerkLib.ElementalBody) == 1) unarmedMulti += .05;
-				if (player.perkv2(PerkLib.ElementalBody) == 2) unarmedMulti += .1;
-				if (player.perkv2(PerkLib.ElementalBody) == 3) unarmedMulti += .15;
-				if (player.perkv2(PerkLib.ElementalBody) == 4) unarmedMulti += .2;
-			}
-			if (player.perkv1(PerkLib.ElementalBody) == 3) {
-				if (player.perkv2(PerkLib.ElementalBody) == 1) unarmedMulti += .1;
-				if (player.perkv2(PerkLib.ElementalBody) == 2) unarmedMulti += .2;
-				if (player.perkv2(PerkLib.ElementalBody) == 3) unarmedMulti += .3;
-				if (player.perkv2(PerkLib.ElementalBody) == 4) unarmedMulti += .4;
+			switch (ElementalRace.getElementAndTier(player)) {
+				case ElementalRace.SYLPH_1:
+					unarmedMulti += .05;
+					break;
+				case ElementalRace.SYLPH_2:
+					unarmedMulti += .1;
+					break;
+				case ElementalRace.SYLPH_3:
+					unarmedMulti += .15;
+					break;
+				case ElementalRace.SYLPH_4:
+					unarmedMulti += .2;
+					break;
+				case ElementalRace.IGNIS_1:
+					unarmedMulti += .1;
+					break;
+				case ElementalRace.IGNIS_2:
+					unarmedMulti += .2;
+					break;
+				case ElementalRace.IGNIS_3:
+					unarmedMulti += .3;
+					break;
+				case ElementalRace.IGNIS_4:
+					unarmedMulti += .4;
+					break;
 			}
 		}
 		if (player.isGargoyle() && Forgefather.material == "marble")
@@ -3662,7 +3673,7 @@ public class Combat extends BaseContent {
 					if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPaaa *= 2;
                     monster.statStore.addBuffObject({spe:-DBPaaa}, "Poison",{text:"Poison"});
                     var venomType:StatusEffectType = StatusEffects.NagaVenom;
-                    if (player.nagaScore() >= 23) venomType = StatusEffects.ApophisVenom;
+                    if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
                     if (monster.hasStatusEffect(venomType)) {
                         monster.addStatusValue(venomType, 2, 0.4);
                         monster.addStatusValue(venomType, 1, (DBPaaa * 0.4));
@@ -3888,22 +3899,22 @@ public class Combat extends BaseContent {
 		}
         damage = Math.round(damage);
         checkAchievementDamage(damage);
-		var elementalVariant:Number = player.perkv1(PerkLib.ElementalBody);
+		var elementalVariant:Number = ElementalRace.getElement(player);
 		if (player.weapon == weapons.MGSWORD) elementalVariant = 5;
         switch (elementalVariant) {
-            case 1:
+            case ElementalRace.ELEMENT_SYLPH:
                 outputText("You form and unleash a wind blade. ");
 				doWindDamage(damage, true, true);
                 break;
-            case 2:
+            case ElementalRace.ELEMENT_GNOME:
                 outputText("You launch a huge rock. ");
 				doEarthDamage(damage, true, true);
                 break;
-            case 3:
+            case ElementalRace.ELEMENT_IGNIS:
                 outputText("You charge and toss a fireball. ");
 				doFireDamage(damage, true, true);
                 break;
-            case 4:
+            case ElementalRace.ELEMENT_UNDINE:
                 outputText("You unleash an arrow of lethally pressurized water. ");
 				doWaterDamage(damage, true, true);
                 break;
@@ -5280,7 +5291,7 @@ public class Combat extends BaseContent {
                     if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPb *= 2;
                     monster.statStore.addBuffObject({spe:-DBPb}, "Poison",{text:"Poison"});
                     var venomType:StatusEffectType = StatusEffects.NagaVenom;
-                    if (player.nagaScore() >= 23) venomType = StatusEffects.ApophisVenom;
+                    if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
                     if (monster.hasStatusEffect(venomType)) {
                         monster.addStatusValue(venomType, 2, 0.4);
                         monster.addStatusValue(venomType, 1, (DBPb * 0.4));
@@ -5649,7 +5660,7 @@ public class Combat extends BaseContent {
             }
         }
         //Unique attack Mantis Prayer
-        if (player.mantisScore() >= 12 && player.arms.type == Arms.MANTIS){
+        if (player.isRace(Races.MANTIS) && player.arms.type == Arms.MANTIS){
             if(player.hasStatusEffect(StatusEffects.InvisibleOrStealth)){
                 outputText("Taking advantage of your opponent's obliviousness you strike four more times with your scythes.");
                 ExtraNaturalWeaponAttack();
@@ -5666,7 +5677,7 @@ public class Combat extends BaseContent {
             }
         }
         //Unique attack Kamaitachi Three way Cut
-        if (player.kamaitachiScore() >= 12 && player.arms.type == Arms.KAMAITACHI){
+        if (player.isRace(Races.KAMAITACHI) && player.arms.type == Arms.KAMAITACHI){
             outputText("You strike at blinding speed, seeming to divide yourself into multiple copies, and slash with your scythes again. You cut once, twice, then finish it with a double scythe strike for a three-hit combo. \n");
             ExtraNaturalWeaponAttack(1, "KamaitachiScythe");
             if (player.hasABiteAttack()) {
@@ -5848,7 +5859,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-			if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+			if (player.isRace(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 			else damage *= 2;
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
@@ -6073,7 +6084,7 @@ public class Combat extends BaseContent {
 				if (player.weapon == weapons.VBLADE) {
 					var vbladeeffect:Boolean = false;
 					var vbladeeffectChance:int = 1;
-					if (rand(100) < vbladeeffectChance) { 
+					if (rand(100) < vbladeeffectChance) {
 						vbladeeffect = true;
 						damage *= 5;
 					}
@@ -6399,7 +6410,7 @@ public class Combat extends BaseContent {
 							if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPaaaa *= 2;
 							monster.statStore.addBuffObject({spe:-DBPaaaa}, "Poison",{text:"Poison"});
 							var venomType:StatusEffectType = StatusEffects.NagaVenom;
-							if (player.nagaScore() >= 23) venomType = StatusEffects.ApophisVenom;
+							if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
 							if (monster.hasStatusEffect(venomType)) {
 								monster.addStatusValue(venomType, 2, 0.4);
 								monster.addStatusValue(venomType, 1, (DBPaaaa*0.4));
@@ -8825,12 +8836,9 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.ManaAffinityIV)) multi += 0.25;
         if (player.hasPerk(PerkLib.ManaAffinityV)) multi += 0.25;
         if (player.hasPerk(PerkLib.ManaAffinityVI)) multi += 0.25;
-        if (player.alicornScore() >= 12) multi += 0.1;
-        if (player.kitsuneScore() >= 5) {
-            if (player.kitsuneScore() >= 10) multi += 1;
-            else multi += 0.5;
-        }
-        if (player.unicornScore() >= 10) multi += 0.05;
+        if (player.isRace(Races.ALICORN,2)) multi += 0.1;
+        if (player.isRace(Races.KITSUNE, 2)) multi += 1.5;
+        if (player.isRace(Races.UNICORN, 2)) multi += 0.05;
         return multi;
     }
 
@@ -9426,7 +9434,7 @@ public class Combat extends BaseContent {
             }
         }
         //Apophis Unholy Aura
-        if (player.apophisScore() >= 23){
+        if (player.isRace(Races.APOPHIS)){
             outputText("Your unholy aura seeps into [monster a] [monster name], slowly and insidiously eroding its resiliance to your unholy charms.\n\n");
             monster.lustVuln += 0.10;
         }
@@ -9702,7 +9710,7 @@ public class Combat extends BaseContent {
             if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
         }
         //Black Frost Aura
-        if (player.hasPerk(PerkLib.IceQueenGown) && player.yukiOnnaScore()>=14) {
+        if (player.hasPerk(PerkLib.IceQueenGown) && player.isRace(Races.YUKIONNA)) {
             if (!monster.hasPerk(PerkLib.IceNature)) {
                 var damageBFA:Number = scalingBonusIntelligence();
                 //Determine if critical hit!
@@ -10107,8 +10115,8 @@ public class Combat extends BaseContent {
                 var soulforcecost:int = 100;
                 player.soulforce -= soulforcecost;
                 var hpChange1:int = 200;
-                if (player.unicornScore() >= 10) hpChange1 += 150;
-                if (player.alicornScore() >= 12) hpChange1 += 200;
+                if (player.isRace(Races.UNICORN, 2)) hpChange1 += 150;
+                if (player.isRace(Races.ALICORN, 2)) hpChange1 += 200;
                 outputText("<b>As your soulforce is drained you can feel Violet Pupil Transformation's regenerative power spreading throughout your body. (<font color=\"#008000\">+" + hpChange1 + "</font>)</b>\n\n");
                 HPChange(hpChange1, false);
             }
@@ -10954,7 +10962,7 @@ public class Combat extends BaseContent {
         if (player.armor == armors.NURSECL) maxPercentRegen += 0.5;
         if (player.armor == armors.BLIZZ_K) {
             if (!player.hasPerk(PerkLib.ColdAffinity)) maxPercentRegen -= 10;
-            if (player.yukiOnnaScore() >= 14) maxPercentRegen += 5;
+            if (player.isRace(Races.YUKIONNA)) maxPercentRegen += 5;
         }
         if (player.weapon == weapons.SESPEAR) maxPercentRegen += 2;
         if (player.hasPerk(PerkLib.LustyRegeneration)) maxPercentRegen += 0.5;
@@ -11021,7 +11029,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) maxRegen += 0.5;
         if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) maxRegen += 0.5;
         if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) maxRegen += 0.5;
-        if (player.armor == armors.BLIZZ_K && player.yukiOnnaScore() >= 14) maxRegen += 5;
+        if (player.armor == armors.BLIZZ_K && player.isRace(Races.YUKIONNA)) maxRegen += 5;
         if (combat && player.headJewelry == headjewelries.CUNDKIN && player.HP < 1) maxRegen += 1;
         if (player.hasKeyItem("M.G.S. bracer") >= 0) maxRegen += 2;
         return maxRegen;
@@ -11130,12 +11138,9 @@ public class Combat extends BaseContent {
         var multi:Number = 1;
         if (player.hasPerk(PerkLib.DaoistCultivator)) multi += 0.5;
         if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
-        if (player.alicornScore() >= 12) multi += 0.1;
-        if (player.kitsuneScore() >= 5) {
-            if (player.kitsuneScore() >= 10) multi += 1;
-            else multi += 0.5;
-        }
-        if (player.unicornScore() >= 10) multi += 0.05;
+        if (player.isRace(Races.ALICORN, 2)) multi += 0.1;
+        if (player.isRace(Races.KITSUNE)) multi += 1;
+        if (player.isRace(Races.UNICORN, 2)) multi += 0.05;
         return multi;
     }
 
@@ -11928,9 +11933,9 @@ public class Combat extends BaseContent {
 
 	private function weaponmasteryXPMulti():Number {
 		var multi:Number = 1;
-		if (player.humanScore() >= player.humanMaxScore() - 9) {
+		if (player.isRace(Races.HUMAN)) {
 			multi += 1;
-			if (player.humanScore() == player.humanMaxScore()) multi += 1;
+			if (player.isPureHuman()) multi += 1;
 		}
         return multi;
 	}
@@ -12646,8 +12651,8 @@ public class Combat extends BaseContent {
         if (player.countCocksOfType(CockTypesEnum.ANEMONE) > 0) TeaseFunctionList.push(RandomTeaseAnemone);
         if (player.hasPerk(PerkLib.ElectrifiedDesire)) TeaseFunctionList.push(RandomTeaseRaiju);
         if (player.hasPerk(PerkLib.DragonLustPoisonBreath) && player.tailVenom >= player.VenomWebCost()) TeaseFunctionList.push(RandomTeaseJabberwocky);
-        if (player.harpyScore() >= 8  || player.thunderbirdScore() >= 10 || player.phoenixScore() >= 10) TeaseFunctionList.push(RandomTeaseHarpy);
-        if (player.kitsuneScore() >= 8) TeaseFunctionList.push(RandomTeaseKitsune);
+        if (player.isAnyRace(Races.HarpylikeRaces)) TeaseFunctionList.push(RandomTeaseHarpy);
+        if (player.isRace(Races.KITSUNE)) TeaseFunctionList.push(RandomTeaseKitsune);
         if (player.perkv1(IMutationsLib.BlackHeartIM) > 0) TeaseFunctionList.push(RandomTeaseLustStrike);
         if (monster.hasBreasts()) TeaseFunctionList.push(RandomTeaseViolateOpponentBreast);
         if (monster.hasVagina()) {
@@ -14320,7 +14325,7 @@ public class Combat extends BaseContent {
             addButton(0, "Next", combatMenu, false);
             return;
         }
-        if (player.jiangshiScore() > 19) {
+        if (player.isRace(Races.JIANGSHI)) {
             outputText("Your cadaverous rigidity prevents any form of escape in battle!");
             //Pass false to combatMenu instead:		menuLoc = 3;
             //		doNext(combatMenu);
@@ -15273,7 +15278,7 @@ public class Combat extends BaseContent {
 		damage += scalingBonusStrength() * 0.25;
 		if (damage < 50) damage = 50;
 		if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-			if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+			if (player.isRace(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 			else damage *= 2;
 		}
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= historyFighterBonus();

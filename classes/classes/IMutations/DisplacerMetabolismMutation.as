@@ -9,6 +9,7 @@ import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
 public class DisplacerMetabolismMutation extends IMutationPerkType
     {
@@ -54,9 +55,7 @@ public class DisplacerMetabolismMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireMetabolismMutationSlot()
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.displacerbeastScore() >= 14;
-                    }, "Displacer beast");
+                    .requireRace(Races.DISPLACERBEAST);
                 }
                 else{
                     var pLvl:int = pTier * 30;

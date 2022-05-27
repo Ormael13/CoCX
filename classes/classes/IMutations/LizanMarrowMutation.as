@@ -9,6 +9,7 @@ import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
 public class LizanMarrowMutation extends IMutationPerkType
     {
@@ -53,9 +54,7 @@ public class LizanMarrowMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireBonesAndMarrowMutationSlot()
-                    .requirePerk(PerkLib.LizanRegeneration).requireCustomFunction(function (player:Player):Boolean {
-                        return player.lizardScore() >= 8;
-                    }, "Lizan race");
+                    .requirePerk(PerkLib.LizanRegeneration).requireRace(Races.LIZARD);
                 }
                 else{
                     var pLvl:int = pTier * 30;

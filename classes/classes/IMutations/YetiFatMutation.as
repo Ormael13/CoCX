@@ -8,6 +8,7 @@ import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
 public class YetiFatMutation extends IMutationPerkType
     {
@@ -52,9 +53,7 @@ public class YetiFatMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireFatTissueMutationSlot()
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.yetiScore() >= 14;
-                    }, "Yeti race");
+                    .requireRace(Races.YETI);
                 }
                 else{
                     var pLvl:int = pTier * 30;

@@ -8,6 +8,7 @@ import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
 public class OniMusculatureMutation extends IMutationPerkType
     {
@@ -55,9 +56,7 @@ public class OniMusculatureMutation extends IMutationPerkType
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.tone >= 100;
                     }, "100+ tone")
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.oniScore() >= 12;
-                    }, "Oni race");
+                    .requireRace(Races.ONI);
                 }
                 else{
                     var pLvl:int = pTier * 30;

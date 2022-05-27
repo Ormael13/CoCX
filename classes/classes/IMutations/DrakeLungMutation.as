@@ -9,6 +9,7 @@ import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
 public class DrakeLungMutation extends IMutationPerkType
     {
@@ -54,9 +55,7 @@ public class DrakeLungMutation extends IMutationPerkType
                 if (pTier == 0){
                     this.requireLungsMutationSlot()
                     .requireAnyPerk(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath, PerkLib.DragonWaterBreath)
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return (player.frostWyrmScore() >= 10 || player.jabberwockyScore() >= 10 || player.vouivreScore() >= 11 || player.leviathanScore() >= 20);
-                    }, "Variants of the dragon race");
+                    .requireAnyRace(Races.FROSTWYRM, Races.JABBERWOCKY, Races.VOUIVRE, Races.SEA_DRAGON);
                 }
                 else{
                     var pLvl:int = pTier * 30;

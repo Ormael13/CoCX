@@ -9,6 +9,7 @@ import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
 public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
     {
@@ -54,9 +55,7 @@ public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireAdrenalGlandsMutationSlot()
-                    .requirePerk(PerkLib.Lustzerker).requireCustomFunction(function (player:Player):Boolean {
-                        return player.salamanderScore() >= 7 || player.phoenixScore() >= 11;
-                    }, "Salamander race");
+                    .requirePerk(PerkLib.Lustzerker).requireAnyRace(Races.SALAMANDER, Races.PHOENIX);
                 }
                 else{
                     var pLvl:int = pTier * 30;

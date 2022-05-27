@@ -8,6 +8,7 @@ import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
     public class ArachnidBookLungMutation extends IMutationPerkType
     {
@@ -53,7 +54,7 @@ import classes.Player;
                 if (pTier == 0){
                     this.requireAdaptationsMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.spiderScore() >= 5 || player.atlachNachaScore() >= 21;
+                        return player.isRace(Races.SPIDER) || player.isRace(Races.ATLACH_NACHA,2);
                     }, "Arachnid race");
                 }
                 else{

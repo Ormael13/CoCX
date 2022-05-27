@@ -9,6 +9,7 @@ import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
 public class CatLikeNimblenessMutation extends IMutationPerkType
     {
@@ -53,9 +54,7 @@ public class CatLikeNimblenessMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requirePerk(PerkLib.Flexibility)
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.catScore() >= 8 || player.nekomataScore() >= 10 || player.displacerbeastScore() >= 14 || player.hellcatScore() >= 10 || player.cheshireScore() >= 11 || player.sphinxScore() >= 14;
-                    }, "Any cat race");
+                            .requireRacialGroup(Races.CatlikeRaces, "Any cat race");
                 }
                 else{
                     var pLvl:int = pTier * 30;

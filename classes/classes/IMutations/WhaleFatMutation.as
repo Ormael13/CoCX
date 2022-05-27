@@ -8,6 +8,7 @@ import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
 public class WhaleFatMutation extends IMutationPerkType
     {
@@ -56,9 +57,7 @@ public class WhaleFatMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireFatTissueMutationSlot()
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.orcaScore() >= 14 || player.leviathanScore() >= 20;
-                    }, "Orca race");
+                    .requireAnyRace(Races.ORCA, Races.SEA_DRAGON);
                 }
                 else{
                     var pLvl:int = pTier * 30;

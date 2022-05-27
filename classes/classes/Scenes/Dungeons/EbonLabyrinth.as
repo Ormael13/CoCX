@@ -2,12 +2,13 @@
  * Quest Dungeon: The Ebon Labyrinth (for Alvina Black Rose Quest)
  * @author Liadri
  */
-package classes.Scenes.Dungeons 
+package classes.Scenes.Dungeons
 {
 import classes.CockTypesEnum;
 import classes.EventParser;
 import classes.ItemType;
 import classes.PerkLib;
+import classes.Races;
 import classes.Scenes.SceneLib;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kACHIEVEMENTS;
@@ -523,7 +524,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         startCombat(new DisplacerBeast(), true);
     }
     private function darkSlimeEL(print:Boolean = true):void {
-        if (player.gooScore() >= 11 || player.magmagooScore() >= 13 || player.darkgooScore() >= 13) {
+        if (player.isRace(Races.SLIME) || player.isRace(Races.MAGMASLIME) || player.isRace(Races.DARKSLIME)) {
             if (!print) {
                 minotaurEL(false); //replace - slime won't attack another slime
                 return;

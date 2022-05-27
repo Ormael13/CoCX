@@ -1,6 +1,7 @@
 package classes.Scenes.Combat.SpellsBlack {
 import classes.Monster;
 import classes.PerkLib;
+import classes.Races;
 import classes.Scenes.Combat.AbstractBlackSpell;
 import classes.StatusEffects;
 
@@ -35,8 +36,8 @@ public class RegenerateSpell extends AbstractBlackSpell {
 		var hpChange2:Number = player.inte;
 		if (player.hasPerk(PerkLib.WisenedHealer)) hpChange2 += player.wis;
 		hpChange2 *= healModBlack();
-		if (player.unicornScore() >= 10) hpChange2 *= 3;
-		if (player.alicornScore() >= 12) hpChange2 *= 4;
+		if (player.isRace(Races.UNICORN, 2)) hpChange2 *= 3;
+		if (player.isRace(Races.ALICORN)) hpChange2 *= 4;
 		if (player.armor == armors.NURSECL) hpChange2 *= 1.2;
 		if (player.weapon == weapons.U_STAFF) hpChange2 *= 1.5;
 		if (player.hasPerk(PerkLib.CloseToDeath) && player.HP < (player.maxHP() * 0.25)) {

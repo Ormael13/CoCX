@@ -15,7 +15,6 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.MutationsHelper;
-import classes.CoC;
 
 public class WorldTree extends BaseContent
 	{
@@ -29,7 +28,7 @@ public class WorldTree extends BaseContent
 		public function YggdrasilDiscovery():void {
 			clearOutput();
 			outputText("With your soul sense, tracing the song back to it’s source is a simple task. Before long, you’re walking the same path in the deep woods as before, and soon you reach the same statuesque tree.\n\n");
-			if (player.plantScore() < 4 && player.yggdrasilScore() < 1) {
+			if (!player.isRace(Races.PLANT) && player.racialScore(Races.YGGDRASIL) == 0) {
 				outputText("You feel the song resonate within the tree, but you cannot discern its source, or anything about the tree. Its size aside, it appears perfectly normal, and you are certain there are even other trees of similar size elsewhere in the forest. When you take a break to meditate on the tree, you come to the realization that you only felt the song without the soul sense when you were a ");
 				outputText("" + player.mf("Treant", "Dryad") +". Perhaps if you regained that particular form, you could understand the true meaning behind this peculiar tree?\n\n");
 				doNext(camp.returnToCampUseOneHour);
@@ -48,7 +47,7 @@ public class WorldTree extends BaseContent
 					else addButton(2, "Take Branch", AidTakeBranch).hint("Take a fallen branch of the world tree");
 					if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(3, "Accept", AcceptTransform);
 					else {
-						if (player.yggdrasilScore() < 10) addButton(3, "Transform", AcceptTransform);
+						if (!player.isRace(Races.YGGDRASIL)) addButton(3, "Transform", AcceptTransform);
 						else addButtonDisabled(3, "Transform", "You're already full transformed into Yggdrasil.");
 					}
 					if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(14, "Decline", DeclineWolrdTreeOffer);
@@ -66,7 +65,7 @@ public class WorldTree extends BaseContent
 					else addButton(2, "Take Branch", AidTakeBranch).hint("Take a fallen branch of the world tree");
 					if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(3, "Accept", AcceptTransform);
 					else {
-						if (player.yggdrasilScore() < 10) addButton(3, "Transform", AcceptTransform);
+						if (!player.isRace(Races.YGGDRASIL)) addButton(3, "Transform", AcceptTransform);
 						else addButtonDisabled(3, "Transform", "You're already full transformed into Yggdrasil.");
 					}
 					if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(14, "Decline", DeclineWolrdTreeOffer);
@@ -86,7 +85,7 @@ public class WorldTree extends BaseContent
 			else addButton(2, "Take Branch", AidTakeBranch).hint("Take a fallen branch of the world tree");
 			if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(3, "Accept", AcceptTransform);
 			else {
-				if (player.yggdrasilScore() < 10) addButton(3, "Transform", AcceptTransform);
+				if (!player.isRace(Races.YGGDRASIL)) addButton(3, "Transform", AcceptTransform);
 				else addButtonDisabled(3, "Transform", "You're already full transformed into Yggdrasil.");
 			}
 			if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(14, "Decline", DeclineWolrdTreeOffer);
@@ -109,7 +108,7 @@ public class WorldTree extends BaseContent
 			clearOutput();
 			if (flags[kFLAGS.YGGDRASIL_BRANCH] < 1) {
 				outputText("\"<i>We have great power, but our ability to use it is...  limited. ");
-				if (player.yggdrasilScore() < 10) outputText("What power we can grant you, we offer freely, you need only accept.");
+				if (!player.isRace(Races.YGGDRASIL)) outputText("What power we can grant you, we offer freely, you need only accept.");
 				else outputText("We have already offered you what power we could.");
 				outputText(" But perhaps there is something more. This tree is naught but a shell, but millennia of focusing our song has imbued it with a fragment of our power. Granted it what you call \"soulforce\".</i>\"\n\n");
 				outputText("You hear rumbling all around you. Its an earthquake! As you struggle to maintain your balance, branches fall around you from the darkness above. As the tremors still, you look around, and then up. You’re inside a tree, how did the branches get... there? \"<i>These twigs have power beyond mere wood. Take any piece you desire, ");

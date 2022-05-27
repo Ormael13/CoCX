@@ -18,13 +18,10 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Consumables.EmberTF;
-import classes.PerkLib;
-import classes.Scenes.Areas.Forest.KitsuneScene;
+import classes.Races.KitsuneRace;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.Transformations.TransformationUtils;
-
-import classes.CoC;
 
 public final class Mutations extends MutationsHelper {
     public function Mutations() {
@@ -33,7 +30,6 @@ public final class Mutations extends MutationsHelper {
     public static const gooSkinColors:Array = ["green", "magenta", "blue", "cerulean", "emerald", "pink"];
     public static const magmagooSkinColors:Array = ["red", "orange", "reddish orange"];
     public static const darkgooSkinColors:Array = ["indigo", "light purple", "purple", "purplish black", "dark purple"];
-    public static const oniEyeColors:Array = ["red", "orange", "yellow", "green"];
     // import classes.ItemSlotClass;
 
     //const FOX_BAD_END_WARNING:int = 477;
@@ -60,6 +56,14 @@ public final class Mutations extends MutationsHelper {
             lib: bonusempower
         }, "DrunkenPowerEmpower", {text: "Drunken Power", rate: Buff.RATE_HOURS, tick: durationhour});
     }
+	
+	
+	public function DrunkenPowerEmpowerIfPossible():void {
+		if (CanDrunkenPowerEmpower()) DrunkenPowerEmpower();
+	}
+	public function CanDrunkenPowerEmpower():Boolean {
+		return !player.statStore.hasBuff("DrunkenPowerEmpower") && CoC.instance.inCombat && player.racialScore(Races.ONI) >= DrunkenPowerEmpowerOni();
+	}
 
     public function DrunkenPowerEmpowerOni():Number {
         var bonusempoweroni:Number = 12;
@@ -80,10 +84,10 @@ public final class Mutations extends MutationsHelper {
             else outputText(player.modTone(player.maxToneCap(), 3));
         }
         player.refillHunger(10);
-        if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
+        DrunkenPowerEmpowerIfPossible();
     }
-
-    //Agility Elixir
+	
+	//Agility Elixir
     public function agilityElixir(player:Player):void {
         player.slimeFeed();
         clearOutput();
@@ -1570,7 +1574,7 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
         }
-        if (changes < changeLimit && player.wolfScore() >= 3 && rand(4) == 0) {
+        if (changes < changeLimit && player.racialScore(Races.WOLF) >= 3 && rand(4) == 0) {
             changes++;
             outputText("[pg]");
             outputText("Images and thoughts come unbidden to your mind, overwhelming your control as you rapidly lose yourself in them, daydreaming of... ");
@@ -2247,7 +2251,7 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
         }
-        if (changes < changeLimit && player.dogScore() >= 3 && rand(4) == 0) {
+        if (changes < changeLimit && player.racialScore(Races.DOG) >= 3 && rand(4) == 0) {
             changes++;
             outputText("[pg]");
             outputText("Images and thoughts come unbidden to your mind, overwhelming your control as you rapidly lose yourself in them, daydreaming of... ");
@@ -4140,7 +4144,7 @@ public final class Mutations extends MutationsHelper {
         changeLimit += player.additionalTransformationChances;
         clearOutput();
         outputText("Whoa it was definitely tasting just as bad as it smelled but hey it's not like your drinking this disgusting concoction for fun right? Or maybe you are?");
-        if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
+		DrunkenPowerEmpowerIfPossible();
         dynStats("lus", 15);
         dynStats("cor", 2);
         //Stronger
@@ -4366,7 +4370,7 @@ public final class Mutations extends MutationsHelper {
         changeLimit += player.additionalTransformationChances;
         clearOutput();
         outputText("You drink the ale, finding it to have a remarkably smooth yet potent taste.  You lick your lips and sneeze, feeling slightly tipsy.");
-        if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
+		DrunkenPowerEmpowerIfPossible();
         dynStats("lus", 15);
         //Stronger
         if (player.str > 50 && rand(3) == 0 && changes < changeLimit) {
@@ -5529,7 +5533,7 @@ public final class Mutations extends MutationsHelper {
             }
             changes++;
         }
-        if (type == 1 && player.dragonScore() >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonFireBreath)) {
+        if (type == 1 && player.racialScore(Races.DRAGON) >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonFireBreath)) {
             outputText("[pg]You feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
             outputText("[pg]It seems vouivre oil has awaked some kind of power within you... your throat and chest feel very sore, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon fire breath!</b>)");
             player.createPerk(PerkLib.DragonFireBreath, 0, 0, 0, 0);
@@ -5553,7 +5557,7 @@ public final class Mutations extends MutationsHelper {
             player.createPerk(PerkLib.DragonDarknessBreath, 0, 0, 0, 0);
             changes++;
         }*/
-        if (type == 3 && player.hydraScore() >= 14 && changes < changeLimit && !player.hasPerk(PerkLib.HydraAcidBreath)) {
+        if (type == 3 && player.isRace(Races.HYDRA) && changes < changeLimit && !player.hasPerk(PerkLib.HydraAcidBreath)) {
             outputText("[pg]You feel sick, like very sick as if your stomach was bubbling up. You spontaneously vomit from all the heads below your waist but what comes out is not vomit. Your hydra heads retches out on the ground in front of you which is doused with smoking green fluids which begins to smoke right away as your powerful acid begin to dissolve whatever is beneath it. <b>It would seem you have developed the ability to use the hydra's infamous breath weapon.</b>  (<b>Gained Perk: Hydra acid breath!</b>)");
             player.createPerk(PerkLib.HydraAcidBreath, 0, 0, 0, 0);
             changes++;
@@ -5649,7 +5653,7 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(100);
         outputText("[pg]");
         transformations.HairHuman.applyEffect(false);
-        if (player.humanScore() > 4) {
+        if (player.isRace(Races.HUMAN)) {
             outputText("[pg]You blink and the world twists around you.  You feel more like yourself than you have in a while, but exactly how isn't immediately apparent.  Maybe you should take a look at yourself?");
         } else {
             outputText("[pg]You cry out as the world spins around you.  You're aware of your entire body sliding and slipping, changing and morphing, but in the sea of sensation you have no idea exactly what's changing.  You nearly black out, and then it's over.  Maybe you had best have a look at yourself and see what changed?");
@@ -5740,7 +5744,7 @@ public final class Mutations extends MutationsHelper {
         outputText("You shovel the stuff into your face, not sure WHY you're eating it, but once you start, you just can't stop.  It tastes incredibly bland, and with a slight hint of cheese.");
         player.refillHunger(5);
         if (player.blockingBodyTransformations()) changeLimit = 0;
-        if (player.humanScore() > 6) {
+        if (player.isRace(Races.HUMAN)) {
             outputText("[pg]You blink and the world twists around you.  You feel more like yourself than you have in a while, but exactly how isn't immediately apparent.  Maybe you should take a look at yourself?");
         } else {
             outputText("[pg]You cry out as the world spins around you.  You're aware of your entire body sliding and slipping, changing and morphing, but in the sea of sensation you have no idea exactly what's changing.  You nearly black out, and then it's over.  Maybe you had best have a look at yourself and see what changed?");
@@ -7373,7 +7377,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //-VAGs
-        if (player.hasVagina() && !player.hasPerk(PerkLib.Oviposition) && changes < changeLimit && rand(5) == 0 && player.lizardScore() > 3) {
+        if (player.hasVagina() && !player.hasPerk(PerkLib.Oviposition) && changes < changeLimit && rand(5) == 0 && player.racialScore(Races.LIZARD) > 3) {
             outputText("[pg]Deep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly.  Beyond that, you aren't sure exactly what just happened, but you are sure it originated from your womb.\n");
             outputText("(<b>Perk Gained: Oviposition</b>)");
             player.createPerk(PerkLib.Oviposition, 0, 0, 0, 0);
@@ -7525,7 +7529,7 @@ public final class Mutations extends MutationsHelper {
         //clear screen
         clearOutput();
         outputText("You uncork the hip flash and drink it down.  The taste is actualy quite good, like an alcohol but with a little fire within.  Just as you expected it makes you feel all hot and ready to take whole world head on.");
-        if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
+		DrunkenPowerEmpowerIfPossible();
         //Statistical changes:
         //-Reduces speed down to 70.
         if (player.spe > 70 && changes < changeLimit && rand(4) == 0) {
@@ -7910,14 +7914,14 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Acid Spit
-        if (!player.hasPerk(PerkLib.AcidSpit) && changes < changeLimit && rand(5) == 0 && player.cavewyrmScore() > 4) {
+        if (!player.hasPerk(PerkLib.AcidSpit) && changes < changeLimit && rand(5) == 0 && player.racialScore(Races.CAVEWYRM) > 4) {
             outputText("[pg]Your endowment begins to feel increasingly pleasurable to the point you drool small glowing blue drop of saliva on the ground lost in the pleasure of your oozing vagina/ and / dripping penis. You lose all desire as your eyes zero in on the smoking vegetation progressively corroded by your fluorescent drool. <b>It seems you now can drool acid!</b>\n");
             outputText("(<b>Perk Gained: Acid Spit</b>)");
             player.createPerk(PerkLib.AcidSpit, 0, 0, 0, 0);
             changes++;
         }
         //Azureflame Breath
-        if (!player.hasPerk(PerkLib.AzureflameBreath) && changes < changeLimit && rand(5) == 0 && player.cavewyrmScore() > 4) {
+        if (!player.hasPerk(PerkLib.AzureflameBreath) && changes < changeLimit && rand(5) == 0 && player.racialScore(Races.CAVEWYRM) > 4) {
             outputText("[pg]You suddenly belch a long neon blue flame in front of you roasting the nearby vegetation. It didn't hurt your throat however so you shrug. <b>Well you will have to control your blue fire breath better not to set fire to your own camp.</b>\n");
             outputText("(<b>Perk Gained: Azureflame Breath</b>)");
             player.createPerk(PerkLib.AzureflameBreath, 0, 0, 0, 0);
@@ -7953,7 +7957,7 @@ public final class Mutations extends MutationsHelper {
         //clear screen
         clearOutput();
         outputText("You uncork the bottle and drink it down.  The taste is actualy quite sweet, like an alcohol but with a hint of hazelnuts flavor.  Would it change anything about you than making feeling of warmth spreading inside?");
-        if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
+		DrunkenPowerEmpowerIfPossible();
         //Statistical changes:
         //-Raises speed up to 90.
         if (changes < changeLimit && rand(3) == 0 && MutagenBonus("spe", 1)) {
@@ -8234,7 +8238,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Phoenix Fire Breath
-        if (player.phoenixScore() >= 5 && changes < changeLimit && !player.hasPerk(PerkLib.PhoenixFireBreath)) {
+        if (player.racialScore(Races.PHOENIX) >= 5 && changes < changeLimit && !player.hasPerk(PerkLib.PhoenixFireBreath)) {
             outputText("[pg]You feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself.  It had enough force to sent a little bit of dirt and shattered gravel all around.");
             outputText("[pg]It seems Nocello liqueur has awaked some kind of power within you... your throat feel quite dry.  (<b>Gained Perk: Phoenix fire breath!</b>)");
             player.createPerk(PerkLib.PhoenixFireBreath, 0, 0, 0, 0);
@@ -8426,7 +8430,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]You feel strange.  Fertile... somehow.  You don't know how else to think of it, but you know your body is just aching to be pregnant and give birth.");
         }
         //-VAGs
-        if (player.hasVagina() && !player.hasPerk(PerkLib.BunnyEggs) && changes < changeLimit && rand(4) == 0 && player.bunnyScore() > 3) {
+        if (player.hasVagina() && !player.hasPerk(PerkLib.BunnyEggs) && changes < changeLimit && rand(4) == 0 && player.racialScore(Races.BUNNY) > 3) {
             outputText("[pg]Deep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly.  Beyond that, you aren't sure exactly what just happened, but you are sure it originated from your womb.[pg]");
             outputText("(<b>Perk Gained: Bunny Eggs</b>)");
             player.createPerk(PerkLib.BunnyEggs, 0, 0, 0, 0);
@@ -9210,7 +9214,7 @@ public final class Mutations extends MutationsHelper {
         //****************
         //-Int less than 10
         if (player.inte < 10 && !player.hasPerk(PerkLib.TransformationResistance)) {
-            if (player.inte < 8 && player.kangaScore() >= 5) {
+            if (player.inte < 8 && player.racialScore(Races.KANGAROO) >= 5) {
                 outputText("[pg]While you gnaw on the fibrous fruit, your already vacant mind continues to empty, leaving nothing behind but the motion of your jaw as you slowly chew and swallow your favorite food.  Swallow.  Chew.  Swallow.  You don't even notice your posture worsening or your arms shortening.  Without a single thought, you start to hunch over but keep munching on the food in your paws as if were the most normal thing in the world.  Teeth sink into one of your fingers, leaving you to yelp in pain.  With the last of your senses, you look at your throbbing paw to notice you've run out of kanga fruit!");
                 outputText("[pg]Still hungry and licking your lips in anticipation, you sniff in deep lungfuls of air.  There's more of that wonderful fruit nearby!  You bound off in search of it on your incredibly muscular legs, their shape becoming more and more feral with every hop.  Now guided completely by instinct, you find a few stalks that grow from the ground.  Your belly rumbles, reminding you of your hunger, as you begin to dig into the kanga fruits...");
                 outputText("[pg]Losing more of what little remains of yourself, your body is now entirely that of a feral kangaroo and your mind has devolved to match it.  After you finish the handful of fruits you found, you move on in search for more of the tasty treats.  Though you pass by your camp later on, there's no memory, no recognition, just a slight feeling of comfort and familiarity.  There's no food here so you hop away.");
@@ -9348,7 +9352,7 @@ public final class Mutations extends MutationsHelper {
         }
         //UBEROOOO
         //kangaroo perk: - any liquid or food intake will accelerate a pregnancy, but it will not progress otherwise
-        if (!player.hasPerk(PerkLib.Diapause) && player.kangaScore() > 4 && rand(4) == 0 && changes < changeLimit && player.hasVagina()) {
+        if (!player.hasPerk(PerkLib.Diapause) && player.isRace(Races.KANGAROO) && rand(4) == 0 && changes < changeLimit && player.hasVagina()) {
             //Perk name and description:
             player.createPerk(PerkLib.Diapause, 0, 0, 0, 0);
             outputText("[pg]Your womb rumbles as something inside it changes.\n<b>(You have gained the Diapause perk.  Pregnancies will not progress when fluid intake is scarce, and will progress much faster when it isn't.)</b>");
@@ -9429,7 +9433,7 @@ public final class Mutations extends MutationsHelper {
         //(decrease strength to 70)
         if (player.str > 70 && rand(3) == 0) {
             outputText("[pg]Lethargy rolls through you while you burp noisily.  You rub at your muscles and sigh, wondering why you need to be strong when you could just sew up a nice sticky web to catch your enemies.  ");
-            if (player.spiderScore() < 4) outputText("Wait, you're not a spider, that doesn't make any sense!");
+            if (!player.isRace(Races.SPIDER)) outputText("Wait, you're not a spider, that doesn't make any sense!");
             else outputText("Well, maybe you should put your nice, heavy abdomen to work.");
             player.addCurse("str", 1, 1);
             changes++;
@@ -9626,7 +9630,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         if (player.blockingBodyTransformations()) {
             outputText("[pg]<b>You won't get anything from drinking this... aside getting drunk.</b>");
-            if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
+			DrunkenPowerEmpowerIfPossible();
             return;
         }
         //no drink for bimbos!
@@ -9770,7 +9774,7 @@ public final class Mutations extends MutationsHelper {
             outputText("<b>(Perk Lost - Feeder!)</b>\n");
             player.removePerk(PerkLib.Feeder);
         }
-        if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
+		DrunkenPowerEmpowerIfPossible();
         dynStats("str", 35, "tou", 35, "lib", 5, "lus", 40);
         player.addCurse("int", 1, 1);
         player.refillHunger(30);
@@ -10139,7 +10143,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(3) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         outputText("You drink the mead, finding it to have a remarkably smooth yet potent taste.  You lick your lips and sneeze, feeling slightly tipsy.");
-        if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
+		DrunkenPowerEmpowerIfPossible();
         //Stats
         if (rand(3) == 0 && changes < changeLimit && MutagenBonus("str", 1)) {
             outputText("[pg]Your fill your muscles filling with orc might.");
@@ -10254,7 +10258,7 @@ public final class Mutations extends MutationsHelper {
             transformations.SkinPatternOrc.applyEffect();
             changes++;
         }
-        if (player.lowerBody == LowerBody.ORC && player.arms.type == Arms.ORC && player.faceType == Face.ORC_FANGS && player.eyes.type == Eyes.ORC && player.skin.hasScarShapedTattoo() && player.orcScore() >= 11 && !player.hasPerk(PerkLib.Ferocity) && changes < changeLimit) {
+        if (player.lowerBody == LowerBody.ORC && player.arms.type == Arms.ORC && player.faceType == Face.ORC_FANGS && player.eyes.type == Eyes.ORC && player.skin.hasScarShapedTattoo() && player.isRace(Races.ORC) && !player.hasPerk(PerkLib.Ferocity) && changes < changeLimit) {
             outputText("[pg]You feel a limitless energy fill your orcish limbs, as your body tenses, rippling muscle making your scar-like tattoos look even more realistic. Your [face] gains a look of reverence has you hear the all mighty words of your goddess, telling you to go and claim new lands, conquer all living things, bring them beneath your rule.");
             outputText("[pg]She tells you that as long as you bear her blessing, you will not fall in battle, even if fatal blows are dealt. Go forth and prove that puny human who said people die when they are killed wrong.");
             outputText("[pg]<b>(Gained Perk: Ferocity</b>)");
@@ -11240,10 +11244,10 @@ public final class Mutations extends MutationsHelper {
 
         //[Change Hair Color: Golden-blonde or Reddish-orange]
         var fox_hair:Array = ["golden blonde", "reddish-orange", "silver", "white", "red", "black"];
-        if (!InCollection(player.hairColor, fox_hair) && !InCollection(player.hairColor, KitsuneScene.basicKitsuneHair) && !InCollection(player.hairColor, KitsuneScene.elderKitsuneColors) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (!InCollection(player.hairColor, fox_hair) && !InCollection(player.hairColor, KitsuneRace.KitsuneHairColors) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
             if (player.tailType == Tail.FOX && player.tailCount > 1)
-                if (player.tailCount < 9) player.hairColor = randomChoice(KitsuneScene.basicKitsuneHair);
-                else player.hairColor = randomChoice(KitsuneScene.elderKitsuneColors);
+                if (player.tailCount < 9) player.hairColor = randomChoice(KitsuneRace.BasicKitsuneHairColors);
+                else player.hairColor = randomChoice(KitsuneRace.ElderKitsuneColors);
             else player.hairColor = randomChoice(fox_hair);
             outputText("[pg]Your scalp begins to tingle, and you gently grasp a strand of hair, pulling it out to check it.  Your hair has become [haircolor]!");
         }
@@ -11420,13 +11424,13 @@ public final class Mutations extends MutationsHelper {
         //[Grow Fur]
         //FOURTH
         if ((enhanced || player.lowerBody == LowerBody.FOX) && !player.hasFur() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
-            if (player.kitsuneScore() >= 4)
-                if (InCollection(player.hairColor, KitsuneScene.basicKitsuneFur) || InCollection(player.hairColor, KitsuneScene.elderKitsuneColors)) {
+            if (player.racialScore(Races.KITSUNE) >= 4)
+                if (InCollection(player.hairColor, KitsuneRace.KitsuneFurColors)) {
                     player.skin.coat.color = player.hairColor;
                 } else if (player.tailType == Tail.FOX && player.tailCount == 9)
-                    player.skin.coat.color = randomChoice(KitsuneScene.elderKitsuneColors);
+                    player.skin.coat.color = randomChoice(KitsuneRace.ElderKitsuneColors);
                 else
-                    player.skin.coat.color = randomChoice(KitsuneScene.basicKitsuneFur);
+                    player.skin.coat.color = randomChoice(KitsuneRace.BasicKitsuneFurColors);
             else {
                 player.skin.coat.color = randomChoice("orange and white", "orange and white", "orange and white", "red and white", "black and white", "white", "tan", "brown");
             }
@@ -11513,7 +11517,7 @@ public final class Mutations extends MutationsHelper {
         //clear screen
         clearOutput();
         outputText("You uncork the hip flash and drink it down.  The taste is actualy quite good, like an alcohol but with a little fire within.  Just as you expected it makes you feel all hot and ready to take whole world head on.");
-        if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
+		DrunkenPowerEmpowerIfPossible();
         //Statistical changes:
         //-Reduces speed down to 70.
         if (player.spe > 70 && changes < changeLimit && rand(4) == 0) {
@@ -11752,7 +11756,7 @@ public final class Mutations extends MutationsHelper {
             player.beardLength += 0.5;
         }
         //Grow hair: Your scalp is beset by pins and needles as your hair grows out, stopping after it reaches [medium/long] length.}
-        if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
+		DrunkenPowerEmpowerIfPossible();
         player.refillHunger(20);
     }
 
@@ -11785,7 +11789,7 @@ public final class Mutations extends MutationsHelper {
             player.beardLength += 0.5;
         }
         //Grow hair: Your scalp is beset by pins and needles as your hair grows out, stopping after it reaches [medium/long] length.}
-        if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
+		DrunkenPowerEmpowerIfPossible();
         player.refillHunger(80);
     }
 
@@ -12083,16 +12087,15 @@ public final class Mutations extends MutationsHelper {
 			transformations.EarsFox.applyEffect();
         });
         //[Change Hair Color: Golden-blonde, SIlver Blonde, White, Black, Red]
-        mutationStep(!InCollection(player.hairColor, KitsuneScene.basicKitsuneHair) && player.lowerBody != LowerBody.GARGOYLE && !InCollection(player.hairColor, KitsuneScene.elderKitsuneColors), mystic ? 2 : 4, function ():void {
-            if (player.tailType == Tail.FOX && player.tailCount == 9) player.hairColor = randomChoice(KitsuneScene.elderKitsuneColors);
-            else player.hairColor = randomChoice(KitsuneScene.basicKitsuneHair);
+        mutationStep(!InCollection(player.hairColor, KitsuneRace.KitsuneHairColors) && player.lowerBody != LowerBody.GARGOYLE, mystic ? 2 : 4, function ():void {
+            if (player.tailType == Tail.FOX && player.tailCount == 9) player.hairColor = randomChoice(KitsuneRace.ElderKitsuneColors);
+            else player.hairColor = randomChoice(KitsuneRace.BasicKitsuneHairColors);
             outputText("[pg]Your scalp begins to tingle, and you gently grasp a strand, pulling it forward to check it.  Your hair has become the same [haircolor] as a kitsune's!");
         });
         var tone:Array = mystic ? ["dark", "ebony", "ashen", "sable", "milky white"] : ["tan", "olive", "light"];
         //[Change Skin Type: remove fur or scales, change skin to Tan, Olive, or Light]
         var changed:Boolean = mutationStep(player.skin.hasFur()
-                && !InCollection(player.coatColor, KitsuneScene.basicKitsuneFur)
-                && !InCollection(player.coatColor, KitsuneScene.elderKitsuneColors)
+                && !InCollection(player.coatColor, KitsuneRace.KitsuneFurColors)
                 && !InCollection(player.coatColor, ["orange and white", "black and white", "red and white", "tan", "brown"])
                 || !player.skin.hasFur() && player.skin.hasCoat(), mystic ? 1 : 2, function ():void {
             outputText("[pg]You begin to tingle all over your [skin], starting as a cool, pleasant sensation but gradually worsening until you are furiously itching all over.");
@@ -12225,7 +12228,7 @@ public final class Mutations extends MutationsHelper {
         if (!CoC.instance.inCombat) outputText("You sit down and unbag your fresh fish. It's perfectly flaky, allowing you to break it off in bite-sized chunks.  The salty meal disappears quickly, and your stomach gives an appreciative gurgle.");
         //(In combat?)
         else {
-            if (player.orcaScore() >= 12 || player.leviathanScore() >= 12) outputText("You produce the fresh fish from your bag and prety much just open wide your hungry mouth and toss it in. Your salty meal is gone in a flash, your stomach giving an appreciative gurgle.  ");
+            if (player.isRace(Races.ORCA) || player.isRace(Races.SEA_DRAGON)) outputText("You produce the fresh fish from your bag and prety much just open wide your hungry mouth and toss it in. Your salty meal is gone in a flash, your stomach giving an appreciative gurgle.  ");
             else outputText("You produce the fresh fish from your bag. Instead of eating slowly it and savor the taste as you normally would, you take a large bite out of it.  In no time your salty meal is gone, your stomach giving an appreciative gurgle.  ");
         }
         //Increase HP by quite a bit!)
@@ -13000,7 +13003,7 @@ public final class Mutations extends MutationsHelper {
         outputText("Feeling parched, you gobble down the fruit without much hesitation. Despite the skin being fuzzy like a peach, the inside is relatively hard, and its taste reminds you of that of an apple.  It even has a core like an apple. Finished, you toss the core aside.");
 
         //BAD END:
-        if (player.ferretScore() >= 6 && !player.hasPerk(PerkLib.TransformationResistance)) {
+        if (player.racialScore(Races.FERRET) >= 6 && !player.hasPerk(PerkLib.TransformationResistance)) {
             //Get warned!
             if (flags[kFLAGS.FERRET_BAD_END_WARNING] == 0) {
                 outputText("[pg]You find yourself staring off into the distance, dreaming idly of chasing rabbits through a warren.  You shake your head, returning to reality.  <b>Perhaps you should cut back on all the Ferret Fruit?</b>");
@@ -13231,7 +13234,7 @@ public final class Mutations extends MutationsHelper {
         //-----------------------
         // BAD END ALERT!
         //-----------------------
-        if (rand(5) == 0 && player.pigScore() >= 9 && !player.hasPerk(PerkLib.TransformationResistance)) {
+        if (rand(5) == 0 && player.isRace(Races.PIG) && !player.hasPerk(PerkLib.TransformationResistance)) {
             if (flags[kFLAGS.PIG_BAD_END_WARNING] == 0) {
                 outputText("[pg]You find yourself idly daydreaming of flailing about in the mud, letting go of all of your troubles. Eventually, you shake off the thought. Why would you do something like that? Maybe you should cut back on all the truffles?");
                 flags[kFLAGS.PIG_BAD_END_WARNING] = 1;
@@ -14612,7 +14615,7 @@ public final class Mutations extends MutationsHelper {
             transformations.SkinPlain.applyEffect();
             changes++;
         }
-        if (player.yukiOnnaScore() >= 14) {
+        if (player.isRace(Races.YUKIONNA)) {
             if (player.hasPerk(PerkLib.IcyFlesh) && changes < changeLimit && rand(3) == 0) {
                 outputText("[pg]The very ice and snow around you feels like an extension of your body. You gesture with a hand and the clouds of snow follow the gesture. You smile and in that moment your smile is cold, whoever will provoke you is not going to like what you have in store. <b>You can now use Hungering cold, Ice Barrage and Frigid Kiss.</b>");
                 if (!player.hasPerk(PerkLib.ColdAffinity)) player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
@@ -14962,7 +14965,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //BREATH WEAPON
-        if (player.leviathanScore() >= 20 && changes < changeLimit && !player.hasPerk(PerkLib.DragonWaterBreath)) {
+        if (player.isRace(Races.SEA_DRAGON) && changes < changeLimit && !player.hasPerk(PerkLib.DragonWaterBreath)) {
             outputText("[pg]You feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself accompanyed by a geyser of steaming water... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small steaming crater you have literally blasted into the landscape with a mixture of awe and surprise.");
             outputText("[pg]It seems some kind of power has awakened within you... your throat and chest feel very sore, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon Water breath!</b>)");
             player.createPerk(PerkLib.DragonWaterBreath, 0, 0, 0, 0);
@@ -15183,7 +15186,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (player.frostWyrmScore() >= 10 && changes < changeLimit && !player.hasPerk(PerkLib.DragonIceBreath)) {
+        if (player.isRace(Races.FROSTWYRM) && changes < changeLimit && !player.hasPerk(PerkLib.DragonIceBreath)) {
             outputText("[pg]You feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
             outputText("[pg]It seems the fafnir tear has awaked some kind of power within you... your throat and chest feel very cold, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon ice breath!</b>)");
             player.createPerk(PerkLib.DragonIceBreath, 0, 0, 0, 0);
@@ -15191,7 +15194,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //BREEDING TIME
-        if (player.frostWyrmScore() >= 10 && rand(3) == 0 && player.gender > 0) {
+        if (player.isRace(Races.FROSTWYRM) && rand(3) == 0 && player.gender > 0) {
             outputText("[pg]A sudden swell of lust races through your ");
             if (player.hasCock()) {
                 outputText(cockDescript(0));
@@ -15687,7 +15690,7 @@ public final class Mutations extends MutationsHelper {
             player.tallness -= 1 + rand(3);
             changes++;
         }
-        if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
+		DrunkenPowerEmpowerIfPossible();
         player.refillHunger(10);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
@@ -15731,7 +15734,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.tone < 70) player.modTone(70, rand(3));
         if (player.femininity > 30) player.modFem(30, rand(3));
-        if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= DrunkenPowerEmpowerOni()) DrunkenPowerEmpower();
+		DrunkenPowerEmpowerIfPossible();
     }
 
     public function jabberwockyScale(player:Player):void {
@@ -15740,7 +15743,7 @@ public final class Mutations extends MutationsHelper {
         var changes:Number = 0;
         var changeLimit:Number = 0;
         player.refillHunger(10);
-        if (player.dragonScore() > 9 || player.dragonneScore() > 9) {
+        if (player.racialScore(Races.DRAGON) > 9 || player.racialScore(Races.DRAGONNE) > 9) {
             outputText("You eat the scale expecting some kind of spectacular change and for a moment pretty much nothing happen. You begin to feel weird… like very weird. For some reason your situation as a whole is so funny you can’t help but laugh. Are you seriously eating some otherworldly dragon scale just so you can turn into a messed up rabbit dragon yourself? Aha yes you are and that's way to funny.");
             changeLimit += 1;
         } else {

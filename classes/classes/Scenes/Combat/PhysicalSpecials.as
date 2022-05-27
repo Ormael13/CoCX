@@ -17,6 +17,7 @@ import classes.IMutations.IMutationsLib;
 import classes.Items.JewelryLib;
 import classes.Items.WeaponLib;
 import classes.PerkLib;
+import classes.Races;
 import classes.Scenes.Areas.Caves.DisplacerBeast;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Dungeons.D3.Lethice;
@@ -62,7 +63,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					}
 				}
 				if (player.hasPerk(PerkLib.AsuraStrength)) {
-					
+				
 				}
 			}
 			if (player.haveWeaponForCleave() && player.hasStatusEffect(StatusEffects.KnowsCleave)) {
@@ -185,7 +186,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Grab & Slam
-			if (player.bearpandaScore() >= 10 && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
+			if (player.isRace(Races.BEARANDPANDA) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
 				bd = buttons.add("Grab", bearGrab).hint("Attempt to grab the opponent in your powerful paws. Does not work on opponent taller than you.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				bd = buttons.add("Slam", bearSlam).hint("Furiously slam your target with your powerful paw, staggering and stunning it.");
@@ -194,7 +195,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Grapple
-			if ((player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN || player.maleMindbreakerScore() >= 20 || player.femaleMindbreakerScore() >= 20)  && !player.hasPerk(PerkLib.ElementalBody)) {
+			if ((player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN || player.isRace(Races.MMINDBREAKER) || player.isRace(Races.FMINDBREAKER))  && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Grapple", scyllaGrapple).hint("Attempt to grapple a foe with your tentacles.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
@@ -325,7 +326,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("<b>You need more time before you can shoot ink again.</b>\n\n");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.hasVagina() && (player.cowScore() >= 9 || player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 1) && !player.hasPerk(PerkLib.ElementalBody)) {
+			if (player.hasVagina() && (player.isRace(Races.COW) || player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 1) && !player.hasPerk(PerkLib.ElementalBody)) {
 				var blaaaast2:String = player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3 ? " (cooldown of "+(player.hasPerk(PerkLib.NaturalInstincts) ? "3":"4")+" rounds before it can be used again)" : "";
 				bd = buttons.add("Milk Blast", milkBlast).hint("Blast your opponent with a powerful stream of milk, arousing and damaging them. The power of the jet is related to arousal, libido and production." + blaaaast2 + "\n");
 				if (player.perkv1(IMutationsLib.LactaBovinaOvariesIM) >= 3) bd.requireLust(200);
@@ -335,7 +336,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					else bd.disable("You can't use it more than once during fight.");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.hasCock() && (player.minotaurScore() >= 9 || player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 1) && !player.hasPerk(PerkLib.ElementalBody)) {
+			if (player.hasCock() && (player.isRace(Races.COW) || player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 1) && !player.hasPerk(PerkLib.ElementalBody)) {
 				var blaaaast1:String = player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3 ? " (cooldown of "+(player.hasPerk(PerkLib.NaturalInstincts) ? "3":"4")+" rounds before it can be used again)" : "";
 				bd = buttons.add("Cum Cannon", cumCannon).hint("Blast your opponent with a powerful stream of cum, arousing and damaging them. The power of the jet is related to arousal, libido and production. " + blaaaast1 + "\n");
 				if (player.perkv1(IMutationsLib.MinotaurTesticlesIM) >= 3) bd.requireLust(200);
@@ -345,12 +346,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 					else bd.disable("You can't use it more than once during fight.");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if ((player.pigScore() >= 8 || player.perkv1(IMutationsLib.PigBoarFatIM) >= 3) && player.thickness >= minThicknessReq()) {
+			if ((player.isRace(Races.PIG) || player.perkv1(IMutationsLib.PigBoarFatIM) >= 3) && player.thickness >= minThicknessReq()) {
 				bd = buttons.add("Body Slam", bodySlam).hint("Body slam your opponent (small chance to stun). Damage scale with toughness and thickness.");
 				bd.requireFatigue(physicalCost(50));
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.gooScore() >= 11 || player.magmagooScore() >= 13 || player.darkgooScore() >= 13) {
+			if (player.isRace(Races.SLIME) || player.isRace(Races.MAGMASLIME) || player.isRace(Races.DARKSLIME)) {
 				bd = buttons.add("Sling Goo", slinggoo).hint("Throw slime at your opponent, lacing it with your aphrodisiac compound and reduce their speed.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
@@ -482,7 +483,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.requireFatigue(physicalCost(30));
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if ((player.orcaScore() >= 10 || player.leviathanScore() >= 20) && player.faceType == Face.ORCA) {
+			if ((player.isRace(Races.ORCA) || player.isRace(Races.SEA_DRAGON)) && player.faceType == Face.ORCA) {
 				bd = buttons.add("Play", orcaPlay).hint("Begin toying with your prey by tossing it in the air, initiating a juggling combo.");
 				bd.requireFatigue(physicalCost(30));
 				if (!monster.hasStatusEffect(StatusEffects.Stunned)) bd.disable("<b>You need the ennemy to be stunned in order to use this ability.</b>\n\n");
@@ -609,7 +610,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Tornado Strike
-			if (player.couatlScore() >= 11) {
+			if (player.isRace(Races.COUATL)) {
 				bd = buttons.add("Tornado Strike", TornadoStrike).hint("Use wind to forcefully lift a foe in the air and deal damage.  \n\nWould go into cooldown after use for: 8 rounds");
 				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(120));
 				else bd.requireFatigue(physicalCost(60));
@@ -771,7 +772,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
 		else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-			if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+			if (player.isRace(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 			else damage *= 2;
 		}
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
@@ -1133,7 +1134,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damage1Bccc *= 2;
 						monster.statStore.addBuffObject({spe:-damage1Bccc}, "Poison",{text:"Poison"});
 						var venomType:StatusEffectType = StatusEffects.NagaVenom;
-						if (player.nagaScore() >= 23) venomType = StatusEffects.ApophisVenom;
+						if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
 						if (monster.hasStatusEffect(venomType))
 						{
 							monster.addStatusValue(venomType,2,0.4);
@@ -1693,7 +1694,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 		if (player.hasStatusEffect(StatusEffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-			if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+			if (player.isRace(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 			else damage *= 2;
 		}
 		//other bonuses
@@ -2182,7 +2183,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-				if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+				if (player.isRace(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 				else damage *= 2;
 			}
 			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
@@ -4094,7 +4095,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 			//Check weither its snakebite or apophis
 			var venomType:StatusEffectType = StatusEffects.NagaVenom;
-			if (player.nagaScore() >= 23) venomType = StatusEffects.ApophisVenom;
+			if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
 			if(monster.hasStatusEffect(venomType))
 			{
 				monster.addStatusValue(venomType,2,2);
@@ -4497,7 +4498,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 				if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
 				if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-					if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+					if (player.isRace(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 					else damage *= 2;
 				}
 				damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
@@ -4625,7 +4626,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 				if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
 				if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-					if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+					if (player.isRace(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 					else damage *= 2;
 				}
 				damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
@@ -5112,9 +5113,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function Drink():void {
 		clearOutput();
-		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore() >= CoC.instance.mutations.DrunkenPowerEmpowerOni()) CoC.instance.mutations.DrunkenPowerEmpower();
 		outputText("You merrily chug from the gourd quenching your thirst for sake.\n\n");
-		if (!player.statStore.hasBuff("Drunken Power") && player.oniScore() >= CoC.instance.mutations.DrunkenPowerEmpowerOni()) outputText("OOOH YESHHHH! This is just what you needed. You smile doopily as you enter the famous oni drunken daze, your muscle filling with extra alchoholic might. Now that your thirst is quenched you're totaly going to destroy the puny thing who dared to challenge you.\n\n");
+		if (CoC.instance.mutations.CanDrunkenPowerEmpower()) {
+			outputText("OOOH YESHHHH! This is just what you needed. You smile doopily as you enter the famous oni drunken daze, your muscle filling with extra alchoholic might. Now that your thirst is quenched you're totaly going to destroy the puny thing who dared to challenge you.\n\n");
+			CoC.instance.mutations.DrunkenPowerEmpower();
+		}
 		enemyAI();
 	}
 
@@ -5593,7 +5596,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBdc4 *= 2;
 						monster.statStore.addBuffObject({spe:-dBdc4}, "Poison",{text:"Poison"});
 						var venomType:StatusEffectType = StatusEffects.NagaVenom;
-						if (player.nagaScore() >= 23) venomType = StatusEffects.ApophisVenom;
+						if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
 						if (monster.hasStatusEffect(venomType)) {
 							monster.addStatusValue(venomType, 2, 0.4);
 							monster.addStatusValue(venomType, 1, (dBdc4*0.4));

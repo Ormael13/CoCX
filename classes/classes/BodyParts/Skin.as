@@ -19,12 +19,25 @@ import classes.internals.EnumValue;
  * @author Stadler76, aimozg
  */
 public class Skin extends SaveableBodyPart {
-
-  public static const COVERAGE_NONE:int     = 0;
+	
+	
+	/**
+	 * Entry properties:
+	 * - value: numerical id (0, 1, 2)
+	 * - id: name of the constant ("PLAIN", "FUR", "SCALES")
+	 * - name: human-readable default name, ("skin", "fur", "scales")
+	 */
+	public static var CoverageTypes:/*EnumValue*/Array = [];
+	public static const COVERAGE_NONE:int     = 0;
+	EnumValue.add(CoverageTypes, COVERAGE_NONE, "NONE", { name: "no" });
 	public static const COVERAGE_LOW:int      = 1;
+	EnumValue.add(CoverageTypes, COVERAGE_LOW, "LOW", { name: "partial" });
 	public static const COVERAGE_MEDIUM:int   = 2;
+	EnumValue.add(CoverageTypes, COVERAGE_MEDIUM, "MEDIUM", { name: "medium" });
 	public static const COVERAGE_HIGH:int     = 3;
+	EnumValue.add(CoverageTypes, COVERAGE_HIGH, "HIGH", { name: "high" });
 	public static const COVERAGE_COMPLETE:int = 4;
+	EnumValue.add(CoverageTypes, COVERAGE_COMPLETE, "COMPLETE", { name: "complete" });
 
 
 	/**
@@ -300,7 +313,7 @@ public class Skin extends SaveableBodyPart {
 		return base.type;
 	}
 
-    //used to determine default coat color - 
+    //used to determine default coat color -
     public function isHairy():Boolean {
         return (type == FUR || type == MOSS || type == FEATHER);
     }
@@ -315,7 +328,7 @@ public class Skin extends SaveableBodyPart {
 		if (coverage > COVERAGE_NONE && coat.checkProps(p)) return coat;
 		return null;
 	}
-    
+ 
 	public function growCoat(type:int,options:Object=null,coverage:int=COVERAGE_HIGH):SkinLayer {
 		this.coverage = coverage;
 		this.coat.type = type;

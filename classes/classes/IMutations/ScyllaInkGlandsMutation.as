@@ -9,6 +9,7 @@ import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
 public class ScyllaInkGlandsMutation extends IMutationPerkType
     {
@@ -53,9 +54,7 @@ public class ScyllaInkGlandsMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requirePerk(PerkLib.InkSpray)
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.scyllaScore() >= 7;
-                    }, "Scylla race");
+                    .requireRace(Races.SCYLLA);
                 }
                 else{
                     var pLvl:int = pTier * 30;

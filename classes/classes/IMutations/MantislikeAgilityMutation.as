@@ -8,6 +8,7 @@ import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
 public class MantislikeAgilityMutation extends IMutationPerkType
     {
@@ -50,9 +51,7 @@ public class MantislikeAgilityMutation extends IMutationPerkType
                 if (pTier == 0){
                     this.requireMusclesMutationSlot()
                     .requireMutation(IMutationsLib.TrachealSystemIM)
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.mantisScore() >= 12;
-                    }, "Mantis race");
+                    .requireRace(Races.MANTIS);
                 }
                 else{
                     var pLvl:int = pTier * 30;
