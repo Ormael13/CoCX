@@ -3155,6 +3155,7 @@ public class DesertCave extends DungeonAbstractContent
 				outputText("Wouldn't it be better if there were like, lots of cum witches, with yummy cocks that you could suck?");
 				outputText("\n\n\"<i>No, it wouldn't,</i>\" the Sand Mother retorts, ending the conversation.");
 				doNext(playerMenu);
+				return;
 			}
             spriteSelect(SpriteDb.s_cumWitch);
 			outputText("You ask her if it wouldn't be more humane to simply create a few more cum witches, allowing them to split their duties and actually have time to serve in other ways, either as normal sisters or perhaps helping with the recruitment.");
@@ -3170,7 +3171,6 @@ public class DesertCave extends DungeonAbstractContent
 			outputText("\n\n(<b>This coven now has numerous cum witches.  You can talk to the Sand Mother again and ask her to send them out in search of recruits if you want the chance to fight them in the future.</b>)");
 			flags[kFLAGS.MORE_CUM_WITCHES] = 1;
 			sandWitchMotherFriendlyMenu();
-			//Send them out, or back
 		}
 			
 		//*Pick Mothers
