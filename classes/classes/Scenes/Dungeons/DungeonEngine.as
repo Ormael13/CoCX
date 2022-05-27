@@ -1,8 +1,8 @@
 package classes.Scenes.Dungeons 
 {
-import classes.StatusEffects;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.StatusEffects;
 
 import coc.view.MainView;
 
@@ -21,7 +21,7 @@ public class DungeonEngine extends DungeonAbstractContent {
     public var ebonlabyrinth:EbonLabyrinth = new EbonLabyrinth;
     public var beehive:BeeHive = new BeeHive;
     
-    public var map:DungeonMap = new DungeonMap;
+    public var map:DungeonMaps = new DungeonMaps;
     
     public function DungeonEngine() {}
     

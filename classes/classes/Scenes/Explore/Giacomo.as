@@ -1,5 +1,5 @@
 /*
- LICENSE
+ LICENSE 
  
 This license grants Fenoxo, creator of this game usage of the works of
 Dxasmodeus in this product. Dxasmodeus grants Fenoxo and the coders assigned by him to this project permission to alter the text to conform with current and new game functions, only. Dxasmodeus retains exclusive rights to alter or change the core contents of the events and no other developer may alter, change or use the events without permission from dxasmodeus. Fenoxo agrees to include Dxasmodeus' name in the credits with indications to the specific contribution made to the licensor. This license must appear
@@ -102,7 +102,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SOUL_SENSE_GIACOMO] < 2) flags[kFLAGS.SOUL_SENSE_GIACOMO]++;
 			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] == 2) {
 				flags[kFLAGS.SOUL_SENSE_GIACOMO]++;
-				outputText("\n\n<b>You have meet him enough times to be able to find him in the future when using soul sense. (Removes Giacomo from general explore encounters pool!)</b>\n\n");
+				outputText("\n\n<b>You have met him enough times to be able to find him in the future when using soul sense. (Removes Giacomo from general explore encounters pool!)</b>\n\n");
 			}
 			menu();
 			addButton(0, "Potions", potionMenu);
@@ -243,7 +243,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			outputText("Giacomo holds up a pouch of dried, fragrant leaves and begins his spiel, \"<i>Have you ever wondered how scholars and other smart folk keep up such a mental effort for so long?  They make a tea out of this fine mixture of quality plants and herbs.  Nothing but the best, this mysterious mixture of herbs in its Orange Pekoe base makes anyone, short of a lummox, as brainy as the finest minds of the land.  All you do is steep the leaves in some water and drink up!  Hot or cold, straight or sweetened with honey, your mind will run circles around itself once it has this for fuel.  Buy it now and I will throw in the strainer for free!  Interested?  Only <b>15 gems</b>!</i>\"  ");
 			doYesNo(buyScholarsTea, potionMenu);
 		}
-		
+
 		private function buyScholarsTea():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			if (player.gems < 15) {
@@ -735,7 +735,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			outputText("Giacomo takes out a slender tube roughly over half a foot in length.  \"<i>Since you seek pleasure, this is as simple and effective as it gets.  This dildo is a healthy seven inches long and is suitable for most women and even adventurous men.  Pick a hole, stick it in and work it to your heart's content or your partner's pleasure.  The single-piece construction makes it solid, sturdy and straightforward.  For 20 gems, you can take matters into your own hands.  How about it?</i>\"");
 			doYesNo(buyDildo, eroticaMenu);
 		}
-		
+
 		private function buyDildo():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
@@ -815,7 +815,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			player.gems -= 40;
 			statScreenRefresh();
 		}
-		
+
 		private function pitchOnahole():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
@@ -842,7 +842,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			player.gems -= 20;
 			statScreenRefresh();
 		}
-		
+
 		private function pitchDeluxeOnahole():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
@@ -1026,7 +1026,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			dynStats("tou", .3, "lib", .5, "sen", .5, "lus", 5, "cor", 1);
 			doNext(ceruleanSuccubusEncounterPart3);
 		}
-		
+
 		private function ceruleanSuccubusEncounterPart3():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_cerulean_succubus);
@@ -1065,7 +1065,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			}
 			inventory.takeItem(consumables.CERUL_P, playerMenu);
 		}
-		
+
 		private function nightSuccubiRepeat():void {
 			spriteSelect(SpriteDb.s_cerulean_succubus);
 			if(player.gender == 0) {
