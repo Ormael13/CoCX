@@ -19,7 +19,6 @@ import classes.CockTypesEnum;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.Scenes.SceneLib;
-import classes.StatusEffects;
 
 public class EmberTF extends BaseContent
 {
@@ -249,28 +248,29 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 		player.tallness += temp;
 		changes++;
 	}
-	if (player.dragonScore() >= 4 && rand(3) == 0 && player.gender > 0) {
+	var canReactMale:Boolean = player.hasCock() && (drakesHeart || SceneLib.emberScene.emberHasVagina());
+	var canReactFemale:Boolean = player.hasVagina() && (drakesHeart || SceneLib.emberScene.emberHasCock());
+	if (player.dragonScore() >= 4 && rand(3) == 0 && (canReactMale || canReactFemale)) {
 		outputText("\n\nA sudden swell of lust races through your ");
-		if (player.hasCock()) {
+		if (canReactMale) {
 			outputText(cockDescript(0));
-			if (player.hasVagina()) outputText(" and ");
+			if (canReactFemale) outputText(" and ");
 		}
-		if (player.hasVagina()) outputText(vaginaDescript());
-        outputText(", making you wish " + (drakesHeart ? "you had a dragon to go with." : "Ember hadn't run you off") + ".  All you can think about now is fucking " + (drakesHeart ? "a dragon-morph" : SceneLib.emberScene.emberMF("him", "her")) + "; ");
-        if (player.hasCock() && flags[kFLAGS.EMBER_GENDER] >= 2) {
-			if (drakesHeart) {
+		if (canReactFemale) outputText(vaginaDescript());
+        outputText(", making you wish " + (drakesHeart ? "you had a dragon to go with." : "you could have sex with Ember right here and now") + ".  All you can think about now is fucking " + (drakesHeart ? "a dragon-morph" : SceneLib.emberScene.emberMF("him", "her")) + "; ");
+        if (canReactMale) {
+			if (drakesHeart)
 				outputText("filling a womb with your seed and fertilizing those eggs");
-			}
 			else {
 				outputText("filling her womb with your seed and fertilizing her eggs");
-				if (player.hasVagina() && flags[kFLAGS.EMBER_GENDER] == 3) outputText(" even while ");
+				if (canReactFemale) outputText(" even while ");
 			}
 		}
-		if (player.hasVagina() && (flags[kFLAGS.EMBER_GENDER] == 3 || flags[kFLAGS.EMBER_GENDER] == 1)) {
+		if (canReactFemale) {
 			outputText("taking that hard, spurting cock inside your own " + vaginaDescript(0));
 		}
 		outputText("... too late, you realize that <b>" + (drakesHeart ? "the flower" : "Ember's blood") + " has sent your draconic body into ");
-		if (player.hasCock() && (flags[kFLAGS.EMBER_GENDER] >= 2 || drakesHeart) && (rand(2) == 0 || !player.hasVagina())) { //If hermaphrodite, the chance is 50/50.
+		if (canReactMale && (rand(2) == 0 || !canReactFemale)) { //If hermaphrodite, the chance is 50/50.
 			outputText("rut");
 			player.goIntoRut(false);
 			changes++;

@@ -12,7 +12,7 @@ import classes.Scenes.Areas.Plains.Gnoll;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
-	public class AntsScene extends BaseContent
+public class AntsScene extends BaseContent
 	{
 		public const phyllaCapacity:Number = 50;
 
@@ -25,9 +25,8 @@ import classes.display.SpriteDb;
 
 		public function antColonyEncounter():void
 		{
-			//WAIFU GET!
-			trace("ANT WINS: " + flags[kFLAGS.ANT_ARENA_WINS] + " ANT LOSSES: " + flags[kFLAGS.ANT_ARENA_LOSSES]);
-			if (flags[kFLAGS.ANT_ARENA_WINS] - flags[kFLAGS.ANT_ARENA_LOSSES] >= 2 && flags[kFLAGS.ANT_ARENA_WINS] >= 4 && player.gender > 0) {
+			//gem check is for gentle decline option (dirty)
+			if (flags[kFLAGS.ANT_ARENA_WINS] - flags[kFLAGS.ANT_ARENA_LOSSES] >= 2 && flags[kFLAGS.ANT_ARENA_WINS] >= 4 && player.gender > 0 && flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] == 0) {
 				if (flags[kFLAGS.PHYLLA_STAY_HOME] > 0) bumpIntoTheAntColonyAfterStayHomePhylla();
 				else antGirlGoodEnd();
 			}
@@ -466,11 +465,25 @@ import classes.display.SpriteDb;
 			menu();
 			if (player.hasCock()) addButton(0, "Use Penis", phyllaFirstTimePenis);
 			if (player.hasVagina()) addButton(1, "Use Vagina", phyllaFirstTimeVagina);
-			addButton(4, "Refuse", refuseAntSex);
+			addButton(3, "Not Now", declineAntSexForNow);
+			addButton(4, "Reject", rejectAntSex);
 		}
 
-		//Refuse sex. This disables further encounter.
-		private function refuseAntSex():void {
+		//Put off the sex for now.
+		private function declineAntSexForNow():void {
+			clearOutput();
+			outputText("Your mind finally fires up and shake your head. You just tell her that today just isn't the right day.");
+			outputText("\n\n\"<i>I... I understand.</i>\" She looks down and pauses in silence then looks back at you, smiling nervously and resumes, \"<i>Please, come back anytime.</i>\"");
+			outputText("\n\nYou reassuringly tell her and plant a kiss on her lips then get yourself redressed and make the departure back to your camp.");
+			if (!recalling) {
+				flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] = 1; //Dirty checking for disabling the ant temporarily for 1 day.
+				doNext(camp.returnToCampUseOneHour);
+			}
+			else doNext(recallWakeUp);
+		}
+
+		//Reject sex. This disables further encounter.
+		private function rejectAntSex():void {
 			clearOutput();
 			outputText("Your mind finally fires up; she's not worth your time. You quickly dart off towards the door, leaving Phylla heart-broken.");
 			outputText("\n\n\"<i>What are you doing? I mean... You won't?</i>\" She looks down, tears leaking from her eyes.");
