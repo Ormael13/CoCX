@@ -350,6 +350,7 @@ public class Race {
 	/**
 	 * Key: debug form name
 	 * Value: a list of elements of type:
+	 * - function(player:Player):void
 	 * - Transformation
 	 * - StatusEffectType
 	 * - IMutationPerkType
@@ -364,6 +365,11 @@ public class Race {
 	}
 	public function takeForm(player:Player, tfName:String):void {
 		for each (var o:* in debugForms[tfName]) {
+			var f:Function = o as Function;
+			if (f) {
+				f(player);
+				continue;
+			}
 			var tf:Transformation = o as Transformation;
 			if (tf) {
 				if (tf.isPossible()) {

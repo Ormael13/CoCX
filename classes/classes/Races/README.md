@@ -302,6 +302,7 @@ To do that, overwrite a `debugForms` race with a map. Each element is a debug fo
 * StatusEffectType - added with zero values. To add a status effect with custom values, add a nested 5-element array `[effect type, value1, value2, value3, value4]`
 * IMutationPerkType - added with max stage. To add a different stage, add a nested 2-element array `[mutation type, stage]`
 * PerkType - added with zero values. To add a perk with custom values, add a nested 5-element array `[perk type, value1, value2, value3, value4]`.
+* functions with signature `function(player:Player):void`
 
 See Kitsune and Human races for example.
 
