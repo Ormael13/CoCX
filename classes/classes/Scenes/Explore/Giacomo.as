@@ -102,7 +102,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SOUL_SENSE_GIACOMO] < 2) flags[kFLAGS.SOUL_SENSE_GIACOMO]++;
 			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] == 2) {
 				flags[kFLAGS.SOUL_SENSE_GIACOMO]++;
-				outputText("\n\n<b>You have meet him enough times to be able to find him in the future when using soul sense. (Removes Giacomo from general explore encounters pool!)</b>\n\n");
+				outputText("\n\n<b>You have met him enough times to be able to find him in the future when using soul sense. (Removes Giacomo from general explore encounters pool!)</b>\n\n");
 			}
 			menu();
 			addButton(0, "Potions", potionMenu);

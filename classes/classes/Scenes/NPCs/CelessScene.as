@@ -430,6 +430,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				outputText("As you dip " + from.shortName + " in purple waters, corruption begins to cling to it like tar staining the material and transforming it into an unholy abomination. A few seconds later you finally retrieve the " + item.shortName + " from the fountain of corruption, highly satisfied with the results as it radiates with blasphemous power to defile anything it touches.");
 			else
 				outputText("As you dip " + from.shortName + " in the fountain, it begins to radiate with light the material transforming into a tool of divine power. A few seconds later you finally retrieve the " + item.shortName + " from the water, highly satisfied with the results as it radiates with power to scour the evil that plagues this land. ");
+			SceneLib.dungeons.ebonlabyrinth.fountainRoom = false;
 		}
 		if(player.keyItemvX("Radiant shard", 1) == 3) player.removeKeyItem("Radiant shard");
 		else player.addKeyValue("Radiant shard",1,-3);
@@ -440,8 +441,8 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 
 	public function AboutRadiantShard():void {
 		outputText("You ask " + _name + " what are radiant shards exactly."+
-				"\n\n<i>\"Well, from what I think I may know, they are the remains of artifacts of past legend. Items long-lost to time that were probably used in the mythical age. They are useless by themselves, just small fragment of lost power, but if you were to bring in multiple, as well as a base for the shards to fuse with, I could weave back the lost item to life.\"</i>\n\n"+
-				"\n\n Truthfully, that your little girl talks about such grown up subject so early both makes you proud and creeps you out.");
+				"\n\n<i>\"Well, from what I think I may know, they are the remains of artifacts of past legend. Items long-lost to time that were probably used in the mythical age. They are useless by themselves, just small fragment of lost power, but if you were to bring in multiple, as well as a base for the shards to fuse with, I could weave back the lost item to life.\"</i>"+
+				"\n\nTruly, your little girl talking about such grown up subject so early both makes you proud and creeps you out.");
 		doNext(campInteraction);
 	}
 
