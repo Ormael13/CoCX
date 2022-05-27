@@ -267,3 +267,21 @@ Instead use this:
 | variables (including class variables) | Use lowerCamelCase                                                      | `furColor`, `skinType`                  |
 | constants                             | Use capital letters and words separated by underscores                  | `CAN_FLY_WINGS`, `RED_PANDA`            |
 ```
+
+### Arrays and trailing commas
+When adding elements to arrays where every array element is in it own line its common practice and recommended to add a trailing comma (`,`) to the new element, to reduce the noise of future diffs:
+```as3
+public static const DEFAULT_ARM_NAMES:Object = createMapFromPairs(
+		[
+			[Arms.HUMAN, "human"],
+			[Arms.HARPY, "harpy"],
+			[Arms.SPIDER, "spider"],
+			[Arms.WOLF, "wolf"],
+			[Arms.PREDATOR, "predator"],
+			[Arms.SALAMANDER, "salamander"],
+			[Arms.COCKATRICE, "cockatrice"],
+			[Arms.RED_PANDA, "red-panda"],
+			[Arms.OTTER, "otter"],
+		]
+);
+```
