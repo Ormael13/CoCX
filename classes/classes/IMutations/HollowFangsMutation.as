@@ -57,7 +57,7 @@ public class HollowFangsMutation extends IMutationPerkType
                 IMutationsLib.HollowFangsIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.HollowFangsIM.requireMouthMutationSlot()
-                    .requirePerk(IMutationsLib.VampiricBloodstreamIM)
+                    .requireMutation(IMutationsLib.VampiricBloodstreamIM)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.facePart.type == 34;//player.facePart.isAny(Face.VAMPIRE, Face.)
                     }, "Vampire fangs")

@@ -54,7 +54,8 @@ public class MantislikeAgilityMutation extends IMutationPerkType
                 IMutationsLib.MantislikeAgilityIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.MantislikeAgilityIM.requireMusclesMutationSlot()
-                    .requirePerk(IMutationsLib.TrachealSystemIM).requireRace(Races.MANTIS);
+                    .requireMutation(IMutationsLib.TrachealSystemIM)
+                    .requireRace(Races.MANTIS);
                 }
                 else{
                     var pLvl:int = pTier * 30;

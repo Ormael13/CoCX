@@ -57,7 +57,7 @@ public class DraconicHeartMutation extends IMutationPerkType
                 IMutationsLib.DraconicHeartIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.DraconicHeartIM.requireHeartMutationSlot()
-                    .requirePerk(IMutationsLib.DraconicBonesIM)
+                    .requireMutation(IMutationsLib.DraconicBonesIM)
                     .requireAnyRace(Races.DRAGON,Races.FROSTWYRM,Races.SEA_DRAGON);
                 }
                 else{

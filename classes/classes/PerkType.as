@@ -669,5 +669,18 @@ public class PerkType extends BaseContent
 			}
 			return this;
 		}
+
+		public function requireMutation(mutation:IMutationPerkType):PerkType {
+			requirements.push({
+				fn  : function (player:Player):Boolean {
+					return player.hasMutation(mutation);
+				},
+				text: mutation.name(),
+				type: "mutation",
+				perk: mutation
+			});
+			return this;
+		}
+
 	}
 }
