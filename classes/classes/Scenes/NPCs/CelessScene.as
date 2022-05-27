@@ -3,11 +3,12 @@ import classes.CoC;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.ItemType;
+import classes.PerkLib;
 import classes.PregnancyStore;
 import classes.Scenes.Camp;
-import classes.TimeAwareInterface;
-import classes.PerkLib;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects;
+import classes.TimeAwareInterface;
 import classes.display.SpriteDb;
 
 import coc.view.ButtonDataList;
@@ -353,74 +354,88 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		doNext(camp.returnToCampUseFourHours);
 	}
 
-	public function itemImproveMenu():void {
-		celessSprite();
-		var improvableItems:Array = [
-			[weapons.BFSWORD, weapons.NPHBLDE, weapons.EBNYBLD],
-			[weapons.DBFSWO, weapons.T_HEART, weapons.DORSOUL],
-			[weapons.MASTGLO, weapons.KARMTOU, weapons.YAMARG],
-			[weapons.KATANA, weapons.MASAMUN, weapons.BLETTER],
-			[weapons.W_STAFF, weapons.U_STAFF, weapons.N_STAFF],
-			[weapons.DEMSCYT, weapons.LHSCYTH, null],
-			[weapons.UGATANA, weapons.MOONLIT, weapons.C_BLADE],
-			[weapons.L__AXE, weapons.WG_GAXE, weapons.DE_GAXE],
-			[weapons.SPEAR, weapons.SESPEAR, weapons.DSSPEAR],
-			[weapons.JRAPIER, weapons.Q_GUARD, weapons.B_WIDOW],
-			[weapons.OTETSU, weapons.POCDEST, weapons.DOCDEST],
-			[weapons.BFTHSWORD, weapons.ARMAGED, weapons.CHAOSEA],
-			[weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
-			[weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
-			[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD],
-			[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR],
-			[armors.BLKIMONO, armors.IBKIMO, armors.TCKIMO],
-			[armors.BKIMONO, armors.IBKIMO, armors.TCKIMO],
-			[armors.PKIMONO, armors.IBKIMO, armors.TCKIMO],
-			[armors.RKIMONO, armors.IBKIMO, armors.TCKIMO],
-			[armors.WKIMONO, armors.IBKIMO, armors.TCKIMO],
-			[armors.SPKIMO, armors.OEKIMO, armors.OTKIMO],
-			[armors.CTPALAD, null, armors.CTBGUAR]
-		];
+	//dialogue: 0 for Celess.
+	public static function itemImproveMenu(dialogue:int = 0, corrupt:Boolean = false /*for EL*/):void {
+		//dialogue
 		clearOutput();
-		outputText(""+_name+" can empower items using materials gems and her innate magic to " + (isCorrupt ? "corrupt" : "bless") + " gear by using radiant shards and gems. Would you like her to create an epic item and in that case which?");// legendary
-		outputText("\n\n<b>You currently have "+player.keyItemvX("Radiant shard", 1)+" radiant shards.</b>")
-		//Celess
-		var selectfrom:int = isCorrupt ? 2 : 1;
+		if (dialogue == 0) {
+			corrupt = instance.isCorrupt;
+			outputText("" + instance._name + " can empower items using materials gems and her innate magic to " + (instance.isCorrupt ? "corrupt" : "bless") + " gear by using radiant shards and gems. Would you like her to create an epic item and in that case which?");
+		} else if (dialogue == 1) {
+			outputText("What item would you like to dip in the " + (corrupt ? "unholy" : "holy") + " waters?");
+		}
+		outputText("\n\n<b>You currently have " + player.keyItemvX("Radiant shard", 1) + " radiant shards.</b>");
+		//menu
+		var improvableItems:Array = [
+			[CoC.instance.weapons.BFSWORD, CoC.instance.weapons.NPHBLDE, CoC.instance.weapons.EBNYBLD],
+			[CoC.instance.weapons.DBFSWO, CoC.instance.weapons.T_HEART, CoC.instance.weapons.DORSOUL],
+			[CoC.instance.weapons.MASTGLO, CoC.instance.weapons.KARMTOU, CoC.instance.weapons.YAMARG],
+			[CoC.instance.weapons.KATANA, CoC.instance.weapons.MASAMUN, CoC.instance.weapons.BLETTER],
+			[CoC.instance.weapons.W_STAFF, CoC.instance.weapons.U_STAFF, CoC.instance.weapons.N_STAFF],
+			[CoC.instance.weapons.DEMSCYT, CoC.instance.weapons.LHSCYTH, null],
+			[CoC.instance.weapons.UGATANA, CoC.instance.weapons.MOONLIT, CoC.instance.weapons.C_BLADE],
+			[CoC.instance.weapons.L__AXE, CoC.instance.weapons.WG_GAXE, CoC.instance.weapons.DE_GAXE],
+			[CoC.instance.weapons.SPEAR, CoC.instance.weapons.SESPEAR, CoC.instance.weapons.DSSPEAR],
+			[CoC.instance.weapons.JRAPIER, CoC.instance.weapons.Q_GUARD, CoC.instance.weapons.B_WIDOW],
+			[CoC.instance.weapons.OTETSU, CoC.instance.weapons.POCDEST, CoC.instance.weapons.DOCDEST],
+			[CoC.instance.weapons.BFTHSWORD, CoC.instance.weapons.ARMAGED, CoC.instance.weapons.CHAOSEA],
+			[CoC.instance.weaponsrange.BOWLONG, CoC.instance.weaponsrange.ARTEMIS, CoC.instance.weaponsrange.WILDHUN],
+			[CoC.instance.weaponsrange.SHUNHAR, CoC.instance.weaponsrange.KSLHARP, CoC.instance.weaponsrange.LEVHARP],
+			[CoC.instance.shields.SANCTYN, CoC.instance.shields.SANCTYL, CoC.instance.shields.SANCTYD],
+			[CoC.instance.armors.LMARMOR, CoC.instance.armors.BMARMOR, CoC.instance.armors.S_ARMOR],
+			[CoC.instance.armors.BLKIMONO, CoC.instance.armors.IBKIMO, CoC.instance.armors.TCKIMO],
+			[CoC.instance.armors.BKIMONO, CoC.instance.armors.IBKIMO, CoC.instance.armors.TCKIMO],
+			[CoC.instance.armors.PKIMONO, CoC.instance.armors.IBKIMO, CoC.instance.armors.TCKIMO],
+			[CoC.instance.armors.RKIMONO, CoC.instance.armors.IBKIMO, CoC.instance.armors.TCKIMO],
+			[CoC.instance.armors.WKIMONO, CoC.instance.armors.IBKIMO, CoC.instance.armors.TCKIMO],
+			[CoC.instance.armors.SPKIMO, CoC.instance.armors.OEKIMO, CoC.instance.armors.OTKIMO],
+			[CoC.instance.armors.CTPALAD, null, CoC.instance.armors.CTBGUAR]
+		];
+		var selectfrom:int = corrupt ? 2 : 1;
 		var selectMenu:ButtonDataList = new ButtonDataList();
-		for (var i:int = 0; i < improvableItems.length; i++) {
-			if (improvableItems[i][selectfrom] == null) {/*do nothing*/
-			}
-			else {
+		for (var i:int = 0; i < improvableItems.length; i++)
+			if (improvableItems[i][selectfrom] != null) {
 				var item:ItemType = improvableItems[i][selectfrom];
 				var from:ItemType = improvableItems[i][0];
-				selectMenu.add(item.id, curry(improveItem, item, from)).disableIf(!player.hasItem(from),"You need a "+from+" as a base to create this item")
-				.disableIf(player.keyItemvX("Radiant shard", 1) < 3,"You need at least three radiant shards in order to create this item.")
-				.disableIf(player.gems < 10000,"You need at least 20 000 gems in order to create this item");
+				selectMenu.add(item.id, curry(improveItemDialogue, item, from, dialogue, corrupt))
+					.disableIf(!player.hasItem(from),"You need a "+from+" as a base to create this item.")
+					.disableIf(player.keyItemvX("Radiant shard", 1) < 3,"You need at least three radiant shards in order to create this item.")
+					.disableIf(player.gems < 10000,"You need at least 20 000 gems in order to create this item.");
 			}
-		}
-		submenu(selectMenu, campInteraction);
+		submenu(selectMenu, dialogue == 0 ? instance.campInteraction : playerMenu);
+	}
 
-		function improveItem(item:ItemType, from:ItemType):void {
-			outputText("You ask " + _name + " if she could imbue an item with her power.\n\n"+
-			"<i>\"Certainly, "+ player.mf("father", "mother") +"! Just leave the items on the ground and let me get to work.\"</i>\n\n"+
-			_name + " trots over to the item and starts channeling power.");
-			if (isCorrupt){
-				outputText("You see her twin horns blazing with a dark purple aura of corruption as her horse cock goes erect. "+
-				"She starts massaging her breasts, then moans, her eyes rolling out as she spontaneously orgasms, a river of black cum flooding out of her flare right unto the item. "+
-				"You see the item, gems and shards transforming as fluid corruption seeps into the material, infusing it with unholy power.\n\n"+
-				"She sighs in relief, shakes out the few last drops of corrupt cum, then steps away, leaving you to examine the fruit of her work.");
-			}
-			else{
-				outputText("Her horns start to glow with a white halo of purity. "+
-				"She cradles the item within her hands like a newborn baby, then finally touches it with her horn, transferring the light into it. "+
-				"A miracle happens, as the armament, gems and shards combine, changing shape and starting to glow with holy power.\n\n" +
-				"Finally done, she comes back to you and solemnly deposits the blessed armament in your hand.");
-			}
-			if(player.keyItemvX("Radiant shard", 1) == 3) player.removeKeyItem("Radiant shard");
-			else player.addKeyValue("Radiant shard",1,-3);
-			player.gems -= 20000;
-			player.destroyItems(from, 1);
-			inventory.takeItem(item, camp.returnToCampUseOneHour);
+	//dialogue: 0 - Celess, 1 - EbonLabyrinth.
+	public static function improveItemDialogue(item:ItemType, from:ItemType, dialogue:int, corrupt:Boolean):void {
+		clearOutput();
+		//Celess herself
+		if (dialogue == 0) {
+			outputText("You ask " + instance._name + " if she could imbue an item with her power.\n\n" +
+				"<i>\"Certainly, " + player.mf("father", "mother") + "! Just leave the items on the ground and let me get to work.\"</i>\n\n" +
+				instance._name + " trots over to the item and starts channeling power.");
+			if (corrupt)
+				outputText("You see her twin horns blazing with a dark purple aura of corruption as her horse cock goes erect. " +
+					"She starts massaging her breasts, then moans, her eyes rolling out as she spontaneously orgasms, a river of black cum flooding out of her flare right unto the item. " +
+					"You see the item, gems and shards transforming as fluid corruption seeps into the material, infusing it with unholy power.\n\n" +
+					"She sighs in relief, shakes out the few last drops of corrupt cum, then steps away, leaving you to examine the fruit of her work.");
+			else
+				outputText("Her horns start to glow with a white halo of purity. " +
+					"She cradles the item within her hands like a newborn baby, then finally touches it with her horn, transferring the light into it. " +
+					"A miracle happens, as the armament, gems and shards combine, changing shape and starting to glow with holy power.\n\n" +
+					"Finally done, she comes back to you and solemnly deposits the blessed armament in your hand.");
 		}
+		//EL
+		else if (dialogue == 1) {
+			if (corrupt)
+				outputText("As you dip " + from.shortName + " in purple waters, corruption begins to cling to it like tar staining the material and transforming it into an unholy abomination. A few seconds later you finally retrieve the " + item.shortName + " from the fountain of corruption, highly satisfied with the results as it radiates with blasphemous power to defile anything it touches.");
+			else
+				outputText("As you dip " + from.shortName + " in the fountain, it begins to radiate with light the material transforming into a tool of divine power. A few seconds later you finally retrieve the " + item.shortName + " from the water, highly satisfied with the results as it radiates with power to scour the evil that plagues this land. ");
+		}
+		if(player.keyItemvX("Radiant shard", 1) == 3) player.removeKeyItem("Radiant shard");
+		else player.addKeyValue("Radiant shard",1,-3);
+		player.gems -= 20000;
+		player.destroyItems(from, 1);
+		SceneLib.inventory.takeItem(item, SceneLib.camp.returnToCampUseOneHour);
 	}
 
 	public function AboutRadiantShard():void {
