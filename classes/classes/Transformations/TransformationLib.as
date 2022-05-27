@@ -9883,10 +9883,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		return new SimpleTransformation("Remove Vagina",
 			// apply effect
 			function (doOutput:Boolean):void {
-				var desc:String = "";
+				var desc:String = "[pg]";
 
 				if (player.hasVagina()) {
-					desc += "A tightness in your groin is the only warning you get before your <b>[vagina "+vagina+1+"] disappears forever</b>!";
+					desc += "A tightness in your groin is the only warning you get before your <b>[vagina "+vagina+1+"] disappears completely</b>!";
 					if (doOutput) outputText(desc);
 
 					player.removeVagina(vagina, 1);
@@ -9931,7 +9931,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			},
 			// is present
 			function ():Boolean {
-				return player.hasVagina() && player.vaginaType() == VaginaClass.HUMAN;
+				return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.HUMAN;
 			}
 		);
 	}
@@ -9965,7 +9965,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType() == VaginaClass.EQUINE;
+					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.EQUINE;
 				}
 		);
 	}
@@ -10002,7 +10002,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType() == VaginaClass.BLACK_SAND_TRAP;
+					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.BLACK_SAND_TRAP;
 				}
 		);
 	}
@@ -10032,7 +10032,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType() == VaginaClass.CAVE_WYRM;
+					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.CAVE_WYRM;
 				}
 		);
 	}
@@ -10072,7 +10072,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType() == VaginaClass.VENOM_DRIPPING;
+					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.VENOM_DRIPPING;
 				}
 		);
 	}
@@ -10102,11 +10102,11 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.MANTICORE, vagina);
 
-					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.EQUINE));
+					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.MANTICORE));
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType() == VaginaClass.HUMAN;
+					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.MANTICORE;
 				}
 		);
 	}
@@ -10142,7 +10142,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType() == VaginaClass.CANCER;
+					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.CANCER;
 				}
 		);
 	}
@@ -10172,7 +10172,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType() == VaginaClass.DEMONIC;
+					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.DEMONIC;
 				}
 		);
 	}
@@ -10206,7 +10206,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType() == VaginaClass.SCYLLA;
+					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.SCYLLA;
 				},
 				function ():Boolean {
 					return player.lowerBody == LowerBody.SCYLLA;
@@ -10243,7 +10243,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType() == VaginaClass.NAGA;
+					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.NAGA;
 				},
 				// is possible
 				function ():Boolean {
@@ -10281,7 +10281,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType() == VaginaClass.SHARK;
+					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.SHARK;
 				}
 		);
 	}
@@ -10312,30 +10312,30 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType() == VaginaClass.RAIJU;
+					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.RAIJU;
 				}
 		);
 	}
 
 
 
-	/*
-    *	 ██████  ██████ ███   ██ ██ ███████
-    *	 ██   ██ ██     ████  ██ ██ ██
-    *	 ██████  ██████ ██ ██ ██ ██ ███████
-    *	 ██      ██     ██  ████ ██      ██
-    *	 ██      ██████ ██   ███ ██ ███████
-     */
+/*
+*	  ██████  ██████   ██████ ██    ██
+*	 ██      ██    ██ ██      ██  ██
+*	 ██      ██    ██ ██      ████
+*	 ██      ██    ██ ██      ██  ██
+*	  ██████  ██████   ██████ ██    ██
+ */
 
 
 
-	/*
-    *	 ██████   █████  ██     ██     ███████
-    * 	 ██   ██ ██   ██ ██     ██     ██
-    * 	 ██████  ███████ ██     ██     ███████
-    * 	 ██   ██ ██   ██ ██     ██          ██
-    * 	 ██████  ██   ██ ██████ ██████ ███████
-     */
+/*
+*	 ██████   █████  ██     ██     ███████
+* 	 ██   ██ ██   ██ ██     ██     ██
+* 	 ██████  ███████ ██     ██     ███████
+* 	 ██   ██ ██   ██ ██     ██          ██
+* 	 ██████  ██   ██ ██████ ██████ ███████
+ */
 
 	public const BallsNone:Transformation = new SimpleTransformation("Remove Bals",
 			// apply
@@ -10424,7 +10424,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					desc += "You feel a delicate tightening sensation around your [balls].  The sensation upon this most sensitive part of your anatomy isn't painful, but the feeling of your balls getting smaller is intense enough that you stifle anything more than a sharp intake of breath only with difficulty.[pg]";
 				player.ballSize = 1;
 				if (!player.hasStatusEffect(StatusEffects.Uniball))
-					desc += "You whimper as once again, your balls tighten and shrink.  Your eyes widen when you feel the gentle weight of your testicles pushing against your crotch, and a few hesitant swings of your [butt] confirm what you can feel - you've tightened your balls up so much they no longer hang beneath your [cocks], but press perkily upwards.  Heat ringing your ears, you explore your new sack with a careful hand.  You are deeply grateful you apparently haven't reversed puberty, but you discover that though you still have " + num2Text(player.balls) + ", your balls now look and feel like one: one cute, tight little sissy parcel, its warm, insistent pressure upwards upon the joining of your thighs a never-ending reminder of it.[pg]"
+					desc += "You whimper as once again, your balls tighten and shrink.  Your eyes widen when you feel the gentle weight of your testicles pushing against your crotch, and a few hesitant swings of your [butt] confirm what you can feel - you've tightened your balls up so much they no longer hang beneath your [cocks], but press perkily upwards.  Heat ringing your ears, you explore your new sack with a careful hand.  "+
+							"You are deeply grateful you apparently haven't reversed puberty, but you discover that though you still have " + num2Text(player.balls) + ", your balls now look and feel like one: one cute, tight little sissy parcel, its warm, insistent pressure upwards upon the joining of your thighs a never-ending reminder of it.[pg]"
 
 				if (doOutput) outputText(desc);
 				if (!player.hasStatusEffect(StatusEffects.Uniball))
