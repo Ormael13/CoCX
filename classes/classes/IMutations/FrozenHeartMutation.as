@@ -6,14 +6,15 @@ package classes.IMutations
 {
 import classes.PerkClass;
 import classes.IMutationPerkType;
+import classes.Creature;
 import classes.Player;
 
 public class FrozenHeartMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:PerkClass = null):String {
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.FrozenHeartIM);
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
                 descS += "Allow you to retain the ability Ice barrage and hungering cold at all times";
             }
@@ -31,7 +32,7 @@ public class FrozenHeartMutation extends IMutationPerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.FrozenHeartIM)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -45,25 +46,20 @@ public class FrozenHeartMutation extends IMutationPerkType
         }
 
         //Mutation Requirements
-        override public function pReqs(target:* = null):void{
+        override public function pReqs():void{
             try{
-                if (target == null){
-                    trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
-                    target = player;
-                }
-                var params:PerkClass = target.getPerk(this);
-                var pTier:int = params.value1;
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
-                IMutationsLib.FrozenHeartIM.requirements = [];
+                this.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.FrozenHeartIM.requireHeartMutationSlot()
+                    this.requireHeartMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.yukiOnnaScore() >= 14;
                     }, "Yuki onna race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.FrozenHeartIM.requireLevel(pLvl);
+                    this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
@@ -71,14 +67,9 @@ public class FrozenHeartMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:* = null):Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
-            if (target == null){
-                trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
-                target = player;
-            }
-            var params:PerkClass = target.getPerk(this);
-            var pTier:int = params.value1;
+            var pTier:int = currentTier(this, (target == null)? player : target);
             return pBuffs;
         }
 
@@ -87,6 +78,5 @@ public class FrozenHeartMutation extends IMutationPerkType
             maxLvl = 3;
         }
 
-        
     }
 }

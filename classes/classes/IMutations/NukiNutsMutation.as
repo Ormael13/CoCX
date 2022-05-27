@@ -6,14 +6,15 @@ package classes.IMutations
 {
 import classes.PerkClass;
 import classes.IMutationPerkType;
+import classes.Creature;
 import classes.Player;
 
 public class NukiNutsMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
-        override public function desc(params:PerkClass = null):String {
+        override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.NukiNutsIM);
+            pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
                 descS += "Gain a natural armor bonus based on your ball size, prevent the loss of money strike";
             }
@@ -30,7 +31,7 @@ public class NukiNutsMutation extends IMutationPerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.NukiNutsIM)){
+            switch (currentTier(this, player)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -44,25 +45,20 @@ public class NukiNutsMutation extends IMutationPerkType
         }
 
         //Mutation Requirements
-        override public function pReqs(target:* = null):void{
+        override public function pReqs():void{
             try{
-                if (target == null){
-                    trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
-                    target = player;
-                }
-                var params:PerkClass = target.getPerk(this);
-                var pTier:int = params.value1;
+                var pTier:int = currentTier(this, player);
                 //This helps keep the requirements output clean.
-                IMutationsLib.NukiNutsIM.requirements = [];
+                this.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.NukiNutsIM.requireBallsMutationSlot()
+                    this.requireBallsMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.raccoonScore() >= 4 && player.balls > 0 && player.ballSize > 5;
                     }, "Tanuki race and large balls");
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.NukiNutsIM.requireLevel(pLvl);
+                    this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
@@ -70,14 +66,9 @@ public class NukiNutsMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:* = null):Object{
+        override public function pBuffs(target:Creature = null):Object{
             var pBuffs:Object = {};
-            if (target == null){
-                trace("Notice: pBuffs target was not set for perk " + this.name() + ". Defaulting to player.");
-                target = player;
-            }
-            var params:PerkClass = target.getPerk(this);
-            var pTier:int = params.value1;
+            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) pBuffs['lib.mult'] = 0.05;
             if (pTier == 2) pBuffs['lib.mult'] = 0.15;
             if (pTier == 3) pBuffs['lib.mult'] = 0.3;
@@ -89,6 +80,5 @@ public class NukiNutsMutation extends IMutationPerkType
             maxLvl = 3;
         }
 
-        
     }
 }

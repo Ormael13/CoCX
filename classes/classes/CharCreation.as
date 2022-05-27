@@ -1754,7 +1754,7 @@ import coc.view.MainView;
 				player.createPerk(PerkLib.Metamorph, 0, 0, 0, 0);
 			}
 			player.perkPoints += 1;
-			setupMutations();
+			//setupMutations();
 			clearOutput();
 			statScreenRefresh();
 			outputText("Would you like to play through the " + (1 * (1 + player.newGamePlusMod())) + "-day"+(player.newGamePlusMod() > 0 ? "s":"")+" prologue in Ingnam or just skip?");
@@ -1780,6 +1780,7 @@ import coc.view.MainView;
 			playerMenu();
 		}
 
+		/*
 		public function setupMutations():void{
 			for each(var mutation:IMutationPerkType in IMutationsLib.mutationsArray("")){
 				if (!player.hasPerk(mutation)){
@@ -1788,7 +1789,7 @@ import coc.view.MainView;
 			}
 			player.createPerk(IMutationsLib.MutationsTemplateIM,0,0,0,0);
 			trace("Mutations setup charcreation done");
-		}
+		}*/
 
 		//-----------------
 		//-- ASCENSION

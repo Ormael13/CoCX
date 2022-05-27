@@ -8,6 +8,7 @@ package classes.IMutations
 {
 import classes.CoC;
 import classes.IMutationPerkType;
+import classes.Creature;
 
 /**
  * The goal of Mutations 3.0 is to allow for everything related to the mutation itself to be hosted within its own file, and to reduce the number of perks being created for the player.
