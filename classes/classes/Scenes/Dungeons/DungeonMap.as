@@ -3,7 +3,7 @@ package classes.Scenes.Dungeons {
  * A map for **one** dungeon (or closed dungeon section.
  * Contains all necessary methods and information for checking the player location (INSIDE the dungeon) and printing the map.
  */
-public class DungeonMap extends DungeonAbstractContent {
+public class DungeonMap extends BaseContent {
     /*
     Reworked map - Svalkash edition.
     DON'T USE NUMERIC CONSTANTS.
@@ -17,10 +17,12 @@ public class DungeonMap extends DungeonAbstractContent {
     L - locked door
     S - stairs
     E - exit (NYI)
+    ---
+    Room names are not displayed on the map. You can add a fancy functions do get 'ANY' location name and add it here.
     */
 
-    //Location name, printed above the map.
-    private var locName:String;
+    //Dungeon name, printed above the map.
+    private var mapName:String;
 
     //The map itself, representing the dungeon layout. May contain specific symbols that will be parsed later.
     private var map:Array;
@@ -36,8 +38,8 @@ public class DungeonMap extends DungeonAbstractContent {
     //Array of symbols from rooms which should not be replaced by spaces. Contains only 'S' by default.
     private var notSpaces:Array;
 
-    public function DungeonMap(locName:String, map:Array, rooms:Object, special:Function = null, notSpaces:Array = null) {
-        this.locName = locName;
+    public function DungeonMap(mapName:String, map:Array, rooms:Object, special:Function = null, notSpaces:Array = null) {
+        this.mapName = mapName;
         this.map = map;
         this.rooms = rooms;
         if (special != null)
@@ -47,16 +49,17 @@ public class DungeonMap extends DungeonAbstractContent {
         if (notSpaces != null)
             this.notSpaces = notSpaces;
         else
-            this.notSpaces = ['S'];
+            this.notSpaces = ['S', 's'];
     }
 
     //Parses the map (inserts the player position and special elements) and returns the resultant String.
     // The Legend is not included.
-    public function parseMap():String {
+    //For each room, the provided position (usually it's dungeonLoc, but can be *anything else* - D3 is an example)
+    public function parseMap(location:*):String {
         //get basic map & associative objects
         var special:Object = getSpecial();
         //parse buffered map
-        var fullMap:String = locName + "\n\n";
+        var fullMap:String = mapName + "\n\n";
         for each (var line:String in map) {
             //check each character
             for (var i:int = 0; i < line.length; ++i) {
@@ -64,7 +67,7 @@ public class DungeonMap extends DungeonAbstractContent {
                 if (special.hasOwnProperty(char)) //replace special points (locked doors)
                     fullMap += special[char];
                 else if (rooms.hasOwnProperty(char)) //replace room contents (player or nothing.. if in 'notSpaces', not replaced by space)
-                    fullMap += (dungeonLoc == rooms[char] ? "P" : notSpaces.indexOf(char) != -1 ? char : " ");
+                    fullMap += (location === rooms[char] ? 'P' : notSpaces.indexOf(char) != -1 ? char : ' ');
                 else fullMap += char;
             }
             //add \n to the end of the line
@@ -74,9 +77,9 @@ public class DungeonMap extends DungeonAbstractContent {
     }
 
     //Checks if the player is in the dungeon by iterating over all possible rooms and comparing them to dungeonLoc
-    public function playerIsHere():Boolean {
+    public function playerIsHere(location:*):Boolean {
         for each (var room:int in rooms)
-            if (dungeonLoc == room)
+            if (location === room)
                 return true;
         return false;
     }
