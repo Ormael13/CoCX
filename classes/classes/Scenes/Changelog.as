@@ -97,7 +97,9 @@ package classes.Scenes
 			outputText("-New tier 4 intelligence lvl-up perk: Selfbuffs Proficiency. Req. Job: Enchanter perk, 120+ int. Effect: Increase max selfbuff max cap by 30%.\n");
 			outputText("-New tier 4 intelligence lvl-up perk: Improved Mana Shield. Req. Arcane Shielding perk, 125+ int. Effect: Increasing fourfold amount of damage Mana Shield spell can withstand before deactivating. (1:4 ratio for physical attacks and 1:20 ratio for magical attacks)\n");
 			outputText("-New tier 5 wisdom lvl-up perk: Elemental Conjurer Knowledge (Ex). Req. Elemental Conjurer Knowledge and Elemental Contract Rank 4 perks, 150+ wis. Effect: Decrease chance to fail (by ~10%) when ranking up an elemental and replace mana/fatigue with elemental energy gained from sacrificing elemental shards to arcane circle. (if not enough energy stored it will check as before for mana/fatigue costs)\n");
+			outputText("-New tier 6 intelligence lvl-up perk: Selfbuffs Proficiency (Ex). Req. Selfbuffs Proficiency & Long(er) Lasting Buffs I perks, 170+ int. Effect: Increase max selfbuff max cap by 70%(100%). Enable recasting all active buffs when they're about to expire.\n");
 			outputText("-New tier 7 intelligence lvl-up perk: Super Convergence. Req. Convergence perk, 225+ int. Effect: Grey magic area of effect spells strike one more time (three times) against single targets. Against groups would deal 50-250% more dmg depending on size (250% for small groups, 100% for large groups).\n");
+			outputText("-New tier 8 intelligence lvl-up perk: Selfbuffs Proficiency (Su). Req. Selfbuffs Proficiency (Ex) & (Ever)Lasting Buffs perks, 220+ int. Effect: Increase max selfbuff max cap five times at the cost of using twice more mana to cast.\n");
 			outputText("-New tier 10 intelligence lvl-up perk: Grand Grey Archmage (2nd Circle). Req. Grand Grey Archmage perk and 275+ int. Effect: Increases grey spell strength by 50%, mana pool by 900, lust bar by 320, regain it 150% faster. Grey spells costs lowered by 20%.\n");
 			outputText("-New tier 12 wisdom lvl-up perk: Greater shared power. Req. Elemental touch perk. Effect: Double the effect of Shared power.\n");
 			outputText("-New tier 13 wisdom lvl-up perk: Ecliptic Infusion. Req. Greater shared power perk. Effect: Your Infuse ability allows you to add and combine a corrupted or a purity normal elemental with a water, fire, earth or wind epic elemental. Doing so adds a purity or corruption scaling to your abilities.\n");
@@ -142,6 +144,10 @@ package classes.Scenes
 			outputText("-New Grey Spell: Corrosive Wave - learned from Grey Book. Cost 200 mana and deal AoE acid dmg. Have cooldown of 3 turns and apply DoT (similar to acid spit/hydra breath ones but ~half weaker). (spell text by Canadian Snas)\n");
 			outputText("-New Grey Spell: Hydro Acid - learned from Grey Book. Cost 100 mana and deal acid dmg and apply DoT (similar to acid spit/hydra breath ones). Have cooldown of 6 turns. It's Tier 2 spell. (spell text by Canadian Snas)\n");
 			outputText("-New Grey Spell: Acid Rain - learned from Grey Book. Cost 500 mana and deal AoE acid dmg. Have cooldown of 6 turns and apply DoT (similar to acid spit/hydra breath ones). It's Tier 2 spell. (spell text by Canadian Snas)\n");
+			outputText("-Added 2 new groups for Internal Mutation (perks): Parathyroid Glands and Adaptations. Ratatoskr Smarts & Ecliptic Mind mutation was moved to Nerv Sys group and Arachne Book Lungs and Twin Hearts moved to Adaptations group.\n");
+			outputText("-Cat-like Nimblness, Scylla Ink Glands, Tracheal System mutations been moved to Adaptations. So now all current internal mutations are placed under one of existing mutation slots ^^\n");
+			outputText("-All internal mutation perks have now more in line lvl req. for tier 2 (30) and 3 (60). Req. for tier 2 and higher would be only previous mutation perk and lvl. Tier 1 perks req. for race scores will be increased to scores around full race score.\n");
+			outputText("-First three tiers of Tracheal System got readjusted stat bonuses: +1% str / +2% spe multi; +2% str / +1% tou / +3% spe multi; +4% str / +3% tou / +5% spe multi.\n");
 			outputText("-2 new achievments. (2 shadow ones)\n");
 			outputText("-Added minor QoL option for minion using PC's to let those minions that can attack on their own (wisp or using simplified turn setup) even when PC itself is stunned or under fear effect. Cuz... well they had orders and pc been stunned not magicaly cause them to not able to follow orginal order to keep smashing enemy ^^\n");
 			outputText("-Diana and Luna forced partial/full body TF events won't proc if PC got TF immunity. As side effect it may cause their storyline progress to freeze.\n");
@@ -160,25 +166,12 @@ package classes.Scenes
 			outputText("-True Dragon Breath would now benefit from dao boosting effects just like all minor dragon breaths.\n");
 			outputText("-Nekomata Ghost Fire won't be dealing only fire dmg. It will deal half of fire dmg than before and second half of damage would be of darkness type. That also mean all the abilities to boost darkness damage (dao or perks for using darknes spells in a row) would boost it too. Additionaly Necromancy perk would boost it damage by 50%.\n");
 			outputText("-Eyes of the Hunter (Ex) effect now not only allow to fight higher lvl enemies than 50 but also discover new areas much earlier (increase of lvl diff would also in the same amount lower min lvl to discover areas).\n");
-			outputText("-Tons of Pyro text corrections in many places.\n");
-			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
-			//outputText("-New tier 9 strength lvl-up perk: Prestige Job: Stalker. Req. Job: Warrior and Hunter perks, 150+ str/spe. Effect: +60 to str multi and +20 to spe multi (scalable with NG tiers), +20% damage and critical damage with thrown weapon.\n");
-			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
-			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
-			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
-			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
-			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			//outputText("-Dinah would provide PC with HB Mech upgrade options after it's bought. They could boost mech defences, attack or even provide with specials. As with all other items upgrades cost can vary depending on her mood ^^\n");
 			outputText("-Unicorn & Nocturnus staff base atk increased to 10 (from 6) and price to 1,600 (from 960). Unicorn staff additionaly decrease healing spells cooldowns by 2 turns.\n");
 			outputText("-Added few more enemies that may fit req. access to Lusty Maiden/Succubus Armor b.titfuck scene.\n");
 			outputText("-Wild Hunt effect of increase dmg to enemies below pc lvl increased from 20% to 100% more damage. Also monster level is now checked against PC effective level (Eyes of the Hunter (Ex) perk can increase it by as many levels as it decrease penalty for fighting too high lvl enemies).\n");
 			outputText("-Artemis bow now have additional effect - increase the magical damage of spells and enchanted arrows by 50%\n");
 			outputText("-Bonus damage on enchanted arrows shoot by arcane archer would now give half of previous damage, but it will no longer stops at adding more samage at 200 int. (So for very intelligent arcane archers it would be very good buff to damage with elemental arrows)\n");
 			outputText("-Gems counter reset on ascension and max 100 * NG tier (max 600) Spirits Stones are kept.\n");
-			outputText("-Added 2 new groups for Internal Mutation (perks): Parathyroid Glands and Adaptations. Ratatoskr Smarts & Ecliptic Mind mutation was moved to Nerv Sys group and Arachne Book Lungs and Twin Hearts moved to Adaptations group.\n");
-			outputText("-Cat-like Nimblness, Scylla Ink Glands, Tracheal System mutations been moved to Adaptations. So now all current internal mutations are placed under one of existing mutation slots ^^\n");
-			outputText("-All internal mutation perks have now more in line lvl req. for tier 2 (30) and 3 (60). Req. for tier 2 and higher would be only previous mutation perk and lvl. Tier 1 perks req. for race scores will be increased to scores around full race score.\n");
-			outputText("-First three tiers of Tracheal System got readjusted stat bonuses: +1% str / +2% spe multi; +2% str / +1% tou / +3% spe multi; +4% str / +3% tou / +5% spe multi.\n");
 			outputText("-Fuel for the Fire perk been moved 2 tiers lower, Rage & Anger perks was each moved up 1 tier.\n");
 			outputText("-Fuel for the Fire perk effect changed to: Increase two times wrath gains from getting hit. +1 attack per turn when wielding any large or massive weapon under berserker/lustzerker state. +1,500 wrath\n");
 			outputText("-Rage perk effect changed to: Increasing crit chance by up to (10%)70% & crit dmg by up to (25%)175% in berserk state that would reset after succesful crit attack. Adds Diehard effect up to 5% of max HP. +2,000 wrath\n");
@@ -200,6 +193,15 @@ package classes.Scenes
 			outputText("-Completing Deep Cave for questlog reward will no longer require to fix Vala. Also for Lethice Stronghold quest completetion either Mirror Demon or Basilisk King must be beaten not both.\n");
 			outputText("-Hinezumi mutation perks req. clarified that it req. PC been called Hinezumi (mouse 12+ score) and not just Mouse.\n");
 			outputText("-Arcane Archer Elemental Arrows can be now enhanced with water, wind, earth dmg as long PC learn matching grey spell.\n");
+			outputText("-Tons of Pyro text corrections in many places.\n");
+			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
+			//outputText("-New tier 9 strength lvl-up perk: Prestige Job: Stalker. Req. Job: Warrior and Hunter perks, 150+ str/spe. Effect: +60 to str multi and +20 to spe multi (scalable with NG tiers), +20% damage and critical damage with thrown weapon.\n");
+			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
+			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
+			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
+			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
+			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			//outputText("-Dinah would provide PC with HB Mech upgrade options after it's bought. They could boost mech defences, attack or even provide with specials. As with all other items upgrades cost can vary depending on her mood ^^\n");
 			outputText("-Convergence perk effect slight change - for single target will hit 2x more (it would mutliply any cases of multicast/omnicast), increase aoe grey spells dmg against smaller (+100%) and larger groups (+50%). Also it effect would not be disabling offensive staff channeling effect.\n");
 			outputText("-Twin Heart can be gained by drider PC's too.\n");
 			outputText("-Added 'Back' buttons for Konstantin. (Svalkash)\n");
@@ -264,8 +266,6 @@ package classes.Scenes
 			outputText("-You can now <b>deliberately</b> lose to Erlking or his hounds even when fast enough (requires 30+ corruption). (Svalkash)\n");
 			outputText("-Prestige Job: Tempest not req. anymore Job: Dervish perk.\n");
 			outputText("-Lactoblasters got bit diff msg in combat for enemy reaction to lust inducing effect of the weapon. Also atk scaling for super high milk productions been... adjusted.\n");
-			outputText("-New tier 6 intelligence lvl-up perk: Selfbuffs Proficiency (Ex). Req. Selfbuffs Proficiency & Long(er) Lasting Buffs I perks, 170+ int. Effect: Increase max selfbuff max cap by 70%(100%). Enable recasting all active buffs when they're about to expire.\n");
-			outputText("-New tier 8 intelligence lvl-up perk: Selfbuffs Proficiency (Su). Req. Selfbuffs Proficiency (Ex) & (Ever)Lasting Buffs perks, 220+ int. Effect: Increase max selfbuff max cap five times at the cost of using twice more mana to cast.\n");
 			outputText("-Minotaur Sons can be moved to Soul Sense now after meeting them 3 times.\n");
 			outputText("-Minerva - restored 'Get Licked' scene and adapted for purified Minerva. (Svalkash)\n");
 			outputText("-Reworked Sapphire affection counter (retroactive). Added a proper dialogue about wedding from Lia's gdocs. (Svalkash)\n");
@@ -330,10 +330,16 @@ package classes.Scenes
 			outputText("-Bonus to mastery exp gains for expanding sparring ring was moved to only apply to fighting training dummy. With this bonus was changed from 1x/2x/3x for each of three sizes of the ring to 2x/5x/10x.\n");
 			outputText("-Any PC that may have Aura of Corruption/Purity can now suppress it or release. At suppressed state it will no longer deal dmg to enemies.\n");
 			outputText("-New tier 0 misc lvl-up perk: Melee Weapons Mastery (Su). Req. Melee Weapons Mastery (Ex) perk, lvl 4+ and 30+ str/tou/spe. Effect: Decrease by ~45% needed exp to level up each melee weapon mastery type and increase cap for melee masteries by 50.\n");
+			outputText("-Added silly options to gameOver messages. Amily - more surprise scenes uncommented (Svalkash)\n");
+			outputText("-UEE imports (by Svalkash): hips/butt increase after Satyr birth; revised Jojo anal scene; Ember TF heat/rut logic improved; male spider-morph can gift spider-silk with a low chance; Amily - PC doesn't leave after gender change talk (if Amily is okay with it); Can put off Phylla's first sex for some time.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//tier 2/9/11 perks?
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
@@ -357,7 +363,6 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -423,9 +428,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -453,9 +456,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
