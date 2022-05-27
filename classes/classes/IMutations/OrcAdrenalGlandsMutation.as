@@ -9,6 +9,7 @@ import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
 public class OrcAdrenalGlandsMutation extends IMutationPerkType
     {
@@ -53,9 +54,7 @@ public class OrcAdrenalGlandsMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireAdrenalGlandsMutationSlot()
-                    .requirePerk(PerkLib.Ferocity).requireCustomFunction(function (player:Player):Boolean {
-                        return player.orcScore() >= 11;
-                    }, "Orc race");
+                    .requirePerk(PerkLib.Ferocity).requireRace(Races.ORC);
                 }
                 else{
                     var pLvl:int = pTier * 30;

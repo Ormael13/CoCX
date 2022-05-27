@@ -25,6 +25,7 @@ import classes.Items.UndergarmentLib;
 import classes.Items.UseableLib;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRangeLib;
+import classes.Races.HumanRace;
 import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirlsPack;
@@ -1213,33 +1214,9 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.Enemy300Type)) specENtypes *= 15;
 			return specENtypes;
 		}
-		protected function humanity():Number
-		{
-			var baseHumBoost1:Number = 1;
-			if (game.player.level >= 6) baseHumBoost1 += 1;
-			if (game.player.level >= 24) baseHumBoost1 += 1;
-			if (game.player.level >= 42) baseHumBoost1 += 1;
-			if (game.player.level >= 72) baseHumBoost1 += 1;
-			if (game.player.level >= 102) baseHumBoost1 += 1;
-			if (game.player.level >= 141) baseHumBoost1 += 1;
-			if (game.player.level >= 180) baseHumBoost1 += 1;
-			//if (level >= 274)
-			return baseHumBoost1;
-		}
 		public function humanityBoostExpValue():Number
 		{
-			var baseHumBoost:Number = 0;
-			if (game.player.humanScore() == game.player.humanMaxScore()) baseHumBoost += this.humanity() * 10;
-			if (game.player.humanScore() == game.player.humanMaxScore() - 1) baseHumBoost += this.humanity() * 9;
-			if (game.player.humanScore() == game.player.humanMaxScore() - 2) baseHumBoost += this.humanity() * 8;
-			if (game.player.humanScore() == game.player.humanMaxScore() - 3) baseHumBoost += this.humanity() * 7;
-			if (game.player.humanScore() == game.player.humanMaxScore() - 4) baseHumBoost += this.humanity() * 6;
-			if (game.player.humanScore() == game.player.humanMaxScore() - 5) baseHumBoost += this.humanity() * 5;
-			if (game.player.humanScore() == game.player.humanMaxScore() - 6) baseHumBoost += this.humanity() * 4;
-			if (game.player.humanScore() == game.player.humanMaxScore() - 7) baseHumBoost += this.humanity() * 3;
-			if (game.player.humanScore() == game.player.humanMaxScore() - 8) baseHumBoost += this.humanity() * 2;
-			if (game.player.humanScore() == game.player.humanMaxScore() - 9) baseHumBoost += this.humanity() * 1;
-			return baseHumBoost;
+			return HumanRace.xpBoost(game.player, game.player.humanScore());
 		}
 
 		public function Monster()
@@ -2464,7 +2441,7 @@ import flash.utils.getQualifiedClassName;
 				var temp2:Number = 0;
 				var temp3:Number = 0;
 				if (hasPerk(PerkLib.Regeneration)) healingPercent += (0.5 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.IceQueenGown) && player.yukiOnnaScore() >= 14) healingPercent += 5;
+				if (hasPerk(PerkLib.IceQueenGown) && player.isRace(Races.YUKIONNA)) healingPercent += 5;
 				if (hasPerk(PerkLib.VladimirRegalia) && !isNightTime()) healingPercent -= 5;
 				if (hasPerk(PerkLib.VladimirRegalia) && isNightTime()) healingPercent += 5;
 				if (hasPerk(PerkLib.LizanRegeneration) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1.5;

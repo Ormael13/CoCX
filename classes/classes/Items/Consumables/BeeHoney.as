@@ -11,6 +11,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
+import classes.Races.BeeRace;
 import classes.Scenes.Areas.Forest.BeeGirlScene;
 import classes.CoC;
 import classes.CockTypesEnum;
@@ -122,9 +123,9 @@ public class BeeHoney extends Consumable
 			//No idears
 			//Appearance Stuff
 			//Hair Color
-			if (changes < changeLimit && !InCollection(player.hairColor, BeeGirlScene.beeHair) && player.lowerBody != LowerBody.GARGOYLE && player.hairLength > 10 && Utils.rand(5) == 0) {
+			if (changes < changeLimit && !InCollection(player.hairColor, BeeRace.BeeHairColors) && player.lowerBody != LowerBody.GARGOYLE && player.hairLength > 10 && Utils.rand(5) == 0) {
 				outputText("\n\nYou feel your scalp tingling, and you grab your hair in a panic, pulling a strand forward.  ");
-				player.hairColor = randomChoice(BeeGirlScene.beeHair);
+				player.hairColor = randomChoice(BeeRace.BeeHairColors);
 				outputText("Your hair is now [haircolor], just like a bee-girl's!");
 				changes++;
 			}

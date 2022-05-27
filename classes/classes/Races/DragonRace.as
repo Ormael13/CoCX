@@ -1,0 +1,118 @@
+package classes.Races {
+import classes.BodyData;
+import classes.BodyParts.*;
+import classes.CockTypesEnum;
+import classes.IMutations.IMutationsLib;
+import classes.PerkLib;
+import classes.Race;
+import classes.lists.Gender;
+
+/**
+ * Tier 1: dragon
+ * Tier 2: elder dragon
+ * Tier 3: ancient dragon
+ */
+public class DragonRace extends Race {
+	public function DragonRace(id:int) {
+		super("Dragon", id);
+	}
+	
+	public override function setup():void {
+		addScores()
+				.faceType(ANY(Face.DRAGON, Face.DRAGON_FANGS), +1)
+				.faceType(NONE(Face.JABBERWOCKY, Face.BUCKTOOTH), 0, -10)
+				.eyeType(Eyes.DRACONIC, +1)
+				.earType(Ears.DRAGON, +1)
+				.tailType(Tail.DRACONIC, +1)
+				.tongueType(Tongue.DRACONIC, +1)
+				.wingType(Wings.DRACONIC_SMALL, +1)
+				.wingType(Wings.DRACONIC_LARGE, +2)
+				.wingType(Wings.DRACONIC_HUGE, +4)
+				.wingType(NOT(Wings.FEY_DRAGON), 0, -10)
+				.legType(LowerBody.DRAGON, +1)
+				.legType(NOT(LowerBody.FROSTWYRM), 0, -10)
+				.armType(Arms.DRACONIC, +1)
+				.skinCoatType(Skin.DRAGON_SCALES, +1)
+				.hornType(Horns.DRACONIC_X2, +1)
+				.hornType(Horns.DRACONIC_X4_12_INCH_LONG, +2)
+				.hornType(NOT(Horns.FROSTWYRM), 0, -3)
+				.hasCockOfType(CockTypesEnum.DRAGON, +1)
+				.gender(Gender.GENDER_FEMALE, +1);
+		addScoresAfter(8)
+				.height(GREATER_THAN(120), +1)
+				.hasAnyPerk([
+					PerkLib.DragonFireBreath,
+					PerkLib.DragonIceBreath,
+					PerkLib.DragonLightningBreath,
+					PerkLib.DragonDarknessBreath
+				], +1)
+				.hasAllPerks([
+					PerkLib.DragonFireBreath,
+					PerkLib.DragonIceBreath,
+					PerkLib.DragonLightningBreath,
+					PerkLib.DragonDarknessBreath
+				], +1);
+		
+		addBloodline(PerkLib.DragonsDescendant, PerkLib.BloodlineDragon);
+		addMutation(IMutationsLib.DraconicBonesIM);
+		addMutation(IMutationsLib.DraconicHeartIM);
+		addMutation(IMutationsLib.DraconicLungIM);
+		
+		buildTier(16, "dragon")
+				.namesMaleFemaleMorphTaur("dragon-man","dragon-girl",
+						"dragon","dragon-taur")
+				.buffs({
+					"maxhp_mult": +0.10,
+					"str.mult": +0.50,
+					"tou.mult": +0.50,
+					"spe.mult": +0.50,
+					"int.mult": +0.40,
+					"wis.mult": +0.40,
+					"lib.mult": +0.30,
+					"sens": +20,
+					"def": +1,
+					"mdef": +1
+				})
+				.withExtraBonuses("+50 Max Hunger")
+				.end();
+		buildTier(24, "elder dragon")
+				.namesMaleFemaleMorphTaur("elder dragon-man","elder dragon-girl",
+						"elder dragon","elder dragon-taur")
+				.buffs({
+					"maxfatigue_base": +100,
+					"maxlust_base": +25,
+					"maxhp_mult": +0.20,
+					"str.mult": +0.80,
+					"tou.mult": +0.80,
+					"spe.mult": +0.80,
+					"int.mult": +0.70,
+					"wis.mult": +0.70,
+					"lib.mult": +0.40,
+					"sens": +30,
+					"def": +4,
+					"mdef": +4
+				})
+				.withExtraBonuses("+100 Max Hunger")
+				.end();
+		buildTier(32, "ancient dragon")
+				.namesMaleFemaleMorphTaur("ancient dragon-man","ancient dragon-girl",
+						"ancient dragon","ancient dragon-taur")
+				.buffs({
+					"maxfatigue_base": +200,
+					"maxlust_base": +50,
+					"maxhp_mult": +0.30,
+					"str.mult": +1.00,
+					"tou.mult": +1.00,
+					"spe.mult": +1.00,
+					"int.mult": +0.80,
+					"wis.mult": +0.80,
+					"lib.mult": +0.60,
+					"sens": +40,
+					"def": +10,
+					"mdef": +10
+				})
+				.withExtraBonuses("+100 Max Hunger")
+				.end();
+	}
+}
+}

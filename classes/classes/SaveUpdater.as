@@ -400,8 +400,8 @@ public class SaveUpdater extends NPCAwareContent {
 		if (player.hasPerk(PerkLib.Phylactery)) awardAchievement("The Devil Wears Prada", kACHIEVEMENTS.EPIC_THE_DEVIL_WEARS_PRADA);
 		//atlach nacha achiev
 		//handmaiden achiev
-		if (player.jiangshiScore() >= 20) awardAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER);
-		if (player.yukiOnnaScore() >= 14) awardAchievement("Let It Go", kACHIEVEMENTS.EPIC_LET_IT_GO);
+		if (player.isRace(Races.JIANGSHI)) awardAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER);
+		if (player.isRace(Races.YUKIONNA)) awardAchievement("Let It Go", kACHIEVEMENTS.EPIC_LET_IT_GO);
 		//wendigo achiev
 
 		if (player.hasStatusEffect(StatusEffects.AchievementsNormalShadowTotal)) {
@@ -695,9 +695,9 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			//Update chitin
 			if (player.hasCoatOfType(Skin.CHITIN)) {
-				if (player.mantisScore() >= 5) player.skin.coat.color = "green";
-				if (player.spiderScore() >= 5) player.skin.coat.color = "pale white";
-				if (player.mantisScore() < 5 && player.spiderScore() < 5) {
+				if (player.isRace(Races.MANTIS)) player.skin.coat.color = "green";
+				if (player.isRace(Races.SPIDER)) player.skin.coat.color = "pale white";
+				if (player.isRace(Races.MANTIS) && !player.isRace(Races.SPIDER)) {
 					if (rand(2) == 1) player.skin.coat.color = "green";
 					else player.skin.coat.color = "pale white";
 				}
@@ -1023,15 +1023,7 @@ public class SaveUpdater extends NPCAwareContent {
 				player.removePerk(PerkLib.MythicalGolemMaker);
 				player.createPerk(PerkLib.EpicGolemMaker3rdCircle, 0, 0, 0, 0);
 			}
-			if (!player.hasStatusEffect(StatusEffects.StrTouSpeCounter1)) {
-				player.createStatusEffect(StatusEffects.StrTouSpeCounter1, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.StrTouSpeCounter2, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.IntWisCounter1, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.IntWisCounter2, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.LibSensCounter1, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.LibSensCounter2, 0, 0, 0, 0);
-				player.strtouspeintwislibsenCalculation2();
-			}
+			player.updateRacialAndPerkBuffs();
 			if (player.blockingBodyTransformations()) {
 				if (player.hasPerk(PerkLib.BimboBody)) player.removePerk(PerkLib.BimboBody);
 				if (player.hasPerk(PerkLib.BimboBrains)) player.removePerk(PerkLib.BimboBrains);
@@ -1890,7 +1882,7 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.018;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.019) {
-				if (flags[kFLAGS.NEISA_FOLLOWER] >= 10 && flags[kFLAGS.NEISA_FOLLOWER] < 17) flags[kFLAGS.NEISA_FOLLOWER] -= 3; 
+				if (flags[kFLAGS.NEISA_FOLLOWER] >= 10 && flags[kFLAGS.NEISA_FOLLOWER] < 17) flags[kFLAGS.NEISA_FOLLOWER] -= 3;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.019;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");

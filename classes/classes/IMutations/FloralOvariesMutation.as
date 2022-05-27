@@ -8,6 +8,7 @@ import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
 public class FloralOvariesMutation extends IMutationPerkType
     {
@@ -52,9 +53,7 @@ public class FloralOvariesMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireOvariesMutationSlot()
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.alrauneScore() >= 13;
-                    }, "Alraune race");
+                    .requireRace(Races.ALRAUNE);
                 }
                 else{
                     var pLvl:int = pTier * 30;

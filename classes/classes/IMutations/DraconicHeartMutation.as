@@ -8,6 +8,7 @@ import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
 public class DraconicHeartMutation extends IMutationPerkType
     {
@@ -53,9 +54,7 @@ public class DraconicHeartMutation extends IMutationPerkType
                 if (pTier == 0){
                     this.requireHeartMutationSlot()
                     .requireMutation(IMutationsLib.DraconicBonesIM)
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return (player.dragonScore() >= 8 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
-                    }, "Dragon race or its variants");
+                    .requireAnyRace(Races.DRAGON,Races.FROSTWYRM,Races.SEA_DRAGON);
                 }
                 else{
                     var pLvl:int = pTier * 30;

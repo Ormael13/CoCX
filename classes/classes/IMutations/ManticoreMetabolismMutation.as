@@ -9,6 +9,7 @@ import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
 public class ManticoreMetabolismMutation extends IMutationPerkType
     {
@@ -53,9 +54,7 @@ public class ManticoreMetabolismMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireMetabolismMutationSlot()
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.manticoreScore() >= 15 && player.tailType == Tail.MANTICORE_PUSSYTAIL;
-                    }, "Manticore race and tail");
+                    .requireRace(Races.MANTICORE);
                 }
                 else{
                     var pLvl:int = pTier * 30;

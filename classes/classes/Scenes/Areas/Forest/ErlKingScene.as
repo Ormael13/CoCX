@@ -97,25 +97,25 @@ public class ErlKingScene extends BaseContent
 			}
 
 			// Heavy penalty for prey features. The penalty is applied PER FEATURE.
-			if (player.kitsuneScore() > 0)
+			if (player.racialScore(Races.KITSUNE) > 0)
 			{
-				baseVal -= (player.kitsuneScore() * 20);
-				trace("-20 for each Kitsune part (-" + String(player.kitsuneScore() * 20) + ")");
+				baseVal -= (player.racialScore(Races.KITSUNE) * 20);
+				trace("-20 for each Kitsune part (-" + String(player.racialScore(Races.KITSUNE) * 20) + ")");
 			}
-			if (player.bunnyScore() > 0)
+			if (player.racialScore(Races.BUNNY) > 0)
 			{
-				baseVal -= (player.bunnyScore() * 20);
-				trace("-20 for each Bunny part (-" + String(player.bunnyScore() * 20) + ")");
+				baseVal -= (player.racialScore(Races.BUNNY) * 20);
+				trace("-20 for each Bunny part (-" + String(player.racialScore(Races.BUNNY) * 20) + ")");
 			}
-			if (player.harpyScore() > 0)
+			if (player.racialScore(Races.HARPY) > 0)
 			{
-				baseVal -= (player.harpyScore() * 20);
-				trace("-20 for each Harpy part (-" + String(player.harpyScore() * 20) + ")");
+				baseVal -= (player.racialScore(Races.HARPY) * 20);
+				trace("-20 for each Harpy part (-" + String(player.racialScore(Races.HARPY) * 20) + ")");
 			}
-			if (player.gooScore() > 0)
+			if (player.racialScore(Races.SLIME) > 0)
 			{
-				baseVal -= (player.gooScore() * 10);
-				trace("-10 for each Goo part (-" + String(player.gooScore() * 10) + ")");
+				baseVal -= (player.racialScore(Races.SLIME) * 10);
+				trace("-10 for each Goo part (-" + String(player.racialScore(Races.SLIME) * 10) + ")");
 			}
 
 			if (player.isTaur())
@@ -241,7 +241,7 @@ public class ErlKingScene extends BaseContent
 			addButton(0, "Run", repeatWildHuntChase);
 			addButton(1, "Wait", repeatWildHuntWait);
 			if (player.cor > 33 - player.corruptionTolerance) {
-				var canRunFast:Boolean = player.bunnyScore() >= 4 || player.kitsuneScore() >= 4 || player.harpyScore() >= 4 || playerHuntScore() > 100;
+				var canRunFast:Boolean = player.isAnyRace(Races.BUNNY, Races.KITSUNE, Races.HARPY) || playerHuntScore() > 100;
 				outputText("Actually... do you <i>really</i> need to run away? Actually, you're pretty sure that Erlking or his hellhounds will <i>definitely</i> do something <i>bad</i> to you if they manage to catch you. But if you run fast enough, maybe you'll even tire him out to get some 'reward'... or take your revenge and show this bully who's a <b>real</b> hunter here.");
 				addButton(2, "Mock-run(S)", mockSlow).hint("Play the worst possible imitation of a real chase. Erlking will probably be disappointed with your skills.");
 				addButtonIfTrue(3, "Mock-run(F)", mockFast,
@@ -337,7 +337,7 @@ public class ErlKingScene extends BaseContent
 
 			outputText("The ropes are thicker than your wrist, and you could probably untie them, given time, but the spin of the net, combined with the mind-bending terror of the fog has left you no room to think.  The hounds are snarling, the world is spinning, you’re prey, and you’ve been caught.\n\n");
 
-			if (player.bunnyScore() >= 4 || player.kitsuneScore() >= 4 || player.harpyScore() >= 4 || pScore > 100) repeatWildHuntAWinnerIsYou();
+			if (player.isAnyRace(Races.BUNNY, Races.KITSUNE, Races.HARPY) || pScore > 100) repeatWildHuntAWinnerIsYou();
 			else repeatWildHuntGivenToTheHounds();
 		}
 

@@ -2,31 +2,26 @@
  * Coded by Liadri on 03.10.2018.
  */
 package classes.Items.Consumables {
-  import classes.Appearance;
-  import classes.BodyParts.Antennae;
-  import classes.BodyParts.Arms;
-  import classes.BodyParts.Ears;
-  import classes.BodyParts.Eyes;
-  import classes.BodyParts.Face;
-  import classes.BodyParts.Gills;
-  import classes.BodyParts.Hair;
-  import classes.BodyParts.Horns;
-  import classes.BodyParts.LowerBody;
-  import classes.BodyParts.RearBody;
-  import classes.BodyParts.Skin;
-  import classes.BodyParts.Tail;
-  import classes.BodyParts.Tongue;
-  import classes.BodyParts.Wings;
-  import classes.CoC_Settings;
-  import classes.CockTypesEnum;
-  import classes.EngineCore;
-  import classes.Items.Consumable;
-  import classes.PerkLib;
-  import classes.StatusEffects;
-  import classes.VaginaClass;
-  import classes.CoC;
+import classes.Appearance;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Face;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
+import classes.BodyParts.Wings;
+import classes.CoC;
+import classes.CoC_Settings;
+import classes.CockTypesEnum;
+import classes.EngineCore;
+import classes.Items.Consumable;
+import classes.Races;
+import classes.StatusEffects;
+import classes.VaginaClass;
 
-  public class Enigmanium extends Consumable {
+public class Enigmanium extends Consumable {
     public function Enigmanium() {
       super("Enigmanium", "Enigmanium", "a vial of Enigmanium", 40, "This strange brew crafted by Evangeline combines harpy, cat, human and centaur traits. Supposedly it could allow you to become a sphinx.");
     }
@@ -448,7 +443,7 @@ package classes.Items.Consumables {
       }
 
       //DAT EYES
-      if (player.tailType == Tail.CAT && player.ears.type == Ears.LION && rand(4) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CAT && (player.hasFur() || (player.hasCoatOfType(Skin.SCALES) && player.dragonneScore() >= 4)) && player.faceType == Face.CAT && player.eyes.type != Eyes.CAT) {
+      if (player.tailType == Tail.CAT && player.ears.type == Ears.LION && rand(4) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CAT && (player.hasFur() || (player.hasCoatOfType(Skin.SCALES) && player.racialScore(Races.DRAGONNE) >= 4)) && player.faceType == Face.CAT && player.eyes.type != Eyes.CAT) {
         outputText("\n\n");
         CoC.instance.transformations.EyesCat.applyEffect();
         changes++;

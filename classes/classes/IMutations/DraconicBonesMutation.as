@@ -11,6 +11,7 @@ import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
 public class DraconicBonesMutation extends IMutationPerkType
     {
@@ -64,9 +65,7 @@ public class DraconicBonesMutation extends IMutationPerkType
                     .requireCustomFunction(function (player:Player):Boolean {
                         return (Tail.hasDraconicTail(player) || LowerBody.hasDraconicLegs(player) && LowerBody.hasTail(player));
                     }, "Dragon race or its variants tail")
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return (player.dragonScore() >= 8 || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
-                    }, "Dragon race or its variants");
+                    .requireAnyRace(Races.DRAGON, Races.JABBERWOCKY, Races.FROSTWYRM, Races.SEA_DRAGON);
                 }
                 else{
                     var pLvl:int = pTier * 30;

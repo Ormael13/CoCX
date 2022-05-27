@@ -2970,7 +2970,7 @@ public class Prison extends BaseContent implements TimeAwareInterface
 
 		public function prisonItemBreadHeatEffect(bonusResist:Number = 0):void
 		{
-			if((!(player.race() == "human") || player.catScore() > 1 || player.dogScore() > 1 || player.foxScore() > 1 || player.horseScore() > 1 || player.minotaurScore() > 1 || player.cowScore() > 4 || player.bunnyScore() > 1 || player.kangaScore() > 1) && rand(player.obey) > 20 + bonusResist)
+			if((!(player.race() == "human") || player.racialScore(Races.CAT) > 1 || player.racialScore(Races.DOG) > 1 || player.racialScore(Races.FOX) > 1 || player.racialScore(Races.HORSE) > 1 || player.racialScore(Races.MINOTAUR) > 1 || player.isRace(Races.COW) || player.racialScore(Races.BUNNY) > 1 || player.racialScore(Races.KANGAROO) > 1) && rand(player.obey) > 20 + bonusResist)
 			{
 				outputText("\n\nAs you eat, the submissive nature of the act stirs an animalistic response in your mutated body. ");
 				if(player.hasVagina())

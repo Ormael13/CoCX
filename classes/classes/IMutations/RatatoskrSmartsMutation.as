@@ -9,6 +9,7 @@ import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
 public class RatatoskrSmartsMutation extends IMutationPerkType
     {
@@ -53,9 +54,7 @@ public class RatatoskrSmartsMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requirePeripheralNervSysMutationSlot()
-                    .requirePerk(PerkLib.KnowledgeIsPower).requireCustomFunction(function (player:Player):Boolean {
-                        return player.ratatoskrScore() >= 12;
-                    }, "Squirrel/Ratatoskr race");
+                    .requireRace(Races.RATATOSKR);
                 }
                 else{
                     var pLvl:int = pTier * 30;

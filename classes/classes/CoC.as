@@ -382,6 +382,10 @@ public class CoC extends MovieClip
 
     public function run():void
     {
+        trace("Initializing races");
+        Races.load();
+        trace("Initializing perks");
+        PerkLib.initDependencies();
         mainMenu.mainMenu();
         this.stop();
 

@@ -3655,7 +3655,7 @@ public class PerkLib
 		public static const FlawlessBody:PerkType = mk("Flawless Body", "Flawless Body",
 				"Your elven body with its flawless form and skin is so alluring it reinforces your ability to tease.");
 		public static const Flexibility:PerkType = mk("Flexibility", "Flexibility",
-				"Grants cat-like flexibility.  Useful for dodging and 'fun'.");
+				"Grants cat-like flexibility.  Useful for dodging and 'fun'. +10% Speed for cat-like races.")
 		public static const FreezingBreath:PerkType = mk("Freezing Breath (F)", "Freezing Breath (F)",
 				"Allows access to Fenrir (AoE) freezing breath attack.");
 		public static const FreezingBreathYeti:PerkType = mk("Freezing Breath (Y)", "Freezing Breath (Y)",
@@ -4047,7 +4047,7 @@ public class PerkLib
 		}
 
 	// Perk requirements
-	private static function initDependencies():void {
+	public static function initDependencies():void {
         try {
 			//------------
             // STRENGTH
@@ -6330,15 +6330,9 @@ public class PerkLib
 					.requireMaxVenom(100);
 			VenomousAdiposeTissue.requireTou(10)
 					.requireMaxVenom(100);
-			CursedTag.requireCustomFunction(function (player:Player):Boolean {
-                return player.jiangshiScore() >= 20;
-            }, "Jiangshi race");
-			ImprovedCursedTag.requirePerk(CursedTag).requireCustomFunction(function (player:Player):Boolean {
-                return player.jiangshiScore() >= 20;
-            }, "Jiangshi race");
-			GreaterCursedTag.requirePerk(ImprovedCursedTag).requireCustomFunction(function (player:Player):Boolean {
-                return player.jiangshiScore() >= 20;
-            }, "Jiangshi race");
+			CursedTag.requireRace(Races.JIANGSHI);
+			ImprovedCursedTag.requirePerk(CursedTag).requireRace(Races.JIANGSHI);
+			GreaterCursedTag.requirePerk(ImprovedCursedTag).requireRace(Races.JIANGSHI);
 			MeleeWeaponsMastery.requireStr(10)
 					.requireTou(10)
 					.requireSpe(10);
@@ -7080,6 +7074,5 @@ public class PerkLib
             trace(e.getStackTrace());
         }
 	}
-	initDependencies();
 }
 }

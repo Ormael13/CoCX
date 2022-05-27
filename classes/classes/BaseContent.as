@@ -14,6 +14,7 @@ import classes.internals.Utils;
 
 import coc.model.GameModel;
 import coc.model.TimeModel;
+import coc.script.Eval;
 import coc.view.ButtonData;
 import coc.view.ButtonDataList;
 import coc.view.CoCButton;
@@ -253,6 +254,10 @@ import coc.xxc.StoryContext;
 			EngineCore.rawOutputText(output, purgeText);
 		}
 
+		protected static function printLink(linkText:String, eventArgument:String):void {
+			outputText('<u><a href="event:'+Eval.escapeString(eventArgument)+'">'+linkText+"</a></u>");
+		}
+		
 		protected static function outputText(output:String):void
 		{
 			EngineCore.outputText(output);
@@ -964,7 +969,7 @@ import coc.xxc.StoryContext;
 			}
 			if (back != null) button(14).show("Back",back);
 		}
-        
+  
 		/**Returns an autocreated menu.
 		 * Structure for menuItems array is: ["Button name", function/false/"ignore", ["Available desc", "Not available desc"]/ ""].
 		 * function/false/"ignore" = addbtn, addbtndisabled, no button.

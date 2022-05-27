@@ -9,6 +9,7 @@ import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 import classes.StatusEffects;
 
 public class GazerEyesMutation extends IMutationPerkType
@@ -54,15 +55,7 @@ public class GazerEyesMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireEyesMutationSlot()
-                        .requireCustomFunction(function (player:Player):Boolean {
-                            return player.eyes.type == 36;
-                        }, "Monoeye")
-                        .requireCustomFunction(function (player:Player):Boolean {
-                            return player.rearBody.type == RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 2;
-                        }, "2+ eyestalks")
-                        .requireCustomFunction(function (player:Player):Boolean {
-                            return player.gazerScore() >= 7;
-                        }, "Gazer race");
+                        .requireRace(Races.GAZER);
                 }
                 else{
                     var pLvl:int = pTier * 30;

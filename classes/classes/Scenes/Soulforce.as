@@ -6,7 +6,12 @@ package classes.Scenes
 {
 import classes.*;
 import classes.BodyParts.*;
+import classes.GeneticMemories.*;
+import classes.IMutationPerkType;
+import classes.IMutations.IMutationsLib;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
+import classes.Items.*;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Areas.Desert.NagaScene;
 import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
@@ -17,6 +22,7 @@ import classes.Scenes.Areas.HighMountains.MinotaurMobScene;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.Dungeons.DesertCave.SandMother;
+import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Explore.Pierce;
 import classes.Scenes.Explore.TheDummy;
 import classes.Scenes.Monsters.Malikore;
@@ -36,9 +42,8 @@ import classes.Scenes.NPCs.WaizAbi;
 import classes.Scenes.Places.Boat.Marae;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Items.*;
+import classes.Scenes.Places.TrollVillage;
 import classes.Stats.Buff;
-import classes.Scenes.Dungeons.EbonLabyrinth.*;
-import classes.GeneticMemories.*;
 
 use namespace CoC;
 
@@ -3034,23 +3039,18 @@ private function applyHangover():void {
 	}
 	private function SoulforceRegeneration00():Number {
 		var SFR00:Number = 0;
-		if (player.kitsuneScore() >= 5) {
-			if (player.kitsuneScore() >= 9 && player.tailType == 13 && player.tailCount >= 2) {
-				if (player.kitsuneScore() >= 16) {
-					if (player.kitsuneScore() >= 21 && player.tailCount == 9 && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
-						if (player.kitsuneScore() >= 26) SFR00 += 200;
-						else SFR00 += 150;
-					}
-					else SFR00 += 80;
-				}
-				else SFR00 += 40;
-			}
-			else SFR00 += 20;
-		}
-		if (player.nekomataScore() >= 10) {
-			if (player.tailType == 8 && player.tailCount >= 2 && player.nekomataScore() >= 12) SFR00 += 40;
-			else SFR00 += 20;
-		}
+		var tier:int;
+		
+		tier = player.racialTier(Races.KITSUNE);
+		if (tier >= 4) SFR00 += 200;
+		else if (tier == 3) SFR00 += 150;
+		else if (tier == 2) SFR00 += 80;
+		else if (tier == 1) SFR00 += 40;
+		
+		tier = player.racialTier(Races.NEKOMATA);
+		if (tier >= 2) SFR00 += 40;
+		else if (tier == 1) SFR00 += 20;
+		
 		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) SFR00 += 20;
 		if (player.hasPerk(PerkLib.DaoistWarriorStage)) SFR00 += 20;
 		if (player.hasPerk(PerkLib.DaoistElderStage)) SFR00 += 20;
@@ -3473,23 +3473,18 @@ private function applyHangover():void {
 	}
 	public function AmountOfSoulforceRecoveredDuringCultivation(mod:Number):Number {
 		var costPercent:Number = 100;
-		if (player.kitsuneScore() >= 5) {
-			if (player.kitsuneScore() >= 9 && player.tailType == 13 && player.tailCount >= 2) {
-				if (player.kitsuneScore() >= 16) {
-					if (player.kitsuneScore() >= 21 && player.tailCount == 9 && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
-						if (player.kitsuneScore() >= 26) costPercent += 1000;
-						else costPercent += 650;
-					}
-					else costPercent += 400;
-				}
-				else costPercent += 200;
-			}
-			else costPercent += 100;
-		}
-		if (player.nekomataScore() >= 10) {
-			if (player.tailType == 8 && player.tailCount >= 2 && player.nekomataScore() >= 12) costPercent += 200;
-			else costPercent += 100;
-		}
+		var tier:int;
+		
+		tier = player.racialTier(Races.KITSUNE);
+		if (tier >= 4) costPercent += 1000;
+		else if (tier == 3) costPercent += 650;
+		else if (tier == 2) costPercent += 400;
+		else if (tier == 1) costPercent += 200;
+		
+		tier = player.racialTier(Races.NEKOMATA);
+		if (tier >= 2) costPercent += 200;
+		else if (tier == 1) costPercent += 100;
+		
 		if (player.hasPerk(PerkLib.DaoistCultivator)) costPercent += 100;
 		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) costPercent += 100;
 		if (player.hasPerk(PerkLib.DaoistWarriorStage)) costPercent += 100;

@@ -8,6 +8,7 @@ import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
 public class LactaBovinaOvariesMutation extends IMutationPerkType
     {
@@ -58,9 +59,7 @@ public class LactaBovinaOvariesMutation extends IMutationPerkType
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.femininity >= 95;
                     }, "95+ feminity")
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.cowScore() >= 10;
-                    }, "Lacta Bovine race");
+                    .requireRace(Races.COW)
                 }
                 else{
                     var pLvl:int = pTier * 30;

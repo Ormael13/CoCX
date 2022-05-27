@@ -9,8 +9,9 @@ import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
-    public class BlackHeartMutation extends IMutationPerkType
+public class BlackHeartMutation extends IMutationPerkType
     {
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
@@ -54,9 +55,7 @@ import classes.Player;
                 if (pTier == 0){
                     this.requireHeartMutationSlot()
                     .requirePerk(PerkLib.DarkCharm).requireCor(100)
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.demonScore() >= 11;
-                    }, "Demon race");
+                    .requireRace(Races.DEMON)
                 }
                 else{
                     var pLvl:int = pTier * 30;

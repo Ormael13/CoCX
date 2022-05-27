@@ -2,18 +2,19 @@
  * ...
  * @author Ormael
  */
-package classes.Items.Vehicles 
+package classes.Items.Vehicles
 {
 	import classes.BodyParts.Tail;
 	import classes.BodyParts.Wings;
 	import classes.Items.Vehicles;
 	import classes.PerkLib;
 	import classes.Player;
+import classes.Races;
 
-	public class GiantSlayerMech extends Vehicles
+public class GiantSlayerMech extends Vehicles
 	{
 		
-		public function GiantSlayerMech() 
+		public function GiantSlayerMech()
 		{
 			super("GS Mech", "GiantSlayerMech", "Giant Slayer Mech", "a Giant Slayer Mech", 0, 0, 2000, "A customisable goblin invention, this bipedal, large mech is equipped with a comfortable seat, fit for a goblin or a small person. Within it you feel like you could kill gods or well gigants... \n\nType: Goblin Mech \nBase value: 2000","Mech");
 		}
@@ -22,7 +23,7 @@ package classes.Items.Vehicles
 			if (!super.canUse()) {
 				return false;
 			}
-			if (game.player.elfScore() >= 11 || game.player.woodElfScore() >= 22) { //Elf
+			if (game.player.isRace(Races.ELF) || game.player.isRace(Races.WOODELF)) { //Elf
 				outputText("No way you’re going into this mechanical abomination. You’re an Elf and as such you have a natural disgust of technology, not to mention the claustrophobia.\n\n");
 				return false;
 			}
@@ -42,7 +43,7 @@ package classes.Items.Vehicles
 				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) EHP += 0.75;
 				if (game.player.hasKeyItem("Upgraded Leather Insulation 1.0") >= 0) EHP += 0.25;
 				if (game.player.hasKeyItem("Upgraded Leather Insulation 2.0") >= 0) EHP += 0.5;
-				if (game.player.hasKeyItem("Upgraded Leather Insulation 3.0") >= 0) EHP += 0.75; 
+				if (game.player.hasKeyItem("Upgraded Leather Insulation 3.0") >= 0) EHP += 0.75;
 				game.player.HP = EHP * game.player.maxHP();
 			}
 			return super.playerEquip();

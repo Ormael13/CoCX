@@ -2,7 +2,7 @@
  * ...
  * @author Pyromania
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Tail;
@@ -89,7 +89,7 @@ import coc.view.ButtonDataList;
 			}
 		}
 
-		public function ZenjiScenes() 
+		public function ZenjiScenes()
 		{
 			Saves.registerSaveableState(this);
 		}
@@ -2651,7 +2651,7 @@ import coc.view.ButtonDataList;
 			outputText("\"<i>Even behind de mask of death, your beauty shines through.</i>\"\n\n");
 			outputText("You can't help but smile at his compliment as he continues rubbing his fingers along your face, the warmth of his touch along with the cool pain is refreshing.");
 			outputText("It doesn't take long until he's finished, making sure not to omit even the slightest detail.");
-			outputText("He glances over your face, now covered by his ceremonial paint. \"<i>It’s a good look on ya [name], maybe I did a betta job on you dan I did ta myself.</i>\""); 
+			outputText("He glances over your face, now covered by his ceremonial paint. \"<i>It’s a good look on ya [name], maybe I did a betta job on you dan I did ta myself.</i>\"");
 			outputText("He gives a soft chuckle, eying you before speaking up once more, \"<i>I love you, [name]... I'm happy ya let me do dis wit ya.</i>\"\n\n");
 			outputText("<b><i>Face Paint gives +10% magic resistance</i></b>\n\n");
 			player.addStatusValue(StatusEffects.ZenjiZList, 4, 2);
@@ -2754,7 +2754,7 @@ import coc.view.ButtonDataList;
 				// Stuff a name in the box and go go go
 				mainView.nameBox.text = "Zenji kiddo";
 			}
-			else if (mainView.nameBox.text == "" || mainView.nameBox.text == "0" || mainView.nameBox.text == "Zenji") 
+			else if (mainView.nameBox.text == "" || mainView.nameBox.text == "0" || mainView.nameBox.text == "Zenji")
 			{
 				clearOutput();
 				if (mainView.nameBox.text == "" || mainView.nameBox.text == "0") outputText("<b>You must select a name.</b>");
@@ -3115,7 +3115,7 @@ import coc.view.ButtonDataList;
 								"You take your leave without another word.\n");
 					}
 				}
-				else if (player.race(true) == "demon"){
+				else if (player.isRace(Races.DEMON)){
 					outputText("With your mind set, you speak up. \"I do,\" you reply.\n" +
 							"\n" +
 							"Tears begin to stream down his face as you smile at him. You look toward Zenji with faux reassurance as you hold out your hand for him.\n" +

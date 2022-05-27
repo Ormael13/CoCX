@@ -9,6 +9,7 @@ import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
 public class VenomGlandsMutation extends IMutationPerkType
     {
@@ -56,9 +57,7 @@ public class VenomGlandsMutation extends IMutationPerkType
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS);
                     }, "Spider or Snake fangs")
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.spiderScore() >= 5 || player.apophisScore() >= 23 || player.nagaScore() >= 8 || player.gorgonScore() >= 11 || player.vouivreScore() >= 11 || player.couatlScore() >= 11 || player.hydraScore() >= 14 || player.atlachNachaScore() >= 21;
-                    }, "Spider or any snake-like race");
+                    .requireAnyRace(Races.SPIDER, Races.APOPHIS, Races.NAGA, Races.GORGON, Races.VOUIVRE, Races.COUATL, Races.HYDRA, Races.ATLACH_NACHA);
                 }
                 else{
                     var pLvl:int = pTier * 30;

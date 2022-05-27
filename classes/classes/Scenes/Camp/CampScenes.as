@@ -231,7 +231,7 @@ public function HaveAGirlBath():void {
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("Etna isn’t far from you, her tail tip covered with a towel for everyone else's safety.\n\n");
 	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) {
 		outputText("Ayane is enjoying some quality time in the other corner, tending to her fur");
-		if (player.kitsuneScore() >= 5) outputText(" and yours");
+		if (player.isRace(Races.KITSUNE)) outputText(" and yours");
 		outputText(".\n\n");
 	}
 	if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) outputText("As a naga Samirah takes a lot of space in the bath. You're glad you made your pool as large as you could.\n\n");

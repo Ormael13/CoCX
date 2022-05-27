@@ -353,7 +353,7 @@ public class EventParser {
             var counter:Number = player.cockTotal() - 1;
             while (counter >= 0) {
                 if (player.cocks[counter].cockType == CockTypesEnum.DOG || player.cocks[counter].cockType == CockTypesEnum.FOX) {
-                    if (player.dogScore() >= player.foxScore())
+                    if (player.racialScore(Races.DOG) >= player.racialScore(Races.FOX))
                         player.cocks[counter].cockType = CockTypesEnum.DOG;
                     else
                         player.cocks[counter].cockType = CockTypesEnum.FOX;

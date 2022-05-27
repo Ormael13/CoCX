@@ -8,6 +8,7 @@ import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
 public class HeartOfTheStormMutation extends IMutationPerkType
     {
@@ -54,9 +55,7 @@ public class HeartOfTheStormMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireHeartMutationSlot()
-                        .requireCustomFunction(function (player:Player):Boolean {
-                            return player.raijuScore() >= 10 || player.thunderbirdScore() >= 12 || player.kamaitachiScore() >= 14 || player.couatlScore() >= 11;
-                        }, "Stormborn race");
+                        .requireAnyRace(Races.RAIJU, Races.THUNDERBIRD, Races.KAMAITACHI, Races.COUATL);
                 }
                 else{
                     var pLvl:int = pTier * 30;

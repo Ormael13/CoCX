@@ -8,6 +8,7 @@ import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Player;
+import classes.Races;
 
 public class PigBoarFatMutation extends IMutationPerkType
     {
@@ -56,9 +57,7 @@ public class PigBoarFatMutation extends IMutationPerkType
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.thickness >= 100;
                     }, "100+ thickness")
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return player.pigScore() >= 10;
-                    }, "Pig/Boar race");
+                    .requireRace(Races.PIG);
                 }
                 else{
                     var pLvl:int = pTier * 30;
