@@ -100,6 +100,11 @@ public class ZzzRace extends Race {
 }
 ```
 
+Things you could add to the constructor:
+* `disabled = true`/`hidden=true` to make race disabled/hidden.
+* `chimeraTier = 0; grandChimeraTier = 0;` to disabled adding points to chimera/grand chimera.
+* `chimeraTier = <N>; grandChimeraTier = <N+1>;` to change default chimera/grand chimera min tiers from default 1 and 2.
+
 ## Score calculation
 
 Racial scores are made with `RaceScoreBuilder` class. Start by adding one of `addScores()` functions in the `setup()` function, and write a method chain.

@@ -251,7 +251,7 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	}
 	var canReactMale:Boolean = player.hasCock() && (drakesHeart || SceneLib.emberScene.emberHasVagina());
 	var canReactFemale:Boolean = player.hasVagina() && (drakesHeart || SceneLib.emberScene.emberHasCock());
-	if (racialScore(Races.DRAGON) >= 4 && rand(3) == 0 && (canReactMale || canReactFemale)) {
+	if (player.racialScore(Races.DRAGON) >= 4 && rand(3) == 0 && (canReactMale || canReactFemale)) {
 		outputText("\n\nA sudden swell of lust races through your ");
 		if (canReactMale) {
 			outputText(cockDescript(0));

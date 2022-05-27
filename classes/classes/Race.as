@@ -110,12 +110,16 @@ public class Race {
 			var maxStage:int = 0;
 			for each (var entry:Array in mutations) {
 				// entry: [mutationPerk:PerkType, scorePerStage:int]
-				var stage:Number = body.player.perkv1(entry[0]);
-				bonus += stage*entry[1];
+				var pt:PerkType = entry[0];
+				var pc:PerkClass = body.player.getPerk(pt);
+				var stage:Number = pc ? pc.value1 : 0;
+				bonus = stage*entry[1];
+				if (outputText != null) outputText("Mutation: "+pt.name(pc), bonus);
+				score += bonus;
 				maxStage = Math.max(maxStage, stage);
 			}
-			if (outputText != null) outputText("Mutations", bonus);
-			score += bonus;
+			//if (outputText != null) outputText("Mutations", bonus);
+			//score += bonus;
 			if (body.player.hasPerk(PerkLib.ChimericalBodySemiImprovedStage)) {
 				bonus = maxStage >= 1 ? +1 : 0;
 				if (outputText != null) outputText("Chimerical Body: Semi-Improved Stage", bonus);
