@@ -1824,17 +1824,13 @@ public class SaveUpdater extends NPCAwareContent {
 				updateMutationsv3("Adaptations");
 				function updateMutationsv3(type:String):void{
 					var arrayVal:int = 0;
-					var arrayValY:Boolean = false;
 					var array1:Array = MutationsLib.mutationsArray(type);
 					var array2:Array = IMutationsLib.mutationsArray(type);
 					for each(var pPerkArray:Array in array1){
 						var x:int = pPerkArray.length;
 						while (x > 0){
 							if (player.hasPerk(pPerkArray[x-1])){
-								player.createPerk(array2[arrayVal],x,0,0,0);
-								array2[arrayVal].updateDynamicPerkBuffs(player);
-								arrayVal++;
-								arrayValY = true;
+								array2[arrayVal].acquireMutation(player, "none", x);
 								x--;
 								break;
 							}
@@ -1844,7 +1840,7 @@ public class SaveUpdater extends NPCAwareContent {
 							player.removePerk(pPerkArray[x]);
 							x--;
 						}
-						if (!arrayValY) arrayVal++;
+						arrayVal++;
 					}
 				}
 				//CoC.instance.charCreation.setupMutations();
