@@ -14,6 +14,7 @@ import classes.internals.Utils;
 
 import coc.model.GameModel;
 import coc.model.TimeModel;
+import coc.script.Eval;
 import coc.view.ButtonData;
 import coc.view.ButtonDataList;
 import coc.view.CoCButton;
@@ -253,6 +254,10 @@ import coc.xxc.StoryContext;
 			EngineCore.rawOutputText(output, purgeText);
 		}
 
+		protected static function printLink(linkText:String, eventArgument:String):void {
+			outputText('<u><a href="event:'+Eval.escapeString(eventArgument)+'">'+linkText+"</a></u>");
+		}
+		
 		protected static function outputText(output:String):void
 		{
 			EngineCore.outputText(output);
@@ -276,7 +281,7 @@ import coc.xxc.StoryContext;
 			EngineCore.doNext(eventNo);
 		}
 
-		protected function menu():void
+		protected static function menu():void
 		{
 			EngineCore.menu();
 		}
@@ -344,7 +349,7 @@ import coc.xxc.StoryContext;
 		protected function addButtonIfTrue(pos:int, text:String, func1:Function, toolTipDisabled:String, condition:Boolean, tooltipText:String = ""):CoCButton {
             return EngineCore.addButtonIfTrue(pos, text, func1, toolTipDisabled, condition, tooltipText);
         }
-		protected function button(pos:int):CoCButton
+		protected static function button(pos:int):CoCButton
 		{
 			return EngineCore.button(pos);
 		}
@@ -688,7 +693,7 @@ import coc.xxc.StoryContext;
 			SceneLib.combat.useManaImpl(mod,type);
 		}
 
-		protected function playerMenu():void { EventParser.playerMenu(); }
+		protected static function playerMenu():void { EventParser.playerMenu(); }
 		protected static function get player():Player
 		{
 			return CoC.instance.player;
@@ -945,7 +950,7 @@ import coc.xxc.StoryContext;
 		protected function get context():StoryContext {
 			return CoC.instance.context;
 		}
-		protected function submenu(buttons:ButtonDataList,back:Function=null,page:int=0,IsSorted:Boolean = true):void {
+		protected static function submenu(buttons:ButtonDataList,back:Function=null,page:int=0,IsSorted:Boolean = true):void {
 			var list:/*ButtonData*/Array = buttons.list.filter(function(e:ButtonData, i:int, a:Array):Boolean{
 				return e.visible;
 			});
@@ -964,7 +969,7 @@ import coc.xxc.StoryContext;
 			}
 			if (back != null) button(14).show("Back",back);
 		}
-        
+  
 		/**Returns an autocreated menu.
 		 * Structure for menuItems array is: ["Button name", function/false/"ignore", ["Available desc", "Not available desc"]/ ""].
 		 * function/false/"ignore" = addbtn, addbtndisabled, no button.

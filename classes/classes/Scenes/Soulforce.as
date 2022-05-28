@@ -6,8 +6,14 @@ package classes.Scenes
 {
 import classes.*;
 import classes.BodyParts.*;
+import classes.GeneticMemories.*;
+import classes.IMutationPerkType;
+import classes.IMutations.IMutationsLib;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
+import classes.Items.*;
 import classes.Scenes.Areas.DeepSea.Kraken;
+import classes.Scenes.Areas.Desert.NagaScene;
 import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
 import classes.Scenes.Areas.Forest.TamaniScene;
 import classes.Scenes.Areas.Forest.WorldTree;
@@ -16,6 +22,7 @@ import classes.Scenes.Areas.HighMountains.MinotaurMobScene;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.Dungeons.DesertCave.SandMother;
+import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Explore.Pierce;
 import classes.Scenes.Explore.TheDummy;
 import classes.Scenes.Monsters.Malikore;
@@ -35,9 +42,8 @@ import classes.Scenes.NPCs.WaizAbi;
 import classes.Scenes.Places.Boat.Marae;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Items.*;
+import classes.Scenes.Places.TrollVillage;
 import classes.Stats.Buff;
-import classes.Scenes.Dungeons.EbonLabyrinth.*;
-import classes.GeneticMemories.*;
 
 use namespace CoC;
 
@@ -46,6 +52,7 @@ public class Soulforce extends BaseContent
 	public var tamaniDaughtersScene:TamainsDaughtersScene = new TamainsDaughtersScene();
 	public var tamaniScene:TamaniScene = new TamaniScene();
 	public var izumiScenes:IzumiScene = new IzumiScene();
+	public var nagaScene:NagaScene = new NagaScene();
 	public var worldtreeScene:WorldTree = new WorldTree();
 	public var minotaurSonsScene:MinotaurMobScene = new MinotaurMobScene();
 
@@ -258,9 +265,27 @@ public class Soulforce extends BaseContent
 		menuItems.push("TyrantPF", (TyrantiaFollower.TyrantiaFollowerStage == 5 && TyrantiaFollower.TyraniaCorrupteedLegendaries == 0)? FairyTest5: false, "Patching Tyrantia corrupted legendaries unlock");
 		menuItems.push("LilyPregF", (DriderTown.LilyKidsPCPregnancy != 0 && LilyFollower.LilyFollowerState)? FairyTest3: false, "Curing Lily Infertility ^^");
 		//menuItems.push("WeaponsXPtest", SceneLib.dilapidatedShrine.weaponsXPtrader, "");
+		menuItems.push("HangoverTest", applyHangover, "");
 		menuGen(menuItems, page, accessSoulforceMenu);
 	}
 
+private function applyHangover():void {
+	//Status: Hangover.
+	//v1 = hours left.
+	//v2 = strength taken
+	//v3 = speed taken
+	//v4 = intelligence
+
+	if(player.statStore.hasBuff('Hangover')) {
+		player.statStore.removeBuffs('Hangover');
+	}
+	player.statStore.addBuffObject({'str':-5,'spe':-10,'int':-15},'Hangover',{text:'Hangover', rate:Buff.RATE_HOURS, tick: 8});
+	showStatDown('str');
+	showStatDown('spe');
+	showStatDown('int');
+	statScreenRefresh();
+	doNext(curry(SoulforceCheats1, 0));
+}
 	public function FairyTest3():void {
 		DriderTown.LilyKidsPCPregnancy = 0;
 		doNext(curry(SoulforceCheats1, 0));
@@ -1217,9 +1242,6 @@ public class Soulforce extends BaseContent
 	}
 	public function AddPussy():void {
 		player.createVagina();
-		player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
-		player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
-		player.vaginas[0].virgin = true;
 		player.clitLength = .25;
 		if (player.fertility <= 5) player.fertility = 6;
 		BodyStateMenu();
@@ -1694,7 +1716,7 @@ public class Soulforce extends BaseContent
 			//addButton(2, "", ).hint("Add 1 .");
 			//addButton(3, "", ).hint("Add 1 .");
 			//addButton(4, "", ).hint("Add 1 .");
-			//addButton(5, "", ).hint("Add 1 .");
+			addButton(5, "E.Shard", AddElementalShard).hint("Add 1 E.Shard.");//addButton(5, "", ).hint("Add 1 .");
 			addButton(6, "UnicornHair", AddUnicornHair).hint("Add 1 Unicorn Hair.");
 			addButton(7, "GolemCore", AddGolemCore).hint("Add 1 Golem Core.");
 			addButton(8, "Mechanism", AddMechanism).hint("Add 1 Mechanism.");
@@ -2008,6 +2030,10 @@ public class Soulforce extends BaseContent
 	public function AddUnicornHair():void {
 		outputText("\n\n<b>(Gained 1 Unicorn Hair!)</b>\n\n");
 		inventory.takeItem(useables.UNICORNH, curry(MaterialMenu, 2));
+	}
+	public function AddElementalShard():void {
+		outputText("\n\n<b>(Gained 1 Elemental Shard!)</b>\n\n");
+		inventory.takeItem(useables.ELSHARD, curry(MaterialMenu, 2));
 	}
 	public function AddPolarMidnightScroll():void {
 		outputText("\n\n<b>(Gained 1 Polar Midnight scroll!)</b>\n\n");
@@ -3017,23 +3043,18 @@ public class Soulforce extends BaseContent
 	}
 	private function SoulforceRegeneration00():Number {
 		var SFR00:Number = 0;
-		if (player.kitsuneScore() >= 5) {
-			if (player.kitsuneScore() >= 9 && player.tailType == 13 && player.tailCount >= 2) {
-				if (player.kitsuneScore() >= 16) {
-					if (player.kitsuneScore() >= 21 && player.tailCount == 9 && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
-						if (player.kitsuneScore() >= 26) SFR00 += 200;
-						else SFR00 += 150;
-					}
-					else SFR00 += 80;
-				}
-				else SFR00 += 40;
-			}
-			else SFR00 += 20;
-		}
-		if (player.nekomataScore() >= 10) {
-			if (player.tailType == 8 && player.tailCount >= 2 && player.nekomataScore() >= 12) SFR00 += 40;
-			else SFR00 += 20;
-		}
+		var tier:int;
+		
+		tier = player.racialTier(Races.KITSUNE);
+		if (tier >= 4) SFR00 += 200;
+		else if (tier == 3) SFR00 += 150;
+		else if (tier == 2) SFR00 += 80;
+		else if (tier == 1) SFR00 += 40;
+		
+		tier = player.racialTier(Races.NEKOMATA);
+		if (tier >= 2) SFR00 += 40;
+		else if (tier == 1) SFR00 += 20;
+		
 		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) SFR00 += 20;
 		if (player.hasPerk(PerkLib.DaoistWarriorStage)) SFR00 += 20;
 		if (player.hasPerk(PerkLib.DaoistElderStage)) SFR00 += 20;
@@ -3456,23 +3477,18 @@ public class Soulforce extends BaseContent
 	}
 	public function AmountOfSoulforceRecoveredDuringCultivation(mod:Number):Number {
 		var costPercent:Number = 100;
-		if (player.kitsuneScore() >= 5) {
-			if (player.kitsuneScore() >= 9 && player.tailType == 13 && player.tailCount >= 2) {
-				if (player.kitsuneScore() >= 16) {
-					if (player.kitsuneScore() >= 21 && player.tailCount == 9 && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
-						if (player.kitsuneScore() >= 26) costPercent += 1000;
-						else costPercent += 650;
-					}
-					else costPercent += 400;
-				}
-				else costPercent += 200;
-			}
-			else costPercent += 100;
-		}
-		if (player.nekomataScore() >= 10) {
-			if (player.tailType == 8 && player.tailCount >= 2 && player.nekomataScore() >= 12) costPercent += 200;
-			else costPercent += 100;
-		}
+		var tier:int;
+		
+		tier = player.racialTier(Races.KITSUNE);
+		if (tier >= 4) costPercent += 1000;
+		else if (tier == 3) costPercent += 650;
+		else if (tier == 2) costPercent += 400;
+		else if (tier == 1) costPercent += 200;
+		
+		tier = player.racialTier(Races.NEKOMATA);
+		if (tier >= 2) costPercent += 200;
+		else if (tier == 1) costPercent += 100;
+		
 		if (player.hasPerk(PerkLib.DaoistCultivator)) costPercent += 100;
 		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) costPercent += 100;
 		if (player.hasPerk(PerkLib.DaoistWarriorStage)) costPercent += 100;
@@ -4354,6 +4370,7 @@ public class Soulforce extends BaseContent
 			if (player.level >= 3 && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0 && (flags[kFLAGS.IZMA_WORMS_SCARED] == 0 || !player.hasStatusEffect(StatusEffects.Infested)) && flags[kFLAGS.IZMA_FOLLOWER_STATUS] <= 0) addButton(3, "???", tigerSharkGal).hint("Tigershark Gal?");
 			if (player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff)) addButton(4, "???", shyHealer).hint("Shy Healer");
 			if (flags[kFLAGS.ISABELLA_PLAINS_DISABLED] == 0) addButton(5, "???", germanCow).hint("German Cow");
+			if (player.level >= 3 && flags[kFLAGS.SAMIRAH_FOLLOWER] <= 9) addButton(6, "???", sneakOnThePlane).hint("F**king ??? on the Plane.");
 			addButton(14, "Back", SoulSense);
 		}
 		else {
@@ -4384,6 +4401,9 @@ public class Soulforce extends BaseContent
 	}
 	public function germanCow():void {
 		SceneLib.isabellaScene.isabellaGreeting();
+	}
+	public function sneakOnThePlane():void {
+		nagaScene.nagaEncounter();
 	}
 	
 	private function canfaceTribulation():Boolean {
@@ -4417,3 +4437,4 @@ public class Soulforce extends BaseContent
 	}
 }
 }
+

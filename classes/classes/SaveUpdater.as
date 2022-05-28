@@ -321,15 +321,15 @@ public class SaveUpdater extends NPCAwareContent {
 		if (camp.followersCount() + camp.loversCount() + camp.slavesCount() >= 38) awardAchievement("All Your People are Belong to Me (2)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME_2);
 		//if (camp.followersCount() + camp.loversCount() + camp.slavesCount() >= 57) awardAchievement("All Your People are Belong to Me (3)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME_3);
 		if (flags[kFLAGS.MANSION_VISITED] >= 3) awardAchievement("Freeloader", kACHIEVEMENTS.GENERAL_FREELOADER);
-		if (player.perks.length >= 25) awardAchievement("Perky", kACHIEVEMENTS.GENERAL_PERKY);
-		if (player.perks.length >= 50) awardAchievement("Super Perky", kACHIEVEMENTS.GENERAL_SUPER_PERKY);
-		if (player.perks.length >= 75) awardAchievement("Mega Perky", kACHIEVEMENTS.GENERAL_MEGA_PERKY);
-		if (player.perks.length >= 100) awardAchievement("Ultra Perky", kACHIEVEMENTS.GENERAL_ULTRA_PERKY);
-		if (player.perks.length >= 200) awardAchievement("Hyper Perky", kACHIEVEMENTS.GENERAL_HYPER_PERKY);
-		if (player.perks.length >= 300) awardAchievement("Umber Perky", kACHIEVEMENTS.GENERAL_UMBER_PERKY);
-		if (player.perks.length >= 444) awardAchievement("Perky Beast of Death", kACHIEVEMENTS.GENERAL_PERKY_BEAST_OF_DEATH);
-		if (player.perks.length >= 600) awardAchievement("Perky King", kACHIEVEMENTS.GENERAL_PERKY_KING);
-		if (player.perks.length >= 800) awardAchievement("Ridiculous Perky King", kACHIEVEMENTS.GENERAL_RIDICULOUS_PERKY_KING);
+		if (player.perks.length - player.hasMutationCount(true) >= 25) awardAchievement("Perky", kACHIEVEMENTS.GENERAL_PERKY);
+		if (player.perks.length - player.hasMutationCount(true) >= 50) awardAchievement("Super Perky", kACHIEVEMENTS.GENERAL_SUPER_PERKY);
+		if (player.perks.length - player.hasMutationCount(true) >= 75) awardAchievement("Mega Perky", kACHIEVEMENTS.GENERAL_MEGA_PERKY);
+		if (player.perks.length - player.hasMutationCount(true) >= 100) awardAchievement("Ultra Perky", kACHIEVEMENTS.GENERAL_ULTRA_PERKY);
+		if (player.perks.length - player.hasMutationCount(true) >= 200) awardAchievement("Hyper Perky", kACHIEVEMENTS.GENERAL_HYPER_PERKY);
+		if (player.perks.length - player.hasMutationCount(true) >= 300) awardAchievement("Umber Perky", kACHIEVEMENTS.GENERAL_UMBER_PERKY);
+		if (player.perks.length - player.hasMutationCount(true) >= 444) awardAchievement("Perky Beast of Death", kACHIEVEMENTS.GENERAL_PERKY_BEAST_OF_DEATH);
+		if (player.perks.length - player.hasMutationCount(true) >= 600) awardAchievement("Perky King", kACHIEVEMENTS.GENERAL_PERKY_KING);
+		if (player.perks.length - player.hasMutationCount(true) >= 800) awardAchievement("Ridiculous Perky King", kACHIEVEMENTS.GENERAL_RIDICULOUS_PERKY_KING);
 		//if (player.perks.length >= 1000) awardAchievement("Ludicrous Perky King", kACHIEVEMENTS.GENERAL_LUDICROUS_PERKY_KING);
 		if (player.internalChimeraScore() >= 4) awardAchievement("Lesser Chimera", kACHIEVEMENTS.GENERAL_LESSER_CHIMERA);
 		if (player.internalChimeraScore() >= 8) awardAchievement("Normal Chimera", kACHIEVEMENTS.GENERAL_NORMAL_CHIMERA);
@@ -400,8 +400,8 @@ public class SaveUpdater extends NPCAwareContent {
 		if (player.hasPerk(PerkLib.Phylactery)) awardAchievement("The Devil Wears Prada", kACHIEVEMENTS.EPIC_THE_DEVIL_WEARS_PRADA);
 		//atlach nacha achiev
 		//handmaiden achiev
-		if (player.jiangshiScore() >= 20) awardAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER);
-		if (player.yukiOnnaScore() >= 14) awardAchievement("Let It Go", kACHIEVEMENTS.EPIC_LET_IT_GO);
+		if (player.isRace(Races.JIANGSHI)) awardAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER);
+		if (player.isRace(Races.YUKIONNA)) awardAchievement("Let It Go", kACHIEVEMENTS.EPIC_LET_IT_GO);
 		//wendigo achiev
 
 		if (player.hasStatusEffect(StatusEffects.AchievementsNormalShadowTotal)) {
@@ -695,9 +695,9 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			//Update chitin
 			if (player.hasCoatOfType(Skin.CHITIN)) {
-				if (player.mantisScore() >= 5) player.skin.coat.color = "green";
-				if (player.spiderScore() >= 5) player.skin.coat.color = "pale white";
-				if (player.mantisScore() < 5 && player.spiderScore() < 5) {
+				if (player.isRace(Races.MANTIS)) player.skin.coat.color = "green";
+				if (player.isRace(Races.SPIDER)) player.skin.coat.color = "pale white";
+				if (player.isRace(Races.MANTIS) && !player.isRace(Races.SPIDER)) {
 					if (rand(2) == 1) player.skin.coat.color = "green";
 					else player.skin.coat.color = "pale white";
 				}
@@ -1023,15 +1023,7 @@ public class SaveUpdater extends NPCAwareContent {
 				player.removePerk(PerkLib.MythicalGolemMaker);
 				player.createPerk(PerkLib.EpicGolemMaker3rdCircle, 0, 0, 0, 0);
 			}
-			if (!player.hasStatusEffect(StatusEffects.StrTouSpeCounter1)) {
-				player.createStatusEffect(StatusEffects.StrTouSpeCounter1, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.StrTouSpeCounter2, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.IntWisCounter1, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.IntWisCounter2, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.LibSensCounter1, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.LibSensCounter2, 0, 0, 0, 0);
-				player.strtouspeintwislibsenCalculation2();
-			}
+			player.updateRacialAndPerkBuffs();
 			if (player.blockingBodyTransformations()) {
 				if (player.hasPerk(PerkLib.BimboBody)) player.removePerk(PerkLib.BimboBody);
 				if (player.hasPerk(PerkLib.BimboBrains)) player.removePerk(PerkLib.BimboBrains);
@@ -1832,17 +1824,13 @@ public class SaveUpdater extends NPCAwareContent {
 				updateMutationsv3("Adaptations");
 				function updateMutationsv3(type:String):void{
 					var arrayVal:int = 0;
-					var arrayValY:Boolean = false;
 					var array1:Array = MutationsLib.mutationsArray(type);
 					var array2:Array = IMutationsLib.mutationsArray(type);
 					for each(var pPerkArray:Array in array1){
 						var x:int = pPerkArray.length;
 						while (x > 0){
 							if (player.hasPerk(pPerkArray[x-1])){
-								player.createPerk(array2[arrayVal],x,0,0,0);
-								array2[arrayVal].updateDynamicPerkBuffs(player);
-								arrayVal++;
-								arrayValY = true;
+								array2[arrayVal].acquireMutation(player, "none", x);
 								x--;
 								break;
 							}
@@ -1852,10 +1840,10 @@ public class SaveUpdater extends NPCAwareContent {
 							player.removePerk(pPerkArray[x]);
 							x--;
 						}
-						if (!arrayValY) arrayVal++;
+						arrayVal++;
 					}
 				}
-				CoC.instance.charCreation.setupMutations();
+				//CoC.instance.charCreation.setupMutations();
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.015;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.016) {
@@ -1888,6 +1876,14 @@ public class SaveUpdater extends NPCAwareContent {
 					player.removePerk(mutation);
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.018;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.019) {
+				if (flags[kFLAGS.NEISA_FOLLOWER] >= 10 && flags[kFLAGS.NEISA_FOLLOWER] < 17) flags[kFLAGS.NEISA_FOLLOWER] -= 3;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.019;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.020) {
+				if (flags[kFLAGS.IZUMI_MET] > 0 && !TyrantiaFollower.TyraniaAndIzumi && TyrantiaFollower.TyrantiaFollowerStage > 0) TyrantiaFollower.TyraniaAndIzumi = true;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.020;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

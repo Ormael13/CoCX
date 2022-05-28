@@ -3,7 +3,7 @@
  * Area with lvl 40-55 enemies.
  * Currently a Work in Progress
  */
-package classes.Scenes.Areas 
+package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
@@ -21,7 +21,7 @@ use namespace CoC;
 		public var alrauneScene:AlrauneScene = new AlrauneScene();
 		public var hellcatScene:HellCatScene = new HellCatScene();
 		
-		public function Ashlands() 
+		public function Ashlands()
 		{
 		}
 		
@@ -72,7 +72,7 @@ use namespace CoC;
 				//	wendigoScene.encounterWendigo();
 				//	break;
 				case 2: //Hellcat/Witches Sabbath
-					if ((flags[kFLAGS.WITCHES_SABBATH] > 3 && player.hellcatScore() > 9 && player.gender == 3) || (flags[kFLAGS.WITCHES_SABBATH] > 0 && player.catScore() >= 8 && player.inte >= 40 && player.hasStatusEffect(StatusEffects.KnowsWhitefire))) SceneLib.ashlands.hellcatScene.WitchesSabbath();
+					if ((flags[kFLAGS.WITCHES_SABBATH] > 3 && player.isRace(Races.HELLCAT) && player.gender == 3) || (flags[kFLAGS.WITCHES_SABBATH] > 0 && player.isRace(Races.CAT) && player.inte >= 40 && player.hasStatusEffect(StatusEffects.KnowsWhitefire))) SceneLib.ashlands.hellcatScene.WitchesSabbath();
 					else SceneLib.ashlands.hellcatScene.HellCatIntro();
 					break;
 				case 3:	//Cinderbloom

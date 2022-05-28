@@ -60,13 +60,20 @@ public class EventParser {
     public static function gameOver(clear:Boolean = false):void { //Leaves text on screen unless clear is set to true
         if (CoC.instance.testingBlockExiting) EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour); //Prevent ChaosMonkah instances from getting stuck
         else {
-            var textChoices:Number = Utils.rand(4);
+            var textChoices:Array = ["GAME OVER",
+                "Game over, man! Game over!", 
+                "You just got Bad-Ended!", 
+                "Your adventures have come to an end...", 
+                //Silly Mode
+                "Don't lose hope... " + CoC.instance.player.short + "! Stay determined!",
+                "Wasted", 
+                "YOU DIED", 
+                "Git gud!", 
+                "Get rekt, noob!", 
+                "OOF."];
             if (clear) EngineCore.clearOutput();
             EngineCore.outputText("\n\n<font color=\"#800000\">");
-            if (textChoices == 0) EngineCore.outputText("<b>GAME OVER</b>");
-            if (textChoices == 1) EngineCore.outputText("<b>Game over, man! Game over!</b>");
-            if (textChoices == 2) EngineCore.outputText("<b>You just got Bad-Ended!</b>");
-            if (textChoices == 3) EngineCore.outputText("<b>Your adventures have came to an end...</b>");
+            EngineCore.outputText("<b>" + textChoices[Utils.rand(EngineCore.silly() ? textChoices.length : 4)] + "</b>");
             EngineCore.outputText("</font>");
             //Delete save on hardcore.
             if (CoC.instance.flags[kFLAGS.HARDCORE_MODE] > 0) {
@@ -346,7 +353,7 @@ public class EventParser {
             var counter:Number = player.cockTotal() - 1;
             while (counter >= 0) {
                 if (player.cocks[counter].cockType == CockTypesEnum.DOG || player.cocks[counter].cockType == CockTypesEnum.FOX) {
-                    if (player.dogScore() >= player.foxScore())
+                    if (player.racialScore(Races.DOG) >= player.racialScore(Races.FOX))
                         player.cocks[counter].cockType = CockTypesEnum.DOG;
                     else
                         player.cocks[counter].cockType = CockTypesEnum.FOX;

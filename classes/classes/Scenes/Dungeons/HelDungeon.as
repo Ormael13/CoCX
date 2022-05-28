@@ -1,5 +1,5 @@
 //Quest Dungeon: Tower of the Phoenix (Helia's quest, one-time dungeon)
-package classes.Scenes.Dungeons 
+package classes.Scenes.Dungeons
 {
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
@@ -15,7 +15,7 @@ use namespace CoC;
 	public class HelDungeon extends DungeonAbstractContent
 	{
 		public function HelDungeon() {}
-				
+		
 		//EVENTS
 		//-HelAffection -- A score measuring Hel's general fondness for the Player Character, measured on a scale of 0 - 100, with \"<i>0</i>\" being immediately after achieving \"<i>Fuckbuddy</i>\" status. Increases by 5 each time you fuck (not Corrupt!Rape) Hel, and 10 each time you engage in one of her threesomes. When HelAffection equals 70 points, the number freezes and Expansion 2 content triggers.
 		// HEL_AFFECTION_FOLLOWER:int = 478;
@@ -41,7 +41,7 @@ use namespace CoC;
 		// VALARIA_AT_CAMP:int = 498;
 
 		//Introduction Scene -- Helia's Discovery
-		//Requirements: 
+		//Requirements:
 		//-PC has achieved \"<i>Fuckbuddy</i>\" status with Helia.
 		//-HelAffection >= 70
 		public function heliaDiscovery():void {
@@ -65,7 +65,7 @@ use namespace CoC;
 			}
 			//(Resume All)
 			outputText("\n\nYou sit the salamander down near your campfire and ask her what brought her all the way from the plains to your humble abode.  She shrugs lightly and says, \"<i>Maybe I just wanted some company tonight.</i>\"");
-			//[If not Centaur: 
+			//[If not Centaur:
 			if(!player.isTaur()) outputText("  Her hand slides over to rest on your thigh.");
 			else outputText("  \"<i>She gives your flank a slow, affectionate stroke.</i>\"");
 			outputText("  You ask her if that's true. With a little wink, she answers, \"<i>Well, it's not entirely untrue...</i>\"");
@@ -107,7 +107,7 @@ use namespace CoC;
 			clearOutput();
 			outputText("You mull the salamander's proposition over and eventually agree to assist her.  Not only will you be stopping a new race of monsters from spawning into the mountains, but you'll be getting into the lovely Helia's good graces - a win-win if ever there was one.");
 			outputText("\n\nHel breaks out into a great big smile and leaps at you, pulling you into a hug and squeezing until you damn near choke.  You return her tight embrace, and are eventually rewarded by Hel relaxing in your arms");
-			//[if has lap: 
+			//[if has lap:
 			if(!player.isTaur()) outputText(" and cuddling up in your lap");
 			outputText(".  She nuzzles your neck and whispers, \"<i>Thanks, Champ. It means a lot to know I can count on you to... watch my back.</i>\"");
 			outputText("\n\nYou run a hand through Hel's hair and tell her that you've got her back no matter what.  You give her muscular ass a playful little grope; and she immediately wraps her tail around you, pinning your arms to your chest.  Doesn't look like you're going anywhere now.  With a little smirk, the salamander whispers, \"<i>Let's stay like this 'till morning - what do you say?</i>\"");
@@ -129,7 +129,7 @@ use namespace CoC;
 			//(Decrease Player Lust to minimum, increase HP to maximum, etc. etc. You're sleeping, but also fucking. Figure it out.)
 			if (flags[kFLAGS.TIMES_ORGASMED] > 0) player.orgasm(); //Never calls if you never orgasmed before.
 		}
-			
+		
 		public function morningAfterHeliaDungeonAgreements():void {
             SceneLib.helScene.helSprite();
 			outputText("\nWhen your eyes flicker open at the crack of dawn, you're pleased to see Helia is lying on your chest, ");
@@ -141,7 +141,7 @@ use namespace CoC;
 			outputText("\n\nWhen you're dressed and organized, Hel asks, \"<i>So, what's the plan, [name]?</i>\"");
 
 			outputText("\n\nYou tell the salamander you just need to get your affairs in order and you're off to the harpies' nest. She nods, reminding you that each moment you spend waiting around is another moment that poor man suffers.  You tell her you'll be quick, and set about preparing.");
-			//(Display: 
+			//(Display:
 			outputText("\n\n(<b>Helia can now be found under the Lovers tab! (For Now!)</b>)");
 			flags[kFLAGS.HEL_FOLLOWER_LEVEL] = 1;
 			doNext(playerMenu);
@@ -170,7 +170,7 @@ use namespace CoC;
 			outputText("\n\n\"<i>Quiet,</i>\" she hisses, lying atop you so that you can't jump up and expose your position.  \"<i>We can't take them all at once out in the open... This is going to be a sneaking mission, got it?</i>\"");
 			outputText("\n\nYou quietly nod, and the two of you begin making your way toward the tower, hopping from one rocky outcropping to the next to avoid the harpies' sights.  Eventually, you come to the base of the looming structure.  Now sheltered in its shadow, you can clearly see the bird-women in great numbers, flying through the air to and fro.");
 			outputText("\n\nNow safe from the watchful eyes of flying harpies and their sentries, Hel whispers, \"<i>Okay, so here's the plan.  I'm going to climb up the tower and hit them from the top; you go in through the main gates here,</i>\" she says, pointing to a rotting wooden door that seems to have been in disuse for a decade.  \"<i>Divide and conquer, right?  There are three floors, so... meet in the second, as soon as we can.  Yeah?</i>\"");
-			outputText("\n\nYou nod again, and give Helia a little boost as she starts to scale the high walls of the aging tower.  You, however, steel yourself and make your way through an opening in the main gates."); 
+			outputText("\n\nYou nod again, and give Helia a little boost as she starts to scale the high walls of the aging tower.  You, however, steel yourself and make your way through an opening in the main gates.");
 			//(NEXT)
 			dungeonLoc = DUNGEON_HEL_GUARD_HALL;
 			inDungeon = true;
@@ -218,7 +218,7 @@ use namespace CoC;
 			clearOutput();
 			outputText("You slip out the door, leaving the tower behind. You make your way back to your camp.");
 			inDungeon = false;
-			doNext(camp.returnToCampUseOneHour);			
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function takeGodMead():void {
@@ -276,22 +276,22 @@ use namespace CoC;
 			//==============================================
 			function vagF():void {
 				outputText("She begins to use her goo to peel back your [armor], soon revealing your defenseless [vagina], and makes a show of licking her lips as tendrils of goo seep into your cunt, filling you utterly.  You writhe and struggle against your gooey bonds, but your efforts are futile.  The goo-girl inside the armor only shakes her head at you, and withdraws herself from your [vagina].");
-				outputText("\n\nYou have only a moment to figure out what's coming before her goo -- now perfectly shaped like the inside of your cunt -- slams back into you like a stiff cock. You can't help yourself as a moan escapes your lips, barely audible through the goop covering your mouth."); 
+				outputText("\n\nYou have only a moment to figure out what's coming before her goo -- now perfectly shaped like the inside of your cunt -- slams back into you like a stiff cock. You can't help yourself as a moan escapes your lips, barely audible through the goop covering your mouth.");
 				outputText("\n\n\"<i>Oh, you like that do you?</i>\" the armor-goo asks, smiling evilly.  \"<i>Well, maybe this can be mutually... beneficial.</i>\"  Still grinning, she begins to hammer her cock-like appendage into your pussy, fucking you fast and hard with her goo-dildo.");
 				player.cuntChange(25,true,true,false);
-				//[If PC has breasts > A-cups: 
+				//[If PC has breasts > A-cups:
 				if(player.biggestTitSize() > 1) {
 					outputText("  As she hammers your cunny, bits of her goo swirl around your [chest], squeezing and massaging your tits.  You squirm as she roughly teases your boobs, pinching at your nipples and squeezing your tender flesh roughly.");
 					//[if PC is lactating: \"<i>
 					if(player.lactationQ() > 0) outputText("  To her delight, a spray of warm milk jets out of your sore nipples, milky white mixing into blue goo like oil in water. \"<i>Mmm, tasty!</i>\" she teases, massaging more and more from you.</i>\"");
 				}
 				outputText("\n\nShe continues to pound your cunt mercilessly, her grin spreading to inhuman width as your juices begin to flow around and into her gooey penetration.  She soaks your fem-lube up greedily, enjoying the meal, but her fucking is relentless until you feel orgasm approaching.  \"<i>Aw, ");
-				//[if height is less than 6': 
+				//[if height is less than 6':
 				if(player.tallness < 70) outputText("little");
 				else outputText("big");
 				outputText(" girl ready to cum?  Well, go on then. Feed me!</i>\"");
 
-				outputText("\n\nYou erupt, femspunk gushing out of your [vagina] and into the goo-cock.  Laughing, the goo-girl absorbs your cum, growing larger and larger as you feed her, until she towers over you, her massive cock now wide enough to painfully stretch your walls.  \"<i>Oh, that's good.  Good, girl, good.  Yes, let it all out, just like that... just like that,</i>\" she coos, soaking your juices up until your orgasm finally passes.  Sated, she withdraws from inside you, leaving a decidedly empty feeling in your gut as she allows you to stand."); 
+				outputText("\n\nYou erupt, femspunk gushing out of your [vagina] and into the goo-cock.  Laughing, the goo-girl absorbs your cum, growing larger and larger as you feed her, until she towers over you, her massive cock now wide enough to painfully stretch your walls.  \"<i>Oh, that's good.  Good, girl, good.  Yes, let it all out, just like that... just like that,</i>\" she coos, soaking your juices up until your orgasm finally passes.  Sated, she withdraws from inside you, leaving a decidedly empty feeling in your gut as she allows you to stand.");
 
 				outputText("\n\n\"<i>Mmm, that was fun,</i>\" the goo-girl says, patting her full belly.  You can see a bit of your cum ");
 				if(player.biggestTitSize() > 1 && player.lactationQ() > 0) outputText("and milk ");
@@ -385,7 +385,7 @@ use namespace CoC;
 				doNext(camp.returnToCampUseOneHour);
 			}
 			
-		}		
+		}
 		//[Refuse Polite]
 		public function refuseGooArmorOfferPolitely():void {
 			spriteSelect(SpriteDb.s_valeria);
@@ -411,7 +411,7 @@ use namespace CoC;
 			flags[kFLAGS.MET_VALERIA] = 1;
 			flags[kFLAGS.TOOK_GOO_ARMOR] = 1;
 			cleanupAfterCombat();
-			if (player.race() != "Jiangshi" || player.jiangshiScore() < 20){
+			if (player.race() != "Jiangshi" || !player.isRace(Races.JIANGSHI)){
 				armors.GOOARMR.useText();
 				player.armor.removeText();
 				//(\"<i>You gained ValeriaArmor!</i>\")
@@ -569,7 +569,7 @@ use namespace CoC;
 			if(player.cockArea(x) > 60) outputText("as far in as you can manage");
 			else outputText("filling her completely");
 			outputText(".  Your cock squirts a thick load inside her, shooting creamy ropes of jizz deep into her bowels ");
-			//[if High Cum Production: 
+			//[if High Cum Production:
 			if(player.cumQ() > 500) outputText("until your cream squelches back out around your cock and onto the floor");
 			outputText(".  With a scream of delight, Kiri clamps down on your [cock " + y + "] and climaxes too, leaking a pool of fem-spunk onto the ground.  She starts to bounce on your cock, riding out her anal orgasm until she's exhausted and you're deflated inside her.");
 
@@ -742,7 +742,7 @@ use namespace CoC;
 			if(player.cockTotal() > 1) outputText(" and ass");
 			outputText(" and sliding into her warm, wet channel");
 			if(player.cockTotal() > 1) outputText("s");
-			outputText("."); 
+			outputText(".");
 
 			outputText("\n\nThe phoenix squirms as you push into her depths, groaning as more and more of your cockmeat pierces her until you finally hilt her.  Gritting her teeth, the phoenix reaches up and grabs your shoulders, holding onto you as your cock");
 			if(player.cockTotal() > 1) outputText("s drive");
@@ -791,7 +791,7 @@ use namespace CoC;
 			player.sexReward("Default", "Dick", true, false);
 			doNext(playerMenu);
 		}
-			
+		
 		//Phoenixes -- [Git Butt-rode]
 		public function gitButtRoadPhoenix():void {
 			clearOutput();
@@ -834,7 +834,7 @@ use namespace CoC;
 			outputText("\n\n\"<i>Oh. Well,</i>\" she says, smirking slightly.  \"<i>If you want a bit of phoenix seed... I guess I wouldn't mind a chance at being a daddy.</i>\"");
 
 			outputText("\n\n");
-			//[If Broodmother, not pregnant: 
+			//[If Broodmother, not pregnant:
 			if(player.hasPerk(PerkLib.BroodMother)) outputText("You assure her she will be soon");
 			else outputText("You grin at her");
 			outputText(" and strip out of your [armor]. The phoenix, a bit more dominant than you might have liked, roughly grabs your [chest], pinching your nipples as she takes over wringing her cock from you. Oh well. You decide to roll with it and slide a hand down to your [vagina], stroking your pussy as your lover warms up.");
@@ -842,7 +842,7 @@ use namespace CoC;
 			outputText("\n\nWhen she's nice and hard, you give the phoenix a little push onto her back and clamber into her lap, lining her lizard prick up with your [vagina].  Before you can get properly situated, though, the girl pulls you down onto her cock, impaling you up to her hilt in one massive thrust.  You roll your head back and scream, a mix of pleasure and burning pain shooting through you as her white-hot rod slams into your innermost depths.");
 			player.cuntChange(12,true,true,false);
 
-			outputText("\n\nBy the time you're somewhat recovered from her surprise attack, the phoenix-girl has started rocking her hips into yours, grinding her long prick into you.  You give her hefty tits a rough squeeze and push her back down, holding her down by her mammaries as you start to ride her cock.  Having gotten her thrill, the phoenix-girl submits to you, only venturing to hold onto your [hips] as you fuck her.  For your part, you bask in the sensation of her thick dick sliding in and out of your well-lubricated depths, rubbing and stroking your sensitive inner walls with its bulbous length."); 
+			outputText("\n\nBy the time you're somewhat recovered from her surprise attack, the phoenix-girl has started rocking her hips into yours, grinding her long prick into you.  You give her hefty tits a rough squeeze and push her back down, holding her down by her mammaries as you start to ride her cock.  Having gotten her thrill, the phoenix-girl submits to you, only venturing to hold onto your [hips] as you fuck her.  For your part, you bask in the sensation of her thick dick sliding in and out of your well-lubricated depths, rubbing and stroking your sensitive inner walls with its bulbous length.");
 
 			outputText("\n\nNow that you're into the swing of things, you give your phoenix lover a hand up, pulling her into a sitting position and burying her face into your [chest].  She struggles for a moment but, after seeing how nice cuddling against your warm flesh is, she relaxes into your embrace.  You start to bounce on her cock, smushing her face into your breasts at the apex of each bounce, and slamming her prick deep inside you as you fall.");
 
@@ -884,7 +884,7 @@ use namespace CoC;
 				outputText("\n\nBefore you can respond, another orgasm washes over you, and a huge load of seed explodes into the thirty-first slut to claim your seed today.  And over her shoulders, you can see dozens more harpies, half of them your own spawn, waiting their turn.");
 				EventParser.gameOver();
 				if (flags[kFLAGS.HARDCORE_MODE] <= 0) addButton(1, "Retry", retryDungeonFromBadEndPrompt);
-			}	
+			}
 		}
 
 		public function gargoyleBadEndPhoenixTower():void {
@@ -954,7 +954,7 @@ use namespace CoC;
 			outputText("You nod your head toward the great big-booty broodmother.  \"<i>Ah, the queen cunt herself,</i>\" Hel says ruefully, cracking her knuckles.  \"<i>We're gonna have some fun with you, little birdie...  Aren't we, [name]?</i>\"");
 			outputText("\n\nYou ask Hel exactly what she thinks you ought to do with the 'queen cunt.'");
 			outputText("\n\n\"<i>Well, we can start by me shoving my tail so far up her twat that she'll never have kids again.  That's a goddamn start.</i>\"");
-			//[If PC has already told her about Hakon: 
+			//[If PC has already told her about Hakon:
 			if(flags[kFLAGS.HEL_KNOWS_ABOUT_HAKON] == 1) outputText("  \"<i>Maybe snap her neck afterwards.</i>\"");
 			doNext(playerMenu);
 		}
@@ -1049,7 +1049,7 @@ use namespace CoC;
 		public function killHarpyQueen():void {
 			clearOutput();
 			outputText("You look from Hel to the Harpy Queen.  This bitch could have bred an entire army - and might try it again. You can't allow that.");
-			outputText("\n\nYou reach down and, with one quick stroke, snap her neck.  It twists easily, no harder than popping the cork of a wine bottle.  The sound of bones breaking is drowned out by the screams of harpies, screeching and cawing in horror."); 
+			outputText("\n\nYou reach down and, with one quick stroke, snap her neck.  It twists easily, no harder than popping the cork of a wine bottle.  The sound of bones breaking is drowned out by the screams of harpies, screeching and cawing in horror.");
 			outputText("\n\nHel blinks at you for a second, nods approvingly.  She turns to the aghast brood and shoos them off with her sword.  The winged bitches yell and curse, but don't dare to resist the two of you.");
 			outputText("\n\n\"<i>Well then. I guess that's that, then,</i>\" Hel says, swinging her sword over her shoulder into its sheath.");
 			outputText("\n\nYou nod your agreement.");
@@ -1115,7 +1115,7 @@ use namespace CoC;
 			outputText("You roughly toss the harpy queen to the floor and, grinning, tell her that since you're wrecking her plans to breed phoenixes, you'll just give her a brood of champion-spawn instead.  She gapes at you, wide-eyed in confusion and fear. Hel keeps her pinned down for you as you toss your [armor] aside, revealing your [cock].");
 
 			outputText("\n\nHel swings her leg around, planting herself firmly over the Harpy Queen's face. She crouches down, planting her cunt just an inch above the queen's nose, her long fiery tail swishing just above her cunt.  \"<i>You should feel honored, whore,</i>\" Hel growls, grabbing the queen by the hair.  \"<i>One egg fathered by my friend's seed is worth a thousand of your weakling sluts. Go on, thank " + player.mf("him","her") + "!</i>\"");
-			outputText("\n\nThe harpy struggles against Hel's firm grasp, until she gets a good slap from the salamander.  \"<i>Gah! Thank you!  Thank you for the honor of bearing your eggs!</i>\" she pleads, still squirming.  You laugh and grab her massive thighs, pulling them apart to reveal your prize.  Her cunt is a voluminous gash between her legs, gaping and drooling lubricant, stretched beyond human possibility by the dozens - hundreds, even - of eggs she's birthed over her long life."); 
+			outputText("\n\nThe harpy struggles against Hel's firm grasp, until she gets a good slap from the salamander.  \"<i>Gah! Thank you!  Thank you for the honor of bearing your eggs!</i>\" she pleads, still squirming.  You laugh and grab her massive thighs, pulling them apart to reveal your prize.  Her cunt is a voluminous gash between her legs, gaping and drooling lubricant, stretched beyond human possibility by the dozens - hundreds, even - of eggs she's birthed over her long life.");
 
 			outputText("\n\nYou kneel down between her legs and experimentally stick your [cock] into her; she seems to simply suck it up, swallowing your entire shaft in a heartbeat.  Gods, she's immense!  You feel like you're sticking your shaft into a black hole, a cavern that has no ending.  She groans slightly at the penetration, but has easily taken your entire length with room to spare.  You shift around a bit, pushing her legs together to contract her gaping cunt.");
 
@@ -1216,7 +1216,7 @@ use namespace CoC;
 			outputText("<b><u>Guard Hall</u></b>\n");
 			outputText("You stand in what might have been a guard room once upon a time.  Now it is a ruined, ransacked mess.  It seems not to have been used in years, and the table, chairs, and spears lined up against the wall have all rotted away to almost nothing.");
 			dungeons.setDungeonButtons(roomStairwell, null, null, null);
-			//[If Armor has not been taken/fought with: 
+			//[If Armor has not been taken/fought with:
 			if(flags[kFLAGS.WON_GOO_ARMOR_FIGHT] + flags[kFLAGS.LOST_GOO_ARMOR_FIGHT] == 0) {
 				if (flags[kFLAGS.CLEARED_HEL_TOWER] == 0) {
 					outputText("  However, a suit of half-plate armor has been left up against the eastern wall, hanging loosely on a rack; it seems to be in usable shape.");
@@ -1277,7 +1277,7 @@ use namespace CoC;
 				else {
 					if (dungeons.checkPhoenixTowerClear())
 						outputText("You're in a large room. There is a wide open stairwell. Ever since your last visit, the room is awfully empty. To the south is a pair of large, open double doors. You can go downstairs into the dungeon or climb up the stairs to the mezzanine.");
-					else 
+					else
 						outputText("There's a pile of drugged, unconscious harpies you've already defeated on the floor.  Kiri appears to have left.");
 				}
 				addButton(5, "Upstairs", roomMezzanine);
@@ -1379,7 +1379,7 @@ use namespace CoC;
 				//Room Description:
 				if (flags[kFLAGS.CLEARED_HEL_TOWER] == 0) outputText("You stand in the harpy throne room - a long, circular room dominated by a high throne surrounded by cushions and drapes.  A single long carpet flows from the heavy double doors to the throne, reminding you of a castle's great hall in days gone by.  A number of harpies cower in the shadows, afraid to oppose you further now that their mighty leader is defeated.");
 				else outputText("You stand in the harpy throne room - a long, circular room dominated by a high throne surrounded by cushions and drapes.  A single long carpet flows from the heavy double doors to the throne, reminding you of a castle's great hall in days gone by.  ");
-				//[if PC hasn't executed the queen: 
+				//[if PC hasn't executed the queen:
 				if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] == 0) {
 					outputText("  The Harpy Queen slumps in her throne, insensate.");
 					addButton(1, "Harpy Queen", harpyQueenAdvantage);

@@ -13,7 +13,8 @@ package classes.Scenes.Places.HeXinDao
 	import classes.BodyParts.Tail;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.Scenes.SceneLib;
+import classes.Races.HumanRace;
+import classes.Scenes.SceneLib;
 	import classes.Scenes.Dungeons.RiverDungeon;
 	import classes.Items.ArmorLib;
 	import classes.Items.HeadJewelryLib;
@@ -84,11 +85,11 @@ package classes.Scenes.Places.HeXinDao
 			addButton(0, "Drink", drinkAlcohol);
 			addButton(2, "Felix", shadyPerson).hint("A strange two headed chimera with two tails is sitting near the bar.");
 			addButton(4, "Adv.Guild", SceneLib.adventureGuild.BoardkeeperYangMain);
-			addButton(5, "Monkey", SceneLib.waizabi.bimboMonkey).hint("You see a massive-breasted woman sitting at a table on your right. At first, she seems human, but as you look, her monkey tail flicks up, grabbing her drink and bringing it to her lips. Her body is heavily muscled, almost amazonian.");//monkey bimbo go go - Waiz'abi
+			//addButton(5, "Monkey", SceneLib.waizabi.bimboMonkey).hint("You see a massive-breasted woman sitting at a table on your right. At first, she seems human, but as you look, her monkey tail flicks up, grabbing her drink and bringing it to her lips. Her body is heavily muscled, almost amazonian.");//monkey bimbo go go - Waiz'abi
 			if (workHoursMadam() || workHoursTemptress()) addButton(6, "5/0/0", tableNo5);
 			else addButtonDisabled(6, "5/0/0", "Table No. 5 is curently empty.");
 			if (flags[kFLAGS.MICHIKO_FOLLOWER] < 1) addButton(8, "???", SceneLib.michikoFollower.firstMeetingMichiko).hint("You see a suspicious looking squirrel in one corner, nursing a drink and small bowl of peanuts.");
-			if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 2 && (player.humanScore() >= (player.humanMaxScore() - player.internalChimeraScore()))) {
+			if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 2 && player.isPureHuman()) {
 				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 1) addButton(9, "???", firstTimeMeetingNekomataBoy).hint("A strange cat morph with two tails is sitting at one of the tables muttering to himself.");
 				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 1) addButton(9, "???", firstTimeMeetingNekomataBoy).hint("A strange cat morph with two tails is sitting at one of the tables muttering to himself.");
 			}
@@ -529,7 +530,7 @@ package classes.Scenes.Places.HeXinDao
 			if (player.hasPerk(PerkLib.FutaForm)) player.removePerk(PerkLib.FutaForm);
 			if (player.hasPerk(PerkLib.FutaFaculties)) player.removePerk(PerkLib.FutaFaculties);
 			player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
-			player.strtouspeintwislibsenCalculation2();
+			player.updateRacialAndPerkBuffs();
 			awardAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER);
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			doNext(camp.returnToCampUseFourHours);

@@ -573,6 +573,8 @@ public class SceneHunter extends BaseContent {
         addButton(13, "CampNPCs", recallScenes_NPCs);
         addButton(13, "Dungeons", recallScenes_dungeons);
         addButton(14, "Wake Up", recallWakeUpImpl);
+
+        doNext(SceneLib.vala.ValaGetsSexed);
     }
 
     private function recallScenes_NPCs():void {

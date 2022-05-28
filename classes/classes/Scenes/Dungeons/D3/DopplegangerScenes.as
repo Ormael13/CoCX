@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Dungeons.D3 
+﻿package classes.Scenes.Dungeons.D3
 {
 import classes.BaseContent;
 import classes.BodyParts.Skin;
@@ -6,6 +6,7 @@ import classes.BodyParts.Tail;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
+import classes.Races;
 
 /**
 	 * ...
@@ -14,9 +15,9 @@ import classes.PerkLib;
 	public class DopplegangerScenes extends BaseContent
 	{
 		
-		public function DopplegangerScenes() 
+		public function DopplegangerScenes()
 		{
-			
+		
 		}
 		
 		public function getDemGlasses():void
@@ -25,7 +26,7 @@ import classes.PerkLib;
 			outputText("You step into the room and move across to the optician stand. The metal door clicks shut behind you. A feeling of unease grows in your gut as you walk further into the room; the place seems gloomier and larger than it did from the door. You almost jump out of your skin as somebody suddenly emerges to your right- but of course it’s just you, reflected in the intricately decorated, oval-shaped mirror which centers the room. You smile at your own silliness, before watching your expression change to a frown. You seem very sharply focused in it; the room behind you barely seems there at all. Some kind of enchantment to refine a demon’s appearance, you guess.");
 
 			outputText("\n\nYou turn away and head over to the upright display of dark shades, pulling a pair out of their indents. They are completely reflective on the side facing away from your eyes, and the word 'Laybans' is engraved down one arm. Whatever they are used for, you know one thing for certain: you are going to look ice cool wearing them. Pleased, you turn back towards the door- and get a start. Was the standing mirror facing this way when you came in here? Maybe it is double-sided, but... you grin uneasily at your own reflection. It grins back. It looks a great deal more confident than you think your smile should look, given the circumstances. You find it difficult to look away now you are confronted with a clear, full length image of what you look like; for so long now you’ve relied on the vague, faltering surface of the stream near your camp it’s almost startling to be given such a clear picture of yourself.");
-			if (player.humanScore() > 4)  outputText("  It is honestly surprising, given everything you have encountered since you stepped through that portal what seems years ago, that you are still recognizably human. You wonder if your parents would be able to recognize the battle-hardened " + player.mf("man", "woman") +" clad in " + player.mf("his", "her") +" [armor] standing in front of you to be the wide-eyed youth they bade their heartfelt goodbyes to all that time ago, though.");
+			if (player.isRace(Races.HUMAN))  outputText("  It is honestly surprising, given everything you have encountered since you stepped through that portal what seems years ago, that you are still recognizably human. You wonder if your parents would be able to recognize the battle-hardened " + player.mf("man", "woman") +" clad in " + player.mf("his", "her") +" [armor] standing in front of you to be the wide-eyed youth they bade their heartfelt goodbyes to all that time ago, though.");
 			else outputText("  The last time you looked into such a sharp reflection you were human; a pang of regret steals through you as you consider probably not even your parents would be able to recognize the strange [race] clad in "+ player.mf("his", "her") +" [armor] standing in front of you now.");
 
 			outputText("\n\nYou continue to stare at yourself, transfixed. The image is so vivid, and yet you cannot shake the feeling that it isn’t really you - the more you look, the more you pick out details which don’t seem right. It has to be you, right? But do you really look that intense? Where did that wild look in your eye come from? Unreality washes over you as the mirror and the room seem to swim. Everything is vague except your image in the mirror, still staring back at you, seeming to move independently of you, perspective causing it to bend and distort bizarrely. When the image’s mouth splits into a grin, opens and speaks whilst yours remains shut, it is no longer surprising. It is not you.");
@@ -236,7 +237,7 @@ import classes.PerkLib;
 			outputText("\n\n\"<i>Beautiful,</i>\" you and [he] breathe. \"<i>I will do great things with this body, [name], things you couldn’t have imagined, poor soulful innocent that you were. I will take my revenge with it, but first...</i>\" [He] stares at [his] reflection smoulderingly as [he] raises [his] hands to [his] armor. [He] forces you to take off your clothes with [him], and you feel it just as clearly as if you were controlling the actions; the way your underclothes whisper off you, the way your naked flesh goose bumps in the coolness of the room");
 			if (player.hasCock()) outputText(", the way your turgid [cock] feels when you grasp it at the base.");
 			else if (player.hasVagina()) outputText(", the way your [vagina] feels when you slide your fingers along its lips.");
-			else 
+			else
 			{
 				outputText(", the way your");
 				player.createVagina();

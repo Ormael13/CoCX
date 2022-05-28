@@ -26,6 +26,7 @@ import classes.IMutationPerkType;
 import classes.IMutations.*;
 import classes.Items.ItemTags;
 import classes.Items.JewelryLib;
+import classes.Races.ElementalRace;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
@@ -147,8 +148,12 @@ public class Creature extends Utils
 		private var _armorPerk:String = "";
 		private var _armorValue:Number = 0;
 		public function get armorName():String { return _armorName; }
-		public function get armorDef():Number { return _armorDef; }
-		public function get armorMDef():Number { return _armorMDef; }
+		public function get armorDef():Number {
+			return defStat.value + _armorDef;
+		}
+		public function get armorMDef():Number {
+			return mdefStat.value + _armorMDef;
+		}
 		public function get armorPerk():String { return _armorPerk; }
 		public function get armorValue():Number { return _armorValue; }
 		public function set armorValue(value:Number):void { _armorValue = value; }
@@ -376,6 +381,8 @@ public class Creature extends Utils
 		public var maxSfPerWisStat: BuffableStat;
 		public var maxSfMultStat: BuffableStat;
 		
+		public var defStat: BuffableStat;
+		public var mdefStat: BuffableStat;
 		public var spellpowerStat: BuffableStat;
 
 		private var _stats: StatStore;
@@ -675,10 +682,6 @@ public class Creature extends Utils
 		protected function maxHP_mult():Number {
 			var maxHP_mult1:Number = 1;
 			maxHP_mult1 += (countCockSocks("green") * 0.02);
-			if (game.player.dragonScore() >= 5) maxHP_mult1 += 0.05;
-			if (game.player.dragonScore() >= 16) maxHP_mult1 += 0.05;
-			if (game.player.dragonScore() >= 24) maxHP_mult1 += 0.1;
-			if (game.player.dragonScore() >= 32) maxHP_mult1 += 0.1;
 			if (game.player.vehiclesName == "Goblin Mech Alpha") {
 				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.2;
 				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.35;
@@ -777,11 +780,6 @@ public class Creature extends Utils
 		}
 		public function maxLust_mult():Number {
 			var maxmult:Number = 1;
-			if (game.player.angelScore() >= 5) maxmult -= 0.15;
-			if (game.player.angelScore() >= 16) maxmult -= 0.3;
-			if (game.player.demonScore() >= 5) maxmult += 0.2;
-			if (game.player.demonScore() >= 11) maxmult += 0.4;
-			if (game.player.demonScore() >= 16) maxmult += 0.6;
 			if (TyrantiaFollower.TyrantiaTrainingSessions > 0.5) maxmult += 0.01 * TyrantiaFollower.TyrantiaTrainingSessions;
 			return maxmult;
 		}
@@ -1249,6 +1247,8 @@ public class Creature extends Utils
 			maxSfPerWisStat = new BuffableStat(this, 'maxsf_perwis', {base:0});
 			maxSfMultStat = new BuffableStat(this, 'maxsf_mult', {base:1});
 			
+			defStat = new BuffableStat(this, 'def', {base:0});
+			mdefStat = new BuffableStat(this, 'mdef', {base:0});
 			spellpowerStat = new BuffableStat(this, 'spellpower', {base:1});
 
 			_stats = new StatStore([
@@ -1284,7 +1284,9 @@ public class Creature extends Utils
 				maxSfPerWisStat,
 				maxSfMultStat,
 				
-				spellpowerStat
+				spellpowerStat,
+				defStat,
+				mdefStat
 			]);
 
 			skin = new Skin(this);
@@ -1548,6 +1550,16 @@ public class Creature extends Utils
 			return perkv1(mutate) > 0;
 		}
 
+		public function hasMutationCount(invert:Boolean = false):int{
+			var total:int = 0;
+				for each (var iMutate:IMutationPerkType in IMutationsLib.mutationsArray("")){
+					if (hasMutation(iMutate)) total++;
+				}
+			if (invert) total = IMutationsLib.mutationsArray("").length - total;
+
+			return total;
+		}
+
 
 		/*
 
@@ -1568,9 +1580,9 @@ public class Creature extends Utils
 		public function get statusEffects():Array {
 			return this._statusEffects.asArray();
 		}
-		public function createOrFindStatusEffect(stype:StatusEffectType):StatusEffectClass
+		public function createOrFindStatusEffect(stype:StatusEffectType,value1:Number=0,value2:Number=0,value3:Number=0,value4:Number=0):StatusEffectClass
 		{
-			return this._statusEffects.createOrFindStatusEffect(stype);
+			return this._statusEffects.createOrFindStatusEffect(stype,value1,value2,value3,value4);
 		}
 		public function createStatusEffect(stype:StatusEffectType, value1:Number, value2:Number, value3:Number, value4:Number, fireEvent:Boolean = true):StatusEffectClass
 		{
@@ -2668,7 +2680,7 @@ public class Creature extends Utils
 				return true;//dodać inne typy wrogów: nieumarli/duchy
 			return false;
 		}
-        
+  
 		//check for vagoo
 		public function hasVagina():Boolean
 		{
@@ -2743,16 +2755,34 @@ public class Creature extends Utils
 		}
 
 		//Rewritten!
+		public function looksFemale():Boolean {
+			var titSize:Number = biggestTitSize();
+			if (hasCock() && hasVagina()) // herm
+				return (titSize >= 3 ||
+						titSize == 2 && femininity >= 15 ||
+						titSize == 1 && femininity >= 40 ||
+						femininity >= 65);
+			if (hasCock()) // male
+				return (
+						titSize >= 3 && femininity >= 5 ||
+						titSize == 2 && femininity >= 35 ||
+						titSize == 1 && femininity >= 65 ||
+						femininity >= 95);
+			if (hasVagina()) // pure female
+				return (titSize > 0 ||
+						femininity >= 40);
+			// genderless
+			return (titSize >= 3 ||
+					titSize == 2 && femininity >= 15 ||
+					titSize == 1 && femininity >= 40 ||
+					femininity >= 65);
+		}
+		public function looksMale():Boolean {
+			return !looksFemale();
+		}
 		public function mf(male:String, female:String):String
 		{
-			if (hasCock() && hasVagina()) // herm
-				return (biggestTitSize() >= 3 || biggestTitSize() == 2 && femininity >= 15 || biggestTitSize() == 1 && femininity >= 40 || femininity >= 65) ? female : male;
-			if (hasCock()) // male
-				return (biggestTitSize() >= 3 && femininity >= 5 || biggestTitSize() == 2 && femininity >= 35 || biggestTitSize() == 1 && femininity >= 65 || femininity >= 95) ? female : male;
-			if (hasVagina()) // pure female
-				return (biggestTitSize() >= 3 || femininity >= 75) ? female : male;
-			// genderless
-			return (biggestTitSize() >= 3 || biggestTitSize() == 2 && femininity >= 15 || biggestTitSize() == 1 && femininity >= 40 || femininity >= 65) ? female : male;
+			return looksFemale() ? female : male;
 		}
 
 		public function maleFemaleHerm(caps:Boolean = false):String
@@ -3126,7 +3156,7 @@ public class Creature extends Utils
 		public function isAlraune():Boolean { return lowerBodyPart.isAlraune(); }
 		public function isLiliraune():Boolean { return lowerBodyPart.isLiliraune(); }
 		public function isElf():Boolean {
-			return perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3 || game.player.elfScore() >= 10 || game.player.woodElfScore() >= 17;
+			return perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3 || game.player.isRace(Races.ELF) || game.player.isRace(Races.WOODELF);
 		}
 
 		public function isFlying():Boolean {
@@ -3865,11 +3895,11 @@ public class Creature extends Utils
 			}
 			if (hasStatusEffect(StatusEffects.HurricaneDance)) chance += 25;
 			if (hasStatusEffect(StatusEffects.BladeDance)) chance += 30;
-			if (game.player.cheshireScore() >= 11) {
+			if (game.player.isRace(Races.CHESHIRE)) {
 				if (hasStatusEffect(StatusEffects.EverywhereAndNowhere)) chance += 80;
 				else chance += 30;
 			}
-			if (game.player.displacerbeastScore() >= 11) {
+			if (game.player.isRace(Races.DISPLACERBEAST)) {
 				if (hasStatusEffect(StatusEffects.Displacement)) chance += 80;
 				else chance += 30;
 			}
@@ -3881,17 +3911,35 @@ public class Creature extends Utils
 			}
 			if (game.player.hasStatusEffect(StatusEffects.Snow) && game.player.tallness < 84) chance -= 50;
 			if (hasPerk(PerkLib.ElementalBody)) {
-				if (perkv1(PerkLib.ElementalBody) == 1) {
-					if (perkv2(PerkLib.ElementalBody) == 1) chance += 10;
-					if (perkv2(PerkLib.ElementalBody) == 2) chance += 20;
-					if (perkv2(PerkLib.ElementalBody) == 3) chance += 30;
-					if (perkv2(PerkLib.ElementalBody) == 4) chance += 40;
-				}
-				if (perkv1(PerkLib.ElementalBody) == 3 || perkv1(PerkLib.ElementalBody) == 4)  {
-					if (perkv2(PerkLib.ElementalBody) == 1) chance += 5;
-					if (perkv2(PerkLib.ElementalBody) == 2) chance += 10;
-					if (perkv2(PerkLib.ElementalBody) == 3) chance += 15
-					if (perkv2(PerkLib.ElementalBody) == 4) chance += 20;
+				switch (ElementalRace.getElementAndTier(this)) {
+					case ElementalRace.SYLPH_1:
+						chance += 10;
+						break;
+					case ElementalRace.SYLPH_2:
+						chance += 20;
+						break;
+					case ElementalRace.SYLPH_3:
+						chance += 30;
+						break;
+					case ElementalRace.SYLPH_4:
+						chance += 40;
+						break;
+					case ElementalRace.IGNIS_1:
+					case ElementalRace.UNDINE_1:
+						chance += 5;
+						break;
+					case ElementalRace.IGNIS_2:
+					case ElementalRace.UNDINE_2:
+						chance += 10;
+						break;
+					case ElementalRace.IGNIS_3:
+					case ElementalRace.UNDINE_3:
+						chance += 15;
+						break;
+					case ElementalRace.IGNIS_4:
+					case ElementalRace.UNDINE_4:
+						chance += 20;
+						break;
 				}
 			}
 			if (hasStatusEffect(StatusEffects.Flying)) chance += flychance;
@@ -3953,9 +4001,9 @@ public class Creature extends Utils
 			if (hasStatusEffect(StatusEffects.Flying) && (roll < flyeavsion)) return "Flying";
 			if (hasStatusEffect(StatusEffects.HurricaneDance) && (roll < 25)) return "Hurricane Dance";
 			if (hasStatusEffect(StatusEffects.BladeDance) && (roll < 30)) return "Blade Dance";
-			if (game.player.cheshireScore() >= 11 && ((!hasStatusEffect(StatusEffects.Minimise) && (roll < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 80)))) return "Minimise";
-			if (game.player.cheshireScore() >= 11 && ((!hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 80)))) return "Phasing";
-			if (game.player.displacerbeastScore() >= 11 && ((!hasStatusEffect(StatusEffects.Displacement) && (roll < 30)) || (hasStatusEffect(StatusEffects.Displacement) && (roll < 80)))) return "Displacing";
+			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.Minimise) && (roll < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 80)))) return "Minimise";
+			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 80)))) return "Phasing";
+			if (game.player.isRace(Races.DISPLACERBEAST) && ((!hasStatusEffect(StatusEffects.Displacement) && (roll < 30)) || (hasStatusEffect(StatusEffects.Displacement) && (roll < 80)))) return "Displacing";
 			return null;
 		}
 

@@ -54,9 +54,16 @@ public class MaleSpiderMorphScene extends BaseContent
 			player.refillHunger(20, false);
 			outputText("He starts talking first, telling of how his people were a young race of transformed off-worlders.  The demons put a quick end to that, and recruited a large amount of the more aggressive driders and arachnes from his tribe.  He quickly explains that arachne are like him, but with chitinous exoskeletons covering their whole body, except for the face.  Driders on the other hand, have the body of a human from the hips up, but a giant spider body below.\n\n");
 			outputText("You talk of your own people, and the good times you had in Ingnam growing up, but you keep coming back to the sadness of losing so many young adults to becoming champions.  Eventually you go over your own selection, training, and eventual journey.  The spider-morph listens with rapt attention the whole way through.\n\n");
-			outputText("\"<i>Wow,</i>\" comments the arachnid male, \"<i>that's quite the story.  Thank you so much for talking to me today.  Here, take this.  If you ever want to have your own venom or webbing, eat as much of it as you can.  Who knows, maybe it'll help you take down the demons somehow?</i>\"\n\n");
-			outputText("He stands and gives you a bundle of pink fibers with a nervous bow.  You look down at the gossamer strands in your hands, and when you glance back up, he's gone.  ");
-			inventory.takeItem(consumables.S_GOSSR, camp.returnToCampUseOneHour);
+			outputText("\"<i>Wow,</i>\" comments the arachnid male, \"<i>that's quite the story.  Thank you so much for talking to me today.  Here, take this.  ");
+			if (rand(6) != 0) {
+				outputText("If you ever want to have your own venom or webbing, eat as much of it as you can.  Who knows, maybe it'll help you take down the demons somehow?</i>\"\n\n");
+				outputText("He stands and gives you a bundle of pink fibers with a nervous bow.  You look down at the gossamer strands in your hands, and when you glance back up, he's gone.  ");
+				inventory.takeItem(consumables.S_GOSSR, camp.returnToCampUseOneHour);
+			} else {
+				outputText("Spider webs are tougher than steel.  A skilled artisan can make an excellent fabric using it.  Or you can just twist it into a rope.  Who knows, maybe it'll help you take down the demons somehow?</i>\"\n\n");
+				outputText("He stands and gives you a bundle of white fibers with a nervous bow.  You look down at the gossamer strands in your hands, and when you glance back up, he's gone.  ");
+				inventory.takeItem(useables.T_SSILK, camp.returnToCampUseOneHour);
+			}
 		}
 
 //*Victory Pretext:rr
@@ -403,10 +410,6 @@ public class MaleSpiderMorphScene extends BaseContent
 		{
 			outputText("\n");
 			spriteSelect(SpriteDb.s_spiderguy);
-			if (player.vaginas.length == 0) {
-				outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ");
-				player.createVagina();
-			}
 			outputText("You shudder violently, your stomach growling fiercely at you. It feels as if something is moving around in your womb, and you bend over on all fours, raising your ass into the air as if it is the most natural thing in the world. A slimy green fluid starts leaking out of your " + vaginaDescript(0) + ", making a small puddle on the ground. The sensation is extremely pleasurable as you feel it running down your thighs. Groaning, you start to push out a small, smooth green ball, and the action makes your " + vaginaDescript(0) + " so much wetter.  You push out another, and another, each ball rubbing against your inner walls before dropping into the slimy pool of goo. After the sixth, you orgasm, ");
 			//[if male/herm]
 			if (player.gender != 2) outputText("spraying your cum all over the ground underneath you, each egg squeezing out and prolonging the intense feeling.\n\n");

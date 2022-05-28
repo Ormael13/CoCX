@@ -377,12 +377,9 @@ public function saveLoad(e:MouseEvent = null):void
 	//This is to clear the 'game over' block from stopping simpleChoices from working.  Loading games supercede's game over.
 
 	menu();
-	//addButton(0, "Save", saveScreen);
 	addButton(1, "Load", loadScreen);
 	addButton(2, "Delete", deleteScreen);
-	//addButton(5, "Save to File", saveToFile);
 	addButton(6, "Load File", openSave);
-	//addButton(8, "AutoSave: " + autoSaveSuffix, autosaveToggle);
 	addButton(14, "Back", EventParser.gameOver, true);
 
 	if (mainView.getButtonText( 0 ) == "Game Over")
@@ -2428,7 +2425,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				//(saveFile.data.perks as Array).splice(i,1);
 				// NEVER EVER EVER MODIFY DATA IN THE SAVE FILE LIKE THIS. EVER. FOR ANY REASON.
 			} else {
-				trace("Creating perk : " + ptype);
+//				trace("Creating perk : " + ptype);
 				var cperk:PerkClass = new PerkClass(ptype, value1, value2, value3, value4);
 
 				if (isNaN(cperk.value1)) {
@@ -2516,9 +2513,12 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		for (i = 0; i < saveFile.data.statusAffects.length; i++)
 		{
 			if (saveFile.data.statusAffects[i].statusAffectName == "Lactation EnNumbere") continue; // ugh...
-			var stype:StatusEffectType = StatusEffectType.lookupStatusEffect(saveFile.data.statusAffects[i].statusAffectName);
+			var name:String = saveFile.data.statusAffects[i].statusAffectName;
+			var stype:StatusEffectType = StatusEffectType.lookupStatusEffect(name);
 			if (stype == null){
-				CoC_Settings.error("Cannot find status effect '"+saveFile.data.statusAffects[i].statusAffectName+"'");
+				if (StatusEffectType.RemovedIds.indexOf(name) < 0) {
+					CoC_Settings.error("Cannot find status effect '" + name + "'");
+				}
 				continue;
 			}
 			player.createStatusEffect(stype,
@@ -2842,6 +2842,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			}
 		}
 
+		player.updateRacialAndPerkBuffs();
 		doNext(playerMenu);
 	}
 }

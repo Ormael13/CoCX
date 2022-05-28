@@ -69,7 +69,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 35.018;
+    public var modSaveVersion:Number = 35.020;
     public var levelCap:Number = 185;
 
     //Used to restrict random drops from overlapping uniques
@@ -382,6 +382,10 @@ public class CoC extends MovieClip
 
     public function run():void
     {
+        trace("Initializing races");
+        Races.load();
+        trace("Initializing perks");
+        PerkLib.initDependencies();
         mainMenu.mainMenu();
         this.stop();
 
