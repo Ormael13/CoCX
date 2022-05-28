@@ -494,7 +494,7 @@ public class Dreams {
         while (x > 0) {
             x--;
             if(CoC.instance.player.cocks[x].sock == "amaranthine" && CoC.instance.player.cocks[x].cockType != CockTypesEnum.DISPLACER) {
-                if(CoC.instance.player.cocks[x].cockType != CockTypesEnum.DOG) CoC.instance.player.cocks[x].knotMultiplier = 1.5;
+                if(CoC.instance.player.cocks[x].knotMultiplier < 1.5) CoC.instance.player.cocks[x].knotMultiplier = 1.5;
                 CoC.instance.player.cocks[x].cockType = CockTypesEnum.DISPLACER;
             }
         }

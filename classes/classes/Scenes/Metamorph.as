@@ -925,27 +925,53 @@ package classes.Scenes {
 			clearOutput();
 			outputText(title);
 
-			const ballsDesc: String = player.ballsDescriptArticle();
+			const ballsDesc: String = CoC.instance.playerAppearance.describeBalls();
 			outputText(player.balls > 0 ?  ballsDesc : "You have no balls.");
 			outputText("[pg]Perhaps you'd like to change this?");
 
 			openPaginatedMenu(title, accessBallsMenu, currentPage, BallsMem.Memories);
 		}
 
-		private function accessVaginaMenu(currentPage: int = 0): void {	//TODO: convert to BodyPart, opt for human, horse, shark, raiju
+		private function accessVaginasMenu(currentPage: int = 0): void {
 			const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Vagina</u></font>\n";
 
 			clearOutput();
 			outputText(title);
 
-			const vaginaDesc: String = CoC.instance.playerAppearance.describePussy();
+			const vaginaDesc: String = CoC.instance.playerAppearance.describePussies();
 			outputText(player.hasVagina() ?  vaginaDesc : "You have no vagina.");
 			outputText("[pg]Perhaps you'd like to change this?");
 
-			openPaginatedMenu(title, accessVaginaMenu, currentPage, VaginaMem.Memories);
+			var totVag:int = player.vaginas.length;
+			if (totVag > 1) {
+				menu();
+
+				for (var i: int = 0; i  < totVag; i++) {
+					addButton(i, "Vagina "+(i+1), accessVaginaMenu, 0, i).hint( player.cockDescript(i));
+				}
+				const vaginaUnlocked:Boolean = false;
+				addButtonIfTrue(totVag, "New Vagina", curry(accessVaginaMenu, 0, totVag), "You need to get a vagina first", vaginaUnlocked, "Add a vagina");
+
+				addButton(14, "Back", accessMetamorphMenu);
+			}
+			else
+				openPaginatedMenu(title, accessVaginaMenu, currentPage, VaginaMem.Memories, 0);
 		}
 
-		private function openPaginatedMenu (title: String, thisMenu: *, currentPage: int, memArray:Array): void {
+		private function accessVaginaMenu(currentPage: int = 0, vagina: int = 0): void {
+			const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Vagina</u></font>\n";
+
+			clearOutput();
+			outputText(title);
+
+			const vaginaDesc: String = CoC.instance.playerAppearance.describePussy(0);
+			outputText(player.hasVagina() ?  vaginaDesc : "You have no vagina.");
+			outputText("[pg]Perhaps you'd like to change this?");
+
+			openPaginatedMenu(title, accessVaginaMenu, currentPage, VaginaMem.Memories, 0);
+		}
+
+		private function openPaginatedMenu (title: String, thisMenu: *, currentPage: int, memArray:Array, index:int = -1): void {
 			menu();
 
 			memArray = memArray.filter(function(element: *, index: int, array: Array): Boolean {
@@ -966,10 +992,10 @@ package classes.Scenes {
 			for each (var genMem: * in pageMems) {
 				const buttonStr: String = genMem.title || "";
 				const unlocked: Boolean = GeneticMemoryStorage[genMem.id] && (genMem.taurVariant ? GeneticMemoryStorage["Taur Lower Body"] : true);
-				const partsInUse: Boolean = genMem.transformation().isPresent();
+				const partsInUse: Boolean = (index==-1? genMem.transformation().isPresent() : genMem.transformation(index).isPresent());
 				const enoughSF: Boolean = player.soulforce >= genMem.cost;
 
-				if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem).hint("Cost: " + genMem.cost + " SF" + (genMem.info ? "\n\n" + genMem.info : ""));
+				if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem, index).hint("Cost: " + genMem.cost + " SF" + (genMem.info ? "\n\n" + genMem.info : ""));
 				else if (unlocked && partsInUse) addButtonDisabled(currentButton, buttonStr, "You already have this, the metamorphosis would have no effect!");
 				else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton, buttonStr, "Cost: " + genMem.cost + " SF (You don't have enough Soulforce for this metamorphosis!)");
 				else if (!unlocked) addButtonDisabled(currentButton, buttonStr, "You haven't unlocked this metamorphosis yet!" + (genMem.lockedInfo ? "\n\n" + genMem.lockedInfo : ""));
@@ -986,10 +1012,13 @@ package classes.Scenes {
 			addButton(14, "Back", accessMetamorphMenu);
 		}
 
-		private function doMetamorph (title: String, genMem: *): void {
+		private function doMetamorph (title: String, genMem: *, index:int = -1): void {
 			clearOutput();
 			outputText(title);
-			genMem.transformation().applyEffect();
+			if (index != -1)
+				genMem.transformation(index).applyEffect();
+			else
+				genMem.transformation().applyEffect();
 			player.soulforce -= genMem.cost;
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			doNext(accessMetamorphMenu);
@@ -1001,11 +1030,7 @@ package classes.Scenes {
 			var memArray: Array = SkinMem.Memories;
 
 			memArray = memArray.filter(function(element: *, index: int, array: Array): Boolean {
-				if (element) {
-					return true;
-				}
-
-				return false;
+				return !!element;
 			});
 
 			const memsPerPage: int = memArray.length > 14 ? 12 : 14;

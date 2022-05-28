@@ -1242,10 +1242,7 @@ private function applyHangover():void {
 		BodyStateMenu();
 	}
 	public function AddCockBalls():void {
-		player.createCock();
-		player.cocks[0].cockLength = 4;
-		player.cocks[0].cockThickness = 1;
-		player.cocks[0].cockType = CockTypesEnum.HUMAN;
+		player.createCock(4);
 		player.clitLength = .25;
 		if (player.balls <= 1) {
 			player.balls = 2;

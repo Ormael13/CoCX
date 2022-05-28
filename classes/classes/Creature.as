@@ -1973,8 +1973,7 @@ public class Creature extends Utils
 			return findCockWithTypeNotIn(arr, CockTypesEnum.UNDEFINED, biggest, minSize, maxSize, compareBy);
 		}
 
-		public function cockDescript(cockIndex:int = 0):String
-		{
+		public function cockDescript(cockIndex:int = 0):String {
 			return Appearance.cockDescript(this, cockIndex);
 		}
 
@@ -1987,16 +1986,14 @@ public class Creature extends Utils
 			return Appearance.cockAdjective(cocks[index].cockType, cocks[index].cockLength, cocks[index].cockThickness, lust, cumQ(), isPierced, hasSock, isGooey, isGhastly);
 		}
 
-		public function wetness():Number
-		{
+		public function wetness():Number {
 			if (vaginas.length == 0)
 				return 0;
 			else
 				return vaginas[0].vaginalWetness;
 		}
 
-		public function vaginaType(newType:int = -1, vagNum:int = 0):int
-		{
+		public function vaginaType(newType:int = -1, vagNum:int = 0):int {
 			if (!hasVagina())
 				return -1;
 			if (newType != -1) // this handles the sandtrap pussy... for some reason.
@@ -2006,8 +2003,7 @@ public class Creature extends Utils
 			return vaginas[vagNum].type;
 		}
 
-		public function looseness(vag:Boolean = true):Number
-		{
+		public function looseness(vag:Boolean = true):Number {
 			if (vag)
 			{
 				if (vaginas.length == 0)
@@ -2021,8 +2017,7 @@ public class Creature extends Utils
 			}
 		}
 
-		public function vaginalCapacity():Number
-		{
+		public function vaginalCapacity():Number {
 			//If the player has no vaginas
 			if (vaginas.length == 0)
 				return 0;
@@ -2051,8 +2046,7 @@ public class Creature extends Utils
 			return total;
 		}
 
-		public function analCapacity():Number
-		{
+		public function analCapacity():Number {
 			var bonus:Number = 0;
 			//Centaurs = +30 capacity
 			if (isTaur())
@@ -2068,8 +2062,7 @@ public class Creature extends Utils
 			return ((bonus + statusEffectv1(StatusEffects.BonusACapacity) + 6 * ass.analLooseness * ass.analLooseness) * (1 + ass.analWetness / 10));
 		}
 
-		public function hasFuckableNipples():Boolean
-		{
+		public function hasFuckableNipples():Boolean {
 			var counter:Number = breastRows.length;
 			while (counter > 0)
 			{
@@ -2080,8 +2073,7 @@ public class Creature extends Utils
 			return false;
 		}
 
-		public function hasBreasts():Boolean
-		{
+		public function hasBreasts():Boolean {
 			if (breastRows.length > 0)
 			{
 				if (biggestTitSize() >= 1)
@@ -2090,8 +2082,7 @@ public class Creature extends Utils
 			return false;
 		}
 
-		public function hasNipples():Boolean
-		{
+		public function hasNipples():Boolean {
 			var counter:Number = breastRows.length;
 			while (counter > 0)
 			{
@@ -2102,14 +2093,12 @@ public class Creature extends Utils
 			return false;
 		}
 
-		public function lactationSpeed():Number
-		{
+		public function lactationSpeed():Number {
 			//Lactation * breastSize x 10 (milkPerBreast) determines scene
 			return biggestLactation() * biggestTitSize() * 10;
 		}
 
-		public function biggestLactation():Number
-		{
+		public function biggestLactation():Number {
 			if (breastRows.length == 0)
 				return 0;
 			var counter:Number = breastRows.length;
@@ -2493,7 +2482,18 @@ public class Creature extends Utils
 					return index;
 			}
 			//trace("Creature.findFirstCockType ERROR - searched for cocktype: " + ctype + " and could not find it.");
-			return 0;
+			return -1;
+		}
+
+		public function findFirstCockNotInType(types:Array):Number {
+			var index:Number = 0;
+
+			for (index = 0; index < cocks.length; index++) {
+				index = types.indexOf(cocks[index].cockType);
+				if (index >= 0)
+					return index;
+			}
+			return index;
 		}
 
 		/*public function findFirstCockType(type:Number = 0):Number
@@ -2519,38 +2519,7 @@ public class Creature extends Utils
 			while (counter > 0)
 			{
 				counter--;
-				//Human - > horse
-				if (cocks[counter].cockType == CockTypesEnum.HUMAN)
-				{
-					cocks[counter].cockType = CockTypesEnum.HORSE;
-					return counter;
-				}
-				//Dog - > horse
-				if (cocks[counter].cockType == CockTypesEnum.DOG)
-				{
-					cocks[counter].cockType = CockTypesEnum.HORSE;
-					return counter;
-				}
-				//Wolf - > horse
-				if (cocks[counter].cockType == CockTypesEnum.WOLF)
-				{
-					cocks[counter].cockType = CockTypesEnum.HORSE;
-					return counter;
-				}
-				//Tentacle - > horse
-				if (cocks[counter].cockType == CockTypesEnum.TENTACLE)
-				{
-					cocks[counter].cockType = CockTypesEnum.HORSE;
-					return counter;
-				}
-				//Demon -> horse
-				if (cocks[counter].cockType == CockTypesEnum.DEMON)
-				{
-					cocks[counter].cockType = CockTypesEnum.HORSE;
-					return counter;
-				}
-				//Catch-all
-				if (cocks[counter].cockType.Index > 4)
+				if (cocks[counter].cockType != CockTypesEnum.HORSE)
 				{
 					cocks[counter].cockType = CockTypesEnum.HORSE;
 					return counter;

@@ -15,6 +15,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GeneticMemories.BallsMem;
+import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
@@ -1421,11 +1422,7 @@ public final class Mutations extends MutationsHelper {
                 }
             }
             if (selectedCockValue != -1) {
-                outputText("[pg]Your " + cockDescript(indexI) + " clenches painfully, becoming achingly, throbbingly erect. A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath. ");
-                outputText("You shudder as the crown of your prick reshapes into a point, the sensations nearly too much for you. You throw back your head as the transformation completes, your knotted wolf-cock much thicker than it ever was before.");
-                outputText("  <b>You now have a wolf-cock.</b>");
-                player.cocks[selectedCockValue].cockType = CockTypesEnum.WOLF;
-                player.cocks[selectedCockValue].knotMultiplier = 1.1;
+                transformations.CockWolf(selectedCockValue).applyEffect();
                 player.cocks[selectedCockValue].thickenCock(2);
                 changes++;
             }
@@ -1873,9 +1870,7 @@ public final class Mutations extends MutationsHelper {
                     }
                     //1 dick - grow 1 and convert 1
                     else if (player.cockTotal() == 1) {
-                        outputText("[pg]Your [cock] vibrates, the veins clearly visible as it reddens and distorts.  The head narrows into a pointed tip while a gradually widening bulge forms around the base.  Where it meets your crotch, the skin bunches up around it, forming a canine-like sheath.  ");
-                        player.cocks[0].cockType = CockTypesEnum.DOG;
-                        player.cocks[0].knotMultiplier = 1.5;
+                        transformations.CockDog().applyEffect();
                         outputText("You feel something slippery wiggling inside the new sheath, and another red point peeks out.  In spite of yourself, you start getting turned on by the change, and the new dick slowly slides free, eventually stopping once the thick knot pops free.  The pair of dog-dicks hang there, leaking pre-cum and arousing you far beyond normal.");
                         player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
                         player.cocks[1].knotMultiplier = 1.7;
@@ -1885,7 +1880,7 @@ public final class Mutations extends MutationsHelper {
                     }
                     //2 dicks+ - convert first 2 to doggie-dom
                     else {
-                        outputText("[pg]Your crotch twitches, and you pull open your [armor] to get a better look.  You watch in horror and arousal as your [cock] and " + cockDescript(1) + " both warp and twist, becoming red and pointed, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.");
+                        outputText("[pg]Your crotch twitches, and you pull open your [armor] to get a better look.  You watch in horror and arousal as your [cock] and [cock 2] both warp and twist, becoming red and pointed, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.");
                         player.cocks[0].cockType = CockTypesEnum.DOG;
                         player.cocks[1].cockType = CockTypesEnum.DOG;
                         player.cocks[0].knotMultiplier = 1.4;
@@ -2028,64 +2023,23 @@ public final class Mutations extends MutationsHelper {
             //Cock Xform if player has free cocks.
             if (player.dogCocks() < player.cocks.length && ((changes < changeLimit && rand(1.6)) && type != 6 || type == 1) == 0) {
                 //Select first human cock
-                choice = player.cocks.length;
-                temp2 = 0;
-                while (choice > 0 && temp2 == 0) {
-                    choice--;
-                    //Store cock index if not a dogCock and exit loop.
-                    if (player.cocks[choice].cockType != CockTypesEnum.DOG) {
-                        temp3 = choice;
-                        //kicking out of tah loop!
-                        temp2 = 1000;
-                    }
-                }
+                choice = player.findFirstCockNotInType([CockTypesEnum.DOG])
                 //Talk about it
-                //Hooooman
-                if (player.cocks[temp3].cockType == CockTypesEnum.HUMAN) {
-                    outputText("[pg]Your " + cockDescript(temp3) + " clenches painfully, becoming achingly, throbbingly erect.  A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath.  You shudder as the crown of your " + cockDescript(temp3) + " reshapes into a point, the sensations nearly too much for you.  You throw back your head as the transformation completes, your " + Appearance.cockNoun(CockTypesEnum.DOG) + " much thicker than it ever was before.  <b>You now have a dog-cock.</b>");
-                    dynStats("lus", 5 * crit);
-                    player.addCurse("sen", 10, 1);
-                }
-                //Horse
-                if (player.cocks[temp3].cockType == CockTypesEnum.HORSE) {
-                    outputText("[pg]Your " + Appearance.cockNoun(CockTypesEnum.HORSE) + " shrinks, the extra equine length seeming to shift into girth.  The flared tip vanishes into a more pointed form, a thick knotted bulge forming just above your sheath.  <b>You now have a dog-cock.</b>");
-                    //Tweak length/thickness.
-                    if (player.cocks[temp3].cockLength > 6) player.cocks[temp3].cockLength -= 2;
-                    else player.cocks[temp3].cockLength -= .5;
-                    player.cocks[temp3].cockThickness += .5;
-
-                    dynStats("lus", 5 * crit);
-                    player.addCurse("sen", 4, 1);
-                }
-                //Tentacular Tuesday!
-                if (player.cocks[temp3].cockType == CockTypesEnum.TENTACLE) {
-                    outputText("[pg]Your " + cockDescript(temp3) + " coils in on itself, reshaping and losing its plant-like coloration as it thickens near the base, bulging out in a very canine-looking knot.  Your skin bunches painfully around the base, forming into a sheath.  <b>You now have a dog-cock.</b>");
-                    dynStats("lus", 5 * crit);
-                    player.addCurse("sen", 4, 1);
-                }
-                //Misc
-                if (player.cocks[temp3].cockType.Index > 4) {
-                    outputText("[pg]Your " + cockDescript(temp3) + " trembles, reshaping itself into a shiny red doggie-dick with a fat knot at the base.  <b>You now have a dog-cock.</b>");
-                    dynStats("lus", 5 * crit);
-                    player.addCurse("sen", 4, 1);
-                }
-                choice = 0;
                 //Demon
                 if (player.cocks[temp3].cockType == CockTypesEnum.DEMON) {
                     outputText("[pg]Your " + cockDescript(temp3) + " color shifts red for a moment and begins to swell at the base, but within moments it smooths out, retaining its distinctive demonic shape, only perhaps a bit thicker.");
                     dynStats("lus", 2 * crit);
                     player.addCurse("sen", 1, 1);
-                    choice = 1;
+                }
+                else{
+                    dynStats("lus", 5 * crit);
+                    player.addCurse("sen", 4, 1);
+                    transformations.CockDog(choice).applyEffect();
                 }
                 //Xform it!
-                player.cocks[temp3].cockType = CockTypesEnum.DOG;
-                player.cocks[temp3].knotMultiplier = 1.1;
-                player.cocks[temp3].thickenCock(2);
-                if (choice == 1) {
-                    player.cocks[temp3].cockType = CockTypesEnum.DEMON;
-                }
+                player.cocks[choice].knotMultiplier += 0.1;
+                player.cocks[choice].thickenCock(2);
                 changes++;
-
             }
             //Cum Multiplier Xform
             if (player.cumMultiplier < 2 && rand(2) == 0 && changes < changeLimit && type != 6) {
@@ -4968,65 +4922,23 @@ public final class Mutations extends MutationsHelper {
         //Snek Penis and Gina
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
             //Find the first non-lizzy dick
-            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
-                //Stop loopahn when dick be found
-                if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
-            }
-            outputText("[pg]A slow tingle warms your groin.  Before it can progress any further, you yank back your [armor] to investigate.  Your " + cockDescript(temp2) + " is changing!  It ripples loosely from ");
-            if (player.hasSheath()) outputText("sheath ");
-            else outputText("base ");
-            outputText("to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker ");
-            if (player.cor < 33) outputText("horrifies you.");
-            else if (player.cor < 66) outputText("is a little strange for your tastes.");
-            else {
-                outputText("looks like it might be more fun to receive than use on others.  ");
-                if (player.hasVagina()) outputText("Maybe you could find someone else with one to ride?");
-                else outputText("Maybe you should test it out on someone and ask them exactly how it feels?");
-            }
-            outputText("  <b>You now have a bulbous, reptile-like cock.</b>");
-            //Actually xform it nau
-            if (player.hasSheath()) {
-                player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
-                if (!player.hasSheath()) outputText("[pg]Your sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
-            } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType != CockTypesEnum.LIZARD; temp2++) { }
+            transformations.CockLizard(temp2).applyEffect();
             changes++;
             dynStats("lus", 10);
             MutagenBonus("lib", 3);
         }
         //(CHANGE OTHER DICK)
         //Requires 1 lizard cock, multiple cocks
-        if (player.cockTotal() > 1 && player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]A familiar tingle starts in your crotch, and before you can miss the show, you pull open your [armor].  As if operating on a cue, ");
-            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
-                //Stop loopahn when dick be found
-                if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
-            }
-            if (player.cockTotal() == 2) outputText("your other dick");
-            else outputText("another one of your dicks");
-            outputText(" starts to change into the strange reptilian shape you've grown familiar with.  It warps visibly, trembling and radiating pleasurable feelings back to you as the transformation progresses.  ");
-            if (player.cumQ() < 50) outputText("pre-cum oozes from the tip");
-            else if (player.cumQ() < 700) outputText("Thick pre-cum rains from the tip");
-            else outputText("A wave of pre-cum splatters on the ground");
-            outputText(" from the pleasure of the change.  In moments <b>you have a bulbous, lizard-like cock.</b>");
-            //(REMOVE SHEATH IF NECESSARY)
-            if (player.hasSheath()) {
-                player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
-                if (!player.hasSheath()) outputText("[pg]Your sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
-            } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+        if (player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
+            transformations.CockLizard(player.findFirstCockNotInType([CockTypesEnum.LIZARD])).applyEffect();
             changes++;
             dynStats("lus", 10);
             MutagenBonus("lib", 3);
         }
         //-Grows second lizard dick if only 1 dick
         if (player.lizardCocks() == 1 && player.cocks.length == 1 && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]A knot of pressure forms in your groin, forcing you off your [feet] as you try to endure it.  You examine the affected area and see a lump starting to bulge under your [skin.type], adjacent to your [cock].  The flesh darkens, turning purple");
-            if (player.hasCoat())
-                outputText(" and shedding " + player.coatColor);
-            outputText(" as the bulge lengthens, pushing out from your body.  Too surprised to react, you can only pant in pain and watch as the fleshy lump starts to take on a penis-like appearance.  <b>You're growing a second lizard-cock!</b>  It doesn't stop growing until it's just as long as its brother and the same shade of shiny purple.  A dribble of cum oozes from its tip, and you feel relief at last.");
-
-            player.createCock();
-            player.cocks[1].cockType = CockTypesEnum.LIZARD;
-            player.cocks[1].cockLength = player.cocks[0].cockLength;
+            transformations.CockLizard(1, player.cocks[0].cockLength).applyEffect();
             player.cocks[1].cockThickness = player.cocks[0].cockThickness;
             changes++;
             dynStats("lus", 10);
@@ -5237,65 +5149,23 @@ public final class Mutations extends MutationsHelper {
         //Snek Penis and Gina
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
             //Find the first non-lizzy dick
-            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
-                //Stop loopahn when dick be found
-                if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
-            }
-            outputText("[pg]A slow tingle warms your groin.  Before it can progress any further, you yank back your [armor] to investigate.  Your " + cockDescript(temp2) + " is changing!  It ripples loosely from ");
-            if (player.hasSheath()) outputText("sheath ");
-            else outputText("base ");
-            outputText("to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker ");
-            if (player.cor < 33) outputText("horrifies you.");
-            else if (player.cor < 66) outputText("is a little strange for your tastes.");
-            else {
-                outputText("looks like it might be more fun to receive than use on others.  ");
-                if (player.hasVagina()) outputText("Maybe you could find someone else with one to ride?");
-                else outputText("Maybe you should test it out on someone and ask them exactly how it feels?");
-            }
-            outputText("  <b>You now have a bulbous, reptile-like cock.</b>");
-            //Actually xform it nau
-            if (player.hasSheath()) {
-                player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
-                if (!player.hasSheath()) outputText("[pg]Your sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
-            } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType != CockTypesEnum.LIZARD; temp2++) { }
+            transformations.CockLizard(temp2).applyEffect();
             changes++;
             dynStats("lus", 10);
             MutagenBonus("lib", 3);
         }
         //(CHANGE OTHER DICK)
         //Requires 1 lizard cock, multiple cocks
-        if (player.cockTotal() > 1 && player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]A familiar tingle starts in your crotch, and before you can miss the show, you pull open your [armor].  As if operating on a cue, ");
-            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
-                //Stop loopahn when dick be found
-                if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
-            }
-            if (player.cockTotal() == 2) outputText("your other dick");
-            else outputText("another one of your dicks");
-            outputText(" starts to change into the strange reptilian shape you've grown familiar with.  It warps visibly, trembling and radiating pleasurable feelings back to you as the transformation progresses.  ");
-            if (player.cumQ() < 50) outputText("pre-cum oozes from the tip");
-            else if (player.cumQ() < 700) outputText("Thick pre-cum rains from the tip");
-            else outputText("A wave of pre-cum splatters on the ground");
-            outputText(" from the pleasure of the change.  In moments <b>you have a bulbous, lizard-like cock.</b>");
-            //(REMOVE SHEATH IF NECESSARY)
-            if (player.hasSheath()) {
-                player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
-                if (!player.hasSheath()) outputText("[pg]Your sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
-            } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+        if (player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
+            transformations.CockLizard(player.findFirstCockNotInType([CockTypesEnum.LIZARD])).applyEffect();
             changes++;
             dynStats("lus", 10);
             MutagenBonus("lib", 3);
         }
         //-Grows second lizard dick if only 1 dick
         if (player.lizardCocks() == 1 && player.cocks.length == 1 && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]A knot of pressure forms in your groin, forcing you off your [feet] as you try to endure it.  You examine the affected area and see a lump starting to bulge under your [skin.type], adjacent to your [cock].  The flesh darkens, turning purple");
-            if (player.hasCoat())
-                outputText(" and shedding " + player.coatColor);
-            outputText(" as the bulge lengthens, pushing out from your body.  Too surprised to react, you can only pant in pain and watch as the fleshy lump starts to take on a penis-like appearance.  <b>You're growing a second lizard-cock!</b>  It doesn't stop growing until it's just as long as its brother and the same shade of shiny purple.  A dribble of cum oozes from its tip, and you feel relief at last.");
-
-            player.createCock();
-            player.cocks[1].cockType = CockTypesEnum.LIZARD;
-            player.cocks[1].cockLength = player.cocks[0].cockLength;
+            transformations.CockLizard(1, player.cocks[0].cockLength).applyEffect();
             player.cocks[1].cockThickness = player.cocks[0].cockThickness;
             changes++;
             dynStats("lus", 10);
@@ -5916,8 +5786,7 @@ public final class Mutations extends MutationsHelper {
         //Change cock back to normal
         if (player.hasCock() && changes < changeLimit) {
             if (rand(3) == 0 && player.cocks[0].cockType != CockTypesEnum.HUMAN) {
-                outputText("[pg]A strange tingling begins behind your [cock], slowly crawling up across its entire length.  While neither particularly arousing nor uncomfortable, you do shift nervously as the feeling intensifies.  You resist the urge to undo your [armor] to check, but by the feel of it, your penis is shifting form.  Eventually the transformative sensation fades, <b>leaving you with a completely human penis.</b>");
-                player.cocks[0].cockType = CockTypesEnum.HUMAN;
+                transformations.CockHuman().applyEffect();
                 changes++;
             }
         }
@@ -6144,13 +6013,7 @@ public final class Mutations extends MutationsHelper {
             //loop through and find a non-cat wang.
             for (var i:Number = 0; i < (player.cockTotal()) && player.cocks[i].cockType == CockTypesEnum.CAT; i++) {
             }
-            outputText("[pg]Your " + cockDescript(i) + " swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum.  ");
-            if (!player.hasSheath()) {
-                outputText("Then, it begins to shrink and sucks itself inside your body.  Within a few moments, a fleshy sheath is formed.");
-                if (player.balls > 0) outputText("  Thankfully, your balls appear untouched.");
-            } else outputText("Then, it disappears back into your sheath.");
-            player.cocks[i].cockType = CockTypesEnum.CAT;
-            player.cocks[i].knotMultiplier = 1;
+            transformations.CockCat(i).applyEffect();
             changes++;
         }
         //Cat penorz shrink
@@ -6426,13 +6289,7 @@ public final class Mutations extends MutationsHelper {
             //loop through and find a non-cat wang.
             for (var i:Number = 0; i < (player.cockTotal()) && player.cocks[i].cockType == CockTypesEnum.CAT; i++) {
             }
-            outputText("[pg]Your " + cockDescript(i) + " swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum.  ");
-            if (!player.hasSheath()) {
-                outputText("Then, it begins to shrink and sucks itself inside your body.  Within a few moments, a fleshy sheath is formed.");
-                if (player.balls > 0) outputText("  Thankfully, your balls appear untouched.");
-            } else outputText("Then, it disappears back into your sheath.");
-            player.cocks[i].cockType = CockTypesEnum.CAT;
-            player.cocks[i].knotMultiplier = 1;
+            transformations.CockCat(i).applyEffect();
             changes++;
         }
         //Cat penorz shrink
@@ -6710,13 +6567,7 @@ public final class Mutations extends MutationsHelper {
             //loop through and find a non-cat wang.
             for (var i:Number = 0; i < (player.cockTotal()) && player.cocks[i].cockType == CockTypesEnum.CAT; i++) {
             }
-            outputText("[pg]Your " + cockDescript(i) + " swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum.  ");
-            if (!player.hasSheath()) {
-                outputText("Then, it begins to shrink and sucks itself inside your body.  Within a few moments, a fleshy sheath is formed.");
-                if (player.balls > 0) outputText("  Thankfully, your balls appear untouched.");
-            } else outputText("Then, it disappears back into your sheath.");
-            player.cocks[i].cockType = CockTypesEnum.CAT;
-            player.cocks[i].knotMultiplier = 1;
+            transformations.CockCat(i).applyEffect();
             changes++;
         }
         //Cat penorz shrink
@@ -7008,13 +6859,7 @@ public final class Mutations extends MutationsHelper {
             //loop through and find a non-cat wang.
             for (var i:Number = 0; i < (player.cockTotal()) && player.cocks[i].cockType == CockTypesEnum.CAT; i++) {
             }
-            outputText("[pg]Your " + cockDescript(i) + " swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum.  ");
-            if (!player.hasSheath()) {
-                outputText("Then, it begins to shrink and sucks itself inside your body.  Within a few moments, a fleshy sheath is formed.");
-                if (player.balls > 0) outputText("  Thankfully, your balls appear untouched.");
-            } else outputText("Then, it disappears back into your sheath.");
-            player.cocks[i].cockType = CockTypesEnum.CAT;
-            player.cocks[i].knotMultiplier = 1;
+            transformations.CockCat(i).applyEffect();
             changes++;
         }
         //Cat penorz shrink
@@ -7227,65 +7072,23 @@ public final class Mutations extends MutationsHelper {
         //-Lizard dick - first one
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
             //Find the first non-lizzy dick
-            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
-                //Stop loopahn when dick be found
-                if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
-            }
-            outputText("[pg]A slow tingle warms your groin.  Before it can progress any further, you yank back your [armor] to investigate.  Your " + cockDescript(temp2) + " is changing!  It ripples loosely from ");
-            if (player.hasSheath()) outputText("sheath ");
-            else outputText("base ");
-            outputText("to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker ");
-            if (player.cor < 33) outputText("horrifies you.");
-            else if (player.cor < 66) outputText("is a little strange for your tastes.");
-            else {
-                outputText("looks like it might be more fun to receive than use on others.  ");
-                if (player.hasVagina()) outputText("Maybe you could find someone else with one to ride?");
-                else outputText("Maybe you should test it out on someone and ask them exactly how it feels?");
-            }
-            outputText("  <b>You now have a bulbous, lizard-like cock.</b>");
-            //Actually xform it nau
-            if (player.hasSheath()) {
-                player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
-                if (!player.hasSheath()) outputText("[pg]Your sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
-            } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType != CockTypesEnum.LIZARD; temp2++) { }
+            transformations.CockLizard(temp2).applyEffect();
             changes++;
             dynStats("lus", 10);
             MutagenBonus("lib", 3);
         }
         //(CHANGE OTHER DICK)
         //Requires 1 lizard cock, multiple cocks
-        if (player.cockTotal() > 1 && player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]A familiar tingle starts in your crotch, and before you can miss the show, you pull open your [armor].  As if operating on a cue, ");
-            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
-                //Stop loopahn when dick be found
-                if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
-            }
-            if (player.cockTotal() == 2) outputText("your other dick");
-            else outputText("another one of your dicks");
-            outputText(" starts to change into the strange reptilian shape you've grown familiar with.  It warps visibly, trembling and radiating pleasurable feelings back to you as the transformation progresses.  ");
-            if (player.cumQ() < 50) outputText("pre-cum oozes from the tip");
-            else if (player.cumQ() < 700) outputText("Thick pre-cum rains from the tip");
-            else outputText("A wave of pre-cum splatters on the ground");
-            outputText(" from the pleasure of the change.  In moments <b>you have a bulbous, lizard-like cock.</b>");
-            //(REMOVE SHEATH IF NECESSARY)
-            if (player.hasSheath()) {
-                player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
-                if (!player.hasSheath()) outputText("[pg]Your sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
-            } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+        if (player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
+            transformations.CockLizard(player.findFirstCockNotInType([CockTypesEnum.LIZARD])).applyEffect();
             changes++;
             dynStats("lus", 10);
             MutagenBonus("lib", 3);
         }
         //-Grows second lizard dick if only 1 dick
         if (player.lizardCocks() == 1 && player.cocks.length == 1 && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]A knot of pressure forms in your groin, forcing you off your [feet] as you try to endure it.  You examine the affected area and see a lump starting to bulge under your [skin.type], adjacent to your [cock].  The flesh darkens, turning purple");
-            if (player.hasCoat())
-                outputText(" and shedding " + player.coatColor);
-            outputText(" as the bulge lengthens, pushing out from your body.  Too surprised to react, you can only pant in pain and watch as the fleshy lump starts to take on a penis-like appearance.  <b>You're growing a second lizard-cock!</b>  It doesn't stop growing until it's just as long as its brother and the same shade of shiny purple.  A dribble of cum oozes from its tip, and you feel relief at last.");
-
-            player.createCock();
-            player.cocks[1].cockType = CockTypesEnum.LIZARD;
-            player.cocks[1].cockLength = player.cocks[0].cockLength;
+            transformations.CockLizard(1, player.cocks[0].cockLength).applyEffect();
             player.cocks[1].cockThickness = player.cocks[0].cockThickness;
             changes++;
             dynStats("lus", 10);
@@ -7552,51 +7355,24 @@ public final class Mutations extends MutationsHelper {
         //-Lizard dick - first one
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
             //Find the first non-lizzy dick
-            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
-                //Stop loopahn when dick be found
-                if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
-            }
-            outputText("[pg]A slow tingle warms your groin.  Before it can progress any further, you yank back your [armor] to investigate.  Your " + cockDescript(temp2) + " is changing!  It ripples loosely from ");
-            if (player.hasSheath()) outputText("sheath ");
-            else outputText("base ");
-            outputText("to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker ");
-            if (player.cor < 33) outputText("horrifies you.");
-            else if (player.cor < 66) outputText("is a little strange for your tastes.");
-            else {
-                outputText("looks like it might be more fun to receive than use on others.  ");
-                if (player.hasVagina()) outputText("Maybe you could find someone else with one to ride?");
-                else outputText("Maybe you should test it out on someone and ask them exactly how it feels?");
-            }
-            outputText("  <b>You now have a bulbous, lizard-like cock.</b>");
-            //Actually xform it nau
-            if (player.hasSheath()) {
-                player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
-                if (!player.hasSheath()) outputText("[pg]Your sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
-            } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType != CockTypesEnum.LIZARD; temp2++) { }
+            transformations.CockLizard(temp2).applyEffect();
             changes++;
             dynStats("lus", 10);
             MutagenBonus("lib", 3);
         }
         //(CHANGE OTHER DICK)
         //Requires 1 lizard cock, multiple cocks
-        if (player.cockTotal() > 1 && player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]A familiar tingle starts in your crotch, and before you can miss the show, you pull open your [armor].  As if operating on a cue, ");
-            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
-                //Stop loopahn when dick be found
-                if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
-            }
-            if (player.cockTotal() == 2) outputText("your other dick");
-            else outputText("another one of your dicks");
-            outputText(" starts to change into the strange reptilian shape you've grown familiar with.  It warps visibly, trembling and radiating pleasurable feelings back to you as the transformation progresses.  ");
-            if (player.cumQ() < 50) outputText("pre-cum oozes from the tip");
-            else if (player.cumQ() < 700) outputText("Thick pre-cum rains from the tip");
-            else outputText("A wave of pre-cum splatters on the ground");
-            outputText(" from the pleasure of the change.  In moments <b>you have a bulbous, lizard-like cock.</b>");
-            //(REMOVE SHEATH IF NECESSARY)
-            if (player.hasSheath()) {
-                player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
-                if (!player.hasSheath()) outputText("[pg]Your sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
-            } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+        if (player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
+            transformations.CockLizard(player.findFirstCockNotInType([CockTypesEnum.LIZARD])).applyEffect();
+            changes++;
+            dynStats("lus", 10);
+            MutagenBonus("lib", 3);
+        }
+        //-Grows second lizard dick if only 1 dick
+        if (player.lizardCocks() == 1 && player.cocks.length == 1 && rand(4) == 0 && changes < changeLimit) {
+            transformations.CockLizard(1, player.cocks[0].cockLength).applyEffect();
+            player.cocks[1].cockThickness = player.cocks[0].cockThickness;
             changes++;
             dynStats("lus", 10);
             MutagenBonus("lib", 3);
@@ -7776,16 +7552,8 @@ public final class Mutations extends MutationsHelper {
 
         //Glowing Lizard Cock:
         if (player.cockTotal() > 0 && player.cocks[0].cockType != CockTypesEnum.CAVE_WYRM && rand(4) == 0 && changes < changeLimit) {
-            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
-                //Stop loopahn when dick be found
-                if (player.cocks[temp2].cockType != CockTypesEnum.CAVE_WYRM) break;
-            }
-            outputText("[pg]You feel a sudden itch in your cock and undress as an irrepressible desire to masturbate takes hold of you. You keep stroking your twitching cock, moaning as you cum neon blue fluids. Wait, what? When you inspect your \"cock descript\" you discover it has not only changed color to neon blue but reshaped into a lizard cock. Furthermore it seems to naturally glow in the dark like the fluids that comes out of it. <b>You now have a neon blue lizard cock that glow in the dark.</b>");
-            //(REMOVE SHEATH IF NECESSARY)
-            if (player.hasSheath()) {
-                player.cocks[temp2].cockType = CockTypesEnum.CAVE_WYRM;
-                outputText("[pg]Your sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
-            } else player.cocks[temp2].cockType = CockTypesEnum.CAVE_WYRM;
+            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType != CockTypesEnum.CAVE_WYRM; temp2++) { }
+            transformations.CockCaveWyrm(temp2).applyEffect();
             changes++;
             dynStats("lus", 10);
             MutagenBonus("lib", 3);
@@ -7979,51 +7747,24 @@ public final class Mutations extends MutationsHelper {
         //-Lizard dick - first one
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
             //Find the first non-lizzy dick
-            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
-                //Stop loopahn when dick be found
-                if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
-            }
-            outputText("[pg]A slow tingle warms your groin.  Before it can progress any further, you yank back your [armor] to investigate.  Your " + cockDescript(temp2) + " is changing!  It ripples loosely from ");
-            if (player.hasSheath()) outputText("sheath ");
-            else outputText("base ");
-            outputText("to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker ");
-            if (player.cor < 33) outputText("horrifies you.");
-            else if (player.cor < 66) outputText("is a little strange for your tastes.");
-            else {
-                outputText("looks like it might be more fun to receive than use on others.  ");
-                if (player.hasVagina()) outputText("Maybe you could find someone else with one to ride?");
-                else outputText("Maybe you should test it out on someone and ask them exactly how it feels?");
-            }
-            outputText("  <b>You now have a bulbous, lizard-like cock.</b>");
-            //Actually xform it nau
-            if (player.hasSheath()) {
-                player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
-                if (!player.hasSheath()) outputText("[pg]Your sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
-            } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType != CockTypesEnum.LIZARD; temp2++) { }
+            transformations.CockLizard(temp2).applyEffect();
             changes++;
             dynStats("lus", 10);
             MutagenBonus("lib", 3);
         }
         //(CHANGE OTHER DICK)
         //Requires 1 lizard cock, multiple cocks
-        if (player.cockTotal() > 1 && player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]A familiar tingle starts in your crotch, and before you can miss the show, you pull open your [armor].  As if operating on a cue, ");
-            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
-                //Stop loopahn when dick be found
-                if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
-            }
-            if (player.cockTotal() == 2) outputText("your other dick");
-            else outputText("another one of your dicks");
-            outputText(" starts to change into the strange reptilian shape you've grown familiar with.  It warps visibly, trembling and radiating pleasurable feelings back to you as the transformation progresses.  ");
-            if (player.cumQ() < 50) outputText("pre-cum oozes from the tip");
-            else if (player.cumQ() < 700) outputText("Thick pre-cum rains from the tip");
-            else outputText("A wave of pre-cum splatters on the ground");
-            outputText(" from the pleasure of the change.  In moments <b>you have a bulbous, lizard-like cock.</b>");
-            //(REMOVE SHEATH IF NECESSARY)
-            if (player.hasSheath()) {
-                player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
-                if (!player.hasSheath()) outputText("[pg]Your sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
-            } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+        if (player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
+            transformations.CockLizard(player.findFirstCockNotInType([CockTypesEnum.LIZARD])).applyEffect();
+            changes++;
+            dynStats("lus", 10);
+            MutagenBonus("lib", 3);
+        }
+        //-Grows second lizard dick if only 1 dick
+        if (player.lizardCocks() == 1 && player.cocks.length == 1 && rand(4) == 0 && changes < changeLimit) {
+            transformations.CockLizard(1, player.cocks[0].cockLength).applyEffect();
+            player.cocks[1].cockThickness = player.cocks[0].cockThickness;
             changes++;
             dynStats("lus", 10);
             MutagenBonus("lib", 3);
@@ -8788,10 +8529,9 @@ public final class Mutations extends MutationsHelper {
         //Change cock if you have a penis.
         if (changes < changeLimit && player.hasCock() && player.countCocksOfType(CockTypesEnum.AVIAN) < player.cockTotal() && rand(type == 1 ? 4 : 10) == 0) { //2.5x chance if magic seed.
             changes++;
-            outputText("[pg]You feel a strange tingling sensation in your cock as erection forms. You " + player.clothedOrNakedLower("open up your [armor] and", "") + " look down to see " + (player.cockTotal() == 1 ? "your cock" : "one of your cocks") + " shifting! By the time the transformation's complete, you notice it's tapered, red, and ends in a tip. When you're not aroused, your cock rests nicely in a newly-formed sheath. <b>You now have an avian penis!</b>");
             for (var i:int = 0; i < player.cocks.length; i++) {
                 if (player.cocks[i].cockType != CockTypesEnum.AVIAN) {
-                    player.cocks[i].cockType = CockTypesEnum.AVIAN;
+                    transformations.CockAvian(i).applyEffect();
                     break;
                 }
             }
@@ -8998,36 +8738,29 @@ public final class Mutations extends MutationsHelper {
             for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
                 if (player.cocks[temp2].cockType != CockTypesEnum.AVIAN) break;
             }
-            outputText("[pg]A warm tingling on your nethers makes you check down if the transformative had an effect on your genitals. Giving them a thorough check, you notice that, effectively, your " + cockDescript(temp2) + " has changed.");
-            outputText("[pg]It has acquired a reddish-pink coloration, with a smooth texture. The most notorious thing is its tapered, albeit slightly wavy shape, as well as its pointy head. All in all it has a very bird-like appearance.  <b>Seems like you’ve got an avian penis!</b>");
-            player.cocks[temp2].cockType = CockTypesEnum.AVIAN;
+            transformations.CockAvian(temp2).applyEffect();
             changes++;
         }
-        if (player.cockTotal() > 1 && player.avianCocks() > 0 && player.cockTotal() > player.avianCocks() && type == 0 && rand(3) == 0 && changes < changeLimit) {
-            outputText("[pg]A warm tingling on your nethers makes you check down if the transformative had an effect on your genitals. Giving them a thorough check, you notice that, effectively, your " + cockDescript(temp2) + " has changed.");
+        if (player.cockTotal() > player.avianCocks() && type == 0 && rand(3) == 0 && changes < changeLimit) {
             for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
                 if (player.cocks[temp2].cockType != CockTypesEnum.AVIAN) break;
             }
-            outputText("[pg]It has acquired a reddish-pink coloration, with a smooth texture. The most notorious thing is its tapered, albeit slightly wavy shape, as well as its pointy head. All in all it has a very bird-like appearance.  <b>Seems like you’ve got an avian penis!</b>");
-            player.cocks[temp2].cockType = CockTypesEnum.AVIAN;
+            transformations.CockAvian(temp2).applyEffect();
             changes++;
         }
         if (player.gryphonCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && type == 1 && rand(3) == 0) {
             for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
                 if (player.cocks[temp2].cockType != CockTypesEnum.GRYPHON) break;
             }
-            outputText("[pg]The magic of the statue feels more focused now, as it were to change a small but specific area of your body, and it does, as your nethers tinge under its effect.[pg]Giving them a glimpse, the first thing that becomes obvious if that your " + cockDescript(temp2) + " became a bit ticker, but albeit it retained it’s avian, tapered shape, it’s slightly wavy form became more straight. ");
-            outputText("It’s reddish-pink color became pink and it’s tip became more conical. Nevertheless, the main chance manifested across its length, where small, soft barbs grew, giving your member an the appearance of an avian-feline hybrid one.  <b>You'll have to try around your new gryphon cock to know how’ they’ll feel to use,</b> but you’re sure that it’ll be pleasant both for you and your partners.");
-            player.cocks[temp2].cockType = CockTypesEnum.GRYPHON;
+            outputText("[pg]The magic of the statue feels more focused now, as it were to change a small but specific area of your body, and it does.");
+            transformations.CockGryphon(temp2).applyEffect();
             changes++;
         }
-        if (player.cockTotal() > 1 && player.gryphonCocks() > 0 && player.cockTotal() > player.gryphonCocks() && type == 1 && rand(3) == 0 && changes < changeLimit) {
+        if (player.cockTotal() > player.gryphonCocks() && type == 1 && rand(3) == 0 && changes < changeLimit) {
             for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
                 if (player.cocks[temp2].cockType != CockTypesEnum.GRYPHON) break;
             }
-            outputText("[pg]The magic of the statue feels more focused now, as it were to change a small but specific area of your body, and it does, as your nethers tinge under its effect.[pg]Giving them a glimpse, the first thing that becomes obvious if that your " + cockDescript(temp2) + " became a bit ticker, but albeit it retained it’s avian, tapered shape, it’s slightly wavy form became more straight. ");
-            outputText("It’s reddish-pink color became pink and it’s tip became more conical. Nevertheless, the main chance manifested across its length, where small, soft barbs grew, giving your member an the appearance of an avian-feline hybrid one.  <b>You'll have to try around your new gryphon cock to know how’ they’ll feel to use,</b> but you’re sure that it’ll be pleasant both for you and your partners.");
-            player.cocks[temp2].cockType = CockTypesEnum.GRYPHON;
+            transformations.CockGryphon(temp2).applyEffect();
             changes++;
         }
         //Legs
@@ -9275,20 +9008,9 @@ public final class Mutations extends MutationsHelper {
             }
             //COCK TF!
             if (player.kangaCocks() < player.cockTotal() && (type == 1 && rand(2) == 0) && changes < changeLimit) {
-                outputText("[pg]You feel a sharp pinch at the end of your penis and whip down your clothes to check.  Before your eyes, the tip of it collapses into a narrow point and the shaft begins to tighten behind it, assuming a conical shape before it retracts into ");
-                if (player.hasSheath()) outputText("your sheath");
-                else outputText("a sheath that forms at the base of it");
-                outputText(".  <b>You now have a kangaroo-penis!</b>");
-                var cockIdx:int = 0;
+                var cockIdx:int = player.findFirstCockNotInType([CockTypesEnum.KANGAROO]);
                 //Find first non-roocock!
-                while (cockIdx < player.cockTotal()) {
-                    if (player.cocks[cockIdx].cockType != CockTypesEnum.KANGAROO) {
-                        player.cocks[cockIdx].cockType = CockTypesEnum.KANGAROO;
-                        player.cocks[cockIdx].knotMultiplier = 1;
-                        break;
-                    }
-                    cockIdx++;
-                }
+                if (cockIdx != -1) transformations.CockKangaroo(cockIdx).applyEffect();
                 changes++;
             }
         }
@@ -9800,8 +9522,7 @@ public final class Mutations extends MutationsHelper {
         //Effect script a:  (human wang)
         if (player.hasCock() && changes < changeLimit) {
             if (rand(3) == 0 && player.cocks[0].cockType != CockTypesEnum.HUMAN) {
-                outputText("[pg]A strange tingling begins behind your [cock], slowly crawling up across its entire length.  While neither particularly arousing nor uncomfortable, you do shift nervously as the feeling intensifies.  You resist the urge to undo your [armor] to check, but by the feel of it, your penis is shifting form.  Eventually the transformative sensation fades, <b>leaving you with a completely human penis.</b>");
-                player.cocks[0].cockType = CockTypesEnum.HUMAN;
+                transformations.CockHuman().applyEffect();
                 changes++;
             }
         }
@@ -10166,15 +9887,12 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
-        if (rand(3) == 0 && changes < changeLimit && player.cocks.length > 0 && player.cocks[0].cockType != CockTypesEnum.PIG) {
-            if (player.cocks.length == 1) { //Single cock
-                outputText("[pg]You feel an uncomfortable pinching sensation in your [cock]. " + player.clothedOrNakedLower("You pull open your [armor]", "You look down at your exposed groin") + ", watching as it warps and changes. As the transformation completes, you’re left with a shiny, pinkish red pecker ending in a prominent corkscrew at the tip. <b>You now have a pig penis!</b>");
-                player.cocks[0].cockType = CockTypesEnum.PIG;
-            } else { //Multiple cocks
-                outputText("[pg]You feel an uncomfortable pinching sensation in one of your cocks. You pull open your [armor], watching as it warps and changes. As the transformation completes, you’re left with a shiny pinkish red pecker ending in a prominent corkscrew at the tip. <b>You now have a pig penis!</b>");
-                player.cocks[rand(player.cocks.length + 1)].cockType = CockTypesEnum.PIG;
+        if (rand(3) == 0 && changes < changeLimit && player.cocks.length > player.pigCocks()) {
+            var temp = player.findFirstCockNotInType([CockTypesEnum.PIG]);
+            if (temp != -1) {
+                transformations.CockPig(temp).applyEffect();
+                changes++;
             }
-            changes++;
         }
         //Physical
         if (player.lowerBody != LowerBody.ORC && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
@@ -10296,10 +10014,7 @@ public final class Mutations extends MutationsHelper {
                 //Stop loopahn when dick be found
                 if (player.cocks[temp2].cockType != CockTypesEnum.RAIJU) break;
             }
-            outputText("[pg]You feel a sudden itch in your cock and undress as an irrepressible desire to masturbate takes hold of you. You keep stroking your twitching cock, moaning as you cum neon blue fluids. Wait, what? When you inspect your [cock] you discover its tip not only has changed color to neon blue but is now tappered with a sheath like that of a raiju. Furthermore it seems to naturally glow in the dark like the plasma that naturaly drips out of it. <b>You now have a neon blue raiju cock that glow in the dark.</b>");
-            //(REMOVE SHEATH IF NECESSARY)
-            player.cocks[temp2].cockType = CockTypesEnum.RAIJU;
-            player.cocks[temp2].knotMultiplier = 1.25;
+            transformations.CockRaiju(temp2).applyEffect();
             changes++;
             dynStats("lus", 10);
             MutagenBonus("lib", 3);
@@ -11283,37 +10998,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (choices.length != 0) {
                 var select:int = choices[rand(choices.length)];
-                if (player.cocks[select].cockType == CockTypesEnum.HUMAN) {
-                    outputText("[pg]Your " + cockDescript(select) + " clenches painfully, becoming achingly, throbbingly erect.  A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a vulpine-looking sheath.  You shudder as the crown of your " + cockDescript(select) + " reshapes into a point, the sensations nearly too much for you.  You throw back your head as the transformation completes, your " + Appearance.cockNoun(CockTypesEnum.FOX) + " much thicker than it ever was before.  <b>You now have a fox-cock.</b>");
-                    player.cocks[select].cockThickness += .3;
-                    dynStats("lus", 5);
-                    player.addCurse("sen", 10, 1);
-                }
-                //Horse
-                else if (player.cocks[select].cockType == CockTypesEnum.HORSE) {
-                    outputText("[pg]Your " + Appearance.cockNoun(CockTypesEnum.HORSE) + " shrinks, the extra equine length seeming to shift into girth.  The flared tip vanishes into a more pointed form, a thick knotted bulge forming just above your sheath.  <b>You now have a fox-cock.</b>");
-                    //Tweak length/thickness.
-                    if (player.cocks[select].cockLength > 6) player.cocks[select].cockLength -= 2;
-                    else player.cocks[select].cockLength -= .5;
-                    player.cocks[select].cockThickness += .5;
-
-                    dynStats("lus", 5);
-                    player.addCurse("sen", 4, 1);
-                }
-                //Tentacular Tuesday!
-                else if (player.cocks[select].cockType == CockTypesEnum.TENTACLE) {
-                    outputText("[pg]Your " + cockDescript(select) + " coils in on itself, reshaping and losing its plant-like coloration as thickens near the base, bulging out in a very canine-looking knot.  Your skin bunches painfully around the base, forming into a sheath.  <b>You now have a fox-cock.</b>");
-                    dynStats("lus", 10);
-                    player.addCurse("sen", 4, 1);
-                }
-                //Misc
-                else {
-                    outputText("[pg]Your " + cockDescript(select) + " trembles, reshaping itself into a shiny red fox-shaped dick with a fat knot at the base.  <b>You now have a fox-cock.</b>");
-                    dynStats("lus", 10);
-                    player.addCurse("sen", 4, 1);
-                }
-                player.cocks[select].cockType = CockTypesEnum.FOX;
-                player.cocks[select].knotMultiplier = 1.25;
+                transformations.CockFox(select).applyEffect();
                 changes++;
             }
 
@@ -11544,51 +11229,24 @@ public final class Mutations extends MutationsHelper {
         //-Lizard dick - first one
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
             //Find the first non-lizzy dick
-            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
-                //Stop loopahn when dick be found
-                if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
-            }
-            outputText("[pg]A slow tingle warms your groin.  Before it can progress any further, you yank back your [armor] to investigate.  Your " + cockDescript(temp2) + " is changing!  It ripples loosely from ");
-            if (player.hasSheath()) outputText("sheath ");
-            else outputText("base ");
-            outputText("to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker ");
-            if (player.cor < 33) outputText("horrifies you.");
-            else if (player.cor < 66) outputText("is a little strange for your tastes.");
-            else {
-                outputText("looks like it might be more fun to receive than use on others.  ");
-                if (player.hasVagina()) outputText("Maybe you could find someone else with one to ride?");
-                else outputText("Maybe you should test it out on someone and ask them exactly how it feels?");
-            }
-            outputText("  <b>You now have a bulbous, lizard-like cock.</b>");
-            //Actually xform it nau
-            if (player.hasSheath()) {
-                player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
-                if (!player.hasSheath()) outputText("[pg]Your sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
-            } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType != CockTypesEnum.LIZARD; temp2++) { }
+            transformations.CockLizard(temp2).applyEffect();
             changes++;
             dynStats("lus", 10);
             MutagenBonus("lib", 3);
         }
         //(CHANGE OTHER DICK)
         //Requires 1 lizard cock, multiple cocks
-        if (player.cockTotal() > 1 && player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]A familiar tingle starts in your crotch, and before you can miss the show, you pull open your [armor].  As if operating on a cue, ");
-            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
-                //Stop loopahn when dick be found
-                if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
-            }
-            if (player.cockTotal() == 2) outputText("your other dick");
-            else outputText("another one of your dicks");
-            outputText(" starts to change into the strange reptilian shape you've grown familiar with.  It warps visibly, trembling and radiating pleasurable feelings back to you as the transformation progresses.  ");
-            if (player.cumQ() < 50) outputText("pre-cum oozes from the tip");
-            else if (player.cumQ() < 700) outputText("Thick pre-cum rains from the tip");
-            else outputText("A wave of pre-cum splatters on the ground");
-            outputText(" from the pleasure of the change.  In moments <b>you have a bulbous, lizard-like cock.</b>");
-            //(REMOVE SHEATH IF NECESSARY)
-            if (player.hasSheath()) {
-                player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
-                if (!player.hasSheath()) outputText("[pg]Your sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
-            } else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
+        if (player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
+            transformations.CockLizard(player.findCockNotIn([CockTypesEnum.LIZARD])).applyEffect();
+            changes++;
+            dynStats("lus", 10);
+            MutagenBonus("lib", 3);
+        }
+        //-Grows second lizard dick if only 1 dick
+        if (player.lizardCocks() == 1 && player.cocks.length == 1 && rand(4) == 0 && changes < changeLimit) {
+            transformations.CockLizard(1, player.cocks[0].cockLength).applyEffect();
+            player.cocks[1].cockThickness = player.cocks[0].cockThickness;
             changes++;
             dynStats("lus", 10);
             MutagenBonus("lib", 3);
@@ -13260,15 +12918,12 @@ public final class Mutations extends MutationsHelper {
         // TRANSFORMATIONS
         //-----------------------
         //Gain pig cock, independent of other pig TFs.
-        if (rand(3) == 0 && changes < changeLimit && player.cocks.length > 0 && player.cocks[0].cockType != CockTypesEnum.PIG) {
-            if (player.cocks.length == 1) { //Single cock
-                outputText("[pg]You feel an uncomfortable pinching sensation in your [cock]. " + player.clothedOrNakedLower("You pull open your [armor]", "You look down at your exposed groin") + ", watching as it warps and changes. As the transformation completes, you’re left with a shiny, pinkish red pecker ending in a prominent corkscrew at the tip. <b>You now have a pig penis!</b>");
-                player.cocks[0].cockType = CockTypesEnum.PIG;
-            } else { //Multiple cocks
-                outputText("[pg]You feel an uncomfortable pinching sensation in one of your cocks. You pull open your [armor], watching as it warps and changes. As the transformation completes, you’re left with a shiny pinkish red pecker ending in a prominent corkscrew at the tip. <b>You now have a pig penis!</b>");
-                player.cocks[rand(player.cocks.length + 1)].cockType = CockTypesEnum.PIG;
+        if (rand(3) == 0 && changes < changeLimit && player.cocks.length > player.pigCocks()) {
+            var temp = player.findFirstCockNotInType([CockTypesEnum.PIG]);
+            if (temp != -1) {
+                transformations.CockPig(temp).applyEffect();
+                changes++;
             }
-            changes++;
         }
         //Gain pig ears!
         if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.ears.type != Ears.PIG) {
@@ -13582,10 +13237,7 @@ public final class Mutations extends MutationsHelper {
                     player.removeVagina(0, 1);
                     if (player.cocks.length == 0) {
                         outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
-                        player.createCock();
-                        player.cocks[0].cockLength = player.clitLength + 2;
-                        player.cocks[0].cockThickness = 1;
-                        player.cocks[0].cockType = CockTypesEnum.HUMAN;
+                        player.createCock(player.clitLength + 2);
                         player.clitLength = .25;
                     }
                 }
@@ -13669,13 +13321,11 @@ public final class Mutations extends MutationsHelper {
         if ((type == 2 || type == 1) && rand(3) == 0 && player.cocks.length > 0) {
             if (player.tentacleCocks() < player.cockTotal()) {
                 if (player.cocks.length == 1) { //Single cawks
-                    outputText("[pg]Your feel your [cock] bending and flexing of its own volition... looking down, you see it morph into a tentacle-like shape.  <b>You now have a tentacle cock!</b>  ");
-                    //Set primary cock flag
-                    player.cocks[0].cockType = CockTypesEnum.SCYLLATENTACLE;
+                    transformations.CockScylla().applyEffect();
                 }
                 if (player.cockTotal() > 1) { //multi
                     outputText("[pg]Your feel your [cocks] bending and flexing of their own volition... looking down, you watch them morph into flexible tentacle-like shapes.  <b>You now have tentacle cocks!</b>  ");
-                    for (var x:int = 0; x < player.cocks.length; x++) player.cocks[x].cockType = CockTypesEnum.SCYLLATENTACLE;
+                    for (var x:int = 0; x < player.cocks.length; x++) transformations.CockScylla(x).applyEffect(false);
                 }
             }
         }
@@ -13984,10 +13634,7 @@ public final class Mutations extends MutationsHelper {
                     player.removeVagina(0, 1);
                     if (player.cocks.length == 0) {
                         outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
-                        player.createCock();
-                        player.cocks[0].cockLength = player.clitLength + 2;
-                        player.cocks[0].cockThickness = 1;
-                        player.cocks[0].cockType = CockTypesEnum.HUMAN;
+                        player.createCock(player.clitLength + 2);
                         player.clitLength = .25;
                     }
                 }
@@ -14071,13 +13718,11 @@ public final class Mutations extends MutationsHelper {
         if ((type == 2 || type == 1) && rand(3) == 0 && player.cocks.length > 0) {
             if (player.tentacleCocks() < player.cockTotal()) {
                 if (player.cocks.length == 1) { //Single cawks
-                    outputText("[pg]Your feel your [cock] bending and flexing of its own volition... looking down, you see it morph into a tentacle-like shape.  <b>You now have a tentacle cock!</b>  ");
-                    //Set primary cock flag
-                    player.cocks[0].cockType = CockTypesEnum.SCYLLATENTACLE;
+                    transformations.CockScylla().applyEffect();
                 }
                 if (player.cockTotal() > 1) { //multi
                     outputText("[pg]Your feel your [cocks] bending and flexing of their own volition... looking down, you watch them morph into flexible tentacle-like shapes.  <b>You now have tentacle cocks!</b>  ");
-                    for (var x:int = 0; x < player.cocks.length; x++) player.cocks[x].cockType = CockTypesEnum.SCYLLATENTACLE;
+                    for (var x:int = 0; x < player.cocks.length; x++) transformations.CockScylla(x).applyEffect(false);
                 }
             }
         }
@@ -14714,17 +14359,11 @@ public final class Mutations extends MutationsHelper {
             }
             //Randomly choose one of those locations
             select = choices[rand(choices.length)];
-            outputText("[pg]Your " + player.cockDescript(select) + " tingles as pins and needles sweep across it.  You pull open your [armor] to watch as it changes; the tip elongates and tapers, like a spear; a series of ridges form along the shaft, giving it an almost segmented look, and a prominent knot swells at its base.  You can't resist stroking it, until it begins dripping pre; ");
-            if (player.sens >= 50) outputText("however, it's not until you press on your new, sensitive knot that you manage to blow your load and enjoy the last few spasms of pleasure as it finally finishes changing.");
-            else outputText("but you sternly rein in your hands and tuck them into your armpits as the arousing changes run their course.");
-            outputText("  <b>You now have a dragon penis.</b>");
+            transformations.CockDragon(select);
             //lose lust if sens>=50, gain lust if else
             dynStats("lus", 10);
             player.addCurse("sen", 10, 1);
             changes++;
-            //Apply the TF
-            player.cocks[select].cockType = CockTypesEnum.DRAGON;
-            player.cocks[select].knotMultiplier = 1.3;
         }
 
         if ((player.gender >= 2 || player.gender == 3) && player.biggestTitSize() < 30 && changes < changeLimit && rand(4) == 0) {
@@ -15026,17 +14665,11 @@ public final class Mutations extends MutationsHelper {
             }
             //Randomly choose one of those locations
             select = choices[rand(choices.length)];
-            outputText("[pg]Your " + player.cockDescript(select) + " tingles as pins and needles sweep across it.  You pull open your [armor] to watch as it changes; the tip elongates and tapers, like a spear; a series of ridges form along the shaft, giving it an almost segmented look, and a prominent knot swells at its base.  You can't resist stroking it, until it begins dripping pre; ");
-            if (player.sens >= 50) outputText("however, it's not until you press on your new, sensitive knot that you manage to blow your load and enjoy the last few spasms of pleasure as it finally finishes changing.");
-            else outputText("but you sternly rein in your hands and tuck them into your armpits as the arousing changes run their course.");
-            outputText("  <b>You now have a dragon penis.</b>");
+            transformations.CockDragon(select).applyEffect();
             //lose lust if sens>=50, gain lust if else
             dynStats("lus", 10);
             player.addCurse("sen", 10, 1);
             changes++;
-            //Apply the TF
-            player.cocks[select].cockType = CockTypesEnum.DRAGON;
-            player.cocks[select].knotMultiplier = 1.3;
         }
         //Increase player's breast size
         if (player.gender > 1 && player.biggestTitSize() <= 12 && changes < changeLimit && rand(3) == 0) {
@@ -15476,10 +15109,11 @@ public final class Mutations extends MutationsHelper {
         if ((player.gender == 1 || player.gender == 3) && rand(3) == 0 && changes < changeLimit) {
             if ((player.horseCocks() + player.demonCocks()) < player.cocks.length) {
                 if (player.cocks.length == 1) {
-                    var temp:int = 0;
+                    var temp:int = player.findFirstCockNotInType([CockTypesEnum.HORSE]);
+                    if (temp == -1) temp = 0
                     temp3 = 0;
-                    if (player.cocks[0].cockType == CockTypesEnum.HUMAN) {
-                        outputText("[pg]Your [cock] begins to feel strange... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.");
+                    if (player.cocks[temp].cockType == CockTypesEnum.HUMAN) {
+                        outputText("[pg]Your [cock"+temp+1+"] begins to feel strange... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.");
                         temp = player.addHorseCock();
                         //temp2 = player.increaseCock(temp, rand(4) + 4);
                         temp3 = 1;
@@ -15487,25 +15121,25 @@ public final class Mutations extends MutationsHelper {
                         player.addCurse("sen", 4, 1);
                         MutagenBonus("lib", 5);
                     }
-                    if (player.cocks[0].cockType == CockTypesEnum.DOG) {
+                    if (player.cocks[temp].cockType == CockTypesEnum.DOG) {
                         temp = player.addHorseCock();
-                        outputText("[pg]Your " + Appearance.cockNoun(CockTypesEnum.DOG) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond it's traditional size.  You notice your knot vanishing, the extra flesh pushing more horsecock out from your sheath.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
+                        outputText("[pg]Your [cock"+temp+1+"] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond it's traditional size.  You notice your knot vanishing, the extra flesh pushing more horsecock out from your sheath.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
                         //temp2 = player.increaseCock(temp, rand(4) + 4);
                         temp3 = 1;
                         dynStats("lus", 35);
                         player.addCurse("sen", 4, 1);
                         MutagenBonus("lib", 5);
                     }
-                    if (player.cocks[0].cockType == CockTypesEnum.TENTACLE) {
+                    if (player.cocks[temp].cockType == CockTypesEnum.TENTACLE) {
                         temp = player.addHorseCock();
-                        outputText("[pg]Your [cock] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your [cock] as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
+                        outputText("[pg]Your [cock"+temp+1+"] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your [cock] as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
                         //temp2 = player.increaseCock(temp, rand(4) + 4);
                         temp3 = 1;
                         dynStats("sen", 4, "lus", 35);
                         MutagenBonus("lib", 5);
                     }
-                    if (player.cocks[0].cockType.Index > 4) {
-                        outputText("[pg]Your [cock] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your [cock] as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
+                    if (player.cocks[temp].cockType.Index > 4) {
+                        outputText("[pg]Your [cock"+temp+1+"] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your [cock] as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
                         temp = player.addHorseCock();
                         //temp2 = player.increaseCock(temp, rand(4) + 4);
                         temp3 = 1;
@@ -16202,8 +15836,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.isMaleOrHerm()) {
             if (player.hasCock() && player.cocks[0].cockType != CockTypesEnum.RED_PANDA && rand(3) == 0 && changes < changeLimit) {
-                outputText("[pg]The skin surrounding your penis folds, encapsulating it and turning itself into a protective sheath. <b>You now have a red-panda cock!</b>");
-                player.cocks[0].cockType = CockTypesEnum.RED_PANDA;
+                transformations.CockRedPanda(0).applyEffect();
                 changes++;
             }
             if (player.shortestCockLength() < 6 && rand(3) == 0 && changes < changeLimit) {
@@ -16721,10 +16354,7 @@ public final class Mutations extends MutationsHelper {
                     player.removeVagina(0, 1);
                     if (player.cocks.length == 0) {
                         outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
-                        player.createCock();
-                        player.cocks[0].cockLength = player.clitLength + 2;
-                        player.cocks[0].cockThickness = 1;
-                        player.cocks[0].cockType = CockTypesEnum.HUMAN;
+                        player.createCock(player.clitLength + 2);
                         player.clitLength = .25;
                     }
                 }
@@ -17195,12 +16825,7 @@ public final class Mutations extends MutationsHelper {
                     //Stop loopahn when dick be found
                     if (player.cocks[temp2].cockType != CockTypesEnum.CANCER) break;
                 }
-                outputText("[pg]Your penis begins foaming bubbles... well guess thats going to take some time to get used to? <b>Your penis is now foaming bubbles like that of a Cancer!</b>");
-                //(REMOVE SHEATH IF NECESSARY)
-                if (player.hasSheath()) {
-                    player.cocks[temp2].cockType = CockTypesEnum.CANCER;
-                    outputText("[pg]Your sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>");
-                } else player.cocks[temp2].cockType = CockTypesEnum.CANCER;
+                transformations.CockCancer(temp2).applyEffect();
                 changes++;
                 dynStats("lus", 10);
                 MutagenBonus("lib", 3);

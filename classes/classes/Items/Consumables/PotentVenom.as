@@ -17,8 +17,11 @@ import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.CockTypesEnum;
 import classes.EngineCore;
+import classes.GeneticMemories.VaginaMem;
 import classes.Items.Consumable;
+import classes.Items.Mutations;
 import classes.PerkLib;
+import classes.Scenes.Metamorph;
 import classes.VaginaClass;
 import classes.CoC;
 
@@ -139,6 +142,7 @@ public class PotentVenom extends Consumable {
 					else outputText("and ");
 					outputText("moan out as your pussy tingles and clenches, drooling a strange dark purple liquid. ");
 					player.vaginaType(7);
+					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.VENOM_DRIPPING));
 				}
 			}
 			//Male and herm area
@@ -204,8 +208,13 @@ public class PotentVenom extends Consumable {
 						outputText("It would seems your venomous markings altered your newly aquired genitals into producing venom as well.");
 					}
 				}
-				if (player.vaginaType() != VaginaClass.VENOM_DRIPPING) player.vaginaType(VaginaClass.VENOM_DRIPPING);
-				if (player.cocks[0].cockType != CockTypesEnum.OOMUKADE) player.cocks[0].cockType = CockTypesEnum.OOMUKADE;
+				if (player.vaginaType() != VaginaClass.VENOM_DRIPPING) {
+					player.vaginaType(VaginaClass.VENOM_DRIPPING);
+					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.VENOM_DRIPPING));
+				}
+				if (player.cocks[0].cockType != CockTypesEnum.OOMUKADE) {
+					player.cocks[0].cockType = CockTypesEnum.OOMUKADE;
+				}
 			}
 			dynStats("lus", 10);
 			player.MutagenBonus("lib", 3);

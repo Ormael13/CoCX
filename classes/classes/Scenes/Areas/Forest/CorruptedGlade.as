@@ -264,13 +264,11 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 				if (rand(3) == 0 && player.cocks.length > 0 && player.hairColor == "green") {
 					if (player.tentacleCocks() < player.cockTotal()) {
 						if (player.cocks.length == 1) { //Single cawks
-							outputText("Your feel your [cock] bending and flexing of its own volition... looking down, you see it morph into a green vine-like shape.  <b>You now have a tentacle cock!</b>  ");
-							//Set primary cock flag
-							player.cocks[0].cockType = CockTypesEnum.TENTACLE;
+							transformations.CockTentacle().applyEffect();
 						}
 						if (player.cockTotal() > 1) { //multi
 							outputText("Your feel your [cocks] bending and flexing of their own volition... looking down, you watch them morph into flexible vine-like shapes.  <b>You now have green tentacle cocks!</b>  ");
-							for (var x:int = 0; x < player.cocks.length; x++) player.cocks[x].cockType = CockTypesEnum.TENTACLE;
+							for (var x:int = 0; x < player.cocks.length; x++) transformations.CockTentacle(x).applyEffect(false);
 						}
 					}
 				}

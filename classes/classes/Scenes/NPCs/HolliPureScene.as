@@ -436,10 +436,7 @@ private function eatHolliFruit():void {
 			i++;
 		}
 		i = choices[rand(choices.length)];
-		outputText("\n\nYour " + num2Text2(i+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your " + cockDescript(i) + " has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a");
-		if(player.tentacleCocks() > 0) outputText("nother");
-		outputText(" tentacle-cock!</b>");
-		player.cocks[i].cockType = CockTypesEnum.TENTACLE;
+		transformations.CockTentacle(i).applyEffect();
 		player.cocks[i].knotMultiplier = 1.3;
 		dynStats("sen", 3, "lus", 10);
 	}

@@ -1515,12 +1515,7 @@ import classes.CoC;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.cockTotal() > 1 && (player.cockTotal() - player.countCocksOfType(CockTypesEnum.HUMAN)) > 0) {
 				outputText("One of your penises begins to feel strange. You " + player.clothedOrNakedLower("pull it out from your [armor], releasing", "notice") + " a plume of thick smoke. When you look down you see it has <b>become a human dick</b>.");
-				for (var i:int = 0; i < player.cockTotal(); i++) {
-					if (player.cocks[i].cockType != CockTypesEnum.HUMAN) {
-						player.cocks[i].cockType = CockTypesEnum.HUMAN;
-						break;
-					}
-				}
+				player.cocks[player.findFirstCockNotInType([CockTypesEnum.HUMAN])].cockType = CockTypesEnum.HUMAN;
 				changes++;
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -1670,12 +1665,9 @@ import classes.CoC;
 			//------------
 			//Change a cock to rhino.
 			if (rand(4) == 0 && changes < changeLimit && player.hasCock() && player.countCocksOfType(CockTypesEnum.RHINO) < player.cockTotal()) {
-				if (player.cockTotal() == 1) outputText("\n\nYou feel a stirring in your loins as your cock grows rock hard. ");
-				else outputText("\n\nOne of your penises begins to feel strange. ");
-				outputText("You " + player.clothedOrNakedLower("pull it out from your [armor]", "lean over") + ", right there in the center of The Black Cock, to take a look. You watch as the skin of your cock becomes a smooth, tough pink colored phallus. It takes on a long and narrow shape with an oval shaped bulge along the center. You feel a tightness near the base where your skin seems to be bunching up. A sheath begins forming around your flared rhino cock’s root, tightening as your stiff rhino dick elongates and settles, the thick flared head leaking a steady stream of funky animal-cum. <b>You now have a rhino-dick.</b>");
 				for (var i:int = 0; i < player.cocks.length; i++) {
 					if (player.cocks[i].cockType != CockTypesEnum.RHINO) {
-						player.cocks[i].cockType = CockTypesEnum.RHINO;
+						transformations.CockRhino(i, player.cocks[i].cockLength, true).applyEffect();
 						break;
 					}
 				}
@@ -1998,13 +1990,9 @@ import classes.CoC;
 			}
 			//Gain Echidna cock
 			if (rand(3) == 0 && changes < changeLimit && player.hasCock() && player.countCocksOfType(CockTypesEnum.ECHIDNA) < player.cockTotal()) {
-				outputText("\n\n");
-				if (player.cockTotal() == 1) outputText("Your [cock] suddenly becomes rock hard out of nowhere. You " + player.clothedOrNakedLower("pull it out from your [armor], right in the middle of the food tent, watching", "watch") + " as it begins to shift and change. It becomes pink in color, and you feel a pinch at the head as it splits to become four heads. " + (player.hasSheath() ? "" : "The transformation finishes off with a fleshy sheath forming at the base.") + " It ejaculates before going limp, retreating into your sheath.");
-				else outputText("One of your penises begins to feel strange. You " + player.clothedOrNakedLower("pull the offending cock out from your [armor], right in the middle of the food tent, watching", "watch") + " as it begins to shift and change. It becomes pink in color, and you feel a pinch at the head as it splits to become four heads. " + (player.hasSheath() ? "" : "The transformation finishes off with a fleshy sheath forming at the base.") + " It ejaculates before going limp, retreating into your sheath.");
-				outputText(" <b>You now have an echidna penis!</b>");
 				for (i = 0; i < player.cocks.length; i++) {
 					if (player.cocks[i].cockType != CockTypesEnum.ECHIDNA) {
-						player.cocks[i].cockType = CockTypesEnum.ECHIDNA;
+						transformations.CockEchidna(i, player.cocks[i].cockLength, true).applyEffect();
 						break;
 					}
 				}
