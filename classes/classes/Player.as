@@ -863,34 +863,6 @@ use namespace CoC;
 				//if (wings.type == Wings.GARGOYLE_LIKE_LARGE) armorMDef += (30 * newGamePlusMod);
 				//if (faceType == Face.DEVIL_FANGS) armorMDef += (30 * newGamePlusMod);
 			//}
-			if (hasPerk(PerkLib.ElementalBody)) {
-				switch (ElementalRace.getElementAndTier(this)) {
-					case ElementalRace.GNOME_1:
-						armorMDef += (10 * newGamePlusMod);
-						break;
-					case ElementalRace.GNOME_2:
-						armorMDef += (20 * newGamePlusMod);
-						break;
-					case ElementalRace.GNOME_3:
-						armorMDef += (30 * newGamePlusMod);
-						break;
-					case ElementalRace.GNOME_4:
-						armorMDef += (40 * newGamePlusMod);
-						break;
-					case ElementalRace.UNDINE_1:
-						armorMDef += (5 * newGamePlusMod);
-						break;
-					case ElementalRace.UNDINE_2:
-						armorMDef += (10 * newGamePlusMod);
-						break;
-					case ElementalRace.UNDINE_3:
-						armorMDef += (15 * newGamePlusMod);
-						break;
-					case ElementalRace.UNDINE_4:
-						armorMDef += (20 * newGamePlusMod);
-						break;
-				}
-			}
 			//Soul Cultivators bonuses
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
 				if (hasPerk(PerkLib.SoulApprentice)) armorMDef += 1 * newGamePlusMod;
@@ -3495,14 +3467,14 @@ use namespace CoC;
 		 * DOES NOT mean that this is player's top race!
 		 */
 		public function isAnyRace(...races:/*Race*/Array):Boolean {
-			if (races.length == 1 && races[0] is Array) return isAnyRace(races[0]);
+			if (races.length == 1 && races[0] is Array) races = flatten(races);
 			for each (var race:Race in races) {
 				if (isRace(race)) return true;
 			}
 			return false;
 		}
 		public function isAnyRaceCached(...races:/*Race*/Array):Boolean {
-			if (races.length == 1 && races[0] is Array) return isAnyRaceCached(races[0]);
+			if (races.length == 1 && races[0] is Array) races = flatten(races);
 			for each (var race:Race in races) {
 				if (isRaceCached(race)) return true;
 			}
@@ -4637,8 +4609,8 @@ use namespace CoC;
 				else min = 0;
 			}
 			//Harpy Lipstick and Drunken Power statuses rise minimum lust by 50.
-			if(hasStatusEffect(StatusEffects.Luststick)) min += min += Math.round(minCap * 0.5);
-			if(hasStatusEffect(StatusEffects.DrunkenPower)) min += min += Math.round(minCap * 0.5);
+			if(hasStatusEffect(StatusEffects.Luststick)) min += Math.round(minCap * 0.5);
+			if(hasStatusEffect(StatusEffects.DrunkenPower)) min += Math.round(minCap * 0.5);
 			//SHOULDRA BOOSTS
 			//+20
 			if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -168 && flags[kFLAGS.URTA_QUEST_STATUS] != 0.75) {
@@ -5483,7 +5455,7 @@ use namespace CoC;
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) maxLevel += 20;
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
 			return maxLevel;
 		}
 		public function GauntletExpToLevelUp():Number {
@@ -5524,7 +5496,7 @@ use namespace CoC;
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) maxLevel += 20;
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
 			return maxLevel;
 		}
 		public function SwordExpToLevelUp():Number {
@@ -5565,7 +5537,7 @@ use namespace CoC;
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) maxLevel += 20;
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
 			return maxLevel;
 		}
 		public function AxeExpToLevelUp():Number {
@@ -5607,7 +5579,7 @@ use namespace CoC;
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) maxLevel += 20;
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
 			return maxLevel;
 		}
 		public function MaceHammerExpToLevelUp():Number {
@@ -5648,7 +5620,7 @@ use namespace CoC;
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) maxLevel += 20;
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
 			return maxLevel;
 		}
 		public function DuelingSwordExpToLevelUp():Number {
@@ -5689,7 +5661,7 @@ use namespace CoC;
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) maxLevel += 20;
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
 			return maxLevel;
 		}
 		public function PolearmExpToLevelUp():Number {
@@ -5730,7 +5702,7 @@ use namespace CoC;
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) maxLevel += 20;
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
 			return maxLevel;
 		}
 		public function SpearExpToLevelUp():Number {
@@ -5771,7 +5743,7 @@ use namespace CoC;
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) maxLevel += 20;
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
 			return maxLevel;
 		}
 		public function DaggerExpToLevelUp():Number {
@@ -5812,7 +5784,7 @@ use namespace CoC;
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) maxLevel += 20;
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
 			return maxLevel;
 		}
 		public function WhipExpToLevelUp():Number {
@@ -5853,7 +5825,7 @@ use namespace CoC;
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) maxLevel += 20;
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
 			return maxLevel;
 		}
 		public function ExoticExpToLevelUp():Number {
@@ -5894,6 +5866,7 @@ use namespace CoC;
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
+			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) maxLevel += 50;
 			return maxLevel;
 		}
 		public function ArcheryExpToLevelUp():Number {
@@ -5901,14 +5874,13 @@ use namespace CoC;
 			var expToLevelUp00:Number = masteryArcheryLevel + 1;
 			var expToLevelUp01:Number = 5;
 			var expToLevelUp02:Number = masteryArcheryLevel + 1;
-			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
-			//-2;//4th
-			//-3;//6th
-			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
-			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
-			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
-			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
-			//-3;//5th
+			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
+			expToLevelUp00 = Math.round(expToLevelUp00);
+			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
+			if (hasPerk(PerkLib.RangeWeaponsMastery)) expToLevelUp01 -= 1;
+			if (hasPerk(PerkLib.RangeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
+			expToLevelUp02 = Math.round(expToLevelUp02);
+			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
 			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
 			return expToLevelUp;
 		}
@@ -5935,6 +5907,7 @@ use namespace CoC;
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
+			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) maxLevel += 50;
 			return maxLevel;
 		}
 		public function ThrowingExpToLevelUp():Number {
@@ -5942,14 +5915,13 @@ use namespace CoC;
 			var expToLevelUp00:Number = masteryThrowingLevel + 1;
 			var expToLevelUp01:Number = 5;
 			var expToLevelUp02:Number = masteryThrowingLevel + 1;
-			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
-			//-2;//4th
-			//-3;//6th
-			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
-			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
-			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
-			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
-			//-3;//5th
+			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
+			expToLevelUp00 = Math.round(expToLevelUp00);
+			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
+			if (hasPerk(PerkLib.RangeWeaponsMastery)) expToLevelUp01 -= 1;
+			if (hasPerk(PerkLib.RangeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
+			expToLevelUp02 = Math.round(expToLevelUp02);
+			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
 			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
 			return expToLevelUp;
 		}
@@ -5976,6 +5948,7 @@ use namespace CoC;
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
+			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) maxLevel += 50;
 			return maxLevel;
 		}
 		public function FirearmsExpToLevelUp():Number {
@@ -5983,14 +5956,13 @@ use namespace CoC;
 			var expToLevelUp00:Number = masteryFirearmsLevel + 1;
 			var expToLevelUp01:Number = 5;
 			var expToLevelUp02:Number = masteryFirearmsLevel + 1;
-			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
-			//-2;//4th
-			//-3;//6th
-			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
-			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
-			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
-			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
-			//-3;//5th
+			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
+			expToLevelUp00 = Math.round(expToLevelUp00);
+			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
+			if (hasPerk(PerkLib.RangeWeaponsMastery)) expToLevelUp01 -= 1;
+			if (hasPerk(PerkLib.RangeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
+			expToLevelUp02 = Math.round(expToLevelUp02);
+			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
 			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
 			return expToLevelUp;
 		}
@@ -6017,7 +5989,7 @@ use namespace CoC;
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) maxLevel += 20;
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
 			return maxLevel;
 		}
 		public function DualWieldSmallExpToLevelUp():Number {
@@ -6058,7 +6030,7 @@ use namespace CoC;
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) maxLevel += 20;
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
 			return maxLevel;
 		}
 		public function DualWieldNormalExpToLevelUp():Number {
@@ -6099,7 +6071,7 @@ use namespace CoC;
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) maxLevel += 20;
+			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
 			return maxLevel;
 		}
 		public function DualWieldLargeExpToLevelUp():Number {
@@ -6140,6 +6112,7 @@ use namespace CoC;
 			var maxLevel:Number = 10;
 			if (level < 90) maxLevel += level;
 			else maxLevel += 90;
+			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) maxLevel += 50;
 			return maxLevel;
 		}
 		public function DualWieldFirearmsExpToLevelUp():Number {
@@ -6147,14 +6120,13 @@ use namespace CoC;
 			var expToLevelUp00:Number = dualWFLevel + 1;
 			var expToLevelUp01:Number = 5;
 			var expToLevelUp02:Number = dualWFLevel + 1;
-			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
-			//-2;//4th
-			//-3;//6th
-			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
-			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
-			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
-			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
-			//-3;//5th
+			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
+			expToLevelUp00 = Math.round(expToLevelUp00);
+			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
+			if (hasPerk(PerkLib.RangeWeaponsMastery)) expToLevelUp01 -= 1;
+			if (hasPerk(PerkLib.RangeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
+			expToLevelUp02 = Math.round(expToLevelUp02);
+			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
 			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
 			return expToLevelUp;
 		}

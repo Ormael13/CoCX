@@ -60,8 +60,8 @@ package classes
 		public static const UNDEFINED:CockTypesEnum = new CockTypesEnum("undefined","");
 		
 		function CockTypesEnum(
-				i_displayName:String,
-				i_group:String
+				i_displayName:String="",
+				i_group:String=""
 		) {
 			_displayName = i_displayName;
 			_group = i_group;
