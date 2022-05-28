@@ -4609,8 +4609,8 @@ use namespace CoC;
 				else min = 0;
 			}
 			//Harpy Lipstick and Drunken Power statuses rise minimum lust by 50.
-			if(hasStatusEffect(StatusEffects.Luststick)) min += min += Math.round(minCap * 0.5);
-			if(hasStatusEffect(StatusEffects.DrunkenPower)) min += min += Math.round(minCap * 0.5);
+			if(hasStatusEffect(StatusEffects.Luststick)) min += Math.round(minCap * 0.5);
+			if(hasStatusEffect(StatusEffects.DrunkenPower)) min += Math.round(minCap * 0.5);
 			//SHOULDRA BOOSTS
 			//+20
 			if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -168 && flags[kFLAGS.URTA_QUEST_STATUS] != 0.75) {
