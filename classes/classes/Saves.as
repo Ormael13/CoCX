@@ -2513,9 +2513,12 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		for (i = 0; i < saveFile.data.statusAffects.length; i++)
 		{
 			if (saveFile.data.statusAffects[i].statusAffectName == "Lactation EnNumbere") continue; // ugh...
-			var stype:StatusEffectType = StatusEffectType.lookupStatusEffect(saveFile.data.statusAffects[i].statusAffectName);
+			var name:String = saveFile.data.statusAffects[i].statusAffectName;
+			var stype:StatusEffectType = StatusEffectType.lookupStatusEffect(name);
 			if (stype == null){
-				CoC_Settings.error("Cannot find status effect '"+saveFile.data.statusAffects[i].statusAffectName+"'");
+				if (StatusEffectType.RemovedIds.indexOf(name) < 0) {
+					CoC_Settings.error("Cannot find status effect '" + name + "'");
+				}
 				continue;
 			}
 			player.createStatusEffect(stype,

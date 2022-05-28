@@ -7,6 +7,18 @@ import flash.utils.Dictionary;
 
 public class StatusEffectType
 {
+	/**
+	 * Do not report an error if one of these was found in save file
+	 */
+	public static const RemovedIds:/*String*/Array = [
+		"Str Tou Spe Counter 1",
+		"Str Tou Spe Counter 2",
+		"Int Wis Counter 1",
+		"Int Wis Counter 2",
+		"Lib Sens Counter 1",
+		"Lib Sens Counter 2",
+	];
+	
 	private static var STATUSAFFECT_LIBRARY:Dictionary = new Dictionary();
 	private var arity:int;
 	

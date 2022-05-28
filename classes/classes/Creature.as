@@ -1284,7 +1284,9 @@ public class Creature extends Utils
 				maxSfPerWisStat,
 				maxSfMultStat,
 				
-				spellpowerStat
+				spellpowerStat,
+				defStat,
+				mdefStat
 			]);
 
 			skin = new Skin(this);

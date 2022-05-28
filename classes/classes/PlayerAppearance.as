@@ -1074,7 +1074,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		
 		// Other body part-related buffs that contribute to the "Racial" buff object in Player.calcRacialBuffs
-		outputText("\n[font-lblue]");
+		outputText("\n");
 		
 		var factor:Number = 0;
 		if (player.hasCoatOfType(Skin.CHITIN)) factor += 2;
@@ -1090,56 +1090,54 @@ public class PlayerAppearance extends BaseContent {
 			bonus += 5*factor;
 		}
 		if (bonus > 0) {
-			outputText("\nMantislike Agility: +"+bonus+"% Speed");
+			outputText("\n[font-lblue]Mantislike Agility[/font]: +"+bonus+"% Speed");
 		}
 		if (player.hasPerk(PerkLib.Flexibility) && player.isAnyRaceCached(Races.CatlikeRaces)) {
-			outputText("\nCat-like race + Flexibility: +10% Speed.");
+			outputText("\n[font-lblue]Cat-like race + Flexibility[/font]: +10% Speed.");
 		}
 		if (player.isNaga()) {
 			if (player.lowerBody == LowerBody.FROSTWYRM) {
-				outputText("\nFrost wyrm lower body: +20% Strength, +10% Toughness.");
+				outputText("\n[font-lblue]Frost wyrm lower body[/font]: +20% Strength, +10% Toughness.");
 			} else {
-				outputText("\nNaga lower body: +15% Strength, +15% Toughness.");
+				outputText("\n[font-lblue]Naga lower body[/font]: +15% Strength, +15% Toughness.");
 			}
 		}
 		
 		if (player.isTaur()) {
-			outputText("\nTaur lower body: +20% Speed.")
+			outputText("\n[font-lblue]Taur lower body[/font]: +20% Speed.")
 		}
 		
 		if (player.isDrider()) {
 			if (player.lowerBody == LowerBody.CANCER) {
-				outputText("\nCancer lower body: +15% Strength, +5% Speed, +10% Toughness.");
+				outputText("\n[font-lblue]Cancer lower body[/font]: +15% Strength, +5% Speed, +10% Toughness.");
 			} else {
-				outputText("\nDrider lower body: +15% Toughness, +15% Speed.");
+				outputText("\n[font-lblue]Drider lower body[/font]: +15% Toughness, +15% Speed.");
 			}
 		}
 		if (player.isScylla()) {
-			outputText("\nScylla lower body: +30% Strength.")
+			outputText("\n[font-lblue]Scylla lower body[/font]: +30% Strength.")
 		}
 		if (player.isKraken()) {
-			outputText("\nKraken lower body: +60% Strength, +15 Sensitivity");
+			outputText("\n[font-lblue]Kraken lower body[/font]: +60% Strength, +15 Sensitivity");
 		}
 		if (player.lowerBody == LowerBody.CENTIPEDE) {
-			outputText("\nCentipede lower body: +15% Strength, +5% Toughness, +10% Speed.")
+			outputText("\n[font-lblue]Centipede lower body[/font]: +15% Strength, +5% Toughness, +10% Speed.")
 		}
 		if (player.isAlraune()) {
-			outputText("\nAlraune lower body: +15% Toughness, +15% Libido.")
+			outputText("\n[font-lblue]Alraune lower body[/font]: +15% Toughness, +15% Libido.")
 		}
 		if (player.hasPerk(PerkLib.RacialParagon)) {
-			outputText("\nRacial Paragon: +"+player.level+"% to core stats.")
+			outputText("\n[font-lblue]Racial Paragon[/font]: +"+player.level+"% to core stats.")
 		}
 		if (player.hasPerk(PerkLib.Apex)) {
-			outputText("\nApex: +"+(2*player.level)+"% to core stats.")
+			outputText("\n[font-lblue]Apex[/font]: +"+(2*player.level)+"% to core stats.")
 		}
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) {
-			outputText("\nAlpha And Omega: +"+(2*player.level)+"% to core stats.")
+			outputText("\n[font-lblue]Alpha And Omega[/font]: +"+(2*player.level)+"% to core stats.")
 		}
 		if (player.hasPerk(PerkLib.AscensionOneRaceToRuleThemAllX)) {
-			outputText("\nAscension: One Race To Rule Them All: +"+(2*player.perkv1(PerkLib.AscensionOneRaceToRuleThemAllX)*player.level)+"% to core stats.");
+			outputText("\n[font-lblue]Ascension: One Race To Rule Them All[/font]: +"+(2*player.perkv1(PerkLib.AscensionOneRaceToRuleThemAllX)*player.level)+"% to core stats.");
 		}
-		
-		outputText("[/font]");
 		
 		menu();
 		if (scrollPos) mainView.mainText.scrollV = scrollPos;
