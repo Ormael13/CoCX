@@ -1257,7 +1257,7 @@ public class PerkMenu extends BaseContent {
 			var pList5:Array = MutationsLib.mutationsArray("Deprecated", true);
 			var pList6:Array = IMutationsLib.mutationsArray("");
 			var pList7:Array = IMutationsLib.mutationsArray("Deprecated");
-			var mArray:Array = arrMerge(pList1, pList2, pList3, pList4, pList5, pList6, pList7).sort();
+			var mArray:Array = arrMerge(pList1, pList2, pList3, pList4, pList5, pList6, pList7);
 			for each (var perkTrue:PerkType in perkDict){
 				if (!(mArray.indexOf(perkTrue) >= 0) && pSpecialRem(perkTrue)){
 					tPerkList.push(perkTrue);
@@ -1682,7 +1682,7 @@ public class PerkMenu extends BaseContent {
 		for(var i:int=0;i<arrays.length;i++){
 			result = result.concat(arrays[i]);
 		}
-		return result;
+		return result.sort();
 	}
 
 	/* [INTERMOD: revamp]
