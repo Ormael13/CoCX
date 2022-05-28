@@ -370,7 +370,7 @@ public class Race {
 	public function takeForm(player:Player, tfName:String):void {
 		for each (var o:* in debugForms[tfName]) {
 			var f:Function = o as Function;
-			if (f) {
+			if (f != null) {
 				f(player);
 				continue;
 			}

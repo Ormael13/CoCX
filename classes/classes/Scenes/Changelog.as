@@ -335,8 +335,8 @@ package classes.Scenes
 			outputText("-Aimozg did it again.... (insert Jurassic Park meme) and went making Race Page(s) prettier and more cool. It would now show more informations like specific bodypart that count to race score. And would show all tiers of race score at the end of each race score. Switching between seeing jsut race name to full info on it is done by clicking on race name.\n");
 			outputText("-New tier 0 misc lvl-up perk: Range Weapons Mastery. Req. 10+ str/tou/spe. Effect: Decrease by ~20% needed exp to level up each range weapon mastery type and grants 200% more of base mastery exp gains.\n");
 			outputText("-New tier 0 misc lvl-up perk: Range Weapons Mastery (Ex). Req. Range Weapons Mastery perk, lvl 2+ and 20+ str/tou/spe. Effect: Decrease by ~45% needed exp to level up each range weapon mastery type and double mastery gains on crit hits (2x -> 4x).\n");
-			outputText("-New tier 0 misc lvl-up perk: Range Weapons Mastery (Su). Req. Range Weapons Mastery (Ex) perk, lvl 4+ and 30+ str/tou/spe. Effect: Decrease by ~45% needed exp to level up each range weapon mastery type and increase cap for melee masteries by 50.\n");
-			outputText("-\n");
+			outputText("-New tier 0 misc lvl-up perk: Range Weapons Mastery (Su). Req. Range Weapons Mastery (Ex) perk, lvl 4+ and 30+ str/tou/spe. Effect: Decrease by ~45% needed exp to level up each range weapon mastery type and increase cap for range masteries by 50.\n");
+			outputText("-When fighting corrupted driders in Swamp can meet one that would be possible to talked with after beating. SHe introduce herself as Lily and can be interacted with gaining either some affection or/and submissiveness points.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
