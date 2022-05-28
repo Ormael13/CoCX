@@ -104,6 +104,7 @@ Things you could add to the constructor:
 * `disabled = true`/`hidden=true` to make race disabled/hidden.
 * `chimeraTier = 0; grandChimeraTier = 0;` to disabled adding points to chimera/grand chimera.
 * `chimeraTier = <N>; grandChimeraTier = <N+1>;` to change default chimera/grand chimera min tiers from default 1 and 2.
+* `mutationThreshold = <N>;` By default always get bonuses from mutations and bloodlines. You can gate them behind certain score.
 
 ## Score calculation
 
@@ -201,6 +202,8 @@ addBloodline(PerkLib.KitsunesDescendant, PerkLib.BloodlineKitsune);
 addMutation(IMutationsLib.KitsuneThyroidGlandIM);
 addMutation(IMutationsLib.TwinHeartIM, +2);
 ```
+
+To gate mutation/bloodline bonuses behing certain score, set `mutatonThreshold` in the constructor. 
 
 ### finalizeScore
 
@@ -302,6 +305,7 @@ To do that, overwrite a `debugForms` race with a map. Each element is a debug fo
 * StatusEffectType - added with zero values. To add a status effect with custom values, add a nested 5-element array `[effect type, value1, value2, value3, value4]`
 * IMutationPerkType - added with max stage. To add a different stage, add a nested 2-element array `[mutation type, stage]`
 * PerkType - added with zero values. To add a perk with custom values, add a nested 5-element array `[perk type, value1, value2, value3, value4]`.
+* functions with signature `function(player:Player):void`
 
 See Kitsune and Human races for example.
 
