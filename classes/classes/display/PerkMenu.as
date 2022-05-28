@@ -1264,8 +1264,6 @@ public class PerkMenu extends BaseContent {
 			//trace(pList1.length + " < 1 - 2 > " + pList2.length + "\n");
 		}
 
-
-
 		function pSpecialRem(perkTrue:PerkType):Boolean{	//SpecialCases
 			var pName:String = perkTrue.name();
 			var rez:Boolean = true;
