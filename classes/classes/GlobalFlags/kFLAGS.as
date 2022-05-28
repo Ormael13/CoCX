@@ -847,8 +847,8 @@ public static const SAND_WITCHES_FRIENDLY:int                                   
 public static const CUM_WITCH_DEFEATED:int                                          =  839; //
 public static const ENTERED_SANDWITCH_DUNGEON:int                                   =  840; //
 public static const PAWJOBS:int                                                     =  841; //
-public static const UNKNOWN_FLAG_NUMBER_0842:int                                    =  842; //
-public static const UNKNOWN_FLAG_NUMBER_0843:int                            		=  843; //
+public static const PRISCILLA_WRESTLE_COUNTER:int                                    =  842; //
+public static const PRISCILLA_FOREPLAY_COUNTER:int                            		=  843; //
 public static const DESERT_CAVE_DISABLED:int                                    	=  844; //Set after the player insists about MilkGirl
 public static const TIMES_SUBMITTED_TO_SANURA:int                                   =  845; //
 public static const TIMES_WINFUCKED_SANURA:int                                      =  846; //
@@ -2024,7 +2024,7 @@ public static const MET_MARAE:int                                               
 public static const MET_MARAE_CORRUPTED:int                                         = 2016;
 public static const MARAE_QUEST_START:int                                           = 2017;
 public static const MARAE_QUEST_COMPLETE:int                                        = 2018;
-public static const UNKNOWN_FLAG_NUMBER_2019:int                                    = 2019; //Not used anymore
+public static const PRISCILLA_AFFECTION:int                                    		= 2019;
 public static const FACTORY_FOUND:int                                               = 2020;
 public static const FACTORY_SUCCUBUS_DEFEATED:int                                   = 2021;
 public static const FACTORY_INCUBUS_DEFEATED:int                                    = 2022;
@@ -2216,7 +2216,7 @@ public static const EMBER_MORNING:int                                           
 public static const BASILISK_RESISTANCE_TRACKER:int                                 = 2208;
 public static const MINOTAUR_CUM_RESISTANCE_TRACKER:int                             = 2209;
 public static const DLC_APRIL_FOOLS:int                                             = 2210;
-public static const PRISCILLA_TALK_COUNTER:int                                   = 2211;
+public static const PRISCILLA_TALK_COUNTER:int                                   	= 2211;
 public static const ISABELLA_POTENCY_STATE:int                                      = 2212;
 public static const ISABELLA_COWMOTHER:int                                          = 2213; //0.5 means prompt happened. 1 indicates she can give birth to cowgirls.
 public static const ISABELLA_PREGNANCY_TYPE:int                                     = 2214;
@@ -2990,7 +2990,7 @@ public static const USE_OLD_INTERFACE:int                                       
 public static const IMAGEPACK_OFF:int                                               = 2982; // 1 if imagepack is disabled.
 public static const SPRITE_STYLE:int                                                = 2983; // 1 if old sprites are used.
 public static const AUTO_LEVEL:int                                                  = 2984; // 1 if automatic leveling is enabled.
-public static const UNKNOWN_FLAG_NUMBER_02985:int                                   = 2985; // formerly SFW mode, now unused
+public static const PRISCILLA_THREESOME_COUNTER:int                                   = 2985; // formerly SFW mode, now unused
 public static const WATERSPORTS_ENABLED:int                                         = 2986; // 1 if watersport scenes are enabled.
 public static const USE_METRICS:int                                                 = 2987; // No longer used. Previously: 0 for imperial, 1 for metric.
 public static const USE_OLD_FONT:int                                                = 2988; // Side bar font.

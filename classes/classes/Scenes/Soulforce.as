@@ -7,10 +7,7 @@ package classes.Scenes
 import classes.*;
 import classes.BodyParts.*;
 import classes.GeneticMemories.*;
-import classes.IMutationPerkType;
-import classes.IMutations.IMutationsLib;
 import classes.GlobalFlags.kFLAGS;
-import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Areas.Desert.NagaScene;
@@ -41,8 +38,6 @@ import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.NPCs.WaizAbi;
 import classes.Scenes.Places.Boat.Marae;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
-import classes.Items.*;
-import classes.Scenes.Places.TrollVillage;
 import classes.Stats.Buff;
 
 use namespace CoC;
@@ -4305,7 +4300,7 @@ private function applyHangover():void {
 		if (player.soulforce >= 320) {
 			player.soulforce -= 320;
 			statScreenRefresh();
-			SceneLib.goblinElderScene.goblinElderEncounter();
+			SceneLib.priscillaScene.goblinElderEncounter();
 		}
 		else {
 			outputText("\n\nYour current soulforce is too low.");

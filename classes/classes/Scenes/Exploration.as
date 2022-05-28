@@ -420,7 +420,7 @@ public class Exploration extends BaseContent
 					if (goblinChooser >= 30 && goblinChooser < 50) SceneLib.goblinScene.goblinAssassinEncounter();
 					else if (goblinChooser >= 50 && goblinChooser < 75) SceneLib.goblinScene.goblinWarriorEncounter();
 					else if (goblinChooser >= 75) {
-						if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] < 3 && rand(2) == 0) SceneLib.goblinElderScene.goblinElderEncounter(); //not yet imported
+						if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] < 3 && rand(2) == 0) SceneLib.priscillaScene.goblinElderEncounter(); //not yet imported
 						else SceneLib.goblinScene.goblinShamanEncounter();
 					}
 					else SceneLib.goblinScene.goblinEncounter();

@@ -2,8 +2,8 @@
  * Coded by aimozg on 28.05.2017.
  */
 package classes.display {
-import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
+import classes.GlobalFlags.kFLAGS;
 
 import flash.display.Bitmap;
 import flash.display.BitmapData;
@@ -275,12 +275,12 @@ public class SpriteDb {
 	public static function get s_goblin(): Class {
 		return is8bit ? s_goblin_8bit : s_goblin_16bit;
 	}
-	[Embed(source="../../../res/sprites/goblinElder.png")]
-	public static var s_goblinElder_16bit:Class;
-	[Embed(source="../../../res/sprites8bit/goblinElder-old.png")]
-	public static const s_goblinElder_8bit:Class;
-	public static function get s_goblinElder(): Class {
-		return is8bit ? s_goblinElder_8bit : s_goblinElder_16bit;
+	[Embed(source="../../../res/sprites/priscilla.png")]
+	public static var s_priscilla_16bit:Class;
+	[Embed(source="../../../res/sprites8bit/priscilla-old.png")]
+	public static const s_priscilla_8bit:Class;
+	public static function get s_priscilla(): Class {
+		return is8bit ? s_priscilla_8bit : s_priscilla_16bit;
 	}
 	[Embed(source="../../../res/sprites/goblinShaman.png")]
 	public static var s_goblinShaman_16bit:Class;
