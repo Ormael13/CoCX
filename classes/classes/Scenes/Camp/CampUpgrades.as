@@ -1555,7 +1555,7 @@ public function arcaneCircleUpgrade():void {
 			return;
 		}
 		if (player.hasStatusEffect(StatusEffects.ElementalEnergyConduits)) {
-			if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) < 4) {
+			if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) < 10) {
 				if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 1) {
 					upgradeFirstElementalEnergyConduit();
 					return;
@@ -1990,7 +1990,7 @@ public function dam():void {
 	if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 1 && player.fatigue <= player.maxFatigue() - 200) {
 		buildUpMinorWoodDam();
 		return;
-	}
+	}/*
 	if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 1 && player.fatigue <= player.maxFatigue() - 400) {
 		buildUpWoodDam();
 		return;
@@ -1998,7 +1998,7 @@ public function dam():void {
 	if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2 && player.fatigue <= player.maxFatigue() - 600) {
 		buildUpMajorWoodDam();
 		return;
-	}/*
+	}
 	if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3 && player.fatigue <= player.maxFatigue() - 800) {
 		buildUpMinorStoneDam();
 		return;
