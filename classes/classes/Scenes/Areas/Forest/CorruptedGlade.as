@@ -33,7 +33,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 		public function intro():void {
 			spriteSelect(SpriteDb.s_corruptedGlade);
 			outputText("Walking through the woods, you find a damp patch overgrown with corrupted plant-life.  Every flower seems warped into a colorful imitation of a female's genitals, each vine appears throbbing and veiny, and every knot on the nearby trees is capped with a nipple-like protrusion, leaking dark sap.");
-			if (player.cor <= 33) { //disgusted reaction
+			if (player.cor <= 33 - player.corruptionTolerance) { //disgusted reaction
 				//Get plant-cum dripped on you if not fast and unlucky!
 				if (player.spe < 60 && rand(player.spe + 50) < 50) {
 					outputText("  Disgusted by this perversion of nature, you turn to leave, catching a faceful of the white goop that's spurting down from the vines above!  It's slimy, gross, and difficult to clear from your eyes, nose, and mouth.  The musky smell and delicious salty flavor are undoubtedly a result of the plant's corruption.  You escape the tainted glade, but feel warmer and warmer as time passes...");
@@ -48,7 +48,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 				addButton(3, "Destroy Them", destroyTheCorruptedGladesChoice).hint("Attempt to destroy the perverted glade.");
 				addButton(4, "Leave", camp.returnToCampUseOneHour);
 			}
-			else if (player.cor <= 66) { //intrigued reaction
+			else if (player.cor <= 66 - player.corruptionTolerance) { //intrigued reaction
 				outputText("  You explore the glade with equal parts caution and curiosity.  ");
 				switch(rand(3)) {
 					case  0: //flowers...

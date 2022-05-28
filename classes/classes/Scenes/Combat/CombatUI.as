@@ -12,6 +12,7 @@ import classes.CoC_Settings;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
+import classes.Races;
 import classes.Scenes.Areas.Beach.CancerAttack;
 import classes.Scenes.Areas.Desert.SandTrap;
 import classes.Scenes.Areas.Forest.Alraune;
@@ -305,7 +306,7 @@ public class CombatUI extends BaseCombatContent {
 			addButton(2, "Coil", combat.HypnosisCoil);
 			vampireBiteDuringGrapple(3);
 			addButton(4, "Maintain", combat.HypnosisMaintain);
-			if (player.apophisScore() >= 23){
+			if (player.isRace(Races.APOPHIS)){
 				addButton(5, "D.Shard", combat.HypnosisDarknessShard);
 				addButton(6, "D.Wave", combat.HypnosisDuskWave);
 			}

@@ -49,7 +49,7 @@ public class OnikiriSake extends Consumable {
 			outputText("That's just what you needed to quench your thirst... now time to beat up those puny eeehhh... things to a pulp!");
 		}
 		else outputText("Woa! That sake sure is powerful. You laugh as your cheeks redden with the obvious sign of complete inebriation. You're so drunk you barely register as your body begins to change.");
-		if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= mutations.DrunkenPowerEmpowerOni()) mutations.DrunkenPowerEmpower();
+		mutations.DrunkenPowerEmpowerIfPossible();
 		if (rand(3) == 0 && changes < changeLimit && player.MutagenBonus("str", 2)) {
 			if (player.str <= 50)
 				outputText("\n\nPainful aches ripple through your body, flooding you with pain as your muscles flex and bulge, growing much stronger and more well-defined.");

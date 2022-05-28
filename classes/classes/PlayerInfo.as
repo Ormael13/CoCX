@@ -14,6 +14,7 @@ import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.VampireThirstEffect;
+import classes.display.PerkMenu;
 
 import coc.view.MainView;
 
@@ -1916,11 +1917,12 @@ public class PlayerInfo extends BaseContent {
 	public function mutationsClear(perks:Array):Array{
 		var temp:Array = [];
 		var compMutate:Array = MutationsLib.mutationsArray("", true);
-		var compMutate2:Array = MutationsLib.mutationsArray("Deprecated");
+		var compMutate2:Array = MutationsLib.mutationsArray("Deprecated", true);
 		var compMutate3:Array = IMutationsLib.mutationsArray("");
 		var compMutate4:Array = IMutationsLib.mutationsArray("Deprecated");
+		var mArray:Array = PerkMenu.arrMerge(compMutate, compMutate2, compMutate3, compMutate4);
 		for each (var playerPerk:PerkType in perks){
-			if (!(compMutate.indexOf(playerPerk) >= 0) && !(compMutate2.indexOf(playerPerk) >= 0) && !(compMutate3.indexOf(playerPerk) >= 0) && !(compMutate4.indexOf(playerPerk) >= 0)){
+			if (!(mArray.indexOf(playerPerk) >= 0)){
 				temp.push(playerPerk);
 			}
 		}

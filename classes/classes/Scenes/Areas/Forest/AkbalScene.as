@@ -3,14 +3,14 @@
  */
 package classes.Scenes.Areas.Forest
 {
-	import classes.*;
-	import classes.BodyParts.Tail;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Items.Armors.LustyMaidensArmor;
-	import classes.Scenes.SceneLib;
-	import classes.display.SpriteDb;
+import classes.*;
+import classes.BodyParts.Tail;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.Armors.LustyMaidensArmor;
+import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
-	public class AkbalScene extends BaseContent {
+public class AkbalScene extends BaseContent {
 		public function AkbalScene() {
 		}
 
@@ -934,7 +934,7 @@ package classes.Scenes.Areas.Forest
 			}
 			//[After 8th submission, if whispered and corruption is greater than 80%]
 			//(fighting Akbal disables this scene, but you retain the ability if you rape him after)
-			else if (flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] >= 8 && player.cor > 80) {
+			else if (flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] >= 8 && player.cor > 80 - player.corruptionTolerance) {
 				if (player.hasPerk(PerkLib.FireLord)) {
 					outputText("You awake in your camp feeling dangerous, powerful and fiercely satisfied.");
 				}
@@ -950,7 +950,7 @@ package classes.Scenes.Areas.Forest
 				}
 			}
 			//[After 4th submission if corruption is greater than 40%]
-			else if (!player.hasPerk(PerkLib.Whispered) && player.cor >= 40) {
+			else if (!player.hasPerk(PerkLib.Whispered) && player.cor >= 40 - player.corruptionTolerance) {
 				outputText("You awake in your camp with Akbal standing over you, the chorus of voices in your head reaching the apex of an agonizingly beautiful song, and then falling silent.  When you rise, Akbal licks your face before turning away and sprinting into the forest.\n\n");
 				if (!player.hasPerk(PerkLib.Whispered)) {
 					outputText("(You are now Whispered.)");

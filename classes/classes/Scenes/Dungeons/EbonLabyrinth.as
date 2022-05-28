@@ -2,12 +2,14 @@
  * Quest Dungeon: The Ebon Labyrinth (for Alvina Black Rose Quest)
  * @author Liadri
  */
-package classes.Scenes.Dungeons 
+package classes.Scenes.Dungeons
 {
 import classes.CockTypesEnum;
 import classes.EventParser;
-import classes.ItemType;
+import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
+import classes.Races;
 import classes.Scenes.SceneLib;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kACHIEVEMENTS;
@@ -19,10 +21,10 @@ import classes.Scenes.Areas.Caves.DisplacerBeast;
 import classes.Scenes.Areas.Forest.TentacleBeast;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
+import classes.Scenes.NPCs.CelessScene;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.display.SpriteDb;
-
-import coc.view.ButtonDataList;
 
 public class EbonLabyrinth extends DungeonAbstractContent {
     //FLAGS:
@@ -392,70 +394,8 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             outputText("While exploring the labyrinth you run into a strange fountain, which radiates " + (fountainCorrupt ? "black" : "white") + " magic like you have never seen before, the water flowing with gittering " + (fountainCorrupt ? "purple corruption" : "starlight") + ". Dipping an object and some additional materials into the font could have... unforeseen consequences.\n\n");
         outputText("You can use the fountain's magic to " + (fountainCorrupt ? "corrupt" : "bless") + " specific gear, making a legendary item using radiant shards and gems.");
         menu();
-        addButton(0, "Dip Item", dipItemMenu);
+        addButton(0, "Dip Item", CelessScene.itemImproveMenu, 1, fountainCorrupt);
         addButton(4, "Back", playerMenu);
-
-        //=================================
-        function dipItemMenu():void {
-            var improvableItems:Array = [
-                [weapons.BFSWORD, weapons.NPHBLDE, weapons.EBNYBLD],
-                [weapons.DBFSWO, weapons.T_HEART, weapons.DORSOUL],
-                [weapons.MASTGLO, weapons.KARMTOU, weapons.YAMARG],
-                [weapons.KATANA, weapons.MASAMUN, weapons.BLETTER],
-                [weapons.W_STAFF, weapons.U_STAFF, weapons.N_STAFF],
-                [weapons.DEMSCYT, weapons.LHSCYTH, null],
-                [weapons.UGATANA, weapons.MOONLIT, weapons.C_BLADE],
-                [weapons.L__AXE, weapons.WG_GAXE, weapons.DE_GAXE],
-                [weapons.SPEAR, weapons.SESPEAR, weapons.DSSPEAR],
-                [weapons.JRAPIER, weapons.Q_GUARD, weapons.B_WIDOW],
-                [weapons.OTETSU, weapons.POCDEST, weapons.DOCDEST],
-                [weapons.BFTHSWORD, weapons.ARMAGED, weapons.CHAOSEA],
-                [weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
-                [weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
-                [shields.SANCTYN, shields.SANCTYL, shields.SANCTYD],
-                [armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR],
-                [armors.BLKIMONO, armors.IBKIMO, armors.TCKIMO],
-                [armors.BKIMONO, armors.IBKIMO, armors.TCKIMO],
-                [armors.PKIMONO, armors.IBKIMO, armors.TCKIMO],
-                [armors.RKIMONO, armors.IBKIMO, armors.TCKIMO],
-                [armors.WKIMONO, armors.IBKIMO, armors.TCKIMO],
-                [armors.SPKIMO, armors.OEKIMO, armors.OTKIMO],
-                [armors.CTPALAD, null, armors.CTBGUAR]
-            ];
-            clearOutput();
-            //TODO: gargoyle shit not added... yet? not my problem anyway, got scenes to hunt.
-            //https://docs.google.com/document/d/1SFSVm9A6431McXUq1B3R_47xme1owodcZSEDdma3r6U/
-            outputText("What item would you like to dip in the " + (fountainCorrupt ? "unholy" : "holy") + " waters?");
-            outputText("\n\n<b>You currently have " + player.keyItemvX("Radiant shard", 1) + " radiant shards.</b>")
-            //Celess
-            var selectfrom:int = fountainCorrupt ? 2 : 1;
-            var selectMenu:ButtonDataList = new ButtonDataList();
-            for (var i:int = 0; i < improvableItems.length; i++) {
-                if (improvableItems[i][selectfrom] == null) {/*do nothing*/
-                }
-                else {
-                    var item:ItemType = improvableItems[i][selectfrom];
-                    var from:ItemType = improvableItems[i][0];
-                    selectMenu.add(item.id, curry(improveItem, item, from)).disableIf(!player.hasItem(from), "You need a " + from + " as a base to create this item")
-                        .disableIf(player.keyItemvX("Radiant shard", 1) < 3, "You need at least three radiant shards in order to create this item.")
-                        .disableIf(player.gems < 10000, "You need at least 20 000 gems in order to create this item");
-                }
-            }
-            submenu(selectMenu, playerMenu);
-        }
-
-        function improveItem(item:ItemType, from:ItemType):void {
-            fountainRoom = false;
-            if (fountainCorrupt)
-                outputText("As you dip " + from.shortName + " in purple waters, corruption begins to cling to it like tar staining the material and transforming it into an unholy abomination. A few seconds later you finally retrieve the " + item.shortName + " from the fountain of corruption, highly satisfied with the results as it radiates with blasphemous power to defile anything it touches.");
-            else
-                outputText("As you dip " + from.shortName + " in the fountain, it begins to radiate with light the material transforming into a tool of divine power. A few seconds later you finally retrieve the " + item.shortName + " from the water, highly satisfied with the results as it radiates with power to scour the evil that plagues this land. ");
-            if(player.keyItemvX("Radiant shard", 1) == 3) player.removeKeyItem("Radiant shard");
-            else player.addKeyValue("Radiant shard",1,-3);
-            player.gems -= 20000;
-            player.destroyItems(from, 1);
-            inventory.takeItem(item, camp.returnToCampUseOneHour);
-        }
     }
 	
     private function encountersFountainOfPurity():void {
@@ -523,7 +463,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         startCombat(new DisplacerBeast(), true);
     }
     private function darkSlimeEL(print:Boolean = true):void {
-        if (player.gooScore() >= 11 || player.magmagooScore() >= 13 || player.darkgooScore() >= 13) {
+        if (player.isRace(Races.SLIME) || player.isRace(Races.MAGMASLIME) || player.isRace(Races.DARKSLIME)) {
             if (!print) {
                 minotaurEL(false); //replace - slime won't attack another slime
                 return;

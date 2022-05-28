@@ -189,12 +189,12 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			return 60;
 		}
 
-		private function emberHasCock():Boolean
+		public function emberHasCock():Boolean
 		{
 			return (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3);
 		}
 
-		private function emberHasVagina():Boolean
+		public function emberHasVagina():Boolean
 		{
 			return (flags[kFLAGS.EMBER_GENDER] == 2 || flags[kFLAGS.EMBER_GENDER] == 3);
 		}
@@ -1309,7 +1309,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			}
 			outputText("\n\nSatisfied, Ember turns to take another look at you.");
 			//(If PC has high dragon or lizard score)
-			if (player.nagaScore() >= 3 || player.lizardScore() >= 3 || player.dragonScore() >= 3) {
+			if (player.racialScore(Races.NAGA) >= 3 || player.racialScore(Races.LIZARD) >= 3 || player.racialScore(Races.DRAGON) >= 3) {
 				outputText("  Ember's eyes linger on your form.  After a moment of awkward silence, you clear your throat.  " + emberMF("he", "she") + " blinks and says hurriedly.  \"<i>Sorry... I was just admiring you-</i>\" Realizing what " + emberMF("he", "she") + " was about to say,and quickly blurts out.  \"<i>I mean the weather! Yes, nice day today isn't it?</i>\"  You're not convinced, but let it slide. Ember recomposes and clears " + emberMF("his", "her") + " throat before saying.");
 				//(+1 Affection)
 				points++;
@@ -1823,7 +1823,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				}
 				player.refillHunger(25);
 				//(no new PG, PC has dragon-morph status and is opposite Ember's sex:
-				if (rand(2) == 0 && player.dragonScore() >= 4 && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
+				if (rand(2) == 0 && player.racialScore(Races.DRAGON) >= 4 && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
 					outputText("  Though, a sudden swell of lust races through your ");
 					if (player.hasCock()) {
 						outputText(cockDescript(0));
@@ -1890,7 +1890,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				}
 				player.refillHunger(50);
 				//(no new PG, PC has dragon-morph status and is opposite Ember's sex:
-				if (rand(2) == 0 && player.dragonScore() >= 4 && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
+				if (rand(2) == 0 && player.racialScore(Races.DRAGON) >= 4 && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
 					outputText("  Though, a sudden swell of lust races through your ");
 					if (player.hasCock()) {
 						outputText(cockDescript(0));
@@ -1991,7 +1991,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\n\nEmber gets so flustered that " + emberMF("he", "she") + " just stares at you in stunned silence, wearing a goofy smile.  \"<i>Wha... you know, there's no point in saying anything.  I know you'll just sneak another opportunity like this in the future... doesn't mean I won't make you pay for this when I catch you later.</i>\"");
 				outputText("\n\nYou whisper into her ear that you're looking forward to it, and gently raise yourself from " + emberMF("his", "her") + " lap to leave.");
 				//(no new PG, PC has dragon-morph status and is opposite Ember's sex:
-				if (rand(2) == 0 && player.dragonScore() >= 4 && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
+				if (rand(2) == 0 && player.racialScore(Races.DRAGON) >= 4 && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
 					outputText("  Though, a sudden swell of lust races through your ");
 					if (player.hasCock()) {
 						outputText(cockDescript(0));

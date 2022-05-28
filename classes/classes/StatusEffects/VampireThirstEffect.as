@@ -3,6 +3,7 @@
  */
 package classes.StatusEffects {
 import classes.IMutations.IMutationsLib;
+import classes.Races;
 import classes.StatusEffectClass;
 import classes.StatusEffectType;
 
@@ -19,8 +20,8 @@ public class VampireThirstEffect extends StatusEffectClass {
 		var maxThi:Number = 0;
 		if (game.player.facePart.type == 34) maxThi += 30;
 		if (game.player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 1) maxThi += 15;
-		if (game.player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 2 && game.player.vampireScore() >= 6) maxThi += 30;
-		if (game.player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 3 && game.player.vampireScore() >= 12) maxThi += 60;
+		if (game.player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 2 && game.player.racialScore(Races.VAMPIRE) >= 6) maxThi += 30;
+		if (game.player.perkv1(IMutationsLib.VampiricBloodstreamIM) >= 3 && game.player.racialScore(Races.VAMPIRE) >= 12) maxThi += 60;
 		if (game.player.perkv1(IMutationsLib.HollowFangsIM) >= 1) maxThi += 5;
 		if (game.player.perkv1(IMutationsLib.HollowFangsIM) >= 2) maxThi += 5;
 		if (game.player.perkv1(IMutationsLib.HollowFangsIM) >= 3) maxThi += 5;

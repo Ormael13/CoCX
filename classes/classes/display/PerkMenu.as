@@ -16,6 +16,7 @@ import classes.PerkClass;
 import classes.PerkLib;
 import classes.PerkTree;
 import classes.PerkType;
+import classes.Races;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
@@ -73,7 +74,7 @@ public class PerkMenu extends BaseContent {
 		addButton(4, "Perks Database", perkDatabase);
 		if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || combat.canSpearDance() ||player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) ||
 			(player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) || player.hasPerk(PerkLib.NaturalInstincts) || player.hasPerk(PerkLib.WayOfTheWarrior) || player.hasPerk(PerkLib.Berzerker) ||
-			((player.hasPerk(PerkLib.Lustzerker)) && player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) || player.hasPerk(PerkLib.LikeAnAsuraBoss) || TyrantiaFollower.TyrantiaTrainingSessions >= 20 || player.jiangshiScore() >= 20) {
+			((player.hasPerk(PerkLib.Lustzerker)) && player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) || player.hasPerk(PerkLib.LikeAnAsuraBoss) || TyrantiaFollower.TyrantiaTrainingSessions >= 20 || player.isRace(Races.JIANGSHI)) {
 			outputText("\n<b>You can adjust your melee attack settings.</b>");
 			addButton(5, "Melee Opt",doubleAttackOptions);
 		}
@@ -194,7 +195,7 @@ public class PerkMenu extends BaseContent {
 		if (doubleAttackVal == 1) outputText("twice");
 		if (doubleAttackVal < 1) outputText("once");
 		outputText(" in combat turn.\n\nYou can change it to different amount of attacks.");
-		if (player.hasPerk(PerkLib.JobBeastWarrior) || player.jiangshiScore() >= 20) {
+		if (player.hasPerk(PerkLib.JobBeastWarrior) || player.isRace(Races.JIANGSHI)) {
 			outputText("\n\nYou can choose between fighting feral or normaly with your fists. (Req. to have natural attacks or a gaunlet type weapon with claws to enable feral mode)");
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 0) outputText("\n\nFighting Style: <b>Normal</b>");
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1) outputText("\n\nFighting Style: <b>Feral</b>");
@@ -327,7 +328,7 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] != 0) addButton(3, "Manual", toggleflag,kFLAGS.ASURA_FORM_COMBAT_MODE,false);
 			if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] != 1) addButton(8, "Autocast", toggleflag,kFLAGS.ASURA_FORM_COMBAT_MODE,true);
 		}
-		if (player.hasPerk(PerkLib.JobBeastWarrior) || player.jiangshiScore() >= 20) {
+		if (player.hasPerk(PerkLib.JobBeastWarrior) || player.isRace(Races.JIANGSHI)) {
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] != 0) addButton(4, "Normal", toggleflag, kFLAGS.FERAL_COMBAT_MODE, false);
 			if (((player.weaponName == "fists" && player.hasNaturalWeapons()) || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(9, "Feral", toggleflag , kFLAGS.FERAL_COMBAT_MODE, true);
 			else addButtonDisabled(9, "Feral", "You do not meet all req. to use this. You need to be unarmed and possess a natural weapon OR to have equipped gaunlet with any type of artifical claws.");
@@ -1092,15 +1093,16 @@ public class PerkMenu extends BaseContent {
 	public function mutationsDatabaseVerify(mutationsArray:Array):void{
 			if(flags[kFLAGS.MUTATIONS_SPOILERS]){
 				for each(var mutation:IMutationPerkType in mutationsArray){
-					if (player.perkv1(mutation) > 0) {	//Just checking if you have the base.
+					var pMutateLvl:int = player.perkv1(mutation);
+					if (pMutateLvl > 0) {	//Just checking if you have the base.
 						outputText("\n" + mutation.name() + ": <font color=\"#008000\">Acquired.</font>");
 					} else {
 						outputText("\n" + mutation.name() + ": <font color=\"#800000\">Missing.</font>");
 					}
-					outputText("\nTier: " + player.perkv1(mutation) + " of " + mutation.maxLvl + ".");
+					outputText("\nTier: " + pMutateLvl + " of " + mutation.maxLvl + ".");
 					var reqs:Array = [];
-					if (mutation.maxLvl != player.perkv1(mutation)) {
-						mutation.pReqs(player)	//Forces requirements to load up
+					if (mutation.maxLvl != pMutateLvl) {
+						mutation.pReqs()	//Forces requirements to load up
 						if (mutation.requirements.length == 0) reqs.push("Missing data. Perhaps Unacquirable?");
 						else{
 							for each (var cond:Object in mutation.requirements){
@@ -1119,18 +1121,33 @@ public class PerkMenu extends BaseContent {
 							}
 						}
 					}
-					if (mutation.maxLvl == player.perkv1(mutation)){	//Highest tier.
+					if (mutation.maxLvl == pMutateLvl){	//Highest tier.
 						reqs.push("You already have the highest tier.");
 					}
 					outputText("\nRequirements for next tier: " + reqs.join(", "));
-					outputText("\nDescription: ");
-					if(mutation.desc().length <= 1) {	//Some desc. contains only "."
-						if (player.perkv1(mutation) == 0) outputText(mutation.desc());
-						else outputText("No description available.");
+
+					if (mutation.maxLvl != pMutateLvl){
+						outputText("\nNext Tier Description: ");
+						if(mutation.mDesc(player.getPerk(mutation), pMutateLvl).length <= 1) {	//Some desc. contains only "."
+							if (!player.hasMutation(mutation)) outputText(mutation.mDesc(player.getPerk(mutation),1));
+							//outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl));
+							else outputText("Error in description for Mutation "+ mutation.name() +".");
+						}
+						else{
+							outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl + 1));
+						}
 					}
-					else{
-						outputText(mutation.desc());
+
+					if (pMutateLvl > 0){
+						outputText("\nCurrent Tier Description: ");
+						if(mutation.mDesc(player.getPerk(mutation), pMutateLvl).length <= 1) {	//Some desc. contains only "."
+							outputText("Error in description for Mutation "+ mutation.name() +".");
+						}
+						else{
+							outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl));
+						}
 					}
+
 					outputText("\n\n")
 					var tempObj:Object = mutation.pBuffs(player)
 					for (var key:String in tempObj){
@@ -1237,16 +1254,19 @@ public class PerkMenu extends BaseContent {
 			var pList3:Array = PerkLib.gearPerks();	//No Gear Perks.
 			var pList4:Array = PerkLib.weaPerks();	//No Weapons Perks.
 			//function pSpecialRem = No Ascension/History/Bloodline/PastLife Perks
-			var pList5:Array = MutationsLib.mutationsArray("Deprecated");
+			var pList5:Array = MutationsLib.mutationsArray("Deprecated", true);
 			var pList6:Array = IMutationsLib.mutationsArray("");
 			var pList7:Array = IMutationsLib.mutationsArray("Deprecated");
+			var mArray:Array = arrMerge(pList1, pList2, pList3, pList4, pList5, pList6, pList7).sort();
 			for each (var perkTrue:PerkType in perkDict){
-				if (!(pList1.indexOf(perkTrue) >= 0) && !(pList2.indexOf(perkTrue) >= 0) && !(pList3.indexOf(perkTrue) >= 0) && !(pList4.indexOf(perkTrue) >= 0) && !(pList5.indexOf(perkTrue) >= 0) && !(pList6.indexOf(perkTrue) >= 0) && !(pList7.indexOf(perkTrue) >= 0) && pSpecialRem(perkTrue)){
+				if (!(mArray.indexOf(perkTrue) >= 0) && pSpecialRem(perkTrue)){
 					tPerkList.push(perkTrue);
 				}
 			}
 			//trace(pList1.length + " < 1 - 2 > " + pList2.length + "\n");
 		}
+
+
 
 		function pSpecialRem(perkTrue:PerkType):Boolean{	//SpecialCases
 			var pName:String = perkTrue.name();
@@ -1523,13 +1543,14 @@ public class PerkMenu extends BaseContent {
 
 		function initSet():void {
 			var mutationList:Array = MutationsLib.mutationsArray("",true);
-			var mutationList2:Array = MutationsLib.mutationsArray("Deprecated");
+			var mutationList2:Array = MutationsLib.mutationsArray("Deprecated", true);
 			var mutationList3:Array = IMutationsLib.mutationsArray("");
 			var mutationList4:Array = IMutationsLib.mutationsArray("Deprecated");
+			var mArray:Array = arrMerge(mutationList, mutationList2, mutationList3, mutationList4)
 
 
 			for each(var pPerks:PerkClass in pPerkList) { //Cleans up the list of mutations and no-perk requiring perks
-				if (!(mutationList.indexOf(pPerks.ptype) >= 0) && !(mutationList2.indexOf(pPerks.ptype) >= 0)&& !(mutationList3.indexOf(pPerks.ptype) >= 0)&& !(mutationList4.indexOf(pPerks.ptype) >= 0)){
+				if (!(mArray.indexOf(pPerks.ptype) >= 0)){
 					//maxpPerks++
 					var pPerkReq:PerkType = pPerks.ptype
 					var perkno:Boolean = true;
@@ -1655,6 +1676,15 @@ public class PerkMenu extends BaseContent {
 		}
 		initSet();
 	}
+
+	public static function arrMerge(...arrays):Array {
+		var result:Array = [];
+		for(var i:int=0;i<arrays.length;i++){
+			result = result.concat(arrays[i]);
+		}
+		return result;
+	}
+
 	/* [INTERMOD: revamp]
 	 public function ascToleranceOption():void{
 	 clearOutput();
@@ -1680,6 +1710,5 @@ public class PerkMenu extends BaseContent {
 	 ascToleranceOption();
 	 }
 	 */
-
 }
 }

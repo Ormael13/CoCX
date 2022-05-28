@@ -498,6 +498,15 @@ public class PerkLib
 		public static const MeleeWeaponsMasterySu:PerkType = mk("Melee Weapons Mastery (Su)", "Melee Weapons Mastery (Su)",
 				"Decrease by ~45% needed exp to level up each melee weapon mastery type and increase cap for melee masteries by 50.",
 				"You've chosen the 'Melee Weapons Mastery (Su)' perk. Decrease by ~45% needed exp to level up each melee weapon mastery type and increase cap for melee masteries by 50.");
+		public static const RangeWeaponsMastery:PerkType = mk("Range Weapons Mastery", "Range Weapons Mastery",
+				"Decrease by ~20% needed exp to level up each range weapon mastery type and grants 200% more of base mastery exp gains.",
+				"You've chosen the 'Range Weapons Mastery' perk. Decrease by ~20% needed exp to level up each range weapon mastery type and grants 200% more of base mastery exp gains.");
+		public static const RangeWeaponsMasteryEx:PerkType = mk("Range Weapons Mastery (Ex)", "Range Weapons Mastery (Ex)",
+				"Decrease by ~45% needed exp to level up each range weapon mastery type and double mastery gains on crit hits (2x -> 4x).",
+				"You've chosen the 'Range Weapons Mastery (Ex)' perk. Decrease by ~45% needed exp to level up each range weapon mastery type and double mastery gains on crit hits (2x -> 4x).");
+		public static const RangeWeaponsMasterySu:PerkType = mk("Range Weapons Mastery (Su)", "Range Weapons Mastery (Su)",
+				"Decrease by ~45% needed exp to level up each range weapon mastery type and increase cap for melee masteries by 50.",
+				"You've chosen the 'Range Weapons Mastery (Su)' perk. Decrease by ~45% needed exp to level up each range weapon mastery type and increase cap for melee masteries by 50.");
 		/*public static const JobBeastlord:PerkType = mk("Job: Beastlord", "Job: Beastlord",
 				".",
 				"You've chosen the 'Job: Beastlord' perk, .");
@@ -3655,7 +3664,7 @@ public class PerkLib
 		public static const FlawlessBody:PerkType = mk("Flawless Body", "Flawless Body",
 				"Your elven body with its flawless form and skin is so alluring it reinforces your ability to tease.");
 		public static const Flexibility:PerkType = mk("Flexibility", "Flexibility",
-				"Grants cat-like flexibility.  Useful for dodging and 'fun'.");
+				"Grants cat-like flexibility.  Useful for dodging and 'fun'. +10% Speed for cat-like races.")
 		public static const FreezingBreath:PerkType = mk("Freezing Breath (F)", "Freezing Breath (F)",
 				"Allows access to Fenrir (AoE) freezing breath attack.");
 		public static const FreezingBreathYeti:PerkType = mk("Freezing Breath (Y)", "Freezing Breath (Y)",
@@ -4047,7 +4056,7 @@ public class PerkLib
 		}
 
 	// Perk requirements
-	private static function initDependencies():void {
+	public static function initDependencies():void {
         try {
 			//------------
             // STRENGTH
@@ -6330,16 +6339,13 @@ public class PerkLib
 					.requireMaxVenom(100);
 			VenomousAdiposeTissue.requireTou(10)
 					.requireMaxVenom(100);
-			CursedTag.requireCustomFunction(function (player:Player):Boolean {
-                return player.jiangshiScore() >= 20;
-            }, "Jiangshi race");
-			ImprovedCursedTag.requirePerk(CursedTag).requireCustomFunction(function (player:Player):Boolean {
-                return player.jiangshiScore() >= 20;
-            }, "Jiangshi race");
-			GreaterCursedTag.requirePerk(ImprovedCursedTag).requireCustomFunction(function (player:Player):Boolean {
-                return player.jiangshiScore() >= 20;
-            }, "Jiangshi race");
+			CursedTag.requireRace(Races.JIANGSHI);
+			ImprovedCursedTag.requirePerk(CursedTag).requireRace(Races.JIANGSHI);
+			GreaterCursedTag.requirePerk(ImprovedCursedTag).requireRace(Races.JIANGSHI);
 			MeleeWeaponsMastery.requireStr(10)
+					.requireTou(10)
+					.requireSpe(10);
+			RangeWeaponsMastery.requireStr(10)
 					.requireTou(10)
 					.requireSpe(10);
 			MeleeWeaponsMasteryEx.requirePerk(MeleeWeaponsMastery)
@@ -6347,7 +6353,17 @@ public class PerkLib
 					.requireStr(20)
 					.requireTou(20)
 					.requireSpe(20);
+			RangeWeaponsMasteryEx.requirePerk(RangeWeaponsMastery)
+					.requireLevel(2)
+					.requireStr(20)
+					.requireTou(20)
+					.requireSpe(20);
 			MeleeWeaponsMasterySu.requirePerk(MeleeWeaponsMasteryEx)
+					.requireLevel(4)
+					.requireStr(30)
+					.requireTou(30)
+					.requireSpe(30);
+			RangeWeaponsMasterySu.requirePerk(RangeWeaponsMasteryEx)
 					.requireLevel(4)
 					.requireStr(30)
 					.requireTou(30)
@@ -7080,6 +7096,5 @@ public class PerkLib
             trace(e.getStackTrace());
         }
 	}
-	initDependencies();
 }
 }

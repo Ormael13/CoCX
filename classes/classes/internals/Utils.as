@@ -36,6 +36,12 @@ public class Utils extends Object
 				return func.apply(null,args.concat(args2));
 			};
 		}
+		// returns same function that doesn't crash on too many arguments
+		public static function varargify(func:Function):Function {
+			return function(...args):* {
+				return func.apply(this, args.slice(0, func.length));
+			}
+		}
 		public static function bindThis(func:Function,thiz:Object):Function {
 			return function(...args2):* {
 				return func.apply(thiz,args2);
@@ -145,6 +151,18 @@ public class Utils extends Object
 		public static function pushAll(target:Array, values:Array):Array {
 			target.push.apply(target, values);
 			return target;
+		}
+		
+		/**
+		 * Returns flattened array with elements from all sub-arrays in a single list.
+		 */
+		public static function flatten(src:Array, dst:Array=null):Array {
+			if (!dst) dst = [];
+			for each(var e:* in src) {
+				if (e is Array) flatten(e, dst);
+				else dst.push(e);
+			}
+			return dst;
 		}
 
 		/**
@@ -418,7 +436,7 @@ public class Utils extends Object
 			return (string.substr(0, 1).toLowerCase() + string.substr(1));
 		}
 
-		public static function mergeSentences(sentences: Array, lastDivider: String = ", and ", divider: String = ", "): String {
+		public static function mergeSentences(sentences: Array, lastDivider: String = ", and ", divider: String = ", ", lowerCase:Boolean=true): String {
 			var mergedString: String = "";
 
 			sentences = sentences.filter(function(element: *, index: int, array: Array): Boolean {
@@ -432,7 +450,7 @@ public class Utils extends Object
 			for (var i: int = 0; i < sentences.length; i++) {
 				var s: String = sentences[i];
 
-				if (i > 0) {
+				if (i > 0 && lowerCase) {
 					s = lowerCaseFirstLetter(s);
 				}
 
@@ -450,6 +468,20 @@ public class Utils extends Object
 			}
 
 			return mergedString;
+		}
+		
+		/**
+		 * Converts an input to string, trying to stringify objects either with their `toString()` method or `JSON.stringify()`
+		 */
+		public static function stringify(input:*):String {
+			if (input is String) return input;
+			if (typeof input !== "object" || !input) return ""+input;
+			if (typeof input.toString === "function") return input.toString();
+			try {
+				return JSON.stringify(input);
+			} catch (e:*) {
+			}
+			return ""+input;
 		}
 
 		// Basically, you pass an arbitrary-length list of arguments, and it returns one of them at random.
@@ -500,6 +532,38 @@ public class Utils extends Object
 			}
 
 			return false;
+		}
+		
+		/**
+		 * Sort the {@param collection} according to natural sort order of the value returned by {@param selector} `(value:*)=>*` function.
+		 * @param descending Sort descending
+		 * @return A new collection, {@param collection} is unmodified.
+		 *
+		 * @example
+		 * sortedBy(
+		 *     ["a","quickest","brown","fox"],
+		 *     function(s:String):int { return s.length; }
+		 * ) -> ["a", "fox", "brown", "quickest"]
+		 */
+		public static function sortedBy(
+				collection:Array,
+				selector:Function,
+				descending:Boolean = false):Array {
+			if (collection.length == 0) return [];
+			/**
+			 * array of `{ v: original collection element, s: value to sort on }
+			 */
+			var selection:Array = [];
+			for (var i:int=0; i<collection.length; i++) {
+				selection[i] = {s:selector(collection[i]),v:collection[i]};
+			}
+			var flags:int = descending?Array.DESCENDING:0;
+			if (selection[0].s is Number) flags |= Array.NUMERIC;
+			selection.sortOn("s",flags);
+			for (i=0; i<collection.length; i++) {
+				selection[i] = selection[i].v;
+			}
+			return selection;
 		}
 
 		public static function rand(max:Number):int

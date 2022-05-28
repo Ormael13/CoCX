@@ -383,7 +383,7 @@ public class CombatTeases extends BaseCombatContent {
 			choices[choices.length] = 17;
 		}
 		//18 DOG TEASE
-		if (player.dogScore() >= 4 && player.hasVagina() && player.isBiped()) {
+		if (player.isRace(Races.DOG) && player.hasVagina() && player.isBiped()) {
 			choices[choices.length] = 18;
 			choices[choices.length] = 18;
 		}
@@ -410,7 +410,7 @@ public class CombatTeases extends BaseCombatContent {
 			choices[choices.length] = 22;
 			choices[choices.length] = 22;
 			choices[choices.length] = 22;
-			if (player.spiderScore() >= 4) {
+			if (player.isRace(Races.SPIDER)) {
 				choices[choices.length] = 22;
 				choices[choices.length] = 22;
 				choices[choices.length] = 22;
@@ -525,7 +525,7 @@ public class CombatTeases extends BaseCombatContent {
 		//38 Kitsune Tease
 		//39 Kitsune Tease
 		//40 Kitsune Tease
-		if (player.kitsuneScore() >= 2 && player.tailType == Tail.FOX) {
+		if (player.racialScore(Races.KITSUNE) >= 2 && player.tailType == Tail.FOX) {
 			choices[choices.length] = 37;
 			choices[choices.length] = 37;
 			choices[choices.length] = 37;
@@ -544,7 +544,7 @@ public class CombatTeases extends BaseCombatContent {
 			choices[choices.length] = 40;
 		}
 		//41 Kitsune Gendered Tease
-		if (player.kitsuneScore() >= 2 && player.tailType == Tail.FOX) {
+		if (player.racialScore(Races.KITSUNE) >= 2 && player.tailType == Tail.FOX) {
 			choices[choices.length] = 41;
 			choices[choices.length] = 41;
 			choices[choices.length] = 41;
@@ -563,7 +563,7 @@ public class CombatTeases extends BaseCombatContent {
 			choices[choices.length] = 42;
 		}
 		//43 - special mino + cowgirls
-		if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tailType == Tail.COW) {
+		if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.racialScore(Races.COW) >= 3 && player.tailType == Tail.COW) {
 			choices[choices.length] = 43;
 			choices[choices.length] = 43;
 			choices[choices.length] = 43;
@@ -627,7 +627,7 @@ public class CombatTeases extends BaseCombatContent {
 		//=======================================================
 		select = choices[rand(choices.length)];
 		if (monster.short.indexOf("minotaur") != -1) {
-			if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tailType == Tail.COW)
+			if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.racialScore(Races.COW) >= 3 && player.tailType == Tail.COW)
 				select = 43;
 		}
 		if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) {

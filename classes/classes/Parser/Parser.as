@@ -627,8 +627,8 @@ public class Parser
 
 			if (mainParserDebug) trace("WARNING: Not an if statement");
 			// Match a single word, with no leading or trailing space
-			var singleWordTagRegExp:RegExp = /^[\w.]+$/;
-			var doubleWordTagRegExp:RegExp = /^[\w.]+\s[\w.]+$/;
+			var singleWordTagRegExp:RegExp = /^[\/\d\w-_.]+$/;
+			var doubleWordTagRegExp:RegExp = /^[\/\d\w-_.]+\s[\w\d-_.]+$/;
 
 			if (mainParserDebug) trace("WARNING: string length = ", textCtnt.length);
 

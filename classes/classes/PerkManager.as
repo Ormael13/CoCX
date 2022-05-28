@@ -51,7 +51,7 @@ public class PerkManager {
      * @return {Boolean} True if perk is added. False if perk already exists or fails to add.
      */
     public function add(perk:PerkClass):Boolean {
-        trace("Attempting to add perk " + perk.ptype.id + " to " + this.actor.short);
+//        trace("Attempting to add perk " + perk.ptype.id + " to " + this.actor.short);
         if (this.has(perk.ptype)) {
             trace("Perk " + perk.ptype.id + " already exists. Aborted.");
             return false;
@@ -66,7 +66,7 @@ public class PerkManager {
             );
         }
         this.arrayCache = null; // Invalidate array cache.
-        trace("Perk " + perk.ptype.id + " added.");
+//        trace("Perk " + perk.ptype.id + " added.");
         return true;
     }
 
