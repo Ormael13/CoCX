@@ -699,17 +699,17 @@ package classes.Scenes {
 //					name: "Breasts",
 //					func: accessBreastsMenu
 //				},
-//				{
-//					name: "Penis",
-//					func: accessCocksMenu
-//				},
+				{
+					name: "Vagina",
+					func: accessVaginasMenu
+				},
+				{
+					name: "Penis",
+					func: accessCocksMenu
+				},
 				{
 					name: "Balls",
 					func: accessBallsMenu
-				},
-				{
-					name: "Vagina",
-					func: accessVaginaMenu
 				}
 			];
 
@@ -919,7 +919,60 @@ package classes.Scenes {
 			openPaginatedMenu(title, accessTailMenu, currentPage, TailMem.Memories);
 		}
 
-		private function accessBallsMenu(currentPage: int = 0): void {	//TODO: convert to BodyPart, opt for none, duo, quad, trap-pouch
+		private function accessBreastsMenu(currentPage: int = 0): void {	//TODO: convert to BodyPart, opts for rows from 0 to 4
+			const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Breasts</u></font>\n";
+
+			clearOutput();
+			outputText(title);
+
+			const breastsDesc: String = CoC.instance.playerAppearance.describeBreasts();
+			outputText(player.hasBreasts() ?  breastsDesc : "You have no Breasts.");
+			outputText("[pg]Perhaps you'd like to change this?");
+
+			addButton(14, "Back", accessMetamorphMenu);
+			//openPaginatedMenu(title, accessBreastsMenu, currentPage, TailMem.Memories);
+		}
+
+		private function accessCocksMenu(currentPage: int = 0): void {
+			const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Cocks</u></font>\n";
+
+			clearOutput();
+			outputText(title);
+
+			const cocksDesc: String = CoC.instance.playerAppearance.describeCocks();
+			outputText(player.hasCock() ?  cocksDesc : "You have no cock.");
+			outputText("[pg]Perhaps you'd like to change this?");
+
+			var totCock: int = player.cockTotal();
+			if (totCock == 0) {
+				openPaginatedMenu(title, accessCocksMenu, currentPage, CockMem.Memories, 0);
+			}
+			else {
+				menu();
+
+				for (var i: int = 0; i  < totCock; i++) {
+					addButton(i, "Cock "+(i+1), accessCockMenu, 0, i).hint( player.cockDescript(i));
+				}
+				const cockUnlocked:Boolean = true;
+				addButtonIfTrue(totCock, "New Cock", curry(accessCockMenu, 0, totCock), "You need to get a cock first", cockUnlocked, "Add a cock");
+
+				addButton(14, "Back", accessMetamorphMenu);
+			}
+		}
+
+		private function accessCockMenu(currentPage: int = 0, cock: int = 0): void {
+			const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Cock</u></font>\n";
+			clearOutput();
+			outputText(title);
+
+			const cockDesc: String = (cock == player.cockTotal()? "Add a new cock":CoC.instance.playerAppearance.describeCock(cock));
+			outputText(cockDesc);
+			outputText("[pg]Perhaps you'd like to change this?");
+
+			openPaginatedMenu(title, accessCockMenu, currentPage, CockMem.Memories, cock);
+		}
+
+		private function accessBallsMenu(currentPage: int = 0): void {
 			const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Balls</u></font>\n";
 
 			clearOutput();

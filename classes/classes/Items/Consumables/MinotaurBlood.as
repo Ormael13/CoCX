@@ -11,9 +11,11 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.CockTypesEnum;
 import classes.EngineCore;
+import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
 import classes.PerkLib;
+import classes.Scenes.Metamorph;
 import classes.StatusEffects;
 import classes.VaginaClass;
 import classes.CoC;
@@ -121,6 +123,8 @@ public class MinotaurBlood extends Consumable {
 						player.cocks[0].cockThickness = 1;
 						player.cocks[0].cockType = CockTypesEnum.HORSE;
 						player.clitLength = .25;
+
+						Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HORSE));
 					}
 				}
 				changes++;

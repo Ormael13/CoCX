@@ -44,8 +44,8 @@ public class VaginaMem extends BaseContent {
 		  name: "No Vagina",
 		  cost: 1000,
 		  title: "None",
-		  transformation: function(): Transformation {
-			  return CoC.instance.transformations.VaginaNone();
+		  transformation: function(vaginaIndex:int): Transformation {
+			  return CoC.instance.transformations.VaginaNone(vaginaIndex);
 		  }
 		});
 
@@ -55,8 +55,8 @@ public class VaginaMem extends BaseContent {
 			name: "Human Vagina",
 			cost: 500,
 			title: "Human",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.VaginaHuman();
+			transformation: function(vaginaIndex:int): Transformation {
+				return CoC.instance.transformations.VaginaHuman(vaginaIndex);
 			}
 		});
 
@@ -66,8 +66,8 @@ public class VaginaMem extends BaseContent {
 			name: "Equine Vagina",
 			cost: 500,
 			title: "Equine",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.VaginaHorse();
+			transformation: function(vaginaIndex:int): Transformation {
+				return CoC.instance.transformations.VaginaHorse(vaginaIndex);
 			}
 		});
 
@@ -77,8 +77,8 @@ public class VaginaMem extends BaseContent {
 			name: "Black Sand Trap Vagina",
 			cost: 500,
 			title: "Sand Trap",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.VaginaSandTrap();
+			transformation: function(vaginaIndex:int): Transformation {
+				return CoC.instance.transformations.VaginaSandTrap(vaginaIndex);
 			}
 		});
 
@@ -88,8 +88,8 @@ public class VaginaMem extends BaseContent {
 			name: "Cave Wyrm Vagina",
 			cost: 500,
 			title: "Cave Wyrm",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.VaginaCaveWyrm();
+			transformation: function(vaginaIndex:int): Transformation {
+				return CoC.instance.transformations.VaginaCaveWyrm(vaginaIndex);
 			}
 		});
 
@@ -99,8 +99,8 @@ public class VaginaMem extends BaseContent {
 			name: "Centipede Vagina",
 			cost: 500,
 			title: "Centipede",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.VaginaCentipede();
+			transformation: function(vaginaIndex:int): Transformation {
+				return CoC.instance.transformations.VaginaCentipede(vaginaIndex);
 			}
 		});
 
@@ -110,8 +110,8 @@ public class VaginaMem extends BaseContent {
 			name: "Manticore Vagina",
 			cost: 500,
 			title: "Manticore",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.VaginaManticore();
+			transformation: function(vaginaIndex:int): Transformation {
+				return CoC.instance.transformations.VaginaManticore(vaginaIndex);
 			}
 		});
 
@@ -121,8 +121,8 @@ public class VaginaMem extends BaseContent {
 		name: "Cancer Vagina",
 		cost: 500,
 		title: "Cancer",
-		transformation: function(): Transformation {
-			return CoC.instance.transformations.VaginaCancer();
+		transformation: function(vaginaIndex:int): Transformation {
+			return CoC.instance.transformations.VaginaCancer(vaginaIndex);
 		}
 	});
 
@@ -132,8 +132,8 @@ public class VaginaMem extends BaseContent {
 			name: "Demon Vagina",
 			cost: 500,
 			title: "Demon",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.VaginaDemonic();
+			transformation: function(vaginaIndex:int): Transformation {
+				return CoC.instance.transformations.VaginaDemonic(vaginaIndex);
 			}
 		});
 
@@ -143,8 +143,8 @@ public class VaginaMem extends BaseContent {
 			name: "Scylla Vagina",
 			cost: 500,
 			title: "Scylla",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.VaginaScylla();
+			transformation: function(vaginaIndex:int): Transformation {
+				return CoC.instance.transformations.VaginaScylla(vaginaIndex);
 			}
 		});
 
@@ -154,8 +154,8 @@ public class VaginaMem extends BaseContent {
 			name: "Naga Vagina",
 			cost: 500,
 			title: "Naga",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.VaginaNaga();
+			transformation: function(vaginaIndex:int): Transformation {
+				return CoC.instance.transformations.VaginaNaga(vaginaIndex);
 			}
 		});
 
@@ -165,8 +165,8 @@ public class VaginaMem extends BaseContent {
 			name: "Shark Vagina",
 			cost: 500,
 			title: "Shark",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.VaginaShark();
+			transformation: function(vaginaIndex:int): Transformation {
+				return CoC.instance.transformations.VaginaShark(vaginaIndex);
 			}
 		});
 
@@ -176,8 +176,8 @@ public class VaginaMem extends BaseContent {
 			name: "Raiju Vagina",
 			cost: 500,
 			title: "Raiju",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.VaginaRaiju();
+			transformation: function(vaginaIndex:int): Transformation {
+				return CoC.instance.transformations.VaginaRaiju(vaginaIndex);
 			}
 		});
 

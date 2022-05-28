@@ -3,6 +3,7 @@ import classes.Appearance;
 import classes.CockTypesEnum;
 import classes.EngineCore;
 import classes.EventParser;
+import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.PerkLib;
@@ -496,6 +497,7 @@ public class Dreams {
             if(CoC.instance.player.cocks[x].sock == "amaranthine" && CoC.instance.player.cocks[x].cockType != CockTypesEnum.DISPLACER) {
                 if(CoC.instance.player.cocks[x].knotMultiplier < 1.5) CoC.instance.player.cocks[x].knotMultiplier = 1.5;
                 CoC.instance.player.cocks[x].cockType = CockTypesEnum.DISPLACER;
+                Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DISPLACER));
             }
         }
         EngineCore.doNext(EventParser.playerMenu);

@@ -17,6 +17,7 @@ import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.CockTypesEnum;
 import classes.EngineCore;
+import classes.GeneticMemories.CockMem;
 import classes.GeneticMemories.VaginaMem;
 import classes.Items.Consumable;
 import classes.Items.Mutations;
@@ -174,6 +175,7 @@ public class PotentVenom extends Consumable {
 					else outputText("and ");
 					outputText("moan out, feeling your cock harden and tingle as it dribbles a strange dark purple liquid. ");
 					player.cocks[0].cockType = CockTypesEnum.OOMUKADE;
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.OOMUKADE));
 				}
 			}
 			if (player.hasVagina() && player.hasCock())
@@ -214,6 +216,7 @@ public class PotentVenom extends Consumable {
 				}
 				if (player.cocks[0].cockType != CockTypesEnum.OOMUKADE) {
 					player.cocks[0].cockType = CockTypesEnum.OOMUKADE;
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.OOMUKADE));
 				}
 			}
 			dynStats("lus", 10);

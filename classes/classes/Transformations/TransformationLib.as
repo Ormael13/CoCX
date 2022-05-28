@@ -10373,6 +10373,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					player.cocks[cock].cockType = CockTypesEnum.HUMAN;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HUMAN));
 				},
 				// is present
 				function ():Boolean {
@@ -10413,6 +10414,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].knotMultiplier = 1;
 					if (doOutput) outputText("<b>Your hands are drawn to the strange new [cock "+cock+1+"]</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.");
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HORSE));
 				},
 				// is present
 				function ():Boolean {
@@ -10460,6 +10462,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (player.cocks[cock].knotMultiplier < 1.5) player.cocks[cock].knotMultiplier = 1.5;
 					player.cocks[cock].cockType = CockTypesEnum.DOG;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DOG));
 				},
 				// is present
 				function ():Boolean {
@@ -10500,6 +10503,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[0].cockThickness = 2;
 					player.cocks[cock].cockType = CockTypesEnum.DEMON;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DEMON));
 				},
 				// is present
 				function ():Boolean {
@@ -10533,6 +10537,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (player.cocks[cock].knotMultiplier < 1.3) player.cocks[cock].knotMultiplier = 1.3;
 					player.cocks[cock].cockType = CockTypesEnum.TENTACLE;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.TENTACLE));
 				},
 				// is present
 				function ():Boolean {
@@ -10562,6 +10567,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					player.cocks[cock].cockType = CockTypesEnum.SCYLLATENTACLE;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.SCYLLATENTACLE));
 				},
 				// is present
 				function ():Boolean {
@@ -10602,6 +10608,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].knotMultiplier = 1;
 					player.cocks[cock].cockType = CockTypesEnum.CAT;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.CAT));
 				},
 				// is present
 				function ():Boolean {
@@ -10634,6 +10641,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					player.cocks[cock].cockType = CockTypesEnum.CANCER;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.CANCER));
 				},
 				// is present
 				function ():Boolean {
@@ -10698,6 +10706,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					player.cocks[cock].cockType = CockTypesEnum.LIZARD;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.LIZARD));
 				},
 				// is present
 				function ():Boolean {
@@ -10732,6 +10741,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					player.cocks[cock].cockType = CockTypesEnum.CAVE_WYRM;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.CAVE_WYRM));
 				},
 				// is present
 				function ():Boolean {
@@ -10809,6 +10819,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.ANEMONE));
 				},
 				// is present
 				function ():Boolean {
@@ -10844,6 +10855,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					player.cocks[cock].cockType = CockTypesEnum.KANGAROO;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.KANGAROO));
 				},
 				// is present
 				function ():Boolean {
@@ -10880,6 +10892,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (player.cocks[cock].knotMultiplier < 1.3) player.cocks[cock].knotMultiplier = 1.3;
 					player.cocks[cock].cockType = CockTypesEnum.DRAGON;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DRAGON));
 				},
 				// is present
 				function ():Boolean {
@@ -10914,6 +10927,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if(player.cocks[cock].knotMultiplier < 1.5) player.cocks[cock].knotMultiplier = 1.5;
 					player.cocks[cock].cockType = CockTypesEnum.DISPLACER;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DISPLACER));
 				},
 				// is present
 				function ():Boolean {
@@ -10961,6 +10975,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (player.cocks[cock].knotMultiplier < 1.5) player.cocks[cock].knotMultiplier = 1.25;
 					player.cocks[cock].cockType = CockTypesEnum.FOX;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.FOX));
 				},
 				// is present
 				function ():Boolean {
@@ -10994,6 +11009,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					player.cocks[cock].cockType = CockTypesEnum.BEE;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.BEE));
 				},
 				// is present
 				function ():Boolean {
@@ -11023,6 +11039,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					player.cocks[cock].cockType = CockTypesEnum.PIG;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.PIG));
 				},
 				// is present
 				function ():Boolean {
@@ -11053,6 +11070,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					player.cocks[cock].cockType = CockTypesEnum.AVIAN;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.AVIAN));
 				},
 				// is present
 				function ():Boolean {
@@ -11085,6 +11103,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					player.cocks[cock].cockType = CockTypesEnum.RHINO;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.RHINO));
 				},
 				// is present
 				function ():Boolean {
@@ -11116,6 +11135,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					player.cocks[cock].cockType = CockTypesEnum.ECHIDNA;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.ECHIDNA));
 				},
 				// is present
 				function ():Boolean {
@@ -11150,6 +11170,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (player.cocks[cock].knotMultiplier < 1.1) player.cocks[cock].knotMultiplier = 1.1;
 					player.cocks[cock].cockType = CockTypesEnum.WOLF;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.WOLF));
 				},
 				// is present
 				function ():Boolean {
@@ -11182,6 +11203,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (player.cocks[cock].knotMultiplier < 1.3) player.cocks[cock].knotMultiplier = 1.3;
 					player.cocks[cock].cockType = CockTypesEnum.STAMEN;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.STAMEN));
 				},
 				// is present
 				function ():Boolean {
@@ -11213,6 +11235,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					player.cocks[cock].cockType = CockTypesEnum.RED_PANDA;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.RED_PANDA));
 				},
 				// is present
 				function ():Boolean {
@@ -11244,6 +11267,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					player.cocks[cock].cockType = CockTypesEnum.GRYPHON;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.GRYPHON));
 				},
 				// is present
 				function ():Boolean {
@@ -11279,6 +11303,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					player.cocks[cock].cockType = CockTypesEnum.OOMUKADE;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.OOMUKADE));
 				},
 				// is present
 				function ():Boolean {
@@ -11309,6 +11334,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (player.cocks[cock].knotMultiplier < 1.25) player.cocks[cock].knotMultiplier = 1.25;
 					player.cocks[cock].cockType = CockTypesEnum.RAIJU;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.RAIJU));
 				},
 				// is present
 				function ():Boolean {
@@ -11340,6 +11366,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					player.cocks[cock].cockType = CockTypesEnum.USHI_ONI;
 
+					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.USHI_ONI));
 				},
 				// is present
 				function ():Boolean {

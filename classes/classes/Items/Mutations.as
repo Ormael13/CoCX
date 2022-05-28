@@ -1867,6 +1867,7 @@ public final class Mutations extends MutationsHelper {
                         player.cocks[1].knotMultiplier = 1.7;
                         player.cocks[1].cockType = CockTypesEnum.DOG;
                         dynStats("lus", 50);
+                        Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DOG));
                     }
                     //1 dick - grow 1 and convert 1
                     else if (player.cockTotal() == 1) {
@@ -1877,6 +1878,7 @@ public final class Mutations extends MutationsHelper {
                         player.cocks[1].cockType = CockTypesEnum.DOG;
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
+                        Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DOG));
                     }
                     //2 dicks+ - convert first 2 to doggie-dom
                     else {
@@ -1887,6 +1889,7 @@ public final class Mutations extends MutationsHelper {
                         player.cocks[1].knotMultiplier = 1.4;
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
+                        Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DOG));
                     }
                 }
                 //If player has 1 dogdicks
@@ -1899,6 +1902,7 @@ public final class Mutations extends MutationsHelper {
                         player.cocks[1].knotMultiplier = 1.4;
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
+                        Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DOG));
                     }
                     //if player has more
                     if (player.cockTotal() >= 1) {
@@ -1916,6 +1920,7 @@ public final class Mutations extends MutationsHelper {
                         }
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
+                        Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DOG));
                     }
                 }
             }
@@ -1959,6 +1964,7 @@ public final class Mutations extends MutationsHelper {
                     outputText("[pg]Your [cock] twitches, reshaping itself.  The crown tapers down to a point while the base begins swelling.  It isn't painful in the slightest, actually kind of pleasant.  Your dog-like knot slowly fills up like a balloon, eventually stopping when it's nearly twice as thick as the rest.  You touch and shiver with pleasure, oozing pre-cum.");
                     player.cocks[0].cockType = CockTypesEnum.DOG;
                     player.cocks[0].knotMultiplier = 2.1;
+                    Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DOG));
                 }
             }
             //You wasted knot pepper!

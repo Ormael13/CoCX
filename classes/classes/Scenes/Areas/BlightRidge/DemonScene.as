@@ -6,10 +6,12 @@ package classes.Scenes.Areas.BlightRidge
 {
 
 import classes.*;
+import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Scenes.Areas.DefiledRavine.CowSuccubus;
 import classes.Scenes.Areas.DefiledRavine.MinoIncubus;
+import classes.Scenes.Metamorph;
 import classes.Scenes.SceneLib;
 
 //use namespace CoC;
@@ -423,6 +425,7 @@ import classes.Scenes.SceneLib;
             outputText("Still, your possessed maleness is far from finished as it continues to slide along her belly and between her still-dripping tits, and before long you feel another orgasm building.  You hang on for dear life, hoping just to stay conscious through the ordeal...\n\nHour later you pull away, sated.  For now.");
             //common
             outputText("\n\nThe succubus licks her fingers clean, looking totally recovered.  In the blink of an eye, she dashes out and disappearing in the distance.");
+			Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DEMON));
 			player.sexReward("vaginalFluids","Dick");
 			dynStats("cor", 5);
 			cleanupAfterCombat();
@@ -452,6 +455,7 @@ import classes.Scenes.SceneLib;
             outputText("\n\nYou pant with exertion and pull back, only to have your " + player.cockDescript(x) + " plunge right back in. Beginning another rough fucking session, your hips force-fuck her beyond your control.  Exhausted, you lean over her, figuring you may as well enjoy your double's wondrous breasts until your demonic cock has finally sated itself.  You just hope you don't black out from the waves of pleasure each of your new nubs radiates.\n\n\nHours later you pull away, sated.  For now.");
 			//common
             outputText("\n\nThe succubus licks her fingers clean, looking totally recovered.  In the blink of an eye, she dashes out and disappearing in the distance.");
+			Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DEMON));
 			player.sexReward("vaginalFluids","Dick");
 			dynStats("cor", 5);
 			cleanupAfterCombat();
