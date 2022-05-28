@@ -3,6 +3,7 @@ package classes.Scenes.Areas.HighMountains
 import classes.*;
 import classes.BodyParts.Horns;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 
@@ -50,9 +51,7 @@ import classes.Stats.Buff;
 		public function encounter():void
 		{
 			clearOutput();
-			
-			if (flags[kFLAGS.IZUMI_MET] == 0)
-			{
+			if (flags[kFLAGS.IZUMI_MET] == 0) {
 				outputText("As you wander the wasted landscape searching for anything of interest, you come across a large rock blocking what appears to be the entrance to a cave.  Wondering about how to best get around it, you suddenly become aware of a strange sound on the edge of your hearing.\n\n");
 				outputText("Flattening yourself against the stone in case of danger, you strain your ears and scan the horizon, searching for the source of the noise.  The volume gradually increases, and eventually you realize what it is that you’re hearing; someone nearby is loudly humming, a lively tune echoing off the rocks and cliffs.  As best you can tell, it seems to be coming from the other side of the enormous stone blocking your path.\n\n");
 				outputText("Your curiosity piqued, you search around the obstruction for a way inside, and finally manage to find a slim gap between the bottom of the rock and the cliff face.  Kneeling down, you peer inside and can make out the distinct glowing embers of a campfire.  You’re pretty sure you can make it inside, but it might be difficult to get away if danger threatens.  On the other hand, wild animals don’t light campfires, and a lust-crazed demon probably wouldn’t bother to hide itself so effectively....\n\n");
@@ -60,8 +59,11 @@ import classes.Stats.Buff;
 				addButton(0, "Enter", enterFirstTime);
 				addButton(1, "Leave", abortabortleavethefukkencave);
 			}
-			else
-			{
+			else {
+				if (TyrantiaFollower.TyraniaAndIzumi && rand(2) == 0) {
+					SceneLib.tyrania.TyraniaAndIzumiScene();
+					return;
+				}
 				outputText("As you wander the wasted landscape searching for anything of interest, you find yourself face to face with a familiar large boulder; the same one hiding the entrance to Izumi’s cave.  Once again, you become aware of a strange sound on the edge of your hearing.  Carefully positioning yourself at the gap between the boulder and the cave entrance, you turn your ear to the source of the noise and manage to pick out what it is that you’re hearing; somebody is loudly humming, the same lively tune you heard during your previous visit.\n\n");
 				outputText("Considering how your last visit to the cave ended, you hesitate for a moment and wonder if you should push forward to enter Izumi’s home... or if turning back to camp would be a wiser decision.\n\n");
 				if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SOUL_SENSE_IZUMI] < 2) flags[kFLAGS.SOUL_SENSE_IZUMI]++;

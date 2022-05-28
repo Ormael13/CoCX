@@ -182,7 +182,7 @@ public function postFightOptions(hpVictory:Boolean):void {
 		outputText("Tyrantia’s shaking legs finally give out, and she drops her phallic spear, both of her meaty hands dropping to her cunt-flap. Ignoring you entirely, she begins to grab at the flap, pulling the steel up and revealing a large-labed, drooling cunny. Wasting no time, she begins jilling herself off, breathing heavily from both exhaustion and arousal.\n\n");
 		outputText("\"<i>Fuck, no. Not now, you…</i>\" She moans, her armored chest heaving. Her black aura is nearly gone, but you can see a pink glow coming from her eyes. \"<i>What do you want?</i>\"\n\n");
 	}
-	//if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) LevelingHerself();
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) LevelingHerself();
 	tyraniaAffection(5);
 	menu();
 	//addButton(0, "Rape", postFightOptionsRape);
@@ -272,6 +272,7 @@ public function repeatEncounterBattlefield():void {
 	outputText("You ask how she knows that, and she blushes, waving it off. \"<i>I don’t, I just have an imagination.</i>\" You say nothing, and she blushes more. \"<i>Okay, okay. I tried catching bugs as a kid, took a match to it by accident, and got hungry. It was natural curiosity!</i>\"\n\n");
 	outputText("You smile, chuckling at her embarrassment. \"<i>Sure, laugh it up, chucklehead.</i>\" Despite her words, she smiles, fangs out. As intimidating as her visage is, her smile is strangely wholesome, in a weird way. \"<i>Okay, what did you want, [name]? Don’t think you came out here for nothing.</i>\"\n\n");
 	if (TyrantiaFollowerStage > 2 && !TyraniaPostFinalKissScene) TyraniaPostFinalKissScene = true;
+	if (flags[kFLAGS.IZUMI_MET] > 0 && !TyraniaAndIzumi) TyraniaAndIzumi = true;
 	menu();
 	if (TyrantiaAffectionMeter > 40) {
 		if (TyraniaPostFinalKissScene) addButtonDisabled(0, "KISS", "Maybe time to think on making your base a bit more crowded? ;)");
@@ -384,8 +385,8 @@ public function repeatEncounterBattlefieldTalkHer():void {
 	addButton(0, "L.B.D.", repeatEncounterBattlefieldTalkHerLifeBeforeDemons).hint("Life Before Demons");
 	addButton(1, "NoHerm?", repeatEncounterBattlefieldTalkHerNoHerm);
 	addButton(2, "Different Parts", repeatEncounterBattlefieldTalkHerDifferentParts);
-	//3 - Goblin
-	//4 - Izumi
+	if (TyraniaSeenFlitzy) addButton(3, "Goblin", repeatEncounterBattlefieldTalkHerGoblin);
+	if (TyraniaAndIzumi) addButton(4, "Izumi", repeatEncounterBattlefieldTalkHerIzumi);
 	if (TyrantiaFollowerStage == 4 && DriderTown.DriderTownComplete && TyrantiaAffectionMeter >= 50) addButton(5, "Kids", talkHerKids);
 	if (TyrantiaFollowerStage < 4) addButton(6, "LotB", repeatEncounterBattlefieldTalkHerLifeOnTheBattlefield).hint("Life on the Battlefield");
 	addButton(14, "Back", repeatEncounterBattlefieldTalk);
@@ -515,6 +516,78 @@ public function talkThePhalluspear():void {
 	TyraniaThePhalluspear = true;
 	eachMinuteCount(15);
 	doNext(playerMenu);
+}
+public function TyraniaAndFlitzyScene():void {
+	outputText("As you walk through the forest, you can hear the gurgling of a stream, and the sounds of...voices? Just talking? In Mareth? As you get closer, you begin to pick out the two voices. As you get closer, you can hear the gentle splatter of a waterfall, and two people bathing.\n\n");
+	if (TyraniaSeenFlitzy) {
+		outputText("You call out, and the Goblin lets out a little ‘eep’. Tyrantia calms her down, and you step out from the foliage. \"<i>Hey [name].</i>\" Tyrantia calls out. \"<i>You have the best timing! Come on down!</i>\"\n\n");
+		outputText("The Goblin lets out a little ‘eep’, but as you reveal yourself, they seem to relax a little. You introduce yourself to the naked goblin, telling her that you’re a friend of Tyrantia.\n\n");
+		outputText("\"<i>Well, if you’re good with her, then… Then "+(player.hasCock()?"you’re alright with me, stud. Come on in":"I guess you can’t be so bad")+".</i>\"\n\n");
+		outputText("You undress "+(player.hasCock()?"getting a lusty grin from the goblin, ":"")+"and join the two ladies in the stream. The stream is quite warm, and you make a comment about it. \n\n");
+		outputText("\"<i>Oh yeah, this place is the best!</i>\" Flitzy says, leaning back and stretching her arms. \"<i>The stream’s fed from an underground hot spring about a hundred feet or so thataway.</i>\" She leans back in the water, letting her natural buoyancy keep her afloat as she lounges. \"<i>It’s the kind of place I like to keep to myself…well…except for a few people.</i>\"\n\n");
+		outputText("You, Tyrantia and Flitzy make some small talk, until the goblin ducks her head under the water. She comes up with a tube, like a big straw, and launches a stream of water at your face. Taken by surprise, you cover your mouth, and both ladies start laughing. Oh, it’s ON.\n\n");
+		outputText("You bring your hands in, splashing Flitzy in retaliation, only to get a burst of water from Tyrantia. Your bath quickly devolves into a splash fight. All three of you, soaking wet and laughing, spend quite some time just playing in the river. Unfortunately, Flitzi hops out of the water, wringing her hair.\n\n");
+		outputText("\"<i>Sorry you two. I gotta head back to the Salon. Mom gets pissy if we’re gone for too long.</i>\" You bid your new goblin friend farewell, and as she skips off into the forest, Tyrantia turns to you, a lazy grin on her face.\n\n");
+		outputText("\"<i>Gotta say, I like seeing you all wet.</i>\" Your drider giantess seems in the mood for some fun. What do you say?\n\n");
+		menu();
+		if (player.gender > 0) addButton(1, "Sex", TyrantiaSexMenu);
+		else addButtonDisabled(1, "Sex", "Not for genderless ones.");
+		//if (TyrantiaAffectionMeter >= 40) addButton(2, "Flirt", TyraniaAndFlitzySceneFlirt);
+		//else addButtonDisabled(2, "Flirt", "Req. 40%+ affection.");
+		addButton(3, "Leave", camp.returnToCampUseOneHour);
+	}
+	else {
+		TyraniaSeenFlitzy = true;
+		outputText("\"<i>And the bitch thinks that just because she birthed me, that she owns me. I mean, the Salon’s not a bad life, all considered, but...There’s more to life than getting knocked up. There just has to be.</i>\" The voice is clearly goblin, and as you crest a small hill, you push through the foliage to behold a bubbling spring in the fork of a river. A goblin stands on a rock on one side of the water, bathing herself in the stream.\n\n");
+		outputText("\"<i>Well, if there isn’t, I’m not really living.</i>\" The low voice, the chittering, and the sheer size of the woman leaves no doubt in your mind who’s sharing a bath with this goblin. Tyrantia’s out of her armor for once, leaving her smooth, tan skin on full display. Her entire body is glistening with moisture from the waterfall, and for once, her lips are drawn into something like a smile. She watches her goblin companion hop on one foot, rubbing her other leg with some sort of pad or abrasion.\n\n");
+		outputText("She holds a leg out for the goblin woman to hold onto, like a rail, and the goblin takes it happily.\n\n");
+		outputText("\"<i>Jeez, I know my life isn’t the greatest, but I keep forgetting...You doing okay?</i>\"\n\n");
+		outputText("Tyrantia sighs. \"<i>Well, I met someone else who doesn’t care about...You know.</i>\"\n\n");
+		outputText("\"<i>That’s Great!</i>\" The goblin springs towards Tyrantia, trying to hug her...and only ends up hugging one of her massive mammaries. \"<i>I’m happy for you.</i>\" The goblin seems to realize where they are, and turns back to a nearby rock, pulling out a razor. She turns her back towards you, but her stance tells you exactly where she’s shaving: The bush around her goblin pussy. \"<i>I swear, though, Every time She tells me to shave, I want to punch her right in her pregnant belly.</i>\"\n\n");
+		outputText("Tyrantia sighs, producing a razor of her own. \"<i>Don’t even get me started on that, Flitz. Don’t complain about shaving around me.</i>\" She begins to run the razor down her spider legs, wincing occasionally. \"<i>Try shaving eight spider legs.</i>\"\n\n");
+		outputText("The goblin finishes her task, wincing suddenly. \"<i>I’ve got to go! Mother’s expecting everyone back at the Salon today for a meeting!</i>\" She throws on a set of goblin straps only slightly less revealing than the nakedness she displayed before, sprinting away into the woods.\n\n");
+		outputText("Tyrantia continues shaving for a moment, before sniffing the air. \"<i>Okay, pervert. Show yourself.</i>\"\n\n");
+		outputText("You decide to come closer, raising your hands in surrender. Seeing you, Tyrantia’s eyes widen, and she covers her waterfall dampened pussy with one hand. \"<i>Y-you?!</i>\" She glares at you, less intimidating than usual, but her size makes up for the compromising situation. \"<i>Why are you-? Why would you-?</i>\" She is clearly very flustered, and the normally serious warrior is on the back-foot.\n\n");
+		outputText("You keep your hands up, telling her that you didn’t mean to intrude, and that you were here patrolling, since your camp isn’t far from here. Your explanation seems to pacify the big woman, and she looks you up and down. \"<i>Y’know...Not sure I believe you.</i>\" She shrugs, not caring so much. \"<i>Look...I don’t mind so much if you wanna look. I know I’m sexy.</i>\" She laughs a little, her breasts shaking and sending droplets every which way. \"<i>But Flitzi doesn’t really want to be disturbed while she’s bathing. So thanks for waiting until she’s gone.</i>\"\n\n");
+		outputText("You nod, and she flicks her hand. \"<i>Alright, ya lil’ perv. I need to finish up here, and you probably have shit y’need to do. So leave me, please.</i>\" You decide that annoying the giant bathing drider probably isn’t in your best interest, and you excuse yourself, heading back to camp.\n\n");
+		doNext(camp.returnToCampUseOneHour);
+	}
+}
+public function TyraniaAndFlitzySceneFlirt():void {
+	outputText("\"<i></i>\"\n\n");
+	menu();
+}
+public function TyraniaAndFlitzyScene2():void {
+	outputText("\"<i></i>\"\n\n");
+}
+public function TyraniaAndFlitzyScene3():void {
+	outputText("\"<i></i>\"\n\n");
+}
+public function TyraniaAndIzumiScene():void {
+	outputText("You peek inside Izumi’s lair, expecting a fight. You clench your fists, parting the Curtain...and blink your [eyes] in surprise. Sitting there in front of you is Izumi and Tyrantia, the big Oni sitting at her table, the massive spider-lady standing beside the table. The two are sipping a fragrant tea, but at the table is a half-empty bottle of Oni's sake, and some other concoctions. Izumi pours herself more of the tea, mixing a half-cup of rice-wine in with it.\n\n");
+	outputText("\"<i>I’m glad you came,</i>\" Izumi says to Tyrantia. \"<i>Not gonna lie, it gets boring up here with just the harpies and ‘Taurs.</i>\"\n\n");
+	outputText("\"<i>You’re kidding, right? Better than demons and rocks.</i>\" Tyrantia fires back. \"<i>Besides...You’re one of the only people who has a brain and won’t run from me.</i>\"\n\n");
+	outputText("\"<i>You kidding? You look badass, girl!</i>\" Izumi slaps her knee. \"<i>I’m pretty sure you’d be able to make that bitch Sophie forget about egg-laying for a month if you just walked by her!</i>\"\n\n");
+	outputText("The two giant women are having a lovely chat over tea and booze. Do you intrude?\n\n");
+	menu();
+	addButton(1, "Yes", TyraniaAndIzumiSceneYes);
+	addButton(3, "No", TyraniaAndIzumiSceneNo);
+}
+public function TyraniaAndIzumiSceneYes():void {
+	outputText("You knock on the stone wall, and both women turn their heads. Izumi grabs her sake bottle, ready to throw, and Tyrantia grabs her Dick, propped up on the wall beside her. Both giant ladies see you. Tyrantia smiles, Izumi smirks, and they lower their weapons. \"<i>Oh, you know Izumi, too?</i>\" Tyrantia asks, and Izumi nods.\n\n");
+	outputText("\"<i>Yeah, [name] here has a knack for just walking into trouble.</i>\" She chuckles. \"<i>Walked right into my cave, no cares at all.</i>\" Izumi pulls out a stool for you. \"<i>Come on, [name], I won’t bite...This time.</i>\"\n\n");
+	outputText("\"<i>I make no such promises.</i>\" Tyrantia interjects, and the two giant ladies start laughing.\n\n");
+	outputText("Despite yourself, you find yourself joining in on the merriment, taking a seat by Izumi’s table. The Oni pours you a cup of tea, and Tyrantia slides over a biscuit.\n\n");
+	outputText("The conversation is full of jokes, both bawdy and normal(ish), and the three of you talk about your adventures, leading to a kill-count contest between you and Tyrantia that goes nowhere, leading to an argument over whether or not temporary golems count as kills. After an hour or so, you excuse yourself.\n\n");
+	outputText("\"<i>Ah, yes, the brave champion needs to guard their portal.</i>\" Izumi says. \"<i>Well, if you feel the need, go on. I enjoyed this.</i>\"\n\n");
+	outputText("\"<i>Me too,</i>\" Tyrantia adds. \"<i>All this talk of battle has made my blood boil. Thank you for the time, Izumi. Always nice to chat.</i>\"\n\n");
+	outputText("You head back to camp, a small smile on your face.\n\n");
+	tyraniaAffection(5);
+	doNext(camp.returnToCampUseOneHour);
+}
+public function TyraniaAndIzumiSceneNo():void {
+	outputText("You are content knowing that the giantess has friends to enjoy more than just sexy times with, a valuable and rare thing in Mareth these days. You head back down the mountain and to camp.\n\n");
+	doNext(camp.returnToCampUseOneHour);
 }
 public function TyrantiaSleepToggle():void {
 	//spriteSelect(SpriteDb.s_electra);
@@ -914,7 +987,7 @@ public function TyrantiaSexMenu():void {
 	menu();
 	if (player.hasCock()) {
 		addButton(1, "DickSex", TyrantiaFuck);
-		//addButton(2, "TitJob", TyrantiaTitJob);
+		addButton(2, "TitJob", TyrantiaTitJob);
 		if (player.isTaur() || player.isDrider()) {
 			addButtonDisabled(3, "HugFuck", "Not for Taurs or Driders.");
 			addButtonDisabled(4, "C.Fuck", "Not for Taurs or Driders.");
@@ -969,14 +1042,16 @@ public function TyrantiaTitJob():void {
 	outputText("You look at your Drider lover’s chest, and she gives a smirk, crossing an arm over each pair of her gargantuan breasts. You smile up at her as she flicks her bras, her massive, G-cups popping free. You feel yourself stiffen, blood rushing to your oversized [cock]. This doesn’t escape Tyrantia’s notice, and she saunters over. She reaches down, between your legs, and she smiles.\n\n");
 	outputText("\"<i>Did I do that?</i>\" She asks, low and smoldering. She knows full well what you want, however, and she wastes no more time, quickly freeing your [cock] from your gear. Your glorious rod springs free, and she blinks twice.\n\n");
 	outputText("\"<i>Nice.</i>\" She says, a giant hand wrapping around your glans. Her fingers are warm, but dry, and she slowly moves the hand down your shaft, tickling the sensitive skin.\n\n");
-	outputText("\"She leans in, planting her front two legs on either side of you, and as she brings her fingers back up your shaft, she pushes herself forward, one leg against the back of your [legs]. She gently bends you backwards, and you let her guide you to the ground. Your drider lover licks her lips, fangs and eyes shining, as she wraps your shaft in both sets of soft, G-cup titflesh. \"\n\n");
-	outputText("\"<i>“Not many are big enough for this.” </i>She comments, smiling as she uses both arms to squeeze her massive mammaries. She begins moving, and you shudder, letting your muscles relax. Her breasts are sublime, warm and soft, and the slow pace is relaxing. You close your eyes, letting your [cock] twitch in Tyrantia’s warm embrace. \"\n\n");
-	outputText("\"She begins to pick up the pace, and you let a soft groan escape your mouth as the tip of your rod enters something warm and wet. You open one eye, to see your [cockhead] poking out from the top of Tyrantia’s breasts, and your Drider lover’s lips around the tip. She gives you a wink, tongue lolling out from her mouth and down your shaft as she starts moving again. \"\n\n");
-	outputText("\"With your eyes closed, you can hear your lover’s flesh on yours, the scrape of her legs…and her soft gasp, the air cool on your [cockhead] for a moment as Tyrantia inhales a deep breath. Suddenly, she tightens her grip, picking up the pace as she brings her mouth down, fangs scraping the underside of your shaft as she throats the top five inches. Groaning, you open your eyes to see her lips suckered around your rod, and you can’t help but buck your hips as she picks up the pace. \"\n\n");
-	outputText("\"It doesn’t take long for your cock to start twitching, and you moan, trying to hold your orgasm back. As your rod starts twitching, Tyrantia lets go of her tits, bringing her hands to your tool. She lunges down, taking a full foot of your length into her throat, gagging as her hands jerk off the rest of your manhood. \"\n\n");
-	outputText("\"You can’t hold it back any longer! With a groan, your mast throbs, your aching balls twitching as you cum, spurting your load down your Drider lover’s throat. \"\n\n");
-	outputText("\"Tyrantia, to your shock, barely even gags as she slides herself down all the way, her fangs now touching your sack. Her throat works, tightening around you, and with this extra stimulation, your orgasm keeps going…and going… Your lover gulps it down, her five eyes looking up at your face, half-closed. Finally, your orgasm ends, and she slowly pulls her head back, your sensitive [cock] still twitching. As your [cockhead] passes her lips, she gently takes your tool in her hands, kissing your head before gently letting your cock rest. \"\n\n");
-	outputText("\"<i>“Good to the last drop, lover.”</i>She says, breathing heavily. <i>“I’d ask if you enjoyed it…but I think we both know you did.” Once you’ve recovered, you thank Tyrantia for the titjob. She waves it off, smiling.\n\nYou redress and head your separate ways, but you make a note to come back (if camp) to Tyrantia’s part of camp more often. (If Battlefield) To the Battlefield more frequently. This was definitely worth the trip. </i>\"\n\n");
+	outputText("She leans in, planting her front two legs on either side of you, and as she brings her fingers back up your shaft, she pushes herself forward, one leg against the back of your [legs]. She gently bends you backwards, and you let her guide you to the ground. Your drider lover licks her lips, fangs and eyes shining, as she wraps your shaft in both sets of soft, G-cup titflesh.\n\n");
+	outputText("\"<i>Not many are big enough for this.</i>\" She comments, smiling as she uses both arms to squeeze her massive mammaries. She begins moving, and you shudder, letting your muscles relax. Her breasts are sublime, warm and soft, and the slow pace is relaxing. You close your eyes, letting your [cock] twitch in Tyrantia’s warm embrace.\n\n");
+	outputText("She begins to pick up the pace, and you let a soft groan escape your mouth as the tip of your rod enters something warm and wet. You open one eye, to see your [cockhead] poking out from the top of Tyrantia’s breasts, and your Drider lover’s lips around the tip. She gives you a wink, tongue lolling out from her mouth and down your shaft as she starts moving again.\n\n");
+	outputText("With your eyes closed, you can hear your lover’s flesh on yours, the scrape of her legs…and her soft gasp, the air cool on your [cockhead] for a moment as Tyrantia inhales a deep breath. Suddenly, she tightens her grip, picking up the pace as she brings her mouth down, fangs scraping the underside of your shaft as she throats the top five inches. Groaning, you open your eyes to see her lips suckered around your rod, and you can’t help but buck your hips as she picks up the pace.\n\n");
+	outputText("It doesn’t take long for your cock to start twitching, and you moan, trying to hold your orgasm back. As your rod starts twitching, Tyrantia lets go of her tits, bringing her hands to your tool. She lunges down, taking a full foot of your length into her throat, gagging as her hands jerk off the rest of your manhood.\n\n");
+	outputText("You can’t hold it back any longer! With a groan, your mast throbs, your aching balls twitching as you cum, spurting your load down your Drider lover’s throat.\n\n");
+	outputText("\"Tyrantia, to your shock, barely even gags as she slides herself down all the way, her fangs now touching your sack. Her throat works, tightening around you, and with this extra stimulation, your orgasm keeps going…and going… Your lover gulps it down, her five eyes looking up at your face, half-closed. Finally, your orgasm ends, and she slowly pulls her head back, your sensitive [cock] still twitching. As your [cockhead] passes her lips, she gently takes your tool in her hands, kissing your head before gently letting your cock rest.\n\n");
+	outputText("\"<i>Good to the last drop, lover.</i>\" She says, breathing heavily. <i>“I’d ask if you enjoyed it…but I think we both know you did.”</i> Once you’ve recovered, you thank Tyrantia for the titjob. She waves it off, smiling.\n\nYou redress and head your separate ways, but you make a note to come back to "+(TyrantiaFollowerStage >= 6 ? "Tyrantia’s part of camp more often":"the Battlefield more frequently. This was <i>definitely</i> worth the trip")+".\n\n");
+	player.sexReward("Default","Dick", true,false);
+    if (CoC.instance.inCombat) cleanupAfterCombat();
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1060,7 +1135,7 @@ public function TyrantiaCavFuck():void {
 	menu();
 	if (player.hasCock()) {
 		addButton(1, "DickSex", TyrantiaFuck);
-		//addButton(2, "TitJob", TyrantiaTitJob);
+		addButton(2, "TitJob", TyrantiaTitJob);
 		if (player.isTaur() || player.isDrider()) addButtonDisabled(3, "HugFuck", "Not for Taurs or Driders.");
 		else addButton(3, "HugFuck", TyrantiaHugFuck);
 	}

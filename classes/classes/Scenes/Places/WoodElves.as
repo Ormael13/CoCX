@@ -824,7 +824,6 @@ package classes.Scenes.Places{
 			if (player.hasItem(useables.MARROWHEAD, 1)) addButton(1, "Moonstone", FletchingCraftArrows2, "moonstone", 2).hint("Use moonstone arrowheads to craft arrows.");
 			if (player.hasItem(useables.SARROWHEAD, 1)) addButton(2, "Skymetal", FletchingCraftArrows2, "skymetal", 3).hint("Use skymetal arrowheads to craft arrows.");
 			if (player.hasItem(useables.EARROWHEAD, 1)) addButton(3, "Ebonbloom", FletchingCraftArrows2, "ebonbloom", 4).hint("Use ebonbloom arrowheads to craft arrows.");
-			//Moonstone(Obtained by mining at night) +20 % Damage
 			//Skymetal(Found in glacial rift) +30% Damage
 			addButton(14, "Back", Fletching);
 		}
@@ -917,7 +916,6 @@ package classes.Scenes.Places{
 				}
 				else addButtonDisabled(3, "EbonIng", "You need ebon ingot.");
 			}
-			//Moonstone(Obtained by mining at night) +30 % Damage
 			//Divine Ice(Requires Divine ice, found in glacial rift) +50% Damage
 			//Orichalcum(Found in deep sea) +60% Damage
 			//Skymetal(Found in End game zone) +70% Damage
