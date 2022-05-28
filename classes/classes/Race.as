@@ -22,6 +22,10 @@ public class Race {
 	 * Array of pairs: `[mutationPerk:IMutationPerkType, scorePerStage:int]`
 	 */
 	public var mutations:/*Array*/Array = [];
+	/**
+	 * Min score to get bonuses from mutation and bloodline
+	 */
+	public var mutationThreshold:int = 0
 	
 	/**
 	 * true - do not display the race in menus
@@ -97,7 +101,7 @@ public class Race {
 		if (bloodlinePerks.length > 0) {
 			bonus = 0;
 			for each (var perk:PerkType in bloodlinePerks) {
-				if (body.player.hasPerk(perk)) {
+				if (score > mutationThreshold && body.player.hasPerk(perk)) {
 					bonus += body.player.increaseFromBloodlinePerks();
 					break;
 				}
@@ -113,7 +117,7 @@ public class Race {
 				var pt:PerkType = entry[0];
 				var pc:PerkClass = body.player.getPerk(pt);
 				var stage:Number = pc ? pc.value1 : 0;
-				bonus = stage*entry[1];
+				bonus = score > mutationThreshold ? stage*entry[1] : 0;
 				if (outputText != null) outputText("Mutation: "+pt.name(pc), bonus);
 				score += bonus;
 				maxStage = Math.max(maxStage, stage);
@@ -121,17 +125,17 @@ public class Race {
 			//if (outputText != null) outputText("Mutations", bonus);
 			//score += bonus;
 			if (body.player.hasPerk(PerkLib.ChimericalBodySemiImprovedStage)) {
-				bonus = maxStage >= 1 ? +1 : 0;
+				bonus = score > mutationThreshold && maxStage >= 1 ? +1 : 0;
 				if (outputText != null) outputText("Chimerical Body: Semi-Improved Stage", bonus);
 				score += bonus;
 			}
 			if (body.player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage)) {
-				bonus = maxStage >= 2 ? +1 : 0;
+				bonus = score > mutationThreshold && maxStage >= 2 ? +1 : 0;
 				if (outputText != null) outputText("Chimerical Body: Semi-Superior Stage", bonus);
 				score += bonus;
 			}
 			if (body.player.hasPerk(PerkLib.ChimericalBodySemiEpicStage)) {
-				bonus = maxStage >= 3 ? +1 : 0;
+				bonus = score > mutationThreshold && maxStage >= 3 ? +1 : 0;
 				if (outputText != null) outputText("Chimerical Body: Semi-Epic Stage", bonus);
 				score += bonus;
 			}
@@ -265,7 +269,7 @@ public class Race {
 			s += reason+" ("+(change>0?"+"+change:change)+")";
 			s += "[/font]\n";
 		}
-		finalizeScore(body, score, finalizerOutput);
+		score = finalizeScore(body, score, finalizerOutput);
 		if (tiers.length>0) {
 			s += "\t<b>Tiers:</b>\n";
 		}
@@ -350,6 +354,7 @@ public class Race {
 	/**
 	 * Key: debug form name
 	 * Value: a list of elements of type:
+	 * - function(player:Player):void
 	 * - Transformation
 	 * - StatusEffectType
 	 * - IMutationPerkType
@@ -364,6 +369,11 @@ public class Race {
 	}
 	public function takeForm(player:Player, tfName:String):void {
 		for each (var o:* in debugForms[tfName]) {
+			var f:Function = o as Function;
+			if (f) {
+				f(player);
+				continue;
+			}
 			var tf:Transformation = o as Transformation;
 			if (tf) {
 				if (tf.isPossible()) {

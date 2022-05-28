@@ -27,6 +27,7 @@ public class KitsuneRace extends Race {
 	
 	public function KitsuneRace(id:int) {
 		super("Kitsune", id);
+		mutationThreshold = 5;
 	}
 	
 	public override function setup():void {

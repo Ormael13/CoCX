@@ -101,25 +101,29 @@ public class ElementalRace extends Race {
 			"tou.mult": +1.00,
 			"wis.mult": +0.75,
 			"str.mult": +0.50,
-			"def": +10
+			"def": +10,
+			"mdef": +10
 		},
 		22: { // GNOME_2
 			"tou.mult": +1.25,
 			"wis.mult": +1.00,
 			"str.mult": +0.75,
-			"def": +20
+			"def": +20,
+			"mdef": +20
 		},
 		23: { // GNOME_3
 			"tou.mult": +1.50,
 			"wis.mult": +1.25,
 			"str.mult": +1.00,
-			"def": +30
+			"def": +30,
+			"mdef": +30
 		},
 		24: { // GNOME_4
 			"tou.mult": +1.75,
 			"wis.mult": +1.50,
 			"str.mult": +1.25,
-			"def": +40
+			"def": +40,
+			"mdef": +40
 		},
 		31: { // IGNIS_1
 			"spe.mult": +1.00,
@@ -145,25 +149,29 @@ public class ElementalRace extends Race {
 			"wis.mult": +1.00,
 			"str.mult": +0.75,
 			"tou.mult": +0.50,
-			"def": +5
+			"def": +5,
+			"mdef": +5
 		},
 		42: { // UNDINE_2
 			"wis.mult": +1.25,
 			"str.mult": +1.00,
 			"tou.mult": +0.75,
-			"def": +10
+			"def": +10,
+			"mdef": +10
 		},
 		43: { // UNDINE_3
 			"wis.mult": +1.50,
 			"str.mult": +1.25,
 			"tou.mult": +1.00,
-			"def": +15
+			"def": +15,
+			"mdef": +15
 		},
 		44: { // UNDINE_4
 			"wis.mult": +1.75,
 			"str.mult": +1.50,
 			"tou.mult": +1.25,
-			"def": +20
+			"def": +20,
+			"mdef": +20
 		}
 	};
 	

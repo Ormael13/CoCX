@@ -21,8 +21,6 @@ public class HarpyRace extends Race {
 				.wingType(Wings.FEATHERED_LARGE, +4)
 				.tailType(Tail.HARPY, +1)
 				.legType(LowerBody.HARPY, +1)
-				.hasVagina(+1)
-				.skinCoverage(Skin.COVERAGE_NONE, +1)
 				.hasPerk(PerkLib.HarpyWomb, +2)
 				.customRequirement("","not another harpy-like race",
 						function (body:BodyData):Boolean {
@@ -32,7 +30,9 @@ public class HarpyRace extends Race {
 									|| body.tailType == Tail.THUNDERBIRD
 							);
 						}, 0, -1000);
-		addScoresAfter(2)
+		addScoresAfter(3)
+				.hasVagina(+1)
+				.skinCoverage(Skin.COVERAGE_NONE, +1)
 				.faceType(ANY(Face.HUMAN, Face.ANIMAL_TOOTHS), +1)
 				.earType(ANY(Ears.HUMAN, Ears.ELFIN), +1);
 		

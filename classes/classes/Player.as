@@ -863,34 +863,6 @@ use namespace CoC;
 				//if (wings.type == Wings.GARGOYLE_LIKE_LARGE) armorMDef += (30 * newGamePlusMod);
 				//if (faceType == Face.DEVIL_FANGS) armorMDef += (30 * newGamePlusMod);
 			//}
-			if (hasPerk(PerkLib.ElementalBody)) {
-				switch (ElementalRace.getElementAndTier(this)) {
-					case ElementalRace.GNOME_1:
-						armorMDef += (10 * newGamePlusMod);
-						break;
-					case ElementalRace.GNOME_2:
-						armorMDef += (20 * newGamePlusMod);
-						break;
-					case ElementalRace.GNOME_3:
-						armorMDef += (30 * newGamePlusMod);
-						break;
-					case ElementalRace.GNOME_4:
-						armorMDef += (40 * newGamePlusMod);
-						break;
-					case ElementalRace.UNDINE_1:
-						armorMDef += (5 * newGamePlusMod);
-						break;
-					case ElementalRace.UNDINE_2:
-						armorMDef += (10 * newGamePlusMod);
-						break;
-					case ElementalRace.UNDINE_3:
-						armorMDef += (15 * newGamePlusMod);
-						break;
-					case ElementalRace.UNDINE_4:
-						armorMDef += (20 * newGamePlusMod);
-						break;
-				}
-			}
 			//Soul Cultivators bonuses
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
 				if (hasPerk(PerkLib.SoulApprentice)) armorMDef += 1 * newGamePlusMod;
@@ -3495,14 +3467,14 @@ use namespace CoC;
 		 * DOES NOT mean that this is player's top race!
 		 */
 		public function isAnyRace(...races:/*Race*/Array):Boolean {
-			if (races.length == 1 && races[0] is Array) return isAnyRace(races[0]);
+			if (races.length == 1 && races[0] is Array) races = flatten(races);
 			for each (var race:Race in races) {
 				if (isRace(race)) return true;
 			}
 			return false;
 		}
 		public function isAnyRaceCached(...races:/*Race*/Array):Boolean {
-			if (races.length == 1 && races[0] is Array) return isAnyRaceCached(races[0]);
+			if (races.length == 1 && races[0] is Array) races = flatten(races);
 			for each (var race:Race in races) {
 				if (isRaceCached(race)) return true;
 			}
