@@ -93,7 +93,7 @@ public class SceneLib {
 
     public static var goblinScene:GoblinScene = new GoblinScene();
 
-    public static var goblinElderScene:GoblinElderScene = new GoblinElderScene();
+    public static var goblinElderScene:PriscillaScene = new PriscillaScene();
 
     public static var trollScene:TrollScenes = new TrollScenes();
 	
