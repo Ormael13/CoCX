@@ -1716,7 +1716,7 @@ private function applyHangover():void {
 			//addButton(2, "", ).hint("Add 1 .");
 			//addButton(3, "", ).hint("Add 1 .");
 			//addButton(4, "", ).hint("Add 1 .");
-			//addButton(5, "", ).hint("Add 1 .");
+			addButton(5, "E.Shard", AddElementalShard).hint("Add 1 E.Shard.");//addButton(5, "", ).hint("Add 1 .");
 			addButton(6, "UnicornHair", AddUnicornHair).hint("Add 1 Unicorn Hair.");
 			addButton(7, "GolemCore", AddGolemCore).hint("Add 1 Golem Core.");
 			addButton(8, "Mechanism", AddMechanism).hint("Add 1 Mechanism.");
@@ -2030,6 +2030,10 @@ private function applyHangover():void {
 	public function AddUnicornHair():void {
 		outputText("\n\n<b>(Gained 1 Unicorn Hair!)</b>\n\n");
 		inventory.takeItem(useables.UNICORNH, curry(MaterialMenu, 2));
+	}
+	public function AddElementalShard():void {
+		outputText("\n\n<b>(Gained 1 Elemental Shard!)</b>\n\n");
+		inventory.takeItem(useables.ELSHARD, curry(MaterialMenu, 2));
 	}
 	public function AddPolarMidnightScroll():void {
 		outputText("\n\n<b>(Gained 1 Polar Midnight scroll!)</b>\n\n");
@@ -4433,3 +4437,4 @@ private function applyHangover():void {
 	}
 }
 }
+

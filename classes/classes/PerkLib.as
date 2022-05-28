@@ -498,6 +498,15 @@ public class PerkLib
 		public static const MeleeWeaponsMasterySu:PerkType = mk("Melee Weapons Mastery (Su)", "Melee Weapons Mastery (Su)",
 				"Decrease by ~45% needed exp to level up each melee weapon mastery type and increase cap for melee masteries by 50.",
 				"You've chosen the 'Melee Weapons Mastery (Su)' perk. Decrease by ~45% needed exp to level up each melee weapon mastery type and increase cap for melee masteries by 50.");
+		public static const RangeWeaponsMastery:PerkType = mk("Range Weapons Mastery", "Range Weapons Mastery",
+				"Decrease by ~20% needed exp to level up each range weapon mastery type and grants 200% more of base mastery exp gains.",
+				"You've chosen the 'Range Weapons Mastery' perk. Decrease by ~20% needed exp to level up each range weapon mastery type and grants 200% more of base mastery exp gains.");
+		public static const RangeWeaponsMasteryEx:PerkType = mk("Range Weapons Mastery (Ex)", "Range Weapons Mastery (Ex)",
+				"Decrease by ~45% needed exp to level up each range weapon mastery type and double mastery gains on crit hits (2x -> 4x).",
+				"You've chosen the 'Range Weapons Mastery (Ex)' perk. Decrease by ~45% needed exp to level up each range weapon mastery type and double mastery gains on crit hits (2x -> 4x).");
+		public static const RangeWeaponsMasterySu:PerkType = mk("Range Weapons Mastery (Su)", "Range Weapons Mastery (Su)",
+				"Decrease by ~45% needed exp to level up each range weapon mastery type and increase cap for melee masteries by 50.",
+				"You've chosen the 'Range Weapons Mastery (Su)' perk. Decrease by ~45% needed exp to level up each range weapon mastery type and increase cap for melee masteries by 50.");
 		/*public static const JobBeastlord:PerkType = mk("Job: Beastlord", "Job: Beastlord",
 				".",
 				"You've chosen the 'Job: Beastlord' perk, .");
@@ -6336,12 +6345,25 @@ public class PerkLib
 			MeleeWeaponsMastery.requireStr(10)
 					.requireTou(10)
 					.requireSpe(10);
+			RangeWeaponsMastery.requireStr(10)
+					.requireTou(10)
+					.requireSpe(10);
 			MeleeWeaponsMasteryEx.requirePerk(MeleeWeaponsMastery)
 					.requireLevel(2)
 					.requireStr(20)
 					.requireTou(20)
 					.requireSpe(20);
+			RangeWeaponsMasteryEx.requirePerk(RangeWeaponsMastery)
+					.requireLevel(2)
+					.requireStr(20)
+					.requireTou(20)
+					.requireSpe(20);
 			MeleeWeaponsMasterySu.requirePerk(MeleeWeaponsMasteryEx)
+					.requireLevel(4)
+					.requireStr(30)
+					.requireTou(30)
+					.requireSpe(30);
+			RangeWeaponsMasterySu.requirePerk(RangeWeaponsMasteryEx)
 					.requireLevel(4)
 					.requireStr(30)
 					.requireTou(30)

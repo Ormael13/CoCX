@@ -333,9 +333,9 @@ package classes.Scenes
 			outputText("-New tier 0 misc lvl-up perk: Melee Weapons Mastery (Su). Req. Melee Weapons Mastery (Ex) perk, lvl 4+ and 30+ str/tou/spe. Effect: Decrease by ~45% needed exp to level up each melee weapon mastery type and increase cap for melee masteries by 50.\n");
 			outputText("-UEE imports (by Svalkash): hips/butt increase after Satyr birth; revised Jojo anal scene; Ember TF heat/rut logic improved; male spider-morph can gift spider-silk with a low chance; Amily - PC doesn't leave after gender change talk (if Amily is okay with it); Can put off Phylla's first sex for some time.\n");
 			outputText("-Aimozg did it again.... (insert Jurassic Park meme) and went making Race Page(s) prettier and more cool. It would now show more informations like specific bodypart that count to race score. And would show all tiers of race score at the end of each race score. Switching between seeing jsut race name to full info on it is done by clicking on race name.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New tier 0 misc lvl-up perk: Range Weapons Mastery. Req. 10+ str/tou/spe. Effect: Decrease by ~20% needed exp to level up each range weapon mastery type and grants 200% more of base mastery exp gains.\n");
+			outputText("-New tier 0 misc lvl-up perk: Range Weapons Mastery (Ex). Req. Range Weapons Mastery perk, lvl 2+ and 20+ str/tou/spe. Effect: Decrease by ~45% needed exp to level up each range weapon mastery type and double mastery gains on crit hits (2x -> 4x).\n");
+			outputText("-New tier 0 misc lvl-up perk: Range Weapons Mastery (Su). Req. Range Weapons Mastery (Ex) perk, lvl 4+ and 30+ str/tou/spe. Effect: Decrease by ~45% needed exp to level up each range weapon mastery type and increase cap for melee masteries by 50.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
