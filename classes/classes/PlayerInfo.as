@@ -1916,11 +1916,9 @@ public class PlayerInfo extends BaseContent {
 	}
 	public function mutationsClear(perks:Array):Array{
 		var temp:Array = [];
-		var compMutate:Array = MutationsLib.mutationsArray("", true);
-		var compMutate2:Array = MutationsLib.mutationsArray("Deprecated", true);
-		var compMutate3:Array = IMutationsLib.mutationsArray("");
-		var compMutate4:Array = IMutationsLib.mutationsArray("Deprecated");
-		var mArray:Array = PerkMenu.arrMerge(compMutate, compMutate2, compMutate3, compMutate4);
+		var compMutate:Array = MutationsLib.mutationsArray("All", true);
+		var compMutate2:Array = IMutationsLib.mutationsArray("All");
+		var mArray:Array = PerkMenu.arrMerge(compMutate, compMutate2);
 		for each (var playerPerk:PerkType in perks){
 			if (!(mArray.indexOf(playerPerk) >= 0)){
 				temp.push(playerPerk);
