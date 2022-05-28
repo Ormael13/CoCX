@@ -1254,15 +1254,24 @@ public class PerkMenu extends BaseContent {
 			var pList3:Array = PerkLib.gearPerks();	//No Gear Perks.
 			var pList4:Array = PerkLib.weaPerks();	//No Weapons Perks.
 			//function pSpecialRem = No Ascension/History/Bloodline/PastLife Perks
-			var pList5:Array = MutationsLib.mutationsArray("Deprecated");
+			var pList5:Array = MutationsLib.mutationsArray("Deprecated", true);
 			var pList6:Array = IMutationsLib.mutationsArray("");
 			var pList7:Array = IMutationsLib.mutationsArray("Deprecated");
+			var mArray:Array = merge(pList1, pList2, pList3, pList4, pList5, pList6, pList7).sort();
 			for each (var perkTrue:PerkType in perkDict){
-				if (!(pList1.indexOf(perkTrue) >= 0) && !(pList2.indexOf(perkTrue) >= 0) && !(pList3.indexOf(perkTrue) >= 0) && !(pList4.indexOf(perkTrue) >= 0) && !(pList5.indexOf(perkTrue) >= 0) && !(pList6.indexOf(perkTrue) >= 0) && !(pList7.indexOf(perkTrue) >= 0) && pSpecialRem(perkTrue)){
+				if (!(mArray.indexOf(perkTrue) >= 0) && pSpecialRem(perkTrue)){
 					tPerkList.push(perkTrue);
 				}
 			}
 			//trace(pList1.length + " < 1 - 2 > " + pList2.length + "\n");
+		}
+
+		function merge(...arrays):Array {
+			var result:Array = [];
+			for(var i:int=0;i<arrays.length;i++){
+				result = result.concat(arrays[i]);
+			}
+			return result;
 		}
 
 		function pSpecialRem(perkTrue:PerkType):Boolean{	//SpecialCases
@@ -1540,7 +1549,7 @@ public class PerkMenu extends BaseContent {
 
 		function initSet():void {
 			var mutationList:Array = MutationsLib.mutationsArray("",true);
-			var mutationList2:Array = MutationsLib.mutationsArray("Deprecated");
+			var mutationList2:Array = MutationsLib.mutationsArray("Deprecated, true");
 			var mutationList3:Array = IMutationsLib.mutationsArray("");
 			var mutationList4:Array = IMutationsLib.mutationsArray("Deprecated");
 
