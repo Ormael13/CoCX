@@ -563,7 +563,7 @@ public class MinervaPurification extends BaseContent
 				outputText("\n\nWith devilish intent you creep up on the sleeping siren, her shapely shark tail twitching gently as she naps. You sneak closer and closer until you are right by her and as soon as you can you grab her tail and pull. Unsurprisingly, and likely your intent, Minerva is jolted away by the touch and jumped what seemed to be feet in the air. Her four wings fluffing up and spreading out in surprise. The broodmother's golden eyes widen as she looks around for what pulled her tail, as soon as she sees you, though, she visibly calms down. Pouting, she punches you gently in the shoulder, a deep blush on her cheeks. \"<i>Hey! Why did you do that? Scaring me like that... you're a mean lover, you know that?</i>\"");
 
 			}
-			outputText("\n\nClearly she is not angry at all, and is in fact happy that you suprised her with a visit. Sitting back, Minerva stretches and yawns, letting out a dove-like coo before turning to you and reaching out, yanking you to her and placing you in her soft lap with her arms around you, her big pillowy tits pressed against your back as she hold you. \"<i>So nice of you to come and see me, my strong brave champion. Now that I'm awake, what shall we do? Want to cuddle? Or perhaps you would like to take a bath with me?</i>\" She grins and nibbles your ear. \"<i>...Or perhaps you want to work on ");
+			outputText("\n\nClearly she is not angry at all, and is in fact happy that you suprised her with a visit. Sitting back, Minerva stretches and yawns, letting out a dove-like coo before turning to you and reaching out, yanking you to her and placing you in her soft lap with her arms around you, her big pillowy tits pressed against your back as she holds you. \"<i>So nice of you to come and see me, my strong brave champion. Now that I'm awake, what shall we do? Want to cuddle? Or perhaps you would like to take a bath with me?</i>\" She grins and nibbles your ear. \"<i>...Or perhaps you want to work on ");
 			if (flags[kFLAGS.MINERVA_CHILDREN] <= 0) outputText("having some babies");
 			else outputText("making more adorable daughters");
 			outputText("?</i>\" she croons, and teasingly licks your cheek.");
@@ -661,7 +661,7 @@ public class MinervaPurification extends BaseContent
 			addButton(5, "Spar", SceneLib.highMountains.minervaScene.fightMinerva);
 			if (SceneLib.highMountains.minervaScene.minervaRomanced() && model.time.hours >= 20) addButton(6, "Sleep With", sleepWithMinerva);
 			//if (flags[kFLAGS.MINERVA_CHILDREN] > 0) addButton(7, "Children", checkUpOnMinervaChildren);
-			if (SceneLib.highMountains.minervaScene.pregnancy.isPregnant) addButton(7, "Pregnancy", checkPregnancy);
+			if (SceneLib.highMountains.minervaScene.pregnancy.isPregnant || player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA) addButton(7, "Pregnancy", checkPregnancy);
 			if (player.hasKeyItem("Marae's Seed") >= 0) addButton(8, "Plant Seed", growTreePostPurification);
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
@@ -855,43 +855,36 @@ public class MinervaPurification extends BaseContent
 			outputText("You lay next to Minerva while you rest your head on her soft breasts. ");
 			if (player.armor == armors.GOOARMR) outputText("Valeria, your goo-girl companion, envelops you and Minerva, helping to keep you and Minerva warm. ");
 			outputText("\"<i>Sweet dreams, love,</i>\" she says as you finally close your eyes. ");
-			doNext(sleepWithMinervaProcess);
+			doNext(sleepWithMinervaII);
 		}
 		private function sleepWithMinervaII():void {
+			var timeToSleep:int = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
 			clearOutput();
-			SceneLib.highMountains.minervaScene.minervaSprite();
+			cheatTime(timeToSleep);
+			SceneLib.highMountains.minervaScene.sleepHeal(timeToSleep);
 			outputText(images.showImage("minerva-sleepwith2-pure"));
-			outputText("<b>Ten hours pass...</b>\n\n");
+			outputText("<b>" + NUMBER_WORDS_CAPITAL[timeToSleep] + " hours pass...</b>\n\n");
 			outputText("You wake up, feeling refreshed. You thank Minerva for letting you sleep with her, and you hug her, making sure to give her a good kiss. \"<i>Ohhhhh,</i>\" she moans and even blushes! You break the kiss. \"<i>Darling, come back anytime, ok?</i>\" she says. \n\n");
 			if (player.armor == armors.GOOARMR) outputText("Valeria encases you once more, and you get suited up ");
 			else outputText("You get re-dressed in your [armor] ");
 			outputText("and you leave the tower to return to your camp. \n\n");
 			awardAchievement("Getaway", kACHIEVEMENTS.GENERAL_GETAWAY);
 			dynStats("cor", -4);
-			sleepWithMinervaHeal();
 			doNext(camp.returnToCampUseOneHour);
 		}
 		private function sleepWithMinervaPostBirthing():void {
+			var timeToSleep:int = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
 			clearOutput();
-			outputText("<b>Three hours pass...</b>\n\n");
+			cheatTime(timeToSleep);
+			SceneLib.highMountains.minervaScene.sleepHeal(timeToSleep);
+			outputText(images.showImage("minerva-sleepwith2-pure"));
+			outputText("<b>" + NUMBER_WORDS_CAPITAL[timeToSleep] + " hours pass...</b>\n\n");
 			outputText("You wake up, feeling refreshed. You take a good look at your newborn sirenic daughters. Already, they have grown quite a bit! They're now four feet tall. You thank Minerva for letting you sleep with her, and you hug her. Next, you pick up the sirenic daughters and give them a playful hug.\n\n");
 			outputText("They look so excited! They yell \"<i>" + player.mf("Daddy!", "Mommy!") +  "</i>\" You finally set them down on the ground and tell Minerva and her daughters that you have to return to your camp.");
 			outputText("\"<i>Come back any time, love,</i>\" she says before she kisses you on your cheek. You finlly set your way back to your camp.");
 			awardAchievement("Getaway", kACHIEVEMENTS.GENERAL_GETAWAY);
 			dynStats("cor", -4);
-			sleepWithMinervaHeal();
 			doNext(camp.returnToCampUseOneHour);
-		}
-		private function sleepWithMinervaProcess():void {
-			clearOutput();
-			CoC.instance.timeQ = 10;
-			goNext(true);
-			sleepWithMinervaII();
-		}
-		private function sleepWithMinervaHeal():void {
-			CoC.instance.timeQ = 10;
-			camp.sleepRecovery(true);
-			CoC.instance.timeQ = 0;
 		}
 		
 		private function minervaACapacity():Number {
@@ -908,8 +901,6 @@ public class MinervaPurification extends BaseContent
 		private function pureMinervaSexMenu(clear:Boolean = true):void {
 			if (clear) clearOutput();
 			else outputText("\n\n");
-			menu();
-			clearOutput();
 			outputText("Minerva grins and slides her arms around you. \"<i>Oh darling, you know I'm always ready to have some fun with you.</i>\" Playfully she reaches down and cups your crotch, gently massaging your ");
 			if (player.hasCock()) outputText(player.cockDescript());
 			if (player.hasCock() && player.hasVagina()) outputText(" and ");
@@ -1474,10 +1465,16 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 		//  PREGNANCY
 		//------------------
 		public function checkPregnancy():void {
-			if (SceneLib.highMountains.minervaScene.pregnancy.incubation >= 168) pregnancyStage1(flags[kFLAGS.MINERVA_CHILDREN] > 0);
-			else if (SceneLib.highMountains.minervaScene.pregnancy.incubation >= 144) pregnancyStage2(flags[kFLAGS.MINERVA_CHILDREN] > 0);
-			else if (SceneLib.highMountains.minervaScene.pregnancy.incubation >= 72) pregnancyStage3(flags[kFLAGS.MINERVA_CHILDREN] > 0);
-			else pregnancyStage4(flags[kFLAGS.MINERVA_CHILDREN] > 0);
+			if (SceneLib.highMountains.minervaScene.pregnancy.isPregnant && (player.pregnancyType != PregnancyStore.PREGNANCY_MINERVA || rand(3) > 0)) {
+				if (SceneLib.highMountains.minervaScene.pregnancy.incubation >= 168) pregnancyStage1(flags[kFLAGS.MINERVA_CHILDREN] > 0);
+				else if (SceneLib.highMountains.minervaScene.pregnancy.incubation >= 144) pregnancyStage2(flags[kFLAGS.MINERVA_CHILDREN] > 0);
+				else if (SceneLib.highMountains.minervaScene.pregnancy.incubation >= 72) pregnancyStage3(flags[kFLAGS.MINERVA_CHILDREN] > 0);
+				else pregnancyStage4(flags[kFLAGS.MINERVA_CHILDREN] > 0);
+			}
+			else {
+				if (player.pregnancyIncubation >= 108) pregnancyPlayerStage1();
+				else pregnancyPlayerStage2();
+			}
 		}
 		
 		//If you've impregnated Minerva.
@@ -1523,7 +1520,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 		
 		public function pregnancyStage3(repeat:Boolean = false):void {
 			clearOutput();
-			if (!repeat) {
+			if (!repeat || !player.hasCock()) { //because another scene depends on it...
 				outputText("Once again you find yourself admiring Minerva's growing pregnancy, though It's hard to get a good look when the siren is fluttering around her tower like a nervous hummingbird, though in her case you say its more out of excitement then nervousness. The heavily pregnant herm can hardly stand still, her wings fluttering, her tail wagging and hands fidgeting. Seeing your intense gaze she blushes and bites her lips before taking a deep breath, choosing to focus once more on the now huge rounded swell of the babies growing inside her, her belly gotten so large now that even she seems to have a little trouble with it.");
 				outputText("\n\nWith her gaze now focused on her belly Minerva visibly calms down, her hands cradling the great swell with all the gentleness of a proud mother, her hands tenderly rubbing and stroking it even as her eyes lift and look at you, a great smile on her face as she looks at you. Finally closing the gap, your lover approaches you, her hips swinging wide with the new weight of your offspring. Moving quickly she presses herself against you, her arms sliding around you as she looks into your eyes, the passionate flames of her love for you burning so clearly in the golden amber orbs. \"<i>My love, I'm...I'm so glad you could visit. I've gotten so big now, I know its close. I... I can hardly believe it, I'm going to give birth soon, your beautiful children.</i>\" she says, her voice wavering gently and betraying her emotions.");
 				outputText("\n\nWith tears in her eyes she tightens her hold, burying her face in your neck and cuddling you tightly, the joyful herm so full of raw emotion that she's bursting at the seams. You can feel her cool tears on your skin as she kisses your neck. \"<i>Oh darling, it's so amazing, I can't believe it's so close already, all I've been thinking about is how I'm finally going to have a real family of my own. I'll make sure these children of ours, all of them, no matter how many you want, will be taken care of, I'll be the greatest mother they could have.</i>\" Minerva's words sounding so definite so strong despite her raging emotions, there is no doubt that she will care for your children and give them all the love they could ever want.");
@@ -1572,12 +1569,12 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			outputText("Indeed, your insatiable lusts kept up for several hours, the pair of you rutting like wild animals, by the time you had finally filled Minerva's belly for the last time you lost count of the orgasms you each had, seven, ten? The siren in question had been rendered into a moaning, sweaty cum caked mess on the floor, her pregnant body completely drenched in your sperm and each of her gaping dick milking holes leaking the thick white cream. For how completely exhausted the pair of you are neither of you could be happier. \"<i>shhoo... shhooooo....gooood...</i>\" was all Minerva could say as she slumps against one of the trees, slowly starting to use her long prehensile tongue to start cleaning herself off, slowly licking all your seed from her voluptuous pregnant body. Shaking your head you have no idea how you're not dead from dehydration by cumming so much, but at least all the siren venom is cleaned out of your system. The stuff may have a powerful effect, but it burns itself off quickly. You're sure Minerva had to have kept stinging you throughout the whole thing to keep you going.");
 			outputText("\n\nLooking over to you Minerva smiled, a bright blush on her now clean face, reaching out for you, she pulls you over to her, helping you by resting you against the tree. \"<i>I guess we went a bit too far, huh? I've never felt so satisfied in my life! Here let me help you, I'll clean you up and then, how about we rest, you can stay the night even! Rest up and relax a little?</i>\" she asks with a smile and a hopeful glitter in her golden-amber eyes. Letting out a sigh you nod your head, too tired from the crazy sex-a-thon you and Minerva just went through to fight. Perhaps a good sleep will fix you right up.");
 			outputText("\n\nGrinning ear to ear, Minerva seems to be somewhat revitalized by your acceptance. Pulling you closer, the siren broodmother gets to work on you, her tongue happily licking up the cum caked mess that is your body. It's a big job but before long you're mostly cleaned, if a little damp from the licking. Letting out a deep sigh your lover relaxes next to you, her arms cradling her massive belly, swollen by not only your soon-to-be birthed offspring, but what you can only guess has to be perhaps a dozen liters of thick sticky baby cream. As if sensing your thoughts, Minerva pats her belly gently. \"<i>So warm, I've never felt so full before in my life. You know, as perverted as it is, I'm sure the little ones appreciate the warmth, even if they are swimming in their daddy's sperm...</i>\" she says before shaking her head. \"<i>Well no matter. Let's just...rest for a while...</i>\" The tired siren says before cuddling up against her, her freshly cleaned body still so swollen with your fresh sperm injections, it will be some time before she absorbs it all. For now though, the urge to sleep overcomes you as soon as your head rests against Minerva's shoulder.");
-			cheatTime(1); //Ensure that the clock is not at 6am to prevent weirdness.
 			fatigue(30);
 			doNext(postPregnancyStage3Sleep);
 		}
 		private function postPregnancyStage3Sleep():void {
-			processSleepTime();
+			clearOutput();
+			cheatTime((model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours);
 			outputText("You awaken the next morning actually feeling rather refreshed. The scent of sweet peaches fills the air, following your nose you don't have to look for long to find where the smell is coming from. In fact, you don't even have to get up! Minerva is right there by your side with some freshly picked peaches from her trees, the golden herm dressed in her usual skimpy attire and in fact you yourself have your clothes back on, could Minerva have redressed you while you were passed out asleep. Grinning at your confusion, the siren broodmother kissing your cheek and speaks. \"<i>Good morning, sleepyhead, you were out for a while, guess we were more tired than we thought! These should perk you up, my peaches are guaranteed to boost your energy. Go head love, freshly picked and oh so sweet!</i>\" she says before sitting with you.");
 			outputText("\n\nNodding in acceptance, you happily bite into the sweet, juicy fruit. Once you taste that delicious fruit, you can't help but wolf it down, the juices running down your chin as they quench your thirst, the tasty flesh helping to sate the hunger that pains your stomach. You eat your fill of the sweet fruit, Minerva handing you a peach each time you finish until you're full and satisfied once more. ");
 			player.refillHunger(100);
@@ -1590,12 +1587,6 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			outputText("\n\nJust as you're about to leave for your camp you suddenly find yourself wrapped in a warm soft embrace, the heavy pregnant bulge of Minerva's belly pressed against your back. \"<i>I love you, be safe, alright? I want my daughters to have their father around when they grow up, and I want my mate to give me lots more of those adorable daughters.</i>\" she says before turning you around and pulling you into a deep tongue tangling kiss for a long-drawn-out moment before the siren reluctantly pulls away from you, a blush on her cheeks. \"<i>Come back soon alright, it will be time to meet both of these sweethearts soon, and I know they will want to see their daddy that rocked them to sleep so often.</i>\" she finishes with her usual sharky grin before finally letting go of you.");
 			outputText("Promising to return as soon as you can you turn and start the trek back to camp, your lusts satisfied, and your belly full of food.");
 			doNext(camp.returnToCampUseOneHour);
-		}
-		private function processSleepTime():void {
-			while (model.time.hours != 6) {
-				CoC.instance.timeQ = 1;
-				goNext(false);
-			}
 		}
 		
 		private function pregnancyStage4(repeat:Boolean = false):void {
@@ -1611,9 +1602,10 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			outputText("\nYou tell her that you'll be looking forward to seeing the new daughters soon. You give her a kiss before you leave the tower to make your way back to camp.");
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
+
 		//If you're impregnated by Minerva.
-		public function pregnancyPlayerStage1(repeat:Boolean = false):void {
+		public function pregnancyPlayerStage1():void {
 			clearOutput();
 			outputText("Sliding your hands down over the gentle baby bump swelling your waistline, you cast your gaze to the one that blessed you with such a motherly gift. The proud siren catching your gaze blushes before grinning to you, her own eyes looking you up and down, undressing you as she looks at you with more than a little hunger. She can't help but watch you as you stroke your swollen tummy, tenderly rubbing the baby sirens that you have growing inside your womb. Shifting from side to side, Minerva seems to be trying hard NOT to just pounce you and cuddle your pregnant body. Biting her lip and grinning wider than ever, Minerva can't hold back a moment longer. Letting out a great bird like chirp she cries out, flapping her great wings, the excited herm barrels into you, plowing you over as she wraps her arms around you and squeezes the daylights out of you. \"<i>Oh darling! I can hardly believe it! You're pregnant, and it's mine...</i>\" she says, ending in a quiet voice. The golden herm sliding her hands over your body, feeling your tummy gently, stroking and caressing you. The siren that impregnated you seemingly, entranced by your pregnant body, her face bright, happier then you have ever seen her. ");
 
@@ -1625,7 +1617,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
-		public function pregnancyPlayerStage2(repeat:Boolean = false):void {
+		public function pregnancyPlayerStage2():void {
 			clearOutput();
 			outputText("Sliding your hands down over the gentle baby bump swelling your waistline, you cast your gaze to the one that blessed you with such a motherly gift. The proud siren catching your gaze blushes before grinning to you, her own eyes looking you up and down, undressing you as she looks at you with more than a little hunger. She can't help but watch you as you stroke your swollen tummy, tenderly rubbing the baby sirens that you have growing inside your womb. Shifting from side to side, Minerva seems to be trying hard NOT to just pounce you and cuddle your pregnant body. Biting her lip and grinning wider than ever, Minerva can't hold back a moment longer. Letting out a great bird like chirp she cries out, flapping her great wings, the excited herm barrels into you, plowing you over as she wraps her arms around you and squeezes the daylights out of you. \"<i>Oh darling! I can hardly believe it! Pregnant, you're pregnant and it's mine...</i>\" she says, ending in a quiet voice. The golden herm sliding her hands over your body, feeling your tummy gently, stroking and caressing you. The siren that impregnated you seemingly, entranced by your pregnant body, her face bright, happier then you have ever seen her. ");
 
