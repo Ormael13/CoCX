@@ -948,7 +948,7 @@ public class GoblinScene extends BaseContent {
         if (player.cor > 50) outputText("Chuckling");
         else outputText("Shuddering");
         outputText(", you make your way back to camp, satisfied.");
-        player.orgasm("vaginalFluids", "Dick");
+        player.sexReward("vaginalFluids", "Dick");
         cleanupAfterCombat();
     }
 
@@ -1097,7 +1097,7 @@ public class GoblinScene extends BaseContent {
         outputText("\n\nYour sexual urge dims down, but you feel another urge as your bladder presses against your pelvis. A wicked grin crosses your face once more, and you place your hands around her head again, forcing your cock down the goblin's well-fucked throat once more. You feel a hum as she protests, her hands pressing weakly against your thighs in an attempt to push you back. The opposition slows as you begin to relieve yourself, warm urine flowing from your [cock] and into the goblin. Once again you feel her throat muscles contract as she attempts to swallow your piss. She sputters, and a few spurts of the salty liquid leak from around her lips and nose, spattering your legs and her face with piss. The stimulation to your still-sensitive cock overwhelms you and your knees begin to shake.");
         outputText("\nAs the last of your bladder empties into the green cock-sleeve, you collapse back into a patch of lush grass, pulling the goblin girl down with you. Your hands fall to your sides and the goblin's lips pop free of your dick. Unconscious from the rough treatment, her mouth hangs open as a crude mixture of cum, piss and spit flows out and clings to a patch of grasses.");
         outputText("\n\nYou catch your breath for a bit. Feeling utterly satisfied and relieved, you gather your equipment and redress. As you move to leave, you see the goblin girl's tongue lewdly lapping at a few of the blades of grass.");
-        player.orgasm("saliva", "Dick");
+        player.sexReward("saliva", "Dick");
         awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE);
         cleanupAfterCombat();
     }
