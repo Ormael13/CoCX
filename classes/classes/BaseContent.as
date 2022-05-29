@@ -44,10 +44,6 @@ import coc.xxc.StoryContext;
 		{
 			EventParser.eachMinuteCount(time, needNext);
 		}
-		/*protected function incrementDay(time:Number):void
-		{
-			CoC.instance.incrementDay(time);
-		}*/
 		protected function get timeQ():Number
 		{
 			return CoC.instance.timeQ;
@@ -63,11 +59,6 @@ import coc.xxc.StoryContext;
 		protected function get isNightTime():Boolean {
 			return (model.time.hours <= 5 || model.time.hours >= 22);
 		}
-
-		/*protected function get measurements():Class
-		{
-			return Measurements;
-		}*/
 
 		protected function get camp():Camp {
 			return SceneLib.camp;
@@ -167,17 +158,6 @@ import coc.xxc.StoryContext;
 		{
 			DungeonAbstractContent.inRoomedDungeonResume = v;
 		}
-
-/*
-		protected function get itemSubMenu():Boolean
-		{
-			return CoC.instance.itemSubMenu;
-		}
-		protected function set itemSubMenu(value:Boolean):void
-		{
-			CoC.instance.itemSubMenu = value;
-		}
-*/
 
 		protected function showStats():void
 		{
@@ -364,20 +344,6 @@ import coc.xxc.StoryContext;
 			return EngineCore.hasButton(arg);
 		}
 
-/* Replaced by Utils.formatStringArray, which does almost the same thing in one function
-		protected function clearList():void{
-			CoC.instance.clearList();
-		}
-
-		protected function addToList(arg:*):void{
-			CoC.instance.addToList(arg);
-		}
-
-		protected function outputList():String{
-			return CoC.instance.outputList();
-		}
-*/
-
 		protected function openURL(url:String):void{
 			return EngineCore.openURL(url);
 		}
@@ -393,13 +359,6 @@ import coc.xxc.StoryContext;
 			else return clitDescript();
 		}
 
-/* Was only used in Scylla's code. Replaced with conditionals
-		protected function balls(balls:*, noBalls:*):String
-		{
-			return CoC.instance.balls(balls, noBalls);
-		}
-*/
-
 		protected function sheathDesc():String
 		{
 			return CoC.instance.player.sheathDescription();
@@ -408,7 +367,6 @@ import coc.xxc.StoryContext;
 		protected function chestDesc():String
 		{
 			return player.chestDesc();
-			//return Appearance.chestDesc(player);
 		}
 
 		protected function allChestDesc():String
@@ -454,18 +412,6 @@ import coc.xxc.StoryContext;
             return Appearance.ballsDescription(false, false, player);
 		}
 
-		/* All calls changed to monster.ballsDescriptLight
-		protected function eBallsDescriptLight():String {
-			return CoC.instance.eBallsDescriptLight();
-		}
-		*/
-
-		/* Was never called
-		protected function eBallsDescript():String {
-			return CoC.instance.eBallsDescript();
-		}
-		*/
-
 		protected function ballsDescript():String {
             return Appearance.ballsDescription(false, true, player, true);
 		}
@@ -498,36 +444,6 @@ import coc.xxc.StoryContext;
 			return Appearance.assholeOrPussy(player);
 		}
 
-/* Replaced by calls to Appearance.breastDescript
-		protected function npcBreastDescript(size:Number):String {
-			return CoC.instance.npcBreastDescript(size);
-		}
-*/
-/* Was never used
-		protected  function eButtDescript():String {
-			return Appearance.buttDescriptionShort(monster);
-		}
-*/
-/* Now in Utils.as
-		protected function num2TextBest(number:int, capitalised:Boolean = false, positional:Boolean = false):String
-		{
-			return CoC.instance.num2TextBest(number, capitalised, positional);
-		}
-
-		protected function num2Text(number:int):String
-		{
-			return CoC.instance.num2Text(number);
-		}
-		protected function Num2Text(number:int):String
-		{
-			return CoC.instance.Num2Text(number);
-		}
-		protected  function num2Text2(number:int):String
-		{
-			return CoC.instance.num2Text2(number);
-		}
-*/
-
 		protected function nippleDescript(rowNum:Number):String
 		{
 			return Appearance.nippleDescription(player, rowNum)
@@ -537,13 +453,6 @@ import coc.xxc.StoryContext;
 		{
 			return CoC.instance.player.cockDescript(cockNum);
 		}
-
-/*
-		protected function cockAdjective(cockNum:Number = -1):String
-		{
-			return CoC.instance.cockAdjective(cockNum);
-		}
-*/
 
 		protected function multiCockDescript():String
 		{
@@ -555,34 +464,10 @@ import coc.xxc.StoryContext;
 			return CoC.instance.player.multiCockDescriptLight();
 		}
 
-/*
-		protected function eMultiCockDescriptLight():String
-		{
-			return CoC.instance.eMultiCockDescriptLight();
-		}
-
-		protected function eCockHead(cockNum:Number = 0):String
-		{
-			return CoC.instance.eCockHead(cockNum);
-		}
-
-		protected function eCockDescript(cockIndex:Number = 0):String
-		{
-			return CoC.instance.eCockDescript(cockIndex);
-		}
-*/
-
 		protected function breastDescript(rowNum:Number):String
 		{
 			return player.breastDescript(rowNum);
 		}
-
-/*
-		protected function cockHead(cockNum:Number = 0):String
-		{
-			return CoC.instance.cockHead(cockNum);
-		}
-*/
 
 		protected function breastSize(val:Number):String
 		{
@@ -619,6 +504,8 @@ import coc.xxc.StoryContext;
             return Appearance.vaginaDescript(player, vaginaNum);
 		}
 
+		//useless until multivaginas are added
+		/*
 		protected function allVaginaDescript():String
 		{
             if (player.vaginas.length == 1) return vaginaDescript(rand(player.vaginas.length - 1));
@@ -627,6 +514,7 @@ import coc.xxc.StoryContext;
             CoC_Settings.error("ERROR: allVaginaDescript called with no vaginas.");
             return "ERROR: allVaginaDescript called with no vaginas.";
 		}
+		*/
 
 		/**
 		 * Apply statmods to the player. dynStats wraps the regular stats call, but supports "named" arguments of the form:
@@ -800,18 +688,6 @@ import coc.xxc.StoryContext;
 			return SceneLib.inventory;
 		}
 
-/* No longer used
-		protected function get itemSwapping():Boolean
-		{
-			return CoC.instance.itemSwapping;
-		}
-
-		protected function set itemSwapping(val:Boolean):void
-		{
-			CoC.instance.itemSwapping = val;
-		}
-*/
-
 		protected function get time():TimeModel
 		{
 			return CoC.instance.time;
@@ -821,47 +697,6 @@ import coc.xxc.StoryContext;
 		{
 			CoC.instance.time = val;
 		}
-
-/* Finally got rid of this var
-		protected function get menuLoc():Number
-		{
-			return CoC.instance.menuLoc;
-		}
-
-		protected function set menuLoc(val:Number):void
-		{
-			CoC.instance.menuLoc = val;
-		}
-*/
-
-/*
-		protected function get itemSlots():Array
-		{
-			return CoC.instance.player.itemSlots;
-		}
-*/
-
-/*
-		protected function get itemStorage():Array
-		{
-			return CoC.instance.itemStorage;
-		}
-
-		protected function set itemStorage(val:Array):void
-		{
-			CoC.instance.itemStorage = val;
-		}
-
-		protected function get gearStorage():Array
-		{
-			return CoC.instance.gearStorage;
-		}
-
-		protected function set gearStorage(val:Array):void
-		{
-			CoC.instance.gearStorage = val;
-		}
-*/
 
 		protected function get mainView():MainView
 		{
