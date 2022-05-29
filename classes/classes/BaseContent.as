@@ -812,36 +812,18 @@ import coc.xxc.StoryContext;
          * isChecking - only check if the menu is non-empty?
 		 */
 		protected function menuGen(menuItems:Array, page:int, back:Function=null):void {
-			var bList:Array = [];
-            var multipage:Boolean = menuItems.length > 14 * 3;
-			if(multipage)
-				for (var h:int = page * (12*3); h <= Math.min((page+1) * (12*3), menuItems.length - 1); h++) // Page 0 - array 0-36. Page 1 - array 37 -?
-					bList.push(menuItems[h]);
-			else
-				bList = menuItems;
-            menu();
-			for (var i:int = 0; i < bList.length; i += 3){
-				//trace("BC Name: "+ bList[i] + "\nBC Typeof: "+typeof(bList[i+1])  + "\n");
-                if (bList[i + 1] is Function)
-					addButton(i/3, bList[i], bList[i + 1]). hint(bList[i + 2] is Array ? bList[i+2][0]: bList[i+2]);
-                else if (bList[i + 1] == "ignore") //Not sure when this would ever be used, but in case.
-                    trace("MenuGen ignored " + bList[i] + " when creating the button menu.\n");
-                else if (!bList[i + 1]) //hope it works
-					addButtonDisabled(i/3, bList[i], (bList[i + 2] is Array) ? bList[i+2][1]: bList[i+2]);
+			var buttons:ButtonDataList = new ButtonDataList();
+			for (var i:int = 0; i < menuItems.length; i += 3){
+                if (menuItems[i + 1] is Function)
+					buttons.add(menuItems[i], menuItems[i+1], menuItems[i+2] is Array ? menuItems[i+2][0] : menuItems[i+2]);
+				else if (!menuItems[i + 1]) //hope it works
+					buttons.add(menuItems[i], null, menuItems[i+2] is Array ? menuItems[i+2][1] : menuItems[i+2]);
+				else if (menuItems[i + 1] == "ignore") //"Legal" ignore
+					trace("MenuGen ignored " + menuItems[i] + " when creating the button menu.\n");
 				else
                     CoC_Settings.error("Non-function in menuGen!")
 			}
-            if (multipage) {
-                if (page > 0)
-                    addButton(12,"Prev Page", curry(menuGen, menuItems,page - 1, back));
-                else
-                    addButtonDisabled(12, "Prev Page","This is the first page.");
-                if (menuItems.length > (page + 1) * 12 * 3)
-                    addButton(13, "Next Page", curry(menuGen, menuItems,page + 1, back));
-                else
-                    addButtonDisabled(13, "Next Page", "This is the last page.");
-            }
-            if (back != null) addButton(14, "Back", back);
+			submenu(buttons, back, page);
 		}
 
 		/**Counts active buttons inside of the menu.
