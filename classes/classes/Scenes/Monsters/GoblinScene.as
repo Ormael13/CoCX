@@ -43,13 +43,6 @@ public class GoblinScene extends BaseContent {
      Dressed in leather straps that support her chest (in a lewd way) while leaving her pierced nipples exposed and slightly parting her ass to expose her pucker & femmy funbits.  Pierced pointed ears.
      */
 
-    private function checkCodex():void {
-        if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
-            flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
-            outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
-        }
-    }
-
     private function goblinClass(assassin:String = "assassin", shaman:String = "shaman", warrior:String = "warrior", elder:String = "elder"):String { //Allows for variants.
         return monster is GoblinAssassin || monster is GoblinAdventurers ? assassin
             : monster is GoblinShaman ? shaman
@@ -67,7 +60,7 @@ public class GoblinScene extends BaseContent {
             outputText("She says, \"<i>Time to get fucked, " + player.mf("stud", "slut") + ".</i>\"");
         else
             outputText("She says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!</i>\"");
-        checkCodex();
+        camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOLEMS);;
         startCombat(new Goblin());
     }
 
@@ -82,7 +75,7 @@ public class GoblinScene extends BaseContent {
             outputText("A familiar sight catches your attention as a shadowy blur lands in front of you - another goblin assassin appears to be lurking around these parts. You ready your [weapon] as she straps on a belt loaded with various types of needles and assumes a combat stance.");
         }
         flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ASSASSIN]++;
-        checkCodex();
+        camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOLEMS);;
         startCombat(new GoblinAssassin());
     }
     //More Assassins
@@ -97,7 +90,7 @@ public class GoblinScene extends BaseContent {
             //[Initiate combat encounter – goblin assassin]
         }
         flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ASSASSIN]++;
-        checkCodex();
+        camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOLEMS);;
         startCombat(new GoblinAdventurers());
     }
 
@@ -114,7 +107,7 @@ public class GoblinScene extends BaseContent {
             outputText("\n\n\"<i>I'm going to cast you into submission,</i>\" she says.");
         }
         flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_SHAMAN]++;
-        checkCodex();
+        camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOLEMS);;
         startCombat(new GoblinShaman());
     }
 
@@ -130,7 +123,7 @@ public class GoblinScene extends BaseContent {
             outputText("\n\n\"<i>I'm going to beat you just so I can fuck you,</i>\" she says.");
         }
         flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_WARRIOR]++;
-        checkCodex();
+        camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOLEMS);;
         startCombat(new GoblinWarrior());
     }
     //More warriors
@@ -145,7 +138,7 @@ public class GoblinScene extends BaseContent {
             outputText("\n\n\"<i>We going to beat you just so we can fuck you,</i>\" says the tallest goblin among them.");
         }
         flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_WARRIOR]++;
-        checkCodex();
+        camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOLEMS);;
         startCombat(new GoblinWarriors());
     }
 

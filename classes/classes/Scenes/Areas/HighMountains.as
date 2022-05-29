@@ -5,7 +5,6 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
@@ -144,10 +143,7 @@ use namespace CoC;
 			if (chooser == 0) {
 				clearOutput();
 				outputText("A harpy wings out of the sky and attacks!");
-				if (flags[kFLAGS.CODEX_ENTRY_HARPIES] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_HARPIES] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Harpies!</b>")
-				}
+				camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_HARPIES);
 				startCombat(new Harpy());
 				spriteSelect(SpriteDb.s_harpy);
 				return;
@@ -187,10 +183,7 @@ use namespace CoC;
 				else {
 					clearOutput();
 					outputText("A harpy wings out of the sky and attacks!");
-					if (flags[kFLAGS.CODEX_ENTRY_HARPIES] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_HARPIES] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Harpies!</b>")
-					}
+					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_HARPIES);
 					startCombat(new Harpy());
 					spriteSelect(SpriteDb.s_harpy);
 				}

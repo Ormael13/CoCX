@@ -2,8 +2,8 @@
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
-import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirlsPack;
+import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -66,10 +66,7 @@ public function sharkGirlEncounter(exploreLoc:Number = 0):void {
 	}
 	outputText("A grey blur bursts from the water and lands on the ground a few feet away from you.\n\n");
 	outputText("It's a woman – a peculiarly corrupted woman, with shiny grey skin, silver hair, and a fin positioned between her shoulder blades. She's wearing some rather revealing black swimwear. The girl looks up at you and grins widely, showing rows of knife-like teeth. \"<i>Wanna play? Heads up though, I play 'rough'!</i>\"\n\n");
-	if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] = 1;
-		outputText("<b>New codex entry unlocked: Shark-girls & Tigershark-girls!</b>\n\n")
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_NAGAS);
 	outputText("You're fighting a shark girl!");
 	startCombat(new SharkGirl());
 	spriteSelect(SpriteDb.s_sharkgirl);
@@ -79,10 +76,7 @@ public function oceanSharkGirlEncounter():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_sharkgirl);
 	outputText("Your boat is hit from the side and violently rocked, throwing you right into the water! As you look for your opponent you see an indistinct shape doing circle in the distance and closing in on you at high speed until its shape becomes clear, jaw wide with a toothy grin.\n\n");
-	if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] = 1;
-		outputText("<b>New codex entry unlocked: Shark-girls & Tigershark-girls!</b>\n\n")
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_NAGAS);
 	outputText("You are under attack by a shark girl!");
 	startCombat(new UnderwaterSharkGirl());
 	spriteSelect(SpriteDb.s_sharkgirl);
@@ -91,10 +85,7 @@ public function oceanTigersharkGirlEncounter():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_izma);
 	outputText("Your boat is grabbed from the side and violently rocked throwing you right into the water! As you look for your opponent you see an indistinct shape doing circle in the distance and closing on you at high speed until its shape becomes clear, jaw wide with a toothy grin.\n\n");
-	if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] = 1;
-		outputText("<b>New codex entry unlocked: Shark-girls & Tigershark-girls!</b>\n\n")
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_NAGAS);
 	outputText("You are under attack by a tiger shark girl!");
 	startCombat(new UnderwaterTigersharkGirl());
 	spriteSelect(SpriteDb.s_izma);
@@ -103,10 +94,7 @@ public function oceanSharkGirlsPackEncounter():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_izma);
 	outputText("As you row your boat through this ocean, something feels... off. You're not quite sure how to describe it"+(silly() ? " as a weird music start playing in background similar to \"<i>Dun dun, dun dun, dun dun dun dun</i>\"":"")+". You see several large fins rising out of the water ahead of you and before you can react your boat is hit by a powerful collision, sending you straight into the water. As you look around you see several shark girls as well as their alpha tiger shark circling you, grinning widely with. most likely, very bad intentions in store for you. This is gonna be a hard battle!\n\n");
-	if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] = 1;
-		outputText("<b>New codex entry unlocked: Shark-girls & Tigershark-girls!</b>\n\n")
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_NAGAS);
 	outputText("You are under attack by a shark girls pack!");
 	startCombat(new UnderwaterSharkGirlsPack());
 	spriteSelect(SpriteDb.s_izma);

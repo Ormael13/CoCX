@@ -2,8 +2,6 @@ package classes.Scenes.Areas.Beach
 {
 import classes.*;
 import classes.BodyParts.Face;
-import classes.BodyParts.LowerBody;
-import classes.display.SpriteDb;
 
 public class GorgonScene extends BaseContent
 	{
@@ -25,20 +23,12 @@ public function gorgonEncounter():void {
 			player.changeStatusValue(StatusEffects.Naga,2,1);
 			outputText("You wander into the beach, noting how good the sand feels on your underbelly compared to rocks and dirt. You are wondering to yourself if maybe it wouldn't be a bad idea to come out here more often when you spot something moving a little farther ahead of you.\n\n");
 			outputText("As you get closer, you see that it is the gorgon that inhabits this dry beach. You stop in your tracks, wondering if it isn't too late to turn and run, when she turns her head and looks straight at you. You slowly tense your hands, ready to raise your [weapon] as the gorgon eyes your new snake-like body hungrily. Just before you can ready yourself, the gorgon opens her mouth. But instead of hissing, you find that you can understand her speech. \"<i>Your new body looks so much better than it did before,</i>\" she says, \"<i>It looks far more... delectable now.</i>\"\n\n");
-		//	if (flags[kFLAGS.CODEX_ENTRY_GORGONS] <= 0) {
-		//		flags[kFLAGS.CODEX_ENTRY_GORGONS] = 1;
-		//		outputText("<b>New codex entry unlocked: Gorgons!</b>\n\n")
-		//	}
 			outputText("You wonder how it is that you can understand her now. Perhaps eating and drinking everything you find isn't the greatest idea after all, and as a result you're hallucinating? \"<i>It's been so long since I last saw another of my scaly kin,</i>\" she hisses softly, pulling you out of your introspection. \"<i>I had almost forgotten how good it is to be able to look at the sleek and powerful curves our kind possess. This place can make you forget, if you aren't too careful.</i>\" As strange as it sounds in your head, you are surprised at how she doesn't hold her s's. You aren't quite sure why you thought that would make sense.\n\n");
 			outputText("You relax a little as she slithers over to you, though you're still wary of possibly being attacked despite the bright smile on her face. When she is close enough to you, she surprises you again by draping her arms around your shoulders in a friendly hug and pressing her chest firmly against you. You jump slightly at the sudden embrace, but slowly wrap your arms around her waist and pull her closer to you.\n\n");
 		}
 		//[If already encountered as a naga]
 		else {
 			outputText("You slide over the hot sand of the beach, enjoying the soft hiss that it makes as your scaled body slides over it. You see a strange yet familiar shape in the distance, and as you approach you realize that it is the gorgon from before. You quickly slither up behind her and wrap your arms around her. You can feel her tense up momentarily, before recognizing that it's you and turning herself to face you. \"<i>You came back!</i>\" She wraps her arms around your waist and you draw her closer to you.\n\n");
-		//	if (flags[kFLAGS.CODEX_ENTRY_GORGONS] <= 0) {
-		//		flags[kFLAGS.CODEX_ENTRY_GORGONS] = 1;
-		//		outputText("<b>New codex entry unlocked: Gorgons!</b>\n\n")
-		//	}	
 		}
 		outputText("She lets out a soft moan and leans her head forward, pressing her lips against yours. You squeeze her body even more firmly against yours in response, the tips of your tails wrapping around one another. You open your mouth slightly and press your tongue against her lips. She offers no resistance and you begin caressing the inside of her mouth with your tongue, circling her fangs as she uses her own tongue to gently stroke ");
 		//[If player has fangs]
@@ -152,10 +142,6 @@ public function gorgonEncounter():void {
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
-//	if (flags[kFLAGS.CODEX_ENTRY_GORGONS] <= 0) {
-//		flags[kFLAGS.CODEX_ENTRY_GORGONS] = 1;
-//		outputText("<b>New codex entry unlocked: Gorgons!</b>\n\n")
-//	}
 	startCombat(new Gorgon());
 }
 

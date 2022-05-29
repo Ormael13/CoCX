@@ -9,25 +9,16 @@ package classes.Scenes.Places {
 
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
-import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.Scenes.Areas.Forest.TentacleBeast;
 import classes.Scenes.Areas.Mountain.HellHound;
 import classes.Scenes.Areas.Swamp.CorruptedDrider;
 import classes.Scenes.Dungeons.HiddenCave.BossGolems;
 import classes.Scenes.Dungeons.RiverDungeon;
+import classes.Scenes.Monsters.*;
+import classes.Scenes.NPCs.ChiChiFollower;
 import classes.Scenes.NPCs.NeisaFollower;
 import classes.Scenes.Places.HeXinDao.*;
-import classes.Scenes.Monsters.*;
-import classes.Scenes.NPCs.Asuka;
-import classes.Scenes.NPCs.Jeniffer;
-import classes.Scenes.NPCs.ChiChiFollower;
-import classes.Scenes.NPCs.Jinx;
-import classes.Scenes.NPCs.Syth;
-import classes.Scenes.NPCs.Rangiku;
-import classes.Scenes.NPCs.Veronika;
 import classes.Scenes.SceneLib;
-import classes.Stats.Buff;
 
 public class HeXinDao extends BaseContent
 {
@@ -192,10 +183,7 @@ public class HeXinDao extends BaseContent
         outputText("You enter a shop titled 'Soul Items' from the sign on its entrance. Inside you see a few shelves with many different items on display.  It doesn't seem like this merchant has a wide choice of things to sell, but for someone at the beginning of their soul cultivation path, it's probably enough.  Sensing motion from a corner of the shop permanently covered in darkness, a person appears without making a sound.  'He' is around five feet tall, and looks like some kind of demonic monster.");
         if (flags[kFLAGS.FOUND_CATHEDRAL] > 0) outputText(" But he does look quite similar to the gargoyle from the cathedral.");
         outputText("\n\n\"<i>Welcome to my master's shop, dear customer. Feel free to look around,</i>\" he says. \n\n");
-        if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] <= 0) {
-            flags[kFLAGS.CODEX_ENTRY_GOLEMS] = 1;
-            outputText("<b>New codex entry unlocked: Golems!</b>\n\n")
-        }
+        camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOBLINS);
         menu();
         var buyItem1:Function = curry(confirmBuy1,golemmerchant,"Golem",1);
         var buyItem2:Function = curry(confirmBuy2,golemmerchant,"Golem",0.2);

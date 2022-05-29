@@ -1720,10 +1720,7 @@ use namespace CoC;
 			clearOutput();
 			if (flags[kFLAGS.IMP_LORD_MALEHERM_PROGRESS] != 1) {
 				outputText("A large corrupted imp crosses your path. He flashes a cruel smile your way.  No way around it, you ready your [weapon] for the fight.");
-				if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-				}
+				camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 				startCombat(new ImpLord());
 				return;
 			}
@@ -1732,10 +1729,7 @@ use namespace CoC;
 				dynStats("lus", 20);
 				flags[kFLAGS.IMP_LORD_MALEHERM_PROGRESS] = 10;
 			}
-			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1745,10 +1739,7 @@ use namespace CoC;
 			outputText("A large corrupted imp crosses your path.  He is wearing armor, unlike most of the imps.  He is also wielding a sword in his right hand.  He flashes a cruel smile your way.  No way around it, you ready your [weapon] for the fight.");
 			flags[kFLAGS.TIMES_ENCOUNTERED_IMP_WARLORD]++;
 			startCombat(new ImpWarlord());
-			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 			doNext(playerMenu);
 		}
 
@@ -1758,10 +1749,7 @@ use namespace CoC;
 			outputText("A large corrupted imp crosses your path but he is no ordinary imp.  Glowing veins line his body.  He is clad in bee-chitin armor and he's wearing a shark-tooth necklace.  He is also wielding a scimitar in his right hand.  He must be an Imp Overlord!  He flashes a cruel smile your way.  No way around it, you ready your [weapon] for the fight.");
 			flags[kFLAGS.TIMES_ENCOUNTERED_IMP_OVERLORD]++;
 			startCombat(new ImpOverlord());
-			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 			doNext(playerMenu);
 		}
 
@@ -1769,10 +1757,7 @@ use namespace CoC;
 		public function impLordFeralEncounter():void {
 			clearOutput();
 			outputText("A large corrupted feral imp crosses your path. He flashes a cruel smile your way while flexing his massive muscles.  No way around it, you ready your [weapon] for the fight.");
-			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Imps!</b>");
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 			flags[kFLAGS.FERAL_EXTRAS] = 2;
 			startCombat(new FeralImps());
 		}
@@ -1782,10 +1767,7 @@ use namespace CoC;
 			clearOutput();
 			outputText("A large corrupted feral imp crosses your path.  He is wearing armor, unlike most of the imps.  He is also wielding a sword in his right hand.  He flashes a cruel smile your way while flexing his massive muscles.  No way around it, you ready your [weapon] for the fight.");
 			flags[kFLAGS.TIMES_ENCOUNTERED_IMP_WARLORD]++;
-			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Imps!</b>");
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 			flags[kFLAGS.FERAL_EXTRAS] = 3;
 			startCombat(new FeralImps());
 		}
@@ -2261,10 +2243,7 @@ use namespace CoC;
 			clearOutput();
 			outputText("During your searching thou current location you suddenly hear sound of many wings flapping.  Turning around you notice a large group of imps flying toward you.  In no time they catch up to you and surrounds.  No way around it, you ready your [weapon] for the fight.");
 			startCombat(new ImpPack());
-			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 			doNext(playerMenu);
 		}
 		public function impPackEncounter2():void {
@@ -2272,10 +2251,7 @@ use namespace CoC;
 			outputText("During your searching thou current location you suddenly hear sound of many wings flapping.  Turning around you notice a large group of feral imps flying toward you.  In no time their catch up to you and surrounds.  No way around it, you ready your [weapon] for the fight.");
 			flags[kFLAGS.FERAL_EXTRAS] = 4;
 			startCombat(new FeralImps());
-			if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 			doNext(playerMenu);
 		}
 

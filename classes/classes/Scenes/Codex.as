@@ -1,4 +1,4 @@
-package classes.Scenes 
+package classes.Scenes
 {
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
@@ -34,7 +34,7 @@ import coc.view.ButtonDataList;
 			headerSub("Header6");
 			outputText("Lorem ipsum dolor sit amet");
 		 */
-		
+
 		//CODEX MODULES & APIs
 		public function headerMain(text:String = ""):void {
 			outputText("<font size=\"36\" face=\"Georgia\">" + text + "</font>\n\n");
@@ -42,20 +42,21 @@ import coc.view.ButtonDataList;
 		public function headerSub(text:String = ""):void {
 			outputText("\n\n<font size=\"24\" face=\"Georgia\"><b><u>" + text + "</u></b></font>\n");
 		}
-		//Ensures that none of the codex entries can be Lost Forever.
-		public function setFlags():void {
-			if (player.hasStatusEffect(StatusEffects.KnowsCharge) || player.hasStatusEffect(StatusEffects.KnowsBlind) || player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.KnowsArouse) || player.hasStatusEffect(StatusEffects.KnowsHeal) || player.hasStatusEffect(StatusEffects.KnowsMight) || player.hasStatusEffect(StatusEffects.KnowsBlink)
-				|| player.hasStatusEffect(StatusEffects.KnowsBlizzard) || player.hasStatusEffect(StatusEffects.KnowsChargeA) || player.hasStatusEffect(StatusEffects.KnowsFireStorm) || player.hasStatusEffect(StatusEffects.KnowsIceRain) || player.hasStatusEffect(StatusEffects.KnowsIceSpike) || player.hasStatusEffect(StatusEffects.KnowsLightningBolt)
-				|| player.hasStatusEffect(StatusEffects.KnowsDarknessShard) || player.hasStatusEffect(StatusEffects.KnowsArcticGale) || player.hasStatusEffect(StatusEffects.KnowsChainLighting) || player.hasStatusEffect(StatusEffects.KnowsDuskWave) || player.hasStatusEffect(StatusEffects.KnowsPyreBurst))
-			{
-				if (flags[kFLAGS.CODEX_ENTRY_MAGIC] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_MAGIC] = 1;
-				}
-			}
-			if (flags[kFLAGS.MARBLE_WARNING] > 0) flags[kFLAGS.CODEX_ENTRY_LABOVINES] = 1;
-			if (flags[kFLAGS.ROGAR_DISABLED] > 0 || flags[kFLAGS.ROGAR_PHASE] >= 3) flags[kFLAGS.CODEX_ENTRY_ORCS] = 1;
+
+		public function unlockEntry(flag:int):Boolean {
+			for each (var entries:Array in pages)
+				for each (var entry:Array in entries)
+					if (entry[0] == flag) {
+						if (flags[flag]) return false; //return if already unlocked. Not earlier - still want to check that flag is legal.
+						outputText("\n\n<b>New codex entry unlocked: " + entry[1] + "!</b>");
+						flags[flag] = 1;
+						checkAchievements();
+						return true;
+					}
+			CoC_Settings.error("Unknown codex entry!");
+			return false;
 		}
-		
+
 		public function checkUnlocked():Number {
 			var num:int = 0;
 			for each (var entries:Array in pages)
@@ -79,12 +80,12 @@ import coc.view.ButtonDataList;
 			if (unlocked >= 30) awardAchievement("Scholar (2)", kACHIEVEMENTS.GENERAL_SCHOLAR_2);//aktualnie 36 codex entries exist ingame
 			if (unlocked >= 40) awardAchievement("Scholar (3)", kACHIEVEMENTS.GENERAL_SCHOLAR_3);
 		}
-		
+
 		//CODEX MENUS
 		public function accessCodexMenu():void {
 			clearOutput();
-			setFlags();
-			checkAchievements(); //TODO: move to opener!
+			if (player.hasSpells()) unlockEntry(kFLAGS.CODEX_ENTRY_MAGIC); //need to do it somewhere
+			checkAchievements(); //just in case something's broken
 			menu();
 			flags[kFLAGS.CODEX_CURRENT_PAGE] = "";
 			flags[kFLAGS.CODEX_CURRENT_ENTRY] = 0;
@@ -133,14 +134,14 @@ import coc.view.ButtonDataList;
 			],
 			"Factions": [
 				[kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS, "Fetish Cult", codexEntryFetish],
-				[kFLAGS.CODEX_ENTRY_SANDWITCHES, "Sand Coven", codexEntrySandWitches],
+				[kFLAGS.CODEX_ENTRY_SANDWITCHES, "Sand Witch", codexEntrySandWitches],
 			],
 			"Other": [
 				[kFLAGS.CODEX_ENTRY_GOLEMS, "Golems", codexEntryGolems],
 				[kFLAGS.CODEX_ENTRY_MAGIC, "Magic", codexEntryMagic],
 			]
 		}
-		
+
 		private function openPage(page:String):void {
 			menu();
 			flags[kFLAGS.CODEX_CURRENT_PAGE] = page;
@@ -176,10 +177,10 @@ import coc.view.ButtonDataList;
 			headerSub("Behavior");
 			outputText("Alraunes while not aggressive in the normal sense are about as likely to strike casual conversation as to force the 'teachings' of their patron deity on others. They see themselves as evangelists of Marae and are willing to pull their would be target all the way to their pitcher by force in order to 'spread the love' of their goddess.");
 			headerSub("History");
-			outputText("The gods each have a creature whom they favor amongst their creations. Amongst plants morphs and dryads none embody Marae teachings as much as the infamous Alraunes. Fertility incarnates, alraunes embody it down to the floral haze of lust that herald their presence. Alraunes only wish to spread the faith of their god the way they do best, by spreading their seed and getting seeded themselves.");			
+			outputText("The gods each have a creature whom they favor amongst their creations. Amongst plants morphs and dryads none embody Marae teachings as much as the infamous Alraunes. Fertility incarnates, alraunes embody it down to the floral haze of lust that herald their presence. Alraunes only wish to spread the faith of their god the way they do best, by spreading their seed and getting seeded themselves.");
 			outputText("\n\n(Written By: Liadri)");
 		}
-		
+
 		private function codexEntryAnemone():void {
 			headerMain("Anemones");
 			outputText("<b>Genders:</b> Universally hermaphroditic\n");
@@ -202,7 +203,7 @@ import coc.view.ButtonDataList;
 			outputText("while they may have a fair bit of natural intelligence, they are very young as a species and by no means world-wise or accustomed to society. They have some talent for language but little exposure to it; most of their sparse language skills come from observing the interactions of others from faraway. Anemone tend to communicate with each other by touch or gesture and will usually default to this with other races, only using words to add emphasis or consciously with races that do not seem to respond to the myriad small cues that anemone recognize in each others’ actions. Anemones tend to be slightly mischievous or sadistic, either as result of their corrupt origins or simply because of their inexperience and lack of social mores.");
 			outputText("\n\n(Written by Zeikfried)");
 		}
-		
+
 		private function codexEntrySpiders():void {
 			headerMain("Arachne, Spider-Morphs, and Driders");
 			outputText("<b>Genders:</b> Female, Male, and Hermaphrodite\n");
@@ -211,7 +212,7 @@ import coc.view.ButtonDataList;
 			outputText("<b>Eyes:</b> Solid yellow, red, black, or purple with small, black pupil in the middle. All spider-kin have a chance of having either four or six such eyes. Typically the extras are located on the forehead, above the primary pair, and are much smaller.\n");
 			outputText("<b>Facial features:</b> Largely human. Spider-kin ALL have long, needle-like retractable canines that can be used for injecting venom or drinking blood. Unlike normal spiders, spider-kin are capable of surviving on an omnivorous diet, but love to dine the 'spider-way' when possible.\n");
 			outputText("<b>Legs:</b> All spider-kin save for Driders have humanoid legs and feet. However, unlike humans, spider-kin feet only have a few toes that can be hooked together to grip and climb on webs. Drider lower bodies are entirely spider-like. They have eight spider legs, used for scaling webs or walls, as well as a much larger abdomen than less spider-races.\n");
-			
+
 			headerSub("Body Structures");
 			outputText("Arachne and spider-morphs have the most in common with other bipeds. Their hand structure is exactly the same as a human’s, save for the chance of being encased in an exoskeleton. Some spider-kin are born with four arms, though only ‘pure-born’ ones seem to show this trait. All arachne and spider-morphs have an arachnid-like abdomen that grows from their back, just above their butt-cheeks, though it has a tendency to hang low when being ignored. On Driders, the anus and corresponding \"cheeks\" are located just above the beginning of their spider half. Though there is no known reason for this disparity in anal positioning, it does allow Driders to fold their spider segments flat between their many legs and allow themselves to be taken anally in the traditional way.");
 			headerSub("Venoms");
@@ -227,7 +228,7 @@ import coc.view.ButtonDataList;
 			headerSub("Other notes");
 			outputText("Spider-kin venom is believed to be a crucial ingredient in the lust drafts and poisons used by the goblins of Mareth, but those weak toxins lose most of their potency after a short time. When injected fresh, it is a great deal more powerful and dangerous than those weak drugs. ");
 		}
-		
+
 		private function codexEntryCheshireCat():void {
 			headerMain("Cheshire Cats");
 			outputText("<b>Genders:</b> Variable\n");
@@ -242,10 +243,10 @@ import coc.view.ButtonDataList;
 			headerSub("Behavior");
 			outputText("Cheshire cats favors forested area where there are plenty of trees to perch themselves up and prey on the gullible. Cheshire cats while not corrupt or innately evil in nature are notorious as pranksters and thus are untrustworthy and hazardous to be around. Their pranks range from stealing items to getting their traveling partners straight into ambushes with the local wildlife.");
 			headerSub("History");
-			outputText("Not native to Mareth, cheshires have first been reported after portals began appearing across the plane. It is likely the curious cats simply ventured out into Mareth seeking new gullible victims to entertain themselves with and with them various otherworldly products made their way to the markets including the infamous wonderland cakes.");			
+			outputText("Not native to Mareth, cheshires have first been reported after portals began appearing across the plane. It is likely the curious cats simply ventured out into Mareth seeking new gullible victims to entertain themselves with and with them various otherworldly products made their way to the markets including the infamous wonderland cakes.");
 			outputText("\n\n(Written By: Liadri)");
 		}
-		
+
 		private function codexEntryChimera():void {
 			headerMain("Chimeras");
 			outputText("<b>Genders:</b> Variable\n");
@@ -260,10 +261,10 @@ import coc.view.ButtonDataList;
 			headerSub("Behavior");
 			outputText("True chimera bodily instability makes them highly unpredictable as they tend to combine the traits of both prey and predators. A consensus is that if any of the chimera parts belong to a predator it is likely to attack, kill or violently rape its victim. Chimeric body instability has a tendency to drive the monster deeper and deeper into its basest instinct, making most true chimera deadlier and hornier than demons.");
 			headerSub("History");
-			outputText("Ever since transformatives appeared on Mareth, chimeric abominations roamed the land. It only became even worse when the demons started experimenting and creating even deadlier beasts. True chimera almost always loses to their many conflicting instincts, turning savage and aggressive before long, something demonic corruption only makes worse.");			
+			outputText("Ever since transformatives appeared on Mareth, chimeric abominations roamed the land. It only became even worse when the demons started experimenting and creating even deadlier beasts. True chimera almost always loses to their many conflicting instincts, turning savage and aggressive before long, something demonic corruption only makes worse.");
 			outputText("\n\n(Written By: Liadri)");
 		}
-		
+
 		private function codexEntryDevil():void {
 			headerMain("Devils");
 			outputText("<b>Genders:</b> Variable\n");
@@ -278,10 +279,10 @@ import coc.view.ButtonDataList;
 			headerSub("Behavior");
 			outputText("Powerful and composed, devils would epitomise the principles of power and control as well as the pinnacle of demonkind ideals. Unlike normal demons the ideal devil would be capable of rational behavior, ever keeping its lust in check so that it does not interfere with its decision. Though wiser and more rational than demons, a devils is nonetheless corrupt and lack the concept of morality, manipulating and putting down its pawns without a second thoughts once it tires of them. It is important to note that most devils are the results of failed demonic experiments and thus will rarely exhibit all of those traits together, coming up with quirks like body deformity, madness, or uncontrollable lust which is the utter opposite of the devil project goals and thus deemed a failure. Should a perfect devil turn up it would easily rival and perhaps even outstrip the mareth gods in terms of power.");
 			headerSub("History");
-			outputText("The first devils were created as an attempt to improve and control the state of demonhood into a better spellcaster variant. Most of those experiments turned up flawed in one way or another, always close to the goal but never perfect with deformed bodies or warped minds destroyed by their own lust and black magic. There are no records of a perfect devil ever created and should one do exist surely it would have revealed itself by now and ensnared Mareth beneath its unholy rulership. Unless of course it lost interest in enslaving other lesser life forms and gave in to its intended original desire for the accumulation of magical powers.");			
+			outputText("The first devils were created as an attempt to improve and control the state of demonhood into a better spellcaster variant. Most of those experiments turned up flawed in one way or another, always close to the goal but never perfect with deformed bodies or warped minds destroyed by their own lust and black magic. There are no records of a perfect devil ever created and should one do exist surely it would have revealed itself by now and ensnared Mareth beneath its unholy rulership. Unless of course it lost interest in enslaving other lesser life forms and gave in to its intended original desire for the accumulation of magical powers.");
 			outputText("\n\n(Written By: Liadri)");
 		}
-		
+
 		private function codexEntryDisplacerBeast():void {
 			headerMain("Displacer Beasts");
 			outputText("<b>Genders:</b> Variable\n");
@@ -296,10 +297,10 @@ import coc.view.ButtonDataList;
 			headerSub("Behavior");
 			outputText("The displacer beast is a highly aggressive predator who hunts for a very specific source of food, breast milk. Once its victim is unable to defend itself it will latch on its prey’s chest with two tentacles and inject it with its natural drugs akin to lactaid to force milk production. This done, it will feed on its victim’s milk until it runs dry. Displacer beast got their name from their ability to displace themselves. When attacked they can reflexively teleport out of the attack range or direction in order to viciously assault their prey from about any angle or range. Due to their sensitive vision they prefer hanging in dark caves, roaming mareth only at night. It is said when fed willingly displacer beasts tend to act very much and be about as tame as an overgrown pet cat. For this reason Lacta bovines in need of relief actively seek them out.");
 			headerSub("History");
-			outputText("The displacer beast origins are pretty much unknown. No god made the claim on their creation through many scholars suspect only the god of transformation and change, Ezekiel, would ever create such a chimeric monster.");			
+			outputText("The displacer beast origins are pretty much unknown. No god made the claim on their creation through many scholars suspect only the god of transformation and change, Ezekiel, would ever create such a chimeric monster.");
 			outputText("\n\n(Written By: Liadri)");
 		}
-		
+
 		private function codexEntryFetish():void {
 			headerMain("Followers of the Fetish");
 			outputText("<b>Genders:</b> Females are Fetish Cultists and Males are Fetish Zealots. Fetish priestesses are either female, or hermaphrodites.\n");
@@ -320,7 +321,7 @@ import coc.view.ButtonDataList;
 			outputText("The original followers where a group of crusaders lead by a man named Alexander. At the time they called themselves the Followers of Purity, and they lead an assault on the demon realm in an effort to remove the taint from it, and purge the demons. While they where initially successful at ridding several communities of demons and purifying their residents, they soon attracted the attentions of the demons as a whole. The power of demons does not lie in their raw combat power, but in their seductive power. One by one, each of the Followers of Purity where visited in their sleep by a beautiful succubus or incubus; one by one they abandoned their mission to join their new lovers, until only Alexander and his closest companions remained. The mission would not fail here though, Alexander and his comrades learned to watch their backs, and to never let any of their members sleep alone. Even then, they no longer had the strength they needed to overcome the demon’s holds on this world’s communities, and Alexander feared his crusade would fail. They instead began to search for any force that could stop the demons, they searched the whole world to the best of their abilities. All the while being hunted by the demons at every turn. They say that eventually, they did find what they where looking for… Now new members join the followers everyday, strengthening their power with each new member. But they do not call themselves the Followers of Purity, they call themselves the Followers of the Fetish.");
 			outputText("\n\n(AUTHOR: The Dark Master) ");
 		}
-		
+
 		private function codexEntryBees():void {
 			headerMain("Giant Bees");
 			outputText("<b>Genders:</b> Almost exclusively Female, save for a few Drones in each hive.\n");
@@ -338,7 +339,7 @@ import coc.view.ButtonDataList;
 			headerSub("Special attributes");
 			outputText("Bees have a venomous stinger that can dispense either a paralyzing toxin, an aphrodisiac, or both. The strength of each toxin varies based on the bee’s caste, and some of the more specialized castes may lack one of the venoms. The exact nature and distribution of the venom between castes is unknown. ");
 		}
-		
+
 		private function codexEntryEchidnas():void {
 			headerMain("Echidna-Morphs");
 			outputText("<b>Genders:</b> Male, Female\n");
@@ -361,7 +362,7 @@ import coc.view.ButtonDataList;
 			outputText("Most echidna-morphs hate the demons. It’s because of them that their forests were corrupted, and the now-resident tentacle beasts were nonexistent until they came about. Due to the rise of corrupted glades and the increasing population of the tentacle beasts, some echidna morphs ending up succumbing to the corruption of the forests. These corrupted mutants have green fur, with the males having a cluster of four tentacle penises rather than the normal, single four-headed one.");
 			outputText("\n\nThe races that echidna-morphs interact the most with are gnolls and satyrs. These interactions are not typically positive ones, however. The over-aggressive gnolls start the occasional turf war, and communities will often have to drive away the occasional drunken satyr.");
 		}
-		
+
 		private function codexEntryGoblins():void {
 			headerMain("Goblins");
 			outputText("<b>Genders:</b> Female\n");
@@ -384,7 +385,7 @@ import coc.view.ButtonDataList;
 			headerSub("Social structure");
 			outputText("Goblins live in groups of 100-300, typically lead by an elder female with a direct bloodline to every goblin under her. ");
 		}
-		
+
 		private function codexEntryGolems():void {
 			headerMain("Golems");
 			outputText("Golems have three varieties: \"dummies\", \"true\" and \"deviants\". Depending on type their belong to all of them share some of basic properties like: abnormal high durability to physical and magical damages, slow self-reconstructing, artificial nature, innate stubbornness, resistance to most of known mental manipulation techniques or spells and need for magical energies to self sustain.");
@@ -396,7 +397,7 @@ import coc.view.ButtonDataList;
 			outputText("Although their are classified as separate type of golems most of them fits quite well to one of other two types. The reason to call them deviant ones is that there is one or more details or their characteristics that are vastly different from typical golem and in most of the cases it's golem uncanny level of independence from the master. Some say that most deviant golems are in fact golems that broke free by various methods from been dependent on it master to gather magical power needed for their self sustain. Aside of that many of them showing signs of possessing many bizarre powers and skills hard to find at others golems making them one of most dangerous enemies. Some theories say that many of them was effects of experiments to make better, stronger golem that went terrible wrong giving birth to an abomination.");
 			outputText("\n\n(Written By: Ormael)");
 		}
-		
+
 		private function codexEntryGooGirls():void {
 			headerMain("Goo Girls");
 			outputText("<b>Genders:</b> Asexual, but appearing female\n");
@@ -421,7 +422,7 @@ import coc.view.ButtonDataList;
 			outputText("Goo girls are sensitive to heat and vibrations, which makes the act of copulation with non-goo races- though pointless- very enjoyable for them. Sex serves the dual purposes of acquiring shape memories and providing them with the protein-rich fluids they cannot acquire from the fluid around them. Additionally, they require regular exposure to moisture to maintain their bodies. While goo may be found a distance from a large body of water, it is rare and the lack of moisture tends to turn them highly acidic and a great deal more dangerous. Although it is possible to encounter goo girls with multiple hearts, they do not tend to occupy a single body for very long. There are rumors of \"Goo Queens\" who have dozens of hearts inside them, using the combined memories and membrane control to become giant, non-permeable, or even capable of speech, depending on the legend. No Goo Queens have ever been reliably identified or reported to date.");
 			outputText("\n\n(Written by: Adjatha) ");
 		}
-		
+
 		private function codexEntryHarpies():void {
 			headerMain("Harpies");
 			outputText("<b>Genders:</b> Exclusively Female\n");
@@ -434,11 +435,11 @@ import coc.view.ButtonDataList;
 			headerSub("Reproduction");
 			outputText("Like goblins, harpies reproductive systems can take almost any variety of sperm and use it to lay an egg of their own race. Unfortunately, they cannot convert demonic sperm or minotaur seed into a harpy, and in the rare instances where one of those species can force a harpy to copulate, the harpy will inevitably have to birth imps or a minotaur. For this reason harpies kill imps on sight and avoid minotaurs.");
 			headerSub("Civilization");
-			outputText("Harpies have never been civilized. Before the demon-times, they were considered a nuisance to most adults. Most villages filled the ears of their young males with horror stories of winged monsters that ate men. The truth is that during the fertile part of any harpy’s ovulation cycle, that harpy would ambush the first lone male she found, lock his member inside her vagina with her powerful thighs, and then take off to prevent him from escaping. After forcing the male to fertilize her for a day, she would release the exhausted victim. Harpies aren’t stupid and can talk, but they are fantastically lazy when it comes to anything other than seeing to their bodies needs. Since harpies roost on the upper reaches of the mountain, it’s inevitable that they became corrupted quite quickly. Corruption had fairly little effect on the harpies. Sure it boosted their libidos, but that only lead to more frequent masturbation. The most profound effect was a large increase in fertility and massive decrease in gestation time. Now harpies lay their eggs within a few days of insemination and the young are hatch and fully mature with the span of a month. It’s now fairly common to find the harpies prowling for a mate in the plains or hunting food in the mountain’s upper reaches.");			
+			outputText("Harpies have never been civilized. Before the demon-times, they were considered a nuisance to most adults. Most villages filled the ears of their young males with horror stories of winged monsters that ate men. The truth is that during the fertile part of any harpy’s ovulation cycle, that harpy would ambush the first lone male she found, lock his member inside her vagina with her powerful thighs, and then take off to prevent him from escaping. After forcing the male to fertilize her for a day, she would release the exhausted victim. Harpies aren’t stupid and can talk, but they are fantastically lazy when it comes to anything other than seeing to their bodies needs. Since harpies roost on the upper reaches of the mountain, it’s inevitable that they became corrupted quite quickly. Corruption had fairly little effect on the harpies. Sure it boosted their libidos, but that only lead to more frequent masturbation. The most profound effect was a large increase in fertility and massive decrease in gestation time. Now harpies lay their eggs within a few days of insemination and the young are hatch and fully mature with the span of a month. It’s now fairly common to find the harpies prowling for a mate in the plains or hunting food in the mountain’s upper reaches.");
 			headerSub("Other Notes");
 			outputText("They are fond of wearing a yellow-tinted lip gloss that is made from stolen bee-girl pollen. They’ll often steal it at night when most of the bee-girls are sleeping. The pollen has little effect on the harpies, but has multiple effects on their victims. It can be absorbed through the lips or genitals of a male, and as a potent, delayed aphrodisiac it will torment the man with lust for hours. The lip-gloss also serves as a focus for a small amount of latent, magical talent. When a harpy utters a command, she will focus her magic through her lips, imbuing it with a difficult to resist compulsion. Some harpies have mastered this art, and will sing commands to lure in weak-willed men. ");
 		}
-		
+
 		private function codexEntryHellcats():void {
 			headerMain("Hellcats");
 			outputText("<b>Genders:</b> Always hermaphrodite\n");
@@ -453,10 +454,10 @@ import coc.view.ButtonDataList;
 			headerSub("Behavior");
 			outputText("Hellcats are highly aggressive and will attempt to attack and rape anyone or anything that crosses their paths save for cat morphs which they hunt, capture and sacrifice to their dark god in order to create more of their malevolent kinds. Hellcats are always in heat and rut, thus seek to soothe their burning urges by any means necessary which almost always transfers the condition to others.");
 			headerSub("History");
-			outputText("Hellcat witches are the faithful zealots of Abraxas, a former fire god of Mareth who became corrupted by the demons becoming a demon himself. Abraxas rewards his followers with dominion over fire and burning urges that never dies out. Since hellcats do not reproduce naturally they have to capture pure cat morphs to corrupt and sacrifice to their fire god which converts them, body and mind into new members of their unholy kind. All hellcats are female hermaphrodites as becomes any cat morph who is sacrificed to Abraxas.");			
+			outputText("Hellcat witches are the faithful zealots of Abraxas, a former fire god of Mareth who became corrupted by the demons becoming a demon himself. Abraxas rewards his followers with dominion over fire and burning urges that never dies out. Since hellcats do not reproduce naturally they have to capture pure cat morphs to corrupt and sacrifice to their fire god which converts them, body and mind into new members of their unholy kind. All hellcats are female hermaphrodites as becomes any cat morph who is sacrificed to Abraxas.");
 			outputText("\n\n(Written By: Liadri)");
 		}
-		
+
 		private function codexEntryHellhounds():void {
 			headerMain("Hellhounds");
 			outputText("<b>Height:</b> 5.5-6 feet when standing\n");
@@ -477,7 +478,7 @@ import coc.view.ButtonDataList;
 			outputText("Feral Hellhounds (those without masters) often gather in packs, but they generally hunt on their own. When interacting with other Hellhounds, competitions for dominance are common. These competitions typically revolve around a test of seduction, with the loser submitting themselves by going down on four legs, and using its two heads to pleasure the dicks of the one that it submitted too. This is one of only two times that the Hellhound will go down on all fours, the other time being when they are out hunting.");
 			outputText("\n\n(Written by: TheDarkMaster) ");
 		}
-		
+
 		private function codexEntryHydra():void {
 			headerMain("Hydra");
 			outputText("<b>Genders:</b> Variable\n");
@@ -492,10 +493,10 @@ import coc.view.ButtonDataList;
 			headerSub("Behavior");
 			outputText("Hydras are generally non aggressive beings content with eating vermin such as mice and rats, though due to their massive size ranging from nine to thirty six feet long and the general lusty state of Mareth, Hydras can become hazardous when horny and even deadly for smaller sentient species to encounter.");
 			headerSub("History");
-			outputText("Hydras began appearing on Mareth around the same time as Nagas though the firsts Hydras were likely Naga who underwent many changes from transformatives. Nowadays the Hydra is a rare albeit deadly predator to stumble upon.");			
+			outputText("Hydras began appearing on Mareth around the same time as Nagas though the firsts Hydras were likely Naga who underwent many changes from transformatives. Nowadays the Hydra is a rare albeit deadly predator to stumble upon.");
 			outputText("\n\n(Written By: Liadri)");
 		}
-		
+
 		private function codexEntryImps():void {
 			headerMain("Imps");
 			outputText("<b>Genders:</b> Male\n");
@@ -513,7 +514,7 @@ import coc.view.ButtonDataList;
 			headerSub("Sexual characteristics");
 			outputText("A large human-like penis that seems to dwarf the rest of the imp, along with two human sized testes. They do have an asshole comparable to a humans, though it seems to exist more for sport and pleasure than for waste removal. ");
 		}
-		
+
 		private function codexEntryLaBovines():void {
 			headerMain("Lacta Bovines or Cowgirl");
 			outputText("<b>Genders:</b> Female\n");
@@ -531,7 +532,7 @@ import coc.view.ButtonDataList;
 			headerSub("Reproduction side note, Minotaurs");
 			outputText("Minotaurs are a common partner with the more bestial Lacta Bovines, and their seed is so strong that it isn’t uncommon for the first child in such a union to be a minotaur, with the rest being Lacta Bovines. At the same time, such unions are often short lived, and it is quite possible for a Lacta Bovine to move to a different mate during a pregnancy. ");
 		}
-		
+
 		private function codexEntryLizans():void {
 			headerMain("Lizans (Lizard-Morphs)");
 			outputText("<b>Genders:</b> Male, Female, Hermaphrodite\n");
@@ -551,17 +552,17 @@ import coc.view.ButtonDataList;
 			headerSub("Reproduction");
 			outputText("Similarly to harpies, Lizans are oviparous; females lay eggs, from which hatch new Lizans – these infants are highly independent and ready to eat meat from when they hatch. As a result, the breasts on a female or herm Lizan are just for show and they do not lactate. Unlike harpies, Lizans actually produce fully-fledged eggs in their womb as part of ovulation – essentially, a pregnant-looking midriff is a sign that a Lizan is now ready to be fertilized, rather than a sign she has been fertilized. If she mates before she goes into labor, then the eggs will remain in the womb for several more days, growing larger as the embryos form inside them, before being laid. The fertilized eggs will be carefully guarded as a \"clutch\", with the mother waiting for the fertilized eggs to hatch. If the \"pregnant\" Lizan doesn’t mate, then the eggs are laid as unfertilized. In this case, the mother traditionally eats them, in order to replenish the depleted nutrients and protein – being offered one of a Lizan’s own eggs to eat is a sign that she finds you very attractive and is interested in mating with you. A Lizan herm or female will typically produce 3 or 4 eggs per clutch, and will produce a clutch every 30 days. Larger clutches aren’t unheard of, especially if the Lizan mates with an extremely virile/potent mate, but typically high fertility manifests in a decrease in the times between laying – normally, this would mean a Lizan grows gravid every 15 days, but in this tainted world it’s possible for a Lizan to make eggs every day. Unfertilized eggs are small, about the size of a chicken’s, while fertilized eggs are considerably larger (think the difference between eggs and large eggs from Ovi Elixir). Like all anthropomorphic Marethian species, Lizans can crossbreed with humans. However, they may be the race most likely to produce mixed bloods (beings that look more like humans with animal traits, such as legs, tails and ears, rather than humanoid animals) instead of pure bloods of one parent's race or the other (usually the anthro's race).");
 			headerSub("Culture");
-			outputText("There are functionally two different Lizan cultures; that of the desert Lizans, and that of the plains Lizans. Both groups are a contemplative, spiritual culture, offering reverence to the various god-spirits of Mareth that they deem important to their lives, such as their creator-spirit and the spirits of the rain. They typically wear little in the way of clothing; most settle for a loincloth about their nethers, for modesty’s sake, and/or a long hooded cloak to keep the worst of the dust and sun off. Prone to being superstitious, many Lizans adorn themselves with assorted bangles and geegaws, talismans intended to attract good spirits and ward of evil spirits. \"Shamans\" and similar mystics are quite respected in Lizan culture, and it’s often a position held by the natural-born hermaphrodites. Lizans of the desert are quiet and peaceful by nature, wandering the lands alone or in small, family groups, eternally seeking food and drink to sustain them through the day. Family groups rarely cross paths, but when they do, it is a time to celebrate – often, members of the group will trade, in order to found new families of their own, in time. This is not to say that they are pacifists or cannot fight, merely that they prefer to hold peace. Lizans of the plains, on the other hand, are violent and warlike, which they blame on the constant harassment by their ancient enemies, the gnolls. Gathering in large clans of multiple extended family groups, they place emphasis on breeding and on honing war-like skills; hermaphrodites are honored amongst their culture for their ability to impregnate and be impregnated at the same time. Indeed, if there are too many members of one gender in a tribe, members are exhorted to use gender-modifying items so there can be more phalluses to fertilize eggs with or more egg-generating wombs.");			
+			outputText("There are functionally two different Lizan cultures; that of the desert Lizans, and that of the plains Lizans. Both groups are a contemplative, spiritual culture, offering reverence to the various god-spirits of Mareth that they deem important to their lives, such as their creator-spirit and the spirits of the rain. They typically wear little in the way of clothing; most settle for a loincloth about their nethers, for modesty’s sake, and/or a long hooded cloak to keep the worst of the dust and sun off. Prone to being superstitious, many Lizans adorn themselves with assorted bangles and geegaws, talismans intended to attract good spirits and ward of evil spirits. \"Shamans\" and similar mystics are quite respected in Lizan culture, and it’s often a position held by the natural-born hermaphrodites. Lizans of the desert are quiet and peaceful by nature, wandering the lands alone or in small, family groups, eternally seeking food and drink to sustain them through the day. Family groups rarely cross paths, but when they do, it is a time to celebrate – often, members of the group will trade, in order to found new families of their own, in time. This is not to say that they are pacifists or cannot fight, merely that they prefer to hold peace. Lizans of the plains, on the other hand, are violent and warlike, which they blame on the constant harassment by their ancient enemies, the gnolls. Gathering in large clans of multiple extended family groups, they place emphasis on breeding and on honing war-like skills; hermaphrodites are honored amongst their culture for their ability to impregnate and be impregnated at the same time. Indeed, if there are too many members of one gender in a tribe, members are exhorted to use gender-modifying items so there can be more phalluses to fertilize eggs with or more egg-generating wombs.");
 			headerSub("History");
 			outputText("The precise history of the Lizans is lost in the mists of time. Oral tradition claims that they were created by a lizard deity who admired the idea the other deities had to uplift the animals of Mareth into humanoid beings, but scorned the idea of uplifting mammals, who he saw as weak and soft. Instead, the spirit chose to uplift the hardy lizards of the plains and the desert.\n");
-			outputText("To be honest, there is nothing of real importance to the history of Lizans. They have simply always been there, roaming the hot, dry regions of the world and keeping primarily to themselves. They have little use for other races, and most races have little use for them.");			
+			outputText("To be honest, there is nothing of real importance to the history of Lizans. They have simply always been there, roaming the hot, dry regions of the world and keeping primarily to themselves. They have little use for other races, and most races have little use for them.");
 			headerSub("Current status");
-			outputText("Because of their historically dispersed nature, the desert Lizans have not really suffered noticeably at the hands of the demons; they are simply too widespread and nomadic to bother hunting down en masse, not that this prevents demons who have the opportunity to enslave them from doing so. The fact they naturally come with two dicks and a love of anal sex makes them quite appealing. The plains Lizans, though, are functionally extinct as a pure race; except for some emigrees from early on in the invasion, all plains dwelling Lizans are now at least moderately corrupt, and as hermaphroditism has become quite widespread, their numbers are flourishing.");			
+			outputText("Because of their historically dispersed nature, the desert Lizans have not really suffered noticeably at the hands of the demons; they are simply too widespread and nomadic to bother hunting down en masse, not that this prevents demons who have the opportunity to enslave them from doing so. The fact they naturally come with two dicks and a love of anal sex makes them quite appealing. The plains Lizans, though, are functionally extinct as a pure race; except for some emigrees from early on in the invasion, all plains dwelling Lizans are now at least moderately corrupt, and as hermaphroditism has become quite widespread, their numbers are flourishing.");
 			headerSub("Inter-species relationship");
-			outputText("All uncorrupted Lizans hate demons. Personal reasons for doing so vary widely, but the racial reason is simple; the demons’ preventing of the rain for years and years has caused many deaths among their number and rendered it increasingly hard to survive in the hot, dry regions where they live. The race that desert Lizans most interact with is the cult of the Sand Witches, and the relationship there can be said to be one of love/hate. As noted above, many Lizans find lactating breasts to be a fetish, males and herms appreciate the twin pussies that sand witches possess, and all sexes find the abundance of nutrient-rich fluids that can be sucked from a Sand Witch quite helpful in the dry climates of their home. Sand Witches don’t necessarily mind the attention, and rumors say there are more than a few mixed blood Lizans in the desert as a result, but are fiercely possessive of their milk and fixated on adding new recruits to their cult. As a result, more than one male Lizan has spent at least some time as a lactating shemale as a result of underestimating them. Plains Lizans are defined by their constant war against the gnolls. Lacking individual strength by comparison, they have always depended on numbers to fight back against the hyena-morphs, and thus they have given themselves over to corruption.");			
+			outputText("All uncorrupted Lizans hate demons. Personal reasons for doing so vary widely, but the racial reason is simple; the demons’ preventing of the rain for years and years has caused many deaths among their number and rendered it increasingly hard to survive in the hot, dry regions where they live. The race that desert Lizans most interact with is the cult of the Sand Witches, and the relationship there can be said to be one of love/hate. As noted above, many Lizans find lactating breasts to be a fetish, males and herms appreciate the twin pussies that sand witches possess, and all sexes find the abundance of nutrient-rich fluids that can be sucked from a Sand Witch quite helpful in the dry climates of their home. Sand Witches don’t necessarily mind the attention, and rumors say there are more than a few mixed blood Lizans in the desert as a result, but are fiercely possessive of their milk and fixated on adding new recruits to their cult. As a result, more than one male Lizan has spent at least some time as a lactating shemale as a result of underestimating them. Plains Lizans are defined by their constant war against the gnolls. Lacking individual strength by comparison, they have always depended on numbers to fight back against the hyena-morphs, and thus they have given themselves over to corruption.");
 			outputText("\n\n(Written By: Quiet Browser)");
 		}
-		
+
 		private function codexEntryMagic():void {
 			headerMain("Magic");
 			outputText("Magic comes in three varieties, \"white\", \"grey\" and \"black\". Despite what they are called, the names of the magic types do not necessarily associate with any kind of \"moral alignment\". Black magic could be used for good just as easily as white magic could be used for evil. However, most demons prefer black magic, and those who fight them tend to prefer white magic. The primary difference between them is where the magic’s power is drawn from. Black Magic is drawn from the emotions and feelings of the body, while White Magic comes from the thoughts of the mind.");
@@ -572,7 +573,7 @@ import coc.view.ButtonDataList;
 			headerSub("White Magic");
 			outputText("The power of White Magic is drawn from the mind, but is more often called the power of the soul. White Magic is considered \"stronger\" than Black Magic because it can be used to create energy from nothing or heal the body. Users of White Magic can blind their opponent with dazzling lights, burn them with pure white flames, or even magnetically charge weapons and armor to repel each other, making them more resistant to attacks. White Magic requires significant mental discipline and awareness, and becomes impossible to cast if the user is greatly distressed or aroused. ");
 		}
-		
+
 		private function codexEntryManticores():void {
 			headerMain("Manticores");
 			outputText("<b>Genders:</b> Exclusively female\n");
@@ -588,12 +589,12 @@ import coc.view.ButtonDataList;
 			outputText("Manticores prefer mountainous areas where they can lie hidden for days in order to ambush their prey. They are notoriously known for singing while milking their victim dry. The reasons for this behavior was never confirmed, but it's assumed they simply feel as much stimulation from their tail as the man feels from his dick. Thus, they sing to express it. Sadistic to the extreme, they delight in the pain and torment of their victims, thus making them natural dominatrixes. However, they show signs of vulnerability when the table is turned, even bowing down to a superior male in a way that is not so different from lions prides and wolf pack hierarchy. Some manticores have actually been seen living happily in civilized areas as consorts to powerful Marethian heroes in the past. Though, anyone strong enough to defeat a manticore in battle should be considered mighty indeed.");
 			headerSub("History");
 			outputText("The manticore, also called man-eater, is an all female species originally from Mareth, although one could say the current variant could trace its origin to the demonic invasion.\n");
-			outputText("Out of all races, they likely struck out the best deal when the demons came, as even back then they were already notorious sexual predators feeding solely from cum. As one could see, despite the small additions to their tail, their succubus like behavior hasn't changed at all since the early days of Mareth. While it is unclear when the manticore’s tails evolved into the nightmarish semen drinking tools they have now, the demons are clearly responsible for it. Their flower-shaped tail pussy can easily milk any penis at a pace of several milliliters per second, making them the worst nightmare of any unlucky male that crosses their path.");			
+			outputText("Out of all races, they likely struck out the best deal when the demons came, as even back then they were already notorious sexual predators feeding solely from cum. As one could see, despite the small additions to their tail, their succubus like behavior hasn't changed at all since the early days of Mareth. While it is unclear when the manticore’s tails evolved into the nightmarish semen drinking tools they have now, the demons are clearly responsible for it. Their flower-shaped tail pussy can easily milk any penis at a pace of several milliliters per second, making them the worst nightmare of any unlucky male that crosses their path.");
 			headerSub("Venom Effects");
-			outputText("Their venom is a powerful aphrodisiac which causes the body to grow more sluggish and aroused with each intake. Furthermore it has the property of massively increasing one's cum production for a short time.  If ingested through the mouth, it can be used as a transformative.");			
+			outputText("Their venom is a powerful aphrodisiac which causes the body to grow more sluggish and aroused with each intake. Furthermore it has the property of massively increasing one's cum production for a short time.  If ingested through the mouth, it can be used as a transformative.");
 			outputText("\n\n(Written By: Liadri)");
 		}
-		
+
 		private function codexEntryMinotaurs():void {
 			headerMain("Minotaurs");
 			outputText("<b>Genders:</b> Male\n");
@@ -614,7 +615,7 @@ import coc.view.ButtonDataList;
 			headerSub("Minitaurs");
 			outputText("The bastard runts of the minotaur race, Minitaurs are rare human-sized minotaurs born with straw colored fur and none of the muscular fitness indicative of the rest of the race. Possessing curvy (but breast-less) bodies, they often wind up as cum receptacles for their larger over-bearing cousins. They do not share ‘release’ problem, but tend to have sexual equipment of similar size to normal minotaurs. This makes them a bit disproportional, but much easier for full-minotaurs to catch. They rarely try to escape anyways, due to the addictive and drug-like nature of large doses of minotaur spunk. ");
 		}
-		
+
 		private function codexEntryNagas():void {
 			headerMain("Nagas");
 			outputText("<b>Genders:</b> Male, Female\n");
@@ -635,7 +636,7 @@ import coc.view.ButtonDataList;
 			outputText("\n\n(ElAcechador – Author of the desert’s Naga girl.)");
 			outputText("\n\n(<b>Fenoxo's Note:</b> Player Nagas still have butt-cheeks and their rectum (damn near killed him!) on the back because Fen likes his girls to have junk in the trunk. And also he doesn’t want to rewrite all the anal scenes.");
 		}
-		
+
 		private function codexEntryOrcs():void {
 			headerMain("Orcs");
 			outputText("<b>Genders:</b> Children are born as boys or girls. It is rare to see an Orc that is both or neither of these, they are very similar to humans in this respect. They do not typically practice gender alteration.\n");
@@ -650,7 +651,7 @@ import coc.view.ButtonDataList;
 			outputText("Men and women are on equal ground socially. It is equally common to see a female dominate a male as it is to see vise versa. When the dominatrix is in question usually the pair (or party) will decide through a wrestling match or various other forms of physical combat. The most common relationship practiced is two men with one female. The female serves as a means of reproduction while the two men compete with each other over her affections. The only notable difference between Orcish men and women is when weakness is taken into account. It is looked down upon within Orcish culture to breed with a weak female, or letting a weak male breed with a female. Even in their peaceful culture, breeding with partners that increase the chances of weak offspring is looked down upon. There seem to be no moral trappings for a dominate male to take a weaker, submissive male or two for himself, since the possibility of breeding is impossible. Without a potentially weak offspring there is no fear of cultural backlash.");
 			outputText("\n\n(By: Donto) ");
 		}
-		
+
 		private function codexEntryRaijus():void {
 			headerMain("Raijus");
 			outputText("<b>Genders:</b> Male, Female\n");
@@ -670,7 +671,7 @@ import coc.view.ButtonDataList;
 			outputText("Sometime raiju electricity will somehow coalesce into a crystal known as a storm jewel. A Storm jewel can be used as a potent energy source if well handled but its volatility makes it hazardous to use as it can accidentally dissolve back into lightning and discharge itself on whatever unsuspecting individuals holds it.");
 			outputText("\n\n(Written By: Liadri)");
 		}
-		
+
 		private function codexEntryRhinos():void {
 			headerMain("Rhino-Morphs");
 			outputText("<b>Genders:</b> Male, Female\n");
@@ -692,7 +693,7 @@ import coc.view.ButtonDataList;
 			outputText("Initially the demons learned to fear the rhino morphs. They took in survivors from other villages into their nomadic crashes and protected them with their tough hide and weapon like horns. Yet ultimately their dualistic nature caused them to trust demons that didn’t show themselves to be aggressive. This allowed the demons to walk among them. One thing lead to another and eventually the corruption swept through the crashes like a million birds of prey felling a field of mice petrified with fear.");
 			outputText("\n\nDespite the corruption they still form married pairs but they are never monogamous.  Their once great love of their offspring has been completely changed and now they tend to not produce offspring by choice, the males and females have evolved corrupt organs that reduce fertility.");
 		}
-		
+
 		private function codexEntrySalamanders():void {
 			headerMain("Salamanders");
 			outputText("<b>Genders:</b> Males and Females occur naturally, though transformative items leave none too few Salamanders as hermaphrodites or genderless.\n");
@@ -709,7 +710,7 @@ import coc.view.ButtonDataList;
 			outputText("One of Mareth’s less civilized races, even before the demon invasion, the Salamanders lived in hunter-gatherer tribes in the wide open plains, foothills, and mountains. Though exceedingly violent, the Salamanders destructive tendencies were kept in check by the savage gnolls, and the two races have shared a bond of mutual hatred for centuries. They will attack each other on sight, and their bloody battles have kept both races from posing a serious threat to the civilizations of Mareth before the demons, and to Lethice after their arrival.");
 			outputText("\n\n(Written by: Savin) ");
 		}
-		
+
 		private function codexEntrySandWitches():void {
 			headerMain("Sand Witches");
 			outputText("<b>Genders:</b> Exclusively female\n");
@@ -727,7 +728,7 @@ import coc.view.ButtonDataList;
 			headerSub("Special attributes");
 			outputText("Sand Witches are adept users of black AND white magic, and will use the combination to arouse their foes into submission, and then alter them into a form more like their own. They are not necessarily hostile, and will treat any they encounter nicely if they allow the witch to work her magic on them. ");
 		}
-		
+
 		private function codexEntrySatyrs():void {
 			headerMain("Satyrs");
 			outputText("<b>Genders:</b> Males (Females used to exist)\n");
@@ -746,7 +747,7 @@ import coc.view.ButtonDataList;
 			headerSub("General behavior (Post-corruption)");
 			outputText("Satyrs are now highly anti-social creatures; when two satyrs meet, invariably, the stronger one will dominate and impregnate the weaker one. They still love to feast and to party, but do so in gluttonous, debauched revels. They are notorious as bandits and thieves, stealing anything they can make off with and assaulting travelers for goods and breeding partners. They are often allied with goblins, one of the few races that can stand to be around them as they are now, with the satyr trading its considerable talents as a stud in exchange for food and liquor. The only reason satyrs as a whole have not sold themselves into slavery to the goblins is because, for many, the ever-increasing supply of willing sluts doesn’t outweigh the fact they can’t breed any sons with goblins.");
 		}
-		
+
 		private function codexEntrySharkGirls():void {
 			headerMain("Shark-Girls & Tigershark-Girls");
 			outputText("<b>Genders:</b> Mostly female, though there are males and herms. Due to the nature of their conception, the vast majority of tiger sharks are hermaphrodites.\n");
@@ -765,7 +766,7 @@ import coc.view.ButtonDataList;
 			headerSub("History");
 			outputText("Before the corruption truly began, the Shark people were a normal fishing community that lived by the lake. They respected and admired marine life so much that they used magic to morph their forms, allowing them to live both under the sea and on dry land. As the demons began to take control, the Shark people retreated into the lake water to avoid the taint. It was only through sheer bad luck that they wound up as they are now; when the factory was constructed, the chemical run-off was funneled into the lake, causing a drastic change to the mindset of the Shark people and making them near-constantly horny. Those who swam too close to the pollutants found their bodies morphed in unexpected ways, becoming what are now known as tiger shark girls. Even if the factory were to be destroyed, it would take generations for the shark girls to fully lose the effects.");
 		}
-		
+
 		private function codexEntrySuccubus():void {
 			headerMain("Succubus");
 			outputText("<b>Genders:</b> Exclusively female.\n");
@@ -785,7 +786,7 @@ import coc.view.ButtonDataList;
 			headerSub("Feeding");
 			outputText("Like most demons, Succubi gain power from corrupting others, and require a steady supply of sexual fluids to survive. In rare cases, if a Succubus has been deprived of ‘food’ for too long, she may find herself too weak to seduce a partner, and enter into an less than advantageous agreement in order to get her food. Amazingly, most succubi will hold themselves to such an agreement after 'eating' their fill. ");
 		}
-		
+
 		private function codexEntryTrolls():void {
 			headerMain("Trolls");
 			outputText("<b>Genders:</b> Male, Female.\n");
@@ -806,7 +807,7 @@ import coc.view.ButtonDataList;
 			outputText("Trolls are exceptionally strong, quick and intelligent. Trolls have the natural ability to regenerate damaged limbs and parts of their body, this can be halted with extreme injury or applications of fire, acid or other volatile elements All female trolls exude a pheromone cloud once matured, the cloud will cause males to become attracted to the female. This cloud affects males of any race, females are unaffected. The cloud is more potent depending on the female’s sex drive. This helps a female troll secure a mate. When a female troll has successfully claimed a mate, the male troll becomes extremely receptive to their female’s pheromones. A male troll’s sex drive is almost completely dependant on their mate. While it is uncommon, a female troll can  subdue multiple mates, this will cause aggression between males.");
 			outputText("\n\nEven less common is homosexuality, as a female troll’s pheromones are generally powerful enough to unite two trolls of the opposite gender.");
 		}
-		
+
 		private function codexEntryBehemoth():void {
 			headerMain("Behemoths");
 			outputText("<b>Genders:</b> Male.\n");
@@ -823,14 +824,14 @@ import coc.view.ButtonDataList;
 			headerSub("Social structure");
 			outputText("Behemoths typically live in villages and caves. The leadership of tribes are determined by which is the strongest of all. Once a year, they host \"Feats of Strength\", a contest consisting of several gauntlets and competitions. Among one of them is the \"Cum-Out\" where the objective is for the behemoths to cum as much as they can in a single orgasm.");
 		}
-		
+
 		private function codexEntryZebras():void {
 			headerMain("Zebra-morphs");
 			outputText("<b>Genders:</b> Male, Female\n");
 			outputText("<b>Height:</b> 5 feet 5 inches to 6 feet\n");
 			outputText("<b>Build:</b> Lean/slender\n");
 			outputText("<b>Skin:</b> Zebra pattern\n");
-			outputText("<b>Fur:</b> Zebra pattern with mohawk-style mane\n");			
+			outputText("<b>Fur:</b> Zebra pattern with mohawk-style mane\n");
 			outputText("<b>Eyes:</b> Brown to black\n");
 			outputText("<b>Diet:</b> Herbivore, specializes on grass, but herbs and shrubs are part of their diet\n");
 			headerSub("Appearance");
@@ -840,7 +841,7 @@ import coc.view.ButtonDataList;
 			headerSub("Social structure");
 			outputText("Zebras are polygamous, one stallion with several mares and young offspring form a harem. Before beginning a harem, males are in bachelor groups, females are in natal harems composed of females only until taken into a stallion's harem.\n");
 			outputText("The rank among mares in a harem is the order they were brought into it. When a new mare is brought into the harem, the other members treat her with disdain, making sure she knows her place, the bottom.\n");
-			outputText("The acquisition of a new mare to a harem is the stallion impregnation of the mare.\n"); 
+			outputText("The acquisition of a new mare to a harem is the stallion impregnation of the mare.\n");
 			outputText("Stallions are passive in most instances except in dealing with others trying to take away part or all of the stallion’s harem, or conflicts when trying for a new mare for his harem. Other causes exist, of course.");
 			headerSub("Natural enemies");
 			outputText("Zebra-morphs show great anxiety when near lion-morphs since millennia have passed where they were the prey to the lion-morphs.");

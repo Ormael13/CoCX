@@ -4,17 +4,16 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Items.Consumables.SimpleConsumable;
-import classes.Scenes.Places.Mindbreaker;
-import classes.Scenes.Places.TrollVillage;
-import classes.Scenes.Places.WoodElves;
 import classes.Scenes.Camp.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
-import classes.lists.Gender;
+import classes.Scenes.Places.Mindbreaker;
+import classes.Scenes.Places.TrollVillage;
+import classes.Scenes.Places.WoodElves;
 import classes.display.SpriteDb;
+import classes.lists.Gender;
 
 import coc.view.ButtonDataList;
 import coc.view.MainView;
@@ -2074,7 +2073,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasPerk(PerkLib.JobElementalConjurer) || player.hasPerk(PerkLib.JobGolemancer) || player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(1, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
 		else addButtonDisabled(1, "Winions", "You need to be able to make some minions that fight for you to use this option.");
 		addButton(2, "Misc", campMiscActions).hint("Misc options to do things in and around [camp].");
-		addButton(3, "SpentTime", campSpendTimeActions).hint("Check your options to spend time in and around [camp].");
+		addButton(3, "Spend Time", campSpendTimeActions).hint("Check your options to spend time in and around [camp].");
 		addButton(4, "NPC's", SparrableNPCsMenu);
 		//addButton(5, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
 		if (player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(7, "Herbalism", HerbalismMenu).hint("Use ingrediants to craft poultrice and battle medicines.")

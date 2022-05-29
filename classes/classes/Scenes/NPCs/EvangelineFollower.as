@@ -5,28 +5,28 @@
 
 package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.BodyParts.Arms;
-	import classes.BodyParts.Eyes;
-	import classes.BodyParts.Horns;
-	import classes.BodyParts.LowerBody;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
+import classes.Items.Armor;
+import classes.Items.HeadJewelry;
+import classes.Items.HeadJewelryLib;
+import classes.Items.Shield;
+import classes.Items.ShieldLib;
+import classes.Items.Undergarment;
+import classes.Items.UndergarmentLib;
+import classes.Items.Weapon;
+import classes.Items.WeaponLib;
+import classes.Items.WeaponRange;
+import classes.Items.WeaponRangeLib;
 import classes.Scenes.Monsters.Imp;
-	import classes.Items.Armor;
-	import classes.Items.Shield;
-	import classes.Items.ShieldLib;
-	import classes.Items.HeadJewelry;
-	import classes.Items.HeadJewelryLib;
-	import classes.Items.Undergarment;
-	import classes.Items.UndergarmentLib;
-	import classes.Items.Weapon;
-	import classes.Items.WeaponLib;
-	import classes.Items.WeaponRange;
-	import classes.Items.WeaponRangeLib;
-	import classes.internals.SaveableState;
+import classes.internals.SaveableState;
 
-	public class EvangelineFollower extends NPCAwareContent implements SaveableState
+public class EvangelineFollower extends NPCAwareContent implements SaveableState
 	{
 		public static var EvangelinePeepTalkOnInternalMutations:Number;
 		public static var EvangelineGemsPurse:Number;
@@ -102,10 +102,7 @@ public function enterTheEvangeline():void
 	outputText("You turn around only for a woman to suddenly flings herself into your arms. She looks like she’s has been roughed up a bit - her simple peasant’s robes have been torn and frayed, and her forehead is streaked with dirt, as if she was dragged through it.\n\n");
 	outputText("\"<i>Th-thank gods! Please, you must help me!</i>\" she cries, darting behind you as if to hide. \"<i>I was wandering over the wasteland trying to find a safe place to hide, and, and... the wretched, terrible little things attacked me!</i>\"\n\n");
 	outputText("On top of everything, you’re worried that this happened a bit too soon after you left your camp, and you’re about to question her, but you're interrupted as an imp flies out of the sky, growling and clawing at you menacingly. If not for the closeness to your camp you would not care too much, but better to deal with this demon spawn now than later see a whole swarm of them storming your camp.");
-	if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-		outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 	startCombat(new Imp());
 	doNext(playerMenu);
 }

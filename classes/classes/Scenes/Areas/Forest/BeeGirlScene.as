@@ -52,10 +52,7 @@ public class BeeGirlScene extends BaseContent
 			//Intro text...
 			outputText("As you approach the edge of the forest, a sweet scent wafts into your nose. Tantalizing, teasing, alluring. As you sniff the air, you find yourself following it, as if an invisible hand is pulling you toward its origin.  Little do you know, that is essentially what's happening. The further and further you go, the more heavy the scent grows, as well as a sound. A sound of a buzz, but not in a maddening tone, as if someone is humming. It's a lovely tune, one that would stick in the back of the mind, but not in a bad way.\n\n");
 			//Bee appears!
-			if (flags[kFLAGS.CODEX_ENTRY_GIANTBEES] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_GIANTBEES] = 1;
-				outputText("<b>New codex entry unlocked: Giant Bees!</b>\n\n")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GIANTBEES);
 			//Chance to avoid the bee or not if smart enough...
 			if (player.hasKeyItem("Traveler's Guide") >= 0 && player.inte / 2 > rand(40)) {
 				outputText("You suddenly remember a passage from the Traveler's Guide about monstrous bees that lay eggs in unmentionable places.  Of course, a brave champion would face any danger.\n\n<b>Do you proceed?</b>");
@@ -157,11 +154,7 @@ public class BeeGirlScene extends BaseContent
    
 			if (player.lust < player.maxLust() * 0.60 || rand(3) == 0) {
                 var play:Function = null;
-
-				if (flags[kFLAGS.CODEX_ENTRY_GIANTBEES] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_GIANTBEES] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Giant Bees!</b>")
-				}
+				camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GIANTBEES);
 				outputText("\n\nYou just barely hold yourself back and shake your head to clear the smell and buzzing from your mind.  Something about your " + (isBeeMorph ? "new bee body seems to have drawn" : "massive member has attracted") + " her attention, and she is staring at your crotch in anticipation.  You steady yourself and decide what you should do next.");
                 if (isBeeMorph && player.hasVagina()) {
                     outputText("Seeing you standing here, the maiden frowns. \"<i>Why did you zzztop? Don't you want to feel good?</i>\"\n");

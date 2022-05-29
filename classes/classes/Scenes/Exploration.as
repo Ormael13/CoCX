@@ -273,18 +273,12 @@ public class Exploration extends BaseContent
 					if (flags[kFLAGS.GALIA_LVL_UP] > 0 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) {
 						if (rand(4) == 0) {
 							outputText("An imp wings out of the sky and attacks!");
-							if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-								flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-								outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-							}
+							camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 							startCombat(new Imp());
 						}
 						else {
 							outputText("A feral imp wings out of the sky and attacks!");
-							if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-								flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-								outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-							}
+							camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 							flags[kFLAGS.FERAL_EXTRAS] = 1;
 							startCombat(new FeralImps());
 						}
@@ -292,19 +286,13 @@ public class Exploration extends BaseContent
 					else {
 						if (rand(4) == 0 && (player.level >= 3 || player.statusEffectv2(StatusEffects.AdventureGuildQuests2) > 0)) {
 							outputText("A feral imp wings out of the sky and attacks!");
-							if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-								flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-								outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-							}
+							camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 							flags[kFLAGS.FERAL_EXTRAS] = 1;
 							startCombat(new FeralImps());
 						}
 						else {
 							outputText("An imp wings out of the sky and attacks!");
-							if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-								flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-								outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-							}
+							camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 							startCombat(new Imp());
 						}
 					}
@@ -399,10 +387,7 @@ public class Exploration extends BaseContent
 					//Dummy golem
 					else {
 						outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered dummy golem! You ready your [weapon] for a fight!");
-						if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] <= 0) {
-							flags[kFLAGS.CODEX_ENTRY_GOLEMS] = 1;
-							outputText("\n\n<b>New codex entry unlocked: Golems!</b>")
-						}
+						camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOLEMS);
 						startCombat(new GolemDummy());
 						return;
 					}
@@ -516,10 +501,7 @@ public class Exploration extends BaseContent
 			//Dummy golems
 			else {
 				outputText("As you take a stroll, from behind of nearby combatants remains emerge group of golems. Looks like you have encountered dummy golems! You ready your [weapon] for a fight!");
-				if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_GOLEMS] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Golems!</b>")
-				}
+				camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOLEMS);
 				startCombat(new GolemsDummy());
 				return;
 			}
