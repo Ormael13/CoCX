@@ -18,7 +18,7 @@ public class DilapidatedShrine extends BaseContent
 		public function firstvisitshrineintro():void {
 			flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] = 2;
 			clearOutput();
-			outputText("As you explore the battlefield, you notice a gravel path, curiously well-maintained, unlike everything else in this crater-ridden wasteland. You decide to follow the path, and it leads to a decently sized green space. In the middle of this surprisingly calm place, a large square building stands. At first glance, it's a majestic old wooden structure, radiating old grandeur and spirituality...Until you look closer. Holes in the walls, shards of ceiling tile strewn through the grass, and sections of the roof entirely missing. The walls, blackened to charcoal in places...This place was not spared the war around it. You cautiously approach, the sparse trees and ancient building still calming compared to the wasteland around it. \n\n");
+			outputText("As you explore the battlefield, you notice a gravel path, curiously well-maintained, unlike everything else in this crater-ridden wasteland. You decide to follow the path, and it leads to a decently sized green space. In the middle of this surprisingly calm place, a large square building stands. At first glance, it's a majestic old wooden structure, radiating old grandeur and spirituality. You cautiously approach, the sparse trees and ancient building still calming compared to the wasteland around it. \n\n");
 			outputText("How could such a thing survive in such a war-torn place?\n\n You push open the chipped, charred wooden door as quietly as you can, but the soft scraping of the wood on the stone floor seems to carry throughout the place. ");
 			outputText("The vermillion hued gates are remarkably built, damage unable to hide the craftsmanship. As you step in, you notice two statues of strange beings, on either side of you. They seem to be half-lion and half-dog, a creature the likes of which you've never seen. You marvel at their almost life-like features. One stands with its jaw agape, the other with its lips sealed.\n\n");
 			outputText("Deeper into the shrine is a large plaza with statues located on each of your cardinal directions. Between the statues, the stones of the floor are carved, inlaid with ceramic, each tile depicting two or more of the statues, locked in combat or ordering smaller, less defined stick figures into battle. \n\n");
@@ -94,14 +94,14 @@ public class DilapidatedShrine extends BaseContent
 		private function westSection():void {
 			clearOutput();
 			outputText("Westward within the building, you see a statue in an open clearing. The towering figure portrays a hideously mesmerizing creature frozen in an aggressive pose, eyes dark and lips curled into a frown. Each limb comes from a different animal you have seen in this realm, yet all together seems to create a harmonious whole despite the statues' chaotic nature.\n\n");
-			outputText("Each arm extends into sharp points, much like a blade. Its left arm resembles what appears to be a mantis blade, while the right arm is a kamaitachi blade. The statue brandishes each arm, ready to strike. You get a vague sense of impatience from the statue, like a sparring instructor waiting for a pupil to make the first move.\n\n");
+			outputText("Each arm extends into sharp points, much like a blade. Its left arm resembles what appears to be a mantis scythe, while the right arm is a kamaitachi blade. The statue brandishes each arm, ready to strike. You get a vague sense of impatience from the statue, like a sparring instructor waiting for a pupil to make the first move.\n\n");
 			outputText("Its eyes seem oddly human-like, except for the pupils, which are x shaped.\n\n");
-			outputText("At the base of the statue lies a metallic plaque. Given the rust coating it, the text is hard to decipher You can only make out, 'E.e.ie.'.\n\n");
+			outputText("At the base of the statue lies a metallic plaque. Given the rust coating it, the text is hard to decipher. You can only make out, 'E.e.ie.'.\n\n");
 			outputText("Below the plaque lies two ornate wooden bowls, presumably used to put offerings in a time when this was a place people actively visited.\n\n");
             //The hint gives everything away. Remove it, and people won't understand what to do. Maybe no checks here?
 			//if (shinshoku()) {
-            outputText("A soft voice rings not far from behind you, \"<i>Sometimes all you need is a small token of goodwill to get a response. Perhaps a few chilly peppers would be enough...</i>\"\n\n");
-            outputText("You turn around, expecting to see the old monk you've seen before. As you peer about, nobody is around. Are you hearing voices or was he truly here moments prior?\n\n");
+            outputText("A soft voice rings not far from behind you, \"<i>Sometimes all you need is a small token of goodwill. Chilly peppers were his favorite, in bunches of three...</i>\"\n\n");
+            outputText("You turn around, expecting to see the old monk you've seen before. As you peer about, nobody is around. Are you hearing voices or was he truly here?\n\n");
 			//}
 			//outputText("\n\n");
 			menu();
@@ -112,14 +112,14 @@ public class DilapidatedShrine extends BaseContent
 		private function westSectionOffering():void {
 			clearOutput();
 			player.destroyItems(consumables.CHILLYP, 3);
-			outputText("You place the peppers in one of the bowls, and wait for a bit. A noise distracts you for half a moment, but when you turn back, the peppers are gone, ");
+			outputText("You place the peppers in one of the bowls, and wait for a bit. You hear a rasping sound, like steel on stone, and you turn to face the noise. When you turn back, the peppers are gone, ");
 			switch(rand(10)) {
 				case 1:
-					outputText("in the other bowl, a small, glowing syringe.");
+					outputText("and in the other bowl sits a small, glowing syringe.");
 					inventory.takeItem(useables.E_ICHOR, westSection);
 					break;
 				case 3:
-					outputText("and a bottle of Nocello sitting in front of the statue.");
+					outputText("replaced by a bottle of Nocello sitting in front of the statue.");
 					inventory.takeItem(consumables.NOCELIQ, westSection);
 					break;
 				case 5:
@@ -135,7 +135,7 @@ public class DilapidatedShrine extends BaseContent
 					inventory.takeItem(consumables.INFWINE, westSection);
 					break;
 				default:
-					outputText("and nothing for your troubles. How disappointing.");
+					outputText("and the other bowl is empty. Disappointing.");
 					break;
 			}
 			outputText("\n\n")
@@ -168,10 +168,11 @@ public class DilapidatedShrine extends BaseContent
 		private function southSection():void {
 			clearOutput();
 			outputText("Southward within the building, you see a group of statues in an open clearing. The largest one portrays a being with bulging muscles, wearing fine armor.\n\n");
-			outputText("The marble statue shimmers, polished stone radiating power and strength. \n\n");
-			outputText("The surrounding statuettes depict a wide variety of warriors of a wide variety of Marethian races, each holding their weapons high. Each one carrying a variety of dual weapons. Axes, blades, warhammers...You could fill several armories with the blades in those statuettes' hands.\n\n");
+			outputText("The marble statue shimmers, polished stone and chiseled muscle radiating power and strength. \n\n");
+			outputText("The surrounding statuettes depict a wide variety of warriors of a wide variety of Marethian races. Each one holds a different pair of weapons. Axes, blades, warhammers...You could fill several armories with the blades in those statuettes' hands.\n\n");
 			outputText("At the base of the largest statue lies a metallic plaque. Given the rust coating it, the text is hard to decipher. You can only make out 'Krat..' within the text.\n\n");
 			outputText("Below the plaque lies an ornate wooden bowl, several rusted coins inside.\n\n");
+			outputText("From behind, you hear a whisper of a voice, like rasping steel. <i>\"Every weapon is treasured by the God of War. Offer him your tools of destruction, and share in the battles they've seen.\"</i> You turn your head, to face the speaker...But there's nobody there. \n\n");
 			menu();
 			addButton(0, "Offering", weaponsXPtrader);//southSectionOffering
 			addButton(14, "Back", shrinemainmenu);
