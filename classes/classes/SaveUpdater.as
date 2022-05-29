@@ -1792,7 +1792,7 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.012;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.013) {
-				//resetting Sanura riddle flags
+				//resetting Sanura riddle flags (already reclaimed)
 				flags[kFLAGS.PRISCILLA_WRESTLE_COUNTER] = 0;
 				flags[kFLAGS.PRISCILLA_FOREPLAY_COUNTER] = 0;
 				flags[kFLAGS.DESERT_CAVE_DISABLED] = 0;
@@ -1882,6 +1882,12 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.020) {
 				if (flags[kFLAGS.IZUMI_MET] > 0 && !TyrantiaFollower.TyraniaAndIzumi && TyrantiaFollower.TyrantiaFollowerStage > 0) TyrantiaFollower.TyraniaAndIzumi = true;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.020;
+			}
+			//Flag cleanup. Add it to the next save update.
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.021) {
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2033] = 0;
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2032] = 0;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.021;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

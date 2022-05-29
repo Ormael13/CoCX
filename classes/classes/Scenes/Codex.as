@@ -34,6 +34,10 @@ import coc.view.ButtonDataList;
 			headerSub("Header6");
 			outputText("Lorem ipsum dolor sit amet");
 		 */
+		
+		//Current state
+		private var currentPage:String = "";
+		private var currentEntry:int = 0;
 
 		//CODEX MODULES & APIs
 		public function headerMain(text:String = ""):void {
@@ -87,8 +91,8 @@ import coc.view.ButtonDataList;
 			if (player.hasSpells()) unlockEntry(kFLAGS.CODEX_ENTRY_MAGIC); //need to do it somewhere
 			checkAchievements(); //just in case something's broken
 			menu();
-			flags[kFLAGS.CODEX_CURRENT_PAGE] = "";
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = 0;
+			currentPage = "";
+			currentEntry = 0;
 			outputText("You open your codex. Which topic would you like to read?\n\n");
 			outputText("Codex entries unlocked: " + checkUnlocked() + "/" + totalEntries());
 			var btn:int = 0;
@@ -144,23 +148,23 @@ import coc.view.ButtonDataList;
 
 		private function openPage(page:String):void {
 			menu();
-			flags[kFLAGS.CODEX_CURRENT_PAGE] = page;
+			currentPage = page;
 
 			var buttons:ButtonDataList = new ButtonDataList();
 			for (var i:int = 0; i < pages[page].length; ++i) {
 				var entry:Array =  pages[page][i]; //Pointer, not a copy!
-				buttons.add(flags[kFLAGS.CODEX_CURRENT_ENTRY] == i ? "(" + entry[1] + ")" : entry[1], curry(entryWrapper, i, entry[2]))
+				buttons.add(currentEntry == i ? "(" + entry[1] + ")" : entry[1], curry(entryWrapper, i, entry[2]))
 					.disableIf(!flags[entry[0]], null, null, "???");
 			}
-			submenu(buttons, accessCodexMenu, flags[kFLAGS.CODEX_CURRENT_ENTRY] / 12); //maybe sort?
+			submenu(buttons, accessCodexMenu, currentEntry / 12); //maybe sort?
 			addButton(14, "Back", accessCodexMenu);
 		}
 
 		private function entryWrapper(index:int, fun:Function):void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = index;
+			currentEntry = index;
 			clearOutput();
 			fun();
-			openPage(flags[kFLAGS.CODEX_CURRENT_PAGE]);
+			openPage(currentPage);
 		}
 
 		private function codexEntryAlraune():void {
