@@ -9,7 +9,6 @@ import classes.Items.JewelryLib;
 import classes.Items.NecklaceLib;
 import classes.PerkLib;
 import classes.Races;
-import classes.Scenes.Codex;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.Places.TelAdre.UmasShop;
@@ -18,7 +17,6 @@ import classes.StatusEffectType;
 import classes.StatusEffects;
 
 public class CombatMagic extends BaseCombatContent {
-	public var codex:Codex = new Codex();
 	public function CombatMagic() {}
 
 	internal function applyAutocast():void {
@@ -264,8 +262,8 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv2(PerkLib.Ambition);
 		}
 		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
-			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) mod += (Math.round(codex.checkUnlocked() / 100) * 3);
-			else mod += Math.round(codex.checkUnlocked() / 100);
+			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) mod += (Math.round(camp.codex.checkUnlocked() / 100) * 3);
+			else mod += Math.round(camp.codex.checkUnlocked() / 100);
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) mod += .3;
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
@@ -325,8 +323,8 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv1(PerkLib.Obsession);
 		}
 		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
-			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) mod += (Math.round(codex.checkUnlocked() / 100) * 3);
-			else mod += Math.round(codex.checkUnlocked() / 100);
+			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) mod += (Math.round(camp.codex.checkUnlocked() / 100) * 3);
+			else mod += Math.round(camp.codex.checkUnlocked() / 100);
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) mod += .3;
 

@@ -1,23 +1,17 @@
 package classes.Scenes 
 {
-	import classes.*
-	import classes.BaseContent;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.CoC;
-	import classes.GlobalFlags.kACHIEVEMENTS;
-	
-	/**
+import classes.*;
+import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
+
+import coc.view.ButtonDataList;
+
+/**
 	 * ...
 	 * @author Kitteh6660
 	 */
 	public class Codex extends BaseContent
 	{
-		/*Use this line of code in an event to unlock codex entry.
-			if (flags[kFLAGS.CODEX_ENTRY_ENTRYHERE] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_ENTRYHERE] = 1;
-				outputText("<b>New codex entry unlocked: Insert entry here!</b>\n\n");
-			}
-		 */
 		/*Please use the following template whenever appropriate.
 			clearOutput();
 			headerMain("Race name goes here");
@@ -41,16 +35,6 @@ package classes.Scenes
 			outputText("Lorem ipsum dolor sit amet");
 		 */
 		
-		public function Codex() 
-		{
-		}
-		
-		private const PAGE_RACES_1:int    =  0;
-		private const PAGE_RACES_2:int    =  1;
-		private const PAGE_RACES_3:int    =  2;
-		private const PAGE_FACTIONS_1:int = 10;
-		private const PAGE_OTHERS_1:int   = 20;
-		
 		//CODEX MODULES & APIs
 		public function headerMain(text:String = ""):void {
 			outputText("<font size=\"36\" face=\"Georgia\">" + text + "</font>\n\n");
@@ -68,345 +52,117 @@ package classes.Scenes
 					flags[kFLAGS.CODEX_ENTRY_MAGIC] = 1;
 				}
 			}
-			if (flags[kFLAGS.MARBLE_WARNING] > 0)
-			{
-				flags[kFLAGS.CODEX_ENTRY_LABOVINES] = 1;
-			}
-			if (flags[kFLAGS.ROGAR_DISABLED] > 0 || flags[kFLAGS.ROGAR_PHASE] >= 3)
-			{
-				flags[kFLAGS.CODEX_ENTRY_ORCS] = 1;
-			}
+			if (flags[kFLAGS.MARBLE_WARNING] > 0) flags[kFLAGS.CODEX_ENTRY_LABOVINES] = 1;
+			if (flags[kFLAGS.ROGAR_DISABLED] > 0 || flags[kFLAGS.ROGAR_PHASE] >= 3) flags[kFLAGS.CODEX_ENTRY_ORCS] = 1;
 		}
 		
 		public function checkUnlocked():Number {
-			var num:Number = 0;
-			//Races
-			if (flags[kFLAGS.CODEX_ENTRY_ALRAUNE] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_ANEMONES] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_ARACHNES] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_BEHEMOTH] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_CHESHIRE_CAT] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_CHIMERA] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_DEVIL] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_ECHIDNAS] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_GIANTBEES] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_HARPIES] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_HELLCATS] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_HYDRA] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_IMPS] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_LABOVINES] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_LIZANS] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_MANTICORES] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_MINOTAURS] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_NAGAS] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_ORCS] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_RAIJU] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_RHINOS] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_SALAMANDERS] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_SATYRS] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] > 0) {
-				num++;
-			}			
-			if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] > 0) {
-				num++;
-			}			
-			if (flags[kFLAGS.CODEX_ENTRY_TROLLS] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_VAMPIRE] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_ZEBRAS] > 0) {
-				num++;
-			}
-			//Factions
-			if (flags[kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_SANDWITCHES] > 0) {
-				num++;
-			}
-			//Others
-			if (flags[kFLAGS.CODEX_ENTRY_MAGIC] > 0) {
-				num++;
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] > 0) {
-				num++;
-			}
-			if (num >= 20) awardAchievement("Scholar (1)", kACHIEVEMENTS.GENERAL_SCHOLAR);
-			if (num >= 30) awardAchievement("Scholar (2)", kACHIEVEMENTS.GENERAL_SCHOLAR_2);//aktualnie 36 codex entries exist ingame
-			//if (num >= 40) awardAchievement("Scholar (3)", kACHIEVEMENTS.GENERAL_SCHOLAR_3);
+			var num:int = 0;
+			for each (var entries:Array in pages)
+				for each (var entry:Array in entries)
+					if (flags[entry[0]])
+						++num;
 			return num;
+		}
+
+		public function totalEntries():Number {
+			var num:int = 0;
+			for each (var entries:Array in pages)
+				for each (var entry:Array in entries)
+					++num;
+			return num;
+		}
+
+		public function checkAchievements():void {
+			var unlocked:int = checkUnlocked();
+			if (unlocked >= 20) awardAchievement("Scholar (1)", kACHIEVEMENTS.GENERAL_SCHOLAR);
+			if (unlocked >= 30) awardAchievement("Scholar (2)", kACHIEVEMENTS.GENERAL_SCHOLAR_2);//aktualnie 36 codex entries exist ingame
+			if (unlocked >= 40) awardAchievement("Scholar (3)", kACHIEVEMENTS.GENERAL_SCHOLAR_3);
 		}
 		
 		//CODEX MENUS
 		public function accessCodexMenu():void {
 			clearOutput();
 			setFlags();
+			checkAchievements(); //TODO: move to opener!
 			menu();
+			flags[kFLAGS.CODEX_CURRENT_PAGE] = "";
 			flags[kFLAGS.CODEX_CURRENT_ENTRY] = 0;
 			outputText("You open your codex. Which topic would you like to read?\n\n");
-			outputText("Codex entries unlocked: " + checkUnlocked() + "/36");
-			addButton(0, "Races", menuRaces);
-			addButton(1, "Cults", menuFactions);
-			addButton(2, "Others", menuItems);
+			outputText("Codex entries unlocked: " + checkUnlocked() + "/" + totalEntries());
+			var btn:int = 0;
+			for (var page:String in pages)
+				addButton(btn++, page, openPage, page);
 			addButton(14, "Back", playerMenu).hint("Return to main settlement menu.");
 		}
-		
-		private function setCodexMenusAfterDisplay():void {
-			if (flags[kFLAGS.CODEX_CURRENT_PAGE] == PAGE_RACES_1) menuRaces();
-			if (flags[kFLAGS.CODEX_CURRENT_PAGE] == PAGE_RACES_2) menuRacesII();
-			if (flags[kFLAGS.CODEX_CURRENT_PAGE] == PAGE_RACES_3) menuRacesIII();
-			if (flags[kFLAGS.CODEX_CURRENT_PAGE] == PAGE_FACTIONS_1) menuFactions();
-			if (flags[kFLAGS.CODEX_CURRENT_PAGE] == PAGE_OTHERS_1) menuItems();
+
+		//TODO: too much flags. Maybe migrate to SaveableState?
+		public var pages:Object = {
+			"Races": [
+				[kFLAGS.CODEX_ENTRY_ALRAUNE, "Alraunes", codexEntryAlraune],
+				[kFLAGS.CODEX_ENTRY_ANEMONES, "Anemones", codexEntryAnemone],
+				[kFLAGS.CODEX_ENTRY_ARACHNES, "Arachnes", codexEntrySpiders],
+				[kFLAGS.CODEX_ENTRY_BEHEMOTH, "Behemoth", codexEntryBehemoth],
+				[kFLAGS.CODEX_ENTRY_CHESHIRE_CAT, "Cheshire Cat", codexEntryCheshireCat],
+				[kFLAGS.CODEX_ENTRY_CHIMERA, "Chimera", codexEntryChimera],
+				[kFLAGS.CODEX_ENTRY_DEVIL, "Devil", codexEntryDevil],
+				[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST, "Displacers", codexEntryDisplacerBeast],
+				[kFLAGS.CODEX_ENTRY_GOOGIRLS, "Goo Girls", codexEntryGooGirls],
+				[kFLAGS.CODEX_ENTRY_ECHIDNAS, "Echidnas", codexEntryEchidnas],
+				[kFLAGS.CODEX_ENTRY_GIANTBEES, "Giant Bees", codexEntryBees],
+				[kFLAGS.CODEX_ENTRY_GOBLINS, "Goblins", codexEntryGoblins],
+				[kFLAGS.CODEX_ENTRY_HARPIES, "Harpies", codexEntryHarpies],
+				[kFLAGS.CODEX_ENTRY_HELLCATS, "Hellcats", codexEntryHellcats],
+				[kFLAGS.CODEX_ENTRY_HELLHOUNDS, "Hellhounds", codexEntryHellhounds],
+				[kFLAGS.CODEX_ENTRY_HYDRA, "Hydra", codexEntryHydra],
+				[kFLAGS.CODEX_ENTRY_IMPS, "Imps", codexEntryImps],
+				[kFLAGS.CODEX_ENTRY_LABOVINES, "LaBovines", codexEntryLaBovines],
+				[kFLAGS.CODEX_ENTRY_LIZANS, "Lizans", codexEntryLizans],
+				[kFLAGS.CODEX_ENTRY_MANTICORES, "Manticores", codexEntryManticores],
+				[kFLAGS.CODEX_ENTRY_MINOTAURS, "Minotaurs", codexEntryMinotaurs],
+				[kFLAGS.CODEX_ENTRY_NAGAS, "Nagas", codexEntryNagas],
+				[kFLAGS.CODEX_ENTRY_ORCS, "Orcs", codexEntryOrcs],
+				[kFLAGS.CODEX_ENTRY_RAIJU, "Raijus", codexEntryRaijus],
+				[kFLAGS.CODEX_ENTRY_RHINOS, "Rhinoceros", codexEntryRhinos],
+				[kFLAGS.CODEX_ENTRY_SALAMANDERS, "Salamanders", codexEntrySalamanders],
+				[kFLAGS.CODEX_ENTRY_SATYRS, "Satyrs", codexEntrySatyrs],
+				[kFLAGS.CODEX_ENTRY_SHARKGIRLS, "Shark Girls", codexEntrySharkGirls],
+				[kFLAGS.CODEX_ENTRY_SUCCUBUS, "Succubus", codexEntrySuccubus],
+				[kFLAGS.CODEX_ENTRY_TROLLS, "Trolls", codexEntryTrolls],
+				[kFLAGS.CODEX_ENTRY_ZEBRAS, "Zebras", codexEntryZebras],
+			],
+			"Factions": [
+				[kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS, "Fetish Cult", codexEntryFetish],
+				[kFLAGS.CODEX_ENTRY_SANDWITCHES, "Sand Coven", codexEntrySandWitches],
+			],
+			"Other": [
+				[kFLAGS.CODEX_ENTRY_GOLEMS, "Golems", codexEntryGolems],
+				[kFLAGS.CODEX_ENTRY_MAGIC, "Magic", codexEntryMagic],
+			]
 		}
 		
-		private function addCodexButton(codexEntryName:String, codexEntryId:String, codexEntry:Function, flag:int):void {
-			var button:int = 0;
-			for (var i:int = 0; i < 14; i++) {
-				if (buttonIsVisible(i)) button++;
-				if (button == 4 || button == 9) button++; //Last slot of the row is reserved for next and previous.
+		private function openPage(page:String):void {
+			menu();
+			flags[kFLAGS.CODEX_CURRENT_PAGE] = page;
+
+			var buttons:ButtonDataList = new ButtonDataList();
+			for (var i:int = 0; i < pages[page].length; ++i) {
+				var entry:Array =  pages[page][i]; //Pointer, not a copy!
+				buttons.add(flags[kFLAGS.CODEX_CURRENT_ENTRY] == i ? "(" + entry[1] + ")" : entry[1], curry(entryWrapper, i, entry[2]))
+					.disableIf(!flags[entry[0]], null, null, "???");
 			}
-			if (flags[flag] > 0) {
-				if (flags[kFLAGS.CODEX_CURRENT_ENTRY] == codexEntryId) addButton(button, "( " + codexEntryName + " )", codexEntry);
-				else addButton(button, "" + codexEntryName + "", codexEntry);
-			}
-			else addButtonDisabled(button, "???");
-		}
-		
-		private function menuRaces():void {
-			menu();
-			flags[kFLAGS.CODEX_CURRENT_PAGE] = PAGE_RACES_1;
-			//1st row
-			addCodexButton("Alraunes", "Alraune", codexEntryAlraune, kFLAGS.CODEX_ENTRY_ALRAUNE);
-			addCodexButton("Anemones", "Anemone", codexEntryAnemone, kFLAGS.CODEX_ENTRY_ANEMONES);
-			addCodexButton("Arachnes", "Arachne", codexEntrySpiders, kFLAGS.CODEX_ENTRY_ARACHNES);
-			addCodexButton("Behemoth", "Behemoth", codexEntryBehemoth, kFLAGS.CODEX_ENTRY_BEHEMOTH);
-			
-			//2nd row
-			addCodexButton("Cheshire Cat", "CheshireCat", codexEntryCheshireCat, kFLAGS.CODEX_ENTRY_CHESHIRE_CAT);
-			addCodexButton("Chimera", "Chimera", codexEntryChimera, kFLAGS.CODEX_ENTRY_CHIMERA);
-			addCodexButton("Devil", "Devil", codexEntryDevil, kFLAGS.CODEX_ENTRY_DEVIL);
-			addCodexButton("Displacer Beast", "DisplacerBeast", codexEntryDisplacerBeast, kFLAGS.CODEX_ENTRY_DISPLACER_BEAST);
-			
-			//3rd row
-			addCodexButton("Goo Girls", "GooGirls", codexEntryGooGirls, kFLAGS.CODEX_ENTRY_GOOGIRLS);
-			addCodexButton("Echidnas", "Echidnas", codexEntryEchidnas, kFLAGS.CODEX_ENTRY_ECHIDNAS);
-			addCodexButton("Giant Bees", "GiantBees", codexEntryBees, kFLAGS.CODEX_ENTRY_GIANTBEES);
-			addCodexButton("Goblins", "Goblins", codexEntryGoblins, kFLAGS.CODEX_ENTRY_GOBLINS);
-			
-			addButton(4, "Next", menuRacesII);
+			submenu(buttons, accessCodexMenu, flags[kFLAGS.CODEX_CURRENT_ENTRY] / 12, false); //maybe sort?
 			addButton(14, "Back", accessCodexMenu);
 		}
-		private function menuRacesII():void {
-			menu();
-			flags[kFLAGS.CODEX_CURRENT_PAGE] = PAGE_RACES_2;
-			//1st row
-			addCodexButton("Harpies", "Harpies", codexEntryHarpies, kFLAGS.CODEX_ENTRY_HARPIES);
-			addCodexButton("Hellcats", "Hellcats", codexEntryHellcats, kFLAGS.CODEX_ENTRY_HELLCATS);
-			addCodexButton("Hellhounds", "Hellhounds", codexEntryHellhounds, kFLAGS.CODEX_ENTRY_HELLHOUNDS);
-			addCodexButton("Hydra", "Hydra", codexEntryHydra, kFLAGS.CODEX_ENTRY_HYDRA);
-			
-			//2nd row
-			addCodexButton("Imps", "Imps", codexEntryImps, kFLAGS.CODEX_ENTRY_IMPS);
-			addCodexButton("LaBovines", "Labovines", codexEntryLaBovines, kFLAGS.CODEX_ENTRY_LABOVINES);
-			addCodexButton("Lizans", "Lizans", codexEntryLizans, kFLAGS.CODEX_ENTRY_LIZANS);
-			addCodexButton("Manticores", "Manticores", codexEntryManticores, kFLAGS.CODEX_ENTRY_MANTICORES);
-			
-			//3rd row
-			addCodexButton("Minotaurs", "Minotaurs", codexEntryMinotaurs, kFLAGS.CODEX_ENTRY_MINOTAURS);
-			addCodexButton("Nagas", "Nagas", codexEntryNagas, kFLAGS.CODEX_ENTRY_NAGAS);
-			addCodexButton("Orcs", "Orcs", codexEntryOrcs, kFLAGS.CODEX_ENTRY_ORCS);
-			addCodexButton("Raijus", "Raiju", codexEntryRaijus, kFLAGS.CODEX_ENTRY_RAIJU);
-			
-			addButton(4, "Next", menuRacesIII);
-			addButton(9, "Previous", menuRaces);
-			addButton(14, "Back", accessCodexMenu);
-		}
-		private function menuRacesIII():void {
-			menu();
-			flags[kFLAGS.CODEX_CURRENT_PAGE] = PAGE_RACES_3;
-			//1st row
-			addCodexButton("Rhinoceros", "Rhinos", codexEntryRhinos, kFLAGS.CODEX_ENTRY_RHINOS);
-			addCodexButton("Salamanders", "Salamanders", codexEntrySalamanders, kFLAGS.CODEX_ENTRY_SALAMANDERS);
-			addCodexButton("Satyrs", "Satyrs", codexEntrySatyrs, kFLAGS.CODEX_ENTRY_SATYRS);
-			addCodexButton("Shark Girls", "SharkGirls", codexEntrySharkGirls, kFLAGS.CODEX_ENTRY_SHARKGIRLS);
-			
-			//2nd row
-			addCodexButton("Succubus", "Succubus", codexEntrySuccubus, kFLAGS.CODEX_ENTRY_SUCCUBUS);
-			addCodexButton("Trolls", "Trolls", codexEntryTrolls, kFLAGS.CODEX_ENTRY_TROLLS);
-			addCodexButton("Zebras", "Zebras", codexEntryZebras, kFLAGS.CODEX_ENTRY_ZEBRAS);
-			
-			//3rd row
-			
-			//addButton(4, "Next", menuRacesIV);
-			addButton(9, "Previous", menuRacesII);
-			addButton(14, "Back", accessCodexMenu);
-		}
-		
-		private function menuFactions():void {
-			flags[kFLAGS.CODEX_CURRENT_PAGE] = PAGE_FACTIONS_1;
-			menu();
-			addCodexButton("Fetish Cult", "FetishCult", codexEntryFetish, kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS);
-			addCodexButton("Sand Witches", "SandWitches", codexEntrySandWitches, kFLAGS.CODEX_ENTRY_SANDWITCHES);
-			
-			addButton(14, "Back", accessCodexMenu);
-		}
-		private function menuItems():void {
-			flags[kFLAGS.CODEX_CURRENT_PAGE] = PAGE_OTHERS_1;
-			menu();
-			addCodexButton("Golems", "Golems", codexEntryGolems, kFLAGS.CODEX_ENTRY_GOLEMS);
-			addCodexButton("Magic", "Magic", codexEntryMagic, kFLAGS.CODEX_ENTRY_MAGIC);
-			
-			addButton(14, "Back", accessCodexMenu);
-		}
-		
-		//CODEX ENTRIES
-		/*private function codexEntry():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Manticores";
+
+		private function entryWrapper(index:int, fun:Function):void {
+			flags[kFLAGS.CODEX_CURRENT_ENTRY] = index;
 			clearOutput();
-			headerMain("Manticores");
-			outputText("<b>Genders:</b> Exclusively female\n");
-			outputText("<b>Height:</b> 5 to 6 feet tall.\n");
-			outputText("<b>Body type:</b> Slender to Average\n");
-			outputText("<b>Skin tone:</b> Light\n");
-			outputText("<b>Fur/hair color:</b> Fur between midnight black and blue black.\n");
-			outputText("<b>Eye color:</b> Red\n");
-			outputText("<b>Notable feature:</b> Tailpussy\n");
-			headerSub("Appearance");
-			outputText("");
-			headerSub("Behavior");
-			outputText("");
-			headerSub("History");
-			outputText("");			
-			outputText("\n\n(Written By: Liadri)");
-			setCodexMenusAfterDisplay();
+			fun();
+			openPage(flags[kFLAGS.CODEX_CURRENT_PAGE]);
 		}
-		
-		private function codexEntry():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Manticores";
-			clearOutput();
-			headerMain("Manticores");
-			outputText("<b>Genders:</b> Exclusively female\n");
-			outputText("<b>Height:</b> 5 to 6 feet tall.\n");
-			outputText("<b>Body type:</b> Slender to Average\n");
-			outputText("<b>Skin tone:</b> Light\n");
-			outputText("<b>Fur/hair color:</b> Fur between midnight black and blue black.\n");
-			outputText("<b>Eye color:</b> Red\n");
-			outputText("<b>Notable feature:</b> Tailpussy\n");
-			headerSub("Appearance");
-			outputText("");
-			headerSub("Behavior");
-			outputText("");
-			headerSub("History");
-			outputText("");			
-			outputText("\n\n(Written By: Liadri)");
-			setCodexMenusAfterDisplay();
-		}
-		
-		private function codexEntry():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Manticores";
-			clearOutput();
-			headerMain("Manticores");
-			outputText("<b>Genders:</b> Exclusively female\n");
-			outputText("<b>Height:</b> 5 to 6 feet tall.\n");
-			outputText("<b>Body type:</b> Slender to Average\n");
-			outputText("<b>Skin tone:</b> Light\n");
-			outputText("<b>Fur/hair color:</b> Fur between midnight black and blue black.\n");
-			outputText("<b>Eye color:</b> Red\n");
-			outputText("<b>Notable feature:</b> Tailpussy\n");
-			headerSub("Appearance");
-			outputText("");
-			headerSub("Behavior");
-			outputText("");
-			headerSub("History");
-			outputText("");			
-			outputText("\n\n(Written By: Liadri)");
-			setCodexMenusAfterDisplay();
-		}
-		
-		private function codexEntry():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Manticores";
-			clearOutput();
-			headerMain("Manticores");
-			outputText("<b>Genders:</b> Exclusively female\n");
-			outputText("<b>Height:</b> 5 to 6 feet tall.\n");
-			outputText("<b>Body type:</b> Slender to Average\n");
-			outputText("<b>Skin tone:</b> Light\n");
-			outputText("<b>Fur/hair color:</b> Fur between midnight black and blue black.\n");
-			outputText("<b>Eye color:</b> Red\n");
-			outputText("<b>Notable feature:</b> Tailpussy\n");
-			headerSub("Appearance");
-			outputText("");
-			headerSub("Behavior");
-			outputText("");
-			headerSub("History");
-			outputText("");			
-			outputText("\n\n(Written By: Liadri)");
-			setCodexMenusAfterDisplay();
-		}*/
-		
+
 		private function codexEntryAlraune():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Alraune";
-			clearOutput();
 			headerMain("Alraunes");
 			outputText("<b>Genders:</b> Female but as plants they are hermaphrodites\n");
 			outputText("<b>Height:</b> 6 to 7 feet tall due to the pitcher size.\n");
@@ -422,12 +178,9 @@ package classes.Scenes
 			headerSub("History");
 			outputText("The gods each have a creature whom they favor amongst their creations. Amongst plants morphs and dryads none embody Marae teachings as much as the infamous Alraunes. Fertility incarnates, alraunes embody it down to the floral haze of lust that herald their presence. Alraunes only wish to spread the faith of their god the way they do best, by spreading their seed and getting seeded themselves.");			
 			outputText("\n\n(Written By: Liadri)");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryAnemone():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Anemone";
-			clearOutput();
 			headerMain("Anemones");
 			outputText("<b>Genders:</b> Universally hermaphroditic\n");
 			outputText("<b>Height:</b> Ranges from 5' to 6', though the body is mildly elastic to cope with water pressure, making determination of an individual's 'natural' height highly subjective.\n");
@@ -448,12 +201,9 @@ package classes.Scenes
 			headerSub("Behavior");
 			outputText("while they may have a fair bit of natural intelligence, they are very young as a species and by no means world-wise or accustomed to society. They have some talent for language but little exposure to it; most of their sparse language skills come from observing the interactions of others from faraway. Anemone tend to communicate with each other by touch or gesture and will usually default to this with other races, only using words to add emphasis or consciously with races that do not seem to respond to the myriad small cues that anemone recognize in each others’ actions. Anemones tend to be slightly mischievous or sadistic, either as result of their corrupt origins or simply because of their inexperience and lack of social mores.");
 			outputText("\n\n(Written by Zeikfried)");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntrySpiders():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Arachne";
-			clearOutput();
 			headerMain("Arachne, Spider-Morphs, and Driders");
 			outputText("<b>Genders:</b> Female, Male, and Hermaphrodite\n");
 			outputText("<b>Skin:</b> All varieties of spider-kin typically have very pale 'skin' in the places their chitin does not cover. Some rare individuals will be born dark, nearly black-skinned, but in general their human portions are very white.\n");
@@ -476,12 +226,9 @@ package classes.Scenes
 			outputText("Unfortunately, the rising tide of corruption in the land has affected the ways that spider-kin copulate in more nefarious ways. Those females who have been exposed to high levels of corruption quickly grow large ovipositors from the bottoms of their abdomens, and are capable of laying their corrupted offspring inside the vaginal canals or anuses of their victims. These corrupt spider-kin often drip venom when agitated or aroused, and can poison or arouse with just a kiss. Eggs laid from their tainted ovipositors do absorb personally traits and some modest physical changes from the host-mother, but still hatch entirely as spiders, regardless of the mother’s race. Thankfully, the eggs will induce labor and force themselves from the host mother’s body moments before they are due to hatch. Once laid, the spider-kin young-lings will emerge and skitter off in search of their first meal. \nThough corrupted, these spider-kin aren’t necessarily in league with demons or monstrous in their desires. Simply being exposed to corrupt fluids a few times in short order can have this affect, leaving a mostly pure-hearted spider-girl with a distended, egg-filled ovipositor and the desire to use it. Succubi drafts have also been known to cause this effect in spider-kin, even males.");
 			headerSub("Other notes");
 			outputText("Spider-kin venom is believed to be a crucial ingredient in the lust drafts and poisons used by the goblins of Mareth, but those weak toxins lose most of their potency after a short time. When injected fresh, it is a great deal more powerful and dangerous than those weak drugs. ");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryCheshireCat():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "CheshireCat";
-			clearOutput();
 			headerMain("Cheshire Cats");
 			outputText("<b>Genders:</b> Variable\n");
 			outputText("<b>Height:</b> 5 to 6 feet tall.\n");
@@ -497,12 +244,9 @@ package classes.Scenes
 			headerSub("History");
 			outputText("Not native to Mareth, cheshires have first been reported after portals began appearing across the plane. It is likely the curious cats simply ventured out into Mareth seeking new gullible victims to entertain themselves with and with them various otherworldly products made their way to the markets including the infamous wonderland cakes.");			
 			outputText("\n\n(Written By: Liadri)");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryChimera():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Chimera";
-			clearOutput();
 			headerMain("Chimeras");
 			outputText("<b>Genders:</b> Variable\n");
 			outputText("<b>Height:</b> Variable\n");
@@ -518,12 +262,9 @@ package classes.Scenes
 			headerSub("History");
 			outputText("Ever since transformatives appeared on Mareth, chimeric abominations roamed the land. It only became even worse when the demons started experimenting and creating even deadlier beasts. True chimera almost always loses to their many conflicting instincts, turning savage and aggressive before long, something demonic corruption only makes worse.");			
 			outputText("\n\n(Written By: Liadri)");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryDevil():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Devil";
-			clearOutput();
 			headerMain("Devils");
 			outputText("<b>Genders:</b> Variable\n");
 			outputText("<b>Height:</b> 3 to 4 feet tall.\n");
@@ -539,12 +280,9 @@ package classes.Scenes
 			headerSub("History");
 			outputText("The first devils were created as an attempt to improve and control the state of demonhood into a better spellcaster variant. Most of those experiments turned up flawed in one way or another, always close to the goal but never perfect with deformed bodies or warped minds destroyed by their own lust and black magic. There are no records of a perfect devil ever created and should one do exist surely it would have revealed itself by now and ensnared Mareth beneath its unholy rulership. Unless of course it lost interest in enslaving other lesser life forms and gave in to its intended original desire for the accumulation of magical powers.");			
 			outputText("\n\n(Written By: Liadri)");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryDisplacerBeast():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "DisplacerBeast";
-			clearOutput();
 			headerMain("Displacer Beasts");
 			outputText("<b>Genders:</b> Variable\n");
 			outputText("<b>Height:</b> 6 to 7 feet tall.\n");
@@ -560,12 +298,9 @@ package classes.Scenes
 			headerSub("History");
 			outputText("The displacer beast origins are pretty much unknown. No god made the claim on their creation through many scholars suspect only the god of transformation and change, Ezekiel, would ever create such a chimeric monster.");			
 			outputText("\n\n(Written By: Liadri)");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryFetish():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "FetishCult";
-			clearOutput();
 			headerMain("Followers of the Fetish");
 			outputText("<b>Genders:</b> Females are Fetish Cultists and Males are Fetish Zealots. Fetish priestesses are either female, or hermaphrodites.\n");
 			outputText("<b>Typical Dress:</b> Followers of the fetish have the ability to shift their clothing to anything they desire, though this is almost exclusively various fetish costumes. They may shift the outfits of those they encounter as well.\n");
@@ -584,12 +319,9 @@ package classes.Scenes
 			headerSub("History");
 			outputText("The original followers where a group of crusaders lead by a man named Alexander. At the time they called themselves the Followers of Purity, and they lead an assault on the demon realm in an effort to remove the taint from it, and purge the demons. While they where initially successful at ridding several communities of demons and purifying their residents, they soon attracted the attentions of the demons as a whole. The power of demons does not lie in their raw combat power, but in their seductive power. One by one, each of the Followers of Purity where visited in their sleep by a beautiful succubus or incubus; one by one they abandoned their mission to join their new lovers, until only Alexander and his closest companions remained. The mission would not fail here though, Alexander and his comrades learned to watch their backs, and to never let any of their members sleep alone. Even then, they no longer had the strength they needed to overcome the demon’s holds on this world’s communities, and Alexander feared his crusade would fail. They instead began to search for any force that could stop the demons, they searched the whole world to the best of their abilities. All the while being hunted by the demons at every turn. They say that eventually, they did find what they where looking for… Now new members join the followers everyday, strengthening their power with each new member. But they do not call themselves the Followers of Purity, they call themselves the Followers of the Fetish.");
 			outputText("\n\n(AUTHOR: The Dark Master) ");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryBees():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "GiantBees";
-			clearOutput();
 			headerMain("Giant Bees");
 			outputText("<b>Genders:</b> Almost exclusively Female, save for a few Drones in each hive.\n");
 			outputText("<b>Height:</b> The average bee is roughly five feet tall. Drones are typically much shorter, but are rarely seen outside the hive. Warrior Bees can reach seven feet in height, and are fearsome when riled. Queens are by far the largest, at up to thirteen feet in length, though much of a queen’s body-size is dominated by her reproductive systems. Fertile-Caste tend to be of average height, anywhere from five to six feet tall.\n");
@@ -605,12 +337,9 @@ package classes.Scenes
 			outputText("Bees are divided into castes – the workers maintain the hive, the warriors protect the hive from the incursions of monsters and demons, the Queen produces the eggs, the Drones keep the Queen’s eggs fertilized, and the Fertile Caste bear the Queen’s fertilized eggs into the wilds to find suitable incubators. The bee social structure is rigid in the extreme, and the only bees that enjoy anything resembling leisure time are the Fertile-Caste, though they don’t see the harm in laying their eggs.");
 			headerSub("Special attributes");
 			outputText("Bees have a venomous stinger that can dispense either a paralyzing toxin, an aphrodisiac, or both. The strength of each toxin varies based on the bee’s caste, and some of the more specialized castes may lack one of the venoms. The exact nature and distribution of the venom between castes is unknown. ");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryEchidnas():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Echidnas";
-			clearOutput();
 			headerMain("Echidna-Morphs");
 			outputText("<b>Genders:</b> Male, Female\n");
 			outputText("<b>Height:</b> Short, never exceeding 5'4\", but never under 4'. Males are usually taller.\n");
@@ -631,12 +360,9 @@ package classes.Scenes
 			headerSub("Inter-Species Relationship");
 			outputText("Most echidna-morphs hate the demons. It’s because of them that their forests were corrupted, and the now-resident tentacle beasts were nonexistent until they came about. Due to the rise of corrupted glades and the increasing population of the tentacle beasts, some echidna morphs ending up succumbing to the corruption of the forests. These corrupted mutants have green fur, with the males having a cluster of four tentacle penises rather than the normal, single four-headed one.");
 			outputText("\n\nThe races that echidna-morphs interact the most with are gnolls and satyrs. These interactions are not typically positive ones, however. The over-aggressive gnolls start the occasional turf war, and communities will often have to drive away the occasional drunken satyr.");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryGoblins():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Goblins";
-			clearOutput();
 			headerMain("Goblins");
 			outputText("<b>Genders:</b> Female\n");
 			outputText("<b>Height:</b> 2 to 4 feet tall.\n");
@@ -657,12 +383,9 @@ package classes.Scenes
 			outputText("Within a week, their greatest minds were spending all their time eating pussies and developing new aphrodisiacs. Within a month the goblins were permanently turned on by the strongest of drugs and fucking nonstop in the streets of their once-great city. A few did not partake of the tainted water, and locked themselves inside their dwellings for as long as they dared. Some gave in to thirst or loneliness. Others stayed indoors until the demons walked in and easily assumed control. They put the few sane goblins left to work building the machines that run their empire to this day. No one has seen those few survivors since, and most goblins don’t waste time thinking about them.");
 			headerSub("Social structure");
 			outputText("Goblins live in groups of 100-300, typically lead by an elder female with a direct bloodline to every goblin under her. ");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryGolems():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Golems";
-			clearOutput();
 			headerMain("Golems");
 			outputText("Golems have three varieties: \"dummies\", \"true\" and \"deviants\". Depending on type their belong to all of them share some of basic properties like: abnormal high durability to physical and magical damages, slow self-reconstructing, artificial nature, innate stubbornness, resistance to most of known mental manipulation techniques or spells and need for magical energies to self sustain.");
 			headerSub("Dummy Golems");
@@ -672,12 +395,9 @@ package classes.Scenes
 			headerSub("Deviant Golems");
 			outputText("Although their are classified as separate type of golems most of them fits quite well to one of other two types. The reason to call them deviant ones is that there is one or more details or their characteristics that are vastly different from typical golem and in most of the cases it's golem uncanny level of independence from the master. Some say that most deviant golems are in fact golems that broke free by various methods from been dependent on it master to gather magical power needed for their self sustain. Aside of that many of them showing signs of possessing many bizarre powers and skills hard to find at others golems making them one of most dangerous enemies. Some theories say that many of them was effects of experiments to make better, stronger golem that went terrible wrong giving birth to an abomination.");
 			outputText("\n\n(Written By: Ormael)");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryGooGirls():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "GooGirls";
-			clearOutput();
 			headerMain("Goo Girls");
 			outputText("<b>Genders:</b> Asexual, but appearing female\n");
 			headerSub("Body");
@@ -700,12 +420,9 @@ package classes.Scenes
 			headerSub("Special notes");
 			outputText("Goo girls are sensitive to heat and vibrations, which makes the act of copulation with non-goo races- though pointless- very enjoyable for them. Sex serves the dual purposes of acquiring shape memories and providing them with the protein-rich fluids they cannot acquire from the fluid around them. Additionally, they require regular exposure to moisture to maintain their bodies. While goo may be found a distance from a large body of water, it is rare and the lack of moisture tends to turn them highly acidic and a great deal more dangerous. Although it is possible to encounter goo girls with multiple hearts, they do not tend to occupy a single body for very long. There are rumors of \"Goo Queens\" who have dozens of hearts inside them, using the combined memories and membrane control to become giant, non-permeable, or even capable of speech, depending on the legend. No Goo Queens have ever been reliably identified or reported to date.");
 			outputText("\n\n(Written by: Adjatha) ");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryHarpies():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Harpies";
-			clearOutput();
 			headerMain("Harpies");
 			outputText("<b>Genders:</b> Exclusively Female\n");
 			outputText("<b>Build:</b> The body structure of a harpy is geared towards lean muscle and minimizing weight in order to better maintain an airborne existence. Their bones are hollow, to minimize weight, and the materials they’re made from makes them nearly as strong as a human’s. Most harpies have very small breasts and only very rarely reach a C or D cup. Breast tissue is unnecessary when you do not need to lactate for your children. Hips are one attribute that harpies have in excess. Since they lay large eggs, their hips are very wide to allow the egg to pass more easily.\n");
@@ -720,12 +437,9 @@ package classes.Scenes
 			outputText("Harpies have never been civilized. Before the demon-times, they were considered a nuisance to most adults. Most villages filled the ears of their young males with horror stories of winged monsters that ate men. The truth is that during the fertile part of any harpy’s ovulation cycle, that harpy would ambush the first lone male she found, lock his member inside her vagina with her powerful thighs, and then take off to prevent him from escaping. After forcing the male to fertilize her for a day, she would release the exhausted victim. Harpies aren’t stupid and can talk, but they are fantastically lazy when it comes to anything other than seeing to their bodies needs. Since harpies roost on the upper reaches of the mountain, it’s inevitable that they became corrupted quite quickly. Corruption had fairly little effect on the harpies. Sure it boosted their libidos, but that only lead to more frequent masturbation. The most profound effect was a large increase in fertility and massive decrease in gestation time. Now harpies lay their eggs within a few days of insemination and the young are hatch and fully mature with the span of a month. It’s now fairly common to find the harpies prowling for a mate in the plains or hunting food in the mountain’s upper reaches.");			
 			headerSub("Other Notes");
 			outputText("They are fond of wearing a yellow-tinted lip gloss that is made from stolen bee-girl pollen. They’ll often steal it at night when most of the bee-girls are sleeping. The pollen has little effect on the harpies, but has multiple effects on their victims. It can be absorbed through the lips or genitals of a male, and as a potent, delayed aphrodisiac it will torment the man with lust for hours. The lip-gloss also serves as a focus for a small amount of latent, magical talent. When a harpy utters a command, she will focus her magic through her lips, imbuing it with a difficult to resist compulsion. Some harpies have mastered this art, and will sing commands to lure in weak-willed men. ");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryHellcats():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Hellcats";
-			clearOutput();
 			headerMain("Hellcats");
 			outputText("<b>Genders:</b> Always hermaphrodite\n");
 			outputText("<b>Height:</b> 5 to 6 feet tall.\n");
@@ -741,12 +455,9 @@ package classes.Scenes
 			headerSub("History");
 			outputText("Hellcat witches are the faithful zealots of Abraxas, a former fire god of Mareth who became corrupted by the demons becoming a demon himself. Abraxas rewards his followers with dominion over fire and burning urges that never dies out. Since hellcats do not reproduce naturally they have to capture pure cat morphs to corrupt and sacrifice to their fire god which converts them, body and mind into new members of their unholy kind. All hellcats are female hermaphrodites as becomes any cat morph who is sacrificed to Abraxas.");			
 			outputText("\n\n(Written By: Liadri)");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryHellhounds():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Hellhounds";
-			clearOutput();
 			headerMain("Hellhounds");
 			outputText("<b>Height:</b> 5.5-6 feet when standing\n");
 			outputText("<b>Body type:</b> Biped or quadrupedal, it is completely comfortable with either\n");
@@ -765,12 +476,9 @@ package classes.Scenes
 			headerSub("Social structure");
 			outputText("Feral Hellhounds (those without masters) often gather in packs, but they generally hunt on their own. When interacting with other Hellhounds, competitions for dominance are common. These competitions typically revolve around a test of seduction, with the loser submitting themselves by going down on four legs, and using its two heads to pleasure the dicks of the one that it submitted too. This is one of only two times that the Hellhound will go down on all fours, the other time being when they are out hunting.");
 			outputText("\n\n(Written by: TheDarkMaster) ");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryHydra():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Hydra";
-			clearOutput();
 			headerMain("Hydra");
 			outputText("<b>Genders:</b> Variable\n");
 			outputText("<b>Height:</b> Variable\n");
@@ -786,12 +494,9 @@ package classes.Scenes
 			headerSub("History");
 			outputText("Hydras began appearing on Mareth around the same time as Nagas though the firsts Hydras were likely Naga who underwent many changes from transformatives. Nowadays the Hydra is a rare albeit deadly predator to stumble upon.");			
 			outputText("\n\n(Written By: Liadri)");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryImps():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Imps";
-			clearOutput();
 			headerMain("Imps");
 			outputText("<b>Genders:</b> Male\n");
 			outputText("<b>Height:</b> 2 to 4 feet tall.\n");
@@ -807,12 +512,9 @@ package classes.Scenes
 			outputText("Four inch horns on their foreheads, small spaded tails, and tiny dragon-like wings. They are not particularly intelligent, always seeming to be about as smart as a human teenager.");
 			headerSub("Sexual characteristics");
 			outputText("A large human-like penis that seems to dwarf the rest of the imp, along with two human sized testes. They do have an asshole comparable to a humans, though it seems to exist more for sport and pleasure than for waste removal. ");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryLaBovines():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Labovines";
-			clearOutput();
 			headerMain("Lacta Bovines or Cowgirl");
 			outputText("<b>Genders:</b> Female\n");
 			outputText("<b>Skin/fur:</b> The skin tone of these creatures is very close to being human; their fur more closely follows the common Minotaur fur colors of brown, black and sometimes white with black spots.\n");
@@ -828,12 +530,9 @@ package classes.Scenes
 			outputText("Lacta Bovines reproduce by finding a suitable mate and first addicting them to their milk. Once their bodies determine that they are giving milk regularly to a creature they like, they will become fertile and will be able to be impregnated by their partner. Any children that result from this union are almost always new Lacta Bovines, as a secondary effect of milk addiction is that it dilutes down the strength of the drinker’s seed causing their traits to become recessive. However, this is not perfect, and it’s very possible for Lacta Bovines to mate with those who have not been completely diluted down yet. This is where the more human appearing ones originate. A Lacta Bovine pregnancy typically lasts 28 days.");
 			headerSub("Reproduction side note, Minotaurs");
 			outputText("Minotaurs are a common partner with the more bestial Lacta Bovines, and their seed is so strong that it isn’t uncommon for the first child in such a union to be a minotaur, with the rest being Lacta Bovines. At the same time, such unions are often short lived, and it is quite possible for a Lacta Bovine to move to a different mate during a pregnancy. ");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryLizans():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Lizans";
-			clearOutput();
 			headerMain("Lizans (Lizard-Morphs)");
 			outputText("<b>Genders:</b> Male, Female, Hermaphrodite\n");
 			outputText("<b>Height:</b> Shorter than Average to Average (5'4\" to 5'11\")\n");
@@ -861,12 +560,9 @@ package classes.Scenes
 			headerSub("Inter-species relationship");
 			outputText("All uncorrupted Lizans hate demons. Personal reasons for doing so vary widely, but the racial reason is simple; the demons’ preventing of the rain for years and years has caused many deaths among their number and rendered it increasingly hard to survive in the hot, dry regions where they live. The race that desert Lizans most interact with is the cult of the Sand Witches, and the relationship there can be said to be one of love/hate. As noted above, many Lizans find lactating breasts to be a fetish, males and herms appreciate the twin pussies that sand witches possess, and all sexes find the abundance of nutrient-rich fluids that can be sucked from a Sand Witch quite helpful in the dry climates of their home. Sand Witches don’t necessarily mind the attention, and rumors say there are more than a few mixed blood Lizans in the desert as a result, but are fiercely possessive of their milk and fixated on adding new recruits to their cult. As a result, more than one male Lizan has spent at least some time as a lactating shemale as a result of underestimating them. Plains Lizans are defined by their constant war against the gnolls. Lacking individual strength by comparison, they have always depended on numbers to fight back against the hyena-morphs, and thus they have given themselves over to corruption.");			
 			outputText("\n\n(Written By: Quiet Browser)");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryMagic():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Magic";
-			clearOutput();
 			headerMain("Magic");
 			outputText("Magic comes in three varieties, \"white\", \"grey\" and \"black\". Despite what they are called, the names of the magic types do not necessarily associate with any kind of \"moral alignment\". Black magic could be used for good just as easily as white magic could be used for evil. However, most demons prefer black magic, and those who fight them tend to prefer white magic. The primary difference between them is where the magic’s power is drawn from. Black Magic is drawn from the emotions and feelings of the body, while White Magic comes from the thoughts of the mind.");
 			headerSub("Black Magic");
@@ -875,12 +571,9 @@ package classes.Scenes
 			outputText("It's not so easy to describe what exactly is Grey Magic. What is sure is that it's magic that require outstanding intelligence to even understand basic principles of it. Most of it spells are as one can say 'grey' not differencing between good or bad, pure and corrupted. Their in most cases cause almost monumental effects like attacking huge areas of battlefield, deal unbelievable amount of the damage to a single target or cause other bizarre things like unnatural even for Mareth standards transformations. Source of this magic is also quite unclear as it drawn at same time from sources used by both White and Black magic requiring caster to be not too horny or not too calm to use them. Some mages even jokes saying that all White and Black magic spells actually came from some of old grey magic spell after loosing much of it former power and becoming too much attuned to calm or horny casters. How much truth is in that only true Grey Archmages could only know.");
 			headerSub("White Magic");
 			outputText("The power of White Magic is drawn from the mind, but is more often called the power of the soul. White Magic is considered \"stronger\" than Black Magic because it can be used to create energy from nothing or heal the body. Users of White Magic can blind their opponent with dazzling lights, burn them with pure white flames, or even magnetically charge weapons and armor to repel each other, making them more resistant to attacks. White Magic requires significant mental discipline and awareness, and becomes impossible to cast if the user is greatly distressed or aroused. ");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryManticores():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Manticores";
-			clearOutput();
 			headerMain("Manticores");
 			outputText("<b>Genders:</b> Exclusively female\n");
 			outputText("<b>Height:</b> 5 to 6 feet tall.\n");
@@ -899,12 +592,9 @@ package classes.Scenes
 			headerSub("Venom Effects");
 			outputText("Their venom is a powerful aphrodisiac which causes the body to grow more sluggish and aroused with each intake. Furthermore it has the property of massively increasing one's cum production for a short time.  If ingested through the mouth, it can be used as a transformative.");			
 			outputText("\n\n(Written By: Liadri)");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryMinotaurs():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Minotaurs";
-			clearOutput();
 			headerMain("Minotaurs");
 			outputText("<b>Genders:</b> Male\n");
 			outputText("<b>Height:</b> 7 to 10 feet tall.\n");
@@ -923,12 +613,9 @@ package classes.Scenes
 			outputText("Most beings think of minotaurs as stupid brutes, but in truth their intelligence rivals that of humans. This misconception is perpetuated by the fact that minotaurs place a much higher priority on their self-reliance, strength, and sexual release than other races, often leading them to ignore social graces in favor of trying to overpower those around them.");
 			headerSub("Minitaurs");
 			outputText("The bastard runts of the minotaur race, Minitaurs are rare human-sized minotaurs born with straw colored fur and none of the muscular fitness indicative of the rest of the race. Possessing curvy (but breast-less) bodies, they often wind up as cum receptacles for their larger over-bearing cousins. They do not share ‘release’ problem, but tend to have sexual equipment of similar size to normal minotaurs. This makes them a bit disproportional, but much easier for full-minotaurs to catch. They rarely try to escape anyways, due to the addictive and drug-like nature of large doses of minotaur spunk. ");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryNagas():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Nagas";
-			clearOutput();
 			headerMain("Nagas");
 			outputText("<b>Genders:</b> Male, Female\n");
 			outputText("<b>Length:</b> Varies a lot. 10-12 feet is considered as average. There are no noticeable size difference between males and females.\n");
@@ -947,12 +634,9 @@ package classes.Scenes
 			outputText("The stereotype portrays Nagas as very narcissistic and eccentric, often wearing ornaments made of precious metals and fine fabrics. In reality, Nagas are very modest and are taught that the only valuable things in life are those that can benefit to everyone. Not counting emotional attachment, they usually don’t value what they own. They believe that all Nagas are related in some way and highly respect each other. Nagas rarely come in contact with other sapient species both due to the fact that they live in very inhospitable regions and because of the complex language barrier that refrains them from properly communicating with anyone else.");
 			outputText("\n\n(ElAcechador – Author of the desert’s Naga girl.)");
 			outputText("\n\n(<b>Fenoxo's Note:</b> Player Nagas still have butt-cheeks and their rectum (damn near killed him!) on the back because Fen likes his girls to have junk in the trunk. And also he doesn’t want to rewrite all the anal scenes.");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryOrcs():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Orcs";
-			clearOutput();
 			headerMain("Orcs");
 			outputText("<b>Genders:</b> Children are born as boys or girls. It is rare to see an Orc that is both or neither of these, they are very similar to humans in this respect. They do not typically practice gender alteration.\n");
 			outputText("<b>Body structure:</b> On average they are taller and wider than humans. It’s been recorded that some Orc men have reached 10 feet tall, though most stop developing at around 7 feet and women are on average a few inches shorter.\n");
@@ -965,12 +649,9 @@ package classes.Scenes
 			headerSub("Courtship");
 			outputText("Men and women are on equal ground socially. It is equally common to see a female dominate a male as it is to see vise versa. When the dominatrix is in question usually the pair (or party) will decide through a wrestling match or various other forms of physical combat. The most common relationship practiced is two men with one female. The female serves as a means of reproduction while the two men compete with each other over her affections. The only notable difference between Orcish men and women is when weakness is taken into account. It is looked down upon within Orcish culture to breed with a weak female, or letting a weak male breed with a female. Even in their peaceful culture, breeding with partners that increase the chances of weak offspring is looked down upon. There seem to be no moral trappings for a dominate male to take a weaker, submissive male or two for himself, since the possibility of breeding is impossible. Without a potentially weak offspring there is no fear of cultural backlash.");
 			outputText("\n\n(By: Donto) ");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryRaijus():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Raijus";
-			clearOutput();
 			headerMain("Raijus");
 			outputText("<b>Genders:</b> Male, Female\n");
 			outputText("<b>Height:</b> 5 to 6 feet tall\n");
@@ -988,12 +669,9 @@ package classes.Scenes
 			headerSub("Storm jewels");
 			outputText("Sometime raiju electricity will somehow coalesce into a crystal known as a storm jewel. A Storm jewel can be used as a potent energy source if well handled but its volatility makes it hazardous to use as it can accidentally dissolve back into lightning and discharge itself on whatever unsuspecting individuals holds it.");
 			outputText("\n\n(Written By: Liadri)");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryRhinos():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Rhinos";
-			clearOutput();
 			headerMain("Rhino-Morphs");
 			outputText("<b>Genders:</b> Male, Female\n");
 			outputText("<b>Height:</b> 7 feet 6 inches to 8 feet 6 inches\n");
@@ -1013,12 +691,9 @@ package classes.Scenes
 			headerSub("Corruption");
 			outputText("Initially the demons learned to fear the rhino morphs. They took in survivors from other villages into their nomadic crashes and protected them with their tough hide and weapon like horns. Yet ultimately their dualistic nature caused them to trust demons that didn’t show themselves to be aggressive. This allowed the demons to walk among them. One thing lead to another and eventually the corruption swept through the crashes like a million birds of prey felling a field of mice petrified with fear.");
 			outputText("\n\nDespite the corruption they still form married pairs but they are never monogamous.  Their once great love of their offspring has been completely changed and now they tend to not produce offspring by choice, the males and females have evolved corrupt organs that reduce fertility.");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntrySalamanders():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Salamanders";
-			clearOutput();
 			headerMain("Salamanders");
 			outputText("<b>Genders:</b> Males and Females occur naturally, though transformative items leave none too few Salamanders as hermaphrodites or genderless.\n");
 			outputText("<b>Body structures:</b> Salamanders stand taller than most humans – usually between 6.5 and 7 feet tall. They have human-like bodies, though their forearms and legs, up to the mid-thigh, are covered in thick, leathery red scales. Their hands and feet have powerful claws that, combined with the natural strength of a Salamander, allows them to easily rend through even some metals. Salamanders also possess a long, prehensile tail that is usually alight with a burning fire.\n");
@@ -1033,12 +708,9 @@ package classes.Scenes
 			headerSub("History");
 			outputText("One of Mareth’s less civilized races, even before the demon invasion, the Salamanders lived in hunter-gatherer tribes in the wide open plains, foothills, and mountains. Though exceedingly violent, the Salamanders destructive tendencies were kept in check by the savage gnolls, and the two races have shared a bond of mutual hatred for centuries. They will attack each other on sight, and their bloody battles have kept both races from posing a serious threat to the civilizations of Mareth before the demons, and to Lethice after their arrival.");
 			outputText("\n\n(Written by: Savin) ");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntrySandWitches():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "SandWitches";
-			clearOutput();
 			headerMain("Sand Witches");
 			outputText("<b>Genders:</b> Exclusively female\n");
 			outputText("<b>Height:</b> Sand Witches are typically five to six feet tall.\n");
@@ -1054,12 +726,9 @@ package classes.Scenes
 			outputText("Sand Witches live in remote covens deep in the desert. While the specifics of the living arrangements that far out are unknown, it is known that the covens tend to be comprised of at least 25 members, each lead by a leader with the title of ‘Sand-Mother’. The cults are governed together by a council of the 7 Sand-Mothers with the largest covens.");
 			headerSub("Special attributes");
 			outputText("Sand Witches are adept users of black AND white magic, and will use the combination to arouse their foes into submission, and then alter them into a form more like their own. They are not necessarily hostile, and will treat any they encounter nicely if they allow the witch to work her magic on them. ");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntrySatyrs():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Satyrs";
-			clearOutput();
 			headerMain("Satyrs");
 			outputText("<b>Genders:</b> Males (Females used to exist)\n");
 			headerSub("Backstory");
@@ -1076,12 +745,9 @@ package classes.Scenes
 			outputText("Once exposed to the outer world, the satyr's corrupted body rapidly matures until it attains full reproductive adulthood - puberty. Invariably, it will flatter its mother and offer to leave them \"something to remember him by\", but it retains enough civility to not become violent if they turn down this initial offer. On subsequent meetings, though, the new satyr will strive to incapacitate them and rape them into pregnancy once more.\n");
 			headerSub("General behavior (Post-corruption)");
 			outputText("Satyrs are now highly anti-social creatures; when two satyrs meet, invariably, the stronger one will dominate and impregnate the weaker one. They still love to feast and to party, but do so in gluttonous, debauched revels. They are notorious as bandits and thieves, stealing anything they can make off with and assaulting travelers for goods and breeding partners. They are often allied with goblins, one of the few races that can stand to be around them as they are now, with the satyr trading its considerable talents as a stud in exchange for food and liquor. The only reason satyrs as a whole have not sold themselves into slavery to the goblins is because, for many, the ever-increasing supply of willing sluts doesn’t outweigh the fact they can’t breed any sons with goblins.");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntrySharkGirls():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "SharkGirls";
-			clearOutput();
 			headerMain("Shark-Girls & Tigershark-Girls");
 			outputText("<b>Genders:</b> Mostly female, though there are males and herms. Due to the nature of their conception, the vast majority of tiger sharks are hermaphrodites.\n");
 			outputText("<b>Height:</b> 5-6 feet tall. Tiger sharks are primarily in the 6 foot region.\n");
@@ -1098,12 +764,9 @@ package classes.Scenes
 			outputText("Despite their slutty nature, shark girls have rather modest endowments in comparison to other such creatures; the majority of them are C-cups, D-cups at most. Though, their hips and buttocks are nice and curvy. Tiger shark girls possess wildly varying bustlines that are larger than their 'sisters', and usually are hyper-endowed with male genitalia.");
 			headerSub("History");
 			outputText("Before the corruption truly began, the Shark people were a normal fishing community that lived by the lake. They respected and admired marine life so much that they used magic to morph their forms, allowing them to live both under the sea and on dry land. As the demons began to take control, the Shark people retreated into the lake water to avoid the taint. It was only through sheer bad luck that they wound up as they are now; when the factory was constructed, the chemical run-off was funneled into the lake, causing a drastic change to the mindset of the Shark people and making them near-constantly horny. Those who swam too close to the pollutants found their bodies morphed in unexpected ways, becoming what are now known as tiger shark girls. Even if the factory were to be destroyed, it would take generations for the shark girls to fully lose the effects.");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntrySuccubus():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Succubus";
-			clearOutput();
 			headerMain("Succubus");
 			outputText("<b>Genders:</b> Exclusively female.\n");
 			outputText("<b>Height:</b> Varies\n");
@@ -1121,12 +784,9 @@ package classes.Scenes
 			outputText("A Succubus' Milk can be an extraordinarily powerful aphrodisiac when drank straight from the source. If it is stored, the aphrodisiacal properties rapidly diminish while its mutagenic properties rapidly rise. Some more powerful succubi are able to use their milk with black magic in order to work changes on their partners.");
 			headerSub("Feeding");
 			outputText("Like most demons, Succubi gain power from corrupting others, and require a steady supply of sexual fluids to survive. In rare cases, if a Succubus has been deprived of ‘food’ for too long, she may find herself too weak to seduce a partner, and enter into an less than advantageous agreement in order to get her food. Amazingly, most succubi will hold themselves to such an agreement after 'eating' their fill. ");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryTrolls():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Trolls";
-			clearOutput();
 			headerMain("Trolls");
 			outputText("<b>Genders:</b> Male, Female.\n");
 			outputText("<b>Height:</b> 7’3 - 7’9\". Females generally tend to be slightly shorter.\n");
@@ -1145,12 +805,9 @@ package classes.Scenes
 			headerSub("Other Notes");
 			outputText("Trolls are exceptionally strong, quick and intelligent. Trolls have the natural ability to regenerate damaged limbs and parts of their body, this can be halted with extreme injury or applications of fire, acid or other volatile elements All female trolls exude a pheromone cloud once matured, the cloud will cause males to become attracted to the female. This cloud affects males of any race, females are unaffected. The cloud is more potent depending on the female’s sex drive. This helps a female troll secure a mate. When a female troll has successfully claimed a mate, the male troll becomes extremely receptive to their female’s pheromones. A male troll’s sex drive is almost completely dependant on their mate. While it is uncommon, a female troll can  subdue multiple mates, this will cause aggression between males.");
 			outputText("\n\nEven less common is homosexuality, as a female troll’s pheromones are generally powerful enough to unite two trolls of the opposite gender.");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryBehemoth():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Behemoth";
-			clearOutput();
 			headerMain("Behemoths");
 			outputText("<b>Genders:</b> Male.\n");
 			outputText("<b>Height:</b> Typically 8 to 10 feet, but 11 feet is not unheard of.\n");
@@ -1165,12 +822,9 @@ package classes.Scenes
 			outputText("Like the satyrs, the behemoth are all-male race. Unlike satyrs, they are incapable of impregnating males. To reproduce, they rely on the females of other races as long as they are pure. Gestation period typically lasts two months, much longer than the typical gestation period in Mareth, and it takes two years for the newborn behemoth to fully mature into an adult.");
 			headerSub("Social structure");
 			outputText("Behemoths typically live in villages and caves. The leadership of tribes are determined by which is the strongest of all. Once a year, they host \"Feats of Strength\", a contest consisting of several gauntlets and competitions. Among one of them is the \"Cum-Out\" where the objective is for the behemoths to cum as much as they can in a single orgasm.");
-			setCodexMenusAfterDisplay();
 		}
 		
 		private function codexEntryZebras():void {
-			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Zebras";
-			clearOutput();
 			headerMain("Zebra-morphs");
 			outputText("<b>Genders:</b> Male, Female\n");
 			outputText("<b>Height:</b> 5 feet 5 inches to 6 feet\n");
@@ -1191,7 +845,6 @@ package classes.Scenes
 			headerSub("Natural enemies");
 			outputText("Zebra-morphs show great anxiety when near lion-morphs since millennia have passed where they were the prey to the lion-morphs.");
 			outputText("\n\n(Written by: Rycharde) ");
-			setCodexMenusAfterDisplay();
 		}
 	}
 }
