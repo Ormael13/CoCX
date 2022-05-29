@@ -386,6 +386,7 @@ public class CoC extends MovieClip
         Races.load();
         trace("Initializing perks");
         PerkLib.initDependencies();
+		perkTree = new PerkTree();
         mainMenu.mainMenu();
         this.stop();
 
