@@ -1063,11 +1063,11 @@ private function InternalMutations():void {
 		outputText("\"<i>Did you bring gems or find a vial of the mutagen?</i>\" she asks.\n\n");
 		outputText("Her eyes briefly graze your form, \"<i>It looks like the only that way we can do anything about that 'unhealthy drive' of yours is with a little mutation.</i>\" She snickers softly as she waits for your response.");
 		menu();
-		addButton(0, "Back", meetEvangeline);
-		if (player.gems >= 500) addButton(2, "Gems", InternalMutationsGemsOrMutagen, 1);
-		else addButtonDisabled(2, "Gems", "Gotta get that 500 gems first.");
-		if (player.hasItem(useables.E_ICHOR, 1)) addButton(4, "Mutagen", InternalMutationsGemsOrMutagen, 2);
-		else addButtonDisabled(4, "Mutagen", "Gotta get that vial of mutagen first.");
+		if (player.gems >= 500) addButton(1, "Gems", InternalMutationsGemsOrMutagen, 1);
+		else addButtonDisabled(1, "Gems", "Gotta get that 500 gems first.");
+		if (player.hasItem(useables.E_ICHOR, 1)) addButton(3, "Mutagen", InternalMutationsGemsOrMutagen, 2);
+		else addButtonDisabled(3, "Mutagen", "Gotta get that vial of mutagen first.");
+		addButton(14, "Back", meetEvangeline);
 	}
 }
 private function InternalMutationsNie():void {

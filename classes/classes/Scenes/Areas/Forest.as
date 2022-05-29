@@ -14,6 +14,7 @@ import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.AikoScene;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.JojoScene;
+import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.Places.WoodElves;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
@@ -464,6 +465,13 @@ use namespace CoC;
 						   && player.hasCock()
 						   && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16
 						   && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3;
+				}
+			}, {
+				name	: "Tyrania_and_Flitzy",
+				chance	: 0.6,
+				call	: SceneLib.tyrania.TyraniaAndFlitzyScene,
+				when	: function():Boolean {
+					return TyrantiaFollower.TyrantiaFollowerStage > 0;
 				}
 			}, {
 				name: "faerie",

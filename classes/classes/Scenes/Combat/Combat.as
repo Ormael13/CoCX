@@ -3549,9 +3549,9 @@ public class Combat extends BaseContent {
                 else doPhysicalDamage(damage, true, true);
                 if (crit) {
 					outputText(" <b>*Critical Hit!*</b>");
-					archeryXP(1);
+					archeryXP(rangeMasteryEXPgained(true));
 				}
-				archeryXP(1);
+				else archeryXP(rangeMasteryEXPgained());
                 outputText("\n\n");
 				WeaponRangeStatusProcs();
                 checkAchievementDamage(damage);
@@ -3573,8 +3573,8 @@ public class Combat extends BaseContent {
 					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) doWindDamage(damage, true, true);
 					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) doEarthDamage(damage, true, true);
                     else doPhysicalDamage(damage, true, true);
-					if (crit) archeryXP(1);
-					archeryXP(1);
+					if (crit) archeryXP(rangeMasteryEXPgained(true));
+					else archeryXP(rangeMasteryEXPgained());
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
 				WeaponRangeStatusProcs();
@@ -3925,13 +3925,28 @@ public class Combat extends BaseContent {
 				doWindDamage(damage, true, true);
                 break;
         }
-		if (crit) {
-			outputText(" <b>*Critical Hit!*</b>");
-			if (player.weapon == weapons.MGSWORD) swordXP(1);
-			else throwingXP(1);
+		if (player.weapon == weapons.MGSWORD) {
+			var swordEXPgains:Number = 1;
+			if (player.hasPerk(PerkLib.MeleeWeaponsMastery)) swordEXPgains += 2;
+			if (monster.short == "training dummy" && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) {
+				swordEXPgains *= 2;
+				if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 2) swordEXPgains *= 2.5;
+				if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 3) swordEXPgains *= 2;
+			}
+			if (crit) {
+				swordEXPgains *= 2;
+				if (player.hasPerk(PerkLib.MeleeWeaponsMasteryEx)) swordEXPgains *= 2;
+				outputText(" <b>*Critical Hit!*</b>");
+			}
+			swordXP(swordEXPgains);
 		}
-		if (player.weapon == weapons.MGSWORD) swordXP(1);
-		else throwingXP(1);
+		else {
+			if (crit) {
+				outputText(" <b>*Critical Hit!*</b>");
+				throwingXP(rangeMasteryEXPgained(true));
+			}
+			else throwingXP(rangeMasteryEXPgained());
+		}
 		WrathGenerationPerHit1(5);
         heroBaneProc(damage);
         if (monster.HP <= monster.minHP()) {
@@ -4049,9 +4064,9 @@ public class Combat extends BaseContent {
                     doPhysicalDamage(damage, true, true);
                     if (crit) {
                         outputText(" <b>*One or more of the projectile did a Critical Hit!*</b>");
-                        throwingXP(1);
+                        throwingXP(rangeMasteryEXPgained(true));
                     }
-                    throwingXP(1);
+                    else throwingXP(rangeMasteryEXPgained());
                     outputText("\n\n");
 					WeaponRangeStatusProcs();
                     doNext(endHpVictory);
@@ -4060,8 +4075,8 @@ public class Combat extends BaseContent {
                     if (!MSGControll) {
                         outputText(" ");
                         doPhysicalDamage(damage, true, true);
-                        if (crit) throwingXP(1);
-                        throwingXP(1);
+                        if (crit) throwingXP(rangeMasteryEXPgained(true));
+                        else throwingXP(rangeMasteryEXPgained());
                     }
                     if (crit) hasCritAtLeastOnce = true;
 					WeaponRangeStatusProcs();
@@ -4240,9 +4255,9 @@ public class Combat extends BaseContent {
                 doPhysicalDamage(damage, true, true);
                 if (crit) {
 					outputText(" <b>*Critical Hit!*</b>");
-					throwingXP(1);
+					throwingXP(rangeMasteryEXPgained(true));
 				}
-				throwingXP(1);
+				else throwingXP(rangeMasteryEXPgained());
                 outputText("\n\n");
                 doNext(endHpVictory);
                 return;
@@ -4250,8 +4265,8 @@ public class Combat extends BaseContent {
                 if (!MSGControll) {
                     outputText(".  It's clearly very painful. ");
                     doPhysicalDamage(damage, true, true);
-					if (crit) throwingXP(1);
-					throwingXP(1);
+					if (crit) throwingXP(rangeMasteryEXPgained(true));
+					else throwingXP(rangeMasteryEXPgained());
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
                 outputText("\n\n");
@@ -4515,12 +4530,12 @@ public class Combat extends BaseContent {
                 doPhysicalDamage(damage, true, true);
                 if (crit) {
 					outputText(" <b>*Critical Hit!*</b>");
-					firearmsXP(1);
+					firearmsXP(rangeMasteryEXPgained(true));
 				}
-				firearmsXP(1);
+				else firearmsXP(rangeMasteryEXPgained());
 				if (player.weaponRangePerk == "Dual Firearms") {
-					if (crit) dualWieldFirearmsXP(1);
-					dualWieldFirearmsXP(1);
+					if (crit) dualWieldFirearmsXP(rangeMasteryEXPgained(true));
+					else dualWieldFirearmsXP(rangeMasteryEXPgained());
 				}
                 outputText("\n\n");
                 doNext(endHpVictory);
@@ -4529,11 +4544,11 @@ public class Combat extends BaseContent {
                 if (player.isInGoblinMech() && (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0)) {
                     outputText(".  It's clearly very painful. ");
                     doPhysicalDamage(damage, true, true);
-					if (crit) firearmsXP(1);
-					firearmsXP(1);
+					if (crit) firearmsXP(rangeMasteryEXPgained(true));
+					else firearmsXP(rangeMasteryEXPgained());
 					if (player.weaponRangePerk == "Dual Firearms") {
-						if (crit) dualWieldFirearmsXP(1);
-						dualWieldFirearmsXP(1);
+						if (crit) dualWieldFirearmsXP(rangeMasteryEXPgained(true));
+						else dualWieldFirearmsXP(rangeMasteryEXPgained());
 					}
 					if (player.weaponRange == weaponsrange.M1CERBE) {
 						if (player.hasPerk(PerkLib.AmateurGunslinger)) doPhysicalDamage(damage, true, true);
@@ -4556,11 +4571,11 @@ public class Combat extends BaseContent {
 								if (player.hasPerk(PerkLib.MasterGunslinger) && player.hasPerk(PerkLib.LockAndLoad)) doPhysicalDamage(damage, true, true);
 							}
 						}
-						if (crit) firearmsXP(1);
-						firearmsXP(1);
+						if (crit) firearmsXP(rangeMasteryEXPgained(true));
+						else firearmsXP(rangeMasteryEXPgained());
 						if (player.weaponRangePerk == "Dual Firearms") {
-							if (crit) dualWieldFirearmsXP(1);
-							dualWieldFirearmsXP(1);
+							if (crit) dualWieldFirearmsXP(rangeMasteryEXPgained(true));
+							else dualWieldFirearmsXP(rangeMasteryEXPgained());
 						}
                     }
                     if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -15889,6 +15904,21 @@ public class Combat extends BaseContent {
 		var fwsc:Number = 500;
 		if (player.perkv1(PerkLib.Dantain) > 2) fwsc -= 100;
 		return fwsc;
+	}
+	
+	public function rangeMasteryEXPgained(crit:Boolean = false):Number {
+		var rangeMasteryEXPgains:Number = 1;
+		if (player.hasPerk(PerkLib.RangeWeaponsMastery)) rangeMasteryEXPgains += 2;
+		if (monster.short == "training dummy" && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) {
+			rangeMasteryEXPgains *= 2;
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 2) rangeMasteryEXPgains *= 2.5;
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 3) rangeMasteryEXPgains *= 2;
+		}
+		if (crit) {
+			rangeMasteryEXPgains *= 2;
+			if (player.hasPerk(PerkLib.RangeWeaponsMasteryEx)) rangeMasteryEXPgains *= 2;
+		}
+		return rangeMasteryEXPgains;
 	}
 	
 	public function bonusCriticalDamageFromMissingHP():Number {

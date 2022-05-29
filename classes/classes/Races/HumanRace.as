@@ -9,6 +9,8 @@ import classes.VaginaClass;
 public class HumanRace extends Race {
 	public function HumanRace(id:int) {
 		super("Human", id);
+		chimeraTier = 0;
+		grandChimeraTier = 0;
 	}
 	
 	override public function setup():void {

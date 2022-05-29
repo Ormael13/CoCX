@@ -50,16 +50,26 @@ public function neisaMorningPaycheckCall():void {
 	//spriteSelect(SpriteDb.s_isabella);
 	outputText("\n");
 	if (flags[kFLAGS.NEISA_FOLLOWER] == 17) {
-		outputText("Neisa sighs in disappointment when she realises you are short "+(9 - flags[kFLAGS.SPIRIT_STONES])+" spirit stones.\n\n");
-		outputText("\"<i>Why now, you forgot to go change gems for spirit stones? That's fine but until you pay the debt you owe me I'm staying back at the inn.</i>\"\n\n");
-		outputText("(<b>Neisa has been removed from Followers menu!</b>)\n\n");
-		flags[kFLAGS.NEISA_AFFECTION] = 0;
-		flags[kFLAGS.NEISA_FOLLOWER] = 6;
+		if (flags[kFLAGS.SPIRIT_STONES] > 9) {
+			outputText("You pay the spirit stone you owe Neisa as she comes over to collect.\n\n");
+			outputText("\"<i>Better later than never. Please try and be on point for the next pay I shouldn't have to remind you three times in a row.</i>\"\n\n");
+			flags[kFLAGS.SPIRIT_STONES] -= 10;
+			flags[kFLAGS.NEISA_FOLLOWER] = 7;
+		}
+		else {
+			outputText("Neisa sighs in disappointment when she realises you are short "+(10 - flags[kFLAGS.SPIRIT_STONES])+" spirit stones.\n\n");
+			outputText("\"<i>Why now, you forgot to go change gems for spirit stones? That's fine but until you pay the debt you owe me I'm staying back at the inn.</i>\"\n\n");
+			outputText("(<b>Neisa has been removed from Followers menu!</b>)\n\n");
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") flags[kFLAGS.PLAYER_COMPANION_1] = "";
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa") flags[kFLAGS.PLAYER_COMPANION_2] = "";
+			flags[kFLAGS.NEISA_AFFECTION] = 0;
+			flags[kFLAGS.NEISA_FOLLOWER] = 6;
+		}
 	}
 	else if (flags[kFLAGS.NEISA_FOLLOWER] == 16) {
 		if (flags[kFLAGS.SPIRIT_STONES] > 8) {
 			outputText("You pay the spirit stone you owe Neisa as she comes over to collect.\n\n");
-			outputText("\"<i>Better late than never. Please try and be on point for the next pay I shouldn't have to remind you 3 times in a row.</i>\"\n\n");
+			outputText("\"<i>Better late than never. Please try and be on point for the next pay I shouldn't have to remind you two times in a row.</i>\"\n\n");
 			flags[kFLAGS.SPIRIT_STONES] -= 9;
 			flags[kFLAGS.NEISA_FOLLOWER] = 7;
 			neisaAffection(0.5);

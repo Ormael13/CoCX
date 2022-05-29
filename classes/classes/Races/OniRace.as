@@ -20,8 +20,6 @@ public class OniRace extends Race {
 				.legType(LowerBody.ONI, +1)
 				.eyeTypeAndColor(Eyes.ONI, ANY(OniEyeColors), +1)
 				.skinBasePattern(Skin.PATTERN_BATTLE_TATTOO, +1)
-				.noRearBody(+1)
-				.noTail(+1)
 				.tone(AT_LEAST(80),+1)
 				.customRequirement("",'vagina and H+ tits or 19\"+ long cock',
 						function (body:BodyData):Boolean {
@@ -29,6 +27,8 @@ public class OniRace extends Race {
 						}, +1)
 				.height(AT_LEAST(108), +1);
 		addScoresAfter(4)
+				.noRearBody(+1)
+				.noTail(+1)
 				.tone(AT_LEAST(120), +1);
 		addScoresAfter(8)
 				.tone(AT_LEAST(160), +1);

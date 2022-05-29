@@ -5482,9 +5482,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 				else doDamage(damage, true, true);
 				if (crit) {
 					outputText(" <b>*Critical Hit!*</b>");
-					combat.archeryXP(1);
+					combat.archeryXP(combat.rangeMasteryEXPgained(true));
 				}
-				combat.archeryXP(1);
+				else combat.archeryXP(combat.rangeMasteryEXPgained());
 				outputText("\n\n");
 				checkAchievementDamage(damage);
 				flags[kFLAGS.ARROWS_SHOT]++;
@@ -5506,8 +5506,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) doWindDamage(damage, true, true);
 					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) doEarthDamage(damage, true, true);
 					else doDamage(damage, true, true);
-					if (crit) combat.archeryXP(1);
-					combat.archeryXP(1);
+					if (crit) combat.archeryXP(combat.rangeMasteryEXPgained(true));
+					else combat.archeryXP(combat.rangeMasteryEXPgained());
 				}
 				if (crit) outputText(" <b>*Critical Hit!*</b>");
 				combat.WrathGenerationPerHit1(5);
