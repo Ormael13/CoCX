@@ -17,7 +17,7 @@ public class PrisonLetters extends BaseContent
 				outputText("\n\nEventually, a newborn cow-girl comes out of your womb and into your cell; Marble would love to see them. You call for Mistress Elly and she rushes to your cell to see the newborn cow-girl. \"<i>Don't worry. I promise your newborn cow-girl will be delivered to Marble. I've ordered two imps to carry her,</i>\" she says. Two imp guards come into your cell to take away the newborn cow-girl. Hopefully you'll receive a letter.");
 				outputText("\n\n<b>Some time passes...</b>");
 				letterFromMarbleAfterGivingBirth();
-				flags[kFLAGS.MINERVA_CHILDREN] += 2;
+				flags[kFLAGS.MARBLE_KIDS]++;
 			}
 			if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA) {
 				outputText("\n\nEventually, the twin sirens come out of your womb and into your cell; Minerva would love to see them. You call for Mistress Elly and she rushes to your cell to see the newborn sirens. \"<i>Don't worry. I promise your newborn sirens will be delivered to Minerva. I've ordered two imps to carry them,</i>\" she says. Two imp guards come into your cell to take away the siren twins. Hopefully you'll receive a letter.");

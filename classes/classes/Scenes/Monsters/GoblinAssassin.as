@@ -101,17 +101,11 @@ public class GoblinAssassin extends Monster
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) SceneLib.hexindao.gaunletchallange2fight2();
-			else SceneLib.goblinAssassinScene.gobboAssassinRapeIntro1();
+			else SceneLib.goblinScene.gobboRapeIntro();
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.gender == 0) {
-				outputText("You collapse in front of the goblin, too wounded to fight.  She growls and kicks you in the head, making your vision swim. As your sight fades, you hear her murmur, \"<i>Fucking dicks can't even bother to grow a dick or cunt.</i>\"");
-				SceneLib.combat.cleanupAfterCombatImpl();
-			} 
-			else {
-				SceneLib.goblinAssassinScene.gobboAssassinBeatYaUp1();
-			}
+			SceneLib.goblinScene.gobboSpecialBeatYaUp();
 		}
 		public function GoblinAssassin(noInit:Boolean=false)
 		{

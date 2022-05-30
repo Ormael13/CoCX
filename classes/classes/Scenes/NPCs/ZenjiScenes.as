@@ -8,16 +8,13 @@ import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.ArmorLib;
-import classes.Items.UndergarmentLib;
-import classes.Scenes.Areas.HighMountains.MinervaPurification;
 import classes.Scenes.Places.TrollVillage;
-import classes.Scenes.Places.TrollVillage.YenzaEnemy;
 import classes.display.SpriteDb;
 import classes.internals.SaveableState;
+
 import coc.view.ButtonDataList;
-	
-	public class ZenjiScenes extends NPCAwareContent implements SaveableState
+
+public class ZenjiScenes extends NPCAwareContent implements SaveableState
 	{
 		public static var Z1stKid:String;
 		public static var Z2ndKid:String;
@@ -116,10 +113,7 @@ import coc.view.ButtonDataList;
 			outputText("You turn to your left and see what looks to be a tall, muscular humanoid. He is easily over 8 feet tall, standing on a tree branch and hanging onto one above him with his muscular arms over his head. He's covered head to toe in dense fuzz with a fairly long tail sprouting behind him. He is supporting a very large and intimidatingly muscular physique. You’re not quite sure who or what he could be."+(flags[kFLAGS.ROGAR_PHASE] > 0 ? " You think that perhaps he’s an orc like Ro’Gar, but he doesn’t have the same body shape, completely different facial structure and has far more fur on his body.":"")+"\n\n");
 			outputText("\"<i>Heheh, If you want to enter I don't ask for much, ya see?</i>\" he chuckles, \"<i>You can pay  a toll for de troll, 25 gems to enter, or perhaps you have something else to offer, something dat could require a lot from you if you tink you can take de challenge.</i>\"\n\n");
 			outputText("You sigh, it's pretty much the same thing, all anybody asks for in this land is either sex or gems and this alleged troll as he called himself seems no different. You consider if giving him proper payment is worth it.\n\n");
-			if (flags[kFLAGS.CODEX_ENTRY_TROLLS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_TROLLS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Trolls!</b>");
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_TROLLS);
 			menu();
 			if (player.gems >= 25) addButton(0, "Pay w Gems", part1TrollEncounterPayWithGems);
 			else addButtonDisabled(0, "Pay w Gems", "You not have enough gems!");

@@ -4,10 +4,9 @@
  */
 package classes.Scenes.NPCs 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class SonyaFollower extends NPCAwareContent
+import classes.GlobalFlags.kFLAGS;
+
+public class SonyaFollower extends NPCAwareContent
 	{
 		
 		public function SonyaFollower() 
@@ -21,10 +20,7 @@ public function firstEnc():void
 	outputText("especially with the large mane around her neck. She could pass for having a human face if not for her malicious cat-like red pupils and sharp canines. The comparison to a cat ends there, due to the pair of large leathery wings that rest on her back.  Where you would have expected a cat tail a scorpion-like chitin covered tail grows. It ends in a bulbous tip crowned with sharp bony spikes, ");
 	outputText("akin to those that nearly hit you earlier. She smirks sadistically, dropping down on all fours to point her tail at you.");
 	outputText("\n\nYou're under attack by a Manticore!");
-	if (flags[kFLAGS.CODEX_ENTRY_MANTICORES] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_MANTICORES] = 1;
-		outputText("\n\n<b>New codex entry unlocked: Manticore!</b>")
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_MANTICORES);
 	startCombat(new Sonya());
 	doNext(playerMenu);
 }

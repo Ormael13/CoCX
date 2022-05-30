@@ -7,7 +7,6 @@ import classes.*;
 import classes.BodyParts.Antennae;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
-import classes.Items.Armors.SuccubusArmor;
 import classes.Items.Weapon;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.SceneLib;
@@ -137,10 +136,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 				//(typical lust gain and temporary stat damage, start combat)
 			}
 			outputText("You are fighting an anemone!");
-			if (flags[kFLAGS.CODEX_ENTRY_ANEMONES] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_ANEMONES] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Anemones!</b>")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_ANEMONES);
 			if (flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] == 1) {
 				var anemone:Anemone = new Anemone();
 				startCombat(anemone);

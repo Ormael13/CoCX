@@ -2,9 +2,6 @@
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.Armor;
-import classes.Items.HeadJewelry;
-import classes.Scenes.Dungeons.DeepCave.ValaScene;
 import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.TelAdre.*;
@@ -637,10 +634,7 @@ public function carpentryShopEntry():void {
     spriteSelect(SpriteDb.s_carpenter);
 	outputText("You enter the shop marked by a sign with hammer and saw symbol painted on it. There are array of tools all hung neatly. A six feet tall zebra-morph stallion stands behind the counter. He appears to be wearing typical lumberjack outfit.\n\n");
 	outputText("\"<i>Welcome to my hardware shop dear customer. Feel free to look around,</i>\" he says. \n\n");
-	if (flags[kFLAGS.CODEX_ENTRY_ZEBRAS] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_ZEBRAS] = 1;
-		outputText("<b>New codex entry unlocked: Zebras!</b>")
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_ZEBRAS);
 	doNext(carpentryShopInside);
 }
 
@@ -1122,11 +1116,7 @@ public function kaibaShopMainMenu():void {
 	outputText("You enter the  shop. Its sign hanging overhead proudly displaying:  <i>'Kaiba odds and ends, the accessory for YOU!’</i> Inside there are many stalls lining the walls in multiple directions. Each stall hosts various strange items put on display. Most of them you can identify as accessory and wondrous items, but others are perplexing.\n\n");
 	outputText("While browsing the stalls, the owner almost silently creeps up on you. You turn in time to meet with his greedy gaze. A Tanuki that could only be Kaiba himself, smiles at you like a cat at the mouse. He breaks the awkward silence first.\n\n");
 	outputText("\"<i>Welcome to my humble shop, dear and precious customer. What need brings you here today? Are you a connoisseur looking for strange artefacts from world across, or an adventurer in need of… special equipment? I’m sure I can provide you just anything you need, for a reasonable sum of course.</i>\"\n\n");
-	outputText("Each word sounds almost like it was repeated endless times as he rub his hands together" + (silly() ? ", he even has the obvious signs of $ in his scammy shopkeeper eyes": "") + ".\n\n");/*
-	if (flags[kFLAGS.CODEX_ENTRY_] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_] = 1;
-		outputText("<b>New codex entry unlocked: !</b>")
-	}*/
+	outputText("Each word sounds almost like it was repeated endless times as he rubs his hands together" + (silly() ? ", he even has the obvious signs of $ in his scammy shopkeeper eyes": "") + ".\n\n");
 	doNext(kaibaShopMainMenu2);
 }
 
@@ -1321,10 +1311,7 @@ public function tripxiShopMainMenu():void {
 			outputText("\"<i>Welcome to Tripxi's bombs and guns emporium my name is Tripxi, how may I help you?</i>\"\n\n");
 			player.createStatusEffect(StatusEffects.TelAdreTripxi, 0, 0, 0, 0);
 		}
-		if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
-			flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
-			outputText("<b>New codex entry unlocked: Goblins!</b>")
-		}
+		camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOBLINS);
 		tripxiShopMainMenu2a();
 	}
 }

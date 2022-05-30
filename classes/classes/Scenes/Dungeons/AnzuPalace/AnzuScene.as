@@ -1181,34 +1181,30 @@ use namespace CoC;
 			outputText("\n\n\"<i>Upset? For a blowjob from my lover? Why? If anything, I should thank you. But, if you were so hungry and horny, you simply could be asked. I’m your host tonight, after all , and I’ll be more than happy to give you a cummy meal.</i>\"");
 			outputText("\n\nAnzu states, playfully poking your cum-inflated stomach. Both of you laugh for a bit and soon, thanks to the vigorous exercise and the hearty lunch in the middle of the night, you catch your sleep again, cuddled on the bigger frame of your avian friend, that falls asleep not much later.");
 			dynStats("lus", 20);
-			doNext(sleepWithAnzuProcess);
+			doNext(wakeUpWithAnzuGoodMorningBirdie);
 		}
 		
 		private function sleepingWithAnzuNoBJ():void {
 			clearOutput();
 			outputText("You shake your head and close your eyes. It takes quite a while but eventually, you succeed in catching your sleep again and make your way back to the dreamland.");
-			doNext(sleepWithAnzuProcess);
+			doNext(wakeUpWithAnzuGoodMorningBirdie);
 		}
-		
-		private function sleepWithAnzuProcess():void {
-			clearOutput();
-			CoC.instance.timeQ = 10;
-			goNext(true);
-			wakeUpWithAnzuGoodMorningBirdie();
-		}
-		private function sleepWithAnzuHeal():void {
-			CoC.instance.timeQ = 10;
+
+		private function sleepHeal(hours:int):void {
+			CoC.instance.timeQ = hours;
 			camp.sleepRecovery(true);
 			CoC.instance.timeQ = 0;
 		}
 		
 		private function wakeUpWithAnzuGoodMorningBirdie():void {
-			//outputText(images.showImage("anzu-bed-end"));
+			var timeToSleep:int = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
+			clearOutput();
+			cheatTime(timeToSleep);
+			sleepHeal(timeToSleep);
 			outputText("Reinvigorated by the refreshing sleep, you get up in the first hours of the morning, still cuddled with Anzu, that wakes up between yawns.");
 			outputText("\n\nGetting off the bed with his aid, both you get dressed, not without some frisky grope from each other in the process, and after eating the breakfast that Anzu cooks for you in the early morning, you give the avian a deep kiss, and bid him farewell, returning to the camp with a smile on your face.");
 			if (player.hunger < player.maxHunger() - 20) player.refillHunger(30);
 			else player.refillHunger(player.maxHunger() + 10 - player.hunger);
-			sleepWithAnzuHeal();
 			inDungeon = false;
 			doNext(camp.returnToCampUseOneHour);
 		}

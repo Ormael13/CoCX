@@ -1,6 +1,4 @@
 ﻿package classes {
-import classes.IMutations.*;
-import classes.Scenes.*;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
@@ -11,8 +9,9 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.*;
 import classes.Items.*;
-import classes.Scenes.Crafting;
+import classes.Scenes.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 
@@ -569,10 +568,10 @@ public class SaveUpdater extends NPCAwareContent {
 		}
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 9) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 10;
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2019] > 0 && player.hasKeyItem("Marae's Lethicite") >= 0) {
-				player.removeKeyItem("Marae's Lethicite"); //Remove the old.
-				player.createKeyItem("Marae's Lethicite", flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2019], 0, 0, 0);
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2019] = 0; //Reclaim the flag.
+			if (flags[kFLAGS.PRISCILLA_AFFECTION] > 0 && player.hasKeyItem("Marae's Lethicite") >= 0) {
+				player.removeKeyItem("Marae's Lethicite");
+				player.createKeyItem("Marae's Lethicite", flags[kFLAGS.PRISCILLA_AFFECTION], 0, 0, 0);
+				flags[kFLAGS.PRISCILLA_AFFECTION] = 0;
 			}
 		}
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 10) {
@@ -1739,8 +1738,7 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.005;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.006) {
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02985] != 0) //reset SFW mode flag just in case
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02985] = 0;
+				flags[kFLAGS.PRISCILLA_THREESOME_COUNTER] = 0; //reset SFW mode flag just in case
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.006;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.007) {
@@ -1790,13 +1788,13 @@ public class SaveUpdater extends NPCAwareContent {
 					Crafting.BagSlot03Cap = 5;
 					Crafting.BagSlot04Cap = 5;
 				}
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2019] = 0; // Reclaim lethicite flag AGAIN.
+				flags[kFLAGS.PRISCILLA_AFFECTION] = 0; // Reclaim lethicite flag AGAIN. Now used for Priscilla
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.012;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.013) {
-				//resetting Sanura riddle flags
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0842] = 0;
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_0843] = 0;
+				//resetting Sanura riddle flags (already reclaimed)
+				flags[kFLAGS.PRISCILLA_WRESTLE_COUNTER] = 0;
+				flags[kFLAGS.PRISCILLA_FOREPLAY_COUNTER] = 0;
 				flags[kFLAGS.DESERT_CAVE_DISABLED] = 0;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.013;
 			}
@@ -1884,6 +1882,12 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.020) {
 				if (flags[kFLAGS.IZUMI_MET] > 0 && !TyrantiaFollower.TyraniaAndIzumi && TyrantiaFollower.TyrantiaFollowerStage > 0) TyrantiaFollower.TyraniaAndIzumi = true;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.020;
+			}
+			//Flag cleanup. Add it to the next save update.
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.021) {
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2033] = 0;
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2032] = 0;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.021;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

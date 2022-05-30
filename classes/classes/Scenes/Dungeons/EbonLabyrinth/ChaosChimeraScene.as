@@ -1,21 +1,18 @@
 
 package classes.Scenes.Dungeons.EbonLabyrinth
 {
-import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.BaseContent;
-import classes.Scenes.SceneLib;
 import classes.EventParser;
+import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class ChaosChimeraScene extends BaseContent {
     public function ChaosChimeraScene() {}
     
     public function encounter():void {
         clearOutput();
-        if (flags[kFLAGS.CODEX_ENTRY_CHIMERA] <= 0) {
-            flags[kFLAGS.CODEX_ENTRY_CHIMERA] = 1;
-            outputText("\n\n<b>New codex entry unlocked: Chimera!</b>");
-        }
+        camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_CHIMERA);
         outputText("You finally find the center of the labyrinth, somewhat exhausted. You can see the rose from here in all its dark beauty. As you are about to approach it, a monstrous creature lands right in front of you. This beast has no less than four heads! A dragon on the left, a lion in the center, a goat on ");
         outputText("the right and, at the tip of its tail, the head of a snake! All four heads roar a warning at you as the beast stands up on its leonine legs, easily twelve feet tall, its massive wings opening in a threatening display revealing nothing short of four erect thirty inches cock already drooling precum!\n\n");
         outputText("\"<i>Foolish intruder, you've walked to your death. You come seeking the rose? Let's see how long your search lasts once you're in the belly of the beast!</i>\"\n\n");

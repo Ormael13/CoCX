@@ -54,13 +54,10 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			else outputText("You go exploring in the swamp, and before you get far, a female spider-morph appears!  She's clearly different than the last one you ran into, though many of her features remain the same.  You realize she's no more than a dozen paces away and slowly approaching with a strange glint in her eye.\n\n");
 			//Menu for either
 			outputText("What do you do?");
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_ARACHNES);
 			simpleChoices("Fight", fightFSpiderMorph, "Try to Talk", talkToFSpiderMorph, "", null, "", null, "Leave", runFromFSpiderMorph);
 			//Incremement 'times encountered spider-girls'
 			flags[kFLAGS.TIMES_ENCOUNTERED_FEMALE_SPIDER]++;
-			if (flags[kFLAGS.CODEX_ENTRY_ARACHNES] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_ARACHNES] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Arachnes, Spider-Morphs, and Driders!</b>")
-			}
 		}
 
 		//Selecting fight starts combat and eventParsers to 1 to display the combat menu and enemy description.
