@@ -1550,33 +1550,17 @@ public class PlayerInfo extends BaseContent {
 	}
 
 	//Sub-menus for limited levelling.
-	public function lvlUpFastSubMenu():void{
+	public function lvlUpFastSubMenu():void {
 		spriteSelect(null);
 		outputText("Fast levelling, just keep clicking on the button to level up by that number. Or press LvlMax to just get all the levels.");
 		outputText("\n\nPressing \"Done\" will bring you to stat/perk allocation.");
 		menu();
-		addButton(0,"Lvl +1", lUFSM1);
-		addButton(1,"Lvl +2", lUFSM2);
-		addButton(2,"Lvl +5", lUFSM5);
-		addButton(3,"Lvl +10", lUFSM10);
-		addButton(4,"LvlMax", lUFSMX);
+		addButton(0, "Lvl +1", lUFSMM, 1);
+		addButton(1, "Lvl +2", lUFSMM, 2);
+		addButton(2, "Lvl +5", lUFSMM, 5);
+		addButton(3, "Lvl +10", lUFSMM, 10);
+		addButton(4, "LvlMax", lUFSMM, 999);
 		addButton(14, "Done", lUFSMAP);
-	}
-
-	public function lUFSM1():void{
-		lUFSMM(1);
-	}
-	public function lUFSM2():void{
-		lUFSMM(2);
-	}
-	public function lUFSM5():void{
-		lUFSMM(5);
-	}
-	public function lUFSM10():void{
-		lUFSMM(10);
-	}
-	public function lUFSMX():void{
-		lUFSMM(999);
 	}
 
 	public function lUFSMM(incmax:int = 999):void{
@@ -1916,11 +1900,9 @@ public class PlayerInfo extends BaseContent {
 	}
 	public function mutationsClear(perks:Array):Array{
 		var temp:Array = [];
-		var compMutate:Array = MutationsLib.mutationsArray("", true);
-		var compMutate2:Array = MutationsLib.mutationsArray("Deprecated", true);
-		var compMutate3:Array = IMutationsLib.mutationsArray("");
-		var compMutate4:Array = IMutationsLib.mutationsArray("Deprecated");
-		var mArray:Array = PerkMenu.arrMerge(compMutate, compMutate2, compMutate3, compMutate4);
+		var compMutate:Array = MutationsLib.mutationsArray("All", true);
+		var compMutate2:Array = IMutationsLib.mutationsArray("All");
+		var mArray:Array = PerkMenu.arrMerge(compMutate, compMutate2);
 		for each (var playerPerk:PerkType in perks){
 			if (!(mArray.indexOf(playerPerk) >= 0)){
 				temp.push(playerPerk);

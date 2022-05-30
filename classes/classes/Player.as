@@ -4368,10 +4368,7 @@ use namespace CoC;
 					else amount /= 1.5;
 				}
 			}
-			/*if(breastRows[0].breastRating > 12) {
-				if(hasPerk("Big Tits") < 0) amount/=2;
-				else amount /= 1.5;
-			}*/
+
 			if(growthType == 2) {
 				temp = 0;
 				//Start at top and keep growing down, back to top if hit bottom before done.

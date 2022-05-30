@@ -215,6 +215,7 @@ public class IMutationsLib
 					IMutationsThyroidGlands();
 					IMutationsParaThyroidGlands();
 					IMutationsAdaptations();
+					if (spec == "All") IMutationsDeprecated();
 					IMutationsList.sort();
 			}
 			return IMutationsList;
