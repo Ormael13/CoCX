@@ -3442,10 +3442,6 @@ use namespace CoC;
 		public function isPureHuman():Boolean {
 			return humanScore() >= HumanRace.maxScore;
 		}
-
-		public function finalRacialScore(score: Number, race:Race):Number {
-			return race.finalizeScore(bodyData(), score);
-		}
 		
 		public function racialScore(race:Race):int {
 			return race.totalScore(bodyData());
