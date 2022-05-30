@@ -10350,7 +10350,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockHuman(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockHuman(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Human Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -10371,6 +10371,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.HUMAN;
 
 					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HUMAN));
@@ -10382,7 +10384,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockHorse(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockHorse(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Horse Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -10410,6 +10412,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.HORSE;
 					player.cocks[cock].knotMultiplier = 1;
 					if (doOutput) outputText("<b>  Your hands are drawn to the strange new [cock "+(cock+1)+"]</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.");
@@ -10423,7 +10427,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockDog(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockDog(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Dog Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -10460,6 +10464,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					if (player.cocks[cock].knotMultiplier < 1.5) player.cocks[cock].knotMultiplier = 1.5;
 					player.cocks[cock].cockType = CockTypesEnum.DOG;
 
@@ -10472,7 +10478,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockDemon(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockDemon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Demon Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -10500,6 +10506,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					if (player.cocks[cock].cockThickness < 2)
 						player.cocks[0].cockThickness = 2;
 					player.cocks[cock].cockType = CockTypesEnum.DEMON;
@@ -10513,7 +10521,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockTentacle(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockTentacle(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Tentacle Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -10536,6 +10544,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					if (player.cocks[cock].knotMultiplier < 1.3) player.cocks[cock].knotMultiplier = 1.3;
 					player.cocks[cock].cockType = CockTypesEnum.TENTACLE;
 
@@ -10548,7 +10558,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockScylla(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockScylla(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Scylla Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -10568,6 +10578,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.SCYLLATENTACLE;
 
 					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.SCYLLATENTACLE));
@@ -10579,7 +10591,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockCat(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockCat(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Cat Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -10609,6 +10621,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].knotMultiplier = 1;
 					player.cocks[cock].cockType = CockTypesEnum.CAT;
 
@@ -10621,7 +10635,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockCancer(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockCancer(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Cancer Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -10644,6 +10658,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.CANCER;
 
 					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.CANCER));
@@ -10655,7 +10671,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockLizard(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockLizard(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Lizard Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -10710,6 +10726,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.LIZARD;
 
 					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.LIZARD));
@@ -10721,7 +10739,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockCaveWyrm(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockCaveWyrm(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Cave Wyrm Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -10745,6 +10763,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.CAVE_WYRM;
 
 					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.CAVE_WYRM));
@@ -10756,7 +10776,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockAnemone(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockAnemone(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Anemone Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -10824,6 +10844,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 
 					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.ANEMONE));
 				},
@@ -10834,7 +10856,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockKangaroo(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockKangaroo(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Kangaroo Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -10860,6 +10882,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.KANGAROO;
 
 					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.KANGAROO));
@@ -10871,7 +10895,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockDragon(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockDragon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Dragon Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -10897,6 +10921,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					if (player.cocks[cock].knotMultiplier < 1.3) player.cocks[cock].knotMultiplier = 1.3;
 					player.cocks[cock].cockType = CockTypesEnum.DRAGON;
 
@@ -10909,7 +10935,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockDisplacer(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockDisplacer(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Displacer Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -10933,6 +10959,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					if(player.cocks[cock].knotMultiplier < 1.5) player.cocks[cock].knotMultiplier = 1.5;
 					player.cocks[cock].cockType = CockTypesEnum.DISPLACER;
 
@@ -10945,7 +10973,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockFox(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockFox(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Fox Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -10982,6 +11010,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					if (player.cocks[cock].knotMultiplier < 1.5) player.cocks[cock].knotMultiplier = 1.25;
 					player.cocks[cock].cockType = CockTypesEnum.FOX;
 
@@ -10994,7 +11024,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockBee(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockBee(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Bee Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -11018,6 +11048,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.BEE;
 
 					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.BEE));
@@ -11029,7 +11061,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockPig(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockPig(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Pig Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -11049,6 +11081,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.PIG;
 
 					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.PIG));
@@ -11060,7 +11094,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockAvian(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockAvian(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Avian Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -11081,6 +11115,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.AVIAN;
 
 					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.AVIAN));
@@ -11092,7 +11128,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockRhino(cock:int = 0, length:Number = 5.5, inBlackCock:Boolean = false): Transformation {
+	public function CockRhino(cock:int = 0, length:Number = 5.5, thickness:Number = 1, inBlackCock:Boolean = false): Transformation {
 		return new SimpleTransformation("Rhino Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -11115,6 +11151,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.RHINO;
 
 					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.RHINO));
@@ -11126,7 +11164,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockEchidna(cock:int = 0, length:Number = 5.5, inBlackCock:Boolean = false): Transformation {
+	public function CockEchidna(cock:int = 0, length:Number = 5.5, thickness:Number = 1, inBlackCock:Boolean = false): Transformation {
 		return new SimpleTransformation("Echidna Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -11148,6 +11186,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.ECHIDNA;
 
 					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.ECHIDNA));
@@ -11159,7 +11199,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockWolf(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockWolf(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Wolf Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -11183,6 +11223,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					if (player.cocks[cock].knotMultiplier < 1.1) player.cocks[cock].knotMultiplier = 1.1;
 					player.cocks[cock].cockType = CockTypesEnum.WOLF;
 
@@ -11195,7 +11237,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockStamen(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockStamen(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Stamen Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -11217,6 +11259,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					if (player.cocks[cock].knotMultiplier < 1.3) player.cocks[cock].knotMultiplier = 1.3;
 					player.cocks[cock].cockType = CockTypesEnum.STAMEN;
 
@@ -11229,7 +11273,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockRedPanda(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockRedPanda(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Red Panda Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -11250,6 +11294,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.RED_PANDA;
 
 					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.RED_PANDA));
@@ -11261,7 +11307,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockGryphon(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockGryphon(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Gryphon Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -11283,6 +11329,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.GRYPHON;
 
 					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.GRYPHON));
@@ -11294,7 +11342,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockCentipede(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockCentipede(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Centipede Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -11319,6 +11367,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.OOMUKADE;
 
 					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.OOMUKADE));
@@ -11330,7 +11380,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockRaiju(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockRaiju(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Raiju Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -11350,6 +11400,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					if (player.cocks[cock].knotMultiplier < 1.25) player.cocks[cock].knotMultiplier = 1.25;
 					player.cocks[cock].cockType = CockTypesEnum.RAIJU;
 
@@ -11362,7 +11414,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockUshiOni(cock:int = 0, length:Number = 5.5): Transformation {
+	public function CockUshiOni(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
 		return new SimpleTransformation("Ushi Oni Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -11384,6 +11436,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.USHI_ONI;
 
 					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.USHI_ONI));

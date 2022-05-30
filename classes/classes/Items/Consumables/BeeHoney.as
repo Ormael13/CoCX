@@ -11,6 +11,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
+import classes.GeneticMemories.CockMem;
 import classes.Races.BeeRace;
 import classes.Scenes.Areas.Forest.BeeGirlScene;
 import classes.CoC;
@@ -20,6 +21,7 @@ import classes.Items.Consumable;
 import classes.PerkLib;
 import classes.Player;
 import classes.PregnancyStore;
+import classes.Scenes.Metamorph;
 import classes.StatusEffects;
 import classes.internals.Utils;
 
@@ -259,9 +261,7 @@ public class BeeHoney extends Consumable
 				//Begin TF
 				if (!player.hasCock()) {
 					outputText("\n\nYou double over in pain as the effects start to concentrate into your groin.  You need to get release, but what you’ve got just isn’t cutting it.  You fall to the ground and grab at your crotch, trying desperately to get the release you need.  Finally, it happens.  With a sudden burst of intense relief and sexual satisfaction, a new human looking penis bursts from your skin and sprays your seed all over the ground in front of you.  When you’re able to recover and take a look at your new possession.  <b>You now have an eight inch long human cock that is very sensitive to stimulation.</b>");
-					player.createCock();
-					player.cocks[0].cockLength = Utils.rand(3) + 8;
-					player.cocks[0].cockThickness = 2;
+					CoC.instance.transformations.CockHuman(0, Utils.rand(3) + 8, 2).applyEffect(false);
 					player.orgasm();
 					player.addCurse("sen", 10, 1);
 				}

@@ -917,9 +917,7 @@ public final class Mutations extends MutationsHelper {
                 }
                 //NO CAWKS?
                 if (player.cocks.length == 0) {
-                    player.createCock();
-                    player.cocks[0].cockLength = rand(3) + 4;
-                    player.cocks[0].cockThickness = 1;
+                    player.createCock(rand(3) + 4);
                     outputText("[pg]You shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
                     outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinTone + " tone.");
                     Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HUMAN));
@@ -1009,6 +1007,7 @@ public final class Mutations extends MutationsHelper {
                     player.cocks[0].cockThickness = 1;
                     outputText("[pg]You shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
                     outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinTone + " tone.");
+                    Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HUMAN));
                     if (tainted) {
                         dynStats("lus", 10, "cor", 3);
                         player.addCurse("sens", 5, 1);
@@ -1077,6 +1076,7 @@ public final class Mutations extends MutationsHelper {
             outputText("The skin bulges obscenely, darkening and splitting around " + num2Text(grown) + " of your new dicks.  For an instant they turn a demonic purple and dribble in thick spasms of scalding demon-cum.  After, they return to a more humanoid coloration.  ");
         }
         if (grown > 4) outputText("Your tender bundle of new cocks feels deliciously sensitive, and you cannot stop yourself from wrapping your hands around the slick demonic bundle and pleasuring them.[pg]Nearly an hour later, you finally pull your slick body away from the puddle you left on the ground.  When you look back, you notice it has already been devoured by the hungry earth.");
+        if (grown > 0) Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HUMAN));
         player.orgasm('Dick');
     }
 
@@ -1210,11 +1210,7 @@ public final class Mutations extends MutationsHelper {
             player.growTits(growth, player.breastRows.length, true, 3);
             if (player.breastRows.length == 0) {
                 outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
-                player.createBreastRow();
-                player.breastRows[0].breasts = 2;
-                //player.breastRows[0].breastsPerRow = 2;
-                player.breastRows[0].nipplesPerBreast = 1;
-                player.breastRows[0].breastRating = 2;
+                player.createBreastRow(2);
                 outputText("\n");
             }
             if (!flags[kFLAGS.HYPER_HAPPY]) {
@@ -1554,9 +1550,7 @@ public final class Mutations extends MutationsHelper {
         else if (rand(2) == 0 && changes < changeLimit) {
             outputText("[pg]Your chest tingles uncomfortably as your center of balance shifts.  <b>You now have a pair of B-cup breasts.</b>");
             outputText("  A sensitive nub grows on the summit of each tit, becoming a new nipple.");
-            player.createBreastRow();
-            player.breastRows[0].breastRating = 2;
-            player.breastRows[0].breasts = 2;
+            player.createBreastRow(2);
             dynStats("lus", 6);
             player.addCurse("sens", 4, 1);
             changes++;
@@ -2192,9 +2186,7 @@ public final class Mutations extends MutationsHelper {
         else if (rand(2) == 0 && changes < changeLimit) {
             outputText("[pg]Your chest tingles uncomfortably as your center of balance shifts.  <b>You now have a pair of B-cup breasts.</b>");
             outputText("  A sensitive nub grows on the summit of each tit, becoming a new nipple.");
-            player.createBreastRow();
-            player.breastRows[0].breastRating = 2;
-            player.breastRows[0].breasts = 2;
+            player.createBreastRow(2);
             dynStats("lus", 6);
             player.addCurse("sen", 4, 1);
             changes++;
@@ -4729,9 +4721,7 @@ public final class Mutations extends MutationsHelper {
             //WANG GROWTH - TIGGERSHARK ONLY
             if (type == 1 && (!player.hasCock()) && changes < changeLimit && rand(3) == 0) {
                 //Genderless:
-                if (!player.hasVagina()) outputText("[pg]You feel a sudden stabbing pain in your featureless crotch and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, you are the proud owner of a new human-shaped penis");
-                //Female:
-                else outputText("[pg]You feel a sudden stabbing pain just above your [vagina] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, you are the proud owner of not only a [vagina], but a new human-shaped penis");
+                transformations.CockHuman(7).applyEffect();
                 if (player.balls == 0) {
                     outputText(" and a pair of balls");
                     player.balls = 2;
@@ -4739,7 +4729,7 @@ public final class Mutations extends MutationsHelper {
                     Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
                 }
                 outputText("!");
-                player.createCock(7, 1.4);
+                player.cocks[0].cockThickness = 1.4;
                 dynStats("lus", 20);
                 player.addCurse("sen", 5, 1);
                 MutagenBonus("lib", 4);
@@ -7789,18 +7779,14 @@ public final class Mutations extends MutationsHelper {
         }
         //WANG GROWTH
         if (!player.hasCock() && changes < changeLimit && rand(3) == 0) {
-            //Genderless:
-            if (!player.hasVagina()) outputText("[pg]You feel a sudden stabbing pain in your featureless crotch and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, you are the proud owner of a new human-shaped penis");
-            //Female:
-            else outputText("[pg]You feel a sudden stabbing pain just above your [vagina] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, you are the proud owner of not only a [vagina], but a new human-shaped penis");
+            transformations.CockHuman(0, 7).applyEffect();
             if (player.balls == 0) {
                 outputText(" and a pair of balls");
                 player.balls = 2;
                 player.ballSize = 2;
                 Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
             }
-            outputText("!");
-            player.createCock(7, 1.4);
+            player.cocks[0].cockThickness = 1.4;
             dynStats("lus", 20);
             player.addCurse("sen", 5, 1);
             MutagenBonus("lib", 4);
@@ -9349,9 +9335,7 @@ public final class Mutations extends MutationsHelper {
             //female
             if (!player.hasCock()) {
                 outputText("The beverage isn't done yet, however, and it makes it perfectly clear with a building pleasure in your groin.  You can only cry in ecstasy and loosen the bottoms of your [armor] just in time for a little penis to spring forth.  You watch, enthralled, as blood quickly stiffens the shaft to its full length – then keeps on going!  Before long, you have a quivering 10-inch maleness, just ready to stuff into a welcoming box.");
-                player.createCock();
-                player.cocks[0].cockLength = 10;
-                player.cocks[0].cockThickness = 2;
+                transformations.CockHuman(0, 10, 2).applyEffect(false);
                 if (player.balls == 0) {
                     outputText("  Right on cue, two cum-laden testicles drop in behind it, their contents swirling and churning.");
                     player.balls = 2;
@@ -9445,10 +9429,8 @@ public final class Mutations extends MutationsHelper {
         else {
             outputText("You hear a straining, tearing noise before you realize it's coming from your underwear.  Pulling open your [armor], you gasp in surprise at the huge, throbbing manhood that now lies between your [hips].  It rapidly stiffens to a full, twelve inches, and goddamn, it feels fucking good.  You should totally find a warm hole to fuck!");
             if (player.balls == 0) outputText("  Two rounded orbs drop down below, filling out a new, fleshy sac above your [legs].  Sweet!  You can probably cum buckets with balls like these.");
+            transformations.CockHuman(0, 12, 3).applyEffect(false);
             outputText("[pg]");
-            player.createCock();
-            player.cocks[0].cockLength = 12;
-            player.cocks[0].cockThickness = 3;
             if (player.balls == 0) {
                 player.balls = 2;
                 player.ballSize = 3;
@@ -9731,11 +9713,7 @@ public final class Mutations extends MutationsHelper {
             player.growTits(grown, player.breastRows.length, true, 3);
             if (player.breastRows.length == 0) {
                 outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
-                player.createBreastRow();
-                player.breastRows[0].breasts = 2;
-                //player.breastRows[0].breastsPerRow = 2;
-                player.breastRows[0].nipplesPerBreast = 1;
-                player.breastRows[0].breastRating = 2;
+                player.createBreastRow(2);
                 outputText("\n");
             }
         }
@@ -10000,11 +9978,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]You feel a surge of energy and heat deep in your [breasts]. They wobble and tingle before suddenly bursting forward, almost throwing you off balance. They jostle a bit before settling into their new size.");
             if (player.breastRows.length == 0) {
                 outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
-                player.createBreastRow();
-                player.breastRows[0].breasts = 2;
-                //player.breastRows[0].breastsPerRow = 2;
-                player.breastRows[0].nipplesPerBreast = 1;
-                player.breastRows[0].breastRating = 2;
+                player.createBreastRow(2);
                 outputText("\n");
             }
         }
@@ -10595,11 +10569,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]You feel a surge of energy and heat deep in your [breasts]. They wobble and tingle before suddenly bursting forward, almost throwing you off balance. They jostle a bit before settling into their new size.");
             if (player.breastRows.length == 0) {
                 outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
-                player.createBreastRow();
-                player.breastRows[0].breasts = 2;
-                //player.breastRows[0].breastsPerRow = 2;
-                player.breastRows[0].nipplesPerBreast = 1;
-                player.breastRows[0].breastRating = 2;
+                player.createBreastRow(2);
                 outputText("\n");
             }
         }
@@ -11038,9 +11008,7 @@ public final class Mutations extends MutationsHelper {
             if (player.breastRows[player.bRows() - 1].nipplesPerBreast > 1) outputText(", not to mention number");
             else if (player.hasFuckableNipples()) outputText(", not to mention penetrability");
             outputText(".  While you continue to explore your body's newest addition, a strange heat builds behind the new nubs. Soft, jiggly breastflesh begins to fill your cupped hands.  Radiant warmth spreads through you, eliciting a moan of pleasure from your lips as your new breasts catch up to the pair above.  They stop at " + player.breastCup(player.bRows() - 1) + "s.  <b>You have " + num2Text(player.bRows() + 1) + " rows of breasts!</b>");
-            player.createBreastRow();
-            player.breastRows[player.bRows() - 1].breastRating = player.breastRows[player.bRows() - 2].breastRating;
-            player.breastRows[player.bRows() - 1].nipplesPerBreast = player.breastRows[player.bRows() - 2].nipplesPerBreast;
+            player.createBreastRow(player.breastRows[player.bRows() - 2].breastRating, player.breastRows[player.bRows() - 2].nipplesPerBreast);
             if (player.hasFuckableNipples()) player.breastRows[player.bRows() - 1].fuckable = true;
             player.breastRows[player.bRows() - 1].lactationMultiplier = player.breastRows[player.bRows() - 2].lactationMultiplier;
             dynStats("lus", 30);
@@ -13235,6 +13203,7 @@ public final class Mutations extends MutationsHelper {
                     if (player.cocks.length == 0) {
                         outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
                         player.createCock(player.clitLength + 2);
+                        Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HUMAN));
                         player.clitLength = .25;
                     }
                 }
@@ -13632,6 +13601,7 @@ public final class Mutations extends MutationsHelper {
                     if (player.cocks.length == 0) {
                         outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
                         player.createCock(player.clitLength + 2);
+                        Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HUMAN));
                         player.clitLength = .25;
                     }
                 }
@@ -14153,11 +14123,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.breastRows.length == 0) {
             outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
-            player.createBreastRow();
-            player.breastRows[0].breasts = 2;
-            //player.breastRows[0].breastsPerRow = 2;
-            player.breastRows[0].nipplesPerBreast = 1;
-            player.breastRows[0].breastRating = 2;
+            player.createBreastRow(2);
             outputText("\n");
         }
         //Physical
@@ -14356,7 +14322,7 @@ public final class Mutations extends MutationsHelper {
             }
             //Randomly choose one of those locations
             select = choices[rand(choices.length)];
-            transformations.CockDragon(select);
+            transformations.CockDragon(select).applyEffect();
             //lose lust if sens>=50, gain lust if else
             dynStats("lus", 10);
             player.addCurse("sen", 10, 1);
@@ -15095,10 +15061,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.breastRows.length == 0) {
                 outputText("A perfect pair of A cup breasts, complete with tiny nipples, form on your chest.");
-                player.createBreastRow();
-                player.breastRows[0].breasts = 2;
-                player.breastRows[0].nipplesPerBreast = 1;
-                player.breastRows[0].breastRating = 1;
+                player.createBreastRow(1);
                 outputText("\n");
             }
         }
@@ -15975,10 +15938,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.breastRows.length == 0 && changes < changeLimit) {
                 outputText("A perfect pair of A cup breasts, complete with tiny nipples, form on your chest.");
-                player.createBreastRow();
-                player.breastRows[0].breasts = 2;
-                player.breastRows[0].nipplesPerBreast = 1;
-                player.breastRows[0].breastRating = 1;
+                player.createBreastRow(1);
                 outputText("\n");
                 changes++;
             }
@@ -16111,10 +16071,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.breastRows.length == 0 && changes < changeLimit) {
                 outputText("A perfect pair of A cup breasts, complete with tiny nipples, form on your chest.");
-                player.createBreastRow();
-                player.breastRows[0].breasts = 2;
-                player.breastRows[0].nipplesPerBreast = 1;
-                player.breastRows[0].breastRating = 1;
+                player.createBreastRow(1);
                 outputText("\n");
                 changes++;
             }
@@ -16294,6 +16251,7 @@ public final class Mutations extends MutationsHelper {
                     if (player.cocks.length == 0) {
                         outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
                         player.createCock(player.clitLength + 2);
+                        Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HUMAN));
                         player.clitLength = .25;
                     }
                 }

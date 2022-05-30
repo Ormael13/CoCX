@@ -212,7 +212,7 @@ use namespace CoC;
 					}
 					//Grow chest
 					//(If player has 0 bewbs)
-					if(player.breastRows.length == 0) {
+					if(player.bRows() == 0) {
 						player.createBreastRow();
 						outputText("Your chest tingles, revealing a pair of pink nipples on your new mammory glands.  ");
 					}
@@ -1023,10 +1023,9 @@ use namespace CoC;
 			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
 			//Grow if none
-			if(player.breastRows.length == 0) {
+			if(player.bRows() == 0) {
 				outputText("<b>Your chest swells out, forming rounded C-cup globes, capped with tiny erect nipples!</b>");
-				player.createBreastRow();
-				player.breastRows[0].breastRating = 3;
+				player.createBreastRow(3);
 				player.nippleLength = .25;
 			}
 			//Singular row - cup size + 3.  Nipple size to 1" if smaller.

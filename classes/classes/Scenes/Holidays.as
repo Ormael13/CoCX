@@ -8,6 +8,7 @@ import classes.CockTypesEnum;
 import classes.DefaultDict;
 import classes.EngineCore;
 import classes.EventParser;
+import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.ItemType;
@@ -610,6 +611,12 @@ public class Holidays {
             player.dynStats("lib", 10, "sen", 10, "cor", 3);
             //Grow a 10" human or tentacle dick! RANDOM!
             player.createCock();
+            if (Math.random(2) == 0) {
+                player.cocks[0].cockType = CockTypesEnum.TENTACLE;
+                Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.TENTACLE));
+            } else {
+                Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HUMAN));
+            }
             player.cocks[0].cockLength = 10;
             player.cocks[0].cockThickness = 2.5;
             //Add five corruption.

@@ -353,7 +353,7 @@ public class AbstractEquinum extends Consumable {
 					}
 				}
 				if (player.vaginas[temp].vaginalWetness <= VaginaClass.WETNESS_NORMAL && changes < changeLimit && rand(2) == 0) {
-					outputText("Your [vagina "+temp+1+"] moistens perceptably, giving off an animalistic scent.");
+					outputText("Your [vagina "+(temp+1)+"] moistens perceptably, giving off an animalistic scent.");
 					player.vaginas[temp].vaginalWetness++;
 					changes++;
 				}

@@ -15,6 +15,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GeneticMemories.BallsMem;
+import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.*;
 import classes.Scenes.Metamorph;
 import classes.lists.Gender;
@@ -1466,7 +1467,8 @@ import classes.lists.Gender;
 			if (rand(3) == 0 && changes < changeLimit && player.hasVagina() && !player.hasCock()) {
 				outputText("\n\nYour vagina begins to feel hot. Removing your [armor], you look down and watch your vagina shrinks to nothing, <b>while your clitoris enlarges to form a human dick</b>.");
 				player.removeVagina();
-				player.createCock(6, 1, CockTypesEnum.HUMAN);
+				player.createCock(6);
+				Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HUMAN));
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.hasCock() && player.balls <= 0) {

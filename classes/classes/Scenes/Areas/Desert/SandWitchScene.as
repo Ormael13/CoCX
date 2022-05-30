@@ -390,7 +390,7 @@ private function centaurTF():void {
     //Grow tits
     if(player.biggestTitSize() == 0) {
         outputText("\n\n(You grow a perfectly rounded pair of C-cup breasts!)");
-        if(player.breastRows.length == 0) player.createBreastRow();
+        if(player.bRows() == 0) player.createBreastRow();
         player.breastRows[0].breasts = 2;
         player.breastRows[0].breastRating = 3;
         if(player.breastRows[0].nipplesPerBreast < 1) player.breastRows[0].nipplesPerBreast = 1;
