@@ -548,13 +548,13 @@ private function bodyRitual():void {
 	
 	outputText("\n\nOver your ragged, pained breathing, you can just hear " + flags[kFLAGS.GAR_NAME] + " chanting: \"<i>With pain comes purity... CRACK!  With agony comes enlightenment... CRACK!  Through torment comes holiness... CRACK!</i>\"  The last crack of the whip leaves you groaning, breathless, sagging in your bonds. Somehow, though, you do feel... cleaner?  Like a weight was just lifted from your heart.  And you know you're going to be thicker-skinned after that!  Quietly, reservedly, " + flags[kFLAGS.GAR_NAME] + " releases you from your bonds, and you stagger into her waiting arms.  She helps you over to the altar and lays you down, letting you rest after your ordeal.  She stands over you, watching you pant and gasp.  You suppose you could get some vengeance for her brutality – or you could be kind.  What do you do?");
 	dynStats("sen", -2);
-	if (player.HP > (player.maxHP()/2){
+	if (player.HP > (player.maxHP()/2)){
 		for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
 		player.removeCurse(stat, 50,1);
 		player.removeCurse(stat, 50,2);
 		player.removeCurse(stat, 50,3);
 	}}
-	else if (player.HP > (player.maxHP()/4){
+	else if (player.HP > (player.maxHP()/4)){
 		for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
 		player.removeCurse(stat, 25,1);
 		player.removeCurse(stat, 25,2);
