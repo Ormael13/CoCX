@@ -2187,7 +2187,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.PureAndLoving)) lust *= 0.95;
 			//Berseking reduces lust gains by 10%
 			if (hasStatusEffect(StatusEffects.Berzerking)) lust *= 0.9;
-			if (hasStatusEffect(StatusEffects.Overlimit)) lust *= 0.9;
+			if (hasStatusEffect(StatusEffects.Overlimit) || hasStatusEffect(StatusEffects.FieryRage)) lust *= 0.9;
 			if (TyrantiaFollower.TyrantiaTrainingSessions >= 25 && lust100 >= 50) {
 				if (lust100 >= 100) lust *= 0.3;
 				else if (lust100 >= 51) lust *= (1 - ((lust100 - 30) * 0.01));
@@ -2222,7 +2222,7 @@ use namespace CoC;
 			if (hasStatusEffect(StatusEffects.Aegis)) lust *= 0.5;
 			lust = Math.round(lust);
 			if (hasStatusEffect(StatusEffects.Lustzerking) && !hasPerk(PerkLib.ColdLust)) lust = 100;
-			if (hasStatusEffect(StatusEffects.BlazingBattleSpirit)) lust = 0;
+			if (hasStatusEffect(StatusEffects.BlazingBattleSpirit) || hasStatusEffect(StatusEffects.MomentOfClarity)) lust = 0;
 			return lust;
 		}
 
@@ -2366,6 +2366,8 @@ use namespace CoC;
 				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
 					damage = bloodShieldAbsorb(damage, display);
 				}
+				if (hasStatusEffect(StatusEffects.AdamantineShell)) damage *= 0.25;
+				if (hasStatusEffect(StatusEffects.TrueEvasion)) damage = 0;
 				if (damage > 0) {
 					switch (damagetype) {
 						case 0: // physical

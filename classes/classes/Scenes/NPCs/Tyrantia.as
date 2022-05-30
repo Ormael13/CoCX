@@ -42,6 +42,7 @@ public class Tyrantia extends Monster
 			dmg0 += this.str * 3;
 			dmg0 += eBaseStrengthDamage() * 2;
 			dmg0 += this.weaponAttack * 3;
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 2) dmg0 *= (1 + (0.1 * (flags[kFLAGS.TYRANTIA_LVL_UP] - 1)));
 			dmg0 = Math.round(dmg0);
 			lust0 *= 3;
 			player.takePhysDamage(dmg0, true);
@@ -83,6 +84,7 @@ public class Tyrantia extends Monster
 				dmg2 += this.str * 4;
 				dmg2 += eBaseStrengthDamage() * 3;
 				dmg2 += this.weaponAttack * 4;
+				if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 2) dmg2 *= (1 + (0.2 * (flags[kFLAGS.TYRANTIA_LVL_UP] - 1)));
 				if (rand(100) < critChance) {
 					crit = true;
 					dmg2 *= critMulti;
@@ -128,6 +130,7 @@ public class Tyrantia extends Monster
 			dmg3 += this.str * 4;
 			dmg3 += eBaseStrengthDamage() * 3;
 			dmg3 += this.weaponAttack;
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 2) dmg3 *= (1 + (0.1 * (flags[kFLAGS.TYRANTIA_LVL_UP] - 1)));
 			dmg3 = Math.round(dmg3);
 			player.takePhysDamage(dmg3, true);
 			player.takePhysDamage(dmg3, true);
@@ -291,7 +294,7 @@ public class Tyrantia extends Monster
 			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 4) {
 				this.createPerk(PerkLib.Juggernaut,0,0,0,0);
 				this.createPerk(PerkLib.JobWarrior,0,0,0,0);
-				//this.createPerk(PerkLib.,0,0,0,0);
+				this.createPerk(PerkLib.InhumanDesireI,0,0,0,0);
 			}
 			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 5) {
 				this.createPerk(PerkLib.LegendaryStrength,0,0,0,0);
@@ -300,7 +303,7 @@ public class Tyrantia extends Monster
 			}
 			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 6) {
 				this.createPerk(PerkLib.LegendaryToughness,0,0,0,0);
-				//this.createPerk(PerkLib.,0,0,0,0);
+				this.createPerk(PerkLib.DemonicDesireI,0,0,0,0);
 				//this.createPerk(PerkLib.,0,0,0,0);
 			}
 			checkMonster();
