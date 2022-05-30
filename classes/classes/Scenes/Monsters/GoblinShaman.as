@@ -118,17 +118,11 @@ public class GoblinShaman extends Goblin
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.goblinShamanScene.goblinShamanRapeIntro();
+			SceneLib.goblinScene.gobboRapeIntro();
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.gender == 0) {
-				outputText("You collapse in front of the goblin, too wounded to fight.  She growls and kicks you in the head, making your vision swim. As your sight fades, you hear her murmur, \"<i>Fucking dumbasses. You can't even bother to grow something?</i>\"");
-				SceneLib.combat.cleanupAfterCombatImpl();
-			} 
-			else {
-				SceneLib.goblinShamanScene.goblinShamanBeatYaUp();
-			}
+			SceneLib.goblinScene.gobboSpecialBeatYaUp();
 		}
 		
 		public function GoblinShaman()

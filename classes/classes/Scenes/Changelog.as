@@ -4,13 +4,10 @@
  */
 package classes.Scenes 
 {
-	import classes.*
-	import classes.BaseContent;
-	import classes.CoC;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.CoC;
-	
-	public class Changelog extends BaseContent
+import classes.BaseContent;
+import classes.CoC;
+
+public class Changelog extends BaseContent
 	{
 		
 		public function Changelog() 
@@ -1993,8 +1990,8 @@ package classes.Scenes
 			outputText("-New head jewelery/accesory/misc (by Liadri): Scanner goggle - craftable at goblin workshop (5 metal pieces, 200 nails, 2 energy core, Machinist Goggles and BP). Cost 4030 gems, immunise against blind, increase critical chance with spell and attack by 5%.\n");
 			outputText("-New head jewelery/accesory/misc (by Liadri): S.A Tech Goggle - craftable at goblin workshop (10 metal pieces, 500 nails, 5 Energy core, Scanner goggle and BP). Cost 11105 gems, immunise against blind, increase critical chance with spell and attack by 10%.\n");
 			outputText("-New consumable item: Airweed - buyable at Pinchou shop. Cost 10 gems and grants water breathing for 24 hours.\n");
-			outputText("-New consumable item: a bottle of low-grade Soulforce Recovery Pills. Costs 110 gems. It's gained by putting in empty pills bottle 10 low-grade soulfroce recovery pills. Action that is only doable in camp (Camp Actions > SpentTime > Fill bottle).\n");
-			outputText("-New consumable item: a bottle of mid-grade Soulforce Recovery Pills. Costs 610 gems. It's gained by putting in empty pills bottle 10 low-grade soulfroce recovery pills. Action that is only doable in camp (Camp Actions > SpentTime > Fill bottle)\n");
+			outputText("-New consumable item: a bottle of low-grade Soulforce Recovery Pills. Costs 110 gems. It's gained by putting in empty pills bottle 10 low-grade soulfroce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle).\n");
+			outputText("-New consumable item: a bottle of mid-grade Soulforce Recovery Pills. Costs 610 gems. It's gained by putting in empty pills bottle 10 low-grade soulfroce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
 			outputText("-New consumable item: a Fasting Pill. Costs 100 gems and buyable at golem shop for anyone with Job: Soul Cultivator perk. Req. to have hunger mode enabled to show up in golem shop offer. Would cause hunger decrease slower for 3 days (2 less points of hunger per hour and if it will be more that current rate of decreasing hunger it may even very slowly increase increase satiety). Using pills in succession would only extend duration by 1 day per additional pill.\n");
 			outputText("-New usable item: Empty Pills Bottle. Costing 10 gems and it's buyable at golem merchant in HXD. Used to store 10 pills of any kind. Due to manufacture process and realm interferances after opening full bottle all pills must be used in a span of few minutes or they would loose all effectivness.\n");
 			outputText("-New usable item: Energy Core. Costing 1015 gems and it's craftable by goblin PC. Req. 5 metal pieces and 3 golem cores. A power source for devices.\n");
@@ -2040,7 +2037,7 @@ package classes.Scenes
 			outputText("-New magical soulskill: Flames of Love (Basic Rank). Req. buying manual from golem merchant for 20 spirit stones. Deal fire damage, against group enemies deal 2x more damage, using ~90% of current PC lust creates flames that deals 200% dmg of used lust. (1 lust used = 2 pts of fire dmg) Cooldown: 3 turns.\n");
 			outputText("-New magical soulskill: Icicles of Love (Basic Rank). Req. buying manual from golem merchant for 20 spirit stones. Deal ice damage, against group enemies deal 2x more damage, using ~90% of current PC lust creates icicles that deals 200% dmg of used lust. (1 lust used = 2 pts of ice dmg) Cooldown: 3 turns.\n");
 			outputText("-Soul Equipment siren shop merchant finally got her name. Which she would always meantion after entering.\n");
-			outputText("-Options in Camp Actions was a bit rearranged. Some was mover to new submenu named SpentTime that involve spending time on watching sky or swimming at steam. Even action of using time to prepare bottles filled with various pills is found here.\n");
+			outputText("-Options in Camp Actions was a bit rearranged. Some was mover to new submenu named Spend Time that involve spending time on watching sky or swimming at steam. Even action of using time to prepare bottles filled with various pills is found here.\n");
 			outputText("-When PC is lvl 24+ can find sometimes instead of very diluted Arcane Regen Concotions and low-grade Soulforce Recovery Pills their stronger versions: diluted Arcane Regen Concotions and mid-grade Soulforce Recovery Pills\n");
 			outputText("-New consumable item: an Arcane Regen Concotion. Costs 720 gems and currently only drops from white mare/unicorn/alicorn founded in Lake, Battlefield or Plains. It restore 7200 mana.\n");
 			outputText("-New TF item: Storm Seed. Evangeline can make it using Magic Seed (enh. at Lumi Golden Seed), Topaz jewel and 10 gems, final cost of created item is 20 gems. Using this item will turn PC into thunderbird. Thunderbird bonus at 12 pts in racial score (scalable): -20 to max Tou, +100 to max Spe, +100 to max Lib.\n");

@@ -21,6 +21,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			clearOutput();
 			spriteSelect(SpriteDb.s_spiderguy);
 			outputText("A spider-morph drops out of a tree in front of you, hanging by a single thread of sparkling webbing.  His purple eyes gaze deeply into your own while he looks you up and down.  ");
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_ARACHNES);
 			//DANGER MODE:
 			if (rand(2) == 0) {
 				outputText("A moment later, he flips down onto his feet and advances, touching his half-hard, foreskin-shrouded cock.  Judging from the glint in his eyes, he plans to force himself upon you!");
@@ -32,10 +33,6 @@ public class MaleSpiderMorphScene extends BaseContent
 				outputText("He breaks into a smile and says, \"<i>Hi there!  I haven't seen anyone else with a shred of sanity in FOREVER.  Would you mind just, talking with me?</i>\"");
 				//[Fight] [Talk] [Leave]
 				simpleChoices("Fight", fightSpiderBoy, "Talk", talkToSpiderBoy, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
-			}
-			if (flags[kFLAGS.CODEX_ENTRY_ARACHNES] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_ARACHNES] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Arachnes, Spider-Morphs, and Driders!</b>")
 			}
 		}
 

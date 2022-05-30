@@ -28,7 +28,6 @@ import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
-import classes.Scenes.Codex;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
@@ -54,7 +53,6 @@ public class Combat extends BaseContent {
     public var soulskills:CombatSoulskills = new CombatSoulskills();
     public var comfoll:CombatFollowersActions = new CombatFollowersActions();
     public var ui:CombatUI = new CombatUI();
-	public var codex:Codex = new Codex();
 	public var meleeDamageNoLag:Number = 0;
     public var MDODialogs:Boolean = false; // JA dialogs, look 3875
     public var MDOCount:int = 0; // count of how many times damage was deal
@@ -7893,8 +7891,8 @@ public class Combat extends BaseContent {
         }
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
 		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
-			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) damage *= (1 + (Math.round(codex.checkUnlocked() / 100) * 3));
-			else damage *= (1 + Math.round(codex.checkUnlocked() / 100));
+			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) damage *= (1 + (Math.round(camp.codex.checkUnlocked() / 100) * 3));
+			else damage *= (1 + Math.round(camp.codex.checkUnlocked() / 100));
 		}
 		if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) damage *= (1+(0.1*player.perkv1(PerkLib.SharedPower)));
 		damage *= EyesOfTheHunterDamageBonus();
@@ -8753,8 +8751,8 @@ public class Combat extends BaseContent {
         }
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
 		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
-			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) damage *= (1 + (Math.round(codex.checkUnlocked() / 100) * 3));
-			else damage *= (1 + Math.round(codex.checkUnlocked() / 100));
+			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) damage *= (1 + (Math.round(camp.codex.checkUnlocked() / 100) * 3));
+			else damage *= (1 + Math.round(camp.codex.checkUnlocked() / 100));
 		}
 		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);

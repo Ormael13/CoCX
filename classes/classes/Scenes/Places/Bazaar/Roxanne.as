@@ -82,10 +82,7 @@ public function Roxanne1stApproach():void {
 	outputText("You hesitantly approach the drinking lizard-folk, taking note of their unusual garments and appearance.  They all wear black jackets with silver trim, tight-fitting leather pants, and tall, black boots.  Oddly, the most feminine of them appears to be the leader.  Her jacket is filled out with large, well-rounded DD-cup breasts, and her boots forgo the traditional shape for a sluttier, higher heel.  Her scales are a dark purple, glittering darkly in the light, and while her head has a lizard-like shape, a pair of dragon-like horns bulge from the back of her skull in place of hair.  The other lizans all appear to be males, but they act as if they're quite intimidated by the feminine leader.\n\n");
 	outputText("Suddenly, the alpha-lizan glances up and meets your eye, her expression turning into a leering sneer as she asks, \"<i>See something you like " + player.mf("buddy","girly") + "?  Come on over, tell us your story!</i>\"\n\n");
 	outputText("Do you approach?");
-	if (flags[kFLAGS.CODEX_ENTRY_LIZANS] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_LIZANS] = 1;
-		outputText("\n\n<b>New codex entry unlocked: Lizans!</b>")
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_LIZANS);
 	doYesNo(RoxanneChooseApproachOrRepeat, bazaar.enterTheBazaar);
 }
 
@@ -141,10 +138,7 @@ public function RoxanneChooseApproachOrRepeat():void {
 	else outputText("If you're reading this, something broke.");
 	//Clear the 'are you losing the contest intionally flag'
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00226] = 0; //In case if lizans codex entry didn't unlock.
-	if (flags[kFLAGS.CODEX_ENTRY_LIZANS] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_LIZANS] = 1;
-		outputText("\n\n<b>New codex entry unlocked: Lizans!</b>")
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_LIZANS);
 	simpleChoices("Yes", roxanneDrinkingContest, "No", bazaar.enterTheBazaar, "Lose", roxanneDrinkingContestLoseDeliberately, "", null, "", null);
 }
 

@@ -1,21 +1,18 @@
 
 package classes.Scenes.Dungeons.EbonLabyrinth
 {
-import classes.GlobalFlags.kFLAGS;
 import classes.BaseContent;
+import classes.EventParser;
+import classes.GlobalFlags.kFLAGS;
 import classes.StatusEffects;
 import classes.display.SpriteDb;
-import classes.EventParser;
 
 public class HydraScene extends BaseContent {
     public function HydraScene() {}
 
     public function encounter():void {
         clearOutput();
-        if (flags[kFLAGS.CODEX_ENTRY_HYDRA] <= 0) {
-            flags[kFLAGS.CODEX_ENTRY_HYDRA] = 1;
-            outputText("<b>New codex entry unlocked: Hydra!</b>\n\n");
-        }
+        camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_HYDRA);
         spriteSelect(SpriteDb.s_hydra_16bit);
         outputText("The first telltale that something might have gone really wrong is the hissing, which seems to come from all around the room. The only warning you get of the impending attack is a sudden move of the shadows as a massive snake head bites the air mere inches from your face. You ready for battle as several huge snakes comes out of the shadow, each connected to a single junction to what appears to be the body of a very tall woman.\n\n");
         if (player.isNaga()) {

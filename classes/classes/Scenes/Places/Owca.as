@@ -222,10 +222,7 @@ private function intoTheDemonPit(sacrifice:Boolean = true):void {
 		else outputText("\n\nThe chains binding you aren't very tight or of the finest craftsmanship, but they're sufficient to hold you more or less in place; though you can probably twist to avoid a few attacks, you won't be able to make any of your own if you decide to resist... at least, not physically.");
 		outputText("  You're once again feeling regret over letting the villagers hold your equipment, but there's nothing for it now.");
 	}
-	if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
-		outputText("\n\n<b>New codex entry unlocked: Succubus!</b>")
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SUCCUBUS);
 	flags[kFLAGS.TIMES_IN_DEMON_PIT]++;
 	flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS] = 0;
 	if(sacrifice) simpleChoices("Fight",createCallBackFunction(fightZeDemons,true),"Submit",loseOrSubmitToVapula, "", null, "", null, "", null);

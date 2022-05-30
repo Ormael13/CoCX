@@ -40,10 +40,7 @@ public class SandWitchScene extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_sandwich);
 			clearOutput();
 			outputText("A strange woman seems to appear from the dunes themselves.  She identifies herself as a sand witch, and politely asks if she can cast a spell on you.");
-			if (flags[kFLAGS.CODEX_ENTRY_SANDWITCHES] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_SANDWITCHES] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Sand Witches!</b>\n\n")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SANDWITCHES);
 			if (player.statusEffectv1(StatusEffects.Exgartuan) == 1 && player.biggestCockArea() > 100 && player.statusEffectv2(StatusEffects.Exgartuan) == 0) {
 				outputText("\n\nThe [armor] covering your lower half hits the ground, as if yanked down by magic.  Your [cock] pulsates darkly, growing rigid in seconds as the demon within you takes over.  It barks, \"<i>Fuck, how about I cast my spell on you baby?</i>\"\n\n");
 				outputText("The sandwitch ");

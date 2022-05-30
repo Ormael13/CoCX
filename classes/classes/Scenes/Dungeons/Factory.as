@@ -13,8 +13,8 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Scenes.Dungeons.Factory.*;
 import classes.Scenes.Metamorph;
-import classes.lists.Gender;
 import classes.display.SpriteDb;
+import classes.lists.Gender;
 
 use namespace CoC;
 
@@ -1670,10 +1670,7 @@ use namespace CoC;
 					outputText("!</i>\"  She stops, sniffing the air, a curious expression on her face as she slowly circles you, her heals clicking loudly on the floor.  A knowing grin blooms across her face as understanding hits her.\n\n");
 					outputText("She exclaims, \"<i>Omigawsh!  You're the champion!  Your, like, soul is still there and everything!  But, you're like, completely corrupt an' stuff!  Ya know what'd be fun?  I could fuck you 'til you cum so hard your soul melts out an' you turn into a demon.  Wouldn't that be great?</i>\"\n\n");
 					outputText("The secretarial demoness pulls out a file and fiddles with her nails, murmuring, \"<i>I guess if you don't wanna, we could just hook you up in the factory.  What's it gonna be?</i>\"");
-					if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
-						outputText("<b>New codex entry unlocked: Succubus!</b>\n\n")
-					}
+					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SUCCUBUS);
 					simpleChoices("Fight", doFightSuccubus, "Go Demon", goDemon, "Hook Up", talkSuccubusYes, "", null, "", null);
 					return;
 				}
@@ -1688,10 +1685,7 @@ use namespace CoC;
 					else if(player.hasVagina()) outputText("lick your honeypot 'til you soak my face");
 					else outputText("give you a new addition and show you how to use it");
 					outputText(".</i>\"\n\nThe succubus turns away from you and makes a show of tweaking her make-up, ignoring you for the moment.");
-					if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
-						outputText("<b>New codex entry unlocked: Succubus!</b>\n\n")
-					}
+					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SUCCUBUS);
 					simpleChoices("Fight", doFightSuccubus, "It's Me!", talkSuccubusItsMe, "Leave", roomLobby, "", null, "", null);
 				}
 				else {
@@ -1699,10 +1693,7 @@ use namespace CoC;
 					if(player.gender == 1) outputText("stud");
 					else outputText("sexy");
 					outputText("!  What's a cute little morsel like you doing by yourself out here?</i>\"");
-					if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
-						outputText("<b>New codex entry unlocked: Succubus!</b>\n\n")
-					}
+					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SUCCUBUS);
 					simpleChoices("Fight", doFightSuccubus, "Talk", talkSuccubus, "Run", roomLobby, "", null, "", null);
 				}
 			}

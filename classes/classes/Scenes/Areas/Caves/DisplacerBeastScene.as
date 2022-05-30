@@ -5,13 +5,11 @@
 package classes.Scenes.Areas.Caves 
 {
 
-import classes.Scenes.Combat.Combat;
 import classes.BaseContent;
 import classes.GlobalFlags.kFLAGS;
-import classes.display.SpriteDb;
 import classes.PerkLib;
 import classes.StatusEffects;
-	
+
 public class DisplacerBeastScene extends BaseContent {
 		
     public function DisplacerBeastScene() {}
@@ -24,10 +22,7 @@ public class DisplacerBeastScene extends BaseContent {
         }
         //Regular encounter
         outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.\n\n");
-        if (flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] <= 0) {
-            flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] = 1;
-            outputText("<b>New codex entry unlocked: Displacer beast!</b>\n\n")
-        }
+        camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_DISPLACER_BEAST);
         outputText("You are fighting a Displacer beast!");
         startCombat(new DisplacerBeast());
     }

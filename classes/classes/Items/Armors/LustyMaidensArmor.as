@@ -3,6 +3,7 @@
  */
 package classes.Items.Armors
 {
+import classes.CoC;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armor;
@@ -12,12 +13,12 @@ import classes.PerkLib;
 import classes.Player;
 import classes.Scenes.Areas.HighMountains.MinotaurMob;
 import classes.Scenes.Areas.Mountain.Minotaur;
-import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 import classes.Scenes.NPCs.Ceraph;
+import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 import classes.Scenes.SceneLib;
 import classes.lists.BreastCup;
+
 import coc.view.CoCButton;
-import classes.CoC;
 
 public final class LustyMaidensArmor extends Armor {
 		
@@ -147,7 +148,7 @@ public final class LustyMaidensArmor extends Armor {
         public static function addTitfuckButton(btn:int, player:Player = null, monster:Monster = null):CoCButton {
 			if (player == null) player = CoC.instance.player;
             if (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor)
-                return EngineCore.addButton(btn, "B.Titfuck", curry(lustyMaidenPaizuri, player, monster));
+                return EngineCore.addButton(btn, "B.Titfuck", curry(lustyMaidenPaizuri, player, monster)).hint("Take advantage of the properties of your special armour and get [themonster] to give you a good titfuck.");
             else return EngineCore.addButtonDisabled(btn, "B.Titfuck", "Req. to have Lusty Maiden's or Succubus' armor equipped.")
         }
 	}

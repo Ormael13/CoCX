@@ -568,6 +568,8 @@ public class MutationsLib
 					mutationsThyroidGlands();
 					mutationsParaThyroidGlands();
 					mutationsAdaptations();
+					if (spec == "All") mutationsDeprecated();
+					MutationsList.sort();
 			}
 
 			if (merge){

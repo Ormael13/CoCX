@@ -42,10 +42,7 @@ public class GooGirlScene extends AbstractLakeContent
 			GooLocation = "lake";
 			outputText("As you walk around the "+GooLocation+", you notice a pale red light pulsing in the " + (flags[kFLAGS.FACTORY_SHUTDOWN] == 1 ? "sapphire" : "murky") + " waters. You pause, trying to figure out what the shape might be. Just under the surface of the water, there appears to be a fist-sized heart shedding a crimson glow. Leaning closer, you gaze down into your reflection only to find your face rising up with pursed lips, trying to kiss you! You jerk backwards, and the pseudo-head quivers, resolving its face into a gooey-looking girl, her ");
 			outputText(gooColor() + " slime body sculpting itself into a humanoid shape. The girl curiously tilts her head to one side, as if trying to figure out why you're backing away, before she happily surges forward!");
-			if (flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Goo Girls!</b>")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOOGIRLS);
 			startCombat(monster);
 			doNext(playerMenu);
 		}
@@ -58,10 +55,7 @@ public class GooGirlScene extends AbstractLakeContent
 			GooLocation = "beach";
 			outputText("As you walk around the "+GooLocation+", you notice a pale red light pulsing in the waters. You pause, trying to figure out what the shape might be. Just under the surface of the seawater, there appears to be a fist-sized heart shedding a crimson glow. Leaning closer, you gaze down into your reflection only to find your face rising up with pursed lips, trying to kiss you! You jerk backwards, and the pseudo-head quivers, resolving its face into a gooey-looking girl, her ");
 			outputText(gooColor() + " slime body sculpting itself into a humanoid shape. The girl curiously tilts her head to one side, as if trying to figure out why you're backing away, before she happily surges forward!");
-			if (flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Goo Girls!</b>")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOOGIRLS);
 			startCombat(monster);
 			doNext(playerMenu);
 		}

@@ -21,10 +21,7 @@ public function lactaBovinaInto():void {
 	outputText("As you explore the mountain you run into a what appears to be a naked woman with gigantic jugs! At first you mistake her for a human but it's obvious from the ears, small horn nubs, tail and hooves that she is not. The cow girl, also having noticed you smiles dreamily, drools at the mouth, as she holds her breast with both hands.\n\n");
 	outputText("\"<i>Milked… finally I will get milked! Come over cutie, let mama pour her white creamy love into you!</i>\"\n\n");
 	outputText("Oh god, it seems this lacta bovine hasn't been milked for quite sometime and she clearly intends to force breastfeed you!");
-	if (flags[kFLAGS.CODEX_ENTRY_LABOVINES] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_LABOVINES] = 1;
-		outputText("<b>New codex entry unlocked: Lacta Bovines/Cowgirl!</b>\n\n")
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_LABOVINES);
 	startCombat(new LactaBovina());
 }
 

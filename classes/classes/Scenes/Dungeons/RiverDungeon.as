@@ -4,12 +4,12 @@
  */
 package classes.Scenes.Dungeons 
 {
+import classes.CoC;
 import classes.EventParser;
-import classes.Scenes.Dungeons.RiverDungeon.Vegot;
-import classes.display.SpriteDb;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Shield;
 import classes.Items.Weapon;
+import classes.PerkLib;
 import classes.Scenes.Areas.GlacialRift.Yeti;
 import classes.Scenes.Areas.Lake.GreenSlime;
 import classes.Scenes.Areas.Mountain.HellHound;
@@ -20,16 +20,16 @@ import classes.Scenes.Dungeons.RiverDungeon.FireElemental;
 import classes.Scenes.Dungeons.RiverDungeon.IceElemental;
 import classes.Scenes.Dungeons.RiverDungeon.LightningElemental;
 import classes.Scenes.Dungeons.RiverDungeon.QuatroElementalBoss;
+import classes.Scenes.Dungeons.RiverDungeon.Vegot;
 import classes.Scenes.Dungeons.RiverDungeon.WaterElemental;
 import classes.Scenes.Monsters.FeralImps;
+import classes.Scenes.Monsters.GolemDummyImproved;
 import classes.Scenes.NPCs.Electra;
 import classes.Scenes.SceneLib;
-import classes.CoC;
-import classes.PerkLib;
-import classes.Scenes.Monsters.GolemDummyImproved;
 import classes.StatusEffects;
+import classes.display.SpriteDb;
 
-	public class RiverDungeon extends DungeonAbstractContent
+public class RiverDungeon extends DungeonAbstractContent
 	{
 		public function RiverDungeon() {} //flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] 1 - pok 1 golema, 2 pokonanie obu golemów, 3-6 pokonanie 4 żywiołaków sub bossów, 7 pokonanie chimerycznego żywiołaka, 8 otwarcie drzwi do bossa 3 poziomu, 9 pokonanie bossa 3 poziomu
 		
@@ -71,10 +71,7 @@ import classes.StatusEffects;
 				if (choice == 0) {
 					spriteSelect(SpriteDb.s_imp);
 					outputText("A feral imp suddenly appears from nearby passage and attacks!");
-					if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-					}
+					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 					flags[kFLAGS.FERAL_EXTRAS] = 5;
 					startCombat(new FeralImps(), true);
 				}
@@ -86,10 +83,7 @@ import classes.StatusEffects;
 				if (choice == 2) {
 					spriteSelect(SpriteDb.s_hellhound);
 					outputText("You hear a fiery howl as a demonic, two-headed beast-man leaps out of a nearby passage!");
-					if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Hellhounds!</b>")
-					}
+					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_HELLHOUNDS);
 					startCombat(new HellHound(), true);
 				}
 				//doNext(playerMenu);
@@ -194,40 +188,24 @@ import classes.StatusEffects;
 					//spriteSelect(SpriteDb.s_green_slime);
 					outputText("A soft shuffling sound catches your attention and you turn around, spotting a small ball of flame hurtling towards you!  Realizing it's been spotted, the elemental's body blazes, orange flames shooting from its body, in the crude shape of arms and legs. It advances, the air hissing and popping around it.");
 					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(3);
-					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-					}*/
 					startCombat(new FireElemental(), true);
 				}
 				if (choice == 1) {
 					//spriteSelect(SpriteDb.s_green_slime);
 					outputText("A soft shuffling sound catches your attention and you turn around, spotting a blob of water flowing towards you!  Realizing it's been spotted, the elemental's body splashes into the ground, flowing upwards into a humanoid form. The creature leans forward, sloshing in to attack");
 					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(3);
-					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-					}*/
 					startCombat(new WaterElemental(), true);
 				}
 				if (choice == 2) {
 					//spriteSelect(SpriteDb.s_green_slime);
 					outputText("A soft shuffling sound catches your attention and you turn around, spotting a small ball of wind rushing towards you!  Realizing it's been spotted, the elemental's body whirls, whipping winds visibly wrapping around, making crude arms and legs. It motions, sending debris your way.");
 					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(3);
-					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-					}*/
 					startCombat(new AirElemental(), true);
 				}
 				if (choice == 3) {
 					//spriteSelect(SpriteDb.s_green_slime);
 					outputText("A soft shuffling sound catches your attention and you turn around, spotting small mass of earth rumbling towards you!  Realizing it's been spotted, the elemental's body shoots from the ground, pillars of stone forming legs. Dirt arms sprout from the creature's core, and it lunges at you!");
 					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(3);
-					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-					}*/
 					startCombat(new EarthElemental(), true);
 				}
 				//doNext(playerMenu);
@@ -243,10 +221,6 @@ import classes.StatusEffects;
 				//spriteSelect(SpriteDb.s_green_slime);
 				outputText("A soft shuffling sound catches your attention and you turn around, spotting a large ball of flame rushing towards you!  Realizing it's been spotted, the elemental's body blazes, sprouting crude arms and legs. It shoots a burst of flame in your direction, crackling angrily.");
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 3;
-				/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-				}*/
 				startCombat(new FireElemental(), true);
 				//doNext(playerMenu);
 			}
@@ -260,10 +234,6 @@ import classes.StatusEffects;
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				outputText("A soft shuffling sound catches your attention and you turn around, spotting a large blob of water rushing towards you!  Realizing it's been spotted, the elemental's body flows, growing pseudopods of water. It takes a humanoid shape, advancing to attack.");
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 3;
-				/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-				}*/
 				startCombat(new WaterElemental(), true);
 				//doNext(playerMenu);
 			}
@@ -278,10 +248,6 @@ import classes.StatusEffects;
 				//spriteSelect(SpriteDb.s_green_slime);
 				outputText("A soft shuffling sound catches your attention and you turn around, spotting a large gust of wind rushing towards you!  Realizing it's been spotted, the elemental's body changes into a humanoid form and attacks!");
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 3;
-				/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-				}*/
 				startCombat(new AirElemental(), true);
 				//doNext(playerMenu);
 			}
@@ -296,10 +262,6 @@ import classes.StatusEffects;
 				//spriteSelect(SpriteDb.s_green_slime);
 				outputText("A soft shuffling sound catches your attention and you turn around, spotting large mass of earth rushing towards you!  Realizing it's been spotted, the elemental's body reforms into a humanoid form and attacks!");
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 3;
-				/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-				}*/
 				startCombat(new EarthElemental(), true);
 				//doNext(playerMenu);
 			}
@@ -436,39 +398,23 @@ import classes.StatusEffects;
 					//spriteSelect(SpriteDb.s_green_slime);
 					outputText("A soft shuffling sound catches your attention and you turn around, spotting a small cluster of ice sliding towards you!  Realizing it's been spotted, the elemental's body crystalises into a humanoid form, raising crude arms ending with sharp icicle blades, stabbing towards you.");
 					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(4);
-					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-					}*/
 					startCombat(new IceElemental(), true);
 				}
 				if (choice == 1) {
 					//spriteSelect(SpriteDb.s_green_slime);
 					outputText("A soft shuffling sound catches your attention You turn around, spotting a small ball of darkness rushing towards you!  Realizing it's been spotted, the elemental's body changes, growing arms and legs. The now humanoid shadow attacks!");
 					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(4);
-					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-					}*/
 					startCombat(new DarknessElemental(), true);
 				}
 				if (choice == 2) {
 					//spriteSelect(SpriteDb.s_green_slime);
 					outputText("A soft shuffling sound catches your attention and you turn around, spotting a small ball of lighting rushing towards you!  Realizing it's been spotted, the elemental's body sparks, glowing tendrils of lightning forming arms and legs. It advances on its new limbs, ready to attack!");
 					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(4);
-					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-					}*/
 					startCombat(new LightningElemental(), true);
 				}
 				if (choice == 3) {
 					//spriteSelect(SpriteDb.s_green_slime);
 					outputText("Hearing a thunderous roar, you ready yourself for a fight. A massive hulking creature barrels around the corner and sets its gaze on you, its clawed hands and feet launching its body over the narrow corridors with ease as you stare the beast down. The white blur of an ice yeti attacks you!");
-					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Yeti!</b>")
-					}*/
 					startCombat(new Yeti(), true);
 				}
 				if (choice == 4) {
@@ -476,10 +422,7 @@ import classes.StatusEffects;
 					outputText("As you wander the dungeon you hear the sound of echoing thunder. Turning around you see a single girl with animalistic features running towards you. Sparks fly from her eyes, and she grins, baring sharp white teeth.\n\n");
 					outputText("\"<i>You will be my lightning rod!!!!</i>\"");
 					outputText("\n\nYou are under attack by a Raiju!");
-					if (flags[kFLAGS.CODEX_ENTRY_RAIJU] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_RAIJU] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Raiju!</b>")
-					}
+					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_RAIJU);
 					startCombat(new Electra(), true);
 				}
 				//doNext(playerMenu);
@@ -500,10 +443,6 @@ import classes.StatusEffects;
 					outputText("As you strain to see this blackened doppelganger, it lurches toward you!");
 				}
 				else outputText("A soft shuffling sound catches your attention and you turn around, spotting a small ball of darkness rushing towards you!  Realizing it's been spotted, the elemental's body shoots up from the ground, shadowy tendrils expanding from its inky mass. Arms and legs grown, it attacks!");
-				/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Elementals!</b>")
-				}*/
 				startCombat(new DarknessElemental(), true);
 				//doNext(playerMenu);
 			}
