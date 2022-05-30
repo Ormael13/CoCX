@@ -25,7 +25,7 @@ public class Race {
 	/**
 	 * Min score to get bonuses from mutation and bloodline
 	 */
-	public var mutationThreshold:int = 0
+	public var mutationThreshold:int = 5;
 	
 	/**
 	 * true - do not display the race in menus
@@ -142,7 +142,7 @@ public class Race {
 		}
 		
 		if (player.hasPerk(PerkLib.RacialParagon) && this != player.racialParagonSelectedRace()) {
-			if (outputText != null) outputText("Racial Paragon",-score);
+			if (outputText != null) outputText("Racial Paragon",Math.min(-1,-score));
 			return 0;
 		}
 		if (player.isGargoyle() && this != Races.GARGOYLE) {
@@ -233,8 +233,8 @@ public class Race {
 					s += " [/font][font-red]("+rscore+" penalty)";
 				}
 			} else {
-				rscore = rr.passScore(body);
-				s += " (" + (rscore>0?"+"+rscore:rscore)+")";
+				var pscore:int = rr.passScore(body);
+				s += " (" + (pscore>0?"+"+pscore:pscore)+")";
 				if (rr.failScore < 0) {
 					s += "[/font]"
 					if (!pass && rscore == 0) {
@@ -264,7 +264,7 @@ public class Race {
 			}
 			s += "\t";
 			if (change > 0) s += "[font-green]"
-			else if (change < 0) s += "[font-green]"
+			else if (change < 0) s += "[font-red]"
 			else s += "[font-default]"
 			s += reason+" ("+(change>0?"+"+change:change)+")";
 			s += "[/font]\n";
