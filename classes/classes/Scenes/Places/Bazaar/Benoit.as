@@ -29,7 +29,7 @@ import classes.GlobalFlags.kFLAGS;
 public class Benoit extends BazaarAbstractContent {
 
 	public function Benoit()
-	{
+	{ 
 	}
 
 //Fen, you'll need a function to determine gendered pronouns and version of name for this character. I've formatted all the eligible places I found in the order of [male/female]. -Z

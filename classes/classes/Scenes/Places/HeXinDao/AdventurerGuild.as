@@ -966,7 +966,7 @@ package classes.Scenes.Places.HeXinDao
 					flags[kFLAGS.SPIRIT_STONES] -= 10;
 					Slot03Cap = 10;
 					Slot04Cap = 10;
-				}
+				} 
 				else {
 					outputText("Yeah sure, you will get promoted. Or rather, you would like to but you lack the required spirit stones for the promotion fee.\n\n");
 					outputText("\"<i>Its ok just go to Moga Hen, he should be able to exchange those gem of yours for the local currency.</i>\"");
