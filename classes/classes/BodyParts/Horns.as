@@ -264,7 +264,7 @@ public class Horns extends BodyPart {
 		appearanceDescFunc: function(player: *): String {
 			var desc: String = "Two large sized spiraling horns grow from the side of your head, similar to those of a ram or frost wyrm. They kind of look great";
 
-			if (player.lowerBody == LowerBody.FROSTWYRM) desc += ", especially with your fur, which makes you look like a sheep serpentine dragon";
+			if (player.lowerBody == LowerBody.FROSTWYRM) desc += ", especially with your fluffy fur, which makes you look like a sheep serpentine dragon";
 
 			desc += ".";
 
@@ -293,6 +293,18 @@ public class Horns extends BodyPart {
 			var desc: String = "";
 
 			if (player.horns.count > 0) desc += " Two large-sized horns grow from the side of your head. The faint bioluminescent specks that line the length of each horn enhance with a mesmerizing glow. At the tip of each horn is a bright red glow, both as a gentle warning and an enthralling lure to unwary prey.";
+
+			return desc;
+		}
+	});
+
+	public static const JABBERWOCKY: int = 22;
+	EnumValue.add(Types, JABBERWOCKY, "JABBERWOCKY", {
+		name:"jabberwocky",
+		appearanceDescFunc: function(player: *): String {
+			var desc: String = "";
+
+			if (player.horns.count > 0) desc += " Four large-sized dragon horns grow from the side of your head curved like those of a jabberwocky.";
 
 			return desc;
 		}

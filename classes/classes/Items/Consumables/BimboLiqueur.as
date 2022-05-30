@@ -19,7 +19,6 @@ public class BimboLiqueur extends Consumable {
 		override public function canUse():Boolean {
 			if (!player.blockingBodyTransformations() || !game.player.hasPerk(PerkLib.FutaForm)) return true;
 			outputText("Ugh.  This stuff is so, like... last year.  Maybe you can find someone else to feed it to?\n\n");
-			if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= mutations.DrunkenPowerEmpowerOni() && (player.blockingBodyTransformations())) mutations.DrunkenPowerEmpower();
 			return false;
 		}
 
@@ -172,7 +171,7 @@ public class BimboLiqueur extends Consumable {
 				game.player.orgasm();
 				player.addCurse("int", 20, 2);
 				player.MutagenBonus("lib", 5);
-				if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= mutations.DrunkenPowerEmpowerOni()) mutations.DrunkenPowerEmpower();
+				mutations.DrunkenPowerEmpowerIfPossible();
 				//FULL ON BITCHFACE
 				game.player.modFem(100, 100);
 				//Body

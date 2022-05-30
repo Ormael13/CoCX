@@ -8,11 +8,11 @@ import classes.StatusEffects;
 public class LifetapSpell extends AbstractHexSpell {
 	public function LifetapSpell() {
 		super(
-				"Lifetap",
-				"Sacrifice a quarter of your hp to recover a quarter of your mana.",
-				TARGET_SELF,
-				TIMING_INSTANT,
-				[TAG_RECOVERY]
+			"Lifetap",
+			"Sacrifice a quarter of your hp to recover a quarter of your mana.",
+			TARGET_SELF,
+			TIMING_INSTANT,
+			[TAG_RECOVERY]
 		);
 		isBloodMagicApplicable = false;
 		isLastResortApplicable = false;
@@ -44,12 +44,11 @@ public class LifetapSpell extends AbstractHexSpell {
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (!backfired(display)) {
-			var lifetap:Number = hpCost();
 			if (display) {
 				outputText("You proceed to cut your hand and draw a small pattern. You feel your magical reservoirs fill back up by a significant amount.");
 			}
-			HPChange(-lifetap, false);
-			EngineCore.ManaChange(lifetap, false);
+			HPChange(-Math.round(player.maxHP() * .25), false);
+			EngineCore.ManaChange(Math.round(player.maxMana() * .25), false);
 		}
 	}
 }

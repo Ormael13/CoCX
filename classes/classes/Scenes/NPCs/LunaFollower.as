@@ -9,7 +9,6 @@ import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
-import classes.BodyParts.Face;
 import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
@@ -18,10 +17,8 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.SceneLib;
 import classes.Items.MutationsHelper;
-import classes.Stats.Buff;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 import classes.internals.SaveableState;
 
@@ -99,7 +96,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 		public function mainLunaMenu():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
-			if (isNightTime && flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && flags[kFLAGS.LUNA_FOLLOWER] >= 7 && flags[kFLAGS.LUNA_JEALOUSY] >= 400) {
+			if (isNightTime && flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && flags[kFLAGS.LUNA_FOLLOWER] >= 7 && flags[kFLAGS.LUNA_JEALOUSY] >= 400 && !player.blockingBodyTransformations()) {
 				SceneLib.lunaFollower.fullMoonEvent(true,true);
 			} else {
 				outputText("You call out to Luna, who immediately stops what she's doing and trots over to you as quickly as her professional dignity permits. She straightens her skirt and addresses you with a polite bow.\n\n" +
@@ -164,7 +161,10 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			addButton(1, "Service", talkMenuLunaWhatCanSheDo).hint("Ask what she can do for you.");
 			addButton(2, "Human", talkMenuLunaHuman).hint("Humans seem pretty rare her in Mareth, you've noticed.");
 			addButton(3, "Camp", talkMenuLunaCampThoughts).hint("Ask her her thoughts on her new place of work.");
-			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) addButton(4, "Lycanthropy", talkMenuLunaLycanthropy).hint("Yeah, humans <b>are</b> pretty rare huh? Find out more about Luna's condition.");
+			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) {
+				if (player.blockingBodyTransformations()) addButtonDisabled(4, "Lycanthropy", "Your body can't be transformed.");
+				else addButton(4, "Lycanthropy", talkMenuLunaLycanthropy).hint("Yeah, humans <b>are</b> pretty rare huh? Find out more about Luna's condition.");
+			}
 			else addButtonDisabled(4, "???", "You need to know her better for this.");
 			if (player.statusEffectv1(StatusEffects.LunaWasCaugh) >= 3)addButton(7, "Accuse", talkMenuLunaStopJealousy).hint("You know it was her, and it needs to stop now.");
 			if ((flags[kFLAGS.LUNA_FOLLOWER] == 13 || flags[kFLAGS.LUNA_FOLLOWER] == 14) && !player.hasPerk(PerkLib.Lycanthropy) && !player.hasPerk(PerkLib.LycanthropyDormant)) addButton(9, "Bite Me", talkMenuBiteMe).hint("This is a terrible idea!");
@@ -305,7 +305,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 					" she begins, and then begins undressing in order to transform. She maintains eye contact with you as she strips, a mixed expression of fear, hunger, adoration, and embarrassment on her face; the display is unintentionally erotic and you feel your own predatory instincts rising at the sight. Once she is fully naked and has assumed her wolf form, you hold your arm before her. Even with her blood surely boiling, she still you gently, lovingly, only just enough to draw blood, her long muzzle lingering against your skin, tasting you. It hurts at first, her hot breath and long, wet tongue like fire against your broken skin, but then the pain recedes, replaced with spreading pleasure as the wounds begin to throb, then close up. " +
 					"Your" + (player.hasCock() ? " [cock] suddenly springs erect" : "") + "" + (player.gender == 3 ? " and your" : "") + "" + (player.hasVagina() ? " pussy begins dripping with moisture" : "") + ", your breath quickens, and your skin begins to flush; you feel aroused but also sick, as if you were having an allergic or toxic reaction.\n\n" +
 					"As your panic rises, Luna pulls you into an embrace, speaking into your ear in a voice wet with emotion. \"<i>" + player.mf("Master","Mistress") + "... no, [name], my love, my everything, you don't know how much this means to me. I will never, ever leave you, never; you won't have to endure this alone, as I did, or anything else, ever again. I am yours, completely and utterly, your mate, your pack, your possession, for all eternity. Just endure a little while, I will hold you until it's over. I love you so much, [name], so, so much more than you can know, and I will never, ever let you forget it. Just a little while longer, and it will all be over.</i>\" You feel tears falling onto your neck and shoulder as she shakes you gently with suppressed sobs.\n\n" +
-					"But you don't have time to respond properly to her outpouring of emotion as " + (player.humanScore() < 30 ? "your body starts changing, and to your surprise, its features warp back to their old human appearance. For an instant think she may have somehow restored your already lost humanity, but it isn't so, not exactly, you realize, as " : "") + "fresh, new heat begins to spread from your rapidly healing tooth-marks and you start panting, trying to vent out the pleasure and the hot feeling in your body as something fundamental inside you begins to twist and warp.\n\n" +
+					"But you don't have time to respond properly to her outpouring of emotion as " + (!player.isRace(Races.HUMAN) < 7 ? "your body starts changing, and to your surprise, its features warp back to their old human appearance. For an instant think she may have somehow restored your already lost humanity, but it isn't so, not exactly, you realize, as " : "") + "fresh, new heat begins to spread from your rapidly healing tooth-marks and you start panting, trying to vent out the pleasure and the hot feeling in your body as something fundamental inside you begins to twist and warp.\n\n" +
 					"You half-shout, half-moan as fur begins to grow on your arms and legs. Your nails sharpen and curve into lethal-looking claws as your hands and feet reshape into padded, lupine paws. You groan in pain and pleasure, opening your mouth to reveal your lengthening canines as your spine extends into a furry tail while your ears migrate to the top of your head, sprouting smooth fur and changing into triangular points like those of a wolf. As your tongue lolls out of your slack jaw it rests against Luna's chest, and you realize that she is holding you closely, supporting you gently in her arms as you succumb, granting you a mercy and kindness in the midst of this terrifying, mesmerizing process that she must have wanted and been denied.\"\n\n");
 			if (player.hasCock()) outputText("As your thoughts turn to her you feel a tightness near the base of your cock, where your skin bunches and folds inward into a canine sheath, tightening and pulling your still-erect, straining length inside its hot depths before it once again surges out with a burst of pain and pleasure. Your dick is now blood-red, the base swollen into a grotesque, vein-covered knot, and the tip pointed. The sensations are too much for you, and you throw back your head and howl as your new lupine member erupts in a spray of hot cum against your lover, your pack-mate, your curse.\n\n");
 			player.lowerBody = LowerBody.WOLF;
@@ -343,7 +343,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats += 20;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
 			if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
-			if (player.findPerk(PerkLib.Lycanthropy) < 0) player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
+			if (!player.hasPerk(PerkLib.Lycanthropy)) player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
 			player.statStore.replaceBuffObject({ 'str': bonusStats,'tou': bonusStats,'spe': bonusStats}, 'Lycanthropy', { text: 'Lycanthropy'});
 			player.strStat.core.value += 5;
 			player.touStat.core.value += 5;
@@ -375,95 +375,12 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
 				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.LUNA_DEFEATS_COUNTER]++;
 				else flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 1;
-				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 2 && flags[kFLAGS.LUNA_LVL_UP] == 0) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 2));
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 2), 0, 0, 0);
+				if (flags[kFLAGS.LUNA_LVL_UP] < 15 && flags[kFLAGS.LUNA_DEFEATS_COUNTER] >= flags[kFLAGS.LUNA_LVL_UP] + 2) {
+					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3))
+						player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * flags[kFLAGS.LUNA_DEFEATS_COUNTER]));
+					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * flags[kFLAGS.LUNA_DEFEATS_COUNTER]), 0, 0, 0);
 					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.LUNA_LVL_UP] = 1;
-				}
-				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 3 && flags[kFLAGS.LUNA_LVL_UP] == 1) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 3));
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 3), 0, 0, 0);
-					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.LUNA_LVL_UP] = 2;
-				}
-				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.LUNA_LVL_UP] == 2) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4));
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4), 0, 0, 0);
-					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.LUNA_LVL_UP] = 3;
-				}
-				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.LUNA_LVL_UP] == 3) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5));
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5), 0, 0, 0);
-					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.LUNA_LVL_UP] = 4;
-				}
-				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 6 && flags[kFLAGS.LUNA_LVL_UP] == 4) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6));
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6), 0, 0, 0);
-					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.LUNA_LVL_UP] = 5;
-				}
-				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 7 && flags[kFLAGS.LUNA_LVL_UP] == 5) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7));
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7), 0, 0, 0);
-					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.LUNA_LVL_UP] = 6;
-				}
-				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 8 && flags[kFLAGS.LUNA_LVL_UP] == 6) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8));
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8), 0, 0, 0);
-					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.LUNA_LVL_UP] = 7;
-				}
-				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.LUNA_LVL_UP] == 7) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9));
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9), 0, 0, 0);
-					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.LUNA_LVL_UP] = 8;
-				}
-				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.LUNA_LVL_UP] == 8) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10));
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10), 0, 0, 0);
-					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.LUNA_LVL_UP] = 9;
-				}
-				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.LUNA_LVL_UP] == 9) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11), 0, 0, 0);
-					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.LUNA_LVL_UP] = 10;
-				}
-				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.LUNA_LVL_UP] == 10) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12));
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12), 0, 0, 0);
-					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.LUNA_LVL_UP] = 11;
-				}
-				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.LUNA_LVL_UP] == 11) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13));
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13), 0, 0, 0);
-					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.LUNA_LVL_UP] = 12;
-				}
-				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 14 && flags[kFLAGS.LUNA_LVL_UP] == 12) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14));
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14), 0, 0, 0);
-					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.LUNA_LVL_UP] = 13;
-				}
-				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 15 && flags[kFLAGS.LUNA_LVL_UP] == 13) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15));
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15), 0, 0, 0);
-					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.LUNA_LVL_UP] = 14;
-				}
-				if (flags[kFLAGS.LUNA_DEFEATS_COUNTER] == 16 && flags[kFLAGS.LUNA_LVL_UP] == 14) {
-					if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers3)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers3, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 16));
-					else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers3, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 16), 0, 0, 0);
-					flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.LUNA_LVL_UP] = 15;
+					++flags[kFLAGS.LUNA_LVL_UP];
 				}
 			}
 			cleanupAfterCombat();
@@ -566,9 +483,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			menu();
 			addButton(0,"Next", mainLunaMenu);
 		}
-		private function sleepWith(arg:String = ""):void {
-			flags[kFLAGS.SLEEP_WITH] = arg;
-		}
+
 		private function lunaChainToggle():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
@@ -596,12 +511,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 		public function warrningAboutJelously():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
-			if (flags[kFLAGS.LUNA_FOLLOWER] == 5) flags[kFLAGS.LUNA_FOLLOWER] = 6;
-			else if (flags[kFLAGS.LUNA_FOLLOWER] == 7) flags[kFLAGS.LUNA_FOLLOWER] = 8;
-			else if (flags[kFLAGS.LUNA_FOLLOWER] == 9) flags[kFLAGS.LUNA_FOLLOWER] = 10;
-			else if (flags[kFLAGS.LUNA_FOLLOWER] == 11) flags[kFLAGS.LUNA_FOLLOWER] = 12;
-			else if (flags[kFLAGS.LUNA_FOLLOWER] == 13) flags[kFLAGS.LUNA_FOLLOWER] = 14;
-			else flags[kFLAGS.LUNA_FOLLOWER] = 16;
+			if (flags[kFLAGS.LUNA_FOLLOWER] >= 5 && flags[kFLAGS.LUNA_FOLLOWER] %2 == 1) flags[kFLAGS.LUNA_FOLLOWER]++;
 			outputText("Luna comes over to you.\n\n" +
 					"\"<i>" + player.mf("Master","Mistress") + " I know that you are busy with important work, but it's been a long time since you accepted my service. I wish to remind you that should you need anything, truly <b>anything</b>, all you need to do is call me. My greatest pleasure is to serve you.</i>\"\n\n" +
 					"With that she leaves to prepare today's food, which you that you indeed have not enjoyed recently. You feel a little guilty thinking of all the work she does for you. Perhaps you should spare her an hour today.\n\n");
@@ -679,7 +589,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			menu();
 			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) addButton(0, "Accept", fullMoonEventAccept2);
 			else addButton(0, "Accept", fullMoonEventAccept);
-			if (player.dogScore() > 5 || player.wolfScore() > 5) addButtonDisabled(1, "Resist", "The smell of a female wolf in heat drives your canine instincts into a frenzy. You must have her here and now!");
+			if (player.racialScore(Races.DOG) > 5 || player.racialScore(Races.WOLF) > 5) addButtonDisabled(1, "Resist", "The smell of a female wolf in heat drives your canine instincts into a frenzy. You must have her here and now!");
 			else addButton(1, "Resist", fullMoonEventResist);
 		}
 		public function fullMoonEventAccept():void {
@@ -780,7 +690,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 					"\"<i>Everything will be ok now. The pain will only last for a few seconds and then... then...</i>\"\n\n" +
 					"Giving you no chance to question her, she lunges and bites right into your shoulder. At first it hurts like crazy but then, as she promised, the pain recedes, replaced with spreading pleasure as the wounds begin to throb and, to your surprise, close. Your" + (player.hasCock() ? " [cock] suddenly springs erect" : "") + "" + (player.gender == 3 ? " and your" : "") + "" + (player.hasVagina() ? " pussy begins dripping" : "") + ", your breath quickens, and your skin begins to flush; you feel aroused but also sick, as if you were having an allergic or toxic reaction.\n\n" +
 					"\"<i>I'm sorry, " + player.mf("Master","Mistress") + ". You may hate me at first, but to ensure that we'll always, always be together this is a price worth paying. I know you'll agree with me when it's over, that you'll love me the way you should. I'll be right here with you, I'll stay with you forever and ever. You won't have to endure it alone the way I did.</i>\" You realize that tears are falling from here large, phosphorescent green eyes onto you as she speaks in a voice wet with emotion, her face a twisted mask of love and guilt and agony.\n\n" +
-					"But before you can process the emotions she's expressing, or perceive your own, " + (player.humanScore() < 30 ? "your body starts changing, and to your surprise, its features warp back to their old human appearance. For an instant you think she may have somehow restored your already lost humanity, but it isn't so, not exactly, you realize, as " : "") + "fresh, new heat begins to spread from your rapidly healing tooth-marks and you start panting, trying to vent out the pleasure and the hot feeling in your body as something fundamental inside you begins to twist and warp.\n\n" +
+					"But before you can process the emotions she's expressing, or perceive your own, " + (!player.isRace(Races.HUMAN) < 7 ? "your body starts changing, and to your surprise, its features warp back to their old human appearance. For an instant you think she may have somehow restored your already lost humanity, but it isn't so, not exactly, you realize, as " : "") + "fresh, new heat begins to spread from your rapidly healing tooth-marks and you start panting, trying to vent out the pleasure and the hot feeling in your body as something fundamental inside you begins to twist and warp.\n\n" +
 					"You half-shout, half-moan as fur begins to grow on your arms and legs. Your nails sharpen and curve into lethal-looking claws as your hands and feet reshape into padded, lupine paws. You groan in pain and pleasure, opening your mouth to reveal your lengthening canines as your spine extends into a furry tail while your ears migrate to the top of your head, sprouting smooth fur and changing into triangular points like those of a wolf. " +
 					"As your tongue lolls out of your slack jaw it rests against Luna's chest, and you realize that she is holding you closely, supporting you gently in her arms as you succumb, granting you a mercy and kindness in the midst of this terrifying, mesmerizing process that she must have wanted and been denied.\"\n\n");
 			if (player.hasCock()) outputText("As your thoughts turn to her you feel a tightness near the base of your cock, where your skin bunches and folds inward into a canine sheath, tightening and pulling your still-erect, straining length inside its hot depths before it once again surges out with a burst of pain and pleasure. Your dick is now blood-red, the base swollen into a grotesque, vein-covered knot, and the tip pointed. The sensations are too much for you, and you throw back your head and howl as your new lupine member erupts in a spray of hot cum against your lover, your pack-mate, your curse");
@@ -898,11 +808,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			clearOutput();
 			sexMenuVaginalIntro2()
 		}
-		public function sexMenuVaginalIntroWW():void {
-			spriteSelect(SpriteDb.s_Luna_Mooning);
-			clearOutput();
-			sexMenuVaginalIntro2()
-		}
+
 		public function sexMenuVaginalIntro2():void {
 			outputText("Long hours spent fighting, exploring, and engaging in other... rough activities, have left your body aching and fatigued, and even though it was you that propositioned her in the first place you're having a hard time mustering up any enthusiasm. Luna easily picks up on your discomfort and moves forward to embrace you gently.\n\n" +
 					"\"<i>" + player.mf("Master","Mistress") + ", are you well? Have your travels left you weary?</i>\"" +
@@ -1008,7 +914,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (player.cocks.length > 1) outputText(" while your other cock" + (player.cocks.length == 2 ? "" : "s") + " explodes messily, painting the top of her head and your own torso with spurt after spurt of white, sticky cum");
 			outputText(".");
 			if (player.cumQ() >= 2000) {
-				outputText("By the time your massive ejaculation is finally finished and only a few more weak strings are spurting still from your mostly spent member, ");
+				outputText(" By the time your massive ejaculation is finally finished and only a few more weak strings are spurting still from your mostly spent member, ");
 				if (player.cocks.length > 1) outputText("your free [cock biggest2] has painted both of you and much of the surrounding area with the fruit of your orgasm, while ");
 				outputText("Luna's belly is visibly distended from the amount of your cream she has hungrily sucked down.");
 			}
@@ -1019,7 +925,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			}
 			outputText(".\n\n");
 			outputText("With one last noisy 'pop' she finally pulls her mouth from your now drooping length, licks a few stray dribbles from around her lips and off her fingertips. Then she smiles at you lovingly and says, in an exaggeratedly sugary tone " +
-					"\"<i>Oh my, " + player.mf("Master","Mistress") + "if I'd known you were going to feed me such a sumptuous snack I wouldn't have prepared my own meal today~. You must really love your cute maid Luna to offer her such a delicious treat~. I'll have to make your dinner <b>extra</b> special tonight to thank you~!</i>\"" +
+					"\"<i>Oh my, " + player.mf("Master","Mistress") + " if I'd known you were going to feed me such a sumptuous snack I wouldn't have prepared my own meal today~. You must really love your cute maid Luna to offer her such a delicious treat~. I'll have to make your dinner <b>extra</b> special tonight to thank you~!</i>\"" +
 					" She kisses you one more time and then collects her dress, heading to the river to clean off before she resumes her work. You wait for a few moments, still panting in spent, shivering bliss, before you rise and follow her to do the same.");
 			lunaJealousy(-100);
 			lunaAffection(2);
@@ -1224,6 +1130,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			flags[kFLAGS.LUNA_MOONING] = 1;
 			doNext(sexMenuDominateHer);
 		}
+		//TODO: SceneHunter, sort this shit out. Why is the method unused?
 		public function sexMenuDominateHer():void {
 			clearOutput();
 			//if player.werewolfScore() > 6 || player.wolfScore > 6 || player.dogScore > 6 {
@@ -1348,7 +1255,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			}
 			else {
 				//text for you and Luna continuing your rough, animalistic sex throughout the night
-				if (flags[kFLAGS.LUNA_FOLLOWER] < 7 && player.werewolfScore() > 6) {
+				if (flags[kFLAGS.LUNA_FOLLOWER] < 7 && player.racialScore(Races.WEREWOLF) > 6) {
 					//text for Luna being your bitch whom you intend to use freely until every dog in a ten mile radius knows she belongs only to you
 					flags[kFLAGS.LUNA_FOLLOWER] = 15;
 				}

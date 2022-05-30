@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Explore {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.display.SpriteDb;
 
 public class Lumi extends BaseContent {
 
@@ -27,7 +28,7 @@ public class Lumi extends BaseContent {
     }
 
     public function lumiLabChoices():void {
-        spriteSelect(37);
+        spriteSelect(SpriteDb.s_lumi);
         clearOutput();
         //First time meeting
         if (flags[kFLAGS.LUMI_MET] == 0) {
@@ -67,6 +68,7 @@ public class Lumi extends BaseContent {
             [consumables.PIGTRUF,consumables.BOARTRU],
             [consumables.PURHONY,consumables.SPHONEY],
             [consumables.SDELITE,consumables.S_DREAM],
+			//[consumables.SNAKOIL,consumables.RESNOIL],
         ];
         if(justCheck){
             for each(var improvable:Array in improvables){
@@ -95,7 +97,7 @@ public class Lumi extends BaseContent {
         }
     }
     private function lumiEnhanceGo0(itype:ItemType,nextItem:ItemType):void{
-        spriteSelect(37);
+        spriteSelect(SpriteDb.s_lumi);
         trace("LUMI ENHANCE");
         player.gems -= 100;
         statScreenRefresh();
@@ -158,7 +160,7 @@ public class Lumi extends BaseContent {
         }
     }
     private function lumiEnhanceGo1(itype:ItemType,nextItem:ItemType):void{
-        spriteSelect(37);
+        spriteSelect(SpriteDb.s_lumi);
         trace("LUMI ENHANCE");
         player.gems -= 100;
         statScreenRefresh();
@@ -181,7 +183,7 @@ public class Lumi extends BaseContent {
     }
 
     public function lumiShop():void {
-        spriteSelect(37);
+        spriteSelect(SpriteDb.s_lumi);
         //Set item handling to lumi shop
         clearOutput();
         outputText("You ask Lumi if you can see her potions.  She smiles at you and pulls out several bottles from her desk and shows them to you.\n\n\"<i>Gawantied qwality, made by Lumi herself,</i>\" she says proudly.\n\n");
@@ -198,7 +200,7 @@ public class Lumi extends BaseContent {
     }
 //Lust Draft
     private function lumiLustDraftPitch():void {
-        spriteSelect(37);
+        spriteSelect(SpriteDb.s_lumi);
         clearOutput();
         outputText("You point at the bottle filled with bubble-gum pink fluid.\n\n\"<i>De lust dwaft? Always a favowite, with it you nevar have to worwy about not bein weady for sexy time; one of my fiwst creations. 15 gems each.</i>\"\n\n");
         outputText("Will you buy the lust draft?");
@@ -206,7 +208,7 @@ public class Lumi extends BaseContent {
     }
 //Goblin Ale
     private function lumiPitchGobboAle():void {
-        spriteSelect(37);
+        spriteSelect(SpriteDb.s_lumi);
         clearOutput();
         outputText("You point at the flagon. \"<i>Oh? Oh thats Lumi's... actually no, dat tispsy stuff for 20 gems. You'll like if you want to be like Lumi. Do you like it?</i>\"\n\n");
         outputText("Will you buy the goblin ale?");
@@ -214,7 +216,7 @@ public class Lumi extends BaseContent {
     }
 //Ovi Elixir
     private function lumiPitchOviElixer():void {
-        spriteSelect(37);
+        spriteSelect(SpriteDb.s_lumi);
         clearOutput();
         outputText("You point at the curious hexagonal bottle. \"<i>De Oviposar Elixir? Made baithsed on da giant bee's special stuff dey give deir queen. It will help make de burfing go faster, an if you dwink it while you awen pweggy, iw will give you some eggs to burf later. More dwinks, eqwals more and biggar eggs. Lumi charges 45 gems for each dose.</i>\"\n\n");
         outputText("Will you buy the Ovi Elixir?");
@@ -222,7 +224,7 @@ public class Lumi extends BaseContent {
     }
 //Goblin Technomancer clothes
     private function lumiPitchGoblinTechnomancerClothes():void {
-        spriteSelect(37);
+        spriteSelect(SpriteDb.s_lumi);
         clearOutput();
         outputText("Lumi nods at your pick. \"<i>Buyin dese? Smart move. Nevar ouant ta work ouit stuff dats gunna gat ruined if some oil drips on it. Dese are true mechanist clothes. Sturdy, durable and best ov all, adaptable ta any gadget ya may plug ta dem.</i>\"\n\n");
         outputText("Will you buy the Goblin Technomancer clothes? (for 400 gems)");
@@ -230,7 +232,7 @@ public class Lumi extends BaseContent {
     }
 //Technomancer bra
     private function lumiPitchTechnomancerBra():void {
-        spriteSelect(37);
+        spriteSelect(SpriteDb.s_lumi);
         clearOutput();
         outputText("Lumi nods at your pick. \"<i>Buyin dese? Smart move. Nevar ouant ta work ouit stuff dats gunna gat ruined if some oil drips on it. Dese are true mechanist clothes. Sturdy, durable and best ov all, adaptable ta any gadget ya may plug ta dem.</i>\"\n\n");
         outputText("Will you buy the Technomancer bra? (for 600 gems)");
@@ -238,14 +240,14 @@ public class Lumi extends BaseContent {
     }
 //Technomancer panties
     private function lumiPitchTechnomancerPanties():void {
-        spriteSelect(37);
+        spriteSelect(SpriteDb.s_lumi);
         clearOutput();
         outputText("Lumi nods at your pick. \"<i>Buyin dese? Smart move. Nevar ouant ta work ouit stuff dats gunna gat ruined if some oil drips on it. Dese are true mechanist clothes. Sturdy, durable and best ov all, adaptable ta any gadget ya may plug ta dem.</i>\"\n\n");
         outputText("Will you buy the Technomancer panties? (for 600 gems)");
         doYesNo(curry(lumiPurchase, undergarments.T_PANTY), lumiShop);
     }
     private function lumiPurchase(itype:ItemType):void {
-        spriteSelect(37);
+        spriteSelect(SpriteDb.s_lumi);
         clearOutput();
         //After choosing, and PC has enough gems
         var cost:Number = 0;
@@ -276,7 +278,7 @@ public class Lumi extends BaseContent {
     }
 	
 	public function lumiSell():void {
-        spriteSelect(37);
+        spriteSelect(SpriteDb.s_lumi);
         //Set item handling to lumi shop
         clearOutput();
         outputText("\"<i>Aye "+player.mf("lad","lass")+" what ya got for trade today?</i>\"\n\n");
@@ -285,7 +287,7 @@ public class Lumi extends BaseContent {
 		addButton(14, "Leave", lumiShop);
     }
 	public function lumiSellMatsMetalPlates():void {
-        spriteSelect(37);
+        spriteSelect(SpriteDb.s_lumi);
         //Set item handling to lumi shop
         clearOutput();
         outputText("\"<i>Ya want to sell me this thing? Sure I will take it from you but only for 40 gem. I ain't running a pawn shop or charity booth here, this is a lab and I need parts and fundings. So in what quantity are we speaking?</i>\"\n\n");
@@ -312,7 +314,7 @@ public class Lumi extends BaseContent {
 	}
 	
 	public function lumiGarage():void {
-		spriteSelect(37);
+		spriteSelect(SpriteDb.s_lumi);
         clearOutput();
         player.createStatusEffect(StatusEffects.LumiWorkshop,0,0,0,0);
 		outputText("In the corner of Lumi’s weird shop, there is a large door to a room filled with similarly weird items, you ask Lumi about them.\n\n");
@@ -364,7 +366,7 @@ public class Lumi extends BaseContent {
 	}
 	
 	public function lumiEngineering():void {
-		spriteSelect(37);
+		spriteSelect(SpriteDb.s_lumi);
         clearOutput();
         outputText("I will ask Lia to write smth for this section.\n\n");
 		menu();
@@ -1211,7 +1213,7 @@ public class Lumi extends BaseContent {
 			else addButton(14, "Back", lumiLabChoices);
 		}
 		else {
-			spriteSelect(37);
+			spriteSelect(SpriteDb.s_lumi);
 			clearOutput();
 			outputText("Lumi answers by the negative when you ask for the key to the workshop.\n\n");
 			outputText("\"<i>Engineering is a goblin craft [name]. Its made <b>by</b> goblins <b>fer</b> goblins. Ya want in my workshop? Ya will have to look the part. I don't want to be responsible for some big oaf blowing " + player.mf("him", "herself") + " up with " + player.mf("his", "her") + " own explosives or shocking " + player.mf("him", "herself") + " to death with live wires.</i>\"\n\n");

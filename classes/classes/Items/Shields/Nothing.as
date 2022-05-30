@@ -1,8 +1,6 @@
 package classes.Items.Shields 
 {
-	import classes.ItemType;
 	import classes.Items.Shield;
-	import classes.Player;
 	
 	public class Nothing extends Shield
 	{

@@ -4,9 +4,7 @@
  */
 package classes.Items.Shields 
 {
-	import classes.Items.Shield;
 	import classes.PerkLib;
-	import classes.Player;
 
 	public class Sanctuary extends ShieldWithPerk
 	{
@@ -14,7 +12,7 @@ package classes.Items.Shields
 		public function Sanctuary() 
 		{
 			super("SanctL", "SanctuaryL", "Sanctuary shield (L)", "a Sanctuary shield (L)", 29, 2900,
-					"Shining in snow-white ivory with a silver trim, this legendary shield is said to heal and protect a knight of pure heart. Embellishments carved on the ivory cover most of its surface. Thanks to holy power it has been fully restored to its former glory.",
+					"Shining in snow-white ivory with a silver trim, this legendary shield is said to heal and protect a knight of pure heart. Embellishments carved on the ivory cover most of its surface.",
 					"Large", PerkLib.Sanctuary, 1, 0, 0, 0);
 		}
 		

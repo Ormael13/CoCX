@@ -4,8 +4,10 @@ import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Items.JewelryLib;
 import classes.Items.NecklaceLib;
+import classes.Scenes.NPCs.Forgefather;
 import classes.CoC;
 
 /**
@@ -433,7 +435,7 @@ import classes.CoC;
 			//Various Errors preventing action
 			if (keyItems.length <= 0)
 			{
-				//trace("ERROR: KeyItem could not be removed because player has no key items.");
+				CoC_Settings.error("KeyItem could not be removed because player has no key items.");
 				return;
 			}
 			while (counter > 0)
@@ -448,24 +450,24 @@ import classes.CoC;
 			}
 		}
 
-		public function addKeyValue(statusName:String, statusValueNum:Number = 1, newNum:Number = 0):void
+		public function addKeyValue(keyItemName:String, statusValueNum:Number = 1, newNum:Number = 0):void
 		{
 			var counter:Number = keyItems.length;
 			//Various Errors preventing action
 			if (keyItems.length <= 0)
 			{
+				CoC_Settings.error("Looking for keyitem '" + keyItemName + "' to change value " + statusValueNum + ", and player has no key items.");
 				return;
-					//trace("ERROR: Looking for keyitem '" + statusName + "' to change value " + statusValueNum + ", and player has no key items.");
 			}
 			while (counter > 0)
 			{
 				counter--;
 				//Find it, change it, quit out
-				if (keyItems[counter].keyName == statusName)
+				if (keyItems[counter].keyName == keyItemName)
 				{
 					if (statusValueNum < 1 || statusValueNum > 4)
 					{
-						//trace("ERROR: AddKeyValue called with invalid key value number.");
+						CoC_Settings.error("ERROR: AddKeyValue called with invalid key value number.");
 						return;
 					}
 					if (statusValueNum == 1)
@@ -479,82 +481,41 @@ import classes.CoC;
 					return;
 				}
 			}
-			//trace("ERROR: Looking for keyitem '" + statusName + "' to change value " + statusValueNum + ", and player does not have the key item.");
+			CoC_Settings.error("Looking for key item '" + keyItemName + "' to change value " + statusValueNum + ", and player does not have the key item.");
 		}
 
-		public function keyItemv1(statusName:String):Number
-		{
-			var counter:Number = keyItems.length;
-			//Various Errors preventing action
-			if (keyItems.length <= 0)
-			{
-				return 0;
-					//trace("ERROR: Looking for keyItem '" + statusName + "', and player has no key items.");
+		public function keyItemvX(keyItemName:String, keyValue:int):Number{
+			if (keyItems.length <= 0){	//If there's nothing, then it shouldn't be considered an error to report. Code handles it fine.
+				trace("ERROR: Looking for keyItem '" + keyItemName + "', and player has no key items.");
+				if (CoC.instance.debug){
+					EngineCore.outputText("ERROR: Looking for keyItem '" + keyItemName + "', and player has no key items.");
+				}
 			}
-			while (counter > 0)
-			{
-				counter--;
-				if (keyItems[counter].keyName == statusName)
-					return keyItems[counter].value1;
+			else{
+				var kItem:int = -1;
+				var counter:int = keyItems.length
+				while (counter > 0){
+					counter--;
+					if(keyItems[counter].keyName == keyItemName) {
+						kItem = counter;
+						break;
+					}
+				}
+				if (kItem != -1){
+					switch (keyValue){
+						case 1:
+							return keyItems[kItem].value1;
+						case 2:
+							return keyItems[kItem].value2;
+						case 3:
+							return keyItems[kItem].value3;
+						case 4:
+							return keyItems[kItem].value4;
+						default:
+							CoC_Settings.error("ERROR: Invalid keyValue requested for item " + keyItemName + ".");
+					}
+				}
 			}
-			//trace("ERROR: Looking for key item '" + statusName + "', but player does not have it.");
-			return 0;
-		}
-
-		public function keyItemv2(statusName:String):Number
-		{
-			var counter:Number = keyItems.length;
-			//Various Errors preventing action
-			if (keyItems.length <= 0)
-			{
-				return 0;
-					//trace("ERROR: Looking for keyItem '" + statusName + "', and player has no key items.");
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (keyItems[counter].keyName == statusName)
-					return keyItems[counter].value2;
-			}
-			//trace("ERROR: Looking for key item '" + statusName + "', but player does not have it.");
-			return 0;
-		}
-
-		public function keyItemv3(statusName:String):Number
-		{
-			var counter:Number = keyItems.length;
-			//Various Errors preventing action
-			if (keyItems.length <= 0)
-			{
-				return 0;
-					//trace("ERROR: Looking for keyItem '" + statusName + "', and player has no key items.");
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (keyItems[counter].keyName == statusName)
-					return keyItems[counter].value3;
-			}
-			//trace("ERROR: Looking for key item '" + statusName + "', but player does not have it.");
-			return 0;
-		}
-
-		public function keyItemv4(statusName:String):Number
-		{
-			var counter:Number = keyItems.length;
-			//Various Errors preventing action
-			if (keyItems.length <= 0)
-			{
-				return 0;
-					//trace("ERROR: Looking for keyItem '" + statusName + "', and player has no key items.");
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (keyItems[counter].keyName == statusName)
-					return keyItems[counter].value4;
-			}
-			//trace("ERROR: Looking for key item '" + statusName + "', but player does not have it.");
 			return 0;
 		}
 
@@ -583,27 +544,6 @@ import classes.CoC;
 			return -1;
 		}
 
-		//Grow
-
-		//BreastCup
-
-		/*OLD AND UNUSED
-		   public function breastCupS(rowNum:Number):String {
-		   if(breastRows[rowNum].breastRating < 1) return "tiny";
-		   else if(breastRows[rowNum].breastRating < 2) return "A";
-		   else if(breastRows[rowNum].breastRating < 3) return "B";
-		   else if(breastRows[rowNum].breastRating < 4) return "C";
-		   else if(breastRows[rowNum].breastRating < 5) return "D";
-		   else if(breastRows[rowNum].breastRating < 6) return "DD";
-		   else if(breastRows[rowNum].breastRating < 7) return "E";
-		   else if(breastRows[rowNum].breastRating < 8) return "F";
-		   else if(breastRows[rowNum].breastRating < 9) return "G";
-		   else if(breastRows[rowNum].breastRating < 10) return "GG";
-		   else if(breastRows[rowNum].breastRating < 11) return "H";
-		   else if(breastRows[rowNum].breastRating < 12) return "HH";
-		   else if(breastRows[rowNum].breastRating < 13) return "HHH";
-		   return "massive custom-made";
-		 }*/
 		public function viridianChange():Boolean
 		{
 			var count:int = cockTotal();
@@ -644,12 +584,14 @@ import classes.CoC;
 				min -= maxHP() * 0.08;
 				min -= (2400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}//nastepny diehard to 10% i 3000 a potem 12% i 3600
-			if (hasPerk(MutationsLib.LizanMarrowEvolved)) min -= maxHP() * 0.05;
-			if (hasPerk(MutationsLib.OrcAdrenalGlandsEvolved) || game.player.orcScore() >= 11) {
+			if (perkv1(IMutationsLib.LizanMarrowIM) >= 3) min -= maxHP() * 0.05;
+			if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 3 || game.player.isRace(Races.ORC)) {
 				if (hasPerk(PerkLib.Ferocity)) min -= maxHP() * 0.07;
-				if (hasPerk(MutationsLib.OrcAdrenalGlands)) min -= maxHP() * 0.01;
-				if (hasPerk(MutationsLib.OrcAdrenalGlandsPrimitive)) min -= maxHP() * 0.02;
+				if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 1) min -= maxHP() * 0.01;
+				if (perkv1(IMutationsLib.OrcAdrenalGlandsIM) >= 2) min -= maxHP() * 0.02;
 			}
+			if (hasPerk(PerkLib.Rage)) min -= maxHP() * 0.05;
+			if (hasPerk(PerkLib.TooAngryToDie)) min -= maxWrath();
 			if (hasPerk(PerkLib.DeityJobMunchkin)) {
 				min -= str;
 				min -= tou;
@@ -672,26 +614,16 @@ import classes.CoC;
 			var max:Number = maxFatigueBaseStat.value;
 			var multimax:Number = maxFatigueMultStat.value;
 			max += maxFatiguePerSpeStat.value*spe;
-			if (game.player.alicornScore() >= 12) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.dragonScore() >= 24) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.dragonScore() >= 32) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.foxScore() >= 7) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.kitsuneScore() >= 5) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.kitsuneScore() >= 9 && game.player.tailType == 13 && game.player.tailCount >= 2) {
-				max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (game.player.kitsuneScore() >= 16 && game.player.tailCount == 9) {
-					max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-					if (game.player.kitsuneScore() >= 21 && hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
-						max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-						if (game.player.kitsuneScore() >= 26) max += (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-					}
-				}
-			}
-			if (game.player.lizardScore() >= 4) max += (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.unicornScore() >= 10) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.EromancyBeginner)) max += Math.round(lib);
 			if (hasPerk(PerkLib.EromancyExpert)) max += Math.round(lib*2);
-			if (hasPerk(PerkLib.EromancyMaster)) max += Math.round(lib*2);
+			if (hasPerk(PerkLib.EromancyMaster)) max += Math.round(lib * 2);
+			if (isGargoyle() && Forgefather.material == "sandstone")
+			{
+				if (Forgefather.refinement == 1) multimax += (.15);
+				if (Forgefather.refinement == 2) multimax += (.25);
+				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) multimax += (.35);
+				if (Forgefather.refinement == 5) multimax += (.5);
+			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -757,21 +689,13 @@ import classes.CoC;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_SF) max += necklaceEffectMagnitude;//+100	 necklaceName == "soulmetal necklace"
 			max += level * maxSfPerLevelStat.value;
 			if (level <= 6) max += level * 5;
-			if (game.player.alicornScore() >= 12) multimax += 0.2;
-			if (game.player.kitsuneScore() >= 5) multimax += 0.1;
-			if (game.player.kitsuneScore() >= 9 && game.player.tailType == 13 && game.player.tailCount >= 2) {
-				multimax += 0.1;
-				if (game.player.kitsuneScore() >= 16 && game.player.tailCount == 9) {
-					multimax += 0.2;
-					if (game.player.kitsuneScore() >= 21 && hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
-						multimax += 0.25;
-						if (game.player.kitsuneScore() >= 26) multimax += 0.35;
-					}
-				}
+			if (isGargoyle() && Forgefather.material == "marble")
+			{
+				if (Forgefather.refinement == 1) multimax += (.15);
+				if (Forgefather.refinement == 2) multimax += (.25);
+				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) multimax += (.35);
+				if (Forgefather.refinement == 5) multimax += (.5);
 			}
-			if (game.player.nekomataScore() >= 10) multimax += 0.1;
-			if (game.player.nekomataScore() >= 12 && game.player.tailType == 8 && game.player.tailCount == 2) multimax += 0.2;
-			if (game.player.unicornScore() >= 10) multimax += 0.1;
 			if (hasPerk(PerkLib.HistoryCultivator) || hasPerk(PerkLib.PastLifeCultivator)) multimax += 0.1;
 			if (hasPerk(PerkLib.JobSoulCultivator)) {//8005-9005 soulforce na razie przed liczeniem mnożnika jest
 				if (hasPerk(PerkLib.Dantain)) {
@@ -799,15 +723,17 @@ import classes.CoC;
 			}
 			max *= multimax;
 			max = Math.round(max);
+			if (hasPerk(PerkLib.Soulless) || max < 0) max = 0;
 			if (max > 1499999) max = 1499999;
 			return max;
 		}
 		public override function maxOverSoulforce():Number {
 			var max1:Number = maxSoulforce();
 			var max2:Number = 1;
-			max1 *= max2;//~170%
-			max1 = Math.round(max1);//~809 905,5
-			if (max1 > 1499999) max1 = 1499999;
+			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			max1 *= max2;//~110%
+			max1 = Math.round(max1);
+			if (max1 > 1699999) max1 = 1699999;
 			return max1;
 		}
 
@@ -825,14 +751,20 @@ import classes.CoC;
 			if (level <= 6) max += level * 5;
 			else max += 30;
 			//~194,455
-			if (game.player.orcScore() >= 5) multimax += 0.1;
-			if (game.player.orcScore() >= 11) multimax += 0.1;
+			if (game.player.isRace(Races.ORC)) multimax += 0.2;
 			if (vehiclesName == "Giant Slayer Mech") {
 				multimax += 0.1;
 				//if (upgrade mecha) multimax += 0.1;
 				//if (upgrade mecha) multimax += 0.1;
 				//if (upgrade mecha) multimax += 0.1;
 				//if (upgrade mecha) multimax += 0.1;
+			}
+			if (isGargoyle() && Forgefather.material == "ebony")
+			{
+				if (Forgefather.refinement == 1) multimax += (.15);
+				if (Forgefather.refinement == 2) multimax += (.25);
+				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) multimax += (.35);
+				if (Forgefather.refinement == 5) multimax += (.5);
 			}
 			max *= multimax;//~245%
 			max = Math.round(max);//476 414,75
@@ -851,9 +783,10 @@ import classes.CoC;
 			if (hasPerk(PerkLib.AsuraToughness)) max2 += 0.1;
 			//
 			if (hasPerk(PerkLib.AsuraSpeed)) max2 += 0.1;
-			max1 *= max2;//~170%
-			max1 = Math.round(max1);//~809 905,5
-			if (max1 > 809999) max1 = 809999;
+			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			max1 *= max2;//~180%
+			max1 = Math.round(max1);//~857 546,5
+			if (max1 > 859999) max1 = 859999;
 			return max1;
 		}
 		public function maxSafeWrathMagicalAbilities():Number {
@@ -899,24 +832,20 @@ import classes.CoC;
 			if (hasPerk(PerkLib.GrandArchmage2ndCircle) && inte >= 150) max += 270;
 			if (hasPerk(PerkLib.GrandArchmage3rdCircle) && inte >= 175) max += 315;
 			if (hasPerk(PerkLib.GrandGreyArchmage) && inte >= 225) max += 600;
+			if (hasPerk(PerkLib.GrandGreyArchmage2ndCircle) && inte >= 275) max += 900;
 			if (hasPerk(PerkLib.GrandMage) && inte >= 75) max += 135;
 			if (hasPerk(PerkLib.GreyArchmage) && inte >= 175) max += 450;
 			if (hasPerk(PerkLib.GreyMage) && inte >= 125) max += 300;
 			if (hasPerk(PerkLib.GreyMageApprentice) && inte >= 75) max += 150;
 			if (hasPerk(PerkLib.Mage) && inte >= 50) max += 90;
-			if (hasPerk(PerkLib.Spellpower) && inte >= 50) max += 45;
 			if (hasPerk(PerkLib.JobSorcerer)) max += 45;
 			if (hasPerk(PerkLib.JobHealer)) max += 90;
+			if (hasPerk(PerkLib.Spellpower) && inte >= 50) max += 45;
+			if (hasPerk(PerkLib.SpellpowerGrey) && inte >= 50) max += 75;
 			if (hasPerk(PerkLib.SpellpowerHealing) && wis >= 50) max += 90;
 			if (hasPerk(PerkLib.EromancyBeginner)) max += Math.round(inte*3);
 			if (hasPerk(PerkLib.EromancyExpert)) max += Math.round(inte*3);
 			if (hasPerk(PerkLib.EromancyMaster)) max += Math.round(inte*6);
-			if (game.player.elfScore() >= 5) multimax += 0.1;
-			if (game.player.elfScore() >= 11) multimax += 0.1;
-			if (game.player.woodElfScore() >= 22) multimax += 0.1;
-			if (game.player.woodElfScore() >= 25) multimax += 0.1;
-			if (game.player.woodElfScore() >= 28) multimax += 0.1;
-			if (game.player.woodElfScore() >= 31) multimax += 0.1;
 			if (hasPerk(PerkLib.HistoryScholar) || hasPerk(PerkLib.PastLifeScholar)) multimax += 0.1;
 			if (hasPerk(PerkLib.ArcaneRegenerationMinor) && inte >= 50) {
 				multimax += 0.05;
@@ -930,13 +859,21 @@ import classes.CoC;
 				if (hasPerk(PerkLib.GrandArchmage) && inte >= 125) multimax += 0.15;
 				if (hasPerk(PerkLib.GrandArchmage2ndCircle) && inte >= 150) multimax += 0.15;
 				if (hasPerk(PerkLib.GrandArchmage3rdCircle) && inte >= 175) multimax += 0.15;
-				if (hasPerk(PerkLib.GrandGreyArchmage) && inte >= 225) multimax += 0.2;
+				if (hasPerk(PerkLib.GrandGreyArchmage) && inte >= 225) multimax += 0.25;
+				if (hasPerk(PerkLib.GrandGreyArchmage2ndCircle) && inte >= 275) multimax += 0.3;
 				if (hasPerk(PerkLib.GrandMage) && inte >= 75) multimax += 0.1;
-				if (hasPerk(PerkLib.GreyArchmage) && inte >= 175) multimax += 0.15;
+				if (hasPerk(PerkLib.GreyArchmage) && inte >= 175) multimax += 0.2;
 				if (hasPerk(PerkLib.GreyMage) && inte >= 125) multimax += 0.15;
 				if (hasPerk(PerkLib.GreyMageApprentice) && inte >= 75) multimax += 0.1;
 				if (hasPerk(PerkLib.Mage) && inte >= 50) multimax += 0.1;
 				if (hasPerk(PerkLib.JobSorcerer)) multimax += 0.1;
+			}
+			if (isGargoyle() && Forgefather.material == "alabaster")
+			{
+				if (Forgefather.refinement == 1) multimax += (.15);
+				if (Forgefather.refinement == 2) multimax += (.25);
+				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) multimax += (.35);
+				if (Forgefather.refinement == 5) multimax += (.5);
 			}
 			if (hasPerk(PerkLib.AscensionInnerPower)) max += perkv1(PerkLib.AscensionInnerPower) * 120;
 			if (jewelryEffectId == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude;
@@ -947,15 +884,17 @@ import classes.CoC;
 			if (level <= 6) max += level * 10;
 			max *= multimax;
 			max = Math.round(max);
+			if (max < 0) max = 0;
 			if (max > 2499999) max = 2499999;
 			return max;
 		}
 		public override function maxOverMana():Number {
 			var max1:Number = maxMana();
 			var max2:Number = 1;
-			max1 *= max2;//~170%
-			max1 = Math.round(max1);//~809 905,5
-			if (max1 > 2499999) max1 = 2499999;
+			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			max1 *= max2;//~110%
+			max1 = Math.round(max1);
+			if (max1 > 2749999) max1 = 2749999;
 			return max1;
 		}
 
@@ -965,6 +904,7 @@ import classes.CoC;
 			var multimaxven:Number = 1;
 			if (CoC.instance.transformations.FaceSnakeFangs.isPresent()) maxven += 200;
 			if (CoC.instance.transformations.FaceSpiderFangs.isPresent()) maxven += 200;
+			if (CoC.instance.transformations.FaceJabberwocky.isPresent()) maxven += 200;
 			if (game.player.tailType == Tail.BEE_ABDOMEN) maxven += 300;
 			if (game.player.tailType == Tail.SPIDER_ADBOMEN) maxven += 300;
 			if (game.player.tailType == Tail.SCORPION) maxven += 300;
@@ -974,9 +914,9 @@ import classes.CoC;
 			if (hasPerk(PerkLib.ImprovedVenomGland)) maxven += 100;
 			if (hasPerk(PerkLib.ImprovedVenomGlandEx)) maxven += 200;
 			if (hasPerk(PerkLib.ImprovedVenomGlandSu)) maxven += 400;
-			if (hasPerk(MutationsLib.VenomGlands)) maxven += 100;
-			if (hasPerk(MutationsLib.VenomGlandsPrimitive)) maxven += 400;
-			if (hasPerk(MutationsLib.VenomGlandsEvolved)) {
+			if (perkv1(IMutationsLib.VenomGlandsIM) >= 1) maxven += 100;
+			if (perkv1(IMutationsLib.VenomGlandsIM) >= 2) maxven += 400;
+			if (perkv1(IMutationsLib.VenomGlandsIM) >= 3) {
 				maxven += 700;
 				multimaxven += 1;
 			}
@@ -1002,9 +942,7 @@ import classes.CoC;
 				if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) multimaxven += 0.2;
 				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) multimaxven += 0.25;
 			}
-			if (hasPerk(MutationsLib.ArachnidBookLung)) multimaxven += 1;
-			if (hasPerk(MutationsLib.ArachnidBookLungPrimitive)) multimaxven += 1;
-			if (hasPerk(MutationsLib.ArachnidBookLungEvolved)) multimaxven += 1;
+			if (perkv1(IMutationsLib.ArachnidBookLungIM) > 0) multimaxven += perkv1(IMutationsLib.ArachnidBookLungIM);
 			maxven *= multimaxven;
 			maxven = Math.round(maxven);
 			return maxven;
@@ -1013,6 +951,7 @@ import classes.CoC;
 		public function maxHunger():Number
 		{
 			var max:Number = 100;
+			var tier:int;
 			if (hasPerk(PerkLib.JobSoulCultivator)) max += 20;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 1) max += 20 * flags[kFLAGS.SOUL_CULTIVATION];//Soul Apprentice
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 4) max += 1 * (flags[kFLAGS.SOUL_CULTIVATION] - 3);//Soul Personage
@@ -1030,23 +969,24 @@ import classes.CoC;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 40) max += 10 * (flags[kFLAGS.SOUL_CULTIVATION] - 39);//Soul Saint
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 43) max += 12 * (flags[kFLAGS.SOUL_CULTIVATION] - 42);//Soul Paragon
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 46) max += 12 * (flags[kFLAGS.SOUL_CULTIVATION] - 45);//Soul Immortal
-			if (game.player.dragonScore() >= 16) max += 50;
-			if (game.player.dragonScore() >= 24) max += 50;
-			if (game.player.pigScore() >= 5) max += 10;
-			if (game.player.pigScore() >= 10) max += 15;
-			if (game.player.pigScore() >= 15) max += 20;
-			if (game.player.orcaScore() >= 6) max += 15;
-			if (game.player.orcaScore() >= 14) max += 20;
-			if (game.player.orcaScore() >= 20) max += 25;
+			tier = game.player.racialTier(Races.DRAGON);
+			if (tier == 1) max += 50;
+			else if (tier >= 2) max += 100;
+			tier = game.player.racialTier(Races.PIG);
+			if (tier == 1) max += 25;
+			else if (tier >= 2) max += 45;
+			tier = game.player.racialTier(Races.ORCA);
+			if (tier == 1) max += 35;
+			else if (tier >= 2) max += 60;
 			if (hasPerk(PerkLib.EzekielBlessing)) max += 50;
-			if (hasPerk(MutationsLib.DisplacerMetabolismPrimitive)) max += 50;
-			if (hasPerk(MutationsLib.ManticoreMetabolismPrimitive)) max += 50;
-			if (hasPerk(MutationsLib.PigBoarFat)) max += 5;
-			if (hasPerk(MutationsLib.PigBoarFatPrimitive)) max += 10;
-			if (hasPerk(MutationsLib.PigBoarFatEvolved)) max += 20;
-			if (hasPerk(MutationsLib.WhaleFat)) max += 5;
-			if (hasPerk(MutationsLib.WhaleFatPrimitive)) max += 10;
-			if (hasPerk(MutationsLib.WhaleFatEvolved)) max += 20;
+			if (perkv1(IMutationsLib.DisplacerMetabolismIM) >= 2) max += 50;
+			if (perkv1(IMutationsLib.ManticoreMetabolismIM) >= 2) max += 50;
+			if (perkv1(IMutationsLib.PigBoarFatIM) >= 1) max += 5;
+			if (perkv1(IMutationsLib.PigBoarFatIM) >= 2) max += 10;
+			if (perkv1(IMutationsLib.PigBoarFatIM) >= 3) max += 20;
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 1) max += 5;
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 2) max += 10;
+			if (perkv1(IMutationsLib.WhaleFatIM) >= 3) max += 20;
 			// (hasPerk(PerkLib.) && game.player.humanScore() < 5) max += 100;
 			// jak bedzie mieć chimeryczna nature to kolejny boost to max hunger moze...150 lub nawet 200 ^^
 			if (hasPerk(PerkLib.IronStomach)) max += 50;

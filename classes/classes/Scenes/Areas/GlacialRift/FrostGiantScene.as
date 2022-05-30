@@ -1,21 +1,14 @@
 package classes.Scenes.Areas.GlacialRift 
 {
 	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.CoC;
 	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.Scenes.UniqueSexScenes;
+	import classes.Scenes.SceneLib;
 	
 	public class FrostGiantScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function FrostGiantScene() 
 		{
-		}
-		
-		public function loseToGiant():void {
-			cleanupAfterCombat();
 		}
 		
 		public function winAgainstGiant():void {
@@ -23,12 +16,12 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("The giant staggers and falls down on his knees. You wonder what you should do next.");
 			if (player.weaponName == "fists" && player.weaponRangeName == "nothing" && player.armor.name == "nothing" && player.shieldName == "nothing") awardAchievement("Like Chuck Norris", kACHIEVEMENTS.GENERAL_LIKE_CHUCK_NORRIS);
 			menu();
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.lust >= 33) {
 				if (player.hasCock()) addButton(0, "Nosefuck", noseJob);
 				if (player.hasVagina()) addButton(1, "RideVaginally", rideVaginally);
 				addButton(2, "Ride Anally", rideAnally);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstGiant);
 			}
 			else {
 				cleanupAfterCombat();
@@ -40,12 +33,12 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("Young giant staggers and falls down on his knees. You wonder what you should do next.");
 			if (player.weaponName == "fists" && player.weaponRangeName == "nothing" && player.armor.name == "nothing" && player.shieldName == "nothing") awardAchievement("Texas Ranger", kACHIEVEMENTS.GENERAL_TEXAS_RANGER);
 			menu();
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.lust >= 33) {
 				if (player.hasCock()) addButton(0, "Nosefuck", noseJob);
 				if (player.hasVagina()) addButton(1, "RideVaginally", rideVaginally);
 				addButton(2, "Ride Anally", rideAnally);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstYoungGiant);
 			}
 			else {
 				cleanupAfterCombat();
@@ -114,22 +107,10 @@ package classes.Scenes.Areas.GlacialRift
 			if (player.hasCock()) outputText("You shoot ropes of jism from your [cocks] and cum all over his chest.  ");
 			if (player.hasVagina()) outputText("Feminine juice splatters all over from your [vagina] and onto his cock.  " );
 			outputText("The giant, however, still needs his release and as he continues pumping, you reach climax more times than you can count. At last, you hear the giant moan, and he finally slides his entire length into you.");
-			outputText("You yelp in surprise as as the giant cums, filling your bowels completely and stuffing your stomach. The giant laughs and grabs you, licks you clean, and sets you down, sheltering you from the cold with his hands and allowing you to fix your armor. Once you redress, the giant lets out a bellowing laugh and saunters off behind a mountain. You feel warm thanks to being stuffed with his cum.");
+			outputText("You yelp in surprise as the giant cums, filling your bowels completely and stuffing your stomach. The giant laughs and grabs you, licks you clean, and sets you down, sheltering you from the cold with his hands and allowing you to fix your armor. Once you redress, the giant lets out a bellowing laugh and saunters off behind a mountain. You feel warm thanks to being stuffed with his cum.");
 			player.refillHunger(30);
 			player.sexReward("cum","Anal");
 			cleanupAfterCombat();			
-		}
-		
-		private function suckHimOff():void {
-			clearOutput();
-			outputText("PLACEHOLDER");
-			player.refillHunger(100);
-			cleanupAfterCombat();
-		}
-		
-		private function exitGiant():void {
-			menu();
-			cleanupAfterCombat();
 		}
 	}
 

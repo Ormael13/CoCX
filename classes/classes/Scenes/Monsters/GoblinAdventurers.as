@@ -7,11 +7,10 @@ package classes.Scenes.Monsters
 import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
-import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
-	public class GoblinAdventurers extends Monster
+public class GoblinAdventurers extends Monster
 	{
 		protected function goblinDrugAttack():void {
 			var temp2:Number = rand(5);
@@ -35,7 +34,7 @@ import classes.internals.*;
 				else outputText("  There doesn't seem to be any effect.\n");
 			}
 			//Dodge chance!
-			if((player.findPerk(PerkLib.Evade) >= 0 && rand(10) <= 3) || (rand(100) < player.spe/5)) {
+			if((player.hasPerk(PerkLib.Evade) && rand(10) <= 3) || (rand(100) < player.spe/5)) {
 				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n");
 			}
 			//Get hit!
@@ -116,17 +115,11 @@ import classes.internals.*;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.goblinAssassinScene.gobboAssassinRapeIntro2();
+			SceneLib.goblinScene.gobboRapeIntro();
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
-				outputText("You collapse in front of the goblins, too wounded to fight.  They growls and kicks you in the head, making your vision swim. As your sight fades, you hear them murmur, \"<i>Fucking dicks can't even bother to grow a dick or cunt.</i>\"");
-				SceneLib.combat.cleanupAfterCombatImpl();
-			} 
-			else {
-				SceneLib.goblinAssassinScene.gobboAssassinBeatYaUp2();
-			}
+			SceneLib.goblinScene.gobboSpecialBeatYaUp();
 		}
 		
 		public function GoblinAdventurers() 

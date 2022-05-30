@@ -3,10 +3,6 @@
  */
 package classes.Items 
 {
-	import classes.ItemType;
-	import classes.PerkLib;
-	import classes.Player;
-
 	public class MiscJewelry extends Useable
 	{
 		private var _effectId:Number;

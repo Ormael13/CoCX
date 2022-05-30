@@ -23,7 +23,7 @@ use namespace CoC;
 		public function exploreBattlefieldBoundary():void {
 			flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY]++;
 			//Discover Outer Battlefield
-			if (flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] <= 0 && player.level >= 19) {
+			if (flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 19) {
 				flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] = 1;
 				player.explored++;
 				clearOutput();
@@ -48,11 +48,14 @@ use namespace CoC;
 			}
 			//Diana
 			if (flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(5) == 0) {
-				SceneLib.dianaScene.repeatBattlefieldEnc();
+                if ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8)
+                    SceneLib.dianaScene.postNameEnc();
+                else
+				    SceneLib.dianaScene.repeatEnc();
 				return;
 			}
 			//Ted
-			if (flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 4 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1 && rand(10) == 0) {
+			if (SceneLib.tedScene.canEncounterTed() && rand(10) == 0) {
 				SceneLib.tedScene.introPostHiddenCave();
 				return;
 			}
@@ -124,7 +127,7 @@ use namespace CoC;
 				default:
 					clearOutput();
 					if (rand(4) == 0) {
-						outputText("You spend almost hour exploring this deserted battlefield but you don't manage to find anything interesting. Adter checking another pile of weapons you hear some noise comming from nearby. Intrigued you cautiously approach source of it, which turns to be... "+(rand(2) == 0?"demons":"imps")+". Whole group of them running straight at you. ");
+						outputText("You spend almost hour exploring this deserted battlefield but you don't manage to find anything interesting. After checking another pile of weapons you hear some noise coming from nearby. Intrigued you cautiously approach source of it, which turns to be... "+(rand(2) == 0?"demons":"imps")+". Whole group of them running straight at you. ");
 						outputText("As they approach you ready your [weapon] but... the first ones after reaching you jsut give you a short glance and just pass by. Then another one and one more pass you by almost looking like they just seen you as merely obstacle to avoid during their run. Then you hear some fragments of the words they seems to talks form time to time.\n\n");
 						outputText("\"<i>...ster or the fog will catch up to u...</i>\", \"<i>...ut there is <b>SOMETHING</b> insid...</i>\", \"<i>...us..t reeee....port b...</i>\"\n\n");
 						outputText("After last one of them pass you by they soon vanish into distance behind you. What just happened? Usualy laidback and horny " + (rand(2) == 0?"demons":"imps") + " was actualy running away? From fog? As you thinking over it you notice something moving slightly in the direction they came. ");

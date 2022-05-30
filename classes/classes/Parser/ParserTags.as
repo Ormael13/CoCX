@@ -4,10 +4,9 @@ import classes.CoC;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Measurements;
-import classes.internals.Utils;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
-import classes.PlayerAppearance;
+import classes.Scenes.NPCs.Forgefather;
 import classes.internals.Utils;
 
 public class ParserTags {
@@ -38,7 +37,7 @@ public class ParserTags {
         "ass"                   : function ():* { return CoC.instance.player.buttDescript(); },
         "asshole"               : function ():* { return CoC.instance.player.assholeDescript(); },
         "balls"                 : function ():* { return CoC.instance.player.ballsDescriptLight(); },
-        "ballsarticle"         : function ():* { return CoC.instance.player.ballsDescriptArticle(); },
+        "ballsarticle"          : function ():* { return CoC.instance.player.ballsDescriptArticle(); },
         "bodytype"              : function ():* { return CoC.instance.player.bodyType(); },
         "boyfriend"             : function ():* { return CoC.instance.player.mf("boyfriend", "girlfriend"); },
         "breasts"               : function ():* { return CoC.instance.player.breastDescript(0); },
@@ -61,8 +60,16 @@ public class ParserTags {
         "finger"                : function ():* { return CoC.instance.player.finger(); },
         "feet"                  : function ():* { return CoC.instance.player.feet(); },
         "foot"                  : function ():* { return CoC.instance.player.foot(); },
+        "font-red"              : function ():* { return '<font color="'+"#a00000"+'">'; },
+        "font-green"            : function ():* { return '<font color="'+"#00a000"+'">'; },
+        "font-blue"             : function ():* { return '<font color="'+"#0000ff"+'">'; },
+        "font-lblue"            : function ():* { return '<font color="'+"#00a0ff"+'">'; },
+        "font-yellow"           : function ():* { return '<font color="'+"#aa8822"+'">'; },
+        "font-pink"             : function ():* { return '<font color="'+"#a000a0"+'">'; },
+        "font-default"          : function ():* { return '<font>'; },
+        "/font"                 : function ():* { return '</font>'; },
         "fullchest"             : function ():* { return CoC.instance.player.allChestDesc(); },
-        "gargoylematerial"      : function ():* { return PlayerAppearance.getGargoyleMaterial(CoC.instance.flags[kFLAGS.GARGOYLE_BODY_MATERIAL]); },
+        "gargoylematerial"      : function ():* { return Forgefather.material; },
         "hair"                  : function ():* { return CoC.instance.player.hairDescript(); },
         "hairshortdesc"         : function ():* { return Appearance.hairShortDescription(CoC.instance.player); },
         "haircolor"             : function ():* { return CoC.instance.player.hairColor; },
@@ -112,8 +119,7 @@ public class ParserTags {
         "skintone"              : function ():* { return CoC.instance.player.skinTone; },
         "tallness"              : function ():* { return Measurements.footInchOrMetres(CoC.instance.player.tallness); },
         "doubletallness"        : function ():* { return Measurements.footInchOrMetres(CoC.instance.player.tallness * 2); },
-        "quadrupletallness"     : function ():* { return Measurements.footInchOrMetres(CoC.instance.player.tallness * 2); },
-        "teasetext"             : function ():* { return SceneLib.combat.teaseText(); },
+        "quadrupletallness"     : function ():* { return Measurements.footInchOrMetres(CoC.instance.player.tallness * 4); },
         "themonster"            : function ():* { return CoC.instance.monster.a + CoC.instance.monster.short; },
         "tongue"                : function ():* { return Appearance.tongueDescription(CoC.instance.player); },
         "uppergarment"          : function ():* { return CoC.instance.player.upperGarmentName; },
@@ -191,6 +197,45 @@ public class ParserTags {
         "breasts": function ():String {return SceneLib.telAdre.rubi.rubiBreasts();}
 
     };
+
+    /**
+     * provides lookups for subject: "exc" (Excellia)
+     * note that these are only used in doubleArgLookups
+     */
+    internal static var excelliaLookups:Object = {
+        "race"  : function ():String {return SceneLib.excelliaFollower.girlRacial(); },
+        "moo"   : function ():String {return SceneLib.excelliaFollower.humanCow("moan", "moo"); },
+        "slut"   : function ():String {return SceneLib.excelliaFollower.humanCow("slut", "cow"); }
+    };
+
+    /**
+     * provides lookups for subject: "onyx" (Onyx/Krystal, second gargoyle in the TempleOfTheDivine)
+     * note that these are only used in doubleArgLookups
+     */
+    internal static var onyxLookups:Object = {
+        "man"   : function ():String {return SceneLib.templeofdivine.onyx.onyxMF("man", "woman"); },
+        "ey"    : function ():String {return SceneLib.templeofdivine.onyx.onyxMF("he", "she"); },
+        "em"    : function ():String {return SceneLib.templeofdivine.onyx.onyxMF("him", "her"); },
+        "eir"   : function ():String {return SceneLib.templeofdivine.onyx.onyxMF("his", "her"); },
+        "eirs"  : function ():String {return SceneLib.templeofdivine.onyx.onyxMF("his", "hers"); },
+        "emself": function ():String {return SceneLib.templeofdivine.onyx.onyxMF("himself", "herself"); },
+        "name"  : function ():String {return SceneLib.templeofdivine.onyx.onyxName(); }
+    };
+
+    /**
+     * provides lookups for subject: "benoit"
+     * note that these are only used in doubleArgLookups
+     */
+    internal static var benoitLookups:Object = {
+        "man"   : function ():String {return SceneLib.bazaar.benoit.benoitMF("man", "woman"); },
+        "ey"    : function ():String {return SceneLib.bazaar.benoit.benoitMF("he", "she"); },
+        "em"    : function ():String {return SceneLib.bazaar.benoit.benoitMF("him", "her"); },
+        "eir"   : function ():String {return SceneLib.bazaar.benoit.benoitMF("his", "her"); },
+        "eirs"  : function ():String {return SceneLib.bazaar.benoit.benoitMF("his", "hers"); },
+        "emself": function ():String {return SceneLib.bazaar.benoit.benoitMF("himself", "herself"); },
+        "name"  : function ():String {return SceneLib.bazaar.benoit.benoitMF("Benoit","Benoite"); }
+    };
+
     /** PC ASCII Aspect lookups for subject: "cock"*/
     internal static var cockLookups:Object = {
         "all"      : function ():* { return CoC.instance.player.multiCockDescriptLight(); },
@@ -433,8 +478,12 @@ public class ParserTags {
      */
     internal static var twoWordTagsLookup:Object = {
         // NPCs:
-        "rubi"   : rubiLookups,
-        "arian"  : arianLookups,
+        "rubi"  : rubiLookups,
+        "arian" : arianLookups,
+        "exc"   : excelliaLookups,
+        "onyx"  : onyxLookups,
+        "benoit": benoitLookups,
+
         "monster": monsterLookups,
 
         // PC Attributes:

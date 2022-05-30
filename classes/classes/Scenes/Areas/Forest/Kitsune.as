@@ -193,7 +193,7 @@ public class Kitsune extends Monster
 			if (flags[kFLAGS.MET_KITSUNES] >= 4) str += "six";
 			else if (flags[kFLAGS.MET_KITSUNES] >= 2) str += "five";
 			else str += "four";
-			if (rand(3) != 2) game.flags[kFLAGS.redheadIsFuta] = 1;
+			if (rand(3) != 2) game.flags[kFLAGS.REDHEAD_IS_FUTA] = 1;
 			this.a = "a ";
 			this.short = "kitsune";
 			this.imageName = "kitsune";
@@ -204,7 +204,7 @@ public class Kitsune extends Monster
 					}[hairColor]) +
 							" hair.  She appears mostly human, except for a pair of large, furry ears poking through her hair and "+str+" luxurious silky tails swaying in the air behind her.  Her robes are revealing but comfortable-looking, hugging her voluptuous curves and exposing large swaths of tattooed skin.  A layer of ornate tattoos covers patches of her exposed flesh, accentuating her feminine curves nicely, and each movement brings a pleasant jiggle from her plump backside and large breasts.";
 			// this.plural = false;
-			if (hairColor=="red" && game.flags[kFLAGS.redheadIsFuta] == 1) {
+			if (hairColor=="red" && game.flags[kFLAGS.REDHEAD_IS_FUTA] == 1) {
 				this.createCock(rand(13) + 14,1.5 + rand(20)/2,CockTypesEnum.FOX);
 				this.balls = 2;
 				this.ballSize = 2 + rand(13);

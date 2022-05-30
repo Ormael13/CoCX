@@ -8,6 +8,7 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 
 public class Evangeline2 extends Monster
 	{
@@ -96,18 +97,18 @@ public class Evangeline2 extends Monster
 		
 		public function SpellMod():Number {
 			var mod:Number = 1;
-			if (findPerk(PerkLib.Channeling) >= 0) mod += .2;
-			if (findPerk(PerkLib.JobSorcerer) >= 0) mod += .1;
-			if (findPerk(PerkLib.Mage) >= 0) mod += .2;
-			if (findPerk(PerkLib.Spellpower) >= 0) mod += .2;
-			if (findPerk(PerkLib.WizardsFocus) >= 0) mod += .5;
+			if (hasPerk(PerkLib.Channeling)) mod += .2;
+			if (hasPerk(PerkLib.JobSorcerer)) mod += .1;
+			if (hasPerk(PerkLib.Mage)) mod += .2;
+			if (hasPerk(PerkLib.Spellpower)) mod += .2;
+			if (hasPerk(PerkLib.WizardsFocus)) mod += .5;
 			return mod;
 		}
 		
 		public function ChargeWeaponSpell():void {
 			outputText("Evangeline utters word of power, summoning an electrical charge around her weapon. <b>It looks like she'll deal more physical damage now!</b>");
 			createStatusEffect(StatusEffects.ChargeWeapon, 50, 0, 0, 0);
-			if (findPerk(PerkLib.JobEnchanter) >= 0) this.weaponAttack += (5 + (inte / 10)) * 1.2 * SpellMod();
+			if (hasPerk(PerkLib.JobEnchanter)) this.weaponAttack += (5 + (inte / 10)) * 1.2 * SpellMod();
 			else this.weaponAttack += (5 + (inte / 10)) * SpellMod();
 			fatigue += spellCostChargeWeapon();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
@@ -116,7 +117,7 @@ public class Evangeline2 extends Monster
 		public function ChargeArmorSpell():void {
 			outputText("Evangeline utters word of power, summoning an electrical charge around her armor. <b>It looks like her armor will be reducing some of incoming damage now!</b>");
 			createStatusEffect(StatusEffects.ChargeArmor, 50, 0, 0, 0);
-			if (findPerk(PerkLib.JobEnchanter) >= 0) this.armorDef += (4 + (inte / 15)) * 1.2 * SpellMod();
+			if (hasPerk(PerkLib.JobEnchanter)) this.armorDef += (4 + (inte / 15)) * 1.2 * SpellMod();
 			else this.armorDef += (4 + (inte / 15)) * SpellMod();
 			fatigue += spellCostChargeArmor();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
@@ -124,10 +125,10 @@ public class Evangeline2 extends Monster
 		
 		public function BlindSpell():void {
 			outputText("Evangeline glare at you and point at you.  A bright flash erupts before you!\n");
-			if ((player.findPerk(MutationsLib.GorgonsEyes) < 0 && rand(100) > 20) && !player.hasPerk(PerkLib.BlindImmunity)) {
+			if ((player.perkv1(IMutationsLib.ArachnidBookLungIM) == 0 && rand(100) > 20) && !player.hasPerk(PerkLib.BlindImmunity)) {
 				player.createStatusEffect(StatusEffects.Blind,2,0,0,0);
 			}
-			else if (player.findPerk(MutationsLib.GorgonsEyes) >= 0) {
+			else if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 1) {
 				outputText("Your mutated eyes not been affected at all by this flash!");
 			}
 			else {
@@ -197,7 +198,7 @@ public class Evangeline2 extends Monster
 		public function MightSpell():void {
 			outputText("She flushes, drawing on her body's desires to empower her muscles and toughen her up.");
 			outputText("The rush of success and power flows through her body.  <b>She looks like she can do anything!</b>");
-			if (findPerk(PerkLib.JobEnchanter) >= 0) {
+			if (hasPerk(PerkLib.JobEnchanter)) {
 				this.statStore.addBuffObject({ 'str': +(5 + (inte / 10)) * 1.2 * SpellMod(), 'tou': -(5 + (inte / 10)) * 1.2 * SpellMod()}, "EvangelineMight",{})
 			}
 			else {
@@ -211,7 +212,7 @@ public class Evangeline2 extends Monster
 			outputText("She flushes, drawing on her body's desires to empower her muscles and hasten her up.");
 			outputText("The rush of success and power flows through her body.  <b>She looks like she can move faster!</b>");
 			createStatusEffect(StatusEffects.Blink, 50, 0, 0, 0);
-			if (findPerk(PerkLib.JobEnchanter) >= 0) this.speStat.core.value += (5 + (inte / 10)) * 1.5 * SpellMod();
+			if (hasPerk(PerkLib.JobEnchanter)) this.speStat.core.value += (5 + (inte / 10)) * 1.5 * SpellMod();
 			else this.speStat.core.value += (5 + (inte / 10)) * 1.2 * SpellMod();
 			fatigue += spellCostBlink();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;

@@ -15,7 +15,7 @@ public class Zetaz extends Monster
 			zetazTaunt();
 			outputText("\n\n");
 			//If afflicted by blind or whispered and over 50% lust,
-			//burns lust and clears statuses before continuing with 
+			//burns lust and clears statuses before continuing with
 			//turn.
 			if(lust > 50 && (hasStatusEffect(StatusEffects.Fear) || hasStatusEffect(StatusEffects.Blind))) {
 				if (hasStatusEffect(StatusEffects.Fear)) this.speStat.core.value += statusEffectv2(StatusEffects.Fear);
@@ -39,7 +39,7 @@ public class Zetaz extends Monster
 				outputText("\n\n");
 			}
 			if(hasStatusEffect(StatusEffects.Constricted)) {
-				//Enemy struggles - 
+				//Enemy struggles -
 				outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.");
 				if(statusEffectv1(StatusEffects.Constricted) <= 0) {
 					outputText("  " + capitalA + short + " proves to be too much for your tail to handle, breaking free of your tightly bound coils.");
@@ -50,7 +50,7 @@ public class Zetaz extends Monster
 			}
 			//STANDARD COMBAT STATUS AFFECTS END HERE
 			//-If over 50 lust and below 50% hp
-			//--burns 20 lust to restore 20% hp. 
+			//--burns 20 lust to restore 20% hp.
 			if(lust > 50 && HPRatio() <= .5) {
 				outputText("The imp lord shudders from his wounds and the pulsing member that's risen from under his tattered loincloth.  He strokes it and murmurs under his breath for a few moments.  You're so busy watching the spectacle of his masturbation that you nearly miss the sight of his bruises and wounds closing!  Zetaz releases his swollen member, and it deflates slightly.  He's used some kind of black magic to convert some of his lust into health!");
 				addHP(0.25 * maxHP());
@@ -60,12 +60,12 @@ public class Zetaz extends Monster
 			else {
 				var attackChoice:Number = rand(3);
 				if(attackChoice == 0) {
-					//Chucks faux-heat draft ala goblins. - 
+					//Chucks faux-heat draft ala goblins. -
 					outputText("Zetaz grabs a bottle from a drawer and hurls it in your direction!  ");
-					if((player.findPerk(PerkLib.Evade) >= 0 && rand(4) == 0) ||
-						(player.findPerk(PerkLib.Flexibility) >= 0 && rand(6) == 0) ||
+					if((player.hasPerk(PerkLib.Evade) && rand(4) == 0) ||
+						(player.hasPerk(PerkLib.Flexibility) && rand(6) == 0) ||
 						(player.spe > 65 && rand(10) == 0) ||
-						(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 20 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia"))) {
+						(player.hasPerk(PerkLib.Misdirection) && rand(100) < 20 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia"))) {
 						outputText("You sidestep it a moment before it shatters on the wall, soaking the tapestries with red fluid!");
 					}
 					else {
@@ -75,9 +75,9 @@ public class Zetaz extends Monster
 					}
 				}
 				else if(attackChoice == 1) {
-					//'Gust' – channels a pidgy's spirit to beat 
-					//his wings and kick up dust, blinding the PC 
-					//next turn and dealing light damage. - 
+					//'Gust' – channels a pidgy's spirit to beat
+					//his wings and kick up dust, blinding the PC
+					//next turn and dealing light damage. -
 					outputText("The imp leaps into the air with a powerful spring, beating his wings hard to suspend himself in the center of his bedchamber.  Dust kicks up into the air from the force of his flight and turns the room into a blinding tornado!  Small objects smack off of you, ");
 					//(causing little damage/
 					if(player.tou > 60) outputText("causing little damage");
@@ -89,8 +89,8 @@ public class Zetaz extends Monster
 					outputText(" while the dust gets into your eyes, temporarily blinding you!");
 					if (!player.hasPerk(PerkLib.BlindImmunity)) player.createStatusEffect(StatusEffects.Blind,1,0,0,0);
 				}
-				//Gigarouse – A stronger version of normal imp's 
-				//'arouse' spell. - copy normal arouse text and 
+				//Gigarouse – A stronger version of normal imp's
+				//'arouse' spell. - copy normal arouse text and
 				//spice it up with extra wetness!
 				else {
 					gigaArouse();
@@ -123,7 +123,7 @@ public class Zetaz extends Monster
 			if(!hasStatusEffect(StatusEffects.round)) {
 				createStatusEffect(StatusEffects.round,1,0,0,0);
 				outputText("Zetaz asks, \"<i>Do you even realize how badly you fucked up my life, ");
-				if(player.humanScore() >= 14) outputText("human");
+				if(player.isRace(Races.HUMAN)) outputText("human");
 				else outputText("'human'");
 				outputText("?  No, of course not.  That's the kind of attitude I'd expect from one of you!</i>\"");
 			}
@@ -206,6 +206,7 @@ public class Zetaz extends Monster
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 30, 0, 0, 0);
 			checkMonster();
 		}
 		

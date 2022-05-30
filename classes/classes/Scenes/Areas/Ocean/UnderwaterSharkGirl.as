@@ -9,11 +9,12 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
+import classes.display.SpriteDb;
 
 public class UnderwaterSharkGirl extends Monster
 	{
 		private function sharkTease():void {
-			game.spriteSelect(70);
+			game.spriteSelect(SpriteDb.s_sharkgirl);
 			if(rand(2) == 0) {
 				outputText("You charge at the shark girl, prepared to strike again, but stop dead in your tracks when she turns around and wiggles her toned ass towards you. It distracts you long enough for her tail to swing out and smack you. She coos, \"<i>Aw... You really do like me!</i>\" ");
 				//(Small health damage, medium lust build).
@@ -28,13 +29,13 @@ public class UnderwaterSharkGirl extends Monster
 			}
 		}
 		private function sharkBiteAttack():void {
-			game.spriteSelect(70);
+			game.spriteSelect(SpriteDb.s_sharkgirl);
 			outputText("Your opponent takes a turn and charges at you at high speed, jaw open as she goes in for the kill, viciously biting you. You start to bleed in abundance the water around you turning red. ");
 			var damage:Number = 0;
 			damage += eBaseDamage();
 			player.takePhysDamage(damage, true);
 			if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
-			else player.createStatusEffect(StatusEffects.Hemorrhage,3,0.05,0,0);
+			else player.createStatusEffect(StatusEffects.Hemorrhage,SceneLib.combat.debuffsOrDoTDuration(3),0.05,0,0);
 		}
 		
 		override public function defeated(hpVictory:Boolean):void

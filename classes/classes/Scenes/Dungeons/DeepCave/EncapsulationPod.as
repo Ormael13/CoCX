@@ -59,7 +59,7 @@ import classes.internals.*;
 				if(player.cockTotal() > 1) {
 					outputText("Your other ");
 					if(player.cockTotal() == 2) outputText(cockDescript(1) + " gets the same treatment, and soon both of your [cocks] are quite happy to be here.  ");
-					else outputText(multiCockDescriptLight() + " get the same treatment and soon feel quite happy to be here.  ");
+					else outputText(player.multiCockDescriptLight() + " get the same treatment and soon feel quite happy to be here.  ");
 				}
 				if(player.hasVagina()) {
 					outputText("The violation of your [vagina] is swift and painless.  The fungus' slippery lubricants make it quite easy for it to slip inside, and you find your [vagina] engorging with pleasure in spite of your need to escape.  The tentacle folds up so that it can rub its stalk over your [clit], ");
@@ -98,7 +98,7 @@ import classes.internals.*;
 				player.dynStats("lus", 1);
 				player.lust = player.maxLust();
 				statScreenRefresh();
-				outputText("What's happening to you definitely isn't rape.  Not any more.  You like it too much.  You lean back against a wall of the pod and thrust your " + Appearance.hipDescription(player) + " pitifully against a phantom lover, moaning lewdly as you're forcibly pleasured.  You grab hold of the fleshy walls with your hands and try to hold yourself up, but your [legs] have the consistency of jello.   They fold neatly underneath you as you slide into the ooze and begin to float inside it.  It's comforting in an odd way, and while you're gasping in between moans, your balance finally gives out.  You sink deeper into the fluid and lose all sense of direction.  Up and down become meaningless constructs that no longer matter to you.\n\n");
+				outputText("What's happening to you definitely isn't rape.  Not anymore.  You like it too much.  You lean back against a wall of the pod and thrust your " + Appearance.hipDescription(player) + " pitifully against a phantom lover, moaning lewdly as you're forcibly pleasured.  You grab hold of the fleshy walls with your hands and try to hold yourself up, but your [legs] have the consistency of jello.   They fold neatly underneath you as you slide into the ooze and begin to float inside it.  It's comforting in an odd way, and while you're gasping in between moans, your balance finally gives out.  You sink deeper into the fluid and lose all sense of direction.  Up and down become meaningless constructs that no longer matter to you.\n\n");
 				
 				outputText("The thick slime passes over your lips and nose as you sink into the rising tide of bliss, and you find yourself wondering how you'll breathe.  Instinctively, you hold your breath.  Even riddled with sexual bliss and thought-obliterating drugs, you won't let yourself open your mouth when 'underwater'.  The lack of oxygen makes your heart hammer in your chest");
 				if(player.cockTotal() > 0) {

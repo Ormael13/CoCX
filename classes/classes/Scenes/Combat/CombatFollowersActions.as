@@ -5,6 +5,7 @@ package classes.Scenes.Combat
 {
 import classes.CoC;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.PerkLib;
 import classes.StatusEffects;
 
@@ -32,7 +33,6 @@ import classes.StatusEffects;
 		}
 
 		public function neisaCombatActions():void {
-			clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerNeisa) > 0) {
 				var choice1:Number = rand(20);
 				if (player.hasPerk(PerkLib.MotivationEx)) {
@@ -127,7 +127,6 @@ import classes.StatusEffects;
 		}
 		
 		public function etnaCombatActions():void {
-			clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerEtna) > 0) {
 				var choice3:Number = rand(20);
 				if (player.hasPerk(PerkLib.MotivationEx)) {
@@ -166,7 +165,7 @@ import classes.StatusEffects;
 		public function etnaCombatActions1():void {
 			var lustDmg:Number = Math.round((player.statusEffectv2(StatusEffects.CombatFollowerEtna) / 6) * increasedEfficiencyOfAttacks());
 			outputText("Etna shoots a spike at [themonster], you can see the telltale sign of arousal in [monster his] movement. ");
-			monster.teased(lustDmg);
+			monster.teased(Math.round(monster.lustVuln * lustDmg));
 			outputText("\n\n");
 		}
 		public function etnaCombatActions2():void {
@@ -183,7 +182,6 @@ import classes.StatusEffects;
 		}
 		
 		public function auroraCombatActions():void {
-			//clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerAurora) > 0) {
 				var choice4:Number = rand(20);
 				if (player.hasPerk(PerkLib.MotivationEx)) {
@@ -319,7 +317,6 @@ import classes.StatusEffects;
 		}*/
 		
 		public function alvinaCombatActions():void {
-			clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerAlvina) > 0) {
 				var choice8:Number = rand(20);
 				if (player.hasPerk(PerkLib.MotivationEx)) {
@@ -379,7 +376,7 @@ import classes.StatusEffects;
 			lustDmg + (rand(player.statusEffectv3(StatusEffects.CombatFollowerAlvina) - player.statusEffectv2(StatusEffects.CombatFollowerAlvina) * 2 + monster.cor) / 3);
 			lustDmg = Math.round(lustDmg * increasedEfficiencyOfAttacks());
 			outputText("Alvina incants a spell and a powerful wave of lust hits [themonster], leaving it more than aroused! ");
-			monster.teased(lustDmg);
+			monster.teased(Math.round(monster.lustVuln * lustDmg));
 			outputText("\n\n");
 		}
 		public function alvinaCombatActions3():void {
@@ -395,7 +392,8 @@ import classes.StatusEffects;
 			outputText("Alvina slices at [themonster] with her scythe, leaving deep wounds. ");
 			doDamage(dmg1, true, true);
 			outputText("\n\n");
-			monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
+			else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
 		}
 		public function alvinaCombatActions4():void {
 			var damage2:Number = player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
@@ -419,7 +417,6 @@ import classes.StatusEffects;
 		}
 		
 		public function mitziCombatActions():void {
-			clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerMitzi) > 0) {
 				var choice9:Number = rand(20);
 				if (player.hasPerk(PerkLib.MotivationEx)) {
@@ -476,19 +473,18 @@ import classes.StatusEffects;
 		public function mitziCombatActions3():void {
 			var lustDmg:Number = Math.round((player.statusEffectv3(StatusEffects.CombatFollowerMitzi) / 6) * increasedEfficiencyOfAttacks());
 			outputText("Furxia throws out a barrage of aphrodisia laced needles at [themonster]. ");
-			monster.teased(lustDmg);
+			monster.teased(Math.round(monster.lustVuln * lustDmg));
 			outputText("\n\n");
 		}
 		public function mitziCombatActions4():void {
 			outputText("Roxy whips out two circular glass bottles filled with a pink liquid. She tosses them at [themonster] releasing a cloud of pink fog around [monster him]. ");
-			monster.teased(Math.round((rand(player.statusEffectv3(StatusEffects.CombatFollowerMitzi)/4)+20) * increasedEfficiencyOfAttacks()));
+			monster.teased(Math.round(monster.lustVuln * (rand(player.statusEffectv3(StatusEffects.CombatFollowerMitzi)/4)+20) * increasedEfficiencyOfAttacks()));
 			outputText("\n\n");
 			if (monster.hasStatusEffect(StatusEffects.LustDoTH)) monster.addStatusValue(StatusEffects.LustDoTH,1,1);
 			else monster.createStatusEffect(StatusEffects.LustDoTH,4,0.02,0,0);
 		}
 		
 		public function excelliaCombatActions():void {
-			clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerExcellia) > 0) {
 				if (player.HP < player.maxHP() * .5) excelliaCombatActions5();
 				else {
@@ -574,7 +570,6 @@ import classes.StatusEffects;
 		}
 		
 		public function amilyCombatActions():void {
-			clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerAmily) > 0) {
 				var choice11:Number = rand(20);
 				if (player.hasPerk(PerkLib.MotivationEx)) {
@@ -622,7 +617,7 @@ import classes.StatusEffects;
 			outputText("\n\n");
 		}
 		public function amilyCombatActions2():void {
-			outputText("Amily peeks out from her cover, taking careful aim as she shoots a blow dart at [opponent]’s eyes. ");
+			outputText("Amily peeks out from her cover, taking careful aim as she shoots a blow dart at [themonster]’s eyes. ");
 			monster.createStatusEffect(StatusEffects.Blind, 2, 0, 0, 0);
 			if (rand(3) == 0 || monster.hasPerk(PerkLib.Resolute)) outputText("[Themonster] shakes off the blow, but they’re still blinded from the impact.\n\n");
 			else {
@@ -644,7 +639,8 @@ import classes.StatusEffects;
 			outputText(" ");
 			doPoisonDamage(((player.statusEffectv2(StatusEffects.CombatFollowerAmily)/4)+20), true, true);
 			outputText("\n\n");
-			monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
+			else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
 			if (monster.hasStatusEffect(StatusEffects.PoisonDoTH)) monster.addStatusValue(StatusEffects.PoisonDoTH,1,1);
 			else monster.createStatusEffect(StatusEffects.PoisonDoTH,4,0.02,0,0);
 		}
@@ -666,7 +662,6 @@ import classes.StatusEffects;
 		}
 		
 		public function zenjiCombatActions():void {
-			clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerZenji) > 0) {
 				if ((player.HP < player.maxHP() * 0.35) && player.statusEffectv3(StatusEffects.CombatFollowerZenji) < 4 && rand(10) > 1) zenjiCombatActions5();
 				else {
@@ -799,6 +794,108 @@ import classes.StatusEffects;
 			player.addStatusValue(StatusEffects.CombatFollowerZenji, 3, 1);
 			if (player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 1) outputText(" Zenji remains weary, but he stands as if he were completely unaffected by the physical trauma he just endured.");
 			else outputText("Zenji seems much worse for wear after protecting you, \"<i>I’m fine.</i>\" he mumbles, but it’s apparent that he’s sustained heavy damage.");
+		}
+		
+		public function tyrantiaCombatActions():void {
+			if (player.statusEffectv4(StatusEffects.CombatFollowerTyrantia) > 0) {
+				//if (TyrantiaFollower.TyraniaPostFinalKissScene) tyrantiaCombatActions5();
+				if (monster.hasStatusEffect(StatusEffects.PouncedByCompanion)) tyrantiaCombatActions1();
+				else {
+					var choice1:Number = rand(20);
+					if (player.hasPerk(PerkLib.MotivationEx)) {
+						if (rand(100) == 0) tyrantiaCombatActions0();
+						else {
+							if (choice1 < 5) tyrantiaCombatActions1();
+							if (choice1 >= 5 && choice1 < 10) tyrantiaCombatActions2();
+							if (choice1 >= 10 && choice1 < 15) tyrantiaCombatActions3();
+							if (choice1 >= 15) tyrantiaCombatActions4();
+						}
+					}
+					else if (player.hasPerk(PerkLib.Motivation)) {
+						if (choice1 < 4) tyrantiaCombatActions0();
+						if (choice1 >= 4 && choice1 < 11) tyrantiaCombatActions1();
+						if (choice1 >= 11 && choice1 < 16) tyrantiaCombatActions2();
+						if (choice1 >= 16 && choice1 < 19) tyrantiaCombatActions3();
+						if (choice1 == 19) tyrantiaCombatActions4();
+					}
+					else {
+						if (choice1 < 10) tyrantiaCombatActions0();
+						if (choice1 >= 10 && choice1 < 14) tyrantiaCombatActions1();
+						if (choice1 >= 14 && choice1 < 17) tyrantiaCombatActions2();
+						if (choice1 == 17 || choice1 == 18) tyrantiaCombatActions3();
+						if (choice1 == 19) tyrantiaCombatActions4();
+					}
+				}
+			}
+			else {
+				outputText("You hold on as Tyrantia wheels about, facing [themonster] with a grin on her face. \"<i>You want to fight us?!</i>\" She brandishes her Dick, keeping her upper body between [themonster] and you. \"<i>Let’s GO!</i>\" ");
+				outputText("Her horns spill darkness, and you ready yourself for battle. Tyrantia instinctively shields you with her body, and you can’t help but feel a bit of affection for the giantess. You watch as several stone spears, duplicates of her Phalluspear, rise from the ground.\n\n");
+				player.addStatusValue(StatusEffects.CombatFollowerTyrantia, 4, 1);
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_0] == "Tyrantia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_0_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_0_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Tyrantia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Tyrantia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+		}
+		public function tyrantiaCombatActions0():void {
+			outputText("Your Drider companion stares at the [themonster], making no movements towards them.\n\n");
+		}
+		public function tyrantiaCombatActions1():void {
+			outputText("Tyrantia’s Dick is thrust into the [themonster]. ");
+			var dmg14:Number = player.statusEffectv1(StatusEffects.CombatFollowerTyrantia);
+			var weaponTyrantia:Number = player.statusEffectv2(StatusEffects.CombatFollowerTyrantia);
+			var lustDmg:Number = Math.round(25 + monster.lib / 5 + monster.sens / 5 + monster.cor / 5);
+			dmg14 += scalingBonusStrengthCompanion() * 1.5;
+			weaponTyrantia *= 3;
+			if (weaponTyrantia < 51) dmg14 *= (1 + (weaponTyrantia * 0.03));
+			else if (weaponTyrantia >= 51 && weaponTyrantia < 101) dmg14 *= (2.5 + ((weaponTyrantia - 50) * 0.025));
+			else if (weaponTyrantia >= 101 && weaponTyrantia < 151) dmg14 *= (3.75 + ((weaponTyrantia - 100) * 0.02));
+			else if (weaponTyrantia >= 151 && weaponTyrantia < 201) dmg14 *= (4.75 + ((weaponTyrantia - 150) * 0.015));
+			else dmg14 *= (5.5 + ((weaponTyrantia - 200) * 0.01));
+			dmg14 = Math.round(dmg14 * increasedEfficiencyOfAttacks());
+			doDamage(dmg14, true, true);
+			doDamage(dmg14, true, true);
+			doDamage(dmg14, true, true);
+			monster.teased(Math.round(monster.lustVuln * lustDmg));
+			outputText("\n\n");
+		}
+		public function tyrantiaCombatActions2():void {
+			var dmg15:Number = player.statusEffectv1(StatusEffects.CombatFollowerTyrantia);
+			dmg15 += scalingBonusStrengthCompanion() * 2;
+			outputText("Tyrantia bowls over [themonster] with a mighty roar, then slams her steel-coated front legs down into the [themonster]’s luckless frame, pinning them in place as they bleed profusely. ");
+			if (rand(2) == 0) {
+				outputText("Tyrantia’s front limbs are brought up and back down, getting a cry of pain from [themonster]. She lets loose a cheerful war cry, stabbing down again. [Themonster] is pinned for now.");
+				monster.createStatusEffect(StatusEffects.PouncedByCompanion,2+rand(2),0,0,0);
+			}
+			else outputText("To your surprise, Tyrantia flinches, backing off from [themonster]. They fight their way to their feet, and take a fighting stance.");
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
+			else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
+			doDamage(dmg15, true, true);
+			outputText("\n\n");
+		}
+		public function tyrantiaCombatActions3():void {
+			var dmg16:Number = player.statusEffectv3(StatusEffects.CombatFollowerTyrantia);
+			dmg16 += scalingBonusIntelligenceCompanion() * 1.5;
+			dmg16 = Math.round(dmg16 * increasedEfficiencyOfAttacks());
+			if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
+				monster.addStatusValue(StatusEffects.AcidDoT,1,1);
+				monster.addStatusValue(StatusEffects.AcidDoT,3,1);
+			}
+			else monster.createStatusEffect(StatusEffects.AcidDoT,4,0.02,1,0);
+			outputText("Tyrantia turns her body around, spraying her acidic goop at the enemy. ");
+			doAcidDamage(dmg16, true, true);
+			outputText("\n\n");
+		}
+		public function tyrantiaCombatActions4():void {
+			var lustDmg:Number = Math.round((25 + monster.lib / 5 + monster.sens / 5 + monster.cor / 5) * 4);
+			monster.statStore.addBuffObject({spe:-20}, "Web",{text:"Web"});
+			outputText("Tyrantia rushes forward, biting [themonster] and sinking her fangs into it. [Themonster] manages to get loose, but not before their blood coats her fangs. [Themonster] looks woozy, and slightly horny. ");
+			monster.teased(Math.round(monster.lustVuln * lustDmg));
+			outputText("\n\n");
+		}
+		public function tyrantiaCombatActions5():void {
+			outputText("Your Drider companion stares at the [enemy], making no movements towards them.\n\n");
 		}/*
 		
 		public function divaCombatActions():void {

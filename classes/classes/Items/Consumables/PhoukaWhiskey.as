@@ -53,17 +53,17 @@ public class PhoukaWhiskey extends Consumable {
 				case 3: //Child is a faerie, hates phouka whiskey
 					outputText("You feel queasy and want to throw up.  There's a pain in your belly and you realize the baby you're carrying didn't like that at all.");
 			}
-			if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= mutations.DrunkenPowerEmpowerOni()) mutations.DrunkenPowerEmpower();
+			mutations.DrunkenPowerEmpowerIfPossible();
 			game.flags[kFLAGS.PREGNANCY_CORRUPTION]++; //Faerie or phouka babies become more corrupted, no effect if the player is not pregnant or on other types of babies
 			phoukaWhiskeyAddStatus(game.player);
-			return(false);
+			return false;
         }
         
 		public function phoukaWhiskeyAcceptable(player:Player):int
 		{ //This function provides a single common test that can be used both by this class and the PhoukaScene class
 			//Returns:	0 = canUse (not pregnant), 1 = canUse (single pregnancy, womb), 2 = canUse (single pregnancy, colon), 3 = canUse (double pregnancy, both OK),
 			//			-1 = No (single pregnancy, womb), -2 = No (single pregnancy, colon), -3 = No (double pregnancy, both not OK), -4 = No (double pregnancy, one OK, one not)
-			if (player.pregnancyIncubation == 0) {				
+			if (player.pregnancyIncubation == 0) {
 				if (player.buttPregnancyIncubation == 0) return 0; //No baby. Simplest, most common case
 				if (player.buttPregnancyType == PregnancyStore.PREGNANCY_SATYR) return 2;
 				return -2;

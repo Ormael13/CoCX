@@ -80,6 +80,7 @@ public class DemonPackBeach extends Monster
 			this.horns.count = 2;
 			this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 45, 0, 0, 0);
 			checkMonster();
 		}
 		

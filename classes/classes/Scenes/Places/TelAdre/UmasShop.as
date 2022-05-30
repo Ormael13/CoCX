@@ -149,7 +149,6 @@ import classes.Scenes.SceneLib;
 			flags[kFLAGS.LOPPE_PC_MET_UMA] = 1;
 
 			// Player returns to Camp
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -461,7 +460,6 @@ import classes.Scenes.SceneLib;
 
 			// Apply bonus & back to camp!
 			applyMassageBonus(selectedMassage);
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -697,7 +695,7 @@ import classes.Scenes.SceneLib;
 					PerkLib.ChiReflowMagic,
 					PerkLib.ChiReflowSpeed
 			]){
-				if (player.findPerk(perk) >= 0)
+				if (player.hasPerk(perk))
 				{
 					return perk;
 				}
@@ -895,8 +893,6 @@ import classes.Scenes.SceneLib;
 			outputText("You thank her for her work, get yourself up and proceed to dress.  You politely excuse yourself and start the long journey back to your camp.\n\n");
 
 			applyNeedlework(selectedSession);
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -943,8 +939,6 @@ import classes.Scenes.SceneLib;
 			outputText("You tell her that you appreciate her taking the time to explain her job to you; maybe at some point in the future you'll have a need for her special skills, but, right now, you think you've taken enough of her time.\n\n");
 			outputText("\"<i>It's always pleasure speaking to the [man] that wooed my little Loppe, dear.  Come visit soon, will you?</i>\"\n\n");
 			outputText("You promise you'll try, and then head back to camp.");
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -971,8 +965,6 @@ import classes.Scenes.SceneLib;
 			outputText("Uma nods.  \"<i>It does, but as you can see, the clinic is pretty empty most of the time.  It just so happens that we're really expensive, especially considering our... extra services.  But don't worry, [name].  Since you're my little Loppe's [boyfriend], I'll be happy to give you a pretty good discount on our services.</i>\"\n\n");
 			outputText("You laugh at that, thanking her for her generosity and her time, and then tell her it's time for you to go.  Uma smiles at you and says, \"<i>Come visit me again soon.</i>\"\n\n");
 			outputText("You promise that you will, and then head out of the quaint little clinic and back to camp.\n\n");
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -998,7 +990,6 @@ import classes.Scenes.SceneLib;
 		 */
 		public function talkLoppeJoiner():void
 		{
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 			//addButton(1, "Debugz", talkMenu);
 		}
@@ -1470,8 +1461,6 @@ import classes.Scenes.SceneLib;
 			outputText("You can't resist noting that it sounds like Uma would end up giving Loppe a little sister if Usagi did come back. \n\n");
 			outputText("Uma nods thoughtfully at your words.  \"<i>A sister or two?  Definitely.  Hey, why not go out on a limb and say five or six little sisters?  I loved being a mom, being pregnant was actually kind of hot, and I'm still young enough to do some serious breeding.</i>\"  She pats her belly with a defiant expression.  But then she slumps and sighs longingly.  \"<i>But I want my Usagi back first...</i>\" She mourns.\n\n");
 			outputText("You tell her to keep hoping; as strong a warrior as Uma described her to be, you're sure that the bunny-herm is still out there, somewhere.  You politely withdraw to give Uma a chance to compose herself, heading back to camp.\n\n");
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1647,8 +1636,6 @@ import classes.Scenes.SceneLib;
 			dynStats("lust=", 0);
 			player.hoursSinceCum = Math.ceil(hoursSinceCum * 0.75);
 			flags[kFLAGS.TIMES_ORGASMED]++;
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1757,8 +1744,6 @@ import classes.Scenes.SceneLib;
 			}
 
 			dynStats("lust=", 0);
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1836,8 +1821,6 @@ import classes.Scenes.SceneLib;
 			outputText(".  See you later, dear.  And don't be a stranger,</i>\" the mare tells you as she waves you goodbye.\n\n");
 
 			dynStats("lust=", 0);
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 		//Needs Cock.
@@ -1853,7 +1836,7 @@ import classes.Scenes.SceneLib;
 			outputText("\n\nUma arches an eyebrow, \"<i>Sorry, [name], but when it comes to cocks, my pussy and ass are both off-limits... I suppose that, for you, though, I could give you a blowjob - just because you’re my little Loppe’s special someone, though.</i>\"");
 			outputText("\n\nYou ");
 			if(player.lust >= 75) outputText("eagerly ");
-			outputText("tell her that would be plenty, and thank her for her consideration.  \"<i>Okay, follow me then.</i>\"  The mare leads you away, out her office and down the corridor towards the far back of the clinic. Her enticing equine tail swishes lazily side to side the entire way, an organic magnet for your roving eyes.  You follow closely in her wake, looking forward to her “special treatment” with such ardor that you give up on concealing the tenting mass under your [armor]. It makes walking a little more difficult, but the feeling of your length");
+			outputText("tell her that would be plenty, and thank her for her consideration.  \"<i>Okay, follow me then.</i>\"  The mare leads you away, out her office and down the corridor towards the far back of the clinic. Her enticing equine tail swishes lazily side to side the entire way, an organic magnet for your roving eyes.  You follow closely in her wake, looking forward to her \"special treatment\" with such ardor that you give up on concealing the tenting mass under your [armor]. It makes walking a little more difficult, but the feeling of your length");
 			if(player.cockTotal() > 1) outputText("s");
 			outputText(" grinding and growing is well-worth the obvious discomfort.");
 
@@ -2015,7 +1998,6 @@ import classes.Scenes.SceneLib;
 			}
 			dynStats("lust=", 0);
 			flags[kFLAGS.UMA_TIMES_SUCKED_YOU]++;
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 		private function sexEatHerOut():void
@@ -2060,10 +2042,7 @@ import classes.Scenes.SceneLib;
 			outputText("\"<i>Oh! Oh-oh-OH!</i>\"  Uma's legs close tightly around your neck, humping her cunt against your [face] before she shudders violently in orgasm, the wetness of her climax splashing across your lips and running down your chin.  One last pleasure-stoked spasm and she slumps in release, her legs unclenching and then sliding off of your shoulders to clop against the floor.  Breathing heavily, she smiles at you.  \"<i>Mmm my dear, my little Loppe is a lucky girl indeed to have you willing to do that for her.</i>\"\n\n");
 			outputText("You lick your lips and wipe the aftermath from your face, smiling broadly at the mare's flattery.  Shaking herself, Uma yawns loudly, one hand in front of her face to be more demure.  \"<i>That really felt wonderful... I think... I think I'm going to take a little rest.  Would you be a dear and flip the sign to Closed on your way out, dear?</i>\" she asks, settling back on her table as if she really is about to have a nap here in her own workroom. \n\n");
 			outputText("You rub her thigh affectionately, promising to do so, then redress yourself and head back to camp.\n\n");
-
 			dynStats("lust", 30);
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 
 		}

@@ -9,6 +9,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.Areas.Battlefield.*;
+import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
 import classes.Items.Vehicles;
 
@@ -29,6 +30,19 @@ use namespace CoC;
 				partsofTwinGrakaturd();
 				return;
 			}*/
+			//Tyrania
+			if (rand(3) == 0 && player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame && !player.hasStatusEffect(StatusEffects.SpoodersOff)) {
+				if (TyrantiaFollower.TyrantiaFollowerStage > 2) SceneLib.tyrania.repeatEncounterBattlefield();
+				else if (TyrantiaFollower.TyrantiaAffectionMeter > 40 && TyrantiaFollower.TyrantiaFollowerStage > 1) SceneLib.tyrania.encounterBattlefieldAfter40Affection();
+				else if (TyrantiaFollower.TyrantiaFollowerStage > 0) SceneLib.tyrania.repeatEncounterBattlefield();
+				else SceneLib.tyrania.firstEncounter();
+				return;
+			}
+			//Iridesian
+			/*if (rand(3) == 0 && player.level >= 45 && ) {
+				SceneLib.iridesianFollower.firstMeetingIridesian();
+				return;
+			}*/
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helFollower.followerHel()) {
 				SceneLib.helScene.helSexualAmbush();
@@ -41,16 +55,14 @@ use namespace CoC;
 			}
 			//Diana
 			if (flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(5) == 0) {
-				SceneLib.dianaScene.repeatBattlefieldEnc();
+				if ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8)
+                    SceneLib.dianaScene.postNameEnc();
+                else
+				    SceneLib.dianaScene.repeatEnc();
 				return;
 			}
-			//Tyrania
-			/*if (rand(10) == 0 && (player.level >= 45)) {
-				SceneLib.tyrania.firstEncounter();
-				return;
-			}*/
 			//Ted
-			if (flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 4 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1 && rand(10) == 0) {
+			if (SceneLib.tedScene.canEncounterTed() && rand(10) == 0) {
 				SceneLib.tedScene.introPostHiddenCave();
 				return;
 			}
@@ -60,15 +72,15 @@ use namespace CoC;
 				return;
 			}
 			
-			//Discover Outer Battlefield
-			if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] >= 1 && flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] <= 0 && player.level >= 19) {
+			//Discover Inner Battlefield
+			/*if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] >= 1 && flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 19) {
 				flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] = 1;
 				player.explored++;
 				clearOutput();
 				outputText("As you explore the boundary of the endless field, you cautiously step over countless remains of fallen and golem husks littered across the ground. Treading further, you reach a part of the battlefield you haven't seen yet. The air is thick, and it constantly feels like you're being watched by something. Perhaps the war isn't quite finished yet...\n\n<b>You've discovered the (Outer) Battlefield!</b>");
 				doNext(camp.returnToCampUseOneHour);
 				return;
-			}
+			}*/
 			
 			var choice:Array = [];
 			var select:int;
@@ -138,7 +150,7 @@ use namespace CoC;
 				default:
 					clearOutput();
 					if (rand(4) == 0) {
-						outputText("You spend almost hour exploring this deserted battlefield but you don't manage to find anything interesting. Adter checking another pile of weapons you hear some noise comming from nearby. Intrigued you cautiously approach source of it, which turns to be... "+(rand(2) == 0?"demons":"imps")+". Whole group of them running straight at you. ");
+						outputText("You spend almost an hour exploring this deserted battlefield but you don't manage to find anything interesting. After checking another pile of weapons you hear some noise coming from nearby. Intrigued you cautiously approach source of it, which turns to be... "+(rand(2) == 0?"demons":"imps")+". Whole group of them running straight at you. ");
 						outputText("As they approach you ready your [weapon] but... the first ones after reaching you jsut give you a short glance and just pass by. Then another one and one more pass you by almost looking like they just seen you as merely obstacle to avoid during their run. Then you hear some fragments of the words they seems to talks form time to time.\n\n");
 						outputText("\"<i>...ster or the fog will catch up to u...</i>\", \"<i>...ut there is <b>SOMETHING</b> insid...</i>\", \"<i>...us..t reeee....port b...</i>\"\n\n");
 						outputText("After last one of them pass you by they soon vanish into distance behind you. What just happened? Usualy laidback and horny " + (rand(2) == 0?"demons":"imps") + " was actualy running away? From fog? As you thinking over it you notice something moving slightly in the direction they came. ");
@@ -166,7 +178,7 @@ use namespace CoC;
 				doNext(playerMenu);
 			}
 		}
-		
+		/*
 		public function partsofTwinGrakaturd():void {
 			clearOutput();
 			outputText("As you explore the (outer) battlefield, you run into what appears to be the half buried remains of an old contraption. This might just be what that gun vendor was talking about! You proceed to dig up the items realizing this to indeed be the remains of a broken firearm.\n\n");
@@ -174,6 +186,6 @@ use namespace CoC;
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Twin Grakaturd", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
-		}
+		}*/
 	}
 }

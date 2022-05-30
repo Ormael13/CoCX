@@ -35,8 +35,10 @@ public class Weapon extends Useable //Equipable
 		
 		public function get name():String { return _name; }
 		
+		public function get descBase():String { return _description; }
+		
 		override public function get description():String {
-			var desc:String = _description;
+			var desc:String = descBase;
 			//Type
 			desc += "\n\nType: Melee Weapon";
 			if (type != "") {
@@ -73,6 +75,7 @@ public class Weapon extends Useable //Equipable
 			specTrans.push("Bleed45", "+45% Bleed");
 			specTrans.push("Bleed100", "+100% Bleed");
 			specTrans.push("LGWrath", "Low Grade Wrath");
+			specTrans.push("MGWrath", "Mid Grade Wrath");
 
 			for each (var spec:String in temp){
 				if (specTrans.indexOf(spec) >= 0){
@@ -88,16 +91,20 @@ public class Weapon extends Useable //Equipable
 		
 		override public function useText():void {
 			outputText("You equip " + longName + ".  ");
-			if ((perk == "Large" && game.player.shield != ShieldLib.NOTHING && !game.player.hasPerk(PerkLib.GigantGrip)) || (perk == "Massive" && game.player.shield != ShieldLib.NOTHING)) {
-				outputText("Because this weapon requires the use of two hands, you have unequipped your shield. ");
-			}
-			if (perk == "Dual Large" || perk == "Dual" || perk == "Dual Small") {
-				outputText("Because those weapons requires the use of two hands, you have unequipped your shield. ");
-			}
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.Rigidity)) {
+			if ((perk == "Large" && game.player.shield != ShieldLib.NOTHING && !game.player.hasPerk(PerkLib.GigantGrip)) || (perk == "Massive" && game.player.shield != ShieldLib.NOTHING)) {
+				outputText("Because this weapon requires the use of two hands, you have unequipped your shield. ");
+				SceneLib.inventory.unequipShield();
+				return false;
+			}
+			else if ((perk == "Dual Large" || perk == "Dual" || perk == "Dual Small") && game.player.shield != ShieldLib.NOTHING) {
+				outputText("Because those weapons requires the use of two hands, you have unequipped your shield. ");
+				SceneLib.inventory.unequipShield();
+				return false;
+			}
+			else if (game.player.hasPerk(PerkLib.Rigidity)) {
 				outputText("You would very like to equip this item but your body stiffness prevents you from doing so.");
 				return false;
 			}
@@ -105,6 +112,18 @@ public class Weapon extends Useable //Equipable
 		}
 		
 		public function playerEquip():Weapon { //This item is being equipped by the player. Add any perks, etc. - This function should only handle mechanics, not text output
+			var temp:Array = perk.split(", ");
+			var temp2:Array = ["Large", "Massive", "Dual", "Dual Large", "Dual Small"]
+			for each (var temp3:String in temp2){
+				if (temp.indexOf(temp3) >= 0 && game.player.shield != ShieldLib.NOTHING){
+					if (temp3 == "Large") {
+						if (game.player.hasPerk(PerkLib.GigantGrip)){
+								break;
+							}
+						}
+					SceneLib.inventory.unequipShield();
+				}
+			}/*
 			if ((perk == "Large" && game.player.shield != ShieldLib.NOTHING && !game.player.hasPerk(PerkLib.GigantGrip))
 			|| (perk == "Massive" && game.player.shield != ShieldLib.NOTHING)
 			|| (perk == "Dual" && game.player.shield != ShieldLib.NOTHING)
@@ -112,7 +131,7 @@ public class Weapon extends Useable //Equipable
 			|| (perk == "Dual Small" && game.player.shield != ShieldLib.NOTHING)
 			|| (game.player.shieldPerk == "Massive" && game.player.shield != ShieldLib.NOTHING && !game.player.hasPerk(PerkLib.GigantGrip))) {
 				SceneLib.inventory.unequipShield();
-			}
+			}*/
 			if (game.flags[kFLAGS.FERAL_COMBAT_MODE] == 1) game.flags[kFLAGS.FERAL_COMBAT_MODE] = 0;
 			return this;
 		}
@@ -122,37 +141,5 @@ public class Weapon extends Useable //Equipable
 		}
 		
 		public function removeText():void {} //Produces any text seen when removing the armor normally
-		
-/*
-		override protected function equip(player:Player, returnOldItem:Boolean, output:Boolean):void
-		{
-			if (output) clearOutput();
-			if (canUse(player,output)){
-				var oldWeapon:Weapon = player.weapon;
-				if (output) {
-					outputText("You equip your " + name + ".  ");
-				}
-				oldWeapon.unequip(player, returnOldItem, output);
-				player.setWeaponHiddenField(this);
-				equipped(player,output);
-			}
-		}
-
-
-		override public function unequip(player:Player, returnToInventory:Boolean, output:Boolean = false):void
-		{
-			if (returnToInventory) {
-				var itype:ItemType = unequipReturnItem(player, output);
-				if (itype != null) {
-					if (output && itype == this)
-						outputText("You still have " + itype.longName + " left over.  ");
-					game.itemSwapping = true;
-					game.inventory.takeItem(this, false);
-				}
-			}
-			player.setWeaponHiddenField(WeaponLib.FISTS);
-			unequipped(player,output);
-		}
-*/
 	}
 }

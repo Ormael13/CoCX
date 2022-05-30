@@ -3,7 +3,6 @@ package classes.Scenes.Monsters
 import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
-import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -30,7 +29,7 @@ public class GoblinWarrior extends Goblin
 			else {
 				outputText("Her shield hits you! ");
 				//Get hit
-				if (rand(100) < 40 && player.findPerk(PerkLib.Resolute) < 0) {
+				if (rand(100) < 40 && !player.hasPerk(PerkLib.Resolute)) {
 					outputText("The impact from the shield has left you with a concussion. <b>You are stunned.</b> ");
 					player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 				}
@@ -46,17 +45,11 @@ public class GoblinWarrior extends Goblin
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.goblinWarriorScene.goblinWarriorRapeIntro1();
+			SceneLib.goblinScene.gobboRapeIntro();
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
-				outputText("You collapse in front of the goblin, too wounded to fight.  She growls and kicks you in the head, making your vision swim. As your sight fades, you hear her murmur, \"<i>Fucking dicks can't even bother to grow a dick or cunt.</i>\"");
-				SceneLib.combat.cleanupAfterCombatImpl();
-			}
-			else {
-				SceneLib.goblinWarriorScene.gobboWarriorBeatYaUp1();
-			}
+			SceneLib.goblinScene.gobboSpecialBeatYaUp();
 		}
 
 		public function GoblinWarrior()

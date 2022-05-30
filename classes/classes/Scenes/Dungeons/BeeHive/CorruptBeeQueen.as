@@ -5,12 +5,8 @@
 package classes.Scenes.Dungeons.BeeHive 
 {
 import classes.*;
-import classes.BodyParts.Horns;
-import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
-import classes.Scenes.Dungeons.BeeHive;
-import classes.Scenes.Dungeons.BeeHive.BeeGuards;
 import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 
 	public class CorruptBeeQueen extends BeeGuards {
@@ -60,12 +56,12 @@ import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			beehive.defeatCorruptBeeQueen();
+			SceneLib.dungeons.beehive.defeatCorruptBeeQueen();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			beehive.defeatedByCorruptBeeQueen();
+			SceneLib.dungeons.beehive.defeatedByCorruptBeeQueen();
 		}
 		
 		public function CorruptBeeQueen() 
@@ -93,6 +89,7 @@ import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 					.elseDrop(useables.B_CHITN);
 			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 40, 0, 0, 0);
 			checkMonster();
 		}
 		

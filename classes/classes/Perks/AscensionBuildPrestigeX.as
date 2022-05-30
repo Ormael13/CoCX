@@ -12,8 +12,7 @@ public class AscensionBuildPrestigeX extends PerkType
 
     override public function desc(params:PerkClass = null):String {
         var pVal:Number = player.perkv1(PerkLib.AscensionBuildingPrestigeX) - 1;
-        "Your understanding of prestige jobs from your previous life allows you to pick another " + pVal.toString() + " job" + (pVal > 1 ? "s":"") +" at lvl 42+."
-        return "Your body has adapted to having unnatural organs to the point of being able to sustain " + pVal.toString() + " extra mutation" + (pVal > 1 ? "s":"") +" in each organ.";
+        return "Your understanding of prestige jobs from your previous life allows you to pick another " + pVal.toString() + " job" + (pVal > 1 ? "s":"") +" at lvl 54+.";
     }
 
     override public function name(params:PerkClass=null):String {

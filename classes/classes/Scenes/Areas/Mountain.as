@@ -19,6 +19,7 @@ import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class Mountain extends BaseContent
 	{
@@ -36,7 +37,6 @@ public class Mountain extends BaseContent
 		}
 		private var explorationEncounter:GroupEncounter = null;
 		private function init():void {
-			const game:CoC     = CoC.instance;
 			const fn:FnHelpers = Encounters.fn;
 			explorationEncounter =
 					Encounters.group(/*game.commonEncounters.withImpGob,*/{
@@ -89,7 +89,7 @@ public class Mountain extends BaseContent
 						name: "highmountains",
 						when: function ():Boolean {
 							return !SceneLib.highMountains.isDiscovered()
-								   && (player.level >= 15)
+								   && ((player.level + combat.playerLevelAdjustment()) >= 15)
 						},
 						call: SceneLib.highMountains.discover,
 						chance: Encounters.ALWAYS
@@ -107,7 +107,7 @@ public class Mountain extends BaseContent
 					},{
 						name:"jackfrost",
 						when: function ():Boolean {
-							return isHolidays() && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear && silly();
+							return isHolidays() && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear;
 						},
 						call: Holidays.meetJackFrostInTheMountains
 					},{
@@ -157,7 +157,7 @@ public class Mountain extends BaseContent
 						when:function():Boolean {
 							return flags[kFLAGS.MARAE_QUEST_START] >= 1 && flags[kFLAGS.FACTORY_FOUND] <= 0;
 						},
-						call: SceneLib.dungeons.enterFactory
+						call: SceneLib.dungeons.factory.enterDungeon
 					},{
 						name:"ceraph",
 						chance:0.7,
@@ -184,7 +184,7 @@ public class Mountain extends BaseContent
 							var check4a:Boolean = flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] == 0;
 							var check4b:Boolean = flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] == 1
 												  && player.hasKeyItem("Marae's Lethicite") >= 0
-												  && player.keyItemv2("Marae's Lethicite") < 3;
+												  && player.keyItemvX("Marae's Lethicite", 1) > 0;
 							return flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] < 3
 								   && check1 && check2 && check3 && (check4a || check4b);
 						},
@@ -192,7 +192,7 @@ public class Mountain extends BaseContent
 					}, {
 						name: "electra",
 						when: function ():Boolean {
-							return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ElectraOff) && (player.level >= 20);
+							return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ElectraOff);
 						},
 						chance:0.5,
 						call: function ():void {
@@ -237,10 +237,8 @@ public class Mountain extends BaseContent
 						call: partsofLactoBlasters
 					}, {
 						name: "ted",
-						when: function():Boolean {
-							return flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 4 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1;
-						},
-						call: SceneLib.tedScene.introPostHiddenCave
+						call: SceneLib.tedScene.introPostHiddenCave,
+						when: SceneLib.tedScene.canEncounterTed
 					}, {
 						name  : "mindbreaker",
 						call  : SceneLib.mindbreaker.findMindbreaker,
@@ -287,17 +285,16 @@ public class Mountain extends BaseContent
 		public function minotaurRouter():void {
 			//Every 15 explorations chance at mino bad-end!
 			if (player.hasPerk(PerkLib.MinotaurCumAddict) && !player.hasPerk(PerkLib.LactaBovineImmunity) && rand(16) == 0) {
-				spriteSelect(44);
+				spriteSelect(SpriteDb.s_minotaur);
 				minotaurScene.minoAddictionBadEndEncounter();
-				return;
 			} else {
-				spriteSelect(44);
+				spriteSelect(SpriteDb.s_minotaur);
 				if (!player.hasStatusEffect(StatusEffects.TF2) && player.level <= 1 && player.str <= 40) {
 					if (silly()) {
 						//(Ideally, this should occur the first time the player would normally get an auto-rape encounter with the minotaur. The idea is to give a breather encounter to serve as a warning of how dangerous the mountain is)
 						clearOutput();
 						outputText("Crossing over the treacherous mountain paths, you walk past an ominous cave.  The bones and the smell of death convince you to hasten your pace.  However, as you walk by, you hear a deep bellow and a snort as a monstrous man with a bull's head steps out.  With hell in his eyes and a giant ax in his hand, he begins to approach you in clear rage.  As he comes out into the light, you see that he is completely naked and sports a monstrous erection as angry as the minotaur himself, freely leaking a steady stream of pre-cum as he stalks you.\n\n");
-						outputText("You stumble in your attempt to escape and realize that you are completely helpless.  The minotaur towers over you and heaves his ax for a <i>coup de grace</i>.  As he readies the blow, a monstrous explosion rocks the entire mountainside, causing the bull-man to stumble before he can finish you off. You look around, bewildered, trying to understand this strange new turn of events, and notice a group of maybe half a dozen people approaching from further up the path.  They appear to be a motley crew clad in blue and carrying monstrous weapons.  The tallest man holds a weapon made of multiple rotating tubes, and begins spinning the barrels.  A second later, while screaming in a language you do not understand, a rain of lead begins shredding the minotaur into a cloud of blood and flesh.\n\n");
+						outputText("You stumble in your attempt to escape and realize that you are completely helpless.  The minotaur towers over you and heaves his ax for a <i>coup de grâce</i>.  As he readies the blow, a monstrous explosion rocks the entire mountainside, causing the bull-man to stumble before he can finish you off. You look around, bewildered, trying to understand this strange new turn of events, and notice a group of maybe half a dozen people approaching from further up the path.  They appear to be a motley crew clad in blue and carrying monstrous weapons.  The tallest man holds a weapon made of multiple rotating tubes, and begins spinning the barrels.  A second later, while screaming in a language you do not understand, a rain of lead begins shredding the minotaur into a cloud of blood and flesh.\n\n");
 						outputText("An equally imposing black man with a patch over one eye begins firing canisters at the beast, which explode violently.  \"<i>Ya ragged-arsed beast man!</i>\" he taunts.  \"<i>Ye should pick on someone yer own size, BOY-O! HEHEHE!</i>\"\n\n");
 						outputText("Coming up the path next is a freak of a person clad in a contained shiny suit with a weapon that burns with flame.  He freely walks into the explosions and gunfire and begins igniting the beast.\n\n");
 						outputText("\"<i>MRPHHUMFHRUFH!!!!! HUMFHUFMMRUF!</i>\" the freak mumbles through his mask.\n\n");
@@ -310,7 +307,7 @@ public class Mountain extends BaseContent
 					else {
 						clearOutput();
 						outputText("Crossing over the treacherous mountain paths, you walk past an ominous cave.  The bones and the smell of death convince you to hasten your pace.  However, as you walk by, you hear a deep bellow and a snort as a monstrous man with a bull's head steps out.  With hell in his eyes and a giant ax in his hand, he begins to approach you in clear rage.  As he comes out into the light, you see that he is completely naked and sports a monstrous erection as angry as the minotaur himself, freely leaking a steady stream of pre-cum as he stalks you.\n\n");
-						outputText("You stumble in your attempt to escape and realize that you are completely helpless.  The minotaur towers over you and heaves his ax for a <i>coup de grace</i>.  As he readies the blow, another beast-man slams into him from the side.  The two of them begin to fight for the honor of raping you, giving you the opening you need to escape.  You quietly sneak away while they fight – perhaps you should avoid the mountains for now?\n\n");
+						outputText("You stumble in your attempt to escape and realize that you are completely helpless.  The minotaur towers over you and heaves his ax for a <i>coup de grâce</i>.  As he readies the blow, another beast-man slams into him from the side.  The two of them begin to fight for the honor of raping you, giving you the opening you need to escape.  You quietly sneak away while they fight – perhaps you should avoid the mountains for now?\n\n");
 					}
 					player.createStatusEffect(StatusEffects.TF2, 0, 0, 0, 0);
 					doNext(camp.returnToCampUseOneHour);
@@ -318,19 +315,13 @@ public class Mountain extends BaseContent
 				}
 				//Mino gangbang
 				if (!player.hasStatusEffect(StatusEffects.MinoPlusCowgirl) || rand(10) == 0) {
-					if (flags[kFLAGS.HAS_SEEN_MINO_AND_COWGIRL] == 1 && player.cowScore() >= 4 && player.lactationQ() >= 200 && player.biggestTitSize() >= 3 && (player.minotaurAddicted() || player.hasPerk(PerkLib.LactaBovineImmunity))) {
+					if (flags[kFLAGS.HAS_SEEN_MINO_AND_COWGIRL] == 1 && player.racialScore(Races.COW) >= 4 && player.lactationQ() >= 200 && player.biggestTitSize() >= 3 && (player.minotaurAddicted() || player.hasPerk(PerkLib.LactaBovineImmunity))) {
 						//PC must be a cowmorph (horns, legs, ears, tail, lactating, breasts at least C-cup)
 						//Must be addicted to minocum
 						outputText("As you pass a shadowy cleft in the mountainside, you hear the now-familiar call of a cowgirl echoing from within.  Knowing what's in store, you carefully inch closer and peek around the corner.");
 						outputText("\n\nTwo humanoid shapes come into view, both with pronounced bovine features - tails, horns and hooves instead of feet.  Their genders are immediately apparent due to their stark nudity.  The first is the epitome of primal femininity, with a pair of massive, udder-like breasts and wide child-bearing hips. The other is the pinnacle of masculinity, with a broad, muscular chest, a huge horse-like penis and a heavy set of balls more appropriate on a breeding stud than a person.  You have once again stumbled upon a cow-girl engaging in a not-so-secret rendezvous with her minotaur lover.");
-						if (flags[kFLAGS.CODEX_ENTRY_MINOTAURS] <= 0) {
-							flags[kFLAGS.CODEX_ENTRY_MINOTAURS] = 1;
-							outputText("<b>New codex entry unlocked: Minotaurs!</b>\n\n")
-						}
-						if (flags[kFLAGS.CODEX_ENTRY_LABOVINES] <= 0) {
-							flags[kFLAGS.CODEX_ENTRY_LABOVINES] = 1;
-							outputText("<b>New codex entry unlocked: Lacta Bovines/Cowgirl!</b>\n\n")
-						}
+						camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_MINOTAURS);
+						camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_LABOVINES);
 						outputText("\n\nYou settle in behind an outcropping, predicting what comes next.  You see the stark silhouettes of imps and goblins take up similar positions around this makeshift theatre, this circular clearing surrounded on the edge by boulders and nooks where all manner of creatures might hide. You wonder if they're as eager for the upcoming show as you are.  The heady scent of impending sex rises in the air... and with it comes something masculine, something that makes your stomach rumble in anticipation.  The mouth-watering aroma of fresh minotaur cum wafts up to your nose, making your whole body quiver in need.  Your [vagOrAss] immediately ");
 						if (player.hasVagina()) outputText("dampens");
 						else outputText("twinges");
@@ -352,19 +343,13 @@ public class Mountain extends BaseContent
 					else player.addStatusValue(StatusEffects.MinoPlusCowgirl, 1, 1);
 					clearOutput();
 					outputText("As you pass a shadowy cleft in the mountainside, you hear the sounds of a cow coming out from it. Wondering how a cow got up here, but mindful of this land's dangers, you cautiously sneak closer and peek around the corner.\n\n");
-					outputText("What you see is not a cow, but two large human-shaped creatures with pronounced bovine features -- tails, horns, muzzles, and hooves instead of feet. They're still biped, however, and their genders are obvious due to their stark nudity. One has massive, udder-like breasts and wide hips, the other a gigantic, horse-like dong and a heavy set of balls more appropriate to a breeding stud than a person. You've stumbled upon a cow-girl and a minotaur.\n\n");
-					if (flags[kFLAGS.CODEX_ENTRY_MINOTAURS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_MINOTAURS] = 1;
-						outputText("<b>New codex entry unlocked: Minotaurs!</b>\n\n")
-					}
-					if (flags[kFLAGS.CODEX_ENTRY_LABOVINES] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_LABOVINES] = 1;
-						outputText("<b>New codex entry unlocked: Lacta Bovines/Cowgirl!</b>\n\n")
-					}
+					outputText("What you see is not a cow, but two large human-shaped creatures with pronounced bovine features -- tails, horns, muzzles, and hooves instead of feet. They're still biped, however, and their genders are obvious due to their stark nudity. One has massive, udder-like breasts and wide hips, the other a gigantic, horse-like dong, and a heavy set of balls more appropriate to a breeding stud than a person. You've stumbled upon a cow-girl and a minotaur.\n\n");
+					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_MINOTAURS);
+					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_LABOVINES);
 					outputText("A part of your mind registers bits of clothing tossed aside and the heady scent of impending sex in the air, but your attention is riveted on the actions of the pair. The cow-girl turns and places her hands on a low ledge, causing her to bend over, her ample ass facing the minotaur. The minotaur closes the distance between them in a single step.\n\n");
 					outputText("She bellows, almost moaning, as the minotaur grabs her cushiony ass-cheeks with both massive hands. Her tail raises to expose a glistening wet snatch, its lips already parted with desire. She moos again as his rapidly hardening bull-cock brushes her crotch. You can't tear your eyes away as he positions himself, his flaring, mushroom-like cock-head eliciting another moan as it pushes against her nether lips.\n\n");
 					outputText("With a hearty thrust, the minotaur plunges into the cow-girl's eager fuck-hole, burying himself past one -- two of his oversized cock's three ridge rings. She screams in half pain, half ecstasy and pushes back, hungry for his full length. After pulling back only slightly, he pushes deeper, driving every inch of his gigantic dick into his willing partner who writhes in pleasure, impaled exactly as she wanted.\n\n");
-					outputText("The pair quickly settles into a rhythm, punctuated with numerous grunts, groans, and moans of sexual excess. To you it's almost a violent assault sure to leave both of them bruised and sore, but the cow-girl's lolling tongue and expression of overwhelming desire tells you otherwise. She's enjoying every thrust as well as the strokes, gropes, and seemingly painful squeezes the minotaur's powerful hands deliver to her jiggling ass and ponderous tits. He's little better, his eyes glazed over with lust as he continues banging the fuck-hole he found and all but mauling its owner.");
+					outputText("The pair quickly settles into a rhythm, punctuated with numerous grunts, groans, and moans of sexual excess. To you, it's almost a violent assault sure to leave both of them bruised and sore, but the cow-girl's lolling tongue and expression of overwhelming desire tells you otherwise. She's enjoying every thrust as well as the strokes, gropes, and seemingly painful squeezes the minotaur's powerful hands deliver to her jiggling ass and ponderous tits. He's little better, his eyes glazed over with lust as he continues banging the fuck-hole he found and all but mauling its owner.");
 					doNext(continueMinoVoyeurism);
 					return;
 				}
@@ -381,8 +366,8 @@ public class Mountain extends BaseContent
 					startCombat(new MinotaurLord());
 					return;
 				}
-				minotaurScene.getRapedByMinotaur(true);
-				spriteSelect(44);
+				minotaurScene.minotaurAutorape();
+				spriteSelect(SpriteDb.s_minotaur);
 			}
 		}
 		public function partsofDerpnadeLauncher():void {
@@ -422,7 +407,7 @@ public class Mountain extends BaseContent
 			outputText(" as they look you up and down.  The entire area goes silent, even the goblins and the imps that are no doubt watching seem to be holding their breath, wondering what will happen to you.");
 			outputText("\n\nThe minotaur grunts, finally, as if he finds you acceptable, and turns back to the plush ass before him, plowing into it once more.  The cow-girl, however, motions for you to move forward, and latches onto a [nipple] when you do.  Her soft lips encircle your areola, while her tongue dances over the rapidly hardening flesh of your teat.  Your breasts tingle with the slightest bit of suction, making you gasp as small droplets of milk escape your nipple and roll over the cow-girl's tongue.  She sucks more and more, eagerly gulping down your refreshing lactic beverage.");
 
-			outputText("\n\nAll the while the minotaur continues grunting, thrusting his massive member into the woman's hungry cunt.  The two rock back and forth, pushing her face right into your breast before pulling back again.  The cow-girl's legs tremble and you suddenly find her arm grasping your shoulder for support.  Her other hand drifts down between your own naked legs, ");
+			outputText("\n\nAll the while the minotaur continues grunting, thrusting his massive member into the woman's hungry cunt.  The two rock back and forth, pushing her face right into your breast before pulling back again.  The cow-girl's legs tremble, and you suddenly find her arm grasping your shoulder for support.  Her other hand drifts down between your own naked legs, ");
 			if (player.hasCock()) {
 				outputText("ignoring your cock");
 				if (player.cockTotal() > 1) outputText("s");
@@ -507,7 +492,7 @@ public class Mountain extends BaseContent
 
 			outputText("\n\nAs if you both possess some kind of bovine telepathy, you both lean forward, wrapping your ");
 			if (player.bRows() > 1) outputText("uppermost ");
-			outputText("breasts around his monolithic shaft.  Your faces meet and her soft lips press against yours, each of you earnestly pressing your tongues into the other's mouths, swapping the juices you've collected over the past hour or so.  The bull beneath you groans, awakening to the feeling of four breasts surrounding his love muscle.");
+			outputText("breasts around his monolithic shaft.  Your faces meet, and her soft lips press against yours, each of you earnestly pressing your tongues into the other's mouths, swapping the juices you've collected over the past hour or so.  The bull beneath you groans, awakening to the feeling of four breasts surrounding his love muscle.");
 
 			outputText("\n\nThe two of your pump your breasts up and down, your lips barely leaving each other long enough to give his member the occasional kiss, lick or slurp.  Up and down you go, and this time it's the minotaur's body that's wracked with bliss, writhing on the ground.  Milk dribbles from your breasts, coating you, the cow-girl and the minotaur in a fine white sheen and creating a sweet-smelling aroma that permeates the air.");
 
@@ -549,7 +534,7 @@ public class Mountain extends BaseContent
 			outputText("Deciding not to risk it, you settle back into your nook in the rocks and watch on eagerly.  The cow-girl turns and places her hands on a low ledge, causing her to bend over, her ample ass facing the minotaur.  The minotaur closes the distance between them in a single step.");
 			outputText("\n\nShe bellows, almost moaning, as the minotaur grabs her cushiony ass-cheeks with both massive hands.  Her tail raises to expose a glistening wet snatch, its lips already parted with desire.  She moos again as his rapidly hardening bull-cock brushes her crotch. You can't tear your eyes away as he positions himself, his flaring, mushroom-like cock-head eliciting another moan as it pushes against her nether lips.");
 			outputText("\n\nWith a hearty thrust, the minotaur plunges into the cow-girl's eager fuck-hole, burying himself past one -- two of his oversized cock's three ridge rings.  She screams in half pain, half ecstasy and pushes back, hungry for his full length.  After pulling back only slightly, he pushes deeper, driving every inch of his gigantic dick into his willing partner who writhes in pleasure, impaled exactly as she wanted.");
-			outputText("\n\nThe pair quickly settles into a rhythm, punctuated with numerous grunts, groans, and moans of sexual excess.  To you it's almost a violent assault sure to leave both of them bruised and sore, but the cow-girl's lolling tongue and expression of overwhelming desire tells you otherwise.  She's enjoying every thrust as well as the strokes, gropes, and seemingly painful squeezes the minotaur's powerful hands deliver to her jiggling ass and ponderous tits.  He's little better, his eyes glazed over with lust as he continues banging the fuck-hole he found and all but mauling its owner.");
+			outputText("\n\nThe pair quickly settles into a rhythm, punctuated with numerous grunts, groans, and moans of sexual excess.  To you, it's almost a violent assault sure to leave both of them bruised and sore, but the cow-girl's lolling tongue and expression of overwhelming desire tells you otherwise.  She's enjoying every thrust as well as the strokes, gropes, and seemingly painful squeezes the minotaur's powerful hands deliver to her jiggling ass and ponderous tits.  He's little better, his eyes glazed over with lust as he continues banging the fuck-hole he found and all but mauling its owner.");
 			//[Next]
 			dynStats("lus", 10);
 			menu();
@@ -559,7 +544,7 @@ public class Mountain extends BaseContent
 		private function watchMinoCumSlutII():void
 		{
 			clearOutput();
-			outputText("They go at it for nearly an hour, oblivious to you watching them, before their intensity heightens as they near orgasm.  The results are almost explosive, both of them crying out as they begin twitching uncontrollably.  Clinging desperately to the cow-girl's ass, the minotaur pumps so much cum into her depths that it begins spurting out.  This accidental lubrication releases his grip and the pair collapse to the ground.  Yet the minotaur isn't finished, his man-milk spraying into the air almost like his still-erect dick is a hose and splattering down onto both of them.");
+			outputText("They go at it for nearly an hour, oblivious to you watching them, before their intensity heightens as they near orgasm.  The results are almost explosive, both of them crying out as they begin twitching uncontrollably.  Clinging desperately to the cow-girl's ass, the minotaur pumps so much cum into her depths that it begins spurting out.  This accidental lubrication releases his grip, and the pair collapse to the ground.  Yet the minotaur isn't finished, his man-milk spraying into the air almost like his still-erect dick is a hose and splattering down onto both of them.");
 			outputText("\n\nAs you look at the two cum-covered creatures laying there in their exhausted sex-induced stupors, the minotaur's thick horse-cock now slowly deflating, you realize that you've been touching yourself.  You make yourself stop in disgust.");
 			outputText("\n\nOnly now do you notice other faces peeking over ledges and ridges.  You count at least two goblins and one imp who quickly pull back.  From the sounds, they were busy getting themselves off.  Apparently this isn't an uncommon show, and the locals enjoy it immensely.");
 			dynStats("lus", 25);
@@ -582,7 +567,7 @@ public class Mountain extends BaseContent
 			if (player.statusEffectv1(StatusEffects.MinoPlusCowgirl) == 0)
 				outputText("  Apparently this isn't an uncommon show, and the locals enjoy it immensely.");
 			//Lust!
-			dynStats("lus", 5 + player.lib / 20 + player.minotaurScore() + player.cowScore());
+			dynStats("lus", 5 + player.lib / 20 + player.racialScore(Races.MINOTAUR) + player.racialScore(Races.COW));
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}

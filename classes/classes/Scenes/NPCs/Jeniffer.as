@@ -36,17 +36,17 @@ package classes.Scenes.NPCs
 				return;
 			}
 			//Determine if evaded
-			if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+			if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
 				outputText("J1c tries to clinch you, but she didn't count on your skills in evasion.  You manage to sidestep her at the last second.\n");
 				return;
 			}
 			//("Misdirection"
-			if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+			if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("J1c ducks and weaves forward to clinch you, but thanks to Raphael's teachings, you're easily able to misguide her and avoid the clumsy grab.\n");
 				return;
 			}
 			//Determine if cat'ed
-			if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
+			if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
 				outputText("J1c tries to lock you in a clinch, but your cat-like flexibility makes it easy to twist away from her grab.\n");
 				return;
 			}

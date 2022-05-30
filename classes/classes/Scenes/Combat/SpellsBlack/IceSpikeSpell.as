@@ -11,13 +11,13 @@ public class IceSpikeSpell extends AbstractBlackSpell {
 	
 	public function IceSpikeSpell(ex:Boolean = false) {
 		super(
-				ex ? "Ice Spike (Ex)" : "Ice Spike",
-				ex ?
-						"Drawning your own lust and wrath to concentrate it into chilling spike of ice that will attack your enemies."
-						: "Drawning your own lust to concentrate it into chilling spike of ice that will attack your enemies.",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING, TAG_ICE]
+			ex ? "Ice Spike (Ex)" : "Ice Spike",
+			ex ?
+				"Drawning your own lust and wrath to concentrate it into chilling spike of ice that will attack your enemies."
+				: "Drawning your own lust to concentrate it into chilling spike of ice that will attack your enemies.",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING, TAG_ICE]
 		);
 		baseManaCost = 40;
 		if (ex) baseWrathCost = 100;
@@ -25,7 +25,7 @@ public class IceSpikeSpell extends AbstractBlackSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target, false) + " ice damage"
+		return "~" + calcDamage(target, false, false) + " ice damage"
 	}
 	
 	override public function get isKnown():Boolean {
@@ -37,17 +37,18 @@ public class IceSpikeSpell extends AbstractBlackSpell {
 		return spellBlackCooldown();
 	}
 	
-	public function calcDamage(monster:Monster, randomize:Boolean = true):Number {
+	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		var baseDamage:Number = 2 * scalingBonusIntelligence(randomize);
+		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
 		if (ex) baseDamage *= 2;
-		return adjustSpellDamage(baseDamage, DamageType.ICE, CAT_SPELL_BLACK, monster);
+		return adjustSpellDamage(baseDamage, DamageType.ICE, CAT_SPELL_BLACK, monster, true, casting);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
 			outputText("You narrow your eyes, focusing your own lust with deadly intent.  At the palm of your hand form ice spike that shots toward [monster a] [monster name]!\n");
 		}
-		var damage:Number = calcDamage(monster);
+		var damage:Number = calcDamage(monster, true, true);
 		damage = critAndRepeatDamage(display, damage, DamageType.ICE);
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);

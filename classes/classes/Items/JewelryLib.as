@@ -58,7 +58,7 @@ package classes.Items
 		public const LIFERNG:Jewelry = new Jewelry("LifeRng", "Life Ring", "ring of life", "an enchanted emerald ring of life force", MODIFIER_HP, 350, 1000, "This ring is topped with emerald gemstone. It is said that this will make you feel healthier. \n\nType: Jewelry (Ring) \nBase value: 1,000 \nSpecial: Increases maximum HP by 350.","Ring");
 		public const WRATRNG:Jewelry = new Jewelry("WratRng", "Wrath Ring", "ring of wrath", "an enchanted peridot ring of wrath", MODIFIER_WR, 175, 1000, "This ring is topped with peridot gemstone. It is said that this will make you feel angrier. \n\nType: Jewelry (Ring) \nBase value: 1,000 \nSpecial: Increases maximum Wrath by 175.","Ring");
 		public const MYSTRNG:Jewelry = new Jewelry("MystRng", "Mystic Ring", "ring of mysticality", "an enchanted sapphire ring of mysticality", MODIFIER_SPELL_POWER, 25, 1500, "This ring is topped with sapphire gemstone. It is said that this will make your spells more powerful. \n\nType: Jewelry (Ring) \nBase value: 1,500 \nSpecial: Increases spellpower by 25 percent.","Ring");
-		public const POWRRNG:Jewelry = new Jewelry("PowrRng", "Power Ring", "ring of power (M)", "an enchanted ruby ring of power (M)", MODIFIER_ATTACK_POWER, 10, 1500, "This ring is topped with ruby gemstone. It is said that this will make your melee attacks feel a bit more powerful. \n\nType: Jewelry (Ring) \nBase value: 1,500 \nSpecial: Increases melee damage by 10 percent.","Ring");
+        public const POWRRNG:Jewelry = new Jewelry("PowrRng", "Power Ring", "ring of power (M)", "an enchanted ruby ring of power (M)", MODIFIER_ATTACK_POWER, 10, 1500, "This ring is topped with ruby gemstone. It is said that this will make your melee attacks feel a bit more powerful. \n\nType: Jewelry (Ring) \nBase value: 1,500 \nSpecial: Increases melee damage by 10 percent.","Ring");
 		public const RPOWRNG:Jewelry = new Jewelry("RPowRng", "R. Power Ring", "ring of power (R)", "an enchanted ruby ring of power (R)", MODIFIER_R_ATTACK_POWER, 10, 1500, "This ring is topped with ruby gemstone. It is said that this will make your range attacks feel a bit more powerful. \n\nType: Jewelry (Ring) \nBase value: 1,500 \nSpecial: Increases range damage by 10 percent.","Ring");
 		public const PURERNG:Jewelry = new Jewelry("PureRng", "Purity Ring", "purity ring", "an enchanted purity ring", PURITY, 10, 3000, "This ring symbolizes chastity and purity. When worn, it reduces minimum libido and makes it harder for you to get turned on. \n\nType: Jewelry (Ring) \nBase value: 3,000 \nSpecial: Slowly decreases the corruption of the wearer over time. Reduces minimum libido by 10.","Ring");
 		public const TSRNG  :Jewelry = new Jewelry("TSRng  ", "T.S.Ring", "training soul ring", "a training soul ring", 0, 0, 100, "This simple ring is made from special forged soulmetal. It help train soulforce to the uttermost limit for novice soul cultivator. \n\nType: Jewelry (Ring) \nBase value: 100.","Ring");
@@ -75,9 +75,7 @@ package classes.Items
 		//armor, mag resis protection rings
 		public const UNDKINS:Jewelry = new Jewelry("UndKinS", "UndefKingSignet", "Undefeated King's Signet", "an Undefeated King's Signet", MODIFIER_WR, 100, 2000, "A signet that belonged in the past to the king, which claimed to be undefeated. But then how it get into your hands?","Ring");
 		public const FLLIRNG:Jewelry = new Jewelry("FlLiRng", "FlameLizardRing", "Flame Lizard ring", "an Flame Lizard ring", MODIFIER_WR, 75, 3200, "Ring is encrusted with a few small emerald, peridot and carnelian gemstones. Usefull to use Lustzerker or boost it. \n\nType: Jewelry (Ring) \nBase value: 1,000 \nSpecial: Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.","Ring");
-		//public const FLLIRNG:FlameLizardRing = new FlameLizardRing();
 		public const INMORNG:Jewelry = new Jewelry("InMoRng", "InfernalMouseRing", "Infernal Mouse ring", "an Infernal Mouse ring", MODIFIER_WR, 75, 3200, "Ring is encrusted with a few small emerald, peridot and sunstone gemstones. Usefull to use Blazing battle spirit or boost it. \n\nType: Jewelry (Ring) \nBase value: 1,000 \nSpecial: Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Blazing battle spirit.","Ring");
-		//public const INMORNG:InfernalMouseRing = new InfernalMouseRing();
 		public const MSIGNIT:MediusSignet = new MediusSignet();
 		public const RINGINT:RingOfIntelligence = new RingOfIntelligence();
 		public const RINGLIB:RingOfLibido = new RingOfLibido();
@@ -87,7 +85,6 @@ package classes.Items
 		public const RINGTOU:RingOfToughness = new RingOfToughness();
 		public const RINGWIS:RingOfWisdom = new RingOfWisdom();
 		public const EZEKIELS:Jewelry = new Jewelry("EzekielS", "EzekielSignet", "Ezekiel's Signet", "an Ezekiel's Signet", 0, 0, 100, "A signet rumored to be blessed by the Ezekiel himself. Is that real one or just another fake signet merchant sold you? \n\nType: Jewelry (Ring) \nBase value: 100","Ring");
-		//public const ONIGOURD:OniGourd = new OniGourd();
 		//public const RINGWIS:Bullseye = new RingWisdom();
 			
 		//Normal ring

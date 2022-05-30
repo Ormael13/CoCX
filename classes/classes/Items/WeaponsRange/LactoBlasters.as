@@ -8,6 +8,7 @@ package classes.Items.WeaponsRange
 	import classes.Items.WeaponRange;
 	import classes.PerkLib;
 	import classes.Player;
+	import classes.Scenes.API.FnHelpers;
 	
 	public class LactoBlasters extends WeaponRange {
 		
@@ -23,10 +24,13 @@ package classes.Items.WeaponsRange
 			if (game.player.biggestTitSize() < 4)outputText("You lack the 'assets' to use this weapon. ");
 			return false;
 		}
-
-		override public function get attack():Number{
-			return (1 + (game.player.lactationQ() / 100));
+		
+		override public function get attack():Number {
+			var lactoatk:Number = (1 + (game.player.lactationQ() / 100));
+			lactoatk = FnHelpers.FN.logScale(lactoatk,LactoblastersABC,10);
+			return lactoatk;
 		}
-
+		
+		private static const LactoblastersABC:Object = FnHelpers.FN.buildLogScaleABC(10,100,1000,10,100);
 	}
 }

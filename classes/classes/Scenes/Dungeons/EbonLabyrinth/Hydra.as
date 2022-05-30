@@ -9,8 +9,6 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Face;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
-import classes.BodyParts.Skin;
-import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -30,19 +28,9 @@ use namespace CoC;
 		private function hydraOmniBreathWeapon():void
 		{
 			outputText("The hydra’s many snake heads opens their maw and you can see green drips from their open maws before it comes as each of them douses you in acid! ");
-			hydraOmniBreathWeaponD();
-			hydraOmniBreathWeaponD();
-			hydraOmniBreathWeaponD();
-			hydraOmniBreathWeaponD();
-			hydraOmniBreathWeaponD();
-			if (this.statusEffectv1(StatusEffects.HydraTails) >= 6) hydraOmniBreathWeaponD();
-			if (this.statusEffectv1(StatusEffects.HydraTails) >= 7) hydraOmniBreathWeaponD();
-			if (this.statusEffectv1(StatusEffects.HydraTails) >= 8) hydraOmniBreathWeaponD();
-			if (this.statusEffectv1(StatusEffects.HydraTails) >= 9) hydraOmniBreathWeaponD();
-			if (this.statusEffectv1(StatusEffects.HydraTails) >= 10) hydraOmniBreathWeaponD();
-			if (this.statusEffectv1(StatusEffects.HydraTails) >= 11) hydraOmniBreathWeaponD();
-			if (this.statusEffectv1(StatusEffects.HydraTails) >= 12) hydraOmniBreathWeaponD();
-			createStatusEffect(StatusEffects.AbilityCooldown1, 8, 0, 0, 0);
+            for (var i:int = 0; i < 12; ++i)
+			    hydraOmniBreathWeaponD();
+            createStatusEffect(StatusEffects.AbilityCooldown1, 8, 0, 0, 0);
 			outputText("\n\n");
 		}
 		private function hydraOmniBreathWeaponD():void {
@@ -57,18 +45,8 @@ use namespace CoC;
 		private function hydraOmnibites():void
 		{
 			outputText("The hydra’s many heads hiss and dart out to bite you, venom dripping from their fangs. ");
-			hydraOmnibitesD();
-			hydraOmnibitesD();
-			hydraOmnibitesD();
-			hydraOmnibitesD();
-			hydraOmnibitesD();
-			if (this.statusEffectv1(StatusEffects.HydraTails) >= 6) hydraOmnibitesD();
-			if (this.statusEffectv1(StatusEffects.HydraTails) >= 7) hydraOmnibitesD();
-			if (this.statusEffectv1(StatusEffects.HydraTails) >= 8) hydraOmnibitesD();
-			if (this.statusEffectv1(StatusEffects.HydraTails) >= 9) hydraOmnibitesD();
-			if (this.statusEffectv1(StatusEffects.HydraTails) >= 10) hydraOmnibitesD();
-			if (this.statusEffectv1(StatusEffects.HydraTails) >= 11) hydraOmnibitesD();
-			if (this.statusEffectv1(StatusEffects.HydraTails) >= 12) hydraOmnibitesD();
+			for (var i:int = 0; i < 12; ++i)
+			    hydraOmnibitesD();
 			outputText("\n\n");
 		}
 		private function hydraOmnibitesD():void {
@@ -80,14 +58,7 @@ use namespace CoC;
 			damage = Math.round(damage);
 			damage = player.takePhysDamage(damage, true);
 			if (!player.hasStatusEffect(StatusEffects.Poison)) {
-				var multiplier:Number = 5; //More heads will produce more potent venom
-				if (this.tailCount >= 6) multiplier += 1;
-				if (this.tailCount >= 7) multiplier += 1;
-				if (this.tailCount >= 8) multiplier += 1;
-				if (this.tailCount >= 9) multiplier += 1;
-				if (this.tailCount >= 10) multiplier += 1;
-				if (this.tailCount >= 11) multiplier += 1;
-				if (this.tailCount >= 12) multiplier += 1;
+				var multiplier:Number = this.tailCount; //more heads -> more venom
 				player.createStatusEffect(StatusEffects.Poison, 0, multiplier, 0, 0);
 			}
 		}
@@ -96,56 +67,36 @@ use namespace CoC;
 		{
 			if (HPRatio() < .75 && this.statusEffectv1(StatusEffects.HydraTails) < 12 && !hasStatusEffect(StatusEffects.AbilityCooldown2)) hydraGrowHead();
 			else {
-				if (rand(3) == 0) {
-					if (!hasStatusEffect(StatusEffects.AbilityCooldown1)) hydraOmniBreathWeapon();
-					else hydraOmnibites();
-				}
-				else hydraOmnibites();
+				if (!hasStatusEffect(StatusEffects.AbilityCooldown1) && rand(3) == 0)
+					hydraOmniBreathWeapon();
+				else
+                    hydraOmnibites();
 			}
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.dungeons.ebonlabyrinth.defeatHydra();
+			SceneLib.dungeons.ebonlabyrinth.hydraScene.defeat();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.dungeons.ebonlabyrinth.defeatedByHydra();
+			SceneLib.dungeons.ebonlabyrinth.hydraScene.defeatedBy();
 		}
 		
 		public function Hydra() 
 		{
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 65) {
-				initStrTouSpeInte(136, 250, 158, 142);
-				initWisLibSensCor(150, 255, 160, 40);
-				this.armorDef = 80;
-				this.armorMDef = 80;
-				this.bonusHP = 1000;
-				this.bonusLust = 480;
-				this.level = 65;
-				this.gems = 200 + rand(80);
-			}
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 70) {
-				initStrTouSpeInte(174, 290, 186, 163);
-				initWisLibSensCor(172, 280, 180, 40);
-				this.armorDef = 100;
-				this.armorMDef = 100;
-				this.bonusHP = 2000;
-				this.bonusLust = 530;
-				this.level = 70;
-				this.gems = 250 + rand(90);
-			}
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 75) {
-				initStrTouSpeInte(212, 330, 214, 184);
-				initWisLibSensCor(194, 305, 200, 40);
-				this.armorDef = 120;
-				this.armorMDef = 120;
-				this.bonusHP = 3000;
-				this.bonusLust = 580;
-				this.level = 75;
-				this.gems = 300 + rand(100);
-			}
+            var mod:int = inDungeon ? SceneLib.dungeons.ebonlabyrinth.enemyLevelMod : 0;
+			initStrTouSpeInte(136 + 38*mod, 250 + 40*mod, 158 + 28*mod, 142 + 21*mod);
+            initWisLibSensCor(150 + 22*mod, 255 + 25*mod, 160 + 20*mod, 40);
+            this.armorDef = 80 + 20*mod;
+            this.armorMDef = 80 + 20*mod;
+            this.bonusHP = 1000 + 1000*mod;
+            this.bonusLust = 480 + 50*mod;
+            this.level = 60 + 5*mod; //starts from 65 due to EL levelMod calculations;
+            this.gems = mod > 50 ? 0 : Math.floor((2000 + rand(400)) * Math.exp(0.3*mod));
+            this.additionalXP = mod > 50 ? 0 : Math.floor(9000 * Math.exp(0.3*mod));
+
 			this.a = "";
 			this.short = "Hydra";
 			this.imageName = "naga";

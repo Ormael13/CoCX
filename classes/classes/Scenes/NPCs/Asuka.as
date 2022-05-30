@@ -11,6 +11,7 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class Asuka extends Monster
@@ -40,7 +41,7 @@ public class Asuka extends Monster
 				player.takeFireDamage(damage, true);
 				if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
 				else {
-					player.createStatusEffect(StatusEffects.BurnDoT,3,0.05,0,0);
+					player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(3),0.05,0,0);
 					outputText(" Reeling in pain you begin to burn.");
 				}
 			}

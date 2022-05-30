@@ -12,7 +12,26 @@ import flash.sampler.startSampling;
 public class StatUtils {
 	public function StatUtils() {
 	}
-
+	
+	/**
+	 * Merge `src` into `dest`, producing sum/product of common keys
+	 * @return dest
+	 */
+	public static function mergeBuffObjects(dest:Object, src:Object):Object {
+		for (var key:String in src) {
+			if (key in dest) {
+				if (MultiplicativeStats.indexOf(key) >= 0) {
+					dest[key] *= src[key];
+				} else {
+					dest[key] += src[key];
+				}
+			} else {
+				dest[key] = src[key]
+			}
+		}
+		return dest;
+	}
+	
 	/**
 	 * Warning: can cause infinite recursion if called from owner.findStat() unchecked
 	 */
@@ -44,6 +63,8 @@ public class StatUtils {
 		if (stat in PlainNumberStats) {
 			return PlainNumberStats[stat]+' '+x;
 		}
+		// fix rounding errors (1.15*100 = 114.999999...)
+		if (value > 0) value += 0.001;
 		var percent:String = signum + Math.floor(value * 100) + '%';
 		if (stat in PercentageStats) {
 			return PercentageStats[stat]+' '+percent;
@@ -135,8 +156,11 @@ public class StatUtils {
 			return stat;
 		}
 	}
+	public static function isKnownStat(stat:String):Boolean {
+		return stat in PlainNumberStats || stat in PercentageStats;
+	}
 	public static function isPlainNumberStat(statname:String):Boolean {
-		return !(statname in PlainNumberStats);
+		return statname in PlainNumberStats;
 	}
 	public static function isPercentageStat(statname:String):Boolean {
 		return statname in PercentageStats;
@@ -186,6 +210,9 @@ public class StatUtils {
 		['maxfatigue_perlevel', "Max Fatigue per level"],
 		['maxmana_perlevel', "Max Mana per level"],
 		['maxsf_perlevel', "Max Soulforce per level"],
+		
+		['def', 'Armor'],
+		['mdef', 'Magic Resistance'],
 	]);
 	public static const PercentageStats:Object = Utils.createMapFromPairs([
 		// [StatNames.SPELLPOWER, 'Spellpower']
@@ -205,5 +232,19 @@ public class StatUtils {
 		
 		['spellpower', "Spellpower"],
 	]);
+	public static const MultiplicativeStats:/*String*/Array = [];
+	
+	/**
+	 * List of racial buff names that should get scaled with NG+
+	 */
+	public static const  NgScaledRacialBuffs:/*String*/Array = [
+		"maxhp_base",
+		'maxlust_base',
+		'maxwrath_base',
+		'maxfatigue_base',
+		'maxmana_base',
+		'maxsf_base',
+		'def'
+	];
 }
 }
