@@ -302,10 +302,10 @@ package classes.Scenes.Places.HeXinDao
 				if (flags[kFLAGS.AURORA_LVL] == 0.3 || (flags[kFLAGS.AURORA_LVL] >= 0.6 && flags[kFLAGS.AURORA_LVL] < 0.75)) addButton(5, "GRJ", BoardkeeperYangGolemRetrievalJob).hint("Golem retrieval job");
 			}
 			else {
-				outputText("You approach the board covered in colorful papers and the panda girl next to it smiles at you.\n\n");
-				outputText("\"<i>Well hello there! Are you looking for a job? I represent the adventurer guild and my organization could use more able bodied men and women like you.</i>\"\n\n");
+				outputText("You approach the board covered in colorful papers and the panda girl next to it smile at you.\n\n");
+				outputText("\"<i>Well hello there! Are you looking for a job? I represent the adventurer guild and my organisation could use more able bodied men and women like you.</i>\"\n\n");
 				outputText("An adventurer guild? What's the benefits?\n\n");
-				outputText("\"<i>Mareth is filled with perils, lost treasures and people in need of heroic assistance. By paying a small membership fee I can let you in on local events that could use your assistance and give you pointers to unplundered ruins. It’s only 5 spirit stones to join. Fame and treasure? All within your reach to grab.</i>\"");
+				outputText("\"<i>Mareth is both filled with perils, lost treasures and people in need of heroic assistance. By paying a small membership fee I can let you in on local events that could use your assistance and give you pointers to unplundered ruins. It’s only 5 spirit stones to join. Fame and treasure? All within your reach to grab.</i>\"");
 				menu();
 				addButton(0, "Decline", No);
 				addButton(1, "Join", Yes);
@@ -313,20 +313,20 @@ package classes.Scenes.Places.HeXinDao
 		}
 		private function No():void {
 			clearOutput();
-			outputText("You aren’t interested in dungeon delving at the time. It's barely worth it while you're overburdened with your regular activities.");
+			outputText("You aren’t interested into dungeon delving at the time. It's barely if you're not overburdened with your regular activities.");
 			doNext(curry(SceneLib.journeyToTheEast.enteringInn,false));
 		}
 		private function Yes():void{
 			clearOutput();
 			if (flags[kFLAGS.SPIRIT_STONES] < 5) {
 				outputText("Yeah sure, you will join. Or rather you would like to but you lack the required spirit stones for the membership fee.\n\n");
-				outputText("\"<i>It's ok just go to Moga Hen, he should be able to exchange those gem of yours for the local currency.</i>\"");
+				outputText("\"<i>Its ok just go to Moga Hen, he should be able to exchange those gem of yours for the local currency.</i>\"");
 				doNext(curry(SceneLib.journeyToTheEast.enteringInn,false));
 			}
 			else {
 				outputText("Yeah sure, you will join. You handle the ursine woman the spirit stones and sign the papers.\n\n");
 				outputText("\"<i>Perfect, Just perfect. Let me hand you over your badge.</i>\"\n\n");
-				outputText("She picks up a small Copper colored plate and gives it to you.\n\n");
+				outputText("She picks up a small Copper colored plate and give it to you.\n\n");
 				outputText("\"<i>Well as of now you are officially a member of the adventurer guild. Tell whenever you are ready ask for a quest and I will direct you to your target.</i>\"\n\n");
 				flags[kFLAGS.SPIRIT_STONES] -= 5;
 				statScreenRefresh();
@@ -338,7 +338,7 @@ package classes.Scenes.Places.HeXinDao
 		}
 		public function BoardkeeperYangQuest():void {
 			clearOutput();
-			outputText("The panda girl nods and allows you to browse the board.\n\n");
+			outputText("The panda girl nod and allow you to browse the board.\n\n");
 			outputText("\"<i>Plenty of quest available. Which one will you take?</i>\"\n\n");
 			menu();
 			addButton(0, "Imps", BoardkeeperYangQuestImps1).hint("Copper tier Quest.");
@@ -370,7 +370,7 @@ package classes.Scenes.Places.HeXinDao
 				}
 				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 6) {
 					if (player.hasItem(useables.IMPSKLL, 5) || Slot01 >= 5) {
-						outputText("Yang examine the skulls to make sure they are imps then nods giving you your payment.\n\n");
+						outputText("Yang examine the skulls to make sure those are imps then nods giving you your payment.\n\n");
 						outputText("\"<i>Good job [name] here is your payment.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 1);
@@ -380,19 +380,19 @@ package classes.Scenes.Places.HeXinDao
 						statScreenRefresh();
 					}
 					else {
-						outputText("The panda taps her foot on the ground.\n\n");
+						outputText("The panda tap her foot on the ground.\n\n");
 						outputText("\"<i>I thought I had been clear the bounty require 5 imps skulls [name]. Get back to hunting.</i>\"\n\n");
 					}
 				}
 				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 4) {
-					outputText("Yang eyes you with keen interest then asks,\n\n");
+					outputText("Yang eyes you with keen interest then ask.\n\n");
 					outputText("\"<i>Would you actually be interested into something easier? Right now there's a bounty on imp slaying. Bring me back 5 imp skulls and I will see it through that you are properly rewarded.</i>\"\n\n");
 					player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 2);
 				}
 				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 3) {
 					if (player.hasItem(useables.IMPSKLL, 4) || Slot01 >= 4) {
-						outputText("Yang examine the skulls to make sure they are imps then nods giving you your payment.\n\n");
-						outputText("\"<i>Good job [name] here is your payment a special training scroll.</i>\"\n\n");
+						outputText("Yang examine the skulls to make sure those are imps then nods giving you your payment.\n\n");
+						outputText("\"<i>Good job [name] here is your payment along with a special training scroll.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 1);
 						if (Slot01 >= 4) Slot01 -= 4;
@@ -400,18 +400,18 @@ package classes.Scenes.Places.HeXinDao
 						player.perkPoints += 1;
 					}
 					else {
-						outputText("The panda taps her foot on the ground.\n\n");
+						outputText("The panda tap her foot on the ground.\n\n");
 						outputText("\"<i>I thought I had been clear the bounty require 4 imps skulls [name]. Get back to hunting.</i>\"\n\n");
 					}
 				}
 				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests1) == 2) {
-					outputText("Yang eyes you with keen interest then asks,\n\n");
+					outputText("Yang eyes you with keen interest then ask.\n\n");
 					outputText("\"<i>Would you actually be interested into something easier? Right now there's a bounty on imp slaying. Bring me back 4 imp skulls and I will see it through that you are properly rewarded.</i>\"\n\n");
 					player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 1);
 				}
 				else {
 					if (player.hasItem(useables.IMPSKLL, 3) || Slot01 >= 3) {
-						outputText("Yang examine the skulls to make sure they are imps then nods giving you your payment.\n\n");
+						outputText("Yang examine the skulls to make sure those are imps then nods giving you your payment.\n\n");
 						outputText("\"<i>Good job [name] here is your payment. By the way I though you may want to be able to sense corruption, can be useful to hunt demons here have this amulet.</i>\"\n\n");
 						outputText("(<b>Acquired demon hunter amulet!</b>)\n\n");
 						outputText("(<b>Gained New Perk: Sense Corruption</b>)");
@@ -424,13 +424,13 @@ package classes.Scenes.Places.HeXinDao
 						else player.destroyItems(useables.IMPSKLL, 3);
 					}
 					else {
-						outputText("The panda taps her foot on the ground.\n\n");
+						outputText("The panda tap her foot on the ground.\n\n");
 						outputText("\"<i>I thought I had been clear the bounty require 3 imps skulls [name]. Get back to hunting.</i>\"\n\n");
 					}
 				}
 			}
 			else {
-				outputText("Yang eyes you with keen interest then asks\n\n");
+				outputText("Yang eyes you with keen interest then ask.\n\n");
 				outputText("\"<i>Would you actually be interested into something easier? Right now there's a bounty on imp slaying. Bring me back 3 imp skulls and I will see it through that you are properly rewarded.</i>\"\n\n");
 				if (!player.hasStatusEffect(StatusEffects.AdventureGuildQuestsCounter1)) player.createStatusEffect(StatusEffects.AdventureGuildQuestsCounter1, 0, 0, 0, 0);
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests1)) player.addStatusValue(StatusEffects.AdventureGuildQuests1, 1, 1);
@@ -447,7 +447,7 @@ package classes.Scenes.Places.HeXinDao
 				}
 				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 6) {
 					if (player.hasItem(useables.SEVTENT, 3)) {
-						outputText("You turn in the quest and Yang nods in appreciation.\n\n");
+						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
 						outputText("\"<i>Good job there. I hope those plants did not prove to much trouble. Here is your payment.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
@@ -463,8 +463,8 @@ package classes.Scenes.Places.HeXinDao
 				}
 				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 3) {
 					if (player.hasItem(useables.SEVTENT, 2)) {
-						outputText("You turn in the quest and Yang nods in appreciation.\n\n");
-						outputText("\"<i>Good job [name] here is your payment a special training scroll.</i>\"\n\n");
+						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
+						outputText("\"<i>Good job [name] here is your payment along with a special training scroll.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
 						player.destroyItems(useables.SEVTENT, 2);
@@ -478,10 +478,10 @@ package classes.Scenes.Places.HeXinDao
 				}
 				else {
 					if (player.hasItem(useables.SEVTENT, 1)) {
-						outputText("You turn in the quest and Yang nods in appreciation.\n\n");
+						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
 						outputText("\"<i>My my, I wasn’t sure I would ever see you back.</i>\"\n\n");
 						outputText("Seems she misjudged you then?\n\n");
-						outputText("\"<i>Everyone makes mistakes and plants assignments are way more dangerous than imps, you clearly outpaced expectation. Here is your payment. Some man told me to leave you this scroll as the reward... should help you sense the anger of your opponents he said.</i>\"\n\n");
+						outputText("\"<i>Everyone makes mistakes and plants assignments are way more dangerous than imps, you clearly outpaced expectation. Here is your payment. This reminds me some man told me to leave you this scroll as a reward too... should help you sense the anger of your opponents he said.</i>\"\n\n");
 						outputText("(<b>Gained New Perk: Sense Wrath</b>)");
 						if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0) player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 1, 1);
@@ -510,7 +510,7 @@ package classes.Scenes.Places.HeXinDao
 				}
 				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 6) {
 					if (player.hasItem(useables.DEMSKLL, 3) || Slot04 >= 3) {
-						outputText("You turn in the quest and Yang nods.\n\n");
+						outputText("You turn in the quest and Yang nod.\n\n");
 						outputText("\"<i>Good job as usual here is your payment.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 2, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 1);
@@ -520,20 +520,20 @@ package classes.Scenes.Places.HeXinDao
 						statScreenRefresh();
 					}
 					else {
-						outputText("The panda taps her foot on the ground.\n\n");
+						outputText("The panda tap her foot on the ground.\n\n");
 						outputText("\"<i>I thought I had been clear the bounty require 3 demon skulls [name]. Get back to hunting.</i>\"\n\n");
 					}
 				}
 				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 4) {
 					outputText("\"<i>Hey [name] happen I have a new higher grade job for you if you’re interested.</i>\"\n\n");
-					outputText("Of course you're interested, what’s the job?\n\n");
+					outputText("Of course your interested what’s the job?\n\n");
 					outputText("\"<i>See it happens the town offer a generous sum for every demon slain. If you can bring me proof of the death of 3 demons.</i>\"\n\n");
 					player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 2);
 				}
 				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 3) {
 					if (player.hasItem(useables.DEMSKLL, 2) || Slot04 >= 2) {
-						outputText("You turn in the quest and Yang nods.\n\n");
-						outputText("\"<i>Good job [name] here is your payment a special training scroll.</i>\"\n\n");
+						outputText("You turn in the quest and Yang nod.\n\n");
+						outputText("\"<i>Good job [name] here is your payment along with a special training scroll.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter1, 2, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 1);
 						if (Slot04 >= 3) Slot04 -= 2;
@@ -541,13 +541,13 @@ package classes.Scenes.Places.HeXinDao
 						player.perkPoints += 1;
 					}
 					else {
-						outputText("The panda taps her foot on the ground.\n\n");
+						outputText("The panda tap her foot on the ground.\n\n");
 						outputText("\"<i>I thought I had been clear the bounty require 2 demon skulls [name]. Get back to hunting.</i>\"\n\n");
 					}
 				}
 				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests1) == 2) {
 					outputText("\"<i>Hey [name] happen I have a new higher grade job for you if you’re interested.</i>\"\n\n");
-					outputText("Of course you're interested, what’s the job?\n\n");
+					outputText("Of course your interested what’s the job?\n\n");
 					outputText("\"<i>See it happens the town offer a generous sum for every demon slain. If you can bring me proof of the death of 2 demons.</i>\"\n\n");
 					player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 1);
 				}
@@ -555,8 +555,8 @@ package classes.Scenes.Places.HeXinDao
 					if (player.hasItem(useables.DEMSKLL, 1) || Slot04 >= 1) {
 						outputText("You display the proof of your victory.\n\n");
 						outputText("\"<i>Nice job [name] so about that special reward, it happens a traveling demon hunter has agreed to train whoever would kill demons in the art of slaying. Chika would you please come over? [name] cleared your bounty.</i>\"\n\n");
-						outputText("Chika appears to be a rattel morph with an eyepatch. Rattel, or honey badgers, are known for their ferocity; the set of throwing daggers and poison flasks hanging from her belt, the pair of scimitars on her side and the crossbow on her back tells everything you need about her, ");
-						outputText("she's clearly an expert killer. Chika's gaze goes through you and the inflexibility and sternness of it leaves you somewhat intimidated.\n\n");
+						outputText("Chika which appears to be a rattel morph with an eyepatch. Rattel, or honey badgers, are known for their ferocity and the set of throwing dagger and poison flasks hanging from her belt, the pair of scimitar on her side and the crossbow on her back tells everything you need about her, ");
+						outputText("she's clearly an expert killer. Chika gaze goes through you and the inflexibility and sternness of it leaves you somewhat intimidated.\n\n");
 						outputText("\"<i>Doesn’t look like much... Ye sure " + player.mf("he", "she") + " smoked the targets?</i>\"\n\n");
 						outputText("Yang goes by the affirmative.\n\n");
 						outputText("\"<i>Ye and I are going to have a lot of dealings in the future. But first I want ya to follow me out in the town training area. I have a few things I would like to teach ye.</i>\"\n\n");
@@ -570,14 +570,14 @@ package classes.Scenes.Places.HeXinDao
 						else player.destroyItems(useables.DEMSKLL, 1);
 					}
 					else {
-						outputText("The panda taps her foot on the ground.\n\n");
+						outputText("The panda tap her foot on the ground.\n\n");
 						outputText("\"<i>I thought I had been clear the bounty require 1 demon skull [name]. Get back to hunting.</i>\"\n\n");
 					}
 				}
 			}
 			else {
 				outputText("\"<i>Hey [name] happen I have a new higher grade job for you if you’re interested.</i>\"\n\n");
-				outputText("Of course you're interested, what’s the job?\n\n");
+				outputText("Of course your interested what’s the job?\n\n");
 				outputText("\"<i>See it happens the town offer a generous sum for every demon slain. If you can bring me proof of the death of demon. Should you come back I have a special reward for you in addition to your pay.</i>\"\n\n");
 				if (!player.hasStatusEffect(StatusEffects.AdventureGuildQuestsCounter1)) player.createStatusEffect(StatusEffects.AdventureGuildQuestsCounter1, 0, 0, 0, 0);
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests1)) player.addStatusValue(StatusEffects.AdventureGuildQuests1, 2, 1);
@@ -594,7 +594,7 @@ package classes.Scenes.Places.HeXinDao
 				}
 				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 6) {
 					if (player.hasItem(useables.FIMPSKL, 5) || Slot02 >= 5) {
-						outputText("You turn in the quest and Yang nods in appreciation.\n\n");
+						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
 						outputText("\"<i>Good job there. I heard those creatures are actually out there killing instead of raping, it’s quite chilling. Here is your payment.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 2, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
@@ -611,8 +611,8 @@ package classes.Scenes.Places.HeXinDao
 				}
 				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 3) {
 					if (player.hasItem(useables.FIMPSKL, 4) || Slot01 >= 4) {
-						outputText("You turn in the quest and Yang nods in appreciation.\n\n");
-						outputText("\"<i>Good job there. I heard those creatures are actually out there killing instead of raping, it’s quite chilling. Here is your payment a special training scroll.</i>\"\n\n");
+						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
+						outputText("\"<i>Good job there. I heard those creatures are actually out there killing instead of raping, it’s quite chilling. Here is your payment along with a special training scroll.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 2, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
 						if (Slot02 >= 4) Slot02 -= 4;
@@ -627,10 +627,10 @@ package classes.Scenes.Places.HeXinDao
 				}
 				else {
 					if (player.hasItem(useables.FIMPSKL, 3) || Slot01 >= 3) {
-						outputText("You turn in the quest and Yang nods in appreciation.\n\n");
+						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
 						outputText("\"<i>My my, I wasn’t sure I would ever see you back.</i>\"\n\n");
 						outputText("Seems she misjudged you then?\n\n");
-						outputText("\"<i>Everyone makes mistakes and feral imps assignments are way more dangerous than normal imps, you clearly outpaced expectation. Here is your payment. Some man told me to leave you this scroll as the reward... should help you fight feral opponents he said.</i>\"\n\n");
+						outputText("\"<i>Everyone makes mistakes and feral imps assignments are way more dangerous than normal imps, you clearly outpaced expectation. Here is your payment. This reminds me some man told me to leave you this scroll as a reward too... should help you fight feral opponents he said.</i>\"\n\n");
 						outputText("(<b>Gained New Perk: Feral Hunter</b>)");
 						if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0) player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 2, 1);
@@ -724,7 +724,7 @@ package classes.Scenes.Places.HeXinDao
 				}
 				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests4) == 4) {
 					if (player.hasItem(useables.GREENGL, 5)) {
-						outputText("You turn in the quest and Yang nods in appreciation.\n\n");
+						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
 						outputText("\"<i>Good job there. I hope gathering these did not prove to much trouble. Here is your payment.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter4, 2, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests4, 2, 1);
@@ -740,8 +740,8 @@ package classes.Scenes.Places.HeXinDao
 				}
 				else {
 					if (player.hasItem(useables.GREENGL, 5)) {
-						outputText("You turn in the quest and Yang nods in appreciation.\n\n");
-						outputText("\"<i>My my, nice job. I can only hope you kept that weapon clean of innocent blood. Regardless here is your payment. The client told me to leave you this scroll as a reward you know what to do with it I suppose?</i>\"\n\n");
+						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
+						outputText("\"<i>My my, nice job. I can only hope you kept that weapon clean of innocent blood. Regardless here is your payment. This reminds me the client told me to leave you this scroll as a reward too you know what to do with it I suppose?</i>\"\n\n");
 						if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0) player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter4, 2, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests4, 2, 1);
@@ -768,7 +768,7 @@ package classes.Scenes.Places.HeXinDao
 				}
 				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 4) {
 					if (player.hasItem(useables.B_CHITN, 5)) {
-						outputText("You turn in the quest and Yang nods in appreciation.\n\n");
+						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
 						outputText("\"<i>Good job there. I hope gathering these did not prove to much trouble. Here is your payment.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter4, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests4, 1, 1);
@@ -780,7 +780,7 @@ package classes.Scenes.Places.HeXinDao
 				}
 				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests4) == 2) {
 					outputText("\"<i>You may or may not like that one. The good news is you are going out to gather chitin the bad news is it primarily drop from bee girls which is a friendly species so your morality may be put to the test. How you handle that is up to you, ");
-					outputText("for all I know chitin is often found on the forest ground where bee girls thrives. Regardless bring us back 5 chitin and your job will be done.</i>\"\n\n");
+					outputText("for all I know chitin is often found on the forest ground where bee girls trives. Regardless bring us back 5 chitin and your job will be done.</i>\"\n\n");
 					player.addStatusValue(StatusEffects.AdventureGuildQuests4, 1, 2);
 					if (player.statusEffectv3(StatusEffects.AdventureGuildQuests4) > 0) {
 						player.removeStatusEffect(StatusEffects.AdventureGuildQuests4);
@@ -789,8 +789,8 @@ package classes.Scenes.Places.HeXinDao
 				}
 				else {
 					if (player.hasItem(useables.B_CHITN, 5)) {
-						outputText("You turn in the quest and Yang nods in appreciation.\n\n");
-						outputText("\"<i>My my, nice job. I can only hope you kept that weapon clean of innocent blood. Regardless here is your payment. The client told me to leave you this scroll as a reward you know what to do with it I suppose?</i>\"\n\n");
+						outputText("You turn in the quest and Yang nod in appreciation.\n\n");
+						outputText("\"<i>My my, nice job. I can only hope you kept that weapon clean of innocent blood. Regardless here is your payment. This reminds me the client told me to leave you this scroll as a reward too you know what to do with it I suppose?</i>\"\n\n");
 						if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0) player.addKeyValue("Adventurer Guild: Copper plate", 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter4, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests4, 1, 1);
@@ -806,7 +806,7 @@ package classes.Scenes.Places.HeXinDao
 			}
 			else {
 				outputText("\"<i>You may or may not like that one. The good news is you are going out to gather chitin the bad news is it primarily drop from bee girls which is a friendly species so your morality may be put to the test. How you handle that is up to you, ");
-				outputText("for all I know chitin is often found on the forest ground where bee girls thrives. Regardless bring us back 5 chitin and your job will be done.</i>\"\n\n");
+				outputText("for all I know chitin is often found on the forest ground where bee girls trives. Regardless bring us back 5 chitin and your job will be done.</i>\"\n\n");
 				if (!player.hasStatusEffect(StatusEffects.AdventureGuildQuestsCounter4)) player.createStatusEffect(StatusEffects.AdventureGuildQuestsCounter4, 0, 0, 0, 0);
 				if (player.hasStatusEffect(StatusEffects.AdventureGuildQuests4)) player.addStatusValue(StatusEffects.AdventureGuildQuests4, 1, 1);
 				else player.createStatusEffect(StatusEffects.AdventureGuildQuests4, 1, 0, 0, 0);
@@ -817,7 +817,7 @@ package classes.Scenes.Places.HeXinDao
 			clearOutput();
 			if (flags[kFLAGS.GALIA_LVL_UP] > 0) {
 				if (flags[kFLAGS.GALIA_AFFECTION] == 10) {
-					outputText("You turn in the quest and Yang nods in appreciation. She verifies the imp, it literally trying to claw at her face before she close the bag again.\n\n");
+					outputText("You turn in the quest and Yang nod in appreciation. She verify the imp, it literally trying to claw at her face before she close the bag again.\n\n");
 					outputText("\"<i>Looks feral, good job there. The imp will be delivered to the researchers address and she will study it in order to perhaps develop a cure. As for you I think you earned your reward.</i>\"\n\n");
 					if (flags[kFLAGS.GALIA_LVL_UP] == 0.01) flags[kFLAGS.GALIA_LVL_UP] = 0.05;
 					else flags[kFLAGS.GALIA_LVL_UP] += 0.05;
@@ -836,14 +836,14 @@ package classes.Scenes.Places.HeXinDao
 		}
 		public function BoardkeeperYangQuestEzekiel1a():void {
 			clearOutput();
-			outputText("You turn in the quest and Yang nods in appreciation. She verifies the imp, it literally trying to claw at her face before she close the bag again.\n\n");
+			outputText("You turn in the quest and Yang nod in appreciation. She verify the imp, it literally trying to claw at her face before she close the bag again.\n\n");
 			outputText("\"<i>Looks feral, good job there. The imp will be delivered to the researchers address and she will study it in order to perhaps develop a cure. As for you I think you earned your reward. By the way this imp is clearly a female, this is a rare find. If you hand it to us we will increase your reward accordingly that is… unless you want to keep her?</i>\"\n\n");
 			menu();
 			addButton(1, "No want", BoardkeeperYangQuestEzekiel1NoWant);
 			addButton(3, "Keep", BoardkeeperYangQuestEzekiel1Keep);
 		}
 		public function BoardkeeperYangQuestEzekiel1NoWant():void {
-			outputText("You turn in the quest and Yang nods in appreciation. She verifies the imp, it literally trying to claw at her face before she close the bag again.\n\n");
+			outputText("You turn in the quest and Yang nod in appreciation. She verify the imp, it literally trying to claw at her face before she close the bag again.\n\n");
 			outputText("\"<i>Looks feral, good job there. The imp will be delivered to the researchers address and she will study it in order to perhaps develop a cure. As for you I think you earned your reward.</i>\"\n\n");
 			flags[kFLAGS.GALIA_LVL_UP] = 0.53;
 			flags[kFLAGS.GALIA_AFFECTION] = 0;
@@ -905,7 +905,7 @@ package classes.Scenes.Places.HeXinDao
 			doNext(BoardkeeperYangQuest);
 		}
 		public function BoardkeeperYangGolemRetrievalJob2():void {
-			outputText("Yang waits for you arms crossed. You write a full job description and hand it over to Yang along with the stones. This done, she then posts it on the board as an iron plate request.\n\n");
+			outputText("Yang wait at you arm crossed. You write a full job description and hand it over to Yang along with the stones. This done, she then posts it on the board as an iron plate request.\n\n");
 			flags[kFLAGS.SPIRIT_STONES] -= 10;
 			flags[kFLAGS.AURORA_LVL] = 0.35;
 			statScreenRefresh();
@@ -913,7 +913,7 @@ package classes.Scenes.Places.HeXinDao
 		}
 		public function BoardkeeperYangTalk():void {
 			clearOutput();
-			outputText("Yang waits for you arms crossed.\n\n");
+			outputText("Yang wait at you arm crossed.\n\n");
 			outputText("\"<i>Here to talk or something else?</i>\"");
 			menu();
 			addButton(0, "Her Job", BoardkeeperYangTalkHerJob);
@@ -924,7 +924,7 @@ package classes.Scenes.Places.HeXinDao
 		}
 		public function BoardkeeperYangTalkHerJob():void {
 			clearOutput();
-			outputText("What’s her job exactly? Is she an adventurer herself?\n\n");
+			outputText("What’s her job really. Is she an adventurer herself?\n\n");
 			outputText("\"<i>Me? No dear no I’m just the guild poster girl. I’m actually paid to stand there. That said there’s a few perk to it as I get to meet some of Mareth’s biggest badass face to face and sometime closer, if you catch my drift.</i>\"\n\n");
 			doNext(BoardkeeperYangTalk);
 		}
@@ -935,15 +935,15 @@ package classes.Scenes.Places.HeXinDao
 		}
 		public function BoardkeeperYangTalkRequests():void {
 			clearOutput();
-			outputText("Ok, you are a member now, how do you take on a job?\n\n");
+			outputText("Ok you are a member now, how do you take on a job?\n\n");
 			outputText("\"<i>First and foremost you come to me or any other board on mareth if you can find one. Then you choose a difficulty and I set you on a corresponding request.</i>\"\n\n");
 			outputText("Difficulty? You thought you could pick on the highest request right away.\n\n");
-			outputText("\"<i>No such thing " + player.mf("Mr.", "Mrs.") + " Hero. The guild has strict ruling to prevent people throwing their lives away on job they can’t handle. We have a difficulty system based on skill and rank. You cannot take on a request way above your ranking until you have qualified for it. The rank are determined by copper, bronze, silver, gold and platinum plates.</i>\"\n\n");
+			outputText("\"<i>No such thing " + player.mf("Mr", "Mrs") + " hero. The guild has strict ruling to prevent people throwing their lives away on job they can’t handle. We have a difficulty system based on skill and rank. You cannot take on a request way above your ranking until you have qualified for it. The rank are determined by copper, bronze, silver, gold and platinum plates.</i>\"\n\n");
 			doNext(BoardkeeperYangTalk);
 		}
 		public function BoardkeeperYangTalkOthers():void {
 			clearOutput();
-			outputText("If there is a guild there are bound to be many adventurers, who are they?\n\n");
+			outputText("If there is a guild there is bound to be many adventurers, who are they?\n\n");
 			outputText("\"<i>Well now that you ask yes there are a few local adventurers however most of them aren’t worthy of mention. That said one stands out, her name is Chi Chi and she regularly go out on request involving battling the corrupt forces. One hell of a fighter to, I heard she is a veteran of the town arena.");
 			if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) outputText(" If you want to get in on that action you may want to enlist in the arena gauntlet challenges to draw her attention.");
 			outputText("</i>\"\n\n");
@@ -952,7 +952,7 @@ package classes.Scenes.Places.HeXinDao
 		public function BoardkeeperYangSex():void {
 			clearOutput();
 			outputText("She giggle before teasingly puffing her chest up, which only shows more cleavage than necessary.\n\n");
-			outputText("\"<i>Well that’s cute " + player.mf("Mr.", "Mrs.") + " Hero but I don’t go for a ride with just anyone who ask. Complete at least a silver request for the guild and I will give you a shot.</i>\"");
+			outputText("\"<i>Well that’s cute " + player.mf("Mr", "Mrs") + " hero but I don’t go for a ride with just anyone who ask. Complete at least a silver request for the guild and I will give you a shot.</i>\"");
 			doNext(BoardkeeperYangMain);
 		}
 		public function BoardkeeperYangPromotion():void {
@@ -974,8 +974,8 @@ package classes.Scenes.Places.HeXinDao
 			}
 			if (player.keyItemv1("Adventurer Guild: Iron plate") > 1) {
 				if (flags[kFLAGS.SPIRIT_STONES] >= 15) {
-					outputText("Yang nods. \"<i>Yep it’s definitely time we promoted hou. You pass from Iron plate to Bronze, congratulations!</i>\"\n\n");
-					outputText("She hand you a new necklace, which you proceed to don up.\n\n");
+					outputText("Yang nod. \"<i>Yep it’s definitely time we promoted hou. You pass from Iron plate to Bronze, congratulations!</i>\"\n\n");
+					outputText("She hand you over a new necklace which you proceed to don up.\n\n");
 					player.removeKeyItem("Adventurer Guild: Iron plate");
 					player.createKeyItem("Adventurer Guild: Bronze plate", 0, 0, 0, 0);
 					flags[kFLAGS.SPIRIT_STONES] -= 15;
