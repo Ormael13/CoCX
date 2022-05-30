@@ -1195,12 +1195,6 @@ public class Prison extends BaseContent implements TimeAwareInterface
 			}
 			if(CoC.instance.timeQ > 0)
 			{
-				/*if(!CoC.instance.campQ)
-				{
-					outputText("More time passes...\n", true);
-					goNext(CoC.instance.timeQ, false);
-					return;
-				}*/
 				if(model.time.hours < 6 || model.time.hours > 20)
 				{
 					camp.doSleep();
