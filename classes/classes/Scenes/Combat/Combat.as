@@ -3653,6 +3653,7 @@ public class Combat extends BaseContent {
                     if (monster.hasStatusEffect(StatusEffects.BeeVenom)) {
                         monster.addStatusValue(StatusEffects.BeeVenom, 3, damage1Ba);
                     } else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, damage1Ba, 0);
+					if (player.hasPerk(PerkLib.ToxineMaster)) monster.statStore.addBuffObject({tou:-5}, "Poison",{text:"Poison"});
                     player.tailVenom -= player.VenomWebCost();
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                 }
@@ -3664,7 +3665,8 @@ public class Combat extends BaseContent {
 						DBP *= 2;
 						DBPa *= 2;
 					}
-                    monster.statStore.addBuffObject({tou:-DBP, spe:-DBP}, "Poison",{text:"Poison"});
+					if (player.hasPerk(PerkLib.ToxineMaster)) monster.statStore.addBuffObject({tou:-(DBP+5), spe:-DBP}, "Poison",{text:"Poison"});
+                    else monster.statStore.addBuffObject({tou:-DBP, spe:-DBP}, "Poison",{text:"Poison"});
                     if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                         monster.addStatusValue(StatusEffects.NagaVenom, 3, DBPa);
                     } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, DBPa, 0);
@@ -3685,6 +3687,7 @@ public class Combat extends BaseContent {
 						DBPaa *= 2;
 					}
                     monster.teased(lustdamage, false);
+					if (player.hasPerk(PerkLib.ToxineMaster)) DBPaa += 2.5;
                     monster.statStore.addBuffObject({tou:-(DBPaa*2)}, "Poison",{text:"Poison"});
                     if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) {
                         monster.addStatusValue(StatusEffects.ManticoreVenom, 3, DBPaa);
@@ -3696,7 +3699,8 @@ public class Combat extends BaseContent {
                     outputText("  [monster he] seems to be effected by the poison, its movements slowing down.");
 					var DBPaaa:Number = 1;
 					if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPaaa *= 2;
-                    monster.statStore.addBuffObject({spe:-DBPaaa}, "Poison",{text:"Poison"});
+					if (player.hasPerk(PerkLib.ToxineMaster)) monster.statStore.addBuffObject({tou:-5, spe:-DBPaaa}, "Poison",{text:"Poison"});
+					else monster.statStore.addBuffObject({spe:-DBPaaa}, "Poison",{text:"Poison"});
                     var venomType:StatusEffectType = StatusEffects.NagaVenom;
                     if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
                     if (monster.hasStatusEffect(venomType)) {
@@ -3725,6 +3729,7 @@ public class Combat extends BaseContent {
 							damage2Ba *= 2;
 						}
                         monster.teased(damage2B);
+						if (player.hasPerk(PerkLib.ToxineMaster)) poisonScaling += 5;
                         monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
                         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                             monster.addStatusValue(StatusEffects.NagaVenom, 3, damage2Ba);
@@ -3742,6 +3747,7 @@ public class Combat extends BaseContent {
                             if (monster.lustVuln > 1) monster.lustVuln = 1;
                         }
                         player.tailVenom -= player.VenomWebCost();
+						if (player.hasPerk(PerkLib.ToxineMaster)) monster.statStore.addBuffObject({tou:-5}, "Poison",{text:"Poison"});
 						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                     }
                 }
@@ -3753,7 +3759,13 @@ public class Combat extends BaseContent {
                 }
                 outputText("\n");
             }
-            if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < player.VenomWebCost()) outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!\n");
+            if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < player.VenomWebCost()) {
+				if (player.hasPerk(PerkLib.ToxineMaster) && player.hasKeyItem("Sky Poison Pearl") >= 0) {
+					outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness.\n");
+					monster.statStore.addBuffObject({tou:-5}, "Poison",{text:"Poison"});
+				}
+				else outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!\n");
+			}
             if (player.weaponRangeName == "Hodr's bow" && !monster.hasStatusEffect(StatusEffects.Blind)) monster.createStatusEffect(StatusEffects.Blind, 1, 0, 0, 0);
             outputText("\n");
             if (flags[kFLAGS.ARROWS_SHOT] >= 1) EngineCore.awardAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE);
@@ -9367,7 +9379,7 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.IzmaBleed)) {
             player.addStatusValue(StatusEffects.IzmaBleed, 1, -1);
-            if (player.statusEffectv1(StatusEffects.IzmaBleed) <= 0) {
+            if (player.statusEffectv1(StatusEffects.IzmaBleed) <= 0 || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 player.removeStatusEffect(StatusEffects.IzmaBleed);
                 outputText("<b>You sigh with relief; your bleeding has slowed considerably.</b>\n\n");
             }
@@ -9382,7 +9394,7 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.Hemorrhage)) {
             player.addStatusValue(StatusEffects.Hemorrhage, 1, -1);
-            if (player.statusEffectv1(StatusEffects.Hemorrhage) <= 0) {
+            if (player.statusEffectv1(StatusEffects.Hemorrhage) <= 0 || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 player.removeStatusEffect(StatusEffects.Hemorrhage);
                 outputText("<b>You sigh with relief; your hemorrhage has slowed considerably.</b>\n\n");
             }
@@ -9397,7 +9409,7 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.BurnDoT)) {
             player.addStatusValue(StatusEffects.BurnDoT, 1, -1);
-            if (player.statusEffectv1(StatusEffects.BurnDoT) <= 0) {
+            if (player.statusEffectv1(StatusEffects.BurnDoT) <= 0 || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 player.removeStatusEffect(StatusEffects.BurnDoT);
                 outputText("<b>You sigh with relief; fire has stopped searing your wounds.</b>\n\n");
             }
@@ -9459,10 +9471,13 @@ public class Combat extends BaseContent {
             }
         }
         if (player.hasStatusEffect(StatusEffects.AcidSlap)) {
-            var slap:Number = 3 + (player.maxHP() * 0.02);
-			if (player.statStore.hasBuff("Crossed Holy Band")) slap *= 0.5;
-			slap = player.takeAcidDamage(slap);
-            outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"#800000\">" + slap + "</font>)</b></b>\n\n");
+			if (player.hasPerk(PerkLib.KingOfTheJungle)) player.removeStatusEffect(StatusEffects.AcidSlap);
+			else {
+				var slap:Number = 3 + (player.maxHP() * 0.02);
+				if (player.statStore.hasBuff("Crossed Holy Band")) slap *= 0.5;
+				slap = player.takeAcidDamage(slap);
+				outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"#800000\">" + slap + "</font>)</b></b>\n\n");
+			}
         }
         if (monster.hasStatusEffect(StatusEffects.AuraOfMadness) && !player.hasPerk(PerkLib.Insanity) && !player.hasStatusEffect(StatusEffects.AlterBindScroll3)) {
 			player.addCurse("int.mult", monster.statusEffectv1(StatusEffects.AuraOfMadness)/100,3);//non bosses have it 5
@@ -9830,7 +9845,7 @@ public class Combat extends BaseContent {
             }
         }
         if (player.hasStatusEffect(StatusEffects.AikoLightningArrow)) {
-            if (player.statusEffectv1(StatusEffects.AikoLightningArrow) <= 0) {
+            if (player.statusEffectv1(StatusEffects.AikoLightningArrow) <= 0 || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 player.removeStatusEffect(StatusEffects.AikoLightningArrow);
                 outputText("<b>You feel stronger as Aiko's lightning finally fades, though the arrow is still lodged in your side.</b>\n\n");
                 player.buff("LightningArrowStr").remove();
@@ -9855,7 +9870,7 @@ public class Combat extends BaseContent {
         //Harpy lip gloss
         if (player.hasCock() && player.hasStatusEffect(StatusEffects.Luststick) && (monster.short == "harpy" || monster.short == "Sophie")) {
             //Chance to cleanse!
-            if (player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) {
+            if ((player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("You manage to cleanse the harpy lip-gloss from your system with your knowledge of medicine!\n\n");
                 player.removeStatusEffect(StatusEffects.Luststick);
             } else if (rand(5) == 0) {
@@ -9903,7 +9918,7 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.NagaVenom)) {
             //Chance to cleanse!
-            if (player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) {
+            if ((player.hasPerk(PerkLib.Medicine) && rand(100) <= 14)  || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("Using your knowledge of medicine, you manage to cleanse [monster a] [monster name] venom from your system.\n\n");
                 player.removeStatusEffect(StatusEffects.NagaVenom);
             } else if (player.spe > 3) {
@@ -9915,7 +9930,7 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.MedusaVenom)) {
             //Chance to cleanse!
-            if (player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) {
+            if ((player.hasPerk(PerkLib.Medicine) && rand(100) <= 14)  || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("Using your knowledge of medicine, you manage to cleanse [monster a] [monster name] venom from your system.\n\n");
                 player.statStore.removeBuffs("Poison");
                 player.removeStatusEffect(StatusEffects.MedusaVenom);
@@ -9931,7 +9946,7 @@ public class Combat extends BaseContent {
         //Temporary heat
         if (player.hasStatusEffect(StatusEffects.TemporaryHeat)) {
             //Chance to cleanse!
-            if (player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) {
+			if ((player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("With your knowledge of medicine, you manage to cleanse the heat and rut drug from your system.\n\n");
                 player.removeStatusEffect(StatusEffects.TemporaryHeat);
             } else {
@@ -9950,7 +9965,7 @@ public class Combat extends BaseContent {
         //Poison
         if (player.hasStatusEffect(StatusEffects.Poison)) {
             //Chance to cleanse!
-            if (player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) {
+            if ((player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("You manage to cleanse the poison from your system with your knowledge of medicine!\n\n");
                 player.removeStatusEffect(StatusEffects.Poison);
             } else {
@@ -9966,7 +9981,7 @@ public class Combat extends BaseContent {
         }
         // Drider incubus venom
         if (player.hasStatusEffect(StatusEffects.DriderIncubusVenom)) {
-            if (player.hasPerk(PerkLib.Medicine) && rand(100) <= 41) {
+            if ((player.hasPerk(PerkLib.Medicine) && rand(100) <= 41) || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("You negate the effects of the drider incubus’ venom with your knowledge of medicine!\n\n");
                 player.statStore.removeBuffs("Poison");
                 player.removeStatusEffect(StatusEffects.DriderIncubusVenom);
@@ -9998,7 +10013,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.AcidDoT)) {
             player.addStatusValue(StatusEffects.AcidDoT, 1, -1);
             //Heal wounds
-            if (player.statusEffectv1(StatusEffects.AcidDoT) <= 0) {
+            if (player.statusEffectv1(StatusEffects.AcidDoT) <= 0 || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("Acid wounds left by [themonster] finally close ups.\n\n");
                 player.removeStatusEffect(StatusEffects.AcidDoT);
             }
@@ -10007,7 +10022,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.FrostburnDoT)) {
             player.addStatusValue(StatusEffects.FrostburnDoT, 1, -1);
             //Heal wounds
-            if (player.statusEffectv1(StatusEffects.FrostburnDoT) <= 0) {
+            if (player.statusEffectv1(StatusEffects.FrostburnDoT) <= 0 || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("Frostburn wounds left by [themonster] finally close ups.\n\n");
                 player.removeStatusEffect(StatusEffects.FrostburnDoT);
             } else {
@@ -10023,7 +10038,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.FrozenLung)) {
             player.addStatusValue(StatusEffects.FrozenLung, 1, -1);
             //Heal wounds
-            if (player.statusEffectv1(StatusEffects.FrozenLung) <= 0) {
+            if (player.statusEffectv1(StatusEffects.FrozenLung) <= 0 || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("Frozen Lung left by [themonster] finally ends.\n\n");
                 player.removeStatusEffect(StatusEffects.FrozenLung);
             } else {

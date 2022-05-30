@@ -4645,8 +4645,9 @@ use namespace CoC;
 					minCap += jewelryEffectMagnitude;
 				}
 			}
-			if (armorName == "lusty maiden's armor") min += Math.round(minCap * 0.3);
+			if (armorName == "lusty maiden's armor" || armorName == "Succubus armor") min += Math.round(minCap * 0.3);
 			if (armorName == "tentacled bark armor") min += Math.round(minCap * 0.2);
+			if (hasPerk(PerkLib.HotNCold) && min > Math.round(minCap * 0.75)) min = Math.round(minCap * 0.75); 
 			//Constrain values
 			if (min < 0) min = 0;
 			if (min > minCap) min = minCap;

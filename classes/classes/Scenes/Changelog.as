@@ -342,9 +342,13 @@ public class Changelog extends BaseContent
 			outputText("-When interaction labeled 'Kiss' become labaled as 'KISS' it mean PC reached crucial stage of interactions after which to proceed is req. to pickl meantioned kiss scene. Then it req. to visit Battlefield again to see scene with few chocies. Depending on event outcome PC may see her 2nd part of her story. After affection reach high enough value even option to invite her to camp would appear.\n");
 			outputText("-In Camp Tyrantia would have most of standard npc interactions like: checking her appearance, talking with her, sex. By doing mini quest would be possible to impregnate massive drider lady. At 100 affections would be enabled anotyher option: Corrupting items into legendary items. It would req. the same additional materials or currency like the one option Celess provide.\n");
 			outputText("-After having all three driders in camp: Belisa, Lily and Tyrantia they would remodel each own residence into mini town called Drider Town. It would group all three under new menu within Lovers menu.\n");
-			outputText("-Tyrantia could train PC with each training (up to 26 sessions) increasing max lust cap by 1% for each. After 5 training PC would be able to activate Tyrant State - Take constant lust damage every turn equal to 5% of your maximum lust. Take 20% increased physical damage. Deal 50% increased melee damage.\n");
-			outputText("-Fusing with Elder rank ofr higher Epic Elemental would give access to new utility oriented special: Moment of Clarity (Water) - immunity to lust damage and remove 5% of max lust per round for 3 rounds, 6 round cooldown, Fiery Rage (fire) - Work as a no damage taken Over Limit that instead consume soulforce over time, ");
+			outputText("-Tyrantia could train PC with each training (up to 25 sessions) increasing max lust cap by 1% for each. After 5 training PC would be able to activate Tyrant State - Take constant lust damage every turn equal to 5% of your maximum lust. Take 20% increased physical damage. Deal 50% increased melee damage.\n");
+			outputText("-Fusing with Elder rank or higher Epic Elemental would give access to new utility oriented special: Moment of Clarity (Water) - immunity to lust damage and remove 5% of max lust per round for 3 rounds, 6 round cooldown, Fiery Rage (fire) - Work as a no damage taken Over Limit that instead consume soulforce over time, ");
 			outputText("Adamantine Shell (earth) - Greatly raise damage reduction (75% for 7 rounds, 10 round cooldown), True Evasion (Air) - Invulnerable for 3 rounds, 10 round cooldown.\n");
+			outputText("-Epic Elementals can be now rank up all way to Viscount Rank (rank 8).\n");
+			outputText("-New tier 10 strength lvl-up perk: Toxine master. Req. Prestige Job: Stalker & Envenomed bolt perks. Effect: Envenomed bolt venom effect now is two times as strong on each projectile and gains an extra dot as 5 toughness damage per round. If PC doesn't have a poison pc can use the sky poison pearl to produce a deadly toxin that adds the base 5 toughness damage to weapon attacks.\n");
+			outputText("-New tier 11 strength lvl-up perk: King of the jungle. Req. Toxine master & Medicine perks. Effect: One with the natural world, you gained almost complete immunity (their duration shortened to 1 round) to status effects like frozen solid, poison, burn and bleeding! Furthermore all the damage caused with the damaging condition above is increased by 20%.\n");
+			outputText("-New tier 2 libido lvl-up perk: Hot N Cold. Req. Hot Blooded & Cold Blooded perks. Effect: You're Hot N Cold and can't cross 75% minimum lust threshold.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -352,11 +356,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//tier 2/11 perks?
+			outputText("-\n");//tier 2 perk?
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym

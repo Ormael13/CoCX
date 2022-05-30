@@ -2754,6 +2754,7 @@ import flash.utils.getQualifiedClassName;
 				else {
 					var procentvalue:Number = (4 + rand(7));
 					if (game.player.hasPerk(PerkLib.ThirstForBlood)) procentvalue *= 1.5;
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) procentvalue *= 1.2;
 					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) procentvalue *= 1.5;
 					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) procentvalue *= 1.5;
 					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) procentvalue *= 1.5;
@@ -2778,6 +2779,7 @@ import flash.utils.getQualifiedClassName;
 				else {
 					var store3:Number = (player.str + player.spe) * 2;
 					if (player.hasPerk(PerkLib.ThirstForBlood)) store3 *= 1.5;
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store3 *= 1.2;
 					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) store3 *= 1.5;
 					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) store3 *= 1.5;
 					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) store3 *= 1.5;
@@ -2810,6 +2812,7 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				var store13:Number = (player.str + player.spe) * 2;
 				if (game.player.hasPerk(PerkLib.ThirstForBlood)) store13 *= 1.5;
+				if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store3 *= 1.2;
 				store13 = Math.round(store13);
 				if (statusEffectv2(StatusEffects.KamaitachiBleed) > 0) store13 *= statusEffectv2(StatusEffects.KamaitachiBleed);
 				store13 += statusEffectv1(StatusEffects.KamaitachiBleed); //Kamaitachi bleed stacks on itself growing ever stronger
@@ -2834,6 +2837,7 @@ import flash.utils.getQualifiedClassName;
 				else {
 					var store5:Number = (player.str + player.spe) * 2;
 					if (player.hasPerk(PerkLib.ThirstForBlood)) store5 *= 1.5;
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store5 *= 1.2;
 					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) store5 *= 1.5;
 					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) store5 *= 1.5;
 					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) store5 *= 1.5;
@@ -2883,6 +2887,7 @@ import flash.utils.getQualifiedClassName;
 					if (statusEffectv1(StatusEffects.Hemorrhage) > 0) hemorrhage += maxHP() * statusEffectv2(StatusEffects.Hemorrhage);
 					if (statusEffectv1(StatusEffects.HemorrhageArmor) > 0) hemorrhage += maxHP() * statusEffectv2(StatusEffects.HemorrhageArmor);
 					if (statusEffectv1(StatusEffects.HemorrhageShield) > 0) hemorrhage += maxHP() * statusEffectv2(StatusEffects.HemorrhageShield);
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage *= 1.2;
 					hemorrhage = SceneLib.combat.doDamage(hemorrhage);
 					if (plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your attack left behind. <b>(<font color=\"#800000\">" + hemorrhage + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your attack left behind. <b>(<font color=\"#800000\">" + hemorrhage + "</font>)</b>\n\n");
@@ -2901,6 +2906,7 @@ import flash.utils.getQualifiedClassName;
 				else {
 					var hemorrhage2:Number = 0;
 					hemorrhage2 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage2);
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage2 *= 1.2;
 					hemorrhage2 = SceneLib.combat.doDamage(hemorrhage2);
 					if (plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your companion attack left behind. <b>(<font color=\"#800000\">" + hemorrhage2 + "</font>)</b>\n\n");
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your companion attack left behind. <b>(<font color=\"#800000\">" + hemorrhage2 + "</font>)</b>\n\n");
@@ -3025,6 +3031,7 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store2:Number = int(50 + (player.inte / 10));
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store2 *= 1.2;
 					store2 = Math.round(store2 * SceneLib.combat.fireDamageBoostedByDao());
 					store2 = SceneLib.combat.doFireDamage(store2);
 					if(plural) outputText(capitalA + short + " burn from lingering immolination after-effect. <b>(<font color=\"#800000\">" + store2 + "</font>)</b>\n\n");
@@ -3043,6 +3050,7 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store4:Number = (player.str + player.spe + player.tou) * 2.5;
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store4 *= 1.2;
 					store4 = Math.round(store4 * SceneLib.combat.fireDamageBoostedByDao());
 					store4 += maxHP() * statusEffectv2(StatusEffects.BurnDoT);
 					store4 = SceneLib.combat.doFireDamage(store4);
@@ -3062,6 +3070,7 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store8:Number = (player.str + player.spe + player.tou) * 2.5;
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store8 *= 1.2;
 					store8 = Math.round(store8 * SceneLib.combat.fireDamageBoostedByDao());
 					store8 += maxHP() * statusEffectv2(StatusEffects.BurnDoT2);
 					store8 = SceneLib.combat.doFireDamage(store8);
@@ -3081,6 +3090,7 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store6:Number = (player.spe + player.inte) * SceneLib.combat.soulskillMod() * 0.5;
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store6 *= 1.2;
 					store6 = Math.round(store6 * SceneLib.combat.fireDamageBoostedByDao());
 					store6 = SceneLib.combat.doFireDamage(store6);
 					if(plural) outputText(capitalA + short + " burn from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
@@ -3121,6 +3131,7 @@ import flash.utils.getQualifiedClassName;
 					//Deal damage if still wounded.
 					else {
 						var store12:Number = (player.str + player.spe + player.tou) * 2.5;
+						if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store12 *= 1.2;
 						store12 = Math.round(store12 * SceneLib.combat.iceDamageBoostedByDao());
 						store12 += maxHP() * statusEffectv2(StatusEffects.FrostburnDoT);
 						if(plural) outputText(capitalA + short + " are hurt by lingering Frostburn after-effect. ");
@@ -3144,6 +3155,7 @@ import flash.utils.getQualifiedClassName;
 					//Deal damage if still wounded.
 					else {
 						var store7:Number = (player.str + player.spe + player.tou) * 2.5;
+						if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store7 *= 1.2;
 						store7 += maxHP() * statusEffectv2(StatusEffects.AcidDoT);
 						if(plural) outputText(capitalA + short + " are hurt by lingering Acid after-effect. ");
 						else outputText(capitalA + short + " is hurt by lingering Acid after-effect. ");
@@ -3166,6 +3178,7 @@ import flash.utils.getQualifiedClassName;
 					//Deal damage if still wounded.
 					else {
 						var store10:Number = (player.str + player.spe + player.tou) * 2.5;
+						if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store10 *= 1.2;
 						store10 += maxHP() * statusEffectv2(StatusEffects.PoisonDoT);
 						if(plural) outputText(capitalA + short + " are hurt by lingering Poison after-effect. ");
 						else outputText(capitalA + short + " is hurt by lingering Poison after-effect. ");
@@ -3208,8 +3221,10 @@ import flash.utils.getQualifiedClassName;
 					}
 					//Deal damage if still wounded.
 					else {
-						var lustDmg1:Number = Math.round(player.lib / 10);
+						var lustDmg1:Number = player.lib / 10;
+						if (game.player.hasPerk(PerkLib.KingOfTheJungle)) lustDmg1 *= 1.2;
 						lustDmg1 += maxLust() * statusEffectv2(StatusEffects.LustDoT);
+						lustDmg1 = Math.round(lustDmg1);
 						if(plural) outputText(capitalA + short + " are aroused by lingering lust-induncing after-effect. ");
 						else outputText(capitalA + short + " is aroused by lingering lust-induncing after-effect. ");
 						teased(lustDmg1, false);
