@@ -890,14 +890,7 @@ public final class Mutations extends MutationsHelper {
                 }
                 if (player.cocks.length > 1) {
                     selectedCock = player.cocks.length;
-                    temp2 = 0;
-                    //Find shortest cock
-                    while (selectedCock > 0) {
-                        selectedCock--;
-                        if (player.cocks[selectedCock].cockLength <= player.cocks[temp2].cockLength) {
-                            temp2 = selectedCock;
-                        }
-                    }
+                    temp2 = player.shortestCockIndex();
                     if (int(Math.random() * 4) == 0) temp3 = player.increaseCock(temp2, 3);
                     else temp3 = player.increaseCock(temp2, 1);
                     if (tainted) {
@@ -929,6 +922,7 @@ public final class Mutations extends MutationsHelper {
                     player.cocks[0].cockThickness = 1;
                     outputText("[pg]You shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
                     outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinTone + " tone.");
+                    Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HUMAN));
                     if (tainted) {
                         dynStats("lus", 10, "cor", 5);
                         player.addCurse("sens", 5, 1);

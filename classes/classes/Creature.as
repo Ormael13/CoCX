@@ -2488,14 +2488,8 @@ public class Creature extends Utils
 		}
 
 		public function findFirstCockNotInType(types:Array):Number {
-			var index:Number = 0;
-
-			for (index = 0; index < cocks.length; index++) {
-				index = types.indexOf(cocks[index].cockType);
-				if (index >= 0)
-					return index;
-			}
-			return index;
+			for (var cock:int = 0; cock<cockTotal() && types.indexOf(cocks[cock].cockType) >= 0; cock++) {}
+			return cock < cockTotal() ? cock : -1;
 		}
 
 		/*public function findFirstCockType(type:Number = 0):Number

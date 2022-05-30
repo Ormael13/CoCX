@@ -307,12 +307,8 @@ public class AbstractEquinum extends Consumable {
 		}
 		//Unicorn grows cocks
 		if ((type == 1 || type == 2) && (!player.hasCock()) && player.isTaur() && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nYou feel a sudden stabbing pain between your back legs");
-			if (player.hasVagina()) outputText(" just below your [vagina]");
-			outputText(" and bend over, moaning in agony. falling on your back so you can get a stare at your hindquarters you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, you are the proud owner of ");
-			if (player.hasVagina()) outputText(" not only a [vagina], but");
-			outputText( " a new human-shaped penis!");
-			player.createCock(7, 1.4);
+			CoC.instance.transformations.CockHuman(7).applyEffect();
+			player.cocks[0].cockThickness = 1.4;
 			dynStats("lus", 20);
 			player.addCurse("sen", 5, 1);
 			player.MutagenBonus("lib", 4);
@@ -321,13 +317,7 @@ public class AbstractEquinum extends Consumable {
 		//Unicorn grows vag
 		if ((type == 1 || type == 2) && (!player.hasVagina()) && player.isTaur() && changes < changeLimit && rand(3) == 0) {
 			changes++;
-			//(balls)
-			if (player.balls > 0) outputText("\n\nAn itch starts behind your [balls], but before you can reach under to scratch it, the discomfort fades. A moment later a warm, wet feeling brushes your [sack], and curious about the sensation, <b>you lift up your balls to reveal your new vagina.</b>");
-			//(dick)
-			else if (player.hasCock()) outputText("\n\nAn itch starts on your groin, just below your [cocks]. You pull the manhood aside to give you a better view, and you're able to watch as <b>your skin splits to give you a new vagina, complete with a tiny clit.</b>");
-			//(neither)
-			else outputText("\n\nAn itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your [armor] to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>");
-			player.createVagina();
+			CoC.instance.transformations.VaginaHuman().applyEffect();
 			player.clitLength = .25;
 			player.addCurse("sen", 10, 1);
 		}
