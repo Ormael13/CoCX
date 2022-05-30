@@ -179,10 +179,9 @@ public class Enigmanium extends Consumable {
 
       //Cat dangly-doo.
       if (player.catCocks() < player.cockTotal() && (player.ears.type == Ears.LION || rand(3) > 0) && (player.tailType == Tail.CAT || rand(3) > 0) && changes < changeLimit && rand(4) == 0) {
-        //loop through and find a non-cat wang.
-        var i:int = player.findFirstCockNotInType([CockTypesEnum.CAT, CockTypesEnum.DEMON]) //Only transform one cock that is not Cat or Demon
-        	CoC.instance.transformations.CockCat(i).applyEffect();
-        	changes++;
+        //Only transform one cock that is not Cat or Demon
+        CoC.instance.transformations.CockCat(player.findFirstCockNotInType([CockTypesEnum.CAT, CockTypesEnum.DEMON])).applyEffect();
+        changes++;
       }
 
       if (player.isTaur() && (player.isMaleOrHerm())&& changes < changeLimit) {
@@ -190,7 +189,8 @@ public class Enigmanium extends Consumable {
         if ((player.catCocks() + player.demonCocks()) < player.cocks.length && rand(3) == 0 ) {
           var j:int = player.findFirstCockNotInType([CockTypesEnum.CAT, CockTypesEnum.DEMON]);
           if (j != -1) {
-
+            CoC.instance.transformations.CockCat(j).applyEffect();
+            player.increaseCock(temp, rand(4) + 4);
             //Make cock thicker if not thick already!
             if (player.cocks[j].cockThickness <= 2) player.cocks[j].thickenCock(1);
             outputText("  <b>You now have a bigger cock.</b>");

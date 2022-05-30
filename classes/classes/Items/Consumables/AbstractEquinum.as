@@ -18,9 +18,11 @@ import classes.CoC_Settings;
 import classes.CockTypesEnum;
 import classes.EngineCore;
 import classes.EventParser;
+import classes.GeneticMemories.BallsMem;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
 import classes.PerkLib;
+import classes.Scenes.Metamorph;
 import classes.StatusEffects;
 import classes.VaginaClass;
 import classes.CoC;
@@ -210,7 +212,7 @@ public class AbstractEquinum extends Consumable {
 		//MALENESS.
 		if ((player.gender == 1 || player.gender == 3) && rand(1.5) == 0 && changes < changeLimit) {
 			//If cocks that aren't horsified!
-			if ((player.horseCocks() + player.demonCocks()) < player.cocks.length) {
+			if ((player.horseCocks() + player.demonCocks()) < player.cockTotal()) {
 				temp = player.findFirstCockNotInType([CockTypesEnum.HORSE,CockTypesEnum.DEMON]);
 				CoC.instance.transformations.CockHorse(temp).applyEffect();
 				temp2 = player.increaseCock(temp, rand(4) + 4);
@@ -291,6 +293,7 @@ public class AbstractEquinum extends Consumable {
 					outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.");
 					dynStats("lus", 5);
 					player.MutagenBonus("lib", 2);
+					Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
 				}
 				else {
 					player.ballSize++;

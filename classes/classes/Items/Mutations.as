@@ -2037,8 +2037,8 @@ public final class Mutations extends MutationsHelper {
                 choice = player.findFirstCockNotInType([CockTypesEnum.DOG])
                 //Talk about it
                 //Demon
-                if (player.cocks[temp3].cockType == CockTypesEnum.DEMON) {
-                    outputText("[pg]Your " + cockDescript(temp3) + " color shifts red for a moment and begins to swell at the base, but within moments it smooths out, retaining its distinctive demonic shape, only perhaps a bit thicker.");
+                if (player.cocks[choice].cockType == CockTypesEnum.DEMON) {
+                    outputText("[pg]Your " + cockDescript(choice) + " color shifts red for a moment and begins to swell at the base, but within moments it smooths out, retaining its distinctive demonic shape, only perhaps a bit thicker.");
                     dynStats("lus", 2 * crit);
                     player.addCurse("sen", 1, 1);
                 }
@@ -9019,9 +9019,8 @@ public final class Mutations extends MutationsHelper {
             }
             //COCK TF!
             if (player.kangaCocks() < player.cockTotal() && (type == 1 && rand(2) == 0) && changes < changeLimit) {
-                var cockIdx:int = player.findFirstCockNotInType([CockTypesEnum.KANGAROO]);
                 //Find first non-roocock!
-                if (cockIdx != -1) transformations.CockKangaroo(cockIdx).applyEffect();
+                transformations.CockKangaroo(player.findFirstCockNotInType([CockTypesEnum.KANGAROO])).applyEffect();
                 changes++;
             }
         }
@@ -9899,11 +9898,8 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
         if (rand(3) == 0 && changes < changeLimit && player.cocks.length > player.pigCocks()) {
-            var temp = player.findFirstCockNotInType([CockTypesEnum.PIG]);
-            if (temp != -1) {
-                transformations.CockPig(temp).applyEffect();
-                changes++;
-            }
+            transformations.CockPig(player.findFirstCockNotInType([CockTypesEnum.PIG])).applyEffect();
+            changes++;
         }
         //Physical
         if (player.lowerBody != LowerBody.ORC && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
@@ -12929,11 +12925,8 @@ public final class Mutations extends MutationsHelper {
         //-----------------------
         //Gain pig cock, independent of other pig TFs.
         if (rand(3) == 0 && changes < changeLimit && player.cocks.length > player.pigCocks()) {
-            var temp = player.findFirstCockNotInType([CockTypesEnum.PIG]);
-            if (temp != -1) {
-                transformations.CockPig(temp).applyEffect();
-                changes++;
-            }
+            transformations.CockPig(player.findFirstCockNotInType([CockTypesEnum.PIG])).applyEffect();
+            changes++;
         }
         //Gain pig ears!
         if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.ears.type != Ears.PIG) {
@@ -15079,7 +15072,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         //Temporary storage
         var temp2:Number = 0;
-        var temp3:Number = 0;
+        //var temp3:Number = 0;
         //Randomly choose affects limit
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
@@ -15118,61 +15111,11 @@ public final class Mutations extends MutationsHelper {
         //male
         if ((player.gender == 1 || player.gender == 3) && rand(3) == 0 && changes < changeLimit) {
             if ((player.horseCocks() + player.demonCocks()) < player.cocks.length) {
-                if (player.cocks.length == 1) {
-                    var temp:int = player.findFirstCockNotInType([CockTypesEnum.HORSE]);
-                    if (temp == -1) temp = 0
-                    temp3 = 0;
-                    if (player.cocks[temp].cockType == CockTypesEnum.HUMAN) {
-                        outputText("[pg]Your [cock"+temp+1+"] begins to feel strange... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.");
-                        temp = player.addHorseCock();
-                        //temp2 = player.increaseCock(temp, rand(4) + 4);
-                        temp3 = 1;
-                        dynStats("lus", 35);
-                        player.addCurse("sen", 4, 1);
-                        MutagenBonus("lib", 5);
-                    }
-                    if (player.cocks[temp].cockType == CockTypesEnum.DOG) {
-                        temp = player.addHorseCock();
-                        outputText("[pg]Your [cock"+temp+1+"] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond it's traditional size.  You notice your knot vanishing, the extra flesh pushing more horsecock out from your sheath.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
-                        //temp2 = player.increaseCock(temp, rand(4) + 4);
-                        temp3 = 1;
-                        dynStats("lus", 35);
-                        player.addCurse("sen", 4, 1);
-                        MutagenBonus("lib", 5);
-                    }
-                    if (player.cocks[temp].cockType == CockTypesEnum.TENTACLE) {
-                        temp = player.addHorseCock();
-                        outputText("[pg]Your [cock"+temp+1+"] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your [cock] as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
-                        //temp2 = player.increaseCock(temp, rand(4) + 4);
-                        temp3 = 1;
-                        dynStats("sen", 4, "lus", 35);
-                        MutagenBonus("lib", 5);
-                    }
-                    if (player.cocks[temp].cockType.Index > 4) {
-                        outputText("[pg]Your [cock"+temp+1+"] begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your [cock] as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
-                        temp = player.addHorseCock();
-                        //temp2 = player.increaseCock(temp, rand(4) + 4);
-                        temp3 = 1;
-                        dynStats("sen", 4, "lus", 35);
-                        MutagenBonus("lib", 5);
-                    }
-                    if (temp3 == 1) outputText("  <b>Your penis has transformed into a horse's!</b>");
-                } else {
-                    dynStats("sen", 4, "lus", 35);
-                    MutagenBonus("lib", 5);
-                    temp = player.addHorseCock();
-                    outputText("[pg]One of your penises begins to feel strange.  You pull down your clothes to take a look and see the skin of your " + cockDescript(temp) + " darkening to a mottled brown and black pattern.");
-                    if (temp == -1) {
-                        CoC_Settings.error("");
-                        clearOutput();
-                        outputText("FUKKKK ERROR NO COCK XFORMED");
-                    }
-                    if (player.horseCocks() > 1 || player.dogCocks() > 0) outputText("  Your sheath tingles and begins growing larger as the cock's base shifts to lie inside it.");
-                    else outputText("  You feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your " + cockDescript(temp) + "'s root, tightening and pulling your " + cockDescript(temp) + " inside its depths.");
-                    //temp2 = player.increaseCock(temp, rand(4) + 4);
-                    outputText("  The shaft suddenly explodes with movement, growing longer and developing a thick flared head leaking steady stream of animal-cum.");
-                    outputText("  <b>You now have a horse-cock.</b>");
-                }
+                var temp:int = player.findFirstCockNotInType([CockTypesEnum.HORSE, CockTypesEnum.DEMON]);
+                transformations.CockHorse(temp).applyEffect();
+                dynStats("lus", 35);
+                player.addCurse("sen", 4, 1);
+                MutagenBonus("lib", 5);
                 if (player.cocks[temp].cockThickness <= 2) player.cocks[temp].thickenCock(1);
                 changes++;
             } else {
@@ -15184,16 +15127,8 @@ public final class Mutations extends MutationsHelper {
                     //Find smallest cock
                     //Temp2 = smallness size
                     //temp = current smallest
-                    temp3 = player.cocks.length;
-                    temp = 0;
-                    while (temp3 > 0) {
-                        temp3--;
-                        //If current cock is smaller than saved, switch values.
-                        if (player.cocks[temp].cockLength > player.cocks[temp3].cockLength) {
-                            temp2 = player.cocks[temp3].cockLength;
-                            temp = temp3;
-                        }
-                    }
+                    //temp3 = player.cocks.length;
+                    temp = player.shortestCockIndex();
                     //Grow smallest cock!
                     //temp2 changes to growth amount
                     temp2 = player.increaseCock(temp, rand(4) + 1);

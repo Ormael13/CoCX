@@ -9770,9 +9770,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			if (player.bRows() >= 3) desc += "abdomen";
 			else desc += "chest";
 				desc += ". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ";
-			if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-			else outputText(player.skinTone + " " + player.skinDesc);
-			desc += " remains. <b>You've lost a row of breasts!</b>";
+			//if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
+			//else outputText(player.skinTone + " " + player.skinDesc);
+			desc += "[skin full] remains. <b>You've lost a row of breasts!</b>";
 
 			if (doOutput) outputText(desc);
 			dynStats("sen", -5);
@@ -9886,7 +9886,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				var desc:String = "[pg]";
 
 				if (player.hasVagina()) {
-					desc += "A tightness in your groin is the only warning you get before your <b>[vagina "+vagina+1+"] disappears completely</b>!";
+					desc += "A tightness in your groin is the only warning you get before your <b>[vagina "+(vagina+1)+"] disappears completely</b>!";
 					if (doOutput) outputText(desc);
 
 					player.removeVagina(vagina, 1);
@@ -9910,7 +9910,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				var desc:String = "";
 
 				if (player.hasVagina()){
-					desc += "Something invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your [vagina "+vagina+1+"] and see it changing back to its ";
+					desc += "Something invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your [vagina "+(vagina+1)+"] and see it changing back to its ";
 					if (player.vaginaType() == 5 || player.vaginaType() == 6)
 						desc +="natural flesh colour.";
 					else
@@ -9943,7 +9943,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					var desc:String = "[pg]";
 
 					if (player.hasVagina()){
-						desc += "You grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your [vagina "+vagina+1+"] has grown larger, in depth AND size. To your absolute surprise it suddenly resume deepening inside your body. " +
+						desc += "You grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your [vagina "+(vagina+1)+"] has grown larger, in depth AND size. To your absolute surprise it suddenly resume deepening inside your body. " +
 								"When you finally take a look you discover your vagina is now not unlike that of a horse, capable of taking the largest cock with ease." +
 								"<b>  You now have a equine vagina!</b>";
 					}
@@ -10184,7 +10184,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					var desc:String = "[pg]";
 
 					if (player.hasVagina()){
-						desc += "Something fundamental changes in your [vagina" + vagina+1 + "] as the insides begins to heat up. Out of curiosity you take a peek and are amazed that the interior of the gaping maw that is your cunt has changed in form and texture. For one you no longer have a clitoris, Instead, several concentric rings of small ultrasensitive nubs line up the walls of your cunt. "+
+						desc += "Something fundamental changes in your [vagina " +(vagina+1)+ "] as the insides begins to heat up. Out of curiosity you take a peek and are amazed that the interior of the gaping maw that is your cunt has changed in form and texture. For one you no longer have a clitoris, Instead, several concentric rings of small ultrasensitive nubs line up the walls of your cunt. "+
 								"Intrigued you shove your entire hand inside and gasp as your snatch instantly grips it and reflectively tries to pull it deeper in. It takes all of your willpower not to fist yourself to orgasm. "+
 								"<b>Your vagina is now like that of a naga and can take in lenghtier insertions.</b>";
 					}
@@ -10221,7 +10221,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					var desc:String = "[pg]";
 
 					if (player.hasVagina()) {
-						desc += "Something fundamental changes in your [vagina" + vagina+1 + "] as the insides begins to heat up. Out of curiosity you take a peek and are amazed that the interior of your cunt has deepened to ridiculus extent running all the way farther into your tail.  "+
+						desc += "Something fundamental changes in your [vagina " +(vagina+1)+ "] as the insides begins to heat up. Out of curiosity you take a peek and are amazed that the interior of your cunt has deepened to ridiculus extent running all the way farther into your tail.  "+
 								"Intrigued you literally shove your entire hand inside and gasp as your snatch instantly grips it and reflectively tries to pull it deeper in heck you could easily insert a good part of your own tail inside and still find space. It takes all of your willpower not to fist yourself to orgasm. "+
 								"<b>Your vagina is now like that of a naga and can take in lenghtier insertions.</b>";
 					}
@@ -10388,7 +10388,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					var desc:String = "[pg]";
 
 					if (player.cockTotal() > cock){
-						desc += "Your [cock "+cock+1+"] begins to feel strange.  You pull down your clothes to take a look and see it darkening";
+						desc += "Your [cock "+(cock+1)+"] begins to feel strange.  You pull down your clothes to take a look and see it darkening";
 
 						desc += player.hasSheath()? "." : " as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.";
 						desc += "  The shaft suddenly explodes with movement, growing longer and developing a thick flared head leaking steady stream of animal-cum.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond its previous size and takes on a more leathery texture.";
@@ -10402,16 +10402,15 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						if (!player.hasVagina() && !player.hasCock()) desc +="You feel a sudden stabbing pain in your groin and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
 						else if (!player.hasVagina()) desc += "You feel a sudden stabbing pain above your [cocks] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
 						else desc +="You feel a sudden stabbing pain just above your [vagina] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
-						desc += "Your [cock "+cock+1+"] begins to feel strange... you see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.";
+						desc += "Your [cock "+(cock+1)+"] begins to feel strange... you see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.";
 						player.createCock();
 					}
-					desc += "  <b>You now have a horse-cock.</b>";
 					if (doOutput) outputText(desc);
 					if (length != 5.5)
 						player.cocks[cock].cockLength = length;
 					player.cocks[cock].cockType = CockTypesEnum.HORSE;
 					player.cocks[cock].knotMultiplier = 1;
-					if (doOutput) outputText("<b>Your hands are drawn to the strange new [cock "+cock+1+"]</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.");
+					if (doOutput) outputText("<b>  Your hands are drawn to the strange new [cock "+(cock+1)+"]</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.");
 
 					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HORSE));
 				},
@@ -10430,16 +10429,16 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 					if (player.cocks.length > cock){
 						if (player.cocks[cock].cockType == CockTypesEnum.HORSE) {
-							desc += "Your [cock "+cock+1+"] shrinks, the extra equine length seeming to shift into girth.  The flared tip vanishes and you";
+							desc += "Your [cock "+(cock+1)+"] shrinks, the extra equine length seeming to shift into girth.  The flared tip vanishes and you";
 							//Tweak length/thickness.
 							if (player.cocks[cock].cockLength > 6) player.cocks[cock].cockLength -= 2;
 							else player.cocks[cock].cockLength -= .5;
 							player.cocks[cock].cockThickness += .5;
 						}
 						else if (["tentacle","plant"].indexOf(CockTypesEnum.ParseConstant(player.cocks[cock].cockType)) >= 0)
-							desc += "Your [cock "+cock+1+"] coils in on itself, reshaping and losing its coloration, becoming a shiny red. You";
-						else desc += "Your [cock "+cock+1+"] clenches painfully, becoming achingly, throbbingly erect and turning a shiny red. You"
-						desc += " shudder as the crown of your [cock "+cock+1+"] reshapes into a point, the sensations nearly too much for you."
+							desc += "Your [cock "+(cock+1)+"] coils in on itself, reshaping and losing its coloration, becoming a shiny red. You";
+						else desc += "Your [cock "+(cock+1)+"] clenches painfully, becoming achingly, throbbingly erect and turning a shiny red. You"
+						desc += " shudder as the crown of your [cock "+(cock+1)+"] reshapes into a point, the sensations nearly too much for you."
 						if (!player.hasSheath()) desc += "A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath. ";
 						if (player.cocks[cock].knotMultiplier <= 1) desc += "You cry out as you feel a swelling at the base of your cock and your new canine knot slowly slips out of your sheath. "
 						desc += "You throw back your head as the transformation completes, your cock much thicker than it ever was before.  <b>You now have a dog-cock.</b>";
@@ -10449,7 +10448,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						if (!player.hasVagina() && !player.hasCock()) desc +="You feel a sudden stabbing pain in your groin and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
 						else if (!player.hasVagina()) desc += "You feel a sudden stabbing pain above your [cocks] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
 						else desc +="You feel a sudden stabbing pain just above your [vagina] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
-						desc += "Your [cock "+cock+1+"] clenches painfully, becoming achingly, throbbingly erect and turning a shiny red. You"+
+						desc += "Your [cock "+(cock+1)+"] clenches painfully, becoming achingly, throbbingly erect and turning a shiny red. You"+
 								"A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath. "+
 								"You cry out as you feel a swelling at the base of your cock and your new canine knot slowly slips out of your sheath. "+
 								"You throw back your head as the transformation completes, that was intense!  <b>You now have a dog-cock.</b>"
@@ -10518,7 +10517,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					var desc:String = "[pg]";
 
 					if (player.cocks.length > cock){
-						desc += "Your " + num2Text2(cock+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your [cock "+cock+1+"] has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a";
+						desc += "Your " + num2Text2(cock+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your [cock "+(cock+1)+"] has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a";
 
 						if(player.tentacleCocks() > 0) outputText("nother");
 						outputText(" tentacle-cock!</b>");
@@ -10552,7 +10551,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					var desc:String = "[pg]";
 
 					if (player.cocks.length > cock){
-						desc += "Your feel your [cock "+cock+1+"] bending and flexing of its own volition... looking down, you see it morph into a tentacle-like shape.  <b>You now have a tentacle cock!</b>  ";
+						desc += "Your feel your [cock "+(cock+1)+"] bending and flexing of its own volition... looking down, you see it morph into a tentacle-like shape.  <b>You now have a tentacle cock!</b>  ";
 					}
 					else {
 						if (!player.hasVagina() && !player.hasCock()) desc +="You feel a sudden stabbing pain in your groin and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
@@ -10582,10 +10581,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					var desc:String = "[pg]";
 
 					if (player.cocks.length > cock){
-						desc += "One of your penises begins to feel strange.  You pull down your clothes to take a look and see your [cock "+cock+1+"] swells up with near-painful arousal and begin to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your [cock "+cock+1+"] and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum.";
+						desc += "One of your penises begins to feel strange.  You pull down your clothes to take a look and see your [cock "+(cock+1)+"] swells up with near-painful arousal and begin to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your [cock "+(cock+1)+"] and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum.";
 						if (player.hasSheath()) desc += "  Your sheath tingles and begins growing larger as the cock's base shifts to lie inside it.";
 						else {
-							desc +="  You feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your [cock "+cock+1+"]'s root, tightening and pulling it inside its depths.";
+							desc +="  You feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your [cock "+(cock+1)+"]'s root, tightening and pulling it inside its depths.";
 							if (player.balls > 0) outputText("  Thankfully, your balls appear untouched.");
 						}
 					}
@@ -10626,7 +10625,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						desc += "Your [cock] begins foaming bubbles... well guess thats going to take some time to get used to? <b>Your penis is now foaming bubbles like that of a Cancer!</b>";
 						//(REMOVE SHEATH IF NECESSARY)
 						if (player.hasSheath())
-							desc +="[pg]Your sheath tightens and starts to smooth out, revealing ever greater amounts of your [cock "+cock+1+"]'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>";
+							desc +="[pg]Your sheath tightens and starts to smooth out, revealing ever greater amounts of your [cock "+(cock+1)+"]'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>";
 					}
 					else {
 						if (!player.hasVagina() && !player.hasCock()) desc +="You feel a sudden stabbing pain in your groin and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
@@ -10669,8 +10668,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 							}
 						}
 						else {
-							desc += "A slow tingle warms your groin.  Before it can progress any further, you yank back your [armor] to investigate.  Your [cock "+cock+1+"] is changing!  It ripples loosely from "+
-									(player.hasSheath() ? "sheath " : "base ") + "to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your [cock "+cock+1+"] resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker "+
+							desc += "A slow tingle warms your groin.  Before it can progress any further, you yank back your [armor] to investigate.  Your [cock "+(cock+1)+"] is changing!  It ripples loosely from "+
+									(player.hasSheath() ? "sheath " : "base ") + "to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your [cock "+(cock+1)+"] resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker "+
 									(player.cor < 33 ? "horrifies you." : (player.cor < 66 ?"is a little strange for your tastes." :"looks like it might be more fun to receive than use on others."));
 							if (player.hasVagina()) desc+= "Maybe you could find someone else with one to ride?"
 							else desc+= "Maybe you should test it out on someone and ask them exactly how it feels?";
@@ -10692,7 +10691,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 							else if (!player.hasVagina()) desc += "You feel a sudden stabbing pain above your [cocks] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
 							else desc +="You feel a sudden stabbing pain just above your [vagina] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
 							desc += "It ripples loosely from "+
-									(player.hasSheath() ? "sheath " : "base ") + "to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your [cock "+cock+1+"] resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker "+
+									(player.hasSheath() ? "sheath " : "base ") + "to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your [cock "+(cock+1)+"] resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker "+
 									(player.cor < 33 ? "horrifies you." : (player.cor < 66 ?"is a little strange for your tastes." :"looks like it might be more fun to receive than use on others."));
 							if (player.hasVagina()) desc+= "Maybe you could find someone else with one to ride?"
 							else desc+= "Maybe you should test it out on someone and ask them exactly how it feels?";
@@ -10758,7 +10757,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (player.cocks.length > cock) {
 						desc += "A strange tingling begins at the base of your [cock], slowly crawling up across its entire length.  You shift nervously as the feeling intensifies.  You undo your [armor] to check, and see  small blue-green tendrils emerging all around the base of your cock and  as it too shifts colour. The tentacles wave about"+
 								"<b>You have a new anemone-penis!</b>";
-						desc += "  The tentacles writhe around, rubbing against your " + player.multiCockDescriptLight() +" and the head of your new blue pecker";
+						desc += "  The tentacles writhe around, rubbing against your [cocks] and the head of your new blue pecker";
 						player.cocks[cock].cockType = CockTypesEnum.ANEMONE;
 						desc += " and you quickly become fully erect from the aphrodisiac they inject.  Over and over the tentacles caress [eachcock] sensually, leaving behind a tingling trail of vibrant pleasure";
 						//[(if no dick1 and no balls)
@@ -10774,7 +10773,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						//[(dick1 exists)
 						if(player.cockTotal() > 1) desc += ", followed in short order by white squirts from [eachcock] remaining";
 						if(player.hasVagina()) {
-							desc += ".  Your " + vaginaDescript(0) + " quivers and pulses as well, adding ";
+							desc += ".  Your [vag] quivers and pulses as well, adding ";
 							if(player.wetness() < VaginaClass.WETNESS_SLICK) desc += "a trickle";
 							else if(player.wetness() < VaginaClass.WETNESS_SLAVERING) desc += "a squirt";
 							else desc += "nearly a cupful of fluid";
@@ -10807,7 +10806,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						//[(dick1 exists)
 						if(player.cockTotal() > 1) desc += ", followed in short order by white squirts from [eachcock] remaining";
 						if(player.hasVagina()) {
-							desc += ".  Your " + vaginaDescript(0) + " quivers and pulses as well, adding ";
+							desc += ".  Your [vag] quivers and pulses as well, adding ";
 							if(player.wetness() < VaginaClass.WETNESS_SLICK) desc += "a trickle";
 							else if(player.wetness() < VaginaClass.WETNESS_SLAVERING) desc += "a squirt";
 							else desc += "nearly a cupful of fluid";
@@ -10908,7 +10907,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 					if (player.cocks.length > cock){
 						desc += "You feel an incessant hardness beneath you and realize your cock is dangling out of its sheath.";
-						if (!player.hasSheath()) "  Wait... did you have a sheath before? Well you do now.";
+						if (!player.hasSheath()) desc += "  Wait... did you have a sheath before? Well you do now.";
 						desc += "  You blink your eyes again... is something wrong with your dick?  At first glance, it appears to be a normal canine dick complete with a knot... but the tip seems to have five grooves along the sides.  When you think about it, you find the tip opening up, splaying out into something resembling a five-armed starfish, with the tips ending in wiggling tendrils, the inner-flesh covered in bumpy nodules that stiffen in the cool air.  With another thought, the cock returns to its normal, almost-canine like appearance, though it's definitely thicker around the tip than an actual canine dick.";
 						desc += "You give your <b>new coeurl cock</b> a few tentative strokes";
 					}
@@ -10943,16 +10942,16 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 					if (player.cocks.length > cock){
 						if (player.cocks[cock].cockType == CockTypesEnum.HORSE) {
-							desc += "Your [cock "+cock+1+"] shrinks, the extra equine length seeming to shift into girth.  The flared tip vanishes and you";
+							desc += "Your [cock "+(cock+1)+"] shrinks, the extra equine length seeming to shift into girth.  The flared tip vanishes and you";
 							//Tweak length/thickness.
 							if (player.cocks[cock].cockLength > 6) player.cocks[cock].cockLength -= 2;
 							else player.cocks[cock].cockLength -= .5;
 							player.cocks[cock].cockThickness += .5;
 						}
 						else if (["tentacle","plant"].indexOf(CockTypesEnum.ParseConstant(player.cocks[cock].cockType)) >= 0)
-							desc += "Your [cock "+cock+1+"] coils in on itself, reshaping and losing its coloration, becoming a shiny red. You";
-						else desc += "Your [cock "+cock+1+"] clenches painfully, becoming achingly, throbbingly erect and turning a shiny red. You"
-						desc += " shudder as the crown of your [cock "+cock+1+"] reshapes into a point, the sensations nearly too much for you."
+							desc += "Your [cock "+(cock+1)+"] coils in on itself, reshaping and losing its coloration, becoming a shiny red. You";
+						else desc += "Your [cock "+(cock+1)+"] clenches painfully, becoming achingly, throbbingly erect and turning a shiny red. You"
+						desc += " shudder as the crown of your [cock "+(cock+1)+"] reshapes into a point, the sensations nearly too much for you."
 						if (!player.hasSheath()) desc += "A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath. ";
 						if (player.cocks[cock].knotMultiplier <= 1) desc += "You cry out as you feel a swelling at the base of your cock and your new canine knot slowly slips out of your sheath. "
 						desc += "You throw back your head as the transformation completes, your cock much thicker than it ever was before.  <b>You now have a fox-cock.</b>";
@@ -10962,7 +10961,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						if (!player.hasVagina() && !player.hasCock()) desc +="You feel a sudden stabbing pain in your groin and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
 						else if (!player.hasVagina()) desc += "You feel a sudden stabbing pain above your [cocks] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
 						else desc +="You feel a sudden stabbing pain just above your [vagina] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
-						desc += "Your [cock "+cock+1+"] clenches painfully, becoming achingly, throbbingly erect and turning a shiny red. You"+
+						desc += "Your [cock "+(cock+1)+"] clenches painfully, becoming achingly, throbbingly erect and turning a shiny red. You"+
 								"A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath. "+
 								"You cry out as you feel a swelling at the base of your cock and your new canine knot slowly slips out of your sheath. "+
 								"You throw back your head as the transformation completes, that was intense!  <b>You now have a fox-cock.</b>"
@@ -10990,7 +10989,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					var desc:String = "[pg]";
 
 					if (player.cocks.length > cock){
-						desc += "Your huge [cock"+cock+1+"] suddenly starts to hurt, especially the tip of the thing.  At the same time, you feel your length start to get incredibly sensitive and the base of your shaft starts to itch.  You tear off your [armor] and watch in fascination as your [cock] starts to change.  The shaft turns black, while becoming hard and smooth to the touch, while the base develops a mane of four inch long yellow bee hair.  As the transformation continues, your member grows even larger than before.  However, it is the tip that keeps your attention the most, as a much finer layer of short yellow hairs grow around it.  Its appearance isn’t the thing that you care about right now, it is the pain that is filling it.  ";
+						desc += "Your huge [cock "+(cock+1)+"] suddenly starts to hurt, especially the tip of the thing.  At the same time, you feel your length start to get incredibly sensitive and the base of your shaft starts to itch.  You tear off your [armor] and watch in fascination as your [cock] starts to change.  The shaft turns black, while becoming hard and smooth to the touch, while the base develops a mane of four inch long yellow bee hair.  As the transformation continues, your member grows even larger than before.  However, it is the tip that keeps your attention the most, as a much finer layer of short yellow hairs grow around it.  Its appearance isn’t the thing that you care about right now, it is the pain that is filling it.  ";
 						outputText("It is entirely different from the usual feeling you get when you’re cock grows larger from imbibing transformative substances.  When the changes stop, the tip is shaped like a typical human mushroom cap covered in fine bee hair, but it feels nothing like what you’d expect a human dick to feel like.  Your whole length is incredibly sensitive, and touching it gives you incredible stimulation, but you’re sure that no matter how much you rub it, you aren’t going to cum by yourself.  You want cool honey covering it, you want tight walls surrounding it, you want to fertilize hundreds of eggs with it.  These desires are almost overwhelming.  ");
 						outputText("<b>You now have a bee cock!</b>");
 					}
@@ -11024,7 +11023,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					var desc:String = "[pg]";
 
 					if (player.cocks.length > cock){
-						desc += "You feel an uncomfortable pinching sensation in your [cock "+cock+1+"]. " + player.clothedOrNakedLower("You pull open your [armor]", "You look down at your exposed groin") + ", watching as it warps and changes. As the transformation completes, you’re left with a shiny, pinkish red pecker ending in a prominent corkscrew at the tip. <b>You now have a pig penis!</b>";
+						desc += "You feel an uncomfortable pinching sensation in your [cock "+(cock+1)+"]. " + player.clothedOrNakedLower("You pull open your [armor]", "You look down at your exposed groin") + ", watching as it warps and changes. As the transformation completes, you’re left with a shiny, pinkish red pecker ending in a prominent corkscrew at the tip. <b>You now have a pig penis!</b>";
 					}
 					else {
 						if (!player.hasVagina() && !player.hasCock()) desc +="You feel a sudden stabbing pain in your groin and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
@@ -11085,7 +11084,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					var desc:String = "[pg]";
 
 					if (player.cocks.length > cock){
-						desc += "You feel a stirring in your loins as your [cock "+cock+1+"] grows rock hard. ";
+						desc += "You feel a stirring in your loins as your [cock "+(cock+1)+"] grows rock hard. ";
 						desc += "You " + player.clothedOrNakedLower("pull it out from your [armor]", "lean over");
 						desc += (inBlackCock? ", right there in the center of The Black Cock":"") +", to take a look. You watch as the skin of your cock becomes a smooth, tough pink colored phallus. It takes on a long and narrow shape with an oval shaped bulge along the center. You feel a tightness near the base where your skin seems to be bunching up. A sheath begins forming around your flared rhino cock’s root, tightening as your stiff rhino dick elongates and settles, the thick flared head leaking a steady stream of funky animal-cum. <b>You now have a rhino-dick.</b>";
 
@@ -11118,7 +11117,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					var desc:String = "[pg]";
 
 					if (player.cocks.length > cock){
-						desc += "Your [cock "+cock+1+"] suddenly becomes rock hard out of nowhere. You " + player.clothedOrNakedLower("pull it out from your [armor]"+(inBlackCock?", right in the middle of the food tent":"")+", watching", "watch") + " as it begins to shift and change. It becomes pink in color, and you feel a pinch at the head as it splits to become four heads. " + (player.hasSheath() ? "" : "The transformation finishes off with a fleshy sheath forming at the base.") + " It ejaculates before going limp, retreating into your sheath.";
+						desc += "Your [cock "+(cock+1)+"] suddenly becomes rock hard out of nowhere. You " + player.clothedOrNakedLower("pull it out from your [armor]"+(inBlackCock?", right in the middle of the food tent":"")+", watching", "watch") + " as it begins to shift and change. It becomes pink in color, and you feel a pinch at the head as it splits to become four heads. " + (player.hasSheath() ? "" : "The transformation finishes off with a fleshy sheath forming at the base.") + " It ejaculates before going limp, retreating into your sheath.";
 						desc += " <b>You now have an echidna penis!</b>";
 					}
 					else {
@@ -11185,7 +11184,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					var desc:String = "[pg]";
 
 					if (player.cocks.length > cock){
-						desc += "You feel a strange tingling in your " + num2Text2(cock+1) + " cock. You remove your [armor] and look down and witness your cock shifting into a peculiar form. Its tapered, " + player.skinTone + " and crowned by several colorful balls that look sort of like knots. Its covered in sweet smelling dust...  you're secreting pollen!  <b>You now have a";
+						desc += "You feel a strange tingling in your " + num2Text2(cock+1) + " cock. You remove your [armor] and look down and witness your cock shifting into a peculiar form. Its tapered, [skinTone] and crowned by several colorful balls that look sort of like knots. Its covered in sweet smelling dust...  you're secreting pollen!  <b>You now have a";
 						if(player.tentacleCocks() > 0) desc += "nother";
 						desc +=" plantlike stamen cock!</b>";
 					}
@@ -11193,7 +11192,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						if (!player.hasVagina() && !player.hasCock()) desc +="You feel a sudden stabbing pain in your groin and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
 						else if (!player.hasVagina()) desc += "You feel a sudden stabbing pain above your [cocks] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
 						else desc +="You feel a sudden stabbing pain just above your [vagina] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
-						desc += "You feel a strange tingling in your " + num2Text2(cock+1) + " cock. You remove your [armor] and look down and witness your cock shifting into a peculiar form. Its tapered, " + player.skinTone + " and crowned by several colorful balls that look sort of like knots. Its covered in sweet smelling dust...  you're secreting pollen!  <b>You now have a plantlike stamen cock!</b>";
+						desc += "You feel a strange tingling in your " + num2Text2(cock+1) + " cock. You remove your [armor] and look down and witness your cock shifting into a peculiar form. Its tapered, [skinTone] and crowned by several colorful balls that look sort of like knots. Its covered in sweet smelling dust...  you're secreting pollen!  <b>You now have a plantlike stamen cock!</b>";
 						player.createCock();
 					}
 					if (doOutput) outputText(desc);
