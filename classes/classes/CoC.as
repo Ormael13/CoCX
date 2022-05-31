@@ -11,11 +11,7 @@ package classes
 // BREAKING ALL THE RULES.
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Items.*;
-import classes.Parser.Parser;
-import classes.Scenes.*;
-import classes.Scenes.NPCs.JojoScene;
 import classes.Transformations.TransformationLib;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
@@ -69,7 +65,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 35.022;
+    public var modSaveVersion:Number = 36.001;
     public var levelCap:Number = 185;
 
     //Used to restrict random drops from overlapping uniques
