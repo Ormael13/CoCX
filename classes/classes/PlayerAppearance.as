@@ -1017,9 +1017,12 @@ public class PlayerAppearance extends BaseContent {
 			outputText("[/font]");
 			if (rtier) {
 				if (rtier.hasBuffs()) {
-					outputText(" (");
-					outputText(rtier.describeBuffs(body));
-					outputText(")");
+					var s:String = rtier.describeBuffs(body);
+					if (s) {
+						outputText(" (");
+						outputText(s);
+						outputText(")");
+					}
 				}
 				outputText("[/font]");
 			}

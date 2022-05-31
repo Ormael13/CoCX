@@ -823,7 +823,7 @@ import coc.xxc.StoryContext;
 				else
                     CoC_Settings.error("Non-function in menuGen!")
 			}
-			submenu(buttons, back, page);
+			submenu(buttons, back, page, false);
 		}
 
 		/**Counts active buttons inside of the menu.
