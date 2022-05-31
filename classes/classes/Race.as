@@ -72,7 +72,6 @@ public class Race {
 			for each(var req:RacialRequirement in requirements) {
 				score += req.calcScore(body, score);
 			}
-			if (score < 0) score = 0;
 		} finally {
 			Utils.End("Race", "basicScore");
 		}
@@ -101,7 +100,7 @@ public class Race {
 		if (bloodlinePerks.length > 0) {
 			bonus = 0;
 			for each (var perk:PerkType in bloodlinePerks) {
-				if (score > mutationThreshold && body.player.hasPerk(perk)) {
+				if (/*score >= mutationThreshold && */body.player.hasPerk(perk)) {
 					bonus += body.player.increaseFromBloodlinePerks();
 					break;
 				}
@@ -117,7 +116,7 @@ public class Race {
 				var pt:PerkType = entry[0];
 				var pc:PerkClass = body.player.getPerk(pt);
 				var stage:Number = pc ? pc.value1 : 0;
-				bonus = score > mutationThreshold ? stage*entry[1] : 0;
+				bonus = score >= mutationThreshold ? stage*entry[1] : 0;
 				if (outputText != null) outputText("Mutation: "+pt.name(pc), bonus);
 				score += bonus;
 				maxStage = Math.max(maxStage, stage);
@@ -125,17 +124,17 @@ public class Race {
 			//if (outputText != null) outputText("Mutations", bonus);
 			//score += bonus;
 			if (body.player.hasPerk(PerkLib.ChimericalBodySemiImprovedStage)) {
-				bonus = score > mutationThreshold && maxStage >= 1 ? +1 : 0;
+				bonus = score >= mutationThreshold && maxStage >= 1 ? +1 : 0;
 				if (outputText != null) outputText("Chimerical Body: Semi-Improved Stage", bonus);
 				score += bonus;
 			}
 			if (body.player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage)) {
-				bonus = score > mutationThreshold && maxStage >= 2 ? +1 : 0;
+				bonus = score >= mutationThreshold && maxStage >= 2 ? +1 : 0;
 				if (outputText != null) outputText("Chimerical Body: Semi-Superior Stage", bonus);
 				score += bonus;
 			}
 			if (body.player.hasPerk(PerkLib.ChimericalBodySemiEpicStage)) {
-				bonus = score > mutationThreshold && maxStage >= 3 ? +1 : 0;
+				bonus = score >= mutationThreshold && maxStage >= 3 ? +1 : 0;
 				if (outputText != null) outputText("Chimerical Body: Semi-Epic Stage", bonus);
 				score += bonus;
 			}
@@ -167,6 +166,7 @@ public class Race {
 				score += 50;
 			}
 		}
+		if (score < 0) return 0;
 		return score;
 	}
 	
