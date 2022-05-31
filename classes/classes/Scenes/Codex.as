@@ -156,7 +156,7 @@ import coc.view.ButtonDataList;
 				buttons.add(currentEntry == i ? "(" + entry[1] + ")" : entry[1], curry(entryWrapper, i, entry[2]))
 					.disableIf(!flags[entry[0]], null, null, "???");
 			}
-			submenu(buttons, accessCodexMenu, currentEntry / 12); //maybe sort?
+			submenu(buttons, accessCodexMenu, currentEntry / 12, false); //maybe sort?
 			addButton(14, "Back", accessCodexMenu);
 		}
 
