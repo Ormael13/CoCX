@@ -185,6 +185,10 @@ public function startWoodStorage():void {
 private function doWoodStorageWork():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -195,10 +199,6 @@ private function doWoodStorageWork():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -256,6 +256,10 @@ public function startStoneStorage():void {
 private function doStoneStorageWork():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -266,10 +270,6 @@ private function doStoneStorageWork():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -364,6 +364,10 @@ public function start1stWarehouse1():void {
 private function do1stWarehouse1Work():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -374,10 +378,6 @@ private function do1stWarehouse1Work():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -438,6 +438,10 @@ public function start1stWarehouse2():void {
 private function do1stWarehouse2Work():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -448,10 +452,6 @@ private function do1stWarehouse2Work():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -511,6 +511,10 @@ public function startGranary1():void {
 private function doGranary1Work():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -521,10 +525,6 @@ private function doGranary1Work():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -586,6 +586,10 @@ public function startGranary2():void {
 private function doGranary2Work():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -596,10 +600,6 @@ private function doGranary2Work():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -660,6 +660,10 @@ public function start2ndWarehouse1():void {
 private function do2ndWarehouse1Work():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -670,10 +674,6 @@ private function do2ndWarehouse1Work():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -735,6 +735,10 @@ public function start2ndWarehouse2():void {
 private function do2ndWarehouse2Work():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -745,10 +749,6 @@ private function do2ndWarehouse2Work():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -836,6 +836,10 @@ public function buildStructure():void {
 private function doBuildStructure():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -846,10 +850,6 @@ private function doBuildStructure():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -906,6 +906,10 @@ public function buildAltair():void {
 private function doBuildAltair():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -916,10 +920,6 @@ private function doBuildAltair():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -1003,6 +1003,10 @@ public function digApool():void {
 private function doDigAPoolWork():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -1013,10 +1017,6 @@ private function doDigAPoolWork():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
@@ -1072,6 +1072,10 @@ public function addAWoodenWalls():void {
 private function doAddAWoodenWallsWork():void {
 	var helpers:int = 0;
 	var helperArray:Array = [];
+	if (flags[kFLAGS.ANT_KIDS] > 100) {
+		helperArray[helperArray.length] = "A group of your ant children";
+		helpers++;
+	}
 	if (marblehelper.marbleFollower()) {
 		helperArray[helperArray.length] = "Marble";
 		helpers++;
@@ -1082,10 +1086,6 @@ private function doAddAWoodenWallsWork():void {
 	}
 	if (kihahelper.followerKiha()) {
 		helperArray[helperArray.length] = "Kiha";
-		helpers++;
-	}
-	if (flags[kFLAGS.ANT_KIDS] > 100) {
-		helperArray[helperArray.length] = "group of your ant children";
 		helpers++;
 	}
 	if (flags[kFLAGS.AURORA_LVL] >= 1) {
