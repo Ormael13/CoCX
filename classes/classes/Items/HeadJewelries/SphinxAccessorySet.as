@@ -6,7 +6,6 @@ package classes.Items.HeadJewelries
 {
 	import classes.Items.HeadJewelry;
 	import classes.StatusEffects;
-	import classes.Player;
 
 	public class SphinxAccessorySet extends HeadJewelry
 	{

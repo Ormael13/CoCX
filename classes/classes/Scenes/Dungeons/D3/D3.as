@@ -274,13 +274,13 @@ import classes.StatusEffects;
 				if (flags[kFLAGS.EXCELLIA_RECRUITED] == 1 && !camp.followerShouldra()) outputText("Before you go, you look for where you left the former cow queen. You find her laying in an imp nest covered in cum. She appears to have fallen asleep sometime during the battle. Shaking your head, you wipe most of the mess from her body then drag her back to camp, leaving the stronghold behind.\n\n");
 				if (flags[kFLAGS.MITZI_RECRUITED] == 1 && player.hasStatusEffect(StatusEffects.CampRathazul)) {
 					outputText("With the threat of the demon queen taken care of, you head back outside where you told Mitzi to wait. When you open the doors, you look around and spot the goblin laying against the wall struggling to stay awake. You head over and barely manage to catch her as she slumps to the side. She shivers and shakes in your arms and a heavy blush is plastered on her face. Fearing something else could be wrong with her, you pick up the drug addled goblin then carry her back to your camp. She mumbles and moans faintly as you carry her. With the amount of mind numbing lust inducing drugs pumped into her, you're not sure if she can simply shake this herself. Maybe Rathazul can help in that regard. Once you reach camp, you head right to the elder rat's lab. He notices you coming over with the barely conscious goblin in your arms.\n\n");
-					outputText("<i>“[name]! It's good to see you return safe and sound. Hm? Is that a goblin you have there?”</i>\n\n");
+					outputText("<i>\"[name]! It's good to see you return safe and sound. Hm? Is that a goblin you have there?\"</i>\n\n");
 					outputText("You elaborate what occurred in Lethice's stronghold and how you saved the diminutive woman from the drider incubus. Rathazul nods his head in understanding then motions for you to lay her on his examination table. After a quick inspection, he turns to you with a concerned look on his face.\n\n");
-					outputText("<i>“Whatever drugs she was given were pretty powerful. They seem to be having a rather profound effect on her body and mind.”</i>\n\n");
+					outputText("<i>\"Whatever drugs she was given were pretty powerful. They seem to be having a rather profound effect on her body and mind.\"</i>\n\n");
 					outputText("You figured that much. However, you wonder if there's anything he can do for her. Is there a way to counteract the drugs pumped into her? The elder rat strokes his beard in thought.\n\n");
-					outputText("<i>“I might be able to create a brew that could help restore her. However, I can not guarantee that it will restore her to the way she used to be.”</i>\n\n");
+					outputText("<i>\"I might be able to create a brew that could help restore her. However, I can not guarantee that it will restore her to the way she used to be.\"</i>\n\n");
 					outputText("You suppose it's better than nothing. You ask him what exactly he needs to make the brew.\n\n");
-					outputText("<i>“I would need five scholar teas, five vitality tinctures, one bottle of pure spring water, and one vial of pure honey should be enough for the mixture. Bring them to me once you have them. I'll keep an eye on the poor girl until you return.”</i>\n\n");
+					outputText("<i>\"I would need five scholar teas, five vitality tinctures, one bottle of pure spring water, and one vial of pure honey should be enough for the mixture. Bring them to me once you have them. I'll keep an eye on the poor girl until you return.\"</i>\n\n");
 					flags[kFLAGS.MITZI_RECRUITED] = 2;
 				}
 				doNext(camp.returnToCampUseOneHour);
@@ -304,7 +304,7 @@ import classes.StatusEffects;
 		{
 			statScreenRefresh();
 			hideUpDown();
-			spriteSelect(-1);
+			spriteSelect(null);
 			SceneLib.dungeons.setTopButtons();
 			if (tRoom.NorthExit != null && tRoom.NorthExit.length > 0)
 			{
@@ -590,10 +590,8 @@ import classes.StatusEffects;
 			{
 				addButton(2, "Eggs", goToEggPile);
 			}
-			if (flags[kFLAGS.D3_DEMONIC_SCYTHE] == 0)
-			{
-				addButton(3, "Scythe", goToEggPile);
-			}
+			if (flags[kFLAGS.D3_DEMONIC_SCYTHE] == 0) addButton(3, "Scythe", takeScythe);
+			if (flags[kFLAGS.D3_GOBLIN_MECH_PRIME] == 0) addButton(4, "Mech", takeMech);
 			
 			return false;
 		}
@@ -629,7 +627,7 @@ import classes.StatusEffects;
 		private function southwestcourtyardRoomFunc():Boolean
 		{
 			outputText("<b><u>Southwest Courtyard</u></b>\n");
-			outputText("Some of the nearby bushes are blooming, filling the air with their sweet scent, unlike any flowers you’ve encounter before. Their petals are a multitude of colors, and their scents, though laced with corruption, are as sweet and pleasant as anything you've had the pleasure of smelling. The path you're treading upon curves north and east from here along the thick, red walls. Vines seem to crowd the way to the north. There are no signs of any ramps or ladders to get to the battlements, but there is a doorway to the west marked as 'Forge Wing'. A notice declares it closed for repairs.");
+			outputText("Some of the nearby bushes are blooming, filling the air with their sweet scent, unlike any flowers you’ve encounter before. Their petals are a multitude of colors, and their scents, though laced with corruption, are as sweet and pleasant as anything you've had the pleasure of smelling. The path you're treading upon curves north and east from here along the thick, red walls. Vines seem to crowd the way to the north. There are no signs of any ramps or ladders to get to the battlements, but there is a doorway to the west marked as 'Forge Wing'. You hear the sound of metal clanking and see a lot of workers in the distance. Better not stay here too long - they can notice your presence.");
 			return false;
 		}
 		
@@ -682,7 +680,7 @@ import classes.StatusEffects;
 		private function northwestwalkRoomFunc():Boolean
 		{
 			outputText("<b><u>Northwest Walk</u></b>\n");
-			outputText("A narrow path splits from the sandstone thoroughfare towards a pair of double doors to the west. The craftsmanship of the carpenter who made them is on full display; intricate designs of dragons engaged in sexual positions of all kinds are carved around the outer edges of the frame while more mundane, eye-pleasing patterns decorate the center panels. Above, a sign designates this area as the library. Unfortunately the doors are sealed closed. Perhaps the library is not yet written. You smirk at your own joke.");
+			outputText("A narrow path splits from the sandstone thoroughfare towards a pair of double doors to the west. The craftsmanship of the carpenter who made them is on full display; intricate designs of dragons engaged in sexual positions of all kinds are carved around the outer edges of the frame while more mundane, eye-pleasing patterns decorate the center panels. Above, a sign designates this area as the library. Unfortunately the doors are sealed closed. The library seems abandoned for a long time - demons care only for sex and conquest...");
 			outputText("\n\nThe courtyard itself continues much as it has elsewhere. The bushes to the south appear more unruly than elsewhere, but to the north there appears to be nothing but pleasant walking through this botanical paradise.");
 			return false;
 		}
@@ -697,14 +695,14 @@ import classes.StatusEffects;
 		private function northcourtyardRoomFunc():Boolean
 		{
 			outputText("<b><u>North Courtyard</u></b>\n");
-			outputText("You stand before what can only be the entrance to Lethice’s throne room. It is unlabelled, but the immense door is unlike any you’ve seen in this world or the last. Constructed from some kind of pink-tinged metal and polished to a mirror sheen, this portal has had a lifetime of care poured into it. What’s more, intricate locking mechanisms overlap the edges of it, each one culminating in an intricately worked seal. Fortunately, each of the seals has been left over. Security must not be much of a concern for the demon queen at this point in time. ");
+			outputText("You stand before what can only be the entrance to Lethice’s throne room. It is unlabelled, but the immense door is unlike any you’ve seen in this world or the last. Constructed from some kind of pink-tinged metal and polished to a mirror sheen, this portal has had a lifetime of care poured into it. What’s more, intricate locking mechanisms overlap the edges of it, each one culminating in an intricately worked seal. Fortunately, each of the seals has been left opened. Security must not be much of a concern for the demon queen at this point in time. ");
 			if (flags[kFLAGS.D3_GARDENER_DEFEATED] > 0 && flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0 && flags[kFLAGS.D3_STATUE_DEFEATED] > 0)
 			{
 				outputText("The seal appears to be broken. You could move north and attempt to defeat Lethice for once and for all. Or you can move east and west through the courtyard, if you like.");
 			}
 			else
 			{
-				outputText("If only the door would open. For some reason, it’s still sealed closed. You can still move east and west through the courtyard, if you like.");
+				outputText("If only the door would open. For some reason, it’s still closed. You can still move east and west through the courtyard, if you like.");
 			}
 			return false;
 		}
@@ -749,11 +747,10 @@ import classes.StatusEffects;
 		private function southeastcourtyardRoomFunc():Boolean
 		{
 			outputText("<b><u>Southeast Courtyard</u></b>\n");
-			outputText("Walking along the sandstone path, you're treated to a remarkably peaceful view. Up here, above the clouds the ring the mountain, it's almost too easy to let your guard down. A small hole in the southern wall of Lethice's fortress appears to the south. Peeking through, you can see machinery and some kind of lift suspended over the cliffside. That must be how the demons can come and go safely. You can continue to walk among the bushes to the north and west. An iron door to the east bears lettering denoting it as 'recreation'. A small placard explains that it's currently off limits due to renovations. Graffiti below complains about some contractor named Fenoxo delivering on his promised work schedule.");
+			outputText("Walking along the sandstone path, you're treated to a remarkably peaceful view. Up here, above the clouds the ring the mountain, it's almost too easy to let your guard down. A small hole in the southern wall of Lethice's fortress appears to the south. Peeking through, you can see machinery and some kind of lift suspended over the cliffside. That must be how the demons can come and go safely. You can continue to walk among the bushes to the north and west. An iron door to the east bears lettering denoting it as 'recreation'. You don't have any need in it though - your goal is ahead, and the demons can raise the alarm at any moment!");
 			return false;
 		}
 		
-		// 9999 - Check this
 		private function courtyardsquareRoomFunc():Boolean
 		{
 			outputText("<b><u>Courtyard Square</u></b>\n");
@@ -769,7 +766,7 @@ import classes.StatusEffects;
 				return true;
 			}
 
-			outputText("Two disembodied, marble feet and a field of rubble are all that remains of the once proud statue that stood in the center of the courtyard. You dealt with the animated monstrosity but can’t help but feel a little shame at the destruction you’ve so openly wrought. Many of the bushes are torn in half by two ton slabs, and the path is scarred in a dozen places by chips and smashed divots. You can go east and west from here, if you move carefully around the more jagged pieces of stone.");
+			outputText("\n\nTwo disembodied, marble feet and a field of rubble are all that remains of the once proud statue that stood in the center of the courtyard. You dealt with the animated monstrosity but can’t help but feel a little shame at the destruction you’ve so openly wrought. Many of the bushes are torn in half by two ton slabs, and the path is scarred in a dozen places by chips and smashed divots. You can go east and west from here, if you move carefully around the more jagged pieces of stone.");
 			
 			return false;
 		}

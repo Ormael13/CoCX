@@ -1,15 +1,15 @@
-//Side Dungeon: Bee Hive
 /**
- * ...
+ * Side Dungeon: Bee Hive
  * @author Liadri and others
  */
-package classes.Scenes.Dungeons 
+package classes.Scenes.Dungeons
 {
 import classes.EventParser;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.EngineCore;
+import classes.Races;
 import classes.Scenes.Dungeons.BeeHive.BeeGuards;
 import classes.Scenes.Dungeons.BeeHive.CorruptBeeQueen;
 import classes.Scenes.Dungeons.BeeHive.DemonicBee;
@@ -17,12 +17,6 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 
 	public class BeeHive extends DungeonAbstractContent
 	{
-		private static const DUNGEON_BEE_HIVE_1:int	= 169;
-		private static const DUNGEON_BEE_HIVE_2:int	= 170;
-		private static const DUNGEON_BEE_HIVE_3:int	= 171;
-		private static const DUNGEON_BEE_HIVE_4:int	= 172;
-		private static const DUNGEON_BEE_HIVE_5:int	= 173;
-		
 		public function BeeHive() {}
 		
 		public function enterDungeon():void {
@@ -40,17 +34,17 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 		
 		private function room1Pass():void {
 			clearOutput();
-			dungeonLoc = 169;
+			dungeonLoc = DUNGEON_BEE_HIVE_1;
 			outputText("As vague as the directions from that bee-girl were, you still managed to find the path she was indicating, and now you find yourself staring at the \"Hive\" she was talking about. It's quite an impressive sight, an edifice of wax built around the trees of the Deepwoods, it's almost the size of a small hill, it’s top reaching for the canopy and its sides vanishing into the gloom on either side of your vision. ");
 			outputText("Fortunately, there are no battles being fought in your path, despite the mental image of her usage of the word \"siege\" had invoked, and you can see an entrance into the hive. Unfortunately, it's not unguarded.\n\n");
 			outputText("There are two creatures standing in your way, and they could be identical twin sisters. They look like the bee-girls you have seen in the Forest... and yet they couldn't be more different. They're huge, easily seven feet tall and while their breasts aren't exactly small, their physiques can only be described as amazonian, with muscles visibly rippling under their tanned yellow skin even from here. ");
 			outputText("Their almond-shaped eyes are solid black, their black hair is roughly trimmed short, their abdomens are huge and clearly solid muscle, tipped with smooth, venom-slick stingers as long as short swords. They look very imposing... and yet, at the same time, not very bright. One of them seems to be staring off into space, while her hand is... ");
 			outputText("You blink, and then you confirm that, yes, her hand is absently playing with her naked vagina, in an awkward, half-hearted way that suggests she has never actually done it before, or that she isn't entirely sure she should be doing so now.\n\n");
 			outputText("As you approach, the other Warrior Bee spots you and buzzes a quick \"<i>zzztop playing wizzz yourzzzelf!</i>\" to the first, who whines that she can't help it before joining her sister in threatening you. \"<i>Who goezzz there?</i>\" They snap as one.\n\n");
-			if (player.beeScore() >= 9) {
+			if (player.isRace(Races.BEE)) {
 				if (player.gender == 0 || player.gender == 2) {
 					outputText("They stop, stare at you, and then look less threatening. \"<i>Where have you been, zzzizzzter? The queen wantzzz uzzz all to stay in the Hive until further notice!</i>\"\n\n");
-					outputText("You can't believe your luck, but make up a vague excuse and hurry past them as they usher you into the entrance. "+(player.inte >= 50 ? "Fortunately, the corruption is clearly messing with their brains and so they obviously can't think straight enough to realize you're not one of their sisters.":"You can't believe you're luck, they must be really dumb.")+"\n\n");
+					outputText("You can't believe your luck, but make up a vague excuse and hurry past them as they usher you into the entrance. "+(player.inte >= 50 ? "Fortunately, the corruption is clearly messing with their brains, and so they obviously can't think straight enough to realize you're not one of their sisters.":"You can't believe you're luck, they must be really dumb.")+"\n\n");
 				}
 				else if (player.gender == 1) {
 					outputText("The fierce expressions on their faces melts away as they take in your own bee-like features, and the obvious sign of male gender. \"<i>What'zzz a drone doing out of the Hive?</i>\" One murmurs. The other doesn't speak, she's staring at you, fixated. The first one shakes her head and then points emphatically at the entrance to the Hive. ");
@@ -113,7 +107,6 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			if (player.gems < 10) {
 				outputText("\n<b>You don't have enough gems...</b>");
 				doNext(room2HoneyMerchant);
-				return;
 			}
 			else room2HoneyMerchantTransact();
 		}
@@ -128,8 +121,8 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			if (flags[kFLAGS.TIFA_FOLLOWER] < 4){
 				if (flags[kFLAGS.TIFA_FOLLOWER] == 3) outputText("You go back to the blocked path trying to find a way to open it.");
 				else {
-					outputText("As you make your way through the lambent hallway, it opens up to a beautiful golden-roofed atrium, letting sunlight pour in from above. However, your progress is hindered due to a few large bookshelves in your way which you notice have been hastily pushed into position to barricade the entrance.\n\n");
-					outputText("Despite your efforts, they do not budge and you realize why. A very dark translucent material is used as a makeshift glue, bonding the bookcases together. Further inspection reveals it to be very reminiscent of caramel. Short of licking it away, you would be hard pressed to remove the hard, congealed substance.");
+					outputText("As you make your way through the lambent hallway, it opens up to a beautiful golden-roofed atrium, letting sunlight pour in from above. However, your progress is hindered due to a few large bookshelves in your way, which you notice have been hastily pushed into position to barricade the entrance.\n\n");
+					outputText("Despite your efforts, they do not budge, and you realize why. A very dark translucent material is used as a makeshift glue, bonding the bookcases together. Further inspection reveals it to be very reminiscent of caramel. Short of licking it away, you would be hard-pressed to remove the hard, congealed substance.");
 				}
 				outputText(" As you silently fume and ponder the situation, a voice suddenly calls out from behind the shelves with an angry buzzing accompanying it.\n\n\"<i>Begone intruderzzz! You zzzhall not pazzz!</i>\" the voice shouts"+(silly() ? ", emphasizing her last statement with a <i>thump</i> sounding like if someone broke a bridge with a staff":"")+".\n\n");
 				if (flags[kFLAGS.TIFA_FOLLOWER] == 0) {
@@ -166,7 +159,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			outputText("This latest chamber you have found yourself in is made entirely from honeycombs. Extremely large cells of wax are positioned vertically all around you - each big enough to house at least one person. The largest one of all is in front of you, and it is covered in a cap of solidified wax. However, it's just translucent enough that you can see shadowy figures inside it... ");
 			outputText("especially as several of them are beating on the other side of the wax wall.\n\n\"<i>Let uzzz out of 'ere! You cannot do zizzz to uzzz! You cannot keep uzz prizzzner!</i>\" One of the shadows buzzes angrily.\n\n");
 			outputText("These, you realize, are prisoners - and it doesn't take a genius to realize that they are thusly members of the hive who haven't fallen to corruption. Approaching the wax cell, you call out to them.\n\n");
-			if (player.beeScore() >= 9) {
+			if (player.isRace(Races.BEE)) {
 				outputText("\"<i>Let uzzz out of here, you zzzcum! Demon-tainted filth!</i>\" One of the figures buzzes shrilly.\n\n");
 				outputText("You protest that you are not a member of the corrupted bees - or any hive for that matter.\n\n");
 				outputText("They fall silent, but then one of them, the largest-looking shadow, speaks up. \"<i>Thizz accurzzzed wax blockzzz much of zzze zzzzentzzz, but... you don't zzzmell like a bee... and your aczzzent izzz awful. Maybe you're telling zzze truth.</i>\"\n\n");
@@ -179,14 +172,14 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			}
 			outputText("\"<i>Yezzz, anything! But we muzzzt be quick - the guard could be back any minute!</i>\"\n\n");
 			outputText("You promise her you'll be quick, but you need to know just what's going on, how all this happened.\n\n");
-			outputText("\"<i>Some of our handmaidenzzz came back home changed, they zztarted meddling with the other bees and it soon became impozzzible to contain the corruption! Now they are trying to corrupt motherzzz, should they zzzucceed the entire hive will follow suit.</i>\" She explains.\n\n");
+			outputText("\"<i>Some of our handmaidenzzz came back home changed, they zztarted meddling with the other bees, and it soon became impozzzible to contain the corruption! Now they are trying to corrupt motherzzz, should they zzzucceed the entire hive will follow suit.</i>\" She explains.\n\n");
 			outputText("You ask why they haven't succumbed to the corruption yet\n\n");
 			outputText("\"<i>Becauzzze we are princezzezz, that is why! No queen can be corrupted so eazzzily - the lezzzer beezzz are falling azzz our mother izzz being corrupted, but we muzzzt be corrupted azzz individualzzz. The fallen sisterzzz ...are too buzzy focusing on our mother to do anything with uzzz juzzzt yet.</i>\"\n\n");
 			outputText("Suddenly, she stiffens, as do the others behind the wax. \"<i>The guard - zzzhe izzz coming! You muzzzt go, now, quickly! Zzzhe will capture or kill you!</i>\"\n\n");
 			outputText("That gets your attention, and as your eyes dart around the chamber, you see what you were too distracted to see before, the corpses of bees, Workers, Handmaidens, even Warriors, lying broken and discarded on the waxen floor. And you can hear a faint, ominous droning noise starting to grow louder and louder. Desperately, you ask what you can do to help.\n\n");
 			outputText("\"<i>One of uzzz, the rebellious one, managed to barricade herzzzelf in a room. If you talk with her, zzzhe should be able to help you.</i>\"\n\n");
 			outputText("You promise that is what you will do, and start to run for the exit. As you go, she calls out to you one last bit of information. \"<i>Her name izzz Tifa, tell her that Bridgezz zzzent you!</i>\"\n\n");
-			outputText("Just as you’re ready to leave the cell, you come upon a particularly corrupted bee guard. Her entire body is twilight black and she’s sporting a bee cock large enough to give you nightmare fuel. Her translucent wings are a mix between bat and bug and truth be told her twin horns alone give her away as a demonic bee.\n\n");
+			outputText("Just as you’re ready to leave the cell, you come upon a particularly corrupted bee guard. Her entire body is twilight black, and she’s sporting a bee cock large enough to give you nightmare fuel. Her translucent wings are a mix between bat and bug and truth be told her twin horns alone give her away as a demonic bee.\n\n");
 			outputText("\"<i>Want to meet the queenz? Thatzzz too bad, zzzhe is very busy having the orgazzzm of her life. Would you prefer my eggzzz or my zzzemen intruder? I think I will fill you both wayzzz. Onzzze I’m done I will give you azzz breeding zzztock for the fallen handmaidenzzz.</i>\"\n\n");
 			if (flags[kFLAGS.TIFA_FOLLOWER] == 1) flags[kFLAGS.TIFA_FOLLOWER] = 3;
 			else flags[kFLAGS.TIFA_FOLLOWER] = 2;
@@ -195,9 +188,9 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 		
 		private function room6():void {
 			clearOutput();
-			outputText("As you enter the first thing that hits you is the overpowering smell of honey. At the deepest reach of the room is a large shape of a sex-addled bee you presume to be the queen. Several smaller bees, the corrupted handmaidens, are busily pistoning in and out of a multitude of orifices in her abdomen.\n\n");
+			outputText("As you enter, the first thing that hits you is the overpowering smell of honey. At the deepest reach of the room is a large shape of a sex-addled bee you presume to be the queen. Several smaller bees, the corrupted handmaidens, are busily pistoning in and out of a multitude of orifices in her abdomen.\n\n");
 			outputText("As you approach the queen they finally take notice of you.\n\n");
-			outputText("\"<i>Hey, girlzzz therezzz an interloper in the throne room! Letzzz add it to the orgy, mother izzz about to turn and we will need willing incubatorzzz.</i>\"\n\n");
+			outputText("\"<i>Hey, girlzzz therezzz an interloper in the throne room! Letzzz add it to the orgy, mother izzz about to turn, and we will need willing incubatorzzz.</i>\"\n\n");
 			outputText("The majority of the hermaphrodite handmaidens detach from the queen and fly to you, a hand on their bee cocks and another on their honeypot with drooling smiles.\n\n");
 			startCombat(new TheCorruptedHandmaidens(), true);
 		}
@@ -205,7 +198,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 		public function defeatedByDemonicBee():void {
 			clearOutput();
 			outputText("The demonic bee smirks wickedly as you fall defeated on the floor. Before you can see it, her stinger pierces you, pumping a massive injection of aphrodisiac into you, and as if you have lost all control of your body, you jump into her arms, happy. As she holds you close, a thick knot-like organ covered in a sweet-smelling lubricant slowly emerges from her abdomen. ");
-			outputText("As your mind synesthetically sees a myriad of colors and scents, you don’t resist as she gently pushes you down to your stomach. Nor do you protest as she leans over you, her stinger- thank goodness it isn’t poisonous- looming close to your anus. With no more words, she shoves the thick, lengthy stinger and knot inside of you. ");
+			outputText("As your mind synesthetically sees a myriad of colors and scents, you don’t resist as she gently pushes you down to your stomach. Nor do you protest as she leans over you, her stinger - thank goodness it isn’t poisonous - looming close to your anus. With no more words, she shoves the thick, lengthy stinger and knot inside of you. ");
 			outputText("Her 'ovipositor' slips in slowly, the lubricant keeping you from shaking out of your scent-induced pleasure coma. Your hands even venture toward your "+(player.hasCock() ? "engorged member":"")+(player.gender == 3 ? " and ":"")+(player.hasVagina() ? "drooling pussy":"")+" as she rather forcefully rapes your hole, humming her lewd tune all the while.\n\n");
 			outputText("After hours of her forcefully filling your hole, her stinger pumping what feels like gallons of her bee-seed into your very bowels"+(player.hasCock() ? ", and of you stroking yourself to ejaculation,":"")+" she finally pulls out. ");
 			outputText("With her stinger still dripping seed onto your back, she smiles "+(player.hasCock() ? "while watching you blow your last load into a pool of semen underneath you, her own cock splattering cum on your chest ":"")+"before you collapse - exhausted.\n\n");
@@ -249,7 +242,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			flags[kFLAGS.TIFA_AFFECTION] = 1;
 			outputText("As you put an end to the life of the fallen bee queen, the princesses and the remaining guards fill the room, looking at the scene with grief. Bridgess talks first.\n\n");
 			outputText("\"<i>Mother izzz dead, thizzz izzz a terrible day for all of uzzz. However azzz the eldezzzt it izzz my rezzzponsability to take up to the tazzzk of queen in her zzztead.</i>\"\n\n");
-			outputText("She walks up to you and does a formal gesture\n\n");
+			outputText("She walks up to you and does a formal gesture.\n\n");
 			outputText("\"<i>You have our thankzzz for zzzaving our hive from corruption and azzz zzzuch I will give you permizzzion to have free pazzzage into the Hive and trade with my honeybrewerzzz for our zzzpecializzzed goodzzz. For now, pleazzze leave, I need zzzome time to mourn my motherzzz death.</i>\"\n\n");
 			outputText("You are escorted out of the Hive but just as you are about to go back to camp, Tifa grabs your arm.\n\n");
 			outputText("\"<i>I’m zzzorry that you had to do thizzz but again thizzz wazzz for the bezzzt. Zzzay what izzz your name?</i>\"\n\n");
@@ -262,7 +255,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 		}
 		
 		public function room1South():void {
-			dungeonLoc = 169;
+			dungeonLoc = DUNGEON_BEE_HIVE_1;
 			clearOutput();
 			outputText("<b><u></u>Entrance</b>\n");
 			if (flags[kFLAGS.TIFA_FOLLOWER] > 5) {
@@ -275,7 +268,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			addButton(11, "Leave", exitDungeon);
 		}
 		public function room4East():void {
-			dungeonLoc = 170;
+			dungeonLoc = DUNGEON_BEE_HIVE_2;
 			clearOutput();
 			if (flags[kFLAGS.TIFA_FOLLOWER] < 2) room4();
 			if (CoC.instance.inCombat) return;
@@ -284,7 +277,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			dungeons.setDungeonButtons(null, null, room2Center, null);
 		}
 		public function room2Center():void {
-			dungeonLoc = 171;
+			dungeonLoc = DUNGEON_BEE_HIVE_3;
 			clearOutput();
 			outputText("<b><u></u>Honey Brewers halls</b>\n");
 			if (flags[kFLAGS.TIFA_FOLLOWER] > 5) {
@@ -298,7 +291,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			}
 		}
 		public function room3West():void {
-			dungeonLoc = 172;
+			dungeonLoc = DUNGEON_BEE_HIVE_4;
 			clearOutput();
 			outputText("<b><u></u>The Library</b>\n");
 			room3();
@@ -308,7 +301,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			}
 		}
 		public function room5North(first:Boolean = true):void {
-			dungeonLoc = 173;
+			dungeonLoc = DUNGEON_BEE_HIVE_5;
 			clearOutput();
 			outputText("<b><u></u>Far corridor towards the throne room</b>\n");
 			if (flags[kFLAGS.TIFA_FOLLOWER] > 4) outputText("The way to the throne room is open.");

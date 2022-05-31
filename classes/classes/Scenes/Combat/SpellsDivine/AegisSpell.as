@@ -8,11 +8,11 @@ import classes.StatusEffects;
 public class AegisSpell extends AbstractDivineSpell {
 	public function AegisSpell() {
 		super(
-				"Aegis",
-				"Increase block chance by 1 to 10%, tripled if using a staff and no shield. (Based on spell buff and intelligence).",
-				TARGET_SELF,
-				TIMING_LASTING,
-				[TAG_BUFF]
+			"Aegis",
+			"Increase block chance by 1 to 10%, tripled if using a staff and no shield. (Based on spell buff and intelligence).",
+			TARGET_SELF,
+			TIMING_LASTING,
+			[TAG_BUFF]
 		);
 		baseManaCost = 500;
 	}

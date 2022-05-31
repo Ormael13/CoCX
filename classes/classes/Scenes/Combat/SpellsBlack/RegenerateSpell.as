@@ -1,17 +1,18 @@
 package classes.Scenes.Combat.SpellsBlack {
 import classes.Monster;
 import classes.PerkLib;
+import classes.Races;
 import classes.Scenes.Combat.AbstractBlackSpell;
 import classes.StatusEffects;
 
 public class RegenerateSpell extends AbstractBlackSpell {
 	public function RegenerateSpell() {
 		super(
-				"Regenerate",
-				"Regenerate will attempt to trigger health recovery over time, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  ",
-				TARGET_SELF,
-				TIMING_LASTING,
-				[TAG_BUFF, TAG_HEALING]
+			"Regenerate",
+			"Regenerate will attempt to trigger health recovery over time, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  ",
+			TARGET_SELF,
+			TIMING_LASTING,
+			[TAG_BUFF, TAG_HEALING]
 		);
 		baseManaCost           = 50;
 		canBackfire            = true;
@@ -35,8 +36,8 @@ public class RegenerateSpell extends AbstractBlackSpell {
 		var hpChange2:Number = player.inte;
 		if (player.hasPerk(PerkLib.WisenedHealer)) hpChange2 += player.wis;
 		hpChange2 *= healModBlack();
-		if (player.unicornScore() >= 10) hpChange2 *= 3;
-		if (player.alicornScore() >= 12) hpChange2 *= 4;
+		if (player.isRace(Races.UNICORN, 2)) hpChange2 *= 3;
+		if (player.isRace(Races.ALICORN)) hpChange2 *= 4;
 		if (player.armor == armors.NURSECL) hpChange2 *= 1.2;
 		if (player.weapon == weapons.U_STAFF) hpChange2 *= 1.5;
 		if (player.hasPerk(PerkLib.CloseToDeath) && player.HP < (player.maxHP() * 0.25)) {
@@ -47,7 +48,7 @@ public class RegenerateSpell extends AbstractBlackSpell {
 	}
 	
 	public function calcDuration():int {
-		return 7
+		return 7;
 	}
 	
 	override public function advance(display:Boolean):void {

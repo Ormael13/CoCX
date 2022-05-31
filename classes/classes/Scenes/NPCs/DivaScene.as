@@ -1,6 +1,7 @@
 package classes.Scenes.NPCs {
 import classes.BodyParts.Face;
 import classes.Items.Consumables.VampireBlood;
+import classes.Races;
 import classes.Scenes.Camp;
 import classes.StatusEffects;
 import classes.display.SpriteDb;
@@ -76,6 +77,50 @@ public class DivaScene extends XXCNPC{
             buttons.add("Diva",campInteraction);
         }
     }
+
+    private function talkMenu():void
+    {
+        clearOutput();
+        display("camp/talkMenu/menu");
+        setupTalkMenu();
+        submenu(_talkMenu,campInteraction);
+    }
+
+    private function sexMenu():void
+    {
+        clearOutput();
+        display("camp/sexMenu/menu");
+        setupSexMenu();
+        submenu(_sexMenu,campInteraction);
+    }
+
+    private function vampirism():void{scene("camp/talkMenu/vampirism",talkMenu);}
+    private function sunlight():void{scene("camp/talkMenu/sunlight",talkMenu);}
+    private function her():void{scene("camp/talkMenu/her",talkMenu);}
+    private function vialofliquid():void {
+        scene("camp/talkMenu/vialofliquid");
+        tookVialToday = true;
+        inventory.takeItem(consumables.REDVIAL, talkMenu);
+    }
+
+    private function setupTalkMenu():void{
+        _talkMenu.clear();
+        _talkMenu.add("Vampirism",vampirism);
+        _talkMenu.add("Sunlight",sunlight);
+        _talkMenu.add("Her",her);
+        _talkMenu.add("Vial",vialofliquid).disableIf(tookVialToday,"You asked for blood already, wait for tomorrow.");
+
+    }
+    
+
+    private function setupSexMenu():void{
+        _sexMenu.clear();
+        _sexMenu.add("Moonlight Sonata",moonlightSonata);
+        _sexMenu.add("Share A Meal",shareAMeal).disableIf((player.racialScore(Races.VAMPIRE) < 6)|| !(player.faceType == Face.VAMPIRE));
+        _sexMenu.add("Bloody Rose",bloodyRose).disableIf((player.racialScore(Races.VAMPIRE) < 6) || !(player.faceType == Face.VAMPIRE));
+
+    }
+
     override public function campInteraction():void{
         spriteSelect(SpriteDb.s_diva);
         if(time.hours > 20){
@@ -86,53 +131,6 @@ public class DivaScene extends XXCNPC{
         addButton(0,"Talk",talkMenu);
         addButton(1,"Sex",sexMenu);
         addButton(14,"Back",camp.campLoversMenu);
-        function talkMenu():void
-        {
-            clearOutput();
-            display("camp/talkMenu/menu");
-            setupTalkMenu();
-            submenu(_talkMenu,campInteraction);
-        }
-        function sexMenu():void
-        {
-            clearOutput();
-            display("camp/sexMenu/menu");
-            setupSexMenu();
-            submenu(_sexMenu,campInteraction);
-        }
-        function setupTalkMenu():void{
-            _talkMenu.clear();
-            _talkMenu.add("Vampirism",vampirism);
-            _talkMenu.add("Sunlight",sunlight);
-            _talkMenu.add("Her",her);
-            _talkMenu.add("Vial",vialofliquid).disableIf(tookVialToday,"You asked for blood already, wait for tomorrow.");
-
-            function vampirism():void{scene("camp/talkMenu/vampirism",talkMenu);}
-            function sunlight():void{scene("camp/talkMenu/sunlight",talkMenu);}
-            function her():void{scene("camp/talkMenu/her",talkMenu);}
-            function vialofliquid():void {
-				scene("camp/talkMenu/vialofliquid");
-				tookVialToday = true;
-				inventory.takeItem(consumables.REDVIAL, talkMenu);
-			}
-        }
-        function setupSexMenu():void{
-            _sexMenu.clear();
-            _sexMenu.add("Moonlight Sonata",moonlightSonata);
-            _sexMenu.add("Share A Meal",shareAMeal).disableIf((player.vampireScore() < 6)|| !(player.faceType == Face.VAMPIRE));
-            _sexMenu.add("Bloody Rose",bloodyRose).disableIf((player.vampireScore() < 6) || !(player.faceType == Face.VAMPIRE));
-
-            function shareAMeal():void{
-                scene("camp/sexMenu/shareAMeal");
-                player.orgasm();
-                player.sexReward("Default");
-            }
-            function bloodyRose():void{
-                scene("camp/sexMenu/bloodyRose");
-                player.orgasm();
-                player.sexReward("Default");
-            }
-        }
     }
 
     public function moonlightSonata(fromCombat:Boolean=false):void{
@@ -145,16 +143,21 @@ public class DivaScene extends XXCNPC{
             display(baseRef + "intro/camp");
         }
 
-        if( player.biggestCockLength() > 24) {
+        if (player.cockThatFits(24) > 0) { //check if ANY is fitting, otherwise this is trash
             display(baseRef + "male/tooBig");
-            player.cocks[player.biggestCockIndex()].cockLength = 18;
-            if(timesReduced < 5){timesReduced++;}
+            player.cocks[player.smallestCockIndex()].cockLength = 18; //much better
+            if (timesReduced < 5)
+                timesReduced++;
         }
-        if(player.batScore() >= 6 || player.vampireScore() >= 6){
-            if(player.isFemale()){display(baseRef + "female/bat");}
-            else if(player.isMaleOrHerm()){
-                display(baseRef + "female/bat");
-                display(baseRef + "male/regular",{$combat:fromCombat})
+        if (player.isRace(Races.BAT) || player.isRace(Races.VAMPIRE)) {
+            if (player.isFemale()) {
+                display(baseRef + "female/bat"); //full scene
+                player.sexReward("vaginalFluids","Vaginal");
+            }
+            else if (player.isMaleOrHerm()) {
+                display(baseRef + "male/bat"); //2 parts
+                display(baseRef + "male/regular",{$combat:fromCombat});
+                player.sexReward("vaginalFluids","Dick");
             }
         } else if(player.isMaleOrHerm()){
             display(baseRef + "male/regular",{$combat:fromCombat});
@@ -178,6 +181,26 @@ public class DivaScene extends XXCNPC{
             doNext(camp.returnToCampUseOneHour);
         }
     }
+
+    private function shareAMeal():void{
+        scene("camp/sexMenu/shareAMeal");
+        player.orgasm();
+        player.sexReward("Default");
+    }
+    private function bloodyRose():void{
+        var baseRef:String = "camp/sexMenu/bloodyRose/";
+        clearOutput();
+        display(baseRef + "intro");
+        if (player.isMaleOrHerm())
+            display(baseRef + "male");
+        else
+            display(baseRef + "female");
+        display(baseRef + "outro");
+        player.orgasm();
+        player.sexReward("Default");
+        doNext(camp.returnToCampUseOneHour);
+    }
+
     public static function encounter():void{
         instance.spriteSelect(SpriteDb.s_diva);
         if(instance.status == 2){

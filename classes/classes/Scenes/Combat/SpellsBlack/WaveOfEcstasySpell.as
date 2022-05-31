@@ -10,10 +10,10 @@ import classes.StatusEffects;
 public class WaveOfEcstasySpell extends AbstractBlackSpell {
 	public function WaveOfEcstasySpell() {
 		super("Wave of Ecstasy",
-				"The arouse spell draws on your own inner lust in order to enflame the enemies passions.",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_LUSTDMG, TAG_AOE]);
+			"The arouse spell draws on your own inner lust in order to enflame the enemies passions.",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_LUSTDMG, TAG_AOE]);
 		baseManaCost = 100;
 	}
 	
@@ -30,10 +30,10 @@ public class WaveOfEcstasySpell extends AbstractBlackSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target, false) + " lust damage"
+		return "~" + calcDamage(target, false), false + " lust damage"
 	}
 	
-	public function calcDamage(monster:Monster, randomize:Boolean = true):Number {
+	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		return adjustLustDamage(
 				player.inte,
 				monster,
@@ -67,7 +67,7 @@ public class WaveOfEcstasySpell extends AbstractBlackSpell {
 			}
 			return;
 		}
-		var lustDmg:Number = calcDamage(monster);
+		var lustDmg:Number = calcDamage(monster, true, true);
 		if (display) {
 			if (monster.plural) {
 				outputText("Arousal breaks in the eyes of your many opponents as pleasure strikes them");
@@ -89,7 +89,7 @@ public class WaveOfEcstasySpell extends AbstractBlackSpell {
 			crit = true;
 			lustDmg *= 1.75;
 		}
-		lustDmg = Math.round(lustDmg);
+		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg, false);
 		if (display) {
 			outputText(" damage.");

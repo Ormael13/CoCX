@@ -52,25 +52,30 @@ use namespace CoC;
 				case 0:
 					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 2;
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
+					player.createStatusEffect(StatusEffects.InWater,0,0,0,0);
 					SceneLib.anemoneScene.mortalAnemoneeeeee();
 					break;
 				case 1:
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
+					player.createStatusEffect(StatusEffects.InWater,0,0,0,0);
 					scyllaScene.oceanScyllaEncounter();
 					break;
 				case 2:
 					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 1;
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
+					player.createStatusEffect(StatusEffects.InWater,0,0,0,0);
 					sharkGirlScene.oceanSharkGirlEncounter();
 					break;
 				case 3:
 					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 2;
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
+					player.createStatusEffect(StatusEffects.InWater,0,0,0,0);
 					sharkGirlScene.oceanTigersharkGirlEncounter();
 					break;
 				case 4:
 					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 1;
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
+					player.createStatusEffect(StatusEffects.InWater,0,0,0,0);
 					sharkGirlScene.oceanSharkGirlsPackEncounter();
 					break;
 				case 5:

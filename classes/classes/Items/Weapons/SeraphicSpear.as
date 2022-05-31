@@ -19,7 +19,11 @@ package classes.Items.Weapons
 			base += (100 - game.player.cor) / 10;
 			return (7 + base);
 		}
-		
+		override public function canUse():Boolean {
+			if (game.player.level >= 40) return super.canUse();
+			outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay in your hands. It would seem you yet lack the power and right to wield this item.");
+			return false;
+		}
 	}
 
 }

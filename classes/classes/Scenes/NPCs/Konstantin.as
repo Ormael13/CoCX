@@ -6,7 +6,9 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.Crafting;
 	import classes.Scenes.SceneLib;
+	import classes.Scenes.NPCs.TyrantiaFollower;
 	
 	public class Konstantin extends NPCAwareContent
 	{
@@ -17,7 +19,7 @@ package classes.Scenes.NPCs
 		}
 		/*
 		Konstantin flags:
-		KONSTANTIN_FOLLOWER: 1 - Meet at forest, 2 - Came to camp
+		KONSTANTIN_FOLLOWER: 1 - Meet at forest, 2 - Came to camp, 3 - unlocked smelting
 		KONSTANTIN_SERVICES: 1/2 - reached before he join the camp
 		*/
 		private function buildedAnythingInCamp():Boolean {
@@ -44,14 +46,14 @@ package classes.Scenes.NPCs
 				outputText("Wandering between trees while avoiding annoying roots that would make you trip, you stumble upon a clearing, and after spotting a tree trunk, you sit on it to rest. Looking around, you manage to see a scattered set of sharp tools near you, nearby is something that looks like a huge furnace. Before you can figure what they’re about, you’re jumped by a mountainous figure that comes and yelps.\n\n");
 				outputText("\"<i>Whoa</i>\" the stranger says, \"<i>Don’t worry " + player.mf("man","girl") + ". I mean no harm.</i>\"\n\n");
 				outputText("Looking again at who said that, you realize that what looked like a boulder coming over you is actually a bear-morph, almost nine feet tall, dressed in an overall with a white shirt and a set of boots. He has brown fur covering his body, and a gentle but slightly worried look on his ursine face.\n\n");
-				outputText("Quickly, you reassure him explaining that you were only startled to face him all of a sudden, and that you were just resting on the clearing. A bit puzzled about him and his equipment, you question him about what he was doing with that stuff.\n\n");
+				outputText("Quickly, you reassure him explaining that you were only startled to face him all of a sudden, and that you were just resting in the clearing. A bit puzzled about him and his equipment, you question him about what he was doing with that stuff.\n\n");
 				outputText("\"<i>Ah, that. Well, you’ll see " + player.mf("boy","girl") + ". After a couple of hours in the forge, tools can get overheated, so I have to get some water to cool them.</i>\" He explains, pointing to a barrel filled of water that wasn’t here before. \"<i>If you haven’t caught up with me yet, friend, I happen to be a smith. Probably one of the last ones in this cursed land.</i>\"\n\n");
 				outputText("Certainly is pretty difficult to find a good smith in those places.");
 				if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) outputText(" The only ones that you know are in Tel’Adre, and albeit decent, their products aren’t exactly outstanding.");
-				outputText("\n\n\"<i>Oh, right, " + player.mf("man","girl") + ", forgot my manners. Name’s Konstantin, and what’s yours?</i>\" extending his hand to you.\n\n");
+				outputText("\n\n\"<i>Oh, right, " + player.mf("man","girl") + ", forgot my manners. Name’s Konstantin, and what’s yours?</i>\" he asks, extending his hand to you.\n\n");
 				outputText("Accepting his handshake, you tell him your name, and vaguely tell what you are and how you happened to stumble on the clearing.\n\n");
 				outputText("\"<i>So, you’re one of those brave and mighty explorers wanting to cleanse every bit of demon ichor of Mareth?</i>\" he says, a bit amused. \"<i>You’re quite a rare sight these days. Anyways friend, I have my furnace working, and if you’re what you’re saying, you may require my services.</i>\"\n\n");
-				outputText("Interesting. Having a smith checking your equipment periodically doesn’t sounds bad. You question him about  kind of things he can do.\n\n");
+				outputText("Interesting. Having a smith checking your equipment periodically doesn’t sounds bad. You question him about what kind of things he can do.\n\n");
 				outputText("\"<i>For starters, I can polish your armor and fix any weakened or broken pieces. If you happen to have several pieces of a solid item that can be assembled into a protective armor, I can do it for you. Lastly, I can sharpen your weapons to make sure that they cut and pierce through almost everything.</i>\"\n\n");
 				outputText("\"<i>The price for any of those services is the same. Say, 25 gems?</i>\"\n\n");
 				outputText("Sounds like a good offer. What will you do?\n\n");
@@ -70,8 +72,10 @@ package classes.Scenes.NPCs
 			if (player.gems >= 25) {
 				player.gems -= 25;
 				outputText("You take the [armor] and hand it to Konstantin. He starts working on it, idly whistling while you patiently sit on the nearby ");
-				if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) outputText("tree stump");
-				else outputText("couch");
+
+				if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) outputText("couch");
+				else outputText("tree stump");
+
 				outputText(".\n\nApplying the best of his smithing skills to the [armor], he starts tossing away the parts of it that are too damaged due to the blows that it has received or too weakened for the continued use, replacing them with brand new pieces of the same material. He also strengthens the inner structure of each piece and fixes them so they don’t leave a bit of your body unprotected.\n\n");
 				outputText("Once he’s finished, your [armor] looks clean, beautiful and as good as if it was brand new.");
 				if (player.hasStatusEffect(StatusEffects.KonstantinArmorPolishing)) player.removeStatusEffect(StatusEffects.KonstantinArmorPolishing);
@@ -83,7 +87,7 @@ package classes.Scenes.NPCs
 				}
 				else {
 					outputText(" Thanking him for services, you take the armor, thank the bear-morph");
-					if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) outputText(", and return to your daily tasks");
+					if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) outputText(", and return to your daily tasks");
 					outputText(".\n\n");
 				}
 			}
@@ -95,7 +99,7 @@ package classes.Scenes.NPCs
 			if (player.gems >= 25) {
 				player.gems -= 25;
 				outputText("Handing the [weapon] to the bear smith, you hop on ");
-				if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) outputText("one of his couches");
+				if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) outputText("one of his couches");
 				else outputText("the tree stump");
 				outputText(" while he gets to work. Konstantin goes to his anvil, where he examines your weapon and figures how he is going to work with it.\n\n");
 				outputText("Later, you start hearing the sound of metal on metal caused by the bear’s tool, accompanied by a song that he’s humming to pass the time. Once he’s done with the anvil, he turns to sharpening and polishing your [weapon].\n\n");
@@ -109,7 +113,7 @@ package classes.Scenes.NPCs
 				}
 				else {
 					outputText(" After giving thanks to the friendly ursine, you return to your ");
-					if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) {
+					if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) {
 						if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) outputText("cabin");
 						else outputText("bedroll");
 					}
@@ -124,11 +128,11 @@ package classes.Scenes.NPCs
 			clearOutput();
 			outputText("Not having needed anything from his services at the moment, you thank the bear for his offer.\n\n");
 			outputText("\"<i>Okay, " + player.mf("man","girl") + ". ");
-			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) outputText("Stop by again soon if you happen to need help with your stuff");
+			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) outputText("Stop by again soon if you happen to need help with your stuff");
 			else outputText("Was a pleasure to meet you, still, stop by again soon if you happen to need a good smith");
 			outputText(".</i>\"\n\n");
 			outputText("Assuring him that you’ll do so, you bid him farewell and proceed to return to your ");
-			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) {
+			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) {
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) outputText("cabin");
 				else outputText("bedroll");
 			}
@@ -139,14 +143,14 @@ package classes.Scenes.NPCs
 		public function meetKonstantinAtForest2():void {
 			outputText("As you take your stuff from Konstantin, you’re questioned by the bear-smith.\n\n");
 			outputText("\"<i>Huh, [name], did you say that you were a Champion, or a warrior of some kind, seeking to save Mareth, right?</i>\"\n\n");
-			outputText("You answer him that more or less, that was what you had on mind when you arrived to this place.\n\n");
+			outputText("You answer him that more or less, that was what you had in mind when you arrived to this place.\n\n");
 			outputText("\"<i>And how are things going? Do you have a place to stay?</i>\"\n\n");
 			outputText("Well, you had thought better ways of start your adventure than awaking drugged by a random imp, but overall, things have been okay. Also, albeit modest");
 			if (buildedAnythingInCamp()) outputText(" at start, you have a camp where you sleep and prepare for your daily tasks");
 			outputText(".\n\n\"<i>Oh. Then, I was wondering if...</i>\" The big bear hesitates for a second, and then sighs \"<i>The truth is, [name] that I’ve barely had any clients recently. You’re the first one coming in many, many days. To make things worse, no matter how tough I may look, I really don’t like the idea of being alone.</i>\"\n\n");
 			outputText("You look at him attentively, guessing where he’s trying to go.\n\n");
 			outputText("\"<i>So, I thought that maybe you would be okay if, well, I moved with you, since you won’t need to walk to the clearing each time that you needed me, and I could get a new place where work, one that maybe isn’t so fucking lonely.</i>\"\n\n");
-			outputText("Seems like Konstantin is asking if you like to have him on your camp. What will you say?\n\n");
+			outputText("Seems like Konstantin is asking if you like to have him at your camp. What will you say?\n\n");
 			menu();
 			addButton(0, "No", meetKonstantinAtForest2No);
 			addButton(1, "Yes", meetKonstantinAtForest2Yes);
@@ -158,19 +162,19 @@ package classes.Scenes.NPCs
 		}
 		public function meetKonstantinAtForest2Yes():void {
 			outputText("\"<i>Really? Damn, I’m so fucking happy</i>\" Konstantin says, wrapping you in a literal bear-hug. \"<i>I’ll make sure that you don’t regret it [name]. And even better, since we’re on your place we’ll have time to meet each other better. So on top of not spending the rest of my life alone in the woods, now I’ll have a new friend.</i>\"\n\n");
-			outputText("That’s certainly true, and having someone like Konstantin as your friend will probably be a fun thing. After a while, he starts packing his personal stuff and working tools, as well as his furnace. The process takes a couple of hours since he has to go to his hut on the woods to retrieve more things and the biggest furnace has to be dismantled before being packed.\n\n");
+			outputText("That’s certainly true, and having someone like Konstantin as your friend will probably be a fun thing. After a while, he starts packing his personal stuff and working tools, as well as his furnace. The process takes a couple of hours since he has to go to his hut in the woods to retrieve more things and the biggest furnace has to be dismantled before being packed.\n\n");
 			outputText("Once he’s finished, both of you are walking back to your camp carrying several boxes containing his things, whilst idly chit-chatting.\n\n");
 			meetKonstantinAtForest2YesPart2();
 		}
 		public function meetKonstantinAtForest2YesPart2():void {
 			clearOutput();
-			outputText("Arriving on the barren land surrounding your camp, you easily spot the purple glow of the portal from afar, and point it to Konstantin. He hurries up to catch you, and soon, you’re next to your tent, helping him to unpack his stuff.  With him are several boxes, enormous even for his size, that have his working tools, as well as the tent he has and probably other personal stuff.\n\n");
+			outputText("Arriving in the barren land surrounding your camp, you easily spot the purple glow of the portal from afar, and point it to Konstantin. He hurries up to catch you, and soon, you’re next to your tent, helping him to unpack his stuff.  With him are several boxes, enormous even for his size, that have his working tools, as well as the tent he has and probably other personal stuff.\n\n");
 			outputText("\"<i>So, this is the place?</i>\" he asks, panting from the exertion of having to carry most of the stuff.\n\n");
 			outputText("\"<i>Yes, it is.</i>\" you reply, also tired, even while you had much less to carry.\n\n");
 			outputText("\"<i>Good</i>\" he says, nodding approvingly \"<i>A bit far from everything, but given this land’s average company, that’s quite a good thing.</i>\"\n\n");
-			outputText("After recovering your breath, you offer to help him get his tent and smithing tools on their place, so he points you to the largest box. With a bit of difficulty, you put the frame and main cloth of the tent on a side of the camp.\n\n");
+			outputText("After recovering your breath, you offer to help him get his tent and smithing tools in their place, so he points you to the largest box. With a bit of difficulty, you put the frame and main cloth of the tent on a side of the camp.\n\n");
 			outputText("Seems like he thought ahead, and brought a large tent, thrice as wide as yours, and twice as big, no doubt to fit his large frame with ease. The outsides are covered in furs and pelts, held by sturdy pieces of wood Since you’re helping him to set it, you manage to see its insides. While it contains no luxuries, it’s well furnished and has a homey feel, having a large bed wrapped in red linen, a small kitchen where a teapot fumes, and lacquered boxes with tools, books and clothing. Some small statues carved in wood ornate the area, some serving as lamps.\n\n");
-			outputText("Once the tent is done, you rush to a secluded side of the camp, where the smoke of the ovens won’t bother anyone, and close enough to the stream. There, Konstantin handily re-assembles his oven and puts his anvil on place, as well as the rest of the working stuff.\n\n");
+			outputText("Once the tent is done, you rush to a secluded side of the camp, where the smoke of the ovens won’t bother anyone, and close enough to the stream. There, Konstantin handily re-assembles his oven and puts his anvil in place, as well as the rest of the working stuff.\n\n");
 			outputText("(<b>Konstantin has been added to the Followers menu!</b>)\n\n");
 			flags[kFLAGS.KONSTANTIN_FOLLOWER] = 2;
 			doNext(camp.returnToCampUseTwoHours);
@@ -183,9 +187,10 @@ package classes.Scenes.NPCs
 			menu();
 			addButton(0, "Appearance", KonstantinAppearance);
 			addButton(1, "Talk", KonstantinTalkMenu);
-			addButton(2, "Smithing", KonstantinSmithingMenu);
-			addButton(3, "Tinkering", KonstantinTinkeringMenu).hint("Add some temporary boosts to you weapons or armor.");
-			addButton(4, "Sex", KonstantinSexMenu);
+			addButton(2, "Sex", KonstantinSexMenu);
+			addButton(5, "Smithing", KonstantinSmithingMenu);
+			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 3) addButton(6, "Smelting", KonstantinSmeltingMenu);
+			addButton(7, "Tinkering", KonstantinTinkeringMenu).hint("Add some temporary boosts to you weapons or armor.");
 			addButton(14, "Leave", camp.campFollowers);
 		}
 		
@@ -208,6 +213,7 @@ package classes.Scenes.NPCs
 			addButton(0, "Him", KonstantinTalkHim);
 			addButton(1, "His Work", KonstantinTalkHisWork);
 			addButton(2, "The camp", KonstantinTalkTheCamp);
+			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) addButton(13, "Better Smiting", KonstantinTalkBetterSmiting);
 			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		public function KonstantinTalkHim():void {
@@ -215,7 +221,7 @@ package classes.Scenes.NPCs
 			outputText("Curious about your ursine friend past, you ask him what he used to do before the two of you met.\n\n");
 			outputText("\"<i>Me? I fear that it’s nothing too outstanding, my friend.</i>\" he remarks. \"<i>Most of my childhood was with my parents, as usual, in one of the villages near the lake. The townsfolk either worked fishing on the lake or chopping wood, but of course, as in every town, a couple of skilled hands would always come in handy doing more artisan-related stuff.</i>\"\n\n");
 			outputText("\"<i>My father worked as a metalsmith, as well as my grandfather, and so on, thus was natural that I followed their steps. What neither of us expected was how well I grew into it. You see, when the family has a line of artisans, sooner or later a kid wants to break the line. My case was the exact opposite. Melting, casting, sharpening, polishing, every bit of the metalwork process puzzled me. ");
-			outputText("Everyone on my family was amazed by how fast I was learning, because when I was given the initials, around 9 or so, it only took me a year or so to understand the basics of iron casting. Turning this iron and other materials into useful things was an entirely different matter, so I took a bit more time with that, but in the end, I was learning faster than most at my age.</i>\"\n\n");
+			outputText("Everyone in my family was amazed by how fast I was learning, because when I was given the initials, around 9 or so, it only took me a year or so to understand the basics of iron casting. Turning this iron and other materials into useful things was an entirely different matter, so I took a bit more time with that, but in the end, I was learning faster than most at my age.</i>\"\n\n");
 			outputText("\"<i>Then, as you may know at this point, like almost everywhere else in Mareth, the horned bastards came down from the mountains. Most of the largest towns were razed and corrupted in a question of weeks, but since our village was quite small, that bought us enough time to find a decent refuge, away from the woods.</i>\"\n\n");
 			outputText("\"<i>Many villagers escaped unscathed too, but since the fear to the demons patrolling the forest was too big, many of them moved to the desert, here some said that a big free city was still standing, or to the frozen forests to the Rift, where the cold, and a kind of unnatural but harmless force was keeping those freaks away.</i>\"\n\n");
 			outputText("\"<i>Me and my parents settled on a peaceful clearing and set up a refuge. During almost a decade we lived there, in our small hut, afar from all the demon crap. Life was almost as easy and peaceful as it always had been, so much that sometimes we saw the corrupted menace as something so distance. When you live in a pure section of the woods, with no other neighbor than the forest creatures and the occasional friendly survivor, it’s hard to think different.</i>\"\n\n");
@@ -227,9 +233,9 @@ package classes.Scenes.NPCs
 		}
 		public function KonstantinTalkHisWork():void {
 			clearOutput();
-			outputText("\"<i>The usual, forging new weapons to sell, sharpening blades and axes that lost their edge, making tools, fitting armors. The defense and protection is a life-or-death thing on Mareth, and my stuff is more often than not which separates people to meet an unfortunate end at the hands of a demon or a minotaur.</i>\"\n\n");
+			outputText("\"<i>The usual, forging new weapons to sell, sharpening blades and axes that lost their edge, making tools, fitting armors. The defense and protection is a life-or-death thing in Mareth, and my stuff is more often than not which separates people to meet an unfortunate end at the hands of a demon or a minotaur.</i>\"\n\n");
 			if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow" || player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle") outputText("\"<i>Recently, I’ve come in contact with some old fools from...how in hell’s name that place called, JaChinDau? that told me how to make strong materials for their ranged weapons. Those are all the rage there, since they allow a weaker fighter to defeat a stronger one, as long as he has some focus on his hands. I’ve learned about how sharpen arrows and javelins, and make this hollow metal balls that those ‘gun’ things makes use of.</i>\"\n\n");
-			if (flags[kFLAGS.KONSTANTIN_SERVICES] >= 2) outputText("\"<i>Also, since you’ve brought me some quite weird stuff to work with, I had to remove the dust from some old manuals about how handle magical and non-metal materials, and how turn them on solid plates and pieces of armor.</i>\"\n\n");
+			if (flags[kFLAGS.KONSTANTIN_SERVICES] >= 2) outputText("\"<i>Also, since you’ve brought me some quite weird stuff to work with, I had to remove the dust from some old manuals about how handle magical and non-metal materials, and how turn them into solid plates and pieces of armor.</i>\"\n\n");
 			outputText("Curious, you ask him how hard was reaching his level of skill in smithing, and if he’s happy with his current situation.\n\n");
 			outputText("\"<i>Metalworking is a life-time office, [name]. Becoming a successful one takes years as an apprentice and some luck to get on your paws. ");
 			if (player.hasPerk(PerkLib.HistorySmith) || player.hasPerk(PerkLib.PastLifeSmith)) {
@@ -266,7 +272,7 @@ package classes.Scenes.NPCs
 					outputText(".</i>\"\n\n");
 				}
 				else if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 && flags[kFLAGS.CAMP_WALL_SKULLS] >= 15) outputText("\"<i>Only a fool of an imp would get near our camp, given the skull-themed decoration on the wall. I bet than even the incubus and succubus are cowed of coming near. Everything feels safer with them sheltering us.</i>\"\n\n");
-				if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) outputText("\"<i>Given the amount of stuff that is found outside, i was a rather wise choice to get a place for holding all of it. If we’re lucky and, in a couple of years, rain returns as normal, this barren land will become a lush prairie, and we could make our own crops around the camp, and obviously, a place to store our harvest will come on handy.</i>\"\n\n");
+				if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) outputText("\"<i>Given the amount of stuff that is found outside, it was a rather wise choice to get a place for holding all of it. If we’re lucky and, in a couple of years, rain returns as normal, this barren land will become a lush prairie, and we could make our own crops around the camp, and obviously, a place to store our harvest will come in handy.</i>\"\n\n");
 				if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) {
 					outputText("\"<i>Nothing as fresh water cleansing your body, huh?");
 					if (milkSlave() && flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) outputText(" Surely beats that weird milk-bath.");
@@ -279,13 +285,23 @@ package classes.Scenes.NPCs
 			doNext(KonstantinTalkMenu);
 			eachMinuteCount(5);
 		}
+		public function KonstantinTalkBetterSmiting():void {
+			clearOutput();
+			outputText("Konstantin deposes his hammer, now that he has a new item in his grasp before he moves toward his storage to retrieve a new ingot.\n\n");
+			outputText("\"<i>You know, [name], what I forge here is nothing extraordinary… just conventional steel. However, there are places across Mareth... Remote locations that are untapped by the other races. Such places are ripe with rare materials, things that only an adventurer like yourself could retrieve. If you could bring me some of that material, I could smelt you the ingots you need for some extremely powerful equipment. Don't worry about the cost. For you, I’ll work for the usual rate. Honestly, it'd be a pleasure if I could get my hands on some high-quality mythril.</i>\"\n\n");
+			outputText("You promise Konstantin to keep a lookout for rare materials in your journey.\n\n");
+			outputText("<b>Unlocked Smelting!</b>\n\n");
+			flags[kFLAGS.KONSTANTIN_FOLLOWER] = 3;
+			doNext(KonstantinTalkMenu);
+			eachMinuteCount(5);
+		}
 		
 		public function KonstantinSmithingMenu():void {
 			clearOutput();
 			outputText("Seeing how Konstantin is working with armor and plating pieces, you happen to ask him if he could assemble some of the materials that you’ve found during your travels in Mareth into something useful to wear and protect yourself.\n\n");
 			if (anyUsableMaterials()) {
 				if (player.hasItem(useables.GREENGL)) {
-					outputText("He looks over your bag’s contents, noticing a glimpse of the gel-like substance on it.\n\n");
+					outputText("He looks over your bag’s contents, noticing a glimpse of the gel-like substance in it.\n\n");
 					outputText("\"<i>Hmm, seems like you’ve got a sample of those strange goo creatures that dwell around the lake these days. While they’re not in my exact area of expertise, I’ve found that those goo remains can become solid if exposed to the right chemicals under a particular temperature, probably due some innate property of the creatures that it comes from. Solid enough to make up for a pretty resilient armor, and flexible enough to deflect blows. If you wish, I can turn them into a protective armor for you, though I’ll require a large amount, something like, five samples.</i>\"\n\n");
 				}
 				if (player.hasItem(useables.B_CHITN)) {
@@ -298,7 +314,7 @@ package classes.Scenes.NPCs
 					outputText("\"<i>Alternatively, if you want, an undergarment, I could make some into a cloth for a shirt, a bra, a loinscloth or even a set of panties. The material necessary for any of them would be less, only 2 strands of silk, but, since the chemical process is the same, I’ll still require the 500 gems.</i>\"\n\n");
 				}
 				if (player.hasItem(useables.D_SCALE)) {
-					outputText("Konstantin carefully examines the dragonscale that you are storing on your pack. \"<i>Dragons in Mareth are a virtually extinct race");
+					outputText("Konstantin carefully examines the dragonscale that you are storing in your pack. \"<i>Dragons in Mareth are a virtually extinct race");
 					if (emberScene.followerEmber()) outputText(", well, except for the one with us, so the chances of finding one of those are pretty slim");
 					outputText(".</i>\"\n\n\"<i>Those things are quite tough, and with enough of them I could make an armor with exceptional defensive properties, and much lighter than your standard platemail. If you’re not feeling in the mood of using a plate armor, I could get my hands on some magically enhanced linen cloth, and use the scales as reinforcement and decoration, thus creating a strong and comfortable set of robes. Since plate requires a lot of material, and I’d like to buy the cloth for the robes by selling the remaining scales, I’ll have to ask you for 5 pieces of dragonscale in both cases.</i>\"\n\n");
 					outputText("\"<i>If you happened to like a smaller piece, I could assemble and undergarment for you, say, a bra, or a vest for your upper body, and a thong or a loincloth for your lower parts. Since we’re speaking of less cloth, I could do it with only 2 pieces of dragon scale.</i>\"\n\n");
@@ -372,14 +388,26 @@ package classes.Scenes.NPCs
 			if (player.hasItem(useables.D_SCALE) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1) addButton(3, "Dragonscale", KonstantinCraftingDragonscaleItems);
 			if (player.hasItem(useables.EBONBLO) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1) addButton(4, "Ebonbloom", KonstantinCraftingEbonbloomItems);
 			if (player.hasItem(useables.WT_BRAN)) addButton(5, "W.T.Branch", KonstantinCraftingYggdrasilItems);
+			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 3) {
+				if (player.hasItem(useables.IRONORE) || Crafting.BagSlot04 > 0) addButton(6, "Iron", KonstantinCraftingIronItems);
+				if (player.hasItem(useables.MOONSTO) || Crafting.BagSlot07 > 0) addButton(7, "Moonstone", KonstantinCraftingMoonstoneItems);
+				if (player.hasItem(useables.SKYMETA) || Crafting.BagSlot08 > 0) addButton(8, "Skymetal", KonstantinCraftingSkymetalItems);
+				if (player.hasItem(useables.EBONING) || Crafting.BagSlot06 > 0) addButton(9, "EbonbIng", KonstantinCraftingEbonbIngItems);
+			}
+			addButton(13, "Misc", KonstantinSmithingMenu2).hint("Specific crafting options.");
+			addButton(14, "Back", KonstantinMainCampMenu);
+		}//usunąć fragmenty " && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1" jak sie całkiem przeniesie crafting z Ratha do Kona
+		private function KonstantinSmithingMenu2():void {
+			menu();
+			if (TyrantiaFollower.TyraniaThePhalluspear && player.hasItem(weapons.SPEAR) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.T_SSILK) && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 3) addButton(6, "ThePhalluspear", KonstantinCraftingThePhalluspear);
 			if (player.hasItem(useables.DBAPLAT)) addButton(8, "D.Bark Armor", KonstantinCraftingDivineBarkArmor);
 			if (player.hasItem(useables.TBAPLAT)) addButton(9, "T.Bark Armor", KonstantinCraftingTentacledBarkArmor);
 			if (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.W_STAFF)) addButton(10, "Puritas", KonstantinCraftingPuritas);
 			if (player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.W_STAFF)) addButton(11, "Depravatio", KonstantinCraftingDepravito);
 			if (player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.PURITAS)) addButton(12, "Ascensus", KonstantinCraftingPuritasAscensus);
 			if (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.DEPRAVA)) addButton(12, "Ascensus", KonstantinCraftingDepravitoAscensus);
-			addButton(14, "Back", KonstantinMainCampMenu);
-		}//usunąć fragmenty " && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1" jak sie całkiem przeniesie crafting z Ratha do Kona
+			addButton(14, "Back", KonstantinSmithingMenu);
+		}
 		
 		private function KonstantinCraftingNotEnoughMaterials1():void {
 			clearOutput();
@@ -441,6 +469,7 @@ package classes.Scenes.NPCs
 			addButton(6, "Shirt", KonstantinCraftingSpiderSilkItems2, 5, null, null, undergarments.SSSHIRT.description);
 			addButton(7, "Panties", KonstantinCraftingSpiderSilkItems2, 6, null, null, undergarments.SSPANTY.description);
 			addButton(8, "Loincloth", KonstantinCraftingSpiderSilkItems2, 7, null, null, undergarments.SS_LOIN.description);
+			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		private function KonstantinCraftingSpiderSilkItems2(spidersilkType:int):void {
 			if (spidersilkType == 1 || spidersilkType == 2 || spidersilkType == 3) { //Armor or robes
@@ -474,7 +503,7 @@ package classes.Scenes.NPCs
 				//	outputText(images.showImage("rathazul-craft-silkrobes"));
 					outputText("Hanging from a small rack is a long, flowing robe. It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric, the pure while of it’s cloth complimented majestically by the golden embroidery.  You run your fingers over the silken garment, feeling the soft material give at your touch.  There's a hood with a golden border embroidered around the edge.  For now, it hangs limply down the back, but it would be easy to pull up in order to shield the wearer's eyes from harsh sunlight or rainy drizzle.  ");
 					outputText("The sleeves match the cowl, circled with intricate threads made in gold and laid out in arcane patterns.\n\nKonstantin smiles as you delight yourself looking at the marvelously crafted garment. Once you’re done carefully takes it and hands it to you.\n\n");
-					outputText("\"<i>" + player.mf("Man", "Girl") + ", this is quite a piece, isn’t? I struck a good deal with the weaver so I got extra gold embroidery. The cloth is soft, but don't let it fool you. This thing is almost as strong as any armor that I could’ve made, and the magical properties of the weaving will come on handy whenever you’re using spells.</i>\"\n\n");
+					outputText("\"<i>" + player.mf("Man", "Girl") + ", this is quite a piece, isn’t? I struck a good deal with the weaver so I got extra gold embroidery. The cloth is soft, but don't let it fool you. This thing is almost as strong as any armor that I could’ve made, and the magical properties of the weaving will come in handy whenever you’re using spells.</i>\"\n\n");
 					itype = armors.SS_ROBE;
 					break;
 				case 3: //Indec.Robes
@@ -525,6 +554,7 @@ package classes.Scenes.NPCs
 			addButton(6, "Vest", KonstantinCraftingDragonscaleItems2, 5, null, null, undergarments.DS_VEST.description);
 			addButton(7, "Thong", KonstantinCraftingDragonscaleItems2, 6, null, null, undergarments.DSTHONG.description);
 			addButton(8, "Loincloth", KonstantinCraftingDragonscaleItems2, 7, null, null, undergarments.DS_LOIN.description);
+			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		private function KonstantinCraftingDragonscaleItems2(dragonscaleType:int):void {
 			if (dragonscaleType == 1 || dragonscaleType == 2 || dragonscaleType == 3) { //Armor or robes
@@ -618,6 +648,7 @@ package classes.Scenes.NPCs
 			addButton(8, "Corset", KonstantinCraftingEbonbloomItems2, 9, null, null, undergarments.EW_CORS.description);
 			addButton(10, "R.Jock", KonstantinCraftingEbonbloomItems2, 10, null, null, undergarments.R_JOCK.description);
 			addButton(11, "R.Thong", KonstantinCraftingEbonbloomItems2, 11, null, null, undergarments.R_THONG.description);
+			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		private function KonstantinCraftingEbonbloomItems2(ebonbloomType:int):void {
 			if (ebonbloomType == 1 || ebonbloomType == 2 || ebonbloomType == 3 || ebonbloomType == 4) { //Armor or robes
@@ -744,6 +775,7 @@ package classes.Scenes.NPCs
 			addButton(1, "Sword", KonstantinCraftingYggdrasilItems2, 2, null, null, weapons.WDBLADE.description);
 			addButton(2, "Bow", KonstantinCraftingYggdrasilItems2, 3, null, null, weaponsrange.WARDBOW.description);
 			addButton(3, "Staff", KonstantinCraftingYggdrasilItems2, 4, null, null, weapons.WDSTAFF.description);
+			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		private function KonstantinCraftingYggdrasilItems2(yggdrasilType:int):void {
 			player.destroyItems(useables.WT_BRAN, 1);
@@ -792,6 +824,89 @@ package classes.Scenes.NPCs
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
 			inventory.takeItem(itype, camp.returnToCampUseOneHour);
 		}
+		private function KonstantinCraftingIronItems():void {
+			outputText("What would you like for Konstantin to create?");
+			menu();
+			addButton(0, "Arrowheads", KonstantinCraftinArrowItems, 1);
+			//armor
+			//weapon
+			addButton(14, "Back", KonstantinMainCampMenu);
+		}
+		private function KonstantinCraftingMoonstoneItems():void {
+			outputText("What would you like for Konstantin to create?");
+			menu();
+			addButton(0, "Arrowheads", KonstantinCraftinArrowItems, 2);
+			//armor
+			//weapon
+			addButton(14, "Back", KonstantinMainCampMenu);
+		}
+		private function KonstantinCraftingSkymetalItems():void {
+			outputText("What would you like for Konstantin to create?");
+			menu();
+			addButton(0, "Arrowheads", KonstantinCraftinArrowItems, 3);
+			//armor
+			//weapon
+			addButton(14, "Back", KonstantinMainCampMenu);
+		}
+		private function KonstantinCraftingEbonbIngItems():void {
+			outputText("What would you like for Konstantin to create?");
+			menu();
+			addButton(0, "Arrowheads", KonstantinCraftinArrowItems, 4);
+			//armor
+			//weapon
+			addButton(14, "Back", KonstantinMainCampMenu);
+		}
+		private function KonstantinCraftinArrowItems(arrowsType:int):void {
+			clearOutput();
+			outputText("Konstantin nods and gets to work, heating up the metal and hammering it down with precision.\n\n");
+			outputText("\"<i>Well, I'm no elf or centaur but I sure know how to make some pretty good arrowheads. Pierce some demons with those will you?</i>\"\n\n");
+			outputText("He hands over to you the freshly crafted arrowheads in a small bag.\n\n");
+			var itype:ItemType;
+			var atype:String;
+			switch(arrowsType) {
+			case 1: //G.Sword
+				if (Crafting.BagSlot04 > 0) Crafting.BagSlot04 -= 1;
+				else player.destroyItems(useables.IRONORE, 1);
+				itype = useables.IARROWHEAD;
+				atype = "iron";
+				break;
+			case 2: //Sword
+				if (Crafting.BagSlot07 > 0) Crafting.BagSlot07 -= 1;
+				else player.destroyItems(useables.MOONSTO, 1);
+				itype = useables.MARROWHEAD;
+				atype = "moonstone";
+				break;
+			case 3: //Bow
+				if (Crafting.BagSlot08 > 0) Crafting.BagSlot08 -= 1;
+				else player.destroyItems(useables.SKYMETA, 1);
+				itype = useables.SARROWHEAD;
+				atype = "skymetal";
+				break;
+			case 4: //Staff
+				if (Crafting.BagSlot06 > 0) Crafting.BagSlot06 -= 1;
+				else player.destroyItems(useables.EBONING, 1);
+				itype = useables.EARROWHEAD;
+				atype = "ebonbloom";
+				break;
+			default:
+				outputText("Something bugged! Please report this bug to Ormael/Aimozg.");
+				itype = useables.IARROWHEAD;
+			}
+			outputText("<b>Got "+atype+" arrowheads!</b>\n\n");
+			inventory.takeItem(itype, camp.returnToCampUseOneHour);
+		}
+		
+		private function KonstantinCraftingThePhalluspear():void {
+			clearOutput();
+			player.destroyItems(weapons.SPEAR, 1);
+			player.destroyItems(consumables.L_DRAFT, 5);
+			player.destroyItems(useables.T_SSILK, 1);
+			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 3;
+			outputText("You bring the materials to Konstantine, and the smith nods, his face serious.\n\n");
+			outputText("\"<i>I’ll need a few hours,</i>\" he says simply. \"<i>Give me the materials, and I’ll craft this for you.</i>\" You hand Konstantine the materials, and he smiles wryly. \"<i>Honestly, I’m not entirely comfortable with this…kind of weapon.</i>\" He admits. \"<i>But I won’t deny the value of it in today’s world.</i>\"\n\n");
+			outputText("The tip glistens with a pink sheen, and you can tell that the blade poking out is razor-sharp. \"<i>Here it is,</i>\" he declares. \"<i>A Phalluspear. Freshly made. I hope you enjoy wielding it more than I did making it.</i>\" An odd thing to say, but you can hardly complain with the results!\n\n");
+			inventory.takeItem(weapons.PHALLUS, camp.returnToCampUseOneHour);
+		}
 		private function KonstantinCraftingDivineBarkArmor():void {
 			clearOutput();
 			outputText("Taking the pile of bark, he goes to his workbench, and starts turning the odd material into plates and armor pieces. Chemicals bathe the bark as he cuts and sews the softer pieces. From time to time you hear Konstantin curses as he has some troubles cutting the largest pieces into plates. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
@@ -818,7 +933,7 @@ package classes.Scenes.NPCs
 			player.destroyItems(useables.DBAPLAT, 1);
 			player.destroyItems(weapons.W_STAFF, 1);
 			outputText("Taking the pile of bark, he goes to his workbench, the magic staff in his other paw. Chemicals bathe the bark as he cuts it into smaller pieces, much more easier to manage. You can hear the bark melding with the staff, as the small plates of bark gradually envelope their wooden core. He takes each piece and wraps them in a careful pattern around the wooden staff, so not even a single bit of bark is wasted. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
-			outputText("\"<i>I’m not a magic expert, but I’m pretty sure that whatever arcane energy bound on that bark really meant serious business. I’m not sure if I want to try to do one of those things again. They’re fucking tedious to work with.  Anyway, here it is.</i>\"\n\n");
+			outputText("\"<i>I’m not a magic expert, but I’m pretty sure that whatever arcane energy bound in that bark really meant serious business. I’m not sure if I want to try to do one of those things again. They’re fucking tedious to work with.  Anyway, here it is.</i>\"\n\n");
 			outputText("He pulls a cloth off his work table, revealing the staff. The glowing white bark has been melded into the staff’s surface, while emerald vines growing out of the bark adorn the length of the staff. The zigzag on the top of the staff has been adorned with several white crystals. Beyond the physical appearance you can feel the mild purity resonating in the staff. The bear-smith nods as you pick up the staff.\n\n");
 			outputText("\"<i>I hope that you find this thing useful, [name]. All this magic will surely give you a bit of edge on any battlefield.</i>\"\n\n");
 			inventory.takeItem(weapons.PURITAS, camp.returnToCampUseOneHour);
@@ -828,7 +943,7 @@ package classes.Scenes.NPCs
 			player.destroyItems(useables.TBAPLAT, 1);
 			player.destroyItems(weapons.W_STAFF, 1);
 			outputText("Taking the pile of bark, he goes to his workbench, the magic staff in his other paw. Chemicals bathe the bark as he cuts it into smaller pieces, much more easier to manage. The occasional grabby tentacle is quickly put down by a well placed hammer hit. You can hear the bark melding with the staff, as the small plates of bark gradually envelope their wooden core. Surprisingly, the entire process takes less than an hour, and once it’s finished, Konstantin calls you so you can examine the finished piece.\n\n");
-			outputText("\"<i>I’m not a magic expert, but I’m pretty sure that whatever arcane energy bound on that bark really meant serious business. I’m not sure if I want to try to do one of those things again. They’re fucking tedious to work with.  Anyway, here it is.</i>\"\n\n");
+			outputText("\"<i>I’m not a magic expert, but I’m pretty sure that whatever arcane energy bound in that bark really meant serious business. I’m not sure if I want to try to do one of those things again. They’re fucking tedious to work with.  Anyway, here it is.</i>\"\n\n");
 			outputText("He pulls a cloth off his work table, revealing the staff. The white bark has been melded into the staff’s surface, while the tentacles growing out of the bark adorn the length of the staff. The zigzag on the top of the staff has been adorned with several white crystals. Beyond the physical appearance you can feel the mild corruption resonating in the staff. The bear-smith nods as you pick up the staff.\n\n");
 			outputText("\"<i>I hope that you find this thing useful, [name]. But be wary of those.</i>\" Konstantin says, pointing the tentacles. \"<i>As you’ve realized, they’re a bit too playful.</i>\"\n\n");
 			inventory.takeItem(weapons.DEPRAVA, camp.returnToCampUseOneHour);
@@ -852,6 +967,64 @@ package classes.Scenes.NPCs
 			outputText("\"<i>Well, I’m no magician, but I can tell you that whatever energy within the staff appears to have balanced out. The previous form of this staff has great power, but this power could only be used for a single type of magic. This restriction no longer exists.  Beyond that, the raw magical power in the staff has exceeded any other I’ve seen or worked with. I have no doubt it will be invaluable to your crusade.</i>\"\n\n");
 			outputText("You take the staff. From the first touch you feel the immense arcane power within the wood.\n\n");
 			inventory.takeItem(weapons.ASCENSU, camp.returnToCampUseFourHours);
+		}
+		
+		public function KonstantinSmeltingMenu():void {
+			clearOutput();
+			outputText("Konstantin eyes you expectantly.\n\n");
+			outputText("\"<i>So [name], do you have anything special for me today?</i>\"\n\n");
+			menu();
+			if (player.hasItem(useables.COP_ORE) && player.hasItem(useables.TIN_ORE)) addButton(0, "Copper/Tin", KonstantinSmeltingMenuCopperAndTin);
+			if (player.hasItem(useables.EBONBLO)) addButton(1, "Ebonbloom", KonstantinSmeltingMenuEbonbloom);
+			addButton(14, "No", KonstantinSmeltingMenuNo);
+		}
+		private function KonstantinSmeltingMenuCopperAndTin():void {
+			menu();
+			if (player.hasItem(useables.COP_ORE) && player.hasItem(useables.TIN_ORE)) addButton(0, "One", KonstantinSmeltingMenuProcess, "copper and tin", 1);
+			//if (player.hasItem(useables.COP_ORE, 5) && player.hasItem(useables.TIN_ORE, 5)) addButton(1, "Five", KonstantinSmeltingMenuProcess, "copper and tin", 2, true);
+			addButton(14, "Back", KonstantinSmeltingMenu);
+		}
+		private function KonstantinSmeltingMenuEbonbloom():void {
+			menu();
+			if (player.hasItem(useables.EBONBLO)) addButton(0, "One", KonstantinSmeltingMenuProcess, "ebonbloom", 3);
+			//if (player.hasItem(useables.EBONBLO, 5)) addButton(1, "Five", KonstantinSmeltingMenuProcess, "ebonbloom", 4, true);
+			addButton(14, "Back", KonstantinSmeltingMenu);
+		}
+		private function KonstantinSmeltingMenuNo():void {
+			outputText("No, not at the moment but you keep on looking. Hearing this, the bear smith nods and resumes his work.\n\n");
+			doNext(KonstantinMainCampMenu);
+		}
+		private function KonstantinSmeltingMenuProcess(material:String = "", craft:Number = 1, amount:Boolean = false):void {
+			outputText("The bear smith grabs the ore from you and examines it.\n\n");
+			outputText("\"<i>That...THAT is some genuine "+material+"! I will be able to forge some amazing stuff with this. The ingots are on me. You got the materials, after all. They’re yours… But if you want me to make something from them, I still need to get paid.</i>\"\n\n");
+			outputText("He gets to work immediately, gently sliding the "+material+" into his forge.. Once they’re all properly melted, he pours the molten "+material+" into an ingot cast. He looks down at the bar, smiling to himself as if anticipating the work he could do. Konstantin lays the mold on the ground, letting the air cool it. He looks at you before speaking. \"<i>Water in the bar would be bad, [name], best to let it air dry.</i>\" He waits by the bar and hands it to you once it's safe to touch.\n\n");
+			outputText("\"<i>Here, [name], freshly smelted "+material+".");
+			if (amount) outputText(" Of course, I would need more of it for armor or weapons but for now it'd do a great job for smaller items. I could still make arrowheads, or…</i>\" He scratches his chin in thought.\n\n");
+			else outputText("</i>\"\n\n");
+			var itype:ItemType;
+			switch(craft) {
+			case 1: //1 Copper+Tin ore
+				player.destroyItems(useables.COP_ORE, 1);
+				player.destroyItems(useables.TIN_ORE, 1);
+				itype = useables.BRONZEB;
+				break;
+			case 2: //5 Copper+Tin ores
+				player.destroyItems(useables.COP_ORE, 5);
+				player.destroyItems(useables.TIN_ORE, 5);
+				itype = useables.BRONZEB;
+				break;
+			case 3: //1 Ebonbloom
+				player.destroyItems(useables.EBONBLO, 1);
+				itype = useables.EBONING;
+				break;
+			case 4: //5 Ebonblooms
+				player.destroyItems(useables.EBONBLO, 5);
+				itype = useables.EBONING;
+				break;
+			default:
+				outputText("Something bugged! Please report this bug to Ormael/Aimozg.");
+			}
+			inventory.takeItem(itype, camp.returnToCampUseOneHour);
 		}
 		
 		public function KonstantinTinkeringMenu():void {
@@ -881,30 +1054,30 @@ package classes.Scenes.NPCs
 				outputText("Peeking inside, you manage to see the well hung bear lazily relaxing on his bed. Not working for the moment, he is currently reading. Since he is in the supposedly private space of his own tent, he has forego most clothing, wearing now only a set of undies that does little to hide the bulge between his legs. You almost gasp in surprise as he takes them off too and starts rubbing his meat.\n\n");
 				outputText("Then, a familiar voice startles you.\n\n");
 				outputText("\"<i>Hey, [name] you aren’t going to say hello?</i>\"\n\n");
-				outputText("Frozen in place, you face to look Konstantin, that smiles to you warmly, cock still on hand, not bothered a bit by your intrusion on his tent. Awkwardly, you try to explain yourself, but the stops you.\n\n");
+				outputText("Frozen in place, you face to look Konstantin, that smiles to you warmly, cock still in hand, not bothered a bit by your intrusion in his tent. Awkwardly, you try to explain yourself, but the stops you.\n\n");
 				outputText("\"<i>Don't worry, my friend. Having your company is always nice. Mind seating with me?</i>\" he offers,\n\n");
 				outputText("As you’re about to sit, your ursine friend points to you.\n\n");
 				outputText("\"<i>Hey, [name]. Better take out those.</i>\" he suggests \"<i>Well feel more fresh that way, and I don’t think that anyone is gonna come in and see us.</i>\"\n\n");
 				outputText("Nodding, you remove you clothing and leave it next to his bed, then you hop in and sit beside the naked bear, feeling the warm embrace of his fur on your [skin].\n\n");
-				outputText("\"<i>“So, you came here only to hand around naked with me?</i>\" he jokingly remarks.\n\n");
+				outputText("\"<i>\"So, you came here only to hand around naked with me?</i>\" he jokingly remarks.\n\n");
 				outputText("Blushing, you admit that you’d like to do what you were seeking, spend a good time with him, if he catches what you mean. He nods and smiles, enveloping you in one of his bear-hugs.\n\n");
-				outputText("\"<i>It’s okay, " + player.mf("man", "girl") + ". We always have those urges sooner or later. And, on those times is much more sooner than later. And, with you, I’d be more than happy.</i>\" he assures you. \"<i>So, what’s on your mind?</i>\"\n\n");
+				outputText("\"<i>It’s okay, " + player.mf("man", "girl") + ". We always have those urges sooner or later. And, in those times is much more sooner than later. And, with you, I’d be more than happy.</i>\" he assures you. \"<i>So, what’s on your mind?</i>\"\n\n");
 				flags[kFLAGS.KONSTANTIN_SEX_MENU] = 1;
 				dynStats("lus", 33);
 			}
 			menu();
 			addButton(0, "Give BJ", KonstantinSexMenuGiveBJ);
 			if (player.hasCock()) {
-				addButton(1, "Recive BJ", KonstantinSexMenuReciveBJ);
+				addButton(1, "Receive BJ", KonstantinSexMenuReciveBJ);
 				addButton(2, "69", KonstantinSexMenu69);
 			}
-			addButton(3, "Recive Anal", KonstantinSexMenuReciveAnal);
+			addButton(3, "Receive Anal", KonstantinSexMenuReciveAnal);
 			if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(4, "Hot Spring Fuck", KonstantinSexMenuHotSpringFuck);
 			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		public function KonstantinSexMenuGiveBJ():void {
 			clearOutput();
-			outputText("More relaxed now, and with the thick slab on your meat dangling on front of your eyes, you ask him if he’d like to receive some oral pleasure of you. The bear answers with a playful wink, and sits on the back of the bed, opening his legs wide, so he gives you a full view of the 22 inch monster and the huge nuts below.\n\n");
+			outputText("More relaxed now, and with the thick slab of meat dangling in front of your eyes, you ask him if he’d like to receive some oral pleasure of you. The bear answers with a playful wink, and sits on the back of the bed, opening his legs wide, so he gives you a full view of the 22 inch monster and the huge nuts below.\n\n");
 			outputText("\"<i>I’ll take that as a yes</i>\" you tell him.\n\n");
 			outputText("Wasting no time, you get closer until his cock is almost on your ");
 			if (player.hasMuzzle()) outputText("muzzle");
@@ -913,7 +1086,7 @@ package classes.Scenes.NPCs
 			if (player.hasMuzzle()) outputText("muzzle");
 			else outputText("nose");
 			outputText(" as wide as you can, and start sucking.\n\n");
-			outputText("To you surprise, even engulfing the mushroom shaped head is quite a task. Most of your mouth envelopes Konstantin’s cockhead,  a steady flow of salty pre flows from his cumslit encouraging  you to keep sucking. Inch by inch, you keep advancing, until you realize that you’ve got at least eight inches of dick on your mouth, and you aren’t even halfway! Pleased groans from Konstantin, couple with caresses to your cheeks and head motivate you to keep going.\n\n");
+			outputText("To you surprise, even engulfing the mushroom shaped head is quite a task. Most of your mouth envelopes Konstantin’s cockhead,  a steady flow of salty pre flows from his cumslit encouraging  you to keep sucking. Inch by inch, you keep advancing, until you realize that you’ve got at least eight inches of dick in your mouth, and you aren’t even halfway! Pleased groans from Konstantin, couple with caresses to your cheeks and head motivate you to keep going.\n\n");
 			outputText("With a bit of difficulty, you’re able to push his dick down your throat, getting almost all of it in. Seeing as that is all you can do by now, he grabs you by the shoulders and gently pushes you front and back, so you can relax and enjoy the feeling of his manhood in you.\n\n");
 			outputText("Not much later, Konstantin gasps and the way that his penis throbs inside you tell you that he’s close to coming. You slide his cock out, so only the head remains inside you, and play with his nuts, enticing them into flooding your mouth with his thick cream. You’re not left waiting too long, as his cumslit opens like a dam breaking, and a torrent of bear cum invades your mouth. Sealing your ");
 			if (player.hasMuzzle()) outputText("muzzle");
@@ -928,7 +1101,7 @@ package classes.Scenes.NPCs
 		public function KonstantinSexMenuReciveBJ():void {
 			clearOutput();
 			var x:int = player.cockThatFits(50, "length");
-			outputText("Lying on bed next of the bear-morph, the arousal running wild through your loins makes its presence painfully obvious as your [cock] arises at full length. Seems like having his large furred body rubbing against yours naked is too much. While still locked on the furred embrace, a familiar feeling deep down your balls appears, you rock hard erection bubbles pre in excitement. Konstantin notices that, and after giving it some tentative strokes with one of his huge hands, he offers:\n\n");
+			outputText("Lying on bed next of the bear-morph, the arousal running wild through your loins makes its presence painfully obvious as your [cock] arises at full length. Seems like having his large furred body rubbing against yours naked is too much. While still locked in the furred embrace, a familiar feeling deep down your balls appears, you rock hard erection bubbles pre in excitement. Konstantin notices that, and after giving it some tentative strokes with one of his huge hands, he offers:\n\n");
 			outputText("\"<i>You’re quite pent up, " + player.mf("boy", "girl") + ". Or is I’m too much to handle?</i>\" he light-heartedly jokes, his hand still rubbing your cock.\n\n");
 			outputText("Your only answer is an overstimulated gasp.\n\n");
 			outputText("\"<i>Then we’ll have to fix that.</i>\" he says with a toothy smile. \"<i>Besides, ");
@@ -941,7 +1114,7 @@ package classes.Scenes.NPCs
 			outputText(". Then, you feel the familiar sensation of something wet enveloping your penis, with the only difference that this time is fucking huge! Rising your head to look at what the bear is doing, you glimpse how his massive tongue slurps and drools over your erection.");
 			if (player.balls > 0) outputText(" From time to time, his hands grasp an caress your nuts, enticing the cum sloshing inside them.");
 			outputText("\n\nThen Konstantin decides that he had enough foreplay, and you feel his muzzle enveloping you cockhead. Inch by inch, you cock starts disappearing inside the bear’s warm maw, and the feeling of his tongue bathing and enveloping the cockflesh inside feels incredible. Between his huge size and his ursine muzzle, he has managed to get ");
-			if (player.cocks[x].cockLength >= 12) outputText("most of your cock on his mouth");
+			if (player.cocks[x].cockLength >= 12) outputText("most of your cock in his mouth");
 			else outputText("you whole cock in his mouth");
 			outputText(", ");
 			if (player.balls > 0) outputText("the tip of his tongue playing with your balls");
@@ -952,13 +1125,13 @@ package classes.Scenes.NPCs
 			outputText(" unloading the barely-contained load throught your cumslit, torrent that is soon flooding the bear’s maw.\n\n");
 			if (player.cumQ() > 1500) {
 				outputText("Konstantin gulps down you seed with a bit of difficulty as your torrent of cums never seems to subside. When it finally does, the bear has gotten a little more rounder from all the cum that he has drinked. Smiling, he gives your cockhead a final, slobbering kiss.\n\n");
-				outputText("\"<i>Whoa, I hadn't expected you to be so productive, on that area. Still, it was tasty.</i>\" the bear mutters, looking at his slightly larger belly.\n\n");
+				outputText("\"<i>Whoa, I hadn't expected you to be so productive, in that area. Still, it was tasty.</i>\" the bear mutters, looking at his slightly larger belly.\n\n");
 			}
 			else {
 				outputText("Konstantin gulps down your seed with ease, a contented look on his face when you finish. Once you’re done, he gives your cockhead a final, slobbering kiss.\n\n");
 				outputText("\"<i>That was more satisfying than I thought.</i>\" the bear mutters, licking the remainder cum from his lips.\n\n");
 			}
-			outputText("Still panting from your recent orgasm, you tell him that he was great, and that you’ll be happy to repeat if he feels on the mood.\n\n");
+			outputText("Still panting from your recent orgasm, you tell him that he was great, and that you’ll be happy to repeat if he feels in the mood.\n\n");
 			outputText("\"<i>Maybe later [name]. I’ll have to rest a bit until our next romp.</i>\" Konstantin answers.\n\n");
 			outputText("Nodding, you grab your clothes and return to your task, not without getting another loving hug from the large bear before going out of his tent.\n\n");
 			player.orgasm();
@@ -974,10 +1147,10 @@ package classes.Scenes.NPCs
 			outputText(" of yours wrapped around this,</i>\" Konstantin adds, pointing to his pre-leaking cock.\n\n");
 			outputText("You ogle for a moment as he keeps rubbing his meat with the dribbling pre, leaving his ursine manhood wet and slick, until your attention is drawn back by his voice.\n\n");
 			outputText("\"<i>That said, I can see from here that you’re as needy as me.</i>\" Black paw pads envelope your [cock], teasing his length and playing a bit with your cumslit. \"<i>So, I’d thought that it would be nice if this time both of us, you know, please each other.</i>\"\n\n");
-			outputText("Once you nod in agreement, Konstantin smiles and locks you again on his furred embrace. Carrying you on his arms, he sits on the bed and then drops you in front of him gently, so you’re facing each other. Then, his muzzle locks with ");
+			outputText("Once you nod in agreement, Konstantin smiles and locks you again in his furred embrace. Carrying you in his arms, he sits on the bed and then drops you in front of him gently, so you’re facing each other. Then, his muzzle locks with ");
 			if (player.hasMuzzle()) outputText("your snout");
 			else outputText("your lips");
-			outputText(" in a passionate kiss, and you relax on this position, as you have your ");
+			outputText(" in a passionate kiss, and you relax in this position, as you have your ");
 			if (player.tallness < 100) outputText("smaller ");
 			outputText("frame help by his strong, furred arms, while your [legs] lie splayed, resting over his, with your [cock] rubbing against his ");
 			if (player.cocks[x].cockLength >= 24) outputText("larger");
@@ -993,7 +1166,7 @@ package classes.Scenes.NPCs
 			outputText(" with his bear-like paw");
 			if (player.cocks[x].cockThickness >= 4) outputText(", albeit with some difficulty due the sheer girth of your combined erections");
 			outputText(". The feeling of his paw pads on your cock soon becomes slick, as the pre starts pouring from both of your penises.\n\n");
-			outputText("His handjob starts with a slow place, simply rubbing your [cock] against his own manhood, the sounds of flesh-hitting-flesh becoming increasingly wet as pre soaks your nethers. As he increases his rhythm, so does the fire within your loins, since Konstantine leaves no spot free. One second you have a large finger spreading your pucker and playing with your vulnerable prostate,  the other you have his other hand grabbing your cockhead and teasing your cumslit. During all this, his pillar of meat is continuously rubbing your own penis. You feel pretty close, and b the look on his face, seems like your ursine lover is feeling the same.\n\n");
+			outputText("His handjob starts with a slow place, simply rubbing your [cock] against his own manhood, the sounds of flesh-hitting-flesh becoming increasingly wet as pre soaks your nethers. As he increases his rhythm, so does the fire within your loins, since Konstantine leaves no spot free. One second you have a large finger spreading your pucker and playing with your vulnerable prostate,  the other you have his other hand grabbing your cockhead and teasing your cumslit. During all this, his pillar of meat is continuously rubbing your own penis. You feel pretty close, and by the look on his face, seems like your ursine lover is feeling the same.\n\n");
 			outputText("Then, before you can have your orgasm, Konstantine suddenly stops. Looking at him confused, he gives you a soft laugh,\n\n");
 			outputText("\"<i>Let me savor this, [name].</i>\" he explains, ");
 			if (player.hairLength > 0) outputText("tousling your [hair]");
@@ -1028,9 +1201,9 @@ package classes.Scenes.NPCs
 		}
 		public function KonstantinSexMenuReciveAnal():void {
 			clearOutput();
-			outputText("Feeling a bit bold, and enticed by the idea of being split by that tower of meat of his, you ask Konstantin if he’d like to fuck your ass this time. The bear smiles at you proposal, and before you can say anything else, you find yourself locked on his embrace.\n\n");
+			outputText("Feeling a bit bold, and enticed by the idea of being split by that tower of meat of his, you ask Konstantin if he’d like to fuck your ass this time. The bear smiles at you proposal, and before you can say anything else, you find yourself locked in his embrace.\n\n");
 			outputText("\"<i>So, you feel frisky today, [name]?</i>\" He says, while kissing your neck, his big tongue tickling your [skin]. Gasping at his touch, you nod.\n\n");
-			outputText("He takes you on his arms and puts you gently on the back of the bed, your arms and legs spread, and before you can say anything you feel your ");
+			outputText("He takes you in his arms and puts you gently on the back of the bed, your arms and legs spread, and before you can say anything you feel your ");
 			if (player.hasMuzzle()) outputText("muzzle");
 			else outputText("mouth");
 			outputText(" locked with his muzzle in a passionate kiss. Konstantin’s ursine frame towers over your body, his big hands caressing your [skin] tenderly. Down there, ");
@@ -1054,7 +1227,7 @@ package classes.Scenes.NPCs
 			outputText("\"<i>Relax, " + player.mf("man", "girl") + "</i>\" Konstantin says, breaking the kiss to give you a reassuring smile. \"<i>You’ll have it real soon.</i>\"\n\n");
 			outputText("He takes some of the pre leaking of his hulking member, and proceeds to coat it from head to base, until it has a slick sheen. Shortly after you feel the wetness announcing its presence at you pucker. Grabbing Konstantin by his shoulders, you beg him again to give it to you now. This time his only answer is a soft nod and a grunt, after which you feel something massive forcing its way inside you. ");
 			outputText("The cock made lube helps a lot, but you have to brace yourself to endure the anal assault that you’re having. Inch after inch, Konstantin's cock disappears inside you backdoor, your belly positively bulging with its outline, that moves further up as you take more of his meat. Panting, he keeps going, until, after a couple of vigorous thrusts, he slides in the last inches.\n\n");
-			outputText("Almost out of breath, you feel overwhelmed by the meaty spear on your insides, having to rely on Konstantin arms to support yourself. Then, between pants, you hear him saying:\n\n");
+			outputText("Almost out of breath, you feel overwhelmed by the meaty spear in your insides, having to rely on Konstantin arms to support yourself. Then, between pants, you hear him saying:\n\n");
 			outputText("\"<i>Liked it " + player.mf("man", "girl") + "?</i>\" Lacking energy to give a proper answer, you nod weakly. \"<i>Good...because now the real stuff starts.</i>\"\n\n");
 			outputText("Wait, what?\n\n");
 			outputText("Before you can inquire about what he mean, the warm mammoth of flesh inside you retreats slowly, leaving you with a suddenly awful emptiness. But Konstantin hasn’t came yet, as you only feel his pre leaking. You realize that his head is still lodged in you pucker.\n\n");
@@ -1082,7 +1255,7 @@ package classes.Scenes.NPCs
 			}
 			outputText(". Above, your ursine stud seems close too.\n\n");
 			outputText("\"<i>Fuck, [name] here it goes</i>\" Konstantin grunts.\n\n");
-			outputText("With that, he comes. A torrent of bear cum is released from his cumslit, and your swear that you can hear how the cum on his balls sloshes and flows to your butt, forced even wider by the sheer volume of the cream deluge that it’s experiencing. The delicious feeling of the cream flooding your innards feels even better than your own orgasm. The outline of his cock on your belly quickly disappears as the cream fills your belly. When he has finished, several loads later, you look positively pregnant, the cum that you didn’t manage to hold splashing onto your butt");
+			outputText("With that, he comes. A torrent of bear cum is released from his cumslit, and your swear that you can hear how the cum in his balls sloshes and flows to your butt, forced even wider by the sheer volume of the cream deluge that it’s experiencing. The delicious feeling of the cream flooding your innards feels even better than your own orgasm. The outline of his cock in your belly quickly disappears as the cream fills your belly. When he has finished, several loads later, you look positively pregnant, the cum that you didn’t manage to hold splashing onto your butt");
 			if (player.tailType > 0) outputText(" and [tail]");
 			outputText(". Konstantin then retreats his penis from you, letting some of his excess cum leak on the bed.\n\n");
 			outputText("\"<i>Damn, " + player.mf("boy", "girl") + ". That was quite a fuck</i>\" He laughs, still recovering from his orgasm.\n\n");
@@ -1095,7 +1268,7 @@ package classes.Scenes.NPCs
 		}
 		public function KonstantinSexMenuHotSpringFuck():void {
 			clearOutput();
-			outputText("With the desire of breaking routine a bit, you suggest Konstantin if he’d like to have a private bath with you on the hot spring. Enticed by the idea of a bath, the bear eagerly takes his things, while you do the same. When you’re starting to re-dress, he stops you again, saying.\n\n");
+			outputText("With the desire of breaking routine a bit, you suggest Konstantin if he’d like to have a private bath with you in the hot spring. Enticed by the idea of a bath, the bear eagerly takes his things, while you do the same. When you’re starting to re-dress, he stops you again, saying.\n\n");
 			outputText("\"<i>Huh, " + player.mf("man", "girl") + ", I don’t think that we need to.</i>\" he says, his clothes packed aside his naked form. \"<i>");
 			if (camp.getCampPopulation() >= 3) outputText("We’re among friends, and I’m pretty sure that they’ll take no mind if we stroll naked. Is not if we haven’t seen each other naked before");
 			else outputText("There is no one here besides us");

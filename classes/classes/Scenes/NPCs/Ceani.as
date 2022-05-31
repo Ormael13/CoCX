@@ -36,7 +36,7 @@ use namespace CoC;
 			}
 			player.takePhysDamage(damage, true);
 			if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed,1,bleeddura);
-			else player.createStatusEffect(StatusEffects.IzmaBleed,bleeddura,0,0,0);
+			else player.createStatusEffect(StatusEffects.IzmaBleed,SceneLib.combat.debuffsOrDoTDuration(bleeddura),0,0,0);
 		}
 		
 		public function moveHarpoonDancing():void {

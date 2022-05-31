@@ -12,9 +12,9 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Scenes.Areas.Desert.SandWitchScene;
-import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
@@ -299,6 +299,13 @@ public function saveScreen():void
 	mainView.nameBox.text = "";
 	mainView.nameBox.maxChars = 54;
 	mainView.nameBox.visible = true;
+	/*
+	//removing extra mutations from save
+	for each(var mutation:PerkType in IMutationsLib.mutationsArray("")){
+		if (player.perkv1(mutation) == 0) player.removePerk(mutation);
+	}
+	player.removePerk(IMutationsLib.MutationsTemplateIM);
+	 */
 
 	// var test; // Disabling this variable because it seems to be unused.
 	if (flags[kFLAGS.HARDCORE_MODE] > 0)
@@ -372,12 +379,9 @@ public function saveLoad(e:MouseEvent = null):void
 	//This is to clear the 'game over' block from stopping simpleChoices from working.  Loading games supercede's game over.
 
 	menu();
-	//addButton(0, "Save", saveScreen);
 	addButton(1, "Load", loadScreen);
 	addButton(2, "Delete", deleteScreen);
-	//addButton(5, "Save to File", saveToFile);
 	addButton(6, "Load File", openSave);
-	//addButton(8, "AutoSave: " + autoSaveSuffix, autosaveToggle);
 	addButton(14, "Back", EventParser.gameOver, true);
 
 	if (mainView.getButtonText( 0 ) == "Game Over")
@@ -621,7 +625,11 @@ public function savePermObject(isFile:Boolean):void {
 
 		saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG] = flags[kFLAGS.SHOW_SPRITES_FLAG];
 		saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
-		saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] = flags[kFLAGS.WATERSPORTS_ENABLED];
+		saveFile.data.flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS] = flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS];
+		saveFile.data.flags[kFLAGS.SCENEHUNTER_OTHER] = flags[kFLAGS.SCENEHUNTER_OTHER];
+		saveFile.data.flags[kFLAGS.SCENEHUNTER_DICK_SELECT] = flags[kFLAGS.SCENEHUNTER_DICK_SELECT];
+		saveFile.data.flags[kFLAGS.SCENEHUNTER_UNI_HERMS] = flags[kFLAGS.SCENEHUNTER_UNI_HERMS];
+        saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] = flags[kFLAGS.WATERSPORTS_ENABLED];
 
 		saveFile.data.flags[kFLAGS.LVL_UP_FAST] = flags[kFLAGS.LVL_UP_FAST];
 		saveFile.data.flags[kFLAGS.MUTATIONS_SPOILERS] = flags[kFLAGS.MUTATIONS_SPOILERS];
@@ -629,12 +637,12 @@ public function savePermObject(isFile:Boolean):void {
 		saveFile.data.flags[kFLAGS.INVT_MGMT_TYPE] = flags[kFLAGS.INVT_MGMT_TYPE];
 		saveFile.data.flags[kFLAGS.CHARVIEWER_ENABLED] = flags[kFLAGS.CHARVIEWER_ENABLED];
 		saveFile.data.flags[kFLAGS.CHARVIEW_STYLE] = flags[kFLAGS.CHARVIEW_STYLE];
+		saveFile.data.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] = flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN];
 		saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE] = flags[kFLAGS.USE_OLD_INTERFACE];
 		saveFile.data.flags[kFLAGS.USE_OLD_FONT] = flags[kFLAGS.USE_OLD_FONT];
 		saveFile.data.flags[kFLAGS.BACKGROUND_STYLE] = flags[kFLAGS.BACKGROUND_STYLE];
 		saveFile.data.flags[kFLAGS.IMAGEPACK_OFF] = flags[kFLAGS.IMAGEPACK_OFF];
 		saveFile.data.flags[kFLAGS.SPRITE_STYLE] = flags[kFLAGS.SPRITE_STYLE];
-		saveFile.data.flags[kFLAGS.SFW_MODE] = flags[kFLAGS.SFW_MODE];
 		saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] = flags[kFLAGS.WATERSPORTS_ENABLED];
 		saveFile.data.flags[kFLAGS.USE_12_HOURS] = flags[kFLAGS.USE_12_HOURS];
 		saveFile.data.flags[kFLAGS.USE_METRICS] = flags[kFLAGS.USE_METRICS];
@@ -684,6 +692,10 @@ public function loadPermObject():void {
 
 			if (saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG] != undefined) flags[kFLAGS.SHOW_SPRITES_FLAG] = saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG];
 			if (saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] != undefined) flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
+            if (saveFile.data.flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS] != undefined) flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS] = saveFile.data.flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS];
+            if (saveFile.data.flags[kFLAGS.SCENEHUNTER_OTHER] != undefined) flags[kFLAGS.SCENEHUNTER_OTHER] = saveFile.data.flags[kFLAGS.SCENEHUNTER_OTHER];
+            if (saveFile.data.flags[kFLAGS.SCENEHUNTER_DICK_SELECT] != undefined) flags[kFLAGS.SCENEHUNTER_DICK_SELECT] = saveFile.data.flags[kFLAGS.SCENEHUNTER_DICK_SELECT];
+            if (saveFile.data.flags[kFLAGS.SCENEHUNTER_UNI_HERMS] != undefined) flags[kFLAGS.SCENEHUNTER_UNI_HERMS] = saveFile.data.flags[kFLAGS.SCENEHUNTER_UNI_HERMS];
 
 			if (saveFile.data.flags[kFLAGS.MUTATIONS_SPOILERS] != undefined) flags[kFLAGS.MUTATIONS_SPOILERS] = saveFile.data.flags[kFLAGS.MUTATIONS_SPOILERS];
 			if (saveFile.data.flags[kFLAGS.NEWPERKSDISPLAY] != undefined) flags[kFLAGS.NEWPERKSDISPLAY] = saveFile.data.flags[kFLAGS.NEWPERKSDISPLAY];
@@ -691,12 +703,12 @@ public function loadPermObject():void {
 			if (saveFile.data.flags[kFLAGS.INVT_MGMT_TYPE] != undefined) flags[kFLAGS.INVT_MGMT_TYPE] = saveFile.data.flags[kFLAGS.INVT_MGMT_TYPE];
 			if (saveFile.data.flags[kFLAGS.CHARVIEWER_ENABLED] != undefined) flags[kFLAGS.CHARVIEWER_ENABLED] = saveFile.data.flags[kFLAGS.CHARVIEWER_ENABLED];
 			if (saveFile.data.flags[kFLAGS.CHARVIEW_STYLE] != undefined) flags[kFLAGS.CHARVIEW_STYLE] = saveFile.data.flags[kFLAGS.CHARVIEW_STYLE];
+			if (saveFile.data.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] != undefined) flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] = saveFile.data.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN];
 			if (saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE] != undefined) flags[kFLAGS.USE_OLD_INTERFACE] = saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE];
 			if (saveFile.data.flags[kFLAGS.USE_OLD_FONT] != undefined) flags[kFLAGS.USE_OLD_FONT] = saveFile.data.flags[kFLAGS.USE_OLD_FONT];
 			if (saveFile.data.flags[kFLAGS.BACKGROUND_STYLE] != undefined) flags[kFLAGS.BACKGROUND_STYLE] = saveFile.data.flags[kFLAGS.BACKGROUND_STYLE];
 			if (saveFile.data.flags[kFLAGS.IMAGEPACK_OFF] != undefined) flags[kFLAGS.IMAGEPACK_OFF] = saveFile.data.flags[kFLAGS.IMAGEPACK_OFF];
 			if (saveFile.data.flags[kFLAGS.SPRITE_STYLE] != undefined) flags[kFLAGS.SPRITE_STYLE] = saveFile.data.flags[kFLAGS.SPRITE_STYLE];
-			if (saveFile.data.flags[kFLAGS.SFW_MODE] != undefined) flags[kFLAGS.SFW_MODE] = saveFile.data.flags[kFLAGS.SFW_MODE];
 			if (saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] != undefined) flags[kFLAGS.WATERSPORTS_ENABLED] = saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED];
 			if (saveFile.data.flags[kFLAGS.USE_12_HOURS] != undefined) flags[kFLAGS.USE_12_HOURS] = saveFile.data.flags[kFLAGS.USE_12_HOURS];
 			if (saveFile.data.flags[kFLAGS.USE_METRICS] != undefined) flags[kFLAGS.USE_METRICS] = saveFile.data.flags[kFLAGS.USE_METRICS];
@@ -929,6 +941,9 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.dualWLXP = player.dualWLXP;
 		saveFile.data.dualWFLevel = player.dualWFLevel;
 		saveFile.data.dualWFXP = player.dualWFXP;
+		//Mining
+		saveFile.data.miningLevel = player.miningLevel;
+		saveFile.data.miningXP = player.miningXP;
 		//Herbalism
 		saveFile.data.herbalismLevel = player.herbalismLevel;
 		saveFile.data.herbalismXP = player.herbalismXP;
@@ -1073,6 +1088,14 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			saveFile.data.breastRows[i].fuckable = player.breastRows[i].fuckable;
 			saveFile.data.breastRows[i].fullness = player.breastRows[i].fullness;
 		}
+		/*
+		//removing extra mutations from save
+		for each(var mutation:PerkType in IMutationsLib.mutationsArray("")){
+			if (player.perkv1(mutation) == 0) player.removePerk(mutation);
+		}
+		player.removePerk(IMutationsLib.MutationsTemplateIM);
+		*/
+
 		//Set Perk Array
 		//Populate Perk Array
 		player.perks.forEach(function (perk:PerkClass, ...args):void {
@@ -1295,7 +1318,6 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 
 		// Keybinds
         saveFile.data.controls = CoC.instance.inputManager.SaveBindsToObj();
-        // TODO @Oxdeception recheck
 		saveFile.data.world = [];
 		saveFile.data.world.x = [];
 		for each(var npc:XXCNPC in XXCNPC.SavedNPCs){
@@ -1562,11 +1584,9 @@ private function unFuckSaveDataBeforeLoading(data:Object):void {
 public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 {
     var game:CoC = CoC.instance;
-    DungeonAbstractContent.dungeonLoc = 0;
-	//Not needed, dungeonLoc = 0 does this:	game.inDungeon = false;
-	DungeonAbstractContent.inDungeon = false; //Needed AGAIN because fuck includes folder. If it ain't broke, don't fix it!
-	DungeonAbstractContent.inRoomedDungeon = false;
-	DungeonAbstractContent.inRoomedDungeonResume = null;
+	inDungeon = false;
+	inRoomedDungeon = false;
+	inRoomedDungeonResume = null;
 
 	//Autosave stuff
 	if(player){
@@ -2041,6 +2061,15 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.dualWFLevel = 0;
 		else
 			player.dualWFLevel = saveFile.data.dualWFLevel;
+		//Mining
+		if (saveFile.data.miningXP == undefined)
+			player.miningXP = 0;
+		else
+			player.miningXP = saveFile.data.miningXP;
+		if (saveFile.data.miningLevel == undefined)
+			player.miningLevel = 0;
+		else
+			player.miningLevel = saveFile.data.miningLevel;
 		//Herbalism
 		if (saveFile.data.herbalismXP == undefined)
 			player.herbalismXP = 0;
@@ -2306,7 +2335,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 
 
 				// backwards compatibility
-				//TODO is there a better way to do this?
 				if(saveFile.data.vaginas[i].clitLength == undefined) {
 					player.vaginas[i].clitLength = VaginaClass.DEFAULT_CLIT_LENGTH;
 					trace("Clit length was not loaded, setting to default.");
@@ -2356,6 +2384,18 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		var hasLustyRegenPerk:Boolean = false;
 		var addedSensualLover:Boolean = false;
 
+		//This below is some weird witchcraft.... It doesn't update/swap anything, but somehow this fixes the id mismatch from mutations?
+		var mutationsShift:Array = [];
+		for each (var pperk1:PerkType in MutationsLib.mutationsArray("All",true)){
+			mutationsShift.push(pperk1.id);
+		}
+		for each (var pPerk2:IMutationPerkType in IMutationsLib.mutationsArray("All")){
+			mutationsShift.push(pPerk2.id);
+		}
+		mutationsShift.push(IMutationsLib.MutationsTemplateIM.id);
+		//Possibly ID updating.
+
+
 		//Populate Perk Array
 		for (i = 0; i < saveFile.data.perks.length; i++)
 		{
@@ -2385,19 +2425,12 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			}
 
 			var ptype:PerkType = PerkType.lookupPerk(id);
-
-			//This below is some weird witchcraft.... It doesn't update/swap anything, but somehow this fixes the id mismatch from mutations?
-			var mutationsShift:Array = [];
-			for each (var pperk1:PerkType in MutationsLib.mutationsArray("",true)){
-				mutationsShift.push(pperk1.id);
-			}
-
 			if (ptype == null) {
-				trace("ERROR: Unknown perk id=" + id);
+				CoC_Settings.error("Unknown perk id=" + id);
 				//(saveFile.data.perks as Array).splice(i,1);
 				// NEVER EVER EVER MODIFY DATA IN THE SAVE FILE LIKE THIS. EVER. FOR ANY REASON.
 			} else {
-				trace("Creating perk : " + ptype);
+//				trace("Creating perk : " + ptype);
 				var cperk:PerkClass = new PerkClass(ptype, value1, value2, value3, value4);
 
 				if (isNaN(cperk.value1)) {
@@ -2418,6 +2451,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				}
 				player.addPerkInstance(cperk);
 			}
+		}
+
+		for each (var mutations:IMutationPerkType in IMutationsLib.mutationsArray("")){
+			if (player.hasPerk(mutations) && !player.statStore.hasBuff("perk_" + mutations.id)) mutations.updateDynamicPerkBuffs(player);
 		}
 
 		// Fixup missing History: Whore perk IF AND ONLY IF the flag used to track the prior selection of a history perk has been set
@@ -2481,9 +2518,12 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		for (i = 0; i < saveFile.data.statusAffects.length; i++)
 		{
 			if (saveFile.data.statusAffects[i].statusAffectName == "Lactation EnNumbere") continue; // ugh...
-			var stype:StatusEffectType = StatusEffectType.lookupStatusEffect(saveFile.data.statusAffects[i].statusAffectName);
+			var name:String = saveFile.data.statusAffects[i].statusAffectName;
+			var stype:StatusEffectType = StatusEffectType.lookupStatusEffect(name);
 			if (stype == null){
-				CoC_Settings.error("Cannot find status effect '"+saveFile.data.statusAffects[i].statusAffectName+"'");
+				if (StatusEffectType.RemovedIds.indexOf(name) < 0) {
+					CoC_Settings.error("Cannot find status effect '" + name + "'");
+				}
 				continue;
 			}
 			player.createStatusEffect(stype,
@@ -2797,7 +2837,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			game.inputManager.LoadBindsFromObj(saveFile.data.controls);
 		}
 
-		// TODO @Oxdeception recheck
 		XXCNPC.unloadSavedNPCs();
 		if(saveFile.data.world == undefined){saveFile.data.world = [];}
 		if(saveFile.data.world.x == undefined){saveFile.data.world.x = [];}
@@ -2808,6 +2847,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			}
 		}
 
+		player.updateRacialAndPerkBuffs();
 		doNext(playerMenu);
 	}
 }

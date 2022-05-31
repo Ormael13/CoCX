@@ -12,7 +12,7 @@ package classes.Items.Weapons
 		
 		public function AngstDaggers() 
 		{
-			super("AngstD","AngstDaggers","Angst Daggers","an Angst Daggers","stab",21,3360,"A pair of small blades filled with anger. To fully unleash potential of those deadly blades is required 300+ speed and 60+ strength.", "Dual Small", "Dagger");
+			super("AngstD","AngstDaggers","Angst Daggers","a set of Angst Daggers","stab",21,3360,"A pair of small blades filled with anger. To fully unleash potential of those deadly blades is required 300+ speed and 60+ strength.", "Dual Small", "Dagger");
 		}
 		
 		override public function get attack():Number {

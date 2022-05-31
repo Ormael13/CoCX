@@ -31,7 +31,7 @@ public class Questlog extends BaseContent
 			outputText("\n<b>End of Reign:</b> ");
 			if (flags[kFLAGS.LETHICE_DEFEATED] > 1) outputText("Completed (Reward taken)");
 			else if (SceneLib.dungeons.checkLethiceStrongholdClear()) outputText("Completed");
-			else if (flags[kFLAGS.D3_DISCOVERED] > 0) outputText("In Progress (to complete this quest PC must beat Basilisk Boss even if they managed to pass him by on first run throu the dungeon)");
+			else if (flags[kFLAGS.D3_DISCOVERED] > 0) outputText("In Progress (to complete this quest PC must beat either Basilisk Boss or Mirror Demon)");
 			else outputText("Not Started");
 			outputText("\n\n<u><b>Side Quests</b></u>");
 			outputText("\n<b>Friend of the Sand Witches:</b> ");
@@ -142,188 +142,88 @@ public class Questlog extends BaseContent
 			}
 			//3rd floor
 			//4th floor
-			if (SceneLib.dungeons.checkEbonLabyrinthClear() && flags[kFLAGS.EBON_LABYRINTH] < 3) addButton(9, "Ebon Labyrinth", takeRewardForEbonLabyrinth50th).hint("For first 50th rooms");
-			if (flags[kFLAGS.EBON_LABYRINTH] == 4) addButton(9, "Ebon Labyrinth", takeRewardForEbonLabyrinth150th).hint("For first 150th rooms");
-			if (flags[kFLAGS.EBON_LABYRINTH] == 6) addButton(9, "Ebon Labyrinth", takeRewardForEbonLabyrinth300th).hint("For first 300th rooms");
-			if (flags[kFLAGS.EBON_LABYRINTH] == 8) addButton(9, "Ebon Labyrinth", takeRewardForEbonLabyrinth450th).hint("For first 450th rooms");
-			if (flags[kFLAGS.EBON_LABYRINTH] == 10) addButton(9, "Ebon Labyrinth", takeRewardForEbonLabyrinth600th).hint("For first 600th rooms");
-			if (SceneLib.dungeons.checkHiddenCaveClear() && flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 6) addButton(10, "Hidden Cave", takeRewardForHiddenCave);
+            if (flags[kFLAGS.EBON_LABYRINTH])
+                addButtonIfTrue(9, "Ebon Labyrinth", takeRewardForEL,
+                    "Req. to reach room " + SceneLib.dungeons.nextAwardEL() + ".",
+                    SceneLib.dungeons.checkEbonLabyrinthNotAwarded());
+            else addButtonDisabled(9, "EL", "Not discovered yet.");
+            if (SceneLib.dungeons.checkHiddenCaveClear() && flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 6) addButton(10, "Hidden Cave", takeRewardForHiddenCave);
 			if (SceneLib.dungeons.checkHiddenCaveHiddenStageClear() && flags[kFLAGS.HIDDEN_CAVE_BOSSES] < 3) addButton(10, "Hidden C.(HS)", takeRewardForHiddenCaveHiddenStage).hint("Hidden Cave (Hidden Stage bonus)");
 			if (SceneLib.dungeons.checkDenOfDesireClear() && flags[kFLAGS.DEN_OF_DESIRE_QUEST] < 2) addButton(11, "Den of Desire", takeRewardForDenOfDesire);
 			//button 12 - ???
 			//button 13 - Lia undersea chtulu dungeon
 			addButton(14, "Back", playerMenu);
 		}
-		
-		public function takeRewardForFactory():void {
+
+        public function reward(perkPoints:int = 0, statPoints:int = 0):void {
 			clearOutput();
 			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 2 perk points and 10 stat points</b>");
-			player.perkPoints = player.perkPoints + 2;
-			player.statPoints = player.statPoints + 10;
+			outputText("<b>Gained");
+            if (perkPoints > 0) outputText(" " + perkPoints + "perk point" + (perkPoints > 1 ? "s" : ""));
+            if (perkPoints > 0 && statPoints > 0) outputText(" and");
+            if (statPoints > 0) outputText(" " + statPoints + "stat point" + (statPoints > 1 ? "s" : ""));
+            outputText((perkPoints == 0 && statPoints == 0) ? " nothing.</b>" : ".</b>");
+            player.perkPoints += perkPoints;
+            player.statPoints += statPoints;
 			statScreenRefresh();
-			flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] = 2;
 			doNext(accessQuestlogMainMenu);
+        }
+        //FUCK, STOP COPYING THE SAME CODE OVER AND OVER
+
+		public function takeRewardForFactory():void {
+			flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] = 2;
+            reward(2, 10);
 		}
 		public function takeRewardForDeepCave():void {
 			clearOutput();
-			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 4 perk points and 20 stat points</b>");
-			player.perkPoints = player.perkPoints + 4;
-			player.statPoints = player.statPoints + 20;
-			statScreenRefresh();
 			flags[kFLAGS.DEFEATED_ZETAZ] = 2;
-			doNext(accessQuestlogMainMenu);
+            reward(4, 20);
 		}
 		public function takeRewardForStronghold():void {
-			clearOutput();
-			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 6 perk points and 30 stat points</b>");
-			player.perkPoints = player.perkPoints + 6;
-			player.statPoints = player.statPoints + 30;
-			statScreenRefresh();
 			flags[kFLAGS.LETHICE_DEFEATED] = 2;
-			doNext(accessQuestlogMainMenu);
+            reward(6, 30);
 		}
 		public function takeRewardForSandCave():void {
-			clearOutput();
-			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 1 perk point and 5 stat points</b>");
-			player.perkPoints = player.perkPoints + 1;
-			player.statPoints = player.statPoints + 5;
-			statScreenRefresh();
 			flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] = 2;
-			doNext(accessQuestlogMainMenu);
+            reward(1, 5);
 		}
 		public function takeRewardForPhoenixTower():void {
-			clearOutput();
-			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 2 perk points and 10 stat points</b>");
-			player.perkPoints = player.perkPoints + 2;
-			player.statPoints = player.statPoints + 10;
-			statScreenRefresh();
 			flags[kFLAGS.CLEARED_HEL_TOWER] = 2;
-			doNext(accessQuestlogMainMenu);
+            reward(2, 10);
 		}
 		public function takeRewardForBeeHive():void {
-			clearOutput();
-			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 2 perk points and 10 stat points</b>");
-			player.perkPoints = player.perkPoints + 2;
-			player.statPoints = player.statPoints + 10;
-			statScreenRefresh();
 			flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] = 3;
-			doNext(accessQuestlogMainMenu);
+            reward(2, 10);
 		}
 		public function takeRewardForRiverDungeon1stFloor():void {
-			clearOutput();
-			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 1 perk point and 5 stat points</b>");
-			player.perkPoints = player.perkPoints + 1;
-			player.statPoints = player.statPoints + 5;
-			statScreenRefresh();
 			player.createStatusEffect(StatusEffects.RiverDungeonFloorRewards,1,0,0,0);
+            reward(1, 5);
 			doNext(accessQuestlogMainMenu);
 		}
 		public function takeRewardForRiverDungeon2ndFloor():void {
-			clearOutput();
-			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 1 perk point and 5 stat points</b>");
-			player.perkPoints = player.perkPoints + 1;
-			player.statPoints = player.statPoints + 5;
-			statScreenRefresh();
 			player.addStatusValue(StatusEffects.RiverDungeonFloorRewards,1,1);
-			doNext(accessQuestlogMainMenu);
+            reward(1, 5);
 		}
 		public function takeRewardForRiverDungeon3rdFloor():void {
-			clearOutput();
-			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 1 perk point and 5 stat points</b>");
-			player.perkPoints = player.perkPoints + 1;
-			player.statPoints = player.statPoints + 5;
-			statScreenRefresh();
 			player.addStatusValue(StatusEffects.RiverDungeonFloorRewards,1,1);
-			doNext(accessQuestlogMainMenu);
+            reward(1, 5);
 		}
-		public function takeRewardForEbonLabyrinth50th():void {
-			clearOutput();
-			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 1 perk points and 5 stat points</b>");
-			player.perkPoints = player.perkPoints + 1;
-			player.statPoints = player.statPoints + 5;
-			statScreenRefresh();
-			flags[kFLAGS.EBON_LABYRINTH] = 3;
-			doNext(accessQuestlogMainMenu);
-		}
-		public function takeRewardForEbonLabyrinth150th():void {
-			clearOutput();
-			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 1 perk points and 5 stat points</b>");
-			player.perkPoints = player.perkPoints + 1;
-			player.statPoints = player.statPoints + 5;
-			statScreenRefresh();
-			flags[kFLAGS.EBON_LABYRINTH] = 5;
-			doNext(accessQuestlogMainMenu);
-		}
-		public function takeRewardForEbonLabyrinth300th():void {
-			clearOutput();
-			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 1 perk points and 5 stat points</b>");
-			player.perkPoints = player.perkPoints + 1;
-			player.statPoints = player.statPoints + 5;
-			statScreenRefresh();
-			flags[kFLAGS.EBON_LABYRINTH] = 7;
-			doNext(accessQuestlogMainMenu);
-		}
-		public function takeRewardForEbonLabyrinth450th():void {
-			clearOutput();
-			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 1 perk points and 5 stat points</b>");
-			player.perkPoints = player.perkPoints + 1;
-			player.statPoints = player.statPoints + 5;
-			statScreenRefresh();
-			flags[kFLAGS.EBON_LABYRINTH] = 9;
-			doNext(accessQuestlogMainMenu);
-		}
-		public function takeRewardForEbonLabyrinth600th():void {
-			clearOutput();
-			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 1 perk points and 5 stat points</b>");
-			player.perkPoints = player.perkPoints + 1;
-			player.statPoints = player.statPoints + 5;
-			statScreenRefresh();
-			flags[kFLAGS.EBON_LABYRINTH] = 11;
+		public function takeRewardForEL():void {
+			flags[kFLAGS.EBON_LABYRINTH] = SceneLib.dungeons.nextAwardEL();
+            reward(1, 5);
 			doNext(accessQuestlogMainMenu);
 		}
 		public function takeRewardForHiddenCave():void {
-			clearOutput();
-			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 1 perk point and 5 stat points</b>");
-			player.perkPoints = player.perkPoints + 1;
-			player.statPoints = player.statPoints + 5;
-			statScreenRefresh();
 			flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] = 6;
-			doNext(accessQuestlogMainMenu);
+            reward(1, 5);
 		}
 		public function takeRewardForHiddenCaveHiddenStage():void {
-			clearOutput();
-			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 1 perk point and 5 stat points</b>");
-			player.perkPoints = player.perkPoints + 1;
-			player.statPoints = player.statPoints + 5;
-			statScreenRefresh();
 			flags[kFLAGS.HIDDEN_CAVE_BOSSES] = 3;
-			doNext(accessQuestlogMainMenu);
+            reward(1, 5);
 		}
 		public function takeRewardForDenOfDesire():void {
-			clearOutput();
-			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 3 perk points and 15 stat points</b>");
-			player.perkPoints = player.perkPoints + 3;
-			player.statPoints = player.statPoints + 15;
-			statScreenRefresh();
 			flags[kFLAGS.DEN_OF_DESIRE_QUEST] = 2;
-			doNext(accessQuestlogMainMenu);
+            reward(3, 15);
 		}
 	}
 }

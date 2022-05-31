@@ -91,10 +91,10 @@ public class MainMenu extends BaseContent {
 		//Disclaimer
 		outputText("\n\n<b><u>DISCLAIMER</u></b>");
 		outputText("<li>There are many strange and odd fetishes contained in this flash.  Peruse at own risk.</li>");
-		outputText("<li>Please be 18 or the legal age to view porn before playing. If not, enable SFW Mode.</li>");
+		outputText("<li>Please be 18 or the legal age to view porn before playing.</li>");
 		outputText("<li>Try to keep your keyboard clean.  Think of the children!</li>");
 		//Other Info
-		outputText("\n<b>Fall of Eden</b> is worth a try too ^^");
+		//outputText("\n<b>Fall of Eden</b> is worth a try too ^^");	//Does it even have any progress?
 		if (debug)
 			outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>");
 		if (flags[kFLAGS.SHOW_SPRITES_FLAG])
@@ -107,6 +107,8 @@ public class MainMenu extends BaseContent {
 			outputText("\n\n<b>Eternal holiday enabled.</b>");
 		if (isEaster())
 			outputText("\n\n<b>It's Easter!  Enjoy the eggs!</b>");
+		if (isAprilFools())
+			outputText("\n\n<b>It's April Fools!</b>");
 		if (isValentine())
 			outputText("\n\n<b>It's Valentine's!</b>");
 		if (isHalloween())
@@ -124,8 +126,8 @@ public class MainMenu extends BaseContent {
 		outputText("\n\n<b>Edited by:</b> Ashi, SoS, Prisoner416, Zeikfried, et al"); //Edited By
 		outputText("\n\n<b>Created by:</b> Fenoxo\n"); //The Original Creator
 		//Github for Mod
-		outputText("\n<b>Modded Game Source Code:</b> <u><a href='https://github.com/Ormael7/Corruption-of-Champions'>https://github.com/Ormael7/Corruption-of-Champions</a></u>");
-		outputText("\n<b>Modded Game Bug Tracker:</b> <u><a href='https://github.com/Ormael7/Corruption-of-Champions/issues'>https://github.com/Ormael7/Corruption-of-Champions/issues</a></u>");
+		outputText("\n<b>Modded Game Source Code:</b> <u><a href='https://github.com/Ormael13/CoCX'>https://github.com/Ormael13/CoCX</a></u>");
+		outputText("\n<b>Modded Game Bug Tracker:</b> <u><a href='https://github.com/Ormael13/CoCX/issues'>https://github.com/Ormael13/CoCX/issues</a></u>");
 		//Github for Original
 		outputText("\n\n<b>Original Game Source Code:</b> <u><a href='https://github.com/OXOIndustries/Corruption-of-Champions'>https://github.com/OXOIndustries/Corruption-of-Champions</a></u>");
 	}
@@ -146,10 +148,11 @@ public class MainMenu extends BaseContent {
 		outputText("</ul>");
 		outputText("<b>Game Mod Angels:</b>\n");
 		outputText("<ul>");
-		outputText("<li> Aimong</li>");
+		outputText("<li> Aimozg</li>");
 		outputText("<li> Liadri</li>");
 		outputText("<li> Pyromania</li>");
 		outputText("<li> Jtecx</li>");
+		outputText("<li> Svalkash</li>");
 		outputText("<li> Zetta</li>\n");
 		outputText("<li> Zavos/Zevos</li>");
 		outputText("<li> Xana</li>");
@@ -179,11 +182,12 @@ public class MainMenu extends BaseContent {
 		 outputText("<li> Prisoner416</li>");
 		 outputText("<li> Chibodee</li>");
 		 outputText("");*/
-		outputText("<b>Graphical Prettiness:</b>");
+		outputText("<b>Graphical & Code Prettiness:</b>");
 		outputText("<ul>");
         outputText("<li> Dasutin (Background Images)</li>");
 		outputText("<li> Invader (Button Graphics, Font, and Other Hawtness)</li>");
 		outputText("<li> Jtecx (Menu Reworks - PerkSimplified, MutationsDB, InvMgmt(Mobile), FastLvl, SFMenu, ElemMenu)</li>");
+		outputText("<li> Svalkash (SceneHunter)</li>");
 		outputText("</ul>");
 		outputText("<b>Supplementary Events:</b>");
 		outputText("<ul>");
@@ -194,6 +198,7 @@ public class MainMenu extends BaseContent {
 		outputText("<li> Lord Snakebite (Centipede TF, part of Ghost TF rework, Mitzi & Excellia X-packs)</li>");
 		outputText("<li> T0uchMe (part of Ghost TF rework)</li>");
 		outputText("<li> Pyromania (Zenji the troll. Various typo revisions, editing and proofreading.)</li>");
+		outputText("<li> Lunaraia (Adaptations slot for internal mutation name idea)</li>");
 		outputText("<li> Apex (part of Michiko)</li>");
 		outputText("<li> Dxasmodeus (Tentacles, Worms, Giacomo)</li>");
 		outputText("<li> Kirbster (Christmas Bunny Trap)</li>");

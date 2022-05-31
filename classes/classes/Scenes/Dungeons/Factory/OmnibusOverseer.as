@@ -6,18 +6,15 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
-import classes.Scenes.Dungeons.Factory;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class OmnibusOverseer extends Monster
 	{
-		public var factory:Factory = new Factory();
-		private var temp:Number = 0;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			factory.winAgainstOmnibus();
+			SceneLib.dungeons.factory.winAgainstOmnibus();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -26,7 +23,7 @@ public class OmnibusOverseer extends Monster
 				outputText("\n\nYour foe doesn't seem to care...");
 				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				factory.doLossOmnibus();
+				SceneLib.dungeons.factory.doLossOmnibus();
 			}
 		}
 		
@@ -45,7 +42,7 @@ public class OmnibusOverseer extends Monster
 			if (rand(2) == 0)
 				outputText("The demoness grips her sizable breasts and squeezes, spraying milk at you.\n");
 			else outputText("Your foe curls up to pinch her nipples, tugging hard and squirting milk towards you.\n");
-			if ((player.spe > 50 && rand(4) == 0) || (player.findPerk(PerkLib.Evade) >= 0 && rand(3) == 0) || (player.findPerk(PerkLib.Misdirection) >= 0 && rand(4) == 0 && player.armorName == "red, high-society bodysuit")) {
+			if ((player.spe > 50 && rand(4) == 0) || (player.hasPerk(PerkLib.Evade) && rand(3) == 0) || (player.hasPerk(PerkLib.Misdirection) && rand(4) == 0 && player.armorName == "red, high-society bodysuit")) {
 				outputText("You sidestep the gushing fluids.");
 			}
 			//You didn't dodge
@@ -123,6 +120,7 @@ public class OmnibusOverseer extends Monster
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 16, 0, 0, 0);
 			checkMonster();
 		}
 		

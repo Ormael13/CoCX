@@ -1,27 +1,74 @@
 ﻿package classes
 {
 import classes.BodyParts.IOrifice;
+import classes.internals.EnumValue;
 import classes.internals.Utils;
 
 public class VaginaClass implements IOrifice {
+	
+	public static const Types:/*EnumValue*/Array = [];
 
         public static const DEFAULT_CLIT_LENGTH:Number = 0.5;
 		
 		public static const HUMAN:int           = 0;
+		EnumValue.add(Types, HUMAN, "HUMAN", {
+			name: "human"
+		});
 		public static const EQUINE:int          = 1;
+		EnumValue.add(Types, EQUINE, "EQUINE", {
+			name: "equine"
+		});
 		//dragon	= 2;
 		//cat		= 3;
 		//			= 4;
 		public static const BLACK_SAND_TRAP:int = 5;
+		EnumValue.add(Types, BLACK_SAND_TRAP, "BLACK_SAND_TRAP", {
+			name: "sand trap"
+		});
 		public static const CAVE_WYRM:int 		= 6;
+		EnumValue.add(Types, CAVE_WYRM, "CAVE_WYRM", {
+			name: "cave wyrm"
+		});
 		public static const VENOM_DRIPPING:int 	= 7;
+		EnumValue.add(Types, VENOM_DRIPPING, "VENOM_DRIPPING", {
+			name: "venom dripping"
+		});
 		public static const MANTICORE:int 		= 8;
+		EnumValue.add(Types, MANTICORE, "MANTICORE", {
+			name: "manticore"
+		});
 		public static const CANCER:int 			= 9;
+		EnumValue.add(Types, CANCER, "CANCER", {
+			name: "cancer"
+		});
 		public static const DEMONIC:int 		= 10;
+		EnumValue.add(Types, DEMONIC, "DEMONIC", {
+			name: "demonic"
+		});
 		public static const ALRAUNE:int 		= 11;
+		EnumValue.add(Types, ALRAUNE, "ALRAUNE", {
+			name: "alraune"
+		});
 		public static const SCYLLA:int 			= 12;
+		EnumValue.add(Types, SCYLLA, "SCYLLA", {
+			name: "scylla"
+		});
 		public static const NAGA:int 			= 13;
+		EnumValue.add(Types, NAGA, "NAGA", {
+			name: "naga"
+		});
 		public static const MINDBREAKER:int 	= 14;
+		EnumValue.add(Types, MINDBREAKER, "MINDBREAKER", {
+			name: "mindbreaker"
+		});
+		public static const SHARK:int 			= 15;
+		EnumValue.add(Types, SHARK, "SHARK", {
+			name: "shark"
+		});
+		public static const RAIJU:int 			= 16;
+		EnumValue.add(Types, RAIJU, "RAIJU", {
+			name: "raiju"
+		});
 		
 		public static const WETNESS_DRY:int       = 0;
 		public static const WETNESS_NORMAL:int    = 1;
@@ -122,7 +169,6 @@ public class VaginaClass implements IOrifice {
 			return 10000;
 		}
 
-		//TODO call this in the setter? With new value > old value check?
 		/**
 		 * Resets the recovery counter.
 		 * The counter is used for looseness recovery over time, a reset usualy occurs when the looseness increases.

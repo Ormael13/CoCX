@@ -8,11 +8,11 @@ import classes.StatusEffects;
 public class LifestealEnchantmentSpell extends AbstractBloodSpell {
 	public function LifestealEnchantmentSpell() {
 		super(
-				"Lifesteal Enchantment",
-				"Lifesteal Enchantment will add lifesteal effect to your weapons.  ",
-				TARGET_SELF,
-				TIMING_LASTING,
-				[TAG_BUFF]
+			"Lifesteal Enchantment",
+			"Lifesteal Enchantment will add lifesteal effect to your weapons.  ",
+			TARGET_SELF,
+			TIMING_LASTING,
+			[TAG_BUFF]
 		);
 		baseHpCost = 500;
 	}

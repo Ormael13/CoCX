@@ -6,8 +6,8 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.WeaponLib;
 import classes.PerkLib;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
 import classes.StatusEffects;
+import classes.VaginaClass;
 
 public class MinotaurKingScenes extends BaseContent
 	{
@@ -16,103 +16,95 @@ public class MinotaurKingScenes extends BaseContent
 
 		}
 
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
 		public function encounterMinotaurKing():void
 		{
 			clearOutput();
-
 			outputText("The moment you step away from the defeated demon, Lethice’s assembled host parts like some kind of tentacled sea, revealing a path that would lead directly to the Queen of Corruption were it not barred by a form out of nightmares. A minotaur like none you’ve ever seen bars your path - the last obstacle before a face-to-face encounter with the cause of so much discontent.");
 			outputText("\n\nEven for one of the bovine beast-men, he’s a giant among giants. His broad shoulders seem ready to scrape the gilding from the cavernous chamber. His crimson-rimmed eyes glare down like a pair of low-burning coals. Stretching from end to end, a cow-girl could barely touch each end of his wide-spread horns. If it weren’t for the three feet of glistening, freshly-fucked maleness jutting from between his legs, he’d look almost regal.");
-			outputText("\n\n<i>“You’re strong, Champion, but your quest ends here,”</i> the brute promises. He snorts and extends a hand toward the crowd. <i>“Excellia, my weapon.”</i>");
+			outputText("\n\n<i>\"You’re strong, Champion, but your quest ends here,\"</i> the brute promises. He snorts and extends a hand toward the crowd. <i>\"Excellia, my weapon.\"</i>");
 			outputText("\n\nA vision of curves and ripe sexuality emerges from the curtain of wet and wiggling flesh. She’s at least part cow, with upraised horns and a happily flicking tail - to say nothing of her egregiously supple breasts, still leaking milk from a recent suckle or their own overtly-abundant production. In her hands is a massive axe; it’s too large to be wielded by human hands.");
 			if (flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] != 0) outputText(" Even Isabella would struggle to wield such a weapon.");
 			else if (player.hasStatusEffect(StatusEffects.CampMarble)) outputText(" Even Marble would struggle to wield such a weapon");
             else if (SceneLib.helFollower.followerHel()) outputText(" Even Helia would struggle to wield such a weapon.");
             outputText(" This poor cow-slut, this ‘Excellia’ can barely to bring it to her lord without tipping forward onto her too-large tits.");
 			outputText("\n\nTaking the gleaming metal shaft from his smaller slave, the proud beast stamps the butt-end into the worked stone floor, creating a spiderweb of cracks from brute strength alone.");
-			outputText("\n\n<i>“Careful not to damage my property, oh King of the Minotaurs. Remember within whose feast-hall you dwell,”</i> a chilly, yet feminine voice calls.");
-			outputText("\n\nEars twitching in irritation, the royal brute inclines his head ever so slightly. <i>“Your property, yes. I’ll not damage your precious floors, but this one... this Champion... "+ player.mf("he", "she") +" will be mine.”</i> The corners of the minotaur’s lips quirk upward in time with his tremendous erection. <i>“Do not make this more painful than it has to be.”</i>");
-			outputText("\n\nYou’ve got a metric fuckton of muscle in between you and the end of this sick, twisted journey. Once more, you’ll have to fight.");
+			outputText("\n\n<i>\"Careful not to damage my property, oh King of the Minotaurs. Remember within whose feast-hall you dwell,\"</i> a chilly, yet feminine voice calls.");
+			outputText("\n\nEars twitching in irritation, the royal brute inclines his head ever so slightly. <i>\"Your property, yes. I’ll not damage your precious floors, but this one... this Champion... "+ player.mf("he", "she") +" will be mine.\"</i> The corners of the minotaur’s lips quirk upward in time with his tremendous erection. <i>\"Do not make this more painful than it has to be.\"</i>");
+			outputText("\n\nYou’ve got a metric fuckton of muscle in between you, and the end of this sick, twisted journey. Once more, you’ll have to fight.");
 
 			player.createStatusEffect(StatusEffects.MinotaurKingMusk, 0, 0, 0, 0);
 			startCombat(new MinotaurKing());
 		}
 
-		public function theKingIsDeadLongLiveTheKing(hpVictory:Boolean):void
+		public function theKingIsDeadLongLiveTheKing():void
 		{
-			flags[kFLAGS.MINOTAURKING_DEFEATED] = 1;
-			
+			if (!recalling) {
+				flags[kFLAGS.MINOTAURKING_DEFEATED] = 1;
+				outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
+			}
 			//Cannot be defeated by HP loss, so only writing lust win texts.
 			clearOutput();
 			outputText("The King’s axe clatters on noisily on the ground. A gasp runs through the corrupt host as one of their mightiest champions drops to his knees, staring at his dick and furiously pumping it with both hands. Nearly insensate with need, he topples over, humping his own hands with so much enthusiasm that he’s lost interest in anything but immediate sexual gratification.");
-			outputText("\n\nA slow, quiet clap begins from the rear of the room. <i>“Well done, Champion... quite well done.”</i> The Queen herself is smiling at you, though her eyes are as cold as dark ice on a winter’s eve. <i>“Avail yourself of your prizes. It wouldn’t be sporting to take you on while you’re all worked up. My underling’s loyal retainers might get the wrong idea about my strength.”</i> Her eyes flash dangerously.");
+			outputText("\n\nA slow, quiet clap begins from the rear of the room. <i>\"Well done, Champion... quite well done.\"</i> The Queen herself is smiling at you, though her eyes are as cold as dark ice on a winter’s eve. <i>\"Avail yourself of your prizes. It wouldn’t be sporting to take you on while you’re all worked up. My underling’s loyal retainers might get the wrong idea about my strength.\"</i> Her eyes flash dangerously.");
 			outputText("\n\nOf course. If she preyed on you while you were still recovering from the minotaur, her subordinates might think her weak or afraid. You have a semi-conscious royal and his cow-slut to use as you will. Or you could just put them out of their misery.");
 			if (player.cor <= 33) outputText(" The poor things are so corrupted.");
+            if (flags[kFLAGS.EXCELLIA_RECRUITED] && !recalling)
+                outputText("\n\n<b>Excellia will be recruited after the final fight.</b>");
+            //menu
+			var smallCockIdx:int = player.findCock(-1, -1, 12, "length");
 			menu();
-			addButton(0, "Kill Them", murderhobo);
-			var smallCockIdx:int = -1;
-			for (var i:int = 0; i < player.cocks.length; i++)
-			{
-				if (player.cocks[i].cockLength <= 12)
-				{
-					if (smallCockIdx != -1 && player.cocks[smallCockIdx].cockLength < player.cocks[i].cockLength)
-					{
-						smallCockIdx = i;
-					}
-				}
+			if (!flags[kFLAGS.MINOTAURKING_FUCKED] || recalling) {
+				addButtonIfTrue(0, "Docking", curry(dockucocku, smallCockIdx),
+					"Req. cock shorter than 12 inches", smallCockIdx >= 0);
+				addButtonIfTrue(1, "Buttfuck", buttufucku, "Req. a cock.", player.hasCock());
+				addButtonIfTrue(2, "Ride Him", mechanicalbullhue, "Req. a vagina.", player.hasVagina());
 			}
-			if (smallCockIdx != -1) addButton(1, "Docking", dockucocku, smallCockIdx);
-			if (player.hasCock())
-			{
-				addButton(2, "Buttfuck", buttufucku);
-				addButton(3, "Titfuck", titfuckCowslut);
-				addButton(4, "SloppySeconds", sloppySeconds);
+			if (!flags[kFLAGS.EXCELLIA_RECRUITED] && !flags[kFLAGS.MINOTAURKINGSSLUT_FUCKED] || recalling) {
+				addButtonIfTrue(3, "Titfuck", titfuckCowslut, "Req. a cock.", player.hasCock());
+				addButtonIfTrue(4, "SloppySeconds", sloppySeconds, "Req. a cock.", player.hasCock());
 			}
-			if (player.hasVagina()) addButton(5, "Ride Him", mechanicalbullhue);
-			addButton(14, "TouchCow", touchTheCowDoItNow).hint("Touch the Cow. Do it Now. (Or maybe it was to keep her after you deal with the Lethice? Who cares?)");
+			if (!recalling) {
+				if (!flags[kFLAGS.EXCELLIA_RECRUITED]) addButton(10, "RecruitHer", recruitExcellia).hint("Keep Excellia after you deal with the Lethice.");
+				addButton(13, flags[kFLAGS.EXCELLIA_RECRUITED] ? "Kill Him" : "Kill Them", murderhobo);
+				addButton(14, flags[kFLAGS.EXCELLIA_RECRUITED] ? "Leave Him" : "Leave Them", leavethem);
+			}
+			else addButton(14, "Wake Up", recallWakeUp);
 		}
 
-		private function touchTheCowDoItNow():void
-		{
-			flags[kFLAGS.EXCELLIA_RECRUITED] = 1;
-			menu();
-			addButton(0, "Kingslayer", murderhobo);
-			var smallCockIdx:int = -1;
-			for (var i:int = 0; i < player.cocks.length; i++)
-			{
-				if (player.cocks[i].cockLength <= 12)
-				{
-					if (smallCockIdx != -1 && player.cocks[smallCockIdx].cockLength < player.cocks[i].cockLength)
-					{
-						smallCockIdx = i;
-					}
+        private function recruitExcellia():void {
+			clearOutput();
+			if (SceneLib.shouldraFollower.followerShouldra()) {
+				outputText("You ask your ghostly partner to take care of the cow slut and help her find her way to the camp. This place will become a huge mess soon.");
+				outputText("\n\n<i>\"But... I wanted to watch your fight with Lettice! Maybe you'll even got a chance to... ah, nevermind.\"</i>");
+				outputText("\n\nShouldra clearly doesn't want to leave you, but you insist - someone has to show the way to the poor cowgirl. And you obviously can't do it right now.\n\n");
+				if (SceneLib.marbleScene.marbleFollower())
+					outputText("\n\n<i>\"But... How will I explain this to Marble? 'Hey, look, there's another cow who will live here. And she's aso a mindless milk-leaking corrupted bitch. Deal with it.'\"</i> The ghost girl even exits your body to imitate your lover.");
+				else if (SceneLib.helScene.followerHel() || SceneLib.kihaScene.followerKiha())
+					outputText("\n\n<i>\"But... I won't be able to even enter your camp without getting her killed! She smells of corruption for miles!\"</i>");
+				else if (camp.followersCount() > 1) {
+					outputText("\n\n<i>\"But... How will I explain this to others? You handle the talking most of the time, not me!\"</i>");
 				}
+				outputText("  You bicker for several minutes. Lethice is so amazed by the situation that she doesn't even interrupt you, smiling from her throne.");
+				outputText("\n\n...\n<i>Look at her, this slut can't even talk properly! Why do you need to take everyone to your camp... Uh, fine. At least she's got these funny milk-udders. Come back soon until I get bored, Champ!</i>");
 			}
-			if (smallCockIdx != -1) addButton(1, "Docking", dockucocku, smallCockIdx);
-			if (player.hasCock())
-			{
-				addButton(2, "Buttfuck", buttufucku);
-				addButton(3, "Titfuck", titfuckCowslut);
-				addButton(4, "SloppySeconds", sloppySeconds);
-			}
-			if (player.hasVagina()) addButton(5, "Ride Him", mechanicalbullhue);
-		}
+			else
+				outputText("You quickly throw the disoriented cowgirl away from her king - you don't have time to help her right now, but can't allow her to stay in your way and get hurt.");
+			outputText("\n\nAfter dealing with Excellia, you return your attention to the beaten minotaur.  ");
+			flags[kFLAGS.EXCELLIA_RECRUITED] = 1;
+            doNext(theKingIsDeadLongLiveTheKing);
+        }
 	
 		private function murderhobo():void
 		{
-			flags[kFLAGS.MINOTAURKING_KILLED] = 1;
-			clearOutput();
+            clearOutput();
 			outputText("You make it quick, then straighten to stare Lethice in the eye. You’ll purge every single ounce of corruption from this world by any means necessary.");
-            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			flags[kFLAGS.MINOTAURKING_KILLED] = 1;
+			cleanupAfterCombat(SceneLib.d3.resumeFromFight);
         }
 
 		private function dockucocku(cockIdx:int):void
 		{
-			flags[kFLAGS.MINOTAURKING_FUCKED] = 1;
-			
 			clearOutput();
-
 			outputText("With a dick that big and that hard at your disposal... you could do something that some might consider crazy, something with enough erotic potential that it makes your [cocks] even harder than the fuck-scent in the air and the nude, well-endowed figures before you.");
 			outputText("\n\nThe wildly flaring tip of the Minotaur King’s dick is neatly adorned with a nice, big cumslit, one that’s spread wide by pre-cum even now. It’s big enough to be a pussy. Bigger than some goblins’ pussies, you bet, and twice as wet looking. The three medial rings that stud the length between sheath and tip would make great grips for your hands, the better to hold onto while you literally fuck the exotic minotaur-dick. You briefly wonder if those extra rings make such cocks even more pleasurable to ride than");
 			if (player.horseCocks() > 0) outputText(" a horse-dick like yours");
@@ -124,7 +116,7 @@ public class MinotaurKingScenes extends BaseContent
 			outputText("\n\nBut you hold back for now, starting by gently easing your [cockHead "+cockIdx+"] into the welcoming embrace of the Minotaur King’s larger erection. He grunts in discomfort at the sensation, weakly craning his head up to watch you, but after a second he slumps right back down on the ground, moaning. He’s too turned on to care that you’re feeding inch after inch of your penis into his own; he’d accept anything that would get him off at this point. What a slut.");
 			outputText("\n\nYou waver momentarily, bathing your [cock "+cockIdx+"]");
 			if (player.balls > 0) outputText(" and [balls]");
-			outputText(" in the steady flow of pre that leaks around your dong, savoring this moment for what it is. You might not get another chance to do something like this once you take down Lethice, and you want it to be memorable. Grinning up at her, you mouth, <i>“You’re next,”</i> and resume feeding the rest of yourself into your cylindrical fucktube.");
+			outputText(" in the steady flow of pre that leaks around your dong, savoring this moment for what it is. You might not get another chance to do something like this once you take down Lethice, and you want it to be memorable. Grinning up at her, you mouth, <i>\"You’re next,\"</i> and resume feeding the rest of yourself into your cylindrical fucktube.");
 			outputText("\n\nThe inside is tight, blessedly tight, but so wet that you could probably slide two of yourself in side-by-side and still manage to enjoy yourself. You squeeze down with your fingers the moment you hilt yourself, cranking the pressure up another notch. The defeated beast-man’s heart is hammering, sending rolling waves of pneumatic pleasure through his cock-pussy, massaging you with his own excitement.");
 			outputText("\n\nFeeling generous, or at least turned on enough not to care, you catch some of the drooling pre in your hand and slather it over the hulk’s glistening prong. A beast like this deserves to be rewarded for being so complacent, so you begin to fuck him and stroke him, working him to a simultaneous beat, stimulating his gigantic cock from inside and out. You swear, the sweltering fuck-tube is getting warmer, or at the very least wetter, like your [cock] could just melt into a puddle of ecstatic bliss.");
 			outputText("\n\nOr maybe that’s just some of the royal brute’s druggy pre-cum backflowing into your own urethra. It’s hard to tell. You fuck him faster, grunting with the effort, plowing the rigid horse-dick with your own so hard that the cum-slut gapes sloppily when you accidentally pull out. You feed yourself right back in and resume humping, plowing this magnificent-smelling slut for all your worth. He’s so big and so virile, but with your smaller dick inside him, he’s little more than willing whore, desperate to be fucked.");
@@ -142,12 +134,18 @@ public class MinotaurKingScenes extends BaseContent
 				outputText("\n\nYou cum like a firehose, spraying a deluge of sticky spunk straight down the minotaur’s cock. His body may have been ready to expel such flows, but never to take one in. He grunts in what you take for discomfort and stares in horror at the bulges of fluid disappearing into his sheath, spreading through his body and collecting in his balls. You can actually see his nuts swelling up with all the pumped-in sperm, absolutely bloated with the fruit of your loins. Hefting one, you feel the extra fluid slosh as you fill it, marvelling at your own virility.");
 			}
 
-			if (!player.hasKnot())
+			if (!player.hasKnot(cockIdx))
 			{
+				sceneHunter.print("Check... passed? You don't have knot on the selected dick.")
 				outputText("\n\nSatisfied at last, you pull out with lurid ‘schliiiick’ sound. A few of the assembled demons clap and catcall, but most surprising of all is the monarch’s own roar of bliss, followed shortly after by his powerful hips lifting up off the floor. The well-fucked horse-cock erupts like a long-dormant volcano, spraying jizz from its sloppy, stretched slit until minotaur spunk is raining over the assembled crowd. Many of the demons immediately fall into fucking one another, but you have the good sense to avoid the bulk of it.");
 				outputText("\n\nAgain and again, those powerful, shaggy hips lift, and each time, more cow-cream explodes into the air, mixed with something else. Something better. Champion cum. Excellia is revitalized by erotic monsoon and manages to climb on top before he finishes, riding him like the bucking bronco that he is.");
 				outputText("\n\nNeither of them will be standing in your way any time soon. Time to deal with Lethice.");
-                cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+				if (!recalling) {
+					player.sexReward("cum", "Dick");
+					flags[kFLAGS.MINOTAURKING_FUCKED] = 1;
+					cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+				}
+				else doNext(recallWakeUp);
             }
 			else
 			{
@@ -159,25 +157,24 @@ public class MinotaurKingScenes extends BaseContent
 		private function dockucockuknotu(cockIdx:int):void
 		{
 			clearOutput();
-			if (player.isAlraune())
-			{
-				uniquuuesexscene.AlrauneDungeonBadEnd();
-			}
-			else {
-				outputText("When you try to pull out, there’s a problem: your knot. It inflated while you were cumming, and now that you’ve finished, it has expanded to lock you inside your unusual mate. No matter how you tug or pull, you can’t seem to extricate yourself from the cream-filled cow-man, and worse still, he’s starting to moan and squirm. Getting filled full of your spunk must have been more enjoyable for him than you thought.");
-				outputText("\n\nThe Minotaur King is moaning, and his cock is getting still harder in your hands, making it even harder to pull yourself free. Panicked now, you tug in vain, anything to get free before your cum and a wave of bovine beast-cum flows back into you. Your [feet] slip in the puddled juices, and the surging bull’s member pulls you over onto his chest, still joined at the crotch. He catches you, holding you an angle so as not to damage either of your members, and then you feel it: pre-cum mixed with your liquid relief pushing back into your [cock " + cockIdx + "].");
-				outputText("\n\nOrgasmic pressure has reversed the liquid flow, and the moment his hips lift from the floor, carrying you with them, the pressure redoubles, turning your urethra into a minotaur cum pipeline. Some of your own is mixed in of course, but you’ve never had the alabaster jism applied to your body so directly. You sag bonelessly into the brute’s grip as he turns you into his personal twinkie");
-				if (player.balls == 0) outputText(", fat with bull-cream.");
-				else outputText(". Your [sack] swells larger and larger, complete with the realization that your [balls] are being transformed into spooge-filled balloons.");
-				outputText("\n\nYou should be alarmed or worried, but mostly you’re amazed by how good it feels. How great it feels to go limp in his powerful arms. How wonderfully warm and content his narcotic spooge makes your body feel. You drool on his chest, then lick it back up, savoring the salty, sweaty tang of it. Your mouth feels empty without his cock, but then you realize you can suck his nipple until his cock is free.");
-				outputText("\n\nMinotaurs are so great. A fuzzy memory of some other desire tries to make itself known, but another buck of your bull’s hips has your head swimming and your body cumming. The pressure of your own ejaculation is nothing next to his of course. You doubt you could squirt anything out ever again. Your insides must be all stretched out with your lord’s love, but that’s fine so long as he uses you again. You can be his dribbly little spunksleeve.");
+			outputText("When you try to pull out, there’s a problem: your knot. It inflated while you were cumming, and now that you’ve finished, it has expanded to lock you inside your unusual mate. No matter how you tug or pull, you can’t seem to extricate yourself from the cream-filled cow-man, and worse still, he’s starting to moan and squirm. Getting filled full of your spunk must have been more enjoyable for him than you thought.");
+			outputText("\n\nThe Minotaur King is moaning, and his cock is getting still harder in your hands, making it even harder to pull yourself free. Panicked now, you tug in vain, anything to get free before your cum, and a wave of bovine beast-cum flows back into you. Your [feet] slip in the puddled juices, and the surging bull’s member pulls you over onto his chest, still joined at the crotch. He catches you, holding you an angle so as not to damage either of your members, and then you feel it: pre-cum mixed with your liquid relief pushing back into your [cock " + cockIdx + "].");
+			outputText("\n\nOrgasmic pressure has reversed the liquid flow, and the moment his hips lift from the floor, carrying you with them, the pressure redoubles, turning your urethra into a minotaur cum pipeline. Some of your own is mixed in of course, but you’ve never had the alabaster jism applied to your body so directly. You sag bonelessly into the brute’s grip as he turns you into his personal twinkie");
+			if (player.balls == 0) outputText(", fat with bull-cream.");
+			else outputText(". Your [sack] swells larger and larger, complete with the realization that your [balls] are being transformed into spooge-filled balloons.");
+			outputText("\n\nYou should be alarmed or worried, but mostly you’re amazed by how good it feels. How great it feels to go limp in his powerful arms. How wonderfully warm and content his narcotic spooge makes your body feel. You drool on his chest, then lick it back up, savoring the salty, sweaty tang of it. Your mouth feels empty without his cock, but then you realize you can suck his nipple until his cock is free.");
+			outputText("\n\nMinotaurs are so great. A fuzzy memory of some other desire tries to make itself known, but another buck of your bull’s hips has your head swimming and your body cumming. The pressure of your own ejaculation is nothing next to his of course. You doubt you could squirt anything out ever again. Your insides must be all stretched out with your lord’s love, but that’s fine so long as he uses you again. You can be his dribbly little spunksleeve.");
+
+			if (!recalling) {
+				player.sexReward("cum", "Dick");
+				flags[kFLAGS.MINOTAURKING_FUCKED] = 1;
 				EventParser.gameOver();
 			}
+			else doNext(recallWakeUp);
 		}
 	
 		private function buttufucku():void
 		{
-			flags[kFLAGS.MINOTAURKING_FUCKED] = 1;
 			clearOutput();
 
 			outputText("Why fuck the spoiled tart when you’ve got such a virile, muscular specimen at your beck and call? He’s pumping his cock with wild, frenetic strokes, spurting bullet-sized bursts of pre-cum over his musky balls and abdominal fur, but no matter how he tugs or squeezes, he doesn’t seem to be getting any closer to release.");
@@ -226,17 +223,18 @@ public class MinotaurKingScenes extends BaseContent
 				outputText(".");
 			}
 			outputText("\n\nThe beaten brute squirms and writhes long after you both of you finish cumming, lost in barely understood pleasure. You pull out before his over-eager motions carry you with him, noisily licking his residue from your lips and preparing to get on with your business. The taste might be keeping you hard, but you feel more than sated enough to take on a demon queen.");
-			
-			player.orgasm();
-			dynStats("lus", 10);
 
-cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			if (!recalling) {
+				player.sexReward("Default", "Dick", true, false);
+				dynStats("lus", 10);
+				flags[kFLAGS.MINOTAURKING_FUCKED] = 1;
+				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			}
+			else doNext(recallWakeUp);
         }
 
 		private function mechanicalbullhue():void
 		{
-			flags[kFLAGS.MINOTAURKING_FUCKED] = 1;
-			
 			clearOutput();
 		
 			outputText("Well, you’ve been handed a prize bull on a silver platter, why not help yourself to his delectable meat? It’s right there, trembling with need and polished to perfection by his erstwhile lover’s affections. It’d slip right in");
@@ -264,11 +262,11 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 				outputText(" along with the eager beats of your heart, and in a moment of weakness, you lean down to drag your [cockHead biggest] along the Minotaur King’s length. It is but a brief dalliance - foreplay before you put him where he belongs. With a regretful sigh, you stop frotting and line him back up.");
 			}
 
-			if (player.averageVaginalLooseness() >= 5)
+			if (player.averageVaginalLooseness() >= VaginaClass.LOOSENESS_GAPING)
 			{
 				outputText("\n\nEasing his tremendous dick into your gaping cunt feels like the most natural thing in the world. All your previous encounters were nothing more than practice to take this bestial rod deep inside yourself. It’s flaring too, imbued with more lust than any mere mortal was meant to handle, swelling to push and stroke against your straining walls as it nestles its way inside of you. It’s perfect. To find such a perfectly-shaped lover so close to your goal... you couldn’t have planned it any better.");
 			}
-			else if (player.averageVaginalLooseness() >= 1)
+			else if (player.averageVaginalLooseness() >= VaginaClass.LOOSENESS_LOOSE)
 			{
 				outputText("\n\nThe first attempt to guide the King’s cock into your anxious slit is nearly a failure. The flaring, flat-headed tip spreads you open, but not nearly far enough for it to slide into your honey-coated cavern. Grunting in distress, you give it a little wiggle, slipping the left side of the horse-like cock inside before working in the other. You have to stop, gasping and panting at the raw sensation of it, struggling to come to grips with it before you can continue your delectable descent. Never before have you been so wholly filled with cock, and you’re just now lowering yourself down the rest of the way.");
 			}
@@ -290,7 +288,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			outputText(" or his unbelievably potent fluids addling your mind, you find it hard to care. The heat burning");
 			if (player.isBiped() || player.isTaur()) outputText(" between your legs");
 			else outputText(" in your loins");
-			outputText(" is too demanding, too all consuming to mind one way or the other. Why should it matter anyway? You’re going to bounce on this lordly stud’s prick until your pussy is raw and flooded, bathed in spunk.");
+			outputText(" is too demanding, too all-consuming to mind one way or the other. Why should it matter anyway? You’re going to bounce on this lordly stud’s prick until your pussy is raw and flooded, bathed in spunk.");
 			outputText("\n\nYou hear the quiet pop of another ring entering your pussy. Drizzles of excitement slide out around him, and in between moans, you’re shocked to realize that you nearly came. Your hand winds down to your [clit] to finish the job.");
 			outputText("\n\nBelow, the bull king is groaning and grunting. One meaty hand cradles your [butt]");
 			if (!player.isTaur()) outputText(" in its entirety");
@@ -321,18 +319,20 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			if (player.isBiped()) outputText(", [legs] akimbo");
 			outputText(". The artificial euphoria this has brought you makes it difficult not to crawl over to the nearest incubus and offer your body up, but you still have to deal with Lethice. Maybe you can make her lick the drippings from your slit after you take her down.");
 			outputText("\n\nWith that fantasy firmly in mind, you stand up and fix your [armor]. You can still do this, right?");
-			player.orgasm();
-			dynStats("lus", 5, "scale", false);
-			player.createStatusEffect(StatusEffects.MinotaurKingsTouch, 0, 0, 0, 0);
-			if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(60);
-			flags[kFLAGS.MINOTAURKINGS_TOUCH] = 1;
-            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			if (!recalling) {
+				player.sexReward("cum", "Vaginal");
+				dynStats("lus", 5, "scale", false);
+				player.createStatusEffect(StatusEffects.MinotaurKingsTouch, 0, 0, 0, 0);
+				if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(60);
+				flags[kFLAGS.MINOTAURKINGS_TOUCH] = 1;
+				flags[kFLAGS.MINOTAURKING_FUCKED] = 1;
+				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			}
+			else doNext(recallWakeUp);
         }
 
 		private function titfuckCowslut():void
 		{
-			flags[kFLAGS.MINOTAURKINGSSLUT_FUCKED] = 1;
-			
 			clearOutput();
 
 			outputText("Forget that beefcake; there’s a primo slut close at hand with a set of tits that’d be worth damnation to fuck. It’s a good thing Lethice is giving you this chance to sate yourself. You might have had to risk giving them a good fucking even if she didn’t. Pulling [oneCock] out of your [armor], you advance on the fallen slut, feeling momentarily sorry for her.");
@@ -357,31 +357,32 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
 			outputText("\n\nRegrettably, you’ve got work to do. You extricate yourself from the cum-and-milk splattered cow-girl and stand up, regarding the awaiting demoness.");
 
-			player.orgasm();
-			player.HP = player.maxHP();
-            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			if (!recalling) {
+				player.sexReward("milk", "Dick");
+				player.HP = player.maxHP();
+				flags[kFLAGS.MINOTAURKINGSSLUT_FUCKED] = 1;
+				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			}
+			else doNext(recallWakeUp);
         }
 
 		private function sloppySeconds():void
 		{
-			flags[kFLAGS.MINOTAURKINGSSLUT_FUCKED] = 1;
-			
-			clearOutput();
-
 			var x:int = player.biggestCockIndex() + 1;
 
+			clearOutput();
 			outputText("Why resort to making use of the brutal minotaur when there’s a puddle of wet trollop so close at hand? It’s a good thing that all the spunk leaking from between her legs actually smells");
-			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0) outputText(" wonderful");
+			if (player.hasPerk(PerkLib.MinotaurCumAddict)) outputText(" wonderful");
 			else outputText(" sort of... nice... sexy even");
 			outputText(", or you might have had second thoughts. Her creampied honeypot ought to feel like teflon-treated silk against your [cock " + x + "]. It glitters in the flickering, bedroom light of Lethice’s throne room, beckoning you to plunge inside and see just how good it will feel.");
-			outputText("\n\n<i>“Hrmmm, again?”</i> Excellia dreamily coos, lifting her ass up into position. <i>“...yes sir, I’m always rarin’ for a fuck.”</i> She happily sighs and wiggles her ass in your direction, completely unaware that you’re the one advancing toward her ass with a aching cock");
+			outputText("\n\n<i>\"Hrmmm, again?\"</i> Excellia dreamily coos, lifting her ass up into position. <i>\"...yes sir, I’m always rarin’ for a fuck.\"</i> She happily sighs and wiggles her ass in your direction, completely unaware that you’re the one advancing toward her ass with a aching cock");
 			if (player.balls > 0)
 			{
 				outputText(" and "+num2Text(player.balls)+" balls full of cum");
 			}
 			else outputText(" and a load of backed-up cum");
 			outputText(". You don’t see much point in correcting her, not when she’s presenting so enthusiastically. Grabbing hold of her tail, you yank her into position, positioning your [cockHead "+x+"] just outside the cream-drizzling gates of her cunt.");
-			outputText("\n\nExcellia moans, <i>“So gentle, Lord! Please, don’t make me wait!”</i>");
+			outputText("\n\nExcellia moans, <i>\"So gentle, Lord! Please, don’t make me wait!\"</i>");
 			outputText("\n\nSavagely tugging on her tail, you bury yourself into well-stuffed quim, unable to believe that this passes for gentle in the service of the Minotaur King. Each");
 			if (player.balls > 0) outputText(" ball");
 			else outputText(" ass");
@@ -390,7 +391,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			else if (player.biggestCockLength() <= 30) outputText(" You didn’t think she’d confuse your prick for her master’s, but she’s happily fucking it all the same. It probably stretches her cunt just about as much.");
 			else outputText(" You don’t think she could possibly confuse your slab of cock for a smaller sample like her minotaur master’s, but she doesn’t show much sign of caring. Perhaps all the minotaur jism stuffed in her twat has left her so inundated with pleasure that worry is beyond her. So long as she’s split with a massive shaft, what’s the difference?");
 			outputText(" You can see why the overgrown beast-man keeps her around.");
-			outputText("\n\nThe quivering cow-slut’s cunt is fucking magic too. It feels like her muscles are pulling you deeper with every thrust, coaxing your [cock "+x+"] to sprout another inch if only to better fill. Gods, you’re getting harder and harder. She feels so damned good that it’s making your head spin, making it impossible to do anything but grab hold of her ass and squeeze like your life depends on it. In this moment, bereft of anything but the sinful squelches emanating from Excellia’s too-moist muff, you feel like you love her, or at least her pussy.");
+			outputText("\n\nThe quivering cow-slut’s cunt is fucking magic too. It feels like her muscles are pulling you deeper with every thrust, coaxing your [cock "+x+"] to sprout another inch if only to better fill. Gods, you’re getting harder and harder. She feels so damned good that it’s making your head spin, making it impossible to do anything but grab hold of her ass and squeeze like your life depends on it. At this moment, bereft of anything but the sinful squelches emanating from Excellia’s too-moist muff, you feel like you love her, or at least her pussy.");
 			outputText("\n\nFuck, you could love almost anyone right now. If the crowd around you wasn’t composed of soulless abominations, you’d probably love them too. You knead her ass some more, watching it give beneath your fingers. Your digits nearly disappear into the cushy, fuckable asscheeks, and you grunt in approval. It’s hypnotic. You’re still fucking her, of course. You couldn’t stop if you wanted to, but there’s a strange disconnect between your hips and the rest of your awareness, like there’s so much pleasure that you’ve gone with numb it.");
 			outputText("\n\nArcs of electric bliss hum and sizzle through your [cock] from second to second, popping in starbursts behind your eyes that make it hard to focus on anything but the swaying ass in front of you. You ravage Excellia on autopilot, groaning in delight as realization finally dawns on you - all the minotaur cum inside of her is affecting you, somehow. And there’s so much of the stuff! Creamy white blobs slop out whenever you pull out or thrust in, but there’s always more inside her to bathe your member, cocooning it in layer after layer of narcotic aphrodisiac.");
 			outputText("\n\nPart of you wants to stop, but that part of you is getting smaller with every thrust. This is wonderful, the raw, almost feral feeling of an athletic fuck unbounded by civilization or decency. Excellia’s pussy was designed to glove your [cock "+x+"] perfectly, to match its ravenous thrusting with a sordid massage. Faintly, you hear cheering and the greedy slut begging for more. She wants you to cum inside of her; you can tell. Everything from her body-language to the pitch of her delirious voice is begging you to feed her overactive ovaries their second meal of the hour. Her body is ravenous for cum, even when she’s so stuffed with it that it won’t stop pouring out.");
@@ -404,15 +405,20 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			outputText(" Your");
 			if (player.isBiped() || player.isTaur()) outputText(" [legs] wobble");
 			else outputText(" [leg] wobbles");
-			outputText(" weakly beneath you, dumping you and your jiggly concubine to the floor mid-orgasm, but it doesn’t slow your ejaculation in the slightest. You feel like you could keep cuming for ever, clenching and releasing, feeding wave after wave into the happily mooing bovine temptress.");
+			outputText(" weakly beneath you, dumping you and your jiggly concubine to the floor mid-orgasm, but it doesn’t slow your ejaculation in the slightest. You feel like you could keep cuming forever, clenching and releasing, feeding wave after wave into the happily mooing bovine temptress.");
 			outputText("\n\n");
 			if (player.hasKnot() && player.cumQ() >= 5000) outputText(" Excellia’s belly bulges into an exceedingly pregnant state, stuffed with so much of your cum that she looks nine months pregnant and then some. Her belly button pops out just before you finish squirting into her, diluting the bestial brute’s druggy load with the seed of a Champion.");
 			else if (player.cumQ() >= 5000 && !player.hasKnot()) outputText(" Excellia’s muscular control is no match for the sheer virility of your load. The gates of her cunt give out in short order, releasing a flood of Champion-diluted minotaur spunk onto the ground. She whimpers and cries out in ecstasy, driven to the peak again and again by the continuous flooding of her womb with your seed.");
 			outputText("\n\nPivoting on your prick, dragging her velvety dicksleeve in a delightful 180 on your length, Excellia crawls atop you, still shaking. Her pussy is still squeezing and clenching down around your [cock "+x+"], keeping your attention focused solely on the itch between your thighs. Your overstimulated crotch has no choice but to climax once more, orgasming to the insatiable mynx’s demands. There’s not much to left to give her, but that doesn’t stop you from writhing in ecstasy, or groping her tits in wild excitement.");
 			outputText("\n\nYou aren’t sure how many more times you give it to her, but by the time you finally manage to extract yourself from her wanton lips, the Minotaur King has been dragged into the crowd.");
 			outputText("\n\nLethice looks bored, drumming her fingers on the edge of her throne. Time to deal with her.");
-			player.orgasm();
-            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			if (!recalling) {
+				player.sexReward("saliva", "Dick");
+				player.HP = player.maxHP();
+				flags[kFLAGS.MINOTAURKINGSSLUT_FUCKED] = 1;
+				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			}
+			else doNext(recallWakeUp);
         }
 		
 		public function hailToTheKingBaby(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -426,12 +432,12 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 				outputText("Your determination burns away in the fires of your desire, nothing against molten need burning through your brain. How could you ever resist this magnificent beast? His magnificent cock is so big... so hard");
 				if (mk.orgasms > 0) outputText("... so wet with the juices of his slut");
 				outputText(". It fills your vision and your thoughts. It would be so easy to bend over for him, to lift your [butt] up in the air and wiggle it in his direction until the big brute forced himself on you. Gods, he could stuff you so well. It’s be so perfect, him inside you, the head of his gigantic monster-cock clearly outlined on your belly.");
-				outputText("\n\n<i>“Are you giving in already?”</i> The minotaur king grabs hold of your head, nearly enveloping your entire skull in the palm of his head. <i>“No matter how well they fight, they all wind up like you. If you could see yourself right now... you’d want to fuck you too.”</i>");
+				outputText("\n\n<i>\"Are you giving in already?\"</i> The minotaur king grabs hold of your head, nearly enveloping your entire skull in the palm of his head. <i>\"No matter how well they fight, they all wind up like you. If you could see yourself right now... you’d want to fuck you too.\"</i>");
 			}
 			else
 			{
 				outputText("You’ve been beaten. Staying upright has become an almost impossible task, and the idea of fighting little more than a pipe dream. Still wobbling in place, you look up in time to see the brute approach, laughing jovially.");
-				outputText("\n\n<i>“There we go. Just accept it.”</i> The minotaur king grabs hold of your head, nearly enveloping your entire skull in the palm of his head. <i>“You fought well, for a human, but you don’t need to fight any more.”</i>");
+				outputText("\n\n<i>\"There we go. Just accept it.\"</i> The minotaur king grabs hold of your head, nearly enveloping your entire skull in the palm of his head. <i>\"You fought well, for a human, but you don’t need to fight any more.\"</i>");
 			}
 			
 			outputText(" He drags you up against his crotch, smearing his sweat and sex-soaked balls against your face. It feels thick and oily on your cheek but smells like getting fucked bareback until your eyes roll back and your tongue lolls out.");
@@ -440,7 +446,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			outputText("\n\nPre-cum, sweat, and skin blend together into an ambrosial feast. Your taste buds are overwhelmed by the flavor. Torrents of red-hot, chemically-assisted pleasure seem to wash your other senses away, leaving you little more than a wiggling tongue and a hungry, empty mouth. How much better would it be to capture the tip? Would you forget the shame of your defeat? Could you live the rest of your life like this, wiggling happily on the end of a royal rod?");
 			outputText("\n\nOnly one way to find out.");
 			outputText("\n\nYou push back against the hand holding you back, grabbing hold of the oozing cock in both hands to pull the blunted tip to your mouth. Spongy flare brushes your lower lip, glazing in a layer of spunky cockdrool. Rather than lick it off, you leave it there and open wide, letting the lubricating juices do what they were meant to do: help ease a dick into a too-small hole. Just getting the tip inside has your jaw aching and your mouth stretched into an impossibly slutty ‘O,’ but once you get past that, the going gets easier.");
-			outputText("\n\n<i>“Atta "+ player.mf("boy", "girl") +",”</i> the triumphant beast-man croons. <i>“This is where you belong.”</i>");
+			outputText("\n\n<i>\"Atta "+ player.mf("boy", "girl") +",\"</i> the triumphant beast-man croons. <i>\"This is where you belong.\"</i>");
 			outputText("\n\nYou can hardly disagree. With his cock captive, no pre-cum will be wasted. The freely-spilling droplets have no choice but to slip down the length of your tongue and into your throat, where they can be swallowed. Your head might as well be filled with thick, pink cotton balls at this point, and every swallow, every eager gulp, adds more, blotting out worry and concern. Those anxious thoughts have no room to form, not when your head is so full of cock, literally and figuratively. Just thinking about it makes you want to smile and giggle, but there’s no room for that in a maw increasingly stuffed with phallus.");
 			outputText("\n\nWhether you’re leaning forward to slide it deeper or the hand on the back of your head is gently but inexorably force-fucking your face is a matter of debate. With a lascivious lick, you wonder why it can’t be both? It takes two to fuck, after all. You open wider, bathing your tonsils in a fresh spurt of the minotaur’s musky gunk, not even flinching when his cockhead flatters your uvula against your palate.");
 			if (player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties) || player.cor >= 66) outputText(" You’re long past the point of having a gag reflex and glad for it.");
@@ -470,7 +476,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			clearOutput();
 			if (player.isAlraune())
 			{
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			}
 			else {
 				outputText("You wind up being grateful for that half-forgotten assfucking later, when the minotaur King finally lays claim to your other end. That little bit of extra gape and lubrication is enough to help him lodge his humongous pecker deep into your asshole. Just like with your throat, you find him easier to handle than his size alone would suggest, but that does nothing to diminish the obscene fullness occupying your mind.");
@@ -483,18 +489,21 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 
 		private function leavethem():void
 		{
-			flags[kFLAGS.MINOTAURKING_ALIVE] = 1;
 			clearOutput();
 			outputText("\n\nYou square yourself off at the demon queen");
 			if (player.weapon != WeaponLib.FISTS) outputText(", [weapon] in hand");
 			else outputText(", balled fists raised");
-			outputText(" and reject her offer out of hand. <i>“");
+			outputText(" and reject her offer out of hand. <i>\"");
 			if (player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties)) outputText("Ummm, like, I’m not </i>that<i> horny. Besides, I can fuck all I want once I take you out, cutie!");
-			else if (player.cor >= 66) outputText("Oh come on. If you’re going to give me something to fuck, at least make it something worth my time. How about your ass, after I beat you?");
+			else if (player.cor >= 66) outputText("Oh, come on. If you’re going to give me something to fuck, at least make it something worth my time. How about your ass, after I beat you?");
 			else if (player.cor <= 20) outputText("Why would I debase myself in front of you like that? The pure need no such indulgence.");
 			else outputText("Not all of us are as enslaved by our desires as you.");
-			outputText("”</i>");
-			cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			outputText("\"</i>");
+			if (!recalling) {
+				flags[kFLAGS.MINOTAURKING_ALIVE] = 1;
+				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			}
+			else doNext(recallWakeUp);
         }
 	}
 }

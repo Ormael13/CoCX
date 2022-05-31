@@ -285,7 +285,7 @@ public class QuatroElementalBoss extends Monster
 		{
 			clearOutput();
 			outputText("The elemental falls again, defeatedly collapsing on the ground. You wonder if you should wait or try to inspect the dormant elemental quickly. Before you can react, a sudden gust of wind shakes the room, causing the remains of the elemental to swirl in a small vortex before spinning back into shape. ");
-			outputText("The revenant rises once more before it speaks to you in a cacophony of different voices, <i>“I will not be aired once more.”</i> Without further warning, it rushes toward you, prepared for combat.");
+			outputText("The revenant rises once more before it speaks to you in a cacophony of different voices, <i>\"I will not be aired once more.\"</i> Without further warning, it rushes toward you, prepared for combat.");
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 2, 1);
 			_fightPhase = 4;
 			short = "quatro elemental";

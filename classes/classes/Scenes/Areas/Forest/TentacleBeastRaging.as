@@ -51,19 +51,17 @@ public class TentacleBeastRaging extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
+			player.removeStatusEffect(StatusEffects.TentacleBadEndCounter); //clear counter
 			if (hpVictory) {
 				outputText("The creature lets out an ear-piercing screech as it collapses upon itself. Its green coloring quickly fades to brown as the life drains from it, leaving you victorious.", true);
+				sceneHunter.print("Maybe lust-defeat would leave more opportunities?");
 				EngineCore.awardAchievement("Tentacle Beast Slayer", kACHIEVEMENTS.GENERAL_TENTACLE_BEAST_SLAYER);
 			}
 			else {
 				outputText("The tentacle beast's mass begins quivering and sighing, the tentacles wrapping around each other and feverishly caressing each other.  It seems the beast has given up on fighting.");
 			}
-			if(!hpVictory && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
-				outputText("  Perhaps you could use it to sate yourself?", true);
-				EngineCore.doYesNo(SceneLib.forest.tentacleBeastScene.tentacleVictoryRape,cleanupAfterCombat);
-			}
-			else if (this.HP <= 0) SceneLib.forest.tentacleBeastScene.choiceofaction();
-			else cleanupAfterCombat();
+			if (hpVictory) SceneLib.forest.tentacleBeastScene.choiceofaction();
+			else SceneLib.forest.tentacleBeastScene.tentacleVictory();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void

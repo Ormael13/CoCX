@@ -20,7 +20,7 @@ public class CombatTeases extends BaseCombatContent {
 		//Worms are immune!
 		else if (monster.short == "worms") {
 			clearOutput();
-			outputText("Thinking to take advantage of its humanoid form, you wave your cock and slap your ass in a rather lewd manner. However, the creature fails to react to your suggestive actions.\n\n");
+			outputText("Thinking to take advantage of its humanoid form, you wave your cock and slap your ass. However, the creature fails to react to your suggestive actions.\n\n");
 			enemyAI();
 		}
 		else {
@@ -28,6 +28,37 @@ public class CombatTeases extends BaseCombatContent {
 			if (combatIsOver()) return;
 			enemyAI();
 		}
+	}
+	
+	public function teaseBaseLustDamage():Number {
+		var tBLD:Number = 27 + rand(9);
+		if (player.hasPerk(PerkLib.SensualLover)) tBLD += 6;
+		if (player.hasPerk(PerkLib.Seduction)) tBLD += 15;
+		if (player.hasPerk(PerkLib.SluttySeduction)) tBLD += (2 * player.perkv1(PerkLib.SluttySeduction));
+		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) tBLD += (2 * player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction));
+		if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) tBLD += 15;
+		if (player.hasPerk(PerkLib.FlawlessBody)) tBLD += 20;
+		tBLD += scalingBonusLibido() * 0.2;
+		if (player.hasPerk(PerkLib.JobSeducer)) tBLD += player.teaseLevel * 3;
+		else tBLD += player.teaseLevel * 2;
+		if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) tBLD *= 1.2;
+		switch (player.coatType()) {
+			case Skin.FUR:
+				tBLD += (2 * (1 + player.newGamePlusMod()));
+				break;
+			case Skin.SCALES:
+				tBLD += (4 * (1 + player.newGamePlusMod()));
+				break;
+			case Skin.CHITIN:
+				tBLD += (6 * (1 + player.newGamePlusMod()));
+				break;
+			case Skin.BARK:
+				tBLD += (8 * (1 + player.newGamePlusMod()));
+				break;
+		}
+		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") tBLD *= (1 + ((10 + rand(11)) / 100));
+		if (player.isElf() && player.hasPerk(PerkLib.ELFElvenSpearDancingTechnique) && player.isSpearTypeWeapon()) tBLD += scalingBonusSpeed() * 0.1;
+		return tBLD;
 	}
 
 	// Just text should force the function to purely emit the test text to the output display, and not have any other side effects
@@ -41,11 +72,11 @@ public class CombatTeases extends BaseCombatContent {
 		}
 		if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 1) {
 			clearOutput();
-			outputText("You do your best to tease [themonster] with your body.  Your artless twirls have no effect, as <b>your ability to tease is sealed.</b>\n\n");
+			outputText("You do your best to tease [themonster] with your body.  Your artless twirls have no effect, as <b>your ability to tease has been sealed.</b>\n\n");
 			return;
 		}
 		if (monster.short == "Sirius, a naga hypnotist") {
-			outputText("He is too focused on your eyes to pay any attention to your teasing moves, <b>looks like you'll have to beat him up.</b>\n\n");
+			outputText("He is too focused on your eyes to pay any attention to your teasing, <b>looks like you'll have to beat him up.</b>\n\n");
 			return;
 		}
 		combat.wrathregeneration1();
@@ -53,7 +84,7 @@ public class CombatTeases extends BaseCombatContent {
 		combat.manaregeneration1();
 		combat.soulforceregeneration1();
 		if (monster.lustVuln == 0) {
-			outputText("You do your best to tease [themonster] with your body but it has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
+			outputText("You do your best to tease [themonster] with your body but it has no effect!  Your foe clearly does not experience lust the same way as you.\n\n");
 			enemyAI();
 			return;
 		}
@@ -113,36 +144,8 @@ public class CombatTeases extends BaseCombatContent {
 		//==============================
 		//Determine basic damage.
 		//==============================
-		damage = 18 + rand(6);
-		if (player.hasPerk(PerkLib.SensualLover)) damage += 6;
-		if (player.hasPerk(PerkLib.Seduction)) damage += 15;
-		if (player.hasPerk(PerkLib.SluttySeduction)) damage += (2 * player.perkv1(PerkLib.SluttySeduction));
-		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += (2 * player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction));
-		if (bimbo || bro || futa) {
-			damage += 15;
-			bimbo = true;
-		}
-		if (player.hasPerk(PerkLib.FlawlessBody)) damage += 20;
-		damage += scalingBonusLibido() * 0.2;
-		if (player.hasPerk(PerkLib.JobSeducer)) damage += player.teaseLevel * 3;
-		else damage += player.teaseLevel * 2;
-		if (player.hasPerk(PerkLib.JobCourtesan) && monster.findPerk(PerkLib.EnemyBossType) >= 0) damage *= 1.2;
-		switch (player.coatType()) {
-			case Skin.FUR:
-				damage += (2 * (1 + player.newGamePlusMod()));
-				break;
-			case Skin.SCALES:
-				damage += (4 * (1 + player.newGamePlusMod()));
-				break;
-			case Skin.CHITIN:
-				damage += (6 * (1 + player.newGamePlusMod()));
-				break;
-			case Skin.BARK:
-				damage += (8 * (1 + player.newGamePlusMod()));
-				break;
-		}
-		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") damage *= (1 + ((10 + rand(11)) / 100));
-		if (player.isElf() && player.hasPerk(PerkLib.ELFElvenSpearDancingTechnique) && player.isSpearTypeWeapon()) damage += scalingBonusSpeed() * 0.1;
+		damage = 0;
+		damage += teaseBaseLustDamage();
 		//==============================
 		//TEASE SELECT CHOICES
 		//==BASICS========
@@ -324,7 +327,7 @@ public class CombatTeases extends BaseCombatContent {
 		}
 		//==EXTRAS========
 		//12 Cat flexibility.
-		if (player.findPerk(PerkLib.Flexibility) >= 0 && player.isBiped() && player.hasVagina()) {
+		if (player.hasPerk(PerkLib.Flexibility) && player.isBiped() && player.hasVagina()) {
 			choices[choices.length] = 12;
 			choices[choices.length] = 12;
 			if (player.wetness() >= 3) choices[choices.length] = 12;
@@ -345,7 +348,7 @@ public class CombatTeases extends BaseCombatContent {
 			if (player.pregnancyIncubation <= 24) choices[choices.length] = 13;
 		}
 		//14 Brood Mother
-		if (monster.hasCock() && player.hasVagina() && player.findPerk(PerkLib.BroodMother) >= 0 && (player.pregnancyIncubation <= 0 || player.pregnancyIncubation > 216)) {
+		if (monster.hasCock() && player.hasVagina() && player.hasPerk(PerkLib.BroodMother) && (player.pregnancyIncubation <= 0 || player.pregnancyIncubation > 216)) {
 			choices[choices.length] = 14;
 			choices[choices.length] = 14;
 			choices[choices.length] = 14;
@@ -380,7 +383,7 @@ public class CombatTeases extends BaseCombatContent {
 			choices[choices.length] = 17;
 		}
 		//18 DOG TEASE
-		if (player.dogScore() >= 4 && player.hasVagina() && player.isBiped()) {
+		if (player.isRace(Races.DOG) && player.hasVagina() && player.isBiped()) {
 			choices[choices.length] = 18;
 			choices[choices.length] = 18;
 		}
@@ -407,7 +410,7 @@ public class CombatTeases extends BaseCombatContent {
 			choices[choices.length] = 22;
 			choices[choices.length] = 22;
 			choices[choices.length] = 22;
-			if (player.spiderScore() >= 4) {
+			if (player.isRace(Races.SPIDER)) {
 				choices[choices.length] = 22;
 				choices[choices.length] = 22;
 				choices[choices.length] = 22;
@@ -444,7 +447,7 @@ public class CombatTeases extends BaseCombatContent {
 			choices[choices.length] = 26;
 		}
 		//27 FEEDER
-		if (player.findPerk(PerkLib.Feeder) >= 0 && player.biggestTitSize() >= 4) {
+		if (player.hasPerk(PerkLib.Feeder) && player.biggestTitSize() >= 4) {
 			choices[choices.length] = 27;
 			choices[choices.length] = 27;
 			choices[choices.length] = 27;
@@ -522,7 +525,7 @@ public class CombatTeases extends BaseCombatContent {
 		//38 Kitsune Tease
 		//39 Kitsune Tease
 		//40 Kitsune Tease
-		if (player.kitsuneScore() >= 2 && player.tailType == Tail.FOX) {
+		if (player.racialScore(Races.KITSUNE) >= 2 && player.tailType == Tail.FOX) {
 			choices[choices.length] = 37;
 			choices[choices.length] = 37;
 			choices[choices.length] = 37;
@@ -541,7 +544,7 @@ public class CombatTeases extends BaseCombatContent {
 			choices[choices.length] = 40;
 		}
 		//41 Kitsune Gendered Tease
-		if (player.kitsuneScore() >= 2 && player.tailType == Tail.FOX) {
+		if (player.racialScore(Races.KITSUNE) >= 2 && player.tailType == Tail.FOX) {
 			choices[choices.length] = 41;
 			choices[choices.length] = 41;
 			choices[choices.length] = 41;
@@ -560,7 +563,7 @@ public class CombatTeases extends BaseCombatContent {
 			choices[choices.length] = 42;
 		}
 		//43 - special mino + cowgirls
-		if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tailType == Tail.COW) {
+		if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.racialScore(Races.COW) >= 3 && player.tailType == Tail.COW) {
 			choices[choices.length] = 43;
 			choices[choices.length] = 43;
 			choices[choices.length] = 43;
@@ -624,7 +627,7 @@ public class CombatTeases extends BaseCombatContent {
 		//=======================================================
 		select = choices[rand(choices.length)];
 		if (monster.short.indexOf("minotaur") != -1) {
-			if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tailType == Tail.COW)
+			if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.racialScore(Races.COW) >= 3 && player.tailType == Tail.COW)
 				select = 43;
 		}
 		if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) {
@@ -674,7 +677,7 @@ public class CombatTeases extends BaseCombatContent {
 						if (player.cocks.length == 1) outputText(player.cockDescript(0));
 						if (player.cocks.length > 1) outputText(player.multiCockDescriptLight());
 						outputText(" and ");
-						if (player.findPerk(PerkLib.BulgeArmor) >= 0) {
+						if (player.hasPerk(PerkLib.BulgeArmor)) {
 							damage += 15;
 						}
 						penis = true;
@@ -688,7 +691,7 @@ public class CombatTeases extends BaseCombatContent {
 			case 3:
 				if (player.isTaur() && player.horseCocks() > 0) {
 					outputText("You let out a bestial whinny and stomp your hooves at your enemy.  They prepare for an attack, but instead you kick your front hooves off the ground, revealing the hefty horsecock hanging beneath your belly.  You let it flop around, quickly getting rigid and to its full erect length.  You buck your hips as if you were fucking a mare in heat, letting your opponent know just what's in store for them if they surrender to pleasure...");
-					if (player.findPerk(PerkLib.BulgeArmor) >= 0) damage += 5;
+					if (player.hasPerk(PerkLib.BulgeArmor)) damage += 5;
 				}
 				else {
 					outputText("You open your [armor], revealing your ");
@@ -696,7 +699,7 @@ public class CombatTeases extends BaseCombatContent {
 					if (player.cocks.length > 1) outputText(player.multiCockDescriptLight());
 					if (player.hasVagina()) outputText(" and ");
 					//Bulgy bonus!
-					if (player.findPerk(PerkLib.BulgeArmor) >= 0) {
+					if (player.hasPerk(PerkLib.BulgeArmor)) {
 						damage += 15;
 						chance += 3;
 					}
@@ -744,24 +747,24 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//6 pussy flash
 			case 6:
-				if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) {
+				if (player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties)) {
 					outputText("You coyly open your [armor] and giggle, \"<i>Is this, like, what you wanted to see?</i>\"  ");
 				}
 				else {
 					outputText("You coyly open your [armor] and purr, \"<i>Does the thought of a hot, ");
 					if (futa) outputText("futanari ");
-					else if (player.findPerk(PerkLib.BimboBody) >= 0) outputText("bimbo ");
+					else if (player.hasPerk(PerkLib.BimboBody)) outputText("bimbo ");
 					else outputText("sexy ");
 					outputText("body turn you on?</i>\"  ");
 				}
-				if (monster.plural) outputText(monster.capitalA + monster.short + "' gazes are riveted on your groin as you run your fingers up and down your folds seductively.");
-				else outputText(monster.capitalA + monster.short + "'s gaze is riveted on your groin as you run your fingers up and down your folds seductively.");
+				if (monster.plural) outputText(monster.capitalA + monster.short + "' gazes are riveted on your groin as you run your fingers up and down your folds.");
+				else outputText(monster.capitalA + monster.short + "'s gaze is riveted on your groin as you run your fingers up and down your folds.");
 				if (player.clitLength > 3) outputText("  You smile as your " + clitDescript() + " swells out from the folds and stands proudly, begging to be touched.");
 				else outputText("  You smile and pull apart your lower-lips to expose your " + clitDescript() + ", giving the perfect view.");
 				if (player.cockTotal() > 0) outputText("  Meanwhile, [eachcock] bobs back and forth with your gyrating hips, adding to the display.");
 				//BONUSES!
 				if (player.hasCock()) {
-					if (player.findPerk(PerkLib.BulgeArmor) >= 0) damage += 15;
+					if (player.hasPerk(PerkLib.BulgeArmor)) damage += 15;
 					penis = true;
 				}
 				vagina = true;
@@ -778,7 +781,7 @@ public class CombatTeases extends BaseCombatContent {
 				//8 Pec Dance
 			case 8:
 				outputText("You place your hands on your hips and flex repeatedly, skillfully making your pecs alternatively bounce in a muscular dance.  ");
-				if (player.findPerk(PerkLib.BroBrains) >= 0) outputText("Damn, [themonster] has got to love this!");
+				if (player.hasPerk(PerkLib.BroBrains)) outputText("Damn, [themonster] has got to love this!");
 				else outputText(monster.capitalA + monster.short + " will probably enjoy the show, but you feel a bit silly doing this.");
 				chance += (player.tone - 75) / 2;
 				damage += (player.tone - 70) / 2;
@@ -787,7 +790,7 @@ public class CombatTeases extends BaseCombatContent {
 				//9 Heroic Pose
 			case 9:
 				outputText("You lift your arms and flex your incredibly muscular arms while flashing your most disarming smile.  ");
-				if (player.findPerk(PerkLib.BroBrains) >= 0) outputText(monster.capitalA + monster.short + " can't resist such a heroic pose!");
+				if (player.hasPerk(PerkLib.BroBrains)) outputText(monster.capitalA + monster.short + " can't resist such a heroic pose!");
 				else outputText("At least the physical changes to your body are proving useful!");
 				chance += (player.tone - 75) / 2;
 				damage += (player.tone - 70) / 2;
@@ -796,12 +799,12 @@ public class CombatTeases extends BaseCombatContent {
 				//10 Bulgy groin thrust
 			case 10:
 				outputText("You lean back and pump your hips at [themonster] in an incredibly vulgar display.  The bulging, barely-contained outline of your [cock] presses hard into your gear.  ");
-				if (player.findPerk(PerkLib.BroBrains) >= 0) outputText("No way could [monster he] resist your huge cock!");
+				if (player.hasPerk(PerkLib.BroBrains)) outputText("No way could [monster he] resist your huge cock!");
 				else outputText("This is so crude, but at the same time, you know it'll likely be effective.");
 				outputText("  You go on like that, humping the air for your foe");
 				outputText("'s");
 				outputText(" benefit, trying to entice them with your man-meat.");
-				if (player.findPerk(PerkLib.BulgeArmor) >= 0) damage += 15;
+				if (player.hasPerk(PerkLib.BulgeArmor)) damage += 15;
 				penis = true;
 				break;
 				//11 Show off dick
@@ -809,10 +812,10 @@ public class CombatTeases extends BaseCombatContent {
 				if (silly() && rand(2) == 0) outputText("You strike a herculean pose and flex, whispering, \"<i>Do you even lift?</i>\" to [themonster].");
 				else {
 					outputText("You open your [armor] just enough to let your [cock] and [balls] dangle free.  A shiny rope of pre-cum dangles from your cock, showing that your reproductive system is every bit as fit as the rest of you.  ");
-					if (player.findPerk(PerkLib.BroBrains) >= 0) outputText("Bitches love a cum-leaking cock.");
+					if (player.hasPerk(PerkLib.BroBrains)) outputText("Bitches love a cum-leaking cock.");
 					else outputText("You've got to admit, you look pretty good down there.");
 				}
-				if (player.findPerk(PerkLib.BulgeArmor) >= 0) damage += 15;
+				if (player.hasPerk(PerkLib.BulgeArmor)) damage += 15;
 				penis = true;
 				break;
 				//==EXTRAS========
@@ -925,8 +928,8 @@ public class CombatTeases extends BaseCombatContent {
 					outputText("You whip out your massive horsecock, and are immediately surrounded by a massive, heady musk.  Your enemy swoons, nearly falling to her knees under your oderous assault.  Grinning, you grab her shoulders and force her to her knees.  Before she can defend herself, you slam your horsecock onto her head, running it up and down on her face, her nose acting like a sexy bump in an onahole.  You fuck her face -- literally -- for a moment before throwing her back and sheathing your cock.");
 				}
 				else {
-					outputText("Panting with your unstoppable lust for the delicious, impregnable cunt before you, you yank off your [armor] with strength born of your inhuman rut, and quickly wave your fully erect cock at your enemy.  She flashes with lust, quickly feeling the heady effect of your man-musk.  You rush up, taking advantage of her aroused state and grab her shoulders.  ");
-					outputText("Before she can react, you push her down until she's level with your cock, and start to spin it in a circle, slapping her right in the face with your musky man-meat.  Her eyes swim, trying to follow your meatspin as you swat her in the face with your cock!  Satisfied, you release her and prepare to fight!");
+					outputText("Panting with your unstoppable lust for the delicious cunt before you, you yank off your [armor] with strength born of your inhuman rut, and quickly wave your fully erect cock at your enemy.  She flashes with lust, quickly feeling the heady effect of your man-musk.  You rush up, taking advantage of her aroused state, and grab her shoulders.  ");
+					outputText("Before she can react, you push her down until she's level with your cock, and start to spin it in a circle, slapping her right in the face with your musky man-meat.  Her eyes swim, trying to follow your tool as you swat her in the face with your cock!  Satisfied, you release her and prepare to fight!");
 				}
 				penis = true;
 				break;
@@ -1066,7 +1069,7 @@ public class CombatTeases extends BaseCombatContent {
 				}
 				//Tease #2:
 				else {
-					outputText("You turn partially around and then bend over, swaying your tail from side to side in your most flirtatious manner and wiggling your hips seductively, your skirt fluttering with the motions.  \"<i>Come on then, what are you waiting for?  This is a fine piece of ass here,</i>\" you grin, spanking yourself with an audible slap.");
+					outputText("You turn around and bend over, swaying your tail from side to side in your most flirtatious manner and wiggling your hips seductively, your skirt fluttering with the motions.  \"<i>Come on then, what are you waiting for?  This is a fine piece of ass here,</i>\" you grin, spanking yourself with an audible slap.");
 					ass = true;
 					chance += 6;
 					damage += 9;
@@ -1129,7 +1132,7 @@ public class CombatTeases extends BaseCombatContent {
 				damage += 15;
 				chance += 9;
 				if (maiden == 0) {
-					outputText("Confidently sauntering forward, you thrust your chest out with your back arched in order to enhance your [chest].  You slowly begin to shake your torso back and forth, slapping your chain-clad breasts against each other again and again.  One of your hands finds its way to one of the pillowy expanses and grabs hold, fingers sinking into the soft tit through the fine, mail covering.  You stop your shaking to trace a finger down through the exposed center of your cleavage, asking, \"<i>Don't you just want to snuggle inside?</i>\"");
+					outputText("Confidently sauntering forward, you thrust your chest out, arching your back in order to enhance your [chest].  You slowly begin to shake your torso back and forth, slapping your chain-clad breasts against each other again and again.  One of your hands finds its way to one of the pillowy expanses and grabs hold, fingers sinking into the soft tit through the fine, mail covering.  You stop your shaking to trace a finger down through the exposed center of your cleavage, asking, \"<i>Don't you just want to snuggle inside?</i>\"");
 					breasts = true;
 				}
 				else if (maiden == 1) {
@@ -1196,9 +1199,9 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//alraune teases
 			case 46:
-				outputText("You let your vines crawl around your opponent, teasing all of [themonster] erogenous zones.  [Themonster] gasps in involuntary arousal at your ministrations, relishing the way your vines seek out all [themonster] pleasurable spots and relentlessly assaults them.");
+				outputText("You let your vines crawl around your opponent, teasing all of [themonster]'s erogenous zones.  [Themonster] gasps in involuntary arousal at your ministrations, relishing the way your vines seek out all [themonster] pleasurable spots and relentlessly assaults them.");
 				if (player.isLiliraune()) {
-					outputText(" Meanwhile you and your twin smile in understanding coming up with the same idea as you begin to kiss, slathering your respective bodies with sweet syrupy nectar and mashing your breasts against each other in order to give a lewd show to [themonster] as the both of you pull a nectar dripping hand out in invitation to your entangled opponent.\n\n");
+					outputText(" Meanwhile you and your twin smile in understanding. You begin to make out, slathering your respective bodies with sweet syrupy nectar and mashing your breasts against each other in order to give a lewd show to [themonster] as the both of you pull a nectar dripping hand out in invitation to your entangled opponent.\n\n");
 				 	outputText("\"<i>Can't you see what delights you're missing out on?</i>\"\n\n");
 				 	outputText("\"<i>Just give up and we'll give you a good time.</i>\"\n\n");
 				 	outputText("\"<i>If you think you have the stamina to take both of us, that is.</i>\"\n\n");
@@ -1217,7 +1220,7 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//naga races belly dance teases
 			case 48:
-				outputText("You give [themonster] a belly dance show, moving your hip from a side to another and displaying your assets.  [Themonster] is so distracted by your dancing it doesn’t realise the two of you are still in battle for a few seconds before snapping out only in time to realise [monster he] did absolutely nothing for the last six seconds.");
+				outputText("You give [themonster] a belly dance, moving your hip from a side to another and displaying your assets.  [Themonster] is so distracted by your dancing it doesn’t realise the two of you are still in battle for a few seconds before snapping out. [monster he] did absolutely nothing for the last six seconds.");
 				monster.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 				chance += 9;
 				damage += 9;
@@ -1298,19 +1301,19 @@ public class CombatTeases extends BaseCombatContent {
 					bonusChance += 2;
 					bonusDamage += 3;
 				}
-				if (player.clitLength > 1.5) {
+				if (player.hasVagina() && player.clitLength > 1.5) {
 					bonusChance += 2;
 					bonusDamage += 3;
 				}
-				if (player.clitLength > 3.5) {
+				if (player.hasVagina() && player.clitLength > 3.5) {
 					bonusChance += 2;
 					bonusDamage += 3;
 				}
-				if (player.clitLength > 7) {
+				if (player.hasVagina() && player.clitLength > 7) {
 					bonusChance += 2;
 					bonusDamage += 3;
 				}
-				if (player.clitLength > 12) {
+				if (player.hasVagina() && player.clitLength > 12) {
 					bonusChance += 2;
 					bonusDamage += 3;
 				}
@@ -1487,18 +1490,6 @@ public class CombatTeases extends BaseCombatContent {
 			if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 			damage *= damagemultiplier;
 			bonusDamage *= damagemultiplier;
-			//Determine if critical tease!
-			var crit:Boolean = false;
-			var critChance:int = 5;
-			if (player.hasPerk(PerkLib.CriticalPerformance)) {
-				if (player.lib <= 100) critChance += player.lib / 4;
-				if (player.lib > 100) critChance += 25;
-			}
-			if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
-			if (rand(100) < critChance) {
-				crit = true;
-				damage *= 1.75;
-			}
 			if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 			if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) damage *= 1.5;
 			damage = (damage + rand(bonusDamage)) * monster.lustVuln;
@@ -1507,6 +1498,18 @@ public class CombatTeases extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 20) {
 				outputText("\n[themonster] is so mesmerised by your show that it stands there gawking.");
 				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			}
+			//Determine if critical tease!
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			if (player.hasPerk(PerkLib.CriticalPerformance)) {
+				if (player.lib <= 100) critChance += player.lib / 4;
+				if (player.lib > 100) critChance += 25;
+			}
+			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+			if (rand(100) < critChance) {
+				crit = true;
+				damage *= 1.75;
 			}
 			if (monster is JeanClaude) (monster as JeanClaude).handleTease(damage, true);
 			else if (monster is Doppleganger && !monster.hasStatusEffect(StatusEffects.Stunned)) (monster as Doppleganger).mirrorTease(damage, true);

@@ -119,16 +119,16 @@ package classes.Scenes.Places{
 		public function findMindbreaker():void {
 			clearOutput();
 			MindBreakerQuest = QUEST_STAGE_METMB;
-			outputText("As you wander the mountainside you venture across a distinct tunnel entrance where the light does not penetrate far. A sudden sense of foreboding envelops you for a moment, and for a moment you hesitate, holding yourself back from entering the crevice." +
-					" A strange, almost alien feeling flows through the crack. Winds waft a peculiarly pungent smell of storm drenched grounds towards you. Weird. It hasn’t rained in... how long has it been since it rained? Likely several days at this point." +
+			outputText("As you wander the mountainside you venture across a distinct tunnel entrance. Something is wrong, you realise quickly...The light doesn't reach in as far as it should. A sudden sense of foreboding envelops you for a moment, and for a moment you hesitate, holding yourself back from entering the crevice." +
+					" A strange, almost alien feeling flows through the crack. Air flows from the cave, sending an odd scent through your nostrils. It smells...Almost like the mud after the rain. Weird. It hasn’t rained in...You realise that it hasn't rained since you arrived on Mareth. Your spine tingles, shivers crawling up your [legs]" +
 					"\n\nYou’re kept from marching unto the breach, a phantom grip on your heart is stalling your advance." +
-					" Why are you being so apprehensive about this? It’s not like you haven’t faced walking nightmares before, and all this- this entire world filled to the brim with rape machines and creatures casually strutting around with hips as wide as a cart and more than enough cocks to plug every hole a human could have!" +
+					" Why are you being so apprehensive about this? It’s not like you haven’t faced walking nightmares before. For goodness' sake, this entire world is filled to the brim with rape machines! Mareth is infested with creatures casually strutting around with hips as wide as a cart, or sporting more than enough cocks to plug every hole a human could have!" +
 					" If anything, it’s probably just another one of the Demon’s spells or something trying to paralyze you with fear;" +
 					" make you too scared to fight so they can have their way with anyone under its effects." +
 					" It’s just a matter of steeling your nerves and venturing forth. But still… maybe this time you should listen to your instincts? Is whatever that resides within worth what you could encounter?" +
 					"\n\nDo you continue?" +
-					"\n\n<b>-Warning-\n" +
-					" -Content in this cave is not for everyone. It includes mind break, tentacles, parasitism and severe slutification. Proceed at your own risk.</b>\n");
+					"\n\n<b><u>-Warning-\n" +
+					" -Content in this cave is not for everyone. It includes mind break, tentacles, parasitism, severe slutification and PERNAMENT TRANSFORMATION. Proceed at your own risk.</u></b>\n");
 			//[Yes] [No]
 			doYesNo(YesTentacle,FuckNo);
 		}
@@ -139,7 +139,7 @@ package classes.Scenes.Places{
 			clearOutput();
 			if (player.cor >= 70){
 				outputText("You approach the cave where your friend, Kaerb-Dnim, awaits you." +
-						" You're finally as lusty and slutty as you should be! Winning the game should be a piece of cake," +
+						" You're finally as lusty as you should be! Winning the game should be a piece of cake," +
 						" yet a faint voice in your head tells you something terrible is about to happen if you enter that cave. You're going to enter, right?");
 				doYesNo(YesTentacleStage3,NoIndecisive);
 			}else{
@@ -164,25 +164,25 @@ package classes.Scenes.Places{
 			else {
 				outputText("shut it down, like a proper champion!");
 			}
-			outputText("Your first movements into the cavern are met with the sounds of the moist earth beneath, squelching beneath the weight of your "+player.feet()+" as you cautiously tread ever deeper. Light from the outside does not penetrate far and quickly fades");
+			outputText("Your first movements into the cavern are met with the sounds of the moist earth beneath, squelching beneath the weight of your "+player.feet()+" as you cautiously tread ever deeper. Light from the outside quickly fades");
 			if(!player.hasDarkVision()) outputText(", leaving you with nothing but your keen senses");
 			outputText(", you stride deeper and deeper into the chasm, holding your [weapon] in a firm grip, taut muscles hefting the weapon, poised to strike."+
 					"\n\nThe tension in the air nearly chokes you, the cool dampness smothering your form, every caress delivering a diseased touch that leaves fields of goosebumps in their wake. Even the winds of this accursed hovel beg you to turn away." +
-					" But their whims matter little, for the mysteries kept from you are what drive you onward, feeding your irrational sense of greed, goading you ever onwards. As if to taunt you, the darkness is humoring itself with your lack of sight, a constant dripping sound follows you wherever you step." +
-					" It offers no respite, the constant drip... drip... drip… beginning to drive you mad. You keep moving through the lightless reaches, your footsteps echoing on the damp ground when a sudden velvety sensation grazes your arm, leaving behind a cold, sticky residue." +
+					" But their whims matter little, for the mysteries kept from you are what drive you onward, feeding your irrational sense of greed, goading you ever onwards. As if to taunt you, the darkness is humoring itself with your lack of sight, a constant dripping sound following you wherever you step." +
+					" It offers no respite, the constant drip... drip... drip… You keep yourself from turning around, trying to see where the moving droplets are coming from...But it's a struggle. You keep moving through the lightless reaches, your footsteps echoing on the damp ground when a sudden velvety sensation grazes your arm, leaving behind a cold, sticky residue." +
 					"\n\nThe shock of being abruptly grazed by an unseen rubbery extension prompts immediate action from your tensed muscles and you whip around, [weapon] raised, and facing the darkness. Silence greets you, the void staring back, mocking you. Shaking your head, you start taking a round of deep breaths." +
-					"\n\nYou’re too wound up, this damned dark is getting to your head. You just need a moment to steady yourself, just a couple breaths to calm your heart. It’s only a dark cave, there’s nothing to fear. You just need a light source and you’ll be fine." +
+					"\n\nYou’re too wound up, this damned dark is getting to your head. You just need a moment to steady yourself, just a couple of breaths to calm your heart. It’s only a dark cave, there’s nothing to fear. You just need a light source and you’ll be fine." +
 					" You reassure yourself, bringing your heart rate under control. With a final deep breath, you prepare to move on, keeping your [weapon] ready just in case." +
 					"\n\nOnce again, you force yourself onwards, pushing further into the endless void. Finding yourself at a corner, you press your hand against the slightly moist granite. Using the rough surface as a guide, you slowly direct yourself around what appears to be a bend." +
 					" The wall’s texture grows slimier with each movement, further passings have the granite adopt a strange, spongy quality. A disturbingly… flesh-like quality." +
 					"\n\nWhether it be the darkness influencing your mind or your lack of vision being compensated with increased sensitivity, most likely both, you could almost swear you felt the wall... twitch." +
 					" Since whatever this is isn’t trying to actively rape you it must be some cave organism. Maybe a closer look is warranted, but with the lack of light and foreboding atmosphere, it would be best saved for another time." +
 					" You press on, though find it increasingly difficult to do so as the organism seems to have quickly grown attached to you, its form reacting to your touch by attempting to latch onto your arm." +
-					"\n\nYou try wrenching your arm away, the creature’s quite adamant about its affection for you. Struggling against the offending substance affords all your attention, the writhing sensation worming its way up your leg going relatively unnoticed." +
-					" By the time you finally acknowledge it, the thing has already wrapped itself around your torso, a sickeningly jovial giggling accompanies this menace’s assault, their origin from directly behind you." +
-					" Another slimy extension grapples you from behind, restraining your free arm, the maddening giggles mounting as the fiend revels in your struggle." +
-					"\n\nYou fight, pulling, kicking, biting, doing all you can to tear away your limbs from the monstrosity.Your struggles are in vain, more slimy tendrils taking hold of your restrained form, wrapping around your mouth, muffling your grunts, latching onto your arms and torso, and forcing you against the wall." +
-					" The sickly squelching of the being assailing creeps closer as it presses you against the wall, two of its appendages crawling up your spine, almost teasing your form as their master relishes in your torment. They near your earlobes, softly pressing against the outer curvature, slowly dragging upwards along the helix." +
+					"\n\nYou try wrenching your arm away but the creature’s quite insistent about its affection for you. Struggling against the offending substance affords all your attention, the writhing sensation worming its way up your leg going relatively unnoticed." +
+					" By the time you finally acknowledge it, the thing has already wrapped itself around your torso. A sickening giggle echoes off the walls, rapidly shifting in pitch as the creature continues its attack. Focusing on the sound, you realise, too late, that it's right behind you." +
+					" Another slimy extension grapples you from behind, restraining your free arm, the maddening giggles mounting as the fiend revels in your struggles." +
+					"\n\nYou fight, pulling, kicking, biting, doing all you can to tear away your limbs from the monstrosity. Your struggles are in vain, more slimy tendrils taking hold of your restrained form, wrapping around your mouth, muffling your grunts, latching onto your arms and torso, and forcing you against the wall." +
+					" The sickly squelching of the being assailing you creeps closer as it presses you against the wall, two of its appendages crawling up your spine, almost teasing your form as their master relishes in your torment. They near your earlobes, softly pressing against the outer curvature, slowly dragging upwards along the helix." +
 					" You feel the creature press itself against you, your form now at its mercy as it releases another perturbing round of incessant, vexing laughter. Inching downwards, the tendrils tickle the flesh of your inner ear. Finally, it pushes forwards, penetrating the inner sanctum of your mind as it pushes past your eardrum." +
 					" Renewed vigor comes as panic ensues, your body doing everything in its power in a last futile attempt at breaking free. Yet it is all too late as the abomination has found its prize. Your world fades to black." +
 					"\n\nNothing but endless darkness greets you as the blackness stretches on for eternity. You’ve only arrived here and yet it feels like you’ve lasted an eternity in this place. The only feeling you’re aware of is being freed from your responsibilities as champion." +
@@ -208,7 +208,7 @@ package classes.Scenes.Places{
 					" Your first mind-numbing orgasm comes almost instantly, and soon after a second is granted. It’s so good...this is all so good. After each release, you fall deeper and deeper into blissful slumber." +
 					" It wants you to sleep, wants you to rest before it sends you away. She wants you to sleep. Go to sleep while it pleasures you, while she comforts you. Come back when you are ready... when you are adequate. She’ll be waiting for you. She loves you." +
 					" It loves you. Return to her so she can love you again. Return after you are ready. Return after you are sufficient." +
-					"\n\nYou wake sometime later, the soft ground leading towards the mouth of the cave greeting you. How long were you out for? Judging by the small pool of drool on the ground, a good while. It’s a little surprising nothing has come by to take advantage of you." +
+					"\n\nYou wake some time later, the soft ground leading towards the mouth of the cave greeting you. How long were you out for? Judging by the small pool of drool on the ground, a good while. It’s a little surprising nothing has come by to take advantage of you." +
 					" The inhabitants of this world aren’t known for passing up on a free fuck, conscious or not." +
 					"\n\nAs you look towards the cave entrance, a sense of insignificance wells up within you. You’re not ready to enter the cave yet." +
 					" Whatever is in there is far beyond your capacity, it would be suicide attempting to go inside. You’re too feeble, too inferior, too inadequate... You just need more time. For now, it’s better if you return to camp." +
@@ -232,7 +232,7 @@ package classes.Scenes.Places{
 					"\n\nThe deeper you traverse, the worse the chill becomes. Strangely, a feeling of solace accompanies the frosted breeze, a familiarity that you would cherish only in the arms of a close friend." +
 					" Perish the thought, for it only distracts from the task at hand. With [weapon] readied, heart as iron, a will of steel, and a sharp mind you push deeper." +
 					"\n\nOnce again the cold granite greets you, the familiar bend your only route of progression. This is where you met that...thing." +
-					" The enigma that forced you out of the cave, rebuked your advance and mocked you as it threw you away like trash, crushed you beneath heel like dirt." +
+					" The enigma that forced you out of the cave, rebuked your advances and mocked you as it threw you away like trash, crushed you beneath heel like dirt." +
 					" It made you understand just how unprepared you were for an expedition like this." +
 					" But now you’re better prepared to handle this thing and whatever else you might encounter in this cave." +
 					"\n\nYou’re better, smarter, stronger... You are adequate." +
@@ -265,7 +265,7 @@ package classes.Scenes.Places{
 					"\n\nA deep, sultry sigh is emitted from behind, a violet hand caresses your cheek soon after. \"<i>Is this really enough to enthrall your mind? A simple weave?</i>\" Soft flesh presses itself against your back, an arm wraps around your chest");
 			if (player.biggestTitSize() >= 2) outputText(" laying cross your bosom");
 			outputText("." +
-					"\n\n\"<i>Woefully inadequate indeed...</i>\", you hear yourself say, not feeling your mouth at all. This is so weird yet so hot." +
+					"\n\n\"<i>Woefully inadequate indeed...</i>\", you hear yourself say, not feeling your mouth at all. This is so weird...But your loins begin to heat up." +
 					" Kaerb-Dnim laughs and you laugh as well, both of you resume the game where you left it." +
 					" Having her tentacle in your head is the best! You could let her fuck your ears all day long and still want to do it the day after." +
 					"\n\nSquelch, squelch, squelch is all you hear for a few seconds as her hand slowly caresses your left breast making you moan appreciatively." +
@@ -290,10 +290,10 @@ package classes.Scenes.Places{
 			clearOutput();
 			if (player.hasCock() && !player.hasVagina()){
 				outputText("You, yet again, enter the cave and cheerfully rush to meet Kaerb-Dnim, who welcomes you with open arms." +
-						"\n\n\"<i>I see you have become as slutty and lusty for me as I wanted, [name]. I think it’s high time I reward your efforts, and give you your well-deserved prize.</i>\"" +
+						"\n\n\"<i>I see you have become as slutty as I wanted, [name]. I think it’s high time I reward your efforts, and give you your well-deserved prize.</i>\"" +
 						"You cheerfully nod, letting her put her loving tentacle back into your head, drooling at the mere thought of your mind becoming more lewd and obscene." +
 						" This drives you to the edge, making you cum spontaneously as you feel your mind being probed again." +
-						" Squelch squelch squelch is all you hear for a few seconds, and you shake your head as lights flash behind your eyelids." +
+						" <i>Squelch squelch squelch</i> is all you hear for a few seconds, and you shake your head as lights flash behind your eyelids." +
 						" You think you are still shaking but you lack feedback from your body. Two times did the cheese fly to the soul by song, alas she never did lick that limp noodle." +
 						"\n\n\"<i>Woefully inadequate</i>\", you hear yourself say, once again, it comes from you, yet it feels like you’re not speaking." +
 						" Kaerb-Dnim laughs. You laugh, yet again as she kisses you, her tentacle coiling around your breasts], tweaking your nipples as you fiercely masturbate under her guidance." +
@@ -309,14 +309,14 @@ package classes.Scenes.Places{
 						" You’re so happy this is happening to you as you feel something hatch within you." +
 						"Your balls ache, tingling pleasurably just as you start changing." +
 						" It feels so good to be entirely remade from the inside and you cum several times as your skin slowly turns to a pale ghostly shade, not unlike that of Kaerb-Dnim." +
-						" The colors begin spreading from your belly across your entire body." +
-						"\n\nYou moan in delight as your hair falls from your head, and are replaced by purple tentacles of various sizes, along them a web-like frills wrap around your head, silhouetting the shape of a crown." +
+						" The colors drain from your belly, the pale-white spreading across your entire body." +
+						"\n\nYou moan in delight as your hair falls from your head, replaced by purple tentacles of various sizes. Web-like frills wrap around your head, spreading between the tentacles in the shape of a crown." +
 						" You open your eyes, but are aware of a third one above your normal pair." +
 						" You realize your view is obstructed slightly by something in front of your face." +
 						" Above your mouth you’ve sprouted several prehensile tentacles, of which you can easily wrap around your prey, giving you the chance to use your newly acquired tentacle-like tongue." +
 						" Your cock aches slightly as they are internal and very slimy." +
-						" Your balls, despite being concealed with your tapered penis in your genital slit, ache with intensity;" +
-						" your penis constantly leaks a continuous fountain of cum, filling your slit past capacity and making an obscene puddle beneath you." +
+						" Your balls, despite being concealed with your tapered penis in your genital slit, aches intensely" +
+						" your penis constantly leaks a continuous fountain of cum, filling your slit past capacity, forcing the slit open and drooling down your body, making an obscene puddle beneath you." +
 						" Your chest is completely flat and with notable athletic tone, although you are covered with a webbed exoskeleton." +
 						" From afar, one would think you're wearing a gothic leather cape until they'd notice it's a part of your body." +
 						" You moan in delight as your cum leaking cock erupts from its slit at full mast, you reflexively bring your hand down to stroke." +
@@ -327,14 +327,14 @@ package classes.Scenes.Places{
 						"\n\nAs an alpha male your job is to inseminate the females so that they can lay eggs and infest new lifeforms, a most important duty." +
 						" While any males can properly fertilise a mindbreaker egg the chances of success are rather slim." +
 						" Unlike some random minotaur up these mountains, your cum is particularly fertile and suited to this task" +
-						" While females typicaly leads the sorority you might as well be higher in rank then most of them an honor only you the chosen male will get." +
-						" How Kaerb-Dnim found this one egg she gave you you got no idea but likely she had it for a long while and just ned a proper host, an host such as you to lay it." +
+						" While females typicaly leads the sorority you are higher in rank then most of them. This is an honor only you, my chosen male, will get." +
+						" How Kaerb-Dnim found this one egg she gave you you got no idea, but she's likely had it for a long while. You assume that she just needed a proper host, an host such as you to lay it." +
 						" A wicked plan starts to form in your mind as you begin to plan out how to get new hosts." +
 						" You imagine everyone living in an endless orgy of constant mind-shattering pleasure as you create an entire sorority of creatures like you." +
 						" The entire world is now playing the game, a game you and sister Kaerb-Dnim truly share now." +
 						" You and Kaerb-Dnim, now the sorority founders, need new willing sisters, brothers, and minions." +
-						" It’s high time you get out and find more willing or unwilling people to join in on your perverted games." +
-						" Then, once you have achieved greater numbers, you can paint Mareth green and white with fluids.");
+						" It’s high time you get out and find more people to join in on your perverted games. Willing or not, it doesn't matter. You know everyone will love it in the end." +
+						" Then, once you have achieved greater numbers, you can paint Mareth green and white, a paradise for you and yours.");
 				player.sexReward("default", "Vaginal", true, false);
 				player.sexReward("default", "Vaginal", true, false);
 				player.sexReward("default", "Vaginal", true, false);
@@ -378,8 +378,8 @@ package classes.Scenes.Places{
 			}
 			else {
 				outputText("You, yet again, enter the cave and cheerfully rush to meet Kaerb-Dnim, who welcomes you with open arms." +
-						"\n\n\"<i>I see you have become as slutty and lusty for me as I wanted, [name]. I think it’s high time I reward your efforts, and give you your well-deserved prize.</i>\"" +
-						"\n\nYou cheerfully nod, letting her put her loving tentacle back into your head, drooling at the mere thought of your mind becoming more lewd and obscene. This drives you to the edge, making you cum spontaneously as you feel your mind being probed again. Squelch squelch squelch is all you hear for a few seconds, and you shake your head as lights flash behind your eyelids. You think you are still shaking but you lack feedback from your body. A green song knits loud spaghetti and asks you in reverse when Snowball is." +
+						"\n\n\"<i>I see you have become as slutty as I wanted, [name]. I think it’s high time I reward your efforts, and give you your well-deserved prize.</i>\"" +
+						"\n\n You cheerfully nod, letting her put her loving tentacle back into your head, drooling at the mere thought of your mind becoming more lewd and obscene. This drives you to the edge, making you cum spontaneously as you feel your mind being probed again. Squelch squelch squelch is all you hear for a few seconds, and you shake your head as lights flash behind your eyelids. You think you are still shaking but you lack feedback from your body. A green song knits loud spaghetti and asks you in reverse when Snowball is." +
 						"\n\n\"<i>Woefully inadequate</i>\", you hear yourself say, not feeling your mouth at all. Kaerb-Dnim laughs." +
 						" You laugh yet again as she kisses you, her tentacle coiling around your breasts, tweaking your nipples as you fiercely masturbate under her guidance." +
 						" Soon Kaerb-Dnim guides you down to the ground and proceeds to grind her lovely purple pussy against your snatch, locking your legs against hers." +
@@ -388,18 +388,18 @@ package classes.Scenes.Places{
 						" She finally breaks away from you, her lovely tentacles retreating back out of your oozing snatch." +
 						"\n\n\"<i>We can finally be true sisters, [name], isn’t that wonderful?</i>\"" +
 						"\n\nYou only understand everything a few seconds later as you start shaking uncontrollably in pleasure. Being a true sister to Kaerb-Dnim?" +
-						" What a wonderful thing! You’re so happy this is happening to you as you feel something hatch within you." +
-						"Your womb aches and tingles pleasurably just as you start changing. It feels so good to be entirely remade from the inside and you cum several times as your skin slowly turns to a pale ghostly shade, not unlike that of Kaerb-Dnim, and begins spreading from your belly. \n" +
+						" What a wonderful thing! You gasp in pleasure, womb twitching as you feel something hatch within you." +
+						"Your womb aches and tingles pleasurably just as you start changing. It feels so <i>good</i>, and you cum several times as your skin slowly turns to a pale ghostly shade, not unlike that of Kaerb-Dnim, and begins spreading from your belly. \n" +
 						"You moan in delight as your hair falls from your head, and are replaced by purple tentacles of various size, which you use to fuck your own brain right away." +
 						" You open your many new eyes located on your tentacles smiling blissfully as the thing below your waist shifts into eight tentacles webbed to each other like a nightdress." +
 						" Your chest is left somewhat intact, although you are covered with a webbed exoskeleton, similar to your legs." +
 						" From afar, one would think you're wearing a gothic leather dress until they'd notice it's a part of your body." +
 						" You moan in delight, groping your own breast at the pleasure of your new, lewd and corrupted body. Kaerb-Dnim closes in on you as you molest yourself." +
 						"\n\n\"<i>You enjoy it, don’t you? Don’t you pity those that can’t enjoy such sensations?</i>\"" +
-						"You giggle lustfully understanding her request right away. \"<i>Yes sister, I think everyone in Mareth and beyond should live like this.</i>\"" +
+						"You giggle, understanding her request right away. You finger yourself as you speak. \"<i>Yes, dear sister, I think everyone in Mareth and beyond should live like this.</i>\"" +
 						"\n\nA wicked plan starts to form in your mind. You imagine everyone living in an endless orgy of constant mind-shattering pleasure as you create an entire sorority of creatures like you." +
 						" The entire world is now playing the game, a game you and sister Kaerb-Dnim truly share now. You and Kaerb-Dnim, now the sorority founders, need new willing sisters, brothers, and minions." +
-						" It’s high time you get out and find more willing or unwilling people to join in on your perverted games. Then, once you have achieved greater numbers, you can paint Mareth green and white with fluids." +
+						" It’s high time you get out and find more people to join in on your perverted games, willing or unwilling, it doesn't matter...not once they've experienced <i>this</i>. Then, once you have achieved greater numbers, you can paint Mareth green and white." +
 						"\n\n<b>You now are a Mindbreaker!</b>");
 				player.sexReward("default", "Vaginal", true, false);
 				player.sexReward("default", "Vaginal", true, false);
@@ -423,11 +423,11 @@ package classes.Scenes.Places{
 				var color:String = randomChoice("pale", "ghostly white", "light purple");
 				player.skin.base.color = color;
 				player.skin.base.color2 = color;
-				player.skinAdj = "slippery";
 				player.skinType = Skin.PLAIN;
 				if (player.skin.base.pattern != Skin.PATTERN_NONE) {
 					CoC.instance.transformations.SkinPatternNone.applyEffect(false);
 				}
+				player.skinAdj = "slippery";
 				player.tone = 0;
 				player.thickness = 20;
 				player.femininity = 80;
@@ -495,30 +495,30 @@ package classes.Scenes.Places{
 			if (MindBreakerConvert == 1) outputText("It seems a new friend already made it to the cave and is in the re-education process.");
 			else if(MindBreakerConvert >= 2) outputText(" In a corner you can see that your many new friends are in the re-education process.");
 			if (MindBreakerGoblinConvert == 1) outputText(" You see the goblin addition masturbating with a newly designed tentacle earplug toy in the corner.");
-			else if(MindBreakerGoblinConvert >= 2) outputText(" You see a few goblins masturbating with a newly designed tentacle earplug toy in the corner, their combined juices making a lovely puddle on the floor.");
+			else if(MindBreakerGoblinConvert >= 2) outputText(" You see a few goblins masturbating with some newly designed tentacle earplug toys in the corner, their combined juices making a lovely puddle on the floor.");
 
 			if (MindBreakerFetishFemaleConvert >= 1) {
 				if (MindBreakerFullConvert >= 1) {
-					outputText(" A mindbreaker is in the process of altering a cultist's mind into that of a proper follower, the girl riding orgasm after orgasm as her brain is thoroughly fucked.");
+					outputText(" A mindbreaker is in the process of altering a cultist's mind into that of a proper follower, the girl riding orgasm after orgasm, her pussy and legs spasming constantly as her brain is thoroughly fucked.");
 				}
 				else{
-					if (MindBreakerFetishFemaleConvert >= 2) outputText(" The female cultists you converted sit quietly in a corner of the cave practicing your teachings by themselves. It occurs to you some of them could use a good earfucking.Maybe you could even make proper mindbreakers out of some of them?");
-					else outputText(" The female cultist you converted sit quietly in a corner of the cave practicing your teachings by herself. It occurs to you she could use a good earfucking. Maybe you could even make a proper mindbreaker out of her?");
+					if (MindBreakerFetishFemaleConvert >= 2) outputText(" The female cultists you converted sit quietly in a corner of the cave practicing your teachings by themselves. It occurs to you some of them could use a good earfucking. Maybe you could even make proper mindbreakers out of some of them?");
+					else outputText(" The female cultist you converted sits quietly in a corner of the cave, practicing your teachings by herself. It occurs to you she could use a good earfucking. Maybe you could even make a proper mindbreaker out of her?");
 				}
 			}
-			if (MindBreakerFetishFemaleConvert >= 1) {
+			if (MindBreakerFetishMaleConvert >= 1) {
 				if (MindBreakerFullConvert >= 1) {
 					outputText(" A male cultist on the other side is busy being raped by another mindbreaker, cum leaking constantly from his cock. He seems to be enjoying himself..");
 				}
 				else {
-					if (MindBreakerFetishFemaleConvert >= 2) outputText(" The male cultists you converted sit quietly in a corner of the cave practicing your teachings by himself. Of course witheout the help of a mindbreaker there is absolutely no way for them to cum so they just end up masturbating pointlessly in frustration in the hope that their next true orgasm blows their mind out.");
-					else outputText(" The male cultist you converted sit quietly in a corner of the cave practicing your teachings by himself. Of course witheout the help of a mindbreaker there is absolutely no way for him to cum so they just end up masturbating pointlessly in frustration in the hope that his next true orgasm blows his mind out.");
+					if (MindBreakerFetishMaleConvert >= 2) outputText(" The male cultists you converted sit quietly in a corner of the cave practicing your teachings by himself. Of course witheout the help of a mindbreaker there is absolutely no way for them to cum so they just end up masturbating pointlessly. Maybe they hope that their next true orgasm blows their mind out?");
+					else outputText(" The male cultist you converted sit quietly in a corner of the cave practicing your teachings by himself. Of course witheout the help of a mindbreaker there is absolutely no way for him to cum so they just end up masturbating pointlessly. You suspect that his next true orgasm will literally blow his mind out.");
 				}
 			}
 			outputText(" Truthfully, just being here turns you on so much you can’t help but to fuck your own brain every now and then, although only ever to sharpen your own well-honed lasciviousness." +
 					"\n\nEveryone at home seems to be busy but, nonetheless Kaerb-Dnim welcomes you." +
-					"\n\n\"<i>Hello sister [name] how is your quest for converts going? Did you come looking for some cerebral relief?");
-			if (MindBreakerConvert >= 1) outputText(" As you can see, many of your followers have been awaiting your return eagerly.");
+					"\n\n\"<i>Hello sister [name], how is your quest for converts going? Did you come looking for some cerebral relief?");
+			if (MindBreakerConvert >= 1) outputText(" As you can see, your followers have been awaiting your return eagerly.");
 			outputText("</i>\"");
 			menu();
 			addButton(0, "Talk", TalkAboutMB);
@@ -529,14 +529,14 @@ package classes.Scenes.Places{
 		public function CaveLayoutBack():void {
 			clearOutput();
 			outputText("You are currently on visit in the mindbreakers lair.\n\n");
-			if (MindBreakerConvert == 1) outputText("It seems a new friend already made it to the cave and is in the re-education process.");
-			else if(MindBreakerConvert >= 2) outputText(" In a corner you can see that your many new friends are in the re-education process.");
+			if (MindBreakerConvert == 1) outputText("It seems a new friend already made it to the cave and is going through the re-education process.");
+			else if(MindBreakerConvert >= 2) outputText(" In a corner you can see that your many new friends are going through the re-education process.");
 			if (MindBreakerGoblinConvert == 1) outputText(" You see the goblin addition masturbating with a newly designed tentacle earplug toy in the corner.");
 			else if(MindBreakerGoblinConvert >= 2) outputText(" You see a few goblins masturbating with a newly designed tentacle earplug toy in the corner, their combined juices making a lovely puddle on the floor.");
 
 			if (MindBreakerFetishFemaleConvert >= 1) {
 				if (MindBreakerFullConvert >= 1) {
-					outputText(" A mindbreaker is in the process of altering a cultist's mind into that of a proper follower, the girl riding orgasm after orgasm as her brain is thoroughly fucked.");
+					outputText(" A mindbreaker is in the process of altering a cultist's mind into that of a proper follower, the girl riding orgasm after orgasm as her brain and pussy are thoroughly fucked.");
 				}
 				else{
 					if (MindBreakerFetishFemaleConvert >= 2) outputText(" The female cultists you converted sit quietly in a corner of the cave practicing your teachings by themselves. It occurs to you some of them could use a good earfucking.Maybe you could even make proper mindbreakers out of some of them?");
@@ -545,11 +545,11 @@ package classes.Scenes.Places{
 			}
 			if (MindBreakerFetishFemaleConvert >= 1) {
 				if (MindBreakerFullConvert >= 1) {
-					outputText(" A male cultist on the other side is busy being raped by another mindbreaker, cum leaking constantly from his cock. He seems to be enjoying himself..");
+					outputText(" A male cultist on the other side is busy being raped by another mindbreaker, cum leaking constantly from his cock. Both seem to be enjoying themselves..");
 				}
 				else {
-					if (MindBreakerFetishFemaleConvert >= 2) outputText(" The male cultists you converted sit quietly in a corner of the cave practicing your teachings by himself. Of course witheout the help of a mindbreaker there is absolutely no way for them to cum so they just end up masturbating pointlessly in frustration in the hope that their next true orgasm blows their mind out.");
-					else outputText(" The male cultist you converted sit quietly in a corner of the cave practicing your teachings by himself. Of course witheout the help of a mindbreaker there is absolutely no way for him to cum so they just end up masturbating pointlessly in frustration in the hope that his next true orgasm blows his mind out.");
+					if (MindBreakerFetishFemaleConvert >= 2) outputText(" The male cultists you converted sit quietly in a corner of the cave practicing your teachings by himself. Of course witheout the help of a mindbreaker there is absolutely no way for them to cum, so they just end up masturbating pointlessly. Their next true orgasm will almost certainly blow their minds.");
+					else outputText(" The male cultist you converted sit quietly in a corner of the cave practicing your teachings by himself. Of course witheout the help of a mindbreaker there is absolutely no way for him to cum so they just end up masturbating pointlessly. His next true orgasm will likely blow his mind.");
 				}
 			}
 			outputText(" Truthfully, just being here turns you on so much you can’t help but to fuck your own brain every now and then, although only ever to sharpen your own well-honed lasciviousness. Kaerb Dnim isn't to far as usual in case you want to ask something of her.");
@@ -565,16 +565,16 @@ package classes.Scenes.Places{
 			if (MindBreakerGoblinConvert < 1) addButtonDisabled(2,"Use gob","You need at least one goblin follower to do this.");
 			//addButton(3, "Use gal", FuckGirl).hint("Improve the mind of one of the girl and enjoy yourself along the way.");
 			//if (MindBreakerFetishFemaleConvert < 1) addButtonDisabled(3,"Use gal","You need at least one female follower to do this.");
-			addButton(4, "Use boy", FuckBoy).hint("Reward one of the boy with his long awaited climax making him cum a river");
+			addButton(4, "Use boy", FuckBoy).hint("Reward one of the boys with his long awaited climax. He'll cum a river, if his swollen balls are any indication");
 			if (MindBreakerFetishMaleConvert < 1) addButtonDisabled(4,"Use boy","You need at least one male follower to do this.");
-			if ((MindBreakerGoblinConvert >= 1 || MindBreakerFetishFemaleConvert >= 1) && (PlayerEggIsFertile || player.hasCock()))addButton(5, "Convert", CreateMB).hint("Make one of your female pet into a new Mindbreaker.");
-			else addButtonDisabled(5,"Convert","You need at least one follower in order to get create a new mindbreaker. Furthermore you need your parasitic eggs to be properly fertilised by a male fellower cum or that of a male mindbreaker.");
-			//addButton(6, "Puppet sex", PuppetMaster).hint("Mind control two of your favorite pet into fucking one another and enjoy it.");
+			if ((MindBreakerGoblinConvert >= 1 || MindBreakerFetishFemaleConvert >= 1) && (PlayerEggIsFertile || player.hasCock()))addButton(5, "Convert", CreateMB).hint("Make one of your female pets into a new Mindbreaker.");
+			else addButtonDisabled(5,"Convert","You need at least one follower in order to get create a new mindbreaker. Furthermore you need your parasitic eggs to be properly fertilised by a male follower's cum...or preferably, that of a male mindbreaker.");
+			//addButton(6, "Puppet sex", PuppetMaster).hint("Mind control two of your favorite pets into fucking one another and enjoy it.");
 			//if (MindBreakerFetishFemaleConvert == 0 || MindBreakerFetishMaleConvert == 0) addButtonDisabled(6,"Puppet sex","You need at least one female follower and one male fellower of normal size to do this.");
-			//addButton(7, "Orgy", FuckEveryFellower).hint("Just fuck with all of your follower at the same time preferably one of each type.");
-			//if (MindBreakerGoblinConvert >= 1 && MindBreakerFetishFemaleConvert >= 1 && MindBreakerFetishMaleConvert >= 1) addButtonDisabled(7,"Orgy","You need at least a goblin a man and a woman in order to get an orgy going on.");
-			if (MindBreakerConvert >=10) addButton(8, "Prisoner", BreakAPrisonner).hint("It appears your follower brought in a new toy for you to break how kind. Time to fix the mind of this defiant new plaything.");
-			else if (MindBreakerConvert >= 10 && !MindbreakerPrisoner) addButtonDisabled(8,"Prisoner").hint("There is no prisonner in the cave for you to play with at the time.");
+			//addButton(7, "Orgy", FuckEveryFellower).hint("Just fuck all of your followers at the same time, preferably one of each type.");
+			//if (MindBreakerGoblinConvert >= 1 && MindBreakerFetishFemaleConvert >= 1 && MindBreakerFetishMaleConvert >= 1) addButtonDisabled(7,"Orgy","You need at least a goblin, a man and a woman in order to get an orgy going on.");
+			if (MindBreakerConvert >=10) addButton(8, "Prisoner", BreakAPrisonner).hint("It appears your followers brought in a new toy for you to break how kind. Time to fix the mind of this defiant new plaything.");
+			else if (MindBreakerConvert >= 10 && !MindbreakerPrisoner) addButtonDisabled(8,"Prisoner").hint("There is no prisoners in the cave for you to play with at the time.");
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 
@@ -582,12 +582,12 @@ package classes.Scenes.Places{
 			clearOutput();
 			outputText("You are curious about the mindbreakers of Mareth, where do they originate from?" +
 					"\n\n\"<i>Truth be told, we were here way before the demons." +
-					" Creatures modified from the indigenous sentient humanoids of this world to serve a master from another dimension, living deep in Mareth darkest reaches." +
+					" Creatures modified from the indigenous sentient humanoids of this world to serve a master from another dimension, living deep in Mareth's darkest reaches." +
 					" We have a body similar to the sea witches and they serve the same god as we do but, ultimately, our creator gave us all but one role, to infest and conquer in his name." +
-					" His name cannot be pronounced in any human tongue and will drive mad the one hearing it, but you should know him as The Deep One." +
-					" The gods have waged war with us for a fair millennium and almost caused us to go extinct, but the demons gave us a reprieve by slaying most of them." +
-					" I was the last of my kind until you came along. We will spread in the world’s many hidden locations and someday emerge again, this time around, Mareth will be ours.</i>\"" +
-					"\n\nYou can only but agree with her sentiment. It's only a mather of time until you convert the world to this perfect way of thinking.");
+					" His name cannot be pronounced in any human tongue, and the mere utterance will drive mad the one hearing it. You, however, should know him as The Deep One." +
+					" The gods...They despised Him and his creations. They have waged war with us for several millennia. Their most recent crusade almost caused us to go extinct, but the demons gave us a reprieve by slaying most of them." +
+					" I was the last of my kind until you came along. We will spread in the world’s many hidden locations and someday emerge again. This time around, Mareth will be ours.</i>\"" +
+					"\n\nYou can only but agree with her sentiment. It's only a matter of time until you convert the world to this perfect way of thinking.");
 			menu();
 			CaveLayout2();
 		}
@@ -605,9 +605,9 @@ package classes.Scenes.Places{
 					" Eventually, you break from Kaerb-Dnim, still overloaded with the sensations from a moment ago, a thick strand of green fluid linking your pussies for an instant.");
 			if(player.cor < 70 || player.lib < 100){
 				outputText("\n\n\"<i>I took the liberty of fixing your mind slightly. There were a few unnecessary inhibitions I thought you didn't need.</i>\"" +
-						"\n\nYou indeed feel even better than before, and thanks your sister for her nice work as you head back to camp.");
+						"\n\nYou indeed feel even better than before, and you thank your sister for her help as you head back to camp.");
 			}
-			else outputText("\n\nFeeling utherly relaxed from the lovemaking you go back to camp.");
+			else outputText("\n\nFeeling utterly relaxed from the lovemaking, you head back to camp.");
 			player.sexReward("Default","Vaginal",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -802,7 +802,7 @@ package classes.Scenes.Places{
 					if (MindBreakerFetishFemaleConvert == 1) outputText("your male slave.");
 					else outputText("one of the many male slaves in the lair.");
 					outputText("He has been an excellent slut and it’s high time to reward his throbbing cock and complete submissiveness properly. " +
-							"\n\n\"<i>“Big brother, [name], I have become a perfect slut as you asked. I raped, and let myself be raped, by countless men and women to prove my loyalty. Please shower me with your love and tentacles.</i>\"" +
+							"\n\n\"<i>\"Big brother, [name], I have become a perfect slut as you asked. I raped, and let myself be raped, by countless men and women to prove my loyalty. Please shower me with your love and tentacles.</i>\"" +
 							"You tell him that he has done well. He is finally ready to transcend and become perfect." +
 							" Your [cock] stiffens, spilling green cum all over your legs as it sprouts from your genital slit, the thought of infesting him with your young makes you leak even more cum." +
 							" He practically throws himself into your arms as you fondly remember your transformation." +
@@ -863,13 +863,13 @@ package classes.Scenes.Places{
 					"\n\n\"<i>I won’t ever talk, fiends, you're wasting your time torturing me!</i>\"" +
 					"\n\nOh, but you don’t need her to say anything. No... what you're interested in right now is her sexy body covered in fur… time to shave that!" +
 					" You insert your tentacle in the prisoner’s ears, forcing the trigger to open her mouth wide." +
-					" Her struggle is cut short by your ministration and you forcefully shoving the first chunk of hummus down her throat ordering her to eat and swallow." +
-					"\n\nShe quickly loses that animal face and fur of hers. These animals ears paw and this tail look cute and all but these just won’t do here in the lair." +
+					" Her struggle is cut short by your ministrations. You forcefully shove the first chunk of hummus down her throat, ordering her to eat and swallow." +
+					"\n\nShe quickly loses that animal face and fur of hers. These animals ears, paws, and this tail look cute and all but these just won’t do here in the lair." +
 					" You keep altering her perception as you keep feeding her more and more hummus until your victim is looking completely horrified at her now fully human body." +
 					"\n\n\"<i>You, big sister! W..what have you done to my now lovely human body?! I love you!</i>\"" +
-					" She suddenly closes her mouth, terrified at what she just said, as her own mind is betraying her, you sadisticaly whisper to her ears that you are just getting started." +
-					"\n\nGreen flashes run behind the woman’s eyes as you break down every single memory making her who she is and replace them with lewd vision of your own design, erasing her entire life within minutes." +
-					" She struggles for a moment against the brainwash, but as soon as you start adding the new memories her expression turns into that lovely, perverted, lascivious smile you have in all of your followers." +
+					" She suddenly closes her mouth, terrified at what she just said, as her own mind is betraying her, you sadistically whisper to her ears that you are just getting started." +
+					"\n\nGreen flashes run behind the woman’s eyes as you break down every single memory making her who she is and replace them with lewd visions of your own design, erasing her entire life within minutes." +
+					" She struggles for a moment against the brainwashing, breaking your connection with a few precious memories once or twice...but as soon as you start adding the new memories her expression turns into that lovely, perverted, lascivious smile you have in all of your followers." +
 					" You cum green goo as the last of her memory is fully altered filling her mind with wild depraved fantasies featuring you and the sisterhood.");
 			MindBreakerFetishFemaleConvert ++;
 			MindBreakerConvert ++;
@@ -889,13 +889,13 @@ package classes.Scenes.Places{
 
 		public function MindbreakerBrainEvolution(isOutOfCave:Boolean = true):void {
 
-			outputText("\n\nAs you finish converting this new recruit to the sisterhood you are suddenly rocked to the core by a spike of pleasure, your mind expanding with new psychic powers as your body spontaneously cum splashing the ground beneath you green with eldritch slime." +
+			outputText("\n\nAs you finish converting this new recruit to the sisterhood you are suddenly rocked to the core by a spike of pleasure, your mind expanding with new psychic powers. Your body convulses, spontaneously splashing the ground beneath you green with eldritch slime." +
 					" Fully overcome by desire you order your newest disciple to kneel in front of you as you begin to fiercely masturbate, cumming over and over again and covering the convert with so much fluid one might mistake them for a slime monster." +
-					" All the while your newest disciple smiles in awe and pleasure as you baptise your newest adept with your blighted juices spontanously cuming from the psychic feedback your powers relay back to it's addled brain." +
+					" All the while, your newest disciple smiles in awe and pleasure. You baptise your newest adept with your blighted juices, their eyes rolling back in ecstasy. The psychic feedback overwhelms it's addled brain, and they convulse, spraying the floor with their love-juices." +
 					" In need of more you firmly shove your");
 			if (player.hasCock())outputText(" cock");
 			if (player.hasVagina())outputText(" cunt");
-			outputText(" into the adept mouth letting your new pet do wonders with its tongue and flooding its throat with green sludge.\n\nOnly as you reach your tenth orgasm do you relent")
+			outputText(" into the adept mouth, letting your new pet do wonders with its tongue and flooding its throat with green sludge.\n\nOnly as you reach your tenth orgasm do you relent")
 			if (isOutOfCave) outputText(", ordering your dazed toy to head to the cave where Kaerb Dnim will provide it with further training.");
 			else outputText(".");
 			outputText(" \n\nYour overloaded brain seems to have changed, improved as your thoughts are now more lewd, more obscene, more perfect. You are getting closer to the truth. ");

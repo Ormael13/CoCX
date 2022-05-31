@@ -5,11 +5,11 @@ import classes.StatusEffects;
 public class ManaShieldSpell extends AbstractGreySpell {
 	public function ManaShieldSpell() {
 		super(
-				"Mana Shield",
-				"Drawning your own mana with help of lust and force of the willpower to form shield that can absorb attacks.  Despite been grey magic it still does carry the risk of backfiring and raising lust.",
-				TARGET_SELF,
-				TIMING_TOGGLE,
-				[TAG_BUFF]
+			"Mana Shield",
+			"Drawning your own mana with help of lust and force of the willpower to form shield that can absorb attacks.  Despite been grey magic it still does carry the risk of backfiring and raising lust.",
+			TARGET_SELF,
+			TIMING_TOGGLE,
+			[TAG_BUFF]
 		);
 	}
 	

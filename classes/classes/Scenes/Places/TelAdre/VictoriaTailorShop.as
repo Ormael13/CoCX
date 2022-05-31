@@ -1,11 +1,15 @@
 package classes.Scenes.Places.TelAdre {
 import classes.ItemType;
 import classes.StatusEffects;
+import classes.display.SpriteDb;
 
 public class VictoriaTailorShop extends Shop {
     public function VictoriaTailorShop() {
-        sprite = 61;
         story = baseStory.locate("VictoriaTailorShop");
+    }
+
+    override public function sprite():void {
+        spriteSelect(SpriteDb.s_victoria)
     }
 
     //-----------------
@@ -32,6 +36,7 @@ public class VictoriaTailorShop extends Shop {
         addButton(10, armors.LTHRPNT.shortName, confirmBuy, armors.LTHRPNT);
         addButton(11, armors.BIMBOSK.shortName, confirmBuy, armors.BIMBOSK);
         addButton(12, armors.A_ROBE_.shortName, confirmBuy, armors.A_ROBE_);
+        addButton(13, armors.LTHRROB.shortName, confirmBuy, armors.LTHRROB);
 
         addButton(4, "Next", undergarmentSection);
         addButton(14, "Leave", telAdre.telAdreMenu);
@@ -56,6 +61,9 @@ public class VictoriaTailorShop extends Shop {
         addButton(6, undergarments.LTX_BRA.shortName, confirmBuy, undergarments.LTX_BRA);
         addButton(7, undergarments.LTXSHRT.shortName, confirmBuy, undergarments.LTXSHRT);
         addButton(8, undergarments.LTXTHNG.shortName, confirmBuy, undergarments.LTXTHNG);
+        addButton(8, undergarments.LTXTHNG.shortName, confirmBuy, undergarments.LTXTHNG);
+        
+        addButton(10, armors.C_CLOTH.shortName, confirmBuy, armors.C_CLOTH);
 
         addButton(9, "Previous", inside);
         addButton(14, "Leave", telAdre.telAdreMenu);

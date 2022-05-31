@@ -13,7 +13,7 @@ package classes.Items
 		public static const DEFAULT_VALUE:Number = 6;	//cena bazowa dla latających mieczy to 50 gems a nie 40 gems
 		public static const NOTHING:Nothing = new Nothing();
 		
-		public const ASAUCHI:FlyingSwords = new FlyingSwords("Asauchi","Asauchi","Asauchi","Asauchi","slash",32,1600,"Sword that was forged from soulmetal. It may not be as deadly as others but due to material it require lesser consumption of soul energies.", "Massive");
+		public const ASAUCHI:FlyingSwords = new FlyingSwords("Asauchi","Asauchi","Asauchi","Asauchi","slash",32,1600,"Sword that was forged from soulmetal. It may not be as deadly as others but due to material it lessen consumption of soul energies.", "Massive");
 		public const B_HALFM:FlyingSwords = new FlyingSwords("B.HalfM","Black Half-Moon","Black Half-Moon","Black Half-Moon","slash",6,600,"Sword that was forged from metal repeadly bathed in the liquid ice.", "Small");
 		public const E_HALFM:FlyingSwords = new FlyingSwords("E.HalfM","Ebon Half-Moon","Ebon Half-Moon","Ebon Half-Moon","slash",6,600,"Sword that was forged from metal repeadly infused with the darkness.", "Small");
 		public const MOONLGT:FlyingSwords = new FlyingSwords("Moonlgt","Moonlight","Moonlight","Moonlight","slash",8,800,"This flying sword was specialy forged and enhanted to help with sneak attacks and posses increased chance to leave bleeding wounds.", "Small");

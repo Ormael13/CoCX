@@ -13,7 +13,6 @@ import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
 import classes.Items.WeaponRangeLib;
-import classes.Scenes.Places.WoodElves;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -33,10 +32,12 @@ public class WoodElvesHuntingParty extends Monster
 
 		public function woodElfWeaponRestoreAtCombatEnd():void{
 			if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0){
+				outputText("Now that the fight's over, you go and retrieve your melee weapon from the ground where they knocked it out your hands.\n");
 				player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
 			}
-			else if(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0){
+			if(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0){
+				outputText("Now that the fight's over, you go and retrieve your ranged weapon from the ground where they knocked it out your hands.\n");
 				player.setWeaponRange(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID]) as WeaponRange);
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = 0;
 			}

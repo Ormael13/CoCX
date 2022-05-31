@@ -3,11 +3,7 @@
  */
 package classes.Items.Shields 
 {
-	import classes.CoC_Settings;
-	import classes.Creature;
-	import classes.CoC;
 	import classes.Items.Shield;
-	import classes.Player;
 
 	public class BeautifulShield extends Shield {
 		
@@ -23,7 +19,7 @@ package classes.Items.Shields
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.cor < (33 + game.player.corruptionTolerance())) return super.canUse();
+			if (game.player.cor < (33 + game.player.corruptionTolerance)) return super.canUse();
 			outputText("You grab hold of the handle of the shield only to have it grow burning hot.  You're forced to let it go lest you burn yourself.  Something within the shield must be displeased.  ");
 			return false;
 		}

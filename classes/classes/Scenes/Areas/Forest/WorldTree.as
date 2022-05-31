@@ -15,7 +15,6 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.MutationsHelper;
-import classes.CoC;
 
 public class WorldTree extends BaseContent
 	{
@@ -29,7 +28,7 @@ public class WorldTree extends BaseContent
 		public function YggdrasilDiscovery():void {
 			clearOutput();
 			outputText("With your soul sense, tracing the song back to it’s source is a simple task. Before long, you’re walking the same path in the deep woods as before, and soon you reach the same statuesque tree.\n\n");
-			if (player.plantScore() < 4 && player.yggdrasilScore() < 1) {
+			if (!player.isRace(Races.PLANT) && player.racialScore(Races.YGGDRASIL) == 0) {
 				outputText("You feel the song resonate within the tree, but you cannot discern its source, or anything about the tree. Its size aside, it appears perfectly normal, and you are certain there are even other trees of similar size elsewhere in the forest. When you take a break to meditate on the tree, you come to the realization that you only felt the song without the soul sense when you were a ");
 				outputText("" + player.mf("Treant", "Dryad") +". Perhaps if you regained that particular form, you could understand the true meaning behind this peculiar tree?\n\n");
 				doNext(camp.returnToCampUseOneHour);
@@ -48,7 +47,7 @@ public class WorldTree extends BaseContent
 					else addButton(2, "Take Branch", AidTakeBranch).hint("Take a fallen branch of the world tree");
 					if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(3, "Accept", AcceptTransform);
 					else {
-						if (player.yggdrasilScore() < 10) addButton(3, "Transform", AcceptTransform);
+						if (!player.isRace(Races.YGGDRASIL)) addButton(3, "Transform", AcceptTransform);
 						else addButtonDisabled(3, "Transform", "You're already full transformed into Yggdrasil.");
 					}
 					if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(14, "Decline", DeclineWolrdTreeOffer);
@@ -66,7 +65,7 @@ public class WorldTree extends BaseContent
 					else addButton(2, "Take Branch", AidTakeBranch).hint("Take a fallen branch of the world tree");
 					if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(3, "Accept", AcceptTransform);
 					else {
-						if (player.yggdrasilScore() < 10) addButton(3, "Transform", AcceptTransform);
+						if (!player.isRace(Races.YGGDRASIL)) addButton(3, "Transform", AcceptTransform);
 						else addButtonDisabled(3, "Transform", "You're already full transformed into Yggdrasil.");
 					}
 					if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(14, "Decline", DeclineWolrdTreeOffer);
@@ -86,7 +85,7 @@ public class WorldTree extends BaseContent
 			else addButton(2, "Take Branch", AidTakeBranch).hint("Take a fallen branch of the world tree");
 			if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(3, "Accept", AcceptTransform);
 			else {
-				if (player.yggdrasilScore() < 10) addButton(3, "Transform", AcceptTransform);
+				if (!player.isRace(Races.YGGDRASIL)) addButton(3, "Transform", AcceptTransform);
 				else addButtonDisabled(3, "Transform", "You're already full transformed into Yggdrasil.");
 			}
 			if (flags[kFLAGS.YGGDRASIL_TF] < 1) addButton(14, "Decline", DeclineWolrdTreeOffer);
@@ -95,7 +94,7 @@ public class WorldTree extends BaseContent
 
 		public function WhatAreYou():void {
 			clearOutput();
-			outputText("\"<i>We are Yggdrasil. You do not understand. You could, but you probably would not. We are the natural life of Mareth, from every tree to every blade of grass. We are the natural world. You stand in our “body”, but it is nothing but a shell to be filled with our voices, to hone our whispers into a song of life, an image to speak on our behalf. Alone, we are nothing, unthinking.  Together, we are Yggdrasil.</i>\"\n\n");
+			outputText("\"<i>We are Yggdrasil. You do not understand. You could, but you probably would not. We are the natural life of Mareth, from every tree to every blade of grass. We are the natural world. You stand in our \"body\", but it is nothing but a shell to be filled with our voices, to hone our whispers into a song of life, an image to speak on our behalf. Alone, we are nothing, unthinking.  Together, we are Yggdrasil.</i>\"\n\n");
 			doNext(YggdrasilMainMenu);
 		}
 
@@ -109,9 +108,9 @@ public class WorldTree extends BaseContent
 			clearOutput();
 			if (flags[kFLAGS.YGGDRASIL_BRANCH] < 1) {
 				outputText("\"<i>We have great power, but our ability to use it is...  limited. ");
-				if (player.yggdrasilScore() < 10) outputText("What power we can grant you, we offer freely, you need only accept.");
+				if (!player.isRace(Races.YGGDRASIL)) outputText("What power we can grant you, we offer freely, you need only accept.");
 				else outputText("We have already offered you what power we could.");
-				outputText(" But perhaps there is something more. This tree is naught but a shell, but millennia of focusing our song has imbued it with a fragment of our power. Granted it what you call “soulforce”.</i>\"\n\n");
+				outputText(" But perhaps there is something more. This tree is naught but a shell, but millennia of focusing our song has imbued it with a fragment of our power. Granted it what you call \"soulforce\".</i>\"\n\n");
 				outputText("You hear rumbling all around you. Its an earthquake! As you struggle to maintain your balance, branches fall around you from the darkness above. As the tremors still, you look around, and then up. You’re inside a tree, how did the branches get... there? \"<i>These twigs have power beyond mere wood. Take any piece you desire, ");
 				if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText("you already know someone who can turn it into a weapon befitting a champion.</i>\"\n\n");
 				else outputText("we have faith you will find a way to use it in our defense.</i>\"\n\n");
@@ -119,7 +118,7 @@ public class WorldTree extends BaseContent
 			}
 			else {
 				if (flags[kFLAGS.YGGDRASIL_BRANCH] > 1) {
-					outputText("\"<i>You ask Yggdrasil for permission to take another fallen branch from her tree. “Of course, do with it what you will.</i>\"  ");
+					outputText("\"<i>You ask Yggdrasil for permission to take another fallen branch from her tree. \"Of course, do with it what you will.</i>\"  ");
 				}
 				outputText("You look for the most promising of the sections of wood around you. While at first they all look different, the quality of wood in every branch is high, and they are all large enough to create a two handed weapon if you so desire. A bow perhaps? Or maybe a staff?\n\n");
 				if (flags[kFLAGS.YGGDRASIL_BRANCH] < 2) flags[kFLAGS.YGGDRASIL_BRANCH]++;
@@ -354,7 +353,7 @@ public class WorldTree extends BaseContent
 			if ((player.skinType != Skin.BARK || player.skinType != Skin.PARTIAL_BARK) && !player.isGargoyle() && changes < changeLimit && player.faceType == Face.PLANT_DRAGON) {
 				if (player.hasFur()) outputText("You scratch yourself, and come away with a large clump of " + player.coatColor + " fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, removing the fur to see the changes beneath.");
 				else outputText("You idly scratch an itch, but recoil when you feel the wrong texture in the wrong place.");
-				outputText(" You watch as flakes of skin peel away to reveal...  scales?  On closer examination, it appears that your “scales” are actually some form of bark. <b>You are now covered by scale-like bark from head to toe.</b>\n\n");
+				outputText(" You watch as flakes of skin peel away to reveal...  scales?  On closer examination, it appears that your \"scales\" are actually some form of bark. <b>You are now covered by scale-like bark from head to toe.</b>\n\n");
 				CoC.instance.transformations.SkinScales(Skin.COVERAGE_COMPLETE, {color:"mahogany", adj:"bark-like"}).applyEffect(false);
 				changes++;
 			}

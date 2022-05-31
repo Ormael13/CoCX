@@ -5,12 +5,10 @@
 package classes.Scenes.NPCs 
 {
 import classes.*;
-import classes.Items.Consumable;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.NPCs.Dinah;
 import classes.internals.Utils;
 
-	public class DinahFollower extends NPCAwareContent
+public class DinahFollower extends NPCAwareContent
 	{
 		
 		public function DinahFollower() 
@@ -57,10 +55,7 @@ import classes.internals.Utils;
 			outputText("They smile happily back at you, showing for the first time a tiny bit of skin. The wide smile is somewhat disturbing under their hood, and they begin packing up their equipment.  They mutter over their shoulder, \"<i>This will be so much fun. I could just feel the excitement in my tails. You can head on back and I'll see you within the hour, maybe a bit sooner or a bit later.  Oh my, yeah.</i>\" ");
 			outputText(" They stop for a moment as if recalling something and then they pull off their hood, revealing a head covered with fiery black and purple hair parted by cat ears, and  two pairs of small horns. Looking at you, with her literally burning eyes, she only utters one word, with a clearly female voice now, before disapearing, \"<i>Dinah.</i>\"");
 			outputText("\n\n(<b>Dinah has been added to the Followers menu!</b>)\n\n");
-			if (flags[kFLAGS.CODEX_ENTRY_CHIMERA] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_CHIMERA] = 1;
-					outputText("<b>New codex entry unlocked: Chimera!</b>\n\n");
-				}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_CHIMERA);
 			flags[kFLAGS.DINAH_LVL_UP] = 1;
 			flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.DINAH_AFFECTION] = 0;
@@ -113,7 +108,7 @@ import classes.internals.Utils;
 		
 		public function DinahAppearance():void {
 			clearOutput();
-			outputText("Dinah is a 7' 8\" tall cat chimera of seemly all cat races in this realm. Burning eyes like those of hellcats and, fiery hair with colors like those of cheshire cats, parted by twin pair of small horns. Behind her slowly moves two blazing tails, and two long tentacles similar to that of a calamari. Her four arms completes her chimeric visage.");
+			outputText("Dinah is a 7' 8\" tall cat chimera of seemly all cat races in this realm. Burning eyes, like those of hellcats and fiery hair with colors akin to those of cheshire cats, parted by twin pair of small horns. A pair of blazing tails sway slowly behind her, and two long tentacles similar to that of a calamari. Her four arms complete her chimeric visage.");
 			outputText("\n\nShe has " + dinahHips() + " and a " + dinahButt() + ". She has a pair of " + dinahTits() + " on her chest. They have "+dinahNippleSize()+"-inch nipples at their tips and must be at least " + Appearance.breastCup(flags[kFLAGS.DINAH_CUP_SIZE]) + "s.");
 			menu();//very long, flowing locks of - between shouled length and ass length - hair desc
 			addButton(14, "Back", DinahMainMenu);
@@ -121,7 +116,7 @@ import classes.internals.Utils;
 		
 		public function DinahSparring():void {
 			clearOutput();
-			outputText("\"<i>Oh, you sensed my slowly building boredom? Not gonna say no to some entertaiment!</i>\" she makes few strenches and assumes a combat pose. \"<i>Let's <b>play</b> [name]!</i>\".");
+			outputText("\"<i>Oh, you sensed my slowly building boredom? Not gonna say no to some entertaiment!</i>\" she makes few strenches and assumes a combat pose. \"<i>Let's <b>play</b>, [name]!</i>\".");
 			player.createStatusEffect(StatusEffects.CampSparingDinah,0,0,0,0);
 			startCombat(new Dinah());
 		}
@@ -202,10 +197,7 @@ import classes.internals.Utils;
 			addButton(7, consumables.REDVIAL.shortName, buyItem3, 7).hint("Buy a vial of ominous red liquid.");
 			addButton(8, consumables.STRASCA.shortName, buyItem2, 8).hint("Buy a Strawberry shortcake.");
 			addButton(9, consumables.BCHCAKE.shortName, buyItem2, 9).hint("Buy a Big chocolate cake.");
-			if (player.headJewelry == headjewelries.HBHELM && player.armor == armors.HBARMOR) {
-				if (player.hasStatusEffect(StatusEffects.BuyedHowlingBansheMech)) addButtonDisabled(10, "???", "Wait until she find things that may be of use to fully restore HB mech.");
-				else addButton(10, vehicles.HB_MECH.shortName, buyHowlingBansheeMech).hint("Buy HB Mech - Increase armor by 15, magic resistance by 15.");
-			}
+			if (player.headJewelry == headjewelries.HBHELM && player.armor == armors.HBARMOR) addButton(10, "HB M&U", buyHowlingBansheeMechAndUpgrades);
 			else addButtonDisabled(10, "???", "Offers only for those that are wearing HB Armor & HB Helmet.");
 			if (flags[kFLAGS.DINAH_LVL_UP] > 0.5) {
 				addButton(11, "Roulette", DinahShopMainMenu3).hint("You feelin' lucky champion?");
@@ -298,8 +290,8 @@ import classes.internals.Utils;
 		}
 		public function catChimeraBuy1(itype:ItemType):void {
 			clearOutput();
-			outputText("You point out the " + itype.longName + ".\n\n");
-			outputText("\"<i>Oh this one? It costs " + (itype.value * (1 + _extra)) + " gems.</i>\"");
+			outputText("You gesture at " + itype.longName + ".\n\n");
+			outputText("\"<i>Oh, this one? It costs " + (itype.value * (1 + _extra)) + " gems.</i>\"");
 			if (player.gems < (itype.value * (1 + _extra))) {
 				outputText("\n<b>You don't have enough gems...</b>");
 				doNext(DinahShopMainMenu);
@@ -309,7 +301,7 @@ import classes.internals.Utils;
 		}
 		public function catChimeraBuy2(itype:ItemType):void {
 			clearOutput();
-			outputText("You point out the " + itype.longName + ".\n\n");
+			outputText("You gesture at " + itype.longName + ".\n\n");
 			outputText("\"<i>Oh this one? It costs " + (itype.value * (2 + _extra)) + " gems.</i>\"");
 			if (player.gems < (itype.value * (2 + _extra))) {
 				outputText("\n<b>You don't have enough gems...</b>");
@@ -382,28 +374,138 @@ import classes.internals.Utils;
 			inventory.takeItem(itype, DinahShopMainMenu3);
 		}
 		
+		public function buyHowlingBansheeMechAndUpgrades():void {
+			menu();
+			if (player.hasStatusEffect(StatusEffects.BuyedHowlingBansheMech)) {/*
+				if (player.hasKeyItem("HB Armor Plating") >= 0) {
+					if (player.keyItemvX("HB Armor Plating", 1) == 1) addButton(0, "Armor Plating v2", buyHowlingBansheeMechUpgrade, "Armor Plating v2", 2500).hint("Increase armor by 25.");
+					if (player.keyItemvX("HB Armor Plating", 1) == 2) addButton(0, "Armor Plating v3", buyHowlingBansheeMechUpgrade, "Armor Plating v3", 3500).hint("Increase armor by 35.");
+					if (player.keyItemvX("HB Armor Plating", 1) == 3) addButton(0, "Armor Plating v3", buyHowlingBansheeMechUpgrade, "Armor Plating v4", 4500).hint("Increase armor by 45.");
+					if (player.keyItemvX("HB Armor Plating", 1) == 4) addButtonDisabled(0, "Armor Plating v4", "Your HB Mech already have this upgrade.");
+				}
+				else addButton(0, "Armor Plating v1", buyHowlingBansheeMechUpgrade, "Armor Plating v1", 1500).hint("Increase armor by 15.");
+				if (player.hasKeyItem("HB Leather Insulation") >= 0) {
+					if (player.keyItemvX("HB Leather Insulation", 1) == 1) addButton(1, "Leather Insulation v2", buyHowlingBansheeMechUpgrade, "Leather Insulation v2", 2500).hint("Increase magic resistance by 25.");
+					if (player.keyItemvX("HB Leather Insulation", 1) == 2) addButton(1, "Leather Insulation v3", buyHowlingBansheeMechUpgrade, "Leather Insulation v3", 3500).hint("Increase magic resistance by 35.");
+					if (player.keyItemvX("HB Leather Insulation", 1) == 3) addButton(1, "Leather Insulation v4", buyHowlingBansheeMechUpgrade, "Leather Insulation v3", 4500).hint("Increase magic resistance by 45.");
+					if (player.keyItemvX("HB Leather Insulation", 1) == 4) addButtonDisabled(1, "Leather Insulation v4", "Your HB Mech already have this upgrade.");
+				}
+				else addButton(1, "Leather Insulation v1", buyHowlingBansheeMechUpgrade, "Leather Insulation v1", 1500).hint("Increase magic resistance by 15.");
+				if (player.hasKeyItem("HB Agility") >= 0) {
+					if (player.keyItemvX("HB Agility", 1) == 1) addButtonDisabled(2, "Agility v2", "Your HB Mech already have this upgrade.");
+					else addButton(2, "Agility v2", buyHowlingBansheeMechUpgrade, "Agility v2", 1000).hint("Adding speed scaling similar to Quick Strike perk to melee mech attacks.");
+				}
+				else addButton(2, "Agility v1", buyHowlingBansheeMechUpgrade, "Agility v1", 500).hint("Adding speed scaling similar to Speed Demon perk to melee mech attacks.");
+				if (player.hasKeyItem("HB Rapid Reload") >= 0) {
+					if (player.keyItemvX("HB Rapid Reload", 1) == 1) addButtonDisabled(3, "Rapid Reload v2", "Your HB Mech already have this upgrade.");
+					else addButton(3, "Rapid Reload v2", buyHowlingBansheeMechUpgrade, "Rapid Reload v2", 1500).hint("Adding speed scaling bonus to damage (half of normal bow dmg scaling based on speed) and increase base range atk by ~25%. +1 more range shoots per turn.");
+				}
+				else addButton(3, "Rapid Reload v1", buyHowlingBansheeMechUpgrade, "Rapid Reload v1", 750).hint("Adding dmg scaling similar to Sharpshooter perk to range mech attacks. +1 more range shoots per turn.");
+				//4 - for next button?
+				if (player.hasKeyItem("HB Internal Systems") >= 0) {
+					if (player.keyItemvX("HB Internal Systems", 1) == 2) addButtonDisabled(5, "Internal Systems v2", "Your HB Mech already have this upgrade.");
+					else addButton(5, "Internal Systems v2", buyHowlingBansheeMechUpgrade, "Internal Systems v2", 1500).hint("Decrease mech SF reserves drain by 20 pts and max SF capacity by 5,000 (when PC wear Ayo armor).");
+				}
+				else addButton(5, "Internal Systems v1", buyHowlingBansheeMechUpgrade, "Internal Systems v1", 750).hint("Decrease mech SF reserves drain by 10 pts and max SF capacity by 2,000 (when PC wear Ayo armor).");
+				if (player.hasKeyItem("HB Dragon's Breath Flamer") >= 0) {
+					if (player.keyItemvX("Dragon's Breath Flamer", 1) == 1) addButtonDisabled(6, "DB Flamer v2", "Your HB Mech already have this upgrade.");
+					else addButton(6, "DB Flamer v2", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v2", 3000).hint("Instal second Dragon's Breath Flamer weapon - adds second fire attack when using this special and cost of use increase twicefold.");
+				}
+				else addButton(6, "DB Flamer v1", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v1", 1500).hint("Add Dragon's Breath Flamer weapon - Allow to enter use special dealing fire damage.");
+				if (player.hasKeyItem("HB Scatter Laser") >= 0) {
+					if (player.keyItemvX("HB Scatter Laser", 1) == 1) addButton(7, "Scatter Laser v2", buyHowlingBansheeMechUpgrade, "Scatter Laser v2", 2500).hint("Adds 2 more units that allow either double shot at lone targets or using all three against groups.");
+					if (player.keyItemvX("HB Scatter Laser", 1) == 2) addButton(7, "Scatter Laser v3", buyHowlingBansheeMechUpgrade, "Scatter Laser v3", 3500).hint("Adding 3 more units that allow either four shots at lone targets or using all six against groups.");
+					if (player.keyItemvX("HB Scatter Laser", 1) == 3) addButtonDisabled(7, "Scatter Laser v3", "Your HB Mech already have this upgrade.");
+				}
+				else addButton(7, "Scatter Laser v1", buyHowlingBansheeMechUpgrade, "Scatter Laser v1", 1500).hint("Add Scatter Laser weapon - Allow to enter use special dealing lightning damage.");
+				//8
+				//9 - for prev button?
+				if (player.hasKeyItem("HB Stealth System") >= 0) {
+					if (player.keyItemvX("HB Stealth System", 1) >= 1) {
+						if (player.keyItemvX("HB Stealth System", 1) == 1) {
+							if (player.hasKeyItem("HB Internal Systems") >= 1) addButton(10, "Invisibility Mode v2", buyHowlingBansheeMechUpgrade, "Invisibility Mode v2", 10000).hint("Upgrades Invisibility Mode from v1 to v2. Decrease cost of activating and sustaining this mobe by 20%.");
+							else addButtonDisabled(10, "Invisibility Mode v2", "Your need to have installed Internal Systems v2 or better to unlock this upgrade.");
+						}
+						if (player.keyItemvX("HB Stealth System", 1) == 2) addButtonDisabled(10, "Invisibility Mode v2", "Your HB Mech already have this upgrade.");
+					}
+					else {
+						if (player.hasKeyItem("HB Internal Systems") >= 0) addButton(10, "Invisibility Mode v1", buyHowlingBansheeMechUpgrade, "Invisibility Mode v1", 5000).hint("Upgrades Camouflage Mode to Invisibility Mode. Allow to stay camouflaged without time limit. Sustaining this mode cost 100 SF per turn.");
+						else addButtonDisabled(10, "Invisibility Mode v1", "Your need to have installed Internal Systems v1 or better to unlock this upgrade.");
+					}
+				}
+				else addButton(10, "Camouflage Mode", buyHowlingBansheeMechUpgrade, "Camouflage Mode", 2000).hint("Enable Camouflage Mode - Allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials.");*/
+				//11
+				//12
+				//13
+			}
+			else addButton(0, vehicles.HB_MECH.shortName, buyHowlingBansheeMech).hint("Buy HB Mech - Increase armor by 15, magic resistance by 15.");
+			addButton(14, "Back", DinahShopMainMenu);
+		}
 		public function buyHowlingBansheeMech():void {
 			clearOutput();
 			outputText("You point out the Howling Banshee Mech.\n\n");
 			outputText("\"<i>Oh this one? Luckly you got armor set needed to move this monster around. An it costs only " + (2000 * _extra) + " gems. It's one time deal so not expect me to find more of those.</i>\"");
 			if (player.gems < (2000 * _extra)) {
 				outputText("\n<b>You don't have enough gems...</b>");
-				doNext(DinahShopMainMenu);
+				doNext(buyHowlingBansheeMechAndUpgrades);
 				return;
 			}
-			doYesNo(Utils.curry(buyHowlingBansheeMech1), DinahShopMainMenu);
+			doYesNo(Utils.curry(buyHowlingBansheeMech1), buyHowlingBansheeMechAndUpgrades);
 		}
 		public function buyHowlingBansheeMech1():void {
 			clearOutput();
 			player.createStatusEffect(StatusEffects.BuyedHowlingBansheMech,0,0,0,0);
 			player.gems -= 2000 * _extra;
 			statScreenRefresh();
-			inventory.takeItem(vehicles.HB_MECH, DinahShopMainMenu);
+			inventory.takeItem(vehicles.HB_MECH, buyHowlingBansheeMechAndUpgrades);
+		}
+		public function buyHowlingBansheeMechUpgrade(upgrade:String, cost:Number):void {
+			clearOutput();
+			outputText("You point out " + upgrade + " upgrade options.\n\n");
+			outputText("\"<i>Oh this one? It costs " + (cost * _extra) + " gems to add to the mech. And bit of time for instaling it. Do you still want to proceed?</i>\"");
+			if (player.gems < (cost * _extra)) {
+				outputText("\n<b>You don't have enough gems...</b>");
+				doNext(buyHowlingBansheeMechAndUpgrades);
+				return;
+			}
+			doYesNo(Utils.curry(buyHowlingBansheeMechUpgrade1,upgrade,cost), buyHowlingBansheeMechAndUpgrades);
+		}
+		public function buyHowlingBansheeMechUpgrade1(upgrade:String, cost:Number):void {
+			clearOutput();
+			outputText("Fancy Placeholder text how mini blackhole suck in mech and returns it upgraded ^^\n\n");
+			player.gems -= cost * _extra;
+			statScreenRefresh();
+			if (upgrade == "Armor Plating v1") player.createKeyItem("HB Armor Plating",1,0,0,0);
+			if (upgrade == "Armor Plating v2") player.addKeyValue("HB Armor Plating",1,1);
+			if (upgrade == "Armor Plating v3") player.addKeyValue("HB Armor Plating",1,1);
+			if (upgrade == "Armor Plating v4") player.addKeyValue("HB Armor Plating",1,1);
+			if (upgrade == "Leather Insulation v1") player.createKeyItem("HB Leather Insulation",1,0,0,0);
+			if (upgrade == "Leather Insulation v2") player.addKeyValue("HB Leather Insulation",1,1);
+			if (upgrade == "Leather Insulation v3") player.addKeyValue("HB Leather Insulation",1,1);
+			if (upgrade == "Leather Insulation v4") player.addKeyValue("HB Leather Insulation",1,1);
+			if (upgrade == "Agility v1") player.createKeyItem("HB Agility",0,0,0,0);
+			if (upgrade == "Agility v2") player.addKeyValue("HB Agility",1,1);
+			if (upgrade == "Rapid Reload v1") player.createKeyItem("HB Rapid Reload",0,0,0,0);
+			if (upgrade == "Rapid Reload v2") player.addKeyValue("HB Rapid Reload",1,1);
+			if (upgrade == "Internal Systems v1") player.createKeyItem("HB Internal Systems",1,0,0,0);
+			if (upgrade == "Internal Systems v2") player.addKeyValue("HB Internal Systems",1,1);
+			if (upgrade == "Dragon's Breath Flamer v1") player.createKeyItem("HB Dragon's Breath Flamer",1,0,0,0);
+			if (upgrade == "Dragon's Breath Flamer v2") player.addKeyValue("HB Dragon's Breath Flamer",1,1);
+			if (upgrade == "Scatter Laser v1") player.createKeyItem("HB Scatter Laser",1,0,0,0);
+			if (upgrade == "Scatter Laser v2") player.addKeyValue("HB Scatter Laser",1,1);
+			if (upgrade == "Scatter Laser v3") player.addKeyValue("HB Scatter Laser",1,1);
+			if (upgrade == "Camouflage Mode") player.createKeyItem("HB Stealth System",0,0,0,0);
+			if (upgrade == "Invisibility Mode v1") player.addKeyValue("HB Stealth System",1,1);
+			if (upgrade == "Invisibility Mode v2") player.addKeyValue("HB Stealth System",1,1);
+			//if (upgrade == "") ;
+			//if (upgrade == "") ;
+			//if (upgrade == "") ;
+			doNext(buyHowlingBansheeMechAndUpgrades);
 		}
 		
 		public function recieveGIFTfromDinah():void {
 			clearOutput();
-			outputText("\"<i>Lady Godiva says that sometimes it's good to share something without asking for money so...</i>\" as she been talking she pulled some object from the folds of her robe and throws toward you. \"<i>...take this. And may Lady Godiva bless this place. And now firgive me i need to occupy myself with other matters.</i>\" Not giving you chance to say anything she shoo you away.");
+			outputText("\"<i>Lady Godiva says that sometimes, it's good to share something without asking for money so...</i>\" as she talks, she pulls an object from the folds of her robe and tosses it to you. \"<i>...Take this. May Lady Godiva bless this place. Now, forgive me. I have other matters that occupy my time.</i>\" Not giving you chance to say anything, she shoos you away.");
 			player.createStatusEffect(StatusEffects.DinahGift, (16+rand(15)), 0, 0, 0);
 			/*var gift:Number = rand(20);
 			if (gift == 0) inventory.takeItem(consumables.KITGIFT, DinahMainMenu);
@@ -412,7 +514,7 @@ import classes.internals.Utils;
 		
 		public function giveDinahItem():void {
 			clearOutput();
-			outputText("What item do you want to give Dinah?");
+			outputText("Which item do you want to offer to Dinah?");
 			menu();
 			var haveGift:Boolean = false;
 			var button:int = 0;

@@ -12,6 +12,7 @@ import classes.BodyParts.Wings;
 import classes.CockTypesEnum;
 import classes.Items.Consumable;
 import classes.PerkLib;
+import classes.Races;
 import classes.StatusEffects;
 import classes.VaginaClass;
 import classes.CoC;
@@ -33,15 +34,13 @@ public class MaraFruit extends Consumable{
 		clearOutput();
 		outputText("Biting into it, sweet juices seem to explode from the flesh, dribbling down your chin.  It tastes like a dessert and you chow down, happily munching away.  In no time flat, you're down to just a core.");
 		//-Increase strength up to 80.
-		if (changes < changeLimit && rand(4) == 0) {
+		if (changes < changeLimit && rand(4) == 0 && player.MutagenBonus("str", 1)) {
 			outputText("\n\nYou feel a bit stronger as you take in a deep breath. You reflexively think about taking in more sunlight.");
-			player.MutagenBonus("str", 1);
 			changes++;
 		}
 		//-Increase toughness up to 100.
-		if (changes < changeLimit && rand(4) == 0) {
+		if (changes < changeLimit && rand(4) == 0 && player.MutagenBonus("tou", 1)) {
 			outputText("\n\nYour body suddenly feels tougher and more resilient just like a tree.");
-			player.MutagenBonus("tou", 1);
 			changes++;
 		}
 		//-Reduces speed down to 60.
@@ -297,7 +296,7 @@ public class MaraFruit extends Consumable{
 			changes++;
 		}
 		//
-		if (player.plantScore() >= 7 && player.wings.type == Wings.PLANT && player.hasStatusEffect(StatusEffects.AlrauneFlower) && changes < changeLimit && rand(2) == 0) {
+		if (player.isRace(Races.PLANT, 4) && player.wings.type == Wings.PLANT && player.hasStatusEffect(StatusEffects.AlrauneFlower) && changes < changeLimit && rand(2) == 0) {
 			outputText("\n\nYour close your eyes to appreciate the feeling of the sun on your vegetal skin, losing yourself in the sensation. The feeling is short lived as your feet suddenly tingle with a weird feeling. Opening your eyes you look down in panic as your feet roots themselves in the ground and start to merge together up to your pussy into a trunk which turn a shade of green darker than the rest of your body. Your tentacle wings have also moved down to your feet tips but the weirdest thing happens when everything below your waist grows bloated, easily becoming twice as large as you are. ");
 			outputText("Your legs almost look... like a flower about to bloom? Bloom it does indeed as everything below your waist explodes in a orchid of enormous size with petals large enough to engulf you entirely. Worried about being rooted in place you try and move and to your surprise you pretty much discover you can actually walk around on the vine like tentacle cocks at the base of your body. It feels weird at first but you think you will get used to walking on pseudo vines.");
 			if (player.tailType != 0) {

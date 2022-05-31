@@ -284,7 +284,7 @@ public function blackCatBeerEffects(player:Player,clearScreen:Boolean = true,new
 		dynStats("spe", -5, "int", -5, "lib", lib, "lus", 20+rand(player.lib/4));
 	}
 	player.slimeFeed();
-	if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= CoC.instance.mutations.DrunkenPowerEmpowerOni()) CoC.instance.mutations.DrunkenPowerEmpower();
+	CoC.instance.mutations.DrunkenPowerEmpowerIfPossible();
 }
 
 //Black Cat Beer Wears Off: This message is displayed eight hours after the last drink.
@@ -486,7 +486,7 @@ public function bimboChampagne(player:Player,clearScreen:Boolean,intro:Boolean):
 		}
 		dynStats("spe", -10, "lib", 1, "lus", 25);
 	}
-	if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= CoC.instance.mutations.DrunkenPowerEmpowerOni()) CoC.instance.mutations.DrunkenPowerEmpower();
+	CoC.instance.mutations.DrunkenPowerEmpowerIfPossible();
 }
 
 public function removeBimboChampagne():void {
@@ -863,7 +863,7 @@ private function barBeerOrgyTits():void {
 		if(player.hasVagina()) outputText("  You gag on it at the same time a new cock fills your cunt, ready to renew the thrusting that's been causing your tits to bounce all over the place.");
 
 		//IF [player has single cock small-med cock]
-		if(player.cockTotal() == 1 && player.cockArea(0) < 75) outputText("\n\nA cat girl with six C-cup breasts jumps up onto the table and mounts you.  She grabs your cock and proceeds to shove it up between the folds of her tight pussy.");
+		if(player.cockTotal() == 1 && player.biggestCockArea() < 75) outputText("\n\nA cat girl with six C-cup breasts jumps up onto the table and mounts you.  She grabs your cock and proceeds to shove it up between the folds of her tight pussy.");
 		//OR IF [player has single huge cock]
 		else if(player.cockTotal() == 1) outputText("\n\nA cow girl with six large tits and quad nipples crawls with difficulty up and onto the table, carefully positioning her bare bovine cunt above your massive member, and proceeds to thrust her ridiculously wide hips down around it.");
 		// FOR BOTH COCK SIZES -

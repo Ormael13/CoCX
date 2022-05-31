@@ -13,7 +13,7 @@ package classes.Items.Consumables
 		
 		public function CeruleanPotion()
 		{
-			super("Cerul P", "Cerulean P.", "a cerulean-tinted potion", ITEM_VALUE, "This is a mysterious bottle filled with a sky-blue liquid that sloshes gently inside.  Supposedly it will make you irresistible, though to what or who you cannot say.");
+			super("Cerul P", "Cerulean P.", "a cerulean-tinted potion", ITEM_VALUE, "This is a mysterious bottle filled with a sky-blue liquid that sloshes gently inside.  Supposedly, it will make you irresistible, though to who or what is unkown.");
 		}
 		
 		override public function useItem():Boolean

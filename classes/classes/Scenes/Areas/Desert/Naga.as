@@ -80,7 +80,7 @@ public class Naga extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) SceneLib.desert.nagaScene.nagaRapeChoice2();
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9 && !sceneHunter.other) SceneLib.desert.nagaScene.nagaRapeChoice2();
 			else SceneLib.desert.nagaScene.nagaRapeChoice();
 		}
 

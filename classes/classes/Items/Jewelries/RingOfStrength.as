@@ -5,7 +5,6 @@
 package classes.Items.Jewelries 
 {
 	import classes.Items.Jewelry;
-	import classes.Player;
 
 	public class RingOfStrength extends Jewelry
 	{
@@ -22,12 +21,12 @@ package classes.Items.Jewelries
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Perk
-			desc += "\nSpecial: Strength +5";
+			desc += "\nSpecial: Strength +5%";
 			return desc;
 		}
 		
 		override public function playerEquip():Jewelry {
-			game.player.statStore.addBuff('str',+5,'RingOfStrength',{text:'Ring Of Strength'});
+			game.player.statStore.addBuff('str.mult',0.05,'RingOfStrength',{text:'Ring Of Strength'});
 			return super.playerEquip();
 		}
 		

@@ -10,6 +10,7 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.Horns;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
@@ -28,16 +29,22 @@ public class DemonPackBlightRidge extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			clearOutput();
-			outputText("With the demons in front of you defeated, you turn to see that your mystery partner has finished his half as well.");
-			postIntroFight();
+			if (TyrantiaFollower.TyrantiaFollowerStage == 2) SceneLib.tyrania.TyrantiaAfterMainFightWon();
+			else {
+				clearOutput();
+				outputText("With the demons in front of you defeated, you turn to see that your mystery partner has finished his half as well.");
+				postIntroFight();
+			}
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			clearOutput();
-			outputText("You fall, knowing what comes next. But in spite of your expectations, the demons suddenly collapse, one by one. This time you see what happens, flashes of crystal impacting their foreheads, knocking the demons out one by one.  You turn to see your savior.");
-			postIntroFight();
+			if (TyrantiaFollower.TyrantiaFollowerStage == 2) SceneLib.tyrania.TyrantiaAfterMainFightLost();
+			else {
+				clearOutput();
+				outputText("You fall, knowing what comes next. But in spite of your expectations, the demons suddenly collapse, one by one. This time you see what happens, flashes of crystal impacting their foreheads, knocking the demons out one by one.  You turn to see your savior.");
+				postIntroFight();
+			}
 		}
 		
 		public function postIntroFight():void {
@@ -66,7 +73,8 @@ public class DemonPackBlightRidge extends Monster
 			this.a = "the ";
 			this.short = "demons pack";
 			this.imageName = "demonmob";
-			this.long= "The group is composed of roughly thirty tan-skinned demons, mostly humanoid in shape with many and varied corruptions across the mob. You see demonic high heels, twisting horns and swinging cocks of all shapes and sizes. You also make out plenty of breasts ranging from tiny ones to a pair that requires a second person to carry them, and with those breasts a wide range of pussies, dripping and dry, sometimes nestled below some form of demonic dick.  The small group carries no weapons and what little clothing they wear is well-shredded, except for one hefty male wearing mage cloak and what appears to be snakeskin across his broad shoulders.  You spot an odd patch that reads, \"<i>43rd East Mage Company: Vaginal Clearance</i>\" on his shoulder.";
+			if (TyrantiaFollower.TyrantiaFollowerStage == 2) this.long= "The group is composed of over two hundreds of tan-skinned demons, mostly humanoid in shape with many and varied corruptions across the mob. You see demonic high heels, twisting horns and swinging cocks of all shapes and sizes. You also make out plenty of breasts ranging from tiny ones to a pair that requires a second person to carry them, and with those breasts a wide range of pussies, dripping and dry, sometimes nestled below some form of demonic dick.  The small group carries no weapons and what little clothing they wear is well-shredded, except for one hefty male wearing mage cloak and what appears to be snakeskin across his broad shoulders.  You spot an odd patch that reads, \"<i>38th South Warriors Company: Vaginal Clearance</i>\" on his shoulder.";
+			else this.long= "The group is composed of roughly thirty tan-skinned demons, mostly humanoid in shape with many and varied corruptions across the mob. You see demonic high heels, twisting horns and swinging cocks of all shapes and sizes. You also make out plenty of breasts ranging from tiny ones to a pair that requires a second person to carry them, and with those breasts a wide range of pussies, dripping and dry, sometimes nestled below some form of demonic dick.  The small group carries no weapons and what little clothing they wear is well-shredded, except for one hefty male wearing mage cloak and what appears to be snakeskin across his broad shoulders.  You spot an odd patch that reads, \"<i>43rd East Mage Company: Vaginal Clearance</i>\" on his shoulder.";
 			this.plural = true;
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";
@@ -114,8 +122,10 @@ public class DemonPackBlightRidge extends Monster
 			this.tailType = Tail.DEMONIC;
 			this.horns.type = Horns.DEMON;
 			this.horns.count = 2;
-			this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
+			if (TyrantiaFollower.TyrantiaFollowerStage == 2) this.createPerk(PerkLib.Enemy300Type, 0, 0, 0, 0);
+			else this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 30, 0, 0, 0);
 			checkMonster();
 		}
 		

@@ -7,11 +7,11 @@ import classes.StatusEffects;
 public class HealSpell extends AbstractWhiteSpell {
 	public function HealSpell() {
 		super(
-				"Heal",
-				"Heal will attempt to use white magic to instnatly close your wounds and restore your body.",
-				TARGET_SELF,
-				TIMING_INSTANT,
-				[TAG_HEALING]
+			"Heal",
+			"Heal will attempt to use white magic to instnatly close your wounds and restore your body.",
+			TARGET_SELF,
+			TIMING_INSTANT,
+			[TAG_HEALING]
 		);
 		baseManaCost = 30;
 		useManaType = Combat.USEMANA_WHITE_HEAL;
@@ -24,7 +24,9 @@ public class HealSpell extends AbstractWhiteSpell {
 	}
 	
 	override public function calcCooldown():int {
-		return 6;
+		var calcC:int = 6;
+		if (player.weapon == weapons.U_STAFF) calcC -= 2;
+		return calcC;
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {

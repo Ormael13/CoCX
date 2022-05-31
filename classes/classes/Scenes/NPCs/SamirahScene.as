@@ -1,4 +1,4 @@
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Face;
@@ -11,7 +11,7 @@ use namespace CoC;
 
 public class SamirahScene extends NPCAwareContent implements TimeAwareInterface {
 //SAMIRAH_FOLLOWER flag: 0-4 normal naga to naga scenes, 5 - Samirah 0-100% affection scenes, 6 to 9 - on quest to bring repti-tongue potion, 10 - w obozie
-public function samirahAffection(changes:Number = 0):Number {	
+public function samirahAffection(changes:Number = 0):Number {
 	flags[kFLAGS.SAMIRAH_AFFECTION] += changes;
 	if (flags[kFLAGS.SAMIRAH_AFFECTION] > 100) flags[kFLAGS.SAMIRAH_AFFECTION] = 100;
 	return flags[kFLAGS.SAMIRAH_AFFECTION];
@@ -140,11 +140,11 @@ public function samirahMainCampMenu():void {
 		outputText("\"<i>It’s really nice to not depend on sunlight to get fully awake, let’s take a bath together sometime, okay?</i>\"\n\n");
 		doNext(samirahMainCampMenu2);
 	}
-	else if (rand(2) == 0 && (player.couatlScore() >= 11 || player.vouivreScore() >= 11)) {
+	else if (rand(2) == 0 && (player.isRace(Races.COUATL) || player.isRace(Races.VOUIVRE))) {
 		outputText("Samirah is admiring your wings and body with a star-struck face, almost like a kid seeing the beach for the first time.\n\n");
 		outputText("\"<i>Wow... My homeland had legends about winged nagas, but to see one in the flesh, it’s amazing!</i>\"\n\n");
 		outputText("You can see her fingers twitching, so you fold your wings into her reach, nodding your permission to touch.\n\n");
-		outputText("\"<i>Your "+(player.vouivreScore() >= 11 ? "feathers are so soft" : "scales are so pretty")+", it must be quite the experience to be able to fly...</i>\"\n\n");
+		outputText("\"<i>Your "+(player.isRace(Races.VOUIVRE) ? "feathers are so soft" : "scales are so pretty")+", it must be quite the experience to be able to fly...</i>\"\n\n");
 		outputText("After she had her fix of your wings, you state what you came for.\n\n");
 		outputText("\"<i>Is that so? How can I help you?</i>\"\n\n");
 		doNext(samirahMainCampMenu2);
@@ -379,7 +379,7 @@ public function samirahMainSexMenu():void {
 public function nagaDefaultSexScene():void {
 	if (flags[kFLAGS.SAMIRAH_FOLLOWER] >= 10) clearOutput();
 	if (player.gender == 1 || (player.gender == 3 && rand(2) == 0)) {
-		if (player.cockArea(0) > 35) {
+		if (player.biggestCockArea() > 35) {
 			outputText("The kiss continues as both of your bodies rub together sensually, your tails continuing to wrap around one another. There is a pulsing in your [cock] as it starts to grow hard against Samirah soft belly. Feeling this, Samirah gently pulls away, slowly letting your tongue out of her mouth as she does so. Her hands make their way over your shoulders, down your abs, and stop at your [cocks].\n\n"); 
 			outputText("\"<i>You're quite the big boy, aren't you?</i>\" she says as she wraps both of her hands around your now throbbing [cock]. She starts to slide her hands up and down your length. Sticking out her tongue, she wraps it around the tip and licks at the pre that is starting to leak out.\n\n");
 			outputText("A hiss of pleasure escapes your lips as Samirah strokes and licks at your [cock], her talented fingers and tongue bringing you into a further state of arousal. Samirah stops her caressing and brings your [cock] to her chest, pressing her breasts around it. She slowly starts to slide her body up and down your shaft, using her tongue to bring some of your pre and lubricate her body. Once she is satisfied with her body's slickness, she quickens her pace.\n\n");
@@ -441,7 +441,7 @@ public function nagaDefaultSexScene():void {
 		outputText("Samirah looks down and suddenly giggles at your stark lack of fun-bits. You turn away in embarrassment and start to head back to your camp.\n\n");
 		outputText("\"<i>Wait,</i>\" Samirah reaches out and places a hand on your shoulder. \"<i>I didn't mean to insult you. I've never seen anyone else quite like you.</i>\" She slides her hand down your body. \"<i>I wonder if you can show me just what a body like yours can do.</i>\"\n\n");
 		outputText("Enjoying this new shift in the conversation, you coil around her and position your head over the scaly covering over her pussy. A soft hiss escapes Samirah as you slide your tongue into her, twirling it around to caress every inch of her. Her hands make their way to your head and press you deeper into her.\n\n");
-		if (1 == 0) outputText("You move your tongue faster and deeper into her pussy, your forked tongue reaching deeper than any human tongue ever could. ");
+		if (player.hasLongTongue()) outputText("You move your tongue faster and deeper into her pussy, your forked tongue reaching deeper than any human tongue ever could. ");
 		else outputText("You move your tongue faster and faster into her pussy, reaching as far in as you possibly can. ");
 		outputText("Samirah grips your head tightly to her and suddenly thrusts her hips in orgasm, her girl cum coating your tongue and mouth.\n\n");
 		outputText("You uncoil yourself and slowly gather your things, Samirah lying on the sand panting.\n\n");

@@ -5,7 +5,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class FetishCultist extends Monster
@@ -85,7 +85,7 @@ public class FetishCultist extends Monster
 				outputText("She suddenly starts mauling her shapely breasts, her fingers nearly disappearing briefly in the soft, full flesh, while fingering herself eagerly, emitting a variety of lewd noises.  You are entranced by the scene, the sexual excitement she's experiencing penetrating your body in warm waves coming from your groin.");
 			}
 			player.dynStats("lus", (player.lib/10 + player.cor/20)+4);
-			if (player.lust >= player.maxLust())
+			if (player.lust >= player.maxOverLust())
 				doNext(SceneLib.combat.endLustLoss);
 			else doNext(SceneLib.combat.combatMenu);
 		}
@@ -111,7 +111,7 @@ public class FetishCultist extends Monster
 				lust -= 50;
 				if(lust < 0) lust = 10;
 			}
-			if (player.lust >= player.maxLust())
+			if (player.lust >= player.maxOverLust())
 				doNext(SceneLib.combat.endLustLoss);
 			else doNext(SceneLib.combat.combatMenu);
 		}

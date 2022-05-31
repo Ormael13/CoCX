@@ -434,7 +434,7 @@ private function soberUrtaSatingPCHeat():void {
 	dynStats("lust=",0);
 	dynStats("lust=",0);
 	dynStats("lust=",0);
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 6;
+	urta.hoursUntilHorny(6, true);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -479,7 +479,7 @@ private function sateRutWithSoberUrtaButHuegDicked():void {
 		outputText("\n\n\"<i>Mmm... you taste nice, lover.  Still, I'd much rather feed this into the hole where it belongs, so why don't you try and shrink this monster down, huh?</i>\" she suggests.  Rising to her feet, with a surprisingly vulpine shake of her body and a soft sigh, she turns and heads home, her erection bobbing up and down before her; evidently, she's intending to use some of her toys to find some release of her own. You re-dress and head back yourself, trying to make sense of your inhuman breeding rut.");
 	}
 	dynStats("lib+",1,"sen-",2,"lust=",0);
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 1;
+	urta.hoursUntilHorny(1, true);
 	doNext(camp.returnToCampUseOneHour);
 	///Player returns to Tel'Adre Menu, usual one hor passes//
 }
@@ -545,7 +545,7 @@ private function sateRutWithSoberUrta():void {
 	//Knock up urta if appropriate.
 	flags[kFLAGS.TIMES_RUT_FUCKED_URTAS_CUNT]++;
 	dynStats("lib+",1,"sen-",2,"lust=",0);
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 6;
+	urta.hoursUntilHorny(6, true);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -629,7 +629,7 @@ private function drunkenUrtaFucksPCInHeat():void {
 	dynStats("lust=",0);
 	dynStats("lust=",0);
 	dynStats("lust=",0);
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 24;
+	urta.hoursUntilHorny(24, true);
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	urtaLove(1);
 	doNext(camp.returnToCampUseFourHours);
@@ -678,7 +678,7 @@ private function sateRutWithDrunkUrtaWithHugeDick():void {
 	//[+1 Libido, -1 Sensitivity; No effect on your rut]
 	dynStats("lib",1,"sen",-1,"lust=",0);
 	//player returns to TelâAdre and loses 1 hour
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 1;
+	urta.hoursUntilHorny(1, true);
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	urtaLove(1);
 	doNext(camp.returnToCampUseOneHour);
@@ -891,7 +891,7 @@ private function drunkUrtaRidesARutPCsCock():void {
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	urtaLove(1);
 	flags[kFLAGS.TIMES_RUT_FUCKED_URTAS_CUNT]++;
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 24;
+	urta.hoursUntilHorny(24, true);
 	doNext(camp.returnToCampUseFourHours);
 }
 

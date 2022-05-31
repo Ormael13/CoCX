@@ -83,10 +83,22 @@ import classes.Scenes.SceneLib;
 		{
 			return SceneLib.emberScene.emberMF(man,woman);
 		}
+		// Ayayayane
+		protected function get ayaneFollower():AyaneFollower{
+			return SceneLib.ayaneFollower;
+		}
+		public function followerAyane():Boolean{
+			return SceneLib.ayaneFollower.followerAyane();
+		}
 		// Exgartuan
 		protected function get exgartuan():Exgartuan
 		{
 			return SceneLib.exgartuan;
+		}
+		// Forgefather
+		protected function get ForgeFather():Forgefather
+		{
+			return SceneLib.forgefatherScene;
 		}
 		// Helia
 		protected function get helScene():HelScene
@@ -288,7 +300,7 @@ import classes.Scenes.SceneLib;
 			return SceneLib.urtaHeatRut;
 		}
 		// Valeria
-		protected function get valeria():Valeria
+		protected function get valeria():ValeriaScene
 		{
 			return SceneLib.valeria;
 		}
