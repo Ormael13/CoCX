@@ -6,11 +6,11 @@ import classes.StatusEffects;
 public class ClearMindSpell extends AbstractGreySpell {
 	public function ClearMindSpell() {
 		super(
-				"Clear Mind",
-				"Recover from a stun or fear.",
-				TARGET_SELF,
-				TIMING_INSTANT,
-				[TAG_RECOVERY]
+			"Clear Mind",
+			"Recover from a stun or fear.",
+			TARGET_SELF,
+			TIMING_INSTANT,
+			[TAG_RECOVERY]
 		);
 		baseManaCost = 100;
 	}

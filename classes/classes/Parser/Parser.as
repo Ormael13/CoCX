@@ -45,7 +45,6 @@ public class Parser
 			{
 
 				// ---------------------------------------------------------------------------------
-				// TODO: Get rid of this shit.
 				// UGLY hack to patch legacy functionality in TiTS
 				// This needs to go eventually
 
@@ -110,7 +109,7 @@ public class Parser
 			if (lookupParserDebug) trace("WARNING: Doing lookup for subject", subject, " aspect ", aspect);
 
 			// Figure out if we need to capitalize the resulting text
-			var capitalize:Boolean = isUpperCase(aspect.charAt(0));
+			var capitalize:Boolean = isUpperCase(subject.charAt(0)) || isUpperCase(aspect.charAt(0));
 
 
 			// Only perform lookup in twoWordNumericTagsLookup if aspect can be cast to a valid number
@@ -153,7 +152,6 @@ public class Parser
 			if (lookupParserDebug) trace("WARNING: trying to look-up two-word tag in parent");
 
 			// ---------------------------------------------------------------------------------
-			// TODO: Get rid of this shit.
 			// UGLY hack to patch legacy functionality in TiTS
 			// This needs to go eventually
 
@@ -469,7 +467,6 @@ public class Parser
 			//
 
 
-			// TODO: (NOT YET) Allows nested condition parenthesis, because I'm masochistic
 
 
 			// POSSIBLE BUG: A actual statement starting with "if" could be misinterpreted as an if-statement
@@ -630,8 +627,8 @@ public class Parser
 
 			if (mainParserDebug) trace("WARNING: Not an if statement");
 			// Match a single word, with no leading or trailing space
-			var singleWordTagRegExp:RegExp = /^[\w.]+$/;
-			var doubleWordTagRegExp:RegExp = /^[\w.]+\s[\w.]+$/;
+			var singleWordTagRegExp:RegExp = /^[\/\d\w-_.]+$/;
+			var doubleWordTagRegExp:RegExp = /^[\/\d\w-_.]+\s[\w\d-_.]+$/;
 
 			if (mainParserDebug) trace("WARNING: string length = ", textCtnt.length);
 
@@ -774,7 +771,7 @@ public class Parser
          * You pass in the string you want parsed, and the parsed result is returned as a string.
 		 *
          * @param contents String to parse
-         * @param prettyQuotes true to convert "x" to “x” and -- to —
+         * @param prettyQuotes true to convert "x" to \"x\" and -- to —
          * @return Parsed string
          */
 		public static function recursiveParser(contents:String, prettyQuotes:Boolean = true):String

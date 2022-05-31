@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!--TODO @Oxdeception convert strings to XXC XML-->
+<!--Move this trash from XML-->
 <story name="diva" xmlns="xxc-story">
     <lib name="combat">
         <lib name="moves">
@@ -62,7 +62,7 @@
         </lib>
         <lib name="scenes">
             <text name="blinded">
-                Diva recoils in pain as the bright light strike her like a hammer, temporarily pinning her to the ground and stunning her.
+                 Diva recoils in pain as the bright light strike her like a hammer, temporarily pinning her to the ground and stunning her.
             </text>
             <lib name="intro">
                 <text name="first">
@@ -117,7 +117,7 @@
                     Huh, she got up to some tinkering between visits, it seems. Neat.
                     You might ask her about how she pulled off that automatic lock trick after you finish the fight <if test="$cabinBuilt">, would be nice to have in your cabin</if>.
                     Diva, unwitting of your musings, appears in a cloud of smoke at the center of the room.
-                    special effects, too. You would give a polite clap if you didn’t know she would bitch at you for breaking the mood.
+                    She prepared some special effects, too. You would give a polite clap if you didn’t know she would bitch at you for breaking the mood.
 
                     <i>
                         “Fufufu... thine foolishness knows no bounds, coming yet again to try and defeat the almighty Countess of Dusk.
@@ -133,7 +133,6 @@
                 <text name="final">
                     This time you don’t even wait for a thunderstorm, you just head straight to Diva’s castle for another match.
                     Truth be told, you are beginning to get endeared to her, somewhat.
-                    Not doing anything particularly distasteful to you when she defeated you for the first time certainly won her some points with you.
                     Also, you don’t begrudge having a good sparring partner, it’s nice having someone strong to practice against without any real risks should you lose.
 
                     Since there's no storm, Diva can’t really sneak around as easily, since there is no thunder to drown out the sound of her movement, so for once you will have to find her yourself.
@@ -160,24 +159,16 @@
             </lib>
             <lib name="defeated">
                 <text name="normal">
-                    <i>
-                        “Wait, that wasn’t in the script! The hero was supposed to lose to the almighty vampire, be bitten, know love, marry, have children…no no no no and NO!”
-
-                    </i>
+                    <i>“Wait, that wasn’t in the script! The hero was supposed to lose to the almighty vampire, be bitten, know love, marry, have children…no no no no and NO!”</i>
 
                     Is she for real... Does she really think this all was an elaborate play with her as the main character of some romance story?
 
-                    She take on an annoyed expression then declares <i>“Cough cough... ahem..Oh how terrible, I the almighty queen of darkness lost to the hero what will happen of me will thy hero rape me and make me his bride by force or will I be left alone in this castle as he/she goes on for a new quest.“
-
-                </i>
-
+                    She take on an annoyed expression then declares <i>“Cough cough... ahem..Oh how terrible, I the almighty queen of darkness lost to the hero what will happen of me will thy hero rape me and make me his bride by force or will I be left alone in this castle as he/she goes on for a new quest.“</i>
+                    
                     Tired of her nonsense you decide to give her exactly what she asked for.
                     But the girl screams a spell that clearly doesn’t exist and disappears in a cloud of smoke from what is obviously a smoke bomb leaving one last warning.
 
-                    <i>
-                        “I shall have my vengeance hero for I am the immortal invincible night terror Diva and believe me, I shall never be defeated again by the likes of thou!”
-
-                    </i>
+                    <i>“I shall have my vengeance hero for I am the immortal invincible night terror Diva and believe me, I shall never be defeated again by the likes of thou!”</i>
 
                     It’s only when the smoke disappears that you notice a trap door under the carpet where she was standing.
                     When you try to open it you discover it’s locked.
@@ -464,12 +455,14 @@
 
                 Not so surprisingly, your nightly vampiric meal offset this issue granting you the energy to go without rest this time around.
             </text>
-            <text name="bloodyRose">
-                You point out to Diva tent and both of you head in.
+            <lib name="bloodyRose">
+                <text name="intro">
+                    You point out to Diva tent and both of you head in.
 
-                Once inside, you give Diva a seductive gaze, offering your neck on display and removing your clothes. The vampire needs no further invitation as she toss hers at the back of her tent. Diva snuggle up to you, kisses your neck and then bite in. The feeling of the blood running out of your neck is a delicious mix of pain and pleasure arousing you to no end. In the delight of the moment you also bite Diva, tasting her blood. It never occurred to you before how powerful the link between the both of you are when feeding from each others neck… were you two any closer than that you would be able to communicate through telepathy. You feel her pleasure through your neck as she can feels yours through her own.. or perhaps you both feels each other pleasure more clearly?
+                    Once inside, you give Diva a seductive gaze, offering your neck on display and removing your clothes. The vampire needs no further invitation as she toss hers at the back of her tent. Diva snuggle up to you, kisses your neck and then bite in. The feeling of the blood running out of your neck is a delicious mix of pain and pleasure arousing you to no end. In the delight of the moment you also bite Diva, tasting her blood. It never occurred to you before how powerful the link between the both of you are when feeding from each others neck… were you two any closer than that you would be able to communicate through telepathy. You feel her pleasure through your neck as she can feels yours through her own.. or perhaps you both feels each other pleasure more clearly?
 
-                <if test="player.isMale">
+                </text>
+                <text name="male">
                     Your [cock] begins to harden from the overstimulation of your sensible vampire neck and the excitement of blood.
                     Diva pussy seems to agree as she’s practically wetting the ground below the pair of you.
                     Giving in to your instinct you slowly insert yourself in her like your fang in her neck as your increasingly hardening [cock] begin to pulse along with your heartbeat.
@@ -479,9 +472,10 @@
                     You however aren’t going to simply lay back and let the devilish pussy do all the work as you begin to piston in and out of her.
                     Diva’s wings are flapping wildly behind her <if test="player.wings.type == VAMPIRE">, yours too and you try not to take flight as a the winds created by your combined flapping shake the tent</if>.
                     Both of you scream in ecstasy, breaking out of the bite, blood still dripping from each other chin as you cum your load in her greedy vagina
-                    <if test="player.cumQ() ge 20"> the excess dripping to the ground</if>.
-
-                <elseif test="player.isFemale">
+                    <if test="player.cumQ() ge 20">, the excess dripping to the ground</if>.
+                    
+                </text>
+                <text name="female">
                     You begin to feel more than blood oozing out of you.
                     Your pussy lips are drooling and you can feel Diva juices slowly running down your leg.
                     You are panting from the feeling in your neck and you desire more, Diva too, so on a common nod you get to step two.
@@ -491,14 +485,15 @@
                     Both of you slide against each other for several minutes, never parting away as a constant fountain of female fluids runs down your respective legs.
                     Diva wings are flapping wildly behind her <if test="player.wings.type == VAMPIRE">, yours too and you try not to take flight as a the winds created by your combined flapping shake the tent</if>.
                     The both of you scream in ecstasy breaking out of the bite, blood still dripping from each other chin as you and Diva reach your orgasm.
-                    Unsatisfied the both of you keep at it for several hours. After about the sixth orgasm
-                </elseif>
-                </if>
+                    Unsatisfied the both of you keep at it for several hours. After about the sixth orgasm...
 
-                You start to doze off tired as Diva pull you down in her coffin still embracing you.
+                </text>
+                <text name="outro">
+                    You start to doze off tired as Diva pull you down in her coffin still embracing you.
 
-                You wake up in the morning, still hugging with Diva. She’s fast asleep but still wearing a content smile.
-            </text>
+                    You wake up in the morning, still hugging with Diva. She’s fast asleep but still wearing a content smile.
+                </text>
+            </lib>
         </lib>
         <lib name="talkMenu">
             <text name="menu">

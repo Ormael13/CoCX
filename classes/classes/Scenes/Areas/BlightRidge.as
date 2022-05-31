@@ -28,7 +28,7 @@ use namespace CoC;
 			if (player.cor < 66) dynStats("cor", 1);
 			
 			//Discover Defiled Ravine
-			if (flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] <= 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && player.level >= 36) {
+			if (flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] <= 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && (player.level + combat.playerLevelAdjustment()) >= 36) {
 				player.explored++;
 				clearOutput();
 				outputText("As you tread through Blight Ridge, you come across a small valley, one you've never noticed before. Where does this place go? How deep does the valley go? Judging by the usual inhabitants of this place, it's not implausible to assume that it would be nothing but more demons up to no good.\n\n");
@@ -50,7 +50,7 @@ use namespace CoC;
 				outputText("Do you enter?");
 				flags[kFLAGS.DEN_OF_DESIRE_BOSSES] = 1;
 				menu();
-				addButton(0, "Yes", SceneLib.dungeons.enterDenOfDesire);
+				addButton(0, "Yes", SceneLib.dungeons.denofdesire.enterDungeon);
 				addButton(1, "No", camp.returnToCampUseOneHour);
 				return;
 			}

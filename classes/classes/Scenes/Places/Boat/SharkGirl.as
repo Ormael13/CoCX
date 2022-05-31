@@ -5,12 +5,13 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
+import classes.display.SpriteDb;
 
 public class SharkGirl extends Monster
 	{
 		//Lust-based attacks:
 		private function sharkTease():void {
-			game.spriteSelect(70);
+			game.spriteSelect(SpriteDb.s_sharkgirl);
 			if(rand(2) == 0) {
 				outputText("You charge at the shark girl, prepared to strike again, but stop dead in your tracks when she bends over and wiggles her toned ass towards you. It distracts you long enough for her tail to swing out and smack you to the ground. She coos, \"<i>Aw... You really do like me!</i>\" ");
 				//(Small health damage, medium lust build).

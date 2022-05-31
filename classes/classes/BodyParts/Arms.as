@@ -46,7 +46,7 @@ public class Arms extends BodyPart {
 	public static const BEE:int = 4;
 	EnumValue.add(Types, BEE, "BEE", {
 		name:"bee",
-		appearanceDesc: "A shining black exoskeleton covers your arms from the biceps down, resembling a pair of long black gloves ending with a yellow fuzz from a distance."
+		appearanceDesc: "A shining [skin coat.color2] exoskeleton covers your arms from the biceps down, resembling a pair of long [skin coat.color2] gloves ending with a [skin coat.color] fuzz from a distance."
 	});
 
 	public static const SALAMANDER:int = 5;
@@ -76,8 +76,9 @@ public class Arms extends BodyPart {
 
 	public static const GARGOYLE:int = 9;
 	EnumValue.add(Types, GARGOYLE, "GARGOYLE", {
-		name:"gargoyle", armSlam: true,
-		appearanceDesc: "Your [gargoylematerial] arms end in stone sharp clawed hands."
+		name:"gargoyle",
+		appearanceDesc: "Your [gargoylematerial] arms end in stone sharp clawed hands.",
+		claw: true
 	});
 
 	public static const WOLF:int = 10;
@@ -182,7 +183,7 @@ public class Arms extends BodyPart {
 	EnumValue.add(Types, GARGOYLE_2, "GARGOYLE_2", {
 		name:"gargoyle",
 		appearanceDesc: "Your [gargoylematerial] arms end in normal human like hands.",
-		claw: true
+		armSlam: true
 	});
 
 	public static const CAT:int = 25;
@@ -398,6 +399,13 @@ public class Arms extends BodyPart {
 	EnumValue.add(Types, MINDBREAKER, "MINDBREAKER", {
 		name:"mindbreaker",
 		appearanceDesc: "Your arms are sleeved up in a web-like membrane, it’s very likely that they could be good for swimming too."
+	});
+
+	public static const JABBERWOCKY:int = 57;
+	EnumValue.add(Types, JABBERWOCKY, "JABBERWOCKY", {
+		name:"jabberwocky",
+		appearanceDesc: "Your forearms are covered by scales which themselves are covered by fur, ending in five fingered clawed hands. Your claws are strong enough to rip and tear through next to anything though you tend to use your arms as a mean to keep your partners pinned down so they don't move during sex.",
+		claw: true
 	});
 
 	public static function canFly(id: int): Boolean {

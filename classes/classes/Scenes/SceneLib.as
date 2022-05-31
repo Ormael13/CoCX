@@ -6,7 +6,6 @@ import classes.Scenes.Areas.Battlefield.DilapidatedShrine;
 import classes.Scenes.Areas.Bog.TrollScenes;
 import classes.Scenes.Areas.Caves.DisplacerBeastScene;
 import classes.Scenes.Areas.Forest.KitsuneScene;
-import classes.Scenes.Areas.GlacialRift.FrostGiantScene;
 import classes.Scenes.Areas.GlacialRift.YuWinterGearShop;
 import classes.Scenes.Areas.Ocean.ScyllaScene;
 import classes.Scenes.Camp.HarvestMoonScenes;
@@ -15,7 +14,6 @@ import classes.Scenes.Dungeons.AnzuPalace.AnzuScene;
 import classes.Scenes.Dungeons.D3.D3;
 import classes.Scenes.Dungeons.DeepCave.ValaScene;
 import classes.Scenes.Dungeons.DungeonEngine;
-import classes.Scenes.Dungeons.EbonLabyrinth;
 import classes.Scenes.Dungeons.HelDungeon.BrigidScene;
 import classes.Scenes.Explore.*;
 import classes.Scenes.Monsters.*;
@@ -50,8 +48,6 @@ public class SceneLib {
     public static var blightridge:BlightRidge = new BlightRidge();
 
     public static var defiledravine:DefiledRavine = new DefiledRavine();
-
-    public static var ebonLabyrinth:EbonLabyrinth = new EbonLabyrinth();
 
     public static var bog:Bog = new Bog();
 
@@ -97,17 +93,13 @@ public class SceneLib {
 
     public static var goblinScene:GoblinScene = new GoblinScene();
 
-    public static var goblinAssassinScene:GoblinAssassinScene = new GoblinAssassinScene();
-
-    public static var goblinWarriorScene:GoblinWarriorScene = new GoblinWarriorScene();
-
-    public static var goblinShamanScene:GoblinShamanScene = new GoblinShamanScene();
-
-    public static var goblinElderScene:GoblinElderScene = new GoblinElderScene();
+    public static var priscillaScene:PriscillaScene = new PriscillaScene();
 
     public static var trollScene:TrollScenes = new TrollScenes();
 	
 	public static var displacerbeastScene:DisplacerBeastScene = new DisplacerBeastScene();
+    
+    public static var dridertown:DriderTown = new DriderTown();
 
     public static var aethertwins:AetherTwinsFollowers = new AetherTwinsFollowers();
 
@@ -126,6 +118,8 @@ public class SceneLib {
     public static var ayaneFollower:AyaneFollower = new AyaneFollower();
 
     public static var bashemathScene:BashemathFollower = new BashemathFollower();
+    
+    public static var belisa:BelisaFollower = new BelisaFollower();
 
     public static var ceraphScene:CeraphScene = new CeraphScene();
 
@@ -152,6 +146,8 @@ public class SceneLib {
     public static var excelliaFollower:ExcelliaFollower = new ExcelliaFollower();
 
     public static var exgartuan:Exgartuan = new Exgartuan();
+	
+	public static var forgefatherScene:Forgefather = new Forgefather();
 
     public static var galiaFollower:GaliaFollower = new GaliaFollower();
 
@@ -164,6 +160,8 @@ public class SceneLib {
     public static var helSpawnScene:HelSpawnScene = new HelSpawnScene();
 
     public static var holliScene:HolliScene = new HolliScene();
+
+    public static var iridesianFollower:IridesianFollower = new IridesianFollower();
 
     public static var isabellaScene:IsabellaScene = new IsabellaScene();
 
@@ -184,6 +182,8 @@ public class SceneLib {
     public static var konstantin:Konstantin = new Konstantin();
 
     public static var latexGirl:LatexGirl = new LatexGirl();
+    
+    public static var lily:LilyFollower = new LilyFollower();
 
     public static var lunaFollower:LunaFollower = new LunaFollower();
 
@@ -239,11 +239,11 @@ public class SceneLib {
 
     public static var vala:ValaScene = new ValaScene();
     
-    public static var valeria:Valeria = new Valeria();
+    public static var valeria:ValeriaScene = new ValeriaScene();
 
     public static var vapula:Vapula = new Vapula();
 
-    //public static var waizabi:WaizAbiFollower = new WaizAbiFollower();
+    public static var waizabi:WaizAbiFollower = new WaizAbiFollower();
 
     public static var woodElves:WoodElves = new WoodElves();
 
@@ -254,6 +254,8 @@ public class SceneLib {
     public static var sharkgirlScene:SharkGirlScene = new SharkGirlScene();
 
     public static var scyllaScene:ScyllaScene = new ScyllaScene();
+
+    public static var trollVillage:TrollVillage = new TrollVillage();
 
     public static var bazaar:Bazaar = new Bazaar();
 
@@ -298,6 +300,12 @@ public class SceneLib {
 	public static var adventureGuild:AdventurerGuild = new AdventurerGuild();
 	
 	public static var fleshGolemScenes:FleshGolemScene = new FleshGolemScene();
+
+    public static var phyllaScene:PhyllaScene = new PhyllaScene();
+
+    public static var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
+
+    public static var uniqueSexScene:UniqueSexScenes = new UniqueSexScenes();
 
     public function SceneLib() {
     }

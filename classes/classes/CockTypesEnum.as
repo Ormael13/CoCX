@@ -18,7 +18,7 @@ package classes
 		 * 8 - ugliest wang ever (kangaroo)
 		 * 9 - dragon
 		 * 10 - displacer
-		 * 11 - Fox	
+		 * 11 - Fox
 		
 		 Group Types used for general description code (eventually)
 		 * human  	- obvious
@@ -29,41 +29,53 @@ package classes
 		 * seaworld - Anything in the water
 		 * other	- doesn't fit anywhere else
 		 */
-		public static const HUMAN:CockTypesEnum = new CockTypesEnum("human");
-		public static const HORSE:CockTypesEnum = new CockTypesEnum("mammal");
-		public static const DOG:CockTypesEnum = new CockTypesEnum("mammal");
-		public static const DEMON:CockTypesEnum = new CockTypesEnum("super");
-		public static const TENTACLE:CockTypesEnum = new CockTypesEnum("tentacle");
-		public static const SCYLLATENTACLE:CockTypesEnum = new CockTypesEnum("tentacle");
-		public static const CAT:CockTypesEnum = new CockTypesEnum("mammal");
-		public static const CANCER:CockTypesEnum = new CockTypesEnum("foaming human");
-		public static const LIZARD:CockTypesEnum = new CockTypesEnum("reptile");
-		public static const CAVE_WYRM:CockTypesEnum = new CockTypesEnum("reptile");
-		public static const ANEMONE:CockTypesEnum = new CockTypesEnum("seaworld");
-		public static const KANGAROO:CockTypesEnum = new CockTypesEnum("mammal");
-		public static const DRAGON:CockTypesEnum = new CockTypesEnum("reptile");
-		public static const DISPLACER:CockTypesEnum = new CockTypesEnum("other");
-		public static const FOX:CockTypesEnum = new CockTypesEnum("mammal");
-		public static const BEE:CockTypesEnum = new CockTypesEnum("insect");
-		public static const PIG:CockTypesEnum = new CockTypesEnum("mammal");
-		public static const AVIAN:CockTypesEnum = new CockTypesEnum("avian");
-		public static const RHINO:CockTypesEnum = new CockTypesEnum("mammal");
-		public static const ECHIDNA:CockTypesEnum = new CockTypesEnum("mammal");
-		public static const WOLF:CockTypesEnum = new CockTypesEnum("mammal");
-		public static const STAMEN:CockTypesEnum = new CockTypesEnum("plant");
-		public static const RED_PANDA:CockTypesEnum = new CockTypesEnum("mammal");
-		public static const GRYPHON:CockTypesEnum = new CockTypesEnum("avian");
-		public static const OOMUKADE:CockTypesEnum = new CockTypesEnum("venomous");
-		public static const MINDBREAKER:CockTypesEnum = new CockTypesEnum("eldritch");
-		public static const USHI_ONI:CockTypesEnum = new CockTypesEnum("other");
-		public static const UNDEFINED:CockTypesEnum = new CockTypesEnum("");
+		public static const HUMAN:CockTypesEnum = new CockTypesEnum("human","human");
+		public static const HORSE:CockTypesEnum = new CockTypesEnum("horse","mammal");
+		public static const DOG:CockTypesEnum = new CockTypesEnum("dog","mammal");
+		public static const DEMON:CockTypesEnum = new CockTypesEnum("demon","super");
+		public static const TENTACLE:CockTypesEnum = new CockTypesEnum("tentacle","tentacle");
+		public static const SCYLLATENTACLE:CockTypesEnum = new CockTypesEnum("scylla tentacle","tentacle");
+		public static const CAT:CockTypesEnum = new CockTypesEnum("cat","mammal");
+		public static const CANCER:CockTypesEnum = new CockTypesEnum("cancer","foaming human");
+		public static const LIZARD:CockTypesEnum = new CockTypesEnum("lizard","reptile");
+		public static const CAVE_WYRM:CockTypesEnum = new CockTypesEnum("cave wyrm","reptile");
+		public static const ANEMONE:CockTypesEnum = new CockTypesEnum("anemone","seaworld");
+		public static const KANGAROO:CockTypesEnum = new CockTypesEnum("kangaroo","mammal");
+		public static const DRAGON:CockTypesEnum = new CockTypesEnum("dragon","reptile");
+		public static const DISPLACER:CockTypesEnum = new CockTypesEnum("displacer","other");
+		public static const FOX:CockTypesEnum = new CockTypesEnum("fox","mammal");
+		public static const BEE:CockTypesEnum = new CockTypesEnum("bee","insect");
+		public static const PIG:CockTypesEnum = new CockTypesEnum("pig","mammal");
+		public static const AVIAN:CockTypesEnum = new CockTypesEnum("avian","avian");
+		public static const RHINO:CockTypesEnum = new CockTypesEnum("rhino","mammal");
+		public static const ECHIDNA:CockTypesEnum = new CockTypesEnum("echidna","mammal");
+		public static const WOLF:CockTypesEnum = new CockTypesEnum("wolf","mammal");
+		public static const STAMEN:CockTypesEnum = new CockTypesEnum("stamen","plant");
+		public static const RED_PANDA:CockTypesEnum = new CockTypesEnum("red panda","mammal");
+		public static const GRYPHON:CockTypesEnum = new CockTypesEnum("gryphon","avian");
+		public static const OOMUKADE:CockTypesEnum = new CockTypesEnum("oomukade","venomous");
+		public static const MINDBREAKER:CockTypesEnum = new CockTypesEnum("mindbreaker","eldritch");
+		public static const RAIJU:CockTypesEnum = new CockTypesEnum("raiju","mammal");
+		public static const USHI_ONI:CockTypesEnum = new CockTypesEnum("ushi-oni","other");
+		public static const UNDEFINED:CockTypesEnum = new CockTypesEnum("undefined","");
 		
-		function CockTypesEnum(i_group:String = "") { _group = i_group; }
+		function CockTypesEnum(
+				i_displayName:String="",
+				i_group:String=""
+		) {
+			_displayName = i_displayName;
+			_group = i_group;
+		}
 		private var _group:String;
+		private var _displayName:String;
 		
-		public function get Group():String 
+		public function get Group():String
 		{
 			return _group;
+		}
+		public function get DisplayName():String
+		{
+			return _displayName;
 		}
 		
 		public static function ParseConstant(i_constantName:String, i_caseSensitive:Boolean = false):CockTypesEnum

@@ -5,15 +5,10 @@
 package classes.Scenes.Areas.Ashlands 
 {
 	import classes.*;
-	import classes.internals.*;
-	import classes.CoC;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Camp.CampMakeWinions;
+	import classes.Scenes.SceneLib;
 	
 	public class GolemTrueFire extends Monster
 	{
-		public var campMake:CampMakeWinions = new CampMakeWinions();
-		
 		public function backhand():void {
 			outputText("The golem visage twists into a grimace of irritation, and it flyby you swinging hand at you in a vicious backhand.");
 			var damage:Number = int ((str + weaponAttack) - rand(player.tou) - player.armorDef);
@@ -83,7 +78,7 @@ package classes.Scenes.Areas.Ashlands
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			campMake.postFightGolemOptions1();
+			SceneLib.camp.campMake.postFightGolemOptions1();
 		}
 		
 		public function GolemTrueFire() 

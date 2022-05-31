@@ -8,6 +8,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 /**
 	 * ...
@@ -15,11 +16,13 @@ import classes.Scenes.SceneLib;
 	 */
 	public class MinotaurMob extends Monster 
 	{
+		public var wastedTurn:Boolean = false;
+
 		private function precumTease():void {
 			var teased:Boolean = false;
 			var damage:Number = 0;
 			var oldLust:Number = player.lust;
-			game.spriteSelect(94);
+			game.spriteSelect(SpriteDb.s_minotaurSons);
 			//(Big taur pre-cum tease)
 			if(rand(2) == 0) {
 				teased = true;
@@ -92,14 +95,14 @@ import classes.Scenes.SceneLib;
 				}
 				if(player.hasCock()) outputText("  " + SMultiCockDesc() + " twitches and dribbles its own pre-seed, but it doesn't smell anywhere near as good!");
 				outputText("  Shuddering and moaning, your body is wracked by ever-increasing arousal.  Fantasies of crawling under the beast-men's soaked legs and lapping at their drooling erections inundate your mind, your body shivering and shaking in response.  ");
-				if(player.lust <= 99) outputText("You pull back from the brink with a start.  It'll take more than a little drugged pre-cum to bring you down!");
+				if(player.lust < player.maxLust()) outputText("You pull back from the brink with a start.  It'll take more than a little drugged pre-cum to bring you down!");
 				else outputText("You sigh and let your tongue loll out.  It wouldn't so bad, would it?");
 			}
 		}
 
 		//Grope
 		private function minotaurGangGropeAttack():void {
-			game.spriteSelect(94);
+			game.spriteSelect(SpriteDb.s_minotaurSons);
 			outputText("Strong hands come from behind and slide under your equipment to squeeze your " + chestDesc() + ".  The brutish fingers immediately locate and pinch at your " + nippleDescript(0) + "s, the sensitive flesh on your chest lighting up with pain and pleasure.  You arch your back in surprise, utterly stunned by the violation of your body.  After a moment you regain your senses and twist away, but the damage is already done.  You're breathing a bit quicker now");
 			if(player.lust >= 80) outputText(", and your pussy is absolutely soaking wet");
 			outputText(".");
@@ -107,19 +110,19 @@ import classes.Scenes.SceneLib;
 		}
 		//Gang Grope
 		private function minotaurGangGangGropeAttack():void {
-			game.spriteSelect(94);
+			game.spriteSelect(SpriteDb.s_minotaurSons);
 			outputText("Before you can react, hands reach out from multiple angles and latch onto your body.  One pair squeezes at your " + Appearance.buttDescription(player) + ", the strong grip massaging your cheeks with loving touches.  Another set of hands are sliding along your tummy, reaching down for, but not quite touching, the juicy delta below.  Palms encircle your [chest] and caress them, gently squeezing in spite of the brutish hands holding you.  You wriggle and squirm in the collective grip of the many minotaurs for a few moments, growing more and more turned on by the treatment.  At last, you shake out of their hold and stand free, panting hard from exertion and desire.");
 			player.dynStats("lus", (15 + player.effectiveSensitivity()/10));
 		}
 		//Waste  a turn
 		private function minotaurGangWaste():void {
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] = 1;
-			game.spriteSelect(94);
+			wastedTurn = true;
+			game.spriteSelect(SpriteDb.s_minotaurSons);
 			outputText("\"<i>Oh man I can't wait to go hilt-deep in that pussy... I'm going to wreck " + player.mf("him", "her") + ",</i>\" promises one bull to his brother.  The other laughs and snorts, telling him how he'll have to do the deed during sloppy seconds.  It quickly escalates, and soon, every single one of the beast-men is taunting the others, bickering over how and when they'll get to have you.  While they're wasting their time, it's your chance to act!");
 		}
 		//
 		private function minosPheromones():void {
-			game.spriteSelect(94);
+			game.spriteSelect(SpriteDb.s_minotaurSons);
 			outputText("The minotaurs smiles at you and lifts their loincloth, flicking them at you.  Thick ropes of pre-cum fly through the air, ");
 			//sometimes get hit with the pre for stronger effect!
 			if(rand(3) == 0) {
@@ -144,7 +147,7 @@ import classes.Scenes.SceneLib;
 		}
 		//This is sparta
 		private function minotaurThisIsSparta():void {
-			game.spriteSelect(94);
+			game.spriteSelect(SpriteDb.s_minotaurSons);
 			outputText("One of the minotaurs in golden armor with a helmet, a round shield and a gladius jumps out of the lot and kicks you in the face throwing you to the ground screaming.\n\n");
 			outputText("\"<i>This.. is… <b>MY FUUUUCK!!!!</b></i>\"");
 			player.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
@@ -152,7 +155,7 @@ import classes.Scenes.SceneLib;
 
 		override protected function performCombatAction():void
 		{
-			game.spriteSelect(94);
+			game.spriteSelect(SpriteDb.s_minotaurSons);
 			if (flags[kFLAGS.ETNA_FOLLOWER] == 3) {
 				var select1:Number = rand(5);
 				if(select1 <= 2) eAttack();
@@ -160,7 +163,7 @@ import classes.Scenes.SceneLib;
 				else minotaurThisIsSparta();
 			}
 			else {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] = 0;
+				wastedTurn = false;
 				var select:Number = rand(7);
 				if(select <= 2) precumTease();
 				else if(select <= 4) minotaurGangGropeAttack();
@@ -192,13 +195,13 @@ import classes.Scenes.SceneLib;
 		{
 			this.a = "the ";
 			if (flags[kFLAGS.ETNA_FOLLOWER] == 3) this.short = "300 jealous minotaurs Ex-es";
-			else if (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] < 20) this.short = "minotaur gang";
+			else if (game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] < 20) this.short = "minotaur gang";
 			else this.short = "minotaur tribe";
 			this.imageName = "minotaurmob";
 			if (flags[kFLAGS.ETNA_FOLLOWER] == 3)
 				this.long = "Whoa, it looks like all of Etna’s sexual partners have amassed in one group to take her and you down. The bull men are all over the chapel!";
 			else 
-				this.long = Num2Text(game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear."+(game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 20?"  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.":"");
+				this.long = Num2Text(game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear."+(game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] >= 20?"  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.":"");
 			this.plural = true;
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";
@@ -238,11 +241,11 @@ import classes.Scenes.SceneLib;
 				this.createPerk(PerkLib.Enemy300Type, 0, 0, 0, 0);
 			}
 			else {
-				bonusHP += 50 * (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3);
-				if((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 2 > 13) lustVuln = .3;
-				else lustVuln -= (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 0.02;
-				this.bonusLust = 115 * Math.round((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
-				var level:int = 26 + Math.round((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
+				bonusHP += 50 * (game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3);
+				if((game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3) * 2 > 13) lustVuln = .3;
+				else lustVuln -= (game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3) * 0.02;
+				this.bonusLust = 115 * Math.round((game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2);
+				var level:int = 26 + Math.round((game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2);
 				if(level > 29) level = 29;
 				this.level = level;
 			}
@@ -254,7 +257,7 @@ import classes.Scenes.SceneLib;
 			this.tailType = Tail.COW;
 			this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;
 			this.drop = NO_DROP;
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00328] > 20 || flags[kFLAGS.ETNA_FOLLOWER] == 3) this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINOTAUR_SONS_GROW_COUNTDOWN] > 20 || flags[kFLAGS.ETNA_FOLLOWER] == 3) this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			else this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();

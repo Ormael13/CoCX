@@ -43,7 +43,6 @@ public class UrtaQuest extends NPCAwareContent
 //const EDRYN_BIRF_COUNTDOWN:int = 722;
 
 //You play as Urta, which copies everyone about you into this new variable. Very clumsy.
-//TODO: Figure out this whole thing. You play as Urta but the whole quest saves you state into this variable and swaps back and forth
 //whenever you "leave" the quest
 public var urtaQItems1:ItemSlotClass = new ItemSlotClass();
 public var urtaQItems2:ItemSlotClass = new ItemSlotClass();
@@ -296,9 +295,9 @@ public function startUrtaQuest():void {
 	player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_DROOLING;
 	player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_NORMAL;
 	player.clitLength = 1;
-	player.strStat.core.value = 163;
-	player.touStat.core.value = 183;
-	player.speStat.core.value = 198;
+	player.strStat.core.value = 187;
+	player.touStat.core.value = 203;
+	player.speStat.core.value = 218;
 	player.intStat.core.value = 80;
 	player.wisStat.core.value = 70;
 	player.libStat.core.value = 120;
@@ -311,9 +310,9 @@ public function startUrtaQuest():void {
 	player.gems = 183;
 	player.level = 30;
 	player.teaseLevel = 15;
-	player.strStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 34);
-	player.touStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 37);
-	player.speStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 40);
+	player.strStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 39);
+	player.touStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 43);
+	player.speStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 46);
 	player.intStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 20);
 	player.wisStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 18);
 	player.libStat.core.value += (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] * 30);
@@ -917,7 +916,7 @@ public function runIntoAGoblin(camped:Boolean = false):void {
 	}
 	outputText("\n\n\"<i>Hey there lady-stud!  You look like you could use a hot cunt to fertilize a few times!</i>\" a reedy, high-pitched goblin voice calls.  Shit, one of those guttersluts.  They're almost as bad as demons.  Worst of all, you know they'll play to your basest, most well-concealed fetishes.  Just the idea of having one of them split on your cock, slowly ballooning with seed and loving it...  well, if you're being honest with yourself, it makes you stiffen a little.  You turn around to face the curvy little preg-hungry whore, and as soon as you see her, you realize she's not going to go away until she's had a ride on your dick or been subdued.");
 	outputText("\n\n<b>It's a fight!</b>");
-	startCombat(new GoblinBroodmother());// TODO extract to Monsters.GoblinBroodMother class
+	startCombat(new GoblinBroodmother());
 }
 
 
@@ -1049,7 +1048,7 @@ private function urtaGameOver():void {
 //PC could perhaps use some of these with proper training, maybe Urta would teach them some moves?
 
 //1-2 round stun, 1-2 round blind, throat punch (2-3 round silence?)
-//Side Winder: 70% damage + stun chance
+//Side Winder: 75% damage + stun chance
 //Vault: 250% damage vs stunned
 //Combo: 3x attack, guaranteed hit vs blind
 //Dirt Kick: Blind 1-3 rounds
@@ -1065,12 +1064,12 @@ public function urtaSpecials():void {
         return;
 	}
 	menu();
-	addButton(0, "Combo", urtaComboAttack).hint("Make a three-hit combo.  Each attack has an extra 33% chance to miss, unless the target is blind. \n\nFatigue cost: 75");
+	addButton(0, "Combo", urtaComboAttack).hint("Make a four-hit combo.  Each attack has an extra 33% chance to miss, unless the target is blind. \n\nFatigue cost: 75");
 	addButton(1, "Vault", urtaVaultAttack).hint("Make a vaulting attack for an extra 50% damage.  Automatically crits stunned foes. \n\nFatigue cost: 60");
 	addButton(2, "Sidewinder", urtaSidewinder).hint("An attack that hits for reduced damage but can stun enemy. \n\nFatigue cost: 100");
-	addButton(3, "Dirt Kick", urtaDirtKick).hint("Attempt to blind your foe with a spray of kicked dirt. \n\nFatigue cost: 15");
-	addButton(4, "Metabolize", urtaMetabolize).hint("Convert 5% of your maximum HP into fatigue.");
-	addButton(5, "SecondWind", urtaSecondWind).hint("Regain 50% of your HP, 200 fatigue, and reduce lust by 200.", "Second Wind");
+	addButton(3, "Dirt Kick", urtaDirtKick).hint("Attempt to blind your foe with a spray of kicked dirt. \n\nFatigue cost: 25");
+	addButton(5, "Metabolize", urtaMetabolize).hint("Convert 5% of your maximum HP into fatigue.");
+	addButton(6, "SecondWind", urtaSecondWind).hint("Regain 75% of your HP, 200 fatigue, and reduce lust by 200.", "Second Wind");
 	addButton(14, "Back", combat.combatMenu, false);
 }
 
@@ -1082,7 +1081,7 @@ public function urtaMSpecials():void {
 		return;
 	}
 	menu();
-	if (player.findPerk(PerkLib.Berzerker) >= 0) {
+	if (player.hasPerk(PerkLib.Berzerker)) {
 		addButton(0, "Berserk", berzerk).hint("Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero!");
 	}
 	addButton(14, "Back", combat.combatMenu, false);
@@ -1103,8 +1102,8 @@ private function berzerk():void {
 
 private function urtaMetabolize():void {
 	clearOutput();
-	var damage:int = player.takePhysDamage(Math.round(player.maxHP()/5));
-	outputText("You work your body as hard as you can, restoring your fatigue at the cost of health. (" + damage + ")\nRestored 25 fatigue!\n\n");
+	var damage:int = player.takePhysDamage(Math.round(player.maxHP()/20));
+	outputText("You work your body as hard as you can, restoring your fatigue at the cost of health. (" + damage + ")\nRestored 100 fatigue!\n\n");
 	fatigue(-100);
     SceneLib.combat.enemyAIImpl();
 }
@@ -1120,7 +1119,7 @@ private function urtaSecondWind():void {
 		return;
 	}
 	monster.createStatusEffect(StatusEffects.UrtaSecondWinded,3,0,0,0);
-	HPChange(Math.round(player.maxHP()*0.5),false);
+	HPChange(Math.round(player.maxHP()*0.75),false);
 	fatigue(-200);
 	dynStats("lus", -200);
 	outputText("Closing your eyes for a moment, you focus all of your willpower on pushing yourself to your absolute limits, forcing your lusts down and drawing on reserves of energy you didn't know you had!\n\n");
@@ -1141,7 +1140,7 @@ private function urtaComboAttack():void {
 		}
 		fatigue(75);
 	}
-	if (!player.hasStatusEffect(StatusEffects.Attacks)) player.createStatusEffect(StatusEffects.Attacks,3,0,0,0);
+	if (!player.hasStatusEffect(StatusEffects.Attacks)) player.createStatusEffect(StatusEffects.Attacks,4,0,0,0);
 	else {
 		player.addStatusValue(StatusEffects.Attacks,1,-1);
 		trace("DECREMENDED ATTACKS");
@@ -1181,7 +1180,7 @@ private function urtaComboAttack():void {
 	critChance += combat.combatPhysicalCritical();
 	if (player.hasPerk(PerkLib.WeaponMastery)) critChance += 10;
 	if (player.hasPerk(PerkLib.WeaponGrandMastery)) critChance += 10;
-	if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+	if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 	if (rand(100) < critChance) {
 		crit = true;
 		damage *= 2;
@@ -1189,8 +1188,8 @@ private function urtaComboAttack():void {
 	//One final round
 	damage = Math.round(damage);
 	if (damage > 0) {
-		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
-		if(player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
+		if(player.hasPerk(PerkLib.HistoryFighter)) damage *= 1.1;
+		if(player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 		damage = SceneLib.combat.doDamage(damage);
 	}
 	if (damage <= 0) {
@@ -1201,7 +1200,7 @@ private function urtaComboAttack():void {
 		outputText("You hit [themonster]! (" + damage + ")");
 		if(crit) outputText(" <b>*CRIT*</b>");
 	}
-	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
+	if (player.hasPerk(PerkLib.BrutalBlows) && player.str > 75) {
 		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage [themonster]'s defenses!");
 		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;
@@ -1227,7 +1226,7 @@ private function urtaComboAttack():void {
 //Dirt Kick
 private function urtaDirtKick():void {
 	clearOutput();
-	if(player.fatigue + 15 > player.maxFatigue()) {
+	if(player.fatigue + 25 > player.maxFatigue()) {
 		outputText("You are too fatigued to use that ability!");
 //Gone		menuLoc = 3;
 //		doNext(combat.combatMenu);
@@ -1235,7 +1234,7 @@ private function urtaDirtKick():void {
 		addButton(0, "Next", combat.combatMenu, false);
 		return;
 	}
-	fatigue(15);
+	fatigue(25);
 	//Blind
 	if (player.hasStatusEffect(StatusEffects.Blind)) outputText("You attempt to dirt kick, but as blinded as you are right now, you doubt you'll have much luck!  ");
 	else outputText("Spinning about, you drag your footpaw through the dirt, kicking a wave of debris towards [themonster]!  ");
@@ -1248,12 +1247,12 @@ private function urtaDirtKick():void {
 	else if (monster.hasStatusEffect(StatusEffects.Blind)) outputText(monster.mf("He","She") + "'s already blinded.  What a waste.\n\n");
 	else {
 		outputText(monster.mf("He","She") + "'s blinded!\n\n");
-		monster.createStatusEffect(StatusEffects.Blind, 2 + rand(3),0,0,0);
+		monster.createStatusEffect(StatusEffects.Blind, 3 + rand(2),0,0,0);
 	}
     SceneLib.combat.enemyAIImpl();
 }
 
-//SideWinder: 50% damage + 80% chance for stun
+//SideWinder: 75% damage + 80% chance for stun
 private function urtaSidewinder():void {
 	clearOutput();
 	if(player.fatigue + 100 > player.maxFatigue()) {
@@ -1283,15 +1282,15 @@ private function urtaSidewinder():void {
 	//Weapon addition!
 	if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.05));
 	else damage *= (3.5 + ((player.weaponAttack - 50) * 0.04));
-	//50% crappier than normal attack.
-	damage *= 0.5;
+	//25% crappier than normal attack.
+	damage *= 0.75;
 	//Determine if critical hit!
 	var crit:Boolean = false;
 	var critChance:int = 15;
 	critChance += combat.combatPhysicalCritical();
 	if (player.hasPerk(PerkLib.WeaponMastery)) critChance += 10;
 	if (player.hasPerk(PerkLib.WeaponGrandMastery)) critChance += 10;
-	if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+	if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 	if (rand(100) < critChance) {
 		crit = true;
 		damage *= 1.75;
@@ -1299,8 +1298,8 @@ private function urtaSidewinder():void {
 	//One final round
 	damage = Math.round(damage);
 	if (damage > 0) {
-		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
-		if(player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
+		if(player.hasPerk(PerkLib.HistoryFighter)) damage *= 1.1;
+		if(player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 		damage = SceneLib.combat.doDamage(damage);
 	}
 	if (damage <= 0) {
@@ -1311,16 +1310,16 @@ private function urtaSidewinder():void {
 		outputText("You hit [themonster]! (" + damage + ")");
 		if(crit) outputText(" <b>*CRIT*</b>");
 	}
-	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
+	if (player.hasPerk(PerkLib.BrutalBlows) && player.str > 75) {
 		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage [themonster]'s defenses!");
 		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;
 	}
-	if (!monster.hasStatusEffect(StatusEffects.Stunned) && monster.findPerk(PerkLib.Resolute) < 0 && damage > 0 && rand(5) > 0) {
+	if (!monster.hasStatusEffect(StatusEffects.Stunned) && !monster.hasPerk(PerkLib.Resolute) && damage > 0 && rand(5) > 0) {
 		outputText("\n<b>[Themonster] is stunned!</b>");
 		monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 	}
-	else if (monster.findPerk(PerkLib.Resolute) >= 0) outputText("\nWhile it should have some chance of stunning, your foe seems far too resolute to be affected by such an ailment.");
+	else if (monster.hasPerk(PerkLib.Resolute)) outputText("\nWhile it should have some chance of stunning, your foe seems far too resolute to be affected by such an ailment.");
 	outputText("\n");
 	//Kick back to main if no damage occured!
 	if(monster.HP >= 1 && monster.lust <= 99) {
@@ -1378,15 +1377,15 @@ private function urtaVaultAttack():void {
 	//Weapon addition!
 	if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.05));
 	else damage *= (3.5 + ((player.weaponAttack - 50) * 0.04));
-	//50% better than normal attack.
-	damage *= 1.5;
+	//100% better than normal attack.
+	damage *= 2;
 	//Determine if critical hit!
 	var crit:Boolean = false;
 	var critChance:int = 15;
 	critChance += combat.combatPhysicalCritical();
 	if (player.hasPerk(PerkLib.WeaponMastery)) critChance += 10;
 	if (player.hasPerk(PerkLib.WeaponGrandMastery)) critChance += 10;
-	if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+	if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 	if (monster.monsterIsStunned()) critChance = 100;
 	if (rand(100) < critChance) {
 		crit = true;
@@ -1395,8 +1394,8 @@ private function urtaVaultAttack():void {
 	//One final round
 	damage = Math.round(damage);
 	if (damage > 0) {
-		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
-		if(player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
+		if(player.hasPerk(PerkLib.HistoryFighter)) damage *= 1.1;
+		if(player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 		damage = SceneLib.combat.doDamage(damage);
 	}
 	if (damage <= 0) {
@@ -1407,7 +1406,7 @@ private function urtaVaultAttack():void {
 		outputText("You hit [themonster]! (" + damage + ")");
 		if (crit) outputText(" <b>*CRIT*</b>");
 	}
-	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
+	if (player.hasPerk(PerkLib.BrutalBlows) && player.str > 75) {
 		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage [themonster]'s defenses!");
 		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;
@@ -1599,7 +1598,7 @@ private function gnollAlphaBitchIntro():void {
 	monster.bonusHP = 750;
 	monster.level += 11;
 	monster.short = "alpha gnoll";
-	monster.HP   = monster.maxHP(); // TODO extract to AlphaGnoll class
+	monster.HP   = monster.maxHP();
 	monster.long = "The gnoll standing before you is obviously an alpha among her kind; she has to be over seven feet tall and rippling with muscle, not that this stops her from having a curvy form, squeezable ass and full E-cup boobs.  The remnants of what must have once been a gorgeous and expensive silken dress are draped across her figure, torn off at the knees and hanging by only a single shoulder, arms bare and exposed.  A heavy necklace of gold is wrapped around her neck, while bracelets of more of the same adorn her arms, and piercings of gold stud her ears.  She carries a mighty-looking spear in her hands, which she brandishes at you menacingly, and a basket of throwing javelins is strapped to her back.";
 	doNext(playerMenu);
 }

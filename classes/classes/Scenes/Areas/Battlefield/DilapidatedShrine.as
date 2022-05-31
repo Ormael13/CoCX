@@ -6,8 +6,10 @@ package classes.Scenes.Areas.Battlefield
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.Weapon;
+import classes.Items.WeaponRange;
 
-	public class DilapidatedShrine extends BaseContent
+public class DilapidatedShrine extends BaseContent
 	{
 		
 		public function DilapidatedShrine() 
@@ -96,14 +98,15 @@ import classes.GlobalFlags.kFLAGS;
 			outputText("Its eyes seem ordinarily human-like, with an x shaped cross for pupils.\n\n");
 			outputText("At the base of the statue lies a metallic plaque. Given the rust coating it, the text is hard to decipher You can only make out, 'E.e.ie.'.\n\n");
 			outputText("Below the plaque lies two ornate wooden bowls, presumably used to put offerings in a time when this was a place people actively visited.\n\n");
-			if (shinshoku()) {
-				outputText("A soft voice rings not far from behind you, \"<i>Sometimes all you need is a small token of goodwill to get a response. Perhaps a few chilly peppers would be enough...</i>\"\n\n");
-				outputText("You turn around, expecting to see the old monk you've seen before. As you peer about, nobody is around. Are you hearing voices or was he truly here moments prior?\n\n");
-			}
+            //The hint gives everything away. Remove it, and people won't understand what to do. Maybe no checks here?
+			//if (shinshoku()) {
+            outputText("A soft voice rings not far from behind you, \"<i>Sometimes all you need is a small token of goodwill to get a response. Perhaps a few chilly peppers would be enough...</i>\"\n\n");
+            outputText("You turn around, expecting to see the old monk you've seen before. As you peer about, nobody is around. Are you hearing voices or was he truly here moments prior?\n\n");
+			//}
 			//outputText("\n\n");
 			menu();
 			if (player.hasItem(consumables.CHILLYP, 3)) addButton(0, "Offering", westSectionOffering);
-			else addButtonDisabled(0, "???", "Perhaps if you came back with Chilly peppers, like the voice said...");
+			else addButtonDisabled(0, "???", "Perhaps if you came back with 3 Chilly peppers, like the voice said...");
 			addButton(14, "Back", shrinemainmenu);
 		}
 		private function westSectionOffering():void {
@@ -111,44 +114,31 @@ import classes.GlobalFlags.kFLAGS;
 			player.destroyItems(consumables.CHILLYP, 3);
 			outputText("You place the peppers in one of the bowls, and wait for a bit. A noise distracts you for half a moment, but when you turn back, the peppers are gone, ");
 			switch(rand(10)) {
-				case 0:
-					outputText("and nothing for your troubles. How disappointing.");
-					break;
 				case 1:
 					outputText("in the other bowl, a small, glowing syringe.");
 					inventory.takeItem(useables.E_ICHOR, westSection);
-					break;
-				case 2:
-					outputText("and nothing for your troubles. How disappointing.");
 					break;
 				case 3:
 					outputText("and a bottle of Nocello sitting in front of the statue.");
 					inventory.takeItem(consumables.NOCELIQ, westSection);
 					break;
-				case 4:
-					outputText("and nothing for your troubles. How disappointing.");
-					break;
 				case 5:
 					outputText("and a single Storm Seed rests in the other bowl.");
 					inventory.takeItem(consumables.SRMSEED, westSection);
-					break;
-				case 6:
-					outputText("and nothing for your troubles. How disappointing.");
 					break;
 				case 7:
 					outputText("replaced by a familiar looking bottle of Enigmanium.");
 					inventory.takeItem(consumables.ENIGMANIUM, westSection);
 					break;
-				case 8:
-					outputText("and nothing for your troubles. How disappointing.");
-					break;
 				case 9:
 					outputText("instead, a bottle of Infernal Wine sits before the statue.");
 					inventory.takeItem(consumables.INFWINE, westSection);
 					break;
+				default:
+					outputText("and nothing for your troubles. How disappointing.");
+					break;
 			}
 			outputText("\n\n")
-			menu();
 			doNext(westSection);
 			cheatTime(1/12);
 		}
@@ -183,7 +173,96 @@ import classes.GlobalFlags.kFLAGS;
 			outputText("At the base of the largest statue lies a metallic plaque. Given the rust coating it, the text is hard to decipher. You can only make out 'Krat..' within the text.\n\n");
 			outputText("Below the plaque lies an ornate wooden bowl, presumably used to put offerings in a time when this was a place people actively visited.\n\n");
 			menu();
+			addButton(0, "Offering", weaponsXPtrader);//southSectionOffering
 			addButton(14, "Back", shrinemainmenu);
+		}
+
+		public function weaponsXPtrader():void{
+			clearOutput();
+			//Firearms and Archery is not supported yet cause classification is a bit blurry still.
+			var weaponClasses:Array = ["Gauntlet", "Sword", "Axe", "Mace/Hammer", "Dueling", "Polearm", "Spear", "Dagger", "Whip", "Exotic"]; //, "Thrown",  "Scythe", "Staff", "Tetsubo", "Ribbon"
+			var btnInt:int = 0;
+			var tempAry:Array = [];
+			outputText("Welcome. Here, you can offer your weapons to the god of war, consuming the weapon to gain knowledge of the battles its seen.\n");
+			for (var i:int = 0; i < inventory.getMaxSlots(); i++){
+				var weaponType:String = "";
+				var itemClassReplace:*;
+				try{
+					if (player.itemSlot(i).itype is Weapon){
+						itemClassReplace = player.itemSlot(i).itype as Weapon;
+						weaponType = itemClassReplace['type'];
+						//outputText(weaponType + "\n");
+					}
+					else if (player.itemSlot(i).itype is WeaponRange){
+						itemClassReplace = player.itemSlot(i).itype as WeaponRange;
+						weaponType = itemClassReplace['type'];
+						//outputText(weaponType + "\n");
+					}
+					else{//I don't know why I decided to go with German with this. But it's funny.
+						trace("ACHTUNG, ARTIKEL IM STECKPLATZ " + i + " IST NICHT KOMPATIBEL!\n");
+						//Warning, Item in Slot i is not compatible.
+					}
+					if (weaponClasses.indexOf(weaponType) >= 0){
+						tempAry.push([player.itemSlot(i).itype,weaponType])
+					}
+				}
+				catch (e:Error){
+					outputText(e + "\n");
+				}
+			}
+			menu();
+			for each (var arr1:Array in tempAry){
+				addButton(btnInt, arr1[0].shortName,conv2mastery,arr1);
+				btnInt++;
+			}
+			addButton(14, "Back", southSection);
+
+
+			function conv2mastery(wType:Array, conf:Boolean = false):void{
+				clearOutput();
+				if (!conf){
+					outputText("You can convert your " + wType[0].shortName + " into mastery xp for " + wType[1] + ".\n");
+					outputText("Would you like to do that?");
+					doYesNo(curry(conv2mastery, wType, true),weaponsXPtrader);
+				}
+				else{
+					switch (wType[1]){
+						case weaponClasses[0]:
+							player.gauntletXP(40);
+							break;
+						case weaponClasses[1]:
+							player.swordXP(40);
+							break;
+						case weaponClasses[2]:
+							player.axeXP(40);
+							break;
+						case weaponClasses[3]:
+							player.macehammerXP(40);
+							break;
+						case weaponClasses[4]:
+							player.duelingswordXP(40);
+							break;
+						case weaponClasses[5]:
+							player.polearmXP(40);
+							break;
+						case weaponClasses[6]:
+							player.spearXP(40);
+							break;
+						case weaponClasses[7]:
+							player.daggerXP(40);
+							break;
+						case weaponClasses[8]:
+							player.whipXP(40);
+							break;
+						case weaponClasses[9]:
+							player.exoticXP(40);
+							break;
+						}
+					player.destroyItems(wType[0],1);
+					outputText("Item has been consumed.");
+					doNext(southSection);
+				}
+			}
 		}
 	}
 }

@@ -31,11 +31,6 @@ use namespace CoC;
 			this.a = "a ";
 			this.short = "pack of imps";
 			this.plural = true;
-			this.removeStatuses();
-			this.removePerks();
-			this.removeCock(0, this.cocks.length);
-			this.removeVagina(0, this.vaginas.length);
-			this.removeBreastRow(0, this.breastRows.length);
 			this.createBreastRow();
 			this.createCock(12,1.5);
 			this.createCock(25,2.5);
@@ -76,6 +71,7 @@ use namespace CoC;
 			this.special1 = lustMagicAttack;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 15, 0, 0, 0);
 			checkMonster();
 		}
 	}

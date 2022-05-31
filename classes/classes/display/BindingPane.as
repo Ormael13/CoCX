@@ -127,7 +127,6 @@ import coc.view.Block;
 		 * The buttons call back into the input manager to trigger the key binding mode, display object
 		 * switches, and set state so the input manager knows what function to bind an incoming keyCode
 		 * to.
-		 * TODO: Shoot self in face.
 		 */
 		private function InitContentObjects():void
 		{
@@ -212,7 +211,6 @@ import coc.view.Block;
 		 * Builds a dictionary to lookup keyCode values -> string representations of key names.
 		 * Handles things like turning keyCode = 8 into "BACKSPACE" rather than an undisplayable
 		 * character.
-		 * TODO: Probably work out a good way of shortening some possibly long key names.
 		 */
 		private function PopulateKeyboardDict():void
 		{

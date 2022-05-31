@@ -7,11 +7,11 @@ import classes.StatusEffects;
 public class MentalShieldSpell extends AbstractWhiteSpell{
 	public function MentalShieldSpell() {
 		super(
-				"Mental Shield",
-				"Protects against lust effects for 10 rounds, halving the damage.  ",
-				TARGET_SELF,
-				TIMING_LASTING,
-				[TAG_BUFF]
+			"Mental Shield",
+			"Protects against lust effects for 10 rounds, halving the damage.  ",
+			TARGET_SELF,
+			TIMING_LASTING,
+			[TAG_BUFF]
 		);
 		baseManaCost = 300;
 	}

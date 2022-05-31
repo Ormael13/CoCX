@@ -3,8 +3,8 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.ArmorLib;
 import classes.Items.WeaponLib;
-import classes.Scenes.NPCs.NPCAwareContent;
 import classes.Scenes.NPCs.CelessScene;
+import classes.Scenes.NPCs.NPCAwareContent;
 
 public class FollowerInteractions extends NPCAwareContent {
 
@@ -619,7 +619,7 @@ private function askAboutAmilyPt2():void {
 	//Progress to next stage!
 	flags[kFLAGS.AMILY_VISITING_URTA] = 2;
 	//Tag that Urta needs to freak out!
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00350] = 1;
+	flags[kFLAGS.AMILY_URTA_FOLLOWUP] = 1;
 }
 private function cheatingSloots():void {
 	clearOutput();
@@ -666,6 +666,7 @@ private function endThisMadness():void {
 
 //Next Morning
 public function amilyUrtaMorningAfter():void {
+	SceneLib.amilyScene.amilySprite();
 	//This scene plays the next morning after the second half of the "Amily goes to see Urta" scene
 	//Should disable Amily as a follower option until the next day.
 	outputText("\nAs you leave your bedding, you see a rather dilapidated-looking mouse sprawled restlessly in her nest.  Amily's back, obviously suffering from the effects of a really bad hangover.  Sympathetically, you bring her one of your water skins, holding it over her so that she can take it from you. She opens one bleary eye and stares at you incomprehensibly for a moment, then her vision focuses and she grabs it, gulping down water and spilling more over her clearly aching head.  You ask if she's all right.\n\n");
@@ -719,7 +720,7 @@ private function smileAndNodToAmilyXUrta():void {
 //Amily Option - Urta
 //This option should probably only appear when Urta is actually at the Wet Bitch
 public function amilyUrtaSex():void {
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00350] = 2;
+	flags[kFLAGS.AMILY_URTA_FOLLOWUP] = 2;
 	clearOutput();
 	outputText("With a knowing smirk, you ask how Amily would feel about going to see Urta and maybe having a little fun with her.  The mouse-girl flushes with embarrassment, but you can see the eagerness in her body language.  \"<i>Okay, sure; I kind of like going to the city... besides, between you and me?  I think Urta needs all the friends she can get... never thought I'd feel sorry for a hermaphrodite.</i>\"  She mumbles this last part to herself, but you can still hear her.");
 	if(player.cor > 50 && flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("  Privately, you note that it's bullshit; she's nothing <b>but</b> self-pity.");

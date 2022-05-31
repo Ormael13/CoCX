@@ -7,8 +7,10 @@ import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Places.TelAdre.Katherine;
+import classes.Scenes.Places.TelAdre.KatherineEmployment;
 import classes.Scenes.Places.TelAdre.Scylla;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class Urta extends NPCAwareContent implements TimeAwareInterface {
 
@@ -88,10 +90,9 @@ public class Urta extends NPCAwareContent implements TimeAwareInterface {
 				if (flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] < 1) flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] = 1;
 			}
 			if (model.time.hours > 23) {
-				if (flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] == 0) flags[kFLAGS.URTA_CUM_NO_CUM_DAYS]++;
-				else flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] = 0;
+				flags[kFLAGS.URTA_CUM_NO_CUM_DAYS]++;
 				if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] > 0) {
-					flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] -= .5;
+					flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] -= .25;
 					if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] < 0) flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] = 0;
 				}
 			}
@@ -104,8 +105,8 @@ public class Urta extends NPCAwareContent implements TimeAwareInterface {
 		//End of Interface Implementation
 
 public function urtaSprite():void {
-	if(urtaDrunk()) spriteSelect(84);
-	else spriteSelect(1);
+	if(urtaDrunk()) spriteSelect(SpriteDb.s_urtaDrunk);
+	else spriteSelect(SpriteDb.s_urta);
 }
 
 public function urtaCapacity():Number {
@@ -135,6 +136,16 @@ override public function urtaLove(love:Number = 0):Boolean {
 	else return false;
 }
 
+public function hoursUntilHorny(hours:Number, add:Boolean = false):Number {
+    //reset days counter
+    if (hours >= 0)
+        flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] = 0;
+    if (add)
+        return flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += hours;
+    else
+        return flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = hours;
+}
+
 public function urtaAvailableForSex():Boolean { return urtaFuckbuddy() && telAdre.scylla.action != Scylla.SCYLLA_ACTION_FUCKING_URTA && flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] == 0; }
 
 public function urtaFuckbuddy():Boolean { //Returns true if Urta is either the player's fuckbuddy or lover
@@ -152,15 +163,15 @@ public function urtaAtBar():Boolean { //Is Urta physically at the Wet Bitch?
 public function urtaDrunk():Boolean {
 	//Preg = no drinking!
 	if (pregnancy.isPregnant) return false;
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] == -1) return false;
-	if (model.time.hours > 12 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] < 1) return true;
-	if (model.time.hours > 8 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] >= 1) return true;
+	if (flags[kFLAGS.URTA_DRINK_TOOGLE] == -1) return false;
+	if (model.time.hours > 12 && flags[kFLAGS.URTA_DRINK_TOOGLE] < 1) return true;
+	if (model.time.hours > 8 && flags[kFLAGS.URTA_DRINK_TOOGLE] >= 1) return true;
 	else return false;
 }
 
 private function urtaOpenAboutEdryn():Boolean {
 	//Did it come out from the scylla threesome?
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] > 0) return true;
+	if(flags[kFLAGS.URTA_TALKED_ABOUT_SCYLLA] > 0) return true;
 	//Did it come out from marble?
 	if(flags[kFLAGS.URTA_KNOWS_PC_HAS_MARBLE_FOLLOWER] > 0) return true;
 	//Did it come out from discussions?
@@ -201,11 +212,11 @@ public function urtaBarDescript():Boolean {
 		return true;
 	}
 	//Raphael betrayed reward
-	if(flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00148] == 0) {
+	if(flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -1 && flags[kFLAGS.REPORTED_RAPHAEL_TO_URTA] == 0) {
 		outputText("Urta has an ecstatic grin plastered across her muzzle, and it only gets wider when she sees you.  Perhaps you should see what all the fuss is about?");
 		return true;
 	}
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00350] == 1) {
+	if(flags[kFLAGS.AMILY_URTA_FOLLOWUP] == 1) {
 		outputText("Urta is sitting at her usual table, holding her head in her hands.  She doesn't even seem to notice you.");
 		return true;
 	}
@@ -215,7 +226,7 @@ public function urtaBarDescript():Boolean {
 		return true;
 	}
 	//Post Scylla Appearance
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0) {
+	if(flags[kFLAGS.URTA_TALKED_ABOUT_SCYLLA] == 0 && flags[kFLAGS.URTA_SCYLLA_TIMES_CAUGHT] > 0) {
 		outputText("Urta's at her normal table, nursing a glass of water with nary a bottle of alcohol around.  She's fidgety and constantly glancing your way, but she never meets your eyes or acknowledges that she saw you.  Something is eating away at her.");
 		return true;
 	}
@@ -245,7 +256,7 @@ public function urtaBarDescript():Boolean {
 	}
 	//[Love Urta Bar Appearance]
 	if(flags[kFLAGS.URTA_PC_LOVE_COUNTER] == 1) {
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] == -1 || !urtaDrunk()) outputText("Urta is sitting at her usual table, sipping a glass of wine and wearing a form-fitting evening gown of shimmering black.  She looks up at you, happiness filling her eyes when she notices you entering the bar.");
+		if(flags[kFLAGS.URTA_DRINK_TOOGLE] == -1 || !urtaDrunk()) outputText("Urta is sitting at her usual table, sipping a glass of wine and wearing a form-fitting evening gown of shimmering black.  She looks up at you, happiness filling her eyes when she notices you entering the bar.");
 		//(DRUNK)
 		else outputText("Urta is sitting at her usual table wearing a shimmering black dress.  She's pretty clearly sloshed judging by her bleary gaze as she looks up at you.  The front of her dress visibly tents, and she waves you over with a lecherous grin.");
 		return true;
@@ -277,8 +288,8 @@ public function urtaBarApproach():void {
 	if((player.hasCock() && player.cockThatFits(urtaCapacity()) >= 0) || player.hasKeyItem("Deluxe Dildo") >= 0) spank = spankTheShitOutOfUrtaAndMakeHerCreamHerselfFromProstateStimulationAloneLikeTheHornyDrunkenSlutSheReallyIs;
 	clearOutput();
 	//Raphael Reward
-	if(flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00148] == 0) {
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00148] = 1;
+	if(flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -1 && flags[kFLAGS.REPORTED_RAPHAEL_TO_URTA] == 0) {
+		flags[kFLAGS.REPORTED_RAPHAEL_TO_URTA] = 1;
 		player.gems += 1000;
 		statScreenRefresh();
 		outputText(images.showImage("urta-bar"));
@@ -295,7 +306,7 @@ public function urtaBarApproach():void {
 		return;
 	}
 	//Post Amily Sad Shit
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00350] == 1) {
+	if(flags[kFLAGS.AMILY_URTA_FOLLOWUP] == 1) {
 		amilyXUrtaUrtaFallout();
 		return;
 	}
@@ -311,8 +322,8 @@ public function urtaBarApproach():void {
 		return;
 	}
 	//Post Scylla discussion
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0) {
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] = 1;
+	if(flags[kFLAGS.URTA_TALKED_ABOUT_SCYLLA] == 0 && flags[kFLAGS.URTA_SCYLLA_TIMES_CAUGHT] > 0) {
+		flags[kFLAGS.URTA_TALKED_ABOUT_SCYLLA] = 1;
 		outputText("The apprehensive fox-morph's gaze lurches up at the sound of your approach, eyes going wide with nervousness.  Clearly she remembers her inebriated encounter with Scylla and is a little worried about the implications.  You sidle up to the table and look her in the eye questioningly – she must have something to say.\n\n");
 
 		outputText("\"<i>I... I want to apologize for the other night.  ");
@@ -379,7 +390,7 @@ public function urtaBarApproach():void {
 	if(flags[kFLAGS.URTA_PC_LOVE_COUNTER] == 1)
 	{
 		//Sworn off drinking, up till noon, or up to 8 if 'drink more'
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] == -1 || !urtaDrunk()) {
+		if(flags[kFLAGS.URTA_DRINK_TOOGLE] == -1 || !urtaDrunk()) {
 			outputText(images.showImage("urta-bar-drunk"));
 			outputText("You walk up to Urta and you see her pivot herself to the side.  Her dress visibly tents at the sight of you, and you smirk as you realize she shifted in position to avoid slamming her hardening cock into the bottom of the table.  You cuddle close and wrap an arm around your lover, giving her a quick kiss on the lips and fondling her through her dress.  The tent immediately darkens as a rush of pre soaks into the material, and Urta half-pants, half-asks, \"<i>Oooh, lover, what do you have in mind today?</i>\"\n\n");
 			outputText("You could go back to her place, suck her off under the table, or eat her out under the table.");
@@ -437,7 +448,7 @@ public function urtaBarApproach():void {
 	//[URTA FRIEND APPROACH]
 
 	//[URTA DRUNK AND NOT TAKING NO FOR AN ANSWER] You approach Urta, but as you get closer you can smell the alcohol cloying the air around her.  Sizing you up with bleary eyes, Urta reaches out and grabs you, pulling you down onto her lap.  You can feel her heartbeat through her 'addition' as it hardens and your butt-cheek.
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] != -1 && urtaDrunk()) {
+	if(flags[kFLAGS.URTA_DRINK_TOOGLE] != -1 && urtaDrunk()) {
 		outputText(images.showImage("urta-bar-drunk"));
 		outputText("The drunken fox roughly gropes you and whispers in your ear, \"<i>I NEED a good fuck right now, and it feels like someone wants a piece of Urta.  I can guess just which piece you're wanting too.  The only question is do I ");
 		//CUT FOR NOW outputText("throw you over the table and fuck you,");
@@ -481,7 +492,6 @@ public function urtaBarApproach():void {
 		else outputText("\n\nYou don't think it's likely Urta would agree to host your eggs in her present state; wait until she's turned down her inhibitions before asking.");
 	}
 	//[Under Table BJ] [Public Jerkoff onto your face] [Public Buttfucking (Receiver)] [Tender lovemaking @ Urtas] [Minotaur Cum-Addict Special?] [TABLE FUCK]
-	//simpleChoices("Hidden BJ",blowUrtaUnderTable,"Urta's Place",goBackToUrtasForLuvinz,"",0,"",0,"Leave",barTelAdre);
 	menu();
 	addButton(0,"Urta's Place",goBackToUrtasForLuvinz).hint("Go to Urta's apartment for sex.");
 	if(flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] >= 5) addButton(1,"Hidden BJ",slurpFawkesCocksForFunAndInflation).hint("Suck Urta's dick until she cums! \n\nNote: Given how long she hasn't relieved, this is most likely going to fill your belly.");
@@ -524,7 +534,7 @@ private function drinkUrtasBoozeLetHer():void {
 	urtaSprite();
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	flags[kFLAGS.TIMES_FUCKED_URTA]++;
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 5;
+	hoursUntilHorny(5);
 	hideUpDown();
 	player.sexReward("cum");
 	dynStats("sen", -2);
@@ -632,7 +642,7 @@ private function watchUrtaJerkIt():void {
 private function dualUrtaMasturbation():void {
 	urtaSprite();
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 5;
+	hoursUntilHorny(5);
 
 	clearOutput();
 	outputText(images.showImage("urta-behindbar-masti-dual"));
@@ -652,8 +662,8 @@ private function dualUrtaMasturbation():void {
 	outputText(".  ");
 	if(player.cockTotal() > 0) {
 		outputText("The situation gives you all the spark you need to rise to your full size, ");
-		if(player.cockArea(0) < 40) outputText("even if Urta's member dwarfs you.");
-		else if(player.cockArea(0) < 70) outputText("showing Urta you're just as big.");
+		if(player.biggestCockArea() < 40) outputText("even if Urta's member dwarfs you.");
+		else if(player.biggestCockArea() < 70) outputText("showing Urta you're just as big.");
 		else outputText("proving to Urta just who has the bigger burden.");
 		outputText("  ");
 	}
@@ -719,7 +729,7 @@ public function urtaFuckHer(afterBefriending:Boolean = false):void {
 	urtaSprite();
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	flags[kFLAGS.TIMES_FUCKED_URTA]++;
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 5;
+	hoursUntilHorny(5);
 	var cocks:Number = player.cockTotal();
 	if (!afterBefriending) clearOutput();
 	//(FUCK HER FEMALE/GENDERLESS)
@@ -896,7 +906,7 @@ internal function blowUrtaUnderTable():void {
 	player.slimeFeed();
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	urtaLove(1);
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(4);
+	hoursUntilHorny(2 + rand(4));
 	clearOutput();
 	outputText(images.showImage("urta-bar-bj"));
 	outputText("Urta's eyes widen in shock when you suggest taking her under the table.  She stammers, \"<i>Uh, okay...</i>\" and fills a glass with straight whiskey, fueling up on liquid courage while you crawl down.  You slip down under the table, pushing her legs apart");
@@ -927,7 +937,7 @@ internal function blowUrtaUnderTable():void {
 
 	outputText("Once you've climbed out from under the table, you're VERY aware of the eyes of some of the nearby bar patrons on your back.  It seems your undercover act managed to draw more than a little attention.  Urta's cheeks burn bright-red under her gray fur, even though her eyes are a bit glassy and unfocused from the amount of alcohol she's ingested.  Sure that she'll remember the embarrassment, you give her a deep kiss, making her taste her residue on your lips.");
 	dynStats("sen", 1, "lus", rand(10)+5+player.lib/10);
-	doNext(camp.returnToCampUseOneHour);
+    doNext(urtaTalkAfterBJ);
 
 }
 
@@ -936,7 +946,7 @@ internal function takeUrtaInTheButtPublically():void {
 	urtaSprite();
 	clearOutput();
 	var tooBig:Boolean = false;
-	if(player.cor < (30 - player.corruptionTolerance()) && flags[kFLAGS.PC_FETISH] == 0) {
+	if(player.cor < (30 - player.corruptionTolerance) && flags[kFLAGS.PC_FETISH] == 0) {
 		outputText("No way!  You're not going to do that in front of EVERYONE.");
 		doNext(telAdre.barTelAdre);
 		return;
@@ -944,7 +954,7 @@ internal function takeUrtaInTheButtPublically():void {
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	flags[kFLAGS.TIMES_FUCKED_URTA]++;
 	urtaLove(2);
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 5;
+	hoursUntilHorny(5);
 	outputText(images.showImage("urta-public-fuck"));
 	if(player.cor < 60 && flags[kFLAGS.PC_FETISH] == 0) outputText("You can't believe you're doing it, but you undo the lower half of your [armor].  ");
 	else outputText("You happily remove the lower half of your [armor], more than a little excited at the prospect of putting on a show for the crowd.  ");
@@ -1044,7 +1054,7 @@ internal function getAPublicFacialFromUrta():void {
 	player.slimeFeed();
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	urtaLove(2);
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 3 + rand(3);
+	hoursUntilHorny(2 + rand(3));
 	clearOutput();
 	outputText(images.showImage("urta-public-facial"));
 	outputText("Given the choices, it seems like just accepting the facial would be the best option.  Urta nods, grinning lasciviously as she pulls the table to the side, and gestures for you to get on the floor.  You kneel before her as she pulls back her ");
@@ -1095,8 +1105,7 @@ internal function getAPublicFacialFromUrta():void {
 private function optionalUrtaBukkake():void {
 	urtaSprite();
 	player.slimeFeed();
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME]-=2;
-	urtaLove(-1);
+	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME]-=1;
 	clearOutput();
 	outputText(images.showImage("urta-bukkake"));
 	outputText("You pause to tear off your [armor] and expose the rest of your body, and you reach out into the crowd, grabbing the nearest cock and caressing it as you beg, \"<i>Come on and cum, she missed most of me!</i>\"\n\n");
@@ -1184,7 +1193,7 @@ private function rideUrtaTenderFemale():void {
 	urtaLove(1.5);
 	flags[kFLAGS.TIMES_FUCKED_URTA]++;
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 3 + rand(2);
+	hoursUntilHorny(3 + rand(2));
 	clearOutput();
 	outputText(images.showImage("urta-home-female-ride"));
 	outputText("You climb into bed and playfully roll Urta over.  Her tits and horse-cock flop and jiggle from the change in position, and you watch mesmerized for a moment until Urta giggles girlishly, drawing you out of your reverie.\n\n");
@@ -1294,7 +1303,7 @@ private function dudeFuckingUrtasCooch():void {
 	urtaLove(1.5);
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]--;
 	if(flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] < 1) flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] = 1;
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2;
+	hoursUntilHorny(2);
 
 	outputText("You let her know that you want her just the way she is and climb into bed behind her.  She watches you apprehensively over her shoulder as you pull out your [cocks] and start lining yourself up to fuck her doggie-style.  ");
 	if(cocks > 1 && y >= 0) outputText("Your secondary " + cockDescript(y) + " wobbles directly behind her back-door and Urta's eyes widen a bit when she realizes you're going to double-penetrate her.  ");
@@ -1351,7 +1360,7 @@ private function fuckItAndLeave():void {
 	if(flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] < 1) flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] = 1;
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]--;
 	if(flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] < 1) flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] = 1;
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 36;
+	hoursUntilHorny(36);
 	urtaLove(-5);
 	clearOutput();
 	outputText("You let Urta know that you've changed your mind and will be leaving.  You go before she can object and the sound of quiet sobbing chases you out into the streets.");
@@ -1366,7 +1375,7 @@ private function tenderTakeItUpTheAssFromUrta():void {
 	urtaLove(1);
 	flags[kFLAGS.TIMES_FUCKED_URTA]++;
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(3);
+	hoursUntilHorny(4 + rand(3));
 	var cocks:Number = player.cockTotal();
 	outputText(images.showImage("urta-home-anal"));
 	outputText("You give Urta's backside a playful slap and ask her to roll over.  She does so with a hesitant look on her face, wondering what you're about.  When you spread her legs and work your way forward to straddle her, a beaming smile breaks across her face and she says, \"<i>You really want me inside you, don't you [name]?</i>\"\n\n");
@@ -1592,7 +1601,7 @@ private function stayFuckbuddiesAfterShootingDown():void {
 	urtaSprite();
 	outputText("Urta gives you a warm smile and a kiss on the cheek, \"<i>Good.  Come see me soon, ok?</i>\"\n\n");
 	//(READY TO GO NEXT TIEM)
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 0;
+	hoursUntilHorny(0);
 	doNext(camp.returnToCampUseOneHour);
 }
 //[no]
@@ -1617,7 +1626,7 @@ private function TwuWuvIsBeautifulUrta():void {
 //[EAT THE BITCH OUT]
 public function eatUrtaOutNomNomPussy():void {
 	urtaSprite();
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 3;
+	hoursUntilHorny(3);
 	urtaLove(1);
 	clearOutput();
 	outputText(images.showImage("urta-bar-vag"));
@@ -1651,7 +1660,7 @@ public function eatUrtaOutNomNomPussy():void {
 //[GIVE GLASS]
 private function giveUrtaCumGlass():void {
 	urtaSprite();
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 1;
+	hoursUntilHorny(1);
 	urtaLove(-.5);
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	clearOutput();
@@ -1659,24 +1668,21 @@ private function giveUrtaCumGlass():void {
 	outputText("\"<i>I think the waitress dropped this off while you were distracted,</i>\" you say.\n\n");
 
 	outputText("Urta snuggles you and tips it back, taking a huge swig.  She quickly pulls it back and gives you a confused look.  Dawning comprehension slowly spreads over her face before morphing into a sultry expression.  Never taking her eyes off you, the fox tips back the glass and gulps down the remaining fluid.  She grabs you by the neck and forcefully kisses you, forcing you to taste her pussy and jizz at the same time.  Breaking away, she teases, \"<i>Good to the last drop.  Thanks again lover.</i>\"\n\n");
-
-	outputText("You smile knowingly and leave, intent on cleaning up a little back at camp.");
-	doNext(camp.returnToCampUseOneHour);
+    doNext(urtaTalkAfterBJ);
 }
 //[Drink Glass]
 private function drinkUrtasCumGlass():void {
 	urtaSprite();
 	player.slimeFeed();
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2;
+	hoursUntilHorny(2);
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	//(+Bonus luv)
 	urtaLove(1);
 	clearOutput();
 	outputText("You give her a good look at the full glass and tip it back, gulping down her thick goop, letting it run out of the corners of your mouth.  Urta looks on, dumbfounded while you guzzle her remaining seed from the cup.  You set it down and burp, leaning over to give her a wet kiss, letting her taste both her sexes on your tongue.  She breaks the kiss and says, \"<i>Oh by Marae, I love you [name].  Thank you so much.</i>\"");
 	player.refillHunger(30);
-	outputText("\n\nYou smile knowingly and leave, intent on cleaning up a little back at camp.");
 	dynStats("sen", 1, "lus", 20);
-	doNext(camp.returnToCampUseOneHour);
+	doNext(urtaTalkAfterBJ);
 }
 //[Set Aside]
 private function setAsideUrtaCumGlass():void {
@@ -1685,9 +1691,9 @@ private function setAsideUrtaCumGlass():void {
 	urtaLove(2);
 
 	clearOutput();
-	outputText("You set aside the glass and cuddle with Urta, snuggling with your lover as the pair of you share a moment of peace.  The satisfied smile on Urta's face is all the thanks you need.  She breathlessly thanks you and kisses you over and over.  Eventually you do part from her, giving her a knowing wink as you head out the door and back to camp, intent on cleaning the girl-cum from your face and the spunk from your hair.\n\n");
+	outputText("You set aside the glass and cuddle with Urta, snuggling with your lover as the pair of you share a moment of peace.  The satisfied smile on Urta's face is all the thanks you need.  She breathlessly thanks you and kisses you over and over.  Eventually you do part from her, giving her a knowing wink, intent on cleaning the girl-cum from your face and the spunk from your hair.\n\n");
 
-	doNext(camp.returnToCampUseOneHour);
+	doNext(urtaTalkAfterBJ);
 }
 private function takeUrtasCumHomeWithYou():void {
 	urtaSprite();
@@ -1695,16 +1701,15 @@ private function takeUrtasCumHomeWithYou():void {
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	clearOutput();
 	outputText("You give her a kiss and let her know that you're going to take her cum home with you.");
-	outputText("\n\nUrta smiles at you and says, \"Okay, lover. I love you!\"");
-	outputText("\n\nYou smile knowingly and leave, intent on cleaning up a little back at camp.");
-	inventory.takeItem(consumables.URTACUM, camp.returnToCampUseOneHour);
+	outputText("\n\nUrta smiles at you and says, \"Okay, [name]. I love you!\"");
+	inventory.takeItem(consumables.URTACUM, urtaTalkAfterBJ);
 }
 
 //[Under Table BJ]
 public function blowUrtaUnderTheTableLuv():void {
 	urtaSprite();
 	player.slimeFeed();
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(3);
+	hoursUntilHorny(3 + rand(3));
 	urtaLove(1);
 	clearOutput();
 	outputText(images.showImage("urta-bar-bj"));
@@ -1733,16 +1738,16 @@ public function blowUrtaUnderTheTableLuv():void {
 	else outputText("dragging across your chest");
 	outputText(" as it begins to soften.  You wipe as much of her leavings from your [face] as you can, licking the slippery glaze from your lips.  Before you get up, you make sure to give Urta's member a firm squeeze, scolding it for its forceful treatment of your mouth.\n\n");
 	outputText("Once you've climbed out from under the table, you're VERY aware of the eyes of some of the nearby bar patron's on your back.  It seems your undercover act managed to draw more than a little attention.  Urta's cheeks burn bright-red under her gray fur, though she has a loving smile on her face.  The pair of you share a tender kiss to hoots and catcalls from the audience.  Urta smiles and gushes, \"<i>You give the BEST blowjobs... I mean, WOW, but maybe next time we should go back to my place and do something a little more... fulfilling for both of us.</i>\"");
-	doNext(camp.returnToCampUseOneHour);
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	dynStats("lus", 15);
+    doNext(urtaTalkAfterBJ);
 }
 
 
 //[RIDE VAGINAL]
 private function rideUrtasCoochLoveyDovey():void {
 	urtaSprite();
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
+	hoursUntilHorny(4 + rand(2));
 	urtaLove(1);
 	clearOutput();
 	//(TOO SMALL)
@@ -1831,7 +1836,7 @@ private function rideUrtasCoochLoveyDovey():void {
 private function rideUrtaInButtAtHomeLove():void {
 	urtaSprite();
 	urtaLove(1);
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
+	hoursUntilHorny(3 + rand(2));
 	clearOutput();
 	outputText(images.showImage("urta-home-anal-urta"));
 	outputText("Urta raises an eyebrow at the suggestion and blushes, though her horse-like member thickens and stiffens noticeably.  You give it a gentle slap and tease, \"<i>Don't act like this isn't what you wanted!</i>\"\n\n");
@@ -1926,19 +1931,17 @@ private function rideUrtaInButtAtHomeLove():void {
 //[69]
 private function oralFiestyUberExplosionUrta():void {
 	urtaSprite();
-	urtaLove(1.5);
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
 	clearOutput();
-	var x:Number = player.cockThatFits(100);
-	if(x < 0) x = 0;
 	//(TOO BIG)
-	if(player.cockArea(x) >= 100) {
+	if(player.cockThatFits(100) < 0 && !player.hasVagina()) {
 		outputText("Urta takes one look at your " + cockDescript(x) + " and says, \"<i>I'm sorry babe, but there's no way I could take that monster in my mouth.  How about we do something else?</i>\"\n\n");
 		doNext(urtaHomeLuvLuvinsMenu);
 		return;
 	}
+	urtaLove(1.5);
+	hoursUntilHorny(4 + rand(2));
 	outputText(images.showImage("urta-home-69","vert"));
-	if(player.gender == 2 || (player.gender == 3 && rand(2) == 0)) {
+	if (player.gender == 2 || player.gender == 3 && (player.cockThatFits(100) < 0 || rand(2) == 0)) {
 		outputText("You smile and let Urta know you want to sixty-nine her.  She raises an eyebrow and teases, \"<i>I hope you don't mind having a full belly and a sore throat!</i>\" as you disrobe and climb atop her.  You turn about, straddling your legs across her face and exposing the hungry lips of your sex.  Smirking over your shoulder, you snatch her discarded dress from the floor and tie the shimmering fabric into an impromptu cock-ring.  The gray fox shudders with excitement and you watch, enraptured, as her mottled horse-cock grows larger and larger, even flaring wide at the tip.\n\n");
 
 		outputText("The musky scent of Urta's forearm-sized horse-prick wafts into your nostrils as it wobbles just below your [face], visibly twitching and throbbing from all the extra blood.  She whines plaintively, nuzzling her moist nose against your ");
@@ -1989,6 +1992,7 @@ private function oralFiestyUberExplosionUrta():void {
 		dynStats("sen", -1);
 		return;
 	}
+	var x:Number = player.cockThatFits(100);
 	//(DUDEZILLAZ)
 	outputText("Urta sits up and practically screams, \"<i>Really,</i>\" and squeals excitedly.  She claps and lies back as you climb into the bed, stopping only to yank off her cock-sheath and toss it into a nearby waste-bin.  You swing your [legs] over her and get into position, aligning ");
 	if(player.balls > 0) {
@@ -2048,11 +2052,6 @@ internal function urtaHomeLuvLuvinsMenu():void {
 	urtaSprite();
 	outputText("She caresses a nipple and visibly shivers as she says, \"<i>You teased me the whole way here, and I'm COMPLETELY ready for you, any way you could want.</i>\"\n\n");
 	outputText("She blushes and continues, \"<i>So, what'll it be, lover?  A little injection of fox-cream or something else?</i>\"");
-	//[Ride Vaginal] [Ride Anal] [69]
-	/*if(player.gender == 3) simpleChoices("Ride Vag",rideUrtasCoochLoveyDovey,"Ride Anal",rideUrtaInButtAtHomeLove,"69",oralFiestyUberExplosionUrta,"Vag Fuck",urtasCoochiNeedsFuckedLove,"No Condoms",condomlessUrtaInHouseSmex);
-	if(player.gender == 2) simpleChoices("Ride Vag",rideUrtasCoochLoveyDovey,"Ride Anal",rideUrtaInButtAtHomeLove,"69",0,"No Condoms",condomlessUrtaInHouseSmex,"",0);
-	if(player.gender == 1) simpleChoices("Ride Vag",0,"Ride Anal",rideUrtaInButtAtHomeLove,"69",oralFiestyUberExplosionUrta,"Vag Fuck",urtasCoochiNeedsFuckedLove,"No Condoms",condomlessUrtaInHouseSmex);
-	if(player.gender == 0) simpleChoices("Ride Vag",0,"Ride Anal",rideUrtaInButtAtHomeLove,"69",0,"",0,"",0);*/
 	outputText("\n\nHow do you want to fuck with the vixen?");
 	menu();
 	if(player.hasVagina()) {
@@ -2061,24 +2060,29 @@ internal function urtaHomeLuvLuvinsMenu():void {
 	}
 	outputText("  She could fuck your ass.");
 	addButton(1,"Ride Ass",rideUrtaInButtAtHomeLove);
+    outputText("  Urta could 69 with you");
+    addButton(2,"69",oralFiestyUberExplosionUrta); //vag is possible, so open it to fems
 	if(player.hasCock()) {
-		outputText("  Urta could 69 with you, let you fuck her pussy, or you could even fuck her cunt full of jizz and then lick her to a second cum.");
+		outputText(", let you fuck her pussy, or you could even fuck her cunt full of jizz and then lick her to a second cum.");
 		addButton(2,"69",oralFiestyUberExplosionUrta);
 		addButton(3,"Vag Fuck",urtasCoochiNeedsFuckedLove);
-		addButton(5,"FuckAndLick",lickOutUrtaAtHome);
+		addButton(4,"FuckAndLick",lickOutUrtaAtHome);
 	}
+    else outputText(".");
 	if(player.gender > 0) {
 		outputText("  There's always the option to ask her to go condomless for a bit of extra fun.");
-		addButton(4,"No Condoms",condomlessUrtaInHouseSmex);
+		addButton(5,"No Condoms",condomlessUrtaInHouseSmex);
 	}
 	if(player.isGoo() && player.skinType == Skin.GOO) addButton(6,"Goo (Weird)",urtaGooTesticleVoreRuinedOrgasms);
 	if(flags[kFLAGS.URTA_PETPLAY_DONE] >= 0 && player.gender > 0) addButton(7,"Collar",urtaPetPlayDeletedForeverBecauseThirdProovedMeWrongAboutDice);
+    if (flags[kFLAGS.KATHERINE_TRAINING] & KatherineEmployment.KBIT_TRAINING_URTA_HELP)
+        addButton(8, "ChastityBelt", chastityBeltFun, true);
 }
 
 private function urtasCoochiNeedsFuckedLove():void {
 	urtaSprite();
 	urtaLove(1.5);
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
+	hoursUntilHorny(2 + rand(2));
 	var x:Number = player.cockThatFits(urtaCapacity());
 	if(x < 0) x = 0;
 	clearOutput();
@@ -2113,13 +2117,13 @@ private function urtasCoochiNeedsFuckedLove():void {
 	outputText(".  You grab her ass and slam in a final time, reaching your own peak.\n\n");
 
 	//[DAWG]
-	if(player.hasKnot(x)) {
+	if(player.cocks[x].cockType == CockTypesEnum.DOG) {
 		outputText("Your knot flares wide, locking itself inside her convulsing cunt as your seed begins pumping into her womb.  Urta cries, \"<i>oooooooOOOOHHhhh YESSSS... You've plugged my cunt with your doggie dick!  It's squirting and pumping into my wooooomb...</i>\"\n\n");
 
 		outputText("You rock back and forth, unable to pull out yet stimulating the sensitive bulb of your knot.  Your " + cockDescript(x) + " dumps its gooey cargo directly into your lover's stopped-up sex with barely audible squishing noises.  ");
 		if(player.cumQ() < 250) {}
 		else if(player.cumQ() < 700) outputText("Her belly puffs up slightly by the time you finish, thanks to your body's copious cum production.  ");
-		else if(player.cumQ() < 1000) outputText("Her belly swells larger and larger as you continue to pump your seemingly endless seed into her.  Urta groans, looking a few months pregnant by the time your overproductive " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " stops spewing inside her.  ");
+		else if(player.cumQ() < 1000) outputText("Her belly swells larger and larger as you continue to pump your seemingly endless seed into her.  Urta groans, looking a few months pregnant by the time your overproductive " + Appearance.cockNoun(CockTypesEnum.DOG) + " stops spewing inside her.  ");
 		else {
 			outputText("Her belly swells larger and larger, bloating as you blast thick torrents of seed inside her, filling her completely thanks to the obstruction of your knot.  ");
 			if(player.cumQ() < 3000) outputText("By the time you finish, she looks VERY pregnant and is moaning with a mixture of pleasure and discomfort.  ");
@@ -2128,7 +2132,7 @@ private function urtasCoochiNeedsFuckedLove():void {
 				if(player.cumQ() > 5000) outputText("Not content with such an easy release, your " + cockDescript(x) + " unloads the last of its cream until the bed and floor are both covered under inches of your canine cum.  ");
 			}
 		}
-		outputText("You finally feel your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + "'s knot shrinking and pull free with a loud and messy pop.  ");
+		outputText("You finally feel your " + Appearance.cockNoun(CockTypesEnum.DOG) + "'s knot shrinking and pull free with a loud and messy pop.  ");
 		if(player.cumQ() >= 2000) outputText("Spunk rushes out in a torrent, splattering everywhere.  ");
 		outputText("Urta's glazed pussy-lips clench reflexively at their sudden emptiness and you hear a very satisfied sigh from the far end of the bed.\n\n");
 	}
@@ -2142,12 +2146,12 @@ private function urtasCoochiNeedsFuckedLove():void {
 		outputText("You rock back forth, unable to resist dragging the sensitive, flared tip and textured ring of your cock all along her pussy-walls, squirting seed with reckless abandon into her hot, cum-slicked cunt.  Wet squishing noises fill the apartment as the two of you rock the bed in twinned orgasms.  ");
 		if(player.cumQ() < 250) {}
 		else if(player.cumQ() < 700) outputText("Her belly slowly rises as more and more cum slides into her womb, filling it.  Runners of the stuff leak down her thighs as it escapes around your bestial cock.  ");
-		else if(player.cumQ() < 1000) outputText("Her belly swells larger and larger as you continue to pump your seemingly endless seed into her.  Urta groans, looking a few months pregnant by the time your over-productive " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " has finished spewing your seed inside her.  ");
+		else if(player.cumQ() < 1000) outputText("Her belly swells larger and larger as you continue to pump your seemingly endless seed into her.  Urta groans, looking a few months pregnant by the time your over-productive " + player.cockDescript(x) + " has finished spewing your seed inside her.  ");
 		else {
 			outputText("Her belly swells larger and larger, bloating out as you blast thick torrents of seed inside her, stuffing her completely.  Every squirt of the stuff is met with a leaking back-blast that soaks her thighs and bed in your jism.  ");
 			if(player.cumQ() < 3000) outputText("By the time you've finished, she looks heavily pregnant and cum soaks the bed.  ");
 			else outputText("Your seemingly endless orgasm pumps more and more into her until she looks ready to give birth, and  you just keep going.  She moans in pleasure and discomfort as each blast of your horse-cum forces thick runners to squirt from between her thighs.  ");
-			if(player.cumQ() > 5000) outputText("Not content with such an easy release, your " + cockDescript(x) + " unloads the last of its cream until the bed and floor are covered in several inches of thick equine cum.  ");
+			if(player.cumQ() > 5000) outputText("Not content with such an easy release, your " + player.cockDescript(x) + " unloads the last of its cream until the bed and floor are covered in several inches of thick equine cum.  ");
 		}
 		outputText("You finally feel your flare returning to normal and pull out with a prolonged 'sluuuuurp'.  ");
 		if(player.cumQ() >= 2000) outputText("Spunk rushes out in a torrent, splattering everywhere.  ");
@@ -2160,19 +2164,19 @@ private function urtasCoochiNeedsFuckedLove():void {
 		outputText("You rock back and forth, sliding your shaft through her spasming muscles, reveling and panting in orgiastic bliss.  Your [cock] dumps its gooey cargo deep into your lover's canal with barely audible squishing noises.  ");
 		if(player.cumQ() < 250) {}
 		else if(player.cumQ() < 700) outputText("Her belly puffs up slightly by the time you finish, thanks to your body's copious cum production.  ");
-		else if(player.cumQ() < 1000) outputText("Her belly swells larger and larger as you continue to pump your seemingly endless seed into her.  Urta groans, looking a few months pregnant by the time your overproductive " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " stops spewing inside her.  ");
+		else if(player.cumQ() < 1000) outputText("Her belly swells larger and larger as you continue to pump your seemingly endless seed into her.  Urta groans, looking a few months pregnant by the time your overproductive " + player.cockDescript(x) + " stops spewing inside her.  ");
 		else {
 			outputText("Her belly swells larger and larger, bloating as you blast thick torrents of seed inside her, filling her completely while leftover jism squirts out around your [cock].  ");
 			if(player.cumQ() < 3000) outputText("By the time you finish, she looks VERY pregnant and is moaning with a mixture of pleasure and discomfort.  ");
 			else outputText("Your seemingly never-ending orgasm pumps her up until she looks on the verge of giving birth, and you just keep going.  Jism sprays out from her dripping cunt as you release a torrent of semen, splattering you, her, and the bed.  ");
 			if(player.cumQ() > 5000) outputText("Not content with such an easy release, your [cock] unloads the last of its cream until the bed and floor are both covered under inches of your gooey cum.  ");
 		}
-		outputText("You finally feel your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " deflating, and you pull free with a messy slurp.  ");
+		outputText("You finally feel your " + player.cockDescript(x) + " deflating, and you pull free with a messy slurp.  ");
 		if(player.cumQ() >= 2000) outputText("Spunk rushes out in a torrent, splattering everywhere.  ");
 		outputText("Urta's glazed pussy-lips clench reflexively at their sudden emptiness and you hear a very satisfied sigh from the far end of the bed.\n\n");
 	}
 	//[RESUME]
-	outputText("Urta calms down at last, though her member is still throbbing weakly as she peels her condom off.  The bloated cum-bubble at the tip is the size of a basketball, and she struggles to get it tied off and disposed of.  The fox tosses it into a waste-basket already full of the things and gives you a toothy smile, \"<i>I think somebody's " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " loves my pussy almost as much as I love you!</i>\"\n\n");
+	outputText("Urta calms down at last, though her member is still throbbing weakly as she peels her condom off.  The bloated cum-bubble at the tip is the size of a basketball, and she struggles to get it tied off and disposed of.  The fox tosses it into a waste-basket already full of the things and gives you a toothy smile, \"<i>I think somebody's " + player.cockDescript(x) + " loves my pussy almost as much as I love you!</i>\"\n\n");
 
 	outputText("She pulls you into her arms and gives you a long, wet kiss before breaking away to clean up.  Urta blows you a kiss and says, \"<i>Thanks again, love!</i>\"\n\n");
 
@@ -2191,7 +2195,7 @@ public function scyllaAndUrtaSittingInATree():void {
 	urtaSprite();
 	clearOutput();
 	//Increment 'times caught with Scylla'
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143]++;
+	flags[kFLAGS.URTA_SCYLLA_TIMES_CAUGHT]++;
 
 
 	if(!urtaDrunk()) {
@@ -2201,7 +2205,7 @@ public function scyllaAndUrtaSittingInATree():void {
 
 	menu();
 
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] > 0)
+	if (flags[kFLAGS.URTA_NO_MORE_SCYLLA] == 0 && flags[kFLAGS.URTA_TALKED_ABOUT_SCYLLA] > 0)
 	{
 		outputText("You meander towards the back-rooms and a canine waitress springs forward with a key clutched in her paw.  She blushes furiously and explains that she was tipped generously to hand it to you if you arrived.  You accept the proffered tool and smile.  It must be cheaper to pay someone to wait with a key than to fix the door each time the three of you meet up!  You snicker to yourself as you plunge the key into the lock's waiting receptacle, turn it, and push your way inside.  The scene in front of you is as arousing as it is familiar.\n\n");
 
@@ -2502,7 +2506,7 @@ private function watchTwoHotBitchesAndJerkIt():void {
 	outputText("Finally spent, you slump back and smile.\n\n");
 
 	outputText("Scylla looks shocked, as if she's seeing you for the first time, but her nose twitches and she starts to shovel your seed into her mouth with greedy abandon.  Even so, her body rapidly 'digests' the fluid intake, and the nun starts to slim up before your eyes.  Urta wobbles up onto shaky legs and stumbles into you, giving you a wet kiss that tastes faintly of your salty leavings and then passionately hugs you.  She breaks the embrace and slurs, ");
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] == 1) outputText("\"<i>We need to do thish again!</i>\"");
+	if(flags[kFLAGS.URTA_SCYLLA_TIMES_CAUGHT] == 1) outputText("\"<i>We need to do thish again!</i>\"");
 	else outputText("\"<i>You're the besht " + player.mf("man","woman") + " a girl could ashk for.</i>\"");
 	outputText("  Before you can answer, she gives your ass a slap and finds a water barrel to wash up in.  Scylla finishes her 'meal' and looks up at you, her alabaster skin turning completely crimson before she too runs off to clean up.\n\n");
 	outputText("You smile happily and pick up your [armor].  It's past time you checked up on your camp.");
@@ -2576,7 +2580,7 @@ private function makeUrtaSitOnYourLapWithScylla():void {
 	else if(flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] < 11) outputText("a nervous smile on her face, but gives you a quick peck all the same.");
 	else outputText("a satisfied smile on her face, and crushes her lips against yours in a passionate kiss.");
 	outputText("  She says, \"<i>I think I'll need to help Scylla to her room... somehow whatever she did to me must have pulled all the alcohol out of me and into my cum.  Don't worry, I'll ");
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] <= 1) outputText("pay for the door and ");
+	if(flags[kFLAGS.URTA_SCYLLA_TIMES_CAUGHT] <= 1) outputText("pay for the door and ");
 	outputText("make sure she's ok.</i>\"\n\n");
 
 	outputText("Did her cock just twitch?  No, you scold yourself; it couldn't have, not after two orgasms like that.  Urta hooks her arm around the giggling nun's midsection and pulls the stumbling sister towards the doorway.  Scylla looks back at you and half-giggles, half-slurs, \"<i>Tee-hee, thish ish so much fun!  I love you guysh!</i>\"\n\n");
@@ -2600,7 +2604,7 @@ private function makeUrtaSitOnYourLapWithScylla():void {
 private function tellUrtaNoMoreScylla():void {
 	urtaSprite();
 	clearOutput();
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] = 1;
+	flags[kFLAGS.URTA_NO_MORE_SCYLLA] = 1;
 	outputText("You let Urta know that you're willing to overlook this, but that Scylla is a slippery slope that's best avoided.  She nods, a sober expression on her vulpine face.  Once you finish, she replies, \"<i>I understand, but you need to know – when 'it' gets too much for me to handle... if you aren't around to help I'm going to see Edryn.  S-she helps... if it wasn't for her I probably would've given up and done something stupid a long time ago.  What we have is more important, but unless we can get together every couple days I'll NEED to visit her.  ");
 	if(urtaLove()) outputText("Just please, don't doubt my love for you.  ");
 	outputText("Do I need to stop drinking too?</i>");
@@ -2643,7 +2647,7 @@ private function tellUrtaToBeADrunkenHussy():void {
 	outputText(" and explain that when she gets drunk, lets her guard down, and gets a little more aggressive... you like it.  A lot.  Her ears perk up at your words, though her expression is a little uncertain while you explain it.  By the time you finish, something warm brushes by your [leg] and gently 'thunks' the table.  Clearly she's as into the idea as you.\n\n");
 
 	outputText("Urta smiles, lewdly at first, though it carries a bit of a predatory glint as she waves down a waitress and orders a full bottle of Barkardi 151.  You give her a rueful smile, a stroke under the table, and a kiss just bursting with tongue before you conclude the conversation.  Urta's going to be a lot of fun from now on...");
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] = 1;
+	flags[kFLAGS.URTA_DRINK_TOOGLE] = 1;
 	dynStats("lus", 5);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2652,7 +2656,7 @@ private function tellUrtaToStopBeingALush():void {
 	urtaSprite();
 	clearOutput();
 	outputText("You sigh and explain that her alcoholism isn't helping anyone – not her and certainly not her relationships with others.  She nods with a knowing, sober look on her face as you recount how much harder her drinking has made your relationship.  She promises you that she won't ever get that drunk again, though she warns that it will be hard to swear off alcohol entirely.  A look of resolve enters her eyes, and she leans over the table to kiss you on the lips.  The two of you wrap up the conversation knowing that you've probably seen the last of drunken Urta.\n\n");
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] = -1;
+	flags[kFLAGS.URTA_DRINK_TOOGLE] = -1;
 	doNext(camp.returnToCampUseOneHour);
 }
 //[Don't Change]
@@ -2669,7 +2673,7 @@ private function tellUrtaToStayTheSame():void {
 }
 
 private function amilyXUrtaUrtaFallout(): void {
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00350] = 2;
+	flags[kFLAGS.AMILY_URTA_FOLLOWUP] = 2;
 	urtaSprite();
 	clearOutput();
 	outputText("You ");
@@ -2705,56 +2709,56 @@ private function crushUrtasHeart():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
-		public function chastityBeltFun(cameFromSexMenu:Boolean = true):void
-		{
-			//The intro to this scene is for when you pick the scene from Urta usual sex menu. Previous scene has a different intro.
-			//Becomes available as a Sex Scene for Urta when she’s alone.
-			clearOutput();
-			if (cameFromSexMenu) {
-				outputText("Eyeing your foxy lover, you tell her to lose the condom, you have something else planned.\n\n");
-				outputText("“<i>Lose it?  What do you have in mind?</i>” Urta asks.  She looks past you towards her cupboard.  “<i>Oh, no, not that belt!  ...Do you really enjoy seeing me make such a mess of myself when I finally get it off?</i>” she protests.\n\n");
-				outputText("You nod your head in affirmation, telling her it’s always quite a sight seeing her melting into a pile of pent-up jism, ready to blow.  And the results are also fun to watch, it’s not everyday you get to see a literal geyser of fox-cum erupting out of a horse-cock.  You also add that you’re always happy to help her clean up afterwards.\n\n");
-				outputText("“<i>And you ought to be, you cause the mess,</i>” Urta states, blushing fiercely and not able to look you in the eye. “<i>...Do you really find it that hot to watch me whimper and squirm and beg for you?</i>” she asks, so quietly it’s almost a whisper.\n\n");
-				outputText("You walk towards her bed and stroke her cheek, telling her she makes the cutest ‘puppy eyes’ you’ve ever seen.  Urta trembles, and, almost despite herself, her tail starts to wag, allowing the hesitantly erect pillar that is her huge horse-prick to bob back and forth in front of you.\n\n");
-				outputText("Smiling, you turn to pick up the belt and hand it over to her, uttering a single command, “<i>Put it on.</i>”  Urta discards her condom and hesitantly takes the offered belt, opening it; slowly she guides her erect shaft into the slot, stopping when her flared tip touches the padded entrance of the tube.  She looks at you, looking for some sort of guidance or confirmation that is really what you want.  You just shoot her a look of impatience.  With a sigh and a groan, she begins pushing her shaft into the rather tight tube.  Grinning mischievously you help her by going around her and pulling the belt all the way, eliciting a whimper from the herm-fox.\n\n");
-				outputText("“<i>N-no fair...</i>” she whimpers to you.  “<i>This is already so hard to put up with...</i>”  You tell her you were merely trying to help her, since she seemed to be having such a hard time putting it on... if she wants you can finish up for her.  She swallows audibly and nods her head, reaching back with one trembling hand to offer you the keys.  You try to take the keys from her, but she refuses to let go.  You cough, indicating that you can’t continue unless she lets go of the keys.\n\n");
-				outputText("“<i>Wha? Oh, sorry.</i>”  She blushes, hand trembling wildly before she visibly forces herself to drop the keys into your hand.  “<i>...Please don’t make me wait too long before using them, alright?</i>” she meekly asks.\n\n");
-				outputText("You reply that you don’t intend to... then quickly snap the the belt shut, snugly against her soft furry buttcheeks and twist the key in the lock, sealing Urta in her metaphorical jail.  Getting up you dangle the keys in front of her eyes and smile triumphantly, teasing her by telling her this is a wonderful pair of panties she’s wearing.");
-			}
-			else { //Follow up from previous scene, Urta needs to undress!
-				outputText("Swallowing hard, Urta gives you a pleading look as if hoping against hope that you’ll change your mind.  You suddenly tell her to stop!  Urta stares at you, expression changing to one of joy, a wide grin so thankful it’s almost silly spreading across her face at the prospect of avoiding this.\n\n");
-				outputText("Seeing this, you laugh, telling her not to get her hopes up... you still want her to go on with it.  You just think the two of you should move into her bedroom.\n\n");
-				outputText("Urta throws you a look that combines an obvious tone of “you bastard” with a strong undertone that she’ll get you back for this, somehow.  Still, it doesn’t stop her from heading into the bedroom.  Once there, she looks at you, still hoping for one more chance at a last-minute reprieve.  Seeing that it’s not forthcoming, she sighs and resigns herself to her fate.\n\n");
-				outputText("Urta slowly and seductively peels off her dress until she’s standing naked before you.  When you make no effort to tell her to forget the belt, she sighs and turns around to step inside it; flashing you an excellent view of her ass and pussy as she pulls it up to her waist.  A little fidgeting and she manages to get her sizable yet still sheathed cock safely ensconced inside of it, clamping it shut and locking it, before flicking the keys to you, which you catch.\n\n");
-				outputText("Dangling the keys before her eyes teasingly, you watch as she lowers her guard for a moment, before you lunge forward and deliver her a passionate kiss, straight to her lips.  Urta eagerly returns the kiss, moaning throatily into your mouth as she embraces you.\n\n");
-				outputText("Stepping away with an evil grin, you tell her that she looks wonderful in her new ‘panties’.");
-			}
-			outputText("  Urta puts on a weak grin and tries to strike a pose, tail brushing low against the ground, one hand resting on an outstretched hip, ass flagrantly displayed at you despite its encumbering coverage.  “<i>Oh, do you think so?  It doesn’t make my bum look too big?</i>” she asks, blushing with embarrassment, which rather takes away from the air she’s trying to exude.\n\n");
-			outputText("You walk around her, looking her over; then deliver an echoing slap on her butt, groping it roughly as you tell her that her bum looks just perfect - Urta lets out a very vulpine yelp at the sudden spanking you just gave her.  Your other hand goes to her bushy tail, lifting and stroking it lovingly, as you enjoy its silky, fluffy feel.  Yes... she looks just perfect like this... you finish your sentence with a second slap on her other asscheek.\n\n");
-			outputText("Urta moans - is that a creak you hear from her chastity belt? - and then shivers.  “<i>You are such a flatterer,</i>” she says, looking abashed but unable to resist wagging her tail in delight at the compliments.\n\n");
-			outputText("You comment that you’re feeling thirsty and that she should fetch you something to drink, while you get comfortable.  Urta looks for a moment like saying something, but then goes to get you something to drink - she walks away in quite a funny manner, somewhat hunched over and awkwardly shuffling.  Her cock must be really straining against the padded interior of her belt; it’s throwing off her balance.\n\n");
-			outputText("While she’s away you proceed to strip off your clothes, fold them neatly and place then in a safe corner of the room.  While waiting for Urta to return, you strike a few poses on a nearby mirror, trying to find the best one for when your foxy lover returns.  Once satisfied, you lay on her bed and wait for her return.\n\n");
-			outputText("Urta returns, wobbling a little less; her erection must have started to subside or else she somehow got herself a little under control while she was gone.  She offers you a thick, cheap-looking clay mug.  “<i>I only have water; is that okay?</i>” she asks nervously.  She then catches sight of you and her eyes bulge out; she almost drops the mug, but manages to catch it before she spills more than half of its contents.\n\n");
-			outputText("You laugh inwardly... who knew teasing was so much fun?  You tell her water is fine and that she should bring it to you.  Urta just stares at you for a few moments, jolting back to reality when you repeat yourself.  Swallowing hard, she awkwardly advances towards you; you almost think you can see her meaty prick straining against the reinforced metal and leather of her chastity belt.  She really is hard-pressed to withstand temptation, even with that thing on.  Finally reaching you, she gingerly stretches out her hands to offer you the mug.\n\n");
-			outputText("You take the mug and tip on your mouth, purposely letting some spill, forming rivulets of water across your [skin noadj], " + (player.hasBreasts() ? "past your breasts and down" : "down your chest and over ") + " your belly.  With a look of mock disappointment, you tell Urta you seem to have spilled some water, maybe she should take care of it?  Urta nods her head and immediately starts to head for a closet to fetch you a towel.  But you quickly stop her, by telling her that you want her to lick you clean.\n\n");
-			outputText("“<i>L-lick you!  What do I look like, an animal!?</i>” Urta snaps, indignantly, tail bristling in outrage.  You calmly remind her of her current predicament... and that you, alone, hold the keys to her freedom.  The fox-morph glares at you, growling deeply enough to remind you you’re basically teasing a fox the size of a human being.  You just smile back at her, confident she won’t hurt you.  She stares into your eyes levelly, but, seeing you won’t back down, finally gives in.  “<i>Oh, very well,</i>” she sighs, then tries her level best to sashay towards you.  “<i>You going to get on the bed? Or are you going to make me get down on my hands and knees?</i>” she huffs.  You merely ask her what does she think you’re going to do?\n\n");
-			outputText("Urta heaves a long suffering sigh and kneels down before you.  Gently taking hold of your [leg], she leans her head in and sticks out her long, broad tongue, running it gently up one running trail of water.  Despite her initial protests, Urta is very thorough, making sure she gets every little bit of moisture from your [skin], replacing the water with her saliva.  You enjoy both the treatment and the power you have over your fox-herm girlfriend immensely.  You congratulate her on her dedication by gently patting her head and stroking your hand along her hair and triangular ears.  At one point you realize that her tail is wagging... quite happily actually... making you question her earlier protests.\n\n");
-			outputText("When she finally hikes her way all the way up to your chin, you take a hold of her head and pull her into another deep kiss, invading her mouth with your [tongue], tangling and dancing with her own canine tongue, moaning into the kiss to excite Urta as best as you can.  Urta is eager to kiss you back, snaking her arms around the back of your neck in order to pull your face against hers.  Through the sounds of your kiss, you become aware of a faint but constant dripping sound.  Breaking the kiss, the two of you look at the floor; Urta’s cock might be physically restrained, but nothing’s stopping it from bubbling precum, which has pooled inside of her cock-tube and is now seeping through the padding and the leather to drip noisily onto the floor.  Urta blushes fiercely.  “<i>Well, I did say this wasn’t good for me - I’m too excited for it,</i>” she says, defending herself.\n\n");
-			outputText("Thinking quickly, you put your mug under her to catch the droplets of pre and suggest the two of you move into the bathroom?  Should be easier to clean up than her bedroom... The vixen nods dumbly at you, then actually takes the mug from your hands, holding it under her steady flow of pre and begins leading you towards what passes for the bathroom in this cheap little apartment of hers.\n\n");
-			outputText("Once there, you realize that the cup is close to overflowing and a wicked idea hits you.  Smiling smugly at Urta, you suggest that she should empty the cup... by drinking its contents!\n\n");
-			outputText("If you were expecting a protest, though, Urta surprises you.  She gives you the most sultry grin she can manage, lifts the glass to her lips, and starts to chug it down, audibly gulping swallow after swallow of hot jizz until the sizable mug is empty.  She looks you right in the eyes as she licks a small trickle of cum from either corner of her mouth, burping softly and gently before placing her fingers to her lips with an exaggerated giggle.  “<i>Satisfied?</i>” she asks with the vulpine equivalent of a purr.  After this little display... you reply that no, you aren’t.  In fact you’re feeling pretty hot now... Urta could-\n\n");
-			outputText("Urta interrupts you with a heave of exasperation.  “<i>If you want anything more from me, dear, you’re going to have to let me out of this thing before I explode,</i>” Urta tells you with a sense of urgency.  She taps one finger on the protrusion that holds her cock, which is now oozing a constant streamer of jizz to splat wetly onto the floor, for emphasis.  “<i>Lemme out of this thing before I wrestle you to the floor and take the keys - and if I gotta do that, I swear to Marae I will ram this cock of mine right up your ass and flood you with every last drop you’ve teased out of me!</i>” she vows.\n\n");
-			outputText("Okay... judging by her look you can tell that she intends to do just that if you refuse... so you tell her that’s fine.  You’ve had your fun and Urta certainly earned her freedom; considering the amount of cum leaking from her cock-prison... perhaps she should get in the shower?\n\n");
-			outputText("She nods eagerly and shuffles into the shower, pulling aside the cheap curtain and motioning you to follow her.  You quickly do and holding the extrusion containing her cock, you tell her to brace herself.\n\n");
-			outputText("With a quick twist of the key, you pull the belt off her as fast as you can, causing her erection to spring up and slap her on the belly as it finally erupts into a veritable geyser of cum, painting the walls, the ceiling and you and Urta both, in thick, hot, fox-cum.  Urta sighs hugely, visibly slumping with relief even as her cock continues to bulge and then geyser gush after gush of cum.  “<i>Ohhh... that feels so, so good, [Name],</i>” she tells you.  She just hangs her head and lets the waves of orgasm ripple through her, visibly bloated balls shrinking before your very eyes as they empty themselves of the pent-up frustration you’ve helped Urta accumulate.\n\n");
-			outputText("Wiping your face clean of the spunk, you tell Urta that this is indeed an impressive amount of cum... but perhaps a bath is in order now?  Urta nods, then puts a finger to her lips and thinks it over.  “<i>I oughta make you lick this off of me... but I’d rather a hot shower anyway,</i>” she declares.\n\n");
-			outputText("With a smile you turn the faucet and let the initially cold water rinse most of the cum off of your bodies.  You help Urta wash by gently massaging her fur, even rubbing yourself against your hot fox lover; then slowly grasping her still sensitive shaft and giving it a few good pumps.  Urta moans and thrusts her cock into your pistoning hand, managing to dredge up a few last sizable spurts of goo that splat wetly into the floor and are swiftly washed away down the drain.  She says nothing, simply looking deeply into your eyes while you help her clean herself down.\n\n");
-			outputText("Once done you ask her where you can get some towels?  “<i>In a cupboard, just there,</i>” Urta tells you, pointing to a small cupboard built into the wall of the bathroom.  Nodding, you quickly go fetch the towels, handing one to her as you begin drying yourself.  Once fully dried up, you look at Urta and realize that she’s still dripping wet.  You begin to form a question, when suddenly you realize the evil stare she’s giving you... before you can scream your protest, you watch as she braces herself on the wall and begins shaking herself, flinging wet droplets of water all over your, formerly, dry self.  Looking at you with as much innocence as she can muster, which is not much by the way, Urta says, “<i>What?  This is how I get dry!</i>”  You glare back at her as she does her best to stifle a laugh.\n\n");
-			outputText("You quickly dry yourself... again.  And then help Urta.  Urta struggles and protests at your efforts to dry her off, but accepts it.  Finally, she laughs and whips the towel off.  “<i>I don’t know if I hate you or love you for what you just put me through... but, all in all, I do love you, so... no hard feelings, okay?</i>”  She asks, giving you her most winning smile even as she approaches a tiny sink and takes up a comb, which she starts running through the tangles of her fur.\n\n");
-			outputText("Looking Urta over, her fur is in serious need of a good combing... especially her tail... you smile at her and ask if she has a spare comb?  Urta blinks, surprised, but takes up a second comb from the sink’s side and hands it over to you.  You gently take her tail in hand and begin combing through it, doing your best to deal with tangled fur without hurting Urta.  Urta lets out a quiet yelp of surprise, then growl-purrs in pleasure at your ministrations; she has to fight to keep from messing things up by wagging her tail.  She leans against you and combs her fur, allowing you sole responsibility for handling her tail.\n\n");
-			outputText("Finally done, you ask Urta to give you a little twirl.  Urta does as you ask, giving a quiet giggle as she does so.  “<i>How do I look?</i>” she asks.  As lovely as ever, you reply with a thumbs up.  Sadly... you need to get going soon... so you give your vulpine lover one last kiss, redress and start on your way back to camp.");
-			doNext(camp.returnToCampUseOneHour);
-		}
+public function chastityBeltFun(cameFromSexMenu:Boolean = true):void
+{
+    //The intro to this scene is for when you pick the scene from Urta usual sex menu. Previous scene has a different intro.
+    //Becomes available as a Sex Scene for Urta when she’s alone.
+    clearOutput();
+    if (cameFromSexMenu) {
+        outputText("Eyeing your foxy lover, you tell her to lose the condom, you have something else planned.\n\n");
+        outputText("\"<i>Lose it?  What do you have in mind?</i>\" Urta asks.  She looks past you towards her cupboard.  \"<i>Oh, no, not that belt!  ...Do you really enjoy seeing me make such a mess of myself when I finally get it off?</i>\" she protests.\n\n");
+        outputText("You nod your head in affirmation, telling her it’s always quite a sight seeing her melting into a pile of pent-up jism, ready to blow.  And the results are also fun to watch, it’s not everyday you get to see a literal geyser of fox-cum erupting out of a horse-cock.  You also add that you’re always happy to help her clean up afterwards.\n\n");
+        outputText("\"<i>And you ought to be, you cause the mess,</i>\" Urta states, blushing fiercely and not able to look you in the eye. \"<i>...Do you really find it that hot to watch me whimper and squirm and beg for you?</i>\" she asks, so quietly it’s almost a whisper.\n\n");
+        outputText("You walk towards her bed and stroke her cheek, telling her she makes the cutest ‘puppy eyes’ you’ve ever seen.  Urta trembles, and, almost despite herself, her tail starts to wag, allowing the hesitantly erect pillar that is her huge horse-prick to bob back and forth in front of you.\n\n");
+        outputText("Smiling, you turn to pick up the belt and hand it over to her, uttering a single command, \"<i>Put it on.</i>\"  Urta discards her condom and hesitantly takes the offered belt, opening it; slowly she guides her erect shaft into the slot, stopping when her flared tip touches the padded entrance of the tube.  She looks at you, looking for some sort of guidance or confirmation that is really what you want.  You just shoot her a look of impatience.  With a sigh and a groan, she begins pushing her shaft into the rather tight tube.  Grinning mischievously you help her by going around her and pulling the belt all the way, eliciting a whimper from the herm-fox.\n\n");
+        outputText("\"<i>N-no fair...</i>\" she whimpers to you.  \"<i>This is already so hard to put up with...</i>\"  You tell her you were merely trying to help her, since she seemed to be having such a hard time putting it on... if she wants you can finish up for her.  She swallows audibly and nods her head, reaching back with one trembling hand to offer you the keys.  You try to take the keys from her, but she refuses to let go.  You cough, indicating that you can’t continue unless she lets go of the keys.\n\n");
+        outputText("\"<i>Wha? Oh, sorry.</i>\"  She blushes, hand trembling wildly before she visibly forces herself to drop the keys into your hand.  \"<i>...Please don’t make me wait too long before using them, alright?</i>\" she meekly asks.\n\n");
+        outputText("You reply that you don’t intend to... then quickly snap the the belt shut, snugly against her soft furry buttcheeks and twist the key in the lock, sealing Urta in her metaphorical jail.  Getting up you dangle the keys in front of her eyes and smile triumphantly, teasing her by telling her this is a wonderful pair of panties she’s wearing.");
+    }
+    else { //Follow up from previous scene, Urta needs to undress!
+        outputText("Swallowing hard, Urta gives you a pleading look as if hoping against hope that you’ll change your mind.  You suddenly tell her to stop!  Urta stares at you, expression changing to one of joy, a wide grin so thankful it’s almost silly spreading across her face at the prospect of avoiding this.\n\n");
+        outputText("Seeing this, you laugh, telling her not to get her hopes up... you still want her to go on with it.  You just think the two of you should move into her bedroom.\n\n");
+        outputText("Urta throws you a look that combines an obvious tone of \"you bastard\" with a strong undertone that she’ll get you back for this, somehow.  Still, it doesn’t stop her from heading into the bedroom.  Once there, she looks at you, still hoping for one more chance at a last-minute reprieve.  Seeing that it’s not forthcoming, she sighs and resigns herself to her fate.\n\n");
+        outputText("Urta slowly and seductively peels off her dress until she’s standing naked before you.  When you make no effort to tell her to forget the belt, she sighs and turns around to step inside it; flashing you an excellent view of her ass and pussy as she pulls it up to her waist.  A little fidgeting and she manages to get her sizable yet still sheathed cock safely ensconced inside of it, clamping it shut and locking it, before flicking the keys to you, which you catch.\n\n");
+        outputText("Dangling the keys before her eyes teasingly, you watch as she lowers her guard for a moment, before you lunge forward and deliver her a passionate kiss, straight to her lips.  Urta eagerly returns the kiss, moaning throatily into your mouth as she embraces you.\n\n");
+        outputText("Stepping away with an evil grin, you tell her that she looks wonderful in her new ‘panties’.");
+    }
+    outputText("  Urta puts on a weak grin and tries to strike a pose, tail brushing low against the ground, one hand resting on an outstretched hip, ass flagrantly displayed at you despite its encumbering coverage.  \"<i>Oh, do you think so?  It doesn’t make my bum look too big?</i>\" she asks, blushing with embarrassment, which rather takes away from the air she’s trying to exude.\n\n");
+    outputText("You walk around her, looking her over; then deliver an echoing slap on her butt, groping it roughly as you tell her that her bum looks just perfect - Urta lets out a very vulpine yelp at the sudden spanking you just gave her.  Your other hand goes to her bushy tail, lifting and stroking it lovingly, as you enjoy its silky, fluffy feel.  Yes... she looks just perfect like this... you finish your sentence with a second slap on her other asscheek.\n\n");
+    outputText("Urta moans - is that a creak you hear from her chastity belt? - and then shivers.  \"<i>You are such a flatterer,</i>\" she says, looking abashed but unable to resist wagging her tail in delight at the compliments.\n\n");
+    outputText("You comment that you’re feeling thirsty and that she should fetch you something to drink, while you get comfortable.  Urta looks for a moment like saying something, but then goes to get you something to drink - she walks away in quite a funny manner, somewhat hunched over and awkwardly shuffling.  Her cock must be really straining against the padded interior of her belt; it’s throwing off her balance.\n\n");
+    outputText("While she’s away you proceed to strip off your clothes, fold them neatly and place then in a safe corner of the room.  While waiting for Urta to return, you strike a few poses on a nearby mirror, trying to find the best one for when your foxy lover returns.  Once satisfied, you lay on her bed and wait for her return.\n\n");
+    outputText("Urta returns, wobbling a little less; her erection must have started to subside or else she somehow got herself a little under control while she was gone.  She offers you a thick, cheap-looking clay mug.  \"<i>I only have water; is that okay?</i>\" she asks nervously.  She then catches sight of you and her eyes bulge out; she almost drops the mug, but manages to catch it before she spills more than half of its contents.\n\n");
+    outputText("You laugh inwardly... who knew teasing was so much fun?  You tell her water is fine and that she should bring it to you.  Urta just stares at you for a few moments, jolting back to reality when you repeat yourself.  Swallowing hard, she awkwardly advances towards you; you almost think you can see her meaty prick straining against the reinforced metal and leather of her chastity belt.  She really is hard-pressed to withstand temptation, even with that thing on.  Finally reaching you, she gingerly stretches out her hands to offer you the mug.\n\n");
+    outputText("You take the mug and tip on your mouth, purposely letting some spill, forming rivulets of water across your [skin noadj], " + (player.hasBreasts() ? "past your breasts and down" : "down your chest and over ") + " your belly.  With a look of mock disappointment, you tell Urta you seem to have spilled some water, maybe she should take care of it?  Urta nods her head and immediately starts to head for a closet to fetch you a towel.  But you quickly stop her, by telling her that you want her to lick you clean.\n\n");
+    outputText("\"<i>L-lick you!  What do I look like, an animal!?</i>\" Urta snaps, indignantly, tail bristling in outrage.  You calmly remind her of her current predicament... and that you, alone, hold the keys to her freedom.  The fox-morph glares at you, growling deeply enough to remind you you’re basically teasing a fox the size of a human being.  You just smile back at her, confident she won’t hurt you.  She stares into your eyes levelly, but, seeing you won’t back down, finally gives in.  \"<i>Oh, very well,</i>\" she sighs, then tries her level best to sashay towards you.  \"<i>You going to get on the bed? Or are you going to make me get down on my hands and knees?</i>\" she huffs.  You merely ask her what does she think you’re going to do?\n\n");
+    outputText("Urta heaves a long suffering sigh and kneels down before you.  Gently taking hold of your [leg], she leans her head in and sticks out her long, broad tongue, running it gently up one running trail of water.  Despite her initial protests, Urta is very thorough, making sure she gets every little bit of moisture from your [skin], replacing the water with her saliva.  You enjoy both the treatment and the power you have over your fox-herm girlfriend immensely.  You congratulate her on her dedication by gently patting her head and stroking your hand along her hair and triangular ears.  At one point you realize that her tail is wagging... quite happily actually... making you question her earlier protests.\n\n");
+    outputText("When she finally hikes her way all the way up to your chin, you take a hold of her head and pull her into another deep kiss, invading her mouth with your [tongue], tangling and dancing with her own canine tongue, moaning into the kiss to excite Urta as best as you can.  Urta is eager to kiss you back, snaking her arms around the back of your neck in order to pull your face against hers.  Through the sounds of your kiss, you become aware of a faint but constant dripping sound.  Breaking the kiss, the two of you look at the floor; Urta’s cock might be physically restrained, but nothing’s stopping it from bubbling precum, which has pooled inside of her cock-tube and is now seeping through the padding and the leather to drip noisily onto the floor.  Urta blushes fiercely.  \"<i>Well, I did say this wasn’t good for me - I’m too excited for it,</i>\" she says, defending herself.\n\n");
+    outputText("Thinking quickly, you put your mug under her to catch the droplets of pre and suggest the two of you move into the bathroom?  Should be easier to clean up than her bedroom... The vixen nods dumbly at you, then actually takes the mug from your hands, holding it under her steady flow of pre and begins leading you towards what passes for the bathroom in this cheap little apartment of hers.\n\n");
+    outputText("Once there, you realize that the cup is close to overflowing and a wicked idea hits you.  Smiling smugly at Urta, you suggest that she should empty the cup... by drinking its contents!\n\n");
+    outputText("If you were expecting a protest, though, Urta surprises you.  She gives you the most sultry grin she can manage, lifts the glass to her lips, and starts to chug it down, audibly gulping swallow after swallow of hot jizz until the sizable mug is empty.  She looks you right in the eyes as she licks a small trickle of cum from either corner of her mouth, burping softly and gently before placing her fingers to her lips with an exaggerated giggle.  \"<i>Satisfied?</i>\" she asks with the vulpine equivalent of a purr.  After this little display... you reply that no, you aren’t.  In fact you’re feeling pretty hot now... Urta could-\n\n");
+    outputText("Urta interrupts you with a heave of exasperation.  \"<i>If you want anything more from me, dear, you’re going to have to let me out of this thing before I explode,</i>\" Urta tells you with a sense of urgency.  She taps one finger on the protrusion that holds her cock, which is now oozing a constant streamer of jizz to splat wetly onto the floor, for emphasis.  \"<i>Lemme out of this thing before I wrestle you to the floor and take the keys - and if I gotta do that, I swear to Marae I will ram this cock of mine right up your ass and flood you with every last drop you’ve teased out of me!</i>\" she vows.\n\n");
+    outputText("Okay... judging by her look you can tell that she intends to do just that if you refuse... so you tell her that’s fine.  You’ve had your fun and Urta certainly earned her freedom; considering the amount of cum leaking from her cock-prison... perhaps she should get in the shower?\n\n");
+    outputText("She nods eagerly and shuffles into the shower, pulling aside the cheap curtain and motioning you to follow her.  You quickly do and holding the extrusion containing her cock, you tell her to brace herself.\n\n");
+    outputText("With a quick twist of the key, you pull the belt off her as fast as you can, causing her erection to spring up and slap her on the belly as it finally erupts into a veritable geyser of cum, painting the walls, the ceiling and you and Urta both, in thick, hot, fox-cum.  Urta sighs hugely, visibly slumping with relief even as her cock continues to bulge and then geyser gush after gush of cum.  \"<i>Ohhh... that feels so, so good, [Name],</i>\" she tells you.  She just hangs her head and lets the waves of orgasm ripple through her, visibly bloated balls shrinking before your very eyes as they empty themselves of the pent-up frustration you’ve helped Urta accumulate.\n\n");
+    outputText("Wiping your face clean of the spunk, you tell Urta that this is indeed an impressive amount of cum... but perhaps a bath is in order now?  Urta nods, then puts a finger to her lips and thinks it over.  \"<i>I oughta make you lick this off of me... but I’d rather a hot shower anyway,</i>\" she declares.\n\n");
+    outputText("With a smile you turn the faucet and let the initially cold water rinse most of the cum off of your bodies.  You help Urta wash by gently massaging her fur, even rubbing yourself against your hot fox lover; then slowly grasping her still sensitive shaft and giving it a few good pumps.  Urta moans and thrusts her cock into your pistoning hand, managing to dredge up a few last sizable spurts of goo that splat wetly into the floor and are swiftly washed away down the drain.  She says nothing, simply looking deeply into your eyes while you help her clean herself down.\n\n");
+    outputText("Once done you ask her where you can get some towels?  \"<i>In a cupboard, just there,</i>\" Urta tells you, pointing to a small cupboard built into the wall of the bathroom.  Nodding, you quickly go fetch the towels, handing one to her as you begin drying yourself.  Once fully dried up, you look at Urta and realize that she’s still dripping wet.  You begin to form a question, when suddenly you realize the evil stare she’s giving you... before you can scream your protest, you watch as she braces herself on the wall and begins shaking herself, flinging wet droplets of water all over your, formerly, dry self.  Looking at you with as much innocence as she can muster, which is not much by the way, Urta says, \"<i>What?  This is how I get dry!</i>\"  You glare back at her as she does her best to stifle a laugh.\n\n");
+    outputText("You quickly dry yourself... again.  And then help Urta.  Urta struggles and protests at your efforts to dry her off, but accepts it.  Finally, she laughs and whips the towel off.  \"<i>I don’t know if I hate you or love you for what you just put me through... but, all in all, I do love you, so... no hard feelings, okay?</i>\"  She asks, giving you her most winning smile even as she approaches a tiny sink and takes up a comb, which she starts running through the tangles of her fur.\n\n");
+    outputText("Looking Urta over, her fur is in serious need of a good combing... especially her tail... you smile at her and ask if she has a spare comb?  Urta blinks, surprised, but takes up a second comb from the sink’s side and hands it over to you.  You gently take her tail in hand and begin combing through it, doing your best to deal with tangled fur without hurting Urta.  Urta lets out a quiet yelp of surprise, then growl-purrs in pleasure at your ministrations; she has to fight to keep from messing things up by wagging her tail.  She leans against you and combs her fur, allowing you sole responsibility for handling her tail.\n\n");
+    outputText("Finally done, you ask Urta to give you a little twirl.  Urta does as you ask, giving a quiet giggle as she does so.  \"<i>How do I look?</i>\" she asks.  As lovely as ever, you reply with a thumbs up.  Sadly... you need to get going soon... so you give your vulpine lover one last kiss, redress and start on your way back to camp.");
+    doNext(camp.returnToCampUseOneHour);
+}
 
 
 
@@ -2778,7 +2782,14 @@ private function QBsTalkExpack():void {
 private function friendsTalkExpack():void {
 	clearOutput();
 	urtaSprite();
-	outputText("You approack Urta's table and she motions for you to take a seat.  She finishes writing something on one of the pieces of paperwork scattered over the table, takes a sip of her drink and leans back in her chair.  “<i>Nice to see you again [name].  What can I do for you?</i>”");
+	outputText("You approack Urta's table and she motions for you to take a seat.  She finishes writing something on one of the pieces of paperwork scattered over the table, takes a sip of her drink and leans back in her chair.  \"<i>Nice to see you again [name].  What can I do for you?</i>\"");
+	urtaDialogueMenu();
+}
+
+private function urtaTalkAfterBJ():void {
+	clearOutput();
+	urtaSprite();
+	outputText("After helping Urta with her needs and cleaning yourself up, you can talk to your fox lover at last. Her delighted face hints you that you won't hear the familiar 'thump' too soon... unless you make her horny again.");
 	urtaDialogueMenu();
 }
 
@@ -2803,8 +2814,8 @@ private function urtaDiscussesSelf():void {
 	urtaSprite();
 	outputText("You tell Urta you'd like to talk about her a little.");
 	if (!urtaLove())
-		outputText("“<i>You wanna talk about me?</i>” she asks" + (urtaJustFriends() ? "" : ", blushing softly") + ".  “<i>Well, there isn't THAT much to tell, but what do you want to know?</i>”   She seems surprisingly pleased to have the chance to talk.");
-	else outputText("“<i>Well, I don't think there's that much to tell,</i>” she says with a smile.  She idly blows a bang out of her face and exhales, “<i>Well, lover, I'm an open book for you, what do you want to know?</i>”");
+		outputText("\"<i>You wanna talk about me?</i>\" she asks" + (urtaJustFriends() ? "" : ", blushing softly") + ".  \"<i>Well, there isn't THAT much to tell, but what do you want to know?</i>\"   She seems surprisingly pleased to have the chance to talk.");
+	else outputText("\"<i>Well, I don't think there's that much to tell,</i>\" she says with a smile.  She idly blows a bang out of her face and exhales, \"<i>Well, lover, I'm an open book for you, what do you want to know?</i>\"");
 	//[Family] [Sex/Romance] [Employment] [Prejudice]
 	if (urtaJustFriends())
 		simpleChoices("Flirt", flirtWithUrta, "Employment", urtaDiscussesEmployment, "Prejudice", urtaDiscussesPrejudice, "", null, "Back", urtaDialogueMenu);
@@ -2832,7 +2843,7 @@ public function flirtWithUrta():void {
 	clearOutput();
 	if (flags[kFLAGS.URTA_PC_LOVE_COUNTER] == -1) { //In friends mode
 		outputText("You ask Urta if, living in Tel'Adre, it's easier to resist the powerful feelings that come from living in this world.\n\n");
-		outputText("“<i>I've lived here my whole life, so I don't have anything else to compare with.  What do you mean by 'feelings'?</i>”\n\n");
+		outputText("\"<i>I've lived here my whole life, so I don't have anything else to compare with.  What do you mean by 'feelings'?</i>\"\n\n");
 		outputText("You tell her that in your world you never felt a deep urge to strip off all your clothes and " + (player.cor < 75 ? "make sweet love to" : "slake your lust on") + " the nearest person.\n\n");
 	}
 	else {
@@ -2840,9 +2851,9 @@ public function flirtWithUrta():void {
 		outputText("Urta gulps down a bit more of her booze and you decide to have a little fun.  ");
 	}
 	outputText("You quietly slide your " + (player.isNaga() ? "tail" : "foot") + " across under the table and rub it against the inside of her leg.  Urta practically jumps out of her seat, then tries to pretend nothing happened.\n\n");
-	outputText("You’re pretty sure most of the bar noticed, but you don’t care.  You keep rubbing and feel a thump as something large smacks against the underside of the table.  Urta drains the last of her drink and whispers, “<i>" + (flags[kFLAGS.URTA_PC_LOVE_COUNTER] == -1 ? "What about Kath?  I... I wouldn't..." :"Please - it’s so hard...") + "</i>”\n\n");
+	outputText("You’re pretty sure most of the bar noticed, but you don’t care.  You keep rubbing and feel a thump as something large smacks against the underside of the table.  Urta drains the last of her drink and whispers, \"<i>" + (flags[kFLAGS.URTA_PC_LOVE_COUNTER] == -1 ? "What about Kath?  I... I wouldn't..." :"Please - it’s so hard...") + "</i>\"\n\n");
 	outputText("You never find out exactly what she was going to say.  When you start to rub your " + (player.isNaga() ? "tail" : "foot") + " in little circles against the root of her huge cock Urta loses her train of thought and just leans back in her chair, trying to keep from spraying her pent up cum across the floor.\n\n");
-	outputText("You ease up so she has a chance of understanding what you’re saying.  “<i>" + (flags[kFLAGS.URTA_PC_LOVE_COUNTER] == -1 ? "I'll explain everything to Kath.  You want this as much as I do, right?" : "Yes, some chicks, with their big dicks, just do it for me.") + "</i>”  You slide " + (player.isNaga() ? "the tip of your tail" : "your toes") + " a little lower and start moving it in little circles against her balls.\n\n");
+	outputText("You ease up so she has a chance of understanding what you’re saying.  \"<i>" + (flags[kFLAGS.URTA_PC_LOVE_COUNTER] == -1 ? "I'll explain everything to Kath.  You want this as much as I do, right?" : "Yes, some chicks, with their big dicks, just do it for me.") + "</i>\"  You slide " + (player.isNaga() ? "the tip of your tail" : "your toes") + " a little lower and start moving it in little circles against her balls.\n\n");
 	outputText("Before Urta pops you get up from the table and tell her to meet you out back, right where things went off the rails that first time.  Urta nods eagerly and the edge of the table rises slightly.\n\n");
 	outputText("You wait outside, hiding in a shadowy corner.  You got Urta so excited that it’s a good fifteen minutes before she throws open the back door of the bar.  She looks hungry, yet unsure.  You’re guessing she’s had such terrible experiences with people in the past that despite your obvious interest she still can’t believe you want her.\n\n");
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] = 0; //urtaFuckHer will raise it to 1
@@ -2949,7 +2960,7 @@ private function urtaDiscussesTheWatch():void {
 private function urtaDiscussesAlcholism():void {
 	clearOutput();
 	urtaSprite();
-	if(flags[kFLAGS.DISCUSSED_URTA_ALCOHOLISM] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] == 0) {
+	if(flags[kFLAGS.DISCUSSED_URTA_ALCOHOLISM] == 0 && flags[kFLAGS.URTA_TALKED_ABOUT_SCYLLA] == 0) {
 		outputText("You quietly inform Urta that you and she need to talk about her drinking habit.  She swallows nervously and insists, \"<i>I - I only drink to try and keep my cock under control.</i>\"");
 		outputText("\n\nYou point out that her actions clearly belie that statement - she would never ask you to jerk her off in public or let her fuck your ass in the middle of the bar when sober.  Urta flinches at your words, ");
 		if(player.cor < 33)
@@ -2979,10 +2990,10 @@ private function urtaDiscussesAlcholism():void {
 	}
 	else {
 		outputText("You tell Urta that you want to discuss her newfound drinking habits.  The grey-furred fox-morph meets your gaze calmly.  \"<i>Really?  What more do you have in mind?</i>\" she asks.");
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] == 1)
+		if(flags[kFLAGS.URTA_DRINK_TOOGLE] == 1)
 			outputText("  \"<i>I can't drink any more than I already do - I'm kind of pushing the laws to drink as much as I do already.</i>\"  She burps loudly, then starts on another bottle.");
 		else
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] == 0)
+			if(flags[kFLAGS.URTA_DRINK_TOOGLE] == 0)
 				outputText("  \"<i>You said you didn't mind me drinking as much as I do... are you going to ask me to cut down?</i>\" she asks, calmly and clearly assuming that's what you intend.");
 			else
 				outputText("  \"<i>I said it before, I'll say it again, I'm not going to stop drinking entirely - there's nothing wrong with a few cold ones to take the edge off.  I don't drink myself stupid any more; that should be enough for you,</i>\" she replies, defensively.");
@@ -3003,7 +3014,7 @@ private function urtaDiscussAlcoholDrinkMore():void {
 	}
 	//{clear Urta sex cooldown}
 	//{Boozehound Urta tag flagged}
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] = 1;
+	flags[kFLAGS.URTA_DRINK_TOOGLE] = 1;
 	flags[kFLAGS.DISCUSSED_URTA_ALCOHOLISM] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -3017,7 +3028,7 @@ private function urtaDiscussAlcoholDrinkLess():void {
 	}
 	outputText(".  Her eyes glitter with steely resolve, and she leans over the table to kiss you on the lips.  The two of you wrap up the conversation, with you hoping that you've seen the last of drunken Urta.");
 	//{Sober Urta tag flagged}
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] = -1;
+	flags[kFLAGS.URTA_DRINK_TOOGLE] = -1;
 	flags[kFLAGS.DISCUSSED_URTA_ALCOHOLISM] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -3031,7 +3042,7 @@ private function urtaDiscussAlcoholNoChange():void {
 	if(flags[kFLAGS.DISCUSSED_URTA_ALCOHOLISM] == 0) urtaLove(1);
 	flags[kFLAGS.DISCUSSED_URTA_ALCOHOLISM] = 1;
 	//{No new tags flagged}
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] = 0;
+	flags[kFLAGS.URTA_DRINK_TOOGLE] = 0;
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -3493,46 +3504,46 @@ private function urtaDiscussessKatherine():void {
 	var affection:int = flags[kFLAGS.KATHERINE_URTA_AFFECTION];
 	if (affection == 0) { //They’re just co-workers
 		outputText("You ask Urta how her new recruit is doing.\n\n");
-		outputText("“<i>Oh Katherine?</i>” she asks.  “<i>Really well.  I mean she still needs to brush up on the laws of the land and a few other things, but she’s doing fine.  Plus it’s nice to have a cat in the watch.  I had thought about saving her for undercover work, but I figure it’s better for everyone to see a cat who’s a good upright citizen.  There really aren’t that many and maybe some of the ones in gangs will rethink things when they see her on patrol.</i>”");
+		outputText("\"<i>Oh Katherine?</i>\" she asks.  \"<i>Really well.  I mean she still needs to brush up on the laws of the land and a few other things, but she’s doing fine.  Plus it’s nice to have a cat in the watch.  I had thought about saving her for undercover work, but I figure it’s better for everyone to see a cat who’s a good upright citizen.  There really aren’t that many and maybe some of the ones in gangs will rethink things when they see her on patrol.</i>\"");
 	}
 	else if (affection == 1) { //They’ve never had sex together but each is aware you’re sleeping with the other if you're not in friends mode with Urta
-		outputText("“<i>Heh, you really have a thing for " + (telAdre.katherine.hasCock() ? "herms" : "girls in need") + ", don’t ya?</i>” she says with a smile.  “<i>Not that I’m complaining.  Anyway, in terms of her work she still needs to brush up on the laws of the land and a few other things, but she’s doing fine.  Plus it’s nice to have a cat in the watch.  I had thought about saving her for undercover work, but I figure it’s better for everyone to see a cat who’s a good upright citizen.  There really aren’t that many and maybe some of the ones in gangs will rethink things when they see her on patrol.</i>”");
+		outputText("\"<i>Heh, you really have a thing for " + (telAdre.katherine.hasCock() ? "herms" : "girls in need") + ", don’t ya?</i>\" she says with a smile.  \"<i>Not that I’m complaining.  Anyway, in terms of her work she still needs to brush up on the laws of the land and a few other things, but she’s doing fine.  Plus it’s nice to have a cat in the watch.  I had thought about saving her for undercover work, but I figure it’s better for everyone to see a cat who’s a good upright citizen.  There really aren’t that many and maybe some of the ones in gangs will rethink things when they see her on patrol.</i>\"");
 	}
 	else if (affection < 11) { //They’ve had drunken sex with you (can't get to this point in friend mode)
-		outputText("“<i>Yeah Kath.  Well I can see why you like her.  Hot girl" + (telAdre.katherine.hasCock() ? " with a decent sized cock" : "") + ", gets a bit horny when she’s drunk.  What’s not to like?</i>”\n\n");
-		outputText("She takes a swig of her drink and gives you a hug.  “<i>So, I just want to say I’m not unhappy having sex with you.  I mean that’s always great.  But, um, I gotta admit it’s really fun when you get the three of us together.  If you decide to do that again ... I’m in.</i>”");
+		outputText("\"<i>Yeah Kath.  Well I can see why you like her.  Hot girl" + (telAdre.katherine.hasCock() ? " with a decent sized cock" : "") + ", gets a bit horny when she’s drunk.  What’s not to like?</i>\"\n\n");
+		outputText("She takes a swig of her drink and gives you a hug.  \"<i>So, I just want to say I’m not unhappy having sex with you.  I mean that’s always great.  But, um, I gotta admit it’s really fun when you get the three of us together.  If you decide to do that again ... I’m in.</i>\"");
 	}
 	else if (affection < 32) { //Willing to have sober sex
-		outputText("“<i>Mmmm yeah Kath,</i>” she says dreamily, then shakes her head and laughs.  “<i>Guess that about sums things up, huh?  Yeah I like Kath, I like her quite a bit.  She’s a good watch officer and she’s a good lover in a threesome.</i>”  Urta looks a little nervous, but presses on.  “<i>So... what do you think of the two of us, when you’re not around, you know?</i>”\n\n");
+		outputText("\"<i>Mmmm yeah Kath,</i>\" she says dreamily, then shakes her head and laughs.  \"<i>Guess that about sums things up, huh?  Yeah I like Kath, I like her quite a bit.  She’s a good watch officer and she’s a good lover in a threesome.</i>\"  Urta looks a little nervous, but presses on.  \"<i>So... what do you think of the two of us, when you’re not around, you know?</i>\"\n\n");
 		outputText("You could tell Urta not to have sex with Katherine except when you’re around, tell her it’s alright for them to have sex whenever they want or encourage them to fuck each other’s brains out.");
 		simpleChoices("Don't Fuck", urtaKathSexDont, "Whenever", urtaKathSexWhenever, "Encourage", urtaKathSexEncourage, "", null, "", null);
 		return;
 	}
 	else { //Lovers
-		outputText("“<i>[name], I can honestly say I never expected to have this much sex.  I love you, I love Katherine.  It’s a bit weird, but I’m not complaining and neither is she and I hope neither are you.  I’m not the same girl you found sitting alone in the bar.  I’m so happy now.</i>”");
+		outputText("\"<i>[name], I can honestly say I never expected to have this much sex.  I love you, I love Katherine.  It’s a bit weird, but I’m not complaining and neither is she and I hope neither are you.  I’m not the same girl you found sitting alone in the bar.  I’m so happy now.</i>\"");
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
 
 private function urtaKathSexDont():void {
-	outputText("You give Urta a smile tell her that while you’re happy for her you’d really prefer if she waited for you to be around before banging Katherine.  You feel a little left out.\n\n");
-	outputText("Urta gives you a weak smile and says, “<i>Alright [name], I understand.  I’ll keep it in my pants.  Course I hope you’re up for a lot of three ways.  Girl’s got to get her fix.</i>”");
+	outputText("\n\nYou give Urta a smile tell her that while you’re happy for her you’d really prefer if she waited for you to be around before banging Katherine.  You feel a little left out.\n\n");
+	outputText("Urta gives you a weak smile and says, \"<i>Alright [name], I understand.  I’ll keep it in my pants.  Course I hope you’re up for a lot of three ways.  Girl’s got to get her fix.</i>\"");
 	flags[kFLAGS.KATHERINE_URTA_DATE] = Katherine.KDATE_LITTLE;
 	doNext(urtaDialogueMenu);
 }
 
 private function urtaKathSexWhenever():void {
-	outputText("You put your arm around Urta and tell her that you don’t mind if your favorite girls need to blow off a little steam together.  As long as they don’t wear each other out that is.\n\n");
-	outputText("Urta lets out a relieved laugh and says, “<i>That’s good.  That’s good.  I’ll make sure not to wear our kitten out.</i>”");
+	outputText("\n\nYou put your arm around Urta and tell her that you don’t mind if your favorite girls need to blow off a little steam together.  As long as they don’t wear each other out that is.\n\n");
+	outputText("Urta lets out a relieved laugh and says, \"<i>That’s good.  That’s good.  I’ll make sure not to wear our kitten out.</i>\"");
 	flags[kFLAGS.KATHERINE_URTA_DATE] = Katherine.KDATE_WHENEVER;
 	doNext(urtaDialogueMenu);
 }
 
 private function urtaKathSexEncourage():void {
-	outputText("You ask Urta what she would say if you told her you flat out expect them to have sex when you’re not around.\n\n");
-	outputText("“<i>Are you sure [name]?  I mean I love the idea, I’m sure Kath will love it too, but you know what my appetite’s like.</i>”\n\n");
+	outputText("\n\nYou ask Urta what she would say if you told her you flat out expect them to have sex when you’re not around.\n\n");
+	outputText("\"<i>Are you sure [name]?  I mean I love the idea, I’m sure Kath will love it too, but you know what my appetite’s like.</i>\"\n\n");
 	outputText("You give her a kiss and tell her you know very well.  Since you’re not in town all the time you expect Urta to see to Kath’s needs and Kath to hers.\n\n");
-	outputText("“<i>Carte blanche?  Ok [name], but I’m warning you - your sex kitten is going to be very well fucked whenever you see her.</i>”");
+	outputText("\"<i>Carte blanche?  Ok [name], but I’m warning you - your sex kitten is going to be very well fucked whenever you see her.</i>\"");
 	flags[kFLAGS.KATHERINE_URTA_DATE] = Katherine.KDATE_LOTS;
 	doNext(urtaDialogueMenu);
 }
@@ -3569,7 +3580,7 @@ public function giveTheFoxSomeEggs():void {
 		}
 	}
 	outputText("and release your ovipositor from its usual hiding slit, already dripping with ");
-	if(player.findPerk(PerkLib.SpiderOvipositor) >= 0) outputText("green slime");
+	if(player.hasPerk(PerkLib.SpiderOvipositor)) outputText("green slime");
 	else outputText("honey");
 	outputText(" in anticipation of laying.  The appendage droops down, curling around to slide its wet length against Urta's balls and the base of her cock.  \"<i>[name], wha...?</i>\" she slurs at you, but you just gently shush her and tell her to relax.  With a little effort, you bring it slithering back up to pry at the dampness of her netherlips...");
 
@@ -3586,7 +3597,7 @@ public function giveTheFoxSomeEggs():void {
 	else outputText("  The entirety of your sexual world begins and ends with your ovipositor, with the sensation of the mock-cock burrowing inexorably towards Urta's womb overwhelming you with pleasure.  Having no other sexual organs to distract you allows you to fully embrace it; you thrust harder and harder, desperate to ensure you have reached the womb before you start to lay.");
 
 	outputText("\n\nFinally, blissfully, you reach the cervix; with one last mighty thrust, eliciting a shriek of arousal-tinged pain and an explosive gout of cum from your vulpine brood-host, you penetrate her all the way into the womb.  You both hover there, gasping as you recover from your mutual exertions, when the wonderful tingling of your eggs moving emanates from your insectile fuckspear.  You moan and groan as contractions push the first of your eggs down, pumping a steady stream of ");
-	if(player.findPerk(PerkLib.BeeOvipositor) >= 0) outputText("honey");
+	if(player.hasPerk(PerkLib.BeeOvipositor)) outputText("honey");
 	else outputText("spider-goo");
 	outputText(" to keep Urta moist and slick and pliable.");
 
@@ -3631,7 +3642,7 @@ public function giveTheFoxSomeEggs():void {
 	flags[kFLAGS.URTA_EGGS] = player.eggs();
 	flags[kFLAGS.URTA_FERTILE_EGGS] = player.fertilizedEggs();
 	flags[kFLAGS.URTA_TIMES_EGG_PREGGED]++;
-	if (player.findPerk(PerkLib.BeeOvipositor) >= 0)
+	if (player.hasPerk(PerkLib.BeeOvipositor))
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_BEE_EGGS, 72);
 	else
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_DRIDER_EGGS, 72);
@@ -3675,7 +3686,7 @@ public function urtaChewsOutPC(newScreen:Boolean = true):void {
 		}
 	}
 	//[Giant Bee:
-	else if(player.findPerk(PerkLib.BeeOvipositor) >= 0) outputText("\n\nWell, you're pretty sure the eggs will just hatch into bee swarms; doesn't Tel'Adre have farms of some kind that could use them, you ask?  Urta looks thoughtful for a few moments, then nods.  \"<i>Yeah, and the farmers often complain that the crops don't produce so well because the drought means there's almost no insects to pollinate them any more.  They'd be happy to take in some swarms, even if they will grow up and move away after three years,</i>\" she mumbles, more to herself than to you.");
+	else if(player.hasPerk(PerkLib.BeeOvipositor)) outputText("\n\nWell, you're pretty sure the eggs will just hatch into bee swarms; doesn't Tel'Adre have farms of some kind that could use them, you ask?  Urta looks thoughtful for a few moments, then nods.  \"<i>Yeah, and the farmers often complain that the crops don't produce so well because the drought means there's almost no insects to pollinate them any more.  They'd be happy to take in some swarms, even if they will grow up and move away after three years,</i>\" she mumbles, more to herself than to you.");
 	//[Drider:
 	else outputText("\n\nMaybe she could give them up to a tailor's guild or something?  After all, they'll be driders like you are now, so they could produce lots of silk for the city.  The fox-morph looks puzzled at the idea, then rubs her chin contemplatively.  \"<i>I guess that might work...</i>\" she mumbles.");
 
@@ -3683,7 +3694,7 @@ public function urtaChewsOutPC(newScreen:Boolean = true):void {
 
 	urtaLove(-10);
 	outputText("\n\nYou kiss the embarrassed fox on the nose and tell her to take care before heading out.  She grabs you by the neck and kisses you back hard, whispering, \"<i>Don't try to make me do this sober, sneaky ");
-	if(player.findPerk(PerkLib.SpiderOvipositor) >= 0) outputText("spider");
+	if(player.hasPerk(PerkLib.SpiderOvipositor)) outputText("spider");
 	else outputText("little bee");
 	outputText("...</i>\"\n");
 	//(Technically finished, now, but waiting Fen's okay before adding repeatable version)
@@ -3772,7 +3783,7 @@ private function repeatUrtaEgging():void {
 	flags[kFLAGS.URTA_EGGS] = player.eggs();
 	flags[kFLAGS.URTA_FERTILE_EGGS] = player.fertilizedEggs();
 	flags[kFLAGS.URTA_TIMES_EGG_PREGGED]++;
-	if (player.findPerk(PerkLib.BeeOvipositor) >= 0)
+	if (player.hasPerk(PerkLib.BeeOvipositor))
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_BEE_EGGS, 72);
 	else
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_DRIDER_EGGS, 72);
@@ -4351,7 +4362,7 @@ private function lickOutUrtaAtHome():void {
 
 	outputText("\n\nYou rub her spent balls affectionately as you wipe your mouth, and tell her, \"<i>I told you so,</i>\" before climbing up next to her and snuggling with her while she comes down from her orgasmic high.  Urta smiles, her lips painted with a mixture of your cum and hers, and you realize she's really going to leave it on all day.  You tenderly hug her and fondle one of her breasts as you languish in the afterglow with her, only splitting up when you realize that you both have things to attend to.");
 	//Urta no lust ALL day.
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 12;
+	hoursUntilHorny(12, true);
 	//Boost dick confidence
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 3;
 	//Boost love
@@ -4405,7 +4416,7 @@ internal function slurpFawkesCocksForFunAndInflation():void {
 	player.refillHunger(100);
 	flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] = 0;
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 3;
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 5;
+	hoursUntilHorny(5);
 	urtaLove(2);
 	if(rand(2) == 0) outputText(player.modThickness(player.maxThicknessCap(),2));
 	if(rand(2) == 0) outputText(player.modTone(0,2));
@@ -4895,7 +4906,7 @@ private function doggyStyle():void {
 	outputText("\n\n...");
 	player.sexReward("cum","Anal");
 	dynStats("sen", 2);
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 4;
+	hoursUntilHorny(4, true);
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 2;
 	menu();
 	addButton(0,"Next",partTwoOfDoggieStyle);
@@ -5003,7 +5014,7 @@ private function getAPetReward():void {
 	if(player.hasCock()) outputText("The cock between your legs, meanwhile, stiffens, briefly becoming harder than you've ever felt before, before blasting the floor with jet after jet of silky white cum.");
 	else outputText("Meanwhile, your vagina clamps on nothing, achingly, painfully empty.  Juices spray out onto Urta's foot and down your thighs, soaking the floor beneath you in yet more slippery femcum.");
 	outputText("  Your Owner doesn't just let it end there, however, she continues her paw-assault on your crotch, stroking and rubbing until you become little more than a gibbering mess of orgasm-infused flesh laying in a puddle of your own sexy goo.");
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] += 2;
+	hoursUntilHorny(2, true);
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 2;
 	player.sexReward("cum","Lips");
 	outputText("...");
@@ -5062,7 +5073,7 @@ private function urtaTakesPCOnWalkies():void {
 
 	outputText("\n\nYou " + player.mf("laugh","giggle") + " and confirm you had a great time as well.  Urta gives you a sheepish look, before asking if you'd ever want to do that again.  You lean in for a kiss, and let that answer the question.");
 	dynStats("lus", 15);
-	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 0;
+	hoursUntilHorny(0);
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 5;
 	if(flags[kFLAGS.PC_FETISH] > 0) {
 		outputText("  <b>You're so fucking turned on after exhibiting yourself in such a way that you're dripping EVERYWHERE.  Such a good doggie.</b>");
@@ -5250,7 +5261,7 @@ private function urtaTakesPCOnWalkies():void {
 		if (flags[kFLAGS.URTA_FERTILE] > 0) outputText("\n\nUrta breathily slips out words between each kiss, unwilling to part her lips from yours for more than an instant. \"<i>I want.</i>\" Kiss. \"<i>You.</i>\" Kiss. \"<i>Inside of me.</i>\" Kiss. \"<i>And I want.</i>\" Kiss. \"<i>You</i>\" Kiss. \"<i>To give me your child.\"</i.> Your vulpine lover rubs your [cockhead] against her slick velvety lips. You can feel her desperate yearning for you inside of her and your [cock] filling her with your virile seed. ");
 		outputText("\n\nUnable to restrain yourself a second longer, you grab her curvy thighs firmly between your hands, and lift her above your [cockHead]. She moans as it rubs against her slick velvety lips, and her slick wetness drools down your [sheath].");
 		outputText("\n\nYou lower her down on your [cock], and at the same time, thrust up to meet her . Her moist folds gently caress your member. Soon you are gloriously sheathed inside of her, and her hot warmth radiates around your length.");
-		outputText("\n\n“Fuck me!” she breathily whimpers, all the while grinding her hips and pussy against your base. You grind together in primal rhythm, pressing your [cockhead] deep into her snatch. Her full breasts and black nipples bounce in front of your eyes, adding more fuel to your carnal thrusts.");
+		outputText("\n\n\"Fuck me!\" she breathily whimpers, all the while grinding her hips and pussy against your base. You grind together in primal rhythm, pressing your [cockhead] deep into her snatch. Her full breasts and black nipples bounce in front of your eyes, adding more fuel to your carnal thrusts.");
 		outputText("\n\nYour thighs slap against the underside of her furry ass as you bounce her in your lap. Her moist walls sloppily caress your [cock] with each bounce, and you let out a guttural moan. Your pre-cum drools inside of her, and mixes with her slick juices. You are reeling with ecstasy, and you passionately dig your fingers into her supple rump.");
 		outputText("\n\nUrta's eyes are glazed with pleasure, and her ears are flattened back. Her fingertips are digging into you. She's feverishly gyrating and grinding in your lap. Your [cock] is stirring around inside her tightly clenching cunt, rubbing and stroking her sopping wet insides.");
 		outputText("\n\n\"<i>Mate me--! Shoot your hot, sticky cum inside of my womb and fill me up, my love!</i>\" she cries out, begging to be fucked and impregnated by her stud. Her round, furry butt bounces in your lap. Her soaking wet cunt is smolderingly hot, more so with every passing second.");

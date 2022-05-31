@@ -5,9 +5,6 @@
 package classes.Items.HeadJewelries 
 {
 	import classes.Items.HeadJewelry;
-import classes.PerkLib;
-import classes.StatusEffects;
-	import classes.Player;
 
 	public class SkullOrnament extends HeadJewelry
 	{

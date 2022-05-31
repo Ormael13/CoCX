@@ -1,13 +1,14 @@
 package classes.Scenes {
 import classes.Appearance;
+import classes.CoC;
 import classes.CockTypesEnum;
 import classes.EngineCore;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.PerkLib;
-	import classes.Player;
-	import classes.StatusEffects;
+import classes.Player;
+import classes.Races;
+import classes.StatusEffects;
 import classes.internals.Utils;
 
 public class Dreams {
@@ -24,11 +25,11 @@ public class Dreams {
         //BUILD UP CHOICES ARRAY
         var scores:Array = [
                 [player.humanScore(), 0],
-                [player.horseScore(), 1],
-                [player.dogScore(),   2],
-                [player.cowScore(),   3],
-                [player.catScore(),   4],
-                [player.demonScore(), 5]
+                [player.racialScore(Races.HORSE), 1],
+                [player.racialScore(Races.DOG),   2],
+                [player.racialScore(Races.COW),   3],
+                [player.racialScore(Races.CAT),   4],
+                [player.racialScore(Races.DEMON), 5]
         ];
         for each (var score:Array in scores){
             for(var i:int = score[0]; i > 0; i--){
@@ -70,7 +71,7 @@ public class Dreams {
             choices[choices.length] = 11;
         }
         //Dom + Scylla
-        if(CoC.instance.flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && CoC.instance.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0) {
+        if(CoC.instance.flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && CoC.instance.flags[kFLAGS.DOMINIKA_MET] > 0) {
             choices[choices.length] = 12;
             choices[choices.length] = 12;
             choices[choices.length] = 12;
@@ -92,13 +93,13 @@ public class Dreams {
             choices[choices.length] = 15;
         }
         //Sand trap
-        if(player.sandTrapScore() >= 2) {
+        if(player.racialScore(Races.SANDTRAP) >= 2) {
             choices[choices.length] = 16;
             choices[choices.length] = 16;
             choices[choices.length] = 16;
             choices[choices.length] = 16;
         }
-        if(player.mouseScore() >= 3) {
+        if(player.racialScore(Races.MOUSE) >= 3) {
             choices[choices.length] = 17;
             choices[choices.length] = 17;
             choices[choices.length] = 17;

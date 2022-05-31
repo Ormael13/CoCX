@@ -7,8 +7,10 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.Areas.Lake.*;
+import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 use namespace CoC;
 
@@ -19,7 +21,6 @@ use namespace CoC;
 		public var fetishZealotScene:FetishZealotScene = new FetishZealotScene();
 		public var gooGirlScene:GooGirlScene = new GooGirlScene();
 		public var greenSlimeScene:GreenSlimeScene = new GreenSlimeScene();
-		public var kaiju:Kaiju = new Kaiju();
 		public var calluScene:CalluScene = new CalluScene();
 		public var swordInStone:SwordInStone = new SwordInStone();
 		public function Lake()
@@ -42,7 +43,15 @@ use namespace CoC;
 			//Diana
 			if (player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(5) == 0) {
 				player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
-				SceneLib.dianaScene.repeatLakeEnc();
+				if ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8)
+                    SceneLib.dianaScene.postNameEnc();
+                else
+				    SceneLib.dianaScene.repeatEnc();
+				return;
+			}
+			//Belisa
+			if (BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3 && BelisaFollower.BelisaEncounternum >= 2 && rand(5) == 0) {
+				SceneLib.belisa.subsequentEncounters();
 				return;
 			}
 			//Helia monogamy fucks
@@ -57,7 +66,7 @@ use namespace CoC;
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
-			if (player.exploredLake % 15 == 0) {
+			if (player.exploredLake % 15 == 0 && !player.hasStatusEffect(StatusEffects.CalluOff)) {
 				calluScene.ottahGirl();
 				return;
 			}
@@ -110,11 +119,8 @@ use namespace CoC;
 			choice[choice.length] = 1;
 			choice[choice.length] = 2;
 			//Fetish cultist not encountered till level 3
-			if (player.level >= 3 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0) {
+			if (player.level >= 3 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0)
 				choice[choice.length] = 3;
-				choice[choice.length] = 10;
-				choice[choice.length] = 11;
-			}
 			//Slimes/Ooze = level >= 3
 			if (player.level >= 3)
 				choice[choice.length] = 4;
@@ -185,7 +191,7 @@ use namespace CoC;
 				//OOZE!
 				else {
 					flags[kFLAGS.TIMES_MET_OOZE]++;
-					spriteSelect(25);
+					spriteSelect(SpriteDb.s_green_slime);
 					//High int starts on even footing.
 					if (player.inte >= 25) {
 						clearOutput();
@@ -243,10 +249,6 @@ use namespace CoC;
 			}
 			else if (select == 1) {
 				//No boat, no kaiju
-				if (player.level >= 5 && flags[kFLAGS.KAIJU_DISABLED] == 0 && player.hasStatusEffect(StatusEffects.BoatDiscovery)) {
-					kaiju.kaijuMeeting();
-					return;
-				}
 				clearOutput();
 				outputText("Your stroll around the lake increasingly bores you, leaving your mind to wander.  ");
 				if (player.cor > 30 || player.lust > 60 || player.lib > 40) outputText("Your imaginings increasingly seem to turn ");

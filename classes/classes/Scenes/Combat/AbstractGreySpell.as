@@ -10,7 +10,7 @@ public class AbstractGreySpell extends AbstractSpell {
 			timingType:int,
 			tags:/*int*/Array
 	) {
-		super(name, desc, targetType, timingType, Combat.USEMANA_MAGIC, tags);
+		super(name, desc, targetType, timingType, Combat.USEMANA_GREY, tags);
 	}
 	
 	override public function get category():int {
@@ -18,7 +18,7 @@ public class AbstractGreySpell extends AbstractSpell {
 	}
 	
 	override public function manaCost():Number {
-		return spellCostWhite(baseManaCost);
+		return spellCostGrey(baseManaCost);
 	}
 	
 	override protected function usabilityCheck():String {

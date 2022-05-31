@@ -3,7 +3,6 @@
  */
 package classes.Items.Consumables
 {
-    import classes.PerkLib;
     import classes.Player;
     import classes.internals.Utils;
 
@@ -15,7 +14,6 @@ package classes.Items.Consumables
             clearOutput();
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
-			var counter:Number = 0;
 			if (Utils.rand(2) == 0) changeLimit++;
 			if (Utils.rand(3) == 0) changeLimit++;
 			if (Utils.rand(4) == 0) changeLimit++;

@@ -5,6 +5,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.SceneLib;
 
 public class Clara extends Monster
@@ -27,7 +28,7 @@ public class Clara extends Monster
 			//Throw offensive potions at the player
 			outputText("Clara suddenly snatches something from a pouch at her belt. \"<i>Try this, little cutie!</i>\" She snarls, and throws a vial of potion at you.");
 			//Dodge chance!
-			if((player.findPerk(PerkLib.Evade) >= 0 && rand(10) <= 3) || (rand(100) < player.spe/5)) {
+			if((player.hasPerk(PerkLib.Evade) && rand(10) <= 3) || (rand(100) < player.spe/5)) {
 				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n");
 			}
 			else
@@ -61,12 +62,12 @@ public class Clara extends Monster
 		{
 			outputText("Clara glares at you, clearly being worn down.  Then strange lights start dancing around her hand and she points it in your direction.");
 			//Successful: 
-			if((player.findPerk(MutationsLib.GorgonsEyes) < 0 && player.inte / 5 + rand(20) + 1 < 14) && !player.hasPerk(PerkLib.BlindImmunity))
+			if((!player.perkv1(IMutationsLib.GorgonEyesIM) >= 1 && player.inte / 5 + rand(20) + 1 < 14) && !player.hasPerk(PerkLib.BlindImmunity))
 			{
 				outputText("\nA bright flash of light erupts in your face, blinding you!  You desperately blink and rub your eyes while Clara cackles with glee.");
 				player.createStatusEffect(StatusEffects.Blind,1,0,0,0);
 			}
-			else if (player.findPerk(MutationsLib.GorgonsEyes) >= 0) {
+			else if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 1) {
 					outputText("Your mutated eyes not been affected at all by this flash!");
 				}
 			else outputText("\nYou manage to close your eyes just in time to avoid being blinded by the bright flash of light that erupts in your face!  Clara curses when she see's you're unaffected by her magic.");

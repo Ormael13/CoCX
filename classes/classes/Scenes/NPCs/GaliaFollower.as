@@ -25,7 +25,7 @@ import classes.Scenes.NPCs.Galia;
 				outputText("\n\nAmily annoyed reply right away.\n\n");
 				outputText("\"<i>Get to the dissection already this thing is polluting our air! The sooner it's dead the better.</i>\"\n\n");
 			}
-			if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) outputText("\n\nJojo simply adds that killing it now is the merciful thing to do while.\n\n");
+			if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) outputText("\n\nJojo simply adds that killing it now is the merciful thing to do while.\n\n");
 			if (CelessScene.instance.isCompanion()) outputText("\n\nCeless seems genuinely "+(CelessScene.instance.isCorrupt ? "curious" : "scared")+" of the imp.");
 			//(If Alvina) outputText("\n\nWhile not physically present you can hear Alvina giggle in your mind replying that this thing would make an interesting lab rat for her black magic researches.\n\n");
 			//(Siegweird) outputText("\n\nSiegweird propose to skip the dissection and simply kill it now.\n\n");

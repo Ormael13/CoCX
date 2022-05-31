@@ -2,6 +2,7 @@
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class Scylla extends TelAdreAbstractContent {
 
@@ -29,8 +30,8 @@ public class Scylla extends TelAdreAbstractContent {
 //Scylla- cum addicted demon-tainted nun
 
 private function scyllaSprite():void {
-	if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 3) spriteSelect(82);
-	else spriteSelect(51);
+	if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 3) spriteSelect(SpriteDb.s_scyllaAndBear);
+	else spriteSelect(SpriteDb.s_scylla);
 }
 
 public function scyllaBarSelectAction():void {
@@ -78,18 +79,18 @@ public function scyllaBarSelectAction():void {
 		}
 		//All the following conditions are needed to see if she's fucking Urta
 		if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] < 3) return; //Minimum Scylla meetings for Urta to fuck her
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] == 1) return; //Together these are the 'No more Scylla' flag
+		if (flags[kFLAGS.URTA_NO_MORE_SCYLLA] == 1 && flags[kFLAGS.URTA_TALKED_ABOUT_SCYLLA] == 1) return; //Together these are the 'No more Scylla' flag
         if (!SceneLib.urta.urtaAtBar() || flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] > 0) return;
         if (flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] > 0 || flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] <= 2 || flags[kFLAGS.TIMES_FUCKED_URTA] == 0) return;
 			//She only fucks Scylla if she's horny and you've fucked her enough to make her comfortable
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] == 0) { //Never fucked Scylla before
+		if (flags[kFLAGS.URTA_SCYLLA_TIMES_CAUGHT] == 0) { //Never fucked Scylla before
             if (!SceneLib.urta.urtaDrunk()) return; //So she has to be drunk
         }
         else if (SceneLib.urta.urtaDrunk() && player.balls == 0) return; //Otherwise she has to be sober and you need to have balls (I'm not sure why, but it is so)
         if (telAdre.katherine.needIntroductionFromScylla()) return;
 		if (rand(3) == 0) scyllaAction = SCYLLA_ACTION_FUCKING_URTA; //And after all that there's still just a 1/3 chance it will happen
 		//Yay, Foursomes! - unless you're Scylla special
-		if (rand(2) == 0 && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 3 && player.hasKeyItem("Opal Ring") < 0 && SceneLib.urta.urtaAtBar() && player.longestCockLength() >= 8 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0) scyllaAction = SCYLLA_ACTION_FURRY_FOURSOME;
+		if (rand(2) == 0 && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 3 && player.hasKeyItem("Opal Ring") < 0 && SceneLib.urta.urtaAtBar() && player.longestCockLength() >= 8 && flags[kFLAGS.URTA_SCYLLA_TIMES_CAUGHT] > 0) scyllaAction = SCYLLA_ACTION_FURRY_FOURSOME;
 	}
 }
 
@@ -107,7 +108,7 @@ public function talkToScylla():void {
 		{
 			outputText("You step up to the woman and introduce yourself, noticing that the white and black hat she wears is covering tiny bulges in her skull.  Brushing her jet hair from her eyes, she follows your glance and blushes a deep purple hue. Pulling the cowl back, she reveals the twin nub-like horns that mark demonic taint. Apologizing for the scene she caused with the cup, she mumbles an introduction, getting as far as to explain that she is a nun before losing the thread entirely- evidently distracted by some inner turmoil. Following her gaze, you see that she’s staring at some of the other patrons- men whose massive members are visible through the knee-length bulge in their pant legs. You try to get her attention again, but she’s lost in a private world, her breath quick and shallow. Troublesome. If you want to keep her attention for any length of time, apparently you’ll need a monster cock swinging from your hips. You leave the size queen and go back to your soup.\n\n");
 			flags[kFLAGS.SCYLLA_SMALLCOCK_INTRO] = 1;
-		// END EVENT, TRIGGER REPEAT INTRO OPTIONS WHEN “NUN” IS SELECTED FROM WET BITCH- EVENING HOURS.
+		// END EVENT, TRIGGER REPEAT INTRO OPTIONS WHEN \"NUN\" IS SELECTED FROM WET BITCH- EVENING HOURS.
 		}
 		else
 		{
@@ -127,9 +128,9 @@ public function talkToScylla():void {
 	}
 
 	//PC DID BLOW FACTORY UP
-	if(flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText("\"<i>I was once a holy woman, sworn to relieve pain from any who suffer, but one night I experienced a dream. It told me that I must go on a pilgrimage to the distant mountains and save one who suffered greatly at an unjust hand. I travelled by day and fasted by night, but when I reached the mountains, I found that my vision had been a trick. Demons seized me and taunted me by saying that I was the one who suffered, for I had never known the touch of a lover. They dragged me to their terrible factory, where I beheld their sinful works and bound me to one of their devices. They promised that I would love my new life and to be sure that my 'suffering' lasted not a moment longer, they hooked a vial of alabaster liquid to my mouth. It was some blasphemous concentration of semen, sweat, and blood and the very smell of it nearly suffocated my mind. But just as the first drop touched my tongue, there was a terrible explosion, and the factory's machines detonated, as if struck down by the hands of the gods. I was saved and helped as many as I could from that den of inequity,</i>\" finishes Scylla.\n\n");
+	if(flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText("\"<i>I was once a holy woman, sworn to relieve pain from any who suffer, but one night I experienced a dream. It told me that I must go on a pilgrimage to the distant mountains and save one who suffered greatly at an unjust hand. I traveled by day and fasted by night, but when I reached the mountains, I found that my vision had been a trick. Demons seized me and taunted me by saying that I was the one who suffered, for I had never known the touch of a lover. They dragged me to their terrible factory, where I beheld their sinful works and bound me to one of their devices. They promised that I would love my new life and to be sure that my 'suffering' lasted not a moment longer, they hooked a vial of alabaster liquid to my mouth. It was some blasphemous concentration of semen, sweat, and blood and the very smell of it nearly suffocated my mind. But just as the first drop touched my tongue, there was a terrible explosion, and the factory's machines detonated, as if struck down by the hands of the gods. I was saved and helped as many as I could from that den of inequity,</i>\" finishes Scylla.\n\n");
 	//PC DIDNT
-	else outputText("\"<i>I was once a holy woman, sworn to relieve pain from any who suffer, but one night, I experienced a dream. It told me that I must go on a pilgrimage to the distant mountains and save one who suffered greatly at an unjust hand. I travelled by day and fasted by night, but when I reached the mountains, I found that my vision had been a trick. Demons seized me and taunted me by saying that I was the one who suffered, for I had never known the touch of a lover. They dragged me to their terrible factory, where I beheld their sinful works and bound me to one of their devices. They promised that I would love my new life and to be sure that my 'suffering' lasted not a moment longer, they hooked a vial of alabaster liquid to my mouth. It was some blasphemous concentration of semen, sweat, and blood and the very smell of it nearly suffocated my mind. Laughing, they left me to my fate, but just as the first drop touched my tongue, the machines ground to a halt, frozen in their wicked works. One of my fellow captives unhooked me from the device and we fled that den of inequity,</i>\" finishes Scylla.\n\n");
+	else outputText("\"<i>I was once a holy woman, sworn to relieve pain from any who suffer, but one night, I experienced a dream. It told me that I must go on a pilgrimage to the distant mountains and save one who suffered greatly at an unjust hand. I traveled by day and fasted by night, but when I reached the mountains, I found that my vision had been a trick. Demons seized me and taunted me by saying that I was the one who suffered, for I had never known the touch of a lover. They dragged me to their terrible factory, where I beheld their sinful works and bound me to one of their devices. They promised that I would love my new life and to be sure that my 'suffering' lasted not a moment longer, they hooked a vial of alabaster liquid to my mouth. It was some blasphemous concentration of semen, sweat, and blood and the very smell of it nearly suffocated my mind. Laughing, they left me to my fate, but just as the first drop touched my tongue, the machines ground to a halt, frozen in their wicked works. One of my fellow captives unhooked me from the device and we fled that den of inequity,</i>\" finishes Scylla.\n\n");
 
 	outputText("Scylla runs her fingertips along the rounded horns, embarrassed, \"<i>I did not escape unscathed, I fear. Even the slightest taste of that foul brew was enough to change my body. I grew taller and... filled out in most impure ways. You have seen the horns but the worst is how it changed my mouth</i>.\"\n\nHer fingers run along her plump, crimson lips. She gasps as they tremble at the touch, her chest rising and falling in a motion that puts a terrible strain on her too-small robe. She looks at you with pure, blue eyes that shimmer on the edge of tears.\n\n\"<i>I can't eat. I can't drink. Everything tastes like ashes in my mouth. Even wine might as well be salt water. My thirst is just... so...</i>\" she trails off to stare at the shattered remains of the cream saucer, seemingly forgetting you as she runs a hand up her side, cups her breast, and tweaks her nipple through the fabric.\n\n");
 
@@ -762,10 +763,10 @@ private function scyllaPtVShare():void {
 	outputText("What addiction would you like to discuss?");
 	//Set choices
 	var milk:Function = null;
-	if((player.findPerk(PerkLib.MarblesMilk) >= 0 || player.statusEffectv3(StatusEffects.Marble) > 0) && player.findPerk(PerkLib.MarbleResistant) < 0)
+	if((player.hasPerk(PerkLib.MarblesMilk) || player.statusEffectv3(StatusEffects.Marble) > 0) && !player.hasPerk(PerkLib.MarbleResistant))
 		milk = scyllaPtVMilk;
 	var cum:Function = null;
-	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 50 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0) cum = scyllaPtVCum;
+	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 50 || player.hasPerk(PerkLib.MinotaurCumAddict)) cum = scyllaPtVCum;
 	var sex:Function = null;
 	if(player.lib >= 85 || player.minLust() >= 20) sex = scyllaPtVSex;
 	var tentacles:Function = null;
@@ -1121,7 +1122,7 @@ private function addictionScyllaTakeAdvantageDicksBonusAndEpilogue():void {
 
 //Scylla #6 - Cat Scratch Fever
 public function Scylla6():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] < 6) flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] = 6;
 	clearOutput();
 	outputText("For once, the Wet Bitch isn't terribly crowded, the few people in the bar finishing their drinks and heading out. Scylla is one of those on their way out of the bar- she's just finishing a suspiciously creamy coffee when you catch her attention. She apologizes that she's just now leaving, but invites you to join her on a walk around town. She often ministers to the ill and homeless and would welcome an extra set of hands at her modest soup kitchen. You're not really enthusiastic about that plan, but to be honest, you're a little curious to see how a cum-hungry, bimbo-proportioned, bashful nun serves her religion.\n\n");
@@ -1137,7 +1138,7 @@ public function Scylla6():void {
 }
 //(super high Intelligence or speed)
 private function Scylla6DUCK():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("You turn in time to spot the ambush and drop low, a pipe swinging just past your head and cracking a brick next to you. Sweeping low, you knock your attacker's legs out from under him and rise into a defensive stance. A dozen cat-morphs have crept up behind you, silently seizing Scylla. The felines hiss, startled by your acute awareness and suddenly doubting their plan of attack.  You decide to end this before it gets too bloody, so you slowly curl your fingers into a fist, audibly cracking each knuckle on your hand one after the other. You rise to your feet and flick your ear with your thumb, chuckling. \"<i>You really broadcast that one,</i>\" you start, speaking slowly and loudly enough for your voice to bounce around the cramped alley. \"<i>But I'm sure you've got better. I mean, you know what I'm capable of. I've had demons helpless at my feet. Minotaurs three times your size cower when they remember my face. Surely you didn't just attack us at random? Nobody's luck is that bad. No, you're definitely trained professionals and not a miserable pack of errant transients, too drugged out to appreciate the scope of the mistake they've just made. So you'll be ready for the worst I've got. And oh, it is going to be DREADFUL.</i>\"\n\n");
 
@@ -1148,7 +1149,7 @@ private function Scylla6DUCK():void {
 
 //(Normal Characters)
 private function Scylla6SLOW():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("Too late, you realize the pickpockets were a distraction, and before you can whip around, a heavy weight cracks against the side of your skull, turning your world into a pin point of pain in an ocean of black unconsciousness. You muscles become jelly and you don't remember falling to your knees or slumping against the brick wall of the alley");
 	if (flags[kFLAGS.KATHERINE_UNLOCKED] < 1) outputText(", but the last thing you remember is the soft jingling of a small bell");
@@ -1189,7 +1190,7 @@ private function Scylla6SLOW():void {
 }
 //[Kick Ass]
 private function lactateAndKickAss():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("Cracking your neck, you decide to end this right now. Flexing your nearly unholy strength, you easily break the leather collar binding your hands and rise to your feet, dumping the cats pining you down to their asses. The felines hiss and leap backward, fearful of your might. You rub the bridge of your nose with the back of your hand, sniffing. \"<i>I enjoy a good joke,</i>\" you start, speaking slowly and loud enough for your voice to bounce around the cramped alley. \"<i>But you have to be kidding me. Cats? I've beaten demon overlords into bloody pulps. I've nearly torn the head off an imp with my bare hands. I've stomached a lot of crap since I came through the portal, but nothing I've drank or eaten, no matter how foul, has been as hard to swallow as this pathetic little ambush. I'm going to count to three and then I'm going to fuck the closest thing I lay my hands on. And if a hole isn't convenient, I'll make my own. Understand? One.</i>\"\n\n");
 
@@ -1199,7 +1200,7 @@ private function lactateAndKickAss():void {
 
 //[Yell]
 private function Scylla6YellForHelp():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("You fill your lungs and scream for help as loudly as you can. The cats lying on you hiss and rake your exposed flesh with their needle-like claws. One tries to jam a leather ball in your mouth to gag you, but the damage is done. The clattering rush of the city guard surrounds the alley from both directions and the cats find themselves trapped. A few try to bolt between the guards, but a well-placed centaur kick knocks one into an unconscious slump and the others quail from the guards, huddling into a scared group.\n\n");
 
@@ -1231,7 +1232,7 @@ private function Scylla6AfterYellLie():void {
 }
 //[Wait]
 private function Scylla6MilkyWait():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("You don't want to risk aggravating junkies while you're unable to defend yourself, especially while all your sensitive bits are in claw's reach of the kitties. You shiver as they begin to lick at your breasts, four felines crowding around your chest, whiskers tickling your nipples as coarse, wet tongues moisten your mounds. Their combined purring sends electric vibrations through your body, drowning out the anger and pain of the attack. Fuzzy faces and hot tongues slather your tits up to the nipples, coaxing small, white drops to the surface. They draw a weak moan from you as each cat takes a turn lapping at your leaking nubs, their rough tongues textured like slick sandpaper, softly scratching your vulnerable teats just enough to leave you panting for more.\n\n");
 
@@ -1247,7 +1248,7 @@ private function Scylla6MilkyWait():void {
 }
 //[Next]
 private function Scylla6MilkyWaitII():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	//[Low milk output]
 	if(player.lactationQ() < 500) outputText("They suck a shuddering orgasm from you and your hips buck against the cats's shaggy bodies, grinding for friction as you cum messily in the street. Your breasts respond by spritzing out what they can, thin jets spitting limpid splashes of milk against the four atop you. They suck at your nipples, slurping down all you've got and teasing your inflamed buds for more. Your breath catches in your throat as their greedy suckling empties you completely and begins to send perversely erotic pain shooting through your chest's summits. When your moans turn to throbbing gasps, the thieves finally relent, taking turns licking each other's faces while clutching and smoothing your bosom, massaging the fire from your over stimulated nipples. You pant and relax under their expertise, mammaries tingling to refill your drained wells, body submitting to the furry thieves' will.\n\n");
@@ -1271,7 +1272,7 @@ private function Scylla6MilkyWaitII():void {
 	doNext(Scylla6MilkyWaitIII);
 }
 private function Scylla6MilkyWaitIII():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("When the last feline has drunk their fill of you and the nun and their bloated masturbation burns off the arousal of their theft, they clumsily untie the constricting collars from your arms and help take Scylla down from her perch. They avoid meeting your eyes, perhaps ashamed or maybe just still too horny, but they press a few meager gems into your hand, trying to pay for the milk they stole. Scylla refuses what they offer her, instead giving them the money she had on her. She manages to gently scold them for not asking first while keeping her blushing gaze hidden behind a veil of her shimmering curls. You help the nun gather up the torn scraps of the top half of her robe and ineffectually drape them around her milk-inflated chest. She tries to put her habit back on but her horns have grown into twisting loops atop her head and are slow to recede while the lusty felines are still around. Before anything else can jump you, you excuse yourself and slink away, rubbing your achingly sore nipples under your [armor] as you do so.");
 	//[Gain gems. End encounter.]
@@ -1314,7 +1315,7 @@ private function Scylla6NoMilkLie():void {
 
 //[Submit] (Only available to players with vaginas)
 private function Scylla6NoMilkSubmit():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("You step around the corner, ready to save the nun, but the heat in your gut overpowers your heroism and you let your tongue hang out of your mouth as your eyelids grow heavy. You stumble and fall to your knees, head hanging low as you rub your body with both hands. The cats smelt your lust, and twelve furred, clawed bodies ring yours, dark rings around their almond-shaped eyes. You weakly try to shoo them away, but hands surround you and they hold firm against your struggles. You tire almost immediately and the cats pull you to the ground. The others push the largest among them forward, a black-furred feline of five feet with a small chest and lean build. Without meeting your gaze, she unhooks the leather collar from her neck and binds your hands behind your back tight enough to make your fingertips tingle, the small bell on it jingling. Then, she ducks back into the crowd, shifting her ragged clothes uncomfortably.\n\n");
 
@@ -1336,7 +1337,7 @@ private function Scylla6NoMilkSubmit():void {
 }
 //[Next]
 private function Scylla6NoMilkSubmitII():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("The black cat who bound your hands sees your lusty want all too well. While the others descend on the nun blindly, she helps you to your feet and pushes you between Scylla's massive, pillowy breasts. With swift but inexperienced motions, she ducks between your legs, grabs your pulsing cock, and guides it to the nun's blushing face. The cat inadvertently teases the captive girl by bopping your cockhead against the nun's cheeks and lips before aiming it against her moist pucker. Your legs clench when you feel Scylla's hot breath on your sensitive tip, the crowd of drinking felines on her chest blocking your view of her debased flush as she lavishes distressed kisses on your prick.\n\n");
 
@@ -1353,7 +1354,7 @@ private function Scylla6NoMilkSubmitII():void {
 	doNext(Scylla6NoMilkSubmitIII);
 }
 private function Scylla6NoMilkSubmitIII():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	if(player.balls > 0) {
 		outputText("Your spot in the middle of the nun-and-cat sandwich is too much, however, and your balls slap against Scylla's face with each thrust the cat-morph makes. She must be able to feel the cum churning in your groin because her throat milks your shaft, her tongue and lips coaxing your swollen pecker as her stomach sucks on your head like a fertile womb, hungry for your seed to the point of hysteria. You finally cum and your body clenches down, muscles tight as your strength deserts you. Your body is putty as the blobs of cum are forced past the suckling lips tightly wrapped against your groin and up the nun's gulping throat, fighting past the intense pressure of her neck. When they get up into her chest, you can feel the bulbs of spunk rushing toward your cockhead with urgent desire and Scylla's stomach rumbles in anticipation. Just as the first dollop bursts free, the herm behind you slaps your ass and gives you one last thrust before cumming herself. Her balloon of flesh flares lewdly and hot jizz pours into your body, painting your womb white with the kitty's dog-seed. The sensation is invigorating and you feel renewed strength as you buck against Scylla's face, fucking her stomach with your cock, even as it squirts its first load into her suspended body. You flex your vaginal walls as best you can, ass clenching, milking the black cat for every drop as she collapses against your back, breast slick with sweat and weakly panting as the orgasm takes its toll, her soft balls straining to make the most of what feels like a long-delayed fucking.\n\n");
@@ -1395,7 +1396,7 @@ private function Scylla6NoMilkSubmitIV():void {
 
 //[Rape]
 private function Scylla6NoMilkRAPETHEWORLD():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("You decide to have a little fun with this situation, so you remain hidden around the corner while the cats mill around Scylla. It's not long before their thirst overwhelms their caution and the felines sink to their knees, nuzzling Scylla's bare chest, small tongues lacquering her mountainous breasts in saliva. Her skin shimmers in the alley's waning light and the nun moans, struggling weakly against her bonds, her milk-laden tits jiggling tantalizingly. You strip off your [armor] and lightly grasp your cock, stroking slowly as you wait for the opportune moment.\n\n");
 
@@ -1409,7 +1410,7 @@ private function Scylla6NoMilkRAPETHEWORLD():void {
 	doNext(Scylla6NoMilkRapeII);
 }
 private function Scylla6NoMilkRapeII():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("The cat-morph freezes in your arms, back arched as natural panic wages war against the heat pumping out of her drooling snatch. She nods her head slowly and you grin. \"<i>Good kittie,</i>\" you murmur, sliding another teasing inch into her cunny. \"<i>Let's give our friends a feast,</i>\" you whisper, directing her to turn about, toward the nursing nun. The two of you slowly pace past milk-addled felines, your captive's scarlet bulb bobbing with each deliberate step. Carefully moving between the distracted cats, you guide the dusky herm between Scylla's expanded breasts. She notices the erection you've marched up to her with a husky coo of pleasure.\n\n");
 
@@ -1423,7 +1424,7 @@ private function Scylla6NoMilkRapeII():void {
 	doNext(Scylla6NoMilkRapeIII);
 }
 private function Scylla6NoMilkRapeIII():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("You give one more savage pump and, at last, the kitty-knot pushes past the nun's pussy-tight, bimbo-bloated kisser with a moist 'plop.' The onyx herm howls like a wolf as her sensitive bulb is swallowed by the captive woman, the grapefruit-sized knob stuffing her cheeks. The cat's body spasms as she howls, and you can see the nun's mouth is distended wide enough to see the knot's bulge under her jaw. Despite the frightening width of her knot, compared to the nun's normal fare, the larger-than-average herm seems positively small, so you decide to give them both a little extra cream.\n\n");
 
@@ -1785,49 +1786,49 @@ public function openTheDoorToFoursomeWivScyllaAndFurries():void
 	outputText("The door audibly creaks when you slip into the Wet Bitch’s back room, but the chamber’s occupants are none the wiser, too busy passionately rutting to hear something as subtle as a hinge’s protest. Scylla is on her knees (of course), her breasts ballooned to gargantuan sizes, big enough that the sit on the floor with her while two white-furred girls pound away at her noisily slurping lipples.");
 	outputText("\n\nThe form on the left is the smaller of the two - a white-furred mouse-girl that can’t be more than an inch over five feet tall, her slit dripping so freely that a small puddle has formed betwixt her thrusting, well-muscled thighs. A frankly monstrous rod juts from where the pink bud of a clit ought to be, as thick around as the rodent woman’s arm and yet somehow fitting snugly between one of the nun’s extra lips all the same, stretching them into a scarlet ‘o’ of cock-devouring hunger.");
 	outputText("\n\nOn the right is a much more physically imposing woman - almost seven feet of muscular husky-girl, her fur slicked by a fine layer of sweat. Her hands are gripping Scylla’s tit so firmly that her fingers are buried deeply into the soft breastflesh, her muscles bulging from the effort of holding the over-sized mammary up to her bright red dog-cock. Unlike her miniature companion, she’s got a proper set of balls separating her turgid dick from the lips of her dewy slit.");
-	outputText("\n\nScylla’s fluttering eyes spot you from between the curvy hermaphrodites. Her tongue laps hungrily at her lips before she stops herself, blushing. <i>“[name]! I... ooh... didn’t... uh... oh my! You l-look so pent up!”</i>");
+	outputText("\n\nScylla’s fluttering eyes spot you from between the curvy hermaphrodites. Her tongue laps hungrily at her lips before she stops herself, blushing. <i>\"[name]! I... ooh... didn’t... uh... oh my! You l-look so pent up!\"</i>");
 	outputText("\n\nYou shed your [armor] halfway through her stammered apology-turned-invitation, giving her a good long look at your [cocks]. Luminous, innocent eyes fix on your libertine display, filling with hunger by the second. Her mouth falls open on its own, her tongue rolling out like a lush red carpet, an invitation if you’ve ever seen one.");
 	outputText("\n\nThe orally-fixated nun’s companions finally react to your presence when you shoulder between them. The husky gasps briefly before making way, her voice trailing off into a simpering moan. To your left, the mouse just smirks at you, grinning lewdly while pumping several feet of cock deeper into the holy woman’s corrupted tit.");
 	//First time
 	if(flags[kFLAGS.SCYLLA_FURRY_FOURSOME_COUNT] == 0)
 	{
-		outputText("\n\nShe greets you in between grunts of pleasure, <i>“I’m Snow, and the whimpering slut over there is Winter. Nice to finally meet you, [name].”</i>");
+		outputText("\n\nShe greets you in between grunts of pleasure, <i>\"I’m Snow, and the whimpering slut over there is Winter. Nice to finally meet you, [name].\"</i>");
 		outputText("\n\nYou nod and step a little closer. Scylla’s tongue stretches out to greet your [cockHead biggest], lapping wetly against it. You struggle not to groan too lewdly in the presence of the more composed mouse.");
-		outputText("\n\n<i>“Awww, don’t be shy,”</i> Snow coos, swatting at your [butt] with her whip-like tail until your hips hitch forward. <i>“She told us about you earlier.”</i> The mouse pauses, wiggling her tail between your cheeks until it’s pressing on your asshole. <i>“Usually I reserve this kind of treatment for Winter, but we can’t have you backing out after coming this far, can we?”</i> You lurch forward from the near-intrusion, burying more than a few inches into Scylla’s sucking gullet.");
+		outputText("\n\n<i>\"Awww, don’t be shy,\"</i> Snow coos, swatting at your [butt] with her whip-like tail until your hips hitch forward. <i>\"She told us about you earlier.\"</i> The mouse pauses, wiggling her tail between your cheeks until it’s pressing on your asshole. <i>\"Usually I reserve this kind of treatment for Winter, but we can’t have you backing out after coming this far, can we?\"</i> You lurch forward from the near-intrusion, burying more than a few inches into Scylla’s sucking gullet.");
 		outputText("\n\nShe hums happily, eyes falling closed to focus on the feelings coming from her three mouths.");
 	}
 	else
 	{
-		outputText("\n\nThe cocky rodent, Snow, greets you in between grunts of pleasure, <i>“Hello again, [name]. You’re just in time - she hasn’t had any cum yet, and she wouldn’t shut up about wanting your dick in her mouth until we both started plugging her together. Some nun.”</i>");
+		outputText("\n\nThe cocky rodent, Snow, greets you in between grunts of pleasure, <i>\"Hello again, [name]. You’re just in time - she hasn’t had any cum yet, and she wouldn’t shut up about wanting your dick in her mouth until we both started plugging her together. Some nun.\"</i>");
 		outputText("\n\nYou step a little closer, allowing Scylla’s tongue to stretch out to caress your [cockHead biggest]. She laps at you wetly, running an organ that seems more snake than muscle in lazy circles around your girth. You struggle not to groan too lewdly in presence of the two herms, silently hoping for a little encouragement from Snow again.");
-		outputText("\n\nThe albino mouse has quite the twinkle in her red-hued eyes as she watches you, silently wrapping her rodentine tail around behind your [butt]. She gently caresses each of your cheeks with it before threading in between to press gently on your [asshole]. <i>“Need a little more encouragement, don’t you?”</i>");
+		outputText("\n\nThe albino mouse has quite the twinkle in her red-hued eyes as she watches you, silently wrapping her rodentine tail around behind your [butt]. She gently caresses each of your cheeks with it before threading in between to press gently on your [asshole]. <i>\"Need a little more encouragement, don’t you?\"</i>");
 		outputText("\n\nYou nod and thrust the first few inches of your [cock biggest] into Scylla’s mouth at the direction of her tail. The nun moans around your shaft and lets her eyes drift closed, overwhelmed by the feelings from three dick-stuffed mouths and her own unholy seed-hunger.");
 	}
 	outputText("\n\nSnow beams at you, still circling your [asshole] while you feed the rest of your [cock biggest] into the nun’s mouth of your own accord.");
-	outputText("\n\nWinter huskily whimpers from the other side, <i>“How can you two even talk... It’s so good.”</i>");
+	outputText("\n\nWinter huskily whimpers from the other side, <i>\"How can you two even talk... It’s so good.\"</i>");
 	outputText("\n\nThe mouse-girl just snickers, but looking down, you can see why she’s having so much trouble. Scylla’s nipple-mounted lips have swollen around the dog-girl’s dick into a pair of glistening fuckpillows. Slippery, lubricated milk spills down the lower lip in thick streams while deft fingers fondle the husky’s fuzzy balls. The holy woman’s expanded cocksuckers slide back and forth against a fully expanded knot, making wet sucking noises with every back and forth motion.");
 	outputText("\n\nThe hapless dog-woman isn’t even thrusting anymore, just wildly and uncontrollably trembling under the assault. By all the signs, she ought to be cumming already, knotting herself in Scylla’s tit and force-feeding her a hot, sticky snack.");
 	outputText("\n\nInstead, she seems held on the edge of orgasm while her balls twitch and... grow in the nun’s hand. You do a double take before you’re sure of what you’re seeing. Winter’s furry sack is at least twice as big as it was when you came in and growing bigger by the second. You should have expected as much after your previous encounters with the nun, but actually seeing it happen to someone else is something else entirely.");
-	outputText("\n\nSnow giggles while you watch, still pounding her gigantic rod deep into the corrupted sister’s boob. <i>“Somethin’ to see, isn’t it? I kind of wish Scylla’ed do that to me.”</i> She leans closer and adds, whispering low, <i>“I swear the husky slut cums way harder since our last visit than before. The bitch ");
+	outputText("\n\nSnow giggles while you watch, still pounding her gigantic rod deep into the corrupted sister’s boob. <i>\"Somethin’ to see, isn’t it? I kind of wish Scylla’ed do that to me.\"</i> She leans closer and adds, whispering low, <i>\"I swear the husky slut cums way harder since our last visit than before. The bitch ");
 	if(flags[kFLAGS.SCYLLA_FURRY_FOURSOME_COUNT] == 0) outputText("busts her nuts like a champ.");
 	else if(flags[kFLAGS.SCYLLA_FURRY_FOURSOME_COUNT] <= 1) outputText("fills condoms like some kind of balloon-making machine.");
 	else if(flags[kFLAGS.SCYLLA_FURRY_FOURSOME_COUNT] <= 2) outputText("busts condoms just about every other orgasm now.");
 	else if(flags[kFLAGS.SCYLLA_FURRY_FOURSOME_COUNT] <= 3) outputText("busts condoms if she even thinks about using ‘em.");
 	else outputText("can almost fill a bathtub nowadays. Fuck, I love watching her squirm while I tease those huge loads out of her.");
-	outputText("”</i>");
+	outputText("\"</i>");
 	outputText("\n\nYou feel like you started cumming a little more... vigorously since your first visits with Scylla as well. Nothing wrong with a little bit more spunk though, right? You feed the last few inches of your length past the nun’s scarlet suckers, feeling your [cockHead biggest] snake down her seemingly endless throat. It’s hard to be concerned about something that feels so unequivocally good, particularly when you’re already started to leak pre-cum like a sieve into a wanton woman’s belly.");
 	outputText("\n\nScylla’s pearl-white cheeks color red in delight and excitement when her nose rubs against your belly, miraculously able to breath with ");
 	if(player.biggestCockLength() <= 12) outputText("a foot");
 	else if(player.biggestCockLength() < 24) outputText("over a foot");
 	else outputText("a few feet");
 	outputText(" of cock choking off her throat.");
-	outputText("\n\nSnow, clearly feeling mischievous, draws most of the way out of chosen target, releasing a small avalanche of backed-up milk in the process. She gingerly guides her nearly three-foot pole over the nun’s leaking lips, brushing her quivering tip against the sensitive ruby pillows. <i>“Hey, if you use some of that magic on me, I’ll put it back in </i>and<i> milk [name]’s prostate for you.”</i>");
+	outputText("\n\nSnow, clearly feeling mischievous, draws most of the way out of chosen target, releasing a small avalanche of backed-up milk in the process. She gingerly guides her nearly three-foot pole over the nun’s leaking lips, brushing her quivering tip against the sensitive ruby pillows. <i>\"Hey, if you use some of that magic on me, I’ll put it back in </i>and<i> milk [name]’s prostate for you.\"</i>");
 	outputText("\n\nScylla shows no outward signs of having heard the mouse-woman’s offer.");
-	outputText("\n\n<i>“Don’t I get a say in this?”</i> you protest, held fast by the corrupted priestess’s lasciviously wriggling tongue and vacuum-sealed lips.");
-	outputText("\n\nSnow pushes her bulbous head halfway back in. <i>“Nope! Just think about it, you, making my huge dick squirt out rivers of that stuff you crave, and me, squeezing every... single... drop... from lover-" + player.mf("boy","girl") + " here.”</i>");
-	outputText("\n\nThe white-furred mouse abruptly squeals and violently rams herself back in hard enough to splatter you with a spray of milk. <i>“D-d-damn!”</i>");
+	outputText("\n\n<i>\"Don’t I get a say in this?\"</i> you protest, held fast by the corrupted priestess’s lasciviously wriggling tongue and vacuum-sealed lips.");
+	outputText("\n\nSnow pushes her bulbous head halfway back in. <i>\"Nope! Just think about it, you, making my huge dick squirt out rivers of that stuff you crave, and me, squeezing every... single... drop... from lover-" + player.mf("boy","girl") + " here.\"</i>");
+	outputText("\n\nThe white-furred mouse abruptly squeals and violently rams herself back in hard enough to splatter you with a spray of milk. <i>\"D-d-damn!\"</i>");
 	outputText("\n\nScylla’s eyes open wide, the white around her azure gaze darkening. Her sclera seem to be filling up with ink, entrapping her once-innocent eyes in deep, corrupted sable. Her horns, formerly nubs, elongate, arching back along the nun’s head until they have more in common with a ram’s twisted battering rams than muted, demonic tips she bore before. Worst of all, there’s no hint of the gentle creature you’ve gotten to know so well. Her compassionate features have warped into a hungry, cruel sort of beauty, the sort of spell-binding, hypnotic attraction you’ve only ever seen in the flames of a bonfire.");
-	outputText("\n\n<i>“Ahhhh~”</i> Snow gasps, arching her back to violently plunge herself deeply into Scylla. Just below her, you spy the demonic woman’s fingers wriggling, firmly embedded into the mousette’s vagina. Every movement of those digits is announced by the splattering of girlcum on the floor and echoed by abrupt upward pitching of Snow’s moans. The breast binding the mouse swells larger by the second, doubtless filling with a load of cum as immense as its source. It pushes against your [leg], partially enveloping you as it grows.");
+	outputText("\n\n<i>\"Ahhhh~\"</i> Snow gasps, arching her back to violently plunge herself deeply into Scylla. Just below her, you spy the demonic woman’s fingers wriggling, firmly embedded into the mousette’s vagina. Every movement of those digits is announced by the splattering of girlcum on the floor and echoed by abrupt upward pitching of Snow’s moans. The breast binding the mouse swells larger by the second, doubtless filling with a load of cum as immense as its source. It pushes against your [leg], partially enveloping you as it grows.");
 	outputText("\n\nIn spite of that, the small-statured but hung albino manages to stay true to her word, thrusting her tail into your [asshole] in between full-body, orgasmic spasms. It roughly presses on your anal walls, thrusting about as it hunts for your p-spot like some kind of prostate-seeking missile. You whimper, dick surging inside Scylla’s mouth, drizzling thicker and thicker gouts of pre with every second. The whole time, her eyes watch you knowingly, mischievously twinkling right up until Snow’s tail finally scores a hit on its target and rudely compresses your prostate.");
 	outputText("\n\nYou aren’t sure if Scylla’s subconscious use of black magic is responsible or if you’re merely a quick shot when dick-deep in a hot-girl’s throat and massaged from behind. Either way, you go off like a canon, flooding a gooey river of spooge directly into the cum-guzzling nun’s belly. You swear you can hear a purr from somewhere in her overstuffed gullet, but there’s no way she could make a sound like that with so much prick stuffed inside her, right?");
 	if(player.cockTotal() > 1)
@@ -1839,7 +1840,7 @@ public function openTheDoorToFoursomeWivScyllaAndFurries():void
 	}
 	outputText("\n\nThe point of Snow’s tail slips off your prostate, easing up enough for your torrent of spunk to briefly abate. You whimper, and she merely presses down on it with the fold of tail behind it, penetrating you more deeply and simultaneously managing to more fully massage for your anal pleasure button. The thrumming arcs of bliss being squeezed into your [cock biggest] pale in comparison from the ecstasy being thrust into you directly through the most tender place in your ass.");
 	outputText("\n\nSomething soft and fuzzy brushes your [leg] on your right side, drawing your lust-addled gaze in that direction. It’s Winter’s ballsack, or at least the monstrosity it has become. It must have been growing this entire time, and it’s gotten so large that the poor husky has to stand on her clawtips to keep her bodyweight from compressing them too forcefully. Her face is more desperate than pained, and her knot is swollen almost as large as a grapefruit. Somehow, Scylla’s lipples are still able to slide back and forth across it - did her orally-gifted mammary grow even bigger to handle it? Those lips look big enough to handle another three huskies - or one more Snow.");
-	outputText("\n\nWinter pleads and moans, <i>“P-please let me c-cum! I can’t take anymore!”</i> Her claws dig in deeply enough to make Scylla’s throat convulse around you in pain, though you perceive it as nothing more than another form of massage for your [cock biggest], urging you to release more of the seemingly endless lake of jism within.");
+	outputText("\n\nWinter pleads and moans, <i>\"P-please let me c-cum! I can’t take anymore!\"</i> Her claws dig in deeply enough to make Scylla’s throat convulse around you in pain, though you perceive it as nothing more than another form of massage for your [cock biggest], urging you to release more of the seemingly endless lake of jism within.");
 	outputText("\n\nScylla shakes her head, her eyes abruptly losing their onyx luster, pain and confusion evident on her face. Her horns, however, stay as they are, and you are unable to deny the lust pounding through your veins, grabbing to aid you in wildly humping her face, dumping wad after wad into into her expanding belly. Her hands release Snow’s squirting twat and Winter’s hyper-inflated nutsack at the same time. Their voices pitch into a chorus of orgiastic delight, filling the air with so much passionate screaming that you can’t even pick your own exultations out of the crowd.");
 	outputText("\n\nSnow is the first to whimper and fall away. Her thirty-inch rod pulls out with a tremendously wet-sounding pop, chased by sticky globules of cummy milk. She lays flat on her back, breathing heavily and lewdly pumping her hips as if she were still inside, somehow still pumping thick gouts of her own mousy cream onto her modest breasts. Gone is the swaggering dom. In her place is a lust-drunk mouse, rubbing palmfuls of pearly cream into her fur.");
 	outputText("\n\nYou aren’t far behind her. The moment her tail slips from your sore prostate and out of your [asshole], your [legs] give out, dropping you on a pile of clothes. Your [cock biggest] gives a few feeble squirts before ");
@@ -1849,8 +1850,8 @@ public function openTheDoorToFoursomeWivScyllaAndFurries():void
 
 	outputText("\n\nStill standing, Winter has released Scylla’s tit in order to more aggressive maul at her own, her claws digging in so deeply that she looks about to pierce her own skin. Down below, a agonizingly bloated nutsack trembles rhythmically, contracting with every other beat of her heart, feeding fresh deluges of spermy goodness into the cum-hungry nun’s seemingly bottomless boob. Winter starts to fall back, but Scylla, looking confused but pleased beyond words, topples forward with her, pinning the still-spurting dick-doggie beneath her sloshing weight.");
 	outputText("\n\nFrom where you’re laying, it looks like nun’s lips sealed tight around the husky’s veiny, pulsing knot, effectively tying her to the still-spurting, canine prick. Both twitch and shake, one party’s balls diminishing as the other’s unholy bust expands above a jizz-swollen belly.");
-	outputText("\n\n<i>“Oh gosh! Mercy above!”</i> Scylla cries with each tit-expanding spurt, folding her hands into a prayer, her elbows resting upon the sloshing, tainted mounds. Her horns are receding, perhaps in response to receiving a feeding, perhaps reacting to her invocation of the divine. In either case, she begins praying, sometimes interrupted by her own moans.");
-	outputText("\n\nA look of sublime relief spreads across Winter’s face with each every audible squirt. In time, she releases her jiggling breasts from her self-imposed torment, mouthing, <i>“Thank you.”</i>");
+	outputText("\n\n<i>\"Oh gosh! Mercy above!\"</i> Scylla cries with each tit-expanding spurt, folding her hands into a prayer, her elbows resting upon the sloshing, tainted mounds. Her horns are receding, perhaps in response to receiving a feeding, perhaps reacting to her invocation of the divine. In either case, she begins praying, sometimes interrupted by her own moans.");
+	outputText("\n\nA look of sublime relief spreads across Winter’s face with each every audible squirt. In time, she releases her jiggling breasts from her self-imposed torment, mouthing, <i>\"Thank you.\"</i>");
 	//[Next]
 	player.orgasm();
 	dynStats("lib", .5, "sen", -1);
@@ -1862,10 +1863,10 @@ private function scyllaFurryFoursomePartDues():void
 {
 	clearOutput();
 	scyllaSprite();
-	outputText("A strong hand slaps down on your chest, rousing you from slumber. <i>“Whaa...?”</i>");
-	outputText("\n\n<i>“Wake up, Champion,”</i> Winter commands with an authority that seems entirely out of place after seeing her moaning and begging. <i>“Scylla’s sleeping off her feeding, but she wanted us to get you up - something about having to guard a door or something.”</i>");
-	outputText("\n\nYou nod and stagger up, donning your armor as you do. Snow is around a corner, trying to get dressed over fur stiffened by dried cum. It’s not going well, and when she sees you looking, she blushes crimson enough to see through her white coat. <i>“Uhm... sorry about that.”</i> She clutches at her tail nervously. <i>“I get a little wild when I’m... uh... horny.”</i> Her blush deepens, and she spins around giving you a view of a tiny, three-inch dick between her legs as she does.");
-	outputText("\n\nYou accept her apology and thank Winter for the warning.{ On your way past Snow, you give the mouse-girl’s dick a squeeze beneath her skirt. She whimpers and nearly faints by the time you release her, the beginnings of a gigantic erection diverting nearly all of her blood southward}. <i>“Later girls!”</i>");
+	outputText("A strong hand slaps down on your chest, rousing you from slumber. <i>\"Whaa...?\"</i>");
+	outputText("\n\n<i>\"Wake up, Champion,\"</i> Winter commands with an authority that seems entirely out of place after seeing her moaning and begging. <i>\"Scylla’s sleeping off her feeding, but she wanted us to get you up - something about having to guard a door or something.\"</i>");
+	outputText("\n\nYou nod and stagger up, donning your armor as you do. Snow is around a corner, trying to get dressed over fur stiffened by dried cum. It’s not going well, and when she sees you looking, she blushes crimson enough to see through her white coat. <i>\"Uhm... sorry about that.\"</i> She clutches at her tail nervously. <i>\"I get a little wild when I’m... uh... horny.\"</i> Her blush deepens, and she spins around giving you a view of a tiny, three-inch dick between her legs as she does.");
+	outputText("\n\nYou accept her apology and thank Winter for the warning.{ On your way past Snow, you give the mouse-girl’s dick a squeeze beneath her skirt. She whimpers and nearly faints by the time you release her, the beginnings of a gigantic erection diverting nearly all of her blood southward}. <i>\"Later girls!\"</i>");
 	outputText("\n\nThe door clicks closed behind you, and your groin has a wonderful, tingling kind of warmth in it. Maybe you’ll catch them for another three-way feeding soon.");
 	if(player.cumMultiplier < 19990) player.cumMultiplier += 1 + rand(5);
 	if(player.balls > 0 && player.ballSize < 30) player.ballSize++;

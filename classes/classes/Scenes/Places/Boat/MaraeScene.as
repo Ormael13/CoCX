@@ -6,6 +6,7 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.EventParser;
+import classes.display.SpriteDb;
 
 public class MaraeScene extends AbstractBoatContent implements TimeAwareInterface {
 
@@ -42,7 +43,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 		//End of Interface Implementation
 
 public function encounterMarae():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	outputText(images.showImage("marae-first-encounter"));
 	outputText("Like a hidden emerald jewel, a small island appears in the distance.  You wager that you're somewhere near the center of this lake.  How coincidental.   You row closer, eager to get out of the boat and stretch your [legs].  The rowboat grounds itself in the moist earth of the island, coming to a dead stop.   You climb out, noting that this island is little more than a raised mound of earth and grass, with a small tree perched atop its apex.  ");
 	//Dungeon operational
@@ -52,7 +53,7 @@ public function encounterMarae():void {
 			flags[kFLAGS.MET_MARAE] = 1;
 			flags[kFLAGS.MARAE_ISLAND] = 1;
 			outputText("You approach the tree and note that its bark is unusually smooth.  Every leaf of the tree is particularly vibrant, bright green with life and color.   You reach out to touch the bark and circle around it, noting a complete lack of knots or discoloration.  As you finish the circle, you are surprised to see the silhouette of a woman growing from the bark.  The transformation stops, exposing the front half a woman from the waist up.   You give a start when she opens her eyes – revealing totally white irises, the only part of her NOT textured with bark.\n\n");
-			if(player.cor > 66 + player.corruptionTolerance() && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) outputText("The woman bellows, \"<i>Begone demon.  You tread on the precipice of damnation.</i>\"  The tree's eyes flash, and you find yourself rowing back to camp.  The compulsion wears off in time, making you wonder just what that tree-woman was!");
+			if(player.cor > 66 + player.corruptionTolerance && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) outputText("The woman bellows, \"<i>Begone demon.  You tread on the precipice of damnation.</i>\"  The tree's eyes flash, and you find yourself rowing back to camp.  The compulsion wears off in time, making you wonder just what that tree-woman was!");
 			//Explain the dungeon scenario
 			else {
 				flags[kFLAGS.MARAE_QUEST_START] = 1;
@@ -79,7 +80,7 @@ public function encounterMarae():void {
 		//Second meeting
 		else {
 			outputText("You approach Marae's tree, watching the goddess flow out of the tree's bark as if it was made of liquid.  Just as before, she appears as the top half of a woman, naked from the waist up, with her back merging into the tree's trunk.\n\n");
-			if(player.cor > 66 + player.corruptionTolerance() && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
+			if(player.cor > 66 + player.corruptionTolerance && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
 				outputText("She bellows in rage, \"<i>I told you, begone!</i>\"\n\nYou turn tail and head back to your boat, knowing you cannot compete with her power directly.");
 				if (player.level >= 30) outputText(" Of course, you could probably try to overthrow her.");
 				doNext(camp.returnToCampUseOneHour);
@@ -158,7 +159,7 @@ public function encounterMarae():void {
 }
 
 public function alraunezeMe():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	outputText(images.showImage("marae-first-encounter"));
 	outputText("For some weird reason, you feel a growing need to visit Marae. Perhaps it’s a natural calling for plant morphs like yourself, tuned to the earth's voice as you have become, or perhaps there is a greater calling to it. Perhaps it’s just that getting into the good graces of the local plant goddess while being a plant yourself is common sense. You use the boat as usual and row to the island where Marae resides. It doesn’t take long for the goddess to notice your presence.\n\n");
 	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) {
@@ -238,53 +239,28 @@ private function alraunezeMeYes0():void {
 		outputText("<b>(New Perk Gained: Marae's Gift – Profractory)</b>\n");
 		player.createPerk(PerkLib.MaraesGiftProfractory,0,0,0,0);
 	}
-	if (player.cocks.length == 0) {
-		if (player.balls > 0) player.balls = 0;
-		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-		player.cocks[0].cockType = CockTypesEnum.STAMEN;
-		player.cocks[1].cockType = CockTypesEnum.STAMEN;
-		player.cocks[2].cockType = CockTypesEnum.STAMEN;
-		player.cocks[3].cockType = CockTypesEnum.STAMEN;
-		player.cocks[4].cockType = CockTypesEnum.STAMEN;
-		player.cocks[5].cockType = CockTypesEnum.STAMEN;
-		player.cocks[6].cockType = CockTypesEnum.STAMEN;
-		player.cocks[7].cockType = CockTypesEnum.STAMEN;
-		player.cocks[8].cockType = CockTypesEnum.STAMEN;
-		player.cocks[9].cockType = CockTypesEnum.STAMEN;
-	}
-	if (player.cocks.length > 0) {
-		player.killCocks(-1);
-		if (player.balls > 0) player.balls = 0;
-		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-		player.cocks[0].cockType = CockTypesEnum.STAMEN;
-		player.cocks[1].cockType = CockTypesEnum.STAMEN;
-		player.cocks[2].cockType = CockTypesEnum.STAMEN;
-		player.cocks[3].cockType = CockTypesEnum.STAMEN;
-		player.cocks[4].cockType = CockTypesEnum.STAMEN;
-		player.cocks[5].cockType = CockTypesEnum.STAMEN;
-		player.cocks[6].cockType = CockTypesEnum.STAMEN;
-		player.cocks[7].cockType = CockTypesEnum.STAMEN;
-		player.cocks[8].cockType = CockTypesEnum.STAMEN;
-		player.cocks[9].cockType = CockTypesEnum.STAMEN;
-	}
+	if (player.cocks.length > 0) player.killCocks(-1);
+	if (player.balls > 0) player.balls = 0;
+	player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+	player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+	player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+	player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+	player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+	player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+	player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+	player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+	player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+	player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+	player.cocks[0].cockType = CockTypesEnum.STAMEN;
+	player.cocks[1].cockType = CockTypesEnum.STAMEN;
+	player.cocks[2].cockType = CockTypesEnum.STAMEN;
+	player.cocks[3].cockType = CockTypesEnum.STAMEN;
+	player.cocks[4].cockType = CockTypesEnum.STAMEN;
+	player.cocks[5].cockType = CockTypesEnum.STAMEN;
+	player.cocks[6].cockType = CockTypesEnum.STAMEN;
+	player.cocks[7].cockType = CockTypesEnum.STAMEN;
+	player.cocks[8].cockType = CockTypesEnum.STAMEN;
+	player.cocks[9].cockType = CockTypesEnum.STAMEN;
 	if (!player.hasStatusEffect(StatusEffects.AlrauneFlower)) player.createStatusEffect(StatusEffects.AlrauneFlower,0,0,0,0);
 	if (player.wings.type == Wings.PLANT) player.wings.type = Wings.NONE;
 	player.lowerBody = LowerBody.PLANT_FLOWER;
@@ -348,7 +324,7 @@ public function winAgainstMarae():void {
 	clearOutput();
 	outputText(images.showImage("marae-defeated"));
 	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-		outputText("\"<i>NO! How can a mortal defeat me?! That's IMPOSSIBLE!</i>\" Marae yells. You tell her that just because she's a goddess doesn't mean a mortal can't defeat her.");
+		outputText("\"<i>NO! How can a mortal defeat me?! That's IMPOSSIBLE!</i>\" Marae yells. All gods are fallible, even a determined mortal can stand against something like her. It's time you slay this one.");
 		if (silly()) outputText("\n\n<b>Did you just punch out Cthulhu? Or in this case, Marae?</b>\n\n");
 		if (player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasPerk(PerkLib.FireLord) || player.hasPerk(PerkLib.Hellfire) || player.hasPerk(PerkLib.DragonFireBreath)) outputText("You summon your magical fire and finish off Marae for the last time. You can hear her screaming as she's withering and shriveling up. While she's on fire, you turn your attention elsewhere.");
 		else outputText("You raise your [weapon] and finish off Marae at last. The corrupted goddess is no more. All the tentacles shrivel up. Afterwards, you turn your attention elsewhere.");
@@ -377,36 +353,9 @@ public function winAgainstMarae():void {
 		inventory.takeItem(useables.DBAPLAT, camp.returnToCampUseOneHour);
 	}
 }
-public function winAgainstMarae2ndRound():void {
-	clearOutput();
-	outputText(images.showImage("marae-defeated"));
-	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-
-	}
-	else {
-
-	}
-}
-public function winAgainstMarae3rdRound():void {
-	clearOutput();
-	outputText(images.showImage("marae-defeated"));
-	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-		if (player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasPerk(PerkLib.FireLord) || player.hasPerk(PerkLib.Hellfire) || player.hasPerk(PerkLib.DragonFireBreath)) outputText("You summon your magical fire and finish off Marae for the last time. You can hear her screaming as she's withering and shriveling up. While she's on fire, you turn your attention elsewhere.");
-		else outputText("You raise your [weapon] and finish off Marae at last. The corrupted goddess is no more. All the tentacles shrivel up and die. Afterwards, you turn your attention elsewhere.");
-		if (!player.hasKeyItem("Marae's Lethicite") >= 0) {
-			outputText("\n\nSomething shiny catches your eye. Clearly, this has to be Marae's lethicite!");
-			outputText("\n<b>(Key Item Gained: Marae's Lethicite!)</b>");
-			player.createKeyItem("Marae's Lethicite", 3, 0, 0, 0);
-		}
-		outputText("\n\nAfter the death of a corrupted physical goddess, you see something odd. There is a pile of intact shards of bark. They looks large and thick enough to be workable. You give it an experiment punch. ");
-	}
-	else {
-
-	}
-}
 
 private function maraeBadEnd():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	clearOutput();
 	outputText(images.showImage("marae-bad-end"));
 	if(flags[kFLAGS.MET_MARAE_CORRUPTED] <= 0) outputText("The goddess flows out of the tree, stepping away from it as a living woman, curvy and nude.\n\n");
@@ -441,10 +390,10 @@ private function maraeBadEnd():void {
 }
 
 private function maraeStealLethicite(deliberate:Boolean = false):void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	clearOutput();
 	//(SUCCESS)
-	if ((player.spe > 35 && (rand(player.spe / 3 + 30) > 20) || player.spe > 35 && player.findPerk(PerkLib.Evade) >= 0 && rand(3) < 2) && !deliberate) {
+	if ((player.spe > 35 && (rand(player.spe / 3 + 30) > 20) || player.spe > 35 && player.hasPerk(PerkLib.Evade) && rand(3) < 2) && !deliberate) {
 		outputText("You dart to the side, diving into a roll that brings you up behind the tree.  You evade the gauntlet of grabbing tentacles that hang from the branches, snatch the large gem in both arms and run for the beach.  You do not hear the sounds of pursuit, only a disappointed sigh.");
 		player.createKeyItem("Marae's Lethicite", 3, 0, 0, 0);
 		doNext(camp.returnToCampUseOneHour);
@@ -477,7 +426,7 @@ private function maraeStealLethicite(deliberate:Boolean = false):void {
 			outputText("You feel warm, enclosed in comfort and pleasure.  Is this heaven?  No, your head is throbbing and your eyes are closed... you open them and discover you're still lying at the base of the tree.  That greedy tentacle is still locked around your [cock] pinning it in the throes of orgasm.  You watch thick bulges of cum pump up the tentacle, evidence of a truly garguantuan fluid output.  It goes on and on, and you realize the pleasure ought to drive you mad.\n\n");
 			outputText("Marae steps into your field of view, and pulls the tentacle free.  Your [cock] twitches pitifully, blasting a few massive loads onto your belly as your orgasm withers and dies from lack of stimulation.\n\n");
 			outputText("\"<i>Sorry about the pain, I had to tweak your body to make you a true breeder.  You can go now stud.  I expect the monsters ought to worry about you now, or they'll all have dripping twats and swollen bellies,</i>\" apologizes Marae.  She turns away from you, returning to the embrace of her tree's tentacles, sinking into debauchery.  You stagger into your boat and row away, oblivious to the stream to pre-cum dripping from your "+multiCockDescript()+".");
-			if (player.findPerk(PerkLib.MaraesGiftStud) < 0) {
+			if (!player.hasPerk(PerkLib.MaraesGiftStud)) {
 				outputText("<b>(New Perk Gained: Marae's Gift – Stud)</b>");
 				player.createPerk(PerkLib.MaraesGiftStud,0,0,0,0);
 			}
@@ -497,7 +446,7 @@ private function maraeStealLethicite(deliberate:Boolean = false):void {
 			outputText("Marae winks, \"<i>Sorry about making you look so pregnant my dear, it's a necessary part of the process.  All that sloshing seed is going to flow right into your tender little mortal ovaries, and remake them.  You'll be so fertile just looking at a hard cock could knock you up!</i>\"\n\n");
 			outputText("She giggles at your expression of horror, \"<i>No, not literally, but it won't take much to make you a mommy, and you'll find the gestation to be quite a bit... shorter.  Now get out of here before I change my mind and lock in an orgasm for the rest of your life.</i>\"\n\n");
 			outputText("You are dropped from the tree, and with little choice, you waddle to your boat, doing your best to cover up your violated " + vaginaDescript(0) + ".");
-			if (player.findPerk(PerkLib.MaraesGiftFertility) < 0) {
+			if (!player.hasPerk(PerkLib.MaraesGiftFertility)) {
 				outputText("<b>(New Perk Gained: Marae's Gift – Fertility)</b>");
 				player.createPerk(PerkLib.MaraesGiftFertility,0,0,0,0);
 			}
@@ -507,7 +456,7 @@ private function maraeStealLethicite(deliberate:Boolean = false):void {
 }
 
 public function level2MaraeEncounter():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] = 1;
 	clearOutput();
 	outputText(images.showImage("marae-second-encounter"));
@@ -533,7 +482,7 @@ public function level2MaraeEncounter():void {
 		outputText("Welcome back, sneak-thief.  What kind of " + player.mf("gentleman","lady") + " is offered sex and then ransacks a god's soul?  Honestly, that right-right theeeeeree-oh yeah right there-is true depravity.</i>");
 	}
 	//(FAIL-STOLE)
-	else if(player.findPerk(PerkLib.MaraesGiftStud) >= 0 || player.findPerk(PerkLib.MaraesGiftFertility) >= 0) {
+	else if(player.hasPerk(PerkLib.MaraesGiftStud) || player.hasPerk(PerkLib.MaraesGiftFertility)) {
 		outputText("Hey there [name].  I didn't think I'd manage to snag you again so soon.  Are you enjoying my gifts?  I've been feeling kind of lonely without anyone around here to play with.</i>");
 	}
 	//(Left Like a Bitch)
@@ -543,7 +492,7 @@ public function level2MaraeEncounter():void {
 	outputText("\"\n\n");
 
 	outputText("Featureless white irises glare at you from the goddess' lust-lidded eyes.  She commands you, \"<i>Come here.  It's time for a ");
-	if(player.findPerk(PerkLib.MaraesGiftFertility) >= 0 || player.findPerk(PerkLib.MaraesGiftStud) >= 0) outputText("second ");
+	if(player.hasPerk(PerkLib.MaraesGiftFertility) || player.hasPerk(PerkLib.MaraesGiftStud)) outputText("second ");
 	outputText("dose of Marae's tender affections.</i>\"\n\n");
 	//Incase something breaks
 	doNext(playerMenu);
@@ -561,7 +510,7 @@ public function level2MaraeEncounter():void {
 }
 
 private function MaraeIIStageII():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	clearOutput();
 	outputText(images.showImage("marae-second-encounter-pt-two"));
 	flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] = 2;
@@ -655,7 +604,7 @@ private function MaraeIIStageII():void {
 		outputText("You swoon, your head buzzing with desire for more of this buzzing goddess' embrace.  The urge to kneel before her and worship her cunt rocks you to the core, blasting away the last of your feeble resistance, but before you can do so, Marae grabs you by the chin and commands, \"<i>No my child.  You can serve me better by breeding.</i>\"  Her fingers pull apart the petals of her flowery fuck-hole while she continues, \"<i>Go ahead, put it inside.  I'll show you how to practice the new faith of Marae.</i>\"\n\n");
 
 		outputText("She's easy to push down into the soft grasses of the island, and her legs part to allow you better access.  Your [cock] doesn't need to be told what to do, and it slips into her waiting wetness as if it was made for her.  ");
-		if(player.cocks[0].cockThickness > 5 || player.cockArea(0) > 100) outputText("With how big you are, there's no way it should be able to fit, but her body isn't even distorted by your girth.  Perhaps she changed you to fit her?  You pull back and your thickness seems unchanged.  You shake your head to clear the unwelcome thoughts and ram yourself back into her.  Fucking is what's important.  ");
+		if(player.cocks[0].cockThickness > 5 || player.biggestCockArea() > 100) outputText("With how big you are, there's no way it should be able to fit, but her body isn't even distorted by your girth.  Perhaps she changed you to fit her?  You pull back and your thickness seems unchanged.  You shake your head to clear the unwelcome thoughts and ram yourself back into her.  Fucking is what's important.  ");
 		else outputText("She feels perfect.  A velvet vice of hot, slippery wetness clutches tightly around your [cock].  It almost feels like it's actually gripping you, cradling your cock in her ambrosia-slicked box.");
 		if(player.cockTotal() > 1) {
 			if(player.cockTotal() > 2) outputText("  Another ");
@@ -703,7 +652,7 @@ private function MaraeIIStageII():void {
 }
 
 private function MaraePt2RoundIIIPrizes():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	clearOutput();
 	//[EPILOGUE]
 	//[Dudes]
@@ -711,18 +660,18 @@ private function MaraePt2RoundIIIPrizes():void {
 		outputText("You awaken in the midst of a powerful orgasm.  Jism boils out of " + sMultiCockDesc() + ", pumping into the tight, sucking tentacle-hole.  Your eyes open wider, and your head clears while you rock your hips in bliss.  You're hanging upside down, suspended in the tentacle tree!  Marae isn't far from you, and she's busy deep-throating the fattest tentacle you've seen while another pair are working her openings.  She turns to you, aware of your wakefulness, and removes the oral intruder, though it manages to squirt a layer of spunk into her face in defiance.   The goddess smirks and slaps it, scolding it before she speaks, \"<i>");
 		//(FORK STUD vs NO STUD)
 		//(STUD)
-		if(player.findPerk(PerkLib.MaraesGiftStud) >= 0) outputText("Well, I see my gift is working out quite well for you, isn't it?  That's excellent.  It was an incomplete gift given by an incomplete goddess, but now that I've gotten my hands on you again, I was able to fix it.  You'll build up cum three times as fast as before, no more waiting for days just to build up a huge load for all the horny girls out there!</i>\"  ");
+		if(player.hasPerk(PerkLib.MaraesGiftStud)) outputText("Well, I see my gift is working out quite well for you, isn't it?  That's excellent.  It was an incomplete gift given by an incomplete goddess, but now that I've gotten my hands on you again, I was able to fix it.  You'll build up cum three times as fast as before, no more waiting for days just to build up a huge load for all the horny girls out there!</i>\"  ");
 		//(NON STUD)
 		else outputText("You might be a little sore.  I did some work to make sure you'll be a perfect breeding stud for me.  No tiny cum-shots for you!  You'll squirt out enough to knock up anyone, and I even touched up your seed so it'll get through most contraceptives.  Aren't I the nicest?</i>\"  ");
 		//(CONTINUED)
 		outputText("Her speech is broken by pauses for her to lick up the goo and swallow it, but still perfectly intelligible.  The entire time she was speaking, you were trapped in orgasm, milked by her tree with unthinking intensity.\n\n");
 
 		outputText("Breathless and panting, you give Marae a nod of thanks as her tentacles lower you back towards your equipment.  They plant you on shaky [feet] and uncoil slowly, stroking your body as they depart.  They must like you.  You get dressed in a hurry, but neither Marae nor the tree are paying you any attention any more.   The boat isn't far, and as you're climbing into it the goddess calls out her goodbyes, \"<i>Thanks for visiting and giving my tree so much of your sperm!  Once its fruit is ready I might come plant one at your camp!  Bye now, and don't forget to knock up all the prettiest girls!</i>\"\n\n");
-		if(player.findPerk(PerkLib.MaraesGiftStud) >= 0 && player.findPerk(PerkLib.MaraesGiftProfractory) < 0) {
+		if(player.hasPerk(PerkLib.MaraesGiftStud) && !player.hasPerk(PerkLib.MaraesGiftProfractory)) {
 			outputText("<b>(New Perk Gained: Marae's Gift – Profractory)</b>");
 			player.createPerk(PerkLib.MaraesGiftProfractory,0,0,0,0);
 		}
-		else if (player.findPerk(PerkLib.MaraesGiftStud) < 0) {
+		else if (!player.hasPerk(PerkLib.MaraesGiftStud)) {
 			outputText("<b>(New Perk Gained: Marae's Gift - Stud)</b>");
 			player.createPerk(PerkLib.MaraesGiftStud,0,0,0,0);
 		}
@@ -731,7 +680,7 @@ private function MaraePt2RoundIIIPrizes():void {
 	else if(player.gender == 2) {
 		outputText("You awaken in the midst of a powerful orgasm.   Jism is pumping into your clenching birth-canal, and you can feel it worming its way into your over-packed womb.  Your eyes open wider as the pleasure brings you to full wakefulness.  You're hanging upside down, suspended in the tentacle tree!  Marae isn't far from you, and she's busy deep-throating the fattest tentacle you've seen while another pair are working her openings.  She turns to you, aware of your wakefulness, and removes the oral intruder, though it manages to squirt a layer of spunk into her face in defiance.   The goddess smirks and slaps it, scolding it before she speaks, \"<i>");
 		//(BREEDER)
-		if(player.findPerk(PerkLib.MaraesGiftFertility) >= 0) {
+		if(player.hasPerk(PerkLib.MaraesGiftFertility)) {
 			outputText("Well, how do you like being my prize breeder?  Your womb is a thing of beauty.  Trust me, I remade it.  I was actually at a loss as to how to improve it, so I decided to take a peek at your other hole.  It was kind of dry, and I didn't want guys with multiple dicks to have to hump such a dry, uncomfortable asshole.  So now it's nice and wet for them!</i>\"\n\n");
 
 			outputText("Your eyes widen in shock.  You gasp, \"<i>You did WHAT!?</i>\"\n\n");
@@ -746,12 +695,12 @@ private function MaraePt2RoundIIIPrizes():void {
 
 		outputText("Breathless and panting, you give Marae a confused nod as her tentacles lower you back towards your equipment.  They plant you on shaky [feet] and uncoil slowly, stroking your body as they depart.  They must like you.  You get dressed in a hurry, but neither Marae nor the tree are paying you any attention any more.   The boat isn't far, and as you're climbing into it the goddess calls out her goodbyes, \"<i>Thanks for visiting and letting my little friend try out your pussy!  Once I get it to flower I might swing by and plant one for you at your camp!  Bye now, and don't forget to have lots of babies!</i>\"\n\n");
 
-		if(player.findPerk(PerkLib.MaraesGiftFertility) >= 0 && player.findPerk(PerkLib.MaraesGiftButtslut) < 0) {
+		if(player.hasPerk(PerkLib.MaraesGiftFertility) && !player.hasPerk(PerkLib.MaraesGiftButtslut)) {
 			outputText("<b>(New Perk Gained: Marae's Gift – Buttslut)</b>");
 			player.createPerk(PerkLib.MaraesGiftButtslut,0,0,0,0);
 			player.ass.analWetness = 2;
 		}
-		else if (player.findPerk(PerkLib.MaraesGiftFertility) < 0) {
+		else if (!player.hasPerk(PerkLib.MaraesGiftFertility)) {
 			outputText("<b>(New Perk Gained: Marae's Gift – Fertility)</b>");
 			player.createPerk(PerkLib.MaraesGiftFertility,0,0,0,0);
 		}
@@ -761,59 +710,59 @@ private function MaraePt2RoundIIIPrizes():void {
 		outputText("You awaken in the midst of a powerful orgasm.  Jism boils out of " + sMultiCockDesc() + ", pumping into the tight, sucking tentacle-hole.  Plant-spooge is pumping into your clenching birth-canal, and you can feel it worming its way into your over-packed womb.  Your eyes open wider, and your head clears while you rock your hips in bliss.  You're hanging upside down, suspended in the tentacle tree!  Marae isn't far from you, and she's busy deep-throating the fattest tentacle you've seen while another pair are working her openings.  She turns to you, aware of your wakefulness, and removes the oral intruder, though it manages to squirt a layer of spunk into her face in defiance.   The goddess smirks and slaps it, scolding it before she speaks, \"<i>");
 
 		//(HAZ NEITHER)
-		if(player.findPerk(PerkLib.MaraesGiftFertility) < 0 && player.findPerk(PerkLib.MaraesGiftStud) < 0) {
+		if(!player.hasPerk(PerkLib.MaraesGiftFertility) && !player.hasPerk(PerkLib.MaraesGiftStud)) {
 			//(RANDOM 1)
-			if(rand(2) == 0 && player.findPerk(PerkLib.MaraesGiftFertility) < 0) {
+			if(rand(2) == 0 && !player.hasPerk(PerkLib.MaraesGiftFertility)) {
 				outputText("You might feel a little sore.  I gave your little womb a makeover to make sure you'll be nice and fertile for all the boys out there.  You're going to serve me so well.  So many died fighting the demons, and you'll be popping out kids from every dick that gets anywhere near your little birth-hole.</i>\"  ");
 				player.createPerk(PerkLib.MaraesGiftFertility,0,0,0,0);
 
 			}
 			//(RANDOM 2)
-			else if (player.findPerk(PerkLib.MaraesGiftStud) < 0) {
+			else if (!player.hasPerk(PerkLib.MaraesGiftStud)) {
 				outputText("You might be a little sore.  I did some work to make sure you'll be a perfect breeding stud for me.  No tiny cum-shots for you!  You'll squirt out enough to knock up anyone, and I even touched up your seed so it'll get through most contraceptives.  Aren't I the nicest?</i>\"  ");
 				player.createPerk(PerkLib.MaraesGiftStud,0,0,0,0);
 			}
 			outputText("The entire time she was speaking, you were trapped in orgasm, milked by her tree with unthinking intensity.\n\n");
 
 			outputText("Breathless and panting, you give Marae a nod of thanks as her tentacles lower you back towards your equipment.  They plant you on shaky [feet] and uncoil slowly, stroking your body as they depart.  They must like you.  You get dressed in a hurry, but neither Marae nor the tree are paying you any attention any more.   The boat isn't far, and as you're climbing into it the goddess calls out her goodbyes, \"<i>Thanks for visiting and giving my tree so much of your sperm!  Once its fruit is ready I might come plant one at your camp!  Bye now, and don't forget to have lots of sex!</i>\"\n\n");
-			if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0) {
+			if (player.hasPerk(PerkLib.MaraesGiftFertility)) {
 				outputText("<b>(New Perk Gained: Marae's Gift - Fertility)</b>");
 			}
-			else if (player.findPerk(PerkLib.MaraesGiftStud) >= 0) {
+			else if (player.hasPerk(PerkLib.MaraesGiftStud)) {
 				outputText("<b>New Perk Gained: Marae's Gift - Stud)</b>");
 			}
 		}
 			//Has both perks
-			else if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0 && player.findPerk(PerkLib.MaraesGiftStud) >= 0) {
-				if (player.findPerk(PerkLib.MaraesGiftStud) >= 0 && player.findPerk(PerkLib.MaraesGiftProfractory) < 0) {
+			else if (player.hasPerk(PerkLib.MaraesGiftFertility) && player.hasPerk(PerkLib.MaraesGiftStud)) {
+				if (player.hasPerk(PerkLib.MaraesGiftStud) && !player.hasPerk(PerkLib.MaraesGiftProfractory)) {
 					outputText("<b>(New Perk Gained: Marae's Gift – Profractory)</b>");
 					player.createPerk(PerkLib.MaraesGiftProfractory, 0, 0, 0, 0);
 				}
-				else if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0 && player.findPerk(PerkLib.MaraesGiftButtslut) < 0) {
+				else if (player.hasPerk(PerkLib.MaraesGiftFertility) && !player.hasPerk(PerkLib.MaraesGiftButtslut)) {
 					outputText("<b>(New Perk Gained: Marae's Gift – Buttslut)</b>");
 					player.createPerk(PerkLib.MaraesGiftButtslut, 0, 0, 0, 0);
 				}
 			}
 		//(HAZ BREEDER)
-			else if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0) {
+			else if (player.hasPerk(PerkLib.MaraesGiftFertility)) {
 			outputText("I can't believe I didn't think to do this last time!  I mean, I spent so much time making you a great baby-birther that I didn't bother to make you a stud too!  I fixed that this time though – you'll be squirting huge loads that are sure to knock up any of the pretty girls out there.  It'll even punch its way through most birth-controlling herbs.  Aren't I nice?</i>\"  ");
 
 			outputText("The entire time she was speaking, you were trapped in orgasm, milked by her tree with unthinking intensity.\n\n");
 
 			outputText("Breathless and panting, you give Marae a nod of thanks as her tentacles lower you back towards your equipment.  They plant you on shaky [feet] and uncoil slowly, stroking your body as they depart.  They must like you.  You get dressed in a hurry, but neither Marae nor the tree are paying you any attention any more.   The boat isn't far, and as you're climbing into it the goddess calls out her goodbyes, \"<i>Thanks for visiting and giving my tree so much of your sperm!  Once its fruit is ready I might come plant one at your camp!  Bye now, and don't forget to have lots of sex!</i>\"\n\n");
-			if (player.findPerk(PerkLib.MaraesGiftStud) < 0) {
+			if (!player.hasPerk(PerkLib.MaraesGiftStud)) {
 				player.createPerk(PerkLib.MaraesGiftStud, 0, 0, 0, 0);
 				outputText("<b>(New Perk Gained: Marae's Gift - Stud)</b>");
 			}
 		}
 		//(HAZ STUD)
-			else if (player.findPerk(PerkLib.MaraesGiftStud) >= 0) {
+			else if (player.hasPerk(PerkLib.MaraesGiftStud)) {
 			outputText("I can't believe I didn't think of this last time!  I made you such a great stud that I didn't think to make you just as good at popping out your own kids!  Well I went ahead and fixed that while you were sleeping.  Your womb is nice and fertile, and you'll pop out kids a LOT quicker than before.  We'll be repopulating everything in Mareth in no time!  Just be sure to knock up the girls and let the boys fuck your pussy, okay?</i>\"  ");
 
 			outputText("The entire time she was speaking, you were trapped in orgasm, milked by her tree with unthinking intensity.\n\n");
 
 			outputText("Breathless and panting, you give Marae a nod of thanks as her tentacles lower you back towards your equipment.  They plant you on shaky [feet] and uncoil slowly, stroking your body as they depart.  They must like you.  You get dressed in a hurry, but neither Marae or the tree are paying you any attention any more.   The boat isn't far, and as you're climbing into it the goddess calls out her goodbyes, \"<i>Thanks for visiting and giving my tree so much of your sperm!  Once its fruit is ready I might come plant one at your camp!  Bye now, and don't forget to have lots of sex!</i>\"\n\n");
-			if (player.findPerk(PerkLib.MaraesGiftFertility) < 0) {
+			if (!player.hasPerk(PerkLib.MaraesGiftFertility)) {
 				player.createPerk(PerkLib.MaraesGiftFertility, 0, 0, 0, 0);
 				outputText("<b>(New Perk Gained: Marae's Gift - Fertility)</b>");
 			}
@@ -824,7 +773,7 @@ private function MaraePt2RoundIIIPrizes():void {
 }
 
 private function MaraeIIFlyAway():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	clearOutput();
 	outputText("You launch into the air and beat your wings, taking to the skies.  The tentacle-tree lashes at you, but comes up short.  You've escaped!  Something large whooshes by, and you glance up to see your boat sailing past you.  She must have hurled it at you!  It lands with a splash near the mooring, somehow surviving the impact.  You dive down and drag it back to the dock before you return to camp.  That was close!");
 	doNext(camp.returnToCampUseOneHour);
@@ -855,14 +804,15 @@ private function runFromPervertedGoddess():void {
 }
 
 public function talkToMaraeAboutMinervaPurification():void {
-	spriteSelect(40);
+    clearOutput();
+	spriteSelect(SpriteDb.s_marae);
 	outputText("As you step into the boat and sail it out into the depths of the lake, you focus on trying to find Marae. She may be Minerva’s best chance of being healed. Thankfully, luck is with you and you soon find yourself pulling ashore at the lushly forested island where the nature goddess dwells. In response to your presence, Marae herself materializes from the vegetation, looking at you in a concerned manner.");
 
 	outputText("\n\n\"<i>You return to my island, champion? What brings you here? Is there something troubling you?</i>\" the deity gently asks you.");
 
-	outputText("\n\nMaking whatever gesture of respect feels most appropriate to you, you explain to her about Minerva and her condition, elaborating that you have come to ask Marae if she can possibly help you to cure her.");
+	outputText("\n\nMaking a gesture of respect, you explain to her about Minerva and her condition, elaborating that you have come to ask Marae if she can possibly help you to cure her.");
 
-	outputText("\n\nAt this, Marae’s expression falls. \"<i>I am sorry, champion, but I cannot do what you ask.</i>\" When you demand to know why, she quickly explains herself. \"<i>It is not that I am ungrateful or unwilling, it is that I am unable. Though you have stopped the assault on my soul by the demon factory, my powers are still vastly diminished from what they were. I fear I would not be able to help her...</i>\" Marae suddenly trails off, looking thoughtful, then gives you an intent expression. \"<i>Explain to me again, the ruins in which you say your friend has been living?</i>\" she requests.");
+	outputText("\n\nAt this, Marae’s expression falls. \"<i>I am sorry, champion, but I cannot do what you ask.</i>\" When you demand to know why, she quickly explains herself. \"<i>It is not that I am ungrateful or unwilling, it is that I am unable. Though you have stopped the assault on my soul by the demon factory, my powers are still vastly diminished from what they were. I fear I would not be able to help her...</i>\" Marae suddenly trails off, looking thoughtful, then gives you an intent expression. \"<i>Explain to me again, in which ruins you say your friend is living?</i>\" she requests.");
 
 	outputText("\n\nPuzzled, you repeat your description, watching with bemusement as Marae’s face lights up. \"<i>I hadn’t dared to hope... a nexus! An untainted nexus, still hidden from the demons! Yes, yes I can help your friend, and you both can help me at the same time!</i>\" she declares joyfully. \"<i>Your friend’s home is a nexus, a place of concentrated holy energies. If I can connect myself to it, I can increase my own powers and help heal her.</i>\" Focusing, she holds her hands only slightly apart from each other as a strange green light begins forming between them. It swells in intensity until you are forced to look away, shielding your eyes. When it fades and you can look back without blinding yourself, you see a gently glowing seed resting between her hands. \"<i>Take this seed, champion, and plant it in the fertile soil at the spring you speak of. Do so and I will be able to help your friend overcome her affliction.</i>\"");
 
@@ -874,7 +824,7 @@ public function talkToMaraeAboutMinervaPurification():void {
 }
 
 public function encounterPureMaraeEndgame():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	clearOutput();
 	outputText("As you step into the boat and sail it out into the depths of the lake, you focus on trying to find Marae. After all, you need a good challenge. Thankfully, luck is with you and you soon find yourself pulling ashore at the lushly forested island where the nature goddess dwells. In response to your presence, Marae herself materializes from the vegetation, looking at you in a concerned manner.");
 	if (flags[kFLAGS.PURE_MARAE_ENDGAME] == 0) {

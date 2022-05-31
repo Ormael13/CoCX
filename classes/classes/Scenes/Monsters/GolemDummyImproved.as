@@ -6,17 +6,11 @@ package classes.Scenes.Monsters
 {
 
 	import classes.*;
-	import classes.internals.*;
-	import classes.CoC;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Dungeons.RiverDungeon;
 	import classes.Scenes.SceneLib;
-	import classes.Scenes.Camp.CampMakeWinions;
 	
 	public class GolemDummyImproved extends AbstractGolem
 	{
-		public var floor1:RiverDungeon = new RiverDungeon();
-		public var campMake:CampMakeWinions = new CampMakeWinions();
 		
 		public function backhand():void {
 			outputText("The golem's visage twists into a grimace of irritation, and it swings its hand at you in a vicious backhand.");
@@ -58,13 +52,13 @@ package classes.Scenes.Monsters
 			}
 			else {
 				if (player.hasStatusEffect(StatusEffects.SoulArena)) SceneLib.combat.finishCombat();
-				else campMake.postFightGolemOptions1();
+				else SceneLib.camp.campMake.postFightGolemOptions1();
 			}
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) floor1.defeatedByAetherGolem();
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) SceneLib.dungeons.riverdungeon.defeatedByAetherGolem();
 			else SceneLib.combat.cleanupAfterCombatImpl();
 		}
 		

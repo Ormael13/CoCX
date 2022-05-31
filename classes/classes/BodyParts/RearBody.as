@@ -87,7 +87,7 @@ public class RearBody extends BodyPart {
 	});
 	public static const METAMORPHIC_GOO: int = 13;
 	EnumValue.add(Types, METAMORPHIC_GOO, "METAMORPHIC_GOO", {
-		name: "metamorphic goo",
+		name: "metamorphic goo rear",
 		appearanceDesc: "Since your body is made of malleable goo you can reshape your form however you want to gain tentacle or any limb or appendage whenever you need one either for combat or for fun."
 	});
 	//public static const thundermantisrearbody: int = 14;//button 0 on 2nd page of metamorph
@@ -149,6 +149,16 @@ public class RearBody extends BodyPart {
 	EnumValue.add(Types, MINDBREAKER, "MINDBREAKER", {
 		name: "Mindbreaker rear",
 		appearanceDesc: "On your back spreads a webbed leather membrane, which from afar may look like a cape."
+	});
+
+	public static const COBRA_HOOD: int = 25;
+	EnumValue.add(Types, COBRA_HOOD, "COBRA_HOOD", {
+		name:"cobra hood",
+		appearanceDescFunc: function(player: *): String {
+			var desc: String = " Behind your hair is a large cobra hood decorated with intimating red triangular patterns.";
+			if (player.faceType == Face.SNAKE_FANGS) desc += " Anyone can tell just from the vibrant colors that you are highly venomous.";
+			return desc;
+		}
 	});
 
 	public function RearBody() {

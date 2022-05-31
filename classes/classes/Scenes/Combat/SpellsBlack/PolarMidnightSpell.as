@@ -8,12 +8,12 @@ import classes.StatusEffects;
 public class PolarMidnightSpell extends AbstractBlackSpell {
 	public function PolarMidnightSpell() {
 		super(
-				"Polar Midnight",
-				"Cause a massive temperature drop which freezes the air solid in an area. Opponents caught in this spell take the cold damage and are stunned for 5 round.  " +
-				"\n<b>Req. 1 turn channeling. Cooldown: 12 turns</b>",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING, TAG_ICE, TAG_AOE]
+			"Polar Midnight",
+			"Cause a massive temperature drop which freezes the air solid in an area. Opponents caught in this spell take the cold damage and are stunned for 5 round.  " +
+			"\n<b>Req. 1 turn channeling. Cooldown: 12 turns</b>",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING, TAG_ICE, TAG_AOE]
 		);
 		baseManaCost = 1250;
 	}
@@ -47,15 +47,19 @@ public class PolarMidnightSpell extends AbstractBlackSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target, false) + " ice damage. "
+		return "~" + calcDamage(target, false, false) + " ice damage. "
 	}
 	
-	public function calcDamage(target:Monster, randomize:Boolean = true):Number {
+	public function calcDamage(target:Monster, randomize:Boolean = true, casting:Boolean = true):Number {
+		var baseDamage:Number = scalingBonusIntelligence(randomize) * 24;
+		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
 		return adjustSpellDamage(
-				scalingBonusIntelligence(randomize) * 24,
+				baseDamage,
 				DamageType.ICE,
 				CAT_SPELL_BLACK,
-				target
+				target,
+                true,
+                casting
 		);
 	}
 	
@@ -66,7 +70,7 @@ public class PolarMidnightSpell extends AbstractBlackSpell {
 		if (display) {
 			outputText("You drain the heat out of the air around your foe, causing its temperature to plummet far below its freezing point in an instant, effectively flash freezing your enemy for \n");
 		}
-		var damage:Number = calcDamage(monster);
+		var damage:Number = calcDamage(monster, true, true);
 		damage = critAndRepeatDamage(display, damage, DamageType.ICE);
 		if (display) {
 			outputText("\n\n[Monster A] [monster name] is encased in a thick layer of ice.\n\n");

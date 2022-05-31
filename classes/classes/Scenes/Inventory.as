@@ -37,7 +37,7 @@ import classes.Scenes.NPCs.MagnoliaFollower;
 use namespace CoC;
 
 	public class Inventory extends BaseContent {
-		private static const inventorySlotName:Array = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"];
+		private static const inventorySlotName:Array = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth"];
 
 		private var itemStorage:Array;
 		private var pearlStorage:Array;
@@ -82,7 +82,7 @@ use namespace CoC;
                 callNext = inventoryCombatHandler; //Player will return to combat after item use
 			}
 			else {
-				spriteSelect(-1);
+				spriteSelect(null);
 				callNext = inventoryMenu; //In camp or in a dungeon player will return to inventory menu after item use
 			}
 			hideMenus();
@@ -105,7 +105,7 @@ use namespace CoC;
 			outputText("<b>Weapon (Range):</b> " + player.weaponRange.name + " (Attack: " + player.weaponRangeAttack + ")");
 			if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") outputText(" (Bow/Crosbow-type weapon)");
 			if (player.weaponRangePerk == "Throwing") outputText(" (Throwing weapon-type weapon)");
-			if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") outputText(" (Firearms-type weapon)");
+			if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Quad Firearms") outputText(" (Firearms-type weapon)");
 			outputText("\n");
 			outputText("<b>Shield:</b> " + player.shield.name + " (Block Rating: " + player.shieldBlock + ")");
 			if (player.shieldPerk == "Large") outputText(" (Large)");
@@ -159,35 +159,7 @@ use namespace CoC;
 					}
 				}
 				addButton(13, "Prev", inventoryMenu, page - 1);
-			}/*
-			if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
-                var miscNieve:Boolean = Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5;
-                var miscHolli:Boolean         = flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 || flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4);
-				if (miscNieve
-					|| miscHolli
-					|| player.hasKeyItem("Dragon Egg") >= 0
-					|| flags[kFLAGS.ANEMONE_KID] > 0
-					|| flags[kFLAGS.ALRAUNE_SEEDS] > 0
-					|| (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 1 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8)) {
-					if (miscNieve) {
-						if (flags[kFLAGS.NIEVE_STAGE] == 1)
-							outputText("\nThere's some odd snow here that you could do something with...\n");
-                        else outputText("\nYou have a snow" + Holidays.nieveMF("man", "woman") + " here that seems like it could use a little something...\n");
-                    }
-					if (player.hasKeyItem("Dragon Egg") >= 0) {
-                        SceneLib.emberScene.emberCampDesc();
-					}
-					if (flags[kFLAGS.ANEMONE_KID] > 0) {
-						SceneLib.anemoneScene.anemoneBarrelDescription();
-					}
-					if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
-						outputText("\nYou have " + flags[kFLAGS.ALRAUNE_SEEDS] + " alraune seeds planted in your garden.");
-						if (flags[kFLAGS.ALRAUNE_GROWING] > 14) outputText(" Some have already grown to adulthood.");
-						outputText("\n");
-					}
-					addButton(13, "Misc.", miscitemsMenu);
-				}
-			}*/
+			}
             if (!CoC.instance.inCombat) {
                 addButton(10, "Unequip/Misc", manageEquipmentmiscitemsMenu);
 				if (player.hasKeyItem("Bag of Cosmos") >= 0) {
@@ -215,7 +187,7 @@ use namespace CoC;
 				callNext = inventoryCombatHandler; //Player will return to combat after item use
 			}
 			else {
-				spriteSelect(-1);
+				spriteSelect(null);
 				callNext = inventoryMenu; //In camp or in a dungeon player will return to inventory menu after item use
 			}
 			hideMenus();
@@ -260,7 +232,7 @@ use namespace CoC;
 				var miscNieve:Boolean = Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5;
                 var miscHolli:Boolean = flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 || flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4);
 				if (miscNieve || miscHolli || player.hasKeyItem("Dragon Egg") >= 0 || (player.hasKeyItem("Rathazul's Purity Elixir") >= 0 && player.perkv1(PerkLib.PurityElixir) < 5)
-					|| flags[kFLAGS.ANEMONE_KID] > 0 || flags[kFLAGS.ALRAUNE_SEEDS] > 0 || (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 1 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8)) {
+					|| flags[kFLAGS.ANEMONE_KID] > 0 || flags[kFLAGS.ALRAUNE_SEEDS] > 0 || (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 0 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8)) {
 					if (miscNieve) {
 						if (flags[kFLAGS.NIEVE_STAGE] == 1)
 							outputText("\nThere's some odd snow here that you could do something with...\n");
@@ -300,10 +272,21 @@ use namespace CoC;
 		}
 
 		private function PurityElixir():void {
-			outputText("You feel something unlock within you as you drink the elixir, some of the veil of corruption being washed out of you as the liquid undo and counteract some of the vile demonic changes your body was afflicted with.");
-			if (player.hasPerk(PerkLib.PurityElixir)) player.addPerkValue(PerkLib.PurityElixir, 1, 1);
-			else player.createPerk(PerkLib.PurityElixir, 1, 0, 0, 0);
-			player.removeKeyItem("Rathazul's Purity Elixir");
+            clearOutput();
+            if (player.getAllMinStats().cor == 0) {
+                outputText("You take out the elixir, but reconsider. ");
+                if (player.cor > 0) outputText("All of your corruption can be removed using simpler methods.");
+                else outputText("You're completely pure!");
+                outputText("\n\nYou decide to leave the elixir for worse times.");
+            }
+            else {
+                outputText("You feel something unlock within you as you drink the elixir, some of the veil of corruption being washed out of you as the liquid undo and counteract some of the vile demonic changes your body was afflicted with.");
+                outputText("\n\n<b>Minimum corruption lowered!</b>");
+                if (player.keyItemvX("Rathazul's Purity Elixir", 1) > 1) player.addKeyValue("Rathazul's Purity Elixir", 1, -1);
+                else player.removeKeyItem("Rathazul's Purity Elixir");
+                if (player.hasPerk(PerkLib.PurityElixir)) player.addPerkValue(PerkLib.PurityElixir, 1, 1);
+                else player.createPerk(PerkLib.PurityElixir, 1, 0, 0, 0);
+            }
 			doNext(inventoryMenu);
 		}
 		
@@ -315,8 +298,11 @@ use namespace CoC;
 			if (player.armor == armors.UHAYOARM) currentArmorSFDrainrate += 240;
 			if (player.armor == armors.HBARMOR) currentArmorSFDrainrate += 180;
 			if (player.vehicles == vehicles.HB_MECH) {
-				/*if (upgrade 1) currentArmorSFDrainrate += ?40?;
-				else */currentArmorSFDrainrate += 60;
+				if (player.hasKeyItem("HB Internal Systems") >= 0) {
+					if (player.keyItemvX("HB Internal Systems", 1) == 2) currentArmorSFDrainrate += 40;
+					else currentArmorSFDrainrate += 50;
+				}
+				else currentArmorSFDrainrate += 60;
 			}
 			maxSFCapacity = 0;
 			if (player.armor == armors.LAYOARM) maxSFCapacity += 1500;
@@ -328,8 +314,14 @@ use namespace CoC;
 			}
 			if (player.upperGarment == undergarments.HBSHIRT) maxSFCapacity += 350;
 			if (player.lowerGarment == undergarments.HBSHORT) maxSFCapacity += 350;
-			if (player.vehicles == vehicles.HB_MECH) maxSFCapacity += 1000;
-			if (player.vehicles == vehicles.HB_MECH) maxSFCapacity += 1000;
+			if (player.vehicles == vehicles.HB_MECH) {
+				maxSFCapacity += 1000;
+				if (player.hasKeyItem("HB Internal Systems") >= 0) {
+					if (player.keyItemvX("HB Internal Systems", 1) == 2) maxSFCapacity += 5000;
+					else maxSFCapacity += 2000;
+				}
+			}
+			//if (player.vehicles == vehicles.HB_MECH) maxSFCapacity += 1000;
 			outputText("Currently used Ayo Armor name: "+player.armorName+"\n\n");
 			outputText("Currently used Ayo Armor soulforce drain rate (per hour): "+currentArmorSFDrainrate+"\n\n");
 			outputText("Soulforce reserves in armor: "+flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR]+" / "+maxSFCapacity+"\n\n");
@@ -474,7 +466,7 @@ use namespace CoC;
 
 		public function BagOfCosmosMenu():void {
 			hideMenus();
-			spriteSelect(-1);
+			spriteSelect(null);
 			menu();
 			addButton(0, "Bag Store", pickItemToPlaceInBagOfCosmos);
 			addButton(1, "Bag Take", pickItemToTakeFromBagOfCosmos);
@@ -483,7 +475,7 @@ use namespace CoC;
 
 		public function SkyPoisonPearlMenu():void {
 			hideMenus();
-			spriteSelect(-1);
+			spriteSelect(null);
 			menu();
 			addButton(0, "Pearl Store 1", pickItemToPlaceInSkyPoisonPearl5).hint("Store item in Sky Poison Pearl (central section).");
 			addButton(5, "Pearl Take 1", pickItemToTakeFromSkyPoisonPearl5).hint("Take item from Sky Poison Pearl (central section).");
@@ -508,6 +500,30 @@ use namespace CoC;
 			addButton(14, "Back", inventoryMenu);
 		}
 
+		public function SkyPoisonPearlMenuv2():void{
+			//clearOutput();
+			hideMenus();
+			spriteSelect(null);
+			var pLvl:int = Math.floor(player.level/6);
+			menu();
+			addButton(0, "Store In", SPPStoreItems).hint("Put your items into the Sky Poison Pearl.");
+			if (player.itemSlots.length == 0 || pLvl * 14 == pearlStorage.length) addButtonDisabled(0, "Store In", "You either don't have anything to store, or can't store any more currently!");
+			addButton(1, "Take out", SPPTakeOut).hint("Take Items out of your Sky Poison Pearl.")
+			if (pearlStorage.length == 0) addButtonDisabled(1, "Take Out", "You have nothing in your Pearl to take out!");
+
+		}
+
+		private function SPPStoreItems():void{
+			clearOutput();
+			outputText("What do you want to put into storage?");
+			var pLvl:int = Math.floor(player.level/6);
+			outputText("You have "+ 14 * pLvl + " slots total, of which " + pearlStorage.length + " slots are used.");
+			menu();
+			pickItemToPlaceInStorage2(placeInSkyPoisonPearl5, allAcceptable, "sky poison pearl", false)
+		}
+
+		private function SPPTakeOut():void{}
+
 		public function stash():void {
 			/*Hacked in cheat to enable shit
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
@@ -515,7 +531,7 @@ use namespace CoC;
 			//REMOVE THE ABOVE BEFORE RELASE ()
 			hideMenus();
 			clearOutput();
-			spriteSelect(-1);
+			spriteSelect(null);
 			menu();
 
 			if (player.hasKeyItem("Camp - Chest") >= 0 || player.hasKeyItem("Camp - Murky Chest") >= 0 || player.hasKeyItem("Camp - Ornate Chest") >= 0) {
@@ -557,7 +573,7 @@ use namespace CoC;
 			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] < 2) {
 			//Weapon Rack
 			if (player.hasKeyItem("Equipment Rack - Weapons") >= 0) {
-				outputText("There's a weapon rack set up here, set up to hold up to nine various weapons.");
+				outputText("There's a weapon rack set up here, able to hold up to nine various weapons.");
 				addButton(7, "W.Rack Put", pickItemToPlaceInWeaponRack);
 				if (weaponRackDescription()) addButton(8, "W.Rack Take", pickItemToTakeFromWeaponRack);
 				outputText("\n\n");
@@ -583,10 +599,11 @@ use namespace CoC;
 		public function warehouse():void {
 			hideMenus();
 			clearOutput();
-			spriteSelect(-1);
+			spriteSelect(null);
 			menu();
-			outputText("You stand inside your warehouse");
-			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) outputText(" looking at the goods stored inside.");
+			outputText("You walk inside your warehouse");
+			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) outputText(", looking at the goods stored inside.");
+            else outputText(".")
 			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4) outputText(" and connected to it medium-sized granary looking at the goods and food stored inside.");
 			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("s and connecting them medium-sized granary looking at the goods and food stored inside.");
 			//Warehouse part 1 and 2
@@ -608,7 +625,7 @@ use namespace CoC;
 			}
 			//Weapon Rack
 			if (player.hasKeyItem("Equipment Rack - Weapons") >= 0) {
-				outputText("There's a weapon rack set up here, set up to hold up to nine various weapons.");
+				outputText("There's a weapon rack set up here, able to hold up to nine various weapons.");
 				addButton(7, "W.Rack Put", pickItemToPlaceInWeaponRack2).hint("Put weapon on the rack.");
 				if (weaponRackDescription()) addButton(8, "W.Rack Take", pickItemToTakeFromWeaponRack2).hint("Take weapon from the rack.");
 				outputText("\n\n");
@@ -726,7 +743,7 @@ use namespace CoC;
 			if (player.hasPerk(PerkLib.StrongBack)) slots++;
 			if (player.hasPerk(PerkLib.StrongBack2)) slots++;
 			if (player.hasPerk(PerkLib.StrongBack3)) slots++;
-			slots += player.keyItemv1("Backpack");
+			if (player.hasKeyItem("Backpack") >= 0) slots += player.keyItemvX("Backpack", 1);
 			//Constrain slots to between 5 and 20.
 			if (slots < 5) slots = 5;
 			if (slots > 20) slots = 20;
@@ -751,7 +768,7 @@ use namespace CoC;
 		//Clear storage slots
 		public function clearStorage():void {
 			//Various Errors preventing action
-			if (itemStorage == null) trace("ERROR: Cannot clear storage because storage does not exist.");
+			if (itemStorage == null) CoC_Settings.error("Cannot clear storage because storage does not exist.");
 			else {
 				trace("Attempted to remove " + itemStorage.length + " storage slots.");
 				itemStorage.splice(0, itemStorage.length);
@@ -760,7 +777,7 @@ use namespace CoC;
 
 		public function clearGearStorage():void {
 			//Various Errors preventing action
-			if (gearStorage == null) trace("ERROR: Cannot clear storage because storage does not exist.");
+			if (gearStorage == null) CoC_Settings.error("Cannot clear storage because storage does not exist.");
 			else {
 				trace("Attempted to remove " + gearStorage.length + " storage slots.");
 				gearStorage.splice(0, gearStorage.length);
@@ -769,7 +786,7 @@ use namespace CoC;
 
 		public function clearPearlStorage():void {
 			//Various Errors preventing action
-			if (pearlStorage == null) trace("ERROR: Cannot clear storage because storage does not exist.");
+			if (pearlStorage == null) CoC_Settings.error("Cannot clear storage because storage does not exist.");
 			else {
 				trace("Attempted to remove " + pearlStorage.length + " storage slots.");
 				pearlStorage.splice(0, pearlStorage.length);
@@ -778,7 +795,7 @@ use namespace CoC;
 
 		public function initializeGearStorage():void {
 			//Completely empty storage array
-			if (gearStorage == null) trace("ERROR: Cannot clear gearStorage because storage does not exist.");
+			if (gearStorage == null) CoC_Settings.error("Cannot clear gearStorage because storage does not exist.");
 			else {
 				trace("Attempted to remove " + gearStorage.length + " gearStorage slots.");
 				gearStorage.splice(0, gearStorage.length);
@@ -793,7 +810,7 @@ use namespace CoC;
 
 		public function initializePearlStorage():void {
 			//Completely empty storage array
-			if (pearlStorage == null) trace("ERROR: Cannot clear pearlStorage because storage does not exist.");
+			if (pearlStorage == null) CoC_Settings.error("Cannot clear pearlStorage because storage does not exist.");
 			else {
 				trace("Attempted to remove " + pearlStorage.length + " pearlStorage slots.");
 				pearlStorage.splice(0, pearlStorage.length);
@@ -826,11 +843,11 @@ use namespace CoC;
 							+ "Do you use it, or destroy it?\n\n");
 					menu();	//Can't get the menu to pop up...
 					addButton(0, "Use it", handleItemInInventory, 0, item, slotNum);
-					addButton(1, "Discard it", handleItemInInventory, 1, item, slotNum);
+					addButton(1, "Discard it", deleteItemPrompt,  item, slotNum);
 				} else {
 					menu();
 					addButton(0, "Next", itemGoNext);
-					addButton(1, "Discard it", handleItemInInventory, 1, item, slotNum);
+					//addButton(1, "Discard it", deleteItemPrompt, item, slotNum);
 					//itemGoNext();
 				}
 				}
@@ -842,15 +859,8 @@ use namespace CoC;
 
 
 		private function handleItemInInventory(x:int, item:Useable, slotNum:int):void{
-			switch(x){
-				case 0:
-					if (!debug) player.itemSlots[slotNum].removeOneItem();
-					useItem(item, player.itemSlots[slotNum]);
-				return;
-				case 1:
-					deleteItemPrompt(item, slotNum);
-				return;
-			}
+			if (!debug) player.itemSlots[slotNum].removeOneItem();
+			useItem(item, player.itemSlots[slotNum]);
 		}
 
 
@@ -1297,7 +1307,7 @@ use namespace CoC;
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 		}
 		public function unequipArmor():void {
-			if (player.armorName == "goo armor") { //Valeria belongs in the camp, not in your inventory!
+			if (player.armor == armors.GOOARMR) { //Valeria belongs in the camp, not in your inventory!
 				player.armor.removeText();
 				player.setArmor(ArmorLib.NOTHING);
 				manageEquipment(1);

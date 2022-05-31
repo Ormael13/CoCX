@@ -9,10 +9,10 @@ import classes.VaginaClass;
 public class ArouseSpell extends AbstractBlackSpell {
 	public function ArouseSpell() {
 		super("Arouse",
-				"The arouse spell draws on your own inner lust in order to enflame the enemy's passions.",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_LUSTDMG]);
+			"The arouse spell draws on your own inner lust in order to enflame the enemy's passions.",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_LUSTDMG]);
 		baseManaCost = 20;
 	}
 	
@@ -21,10 +21,10 @@ public class ArouseSpell extends AbstractBlackSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target, false) + " lust damage"
+		return "~" + calcDamage(target, false, false) + " lust damage"
 	}
 	
-	public function calcDamage(monster:Monster, randomize:Boolean = true):Number {
+	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		return adjustLustDamage(player.inte / 5, monster, CAT_SPELL_BLACK, randomize);
 	}
 	
@@ -43,7 +43,7 @@ public class ArouseSpell extends AbstractBlackSpell {
 			}
 			return;
 		}
-		var lustDmg:Number = calcDamage(monster);
+		var lustDmg:Number = calcDamage(monster, true, true);
 		if (display) {
 			if (monster.lust100 < 30) outputText("[Themonster] squirms as the magic affects [monster him].  ");
 			if (monster.lust100 >= 30 && monster.lust100 < 60) {
@@ -94,7 +94,7 @@ public class ArouseSpell extends AbstractBlackSpell {
 			crit = true;
 			lustDmg *= 1.75;
 		}
-		lustDmg = Math.round(lustDmg);
+		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg, false);
 		if (crit) outputText(" <b>Critical!</b>");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());

@@ -8,11 +8,11 @@ import classes.StatusEffects;
 public class BoneArmorSpell extends AbstractNecroSpell {
 	public function BoneArmorSpell() {
 		super(
-				"Bone armor",
-				"Animate bones to create an impenetrable shield lasting 5 rounds and reducing all damage taken by 50%.",
-				TARGET_SELF,
-				TIMING_LASTING,
-				[TAG_BUFF]
+			"Bone armor",
+			"Animate bones to create an impenetrable shield lasting 5 rounds and reducing all damage taken by 50%.",
+			TARGET_SELF,
+			TIMING_LASTING,
+			[TAG_BUFF]
 		)
 	}
 	

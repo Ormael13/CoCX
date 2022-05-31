@@ -3,9 +3,7 @@
  */
 package classes
 {
-import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Stats.StatUtils;
 
 import flash.utils.Dictionary;
@@ -47,7 +45,7 @@ public class PerkType extends BaseContent
 		 * If this is perk player has, `params` is not-null and has value1-4 properties
 		 */
 		public function name(params:PerkClass=null):String {
-			return _name
+			return _name;
 		}
 
 		/**
@@ -318,7 +316,7 @@ public class PerkType extends BaseContent
 		public function requireBloodsteamMutationSlot():PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {
-					return player.maxBloodsteamMutations() > 0;
+					return player.maxBloodstreamMutations() > 0;
 				},
 				text: "Free Bloodsteam Mutation Slot",
 				type: "bloodsteammutation"
@@ -390,8 +388,8 @@ public class PerkType extends BaseContent
 				fn  : function(player:Player):Boolean {
 					return player.maxPeripheralNervSysMutations() > 0;
 				},
-				text: "Free Peripheral NervSys Mutation Slot",
-				type: "peripheralnervsysmutation"
+				text: "Free NervSys Mutation Slot",
+				type: "nervsysmutation"
 			});
 			return this;
 		}
@@ -422,6 +420,16 @@ public class PerkType extends BaseContent
 				},
 				text: "Free Parathyroid Gland Mutation Slot",
 				type: "parathyroidglandmutation"
+			});
+			return this;
+		}
+		public function requireAdaptationsMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxAdaptationsMutations() > 0;
+				},
+				text: "Free Adaptations Mutation Slot",
+				type: "adaptationsmutation"
 			});
 			return this;
 		}
@@ -526,6 +534,73 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
+		
+		/**
+		 * Require player to be of specified race with optional minimum tier
+		 * @example
+		 * requireRace(Races.KITSUNE)
+		 * -> name: "Kitsune race"
+		 * -> fn: player.isRace(Races.KITSUNE, 1)
+		 * @example
+		 * requireRace(Races.KITSUNE, 3)
+		 * -> name: "Nine-tailed kitsune of balance race"
+		 * -> fn: player.isRace(Races.KITSUNE, 3)
+		 */
+		public function requireRace(race:Race, minTier:int=1):PerkType {
+			var text:String;
+			if (minTier == 1) {
+				text = capitalizeFirstLetter(race.name)+" race";
+			} else {
+				text = capitalizeFirstLetter(race.tiers[minTier-1].name)+" race";
+			}
+			requirements.push({
+				fn : function (player:Player):Boolean {
+					return player.isRace(race, minTier);
+				},
+				text: text,
+				type: "race",
+				race: race,
+				tier: minTier
+			});
+			return this;
+		}
+		
+		/**
+		 * Require player to be at tier 1+ in any of listed races.
+		 * Consider using `requireRacialGroup` if too many races
+		 * @param {Race[]} races
+		 * @example
+		 * requireAnyRace(Races.KITSUNE, Races.FOX)
+		 * -> name: "Kitsune or Fox race"
+		 * -> fn: player.isRace(Races.KITSUNE) || player.isRace(Races.FOX)
+		 */
+		public function requireAnyRace(...races):PerkType {
+			return requireRacialGroup(races as Array);
+		}
+		/**
+		 * Require player to be at tier 1+ in any of listed races.
+		 * Can provide a custom name for this requirement
+		 * @example
+		 * requireRacialGroup([Races.KITSUNE, Races.FOX], "Any vulpine race")
+		 * -> name: "Any vulpine race"
+		 * -> fn: player.isRace(Races.KITSUNE) || player.isRace(Races.FOX)
+		 */
+		public function requireRacialGroup(races:/*Race*/Array, text:String =""):PerkType {
+			races = flatten(races);
+			if (!text) text = mergeSentences(mapOneProp(races,"name"),", or ",", ",false)+" race";
+			requirements.push({
+				fn : function (player:Player):Boolean {
+					for each (var race:Race in races) {
+						if (player.isRace(race)) return true;
+					}
+					return false;
+				},
+				text: text,
+				type: "anyrace",
+				races: races
+			});
+			return this;
+		}
 		public function requirePerk(perk:PerkType):PerkType {
 			requirements.push({
 				fn  : function (player:Player):Boolean {
@@ -593,6 +668,23 @@ public class PerkType extends BaseContent
 				_longDesc += tempText;
 			}
 			return this;
+		}
+
+		public function requireMutation(mutation:IMutationPerkType):PerkType {
+			requirements.push({
+				fn  : function (player:Player):Boolean {
+					return player.hasMutation(mutation);
+				},
+				text: mutation.name(),
+				type: "mutation",
+				perk: mutation
+			});
+			return this;
+		}
+
+		public function mDesc(params:PerkClass, tier:int = 0):String	//Can't overload the function, and override won't do it.
+		{
+			return _desc;
 		}
 	}
 }

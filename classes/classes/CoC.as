@@ -1,11 +1,9 @@
 /*
  CoC Main File - This is what loads when the game begins. If you want
-import classes.EngineCore;to start understanding the structure of CoC,
- this is the place to start.
- First, we import all the classes from many different files across the codebase. It would be wise not t
-import classes.Scenes.NPCs.JojoScene;o alter the
- order of th
-import classes.Scenes.SceneLib;ese imports until more is known about what needs to load and when.
+ to start understanding the structure of CoC, this is the place to start.
+ First, we import all the classes from many different files across the codebase.
+ It would be wise not to alter the
+ order of these imports until more is known about what needs to load and when.
 */
 
 package classes
@@ -71,14 +69,13 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 35;
+    public var modSaveVersion:Number = 35.022;
     public var levelCap:Number = 185;
 
     //Used to restrict random drops from overlapping uniques
     public var plotFight:Boolean = false;
     public var timeQ:Number = 0; // Queued hours
     public var timeQmin:int = 0; // Queued minutes
-    //FIXME @OXDECEPTION Move above vars to more appropriate classes if possible
 
     /*private static var doCamp:Function; //Set by campInitialize, should only be called by playerMenu
     private static function campInitialize(passDoCamp:Function):void { doCamp = passDoCamp; }*/
@@ -254,11 +251,10 @@ public class CoC extends MovieClip
 
         //DEBUG, used all over the place
         debug = false;
-        //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8s3";
-			version = ver + " (<b>Druid Prestige Job, buffs to Gunslinger & Golemancer jobs, 3rd Floor of River Dungeon, out of combat fatigue regen + shorter intervals on resource generation, many QoL changes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8s4";
+			version = ver + " (<b>Drider Triplets, Perk-o-calipse 7 (only around 30+ perks this time), many new equipable items / grey spells, truckload list of changes too many to meantion briefly major ones, tons upon tons of QoL changes, massive list of bugfixes</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);
@@ -386,6 +382,11 @@ public class CoC extends MovieClip
 
     public function run():void
     {
+        trace("Initializing races");
+        Races.load();
+        trace("Initializing perks");
+        PerkLib.initDependencies();
+		perkTree = new PerkTree();
         mainMenu.mainMenu();
         this.stop();
 
@@ -418,20 +419,12 @@ public class CoC extends MovieClip
         }
     }
 
-    public function spriteSelect(choice:Object = 0):void {
+    public function spriteSelect(choice:Class = null):void {
         // Inlined call from lib/src/coc/view/MainView.as
-        // TODO: When flags goes away, if it goes away, replace this with the appropriate settings thing.
-        if (choice <= 0 || choice == null || flags[kFLAGS.SHOW_SPRITES_FLAG] == 1) {
+        if (choice == null || flags[kFLAGS.SHOW_SPRITES_FLAG] == 1)
             mainViewManager.hideSprite();
-        } else {
-            if (choice is Class) {
-                mainViewManager.showSpriteBitmap(SpriteDb.bitmapData(choice as Class));
-            } else if (choice is Number) {
-                mainViewManager.showSpriteBitmap(SpriteDb.bitmapDataFromIndex(int(choice)));
-            } else {
-                mainViewManager.hideSprite();
-            }
-        }
+        else
+            mainViewManager.showSpriteBitmap(SpriteDb.bitmapData(choice));
     }
 
     public function outputHistory():void {

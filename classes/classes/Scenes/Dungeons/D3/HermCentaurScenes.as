@@ -4,10 +4,7 @@ import classes.BaseContent;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.PregnancyStore;
-import classes.Scenes.UniqueSexScenes;
-import classes.StatusEffects;
 import classes.Scenes.SceneLib;
-import classes.PerkLib;
 
 /**
 	 * ...
@@ -21,8 +18,7 @@ import classes.PerkLib;
 			
 		}
 
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function encounterThePony():void
 		{
 			outputText("\n\nA gigantic, demonic centaur is here!  She grins down at your sudden arrival and gestures at the mammoth dong between her thighs as she taunts, \"<i>You are not prepared.</i>\"");
@@ -32,14 +28,15 @@ import classes.PerkLib;
 			
 			startCombat(new HermCentaur());
 		}
-		
-		private const CENTAUR_KILLED:int = 1;
-		private const CENTAUR_RELEASED:int = 2;
-		private const CENTAUR_FUCKED:int = 3;
 
-		public function beatThePony(hpVictory:Boolean):void
+		private static const CENTAUR_KILLED:int = 1;
+		private static const CENTAUR_RELEASED:int = 2;
+		private static const CENTAUR_FUCKED:int = 3;
+
+		public function beatThePony(hpVictory:Boolean = false):void
 		{
 			clearOutput();
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			outputText("With a heavy 'thud', the demonic red-head slumps onto her side in the grass.  Her tail flails fitfully");
 			if (hpVictory) outputText(" as she tries to rise");
 			else outputText(" as she tries to stretch for her pulsating, cum-dripping member");
@@ -54,8 +51,8 @@ import classes.PerkLib;
 
 			menu();
 
-			if (player.hasCock()) addButton(0, "Fuck Her", maleFuckHer);
-			if (player.hasVagina()) addButton(1, "Get Fucked", femFuckHer);
+			addButtonIfTrue(0, "Fuck Her", maleFuckHer, "Req. a cock.", player.hasCock());
+			addButtonIfTrue(1, "Get Fucked", femFuckHer, "Req. a vagina.", player.hasVagina());
 			addButton(5, "Release", letHerGo);
 			addButton(6, "Kill", killHer);
 		}
@@ -64,25 +61,27 @@ import classes.PerkLib;
 		{
 			clearOutput();
 			outputText("Sighing, you advance on the downed demon, trying to ignore the horrified look in her eyes as you end her.");
-			flags[kFLAGS.D3_CENTAUR_DEFEATED] = CENTAUR_KILLED;
-
-			menu();
-            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			if (!recalling) {
+				flags[kFLAGS.D3_CENTAUR_DEFEATED] = CENTAUR_KILLED;
+				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			}
+			else doNext(recallWakeUp);
         }
 
 		private function letHerGo():void
 		{
 			clearOutput();
 			outputText("You dust off your [armor] and wave nonchalantly at the equine demoness.  She slowly staggers up, watching you warily.  Dismissively, you tell her to leave before she earns your ire - her queen will be dealt with soon enough.  She clops off in a huff towards the exit.");
-			flags[kFLAGS.D3_CENTAUR_DEFEATED] = CENTAUR_RELEASED;
-
-			menu();
-            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			if (!recalling) {
+				flags[kFLAGS.D3_CENTAUR_DEFEATED] = CENTAUR_RELEASED;
+				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			}
+			else doNext(recallWakeUp);
         }
 
 		private function maleFuckHer():void
 		{
-			flags[kFLAGS.D3_CENTAUR_DEFEATED] = CENTAUR_FUCKED;
+			if (!recalling) flags[kFLAGS.D3_CENTAUR_DEFEATED] = CENTAUR_FUCKED;
 
 			var y:int = player.cockThatFits(monster.vaginalCapacity());
 
@@ -107,7 +106,7 @@ import classes.PerkLib;
 
 			outputText("\n\nGlancing back, you can see a puddle of white forming beneath her flaring cock-tip.  Her pre is coming out so thick that it's become indistinguishable from cum at this point.  As encouragement, you slap [eachCock] into her cheek, slowly dragging it across her face.  Of course, you slow down when you slide over her lips and across her nose, giving her a few more nice long drags of her own fertile pheromones.  Her hind legs begin to twitch and buck, clawing at the air in a frenzy but only managing to drag her spunk-splorting prick back and forth through her own puddled spunk.  The demoness moans, \"Fffffuuuck yooooouuuu,</i>\" in a voice that's more lusty than furious.");
 
-			outputText("\n\n\"<i>No,</i>\" you answer, \"<i>I'm fucking you.</i>\"  You push your "+ cockDescript(y) +" at her parted mouth, and they yield immediately, pleasantly opening to gratefully accept the taste of the mixed juices that soak it.  Her fair, freckled cheeks go so red that her freckles are actually lighter than the skin around them as she begins to suck, slurping lewdly at you with the skills of a professional cock-sucker.  You compliment her for being such a good mare and make sure to remind her that she's no stud.  Her dick flexes tightly at your words, flooding with so much blood that its skin shines from being stretched taut.  The masochistic cunt is getting off on sniffing her own fem-spunk and being humiliated!");
+			outputText("\n\n\"<i>No,</i>\" you answer, \"<i>I'm fucking you.</i>\"  You push your "+ cockDescript(y) +" at her parted mouth, and they yield immediately, pleasantly opening to gratefully accept the taste of the mixed juices that soak it.  Her fair, freckled cheeks go so red that her freckles are actually lighter than the skin around them as she begins to suck, slurping lewdly at you with the skills of a professional cocksucker.  You compliment her for being such a good mare and make sure to remind her that she's no stud.  Her dick flexes tightly at your words, flooding with so much blood that its skin shines from being stretched taut.  The masochistic cunt is getting off on sniffing her own fem-spunk and being humiliated!");
 
 			outputText("\n\nYou take her onyx horns in your hands and adjust the angle of her head before pumping forward again, stuffing your "+ cockDescript(y) +" into her gullet with a forceful thrust.  She gurgles messily, still trying to breathe through her nose while her tongue lashes madly across the sensitive underside of your dick.  This suits your purpose perfectly, as it keeps her so high on her own fuck-odor that she can't think straight, let alone slow the fevered pumping of her bloated sausage.  While fucking her throat raw, you feel the familiar tingling of your budding orgasm, and this time, you don't try to step it.  In fact, you pick up the pace, reaching down to tweak at the cherry-sized nipples below.");
 
@@ -122,15 +121,17 @@ import classes.PerkLib;
 			if (player.cumQ() >= 15000) outputText(", practically dragging her gut on the stones as she runs");
 			outputText(".  Well, she might have gotten away, but she won't be able to stop you from getting to Lethice.  Indeed, it seems she was running for the exit.");
 
-			player.orgasm();
-			dynStats("cor+", 5);
-
-cleanupAfterCombat(SceneLib.d3.resumeFromFight)
+			if (!recalling) {
+				player.orgasm();
+				dynStats("cor+", 5);
+				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			}
+			else doNext(recallWakeUp);
         }
 
-		private const HORZGOG:int = 0;
-		private const DOGGECOCK:int = 1;
-		private const TENTACOCK:int = 2;
+		private static const HORZGOG:int = 0;
+		private static const DOGGECOCK:int = 1;
+		private static const TENTACOCK:int = 2;
 
 		private function femFuckHer():void
 		{
@@ -144,8 +145,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight)
 			outputText("\n\nFinally, a demon with some common sense!  You idly trace your [foot] along the underside of her leaky horse-cock while pondering this newest development.  She'll need to match her size to your [vagina] for sure, but what kind of cock do you want her to have?");
 
 			menu();
-			if (silly()) addButton(0, "HORZ GOG", femFuckHerII, HORZGOG);
-			else addButton(0, "Horsecock", femFuckHerII, HORZGOG);
+			addButton(0, "Horsecock", femFuckHerII, HORZGOG);
 			addButton(1, "Dog Dick", femFuckHerII, DOGGECOCK);
 			addButton(2, "Tentacles", femFuckHerII, TENTACOCK);
 		}
@@ -249,25 +249,24 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight)
 
 				outputText("\n\nYou nervelessly slide off the pole into the ground, earning a fresh bukkake of creamy cum to plaster your " + player.skinFurScales() + ".  While you recover, your demonic lover's bulk shifts away, and you soon here the telltale clopping of her moving away.  It sounds like she's heading towards the south - the exit.  You missed your chance to do anything about that demon...");
 			}
-			player.orgasm();
-			dynStats("cor+", 5);
-			player.sexReward("vaginalFluids");
-			if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
-			menu();
-            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			if (!recalling) {
+				player.orgasm();
+				dynStats("cor+", 5);
+				player.sexReward("vaginalFluids");
+				if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
+				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			}
+			else doNext(recallWakeUp);
         }
 		
 		public function inSovietCoCPonyRidesYou(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.hasCock() && player.hasVagina())
-			{
-				if (rand(2) == 0) maleLoss(hpVictory);
-				else femLoss(hpVictory);
-			}
-
-			if (player.hasCock() && !player.hasVagina()) maleLoss(hpVictory);
-			else if (player.hasVagina() && !player.hasCock()) femLoss(hpVictory);
-			else if (!player.hasVagina() && !player.hasCock()) femLoss(hpVictory);
+			sceneHunter.selectLossMenu([
+					[0, player.hasVagina() ? "With vagina" : "???", curry(femLoss, hpVictory)],
+					[1, "With dick", curry(maleLoss, hpVictory), "Req. a dick with area smaller than " + monster.vaginalCapacity(), player.cockThatFits(monster.vaginalCapacity()) >= 0]
+				],
+				"This is your end. But <i>how</i> exactly do you want to submit to her?\n\n"
+			);
 		}
 		
 		private function femLoss(hpVictory:Boolean):void
@@ -290,9 +289,9 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight)
 			}
 			outputText(" She smirks as she trots up, commenting, \"<i>That's more like it, slut.  I don't know how you got this far, but your quest ends here.</i>\"  She casually reaches down and grabs you by the scruff of the neck, hauling you bodily up until your head nestles between her tits");
 			if (player.tallness >= 7 * 12) outputText(", even though your [feet] still touch the ground");
-			outputText(".  Brushing through your hair, a hand gently caresses your back as its owner coos, \"<i>You'll make a fine mare for my stable, but lets get you in the right mindset first...</i>\"");
+			outputText(".  Brushing through your hair, a hand gently caresses your back as its owner coos, \"<i>You'll make a fine mare for my stable, but lets you get in the right mindset first...</i>\"");
 			
-			outputText("\n\nYou're shifted to the side, your face dragged along the side of a pale, freckled breast as you're moved into position.  A thick nipple, almost as wide as your finger, pushes at your lips, smelling faintly of sugary sweetness and sex all blended together.  When you don't gratefully accept it, your jaw is forced open and the nearly inch-long teat is firmly inserted.  As soon as it's seated in your maw, the hard milk-nozzle immediately begins to leak its tasty treat - a sweet fluid that seems to fizz on your tongue and light your mouth up with pleasure.  You savor the taste as long as you can, but pleasure-inducing juice soon has your cheeks bulging.  You gulp it down reluctantly, if only to make room for more.");
+			outputText("\n\nYou're shifted to the side, your face dragged along the side of a pale, freckled breast as you're moved into position.  A thick nipple, almost as wide as your finger, pushes at your lips, smelling faintly of sugary sweetness and sex all blended together.  When you don't gratefully accept it, your jaw is forced open, and the nearly inch-long teat is firmly inserted.  As soon as it's seated in your maw, the hard milk-nozzle immediately begins to leak its tasty treat - a sweet fluid that seems to fizz on your tongue and light your mouth up with pleasure.  You savor the taste as long as you can, but pleasure-inducing juice soon has your cheeks bulging.  You gulp it down reluctantly, if only to make room for more.");
 			
 			outputText("\n\nYour eyes open wide when the delicious demon-milk hits your stomach.  It fills your core with such warmth that you think you might melt, at least until the heat begins to diffuse outward, bringing with it a tingling sensitivity that makes the tit in your mouth taste that much better.  You draw deeply on the rosy, pink nipple, sucking down even more 'milk' with every passing second, if only to kindle even more of that pleasant sensation.  The hands release you, but you stay firmly attached to your teat.  You need more.");
 			
@@ -335,9 +334,9 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight)
 
 			outputText("\n\nThe demon's horns casts a black shadow on the cobbles before you.  You curiously watch it bob with every slow drag out and inhumanly powerful thrust back in.  Each hip-jarring penetration bears pleasant fruits, in the form of heavy globs of precum that squish through your cervix and into your womb.  Small spurts of it splatter out of your well-stretched cunt as the thick cock fills every available crevice of your canal, mixed in with the clear dribbles of your own need.  By now you've begun to moan like a whore in heat, rutting with this demonic beast as hard as your body will allow, yet it still will not gratefully accept the beast's crown - you're just too small!");
 
-			outputText("\n\nSmirking, the demoness asks, \"<i>Not happy only getting half of my cock in there, are you, slut?  Lets make that troublesome cervix a bit more accepting, shall we?</i>\"  She pushes in until her tip is smashed flat on your womb's entrance once again, but this time, she holds still.  Soft murmurs echo down from above, incoherent to your unpracticed ears but undeniably magic.  The constant trickles of demon-spooge of thicken, flowing hot and hard enough to baste your innards with, and as soon as she finishes her chanting, you 'bloom' internally, for lack of a better word.  It's almost as if your entire reproductive system is relaxing, opening gratefully to allow your mistress to more properly ravish you.  Of course, she does.");
+			outputText("\n\nSmirking, the demoness asks, \"<i>Not happy only getting half of my cock in there, are you, slut?  Let's make that troublesome cervix a bit more accepting, shall we?</i>\"  She pushes in until her tip is smashed flat on your womb's entrance once again, but this time, she holds still.  Soft murmurs echo down from above, incoherent to your unpracticed ears but undeniably magic.  The constant trickles of demon-spooge of thicken, flowing hot and hard enough to baste your innards with, and as soon as she finishes her chanting, you 'bloom' internally, for lack of a better word.  It's almost as if your entire reproductive system is relaxing, opening gratefully to allow your mistress to more properly ravish you.  Of course, she does.");
 
-			outputText("\n\nThat hot horsecock is rammed into you, until you feel the folded skin of her sheath on your lips and the heavy weight of her squirming testes bouncing off your [butt].  The proud shape of her flare is clearly visible on your stretched-out tummy, but it doesn't hurt.  All you feel is glorious fullness and the ache of so much pleasure that you fear you'll cum and pass out, all at the same time.  The delicious thickness inside you bubbles and grows, thickening with each beat of the demon's heart, and you realize she's as close as you, perhaps closer.  Timidly, you caress her thick flare through your taut skin, garnering a spurt of hot pre and a matched moan of contentment from your gargantuan lover.");
+			outputText("\n\nThat hot horsecock is rammed into you, until you feel the folded skin of her sheath on your lips, and the heavy weight of her squirming testes bouncing off your [butt].  The proud shape of her flare is clearly visible on your stretched-out tummy, but it doesn't hurt.  All you feel is glorious fullness and the ache of so much pleasure that you fear you'll cum and pass out, all at the same time.  The delicious thickness inside you bubbles and grows, thickening with each beat of the demon's heart, and you realize she's as close as you, perhaps closer.  Timidly, you caress her thick flare through your taut skin, garnering a spurt of hot pre and a matched moan of contentment from your gargantuan lover.");
 
 			outputText("\n\n\"<i>I think I might have a new favorite mare</i>,\" the demoness pants while gleefully pounding your over-stuffed snatch, \"<i>We just met and you've already accepted your role.  I hope you don't mind birthing dozens of imps for my personal army and helping us research more proper reproduction.</i>\"  She's going to fuck you more?  You gleefully moan out an affirmative, and she rewards you by pounding your box harder, stuffing it full of her thick, hot member, all the way to the top of your hungry, pre-stuffed womb.");
 
@@ -345,8 +344,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight)
 
 			outputText("\n\nDarkness takes you while you shiver in knocked-up bliss.");
 			dynStats("lib", 50, "cor", 50);
-			menu();
-			addButton(0, "Next", femLossII);
+			doNext(femLossII);
 		}
 
 		private function femLossII():void
@@ -356,25 +354,22 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight)
 
 			outputText("\n\nThe demon has you knotted on a giant dog-cock!  When did she get one of those!?  You gasp in surprise, pain, and pleasure in equal measure.  She hears you and looks over her shoulder, still slowly walking, and she smiles as she says, \"<i>Welcome back.  I'm just taking you to your stall and making sure my devilish little children get a proper foothold in your womb.  Relax and enjoy - we'll get you fixed up once you're secured in your stall.</i>\"");
 
-			outputText("\n\nYou slump down as you're dragged through dirt, over carpets, and through halls.  Various demons leer at you as you pass, snickering at the fallen champion, now little more than a willing mare.  The humiliation makes your cheeks go red but your [vagina] drool. Some part of you is clearly enjoying it, though you aren't sure if it's a natural enjoyment or something this creature has done to you.  You sigh and shrug, raising your hands to fondle your breasts as you're dragged to your new home.  You may as well enjoy yourself.");
+			outputText("\n\nYou slump down as you're dragged through dirt, over carpets, and through halls.  Various demons leer at you as you pass, snickering at the fallen champion, now little more than a willing mare.  The humiliation makes your cheeks go red, but your [vagina] drools. Some part of you is clearly enjoying it, though you aren't sure if it's a natural enjoyment or something this creature has done to you.  You sigh and shrug, raising your hands to fondle your breasts as you're dragged to your new home.  You may as well enjoy yourself.");
 
-			menu();
-			addButton(0, "Next", femLossIII);
+			doNext(femLossIII);
 		}
 
 		private function femLossIII():void
 		{
 			clearOutput();
 			if (player.isAlraune())
-			{
-				uniquuuesexscene.AlrauneDungeonBadEnd();
-			}
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			else {
 				outputText("<b>Months later...</b>");
 
 				outputText("\n\nYou sigh as your latest litter of imps clamor around your nipples, hungry for their mother's milk.  They're such greedy, ceaselessly ravenous creatures.  Having their clutching mouths on your nipples all the time makes it so hard to sleep, and it doesn't help that the 'father' insists on rutting with you and knotting you for hours until she's 'sure' your pregnant.");
 
-				outputText("\n\nThe rest of your days are lived out like that, interrupted only for fresh injections of demonic chemicals and thick centaur-cum.  Amazingly, the demon's experiments bear fruit, and you have the honor of birthing the first true demon offspring - the first of many.  Though you're eventually traded to a new owner once you're well used and other sluts have been similar prepared, you keep a sense of a perverse pride through it all.  You were the first demon mother.  You helped the new species propagate and assure their dominance over lesser forms of life, like yourself.");
+				outputText("\n\nThe rest of your days are lived out like that, interrupted only for fresh injections of demonic chemicals and thick centaur-cum.  Amazingly, the demon's experiments bear fruit, and you have the honor of birthing the first true demon offspring - the first of many.  Though you're eventually traded to a new owner once you're well-used and other sluts have been similar prepared, you keep a sense of a perverse pride through it all.  You were the first demon mother.  You helped the new species propagate and assure their dominance over lesser forms of life, like yourself.");
 
 				dynStats("lus=", player.maxLust(), "lib", 50, "cor", 50);
 				EventParser.gameOver();
@@ -402,7 +397,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight)
 			if (player.tallness >= 7 * 12) outputText(", even though your [feet] still touch the ground");
 			outputText(".  Brushing through your hair, a hand gently caresses your back as its owner coos, \"<i>I'm not sure you have what it takes to be one of my stallions...</i>\"");
 
-			outputText("\n\nYou're shifted to the side, your face dragged along the side of a pale, freckled breast as you're moved into position.  A thick nipple, almost as wide as your finger, pushes at your lips, smelling faintly of sugary sweetness and sex all blended together.  When you don't gratefully accept it, your jaw is forced open and the nearly inch-long teat is firmly inserted.  As soon as it's seated in your maw, the hard milk-nozzle immediately begins to leak its tasty treat - a sweet fluid that seems to fizz on your tongue and light your mouth up with pleasure.  You savor the taste as long as you can, but pleasure-inducing juice soon has your cheeks bulging.  You gulp it down reluctantly, if only to make room for more.");
+			outputText("\n\nYou're shifted to the side, your face dragged along the side of a pale, freckled breast as you're moved into position.  A thick nipple, almost as wide as your finger, pushes at your lips, smelling faintly of sugary sweetness and sex all blended together.  When you don't gratefully accept it, your jaw is forced open, and the nearly inch-long teat is firmly inserted.  As soon as it's seated in your maw, the hard milk-nozzle immediately begins to leak its tasty treat - a sweet fluid that seems to fizz on your tongue and light your mouth up with pleasure.  You savor the taste as long as you can, but pleasure-inducing juice soon has your cheeks bulging.  You gulp it down reluctantly, if only to make room for more.");
 
 			outputText("\n\nYour eyes open wide when the delicious demon-milk hits your stomach.  It fills your core with such warmth that you think you might melt, at least until the heat begins to diffuse outward, bringing with it a tingling sensitivity that makes the tit in your mouth taste that much better.  You draw deeply on the rosy, pink nipple, sucking down even more 'milk' with every passing second, if only to kindle even more of that pleasant sensation.  The hands release you, but you stay firmly attached to your teat.  You need more.");
 
@@ -416,7 +411,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight)
 
 			outputText("\n\nWith your hands and body freed, you unabashedly dive down in an instant to get at your needy hardness.  You drink and squeeze, swallow and stroke.  Over and over, you give in to the artificial, hedonistic desires your dual-endowed mistress's milk instills in you.  There's no fighting it, only giving in utterly as you prepare yourself to be used as a sperm-pump, ridden mercilessly until you spew your molten lust into her fertile nethers, a helpless stud only alive to knock her up over and over again.");
 
-			outputText("\n\nThe tainted centaur pulls you back even as your lips stretch forward in desperation, but at last, you pop off the nipple, disappointed.  She tilts your head to look up at her green eyes and glittering, black horns.  She's a terrible demon, a beautiful maiden, and a monstrously large, giant-like centaur, all at once.  You pant, whining with your exhalations until she gently releases you.  Dropping nervelessly in the grass, you twist and writhe, trying to rise and jerk off all at once.  Of course it fails, and by the time you get your hands down to push up, a shadow falls across your view.");
+			outputText("\n\nThe tainted centaur pulls you back even as your lips stretch forward in desperation, but at last, you pop off the nipple, disappointed.  She tilts your head to look up at her green eyes and glittering, black horns.  She's a terrible demon, a beautiful maiden, and a monstrously large, giant-like centaur, all at once.  You pant, whining with your exhalations until she gently releases you.  Dropping nervelessly in the grass, you twist and writhe, trying to rise and jerk off all at once.  Of course, it fails, and by the time you get your hands down to push up, a shadow falls across your view.");
 
 			outputText("\n\nThe equine half of your oppressor is directly above you, dripping strands of thick, female cum onto your face while her hard cock rains its pre-jizz over [eachCock] in a show of supreme dominance.  Still, you try to rise - perhaps due to foolish pride, desire, or just sheer instinct.  The centaur drops down before you get a few inches up, smashing her cunny into your face and bearing you to the ground.  Her weight is immense, and though some is kept on her forelegs and little spread to the haunches on either side of your face, you still get buried nose-deep in sloppy, black-lipped snatch.");
 
@@ -457,14 +452,13 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight)
 
 			outputText("\n\nThe vibrations of your moans of pleasure set the omnibus alight with delight, and her dick surges deeper down your throat, releasing a thick batch of creamy seed to fill your belly.  Shuddering in bliss, you swallow and cum over and over, spunking up the equine cunt happily while swallowing an equal measure orally.  Locked in cunt and on cock and finally allowed orgasm after an endlessly long tease, you feel as if you're atop an orgasmic wave, riding the spooge all the way into shore.  The hot vice around your dick quivers and squirts thanks to your donation.");
 
-			outputText("\n\nAs your climax-contractions slow, you the omnibi withdraws with a smirk.  \"<i>Thanks, maybe I'll come back to try some of that champion-spunk once my big friend is tired of you.  Then again, maybe I'll just ride your face like the fuckable cunt-hole it is while the centaurs take turns getting knocked up on your worthless fuck-tool.</i>\"");
+			outputText("\n\nAs your climax-contractions slow, the omnibi withdraws with a smirk.  \"<i>Thanks, maybe I'll come back to try some of that champion-spunk once my big friend is tired of you.  Then again, maybe I'll just ride your face like the fuckable cunt-hole it is while the centaurs take turns getting knocked up on your worthless fuck-tool.</i>\"");
 
 			outputText("\n\nThe centauress backs you into a wall, clamps snapping shut over your [legs] to hold you in place.  In a panic, you try to wriggle free, but the omnibus easily wrangles your arms into a matching set of restraints.  Once suitably immobilized, she kisses you hard, her ruby lips burning hot against yours for the briefest moment.  It's at this moment that you realize your dick is still rock-solid and ready to go again.  Then, the kiss breaks, and the omnibus wings away.");
 
 			outputText("\n\nAt the same time, your centaur mate steps away, still joined to you by webs of sexual fluid that gradually snap.  As she departs, you realize you're bound up in a stall, tied to a wall, and you swear you can see lines of hooves waiting their turn from under the wood frame.  An albino woman with ivory horns clops in next.  She pivots, and you're given your first glimpse of your second 'wife'.  You've got a lot of demons to inseminate.");
 
-			menu();
-			addButton(0, "Next", maleLossII);
+			doNext(maleLossII);
 		}
 
 		private function maleLossII():void
@@ -472,7 +466,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight)
 			clearOutput();
 			if (player.isAlraune())
 			{
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			}
 			else {
 				outputText("As the years roll by, you see lots of pussy, and lots of injections.  They test all kinds of cocktails on you.  Ones that makes your balls swell, or your seed runny, or thick, or even black.  Eventually, one of your children comes out as something other than an imp.  The first proper demon infant.  Too fucked up to feel anything but pride, you can only marvel at your amazing virility as you seed the birth of a new species, knocking up every demon with a cunt in a month-long orgy.  Your jism fuels the ascendency of an entire race, dooming Mareth.");

@@ -26,9 +26,10 @@ For further information and license requests, Dxasmodeus may be contacted throug
 package classes.Scenes.Explore {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
+import classes.Scenes.Crafting;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class Giacomo extends BaseContent implements TimeAwareInterface {
 
@@ -70,7 +71,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		//End of Interface Implementation
 		
 		public function giacomoEncounter():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (flags[kFLAGS.GIACOMO_MET] == 0) {
 				firstEncounter();
@@ -98,10 +99,10 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				outputText("Giacomo's grin is nothing short of creepy as he offers his wares to you. What are you interested in?");
 			}
 			//var deworm:Function = (player.hasStatusEffect(StatusEffects.WormOffer) && player.hasStatusEffect(StatusEffects.Infested) ? wormRemovalOffer : null);
-			if (player.findPerk(PerkLib.SoulSense) >= 0 && flags[kFLAGS.SOUL_SENSE_GIACOMO] < 2) flags[kFLAGS.SOUL_SENSE_GIACOMO]++;
+			if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SOUL_SENSE_GIACOMO] < 2) flags[kFLAGS.SOUL_SENSE_GIACOMO]++;
 			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] == 2) {
 				flags[kFLAGS.SOUL_SENSE_GIACOMO]++;
-				outputText("\n\n<b>You have meet him enough times to be able to find him in the future when using soul sense. (Removes Giacomo from general explore encounters pool!)</b>\n\n");
+				outputText("\n\n<b>You have met him enough times to be able to find him in the future when using soul sense. (Removes Giacomo from general explore encounters pool!)</b>\n\n");
 			}
 			menu();
 			addButton(0, "Potions", potionMenu);
@@ -125,7 +126,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function potionMenu():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			outputText("Which potion or tincture will you examine?");
 			menu();
@@ -143,7 +144,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function bookMenu():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			outputText("Which book are you interested in perusing?");
 			menu();
@@ -151,18 +152,20 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			addButton(1, "Traveler's Guide", pitchTravellersGuide);
 			addButton(2, "Hentai Comic", pitchHentaiComic);
 			if (flags[kFLAGS.COTTON_UNUSUAL_YOGA_BOOK_TRACKER] > 0) addButton(3, "Yoga Guide", pitchYogaGuide);
+			addButton(4, "E. Tome", pitchElementalistsTome).hint("Elementalist’s Tome");
 			addButton(5, "White Book", pitchWhiteBook);
 			addButton(6, "Black Book", pitchBlackBook);
 			addButton(7, "Grey Book", pitchGreyBook);
 			addButton(8, "Red Manuscript", pitchRedManuscript);
 			addButton(9, "Crimson Jade", pitchCrimsonJade);
-			addButton(10, "E. Tome", pitchElementalistsTome).hint("Elementalist’s Tome");
+			addButton(10, "TelAdreMagI5", pitchTelAdreMagazineIssue5).hint("Tel'Adre Magazine Issue 5");
+			addButton(11, "TelAdreMagI10", pitchTelAdreMagazineIssue10).hint("Tel'Adre Magazine Issue 10");
 			addButton(14, "Back", giacomoEncounter);
 			statScreenRefresh();
 		}
 		
 		private function eroticaMenu():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			outputText("Giacomo's grin is nothing short of creepy as he offers his wares to you.  What are you interested in?");
 			menu();
@@ -179,9 +182,10 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function miscMenu():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			menu();
+			if (player.hasKeyItem("Tarnished Ore Bag (Lowest grade)") >= 0) addButton(10, "Ore Bag (LowG)", pitchOreBag).hint("Ore Bag (Lowest Grade)");
 			if (Holidays.nieveHoliday()) {
 				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 0) addButton(11, "Mysterious Seed", pitchMysteriousSeed);
 				if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 5) addButton(12, "Decorations", pitchDecorations);
@@ -192,14 +196,14 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function pitchManUpBeer():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			outputText("Giacomo holds up the item and says, \"<i>Ahh so you're interested into this beverage eh? It is rumored to help weight lifters grow bigger muscles. Only a handful of gems!  Yes " + player.mf("sir", "madam") + ", this is liquid gold for pilgrim and adventurer alike.  Interested?  It is <b>15 gems</b></i>.\"  ");
 			doYesNo(buyManUpBeer, potionMenu);
 		}
 		
 		private function buyManUpBeer():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			if (player.gems < 15) {
 				clearOutput();
 				outputText("\n\nGiacomo sighs, indicating you need " + String(15 - player.gems) + " more gems to purchase this item.");
@@ -213,14 +217,14 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function pitchVitailtyTincture():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			outputText("Giacomo holds up the item and says, \"<i>Ah, yes!  The quintessential elixir for all travelers, this little bottle of distilled livelihood will aid you in restoring your energy on your journey and, should you be hurt or injured, will aid the body's ability to heal itself.  Yes " + player.mf("sir", "madam") + ", this is liquid gold for pilgrim and adventurer alike.  Interested?  It is <b>15 gems</b></i>.\"  ");
 			doYesNo(buyVitailtyTincture, potionMenu);
 		}
 		
 		private function buyVitailtyTincture():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			if (player.gems < 15) {
 				clearOutput();
 				outputText("\n\nGiacomo sighs, indicating you need " + String(15 - player.gems) + " more gems to purchase this item.");
@@ -234,14 +238,14 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function pitchScholarsTea():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			outputText("Giacomo holds up a pouch of dried, fragrant leaves and begins his spiel, \"<i>Have you ever wondered how scholars and other smart folk keep up such a mental effort for so long?  They make a tea out of this fine mixture of quality plants and herbs.  Nothing but the best, this mysterious mixture of herbs in its Orange Pekoe base makes anyone, short of a lummox, as brainy as the finest minds of the land.  All you do is steep the leaves in some water and drink up!  Hot or cold, straight or sweetened with honey, your mind will run circles around itself once it has this for fuel.  Buy it now and I will throw in the strainer for free!  Interested?  Only <b>15 gems</b>!</i>\"  ");
 			doYesNo(buyScholarsTea, potionMenu);
 		}
-			
+
 		private function buyScholarsTea():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			if (player.gems < 15) {
 				clearOutput();
 				outputText("\n\nGiacomo sighs, indicating you need " + String(15 - player.gems) + " more gems to purchase this item.  ");
@@ -255,14 +259,14 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function pitchCeruleanPotion():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			outputText("Giacomo makes his comical over-the-shoulder search and holds up a sky-blue bottle.  He grins widely as he begins his pitch, \"<i>My friend, you truly have a discerning eye.  Even the most successful of men seek to attract more women for pleasure and status.  This, my friend, will attract the most discerning and aroused of women.  Women attracted by this fine unction will NEVER say no.  I GUARANTEE that she will want pleasure every time you demand pleasure!  A bit of a caution to you, brother.  Some say this works TOO well.  If you aren't man enough to handle the women this urn draws to you, you'd best say so now and I will offer something more to your liking.  However, if you have the heart for it, I can sell you this little gem for <b>75 gems</b></i>!\"  ");
 			doYesNo(buyCeruleanPotion, potionMenu);
 		}
 		
 		private function buyCeruleanPotion():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			if (player.gems < 75) {
 				clearOutput();
 				outputText("\n\nGiacomo sighs, indicating you need " + String(75 - player.gems) + " more gems to purchase this item.");
@@ -294,14 +298,14 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		public function pitchCondom():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			outputText("Giacomo holds up the packet and says, \"<i>Ah, yes! This is a condom. Just slip it on any cocks and have it penetrate any holes. It's guaranteed to prevent the spread of STDs and it will help to prevent pregnancy. I must warn you that it does not completely prevent pregnancy. Rarely, it will fail. However, it will work most of the time. So, <b>ten gems</b>. What do you say?</i>\"");
 			doYesNo(buyCondom, eroticaMenu);
 		}
 		
 		public function buyCondom():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			if (player.gems < 10)
 			{
 				clearOutput();
@@ -317,7 +321,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function pitchDangerousPlantsBook():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.hasKeyItem("Dangerous Plants") >= 0) {
 				outputText("<b>You already own the book 'Dangerous Plants'.</b>");
@@ -329,7 +333,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function buyDangerousPlantsBook():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 10) {
 				outputText("\n\nGiacomo sighs, indicating you need " + String(10 - player.gems) + " more gems to purchase this item.");
@@ -345,7 +349,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function pitchTravellersGuide():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.hasKeyItem("Traveler's Guide") >= 0) {
 				outputText("<b>You already own the book 'Traveler's Guide'.</b>");
@@ -357,7 +361,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function buyTravellersGuide():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 1) {
 				outputText("\n\nGiacomo sighs, indicating you need 1 gem to purchase this item.");
@@ -373,7 +377,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function pitchHentaiComic():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.hasKeyItem("Hentai Comic") >= 0)
 			{
@@ -386,7 +390,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function buyHentaiComic():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 10) {
 				outputText("\n\nGiacomo sighs, indicating you need " + String(10 - player.gems) + " more gems to purchase this item.");
@@ -403,7 +407,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function pitchYogaGuide():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			outputText("Giacomo holds up the book with a small degree of reverence.  The cover is leather, with the lettering stitched in by hand.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a strange book indeed.  I traded for it in the east, where they practice a form of exercise known as yoga.  This volume in particular deals with those of, shall we say, unusual body shapes.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your horizons?</i>\"");
 			doYesNo(buyYogaGuide, bookMenu);
@@ -426,18 +430,104 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			doNext(bookMenu);
 		}
 		
+		private function pitchTelAdreMagazineIssue5():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.hasKeyItem("Tel'Adre Magazine Issue 5") >= 0) {
+				outputText("<b>You already own the magazine 'Tel'Adre Magazine Issue 5'.</b>");
+				doNext(bookMenu);
+				return;
+			}
+			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 5th issue of Tel'Adre Magazine.  I dive into matters of so called fifth finger or green thumb.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your herbalism horizons?</i>\"");
+			doYesNo(buyTelAdreMagazineIssue5, bookMenu);
+		}
+		
+		private function buyTelAdreMagazineIssue5():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.gems < 100) {
+				outputText("\n\nGiacomo sighs, indicating you need " + String(100 - player.gems) + " more gems to purchase this item.");
+				doNext(bookMenu);
+			}
+			else {
+				outputText("\n\nYou consider yourself fortunate to be quite literate in this day and age.  It certainly comes in handy with this magazine.  Obviously written by well-informed, would help you in herb cultivation. ");
+				doNext(bookMenu);
+				player.gems -= 100;
+				player.createKeyItem("Tel'Adre Magazine Issue 5", 0, 0, 0, 0);
+				statScreenRefresh();
+			}
+		}
+		
+		private function pitchTelAdreMagazineIssue10():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.hasKeyItem("Tel'Adre Magazine Issue 10") >= 0) {
+				outputText("<b>You already own the magazine 'Tel'Adre Magazine Issue 10'.</b>");
+				doNext(bookMenu);
+				return;
+			}
+			outputText("Giacomo holds up the magazine with a small degree of reverence.  \"<i>This, my friend,</i>\" begins Giacomo, \"<i>is a 10th issue of Tel'Adre Magazine.  I dive into matters of so benefits of having all ten fingers... like to hold your pickaxe.  Because of its rarity and usefulness, I simply cannot let it go for less than 100 gems and believe me, at this price I'm practically cutting my own throat.  Care to broaden your mining horizons?</i>\"");
+			doYesNo(buyTelAdreMagazineIssue10, bookMenu);
+		}
+		
+		private function buyTelAdreMagazineIssue10():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.gems < 100) {
+				outputText("\n\nGiacomo sighs, indicating you need " + String(100 - player.gems) + " more gems to purchase this item.");
+				doNext(bookMenu);
+			}
+			else {
+				outputText("\n\nYou consider yourself fortunate to be quite literate in this day and age.  It certainly comes in handy with this magazine.  Obviously written by well-informed, would help you in diggin the hole.... err mining to your heart content. ");
+				doNext(bookMenu);
+				player.gems -= 100;
+				player.createKeyItem("Tel'Adre Magazine Issue 10", 0, 0, 0, 0);
+				statScreenRefresh();
+			}
+		}
+		
+		private function pitchOreBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			outputText("\"<i>I see you have some pretty tarnished bag to store ores. Why not you buy this new one bag that is much better even if it's not better grade than the one you have now? Only 600 gems and i even gonna take your current bag. I assure you not gonna find such good offer anywhere else...</i>\"");
+			doYesNo(buyOreBag, miscMenu);
+		}
+		
+		private function buyOreBag():void {
+			spriteSelect(SpriteDb.s_giacomo);
+			clearOutput();
+			if (player.gems < 600) {
+				outputText("\n\nGiacomo sighs, indicating you need 600 gems to purchase this item.");
+				doNext(miscMenu);
+			}
+			else {
+				outputText("\n\nYou decided to buy the bag. It looking much better the one you had and checking inside it appears to have bit more space. As part of the deal you hand over current one to Giacomo. <b>You acquired Ore Bag (Lowest grade).</b>");
+				player.gems -= 600;
+				statScreenRefresh();
+				player.removeKeyItem("Tarnished Ore Bag (Lowest grade)");
+				player.createKeyItem("Ore Bag (Lowest grade)", 0, 0, 0, 0);
+				Crafting.BagSlot01Cap = 10;
+				Crafting.BagSlot02Cap = 10;
+				Crafting.BagSlot03Cap = 10;
+				Crafting.BagSlot04Cap = 10;
+				Crafting.BagSlot06Cap = 10;
+				Crafting.BagSlot07Cap = 10;
+				doNext(miscMenu);
+			}
+		}
+		
 		private function pitchMysteriousSeed():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			outputText("\"<i>Ah, that. That's just a seed I acquired from someone on my travels. They said planting it will result in something truly extraordinary to happen but I haven't really had the time to get around to it. Perhaps it'll be better suited for someone with more time on their hands? Maybe for let's say… 30 gems?</i>\"");
 			doYesNo(buyMysteriousSeed, miscMenu);
 		}
 		
 		private function buyMysteriousSeed():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 30) {
-				outputText("\n\nGiacomo sighs, indicating you need 30 gem to purchase this item.");
+				outputText("\n\nGiacomo sighs, indicating you need 30 gems to purchase this item.");
 				doNext(miscMenu);
 			}
 			else {
@@ -451,17 +541,17 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function pitchDecorations():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			outputText("\"<i>Ah, yes! I make sure to keep these in stock for the season! Though not many people around here really buy these anymore… I can sell these to you for a decent price. Let's say about 100 gems?</i>\"");
 			doYesNo(buyDecorations, miscMenu);
 		}
 		
 		private function buyDecorations():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 100) {
-				outputText("\n\nGiacomo sighs, indicating you need 100 gem to purchase this item.");
+				outputText("\n\nGiacomo sighs, indicating you need 100 gems to purchase this item.");
 				doNext(miscMenu);
 			}
 			else {
@@ -475,10 +565,10 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function pitchTorch():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.hasKeyItem("Torch") > 0) {
-				outputText("<b>You already have Torch.</b>");
+				outputText("<b>Trying to cope with that pyromania? You already have a torch!</b>");
 				doNext(miscMenu);
 				return;
 			}
@@ -487,10 +577,10 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function buyTorch():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 100) {
-				outputText("\n\nGiacomo sighs, indicating you need 100 gem to purchase this item.");
+				outputText("\n\nGiacomo sighs, indicating you need 100 gems to purchase this item.");
 				doNext(miscMenu);
 			}
 			else {
@@ -503,21 +593,21 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function pitchWhiteBook():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
-			outputText("Giacomo holds up a white book.  \"<i>While you may not find value in this as a simple book,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  Maybe even some usefull spell!  I will offer the super-cheap price of 100 gem!</i>\"");
+			outputText("Giacomo holds up a white book.  \"<i>While you may not find value in this as a simple book,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  Maybe even some useful spell!  I will offer the super-cheap price of 100 gems!</i>\"");
 			doYesNo(buyWhiteBook, bookMenu);
 		}
 		
 		private function buyWhiteBook():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 100) {
-				outputText("\n\nGiacomo sighs, indicating you need 100 gem to purchase this item.");
+				outputText("Giacomo sighs, indicating you need 100 gems to purchase this item.");
 				doNext(bookMenu);
 			}
 			else {
-				outputText("\n\nThe crazy merchant nods satisfied when you hand him over a hundred gems and in exchange gives you a white book.");
+				outputText("The crazy merchant nods satisfied when you hand him over a hundred gems and in exchange gives you a white book.");
 				player.gems -= 100;
 				statScreenRefresh();
 				inventory.takeItem(consumables.W__BOOK, bookMenu);
@@ -525,21 +615,21 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function pitchGreyBook():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
-			outputText("Giacomo holds up a grey book.  \"<i>While you may not find value in this as a simple book,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  Maybe even some usefull spell!  I will offer the super-cheap price of 500 gem!</i>\"");
+			outputText("Giacomo holds up a grey book.  \"<i>While you may not find value in this as a simple book,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  Maybe even some useful spell!  I will offer the super-cheap price of 500 gems!</i>\"");
 			doYesNo(buyGreyBook, bookMenu);
 		}
 		
 		private function buyGreyBook():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 500) {
-				outputText("\n\nGiacomo sighs, indicating you need 500 gem to purchase this item.");
+				outputText("Giacomo sighs, indicating you need 500 gems to purchase this item.");
 				doNext(bookMenu);
 			}
 			else {
-				outputText("\n\nThe crazy merchant nods satisfied when you hand him over five hundred gems and in exchange gives you a grey book.");
+				outputText("The crazy merchant nods satisfied when you hand him over five hundred gems and in exchange gives you a grey book.");
 				player.gems -= 500;
 				statScreenRefresh();
 				inventory.takeItem(consumables.G__BOOK, bookMenu);
@@ -547,21 +637,21 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function pitchBlackBook():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
-			outputText("Giacomo holds up a black book.  \"<i>While you may not find value in this as a simple book,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  Maybe even some usefull spell!  I will offer the super-cheap price of 100 gem!</i>\"");
+			outputText("Giacomo holds up a black book.  \"<i>While you may not find value in this as a simple book,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  Maybe even some useful spell!  I will offer the super-cheap price of 100 gems!</i>\"");
 			doYesNo(buyBlackBook, bookMenu);
 		}
 		
 		private function buyBlackBook():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 100) {
-				outputText("\n\nGiacomo sighs, indicating you need 100 gem to purchase this item.");
+				outputText("Giacomo sighs, indicating you need 100 gems to purchase this item.");
 				doNext(bookMenu);
 			}
 			else {
-				outputText("\n\nThe crazy merchant nods satisfied when you hand him over a hundred gems and in exchange gives you a black book.");
+				outputText("The crazy merchant nods satisfied when you hand him over a hundred gems and in exchange gives you a black book.");
 				player.gems -= 100;
 				statScreenRefresh();
 				inventory.takeItem(consumables.B__BOOK, bookMenu);
@@ -569,21 +659,21 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function pitchRedManuscript():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
-			outputText("Giacomo holds up a red manuscript.  \"<i>While you may not find value in this as a simple manuscript,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  Maybe even some usefull spell!  I will offer the super-cheap price of 125 gem!</i>\"");
+			outputText("Giacomo holds up a red manuscript.  \"<i>While you may not find value in this as a simple manuscript,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  Maybe even some useful spell!  I will offer the super-cheap price of 125 gems!</i>\"");
 			doYesNo(buyRedManuscript, bookMenu);
 		}
 		
 		private function buyRedManuscript():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 125) {
-				outputText("\n\nGiacomo sighs, indicating you need 125 gem to purchase this item.");
+				outputText("Giacomo sighs, indicating you need 125 gems to purchase this item.");
 				doNext(bookMenu);
 			}
 			else {
-				outputText("\n\nThe crazy merchant nods satisfied when you hand him over a one hundred twenty five gems and in exchange gives you a red manuscript.");
+				outputText("The crazy merchant nods satisfied when you hand him over a one hundred twenty five gems and in exchange gives you a red manuscript.");
 				player.gems -= 125;
 				statScreenRefresh();
 				inventory.takeItem(consumables.RMANUSC, bookMenu);
@@ -591,21 +681,21 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function pitchCrimsonJade():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
-			outputText("Giacomo holds up a crimson jade.  \"<i>While you may not find value in this as a simple jade,</i>\", Giacomo waves, \"<i>you never know what you may learn from it!  Maybe even some usefull soulskill!  I will offer the super-cheap price of 125 gem!</i>\"");
+			outputText("Giacomo holds up a crimson jade.  \"<i>While you may not find value in this as a simple jade,</i>\", Giacomo waves, \"<i>you never know what you may learn from it!  Maybe even some useful soulskill!  I will offer the super-cheap price of 125 gems!</i>\"");
 			doYesNo(buyCrimsonJade, bookMenu);
 		}
 		
 		private function buyCrimsonJade():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 125) {
-				outputText("\n\nGiacomo sighs, indicating you need 125 gem to purchase this item.");
+				outputText("Giacomo sighs, indicating you need 125 gems to purchase this item.");
 				doNext(bookMenu);
 			}
 			else {
-				outputText("\n\nThe crazy merchant nods satisfied when you hand him over a one hundred twenty five gems and in exchange gives you a red manuscript.");
+				outputText("The crazy merchant nods satisfied when you hand him over a one hundred twenty five gems and in exchange gives you a Crimson Jade.");
 				player.gems -= 125;
 				statScreenRefresh();
 				inventory.takeItem(consumables.CRIMS_J, bookMenu);
@@ -613,21 +703,21 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function pitchElementalistsTome():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
-			outputText("Giacomo holds up an Elementalist’s Tome.  \"<i>While you may not find value in this as a simple tome,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  I will offer the super-cheap price of 1,000 gem!</i>\"");
+			outputText("Giacomo holds up an Elementalist’s Tome.  \"<i>While you may not find value in this as a simple tome,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  I will offer the super-cheap price of 1,000 gems!</i>\"");
 			doYesNo(buyElementalistsTome, bookMenu);
 		}
 		
 		private function buyElementalistsTome():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 1000) {
-				outputText("\n\nGiacomo sighs, indicating you need 1,000 gem to purchase this item.");
+				outputText("Giacomo sighs, indicating you need 1,000 gems to purchase this item.");
 				doNext(bookMenu);
 			}
 			else {
-				outputText("\n\nThe crazy merchant nods satisfied when you hand him over thousand gems and in exchange gives you an Elementalist’s Tome.");
+				outputText("The crazy merchant nods satisfied when you hand him over thousand gems and in exchange gives you an Elementalist’s Tome.");
 				player.gems -= 1000;
 				statScreenRefresh();
 				inventory.takeItem(weaponsrange.E_TOME_, bookMenu);
@@ -635,7 +725,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function pitchDildo():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.hasKeyItem("Dildo") >= 0) {
 				outputText("<b>You already own a Dildo!</b>");
@@ -645,9 +735,9 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			outputText("Giacomo takes out a slender tube roughly over half a foot in length.  \"<i>Since you seek pleasure, this is as simple and effective as it gets.  This dildo is a healthy seven inches long and is suitable for most women and even adventurous men.  Pick a hole, stick it in and work it to your heart's content or your partner's pleasure.  The single-piece construction makes it solid, sturdy and straightforward.  For 20 gems, you can take matters into your own hands.  How about it?</i>\"");
 			doYesNo(buyDildo, eroticaMenu);
 		}
-			
+
 		private function buyDildo():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 20) {
 				outputText("\n\nGiacomo sighs, indicating you need " + String(20 - player.gems) + " more gems to purchase this item.");
@@ -663,7 +753,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function pitchSelfStimulationBelt():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.hasKeyItem("Self-Stimulation Belt") >= 0) {
 				outputText("<b>You already own a Self-Stimulation Belt!</b>");
@@ -675,7 +765,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function buySelfStimulationBelt():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 30) {
 				outputText("\n\nGiacomo sighs, indicating you need " + String(30 - player.gems) + " more gems to purchase this item.");
@@ -690,7 +780,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function pitchAllNaturalSelfStimulationBelt():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.hasKeyItem("All-Natural Self-Stimulation Belt") >= 0) {
 				outputText("<b>You already own an All-Natural Self-Stimulation Belt!</b>");
@@ -712,7 +802,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function buyAllNaturalSelfStimulationBelt():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 40) {
 				outputText("\n\nGiacomo sighs, indicating you need " + String(40 - player.gems) + " more gems to purchase this item.");
@@ -725,9 +815,9 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			player.gems -= 40;
 			statScreenRefresh();
 		}
-			
+
 		private function pitchOnahole():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.hasKeyItem("Plain Onahole") >= 0) {
 				outputText("<b>You already own a Plain Onahole!</b>");
@@ -739,7 +829,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function buyOnahole():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 20) {
 				outputText("\n\nGiacomo sighs, indicating you need " + String(20 - player.gems) + " more gems to purchase this item.");
@@ -752,9 +842,9 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			player.gems -= 20;
 			statScreenRefresh();
 		}
-			
+
 		private function pitchDeluxeOnahole():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.hasKeyItem("Deluxe Onahole") >= 0) {
 				outputText("<b>You already own a Deluxe Onahole!</b>");
@@ -766,7 +856,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function buyDeluxeOnahole():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 50) {
 				outputText("\n\nGiacomo sighs, indicating you need " + String(50 - player.gems) + " more gems to purchase this item.");
@@ -781,7 +871,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function pitchAllNaturalOnahole():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.hasKeyItem("All-Natural Onahole") >= 0) {
 				outputText("<b>You already own an All-Natural Onahole!</b>");
@@ -800,7 +890,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function buyAllNaturalOnahole():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 150) {
 				outputText("\n\nGiacomo sighs, indicating you need " + String(150 - player.gems) + " more gems to purchase this item.");
@@ -815,7 +905,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function pitchDualStimulationBelt():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.hasKeyItem("Dual Belt") >= 0) {
 				outputText("<b>You already own a Dual Belt!</b>");
@@ -827,7 +917,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function buyDualStimulationBelt():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 50) {
 				outputText("\n\nGiacomo sighs, indicating you need " + String(50 - player.gems) + " more gems to purchase this item.");
@@ -844,7 +934,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function wormRemoval():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			outputText("You toss the gems at the merchant, who calmly hands you the bottle. Gulping down the liquid, your guts light up as if you swallowed fire. Pain overwhelms your body and you drop to your knees convulsing. You curse the merchant for poisoning you, yet you can only choke out gibberish through your groans. The pain quickly focuses from your stomach to your crotch as the worms inside you are clearly NOT happy with what you have done. You fall onto your back as the thrashing overwhelms you. With an unexpected climax, every worm in your body fights to escape your gonads. The fat worm that resided deep in your sex lazily pushes itself out last.\n\n");
 			outputText("Upon seeing the fat worm, Giacomo displays a freakish celerity by jumping off his cart, grabbing an empty container and collecting the fat worm. Regaining your senses, you look at him with inquisitive shock at what he just did.\n\n");
@@ -863,7 +953,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function wormRemovalOffer():void {
-			spriteSelect(23);
+			spriteSelect(SpriteDb.s_giacomo);
 			outputText("\n\n\"<i>Been playing with creatures best left alone, I see</i>\", he chuckles, \"<i>Infestations of any kind are annoying, yet your plight is quite challenging given the magnitude of corrupt creatures around here. It is not the first time I have seen one infested with THOSE worms.</i>\"\n\n");
 			outputText("You ask how he knows of your change and the merchant giggles heartily.\n\n");
 			outputText("\"<i>Do not look at me as if I am a mystic.</i>\", Giacomo heckles lightly. \"<i>Your crotch is squirming.</i>\"\n\n");
@@ -885,7 +975,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function nightSuccubiFirstTime():void {
-			spriteSelect(8);
+			spriteSelect(SpriteDb.s_cerulean_succubus);
 			outputText("\nAs you sleep, your rest becomes increasingly disturbed.  You feel a great weight on top of you and you find it difficult to breathe.  Stirred to consciousness, your eyes are greeted by an enormous pair of blue tinged breasts.  The nipples are quite long and thick and are surrounded by large, round areola.  A deep, feminine voice breaks the silence.  \"<i>I was wondering if you would wake up.</i>\"  You turn your head to the voice to see the visage of a sharp-featured, attractive woman.  The woman grins mischievously and speaks again.  \"<i>I was hoping that idiot, Giacomo, did not dilute the 'potion' again.</i>\"  Your campfire reflects off the woman's face and her beauty contains some sharply contrasting features.  The pupils of her eyes are slit like a cat's.  As she grins, she bares her teeth, which contain two pairs of long and short fangs.  This woman is clearly NOT human!  In shock, you attempt to get up, only prompting the woman to prove her inhuman nature by grabbing your shoulders and pinning you to the ground.  You see that each finger on her hand also contains a fourth joint, further proving her status.  Before you can speak a word, the woman begins mocking your fear and places her face in front of yours.  Her face is almost certainly demonic in nature.\n\n");
 			if (player.gender == 0) {
 				outputText("She quickly moves down to your crotch... only to discover no organs down there.\n\n");
@@ -923,7 +1013,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		
 		private function ceruleanSuccubusEncounterPart2():void {
 			clearOutput();
-			spriteSelect(8);
+			spriteSelect(SpriteDb.s_cerulean_succubus);
 			if (player.gender == 1) {
 				outputText("Your natural instincts immediately take over and you open your mouth and allow her nipple inside.  Immediately, your mouth has a mind of its own as you press your head firmly into her breast and begin suckling the unnaturally long teat like a starving baby.  The demon-woman laughs in satisfaction.  \"<i>To think, that you believed me to do you harm!</i>\" she taunts.  \"<i>Drink, little man.  Feed your lust as you will soon feed mine.</i>\"  Immediately, you feel her milk flood your mouth.  Its taste immediately reminds you of the potion you got from Giacomo.  You realize the potion was not a potion at all, but this demon's breast milk!  Concerned only for your blind libido, the suction of your mouth coaxes torrents of the devil's fluid into your mouth and down your throat.  She continues teasing your cock only enough to maintain your erection.  In time, your stomach signals that you are full and you break the seal from her tit, making a loud 'pop'.  She briefly hoses you down with milk, soaking you.\n\n");
 				outputText("The demon has a satisfied look on her face.  \"<i>Did I taste good?  Was I wholesome and fulfilling?</i>\" she asks.  \"<i>Since you have fed from my life-milk, it is only fair that I do the same.  To be fair, 'yes', I am as fierce as I look and I will leave you sore and insensible.  However, I do so to pleasure you and feed myself.  Accept it and be happy.</i>\"  She gives you another inhumanly toothy grin and kisses you deeply.  A small pang of fear still shoots through you as you feel the sharpness of her teeth.  She breaks away from your lips and sighs in excitement.  \"<i>Now, I FEED!</i>\" she utters jubilantly.");
@@ -936,10 +1026,10 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			dynStats("tou", .3, "lib", .5, "sen", .5, "lus", 5, "cor", 1);
 			doNext(ceruleanSuccubusEncounterPart3);
 		}
-			
+
 		private function ceruleanSuccubusEncounterPart3():void {
 			clearOutput();
-			spriteSelect(8);
+			spriteSelect(SpriteDb.s_cerulean_succubus);
 			if (player.gender == 1) {
 				outputText("Rotating herself into a 69 position, she seizes your throbbing member and effortlessly begins deep throating.  Her thighs wrap around your head and confront you with her surprisingly hairy pussy.  Her clitoris is long and erect, begging for attention and the smell of her pheromones enslaves you.  You bury your face into her furry mound, ignoring your normal revulsion to such an unshaved state and begin eating her as well as any woman you have ever pleased.  The demon takes your cock out of her mouth to cry in delight.  \"<i>YES, LITTLE MAN!</i>\" she screams.  \"<i>LICK ME!  TEASE ME!  LOVE MY WOMB WITH YOUR TONGUE!</i>\"  She responds by clamping her mouth around the head of your penis and sucking smartly.  A sharp pain in your ass signals the entry of her bony fingers working their way to your inner manhood.  Finding the root of your sex easily, she mashes down to force you to cum.\n\n");
 				outputText("Finding it impossible to resist such pleasure, you immediately begin cumming.  Glob after glob, stream after stream of your semen shoots into the woman's mouth.  Her timed sucking ensures that she swallows each drop as you launch it into her.  While you have been proud of the ability to cum in a woman for over a minute, you are wracked with both pain and pleasure as your ejaculations continue for almost ten.  Once you have spent your last, the demon releases your penis to bear down on your face with her thighs and unloads a massive squirting orgasm.  Your face is soaked with pussy juice as you see her cunt spasm from the force of her pleasure.  The sight of her rhythmic muscles is hypnotic.  She then promptly removes her finger from your ass.");
@@ -959,7 +1049,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		}
 		
 		private function ceruleanSuccubusEncounterPart4():void {
-			spriteSelect(8);
+			spriteSelect(SpriteDb.s_cerulean_succubus);
 			if (player.gender == 1) {
 				clearOutput();
 				outputText("She stands up and helps you to your feet.  While dazed, ");
@@ -975,9 +1065,9 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			}
 			inventory.takeItem(consumables.CERUL_P, playerMenu);
 		}
-				
+
 		private function nightSuccubiRepeat():void {
-			spriteSelect(8);
+			spriteSelect(SpriteDb.s_cerulean_succubus);
 			if(player.gender == 0) {
 				if(flags[kFLAGS.CERULEAN_POTION_NEUTER_ATTEMPTED] == 0) {
 					outputText("\nAs you sleep, your rest becomes increasingly disturbed. You feel a great weight on top of you and you find it difficult to breathe. Stirred to consciousness, your eyes are greeted by an enormous pair of blue-tinged breasts. The nipples are quite long and thick and are surrounded by large, round areola. A deep, feminine voice breaks the silence, \"<i>I was wondering if you would wake up.</i>\" You turn your head to the voice to see the visage of a sharp featured, attractive woman. The woman grins mischievously and speaks again, \"<i>I was hoping that idiot, Giacomo, did not dilute the 'potion' again.</i>\" Your campfire reflects off the woman's face and her beauty contains some sharply contrasting features. The pupils of her eyes are slit like a cat's. As she grins, she bares her teeth, which contain two pairs of long and short fangs. This woman is clearly NOT human! In shock, you attempt to get up, only prompting the woman to prove her inhuman nature by grabbing your shoulders and pinning you to the ground. You see that each finger on her hand also contains a fourth joint, further proving her status. Before you can speak a word, the woman begins mocking your fear and places her face in front of yours. Her face is almost certainly demonic in nature.\n\n");
@@ -1084,8 +1174,8 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 					outputText("\"<i>Well, this was unexpected.</i>\", she says, \"<i>I did not expect you to change. Normally, men are susceptible to my milk, but apparently it works on herms, too.</i>\"\n\n");
 		
 					outputText("As you stand, you feel awkward as your body does not feel right. You look at the Succubus and she no longer appears as large as she once was. Quick to realize a problem, you look at your reflection in a small bucket at your campsite. Other than your own unique facial features, you see ANOTHER Cerulean Succubus looking back at you! You ARE a Cerulean Succubus!");
-					//[(if the player has a large number of transformations) 
-					if(player.horseScore() + player.dogScore() + player.nagaScore() + player.goblinScore() + player.sharkScore() + player.minotaurScore() + player.cowScore() > 5) outputText("  All of the other corruptions and changes to your body have faded away as your new form has taken shape.");
+					//[(if the player has a large number of transformations)
+					if(player.racialScore(Races.HORSE) + player.racialScore(Races.DOG) + player.racialScore(Races.NAGA) + player.racialScore(Races.GOBLIN) + player.racialScore(Races.SHARK) + player.racialScore(Races.MINOTAUR) + player.racialScore(Races.COW) > 5) outputText("  All of the other corruptions and changes to your body have faded away as your new form has taken shape.");
 					outputText("  As the reality soaks in, you feel a sharp pain in your stomach and your cock. You NEED to feed. Cum, milk, it doesn't matter. Likewise, your dick is hard and you need to cum. Despite your need, you cannot bring yourself to masturbate. You want ANOTHER'S attention.\n\n");
 		
 					outputText("Without further acknowledgement, you take up your on your demonic wings to find your first \"meal\". The Succubus left behind simply giggles as she sees another of her kind take up the night in search for more meals and pleasure.");
