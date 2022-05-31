@@ -543,11 +543,11 @@ public class Exploration extends BaseContent
 				hiddencavediscovery();
 				return;
 			}
-			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && TrollVillage.ZenjiVillageStage == 0 && rand(10) == 0){
+/*			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && TrollVillage.ZenjiVillageStage == 0 && rand(10) == 0) {
 				SceneLib.trollVillage.FirstEncountersoftheTrollKind();
 				return;
 			}
-/*			if (player.level > 5 && flags[kFLAGS.RYUBI_LVL_UP] < 1 && rand(4) == 0) {
+			if (player.level > 5 && flags[kFLAGS.RYUBI_LVL_UP] < 1 && rand(4) == 0) {
 				ryubifirstenc();
 				return;
 			}

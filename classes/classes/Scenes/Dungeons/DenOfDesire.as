@@ -80,7 +80,7 @@ public class DenOfDesire extends DungeonAbstractContent
 				outputText("Regardless of the reason, she had exactly whatever missing information you needed to finish the ritual. ");
 				flags[kFLAGS.GARGOYLE_QUEST]++;
 			}
-			else outputText("You pick up her research, not wanting it to fall into the wrong hands, plus  it may come in handy in the future.\n\n");
+			else outputText("You pick up her research, not wanting it to fall into the wrong hands, plus it may come in handy in the future.\n\n");
 			outputText("<b>(Key Item Acquired: Gargoyle demonic researches!)</b>");
 			player.createKeyItem("Gargoyle demonic researches", 0, 0, 0, 0);
 			flags[kFLAGS.DEN_OF_DESIRE_BOSSES] = 3;

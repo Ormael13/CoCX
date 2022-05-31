@@ -23,9 +23,9 @@ public class Race {
 	 */
 	public var mutations:/*Array*/Array = [];
 	/**
-	 * Min score to get bonuses from mutation and bloodline
+	 * Min score to get bonuses from mutation
 	 */
-	public var mutationThreshold:int = 5;
+	public var mutationThreshold:int = 3;
 	
 	/**
 	 * true - do not display the race in menus
