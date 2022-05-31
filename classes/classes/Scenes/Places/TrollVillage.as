@@ -174,11 +174,11 @@ public class TrollVillage extends BaseContent implements SaveableState{
             if (KaljiUnlocked) outputText("You can meet Kal’ji at his personal hut.\n");
             if (ZenjiVillageStage == 0) ZenjiVillageStage = 0.5;
 
-            var preZenjiDialogue:String = (ZenjiVillageStage < 1)?"Look for the nice couple":"Look for Zenji's Parents";
+
             var menuItems:Array = [];
             menuItems.push("Dining Hall", SceneLib.trollVillage.diningHalls.GrabABite2Eat, "Catch a bite to eat.");
             menuItems.push("Elder's Hut", SceneLib.trollVillage.elderstore.ElderShops, "Look for the elder of the village.");
-            menuItems.push((JabalaUnlocked && !ZenjiBerated)?"Jabala's Hut":"???", ((JabalaUnlocked && !ZenjiBerated)?SceneLib.trollVillage.jabala.JabalaHome:false), [preZenjiDialogue, "You don't want to disturb the nice couple."]);
+            menuItems.push((JabalaUnlocked && !ZenjiBerated)?"Jabala's Hut":"???", ((JabalaUnlocked && !ZenjiBerated)?SceneLib.trollVillage.jabala.JabalaHome:false), [(ZenjiVillageStage < 1)?"Look for the nice couple":"Look for Zenji's Parents", "You don't want to disturb the nice couple."]);
             menuItems.push((YenzaUnlocked > 0)?"Yenza's Hut":"???", ((YenzaUnlocked > 0)?SceneLib.trollVillage.yenza.YenzaHome:false), ["Look for Yenza","You don't know who lives there."]);
             menuItems.push((KaljiUnlocked == 5)?"Kalji's Hut":"???", ((KaljiUnlocked == 5)?SceneLib.trollVillage.kalji.KaljiHome:false), ["",""]);
             menuGen(menuItems,0, camp.returnToCampUseOneHour);
