@@ -8,6 +8,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.*;
+import classes.IMutations.IMutationsLib;
 import classes.Items.Consumables.EmberTF;
 import classes.Scenes.Places.TelAdre.YvonneArmorShop;
 import classes.Scenes.SceneLib;
@@ -98,7 +99,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			}
 			if (followerEmber() && !player.hasStatusEffect(StatusEffects.EmberNapping)) {
 				//Mino cum freakout - PC partly addicted!
-				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 1 && player.findPerk(PerkLib.MinotaurCumAddict) < 0 && flags[kFLAGS.EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 0) {
+				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 1 && !player.hasPerk(PerkLib.MinotaurCumAddict) && flags[kFLAGS.EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 0) {
 					minotaurJizzFreakout();
 					needNext = true;
 				}
@@ -188,12 +189,12 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			return 60;
 		}
 
-		private function emberHasCock():Boolean
+		public function emberHasCock():Boolean
 		{
 			return (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3);
 		}
 
-		private function emberHasVagina():Boolean
+		public function emberHasVagina():Boolean
 		{
 			return (flags[kFLAGS.EMBER_GENDER] == 2 || flags[kFLAGS.EMBER_GENDER] == 3);
 		}
@@ -250,8 +251,16 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				if (flags[kFLAGS.EMBER_AFFECTION] < 75) addButton(7, "Sleep With?", sleepWithEmber).hint("Try to spend the night with Ember.");
 				else addButton(7, "Sleep With", sleepWithEmber).hint("Spend the night with Ember.");
 			}
+			if (flags[kFLAGS.SLEEP_WITH] == "Ember") addButton(8, "NoSleepWith", noSleepWith);
 			addButton(14, "Back", camp.campFollowers);
 		}
+
+        private function noSleepWith():void {
+            clearOutput();
+            outputText("You decide to spend the next night alone and tell this to Ember. She tries to look indifferent, but there's a hint of disappointment in her eyes.")
+            flags[kFLAGS.SLEEP_WITH] = "";
+            doNext(emberCampMenu);
+        }
 
 //Approach for sex - initial output when selecting [Sex] menu (Z)
 		private function emberSexMenu(output:Boolean = true):void
@@ -408,7 +417,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\n\n\"<i>What is this?  An egg?  Eggs aren't much good for armor, cutie, no matter how big.  One good blow and POW!</i>\"  To demonstrate, she raises her hand, then strikes the shell with the blade of her palm - and pulls it away, smarting.  \"<i>My gods!  It's so hard!  Ok... maybe we can do this.</i>\"");
 			outputText("\n\nShe turns the cracked shell over in her hands, then puts it into the fire and whacks at it with a pair of tongs, attempting to bend and break it.  \"<i>Ist not softening.  Tch, cannot make armor if I cannot shape it.  Vell, it iz nice und curved, ja?  It vill make a decent small-shield to deflect blows, if I sand ze edges down und fit some straps.</i>\"");
 			outputText("\n\nYou tell the armorsmith that a shield will be fine, and she sets to work smoothing the edges.  After nearly an hour of idle browsing through armor you don't really care about, she attracts your attention.  \"<i>It's done, cutie.  Payment up front.</i>\"");
-			outputText("\n\nHanding over the gems, you take the white shell back from her; true to her word, she's rounded it into a proper shield and fitted adjustable straps to the back.  Its hardness is indisputable, but you can only wonder if its liquid absorption properties are still intact.  Worth a test, right?");
+			outputText("\n\nHanding over the gems, you take the white shell back from her; true to her word, she's rounded it into a proper shield and fitted adjustable straps to the back.  Its hardness is indisputable, but you can only wonder if its liquid absorption properties are still intact.  Worth a test, right?\n\n");
 			//this is where the Dragonshell Shield lives, git you one!
 			player.gems -= 200;
 			statScreenRefresh();
@@ -1060,7 +1069,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				if (flags[kFLAGS.EMBER_GENDER] >= 2) outputText("  The inviting lips of a human-looking pussy purse between her legs; some moisture seems to have gathered on her labia, giving it a slick look that just begs for attention.");
 
 				outputText("\n\nEmber's legs themselves are somewhat human-like in appearance, but they're covered in the thick protective scales that don most of " + emberMF("his", "her") + " extremities.  Only the feet look like anything but normal human anatomy; the clawed feet of a predator decorate " + emberMF("him", "her") + " instead, capped with talons meant for gripping at the ground... or at prey.");
-				outputText("\n\nHaving drawn the dragon's attention with your examination of " + emberMF("his", "her") + " body, Ember darts a reptilian tongue out from " + emberMF("his", "her") + " lips, as if to entice you.");
+				outputText("\n\nYou've drawn the dragon's attention with your examination of " + emberMF("his", "her") + " body - Ember darts a reptilian tongue out from " + emberMF("his", "her") + " lips, as if to entice you.");
 			}
 			doNext(emberCampMenu);
 		}
@@ -1300,7 +1309,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			}
 			outputText("\n\nSatisfied, Ember turns to take another look at you.");
 			//(If PC has high dragon or lizard score)
-			if (player.nagaScore() >= 3 || player.lizardScore() >= 3 || player.dragonScore() >= 3) {
+			if (player.racialScore(Races.NAGA) >= 3 || player.racialScore(Races.LIZARD) >= 3 || player.racialScore(Races.DRAGON) >= 3) {
 				outputText("  Ember's eyes linger on your form.  After a moment of awkward silence, you clear your throat.  " + emberMF("he", "she") + " blinks and says hurriedly.  \"<i>Sorry... I was just admiring you-</i>\" Realizing what " + emberMF("he", "she") + " was about to say,and quickly blurts out.  \"<i>I mean the weather! Yes, nice day today isn't it?</i>\"  You're not convinced, but let it slide. Ember recomposes and clears " + emberMF("his", "her") + " throat before saying.");
 				//(+1 Affection)
 				points++;
@@ -1804,7 +1813,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\n\nEmber flushes with embarrassment.  \"<i>I-I... That's it!  No more milk for you!</i>\" " + emberMF("he", "she") + " declares, hauling you upright and shooing you out of her den.");
 				outputText("\n\nYou shake your head with good temper.  Still, you got your fill of her milk, and you feel refreshed and renewed, new vitality flowing through your veins.");
 				//(PC's D.Breath timer = not ready: Your throat feels soothed as the scratching and soreness die down; you feel like you could shout to the mountaintops!)
-				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(MutationsLib.DraconicLungsPrimitive) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(MutationsLib.DraconicLungs) < 0)) {
+				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 2) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1)) {
 					if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 					if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
 					if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
@@ -1814,7 +1823,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				}
 				player.refillHunger(25);
 				//(no new PG, PC has dragon-morph status and is opposite Ember's sex:
-				if (rand(2) == 0 && player.dragonScore() >= 4 && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
+				if (rand(2) == 0 && player.racialScore(Races.DRAGON) >= 4 && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
 					outputText("  Though, a sudden swell of lust races through your ");
 					if (player.hasCock()) {
 						outputText(cockDescript(0));
@@ -1871,7 +1880,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\n\nEmber can't hide the faintest of smiles that graces " + emberMF("his", "her") + " scaly face.  You yelp softly as you feel a sharp prick against your belly; when you feel it again, you jump out of Ember's lap to reveal the clawed finger prodding you.  \"<i>Payback for teasing me earlier.  And don't think I'll be feeding you my milk everytime you ask,</i>\" " + emberMF("he", "she") + " finishes, with a small puff of smoke.");
 				outputText("\n\nYou can't resist pointing out that " + emberMF("he", "she") + " certainly seemed eager to let you drink your fill, and you didn't hear any complaining over " + emberMF("his", "her") + " purring.  Before " + emberMF("he", "she") + " can rebut that, you turn and leave the dragon in " + emberMF("his", "her") + " den.");
 				outputText("\n\nThe drink you got did you plenty of good; you feel refreshed and renewed, new vitality flowing through your veins.");
-				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(MutationsLib.DraconicLungsPrimitive) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(MutationsLib.DraconicLungs) < 0)) {
+				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 2) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1)) {
 					if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 					if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
 					if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
@@ -1881,7 +1890,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				}
 				player.refillHunger(50);
 				//(no new PG, PC has dragon-morph status and is opposite Ember's sex:
-				if (rand(2) == 0 && player.dragonScore() >= 4 && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
+				if (rand(2) == 0 && player.racialScore(Races.DRAGON) >= 4 && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
 					outputText("  Though, a sudden swell of lust races through your ");
 					if (player.hasCock()) {
 						outputText(cockDescript(0));
@@ -1949,7 +1958,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\n\nThe soft purrs that accompany each suckle and the soft caresses on your body, bringing you ever closer to these two motherlodes of Ember-flavoured treasure, only serve to enhance the whole experience.");
 
 				outputText("\n\nEventually, your swallows of the rich, freely-flowing, creamy dragon-milk cease as your stomach fills up.");
-				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(MutationsLib.DraconicLungsPrimitive) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(MutationsLib.DraconicLungs) < 0)) {
+				if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 2) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1)) {
 					if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 					if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
 					if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);
@@ -1977,12 +1986,12 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 					outputText("\n\nYeah, yeah.  You finish draining the second breast and then lift it, planting a kiss on the sensitized nipple.");
 				}
 				player.refillHunger(50);
-				if (player.tou > 40) dynStats("tou", -1);
+				if (player.tou > 40) player.addCurse("tou", 1, 1);
 				//merge wuss and jerk forks
 				outputText("\n\nEmber gets so flustered that " + emberMF("he", "she") + " just stares at you in stunned silence, wearing a goofy smile.  \"<i>Wha... you know, there's no point in saying anything.  I know you'll just sneak another opportunity like this in the future... doesn't mean I won't make you pay for this when I catch you later.</i>\"");
 				outputText("\n\nYou whisper into her ear that you're looking forward to it, and gently raise yourself from " + emberMF("his", "her") + " lap to leave.");
 				//(no new PG, PC has dragon-morph status and is opposite Ember's sex:
-				if (rand(2) == 0 && player.dragonScore() >= 4 && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
+				if (rand(2) == 0 && player.racialScore(Races.DRAGON) >= 4 && player.gender > 0 && (player.gender != flags[kFLAGS.EMBER_GENDER] || (player.gender == 3 && flags[kFLAGS.EMBER_GENDER] == 3))) {
 					outputText("  Though, a sudden swell of lust races through your ");
 					if (player.hasCock()) {
 						outputText(cockDescript(0));
@@ -3180,7 +3189,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("\n\n\"<i>I-I can't keep doing this... you're going to dry me out...</i>\" Ember says, panting in exhaustion, although from " + emberMF("his", "her") + " expression you'd have a hard time believing " + emberMF("he", "she") + " isn't enjoying it.  You give " + emberMF("him", "her") + " an exaggerated pout and tell " + emberMF("him", "her") + " you're not quite done yet.  Surely, just one or two more...?");
 			//[(has History: Slut or Whore)
-			if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.HistorySlut) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0 || player.findPerk(PerkLib.PastLifeSlut) >= 0) outputText("  Using the skills you've honed, you make the muscles in your vagina ripple and wrinkle, teasing the cock caught inside you in a way few women can.");
+			if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.HistorySlut) || player.hasPerk(PerkLib.PastLifeWhore) || player.hasPerk(PerkLib.PastLifeSlut)) outputText("  Using the skills you've honed, you make the muscles in your vagina ripple and wrinkle, teasing the cock caught inside you in a way few women can.");
 			outputText("  Mmm... you can feel your own second orgasm coming in hot.  Maybe after another 4 or 5, you'll let the dragon go...");
 
 			outputText("\n\nEventually, exhausted, belly stuffed with dragon-spunk to the point you look ready to birth a pair of dragon toddlers, and feeling incredibly well-sated, you lay on Ember's chest, cuddling your limp, utterly drained lover.  The dragon is fast asleep, having passed out from exhaustion, and you amuse yourself by listening to " + emberMF("his", "her") + " heart beating as " + emberMF("he", "she") + " inhales and exhales softly in " + emberMF("his", "her") + " sleep.  To be honest, you could use a nap too, and you pass out atop " + emberMF("him", "her") + ".");
@@ -3763,10 +3772,6 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			if (flags[kFLAGS.EMBER_OVIPOSITION] == 0) {
 				//40% chance of boy, 40% chance of girl and 20% chance of both
 				//(If the PC has no pussy)
-				if (!player.hasVagina()) {
-					outputText("A terribly painful ripping feeling comes from your crotch. Reaching down to touch the tender spot you feel a spike of pleasure and moistness.  <b>You've grown a vagina!</b>\n\n");
-					player.createVagina();
-				}
 				outputText("You find yourself doubling over - well, as far as you can given your hugely gravid stomach, letting out a hollow cry of pain.  You can feel the muscles in your midriff starting to squeeze and ripple in a fashion you just know signifies the onset of labor.  You cry out for Ember to come and attend you.  Ember rushes towards you in a blur, stopping mere inches from you, panting.  \"<i>What is it?  Is it time!?  Are you in labor!?</i>\" " + emberMF("he", "she") + " asks in a hurry.  You nod and tell " + emberMF("him", "her") + " that you are.");
 
 				outputText("\n\nEmber wastes no time, " + emberMF("he", "she") + " hefts you into " + emberMF("his", "her") + " arms and takes you to " + emberMF("his", "her") + " den, gently setting you down on the soft leaves; then " + emberMF("he", "she") + " starts undressing you, stripping your [armor] as quickly as " + emberMF("he", "she") + " can.  \"<i>Okay, Okay...  What do you need?  W-what should I do!?  Do you need anything!?  How are you feeling!?</i>\" Ember asks in panic, the excitement of what's about to happen too much to bear for the dragon" + emberMF("-boy", "-girl") + ".");
@@ -3785,7 +3790,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				player.cuntChange(80, true, true, false);
 
 				outputText("\n\nYou strain with all your might, drawing on wells of inner strength you weren't even sure you had, hovering ");
-				if (player.findPerk(PerkLib.Masochist) >= 0) outputText("deliciously ");
+				if (player.hasPerk(PerkLib.Masochist)) outputText("deliciously ");
 				outputText("on the boundary between pleasure and pain.  You aren't sure how much more you can take.");
 
 				outputText("\n\nEmber suddenly withdraws " + emberMF("his", "her") + " tongue and screams in joy, \"<i>I can see it! Push [name]!  You're almost done!</i>\"");
@@ -3845,11 +3850,6 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			}
 			//PC Lays Egg
 			else {
-				//(If the PC has no pussy)
-				if (!player.hasVagina()) {
-					outputText("A terribly painful ripping feeling comes from your crotch. Reaching down to touch the tender spot you feel a spike of pleasure and moistness.  <b>You've grown a vagina!</b>\n\n");
-					player.createVagina();
-				}
 				outputText("You find yourself doubling over - well, as far as you can given your hugely gravid stomach, letting out a hollow cry of pain.  You can feel the muscles in your midriff starting to squeeze and ripple in a fashion you just know signifies the onset of labor.  You cry out for Ember to come and attend you.  Ember rushes towards you in a blur, stopping mere inches from you, panting.  \"<i>What is it? Is it time!? Are you ready to lay!?</i>\" " + emberMF("he", "she") + " asks in a hurry.  You nod and tell " + emberMF("him", "her") + " that you are.");
 
 				outputText("\n\nEmber wastes no time - " + emberMF("he", "she") + " hefts you into " + emberMF("his", "her") + " arms and takes you to " + emberMF("his", "her") + " den, gently setting you down on the soft leaves.  Then " + emberMF("he", "she") + " starts undressing you, stripping your [armor] as quickly as " + emberMF("he", "she") + " can.  \"<i>Okay, Okay...  What do you need?  W-what should I do!?  Do you need anything!?  How are you feeling!?</i>\" Ember asks in panic, the excitement of what's about to happen too much to bear for the dragon" + emberMF("-boy", "-girl") + ".");
@@ -3869,7 +3869,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\n\nEmber complies, digging deeper into your searing hot canal; one of " + emberMF("his", "her") + " clawed hands, gently reach out to the protruding bulge within your belly, massaging you as best as " + emberMF("he", "she") + " can.  Slowly but steadily, the draconic egg within you starts making its way down your birth canal, stretching you out as it seeks freedom.");
 
 				outputText("\n\nYou strain with all your might, drawing on wells of inner strength you weren't even sure you had, hovering ");
-				if (player.findPerk(PerkLib.Masochist) >= 0) outputText("deliciously ");
+				if (player.hasPerk(PerkLib.Masochist)) outputText("deliciously ");
 				outputText("on the boundary between pleasure and pain.  You aren't sure how much more you can take.");
 
 				outputText("\n\nEmber suddenly withdraws " + emberMF("his", "her") + " tongue and screams in joy, \"<i>I can see it! Push [name]!  You're almost done!</i>\"");
@@ -4544,7 +4544,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 					outputText("\n\nYou've been at this for quite some time now... how many times have you drained Ember's breasts?  Four?  Five?  You don't know... and besides that, you're feeling rather tired yourself... plus all this milk sloshing inside your belly does not help keep you awake... still you must press on...");
 					outputText("\n\n<b>Even later...</b>");
 					outputText("\n\nWith a final powerful suckle, you finally drain the last of Ember's milk... for the 8th time you believe... tired and full... you don't even bother getting off the sleeping dragon.  You settle your head between Ember's soft, milky mounds, and surrounded by their soft " + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "scales" : "flesh") + ", you fall asleep right there...");
-					if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(MutationsLib.DraconicLungsPrimitive) < 0) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && player.findPerk(MutationsLib.DraconicLungs) < 0)) {
+					if ((player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 2) || ((player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonIceBreathCooldown) || player.hasStatusEffect(StatusEffects.DragonLightningBreathCooldown)) && !player.perkv1(IMutationsLib.DraconicLungIM) >= 1)) {
 						if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 						if (player.hasStatusEffect(StatusEffects.DragonDarknessBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonDarknessBreathCooldown);
 						if (player.hasStatusEffect(StatusEffects.DragonFireBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonFireBreathCooldown);

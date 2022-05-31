@@ -2,75 +2,55 @@
  * Coded by Liadri on 03.10.2018.
  */
 package classes.Items.Consumables {
-  import classes.Appearance;
-  import classes.BodyParts.Antennae;
-  import classes.BodyParts.Arms;
-  import classes.BodyParts.Ears;
-  import classes.BodyParts.Eyes;
-  import classes.BodyParts.Face;
-  import classes.BodyParts.Gills;
-  import classes.BodyParts.Hair;
-  import classes.BodyParts.Horns;
-  import classes.BodyParts.LowerBody;
-  import classes.BodyParts.RearBody;
-  import classes.BodyParts.Skin;
-  import classes.BodyParts.Tail;
-  import classes.BodyParts.Tongue;
-  import classes.BodyParts.Wings;
-  import classes.CoC_Settings;
-  import classes.CockTypesEnum;
-  import classes.EngineCore;
-  import classes.Items.Consumable;
-  import classes.PerkLib;
-  import classes.StatusEffects;
-  import classes.VaginaClass;
-  import classes.CoC;
+import classes.Appearance;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Face;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
+import classes.BodyParts.Wings;
+import classes.CoC;
+import classes.CoC_Settings;
+import classes.CockTypesEnum;
+import classes.EngineCore;
+import classes.Items.Consumable;
+import classes.Races;
+import classes.StatusEffects;
+import classes.VaginaClass;
 
-  public class Enigmanium extends Consumable {
+public class Enigmanium extends Consumable {
     public function Enigmanium() {
       super("Enigmanium", "Enigmanium", "a vial of Enigmanium", 40, "This strange brew crafted by Evangeline combines harpy, cat, human and centaur traits. Supposedly it could allow you to become a sphinx.");
     }
     public override function useItem(): Boolean {
       var choice: int;
       var changes: Number = 0;
-      var changeLimit: Number = 1;
+      var changeLimit: Number = player.additionalTransformationChances;
       var temp2: Number = 0;
       var temp3: Number = 0;
-      if (rand(2) == 0) changeLimit++;
-      if (rand(2) == 0) changeLimit++;
-      if (rand(3) == 0) changeLimit++;
-      if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
-      if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
-      if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
-      changeLimit = 1000;
       //Text go!
       clearOutput();
       outputText("You chug down the potion pinching your nose and hoping for the best. Knowledge flood your mind. Hey you could as well get to making riddles as a pastime.");
 
       //Speed raises up to 75
-      if (rand(3) == 0 && changes < changeLimit) {
+      if (rand(3) == 0 && changes < changeLimit && player.MutagenBonus("spe", 2)) {
         //low speed
-        if (player.spe <= 30) {
+        if (player.spe <= 30)
           outputText("\n\nYou feel... more balanced, sure of step. You're certain that you've become just a little bit faster.");
-          player.MutagenBonus("spe", 2);
-        }
         //medium speed
-        else if (player.spe <= 60) {
+        else if (player.spe <= 60)
           outputText("\n\nYou stumble as you shift position, surprised by how quickly you move. After a moment or two of disorientation, you adjust. You're certain that you can run faster now.");
-          player.MutagenBonus("spe", 1);
-        }
-        //high speed
-        else {
+        else
           outputText("\n\nYou pause mid-step and crouch. Your leg muscles have cramped up like crazy. After a few moments, the pain passes and you feel like you could chase anything down.");
-          player.MutagenBonus("spe", 0.5);
-        }
         changes++;
       }
       //Strength raises to 80
-      if (rand(3) == 0 && changes < changeLimit) {
+      if (rand(3) == 0 && changes < changeLimit && player.MutagenBonus("str", 1)) {
         if (rand(2) == 0) outputText("\n\nYour muscles feel taut, like a coiled spring, and a bit more on edge.");
         else outputText("\n\nYou arch your back as your muscles clench painfully.  The cramp passes swiftly, leaving you feeling like you've gotten a bit stronger.");
-        player.MutagenBonus("str", 1);
         changes++;
       }
       //Toughness drops if over 50
@@ -80,10 +60,8 @@ package classes.Items.Consumables {
         player.addCurse("tou", 2, 1);
       }
       //IntelliWisGain
-      if (rand(4) == 0 && changes < changeLimit) {
+      if (rand(4) == 0 && changes < changeLimit && (player.MutagenBonus("int", 2) || player.MutagenBonus("wis", 2))) {
         outputText("\n\nThousands of glowing symbols, hieroglyphics you remember them being denoted as, appear in vast arrays in your mind. Miraculously, you can make sense of them, as if they were in your own language. Shifting them, you giggle to yourself as you begin crafting a riddle that will surely baffle great minds. The visions end, and you feel incredibly enlightened! Is this how Sanurah feels?");
-        player.MutagenBonus("int", 2);
-        player.MutagenBonus("wis", 2);
         changes++;
       }
       //Libido gain
@@ -91,7 +69,7 @@ package classes.Items.Consumables {
         //Cat dicked folks
         if (player.catCocks() > 0) {
           choice = player.findFirstCockType(CockTypesEnum.CAT);
-          outputText("\n\nYou feel your [cock] growing hard, the barbs becoming more sensitive. You gently run your hands down them and imagine the feeling of raking the insides of a cunt as you pull.  The fantasy continues, and after ejaculating and hearing the female yowl with pleasure, you shake your head and try to drive off the image.  ");
+          outputText("\n\nYou feel your [cock"+(choice+1)+"] growing hard, the barbs becoming more sensitive. You gently run your hands down them and imagine the feeling of raking the insides of a cunt as you pull.  The fantasy continues, and after ejaculating and hearing the female yowl with pleasure, you shake your head and try to drive off the image.  ");
           if (player.cor < 33) outputText("You need to control yourself better.");
           else if (player.cor < 66) outputText("You're not sure how you feel about the fantasy.");
           else outputText("You hope to find a willing partner to make this a reality.");
@@ -103,8 +81,8 @@ package classes.Items.Consumables {
           outputText("turned on.");
         }
         player.addCurse("sen", 2, 1);
-        player.MutagenBonus("lib", 1);
-        changes++;
+        if (player.MutagenBonus("lib", 1))
+            changes++; //fair
       }
       if (player.blockingBodyTransformations()) changeLimit = 0;
       //Mare
@@ -465,7 +443,7 @@ package classes.Items.Consumables {
       }
 
       //DAT EYES
-      if (player.tailType == Tail.CAT && player.ears.type == Ears.LION && rand(4) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CAT && (player.hasFur() || (player.hasCoatOfType(Skin.SCALES) && player.dragonneScore() >= 4)) && player.faceType == Face.CAT && player.eyes.type != Eyes.CAT) {
+      if (player.tailType == Tail.CAT && player.ears.type == Ears.LION && rand(4) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CAT && (player.hasFur() || (player.hasCoatOfType(Skin.SCALES) && player.racialScore(Races.DRAGONNE) >= 4)) && player.faceType == Face.CAT && player.eyes.type != Eyes.CAT) {
         outputText("\n\n");
         CoC.instance.transformations.EyesCat.applyEffect();
         changes++;

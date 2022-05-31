@@ -7,11 +7,11 @@ import classes.StatusEffects;
 public class CurseOfDesireSpell extends AbstractHexSpell {
 	public function CurseOfDesireSpell() {
 		super(
-				"Curse of Desire",
-				"Arouse yourself and curse the target with lewd thoughts, weakening its resistance to lust and forcing it to take low lust damage each round for 8 rounds.",
-				TARGET_ENEMY,
-				TIMING_LASTING,
-				[TAG_DEBUFF,TAG_LUSTDMG]
+			"Curse of Desire",
+			"Arouse yourself and curse the target with lewd thoughts, weakening its resistance to lust and forcing it to take low lust damage each round for 8 rounds.",
+			TARGET_ENEMY,
+			TIMING_LASTING,
+			[TAG_DEBUFF,TAG_LUSTDMG]
 		);
 		baseManaCost = 400;
 		useManaType = Combat.USEMANA_BLACK;
@@ -64,7 +64,7 @@ public class CurseOfDesireSpell extends AbstractHexSpell {
 			if (display) {
 				outputText("The curse of desire slowly sap at your victim's resolve and countenance. ");
 			}
-			monster.teased(lustDmg3, false);
+			monster.teased(Math.round(monster.lustVuln * lustDmg3), false);
 			if (display) {
 				outputText("\n\n");
 			}
@@ -90,7 +90,7 @@ public class CurseOfDesireSpell extends AbstractHexSpell {
 		if (monster != null && monster.lustVuln != 0) {
 			if (monster.lustVuln < 0.1) return monster.lustVuln;
 		}
-		return 0.1
+		return 0.1;
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {

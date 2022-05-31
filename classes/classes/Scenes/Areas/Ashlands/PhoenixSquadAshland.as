@@ -64,7 +64,7 @@ import classes.internals.WeightedDrop;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.highMountains.phoenixScene.winAgainstPhoenix1();
+			SceneLib.highMountains.phoenixScene.winAgainstPhoenix(true);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -73,7 +73,7 @@ import classes.internals.WeightedDrop;
 				outputText("\n\nYour foes doesn't seem disgusted enough to leave...");
 				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				SceneLib.highMountains.phoenixScene.loseToPhoenix1();
+				SceneLib.highMountains.phoenixScene.loseToPhoenix(true);
 			}
 		}
 		

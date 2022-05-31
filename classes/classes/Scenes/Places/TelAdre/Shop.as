@@ -5,10 +5,13 @@ import classes.ItemType;
 import coc.xxc.BoundStory;
 
 public class Shop extends TelAdreAbstractContent {
-    protected var sprite:int = -1;
     protected var story:BoundStory;
     protected var localvars:Object = {};
     private static var _baseStory:BoundStory;
+
+    public function sprite():void {
+        spriteSelect(null);
+    }
     protected function get baseStory():BoundStory{
         if(!_baseStory){
             _baseStory = CoC.instance.rootStory.locate("teladreshops").bind(CoC.instance.context);
@@ -19,7 +22,7 @@ public class Shop extends TelAdreAbstractContent {
     public function enter():void {
         clearOutput();
         menu();
-        spriteSelect(sprite);
+        sprite();
         if(display("enter",localvars.enter)){
             doNext(inside);
             return;

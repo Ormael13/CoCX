@@ -22,7 +22,7 @@ public class DemonPackDesert extends Monster
 			}
 			if(hasStatusEffect(StatusEffects.phyllafight)) {
 				doNext(SceneLib.desert.antsScene.consolePhylla);
-			} else if (hpVictory || flags[kFLAGS.SFW_MODE] > 0){
+			} else if (hpVictory){
 				SceneLib.combat.cleanupAfterCombatImpl();
 			} else {
 				outputText("  Do you rape them?", true);
@@ -43,9 +43,6 @@ public class DemonPackDesert extends Monster
 				} else {
 					outputText("You offer yourself to the demons, who promptly begin laughing at your lack of endowments.  They fall on you as one, beating you into unconsciousness.", true);
 				}
-				SceneLib.combat.cleanupAfterCombatImpl();
-			} else if (flags[kFLAGS.SFW_MODE] > 0) {
-				outputText("Because SFW mode is enabled, this scene is disabled.");
 				SceneLib.combat.cleanupAfterCombatImpl();
 			} else if (hpVictory){
 				outputText("The demons finally beat you down and you collapse onto the sand of the oasis. Almost immediately you feel demonic hands pressing and probing your prone form. You hear the leader of the group say something in a strange tongue but you have a feeling you know what it means. The demons dive onto your inert body with intent and begin to press themselves against you...", true);
@@ -137,6 +134,7 @@ public class DemonPackDesert extends Monster
 			this.horns.count = 2;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 9, 0, 0, 0);
 			checkMonster();
 		}
 

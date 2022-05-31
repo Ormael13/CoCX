@@ -13,7 +13,7 @@ package classes.Scenes.Places.Ingnam
 		
 		public function encounterThief():void {
 			clearOutput();
-			outputText("You wander the village for Ingnam until you feel something pressing against your shoulder and you look around to see the thief. \"<i>Your money or your life,</i>\" he demands.");
+			outputText("You wander the village of Ingnam until you feel something pressing against your shoulder and you look around to see the thief. \"<i>Your money or your life,</i>\" he demands.");
 			menu();
 			addButton(0, "Fight", startCombatImmediate, new Thief);
 			addButton(1, "Give Gems", giveGems);
@@ -46,7 +46,7 @@ package classes.Scenes.Places.Ingnam
 			monster.gems += flags[kFLAGS.THIEF_GEMS];
 			flags[kFLAGS.THIEF_GEMS] = 0;
 			menu();
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.lust >= 33) {
 				outputText("\n\nYou could punish the thief if you want to. If so, which parts would you use?");
 				if (player.hasCock()) {
 					if (player.cockThatFits(monster.analCapacity()) >= 0) addButton(0, "Anal Fuck", rapeThiefAnally).hint("The thief definitely needs to learn a lesson not to mess with you. Buttfuck the thief.");

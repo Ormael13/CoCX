@@ -15,13 +15,12 @@ package classes.Scenes.Areas.DefiledRavine
 	import classes.CoC;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Monsters.AbstractSuccubus;
-	import classes.Scenes.Areas.BlightRidge.DemonScene;
+	import classes.Scenes.SceneLib;
 	
 	use namespace CoC;
 	
 	public class CowSuccubus extends AbstractSuccubus
 	{
-		public var TrueDemons:DemonScene = new DemonScene();
 		
 		public function cowsuccubusMilkSpray():void {
 			outputText("\"<i>How about a taste?</i>\"  The succubus asks, pressing her tits together.  Before you can reply, a veritable jet of milk sprays in your direction!\n");
@@ -62,7 +61,7 @@ package classes.Scenes.Areas.DefiledRavine
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
-			TrueDemons.defeatCowSuccubus();
+			SceneLib.defiledravine.demonScene.defeatCowSuccubus();
 		}
 		
 		public function CowSuccubus() 
@@ -74,7 +73,7 @@ package classes.Scenes.Areas.DefiledRavine
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_GAPING);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 100, 0, 0, 0);
-			createBreastRow(Appearance.breastCupInverse("P"));
+			createBreastRow(Appearance.breastCupInverse("RR"));
 			this.ass.analLooseness = AssClass.LOOSENESS_LOOSE;
 			this.ass.analWetness = AssClass.WETNESS_SLIMY;
 			this.tallness = 84;
@@ -118,6 +117,7 @@ package classes.Scenes.Areas.DefiledRavine
 					add(consumables.SUCMILK, 10);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 45, 0, 0, 0);
 			checkMonster();
 		}
 	}

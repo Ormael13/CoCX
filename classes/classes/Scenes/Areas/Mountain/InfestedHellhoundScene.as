@@ -6,6 +6,7 @@ package classes.Scenes.Areas.Mountain
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
+import classes.display.SpriteDb;
 
 public class InfestedHellhoundScene extends BaseContent
 	{
@@ -23,27 +24,19 @@ public class InfestedHellhoundScene extends BaseContent
 			else outputText("rattling your teeth");
 			outputText(".  Peeking fearfully over your shoulder, you see the black-furred form of a hell-hound emerging from behind a rock.  Its eyes narrow as its gaze locks onto your " + player.assholeOrPussy() + ", a pair of black, shiny dog-cocks emerge underneath him, dangling freely.  His balls look bloated and distended, the skin around them crawling and wriggling.  A few worms drip from its over-sized peckers, crawling on the ground under the infested beast.\n\n");
 			outputText("Somehow you know this thing isn't going to let you just walk away.");
-			if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Hellhounds!</b>")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_HELLHOUNDS);
 			startCombat(new InfestedHellhound());
-			spriteSelect(27);
+			spriteSelect(SpriteDb.s_hellhound);
 		}
 
 
 		public function infestedHellhoundLossRape():void
 		{
-            if (flags[kFLAGS.SFW_MODE] > 0 && CoC.instance.inCombat) { //No rape in SFW mode.
-                clearOutput();
-				cleanupAfterCombat();
-				return;
-			}
 			clearOutput();
 			//[BOTH INFESTED]
 			if (player.cockTotal() > 0 && player.hasStatusEffect(StatusEffects.Infested)) {
 				//(LUST)
-				if (player.lust >= player.maxLust()) {
+				if (player.lust >= player.maxOverLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ");
 					if (player.cor < 33) outputText("In spite of your revulsion ");
 					else if (player.cor < 66) outputText("In spite of your better sense ");
@@ -64,7 +57,7 @@ public class InfestedHellhoundScene extends BaseContent
 			//[PLAYER'S COCKS ARE BIG ENOUGH TO BE INFECTED]
 			else if (!player.hasStatusEffect(StatusEffects.Infested) && player.biggestCockArea() >= 40 && player.hasCock()) {
 				//(LUST)
-				if (player.lust >= player.maxLust()) {
+				if (player.lust >= player.maxOverLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ");
 					if (player.cor < 33) outputText("In spite of your revulsion ");
 					else if (player.cor < 66) outputText("In spite of your better sense ");
@@ -121,7 +114,7 @@ public class InfestedHellhoundScene extends BaseContent
 			//[HAS PUSSY AND NO DICK BIG ENOUGH TO BE INFECTED]
 			else if (player.hasVagina() && player.biggestCockArea() < 40 && !player.isNaga()) {
 				//(LUST)
-				if (player.lust >= player.maxLust()) {
+				if (player.lust >= player.maxOverLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ");
 					if (player.cor < 33) outputText("In spite of your revulsion ");
 					else if (player.cor < 66) outputText("In spite of your better sense ");
@@ -165,7 +158,7 @@ public class InfestedHellhoundScene extends BaseContent
 			//[GENDERLESS OR MALE WITH DICK TOO SMALL]
 			else {
 				//(LUST)
-				if (player.lust >= player.maxLust()) {
+				if (player.lust >= player.maxOverLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ");
 					if (player.cor < 33) outputText("In spite of your revulsion ");
 					else if (player.cor < 66) outputText("In spite of your better sense ");

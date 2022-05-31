@@ -14,95 +14,40 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Monsters.AbstractSuccubus;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
+import classes.Scenes.Dungeons.DungeonAbstractContent;
 
 use namespace CoC;
 	
 	public class Omnibus extends AbstractSuccubus
 	{
-		public var TrueDemons:DemonScene = new DemonScene();
-		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
-			TrueDemons.defeatOmnibus();
+			SceneLib.defiledravine.demonScene.defeatOmnibus();
 		}
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) SceneLib.dungeons.ebonlabyrinth.defeatedByStrayDemon();
-			else TrueDemons.loseToAOmnibus();
+			if (inDungeon) SceneLib.dungeons.ebonlabyrinth.defeatedByStrayDemon();
+			else SceneLib.dungeons.factory.doLossIncubus(false); //it's alright, the scene uses [themonster] and [monster he] to specify.
 		}
 		
 		public function Omnibus()
 		{
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
+			if (inDungeon) { //EL check
 				this.short = "stray omnibus";
-				if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 250) {
-					initStrTouSpeInte(340, 320, 295, 200);
-					initWisLibSensCor(200, 230, 130, 100);
-					this.weaponAttack = 77;
-					this.armorDef = 108;
-					this.armorMDef = 18;
-					this.bonusHP = 6900;
-					this.bonusLust = 446;
-					this.level = 86;
-					this.additionalXP = 2450;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 200) {
-					initStrTouSpeInte(328, 305, 270, 195);
-					initWisLibSensCor(195, 220, 122, 100);
-					this.weaponAttack = 72;
-					this.armorDef = 96;
-					this.armorMDef = 16;
-					this.bonusHP = 5750;
-					this.bonusLust = 424;
-					this.level = 82;
-					this.additionalXP = 2100;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 150) {
-					initStrTouSpeInte(316, 290, 255, 190);
-					initWisLibSensCor(190, 210, 114, 100);
-					this.weaponAttack = 67;
-					this.armorDef = 84;
-					this.armorMDef = 14;
-					this.bonusHP = 4600;
-					this.bonusLust = 402;
-					this.level = 78;
-					this.additionalXP = 1750;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 100) {
-					initStrTouSpeInte(304, 275, 240, 185);
-					initWisLibSensCor(185, 200, 106, 100);
-					this.weaponAttack = 62;
-					this.armorDef = 72;
-					this.armorMDef = 12;
-					this.bonusHP = 3450;
-					this.bonusLust = 380;
-					this.level = 74;
-					this.additionalXP = 1400;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 50) {
-					initStrTouSpeInte(292, 260, 225, 180);
-					initWisLibSensCor(180, 190, 98, 100);
-					this.weaponAttack = 57;
-					this.armorDef = 60;
-					this.armorMDef = 10;
-					this.bonusHP = 2300;
-					this.bonusLust = 358;
-					this.level = 70;
-					this.additionalXP = 1050;
-				}
-				else {
-					initStrTouSpeInte(280, 245, 210, 175);
-					initWisLibSensCor(175, 180, 90, 100);
-					this.weaponAttack = 52;
-					this.armorDef = 48;
-					this.armorMDef = 8;
-					this.bonusHP = 1150;
-					this.bonusLust = 336;
-					this.level = 66;
-					this.additionalXP = 700;
-				}
+                var mod:int = SceneLib.dungeons.ebonlabyrinth.enemyLevelMod;
+                initStrTouSpeInte(280 + 12*mod, 245 + 15*mod, 210 + 15*mod, 175 + 5*mod);
+                initWisLibSensCor(175 + 5*mod, 180 + 10*mod, 90 + 8*mod, 100);
+                this.weaponAttack = 52 + 5*mod;
+                this.armorDef = 48 + 12*mod;
+                this.armorMDef = 8 + 2*mod;
+                this.bonusHP = 1150 + 1150*mod;
+                this.bonusLust = 336 + 18*mod;
+                this.level = 63 + 5*mod;
+                this.additionalXP = int(700 * Math.exp(0.3*mod));
+                this.gems = int((80 + rand(40)) * Math.exp(0.3*mod));
+				this.createPerk(PerkLib.OverMaxHP, (63 + 5*mod), 0, 0, 0);
 			}
 			else {
 				this.short = "omnibus";
@@ -115,6 +60,8 @@ use namespace CoC;
 				this.bonusLust = 209;
 				this.level = 29;
 				this.additionalXP = 70;
+			    this.gems = rand(40) + 20;
+				this.createPerk(PerkLib.OverMaxHP, 29, 0, 0, 0);
 			}
 			this.a = "the ";
 			this.imageName = "omnibus";
@@ -145,7 +92,6 @@ use namespace CoC;
 			this.lust = 30;
 			this.lustVuln = .5;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.gems = rand(40)+20;
 			this.drop = new WeightedDrop().
 					add(consumables.BIMBOLQ, 1).
 					add(consumables.BROBREW, 1).

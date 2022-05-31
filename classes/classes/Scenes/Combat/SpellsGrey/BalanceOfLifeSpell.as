@@ -7,11 +7,11 @@ import classes.StatusEffects;
 public class BalanceOfLifeSpell extends AbstractGreySpell {
 	public function BalanceOfLifeSpell() {
 		super(
-				"Balance of Life",
-				"Heals for 5% of your hp when dealing spell damage.",
-				TARGET_SELF,
-				TIMING_LASTING,
-				[TAG_HEALING,TAG_BUFF]
+			"Balance of Life",
+			"Heals for 5% of your hp when dealing spell damage.",
+			TARGET_SELF,
+			TIMING_LASTING,
+			[TAG_HEALING,TAG_BUFF]
 		);
 		baseManaCost = 500;
 	}
@@ -29,7 +29,9 @@ public class BalanceOfLifeSpell extends AbstractGreySpell {
 	}
 	
 	override public function calcCooldown():int {
-		return 8;
+		var calcC:int = 8;
+		if (player.weapon == weapons.U_STAFF) calcC -= 2;
+		return calcC;
 	}
 	
 	public function calcDuration():int {

@@ -5,6 +5,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.*;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
@@ -179,161 +180,20 @@ public class Akbal extends Monster
 
 		public function Akbal()
 		{
+			var mod:int = flags[kFLAGS.AKBAL_LVL_UP]; //just to be concise
+			var addIntWis:int = (mod <= 4) ? mod * 19 : 4*19 + (mod - 4) * 9;
 			trace("Akbal Constructor!");
-			if (flags[kFLAGS.AKBAL_LVL_UP] < 1) {
-				initStrTouSpeInte(61, 89, 75, 86);
-				initWisLibSensCor(85, 80, 50, 100);
-				this.weaponAttack = 17;
-				this.armorDef = 10;
-				this.armorMDef = 20;
-				this.bonusHP = 100;
-				this.bonusLust = 150;
-				this.level = 20;
-				this.additionalXP = 50;
-			}
-			if (flags[kFLAGS.AKBAL_LVL_UP] == 1) {
-				initStrTouSpeInte(74, 109, 90, 105);
-				initWisLibSensCor(104, 97, 60, 100);
-				this.weaponAttack = 20;
-				this.armorDef = 12;
-				this.armorMDef = 24;
-				this.bonusHP = 200;
-				this.bonusLust = 183;
-				this.level = 26;
-				this.additionalXP = 100;
-			}
-			if (flags[kFLAGS.AKBAL_LVL_UP] == 2) {
-				initStrTouSpeInte(87, 129, 105, 124);
-				initWisLibSensCor(123, 114, 70, 100);
-				this.weaponAttack = 23;
-				this.armorDef = 14;
-				this.armorMDef = 28;
-				this.bonusHP = 300;
-				this.bonusLust = 216;
-				this.level = 32;
-				this.additionalXP = 150;
-			}
-			if (flags[kFLAGS.AKBAL_LVL_UP] == 3) {
-				initStrTouSpeInte(100, 149, 120, 143);
-				initWisLibSensCor(142, 131, 80, 100);
-				this.weaponAttack = 26;
-				this.armorDef = 16;
-				this.armorMDef = 32;
-				this.bonusHP = 400;
-				this.bonusLust = 249;
-				this.level = 38;
-				this.additionalXP = 200;
-			}
-			if (flags[kFLAGS.AKBAL_LVL_UP] == 4) {
-				initStrTouSpeInte(113, 169, 135, 162);
-				initWisLibSensCor(161, 148, 90, 100);
-				this.weaponAttack = 29;
-				this.armorDef = 18;
-				this.armorMDef = 36;
-				this.bonusHP = 500;
-				this.bonusLust = 282;
-				this.level = 44;
-				this.additionalXP = 250;
-			}
-			if (flags[kFLAGS.AKBAL_LVL_UP] == 5) {
-				initStrTouSpeInte(126, 189, 150, 171);
-				initWisLibSensCor(170, 165, 100, 100);
-				this.weaponAttack = 32;
-				this.armorDef = 20;
-				this.armorMDef = 40;
-				this.bonusHP = 600;
-				this.bonusLust = 315;
-				this.level = 50;
-				this.additionalXP = 300;
-			}
-			if (flags[kFLAGS.AKBAL_LVL_UP] == 6) {
-				initStrTouSpeInte(139, 209, 165, 180);
-				initWisLibSensCor(179, 182, 110, 100);
-				this.weaponAttack = 35;
-				this.armorDef = 22;
-				this.armorMDef = 44;
-				this.bonusHP = 700;
-				this.bonusLust = 348;
-				this.level = 56;
-				this.additionalXP = 350;
-			}
-			if (flags[kFLAGS.AKBAL_LVL_UP] == 7) {
-				initStrTouSpeInte(152, 229, 180, 189);
-				initWisLibSensCor(188, 199, 120, 100);
-				this.weaponAttack = 38;
-				this.armorDef = 24;
-				this.armorMDef = 48;
-				this.bonusHP = 800;
-				this.bonusLust = 382;
-				this.level = 62;
-				this.additionalXP = 400;
-			}
-			if (flags[kFLAGS.AKBAL_LVL_UP] == 8) {
-				initStrTouSpeInte(165, 249, 195, 198);
-				initWisLibSensCor(197, 216, 130, 100);
-				this.weaponAttack = 41;
-				this.armorDef = 26;
-				this.armorMDef = 52;
-				this.bonusHP = 900;
-				this.bonusLust = 415;
-				this.level = 68;
-				this.additionalXP = 450;
-			}
-			if (flags[kFLAGS.AKBAL_LVL_UP] == 9) {
-				initStrTouSpeInte(178, 269, 210, 207);
-				initWisLibSensCor(206, 233, 140, 100);
-				this.weaponAttack = 44;
-				this.armorDef = 28;
-				this.armorMDef = 56;
-				this.bonusHP = 1000;
-				this.bonusLust = 448;
-				this.level = 74;
-				this.additionalXP = 500;
-			}
-			if (flags[kFLAGS.AKBAL_LVL_UP] == 10) {
-				initStrTouSpeInte(191, 289, 225, 216);
-				initWisLibSensCor(215, 250, 150, 100);
-				this.weaponAttack = 47;
-				this.armorDef = 30;
-				this.armorMDef = 60;
-				this.bonusHP = 1100;
-				this.bonusLust = 481;
-				this.level = 80;
-				this.additionalXP = 550;
-			}
-			if (flags[kFLAGS.AKBAL_LVL_UP] == 11) {
-				initStrTouSpeInte(204, 309, 240, 225);
-				initWisLibSensCor(224, 267, 160, 100);
-				this.weaponAttack = 50;
-				this.armorDef = 32;
-				this.armorMDef = 64;
-				this.bonusHP = 1200;
-				this.bonusLust = 514;
-				this.level = 86;
-				this.additionalXP = 600;
-			}
-			if (flags[kFLAGS.AKBAL_LVL_UP] == 12) {
-				initStrTouSpeInte(217, 329, 255, 234);
-				initWisLibSensCor(233, 284, 170, 100);
-				this.weaponAttack = 53;
-				this.armorDef = 34;
-				this.armorMDef = 68;
-				this.bonusHP = 1300;
-				this.bonusLust = 547;
-				this.level = 92;
-				this.additionalXP = 650;
-			}
-			if (flags[kFLAGS.AKBAL_LVL_UP] == 13) {
-				initStrTouSpeInte(230, 349, 270, 243);
-				initWisLibSensCor(242, 301, 180, 100);
-				this.weaponAttack = 56;
-				this.armorDef = 36;
-				this.armorMDef = 72;
-				this.bonusHP = 1400;
-				this.bonusLust = 580;
-				this.level = 98;
-				this.additionalXP = 700;
-			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
+			//New levelling
+			initStrTouSpeInte(61 + mod*13, 89 + mod*20, 75 + mod*15, 126 + addIntWis); //int might be too much, but it's scalable now
+			initWisLibSensCor(85 + addIntWis, 80 + mod*17, 50 + mod*10, 100); //wis too
+			this.weaponAttack = 17 + mod*3;
+			this.armorDef = 10 + mod*2;
+			this.armorMDef = 20 + mod*4;
+			this.bonusHP = 100 + mod*100;
+			this.bonusLust = 150 + mod*33;
+			this.level = 20 + mod*6;
+			this.additionalXP = 50 + mod*50;
+			//
 			this.a = "";
 			this.short = "Akbal";
 			this.imageName = "akbal";
@@ -378,6 +238,7 @@ public class Akbal extends Monster
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, (20 + mod*6), 0, 0, 0);
 			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			if (flags[kFLAGS.AKBAL_LVL_UP] >= 1) this.createPerk(PerkLib.JobRanger, 0, 0, 0, 0);
 			if (flags[kFLAGS.AKBAL_LVL_UP] >= 2) this.createPerk(PerkLib.JobRogue, 0, 0, 0, 0);
@@ -389,9 +250,9 @@ public class Akbal extends Monster
 			if (flags[kFLAGS.AKBAL_LVL_UP] >= 8) this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
 			if (flags[kFLAGS.AKBAL_LVL_UP] >= 9) this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			if (flags[kFLAGS.AKBAL_LVL_UP] >= 10) this.createPerk(PerkLib.PrestigeJobTempest, 0, 0, 0, 0);
-			if (flags[kFLAGS.AKBAL_LVL_UP] >= 11) this.createPerk(PerkLib.CatlikeNimblenessEvolved, 0, 0, 0, 0);
+			if (flags[kFLAGS.AKBAL_LVL_UP] >= 11) IMutationsLib.CatLikeNimblenessIM.acquireMutation(this, "none", 2);
 			if (flags[kFLAGS.AKBAL_LVL_UP] >= 12) this.createPerk(PerkLib.MythicalSpeed, 0, 0, 0, 0);
-			if (flags[kFLAGS.AKBAL_LVL_UP] >= 13) this.createPerk(PerkLib.CatlikeNimblenessFinalForm, 0, 0, 0, 0);
+			if (flags[kFLAGS.AKBAL_LVL_UP] >= 13) IMutationsLib.CatLikeNimblenessIM.acquireMutation(this, "none", 3);
 			checkMonster();
 		}
 

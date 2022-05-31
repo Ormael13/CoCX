@@ -85,9 +85,15 @@ use namespace CoC;
 			}, {
 				name: "diana",
 				when: function():Boolean {
-					return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
+					return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
 				},
-				call: SceneLib.dianaScene.repeatPlainsEnc
+				call: SceneLib.dianaScene.repeatEnc
+			}, {
+				name: "dianaName",
+				when: function():Boolean {
+					return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
+				},
+				call: SceneLib.dianaScene.postNameEnc
 			}, {
 				//Dem Kangasluts!  Force Sheila relationship phase!
 				name  : "sheila_xp3",
@@ -183,7 +189,7 @@ use namespace CoC;
 			}, {
 				name: "ted",
 				when: function():Boolean {
-					return flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 4 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1;
+					return flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 2 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1;
 				},
 				call: SceneLib.tedScene.introPostHiddenCave
 			}, {

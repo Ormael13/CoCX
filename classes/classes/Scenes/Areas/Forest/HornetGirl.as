@@ -112,7 +112,7 @@ import classes.internals.ChainedDrop;
 				}
 				paralyze.increaseHornet1();
 			}
-			if (player.lust >= player.maxLust())
+			if (player.lust >= player.maxOverLust())
 				doNext(SceneLib.combat.endLustLoss);
 			else doNext(EventParser.playerMenu);
 		}

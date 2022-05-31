@@ -11,17 +11,17 @@ public class AscensionTrancendentGenMemX extends PerkType
 {
 
     override public function desc(params:PerkClass = null):String {
-        var pVal:Number = player.perkv1(PerkLib.AscensionAdditionalOrganMutationX);
-        return "Your body has adapted to having unnatural organs to the point of being able to sustain " + pVal.toString() + " extra mutation" + (pVal > 1 ? "s":"") +" in each organ.";
+        var pVal:Number = player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX);
+        return "Your body has learned to retain " + (5*pVal).toString() + " metamorphic adaptations.";
     }
 
     override public function name(params:PerkClass=null):String {
-        var sufval:String = player.perkv1(PerkLib.AscensionAdditionalOrganMutationX).toString();
-        return "Ascension: Additional Organ Mutation " + sufval;
+        var sufval:String = player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX).toString();
+        return "Ascension: Transcendental Genetic Memory Rank " + sufval;
     }
 
     public function AscensionTrancendentGenMemX() {
-        super("Ascension Additional Organ Mutation", "Ascension Additional Organ Mutation",
+        super("Ascension: Transcendental Genetic Memory Rank", "Ascension: Transcendental Genetic Memory Rank",
                 ".");
     }
 

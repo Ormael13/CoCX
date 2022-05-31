@@ -5,22 +5,15 @@
 package classes.Scenes.Areas.Ashlands
 {
 import classes.*;
-import classes.BodyParts.Eyes;
-import classes.BodyParts.Hair;
-import classes.BodyParts.Skin;
-import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.Armors.LustyMaidensArmor;
 import classes.Items.MutationsHelper;
-import classes.Scenes.Areas.Ashlands.HellCat;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
-import classes.CoC;
 
 public class HellCatScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
-		public var mutations:MutationsHelper = new MutationsHelper();
+				public var mutations:MutationsHelper = new MutationsHelper();
 
 		public function HellCatScene()
 		{
@@ -31,10 +24,7 @@ public function HellCatIntro():void {
 	clearOutput();
 	outputText("As you explore the crag you run into a strange sight. You spot a hooded figure with a cape walking silently toward you. Only when it's finally up close does it throw its cape open revealing the ashen naked skin of a human woman inside or what could have been a human if not for the swishing tail of fire, black furry cat legs and pawed hands with sharp claws. The hood now pulled back reveals a somewhat human face with eyes and hair ");
 	outputText("of literal fire and feline ears to top it off. Well, guess you have seen everything now including pyrocatgirls. Speaking of pyro, the intent of the cat girl manifest as a large fireball which she proceeds to throw at you. Barely dodging this surprise assault you steady yourself just in time to see her grin wide as a 10 inch spiked cat cock slides out of the sheath just above her drooling pussy. You ready your [weapon] for a fight!");
-	if (flags[kFLAGS.CODEX_ENTRY_HELLCATS] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_HELLCATS] = 1;
-		outputText("\n\n<b>New codex entry unlocked: Hellcats!</b>");
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_HELLCATS);
 	if (flags[kFLAGS.WITCHES_SABBATH] < 1) flags[kFLAGS.WITCHES_SABBATH] = 1;
 	startCombat(new HellCat());
 }
@@ -47,9 +37,10 @@ public function DefeatedHellCat():void {
 	addButton(0, "Back", cleanupAfterCombat);
 	if (player.hasCock()) addButton(1, "Pussycat", DefeatedHellCatPussycat);
 	if (player.hasVagina()) addButton(2, "Catcock", DefeatedHellCatCatcock);
-	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+    LustyMaidensArmor.addTitfuckButton(3);
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(DefeatedHellCat);
+	}
 
-}
 public function DefeatedHellCatPussycat():void {
 	if (player.gender == 3) outputText("You ain’t gonna get any close to that feline penis of hers. " + (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] > 0 ? "If your hunch is good it’s likely even worse than that of the hellhounds. " : "") + "");
 	outputText("However her pussy is for lack of any better word hell of tempting.\n\n");

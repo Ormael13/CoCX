@@ -87,12 +87,11 @@ import classes.internals.*;
 			else if (player.cor >= 10) damage = Math.round(damage * 1.3);
 			else damage = Math.round(damage * 1.4);
 			if (hasStatusEffect(StatusEffects.Maleficium)) damage *= 2;
-			outputText("Alvina weaves her scythe above her head tracing complicated arcane signs");
-			outputText(", as a purple flame surges under you, searing your flesh. ");
+			outputText("Alvina weaves her scythe above her head tracing complicated arcane signs, as a purple flame surges under you, searing your flesh. ");
 			//outputText(". (" + damage + ")");
 			player.takeFireDamage(damage, true);//, true
 			if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
-			else player.createStatusEffect(StatusEffects.BurnDoT,5,0.05,0,0);
+			else player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(5),0.05,0,0);
 			statScreenRefresh();
 			outputText("\n");
 		}
@@ -143,7 +142,7 @@ import classes.internals.*;
 			outputText("Large crystalline shards of ice form in a fan around Alvina. She waves her scythe in an arc launching them in a barrage at you. You are impaled several times over, your wounds bleeding grievously. ");
 			player.takeIceDamage(damage, true);
 			if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed,1,1);
-			else player.createStatusEffect(StatusEffects.IzmaBleed,5,0,0,0);
+			else player.createStatusEffect(StatusEffects.IzmaBleed,SceneLib.combat.debuffsOrDoTDuration(5),0,0,0);
 			statScreenRefresh();
 			outputText("\n");
 		}
@@ -163,8 +162,8 @@ import classes.internals.*;
 						+ "being everywhere and nowhere at the same time, a living paradox"
 						+ ". You are barely conscious of the blades colliding together at your previous position with a deafening crash as you appear a few yards away!\n\n");
 			}
-			else if (player.fairyScore() >= 18) outputText("You avoid the attack thanks to your Faerie magic, flickering out of reality just as the blades collides.\n\n");
-			else if (player.displacerbeastScore() >= 13) outputText("Little does she know that you have the ability to displace yourself out of such deadly attacks, You are barely conscious of the blades colliding together at your previous position with a deafening crash as you appear a few yards away!\n\n");
+			else if (player.isRace(Races.FAIRY)) outputText("You avoid the attack thanks to your Faerie magic, flickering out of reality just as the blades collides.\n\n");
+			else if (player.isRace(Races.DISPLACERBEAST)) outputText("Little does she know that you have the ability to displace yourself out of such deadly attacks, You are barely conscious of the blades colliding together at your previous position with a deafening crash as you appear a few yards away!\n\n");
 			else {
 				var damage:Number = player.maxHP() * 1.1;
 				if (player.minHP() < 0) damage += player.minHP();
@@ -277,7 +276,7 @@ import classes.internals.*;
 		override public function defeated(hpVictory:Boolean):void
 		{
 			cleanupAfterCombat();
-			SceneLib.alvinaFollower.alvinaThirdEncounterYesNeverWon();
+			doNext(SceneLib.alvinaFollower.alvinaThirdEncounterYesNeverWon);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -327,14 +326,12 @@ import classes.internals.*;
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.MindOverBodyI, 0, 0, 0, 0);
-			//this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 100, 0, 0, 0);
 			this.createPerk(PerkLib.Phylactery, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyResiliance, 0, 0, 0, 0);
 			checkMonster();
 		}
-
 	}
-
 }

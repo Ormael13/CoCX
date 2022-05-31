@@ -6,7 +6,7 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.display.SpriteDb;
+    import classes.display.SpriteDb;
 	
 	public class MagnoliaFollower extends NPCAwareContent
 	{
@@ -26,28 +26,28 @@ public function treeMenu():void {
 		outputText("At the corner of camp where you planted a seed, sapling has grown. It has dozens of branches and bright green leaves.\n\n");
 		menu();
 		if (player.fatigue + 50 < player.maxFatigue()) addButton(1, "Water It", waterIt);
-		if (player.HP > 150 && player.soulforce>= 50 && player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(2, "Use SFIB", useSouforceInfusedBlood);
+		if (player.HP > 150 && player.soulforce>= 50 && player.hasPerk(PerkLib.SoulApprentice)) addButton(2, "Use SFIB", useSouforceInfusedBlood);
 		addButton(14, "Back", inventory.inventoryMenu);
 	}
 	else if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 4) {
 		outputText("At the corner of camp, the tree like sapling has grown bigger having grown more branches and leaves.\n\n");
 		menu();
 		if (player.fatigue + 50 < player.maxFatigue()) addButton(1, "Water It", waterIt);
-		if (player.HP > 150 && player.soulforce>= 50 && player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(2, "Use SFIB", useSouforceInfusedBlood);
+		if (player.HP > 150 && player.soulforce>= 50 && player.hasPerk(PerkLib.SoulApprentice)) addButton(2, "Use SFIB", useSouforceInfusedBlood);
 		addButton(14, "Back", inventory.inventoryMenu);
 	}
 	else if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 5) {
 		outputText("At the corner of camp, a small tree has grown. The bright green leaves gently sway with the blowing wind.\n\n");
 		menu();
 		if (player.fatigue + 50 < player.maxFatigue()) addButton(1, "Water It", waterIt);
-		if (player.HP > 150 && player.soulforce>= 50 && player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(2, "Use SFIB", useSouforceInfusedBlood);
+		if (player.HP > 150 && player.soulforce>= 50 && player.hasPerk(PerkLib.SoulApprentice)) addButton(2, "Use SFIB", useSouforceInfusedBlood);
 		addButton(14, "Back", inventory.inventoryMenu);
 	}
 	else if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] >= 6 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 9) {
 		if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 7 && player.hasKeyItem("Decorations") >= 0) {
 			outputText("You bring the package of holiday decorations over to your newly grown tree. You feel it could be 'dressed' for the season too. You open the package then begin the long process of hanging ornaments on the branches and lining it with lights and garland.");
 			if (camp.hasCompanions()) outputText(" Some of the camp residents come over to see what you're doing.");
-			if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) outputText("\"<i>Oh? Are you decorating the tree? I would like to assist too if you don't mind.</i>\" Says Jojo.\n\n");
+			if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) outputText("\"<i>Oh? Are you decorating the tree? I would like to assist too if you don't mind.</i>\" Says Jojo.\n\n");
 			if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) outputText("\"<i>[name] there's no way you're decorating that alone. Let me lend a hand.</i>\" Comments Amily.\n\n");
 			if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("\"<i>Oooo, that looks like fun! Maybe I can fly up and decorate the harder to reach areas.</i>\" Etna suggests.\n\n");
 			if (DivaScene.instance.isCompanion()) outputText("\"<i>Tis the season already? I suppose I could lend my services.</i>\" Diva speaks with overdramatic voice.\n\n");

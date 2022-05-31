@@ -2,12 +2,11 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.Useable;
 import classes.display.SpriteDb;
 
 use namespace CoC;
@@ -15,7 +14,7 @@ use namespace CoC;
 public class AlvinaFollower extends NPCAwareContent
 	{
 		
-		public function AlvinaFollower() 
+		public function AlvinaFollower()
 		{}
 
 public function isAlvinaBirthday():Boolean {
@@ -26,19 +25,18 @@ public function alvinaFirstEncounter():void
 {
 	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 	clearOutput();
-
-	outputText("Along your travels, you meet a woman in robes with black hair. You didn’t expect to see a fellow human around in Mareth, which is a relief. Perhaps you aren’t alone in this quest. You ask if she could give you directions, as you have no idea what to expect in this realm. As a champion, your job is to fight the demons, but you can’t fight them if you have no idea where to look.\n\n");
+	outputText("Along your travels, you meet a woman in robes with black hair. You expected to find at least a few humans in Mareth, if nothing else, the previous champions, so to find another human in this realm is a relief. You ask if she could give you directions, as you have no idea what to expect in this realm. As a champion, your job is to fight the demons, but you can’t fight them if you have no idea where to look.\n\n");
 	outputText("\"<i>Directions and demons, hm? There are many places you could visit. If I were you, I would go to the lake and look for a peculiar island at its center. That said, be respectful of whomever you meet there.</i>\"");
 	outputText("You nod and prepare to leave, but ask her who she is in case you should ever see her again.\n\n");
 	outputText("\"<i>Me? I am a person of no consequence.</i>\"");
-	outputText("As you turn over to question her on her wording, you find out she is no longer there. Well, that was a strange encounter.\n\n");
+	outputText("As you turn back to question her, you notice that she's vanished without a trace. You're not sure whether to be relieved...or concerned by this.\n\n");
 	flags[kFLAGS.ALVINA_FOLLOWER] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
 
 public function alvinaSecondEncounter():void
 {
-	//spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 	clearOutput();
 	outputText("As you pass by the road you spot the woman from before sitting on a nearby wooden log. You sit right next to her, and she closes her book in response. You thank her for the information regarding Marae’s whereabouts");
 	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText(" though it ended in disaster, thanks to your actions");
@@ -146,10 +144,7 @@ public function alvinaThirdEncounterYesContinue():void
 	outputText("The demons came very close to harnessing true power but ultimately failed, turning into insatiable creatures unable to satisfy their endless thirst for souls and sex, in the end, they lack a soul entirely. To achieve perfection and immortality one needs their soul to be attached to its body so to… Regardless, this is nothing you should concern yourself with yet.</i>\"\n\n");
 	outputText("Ok, so why does it matter? It’s not like you have anything to do with this right?\n\n");
 	outputText("\"<i>On the contrary, you coming here is no hazard. You seek forbidden knowledge and I, Alvina Shadowmantle, founder of what is today black magic seek someone to impart it… For a price. So how about joining me and becoming my apprentice? You have proven to be way more than a mere pawn, so surely you are worthy of my time.</i>\"\n\n");
-	if (flags[kFLAGS.CODEX_ENTRY_DEVIL] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_DEVIL] = 1;
-		outputText("\n\n<b>New codex entry unlocked: Devil!</b>");
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_DEVIL);
 	menu();
 	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] >= 4) addButtonDisabled(0, "Sure", "There's no way you would be able to have HER in your camp at the same time as Siegweird. He'd kill her or she'd kill him.");
 	else addButton(0, "Sure", alvinaThirdEncounterYesSure);
@@ -185,6 +180,7 @@ public function alvinaThirdEncounterYesNever():void
 }
 public function alvinaThirdEncounterYesNeverWon():void
 {
+    clearOutput();
 	outputText("This is a battle you cannot win. This woman is likely stronger than Lethice herself, and sports godlike power you have no chance to stand against! As you look for a possible way to flee, you notice a detail that has escaped your attention up till now. While Alvina has not taken even a single apparent wound, ");
 	outputText("she has been actively protecting a crystalline pendant around her neck. Alvina suddenly looks worried, realizing that you are staring at her necklace.\n\n");
 	outputText("\"<i>Hey, why are you looking at my breasts you idiot?! Look me in the face before you die!</i>\"\n\n");
@@ -234,7 +230,7 @@ public function alvinaMainCampMenu():void
 	if (player.hasStatusEffect(StatusEffects.AlvinaTraining) && player.statusEffectv1(StatusEffects.AlvinaTraining2) < 2) addButton(11, "Advanced Study", alvinaCampAdvancedStudy);
 	else {
 		if (player.hasStatusEffect(StatusEffects.AlvinaTraining) && player.statusEffectv1(StatusEffects.AlvinaTraining2) == 2) {
-			if (player.hasItem(useables.AMETIST, 1) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.SOULGEM, 5) && (player.hasKeyItem("Marae's Lethicite") >= 0 || player.hasKeyItem("Stone Statue Lethicite") >= 0)) addButton(11, "Advanced Study", alvinaCampAdvancedStudy);
+			if (player.hasItem(useables.AMETIST, 1) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.SOULGEM, 5) && (player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemvX("Marae's Lethicite", 1) > 0 || player.hasKeyItem("Stone Statue Lethicite") >= 0)) addButton(11, "Advanced Study", alvinaCampAdvancedStudy);
 			else addButtonDisabled(11, "Advanced Study", "You need to gather a flawless Amethyst necklace, five lust drafts, five soul gems, and a piece of very powerful Lethicite before you can progress.");
 		}
 		if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3) {
@@ -511,7 +507,7 @@ public function alvinaMainCampSexMenuPrideOfLucifer():void
 	outputText("You grab the girl by the shoulder and pull her to you for a kiss, Alvina replies in the same way. For someone with such a small looking body, Alvina is way more experienced than she looks. You wrestle for several minutes trying to catch each other’s tongue, but it doesn't end there as Alvina suddenly casts a spell.\n\n");
 	outputText("Her form suddenly changes as shadows cover her small frame. She gets taller, up to 6 feet, her breast swelling up as her firm backside fills into a shape closer to that of a standard succubus. Her twilight black hair grows as well, reaching ass length. Finally, her wings also get slightly larger now, stretching wide enough to encompass both sides of the bed. ");
 	outputText("Gods above, the perfect hourglass shape, sensual mouth with those perfect cock pillows, juicy pussy dripping with excitement, and generous bosom of your infernal princess look like they were made to tempt and corrupt the hearts of men. She sashays to you, winking playfully at your reaction.\n\n");
-	//outputText("\"<i>I know you love this form a lot, so today...</i>\"");(if married) 
+	//outputText("\"<i>I know you love this form a lot, so today...</i>\"");(if married)
 	outputText("\"<i>You thought I couldn't change my shape to that of a proper succubus? Think again, because I’m going to show you all the delightful things this perfect temptress body can do.</i>\"");
 	if (player.tallness > 48) outputText(" pressing her immaculate form against you, your mind fully enveloped by the rush of elation from her erect teets boring into your chest, her soft cheek pressing against yours as those plush lips whisper a tantalizing promise ");
 	else outputText(" pressing her immaculate form against you, your head fully enveloped by those plump mounds, intoxicating sweet fragrance mingling with her natural titillating musk and light coat of alluring spice. Her form envelops yours, her chin pressed atop of your cranium, she curls down so her lips rest against the tip of your ear, warm breath cascading over the sensitive skin, ");
@@ -589,7 +585,7 @@ public function alvinaMainCampSexMenuBlasphemeOfBaphomet():void
 	outputText("She doesn’t have to tell you twice, diving head first towards her infernal cunt, you begin to lick her lunchbox, tasting the juices of your girl-fiend, delivering the pleasure she desires. Indulging in more of her infernal juices has stirred something deep within, now an unquenchable desire for her pleasure plagues your mind, clouding your thoughts in a thick haze of lust. ");
 	outputText("You ravenously attack her cunt, your tongue darting around near sporadically as you try to hit every sensitive spot to bring the naughty devil to orgasm. Her girl juice ignites fires along your tongue, pleasure courses through your form.");
 	if (player.tongue.type == Tongue.DEMONIC) outputText(" That said, your demon tongue is perfectly capable of bringing the both of you to orgasm and you ravenously play with her cunt using your unique appendage, easily able to stimulate every sensitive area, your prowess aptly exemplified. From above,  you can hear Alvina gasp in delight.");
-	outputText("\n\n\"<i>OHHhhh yes [name] keep it up I feel the magic building…!”</i>\"\n\n");
+	outputText("\n\n\"<i>OHHhhh yes [name] keep it up I feel the magic building…!\"</i>\"\n\n");
 	outputText("Her pussy gushes with juices, coating your gluttonous maw in her infernal ichor.  To your surprise, her clit begins to pulse as it engorges and grows, flecks of violet demonic energy dances across the engorged flesh. Her enlarging clit notably becomes...sweeter, juicier. Your continued attention enriching the sudden growth, and enthralling you. The unholy, addicting taste ");
 	outputText("of her growing appendage pulls your mind away, stealing your will and conforming it to her own demands for pleasure. Growing longer and thicker, her clit occasionally pulses with energy until it turns into something that might as well be a cock. The 15.6 inches long beast of demonic flesh rests happily between her pussy lips, as if jutting out of a sheath, the tip flared ");
 	outputText("like that of a horse.\n\nAn intoxicating smell rises from Alvina’s newly grown equine cock, a dollop of pre-cum emerging from the slit. You can’t help but lurch forwards, gripping her new tool between your hands and pulling it to your mouth, vehemently devouring her meaty crown, savoring the flavor of the corrupting fluid. Hells under, her clitcock tastes so good! You need ");
@@ -807,15 +803,12 @@ public function alvinaCampAdvancedStudy():void
 		inventory.takeItem(consumables.POL_MID, camp.campFollowers);
 		eachMinuteCount(5);
 	}
-	else if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 2 && player.hasItem(useables.AMETIST, 1) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.SOULGEM, 5) && (player.hasKeyItem("Marae's Lethicite") >= 0 || player.hasKeyItem("Stone Statue Lethicite") >= 0)) {
+	else if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 2 && player.hasItem(useables.AMETIST, 1) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.SOULGEM, 5) && (player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemvX("Marae's Lethicite", 1) > 0 || player.hasKeyItem("Stone Statue Lethicite") >= 0)) {
 		player.destroyItems(useables.AMETIST, 1);
 		player.destroyItems(consumables.L_DRAFT, 5);
 		player.destroyItems(useables.SOULGEM, 5);
 		if (player.hasKeyItem("Stone Statue Lethicite") >= 0) player.removeKeyItem("Stone Statue Lethicite");
-		else {
-			if (player.keyItemv1("Marae's Lethicite") > 1) player.addKeyValue("Marae's Lethicite", 1, -1);
-			else player.removeKeyItem("Marae's Lethicite");
-		}
+		else player.addKeyValue("Marae's Lethicite", 1, -1);
 		outputText("You show up with all the required items and the demoness smiles.\n\n");
 		outputText("\"<i>Good, I wasn’t expecting you to collect those items so quickly. Once again you’ve exceeded my expectations.</i>\"\n\n");
 		outputText("She arranges the soul gemes on the ground to form a magic circle, cutting herself with a dagger to draw the lines using her own blood she then hands you over the knife.\n\n");
@@ -841,16 +834,16 @@ public function alvinaCampAdvancedStudy():void
 		doNext(camp.returnToCampUseSixHours);
 	}
 	else if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 1) {
-		if (player.devilkinScore() >= 11 || (player.demonScore() >= 11 && player.gender > 0)) {
-			if (player.devilkinScore() >= 11) {
+		if (player.isRace(Races.DEVIL) || (player.isRace(Races.DEMON) && player.gender > 0)) {
+			if (player.isRace(Races.DEVIL)) {
 				outputText("You ask Alvina if this form will work, and she looks at you, amused.\n\n");
 				outputText("\"<i>Well, I didn't expect you to like my form that much. How flattering. I guess you didn’t want to be part of the common rabble, did you? You just had to go a special path? Oh well, like apprentice like master I guess?</i>\"\n\n");
 			}
-			else if (player.demonScore() >= 11 && player.gender == 1) {
+			else if (player.isRace(Races.DEMON) && player.gender == 1) {
 				outputText("You ask Alvina if this form will work, swinging your [cock] for her to admire.\n\n");
 				outputText("\"<i>A slavering incubus fits you perfectly.</i>\"\n\n");
 			}
-			else if (player.demonScore() >= 11 && player.gender == 2) {
+			else if (player.isRace(Races.DEMON) && player.gender == 2) {
 				outputText("You ask Alvina if this form will work, giving her a nice view, putting your [chest] and your [pussy] on display.\n\n");
 				outputText("\"<i>A slutty succubus fits you perfectly.</i>\"\n\n");
 			}

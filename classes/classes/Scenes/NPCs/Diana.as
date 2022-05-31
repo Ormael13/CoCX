@@ -43,59 +43,59 @@ package classes.Scenes.NPCs
 		public function spellCostHeal():Number {
 			var cost:Number = 30;
 			cost *= spellCostMultiplier();
-			if (findPerk(PerkLib.NaturalHealingMinor) >= 0) cost -= 3;
-			if (findPerk(PerkLib.NaturalHealingMajor) >= 0) cost -= 4.5;
-			if (findPerk(PerkLib.NaturalHealingEpic) >= 0) cost -= 5;
-			if (findPerk(PerkLib.NaturalHealingLegendary) >= 0) cost -= 6.5;
-			if (findPerk(PerkLib.WisenedHealer) >= 0) cost *= 2;
+			if (hasPerk(PerkLib.NaturalHealingMinor)) cost -= 3;
+			if (hasPerk(PerkLib.NaturalHealingMajor)) cost -= 4.5;
+			if (hasPerk(PerkLib.NaturalHealingEpic)) cost -= 5;
+			if (hasPerk(PerkLib.NaturalHealingLegendary)) cost -= 6.5;
+			if (hasPerk(PerkLib.WisenedHealer)) cost *= 2;
 			return cost;
 		}
 		public function spellCostRegenerate():Number {
 			var cost:Number = 50;
 			cost *= spellCostMultiplier();
-			if (findPerk(PerkLib.NaturalHealingMinor) >= 0) cost -= 5;
-			if (findPerk(PerkLib.NaturalHealingMajor) >= 0) cost -= 7.5;
-			if (findPerk(PerkLib.NaturalHealingEpic) >= 0) cost -= 10;
-			if (findPerk(PerkLib.NaturalHealingLegendary) >= 0) cost -= 12.5;
-			if (findPerk(PerkLib.WisenedHealer) >= 0) cost *= 2;
+			if (hasPerk(PerkLib.NaturalHealingMinor)) cost -= 5;
+			if (hasPerk(PerkLib.NaturalHealingMajor)) cost -= 7.5;
+			if (hasPerk(PerkLib.NaturalHealingEpic)) cost -= 10;
+			if (hasPerk(PerkLib.NaturalHealingLegendary)) cost -= 12.5;
+			if (hasPerk(PerkLib.WisenedHealer)) cost *= 2;
 			return cost;
 		}
 		public function soulskillCostManyBirds():Number {
 			var cost:Number = 10;
-			if (findPerk(PerkLib.DaoistCultivator) >= 0) cost -= 1;
+			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 1;
 			return cost;
 		}
 		public function soulskillCostHailOfBlades1():Number {
 			var cost:Number = 50;
-			if (findPerk(PerkLib.DaoistCultivator) >= 0) cost -= 5;
+			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 5;
 			return cost;
 		}
 		
 		public function HealMod():Number {
 			var mod1:Number = 1;
-			if (findPerk(PerkLib.WizardsFocus) >= 0) mod1 += .4;
-			if (findPerk(PerkLib.SpellpowerHealing) >= 0) mod1 += .2;
-			if (findPerk(PerkLib.NaturalHealingMinor) >= 0) mod1 += .3;
-			if (findPerk(PerkLib.NaturalHealingMajor) >= 0) mod1 += .4;
-			if (findPerk(PerkLib.NaturalHealingEpic) >= 0) mod1 += .5;
-			if (findPerk(PerkLib.NaturalHealingLegendary) >= 0) mod1 += .6;
+			if (hasPerk(PerkLib.WizardsFocus)) mod1 += .4;
+			if (hasPerk(PerkLib.SpellpowerHealing)) mod1 += .2;
+			if (hasPerk(PerkLib.NaturalHealingMinor)) mod1 += .3;
+			if (hasPerk(PerkLib.NaturalHealingMajor)) mod1 += .4;
+			if (hasPerk(PerkLib.NaturalHealingEpic)) mod1 += .5;
+			if (hasPerk(PerkLib.NaturalHealingLegendary)) mod1 += .6;
 			return mod1;
 		}
 		public function SpellMod():Number {
 			var mod2:Number = 1;
-			if (findPerk(PerkLib.Spellpower) >= 0) mod2 += .1;
-			if (findPerk(PerkLib.Channeling) >= 0) mod2 += .2;
-			if (findPerk(PerkLib.JobSorcerer) >= 0) mod2 += .1;
-			if (findPerk(PerkLib.WizardsFocus) >= 0) mod2 += .4;
+			if (hasPerk(PerkLib.Spellpower)) mod2 += .1;
+			if (hasPerk(PerkLib.Channeling)) mod2 += .2;
+			if (hasPerk(PerkLib.JobSorcerer)) mod2 += .1;
+			if (hasPerk(PerkLib.WizardsFocus)) mod2 += .4;
 			return mod2;
 		}
 		public function SoulskillMod():Number {
 			var mod3:Number = 1;
-			if (findPerk(PerkLib.DaoistCultivator) >= 0) mod3 += .2;
-			if (findPerk(PerkLib.DaoistApprenticeStage) >= 0) {
-				if (findPerk(PerkLib.SoulApprentice) >= 0) mod3 += .4;
-				if (findPerk(PerkLib.SoulPersonage) >= 0) mod3 += .4;
-				if (findPerk(PerkLib.SoulWarrior) >= 0) mod3 += .4;
+			if (hasPerk(PerkLib.DaoistCultivator)) mod3 += .2;
+			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
+				if (hasPerk(PerkLib.SoulApprentice)) mod3 += .4;
+				if (hasPerk(PerkLib.SoulPersonage)) mod3 += .4;
+				if (hasPerk(PerkLib.SoulWarrior)) mod3 += .4;
 			}
 			return mod3;
 		}
@@ -106,7 +106,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 5) temp *= 3;
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 10) temp *= 3;
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 15) temp *= 3;
-			outputText("She pop the small pill into her mouth and swallow. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
+			outputText("She pops the small pill into her mouth and swallows. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
 			addHP(temp);
 		}
 		public function usingARC():void {
@@ -118,7 +118,7 @@ package classes.Scenes.NPCs
 		}
 		
 		public function usingManyBirdsSoulskill():void {
-			outputText("She thrust her hand outwards with deadly intent, and in the blink of an eye a crystals shoots towards you.  Crystals hits you, dealing ");
+			outputText("She brings her hand up towards you, palm out. A shower of crystalline shards form in front of her outstretched hand. The crystals shoots towards you. The crystals shatter as they hit you, detonating");
 			soulforce -= soulskillCostManyBirds();
 			var damage:Number = wisdomscalingbonus();
 			if (damage < 10) damage = 10;
@@ -129,28 +129,37 @@ package classes.Scenes.NPCs
 		}
 		
 		public function usingHailOfBlades1Soulskill():void {
-			outputText("Letting soulforce leak out around her, Diana form six ethereal two meter long weapons. She thrust her hand outwards and in the blink of an eye, weapons shoot towards you.  ");
+			outputText("placing her palms together, Diana's aura flares. soulforce leaks out around her, and she brings her palms out to her sides. Eyes focused on you, Diana forms six ethereal swords nearly six feet long, splaying out behind her like a fan of blades. She thrusts her hand outwards and in the blink of an eye, the etherial blades shoot towards you. ");
 			soulforce -= soulskillCostHailOfBlades1();
-			outputText("Weapons hits you, dealing ");
-			BladesD();
-			BladesD();
-			BladesD();
-			BladesD();
-			BladesD();
-			BladesD();
-			outputText(" damage!");
+			outputText("The blades cut deep, inflicting ");
+			var hob1:Number = 6;
+			while (hob1-->0) BladesD();
+			outputText("damage!");
 		}
 		private function BladesD():void {
 			var damage:Number = this.wis * 0.5;
 			damage += wisdomscalingbonus() * 0.5;
 			if (damage < 10) damage = 10;
 			damage *= SoulskillMod();
+			var crit:Boolean = false;
+			var critChance:int = 5;
+			if (this.wis <= 200) critChance += this.wis / 10;
+			if (this.wis > 200) critChance += 20;
+			if (rand(100) < critChance) {
+				crit = true;
+				damage *= 1.75;
+			}
+			var bd2:Number = 0.9;
+			bd2 += (rand(21) * 0.01);
+			damage *= bd2;
 			damage = Math.round(damage);
 			player.takeMagicDamage(damage, true);
+			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+			outputText(" ");
 		}
 		
 		public function usingMagicBoltsBarrageSpell():void {
-			outputText("Diana narrow her eyes, focusing her mind with deadly intent.  After longer time she spend focusing, she point her staff and shots magic bolts toward you! ");
+			outputText("Diana narrow her eyes, focusing her mind with deadly intent. Mana pours down her shoulders, past her hands and into her staff, which she spins, pointing the tip at you. Blue energy coats the staff, and she fires a barrage of mana bolts at you! ");
 			mana -= spellCostMagicBoltsBarrage();
 			var damage:Number = inteligencescalingbonus() * SpellMod() * 1.2;
 			if (damage < 10) damage = 10;
@@ -168,7 +177,7 @@ package classes.Scenes.NPCs
 		}
 		
 		public function usingMagicBoltSpell():void {
-			outputText("Diana narrow her eyes, focusing her mind with deadly intent.  Then she point her staff and shots magic bolt toward you! ");
+			outputText("Diana narrows her eyes, and her staff begins to glow. She points her staff at you, a large blue bolt lancing towards you.");
 			mana -= spellCostMagicBolt();
 			var damage:Number = inteligencescalingbonus() * SpellMod() * 1.2;
 			if (damage < 10) damage = 10;
@@ -182,9 +191,9 @@ package classes.Scenes.NPCs
 		}
 		
 		public function usingRegenerateSpell():void {
-			outputText("She focus on her body and its desire to end pain, trying to draw on her arousal without enhancing it.\n");
+			outputText("She closes her eyes, taking a wide stance and holding her staff in front of her. Her cheeks flush red, and you can see her wounds closing. The magic sticks around, clinging to her body. She's regenerating!\n");
 			var hpChange2:int = inte;
-			if (findPerk(PerkLib.WisenedHealer) >= 0) hpChange2 += wis;
+			if (hasPerk(PerkLib.WisenedHealer)) hpChange2 += wis;
 			createStatusEffect(StatusEffects.MonsterRegen2, 7, hpChange2, 0, 0);
 			mana -= spellCostRegenerate();
 			flags[kFLAGS.DIANA_SPELLS_CASTED]++;
@@ -193,13 +202,13 @@ package classes.Scenes.NPCs
 		public function usingHealSpell():void {
 			var temp:Number = 0;
 			temp += inteligencescalingbonus();
-			if (findPerk(PerkLib.WisenedHealer) >= 0) temp += wisdomscalingbonus();
+			if (hasPerk(PerkLib.WisenedHealer)) temp += wisdomscalingbonus();
 			temp *= HealMod();
 			temp = Math.round(temp);
 			if (flags[kFLAGS.DIANA_LVL_UP] < 2) outputText("Horse-morph");
 			else if (flags[kFLAGS.DIANA_LVL_UP] >= 2 && flags[kFLAGS.DIANA_LVL_UP] < 8) outputText("Unicorn");
 			else outputText("Diana");
-			outputText(" chant a magical song of healing and recovery and her wounds start knitting themselves shut in response. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
+			outputText(" cries out, planting her staff. She inhales deeply, and begins chanting. A green pulse eminates from her staff, which wraps around her, closing her injuries almost instantly.  <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
 			addHP(temp);
 			mana -= spellCostHeal();
 			createStatusEffect(StatusEffects.AbilityCooldown1, 2, 0, 0, 0);
@@ -209,15 +218,15 @@ package classes.Scenes.NPCs
 		override protected function performCombatAction():void
 		{
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 16 && HPRatio() < .4 && soulforce >= 100 && !hasStatusEffect(StatusEffects.MonsterVPT)) {
-				outputText("Diana eyes starts to glow with a violet hue and you can see all of her wounds are now slowly healing.\n");
+				outputText("Diana's eyes starts to glow with a violet hue and you can see all of her wounds are now slowly healing.\n");
 				createStatusEffect(StatusEffects.MonsterVPT, 550, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 12 && flags[kFLAGS.DIANA_LVL_UP] < 16 && HPRatio() < .3 && soulforce >= 100 && !hasStatusEffect(StatusEffects.MonsterVPT)) {
-				outputText("Diana eyes starts to glow with a violet hue and you can see all of her wounds are now slowly healing.\n");
+				outputText("Diana's eyes starts to glow with a violet hue and you can see all of her wounds are now slowly healing.\n");
 				createStatusEffect(StatusEffects.MonsterVPT, 350, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 8 && flags[kFLAGS.DIANA_LVL_UP] < 12 && HPRatio() < .2 && soulforce >= 100 && !hasStatusEffect(StatusEffects.MonsterVPT)) {
-				outputText("Diana eyes starts to glow with a violet hue and you can see all of her wounds are now slowly healing.\n");
+				outputText("Diana's eyes starts to glow with a violet hue and you can see all of her wounds are now slowly healing.\n");
 				createStatusEffect(StatusEffects.MonsterVPT, 200, 0, 0, 0);
 			}
 			if (hasStatusEffect(StatusEffects.MonsterVPT)) {
@@ -296,11 +305,12 @@ package classes.Scenes.NPCs
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (flags[kFLAGS.DIANA_FOLLOWER] >= 6) dianaScene.wonOverDianaSpar();
-			else if (flags[kFLAGS.DIANA_AFFECTION] >= 100 && flags[kFLAGS.DIANA_LVL_UP] >= 8) {
-				if (flags[kFLAGS.DIANA_FOLLOWER] < 3) dianaScene.beMyStallion();
-				else dianaScene.beMyStallionRepeat();
-			}
+			if (flags[kFLAGS.DIANA_FOLLOWER] >= 6)
+                dianaScene.wonOverDianaSpar();
+            else if (flags[kFLAGS.DIANA_FOLLOWER] == 5 && (player.hasCock() || !player.blockingBodyTransformations()))
+                dianaScene.beMyStallionRepeat();
+			else if (flags[kFLAGS.DIANA_FOLLOWER] < 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8 && (player.hasCock() || !player.blockingBodyTransformations()))
+				dianaScene.beMyStallion();
 			else dianaScene.wonOverDiana();
 		}
 		
@@ -556,7 +566,7 @@ package classes.Scenes.NPCs
 					add(consumables.BAGOCA1,1/5).
 					add(consumables.UNICORN,1/2);
 			}
-			if (flags[kFLAGS.DIANA_LVL_UP] >= 2 && flags[kFLAGS.DIANA_FOLLOWER] == 4) {
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 2 && flags[kFLAGS.DIANA_FOLLOWER] == 3) {
 				this.a = "the ";
 				this.short = "unicorn";
 				this.imageName = "unicornmare";
@@ -712,7 +722,7 @@ package classes.Scenes.NPCs
 				this.createPerk(PerkLib.SoulAncestor, 0, 0, 0, 0);
 				this.createPerk(PerkLib.SuperiorSpirituality, 0, 0, 0, 0);
 			}
-			if (flags[kFLAGS.DIANA_FOLLOWER] == 3 || flags[kFLAGS.DIANA_FOLLOWER] == 4) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			if (flags[kFLAGS.DIANA_FOLLOWER] == 3) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			checkMonster();
 		}
 	}

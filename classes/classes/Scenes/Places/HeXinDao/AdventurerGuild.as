@@ -22,7 +22,7 @@ package classes.Scenes.Places.HeXinDao
 		public static var Slot04Cap:Number;//demon skulls
 		//Iron plate
 		public static var Slot05:Number;
-		public static var Slot05Cap:Number;
+		public static var Slot05Cap:Number;//feral tentacle beasts
 		public static var Slot06:Number;
 		public static var Slot06Cap:Number;
 		//Bronze plate
@@ -295,7 +295,7 @@ package classes.Scenes.Places.HeXinDao
 				menu();
 				addButton(0, "Quest", BoardkeeperYangQuest);
 				addButton(1, "Talk", BoardkeeperYangTalk);
-				if (player.keyItemv1("Adventurer Guild: Copper plate") > 1) addButton(2, "Promotion", BoardkeeperYangPromotion).hint("Ask Yang for a promotion once you have achieved enough jobs.");
+				if (player.keyItemvX("Adventurer Guild: Copper plate", 1) > 1) addButton(2, "Promotion", BoardkeeperYangPromotion).hint("Ask Yang for a promotion once you have achieved enough jobs.");
 				else addButtonDisabled(2, "Promotion", "Not meet req.");
 				addButton(3, "Sex", BoardkeeperYangSex);
 				addButton(4, "Back", curry(SceneLib.journeyToTheEast.enteringInn, false));
@@ -957,7 +957,7 @@ package classes.Scenes.Places.HeXinDao
 		}
 		public function BoardkeeperYangPromotion():void {
 			clearOutput();
-			if (player.keyItemv1("Adventurer Guild: Copper plate") > 1) {
+			if (player.keyItemvX("Adventurer Guild: Copper plate", 1) > 1) {
 				if (flags[kFLAGS.SPIRIT_STONES] >= 10) {
 					outputText("Yang nods, \"<i>Yep, it’s definitely time we promoted you. You pass from Copper plate to Iron, congratulations!</i>\"\n\n");
 					outputText("She hands you a new necklace, which you proceed to don up.\n\n");
@@ -966,21 +966,22 @@ package classes.Scenes.Places.HeXinDao
 					flags[kFLAGS.SPIRIT_STONES] -= 10;
 					Slot03Cap = 10;
 					Slot04Cap = 10;
+					Slot05Cap = 10;
 				}
 				else {
 					outputText("Yeah sure, you will get promoted. Or rather, you would like to but you lack the required spirit stones for the promotion fee.\n\n");
 					outputText("\"<i>Its ok just go to Moga Hen, he should be able to exchange those gem of yours for the local currency.</i>\"");
 				}
 			}
-			if (player.keyItemv1("Adventurer Guild: Iron plate") > 1) {
+			if (player.keyItemvX("Adventurer Guild: Iron plate", 1) > 1) {
 				if (flags[kFLAGS.SPIRIT_STONES] >= 15) {
 					outputText("Yang nods. \"<i>Yep it’s definitely time we promoted hou. You pass from Iron plate to Bronze, congratulations!</i>\"\n\n");
 					outputText("She hand you a new necklace, which you proceed to don up.\n\n");
 					player.removeKeyItem("Adventurer Guild: Iron plate");
 					player.createKeyItem("Adventurer Guild: Bronze plate", 0, 0, 0, 0);
 					flags[kFLAGS.SPIRIT_STONES] -= 15;
-					Slot05Cap = 10;
 					Slot06Cap = 10;
+					Slot07Cap = 10;
 				}
 				else {
 					outputText("Yeah sure, you will get promoted. Or rather you would like to but you lack the required spirit stones for the promotion fee.\n\n");

@@ -1,8 +1,8 @@
 ﻿package classes.Scenes.NPCs {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class MilkWaifu extends NPCAwareContent{
 
@@ -25,6 +25,7 @@ override public function milkSlave():Boolean {
 //Arriving at Camp
 public function arriveWithLacticWaifuAtCamp():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_milkgirl);
 	outputText("It's slow going, having to support your milky friend all the way back to camp, but after a few hours, you manage to make it home.  By the time you arrive, you see that the Sand Mother has kept her word, and a small part of the camp's perimeter has been cleared away, your belongings moved aside to make room for a large pool, its radius easily ten feet, buried in the hard-packed dirt of the wasteland.  A metallic brim surrounds the pool, just wide enough to sit or lie on with your [legs] dangling into the milky waters that will soon be filling it.");
 	
 	outputText("\n\nSeeing the pool, the milk girl gasps with glee, stumbling over to it before collapsing onto all fours, chest resting on her massive tits and ass up in the air, bare for all to see.  \"<i>Bath Slut milk time?</i>\" she asks, her bright brown eyes looking up at yours pleadingly.");
@@ -37,8 +38,9 @@ public function arriveWithLacticWaifuAtCamp():void {
 	mainView.nameBox.text = "";
 }
 
+//for 'enemy' options new functions were added to DesertCave.as
 
-private function nameZeMilkBath():void 
+public function nameZeMilkBath():void
 {
 	if (CoC.instance.testingBlockExiting)
 	{
@@ -106,6 +108,7 @@ private function nameZeMilkBath():void
 
 public function ratducto():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_rathazul);
 	outputText("Looking up, you see the old rat alchemist Rathazul approaching, nose buried in an ancient-looking tome.  \"<i>Good news, [name]!</i>\" he calls, just before tripping over the prone milkmaid, going sprawling across the ground.");
 	
 	outputText("\n\n\"<i>Gah!  Help, I can't get up!</i>\" he shouts, flailing around until you rush over and pull him to his feet.");
@@ -132,6 +135,7 @@ public function ratducto():void {
 //Milky's Menu (Accessed from the FOLLOWERS tab)
 public function milkyMenu():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_milkgirl);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0)
 	{
 		outputText("You wander over to " + flags[kFLAGS.MILK_NAME] + "'s pool, and find the dusky girl sitting at its rim, ");
@@ -145,13 +149,13 @@ public function milkyMenu():void {
 		{
 			outputText("[bathgirlname] shakes vaguely out of her boob daze as you pick your way over to her.");
 
-			outputText("\n\n“<i>Bath time?</i>”");
+			outputText("\n\n\"<i>Bath time?</i>\"");
 		}
 		else
 		{
 			outputText("[bathgirlname] smiles at you as you pick your way over to her.");
 
-			outputText("\n\n“<i>Hello [name]. Is there something you need?</i>”");
+			outputText("\n\n\"<i>Hello [name]. Is there something you need?</i>\"");
 		}
 	}
 
@@ -194,7 +198,7 @@ private function sendToFarm():void
 	
 	outputText("You describe to [bathgirlname] the lake, and the farm which is situated close to it. Gently you tell her you want her to go there, present herself to the dog woman who owns it, and do as she says.");
 
-	outputText("“<i>Ok,</i>” says [bathgirlname], cautiously testing the idea out. “<i>You’ll come and visit sometimes, right?</i>” Of course. Mollified, the former sand witch slave gets to her feet and cautiously picks her way towards the lake. She won’t be much use protection-wise but she’ll give your milk production a boost.");
+	outputText("\"<i>Ok,</i>\" says [bathgirlname], cautiously testing the idea out. \"<i>You’ll come and visit sometimes, right?</i>\" Of course. Mollified, the former sand witch slave gets to her feet and cautiously picks her way towards the lake. She won’t be much use protection-wise but she’ll give your milk production a boost.");
 
 	if (player.cor >= 90)
 	{
@@ -209,11 +213,9 @@ private function sendToFarm():void
 private function backToCamp():void
 {
 	clearOutput();
-	
-	//TODO
-	outputText("“<i>I want you to head on back to camp,</i>” you tell her. “<i>You’ll be more useful to me there.</i>” [bathgirlName]’s brow crinkles but she seems to accept your instruction.");
+	outputText("\"<i>I want you to head on back to camp,</i>\" you tell her. \"<i>You’ll be more useful to me there.</i>\" [bathgirlName]’s brow crinkles but she seems to accept your instruction.");
 
-	outputText("“<i>As you wish.</i>” She wipes her hands before walking slowly down and out of the farm’s gate.");
+	outputText("\"<i>As you wish.</i>\" She wipes her hands before walking slowly down and out of the farm’s gate.");
 	
 	flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] = 0;
 	
@@ -345,7 +347,7 @@ private function milkBathTime():void {
 	
 	outputText("\n\n" + flags[kFLAGS.MILK_NAME] + " pulls back, licking her puffy lips and smelling strongly of female arousal, though obviously satisfied.  She whimpers, \"<i>I love bath time,</i>\" before ");
 	if(flags[kFLAGS.MILK_SIZE] == 0) outputText("starting to shift her breasts' bulk toward a comfortable spot for a nap");
-	else outputText("struggling to her feet, legs shaky with the afterglow of a might boobgasm");
+	else outputText("struggling to her feet, legs shaky with the afterglow of a mighty boobgasm");
 	outputText(".");
 	if(player.lust >= 33) outputText("  You could probably masturbate in the tub if you wanted to, or maybe pull the dusky milk-maid in for company.");
 	//If PC has Sophie, Hel, Isabella, Izma, Ember, or Amily:
@@ -420,7 +422,10 @@ private function communalBath():void {
 	if(helScene.followerHel()) outputText("\n\nWith a gleeful shout, Hel rushes the pool.  In one swift motion, she tosses her scale bikini aside and cannon-balls in, splashing everyone with a creamy tidal wave.  Chuckling, you clear your eyes - just in time for her bikini bottom to land on your face.");
 	
 	//If PC has Izma: 
-	if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) outputText("\n\nYou didn't even notice Izma getting into the pool.  The first sign of her is the sudden appearance of a bright red fin sticking above the water, closing in on you.  She breaches at the last moment, laughing gaily as she gives her alpha a kiss.");
+	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) {
+		var el:Boolean = flags[kFLAGS.IZMA_BROFIED] > 0;
+		outputText("\n\nYou didn't even notice " + (el ? "Izmael" : "Izma") + " getting into the pool.  The first sign of " + (el ? "him" : "her") + " is the sudden appearance of a bright red fin sticking above the water, closing in on you.  " + (el ? "He" : "She") + " breaches at the last moment, laughing gaily as " + (el ? "he" : "she") + " gives " + (el ? "his" : "her") + " alpha a kiss.");
+	}
 	
 	//{If PC has Ember:
 	if(emberScene.followerEmber()) outputText("\n\nEmber approaches the pool, reptilian tail swishing eagerly.  " + emberScene.emberMF("He","She") + " lowers " + emberScene.emberMF("himself","herself") + " in with ease, sighing contentedly as milk washes over " + emberScene.emberMF("his","her") + " scaled body.  \"<i>Is this how you humans bathe normally?</i>\"  " + emberScene.emberMF("He","She") + " muses.  \"<i>How bizarre.</i>\"");
@@ -506,8 +511,8 @@ private function fuckTheMilkWaifu():void {
 	outputText("You turn around and pull the milk-slut against you, her massive teats pressing hard against your [chest] until they spurt.  You stroke her cheeks, bringing her lips up to yours.  Her hand finds your [cock] again, stroking you with mounting speed as your tongue finds its way into her mouth, your hands wandering down to grope her sizable ass and flared, breeder's hips.  Your lover sighs heavily, breath filled with lust as you push her up against the rim of the tub, her legs spreading wide for easy access to her milk-lubed cunt.  She locks her arms around your shoulders, moaning happily as you press into her, your [cock] slipping easily into her sodden box.");
 	
 	outputText("\n\nSubmerged beneath a sea of creamy milk, it's so very, very easy to slide into " + flags[kFLAGS.MILK_NAME] + ", ");
-	if(player.cockArea(0) < 20) outputText("pushing your few inches into her until your hips join, her nice and loose cunt easily taking your length");
-	else if(player.cockArea(0) < 50) outputText("hilting her in one long stroke");
+	if(player.biggestCockArea() < 20) outputText("pushing your few inches into her until your hips join, her nice and loose cunt easily taking your length");
+	else if(player.biggestCockArea() < 50) outputText("hilting her in one long stroke");
 	else outputText("your cock gaining as much entrance as your massive member can, the excess dickmeat embraced in cream between you");
 	outputText(".  With your prick buried in her, " + flags[kFLAGS.MILK_NAME] + " hooks her legs around your [hips] and starts to gently rock her hips, letting you take the initiative.  Smiling at the meek girl, you sink your fingers into milk-yielding titflesh and start to move your hips, thrusting into her with measured ease, letting milk flood into her channel and coat your dick to lubricate each and every stroke.");
 	

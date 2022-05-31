@@ -2,9 +2,6 @@
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.Armor;
-import classes.Items.HeadJewelry;
-import classes.Scenes.Dungeons.DeepCave.ValaScene;
 import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.TelAdre.*;
@@ -89,7 +86,7 @@ private function encounterTelAdre():void {
 private function telAdreCrystal():void {
 	if(!player.hasStatusEffect(StatusEffects.TelAdre)) player.createStatusEffect(StatusEffects.TelAdre,0,0,0,0);
 	//-70+ corruption, or possessed by exgartuan
-	if (player.hasStatusEffect(StatusEffects.Exgartuan) || player.cor >= 70 + player.corruptionTolerance()) {
+	if (player.hasStatusEffect(StatusEffects.Exgartuan) || player.cor >= 70 + player.corruptionTolerance) {
 		outputText("The crystal pendant begins to vibrate in the air, swirling around and glowing dangerously black.  Edryn snatches her hand back and says, \"<i>I'm sorry, but you're too far gone to step foot into our city.  If by some miracle you can shake the corruption within you, return to us.</i>\"\n\n");
 		outputText("You shrug and step back.  You could probably defeat these two, but you know you'd have no hope against however many friends they had beyond the walls.  You turn around and leave, a bit disgruntled at their hospitality.  After walking partway down the dune you spare a glance over your shoulder and discover the city has vanished!  Surprised, you dash back up the dune, flinging sand everywhere, but when you crest the apex, the city is gone.");
 		doNext(camp.returnToCampUseOneHour);
@@ -187,7 +184,7 @@ public function telAdreMenu():void {
 		else meetingLunaFirstTime();
 		return;
 	}
-	spriteSelect(-1);
+	spriteSelect(null);
 	outputText(images.showImage("location-teladre"));
 	clearOutput();
 	outputText("Tel'Adre is a massive city, though most of its inhabitants tend to hang around the front few city blocks.  It seems the fall of Mareth did not leave the city of Tel'Adre totally unscathed.  A massive tower rises up in the center of the city, shimmering oddly.  From what you overhear in the streets, the covenant's magic-users slave away in that tower, working to keep the city veiled from outside dangers.  There does not seem to be a way to get into the unused portions of the city, but you'll keep your eyes open.\n\n");
@@ -265,7 +262,7 @@ public function houses():void {
 
 
 public function oswaldPawn():void {
-	spriteSelect(47);
+	spriteSelect(SpriteDb.s_oswald);
 	clearOutput();
 	if (!player.hasStatusEffect(StatusEffects.Oswald)) {
 		outputText("Upon closer inspection, you realize the pawnbroker appears to be some kind of golden retriever.  He doesn't look entirely comfortable and he slouches, but he manages to smile the entire time.  His appearance is otherwise immaculate, including his classy suit-jacket and tie, though he doesn't appear to be wearing any pants.  Surprisingly, his man-bits are retracted.  ");
@@ -308,7 +305,7 @@ private function buyCarrotFromOswald():void {
 
 private function oswaldPawnMenu(page:int = 1, refresh:Boolean = false):void { //Moved here from Inventory.as
 	var slot:int;
-	spriteSelect(47);
+	spriteSelect(SpriteDb.s_oswald);
 	if (refresh) {
 		clearOutput();
 		outputText("You see Oswald fiddling with a top hat as you approach his stand again.  He looks up and smiles, padding up to you and rubbing his furry hands together.  He asks, \"<i>Have any merchandise for me " + player.mf("sir","dear") + "?</i>\"\n\n");
@@ -342,9 +339,9 @@ private function oswaldPawnMenu(page:int = 1, refresh:Boolean = false):void { //
 	addButton(14, "Back", telAdreMenu);
 }
 private function oswaldPawnMenu2():void {
-	spriteSelect(47);
+	spriteSelect(SpriteDb.s_oswald);
 	menu();
-	if (player.keyItemv1("Backpack") < 12) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
+	if (player.keyItemvX("Backpack", 1) < 4) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
 	switch (flags[kFLAGS.KATHERINE_UNLOCKED]) {
 		case 1:
 		case 2: addButton(10, "Kath's Alley", katherine.visitKatherine); break;
@@ -355,12 +352,12 @@ private function oswaldPawnMenu2():void {
 }
 
 private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
-	spriteSelect(47);
+	spriteSelect(SpriteDb.s_oswald);
 	var itemValue:int = int(player.itemSlots[slot].itype.value / 2);
 	clearOutput();
 	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
 		if (itemValue == 0)
-			outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to Oswald.  He shrugs and says, “<i>Well ok, it isn't worth anything, but I'll take it.</i>”");
+			outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to Oswald.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
 		else outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to Oswald.  He nervously pulls out " + num2Text(itemValue * player.itemSlots[slot].quantity)  + " gems and drops them into your waiting hand.");
 		while (player.itemSlots[slot].quantity > 0){
 			player.itemSlots[slot].removeOneItem();
@@ -372,11 +369,11 @@ private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
 		if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
 		if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
 		if (itemValue == 0)
-		outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He shrugs and says, “<i>Well ok, it isn't worth anything, but I'll take it.</i>”");
+		outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
 		else outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He nervously pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
 		player.itemSlots[slot].removeOneItem();
 		if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for double the amount.");
-		if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four time the amount.");
+		if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four times the amount.");
 		player.gems += itemValue;
 	}
 	statScreenRefresh();
@@ -384,7 +381,7 @@ private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
 }
 
 private function oswaldPawnSellAll():void {
-	spriteSelect(47);
+	spriteSelect(SpriteDb.s_oswald);
 	var itemValue:int = 0;
 	clearOutput();
 	for (var slot:int = 0; slot < 20; slot++) {
@@ -397,7 +394,7 @@ private function oswaldPawnSellAll():void {
 	if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
 	outputText("You lay out all the items you're carrying on the counter in front of Oswald.  He examines them all and nods.  Nervously, he pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
 	if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for double the amount.");
-	if (player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four time the amount.");
+	if (player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four times the amount.");
 
 	player.gems += itemValue;
 	statScreenRefresh();
@@ -405,7 +402,7 @@ private function oswaldPawnSellAll():void {
 }
 
 private function buyBackpack():void {
-	spriteSelect(47);
+	spriteSelect(SpriteDb.s_oswald);
 	clearOutput();
 	outputText("You ask Oswald if he has a backpack to spare.");
 	outputText("\n\n\"<i>Yes. They come in two sizes. What will you pick?</i>\" he asks.");
@@ -413,12 +410,12 @@ private function buyBackpack():void {
 	outputText("\nSmall: 100 gems, +2 inventory slot");
 	outputText("\nMedium: 200 gems, +4 inventory slots");
 	menu();
-	if (player.keyItemv1("Backpack") < 2) addButton(0, "Small", buyBackpackConfirmation, 2, "Small", 100, "Grants additional two slot. \n\nCost: 100 gems");
-	if (player.keyItemv1("Backpack") < 4) addButton(1, "Medium", buyBackpackConfirmation, 4, "Medium", 200, "Grants additional four slots. \n\nCost: 200 gems");
+	if (player.keyItemvX("Backpack", 1) < 2) addButton(0, "Small", buyBackpackConfirmation, 2, "Small", 100, "Grants additional two slot. \n\nCost: 100 gems");
+	if (player.keyItemvX("Backpack", 1) < 4) addButton(1, "Medium", buyBackpackConfirmation, 4, "Medium", 200, "Grants additional four slots. \n\nCost: 200 gems");
 	addButton(14, "Nevermind", oswaldPawnMenu2);
 }
 private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 100):void {
-	spriteSelect(47);
+	spriteSelect(SpriteDb.s_oswald);
 	clearOutput();
 	if (player.gems < price) {
 		outputText("You count out your gems and realize it's beyond your price range.");
@@ -427,8 +424,8 @@ private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small"
 	}
 	outputText("\"<i>Here you go.</i>\"");
 	if (player.hasKeyItem("Backpack") >= 0) {
-		outputText("\n\n<b>(Key Item Upgraded: " + sizeDesc + " Backpack! You now have " + num2Text(size - player.keyItemv1("Backpack")) + " extra inventory slots");
-		player.addKeyValue("Backpack", 1, size - player.keyItemv1("Backpack"));
+		outputText("\n\n<b>(Key Item Upgraded: " + sizeDesc + " Backpack! You now have " + num2Text(size - player.keyItemvX("Backpack", 1)) + " extra inventory slots");
+		player.addKeyValue("Backpack", 1, size - player.keyItemvX("Backpack", 1));
 		outputText(" for a total of " + num2Text(inventory.getMaxSlots()) + " slots.)</b>");
 	}
 	else {
@@ -455,7 +452,7 @@ private function enterBarTelAdre():void {
 public function barTelAdre():void {
 	// Dominka & Edryn both persist their sprites if you back out of doing anything with them -- I
 	// I guess this is good a place as any to catch-all the sprite, because I don't think theres ever a case you get a sprite from just entering the bar?
-	spriteSelect( -1);
+	spriteSelect(null);
 
 	hideUpDown();
 	var button:int = 0;
@@ -466,7 +463,7 @@ public function barTelAdre():void {
 	}
 	outputText(images.showImage("location-teladre-thewetbitch"));
 	outputText("The interior of The Wet Bitch is far different than the mental picture its name implied.  It looks like a normal tavern, complete with a large central hearth, numerous tables and chairs, and a polished dark wood bar.  The patrons all seem to be dressed and interacting like normal people, that is if normal people were mostly centaurs and dog-morphs of various sub-species.  The atmosphere is warm and friendly, and ");
-	if (player.humanScore() <= 3) outputText("despite your altered appearance, ");
+	if (!player.isRace(Races.HUMAN)) outputText("despite your altered appearance, ");
 	outputText("you hardly get any odd stares.  There are a number of rooms towards the back, as well as a stairway leading up to an upper level.");
 
 	scylla.scyllaBarSelectAction(); //Done before anything else so that other NPCs can check scylla.action to see what she's doing
@@ -479,7 +476,7 @@ public function barTelAdre():void {
 		button = anotherButton(button,"Ask4Amily",SceneLib.followerInteractions.askAboutAmily);
 	}
 	//DOMINIKA
-	if(model.time.hours > 17 && model.time.hours < 20 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] != -1) {
+	if(model.time.hours > 17 && model.time.hours < 20 && flags[kFLAGS.DOMINIKA_MET] != -1) {
 		button = anotherButton(button,"Dominika",dominika.fellatrixBarApproach);
 	}
 	//EDRYN!
@@ -607,11 +604,11 @@ public function barTelAdre():void {
 		}
 		//Urta X Scylla threesome
 		if (scylla.action == Scylla.SCYLLA_ACTION_FUCKING_URTA) {
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] == 0)
+			if (flags[kFLAGS.URTA_SCYLLA_TIMES_CAUGHT] == 0)
 				outputText("\n\n<b>Though Urta would normally be here getting sloshed, her usual spot is completely vacant.  You ask around but all you get are shrugs and giggles.  Something isn't quite right here.  You see an empty bottle of one of her favorite brands of whiskey still rolling on her table, so she can't have been gone long.  Maybe she had guard business, or had to head to the back rooms for something?</b>");
 			else
 				outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank mug of something potent and alcoholic.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...");
-			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 4;
+			SceneLib.urta.hoursUntilHorny(4);
 			button = anotherButton(button, "Back Room", SceneLib.urta.scyllaAndUrtaSittingInATree);
 		}
 		else if (SceneLib.urta.urtaBarDescript()) {
@@ -634,12 +631,10 @@ public function barTelAdre():void {
 //-----------------
 public function carpentryShopEntry():void {
 	clearOutput();
+    spriteSelect(SpriteDb.s_carpenter);
 	outputText("You enter the shop marked by a sign with hammer and saw symbol painted on it. There are array of tools all hung neatly. A six feet tall zebra-morph stallion stands behind the counter. He appears to be wearing typical lumberjack outfit.\n\n");
 	outputText("\"<i>Welcome to my hardware shop dear customer. Feel free to look around,</i>\" he says. \n\n");
-	if (flags[kFLAGS.CODEX_ENTRY_ZEBRAS] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_ZEBRAS] = 1;
-		outputText("<b>New codex entry unlocked: Zebras!</b>")
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_ZEBRAS);
 	doNext(carpentryShopInside);
 }
 
@@ -1121,11 +1116,7 @@ public function kaibaShopMainMenu():void {
 	outputText("You enter the  shop. Its sign hanging overhead proudly displaying:  <i>'Kaiba odds and ends, the accessory for YOU!’</i> Inside there are many stalls lining the walls in multiple directions. Each stall hosts various strange items put on display. Most of them you can identify as accessory and wondrous items, but others are perplexing.\n\n");
 	outputText("While browsing the stalls, the owner almost silently creeps up on you. You turn in time to meet with his greedy gaze. A Tanuki that could only be Kaiba himself, smiles at you like a cat at the mouse. He breaks the awkward silence first.\n\n");
 	outputText("\"<i>Welcome to my humble shop, dear and precious customer. What need brings you here today? Are you a connoisseur looking for strange artefacts from world across, or an adventurer in need of… special equipment? I’m sure I can provide you just anything you need, for a reasonable sum of course.</i>\"\n\n");
-	outputText("Each word sounds almost like it was repeated endless times as he rub his hands together" + (silly() ? ", he even has the obvious signs of $ in his scammy shopkeeper eyes": "") + ".\n\n");/*
-	if (flags[kFLAGS.CODEX_ENTRY_] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_] = 1;
-		outputText("<b>New codex entry unlocked: !</b>")
-	}*/
+	outputText("Each word sounds almost like it was repeated endless times as he rubs his hands together" + (silly() ? ", he even has the obvious signs of $ in his scammy shopkeeper eyes": "") + ".\n\n");
 	doNext(kaibaShopMainMenu2);
 }
 
@@ -1138,6 +1129,7 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(5, "E.R.Armor", "You already bought item from Kaiba today.");
 			addButtonDisabled(6, "I.Q.Gown", "You already bought item from Kaiba today.");
 			addButtonDisabled(7, "VladimirReg", "You already bought item from Kaiba today.");
+			addButtonDisabled(8, "Asterius", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(3, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Remove range accuracy penalty when flying and increase range accuracy by 20%.");
@@ -1145,10 +1137,11 @@ public function kaibaShopMainMenu2():void {
 			addButton(5, "E.R.Armor", buyItem, armors.ERA).hint("Elven Ranger Armor - +50% to Bow and spear damage, Agile, Revealing, Slutty seduction +10.");
 			addButton(6, "I.Q.Gown", buyItem, armors.IQG).hint("Ice queen gown - A rare dress wich may only be in Kaiba inventory for a moment buy it while you can!");
 			addButton(7, "VladimirReg", buyItem, armors.VLAR).hint("Vladimir Regalia - These burgundy clothes fit for a noble seems to naturaly befit the style of what could be a vampire.");
-
+			addButton(8, "Asterius", buyItem, weapons.ASTERIUS).hint("Asterius Rage - A pair of mighty but clearly cursed magical axes rumored to be the artefact of the fallen war deity Asterius.");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
-		addButton(13, "-2-", kaibaShopMainMenuPage2);
+		addButton(12, "-2-", kaibaShopMainMenuPage2);
+		addButton(13, "-3-", kaibaShopMainMenuPage3);
 	}
 	if (flags[kFLAGS.KAIBA_SHELFS] == 1) {
 		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
@@ -1158,9 +1151,7 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(5, "Hodr's bow", "You already bought item from Kaiba today.");
 			addButtonDisabled(6, "Avelynn", "You already bought item from Kaiba today.");
 			addButtonDisabled(7, "Oni enchanted drinking jug", "You already bought item from Kaiba today.");
-			addButtonDisabled(8, "Oni Noble Kimono", "You already bought item from Kaiba today.");
-			addButtonDisabled(9, "Oni Tyrant Kimono", "You already bought item from Kaiba today.");
-			addButtonDisabled(10, "Demon tail ring", "You already bought item from Kaiba today.");
+			addButtonDisabled(8, "Storm Ruler", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(2, "C.S.Necklace", buyItem, necklaces.CSNECK).hint("Crinos Shape necklace - Allow PC to use Crinos Shape even without perk Job: Beast Warrior with wrath costs and boost as the one gained from picking Job: Beast Warrior.");
@@ -1168,38 +1159,35 @@ public function kaibaShopMainMenu2():void {
 			addButton(4, "Soul Drill", buyItem, weapons.SDRILL).hint("Soul Drill - 1H large weapon that can deal more damage the more soulforce is feed to it each turn.");
 			addButton(5, "Hodr's bow", buyItem, weaponsrange.BOWHODR).hint("Hodr's bow - Bow that would apply blindess status or deal increased damage to blinded targets.");
 			addButton(6, "Avelynn", buyItem, weaponsrange.AVELYNN).hint("Avelynn - Crossbow that will shoot two additional bolts each time.");
-			addButton(7, "Oni enchanted drinking gourd", buyItem, miscjewelries.ONI_GOURD).hint("A magical drinking gourd beloved by onis. Suposedly it greatly increases its users attack power but also grants an endless supply of fresh drinks!");
-			addButton(8, "Oni Noble Kimono", buyItem, armors.OEKIMO).hint("The garbs of an oni noble. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
-			addButton(9, "Oni Tyrant Kimono", buyItem, armors.OTKIMO).hint("The garbs of an oni tyrant. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
-			addButton(10, "Demon tail ornament", buyItem, miscjewelries.DMAGETO).hint("This golden band covered with black magic incantation is big enough for an arm bracelet but was designed so it could serve as a ornament for a demon tail. This is a temporary sale.");
+			addButton(7, "Oni enchanted drinking gourd", buyItem, miscjewelries.ONI_GOURD).hint("Oni enchanted drinking gourd - A magical drinking gourd beloved by onis. Suposedly it greatly increases its users attack power but also grants an endless supply of fresh drinks!");
+			addButton(8, "Storm Ruler", buyItem, weapons.S_RULER).hint("Storm Ruler - It's large sized weapon belonging to mace/hammer type with 10% chance to trigger stun effect. It deal lightning type of damage and 50% more damage to huge or larger enemies. Additionally have Body's Cultivator (20%).");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
+		addButton(12, "-1-", kaibaShopMainMenuPage1);
 		addButton(13, "-3-", kaibaShopMainMenuPage3);
 	}
 	if (flags[kFLAGS.KAIBA_SHELFS] == 2) {
 		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
+			addButtonDisabled(0, "S.Ornament", "You already bought item from Kaiba today.");
+			addButtonDisabled(1, "Demon tail ring", "You already bought item from Kaiba today.");
+			addButtonDisabled(2, "MoonGSword", "You already bought item from Kaiba today.");
 			addButtonDisabled(3, "Wrathless", "You already bought item from Kaiba today.");
 			addButtonDisabled(4, "T.M.Outfit", "You already bought item from Kaiba today.");
 			addButtonDisabled(5, "W.I.Cloak", "You already bought item from Kaiba today.");
 			addButtonDisabled(6, "S.S.Clothing", "You already bought item from Kaiba today.");
-			addButtonDisabled(7, "T.C.Kimono", "You already bought item from Kaiba today.");
-			addButtonDisabled(8, "I.B.Kimono", "You already bought item from Kaiba today.");
-			addButtonDisabled(9, "C.B.G.Armor", "You already bought item from Kaiba today.");
-			addButtonDisabled(10, "S.Ornament", "You already bought item from Kaiba today.");
 		}
 		else {
+			addButton(0, "S.Ornament", buyItem, headjewelries.DMONSKUL).hint("Skull hair ornament - An unique hair accessory for evil wizards greatly empower ones magic power scaling with corruption, An unique find buy it while you can because this won't last forever!");
+			addButton(1, "Demon tail ornament", buyItem, miscjewelries.DMAGETO).hint("Demon tail ornament - This golden band covered with black magic incantation is big enough for an arm bracelet but was designed so it could serve as a ornament for a demon tail. This is a temporary sale.");
+			addButton(2, "MoonGSword", buyItem, weapons.MGSWORD).hint("Moonlight Greatsword - dealing magical dmg instead of physical, using charge weapon will give 2x larger bonus and can use range attack in case there is no range weapon equipped.");
 			addButton(3, "Wrathless", buyItem, necklaces.WRATHLE).hint("Wrathless - +10% to spellpower and removes all penalty to spellcasting or using m. specials if wrath is not at max value.");
 			addButton(4, "T.M.Outfit", buyItem, armors.TRMOUTF).hint("Traveling Merchant Outfit - Increase all gems gained by 100% and increase the potency of gem based ability by 150%, reduce spellcasting cost by 60%.");
 			addButton(5, "W.I.Cloak", buyItem, armors.WALIC).hint("Walpurgis Izalia Cloak - Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
 			addButton(6, "S.S.Clothing", buyItem, armors.SCANSC).hint("Scandalous Succubus Clothing - Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.");
-			addButton(7, "T.C.Kimono", buyItem, armors.TCKIMO).hint("Tamamo no Mae Cursed Kimono - Slutty seduction 15, Count as naked and empower magical and soulforce ability, An unique find buy it while you can because this won't last forever!");
-			addButton(8, "I.B.Kimono", buyItem, armors.IBKIMO).hint("Inari Blessed Kimono - Slutty seduction 15, Count as naked and empower magical and soulforce ability, An unique find buy it while you can because this won't last forever!");
-			addButton(9, "C.B.G.Armor", buyItem, armors.CTBGUAR).hint("Centaur Blackguard Armor - Count as a light and heavy armor, An unique find buy it while you can because this won't last forever!");
-			addButton(10, "S.Ornament", buyItem, headjewelries.DMONSKUL).hint("Skull hair ornament - An unique hair accessory for evil wizards greatly empower ones magic power scaling with corruption, An unique find buy it while you can because this won't last forever!");
-
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
-		addButton(13, "-1-", kaibaShopMainMenuPage1);
+		addButton(12, "-1-", kaibaShopMainMenuPage1);
+		addButton(13, "-2-", kaibaShopMainMenuPage2);
 	}
 	addButton(14, "Leave", telAdreMenu);
 }
@@ -1323,10 +1311,7 @@ public function tripxiShopMainMenu():void {
 			outputText("\"<i>Welcome to Tripxi's bombs and guns emporium my name is Tripxi, how may I help you?</i>\"\n\n");
 			player.createStatusEffect(StatusEffects.TelAdreTripxi, 0, 0, 0, 0);
 		}
-		if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
-			flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
-			outputText("<b>New codex entry unlocked: Goblins!</b>")
-		}
+		camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOBLINS);
 		tripxiShopMainMenu2a();
 	}
 }
@@ -1335,18 +1320,19 @@ public function tripxiShopMainMenu2a():void {
 	menu();
 	addButton(0, weaponsrange.FLINTLK.shortName, buyItemT1, weaponsrange.FLINTLK);
 	addButton(1, weaponsrange.BLUNDER.shortName, buyItemT1, weaponsrange.BLUNDER);
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(2, weaponsrange.DESEAGL.shortName, buyItemT1, weaponsrange.DESEAGL);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(2, "???", "Search the Desert. (lvl 6+)");
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(3, weaponsrange.M1CERBE.shortName, buyItemT1, weaponsrange.M1CERBE);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(3, "???", "Search the Swamp.");
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) > 0) addButton(4, weaponsrange.TRFATBI.shortName, buyItemT1, weaponsrange.TRFATBI);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(4, "???", "Search the Volcanic Crag.");
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) > 0) addButton(5, weaponsrange.SNIPPLE.shortName, buyItemT1, weaponsrange.SNIPPLE);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns4)) addButtonDisabled(5, "???", "Search the Plains.");
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) > 0) addButton(6, weaponsrange.TOUHOM3.shortName, buyItemT1, weaponsrange.TOUHOM3);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(6, "???", "Search the Caves.");
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) > 0) addButton(7, weaponsrange.TWINGRA.shortName, buyItemT1, weaponsrange.TWINGRA);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6)) addButtonDisabled(7, "???", "Search the Battlefield(B).");
+	addButton(2, weaponsrange.DUEL_P_.shortName, buyItemT1, weaponsrange.DUEL_P_);
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(4, weaponsrange.DESEAGL.shortName, buyItemT1, weaponsrange.DESEAGL);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(4, "???", "Search the Desert. (lvl 6+)");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(5, weaponsrange.M1CERBE.shortName, buyItemT1, weaponsrange.M1CERBE);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(5, "???", "Search the Swamp.");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) > 0) addButton(6, weaponsrange.TRFATBI.shortName, buyItemT1, weaponsrange.TRFATBI);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(6, "???", "Search the Volcanic Crag.");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) > 0) addButton(7, weaponsrange.SNIPPLE.shortName, buyItemT1, weaponsrange.SNIPPLE);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns4)) addButtonDisabled(7, "???", "Search the Plains.");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) > 0) addButton(8, weaponsrange.TOUHOM3.shortName, buyItemT1, weaponsrange.TOUHOM3);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(8, "???", "Search the Caves.");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) > 0) addButton(9, weaponsrange.TWINGRA.shortName, buyItemT1, weaponsrange.TWINGRA);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6)) addButtonDisabled(9, "???", "Search the Battlefield(B).");
 	addButtonDisabled(10, "-1-", "Shelf 1");
 	addButton(11, "-2-", tripxiShopMainMenu2b);
 	addButton(12, "-3-", tripxiShopMainMenu2c);
@@ -1357,16 +1343,16 @@ public function tripxiShopMainMenu2b():void {
 	menu();
 	addButton(0, weaponsrange.ADBSHOT.shortName, buyItemT1, weaponsrange.ADBSHOT);
 	addButton(1, weaponsrange.ADBSCAT.shortName, buyItemT1, weaponsrange.ADBSCAT);
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(2, weaponsrange.DPISTOL.shortName, buyItemT2, weaponsrange.DPISTOL);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(2, "???", "Search the Blight Ridge.");
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(3, weaponsrange.TDPISTO.shortName, buyItemT2, weaponsrange.TDPISTO);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(3, "???", "Search the Defiled Ravine.");
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) > 0) addButton(4, weaponsrange.HARPGUN.shortName, buyItemT2, weaponsrange.HARPGUN);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(4, "???", "Search the Beach.");
-	//5 - Sakuno M2
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) > 0) addButton(6, weaponsrange.DERPLAU.shortName, buyItemT2, weaponsrange.DERPLAU);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(6, "???", "Search the Mountains.");
-	//7 - Tediore pistol
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(4, weaponsrange.DPISTOL.shortName, buyItemT2, weaponsrange.DPISTOL);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(4, "???", "Search the Blight Ridge.");
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(5, weaponsrange.TDPISTO.shortName, buyItemT2, weaponsrange.TDPISTO);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(5, "???", "Search the Defiled Ravine.");
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) > 0) addButton(6, weaponsrange.HARPGUN.shortName, buyItemT2, weaponsrange.HARPGUN);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(6, "???", "Search the Beach.");
+	//7 - Sakuno M2
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) > 0) addButton(8, weaponsrange.DERPLAU.shortName, buyItemT2, weaponsrange.DERPLAU);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(8, "???", "Search the Mountains.");
+	//9 - Tediore pistol
 	addButton(10, "-1-", tripxiShopMainMenu2a);
 	addButtonDisabled(11, "-2-", "Shelf 2");
 	addButton(12, "-3-", tripxiShopMainMenu2c);
@@ -1375,12 +1361,13 @@ public function tripxiShopMainMenu2b():void {
 
 public function tripxiShopMainMenu2c():void {
 	menu();
-	addButton(0, weaponsrange.DUEL_P_.shortName, buyItemT1, weaponsrange.DUEL_P_);
-	addButton(1, weaponsrange.IVIARG_.shortName, buyItemT1, weaponsrange.IVIARG_);
-	if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(2, weaponsrange.DBDRAGG.shortName, buyItemT3, weaponsrange.DBDRAGG);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(2, "???", "Search the Volcanic Crag.");
-	if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(3, weaponsrange.LBLASTR.shortName, buyItemT3, weaponsrange.LBLASTR);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(3, "???", "Search the Mountains.");
+	addButton(0, weaponsrange.IVIARG_.shortName, buyItemT1, weaponsrange.IVIARG_);
+	addButton(1, weaponsrange.HARKON1.shortName, buyItemT1, weaponsrange.HARKON1);
+	if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(4, weaponsrange.DBDRAGG.shortName, buyItemT3, weaponsrange.DBDRAGG);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(4, "???", "Search the Volcanic Crag.");
+	if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(5, weaponsrange.LBLASTR.shortName, buyItemT3, weaponsrange.LBLASTR);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(5, "???", "Search the Mountains.");
+	//6 lub 7 - Harkonnen II - BP req. from some dark place/area?
 	//addButton(0, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
 	//addButton(1, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
 

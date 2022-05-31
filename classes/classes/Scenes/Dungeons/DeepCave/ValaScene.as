@@ -4,18 +4,15 @@ import classes.*;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
-import classes.BodyParts.Face;
-import classes.BodyParts.Hair;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.Armor;
-import classes.Items.ArmorLib;
-import classes.Items.Armors.ArmorWithPerk;
+import classes.Races.HumanRace;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 import classes.internals.SaveableState;
 
 public class ValaScene extends BaseContent implements SaveableState
@@ -29,7 +26,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		public static const QUEST_STAGE_STARTED:int = 1;
 		public static const QUEST_STAGE_ITEM_GATHERED:int = 2;
 		public static const QUEST_STAGE_ITEM_TURNEDIN:int = 3;
-		public static const QUEST_STAGE_ITEM_SCEPTER_REPAIRED:int = 4;
+		//public static const QUEST_STAGE_ITEM_SCEPTER_REPAIRED:int = 4; // unused
 		public static const QUEST_STAGE_PCDECLINED:int = 5;
 		public static const QUEST_STAGE_PCDACCEPTED:int = 6;
 
@@ -61,158 +58,47 @@ public class ValaScene extends BaseContent implements SaveableState
 			Saves.registerSaveableState(this);
 		}
 
-		//Vala
-		public function useVala():void {
-			spriteSelect(85);
-			clearOutput();
-			dynStats("lus", 20);
-			//(Male)
-			if(player.gender == 1) {
-				outputText("You shrug. The girl is so hopelessly lost in pleasure that you doubt she could ever return to the real world anyway. There doesn't seem to be any demons around, and it'd be a good idea to relieve the tension that's been building in your gut since you stepped into this wretched place. Besides, you chuckle as you strip off your [armor], you've always wondered what it'd be like to take a fairy.\n\n");
-				outputText("Since the demons were so kind as to string her up for you, it's easy enough to take her rape-broadened hips into your hands and slide your [cock] up her thin thighs, toward her drooling pussy. The fairy girl has been well used, and recently, you realize, as you guide your cockhead over her pink snatch. Used quite a bit, you realize as you try to slide in and find virtually no resistance. Apparently, the imps couldn't decide who'd go first and settled on penetrating her by two or three dicks at a time. That, or they've got a minotaur-sized imp lurking in the cave somewhere. Either way, the ruined vagina gapes far too widely for enough friction to get you off. It looks like her asshole is in no better shape. Well, you are nothing if not resourceful.\n\n");
-				outputText("You step away from the mind-fucked fairy and examine the potions on the alchemy table. Sifting through the vile concoctions, you find what you were looking for- minotaur blood. Snatching the whole bottle, you step back up to the waiting fairy and wrap a fist in her pink-tinged violet hair, jerking her head backwards. She gasps in ecstatic pleasure, the pain bringing her back in a flash. Her eyes lock onto yours and hot desire curls her face into a wanton, panting grimace. You grab her face and put pressure on her cheeks, forcing her jaw open. The crimson fluid trickles down her throat and her tongue licks her lips with satisfaction, savoring your rough treatment. You cast the empty bottle aside and thrust your cock back into her slit as the walls tighten around you. You begin to rock back and forth, enjoying the feeling of the velvet vice, even groaning as her gash becomes tight enough to begin hurting your [cock].");
-			}
-			//(Female)
-			else if(player.gender == 2) {
-				outputText("You shrug. The girl is so hopelessly lost in pleasure that you doubt she could ever return to the real world anyway. There donesn't seem to be any demons around, and it'd be a good idea to relieve the tension that's been building in your gut since you stepped into this wretched place. Besides, you chuckle as you strip off your [armor], you've always wondered what it'd be like to take a fairy.\n\n");
-				outputText("The fairy's rose-scented honeypot glistens with thick beads of clear liquid that well and dribble down her inner thighs, but you're a little too careful to eat out every wet and waiting fairy girl you happen to find in demonic dungeons, so you elect for a safer, less potentially drug-filled route for your carnal satisfaction. Glancing around the room, your eyes settle on the long, wooden pegging table in one corner of the room. You snatch a large, loose stone from the ground as you head over to it and fold your arms under your [allbreasts], shopping amongst the lacquered, intensely detailed wooden cocks set into the device. This one is far too small, that one is the wrong shape, one by one, you weed them out until you settle on a huge, minotaur-shaped dildo, over a foot and a half long and nearly six inches wide at the flared head. Grinning, you take the stone and carefully tap the bottom of the board until the peg starts wobbling loose. Using both hands, you yank the fire-hardened wooden dildo from its socket and hold it triumphantly over your head. You swing it in the air, experimentally, but decide that beating demons unconscious with a minotaur's dick would just be silly.\n\n");
-				outputText("Heading back to the chained fairy, you rub the head of the wooden dildo between her petal-shaped labia, turning the cock as you do so, to lubricate the whole 18\" of the monstrous thing. You stroke her juices into the glistening finish until it's difficult to keep your grip. Placing the flared head at the entrance to her rape-worn love box, you squeeze your own legs together in anticipation. With exquisite slowness, you press the dildo against her pussy and apply pressure until it begins to part her lips, pushing her slit wider and wider. The fairy finally seems to come to, under your teasing penetration and she coos at the stimulation, without questioning the source. She wiggles her plump butt and shakes her heaving chest, sending her absurdly large breasts swinging in the air, milk-heavy flesh slapping against each other. You encounter resistance just past her lower lips and you roll the flare in circles, cold wood rubbing hot skin and soaking up the squirting girl's natural lubrication. Then, putting your hand on the far end of the dildo, you push as hard as you can, jamming it into the fairy's cunt.");
-			}
-			//HERMY WORMY
-			else if(player.gender == 3) {
-				outputText("You shrug. The girl is so hopelessly lost in pleasure that you doubt she could ever return to the real world anyway. There donesn't seem to be any demons around, and it'd be a good idea to relieve the tension that's been building in your gut since you stepped into this wretched place. Besides, you chuckle as you strip off your [armor], you've always wondered what it'd be like to take a fairy.\n\n");
-				outputText("The fairy's rose-scented honeypot glistens with thick beads of clear liquid that well and dribble down her inner thighs, but you're too clever to just eat out every wet and waiting fairy girl you happen to find in demonic dungeons, so you elect for a safer, less potentially drug-filled route for your carnal satisfaction. Glancing around the room, your eyes settle on the long, wooden pegging table in one corner of the room. You snatch a large, loose stone from the ground as you head over to it and fold your arms under your [allbreasts] as you shop amongst the lacquered, intensely detailed wooden cocks set into the device. This one is far too small, that one is the wrong shape, one by one, you weed them out until you settle on a huge, minotaur-shaped dildo, over a foot and a half long and nearly six inches wide at the flared head. Grinning, you take the stone and carefully tap the bottom of the board until the peg starts wobbling loose. Using both hands, you yank the fire-hardened wooden dildo from its socket and hold it triumphantly over your head. You swing it in the air, experimentally, but decide that beating demons unconscious with a minotaur's dick would just be silly.\n\n");
-				outputText("Heading back to the chained fairy, you rub the head of the wooden dildo between her petal-shaped labia, turning the cock as you do so, to lubricate the whole 18\" of the monstrous thing. You stroke her juices into the glistening finish until it's difficult to keep hold of and then you place the flared head at the entrance to her rape-worn love box. With exquisite slowness, you press the dildo against her pussy and apply pressure until it begins to part her lips, pushing her slit wider and wider. The fairy finally seems to come to under your teasing penetration and she coos at the stimulation, without questioning the source. She wiggles her plump butt and jiggles her chest, sending her absurdly large breasts swinging in the air, milk-heavy flesh slapping together. You encounter resistance just past her vulva and you roll the flared corona in circles, cold wood rubbing hot skin and soaking up the squirting girl's natural lubrication. With a wicked grin, you pull it out of her cunt and brace the monster against her puckered rear instead. Then, putting your hand on the far end of the dildo, you push as hard as you can, jamming it into the fairy's ass.");
-			}
-			//Go to pt 2
-			dynStats("lus", 40);
-			doNext(useValaPtII);
-		}
-		public function useValaPtII():void {
-			spriteSelect(85);
-			clearOutput();
-			hideUpDown();
-			fatigue(5,0);
-			player.orgasm();
-			//(Male)
-			if(player.gender == 1) {
-				outputText("Before the fairy can get any tighter, you figure it's time to loosen her back up. Grabbing fistfuls of her violet hair, you thrust forward, violently, slamming the chained fairy's head against the stone wall. \"<i>Fuck!</i>\" She shrieks in delight. \"<i>More, more!</i>\" All too happy to comply, you begin screwing her harder, the crushing pressure of her swollen labia milking your cock with every motion. The giant fairy seems to feed on your rough treatment, and begins to slap her ass back into you, in time with your thrusts, giggling aimlessly between her disjointed pleas for your cum. You grab her wobbling chest, figuring it'll be the best handhold you're going to find on the malnourished girl, and are rewarded with an orgasmic cry from the fairy. She clenches down on your [cock] as she clasps your hardness, her pulsing depths making you dig your fingers deeper into her supple flesh. Rocking against her at a painful pace, you grit your teeth and tighten your grip on her teats, their fluid depths yielding to your passionate throes. Her nipples swell and burst with milk, white cream spraying at your feet with each thrust, and you slide your hands down to pull at the lactating pink nubs, each burst of pale alabaster filling your lust to bursting.\n\n");
-				outputText("You can't keep up your frenzied pace for long, and the fairy's drug-tightened cunt finally takes its prize as your climax gushes from your [cock]. You scream in pleasure and slam her body against the wall, lifting her off the ground and holding the side of her face on the molding stone. Every muscle in your body strains as you crush the thin girl's frame between your twitching form and the dungeon wall, hips bucking in time to each of your pulsing loads. The girl simply lets her body be used like a cocksleeve, drinking in the abuse as much as your ejaculate. She twitches, limply, against you and spasms in orgasm again, whispering desperate imperatives to fuck her over and over again.\n\n");
-				outputText("Finally spent, you step back and toss the girl off of your dick, letting her fall back into a slump against the wall, dangling from her manacles. A wicked thought crosses your mind and you step back to the Alchemy table. Grabbing armfuls of hexagonal bottles, you flip the girl around, exposing her drooling, empty face and her bruised, sore breasts. You plug a bottle up to her lips and she begins sucking at it automatically, her ravaged mind automatically assuming any phallic object to be another dick to suck. She quaffs the Ovi Elixir gratefully, then a second, then a third. By the time you've finished pouring the stuff down her throat, her body has already begun changing. The elixir has pounced on your seed and forced her ovulation, rapidly accelerating the speed of conception. Her tummy pouts, then bloats as your sperm impregnates the fairy in seconds. Her abdomen swells violently, and you suspect that force-feeding her so much so quickly may have resulted in a far greater pregnancy than she's had to endure before. She moans in bliss, her already disproportioned tits gurgling with even greater milky weight. If there was any doubt as to if she could stand under her own power before, it's gone now - even your strength wouldn't be able to move the breeding cow that you've turned her into. Well, at least she won't be able to pump out any more imps for a while, you shrug, redressing. Though, with how many elixirs you gave her, she won't be pregnant for too long. Pity you'll probably miss it.");
-			}
-			//VAGOOZLES
-			else if(player.gender == 2) {
-				outputText("She squeals in delight and her knees wobble, the force of your thrust almost knocking her head into the wall she's shackled next to. You work the frightful dildo further into the girl's drooling snatch until a mere 9 inches protrudes from her bright pink cunny. You smear more of the girl's lubrication along the exposed shaft and turn your back to the fairy. Bending down, you slowly rub your [butt] against the smaller, rounded base of the minotaur cock. Though your end is veiny and sheathed, it lacks the broad flare of the cock head, so you press your " + vaginaDescript(0) + " against it and brace your hands on your [legs]. Rolling your ass up and down, you let your own excitement-thick lube smear the rounded end before you take a step backwards, toward the fairy. The bulb slides past your cheeks and presses against your vaginal entrance, its girth as exciting as it is frightening. You take a deep breath, but before you're ready, the impaled fairy bucks backward and drives the dildo into your unprepared cunt, provoking a cry of surprise.\n\n");
-				outputText("You quickly recover and thrust backwards, driving more of the dildo inside your clenching walls while also slamming the fairy's slick box in lusty punishment for her over-eagerness. She giggles and humps right back, driving another inch into you, your uterus aflame with the delicious stimulation of the bumpy, uneven veins carved into the smooth cock-base. Before long, the two of you have a rhythm, driving the makeshift double-ended dildo into each other until you end up ass-to-ass, your [butt] smacking heavily against the fey girl's supple rear. A large puddle of girl cum has begun forming on the floor, each wet slap of your cunts splashing more of the warm, clear liquid between the two of you. You can feel your orgasm building a knot in your gut and you bite your lower lip as you ride her more forcefully, slamming yourself down on the veiny cock, driving the flared head deeper into the fairy's body. She tries to jackhammer it right back, mind lost in eternal lust, until you can feel the rounded base pushing against your cervix, blissful pain coursing through your lower body.\n\n");
-				outputText("You clutch your [allbreasts] and squeeze the " + nippleDescript(0) + " until they hurt, the agony giving you strength to drive the dildo back into the fairy. It's a losing battle, you realize, when she cums before you do, pulsing walls locking down and squeezing the dildo out, by painful inches, deeper into your " + vaginaDescript(0) + " until the base is so far against your gut that it's pushed into your womb with a toe-curling, wet pop. You silently scream in ecstasy and agony, unable to believe that the frail fairy managed to fuck your womb with your own toy. Your strength falters and you slump down, sliding off the shaft with soothing regret, your cervix clenching wildly, still spasming from the obscene intruder. You roll onto your back, fairy cum all around you, even now dripping down the lube-slick cock still sticking out of the girl's sex, flared glans keeping it locked inside of her. You jill your " + clitDescript() + " for a few minutes afterward, just enjoying the afterglow, lapping at the dripping sprite cum that dribbles onto your face from the fairy's shivering, dick-stuffed cunt. Gradually, your strength returns and you rise, skin slick from the cum pool you've been basking in. You remind yourself to clean your [armor] after this is over, sliding into them with damp, squishing noises. Giving your drooling fairy girl's ass a slap on the way out, you head back into the dungeon- you've got demons to stomp.\n\n");
-			}
-			//HERPY DERPY HERMY
-			else if(player.gender == 3) {
-				outputText("She squeals in delight and her knees wobble, the force of your thrust almost knocking her head into the wall she's shackled next to. You work the frightful dildo further past the girl's gaping spincter until a mere 9 inches remains protruding from her bright pink hole. You smear more of the girl's lubrication along the exposed shaft and turn your back to the fairy. Bending down, you slowly rub your [butt] against the smaller, rounded base of the minotaur cock. Though your end is veiny and sheathed, it lacks the broad flare of the cock head, so you press your " + vaginaDescript(0) + " against it and brace your hands on your ");
-				if(player.isNaga()) outputText("tail");
-				else outputText("knees");
-				outputText(".  Rolling your ass up and down, you let your own excitement-thick lube smear the rounded end before you take a step backwards, toward the fairy. The bulb slides past your [butt] and presses against your " + vaginaDescript(0) + ", its girth exciting and frightening. You take a deep breath, but before you're ready, the impaled fairy bucks backward and drives the dildo into your unprepared cunt, provoking a cry of surprise.\n\n");
-				outputText("You quickly recover and prepare your second surprise. Reaching around your " + hipDescript() + ", you grab your stiffening [cock] and pull it backwards, until it's just under the dildo connecting the two of you. With a thrust backwards, you jam your dick into her drooling pussy, while driving more of the dildo inside your clenching walls, slamming the fairy's distended rosette in lusty punishment for her over-eagerness. She giggles and humps right back, driving another inch of your shaft into her rectum and your uterus, your love-canal aflame with the delicious stimulation of the bumpy, uneven veins carved into the smooth cock-base. Before long, the two of you have a rhythm, driving the makeshift double-ended dildo into each other and thrusting your tail-like [cock] into the fairy until you end up ass-to-ass, your [butt] smacking heavily against the fey girl's supple rear. A large puddle of girl cum has begins to form on the floor, each wet slap splashing more of the warm, clear liquid between the two of you. You can feel your orgasm building a knot in your gut and you bite your lower lip as you make your thrusts more forceful, slamming yourself into her violated nethers, the fairy's body as bloated from the minotaur dildo as from your own girth. She, in turn, is just as consumed by lust and tries to jackhammer right back into you, until you can feel the rounded wooden base pushing against your cervix, the mouth of her own womb slamming against your cockhead, blissful pain coursing through your lower body.\n\n");
-				outputText("You clutch your [allbreasts] and squeeze the " + nippleDescript(0) + " until they hurt, the agony giving you strength to drive the dildo back into the fairy. She cums before you do, her pulsing walls locking down and driving the dildo out, inch by painful inch, deeper into your body until the base is so far against your gut that it is pushed into your furthest recesses with a toe-curling, wet slap. You silently scream in ecstasy and agony, unable to believe that the frail fairy managed to fuck your womb with your own toy. Your strength redoubles and you thrust back, your [cock] penetrating her spongy, well-used cervix, her womb sucking you inside it. You release the knotted tension, spraying your spunk deep inside her. You slap your [butt] against hers with each pulsing load, your pussy clenching at the dildo stuffing it even as your empty your seed into the chained slave.  You try to go limp, but the double penetrated girl keeps you from pulling out, both holes clenching you against her until every last drop of your sperm has filled her greedy womb. Fairy cum drips down your length, while the flared tip deep inside her large intestine keeps your pussy twitching against her posterior. You jill your " + clitDescript() + " for a few minutes afterward, just enjoying the afterglow as your strength returns and the fairy's body unclenches, releasing you from your breeder's embrace, the minotaur dildo still halfway up her ass. You remind yourself to clean your [armor] after this is over, sliding into them with wet, squishing noises. Giving your drooling fairy girl's rump a slap on the way out, you head back into the dungeon- you've got demons to stomp.");
-			}
-			flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
-			doNext(playerMenu);
-		}
-
-		//[Free]
 		public function freeValazLooseCoochie():void {
-			spriteSelect(85);
+            spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			outputText("You search the room for a way to free the fairy from her shackles and find an ugly, iron key that looks like a promising candidate. Opening the rusted metal with a teeth-clenching screech, the girl slumps to the ground in an ungainly heap. The fall seems to have roused her, at least, because she blinks, slowly, several times before lifting her head to stare blankly at you. You try to explain that she's free, but it's clear that thoughts are travelling through a pretty thick haze of abuse, so you take a moment to let her gather herself. When she's managed to assemble what wits are left to her, she slowly curls her mouth into a hopeful smile. \"<i>How can Bitch please Master?</i>\" she asks in an innocent voice tainted by husky desire.\n\n");
-			outputText("You bend down to comfort the girl and offer her a shoulder to lean on as you help her to her feet. As you expected, the weight of her milky tits nearly surpasses the rest of her body. She clings to you happily, stroking and rubbing her bare skin against your body. She is adamantly ignoring your efforts to dissuade her amorous advances, merely cooing \"<i>master</i>\" and \"<i>pleasure</i>\" over and over again. If you had the right materials, you might be able to mix something to heal the damage her captors have done to the fairy's mind.\n\n");
-			//Choicez go here.  I can haz fucks?
+			outputText("You bend down to comfort the girl and offer her a shoulder to lean on as you help her to her feet. As you expected, the weight of her milky tits nearly surpasses the rest of her body. She clings to you happily, stroking and rubbing her bare skin against your body. She is adamantly ignoring your efforts to dissuade her amorous advances, merely cooing \"<i>master</i>\" and \"<i>pleasure</i>\" over and over again.\n\n");
 			menu();
-			if (player.gender > 0) addButton(1, "Sex", ValaGetsSexed);
-			addButton(2, "Reject", rejectFuckingVala);
-			if (player.hasItem(consumables.PURHONY, 1) || player.hasItem(consumables.P_PEARL, 1)) addButton(3, "Fix Her", healVala);
-			else addButtonDisabled(3, "???", "Need to have Pure Pearl or Pure Honey.");
+			addButtonIfTrue(0, "Sex", ValaGetsSexed, "Not genderless!", player.gender > 0);
+			addButton(1, "Reject", rejectFuckingVala).hint(!recalling ? "Are you sure?" : "Leads to after-fight scene.");
 		}
 
-		//[Heal]
-		public function healVala():void {
-			spriteSelect(85);
-			clearOutput();
-			if(player.hasItem(consumables.PURHONY,1)) {
-				player.consumeItem(consumables.PURHONY, 1);
-				flags[kFLAGS.VALA_HEALED_HONEY] = 1;
-				outputText("You're not sure if Pure Honey will do the trick, but it seems like the most likely candidate. You set the broken girl down and step over to the alchemy table. She clings onto your ");
-				if(player.isNaga()) outputText("tail");
-				else outputText(player.leg());
-				outputText(" as you walk, and you end up dragging her across the dungeon floor leaving a trail of her cum behind you. Before things can get too out of hand with the needy girl, you pull out the vial of Pure Honey and arrange the equipment in front of you. Using the cleanest of the pipettes, you take a small portion of the honey and mix it with what you hope to be water, diluting the rich mixture to a less viscous state. Working quickly, you manage to produce a draught that the weak girl can tolerate. By now, she's managed to work her way to a sitting position and is grinding her dripping sex against your [foot]. You lean down and hold her nose to make her open her mouth. She gleefully opens wide, tongue thrashing about in anticipation. You pour the sweet-smelling concoction down her anxious throat and begin to re-cork the rest of your honey.\n\n");
-				outputText("The effects of your cure are more violent than you expected. The fairy thrashes wildly, causing you to drop your bottle of Pure Honey, sending it spilling over the table, shattering the delicate equipment and ruining the unlabeled concoctions within. Moving to keep the girl from hurting herself in her seizure, you hold her head against your chest and wait out the wild bucking. Gradually, her motions slow and her breath calms to a more normal pace. When she looks back up at you, her eyes are clear at last, the pollution of lust burned away by the honey's restorative properties. She gives you a genuine smile and speaks with a voice like the rushing of wind over reeds. \"<i>Thank you. I cannot express my gratitude for what you've done. The fate you've saved me from was worse than any death these wretched creatures could have subjected me to.</i>\"");
-				//[Next]
-				doNext(healValaPartTwoTheHealingHealsOfRevenge);
-			}
-			//Pearl!
-			else {
-				player.consumeItem(consumables.P_PEARL,1);
-				outputText("A soft, warm breeze rustles your " + hairDescript() + " and for a moment the foul stench of the dungeon vanishes, setting your mind at ease and draining the tension that has been building in your gut. In a moment of clarity, you remember the beautiful Pure Pearl that Marae granted you as a reward for shutting down the demons' factory. It seems only right to use the goddess' gift to rescue one of her wayward children. Perhaps she gave it to you for this very reason? The oblivious girl has managed to work her way to a sitting position and is grinding her dripping sex against your [foot]. You lean down and gently lift her chin up, bringing her empty, pink eyes to stare into yours. Mistaking the gentle motion for a command, she gleefully opens wide, tongue thrashing about in anticipation. You place the pink pearl at the fairy's lips and she wraps her mouth around the pale jewel, trying obediently to swallow it. However, the little fairy's mouth is far smaller than you would've thought and it seems to get stuck just behind her teeth, like a pink ball-gag. She coos a muffled moan and begins to masturbate without breaking eye contact with you.\n\n");
-
-				outputText("Not exactly what you had in mind. It looks like you're going to have to be a bit more forceful.  You stoop down and take the fairy's head in your arms. Placing your fingers on the drool-soaked orb wrenching her mouth open, you begin to shove the pure pearl into her throat. With ecstatic joy, she swallows as hard as she can, trying to accommodate this new, exciting insertion. The gem squeezes past her tonsils and is forced into her esophagus with an audible 'pop!' the mass of the pearl leaving an orb-shaped bulge in her throat. Her masturbation becomes frenzied as she begins choking on the gem and you hurry to stroke the girl's neck, coaxing the pearl down, out of her windpipe. Finally, it drops into her stomach and the change is immediate. Just as she climaxes, her empty pink eyes focus and sharpen, the lusty haze fading as Marae's gift burns away the pollution of the imps' drugs and rape. She gives you a genuine smile and speaks with a voice like the rushing of wind over reeds. \"<i>Thank you. I cannot express my gratitude for what you've done. You are a godsend, hero. I will never forget what you've done for me.</i>\"\n\n");
-
-				outputText("She tries to stand and falls back on her ass, the unbalancing weight of her corrupted breasts more than her atrophied legs can handle. She seems surprised at first, but her laughter is rich and hearing it eases your heart. \"<i>Oh my, I have changed a bit, haven't I? Still, any deformation is worth restoring my mind. Please, let me introduce myself.</i>\" She flaps her thin, fey wings rapidly and their lift is enough to allow her to stand. \"<i>I am Vala, and I used to be a fairy, like my sisters. I was captured by the demons of this place and used to amuse them between rutting sessions. The leader of them, however, thought it would be better to use me for sexual release instead. They fed me such terrible drugs, to make me grow and to bind me with these,</i>\" she cups her absurdly large tits, \"<i>weights. They used me terribly and, in time, I forgot who I was. Pleasure was all that mattered. But you have saved me, and now it is all but a bad dream.</i>\" She flutters up to kiss your forehead.\n\n");
-
-				outputText("Leaving the way you came, Vala makes her exodus from the abyssal cavern. Despite her savagely warped body, you do not doubt that her renewed vigor for life will let her achieve some measure of happiness again. You feel like you've managed to do a truly selfless thing in this den of iniquity. Defeating monsters is satisfying, but it's the lives you save that really make you feel like a hero. You sigh contentedly and wonder where she'll end up, now that she's been given her life back.");
-
-				//(Vala unlocked in The Wet Bitch)[End Encounter]
-				flags[kFLAGS.FREED_VALA] = 1;
-				doNext(playerMenu);
-			}
-
-		}
-		public function healValaPartTwoTheHealingHealsOfRevenge():void {
-			spriteSelect(85);
-			clearOutput();
-			outputText("She tries to stand and falls back on her ass, the unbalancing weight of her corrupted breasts still surprising. She seems surprised at first, but her laughter is rich and eases your heart even just to hear it. \"<i>Oh my, I have changed a bit, haven't I? Still, any deformity is worth restoring my mind. Please, let me introduce myself.</i>\" She flaps her thin, fey wings rapidly and their lift is enough to allow her to stand. \"<i>I am Vala, and I used to be a fairy, like my sisters. I was captured by the demons of this place and used to amuse them between sexual releases. The lord of this place, in his dark designs, thought it would be better to use me for sexual release instead. They fed me such terrible drugs, to make me grow to a more pleasing size. They bound me in this room with these,</i>\" she cups her absurdly large tits, \"<i>weights. When my wings grew strong enough to carry my inflated body, they switched to chains instead. They used me terribly and, in time, I forgot who I was. Pleasure was all that mattered. But you have saved me, and now it is all but a bad dream.</i>\" She flutters up to kiss your forehead. \"<i>I must taste the sweet open air and return to my sisters, but please try to find me once you are done here. I wish to repay your kindness.</i>\"\n\n");
-
-			outputText("Leaving the way you came, Vala makes her exodus from the abyssal cavern. Despite her savagely warped body, you do not doubt that her renewed vigor for life will let her achieve some measure of happiness again. You feel like you've managed to do a truly selfless thing in this den of iniquity. Defeating monsters is satisfying, but it is the lives you save that really make you feel like a hero. You sigh contentedly and press on. You've got demons to dethrone.");
-			//[End Encounter]
-			flags[kFLAGS.FREED_VALA] = 1;
-			doNext(playerMenu);
-		}
 
 		//[Sex]
 		public function ValaGetsSexed():void {
-			spriteSelect(85);
-			clearOutput();
-			//(Herm/Male)
-			if(player.cockTotal() > 0) {
+			if (!recalling) dynStats("lus", 33);
+            clearOutput();
+            sceneHunter.selectGender(curry(sceneHunter.callFitNofit, dickF, 60), vagF);
+
+            //===============================================================
+			function dickF(x:int):void {
 				outputText("The fairy's grinding and the sweet scent leaking out of her honey pot is getting under your skin, irritating an itch that's been building for a while now. Surely it wouldn't hurt to throw the mind-broken girl a pity fuck? It's not like she's one of the demons or anything. You push the girl back, gently and nod your head, stripping your [armor] piece by piece, teasing the fairy with your slowness. As you disrobe, you glance back at the spot she'd been chained up and see the placard on the wall again. \"<i>Vala?</i>\" you ask. \"<i>Is that your name?</i>\" She stares blankly, unresponsive.\n\n");
 
 				outputText("She points at herself. \"<i>Bitch,</i>\" she explains. You grab her hands and stare into her pink eyes, holding her in your gaze until the faintest sparkle of light returns to their empty depths.\n\n");
 
 				outputText("\"<i>Your name is Vala,</i>\" you command, softly. She flinches. \"<i>Say it, or I won't fuck you.</i>\" She squirms, eyes clenched, rubbing her knees together as the heat in her groin battles the conditioned rape the imps used to crush her identity. Just as you knew it would, lust wins out.\n\n");
 
-				outputText("\"<i>It is... we are... Vala,</i>\" she glances around, looking for imminent punishment. When none is forthcoming, she curls her lips into a wanton smile. \"<i>Now fuck Vala!</i>\" You chuckle and show your satisfaction at her small rebellion by grabbing one of her supple tits and leaning down to flick your tongue against her milk-bloated nipples. She arches her back under your touch and clenches her muscles, but slowly relaxes when you don't bite or tear at her pale skin. Her smile becomes a little more natural and her hands find your genitals, eager fingers sliding across your sensitive [skin.type]. Her hand grabs your [cock], thumb and pinkie forming a tight circle at your base while her other fingers stroke up and down your shaft. The fairy's touch is surprisingly light for the rough treatment she's endured, and you're quickly brought to hardness under her caresses.\n\n");
+				outputText("\"<i>It is... we are... Vala,</i>\" she glances around, looking for imminent punishment. When none is forthcoming, she curls her lips into a wanton smile. \"<i>Now fuck Vala!</i>\" You chuckle and show your satisfaction at her small rebellion by grabbing one of her supple tits and leaning down to flick your tongue against her milk-bloated nipples. She arches her back under your touch and clenches her muscles, but slowly relaxes when you don't bite or tear at her pale skin. Her smile becomes a little more natural and her hands find your genitals, eager fingers sliding across your sensitive [skin.type]. Her hand grabs your " + cockDescript(x) + ", thumb and pinkie forming a tight circle at your base while her other fingers stroke up and down your shaft. The fairy's touch is surprisingly light for the rough treatment she's endured, and you're quickly brought to hardness under her caresses.\n\n");
 
 				outputText("Whatever small parts of her mind may be returning, she clearly hasn't conquered her sex-madness, because she simply cannot restrain herself any longer. Fluttering her wings rapidly, the girl lifts out of your embrace and rises above you, lining her sex up with yours, thick beads of wetness trickling down from her gaping pussy. With a mad giggle, she stops flapping and drops down, impaling herself on your length.");
+			    doNext(curry(dickF_2, x));
 			}
-			else {
+			function vagF():void {
 				outputText("The fairy's incessant groping is maddening and you decide it'd just be easier to get it over with than have her hanging from your tits for the rest of the day. You select what looks like a reasonably clean spot in the room and carry the girl with you. Sitting down, you let her sit in your lap as you try to pull the clumped hair from her face. Spitting on your hand, you wipe some of the grease, dirt, and dried cum from her face, while she coos at your touch. Under all the grime, she's actually quite pretty; an impossibly frail yet timeless sort of beauty that reminds you of snowflakes back home. You smile, despite yourself, and give the girl a little kiss of affection, stroking her tattooed shoulders gently. She returns your kiss with a famished sort of desperation, trying to swallow your tongue in gulping slurps that force you to pull back and wipe the spittle from your face. She's just not going to be happy until she gets something inside her.\n\n");
 
 				outputText("You ask her if she can fly, and she nods, blankly. By way of demonstration, she flutters her dragonfly wings and lifts a couple feet into the air, heavy chest causing her to sway precariously. You stroke your hands up her legs, pulling them around your shoulders and drawing the girl's pussy toward your head. The fairy's labia is almost artistic- hairless folds like rose petals, her leaking excitement like morning dew. You lean in and lick gently around her slit, the tip of your tongue tracing teasing circles around her small, overstimulated clit. She squeals in a pitch that you thought only dogs could hear and her legs clench around your head. Sliding your tongue into her gash, you are a little surprised that the well-used fairy still tastes sweet. Even mind-breaking imp rape couldn't fully pollute the fey girl's juicy snatch.");
+			    doNext(vagF_2);
 			}
-			dynStats("lus", 33);
-			//[Next]
-			doNext(valaGetsSexedPtDuece);
-		}
-
-		public function valaGetsSexedPtDuece():void {
-			spriteSelect(85);
-			clearOutput();
-			hideUpDown();
-			player.orgasm();
-			fatigue(5,0);
-			if(player.cockTotal() > 0) {
-				var x:Number = player.cockThatFits(60);
-				trace("X IS MOTHERFUCKER: " + x);
-				//(small-to-medium girth dicks)
-				if(x >= 0) {
+            //PART 2===============================================================
+			function dickF_2(x:int):void {
+			    clearOutput();
+                if(player.cockArea(x) >= 60) {
 					outputText("Vala's pussy surrounds you like a quivering mouth, but she's simply too used for you to get much friction. The fairy barely even notices, grinding her front against you, tits rubbing your chest like a liquid massage, cream leaking down your torso. She hooks her legs around your [butt] and, using her wings, lifts up before dropping down again. Although she's too loose for your preference, the girl seems to be getting off just fine by using your " + cockDescript(x) + " as a fucking post. You spot the wooden rack to one side of the room and the variety of carved dildos worked into the pegging ladder. A wicked thought crosses your mind, but lacking any other options, you guess you could at least give it a try. Pulling the fairy over to the lacquered bench, you choose one that seems like a likely fit and position your " + player.assholeOrPussy() + " over the carved cock. When the fairy drops herself onto you next, she forces you down with her, penetrating you on the peg. It proves to be a bit thicker than you realized, however, and you gasp at the weight that settles into your gut. You try to get up and select a smaller peg, but the fairy's jack-hammering flight keeps you rooted on the post. Your " + cockDescript(x) + " swells from the stimulation your ");
 					if(player.hasVagina()) outputText("cunt");
 					else outputText("prostate");
@@ -224,44 +110,56 @@ public class ValaScene extends BaseContent implements SaveableState
 
 					outputText("When a hot bath of girl cum sprays from her loins, soaking your thighs, she finally collapses against you, hugging your waist and weakly flapping her wings in the afterglow. You gingerly pull yourself off of the pegging board and carry the exhausted slave girl in your arms. Lifting her chin up to look into her face, you sadly find that her vacant expression is still there. Her road to recovery is more than one fuck, it seems. Well, at least you were able to show her a little kindness, you sigh. You set the girl in what looks like the least foul corner of the room and tell her you'll return for her after you've finished off the demons, wondering if she'll even remember you five minutes from now.");
 				}
-				//(large girth dicks)
 				else {
-					outputText("Vala slides onto your [cock] with gleeful squeals as you part her rose-petal labia and slide into her well-worn depths. If the marks on her back are any indication, her ability to accommodate your girth is a result of endless sessions with the captors, probably two or more to a hole. However she ended up so stretched, it works for you because her slavering cunt sucks up your titanic dick into her well-lubricated uterus. Her abdomen distorts at your insertion, but instead of pain or fear, her expression is utter bliss, her pink eyes fluttering as she wordlessly mutters sweet nothings into your ");
+					outputText("Vala slides onto your " + cockDescript(x) + " with gleeful squeals as you part her rose-petal labia and slide into her well-worn depths. If the marks on her back are any indication, her ability to accommodate your girth is a result of endless sessions with the captors, probably two or more to a hole. However she ended up so stretched, it works for you because her slavering cunt sucks up your titanic dick into her well-lubricated uterus. Her abdomen distorts at your insertion, but instead of pain or fear, her expression is utter bliss, her pink eyes fluttering as she wordlessly mutters sweet nothings into your ");
 					if(player.biggestTitSize() < 1) outputText("chest");
 					else outputText("breasts");
 					outputText(". She's tight and getting tighter as you pump slowly, working your long inches into the fairy's needy hole. Her body is hot around you and her milky tits drool with each thrust, their nectar fragrant like rose water. At this rate, the condom-tight girl is going to make you blow your load before you get a chance to see what a fairy orgasm looks like.\n\n");
 
-					outputText("You spot an unsecured set of chained manacles on the floor and an idea strikes you. Vala still sliding along your shaft, you bend down and grab the fetters, snapping one around the girl's neck like a collar. With a shudder at the cold iron, you lift the fairy up and lock the other end of the shackles around the root of your [cock], steel snapping around your base tightly. The makeshift cock-ring works perfectly as your hips quiver, your body trying to orgasm but denied release by the metal loop. The fairy, meanwhile, thrashes atop your groin, the chain of her collar swinging between her tits, buffeting them with enough force to spray small white streams as she rides you. Her purple hair glimmers pink in the dull light of the dungeon as it bounces right along with her rocking hips. Even the diminished pulses of sunlight streaming from her stained and tattooed skin seem brighter as she is filled labia to cervix by your straining fuckpole.\n\n");
+					outputText("You spot an unsecured set of chained manacles on the floor and an idea strikes you. Vala still sliding along your shaft, you bend down and grab the fetters, snapping one around the girl's neck like a collar. With a shudder at the cold iron, you lift the fairy up and lock the other end of the shackles around the root of your " + cockDescript(x) + ", steel snapping around your base tightly. The makeshift cock-ring works perfectly as your hips quiver, your body trying to orgasm but denied release by the metal loop. The fairy, meanwhile, thrashes atop your groin, the chain of her collar swinging between her tits, buffeting them with enough force to spray small white streams as she rides you. Her purple hair glimmers pink in the dull light of the dungeon as it bounces right along with her rocking hips. Even the diminished pulses of sunlight streaming from her stained and tattooed skin seem brighter as she is filled labia to cervix by your straining fuckpole.\n\n");
 
-					outputText("She moans in a series of small, cute gasps and her pussy clenches your [cock] as tightly as the makeshift cock-ring. You savor the sweet shivers that run up her spritely body, fingers clenching around your arms and legs wrapping about your " + hipDescript() + " to slam deeper, even taking the chained shackle at your base into her gushing slit. It feels like a flood is released from the fairy's gaping box, warm fluid splashing around your bulging length and raining down to leave a thin, clear puddle under you. You bite your lip and slide your fingers into her vice-like pussy, trying to unhook the shackle around your cock. The added insertion gives the girl enough to climax again, her body shaking violently against yours, squirting her hot girl cum over your hand, making it difficult to spring the catch. The pressure in your loins is getting painful now, and you lean against a wall, using both hands to try to unclap the fetters around your [cock]. Between her wings and the chain, she manages to stay firmly locked onto your root, grinding orgasmically as you push more fingers past her pulsing vulva and fumble at the cock-ring.\n\n");
+					outputText("She moans in a series of small, cute gasps and her pussy clenches your " + cockDescript(x) + " as tightly as the makeshift cock-ring. You savor the sweet shivers that run up her spritely body, fingers clenching around your arms and legs wrapping about your " + hipDescript() + " to slam deeper, even taking the chained shackle at your base into her gushing slit. It feels like a flood is released from the fairy's gaping box, warm fluid splashing around your bulging length and raining down to leave a thin, clear puddle under you. You bite your lip and slide your fingers into her vice-like pussy, trying to unhook the shackle around your cock. The added insertion gives the girl enough to climax again, her body shaking violently against yours, squirting her hot girl cum over your hand, making it difficult to spring the catch. The pressure in your loins is getting painful now, and you lean against a wall, using both hands to try to unclap the fetters around your " + cockDescript(x) + ". Between her wings and the chain, she manages to stay firmly locked onto your root, grinding orgasmically as you push more fingers past her pulsing vulva and fumble at the cock-ring.\n\n");
 
 					outputText("When she cums a third time, her rose-smelling lubricant utterly soaks your hands and you nearly wail with frustration. Clenching your teeth, you grunt and grab the fairy's cock-widened hips. You jam into her as hard and fast as you can, trying to fuck through the pressure and break your shackles with the force of your cum. The fairy is lost in her lust, her hands rubbing her clit while the other reaches around your back. She slides a finger upward ");
 					if(player.hasVagina()) outputText("nuzzling your joy buzzer");
 					else outputText("tickling your prostate");
-					outputText(" and you thrust more forcefully than she was braced for, finally lifting the fey cocksleeve off your root. Without wasting a moment, you pull the locking bar out of the shackle and finally allow your orgasm to spew into her waiting womb. You slip in the fairy's cum puddle and fall on your [butt] as your [cock] dumps its long-delayed loads inside the distended girl. The feeling of cum filling her pussy drives her to a fourth orgasm, her toes curling and wings flapping wildly. She's so tightly clenched around you that there's nowhere for your cum to run out, so her womb bloats to a well-feasted fatness and she loses the strength to keep writhing in your lap, simply collapsing into your ");
+					outputText(" and you thrust more forcefully than she was braced for, finally lifting the fey cocksleeve off your root. Without wasting a moment, you pull the locking bar out of the shackle and finally allow your orgasm to spew into her waiting womb. You slip in the fairy's cum puddle and fall on your [butt] as your " + cockDescript(x) + " dumps its long-delayed loads inside the distended girl. The feeling of cum filling her pussy drives her to a fourth orgasm, her toes curling and wings flapping wildly. She's so tightly clenched around you that there's nowhere for your cum to run out, so her womb bloats to a well-feasted fatness and she loses the strength to keep writhing in your lap, simply collapsing into your ");
 					if(player.biggestTitSize() < 1) outputText("chest");
 					else outputText("breasts");
 					outputText(".\n\n");
 
 					outputText("She's unconscious by the time you're finished seeding the fairy, the girl's chest barely rising and falling under her disproportionately huge breasts and massively inflated womb. Even better than a goblin, you reflect, marveling at the fairy's ability to take your impossibly huge cock and her resilience, despite the rapid sequence of orgasms. Though, you suppose, once you've already been fucked mindless, there's little left to break. You resolve to check back on her after you've dealt with the demons.");
 				}
-			}
-			//(female)
-			else {
+                if (!recalling) {
+                    player.sexReward("vaginalFluids", "Dick");
+                    flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
+                    doNext(playerMenu);
+                }
+                else doNext(recallWakeUp);
+                
+            }
+            function vagF_2():void {
+			    clearOutput();
 				outputText("You close your eyes and run your tongue into her groin with teasing flicks and probing touches, exploring her nethers and lapping up the constant flow of fae cum that dribbles from her perpetually wet body. She shifts in the air, but keeps your head bouncing between her thighs and you can't tell what she's doing. When a hot, humid panting puffs against your " + vaginaDescript(0) + ", you realize she must've done a 180 in the air, wings keeping her in a vertical 69. She descends on your pussy with relish, tasting something that isn't demon cum for the first time in too long. Her needy tongue is as delicately thin as the rest of her body, but it is LONG. She threads it into your depths and you buck your hips as it just keeps going deeper and deeper. You moan into her abdomen and flatten your own tongue to bring as much roughness against her twitching walls as you can, trying to get the little minx off before she sucks your orgasm from you.\n\n");
 
 				outputText("It's a hopeless race, however, as she quickly zeros in on your g-spot, curling her tongue to coil thickly inside of you. You grab her head by its purple hair and crush it into your crotch, crushing her nose on your " + clitDescript() + ", momentarily forgetting about the fairy's pussy as she tongue-rapes yours. When you cum, your body tenses and you hold your breath as your " + hipDescript() + " threaten to draw the small girl's whole head into your " + vaginaDescript(0) + ". You hear a slurping and realize she's drinking your girl cum. The thought is enough to remind you about the fairy slit at eye-level just as she climaxes from the taste of your body. She squirts wildly into your face, small jets of hot, sticky liquid spraying into your mouth, over your cheeks, and into your eyes.\n\n");
 
-				outputText("You blink, and give the little brat a bump on the back of the head for her sneaky facial. She flutters right-side up again and when you see her face, your heart leaps in your chest. Your orgasm has washed her visage clean and you realize she's breath-taking. The soft curves of her heart-shaped face, the timeless alabaster of her flawless skin, and most surprisingly, the glimmers in her almond-shaped, pink eyes. She kisses you, softly this time, almost affectionately. Perhaps your exchange unlocked the memory of sweeter days with her fairy sisters? Your heart sinks when you realize she'll never be able to recapture those lost days in her state and you resolve to make sure she finds her way out of this place once you've defeated its dark master. You return her kiss and redress as she finally gets some long-delayed, restful sleep.");
+				outputText("You blink, and give the little brat a bump on the back of the head for her sneaky facial. She flutters right-side up again and when you see her face, your heart leaps in your chest. Your orgasm has washed her visage clean and you realize she's breathtaking. The soft curves of her heart-shaped face, the timeless alabaster of her flawless skin, and most surprisingly, the glimmers in her almond-shaped, pink eyes. She kisses you, softly this time, almost affectionately. Perhaps your exchange unlocked the memory of sweeter days with her fairy sisters? Your heart sinks when you realize she'll never be able to recapture those lost days in her state and you resolve to make sure she finds her way out of this place once you've defeated its dark master. You return her kiss and redress as she finally gets some long-delayed, restful sleep.");
+                
+                if (!recalling) {
+                    player.sexReward("vaginalFluids", "Lips");
+                    player.sexReward("saliva", "Vaginal");
+                    flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
+                    doNext(playerMenu);
+                }
+                else doNext(recallWakeUp);
 			}
-			//[End Encounter]
-			flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
-			doNext(playerMenu);
 		}
 
 		public function leftValaAlone():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
+			if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 			//first post meeting
 			if(flags[kFLAGS.INVESTIGATED_VALA_AFTER_ZETAZ_DEFEATED] == 0 || flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] == 0) {
 				outputText("Having dispatched the foul master of this cavern, you return to the broken fairy. She is lying as you left her, apparently still as oblivious to the world beyond her pussy and asshole as before. You try to rouse the girl from her near comatose state, but she responds only in terse, disjointed phrases. When you urge her to leave the dungeon, she seems confused and refuses. When you offer to shelter her at your camp, she grows panicked, apparently so inured to her captivity that the thought of freedom frightens her into paralysis. Nothing you say seems to reach her dulled brain and you realize that even if she were willing to come with you, having a broken, drugged, branded fairy at your camp might alienate your friends or send the wrong message to potential allies. There's nothing for it- you're going to have to leave her here.\n\n");
@@ -272,133 +170,144 @@ public class ValaScene extends BaseContent implements SaveableState
 			}
 			//Anytime within 6 hours of waking/raping/meeting her
 			else if(flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] > 0) {
-				outputText("Vala is still here, the thought to escape apparently never even crossing her vacant mind. The pale-skinned, whip-thin fairy looks slightly healthier than before, now that you've cleared out the rapists who used her for an hourly cum-dump. Her purple hair even sparkles with pink light regularly. Her pink eyes remain empty, however, her pupils no more than pin-points in lusty oceans. She's still senseless from your last encounter, her body smeared with your juices and her sex pulsing, bloated and engorged from the pounding you gave her. Trying to use her again so soon wouldn't be terribly pleasant for you, and besides, you're better than a pack of filthy imps, right? Better to give her a chance to recover.");
+				outputText("Vala is still here, the thought to escape apparently never even crossing her vacant mind. The pale-skinned, whip-thin fairy looks slightly healthier than before, now that you've cleared out the rapists who used her for an hourly cum-dump. Her purple hair even sparkles with pink light regularly. Her pink eyes remain empty, however, her pupils no more than pinpoints in lusty oceans. She's still senseless from your last encounter, her body smeared with your juices and her sex pulsing, bloated and engorged from the pounding you gave her. Trying to use her again so soon wouldn't be terribly pleasant for you, and besides, you're better than a pack of filthy imps, right? Better to give her a chance to recover.");
 			}
 			//Anytime meeting her AFTER 6 hours.
 			else if(flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] == 0) {
-				outputText("Vala is still here, the thought to escape apparently never even crossing her vacant mind. The pale-skinned, whip-thin fairy looks slightly healthier than before, now that you've cleared out the rapists who used her for an hourly cum-dump. Her purple hair even sparkles with pink light regularly. Her pink eyes remain empty, however, her pupils no more than pin-points in lusty oceans. Although there's no one to lock her manacles, she seems to prefer sleeping in them, and has propped herself up, shackles about her wrists, hanging limply in the air, unaware of your presence. It's good to see that she's doing well, but you know any attempt at conversation would be about as productive as talking to a fairy-shaped onahole. Her apple-bottomed ass sways with each breath, pussy dripping lube even in her sleep.");
+				outputText("Vala is still here, the thought to escape apparently never even crossing her vacant mind. The pale-skinned, whip-thin fairy looks slightly healthier than before, now that you've cleared out the rapists who used her for an hourly cum-dump. Her purple hair even sparkles with pink light regularly. Her pink eyes remain empty, however, her pupils no more than pinpoints in lusty oceans. Although there's no one to lock her manacles, she seems to prefer sleeping in them, and has propped herself up, shackles about her wrists, hanging limply in the air, unaware of your presence. It's good to see that she's doing well, but you know any attempt at conversation would be about as productive as talking to a fairy-shaped onahole. Her apple-bottomed ass sways with each breath, pussy dripping lube even in her sleep.");
 			}
 			outputText("\n\nWhat would you like to do to her?");
-			//[Heal][Use][Wake][Leave]
-			var Use:* = null;
-			var Wake:* = null;
-			if(player.gender > 0) Use = useValaOHYEAHSNAPINTOASLIMJIM;
-			if(player.gender > 0) Wake = wakeValaUpBeforeYouGoGo;
-			var shouldra:Function = null;
-			if(player.lust >= 33 && SceneLib.shouldraFollower.followerShouldra()) shouldra = SceneLib.shouldraFollower.shouldraMeetsCorruptVala;
-			simpleChoices("Fix Her", tryToHealVala, "Use", Use, "Wake", Wake, "ShouldraVala", shouldra, "Leave", playerMenu);
+            menu();
+			addButtonIfTrue(0, "Use", useVala, "Not genderless!", player.gender > 0, "Fuck the poor fairy while she's asleep.");
+			addButton(1, "Wake", wakeValaUpBeforeYouGoGo, "Not genderless!", player.gender > 0, "Wake the girl up to have some fun.");
+            if (SceneLib.shouldraFollower.followerShouldra())
+                addButtonIfTrue(2, "Shouldra?", SceneLib.shouldraFollower.shouldraMeetsCorruptVala, "Not horny enough.",
+                    player.lust >= 33, "Ask Shouldra if she has any ideas. Are you sure you want to wake <i>her</i> up too?");
+            else addButtonDisabled(2, "???", "Req. to have a certain ghostly follower with you.");
+            //heal
+            var honey:Boolean = player.hasItem(consumables.PURHONY, 1) || recalling;
+            var pearl:Boolean = player.hasItem(consumables.P_PEARL, 1) || recalling;
+            if (!honey && !pearl)
+                outputText("If you had the right materials, you might be able to mix something to heal the damage her captors have done to the fairy's mind.\n\n");
+            if (honey)
+                outputText("Pure honey is known for its cleansing properties. Why not try it on the faerie?\n\n");
+            if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && pearl)
+                outputText("Nothing can reverse corruption effects as good as the pearl given by Marae itself. But... is it <i>really</i> the only way? You <b><i>might</i></b> find a better use for it.\n\n");
+			if (recalling)
+				outputText("<b>Recall: items won't be consumed.</b>");
+			addButtonIfTrue(3, "Use Honey", healValaHoney, "Requires a bottle of Pure Honey.", honey);
+            if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1)
+			    addButtonIfTrue(4, "Use Pearl", healValaPearl, "Requires the Pure Pearl.", pearl);
+            //Leave
+            addButton(14, "Leave", playerMenu);
 		}
 
-		public function tryToHealVala():void {
-			spriteSelect(85);
+        public function healValaHoney():void {
 			clearOutput();
-			//(Without Pure Honey)
-			if(!(player.hasItem(consumables.PURHONY,1) || player.hasItem(consumables.P_PEARL,1))) {
-				outputText("You try your best with what you've got, but nothing seems to restore the broken fairy's mind to her sex-addled  body. You're going to have to go out and gather more materials. Surely there's something that can break the damage the imps have done to Vala.");
-				doNext(playerMenu);
+			if (!recalling) {
+				player.consumeItem(consumables.PURHONY, 1);
+				flags[kFLAGS.VALA_HEALED_HONEY] = 1;
 			}
-			//(With Pure Honey)
-			else if(player.hasItem(consumables.PURHONY,1)) {
-				player.consumeItem(consumables.PURHONY,1);
-				outputText("You're not sure if Pure Honey will do the trick, but it seems like the most likely candidate. You set the broken girl down and step over to the alchemy table. Vala clings onto your leg as you walk, and you end up dragging her across the dungeon floor. Before things can get too out of hand with the needy girl, you pull out the vial of Pure Honey and arrange the equipment in front of you. Using the cleanest of the pipettes, you take a small portion of the honey and mix it with what you hope to be water, diluting the rich mixture to a more viscous state. Working quickly, you manage to produce a draught that the weak girl can tolerate. By now, she's managed to work her way to a sitting position and is grinding her dripping sex against your shin. You lean down and hold her nose to make her open her mouth. She gleefully opens wide, tongue thrashing about in anticipation. You pour the sweet-smelling concoction down her anxious throat and begin to re-cork the rest of your honey.\n\n");
+            outputText("You're not sure if Pure Honey will do the trick, but it seems like the most likely candidate. You set the broken girl down and step over to the alchemy table. She clings onto your " + (player.isNaga() ? "tail" : player.leg()) + " as you walk, and you end up dragging her across the dungeon floor, leaving a trail of her cum behind you. Before things can get too out of hand with the needy girl, you pull out the vial of Pure Honey and arrange the equipment in front of you. Using the cleanest of the pipettes, you take a small portion of the honey and mix it with what you hope to be water, diluting the rich mixture to a less viscous state. Working quickly, you manage to produce a draught that the weak girl can tolerate. By now, she's managed to work her way to a sitting position and is grinding her dripping sex against your [foot]. You lean down and hold her nose to make her open her mouth. She gleefully opens wide, tongue thrashing about in anticipation. You pour the sweet-smelling concoction down her anxious throat and begin to re-cork the rest of your honey.\n\n");
 
-				outputText("The effects of your cure are more violent than you expected. The fairy thrashes wildly, causing you to drop your bottle of Pure Honey, sending it spilling over the table, shattering the delicate equipment and ruining the unlabeled concoctions within. Moving to keep the girl from hurting herself in her seizure, you hold her head against your chest and wait out the wild bucking. Gradually, her motions slow and her breath calms to a more normal pace. When she looks back up at you, her eyes are clear at last, the pollution of lust burned away by the honey's restorative properties. She gives you a genuine smile and speaks with a voice like the rushing of wind over reeds. \"<i>Thank you,</i>\" she gasps. \"<i>Thank you. I cannot express my gratitude for what you've done. The fate you've saved me from was worse than any death those wretched creatures could have subjected me to.</i>\"");
+            outputText("The effects of your cure are more violent than you expected. The fairy thrashes wildly, causing you to drop your bottle of Pure Honey, sending it spilling over the table, shattering the delicate equipment and ruining the unlabeled concoctions within. Moving to keep the girl from hurting herself in her seizure, you hold her head against your chest and wait out the wild bucking. Gradually, her motions slow and her breath calms to a more normal pace. When she looks back up at you, her eyes are clear at last, the pollution of lust burned away by the honey's restorative properties. She gives you a genuine smile and speaks with a voice like the rushing of wind over reeds. \"<i>Thank you. I cannot express my gratitude for what you've done. The fate you've saved me from was worse than any death these wretched creatures could have subjected me to.</i>\"\n\n");
 
-				//[Next]
-				doNext(tryToHealValaWHoney2);
-			}
-			else {
-				//Pure Pearl
-				player.consumeItem(consumables.P_PEARL,1);
-				outputText("A soft, warm breeze rustles your " + hairDescript() + " and for a moment the foul stench of the dungeon vanishes, setting your mind at ease and draining the tension that has been building in your gut. In a moment of clarity, you remember the beautiful Pure Pearl that Marae granted you as a reward for shutting down the demons' factory. It seems only right to use the goddess' gift to rescue one of her wayward children. Perhaps she gave it to you for this very reason? The oblivious girl has managed to work her way to a sitting position and is grinding her dripping sex against your [foot]. You lean down and gently lift her chin up, bringing her empty, pink eyes to stare into yours. Mistaking the gentle motion for a command, she gleefully opens wide, tongue thrashing about in anticipation. You place the pink pearl at the fairy's lips and she wraps her mouth around the pale jewel, trying obediently to swallow it. However, the little fairy's mouth is far smaller than you would've thought and it seems stuck just behind her teeth, like a pink ball-gag. She coos a muffled moan and begins to masturbate without breaking eye contact with you.\n\n");
+            outputText("She tries to stand and falls back on her ass, the unbalancing weight of her corrupted breasts still surprising. She seems surprised at first, but her laughter is rich and eases your heart even just to hear it. \"<i>Oh my, I have changed a bit, haven't I? Still, any deformity is worth restoring my mind. Please, let me introduce myself.</i>\" She flaps her thin, fey wings rapidly and their lift is enough to allow her to stand. \"<i>I am Vala, and I used to be a fairy, like my sisters. I was captured by the demons of this place and used to amuse them between sexual releases. The lord of this place, in his dark designs, thought it would be better to use me for sexual release instead. They fed me such terrible drugs, to make me grow to a more pleasing size. They bound me in this room with these,</i>\" she cups her absurdly large tits, \"<i>weights. When my wings grew strong enough to carry my inflated body, they switched to chains instead. They used me terribly and, in time, I forgot who I was. Pleasure was all that mattered. But you have saved me, and now it is all but a bad dream.</i>\" She flutters up to kiss your forehead. \"<i>I must taste the sweet open air and return to my sisters, but please try to find me once you are done here. I wish to repay your kindness.</i>\"\n\n");
 
-				outputText("Not exactly what you had in mind. It looks like you're going to have to be a bit more forceful.  You stoop down and take the fairy's head in your arms. Placing your fingers on the drool-soaked orb wrenching her mouth open, you begin to shove the pure pearl into her throat. With ecstatic joy, she swallows as hard as she can, trying to accommodate this new, exciting insertion. The gem squeezes past her tonsils and is forced into her esophagus with an audible 'pop!' the mass of the pearl leaving an orb-shaped bulge in her throat. Her masturbation becomes frenzied as she begins choking on the gem and you hurry to stroke the girl's neck, coaxing the pearl down, out of her windpipe. Finally, it drops into her stomach and the change is immediate. Just as she climaxes, her empty pink eyes focus and sharpen, the lusty haze fading as Marae's gift burns away the pollution of the imps' drugs and rape. She gives you a genuine smile and speaks with a voice like the rushing of wind over reeds. \"<i>Thank you. I cannot express my gratitude for what you've done. You are a godsend, hero. I will never forget what you've done for me.</i>\"\n\n");
-
-				outputText("She tries to stand and falls back on her ass, the unbalancing weight of her corrupted breasts more than her atrophied legs can handle. She seems surprised at first, but her laughter is rich and hearing it eases your heart. \"<i>Oh my, I have changed a bit, haven't I? Still, any deformation is worth restoring my mind. Please, let me introduce myself.</i>\" She flaps her thin, fey wings rapidly and their lift is enough to allow her to stand. \"<i>I am Vala, and I used to be a fairy, like my sisters. I was captured by the demons of this place and used to amuse them between rutting sessions. The leader of them, however, thought it would be better to use me for sexual release instead. They fed me such terrible drugs, to make me grow and to bind me with these,</i>\" she cups her absurdly large tits, \"<i>weights. They used me terribly and, in time, I forgot who I was. Pleasure was all that mattered. But you have saved me, and now it is all but a bad dream.</i>\" She flutters up to kiss your forehead.\n\n");
-
-				outputText("Leaving the way you came, Vala makes her exodus from the abyssal cavern. Despite her savagely warped body, you do not doubt that her renewed vigor for life will let her achieve some measure of happiness again. You feel like you've managed to do a truly selfless thing in this den of iniquity. Defeating monsters is satisfying, but it's the lives you save that really make you feel like a hero. You sigh contentedly and wonder where she'll end up, now that she's been given her life back.");
-				//(Vala unlocked in The Wet Bitch)[End Encounter]
+			outputText("Leaving the way you came, Vala makes her exodus from the abyssal cavern. Despite her savagely warped body, you do not doubt that her renewed vigor for life will let her achieve some measure of happiness again. You feel like you've managed to do a truly selfless thing in this den of iniquity. Defeating monsters is satisfying, but it is the lives you save that really make you feel like a hero. You sigh contentedly and wonder where she'll end up, now that she's been given her life back.");
+			if (!recalling) {
 				flags[kFLAGS.FREED_VALA] = 1;
 				doNext(playerMenu);
 			}
-		}
-		public function tryToHealValaWHoney2():void {
-			spriteSelect(85);
+			else doNext(recallWakeUp);
+        }
+
+        public function healValaPearl():void {
+            clearOutput();
+			if (!recalling) player.consumeItem(consumables.P_PEARL,1);
+            outputText("A soft, warm breeze rustles your " + hairDescript() + " and for a moment the foul stench of the dungeon vanishes, setting your mind at ease and draining the tension that has been building in your gut. In a moment of clarity, you remember the beautiful Pure Pearl that Marae granted you as a reward for shutting down the demons' factory. It seems only right to use the goddess' gift to rescue one of her wayward children. Perhaps she gave it to you for this very reason? The oblivious girl has managed to work her way to a sitting position and is grinding her dripping sex against your [foot]. You lean down and gently lift her chin up, bringing her empty, pink eyes to stare into yours. Mistaking the gentle motion for a command, she gleefully opens wide, tongue thrashing about in anticipation. You place the pink pearl at the fairy's lips and she wraps her mouth around the pale jewel, trying obediently to swallow it. However, the little fairy's mouth is far smaller than you would've thought and the pearl seems stuck just behind her teeth, like a pink ball-gag. She coos a muffled moan and begins to masturbate without breaking eye contact with you.\n\n");
+
+            outputText("Not exactly what you had in mind. It looks like you're going to have to be a bit more forceful.  You stoop down and take the fairy's head in your arms. Placing your fingers on the drool-soaked orb wrenching her mouth open, you begin to shove the pure pearl into her throat. With ecstatic joy, she swallows as hard as she can, trying to accommodate this new, exciting insertion. The gem squeezes past her tonsils and is forced into her esophagus with an audible 'pop!' the mass of the pearl leaving an orb-shaped bulge in her throat. Her masturbation becomes frenzied as she begins choking on the gem and you hurry to stroke the girl's neck, coaxing the pearl down, out of her windpipe. Finally, it drops into her stomach and the change is immediate. Just as she climaxes, her empty pink eyes focus and sharpen, the lusty haze fading as Marae's gift burns away the pollution of the imps' drugs and rape. She gives you a genuine smile and speaks with a voice like the rushing of wind over reeds. \"<i>Thank you. I cannot express my gratitude for what you've done. You are a godsend, hero. I will never forget what you've done for me.</i>\"\n\n");
+
+            outputText("She tries to stand and falls back on her ass, the unbalancing weight of her corrupted breasts more than her atrophied legs can handle. She seems surprised at first, but her laughter is rich and hearing it eases your heart. \"<i>Oh my, I have changed a bit, haven't I? Still, any deformation is worth restoring my mind. Please, let me introduce myself.</i>\" She flaps her thin, fey wings rapidly and their lift is enough to allow her to stand. \"<i>I am Vala, and I used to be a fairy, like my sisters. I was captured by the demons of this place and used to amuse them between rutting sessions. The leader of them, however, thought it would be better to use me for sexual release instead. They fed me such terrible drugs, to make me grow and to bind me with these,</i>\" she cups her absurdly large tits, \"<i>weights. They used me terribly and, in time, I forgot who I was. Pleasure was all that mattered. But you have saved me, and now it is all but a bad dream.</i>\" She flutters up to kiss your forehead.\n\n");
+
+            outputText("Leaving the way you came, Vala makes her exodus from the abyssal cavern. Despite her savagely warped body, you do not doubt that her renewed vigor for life will let her achieve some measure of happiness again. You feel like you've managed to do a truly selfless thing in this den of iniquity. Defeating monsters is satisfying, but it's the lives you save that really make you feel like a hero. You sigh contentedly and wonder where she'll end up, now that she's been given her life back.");
+            //(Vala unlocked in The Wet Bitch)[End Encounter]
+			if (!recalling) {
+				flags[kFLAGS.FREED_VALA] = 1;
+				doNext(playerMenu);
+			}
+			else doNext(recallWakeUp);
+        }
+
+		//Vala
+		public function useVala():void {
 			clearOutput();
-            outputText("She tries to stand and falls back on her ass, the unbalancing weight of her corrupted breasts still surprising. She seems surprised at first, but her laughter is rich and eases your heart even just to hear it. \"<i>Oh my, I have changed a bit, haven't I? Still, any deformation is worth restoring my mind. Please, let me introduce myself.</i>\" She flaps her thin, fey wings rapidly and their lift is enough to allow her to stand. \"<i>I am Vala, and I used to be a fairy, like my sisters. I was captured by the demons of this place and used to amuse them between sexual releases. The leader of them, however, thought it would be better to use me for sexual release instead. They fed me such terrible drugs, to make me grow and to bind me with these,</i>\" she cups her absurdly large tits, \"<i>weights. They used me terribly and, in time, I forgot who I was. Pleasure was all that mattered. But you have saved me, and now it is all but a bad dream.</i>\" She flutters up to kiss your forehead.\n\n");
-            outputText("Leaving the way you came, Vala makes her exodus from the abyssal cavern. Despite her savagely warped body, you do not doubt that her renewed vigor for life will let her achieve some measure of happiness again. You feel like you've managed to do a truly selfless thing in this den of iniquity. Defeating monsters is satisfying, but it's the lives you save that really make you feel like a hero. You sigh contentedly and wonder where she'll end up, now that she's been given her life back.\n\n");
-			//(Vala unlocked in The Wet Bitch)
-			flags[kFLAGS.FREED_VALA] = 1;
-			//[End Encounter]
-			doNext(playerMenu);
+			if (!recalling) dynStats("lus", 60);
+            outputText("You shrug. The girl is so hopelessly lost in pleasure that you doubt she could ever return to the real world anyway. There doesn't seem to be any more demons around, and it'd be a good idea to relieve the tension that's been building in your gut since you stepped into this wretched place. Besides, you chuckle as you strip off your [armor], you've always wondered what it'd be like to take a fairy.\n\n");
+			sceneHunter.selectGender(dickF, vagF, null, hermF);
+			//==================================================
+			function dickF():void {
+				outputText("Since the demons were so kind as to string her up for you, it's easy enough to take her rape-broadened hips into your hands and slide your [cock] up her thin thighs, toward her drooling pussy. The fairy girl has been well-used, and recently, you realize, as you guide your cockhead over her pink snatch. Used quite a bit, you realize as you try to slide in and find virtually no resistance. Apparently, the imps couldn't decide who'd go first and settled on penetrating her by two or three dicks at a time. That, or they've got a minotaur-sized imp lurking in the cave somewhere. Either way, the ruined vagina gapes far too widely for enough friction to get you off. It looks like her asshole is in no better shape. Well, you are nothing if not resourceful.\n\n");
+				outputText("You step away from the mind-fucked fairy and examine the potions on the alchemy table. Sifting through the vile concoctions, you find what you were looking for- minotaur blood. Snatching the whole bottle, you step back up to the waiting fairy and wrap a fist in her pink-tinged violet hair, jerking her head backwards. She gasps in ecstatic pleasure, the pain bringing her back in a flash. Vala's eyes lock onto yours and hot desire curls her face into a wanton, panting grimace. You grab her face and put pressure on her cheeks, forcing her jaw open. The crimson fluid trickles down her throat and her tongue licks her lips with satisfaction, savoring your rough treatment. You cast the empty bottle aside and thrust your cock back into her slit as the walls tighten around you. You begin to rock back and forth, enjoying the feeling of the velvet vice, even groaning as her gash becomes tight enough to begin hurting your [cock].");
+				doNext(dickF_2);
+			}
+			function vagF():void {
+				outputText("The fairy's rose-scented honeypot glistens with thick beads of clear liquid that well and dribble down her inner thighs, but you're a little too careful to eat out every wet and waiting fairy girl you happen to find in demonic dungeons, so you elect for a safer, less potentially drug-filled route for your carnal satisfaction. Glancing around the room, your eyes settle on the long, wooden pegging table in one corner of the room. You snatch a large, loose stone from the ground as you head over to it and fold your arms under your [allbreasts], shopping amongst the lacquered, intensely detailed wooden cocks set into the device. This one is far too small, that one is the wrong shape, one by one, you weed them out until you settle on a huge, minotaur-shaped dildo, over a foot and a half long and nearly six inches wide at the flared head. Grinning, you take the stone and carefully tap the bottom of the board until the peg starts wobbling loose. Using both hands, you yank the fire-hardened wooden dildo from its socket and hold it triumphantly over your head. You swing it in the air, experimentally, but decide that beating demons unconscious with a minotaur's dick would just be silly.\n\n");
+				outputText("Heading back to the chained fairy, you rub the head of the wooden dildo between her petal-shaped labia, turning the cock as you do so, to lubricate the whole 18\" of the monstrous thing. You stroke her juices into the glistening finish until it's difficult to keep your grip. Placing the flared head at the entrance to her rape-worn love box, you squeeze your own legs together in anticipation. With exquisite slowness, you press the dildo against her pussy and apply pressure until it begins to part her lips, pushing her slit wider and wider. The fairy finally seems to come to, under your teasing penetration and she coos at the stimulation, without questioning the source. She wiggles her plump butt and shakes her heaving chest, sending her absurdly large breasts swinging in the air, milk-heavy flesh slapping against each other. You encounter resistance just past her lower lips and you roll the flare in circles, cold wood rubbing hot skin and soaking up the squirting girl's natural lubrication. Then, putting your hand on the far end of the dildo, you push as hard as you can, jamming it into the fairy's cunt.");
+				doNext(vagF_2);
+			}
+			function hermF():void {
+				outputText("The fairy's rose-scented honeypot glistens with thick beads of clear liquid that well and dribble down her inner thighs, but you're too clever to just eat out every wet and waiting fairy girl you happen to find in demonic dungeons, so you elect for a safer, less potentially drug-filled route for your carnal satisfaction. Glancing around the room, your eyes settle on the long, wooden pegging table in one corner of the room. You snatch a large, loose stone from the ground as you head over to it and fold your arms under your [allbreasts] as you shop amongst the lacquered, intensely detailed wooden cocks set into the device. This one is far too small, that one is the wrong shape, one by one, you weed them out until you settle on a huge, minotaur-shaped dildo, over a foot and a half long and nearly six inches wide at the flared head. Grinning, you take the stone and carefully tap the bottom of the board until the peg starts wobbling loose. Using both hands, you yank the fire-hardened wooden dildo from its socket and hold it triumphantly over your head. You swing it in the air, experimentally, but decide that beating demons unconscious with a minotaur's dick would just be silly.\n\n");
+				outputText("Heading back to the chained fairy, you rub the head of the wooden dildo between her petal-shaped labia, turning the cock as you do so, to lubricate the whole 18\" of the monstrous thing. You stroke her juices into the glistening finish until it's difficult to keep hold of and then you place the flared head at the entrance to her rape-worn love box. With exquisite slowness, you press the dildo against her pussy and apply pressure until it begins to part her lips, pushing her slit wider and wider. The fairy finally seems to come to under your teasing penetration and she coos at the stimulation, without questioning the source. She wiggles her plump butt and jiggles her chest, sending her absurdly large breasts swinging in the air, milk-heavy flesh slapping together. You encounter resistance just past her vulva and you roll the flared corona in circles, cold wood rubbing hot skin and soaking up the squirting girl's natural lubrication. With a wicked grin, you pull it out of her cunt and brace the monster against her puckered rear instead. Then, putting your hand on the far end of the dildo, you push as hard as you can, jamming it into the fairy's ass.");
+				doNext(hermF_2);
+			}
+			//PART 2======================================
+			function dickF_2():void {
+				clearOutput();
+				outputText("Before the fairy can get any tighter, you figure it's time to loosen her back up. Grabbing fistfuls of her violet hair, you thrust forward, violently, slamming the chained fairy's head against the stone wall. \"<i>Fuck!</i>\" She shrieks in delight. \"<i>More, more!</i>\" All too happy to comply, you begin screwing her harder, the crushing pressure of her swollen labia milking your cock with every motion. The giant fairy seems to feed on your rough treatment, and begins to slap her ass back into you, in time with your thrusts, giggling aimlessly between her disjointed pleas for your cum. You grab her wobbling chest, figuring it'll be the best handhold you're going to find on the malnourished girl, and are rewarded with an orgasmic cry from the fairy. She clenches down on your [cock] as she clasps your hardness, her pulsing depths making you dig your fingers deeper into her supple flesh. Rocking against her at a painful pace, you grit your teeth and tighten your grip on her teats, their fluid depths yielding to your passionate throes. Her nipples swell and burst with milk, white cream spraying at your feet with each thrust, and you slide your hands down to pull at the lactating pink nubs, each burst of pale alabaster filling your lust to bursting.\n\n");
+				outputText("You can't keep up your frenzied pace for long, and the fairy's drug-tightened cunt finally takes its prize as your climax gushes from your [cock]. You scream in pleasure and slam her body against the wall, lifting her off the ground and holding the side of her face on the molding stone. Every muscle in your body strains as you crush the thin girl's frame between your twitching form and the dungeon wall, hips bucking in time to each of your pulsing loads. The girl simply lets her body be used like a cocksleeve, drinking in the abuse as much as your ejaculate. She twitches, limply, against you and spasms in orgasm again, whispering desperate imperatives to fuck her over and over again.\n\n");
+				outputText("Finally spent, you step back and toss the girl off of your dick, letting her fall back into a slump against the wall, dangling from her manacles. A wicked thought crosses your mind and you step back to the Alchemy table. Grabbing armfuls of hexagonal bottles, you flip the girl around, exposing her drooling, empty face and her bruised, sore breasts. You plug a bottle up to her lips and she begins sucking at it automatically, her ravaged mind automatically assuming any phallic object to be another dick to suck. She quaffs the Ovi Elixir gratefully, then a second, then a third. By the time you've finished pouring the stuff down her throat, her body has already begun changing. The elixir has pounced on your seed and forced her ovulation, rapidly accelerating the speed of conception. Her tummy pouts, then bloats as your sperm impregnates the fairy in seconds. Her abdomen swells violently, and you suspect that force-feeding her so much so quickly may have resulted in a far greater pregnancy than she had to endure before. She moans in bliss, her already disproportioned tits gurgling with even greater milky weight. If there was any doubt as to if she could stand under her own power before, it's gone now - even your strength wouldn't be able to move the breeding cow that you've turned her into.  Knowing your luck, however, she'll have given birth by the time you check in next.");
+				if (!recalling) player.sexReward("vaginalFluids", "Dick");
+				sharedEnd();
+			}
+			function vagF_2():void {
+				clearOutput();
+				outputText("She squeals in delight and her knees wobble, the force of your thrust almost knocking her head into the wall she's shackled next to. You work the frightful dildo further into the girl's drooling snatch until a mere 9 inches protrudes from her bright pink cunny. You smear more of the girl's lubrication along the exposed shaft and turn your back to the fairy. Bending down, you slowly rub your [butt] against the smaller, rounded base of the minotaur cock. Though your end is veiny and sheathed, it lacks the broad flare of the cock head, so you press your " + vaginaDescript(0) + " against it and brace your hands on your [legs]. Rolling your ass up and down, you let your own excitement-thick lube smear the rounded end before you take a step backwards, toward the fairy. The bulb slides past your cheeks and presses against your vaginal entrance, its girth as exciting as it is frightening. You take a deep breath, but before you're ready, the impaled fairy bucks backward and drives the dildo into your unprepared cunt, provoking a cry of surprise.\n\n");
+				outputText("You quickly recover and thrust backwards, driving more of the dildo inside your clenching walls while also slamming the fairy's slick box in lusty punishment for her over-eagerness. She giggles and humps right back, driving another inch into you, your uterus aflame with the delicious stimulation of the bumpy, uneven veins carved into the smooth cock-base. Before long, the two of you have a rhythm, driving the makeshift double-ended dildo into each other until you end up ass-to-ass, your [butt] smacking heavily against the fey girl's supple rear. A large puddle of girl cum has begun forming on the floor, each wet slap of your cunts splashing more of the warm, clear liquid between the two of you. You can feel your orgasm building a knot in your gut and you bite your lower lip as you make your thrusts more forceful, more insistent, slamming yourself down on the veiny cock, driving the flared head deeper into the fairy's body. She, in turn, is just as consumed by lust and tries to jackhammer it right back, until you can feel the rounded base pushing against your cervix, blissful pain coursing through your lower body.\n\n");
+				outputText("You clutch your [allbreasts] and squeeze the " + nippleDescript(0) + " until they hurt, the agony giving you strength to drive the dildo back into the fairy. It's a losing battle, you realize, when Vala cums before you do, pulsing walls locking down and squeezing the dildo out, by painful inches, deeper into your " + vaginaDescript(0) + " until the base is so far against your gut that it's pushed into your womb with a toe-curling, wet pop. You silently scream in ecstasy and agony, unable to believe that the frail fairy managed to fuck your womb with your own toy. Your strength falters and you slump down, sliding off the shaft with soothing regret, your cervix clenching wildly, still spasming from the obscene intruder. You roll onto your back, fairy cum all around you, even now dripping down the lube-slick cock still sticking out of the girl's sex, flared glans keeping it locked inside of her. You jill your " + clitDescript() + " for a few minutes afterward, just enjoying the afterglow, lapping at the dripping sprite cum that dribbles onto your face from the fairy's shivering, dick-stuffed cunt. Gradually, your strength returns and you rise, skin slick from the cum pool you've been basking in. You remind yourself to clean your [armor] after this is over, sliding into them with damp, squishing noises, and give Vala's ass a slap on your way out - a reward for your favorite brainless fairy.\n\n");
+				if (!recalling) player.sexReward("vaginalFluids", "Vaginal");
+				sharedEnd();
+			}
+			function hermF_2():void {
+				clearOutput();
+				outputText("She squeals in delight and her knees wobble, the force of your thrust almost knocking her head into the wall she's shackled next to. You work the frightful dildo further past the girl's gaping spincter until a mere 9 inches remains protruding from her bright pink hole. You smear more of the girl's lubrication along the exposed shaft and turn your back to the fairy. Bending down, you slowly rub your [butt] against the smaller, rounded base of the minotaur cock. Though your end is veiny and sheathed, it lacks the broad flare of the cock head, so you press your " + vaginaDescript(0) + " against it and brace your hands on your " + (player.isNaga() ? "tail" : "knees") + ".  Rolling your ass up and down, you let your own excitement-thick lube smear the rounded end before you take a step backwards, toward the fairy. The bulb slides past your [butt] and presses against your " + vaginaDescript(0) + ", its girth exciting and frightening. You take a deep breath, but before you're ready, the impaled fairy bucks backward and drives the dildo into your unprepared cunt, provoking a cry of surprise.\n\n");
+				outputText("You quickly recover and prepare your second surprise. Reaching around your " + hipDescript() + ", you grab your stiffening [cock] and pull it backwards, until it's just under the dildo connecting the two of you. With a thrust backwards, you jam your dick into her drooling pussy, while driving more of the dildo inside your clenching walls, slamming the fairy's distended rosette in lusty punishment for her over-eagerness. She giggles and humps right back, driving another inch of your shaft into her rectum and your uterus, your love-canal aflame with the delicious stimulation of the bumpy, uneven veins carved into the smooth cock-base. Before long, the two of you have a rhythm, driving the makeshift double-ended dildo into each other and thrusting your [cock] into Vala until you end up ass-to-ass, your [butt] smacking heavily against the fey girl's supple rear. A large puddle of girl cum has begins to form on the floor, each wet slap splashing more of the warm, clear liquid between the two of you. You can feel your orgasm building a knot in your gut and you bite your lower lip as you make your thrusts more forceful, slamming yourself into her violated nethers, the fairy's body as bloated from the minotaur dildo as from your own girth. She, in turn, is just as consumed by lust and tries to jackhammer right back into you, until you can feel the rounded wooden base pushing against your cervix, the mouth of her own womb slamming against your cockhead, blissful pain coursing through your lower body.\n\n");
+				outputText("You clutch your [allbreasts] and squeeze the " + nippleDescript(0) + " until they hurt, the agony giving you strength to drive the dildo back into the fairy, but it's a losing battle. Vala cums before you do, her pulsing walls locking down and driving the dildo out, inch by painful inch, deeper into your body until the base is so far against your gut that it is pushed into your furthest recesses with a toe-curling, wet slap. You silently scream in ecstasy and agony, unable to believe that the frail fairy managed to fuck your womb with your own toy. Your strength redoubles and you thrust back, your [cock] penetrating her spongy, well-used cervix, her womb sucking you inside it. You release the knotted tension, spraying your spunk deep inside her. You slap your [butt] against hers with each pulsing load, your pussy clenching at the dildo stuffing it even as your empty your seed into the chained slave.  You try to go limp, but the double penetrated girl keeps you from pulling out, both holes clenching you against her until every last drop of your sperm has filled her greedy womb. Fairy cum drips down your length, while the flared tip deep inside her large intestine keeps your pussy twitching against her posterior. You jill your " + clitDescript() + " for a few minutes afterward, just enjoying the afterglow as your strength returns and the fairy's body unclenches, releasing you from your breeder's embrace, the minotaur dildo still halfway up her ass. You remind yourself to clean your [armor] after this is over, sliding into them with wet, squishing noises, and give your drooling fairy girl's rump a slap on the way out - a reward for her broodmother-sized hips.\n\n");
+				if (!recalling) {
+					player.sexReward("vaginalFluids", "Dick");
+					player.sexReward("vaginalFluids", "Vaginal");
+				}
+				sharedEnd();
+			}
+			function sharedEnd():void {
+				if (!recalling) {
+					fatigue(5, 0);
+					dynStats("cor", 1);
+					flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
+					doNext(playerMenu);
+				}
+				else doNext(recallWakeUp);
+			}
 		}
 
-		public function useValaOHYEAHSNAPINTOASLIMJIM():void {
-			spriteSelect(85);
-			clearOutput();
-			//(Male)
-			if(player.gender == 1) {
-				outputText("You shrug. The girl is so hopelessly lost in pleasure that you doubt she could ever return to the real world anyway. Since Val has been so kind as to string herself up for you, it's easy enough to take her rape-broadened hips into your hands and slide your [cock] up her thin thighs, toward her drooling pussy. The fairy girl has been playing with the toys around her chamber, you realize, and recently at that. You try to slide in and find virtually no resistance. Apparently in the imps' absence she's been simulating their frenzied lusts, penetrating her gash with two or three dildos at a time. That, or maybe she's been using the minotaur-sized one. Either way, the ruined vagina gapes far too widely for enough friction to get you off. It looks like her asshole is in no better shape. Well, you are nothing if not resourceful.\n\n");
-
-				outputText("You step away from the brain-dead fairy and examine the potions on the alchemy table. Sifting through the vile concoctions, you find what you were looking for- minotaur blood. Snatching the whole bottle, you step back up to the waiting fairy and wrap a fist in her pink-tinged violet hair, jerking her head backwards. She gasps in ecstatic pleasure, the pain bringing her mind back in a flash. Vala's eyes lock onto yours and hot desire curls her face into a wanton, panting grimace. You grab her face and put pressure on her cheeks, forcing her jaw open. The crimson fluid trickles down her throat and her tongue licks her lips with satisfaction, savoring your rough treatment. You cast the empty bottle aside and thrust your cock back into her slit as the walls tighten around you. You begin to rock back and forth, enjoying the feeling of the velvet vice, even groaning as her gash becomes tight enough to begin hurting your shaft.\n\n");
-
-			}
-			//(Female)
-			else if(player.gender == 2) {
-				outputText("You shrug. The girl is so hopelessly lost in pleasure that you doubt she could ever return to the real world anyway. The fairy's rose-scented honeypot glistens with thick beads of clear liquid that well and dribble down her inner thighs, but you'd like to save that nectar for later. Glancing around the room, your eyes settle on the long, wooden pegging table in one corner of the room. Vala has removed most of the pegs to ram into her lonely snatch while you were away, and a variety of carved dildos lie strewn at the foot of the bench. Shopping amongst the lacquered, intensely detailed wooden cocks, you rule them out, one by one. You settle on a huge, minotaur-shaped dildo, over a foot and a half long and nearly six inches wide at the flared head. Grinning, you take the fire-hardened wooden dildo from the ground and hold it triumphantly over your head. You swing it in the air, experimentally, but decide that beating demons unconscious with a minotaur's dick would just be silly.\n\n");
-
-				outputText("Heading back to the chained fairy, you rub the head of the wooden dildo between her petal-shaped labia, turning the cock as you do so, to lubricate the whole 18\" of the monstrous thing. You stroke Vala's juices into the glistening finish until it's difficult to keep hold of and then you place the flared head at the entrance to her rape-worn love box. With exquisite slowness, you press the dildo against her pussy and apply pressure until it begins to part her lips, pushing her slit wider and wider. The fairy finally seems to come to under your teasing penetration and she coos at the stimulation, without questioning the source. She wiggles her tight little butt and shakes her chest, to set her absurdly large breasts swinging in the air, fluid flesh slapping against each other. You encounter resistance just past her lower lips and you roll the flare in circles, cold wood rubbing hot skin and soaking up the squirting girl's natural lubrication. Then, putting your hand on the far end of the dildo, you push as hard as you can, jamming it into the fairy's cunt.");
-			}
-			//Herm
-			else {
-				outputText("You shrug. The girl is so hopelessly lost in pleasure that you doubt she could ever return to the real world anyway. Vala's rose-scented honeypot glistens with thick beads of clear liquid that well and dribble down her inner thighs, but you're hungry for a different sort of meal. Glancing around the room, your eyes settle on the long, wooden pegging table in one corner of the room. The fairy has removed most of the pegs to ram into her lonely snatch while you were away, and a variety of carved dildos lie strewn at the foot of the bench. Shopping amongst the lacquered, intensely detailed wooden cocks, you rule them out, one by one. You settle on a huge, minotaur-shaped dildo, over a foot and a half long and nearly six inches wide at the flared head. Grinning, you take the fire-hardened wooden dildo from the ground and hold it triumphantly over your head. You swing it in the air, experimentally, but decide that beating demons unconscious with a minotaur's dick would just be silly.\n\n");
-
-				outputText("Heading back to the chained fairy, you rub the head of the wooden dildo between her petal-shaped labia, turning the cock as you do so, to lubricate the whole 18\" of the monstrous thing. You stroke her juices into the glistening finish until it's difficult to keep hold of and then you place the flared head at the entrance to her rape-worn love box. With exquisite slowness, you press the dildo against her pussy and apply pressure until it begins to part Vala's lips, pushing her slit wider and wider. The fairy finally seems to come to, under your teasing penetration and she coos at the stimulation, without questioning the source. She wiggles her tight little butt and shakes her chest, to set her absurdly large breasts swinging in the air, plump flesh slapping togeather. You encounter resistance just past her lower lips and you roll the flare in circles, cold wood rubbing hot skin and soaking up the squirting girl's natural lubrication. With a wicked grin, you pull it out of her cunt and brace the monster against her asshole instead. Then, putting your hand on the far end of the dildo, you push as hard as you can, jamming it into the fairy's rump.");
-			}
-			//[Next]
-			dynStats("lus", 80);
-			doNext(useValaOHYEAHKOOLAIDPTII);
-		}
-
-		public function useValaOHYEAHKOOLAIDPTII():void {
-			spriteSelect(85);
-			clearOutput();
-			hideUpDown();
-			//m2
-			if(player.gender == 1) {
-				outputText("Before she can get any tighter, you figure it's time to loosen her back up. Grabbing fistfuls of her hair, you thrust forward, violently, slamming the Vala's head against the stone wall. \"<i>Fuck!</i>\" She shrieks in delight. \"<i>More, more!</i>\" All too happy to comply, you begin ramming her harder, the crushing pressure of her swollen labia milking your cock with every motion. The giant fairy is all too happy to help your rough treatment, and begins to slap her ass back into you, in time with your thrusts, giggling aimlessly between her disjointed pleas for you to cum inside her. You grab her wobbling chest, figuring her bloated breasts are the best handholds you're going to find on the malnourished girl, and are rewarded with an ecstatic cry from the fairy. She clenches down on your [cock] as she orgasms, her pulsing depths making you dig your fingers deeper into her supple flesh. Rocking against her at a painful pace, you grit your teeth and begin to dig your fingers into her mounds, their fluid depths yielding to your passionate throes. Her nipples swell and burst with milk, white cream spraying at your feet with each thrust, and you slide your hands down to pull at the lactating pink flesh, each burst of pale alabaster filling your lust to bursting.\n\n");
-
-				outputText("You cannot keep up your frenzied pace for long, and the fairy's drug-tightened cunt finally takes its prize as your orgasm shudders from your loins. You scream in pleasure and slam her whole body against the wall, lifting her off the ground and holding the side of her face on the molding stone. Every muscle in your body strains as you crush the thin girl's frame between your twitching form and the dungeon wall, " + hipDescript() + " bucking in time to each of your pulsing loads. Vala lets her body be used like a cocksleeve, drinking in the abuse as much as your ejaculate. She twitches, limply, against you and cums again, whispering desperate imperatives to fuck her harder and fill her with your sweet seed.\n\n");
-
-				outputText("Finally spent, you step back and toss the girl off of your [cock], letting her fall back into a slump against the wall, dangling from her manacles. A wicked thought crosses your mind and you step back to the alchemy table. Grabbing armfuls of hexagonal bottles, you flip the girl around, exposing her drooling, empty face and her sore, gushing breasts. You plug a bottle up to her lips and she begins sucking at it automatically, perhaps believing it's a dick in some corner of her ravaged mind. Vala quaffs the Ovi Elixir gratefully, then a second, then a third. By the time you've finished pouring the stuff down her throat, her body has already begun changing. The elixir has pounced on your seed and forced her ovulation, rapidly accelerating the speed of conception. Her tummy pouts, then bloats as your sperm impregnates the fairy in seconds. Her abdomen swells violently, and you suspect that force-feeding her so much so quickly may have resulted in twins or triplets. She moans in blissful pregnancy, her already disproportioned tits gurgling with even greater milky weight. If there was any doubt as to if she could stand under her own power before, it's gone now- even your strength wouldn't be able to move the breeding cow that you've turned her into. Knowing your luck, however, she'll have given birth by the time you check in next.");
-			}
-			//f2
-			else if(player.gender == 2) {
-				outputText("She squeals in delight and her knees wobble, the force of your thrust almost knocking her head into the wall she's shackled next to. You work the huge dildo further into the girl's drooling snatch until a mere 9 inches remains protruding from her bright pink cunny. You smear more of the girl's lubrication along the exposed shaft and turn your back to the fairy. Bending down, you slowly rub your [butt] against the smaller, rounded base of the minotaur cock. Though your end is veiny and sheathed, it lacks the broad flare of the cock head, so you press your " + vaginaDescript(0) + " against it and brace your hands on your knees. Rolling your ass up and down, you let your own excitement-thick lube smear the rounded end before you take a step backwards, toward the fairy. The bulb slides past your " + assholeDescript() + " and presses against your vaginal entrance, its girth exciting and frightening. You take a deep breath, but before you're ready, Vala bucks backward and drives the dildo into your unprepared cunt, provoking a cry of surprise.");
-
-				outputText("You quickly recover and thrust backwards, driving more of the dildo inside your clenching walls while also slamming the fairy's slick box in lusty punishment for her overeagerness. She giggles and humps right back, driving another inch into you, your " + vaginaDescript(0) + " aflame with the delicious stimulation of the bumpy, uneven veins carved into the smooth cock-base. Before long, the two of you have a rhythm, driving the makeshift double-ended dildo into each other until you end up ass-to-ass, your [butt] smacking heavily against the fey girl's supple rear. A large puddle of girl cum has begun forming on the floor, each wet slap of your cunts splashing more of the warm, clear liquid between the two of you. You can feel your orgasm building a knot in your gut and you bite your lower lips as you make your thrusts more forceful, more insistent, slamming yourself down on the veiny cock, driving the flared head deeper into the fairy's body. She, in turn, is just as consumed by lust and tries to jackhammer it right back, until you can feel the rounded base pushing against your cervix, blissful pain coursing through your lower body.\n\n");
-
-				outputText("You clutch your [allbreasts] and squeeze your " + nippleDescript(0) + " until it hurts, the agony giving you strength to drive the dildo back into the fairy, but it's a losing battle. Vala cums before you do, her pulsing walls locking down and driving the dildo out, inch by painful inch, deeper into your body until the base is so far against your gut that it is pushed into your womb with a toe-curling pop. You silently scream in ecstasy and agony, unable to believe that the frail fairy managed to fuck your womb with your own toy. Your strength falters and you slump down, sliding off the shaft with soothing regret, your cervix clenching wildly, still spasming from its penetration. You roll onto your back, fairy cum all around you, even now dripping down the lube-slick cock still sticking out of the girl's pussy, flared tip keeping it locked inside of her. You jill your " + clitDescript() + " for a few minutes afterward, just enjoying the afterglow, lapping at the dripping sprite cum that dribbles onto your face from the fairy's shivering, dick-stuffed cunt. Gradually, your strength returns and you rise, skin slick with the cum pool you've been basking in. You give Vala's ass a slap on your way out- a reward for your favorite brainless fairy.");
-			}
-			//h2
-			else {
-				outputText("She squeals in delight and her knees wobble, the force of your thrust almost knocking her head into the wall she's shackled next to. You work the frightful dildo further past the girl's gaping spincter until a mere 9 inches remains protruding from Vala's bright pink hole. You smear more of the girl's lubrication along the exposed shaft and turn your back to the fairy. Bending down, you slowly rub your [butt] against the smaller, rounded base of the minotaur cock. Though your end is veiny and sheathed, it lacks the broad flare of the cock head, so you press your own pussy against it and brace your hands on your knees. Rolling your ass up and down, you let your own excitement-thick lube smear the rounded end before you take a step backwards, toward the fairy. The bulb slides past your butt cheeks and presses against your vaginal entrance, its girth exciting and frightening. You take a deep breath, but before you're ready, the impaled fairy bucks backward and drives the dildo into your unprepared " + vaginaDescript(0) + ", provoking a cry of surprise.\n\n");
-
-				outputText("You quickly recover and prepare your second surprise. Reaching behind you, you grab your stiffening [cock] and push it backwards, until it's just under the dildo connecting the two of you. With a thrust backwards, you punch your dick into her drooling pussy, while driving more of the dildo inside your clenching walls, slamming the fairy's colon in lusty punishment for her overeagerness. She giggles and humps right back, driving another inch of your shaft into her cunny, your " + vaginaDescript(0) + " aflame with the delicious stimulation of the bumpy, uneven veins carved into the smooth cock-base. Before long, the two of you have a rhythm, driving the makeshift double-ended dildo into each other and thrusting your tail-like cock into Vala until you end up ass-to-ass, your [butt] smacking heavily against the fey girl's supple rear. A large puddle of girl cum has begun forming on the floor, each wet slap splashing more of the warm, clear liquid between the two of you. You can feel your orgasm building a knot in your gut and you bite your lower lips as you make your thrusts more forceful, more insistent, slamming yourself into her violated nethers, the fairy's body as bloated from half of the minotaur dildo as from your own girth. She, in turn, is just as consumed by lust and tries to jackhammer it right back, until you can feel the rounded wooden base pushing against your cervix, her own inner barrier slamming against your cockhead, blissful pain coursing through your lower body.\n\n");
-
-				outputText("You clutch your [allbreasts] and squeeze your " + nippleDescript(0) + " until they hurt, the agony giving you strength to drive the dildo back into the fairy, but it's a losing battle. Vala cums before you do, her pulsing walls locking down and driving the dildo out, inch by painful inch, deeper into your body until the base is so far against your gut that it is pushed into your womb with a toe-curling pop. You silently scream in ecstasy and agony, unable to believe that the frail fairy managed to fuck your womb with your own toy. Your strength redoubles and you thrust back, your [cock] penetrating her spongy, well-used cervix, her womb sucking you inside it. You release the knotted tension, spraying your spunk deep inside her. You slap your [butt] against hers with each pulsing load, your " + vaginaDescript(0) + " clenching at the dildo stuffing it even as your empty your seed into the chained slave.  You try to go limp, but the double penetrated girl keeps you from pulling out, both of Vala's milking holes pining you against her until every last drop of your sperm has filled her greedy womb. Fairy cum drips down your length, while the flared tip deep inside her large intestine keeps your pussy twitching against her posterior. You jill your " + clitDescript() + " for a few minutes afterward, just enjoying the afterglow as your strength returns and the fairy's body unclenches, releasing you from your breeder's embrace, the minotaur dildo still halfway up her ass. You give your fairy girl's rump a slap on the way out- a reward for her brood mother-sized hips.\n\n");
-			}
-			//DAH END
-			player.orgasm();
-			dynStats("cor", 1);
-			doNext(playerMenu);
-		}
 		//[Wake]
 		public function wakeValaUpBeforeYouGoGo():void {
-			spriteSelect(85);
 			clearOutput();
-			//(Male)
-			if(player.gender == 1) {
+			if (!recalling) dynStats("lus", 999);
+			sceneHunter.selectGender(dickF, vagF, null, hermF);
+			//=====================================================
+			function dickF():void {
 				outputText("You don't bother searching the room for a key to her shackles, knowing she's just clapped them over her limbs for the feel of the metal. You pull them open and, predictably, Vala slumps to the ground in an ungainly heap. The fall seems to have roused her, at least, because she blinks, slowly, several times before lifting her head to stare blankly at you. You give her a moment to gather herself but when she's managed to assemble what wits she's got left, it's clear she only recognizes you as her pleasure giver. She slowly curls her mouth into a hopeful smile. \"<i>How can Vala please Master?</i>\" she asks in an innocent voice tainted by husky desire. It seems she still shows no sign of improvement. Well, at least you can both take some enjoyment from your visit.\n\n");
 
 				outputText("The fairy's grinding and the sweet scent leaking out of her honey pot is as tempting as ever. You push the girl back gently and nod your head, stripping your [armor] piece by piece, teasing the fairy with your slowness. She curls her lips into a wanton smile. \"<i>Now fuck Vala!</i>\" she begs. You chuckle and show your satisfaction at the small restoration of her mind by grabbing one of her supple tits and leaning down to suck out some of her chest-bloating milk. She arches her back under your touch and clenches her muscles. Her hands find your genitals, eager fingers sliding across your sensitive [skin.type]. Her hand grabs your [cock], thumb and pinkie forming a tight circle at your base while her other fingers stroke up and down your shaft. The fairy's touch is surprisingly light for the rough treatment she's endured, and you're quickly brought to hardness under her caresses.\n\n");
@@ -406,17 +315,17 @@ public class ValaScene extends BaseContent implements SaveableState
 				outputText("Whatever small parts of her mind may be returning, she clearly hasn't conquered her sex-madness, because she simply cannot restrain herself any longer. Fluttering her wings rapidly, the girl lifts out of your embrace and rises above you, lining her sex up with yours, thick beads of wetness trickling down from her gaping pussy. With a mad giggle, she stops flapping and drops down, impaling herself on your length.\n\n");
 
 				outputText("Vala slides onto your cockhead with gleeful squeals as you part her rose-petal labia and slide into her well-worn depths. Her body's recovered some of its tightness, and hugs your [cock] comfortably, walls clenching as her slavering cunt sucks your dick into her well-lubricated passage. Her abdomen distorts at your insertion, but instead of pain or fear, her expression is utter bliss, her pink eyes fluttering as she wordlessly mutters sweet nothings into your chest. She's tight and getting tighter as you pump slowly, working your long inches into the fairy's needy hole. Her body is hot around you and her milky tits drool with each thrust, their milk fragrant like rose water. At this rate, the condom-tight girl is going to make you blow your load before you get a chance to give her an orgasm of her own.");
+				doNext(dickF_2);
 			}
-			//(Female)
-			else if(player.gender == 2) {
+			function vagF():void {
 				outputText("You don't bother searching the room for a key to her shackles, knowing she's just clapped them over her limbs for the feel of the metal. You pull them open and, predictably, Vala slumps to the ground in an ungainly heap. The fall seems to have roused her, at least, because she blinks, slowly, several times before lifting her head to stare blankly at you. You give her a moment to gather herself but when she's managed to assemble what wits she's got left, it's clear she only recognizes you as her pleasure giver. She slowly curls her mouth into a hopeful smile. \"<i>How can Vala please Mistress?</i>\" she asks in an innocent voice tainted by husky desire. It seems she still shows no sign of improvement. Well, at least you can both take some enjoyment from your visit.\n\n");
 
 				outputText("You select what looks like a reasonably clean spot in the room and carry the girl with you. Sitting cross-legged, you let her sit in your lap as you brush Vala's violet hair from her face. Spitting on your hand, you wipe some of the grease and dirt from her face, while she coos at your touch. Under all the grime, she's actually quite pretty, an impossibly frail yet timeless sort of beauty that reminds you of snowflakes back home. You smile, despite yourself, and give the girl a little kiss of affection, stroking her tattooed shoulders gently. She returns your kiss with a famished sort of desperation, trying to gobble your face down in gulping slurps that force you to pull back and wipe the spittle from yourself. She's just not going to be happy until she gets something inside her.\n\n");
 
 				outputText("You ask her if she feels up to flying, and she nods, eager to please. By way of demonstration, she flutters her dragonfly wings and lifts a couple feet into the air, heavy chest causing her to sway precariously. You stroke your hands up her legs, pulling them around your shoulders and drawing the girl's pussy toward your head. Vala's labia is almost artistic- hairless folds like rose petals, her leaking excitement like morning dew. You lean in and lick gently around her slit, the tip of your tongue tracing teasing circles around her small, overstimulated clit. She squeals in a pitch that you thought only dogs could hear and her legs clench around your head. Sliding your tongue into her gash, you savor her sweet warmth.");
+				doNext(vagF_2);
 			}
-			//(Herm)
-			else if(player.gender == 3) {
+			function hermF():void {
 				outputText("You don't bother searching the room for a key to her shackles, knowing she's just clapped them over her limbs for the feel of the metal. You pull them open and, predictably, Vala slumps to the ground in an ungainly heap. The fall seems to have roused her, at least, because she blinks, slowly, several times before lifting her head to stare blankly at you. You give her a moment to gather herself but when she's managed to assemble what wits she's got left, it's clear she only recognizes you as her pleasure giver. She slowly curls her mouth into a hopeful smile. \"<i>How can Vala please Mistress?</i>\" she asks in an innocent voice tainted by husky desire. It seems she still shows no sign of improvement. Well, at least you can both take some enjoyment from your visit.\n\n");
 
 				outputText("Scooping her up in your arms, you marvel at the weightlessness of the fairy, even her chest-slapping titties are nothing to you. Carrying her to the center of the room, you set the girl down and retrieve her large, wooden bowl from a corner of the room. The three-gallon bowl's 'Bitch' title has been scratched out and replaced by a rough 'Vala.' You plop it down, in front of her, and fish around the tubes and toys hanging from the ceiling, selecting a promising looking one. The pale hose has a large, metal, imp-shaped cock for a tip and a nozzle at the base of the foot-long dildo. You twist the lever an inch and a slow, steady stream of cum comes leaking out the end. Grinning, you let the leaking iron dick splash ropey strands of slime across the fairy's tattooed backside, along her impossibly frail dragonfly wings, and into her glimmering purple hair.\n\n");
@@ -424,18 +333,10 @@ public class ValaScene extends BaseContent implements SaveableState
 				outputText("Finally reaching the bowl, you twist the nozzle all the way and are nearly knocked to the ground by the pressure. The fire hose of sperm blasts into the large wooden bowl and splashes upward, painting the girl's face with alabaster cream. Before long, the bowl is full to overflowing and you cut off the flow of cum from the device. Kneeling down next to her, you stroke the back of her head and apply just the slightest bit of pressure toward the seething meal. \"<i>Dinner time, Vala,</i>\" you offer to the fairy, and her resistance crumbles, burying her face in the spunk, bubbles rising from the frothy bowl as she begins to suck it down with mindless obedience.\n\n");
 
 				outputText("Your [cocks] is getting hard from the display, and you figure it'd be easier to satisfy the girl if you filled her from multiple holes. Reaching up again, you pull down a different hose, this time selecting a dildo that looks like an amalgam of several dick types. It's flared, like a horse's, knotted at the base, like a dog's, bulbous in the middle, like a lizard's, and barbed all along, like a cat's. You have no idea what kind of cum is filling this one, but you kind of want to see what'll pop out of the broken fairy. Hauling it down, you slide the hose behind you, threading it around your [butt], along your " + vaginaDescript(0) + ", and under your [cocks]. You bring your shaft to her gaping cunt and rub along her oozing labia, the puffy flesh inflamed with her desire. Slowly, you begin to slide your [cock] in first, letting her walls adjust to your girth, before pressing the dildo-nozzle into her twitching hole. The pressure of the strangely warm metal drives the fairy crazy, and her steady guzzle from the bowl becomes frantic gulps, her belly beginning to show a paunch from her meal. You let the girl's crystal cum soak the chimera-cock before feeding it into her slavering pussy, inches at a time. The girl's brood mother hips are so wide that you manage to penetrate her recesses with both cocks, though her abdomen stretches violently as the two cocks work their way deeper into her.");
+				doNext(hermF_2);
 			}
-			dynStats("lus", 999);
-			//[Next]
-			doNext(wakeMeUpBeforeValaGoGosPtII);
-		}
-
-		public function wakeMeUpBeforeValaGoGosPtII():void {
-			spriteSelect(85);
-			clearOutput();
-			hideUpDown();
-			//m2
-			if(player.gender == 1) {
+			//PART 2==========================================================
+			function dickF_2():void {
 				clearOutput();
 				outputText("You spot an unsecured set of chained manacles on the floor and an idea strikes you. Vala still sliding along your shaft, you bend down and grab the fetters, snapping one around the girl's neck like a collar. With a shudder at the cold, you lift the fairy up and lock the other end of the shackles around the root of your [cock], steel snapping around your base tightly. The makeshift cock-ring works perfectly as your " + hipDescript() + " quiver, your body trying to orgasm but denied release by the metal loop. The fairy, meanwhile, thrashes atop your groin, the chain of her collar swinging between her tits, buffeting them with enough force to spray small white streams as she rides you. Her purple hair glimmers pink in the dull light of the dungeon as it bounces right along with her rocking hips. Even the diminished pulses of sunlight streaming from her stained and tattooed skin seems brighter as she is filled labia to cervix by your straining fuckpole.\n\n");
 
@@ -446,17 +347,24 @@ public class ValaScene extends BaseContent implements SaveableState
 				outputText("Vala is enjoying your pulsing erection inside her far too much to make it easy for you. You've seen her tricks, however and you thrust more forcefully than she was braced for, finally pulling the fey cocksleeve off your root. Without wasting a moment, you pull the locking bar out of the shackle and finally allow your orgasm to blast into her waiting womb. You slip in the fairy's cum puddle and fall on your [butt] as your [cock]  dumps its long-delayed loads inside the distended girl. The feeling of cum filling her pussy drives her to a fourth orgasm, her toes curling and wings flapping wildly. She's so tightly clenched around you that there's nowhere for your cum to run out, so her womb bloats to a pregnancy-thickness and she loses the strength to keep writhing in your lap, simply collapsing into your chest with a weak cooing.\n\n");
 
 				outputText("She's unconscious by the time you're finished seeding the fairy, the girl's chest barely rising and falling under her disproportionately huge breasts and massively inflated womb. Even better than a goblin, you reflect, marveling at the fairy's resilience to the rapid sequence of orgasms. Though, you suppose, once you've already been fucked mindless, there's little left to break. You resolve to check back on her again.");
+				if (!recalling) player.sexReward("vaginalFluids", "Dick");
+				sharedEnd();
 			}
-			//f2
-			else if(player.gender == 2) {
+			function vagF_2():void {
+				clearOutput();
 				outputText("You close your eyes and run your tongue into her groin with teasing flicks and probing touches, exploring her nethers and lapping up the constant flow of fae cum that dribbles from her perpetually wet body. She shifts in the air, but her clenching thighs keep you from seeing anything but her juicy snatch. When a hot, humid panting puffs against your " + vaginaDescript(0) + ", you realize she must've done a 180 in the air, wings keeping her in a vertical 69. She descends on your pussy with relish, savoring the taste of your moist body. Her needy tongue is as delicately thin as the rest of her body, but it is LONG. She threads it into your depths and you buck your hips as it just keeps going deeper and deeper. You moan into her abdomen and flatten your own tongue to bring as much roughness against her twitching walls as you can, trying to get the little minx off before she sucks your orgasm from you.\n\n");
 
 				outputText("It's a hopeless race, however, as she quickly zeros in on your g-spot, curling her tongue to coil thickly inside of you. You grab Vala's purple hair and crush her head into your crotch, adorable button nose grinding against your " + clitDescript() + ", momentarily distracting you from the fairy's pussy as she tongue-rapes yours. When you cum, your body tenses and you hold your breath as your " + hipDescript() + " threaten to draw the small girl's whole head into your " + vaginaDescript(0) + ". You hear a slurping and realize she's drinking your girl cum. The thought is enough to remind you about the fairy slit at eye-level just as she cums from the taste of your body. She squirts wildly into your face, small jets of hot, sticky liquid spraying into your mouth, over your cheeks, and into your eyes.\n\n");
 
-				outputText("You blink, and give the little brat a bump on the back of the head for her sneaky facial. She flutters right-side up again and when you see her face, your heart leaps in your chest. Your orgasm has washed her visage clean and you realize she's breath-taking. The soft curves of her heart-shaped face, the timeless alabaster of her flawless skin, and most surprisingly, the glimmers in her almond-shaped, pink eyes. She kisses you, softly this time, almost affectionately, the taste of your sex still wet on her lips. Perhaps your exchange unlocked the memory of sweeter days with her fairy sisters? She might never be able to recapture those lost days, but in time, perhaps she can forge a new life among larger folk. You return her kiss and redress as she finally gets some restful, if wet, sleep.");
+				outputText("You blink, and give the little brat a bump on the back of the head for her sneaky facial. She flutters right-side up again and when you see her face, your heart leaps in your chest. Your orgasm has washed her visage clean and you realize she's breathtaking. The soft curves of her heart-shaped face, the timeless alabaster of her flawless skin, and most surprisingly, the glimmers in her almond-shaped, pink eyes. She kisses you, softly this time, almost affectionately, the taste of your sex still wet on her lips. Perhaps your exchange unlocked the memory of sweeter days with her fairy sisters? She might never be able to recapture those lost days, but in time, perhaps she can forge a new life among larger folk. You return her kiss and redress as she finally gets some restful, if wet, sleep.");
+				if (!recalling) {
+					player.sexReward("vaginalFluids", "Lips");
+					player.sexReward("saliva", "Vaginal");
+				}
+				sharedEnd();
 			}
-			//h2
-			else if(player.gender == 3) {
+			function hermF_2():void {
+				clearOutput();
 				if(player.cockTotal() > 1) outputText("It'd be a shame if you didn't get a chance to stuff all her holes, so you grab your " + cockDescript(1) + " and slide it along her ass cheeks, pulling out just enough to let it rest against her twitching sphincter. With a probing pinkie, you stretch out her rectum, the muscle spongy from the endless cavalcade of imp-rape you saved her from. You slide in and are pleasantly surprised that her ass is nearly as slick as her pussy, already lubricated by some body-altering drug the imps must've fed her. You grunt in surprise when you feel your two cocks rubbing against each other through the fleshy wall separating her vagina from her ass, and the extra friction nearly makes you blow your load then and there, but by force of will, you hold it back, teeth gritted in the effort.\n\n");
 
 				outputText("Your " + vaginaDescript(0) + " needs some loving too, so you grab the imp dildo you filled the fairy's bowl with and slide it between your " + hipDescript() + ", the cold metal exciting your moist sex and driving your shaft deeper into the girl. Hesitating at first, your restraint crumbles and you press the steel tip to your wet sex, and roll it around your clit, the chill sending electric tingles through your groin and sets a raging fire in your loins as your flesh walls pulse from your racing heart. You guide the imp-shaped dildo to your pussy and slide the demonically sculpted toy into your body, unyielding metal parting your soft, supple skin, folds of pink flesh sucking at the knobby shaft. You gasp and nearly pull out of the tight confines of the fairy's double-stuffed cunt, but with a quick thrust, you penetrate yourself and jam more long inches into Vala.\n\n");
@@ -469,17 +377,24 @@ public class ValaScene extends BaseContent implements SaveableState
 				outputText("Inside Vala's drooling pussy, your [cock] twitches as your load rushes over the steel dildo and spurts from your cockhead in hot ropes of gooey love. You manage to think through the suffocating pleasure addling your brain and flick the nozzle of the chimera dildo, the tube kicking to life. The monstrous hose vibrates your entire lower body and you tremble helplessly as you're stimulated nearly to breaking. The fairy girl, already happily shattered, merely lets out a stream of mad laughter, cum bubbling over her lips as her cunt is turned into a cornucopia of monster jizz. A cunny-copia, you giggle to yourself, her insane glee infecting your exhausted body. The double-penetrated fae bloats and swells under the pressure of the cum-pump, supplemented your own obscene spunk stuffing.\n\n");
 
 				outputText("When your orgasm subsides, you finally manage to switch off the imp pump in your " + vaginaDescript(0) + " and pull it out, tenderly. Your abdomen has been filled enough to leave a paunch of infernal cream below your belly. You press down on it, demonic ichor spilling out of your swollen vagina and splashing between your " + hipDescript() + ". You sigh and hope the seed doesn't take hold. Speaking of taking hold, you switch off the gushing monster pump and carefully pull your [cocks] out of the fairy, making sure the metal dildo remains fixed in place to hold the cum inside. You slide out from between her legs and rise unsteadily to look at your handiwork. The fairy has been filled, top to bottom, all three gallons you sprayed in her bowl gone down her thirsty gullet. The jizz you packed into her womb bloats her even further, the girl's belly nearly four times larger than it was when you found her. She wriggles on the ground, lost to the cummy heaven her mindless body has been plunged into. You're not sure what kind of fucked up child that little exchange would give her, but if anybody had the vagina to pass a monster, it'd be Vala. You probably won't get to find out, though. Who knows what kind of incubation period the chimera-kid will have?");
+				if (!recalling) {
+					player.sexReward("vaginalFluids", "Dick");
+					player.sexReward("cum", "Vaginal");
+				}
+				sharedEnd();
 			}
-			//[End Encounter]
-			player.orgasm();
-			dynStats("cor", 1);
-			flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
-			doNext(playerMenu);
+			function sharedEnd():void {
+				if (!recalling) {
+					dynStats("cor", 1);
+					flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
+					doNext(playerMenu);
+				}
+				else doNext(recallWakeUp);
+			}
 		}
 
 		//[Reject]
 		public function rejectFuckingVala():void {
-			spriteSelect(85);
 			clearOutput();
 			if(flags[kFLAGS.TIMES_PC_DEFEATED_VALA] == 0) {
 				outputText("The fairy's weak insistence has begun to get obnoxious. What kind of prisoner dry humps her rescuer? Actually, if the heavy flow of lubricating girl cum dripping out of her pussy is any indication, it's the wettest humping you've had with your [armor] still on. You seize the girl's shoulders and hold her up, pushing her away from your goo-stained lower body. You assure the girl that you won't be having sex with her here. It's far too dangerous, you tell her, to leave yourself vulnerable right now. You'll take her to safety when the demons are defeated. You try to impress on her the importance of speed and stealth, but you might as well be talking to a big-breasted brick wall. When she makes a grab at your crotch, you've had enough and throw her back.\n\n");
@@ -494,94 +409,94 @@ public class ValaScene extends BaseContent implements SaveableState
 				outputText("The fairy stumbles up and fondles herself madly, already looking close to defeat. \"<i>Bitch doesn't want to leave masters!  Masters have good cum.  Let bitch show you how wonderful it tastes.</i>\" she demands, madly. Her wings gain sudden life, flapping rapidly to pull her frail body off the floor. Hovering before you, she curls her fingers into desperate claws and rakes at you. She's too far gone, you realize. You're going to have to fight the broken fairy, AGAIN!");
 			}
 			//Initiate fight
-			startCombat(new Vala(),true);
-			doNext(playerMenu);
+			if (!recalling) {
+				startCombat(new Vala(),true);
+				doNext(playerMenu);
+			}
+			else {
+				outputText("\n\nSome time passes...");
+				eachMinuteCount(30);
+				doNext(SceneLib.dungeons.deepcave.fightValaVictory);
+			}
 		}
 
 		//[Fuck]
 		public function valaFightVictoryFuck():void {
-			spriteSelect(85);
 			clearOutput();
-			//(Female)
-			if(player.gender == 2) {
+            sceneHunter.selectGender(dickF, vagF, null, hermF);
+            //====================================================
+			function vagF():void {
 				outputText("If the girl's got energy to spare, you'd better try to wear her down or she might alert more demons after you leave. Time to see just how strong her drug-fuelled wings have become. Stripping down, you step up to the fairy and present your " + vaginaDescript(0) + " to her. She's all too happy to lavish kisses on your lower lips, hot tongue sliding along your labia and tip teasing your " + clitDescript() + " with lapping flicks. Licking your lips, you bend over and pull her legs up, forcing her into a hand-stand as you raise the girl's gushing sex to your head. It's startling how light the fairy is; even her flesh-slapping titties are practically weightless as you loop an arm around her impossibly thin waist and bury your face in her groin, breathing in her honey-sweet nectar as she squirts hard enough to splash you with her warm juice. You bear down on her stimulation-swollen clit and suck the joy buzzer hard enough to pull it from the thin skin sheath. Biting lightly on the engorged button, you whisper into the fairy's cunt, \"<i>Let's fly.</i>\"\n\n");
-
 				outputText("She needs no additional urging, and wraps her whip-thin arms around your [butt] with a grip like steel. Her corruption-strengthened dragonfly wings flutter uselessly for a moment, but as your excitement begins to drip warm fluid onto her tongue, she flaps like she means it.  ");
 				//(PC Has Wings:
 				if(player.wings.type > Wings.NONE) outputText("You decide to give her a hand, and flap your " + player.wings.desc + " as hard as you can, the added thrust giving her the start she needs.  ");
-
 				outputText("Like a hummingbird on coffee, the fairy's wings blur as she pulls the two of you into the air and a thrill of glee sends shivers down your spine as the two of you slowly circle the room, clinging to each other in a desperate 69. Under her well-practiced mouth, you can feel your " + vaginaDescript(0) + " drooling nearly as much as the fey girl's, your utter dominion of the fairy delighting you nearly to the verge of orgasm.\n\n");
-
 				outputText("Still, she was such a willful creature, attacking you like that. Pets can't be allowed to bite their masters without punishment. Spare the rod, spoil the fairy. Lacking a rod, you use the next best thing. Keeping one arm firmly pinning the girl's thighs around your head, you reach up with the other and begin to feed fingers into her imp-loose cunt. The first three fingers slide in with practically no resistance, and your pinkie pushes in with only a bit of effort. When you reach your thumb, the girl has begun rocking her hips against your hand, rubbing her clit on your arm like a tiny tongue, smearing her sticky grease along your wrist. You push down and manage to fit your whole hand inside the girl, fingers cupped to a point, thumb tucked in your palm. She gurgles and jams her mouth against your " + vaginaDescript(0) + ", doing her best to please her Mistress. You savor the wet velvet feel of her depths, sliding in and out for a moment before you decide to begin the punishment.");
+                if (!recalling) dynStats("lus", 99, "cor", 1);
+                doNext(vagF_2);
 			}
-			//(Male)
-			else if(player.gender == 1) {
+			function dickF():void {
 				outputText("If the girl's got energy to spare, you'd better try to wear her down or she might alert more demons after you leave. Commanding her to bow before you, the broken fairy is all too happy to comply, falling on her face, her arms spread wide, panting with desire. You circle around her and strip your [armor] off, admiring her plump little ass, all the plumper for how whip-thin her waist and legs are. You bend down to grab her waist and haul her ass upward, spearing her on your stiffening [cock] without further ceremony. It's important she knows that foreplay is for obedient pets, you note to yourself with a grin. With a vicious thrust, you fill the girl's stretched pussy and bend her over at a right angle. Smacking her ass, you command the little bitch to fly and she shivers with delight.\n\n");
-
 				outputText("She needs no additional urging, and wraps her whip-thin legs around your " + hipDescript() + " with a grip like steel. Her corruption-strengthened dragonfly wings flutter uselessly for a moment, but as your excitement begins to leak globs of pre-cum into her sucking box, she flaps like she means it. ");
 				//(PC Has Wings:
 				if(player.wings.type > Wings.NONE) outputText("You decide to give her a hand, and flap your " + player.wings.desc + " as hard as you can, the added thrust giving her the start she needs.  ");
-				outputText("Like a hummingbird on coffee, the fairy's wings blur as she pulls the two of you into the air and a thrill of glee sends shivers down your spine as the two of you slowly circle the room, you mounting her doggy-style, hands gripping her ribs as you lean over her. The tight clenching of her overburdened flight turns her loose pussy into a tight, clenching sphincter that practically milks your shaft with every heartbeat.\n\n");
-
+				outputText("Like a hummingbird on coffee, the fairy's wings blur as she pulls the two of you into the air and a thrill of glee sends shivers down your spine as the two of you slowly circle the room, you're mounting her doggy-style, hands gripping her ribs as you lean over her. The tight clenching of her overburdened flight turns her loose pussy into a tight, clenching sphincter that practically milks your shaft with every heartbeat.\n\n");
 				outputText("She makes a short circuit around the room, slowing enough to savor each thrust, your pounding giving her a short burst of speed as you ride the bitch through the air, every muscle in both of your bodies tense with the effort. You're still not convinced she's been sufficiently humbled, however, so you thread your arms under her wings and loop your hands around the sides of her face. You slide your forefingers into her mouth and hook the fingers to pull her cheeks wide open. Like a horse's reins, you jerk the fairy's head back and wrap your other fingers under her jaw, fully controlling her head. She tries to speak, but slurs the words, drool gushing from her wrenched mouth. You guide her head up, and she rises, descending when you yank it down. Satisfied that she understands your commands, you decide that it's time to take your mare through her paces.");
+				if (!recalling) dynStats("lus", 99, "cor", 1);
+                doNext(dickF_2);
 			}
-			//[Fuck]
-			//(Herm)
-			else {
+			function hermF():void {
 				outputText("If the girl's got energy to spare, you'd better make sure she can't leave under her own power or she might alert more demons after you leave. You could always chain her back up, but you think you've got a better idea. Scooping her up in your arms, you marvel at the fairy's lightness, even her chest-slapping titties are practically weightless to you. Carrying her to the center of the room, you set the girl down and retrieve her large, wooden bowl from a corner of the room. The bowl has the word \"<i>Bitch</i>\" scratched on it in the ragged style of imps and is large enough to hold perhaps three gallons of food. You plop it down, in front of her, and fish around the tubes and toys hanging from the ceiling, selecting a promising looking one. The pale hose has a large, metal, imp-shaped cock for a tip and a nozzle at the base of the foot-long dildo. You twist the lever an inch and a slow, steady stream of spoo comes leaking out the end, startling you to realize that the hose isn't white, but simply full of cum. Grinning, you let the leaking iron dick splash ropey strands of jizz across the fairy's tattooed backside, along her impossibly frail dragonfly wings, and into her glimmering purple hair.\n\n");
-
 				outputText("Finally reaching the bowl, you twist the nozzle all the way and are nearly knocked off your feet by the pressure. The fire hose of sperm blasts into the large wooden bowl and splashes upward, painting the girl's face with alabaster cream. Before long, the bowl is full to overflowing and you cut off the flow of cum from the device. Standing over her, you begin shedding your clothing and place the ");
 				outputText("underside of your [foot] against the back of her head and apply pressure, forcing her face toward the seething meal. \"<i>Eat up,</i>\" you command the fairy, and her resistance crumbles, allowing her face to be fully submerged in the spunk, bubbles rising from the slimy bowl as she begins to suck it down with mindless obedience.\n\n");
-
 				outputText("Your own cock is getting hard from the display, and you figure it'd be easier to stuff the slut if you filled her from multiple holes. Reaching up again, you pull down a different hose, this time selecting a dildo that looks like an amalgam of several dick types. It's flared, like a horse's, knotted at the base, like a dogs, bulbous in the middle, like a lizard's, and barbed all along, like a cat's. You have no idea what kind of cum is filling this one, but you kind of want to see what'll pop out of the broken fairy. Hauling it down, you get to your knees and slide the hose behind you, threading it over your [butt], along your " + vaginaDescript(0) + ", and under your [cock]. You bring the shaft to her gaping cunt and rub along her oozing labia, the puffy flesh inflamed with her desire. Slowly, you begin to slide your own cock in first, letting her walls adjust to your girth, before feeding the dildo-nozzle into her twitching hole. The pressure of your cock and the strangely warm metal drives the fairy crazy, and her steady guzzle from the bowl becomes frantic gulps, her belly beginning to show a paunch from her meal. You let the girl's crystal cum soak the chimera-cock before driving more of it into her slavering pussy, inches at a time. The girl's hips have been fucked so wide that you manage to penetrate her recesses with both cocks, though her abdomen stretches violently as the two cocks work their way deeper into her.");
+				if (!recalling) dynStats("lus", 99, "cor", 1);
+                doNext(hermF_2);
 			}
-			dynStats("lus", 99, "cor", 1);
-			//Next
-			doNext(valaFightVictoryFuckPtII);
-		}
-
-		//[Fuck]
-		public function valaFightVictoryFuckPtII():void {
-			spriteSelect(85);
-			clearOutput();
-			//fem2
-			if(player.gender == 2) {
-				outputText("One by one, you curl your fingers into a ball, tightening your hand into a fist within the girl's pink tunnel, sensitive walls parting before your hardening grip. The fairy's wings spasm as she orgasms under your clenching fist, nearly dropping the two of you back onto the stone floor, before she catches herself and pulls up. You pump your fist into her tunnel, thick as a minotaur's cock, and the girl's pussy gushes in ecstasy. You can feel her inner walls flexing against your arm, coiled rings of muscle tightening in pinching contractions, actually pulling your arm deeper into her cunt. You pull back, reminding her greedy cunny who the Mistress is, fist stretching her abdomen in a way that brings a shuddering orgasm to your quivering sex. Your own walls tighten around the fairy's fair features, trapping her tongue inside you as your " + vaginaDescript(0) + " squirts down her lips and across her face. She begins to spin in mid-air and the force of the rotation is nearly enough to shake you off of the oversexed girl's body.\n\n");
-
+            //PART 2============================================================================
+            function vagF_2():void {
+			    clearOutput();
+                outputText("One by one, you curl your fingers into a ball, tightening your hand into a fist within the girl's pink tunnel, sensitive walls parting before your hardening grip. The fairy's wings spasm as she orgasms under your clenching fist, nearly dropping the two of you back onto the stone floor, before she catches herself and pulls up. You pump your fist into her tunnel, thick as a minotaur's cock, and the girl's pussy gushes in ecstasy. You can feel her inner walls flexing against your arm, coiled rings of muscle tightening in pinching contractions, actually pulling your arm deeper into her cunt. You pull back, reminding her greedy cunny who the Mistress is, fist stretching her abdomen in a way that brings a shuddering orgasm to your quivering sex. Your own walls tighten around the fairy's fair features, trapping her tongue inside you as your " + vaginaDescript(0) + " squirts down her lips and across her face. She begins to spin in mid-air and the force of the rotation is nearly enough to shake you off of the oversexed girl's body.\n\n");
 				outputText("You'll be damned if she's going to shake you loose before you break the bitch. You tighten your grip around her waist and jam your fist deep into her cunt, up to your elbow, her spongy cervix posing practically no barrier as your hand punches into her imp-tainted womb, bloating her belly like she's been thrust atop a flagpole. The fairy spins out of control, bucking and writhing in clenching frenzy, slamming against the ceiling and walls in wild flight as you unclench your fist, to feel the sucking wet heat of her innermost recesses slurping at your fingers, gushing girl cum spraying in regular gouts, her pussy climaxing like a breached dam. Her blurring wings falter and the two of you begin to tumble to the ground, but the enslaved slut knows her place well enough to make sure that she lands between you and the floor, your bodies slumping together as her back arches in orgasmic grinding. Sufficiently tamed, you brace your free hand against her spasming legs and pull your arm out the girl's pussy in one motion, her distorted abdomen collapsing against her overstretched vaginal cavity, the bulging outline of her womb still visible against the thin girl's waist.");
-
 				outputText("Reaching down to grab the fairy's exhausted wings, you wipe the cum bath from your arm on the soft dragonfly-like membranes, figuring the slime should keep her from taking flight until it has a chance to dry. Satisfied by the ride, you figure it's time to move on to the girl's former masters.");
-				//[End Encounter]
-			}
-			//male2
-			else if(player.gender == 1) {
-				outputText("You pick up the speed of your animalistic fucking and guide the fairy's head on a bobbing path through the air, using short dives to slam your [cock] deeper into her cunt. She giggles mindlessly at your abuse and her drooling box clenches tighter still, her passage almost virginal from the exertion of the flight. You can feel an orgasm building in your gut and you twist the girl's head all the way back until she turns over, flying upside down. Your grip on her head combined with her legs coiled around your [butt] keep you locked inside the girl as you command her to 'land' on the ceiling, her wings reaching a frenzied pace to keep the two of you suspended in the air. When she touches the sulfur-stained stone, you brace yourself against the slut and redouble your pounding, every thrust squirting increasingly larger bulbs of pre-cum into the needy hole. Like a dog, she pounds back, slavering pussy oozing down your groin, along your chest, and sliding into your nose, filling your head with images of blissful rose gardens and the moist smell of fallen leaves after an autumn rain. No longer able to hold back, you empty your load inside the upside down fairy, ropes of gooey spunk filling her cunt even as she rocks back and forth, her intensely clutching tunnel slurping every drop from your suspended body.\n\n");
-
-				outputText("Her orgasm comes a moment later, and her wings lose their wild pace, sending the two of you tumbling out of the air, toward the ground. You jerk her head back, painfully, but the girl is lost in the depths of her creaming, muscles clenching and unclenching uselessly as her seed-stuffed sex sprays the girl's clear cum into the air, crystal bubbles spilling around your falling bodies. She giggles and mumbles something about cushions before giving one last, hard flap, sending your bodies spiraling. The fairy pet's wings twists you around so that when the two bodies land, she is under you, her sex-inflated chest cushioning her fall like liquid body pillows. The sudden shock sends her into another wild orgasm, crushing you inside her impossibly tight pussy, her womb bloating from the trapped sperm your panic-fuelled body churns out. You gasp at the descent, just letting the bitch's lower lips milk your [cock], until you gather yourself. Despite your weight, she seems uninjured, her eyes rolling aimlessly in their sockets, a brainless smile plastered across her face. You rise, unsteadily, and leave the fairy lying there, ass in the air, gushing cunt stuffed with your cum all the way to her clit, your exhausting creampie finally satisfying the fey whore. You'd have to be crazy to try that again, you pant, trying to slow your heartbeat. Next to that wild ride, the demons should be no problem, you sigh, fatigued.");
-			}
-			//herm2
-			else {
-				//[2 dicks –
-				if(player.cockTotal() > 1) {
-					outputText("It'd be a shame if you didn't get a chance to stuff all her holes, so you grab your " + cockDescript(1) + " and slide it along her ass cheeks, pulling out just enough to let it rest against her twitching sphincter. With a probing pinkie, you stretch out her rectum, the muscle spongy from the fuckings the demons have tattooed all down her back. You slide in and are pleasantly surprised that her ass is nearly as slick as her pussy, already lubricated by some body-altering drug the imps must've fed her. You make a note to give her a dash on both the ass and pussy columns of her score-card body-tattoo. You grunt in surprise when you feel your two cocks rubbing against each other through the fleshy wall separating her vagina from her ass, and the extra friction nearly makes you blow your load then and there, but by force of will, you hold it back, teeth gritted in the effort.\n\n");
+				if (!recalling) {
+					player.sexReward("vaginalFluids", "Lips");
+					player.sexReward("saliva", "Vaginal");
 				}
+				sharedEnd();
+            }
+            function dickF_2():void {
+			    clearOutput();
+                outputText("You pick up the speed of your animalistic fucking and guide the fairy's head on a bobbing path through the air, using short dives to slam your [cock] deeper into her cunt. She giggles mindlessly at your abuse and her drooling box clenches tighter still, her passage almost virginal from the exertion of the flight. You can feel an orgasm building in your gut and you twist the girl's head all the way back until she turns over, flying upside down. Your grip on her head combined with her legs coiled around your [butt] keep you locked inside the girl as you command her to 'land' on the ceiling, her wings reaching a frenzied pace to keep the two of you suspended in the air. When she touches the sulfur-stained stone, you brace yourself against the slut and redouble your pounding, every thrust squirting increasingly larger bulbs of pre-cum into the needy hole. Like a dog, she pounds back, slavering pussy oozing down your groin, along your chest, and sliding into your nose, filling your head with images of blissful rose gardens and the moist smell of fallen leaves after an autumn rain. No longer able to hold back, you empty your load inside the upside down fairy, ropes of gooey spunk filling her cunt even as she rocks back and forth, her intensely clutching tunnel slurping every drop from your suspended body.\n\n");
+				outputText("Her orgasm comes a moment later, and her wings lose their wild pace, sending the two of you tumbling out of the air, toward the ground. You jerk her head back, painfully, but the girl is lost in the depths of her creaming, muscles clenching and unclenching uselessly as her seed-stuffed sex sprays the girl's clear cum into the air, crystal bubbles spilling around your falling bodies. She giggles and mumbles something about cushions before giving one last, hard flap, sending your bodies spiraling. The fairy pet's wings twists you around so that when the two bodies land, she is under you, her sex-inflated chest cushioning her fall like liquid body pillows. The sudden shock sends her into another wild orgasm, crushing you inside her impossibly tight pussy, her womb bloating from the trapped sperm your panic-fuelled body churns out. You gasp at the descent, just letting the bitch's lower lips milk your [cock], until you gather yourself. Despite your weight, she seems uninjured, her eyes rolling aimlessly in their sockets, a brainless smile plastered across her face. You rise, unsteadily, and leave the fairy lying there, ass in the air, gushing cunt stuffed with your cum all the way to her clit, your exhausting creampie finally satisfying the fey whore. You'd have to be crazy to try that again, you pant, trying to slow your heartbeat. Next to that wild ride, the demons should be no problem, you sigh, fatigued.");
+				if (!recalling) player.sexReward("vaginalFluids", "Dick");
+				sharedEnd();
+            }
+            function hermF_2():void {
+			    clearOutput();
+                if(player.cockTotal() > 1)
+					outputText("It'd be a shame if you didn't get a chance to stuff all her holes, so you grab your " + cockDescript(1) + " and slide it along her ass cheeks, pulling out just enough to let it rest against her twitching sphincter. With a probing pinkie, you stretch out her rectum, the muscle spongy from the fuckings the demons have tattooed all down her back. You slide in and are pleasantly surprised that her ass is nearly as slick as her pussy, already lubricated by some body-altering drug the imps must've fed her. You make a note to give her a dash on both the ass and pussy columns of her score-card body-tattoo. You grunt in surprise when you feel your two cocks rubbing against each other through the fleshy wall separating her vagina from her ass, and the extra friction nearly makes you blow your load then and there, but by force of will, you hold it back, teeth gritted in the effort.\n\n");
 				outputText("Your pussy needs some loving too, so you grab the imp dildo you filled the fairy's bowl with and slide it across your " + hipDescript() + ", the cold metal exciting your moist sex and driving your [cock] deeper into the girl. Hesitating at first, your restraint crumbles and you press the steel tip to your " + vaginaDescript(0) + ", and roll it around your " + clitDescript() + ", the chill sending electric tingles through your groin and sets a raging fire in your loins as your flesh walls pulse from your racing heart. You guide the imp-shaped dildo to your pussy and feed the demonically sculpted toy into your body, unyielding metal parting your soft, supple skin, folds of pink flesh sucking at the knobby shaft. You gasp and nearly slide out of the tight confines of the fairy's double-stuffed cunt, but with a quick thrust, you penetrate yourself and jam more long inches into the cum-enslaved girl.\n\n");
-
 				outputText("The steel against your cock and inside your cunny gurgle with their restrained payloads and you resist the urge to twist both nozzles until they break, instead beginning a slow bucking ride of the fairy. Sliding the imp cock into your gash on each back-thrust, and stuffing more of the monstrous dildo into her quivering body with every bucking motion, you work your arms as much as your " + hipDescript() + ". The bulge of your tools inside her nubile body gets deeper with every push, rushing to meet the swell of her cum-stuffed stomach. The girl has already slurped up nearly two of the three gallons you poured for her. As you're rocking back, building up to a truly delicious orgasm, the slick girl cum from your " + vaginaDescript(0) + " drips between your fingers and you lose your grip momentarily. Trying to regain it, your hand accidentally strokes the nozzle at the base and your eyes go wide as the imp cock unleashes a torrent of seething spunk into your body. Panicking, you try to twist it shut again, but only manage to open the spigot all the way, your abdomen nearly bursting as the firehose blasts your cervix with a gushing pillar of cum.");
-
 				outputText("Your careful restraint is torn from your body and orgasm overtakes you.  ");
-				//(2 Dicks-
 				if(player.cockTotal() > 1) outputText("Your [cock] inside the fairy girl's ass erupts first, pumping your seed into her bowls, her hips distorting with the bursting flow of your cum, sphincter's clenching powerless to stop your alabaster flood.  ");
 				outputText("Inside the fairy's drooling pussy, your  [cock] twitches as your load rushes over the steel dildo and spurts from your cockhead in hot ropes of gooey love. The suffocating pleasure addling your brain makes you flick the nozzle of the chimera dildo, the tube wrapped around your " + hipDescript() + " kicking to life. The monstrous hose vibrates your entire lower body and you pump helplessly as your body is stimulated nearly to breaking. The fairy girl, already broken, merely lets out a stream of mad laughter, cum bubbling over her lips as her cunt is turned into a cornucopia of monster jizz. A cunny-copia, you giggle to yourself, her insane glee infecting your exhausted body. The double-penetrated fae bloats and swells under the pressure of the cum-pump, supplemented your own obscene spunk stuffing.\n\n");
-
 				outputText("When your orgasm subsides, you finally manage to switch off the imp pump in your " + vaginaDescript(0) + " and pull it out, tenderly. Your abdomen has been filled enough to leave a paunch of infernal cream below your belly. You press down on it, demonic ichor spilling out of your swollen vagina and splashing between your thighs. You sigh and hope the seed doesn't take hold. Speaking of taking hold, you switch off the gushing monster pump and carefully pull your [cock] out of the fairy, making sure the metal dildo remains fixed in place to hold the cum inside. You slide out from between her legs and rise unsteadily to look at your handiwork. The fairy has been filled, top to bottom, all three gallons you sprayed in her bowl gone down her thirsty gullet. The jizz you packed into her womb bloats her even further, her belly nearly four times larger than it was when you found her. She wriggles on the ground, lost to the cummy heaven her mindless body has been plunged into. That should keep her occupied while you root out the imps.");
+				if (!recalling) {
+					player.sexReward("vaginalFluids", "Dick");
+					if (player.cockTotal() > 1) player.sexReward("Default", "Dick", true, false);
+					player.sexReward("cum", "Vaginal");
+				}
+				sharedEnd();
+            }
+			function sharedEnd():void {
+				if (!recalling) {
+					flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
+					flags[kFLAGS.TIMES_PC_DEFEATED_VALA_AND_RAEPED]++;
+					cleanupAfterCombat();
+				}
+				else doNext(recallWakeUp);
 			}
-			player.orgasm();
-			//[End Encounter]
-			flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
-			//Mark as defeated in combat
-			flags[kFLAGS.TIMES_PC_DEFEATED_VALA_AND_RAEPED]++;
-			cleanupAfterCombat();
 		}
 
 		//Purified Fairy
@@ -609,9 +524,7 @@ public class ValaScene extends BaseContent implements SaveableState
 
 		//[Vala]
 		public function chooseValaInBar():void {
-			spriteSelect(60);
-			var cumBath:Function = null;
-			if(player.hasCock()) cumBath = valaCumBath;
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			menu();
 			//(First meeting)
@@ -643,34 +556,36 @@ public class ValaScene extends BaseContent implements SaveableState
 				//Once per week special!
 				if(flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN] == 0) {
 					outputText("\n\nA thought occurs to her and she leans in, conspiratorially. \"<i>Actually, some of my sisters are visiting from the forest today. Should we spend some time with them, or do I get you all for myself?</i>\"");
-					//[Fairies][You][Leave]
 					addButton(0,"Faeries",faerieOrgyFuck);
 				}
 				if(ValaFairyQueenQuest == QUEST_STAGE_NOT_STARTED) {
 					outputText("\n\nShe looks a little worried there might be something up her mind perhaps you should ask her about it.");
-					//[Fairies][You][Worries][Leave]
 					addButton(4,"Worries",Worries);
 				}
 				if(ValaFairyQueenQuest == QUEST_STAGE_ITEM_GATHERED) {
 					outputText("\n\nWith all the pieces of the scepter in hand its about time you report the good news to her.");
-					//[Fairies][You][Scepter][Leave]
 					addButton(4,"Scepter",Scepter);
 				}
 				if(ValaFairyQueenQuest == QUEST_STAGE_ITEM_TURNEDIN) { //Temporary until I work in a timer
 					outputText("\n\nCome to think of it what happened with the scepter after you brought it back to her? Maybe you should ask her.");
-					//[Fairies][You][Scepter][Leave]
 					addButton(4,"Scepter",Scepter2);
 				}
+				//just a hint
+				if (player.hasCock()) addButtonDisabled(5, "Date", model.time.hours == 20 ? "Another time, perhaps?" : "Try visiting the bar in the late evening. :)");
 			}
-
 			addButton(1,"You",cleansedValaRepeatBrainFucking);
-			if (cumBath != null) addButton(2, "Cum Bath", cumBath);
-			if (flags[kFLAGS.SHOULDRA_MET_VALA] > 0 && SceneLib.shouldraFollower.followerShouldra()) addButton(3, "Big You", valaBigYou);
-			addButton(5,"Leave",SceneLib.telAdre.barTelAdre);
+			addButtonIfTrue(2, "Cum Bath", valaCumBath, "Req. a cock.", player.hasCock());
+			if (SceneLib.shouldraFollower.followerShouldra()) {
+				if (flags[kFLAGS.SHOULDRA_MET_VALA] > 0)
+					addButton(3, "Big You", valaBigYou).hint("Shouldra is always ready for some madness.");
+				else addButtonDisabled(3, "???", "Vala is small. Very small. Maybe talk to Shouldra about her, even though she prefers <i>big</i> things?");
+			}
+			else addButtonDisabled(3, "???", "Req. spending more time with <i>ghosts</i>.");
+			addButton(14,"Leave",SceneLib.telAdre.barTelAdre);
 		}
 
 		public function cleansedFirstRemeet():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 
 			outputText("When Vala finishes delivering drinks and making sure everybody is set, she lets the bartender know that she'll be taking a break and leaves her apron behind the bar. She leads you to a store room in back and closes the door behind you. Offering you the only chair in the room, a low, wide stool, she seems content to flutter in the air while the two of you talk, her obscene strength making constant flight trivial.  ");
@@ -687,10 +602,12 @@ public class ValaScene extends BaseContent implements SaveableState
 
 		//[You]
 		public function cleansedValaFuckHerBrainsOut():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
-			//[Male/Herm Growth scene]
-			if(player.cockTotal() > 0) {
+			sceneHunter.print("Height forks: 4'11\"-, 5'- 6'2\", 6'3\"+");
+			sceneHunter.selectGender(dickF, vagF);
+			//==============================================
+			function dickF():void {
 				outputText("You don't even have to speak, she reads your desire as plainly as you can read hers. She flutters her wings in eager anticipation as she slides her hands up your chest and over your arms, thumbs tracing the curve of your muscles while fingertips dance across your " + player.skinFurScales() + ". With anxious quickness, she gently caresses your body with every breath. Vala leans in to kiss your neck and shoulders while shifting to straddle you, her enormous breasts hotter than her kisses as she presses into you. She savors the nearness for a long moment, just feeling your heartbeat against hers, sighing happily in your arms, before she wraps her legs around your waist and begins to grind her ass into your crotch. Time has not abated the torrential flow of clear lube leaking from her aroused pussy, and your lower body is soaked by her rose-petal labia, her ample rear spreading the warm liquid across your lap and over your stiffening length. You hiss in teased excitement and reach your hands across her broad, breeder's hips to clutch her bubble-bottom cheeks. She rocks up and down, her drooling lower lips sucking at your shaft with each motion, heat pouring out of her cunny.\n\n");
 
 				outputText("Feeling your straining body, hard against hers, she runs a hand through her purple hair, spilling it across half of her face. \"<i>I want you to enjoy this as much as I will.</i>\" Vala reaches a hand between her legs and slides against your abdomen, guiding your [cock] into her pussy. The fae's labia practically breathes the heat of her uterus across your twitching shaft and you slide through her well-lubricated depths with a moist sigh, her inhuman snatch tight with her passionate yearning. She rocks back and forth barely an inch at a time, but it's enough to ignite a manic need in your loins. ");
@@ -705,9 +622,11 @@ public class ValaScene extends BaseContent implements SaveableState
 				outputText(" from base to tip with her inner walls. Biting her lower lip, she grinds her pussy against your waist as your seed slowly fills her nethers. Her disproportionately huge tits drool with milk and you take her nipples in each hand, pressing tightly with your forefingers and thumbs until small white streams jet out of her overburdened chest. She leans backward in ecstasy and her arcing spray splatters against your lips, tantalizingly. You open your mouth and begin lapping at the streams, a buttermilk richness sending revitalizing clarity through your body. Fatigue fades, your mind clears, and your blood pumps with renewed vigor, reanimating your flagging erection. Suddenly, the pressure of her cum-drenched, sucking loins becomes a stimulation that grabs your brain through your crotch. You can feel every inch of your prick");
 				if(player.cockTotal() > 1) outputText("s");
 				outputText(" being stroked and suckled by the fey girl's muscles and you tighten your grip on her nipples, intending to earn this orgasm.\n\n");
+				player.sexReward("vaginalFluids", "Dick");
+				doNext(dickF_2);
 			}
 			//[Female Growth scene]
-			else {
+			function vagF():void {
 				outputText("You run your hands over Vala's flawless skin, fingertips tracing the seemingly frail girl's bone structure around her shoulders and down her thin arms before your hands circle round her inflated bosom, yielding flesh hot with the thundering heartbeat inside her chest. She gasps at the feel of your hands on her sensitive skin and giggles when you move your fingertips to her areolas, coin-sized pink buttons that shimmer with the strange, otherworldly glow of daylight that her body seems to radiate. Her nipples are already stiff from your teasing and you stroke the hot bulges with your thumbs, moisture bubbling under your touch. She draws in breath between her teeth and squirms in your lap, her rose-petal pussy drooling across your " + hipDescript() + " as she runs her hands through your " + hairDescript() + ". She pushes against you, stroking your " + nippleDescript(0) + "s with her hard nubs, pressing her wobbling breasts against your [allbreasts]. The heat pouring off the little fairy girl's body is incredible and you can feel a dampness growing in your " + vaginaDescript(0) + ".\n\n");
 
 				outputText("Still in your lap, she swings her legs around yours and braces herself with one hand around your neck and the other on your knees. Sliding back and forth, she strokes her pussy against yours, the slick folds of her labia rubbing against your " + clitDescript() + " with wet squishing sounds, sending electric shivers up your spine. You begin to rock back, in time with her motions, your stiff clit stroking hers in tight circles that leave the fairy panting, her legs clenching and unclenching around your [butt]. The two of you jill against the other's joy buzzers until your bodies tremble with orgasm, the fairy sliding her hand from your neck to one of your heaving breasts, squeezing a nipple between her second knuckles hard enough to make you squeak with pain.");
@@ -721,12 +640,15 @@ public class ValaScene extends BaseContent implements SaveableState
 					if (flags[kFLAGS.VALA_HEALED_HONEY] == 1) outputText("  You, in turn, take her legs around your temples and rub your nose against her juicy snatch, the fragrance of summer as intoxicating as any of the bottles around you. Your mind goes fuzzy for a moment and you suspect that your pure honey cure may have had some lingering effects on the over-grown girl. She wraps her arms around your [butt] and you mirror the grip just as she flaps harder, carrying the two of you into the air, locked in each other's love tunnels.\n\n");
 
 					outputText("Her long tongue remembers your body all too well, flicking your tender clit with just enough force to get your walls pulsing before she slides inside of your " + vaginaDescript(0) + ", lapping up your girl cum, exploring every bumpy recess of your twitching pussy. You are practically inundated by the girl's slippery slit, her sweet nectar gushing around your lips and into your nose as she slowly rolls the two of you through the air in an elegant dance, bodies entwined in passionate feasting, losing yourself to a symphony of glistening, pink flesh. After who knows how many climaxes the girl licks out of your sensitive snatch, she gently lands the two of you on the floor, still nuzzling in your coupled embrace. You'd lost track of how much of her earthy lubrication you've swallowed, but feeling the solid ground beneath you makes you aware that your belly jiggles with a surprising heaviness, like you've spent the night drinking gallons of honey wine. Vala slides her legs down your body, rubbing her still juicy cunny across your [skin.type] until she has righted herself to give you a big, wet kiss, your clear cream still moist on her lips. \"<i>I wish we could do that every night,</i>\" she sighs, happily.");
+					player.sexReward("vaginalFluids", "Lips");
+					player.sexReward("saliva", "Vaginal");
 				}
 				//[Medium characters- 5'- 6'2"]
 				else if(player.tallness < 74) {
 					outputText("The fairy, catching her breath between rolling her tender lower lips against yours, adopts a sultry expression and leans in with a whisper. \"<i>Kiss me, you sweet girl.</i>\" You lean down and press against the small fairy, her desire pouring from her eyes in an ocean of pink lust. You kiss the girl softly, your lips trespassing on hers, panting breaths traded between the two of you as hands seek each other's pleasure centers. Yours go to the small girl's heavy breasts, wobbling with their unmilked bounty and you stroke their yielding surface, savoring the weight in your palms and the stiff excitement of her nipples between your fingers. Her hands find your " + vaginaDescript(0) + " and Vala's fingers play across your lower lips, fingertips tracing the curves of your labia's plump ruffles, thumbs flicking your " + clitDescript() + " to life with a jarring shock that makes you gasp mid-kiss. The fairy pounces on the opening, her tongue tracing the line of your open lips before sliding into your mouth with a fierce boldness, the warm muscle wrapping around your tongue, filling your mouth with the hot moisture of the fairy's blossom-sweet breath. You return the force of her caress, one hand seeking her drooling cunt, eager to return in full the trembling climax she's coaxing from you.\n\n");
 
 					outputText("Slipping a few fingers into your " + vaginaDescript(0) + " teasingly, she raises her other hand to your [allbreasts], fondling your sweating flesh with a practiced skill she definitely didn't learn while in the captivity of the imps. She demonstrates a bit more of her Forest knowledge when she squeezes all four thin, warm fingers into your pulsing pussy and, stroking along the top of your love tunnel, she locates your g-spot almost immediately.  You bite your lower lip and send your own fingers into her cunny, your thumb making small circles around her tiny clit while you alternate pumping your fore and middle finger out of her vagina. She's simply more experienced, however, and her inner caresses trace patterns of sensations inside your body that you didn't realize you could feel and your muscles go weak as you crescendo under the fairy's expertise. She breaks your kiss, a long drooping bridge of spittle joining your mouths, and gently shooshes your whimpering by lowering your head to her breast. You meekly take a nipple into her mouth, your climax still sending electric waves of toe-curling tension through your body, and suckle at her bloated mounds, slurping down Vala's sweet buttermilk cream. When her fingers finally release you from your mind-blowing orgasm, you find that your " + vaginaDescript(0) + " has spilled a large puddle of warm, clear girl lube all over the stockroom floor- far more girl cum than you've ever produced. Vala lifts her jilling hand to her lips and sensually licks one finger after the other, her pink eyes bright with the mischief of the fae.\n\n");
+					player.sexReward("milk", "Lips");
 				}
 				//[Tall characters- 6'3"+]
 				else {
@@ -737,19 +659,14 @@ public class ValaScene extends BaseContent implements SaveableState
 						outputText("To your surprise, the mere taste of the girl's milk sends a fluid pulsing through your chest and you can feel your breasts filling with milk! You have begun to lactate!  ");
 						player.boostLactation(3);
 					}
-					outputText("Vala's lips, perhaps trained to please imp cocks, are tighter on your " + nippleDescript(0) + " than you would've believed possible, suckling milk from your depths. With a breathtaking mixture of pressure and softness, she nurses your breast more efficiently than any machine, your warm milk filling her hungry maw in short order. She nurses at each breast in turn, bringing each one to frothy lactation faster than the last until your chest is heaving, your breasts jiggling, and your body clenching down in a shivering climax. Your orgasm leaves you unprepared for the fairy girl's and when her body starts quivering, her breasts flood your mouth with more milk than you can handle. Even swallowing as quickly as you can, it runs through your lips and even up your nose in two twin jets of pale alabaster that leave your nostrils wet with the lingering scent of honey wine. Sweating and still leaking milk, she rights herself and lands, cupping her breasts with one hand and stroking the paunch of her tiny stomach with the other. \"<i>Ooo... so full. I hope I was as good for you as you were for me,</i>\" she coos.");
+					outputText("Vala's lips, perhaps trained to please imp cocks, are tighter on your " + nippleDescript(0) + " than you would've believed possible, suckling milk from your depths. With a breathtaking mixture of pressure and softness, she nurses your breast more efficiently than any machine, your warm milk filling her hungry maw in short order. She nurses at each breast in turn, bringing each one to frothy lactation faster than the last until your chest is heaving, your breasts jiggling, and your body clenching down in a shivering climax. Your orgasm leaves you unprepared for the fairy girl's and when her body starts quivering, her breasts flood your mouth with more milk than you can handle. Even swallowing as quickly as you can, it runs through your lips and even up your nose in two twin jets of pale alabaster that leaves your nostrils wet with the lingering scent of honey wine. Sweating and still leaking milk, she rights herself and lands, cupping her breasts with one hand and stroking the paunch of her tiny stomach with the other. \"<i>Ooo... so full. I hope I was as good for you as you were for me,</i>\" she coos.");
+					player.sexReward("milk", "Lips");
 				}
+				doNext(vagF_2);
 			}
-			doNext(cleansedValaFuckHerBrainsOutPtII);
-			player.orgasm();
-		}
-
-		//Part 2
-		public function cleansedValaFuckHerBrainsOutPtII():void {
-			spriteSelect(60);
-			clearOutput();
-			//dicks + growth
-			if(player.cockTotal() > 0) {
+			//==============================================
+			function dickF_2():void {
+				clearOutput();
 				outputText("Vala leans way back and grabs the edge of the stool while she locks her legs behind your waist, the fairy's startling strength pinning the two of you together. She slaps her generous butt onto your dick in long, slow motions, making sure you feel every inch of her rippling passage");
 				if(player.cockTotal() > 0) outputText("s");
 				outputText(". You tweak her nipples harder with each thrust, pale cream spurting in increasingly erratic arcs as her heavy breasts grow light pink from the bouncing of her ride. She clenches her eyes shut and wraps her arms under yours, hands clutching your shoulders with desperate rapture.\n\n");
@@ -779,9 +696,7 @@ public class ValaScene extends BaseContent implements SaveableState
 				//[All characters]
 				outputText("Vala's irrepressible energy is restored in short order, and she re-dresses swiftly, barely noticing the tiny milk spots staining her green dress or the thin trail of cum leaking between her legs as she flutters a foot off the ground. She gives you a kiss on the cheek and winks affectionately. \"<i>Visit me any time, okay [name]? For a free drink or... anything else,</i>\" she winks. She bundles her hair back up into a sensible bun and flies out of the stockroom, ignoring the curious glances that follow her as she retrieves her plain apron. ");
 				if (ValaFairyQueenQuest == QUEST_STAGE_PCDACCEPTED)
-				{
 					outputText("You sigh appreciatively and retrieve your own clothes.");
-				}
 				else
 				{
 					outputText("You sigh appreciatively and retrieve your own clothes only to find that you've grown! Whatever growth drug the imps gave to Vala must not be entirely out of her system, because her milk seems to have added an extra inch to your frame.");
@@ -797,15 +712,15 @@ public class ValaScene extends BaseContent implements SaveableState
 					player.tallness++;
 					if(player.cor > 40) dynStats("cor", -.3);
 				}
+				eachMinuteCount(30);
+				doNext(SceneLib.telAdre.barTelAdre);
 			}
-			//Part 2 - girls
-			else if(player.hasVagina()) {
+			function vagF_2():void {
+				clearOutput();
 				//[All characters]
 				outputText("Vala's irrepressible energy is restored in short order, and she redresses swiftly barely noticing the tiny milk spots staining her green dress or the thin trail of lubrication leaking between her legs as she flutters a foot off the ground. She gives you a kiss on the cheek and winks affectionately. \"<i>Visit me anytime, okay [name]? For a free drink or... anything else,</i>\" she winks. She bundles her hair back up into a sensible bun and flies out of the stockroom, ignoring the curious glances that follow her as she retrieves her plain apron.");
 				if (ValaFairyQueenQuest == QUEST_STAGE_PCDACCEPTED)
-				{
 					outputText("You sigh appreciatively and retrieve your own clothes.");
-				}
 				else
 				{
 					outputText("You sigh appreciatively and retrieve your own clothes only to find that you've grown! Whatever growth drug the imps gave to Vala must not be entirely out of her system, because her milk seems to have added an extra inch to your frame.");
@@ -821,14 +736,13 @@ public class ValaScene extends BaseContent implements SaveableState
 					//[Player grows 1", lust drops to 0, corruption drops by 2]
 					if(player.cor > 40) dynStats("cor", -.5);
 				}
+				eachMinuteCount(30);
+				doNext(SceneLib.telAdre.barTelAdre);
 			}
-			//[End Encounter]
-			eachMinuteCount(30);
-			doNext(SceneLib.telAdre.barTelAdre);
 		}
 		//[You]
 		public function cleansedValaRepeatBrainFucking():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			outputText("She flashes a beautiful smile and tells the bartender that she'll be taking her break early. Grabbing you by the hand, she rushes to the stockroom and sheds her dress without any trace of her former shame about her tattooed back. When you're too slow taking off your [armor], she helps, deft hands made all the quicker by eagerness. When the two of you are naked, she pushes you onto the well-worn stool and sits in your lap, staring into your eyes with a small smile.");
 			//[Next] (go to Growth scene)
@@ -836,7 +750,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		}
 		//[Fairies]
 		public function faerieOrgyFuck():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			outputText("Vala giggles and nods to the bartender to indicate she'll be taking her break. Taking you by the hand, she flutters upstairs to one of the far rooms of the tavern. When she opens the door, you're startled to find the room is virtually filled with fairies. Unlike Vala, they're the type you're more used to seeing- three to four inches tall, the girls are clothed in shiny black leather straps and wear tiny sable stockings tipped with crystalline heels. There's quite a variety of them and dozens of eyes settle on you as Vala pulls you into the room, closing the door behind you. \"<i>These are my sisters, from the deep forest,</i>\" she introduces. \"<i>In my state, a monster or other predator of the woods would surely catch me or, worse, use me to lure my sisters to danger. But with a few complimentary bottles of whiskey, the captain of Tel'Adre's city guard was willing to give them passage to visit me in the city once a week, as long as they stay out of mischief.</i>\" The fairies lift off and buzz around you, teeny voices introducing themselves, asking your name, marveling at your huge muscles, or otherwise fawning over you. It's a bit much, truth be told.\n\n");
 			outputText("You thank Vala for introducing you, but you've really got to be going, you claim. Demons to defeat, maidens to rescue, all that. The large fairy chuckles and gives you a squeeze. \"<i>You're so cute when you're flustered. Don't worry, we're not going to all jump you at once- you'd probably end up like I did! No, I asked my sisters here to help me with a little forest magic. Don't you want to see how fairies masturbate?</i>\" You're a little taken aback by the question, but you nod all the same. \"<i>All right girls, the petals please.</i>\" The cloud of fairies in front of you disperses, each winged vixen scattering to different corners of the room to retrieve hidden flower petals. Each blossom, you note, matches the hair color of the fairy holding it, creating a dizzying array of  hues as they form circles around the two of you. Vala guides you to the bed and gently removes your [armor] before instructing you to lie down.\n\n");
@@ -851,7 +765,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		}
 		//[Worries]
 		public function Worries():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			outputText("She seems worried for some reason and so you ask her about it.\n\n" +
 					"\"<i>Oh! I’m kind of sorry. It’s just that we fairies have lost our queen. Without the queen there is no one to protect us or safeguard our future.</i>\"\n" +
@@ -864,7 +778,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function Scepter():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			outputText("You deposit the fifteen shards of the scepter before Vala, who looks at you with complete awe.\n\n" +
 					"\"<i>What you did today might have just saved the fairies. I will bring these back to my sisters and let you know about the developments!</i>\"\n\n" +
@@ -874,19 +788,18 @@ public class ValaScene extends BaseContent implements SaveableState
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function Scepter2():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			menu();
-			if (player.isFemaleOrHerm && (player.humanScore() >= (player.humanMaxScore() - player.internalChimeraScore())) || player.elfScore() >= 11)
-			{
+			if (player.isFemaleOrHerm() && (player.isPureHuman()) || player.isRace(Races.ELF)) {
 				outputText("Vala spots you from a distance and flies to you right away.\n\n" +
 						"\"<i>[name] I have great news! The new fairy queen has finally been chosen!</i>\"\n\n" +
 						"You idly ask if you could meet her.\n\n" +
 						"\"<i>Well that's where things get complicated, just follow me…</i>\"\n\n" +
 						"Vala escorts you all the way to the woods where you spot an unusual amount of fairies watching you. You both enter what looks to be a grove. You can see small bubble of energy slowly flying up from the ground and deduce the place is highly magical. Vala turns to face you looking somewhat embarrassed.\n\n" +
-						"\"<i>[name] when we first met, I wanted to thank you for saving me from those imps. While we have had sex many times. I never could really feel like it was enough to let go of my debt to you. Today I’m actually telling you something very few humans have ever been told. We, the fairies would like you to become our champion.</i>\"\n\n" +
+						"\"<i>[name] when we first met, I wanted to thank you for saving me from those imps. While we have had sex many times, I never could really feel like it was enough to let go of my debt to you. Today I’m actually telling you something very few humans have ever been told. We, the fairies would like you to become our champion.</i>\"\n\n" +
 						"Sure why not, you're already trying to save Mareth anyway.\n\n" +
-						"“You don’t understand. What the fairies agreed to is that YOU should be the next queen.”\n\n" +
+						"\"You don’t understand. What the fairies agreed to is that YOU should be the next queen.\"\n\n" +
 						"Whoa, wait, what?! You never agreed to anything of the such! Can’t you at least be allowed to make the choice.\n\n" +
 						"\"<i>I know this is a lot to take in, but take a deep breath and make a choice. Will you become the next great fairy, queen of fairykind?</i>\"\n\n" +
 						"How could you even become the queen of the fairies. You’re way too big to become a fairy to begin with. Vala laughs, but explains.\n\n" +
@@ -905,43 +818,43 @@ public class ValaScene extends BaseContent implements SaveableState
 			}
 		}
 		public function Accept():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			outputText("While this is a great honor, maybe too much for a human you still nod in agreement. Vala hugs you right away.\n\n" +
 					"\"<i>Thank you! Thank you so much, you cannot grasp how much this means to us. Once you are ready, go lay down in the big red flower there and your coronation will begin.</i>\"\n\n" +
 					"Not one to waste time, as instructed by Vala you lay down in the giant orchid. The flower is surprisingly comfortable for a plant, you could almost mistake it for a comfy velvet bed, and so you slowly drift to sleep as the petals close on you.\n\n" +
-					"You dream of a beautiful world from before the age of the demons as you walk in a floral palace filled with echoes of laughter and cheers. Small fairies fly from one side to another, singing while carrying foods, flowers, and various items. At the back of the room is a figure of greater size. Sitting on a crystalline throne is a woman who wields no crown yet has the presence of royalty. While bigger in size than her sisters who fly in this otherworldly palace she is nonetheless a fairy and only one word comes to your mind to describe her… queen. This fairy sports a pair of colorful translucent butterfly wings which stretch six feet wide on a mature, almost perfect body not unlike that of an elf. Her regal visage turns toward you and looks straight in your eyes as if peering at the depth of your soul. It is only as you realise this royal figure was a beautified version of yourself all along that you slowly open your eyes, waking up with a loud yawn. The flower feels bigger than what you remembered it to be and so you slowly part away the petals so to let the light of the sun filter in. To your surprise, it's not the flower that got smaller but your body which got slightly bigger. While your overall shape did not change that much your body took on a more fragile and graceful version of itself, almost a mimicry of that of the elves. Your unblemished skin and refined limbs wouldn't look out of place on a nymph, not to mention your elf like pointed ears. However what really sets you apart from a human is your shiny, almost translucent hair, in which many beads of morning dew shine like beautiful gems, and your large, colorful butterfly wings easily twice as wide as your stretched arms. You flap them a few times with childlike curiosity and only stop short of taking flight. While admiring your new body you can't help but wish the flower was just a little bigger and to your surprise you actually shrink in size. Afraid as the world suddenly becomes bigger around you, including dog sized bugs you swiftly return to normal realizing that you can now shrink and grow back to human size at will. Heck, this is only a fragment of your new powers as you begin exploring the many fae magical abilities you acquired. After a few minutes, satisfied with your inspection, you finally take the time to gaze beyond the flower back to your waiting subjects. These fairies need a champion and a leader to fight for and rule them, you won’t let the fairies or Vala down. Lethice shall be defeated and the fairies protected! A few fairies come over to you carrying a human sized dress that could actually fit you just right. Its light but... perhaps a little skimpy? Well at least it won't hinder your flight. Still you are amazed they got it so quickly. To humor them you put the dress on and discover to your delight that it is the dress from the dream. Vala cheers for you right away pulling all the other fairies in.\n\n" +
+					"You dream of a beautiful world from before the age of the demons as you walk in a floral palace filled with echoes of laughter and cheers. Small fairies fly from one side to another, singing while carrying foods, flowers, and various items. At the back of the room is a figure of greater size. Sitting on a crystalline throne is a woman who wields no crown yet has the presence of royalty. While bigger in size than her sisters who fly in this otherworldly palace she is nonetheless a fairy and only one word comes to your mind to describe her… queen. This fairy sports a pair of colorful translucent butterfly wings, which stretch six feet wide on a mature, almost perfect body not unlike that of an elf. Her regal visage turns toward you and looks straight in your eyes as if peering at the depth of your soul. It is only as you realise this royal figure was a beautified version of yourself all along that you slowly open your eyes, waking up with a loud yawn. The flower feels bigger than what you remembered it to be and so you slowly part away the petals so to let the light of the sun filter in. To your surprise, it's not the flower that got smaller but your body that got slightly bigger. While your overall shape did not change that much your body took on a more fragile and graceful version of itself, almost a mimicry of that of the elves. Your unblemished skin and refined limbs wouldn't look out of place on a nymph, not to mention your elf like pointed ears. However what really sets you apart from a human is your shiny, almost translucent hair, in which many beads of morning dew shine like beautiful gems, and your large, colorful butterfly wings easily twice as wide as your stretched arms. You flap them a few times with childlike curiosity and only stop short of taking flight. While admiring your new body you can't help but wish the flower was just a little bigger and to your surprise you actually shrink in size. Afraid as the world suddenly becomes bigger around you, including dog sized bugs you swiftly return to normal realizing that you can now shrink and grow back to human size at will. Heck, this is only a fragment of your new powers as you begin exploring the many fae magical abilities you acquired. After a few minutes, satisfied with your inspection, you finally take the time to gaze beyond the flower back to your waiting subjects. These fairies need a champion and a leader to fight for and rule them, you won’t let the fairies or Vala down. Lethice shall be defeated and the fairies protected! A few fairies come over to you carrying a human sized dress that could actually fit you just right. It's light but... perhaps a little skimpy? Well at least it won't hinder your flight. Still you are amazed they got it so quickly. To humor them you put the dress on and discover to your delight that it is the dress from the dream. Vala cheers for you right away pulling all the other fairies in.\n\n" +
 					"\"<i>All hail [name], new queen of the fairies!!</i>\"\n\n" +
-					"The fairies give you an ovation, everyone clapping for the new fairy queen. You are in awe before the thousands of butterfly girls cheering for you and while your charge is a big one, you are confident that you will succeed. It's time for you to make good on your promise to them thus you head back out to your adventure ready to face the agents of evil in the name of your people.\n");
+					"The fairies give you an ovation, everyone claps for the new fairy queen. You are in awe before the thousands of butterfly girls cheering for you and while your charge is a big one, you are confident that you will succeed. It's time for you to make good on your promise to them thus you head back out to your adventure ready to face the agents of evil in the name of your people.\n");
 			ValaFairyQueenQuest = QUEST_STAGE_PCDACCEPTED;
 			//Turn pc into a proper fairy
 			CoC.instance.transformations.FaceFairy.applyEffect(false);
 			player.eyes.type = Eyes.FAIRY;
+			CoC.instance.transformations.HairFairy.applyEffect(false);
 			player.ears.type = Ears.ELVEN;
 			player.tailType = Tail.NONE;
 			player.arms.type = Arms.ELF;
 			player.lowerBody = LowerBody.ELF;
 			player.tongue.type = Tongue.ELF;
 			player.wings.type = Wings.FAIRY;
-			CoC.instance.transformations.HairFairy.applyEffect(false);
 			player.skinType = Skin.PLAIN;
 			player.skinAdj = "flawless";
 			player.removeCock(0, player.cockTotal());
 			player.skin.coverage = Skin.COVERAGE_NONE;
 			var growth:int = 1 + rand(3);
 			if (player.breastRows.length > 0) {
-				if (player.breastRows[0].breastRating < 2 && rand(3) == 0) growth++;
-				if (player.breastRows[0].breastRating < 5 && rand(4) == 0) growth++;
-				if (player.breastRows[0].breastRating < 6 && rand(5) == 0) growth++;
+				if (player.breastRows[0].breastRating < 2) growth++;
+				if (player.breastRows[0].breastRating < 3 && rand(2) == 0) growth++;
+				if (player.breastRows[0].breastRating < 4 && rand(3) == 0) growth++;
 			}
-			player.createPerk(PerkLib.TransformationImmunityFairy,0,0,0,0)
+			player.createPerk(PerkLib.TransformationImmunityFairy, 0, 0, 0, 0);
 			player.removeAllRacialMutation();
 			outputText("\n\n");
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			inventory.takeItem(armors.FQR, camp.returnToCampUseOneHour);
 		}
 		public function Decline():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			outputText("You announce your decision to a somewhat disappointed Vala but she nods in understanding.\n\n" +
 					"\"<i>It’s ok, [name]. No one will force you to make that choice through I wish you did.</i>\"\n\n" +
@@ -953,7 +866,7 @@ public class ValaScene extends BaseContent implements SaveableState
 
 		//[Male]
 		public function faerieOrgyFuckMaleContinue():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			outputText("The fairy girl lands at the edge of the bed, settling on her knees and resting her weighty chest on the mattress. Leaning in, she spreads your [legs] with warm, delicate hands, fingertips stroking the insides of your thighs. You shiver and squeeze the bedspread between your fingers, a little nervous about this 'forest magic.' One of the fairies flutters down to Vala and hands her a pale white lily petal with a tittering giggle. The larger fairy takes the soft white bloom and, whispering a silken word to it, licks the cream-colored surface. Slithering further between your legs, she reaches your [cock] and brushes the petal against your throbbing glans with a teasing caress. Then, much to your surprise, she places it on the tip of her forefinger and places it on the base of your cock. You gasp, the petal's soft surface rubbing sensitive skin with a warmth you were unprepared for. After the briefest delay, you lose your breath as the tremor of a small, barely contained orgasm rumbles through your gut. Without hesitation, the fairy barmaid takes a rose petal and repeats the process, another almost-orgasm seizing you and leaving you panting. \"<i>Normally we only need the one petal, but since you and I are so much larger than the average fairy, I had my sisters bring lots. All for you,</i>\" she whispers, coyly.\n\n");
 
@@ -974,13 +887,13 @@ public class ValaScene extends BaseContent implements SaveableState
 
 			outputText("\"<i>You see?</i>\" Vala asks, holding the organic device aloft with a mischievous smile. \"<i>They don't last forever, but while they do, these little toys give us a very intimate connection to loved ones. This way, I can go all week with a reminder of you inside me.</i>\" She gives you a kiss on the lips and the fairies give you a tiny chorus of applause for the entertaining show. It's good that her little friends aren't around more often, you pant to yourself, or you'd be a drooling vegetable in no time.\n\n");
 			eachMinuteCount(30);
-			player.orgasm();
+			player.sexReward("saliva", "Dick");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
 		//[Female]
 		public function faerieOrgyFuckFemaleContinue():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			outputText("The fairy girl lands at the edge of the bed, settling on her knees and resting her weighty chest on the mattress. Leaning in, she spreads your [legs] with warm, delicate hands, fingertips stroking the insides of your thighs. You shiver and hug your arms under your breasts, a little nervous about this 'forest magic.' One of the fairies flutters down to Vala and hands her a pale white lily petal with a tittering giggle. The larger fairy takes the soft white bloom and, whispering a silken word to it, licks the cream-colored surface. Slithering further between your legs, she reaches your " + vaginaDescript(0) + " and brushes the petal against your " + clitDescript() + " with a teasing caress. Then, much to your surprise, she places it on the tip of her forefinger and slides it into your pussy. You gasp, the petal's soft surface rubbing your inner walls with a warmth you were unprepared for. Vala presses lightly on a spot inside your vagina and you lose your breath as the tremor of a small orgasm rumbles through your gut. Without explanation, the fairy barmaid takes a rose petal and repeats the process, another orgasm seizing you and leaving you panting. \"<i>Normally we only need the one petal, but since you and I are so much larger than the average fairy, I had my sisters bring lots. All for you,</i>\" she whispers, coyly.\n\n");
 
@@ -993,12 +906,12 @@ public class ValaScene extends BaseContent implements SaveableState
 
 			outputText("\"<i>You see?</i>\" Vala asks, holding the organic device aloft with a mischievous smile. \"<i>They don't last forever, but while they do, these little toys give us a very intimate connection to loved ones. This way, I can go about all week with a reminder of you inside me.</i>\" She gives you a kiss on the lips and the fairies give you a tiny chorus of applause for the entertaining show. It's good that her little friends aren't around more often, you gasp to yourself, or you'd be a drooling vegetable in no time.");
 			eachMinuteCount(30);
-			player.orgasm();
+			player.sexReward("saliva", "Vaginal");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		//[Cum Bath]
 		public function valaCumBath():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			//FIRST TIME INTRO
 			if(flags[kFLAGS.VALA_CUMBATH_TIMES] == 0) {
@@ -1035,7 +948,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		}
 
 		public function valaCumBath2():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			outputText("Vala tries to compose herself before you, but the girl is too antsy to go slowly, impatient hands wrapping around your [ass] and pulling you toward her lithe body, her wings aflutter with restless gaiety.  The buoyant pixie leans in to lap at the pout of your cockhead with the tip of her pink tongue while her thumbs work fervently between the junction of her legs, stroking her glistening clit like she were polishing a precious jewel.  Her fingers curl into the slavering depths of her pussy, stroking her fey folds with trembling pleasure.  Leaving one hand to continue jilling herself, Vala takes the other and uses her honey-drenched palm to polish the quivering flesh of your swelling shaft.  She encircles the crest of your fairy-slick cock with her eager pucker, sucking the steady dribble of your pre-cum as she pumps vigorously.  Before long, the twitching bliss rushing to your loins tell you that her voracious efforts have coaxed the thickening semen bubbling inside you to the edge of your restraint.  Gently, you push her off of your member, your urethra dilating as your orgasm gushes forth.");
 			outputText("[pg]Your cum spurts out in long, drooping ropes of alabaster that splash against Vala's face, provoking a startled jolt from the over-grown fairy.  She smiles, blinking the spunk from her eyes just as another stream lances out, pallid jizz catching her on the lips as she opens her mouth to speak.  She gasps in surprise, a curtain of ivory splashing down her chin.  The shuddering pleasure coursing through your body reaches a steady rhythm as you stroke yourself off in the throes of one, long orgasm.  Forcing yourself to breath steadily despite your racing heart, you pump your [cock] with remarkable restraint, holding back your impassioned urges to fill the fairy's womb with your virile seed.");
@@ -1046,7 +959,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			//[IF BALLS:
 			if(player.balls > 0) outputText("  Her head sinks down to rest against your wobbling scrotum, the balls within practically swimming in the oceans of jizz your body is producing to saturate the cum-drunk girl.  Lifting your shaft vertically, your jism rains down on Vala's body, blotting out the imp-tattooed hash marks with an ivory cascade that splatters against her narrow shoulders and dribbles down, between her gossamer wings, draping her muscular back with a pearl raiment.");
 			outputText("  Her face dripping with the milky veil of your spunk, the overwhelmed girl leans back, settling against the floor as the drug-like intoxication of your sperm leaves her incapable of much more than moaning and writhing.  Using both hands, she smears the spattering cum across her lissome frame: tracing the flower-like folds of her labia, pooling it into her belly button, scooping double handfuls to bathe her pink-and-purple hair in your white waterfall.");
-			outputText("[pg]Her blissful ecstasy fills the cup of your frenzied ardor until it overflows, leaving you unable to keep your steady pace from accelerating.  Gripping the base of your shaft with one hand, you apply steady pressure, cutting off the stream of your cum while the other hand pumps faster and faster.  The squirming fairy at your feet thrashes in rapture, wreathed in the pale luminance of candle light reflecting off the lurid pool that surrounds her spunk-polished body.  Her breasts sway across her chest, heavy with the milk of her many pregnancies, your gooey ejaculate giving the ponderous orbs a glistening sheen that ripples with every wobbling heave of her overwhelmed lungs.  Her mouth moves, whispering your name too softly for anyone but you to hear, and her hands slide down her hips, around her thighs, and past the petals of her pussy.");
+			outputText("[pg]Her blissful ecstasy fills the cup of your frenzied ardor until it overflows, leaving you unable to keep your steady pace from accelerating.  Gripping the base of your shaft with one hand, you apply steady pressure, cutting off the stream of your cum while the other hand pumps faster and faster.  The squirming fairy at your feet thrashes in rapture, wreathed in the pale luminance of candlelight reflecting off the lurid pool that surrounds her spunk-polished body.  Her breasts sway across her chest, heavy with the milk of her many pregnancies, your gooey ejaculate giving the ponderous orbs a glistening sheen that ripples with every wobbling heave of her overwhelmed lungs.  Her mouth moves, whispering your name too softly for anyone but you to hear, and her hands slide down her hips, around her thighs, and past the petals of her pussy.");
 			outputText("[pg]The sight of Vala, subdued eyes clenched and delirious mouth agape, utterly drenched in your cum, jilling herself off with both hands as she cries out your name is just too much.  You shift the grip on the hand holding your flow back and begin jerking yourself with both fists, bucking in the air as if to add force to your frenzied strokes.  Your body complies immediately, a rush of liquid heat pouring past your hands, torrential loads visibly bulging outward as they gush from your loins.  As the jetting spray bursts from your [cock] in an unbroken stream, you cry out Vala's name, rousing her from the drugged stupor.  Your alabaster cream rains down on the fairy's face and she screams with pleasure, mouth filling with cum so quickly that it gushes out the sides of her gleeful smile.  Her back arches in euphoria, giddy exhilaration fueling her own gasping, squirming orgasm as her fingers dig joyously into her honey-drooling cunny.  You pump out what feels like gallons of seed, basting Vala head to toe until her semen-lacquered body seems glued to the floor.  She happily scoops your jizz from between her legs and into her pussy before shivering and squeaking, her chest huffing as she cums again.");
 			outputText("[pg]You keep stroking your [cock] for a minute or two afterwards, feeling utterly drained and begin to reach down to help Vala up when you notice she hasn't stopped her quivering, every muscle in the girl's body shaking with the trance-like bliss of her climaxes.  It seems the fairy is going through a protracted orgasm to rival your own, swooning in a paradise of her hero's sticky passion.  Rather than interrupt the fairy's cum-soaked reverie, you opt to let her enjoy every last minute of it.  You leave her with a cheerful kiss on the forehead as you discretely exit the back room.  As you go, the taste of your salty jizz mingles with the girl's own sweet flavor to breed waves of tingling euphoria that washes away your weariness.");
 			//[End Encounter][Cum production up, Fatigue removed]
@@ -1057,7 +970,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			player.cumMultiplier += 2;
 			if(player.balls > 0) player.ballSize += .3;
 			flags[kFLAGS.VALA_CUMBATH_TIMES]++;
-			player.orgasm();
+			player.sexReward("Default", "Dick");
 			dynStats("lib", -1.5);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1090,10 +1003,14 @@ public class ValaScene extends BaseContent implements SaveableState
 			//[Dom Me] [Lick Me]
 			menu();
 			addButton(0,"Dom Me",bigValaDomsPC);
-			if(player.hasCock()) addButton(1,"Lick Me",bigValaLicksOffDudes);
-			if(SceneLib.vapula.vapulaSlave() && player.gender > 0 && (player.hasCock() || (player.hasVagina() && player.hasKeyItem("Demonic Strap-On") >= 0))) {
+			addButtonIfTrue(1,"Lick Me",bigValaLicksOffDudes, "Req. a cock.", player.hasCock());
+			if(SceneLib.vapula.vapulaSlave() && (player.hasCock() || (player.hasVagina() && player.hasKeyItem("Demonic Strap-On") >= 0))) {
 				addButton(2,"Dom Vapula",valaDommyVapula3Some);
 				addButton(3,"Vapula3Some",valaLoveyVapula3Some);
+			}
+			else {
+				addButtonDisabled(2, "???", "Req. enslaving a certain succubus and having something to feed her with.");
+				addButtonDisabled(3, "???", "Req. enslaving a certain succubus and having something to feed her with.");
 			}
 		}
 		//Big Vala: Dom Me
@@ -1141,11 +1058,10 @@ public class ValaScene extends BaseContent implements SaveableState
 			outputText("\n\nVala gasps, \"<i>A-ah!  S-suck on my pearl, tiny fairy!  Take it into your - oh! - mouth and feel the c-c-corr-UP!  UP!  Corruption wash from you!  Bathe in my crystal honey!</i>\"  You pull yourself up onto her buzzer with burning arms and swallow it whole, obeying immediately.  You were already aroused at the sight of her immense tunnel, but to be so... intimately engulfed in it and massaged with such dexterous, natural skill is overpoweringly erotic.  You feel her clit bumping against your tonsils at the same time that slick moisture rolls all over you, from shoulders to [feet], inside your [armor] and out.  She's gushing all over you, and you're wiggling your [hips] senselessly, starting to moan into her clit as she rides you like a living, clit-sucking dildo.");
 			outputText("\n\nAn ear-splitting shriek of excitement hits you, and the fevered movements of Vala's interior redouble, sucking your whole body hard, pulling you deeper and deeper inside, hard enough that her clit almost pulls out of your maw.  You hold for dear life, fiercely afraid of disappearing into her womb and simultaneously aroused enough that your own body is shaking wantonly, lewdly vibrating your own body inside her as you slam your groin against her walls again and again.  Orgasmic pleasure hits you, robbing you of strength.  Your hands lose their grip and suddenly, you feel yourself slipping into her, her plush lips closing around your head so that all you can see is the faint, pink-tinged light that penetrates through you.  It slowly diminishes as you pass deeper, and with strength born of terror, you stretch up to grab her clit, the only hand-hold you can reach.");
 			outputText("\n\nAs soon as your hands clench onto that rigid little rod, the vaginal walls that surround you go wild, slamming you back and forth for a moment until a wave of girlish lubricant wells up from inside her.  It floods the cavernous twat with moisture, and you're actually carried out on the lady-spunk scented tide, riding the clear geyser you wash out onto the ground.  Vala's thighs long since spread wide and began to shake and tremble wildly.");
-			outputText("\n\nShouldra pops out of Vala's belly, asking, \"<i>Like what I did with her pussy, Champ?  They're so much more fun when they're pulling you into their welcoming wetness, don't you think?</i>\"  She smirks at the look in your eyes and flies into you, her comforting, familiar presence reappearing in the back of your mind.  \"<i>Oh wow, Champ, did you get off on that?  You did - you horndog you!  I should've rode that one out inside you!</i>\"");
+			outputText("\n\nShouldra pops out of Vala's belly, asking, \"<i>Like what I did with her pussy, Champ?  They're so much more fun when they're pulling you into their welcoming wetness, don't you think?</i>\"  She smirks at the look in your eyes and flies into you, her comforting, familiar presence reappearing in the back of your mind.  \"<i>Oh wow, Champ, did you get off on that?  You did - you horndog you!  I should've ridden that one out inside you!</i>\"");
 			outputText("\n\nWhile you stand there, dripping sexual juices, Vala gradually starts to diminish in size.  Sadly, her breasts seem to return to normal faster than the rest, which leaves her disproportional while she journeys towards her normal shape.  She's still locked in climax, leaking an ever-shrinking amount of fluid.  The smaller she gets, the faster her change progresses.  Then, with an alarming abruptness, she flops down in the lake of lady-spunk she left behind, moaning pleasantly.");
 			outputText("\n\nYou lift her up out of the mess and carry her to the stream where you both clean up.  Vala murmurs, \"<i>My hero...</i>\" as you wash her, too wiped out to do it herself.  Vala recovers by the time you're getting re-dressed, and she gives you a surprisingly chaste, blushing kiss before she gets ready to depart.  The faerie seems to have some degree of magical affinity, as she's able to knit her dress back together with a bit of mental effort, and then she's fluttering away, calling out her goodbyes to you as she journeys back to Tel'Adre.");
-			player.slimeFeed();
-			player.orgasm();
+			player.sexReward("vaginalFluids", "Default");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1154,7 +1070,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			clearOutput();
 			outputText("Giant Vala cocks an eyebrow at your request in surprise.  \"<i>But, what if I accidentally swallow?  I couldn't live with myself if something should happen to my big... er, little Hero.</i>\"  She pats you on the head affectionately, unsure of how to handle herself with all of her newfound size.");
 			outputText("\n\nYou comfortingly stroke her hand and reassure her that you want nothing more than to slide yourself in her mouth and feel her gigantic tongue sliding all over you, licking all of you like a popsicle until you can't take it anymore.");
-			outputText("\n\nVala seems somewhat intrigued by the way you're putting it, but her worried brow furrows deeper, fretting about what could go wrong.  The familiar glow of your ectoplasmic friend appears in Vala's eyes for a split second, and her lips suddenly begin to inflate, puckering on their own into what can only be described as a cock-sucking 'o'.  Their surface begins to shine with unnatural lubrication, glossy with slippery promises of sensuous caresses and orgasmic pleasure.");
+			outputText("\n\nVala seems somewhat intrigued by the way you're putting it, but her worried brow furrows deeper, fretting about what could go wrong.  The familiar glow of your ectoplasmic friend appears in Vala's eyes for a split second, and her lips suddenly begin to inflate, puckering on their own into what can only be described as a cocksucking 'o'.  Their surface begins to shine with unnatural lubrication, glossy with slippery promises of sensuous caresses and orgasmic pleasure.");
 			outputText("\n\n\"<i>What did you dtho tho mee?</i>\" Vala whines as her tongue pokes out to test the newly swollen flesh, sliding across the immense, pillowy lips on its own.  Her grip on you slackens as she shudders with pleasure, eyes rolling halfway back before she lets out a sugary, pleasure-addled moan.  \"<i>Okthay, okthay... jusht... be careful!</i>\"  She sets you down before the act of speaking makes her moan any harder, actually pushing you on to your back and fumbling around your [armor] on her own, trying to take it off.  You try to help, but her eager, shaking fingertips keep getting in the way.  You can see she hasn't stopped licking her lips or moaning through the puffy maw she calls a mouth, and once she finally gets a fingernail into your equipment, she tears it off you and tosses it aside.");
 			outputText("\n\nThe mountainous pixie lifts you up to her lips with a smile, or as much of one as she can manage at the moment, with her tongue drooling out the corner of her mouth.  Slowly, almost tentatively, she brings you closer and closer to her open pucker, her movements so slow and deliberate that it seems she's both afraid to do it and stubbornly insistent on this course of action at the same time.");
 			outputText("\n\nYour [foot] hits her plush, lower lip, feeling the warmth of her breath flowing over your body.  Her lust-lidded eyes gaze down at you worshipfully as she moans across you, gingerly slipping your [feet] across her lubricated mouth and into the saliva-filled cavity behind.  They come to rest on her tongue, which eagerly slithers around your [legs] and [hips] before winding to your [chest], flicking each of your [nipples] in turn along the way.");
@@ -1198,7 +1114,7 @@ public class ValaScene extends BaseContent implements SaveableState
 
 			outputText("\n\nYou lift her up out of the mess and carry her to the stream where you both clean up.  Vala murmurs, \"<i>My hero...</i>\" as you wash her, too wiped out to do it herself.  Vala recovers by the time you're getting re-dressed, and she gives you a surprisingly chaste, blushing kiss before she gets ready to depart.  The faerie seems to have some degree of magical affinity, as she's able to knit her dress and your [armor] back together with a bit of mental effort, and then she's fluttering away, calling out her goodbyes to you as she journeys back to Tel'Adre.");
 
-			player.orgasm();
+			player.sexReward("saliva", "Dick");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1209,7 +1125,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			if(flags[kFLAGS.TIMES_VAPULA_AND_GIANT_VALA] == 1) {
 				outputText("Crossing your arms, you call out to summon your pet succubus from wherever she's lurking at the moment.  Vapula comes frolicking up almost instantaneously before stopping mid-stride, curvy thighs quivering and mouth-gaping.  \"<i>T-there's a gigantic... faerie?!</i>\" she asks incredulously while slowly turning to face you, her [master].");
 				outputText("\n\nYou cackle gleefully at the sight.  This is perhaps the most anything has ever surprised your violet sex-pet, and you revel in the moment while her brain tries to cope with what she's seeing.  Behind you, Vala shrieks, gasping out, \"<i>There's a demon, here!?</i>\"  You spin about in time to see the immense pixie cradling her breasts and vagina, as if she could somehow conceal her modesty or lusty state simply by covering the offending organs with her once-petite palms.  You place a comforting hand on Vala's gargantuan thigh to try and comfort her; big as she is, she barely feels it.  Her pink-tinted eyes focus on you as she queries, \"<i>What is a demon doing here?!</i>\"");
-				outputText("\n\nPutting on your most charming smile, you tell her that Vapula is YOUR demon.  You broke her of her domineering ways and brought her here to serve you with her numerous skills, and besides, you figured Vala might like the opportunity to take revenge on a demon her way.  During this, Vapula seats herself before you, one hand stroking your thigh encouragingly.  You pat her head and say, \"<i>Come on Vala, I'll make sure Vapula does whatever you say, won't you my little, submissive demon-whore?</i>\"");
+				outputText("\n\nPutting on your most charming smile, you tell her that Vapula is YOUR demon.  You broke her of her domineering ways and brought her here to serve you with her numerous skills, and besides, you figured Vala might like the opportunity to take revenge on a demon her way.  During this, Vapula seats herself before you, one hand stroking your thigh encouragingly.  You pat her head and say, \"<i>Come on Vala, I'll make sure Vapula does whatever you say, won't you, my little, submissive demon-whore?</i>\"");
 				outputText("\n\nVapula nods eagerly, though she does dare to ask, \"<i>How will this feed me?</i>\"");
 				outputText("\n\n\"<i>If you ever want to feed again, you had better do whatever my faerie friend wants of you,</i>\" you reply.");
 				outputText("\n\nVala is understandably taken aback by this, but she gradually removes her hands from her erogenous zones.  \"<i>I guess if you say it's okay...</i>\" she mumbles, still a bit worried.");
@@ -1261,9 +1177,8 @@ public class ValaScene extends BaseContent implements SaveableState
 			}
 			outputText("\n\nVala climaxes, pulling you both out as a river of fem-spunk gushes out behind you, and you and your lust-locked demoness drag across the faerie's enhanced pleasure-buzzer, smearing her lusty juices across her pulsating, sensitive organ while you thoroughly feed your demoness's insatiable cum-hunger.");
 			outputText("\n\nEventually, you're dropped to the ground, panting for your breath while Vapula's tongue slowly withdraws.  You separate, realizing that during the lengthy cum Shouldra returned to you, and Vala is rapidly dwindling behind you.  The three of you have a playful swim in the stream to get cleaned up before Vala mends her clothing and goes on her way, thanking you for having the chance to feel what it's like to be in charge.");
-			player.orgasm();
+			player.sexReward("vaginalFluids", "Default");
 			dynStats("cor", 1);
-			player.slimeFeed();
 			doNext(camp.returnToCampUseOneHour);
 		}
 		//Giant Vala + Vapula Threesome - Vala Lovey Dovey
@@ -1294,9 +1209,8 @@ public class ValaScene extends BaseContent implements SaveableState
 			else outputText("[cock smallest]");
 			outputText(", ensuring that every single drop is passed into her ravenous gash.");
 			outputText("\n\nYou aren't sure how long you stay like that, but eventually, Vala finishes with her own pleasure and sets the pair of you down on the ground, still joined together, groin-to-groin.  You're so sensitive from your recent orgasm that separation is almost painful.  Only after you're free do you realize that Shouldra slipped back into you, and Vala is shrinking down behind you.  The three of you bathe and get dressed together, Vala using some strange magic to repair her dress before she goes.");
-			player.orgasm();
+			player.sexReward("vaginalFluids", "Default");
 			dynStats("cor", 1);
-			player.slimeFeed();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1364,9 +1278,9 @@ public class ValaScene extends BaseContent implements SaveableState
 			outputText("\n\nHer passionate cries focus your attention on her, her face the picture of carnal bliss and her eyes murky and unfocused.  They occasionally roll up when a wave of pleasure hits her.  Her tongue lolls from her lips.  Her breath pants hard alongside each cry of delight you pull from her as you plumb her tender depths.");
 			if(player.balls > 0) {
 				//if ballsize <3:
-				if(player.ballSize < 3) outputText("  With each hard quaking thrust your balls slap against Vala’s expansive ass.  Your nuts ache under their pent up load and demand you to shoot it into the sweet fey-girl soon.");
+				if(player.ballSize < 3) outputText("  With each hard quaking thrust your balls slap against Vala’s expansive ass.  Your nuts ache under their pent-up load and demand you to shoot it into the sweet fey-girl soon.");
 				else if(player.ballSize < 6) outputText("  With each hard quaking thrust, your balls smack against Vala’s cushiony ass.  Your hefty, cum-bloated sack, so full, aches for the sweet release into your tender fairy lover.");
-				else outputText("  With each hard quaking thrust, your fat balls slam against Vala’s pale squeezable ass.  The huge, virile spunk-factories go into overtime, their already taut skin growing tighter as they swell and bloat with your pent up load.  Your body's natural instincts demand you do your duty as the breeder you are and pack your small lover’s womb full of your spunk until her belly is swollen and seeded with your young.");
+				else outputText("  With each hard quaking thrust, your fat balls slam against Vala’s pale squeezable ass.  The huge, virile spunk-factories go into overtime, their already taut skin growing tighter as they swell and bloat with your pent-up load.  Your body's natural instincts demand you do your duty as the breeder you are and pack your small lover’s womb full of your spunk until her belly is swollen and seeded with your young.");
 			}
 
 			outputText("\n\nHotter and hotter your passion flares, your wild bucking thrusts rocking and battering your short curvy lover’s body over and over, your " + cockDescript(x) + " pounding her hungry pussy harder and faster, desperate to reach that peak of pleasure.  Wrapping your arms around Vala’s small body, you squeeze her against you as you finally reach your climactic end.  Gritting your teeth and growling to your tender lover, you ram your hips against her and sink every inch of throbbing cockflesh into her receptice body as you can fit.  The sudden hard thrust combined with the feeling of your aching mast pulsing and swelling inside her at your orgasm makes your sumptuous sweetheart groan and moan as her eyes roll back from the feeling of your hot spunk rushing into her.  The raw, blissful nirvana of the rampant sex and impending creamy injection bring the overexcited fairy to an explosive squirting orgasm.");
@@ -1378,10 +1292,9 @@ public class ValaScene extends BaseContent implements SaveableState
 			else outputText("\n\nYour eyes roll up, your mouth hangs open, and you grunt long and hard as your seed floods Vala’s tight, squeezing cunt like a frothy flood.  Wave after wave of your thick, creamy spunk forces its way through her convulsing cunt and right into her eager, waiting womb.  Your little lover wraps her legs around you, squeezing herself against you to get as much of your hot seed inside her body as she can.  Geysers of spunk force their way into her womb, filling it fuller and fuller until her belly swells.  Her once tight, flat tummy rounds out into a healthy, round cumbaby, your thick, yogurt-like spunk overflowing from her over-stuffed snatch in sticky streams.");
 
 			outputText("\n\nThe sweet relief of your orgasm washes over you, the blissful afterglow turning your arms and [legs] to jelly as you settle over your small panting lover.  Vala’s body is sweaty and hot from the passionate sex.  Her arms wrap around you, hugging her body against yours as she whispers to you and snuggles against you.  \"<i>Ohhh... that was... you are amazing...</i>\" she says blissfully as she nuzzles her face against your body, her cunt clenching hard around you as she cuddles up against you.  As you lay there holding her, you can hear her whisper softly to herself, muttering sweet nothings into the air to you.  Her fingers run over your [chest], drawing little shapes and hearts over your skin as she hums.  Smiling to yourself, you stroke her head and hold onto her, cuddling up with your tender fairy.  Leaning in, you plant a tender kiss in her hair before you settle in for the night with the oversized fairy.");
-			player.orgasm();
+			player.sexReward("vaginalFluids", "Dick");
 			dynStats("lib", -1, "sen", -2);
-			menu();
-			addButton(0,"Next",valaPartIIWaifuLove)
+			doNext(valaPartIIWaifuLove);
 		}
 
 		//[next]

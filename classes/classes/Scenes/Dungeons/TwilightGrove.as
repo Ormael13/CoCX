@@ -1,6 +1,5 @@
-//Side Dungeon: Twilight Grove (Corrupted Alraune grove)
 /**
- * ...
+ * Side Dungeon: Twilight Grove (Corrupted Alraune grove)
  * @author Liadri
  */
 package classes.Scenes.Dungeons 

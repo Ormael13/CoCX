@@ -49,32 +49,20 @@ public class OnikiriSake extends Consumable {
 			outputText("That's just what you needed to quench your thirst... now time to beat up those puny eeehhh... things to a pulp!");
 		}
 		else outputText("Woa! That sake sure is powerful. You laugh as your cheeks redden with the obvious sign of complete inebriation. You're so drunk you barely register as your body begins to change.");
-		if (!player.hasStatusEffect(StatusEffects.DrunkenPower) && CoC.instance.inCombat && player.oniScore() >= mutations.DrunkenPowerEmpowerOni()) mutations.DrunkenPowerEmpower();
-		if (rand(3) == 0 && changes < changeLimit) {
-			if (player.str <= 50) {
+		mutations.DrunkenPowerEmpowerIfPossible();
+		if (rand(3) == 0 && changes < changeLimit && player.MutagenBonus("str", 2)) {
+			if (player.str <= 50)
 				outputText("\n\nPainful aches ripple through your body, flooding you with pain as your muscles flex and bulge, growing much stronger and more well-defined.");
-				if (player.str <= 20) player.MutagenBonus("str", 3);
-				else player.MutagenBonus("str", 2);
-			}
-			else {
-				if (player.str >= 75) player.MutagenBonus("str", 0.5);
-				else player.MutagenBonus("str", 1);
+			else
 				outputText("\n\nYour muscles grow tighter, bulging outwards powerfully as you get even stronger!");
-			}
 			changes++;
 		}
 
-		if (rand(3) == 0 && changes < changeLimit) {
-			if (player.tou <= 50) {
+		if (rand(3) == 0 && changes < changeLimit && player.MutagenBonus("tou", 2)) {
+			if (player.tou <= 50)
 				outputText("\n\nYour hide... skin... whatever... you can feel it getting tougher as it thickens perceptibly.");
-				if (player.tou <= 20) player.MutagenBonus("tou", 3);
-				else player.MutagenBonus("tou", 2);
-			}
-			else {
-				if (player.tou >= 75) player.MutagenBonus("tou", 0.5);
-				else player.MutagenBonus("tou", 1);
+			else
 				outputText("\n\nYour tough hide grows slightly thicker.");
-			}
 			changes++;
 		}
 

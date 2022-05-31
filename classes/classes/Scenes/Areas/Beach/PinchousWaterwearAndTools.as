@@ -6,7 +6,7 @@ package classes.Scenes.Areas.Beach
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-import classes.display.SpriteDb;
+    import classes.display.SpriteDb;
 
 public class PinchousWaterwearAndTools extends BaseContent
 	{
@@ -47,6 +47,7 @@ public class PinchousWaterwearAndTools extends BaseContent
 			addButton(8, headjewelries.AQBREATH.shortName, itemBuy, headjewelries.AQBREATH);
 			addButton(9, armors.KBDRESS.shortName, itemBuy, armors.KBDRESS);
 			addButton(10, "Bikini", PinchousWaterwearAndToolsShopBikiniMenu);
+			addButton(11, armors.G_DIVES.shortName, itemBuy, armors.G_DIVES);
 			addButton(14, "Leave", leavePinchousWaterwearAndToolsShop);
 		}
 		public function PinchousWaterwearAndToolsShopBikiniMenu():void {

@@ -6,6 +6,7 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -41,11 +42,11 @@ public class ImpOverlord extends Imp
 			//Blind
 			else if (spellChooser == 1 && fatigue <= (maxFatigue() - spellCostBlind)) {
 				outputText("The imp glares at you and points at you! A bright flash erupts before you!  ");
-				if ((player.findPerk(MutationsLib.GorgonsEyes) < 0 && rand(player.inte / 5) <= 4) && !player.hasPerk(PerkLib.BlindImmunity)) {
+				if ((!player.perkv1(IMutationsLib.GorgonEyesIM) >= 1 && rand(player.inte / 5) <= 4) && !player.hasPerk(PerkLib.BlindImmunity)) {
 					outputText("<b>You are blinded!</b>");
 					player.createStatusEffect(StatusEffects.Blind, 1 + rand(3), 0, 0, 0);
 				}
-				else if (player.findPerk(MutationsLib.GorgonsEyes) >= 0) {
+				else if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 1) {
 					outputText("Your mutated eyes not been affected at all by this flash!");
 				}
 				else {
@@ -253,6 +254,7 @@ public class ImpOverlord extends Imp
 			];
 			this.wings.type = Wings.IMP;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 21, 0, 0, 0);
 			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
 			checkMonster();
 		}

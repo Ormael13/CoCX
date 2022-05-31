@@ -9,20 +9,19 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.*;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
 
 public class Kiha extends Monster
 	{
 		private function kihaTimeWaster():void {
-			game.spriteSelect(72);
 			outputText("She supports the axe on a shoulder, cracking her neck and arching her back to stretch herself, giving you an unintended show.  ");
 			player.dynStats("lus", 5);
 		}
 
 		//This could be silly mode worthy! Should Expand? oh ok
 		private function sillyModeKihaAttack():void {
-			game.spriteSelect(72);
 			outputText("Before you can stop to think, the dragon-woman steps back - throwing her axe into the air before she starts sprinting towards you. In seconds she's reached a hair's distance between her lithe form and your own, her fist recoiling and time seemingly stopping to allow you to note the powerful energy seeping from her arms.  ");
 			//Miss:
 			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
@@ -55,7 +54,6 @@ public class Kiha extends Monster
 		}
 
 		private function kihaFirePunch():void {
-			game.spriteSelect(72);
 			outputText("The draconic girl throws her trusty weapon into the sodden ground, using the distraction to build up balls of flame around her fists.  She runs towards you, launching herself in your direction with a flurry of punches.\n");
 
 			//Dodged
@@ -90,7 +88,6 @@ public class Kiha extends Monster
 
 		//Fire breath
 		private function kihaFireBreath():void {
-			game.spriteSelect(72);
 			outputText("Kiha throws her arms back and roars, exhaling a swirling tornado of fire directly at you!\n");
 			//Miss:
 			//Determine if evaded
@@ -395,7 +392,7 @@ public class Kiha extends Monster
 				this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 6) {
-				this.createPerk(MutationsLib.LizanMarrow, 0, 0, 0, 0);
+				this.createPerk(IMutationsLib.LizanMarrowIM, 1, 0, 0, 0);
 				this.createPerk(PerkLib.ImprovedTranquilness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 7) {
@@ -407,7 +404,7 @@ public class Kiha extends Monster
 				this.createPerk(PerkLib.HalfStepToAdvancedTranquilness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 9) {
-				this.createPerk(MutationsLib.LizanMarrowPrimitive, 0, 0, 0, 0);
+				this.setPerkValue(IMutationsLib.LizanMarrowIM, 1,2);
 				this.createPerk(PerkLib.EpicLibido, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 10) {
@@ -419,7 +416,7 @@ public class Kiha extends Monster
 				this.createPerk(PerkLib.LegendaryToughness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 12) {
-				this.createPerk(MutationsLib.LizanMarrowEvolved, 0, 0, 0, 0);
+				this.setPerkValue(IMutationsLib.LizanMarrowIM, 1,3);
 				this.createPerk(PerkLib.HalfStepToSuperiorTranquilness, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 13) {
@@ -427,6 +424,7 @@ public class Kiha extends Monster
 				this.createPerk(PerkLib.LegendaryLibido, 0, 0, 0, 0);
 			}
 			this.createPerk(PerkLib.Lifeline, 0, 0, 0, 0);
+			IMutationsLib.LizanMarrowIM.acquireMutation(this, "none");
 			checkMonster();
 		}
 

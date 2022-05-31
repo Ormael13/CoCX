@@ -5,8 +5,6 @@
 package classes.Items.Shields 
 {
 	import classes.Items.Shield;
-	import classes.PerkLib;
-	import classes.Player;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.StatusEffects;
 

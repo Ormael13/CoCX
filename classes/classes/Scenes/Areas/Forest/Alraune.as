@@ -10,7 +10,6 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
-import classes.internals.ChainedDrop;
 import classes.display.SpriteDb;
 import classes.internals.WeightedDrop;
 

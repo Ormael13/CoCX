@@ -10,7 +10,7 @@ import classes.internals.EnumValue;
  * a **coverage** parameter with the rance:
  * `(0) COVERAGE_NONE` : coat layer is non-existant
  * `(1) COVERAGE_LOW` : coat layer exists, but its descriptions appear only when explicitly called
- * `(2) COVERAGE_MEDIUM` : coat layer exists, descriptions use mixed "[base] and [coat]", can explicitly check either
+ * `(2) COVERAGE_MEDIUM` : coat layer exists, descriptions use mixed "[base] and [skin coat]", can explicitly check either
  * `(3) COVERAGE_HIGH` : coat layer exists and is used as a default layer when describing skin; base description appear only when explicitly called
  * `(4) COVERAGE_COMPLETE` : same as COVERAGE_HIGH; intended to be used when even face is fully coverred
  * tattoos should be moved to body part-level as patterns
@@ -19,12 +19,25 @@ import classes.internals.EnumValue;
  * @author Stadler76, aimozg
  */
 public class Skin extends SaveableBodyPart {
-
-  public static const COVERAGE_NONE:int     = 0;
+	
+	
+	/**
+	 * Entry properties:
+	 * - value: numerical id (0, 1, 2)
+	 * - id: name of the constant ("PLAIN", "FUR", "SCALES")
+	 * - name: human-readable default name, ("skin", "fur", "scales")
+	 */
+	public static var CoverageTypes:/*EnumValue*/Array = [];
+	public static const COVERAGE_NONE:int     = 0;
+	EnumValue.add(CoverageTypes, COVERAGE_NONE, "NONE", { name: "no" });
 	public static const COVERAGE_LOW:int      = 1;
+	EnumValue.add(CoverageTypes, COVERAGE_LOW, "LOW", { name: "partial" });
 	public static const COVERAGE_MEDIUM:int   = 2;
+	EnumValue.add(CoverageTypes, COVERAGE_MEDIUM, "MEDIUM", { name: "medium" });
 	public static const COVERAGE_HIGH:int     = 3;
+	EnumValue.add(CoverageTypes, COVERAGE_HIGH, "HIGH", { name: "high" });
 	public static const COVERAGE_COMPLETE:int = 4;
+	EnumValue.add(CoverageTypes, COVERAGE_COMPLETE, "COMPLETE", { name: "complete" });
 
 
 	/**
@@ -41,27 +54,27 @@ public class Skin extends SaveableBodyPart {
 	public static const PLAIN: int = 0;
 	EnumValue.add(SkinTypes, PLAIN, "PLAIN", {
 		name:"skin",
-		appearanceDesc: "Your [skin full.noadj] has a completely normal texture, at least for your original world.",
+		appearanceDesc: "Your [skin base] has a completely normal texture, at least for your original world.",
 		plural: false,
 		base:true
 	});
 	public static const FUR: int = 1;
 	EnumValue.add(SkinTypes, FUR, "FUR", {
 		name:"fur",
-		appearanceDesc: "Your [skin full.noadj] is {partiallyOrCompletely} covered by [skin coat].",
+		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: false,
 		coat:true
 	});
 	public static const SCALES: int = 2;
 	EnumValue.add(SkinTypes, SCALES, "SCALES", {
 		name:"scales",
-		appearanceDesc: "Your [skin full.noadj] is {partiallyOrCompletely} covered by [skin coat].",
+		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: true
 	});
 	public static const GOO: int = 3;
 	EnumValue.add(SkinTypes, GOO, "GOO", {
 		name:"skin",
-		appearanceDesc: "Your [skin full.noadj] is {partiallyOrCompletely} made of [skin coat].",
+		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} made of [skin coat].",
 		plural: false,
 		base:true
 	});
@@ -69,21 +82,21 @@ public class Skin extends SaveableBodyPart {
 	public static const CHITIN: int = 5;
 	EnumValue.add(SkinTypes, CHITIN, "CHITIN", {
 		name:"chitin",
-		appearanceDesc: "Your [skin full.noadj] is {partiallyOrCompletely} covered by [skin coat].",
+		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: false,
 		coat:true
 	});
 	public static const BARK: int = 6;
 	EnumValue.add(SkinTypes, BARK, "BARK", {
 		name:"bark",
-		appearanceDesc: "Your [skin full.noadj] is {partiallyOrCompletely} covered by [skin coat].",
+		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: false,
 		coat:true
 	});
 	public static const STONE: int = 7;
 	EnumValue.add(SkinTypes, STONE, "STONE", {
 		name:"stone",
-		appearanceDesc: "Your [skin full.noadj] is completely made of [gargoylematerial].",
+		appearanceDesc: "Your [skin base] is completely made of [gargoylematerial].",
 		plural: false,
 		base:true
 	});
@@ -91,7 +104,7 @@ public class Skin extends SaveableBodyPart {
 	public static const AQUA_SCALES: int = 9;
 	EnumValue.add(SkinTypes, AQUA_SCALES, "AQUA_SCALES", {
 		name:"scales",
-		appearanceDesc: "Your [skin full.noadj] is {partiallyOrCompletely} covered by [skin coat].",
+		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: true,
 		coat:true
 	});
@@ -102,14 +115,14 @@ public class Skin extends SaveableBodyPart {
 	public static const DRAGON_SCALES: int = 14;
 	EnumValue.add(SkinTypes, DRAGON_SCALES, "DRAGON_SCALES", {
 		name:"dragon scales",
-		appearanceDesc: "Your [skin full.noadj] is {partiallyOrCompletely} covered by [skin coat].",
+		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: false,
 		coat:true
 	});
 	public static const MOSS: int = 15;
 	EnumValue.add(SkinTypes, MOSS, "MOSS", {
 		name:"moss",
-		appearanceDesc: "Your [skin full.noadj] is {partiallyOrCompletely} covered by [skin coat].",
+		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: false,
 		coat:true
 	});
@@ -119,7 +132,7 @@ public class Skin extends SaveableBodyPart {
 	public static const AQUA_RUBBER_LIKE: int = 19;
 	EnumValue.add(SkinTypes, AQUA_RUBBER_LIKE, "AQUA_RUBBER_LIKE", {
 		name:"slippery rubber-like skin",
-		appearanceDesc: "Your [skin full.noadj] has a rubber-like texture.",
+		appearanceDesc: "Your [skin base] has a rubber-like texture.",
 		plural: false,
 		base:true
 	});
@@ -127,14 +140,14 @@ public class Skin extends SaveableBodyPart {
 	public static const FEATHER: int = 21;
 	EnumValue.add(SkinTypes, FEATHER, "FEATHER", {
 		name:"feather",
-		appearanceDesc: "Your [skin full.noadj] is {partiallyOrCompletely} covered by [skin coat].",
+		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: false,
 		base:true
 	});
 	public static const TRANSPARENT: int = 22;
 	EnumValue.add(SkinTypes, TRANSPARENT, "TRANSPARENT", {
 		name:"transparent",
-		appearanceDesc: "Your [skin full.noadj] is completely transparent, like a ghost's.",
+		appearanceDesc: "Your [skin base] is completely transparent, like a ghost's.",
 		plural: false,
 		base:true
 	});
@@ -171,13 +184,13 @@ public class Skin extends SaveableBodyPart {
 	public static const PATTERN_BEE_STRIPES: int = 3;
 	EnumValue.add(PatternTypes, PATTERN_BEE_STRIPES, "BEE_STRIPES", {
 		name:"bee stripes",
-		appearanceDesc: "You have [skin color] [skin] covered by a bee-like [skin color2] stripe pattern.",
+		appearanceDesc: "You have [skin color] [skin base] covered by a bee-like [skin color2] stripe pattern.",
 		coat:true
 	});
 	public static const PATTERN_TIGER_STRIPES: int = 4;
 	EnumValue.add(PatternTypes, PATTERN_TIGER_STRIPES, "TIGER_STRIPES", {
 		name:"tiger stripes",
-		appearanceDesc: "You have [skin color] [skin] covered by a tiger-like [skin color2] stripe pattern.",
+		appearanceDesc: "You have [skin color] [skin base] covered by a tiger-like [skin color2] stripe pattern.",
 		coat:true
 	});
 	public static const PATTERN_BATTLE_TATTOO: int = 5;
@@ -213,7 +226,7 @@ public class Skin extends SaveableBodyPart {
 	public static const PATTERN_WHITE_BLACK_VEINS: int = 10;
 	EnumValue.add(PatternTypes, PATTERN_WHITE_BLACK_VEINS, "WHITE_BLACK_VEINS", {
 		name:"white and black veins",
-		appearanceDesc: "Many [skin color2] veins are clearly visible on your [skin full.noadj] body.",
+		appearanceDesc: "Many [skin color2] veins are clearly visible on your [skin base] body.",
 		base:true
 	});
 	public static const PATTERN_VENOMOUS_MARKINGS: int = 11;
@@ -296,9 +309,15 @@ public class Skin extends SaveableBodyPart {
 		return skinValue(base.isAre(s, p), coat.isAre(s, p));
 	}
 	override public function get type():int {
-		if (coverage >= COVERAGE_HIGH) return coat.type;
+		if (coverage > COVERAGE_NONE) return coat.type;
 		return base.type;
 	}
+
+    //used to determine default coat color -
+    public function isHairy():Boolean {
+        return (type == FUR || type == MOSS || type == FEATHER);
+    }
+
 	/**
 	 * Checks both layers against property set
 	 * @param p {color, type, adj, desc}
@@ -309,13 +328,16 @@ public class Skin extends SaveableBodyPart {
 		if (coverage > COVERAGE_NONE && coat.checkProps(p)) return coat;
 		return null;
 	}
-	/**
-	 * @param options = {color,color2,pattern,adj,desc}
-	 */
+ 
 	public function growCoat(type:int,options:Object=null,coverage:int=COVERAGE_HIGH):SkinLayer {
 		this.coverage = coverage;
 		this.coat.type = type;
-		this.coat.color = creature.hairColor;
+        if (!this.coat.color) {
+            if (isHairy()) //select default color
+		        this.coat.color = creature.hairColor;
+            else
+                this.coat.color = this.base.color;
+        }
 		if (options) this.coat.setProps(options);
 		return this.coat;
 	}
@@ -332,8 +354,11 @@ public class Skin extends SaveableBodyPart {
 	 * @param baseOptions = {color,adj,desc,type}
 	 */
 	public function setBaseOnly(baseOptions:Object =null):void {
-		coverage = Skin.COVERAGE_NONE;
-		if (baseOptions) base.setAllProps(baseOptions);
+        //mainly workaround to fix *something* setting the skin desc forever. Fuck.
+        //clear coverage. Nobody needs its type, color
+		this.coverage = Skin.COVERAGE_NONE;
+        coat.restore(true); //restore, keep color for parts
+		if (baseOptions) this.base.setAllProps(baseOptions);
 	}
 	/**
 	 * @param layer 'base','coat','skin' (both layer if MEDIUM, else major),'full' (both layers if present)
@@ -529,7 +554,6 @@ public class Skin extends SaveableBodyPart {
 			case COVERAGE_LOW:
 				return inBase;
 			case COVERAGE_MEDIUM:
-				return inBase + " and " + inCoat;
 			case COVERAGE_HIGH:
 			case COVERAGE_COMPLETE:
 			default:
@@ -683,9 +707,12 @@ public class Skin extends SaveableBodyPart {
 		savedata.chitinColor = coat.color;
 	}
 
-	public static function getSkinAppearanceDescription(creature: *):String {
-		const id: int = creature.skin.base.type;
+	public function get shortName():String {
+		return SkinTypes[type].name;
+	}
 
+	public static function getSkinAppearanceDescription(creature: *):String {
+		const id: int = creature.skin.type;
 		return formatDescription((SkinTypes[id].appearanceDescFunc ? SkinTypes[id].appearanceDescFunc(creature) : SkinTypes[id].appearanceDesc) || "", creature);
 	}
 

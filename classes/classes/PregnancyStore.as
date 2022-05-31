@@ -48,6 +48,7 @@ package classes
 		public static const PREGNANCY_CELESS:int				=  39;
 		public static const PREGNANCY_GOBLIN:int				=  40;
 		public static const PREGNANCY_ZENJI:int                 =  41;
+		public static const PREGNANCY_AYANE:int                 =  42; //This is a placeholder for a future expansion.
 		
 		public static const PREG_NOT_PREGANT:int                =   0; //The PREG_* consts are returned by the size function
 		public static const PREG_NO_SIGNS_UNKNOWN:int           =   1; //NPC has conceived but doesn’t know she’s pregnant, no visible signs
@@ -102,6 +103,12 @@ package classes
 		public static const INCUBATION_MITZI:int				= 312;
 		public static const INCUBATION_EXCELLIA:int				= 480;
 		public static const INCUBATION_ZENJI:int                = 720;
+		public static const INCUBATION_AYANE:int				= 336;
+		/*public static const INCUBATION_BELISA:int				= 300;
+		public static const INCUBATION_LILY:int					= 300;
+		public static const INCUBATION_TYRANTIA:int				= 300;
+		public static const INCUBATION_ETNA:int					= 300;
+		public static const INCUBATION_CHI_CHI:int				= 300;*/
 		
 		private static const MAX_FLAG_VALUE:int                 = 2999;
 		private static const PREG_TYPE_MASK:int                 = 0x0000FFFF; //Should be safe with 65535 different pregnancy types
@@ -123,7 +130,7 @@ package classes
 			_pregnancyEventValue = new Vector.< Vector.<int> >();
 			_buttPregnancyEventValue = new Vector.< Vector.<int> >();
 			if (pregType < 0 || pregType > MAX_FLAG_VALUE || pregInc < 0 || pregInc > MAX_FLAG_VALUE || buttPregType < 0 || buttPregType > MAX_FLAG_VALUE || buttPregInc < 0 || buttPregInc > MAX_FLAG_VALUE || pregType == buttPregType || pregInc == buttPregInc) {
-				trace("Error: PregnancyStore created with invalid values for its flags. PregnancyStore(" + pregType + ", " + pregInc + ", " + buttPregType + ", " + buttPregInc + ")");
+				CoC_Settings.error("PregnancyStore created with invalid values for its flags. PregnancyStore(" + pregType + ", " + pregInc + ", " + buttPregType + ", " + buttPregInc + ")");
 			}
 		}
 	

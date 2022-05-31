@@ -18,8 +18,8 @@ import classes.CoC;
 import classes.CockTypesEnum;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
+import classes.Races;
 import classes.Scenes.SceneLib;
-import classes.StatusEffects;
 
 public class EmberTF extends BaseContent
 {
@@ -30,23 +30,12 @@ public class EmberTF extends BaseContent
 
 public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	var changes:int = 0;
-	var changeLimit:int = 2;
-	if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
-	if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
-	if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
-	if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
-	if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
-	if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
-	if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
-	if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
-	if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
-	if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
+	var changeLimit:int = 2 + player.additionalTransformationChances;
 	//Temporary storage
 	var temp:Number = 0;
 	if (player.blockingBodyTransformations()) changeLimit = 0;
 	//Gain Dragon Dick
 	if (changes < changeLimit && player.dragonCocks() < player.cockTotal() && rand(3) == 0) {
-		temp = 0;
 		var choices:Array = [];
 		var select:int;
 		temp = player.cockTotal();
@@ -135,17 +124,16 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	}
 	//(Pending Tongue Masturbation Variants; if we ever get around to doing that.)
 	//Gain Dragon Head OR Dragon Fangs
-	if (changes < changeLimit && rand(3) == 0 && player.tongue.type == Tongue.DRACONIC && player.lowerBody != LowerBody.GARGOYLE && (player.faceType != Face.DRAGON || player.faceType != Face.DRAGON_FANGS)) {
-		if (player.faceType != Face.DRAGON) {
-			outputText("\n\n");
-      CoC.instance.transformations.FaceDragon.applyEffect();
-		}
-		else {
-			outputText("\n\n");
-      CoC.instance.transformations.FaceDragonFangs.applyEffect();
-		}
+    if (changes < changeLimit && rand(3) == 0 && player.tongue.type == Tongue.DRACONIC && player.lowerBody != LowerBody.GARGOYLE && (player.faceType != Face.DRAGON && player.faceType != Face.DRAGON_FANGS)) {
+        outputText("\n\n");
+        CoC.instance.transformations.FaceDragonFangs.applyEffect();
         changes++;
-	}
+    }
+    else if (changes < changeLimit && rand(3) == 0 && player.tongue.type == Tongue.DRACONIC && player.lowerBody != LowerBody.GARGOYLE && player.faceType == Face.DRAGON_FANGS) {
+        outputText("\n\n");
+        CoC.instance.transformations.FaceDragon.applyEffect();
+        changes++;
+    }
 	var dragon_coat_color:Array = ["red", "golden", "metallic golden", "metallic silver", "silver", "snow white", "green", "blue", "bronzed", "black", "midnight"];
 	//Gain Dragon Scales
 	if (player.hasPartialCoat(Skin.DRAGON_SCALES) && changes < changeLimit && rand(3) == 0) {
@@ -219,28 +207,28 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	}
 	//Get Dragon Breath (Tainted version)
 	//Can only be obtained if you are considered a dragon-morph, once you do get it though, it won't just go away even if you aren't a dragon-morph anymore.
-	if (player.dragonScore() >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonFireBreath)) {
+	if (player.racialScore(Races.DRAGON) >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonFireBreath)) {
 		outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
 		outputText("\n\nIt seems " + (drakesHeart ? "the flower" : "Ember's dragon blood") + " has awaked some kind of power within you... your throat and chest feel very sore, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon fire breath!</b>)");
 		player.createPerk(PerkLib.DragonFireBreath, 0, 0, 0, 0);
         if (SceneLib.emberScene.emberAffection() >= 75 && !drakesHeart) outputText("\n\nEmber immediately dives back in to soothe your battered throat and mouth with another kiss.");
         changes++;
 	}
-	if (player.dragonScore() >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonIceBreath)) {
+	if (player.racialScore(Races.DRAGON) >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonIceBreath)) {
 		outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
 		outputText("\n\nIt seems " + (drakesHeart ? "the flower" : "Ember's dragon blood") + " has awaked some kind of power within you... your throat and chest feel very cold, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon ice breath!</b>)");
 		player.createPerk(PerkLib.DragonIceBreath, 0, 0, 0, 0);
         if (SceneLib.emberScene.emberAffection() >= 75 && !drakesHeart) outputText("\n\nEmber immediately dives back in to soothe your battered throat and mouth with another kiss.");
         changes++;
 	}
-	if (player.dragonScore() >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonLightningBreath)) {
+	if (player.racialScore(Races.DRAGON) >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonLightningBreath)) {
 		outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
 		outputText("\n\nIt seems " + (drakesHeart ? "the flower" : "Ember's dragon blood") + " has awaked some kind of power within you... your throat and chest feel like it was electrocuted, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon lightning breath!</b>)");
 		player.createPerk(PerkLib.DragonLightningBreath, 0, 0, 0, 0);
         if (SceneLib.emberScene.emberAffection() >= 75 && !drakesHeart) outputText("\n\nEmber immediately dives back in to soothe your battered throat and mouth with another kiss.");
         changes++;
 	}
-	if (player.dragonScore() >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonDarknessBreath)) {
+	if (player.racialScore(Races.DRAGON) >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonDarknessBreath)) {
 		outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
 		outputText("\n\nIt seems " + (drakesHeart ? "the flower" : "Ember's dragon blood") + " has awaked some kind of power within you... your throat and chest feel very... strange and you can't put a finger what this feeling exactly is, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon darkness breath!</b>)");
 		player.createPerk(PerkLib.DragonDarknessBreath, 0, 0, 0, 0);
@@ -261,28 +249,29 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 		player.tallness += temp;
 		changes++;
 	}
-	if (player.dragonScore() >= 4 && rand(3) == 0 && player.gender > 0) {
+	var canReactMale:Boolean = player.hasCock() && (drakesHeart || SceneLib.emberScene.emberHasVagina());
+	var canReactFemale:Boolean = player.hasVagina() && (drakesHeart || SceneLib.emberScene.emberHasCock());
+	if (player.racialScore(Races.DRAGON) >= 4 && rand(3) == 0 && (canReactMale || canReactFemale)) {
 		outputText("\n\nA sudden swell of lust races through your ");
-		if (player.hasCock()) {
+		if (canReactMale) {
 			outputText(cockDescript(0));
-			if (player.hasVagina()) outputText(" and ");
+			if (canReactFemale) outputText(" and ");
 		}
-		if (player.hasVagina()) outputText(vaginaDescript());
-        outputText(", making you wish " + (drakesHeart ? "you had a dragon to go with." : "Ember hadn't run you off") + ".  All you can think about now is fucking " + (drakesHeart ? "a dragon-morph" : SceneLib.emberScene.emberMF("him", "her")) + "; ");
-        if (player.hasCock() && flags[kFLAGS.EMBER_GENDER] >= 2) {
-			if (drakesHeart) {
+		if (canReactFemale) outputText(vaginaDescript());
+        outputText(", making you wish " + (drakesHeart ? "you had a dragon to go with." : "you could have sex with Ember right here and now") + ".  All you can think about now is fucking " + (drakesHeart ? "a dragon-morph" : SceneLib.emberScene.emberMF("him", "her")) + "; ");
+        if (canReactMale) {
+			if (drakesHeart)
 				outputText("filling a womb with your seed and fertilizing those eggs");
-			}
 			else {
 				outputText("filling her womb with your seed and fertilizing her eggs");
-				if (player.hasVagina() && flags[kFLAGS.EMBER_GENDER] == 3) outputText(" even while ");
+				if (canReactFemale) outputText(" even while ");
 			}
 		}
-		if (player.hasVagina() && (flags[kFLAGS.EMBER_GENDER] == 3 || flags[kFLAGS.EMBER_GENDER] == 1)) {
+		if (canReactFemale) {
 			outputText("taking that hard, spurting cock inside your own " + vaginaDescript(0));
 		}
 		outputText("... too late, you realize that <b>" + (drakesHeart ? "the flower" : "Ember's blood") + " has sent your draconic body into ");
-		if (player.hasCock() && (flags[kFLAGS.EMBER_GENDER] >= 2 || drakesHeart) && (rand(2) == 0 || !player.hasVagina())) { //If hermaphrodite, the chance is 50/50.
+		if (canReactMale && (rand(2) == 0 || !canReactFemale)) { //If hermaphrodite, the chance is 50/50.
 			outputText("rut");
 			player.goIntoRut(false);
 			changes++;

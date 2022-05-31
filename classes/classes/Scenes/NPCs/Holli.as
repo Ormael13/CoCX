@@ -42,7 +42,7 @@ public class Holli extends Monster
 			if (player.canFly()) outputText("beat your wings and ");
 			outputText("try to escape, but " + short + " wraps one of her writhing roots around your [leg], slamming you to the ground and tying you up with several more!  \"<i>And just where do you think you're going, my little meat?</i>\" she hisses.  Her bark splits open, exposing her body, and a green shaft snakes out of her crotch, sprouting thorns and blooming into a rose at the tip.  She holds the drooling blossom over your [face] as she forces your mouth open with her roots! ");
 			//hp loss, begin lust constrict next round
-			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {var damage:int = 15;
+			if (!player.hasPerk(PerkLib.Juggernaut) && armorPerk != "Heavy") {var damage:int = 15;
 			damage = player.takePhysDamage(damage, true);
 			}
 			outputText("\n\n");

@@ -9,10 +9,8 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Face;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
-import classes.BodyParts.Skin;
 import classes.BodyParts.Wings;
 import classes.BodyParts.Tail;
-import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -107,12 +105,12 @@ use namespace CoC;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.dungeons.ebonlabyrinth.defeatLivingFailure();
+			SceneLib.dungeons.ebonlabyrinth.livingFailureScene.defeat();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.dungeons.ebonlabyrinth.defeatedByLivingFailure();
+			SceneLib.dungeons.ebonlabyrinth.livingFailureScene.defeatedBy();
 		}
 		
 		override public function get long():String
@@ -125,36 +123,18 @@ use namespace CoC;
 		
 		public function LivingFailure()
 		{
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 80) {
-				initStrTouSpeInte(330, 330, 154, 350);
-				initWisLibSensCor(350, 360, 180, 100);
-				this.armorDef = 80;
-				this.armorMDef = 80;
-				this.bonusHP = 4000;
-				this.bonusLust = 620;
-				this.level = 80;
-				this.gems = 340 + rand(110);
-			}
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 85) {
-				initStrTouSpeInte(360, 360, 181, 373);
-				initWisLibSensCor(373, 390, 220, 100);
-				this.armorDef = 100;
-				this.armorMDef = 100;
-				this.bonusHP = 6000;
-				this.bonusLust = 695;
-				this.level = 85;
-				this.gems = 390 + rand(120);
-			}
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 90) {
-				initStrTouSpeInte(390, 390, 208, 396);
-				initWisLibSensCor(396, 420, 260, 100);
-				this.armorDef = 120;
-				this.armorMDef = 120;
-				this.bonusHP = 8000;
-				this.bonusLust = 770;
-				this.level = 90;
-				this.gems = 440 + rand(130);
-			}
+            //scaled from 65 now, reduced base stats to compensate
+			var mod:int = inDungeon ? SceneLib.dungeons.ebonlabyrinth.enemyLevelMod : 3;
+            initStrTouSpeInte(240 + 30*mod, 240 + 30*mod, 73 + 27*mod, 281 + 23*mod);
+            initWisLibSensCor(281 + 23*mod, 270 + 30*mod, 60 + 40*mod, 100);
+            this.armorDef = 20 + 20*mod;
+            this.armorMDef = 20 + 20*mod;
+            this.bonusHP = mod == 0 ? 0 : 2000*(mod-1);
+            this.bonusLust = 395 + 75*mod;
+            this.level = 60 + 5*mod; //starts from 65 due to EL levelMod calculations;
+            this.gems = mod > 50 ? 0 : Math.floor((1200 + rand(200)) * Math.exp(0.3*mod));
+            this.additionalXP = mod > 50 ? 0 : Math.floor(4000 * Math.exp(0.3*mod));
+			
 			this.a = " ";
 			this.short = "Living Failure";
 			this.imageName = "livingfailure";
@@ -172,7 +152,6 @@ use namespace CoC;
 			this.weaponName = "claws";
 			this.weaponVerb = "slash";
 			this.armorName = "fur";
-			this.additionalXP = 1500;
 			this.lustVuln = 0;
 			this.lowerBody = LowerBody.HYDRA;
 			this.faceType = Face.ANIMAL_TOOTHS;
@@ -182,6 +161,8 @@ use namespace CoC;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, (60 + 5*mod), 0, 0, 0);
 			this.checkMonster();
 		}
 	}

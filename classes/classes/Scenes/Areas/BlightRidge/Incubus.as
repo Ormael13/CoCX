@@ -17,52 +17,22 @@ import classes.internals.*;
 use namespace CoC;
 	
 	public class Incubus extends Monster
-	{
-		public var TrueDemons:DemonScene = new DemonScene();
-		
+	{		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
-			TrueDemons.defeatIncubus();
+			SceneLib.defiledravine.demonScene.defeatIncubus();
 		}
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) SceneLib.dungeons.ebonlabyrinth.defeatedByStrayDemon();
-			else TrueDemons.loseToAIncubus();
-		}
-		
-		private function cockTripAttack():void {
-			if (hasStatusEffect(StatusEffects.Blind)) { //Blind dodge change
-				outputText(capitalA + short + " suddenly grows it's dick to obscene lengths and tries to trip you with it.  Thankfully he's so blind he wasn't aiming anywhere near you!");
-				return;
-			}
-			outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + Appearance.buttDescription(player) + " and pull your [legs] out from under you.");
-			if ((player.spe-30) > rand(60)) {
-				outputText("  You spin as you fall, twisting your [legs] free and springing back to your [feet] unharmed.");
-			}
-			else { //Fall down go boom
-				outputText("  You land hard on your ass, momentarily stunned as the demonic cock-tentacle curls around your [legs], smearing them with oozing demonic fluids.");
-				if (player.lust >= 80 || player.cor >= 80) {
-					outputText("  Moaning with desire, you lick your lips as you slide your well-lubricated [legs] free.  You gather a dollop of cum and lick it seductively, winking at the incubus and hoping to make him cave into his desire.");
-					player.dynStats("lus", 13, "cor", 1);
-				}
-				else if (player.lust >= 50 || player.cor >= 50) {
-					outputText("  Blushing at the scent and feel of cum on your [legs], you twist and pull free.  You find yourself wondering what this demon's dick would taste like.");
-					player.dynStats("lus", 8 + player.cor / 20);
-				}
-				else {
-					outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed [legs].");
-					player.dynStats("lus", 5 + player.cor / 20);
-				}
-				player.takePhysDamage(5);
-			}
-			outputText("\nThe incubus gives an overconfident smile as his cock retracts away from you, returning to its normal size.");
+			if (inDungeon) SceneLib.dungeons.ebonlabyrinth.defeatedByStrayDemon();
+			else SceneLib.dungeons.factory.doLossIncubus(false);
 		}
 		
 		private function cockTripAttack2():void {
 			if (hasStatusEffect(StatusEffects.Blind)) { //Blind dodge change
-				outputText(capitalA + short + " suddenly grows it's dick to obscene lengths and tries to trip you with it.  Thankfully he's so blind he wasn't aiming anywhere near you!");
+				outputText(capitalA + short + " suddenly grows its dick to obscene lengths and tries to trip you with it.  Thankfully he's so blind he wasn't aiming anywhere near you!");
 				return;
 			}
 			outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + Appearance.buttDescription(player) + " and pull your [legs] out from under you.");
@@ -137,74 +107,20 @@ use namespace CoC;
 		
 		public function Incubus()
 		{
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB))  {
+			if (inDungeon) { //EL check
 				this.short = "stray incubus";
-				if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 250) {
-					initStrTouSpeInte(305, 220, 245, 190);
-					initWisLibSensCor(190, 205, 155, 100);
-					this.weaponAttack = 47;
-					this.armorDef = 66;
-					this.armorMDef = 11;
-					this.bonusHP = 6000;
-					this.bonusLust = 442;
-					this.level = 82;
-					this.additionalXP = 1750;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 200) {
-					initStrTouSpeInte(295, 210, 235, 185);
-					initWisLibSensCor(185, 197, 145, 100);
-					this.weaponAttack = 44;
-					this.armorDef = 60;
-					this.armorMDef = 10;
-					this.bonusHP = 5000;
-					this.bonusLust = 420;
-					this.level = 78;
-					this.additionalXP = 1500;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 150) {
-					initStrTouSpeInte(285, 200, 225, 180);
-					initWisLibSensCor(180, 189, 135, 100);
-					this.weaponAttack = 41;
-					this.armorDef = 54;
-					this.armorMDef = 9;
-					this.bonusHP = 4000;
-					this.bonusLust = 398;
-					this.level = 74;
-					this.additionalXP = 1250;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 100) {
-					initStrTouSpeInte(275, 190, 215, 175);
-					initWisLibSensCor(175, 181, 125, 100);
-					this.weaponAttack = 38;
-					this.armorDef = 48;
-					this.armorMDef = 8;
-					this.bonusHP = 3000;
-					this.bonusLust = 376;
-					this.level = 70;
-					this.additionalXP = 1000;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 50) {
-					initStrTouSpeInte(265, 180, 205, 170);
-					initWisLibSensCor(170, 173, 115, 100);
-					this.weaponAttack = 35;
-					this.armorDef = 42;
-					this.armorMDef = 7;
-					this.bonusHP = 2000;
-					this.bonusLust = 354;
-					this.level = 66;
-					this.additionalXP = 750;
-				}
-				else {
-					initStrTouSpeInte(255, 170, 195, 165);
-					initWisLibSensCor(165, 165, 105, 100);
-					this.weaponAttack = 32;
-					this.armorDef = 36;
-					this.armorMDef = 6;
-					this.bonusHP = 1000;
-					this.bonusLust = 332;
-					this.level = 62;
-					this.additionalXP = 500;
-				}
+                var mod:int = SceneLib.dungeons.ebonlabyrinth.enemyLevelMod;
+                initStrTouSpeInte(255 + 10*mod, 170 + 10*mod, 195 + 10*mod, 165 + 5*mod);
+                initWisLibSensCor(165 + 5*mod, 165 + 8*mod, 105 + 10*mod, 100);
+                this.weaponAttack = 32 + 3*mod;
+                this.armorDef = 36 + 6*mod;
+                this.armorMDef = 6 + mod;
+                this.bonusHP = 1000 + 1000*mod;
+                this.bonusLust = 332 + 22*mod;
+                this.level = 62 + 5*mod;
+                this.additionalXP = int(500 * Math.exp(0.3*mod));
+			    this.gems = int((60 + rand(30)) * Math.exp(0.3*mod));
+				this.createPerk(PerkLib.OverMaxHP, (62 + 5*mod), 0, 0, 0);
 			}
 			else {
 				this.short = "incubus";
@@ -217,6 +133,8 @@ use namespace CoC;
 				this.bonusLust = 206;
 				this.level = 26;
 				this.additionalXP = 50;
+			    this.gems = rand(30) + 15;
+				this.createPerk(PerkLib.OverMaxHP, 26, 0, 0, 0);
 			}
 			this.a = "the ";
 			this.imageName = "incubus";
@@ -248,7 +166,6 @@ use namespace CoC;
 			this.drop = new WeightedDrop().
 					add(consumables.BROBREW, 1).
 					add(consumables.INCUBID, 12);
-			this.gems = rand(30) + 15;
 			this.special1 = cockTripAttack2;
 			this.special2 = spoogeAttack2;
 			this.tailType = Tail.DEMONIC;

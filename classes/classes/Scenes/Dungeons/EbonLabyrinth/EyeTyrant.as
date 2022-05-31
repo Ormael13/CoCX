@@ -9,8 +9,6 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Face;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
-import classes.BodyParts.Skin;
-import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -28,10 +26,10 @@ use namespace CoC;
 		
 		private function eyeTyrantOmnicast():void {
 			outputText("The gazer suddenly fixates you with all of its eye unleashing a barrage of rays at you! ");
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
+			eyeTyrantOmnicastD();
+			eyeTyrantOmnicastD();
+			eyeTyrantOmnicastD();
+			eyeTyrantOmnicastD();
 			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
 			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
 			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
@@ -41,8 +39,8 @@ use namespace CoC;
 			outputText("\n\n");
 		}
 		private function eyeTyrantOmnicastD():void {
-			var damage:Number = eBaseIntelligenceDamage() * 0.15;
-			damage += eBaseWisdomDamage() * 0.15;
+			var damage:Number = eBaseIntelligenceDamage() * 0.25;
+			damage += eBaseWisdomDamage() * 0.25;
 			damage = Math.round(damage);
 			damage = player.takeMagicDamage(damage, true);
 		}
@@ -55,46 +53,28 @@ use namespace CoC;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.dungeons.ebonlabyrinth.defeatEyeTyrant();
+			SceneLib.dungeons.ebonlabyrinth.eyeTyrantScene.defeat();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.dungeons.ebonlabyrinth.defeatedByEyeTyrant();
+			SceneLib.dungeons.ebonlabyrinth.eyeTyrantScene.defeatedBy();
 		}
 		
 		public function EyeTyrant()
 		{
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 80) {
-				initStrTouSpeInte(134, 342, 157, 390);
-				initWisLibSensCor(175, 250, 150, 60);
-				this.armorDef = 80;
-				this.armorMDef = 300;
-				this.bonusHP = 5000;
-				this.bonusLust = 480;
-				this.level = 80;
-				this.gems = 350 + rand(110);
-			}
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 85) {
-				initStrTouSpeInte(168, 363, 184, 430);
-				initWisLibSensCor(196, 280, 190, 60);
-				this.armorDef = 100;
-				this.armorMDef = 350;
-				this.bonusHP = 7500;
-				this.bonusLust = 555;
-				this.level = 85;
-				this.gems = 400 + rand(120);
-			}
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 90) {
-				initStrTouSpeInte(204, 384, 211, 470);
-				initWisLibSensCor(217, 310, 230, 60);
-				this.armorDef = 120;
-				this.armorMDef = 400;
-				this.bonusHP = 10000;
-				this.bonusLust = 630;
-				this.level = 90;
-				this.gems = 450 + rand(130);
-			}
+            //scaled from 65 now, reduced base stats to compensate
+			var mod:int = inDungeon ? SceneLib.dungeons.ebonlabyrinth.enemyLevelMod : 3;
+            initStrTouSpeInte(32 + 34*mod, 279 + 21*mod, 76 + 27*mod, 270 + 40*mod);
+            initWisLibSensCor(112 + 21*mod, 160 + 30*mod, 30 + 40*mod, 60);
+            this.armorDef = 20 + 20*mod;
+            this.armorMDef = 150 + 50*mod;
+            this.bonusHP = mod == 0 ? 0 : 2500*(mod-1);
+            this.bonusLust = 255 + 75*mod;
+            this.level = 60 + 5*mod; //starts from 65 due to EL levelMod calculations;
+            this.gems = mod > 50 ? 0 : Math.floor((1300 + rand(260)) * Math.exp(0.3*mod));
+            this.additionalXP = mod > 50 ? 0 : Math.floor(6000 * Math.exp(0.3*mod));
+            
 			this.a = "";
 			this.short = "Eye Tyrant";
 			this.imageName = "gazer";
@@ -109,8 +89,8 @@ use namespace CoC;
 			this.tallness = 10*12+10;
 			this.hips.type = Hips.RATING_AMPLE;
 			this.butt.type = Butt.RATING_NOTICEABLE + 1;
-			//this.lowerBody = LowerBody.HYDRA;
-			//this.faceType = Face.SNAKE_FANGS;
+			this.lowerBody = LowerBody.GAZER;
+			this.faceType = Face.ANIMAL_TOOTHS;
 			this.skinTone = "light grey";
 			this.hairColor = "black";
 			this.hairLength = 16;

@@ -44,37 +44,42 @@ import classes.internals.*;
 		}
 		public function soulskillCostManyBirds():Number {
 			var cost:Number = 10;
-			if (findPerk(PerkLib.DaoistCultivator) >= 0) cost -= 1;
+			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 1;
 			return cost;
 		}
 		public function soulskillCostHailofBlades():Number {
 			var cost:Number = 50;
-			if (findPerk(PerkLib.DaoistCultivator) >= 0) cost -= 5;
+			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 5;
+			return cost;
+		}
+		public function soulskillCostGrandioseHailofBlades():Number {
+			var cost:Number = 200;
+			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 20;
 			return cost;
 		}
 		
 		public function SoulskillMod():Number {
 			var mod1:Number = 1;
-			if (findPerk(PerkLib.DaoistCultivator) >= 0) mod1 += .2;
-			if (findPerk(PerkLib.DaoistApprenticeStage) >= 0) {
-				if (findPerk(PerkLib.SoulApprentice) >= 0) mod1 += .4;
-				if (findPerk(PerkLib.SoulPersonage) >= 0) mod1 += .4;
-				if (findPerk(PerkLib.SoulWarrior) >= 0) mod1 += .4;
+			if (hasPerk(PerkLib.DaoistCultivator)) mod1 += .2;
+			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
+				if (hasPerk(PerkLib.SoulApprentice)) mod1 += .4;
+				if (hasPerk(PerkLib.SoulPersonage)) mod1 += .4;
+				if (hasPerk(PerkLib.SoulWarrior)) mod1 += .4;
 			}
-			if (findPerk(PerkLib.DaoistWarriorStage) >= 0) {
-				if (findPerk(PerkLib.SoulSprite) >= 0) mod1 += .6;
-				if (findPerk(PerkLib.SoulScholar) >= 0) mod1 += .6;
-				if (findPerk(PerkLib.SoulElder) >= 0) mod1 += .6;
+			if (hasPerk(PerkLib.DaoistWarriorStage)) {
+				if (hasPerk(PerkLib.SoulSprite)) mod1 += .6;
+				if (hasPerk(PerkLib.SoulScholar)) mod1 += .6;
+				if (hasPerk(PerkLib.SoulElder)) mod1 += .6;
 			}
 			return mod1;
 		}
 		public function SpellMod():Number {
 			var mod2:Number = 1;
-			if (findPerk(PerkLib.GrandMage) >= 0) mod2 += .3;
-			if (findPerk(PerkLib.Channeling) >= 0) mod2 += .2;
-			if (findPerk(PerkLib.Mage) >= 0) mod2 += .1;
-			if (findPerk(PerkLib.Spellpower) >= 0) mod2 += .1;
-			if (findPerk(PerkLib.JobSorcerer) >= 0) mod2 += .1;
+			if (hasPerk(PerkLib.GrandMage)) mod2 += .3;
+			if (hasPerk(PerkLib.Channeling)) mod2 += .2;
+			if (hasPerk(PerkLib.Mage)) mod2 += .1;
+			if (hasPerk(PerkLib.Spellpower)) mod2 += .1;
+			if (hasPerk(PerkLib.JobSorcerer)) mod2 += .1;
 			return mod2;
 		}
 		
@@ -91,15 +96,19 @@ import classes.internals.*;
 		public function castHailOfBladesSoulskillDinah():void {
 			outputText("Letting soulforce leak out around her, Dinah form six ethereal two meter long weapons. Then she thrust her hand outwards and in the blink of an eye, weapons shoot forwards you. Weapons hits you, dealing ");
 			soulforce -= soulskillCostHailofBlades();
-			bladesD();
-			bladesD();
-			bladesD();
-			bladesD();
-			bladesD();
-			bladesD();
-			outputText(" damage!");
+			var hobD:Number = 6;
+			while (hobD-->0) bladesD();
+			outputText("damage!");
 		}
-		private function bladesD():void {
+		public function castGrandioseHailOfBladesSoulskillDinah():void {
+			outputText("Letting soulforce leak out around her, Dinah form eighteen ethereal two meter long weapons in two rows. Then she thrust her hand outwards and in the blink of an eye, weapons shoot forwards you. Weapons hits you, dealing ");
+			soulforce -= soulskillCostGrandioseHailofBlades();
+			createStatusEffect(StatusEffects.AbilityCooldown2, 3, 0, 0, 0);
+			var ghobD:Number = 9;
+			while (ghobD-->0) bladesD(2);
+			outputText("damage!");
+		}
+		private function bladesD(hits:Number = 1):void {
 			var bd:Number = 0;
 			bd += this.wis * 0.5;
 			bd += wisdomscalingbonus() * 0.5;
@@ -120,6 +129,11 @@ import classes.internals.*;
 			bd = player.takeMagicDamage(bd, true);
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 			outputText(" ");
+			if (hits == 2) {
+				bd = player.takeMagicDamage(bd, true);
+				if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+				outputText(" ");
+			}
 		}
 		
 		public function castWhiteFireSpellDinah():void {
@@ -152,7 +166,7 @@ import classes.internals.*;
 			outputText("She flushes, drawing on her body's desires to empower her muscles and hasten her up.");
 			outputText("The rush of success and power flows through her body.  <b>She looks like she can move faster!</b>");
 			createStatusEffect(StatusEffects.Blink, 50, 0, 0, 0);
-			if (findPerk(PerkLib.JobEnchanter) >= 0) this.speStat.core.value += (5 + (inte / 10)) * 1.5 * SpellMod();
+			if (hasPerk(PerkLib.JobEnchanter)) this.speStat.core.value += (5 + (inte / 10)) * 1.5 * SpellMod();
 			else this.speStat.core.value += (5 + (inte / 10)) * 1.2 * SpellMod();
 			mana -= spellCostBlink();
 			flags[kFLAGS.DINAH_SPELLS_CASTED]++;
@@ -190,12 +204,12 @@ import classes.internals.*;
 			firedamage = Math.round(firedamage);
 			player.takeFireDamage(firedamage, true);
 			if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
-			else player.createStatusEffect(StatusEffects.BurnDoT,3,0.05,0,0);
+			else player.createStatusEffect(StatusEffects.BurnDoT,SceneLib.combat.debuffsOrDoTDuration(3),0.05,0,0);
 			var physdamage:Number = 0;
 			physdamage += eBaseDamage();
 			player.takePhysDamage(physdamage, true);
 			if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
-			else player.createStatusEffect(StatusEffects.Hemorrhage,3,0.05,0,0);
+			else player.createStatusEffect(StatusEffects.Hemorrhage,SceneLib.combat.debuffsOrDoTDuration(3),0.05,0,0);
 			outputText(" Reeling in pain you begin to bleed and burn at the same time.");
 		}
 		
@@ -246,7 +260,8 @@ import classes.internals.*;
 						else hellcatFireballDinah();
 						break;
 					case 3:
-						if ((soulforce >= soulskillCostHailofBlades()) && rand(2) == 0) castHailOfBladesSoulskillDinah();
+						if ((soulforce >= soulskillCostGrandioseHailofBlades()) && !hasStatusEffect(StatusEffects.AbilityCooldown2)) castGrandioseHailOfBladesSoulskillDinah();
+						else if ((soulforce >= soulskillCostHailofBlades()) && rand(2) == 0) castHailOfBladesSoulskillDinah();
 						else hellcatInfernalClawDinah();
 						break;
 					case 4:
