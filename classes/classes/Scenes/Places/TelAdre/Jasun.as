@@ -1,7 +1,5 @@
 ﻿package classes.Scenes.Places.TelAdre{
 	import classes.GlobalFlags.kFLAGS;
-	import classes.PerkLib;
-	import classes.StatusEffects;
 
 	public class Jasun extends TelAdreAbstractContent{
 
@@ -42,14 +40,13 @@ public function changingRoom():void {
 	}
 	//[Look Around]
 	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00181] == 0)
-		simpleChoices("Look Around", meetJasun, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
-	else simpleChoices("Jasun", meetJasun, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+		simpleChoices("Look Around", meetJasun, "", null, "", null, "", null, "Leave", telAdre.gymDesc);
+	else simpleChoices("Jasun", meetJasun, "", null, "", null, "", null, "Leave", telAdre.gymDesc);
 }
 
 //AT CHANGING ROOM (SELECTING TO SEE THE SHARK OR LOOK AROUND IF FIRST TIME)
 private function meetJasun():void {
 	clearOutput();
-	spriteSelect(33);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179] == 0) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179]++;
 		outputText("As your eyes survey the room, you see a very thick figure step out from one of the changing stalls.  He is at least six feet tall from your guesstimate and has a massive barreled chest, the kind that could no doubt bench press anything the creature's own weight.  His shoulder span must be at least ");
@@ -60,12 +57,18 @@ private function meetJasun():void {
 		outputText("Before long, you blink a couple of times and break through your prior distraction.  You can see in the mirror before the man that he has been watching your revelry of his form.  A grin plays across the man's features and within it you find several rows of razor-sharp teeth, forcing you to gulp instinctively as you think of what sort of damage those could do to your tender flesh.  ");
 	
 		//IF MALE
-		if(player.gender <= 1) {
+		if(player.gender <= 1 || player.gender == 3 && player.mf("m", "f") == "m") {
 			outputText("\"<i>Eyes to yourself, boy. Try to play any games and I'll tear you apart limb from limb. Now get out of here before I do it anyway.</i>\" The shark-morph snarls threateningly before turning back to the mirror.\n\n");
 			outputText("You doubt he'd have the nerve to murder someone here, but you feel like you've wasted your time.");
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179] = 0;
-			doNext(camp.returnToCampUseOneHour);
-			return;
+
+            if (silly() && player.armor == armors.BONSTRP) {
+                outputText("\n\nOn your way out you pass by the drawers, where you notice someone's forgotten bondage straps, just like yours.");
+                outputText("\nMaybe you should come here one more time?");
+                return;
+            }
+            else
+                strapsRouter();
+            return;
 		}
 		//IF FEMALE
 		else {
@@ -81,7 +84,7 @@ private function meetJasun():void {
 				//(+15 Lust, back to gym entrance)
 				dynStats("lus", (10+player.lib/10));
 				outputText("You book it out of there.  What a waste.");
-				doNext(camp.returnToCampUseOneHour);
+				doNext(telAdre.gymDesc);
 				return;
 			}
 			//IF PASS FITNESS CHECK
@@ -93,7 +96,7 @@ private function meetJasun():void {
 				//(+15 Lust, back to gym entrance)
 				dynStats("lus", (10+player.lib/10));
 				outputText("You book it out of there.  What a waste.");
-				doNext(camp.returnToCampUseOneHour);
+				doNext(telAdre.gymDesc);
 				return;
 			}
 			//IF YOU HAVE THE BIKINI ON
@@ -109,13 +112,18 @@ private function meetJasun():void {
 			outputText("While you look around the changing room, one of the gym's other patron asks you if you're looking for Jasun.  Seeing your confusion, they describe the hunky shark guy you met before.  You nod and smile, happy to have learned his name.\n\n");
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00181]++;
 		}
+		//IF MALE
+        if (silly() && (player.gender <= 1 || player.gender == 3 && player.mf("m", "f") == "m") && player.armor == armors.BONSTRP) {
+            jasunGachi();
+            return;
+        }
 		//If you're a dude.
-		if(player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
+		if(player.gender <= 1 || player.gender == 3 && player.mf("m", "f") == "m") {
 			outputText("Jasun walks out of a stall, his thick and muscular figure still as glorious as the last time you set eyes upon it.  He glances your way and smirks.\n\n");
 			outputText("\"<i>Eyes to yourself, boy. Try to play any games and I'll tear you apart limb from limb. Now get out of here before I do it anyway.</i>\" The shark-morph snarls threateningly before turning to walk away.\n\n");
 			outputText("You doubt he'd have the nerve to murder someone here, but you feel like you've wasted your time.");
-			doNext(camp.returnToCampUseOneHour);
-			return;
+            strapsRouter();
+            return;
 		}
 		//IF YOU FAIL TO MEET ANY OF HIS CRITERIA NOW
 		if(player.tone < 75 || player.armorName != "slutty swimwear") {
@@ -128,7 +136,7 @@ private function meetJasun():void {
 			outputText(", we can go swim.</i>\" He hesitates for a moment at the mirror, and then walks past you quickly without making eye contact. Feeling dejected and suddenly very alone, you ignore the sensation caused by his skin brushing against yours and walk back to the gym's entrance. Maybe you can work yourself back into Jasun's graces with time.\n\n");
 			//(-15 Lust, back to gym entrance)
 			dynStats("lus", -15);
-			doNext(camp.returnToCampUseOneHour);
+			doNext(telAdre.gymDesc);
 			return;
 		}
 		outputText("Jasun comes out of his stall and smiles when he sees you, already beginning to strain against the skimpy fabric of his bottom.  He asks, \"<i>Would you like to come swimming with me?</i>\" though his tone indicates that swimming may involve more than a few laps.");
@@ -137,13 +145,18 @@ private function meetJasun():void {
 	}
 	//Repeat
 	else {
+		//IF MALE
+        if (silly() && (player.gender <= 1 || player.gender == 3 && player.mf("m", "f") == "m") && player.armor == armors.BONSTRP) {
+            jasunGachi();
+            return;
+        }
 		//If you're a dude.
-		if(player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
+		if(player.gender <= 1 || player.gender == 3 && player.mf("m", "f") == "m") {
 			outputText("Jasun walks out of a stall, his thick and muscular figure still as glorious as the last time you set eyes upon it.  He glances your way and smirks.\n\n");
 			outputText("\"<i>Eyes to yourself, boy. Try to play any games and I'll tear you apart limb from limb. Now get out of here before I do it anyway.</i>\" The shark-morph snarls threateningly before turning to walk away.\n\n");
 			outputText("You doubt he'd have the nerve to murder someone here, but it's clear that so long as you lack a vagina Jasun will have no interest in you.  What a waste.");
-			doNext(camp.returnToCampUseOneHour);
-			return;
+            strapsRouter();
+            return;
 		}
 		//IF YOU FAIL TO MEET ANY OF HIS CRITERIA NOW
 		if(player.tone < 75 || player.armorName != "slutty swimwear") {
@@ -152,7 +165,7 @@ private function meetJasun():void {
 			outputText("\"<i>[name], you know, I see that a lot has changed with you. That's fine, and it's entirely up to you, but I think today I should probably swim alone. You can come and visit me anytime, of course, maybe things will be like they were before in time.</i>\" He hesitates for a moment at the mirror, and then walks past you quickly without making eye contact. Feeling dejected and suddenly very alone, you ignore the sensation caused by his skin brushing against yours and walk back to the gym's entrance. Maybe you can work yourself back into Jasun's graces with time.\n\n");
 			//(-15 Lust, back to gym entrance)
 			dynStats("lus", -15);
-			doNext(camp.returnToCampUseOneHour);
+			doNext(telAdre.gymDesc);
 			return;
 		}
 		//IF YOU MEET ALL CRITERIA STILL
@@ -167,7 +180,6 @@ private function meetJasun():void {
 
 private function meetJasun2():void {
 	clearOutput();
-	spriteSelect(33);
 	outputText("You and he walk together for what can't be a very long time. He winds around the back side of the gym, avoiding the weightlifting room and going past the track altogether. You didn't even know that there were areas of the gym beyond what you had previously seen. He easily pushes aside a very thick door with one arm ");
 	if(player.str < 50) outputText("that you're pretty sure you couldn't have moved on your own at all ");
 	outputText("and then suddenly stops. The light in the room blinds you for a moment, but then your eyes adjust and what you see makes you gasp. There's an entire swimming pool in here, and it's absolutely gargantuan! You pull away from the shark-man and walk up to the water, running your hand through it and looking about like a kid who just walked into a toy store. He walks up behind you slowly and sits down on the ledge into the pool beside you.\n\n");
@@ -181,18 +193,16 @@ private function meetJasun2():void {
 //IF YOU TURN AWAY
 private function turnAwayFromAdj():void {
 	clearOutput();
-	spriteSelect(33);
 	outputText("\"<i>I understand,</i>\" he says dejectedly. He steps up and walks back toward the door. He perks up at the last minute, not letting his being rejected hurt his pride in the least, and says, \"<i>If you ever would like to swim, you know where to find me. Farewell.</i>\" He stands at the door and waits for you to leave before leaping into the water alone, as he has done no doubt many times in the past.\n\n");
 	//(Back to gym entrance)
 	outputText("You book it out of there.  What a waste.");
-	doNext(camp.returnToCampUseOneHour);
+	doNext(telAdre.gymDesc);
 	return;
 }
 
 //IF YOU ACCEPT
 private function acceptJasunsAdvances():void {
 	clearOutput();
-	spriteSelect(33);
 	outputText("He smiles wider as you put your hand into his. He leaps into the pool with a finesse unrivaled and lets go of you just as you're over the edge and dive in yourself. You giggle and throw about your hair in the water, gleeful at being able to swim somewhere without fear of being attacked by assorted demons, slimes, or what-have-you. You swim swiftly through the water and manage to catch up to him as he rounds the second corner of his first lap. He's completely shocked at your adroitness in the water, and smiles a wicked and toothed grin as he speeds up, no longer content to hold back. You struggle to keep up, but find that he is simply designed for this kind of thing. Seeing that you are trying so hard, he lets up again, content with the challenge you've provided as you round out your first lap. He isn't even panting when he holds up and turns toward you. You're so focused on your swimming that you ram right into his chest, bonking your head and causing you to scowl a little and contort in the water to come up. As you come up, rubbing your head, you find that you are intimately close to Jasun and immediately blush.\n\n");
 
 	outputText("From this distance, you see countless pockmarked scars on his torso, no doubt from his life before this one. You can't help yourself as you reach out to touch each one, caressing the spot gently to let him know that you understand the pain that this land can inflict on an individual. You look up into his piercing, red eyes inquisitively, and he understands instantly. He gently grasps the hand of yours that is petting his chest and speaks, \"<i>The women of my people use us males for their whims. They are merciless and cruel in their methods.</i>\" You know what he isn't telling you is that they're used for breeding purposes and instinctively turn your back to him, silently apologetic that you've been so distracted by his masculinity up to now. He pulls at your shoulders and tugs you back around to face him, clearly unperturbed by your presence. \"<i>You're different. You're not like them. You understand.</i>\" He uses one of his clawed fingers and somehow manages a gentle touch to the bottom of your chin, bringing your eyes to meet with his. You can tell that he is being sincere, and find yourself drawn into his visage. The two of you pull together, and his hand moves up to pull your head closer, and you kiss longingly, like the two of you have never kissed before. The kiss lasts for minutes, and at the end of it, you both pull away, flushed by the other's presence and closeness. Just then, while staring into his eyes, you feel a poke at your stomach and instinctively look down, shocked to find beneath the water's surface that Jasun's penis has grown to nearly two feet long and has erupted from his skimpy attire. It is a work of art, you think to yourself, noting how it is long and slender and just barely tipped at the end. It is as smoothly-flowing as his body is in water. He makes no attempt to conceal his desire to have you, and you find that you have no desire to resist him either.\n\n");
@@ -204,7 +214,6 @@ private function acceptJasunsAdvances():void {
 
 private function jasunSecks():void {
 	clearOutput();
-	spriteSelect(33);
 	//Increment 'times had sex'
 	player.slimeFeed();
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00180] == 0) {
@@ -231,11 +240,126 @@ private function jasunSecks():void {
 
 		outputText("When you wake back up, you find that your bikini is next to you and that everything else seems to be fine. You put your bikini back on and look around, unable to see Jasun anywhere. You walk toward the gym's exit and reminisce of your experience today, ready for whatever your next escapade will bring.");
 	}
-	player.sexReward("cum","Vaginal");
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00180]++;
 	player.orgasm();
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
+
+private function strapsRouter():void {
+    if (player.armor == armors.BONSTRP || player.hasItem(armors.BONSTRP)) {
+        if (silly()) {
+            outputText("\n\nYou remember about your bondage straps. Maybe you should try to come to the same place wearing it? It's Mareth, you probably won't get arrested.");
+        }
+		doNext(telAdre.gymDesc);
+        return;
+    }
+    else {
+        outputText("\n\nOn your way out you pass by the drawers, where you notice someone's forgotten bondage straps.");
+        if (!silly()) {
+            outputText("\nYou blink in amazement and realize that it's just a regular swimsuit.. You aren't <b>silly</b> enough to really think people come in gym dressed in  such fetish junk, are you?");
+		    doNext(telAdre.gymDesc);
+            return;
+        }
+        else
+            simpleChoices("Steal Them", stealStraps, "", null, "", null, "", null, "Leave", notSteal);
+    }
+    		
+}
+
+private function stealStraps():void {
+    outputText("\n\nYou see no witnesses right now. Quickly, you take a strange piece of clothing and put it into your bag. Maybe next time you should try to come to the same place wearing it? In the end, it reveals your muscles good enough to make someone fall for you.");
+    inventory.takeItem(armors.BONSTRP, camp.returnToCampUseOneHour);
+    return;
+
+}
+
+private function notSteal():void {
+    outputText("\n\nIt's probably not a good idea to steal someone else's... <i>clothes</i>, especially where anyone can come in and see you.. maybe you can buy your own at some bazaar?");
+    doNext(telAdre.gymDesc);
+    return;
+}
+    
+
+private function jasunGachi():void {
+    clearOutput();
+    outputText("Jasun is sitting on the bench facing you, dressed in leather pants. Noticing your bizzare clothing, he scowls and rises up from the bench abruptly:");
+    outputText("\n\"<i>Hey buddy, I think you've got the wrong door, the leather club is two blocks down.</i>\"");
+
+    outputText("\n\nDisgruntled by your sudden rudeness, you respond: \"<i>Fuck you!.</i>\"");
+
+    outputText("\n\n\"<i>No, fuck <b>you</b>, leather man.</i>\"");
+
+    outputText("\n\nYou're going to show him who is the boss of this gym! You tell him of some fucking slaves who dared to oppose you before and explain how these stories usually end.");
+
+    outputText("\n\n\"<i>Shut the fuck up, boy next door! You like challenges? You got me mad now!</i>\"");
+    outputText("\nJasun jumps you, trying to pin you down. Fuck, he's fast! You barely dodge his charge (good thing sharks doesn't have horns, or that would end badly..) to dive under his hands and slap his ass.");
+    outputText("\n\"<i>Endure the lash of the spanking</i>\", you sneer at him. \"<i>Do you like that? I'll give you one more round with me.</i>\"");
+
+    outputText("\n\nStunned after his unsuccessful attempt, the shark morph pulls up his pants and prepares for another charge.");
+    outputText("\n\"<i>Get your ass back here, <b>NOW</b>! You're playing with fire!!</i>\"");
+
+    outputText("\n\nThis time you didn't have enough time to avoid the charge and he pins you down. Trying to get out of the pin, you grab hold of something and try to pull on it.");
+    outputText("\n\"<i><b>AHHHH</b></i>\" - Jasun screams and lets you go, his trousers dropping down revealing him completely. \"<i><b>YOU RIPPED MY FUCKING PANTS</b>!!! That's power, son!</i>\"");
+
+    outputText("\n\nYou can apologize or use the possibility to attack him in return.");
+
+    simpleChoices("Attack!", gachiFight, "Apologize", suckSomeDick, "", null, "", null, "", null);
+    return;
+}
+
+private function suckSomeDick():void {
+    clearOutput();
+    outputText("You clearly didn't mind to do that. \"<i>Oh shit, I'm sorry</i>\" - you respond, trying to look away.");
+
+    outputText("\n\nJasun changes his scowl for a grin. \"<i>Sorry for what? Our daddy taught us not to be ashamed of our dicks.</i>\"");
+
+    outputText("\n\nSeeing your 'enemy' calm down, you lean on the closest drawer. \"<i>Yeah, I see that. Your daddy gave you good advice.</i>\"");
+
+    outputText("\n\nJasun proudly stands up. \"<i>It gets bigger when I pull on it. Sometimes, I pull on it so hard, I rip the skin.</i>\"");
+
+    outputText("\n\nYou remember your wrestling sessions in Ingnam. \"<i>Well, my daddy taught me a few things too, like, uh, how not to rip the skin by using someone else's mouth, instead of your own hands.</i>\"");
+
+    outputText("\n\n\"<i>Will you show me?</i>\"");
+
+    outputText("\n\n\"<i>I'd be right happy to.</i>\"");
+    outputText("\n\nWithout further interruption, you decide to celebrate your reconciliation.");
+    doNext(gachiFinish);
+}
+
+private function gachiFight():void {
+    clearOutput();
+    outputText("You're not going to lose this fight, so you prepare to jump at your distracted foe.");
+    outputText("\n\"<i>Oh-ho-ho, it turns me on! Let's have one more round! I bet your ass, you won't be able to catch me this time.</i>\"");
+
+    outputText("\n\nShark-morph throws his pants away and prepares to make the next move.");
+    outputText("\n\"<i>You like challenges? <b>SHOW ME WHAT YOU'VE GOT, COLLEGE BOY!</b></i>\"");
+
+    outputText("\n\nYou continue fighting for the next 2 hours trying to show each other who's the boss of this gym. Sadly, Heckel was late for competition.");
+    doNext(gachiFinish);
+}
+
+private function gachiFinish():void {
+    clearOutput();
+    outputText("As the last visitors walk out of the gym, the centauress at the entrance finally finds her book and tries to read in silence... or not. Suddenly, screams are heard from the changing room.");
+    outputText("\n\n<i>Yes, show me your deep dark fantasies!</i>\"");
+
+    outputText("\n\n<i>Aw, yes, sir! Oh, I'm fucking cumming!</i>\"");
+
+    outputText("\n\n<i>Come on, boy next door! Swallow my cum!</i>\"");
+
+    outputText("\n\n<i><b>AAAAAAAAHHHHHHHHH</b></i>\"");
+
+    outputText("\n\n<i><b>AAAAAAAAHHHHHHHHHHH</b></i>\"");
+    player.orgasm();
+    dynStats("sen", -1);
+    dynStats("str", 1);
+    dynStats("tou", 1);
+    outputText("\n\nYou gain 300 gems from this 'battle'.");
+    player.gems += 300;
+    statScreenRefresh();
+	doNext(camp.returnToCampUseTwoHours);
+}
+
 }
 }

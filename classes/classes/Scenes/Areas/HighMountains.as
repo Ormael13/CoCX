@@ -5,11 +5,11 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 use namespace CoC;
 
@@ -21,7 +21,6 @@ use namespace CoC;
 		public var minotaurMobScene:MinotaurMobScene = new MinotaurMobScene();
 		public var izumiScenes:IzumiScene = new IzumiScene();
 		public var phoenixScene:PhoenixScene = new PhoenixScene();
-		public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
 		public var darkelfScene:DarkElfScene = new DarkElfScene();
 		
 		public function HighMountains()
@@ -42,12 +41,12 @@ use namespace CoC;
 			flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
 			doNext(playerMenu);
 			
-			if (SceneLib.d3.discoverD3() == true)
+			if (SceneLib.d3.discoverD3())
 			{
 				return;
 			}
 			
-			var chooser:Number = rand(6);
+			var chooser:Number = rand(5);
 			//Boosts mino and hellhound rates!
 			if (player.hasPerk(PerkLib.PiercedFurrite) && rand(3) == 0) {
 				chooser = 1;
@@ -77,7 +76,7 @@ use namespace CoC;
 				return;
 			}
 			//Wild manticore/malikore
-			if (chooser == 5) {
+			/*if (chooser == 5) {
 				if (flags[kFLAGS.ETNA_AFFECTION] < 5) chooser = rand(5);
 				else {
 					if (rand(2) == 0) {
@@ -90,15 +89,15 @@ use namespace CoC;
 						return;
 					}
 				}
-			}
+			}*/
 			//Temple of the Divine
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] < 1 && rand(4) == 0) {
-				templeofdivine.firstvisitintro();
+				SceneLib.templeofdivine.firstvisitintro();
 				return;
 			}
 			//25% minotaur sons!
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 3 && rand(4) == 0 && player.hasVagina()) {
-				spriteSelect(44);
+			if (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] >= 3 && rand(4) == 0 && player.hasVagina() && flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] < 3) {
+				spriteSelect(SpriteDb.s_minotaur);
 				minotaurMobScene.meetMinotaurSons();
 				return;
 			}
@@ -118,24 +117,24 @@ use namespace CoC;
 				}
 			}
 			if (flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0 && rand(4) == 0) {
-				phoenixScene.encounterPhoenix1();
+				phoenixScene.encounterPhoenix(0);
 				return;
 			}
-			if (player.hasKeyItem("Gryphon Statuette") < 0 && player.hasKeyItem("Peacock Statuette") < 0 && player.avianScore() >= 6 && rand(4) == 0) {
+			if (player.hasKeyItem("Gryphon Statuette") < 0 && player.hasKeyItem("Peacock Statuette") < 0 && player.isRace(Races.AVIAN) && rand(4) == 0) {
 				caveScene();
 				return;
 			}
 			//10% chance to mino encounter rate if addicted
 			if ((flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0 || player.hasPerk(PerkLib.LactaBovineImmunity)) && rand(10) == 0) {
-				spriteSelect(44);
+				spriteSelect(SpriteDb.s_minotaur);
 				//Cum addictus interruptus!  LOL HARRY POTTERFAG
 				//Withdrawl auto-fuck!
 				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3 || player.hasPerk(PerkLib.LactaBovineImmunity)) {
                     SceneLib.mountain.minotaurScene.minoAddictionFuck();
                     return;
 				}
-                SceneLib.mountain.minotaurScene.getRapedByMinotaur(true);
-                spriteSelect(44);
+                SceneLib.mountain.minotaurScene.minotaurAutorape();
+                spriteSelect(SpriteDb.s_minotaur);
 				return;
 			}
 			trace("Chooser goin for" + chooser);
@@ -144,12 +143,9 @@ use namespace CoC;
 			if (chooser == 0) {
 				clearOutput();
 				outputText("A harpy wings out of the sky and attacks!");
-				if (flags[kFLAGS.CODEX_ENTRY_HARPIES] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_HARPIES] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Harpies!</b>")
-				}
+				camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_HARPIES);
 				startCombat(new Harpy());
-				spriteSelect(26);
+				spriteSelect(SpriteDb.s_harpy);
 				return;
 			}
 			//Basilisk!
@@ -159,18 +155,18 @@ use namespace CoC;
 			}
 			//Sophie
 			if (chooser == 2) {
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || SceneLib.sophieFollowerScene.sophieFollower()) {
+				if (flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0 || flags[kFLAGS.SOPHIE_DISABLED] > 0 || SceneLib.sophieFollowerScene.sophieFollower()) {
 					clearOutput();
 					outputText("A harpy wings out of the sky and attacks!");
 					startCombat(new Harpy());
-					spriteSelect(26);
+					spriteSelect(SpriteDb.s_harpy);
 				}
 				else {
 					if (flags[kFLAGS.MET_SOPHIE_COUNTER] == 0) SceneLib.sophieScene.meetSophie();
 					else SceneLib.sophieScene.meetSophieRepeat();
 				}
 			}
-			if (chooser == 3) 
+			if (chooser == 3)
 			{
 				if (flags[kFLAGS.SOUL_SENSE_IZUMI] < 3) {
 					this.izumiScenes.encounter();
@@ -187,14 +183,10 @@ use namespace CoC;
 				else {
 					clearOutput();
 					outputText("A harpy wings out of the sky and attacks!");
-					if (flags[kFLAGS.CODEX_ENTRY_HARPIES] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_HARPIES] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Harpies!</b>")
-					}
+					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_HARPIES);
 					startCombat(new Harpy());
-					spriteSelect(26);
+					spriteSelect(SpriteDb.s_harpy);
 				}
-				return;
 			}
 		}
 		
@@ -203,7 +195,7 @@ use namespace CoC;
 		public function chickenHarpy():void
 		{
 			clearOutput();
-			spriteSelect(90);
+			spriteSelect(SpriteDb.s_chickenHarpy);
 			if (flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] == 0) {
 				outputText("Taking a stroll along the mountains, you come across a peculiar-looking harpy wandering around with a large wooden cart in tow.  She's far shorter and bustier than any regular harpy you've seen before, reaching barely 4' in height but managing to retain some semblance of their thick feminine asses.  In addition to the fluffy white feathers decorating her body, the bird-woman sports about three more combed back upon her forehead like a quiff, vividly red in color.");
 				outputText("\n\nHaving a long, hard think at the person you're currently making uncomfortable with your observational glare, you've come to a conclusion - she must be a chicken harpy!");
@@ -234,7 +226,7 @@ use namespace CoC;
 		public function giveTwoOviElix():void
 		{
 			clearOutput();
-			spriteSelect(90);
+			spriteSelect(SpriteDb.s_chickenHarpy);
 			player.consumeItem(consumables.OVIELIX);
 			player.consumeItem(consumables.OVIELIX);
 			outputText("You hand over two elixirs, the harpy more than happy to take them from you.  In return, she unties a corner of the sheet atop the cart, allowing you to take a look at her collection of eggs.");
@@ -251,7 +243,7 @@ use namespace CoC;
 		public function giveThreeOviElix():void
 		{
 			clearOutput();
-			spriteSelect(90);
+			spriteSelect(SpriteDb.s_chickenHarpy);
 			player.consumeItem(consumables.OVIELIX, 3);
 			outputText("You hand over three elixirs, the harpy ecstatic over the fact that you're willing to part with them.  In return, she unties a side of the sheet atop the cart, allowing you to take a look at a large collection of her eggs.");
 			//[Black][Blue][Brown][Pink][Purple]
@@ -267,7 +259,7 @@ use namespace CoC;
 		public function getHarpyEgg(itype:ItemType):void
 		{
 			clearOutput();
-			spriteSelect(90);
+			spriteSelect(SpriteDb.s_chickenHarpy);
 			flags[kFLAGS.EGGS_BOUGHT]++;
 			outputText("You take " + itype.longName + ", and the harpy nods in regards to your decision.  Prepping her cart back up for the road, she gives you a final wave goodbye before heading back down through the mountains.\n\n");
 			inventory.takeItem(itype, chickenHarpy);
@@ -276,7 +268,7 @@ use namespace CoC;
 		public function leaveChickenx():void
 		{
 			clearOutput();
-			spriteSelect(90);
+			spriteSelect(SpriteDb.s_chickenHarpy);
 			outputText("At the polite decline of her offer, the chicken harpy gives a warm smile before picking her cart back up and continuing along the path through the mountains.");
 			outputText("\n\nYou decide to take your own path, heading back to camp while you can.");
 			doNext(camp.returnToCampUseOneHour);
@@ -289,7 +281,7 @@ use namespace CoC;
 			outputText("The alcove itself is seemingly empty, though after a better examination, the back has engraved on the cliff rock a long, detailed inscription. Sadly, you can’t get a word from it, since it’s written in a strange, old language that’s doesn’t barely resemble anything that you’ve found in Mareth. Carved on each side there area stylized figures of avian creatures, ");
 			outputText("the most noticeable ones being a gryphon with the wings spread, and in the other side, a peacock doing the same with its tail. As you put your hands on them, you notice a that a shape vaguely resembling a hand forming in the floor of the alcove.\n\n");
 			outputText("Tentatively you put one hand on place");
-			if (player.avianScore() < 9) {
+			if (!player.isRace(Races.AVIAN)) {
 				outputText(", but absolutely nothing happens. Maybe the magic or whatever that thing was supposed to do stopped working long ago? In any case, you had enough looking for a while, and since you’re not getting anything useful from there, you resume your walk.\n\n");
 				doNext(camp.returnToCampUseOneHour);
 			}

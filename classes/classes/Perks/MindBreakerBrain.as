@@ -16,7 +16,7 @@ package classes.Perks
 
 		override public function name(params:PerkClass=null):String {
 			var suffix:Array = ["", "Gamma", "Beta", "Alpha", "Omega", "Prime"];
-			var sufval:int = player.perkv1(PerkLib.MindbreakerBrain1toX);
+			var sufval:int = player ? player.perkv1(PerkLib.MindbreakerBrain1toX) : 0;
 			if (sufval > 5) sufval = 5;
 			return "Mindbreaker Brain " + suffix[sufval] + "";
 		}

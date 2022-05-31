@@ -17,12 +17,7 @@ public class SandWitch extends Monster
 			{
 				player.removeStatusEffect(StatusEffects.StoneLust);
 			}
-			
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0){
-				SceneLib.desert.sandWitchScene.beatSandwitch();
-			} else {
-				SceneLib.combat.finishCombat();
-			}
+			SceneLib.desert.sandWitchScene.beatSandwitch();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void

@@ -1,13 +1,8 @@
 package classes.Items.Consumables
 {
-    import classes.Items.Consumable;
     import classes.CoC;
-    import classes.CockTypesEnum;
-    import classes.GlobalFlags.*;
     import classes.Items.Consumable;
-    import classes.PerkLib;
     import classes.Player;
-    import classes.PregnancyStore;
     import classes.StatusEffects;
     import classes.internals.Utils;
 
@@ -16,8 +11,6 @@ package classes.Items.Consumables
     */
     public class Ambrosia extends Consumable
     {
-        private static const ITEM_VALUE:int = 150;
-
         public function Ambrosia()
         {
             super("Ambrosa","Ambrosia", "a small crystal vial filled with a glittering amber fluid you got from the Sand Mother. You can smell a sweet scent, even though it is tightly corked");
@@ -25,7 +18,7 @@ package classes.Items.Consumables
 
         override public function canUse():Boolean {
             if (CoC.instance.player.statusEffectv1(StatusEffects.Exgartuan) == 1) { //Exgartuan doesn't like the pure honey products
-                outputText("You uncork the bottle only to hear Exgartuan suddenly speak up.  <i>“Hey kid, this beautiful cock here doesn’t need any of that special bee shit.  Cork that bottle up right now or I’m going to make it so that you can’t drink anything but me.”</i>  You give an exasperated sigh and put the cork back in the bottle.");
+                outputText("You uncork the bottle only to hear Exgartuan suddenly speak up.  <i>\"Hey kid, this beautiful cock here doesn’t need any of that special bee shit.  Cork that bottle up right now or I’m going to make it so that you can’t drink anything but me.\"</i>  You give an exasperated sigh and put the cork back in the bottle.");
 				return false;
 			}
 			return true;
@@ -77,12 +70,11 @@ package classes.Items.Consumables
 			}
 
             //Intelligence Boost
-			if (changes < changeLimit && Utils.rand(2) == 0) {
-				player.MutagenBonus("int", 1);
+			if (changes < changeLimit && Utils.rand(2) == 0 && player.MutagenBonus("int", 1)) {
 				outputText("\n\nYou spend a few moments analyzing the taste and texture of the fluid residue, feeling awfully smart for it.");
 				changes++;
 			}
-            return (false);
+            return false;
         }
     }
 }

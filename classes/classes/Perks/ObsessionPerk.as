@@ -18,7 +18,7 @@ package classes.Perks
 		public function ObsessionPerk() 
 		{
 			super("Obsession", "Obsession",
-					"Your equipment boost your spells power and argument your black magic at the same time lowering it costs!");
+					"Your equipment boost your spells power and augment your black magic at the same time lowering it costs!");
 		}
 		
 		override public function keepOnAscension(respec:Boolean = false):Boolean 

@@ -79,7 +79,7 @@ public class ImpLord extends Imp
 			if (player.hasStatusEffect(StatusEffects.SiegweirdImp)) {
 				player.removeStatusEffect(StatusEffects.SiegweirdImp);
 				cleanupAfterCombat();
-				SceneLib.siegweirdFollower.siegweirdFirstEncounterPostFight();
+				doNext(SceneLib.siegweirdFollower.siegweirdFirstEncounterPostFight);
 			}
 			else {
 				game.flags[kFLAGS.DEMONS_DEFEATED]++;
@@ -163,6 +163,7 @@ public class ImpLord extends Imp
 				{call: lustMagicAttack1, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[]}
 			];
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 7, 0, 0, 0);
 			checkMonster();
 		}
 		

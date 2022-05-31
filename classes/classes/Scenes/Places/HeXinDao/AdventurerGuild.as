@@ -990,4 +990,3 @@ package classes.Scenes.Places.HeXinDao
 			doNext(BoardkeeperYangMain);
 		}
 	}
-}

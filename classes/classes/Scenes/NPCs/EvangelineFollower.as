@@ -5,32 +5,28 @@
 
 package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.BodyParts.Arms;
-	import classes.BodyParts.Eyes;
-	import classes.BodyParts.Face;
-	import classes.BodyParts.Horns;
-	import classes.BodyParts.LowerBody;
-	import classes.BodyParts.Tail;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Monsters.Imp;
-	import classes.Items.Armor;
-	import classes.Items.ArmorLib;
-	import classes.MutationsLib;
-	import classes.Items.Shield;
-	import classes.Items.ShieldLib;
-	import classes.Items.HeadJewelry;
-	import classes.Items.HeadJewelryLib;
-	import classes.Items.Undergarment;
-	import classes.Items.UndergarmentLib;
-	import classes.Items.Weapon;
-	import classes.Items.WeaponLib;
-	import classes.Items.WeaponRange;
-	import classes.Items.WeaponRangeLib;
-	import classes.internals.SaveableState;
-	import coc.view.ButtonDataList;
+import classes.*;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
+import classes.Items.Armor;
+import classes.Items.HeadJewelry;
+import classes.Items.HeadJewelryLib;
+import classes.Items.Shield;
+import classes.Items.ShieldLib;
+import classes.Items.Undergarment;
+import classes.Items.UndergarmentLib;
+import classes.Items.Weapon;
+import classes.Items.WeaponLib;
+import classes.Items.WeaponRange;
+import classes.Items.WeaponRangeLib;
+import classes.Scenes.Monsters.Imp;
+import classes.internals.SaveableState;
 
-	public class EvangelineFollower extends NPCAwareContent implements SaveableState
+public class EvangelineFollower extends NPCAwareContent implements SaveableState
 	{
 		public static var EvangelinePeepTalkOnInternalMutations:Number;
 		public static var EvangelineGemsPurse:Number;
@@ -106,10 +102,7 @@ public function enterTheEvangeline():void
 	outputText("You turn around only for a woman to suddenly flings herself into your arms. She looks like she’s has been roughed up a bit - her simple peasant’s robes have been torn and frayed, and her forehead is streaked with dirt, as if she was dragged through it.\n\n");
 	outputText("\"<i>Th-thank gods! Please, you must help me!</i>\" she cries, darting behind you as if to hide. \"<i>I was wandering over the wasteland trying to find a safe place to hide, and, and... the wretched, terrible little things attacked me!</i>\"\n\n");
 	outputText("On top of everything, you’re worried that this happened a bit too soon after you left your camp, and you’re about to question her, but you're interrupted as an imp flies out of the sky, growling and clawing at you menacingly. If not for the closeness to your camp you would not care too much, but better to deal with this demon spawn now than later see a whole swarm of them storming your camp.");
-	if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
-		outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);
 	startCombat(new Imp());
 	doNext(playerMenu);
 }
@@ -206,8 +199,8 @@ public function meetEvangeline():void {
 		addButtonDisabled(8, "I.Mutations", "Req. 5%+ affection and Evangeline been lvl 6+.");
 	}
 	addButton(4, "Alchemy", evangelineAlchemyMenu).hint("Ask Evangeline to make some transformation item.");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) addButton(9, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
-	addButtonDisabled(9, "???", "Req. Evangeline been lvl 15+.");
+	//if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) addButton(9, "Experiments", Experiments).hint("Check on what experiments Evangeline can work on.");//menu do eksperymentow alchemicznych jak tworzenie eksperymentalnych TF lub innych specialnych tworow evangeline typu specjalny bimbo liq lub tonik/coskolwiek nazwane wzmacniajace postacie do sparingu w obozie
+	//addButtonDisabled(9, "???", "Req. Evangeline been lvl 15+.");
 	if (player.hasPerk(PerkLib.WendigoCurse)) {
 		if (player.perkv1(PerkLib.WendigoCurse) > 0) {
 			if (player.hasItem(consumables.PURPEAC, 5) && player.hasItem(consumables.PPHILTR, 5)) addButton(11, "Wendigo", curingWendigo);
@@ -1004,7 +997,7 @@ private function curingJiangshi():void {
 		player.statStore.removeBuffs("Jiangshi Curse Tag");
 		outputText("Done with this place you head back to camp.\n\n");
 		outputText("<b>(Lost Perks: Halted vitals, Super strength, Poison nails, Rigidity, Life leech, Undeath, Energy dependent"+(player.hasPerk(PerkLib.CursedTag)?", Cursed Tag":"")+")</b>\n\n");
-		player.strtouspeintwislibsenCalculation2();
+		player.updateRacialAndPerkBuffs();
 		flags[kFLAGS.CURSE_OF_THE_JIANGSHI]++;
 		doNext(camp.returnToCampUseTwoHours);
 	}
@@ -1070,11 +1063,11 @@ private function InternalMutations():void {
 		outputText("\"<i>Did you bring gems or find a vial of the mutagen?</i>\" she asks.\n\n");
 		outputText("Her eyes briefly graze your form, \"<i>It looks like the only that way we can do anything about that 'unhealthy drive' of yours is with a little mutation.</i>\" She snickers softly as she waits for your response.");
 		menu();
-		addButton(0, "Back", meetEvangeline);
-		if (player.gems >= 500) addButton(2, "Gems", InternalMutationsGemsOrMutagen);
-		else addButtonDisabled(2, "Gems", "Gotta get that 500 gems first.");
-		if (player.hasItem(useables.E_ICHOR, 1)) addButton(4, "Mutagen", InternalMutationsGemsOrMutagen);
-		else addButtonDisabled(4, "Mutagen", "Gotta get that vial of mutagen first.");
+		if (player.gems >= 500) addButton(1, "Gems", InternalMutationsGemsOrMutagen, 1);
+		else addButtonDisabled(1, "Gems", "Gotta get that 500 gems first.");
+		if (player.hasItem(useables.E_ICHOR, 1)) addButton(3, "Mutagen", InternalMutationsGemsOrMutagen, 2);
+		else addButtonDisabled(3, "Mutagen", "Gotta get that vial of mutagen first.");
+		addButton(14, "Back", meetEvangeline);
 	}
 }
 private function InternalMutationsNie():void {
@@ -1089,13 +1082,14 @@ private function InternalMutationsTak():void {
 	EvangelinePeepTalkOnInternalMutations = 2;
 	doNext(meetEvangeline);
 }
-private function InternalMutationsGemsOrMutagen():void {
+private function InternalMutationsGemsOrMutagen(GoM:int = 0):void {
 	outputText("\n\nEvangeline prepares her alchemy lab as she sterilizes a syringe.\n\n\"<i>I can craft a mutagen out of common material or use the one you found to alter one of your organs. The change will be difficult to reverse, though. You'd better make sure this is what you want. Which mutagen would you like me to craft?</i>\"");
-	InternalMutations0();
+	InternalMutations0(0, GoM);
 }
-private function InternalMutations0(page:int = 0):void {
+private function InternalMutations0(page:int = 0, GoM:int = 0):void {
 	menu();
 	var menuItems:Array = [];
+	//Next Page
 	menuItems.push("Heart", InternalMutationsHeart, "Heart Mutations");
 	menuItems.push("Muscle", InternalMutationsMuscle, "Muscle Mutations");
 	menuItems.push("Mouth", InternalMutationsMouth, "Mouth Mutations");
@@ -1107,194 +1101,169 @@ private function InternalMutations0(page:int = 0):void {
 	menuItems.push("Ovaries", InternalMutationsOvaries, "Ovaries Mutations");
 	menuItems.push("Testicles", InternalMutationsTesticles, "Testicles Mutations");
 	menuItems.push("Eyes", InternalMutationsEyes, "Eyes Mutations");
-	menuItems.push("Nerv/Sys", InternalMutationsPNervSys, "PNerv-Sys Mutations");
-	//Next Page
 	menuItems.push("Bone/Marrow", InternalMutationsBoneMarrow, "Bone Mutations");
+	//Next Page
+	menuItems.push("Nerv/Sys", InternalMutationsPNervSys, "Nerv-Sys Mutations");
 	menuItems.push("Thyroid Gland", InternalMutationsThyroidGlands, "Thyroid Mutations");
-	//menuItems.push("Parathyroid Gland", InternalMutationsParathyroid);
-	menuGen(menuItems, page, meetEvangeline, false);
+	menuItems.push("Parathyroid Gland", InternalMutationsParathyroid, "Parathyroid Mutations");
+	menuItems.push("Adaptations", InternalMutationsAdaptations, "Adaptation Mutations");
+	menuGen(menuItems, page, meetEvangeline);
 
 	function InternalMutationsHeart():void{
-		var btnNum:int = 0
 		menu();
 		//Heart Mutations
-		for each (var mutate:Array in MutationsLib.mutationsArray("Heart")){
-			mutationsAssistant(mutate, btnNum++, "heart");
-		}
-		addButton(14, "Back", InternalMutations0);
+		mutationsAssistant(IMutationsLib.mutationsArray("Heart"));
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsMuscle():void{
-		var btnNum:int = 0;
 		menu();
 		//Muscle Mutations
-		for each (var mutate:Array in MutationsLib.mutationsArray("Muscle")){
-			mutationsAssistant(mutate, btnNum++, "muscle");
-		}
-		addButton(14, "Back", InternalMutations0);
+		mutationsAssistant(IMutationsLib.mutationsArray("Muscle"));
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsMouth():void{
-		var btnNum:int = 0
 		menu();
 		//Mouth Mutations
-		for each (var mutate:Array in MutationsLib.mutationsArray("Mouth")){
-			mutationsAssistant(mutate, btnNum++, "mouth");
-		}
-		addButton(14, "Back", InternalMutations0);
+		mutationsAssistant(IMutationsLib.mutationsArray("Mouth"));
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsAdrenals():void{
-		var btnNum:int = 0
 		menu();
 		//Adrenal Glands Mutations
-		for each (var mutate:Array in MutationsLib.mutationsArray("Adrenals")){
-			mutationsAssistant(mutate, btnNum++, "adrenals");
-		}
-		addButton(14, "Back", InternalMutations0);
+		mutationsAssistant(IMutationsLib.mutationsArray("Adrenals"));
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsBloodstream():void{
-		var btnNum:int = 0
 		menu();
 		//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
-		for each (var mutate:Array in MutationsLib.mutationsArray("Bloodstream")){
-			mutationsAssistant(mutate, btnNum++, "bloodstream");
-		}
-		addButton(14, "Back", InternalMutations0);
+		mutationsAssistant(IMutationsLib.mutationsArray("Bloodstream"));
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsFaTissue():void{
-		var btnNum:int = 0
 		menu();
 		//Fat tissue Mutations
-		for each (var mutate:Array in MutationsLib.mutationsArray("FaT")){
-			mutationsAssistant(mutate, btnNum++, "fat and tissue");
-		}
-		addButton(14, "Back", InternalMutations0);
+		mutationsAssistant(IMutationsLib.mutationsArray("FaT"));
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsLungs():void{
-		var btnNum:int = 0
 		menu();
 		//Lungs Mutations
-		for each (var mutate:Array in MutationsLib.mutationsArray("Lungs")){
-			mutationsAssistant(mutate, btnNum++, "lungs");
-		}
-		addButton(14, "Back", InternalMutations0);
+		mutationsAssistant(IMutationsLib.mutationsArray("Lungs"));
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsMetabolism():void{
-		var btnNum:int = 0
 		menu();
 		//Metabolism Mutations
-		for each (var mutate:Array in MutationsLib.mutationsArray("Metabolism")){
-			mutationsAssistant(mutate, btnNum++, "metabolism");
-		}
-		addButton(14, "Back", InternalMutations0);
+		mutationsAssistant(IMutationsLib.mutationsArray("Metabolism"));
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsOvaries():void{
-		var btnNum:int = 0
 		menu();
 		//Ovaries Mutations
-		for each (var mutate:Array in MutationsLib.mutationsArray("Ovaries")){
-			mutationsAssistant(mutate, btnNum++, "ovaries");
-		}
-		addButton(14, "Back", InternalMutations0);
+		mutationsAssistant(IMutationsLib.mutationsArray("Ovaries"));
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsTesticles():void{
-		var btnNum:int = 0
 		menu();
 		//Testicle Mutations
-		for each (var mutate:Array in MutationsLib.mutationsArray("Testicles")){
-			mutationsAssistant(mutate, btnNum++, "testicles");
-		}
-		addButton(14, "Back", InternalMutations0);
+		mutationsAssistant(IMutationsLib.mutationsArray("Testicles"));
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsEyes():void {
-		var btnNum:int = 0
 		menu();
 		//Eyes Mutations
-		for each (var mutate:Array in MutationsLib.mutationsArray("Eyes")){
-			mutationsAssistant(mutate, btnNum++, "eyes");
-		}
-		addButton(14, "Back", InternalMutations0);
-	}
-
-	function InternalMutationsPNervSys():void{
-		var btnNum:int = 0
-		menu();
-		//Peripheral/NervSys Mutations
-		for each (var mutate:Array in MutationsLib.mutationsArray("Nerv/Sys")){
-			mutationsAssistant(mutate, btnNum++, "peripheral nerv-sys");
-		}
-		addButton(14, "Back", InternalMutations0);
+		mutationsAssistant(IMutationsLib.mutationsArray("Eyes"));
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsBoneMarrow():void{
-		var btnNum:int = 0
 		menu();
 		//Bones and Marrow Mutations
-		for each (var mutate:Array in MutationsLib.mutationsArray("Bone")){
-			mutationsAssistant(mutate, btnNum++, "bone marrow");
-		}
-		addButton(14, "Back", curry(InternalMutations0, 1));
+		mutationsAssistant(IMutationsLib.mutationsArray("Bone"));
+		addButton(14, "Back", InternalMutations0, 0 , GoM);
+	}
+
+	function InternalMutationsPNervSys():void{
+		menu();
+		//Peripheral/NervSys Mutations
+		mutationsAssistant(IMutationsLib.mutationsArray("Nerv/Sys"), 1);
+		addButton(14, "Back", InternalMutations0, 1, GoM);
 	}
 
 	function InternalMutationsThyroidGlands():void{
-		var btnNum:int = 0
 		menu();
 		//Thyroid Glands Mutations
-		for each (var mutate:Array in MutationsLib.mutationsArray("Thyroid")){
-			mutationsAssistant(mutate, btnNum++, "thyroid glands");
-		}
-		addButton(14, "Back", curry(InternalMutations0, 1));
+		mutationsAssistant(IMutationsLib.mutationsArray("Thyroid"),1);
+		addButton(14, "Back", InternalMutations0, 1, GoM);
 	}
 
 	function InternalMutationsParathyroid():void{
-		var btnNum:int = 0
 		menu();
-		//ParaThyroid Glands Mutations. What's the difference between this and the above???
-		for each (var mutate:Array in MutationsLib.mutationsArray("PThyroid")){
-			mutationsAssistant(mutate, btnNum++, "parathyroid glands");
-		}
-		addButton(14, "Back", curry(InternalMutations0, 1));
+		//ParaThyroid Glands Mutations
+		mutationsAssistant(IMutationsLib.mutationsArray("PThyroid"),1);
+		addButton(14, "Back", InternalMutations0, 1, GoM);
 	}
 
-	function InternalMutationsText():void {
-		
+	function InternalMutationsAdaptations():void{
+		menu();
+		//Adaptations Mutations
+		mutationsAssistant(IMutationsLib.mutationsArray("Adaptations"),1);
+		addButton(14, "Back", InternalMutations0, 1, GoM);
 	}
 
-	function mutationsAssistant(perkName:Array, menuButton:int, partSwap:String):void {
-		var perkCount:int = 0
-		for each(var perkTier:PerkType in perkName) {
-			if (!(player.hasPerk(perkTier))) {
-				if (perkTier.available(player)) {
-					addButton(menuButton, perkName[0].name(), perkChoice, perkTier, partSwap, -9000, "Next Perk: " + perkTier.name())
-				} else {
-					addButtonDisabled(menuButton, perkName[0].name(), "Requirements not met. Check MutationsDB.");
-				}
-				break;
+	function mutationsAssistant(pArray:Array, menuButton:int = 0):* {
+		var menuItems:Array = [];
+		var target:* = player;
+		for each (var mutations:IMutationPerkType in pArray){
+			mutations.pReqs();
+			trace("" + mutations.name() + ": Checking requirements. v");
+			if (mutations.available(target) && mutations.maxLvl > target.perkv1(mutations)){
+				trace("Requirements met, adding in.");
+				menuItems.push(mutations.name(), curry(mutations.acquireMutation, player, costTaker), mutations.desc());	//This is witchcraft, not sure how acquirePerk still recalls which perk to give, but it does.
 			}
-			perkCount++
+			else if(mutations.maxLvl == target.perkv1(mutations)){
+				trace("MaxTier acquired");
+				menuItems.push(mutations.name(), false, "You already have the highest tier!");
+			}
+			else{
+				if (mutations.requirements.length == 0){
+					trace("Requirements empty.");
+				}
+				else{
+					trace("Did not meet requirements.");
+				}
+				//trace("Unable to meet requirements/requirements borked.");
+				//if (mutations.available(target)) trace("\nAvailable: True");
+				//if (mutations.maxLvl > target.perkv1(mutations)) trace("MaxLvl: True");
+				menuItems.push(mutations.name(), false, "You don't meet the requirements for this!");
+			}
 		}
-		if (perkCount == perkName.length) {
-			addButtonDisabled(menuButton, perkName[0].name(), "Highest Tier obtained!");
-		}
+		menuGen(menuItems, page, curry(meetEvangeline, 2));
 	}
 
-	function perkChoice(perkTier:PerkType, partSwap:String):void {
+	function costTaker():void{
+		if (GoM == 1){
+			player.gems -= 500
+		}
+		else{
+			player.destroyItems(useables.E_ICHOR, 1)
+		}
+		menu();
 		clearOutput();
-		if (player.hasItem(useables.E_ICHOR, 1)) player.destroyItems(useables.E_ICHOR, 1);
-		else player.gems -= 500;
 		outputText("Evangeline gets to brewing the mutagen. An half hour later, the injection is ready. She has you laid down into a makeshift seat.\n\n");
 		outputText("\"<i>This might sting a little… bear it with me [name].</i>\"\n\n");
-		outputText("You don't have the time to gasp before she pushes the injection in. The transformative in the wound burns at first but then spreads to your " + partSwap + " as it slowly changes to acquire new inhuman property. The transformation was successful. You now have "+ perkTier.name() +"!");
-		player.createPerk(perkTier, 0, 0, 0, 0);
-		eachMinuteCount(30);
+		outputText("You don't have the time to gasp before she pushes the injection in. The transformative in the wound burns at first but then spreads to your organ as it slowly changes to acquire new inhuman property. The transformation was successful.");
+		eachMinuteCount(15);
 		doNext(InternalMutations);
 	}
 }

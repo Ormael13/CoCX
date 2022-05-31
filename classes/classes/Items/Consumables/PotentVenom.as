@@ -29,19 +29,8 @@ public class PotentVenom extends Consumable {
 
 	override public function useItem():Boolean {
 		var changes:Number = 0;
-		var changeLimit:Number = 1;
+		var changeLimit:Number = 2 + player.additionalTransformationChances;
 		var temp2:Number = 0;
-		if (rand(3) == 0) changeLimit++;
-		if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
-		if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
-		if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
-		if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
-		if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
-		if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
-		if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
-		if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
-		if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
-		if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
 		player.slimeFeed();
 		clearOutput();
 		outputText("You pop the cork on the vial and quickly chug the clear liquid. It tastes somewhat sweet, leaving your body feeling warm all over.");
@@ -53,21 +42,19 @@ public class PotentVenom extends Consumable {
 			changes++;
 		}
 
-		if (changes < changeLimit && rand(3) == 0) {
+		if (changes < changeLimit && rand(3) == 0 && player.MutagenBonus("spe", 1)) {
 			outputText("\n\nYou suddenly jerk forward, feeling somewhat twitchy. Surprised, you didn't know you could react so quickly.");
-			player.MutagenBonus("spe", 1);
 			changes++;
 		}
 
-		if (changes < changeLimit && rand(3) == 0) {
+		if (changes < changeLimit && rand(3) == 0 && player.MutagenBonus("tou", 5)) {
 			outputText("\n\nYou feel oddly revitalized. You're so pumped that you feel that you can take on the strongest of enemies and even they would fail to even leave a scratch on you.");
-			player.MutagenBonus("tou", 5);
 			changes++;
 		}
 
 		if (player.wis > 20 && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nSomehow everything around seems so much duller. The world around you just seems so much more bland and uneventful.\n");
-			player.addCurse("wis",-5,1)
+			player.addCurse("wis",-5,1);
 			changes++;
 		}
 		//end of stat change list and starts of body changes

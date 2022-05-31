@@ -15,20 +15,32 @@
 
 //[Mage's Tower]
 public function visitZeMagesTower():void {
-	
-	if(flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == 0) firstTowerVisit();
+	if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == 0) firstTowerVisit();
 	else towerFollowUpVisits();
 	menu();
-	if(flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == 0 || model.time.hours <= 17)  {
+	addButton(0,"Study",studyInTA);
+	if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == 0 || model.time.hours <= 17) {
 		addButton(1,"You Okay?",youOkayBuddy);
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00175] > 0) addButton(2,"Mali",talkToMali);
 	}
-	if(flags[kFLAGS.TIMES_VISITED_MALI] > 0) addButton(2,"Mali",talkToMali);
-	addButton(0,"Study",studyInTA);
+	if (flags[kFLAGS.TIMES_VISITED_MALI] > 0) addButton(2,"Mali",talkToMali);
+	if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] > 0 && player.gems >= 240) {
+		addButton(5, "A.Staff", buyStarterStaff, weapons.A_STAFF).hint("Buy Amphyst Staff.");
+		addButton(6, "R.Staff", buyStarterStaff, weapons.R_STAFF).hint("Buy Ruby Staff.");
+		addButton(7, "S.Staff", buyStarterStaff, weapons.S_STAFF).hint("Buy Sapphire Staff.");
+		addButton(8, "T.Staff", buyStarterStaff, weapons.T_STAFF).hint("Buy Topaz Staff.");
+	}
 	flags[kFLAGS.TIMES_BEEN_TO_LIBRARY]++;
-	addButton(4,"Back",telAdre.telAdreMenu);
+	addButton(14,"Back",telAdre.telAdreMenu);
 }
 
+private function buyStarterStaff(type:ItemType):void {
+	clearOutput();
+	player.gems -= 240;
+	statScreenRefresh();
+	outputText("You pay 240 gems and Quinn hands over choosen basic elemental staff to you.");
+	inventory.takeItem(type, telAdre.telAdreMenu);
+}
 
 //(first visit)
 private function firstTowerVisit():void {

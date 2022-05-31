@@ -14,14 +14,12 @@ package classes.Scenes.Areas.DefiledRavine
 	import classes.BodyParts.Tail;
 	import classes.CoC;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Areas.BlightRidge.DemonScene;
+	import classes.Scenes.SceneLib;
 	
 	use namespace CoC;
 	
 	public class MinoIncubus extends Monster 
-	{
-		public var TrueDemons:DemonScene = new DemonScene();
-		
+	{		
 		public function minoincubusPheromones():void {
 			outputText("The mino incubus smiles at you and lifts his loincloth, flicking it at you.  Thick ropes of pre-cum fly through the air, ");
 			if(rand(3) == 0) {
@@ -103,7 +101,7 @@ package classes.Scenes.Areas.DefiledRavine
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
-			TrueDemons.defeatMinoIncubus();
+			SceneLib.defiledravine.demonScene.defeatMinoIncubus();
 		}
 		
 		public function MinoIncubus() 
@@ -159,6 +157,7 @@ package classes.Scenes.Areas.DefiledRavine
 					add(consumables.INCUBID, 10);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 46, 0, 0, 0);
 			checkMonster();
 		}
 	}

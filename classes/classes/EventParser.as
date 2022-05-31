@@ -1,9 +1,14 @@
 package classes {
 import classes.BodyParts.Hair;
 import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.ArmorLib;
+import classes.Items.Armors.BattleMaidenArmor;
+import classes.Items.Armors.LustyMaidensArmor;
+import classes.Items.Armors.SuccubusArmor;
+import classes.Items.MiscJewelryLib;
 import classes.Items.ShieldLib;
 import classes.Items.UndergarmentLib;
 import classes.Items.WeaponLib;
@@ -29,7 +34,7 @@ public class EventParser {
     public static function playerMenu():void {
         CoC.instance.mainViewManager.updateCharviewIfNeeded();
         if (!CoC.instance.inCombat) {
-            CoC.instance.spriteSelect(-1);
+            CoC.instance.spriteSelect(null);
         }
         CoC.instance.mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", CoC.instance.charCreation.newGameGo);
         CoC.instance.mainView.nameBox.visible = false;
@@ -55,13 +60,20 @@ public class EventParser {
     public static function gameOver(clear:Boolean = false):void { //Leaves text on screen unless clear is set to true
         if (CoC.instance.testingBlockExiting) EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour); //Prevent ChaosMonkah instances from getting stuck
         else {
-            var textChoices:Number = Utils.rand(4);
+            var textChoices:Array = ["GAME OVER",
+                "Game over, man! Game over!", 
+                "You just got Bad-Ended!", 
+                "Your adventures have come to an end...", 
+                //Silly Mode
+                "Don't lose hope... " + CoC.instance.player.short + "! Stay determined!",
+                "Wasted", 
+                "YOU DIED", 
+                "Git gud!", 
+                "Get rekt, noob!", 
+                "OOF."];
             if (clear) EngineCore.clearOutput();
             EngineCore.outputText("\n\n<font color=\"#800000\">");
-            if (textChoices == 0) EngineCore.outputText("<b>GAME OVER</b>");
-            if (textChoices == 1) EngineCore.outputText("<b>Game over, man! Game over!</b>");
-            if (textChoices == 2) EngineCore.outputText("<b>You just got Bad-Ended!</b>");
-            if (textChoices == 3) EngineCore.outputText("<b>Your adventures have came to an end...</b>");
+            EngineCore.outputText("<b>" + textChoices[Utils.rand(EngineCore.silly() ? textChoices.length : 4)] + "</b>");
             EngineCore.outputText("</font>");
             //Delete save on hardcore.
             if (CoC.instance.flags[kFLAGS.HARDCORE_MODE] > 0) {
@@ -84,15 +96,7 @@ public class EventParser {
             gameOverMenuOverride();
         }
         CoC.instance.inCombat = false;
-        DungeonAbstractContent.dungeonLoc = 0; //Replaces inDungeon = false;
-		if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
-			if (CoC.instance.player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) CoC.instance.player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
-			if (CoC.instance.flags[kFLAGS.EBON_LABYRINTH_RECORD] < CoC.instance.player.statusEffectv1(StatusEffects.EbonLabyrinthB)) CoC.instance.flags[kFLAGS.EBON_LABYRINTH_RECORD] = CoC.instance.player.statusEffectv1(StatusEffects.EbonLabyrinthB);
-			CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthA);
-			CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
-			if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
-			if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
-		}
+		DungeonAbstractContent.inDungeon = false;
 		if (CoC.instance.player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 			if (CoC.instance.flags[kFLAGS.NEISA_FOLLOWER] == 3) CoC.instance.flags[kFLAGS.PLAYER_COMPANION_1] = "";
 			if (CoC.instance.player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) CoC.instance.player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
@@ -105,34 +109,6 @@ public class EventParser {
         CoC.instance.mainView.hideMenuButton(MainView.MENU_APPEARANCE);
         CoC.instance.mainView.hideMenuButton(MainView.MENU_LEVEL);
         CoC.instance.mainView.hideMenuButton(MainView.MENU_PERKS);
-    }
-
-    public static function getCurrentStackTrace():String		// Fuck, stack-traces only work in the debug player.
-    {
-        var tempError:Error = new Error();
-        var stackTrace:String = tempError.getStackTrace();
-        return stackTrace;
-    }
-
-    public static function errorPrint(details:* = null):void {
-        EngineCore.rawOutputText("<b>Congratulations, you've found a bug!</b>", true);
-        EngineCore.rawOutputText("\nError: Unknown event!");
-        EngineCore.rawOutputText("\n\nPlease report that you had an issue with code: \"" + details + "\" ");
-        EngineCore.rawOutputText("\nGame version: \"" + CoC.instance.ver + "\" (<b>THIS IS IMPORTANT! Please be sure you include it!</b>) ");
-
-        var sTrace:String = getCurrentStackTrace();
-
-        if (sTrace)	// Fuck, stack-traces only work in the debug player.
-            EngineCore.rawOutputText("and stack-trace: \n <pre>" + sTrace + "</pre>\n");
-        EngineCore.rawOutputText("to fake-name on the forums or better yet, file a bug report on github: ");
-        EngineCore.rawOutputText("\nhttps://github.com/herp-a-derp/Corruption-of-Champions");
-
-        EngineCore.rawOutputText("\nPlease try to include the details of what you were doing when you encountered this bug ");
-        if (sTrace)
-            EngineCore.rawOutputText(" (including the above stack trace copy&pasted into the details),");
-        EngineCore.rawOutputText(" to make tracking the issue down easier. Thanks!");
-
-        EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour);
     }
 
     public static function goNext(needNext:Boolean):Boolean {
@@ -298,36 +274,35 @@ public class EventParser {
             SceneLib.inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
             return true;
         }
-//	if (player.weapon == weapons.CLAYMOR && player.str < 40) {
-//		outputText("\n<b>You aren't strong enough to handle the weight of your weapon any longer, and you're forced to stop using it.</b>\n");
-//		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
-//		return true;
-//	}
-//	if (player.weapon == weapons.WARHAMR && player.str < 80) {
-//		outputText("\n<b>You aren't strong enough to handle the weight of your weapon any longer!</b>\n");
-//		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
-//		return true;
-//	}
+        //Remove tail ornament if no demonic tail
+        if (player.miscJewelry == CoC.instance.miscjewelries.DMAGETO && player.tailType != Tail.DEMONIC) {
+            EngineCore.outputText("<b>\nSince you don't have a demonic tail anymore, your beautiful ornament becomes useless.</b>\n");
+            SceneLib.inventory.takeItem(player.setMiscJewelry(MiscJewelryLib.NOTHING), playerMenu);
+        }
+        if (player.miscJewelry2 == CoC.instance.miscjewelries.DMAGETO && player.tailType != Tail.DEMONIC) {
+            EngineCore.outputText("<b>\nSince you don't have a demonic tail anymore, your beautiful ornament becomes useless.</b>\n");
+            SceneLib.inventory.takeItem(player.setMiscJewelry2(MiscJewelryLib.NOTHING), playerMenu);
+        }
         //Drop Excalibur / beautiful sword / beautiful staff if corrupted!
-        if ((player.weapon == CoC.instance.weapons.EXCALIB || player.weapon == CoC.instance.weapons.B_SWORD || player.weapon == CoC.instance.weapons.B_STAFF) && player.cor >= (33 + player.corruptionTolerance())) {
+        if ((player.weapon == CoC.instance.weapons.EXCALIB || player.weapon == CoC.instance.weapons.B_SWORD || player.weapon == CoC.instance.weapons.B_STAFF) && player.cor >= (33 + player.corruptionTolerance)) {
             EngineCore.outputText("<b>\nThe <u>[weapon]</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this weapon appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the hilt, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n");
             SceneLib.inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
             return true;
         }
         //Drop beautiful bow if corrupted!
-        if (player.weaponRange == CoC.instance.weaponsrange.BEA_BOW && player.cor >= (33 + player.corruptionTolerance())) {
+        if (player.weaponRange == CoC.instance.weaponsrange.BEA_BOW && player.cor >= (33 + player.corruptionTolerance)) {
             EngineCore.outputText("<b>\nThe <u>[weaponrange]</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this range weapon appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the riser, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n");
             SceneLib.inventory.takeItem(player.setWeaponRange(WeaponRangeLib.NOTHING), playerMenu);
             return true;
         }
         //Drop beautiful shield if corrupted!
-        if (player.shield == CoC.instance.shields.BSHIELD && player.cor >= (33 + player.corruptionTolerance())) {
+        if (player.shield == CoC.instance.shields.BSHIELD && player.cor >= (33 + player.corruptionTolerance)) {
             EngineCore.outputText("<b>\nThe <u>[shield]</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this shield appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the enarmes, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n");
             SceneLib.inventory.takeItem(player.setShield(ShieldLib.NOTHING), playerMenu);
             return true;
         }
         //Drop scarred blade if not corrupted enough!
-        if (player.weapon == CoC.instance.weapons.SCARBLD && player.cor < (66 - player.corruptionTolerance()) && CoC.instance.flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
+        if (player.weapon == CoC.instance.weapons.SCARBLD && player.cor < (66 - player.corruptionTolerance) && CoC.instance.flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
             SceneLib.sheilaScene.rebellingScarredBlade();
             return true;
         }
@@ -336,7 +311,7 @@ public class EventParser {
             return true;
         }
         //Unequip Lusty maiden armor
-        if (player.armorName == "lusty maiden's armor") {
+        if (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor || player.armor is BattleMaidenArmor) {
             //Removal due to no longer fitting:
             //Grew Cock or Balls
             if ((player.hasCock() && !player.hasSheath()) || player.balls > 0) {
@@ -367,7 +342,7 @@ public class EventParser {
             return true;
         }
         //Unequip shield if you're wielding a large weapon.
-        if (((player.weaponSpecials("Large") && !player.hasPerk(PerkLib.GigantGrip)) || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large")) && player.shield != ShieldLib.NOTHING) {
+        if (((player.weaponSpecials("Large") && !player.hasPerk(PerkLib.GigantGrip)) || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large") || player.weapon == CoC.instance.weapons.DAISHO) && player.shield != ShieldLib.NOTHING) {
             EngineCore.outputText("Your current weapon requires the use of two hands. As such, your shield has been unequipped automatically. ");
             SceneLib.inventory.takeItem(player.setShield(ShieldLib.NOTHING), playerMenu);
             return true;
@@ -378,7 +353,7 @@ public class EventParser {
             var counter:Number = player.cockTotal() - 1;
             while (counter >= 0) {
                 if (player.cocks[counter].cockType == CockTypesEnum.DOG || player.cocks[counter].cockType == CockTypesEnum.FOX) {
-                    if (player.dogScore() >= player.foxScore())
+                    if (player.racialScore(Races.DOG) >= player.racialScore(Races.FOX))
                         player.cocks[counter].cockType = CockTypesEnum.DOG;
                     else
                         player.cocks[counter].cockType = CockTypesEnum.FOX;
@@ -432,7 +407,7 @@ public class EventParser {
                 ]
             ];
 
-            var sEgg:ItemType = null;
+            var sEgg:ItemType;
 
             if (player.hasStatusEffect(StatusEffects.Eggs)) {
                 var size:int = player.statusEffectv2(StatusEffects.Eggs);
@@ -463,48 +438,13 @@ public class EventParser {
 
     private static function pregnancyProgress():int {
         var needNext:Boolean = false;
-        //No diapause?  Normal!
         var player:Player = CoC.instance.player;
         var flags:DefaultDict = CoC.instance.flags;
-        if (!player.hasPerk(PerkLib.Diapause)) {
-            if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
-            //DOUBLE PREGGERS SPEED
-            if (player.hasPerk(PerkLib.MaraesGiftFertility)) {
-                if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            }
-            //DOUBLE PREGGERS SPEED
-            if (player.hasPerk(PerkLib.MagicalFertility)) {
-                if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            }
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
-            if (player.hasPerk(PerkLib.FerasBoonBreedingBitch)) {
-                if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            }
-            if (player.hasPerk(PerkLib.FerasBoonWideOpen) || player.hasPerk(PerkLib.FerasBoonMilkingTwat)) {
-                if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            }
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
-            //DOUBLE PREGGERS SPEED
-            if (player.hasPerk(PerkLib.BroodMother)) {
-                if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            }
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
-        }
-        //Diapause!
-        else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] > 0 && (player.pregnancyIncubation > 0 || player.buttPregnancyIncubation > 0)) {
+
+        if (player.hasPerk(PerkLib.Diapause)) {
+            if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] <= 0 || player.pregnancyIncubation <= 0 && player.buttPregnancyIncubation <= 0) //no pregnancy, I guess?
+                return 0;
+            //unique checks for diapause
             if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] == 1) {
                 flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 0;
                 EngineCore.outputText("\n\nYour body reacts to the influx of nutrition, accelerating your pregnancy. Your belly bulges outward slightly.");
@@ -525,41 +465,42 @@ public class EventParser {
                 flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
                 return 2;
             }
+        }
+        //checks not depending on diapause
+        if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+        if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
+            flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
+            return 2;
+        }
+        //DOUBLE PREGGERS SPEED
+        if (player.hasPerk(PerkLib.MaraesGiftFertility)) {
             if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
-            //DOUBLE PREGGERS SPEED
-            if (player.hasPerk(PerkLib.MaraesGiftFertility)) {
-                if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            }
-            //DOUBLE PREGGERS SPEED
-            if (player.hasPerk(PerkLib.MagicalFertility)) {
-                if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            }
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
-            if (player.hasPerk(PerkLib.FerasBoonBreedingBitch)) {
-                if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            }
-            if (player.hasPerk(PerkLib.FerasBoonWideOpen) || player.hasPerk(PerkLib.FerasBoonMilkingTwat)) {
-                if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            }
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
-            //DOUBLE PREGGERS SPEED
-            if (player.hasPerk(PerkLib.BroodMother)) {
-                if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-            }
-            if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-                flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-                return 2;
-            }
+        }
+        //DOUBLE PREGGERS SPEED
+        if (player.hasPerk(PerkLib.MagicalFertility)) {
+            if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+        }
+        if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
+            flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
+            return 2;
+        }
+        if (player.hasPerk(PerkLib.FerasBoonBreedingBitch)) {
+            if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+        }
+        if (player.hasPerk(PerkLib.FerasBoonWideOpen) || player.hasPerk(PerkLib.FerasBoonMilkingTwat)) {
+            if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+        }
+        if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
+            flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
+            return 2;
+        }
+        //DOUBLE PREGGERS SPEED
+        if (player.hasPerk(PerkLib.BroodMother)) {
+            if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+        }
+        if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
+            flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
+            return 2;
         }
         return needNext ? 1 : 0;
     }
@@ -655,7 +596,7 @@ public class EventParser {
 
     public static function cheatTime(time:Number, needNext:Boolean = false):void {
         //Advance minutes
-        var minutesToPass:Number = (time -= Math.floor(time)) * 60;
+        var minutesToPass:Number = (time - Math.floor(time)) * 60;
         minutesToPass = Math.round(minutesToPass);
         CoC.instance.model.time.minutes += minutesToPass;
         if (CoC.instance.model.time.minutes > 59) {
@@ -808,7 +749,7 @@ public class EventParser {
     }
 
     public static function set doCamp(value:Function):void {
-        if(_campSet){throw new Error("Multiple Docamp Inits");return;}
+        if(_campSet){throw new Error("Multiple Docamp Inits");}
         _doCamp = value;
         _campSet = true;
     }

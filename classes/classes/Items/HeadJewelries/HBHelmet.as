@@ -4,10 +4,7 @@
  */
 package classes.Items.HeadJewelries 
 {
-	import classes.GlobalFlags.kFLAGS;
-	import classes.ItemType;
 	import classes.Items.HeadJewelry;
-	import classes.Player;
 	
 	public class HBHelmet extends HeadJewelry
 	{

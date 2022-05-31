@@ -54,6 +54,7 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 			this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Diehard, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 40, 0, 0, 0);//v1 = enemy lvl
 			checkMonster();
 			createStatusEffect(StatusEffects.TentagrappleCooldown, 10, 0, 0, 0);
 		}
@@ -97,7 +98,7 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 			if (player.hasStatusEffect(StatusEffects.ShowerDotEffect))
 			{
 				showerDotEffect();
-				if (player.lust >= player.maxLust()) return;
+				if (player.lust >= player.maxOverLust()) return;
 			}
 			
 			if (this.HPRatio() <= 0.6 && fatigue < this.maxFatigue())
@@ -227,7 +228,7 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 					outputText(". You're intimately aware of the vegetative masses pressing down on you from every angle, lavishing you with attentions so forceful that they threaten to squeeze the very breathe from your body. It's impossible to ignore. You do your best to breathe and ignore the undulated affections, but even you can't deny the way that it makes your heart beat faster.");
 				}
 				player.addStatusValue(StatusEffects.Tentagrappled, 1, 1);
-				if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
+				if (!player.hasPerk(PerkLib.Juggernaut) && armorPerk != "Heavy") {
 					player.takePhysDamage(0.75*this.str + rand(15));
 				}
 				player.dynStats("lus+", 3 + rand(3));
@@ -254,7 +255,7 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 				outputText("You're intimately aware of the vegetative masses pressing down on you from every angle, lavishing you with attentions so forceful that they threaten to squeeze the very breathe from your body. It's impossible to ignore. You do your best to breathe and ignore the undulated affections, but even you can't deny the way that it makes your heart beat faster.");
 			}
 			player.addStatusValue(StatusEffects.Tentagrappled, 1, 1);
-			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
+			if (!player.hasPerk(PerkLib.Juggernaut) && armorPerk != "Heavy") {
 				player.takePhysDamage(.75*this.str + rand(15));
 			}
 			player.dynStats("lus+", 3 + rand(3));
@@ -262,7 +263,7 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 		
 		private function sicem():void
 		{
-			outputText("Jiggling oh so pleasantly, the gardener twirls and points in your direction. <i>“Sic 'em, pets!”</i> There is no time for a retort, only a wave of unrelenting greenery lashing in your direction!");
+			outputText("Jiggling oh so pleasantly, the gardener twirls and points in your direction. <i>\"Sic 'em, pets!\"</i> There is no time for a retort, only a wave of unrelenting greenery lashing in your direction!");
 			//Ten very low damage attacks.
 			// Geddynote- opted to convert to a lust-inducing attack, because LITERALLY EVERYTHING ELSE she does is lust-based.
 			
@@ -291,7 +292,7 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 		
 		private function corruptiveShower():void
 		{
-			outputText("The succubus lifts her hands up in the air, saying, <i>“Why not taste a sampling of the pleasures I offer?”</i> Above her, a canopy of corrupt, snarled greenery forms, oozing unmistakable sexual fluids - both male and female. Splatters of jism and pussy juice fall like curtains of corruptive rain, their scent lacing the air with their heady musk.");
+			outputText("The succubus lifts her hands up in the air, saying, <i>\"Why not taste a sampling of the pleasures I offer?\"</i> Above her, a canopy of corrupt, snarled greenery forms, oozing unmistakable sexual fluids - both male and female. Splatters of jism and pussy juice fall like curtains of corruptive rain, their scent lacing the air with their heady musk.");
 	
 			if (player.getEvasionRoll())
 			{
@@ -366,12 +367,12 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 		
 		private function taunt():void
 		{
-			outputText("<i>“How do you expect to defeat me, [name],”</i> the green-thumbed temptress asks with a quirk of her head. <i>“You are but one, and we are many. You have the frailties and weaknesses of a soul. I have power and experience beyond your comprehension. What is there for you to do but willingly submit?”</i> She purses her puffy lips, thinking. <i>“If you submit willingly, I'll allow you to lay your head between my breasts while my plants feed on you. It'll be quite the experience.”</i>");
+			outputText("<i>\"How do you expect to defeat me, [name],\"</i> the green-thumbed temptress asks with a quirk of her head. <i>\"You are but one, and we are many. You have the frailties and weaknesses of a soul. I have power and experience beyond your comprehension. What is there for you to do but willingly submit?\"</i> She purses her puffy lips, thinking. <i>\"If you submit willingly, I'll allow you to lay your head between my breasts while my plants feed on you. It'll be quite the experience.\"</i>");
 		}
 		
 		private function motorboat():void
 		{
-			outputText("<i>“Oh fuck it,”</i> the demoness growls, stalking forward. <i>“We both need this, don't we, pet?”</i> She slips inside your guard, pressing her pendulous melons against your face");
+			outputText("<i>\"Oh fuck it,\"</i> the demoness growls, stalking forward. <i>\"We both need this, don't we, pet?\"</i> She slips inside your guard, pressing her pendulous melons against your face");
 			
 			if (player.tallness <= this.tallness - 6) outputText(", somehow short enough in spite of the height differences.");
 			else if (player.tallness >= this.tallness + 6) outputText(", somehow tall enough in spite of the height differences.");
@@ -389,9 +390,9 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 			//Used once after first orgasm
 			// 9999 wot orgasm -- gonna assume it's used the heal at least once
 			
-			outputText("Cupping her breasts under the cover of her tentacular minions, the gardening succubus coos, <i>“Slow down a little and enjoy the sights, why don't you?”</i> She squeezes, and arcs of glittering milk (or is that sap?) erupt from her elongated nipples, spraying out in continuous streams towards your [feet]. You try to evade at the last second, but the streams follow you every which way, eventually coating you in a layer amber milk-sap.");
+			outputText("Cupping her breasts under the cover of her tentacular minions, the gardening succubus coos, <i>\"Slow down a little and enjoy the sights, why don't you?\"</i> She squeezes, and arcs of glittering milk (or is that sap?) erupt from her elongated nipples, spraying out in continuous streams towards your [feet]. You try to evade at the last second, but the streams follow you every which way, eventually coating you in a layer amber milk-sap.");
 			
-			outputText("\n\nThe lactic adhesive effectively slows your movements. You won't be dodging around quite so nimbly anymore, but at least you get to watch the succubus moan and twist, kneading the last few golden droplets from her engorged tits. She licks a stray strand from her finger while watching you, smiling. <i>“Ready to give up yet?”</i>");
+			outputText("\n\nThe lactic adhesive effectively slows your movements. You won't be dodging around quite so nimbly anymore, but at least you get to watch the succubus moan and twist, kneading the last few golden droplets from her engorged tits. She licks a stray strand from her finger while watching you, smiling. <i>\"Ready to give up yet?\"</i>");
 			
 			// 20%?
 			var effect:GardenerSapSpeedDebuff = player.createOrFindStatusEffect(StatusEffects.GardenerSapSpeed) as GardenerSapSpeedDebuff;
@@ -415,7 +416,7 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 		private function tasteTheEcstasy():void
 		{
 			//Strength check based lust damage, used when aroused only.
-			outputText("Three tentacles stab out at you like organic spears, but you easily evade them... directly into the succubus' arms! Too late, you realize that the offensive was a feint! Her tremendous tits are pressing into your back, and you feel a trickle of wetness leaking down your [leg] as she grinds against you. At the same time, she whispers into your ear, <i>“Just have a taste... sample the ecstasy. You'll see that indulging is the best thing you could possibly do.”</i>");
+			outputText("Three tentacles stab out at you like organic spears, but you easily evade them... directly into the succubus' arms! Too late, you realize that the offensive was a feint! Her tremendous tits are pressing into your back, and you feel a trickle of wetness leaking down your [leg] as she grinds against you. At the same time, she whispers into your ear, <i>\"Just have a taste... sample the ecstasy. You'll see that indulging is the best thing you could possibly do.\"</i>");
 			
 			outputText("\n\nOne of those tentacles is above you now, and it points down, its phallic shape clear. The slit at the end spreads open, and a blob of whitish goo appears. ");
 			
@@ -431,7 +432,7 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 			{
 				//Succeed strength check
 				outputText("\n\nThat's all the warning you need to redouble your efforts. Riding high on a surge of adrenaline, you tear your way out of the temptress' bonds before she can feed you any more corruption.");
-				outputText("\n\nShe pouts. <i>“Come on, just a taste!”</i>");
+				outputText("\n\nShe pouts. <i>\"Come on, just a taste!\"</i>");
 			}
 		}
 		

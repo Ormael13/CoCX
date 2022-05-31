@@ -446,7 +446,7 @@ public class Face extends SaveableBodyPart {
 	});
 	public static const CHESHIRE: int = 39;
 	EnumValue.add(Types, CHESHIRE, "CHESHIRE", {
-		name: "cheshire",
+		name: "cheshire cat",
 		appearanceDescFunc: function(creature: *): String {
 			var desc: String = "";
 
@@ -465,7 +465,7 @@ public class Face extends SaveableBodyPart {
 	});
 	public static const CHESHIRE_SMILE: int = 40;
 	EnumValue.add(Types, CHESHIRE_SMILE, "CHESHIRE_SMILE", {
-		name: "cheshire",
+		name: "cheshire smile",
 		appearanceDesc: "You have a pair of cat-like canines in your mouth, and for some reason your facial expression is that of an everlasting yet unsettling grin.",
 		bite: true,
 		humanShaped: true

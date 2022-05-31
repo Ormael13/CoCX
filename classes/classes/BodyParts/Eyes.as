@@ -254,6 +254,11 @@ public class Eyes extends BodyPart {
 		appearanceDesc: "You have three two [eyecolor], predatory eyes at the front of your head, giving you full sight and perfect perception of what’s in front of you. The eye along your forehead is considerably larger, it is where you channel your formidable mental powers.",
 		Darkvision: true
 	});
+	public static const SNAKEFIENDISH: int = 42;
+	EnumValue.add(Types, SNAKEFIENDISH, "SNAKEFIENDISH", {
+		name:"fiendish snake",
+		appearanceDesc: "Your [eyecolor] eyes have slitted pupils like that of a snake with black schlera wich betray your corrupted nature."
+	});
 
 	public var count:int;
 	public var colour:String = "brown";

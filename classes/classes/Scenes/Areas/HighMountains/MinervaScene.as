@@ -4,6 +4,7 @@ import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class MinervaScene extends BaseContent implements TimeAwareInterface {
 
@@ -33,10 +34,13 @@ public class MinervaScene extends BaseContent implements TimeAwareInterface {
 	public function minervaACapacity():Number {
 		return 100;
 	}
+    public function get minervaPurified():Boolean {
+        return flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10;
+    }
 	public function minervaSprite():void {
-		if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) spriteSelect(120);
-		else if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) spriteSelect(121);
-		else spriteSelect(95);
+		if (minervaPurified) spriteSelect(SpriteDb.s_minerva_pure);
+		else if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) spriteSelect(SpriteDb.s_minerva_corrupt);
+		else spriteSelect(SpriteDb.s_minerva);
 	}
 
 	public function minervaRomanced():Boolean {
@@ -44,23 +48,6 @@ public class MinervaScene extends BaseContent implements TimeAwareInterface {
 	}
 
 	public var minervaPurification:MinervaPurification = new MinervaPurification;
-	public var minervaCorruption:MinervaCorruption = new MinervaCorruption;
-
-
-//All readers, please read the actual scenes before judging this work. Notes may be rough but the scenes aren't
-//LOCATION
-//Location: High Mountains - a small oasis high in the mountains with small grove of fruit-bearing trees and a pond of pure, crystal clear water.  Lanterns around the oasis and around the edge of the pond burn with purifying white fire.  The soothing scent of mint wafts up from numerous peppermint plants that sprout from the moss.
-//Due to the pure nature, and its location, demons do not approach the spring oasis to get rid of it. Harpies drive off demons that come into their territory, as well, and the oasis is close to their territory, which offers some protection as well.
-//What you can get from coming here (subject to Fen-balancing)
-//item data can be found at the bottom of the doc
-//The trees grow purity peaches, yellowy orange with reddish tiger stripes, and the size of a pomegranate.  The fruit can be consumed to give a small speed and intelligence stat boost of 2-3 points, lower fatigue by 10 and lower corruption by 1-2 (if Minerva becomes corrupted, the fruits still give stat boosts and remove fatigue, but now give corruption instead of lowering it).
-//Consuming the calming mint lowers libido and lust by 3 and 10 respectively (if Minerva becomes corrupted, the mint instead raises libido and lust).
-//The pc can drink from, or relax in, the spring to lower fatigue by 10 as well as lower corruption by 4-5 - The corrupted spring also boosts Lust by at least 10-20 points with each dip as well as raising corruption 5-6 points.
-
-//When corrupted or purified, Minerva can get pregnant and impregnate the pc with baby sirens.
-//Minerva herself!
-//Minerva appearance (normal)
-//http://i46.tinypic.com/20z1f1x.jpg
 
 		public function timeChange():Boolean
 		{
@@ -98,14 +85,13 @@ private function minervaAppearance():void {
 	clearOutput();
 	minervaSprite();
 	outputText(images.showImage("minerva-appearance"));
-	outputText("Minerva is a siren. She stands 8'5\" with navy blue skin and a white belly, neck and inner thighs. Orange and white stripes adorn her legs, tail and back.  Her head is topped with fiery red orange hair that frames her face with well kept bangs and also slide down her back in a pair of long braids.  Her eyes are bright electric blue on pure black sclera.  The siren's body is adorned with an expansive array of golden studs and rings, one through an eyebrow, a pair on her lips and even one in her nose.  From her ears hangs large hoop earrings while a trio of studs sits higher up.  Along the fin that tips her tail are a set of five gold rings linked together by a fine silver chain.");
+	outputText("Minerva is a siren. She stands 8'5\" with navy blue skin and a white belly, neck and inner thighs. Orange and white stripes adorn her legs, tail and back.  Her head is topped with fiery red orange hair that frames her face with well-kept bangs and also slide down her back in a pair of long braids.  Her eyes are bright electric blue on pure black sclera.  The siren's body is adorned with an expansive array of golden studs and rings, one through an eyebrow, a pair on her lips and even one in her nose.  From her ears hangs large hoop earrings while a trio of studs sits higher up.  Along the fin that tips her tail are a set of five gold rings linked together by a fine silver chain.");
 	outputText("\n\nAttention-grabbing large red and orange feathered wings sprout from her back; the same feathers flow down her arms like those of a harpy.  Two DD-cup sized breasts rests on her chest, they would look large on a human, but on Minerva, they appear quite average.  Each breast is topped with a firm gold stud pierced nipple about half an inch thick.");
 	outputText("\n\nHer feather-covered arms would be more at home on a harpy, but contrasts well with her well toned body. Her skin is blue and white and, though she is clothed, you can tell from how sheer her tight tube top is, that her nipples are a tender pink.");
-	outputText("\n\nMinerva's wide hips make her waist appear thin and waspish; they sway in unison with a striped shark tail, each step accentuating her hips and tight shorts her rear.  A long, pink horizontal scar mars the clean white skin across her stomach and a golden piercing adorns her navel.");
+	outputText("\n\nMinerva's wide hips make her waist appear thin and waspish; they sway in unison with a striped shark tail, each step accentuating her hips and tight shorts her rear.  A long, pink horizontal scar mars the clean white skin across her stomach, and a golden piercing adorns her navel.");
 	outputText("\n\nBetween Minerva's lightly toned legs rests all of her sexual organs; a normal vagina, and an unusually thick, sixteen-inch long anemone-like penis.  The glans of that blue and pink shaft is ringed by small aphrodisiac-filled tentacles, while the base is surrounded by long tentacles as thick as fingers.  Nestled against her soft thighs is a scrotum with apple-sized balls.  She has a tight asshole, placed between her shapely buttcheeks, where it belongs.");
 	outputText("\n\nMinerva has large demonic feet, each toe double-jointed and tipped with a large, black talon.  Similar to her feet, her tongue also has a demonic quality, being two foot long and fully prehensile.");
 	outputText("\n\nA white tube top and a pair of short shorts are all the siren wears for clothing.");
-	menu();
 	//[Talk] [Sex] [Eat] [Fight] [Leave]
 	//addButton(0,"Appearance",minervaAppearance);
 	genericMenu();
@@ -116,6 +102,7 @@ public function encounterMinerva():void {
 		if(flags[kFLAGS.MET_MINERVA] == 0) firstMinervaEncounter();
 		else if(flags[kFLAGS.MET_MINERVA] == 3) minervaThirdPlusEncounter();
 		else if(flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] > 0 && player.gender > 0 && flags[kFLAGS.MINERVA_LOVE] == 0 && rand(2) == 0) minervaAfterFiveTalksRomancing();
+		else if (flags[kFLAGS.MINERVA_LOVE] == 1) repeatableMinervaRomanceScene();
 		else {
 			if(rand(2) == 0) minervaThirdPlusEncounter();
 			else repeatEncounterMinerva();
@@ -132,7 +119,7 @@ private function firstMinervaEncounter():void {
 	clearOutput();
 	outputText("Returning to the mountains, you begin to climb; the usual search for loot and, perhaps, some harpies driving your upward efforts.  Perhaps you'll run into");
 	//If Sophie Bimbo=0:
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] == 0 && !SceneLib.sophieFollowerScene.sophieFollower()) outputText(" that matronly harpy, Sophie");
+	if(flags[kFLAGS.MET_SOPHIE_COUNTER] > 0 && flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] == 0 && flags[kFLAGS.SOPHIE_DISABLED] == 0 && !SceneLib.sophieFollowerScene.sophieFollower()) outputText(" that matronly harpy, Sophie");
 	else outputText(" something interesting");
 	outputText(", or get some good plunder from some of the local beasts");
 	//if minotaur cum addict:
@@ -179,9 +166,9 @@ private function takeMinervasPath():void {
 	//Low corruption:
 	if(player.cor < 50) outputText("  \"<i>All right, you!  Who are you and what are you doing here?!  I don't get any visitors besides those horny harpies, so what are you after?  Hm?");
 	//High corruption:
-	else outputText("  \"<i>All right, you corrupted beast!  Who are you and what are you doing here?  Your presence is not welcome in this sanctuary... answer quickly or I'll drop you to your death!");
+	else outputText("  \"<i>All right, you corrupted beast!  Who are you and what are you doing here?  Your presence is not welcome in this sanctuary... answer quickly, or I'll drop you to your death!");
 	//Demon Score=3>:
-	if(player.demonScore() >= 3) outputText("  Filthy demon!  Come to finish your work, have you?!  You won't take me without a fight!  Maybe if you beg for your life I'll give you a chance. Speak!  Convince me to not simply kill you here and now!");
+	if(player.isRace(Races.DEMON)) outputText("  Filthy demon!  Come to finish your work, have you?!  You won't take me without a fight!  Maybe if you beg for your life I'll give you a chance. Speak!  Convince me to not simply kill you here and now!");
 	outputText("</i>\" the creature demands, clearly threatening to drop you if you don't answer to her liking.");
 	
 	//Goo:
@@ -219,7 +206,7 @@ private function takeMinervasPath():void {
 	//[Follow] [Leave]
 	menu();
 	addButton(0,"Follow",followMinerva);
-	addButton(1,"Don'tFollow",leaveMinervasFirstEncounter);
+	addButton(1,"Don't",leaveMinervasFirstEncounter);
 }
 
 //[Follow]
@@ -228,7 +215,6 @@ private function followMinerva():void {
 	minervaSprite();
 	outputText("Deciding that you want to know more about Minerva, you follow her into the tower.  \"<i>So, now that you're inside, would you like to talk?  Or perhaps to partake in some of the peaches that grow on my trees?</i>\" she asks, looking at you with interest.");
 	//[Talk] [Drink] [Eat] [Leave]
-	menu();
 	genericMenu();
 	removeButton(0);
 	removeButton(2);
@@ -321,7 +307,7 @@ private function goForASkyRideWithMinervaHeartBaring():void {
 	else outputText(" hold");
 	outputText(" onto the large shark-harpy, telling her that you don't mind flying with her.");
 	//No or small wings:
-	if(!player.canFly()) outputText("  Minerva seems quite pleased when you accept her offer, her arms hugging you against her and resting your head on her soft chest as she beats her wings harder.  With each pump of Minerva's wings, you ascend higher into the tower, and through the huge opening at the top.  Both of you keep going higher and higher until you finally breach the clouds.  As soon as you get above the clouds, the siren suddenly does a spin midair, positioning the two of you so that her back is turned to the distant ground, and you're lying atop her body with the heavens behind your back.  The two of you seem to float there for a moment before gravity kicks in and you both plummet back down through the clouds.");
+	if(!player.canFly()) outputText("  Minerva seems quite pleased when you accept her offer, her arms hugging you against her and resting your head on her soft chest as she beats her wings harder.  With each pump of Minerva's wings, you ascend higher into the tower, and through the huge opening at the top.  Both of you keep going higher and higher until you finally breach the clouds.  As soon as you get above the clouds, the siren suddenly does a spin midair, positioning the two of you so that her back is turned to the distant ground, and you're lying atop her body with the heavens behind your back.  The two of you seem to float there for a moment before gravity kicks in, and you both plummet back down through the clouds.");
 	//Large wings:
 	else {
 		outputText("  Minerva seems quite pleased that you accepted her offer.  Seeing you have powerful wings of your own, she slowly lets go, allowing your wings to spread out and beat as you hover next to her.  The pair of you fly out of the tower together, streaking through the air as you both zoom around the mountain, and it becomes almost like a playful race between you.");
@@ -362,11 +348,12 @@ private function yeahSureMinervaILikeYouAndShit():void {
 	menu();
 	//{Male: [NEXT] / Female/Herm: [NEXT]}
 	//Sex Menu
+	//TODO: shit, rework
 	if(player.gender == 1) {
-		if(player.cockThatFits(minervaVCapacity()) >= 0) addButton(0,"Next",minervaCowgirlSex);
-		else addButton(0,"Next",letMinervaSuckYouOff);
+		if(player.cockThatFits(minervaVCapacity()) >= 0) doNext(minervaCowgirlSex);
+		else doNext(letMinervaSuckYouOff);
 	}
-	else addButton(0,"Next",minervaLapSex);
+	else doNext(minervaLapSex);
 }
 
 //[Reject]
@@ -379,7 +366,7 @@ private function rejectMinervasLove():void {
 	else outputText("You can tell she really wants this - the siren is almost desperate for your attention.  Unfortunately for the love starved herm, she won't find the love she craves with you.");
 	outputText("  You look away from her and pull back a bit before speaking.  You confess to her that, while she is a nice person, you do not feel that sort of bond with her, and you apologize if she was misled by your actions, but that you would like to be friends with her still.");
 	
-	outputText("\n\nAs you speak, you see the hope she had fade, and her face droops in sadness as you reject her feelings.  \"<i>I-I see... I thought that...</i>\" she stops and looks away, before moving away from you and stepping out of the cleansing waters.  The tall, red-headed shark-harpy keeps her back to you, her tail curled around her legs protectively.  \"<i>I'm sorry, I shouldn't have gotten my hopes up.  Can you... maybe you should go, I want to be alone for a bit... but... I... just make sure to come back, please. I would like to still see you around,</i>\" she requests sullenly as she stands by the pool.  Keeping her back to you she looks over her shoulder, a sad smile on her face, it's clear she's trying to be strong and hold back her feelings.  \"<i>I guess love just isn't in the cards for me.</i>\"");
+	outputText("\n\nAs you speak, you see the hope she had fades, and her face droops in sadness as you reject her feelings.  \"<i>I-I see... I thought that...</i>\" she stops and looks away, before moving away from you and stepping out of the cleansing waters.  The tall, red-headed shark-harpy keeps her back to you, her tail curled around her legs protectively.  \"<i>I'm sorry, I shouldn't have gotten my hopes up.  Can you... maybe you should go, I want to be alone for a bit... but... I... just make sure to come back, please. I would like to still see you around,</i>\" she requests sullenly as she stands by the pool.  Keeping her back to you, she looks over her shoulder, a sad smile on her face, it's clear she's trying to be strong and hold back her feelings.  \"<i>I guess love just isn't in the cards for me.</i>\"");
 	
 	outputText("\n\nSlowly, you get up, looking away from the curvy siren as you step out of the pool and leaving Minerva's tower.  Hopefully she won't be upset for too long, it would be best to check up on her later.  As you go, you swear you hear her let out a sob, the pain of your rejection clear as the mist that floats around the mountain.");
 	// PC returns to camp.
@@ -420,7 +407,7 @@ private function genericMenu(display:Boolean = false):void {
 	addButton(3,"Eat",eatSomethingYouCunt);
 	addButton(4,"Drink",getADrinkYouBitch);
 	addButton(5, "Spar", fightMinerva);
-	if (minervaRomanced() && model.time.hours >= 20) addButton(6, "Sleep With", sleepWithMinerva);
+	if (minervaRomanced() && model.time.hours >= 19) addButton(6, "Sleep With", sleepWithMinerva);
 	if (player.hasKeyItem("Rathazul's Purity Potion") >= 0) addButton(7, "Purify", minervaPurification.purificationByRathazul);
 	if (player.hasKeyItem("Marae's Seed") >= 0) addButton(8, "Plant Seed", minervaPurification.purificationByMarae);
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
@@ -433,26 +420,15 @@ private function repeatableMinervaRomanceScene():void {
 	outputText("You make your way back up the mountain, passing the usual harpy nests as you go.  Climbing through the clouds, you reach a height that has only become easier thanks to the repeated effort.  You make your way back up the mountain, passing the usual harpy nests as you go, looking for the oasis tower that you know has to be around here somewhere in the thick mountain mists. The promise of a respite from your climb, along with food and company, compels you to continue until you finally reach the oasis tower.  Without pausing to catch your breath you head for the tower, the desire to see your siren lover beating out the nagging fatigue you feel from the tough climb.  Your legs are pumping hard as you hoof it down the path, soon enough happening upon the shape of the ruined tower that encloses Minerva's oasis.");
 	
 	outputText("\n\nNot wasting any time, you head right for the tower.  Upon entering the humble home, you take in the sights and assess the state of the oasis, looking for your favorite flying shark girl.  Before you can really get a good look, though, you've been grabbed and pulled into what seems to be a dance, your hands taken by Minerva's as she spins you and hugs you tightly.  \"<i>I was wondering when you would return to me, I've missed you so much, [name]!  I'm so glad you could come by,</i>\" Minerva says before leaning in to plant a kiss on your neck.  \"<i>So, hun, what shall we do?  Here to give me some company?  Or maybe you want to have some fun?</i>\"  she asks playfully as she presses her hips against yours, giving away her desires.");
-	
-	menu();
 	//[Talk] [Sex] [Eat] [Fight] [Leave]
 	genericMenu();
 }
 
 
-private function minervaTalkSelect(bath:Boolean = true):void {
-	var choices:Array = [talkingToMinervaAboutBackstory];
+public function minervaTalkSelect(bath:Boolean = true):void {
 	if(flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 0) {
-		//Force first time to talk about her early backstory!
-		if(flags[kFLAGS.MINERVA_BACKSTORY] == 0) {
-			talkingToMinervaAboutBackstory();
-			return;
-		}
-		choices[choices.length] = talkingToMinervaAboutBackstory;
-		choices[choices.length] = talkingToMinervaAboutBackstory;
-		choices[choices.length] = talkingToMinervaAboutBackstory;
-		choices[choices.length] = talkingToMinervaAboutBackstory;
-		choices[choices.length] = talkingToMinervaAboutBackstory;
+        talkingToMinervaAboutBackstory();
+        return;
 	}
 	//Force start if the flag is right.
 	trace(flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS]);
@@ -460,25 +436,41 @@ private function minervaTalkSelect(bath:Boolean = true):void {
 		minervaPurification.startPurification();
 		return;
 	}
+    clearOutput();
+    //Minerva asks you to join
+	if(bath && minervaRomanced() && rand(2) == 0) {
+        bathTimeTalkWithMinerva();
+        return;
+    }
+    //no bath
+    outputText("What do you want to ask her about?")
+    menu();
+	addButton(0, "Her", minervaPurified ? minervaPurification.talkingToMinervaAboutBackstory : talkingToMinervaAboutBackstory);
 	//3-2 Talk Scene 2 - talks about the spring
 	//-repeatable
-	choices[choices.length] = talkAboutTheSpringWithMinerva;
+    addButton(0, "Spring", minervaPurified ? minervaPurification.talkToMinervaAboutSpring : talkAboutTheSpringWithMinerva);
 	//- requires that backstory has been told
 	//- if already romanced Minerva shamefully confesses she may have fathered a granddaughter with her first daughter -repeatable
 	//3-3 Talking Scene 3 - talks about her shark girl daughter
-	if(minervaRomanced() && flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 1) choices[choices.length] =  talkWithMinervaAboutSharkGirlDaughter;
-	
+	if(minervaRomanced() && flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] > 0)
+        addButton(2, "Daughter", minervaPurified ? minervaPurification.talkToMinervaAboutSharkgirl : talkWithMinervaAboutSharkGirlDaughter);
+    else
+        addButtonDisabled(2, "???", "You need to know her better.");
 	//3-4 Talk Scene 4 - talks about her corruption
 	//- romance yes only or if you trick her into thinking you love her. - Repeatable until Minerva is purified or corrupted
-	if(minervaRomanced()) choices[choices.length] = talkToMinervaAboutHerCorruption;
+    if (!minervaPurified) {
+        if(minervaRomanced() && flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 2)
+            addButton(3, "Corruption", talkToMinervaAboutHerCorruption);
+        else
+            addButtonDisabled(3, "???", "You need to know her better.");
+    }
+    else if (flags[kFLAGS.MINERVA_TOWER_TREE])
+        addButton(3, "Tree", minervaPurification.talkToMinervaAboutTree);
+
 	//3-5 Motherhood
 	//-talks about how she wishes to be a real mother, have an actual loving family and not made from being raped- repeatable
-	choices[choices.length] = minervaMotherhood;
-	//3-6 Bath Time - romance only
-	//Needs an option to be disabled.
-	if(bath && minervaRomanced()) choices[choices.length] = bathTimeTalkWithMinerva;
-	
-	choices[rand(choices.length)]();
+    addButton(1, "Motherhood", minervaPurified ? minervaPurification.talkToMinervaAboutMotherhood : minervaMotherhood);
+    addButton(4, "Back", genericMenu);
 }
 
 //Talking scenes
@@ -498,7 +490,7 @@ private function talkingToMinervaAboutBackstory():void {
 		
 		outputText("\n\nWanting to take the topic away from her scar, Minerva continues.  \"<i>Of course, they chased after me, but they ceased once I reached the edge of the forest and the lake.  They seemed to fear the lake, giving up on me,</i>\" she adds with a look of relief.  You know exactly what she is talking about, having gone through a very similar experience, though in retrospect, perhaps not nearly as harrowing.");
 		
-		outputText("\n\nThe siren seems to be lost in thought, though whether she's deciding what to tell you next or simply remembering the events of the demon ambush, you couldn't say.  After a moment of silence, Minerva continues her story.  \"<i>Knowing the demons stayed away from the lake, I took it upon myself to stay there a few days, living on fish.  Unfortunately, the lake was not safe either.  Those simple-minded anemones and savage shark girls... as you can probably tell, I've had more than a few encounters with them.</i>\"  Minerva looks down at her body, more shark-like than human.  \"<i>I'm supposed to be female, but one of the anemones got to me.  Their tentacles are fairly potent and it kept stinging; I couldn't fight back for long before it started to mate with me... Suffice to say, it impregnated me.  Its offspring attached itself to my body and turned into this thing,</i>\" the siren says, before pointing between her legs.");
+		outputText("\n\nThe siren seems to be lost in thought, though whether she's deciding what to tell you next or simply remembering the events of the demon ambush, you couldn't say.  After a moment of silence, Minerva continues her story.  \"<i>Knowing the demons stayed away from the lake, I took it upon myself to stay there a few days, living on fish.  Unfortunately, the lake was not safe either.  Those simple-minded anemones and savage shark girls... as you can probably tell, I've had more than a few encounters with them.</i>\"  Minerva looks down at her body, more shark-like than human.  \"<i>I'm supposed to be female, but one of the anemones got to me.  Their tentacles are fairly potent, and it kept stinging; I couldn't fight back for long before it started to mate with me... Suffice to say, it impregnated me.  Its offspring attached itself to my body and turned into this thing,</i>\" the siren says, before pointing between her legs.");
 		
 		outputText("\n\nShe again goes deep into thought.  \"<i>I think that's enough for now.  It's hard recalling all these... less than pleasant memories,</i>\" she declares.  With Minerva clearly reluctant to continue, you decide it's time to go.  Saying goodbye to the siren, you leave the tower and head back to camp, leaving Minerva alone with her thoughts.");
 		// PC returns to camp.
@@ -510,21 +502,21 @@ private function talkingToMinervaAboutBackstory():void {
 		outputText("\n\nTaking a seat, you ask her if she would continue talking about her past.  The shark-harpy purses her lips and seems lost in thought for a moment, unsure if she wants to keep going.  \"<i>Well... I suppose it would be all right to tell you more, if you really want to know,</i>\" Minerva says, running a hand through her red hair.");
 		outputText("\n\nThe redheaded siren begins her story again, picking up where she left off, \"<i>I think I was at the part with that anemone...  hm... that was the start of some bad times in my life... so... after the incident with that anemone and getting my... well, after I became more than just female... I fled from the lake, I didn't want to run into any more of the creatures there, so I tried to survive further inland.</i>\"");
 		
-		outputText("\n\nShe shudders and once again looks down at herself.  \"<i>It didn't work out too well.  You see, I found this farm and it seemed all right, but I didn't want to take any chances, and I was really, </i>really<i> hungry at the time, so I just stole some of the peppers that grew there. These bulbous ones that smelled so good that I just scarfed them down like a hungry animal,</i>\" Minerva reveals with a sigh, squirming a little in her spot at the memory.  \"<i>Damn things made me grow balls... and, I guess, since I ate more than a couple... they got bigger.  At least I still kept my more feminine parts,</i>\" she notes, blushing at the realization that she was describing her genitalia to you.");
+		outputText("\n\nShe shudders and once again looks down at herself.  \"<i>It didn't work out too well.  You see, I found this farm, and it seemed all right, but I didn't want to take any chances, and I was really, </i>really<i> hungry at the time, so I just stole some of the peppers that grew there. These bulbous ones that smelled so good that I just scarfed them down like a hungry animal,</i>\" Minerva reveals with a sigh, squirming a little in her spot at the memory.  \"<i>Damn things made me grow balls... and, I guess, since I ate more than a couple... they got bigger.  At least I still kept my more feminine parts,</i>\" she notes, blushing at the realization that she was describing her genitalia to you.");
 		outputText("\n\n\"<i>A-anyway... the food inland seemed a worse option than staying around the lake... I mean, I didn't want to turn into some giant-balled freak,</i>\" she says, her tone making it clear she's aware of the irony, \"<i>So I headed back to the lake, which may have been a mistake, but at least eating the fish didn't change me.  A few days passed without any incidents, until I swam into some of the shark girls that inhabit the lake...  they seemed to take a liking to my new... 'equipment.'  They were stronger than I was, fast and fierce.  They forced themselves on me, using me for their pleasure and making me impregnate them with my new male genitalia.</i>\"  The siren shivers at the memories of sexual violation by the shark girls.");
 		outputText("\n\n\"<i>I guess they really took a liking to me, since they force-fed me these soft things that looked like sharks' teeth.  But they changed me, my skin turned all grey and blue, I grew a tail like them and even a fin on my back.  They turned me into some kind of anemone-dicked shark girl... which just made things worse.</i>\"");
 		outputText("\n\n\"<i>There are creatures like that in the lake, these... more aggressive, </i>striped<i> shark girls with cocks and balls.</i>\"  She bites her lip, momentarily showing her own sharky teeth.");
 		
 		outputText("\n\n\"<i>There was this one that didn't like the fact that I was around and had knocked up those shark girls.  I guess it thought I was trying to wedge in on its harem and really, </i>really<i> didn't like it.  So it... </i>she<i>, decided she was going to add me to her harem.</i>\"");
-		outputText("\n\n\"<i>I was exhausted from the other sharks when that angry striped one came along; she was much more threatening.  She grabbed me and made sure I was on the receiving end.  The - I guess tiger shark-was so rough...  The lusty beast wanted to teach me a lesson so she fucked me as hard as she could before dumping this... insane load of cum into me... so much that my stomach bulged out like I was already pregnant.</i>\"");
+		outputText("\n\n\"<i>I was exhausted from the other sharks when that angry striped one came along; she was much more threatening.  She grabbed me and made sure I was on the receiving end.  The - I guess tiger shark-was so rough...  The lusty beast wanted to teach me a lesson, so she fucked me as hard as she could before dumping this... insane load of cum into me... so much that my stomach bulged out like I was already pregnant.</i>\"");
 		
 		outputText("\n\nMinerva seems to go quiet for a bit after that, just looking down at the ground.  The unpleasant feelings and memories of having been subjected to such a vile act is obvious in her eyes, and something about her behavior seems to suggest that she had been impregnated by the tiger shark.");
 		
-		outputText("\n\n\"<i>With her enjoying the orgasm, I struggled and managed to get away.  In the fight, it dropped one of those 'teeth' the other sharks had forced on me, but this one had a strange sheen.  I grabbed the thing and... just swam and swam until I reached the shore, then ran into the forest and just... I just...  I felt like giving up.  The world had tried to kill or rape me since I got here... it was probably the lowest point in my life.  I knew I needed to get stronger.  Stronger like the tigershark and sharkgirls.  I knew that those sharks were stronger than me and eating their fishy tasting things, so I took that glowing tooth and swallowed it.  That's how i got these stripes of mine,</i>\" the siren explains as she curls up in her spot, holding her knees to her chest.  For a moment you think she's isn't going to continue her story, but she starts back up, voice slightly muffled by her knees.");
+		outputText("\n\n\"<i>With her enjoying the orgasm, I struggled and managed to get away.  In the fight, it dropped one of those 'teeth' the other sharks had forced on me, but this one had a strange sheen.  I grabbed the thing and... just swam and swam until I reached the shore, then ran into the forest and just... I just...  I felt like giving up.  The world had tried to kill or rape me since I got here... it was probably the lowest point in my life.  I knew I needed to get stronger.  Stronger like the tigershark and sharkgirls.  I knew that those sharks were stronger than me and eating their fishy tasting things, so I took that glowing tooth and swallowed it.  That's how i got these stripes of mine,</i>\" the siren explains as she curls up in her spot, holding her knees to her chest.  For a moment you think she isn't going to continue her story, but she starts back up, voice slightly muffled by her knees.");
 		
 		outputText("\n\n\"<i>It turns out that I had, in fact, gotten pregnant from that tiger shark.  And even though, as I said, I wanted to give up... I'd always wanted a family of my own, and it seemed like this would not just be some monster, but an actual child, so I gave this place another chance and decided to keep going.</i>\"");
 		
-		outputText("\n\n\"<i>I didn't have to wait very long, either... about twelve days after that tiger shark had its way with me, my stomach had grown like a balloon and I was already giving birth.  I thought I was going crazy when I saw my child, but there she was... I had given birth to a baby shark girl.</i>\"");
+		outputText("\n\n\"<i>I didn't have to wait very long, either... about twelve days after that tiger shark had its way with me, my stomach had grown like a balloon, and I was already giving birth.  I thought I was going crazy when I saw my child, but there she was... I had given birth to a baby shark girl.</i>\"");
 		
 		outputText("\n\nMinerva actually seems to smile at the memory.  It is odd; you would think that she would have very negative feelings about having a shark girl daughter.");
 		
@@ -539,21 +531,22 @@ private function talkingToMinervaAboutBackstory():void {
 		outputText("\n\nSitting down, as well, you ask about her and if she would continue telling you about her past.  The shark-harpy purses her lips and seems to think about it for a moment, unsure if she wants to keep going. \"<i>Well... I suppose it would be all right to tell you more, if you really want to know,</i>\" Minerva says, running a hand through her red hair, remembering where she stopped last.");
 		outputText("\n\nThe redheaded siren begins her story again, picking up where she left off, smiling this time, \"<i>I remember we stopped right after I had my daughter.</i>\"  Already, Minerva seems a bit happier, though her smile looks bittersweet.  \"<i>I miss her... my darling daughter, my little girl...</i>\" she says, shaking her head and continuing her story.  \"<i>When I was about to give birth, my new instincts told me to seek out water.  I didn't want to go back to the lake again, so I managed to find a river and ended up giving birth to my daughter there.  With her born and so young, I didn't want to just travel around.  So we stayed at the stream for a while.</i>\"  Minerva stops for a moment, closing her eyes as if she's picturing it in her head, reliving the time spent with her daughter.");
 		outputText("\n\nAfter a moment or two of reminiscing, Minerva opens her eyes again and, even though she seems sad again, you also notice a certain happiness.  \"<i>We stayed there at the stream for months.  It was just us, mother and daughter.  The stream even had fish in it - plenty of them, too, so it was easy to feed just the two of us.  It seemed safe for us there, and while she was growing up we needed to be by the water.  She... grew up fast, though.  In a matter of months she was about an adult's size.  Though she was smaller than I was at the time, she was easily the size of the tiger shark who had fathered her.</i>\"");
-		outputText("\n\n\"<i>I had no idea that she would grow up so quickly!  After reaching the size of a preteen, I figured that she would just grow normally from that point on, but there she was... only a couple of months old and an adult.  It was amazing, but sad... I hoped she would be young just for a while longer so I could be her mother a bit more...</i>\"  Minerva looks down now, seeming ashamed.  \"<i>I... there was... I don't want to talk about this right now,</i>\" she says as she brings her knees to her chest and holds them tight; clearly this is a very sensitive topic.  You reach over and put a hand on her shoulder as a gesture of comfort.  The sad siren looks up at you for a moment before shuffling closer and leaning against you.");
-		outputText("\n\nShe stays silent for a bit, likely thinking about whatever happened to her daughter.  You're not sure what occurred, but it is clearly a painful memory.  With a sigh, Minerva continues her story.  \"<i>Maybe I'll tell you about what happened another time, but I'm skipping it for now...  Let's just say I had to leave and continue on my own.  I was having a hard time by then, as my body was getting more corrupted by the day. I could feel it creeping at the edge of my thoughts.  I must've ran into a dozen of those green sluts and red little cretins as I traveled - not at the same time, of course...  Thankfully, my new shark-like body was stronger than before, so I was able to beat them all down when they tried to attack me.  I don't know why, but I headed for these mountains,</i>\" Minerva says, looking up at the broken ceiling of her tower.");
+		outputText("\n\n\"<i>I had no idea that she would grow up so quickly!  After reaching the size of a preteen, I figured that she would just grow normally from that point on, but there she was... only a couple of months old and an adult.  It was amazing, but sad... I hoped she would be young just for a while longer, so I could be her mother a bit more...</i>\"  Minerva looks down now, seeming ashamed.  \"<i>I... there was... I don't want to talk about this right now,</i>\" she says as she brings her knees to her chest and holds them tight; clearly this is a very sensitive topic.  You reach over and put a hand on her shoulder as a gesture of comfort.  The sad siren looks up at you for a moment before shuffling closer and leaning against you.");
+		outputText("\n\nShe stays silent for a bit, likely thinking about whatever happened to her daughter.  You're not sure what occurred, but it is clearly a painful memory.  With a sigh, Minerva continues her story.  \"<i>Maybe I'll tell you about what happened another time, but I'm skipping it for now...  Let's just say I had to leave and continue on my own.  I was having a hard time by then, as my body was getting more corrupted by the day. I could feel it creeping at the edge of my thoughts.  I must've run into a dozen of those green sluts and red little cretins as I traveled - not at the same time, of course...  Thankfully, my new shark-like body was stronger than before, so I was able to beat them all down when they tried to attack me.  I don't know why, but I headed for these mountains,</i>\" Minerva says, looking up at the broken ceiling of her tower.");
 		outputText("\n\n\"<i>Of course, now I know it's fortunate that I did.  Had I not, I would absolutely have succumbed to this corruption inside me.  It was a growing and ready threat inside me, at that point already changing me physically, turning my feet into these clawed things, and my tongue into... well, this,</i>\" Minerva says, before opening her mouth and extending what looks to be a two-foot long demonic tongue.  Pulling it back inside, she continues.  \"<i>Thankfully, I was getting close to 'help,'</i>\" the siren says, before putting her hand below her chest, just under her rib cage.  \"<i>I kept climbing, kept trudging along.  It didn't take more than a few days for my food to run out.  It had to happen, of course, when I was reaching one of the highest points of the mountain.  I could have tried climbing back down, but I would probably have passed out from hunger by then and fallen off.  Luckily, I didn't have to decide, as a trio of harpies found me clinging to the side of the mountain.  With me having to hang onto the rock face, it was easy for the natural-born flyers to pluck me from the side and fly off.  Though, thanks to my size, they had to work together to carry me off to a nest, and like everything else in this world, it was easy to tell what they wanted from me.  As soon as they dropped me down, they were right on top of me again, pulling my clothes off and kissing me with this weird golden lipstick.</i>\" Minerva lets out a shiver at the thought of the experience.");
 		outputText("\n\n\"<i>I have no idea what they put in that stuff, but it hit me fast, and in no time, all I could think of was fucking them.  It was like the shark girls all over again, but this time I was the aggressor.  I'm not sure how long the effects of those drugs lasted... at least a few hours, but by the time my head was clear enough to let me try and make a break for it, the three harpies seemed to have had their... fill of me...</i>\" she says, shaking her head at the unintended pun she just made.  \"<i>Anyway... since they were exhausted, I took the chance to get away.  Thankfully, those harpies had food... bags full of these big, gold-colored seeds.</i>\"");
 		
 		outputText("\n\n\"<i>I was so hungry I didn't care if they changed me.  So I dug in, eating the walnut-sized things one after another until I couldn't eat anymore.</i>\"  Bringing a wing into view, Minerva gently strokes the feathers.  \"<i>I grew these very soon after, sprouting right from my back as my arms were covered in these... sleeves of feathers.  It hurt to grow them, but it didn't really matter to me... I was full of food and had a way to get around more quickly.  I'd tried a few times to get the hang at first... and almost slammed into the mountain for my troubles!</i>\" she chuckles, remembering how dangerous it was.  \"<i>But eventually I got the hang of it; for the first time since I got here, it felt like I was truly free...</i>\"  Judging from the tone of her voice, you can tell she is getting close to the end of her tale.");
 		outputText("\n\n\"<i>I must have flown for hours, the seeds I'd eaten getting burned off fairly quickly, leaving me starving again...  What is up with that, anyway?  Why is normal food so hard to come by around here?</i>\" she asks seriously, as if it has been on her mind for a while.  Shrugging your shoulders since you really have no answer for her, you have to admit that you had actually been wondering that yourself.  \"<i>Well... with exhaustion, hunger, and corruption catching up with me, I finally could go no further and crashed onto a cliff side.  I could feel the corruption's warm, all-consuming grasp closing around me.  It was so tempting to give in and let it happen.  But as fate would have it, I landed on the rocks just outside this tower.  I hadn't seen it while in the air because of the mist.</i>\"  Smiling a little, the siren pats the soft moss that grows from the ground.  You can't help but notice the somewhat bittersweet look on her face.");
-		outputText("\n\n\"<i>If I was going to become a monster, I at least wanted to have some shelter, so I went inside the tower.  That's when I found this place.  This... oasis of life... hidden away inside the tower.  I guess it was built as some kind of sanctuary, though it clearly fell into disrepair long before I found it.  This place turned out to be my... salvation...</i>\" she states and looks down again, her bittersweet expression deepening.  \"<i>As soon as I saw the fruit on the trees and the fresh water in the spring, I couldn't help myself.  Feasting with my corruption forgotten, I just gorged on the fruits and water and, with each bite, each drink, I felt the corruption recede.  My mind and thoughts became more clear - clearer than they had been in a long time, too.  This place is blessed!  It didn't get rid of the corruption entirely, but it calmed it, made it less pervasive.  I was happy to be more or less back to normal, but... I knew I could never really leave this tower as, if I did, the corruption would just come back.  This place, while beautiful, is my prison, my... gilded cage,</i>\" she says sadly.  You can only imagine it, being on the brink of turning into a monster, only to be saved at the cost of your freedom.  To be safe, fed, and sane, but unable to leave, lest the corruption returns to consume you.  This fact is clearly the source of the bitterness so clear on her face and in her voice.");
+		outputText("\n\n\"<i>If I was going to become a monster, I at least wanted to have some shelter, so I went inside the tower.  That's when I found this place.  This... oasis of life... hidden away inside the tower.  I guess it was built as some kind of sanctuary, though it clearly fell into disrepair long before I found it.  This place turned out to be my... salvation...</i>\" she states and looks down again, her bittersweet expression deepening.  \"<i>As soon as I saw the fruits on the trees, and the fresh water in the spring, I couldn't help myself.  Feasting with my corruption forgotten, I just gorged on the fruits and water and, with each bite, each drink, I felt the corruption recede.  My mind and thoughts became more clear - clearer than they had been in a long time, too.  This place is blessed!  It didn't get rid of the corruption entirely, but I calmed it, made it less pervasive.  I was happy to be more or less back to normal, but... I knew I could never really leave this tower as, if I did, the corruption would just come back.  This place, while beautiful, is my prison, my... gilded cage,</i>\" she says sadly.  You can only imagine it, being on the brink of turning into a monster, only to be saved at the cost of your freedom.  To be safe, fed, and sane, but unable to leave, lest the corruption returns to consume you.  This fact is clearly the source of the bitterness so clear on her face and in her voice.");
 		outputText("\n\nReaching out to her, you put an arm around her shoulder, trying to make her feel better.  It seems to help, as the look on her face visibly changes, a tiny smile resurfacing.  \"<i>Thank you for listening to my story; I know it was long and boring,</i>\" she says with a chuckle.  \"<i>You're the first sane person to visit me.  Sometimes, harpies come and try to get me to fuck them... it might even be those same harpies from before... anyway, I just want to tell you how much I appreciate you coming to visit me like this,</i>\" she explains with a genuine smile.  The siren leans in to give you a small peck on the cheek.");
 		//No Romance:
 		if(!minervaRomanced()) outputText("  \"<i>You're a good friend to have, and you know that, [name].</i>\"");
 		//Romance:
 		else outputText("  \"<i>You're a wonderful lover, you know.  I couldn't be happier that you found me.</i>\"");
 		// PC returns to camp.
-		flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] = 1;
+        if (flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 0)
+		    flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] = 1;
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -590,21 +583,16 @@ private function talkWithMinervaAboutSharkGirlDaughter():void {
 	outputText("Telling Minerva that you want to sit down and talk brings a pleasant smile to her face. The siren more than happy to talk with you.  \"<i>Well, since you came all this way to see me, I guess we could talk</i>\" she says playfully.  \"<i>All right, what do you want to know?</i>\" she asks as she sits down cross-legged on the soft, pillowy moss across from you.");
 	outputText("\n\nRemembering your past conversations with Minerva, she briefly mentioned that she had birthed a shark girl; it seemed like a sensitive topic to her, though, and you didn't broach the subject.  Really wanting to know more, you ask about this daughter of hers.");
 	
-	outputText("\n\nHearing you ask about her daughter brings a bittersweet smile to Minerva's face and she looks away from you.  \"<i>I... that's a very sensitive topic... I'm not sure how far I'll get into it.  She was such a sweet girl, so lively and playful.  I remember the day she was born.  As you know, it wasn't my first time giving birth, but this one was much more serious.  She was much bigger than that anemone thing I birthed... you should have seen her.  Big red eyes, so bright with wonder as I held her in my arms - I had never seen such a cute little girl, even though she was a shark girl,</i>\" Minerva says with a bright smile as she remembers her daughter.  Hearing her describe it like this, you can't help but grin at the tender scene the siren is painting for you.");
-	outputText("\n\n\"<i>I'm sure you've noticed things grow up quickly in this world, and she was no exception.  When I fed her for the first time, she grew up right in my arms, not stopping until she was about the size of a preteen or maybe a very young teenager.  She would follow me everywhere, the adorable little sweetheart... always hanging onto my tail so she would never lose her mommy,</i>\" Minerva tells you with a giggle, and you have to admit, it would have been an cute thing to see.");
-	
+	outputText("\n\nHearing you ask about her daughter brings a bittersweet smile to Minerva's face, and she looks away from you.  \"<i>I... that's a very sensitive topic... I'm not sure how far I'll get into it.  She was such a sweet girl, so lively and playful.  I remember the day she was born.  As you know, it wasn't my first time giving birth, but this one was much more serious.  She was much bigger than that anemone thing I birthed... you should have seen her.  Big red eyes, so bright with wonder as I held her in my arms - I had never seen such a cute little girl, even though she was a shark girl,</i>\" Minerva says with a bright smile as she remembers her daughter.  Hearing her describe it like this, you can't help but grin at the tender scene the siren is painting for you.");
+	outputText("\n\n\"<i>I'm sure you've noticed things grow up quickly in this world, and she was no exception.  When I fed her for the first time, she grew up right in my arms, not stopping until she was about the size of a preteen or maybe a very young teenager.  She would follow me everywhere, the adorable little sweetheart... always hanging onto my tail so she would never lose her mommy,</i>\" Minerva tells you with a giggle, and you have to admit, it would have been a cute thing to see.");
 	outputText("\n\n\"<i>The little one would never leave my side, and I had never been a mother before, so I did the best I could... I played with her, kept her well-fed and taught her all that I could about how to feed herself, how to defend herself and to be wary of her surroundings at all times.  Like a sponge, she absorbed it all.  I really wish I could have had more time with her...</i>\" the siren says, sadness bleeding out into her smile.");
-	
-	//No romance:
-	if(!minervaRomanced()) outputText("\n\n\"<i>I think that's enough for now...  I would rather not get into it any further...  It gets... bad after that.  Thank you for listening, though.  Perhaps, some day when we are more familiar, I think I could probably tell you the rest.</i>\"  With her being reluctant to continue, you decide it's time to go.  Saying goodbye to the siren, you leave the tower and head back to camp, leaving Minerva to her thoughts.");
-	//Romance:
-	else {
-		outputText("\n\n\"<i>I may have told you this already, but there was an incident between us.  She grew up so fast, I didn't expect her become an adult in only a few months.  It... it was such a shock to me; I had no idea she would grow that quickly.  If I had, I would have established proper boundaries...</i>\" she says, looking down and sighing.  \"<i>I guess it could've had something to do with her shark girl nature, as well, the ones I encountered always were sexually aggressive creatures, especially when it came to breeding,</i>\" Minerva notes with a sigh and a sour look on her face, clearly not happy with how things went with her daughter.");
-		outputText("\n\n\"<i>It's my own fault for not doing enough, for not being strong enough to resist her and failing to teach her properly before it got to that point.  She came to me one night, claimed she was ready to be an adult.  She needed me to get her pregnant so she could be a mother in turn... and something... I just couldn't resist her.  We had sex... a lot of sex, at that.</i>\"");
-		outputText("\n\n\"<i>Once she seduced me, I couldn't hold back.  She sucked me off, rode me, I plowed her so hard in my lustful haze, and I had to have cum inside her at least half a dozen times that night.  With how needy and fertile those shark girls are, I know I got her pregnant.  How shameful is that?!  I knocked up my own daughter and probably have a granddaughter that I fathered!</i>\" the siren declares sorely, her voice lined with regret and shame for her actions.  \"<i>I'm sorry for yelling, love, I just miss her.  I wish we hadn't parted on those terms.  One day though, I'll see her again... maybe get another chance at being a proper mother,</i>\" she says with a final sigh before looking you in the eyes and hugging you.");
-		outputText("\n\n\"<i>Thank you for listening to me, hun, I'm so happy to have someone like you in my life,</i>\" Minerva whispers to you with a genuine smile on her black lips.");
-		outputText("\n\nThe two of you stay like this for a while, just spending a little time together before you decide you must return to camp and your quest.  Saying your goodbyes, you give Minerva a kiss before heading home.");
-	}
+	outputText("\n\n\"<i>I may have told you this already, but there was an incident between us.  She grew up so fast, I didn't expect her become an adult in only a few months.  It... it was such a shock to me; I had no idea she would grow that quickly.  If I had, I would have established proper boundaries...</i>\" she says, looking down and sighing.  \"<i>I guess it could've had something to do with her shark girl nature, as well, the ones I encountered always were sexually aggressive creatures, especially when it came to breeding,</i>\" Minerva notes with a sigh and a sour look on her face, clearly not happy with how things went with her daughter.");
+    outputText("\n\n\"<i>It's my own fault for not doing enough, for not being strong enough to resist her and failing to teach her properly before it got to that point.  She came to me one night, claimed she was ready to be an adult.  She needed me to get her pregnant so she could be a mother in turn... and something... I just couldn't resist her.  We had sex... a lot of sex, at that.</i>\"");
+    outputText("\n\n\"<i>Once she seduced me, I couldn't hold back.  She sucked me off, rode me, I plowed her so hard in my lustful haze, and I had to have cum inside her at least half a dozen times that night.  With how needy and fertile those shark girls are, I know I got her pregnant.  How shameful is that?!  I knocked up my own daughter and probably have a granddaughter that I fathered!</i>\" the siren declares sorely, her voice lined with regret and shame for her actions.  \"<i>I'm sorry for yelling, love, I just miss her.  I wish we hadn't parted on those terms.  One day though, I'll see her again... maybe get another chance at being a proper mother,</i>\" she says with a final sigh before looking you in the eyes and hugging you.");
+    outputText("\n\n\"<i>Thank you for listening to me, hun, I'm so happy to have someone like you in my life,</i>\" Minerva whispers to you with a genuine smile on her black lips.");
+    outputText("\n\nThe two of you stay like this for a while, just spending a little time together before you decide you must return to camp and your quest.  Saying your goodbyes, you give Minerva a kiss before heading home.");
+    if (flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 1)
+        flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] = 2;
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -619,8 +607,6 @@ private function talkToMinervaAboutHerCorruption():void {
 	outputText("\n\nLooking at her, you notice her sad expression and ask what's bothering her; she looked happy just moments before, what could be troubling her now?  The tall redhead looks over at you before sighing and turning around to face you.  She puts a hand to her chest and holds it there.  \"<i>What I'm about to tell you... is very personal to me.  It's the reason I'm here, the reason I can't really leave this place,</i>\" she says as she looks you in the eyes, clearly quite serious about this.");
 	outputText("\n\n\"<i>There is something inside me.  I told you how I came to be here, about how the demons attacked me.  Well, it's obvious I didn't escape unharmed.  There was this little demonic creature that attached itself to me.  It  burrowed inside me.  It's in here right now,</i>\" she finishes, tapping her midriff, above her stomach and under her breasts.  \"<i>Sometimes, I can feel it... squirming...  It's the reason for my corruption and why it won't just go away.  This thing just keeps pumping its corrupting influence into my body; it's probably doing all kinds of other stuff I don't know about, too...</i>\"");
 	outputText("\n\nYou look at her with wide eyes, your gaze automatically shifting to her chest where her hand is.  Quickly noticing your look, she turns away, a little embarrassed that you're just staring at her chest.  \"<i>Anyway.  It's this thing that binds me here; it's why I need to consume the blessed water and fruit of this grove.  At one point, this corruption made me do things I feel great shame for...");
-	//PC told about shark daughter:
-	if(flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 1) outputText("  You remember my firstborn, the shark girl I had?  Well... not long after she reached maturity, she... well, she got a bit amorous...  She seduced me and I... I mated with her.  I mated with her over and over that night.  I enjoyed it... it was like I couldn't get enough...  I probably got her pregnant...  So shameful...  I impregnated my own daughter and made her bear my grandchild,");
 	outputText("</i>\" she declares sourly as she stares into the pure waters of the spring.");
 	outputText("\n\nYou put a hand on her shoulder, inquiring about the nature of the creature, but your siren companion can only shrug in answer.  \"<i>I don't know.  Considering the demons, it's likely it was supposed to corrupt and mutate me into some foul, twisted beast of rape and pleasure...</i>\"  Minerva looks to you, her eyes soft and full of emotion.  \"<i>I want to be free of this curse.  It's my greatest wish, even more than having a true family of my own.  I want to be pure, to be clean.  I want this creature exiled from my body and myself to be purged of this corruption...</i>\"");
 	outputText("\n\nCuddling up to you, the siren slips her arms around you, hugging you tightly.  \"<i>Thank you for listening to me, hun, I'm so happy to have someone like you in my life,</i>\" Minerva whispers to you with a genuine smile on her black lips.  \"<i>Sharing one of my hopes and dreams like that, I can't help but feel closer to you.</i>\"");
@@ -640,7 +626,7 @@ private function minervaMotherhood():void {
 	
 	outputText("\n\nYou rack your brain trying to think of what to talk about.  Unable to really think about anything important to discuss, you lean back and relax, deciding that you could talk for once - instead of just listen - about random things you have seen.  You elaborate on the creatures you have encountered, the things that have tried to sexually assault you, knock you up or try to force you to impregnate them.  Perhaps she can learn something from your own trials and errors in this land.");
 	
-	outputText("\n\nThough happy to listen to you for a change, Minerva looks a little uncomfortable with hearing about the sex hungry monsters out there in the world. Nonetheless she pays complete attention to you, leans against the tree with her legs stretched out, her shark tail lying between her legs.  As you tell your tale to your siren ");
+	outputText("\n\nThough happy to listen to you for a change, Minerva looks a little uncomfortable with hearing about the sex hungry monsters out there in the world. Nonetheless, she pays complete attention to you, leans against the tree with her legs stretched out, her shark tail lying between her legs.  As you tell your tale to your siren ");
 	if(minervaRomanced()) outputText("lover");
 	else outputText("friend");
 	outputText(", you can't help but notice how she becomes utterly entranced, how she seems to be clinging hungrily to every word of your story.  With such an attentive audience, it would be a shame not to embellish the truth, just a little.  And so, you begin weaving a story of how you once fought six minotaurs at the same time, each of them twelve feet tall and carrying huge axes.  It was a hard fight, most of your clothes were shredded from the fierce battle, and your body glistened with sweat as you stood over your fallen bestial foes.");
@@ -710,10 +696,10 @@ private function bathTimeWithMinerva():void {
 	outputText("\n\nTurning around, you catch the peeping herm in her voyeuristic act, making her jump back and turn away from you.  \"<i>I... I'm sorry!  I couldn't help it... you just... you're... you look really good, is all...</i>\" she says with a stammer, you can't see it, but you're sure her face must be on fire by now.");
 	
 	outputText("\n\nStepping forward, you slide your arms around the tall, curvy herm and pull her against you, telling her not to worry about it, and to just enjoy the bath.  Your touch seems to work its usual magic, calming her nerves and making Minerva relax against you.  \"<i>Thanks, love... I just can't help myself when it's you...  You're rather sexy, if you didn't know,</i>\" she says playfully before turning around and pushing you back a little, giving you a sharky grin as she makes room for herself to strip.  Pulling her tight white tube top off, her short shorts come off right after, the skimpy clothes tossed to the shore and leaving her just as naked as you are.");
-	outputText("\n\nWith both of you ready, you take the siren's hand and sit in the water with her.  It's cool and refreshing, though you could do with a hot bath instead.  As if sensing your thoughts, Minerva moves close to you.  \"<i>Watch this, hun, the spring reacts funny when I cast a white fire spell on it.  Makes for a lovely hot bath,</i>\" she says before focusing, casting an incantation into the water.");
+	outputText("\n\nWith both of you ready, you take the siren's hand and sit in the water with her.  It's cool and refreshing, though you could do with a hot bath instead.  As if sensing your thoughts, Minerva moves close to you.  \"<i>Watch this, hun, the spring reacts funny when I cast a Whitefire spell on it.  Makes for a lovely hot bath,</i>\" she says before focusing, casting an incantation into the water.");
 	outputText("\n\nWhen no fire appears, you look at her and wonder if she made a mistake, however, your thoughts are interrupted when a deep warmth flows all around you.  The pure spring water grows lukewarm, then a gentle, pleasant warmth, before reaching the temperature of a hot, relaxing bath.");
 	outputText("\n\nGrinning at her work, Minerva cuddles up against you in the now steaming water, and you certainly can't say you're not impressed with that little trick of hers.  Letting out a small moan of approval, both of you lay back and rest in the temporarily hot spring, just relaxing peacefully together, a simple affectionate pastime shared between two lovers.  Minerva holds onto you gently, and her bare breasts presses against your arm as one of her hands tenderly stroke your form, drawing a relaxed sigh from you.");
-	outputText("\n\nEventually though, the heat fades and it's time for both of you to get out of the spring.  The affectionate siren helps you out of the warm water, even going to get you something to dry off with and helping dry you off.  As soon as you're dry, you find yourself wrapped up in a tight, squeezing hug, the blue and gray siren cuddling you tightly.  \"<i>That was nice, my love... really, it was wonderful,</i>\" she says as she looks at you, eyes locked on yours, clearly very happy to have shared that tender moment with you.");
+	outputText("\n\nEventually though, the heat fades, and it's time for both of you to get out of the spring.  The affectionate siren helps you out of the warm water, even going to get you something to dry off with and helping dry you off.  As soon as you're dry, you find yourself wrapped up in a tight, squeezing hug, the blue and gray siren cuddling you tightly.  \"<i>That was nice, my love... really, it was wonderful,</i>\" she says as she looks at you, eyes locked on yours, clearly very happy to have shared that tender moment with you.");
 	outputText("\n\nLeaning in, she gives you a gentle kiss on the lips before finally letting go of you.  \"<i>I wish you didn't have to go, but I understand that you must.  I'll miss you, you know?  Make sure you come back soon, all right?</i>\"  she asks, a sparkle of hope in her eyes.  Smiling back at the happy siren, you nod, reassuring the herm that you will come back as soon as you can, returning her embrace for a moment before turning and heading back for your camp.");
 	// PC returns to camp.
 	dynStats("lus", 10+player.lib/10);
@@ -764,18 +750,27 @@ private function minervaSexMenu(display:Boolean = true):void
 		}
 	}
 	menu();
-	var btnIdx:int = 0;
-	if (player.hasCock() && player.cockThatFits(minervaACapacity()) >= 0)
-		addButton(btnIdx++, "FuckHerButt", fuckMinervasAsshole);
-	if (player.hasCock() && player.cockThatFits(minervaVCapacity()) >= 0 && minervaRomanced())
-	{
-		addButton(btnIdx++, "FuckCowgirl", minervaCowgirlSex);
-		addButton(btnIdx++, "RestrainFuck", fuckMinervaWithHerHandsBehindHerBack);
+	addButtonIfTrue(0, "FuckHerButt", fuckMinervasAsshole,
+		"Req. a cock with area smaller than " + minervaACapacity(),
+		player.cockThatFits(minervaACapacity()) >= 0);
+	if (minervaRomanced()) {
+		addButtonIfTrue(1, "FuckCowgirl", minervaCowgirlSex,
+			"Req. a cock with area smaller than " + minervaVCapacity(),
+			player.cockThatFits(minervaVCapacity()) >= 0);
+		addButtonIfTrue(2, "RestrainFuck", fuckMinervaWithHerHandsBehindHerBack,
+			"Req. a cock with area smaller than " + minervaVCapacity(),
+			player.cockThatFits(minervaVCapacity()) >= 0);
 	}
-	addButton(btnIdx++, "TakeHerDick", chooseVagOrAss);
-	addButton(btnIdx++, "EatHerOut", goDownOnAHermAndLoveItYouDirtySlutYou);
-	if (player.hasCock())
-		addButton(btnIdx++, "Get BJ", letMinervaSuckYouOff);
+	else {
+		addButtonDisabled(1, "???", "You don't think Minerva will let you into her vagina... yet?");
+		addButtonDisabled(2, "???", "You don't think Minerva will let you into her vagina... yet?");
+	}
+	addButton(3, "TakeHerDick", chooseVagOrAss);
+	addButton(4, "EatHerOut", goDownOnAHermAndLoveItYouDirtySlutYou);
+	addButtonIfTrue(5, "Get BJ", letMinervaSuckYouOff,
+		"Req. a cock", player.hasCock());
+	addButtonIfTrue(6, "GetEatenOut", pcGetsEatenOutByMinerva,
+		"Req. a vagina", player.hasVagina());
 	addButton(14, "Leave", genericMenu, true);
 }
 
@@ -811,7 +806,7 @@ private function fuckMinervasAsshole():void {
 	
 	outputText("\n\nYour suddenly increased pace and new brutal thrusts cause the siren to grit her teeth and clench the soft moss in her fingers.  A long, throaty groan is pulled from her, clearly enjoying the rough treatment you're giving her.  \"<i>Ahh-ahh... I'm sorry, I can't help it.  My tendrils have a mind of their own... it feels so good, oh fuck!</i>\" she moans between gasps, her tail tightening around you to keep hold of you.");
 	
-	outputText("\n\nYou can't take it any more and, with a cry, unleash your seething, frothy seed into the siren's waiting bowels.  The intense, rough fucking and the feeling of your sweltering seed flooding her bowels sets her off as well, the siren's orgasm bursting around you.  The siren's tight, slick inner walls squeeze around you as her own member blows its load onto the mossy ground.  Minerva's fat phallus throbs and pulses hard, her thick cumvein bulging as it spews its copious load, making a slick, thick puddle beneath her.");
+	outputText("\n\nYou can't take it any more, and, with a cry, unleash your seething, frothy seed into the siren's waiting bowels.  The intense, rough fucking and the feeling of your sweltering seed flooding her bowels sets her off as well, the siren's orgasm bursting around you.  The siren's tight, slick inner walls squeeze around you as her own member blows its load onto the mossy ground.  Minerva's fat phallus throbs and pulses hard, her thick cumvein bulging as it spews its copious load, making a slick, thick puddle beneath her.");
 	
 	//Moderate cum or less:
 	outputText("\n\nYou keep gushing into her until totally spent, her innards swallowing your load without the slightest effort.  \"<i>Ahhh... please, let it all out, give me every drop you can muster!</i>\" she groans loudly as her tail squeezes around you, not wanting you to leave her body, her tight anal muscles squeezing you so tightly, trying to suck everything she can from your cock.");
@@ -827,7 +822,7 @@ private function fuckMinervasAsshole():void {
 	//Very high cum volume:
 	else outputText("\n\nGasping and gurgling softly, Minerva does her best to hold in the veritable pond of jizz you shot into her.  Her hands keep running up and down the huge, swollen belly she has now, clearly amazed that she was able to withstand such a ridiculous stuffing.  Swallowing again, she slowly pulls away from you, clearly needing to let off the pressure.  As soon as your " + cockDescript(x) + " is free, like a cork from a overpressured bottle, your belly packing load bursts from her body, soaking your pelvis and her legs in thick, white cream.  Sighing in great relief, Minerva turns toward you and pulls you into a gentle after-sex cuddle, her lips brushing against your neck as she gives you a gentle peck.");
 	
-	outputText("\n\nYou allow Minerva to hold you against her toned body, recovering your strength from the draining sex.  Eventually, though, your strength returns and you gently pry yourself free of her, telling her that the sex and her company was wonderful, but that you need to return to camp.");
+	outputText("\n\nYou allow Minerva to hold you against her toned body, recovering your strength from the draining sex.  Eventually, though, your strength returns, and you gently pry yourself free of her, telling her that the sex and her company was wonderful, but that you need to return to camp.");
 	
 	if(!minervaRomanced()) {
 		//First time ending:
@@ -885,7 +880,7 @@ private function minervaCowgirlSex():void {
 	outputText("\n\nYou moan and shudder, shivering violently as Minerva's poisons boil through your blood and countless tendrils stoke your lust to a fever pitch.  Your brain seethes and roils with pleasure as you are surrounded, engulfed.  You don't think you can hold back from cumming for very long, and gasp a warning to the siren that you will cum inside her if she isn't careful.  Clearly hearing your response, a sinister grin grows on Minerva's face as two of her longest and strongest tentacles wrap around the base of your " + cockDescript(x) + " and squeeze tightly, \"<i>Ah-ah-ah... no cumming for you, not until I get mine... I'm the one in charge, here, remember?</i>\"");
 	outputText("\n\nYou can't help but beg and plead for her to show mercy on you, you can't bear this much longer!  Unfortunately for you, the only response you get from Minerva is a smirk, and the tentacles tightening around your throbbing maleness as she draws you in deeper.  The venom and the aggressive treatment makes your dick swell even more, stretching her tight squirming walls around you, the sensation drawing a sharp gasp and soft moan from your siren lover.  The siren's balls come to a rest just above your " + cockDescript(x) + ", the heavy, swollen orbs a reminder that she is enjoying this just as much as you.");
 	
-	outputText("\n\nBiting her lip, she pushes down harder, sinking her soothingly cool pussy down until your whole cock is engulfed in her tight, cilia-filled snatch.  \"<i>Mmm, oh yesss... don't you just love how your " + cockDescript(x) + " stretches me... and all those little things in there, stroking you like little tongues.  Tell me how much you need to cum.  Tell me and I'll let you blow your pent-up load deep inside me.  I doubt you could get me pregnant, I'm probably too unstable to breed with someone like you.  Or maybe you'd like to take a gamble and try?  Do it, fill my pussy with your cum!</i>\"");
+	outputText("\n\nBiting her lip, she pushes down harder, sinking her soothingly cool pussy down until your whole cock is engulfed in her tight, cilia-filled snatch.  \"<i>Mmm, oh yesss... don't you just love how your " + cockDescript(x) + " stretches me... and all those little things in there, stroking you like little tongues.  Tell me how much you need to cum.  Tell me, and I'll let you blow your pent-up load deep inside me.  I doubt you could get me pregnant, I'm probably too unstable to breed with someone like you.  Or maybe you'd like to take a gamble and try?  Do it, fill my pussy with your cum!</i>\"");
 	
 	outputText("\n\nYou plead with her, begging her to let you cum.  You NEED to cum, you feel like you're going to burst!  You ache for relief.  \"<i>Please, let me release myself into your womb!</i>\" you cry out to her.  Licking her lips in anticipation, Minerva lets go of your dick, her cum-blocking tentacles relaxing around you and letting the pressure off of your swollen prick.  With a hollow groan of release, you unleash everything you have into her, flooding her waiting womb with your spooge.");
 	
@@ -896,7 +891,7 @@ private function minervaCowgirlSex():void {
 	//Moderate-high cum:
 	else if(player.cumQ() < 4000) outputText("\n\nYour blissful release surges from you like froth from an over-shaken champagne bottle, gushing into Minerva's cunt with such eagerness that it barely needs her threshing cilia to draw it up into her belly, which becomes visibly bloated after your deposit.  \"<i>Oh!  Oh!  W-wow!  That... that's a lot.  So warm... I feel... so heavy now.  If I could, I bet you would have gotten me pregnant with all that,</i>\" she croons as she strokes her rounded, swollen tummy.");
 	//Very high cum:
-	else outputText("\n\nThe idle thought that Minerva may have bitten off more than she can chew by holding back your orgasm races across your brain, but is scattered like dust on the wind by the bliss of release.  Minerva's belly explosively inflates as gush after frothy gush of copious spunk floods her womb, making it balloon out until it is lying on your own belly, heavy and full.  Minerva's eyes widen as her belly swells bigger and bigger, her trim, firm stomach soon appearing like she was carrying a whole litter of baby shark girls inside her.  Her hands gently stroke her huge, drum-tight belly, the massive load gently sloshing around in her womb.  \"<i>G-geez... how can you let out so much...  Oh gods... so much...  You could knock up a whole village with all this stuff.</i>\"");
+	else outputText("\n\nThe idle thought that Minerva may have bitten off more than she can chew by holding back your orgasm races across your brain, but is scattered like dust on the wind by the bliss of release.  Minerva's belly explosively inflates as gush after frothy gush of copious spunk floods her womb, making it balloon out until it is lying on your own belly, heavy and full.  Minerva's eyes widen as her belly swells bigger and bigger, her trim, firm stomach soon appearing like she was carrying a whole litter of baby shark girls inside her.  Her hands gently stroke her huge, drum-tight belly, the massive load  sloshing around in her womb.  \"<i>G-geez... how can you let out so much...  Oh gods... so much...  You could knock up a whole village with all this stuff.</i>\"");
 	
 	//Moderate-very high only:
 	if(player.cumQ() >= 500) {
@@ -929,7 +924,7 @@ private function minervaCowgirlSex():void {
 	//Very High:
 	if(player.cumQ() >= 4000) {
 		outputText("\n\nYou don't know if Minerva could have safely held the entire contents of both this orgasm and the last.  Luckily, this time, she releases most of it to splash back down onto you, but even so, her belly swells rounder and fuller than before, reaching the bloated state of your last orgasm and then some.  Minerva gasps and groans in some discomfort as her belly swells more and more from your torrential flood of jizz, her tummy taut under the sheer amount of cum crammed into her womb.  Finally, to her palpable relief, her swelling stops as a pool of slick spooge forms underneath your bodies, \"<i>Ooohh...  How... how did you cum even more this time?  I gotta lay off the venom...</i>\"");
-		outputText("\n\nUndeterred by your orgasm, Minerva continues to bounce up and down, biting her lip as she hugs you tightly.  Curling her legs under you as she slams her hips down in her own orgasm.  She shudders as her climax fills her, her own forearm-length cock swelling and pulsing.  The cool stream of siren sperm lancing out, flying well over you and splattering against moss and stone.  Panting and groaning, Minerva holds her swelling stomach, her hands running over the smooth, taut flesh and feeling how your creamy cum swirls inside her. Despite her eagerness and accommodating body, you just keep cumming inside her.  Your thick creamy seed fills her womb, forcing the poor baby breeder to swell larger under the pressure of your orgasm.  Your lusty lover groans and moans under the impossibly filling sensation of being stuffed so full of cum.  Thick rivulets ooze out from around your tight fleshy connection to pool around your ass and hips.  Despite her large bodies considerable capacity, you are simply too virile for her body to contain it all.  Even as your tremendous climax tapers off, both your's and Minerva's hips are soaked in your creamy baby batter.  The poor cum stuffed herm groans and slides her hands over her hugely swollen belly.  Her bright eyes looking down at her gravid form as she continues to stroke herself.  She seems to be lost in a rush of sudden maternal feelings at the sight of how big she's gotten.");
+		outputText("\n\nUndeterred by your orgasm, Minerva continues to bounce up and down, biting her lip as she hugs you tightly.  Curling her legs under you as she slams her hips down in her own orgasm.  She shudders as her climax fills her, her own forearm-length cock swelling and pulsing.  The cool stream of siren sperm lancing out, flying well over you and splattering against moss and stone.  Panting and groaning, Minerva holds her swelling stomach, her hands running over the smooth, taut flesh and feeling how your creamy cum swirls inside her. Despite her eagerness and accommodating body, you just keep cumming inside her.  Your thick creamy seed fills her womb, forcing the poor baby breeder to swell larger under the pressure of your orgasm.  Your lusty lover groans and moans under the impossibly filling sensation of being stuffed so full of cum.  Thick rivulets ooze out from around your tight fleshy connection to pool around your ass and hips.  Despite her large bodies considerable capacity, you are simply too virile for her body to contain it all.  Even as your tremendous climax tapers off, both yours and Minerva's hips are soaked in your creamy baby batter.  The poor cum stuffed herm groans and slides her hands over her hugely swollen belly.  Her bright eyes looking down at her gravid form as she continues to stroke herself.  She seems to be lost in a rush of sudden maternal feelings at the sight of how big she's gotten.");
 		if(!minervaRomanced()) outputText("  \"<i>Oohhh...I'm so... so big... It's almost like you've gotten me pregnant.</i>\"");
 		else outputText("  \"<i>Oohhh... I'm so... so big... cumming so much, I didn't know you were so desperate to get me pregnant.</i>\"");
 	}
@@ -940,7 +935,7 @@ private function minervaCowgirlSex():void {
 	//Very high:
 	else outputText("\n\nGroaning and shuddering from the intense sperm injection, Minerva looks down at herself, her hands gently squeezing her distended stomach, each squeeze making a bit of your frothy cream gush out from between the tight vaginal connection.  If she wasn't so tight, there would be far less trapped inside her.  It's easy to tell she very much enjoyed the sexual union you just shared.  Not yet pulling out, her tight cunt gently squeezes you as she, with some difficulty, lies down on top of you, her fingers lightly stroking you as she cuddles against you.  The act of trying to cuddle forces more of your virile baby batter out of her body to add to the ever-growing pool of cum on the ground.  The siren sighs, basking in the afterglow of sex.");
 	
-	outputText("\n\nYou let Minerva hold you against her soft, curvy body, recovering your strength from the draining sex you just had.  Eventually, though, your strength returns and you gently pry yourself free of her, telling her that the sex and her company was wonderful and that, despite still being very aroused from all the venom she stung you with, you need to return to camp.");
+	outputText("\n\nYou let Minerva hold you against her soft, curvy body, recovering your strength from the draining sex you just had.  Eventually, though, your strength returns, and you gently pry yourself free of her, telling her that the sex and her company was wonderful and that, despite still being very aroused from all the venom she stung you with, you need to return to camp.");
 	if(!minervaRomanced()) {
 		//Default, first time ending:
 		if(flags[kFLAGS.TIMES_MINERVA_COWGIRLED] == 0) outputText("\n\nMinerva actually seems a little sad that you're leaving.  \"<i>I guess you are a busy person.  But I'm glad we did this; it was a lot of fun.  And... you know...  I wouldn't mind if we did this again soon,</i>\" she suggests with a small, hopeful smile on her face.  You promise her that you'll try to come back again soon.");
@@ -996,7 +991,7 @@ private function minervaLapSex():void {
 	
 	outputText("\n\nLetting out a gasp at the sudden tightness, Minerva grits her sharky teeth and grips your rear harder, clearly trying to hold back her own orgasm.  You could swear you could feel her sizable balls swell in preparation only to be denied.  \"<i>Nnnh!  That was close... almost blew my load right there!  You feel so good around me... so warm around my cock.  How do those tentacles feel, hm?  The stinging must feel good,</i>\" she says teasingly as she grinds against you, using her grip on you to shift you back and forth slowly and twist her cock inside you.");
 	
-	outputText("\n\nGrinning to you, she leans in and nibbles your ear gently before licking the outside playfully.  Just as your orgasm is ending, your siren lover decides that it's time to get things moving.  Gripping you tightly, she starts to pull you off her fat length before slamming you back down hard, the forceful action making your [fullChest] bounce and your [vagina] clench in sudden pleasure.  With hard, slow pulls and humps Minerva yanks you up and down, slowly bouncing you in her lap and filling you each time with the squirming, throbbing fullness of her cock.");
+	outputText("\n\nGrinning to you, she leans in and nibbles your ear gently before licking the outside playfully.  Just as your orgasm is ending, your siren lover decides that it's time to get things moving.  Gripping you tightly, she starts to pull you off her fat length before slamming you back down hard, the forceful action making your [fullChest] bounce, and your [vagina] clench in sudden pleasure.  With hard, slow pulls and humps Minerva yanks you up and down, slowly bouncing you in her lap and filling you each time with the squirming, throbbing fullness of her cock.");
 	outputText("\n\nIt doesn't take long for the sound of wet flesh squishing together to pervade the air, the slapping of skin coming together with each hard, fast impact when your hips collide with Minerva's.  Both of you gasp and groan with pleasure as your pace increases.  Leaning you down, Minerva takes a more dominant role, pushing you against the ground without missing a beat, her hips now working against yours as she thrusts into you over and over.  Looking up at your siren lover, you can't help but let out a long moan as another dose of her venom is injected into you.  With so much inside you, coursing through your blood and making you more sensitive than ever, each hard thrust of Minerva's hips, each grope and touch of her hands across your body, sends shocks of spine-tingling pleasure through your body.");
 	
 	outputText("\n\nThe eight-foot tall siren grunts hard as she kicks up the pace, her shark tail smacking the ground as she starts to rut you harder.  What started as slow and gentle has become a fast and hard, passion-filled fuck.  Minerva leans down, capturing your lips in a heated kiss and, despite your lust-addled mind, you can feel the passion and care in the kiss, her delightfully long tongue gently caressing yours even as she pounds you powerfully.");
@@ -1024,7 +1019,7 @@ private function minervaLapSex():void {
 	
 	outputText("\n\nReaching up, you hug your siren, telling her not to worry, and that you loved every second of it.  The two of you lay there for a little while, cuddling and basking in a gentle after-sex, embrace.");
 	
-	outputText("\n\nYou allow Minerva to hold you against her soft body, recovering your strength from the sex you just had.  Eventually, though, your strength returns and you gently pry yourself free.  Telling her that the sex and her company was wonderful and, despite still being very aroused due to all the venom she stung you with, you need to return to camp.");
+	outputText("\n\nYou allow Minerva to hold you against her soft body, recovering your strength from the sex you just had.  Eventually, though, your strength returns, and you gently pry yourself free.  Telling her that the sex and her company was wonderful and, despite still being very aroused due to all the venom she stung you with, you need to return to camp.");
 	
 	if(!minervaRomanced()) {
 		//Default, first time:
@@ -1155,14 +1150,14 @@ private function letMinervaSuckYouOff():void {
 	//if cock area 34+:
 	else if(player.cockArea(x) < 60) outputText("\n\nMinerva's eyes widen as your dick grows and grows, quickly growing almost as large as her own sizable package.  \"<i>Wow, you're hung, aren't you?  I'll do my best to take everything... wow,</i>\" she says with a blush on her face.");
 	//if cock area 60+:
-	else outputText("\n\nMinerva's eyes widen and her mouth opens in shock as your dick grows and grows... and grows, quickly dwarfing her own sizable package.  \"<i>G-geez, what a huge dick, it's enormous...</i>\" she says with wonder in her voice.  Gulping, she licks her lips.  \"<i>W-well... I'll do my best to take all of it...</i>\"  A little nervousness is mixed into her voice, but with how tall she is, you're sure she could take it all.");
+	else outputText("\n\nMinerva's eyes widen, and her mouth opens in shock as your dick grows and grows... and grows, quickly dwarfing her own sizable package.  \"<i>G-geez, what a huge dick, it's enormous...</i>\" she says with wonder in her voice.  Gulping, she licks her lips.  \"<i>W-well... I'll do my best to take all of it...</i>\"  A little nervousness is mixed into her voice, but with how tall she is, you're sure she could take it all.");
 	
 	outputText("\n\nTaking a relaxing breath, Minerva dives right into it, her long tongue slithering out to lick your hard, sensitive flesh, wrapping around the tip and giving the most sensitive part of your dick a good squeeze.  The heat-quenching chill of her wet tongue feels remarkable on your hard prick, the tight squeeze pulling a gasp from your mouth.  Your hands move over her head and into her dark red hair, and you're suddenly relieved that she can't envenom you this way.  Wanting to show you what she's made of, your siren leans in, dragging her cool wet tongue up your " + cockDescript(x) + " from base to tip before planting a kiss right on the " + player.cockHead(x) + " of your throbbing, needy dick.");
 	
 	//If balls:
 	if(player.balls > 0) outputText("  Her hand on your hip moves down between your legs, sliding inwards to gently caress and massage your cum-filled [balls] to increase your pleasure even more, her hands trying their best to get your nuts worked up and prepare a good load for her at the end.");
 	
-	outputText("\n\nHolding the kiss for a moment, your siren lover slides her tongue out, slowly teasing around the tip.  She look up at you briefly, before a playful smirk slips across her face, her tongue extending from her mouth like a snake, the long appendage coiling around your length and constricting around you tightly, sending shudders of pleasure through your body.  The oral embrace feels tight, wet and cool around your comparatively hot dick, the tip of her tongue teasing the underside of your hard flesh");
+	outputText("\n\nHolding the kiss for a moment, your siren lover slides her tongue out, slowly teasing around the tip.  She looks up at you briefly, before a playful smirk slips across her face, her tongue extending from her mouth like a snake, the long appendage coiling around your length and constricting around you tightly, sending shudders of pleasure through your body.  The oral embrace feels tight, wet and cool around your comparatively hot dick, the tip of her tongue teasing the underside of your hard flesh");
 	//If balls:
 	if(player.balls > 0) outputText(" before licking and teasing your [balls]");
 	outputText(".");
@@ -1194,11 +1189,11 @@ private function letMinervaSuckYouOff():void {
 	//High cum:
 	else if(player.cumQ() < 4000) outputText("\n\nFeeling your orgasm suddenly burst inside her, Minerva's long tongue licks up every drop as she keeps sucking you hard, your load notably bigger than she thought it would be, flooding her mouth and puffing out her cheeks, forcing her to struggle to swallow and gulp down your thick, copious load.  Lasting well over a minute, your stomach-filling ejaculations finally end, and Minerva pops off your cum hose with a deep sigh, some of your pearly cream running down her chin before being licked up by that delightfully long tongue of hers.  \"<i>W-wow... that was quite the load.  I'm impressed, I wasn't expecting to get such a... filling meal like this, but you taste pretty good.  And I don't think I'm too bad at giving head, either, considering how much I made you cum,</i>\" she says with a shark-like grin and a gentle pat on her slightly swollen tummy.  \"<i>I wouldn't mind doing this again with you.</i>\"");
 	//holy shit cum volume:
-	else outputText("\n\nFeeling your orgasm suddenly burst inside her, Minerva's long tongue licks up every drop as she keeps sucking you hard, your colossal load far more than she was expecting.  Like a great flood, your sperm gushes into her sucking mouth, quickly overflowing Minerva despite her constant swallowing and attempts to contain it, her stomach rapidly bloating under the intense flow.  Choking and gagging on the thick cream filling her throat, Minerva squeezes her eyes shut, not about to give up and pull away.  She swallows great gulps of your thick, hot cum, but can't catch it all and some begins to gush from her nose and the seal of her lips.\n\nWith your orgasm lasting for what has to be several minutes, you let out a long, satisfied groan as your sperm fountain of a cock is finally released from Minerva's sucking mouth.  The filled up siren groans and leans back, a hand on her bloated, cum-stuffed belly, her chest and face plastered with your thick, white cream.  Coughing a couple of times to free her throat and sinuses from your jizz, she stares up at you with shock and awe.  \"<i>Gods... I had no idea you could cum so much, I've never seen such a potent " + player.mf("male","herm") + " before...</i>\" she chuckles, before coughing some more, \"<i> I don't think I'm going to have to eat dinner tonight, that's for sure...</i>\" she says with a bit of a laugh as she pats her tummy.  \"<i>Despite almost drowning me in your cum, I wouldn't mind doing this again with you, you're surprisingly delicious!</i>\"");
+	else outputText("\n\nFeeling your orgasm suddenly burst inside her, Minerva's long tongue licks up every drop as she keeps sucking you hard, your colossal load far more than she was expecting.  Like a great flood, your sperm gushes into her sucking mouth, quickly overflowing Minerva despite her constant swallowing and attempts to contain it, her stomach rapidly bloating under the intense flow.  Choking and gagging on the thick cream filling her throat, Minerva squeezes her eyes shut, not about to give up and pull away.  She swallows great gulps of your thick, hot cum, but can't catch it all, and some begins to gush from her nose and the seal of her lips.\n\nWith your orgasm lasting for what has to be several minutes, you let out a long, satisfied groan as your sperm fountain of a cock is finally released from Minerva's sucking mouth.  The filled up siren groans and leans back, a hand on her bloated, cum-stuffed belly, her chest and face plastered with your thick, white cream.  Coughing a couple of times to free her throat and sinuses from your jizz, she stares up at you with shock and awe.  \"<i>Gods... I had no idea you could cum so much, I've never seen such a potent " + player.mf("male","herm") + " before...</i>\" she chuckles, before coughing some more, \"<i> I don't think I'm going to have to eat dinner tonight, that's for sure...</i>\" she says with a bit of a laugh as she pats her tummy.  \"<i>Despite almost drowning me in your cum, I wouldn't mind doing this again with you, you're surprisingly delicious!</i>\"");
 	
 	outputText("\n\nDeciding to relax for a while after your sexual exertion, you curl up on the soft moss with Minerva, both of you just basking in the warmth that the spring gives off, and the softness of the moss, content with each other's presence.  Unfortunately, you know you have to go; the call of your duty to this land is too great, and despite the comfort of this place, you must go.  Pulling away from the siren you promise to return and visit her soon.");
 	//PC returns to camp.
-	player.sexReward("Default","Dick",true,false);
+	player.sexReward("saliva","Dick");
 
 if (CoC.instance.inCombat)
         cleanupAfterCombat();
@@ -1276,12 +1271,13 @@ private function fuckMinervaWithHerHandsBehindHerBack():void {
 
 //4-9= sex scene 9: lesing out
 //pure/normal - pc gets eaten out
-private function pcGetsEatenOutByMinerva():void {
+//Restored, adapted to purifidd version and added to menus by SceneHunter.
+public function pcGetsEatenOutByMinerva():void {
 	clearOutput();
 	minervaSprite();
-	outputText("Thinking about just what kind of heated, heart-pounding, lusty fun you want to have with your siren lover, your eyes look the shark-like harpy up and down, taking in her features.  Starting with her long legs, and moving up to her wide, flared hips, your eyes travel past the thick bulge in her shorts, going up her scarred belly to the siren's perky DD-cup breasts before finally reaching her face.");
+	outputText("Thinking about just what kind of heated, heart-pounding, lusty fun you want to have with your siren lover, your eyes look the shark-like harpy up and down, taking in her features.  Starting with her long legs, and moving up to her wide, flared hips, your eyes travel past the thick bulge in her shorts, going up her scarred belly to the siren's " + (minervaPurified ? "enormous G-cup" : "perky DD-cup") + " breasts before finally reaching her face.");
 	
-	outputText("\n\nGrinning to the blue and grey herm, you decide what you want from her.  Your eyes quickly fall to her succulent, glossy black lips, and the long demonic tongue hidden inside.  Your mind wanders through your kinky fantasies, conjuring up images of all the things that scandalously long tongue could do to you, and settles on wanting a piece of the sweet oral pleasure you know Minerva could give you.");
+	outputText("\n\nGrinning to the " + (minervaPurified ? "golden and white" : "blue and grey") + " herm, you decide what you want from her.  Your eyes quickly fall to her succulent, glossy black lips, and the long demonic tongue hidden inside.  Your mind wanders through your kinky fantasies, conjuring up images of all the things that scandalously long tongue could do to you, and settles on wanting a piece of the sweet oral pleasure you know Minerva could give you.");
 	
 	outputText("\n\nHearing that you want her to put her tongue and mouth to work for some sapphic fun brings a playful grin to Minerva's black lips.  \"<i>Oh really?  You want to see my oral skills, huh?  Well, I'm not too shabby, if I have to say,</i>\" the sharky herm claims with a smirk before sticking her long demonic tongue out, the far-reaching, saliva-damped organ sliding down between her own breasts and giving a wiggle for emphasis.");
 	
@@ -1291,11 +1287,11 @@ private function pcGetsEatenOutByMinerva():void {
 	if(player.hasCock()) outputText(", and, perhaps, your more male parts while she's down there");
 	outputText(".");
 	
-	outputText("\n\nLicking her lips, the blue and grey herm moves in closer as you free your genitalia and present yourself to her, eager to see what she can do with that mouth of hers.  Grabbing hold of your thighs, Minerva  leans in");
+	outputText("\n\nLicking her lips, the " + (minervaPurified ? "golden and white" : "blue and grey") + " herm moves in closer as you free your genitalia and present yourself to her, eager to see what she can do with that mouth of hers.  Grabbing hold of your thighs, Minerva  leans in");
 	if(player.balls > 0) outputText(", one of her hands lifting your [balls] up before giving each of the fertile nuts a kiss");
 	outputText(" and moving down to your sweet cunt, just waiting for her attentions.");
 	
-	outputText("\n\nWith a lick of her lips, the siren starts her sexual stimulation.  Leaning in, she plants a kiss on your [vagina], giving your womanly flower a long, slow kiss before sliding her tongue out and licking you, her tongue dragging across your pussy from bottom to top, teasing you as shivers of sweet pleasure run through your body.  As her long tongue teases you, the tip dancing along the outside of your sex, yet never sliding inside.  Her fingers gently caress your vulva, rubbing and stroking you as her perverse oral appendage plays with your entrance.");
+	outputText("\n\nWith a lick of her lips, the siren starts her sexual stimulation.  Leaning in, she plants a kiss on your [vagina], giving your womanly flower a long, slow kiss before sliding her tongue out and licking you, her tongue dragging across your pussy from bottom to top, teasing you as shivers of sweet pleasure run through your body.  As her long tongue teases you, the tip dances along the outside of your sex, yet never sliding inside.  Her fingers gently caress your vulva, rubbing and stroking you as her perverse oral appendage plays with your entrance.");
 	
 	//If herm:
 	if(player.gender == 3) outputText("\n\nLicking her way up, she drags her tongue up to your hardening maleness, her perversely prehensile tongue coiling around your growing cock and, like a snake, squeezing down around the swelling mass, drawing a gasp of delight from your lips as the long demonic tongue slowly slithers off you, squeezing you even as it uncoils from you and slides back down.");
@@ -1315,11 +1311,11 @@ private function pcGetsEatenOutByMinerva():void {
 	
 	outputText("\n\nEven as you're still caught up in your first explosive climax, the sudden, forceful, penetration by her tentacle-like tongue throws you headlong into a whole new level of pleasure, a second orgasm rushing through your body even as your first was winding down.  Your moans go silent and breathless from the raw, mind-blowing ecstasy, your body too consumed by the heavenly oral ministrations to stop screaming and remember to breathe.");
 	
-	outputText("\n\nYour vision darkens, tunneling as your lungs burn for fresh air, your siren lover never once stopping her oral onslaught, her tongue squirming and wriggling its way deeper and deeper into your spasming, quivering quim, and eagerly tasting every drop of girl-spunk you let flow from your squeezing snatch.  Realizing your predicament, Minerva lets her tongue slip out, allowing you respite from the lengthy orgasm, just in time for you to grab a hearty lungful of air, your vision snapping back into place.");
+	outputText("\n\nYour vision darkens, tunneling as your lungs burn for fresh air, your siren lover never once stopping her oral onslaught, her tongue squirming and wriggling its way deeper and deeper into your spasming, quivering quim, and eagerly tasting every drop of girl-spunk you let flow from your squeezing snatch.  Realizing your predicament, Minerva lets her tongue slip out, allowing you to respite from the lengthy orgasm, just in time for you to grab a hearty lungful of air, your vision snapping back into place.");
 	
 	outputText("\n\nGrinning at her work, the siren's eyes move up and down your sweaty, heavily panting form, a distant lusty look in your eyes as your body continues to twitch from jolts of sweet pleasure.  \"<i>Mmm... don't go passing out now, cutie.  You wanted me to use my mouth on you, so that's just what you're getting.</i>\"");
 	
-	outputText("\n\nUnfortunately... or perhaps fortunately, Minerva is not yet done with you.  Licking her lips clean from your juices, she leans back in and draws her tongue up your still quivering cunt.  The slow, teasing touch on your freshly orgasmic flesh feels even better than before, your eyes snapping wide open as you gasp from the sensation.  Grinning her sharky grin, Minerva digs in again, her hands reaching around and grabbing hold of your [butt] before opening her mouth wide and clamping down on you, enclosing your feminine sex inside her cool, wet mouth, her tongue lashing out and spearing into you again, delving deeper then ever before, licking walls that had been left untouched by the siren.");
+	outputText("\n\nUnfortunately... or perhaps fortunately, Minerva is not yet done with you.  Licking her lips clean from your juices, she leans back in and draws her tongue up your still quivering cunt.  The slow, teasing touch on your freshly orgasmic flesh feels even better than before, your eyes snapping wide open as you gasp from the sensation.  Grinning her sharky grin, Minerva digs in again, her hands reaching around and grabbing hold of your [butt] before opening her mouth wide and clamping down on you, enclosing your feminine sex inside her cool, wet mouth, her tongue lashing out and spearing into you again, delving deeper than ever before, licking walls that had been left untouched by the siren.");
 	
 	//If dick:
 	if(player.hasCock()) outputText("\n\nOne of her hands slides back from your rear and across your flesh to your swollen, untouched cock, her soft hand closing around your member and stroking you as she works to send you plummeting back into that ocean of heavenly delights.");
@@ -1335,7 +1331,7 @@ private function pcGetsEatenOutByMinerva():void {
 	
 	outputText("\n\nWith a deeply content sigh, the siren looks across your panting, sweaty body, a cheeky grin appearing on her face appears as she crawls up your exhausted figure and plants a deep tongue-tangling kiss on your lips.  Her girl-cum coated tongue curls around yours, making sure you get a good taste of yourself before pulling back.  \"<i>Mmm, delicious... so musky, so rich, a very special taste for sure,</i>\" she says to you with a grin before laying you down on the moss to let you rest and recover for a while.");
 	
-	outputText("\n\nNearly an hour goes by as you rest from your orgasms at the hands of Minerva's skilled mouth and tongue.  Stirring softly, you feel the siren cuddled up next to you, her bright, electric blue eyes looking at you tenderly as you awaken, perhaps even watching you as you slept.  Slowly sitting up, you stretch and yawn, feeling somewhat rejuvenated from the pleasurable sex and brief nap.  You let out a content sigh and look around for your clothes, only to remember that you never took them off in the first place, though it seems they have been fixed up by the dutiful siren.  Though you had a wonderful time with the scantily clad hermaphrodite, you must return to your duties as a Champion.");
+	outputText("\n\nNearly an hour goes by as you rest from your orgasms at the hands of Minerva's skilled mouth and tongue.  Stirring softly, you feel the siren cuddled up next to you, her bright, electric " + (minervaPurified ? "amber" : "blue") + " eyes looking at you tenderly as you awaken, perhaps even watching you as you slept.  Slowly sitting up, you stretch and yawn, feeling somewhat rejuvenated from the pleasurable sex and brief nap.  You let out a content sigh and look around for your clothes, only to remember that you never took them off in the first place, though it seems they have been fixed up by the dutiful siren.  Though you had a wonderful time with the scantily clad hermaphrodite, you must return to your duties as a Champion.");
 	if(!minervaRomanced()) {
 		//First time ending:
 		if(flags[kFLAGS.MINERVA_LEZZES_OUT] == 0) outputText("\n\nMinerva actually seems a little sad that you're leaving.  \"<i>Well, I guess you are a busy person.  But I'm glad we did this though, it was a lot of fun.  And, you know... I wouldn't mind if maybe we could do this again, soon,</i>\"  she says with a small, hopeful smile on her face.  You promise her that you'll try to come back again soon.");
@@ -1395,7 +1391,7 @@ private function getButtFuckedYouSlut():void {
 	
 	outputText("  The thick siren prick plunges into your backdoor and fills your sweltering hole with her oddly cool cock, both of you groaning in delightful pleasure.");
 	player.buttChange(32, true);
-	outputText("  Minerva basks in the feeling of being balls deep in you, and you revel in the feeling of being so filled and stretched while little tentacles squirm inside you and gently sting you with aphrodisiac venom.  The build-up of all the arousal enhancing toxins running through your body and the pleasure of the butt-packing cock squeezed into your ass becomes too much to bear.  Your vision explodes with stars and your ass clenches as you reach an orgasm.  Your body shudders and quivers with spine-tingling ecstasy, your nerves alight with furious sensation while your back arches and presses your [chest] against your siren lover.");
+	outputText("  Minerva basks in the feeling of being balls deep in you, and you revel in the feeling of being so filled and stretched while little tentacles squirm inside you and gently sting you with aphrodisiac venom.  The build-up of all the arousal enhancing toxins running through your body and the pleasure of the butt-packing cock squeezed into your ass becomes too much to bear.  Your vision explodes with stars, and your ass clenches as you reach an orgasm.  Your body shudders and quivers with spine-tingling ecstasy, your nerves alight with furious sensation while your back arches and presses your [chest] against your siren lover.");
 	
 	outputText("\n\nLetting out a gasp at the sudden tightness, Minerva grits her sharky teeth and grips your rear harder, clearly trying to hold back her own orgasm.  You could swear you could feel her sizable balls swell in preparation only to be denied.  \"<i>Nnnh!  That was close... almost blew my load right there!  You feel so good around me... so warm around my cock.  How do those tentacles feel, hm?  The stinging must feel good,</i>\" she says teasingly as she grinds against you, using her grip on you to shift you back and forth slowly and twist her cock inside you.");
 	
@@ -1404,7 +1400,7 @@ private function getButtFuckedYouSlut():void {
 	
 	outputText("\n\nThe eight-foot tall siren grunts hard as she kicks up the pace, her shark tail smacking the ground as she starts to rut you harder.  What started as slow and gentle has become a fast and hard, passion-filled fuck.  Minerva leans down, capturing your lips in a heated kiss and, despite your lust-addled mind, you can feel the passion and care in the kiss, her delightfully long tongue gently caressing yours even as she pounds you powerfully.");
 	
-	outputText("\"<i>So good, so good.  Yes, yes, yes, how do you like this?  Getting fucked so good... mmm... getting your ass pounded so hard...  Nnnngh!  Oh gods... here it comes, hun, I'm gonna fuck you s-so full of cum,</i>\" Minerva says to you as she pulls back from the kiss, the need in her voice quite clear.  Your lover only lasts a few more hard, powerful thrusts before she gasps, her eyes rolling back into her head as she grips you hard, slamming into you and hilting herself, even as her sizable balls clench and swell again, her thick throbbing cock pulsing inside you, signaling her orgasm.  The thick anemone dick seems to bulge with each fat ejaculation, her pent-up balls blowing an immense load inside you, each gush erupting from her tentacle-endowed dick splattering deep inside you, very quickly pooling in your bowels and bloating it as more and more fills you.");
+	outputText("\"<i>So good, so good.  Yes, yes, yes, how do you like this?  Getting fucked so good... mmm... getting your ass pounded so hard...  Nnnngh!  Oh, gods... here it comes, hun, I'm gonna fuck you s-so full of cum,</i>\" Minerva says to you as she pulls back from the kiss, the need in her voice quite clear.  Your lover only lasts a few more hard, powerful thrusts before she gasps, her eyes rolling back into her head as she grips you hard, slamming into you and hilting herself, even as her sizable balls clench and swell again, her thick throbbing cock pulsing inside you, signaling her orgasm.  The thick anemone dick seems to bulge with each fat ejaculation, her pent-up balls blowing an immense load inside you, each gush erupting from her tentacle-endowed dick splattering deep inside you, very quickly pooling in your bowels and bloating it as more and more fills you.");
 	
 	outputText("\n\nThe feeling of being stuffed by such a cool, thick, and sticky fluid sends you spiraling over the edge in a mind-blowing orgasm.  Back arching and hands gripping the ground as you let out a piercing cry, your [asshole] clenches tightly and quivers around the invading member, ");
 	
@@ -1434,7 +1430,7 @@ private function getButtFuckedYouSlut():void {
 	
 	outputText("\n\nReaching up, you hug your siren, telling her not to worry, and that you loved every second of it.  The two of you lay there for a little while, cuddling and basking in a gentle after-sex, embrace.");
 	
-	outputText("\n\nYou allow Minerva to hold you against her soft body, recovering your strength from the sex you just had.  Eventually, though, your strength returns and you gently pry yourself free.  Telling her that the sex and her company was wonderful and, despite still being very aroused due to all the venom she stung you with, you need to return to camp.");
+	outputText("\n\nYou allow Minerva to hold you against her soft body, recovering your strength from the sex you just had.  Eventually, though, your strength returns, and you gently pry yourself free.  Telling her that the sex and her company was wonderful and, despite still being very aroused due to all the venom she stung you with, you need to return to camp.");
 	
 	if(!minervaRomanced()) {
 		//Default, first time:
@@ -1485,53 +1481,9 @@ internal function beatUpDatSharpie():void {
 	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
 		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.MINERVA_DEFEATS_COUNTER]++;
 		else flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 1;
-		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 1 && flags[kFLAGS.MINERVA_LVL_UP] < 1) {
+		if (flags[kFLAGS.MINERVA_LVL_UP] < 12 && flags[kFLAGS.MINERVA_DEFEATS_COUNTER] > flags[kFLAGS.MINERVA_LVL_UP]) {
 			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.MINERVA_LVL_UP] = 1;
-		}
-		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 2 && flags[kFLAGS.MINERVA_LVL_UP] == 1) {
-			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.MINERVA_LVL_UP] = 2;
-		}
-		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 3 && flags[kFLAGS.MINERVA_LVL_UP] == 2) {
-			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.MINERVA_LVL_UP] = 3;
-		}
-		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.MINERVA_LVL_UP] == 3) {
-			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.MINERVA_LVL_UP] = 4;
-		}
-		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.MINERVA_LVL_UP] == 4) {
-			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.MINERVA_LVL_UP] = 5;
-		}
-		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 6 && flags[kFLAGS.MINERVA_LVL_UP] == 5) {
-			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.MINERVA_LVL_UP] = 6;
-		}
-		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 7 && flags[kFLAGS.MINERVA_LVL_UP] == 6) {
-			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.MINERVA_LVL_UP] = 7;
-		}
-		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 8 && flags[kFLAGS.MINERVA_LVL_UP] == 7) {
-			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.MINERVA_LVL_UP] = 8;
-		}
-		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.MINERVA_LVL_UP] == 8) {
-			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.MINERVA_LVL_UP] = 9;
-		}
-		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.MINERVA_LVL_UP] == 9) {
-			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.MINERVA_LVL_UP] = 10;
-		}
-		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.MINERVA_LVL_UP] == 10) {
-			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.MINERVA_LVL_UP] = 11;
-		}
-		if (flags[kFLAGS.MINERVA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.MINERVA_LVL_UP] == 11) {
-			flags[kFLAGS.MINERVA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.MINERVA_LVL_UP] = 12;
+			++flags[kFLAGS.MINERVA_LVL_UP];
 		}
 	}
 	//Win by damage
@@ -1543,7 +1495,7 @@ internal function beatUpDatSharpie():void {
 	}
 	//Win by lust
 	else {
-		outputText("Your final move finishes the horny siren, her shorts bulging obscenely and soaked with her arousal.  Falling to her knees, Minerva desperately grabs hold of her shorts, yanking them from her curvy hips, letting out a gasp of relief and a moan of need.  Between the lusty herm's legs stands her painfully hard cock, all sixteen thick inches throbbing with desperate need, her thighs soaked in womanly juices.  Minerva's hands grab hold of her cock, stroking herself as she slips a pair of fingers into her quivering, slippery quim.  \"<i>Oh, [name], p-please... ohhh... look what you've done.  So mean, getting me so horny like this,</i>\" she says before letting out a long moan.");
+		outputText("Your final move finishes the horny siren, her shorts bulging obscenely and soaked with her arousal.  Falling to her knees, Minerva desperately grabs hold of her shorts, yanking them from her curvy hips, letting out a gasp of relief, and a moan of need.  Between the lusty herm's legs stands her painfully hard cock, all sixteen thick inches throbbing with desperate need, her thighs soaked in womanly juices.  Minerva's hands grab hold of her cock, stroking herself as she slips a pair of fingers into her quivering, slippery quim.  \"<i>Oh, [name], p-please... ohhh... look what you've done.  So mean, getting me so horny like this,</i>\" she says before letting out a long moan.");
 		outputText("\n\nShe's looking up at you with her debilitating lust clear in her eyes.  \"<i>W-well... think you could help little old me with this...  Just tell me what to do, I need it so badly.</i>\"");
 		minervaSexMenu(false);
 		addButton(14,"Leave",cleanupAfterCombat);
@@ -1574,17 +1526,6 @@ private function getMint():void {
 	inventory.takeItem(consumables.C__MINT, camp.returnToCampUseOneHour);
 }
 
-
-/* IMPLEMENTED AT LAST!
-Calming Mint
-Acquiring: There are many strange herbs growing around the spring, fed by whatever power resides in the water.  Finally, you locate a sprig of something that resembles mint, but silver in color, and decide to pluck it.  Stowing it carefully amongst your belongings, you thank Minerva for sharing the contents of her 'garden' with you and then head back to camp.
-C. Mint - Inventory
-This is a sprig of silver-colored mint.  Its strong scent makes you feel calmer and less lustful.
-Sell value 3
-Using
-C. Mint - Eating the sprig of raw mint is a bit of a stretch, but you manage to gulp it down.  As the strong minty flavor overwhelms your taste buds, your mind feels calmer, and a relaxed sensation spreads through your body.
-// -3 Libido, -10 Lust, intelligence +2
-*/
 //Spring Water
 public function getADrinkYouBitch():void {
 	clearOutput();
@@ -1618,44 +1559,33 @@ private function sleepWithMinerva():void {
 	outputText(images.showImage("minerva-sleepwith"));
 	outputText("You walk over to the siren and give her a hug. You tell her that you want to sleep with her. \"<i>Oh, really? You want to sleep with me?</i>\" she says. You nod.\n\n");
 	outputText("Minerva guides you to the most comfortable spot.  She takes off her tube top, exposing her breasts completely.\n\n");
-	if (player.armorName == "goo armor") outputText("You take your time to get the metal platebody off until you're completely naked save for the goo-girl covering you.  ");
+	if (player.armor == armors.GOOARMR) outputText("You take your time to get the metal platebody off until you're completely naked save for the goo-girl covering you.  ");
 	else outputText("You take your time to get your [armor] off until you're completely naked.  ");
 	outputText("You lay next to Minerva while you rest your head on her soft breasts.  ");
-	if (player.armorName == "goo armor") outputText("Valeria, your goo-girl companion, envelopes you and Minerva, helping to keep you and Minerva warm.  ");
+	if (player.armor == armors.GOOARMR) outputText("Valeria, your goo-girl companion, envelops you and Minerva, helping to keep you and Minerva warm.  ");
 	outputText("\"<i>Sweet dreams,</i>\" she says as you finally close your eyes.  ");
-	doNext(sleepWithMinervaProcess);
+	doNext(sleepWithMinervaII);
 }
 private function sleepWithMinervaII():void {
+	var timeToSleep:int = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
 	clearOutput();
+	cheatTime(timeToSleep);
+	sleepHeal(timeToSleep);
 	outputText(images.showImage("minerva-sleepwith2"));
-	outputText("<b>Ten hours pass...</b>\n\n");
-	outputText("You wake up, feeling refreshed. You thank Minerva for letting you sleep with her and you hug her, making sure to give her a good kiss. \"<i>Ohhhhh,</i>\" she moans and even blushes! You break the kiss. \"<i>Darling, come back anytime, ok?</i>\" she says. \n\n");
-	if (player.armorName == "goo armor") outputText("Valeria encases you once more and you get suited up ");
+	outputText("<b>" + NUMBER_WORDS_CAPITAL[timeToSleep] + " hours pass...</b>\n\n");
+	outputText("You wake up, feeling refreshed. You thank Minerva for letting you sleep with her, and you hug her, making sure to give her a good kiss. \"<i>Ohhhhh,</i>\" she moans and even blushes! You break the kiss. \"<i>Darling, come back anytime, ok?</i>\" she says. \n\n");
+	if (player.armor == armors.GOOARMR) outputText("Valeria encases you once more, and you get suited up ");
 	else outputText("You get re-dressed in your [armor] ");
 	outputText("and you leave the tower to return to your camp. \n\n");
 	awardAchievement("Getaway", kACHIEVEMENTS.GENERAL_GETAWAY);
-	sleepWithMinervaHeal();
 	doNext(camp.returnToCampUseOneHour);
 }
-private function sleepWithMinervaProcess():void {
-	clearOutput();
-	CoC.instance.timeQ = 10;
-	goNext(true);
-	sleepWithMinervaII();
-}
-private function sleepWithMinervaHeal():void {
-	CoC.instance.timeQ = 10;
+
+public function sleepHeal(hours:int):void {
+	CoC.instance.timeQ = hours;
 	camp.sleepRecovery(true);
 	CoC.instance.timeQ = 0;
 }
 
-/* IMPLEMENTED AT LAST!
-[Bottle] Pulling out a small waterskin, you dip it into the crystal clear water, filling the container with the cool, clean spring water before placing it in your pack
-Spring Water - Inventory
-A waterskin full of purified water from Minerva's spring.  It's clean and clear, with a faint sweet scent to it.  You're sure it would be a very refreshing drink.
-Using
-The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body.
-// Corruption - 3 to 4, lower fatigue by 5 or 10, heal health by 20 per level.
-*/
 }
 }

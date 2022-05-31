@@ -12,14 +12,11 @@ package coc.view {
  ****/
 
 import classes.internals.Utils;
-
-import flash.display.MovieClip;
-import flash.display.Sprite;
 import flash.text.Font;
 import flash.text.TextField;
-import flash.text.TextFormat;
 
 import flash.events.MouseEvent;
+import classes.Parser.Parser;
 
 public class CoCButton extends Block {
 
@@ -154,10 +151,16 @@ public class CoCButton extends Block {
 	public function show(text:String,callback:Function,toolTipText:String="",toolTipHeader:String=""):CoCButton {
 		this.labelText     = text;
 		this.callback      = callback;
-		this.toolTipHeader = toolTipHeader||text;
-		this.toolTipText   = toolTipText;
+		this.toolTipText = toolTipText;
+		this.toolTipHeader = toolTipHeader || text;
+		if (this.labelText)
+			this.labelText = Parser.recursiveParser(this.labelText);
+        if (this.toolTipText)
+            this.toolTipText = Parser.recursiveParser(this.toolTipText);
+        if (this.toolTipHeader)
+            this.toolTipHeader = Parser.recursiveParser(this.toolTipHeader);
 		this.visible       = true;
-		this.enabled       = true;
+		this.enabled       = (this.callback != null);
 		this.alpha         = 1;
 		return this;
 	}
@@ -166,14 +169,7 @@ public class CoCButton extends Block {
 	 * @return this
 	 */
 	public function showDisabled(text:String,toolTipText:String="",toolTipHeader:String=""):CoCButton {
-		this.labelText     = text;
-		this.callback      = null;
-		this.toolTipHeader = toolTipHeader||text;
-		this.toolTipText   = toolTipText;
-		this.visible       = true;
-		this.enabled       = false;
-		this.alpha         = 1;
-		return this;
+		return show(text, null, toolTipText, toolTipHeader);
 	}
 	/**
 	 * Set text and tooltip. Don't change callback, enabled, visibility
@@ -183,6 +179,10 @@ public class CoCButton extends Block {
 		this.labelText = text;
 		this.toolTipText = toolTipText||labelText;
 		this.toolTipHeader = toolTipHeader;
+        if (this.toolTipText)
+            this.toolTipText = Parser.recursiveParser(this.toolTipText);
+        if (this.toolTipHeader)
+            this.toolTipHeader = Parser.recursiveParser(this.toolTipHeader);
 		return this;
 	}
 	/**
@@ -192,6 +192,10 @@ public class CoCButton extends Block {
 	public function hint(toolTipText:String = "",toolTipHeader:String=""):CoCButton {
 		this.toolTipText = toolTipText;
 		this.toolTipHeader = toolTipHeader||labelText;
+        if (this.toolTipText)
+            this.toolTipText = Parser.recursiveParser(this.toolTipText);
+        if (this.toolTipHeader)
+            this.toolTipHeader = Parser.recursiveParser(this.toolTipHeader);
 		return this;
 	}
 	/**
@@ -201,7 +205,8 @@ public class CoCButton extends Block {
 	public function disableIf(condition:Boolean, toolTipText:String=null):CoCButton {
 		if (condition) {
 			enabled = false;
-			if (toolTipText !== null) this.toolTipText = toolTipText;
+			if (toolTipText !== null)
+                this.toolTipText = Parser.recursiveParser(toolTipText);
 		}
 		return this;
 	}
@@ -211,7 +216,8 @@ public class CoCButton extends Block {
 	 */
 	public function disable(toolTipText:String=null):CoCButton {
 		enabled = false;
-		if (toolTipText!==null) this.toolTipText = toolTipText;
+        if (toolTipText !== null)
+            this.toolTipText = Parser.recursiveParser(toolTipText);
 		return this;
 	}
 	/**

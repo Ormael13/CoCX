@@ -89,7 +89,7 @@ public class CaiLin extends Monster
 			else outputText("The gorgon");
 			outputText(" draws close and suddenly wraps herself around you, binding you in place! You can't help but feel strangely aroused by the sensation of her scales rubbing against your body. All you can do is struggle as she begins to squeeze tighter!");
 			player.createStatusEffect(StatusEffects.NagaBind,0,0,0,0); 
-			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
+			if (!player.hasPerk(PerkLib.Juggernaut) && armorPerk != "Heavy") {
 				player.takePhysDamage(3+rand(6));
 			}
 		}
@@ -99,10 +99,10 @@ public class CaiLin extends Monster
 			else outputText("The gorgon");
 			outputText(" tenses and twists herself forcefully.  ");
 			//[if evaded]
-			if((player.findPerk(PerkLib.Evade) && rand(6) == 0)) {
+			if((player.hasPerk(PerkLib.Evade) && rand(6) == 0)) {
 				outputText("You see her tail whipping toward you and evade it at the last second. You quickly roll back onto your feet.");
 			}
-			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+			else if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s tail-whip.");
 			}
 			else if(player.spe > rand(400)) {
@@ -139,10 +139,10 @@ public class CaiLin extends Monster
 		
 		public function SpellMod():Number {
 			var mod:Number = 1;
-			if (findPerk(PerkLib.JobSorcerer) >= 0) mod += .1;
-			//if (findPerk(PerkLib.Mage) >= 0) mod += .2;
-			//if (findPerk(PerkLib.Spellpower) >= 0) mod += .2;
-			//if (findPerk(PerkLib.WizardsFocus) >= 0) mod += .5;
+			if (hasPerk(PerkLib.JobSorcerer)) mod += .1;
+			//if (hasPerk(PerkLib.Mage)) mod += .2;
+			//if (hasPerk(PerkLib.Spellpower)) mod += .2;
+			//if (hasPerk(PerkLib.WizardsFocus)) mod += .5;
 			return mod;
 		}
 		

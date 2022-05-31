@@ -119,7 +119,7 @@ use namespace CoC;
 					}, {
 						name: "nails",
 						when: function ():Boolean {
-							return player.hasKeyItem("Carpenter's Toolbox") >= 0 && player.keyItemv1("Carpenter's Toolbox") < 200;
+							return player.hasKeyItem("Carpenter's Toolbox") >= 0 && player.keyItemvX("Carpenter's Toolbox", 1) < 200;
 						},
 						call: nailsEncounter
 					}, {

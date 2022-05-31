@@ -8,11 +8,11 @@ import classes.StatusEffects;
 public class ThunderstormSpell extends AbstractDivineSpell {
 	public function ThunderstormSpell() {
 		super(
-				"Thunderstorm",
-				"Call upon the heavenly thunder, starting a lightning storm that will systematically zap your opponents every turn for up to 30 rounds.  ",
-				TARGET_ENEMY,
-				TIMING_LASTING,
-				[TAG_DAMAGING, TAG_LIGHTNING]
+			"Thunderstorm",
+			"Call upon the heavenly thunder, starting a lightning storm that will systematically zap your opponents every turn for up to 30 rounds.  ",
+			TARGET_ENEMY,
+			TIMING_LASTING,
+			[TAG_DAMAGING, TAG_LIGHTNING]
 		);
 		baseManaCost = 1200;
 	}
@@ -22,7 +22,7 @@ public class ThunderstormSpell extends AbstractDivineSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~"+calcDamage(target, false)+" lightning damage for "+numberOfThings(calcDuration(),"round");
+		return "~"+calcDamage(target, false, false)+" lightning damage for "+numberOfThings(calcDuration(),"round");
 	}
 	
 	override public function isActive():Boolean {
@@ -51,13 +51,14 @@ public class ThunderstormSpell extends AbstractDivineSpell {
 		}
 	}
 	
-	public function calcDamage(monster:Monster, randomize:Boolean=true):Number {
+	public function calcDamage(monster:Monster, randomize:Boolean=true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		return adjustSpellDamage(
 				scalingBonusIntelligence(randomize),
 				DamageType.LIGHTNING,
 				CAT_SPELL_DIVINE,
 				monster,
-				false
+				false,
+                casting
 			);
 	}
 	
@@ -65,7 +66,7 @@ public class ThunderstormSpell extends AbstractDivineSpell {
 		if (display) {
 			outputText("You call upon the anger of the gods to smite your foe and they gladly answer with thunder. Lightning begins to strike down upon your opponent"+(monster.plural ? "s":"")+" with perfect precision.");
 		}
-		var damage:Number = calcDamage(monster);
+		var damage:Number = calcDamage(monster, true, true);
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;

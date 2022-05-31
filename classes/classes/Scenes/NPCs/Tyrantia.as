@@ -10,6 +10,7 @@ import classes.BodyParts.Ears;
 import classes.BodyParts.Hips;
 import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
+import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 import classes.internals.*;
@@ -41,6 +42,7 @@ public class Tyrantia extends Monster
 			dmg0 += this.str * 3;
 			dmg0 += eBaseStrengthDamage() * 2;
 			dmg0 += this.weaponAttack * 3;
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 2) dmg0 *= (1 + (0.1 * (flags[kFLAGS.TYRANTIA_LVL_UP] - 1)));
 			dmg0 = Math.round(dmg0);
 			lust0 *= 3;
 			player.takePhysDamage(dmg0, true);
@@ -72,11 +74,28 @@ public class Tyrantia extends Monster
 					player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 				}
 				var dmg2:Number = 0;
+				var crit:Boolean = false;
+				var critChance:int = 15;
+				var critMulti:Number = 1.75;
+				if (hasPerk(PerkLib.GrandTactician) && this.inte >= 150) {
+					if (this.inte <= 300) critChance += (this.inte - 150) / 5;
+					if (this.inte > 300) critChance += 30;
+				}
 				dmg2 += this.str * 4;
 				dmg2 += eBaseStrengthDamage() * 3;
 				dmg2 += this.weaponAttack * 4;
+				if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 2) dmg2 *= (1 + (0.2 * (flags[kFLAGS.TYRANTIA_LVL_UP] - 1)));
+				if (rand(100) < critChance) {
+					crit = true;
+					dmg2 *= critMulti;
+				}
+				if (hasPerk(PerkLib.Naturaljouster)) {
+					if (hasPerk(PerkLib.NaturaljousterMastergrade)) dmg2 *= 5;
+					else dmg2 *= 3;
+				}
 				dmg2 = Math.round(dmg2);
 				player.takePhysDamage(dmg2, true);
+				if (crit) outputText("<b> Critical!</b>");
 				player.dynStats("lus", lustFromHits());
 			}
 		}
@@ -111,6 +130,7 @@ public class Tyrantia extends Monster
 			dmg3 += this.str * 4;
 			dmg3 += eBaseStrengthDamage() * 3;
 			dmg3 += this.weaponAttack;
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 2) dmg3 *= (1 + (0.1 * (flags[kFLAGS.TYRANTIA_LVL_UP] - 1)));
 			dmg3 = Math.round(dmg3);
 			player.takePhysDamage(dmg3, true);
 			player.takePhysDamage(dmg3, true);
@@ -145,7 +165,7 @@ public class Tyrantia extends Monster
 					removeStatusEffect(StatusEffects.Lustzerking);
 				}
 			}
-			tyrantiaLustAura();
+			if (TyrantiaFollower.TyrantiaFollowerStage < 2 || (player.hasStatusEffect(StatusEffects.SparingTyrantia) && player.statusEffectv1(StatusEffects.SparingTyrantia) > 0)) tyrantiaLustAura();
 			//if () 
 			//else {
 				var choice0:Number = rand(6);
@@ -174,12 +194,13 @@ public class Tyrantia extends Monster
 				}
 			//}
 		}
-		/*
+		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.tyrania.postFightOptions(hpVictory);
+			if (player.hasStatusEffect(StatusEffects.SparingTyrantia)) SceneLib.tyrania.TyrantiaLostSparring(hpVictory);
+			else SceneLib.tyrania.postFightOptions(hpVictory);
 		}
-		*/
+		
 		override public function get long():String
 		{
 			var str:String = "";
@@ -193,6 +214,37 @@ public class Tyrantia extends Monster
 		
 		public function Tyrantia() 
 		{
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] < 2) {
+				initStrTouSpeInte(295, 310, 190, 150);
+				initWisLibSensCor(100, 280, 100, 100);
+				this.weaponAttack = 150;
+				this.armorDef = 300;
+				this.armorMDef = 300;
+				this.bonusHP = 2000;
+				this.bonusLust = 438;
+				this.level = 58;
+			}
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 2 && flags[kFLAGS.TYRANTIA_LVL_UP] < 4) {
+				var mod:int = (flags[kFLAGS.TYRANTIA_LVL_UP] - 1);
+				initStrTouSpeInte(295 + 20*mod, 310 + 25*mod, 190 + 15*mod, 150 + 10*mod);
+				initWisLibSensCor(100 + 5*mod, 280 + 20*mod, 100 + 20*mod, 100);
+				this.weaponAttack = 150 + 10*mod;
+				this.armorDef = 300 + 20*mod;
+				this.armorMDef = 300 + 20*mod;
+				this.bonusHP = 2000 + 1000*mod;
+				this.bonusLust = 438 + 46*mod;
+				this.level = 58 + 6*mod;
+			}
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] == 4) {
+				initStrTouSpeInte(355, 385, 235, 180);
+				initWisLibSensCor(115, 340, 160, 100);
+				this.weaponAttack = 180;
+				this.armorDef = 360;
+				this.armorMDef = 360;
+				this.bonusHP = 5000;
+				this.bonusLust = 576;
+				this.level = 76;
+			}
 			this.a = "";
 			this.short = "Tyrantia";
 			this.imageName = "corrupteddrider";
@@ -211,19 +263,11 @@ public class Tyrantia extends Monster
 			this.skinTone = "brown";
 			this.hairColor = "black";
 			this.hairLength = 24;
-			initStrTouSpeInte(295, 310, 190, 150);
-			initWisLibSensCor(100, 280, 100, 100);
 			this.weaponName = "Dick";
 			this.weaponVerb="piercing stab";
-			this.weaponAttack = 150;
 			this.armorName = "carapace";
-			this.armorDef = 300;
-			this.armorMDef = 300;
-			this.bonusHP = 2000;
-			this.bonusLust = 438;
 			this.lustVuln = .2;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 58;
 			this.gems = rand(10) + 40;
 			this.drop = new WeightedDrop().add(consumables.B_GOSSR,1)
 					.add(consumables.UNICORN,1)
@@ -237,9 +281,32 @@ public class Tyrantia extends Monster
 			this.createPerk(PerkLib.TankI,0,0,0,0);
 			this.createPerk(PerkLib.GoliathI,0,0,0,0);
 			this.createPerk(PerkLib.CheetahI,0,0,0,0);
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 2) {
+				this.createPerk(PerkLib.EpicStrength,0,0,0,0);
+				this.createPerk(PerkLib.EpicSpeed,0,0,0,0);
+				this.createPerk(PerkLib.Naturaljouster,0,0,0,0);
+			}
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 3) {
+				this.createPerk(PerkLib.EpicToughness,0,0,0,0);
+				this.createPerk(PerkLib.GrandTactician,0,0,0,0);
+				this.createPerk(PerkLib.ImmovableObject,0,0,0,0);
+			}
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 4) {
+				this.createPerk(PerkLib.Juggernaut,0,0,0,0);
+				this.createPerk(PerkLib.JobWarrior,0,0,0,0);
+				this.createPerk(PerkLib.InhumanDesireI,0,0,0,0);
+			}
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 5) {
+				this.createPerk(PerkLib.LegendaryStrength,0,0,0,0);
+				this.createPerk(PerkLib.LegendarySpeed,0,0,0,0);
+				this.createPerk(PerkLib.NaturaljousterMastergrade,0,0,0,0);
+			}
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 6) {
+				this.createPerk(PerkLib.LegendaryToughness,0,0,0,0);
+				this.createPerk(PerkLib.DemonicDesireI,0,0,0,0);
+				//this.createPerk(PerkLib.,0,0,0,0);
+			}
 			checkMonster();
 		}
-		
 	}
-
 }

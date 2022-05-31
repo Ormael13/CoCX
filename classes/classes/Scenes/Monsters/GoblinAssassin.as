@@ -3,7 +3,6 @@
 import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
-import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -32,7 +31,7 @@ public class GoblinAssassin extends Monster
 				else outputText("  There doesn't seem to be any effect.\n");
 			}
 			//Dodge chance!
-			if((player.findPerk(PerkLib.Evade) >= 0 && rand(10) <= 3) || (rand(100) < player.spe/5)) {
+			if((player.hasPerk(PerkLib.Evade) && rand(10) <= 3) || (rand(100) < player.spe/5)) {
 				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n");
 			}
 			//Get hit!
@@ -56,7 +55,6 @@ public class GoblinAssassin extends Monster
 				outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n");
 				EngineCore.fatigue(10 + rand(25));
 			}
-			return;
 		}
 		//Lust Needle
 		protected function lustNeedle():void {
@@ -88,7 +86,7 @@ public class GoblinAssassin extends Monster
 				outputText("\nBefore you can do anything to stop her, she lifts her head and takes a swift lick of your crotch, taking a small moan from you and giving her enough time to stab into the back of your knees. She rolls out of the way just as you pluck the two needles out and throw them back to the ground. They didn’t seem to have anything in them, but the pain is enough to make you stagger. ");
 				//(Medium HP loss, small lust gain)
 				var damage:int = int((str + weaponAttack + 40) - rand(player.tou) - player.armorDef);
-				damage = player.takePhysDamage(damage, true);
+				player.takePhysDamage(damage, true);
 			}
 		}
 		//Explosion
@@ -98,22 +96,16 @@ public class GoblinAssassin extends Monster
 			//(High HP loss, no lust gain)
 			var damage:int = 25 + rand(75);
 			damage = Math.round(damage);
-			damage = player.takeFireDamage(damage, true);
+			player.takeFireDamage(damage, true);
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) SceneLib.hexindao.gaunletchallange2fight2();
-			else SceneLib.goblinAssassinScene.gobboAssassinRapeIntro1();
+			else SceneLib.goblinScene.gobboRapeIntro();
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
-				outputText("You collapse in front of the goblin, too wounded to fight.  She growls and kicks you in the head, making your vision swim. As your sight fades, you hear her murmur, \"<i>Fucking dicks can't even bother to grow a dick or cunt.</i>\"");
-				SceneLib.combat.cleanupAfterCombatImpl();
-			} 
-			else {
-				SceneLib.goblinAssassinScene.gobboAssassinBeatYaUp1();
-			}
+			SceneLib.goblinScene.gobboSpecialBeatYaUp();
 		}
 		public function GoblinAssassin(noInit:Boolean=false)
 		{
@@ -164,7 +156,7 @@ public class GoblinAssassin extends Monster
 							consumables.PINKDYE,
 							consumables.BLUEDYE,
 							consumables.ORANGDY,
-							consumables.PURPDYE);// TODO this is a copy of goblin drop. consider replacement with higher-lever stuff
+							consumables.PURPDYE);
 			this.abilities = [
 				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
 				{ call: goblinDrugAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[TAG_FLUID]},

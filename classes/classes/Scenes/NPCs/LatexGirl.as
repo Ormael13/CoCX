@@ -3,6 +3,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class LatexGirl extends NPCAwareContent
 	{
@@ -132,6 +133,7 @@ private function gooTitSize():Number {
 public function meanGooGirlRecruitment():void {
     CoC.instance.inCombat = false;
     clearOutput();
+    spriteSelect(SpriteDb.s_latexgoogirl);
 	flags[kFLAGS.GOO_TFED_MEAN] = 1;
 	flags[kFLAGS.GOO_EYES] = monster.skinTone;
 	if(player.hasItem(consumables.SUCMILK)) player.consumeItem(consumables.SUCMILK);
@@ -280,6 +282,7 @@ private function nameZeLatexGoo():void
 //PC Couldn't Bring Her Back
 public function encounterLeftBehindGooSlave():void {
 	clearOutput();
+    spriteSelect(SpriteDb.s_latexgoogirl);
 	if(flags[kFLAGS.GOO_TFED_NICE] > 0) {
 		outputText("While exploring, you see something odd in the lake.  It's a black blob, barely visible in the azure waves, though it seems to be splashing wildly, as if it was struggling.  You walk up to the lake shore just as the black blob flops limply onto the beach, breathing hard.  It's the poor goo-girl that got turned into latex!");
 		outputText("\n\n\"<i>It's... you...</i>\" she moans, looking up at you with wide " + flags[kFLAGS.GOO_EYES] + " eyes before they close...  It seems she's fainted.  She looks almost alien in a way... more than she did before, when she was just an aqueous blob with tits and faux hair.  Now, every facet of her being is shiny, reflective latex.  Even her vaginal secretions, which dribble freely, are liquid latex, glossy black juices that slowly harden into a flexible solid once freed from her body.");
@@ -329,6 +332,7 @@ private function encounterLeftBehindGooSlaveII():void {
 public function pureGooRecruitmentStart():void {
     CoC.instance.inCombat = false;
     clearOutput();
+    spriteSelect(SpriteDb.s_latexgoogirl);
 	flags[kFLAGS.GOO_TFED_NICE] = 1;
 	flags[kFLAGS.GOO_EYES] = monster.skinTone;
 	if(player.hasItem(consumables.SUCMILK)) player.consumeItem(consumables.SUCMILK);
@@ -337,7 +341,7 @@ public function pureGooRecruitmentStart():void {
 	else player.consumeItem(consumables.L_BLKEG);
 	//Play after having defeated a Googirl, when you have a Black Egg & Succubi Milk in your inventory. Corruption less than 50.
 	//NOTE: Starts with Obedience 30, Happiness 60~?
-	outputText("The excitement of your scuffle proves too much for the goo-girl to keep up with and she collapses into the slime of her lower torso, her skin wiggling as she struggles to maintain cohesion.  Her expression is one of disappointment, and she looks at you with big, hopeful eyes, reaching out a hand, as if to offer an apology for her overexuberance.");
+	outputText("The excitement of your scuffle proves too much for the goo-girl to keep up with, and she collapses into the slime of her lower torso, her skin wiggling as she struggles to maintain cohesion.  Her expression is one of disappointment, and she looks at you with big, hopeful eyes, reaching out a hand, as if to offer an apology for her overexuberance.");
 	outputText("\n\nAs you lean over the defeated goo-girl, trying to decide what to do with her, she suddenly surges forward, wrapping her goopy arms around you and pulling your face into her squishy tits.  You squirm as the goo-girl tries to give you a playful hug, apparently not quite finished with you yet, when your pack suddenly falls off!  You pull away in the confusion as your inventory clatters to the ground, but end up staring in surprise as the black egg you were carrying cracks right over the goo's head, pouring its latexy substance into her head even as your Succubi Milk pops open, spraying her " + monster.skinTone + " exterior with creamy milk.  Your eyes widen slightly as the two substances, black and white, trickle into her absorbent body, eventually slithering toward the heart-shaped core of her being.");
 	outputText("\n\nAbruptly, her motions stop as the two substances swirl around her core, sucked in like seed into a hungry whore's mouth.  As the egg and milk mix inside her, the girl's lips begin to darken, gradually turning opaque.  With a slosh of dismay, the goo-girl rises, spinning to face you.  Her lower lip is already a shining onyx, pouting and afraid.  She raises her arms before her face, watching with abject horror as they become covered in slowly growing black spots.  She starts to waver, and falls to the ground; her fingertips have solidified, becoming smooth solid things with clearly defined nails that dig fearfully into the shore.  Her breasts enlarge as the last of the milk swirls into her heart, pulling her facedown on the ground.");
 	outputText("\n\nShe wiggles but fails to rise, too encumbered by solidifying tits to move.  Her arms have congealed into smooth onyx up to the elbows by now, and her asscheeks are equally dark spheres of reflective material, just begging to be touched.  Below that, her pool is shrinking, pulling inward even as it becomes more opaque.  It divides in two, gradually twisting around itself until two shapely calves are visible, capped with a dainty pair of feet.  These solidify almost instantly - the transformation is accelerating!  Permeable membrane swiftly gives way to reflective, glossy latex all over her shuddering form, crafting the goo-girl into a visage of a bondage-slut's wet dream.  With her whole body changed from liquid to solid, the once-goo collapses into unconsciousness, black eyelids closing over her solid " + monster.skinTone + " eyes.");
@@ -488,6 +492,7 @@ private function niceGuysKeepTheirGooGals():void {
 //Approach Her (Select From Slaves Tab)(F)
 public function approachLatexy():void {
 	clearOutput();
+    spriteSelect(SpriteDb.s_latexgoogirl);
 	//First Line - Happiness Dependent
 	//(Sub 10)
 	if(gooHappiness() < 10) outputText(flags[kFLAGS.GOO_NAME] + " scowls up at your approach, her unhappiness clearly visible in her " + flags[kFLAGS.GOO_EYES] + " eyes.  You doubt her solid onyx face could be any more morose.");
@@ -594,11 +599,11 @@ private function sendToFarm():void
 {
 	clearOutput();
 	
-	outputText("You tell your goo pet that she is to head towards the lake, find a farm, present herself to the lady who works there and do as she says. The word “lake” has the effect you expected it would have; joy creases [latexyname]’s liquid face as you mention the Promised Land.");
+	outputText("You tell your goo pet that she is to head towards the lake, find a farm, present herself to the lady who works there and do as she says. The word \"lake\" has the effect you expected it would have; joy creases [latexyname]’s liquid face as you mention the Promised Land.");
 
-	outputText("\n\n“<i>No sneaking off,</i>” you warn. “<i>I want you to work hard and earn the fluids you’ll be given.</i>”");
+	outputText("\n\n\"<i>No sneaking off,</i>\" you warn. \"<i>I want you to work hard and earn the fluids you’ll be given.</i>\"");
 
-	outputText("\n\n“<i>As you wish [master],</i>” she sighs, before slowly sliding off in the direction of the lake. She will be utterly useless as either a worker or a protector, you think; however, you suspect if Whitney keeps her well fed she will be able to harvest latex from her, which is surely worth something, and maybe some good old fashioned exertion will do the willful goo some good.");
+	outputText("\n\n\"<i>As you wish [master],</i>\" she sighs, before slowly sliding off in the direction of the lake. She will be utterly useless as either a worker or a protector, you think; however, you suspect if Whitney keeps her well fed she will be able to harvest latex from her, which is surely worth something, and maybe some good old fashioned exertion will do the willful goo some good.");
 	
 	flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] = 1;
 	
@@ -1387,7 +1392,7 @@ private function femalePCDomFucksLatexGoo():void {
 	outputText("\n\nAs her essence burrows inside you, your [vagina] clenches of its own volition.  Your eyes roll back from the ecstasy your netherlips jolt into your spine, and you pull tighter on your toy's legs, dragging her oily quim tighter against your goo-gilt slit.  The two latex pussies gush and gleam with each other's hot lubricants.  They quiver feverishly, clits rigid and erect, happily sharing in feminine bliss.  There's two voices screaming, crying out to the heavens in mismatched harmony.  The higher one dies down to a low moan of contentment, and once your cunt slackens in the aftermath of your orgasm, you realize the second is your own.");
 	outputText("\n\nYou mash your [vagina] against " + flags[kFLAGS.GOO_NAME] + "'s a few more times to savor the aftershocks of climax.  She grunts each time, her mouth widening into simple 'o's.  The sensuously skinned lady fails can't even scream any more.  The best she can do is moan, low and lewd as you finish using her.  As you slowly begin to separate, a tangle of sable webs hangs in the air, glittering with a coating of femcum.  Some of them are already semi-solid and snap at your withdrawal.  The others just come apart, wetly slapping against each twat as they separate.");
 	outputText("\n\nRising, you examine your [vagina].  In addition to being so heavy and wet, it's coated with a solid sheet of latex.  You've no doubt it would hurt to remove");
-	if(player.findPerk(PerkLib.Masochist) >= 0) outputText(", so you do, gleefully stripping the material from your skin.  Juices gush from your [vagina] as you torture your mons with masochistic pleasure, peeling the adhesive substance away to reveal pain-reddened skin.  " + flags[kFLAGS.GOO_NAME] + " looks up at you in awe, and with a shudder, you pat her on the head.  \"<i>Good pet.</i>\"");
+	if(player.hasPerk(PerkLib.Masochist)) outputText(", so you do, gleefully stripping the material from your skin.  Juices gush from your [vagina] as you torture your mons with masochistic pleasure, peeling the adhesive substance away to reveal pain-reddened skin.  " + flags[kFLAGS.GOO_NAME] + " looks up at you in awe, and with a shudder, you pat her on the head.  \"<i>Good pet.</i>\"");
 	//{ALT:
 	else {
 		outputText(".  Of course, you've got a pet right here that's already an obedient little cunt-cleaner.  You plant your [vagina] right on her face and command, \"<i>Lick it clean.</i>\"");
@@ -1651,7 +1656,7 @@ private function feedLatexySomeMilk():void {
 	else outputText("your [ass] clamping down hard as her finger milks you from behind");
 	outputText(".  Suddenly, your teat pops free of her mouth, a streak of milk still spraying until " + flags[kFLAGS.GOO_NAME] + " is liberally coated with your white orgasmic offering, laughing girlishly as she licks her fingers and brings her own breast to her mouth, trying to tongue off the milk splattered on her.");
 	outputText("\n\n\"<i>Delicious!</i>\" she says with a smile, plating a long kiss on your lips.  You return her grin and pull her close, nesting her face into your now-lighter bosom for a few short, restful minutes.");
-	if(player.findPerk(PerkLib.Feeder) >= 0) {
+	if(player.hasPerk(PerkLib.Feeder)) {
 		//You've now been milked, reset the timer for that
 		player.addStatusValue(StatusEffects.Feeder,1,1);
 		player.changeStatusValue(StatusEffects.Feeder,2,0);

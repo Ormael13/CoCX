@@ -6,6 +6,7 @@ package classes.Scenes.Places
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Lake.*;
+import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.Places.Boat.*;
 import classes.Scenes.SceneLib;
 
@@ -13,9 +14,9 @@ public class Boat extends AbstractLakeContent
 	{
 		public var sharkGirlScene:SharkGirlScene = new SharkGirlScene();
 		public var marae:MaraeScene = new MaraeScene();
-		public function Boat()
-		{
-		}
+		public var kaiju:Kaiju = new Kaiju();
+		public function Boat() {}
+
 		public function discoverBoat():void {
 			player.createStatusEffect(StatusEffects.BoatDiscovery,0,0,0,0);
 			clearOutput();
@@ -28,6 +29,11 @@ public class Boat extends AbstractLakeContent
 		public function boatExplore():void
 		{
 			player.addStatusValue(StatusEffects.BoatDiscovery, 1, 1);
+			//Belisa
+			if (BelisaFollower.BelisaInGame && BelisaFollower.BelisaEncounternum == 1) {
+				SceneLib.belisa.secondEncounter();
+				return;
+			}
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
 				SceneLib.helScene.helSexualAmbush();
@@ -59,6 +65,7 @@ public class Boat extends AbstractLakeContent
 			//BUILD LIST OF CHOICES
 			var choice:Array = [0, 1, 2, 3, 4];
 			if (player.hasKeyItem("Fishing Pole") >= 0) choice[choice.length] = 5;
+			if (player.level >= 5 && flags[kFLAGS.KAIJU_DISABLED] == 0 && !player.hasStatusEffect(StatusEffects.VenusOff)) choice[choice.length] = 6; //moved kaiju here
 			//MAKE YOUR CHOICE
 			var selector:Number = choice[rand(choice.length)];
 			//RUN CHOSEN EVENT
@@ -84,6 +91,9 @@ public class Boat extends AbstractLakeContent
 					outputText("This is a calm day at the lake, you managed to hold your boat in place and, while you found nothing of note, couldn’t help yourself but to enjoy a few hour using your newly acquired fishing pole. You even spotted Calu in the distance doing the same thing from her usual sitting spot.\n\n");
 					outputText("<b>You got a fish!</b>");
 					inventory.takeItem(consumables.FREFISH, camp.returnToCampUseOneHour);
+					return;
+				case 6:
+					kaiju.kaijuMeeting();
 					return;
 			}
 		}

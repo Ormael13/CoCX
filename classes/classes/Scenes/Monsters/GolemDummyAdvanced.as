@@ -6,16 +6,10 @@ package classes.Scenes.Monsters
 {
 
 	import classes.*;
-	import classes.internals.*;
-	import classes.CoC;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Camp.CampMakeWinions;
 	import classes.Scenes.SceneLib;
 	
 	public class GolemDummyAdvanced extends AbstractGolem
 	{
-		public var campMake:CampMakeWinions = new CampMakeWinions();
-		
 		public function backhand():void {
 			outputText("The golem's visage twists into a grimace of irritation, and it swings its hand at you in a vicious backhand.");
 			var damage:Number = int ((str + weaponAttack) - rand(player.tou) - player.armorDef);
@@ -49,7 +43,7 @@ package classes.Scenes.Monsters
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (player.hasStatusEffect(StatusEffects.SoulArena)) SceneLib.combat.finishCombat();
-			else campMake.postFightGolemOptions1();
+			else SceneLib.camp.campMake.postFightGolemOptions1();
 		}
 		
 		public function GolemDummyAdvanced() 

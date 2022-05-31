@@ -5,7 +5,6 @@
 package classes.Items.Jewelries 
 {
 	import classes.Items.Jewelry;
-	import classes.Player;
 
 	public class RingOfSensitivity extends Jewelry
 	{
@@ -27,7 +26,7 @@ package classes.Items.Jewelries
 		}
 		
 		override public function playerEquip():Jewelry {
-			game.player.statStore.addBuff('sens',+5,'RingOfSensitivity',{text:'Ring Of Sensitivity'});
+			game.player.statStore.addBuff('sens',5,'RingOfSensitivity',{text:'Ring Of Sensitivity'});
 			return super.playerEquip();
 		}
 		

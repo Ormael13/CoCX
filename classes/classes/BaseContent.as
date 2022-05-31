@@ -1,5 +1,4 @@
 ﻿package classes {
-import classes.CoC;
 import classes.Items.*;
 import classes.Scenes.Camp;
 import classes.Scenes.Combat.Combat;
@@ -15,6 +14,7 @@ import classes.internals.Utils;
 
 import coc.model.GameModel;
 import coc.model.TimeModel;
+import coc.script.Eval;
 import coc.view.ButtonData;
 import coc.view.ButtonDataList;
 import coc.view.CoCButton;
@@ -44,10 +44,6 @@ import coc.xxc.StoryContext;
 		{
 			EventParser.eachMinuteCount(time, needNext);
 		}
-		/*protected function incrementDay(time:Number):void
-		{
-			CoC.instance.incrementDay(time);
-		}*/
 		protected function get timeQ():Number
 		{
 			return CoC.instance.timeQ;
@@ -63,11 +59,6 @@ import coc.xxc.StoryContext;
 		protected function get isNightTime():Boolean {
 			return (model.time.hours <= 5 || model.time.hours >= 22);
 		}
-
-		/*protected function get measurements():Class
-		{
-			return Measurements;
-		}*/
 
 		protected function get camp():Camp {
 			return SceneLib.camp;
@@ -140,23 +131,15 @@ import coc.xxc.StoryContext;
 			return CoC.instance.date;
 		}
 
-/*
-		protected function inCombat():Boolean
-		{
-			return CoC.instance.inCombat();
-		}
-*/
-		//Curse you, CoC updates!
 		protected function get inDungeon():Boolean
 		{
 			return DungeonAbstractContent.inDungeon;
 		}
-/* inDungeon is now read only
+
 		protected function set inDungeon(v:Boolean):void
 		{
-			CoC.instance.inDungeon = v;
+			DungeonAbstractContent.inDungeon = v;
 		}
-*/
 
 		protected function get inRoomedDungeon():Boolean
 		{
@@ -175,17 +158,6 @@ import coc.xxc.StoryContext;
 		{
 			DungeonAbstractContent.inRoomedDungeonResume = v;
 		}
-
-/*
-		protected function get itemSubMenu():Boolean
-		{
-			return CoC.instance.itemSubMenu;
-		}
-		protected function set itemSubMenu(value:Boolean):void
-		{
-			CoC.instance.itemSubMenu = value;
-		}
-*/
 
 		protected function showStats():void
 		{
@@ -221,7 +193,7 @@ import coc.xxc.StoryContext;
 			player.clearStatuses(visibility);
 		}
 
-		protected function spriteSelect(choice:Object = 0):void
+		protected function spriteSelect(choice:Class = null):void
 		{
 			CoC.instance.spriteSelect(choice);
 		}
@@ -234,28 +206,6 @@ import coc.xxc.StoryContext;
 		{
 			EngineCore.hideUpDown();
 		}
-
-		/* This class extends Utils, no need for a non-static version of this function
-		protected function curry(func:Function,...args):Function
-		{
-			return Utils.curry.apply(null,[func].concat(args));
-		}
-		*/
-
-		/* None of these functions are called anymore
-		protected function lazyIndex(obj:*,...args):Function
-		{
-			return Utils.lazyIndex.apply(null,[obj].concat(args));
-		}
-		protected function lazyCallIndex(func:Function,...args):Function
-		{
-			return Utils.lazyCallIndex.apply(null,[func].concat(args));
-		}
-		protected function lazyCallIndexCall(func:Function,...args):Function
-		{
-			return Utils.lazyCallIndexCall.apply(null,[func].concat(args));
-		}
-		*/
 
 		protected function createCallBackFunction(func:Function, arg:*):Function
 		{
@@ -271,10 +221,6 @@ import coc.xxc.StoryContext;
 			SceneLib.combat.startCombatImpl(monster_,plotFight_);
 		}
 
-		protected function doSFWloss():Boolean {
-			return EngineCore.doSFWloss();
-		}
-
 
 		protected function startCombatImmediate(monster:Monster, _plotFight:Boolean = false):void
 		{
@@ -288,6 +234,10 @@ import coc.xxc.StoryContext;
 			EngineCore.rawOutputText(output, purgeText);
 		}
 
+		protected static function printLink(linkText:String, eventArgument:String):void {
+			outputText('<u><a href="event:'+Eval.escapeString(eventArgument)+'">'+linkText+"</a></u>");
+		}
+		
 		protected static function outputText(output:String):void
 		{
 			EngineCore.outputText(output);
@@ -311,7 +261,7 @@ import coc.xxc.StoryContext;
 			EngineCore.doNext(eventNo);
 		}
 
-		protected function menu():void
+		protected static function menu():void
 		{
 			EngineCore.menu();
 		}
@@ -376,7 +326,10 @@ import coc.xxc.StoryContext;
 		{
 			return EngineCore.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
 		}
-		protected function button(pos:int):CoCButton
+		protected function addButtonIfTrue(pos:int, text:String, func1:Function, toolTipDisabled:String, condition:Boolean, tooltipText:String = ""):CoCButton {
+            return EngineCore.addButtonIfTrue(pos, text, func1, toolTipDisabled, condition, tooltipText);
+        }
+		protected static function button(pos:int):CoCButton
 		{
 			return EngineCore.button(pos);
 		}
@@ -390,20 +343,6 @@ import coc.xxc.StoryContext;
 		{
 			return EngineCore.hasButton(arg);
 		}
-
-/* Replaced by Utils.formatStringArray, which does almost the same thing in one function
-		protected function clearList():void{
-			CoC.instance.clearList();
-		}
-
-		protected function addToList(arg:*):void{
-			CoC.instance.addToList(arg);
-		}
-
-		protected function outputList():String{
-			return CoC.instance.outputList();
-		}
-*/
 
 		protected function openURL(url:String):void{
 			return EngineCore.openURL(url);
@@ -420,13 +359,6 @@ import coc.xxc.StoryContext;
 			else return clitDescript();
 		}
 
-/* Was only used in Scylla's code. Replaced with conditionals
-		protected function balls(balls:*, noBalls:*):String
-		{
-			return CoC.instance.balls(balls, noBalls);
-		}
-*/
-
 		protected function sheathDesc():String
 		{
 			return CoC.instance.player.sheathDescription();
@@ -435,7 +367,6 @@ import coc.xxc.StoryContext;
 		protected function chestDesc():String
 		{
 			return player.chestDesc();
-			//return Appearance.chestDesc(player);
 		}
 
 		protected function allChestDesc():String
@@ -481,18 +412,6 @@ import coc.xxc.StoryContext;
             return Appearance.ballsDescription(false, false, player);
 		}
 
-		/* All calls changed to monster.ballsDescriptLight
-		protected function eBallsDescriptLight():String {
-			return CoC.instance.eBallsDescriptLight();
-		}
-		*/
-
-		/* Was never called
-		protected function eBallsDescript():String {
-			return CoC.instance.eBallsDescript();
-		}
-		*/
-
 		protected function ballsDescript():String {
             return Appearance.ballsDescription(false, true, player, true);
 		}
@@ -525,36 +444,6 @@ import coc.xxc.StoryContext;
 			return Appearance.assholeOrPussy(player);
 		}
 
-/* Replaced by calls to Appearance.breastDescript
-		protected function npcBreastDescript(size:Number):String {
-			return CoC.instance.npcBreastDescript(size);
-		}
-*/
-/* Was never used
-		protected  function eButtDescript():String {
-			return Appearance.buttDescriptionShort(monster);
-		}
-*/
-/* Now in Utils.as
-		protected function num2TextBest(number:int, capitalised:Boolean = false, positional:Boolean = false):String
-		{
-			return CoC.instance.num2TextBest(number, capitalised, positional);
-		}
-
-		protected function num2Text(number:int):String
-		{
-			return CoC.instance.num2Text(number);
-		}
-		protected function Num2Text(number:int):String
-		{
-			return CoC.instance.Num2Text(number);
-		}
-		protected  function num2Text2(number:int):String
-		{
-			return CoC.instance.num2Text2(number);
-		}
-*/
-
 		protected function nippleDescript(rowNum:Number):String
 		{
 			return Appearance.nippleDescription(player, rowNum)
@@ -564,13 +453,6 @@ import coc.xxc.StoryContext;
 		{
 			return CoC.instance.player.cockDescript(cockNum);
 		}
-
-/*
-		protected function cockAdjective(cockNum:Number = -1):String
-		{
-			return CoC.instance.cockAdjective(cockNum);
-		}
-*/
 
 		protected function multiCockDescript():String
 		{
@@ -582,34 +464,10 @@ import coc.xxc.StoryContext;
 			return CoC.instance.player.multiCockDescriptLight();
 		}
 
-/*
-		protected function eMultiCockDescriptLight():String
-		{
-			return CoC.instance.eMultiCockDescriptLight();
-		}
-
-		protected function eCockHead(cockNum:Number = 0):String
-		{
-			return CoC.instance.eCockHead(cockNum);
-		}
-
-		protected function eCockDescript(cockIndex:Number = 0):String
-		{
-			return CoC.instance.eCockDescript(cockIndex);
-		}
-*/
-
 		protected function breastDescript(rowNum:Number):String
 		{
 			return player.breastDescript(rowNum);
 		}
-
-/*
-		protected function cockHead(cockNum:Number = 0):String
-		{
-			return CoC.instance.cockHead(cockNum);
-		}
-*/
 
 		protected function breastSize(val:Number):String
 		{
@@ -646,6 +504,8 @@ import coc.xxc.StoryContext;
             return Appearance.vaginaDescript(player, vaginaNum);
 		}
 
+		//useless until multivaginas are added
+		/*
 		protected function allVaginaDescript():String
 		{
             if (player.vaginas.length == 1) return vaginaDescript(rand(player.vaginas.length - 1));
@@ -654,20 +514,7 @@ import coc.xxc.StoryContext;
             CoC_Settings.error("ERROR: allVaginaDescript called with no vaginas.");
             return "ERROR: allVaginaDescript called with no vaginas.";
 		}
-
-/* Now called directly
-		protected function breastCup(val:Number):String
-		{
-			return Appearance.breastCup(val);
-		}
-*/
-
-/* Replaced with calls to Appearance.cockDescription
-		protected function NPCCockDescript(cockType:*,cockLength:Number=0,lust:Number=50):String
-		{
-			return CoC.instance.NPCCockDescript(cockType,cockLength,lust);
-		}
-*/
+		*/
 
 		/**
 		 * Apply statmods to the player. dynStats wraps the regular stats call, but supports "named" arguments of the form:
@@ -690,19 +537,19 @@ import coc.xxc.StoryContext;
 			player.dynStats.apply(player, args);
 		}
 
-		protected function MutagenBonus(statName: String, bonus: Number):void
+		protected function MutagenBonus(statName: String, bonus: Number):Boolean
 		{
-			player.MutagenBonus(statName,bonus);
+			return player.MutagenBonus(statName,bonus);
 		}
 
 		protected function AlchemyBonus(statName: String, bonus: Number):void
 		{
-			player.AlchemyBonus(statName,bonus);
+			return player.AlchemyBonus(statName,bonus);
 		}
 
 		protected function KnowledgeBonus(statName: String, bonus: Number):void
 		{
-			player.KnowledgeBonus(statName,bonus);
+			return player.KnowledgeBonus(statName,bonus);
 		}
 
 		protected function silly():Boolean
@@ -734,16 +581,7 @@ import coc.xxc.StoryContext;
 			SceneLib.combat.useManaImpl(mod,type);
 		}
 
-
-/*
-		protected function get eventParser():Function
-		{
-			return CoC.instance.eventParser;
-		}
-*/
-
-		protected function playerMenu():void { EventParser.playerMenu(); }
-
+		protected static function playerMenu():void { EventParser.playerMenu(); }
 		protected static function get player():Player
 		{
 			return CoC.instance.player;
@@ -850,18 +688,6 @@ import coc.xxc.StoryContext;
 			return SceneLib.inventory;
 		}
 
-/* No longer used
-		protected function get itemSwapping():Boolean
-		{
-			return CoC.instance.itemSwapping;
-		}
-
-		protected function set itemSwapping(val:Boolean):void
-		{
-			CoC.instance.itemSwapping = val;
-		}
-*/
-
 		protected function get time():TimeModel
 		{
 			return CoC.instance.time;
@@ -871,47 +697,6 @@ import coc.xxc.StoryContext;
 		{
 			CoC.instance.time = val;
 		}
-
-/* Finally got rid of this var
-		protected function get menuLoc():Number
-		{
-			return CoC.instance.menuLoc;
-		}
-
-		protected function set menuLoc(val:Number):void
-		{
-			CoC.instance.menuLoc = val;
-		}
-*/
-
-/*
-		protected function get itemSlots():Array
-		{
-			return CoC.instance.player.itemSlots;
-		}
-*/
-
-/*
-		protected function get itemStorage():Array
-		{
-			return CoC.instance.itemStorage;
-		}
-
-		protected function set itemStorage(val:Array):void
-		{
-			CoC.instance.itemStorage = val;
-		}
-
-		protected function get gearStorage():Array
-		{
-			return CoC.instance.gearStorage;
-		}
-
-		protected function set gearStorage(val:Array):void
-		{
-			CoC.instance.gearStorage = val;
-		}
-*/
 
 		protected function get mainView():MainView
 		{
@@ -953,6 +738,22 @@ import coc.xxc.StoryContext;
 			CoC.instance.achievements = val;
 		}
 
+		//==========================
+		//SceneHunter shortcuts
+        protected function get sceneHunter():SceneHunter {
+            return CoC.instance.gameSettings.sceneHunter_inst;
+        }
+		protected function get recalling():Boolean {
+			return CoC.instance.gameSettings.sceneHunter_inst._recalling;
+		}
+		protected function set recalling(val:Boolean):void {
+			CoC.instance.gameSettings.sceneHunter_inst._recalling = val;
+		}
+		protected function recallWakeUp():void {
+			CoC.instance.gameSettings.sceneHunter_inst.recallWakeUpImpl();
+		}
+		//============================
+
 		protected function showStatDown(arg:String):void
 		{
 			CoC.instance.mainView.statsView.showStatDown(arg);
@@ -984,7 +785,7 @@ import coc.xxc.StoryContext;
 		protected function get context():StoryContext {
 			return CoC.instance.context;
 		}
-		protected function submenu(buttons:ButtonDataList,back:Function=null,page:int=0,IsSorted:Boolean = true):void {
+		protected static function submenu(buttons:ButtonDataList,back:Function=null,page:int=0,IsSorted:Boolean = true):void {
 			var list:/*ButtonData*/Array = buttons.list.filter(function(e:ButtonData, i:int, a:Array):Boolean{
 				return e.visible;
 			});
@@ -1003,47 +804,42 @@ import coc.xxc.StoryContext;
 			}
 			if (back != null) button(14).show("Back",back);
 		}
-		//Returns an autocreated menu.
-		//Structure for array is: ["Button name", function/false/"ignore", ["Available desc", "Not available desc"]/ ""]
-		//function/false/"ignore" = addbtn, addbtndisabled, no button
-		protected function menuGen(menuItems:Array, page:int, back:Function=null, sort:Boolean=false):void{
-			var bList:Array = [];
-			var total:int = menuItems.length;
-			var next:Boolean = false;
-			if(sort){
-				menuItems = menuItems.sort()
+  
+		/**Returns an autocreated menu.
+		 * Structure for menuItems array is: ["Button name", function/false/"ignore", ["Available desc", "Not available desc"]/ ""].
+		 * function/false/"ignore" = addbtn, addbtndisabled, no button.
+		 * btnStat returns how many buttons are active.
+         * isChecking - only check if the menu is non-empty?
+		 */
+		protected function menuGen(menuItems:Array, page:int, back:Function=null):void {
+			var buttons:ButtonDataList = new ButtonDataList();
+			for (var i:int = 0; i < menuItems.length; i += 3){
+                if (menuItems[i + 1] is Function)
+					buttons.add(menuItems[i], menuItems[i+1], menuItems[i+2] is Array ? menuItems[i+2][0] : menuItems[i+2]);
+				else if (!menuItems[i + 1]) //hope it works
+					buttons.add(menuItems[i], null, menuItems[i+2] is Array ? menuItems[i+2][1] : menuItems[i+2]);
+				else if (menuItems[i + 1] == "ignore") //"Legal" ignore
+					trace("MenuGen ignored " + menuItems[i] + " when creating the button menu.\n");
+				else
+                    CoC_Settings.error("Non-function in menuGen!")
 			}
-			if(total/3 > 12){
-				for (var h:int = (page * 12) * 3, j:int = Math.min((h + 35), total - 1); h <= j; h++){ // Page 0 - array 0-36. Page 1 - array 37 -?
-					bList.push(menuItems[h]);
-					if(j != total - 1) next = true;
-				}
-			}
-			else{
-				bList = menuItems;
-			}
-			menu();
-			var btnval:int = 0;
-			for (var i:int = 0; i < bList.length; i++){
-				if (i % 3 == 0){
-					if (!bList[i + 1]){
-						addButtonDisabled(btnval, bList[i],(bList[i + 2] is Array) ? bList[i+2][1]: bList[i+2]);
-					}
-					else if (bList[i + 1] == "ignore") { //Not sure when this would ever be used, but in case.
-						continue;
-					}
-					else{
-						addButton(btnval,bList[i],bList[i + 1], null, null, null,(bList[i + 2] is Array) ? bList[i+2][0]: bList[i+2]);
-					}
-					btnval++
-				}
-			}
-			if (page!=0 || total>12) {
-				button(12).show("Prev Page", curry(menuGen, menuItems,page - 1,  back, sort)).disableIf(page == 0);
-				button(13).show("Next Page", curry(menuGen, menuItems,page + 1,  back, sort)).disableIf(!next);
-			}
-			if (back != null) button(14).show("Back",back);
+			submenu(buttons, back, page);
 		}
+
+		/**Counts active buttons inside of the menu.
+		 * Structure for menuItems array is: ["Button name", function/false/"ignore", ["Available desc", "Not available desc"]/ ""].
+		 * function/false/"ignore" = addbtn, addbtndisabled, no button.
+		 * btnStat returns how many buttons are active.
+         * isChecking - only check if the menu is non-empty?
+		 */
+        protected function menuActiveButtons(menuItems:Array):int {
+            //just check actives, that's all
+			var btnsActive: int = 0;
+            for (var i:int = 0; i < menuItems.length; i += 3)
+                if (menuItems[i + 1] && menuItems[i + 1] != "ignore") //count even non-functions, let's make it explode!
+                    ++btnsActive;
+            return btnsActive;
+        }
 	}
 
 }

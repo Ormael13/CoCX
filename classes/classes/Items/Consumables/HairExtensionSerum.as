@@ -5,7 +5,8 @@ package classes.Items.Consumables
 {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Consumable;
-	import classes.internals.Utils;
+import classes.Races;
+import classes.internals.Utils;
 	import classes.Player;
 
 	public final class HairExtensionSerum extends Consumable {
@@ -35,7 +36,7 @@ package classes.Items.Consumables
 				outputText("\n\nThe tingling on your scalp is intolerable!  It's like your head is a swarm of angry ants, though you could swear your hair is growing so fast that you can feel it weighing you down more and more!");
 				game.flags[kFLAGS.INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED]++;
 			}
-			if (game.flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] > 0 && (game.player.hairType != 4 || game.player.hairType != 6) && game.player.jiangshiScore() < 20) {
+			if (game.flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] > 0 && (game.player.hairType != 4 || game.player.hairType != 6) && !game.player.isRace(Races.JIANGSHI)) {
 				game.flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
 				outputText("\n\n<b>Somehow you know that your " + game.player.hairDescript() + " is growing again.</b>");
 			}

@@ -50,11 +50,11 @@ public class CureSpell extends AbstractWhiteSpell{
 	
 	public function CureSpell() {
 		super(
-				"Cure",
-				"Negate all status ailments. Restore stat damaged by poison.",
-				TARGET_SELF,
-				TIMING_INSTANT,
-				[TAG_RECOVERY]
+			"Cure",
+			"Negate all status ailments. Restore stat damaged by poison.",
+			TARGET_SELF,
+			TIMING_INSTANT,
+			[TAG_RECOVERY]
 		)
 		baseManaCost = 500;
 	}

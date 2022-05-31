@@ -1307,13 +1307,13 @@ public class Prison extends BaseContent implements TimeAwareInterface
 			addButton(7, "Inventory", inventory.inventoryMenu);
 			//Check lust
 			if (player.lust >= 30) {
-				if (player.lust >= player.maxLust()) {
+				if (player.lust >= player.maxOverLust()) {
 					outputText("\n\n<b>You are debilitatingly aroused, and can think of doing nothing other than masturbating.</b>");
 					removeButton(0);
 					removeButton(4);
 				}
                 addButton(8, "Masturbate", SceneLib.masturbation.masturbateMenu);
-                if ((((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", SceneLib.masturbation.masturbateMenu);
+                if ((((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0)) addButton(8, "Meditate", SceneLib.masturbation.masturbateMenu);
             }
 			//Alter menu depending on punishment.
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 1) {
@@ -2970,7 +2970,7 @@ public class Prison extends BaseContent implements TimeAwareInterface
 
 		public function prisonItemBreadHeatEffect(bonusResist:Number = 0):void
 		{
-			if((!(player.race() == "human") || player.catScore() > 1 || player.dogScore() > 1 || player.foxScore() > 1 || player.horseScore() > 1 || player.minotaurScore() > 1 || player.cowScore() > 4 || player.bunnyScore() > 1 || player.kangaScore() > 1) && rand(player.obey) > 20 + bonusResist)
+			if((!(player.race() == "human") || player.racialScore(Races.CAT) > 1 || player.racialScore(Races.DOG) > 1 || player.racialScore(Races.FOX) > 1 || player.racialScore(Races.HORSE) > 1 || player.racialScore(Races.MINOTAUR) > 1 || player.isRace(Races.COW) || player.racialScore(Races.BUNNY) > 1 || player.racialScore(Races.KANGAROO) > 1) && rand(player.obey) > 20 + bonusResist)
 			{
 				outputText("\n\nAs you eat, the submissive nature of the act stirs an animalistic response in your mutated body. ");
 				if(player.hasVagina())

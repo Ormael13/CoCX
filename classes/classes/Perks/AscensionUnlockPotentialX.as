@@ -25,6 +25,10 @@ public class AscensionUnlockPotentialX extends PerkType
                 ".");
     }
 
+    public function pBuff():Object{
+
+    }
+
     override public function keepOnAscension(respec:Boolean = false):Boolean {
         return true;
     }

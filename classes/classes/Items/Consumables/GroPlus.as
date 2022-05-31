@@ -58,7 +58,7 @@ public final class GroPlus extends Consumable {
 			if (game.player.breastRows.length == 1)
 				game.player.growTits(Utils.rand(5) + 1, 1, true, 1);
 			else
-				game.player.growTits(Utils.rand(2) + 1, game.player.breastRows.length, true, 1);
+				game.player.growTits(Utils.rand(2) + 1, game.player.breastRows.length, true, 2);
 			game.player.dynStats("lus", 10);
 			SceneLib.inventory.itemGoNext();
 		}

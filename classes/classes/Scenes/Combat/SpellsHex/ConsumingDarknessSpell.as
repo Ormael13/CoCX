@@ -9,11 +9,11 @@ import classes.StatusEffects;
 public class ConsumingDarknessSpell extends AbstractHexSpell {
 	public function ConsumingDarknessSpell() {
 		super(
-				"Consuming Darkness",
-				"For the next 7 round the target is devoured by living shadow trying to tear its body apart deals good damage on each round.",
-				TARGET_ENEMY,
-				TIMING_LASTING,
-				[TAG_DAMAGING, TAG_DARKNESS]
+			"Consuming Darkness",
+			"For the next 7 round the target is devoured by living shadow trying to tear its body apart deals good damage on each round.",
+			TARGET_ENEMY,
+			TIMING_LASTING,
+			[TAG_DAMAGING, TAG_DARKNESS]
 		);
 		baseManaCost = 350;
 		useManaType = Combat.USEMANA_MAGIC_HEAL;
@@ -25,7 +25,7 @@ public class ConsumingDarknessSpell extends AbstractHexSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "" + calcDamage(target, false) + " darkness damage over "+
+		return "" + calcDamage(target, false, false) + " darkness damage over "+
 				numberOfThings(calcDuration(),"round") +
 				"; " + calcBackfirePercent() + "% backfire"
 	}
@@ -64,13 +64,14 @@ public class ConsumingDarknessSpell extends AbstractHexSpell {
 		}
 	}
 	
-	public function calcDamage(monster:Monster, randomize:Boolean=true):Number {
+	public function calcDamage(monster:Monster, randomize:Boolean=true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		return adjustSpellDamage(
 				scalingBonusIntelligence()*2,
 				DamageType.DARKNESS,
 				CAT_SPELL_HEX,
 				monster,
-				false
+				false,
+                casting
 		);
 	}
 	
@@ -80,7 +81,7 @@ public class ConsumingDarknessSpell extends AbstractHexSpell {
 		}
 		if (!backfired(display)) {
 			outputText("You call on the power of primordial darkness, which is all too happy to oblige your request of ripping your foe to shreds. The shadows all around you sprouting countless mouths and claws to do just that. [Themonster] can only scream in surprise, then in pain, at the sudden assault. ");
-			var consumingdarkness:Number = calcDamage(monster);
+			var consumingdarkness:Number = calcDamage(monster, true, true);
 			monster.createStatusEffect(StatusEffects.ConsumingDarkness, calcDuration(), consumingdarkness, 0, 0);
 			doDarknessDamage(consumingdarkness, true, true);
 		}

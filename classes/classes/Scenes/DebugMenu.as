@@ -1,7 +1,6 @@
 package classes.Scenes
 {
 import classes.*;
-import classes.BodyParts.Ears;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Beard;
@@ -15,7 +14,6 @@ import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
-import classes.BodyParts.SkinLayer;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
@@ -26,25 +24,21 @@ import classes.Parser.Parser;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Transformations.PossibleEffect;
 import classes.Transformations.Transformation;
-import classes.Transformations.Transformation;
 import classes.internals.EnumValue;
+import classes.internals.race.RacialRequirement;
 
 import coc.view.Block;
-
 import coc.view.Color;
 import coc.view.MainView;
-import coc.view.StatsView;
 
 import fl.controls.ComboBox;
 import fl.controls.TextInput;
 import fl.data.DataProvider;
 
 import flash.display.DisplayObject;
-
 import flash.events.Event;
 import flash.events.TextEvent;
 import flash.utils.describeType;
-import flash.utils.setTimeout;
 
 public class DebugMenu extends BaseContent
 	{
@@ -498,6 +492,8 @@ public class DebugMenu extends BaseContent
 			weaponArray.push(weaponsrange.LCROSBW);
 			weaponArray.push(weaponsrange.FLINTLK);
 			weaponArray.push(weapons.UGATANA);
+			weaponArray.push(weapons.DDAGGER);
+			weaponArray.push(weapons.D_LANCE);
 
 			//------------
 			// Shields
@@ -508,6 +504,8 @@ public class DebugMenu extends BaseContent
 			shieldArray.push(shields.GREATSH);
 			shieldArray.push(shields.KITE_SH);
 			shieldArray.push(shields.TOWERSH);
+			shieldArray.push(shields.SPI_FOC);
+			shieldArray.push(shields.BSHIELD);
 
 			//------------
 			// Armours
@@ -574,6 +572,10 @@ public class DebugMenu extends BaseContent
 			//Page 2
 			undergarmentArray.push(undergarments.SS_LOIN);
 			undergarmentArray.push(undergarments.SSPANTY);
+			undergarmentArray.push(undergarments.COW_BRA);
+			undergarmentArray.push(undergarments.COW_PANTY);
+			undergarmentArray.push(undergarments.DRI_BRA);
+			undergarmentArray.push(undergarments.DRI_PANTY);
 
 			//------------
 			// Accessories
@@ -783,11 +785,12 @@ public class DebugMenu extends BaseContent
 			mainViewManager.showPlayerDoll(true);
 			CoC.instance.playerAppearance.appearance(true);
 			outputText("[pg]");
-			for each (var race:Race in Race.ALL_RACES) {
-				if (!race) continue;
-				var score:int = race.score(player);
+			var body:BodyData = player.bodyData();
+			for each (var race:Race in Races.AllRacesByName) {
+				var score:int = race.totalScore(body);
 				if (score == 0) continue;
-				outputText(race.name+" score: "+race.score(player)+"\n");
+				outputText("<b>"+race.name+" score: "+score+"</b>\n");
+				//outputText(race.printDetails(body));
 			}
 			flushOutputTextToGUI();
 		}

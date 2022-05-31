@@ -11,13 +11,13 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 	private var ex:Boolean;
 	public function PyreBurstSpell(ex:Boolean=false) {
 		super(
-				ex ? "Pyre Burst(Ex)" : "Pyre Burst",
-				ex ?
-						"Teach your foes a lesson with the strength of a wrath-empowered firestorm."
-						: "Teach your foes a lesson with the strength of a firestorm.",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING, TAG_AOE, TAG_FIRE]
+			ex ? "Pyre Burst(Ex)" : "Pyre Burst",
+			ex ?
+				"Teach your foes a lesson with the strength of a wrath-empowered firestorm."
+				: "Teach your foes a lesson with the strength of a firestorm.",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING, TAG_AOE, TAG_FIRE]
 		);
 		baseManaCost = 200;
 		baseWrathCost = ex ? 100 : 0;
@@ -26,7 +26,7 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 	
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~"+calcDamage(target,false)+" fire damage"
+		return "~"+calcDamage(target, false, false)+" fire damage"
 	}
 	
 	override public function get isKnown():Boolean {
@@ -44,10 +44,11 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 	 * @param randomize true: Apply random bonus, false: Apply average bonus
 	 * @return {Number} Damage dealt by this spell
 	 */
-	public function calcDamage(monster:Monster, randomize:Boolean=true):Number {
+	public function calcDamage(monster:Monster, randomize:Boolean=true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		var baseDamage:Number = 2*scalingBonusIntelligence(randomize);
+		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
 		if (ex) baseDamage *= 2;
-		return adjustSpellDamage(baseDamage, DamageType.FIRE, CAT_SPELL_WHITE, monster);
+		return adjustSpellDamage(baseDamage, DamageType.FIRE, CAT_SPELL_WHITE, monster, true, casting);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
@@ -58,10 +59,10 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
 		} else {
 			if (display) {
-				outputText("You wave the signs with your hands before striking the grounds causing an expending wave of flames to wash over [themonster].\n");
+				outputText("Following practiced somatics, you circle your hands in the air before striking the ground, causing a pillar of flame to wash over [themonster].\n");
 			}
 		}
-		var damage:Number = calcDamage(monster);
+		var damage:Number = calcDamage(monster, true, true);
 		damage = critAndRepeatDamage(display, damage, DamageType.FIRE);
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);

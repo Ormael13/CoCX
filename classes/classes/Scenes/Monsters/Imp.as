@@ -80,7 +80,7 @@ public class Imp extends Monster
 				}
 			}
 			outputText("\n");
-			if (player.lust >= player.maxLust())
+			if (player.lust >= player.maxOverLust())
 				doNext(SceneLib.combat.endLustLoss);
 			else doNext(EventParser.playerMenu);
 		}
@@ -121,7 +121,7 @@ public class Imp extends Monster
 				}
 			}
 			outputText("\n");
-			if (player.lust >= player.maxLust())
+			if (player.lust >= player.maxOverLust())
 				doNext(SceneLib.combat.endLustLoss);
 			else doNext(EventParser.playerMenu);
 		}
@@ -177,6 +177,7 @@ public class Imp extends Monster
 			];
 			this.wings.type = Wings.IMP;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 1, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyForBeginnersType, 0, 0, 0, 0);
 			checkMonster();
 		}

@@ -6,7 +6,9 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.Crafting;
 	import classes.Scenes.SceneLib;
+	import classes.Scenes.NPCs.TyrantiaFollower;
 	
 	public class Konstantin extends NPCAwareContent
 	{
@@ -17,7 +19,7 @@ package classes.Scenes.NPCs
 		}
 		/*
 		Konstantin flags:
-		KONSTANTIN_FOLLOWER: 1 - Meet at forest, 2 - Came to camp
+		KONSTANTIN_FOLLOWER: 1 - Meet at forest, 2 - Came to camp, 3 - unlocked smelting
 		KONSTANTIN_SERVICES: 1/2 - reached before he join the camp
 		*/
 		private function buildedAnythingInCamp():Boolean {
@@ -70,8 +72,10 @@ package classes.Scenes.NPCs
 			if (player.gems >= 25) {
 				player.gems -= 25;
 				outputText("You take the [armor] and hand it to Konstantin. He starts working on it, idly whistling while you patiently sit on the nearby ");
+
 				if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) outputText("couch");
 				else outputText("tree stump");
+
 				outputText(".\n\nApplying the best of his smithing skills to the [armor], he starts tossing away the parts of it that are too damaged due to the blows that it has received or too weakened for the continued use, replacing them with brand new pieces of the same material. He also strengthens the inner structure of each piece and fixes them so they don’t leave a bit of your body unprotected.\n\n");
 				outputText("Once he’s finished, your [armor] looks clean, beautiful and as good as if it was brand new.");
 				if (player.hasStatusEffect(StatusEffects.KonstantinArmorPolishing)) player.removeStatusEffect(StatusEffects.KonstantinArmorPolishing);
@@ -83,7 +87,7 @@ package classes.Scenes.NPCs
 				}
 				else {
 					outputText(" Thanking him for services, you take the armor, thank the bear-morph");
-					if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) outputText(", and return to your daily tasks");
+					if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) outputText(", and return to your daily tasks");
 					outputText(".\n\n");
 				}
 			}
@@ -95,7 +99,7 @@ package classes.Scenes.NPCs
 			if (player.gems >= 25) {
 				player.gems -= 25;
 				outputText("Handing the [weapon] to the bear smith, you hop on ");
-				if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) outputText("one of his couches");
+				if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) outputText("one of his couches");
 				else outputText("the tree stump");
 				outputText(" while he gets to work. Konstantin goes to his anvil, where he examines your weapon and figures how he is going to work with it.\n\n");
 				outputText("Later, you start hearing the sound of metal on metal caused by the bear’s tool, accompanied by a song that he’s humming to pass the time. Once he’s done with the anvil, he turns to sharpening and polishing your [weapon].\n\n");
@@ -109,7 +113,7 @@ package classes.Scenes.NPCs
 				}
 				else {
 					outputText(" After giving thanks to the friendly ursine, you return to your ");
-					if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) {
+					if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) {
 						if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) outputText("cabin");
 						else outputText("bedroll");
 					}
@@ -124,11 +128,11 @@ package classes.Scenes.NPCs
 			clearOutput();
 			outputText("Not having needed anything from his services at the moment, you thank the bear for his offer.\n\n");
 			outputText("\"<i>Okay, " + player.mf("man","girl") + ". ");
-			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) outputText("Stop by again soon if you happen to need help with your stuff");
+			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) outputText("Stop by again soon if you happen to need help with your stuff");
 			else outputText("Was a pleasure to meet you, still, stop by again soon if you happen to need a good smith");
 			outputText(".</i>\"\n\n");
 			outputText("Assuring him that you’ll do so, you bid him farewell and proceed to return to your ");
-			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) {
+			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) {
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) outputText("cabin");
 				else outputText("bedroll");
 			}
@@ -183,9 +187,10 @@ package classes.Scenes.NPCs
 			menu();
 			addButton(0, "Appearance", KonstantinAppearance);
 			addButton(1, "Talk", KonstantinTalkMenu);
-			addButton(2, "Smithing", KonstantinSmithingMenu);
-			addButton(3, "Tinkering", KonstantinTinkeringMenu).hint("Add some temporary boosts to you weapons or armor.");
-			addButton(4, "Sex", KonstantinSexMenu);
+			addButton(2, "Sex", KonstantinSexMenu);
+			addButton(5, "Smithing", KonstantinSmithingMenu);
+			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 3) addButton(6, "Smelting", KonstantinSmeltingMenu);
+			addButton(7, "Tinkering", KonstantinTinkeringMenu).hint("Add some temporary boosts to you weapons or armor.");
 			addButton(14, "Leave", camp.campFollowers);
 		}
 		
@@ -208,6 +213,7 @@ package classes.Scenes.NPCs
 			addButton(0, "Him", KonstantinTalkHim);
 			addButton(1, "His Work", KonstantinTalkHisWork);
 			addButton(2, "The camp", KonstantinTalkTheCamp);
+			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) addButton(13, "Better Smiting", KonstantinTalkBetterSmiting);
 			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		public function KonstantinTalkHim():void {
@@ -276,6 +282,16 @@ package classes.Scenes.NPCs
 				if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) outputText("\"<i>And there is this place where we can spend our excess energy. Quite good, since it also keep us in shape if someday if someday the demons get too cocky and intend to storm our camp.</i>\"\n\n");
 				outputText("\"<i>So all in all, I think that this is a great places. Good company, no demons in the proximity, and a great potential for the years to come.</i>\"\n\n");
 			}
+			doNext(KonstantinTalkMenu);
+			eachMinuteCount(5);
+		}
+		public function KonstantinTalkBetterSmiting():void {
+			clearOutput();
+			outputText("Konstantin deposes his hammer, now that he has a new item in his grasp before he moves toward his storage to retrieve a new ingot.\n\n");
+			outputText("\"<i>You know, [name], what I forge here is nothing extraordinary… just conventional steel. However, there are places across Mareth... Remote locations that are untapped by the other races. Such places are ripe with rare materials, things that only an adventurer like yourself could retrieve. If you could bring me some of that material, I could smelt you the ingots you need for some extremely powerful equipment. Don't worry about the cost. For you, I’ll work for the usual rate. Honestly, it'd be a pleasure if I could get my hands on some high-quality mythril.</i>\"\n\n");
+			outputText("You promise Konstantin to keep a lookout for rare materials in your journey.\n\n");
+			outputText("<b>Unlocked Smelting!</b>\n\n");
+			flags[kFLAGS.KONSTANTIN_FOLLOWER] = 3;
 			doNext(KonstantinTalkMenu);
 			eachMinuteCount(5);
 		}
@@ -372,14 +388,26 @@ package classes.Scenes.NPCs
 			if (player.hasItem(useables.D_SCALE) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1) addButton(3, "Dragonscale", KonstantinCraftingDragonscaleItems);
 			if (player.hasItem(useables.EBONBLO) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1) addButton(4, "Ebonbloom", KonstantinCraftingEbonbloomItems);
 			if (player.hasItem(useables.WT_BRAN)) addButton(5, "W.T.Branch", KonstantinCraftingYggdrasilItems);
+			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 3) {
+				if (player.hasItem(useables.IRONORE) || Crafting.BagSlot04 > 0) addButton(6, "Iron", KonstantinCraftingIronItems);
+				if (player.hasItem(useables.MOONSTO) || Crafting.BagSlot07 > 0) addButton(7, "Moonstone", KonstantinCraftingMoonstoneItems);
+				if (player.hasItem(useables.SKYMETA) || Crafting.BagSlot08 > 0) addButton(8, "Skymetal", KonstantinCraftingSkymetalItems);
+				if (player.hasItem(useables.EBONING) || Crafting.BagSlot06 > 0) addButton(9, "EbonbIng", KonstantinCraftingEbonbIngItems);
+			}
+			addButton(13, "Misc", KonstantinSmithingMenu2).hint("Specific crafting options.");
+			addButton(14, "Back", KonstantinMainCampMenu);
+		}//usunąć fragmenty " && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1" jak sie całkiem przeniesie crafting z Ratha do Kona
+		private function KonstantinSmithingMenu2():void {
+			menu();
+			if (TyrantiaFollower.TyraniaThePhalluspear && player.hasItem(weapons.SPEAR) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.T_SSILK) && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 3) addButton(6, "ThePhalluspear", KonstantinCraftingThePhalluspear);
 			if (player.hasItem(useables.DBAPLAT)) addButton(8, "D.Bark Armor", KonstantinCraftingDivineBarkArmor);
 			if (player.hasItem(useables.TBAPLAT)) addButton(9, "T.Bark Armor", KonstantinCraftingTentacledBarkArmor);
 			if (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.W_STAFF)) addButton(10, "Puritas", KonstantinCraftingPuritas);
 			if (player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.W_STAFF)) addButton(11, "Depravatio", KonstantinCraftingDepravito);
 			if (player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.PURITAS)) addButton(12, "Ascensus", KonstantinCraftingPuritasAscensus);
 			if (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.DEPRAVA)) addButton(12, "Ascensus", KonstantinCraftingDepravitoAscensus);
-			addButton(14, "Back", KonstantinMainCampMenu);
-		}//usunąć fragmenty " && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1" jak sie całkiem przeniesie crafting z Ratha do Kona
+			addButton(14, "Back", KonstantinSmithingMenu);
+		}
 		
 		private function KonstantinCraftingNotEnoughMaterials1():void {
 			clearOutput();
@@ -441,6 +469,7 @@ package classes.Scenes.NPCs
 			addButton(6, "Shirt", KonstantinCraftingSpiderSilkItems2, 5, null, null, undergarments.SSSHIRT.description);
 			addButton(7, "Panties", KonstantinCraftingSpiderSilkItems2, 6, null, null, undergarments.SSPANTY.description);
 			addButton(8, "Loincloth", KonstantinCraftingSpiderSilkItems2, 7, null, null, undergarments.SS_LOIN.description);
+			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		private function KonstantinCraftingSpiderSilkItems2(spidersilkType:int):void {
 			if (spidersilkType == 1 || spidersilkType == 2 || spidersilkType == 3) { //Armor or robes
@@ -525,6 +554,7 @@ package classes.Scenes.NPCs
 			addButton(6, "Vest", KonstantinCraftingDragonscaleItems2, 5, null, null, undergarments.DS_VEST.description);
 			addButton(7, "Thong", KonstantinCraftingDragonscaleItems2, 6, null, null, undergarments.DSTHONG.description);
 			addButton(8, "Loincloth", KonstantinCraftingDragonscaleItems2, 7, null, null, undergarments.DS_LOIN.description);
+			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		private function KonstantinCraftingDragonscaleItems2(dragonscaleType:int):void {
 			if (dragonscaleType == 1 || dragonscaleType == 2 || dragonscaleType == 3) { //Armor or robes
@@ -618,6 +648,7 @@ package classes.Scenes.NPCs
 			addButton(8, "Corset", KonstantinCraftingEbonbloomItems2, 9, null, null, undergarments.EW_CORS.description);
 			addButton(10, "R.Jock", KonstantinCraftingEbonbloomItems2, 10, null, null, undergarments.R_JOCK.description);
 			addButton(11, "R.Thong", KonstantinCraftingEbonbloomItems2, 11, null, null, undergarments.R_THONG.description);
+			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		private function KonstantinCraftingEbonbloomItems2(ebonbloomType:int):void {
 			if (ebonbloomType == 1 || ebonbloomType == 2 || ebonbloomType == 3 || ebonbloomType == 4) { //Armor or robes
@@ -744,6 +775,7 @@ package classes.Scenes.NPCs
 			addButton(1, "Sword", KonstantinCraftingYggdrasilItems2, 2, null, null, weapons.WDBLADE.description);
 			addButton(2, "Bow", KonstantinCraftingYggdrasilItems2, 3, null, null, weaponsrange.WARDBOW.description);
 			addButton(3, "Staff", KonstantinCraftingYggdrasilItems2, 4, null, null, weapons.WDSTAFF.description);
+			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		private function KonstantinCraftingYggdrasilItems2(yggdrasilType:int):void {
 			player.destroyItems(useables.WT_BRAN, 1);
@@ -791,6 +823,89 @@ package classes.Scenes.NPCs
 			}
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
 			inventory.takeItem(itype, camp.returnToCampUseOneHour);
+		}
+		private function KonstantinCraftingIronItems():void {
+			outputText("What would you like for Konstantin to create?");
+			menu();
+			addButton(0, "Arrowheads", KonstantinCraftinArrowItems, 1);
+			//armor
+			//weapon
+			addButton(14, "Back", KonstantinMainCampMenu);
+		}
+		private function KonstantinCraftingMoonstoneItems():void {
+			outputText("What would you like for Konstantin to create?");
+			menu();
+			addButton(0, "Arrowheads", KonstantinCraftinArrowItems, 2);
+			//armor
+			//weapon
+			addButton(14, "Back", KonstantinMainCampMenu);
+		}
+		private function KonstantinCraftingSkymetalItems():void {
+			outputText("What would you like for Konstantin to create?");
+			menu();
+			addButton(0, "Arrowheads", KonstantinCraftinArrowItems, 3);
+			//armor
+			//weapon
+			addButton(14, "Back", KonstantinMainCampMenu);
+		}
+		private function KonstantinCraftingEbonbIngItems():void {
+			outputText("What would you like for Konstantin to create?");
+			menu();
+			addButton(0, "Arrowheads", KonstantinCraftinArrowItems, 4);
+			//armor
+			//weapon
+			addButton(14, "Back", KonstantinMainCampMenu);
+		}
+		private function KonstantinCraftinArrowItems(arrowsType:int):void {
+			clearOutput();
+			outputText("Konstantin nods and gets to work, heating up the metal and hammering it down with precision.\n\n");
+			outputText("\"<i>Well, I'm no elf or centaur but I sure know how to make some pretty good arrowheads. Pierce some demons with those will you?</i>\"\n\n");
+			outputText("He hands over to you the freshly crafted arrowheads in a small bag.\n\n");
+			var itype:ItemType;
+			var atype:String;
+			switch(arrowsType) {
+			case 1: //G.Sword
+				if (Crafting.BagSlot04 > 0) Crafting.BagSlot04 -= 1;
+				else player.destroyItems(useables.IRONORE, 1);
+				itype = useables.IARROWHEAD;
+				atype = "iron";
+				break;
+			case 2: //Sword
+				if (Crafting.BagSlot07 > 0) Crafting.BagSlot07 -= 1;
+				else player.destroyItems(useables.MOONSTO, 1);
+				itype = useables.MARROWHEAD;
+				atype = "moonstone";
+				break;
+			case 3: //Bow
+				if (Crafting.BagSlot08 > 0) Crafting.BagSlot08 -= 1;
+				else player.destroyItems(useables.SKYMETA, 1);
+				itype = useables.SARROWHEAD;
+				atype = "skymetal";
+				break;
+			case 4: //Staff
+				if (Crafting.BagSlot06 > 0) Crafting.BagSlot06 -= 1;
+				else player.destroyItems(useables.EBONING, 1);
+				itype = useables.EARROWHEAD;
+				atype = "ebonbloom";
+				break;
+			default:
+				outputText("Something bugged! Please report this bug to Ormael/Aimozg.");
+				itype = useables.IARROWHEAD;
+			}
+			outputText("<b>Got "+atype+" arrowheads!</b>\n\n");
+			inventory.takeItem(itype, camp.returnToCampUseOneHour);
+		}
+		
+		private function KonstantinCraftingThePhalluspear():void {
+			clearOutput();
+			player.destroyItems(weapons.SPEAR, 1);
+			player.destroyItems(consumables.L_DRAFT, 5);
+			player.destroyItems(useables.T_SSILK, 1);
+			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 3;
+			outputText("You bring the materials to Konstantine, and the smith nods, his face serious.\n\n");
+			outputText("\"<i>I’ll need a few hours,</i>\" he says simply. \"<i>Give me the materials, and I’ll craft this for you.</i>\" You hand Konstantine the materials, and he smiles wryly. \"<i>Honestly, I’m not entirely comfortable with this…kind of weapon.</i>\" He admits. \"<i>But I won’t deny the value of it in today’s world.</i>\"\n\n");
+			outputText("The tip glistens with a pink sheen, and you can tell that the blade poking out is razor-sharp. \"<i>Here it is,</i>\" he declares. \"<i>A Phalluspear. Freshly made. I hope you enjoy wielding it more than I did making it.</i>\" An odd thing to say, but you can hardly complain with the results!\n\n");
+			inventory.takeItem(weapons.PHALLUS, camp.returnToCampUseOneHour);
 		}
 		private function KonstantinCraftingDivineBarkArmor():void {
 			clearOutput();
@@ -854,6 +969,64 @@ package classes.Scenes.NPCs
 			inventory.takeItem(weapons.ASCENSU, camp.returnToCampUseFourHours);
 		}
 		
+		public function KonstantinSmeltingMenu():void {
+			clearOutput();
+			outputText("Konstantin eyes you expectantly.\n\n");
+			outputText("\"<i>So [name], do you have anything special for me today?</i>\"\n\n");
+			menu();
+			if (player.hasItem(useables.COP_ORE) && player.hasItem(useables.TIN_ORE)) addButton(0, "Copper/Tin", KonstantinSmeltingMenuCopperAndTin);
+			if (player.hasItem(useables.EBONBLO)) addButton(1, "Ebonbloom", KonstantinSmeltingMenuEbonbloom);
+			addButton(14, "No", KonstantinSmeltingMenuNo);
+		}
+		private function KonstantinSmeltingMenuCopperAndTin():void {
+			menu();
+			if (player.hasItem(useables.COP_ORE) && player.hasItem(useables.TIN_ORE)) addButton(0, "One", KonstantinSmeltingMenuProcess, "copper and tin", 1);
+			//if (player.hasItem(useables.COP_ORE, 5) && player.hasItem(useables.TIN_ORE, 5)) addButton(1, "Five", KonstantinSmeltingMenuProcess, "copper and tin", 2, true);
+			addButton(14, "Back", KonstantinSmeltingMenu);
+		}
+		private function KonstantinSmeltingMenuEbonbloom():void {
+			menu();
+			if (player.hasItem(useables.EBONBLO)) addButton(0, "One", KonstantinSmeltingMenuProcess, "ebonbloom", 3);
+			//if (player.hasItem(useables.EBONBLO, 5)) addButton(1, "Five", KonstantinSmeltingMenuProcess, "ebonbloom", 4, true);
+			addButton(14, "Back", KonstantinSmeltingMenu);
+		}
+		private function KonstantinSmeltingMenuNo():void {
+			outputText("No, not at the moment but you keep on looking. Hearing this, the bear smith nods and resumes his work.\n\n");
+			doNext(KonstantinMainCampMenu);
+		}
+		private function KonstantinSmeltingMenuProcess(material:String = "", craft:Number = 1, amount:Boolean = false):void {
+			outputText("The bear smith grabs the ore from you and examines it.\n\n");
+			outputText("\"<i>That...THAT is some genuine "+material+"! I will be able to forge some amazing stuff with this. The ingots are on me. You got the materials, after all. They’re yours… But if you want me to make something from them, I still need to get paid.</i>\"\n\n");
+			outputText("He gets to work immediately, gently sliding the "+material+" into his forge.. Once they’re all properly melted, he pours the molten "+material+" into an ingot cast. He looks down at the bar, smiling to himself as if anticipating the work he could do. Konstantin lays the mold on the ground, letting the air cool it. He looks at you before speaking. \"<i>Water in the bar would be bad, [name], best to let it air dry.</i>\" He waits by the bar and hands it to you once it's safe to touch.\n\n");
+			outputText("\"<i>Here, [name], freshly smelted "+material+".");
+			if (amount) outputText(" Of course, I would need more of it for armor or weapons but for now it'd do a great job for smaller items. I could still make arrowheads, or…</i>\" He scratches his chin in thought.\n\n");
+			else outputText("</i>\"\n\n");
+			var itype:ItemType;
+			switch(craft) {
+			case 1: //1 Copper+Tin ore
+				player.destroyItems(useables.COP_ORE, 1);
+				player.destroyItems(useables.TIN_ORE, 1);
+				itype = useables.BRONZEB;
+				break;
+			case 2: //5 Copper+Tin ores
+				player.destroyItems(useables.COP_ORE, 5);
+				player.destroyItems(useables.TIN_ORE, 5);
+				itype = useables.BRONZEB;
+				break;
+			case 3: //1 Ebonbloom
+				player.destroyItems(useables.EBONBLO, 1);
+				itype = useables.EBONING;
+				break;
+			case 4: //5 Ebonblooms
+				player.destroyItems(useables.EBONBLO, 5);
+				itype = useables.EBONING;
+				break;
+			default:
+				outputText("Something bugged! Please report this bug to Ormael/Aimozg.");
+			}
+			inventory.takeItem(itype, camp.returnToCampUseOneHour);
+		}
+		
 		public function KonstantinTinkeringMenu():void {
 			clearOutput();
 			outputText("You pay another visit to Konstantine, and find him working on his furnace near his tent. He smiles warmly and greets you, after what you ask him if he can help you with your stuff.\n\n");
@@ -886,7 +1059,7 @@ package classes.Scenes.NPCs
 				outputText("As you’re about to sit, your ursine friend points to you.\n\n");
 				outputText("\"<i>Hey, [name]. Better take out those.</i>\" he suggests \"<i>Well feel more fresh that way, and I don’t think that anyone is gonna come in and see us.</i>\"\n\n");
 				outputText("Nodding, you remove you clothing and leave it next to his bed, then you hop in and sit beside the naked bear, feeling the warm embrace of his fur on your [skin].\n\n");
-				outputText("\"<i>“So, you came here only to hand around naked with me?</i>\" he jokingly remarks.\n\n");
+				outputText("\"<i>\"So, you came here only to hand around naked with me?</i>\" he jokingly remarks.\n\n");
 				outputText("Blushing, you admit that you’d like to do what you were seeking, spend a good time with him, if he catches what you mean. He nods and smiles, enveloping you in one of his bear-hugs.\n\n");
 				outputText("\"<i>It’s okay, " + player.mf("man", "girl") + ". We always have those urges sooner or later. And, in those times is much more sooner than later. And, with you, I’d be more than happy.</i>\" he assures you. \"<i>So, what’s on your mind?</i>\"\n\n");
 				flags[kFLAGS.KONSTANTIN_SEX_MENU] = 1;
@@ -895,10 +1068,10 @@ package classes.Scenes.NPCs
 			menu();
 			addButton(0, "Give BJ", KonstantinSexMenuGiveBJ);
 			if (player.hasCock()) {
-				addButton(1, "Recive BJ", KonstantinSexMenuReciveBJ);
+				addButton(1, "Receive BJ", KonstantinSexMenuReciveBJ);
 				addButton(2, "69", KonstantinSexMenu69);
 			}
-			addButton(3, "Recive Anal", KonstantinSexMenuReciveAnal);
+			addButton(3, "Receive Anal", KonstantinSexMenuReciveAnal);
 			if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(4, "Hot Spring Fuck", KonstantinSexMenuHotSpringFuck);
 			addButton(14, "Back", KonstantinMainCampMenu);
 		}
