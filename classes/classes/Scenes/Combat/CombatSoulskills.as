@@ -654,7 +654,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) damage *= 2;
 		return damage;
@@ -805,7 +805,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
 		var crit:Boolean = false;
 		var critChance:int = 5;

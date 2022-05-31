@@ -296,8 +296,9 @@ import classes.Scenes.SceneLib;
 			if (minedStones > (40 + (2 * player.miningLevel) + (20 * player.newGamePlusMod()))) minedStones = (40 + (2 * player.miningLevel) + (20 * player.newGamePlusMod()));
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] += minedStones;
 			incrementStoneSupply(minedStones);
-			if (player.hasKeyItem("Tel'Adre Magazine Issue 10") >= 0) player.mineXP(2);
-			else player.mineXP(1);
+			var mineEXP:Number = 1;
+			if (player.hasKeyItem("Tel'Adre Magazine Issue 10") >= 0) mineEXP *= 2;
+			player.mineXP(mineEXP);
 			if (rand(10) == 0) {
 				var gemsMined:Number = 1 + rand(1+player.miningLevel);
 				outputText(" Along with the stone you managed to dig up " + gemsMined + " gems!");
@@ -334,7 +335,7 @@ import classes.Scenes.SceneLib;
 					inventory.takeItem(itype, camp.returnToCampUseTwoHours);
 				}
 				else {
-					outputText("After attempt to mine ore vein you ended with unusable piece.");
+					outputText(" After attempt to mine ore vein you ended with unusable piece.");
 					doNext(camp.returnToCampUseTwoHours);
 				}
 			}

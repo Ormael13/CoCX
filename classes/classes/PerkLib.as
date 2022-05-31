@@ -447,11 +447,11 @@ public class PerkLib
 				"Increase venom/web recharge speed based on current hunger level. (will have no effect if max venom/web is at 0)",
 				"You've chosen the 'Venomous Diet' perk. Increase venom/web recharge speed based on current hunger level. (will have no effect if max venom/web is at 0)");
 		public static const HighlyVenomousDiet:PerkType = mk("Highly Venomous Diet", "Higly Venomous Diet",
-				"Increase venom/web recharge speed at cost of faster getting hungry. (will have no effect if max venom/web is at 0)",
-				"You've chosen the 'Higly Venomous Diet' perk. Increase venom/web recharge speed at cost of faster getting hungry. (will have no effect if max venom/web is at 0)");
+				"Increase venom/web recharge speed at cost of faster getting hungry. If reached max venom/web cap it will no longer cause faster hunger bar decay. (will have no effect if max venom/web is at 0)",
+				"You've chosen the 'Higly Venomous Diet' perk. Increase venom/web recharge speed at cost of faster getting hungry. If reached max venom/web cap it will no longer cause faster hunger bar decay. (will have no effect if max venom/web is at 0)");
 		public static const AxillaryVenomGlands:PerkType = mk("Axillary Venom Glands", "Axillary Venom Glands",
-				"Increase venom/web recharge speed based by 100% at cost of 1% of max HP lost per tick. (if hunger mode is active will instead drain hunger 2x faster)",
-				"You've chosen the 'Axillary Venom Glands' perk. Increase venom/web recharge speed based by 100% at cost of 1% of max HP lost per tick. (if hunger mode is active will instead drain hunger 2x faster)");
+				"Increase venom/web recharge speed based by 100% at cost of 1% of max HP lost per tick. If reached max venom/web cap it will no longer cause HP decay. (if hunger mode is active will instead drain hunger 2x faster)",
+				"You've chosen the 'Axillary Venom Glands' perk. Increase venom/web recharge speed based by 100% at cost of 1% of max HP lost per tick. If reached max venom/web cap it will no longer cause HP decay. (if hunger mode is active will instead drain hunger 2x faster)");
 		public static const VenomousAdiposeTissue:PerkType = mk("Venomous Adipose Tissue", "Venomous Adipose Tissue",
 				"Increase venom/web recharge speed and maximum capacity based on current toughness and thickness. (higher tou/thick value the smaller increases) (will have no effect if max venom/web is at 0) (will have no effect if max venom/web is at 0)",
 				"You've chosen the 'Venomous Adipose Tissue' perk. Increase venom/web recharge speed and maximum capacity based on current toughness and thickness. (higher tou/thick value the smaller increases)");
@@ -507,6 +507,16 @@ public class PerkLib
 		public static const RangeWeaponsMasterySu:PerkType = mk("Range Weapons Mastery (Su)", "Range Weapons Mastery (Su)",
 				"Decrease by ~45% needed exp to level up each range weapon mastery type and increase cap for range masteries by 50.",
 				"You've chosen the 'Range Weapons Mastery (Su)' perk. Decrease by ~45% needed exp to level up each range weapon mastery type and increase cap for range masteries by 50.");
+		public static const ToxineMaster:PerkType = mk("Toxine master", "Toxine master",
+				"You learned how to make most use of any venom in your possession, refining them to their maximum potential by combining them with various plants to deadly effects. If no toxin is available the sky poison pearl can produce a violent poison for your personal use. " +
+					"(Envenomed bolt venom effect now is two times as strong on each projectile and gains an extra dot as 5 toughness damage per round. If PC doesn't have a poison pc can use the sky poison pearl to produce a deadly toxin that adds the base 5 toughness damage to weapon attacks.)",
+				"You've chosen the 'Toxine master' perk. Envenomed bolt venom effect now is two times as strong on each projectile and gains an extra dot as 5 toughness damage per round. If PC doesn't have a poison pc can use the sky poison pearl to produce a deadly toxin that adds the base 5 toughness damage to weapon attacks.");
+		public static const KingOfTheJungle:PerkType = mk("King of the jungle", "King of the jungle",
+				"One with the natural world, you gained almost complete immunity (their duration shortened to 1 round) to status effects like frozen solid, poison, burn and bleeding! Furthermore all the damage caused with the damaging condition above is increased by 20%.",
+				"You've chosen the 'King of the jungle' perk. One with the natural world, you gained almost complete immunity (their duration shortened to 1 round) to status effects like frozen solid, poison, burn and bleeding! Furthermore all the damage caused with the damaging condition above is increased by 20%.");
+		public static const HotNCold:PerkType = mk("Hot N Cold", "Hot N Cold",
+				"You're Hot N Cold and can't cross 75% minimum lust threshold.",
+				"You've chosen the 'Hot N Cold' perk, causing your minimum lust never cross 75% threshold.");
 		/*public static const JobBeastlord:PerkType = mk("Job: Beastlord", "Job: Beastlord",
 				".",
 				"You've chosen the 'Job: Beastlord' perk, .");
@@ -519,6 +529,15 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -4273,12 +4292,12 @@ public class PerkLib
                     .requireAnyPerk(Berzerker, Lustzerker)
                     .requireStr(200)
                     .requireLevel(54);
-            /*PrestigeJobStalker.requirePrestigeJobSlot()
+            PrestigeJobStalker.requirePrestigeJobSlot()
                     .requirePerk(JobWarrior)
                     .requirePerk(JobHunter)
                     .requireStr(150)
                     .requireSpe(150)
-                    .requireLevel(54);*/
+                    .requireLevel(54);
             PrestigeJobSpellKnight.requirePrestigeJobSlot()
                     .requirePerk(JobWarrior)
                     .requirePerk(JobSorcerer)
@@ -4298,6 +4317,8 @@ public class PerkLib
                     .requirePerk(EpicBrute);
             //Tier 10 Strength Perks
             FuelForTheFire.requirePerk(PrestigeJobBerserker)
+                    .requireLevel(60);
+            ToxineMaster.requirePerks(PrestigeJobStalker, EnvenomedBolt)
                     .requireLevel(60);
             SwiftCasting.requireLevel(60)
                     .requirePerk(PrestigeJobSpellKnight)
@@ -4319,6 +4340,8 @@ public class PerkLib
             //Tier 11 Strength Perks
             Rage.requirePerk(FuelForTheFire)
                     .requireLevel(66);
+            KingOfTheJungle.requirePerks(ToxineMaster, Medicine)
+                    .requireLevel(60);
             WarCaster.requirePerk(SwiftCasting)
                     .requireLevel(66);
             HalfStepToEpicTranquilness.requireStr(360)
@@ -5952,6 +5975,8 @@ public class PerkLib
                     .requireLevel(12);
 			Straddle.requirePerk(JobCourtesan)
 					.requireLib(75)
+					.requireLevel(12);
+			HotNCold.requirePerks(HotBlooded, ColdBlooded)
 					.requireLevel(12);
             //Tier 3 Libido Perks
             DemonicDesireIV.requirePerk(DemonicDesireIII)

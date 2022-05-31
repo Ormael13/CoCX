@@ -12,7 +12,6 @@ public class DemonRace extends Race {
 	
 	public function DemonRace(id:int) {
 		super("Demon", id);
-		mutationThreshold = 5;
 	}
 	
 	public override function setup():void {

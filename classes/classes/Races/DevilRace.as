@@ -10,7 +10,6 @@ import classes.VaginaClass;
 public class DevilRace extends Race {
 	public function DevilRace(id:int) {
 		super("Devil", id);
-		mutationThreshold = 5;
 	}
 	
 	public override function setup():void {

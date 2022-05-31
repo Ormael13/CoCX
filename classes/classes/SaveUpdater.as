@@ -1889,6 +1889,12 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2032] = 0;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.021;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.022) {
+				if (AdventurerGuild.Slot04Cap >= 5) {
+				AdventurerGuild.Slot05Cap = 10;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.022;
+			}
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;

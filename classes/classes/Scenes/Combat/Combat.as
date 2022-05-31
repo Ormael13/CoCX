@@ -941,6 +941,11 @@ public class Combat extends BaseContent {
             }
 			if (player.armor == armors.BMARMOR) dynStats("lus", -(Math.round(player.maxLust() * 0.02)));
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) dynStats("lus", (Math.round(player.maxLust() * 0.05)));
+			if (player.hasStatusEffect(StatusEffects.MomentOfClarity)) dynStats("lus", -(Math.round(player.maxLust() * 0.05)));
+			if (player.hasStatusEffect(StatusEffects.FieryRage)) {
+				if (player.soulforce < (player.maxSoulforce() * 0.05)) player.removeStatusEffect(StatusEffects.FieryRage);
+				else EngineCore.SoulforceChange(Math.round(player.maxSoulforce() * 0.05), false);
+			}
         }
         mainView.hideMenuButton(MainView.MENU_DATA);
         mainView.hideMenuButton(MainView.MENU_APPEARANCE);
@@ -1231,7 +1236,13 @@ public class Combat extends BaseContent {
 					bd.disable("Your current soulforce is too low.");
 				}
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) == 5) {
-					//True Evasion
+					bd = buttons.add("True Evasion", mspecials.FusionSpecialTrueEvasion).hint("Cooldown: 10 turns.\n\nSoulforce cost: " + Math.round(20 * soulskillCost() * soulskillcostmulti()));
+					if (player.soulforce < 20 * soulskillCost() * soulskillcostmulti()) {
+						bd.disable("Your current soulforce is too low.");
+					}
+					else if (player.hasStatusEffect(StatusEffects.CooldownTrueEvasion)) {
+						bd.disable("You need more time before you can use True Evasion again.");
+					}
 				}
 			}
 			if (element == ElementalRace.ELEMENT_GNOME) {
@@ -1247,7 +1258,13 @@ public class Combat extends BaseContent {
 					bd.disable("Your current soulforce is too low.");
 				}
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) == 5) {
-					//Adamantine Shell
+					bd = buttons.add("Adamantine Shell", mspecials.FusionSpecialAdamantineShell).hint("Cooldown: 10 turns.\n\nSoulforce cost: " + Math.round(20 * soulskillCost() * soulskillcostmulti()));
+					if (player.soulforce < 20 * soulskillCost() * soulskillcostmulti()) {
+						bd.disable("Your current soulforce is too low.");
+					}
+					else if (player.hasStatusEffect(StatusEffects.CooldownAdamantineShell)) {
+						bd.disable("You need more time before you can use True Evasion again.");
+					}
 				}
 			}
 			if (element == ElementalRace.ELEMENT_IGNIS) {
@@ -1260,7 +1277,11 @@ public class Combat extends BaseContent {
 					bd.disable("Your current soulforce is too low.");
 				}
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) == 5) {
-					//Fiery Rage
+					if (player.hasStatusEffect(StatusEffects.FieryRage)) {
+						bd = buttons.add("Fiery Rage(Off)", mspecials.FusionSpecialFieryRageDeactivate).hint("Deactivate Fiery Rage.");
+					} else {
+						bd = buttons.add("Fiery Rage(On)", mspecials.FusionSpecialFieryRageActivate).hint("Double your melee damage for a time, by ignoring your body's limits, pushing past them. This technique drain 5% of max soulforce per round, but also increases lust resistance.");
+					}
 				}
 			}
 			if (element == ElementalRace.ELEMENT_UNDINE) {
@@ -1273,7 +1294,13 @@ public class Combat extends BaseContent {
 					bd.disable("Your current soulforce is too low.");
 				}
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 5) {
-					//Moment of Clarity
+					bd = buttons.add("Moment of Clarity", mspecials.FusionSpecialMomentOfClarity).hint("Cooldown: 6 turns.\n\nSoulforce cost: " + Math.round(20 * soulskillCost() * soulskillcostmulti()));
+					if (player.soulforce < 20 * soulskillCost() * soulskillcostmulti()) {
+						bd.disable("Your current soulforce is too low.");
+					}
+					else if (player.hasStatusEffect(StatusEffects.CooldownMomentOfClarity)) {
+						bd.disable("You need more time before you can use True Evasion again.");
+					}
 				}
 			}
 		}
@@ -3626,6 +3653,7 @@ public class Combat extends BaseContent {
                     if (monster.hasStatusEffect(StatusEffects.BeeVenom)) {
                         monster.addStatusValue(StatusEffects.BeeVenom, 3, damage1Ba);
                     } else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, damage1Ba, 0);
+					if (player.hasPerk(PerkLib.ToxineMaster)) monster.statStore.addBuffObject({tou:-5}, "Poison",{text:"Poison"});
                     player.tailVenom -= player.VenomWebCost();
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                 }
@@ -3637,7 +3665,8 @@ public class Combat extends BaseContent {
 						DBP *= 2;
 						DBPa *= 2;
 					}
-                    monster.statStore.addBuffObject({tou:-DBP, spe:-DBP}, "Poison",{text:"Poison"});
+					if (player.hasPerk(PerkLib.ToxineMaster)) monster.statStore.addBuffObject({tou:-(DBP+5), spe:-DBP}, "Poison",{text:"Poison"});
+                    else monster.statStore.addBuffObject({tou:-DBP, spe:-DBP}, "Poison",{text:"Poison"});
                     if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                         monster.addStatusValue(StatusEffects.NagaVenom, 3, DBPa);
                     } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, DBPa, 0);
@@ -3658,6 +3687,7 @@ public class Combat extends BaseContent {
 						DBPaa *= 2;
 					}
                     monster.teased(lustdamage, false);
+					if (player.hasPerk(PerkLib.ToxineMaster)) DBPaa += 2.5;
                     monster.statStore.addBuffObject({tou:-(DBPaa*2)}, "Poison",{text:"Poison"});
                     if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) {
                         monster.addStatusValue(StatusEffects.ManticoreVenom, 3, DBPaa);
@@ -3669,7 +3699,8 @@ public class Combat extends BaseContent {
                     outputText("  [monster he] seems to be effected by the poison, its movements slowing down.");
 					var DBPaaa:Number = 1;
 					if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPaaa *= 2;
-                    monster.statStore.addBuffObject({spe:-DBPaaa}, "Poison",{text:"Poison"});
+					if (player.hasPerk(PerkLib.ToxineMaster)) monster.statStore.addBuffObject({tou:-5, spe:-DBPaaa}, "Poison",{text:"Poison"});
+					else monster.statStore.addBuffObject({spe:-DBPaaa}, "Poison",{text:"Poison"});
                     var venomType:StatusEffectType = StatusEffects.NagaVenom;
                     if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
                     if (monster.hasStatusEffect(venomType)) {
@@ -3698,6 +3729,7 @@ public class Combat extends BaseContent {
 							damage2Ba *= 2;
 						}
                         monster.teased(damage2B);
+						if (player.hasPerk(PerkLib.ToxineMaster)) poisonScaling += 5;
                         monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
                         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                             monster.addStatusValue(StatusEffects.NagaVenom, 3, damage2Ba);
@@ -3715,6 +3747,7 @@ public class Combat extends BaseContent {
                             if (monster.lustVuln > 1) monster.lustVuln = 1;
                         }
                         player.tailVenom -= player.VenomWebCost();
+						if (player.hasPerk(PerkLib.ToxineMaster)) monster.statStore.addBuffObject({tou:-5}, "Poison",{text:"Poison"});
 						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                     }
                 }
@@ -3726,7 +3759,13 @@ public class Combat extends BaseContent {
                 }
                 outputText("\n");
             }
-            if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < player.VenomWebCost()) outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!\n");
+            if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < player.VenomWebCost()) {
+				if (player.hasPerk(PerkLib.ToxineMaster) && player.hasKeyItem("Sky Poison Pearl") >= 0) {
+					outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness.\n");
+					monster.statStore.addBuffObject({tou:-5}, "Poison",{text:"Poison"});
+				}
+				else outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!\n");
+			}
             if (player.weaponRangeName == "Hodr's bow" && !monster.hasStatusEffect(StatusEffects.Blind)) monster.createStatusEffect(StatusEffects.Blind, 1, 0, 0, 0);
             outputText("\n");
             if (flags[kFLAGS.ARROWS_SHOT] >= 1) EngineCore.awardAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE);
@@ -3824,7 +3863,7 @@ public class Combat extends BaseContent {
 			if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+			if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
 			if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= historyFighterBonus();
@@ -3842,7 +3881,7 @@ public class Combat extends BaseContent {
 			}
 			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+			if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
 			damage *= meleePhysicalForce();
 			//Determine if critical hit!
@@ -3883,7 +3922,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
 			if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+			if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
 			if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
 				if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
@@ -4027,7 +4066,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
                 if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
                 if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-                if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+                if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 				if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
                 if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
                     if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
@@ -4193,7 +4232,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
             if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-            if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+            if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
             if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
                 if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
@@ -5925,7 +5964,7 @@ public class Combat extends BaseContent {
 		if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 		if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
 		if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) {
 			if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) damage *= 1.1;
@@ -5948,7 +5987,7 @@ public class Combat extends BaseContent {
 		}
 		if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
 		if (SceneLib.urtaQuest.isUrta()) damage *= 2;
 		damage *= meleePhysicalForce();
@@ -6068,7 +6107,7 @@ public class Combat extends BaseContent {
                     }
                     if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
                     if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-                    if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+                    if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 					if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
                     if (damage > 0) doPhysicalDamage(damage, false);
                     (monster as Doppleganger).mirrorAttack(damage);
@@ -6761,7 +6800,7 @@ public class Combat extends BaseContent {
             if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
             if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-            if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+            if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
             //One final round
             damage = Math.round(damage);
@@ -6794,7 +6833,7 @@ public class Combat extends BaseContent {
                     }
                     if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
                     if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-                    if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+                    if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 					if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
                     if (damage > 0) doPhysicalDamage(damage, false);
                     (monster as Doppleganger).mirrorAttack(damage);
@@ -6822,7 +6861,7 @@ public class Combat extends BaseContent {
                 }
                 if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
                 if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-                if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+                if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 				if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
 
                 else if (MDODialogs) {
@@ -9340,7 +9379,7 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.IzmaBleed)) {
             player.addStatusValue(StatusEffects.IzmaBleed, 1, -1);
-            if (player.statusEffectv1(StatusEffects.IzmaBleed) <= 0) {
+            if (player.statusEffectv1(StatusEffects.IzmaBleed) <= 0 || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 player.removeStatusEffect(StatusEffects.IzmaBleed);
                 outputText("<b>You sigh with relief; your bleeding has slowed considerably.</b>\n\n");
             }
@@ -9355,7 +9394,7 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.Hemorrhage)) {
             player.addStatusValue(StatusEffects.Hemorrhage, 1, -1);
-            if (player.statusEffectv1(StatusEffects.Hemorrhage) <= 0) {
+            if (player.statusEffectv1(StatusEffects.Hemorrhage) <= 0 || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 player.removeStatusEffect(StatusEffects.Hemorrhage);
                 outputText("<b>You sigh with relief; your hemorrhage has slowed considerably.</b>\n\n");
             }
@@ -9370,7 +9409,7 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.BurnDoT)) {
             player.addStatusValue(StatusEffects.BurnDoT, 1, -1);
-            if (player.statusEffectv1(StatusEffects.BurnDoT) <= 0) {
+            if (player.statusEffectv1(StatusEffects.BurnDoT) <= 0 || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 player.removeStatusEffect(StatusEffects.BurnDoT);
                 outputText("<b>You sigh with relief; fire has stopped searing your wounds.</b>\n\n");
             }
@@ -9432,10 +9471,13 @@ public class Combat extends BaseContent {
             }
         }
         if (player.hasStatusEffect(StatusEffects.AcidSlap)) {
-            var slap:Number = 3 + (player.maxHP() * 0.02);
-			if (player.statStore.hasBuff("Crossed Holy Band")) slap *= 0.5;
-			slap = player.takeAcidDamage(slap);
-            outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"#800000\">" + slap + "</font>)</b></b>\n\n");
+			if (player.hasPerk(PerkLib.KingOfTheJungle)) player.removeStatusEffect(StatusEffects.AcidSlap);
+			else {
+				var slap:Number = 3 + (player.maxHP() * 0.02);
+				if (player.statStore.hasBuff("Crossed Holy Band")) slap *= 0.5;
+				slap = player.takeAcidDamage(slap);
+				outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"#800000\">" + slap + "</font>)</b></b>\n\n");
+			}
         }
         if (monster.hasStatusEffect(StatusEffects.AuraOfMadness) && !player.hasPerk(PerkLib.Insanity) && !player.hasStatusEffect(StatusEffects.AlterBindScroll3)) {
 			player.addCurse("int.mult", monster.statusEffectv1(StatusEffects.AuraOfMadness)/100,3);//non bosses have it 5
@@ -9803,7 +9845,7 @@ public class Combat extends BaseContent {
             }
         }
         if (player.hasStatusEffect(StatusEffects.AikoLightningArrow)) {
-            if (player.statusEffectv1(StatusEffects.AikoLightningArrow) <= 0) {
+            if (player.statusEffectv1(StatusEffects.AikoLightningArrow) <= 0 || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 player.removeStatusEffect(StatusEffects.AikoLightningArrow);
                 outputText("<b>You feel stronger as Aiko's lightning finally fades, though the arrow is still lodged in your side.</b>\n\n");
                 player.buff("LightningArrowStr").remove();
@@ -9828,7 +9870,7 @@ public class Combat extends BaseContent {
         //Harpy lip gloss
         if (player.hasCock() && player.hasStatusEffect(StatusEffects.Luststick) && (monster.short == "harpy" || monster.short == "Sophie")) {
             //Chance to cleanse!
-            if (player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) {
+            if ((player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("You manage to cleanse the harpy lip-gloss from your system with your knowledge of medicine!\n\n");
                 player.removeStatusEffect(StatusEffects.Luststick);
             } else if (rand(5) == 0) {
@@ -9876,7 +9918,7 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.NagaVenom)) {
             //Chance to cleanse!
-            if (player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) {
+            if ((player.hasPerk(PerkLib.Medicine) && rand(100) <= 14)  || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("Using your knowledge of medicine, you manage to cleanse [monster a] [monster name] venom from your system.\n\n");
                 player.removeStatusEffect(StatusEffects.NagaVenom);
             } else if (player.spe > 3) {
@@ -9888,7 +9930,7 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.MedusaVenom)) {
             //Chance to cleanse!
-            if (player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) {
+            if ((player.hasPerk(PerkLib.Medicine) && rand(100) <= 14)  || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("Using your knowledge of medicine, you manage to cleanse [monster a] [monster name] venom from your system.\n\n");
                 player.statStore.removeBuffs("Poison");
                 player.removeStatusEffect(StatusEffects.MedusaVenom);
@@ -9904,7 +9946,7 @@ public class Combat extends BaseContent {
         //Temporary heat
         if (player.hasStatusEffect(StatusEffects.TemporaryHeat)) {
             //Chance to cleanse!
-            if (player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) {
+			if ((player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("With your knowledge of medicine, you manage to cleanse the heat and rut drug from your system.\n\n");
                 player.removeStatusEffect(StatusEffects.TemporaryHeat);
             } else {
@@ -9923,7 +9965,7 @@ public class Combat extends BaseContent {
         //Poison
         if (player.hasStatusEffect(StatusEffects.Poison)) {
             //Chance to cleanse!
-            if (player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) {
+            if ((player.hasPerk(PerkLib.Medicine) && rand(100) <= 14) || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("You manage to cleanse the poison from your system with your knowledge of medicine!\n\n");
                 player.removeStatusEffect(StatusEffects.Poison);
             } else {
@@ -9939,7 +9981,7 @@ public class Combat extends BaseContent {
         }
         // Drider incubus venom
         if (player.hasStatusEffect(StatusEffects.DriderIncubusVenom)) {
-            if (player.hasPerk(PerkLib.Medicine) && rand(100) <= 41) {
+            if ((player.hasPerk(PerkLib.Medicine) && rand(100) <= 41) || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("You negate the effects of the drider incubus’ venom with your knowledge of medicine!\n\n");
                 player.statStore.removeBuffs("Poison");
                 player.removeStatusEffect(StatusEffects.DriderIncubusVenom);
@@ -9971,7 +10013,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.AcidDoT)) {
             player.addStatusValue(StatusEffects.AcidDoT, 1, -1);
             //Heal wounds
-            if (player.statusEffectv1(StatusEffects.AcidDoT) <= 0) {
+            if (player.statusEffectv1(StatusEffects.AcidDoT) <= 0 || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("Acid wounds left by [themonster] finally close ups.\n\n");
                 player.removeStatusEffect(StatusEffects.AcidDoT);
             }
@@ -9980,7 +10022,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.FrostburnDoT)) {
             player.addStatusValue(StatusEffects.FrostburnDoT, 1, -1);
             //Heal wounds
-            if (player.statusEffectv1(StatusEffects.FrostburnDoT) <= 0) {
+            if (player.statusEffectv1(StatusEffects.FrostburnDoT) <= 0 || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("Frostburn wounds left by [themonster] finally close ups.\n\n");
                 player.removeStatusEffect(StatusEffects.FrostburnDoT);
             } else {
@@ -9996,7 +10038,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.FrozenLung)) {
             player.addStatusValue(StatusEffects.FrozenLung, 1, -1);
             //Heal wounds
-            if (player.statusEffectv1(StatusEffects.FrozenLung) <= 0) {
+            if (player.statusEffectv1(StatusEffects.FrozenLung) <= 0 || player.hasPerk(PerkLib.KingOfTheJungle)) {
                 outputText("Frozen Lung left by [themonster] finally ends.\n\n");
                 player.removeStatusEffect(StatusEffects.FrozenLung);
             } else {
@@ -10216,6 +10258,27 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.EverywhereAndNowhere);
                 outputText("<b>Everywhere and nowhere effect ended!</b>\n\n");
             } else player.addStatusValue(StatusEffects.EverywhereAndNowhere, 1, -1);
+        }
+        //True Evasion
+        if (player.hasStatusEffect(StatusEffects.TrueEvasion)) {
+            if (player.statusEffectv1(StatusEffects.TrueEvasion) <= 0) {
+                player.removeStatusEffect(StatusEffects.TrueEvasion);
+                outputText("<b>True Evasion effect ended!</b>\n\n");
+            } else player.addStatusValue(StatusEffects.TrueEvasion, 1, -1);
+        }
+        //Adamantine Shell
+        if (player.hasStatusEffect(StatusEffects.AdamantineShell)) {
+            if (player.statusEffectv1(StatusEffects.AdamantineShell) <= 0) {
+                player.removeStatusEffect(StatusEffects.AdamantineShell);
+                outputText("<b>Adamantine Shell effect ended!</b>\n\n");
+            } else player.addStatusValue(StatusEffects.AdamantineShell, 1, -1);
+        }
+        //Moment of Clarity
+        if (player.hasStatusEffect(StatusEffects.MomentOfClarity)) {
+            if (player.statusEffectv1(StatusEffects.MomentOfClarity) <= 0) {
+                player.removeStatusEffect(StatusEffects.MomentOfClarity);
+                outputText("<b>Moment of Clarity effect ended!</b>\n\n");
+            } else player.addStatusValue(StatusEffects.MomentOfClarity, 1, -1);
         }
         //Ezekiel Curse
         if (player.hasStatusEffect(StatusEffects.EzekielCurse)) {/*
@@ -10943,7 +11006,7 @@ public class Combat extends BaseContent {
                 if (player.perkv1(IMutationsLib.HinezumiBurningBloodIM) >= 3) healingPercent += 0.5;
             }
             if (player.headJewelry == headjewelries.CUNDKIN && player.HP < 1) healingPercent += 1;
-            if (player.hasStatusEffect(StatusEffects.Overlimit)) healingPercent -= 10;
+            if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) healingPercent -= 10;
             if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) negativeHPRegen -= 1;
             if (player.hasPerk(PerkLib.Diehard) && !player.hasPerk(PerkLib.EpicDiehard) && player.HP < 1) negativeHPRegen -= 1;
             if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 3 && player.HP < 1) negativeHPRegen -= 1;
@@ -10970,7 +11033,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.Regeneration5)) maxPercentRegen += 0.5;
             if (player.hasPerk(PerkLib.Regeneration6)) maxPercentRegen += 0.5;
         }
-		if (flags[kFLAGS.HUNGER_ENABLED] <= 0 && !player.hasPerk(PerkLib.EndlessHunger) && player.hasPerk(PerkLib.AxillaryVenomGlands)) maxPercentRegen -= 1;
+		if (flags[kFLAGS.HUNGER_ENABLED] <= 0 && !player.hasPerk(PerkLib.EndlessHunger) && player.hasPerk(PerkLib.AxillaryVenomGlands) && player.tailVenom < player.maxVenom()) maxPercentRegen -= 1;
 		//if (player.hasStatusEffect(StatusEffects.GnomeHomeBuff) && player.statusEffectv1(StatusEffects.GnomeHomeBuff) == 1) maxPercentRegen += 15;
         if (player.armor == armors.NURSECL) maxPercentRegen += 0.5;
         if (player.armor == armors.BLIZZ_K) {
@@ -12102,7 +12165,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
             if (player.necklace == necklaces.OBNECK) damage *= 1.2;
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-            if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+            if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
             if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
             if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
@@ -12196,7 +12259,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
             if (player.necklace == necklaces.OBNECK) damage *= 1.2;
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-            if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+            if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
             if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
                 damage *= 1.50;
@@ -12248,7 +12311,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
             if (player.necklace == necklaces.OBNECK) damage *= 1.2;
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-            if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+            if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
             if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
                 damage *= 1.50;
@@ -12309,7 +12372,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
             if (player.necklace == necklaces.OBNECK) damage *= 1.2;
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-            if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+            if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
             if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
                 damage *= 1.50;
@@ -12506,7 +12569,7 @@ public class Combat extends BaseContent {
         damage *= player.tallness / 10;
         damage *= scalingBonusStrength() * 0.5;
         if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-        if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+        if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
         if (monster.plural) damage *= 5;
@@ -13034,7 +13097,7 @@ public class Combat extends BaseContent {
         damage *= scalingBonusStrength()*0.4;
         damage *= scalingBonusToughness()*0.2;
         if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-        if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+        if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
         if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
@@ -13077,7 +13140,7 @@ public class Combat extends BaseContent {
             damage += player.str;
         }
         if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-        if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+        if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
         if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
@@ -13287,7 +13350,7 @@ public class Combat extends BaseContent {
 		outputText("You tighten the noose around your opponent's necks, your whip leaving red marks into the flesh. ");
 		var damage:int = monster.maxHP() * (.10 + rand(15) / 100);
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
 		if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
@@ -14812,7 +14875,7 @@ public class Combat extends BaseContent {
             damage += player.spe * 2;
         }
         if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-        if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+        if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
         if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 1) damage *= 1.2;
         if (player.perkv1(IMutationsLib.HarpyHollowBonesIM) >= 2) damage *= 1.5;
@@ -15304,7 +15367,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
 		damage *= (1 + SFoDMulti);
 		var crit:Boolean = false;

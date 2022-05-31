@@ -76,11 +76,11 @@ public class Changelog extends BaseContent
 			outputText("-Aimozg changes to spells code including new tab in Stats to give general estimate how much damage would they deal.\n");
 			outputText("-All perks in tree of Daoist Cultivator and Body Cultivator have effects increased (more for those that are gained later on).\n");
 			outputText("-Evangeline can make Leviatan Sunscreen (Sea Dragon TF) from Orca and Dragon TF items. Alchemy menu been split between 2 subpages with all options now spread there without any additional submenus (like the one before for scylla or abyssal ink).\n");
-			outputText("-Druid job allow to undergone another (sorta) transformation: fusion with one of 4 epic elementals (water, firte, air, earth). Fusion would change PC look, disable most of physical and magical speicals that req. to have specific bodypart, if PC nopt have any range weapon equipped that allow to attack will be granted default to specific fusion base range attack option.\n");
+			outputText("-Druid job allow to undergone another (sorta) transformation: fusion with one of 4 epic elementals (water, fire, air, earth). Fusion would change PC look, disable most of physical and magical specials that req. to have specific bodypart, if PC nopt have any range weapon equipped that allow to attack will be granted default to specific fusion base range attack option.\n");
 			outputText("-Elemental fusions would change PC sprite look to either male or female version of one of four options. (sprites by Liadri)\n");
 			outputText("-Body Cultivator's Focus & Daoist's Focus perks on melee and range weapons will be seperated with change to perk desc (so there will be possible to have 2 perks with one with suffix (M) and other (R)). For making sure nothing glitch futher please deequip both melee and range weapons then reequip them anew.\n");
 			outputText("-Aquatic Affinity perk adding now weakness to lightining damage (-100% resistance).\n");
-			outputText("-Fusing with epic elemental would remove raical bonuses and give new ones realted to specific fusion. Also would give access to passive effect + 2 specials. When Epic elemental are higher ranked it will unlock 2nd and 3rd special.\n");
+			outputText("-Fusing with epic elemental would remove racial bonuses and give new ones realted to specific fusion. Also would give access to passive effect + 2 specials. When Epic elemental are higher ranked it will unlock 2nd and 3rd special.\n");
 			outputText("-Jtex numerous fixes, including Neisa bug after bad end, Valeria conflicy with Jiangshi, Yeti fix.\n");
 			outputText("-Zetta fixes.\n");
 			outputText("-Liadri many small changes.\n");
@@ -89,6 +89,12 @@ public class Changelog extends BaseContent
 			outputText("unique sex scenes not leading to 1st page, Mysterious Seed missing from Unequip/Misc menu\n\n");
 			outputText("<b>Version 0.8s4:</b>\n\n");
 			outputText("-New tier 0 intelligence lvl-up perk: Spellpower: Grey. Req. Grey Magic perk, 50+ int and lvl 3+. Effect: Increases grey spell strength by 15% and mana pool by 75.\n");
+			outputText("-New tier 0 misc lvl-up perk: Melee Weapons Mastery. Req. 10+ str/tou/spe. Effect: Decrease by ~20% needed exp to level up each melee weapon mastery type and grants 200% more of base mastery exp gains.\n");
+			outputText("-New tier 0 misc lvl-up perk: Melee Weapons Mastery (Ex). Req. Melee Weapons Mastery perk, lvl 2+ and 20+ str/tou/spe. Effect: Decrease by ~45% needed exp to level up each melee weapon mastery type and double mastery gains on crit hits (2x -> 4x).\n");
+			outputText("-New tier 0 misc lvl-up perk: Melee Weapons Mastery (Su). Req. Melee Weapons Mastery (Ex) perk, lvl 4+ and 30+ str/tou/spe. Effect: Decrease by ~45% needed exp to level up each melee weapon mastery type and increase cap for melee masteries by 50.\n");
+			outputText("-New tier 0 misc lvl-up perk: Range Weapons Mastery. Req. 10+ str/tou/spe. Effect: Decrease by ~20% needed exp to level up each range weapon mastery type and grants 200% more of base mastery exp gains.\n");
+			outputText("-New tier 0 misc lvl-up perk: Range Weapons Mastery (Ex). Req. Range Weapons Mastery perk, lvl 2+ and 20+ str/tou/spe. Effect: Decrease by ~45% needed exp to level up each range weapon mastery type and double mastery gains on crit hits (2x -> 4x).\n");
+			outputText("-New tier 0 misc lvl-up perk: Range Weapons Mastery (Su). Req. Range Weapons Mastery (Ex) perk, lvl 4+ and 30+ str/tou/spe. Effect: Decrease by ~45% needed exp to level up each range weapon mastery type and increase cap for range masteries by 50.\n");
 			outputText("-New tier 1 intelligence lvl-up perk: Arcane Shielding. Req. Grey Magic perk, Mana Shield spell, 75+ int. Effect: Improving by fivefold mana shield resistance to magical attacks. (1:5 ratio for mana to magic damage)\n");
 			outputText("-New tier 3 intelligence lvl-up perk: Offensive Staff Channeling. Req. Staff Channeling and Grey Magic perks, knowing any attack spell, 120+ int. Effect: Allow to cast splited offensive spell without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (Effect will not activate if you already have ways to multicast spells at reduced power)\n");
 			outputText("-New tier 4 intelligence lvl-up perk: Selfbuffs Proficiency. Req. Job: Enchanter perk, 120+ int. Effect: Increase max selfbuff max cap by 30%.\n");
@@ -307,7 +313,7 @@ public class Changelog extends BaseContent
 			outputText("-Tons of Pyro text corrections in many places.\n");
 			outputText("-Liadri minor changes to vampire TF and score.\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
-			//outputText("-New tier 9 strength lvl-up perk: Prestige Job: Stalker. Req. Job: Warrior and Hunter perks, 150+ str/spe. Effect: +60 to str multi and +20 to spe multi (scalable with NG tiers), +20% damage and critical damage with thrown weapon.\n");
+			outputText("-New tier 9 strength lvl-up perk: Prestige Job: Stalker. Req. Job: Warrior and Hunter perks, 150+ str/spe. Effect: +80% str multi and +40% spe multi (scalable with NG tiers), +20% damage and critical damage with thrown range weapons.\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
 			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
@@ -325,15 +331,24 @@ public class Changelog extends BaseContent
 			outputText("-After rising high enough affection with Belisa new options opens up including shop with few nto found otherwise items or talk options. It even include short mini quest option that allow to open recrtutiment option for her.\n");
 			outputText("-When in camp Belisa have following interaction options: Appearance, Talk, Hang, Shop, Sex (req. special event to happen before it unlock), Holy Bands (allowing to equip or deequip bought Holy Bands with her help). During sex there is chance to impregnate her, which lead to her laying eggs that need few days to hatch.\n");
 			outputText("-Beside limit on how many Holy Bands of each type PC can buy there is also limit on how many bands PC can wear at once and it's 4.\n");
-			outputText("-New tier 0 misc lvl-up perk: Melee Weapons Mastery. Req. 10+ str/tou/spe. Effect: Decrease by ~20% needed exp to level up each melee weapon mastery type and grants 200% more of base mastery exp gains.\n");
-			outputText("-New tier 0 misc lvl-up perk: Melee Weapons Mastery (Ex). Req. Melee Weapons Mastery perk, lvl 2+ and 20+ str/tou/spe. Effect: Decrease by ~45% needed exp to level up each melee weapon mastery type and double mastery gains on crit hits (2x -> 4x).\n");
-			outputText("-New tier 0 misc lvl-up perk: Melee Weapons Mastery (Su). Req. Melee Weapons Mastery (Ex) perk, lvl 4+ and 30+ str/tou/spe. Effect: Decrease by ~45% needed exp to level up each melee weapon mastery type and increase cap for melee masteries by 50.\n");
 			outputText("-UEE imports (by Svalkash): hips/butt increase after Satyr birth; revised Jojo anal scene; Ember TF heat/rut logic improved; male spider-morph can gift spider-silk with a low chance; Amily - PC doesn't leave after gender change talk (if Amily is okay with it); Can put off Phylla's first sex for some time.\n");
 			outputText("-Aimozg did it again.... (insert Jurassic Park meme) and went making Race Page(s) prettier and more cool. It would now show more informations like specific bodypart that count to race score. And would show all tiers of race score at the end of each race score. Switching between seeing jsut race name to full info on it is done by clicking on race name.\n");
-			outputText("-New tier 0 misc lvl-up perk: Range Weapons Mastery. Req. 10+ str/tou/spe. Effect: Decrease by ~20% needed exp to level up each range weapon mastery type and grants 200% more of base mastery exp gains.\n");
-			outputText("-New tier 0 misc lvl-up perk: Range Weapons Mastery (Ex). Req. Range Weapons Mastery perk, lvl 2+ and 20+ str/tou/spe. Effect: Decrease by ~45% needed exp to level up each range weapon mastery type and double mastery gains on crit hits (2x -> 4x).\n");
-			outputText("-New tier 0 misc lvl-up perk: Range Weapons Mastery (Su). Req. Range Weapons Mastery (Ex) perk, lvl 4+ and 30+ str/tou/spe. Effect: Decrease by ~45% needed exp to level up each range weapon mastery type and increase cap for range masteries by 50.\n");
-			outputText("-When fighting corrupted driders in Swamp can meet one that would be possible to talked with after beating. SHe introduce herself as Lily and can be interacted with gaining either some affection or/and submissiveness points.\n");
+			outputText("-When fighting corrupted driders in Swamp can meet one that would be possible to talked with after beating. She introduce herself as Lily and can be interacted with gaining either some affection or/and submissiveness points. With higher point scores in both new options would open until possibility to take her to camp become available.\n");
+			outputText("-Axillary Venom Glands & Highly Venomous Diet perks won't drain HP/hunger bar faster if venom/web pool is at max value.\n");
+			outputText("-When in camp Lily would still have talk, spar, sex or rape options. With luck PC could even impregnate her. At 100 submissiveness new option would be adde din her sex menu.\n");
+			outputText("-Visiting Outer Battlefield at lvl 45+ will allow PC to meet massive drider-like enemy. After first fight PC can interact with massive drider or leave her alone.\n");
+			outputText("-Repeadly visiting battlefield allow to interact more with corrupted drider that reveal her name: Tyrantia. With higher affection score new options in talk menu or interaction appear or some previously available options that was cut shortt will have different ending.\n");
+			outputText("-When visiting Deepwoods or High Mountains after knowing Tyrantia is possible to see scenes involving her or goblin/oni.\n");
+			outputText("-When interaction labeled 'Kiss' become labaled as 'KISS' it mean PC reached crucial stage of interactions after which to proceed is req. to pickl meantioned kiss scene. Then it req. to visit Battlefield again to see scene with few chocies. Depending on event outcome PC may see her 2nd part of her story. After affection reach high enough value even option to invite her to camp would appear.\n");
+			outputText("-In Camp Tyrantia would have most of standard npc interactions like: checking her appearance, talking with her, sex. By doing mini quest would be possible to impregnate massive drider lady. At 100 affections would be enabled anotyher option: Corrupting items into legendary items. It would req. the same additional materials or currency like the one option Celess provide.\n");
+			outputText("-After having all three driders in camp: Belisa, Lily and Tyrantia they would remodel each own residence into mini town called Drider Town. It would group all three under new menu within Lovers menu.\n");
+			outputText("-Tyrantia could train PC with each training (up to 25 sessions) increasing max lust cap by 1% for each. After 5 training PC would be able to activate Tyrant State - Take constant lust damage every turn equal to 5% of your maximum lust. Take 20% increased physical damage. Deal 50% increased melee damage.\n");
+			outputText("-Fusing with Elder rank or higher Epic Elemental would give access to new utility oriented special: Moment of Clarity (Water) - immunity to lust damage and remove 5% of max lust per round for 3 rounds, 6 round cooldown, Fiery Rage (fire) - Work as a no damage taken Over Limit that instead consume soulforce over time, ");
+			outputText("Adamantine Shell (earth) - Greatly raise damage reduction (75% for 7 rounds, 10 round cooldown), True Evasion (Air) - Invulnerable for 3 rounds, 10 round cooldown.\n");
+			outputText("-Epic Elementals can be now rank up all way to Viscount Rank (rank 8).\n");
+			outputText("-New tier 10 strength lvl-up perk: Toxine master. Req. Prestige Job: Stalker & Envenomed bolt perks. Effect: Envenomed bolt venom effect now is two times as strong on each projectile and gains an extra dot as 5 toughness damage per round. If PC doesn't have a poison pc can use the sky poison pearl to produce a deadly toxin that adds the base 5 toughness damage to weapon attacks.\n");
+			outputText("-New tier 11 strength lvl-up perk: King of the jungle. Req. Toxine master & Medicine perks. Effect: One with the natural world, you gained almost complete immunity (their duration shortened to 1 round) to status effects like frozen solid, poison, burn and bleeding! Furthermore all the damage caused with the damaging condition above is increased by 20%.\n");
+			outputText("-New tier 2 libido lvl-up perk: Hot N Cold. Req. Hot Blooded & Cold Blooded perks. Effect: You're Hot N Cold and can't cross 75% minimum lust threshold.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -341,12 +356,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//tier 2/9/11 perks?
+			outputText("-\n");//tier 2 perk?
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
@@ -435,7 +445,15 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -463,6 +481,30 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
