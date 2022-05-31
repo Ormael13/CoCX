@@ -104,7 +104,7 @@ Things you could add to the constructor:
 * `disabled = true`/`hidden=true` to make race disabled/hidden.
 * `chimeraTier = 0; grandChimeraTier = 0;` to disabled adding points to chimera/grand chimera.
 * `chimeraTier = <N>; grandChimeraTier = <N+1>;` to change default chimera/grand chimera min tiers from default 1 and 2.
-* `mutationThreshold = <N>;` By default you get bonuses from mutations and bloodlines only after 5 points from other sources. You can change that number.
+* `mutationThreshold = <N>;` By default you get bonuses from mutations only after 3 points from other sources. You can change that number.
 
 ## Score calculation
 
