@@ -3,8 +3,8 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.ArmorLib;
 import classes.Items.WeaponLib;
-import classes.Scenes.NPCs.NPCAwareContent;
 import classes.Scenes.NPCs.CelessScene;
+import classes.Scenes.NPCs.NPCAwareContent;
 
 public class FollowerInteractions extends NPCAwareContent {
 
@@ -666,6 +666,7 @@ private function endThisMadness():void {
 
 //Next Morning
 public function amilyUrtaMorningAfter():void {
+	SceneLib.amilyScene.amilySprite();
 	//This scene plays the next morning after the second half of the "Amily goes to see Urta" scene
 	//Should disable Amily as a follower option until the next day.
 	outputText("\nAs you leave your bedding, you see a rather dilapidated-looking mouse sprawled restlessly in her nest.  Amily's back, obviously suffering from the effects of a really bad hangover.  Sympathetically, you bring her one of your water skins, holding it over her so that she can take it from you. She opens one bleary eye and stares at you incomprehensibly for a moment, then her vision focuses and she grabs it, gulping down water and spilling more over her clearly aching head.  You ask if she's all right.\n\n");
