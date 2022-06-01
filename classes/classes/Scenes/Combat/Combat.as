@@ -14456,6 +14456,8 @@ public class Combat extends BaseContent {
                 outputText("You run as fast as you can, taking random corridors and running past the confused enemies all the way back to the labyrinth entrance. You lose the slug-woman quickly, however your flight attracts more attention, forcing you all the way back to the surface. \n\n");
                 SceneLib.dungeons.ebonlabyrinth.room = 1;
                 SceneLib.dungeons.ebonlabyrinth.depth = 0;
+                inCombat = false;
+                clearStatuses(false);
                 doNext(playerMenu);
             } else {
                 outputText("You're trapped in your foe's domain - there is nowhere to run!\n\n");
