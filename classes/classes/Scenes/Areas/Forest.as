@@ -371,20 +371,12 @@ use namespace CoC;
 							return (flags[kFLAGS.LUNA_FOLLOWER] == 2);
 						},
 						chance: 2
-					});
-					/*
-					{
-						name  : "mimic",
-						call  : curry(game.mimicScene.mimicTentacleStart, 3),
-						when  : fn.ifLevelMin(3),
-						chance: 0.50
 					}, {
-						name  : "succubus",
-						call  : game.succubusScene.encounterSuccubus,
-						when  : fn.ifLevelMin(3),
+						name: "mimic",
+						when: fn.ifLevelMin(3),
+						call: curry(SceneLib.mimicScene.mimicTentacleStart, 1),
 						chance: 0.50
-					}
-					*/
+					});
 			_deepwoodsEncounter = Encounters.group("deepwoods", /*CoC.instance.commonEncounters,*/ {
 				name: "shrine",
 				when: function():Boolean {

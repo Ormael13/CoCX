@@ -34,14 +34,14 @@ public class GoblinShaman extends Goblin
 			}
 			//Spell time!
 			//Charge Weapon
-			if (spellChooser == 0 && fatigue <= (100 - spellCostCharge)) {
+			if (spellChooser == 0 && mana >= spellCostCharge) {
 				outputText("The goblin utters word of power, summoning an electrical charge around her staff. <b>It looks like she'll deal more physical damage now!</b>");
 				createStatusEffect(StatusEffects.ChargeWeapon, 25 * spellMultiplier(), 0, 0, 0);
 				this.weaponAttack += 25 * spellMultiplier();
-				fatigue += spellCostCharge;
+				mana -= spellCostCharge;
 			}
 			//Blind
-			else if (spellChooser == 1 && fatigue <= (100 - spellCostBlind)) {
+			else if (spellChooser == 1 && mana >= spellCostBlind) {
 				outputText("The goblin glares at you and points at you! A bright flash erupts before you!  ");
 				if ((!player.perkv1(IMutationsLib.GorgonEyesIM) >= 1 && rand(player.inte / 5) <= 4) && !player.hasPerk(PerkLib.BlindImmunity)) {
 					outputText("<b>You are blinded!</b>");
@@ -53,10 +53,10 @@ public class GoblinShaman extends Goblin
 				else {
 					outputText("You manage to blink in the nick of time!");
 				}
-				fatigue += spellCostBlind;
+				mana -= spellCostBlind;
 			}
 			//Whitefire
-			else if (spellChooser == 2 && fatigue <= (100 - spellCostWhitefire)) {
+			else if (spellChooser == 2 && mana >= spellCostWhitefire) {
 				outputText("The goblin narrows her eyes and focuses her mind with deadly intent. She snaps her fingers and you are enveloped in a flash of white flames!  ");
 				var damage:int = inte + rand(50) * spellMultiplier();
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
@@ -74,32 +74,33 @@ public class GoblinShaman extends Goblin
 				else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) damage *= 3.5;
 				damage = Math.round(damage);
 				player.takeFireDamage(damage, true);
-				fatigue += spellCostWhitefire;
+				mana -= spellCostWhitefire;
 			}
 			//Arouse
-			else if (spellChooser == 3 && fatigue <= (100 - spellCostArouse)) {
+			else if (spellChooser == 3 && mana >= spellCostArouse) {
 				outputText("She makes a series of arcane gestures, drawing on her lust to inflict it upon you! ");
 				var lustDamage:int = (inte / 10) + (player.lib / 10) + rand(10) * spellMultiplier();
 				lustDamage = lustDamage * (EngineCore.lustPercent() / 100);
 				player.dynStats("lus", lustDamage, "scale", false);
 				outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDamage * 10) / 10) + "</font>)</b>");
-				fatigue += spellCostArouse;
+				mana -= spellCostArouse;
 			}
 			//Heal
-			else if (spellChooser == 4 && fatigue <= (100 - spellCostHeal)) {
+			else if (spellChooser == 4 && mana >= spellCostHeal) {
 				outputText("She focuses on her body and her desire to end pain, trying to draw on her arousal without enhancing it.");
 				var temp:int = int(10 + (inte/2) + rand(inte/3)) * spellMultiplier();
 				outputText("She flushes with success as her wounds begin to knit! <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
 				addHP(temp);
-				fatigue += spellCostHeal;
+				mana -= spellCostHeal;
 			}
 			//Might
-			else if (spellChooser == 5 && fatigue <= (100 - spellCostMight)) {
+			else if (spellChooser == 5 && mana >= spellCostMight) {
 				outputText("She flushes, drawing on her body's desires to empower her muscles and toughen her up.");
 				outputText("The rush of power flows through her body.");
 				statStore.addBuffObject({str:+20 * spellMultiplier(), tou:+20 * spellMultiplier()},"GoblinMight")
-				fatigue += spellCostMight;
+				mana -= spellCostMight;
 			}
+			else outputText("[Themonster] tries to cast something, but fails miserably. Seems like she's out of mana!");
 		}
 		
 		private function spellMultiplier():Number {

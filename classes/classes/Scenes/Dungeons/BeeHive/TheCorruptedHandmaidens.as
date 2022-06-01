@@ -8,7 +8,7 @@ import classes.*;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
 
-	public class TheCorruptedHandmaidens extends BeeGuards {
+public class TheCorruptedHandmaidens extends BeeGuards {
 		
 		public function corruptedHandmaidensStinger():void {
 			outputText("One of the handmaidens strikes through your defenses, trying to burrow her stinger in. ");
@@ -40,7 +40,7 @@ import classes.internals.ChainedDrop;
 		
 		override protected function performCombatAction():void {
 			if (monsterIsStunned()) removeStatusEffect(StatusEffects.CHCompellingAria);
-			if (hasStatusEffect(StatusEffects.CHCompellingAria)) corruptedHandmaidensCompellingAria();
+			else if (hasStatusEffect(StatusEffects.CHCompellingAria)) corruptedHandmaidensCompellingAria();
 			else {
 					if (rand(2) == 0 && !hasStatusEffect(StatusEffects.AbilityCooldown1) && !hasStatusEffect(StatusEffects.AbilityCooldown2)) {
 					if (!hasStatusEffect(StatusEffects.AbilityCooldown1)) corruptedHandmaidensCompellingAria();
