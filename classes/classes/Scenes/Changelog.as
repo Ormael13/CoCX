@@ -25,7 +25,7 @@ public class Changelog extends BaseContent
 		}
 		private function Changelog41():void {
 			clearOutput();
-			outputText("(Part 3/3) <b>Version 0.8s4:</b>\n\n");
+			outputText("(Part 3/3) <b>Version 0.8s4 (Drider Triplets, Perk-o-calipse 7 (only around 30+ perks this time), many new equipable items / grey spells, truckload list of changes too many to meantion briefly major ones, tons upon tons of QoL changes, massive list of bugfixes):</b>\n\n");
 			outputText("-Lizard morphs will recieve +100 fatigue as race bonus (up from +30).\n");
 			outputText("-Aside few cases all the races half-stages was removed. You now either is some race or not, no half-race stage.\n");
 			outputText("-Soul Sense ??? submenu helps to find some otherwise hard to repeadly meet npc's before they come to camp.\n");
@@ -153,8 +153,8 @@ public class Changelog extends BaseContent
 			outputText("current Speed value, Half-Frost Wyrm or Half Spider-morph racial bonus been attained super easy, Mysterious Seed not causing for misc items menu appear as inventory submenu, unable to add arcane circuits to 5th arcane circle, doppleganger fight won't drag unnecessary due to getting messly 1k lust after 5th round in fight, Gazer Eyes mutation not keeping True seeing perk, Magical Eye Drops as item ");
 			outputText("find in Caves instead of Eye Drops, raiju tf removing/humanizing raiju paws, picking no elemental during minions turn skipping many following up phases of the turn, epic/legendary/mythical perks for stats not affecting monsters, harpy wings not setting shark score to 0, Siren been excluded form races list for appearance screen, Minor Minerva and parsertag, Encaps. pod multicockdescript, Elf hair ");
 			outputText("mutation, holiday events appearing in Ingnam/prison, Minotaur-Dormammu bug for all damage sources, equipping at once specific combinations of melee weapon and shield when not meeting req. to do so, Blood Chains too long stun duration, cyclop/gazer scores not included in chimera race check, Wood Elf perks not adding extra shoot & not affecting Skypiercer, Sand Mother finally remembered that she ");
-			outputText("can use spells, some spell teaching items allowing to learn more than 1 spell per use, Oswald not selling backpacks when PC got none\n");/*ostatni punkt changelogu
-			outputText("<b>Version 0.8s5:</b>\n\n\n");
+			outputText("can use spells, some spell teaching items allowing to learn more than 1 spell per use, Oswald not selling backpacks when PC got none\n\n");
+			outputText("<b>Version 0.8s5:</b>\n\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -162,7 +162,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
+			outputText("-Fixed Bugs: \n");/*ostatni punkt changelogu
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
@@ -326,7 +326,7 @@ public class Changelog extends BaseContent
 		}
 		private function Changelog40():void {
 			clearOutput();
-			outputText("(Part 2/3) <b>Version 0.8s4:</b>\n\n");
+			outputText("(Part 2/3) <b>Version 0.8s4 (Drider Triplets, Perk-o-calipse 7 (only around 30+ perks this time), many new equipable items / grey spells, truckload list of changes too many to meantion briefly major ones, tons upon tons of QoL changes, massive list of bugfixes):</b>\n\n");
 			outputText("-New melee weapon (by Ormael): Amphyst/Ruby/Sapphire/Topaz Staff - buyable in Tel'Adre Tower. 2 atk, costs 240 gems, increase matching type of element attacks (sapphire > ice and etc.) by 40%, Wizard's Focus (20%), staff type weapon.\n");
 			outputText("-New melee weapon (by Ormael): Dual Katana - dropped by corrupted flesh golems. Cost 1200 gems. Base atk is 15. It's Dual Large weapon belonging to dueling sword type.\n");
 			outputText("-New melee weapon (by Ormael): Dual Lance - dropped by corrupted flesh golems. Cost 960 gems. Base atk is 12. It's Dual Normal weapon belonging to spear type. When used in Charge special would hit twice.\n");
@@ -507,7 +507,7 @@ public class Changelog extends BaseContent
 			outputText("-Fixed Bugs: Morph option at Aether Twins leading to Feed page, possibility to equip by Jiangshi PC items from melee/range weapons, armor, underwear cathegories, Sextuple Thrust cooldown frozen, Woodcutting location in Places req. 3x more visits that Quarry, White Book teaching few spells at once, penatly to acc for melee weapons applied even if PC not use deal melee weapons, ");
 			outputText("Angst Daggers not been equippable with dual wield perk, some of combat debuffs not clearing up after combat, Dinah been in false training mode when Luna is actualy training/leveling herself, error in map display for one of Den of Desire rooms, Bee Hive entrance skipping bee guards andf afterwards showing wrong desc of the room until clearing dungeon, button on 2nd page of ");
 			outputText("unique sex scenes not leading to 1st page, Mysterious Seed missing from Unequip/Misc menu\n\n");
-			outputText("(Part 1/3) <b>Version 0.8s4:</b>\n\n");
+			outputText("(Part 1/3) <b>Version 0.8s4 (Drider Triplets, Perk-o-calipse 7 (only around 30+ perks this time), many new equipable items / grey spells, truckload list of changes too many to meantion briefly major ones, tons upon tons of QoL changes, massive list of bugfixes):</b>\n\n");
 			outputText("-New tier 0 intelligence lvl-up perk: Spellpower: Grey. Req. Grey Magic perk, 50+ int and lvl 3+. Effect: Increases grey spell strength by 15% and mana pool by 75.\n");
 			outputText("-New tier 0 misc lvl-up perk: Melee Weapons Mastery. Req. 10+ str/tou/spe. Effect: Decrease by ~20% needed exp to level up each melee weapon mastery type and grants 200% more of base mastery exp gains.\n");
 			outputText("-New tier 0 misc lvl-up perk: Melee Weapons Mastery (Ex). Req. Melee Weapons Mastery perk, lvl 2+ and 20+ str/tou/spe. Effect: Decrease by ~45% needed exp to level up each melee weapon mastery type and double mastery gains on crit hits (2x -> 4x).\n");

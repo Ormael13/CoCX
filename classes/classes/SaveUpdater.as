@@ -1678,6 +1678,7 @@ public class SaveUpdater extends NPCAwareContent {
 			doNext(camp.doCamp);
 			return;
 		}
+
 		if (int(flags[kFLAGS.MOD_SAVE_VERSION]) == 35) { //now using float to store versions!
 			clearOutput();
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.001) {
@@ -1819,34 +1820,32 @@ public class SaveUpdater extends NPCAwareContent {
 				updateMutationsv3("Thyroid");
 				updateMutationsv3("PThyroid");
 				updateMutationsv3("Adaptations");
-
-				function updateMutationsv3(type:String):void {
+				function updateMutationsv3(type:String):void{
 					var arrayVal:int = 0;
 					var array1:Array = MutationsLib.mutationsArray(type);
 					var array2:Array = IMutationsLib.mutationsArray(type);
-					for each(var pPerkArray:Array in array1) {
+					for each(var pPerkArray:Array in array1){
 						var x:int = pPerkArray.length;
-						while (x > 0) {
-							if (player.hasPerk(pPerkArray[x - 1])) {
+						while (x > 0){
+							if (player.hasPerk(pPerkArray[x-1])){
 								array2[arrayVal].acquireMutation(player, "none", x);
 								x--;
 								break;
 							}
 							x--;
 						}
-						while (x > 0) {
+						while (x > 0){
 							player.removePerk(pPerkArray[x]);
 							x--;
 						}
 						arrayVal++;
 					}
 				}
-
 				//CoC.instance.charCreation.setupMutations();
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.015;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.016) {
-				if (player.hasMutation(IMutationsLib.GorgonEyesIM)) {
+				if (player.hasMutation(IMutationsLib.GorgonEyesIM)){
 					player.HP = player.maxOverHP();
 					player.fatigue = 0;
 				}
@@ -1862,16 +1861,16 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.017;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.018) {
-				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) {
+				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0){
 					player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
 					flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
 				}
-				if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0) {
+				if(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0){
 					player.setWeaponRange(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID]) as WeaponRange);
 					flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = 0;
 				}
 				outputText("\nWeapons duplication from woodelves hunting party should now be fixed.... again.");
-				for each (var mutation:PerkType in MutationsLib.mutationsArray("", true)) {
+				for each (var mutation:PerkType in MutationsLib.mutationsArray("", true)){
 					player.removePerk(mutation);
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.018;
@@ -1891,9 +1890,7 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.021;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.022) {
-				if (AdventurerGuild.Slot04Cap >= 5) {
-					AdventurerGuild.Slot05Cap = 10;
-				}
+				if (AdventurerGuild.Slot04Cap >= 5) AdventurerGuild.Slot05Cap = 10;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.022;
 			}
 			flags[kFLAGS.MOD_SAVE_VERSION] = 36.0;
@@ -1905,51 +1902,50 @@ public class SaveUpdater extends NPCAwareContent {
 		if (int(flags[kFLAGS.MOD_SAVE_VERSION]) == 36) {
 			clearOutput();
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.001) {
+				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) {
+					if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1,1);
+					else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1, 0, 0, 1);
+					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1);
+				}
+				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2)) {
+					if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1,2);
+					else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX,2,0,0,1);
+					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2);
+				}
+				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3)){
+					if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1,3);
+					else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX,3,0,0,1);
+					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3);
+				}
+				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)){
+					if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1,4);
+					else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX,4,0,0,1);
+					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4);
+				}
+				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5)) {
+					if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1,5);
+					else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 5, 0, 0, 1);
+					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5);
+				}
+				if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6)) {
+					if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1,6);
+					else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX,6,0,0,1);
+					player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6);
+				}
+				if (player.hasPerk(PerkLib.AscensionHerosLineage)) player.ascensionPerkPoints -= 5;
 				flags[kFLAGS.GARGOYLE_QUEST] = flags[kFLAGS.GARGOYLE_QUEST] > 0 ? 1 : 0;
 				outputText("\nThe gargoyle quest tracker should be fixed by now. Otherwise, please report it again.");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.001;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.002) {
+				flags[kFLAGS.GARGOYLE_QUEST] = flags[kFLAGS.GARGOYLE_QUEST] > 0 ? 1 : 0;
+				outputText("\nThe gargoyle quest tracker should be fixed by now. Otherwise, please report it again.");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.002;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;
 		}
-			/*
-            flags[kFLAGS.MOD_SAVE_VERSION] = 36;
-            clearOutput();
-            outputText("Text.");
-            //Jtecx fixes
-            if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) {
-                if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1,1);
-                else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1, 0, 0, 1);
-                player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1);
-            }
-            if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2)) {
-                if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1,2);
-                else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX,2,0,0,1);
-                player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2);
-            }
-            if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3)){
-                if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1,3);
-                else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX,3,0,0,1);
-                player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3);
-            }
-            if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)){
-                if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1,4);
-                else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX,4,0,0,1);
-                player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4);
-            }
-            if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5)) {
-                if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1,5);
-                else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 5, 0, 0, 1);
-                player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5);
-            }
-            if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6)) {
-                if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1,6);
-                else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX,6,0,0,1);
-                player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6);
-            }
-            if (player.hasPerk(PerkLib.AscensionHerosLineage)) player.ascensionPerkPoints -= 5;
-            */
 		camp.doCamp();
 	}
 

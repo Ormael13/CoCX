@@ -249,8 +249,8 @@ public class CoC extends MovieClip
         debug = false;
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8s4";
-			version = ver + " (<b>Drider Triplets, Perk-o-calipse 7 (only around 30+ perks this time), many new equipable items / grey spells, truckload list of changes too many to meantion briefly major ones, tons upon tons of QoL changes, massive list of bugfixes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8s5";
+			version = ver + " (<b></b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);
