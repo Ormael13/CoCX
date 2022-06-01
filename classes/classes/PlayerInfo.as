@@ -1985,9 +1985,13 @@ public class PlayerInfo extends BaseContent {
 			HPChange(player.spe, false);
 			statScreenRefresh();
 		}
-		//if (perk.ptype == PerkLib.RacialParagon) {
-		//	flags[kFLAGS.APEX_SELECTED_RACE] = Race.ALL_RACES[player.race];	//How do I get the current race id....
-		//}
+		if (perk.ptype == PerkLib.RacialParagon) {
+			var list:Array = Races.AllRacesByName;
+			list = sortedBy(list, function (a:Race):int {
+				return player.racialScoreCached(a);
+			}, true);
+			flags[kFLAGS.APEX_SELECTED_RACE] = list[0].id;
+		}
 		if (player.perkPoints > 0) {
 			doNext(perkBuyMenu);
 		} else {
