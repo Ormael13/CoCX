@@ -111,7 +111,13 @@ public class Mimic extends Monster {
         this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
         this.level = 6;
         this.gems = rand(30) + 11;
-        this.drop = new WeightedDrop().add(consumables.PPHILTR, 4).add(consumables.NUMBOIL, 4).add(consumables.HUMMUS_, 3).add(consumables.INCUBID, 1).add(consumables.SUCMILK, 1).add(consumables.REDUCTO, 1);
+        this.drop = new WeightedDrop()
+            .add(consumables.PPHILTR, 4)
+            .add(consumables.NUMBOIL, 4)
+            .add(consumables.HUMMUS_, 3)
+            .add(consumables.INCUBID, 1)
+            .add(consumables.SUCMILK, 1)
+            .add(consumables.REDUCTO, 1);
         this.special1 = mimicBite;
         checkMonster();
     }
