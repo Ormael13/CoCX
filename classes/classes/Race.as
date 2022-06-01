@@ -4,6 +4,7 @@ import classes.internals.Utils;
 import classes.internals.race.ConditionedRaceScoreBuilder;
 import classes.internals.race.RaceScoreBuilder;
 import classes.internals.race.RaceTierBuilder;
+import classes.internals.race.RaceTierRequirement;
 import classes.internals.race.RacialRequirement;
 
 public class Race {
@@ -173,8 +174,15 @@ public class Race {
 	public function getTier(body:BodyData, score:int=-1):RaceTier {
 		if (score < 0) score = this.totalScore(body);
 		var tier:RaceTier = null;
+		var prev:Boolean = false;
 		for each(var i:RaceTier in tiers) {
-			if (i.check(body, score)) tier = i;
+			if (i.requiresPreviousTier && !prev) continue;
+			if (i.check(body, score)) {
+				tier = i;
+				prev = true;
+			} else {
+				prev = false;
+			}
 		}
 		return tier;
 	}
@@ -291,7 +299,24 @@ public class Race {
 				s += "[font-default]"
 			}
 			s += tier.describeBuffs(present ? body : null);
-			s += "[/font]\n";
+			s += "[/font]";
+			if (tier.requirements.length > 0) {
+				s += '. Requires ';
+				s += tier.requirements.map(Utils.varargify(function(rtr:RaceTierRequirement):String {
+					// green: pass, red: pass core fail req, black: fail req
+					//noinspection JSReferencingMutableVariableFromClosure
+					return (score < tier.minScore ? "[font-default]" :
+									rtr.check(body) ? "[font-green]" : "[font-red]") +
+							rtr.name + "[/font]"
+				})).join(", ");
+				if (tier.requiresPreviousTier) {
+					s += " and previous tier";
+				}
+				s+=".";
+			} else if (tier.requiresPreviousTier) {
+				s += ". Requires previous tier."
+			}
+			s += '\n';
 		}
 		return s;
 	}
