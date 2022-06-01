@@ -399,9 +399,9 @@ import coc.view.ButtonDataList;
 			outputText("When you hear stories about “golems”, they're often speaking of True Golems. Almost common a sight as their dummy cousins, true golems are far stronger, posing a threat to even seasoned adventurers. Although they still require a link to their master's magic, their ‟leash” is far longer, allowing the golem and golemancer to be nowhere near one another, and can even feed off environmental magic in particularly rich atmospheres. A clever golemancer can even take advantage of the golem's powerful intelligence to give it complex commands, allowing it to operate without the need for further interference to handle changes.");
 			headerSub("Deviant Golems");
 			outputText("Deviant golems are those with a modified core or body, often caused by outside influences, frequently resulting in independent operations without the need of a golemancer's magical link. Common rumors are simply that their masters gave them too much power or sent them to a region too rich in magical energy, overloading and severing their links.")
-outputText("\n\nAside from independence, many deviant golems exhibit bizarre powers and techniques ill-fitting an obedient construct. While noone knows the source of these constructs, it is theorized that some golemancers strayed too far from the code and produced abominations. Whatever the case, their unexpected powers can result in them being a far greater threat to those prepared to fight plain old true golems.");
+			outputText("\n\nAside from independence, many deviant golems exhibit bizarre powers and techniques ill-fitting an obedient construct. While noone knows the source of these constructs, it is theorized that some golemancers strayed too far from the code and produced abominations. Whatever the case, their unexpected powers can result in them being a far greater threat to those prepared to fight plain old true golems.");
 			outputText("\n\n(Rewritten By: Furrin Gok; Original By: Ormael)");
-			setCodexMenusAfterDisplay();
+			//setCodexMenusAfterDisplay();
 		}
 
 		private function codexEntryGooGirls():void {
