@@ -307,7 +307,6 @@ public class SceneLib {
 
     public static var uniqueSexScene:UniqueSexScenes = new UniqueSexScenes();
 
-    public function SceneLib() {
-    }
+    public static var mimicScene:MimicScene = new MimicScene();
 }
 }

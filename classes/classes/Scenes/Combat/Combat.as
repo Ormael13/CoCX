@@ -679,6 +679,7 @@ public class Combat extends BaseContent {
                 inCombat = false;
                 if (player.hasStatusEffect(StatusEffects.SoulArena)) player.removeStatusEffect(StatusEffects.SoulArena);
                 if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) player.removeStatusEffect(StatusEffects.SoulArenaGaunlet);
+                //Prison is unfinished, shit is old, I'm not adding new monsties here.
                 if (!prison.inPrison && flags[kFLAGS.PRISON_CAPTURE_CHANCE] > 0 && rand(100) < flags[kFLAGS.PRISON_CAPTURE_CHANCE] && (prison.trainingFeed.prisonCaptorFeedingQuestTrainingIsTimeUp() || !prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists()) && (monster.short == "goblin" || monster.short == "goblin assassin" || monster.short == "imp" || monster.short == "imp lord" || monster.short == "imp warlord" || monster.short == "hellhound" || monster.short == "minotaur" || monster.short == "satyr" || monster.short == "gnoll" || monster.short == "gnoll spear-thrower" || monster.short == "basilisk")) {
                     outputText("  You feel yourself being dragged and carried just before you black out.");
                     doNext(prison.prisonIntro);
@@ -5047,15 +5048,6 @@ public class Combat extends BaseContent {
                 (monster as Alraune).trapLevel(-6);
             }
         }
-        /*if(player.hasPerk(PerkLib.DoubleAttack) && player.spe >= 50 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] < 2) {
-		if(player.hasStatusEffect(StatusEffects.FirstAttack)) player.removeStatusEffect(StatusEffects.FirstAttack);
-		else {
-			//Always!
-			if(flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0) player.createStatusEffect(StatusEffects.FirstAttack,0,0,0,0);
-			//Alternate!
-			else if(player.str < 61 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) player.createStatusEffect(StatusEffects.FirstAttack,0,0,0,0);
-		}
-	    }*/
         //"Brawler perk". Urta only. Thanks to Fenoxo for pointing this out... Even though that should have been obvious :<
         //Urta has fists and the Brawler perk. Don't check for that because Urta can't drop her fists or lose the perk!
         else if (SceneLib.urtaQuest.isUrta()) {
@@ -6109,9 +6101,7 @@ public class Combat extends BaseContent {
                     if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
                     if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
 					if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
-                    if (damage > 0) doPhysicalDamage(damage, false);
                     (monster as Doppleganger).mirrorAttack(damage);
-                    return;
                 }
                 // Stunning the doppleganger should now "buy" you another round.
             }
@@ -6128,9 +6118,13 @@ public class Combat extends BaseContent {
                     default:
                 }
             }
-            if ((damage <= 0) && ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll))) {
+            if (monster.hasStatusEffect(StatusEffects.MirroredAttack)) {//Doppelganger parry!
                 damage = 0;
-                outputText("Your attacks are deflected or blocked by [monster a] [monster name].");
+                monster.removeStatusEffect(StatusEffects.MirroredAttack);
+            }
+            else if ((damage <= 0) && ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll))) {
+                damage = 0;
+                outputText("Your attacks are deflected by [monster a] [monster name].");
             }
 			else {
 				if (player.weapon == weapons.VBLADE) {
@@ -6301,7 +6295,7 @@ public class Combat extends BaseContent {
 				if (player.weaponSpecials("Dual")) dualWieldNormalXP(meleeMasteryEXPgains);
 				if (player.weaponSpecials("Dual Large")) dualWieldLargeXP(meleeMasteryEXPgains);
             }
-            if (player.hasPerk(PerkLib.BrutalBlows) && player.str > 75) {
+            if (player.hasPerk(PerkLib.BrutalBlows) && player.str > 75 && damage > 0) {
                 if (monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage [monster a] [monster name]'s defenses!");
                 if (monster.armorDef - 5 > 0) monster.armorDef -= 5;
                 else monster.armorDef = 0;
@@ -14885,9 +14879,9 @@ public class Combat extends BaseContent {
 		if (Forgefather.gem == "emerald" && Forgefather.refinement == 4) damage *= 1.12;
 		if (Forgefather.gem == "emerald" && Forgefather.refinement == 5) damage *= 1.25;
         outputText("You focus on [Themonster], ");
-		if (player.statusEffectv1(StatusEffects.Flying) == 0) outputText("fold your wings and dive");
-		if (player.statusEffectv1(StatusEffects.Flying) == 1) outputText("direct your "+player.weaponFlyingSwordsName+" downward");
-		if (player.statusEffectv1(StatusEffects.Flying) == 2) outputText("fold your arms and dive");
+		if (player.statusEffectv2(StatusEffects.Flying) == 0) outputText("fold your wings and dive");
+		if (player.statusEffectv2(StatusEffects.Flying) == 1) outputText("direct your "+player.weaponFlyingSwordsName+" downward");
+		if (player.statusEffectv2(StatusEffects.Flying) == 2) outputText("fold your arms and dive");
 		outputText(", using gravity to increase the impact");
         if (player.hasPerk(PerkLib.DeathPlunge)) {
             if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
@@ -14896,12 +14890,12 @@ public class Combat extends BaseContent {
             else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
             else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
             outputText(" of your [weapon]. Your [weapon] strikes true, inflicting severe wounds as ");
-            if (player.lowerBody == LowerBody.HARPY && player.statusEffectv1(StatusEffects.Flying) != 1) {
+            if (player.lowerBody == LowerBody.HARPY && player.statusEffectv2(StatusEffects.Flying) != 1) {
                 outputText("your talons leave a bloody trail across your foe");
                 damage *= 1.5;
             }
 			else outputText("the rest of your body collides against your target" + (monster.plural?"s":"") + "");
-            if (player.statusEffectv1(StatusEffects.Flying) > 0 && player.weaponFlyingSwordsName != "nothing") {
+            if (player.statusEffectv2(StatusEffects.Flying) > 0 && player.weaponFlyingSwordsName != "nothing") {
 				outputText(". At the same time " + player.weaponFlyingSwordsName+" impales your target" + (monster.plural?"s":"") + "");
 				if (player.weaponFlyingSwordsAttack < 51) damage *= (1 + (player.weaponFlyingSwordsAttack * 0.03));
 				else if (player.weaponFlyingSwordsAttack >= 51 && player.weaponFlyingSwordsAttack < 101) damage *= (2.5 + ((player.weaponFlyingSwordsAttack - 50) * 0.025));
@@ -14918,12 +14912,12 @@ public class Combat extends BaseContent {
             }
 			damage *= (1 + PASPAS());
         } else {
-            if (player.lowerBody == LowerBody.HARPY && player.statusEffectv1(StatusEffects.Flying) != 1) {
+            if (player.lowerBody == LowerBody.HARPY && player.statusEffectv2(StatusEffects.Flying) != 1) {
                 outputText(" making a bloody trail with your talons");
                 damage *= 1.5;
             }
 			else outputText(" hitting your target with violence");
-			if (player.statusEffectv1(StatusEffects.Flying) > 0 && player.weaponFlyingSwordsName != "nothing") {
+			if (player.statusEffectv2(StatusEffects.Flying) > 0 && player.weaponFlyingSwordsName != "nothing") {
 				outputText(". At the same time " + player.weaponFlyingSwordsName+" impales your target" + (monster.plural?"s":"") + "");
 				if (player.weaponFlyingSwordsAttack < 51) damage *= (1 + (player.weaponFlyingSwordsAttack * 0.03));
 				else if (player.weaponFlyingSwordsAttack >= 51 && player.weaponFlyingSwordsAttack < 101) damage *= (2.5 + ((player.weaponFlyingSwordsAttack - 50) * 0.025));

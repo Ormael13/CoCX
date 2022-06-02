@@ -462,7 +462,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
                 minotaurEL(false); //replace - slime won't attack another slime
                 return;
             }
-            spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
+            spriteSelect(SpriteDb.s_darkgoogirlsprite);
             clearOutput();
             outputText("You take the turn at the end of the corridor and run right into a dark slime. For a few second the both of you consider each other before the slime shrugs and simply asks.\n\n");
             outputText("\"<i>No luck finding fluids that way?</i>\"");
@@ -471,7 +471,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             outputText("Well that was easy… you can only guess slimes don’t get much out of other slimes’ bodies. You proceed deeper into the labyrinth unhindered, though, you wish you indeed had found someone to milk the fluids off.\n\n");
         }
         else {
-            spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
+            spriteSelect(SpriteDb.s_darkgoogirlsprite);
             if (print) {
                 clearOutput();
                 outputText("As you wander into a new corridor, you come face to face with a purplish jelly-like woman. She giggles upon spotting you, her small, sphere-shaped core emitting an ominous light as she surges toward you with a gooey smile.\n\n");
