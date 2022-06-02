@@ -247,14 +247,19 @@ public class RaceScoreBuilder {
 		return tailType(Tail.NONE, score);
 	}
 	public function tailTypeAndCount(type:*, count:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
-		addRequirement(
-				RacialRequirement.joinAnd(
-						"tail",
-						" ",
-						slotRequirement(BodyData.SLOT_TAIL_COUNT, count, score, failScore, false),
-						slotRequirement(BodyData.SLOT_TAIL_TYPE, type, score, failScore)
-				), customName
-		)
+		var req:RacialRequirement = RacialRequirement.joinAnd(
+				"tail",
+				" ",
+				slotRequirement(BodyData.SLOT_TAIL_COUNT, count, score, failScore, false),
+				slotRequirement(BodyData.SLOT_TAIL_TYPE, type, score, failScore, false)
+		);
+		if (count is Number) {
+			if (count > 1) req.name += " tails";
+			else req.name += " tail";
+		} else {
+			req.name += " tail(s)"
+		}
+		addRequirement(req, customName);
 		return this;
 	}
 	public function tongueType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {

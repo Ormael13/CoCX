@@ -5557,6 +5557,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 							monster.addStatusValue(StatusEffects.NagaVenom, 3, dBdc1);
 						} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, dBdc1, 0);
+						if (player.hasPerk(PerkLib.ToxineMaster)) monster.statStore.addBuffObject({tou:-1}, "Poison",{text:"Poison"});
 						player.tailVenom -= player.VenomWebCost();
 						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 					}
@@ -5564,7 +5565,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 						outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
 						var dBdc2:Number = 1;
 						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBdc2 *= 2;
-						monster.statStore.addBuffObject({tou:-(dBdc2*2), spe:-(dBdc2*2)}, "Poison",{text:"Poison"});
+						if (player.hasPerk(PerkLib.ToxineMaster)) monster.statStore.addBuffObject({tou:-((dBdc2*2)+1), spe:-(dBdc2*2)}, "Poison",{text:"Poison"});
+						else monster.statStore.addBuffObject({tou:-(dBdc2*2), spe:-(dBdc2*2)}, "Poison",{text:"Poison"});
 						if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 							monster.addStatusValue(StatusEffects.NagaVenom, 3, dBdc2);
 						} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, dBdc2, 0);
@@ -5583,7 +5585,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 						lustdamage *= 0.14;
 						lustdamage *= dBdc3;
 						monster.teased(monster.lustVuln * lustdamage, false);
-						monster.statStore.addBuffObject({tou:-2}, "Poison",{text:"Poison"});
+						if (player.hasPerk(PerkLib.ToxineMaster)) monster.statStore.addBuffObject({tou:-3}, "Poison",{text:"Poison"});
+						else monster.statStore.addBuffObject({tou:-2}, "Poison",{text:"Poison"});
 						if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) {
 							monster.addStatusValue(StatusEffects.ManticoreVenom, 3, dBdc3);
 						} else monster.createStatusEffect(StatusEffects.ManticoreVenom, 0, 0, dBdc3, 0);
@@ -5594,13 +5597,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 						outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
 						var dBdc4:Number = 1;
 						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBdc4 *= 2;
-						monster.statStore.addBuffObject({spe:-dBdc4}, "Poison",{text:"Poison"});
+						if (player.hasPerk(PerkLib.ToxineMaster)) monster.statStore.addBuffObject({tou:-1, spe:-dBdc4}, "Poison",{text:"Poison"});
+						else monster.statStore.addBuffObject({spe:-dBdc4}, "Poison",{text:"Poison"});
 						var venomType:StatusEffectType = StatusEffects.NagaVenom;
 						if (player.racialScore(Races.NAGA) >= 23) venomType = StatusEffects.ApophisVenom;
 						if (monster.hasStatusEffect(venomType)) {
 							monster.addStatusValue(venomType, 2, 0.4);
 							monster.addStatusValue(venomType, 1, (dBdc4*0.4));
-						} else monster.createStatusEffect(venomType, (dBdc4*0.4), 0.4, 0, 0);
+						} else monster.createStatusEffect(venomType, (dBdc4 * 0.4), 0.4, 0, 0);
 						player.tailVenom -= player.VenomWebCost();
 						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 					}
@@ -5621,6 +5625,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 							damage4B *= dBdc5;
 							damage4B *= 1+(poisonScaling/10);
 							poisonScaling *= dBdc5;
+							if (player.hasPerk(PerkLib.ToxineMaster)) poisonScaling += 1;
 							monster.teased(monster.lustVuln * damage4B);
 							monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
 							if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
@@ -5639,6 +5644,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 								if (monster.lustVuln > 1) monster.lustVuln = 1;
 							}
 							player.tailVenom -= player.VenomWebCost();
+							if (player.hasPerk(PerkLib.ToxineMaster)) monster.statStore.addBuffObject({tou:-1}, "Poison",{text:"Poison"});
 							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 						}
 					}
@@ -5652,7 +5658,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 					outputText("\n");
 				}
 			}
-			if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < player.VenomWebCost()) outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!\n");
+			if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < player.VenomWebCost()) {
+				if (player.hasPerk(PerkLib.ToxineMaster) && player.hasKeyItem("Sky Poison Pearl") >= 0) {
+					outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness.\n");
+					monster.statStore.addBuffObject({tou:-1}, "Poison",{text:"Poison"});
+				}
+				else outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!\n");
+			}
 			if (player.weaponRangeName == "Hodr's bow" && !monster.hasStatusEffect(StatusEffects.Blind)) monster.createStatusEffect(StatusEffects.Blind, 1, 0, 0, 0);
 			outputText("\n");
 			if (flags[kFLAGS.ARROWS_SHOT] >= 1) EngineCore.awardAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE);

@@ -183,7 +183,7 @@ public class DilapidatedShrine extends BaseContent
 			var weaponClasses:Array = ["Gauntlet", "Sword", "Axe", "Mace/Hammer", "Dueling", "Polearm", "Spear", "Dagger", "Whip", "Exotic"]; //, "Thrown",  "Scythe", "Staff", "Tetsubo", "Ribbon"
 			var btnInt:int = 0;
 			var tempAry:Array = [];
-			outputText("Welcome. Here, you can trade your weapons in for some mastery in the related weapon type.\n");
+			outputText("Welcome. Here, you can offer your weapons to the god of war, consuming the weapon to gain knowledge of the battles its seen.\n");
 			for (var i:int = 0; i < inventory.getMaxSlots(); i++){
 				var weaponType:String = "";
 				var itemClassReplace:*;

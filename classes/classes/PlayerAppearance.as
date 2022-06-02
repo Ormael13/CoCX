@@ -86,6 +86,9 @@ public class PlayerAppearance extends BaseContent {
 		outputText("[pg]" + describeGear());
 		//MONEY!
 		outputText("[pg]" + describeMoney());
+		
+		if (debug) return; // don't print buttons if opened from debug menu
+		
 		menu();
 		addButton(0, "Next", playerMenu);
 		if (player.hasPerk(PerkLib.RacialParagon)) addButton(1, "Set Race.", ApexRaceSetting);
@@ -1029,9 +1032,12 @@ public class PlayerAppearance extends BaseContent {
 			outputText("[/font]");
 			if (rtier) {
 				if (rtier.hasBuffs()) {
-					outputText(" (");
-					outputText(rtier.describeBuffs(body));
-					outputText(")");
+					var s:String = rtier.describeBuffs(body);
+					if (s) {
+						outputText(" (");
+						outputText(s);
+						outputText(")");
+					}
 				}
 				outputText("[/font]");
 			}

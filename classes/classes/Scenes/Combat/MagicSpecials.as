@@ -6100,7 +6100,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function FusionSpecialFieryRageDeactivate():void {
 		clearOutput();
-		outputText("You release flame of anger ending your fiery rage.\n\n");
+		outputText("You extinguish your flames, calming down from your fiery rage.\n\n");
 		player.removeStatusEffect(StatusEffects.FieryRage);
 		enemyAI();
 	}
@@ -6167,3 +6167,4 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 }
 }
+
