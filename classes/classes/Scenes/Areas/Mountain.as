@@ -257,6 +257,10 @@ public class Mountain extends BaseContent
 						name:"hike",
 						chance:0.2,
 						call:hike
+					}, {
+						name: "mimic",
+						when: fn.ifLevelMin(3),
+						call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
 					})
 			;
 		}

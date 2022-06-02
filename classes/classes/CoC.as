@@ -11,11 +11,7 @@ package classes
 // BREAKING ALL THE RULES.
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Items.*;
-import classes.Parser.Parser;
-import classes.Scenes.*;
-import classes.Scenes.NPCs.JojoScene;
 import classes.Transformations.TransformationLib;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
@@ -69,7 +65,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 35.022;
+    public var modSaveVersion:Number = 36.002;
     public var levelCap:Number = 185;
 
     //Used to restrict random drops from overlapping uniques
@@ -253,8 +249,8 @@ public class CoC extends MovieClip
         debug = false;
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8s4";
-			version = ver + " (<b>Drider Triplets, Perk-o-calipse 7 (only around 30+ perks this time), many new equipable items / grey spells, truckload list of changes too many to meantion briefly major ones, tons upon tons of QoL changes, massive list of bugfixes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8s5";
+			version = ver + " (<b></b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);
