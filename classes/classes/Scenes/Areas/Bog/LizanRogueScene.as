@@ -17,10 +17,7 @@ public class LizanRogueScene extends BaseContent
 			clearOutput();
 			if (player.cor > 33 + player.corruptionTolerance) {
 				outputText("As you walk through the bog you happen upon a lone lizan male covered in " + monster.skinTone + " scales. Upon hearing your approach he jumps back, your sudden appearance must have surprised him. After an initial moment of surprise, the lizan tentatively sniffs the air between the two of you. Without warning, he jumps back, flashing his claws and releasing a loud hiss. Apparently he smells something he doesn't like. You ready for an attack, but he just sits there, making noise and puffing himself up. For all the ferocity he displays he doesn't attack, and you realize he's waiting for you to back down. What will you do?");
-				if (flags[kFLAGS.CODEX_ENTRY_LIZANS] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_LIZANS] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Lizans!</b>")
-				}
+				camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_LIZANS);
 				menu();
 				addButton(0, "Fight", fightLizan, false, null, null, "Fight the lizan!");
                 if (sceneHunter.other)
@@ -59,10 +56,7 @@ public class LizanRogueScene extends BaseContent
 
 		public function lizanMenu():void {
 			outputText("\n\nYou're not sure if the lizan wants to have sex with you or have a quick sparring match. You could just attack him and do whatever you want with him. What will you do?");
-			if (flags[kFLAGS.CODEX_ENTRY_LIZANS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_LIZANS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Lizans!</b>")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_LIZANS);
 			menu();
 			addButton(0, "Spar", fightLizan, true, null, null, "Do a spar session with the lizan!");
 			if (player.lust >= 33) addButton(1, "Sex", haveSexWithLizan).hint("Have some fun with the oh-so-sexy lizan.");

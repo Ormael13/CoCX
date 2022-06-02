@@ -104,7 +104,7 @@ Things you could add to the constructor:
 * `disabled = true`/`hidden=true` to make race disabled/hidden.
 * `chimeraTier = 0; grandChimeraTier = 0;` to disabled adding points to chimera/grand chimera.
 * `chimeraTier = <N>; grandChimeraTier = <N+1>;` to change default chimera/grand chimera min tiers from default 1 and 2.
-* `mutationThreshold = <N>;` By default always get bonuses from mutations and bloodlines. You can gate them behind certain score.
+* `mutationThreshold = <N>;` By default you get bonuses from mutations only after 3 points from other sources. You can change that number.
 
 ## Score calculation
 
@@ -203,7 +203,7 @@ addMutation(IMutationsLib.KitsuneThyroidGlandIM);
 addMutation(IMutationsLib.TwinHeartIM, +2);
 ```
 
-To gate mutation/bloodline bonuses behing certain score, set `mutatonThreshold` in the constructor. 
+To gate mutation/bloodline bonuses behing score different than default 5, set `mutatonThreshold` in the constructor. 
 
 ### finalizeScore
 

@@ -2,7 +2,6 @@
  * Coded by aimozg on 29.09.2017.
  */
 package coc.view {
-import classes.BaseContent;
 import classes.CoC;
 import classes.PerkLib;
 import classes.StatusEffects;
@@ -33,15 +32,16 @@ public class ButtonData {
 		if (toolTipHeader is String) this.toolTipHeader = toolTipHeader;
 		return this;
 	}
-	public function disable(toolTipText:String=null,toolTipHeader:String=null):ButtonData {
+	public function disable(toolTipText:String=null,toolTipHeader:String=null, text:String = null):ButtonData {
 		this.enabled = false;
 		if (toolTipText is String) this.toolTipText = toolTipText;
 		if (toolTipHeader is String) this.toolTipHeader = toolTipHeader;
+		if (text is String) this.text = text;
 		return this;
 	}
-	public function disableIf(condition:Boolean,toolTipText:String=null,toolTipHeader:String=null):ButtonData {
+	public function disableIf(condition:Boolean,toolTipText:String=null,toolTipHeader:String=null, text:String = null):ButtonData {
 		if (this.enabled && condition) {
-			disable(toolTipText,toolTipHeader);
+			disable(toolTipText,toolTipHeader, text);
 		}
 		return this;
 	}

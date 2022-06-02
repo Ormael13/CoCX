@@ -1761,7 +1761,7 @@ public function femoitSexIntro():void
 		outputText("\n\nYou encourage her to breathe deeply, to try and focus on pushing in time with the contractions.  Benoite groans but does as you instruct, and within moments she is gritting her teeth as the unmistakable form of an egg bulges from her pussy");
 		if (silly()) outputText(".  It's shaped like a complex rhomboidal polygon with 15 sides.");
 		else outputText(", the smoothly curved peak of a jade egg beginning to crest.");
-		outputText("  With a strangled cry of orgasm tinged with pained relief, Benoite pushes it from her passage into your hands. Slick with juices, the egg makes for quite a handful and you find yourself struggling to safely cradle it within your grasp. You quickly place it into the makeshift next at her feet.");
+		outputText("  With a strangled cry of orgasm tinged with pained relief, Benoite pushes it from her passage into your hands. Slick with juices, the egg makes for quite a handful and you find yourself struggling to safely cradle it within your grasp. You quickly place it into the makeshift nest at her feet.");
 
 		if (flags[kFLAGS.FEMOIT_EGGS] >= 2)
 		{
@@ -1769,7 +1769,7 @@ public function femoitSexIntro():void
 
 			if (benoitRegularPreggers())
 			{
-				outputText("\n\nHer labors are over quickly; the clutch isn't that big, and her muscles are already well prepared.  Soon, she's squatting over a pile of" + num2Text(flags[kFLAGS.FEMOIT_EGGS]) + " eggs.");
+				outputText("\n\nHer labors are over quickly; the clutch isn't that big, and her muscles are already well prepared.  Soon, she's squatting over a pile of " + num2Text(flags[kFLAGS.FEMOIT_EGGS]) + " eggs.");
 			}
 			else if (benoitHeavyPreggers())
 			{

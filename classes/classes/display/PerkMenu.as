@@ -1185,8 +1185,8 @@ public class PerkMenu extends BaseContent {
 
 	public function perkDatabase(page:int=0, count:int=50):void {
 		var allPerks:Array = PerkTree.obtainablePerks().sort();
-		var mutationList:Array = MutationsLib.mutationsArray("",true);
-		var mutationList2:Array = IMutationsLib.mutationsArray("");
+		var mutationList:Array = MutationsLib.mutationsArray("All",true);
+		var mutationList2:Array = IMutationsLib.mutationsArray("All");
 
 		var temp:Array = [];
 		for each(var pPerks:PerkType in allPerks) {
@@ -1249,15 +1249,13 @@ public class PerkMenu extends BaseContent {
 		//var pCount:int = 0;
 
 		function pDictPrep():void{	//Perk Dictionary preperations/Filter
-			var pList1:Array = MutationsLib.mutationsArray("",true); //No Mutations Perks
+			var pList1:Array = MutationsLib.mutationsArray("All",true); //No Mutations Perks
 			var pList2:Array = PerkLib.enemyPerkList(); //No Enemy Perks.
 			var pList3:Array = PerkLib.gearPerks();	//No Gear Perks.
 			var pList4:Array = PerkLib.weaPerks();	//No Weapons Perks.
 			//function pSpecialRem = No Ascension/History/Bloodline/PastLife Perks
-			var pList5:Array = MutationsLib.mutationsArray("Deprecated", true);
-			var pList6:Array = IMutationsLib.mutationsArray("");
-			var pList7:Array = IMutationsLib.mutationsArray("Deprecated");
-			var mArray:Array = arrMerge(pList1, pList2, pList3, pList4, pList5, pList6, pList7).sort();
+			var pList5:Array = IMutationsLib.mutationsArray("All");
+			var mArray:Array = arrMerge(pList1, pList2, pList3, pList4, pList5);
 			for each (var perkTrue:PerkType in perkDict){
 				if (!(mArray.indexOf(perkTrue) >= 0) && pSpecialRem(perkTrue)){
 					tPerkList.push(perkTrue);
@@ -1265,8 +1263,6 @@ public class PerkMenu extends BaseContent {
 			}
 			//trace(pList1.length + " < 1 - 2 > " + pList2.length + "\n");
 		}
-
-
 
 		function pSpecialRem(perkTrue:PerkType):Boolean{	//SpecialCases
 			var pName:String = perkTrue.name();
@@ -1542,11 +1538,9 @@ public class PerkMenu extends BaseContent {
 		var maxpPerks:int = 0;					//DebugLine
 
 		function initSet():void {
-			var mutationList:Array = MutationsLib.mutationsArray("",true);
-			var mutationList2:Array = MutationsLib.mutationsArray("Deprecated", true);
-			var mutationList3:Array = IMutationsLib.mutationsArray("");
-			var mutationList4:Array = IMutationsLib.mutationsArray("Deprecated");
-			var mArray:Array = arrMerge(mutationList, mutationList2, mutationList3, mutationList4)
+			var mutationList:Array = MutationsLib.mutationsArray("All",true);
+			var mutationList2:Array = IMutationsLib.mutationsArray("All");
+			var mArray:Array = arrMerge(mutationList, mutationList2);
 
 
 			for each(var pPerks:PerkClass in pPerkList) { //Cleans up the list of mutations and no-perk requiring perks
@@ -1682,7 +1676,7 @@ public class PerkMenu extends BaseContent {
 		for(var i:int=0;i<arrays.length;i++){
 			result = result.concat(arrays[i]);
 		}
-		return result;
+		return result.sort();
 	}
 
 	/* [INTERMOD: revamp]

@@ -4,17 +4,16 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Items.Consumables.SimpleConsumable;
-import classes.Scenes.Places.Mindbreaker;
-import classes.Scenes.Places.TrollVillage;
-import classes.Scenes.Places.WoodElves;
 import classes.Scenes.Camp.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
-import classes.lists.Gender;
+import classes.Scenes.Places.Mindbreaker;
+import classes.Scenes.Places.TrollVillage;
+import classes.Scenes.Places.WoodElves;
 import classes.display.SpriteDb;
+import classes.lists.Gender;
 
 import coc.view.ButtonDataList;
 import coc.view.MainView;
@@ -2074,7 +2073,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasPerk(PerkLib.JobElementalConjurer) || player.hasPerk(PerkLib.JobGolemancer) || player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(1, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
 		else addButtonDisabled(1, "Winions", "You need to be able to make some minions that fight for you to use this option.");
 		addButton(2, "Misc", campMiscActions).hint("Misc options to do things in and around [camp].");
-		addButton(3, "SpentTime", campSpendTimeActions).hint("Check your options to spend time in and around [camp].");
+		addButton(3, "Spend Time", campSpendTimeActions).hint("Check your options to spend time in and around [camp].");
 		addButton(4, "NPC's", SparrableNPCsMenu);
 		//addButton(5, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
 		if (player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(7, "Herbalism", HerbalismMenu).hint("Use ingrediants to craft poultrice and battle medicines.")
@@ -3740,22 +3739,8 @@ public class Camp extends NPCAwareContent{
 
 //For shit that breaks normal sleep processing.
 	public function sleepWrapper():void {
-		if (model.time.hours == 16) timeQ = 14;
-		if (model.time.hours == 17) timeQ = 13;
-		if (model.time.hours == 18) timeQ = 12;
-		if (model.time.hours == 19) timeQ = 11;
-		if (model.time.hours == 20) timeQ = 10;
-		if (model.time.hours == 21) timeQ = 9;
-		if (model.time.hours == 22) timeQ = 8;
-		if (model.time.hours >= 23) timeQ = 7;
-		if (model.time.hours == 0) timeQ = 6;
-		if (model.time.hours == 1) timeQ = 5;
-		if (model.time.hours == 2) timeQ = 4;
-		if (model.time.hours == 3) timeQ = 3;
-		if (model.time.hours == 4) timeQ = 2;
-		if (model.time.hours == 5) timeQ = 1;
+		timeQ = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
 		if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Ember" || flags[kFLAGS.SLEEP_WITH] == 0)) timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
-		clearOutput();
 		clearOutput();
 		if (timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n");
 		else outputText("You lie down to resume sleeping for the remaining hour.\n");
@@ -4274,6 +4259,10 @@ public function rebirthFromBadEnd():void {
 	private function buildCampWall():void {
 		var helpers:int = 0;
 		var helperArray:Array = [];
+		if (flags[kFLAGS.ANT_KIDS] > 100) {
+			helperArray[helperArray.length] = "A group of your ant children";
+			helpers++;
+		}
 		if (marbleFollower()) {
 			helperArray[helperArray.length] = "Marble";
 			helpers++;
@@ -4284,10 +4273,6 @@ public function rebirthFromBadEnd():void {
 		}
 		if (followerKiha()) {
 			helperArray[helperArray.length] = "Kiha";
-			helpers++;
-		}
-		if (flags[kFLAGS.ANT_KIDS] > 100) {
-			helperArray[helperArray.length] = "group of your ant children";
 			helpers++;
 		}
 		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 10;
@@ -4358,6 +4343,10 @@ public function rebirthFromBadEnd():void {
 	private function buildCampGate():void {
 		var helpers:int = 0;
 		var helperArray:Array = [];
+		if (flags[kFLAGS.ANT_KIDS] > 100) {
+			helperArray[helperArray.length] = "A group of your ant children";
+			helpers++;
+		}
 		if (marbleFollower()) {
 			helperArray[helperArray.length] = "Marble";
 			helpers++;
@@ -4368,10 +4357,6 @@ public function rebirthFromBadEnd():void {
 		}
 		if (followerKiha()) {
 			helperArray[helperArray.length] = "Kiha";
-			helpers++;
-		}
-		if (flags[kFLAGS.ANT_KIDS] > 100) {
-			helperArray[helperArray.length] = "group of your ant children";
 			helpers++;
 		}
 		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 100;

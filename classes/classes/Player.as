@@ -3442,10 +3442,6 @@ use namespace CoC;
 		public function isPureHuman():Boolean {
 			return humanScore() >= HumanRace.maxScore;
 		}
-
-		public function finalRacialScore(score: Number, race:Race):Number {
-			return race.finalizeScore(bodyData(), score);
-		}
 		
 		public function racialScore(race:Race):int {
 			return race.totalScore(bodyData());
@@ -4368,10 +4364,7 @@ use namespace CoC;
 					else amount /= 1.5;
 				}
 			}
-			/*if(breastRows[0].breastRating > 12) {
-				if(hasPerk("Big Tits") < 0) amount/=2;
-				else amount /= 1.5;
-			}*/
+
 			if(growthType == 2) {
 				temp = 0;
 				//Start at top and keep growing down, back to top if hit bottom before done.
@@ -4652,8 +4645,9 @@ use namespace CoC;
 					minCap += jewelryEffectMagnitude;
 				}
 			}
-			if (armorName == "lusty maiden's armor") min += Math.round(minCap * 0.3);
+			if (armorName == "lusty maiden's armor" || armorName == "Succubus armor") min += Math.round(minCap * 0.3);
 			if (armorName == "tentacled bark armor") min += Math.round(minCap * 0.2);
+			if (hasPerk(PerkLib.HotNCold) && min > Math.round(minCap * 0.75)) min = Math.round(minCap * 0.75); 
 			//Constrain values
 			if (min < 0) min = 0;
 			if (min > minCap) min = minCap;

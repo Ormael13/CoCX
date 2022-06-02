@@ -187,7 +187,7 @@ public class RaceTierBuilder {
 	}
 	public function requirePerk(perk:PerkType):RaceTierBuilder {
 		requirements.push(new RaceTierRequirement(
-				perk.name+" perk",
+				perk.name(null)+" perk",
 				RaceUtils.hasPerkFn(perk)
 		));
 		return this;
@@ -236,6 +236,7 @@ public class RaceTierBuilder {
 					extraBonuses
 			);
 		}
+		tier.requiresPreviousTier = requiresPreviousTier;
 		race.tiers.push(tier);
 		currentBuilder = null;
 	}

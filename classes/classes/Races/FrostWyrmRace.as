@@ -14,7 +14,7 @@ public class FrostWyrmRace extends Race {
 		super("Frost Wyrm", id);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
-		mutationThreshold = 5;
+		mutationThreshold = 6;
 	}
 	
 	public override function setup():void {

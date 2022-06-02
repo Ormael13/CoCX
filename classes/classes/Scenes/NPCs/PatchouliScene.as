@@ -10,10 +10,9 @@ import classes.Scenes.Areas.Beach.DemonPackBeach;
 import classes.Scenes.Areas.Bog.LizanRogue;
 import classes.Scenes.Areas.Forest.AkbalScene;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
-import classes.Scenes.Areas.HighMountains.Phoenix;
-import classes.Scenes.Areas.VolcanicCrag.PhoenixPlatoon;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Areas.Swamp.CorruptedDrider;
+import classes.Scenes.Areas.VolcanicCrag.PhoenixPlatoon;
 import classes.Scenes.Camp.Jabberwocky;
 import classes.Scenes.Monsters.Manticore;
 import classes.Scenes.SceneLib;
@@ -74,10 +73,7 @@ public class PatchouliScene extends NPCAwareContent {
 			} else {
 				outputText(", you could use a guide across Mareth.");
 			}
-			if (flags[kFLAGS.CODEX_ENTRY_CHESHIRE_CAT] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_CHESHIRE_CAT] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Cheshire Cat!</b>");
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_CHESHIRE_CAT);
 			flags[kFLAGS.PATCHOULI_FOLLOWER] = MET;
 			menu();
 			addButton(0, "Accept", patchouliExploreLuckyWheel).hint("Let him lead you to new places.");

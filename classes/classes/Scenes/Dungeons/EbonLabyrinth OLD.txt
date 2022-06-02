@@ -77,7 +77,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		}
 		public function defeatedByDarkSlime():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
+			spriteSelect(SpriteDb.s_darkgoogirlsprite);
 			menu();
 			outputText("As the dark slime approaches, it occurs to you that the only thing she is after are your fluids. You can either let her or struggle. What will you do?\n\n");
 			addButton(0, "Let her", defeatedByDarkSlimeLetHer);
@@ -90,7 +90,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 
 		public function defeatedByDarkSlimeStruggle():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
+			spriteSelect(SpriteDb.s_darkgoogirlsprite);
 			outputText("You refuse to end up as a meal to a slime and, unable to pose a decent fight, you keep the thing at bay using a torch.\n\n");
 			outputText("\"<i>Not fair! Put that out, damn thing hurts like a bitch. Fucking knew I should have put more work on my fire wards!</i>\"\n\n");
 			outputText("Aha! So she can’t stand fire, huh? Well too bad for her, as you proceed to crawl away from the slime keeping the torch between you and her so she can’t approach. Eventually, you manage to stand up and begin running from the, somewhat disappointed, slime girl.\n\n");
@@ -364,10 +364,6 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		private function encountersRuletteBossesEL1():void {
 			player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 			if (flags[kFLAGS.ALVINA_FOLLOWER] == 17) {
-				if (flags[kFLAGS.CODEX_ENTRY_CHIMERA] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_CHIMERA] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Chimera!</b>");
-				}
 				outputText("You finally find the center of the labyrinth, somewhat exhausted. You can see the rose from here in all its dark beauty. As you are about to approach it, a monstrous creature lands right in front of you. This beast has no less than four heads! A dragon on the left, a lion on the center, a goat on ");
 				outputText("the right and, at the tip of its tail, the head of a snake! All four heads roar a warning at you as the beast stands up on its leonine legs, easily twelve feet tall, its massive wings opening in a threatening display revealing nothing short of four erect thirty inches cock already drooling precum!\n\n");
 				outputText("\"<i>Foolish intruder, you've walked to your death. You come seeking the rose? Let's see how long your search lasts once you're in the belly of the beast!</i>\"\n\n");
@@ -462,10 +458,6 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		}
 		
 		public function encountersRuletteBossesEL1Hydra():void {
-			if (flags[kFLAGS.CODEX_ENTRY_HYDRA] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_HYDRA] = 1;
-				outputText("<b>New codex entry unlocked: Hydra!</b>\n\n");
-			}
 			spriteSelect(SpriteDb.s_hydra_16bit);
 			outputText("The first telltale that something might have gone really wrong is the hissing which seems to come from all around the room. The only warning you get of the impending attack is a sudden move of the shadows as a massive snake head bites the air mere inches from your face. You ready for battle as several huge snakes comes out of the shadow, each connected to a single junction to what appears to be the body of a very tall woman.\n\n");
 			if (player.isNaga()) {
@@ -730,15 +722,11 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				var choice:Number = rand(8);
 				if (choice == 0) {
 					outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.");
-					if (flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] = 1;
-						outputText("<b>New codex entry unlocked: Displacer beast!</b>\n\n")
-					}
 					startCombat(new DisplacerBeast(), true);
 				}
 				if (choice == 1) {
 					if (player.gooScore() >= 11 || player.magmagooScore() >= 13 || player.darkgooScore() >= 13) {
-						spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
+						spriteSelect(SpriteDb.s_darkgoogirlsprite);
 						outputText("You take the turn at the end of the corridor and run right into a dark slime. For a few second the both of you consider each other before the slime shrugs and simply asks.\n\n");
 						outputText("\"<i>No luck finding fluids that way?</i>\"");
 						outputText("You didn’t find any and if you did you would have pumped it out until it ran dry.\n\n");
@@ -746,7 +734,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 						outputText("Well that was easy… you can only guess slimes don’t get much out of other slimes’ bodies. You proceed deeper into the labyrinth unhindered, though, you wish you indeed had found someone to milk the fluids off.\n\n");
 					}
 					else {
-						spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
+						spriteSelect(SpriteDb.s_darkgoogirlsprite);
 						outputText("As you wander into a new corridor you come face to face with a purplish jelly-like woman. She giggles upon spotting you, her small, sphere-shaped core emitting an ominous light as she surges toward you with a gooey smile.\n\n");
 						outputText("\"<i>Dinner is served! Your fluids are mine, so surrender them now intruder and I promise to make it very pleasurable for you!</i>\"");
 						startCombat(new DarkSlime(), true);
@@ -755,10 +743,6 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				if (choice == 2) {
 					clearOutput();
 					outputText("You run right into a demon. The fiend look at you confused, then attacks with glee.");
-					if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
-						outputText("\n\n<b>New codex entry unlocked: Succubus!</b>")
-					}
 					startCombat(new Succubus(), true);
 				}
 				if (choice == 3) {
@@ -793,18 +777,10 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		private function nightAmbushRuletteEL():void {
 			var choice:Number = rand(8);
 			if (choice == 0) {
-				if (flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] = 1;
-					outputText("<b>New codex entry unlocked: Displacer beast!</b>\n\n")
-				}
 				startCombat(new DisplacerBeast(), true);
 			}
 			if (choice == 1) startCombat(new DarkSlime(), true);
 			if (choice == 2) {
-				if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] <= 0) {
-					flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
-					outputText("\n\n<b>New codex entry unlocked: Succubus!</b>")
-				}
 				startCombat(new Succubus(), true);
 			}
 			if (choice == 3) startCombat(new Incubus(), true);

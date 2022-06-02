@@ -88,6 +88,7 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Unicorn: Celess can be 'recruited' after fucking the unicorn. Meant for people who don't feel the overwhelming love for horsecocks and gender-changing, but still want their legendary equipment.");
         outputText("\n- Benoit: can be feminized even after having sex with. The talk should start automatically when PC has a vagina & Benoit's affection is higher than 40.");
         outputText("\n- Benoite / Femoit: when impregnating her, you can select the size of the resultant clutch.");
+        outputText("\n- Imps - 'regular' imp menu now accesible from imp lord/overlord menu.");
         outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical and you don't get nonsense like Amily living with corrupt Jojo), but be warned that the original writers probably intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
 
@@ -573,8 +574,6 @@ public class SceneHunter extends BaseContent {
         addButton(13, "CampNPCs", recallScenes_NPCs);
         addButton(13, "Dungeons", recallScenes_dungeons);
         addButton(14, "Wake Up", recallWakeUpImpl);
-
-        doNext(SceneLib.vala.ValaGetsSexed);
     }
 
     private function recallScenes_NPCs():void {

@@ -4,6 +4,7 @@ import classes.internals.Utils;
 import classes.internals.race.ConditionedRaceScoreBuilder;
 import classes.internals.race.RaceScoreBuilder;
 import classes.internals.race.RaceTierBuilder;
+import classes.internals.race.RaceTierRequirement;
 import classes.internals.race.RacialRequirement;
 
 public class Race {
@@ -23,9 +24,9 @@ public class Race {
 	 */
 	public var mutations:/*Array*/Array = [];
 	/**
-	 * Min score to get bonuses from mutation and bloodline
+	 * Min score to get bonuses from mutation
 	 */
-	public var mutationThreshold:int = 0
+	public var mutationThreshold:int = 3;
 	
 	/**
 	 * true - do not display the race in menus
@@ -72,7 +73,6 @@ public class Race {
 			for each(var req:RacialRequirement in requirements) {
 				score += req.calcScore(body, score);
 			}
-			if (score < 0) score = 0;
 		} finally {
 			Utils.End("Race", "basicScore");
 		}
@@ -101,7 +101,7 @@ public class Race {
 		if (bloodlinePerks.length > 0) {
 			bonus = 0;
 			for each (var perk:PerkType in bloodlinePerks) {
-				if (score > mutationThreshold && body.player.hasPerk(perk)) {
+				if (/*score >= mutationThreshold && */body.player.hasPerk(perk)) {
 					bonus += body.player.increaseFromBloodlinePerks();
 					break;
 				}
@@ -117,7 +117,7 @@ public class Race {
 				var pt:PerkType = entry[0];
 				var pc:PerkClass = body.player.getPerk(pt);
 				var stage:Number = pc ? pc.value1 : 0;
-				bonus = score > mutationThreshold ? stage*entry[1] : 0;
+				bonus = score >= mutationThreshold ? stage*entry[1] : 0;
 				if (outputText != null) outputText("Mutation: "+pt.name(pc), bonus);
 				score += bonus;
 				maxStage = Math.max(maxStage, stage);
@@ -125,24 +125,24 @@ public class Race {
 			//if (outputText != null) outputText("Mutations", bonus);
 			//score += bonus;
 			if (body.player.hasPerk(PerkLib.ChimericalBodySemiImprovedStage)) {
-				bonus = score > mutationThreshold && maxStage >= 1 ? +1 : 0;
+				bonus = score >= mutationThreshold && maxStage >= 1 ? +1 : 0;
 				if (outputText != null) outputText("Chimerical Body: Semi-Improved Stage", bonus);
 				score += bonus;
 			}
 			if (body.player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage)) {
-				bonus = score > mutationThreshold && maxStage >= 2 ? +1 : 0;
+				bonus = score >= mutationThreshold && maxStage >= 2 ? +1 : 0;
 				if (outputText != null) outputText("Chimerical Body: Semi-Superior Stage", bonus);
 				score += bonus;
 			}
 			if (body.player.hasPerk(PerkLib.ChimericalBodySemiEpicStage)) {
-				bonus = score > mutationThreshold && maxStage >= 3 ? +1 : 0;
+				bonus = score >= mutationThreshold && maxStage >= 3 ? +1 : 0;
 				if (outputText != null) outputText("Chimerical Body: Semi-Epic Stage", bonus);
 				score += bonus;
 			}
 		}
 		
 		if (player.hasPerk(PerkLib.RacialParagon) && this != player.racialParagonSelectedRace()) {
-			if (outputText != null) outputText("Racial Paragon",-score);
+			if (outputText != null) outputText("Racial Paragon",Math.min(-1,-score));
 			return 0;
 		}
 		if (player.isGargoyle() && this != Races.GARGOYLE) {
@@ -167,14 +167,22 @@ public class Race {
 				score += 50;
 			}
 		}
+		if (score < 0) return 0;
 		return score;
 	}
 	
 	public function getTier(body:BodyData, score:int=-1):RaceTier {
 		if (score < 0) score = this.totalScore(body);
 		var tier:RaceTier = null;
+		var prev:Boolean = false;
 		for each(var i:RaceTier in tiers) {
-			if (i.check(body, score)) tier = i;
+			if (i.requiresPreviousTier && !prev) continue;
+			if (i.check(body, score)) {
+				tier = i;
+				prev = true;
+			} else {
+				prev = false;
+			}
 		}
 		return tier;
 	}
@@ -233,8 +241,8 @@ public class Race {
 					s += " [/font][font-red]("+rscore+" penalty)";
 				}
 			} else {
-				rscore = rr.passScore(body);
-				s += " (" + (rscore>0?"+"+rscore:rscore)+")";
+				var pscore:int = rr.passScore(body);
+				s += " (" + (pscore>0?"+"+pscore:pscore)+")";
 				if (rr.failScore < 0) {
 					s += "[/font]"
 					if (!pass && rscore == 0) {
@@ -264,7 +272,7 @@ public class Race {
 			}
 			s += "\t";
 			if (change > 0) s += "[font-green]"
-			else if (change < 0) s += "[font-green]"
+			else if (change < 0) s += "[font-red]"
 			else s += "[font-default]"
 			s += reason+" ("+(change>0?"+"+change:change)+")";
 			s += "[/font]\n";
@@ -291,7 +299,24 @@ public class Race {
 				s += "[font-default]"
 			}
 			s += tier.describeBuffs(present ? body : null);
-			s += "[/font]\n";
+			s += "[/font]";
+			if (tier.requirements.length > 0) {
+				s += '. Requires ';
+				s += tier.requirements.map(Utils.varargify(function(rtr:RaceTierRequirement):String {
+					// green: pass, red: pass core fail req, black: fail req
+					//noinspection JSReferencingMutableVariableFromClosure
+					return (score < tier.minScore ? "[font-default]" :
+									rtr.check(body) ? "[font-green]" : "[font-red]") +
+							rtr.name + "[/font]"
+				})).join(", ");
+				if (tier.requiresPreviousTier) {
+					s += " and previous tier";
+				}
+				s+=".";
+			} else if (tier.requiresPreviousTier) {
+				s += ". Requires previous tier."
+			}
+			s += '\n';
 		}
 		return s;
 	}

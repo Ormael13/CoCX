@@ -17,7 +17,7 @@ public class VampireRace extends Race {
 		
 		addScores()
 				.earType(NOT(Ears.BAT), 0, -10)
-				.earType(Ears.VAMPIRE, -10)
+				.earType(Ears.VAMPIRE, 0, -10)
 				.wingType(Wings.VAMPIRE, +4)
 				.faceType(Face.VAMPIRE, +2)
 				.eyeType(Eyes.VAMPIRE, +1)

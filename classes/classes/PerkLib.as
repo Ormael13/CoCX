@@ -507,6 +507,16 @@ public class PerkLib
 		public static const RangeWeaponsMasterySu:PerkType = mk("Range Weapons Mastery (Su)", "Range Weapons Mastery (Su)",
 				"Decrease by ~45% needed exp to level up each range weapon mastery type and increase cap for range masteries by 50.",
 				"You've chosen the 'Range Weapons Mastery (Su)' perk. Decrease by ~45% needed exp to level up each range weapon mastery type and increase cap for range masteries by 50.");
+		public static const ToxineMaster:PerkType = mk("Toxine master", "Toxine master",
+				"You learned how to make most use of any venom in your possession, refining them to their maximum potential by combining them with various plants to deadly effects. If no toxin is available the sky poison pearl can produce a violent poison for your personal use. " +
+					"(Envenomed bolt venom effect now is two times as strong on each projectile and gains an extra dot as 5 toughness damage per round. If PC doesn't have a poison pc can use the sky poison pearl to produce a deadly toxin that adds the base 5 toughness damage to weapon attacks.)",
+				"You've chosen the 'Toxine master' perk. Envenomed bolt venom effect now is two times as strong on each projectile and gains an extra dot as 5 toughness damage per round. If PC doesn't have a poison pc can use the sky poison pearl to produce a deadly toxin that adds the base 5 toughness damage to weapon attacks.");
+		public static const KingOfTheJungle:PerkType = mk("King of the jungle", "King of the jungle",
+				"One with the natural world, you gained almost complete immunity (their duration shortened to 1 round) to status effects like frozen solid, poison, burn and bleeding! Furthermore all the damage caused with the damaging condition above is increased by 20%.",
+				"You've chosen the 'King of the jungle' perk. One with the natural world, you gained almost complete immunity (their duration shortened to 1 round) to status effects like frozen solid, poison, burn and bleeding! Furthermore all the damage caused with the damaging condition above is increased by 20%.");
+		public static const HotNCold:PerkType = mk("Hot N Cold", "Hot N Cold",
+				"You're Hot N Cold and can't cross 75% minimum lust threshold.",
+				"You've chosen the 'Hot N Cold' perk, causing your minimum lust never cross 75% threshold.");
 		/*public static const JobBeastlord:PerkType = mk("Job: Beastlord", "Job: Beastlord",
 				".",
 				"You've chosen the 'Job: Beastlord' perk, .");
@@ -519,6 +529,15 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -2437,10 +2456,10 @@ public class PerkLib
 				"You've chosen the 'Natural healing (Minor)' perk, increasing healing spell effectiveness and lowering their costs.");
 		public static const Naturaljouster:PerkType = mk("Natural jouster", "Natural jouster",
 				"Increase attack power of spears/lances when you attack once each turn and have taur/drider lower body or 2,5x higher speed if you not have one of this specific lower body types (60+ for taurs/drider and 150+ for others).",
-				"You've chosen the 'Natural jouster' perk. As long you have a taur or drider lower body and attack once per turn, your spear/lance attack power will be three times higher.");
+				"You've chosen the 'Natural jouster' perk. As long you have high enough speed (60+ for taurs/drider and 150+ for others) and attack once per turn, your spear/lance attack power will be three times higher.");
 		public static const NaturaljousterMastergrade:PerkType = mk("Natural jouster (Master grade)", "Natural jouster (Master grade)",
 				"Increase attack power of spears/lances when you attack once each turn and have taur/drider lower body or 2,5x higher speed if you not have one of this specific lower body types (180+ for taurs/drider and 450+ for others).",
-				"You've chosen the 'Natural jouster (Master grade)' perk. As long you have a taur or drider lower body and attack once per turn, your spear/lance attack power will be five times higher.");
+				"You've chosen the 'Natural jouster (Master grade)' perk. As long you have high enough speed (180+ for taurs/drider and 450+ for others) and attack once per turn, your spear/lance attack power will be five times higher.");
 		public static const NaturesSpringI:PerkType = mk("Nature's Spring I", "Nature's Spring I",
 				"Raises max fatigue by 20 and regain it 5% faster.",
 				"You've chosen the 'Nature's Spring I' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.")
@@ -4299,6 +4318,8 @@ public class PerkLib
             //Tier 10 Strength Perks
             FuelForTheFire.requirePerk(PrestigeJobBerserker)
                     .requireLevel(60);
+            ToxineMaster.requirePerks(PrestigeJobStalker, EnvenomedBolt)
+                    .requireLevel(60);
             SwiftCasting.requireLevel(60)
                     .requirePerk(PrestigeJobSpellKnight)
                     .requireCustomFunction(function (player:Player):Boolean {
@@ -4319,6 +4340,8 @@ public class PerkLib
             //Tier 11 Strength Perks
             Rage.requirePerk(FuelForTheFire)
                     .requireLevel(66);
+            KingOfTheJungle.requirePerks(ToxineMaster, Medicine)
+                    .requireLevel(60);
             WarCaster.requirePerk(SwiftCasting)
                     .requireLevel(66);
             HalfStepToEpicTranquilness.requireStr(360)
@@ -5952,6 +5975,8 @@ public class PerkLib
                     .requireLevel(12);
 			Straddle.requirePerk(JobCourtesan)
 					.requireLib(75)
+					.requireLevel(12);
+			HotNCold.requirePerks(HotBlooded, ColdBlooded)
 					.requireLevel(12);
             //Tier 3 Libido Perks
             DemonicDesireIV.requirePerk(DemonicDesireIII)

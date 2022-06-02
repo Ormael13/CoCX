@@ -237,7 +237,6 @@ import classes.StatusEffects.VampireThirstEffect;
 	//	public static const Unlocked:StatusEffectType = mk("Unlocked ");
 
 		// Non-combat player perks
-		public static const AchievementsNormalShadowTotal:StatusEffectType  = mk("Achievements (Normal / Shadow / Total)");
 		public static const AdvancingCamp:StatusEffectType                 	= mk("AdvancingCamp");
 		public static const AdventureGuildQuests1:StatusEffectType          = mk("Adventure Guild Quests 1");//Imps Hunt / Demons Hunt / Minotaurs Hunt / x
 		public static const AdventureGuildQuests2:StatusEffectType          = mk("Adventure Guild Quests 2");//Feral Tentacle Beasts Hunt / Feral Imps Hunt / x / x
@@ -1232,4 +1231,3 @@ import classes.StatusEffects.VampireThirstEffect;
 		}
 	}
 }
-

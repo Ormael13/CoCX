@@ -15,7 +15,6 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
-import classes.Scenes.Codex;
 import classes.Scenes.Dungeons.D3.Doppleganger;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.LivingStatue;
@@ -31,7 +30,6 @@ import coc.view.ButtonData;
 import coc.view.ButtonDataList;
 
 public class MagicSpecials extends BaseCombatContent {
-	public var codex:Codex = new Codex();
 	public function MagicSpecials() {}
 	internal function applyAutocast2():void {
 		outputText("\n\n");
@@ -3081,7 +3079,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else player.createStatusEffect(StatusEffects.CooldownKnowledgeOverload,KOCD,0,0,0);
 		outputText("You share some of your well earned knowledge with [themonster] who stands there blankly listening to your spiel in confusion. It's going to take [monster him] a moment to come down from the absurd amount of info you forced into [monster his] tiny head"+(monster.plural?"s":"")+".\n\n");
 		var overloadduration:Number = 0;
-		overloadduration += Math.round(codex.checkUnlocked() / 10);
+		overloadduration += Math.round(camp.codex.checkUnlocked() / 10);
 		monster.createStatusEffect(StatusEffects.Stunned, overloadduration, 0, 0, 0);
 		enemyAI();
 	}
@@ -3099,7 +3097,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var armordebuff:Number = monster.armorDef;
 		var provokeornah:Number = 1.2;
 		monster.armorDef -= armordebuff;
-		provokeornah += Math.round(codex.checkUnlocked() / 100);
+		provokeornah += Math.round(camp.codex.checkUnlocked() / 100);
 		monster.createStatusEffect(StatusEffects.Provoke, 3, provokeornah, armordebuff, 0);
 		enemyAI();
 	}
@@ -3113,7 +3111,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalInstincts)) WWCD -= 1;
 		player.createStatusEffect(StatusEffects.CooldownWeirdWords,WWCD,0,0,0);
 		var damage:Number = scalingBonusIntelligence() * spellMod() * 4;
-		damage *= 1 + (codex.checkUnlocked() * 0.01);
+		damage *= 1 + (camp.codex.checkUnlocked() * 0.01);
 		if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 2) damage *= 1.2;
 		if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) damage *= 1.25;
 		//Determine if critical hit!
@@ -6102,7 +6100,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function FusionSpecialFieryRageDeactivate():void {
 		clearOutput();
-		outputText("You release flame of anger ending your fiery rage.\n\n");
+		outputText("You extinguish your flames, calming down from your fiery rage.\n\n");
 		player.removeStatusEffect(StatusEffects.FieryRage);
 		enemyAI();
 	}
@@ -6169,3 +6167,4 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 }
 }
+
