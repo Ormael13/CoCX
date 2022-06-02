@@ -6,8 +6,8 @@ package classes.Scenes.Places.TempleOfTheDivine
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.SceneLib;
 import classes.Scenes.NPCs.Forgefather;
+import classes.Scenes.SceneLib;
 
 use namespace CoC;
 
@@ -38,10 +38,7 @@ use namespace CoC;
 			outputText("Should the sacrifice still be alive, it’s physical body will likely die as its soul is sucked into your creation. There is no turning back once it's done, so make sure the subject is ready physically and psychologically to welcome the change. Stand facing the statue but on the opposite side of the central altar and recite the following arcane word in order to proceed to the transfer.\n\n");
 			outputText("Shira Khrim Almisry Ohm Ak Tar Marae Kann Tharr Shul Elysro An Siryr Ahn Ekatyr Evenar Sethe Omaris.\n\n");
 			outputText("You think you could use this information to perhaps turn yourself into a living weapon in order to defeat the demons with relative ease. The question you should ask yourself however is... is this really what you want?");
-			if (flags[kFLAGS.GARGOYLE_QUEST] == 1) {
-				if (player.hasKeyItem("Soul Gem Research") >= 0) flags[kFLAGS.GARGOYLE_QUEST] = 3;
-				flags[kFLAGS.GARGOYLE_QUEST]++;
-			}
+			if (!flags[kFLAGS.GARGOYLE_QUEST]) flags[kFLAGS.GARGOYLE_QUEST] = 1;
 			doNext(SceneLib.templeofdivine.templeBasement);
 		}
 
@@ -150,21 +147,14 @@ use namespace CoC;
 			else addButtonDisabled(8, "Cock", "You already sculpted the Cock Area.");
 			if (Forgefather.balls < 1) addButton(9, "Balls", SculptBalls);
 			else addButtonDisabled(9, "Balls", "You already sculpted the Balls Area.");
-			if (Forgefather.statueProgress >= 10 && flags[kFLAGS.GARGOYLE_QUEST] >= 3 && !player.isGargoyle()) addButton(13, "Ritual", becomingGargoyle);
+			if (!player.isGargoyle()) addButtonIfTrue(10, "Ritual", becomingGargoyle,
+				"The statue is not ready yet.", Forgefather.statueProgress >= 10);
 			addButton(14, "Back", BackToSapphire);
 		}
 		public function BackToSapphire():void {
 			clearOutput();
 			outputText("You decide to come back later to finish the work.");
 			doNext(SceneLib.templeofdivine.templeMainMenu);
-		}
-
-		public function chooseToWorkOnStoneStatue():void {
-			//flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 1;
-			flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] = 1;
-			flags[kFLAGS.GARGOYLE_QUEST] = 1;
-			//flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 0;
-			currentStateOfStatue();
 		}
 
 		public function SculptFrameAndFace():void {
@@ -344,17 +334,14 @@ use namespace CoC;
 
 		public function becomingGargoyle():void {
 			clearOutput();
-			if (player.hasKeyItem("Gargoyle demonic researches") >= 0 && player.hasItem(useables.SOULGEM, 1) && flags[kFLAGS.GARGOYLE_QUEST] < 6) flags[kFLAGS.GARGOYLE_QUEST] = 6;
-			if (player.hasKeyItem("Gargoyle demonic researches") >= 0 && player.hasItem(useables.SOULGEM, 1) && flags[kFLAGS.GARGOYLE_QUEST] == 6) {
+			if (player.hasKeyItem("Gargoyle demonic researches") >= 0 && player.hasItem(useables.SOULGEM, 1)) {
 				if (player.inte < 80) {
 					outputText("While you do have all the ingredient required as it states in the formula you feel you don't understand magic well enough yet to risk the ritual. Who knows, what fate awaits you, should you fail it. You resolve to come back when you have enough arcane knowledge to attempt this.");
 					doNext(SceneLib.templeofdivine.templeBasement);
-				}
-				else if (player.isPregnant() || player.isButtPregnant()) {
+				} else if (player.isPregnant() || player.isButtPregnant()) {
 					outputText("You can't become Gargoyle while pregnant. Come back after you give a birth.");
 					doNext(SceneLib.templeofdivine.templeBasement);
-				}
-				else {
+				} else {
 					outputText("You think you’ve gathered all you need and proceed to move the statue up from the basement to the cathedral center next to the altar where it ought to be. You ask Sapphire to help you carry it, to which she complies, albeit she throws you several worried looks.");
 					outputText("\n\n<b>Are you sure about this? There's no turning back past this point.</b>");
 					menu();
@@ -362,17 +349,20 @@ use namespace CoC;
 					addButton(1, "Yes", becomingGargoyleYes);
 					addButton(2, "Back", currentStateOfStatue);
 				}
-			}
-			else {
-				if (player.hasKeyItem("Gargoyle demonic researches") < 0 && player.hasItem(useables.SOULGEM, 1)) outputText("As you plan out the ritual you discover, to your utter annoyance, that the book doesn't describe at all what the magic circles look like. Without this information, you can’t risk your very soul in a spell that might fail entirely due to a wrong drawing. You will need to somehow find more information about golems and gargoyles first. ");
-				if (player.hasKeyItem("Gargoyle demonic researches") >= 0 && !player.hasItem(useables.SOULGEM, 1)) outputText("While you do have the demonic researches in hand the ritual specifically ask for a soul gem. Guess you will have to craft one.");
-				if (flags[kFLAGS.GARGOYLE_QUEST] == 4) flags[kFLAGS.GARGOYLE_QUEST]++;
+			} else {
+				if (player.hasKeyItem("Gargoyle demonic researches") < 0)
+					outputText("As you plan out the ritual you discover, to your utter annoyance, that the book doesn't describe at all what the magic circles look like. Without this information, you can’t risk your very soul in a spell that might fail entirely due to a wrong drawing. You will need to somehow find more information about golems and gargoyles first. ");
+				if (!player.hasItem(useables.SOULGEM, 1) && player.hasKeyItem("Soul Gem Research") >= 0)
+					outputText("While you do have the demonic researches in hand the ritual specifically ask for a soul gem. Guess you will have to craft one. Maybe ask an alchemist about it?");
+				else
+					outputText("You need a soul gem, but have no idea how to craft it. There should be some information... somewhere?");
 				doNext(SceneLib.templeofdivine.templeBasement);
 			}
 		}
+
 		public function becomingGargoyleNo():void {
 			clearOutput();
-			outputText("This is something that is gonna change your entire life and while you're ready to do anything to stop the demons, you're not sure this is what you want yet. You resolve to come back and do the ritual once you truly are ready for it.");
+			outputText("This is something that is gonna change your entire life and while you're ready to do anything to stop the demons, you're not sure if this is what you want yet. You resolve to come back and do the ritual once you truly are ready for it.");
 			doNext(SceneLib.templeofdivine.templeBasement);
 		}
 		public function becomingGargoyleYes():void {
