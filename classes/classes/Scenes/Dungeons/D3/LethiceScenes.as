@@ -1,14 +1,14 @@
 package classes.Scenes.Dungeons.D3
 {
 import classes.BaseContent;
+import classes.CoC;
 import classes.EventParser;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Items.WeaponLib;
 import classes.Scenes.SceneLib;
-import classes.display.SpriteDb;
 import classes.StatusEffects;
+import classes.display.SpriteDb;
 
 public class LethiceScenes extends BaseContent
 	{
@@ -37,9 +37,8 @@ public class LethiceScenes extends BaseContent
 			clearOutput();
 			outputText("You may have defeated Lethice and completed the main story, but the fun isn't over! It's time for you to return to the game and begin a new era of Mareth.");
 			awardAchievement("Demon Slayer", kACHIEVEMENTS.STORY_FINALBOSS, true, true, false);
-			cleanupAfterCombat();
 			if (flags[kFLAGS.LETHICE_DEFEATED] <= 0) flags[kFLAGS.LETHICE_DEFEATED] = 1;
-			inventory.takeItem(weapons.L_WHIP, camp.returnToCampUseOneHour);
+			cleanupAfterCombat();
 		}
 		
 		private function quitToMenu():void {
