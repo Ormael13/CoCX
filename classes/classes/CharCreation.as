@@ -2117,13 +2117,15 @@ import coc.view.MainView;
 			}
 		}
 
-		private function perkRPConfirm(tier:int, perk:PerkType, pCost:int):void{
+		private function perkRPConfirm(tier:int, perk:PerkType, pCost:int, RPP:int = 1):void{
 			player.ascensionPerkPoints -= pCost* tier;
 			if (tier == 1) player.createPerk(perk,1,0,0,1);
 			else player.setPerkValue(perk,1,player.perkv1(perk) + 1);
 			clearOutput();
 			outputText("You have acquired "+ perk.name() + "!");
-			doNext(rarePerks1);
+			if (RPP == 1) doNext(rarePerks1);
+			else doNext(rarePerks2);
+
 		}
 
 		private function perkBloodlineHeritage():void {
@@ -2175,9 +2177,10 @@ import coc.view.MainView;
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			menu();
 			var btn:int = 0;
-			//perkMetamorphAscCheck(btn);
-			//btn++
+			perkMetamorphAscCheck(btn);
+			btn++
 			//Deprecating on next public Build.
+			/*
 			if (player.ascensionPerkPoints >= 30 && !player.hasPerk(PerkLib.AscensionNaturalMetamorph)) addButton(btn, "N.Metamorph", perkNaturalMetamorph).hint("Perk allowing you to start with perks Genetic Memory and Metamorph.\n\nCost: 30 points");
 			else if (player.ascensionPerkPoints < 30 && !player.hasPerk(PerkLib.AscensionNaturalMetamorph)) addButtonDisabled(btn, "N.Metamorph", "You do not have enough ascension perk points!");
 			else addButtonDisabled(btn, "N.Metamorph", "You already bought Natural Metamorph perk.");
@@ -2221,6 +2224,7 @@ import coc.view.MainView;
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)) addButtonDisabled(btn, "T.G.M.(S5)", "You need to buy Transcendental Genetic Memory (Stage 4) perk first.");
 			else addButtonDisabled(btn, "T.G.M.(S5)", "You need ascend more times to buy this perk.");
 			btn++;
+			*/
 			//End of deprecation.
 			if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionUnderdog)) addButton(btn, "Underdog", perkUnderdog).hint("Perk allowing you to double base exp gains for fighting enemies above PC level, increasing max lvl diff when bonus is in effect will still increase from 20 to 40 above current PC lvl.\n\nCost: 5 points");// And... to live up to underdog role PC will 'accidentally' find few places to further power-up.
 			else if (player.ascensionPerkPoints < 5 && !player.hasPerk(PerkLib.AscensionUnderdog)) addButtonDisabled(btn, "Underdog", "You do not have enough ascension perk points!");
@@ -2262,14 +2266,14 @@ import coc.view.MainView;
 		}
 
 		//Unused for now
-		/*
+
 		private function perkMetamorphAscCheck(btn:int):void{
 			if (!player.hasPerk(PerkLib.AscensionNaturalMetamorph)){
 				if (player.ascensionPerkPoints < 30){
 					addButtonDisabled(btn, "Nat.MetaMph", "You do not have enough point to acquire Natural Metamorph.");
 				}
 				else{
-					perkRPConfirm(1,PerkLib.AscensionNaturalMetamorph, 30);
+					perkRPConfirm(1,PerkLib.AscensionNaturalMetamorph, 30, 2);
 				}
 			}
 			else{
@@ -2279,7 +2283,7 @@ import coc.view.MainView;
 						addButtonDisabled(btn, "Gen. Memory", "You do not have enough point to acquire Genetic Memory.");
 					}
 					else{
-						addButton(btn, "Gen. Memory", perkRPConfirm, 1, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost *1);
+						addButton(btn, "Gen. Memory", curry(perkRPConfirm, 1, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost *1, 2));
 					}
 				}
 				else {
@@ -2294,21 +2298,22 @@ import coc.view.MainView;
 						addButtonDisabled(btn, "Gen. Memory", "You have acquired the highest tier available.");
 					}
 					else {
-						addButton(btn, "Gen. Memory", perkRPConfirm, tier, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost * tier);
+						addButton(btn, "Gen. Memory", curry(perkRPConfirm, tier, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost *1, 2));
 						if (tier == 1){
 							player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15, 0, 0, 9000);
 						}
 						else{
-							player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 15 * tier);
+							player.changeStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 15 * tier);
 						}
 					}
 				}
 			}
 
 		}
-		*/
+
 
 		//Deprecating on next public build.
+		/*
 		private function perkNaturalMetamorph():void {
 			player.ascensionPerkPoints -= 30;
 			player.createPerk(PerkLib.AscensionNaturalMetamorph,0,0,0,1);
