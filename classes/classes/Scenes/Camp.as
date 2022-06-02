@@ -4259,6 +4259,10 @@ public function rebirthFromBadEnd():void {
 	private function buildCampWall():void {
 		var helpers:int = 0;
 		var helperArray:Array = [];
+		if (flags[kFLAGS.ANT_KIDS] > 100) {
+			helperArray[helperArray.length] = "A group of your ant children";
+			helpers++;
+		}
 		if (marbleFollower()) {
 			helperArray[helperArray.length] = "Marble";
 			helpers++;
@@ -4269,10 +4273,6 @@ public function rebirthFromBadEnd():void {
 		}
 		if (followerKiha()) {
 			helperArray[helperArray.length] = "Kiha";
-			helpers++;
-		}
-		if (flags[kFLAGS.ANT_KIDS] > 100) {
-			helperArray[helperArray.length] = "group of your ant children";
 			helpers++;
 		}
 		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 10;
@@ -4343,6 +4343,10 @@ public function rebirthFromBadEnd():void {
 	private function buildCampGate():void {
 		var helpers:int = 0;
 		var helperArray:Array = [];
+		if (flags[kFLAGS.ANT_KIDS] > 100) {
+			helperArray[helperArray.length] = "A group of your ant children";
+			helpers++;
+		}
 		if (marbleFollower()) {
 			helperArray[helperArray.length] = "Marble";
 			helpers++;
@@ -4353,10 +4357,6 @@ public function rebirthFromBadEnd():void {
 		}
 		if (followerKiha()) {
 			helperArray[helperArray.length] = "Kiha";
-			helpers++;
-		}
-		if (flags[kFLAGS.ANT_KIDS] > 100) {
-			helperArray[helperArray.length] = "group of your ant children";
 			helpers++;
 		}
 		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 100;
