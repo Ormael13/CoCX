@@ -2273,7 +2273,7 @@ import coc.view.MainView;
 					addButtonDisabled(btn, "Nat.MetaMph", "You do not have enough point to acquire Natural Metamorph.");
 				}
 				else{
-					perkRPConfirm(1,PerkLib.AscensionNaturalMetamorph, 30);
+					perkRPConfirm(1,PerkLib.AscensionNaturalMetamorph, 30, 2);
 				}
 			}
 			else{
