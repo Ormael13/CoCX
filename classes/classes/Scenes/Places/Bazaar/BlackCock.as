@@ -1677,7 +1677,7 @@ import classes.lists.Gender;
 			if (rand(4) == 0 && changes < changeLimit && player.hasCock() && player.countCocksOfType(CockTypesEnum.RHINO) < player.cockTotal()) {
 				for (var i:int = 0; i < player.cocks.length; i++) {
 					if (player.cocks[i].cockType != CockTypesEnum.RHINO) {
-						transformations.CockRhino(i, player.cocks[i].cockLength, true).applyEffect();
+						transformations.CockRhino(i, player.cocks[i].cockLength, player.cocks[i].cockThickness, true).applyEffect();
 						break;
 					}
 				}
@@ -1999,7 +1999,7 @@ import classes.lists.Gender;
 			if (rand(3) == 0 && changes < changeLimit && player.hasCock() && player.countCocksOfType(CockTypesEnum.ECHIDNA) < player.cockTotal()) {
 				for (i = 0; i < player.cocks.length; i++) {
 					if (player.cocks[i].cockType != CockTypesEnum.ECHIDNA) {
-						transformations.CockEchidna(i, player.cocks[i].cockLength, true).applyEffect();
+						transformations.CockEchidna(i, player.cocks[i].cockLength, player.cocks[i].cockThickness, true).applyEffect();
 						break;
 					}
 				}
