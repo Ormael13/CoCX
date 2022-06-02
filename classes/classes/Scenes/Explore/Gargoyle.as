@@ -1,7 +1,6 @@
 ﻿package classes.Scenes.Explore{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
