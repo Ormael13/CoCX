@@ -10350,7 +10350,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			// apply effect
 			function (doOutput:Boolean):void {
 				var desc:String = "[pg]";
-				if (cock >= player.cockTotal()) return;
 
 				desc += "You have a strange feeling as your crotch tingles.  Opening your [armor], <b>you realize that one of your cocks have vanished completely!</b>";
 				if (doOutput) outputText(desc);
@@ -10359,7 +10358,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			},
 			// is present
 			function ():Boolean {
-				return cock == player.cockTotal();
+				return !player.hasCock() || cock >= player.cockTotal();
 			},
 			// is possible
 			function ():Boolean {
@@ -10398,7 +10397,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.HUMAN;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.HUMAN;
 				}
 		);
 	}
@@ -10442,7 +10441,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.HORSE;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.HORSE;
 				}
 		);
 	}
@@ -10494,7 +10493,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.HUMAN;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.DOG;
 				}
 		);
 	}
@@ -10538,7 +10537,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.DEMON;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.DEMON;
 				}
 		);
 	}
@@ -10576,7 +10575,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.TENTACLE;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.TENTACLE;
 				}
 		);
 	}
@@ -10610,7 +10609,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.SCYLLATENTACLE;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.SCYLLATENTACLE;
 				}
 		);
 	}
@@ -10655,7 +10654,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.CAT;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.CAT;
 				}
 		);
 	}
@@ -10692,7 +10691,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.CANCER;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.CANCER;
 				}
 		);
 	}
@@ -10761,7 +10760,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.LIZARD;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.LIZARD;
 				}
 		);
 	}
@@ -10799,7 +10798,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.CAVE_WYRM;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.CAVE_WYRM;
 				}
 		);
 	}
@@ -10880,7 +10879,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.ANEMONE;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.ANEMONE;
 				}
 		);
 	}
@@ -10920,7 +10919,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.KANGAROO;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.KANGAROO;
 				}
 		);
 	}
@@ -10961,7 +10960,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.DRAGON;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.DRAGON;
 				}
 		);
 	}
@@ -11000,7 +10999,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.DISPLACER;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.DISPLACER;
 				}
 		);
 	}
@@ -11052,7 +11051,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.FOX;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.FOX;
 				}
 		);
 	}
@@ -11090,7 +11089,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.BEE;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.BEE;
 				}
 		);
 	}
@@ -11124,7 +11123,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.PIG;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.PIG;
 				}
 		);
 	}
@@ -11159,7 +11158,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.AVIAN;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.AVIAN;
 				}
 		);
 	}
@@ -11196,7 +11195,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.RHINO;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.RHINO;
 				}
 		);
 	}
@@ -11232,7 +11231,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.ECHIDNA;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.ECHIDNA;
 				}
 		);
 	}
@@ -11271,7 +11270,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.WOLF;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.WOLF;
 				}
 		);
 	}
@@ -11308,7 +11307,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.STAMEN;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.STAMEN;
 				}
 		);
 	}
@@ -11343,7 +11342,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.RED_PANDA;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.RED_PANDA;
 				}
 		);
 	}
@@ -11379,7 +11378,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.GRYPHON;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.GRYPHON;
 				}
 		);
 	}
@@ -11418,7 +11417,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.OOMUKADE;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.OOMUKADE;
 				}
 		);
 	}
@@ -11453,7 +11452,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.RAIJU;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.RAIJU;
 				}
 		);
 	}
@@ -11489,7 +11488,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function ():Boolean {
-					return cock < player.cocks.length && player.cocks[cock].cockType != CockTypesEnum.USHI_ONI;
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.USHI_ONI;
 				}
 		);
 	}

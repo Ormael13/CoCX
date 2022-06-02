@@ -1024,7 +1024,7 @@ package classes.Scenes {
 			openPaginatedMenu(title, accessVaginaMenu, currentPage, VaginaMem.Memories, 0);
 		}
 
-		private function openPaginatedMenu (title: String, thisMenu: *, currentPage: int, memArray:Array, index:int = -1): void {
+		private function openPaginatedMenu (title: String, thisMenu: *, currentPage: int, memArray:Array, index:int = -9000): void {
 			menu();
 
 			memArray = memArray.filter(function(element: *, index: int, array: Array): Boolean {
@@ -1056,9 +1056,9 @@ package classes.Scenes {
 			}
 
 			if (lastPage > 0) {
-				if (currentPage > 0) addButton(12, "Prev Page", thisMenu, currentPage - 1);
+				if (currentPage > 0) addButton(12, "Prev Page", thisMenu, currentPage - 1, index);
 				else addButtonDisabled (12, "Prev Page");
-				if (currentPage < lastPage) addButton(13, "Next Page", thisMenu, currentPage + 1);
+				if (currentPage < lastPage) addButton(13, "Next Page", thisMenu, currentPage + 1, index);
 				else addButtonDisabled (13, "Next Page");
 			}
 
