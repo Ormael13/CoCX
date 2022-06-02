@@ -9136,7 +9136,7 @@ public class Combat extends BaseContent {
                 if monster.gems <= 0{
             monster.gems == 0
         }
-        if (player.gems += monster.gems >= 1000000000 || player.gems += monster.gems < 0){
+        if (player.gems += monster.gems >= 1000000000 || player.gems += monster.gems < 0) && monster.gems > 0{
             player.gems == 1000000000
         }
         else player.gems += monster.gems;
