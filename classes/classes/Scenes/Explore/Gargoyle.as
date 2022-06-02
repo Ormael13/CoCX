@@ -559,7 +559,7 @@ private function bodyRitual():void {
 		player.removeCurse(stat, 50,3);
 	}}
 	else if (player.HP > (player.maxHP()/4)){
-		for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
+		for each (var stat2:String in ["str","spe","tou","int","wis","lib","sens"]) {
 		player.removeCurse(stat, 25,1);
 		player.removeCurse(stat, 25,2);
 		player.removeCurse(stat, 25,3);
