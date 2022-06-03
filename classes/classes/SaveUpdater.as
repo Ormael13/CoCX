@@ -1738,20 +1738,6 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.lowerBody == LowerBody.GOO && player.arms.type == Arms.GOO && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.skinAdj != "slimy") player.skinAdj = "slimy";
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.009;
 			}
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.010) {
-				if (Forgefather.gender > 0) Forgefather.statueProgress++;
-				if (Forgefather.wings > 0) Forgefather.statueProgress++;
-				if (Forgefather.tail > 0) Forgefather.statueProgress++;
-				if (Forgefather.lowerBody > 0) Forgefather.statueProgress++;
-				if (Forgefather.arms > 0) Forgefather.statueProgress++;
-				if (Forgefather.hairLength > 0) Forgefather.statueProgress++;
-				if (Forgefather.chest > 0) Forgefather.statueProgress++;
-				if (Forgefather.vagina > 0) Forgefather.statueProgress++;
-				if (Forgefather.cock > 0) Forgefather.statueProgress++;
-				if (Forgefather.balls > 0) Forgefather.statueProgress++;
-				flags[kFLAGS.MOD_SAVE_VERSION] = 35.010;
-			}
-			//TODO: disable this before the next major update, public ver. players don't need to see this.
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.011) {
 				flags[kFLAGS.SCENEHUNTER_LOSS_SELECT] = flags[kFLAGS.SCENEHUNTER_OTHER];
 				outputText("\n\nSceneHunter update: new <b>Select Loss</b> feature. Set equal to the 'Other' flag by default. You can toggle its value in settings.");
