@@ -11,6 +11,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
+import classes.GeneticMemories.CockMem;
 import classes.Races.BeeRace;
 import classes.Scenes.Areas.Forest.BeeGirlScene;
 import classes.CoC;
@@ -20,6 +21,7 @@ import classes.Items.Consumable;
 import classes.PerkLib;
 import classes.Player;
 import classes.PregnancyStore;
+import classes.Scenes.Metamorph;
 import classes.StatusEffects;
 import classes.internals.Utils;
 
@@ -259,9 +261,7 @@ public class BeeHoney extends Consumable
 				//Begin TF
 				if (!player.hasCock()) {
 					outputText("\n\nYou double over in pain as the effects start to concentrate into your groin.  You need to get release, but what you’ve got just isn’t cutting it.  You fall to the ground and grab at your crotch, trying desperately to get the release you need.  Finally, it happens.  With a sudden burst of intense relief and sexual satisfaction, a new human looking penis bursts from your skin and sprays your seed all over the ground in front of you.  When you’re able to recover and take a look at your new possession.  <b>You now have an eight inch long human cock that is very sensitive to stimulation.</b>");
-					player.createCock();
-					player.cocks[0].cockLength = Utils.rand(3) + 8;
-					player.cocks[0].cockThickness = 2;
+					CoC.instance.transformations.CockHuman(0, Utils.rand(3) + 8, 2).applyEffect(false);
 					player.orgasm();
 					player.addCurse("sen", 10, 1);
 				}
@@ -287,10 +287,8 @@ public class BeeHoney extends Consumable
 					player.addCurse("sen", 5, 1);
 				}
 				else if (player.cocks[0].cockType != CockTypesEnum.BEE && player.race() == "bee-morph") {
-					outputText("\n\nYour huge member suddenly starts to hurt, especially the tip of the thing.  At the same time, you feel your length start to get incredibly sensitive and the base of your shaft starts to itch.  You tear off your [armor] and watch in fascination as your [cock] starts to change.  The shaft turns black, while becoming hard and smooth to the touch, while the base develops a mane of four inch long yellow bee hair.  As the transformation continues, your member grows even larger than before.  However, it is the tip that keeps your attention the most, as a much finer layer of short yellow hairs grow around it.  Its appearance isn’t the thing that you care about right now, it is the pain that is filling it.\n\n");
-					outputText("It is entirely different from the usual feeling you get when you’re cock grows larger from imbibing transformative substances.  When the changes stop, the tip is shaped like a typical human mushroom cap covered in fine bee hair, but it feels nothing like what you’d expect a human dick to feel like.  Your whole length is incredibly sensitive, and touching it gives you incredible stimulation, but you’re sure that no matter how much you rub it, you aren’t going to cum by yourself.  You want cool honey covering it, you want tight walls surrounding it, you want to fertilize hundreds of eggs with it.  These desires are almost overwhelming, and it takes a lot of will not to just run off in search of the bee girl that gave you that special honey right now.  This isn’t good.\n\n");
-					outputText("<b>You now have a bee cock!</b>");
-					player.cocks[0].cockType = CockTypesEnum.BEE;
+					CoC.instance.transformations.CockBee(0).applyEffect();
+					outputText("[pg]It takes a lot of will not to just run off in search of the bee girl that gave you that special honey right now.  This isn’t good.[pg]");
 					player.cocks[0].cockLength += 5 * mult;
 					player.cocks[0].cockThickness += 1 * mult;
 					player.addCurse("sen", 15, 1);

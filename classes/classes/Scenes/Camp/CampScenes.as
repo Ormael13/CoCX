@@ -452,10 +452,7 @@ private function goblinsBirthScene2():void {
 	outputText("Aw... She’s fully grown up now but hey, that's another pair of hands around the workshop, right?\n\n");
 	if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 	if (player.breastRows.length == 0) {
-		player.createBreastRow();
-        player.breastRows[0].breasts = 2;
-        player.breastRows[0].nipplesPerBreast = 1;
-        player.breastRows[0].breastRating = 1;
+		player.createBreastRow(1);
 	}
 	else player.breastRows[0].breastRating += 1;
 	player.hips.type += 1;

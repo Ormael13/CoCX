@@ -423,6 +423,17 @@ public class ParserTags {
                     return "<b>(Attempt To Parse CockHeadDescript for Invalid Cock)</b>";
                 }
             }
+        },
+        "vagina"        : function (aspect:*):* {
+            if (!CoC.instance.player.hasVagina()) {
+                return "<b>(Attempt to parse vagina when none present.)</b>";
+            } else {
+                if (aspect - 1 >= 0 && aspect - 1 < CoC.instance.player.vaginas.length) {
+                    return CoC.instance.player.vaginaDescript(aspect - 1);
+                } else {
+                    return "<b>(Attempt To Parse CockDescript for Invalid Cock)</b>";
+                }
+            }
         }
 
     };

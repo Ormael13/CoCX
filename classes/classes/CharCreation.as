@@ -1750,6 +1750,7 @@ import coc.view.MainView;
 			if (player.hasPerk(PerkLib.AscensionNaturalMetamorph)) {
 				player.createPerk(PerkLib.GeneticMemory, 0, 0, 0, 0);
 				player.createPerk(PerkLib.Metamorph, 0, 0, 0, 0);
+				player.createPerk(PerkLib.MetamorphEx, 0, 0, 0, 0);
 			}
 			player.perkPoints += 1;
 			//setupMutations();
