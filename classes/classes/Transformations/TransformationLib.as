@@ -8030,6 +8030,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 2;
 
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.TWINKASKA));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -9639,6 +9640,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.wings.desc = "giant dragonfly";
 	    player.wings.type = Wings.GIANT_DRAGONFLY;
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.GIANT_DRAGONFLY));
 	  },
 	  // is present
 	  function (): Boolean {
