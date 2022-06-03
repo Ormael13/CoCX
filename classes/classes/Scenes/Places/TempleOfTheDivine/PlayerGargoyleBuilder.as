@@ -42,10 +42,12 @@ use namespace CoC;
 			doNext(SceneLib.templeofdivine.templeBasement);
 		}
 
+
+
 		public function currentStateOfStatue():void {
 			clearOutput();
 			outputText("This statue looks like ");
-			if (Forgefather.statueProgress >= 11) outputText("a finished");
+			if (Forgefather.statueProgress >= 10) outputText("a finished");
 			else outputText("an incomplete stone gargoyle. This statue looks like ");
 			if (Forgefather.gender == 1) outputText("it has a gorgeous female face");
 			if (Forgefather.gender == 2) outputText("it has a handsome male face");
@@ -58,8 +60,8 @@ use namespace CoC;
 			if (Forgefather.hairLength == 4) outputText("long hair looks great.");
 			if (Forgefather.hairLength == 0) outputText("hair is yet to be sculpted.");
 			if (Forgefather.chest > 0) {
-				outputText("\n\nStatue have ");
-				if (Forgefather.chest == 1)outputText("flat chest");
+				outputText("\n\nThe statue has ");
+				if (Forgefather.chest == 1)outputText("a flat chest");
 				else outputText(Appearance.breastCup(Forgefather.chest - 1) + " breasts");
 				outputText(".\n\n");
 			}
@@ -159,83 +161,57 @@ use namespace CoC;
 
 		public function SculptFrameAndFace():void {
 			menu();
-			addButton(0, "Feminine", SculptFeminineFrameAndFace).hint("Sculpt a feminine frame and face.");
-			addButton(1, "Masculine", SculptMasculineFrameAndFace).hint("Sculpt a masculine frame and face.");
-			addButton(2, "Androgynous", SculptAndrogynousFrameAndFace).hint("Sculpt a androgynous frame and face.");
+			addButton(0, "Feminine", SculptFrameAndFace_chosen, 1).hint("Sculpt a feminine frame and face.");
+			addButton(1, "Masculine", SculptFrameAndFace_chosen, 2).hint("Sculpt a masculine frame and face.");
+			addButton(2, "Androgynous", SculptFrameAndFace_chosen, 3).hint("Sculpt a androgynous frame and face.");
 			addButton(14, "Back", currentStateOfStatue);
 		}
-		public function SculptFeminineFrameAndFace():void {
-			SceneLib.forgefatherScene.setGargoyleGender(1);
-			SecondPartOfSculptingText();
-		}
-		public function SculptMasculineFrameAndFace():void {
-			SceneLib.forgefatherScene.setGargoyleGender(2);
-			SecondPartOfSculptingText();
-		}
-		public function SculptAndrogynousFrameAndFace():void {
-			SceneLib.forgefatherScene.setGargoyleGender(3);
+		public function SculptFrameAndFace_chosen(gender:int):void {
+			SceneLib.forgefatherScene.setGargoyleGender(gender);
 			SecondPartOfSculptingText();
 		}
 
 		public function SculptWings():void {
 			menu();
-			addButton(0, "Bat", SculptBatWings).hint("Sculpt bat wings.");
-			addButton(1, "Feathered", SculptFeatheredWings).hint("Sculpt feathered wings.");
+			addButton(0, "Bat", SculptWings_chosen, 2).hint("Sculpt bat wings.");
+			addButton(1, "Feathered", SculptWings_chosen, 1).hint("Sculpt feathered wings.");
 			addButton(14, "Back", currentStateOfStatue);
 		}
-		public function SculptBatWings():void {
-			SceneLib.forgefatherScene.setGargoyleWings(2);
-			//flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 2;
-			SecondPartOfSculptingText();
-		}
-		public function SculptFeatheredWings():void {
-			SceneLib.forgefatherScene.setGargoyleWings(1);
-			//flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 1;
+		public function SculptWings_chosen(wings:int):void {
+			SceneLib.forgefatherScene.setGargoyleWings(wings);
 			SecondPartOfSculptingText();
 		}
 
 		public function SculptTail():void {
 			menu();
-			addButton(0, "Mace", SculptMaceTail).hint("Sculpt mace shaped tail tip.");
-			addButton(1, "Axe", SculptAxeTail).hint("Sculpt axe shaped tail tip.");
+			addButton(0, "Mace", SculptTail_chosen, 1).hint("Sculpt mace shaped tail tip.");
+			addButton(1, "Axe", SculptTail_chosen, 2).hint("Sculpt axe shaped tail tip.");
 			addButton(14, "Back", currentStateOfStatue);
 		}
-		public function SculptMaceTail():void {
-			SceneLib.forgefatherScene.setGargoyleTail(1);
-			SecondPartOfSculptingText();
-		}
-		public function SculptAxeTail():void {
-			SceneLib.forgefatherScene.setGargoyleTail(2);
+		public function SculptTail_chosen(tail:int):void {
+			SceneLib.forgefatherScene.setGargoyleTail(tail);
 			SecondPartOfSculptingText();
 		}
 
 		public function SculptLegs():void {
 			menu();
-			addButton(0, "Clawed", SculptClawedLegs).hint("Sculpt clawed legs.");
-			addButton(1, "Humane", SculptHumaneLegs).hint("Sculpt humane legs.");
+			addButton(0, "Clawed", SculptLegs_chosen, 1).hint("Sculpt clawed legs.");
+			addButton(1, "Humane", SculptLegs_chosen, 2).hint("Sculpt humane legs.");
 			addButton(14, "Back", currentStateOfStatue);
 		}
-		public function SculptClawedLegs():void {
-			SceneLib.forgefatherScene.setGargoyleLowerBody(1);
-			SecondPartOfSculptingText();
-		}
-		public function SculptHumaneLegs():void {
-			SceneLib.forgefatherScene.setGargoyleLowerBody(2);
+		public function SculptLegs_chosen(legs:int):void {
+			SceneLib.forgefatherScene.setGargoyleLowerBody(legs);
 			SecondPartOfSculptingText();
 		}
 
 		public function SculptArms():void {
 			menu();
-			addButton(0, "Clawed", SculptClawedArms).hint("Sculpt clawed arms.");
-			addButton(1, "Humane", SculptHumaneArms).hint("Sculpt humane arms.");
+			addButton(0, "Clawed", SculptArms_chosen, 1).hint("Sculpt clawed arms.");
+			addButton(1, "Humane", SculptArms_chosen, 2).hint("Sculpt humane arms.");
 			addButton(14, "Back", currentStateOfStatue);
 		}
-		public function SculptClawedArms():void {
-			SceneLib.forgefatherScene.setGargoyleArms(1);
-			SecondPartOfSculptingText();
-		}
-		public function SculptHumaneArms():void {
-			SceneLib.forgefatherScene.setGargoyleArms(2);
+		public function SculptArms_chosen(arms:int):void {
+			SceneLib.forgefatherScene.setGargoyleArms(arms);
 			SecondPartOfSculptingText();
 		}
 
@@ -272,16 +248,12 @@ use namespace CoC;
 
 		public function SculptPussy():void {
 			menu();
-			if (Forgefather.cock != 1) addButton(0, "No", SculptPussyNo).hint("Don't sculpt pussy.");
-			addButton(1, "Yes", SculptPussyYes).hint("Sculpt pussy.");
+			if (Forgefather.cock != 1) addButton(0, "No", SculptPussy_chosen, 1).hint("Don't sculpt pussy.");
+			addButton(1, "Yes", SculptPussy_chosen, 2).hint("Sculpt pussy.");
 			addButton(14, "Back", currentStateOfStatue);
 		}
-		public function SculptPussyNo():void {
-			SceneLib.forgefatherScene.setGargoyleVagina(1);
-			SecondPartOfSculptingText();
-		}
-		public function SculptPussyYes():void {
-			SceneLib.forgefatherScene.setGargoyleVagina(2);
+		public function SculptPussy_chosen(puss:int):void {
+			SceneLib.forgefatherScene.setGargoyleVagina(puss);
 			SecondPartOfSculptingText();
 		}
 
@@ -327,8 +299,6 @@ use namespace CoC;
 		public function SecondPartOfSculptingText():void {
 			clearOutput();
 			outputText("You work for six hours, sculpting the statue part to your liking with an artist's passion, then head back to camp for a break.");
-			if (Forgefather.statueProgress > 0) Forgefather.statueProgress++;
-			else Forgefather.statueProgress = 1;
 			doNext(camp.returnToCampUseSixHours);
 		}
 
@@ -393,8 +363,6 @@ use namespace CoC;
 			outputText("You reply that you will do whatever is needed to defeat the demons and if that means becoming an immortal artificial being, then so be it. Defeated by your determination, Sapphire finally complies as she chants \"<i>Shira Khrim Almisry Ohm Ak Tar Marae Kann Tharr Shul Elysro An Siryr Ahn Ekatyr Evenar Sethe Omaris!</i>\"\n\n");
 			outputText("As she practically screams the last word, your vision fade to black, and you lose consciousness.\n\n");
 			outputText("You come to several seconds later and, as you open your eyes, it seems you're sitting on a pedestal, your pedestal. It looks like your previous body turned to ashes on the altar and is no more, so it will be extremely difficult going back to being human, if such a thing is even possible. You flex your arms for a few seconds admiring your perfectly defined form, majestic wings and ");
-			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble");
-			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
 			outputText("stone body, strong enough to shatter rocks and solid enough that the sharpest sword will leave you damageless as you’re suddenly rocked over by a terrifying hunger.\n\n");
 			if (player.hasPerk(PerkLib.GargoylePure)) {
 				outputText("Energy! You need energy to stay alive now. As you are masterless, while food used to be your main source of power, you are now a magical construct and Soulforce is what powers you now!\n\n");
