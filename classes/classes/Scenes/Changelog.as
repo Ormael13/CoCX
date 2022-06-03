@@ -146,7 +146,12 @@ public class Changelog extends BaseContent
 			outputText("mutation, holiday events appearing in Ingnam/prison, Minotaur-Dormammu bug for all damage sources, equipping at once specific combinations of melee weapon and shield when not meeting req. to do so, Blood Chains too long stun duration, cyclop/gazer scores not included in chimera race check, Wood Elf perks not adding extra shoot & not affecting Skypiercer, Sand Mother finally remembered that she ");
 			outputText("can use spells, some spell teaching items allowing to learn more than 1 spell per use, Oswald not selling backpacks when PC got none\n\n");
 			outputText("<b>Version 0.8s5:</b>\n\n");
-			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
+			outputText("-(UEE import) Treasure chests added to some locations. (Svalkash)\n");
+			outputText("-Fixed combat issues: Corrupted Handmaidens, Doppelganger, Priscilla, Goblin Shaman. The latter two still need mana cost rebalancing, Vala 'Wake Up' scene, Lethice drops, Gnoll scene. (Svalkash)\n");
+			outputText("-Gargoyle's Body Ritual now lessens bodily curses. Effectiveness requires actually having the HP to be harmed. (Furrin Gok)\n");
+			outputText("-Camp upgrades prioritizes ant children. Rewrote golem codex. (Furrin Gok)\n");
+			outputText("-Negative gem drops from battle are set to zero, wallet won't go over a billion gems to avoid the 4-billions overflow limit. (Furrin Gok)\n");
+			outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk with full bonus to soulforce (+950). Effect: Opening more options to change PC body: cock types, ball count, pussie types, breast rows count. (also increase max SF by 100 each day up to 1,000)\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
 			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
@@ -155,12 +160,7 @@ public class Changelog extends BaseContent
 			//outputText("-Dinah would provide PC with HB Mech upgrade options after it's bought. They could boost mech defences, attack or even provide with specials. As with all other items upgrades cost can vary depending on her mood ^^\n");
 			//outputText("-HB Mech upgrade options includes: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Rapid Reload (+base ranged atk dmg), Internal Systems (increase mech SF capacity and lower it consumption during high activity), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special), ");
 			//outputText("Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)\n");
-			outputText("-Gargoyle's Body Ritual now lessens bodily curses. Effectiveness requires actually having the HP to be harmed. (Furrin Gok)\n");
-			outputText("-(UEE import) Treasure chests added to some locations. (Svalkash)\n");
-			outputText("-Fixed combat issues: Corrupted Handmaidens, Doppelganger, Priscilla, Goblin Shaman. The latter two still need mana cost rebalancing. (Svalkash)\n");
-			outputText("-Camp upgrades prioritizes ant children. Rewrote golem codex. (Furrin Gok)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Ascension: Natural Metamorph would grant Metamorph (Ex) perk too.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

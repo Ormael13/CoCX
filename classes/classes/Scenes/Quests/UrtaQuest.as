@@ -267,8 +267,7 @@ public function startUrtaQuest():void {
 	player.hairColor = "gray";
 	player.hairLength = 12;
 	player.skin.growFur({color:"silky"});
-	player.createBreastRow();
-	player.breastRows[0].breastRating = 7;
+	player.createBreastRow(7);
 	player.nippleLength = .75;
 	player.skinTone = "black";
 	player.lowerBody = LowerBody.FOX;
@@ -277,10 +276,7 @@ public function startUrtaQuest():void {
 	player.faceType = Face.FOX;
 	player.tailType = Tail.FOX;
 	player.tailCount = 1;
-	player.createCock();
-	player.cocks[0].cockType = CockTypesEnum.HORSE;
-	player.cocks[0].cockLength = 20;
-	player.cocks[0].cockThickness = 3;
+	player.createCock(20, 3, CockTypesEnum.HORSE);
 	player.balls = 2;
 	player.ballSize = 4;
 	player.cumMultiplier = 80;

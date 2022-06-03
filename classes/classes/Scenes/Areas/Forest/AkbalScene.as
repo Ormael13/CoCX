@@ -609,10 +609,7 @@ public class AkbalScene extends BaseContent {
 			spriteSelect(SpriteDb.s_akbal);
 			//Make sure that the buttchange is set correctly
 			//when submitting.  Gotta stretch em all!
-			monster.createCock();
-			monster.cocks[0].cockLength = 15;
-			monster.cocks[0].cockThickness = 2.5;
-			monster.cocks[0].cockType = CockTypesEnum.HUMAN;
+			monster.createCock(15, 2.5);
 			if (flags[kFLAGS.AKBAL_BITCH_Q] >= 2) {
 				akbitchEncounter();
 				return;

@@ -5,9 +5,11 @@
 package classes.Scenes.Areas.Ashlands
 {
 import classes.*;
+import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Items.MutationsHelper;
+import classes.Scenes.Metamorph;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -218,6 +220,7 @@ public function WitchesSabbathThirdVisitYes():void {
 		player.cocks[0].cockThickness = 2.5;
 		player.cocks[0].cockType = CockTypesEnum.CAT;
 		player.cocks[0].knotMultiplier = 1;
+		Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.CAT));
 	}
 	if (player.hasCock() && player.catCocks() < player.cockTotal()) {
 		outputText("Your cock" + (player.cockTotal() > 1 ? "s" : "") + " begins to feel strange as the warmth begins to warp " + (player.cockTotal() > 1 ? "them" : "it") + " against your will.");
@@ -226,6 +229,7 @@ public function WitchesSabbathThirdVisitYes():void {
 		if (player.catCocks() < player.cockTotal()) outputText(", barbs forming on " + (player.cockTotal() > 1 ? "their" : "the") + " originally smooth cleft until you are left with what appears to be a" + (player.cockTotal() > 1 ? " set of" : "") + " cat penis" + (player.cockTotal() > 1 ? "es" : "") + "");
 		outputText("It does not end there though as your cock" + (player.cockTotal() > 1 ? "s" : "") + " suddenly pulse with unholy purple light before[less than 10 inches: / gaining several extra inches of flesh as] devilish pleasure overcomes your kitty pecker" + (player.cockTotal() > 1 ? "s" : "") + " causing you to orgasm covering your belly and face with kitty cum.");
 		if (player.cockTotal() > 0 && player.catCocks() < player.cockTotal()) reformallcockstokittycocks();
+		Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.CAT));
 	}
 	outputText("\n\nWarmth then rampage all around body altering your shape in many lesser ways until you have something fit for a proper female.");
 	if (player.breastRows[0].breastRating < 1) player.breastRows[0].breastRating = 5 + rand(5);
@@ -347,6 +351,7 @@ public function reformallcockstokittycocks2():void {
 		if (player.cocks[i].cockLength < 10) player.cocks[i].cockLength = 10;
 		if (player.cocks[i].cockThickness < 2.5) player.cocks[i].cockThickness = 2.5;
 	}
+	Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.CAT));
 }
 
 	}

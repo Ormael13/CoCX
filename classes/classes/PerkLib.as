@@ -2328,9 +2328,7 @@ public class PerkLib
 		public static const MelkieSong:PerkType = mk("Melkie Song", "Melkie Song",
 				"Your voice is supernaturaly enhanced and may be used during battle to arouse foes.");
 		public static const Metamorph:MetamorphPerk = new MetamorphPerk();
-		public static const MetamorphEx:PerkType = mk("Metamorph (Ex)", "Metamorph (Ex)",
-				"Mold your own body even further than before using genetic memory and soulforce.",
-				"You've chosen the 'Metamorph (Ex)' perk, giving you a more options to mold your own body.");
+		public static const MetamorphEx:MetamorphExPerk = new MetamorphExPerk();
 		public static const Metamorphable:PerkType = mk("Metamorphable", "Metamorphable",
 				"You can manipulate your soul force to change your body... but this increases your soul force by 10%.",
 				"You've chosen the 'Metamorphable' perk, gaining +10% max Soulforce.")
@@ -6333,10 +6331,13 @@ public class PerkLib
 			}
 			if (flags[kFLAGS.HUNGER_ENABLED] > 0 && game.player.humanScore() < 5) {
 			_add(new PerkClass(PerkLib.)); - zelazny zoladek czy cos w tym stylu
-			}
+			}if ()
 			*/
             Metamorph.requirePerk(GeneticMemory);
-            //MetamorphEx.requirePerk(Metamorph);
+			MetamorphEx.requirePerk(Metamorph)
+					.requireCustomFunction(function (player:Player):Boolean {
+						return player.perkv1(PerkLib.Metamorph) >= 18;
+					}, "Metamorph perk bonus to soulforce at 950.");
             //	JobArtificer.requireInt(25)
             //				.requireWis(25);
             JobBeastWarrior.requireStr(20)

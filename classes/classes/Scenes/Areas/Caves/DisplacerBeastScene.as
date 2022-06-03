@@ -53,10 +53,7 @@ public class DisplacerBeastScene extends BaseContent {
         outputText("As you fall defeated by the octopi-cat woman. Her expression change from aggressive to delighted as she strips your gear away. You expect your crotch to get played with but to your surprise, she goes for your [breasts] applying her tentacles on them like a pair of suction cups. You gasp in surprise as something not unlike needles somehow enter your nipples doing god knows what inside of your chest which inflate to ");
         if (player.breastRows[0].breastRating < 5) {
             if (player.breastRows.length == 0) {
-                player.createBreastRow();
-                player.breastRows[0].breasts = 2;
-                player.breastRows[0].nipplesPerBreast = 1;
-                player.breastRows[0].breastRating = 5;
+                player.createBreastRow(5);
             }
             else player.growTits(2, 1, true, 3);
         }

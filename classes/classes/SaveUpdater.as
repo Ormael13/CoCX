@@ -1738,20 +1738,6 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.lowerBody == LowerBody.GOO && player.arms.type == Arms.GOO && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.skinAdj != "slimy") player.skinAdj = "slimy";
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.009;
 			}
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.010) {
-				if (Forgefather.gender > 0) Forgefather.statueProgress++;
-				if (Forgefather.wings > 0) Forgefather.statueProgress++;
-				if (Forgefather.tail > 0) Forgefather.statueProgress++;
-				if (Forgefather.lowerBody > 0) Forgefather.statueProgress++;
-				if (Forgefather.arms > 0) Forgefather.statueProgress++;
-				if (Forgefather.hairLength > 0) Forgefather.statueProgress++;
-				if (Forgefather.chest > 0) Forgefather.statueProgress++;
-				if (Forgefather.vagina > 0) Forgefather.statueProgress++;
-				if (Forgefather.cock > 0) Forgefather.statueProgress++;
-				if (Forgefather.balls > 0) Forgefather.statueProgress++;
-				flags[kFLAGS.MOD_SAVE_VERSION] = 35.010;
-			}
-			//TODO: disable this before the next major update, public ver. players don't need to see this.
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.011) {
 				flags[kFLAGS.SCENEHUNTER_LOSS_SELECT] = flags[kFLAGS.SCENEHUNTER_OTHER];
 				outputText("\n\nSceneHunter update: new <b>Select Loss</b> feature. Set equal to the 'Other' flag by default. You can toggle its value in settings.");
@@ -1916,6 +1902,10 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.GARGOYLE_QUEST] = flags[kFLAGS.GARGOYLE_QUEST] > 0 ? 1 : 0;
 				outputText("\nThe gargoyle quest tracker should be fixed by now. Otherwise, please report it again.");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.002;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.003) {
+				if (player.hasPerk(PerkLib.AscensionNaturalMetamorph) && !player.hasPerk(PerkLib.MetamorphEx)) player.createPerk(PerkLib.MetamorphEx, 0, 0, 0, 0);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.003;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

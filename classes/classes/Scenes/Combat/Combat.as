@@ -9127,7 +9127,10 @@ public class Combat extends BaseContent {
         }
         dropItem(monster, nextFunc);
         inCombat = false;
-        player.gems += monster.gems;
+        if (monster.gems <= 0) monster.gems = 0;
+        if (((player.gems + monster.gems) >= 1000000000 || (player.gems + monster.gems) < 0) && monster.gems > 0) player.gems = 1000000000;
+        else player.gems += monster.gems;
+        if (monster.XP <= 0) monster.XP = 0;
         if (!monster.hasPerk(PerkLib.NoExpGained)) player.XP += monster.XP;
         mainView.statsView.showStatUp('xp');
         dynStats("lust", 0, "scale", false); //Forces up arrow.
@@ -14456,6 +14459,8 @@ public class Combat extends BaseContent {
                 outputText("You run as fast as you can, taking random corridors and running past the confused enemies all the way back to the labyrinth entrance. You lose the slug-woman quickly, however your flight attracts more attention, forcing you all the way back to the surface. \n\n");
                 SceneLib.dungeons.ebonlabyrinth.room = 1;
                 SceneLib.dungeons.ebonlabyrinth.depth = 0;
+                inCombat = false;
+                clearStatuses(false);
                 doNext(playerMenu);
             } else {
                 outputText("You're trapped in your foe's domain - there is nowhere to run!\n\n");
@@ -16219,3 +16224,4 @@ public class Combat extends BaseContent {
     }
 }
 }
+
