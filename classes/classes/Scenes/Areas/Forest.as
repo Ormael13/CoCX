@@ -89,7 +89,6 @@ use namespace CoC;
 			return _deepwoodsEncounter
 		}
 		private function init():void {
-            const game:CoC = CoC.instance;
             const fn:FnHelpers = Encounters.fn;
 			_forestOutskirtsEncounter = Encounters.group("outskirtsforest", {
 						//General Golems, Goblin and Imp Encounters
@@ -375,6 +374,11 @@ use namespace CoC;
 						name: "mimic",
 						when: fn.ifLevelMin(3),
 						call: curry(SceneLib.mimicScene.mimicTentacleStart, 1),
+						chance: 0.50
+					}, {
+						name  : "succubus",
+						call  : SceneLib.ivorySuccubusScene.encounterSuccubus,
+						when  : fn.ifLevelMin(3),
 						chance: 0.50
 					});
 			_deepwoodsEncounter = Encounters.group("deepwoods", /*CoC.instance.commonEncounters,*/ {
