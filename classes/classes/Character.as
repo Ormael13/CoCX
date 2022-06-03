@@ -660,6 +660,7 @@ import classes.CoC;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 46) max += 180 * (flags[kFLAGS.SOUL_CULTIVATION] - 45);//Soul Immortal
 			if (hasPerk(PerkLib.DemonicLethicite)) max += Math.round(lib);
 			if (hasPerk(PerkLib.Metamorph)) max += (50 * (1 + perkv1(PerkLib.Metamorph)));
+			if (hasPerk(PerkLib.MetamorphEx)) max += (100 * perkv1(PerkLib.MetamorphEx));
 			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
 				if (hasPerk(PerkLib.SoulApprentice)) max += 40;
 				if (hasPerk(PerkLib.SoulPersonage)) max += 40;
