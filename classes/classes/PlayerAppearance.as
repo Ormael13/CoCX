@@ -67,7 +67,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("[pg]" + describeBalls());
 		} else {
 			if (player.hasCock() || player.balls > 0) {
-				outputText("[pg]" + Utils.mergeSentences([describeCock(), describeBalls()]));
+				outputText("[pg]" + Utils.mergeSentences([describeCocks(), describeBalls()]));
 			}
 		}
 		const pussyDesc: String = describePussies();
@@ -715,6 +715,7 @@ public class PlayerAppearance extends BaseContent {
 
 	public function describeCock(cock_index:int = 0, rando:int = 0): String {
 		var cockDesc:String = ""
+		if (cock_index >= player.cocks.length) return cockDesc;
 		if (rando == 0)
 			rando = rand(100);
 		// How to start the sentence?

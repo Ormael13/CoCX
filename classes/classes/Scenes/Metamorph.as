@@ -951,7 +951,7 @@ package classes.Scenes {
 
 			var totCock: int = player.cockTotal();
 			if (totCock == 0) {
-				openPaginatedMenu(title, accessCocksMenu, currentPage, CockMem.Memories, 0);
+				openPaginatedMenu(title, accessCockMenu, currentPage, CockMem.Memories, 0);
 			}
 			else {
 				menu();
