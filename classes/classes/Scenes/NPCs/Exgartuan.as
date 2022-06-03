@@ -1,8 +1,10 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.BodyParts.Skin;
+import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Metamorph;
 import classes.display.SpriteDb;
 
 public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
@@ -265,6 +267,7 @@ private function exgartuanInfestDick():void {
 		outputText("\n\nWell now... this was certainly unexpected.  Perhaps there's a way to be rid of this thing?");
 		dynStats("lib", 5, "lus", 10, "cor", 10);
 		player.cocks[0].cockType = CockTypesEnum.DEMON;
+		Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DEMON));
 		player.cocks[0].cockLength += 1;
 		player.cocks[0].cockThickness += .5;
 	}

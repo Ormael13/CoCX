@@ -5,7 +5,9 @@ package classes.Scenes.Areas.Mountain
 {
 import classes.*;
 import classes.BodyParts.LowerBody;
+import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Metamorph;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -301,6 +303,7 @@ public class HellHoundScene extends BaseContent
 					while (player.cocks.length > 2) {
 						player.removeCock(2, 1);
 					}
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
 				}
 				outputText("You don't hesitate.  You pounce on the horny barghest, slamming your two dog pricks inside her two cunts without hesitation.  The bitch responds with a low growl, and starts bucking her rear against you, while you thrust into her with abandon.  The pleasure of her interior drives you mad like no other that you've ever been in before.  The loud squelching and stimulation of her slobbering pussies don't give you a chance to do anything but thrust and lose yourself in the feeling.\n\n");
 

@@ -1,6 +1,8 @@
 ﻿package classes.Scenes.Areas.Forest{
 import classes.*;
+import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Metamorph;
 import classes.display.SpriteDb;
 
 public class TentacleBeastScene extends BaseContent{
@@ -876,12 +878,10 @@ public function defeatedByAncientTentacleBeast():void {
         player.growTits(1 + rand(3), 1, false, 3);
         outputText("! Milks churns inside ready for the harvest.");
         player.boostLactation(1.5);
-        if (player.cocks.length == 0) {
+        if (!player.hasCock()) {
             outputText(" Just as you were thinking about your breasts you feel a bump of flesh between your legs growing steadily until it breaks out standing erect. This… this thing is a penis!");
-            player.createCock();
-            player.cocks[0].cockLength = 6;
-            player.cocks[0].cockThickness = 1.5;
-            player.cocks[0].cockType = CockTypesEnum.HUMAN;
+            player.createCock(6, 1.5);
+			Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
             player.clitLength = .25;
             if (player.hasVagina()) outputText(" Oh, no, you're a full herm now!");
         }
@@ -889,9 +889,6 @@ public function defeatedByAncientTentacleBeast():void {
         if (!player.hasVagina()) {
             outputText(" Just underneath your ballsack you feel flesh parting wetly as your acquire a brand-new pussy, one the tentacle beast will be eager to dive in.");
             player.createVagina();
-            player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
-            player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
-            player.vaginas[0].virgin = true;
             player.clitLength = .25;
             if (player.hasCock()) outputText(" Oh, no, you’re a full herm now!");
         }

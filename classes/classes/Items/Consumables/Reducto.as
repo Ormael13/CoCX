@@ -5,7 +5,9 @@ package classes.Items.Consumables
 {
 import classes.CockTypesEnum;
 import classes.EngineCore;
+import classes.GeneticMemories.CockMem;
 import classes.Items.Consumable;
+import classes.Scenes.Metamorph;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
@@ -96,6 +98,7 @@ public final class Reducto extends Consumable {
 			if (game.player.cocks[0].cockType == CockTypesEnum.BEE) {
 				outputText("The gel produces an odd effect when you rub it into your " + game.player.cockDescript(0) + ".  It actually seems to calm the need that usually fills you.  In fact, as your " + game.player.cockDescript(0) + " shrinks, its skin tone changes to be more in line with yours and the bee hair that covered it falls out.  <b>You now have a human cock!</b>");
 				game.player.cocks[0].cockType = CockTypesEnum.HUMAN;
+				Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
 			}
 			else {
 				outputText("You smear the repulsive smelling paste over your " + game.player.multiCockDescriptLight() + ".  It immediately begins to grow warm, almost uncomfortably so, as your " + game.player.multiCockDescriptLight() + " begins to shrink.\n\n");

@@ -46,17 +46,11 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 		}
 		//Randomly choose one of those locations
 		select = choices[rand(choices.length)];
-		outputText("\n\nYour " + player.cockDescript(select) + " tingles as pins and needles sweep across it.  You pull open your [armor] to watch as it changes; the tip elongates and tapers, like a spear; a series of ridges form along the shaft, giving it an almost segmented look, and a prominent knot swells at its base.  You can't resist stroking it, until it begins dripping pre; ");
-		if (player.sens >= 50) outputText("however, it's not until you press on your new, sensitive knot that you manage to blow your load and enjoy the last few spasms of pleasure as it finally finishes changing.");
-		else outputText("but you sternly rein in your hands and tuck them into your armpits as the arousing changes run their course.");
-		outputText("  <b>You now have a dragon penis.</b>");
+		transformations.CockDragon(select).applyEffect();
 		//lose lust if sens>=50, gain lust if else
 		dynStats("lus", 10)
 		player.addCurse("sen", 10, 1);
 		changes++;
-		//Apply the TF
-		player.cocks[select].cockType = CockTypesEnum.DRAGON;
-		player.cocks[select].knotMultiplier = 1.3;
 	}
 	//-Existing horns become draconic, max of 4, max length of 1'
 	if (player.horns.type != Horns.DRACONIC_X4_12_INCH_LONG && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(5) == 0) {
