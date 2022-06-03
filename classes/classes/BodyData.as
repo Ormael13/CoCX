@@ -430,7 +430,7 @@ public class BodyData {
 		}
 	});
 	public function get vaginaType():int {
-		return data[SLOT_TONGUE_TYPE];
+		return data[SLOT_VAGINA_TYPE];
 	}
 	
 	public static const SLOT_WING_TYPE:int = _slotid++;
