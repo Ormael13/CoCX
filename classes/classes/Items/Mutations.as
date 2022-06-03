@@ -13913,18 +13913,10 @@ public final class Mutations extends MutationsHelper {
                 outputText("  With the transformation complete, your [cock] returns to its normal coloration.");
             }
             if (player.cocks.length > 1) {
-                temp = player.cocks.length;
-                temp2 = 0;
-                //Find shortest cock
-                while (temp > 0) {
-                    temp--;
-                    if (player.cocks[temp].cockLength <= player.cocks[temp2].cockLength) {
-                        temp2 = temp;
-                    }
-                }
+                temp2 = player.shortestCockIndex();
                 if (int(Math.random() * 4) == 0) temp3 = player.increaseCock(temp2, 3);
                 else temp3 = player.increaseCock(temp2, 1);
-                dynStats("lus", 5 + temp * 3);
+                dynStats("lus", 5 + temp2 * 3);
                 player.addCurse("sen", 1, 1);
                 MutagenBonus("int", 1);
                 MutagenBonus("lib", 2);
@@ -13948,11 +13940,10 @@ public final class Mutations extends MutationsHelper {
         }
         //Legs
         if (player.lowerBody != LowerBody.YETI && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+            outputText("[pg]");
             if (player.lowerBody == LowerBody.HUMAN) {
-                outputText("[pg]");
                 transformations.LowerBodyYeti.applyEffect();
             } else {
-                outputText("[pg]");
                 transformations.LowerBodyHuman.applyEffect();
             }
             changes++;

@@ -2356,6 +2356,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.YETI_FANGS;
+		  Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.YETI));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3678,6 +3679,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.YETI;
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.YETI));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5218,6 +5220,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.arms.type = Arms.YUKI_ONNA;
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.YUKI_ONNA));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5481,6 +5484,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.arms.type = Arms.YETI;
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.YETI));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5939,6 +5943,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.rearBody.type = RearBody.YETI_FUR;
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.YETI));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7411,6 +7416,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 2;
 	    player.lowerBody = LowerBody.YETI;
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.YETI));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -9049,34 +9055,27 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      player.tailCount = tailCount;
 	      if (doOutput) outputText(desc);
 
+	      //noinspection FallThroughInSwitchStatementJS			// Fallthrough is intended for retroactively unlocking in Metamorph after getting GeneticMemory
 	      switch (tailCount) {
 	      case 9:
 	        if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance))
 	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_9));
-				  break;
 	      case 8:
 	        if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance))
 	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_8));
-				  break;
 	      case 7:
 	        if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance))
 	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_7));
-				  break;
 	      case 6:
 	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_6));
-				  break;
 	      case 5:
 	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_5));
-				  break;
 	      case 4:
 	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_4));
-				  break;
 	      case 3:
 	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_3));
-				  break;
 	      case 2:
 	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX_2));
-				  break;
 	      case 1:
 	    		Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FOX));
 				  break;
@@ -10328,6 +10327,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
  */
 
     public function UnlockCocks():void {
+		//noinspection FallThroughInSwitchStatementJS	// Fallthrough is intended for retroactively unlocking in Metamorph after getting GeneticMemory
         switch (player.cockTotal()) {
             case 12: Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK12));
             case 11: Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK11));
