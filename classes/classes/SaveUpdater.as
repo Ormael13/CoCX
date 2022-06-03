@@ -1903,6 +1903,10 @@ public class SaveUpdater extends NPCAwareContent {
 				outputText("\nThe gargoyle quest tracker should be fixed by now. Otherwise, please report it again.");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.002;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.003) {
+				if (player.hasPerk(PerkLib.AscensionNaturalMetamorph) && !player.hasPerk(PerkLib.MetamorphEx)) player.createPerk(PerkLib.MetamorphEx, 0, 0, 0, 0);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.003;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;

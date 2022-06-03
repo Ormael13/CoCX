@@ -217,14 +217,14 @@ public class Enigmanium extends Consumable {
 
         //Chance of thickness + daydream
         if (rand(2) == 0 && changes < changeLimit && player.catCocks() > 0) {
-          var temp:int = player.findCockWithType(CockTypesEnum.CAT, -1, -1,-1, "thickness");
-          if (temp != -1) {
+          var temp0:int = player.findCockWithType(CockTypesEnum.CAT, -1, -1,-1, "thickness");
+          if (temp0 != -1) {
             player.cocks[temp].thickenCock(.5);
-            outputText("[pg]Your [cock "+temp+1+"] thickens inside its sheath, growing larger and fatter as your veins thicken, becoming more noticeable.  It feels right");
-            if (player.cor + player.lib > 175) outputText(" Your [cock "+temp+1+"] is perfect for fucking about anything that is a cat or a taur.  You imagine the feel of plowing an equine pussy deeply, bottoming out and unloading sticky jets of horse-jizz into its fertile womb.  Your hand strokes your cat cock of its own accord, musky pre dripping from the spiked tip with each stroke.  Your mind wanders to the thought of you with a harem of pregnant cat or centaurs.");
-            else if (player.cor + player.lib >= 100) outputText(" to be a rutting stud.  You ache to find a catgirl in heat to breed with.  Longing to spend your evenings plunging a [cock "+temp+1+"] deep into their passages, dumping load after load of your thick animal-cum into them.  You'd be happy just fucking cunt morning, noon, and night.");
+            outputText("[pg]Your [cock "+temp0+1+"] thickens inside its sheath, growing larger and fatter as your veins thicken, becoming more noticeable.  It feels right");
+            if (player.cor + player.lib > 175) outputText(" Your [cock "+temp0+1+"] is perfect for fucking about anything that is a cat or a taur.  You imagine the feel of plowing an equine pussy deeply, bottoming out and unloading sticky jets of horse-jizz into its fertile womb.  Your hand strokes your cat cock of its own accord, musky pre dripping from the spiked tip with each stroke.  Your mind wanders to the thought of you with a harem of pregnant cat or centaurs.");
+            else if (player.cor + player.lib >= 100) outputText(" to be a rutting stud.  You ache to find a catgirl in heat to breed with.  Longing to spend your evenings plunging a [cock "+temp0+1+"] deep into their passages, dumping load after load of your thick animal-cum into them.  You'd be happy just fucking cunt morning, noon, and night.");
             else if (player.cor + player.lib >= 60 ) outputText(" to be this way... You breath the powerful animalistic scent and fantasize about fucking catgirls and centaurs night and day until their bellies slosh with your cum.");
-            else outputText(" to have such a splendid tool.  You idly daydream about cunts and pussies, your [cock "+temp+1+"] plowing them relentlessly, stuffing them pregnant with cum.");
+            else outputText(" to have such a splendid tool.  You idly daydream about cunts and pussies, your [cock "+temp0+1+"] plowing them relentlessly, stuffing them pregnant with cum.");
 
             if (player.cor >= 90) outputText("  You flush hotly and give a twisted smile, resolving to find a fitting subject to rape and relive your fantasies.");
             else if (player.cor >= 60) outputText("  You relish your twisted fantasies, hoping to dream of them again.");
