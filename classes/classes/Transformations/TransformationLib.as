@@ -9927,7 +9927,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 				player.vaginaType(VaginaClass.HUMAN, vagina);
 
-				Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.HUMAN));
+				Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.HUMAN));
 			},
 			// is present
 			function ():Boolean {
@@ -9961,7 +9961,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.vaginaType(VaginaClass.EQUINE, vagina);
 					player.vaginas[vagina].vaginalLooseness = VaginaClass.LOOSENESS_GAPING;
 
-					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.EQUINE));
+					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.EQUINE));
 				},
 				// is present
 				function ():Boolean {
@@ -9998,7 +9998,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.BLACK_SAND_TRAP);
 
-					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.BLACK_SAND_TRAP));
+					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.BLACK_SAND_TRAP));
 				},
 				// is present
 				function ():Boolean {
@@ -10028,7 +10028,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.CAVE_WYRM);
 
-					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.CAVE_WYRM));
+					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.CAVE_WYRM));
 				},
 				// is present
 				function ():Boolean {
@@ -10068,7 +10068,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.VENOM_DRIPPING, vagina);
 
-					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.VENOM_DRIPPING));
+					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.VENOM_DRIPPING));
 				},
 				// is present
 				function ():Boolean {
@@ -10102,7 +10102,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.MANTICORE, vagina);
 
-					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.MANTICORE));
+					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.MANTICORE));
 				},
 				// is present
 				function ():Boolean {
@@ -10138,7 +10138,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 					player.vaginaType(VaginaClass.CANCER, vagina);
 
-					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.CANCER));
+					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.CANCER));
 				},
 				// is present
 				function ():Boolean {
@@ -10168,7 +10168,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.DEMONIC, vagina);
 
-					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.DEMONIC));
+					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.DEMONIC));
 				},
 				// is present
 				function ():Boolean {
@@ -10202,7 +10202,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.vaginaType(VaginaClass.SCYLLA, vagina);
 					player.vaginas[vagina].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
 
-					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.SCYLLA));
+					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.SCYLLA));
 				},
 				// is present
 				function ():Boolean {
@@ -10239,7 +10239,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.vaginas[vagina].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
 					player.vaginaType(VaginaClass.NAGA, vagina);
 
-					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.NAGA));
+					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.NAGA));
 				},
 				// is present
 				function ():Boolean {
@@ -10247,7 +10247,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is possible
 				function ():Boolean {
-					return player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.HYDRA;
+					return (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.HYDRA) && player.vaginaType(-1, vagina) != VaginaClass.NAGA;
 				}
 		);
 	}
@@ -10277,7 +10277,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.SHARK, vagina);
 
-					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.SHARK));
+					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.SHARK));
 				},
 				// is present
 				function ():Boolean {
@@ -10308,7 +10308,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.RAIJU, vagina);
 
-					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.RAIJU));
+					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.RAIJU));
 				},
 				// is present
 				function ():Boolean {
@@ -10329,18 +10329,18 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
     public function UnlockCocks():void {
         switch (player.cockTotal()) {
-            case 12: Metamorph.unlockMetamorph(CockCountMem.getMemory(CockCountMem.COCK12));
-            case 11: Metamorph.unlockMetamorph(CockCountMem.getMemory(CockCountMem.COCK11));
-            case 10: Metamorph.unlockMetamorph(CockCountMem.getMemory(CockCountMem.COCK10));
-            case 9: Metamorph.unlockMetamorph(CockCountMem.getMemory(CockCountMem.COCK9));
-            case 8: Metamorph.unlockMetamorph(CockCountMem.getMemory(CockCountMem.COCK8));
-            case 7: Metamorph.unlockMetamorph(CockCountMem.getMemory(CockCountMem.COCK7));
-            case 6: Metamorph.unlockMetamorph(CockCountMem.getMemory(CockCountMem.COCK6));
-            case 5: Metamorph.unlockMetamorph(CockCountMem.getMemory(CockCountMem.COCK5));
-            case 4: Metamorph.unlockMetamorph(CockCountMem.getMemory(CockCountMem.COCK4));
-            case 3: Metamorph.unlockMetamorph(CockCountMem.getMemory(CockCountMem.COCK3));
-            case 2: Metamorph.unlockMetamorph(CockCountMem.getMemory(CockCountMem.COCK2));
-            case 1: Metamorph.unlockMetamorph(CockCountMem.getMemory(CockCountMem.COCK1));
+            case 12: Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK12));
+            case 11: Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK11));
+            case 10: Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK10));
+            case 9: Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK9));
+            case 8: Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK8));
+            case 7: Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK7));
+            case 6: Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK6));
+            case 5: Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK5));
+            case 4: Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK4));
+            case 3: Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK3));
+            case 2: Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK2));
+            case 1: Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK1));
                 break;
         }
     }
@@ -10393,7 +10393,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.HUMAN;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HUMAN));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
 				},
 				// is present
 				function ():Boolean {
@@ -10437,7 +10437,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText("<b>  Your hands are drawn to the strange new [cock "+(cock+1)+"]</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.");
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HORSE));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HORSE));
 				},
 				// is present
 				function ():Boolean {
@@ -10489,7 +10489,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.DOG;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DOG));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
 				},
 				// is present
 				function ():Boolean {
@@ -10533,7 +10533,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.DEMON;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DEMON));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DEMON));
 				},
 				// is present
 				function ():Boolean {
@@ -10571,7 +10571,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.TENTACLE;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.TENTACLE));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.TENTACLE));
 				},
 				// is present
 				function ():Boolean {
@@ -10605,7 +10605,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.SCYLLATENTACLE;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.SCYLLATENTACLE));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.SCYLLATENTACLE));
 				},
 				// is present
 				function ():Boolean {
@@ -10650,7 +10650,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.CAT;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.CAT));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.CAT));
 				},
 				// is present
 				function ():Boolean {
@@ -10687,7 +10687,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.CANCER;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.CANCER));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.CANCER));
 				},
 				// is present
 				function ():Boolean {
@@ -10756,7 +10756,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.LIZARD;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.LIZARD));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.LIZARD));
 				},
 				// is present
 				function ():Boolean {
@@ -10794,7 +10794,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.CAVE_WYRM;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.CAVE_WYRM));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.CAVE_WYRM));
 				},
 				// is present
 				function ():Boolean {
@@ -10875,7 +10875,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockThickness = thickness;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.ANEMONE));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.ANEMONE));
 				},
 				// is present
 				function ():Boolean {
@@ -10915,7 +10915,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.KANGAROO;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.KANGAROO));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.KANGAROO));
 				},
 				// is present
 				function ():Boolean {
@@ -10956,7 +10956,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.DRAGON;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DRAGON));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DRAGON));
 				},
 				// is present
 				function ():Boolean {
@@ -10995,7 +10995,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.DISPLACER;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DISPLACER));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DISPLACER));
 				},
 				// is present
 				function ():Boolean {
@@ -11047,7 +11047,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.FOX;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.FOX));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.FOX));
 				},
 				// is present
 				function ():Boolean {
@@ -11085,7 +11085,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.BEE;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.BEE));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.BEE));
 				},
 				// is present
 				function ():Boolean {
@@ -11119,7 +11119,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.PIG;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.PIG));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.PIG));
 				},
 				// is present
 				function ():Boolean {
@@ -11154,7 +11154,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.AVIAN;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.AVIAN));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.AVIAN));
 				},
 				// is present
 				function ():Boolean {
@@ -11191,7 +11191,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.RHINO;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.RHINO));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.RHINO));
 				},
 				// is present
 				function ():Boolean {
@@ -11227,7 +11227,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.ECHIDNA;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.ECHIDNA));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.ECHIDNA));
 				},
 				// is present
 				function ():Boolean {
@@ -11266,7 +11266,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.WOLF;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.WOLF));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.WOLF));
 				},
 				// is present
 				function ():Boolean {
@@ -11303,7 +11303,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.STAMEN;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.STAMEN));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.STAMEN));
 				},
 				// is present
 				function ():Boolean {
@@ -11338,7 +11338,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.RED_PANDA;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.RED_PANDA));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.RED_PANDA));
 				},
 				// is present
 				function ():Boolean {
@@ -11374,7 +11374,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.GRYPHON;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.GRYPHON));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.GRYPHON));
 				},
 				// is present
 				function ():Boolean {
@@ -11413,7 +11413,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.OOMUKADE;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.OOMUKADE));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.OOMUKADE));
 				},
 				// is present
 				function ():Boolean {
@@ -11448,7 +11448,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.RAIJU;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.RAIJU));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.RAIJU));
 				},
 				// is present
 				function ():Boolean {
@@ -11484,7 +11484,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.USHI_ONI;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.USHI_ONI));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.USHI_ONI));
 				},
 				// is present
 				function ():Boolean {
@@ -11534,7 +11534,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 				if (doOutput) outputText(desc);
 				player.balls = 2;
-				Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
+				Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 			},
 			// is present
 			function ():Boolean {
@@ -11566,9 +11566,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 
 					if (player.balls == 2)
-						Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
+						Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 					else
-						Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.QUAD));
+						Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.QUAD));
 				},
 				// is present
 				function ():Boolean {
@@ -11597,7 +11597,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				if (!player.hasStatusEffect(StatusEffects.Uniball))
 					player.createStatusEffect(StatusEffects.Uniball, 0, 0, 0, 0);
 
-				Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.TRAP));
+				Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.TRAP));
 			},
 			// is present
 			function ():Boolean {

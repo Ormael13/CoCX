@@ -499,7 +499,7 @@ public function breakingInYourMare():void {
 		outputText("You take the mixture, groaning as you suddenly feel a sizeable cock growing between your legs.\n\n");
 		player.createCock(10 + rand(7), 2 + rand(10) / 10);
 		player.cocks[0].cockType = CockTypesEnum.HORSE;
-		Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HORSE));
+		Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HORSE));
 	}
 	outputText("Diana, in a fit of excitement, suddenly climbs onto her knees and hands before turning around and presenting her rear for you to fuck, moving her tail out of the way of her virgin sex and her equally virgin arsehole, her whole body trembling in excitement.\n\n");
 	outputText("\"<i>Thank you!</i>\" Diana says, her voice full of happiness, as she shakes her behind temptingly. \"<i>I’ll be a good mare to you, but please fuck me!! I really can’t take it anymore, I just need your cock in me now!!</i>\" her voice desperate.\n\n");

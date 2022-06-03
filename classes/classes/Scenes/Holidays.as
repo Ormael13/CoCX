@@ -612,10 +612,10 @@ public class Holidays {
             //Grow a 10" human or tentacle dick! RANDOM!
             if (int(Math.random() * 2) == 0) {
                 CoC.instance.transformations.CockTentacle(0, 10, 2.5).applyEffect(false);
-                Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.TENTACLE));
+                Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.TENTACLE));
             } else {
                 player.createCock(10, 2.5);
-                Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HUMAN));
+                Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
             }
             //Add five corruption.
             if (!player.hasPerk(PerkLib.FerasBoonSeeder)) {

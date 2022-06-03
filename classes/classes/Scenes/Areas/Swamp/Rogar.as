@@ -726,7 +726,7 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 		if(player.balls == 0) {
 			player.balls = 2;
 			player.ballSize = 3;
-			Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
+			Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 		}
 		if(player.inte > 35) {
 			player.addCurse("int", -0.1, 2);
@@ -757,7 +757,7 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 			if(player.balls == 0) {
 				player.balls = 2;
 				player.ballSize = 3;
-				Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
+				Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 			}
 		}
 		//(Pussy b gone)

@@ -920,7 +920,7 @@ public final class Mutations extends MutationsHelper {
                     player.createCock(rand(3) + 4);
                     outputText("[pg]You shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
                     outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinTone + " tone.");
-                    Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HUMAN));
+                    Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
                     if (tainted) {
                         dynStats("lus", 10, "cor", 5);
                         player.addCurse("sens", 5, 1);
@@ -1007,7 +1007,7 @@ public final class Mutations extends MutationsHelper {
                     player.cocks[0].cockThickness = 1;
                     outputText("[pg]You shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
                     outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinTone + " tone.");
-                    Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HUMAN));
+                    Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
                     if (tainted) {
                         dynStats("lus", 10, "cor", 3);
                         player.addCurse("sens", 5, 1);
@@ -1076,7 +1076,7 @@ public final class Mutations extends MutationsHelper {
             outputText("The skin bulges obscenely, darkening and splitting around " + num2Text(grown) + " of your new dicks.  For an instant they turn a demonic purple and dribble in thick spasms of scalding demon-cum.  After, they return to a more humanoid coloration.  ");
         }
         if (grown > 4) outputText("Your tender bundle of new cocks feels deliciously sensitive, and you cannot stop yourself from wrapping your hands around the slick demonic bundle and pleasuring them.[pg]Nearly an hour later, you finally pull your slick body away from the puddle you left on the ground.  When you look back, you notice it has already been devoured by the hungry earth.");
-        if (grown > 0) Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HUMAN));
+        if (grown > 0) Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
         player.orgasm('Dick');
     }
 
@@ -1860,7 +1860,7 @@ public final class Mutations extends MutationsHelper {
                         player.cocks[1].knotMultiplier = 1.7;
                         player.cocks[1].cockType = CockTypesEnum.DOG;
                         dynStats("lus", 50);
-                        Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DOG));
+                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
                     }
                     //1 dick - grow 1 and convert 1
                     else if (player.cockTotal() == 1) {
@@ -1871,7 +1871,7 @@ public final class Mutations extends MutationsHelper {
                         player.cocks[1].cockType = CockTypesEnum.DOG;
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
-                        Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DOG));
+                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
                     }
                     //2 dicks+ - convert first 2 to doggie-dom
                     else {
@@ -1882,7 +1882,7 @@ public final class Mutations extends MutationsHelper {
                         player.cocks[1].knotMultiplier = 1.4;
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
-                        Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DOG));
+                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
                     }
                 }
                 //If player has 1 dogdicks
@@ -1895,7 +1895,7 @@ public final class Mutations extends MutationsHelper {
                         player.cocks[1].knotMultiplier = 1.4;
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
-                        Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DOG));
+                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
                     }
                     //if player has more
                     if (player.cockTotal() >= 1) {
@@ -1913,7 +1913,7 @@ public final class Mutations extends MutationsHelper {
                         }
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
-                        Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DOG));
+                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
                     }
                 }
             }
@@ -1957,7 +1957,7 @@ public final class Mutations extends MutationsHelper {
                     outputText("[pg]Your [cock] twitches, reshaping itself.  The crown tapers down to a point while the base begins swelling.  It isn't painful in the slightest, actually kind of pleasant.  Your dog-like knot slowly fills up like a balloon, eventually stopping when it's nearly twice as thick as the rest.  You touch and shiver with pleasure, oozing pre-cum.");
                     player.cocks[0].cockType = CockTypesEnum.DOG;
                     player.cocks[0].knotMultiplier = 2.1;
-                    Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.DOG));
+                    Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
                 }
             }
             //You wasted knot pepper!
@@ -4726,7 +4726,7 @@ public final class Mutations extends MutationsHelper {
                     outputText(" and a pair of balls");
                     player.balls = 2;
                     player.ballSize = 2;
-                    Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
+                    Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
                 }
                 outputText("!");
                 player.cocks[0].cockThickness = 1.4;
@@ -4980,7 +4980,7 @@ public final class Mutations extends MutationsHelper {
                 player.vaginas[0].vaginalLooseness++;
                 changes++;
             }
-            if ((player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.HYDRA) && player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE) {
+            if (transformations.VaginaNaga().isPossible() && player.vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE) {
                 transformations.VaginaNaga().applyEffect();
                 changes++;
             }
@@ -7784,7 +7784,7 @@ public final class Mutations extends MutationsHelper {
                 outputText(" and a pair of balls");
                 player.balls = 2;
                 player.ballSize = 2;
-                Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
+                Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
             }
             player.cocks[0].cockThickness = 1.4;
             dynStats("lus", 20);
@@ -8169,7 +8169,7 @@ public final class Mutations extends MutationsHelper {
                 outputText("a heavy flesh bag not unlike a pair of ball form beneath your cock. " +
                         "At first you think this is a standard set of balls but no this is something else altogether. ");
                 player.balls = 2;
-                Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
+                Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
             }
             outputText("You are proven right a few second later when they begin to inflate, " +
                     "gaining in weight. Overcome by lust you begin jerking your cock, something large and pleasurable sliding out of your nuts and running down the length of your [cock]. " +
@@ -9340,14 +9340,14 @@ public final class Mutations extends MutationsHelper {
                     outputText("  Right on cue, two cum-laden testicles drop in behind it, their contents swirling and churning.");
                     player.balls = 2;
                     player.ballSize = 3;
-                    Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
+                    Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
                 }
                 outputText("[pg]");
             } else if (player.balls == 0) {
                 outputText("A swelling begins behind your man-meat, and you're assailed with an incredibly peculiar sensation as two sperm-filled balls drop into a newly-formed scrotum.  Frikkin' sweet![pg]");
                 player.balls = 2;
                 player.ballSize = 3;
-                Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
+                Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
             }
             outputText("Finally, you feel the transformation skittering to a halt, leaving you to openly roam your new chiseled and sex-ready body.  So what if you can barely form coherent sentences anymore?  A body like this does all the talking you need, you figure!");
             MutagenBonus("lib", .1);
@@ -9421,7 +9421,7 @@ public final class Mutations extends MutationsHelper {
                 outputText("Two rounded orbs drop down below, filling out a new, fleshy sac above your [legs].  Sweet!  You can probably cum buckets with balls like these.");
                 player.balls = 2;
                 player.ballSize = 3;
-                Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
+                Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
             }
             outputText("[pg]");
         }
@@ -9434,7 +9434,7 @@ public final class Mutations extends MutationsHelper {
             if (player.balls == 0) {
                 player.balls = 2;
                 player.ballSize = 3;
-                Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
+                Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
             }
         }
         //(Pussy b gone)
@@ -11970,7 +11970,7 @@ public final class Mutations extends MutationsHelper {
                 //[Note: Balls description should no longer say \"swings heavily beneath\".  For simplicity's sake sex scenes should continue to assume two balls]
                 player.ballSize = 1;
                 player.createStatusEffect(StatusEffects.Uniball, 0, 0, 0, 0);
-                Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.TRAP));
+                Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.TRAP));
             } else if (player.ballSize < 1) player.ballSize = 1;
             changes++;
         }
@@ -12172,7 +12172,7 @@ public final class Mutations extends MutationsHelper {
                 outputText("[pg]As you eat, you contemplate your masked appearance; it strikes you that you're dangerously close to the classic caricature of a thief.  Really, all it would take is a big, nondescript sack and a hurried gait and everyone would immediately think the worst of you.  In a brief fit of pique, you wish you had such a bag to store your things in, eager to challenge a few assumptions.  A few minutes into that line of thought, a twisting ache in your crotch bends you double, and you expose yourself hurriedly to examine the region.  As you watch, a balloon of flesh forms on your crotch, and two lumps migrate from below your navel down into it.  <b>Looks like you have a sack, after all.</b>");
                 player.balls = 2;
                 player.ballSize = 1;
-                Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
+                Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
                 changes++;
             }
         }
@@ -13203,7 +13203,7 @@ public final class Mutations extends MutationsHelper {
                     if (player.cocks.length == 0) {
                         outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
                         player.createCock(player.clitLength + 2);
-                        Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HUMAN));
+                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
                         player.clitLength = .25;
                     }
                 }
@@ -13601,7 +13601,7 @@ public final class Mutations extends MutationsHelper {
                     if (player.cocks.length == 0) {
                         outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
                         player.createCock(player.clitLength + 2);
-                        Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HUMAN));
+                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
                         player.clitLength = .25;
                     }
                 }
@@ -16251,7 +16251,7 @@ public final class Mutations extends MutationsHelper {
                     if (player.cocks.length == 0) {
                         outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
                         player.createCock(player.clitLength + 2);
-                        Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HUMAN));
+                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
                         player.clitLength = .25;
                     }
                 }

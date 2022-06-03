@@ -6336,7 +6336,9 @@ public class PerkLib
 			}
 			*/
             Metamorph.requirePerk(GeneticMemory);
-            //MetamorphEx.requirePerk(Metamorph);
+            MetamorphEx.requirePerk(Metamorph).requireCustomFunction(function (player:Player):Boolean {
+				return player.perkv1(PerkLib.Metamorph) >= 18;
+			}, "Metamorph perk bonus to soulforce at 950.");;
             //	JobArtificer.requireInt(25)
             //				.requireWis(25);
             JobBeastWarrior.requireStr(20)

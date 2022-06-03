@@ -143,7 +143,7 @@ public class PotentVenom extends Consumable {
 					else outputText("and ");
 					outputText("moan out as your pussy tingles and clenches, drooling a strange dark purple liquid. ");
 					player.vaginaType(7);
-					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.VENOM_DRIPPING));
+					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.VENOM_DRIPPING));
 				}
 			}
 			//Male and herm area
@@ -175,7 +175,7 @@ public class PotentVenom extends Consumable {
 					else outputText("and ");
 					outputText("moan out, feeling your cock harden and tingle as it dribbles a strange dark purple liquid. ");
 					player.cocks[0].cockType = CockTypesEnum.OOMUKADE;
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.OOMUKADE));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.OOMUKADE));
 				}
 			}
 			if (player.hasVagina() && player.hasCock())
@@ -212,11 +212,11 @@ public class PotentVenom extends Consumable {
 				}
 				if (player.vaginaType() != VaginaClass.VENOM_DRIPPING) {
 					player.vaginaType(VaginaClass.VENOM_DRIPPING);
-					Metamorph.unlockMetamorph(VaginaMem.getMemory(VaginaMem.VENOM_DRIPPING));
+					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.VENOM_DRIPPING));
 				}
 				if (player.cocks[0].cockType != CockTypesEnum.OOMUKADE) {
 					player.cocks[0].cockType = CockTypesEnum.OOMUKADE;
-					Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.OOMUKADE));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.OOMUKADE));
 				}
 			}
 			dynStats("lus", 10);

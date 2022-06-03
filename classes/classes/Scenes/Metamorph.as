@@ -695,23 +695,27 @@ package classes.Scenes {
 					name: "Tail",
 					func: accessTailMenu
 				},
-//				{
+			];
+
+			if (player.hasPerk(PerkLib.MetamorphEx)) {
+//				menusList.push({
 //					name: "Breasts",
 //					func: accessBreastsMenu
 //				},
-				{
-					name: "Vagina",
-					func: accessVaginasMenu
-				},
-				{
-					name: "Penis",
-					func: accessCocksMenu
-				},
-				{
-					name: "Balls",
-					func: accessBallsMenu
-				}
-			];
+				menusList.push({
+						name: "Vagina",
+						func: accessVaginasMenu
+					});
+				menusList.push({
+						name: "Penis",
+						func: accessCocksMenu
+					});
+				menusList.push({
+						name: "Balls",
+						func: accessBallsMenu
+					}
+				);
+			}
 
 			const menusPerPage: int = menusList.length > 14 ? 12 : 14;
 
@@ -1284,6 +1288,14 @@ package classes.Scenes {
 			if (!GeneticMemoryStorage[genMem.id] && player.hasPerk(PerkLib.GeneticMemory)) {
 				GeneticMemoryStorage[genMem.id] = true;
 				if (player.hasPerk(PerkLib.Metamorph)) outputText("\n\n<b>Genetic Memory Obtained: " + (genMem.name || genMem.id) + "!</b>");
+				if (genMem.unlockText) outputText("\n<b>" + genMem.unlockText +"</b>");
+			}
+		}
+
+		public static function unlockMetamorphEx (genMem: *): void {
+			if (!GeneticMemoryStorage[genMem.id] && player.hasPerk(PerkLib.GeneticMemory)) {
+				GeneticMemoryStorage[genMem.id] = true;
+				if (player.hasPerk(PerkLib.MetamorphEx)) outputText("\n\n<b>Genetic Memory Obtained: " + (genMem.name || genMem.id) + "!</b>");
 				if (genMem.unlockText) outputText("\n<b>" + genMem.unlockText +"</b>");
 			}
 		}

@@ -881,7 +881,7 @@ public function defeatedByAncientTentacleBeast():void {
         if (!player.hasCock()) {
             outputText(" Just as you were thinking about your breasts you feel a bump of flesh between your legs growing steadily until it breaks out standing erect. This… this thing is a penis!");
             player.createCock(6, 1.5);
-			Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HUMAN));
+			Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
             player.clitLength = .25;
             if (player.hasVagina()) outputText(" Oh, no, you're a full herm now!");
         }

@@ -94,7 +94,7 @@ public class MinotaurBlood extends Consumable {
 				outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.");
 				dynStats("lus", 5);
 				player.MutagenBonus("lib", 2);
-				Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
+				Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 			}
 			else {
 				player.ballSize++;
@@ -126,7 +126,7 @@ public class MinotaurBlood extends Consumable {
 						player.cocks[0].cockType = CockTypesEnum.HORSE;
 						player.clitLength = .25;
 
-						Metamorph.unlockMetamorph(CockMem.getMemory(CockMem.HORSE));
+						Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HORSE));
 					}
 				}
 				changes++;

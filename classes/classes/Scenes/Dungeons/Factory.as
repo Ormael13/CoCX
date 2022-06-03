@@ -315,7 +315,7 @@ use namespace CoC;
 					player.cocks[0].cockType = CockTypesEnum.DEMON;
 					player.balls = 2;
 					player.ballSize = 3;
-					Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
+					Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 				}
 				else {
 					outputText("gushing with fluids as it shapes itself into a hungry demonic cunt.");

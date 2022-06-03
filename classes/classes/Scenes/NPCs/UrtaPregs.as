@@ -2628,7 +2628,7 @@ private function acceptARandomGenderFromASkunk():void {
 			outputText("\n\nYou feel strange as a pair of lumps form at the base of your newly acquired dick; these lumps quickly grow to sag, forming an excess of skin.  Moments later you groan as a pair of weighty nuts fills your new ballsack, instantly filling it up with some cum.  It's not much to look at, being only 1 inch in diameter, but it certainly seems productive.  Small dollops of pre escape your new cock in agreement.");
 			player.balls = 2;
 			player.ballSize = 1;
-			Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
+			Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 		}
 		player.createCock();
 		player.cocks[0].cockLength = 4;
@@ -2683,7 +2683,7 @@ private function acceptARandomGenderFromASkunk():void {
 			outputText("\n\nYou feel strange as a pair of lumps form at the base of your newly acquired dick.  These lumps quickly grow to sag, forming an excess of skin.  Moments later you groan as a pair of weighty nuts fills your new ballsack, instantly filling it up with some cum.  It's only 2 inches in diameter.  At first you don't think much of it, but a sudden feeling of discomfort makes itself known as your balls grow fuller and fuller.  Despite not being huge, your balls seem as productive as a minotaur's.  Soon enough you run out of space in your churning, full sack, and begin climaxing in a spontaneous orgasm, adding to the mess you made of Lianna and her carpet.");
 			player.balls = 2;
 			player.ballSize = 2;
-			Metamorph.unlockMetamorph(BallsMem.getMemory(BallsMem.DUO));
+			Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 		}
 		outputText("\n\nThe skunk alchemist doesn't seem bothered about the mess in the least, she just continues to take notes, gazing at you every time something new seems to come up.  \"<i>That was certainly unexpected.  Such a strong reaction was not in my plans, but it seems to have gotten the job done, either way.</i>\"  She notes with amusement as she continues taking notes.");
 		
