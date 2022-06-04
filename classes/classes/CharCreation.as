@@ -329,7 +329,7 @@ import coc.view.MainView;
 					trace("1 vagina purged.");
 				}
 				//Keep gender and normalize genitals.
-				if (hadOldCock) player.createCock(5.5, 1, CockTypesEnum.HUMAN);
+				if (hadOldCock) player.createCock();
 				if (hadOldVagina) player.createVagina(true);
 				if (player.balls > 2) player.balls = 2;
 				if (player.ballSize > 2) player.ballSize = 2;
@@ -553,9 +553,6 @@ import coc.view.MainView;
 			player.balls = 2;
 			player.ballSize = 1;
 			player.createCock();
-			player.cocks[0].cockLength = 5.5;
-			player.cocks[0].cockThickness = 1;
-			player.cocks[0].cockType = CockTypesEnum.HUMAN;
 			player.cocks[0].knotMultiplier = 1;
 
 			//Breasts
@@ -612,9 +609,6 @@ import coc.view.MainView;
 			player.createVagina();
 			player.clitLength = .5;
 			player.createCock();
-			player.cocks[0].cockLength = 5.5;
-			player.cocks[0].cockThickness = 1;
-			player.cocks[0].cockType = CockTypesEnum.HUMAN;
 			player.cocks[0].knotMultiplier = 1;
 
 			//Breasts
@@ -1754,12 +1748,17 @@ import coc.view.MainView;
 			}
 			player.perkPoints += 1;
 			//setupMutations();
+			Metamorph.resetMetamorph();
+			if (player.hasCock()) {
+				Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
+				Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK1));
+			}
+			if (player.hasVagina()) Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.HUMAN));
 			clearOutput();
 			statScreenRefresh();
 			outputText("Would you like to play through the " + (1 * (1 + player.newGamePlusMod())) + "-day"+(player.newGamePlusMod() > 0 ? "s":"")+" prologue in Ingnam or just skip?");
 			player.updateRacialAndPerkBuffs();
 			player.HP = player.maxHP();
-			Metamorph.resetMetamorph();
 			//doYesNo(goToIngnam, arrival);
 			menu();
 			addButton(0, "Ingnam", goToIngnam);

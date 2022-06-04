@@ -294,6 +294,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const YETI:int = 23;
+		EnumValue.add(Memories, YETI, "YETI", {
+		  id: "Yeti Ears",
+		  name: "Yeti Ears",
+		  cost: 100,
+		  title: "Yeti",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsYeti;
+		  }
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Combat {
+package classes.Scenes.Combat {
 import classes.BaseContent;
 import classes.BodyParts.*;
 import classes.CoC;
@@ -7050,7 +7050,7 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) lustDmgF *= 1.1;
         if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) lustDmgF *= 1.2;
         if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) lustDmgF *= 1.3;
-        if (player.perkv1(IMutationsLib.RaijuCathodeIM) >= 2) damage *= 1.2;
+        if (player.perkv1(IMutationsLib.RaijuCathodeIM) >= 2) lustDmgF *= 1.2;
         if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= RacialParagonAbilityBoost();
         if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
         lustDmgF = lustDmgF * monster.lustVuln;
@@ -14745,8 +14745,7 @@ public class Combat extends BaseContent {
 		if (flags[kFLAGS.PLAYER_COMPANION_1] != "") partySize += 1;
 		if (flags[kFLAGS.PLAYER_COMPANION_2] != "") partySize += 1;
 		if (flags[kFLAGS.PLAYER_COMPANION_3] != "") partySize += 1;
-		if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji) && partySize == 2) return true;
-		else return false;
+		return (player.hasStatusEffect(StatusEffects.CombatFollowerZenji) && partySize == 2);
 	}
 
     public function struggleCreepingDoom():void {

@@ -11432,12 +11432,6 @@ public final class Mutations extends MutationsHelper {
         if (player.cor > 75) dynStats("cor", -2);
     }
 
-    public function akbalSaliva(player:Player):void {
-        outputText("You uncork the vial and chug down the saliva.  ");
-        HPChange((player.maxHP() / 4), true);
-        player.refillHunger(5);
-    }
-
     //Item: Dragon Egg (Z) (FEN CODED TO HERE - OR AT LEAST COPIED INTO THE CODE FOR FUTURE CODING)
     //Itemdescription - "A large, solid egg, easily the size of your clenched fist.  Its shell color is reddish-white, with blue splotches."
     public function eatEmberEgg(player:Player):void {
@@ -12060,8 +12054,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Nipples Turn Black:
         if (!player.hasStatusEffect(StatusEffects.BlackNipples) && player.lowerBody != LowerBody.GARGOYLE && rand(6) == 0 && changes < changeLimit) {
-            outputText("[pg]A tickling sensation plucks at your nipples and you cringe, trying not to giggle.  Looking down you are in time to see the last spot of flesh tone disappear from your [nipples].  They have turned an onyx black!");
-            player.createStatusEffect(StatusEffects.BlackNipples, 0, 0, 0, 0);
+            transformations.NipplesBlack.applyEffect();
             changes++;
         }
         //Remove odd eyes
@@ -13913,18 +13906,10 @@ public final class Mutations extends MutationsHelper {
                 outputText("  With the transformation complete, your [cock] returns to its normal coloration.");
             }
             if (player.cocks.length > 1) {
-                temp = player.cocks.length;
-                temp2 = 0;
-                //Find shortest cock
-                while (temp > 0) {
-                    temp--;
-                    if (player.cocks[temp].cockLength <= player.cocks[temp2].cockLength) {
-                        temp2 = temp;
-                    }
-                }
+                temp2 = player.shortestCockIndex();
                 if (int(Math.random() * 4) == 0) temp3 = player.increaseCock(temp2, 3);
                 else temp3 = player.increaseCock(temp2, 1);
-                dynStats("lus", 5 + temp * 3);
+                dynStats("lus", 5 + temp2 * 3);
                 player.addCurse("sen", 1, 1);
                 MutagenBonus("int", 1);
                 MutagenBonus("lib", 2);
@@ -13948,11 +13933,10 @@ public final class Mutations extends MutationsHelper {
         }
         //Legs
         if (player.lowerBody != LowerBody.YETI && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+            outputText("[pg]");
             if (player.lowerBody == LowerBody.HUMAN) {
-                outputText("[pg]");
                 transformations.LowerBodyYeti.applyEffect();
             } else {
-                outputText("[pg]");
                 transformations.LowerBodyHuman.applyEffect();
             }
             changes++;
@@ -15206,10 +15190,6 @@ public final class Mutations extends MutationsHelper {
 
     public function prisonBread(player:Player):void {
         prison.prisonItemBread(false);
-    }
-
-    public function prisonCumStew(player:Player):void {
-        prison.prisonItemBread(true);
     }
 
     public function frothyBeer(player:Player):void {

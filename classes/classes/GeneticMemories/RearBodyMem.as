@@ -140,6 +140,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+	  public static const YETI:int = 9;
+	  EnumValue.add(Memories, YETI, "YETI", {
+		  id: "Yeti Rear Body",
+		  name: "Yeti Fur",
+		  cost: 100,
+		  title: "Yeti",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.RearBodyYetiFur;
+		  }
+	  });
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}
