@@ -1090,97 +1090,92 @@ public class PerkMenu extends BaseContent {
 	}
 
 	//Mutations check helper. Cloned + stripped requirements logic from PerkMenuDB.
-	public function mutationsDatabaseVerify(mutationsArray:Array):void{
-			if(flags[kFLAGS.MUTATIONS_SPOILERS]){
-				for each(var mutation:IMutationPerkType in mutationsArray){
-					var pMutateLvl:int = player.perkv1(mutation);
-					if (pMutateLvl > 0) {	//Just checking if you have the base.
-						outputText("\n" + mutation.name() + ": <font color=\"#008000\">Acquired.</font>");
-					} else {
-						outputText("\n" + mutation.name() + ": <font color=\"#800000\">Missing.</font>");
-					}
-					outputText("\nTier: " + pMutateLvl + " of " + mutation.maxLvl + ".");
-					var reqs:Array = [];
-					if (mutation.maxLvl != pMutateLvl) {
-						mutation.pReqs()	//Forces requirements to load up
-						if (mutation.requirements.length == 0) reqs.push("Missing data. Perhaps Unacquirable?");
-						else{
-							for each (var cond:Object in mutation.requirements){
-								var reqStr:String = cond.text;
-								var color:String = "";
-								if (!(reqStr.indexOf("Mutation") >= 0)) { //Ignores the "free mutation slot" note.
-									if (cond.fn(player)) {
-										color = "#008000";
-									}
-									else {
-										color = "#800000";
-									}
-									reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
+	public function mutationsDatabaseVerify(mutationsArray:Array):void {
+		if(flags[kFLAGS.MUTATIONS_SPOILERS]) {
+			for each(var mutation:IMutationPerkType in mutationsArray) {
+				var pMutateLvl:int = player.perkv1(mutation);
+				if (pMutateLvl > 0) {	//Just checking if you have the base.
+					outputText("\n" + mutation.name() + ": <font color=\"#008000\">Acquired.</font>");
+				} else {
+					outputText("\n" + mutation.name() + ": <font color=\"#800000\">Missing.</font>");
+				}
+				outputText("\nTier: " + pMutateLvl + " of " + mutation.maxLvl + ".");
+				var reqs:Array = [];
+				if (mutation.maxLvl != pMutateLvl) {
+					mutation.pReqs()	//Forces requirements to load up
+					if (mutation.requirements.length == 0) reqs.push("Missing data. Perhaps Unacquirable?");
+					else {
+						for each (var cond:Object in mutation.requirements) {
+							var reqStr:String = cond.text;
+							var color:String = "";
+							if (!(reqStr.indexOf("Mutation") >= 0)) { //Ignores the "free mutation slot" note.
+								if (cond.fn(player)) {
+									color = "#008000";
+								} else {
+									color = "#800000";
 								}
-
+								reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
 							}
 						}
 					}
-					if (mutation.maxLvl == pMutateLvl){	//Highest tier.
-						reqs.push("You already have the highest tier.");
-					}
-					outputText("\nRequirements for next tier: " + reqs.join(", "));
+				}
+				if (mutation.maxLvl == pMutateLvl) {	//Highest tier.
+					reqs.push("You already have the highest tier.");
+				}
+				outputText("\nRequirements for next tier: " + reqs.join(", "));
 
-					if (mutation.maxLvl != pMutateLvl){
-						outputText("\nNext Tier Description: ");
-						if(mutation.mDesc(player.getPerk(mutation), pMutateLvl).length <= 1) {	//Some desc. contains only "."
-							if (!player.hasMutation(mutation)) outputText(mutation.mDesc(player.getPerk(mutation),1));
-							//outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl));
-							else outputText("Error in description for Mutation "+ mutation.name() +".");
-						}
-						else{
-							outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl + 1));
-						}
+				if (mutation.maxLvl != pMutateLvl) {
+					outputText("\nNext Tier Description: ");
+					if(mutation.mDesc(player.getPerk(mutation), pMutateLvl).length <= 1) {	//Some desc. contains only "."
+						if (!player.hasMutation(mutation)) outputText(mutation.mDesc(player.getPerk(mutation),1));
+						//outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl));
+						else outputText("Error in description for Mutation "+ mutation.name() +".");
+					} else {
+						outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl + 1));
 					}
+				}
 
-					if (pMutateLvl > 0){
-						outputText("\nCurrent Tier Description: ");
-						if(mutation.mDesc(player.getPerk(mutation), pMutateLvl).length <= 1) {	//Some desc. contains only "."
-							outputText("Error in description for Mutation "+ mutation.name() +".");
-						}
-						else{
-							outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl));
-						}
+				if (pMutateLvl > 0) {
+					outputText("\nCurrent Tier Description: ");
+					if(mutation.mDesc(player.getPerk(mutation), pMutateLvl).length <= 1) {	//Some desc. contains only "."
+						outputText("Error in description for Mutation "+ mutation.name() +".");
+					} else{
+						outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl));
 					}
+				}
 
-					outputText("\n\n")
-					var tempObj:Object = mutation.pBuffs(player)
-					for (var key:String in tempObj){
-						outputText("Buffs " + key + ": " + tempObj[key] + "\n");
+				outputText("\n\n")
+				var tempObj:Object = mutation.pBuffs(player)
+				for (var key:String in tempObj) {
+					outputText("Buffs " + key + ": " + tempObj[key] + "\n");
+				}
+				outputText("\n");
+			}
+		}
+		else{
+			for each(var mutation2:IMutationPerkType in mutationsArray) {
+				var pMutateLvl2:int = player.perkv1(mutation2);
+				if (player.hasMutation(mutation2)) {
+					outputText("\n" + mutation2.name() + ": <font color=\"#008000\">Acquired.</font>");
+					outputText("\nTier: " + player.perkv1(mutation2));
+					outputText("\nDescription: ");
+					if (mutation2.mDesc(player.getPerk(mutation2), pMutateLvl2).length <= 1) {	//Some desc. contains only "."
+						if (player.perkv1(mutation2) == 0) outputText("You don't have this Mutation yet.");
+						else outputText("No description available.");
+					} else {
+						outputText(mutation2.mDesc(player.getPerk(mutation2), pMutateLvl2));
 					}
-					outputText("\n");
+					outputText("\n\n");
+					var tempObj2:Object = mutation2.pBuffs(player);
+					for (var key2:String in tempObj2) {
+						outputText("Buffs " + key2 + ": " + tempObj2[key2] + "\n");
+					}
+				} else {
+					outputText("\n???" + "\n Tier: ?" + "\nDescription: ???");
 				}
 			}
-			else{
-				for each(var mutation2:IMutationPerkType in mutationsArray){
-					if (player.hasMutation(mutation2)) {
-						outputText("\n" + mutation2.name() + ": <font color=\"#008000\">Acquired.</font>");
-						outputText("\nTier: " + player.perkv1(mutation2));
-						outputText("\nDescription: ");
-						if (mutation2.desc().length <= 1) {	//Some desc. contains only "."
-							if (player.perkv1(mutation2) == 0) outputText("You don't have this Mutation yet.");
-							else outputText("No description available.");
-						} else {
-							outputText(mutation2.desc());
-						}
-						outputText("\n\n")
-						var tempObj2:Object = mutation2.pBuffs(player)
-						for (var key2:String in tempObj2){
-							outputText("Buffs " + key2 + ": " + tempObj2[key2] + "\n");
-						}
-					}
-					else
-						{
-							outputText("\n???" + "\n Tier: ?" + "\nDescription: ???");
-						}
-				}
-			}
-			outputText("\n");
+		}
+		outputText("\n");
 	}
 
 	public function perkDatabase(page:int=0, count:int=50):void {
