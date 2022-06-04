@@ -115,16 +115,16 @@ public class VaginaMem extends BaseContent {
 			}
 		});
 
-	public static const CANCER:int = 7;
-	EnumValue.add(Memories, CANCER, "CANCER", {
-		id: "Cancer Vagina",
-		name: "Cancer Vagina",
-		cost: 500,
-		title: "Cancer",
-		transformation: function(vaginaIndex:int): Transformation {
-			return CoC.instance.transformations.VaginaCancer(vaginaIndex);
-		}
-	});
+		public static const CANCER:int = 7;
+		EnumValue.add(Memories, CANCER, "CANCER", {
+			id: "Cancer Vagina",
+			name: "Cancer Vagina",
+			cost: 500,
+			title: "Cancer",
+			transformation: function(vaginaIndex:int): Transformation {
+				return CoC.instance.transformations.VaginaCancer(vaginaIndex);
+			}
+		});
 
 		public static const DEMONIC:int = 8;
 		EnumValue.add(Memories, DEMONIC, "DEMONIC", {
