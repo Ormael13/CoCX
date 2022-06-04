@@ -146,7 +146,7 @@ public class Changelog extends BaseContent
 			outputText("mutation, holiday events appearing in Ingnam/prison, Minotaur-Dormammu bug for all damage sources, equipping at once specific combinations of melee weapon and shield when not meeting req. to do so, Blood Chains too long stun duration, cyclop/gazer scores not included in chimera race check, Wood Elf perks not adding extra shoot & not affecting Skypiercer, Sand Mother finally remembered that she ");
 			outputText("can use spells, some spell teaching items allowing to learn more than 1 spell per use, Oswald not selling backpacks when PC got none\n\n");
 			outputText("<b>Version 0.8s5:</b>\n\n");
-			outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk with full bonus to soulforce (+950). Effect: Opening more options to change PC body: cock types, ball count, pussie types, breast rows count. (also increase max SF by 100 each day up to 1,000)\n");
+			outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk with full bonus to soulforce (+950). Effect: Opening more options to change PC body: cock types, ball count, pussie types, breast rows count. (also increase max SF by 50 + 100 each day up to 1,050)\n");
 			outputText("-Ascension: Natural Metamorph would grant Metamorph (Ex) perk too.\n");
 			outputText("-(UEE import) Treasure chests added to some locations. (Svalkash)\n");
 			outputText("-Fixed combat issues: Corrupted Handmaidens, Doppelganger, Priscilla, Goblin Shaman. The latter two still need mana cost rebalancing, Vala 'Wake Up' scene, Lethice drops, Gnoll scene. (Svalkash)\n");
