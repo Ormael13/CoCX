@@ -1,4 +1,4 @@
-package classes.Scenes.Combat {
+﻿package classes.Scenes.Combat {
 import classes.BaseContent;
 import classes.BodyParts.*;
 import classes.CoC;
@@ -14745,7 +14745,8 @@ public class Combat extends BaseContent {
 		if (flags[kFLAGS.PLAYER_COMPANION_1] != "") partySize += 1;
 		if (flags[kFLAGS.PLAYER_COMPANION_2] != "") partySize += 1;
 		if (flags[kFLAGS.PLAYER_COMPANION_3] != "") partySize += 1;
-		return (player.hasStatusEffect(StatusEffects.CombatFollowerZenji) && partySize == 2);
+		if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji) && partySize == 2) return true;
+		else return false;
 	}
 
     public function struggleCreepingDoom():void {
