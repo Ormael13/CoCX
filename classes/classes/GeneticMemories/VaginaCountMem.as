@@ -4,7 +4,7 @@ package classes.GeneticMemories {
 	import classes.Transformations.Transformation;
 	import classes.CoC;
 
-	public class CockCountMem extends BaseContent {
+	public class VaginaCountMem extends BaseContent {
 		/**
 		* Entry properties:
 		* - id: the identificator of the Metamorph inside GeneticStorage
@@ -38,76 +38,19 @@ package classes.GeneticMemories {
 
 		public static var Memories:/*EnumValue*/ Array = [];
 
-		public static const COCK1:int = 0;
-		EnumValue.add(Memories, COCK1, "COCK1", {
-			id: "One Cock",
-			name: "One Cock",
-			title: "COCK1"
+		public static const VAGINA1:int = 0;
+		EnumValue.add(Memories, VAGINA1, "VAGINA1", {
+			id: "One Vagina",
+			name: "One Vagina",
+			title: "VAGINA1"
 		});
 
-		public static const COCK2:int = 1;
-		EnumValue.add(Memories, COCK2, "COCK2", {
-			id: "Two Cocks",
-			name: "Two Cocks",
-			title: "COCK2"
+		public static const VAGINA2:int = 1;
+		EnumValue.add(Memories, VAGINA2, "VAGINA2", {
+			id: "Two Vaginas",
+			name: "Two Vaginas",
+			title: "VAGINA2"
 		});
-
-		public static const COCK3:int = 2;
-		EnumValue.add(Memories, COCK3, "COCK3", {
-			id: "Three Cocks",
-			name: "Three Cocks",
-			title: "COCK3"
-		});
-
-		public static const COCK4:int = 3;
-		EnumValue.add(Memories, COCK4, "COCK4", {
-			id: "Four Cocks",
-			name: "Four Cocks",
-			title: "COCK4"
-		});
-
-		public static const COCK5:int = 4;
-		EnumValue.add(Memories, COCK5, "COCK5", {
-			id: "Five Cocks",
-			name: "Five Cocks",
-			title: "COCK5"
-		});
-
-		public static const COCK6:int = 5;
-		EnumValue.add(Memories, COCK6, "COCK6", {
-			id: "Six Cocks",
-			name: "Six Cocks",
-			title: "COCK6"
-		});
-
-		public static const COCK7:int = 6;
-		EnumValue.add(Memories, COCK7, "COCK7", {
-			id: "Seven Cocks",
-			name: "Seven Cocks",
-			title: "COCK7"
-		});
-
-		public static const COCK8:int = 7;
-		EnumValue.add(Memories, COCK8, "COCK8", {
-			id: "Eight Cocks",
-			name: "Eight Cocks",
-			title: "COCK8"
-		});
-
-		public static const COCK9:int = 8;
-		EnumValue.add(Memories, COCK9, "COCK9", {
-			id: "Nine Cocks",
-			name: "Nine Cocks",
-			title: "COCK9"
-		});
-
-		public static const COCK10:int = 9;
-		EnumValue.add(Memories, COCK10, "COCK10", {
-			id: "Ten Cocks",
-			name: "Ten Cocks",
-			title: "COCK10"
-		});
-
 
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];

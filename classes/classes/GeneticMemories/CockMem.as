@@ -51,7 +51,7 @@ package classes.GeneticMemories {
 
 		public static const HUMAN:int = 1;
 		EnumValue.add(Memories, HUMAN, "HUMAN", {
-			id: "Human cock",
+			id: "Unlocked Metamorph",
 			name: "Human cock",
 			cost: 500,
 			title: "Human",

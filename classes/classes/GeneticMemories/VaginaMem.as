@@ -51,7 +51,7 @@ public class VaginaMem extends BaseContent {
 
 		public static const HUMAN:int = 1;
 		EnumValue.add(Memories, HUMAN, "HUMAN", {
-			id: "Human Vagina",
+			id: "Unlocked Metamorph",
 			name: "Human Vagina",
 			cost: 500,
 			title: "Human",

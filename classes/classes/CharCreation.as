@@ -1750,10 +1750,9 @@ import coc.view.MainView;
 			//setupMutations();
 			Metamorph.resetMetamorph();
 			if (player.hasCock()) {
-				Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
 				Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK1));
 			}
-			if (player.hasVagina()) Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.HUMAN));
+			if (player.balls > 0) Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 			clearOutput();
 			statScreenRefresh();
 			outputText("Would you like to play through the " + (1 * (1 + player.newGamePlusMod())) + "-day"+(player.newGamePlusMod() > 0 ? "s":"")+" prologue in Ingnam or just skip?");
@@ -2784,6 +2783,22 @@ import coc.view.MainView;
 				{
 					name: "Tail",
 					func: accessTailMenu
+				},
+				{
+					name: "Vagina",
+					func: accessVaginaMenu
+				},
+				{
+					name: "PenisCount",
+					func: accessCockCountMenu
+				},
+				{
+					name: "Penis",
+					func: accessCockMenu
+				},
+				{
+					name: "Balls",
+					func: accessBallsMenu
 				}
 			];
 
@@ -2884,6 +2899,22 @@ import coc.view.MainView;
 
 		private function accessTailMenu(currentPage: int = 0): void {
 			openPaginatedMetamorphMenu("Tail", accessTailMenu, currentPage, TailMem.Memories);
+		}
+
+		private function accessVaginaMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Vagina", accessVaginaMenu, currentPage, VaginaMem.Memories);
+		}
+
+		private function accessCockMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Cock", accessCockMenu, currentPage, CockMem.Memories);
+		}
+
+		private function accessCockCountMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Cock Count", accessCockCountMenu, currentPage, CockCountMem.Memories);
+		}
+
+		private function accessBallsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Balls", accessBallsMenu, currentPage, BallsMem.Memories);
 		}
 
 		private function openPaginatedMetamorphMenu (title: String, thisMenu: *, currentPage: int, memArray:Array): void {

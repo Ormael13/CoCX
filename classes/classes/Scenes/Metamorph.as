@@ -4,6 +4,7 @@
  */
 package classes.Scenes {
 	import classes.*;
+	import classes.GeneticMemories.VaginaCountMem;
 	import classes.internals.SaveableState;
 	import classes.BodyParts.Hair;
 	import classes.BodyParts.Antennae;
@@ -950,10 +951,9 @@ package classes.Scenes {
 			outputText("[pg]Perhaps you'd like to change this?");
 
 			var totCock: int = player.cockTotal();
-			if (totCock == 0) {
+			if (totCock == 0 && GeneticMemoryStorage[CockCountMem.Memories[0].id]) {
 				openPaginatedMenu(title, accessCockMenu, currentPage, CockMem.Memories, 0);
-			}
-			else {
+			} else {
 				menu();
 
 				for (var i: int = 0; i  < totCock; i++) {
@@ -1002,19 +1002,26 @@ package classes.Scenes {
 			outputText("[pg]Perhaps you'd like to change this?");
 
 			var totVag:int = player.vaginas.length;
-			if (totVag > 1) {
+			if ((totVag == 0 && GeneticMemoryStorage[VaginaCountMem.Memories[0].id]) ||
+				(totVag == 1 && !GeneticMemoryStorage[VaginaCountMem.Memories[1].id])) {
+				openPaginatedMenu(title, accessVaginaMenu, currentPage, VaginaMem.Memories, 0);
+			} else if (totVag > 1 || GeneticMemoryStorage[VaginaCountMem.Memories[1].id]) {
 				menu();
 
 				for (var i: int = 0; i  < totVag; i++) {
-					addButton(i, "Vagina "+(i+1), accessVaginaMenu, 0, i).hint( player.cockDescript(i));
+					addButton(i, "Vagina "+(i+1), accessVaginaMenu, 0, i).hint( player.vaginaDescript(i));
 				}
-				const vaginaUnlocked:Boolean = false;
+				const vaginaUnlocked:Boolean = GeneticMemoryStorage[VaginaCountMem.Memories[totVag].id] && true;
 				addButtonIfTrue(totVag, "New Vagina", curry(accessVaginaMenu, 0, totVag), "You need to get a vagina first", vaginaUnlocked, "Add a vagina");
 
 				addButton(14, "Back", accessMetamorphMenu);
 			}
-			else
-				openPaginatedMenu(title, accessVaginaMenu, currentPage, VaginaMem.Memories, 0);
+			else {
+				clearOutput();
+				outputText(title);
+				outputText("You need to unlock a vagina first!");
+				addButton(14, "Back", accessMetamorphMenu);
+			}
 		}
 
 		private function accessVaginaMenu(currentPage: int = 0, vagina: int = 0): void {

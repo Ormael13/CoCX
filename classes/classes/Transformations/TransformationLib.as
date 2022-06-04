@@ -10331,8 +10331,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public function UnlockCocks():void {
 		//noinspection FallThroughInSwitchStatementJS	// Fallthrough is intended for retroactively unlocking in Metamorph after getting GeneticMemory
         switch (player.cockTotal()) {
-            case 12: Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK12));
-            case 11: Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK11));
             case 10: Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK10));
             case 9: Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK9));
             case 8: Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK8));
