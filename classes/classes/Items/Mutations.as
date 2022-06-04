@@ -4752,6 +4752,7 @@ public final class Mutations extends MutationsHelper {
             }
             //Ear tf
             if (player.faceType == Face.SHARK_TEETH && player.ears.type != Ears.SHARK && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+                outputText("[pg]");
                 transformations.EarsShark.applyEffect();
                 changes++;
             }
@@ -4815,7 +4816,7 @@ public final class Mutations extends MutationsHelper {
                 transformations.LowerBodyShark(2).applyEffect();
                 changes++;
             }
-            if (player.lowerBody != LowerBody.SHARK && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+            if (!InCollection(player.lowerBody, LowerBody.HUMAN, LowerBody.SHARK, LowerBody.GARGOYLE) && changes < changeLimit && rand(3) == 0) {
                 outputText("[pg]");
                 transformations.LowerBodyHuman.applyEffect();
                 changes++;
