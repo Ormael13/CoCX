@@ -873,6 +873,13 @@ public function soularena():void {
 		if (flags[kFLAGS.SPIRIT_STONES] < 3) addButtonDisabled(2, "Challange", "To go to the section of soul arena for challenges you need to give 3 spirit stones.");
 		else addButton(2, "Challenge", soularenaChallenge).hint("Go to the section of soul arena for challenges. (Who knows what rewards you may get after winning any of the challenges there...)");
 		if (flags[kFLAGS.IGNIS_ARENA_SEER] >= 1) addButton(10, "Ignis", ignisarenaseer.mainIgnisMenu);
+		if (player.gems >= 50 && !player.hasPerk(PerkLib.JobSoulCultivator)) addButton(11, "M.S.L.", mrsShigureLecturesBasics).hint("Mrs. Shigure Lectures about soul cultivation.");
+		else if (player.hasPerk(PerkLib.JobSoulCultivator)) addButtonDisabled(11, "M.S.L.", "You already learned basic to start your soul cultivation.");
+		else addButtonDisabled(11, "M.S.L.", "You not have enough gems to listen to those lectures.");
+		if (!player.hasPerk(PerkLib.SoulWarrior) && player.hasPerk(PerkLib.JobSoulCultivator)) {
+			if (flags[kFLAGS.SPIRIT_STONES] >= 5) addButton(12, "M.S.L.", mrsShigureLecturesFirstTrio).hint("Mrs. Shigure Lectures about first three steps of soul cultivation.");
+			else addButtonDisabled(12, "M.S.L.", "You not have enough spirit stones to listen to those lectures.");
+		}
 		addButton(14, "Back", riverislandVillageStuff);
 		statScreenRefresh();
 	}
@@ -1084,6 +1091,34 @@ public function soularena():void {
 		flags[kFLAGS.SPIRIT_STONES] += 3;
 		statScreenRefresh();
 		soularena();
+	}
+	public function mrsShigureLecturesBasics():void {
+		clearOutput();
+		player.gems -= 50;
+		outputText("Placeholder about milf fluff telling all gathered about joys of (dual) cultivation.");
+		if (player.wis >= 10) {
+			outputText("Placeholder about PC avoiding been distracted by milf fluff. <b>Gained perk: Soul Cultivation</b>");
+			player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
+		}
+		else outputText("Placeholder about PC been distracted by milf fluff than what she was talking about.");
+		doNext(camp.returnToCampUseFourHours);
+	}
+	public function mrsShigureLecturesFirstTrio():void {
+		clearOutput();
+		flags[kFLAGS.SPIRIT_STONES] -= 5;
+		if (player.hasPerk(PerkLib.SoulPersonage)) {
+			outputText("Placeholder about milf fluff telling all gathered about joys of (dual) cultivation or becoming Soul Warrior.");
+			if (player.wis >= 80 && player.level >= 18) player.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
+		}
+		else if (player.hasPerk(PerkLib.SoulApprentice)) {
+			outputText("Placeholder about milf fluff telling all gathered about joys of (dual) cultivation or becoming Soul Personage.");
+			if (player.wis >= 40 && player.level >= 9) player.createPerk(PerkLib.SoulPersonage, 0, 0, 0, 0);
+		}
+		else {
+			outputText("Placeholder about milf fluff telling all gathered about joys of (dual) cultivation or becoming Soul Apprentice.");
+			if (player.wis >= 20) player.createPerk(PerkLib.SoulApprentice, 0, 0, 0, 0);
+		}
+		doNext(camp.returnToCampUseFourHours);
 	}
 	
 	private function golemancershop():void {

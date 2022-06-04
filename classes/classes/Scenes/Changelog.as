@@ -161,9 +161,9 @@ public class Changelog extends BaseContent
 			//outputText("-Dinah would provide PC with HB Mech upgrade options after it's bought. They could boost mech defences, attack or even provide with specials. As with all other items upgrades cost can vary depending on her mood ^^\n");
 			//outputText("-HB Mech upgrade options includes: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Rapid Reload (+base ranged atk dmg), Internal Systems (increase mech SF capacity and lower it consumption during high activity), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special), ");
 			//outputText("Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-When Belisa Affection reach 80%+ PC can use 6 holy bands at once. If it reach 120% limit increase to 8 holy bands. Her affection cap is now 120% not 100% too.\n");
+			outputText("-Basic and Advanced perks are lablel on perk selection now to help distinguish if player picking basic or advanced job perk.\n");
+			outputText("-Belisa texts for putting on and removing holy bands been added/expanded.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

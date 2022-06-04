@@ -1696,7 +1696,10 @@ import coc.view.MainView;
 			else player.setUndergarment(undergarments.C_LOIN);
 			if (player.biggestTitSize() >= 2) player.setUndergarment(undergarments.C_BRA);
 			else player.setUndergarment(undergarments.C_SHIRT);
-			if (player.hasPerk(PerkLib.HistoryCultivator) || (player.hasPerk(PerkLib.PastLifeCultivator) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.HistoryCultivator) || (player.hasPerk(PerkLib.PastLifeCultivator) && player.hasKeyItem("PerksOverJobs") < 0)) {
+				player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.HistoryFighter) || (player.hasPerk(PerkLib.PastLifeFighter) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryScout) || (player.hasPerk(PerkLib.PastLifeScout) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobRanger, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryScholar) || (player.hasPerk(PerkLib.PastLifeScholar) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);

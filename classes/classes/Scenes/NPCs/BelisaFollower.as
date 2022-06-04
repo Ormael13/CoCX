@@ -154,7 +154,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 	
 	public function BelisaAffection(changes:Number = 0):Number {
 		BelisaAffectionMeter += changes;
-		if (BelisaAffectionMeter > 100) BelisaAffectionMeter = 100;
+		if (BelisaAffectionMeter > 120) BelisaAffectionMeter = 120;
 		if (BelisaAffectionMeter < 0) BelisaAffectionMeter = 0;
 		return BelisaAffectionMeter;
 	}
@@ -868,6 +868,8 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 	}
 	private function BelisaHolyBandsManagmentCap():Number {
 		var BHBMCap:Number = 4;
+		if (BelisaAffectionMeter >= 80) BHBMCap += 2;
+		if (BelisaAffectionMeter >= 120) BHBMCap += 2;
 		return BHBMCap;
 	}
 	private function BelisaHolyBandsManagment():void {
@@ -906,14 +908,17 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		outputText("Do you want this band attached semi-permanently?\n\n");
 	}
 	private function BelisaHolyBandsManagmentAddYes():void {
-		outputText("Belisa nods, looking seriously down at you. \"<i></i>\"\n\n");
+		outputText("Belisa nods, looking seriously down at you. \"<i>This might sting a bit. The band will take a second or so to acclimate to your energies.</i>\" As she says that, she flattens the band against your [skin].\n\n");
 		outputText("Electricity seems to shoot from the band to your body, for a brief moment, you grimace, forcing yourself to stay still. The unpleasant sensation fades, leaving you with one of Belisa’s bands stuck tight to your arm. The band seems to pulse with your heartbeat, flexing as you move.\n\n");
-		outputText("\"<i>Sorry.</i>\" Belisa winces. \"<i>Was that more than a sting?</i>\" You give the little Drider a nod, and she sighs.\n\n");
-		//outputText("\"<i></i>\"\n\n");
+		outputText("\"<i>Sorry.</i>\" Belisa winces. \"<i>Was that more than a sting?</i>\" You give the little Drider a nod, and she sighs. \"<i>You should feel a pulsing in your arm. That’s natural, and means the band’s synched up with your energies.</i>\" She blinks twice. \"<i>The pulsing should go away in an hour or so. If it doesn’t, come back here, it’ll need to be removed.</i>\"\n\n");
 	}
 	private function BelisaHolyBandsManagmentAddNo():void {
-		outputText("Belisa nods, giving you back your gems and putting the band away.\n\n");
+		outputText("Belisa nods, putting the band away.\n\n");
 		doNext(BelisaHolyBandsManagment);
+	}
+	private function BelisaHolyBandsManagmentRemove():void {
+		outputText("You ask Belisa to remove one of the bands. She nods sagely, taking a seat by the shore. You sit beside her, and she inhales, hands glowing blue. You feel a numb throbbing in your arm, and with a slight <i>snap</i> noise, the band peels off your [skin]. You feel the flow of energy through your body begin to normalize, and Belisa nods, putting the band away.\n\n");
+		outputText("\"<i>There you go.</i>\" She puts a hand on your [skin] where the band was. \"<i>Your energies seem to be returning to their normal flow. If you feel any sharp pain, come back to me, otherwise you’re good to go.</i>\"\n\n");
 	}
 	private function BelisaHolyBandsManagmentCrimsonAdd():void {
 		BelisaHolyBandsManagmentAdd();
@@ -932,6 +937,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		doNext(BelisaHolyBandsManagment);
 	}
 	private function BelisaHolyBandsManagmentCrimsonRemove():void {
+		BelisaHolyBandsManagmentRemove();
 		if (HolyBand1 == 1) {
 			HolyBand1 -= 1;
 			player.statStore.removeBuffs('Crimson Holy Band');
@@ -958,6 +964,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		doNext(BelisaHolyBandsManagment);
 	}
 	private function BelisaHolyBandsManagmentPinkRemove():void {
+		BelisaHolyBandsManagmentRemove();
 		if (HolyBand2 == 1) {
 			HolyBand2 -= 1;
 			player.statStore.removeBuffs('Pink Holy Band');
@@ -984,6 +991,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		doNext(BelisaHolyBandsManagment);
 	}
 	private function BelisaHolyBandsManagmentYellowRemove():void {
+		BelisaHolyBandsManagmentRemove();
 		if (HolyBand3 == 1) {
 			HolyBand3 -= 1;
 			player.statStore.removeBuffs('Yellow Holy Band');
@@ -1004,6 +1012,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		doNext(BelisaHolyBandsManagment);
 	}
 	private function BelisaHolyBandsManagmentTurqouiseRemove():void {
+		BelisaHolyBandsManagmentRemove();
 		HolyBand4 -= 1;
 		player.statStore.removeBuffs('Turqouise Holy Band');
 		doNext(BelisaHolyBandsManagment);
@@ -1018,6 +1027,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		doNext(BelisaHolyBandsManagment);
 	}
 	private function BelisaHolyBandsManagmentCrossedRemove():void {
+		BelisaHolyBandsManagmentRemove();
 		HolyBand5 -= 1;
 		player.statStore.removeBuffs('Crossed Holy Band');
 		doNext(BelisaHolyBandsManagment);
@@ -1032,6 +1042,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		doNext(BelisaHolyBandsManagment);
 	}
 	private function BelisaHolyBandsManagmentBrownAndBeigeRemove():void {
+		BelisaHolyBandsManagmentRemove();
 		HolyBand6 -= 1;
 		player.statStore.removeBuffs('Brown and Beige Holy Band');
 		doNext(BelisaHolyBandsManagment);
@@ -1052,6 +1063,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		doNext(BelisaHolyBandsManagment);
 	}
 	private function BelisaHolyBandsManagmentRoyalBlueRemove():void {
+		BelisaHolyBandsManagmentRemove();
 		if (HolyBand7 == 1) {
 			HolyBand7 -= 1;
 			player.statStore.removeBuffs('Royal Blue Holy Band');

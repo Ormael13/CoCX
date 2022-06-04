@@ -259,28 +259,18 @@ public class Soulforce extends BaseContent
 		menuItems.push("LustBreath", (player.hasPerk(PerkLib.DragonPoisonBreath))? FairyTest: false, "Replacing 1 perk with another");
 		menuItems.push("TyrantPF", (TyrantiaFollower.TyrantiaFollowerStage == 5 && TyrantiaFollower.TyraniaCorrupteedLegendaries == 0)? FairyTest5: false, "Patching Tyrantia corrupted legendaries unlock");
 		menuItems.push("LilyPregF", (DriderTown.LilyKidsPCPregnancy != 0 && LilyFollower.LilyFollowerState)? FairyTest3: false, "Curing Lily Infertility ^^");
+		menuItems.push("NewSoulCult", applyHangover, "Cripple your cultivation base to start anew (with a bit more milf fluff in your life).");
 		//menuItems.push("WeaponsXPtest", SceneLib.dilapidatedShrine.weaponsXPtrader, "");
-		//menuItems.push("HangoverTest", applyHangover, "");
 		menuGen(menuItems, page, accessSoulforceMenu);
 	}
 
 	private function applyHangover():void {
-	//Status: Hangover.
-	//v1 = hours left.
-	//v2 = strength taken
-	//v3 = speed taken
-	//v4 = intelligence
-
-	if(player.statStore.hasBuff('Hangover')) {
-		player.statStore.removeBuffs('Hangover');
+		if (player.hasPerk(PerkLib.JobSoulCultivator)) player.removePerk(PerkLib.JobSoulCultivator);
+		if (player.hasPerk(PerkLib.SoulApprentice)) player.removePerk(PerkLib.SoulApprentice);
+		if (player.hasPerk(PerkLib.SoulPersonage)) player.removePerk(PerkLib.SoulPersonage);
+		if (player.hasPerk(PerkLib.SoulWarrior)) player.removePerk(PerkLib.SoulWarrior);
+		doNext(curry(SoulforceCheats1, 0));
 	}
-	player.statStore.addBuffObject({'str':-5,'spe':-10,'int':-15},'Hangover',{text:'Hangover', rate:Buff.RATE_HOURS, tick: 8});
-	showStatDown('str');
-	showStatDown('spe');
-	showStatDown('int');
-	statScreenRefresh();
-	doNext(curry(SoulforceCheats1, 0));
-}
 	public function FairyTest3():void {
 		DriderTown.LilyKidsPCPregnancy = 0;
 		doNext(curry(SoulforceCheats1, 0));
