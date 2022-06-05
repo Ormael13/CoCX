@@ -6546,35 +6546,35 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.SwiftCasting) && (player.isOneHandedWeapons() || (player.weaponSpecials("Large") && player.hasPerk(PerkLib.GigantGrip))) && player.isHavingFreeOffHand() && flags[kFLAGS.ELEMENTAL_MELEE] > 0) {
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && CombatAbilities.Whitefire.isUsable) {
                     outputText("\n\n");
-                    CombatAbilities.Whitefire.perform();
+                    CombatAbilities.Whitefire.swiftcast();
                 }
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 2 && CombatAbilities.IceSpike.isUsable) {
                     outputText("\n\n");
-                    CombatAbilities.IceSpike.perform();
+					CombatAbilities.IceSpike.swiftcast();
                 }
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 3 && CombatAbilities.LightningBolt.isUsable) {
                     outputText("\n\n");
-                    CombatAbilities.LightningBolt.perform();
+                    CombatAbilities.LightningBolt.swiftcast();
                 }
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 4 && CombatAbilities.DarknessShard.isUsable) {
                     outputText("\n\n");
-                    CombatAbilities.DarknessShard.perform();
+                    CombatAbilities.DarknessShard.swiftcast();
                 }
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 5 && CombatAbilities.WaterBall.isUsable) {
                     outputText("\n\n");
-                    CombatAbilities.WaterBall.perform();
+                    CombatAbilities.WaterBall.swiftcast();
                 }
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 6 && CombatAbilities.WindBullet.isUsable) {
                     outputText("\n\n");
-                    CombatAbilities.WindBullet.perform();
+                    CombatAbilities.WindBullet.swiftcast();
                 }
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 7 && CombatAbilities.Stalagmite.isUsable) {
                     outputText("\n\n");
-                    CombatAbilities.Stalagmite.perform();
+                    CombatAbilities.Stalagmite.swiftcast();
                 }
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 8 && CombatAbilities.AcidSpray.isUsable) {
                     outputText("\n\n");
-                    CombatAbilities.AcidSpray.perform();
+                    CombatAbilities.AcidSpray.swiftcast();
                 }
             }
             if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) {
@@ -11155,6 +11155,7 @@ public class Combat extends BaseContent {
 		gainedsoulforce *= soulforceRecoveryMultiplier();
 		if (player.hasPerk(PerkLib.Necromancy)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
 		if (player.hasPerk(PerkLib.RecoveryMantra)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
+		if (player.hasKeyItem("Cultivation Manual: Duality") >= 0) gainedsoulforce += Math.round(player.maxSoulforce() * 0.01);
 		gainedsoulforce = Math.round(gainedsoulforce * 0.02 * minutes);
 		if (player.hasPerk(PerkLib.EnergyDependent)) gainedsoulforce = 0;
 		EngineCore.SoulforceChange(gainedsoulforce, false);

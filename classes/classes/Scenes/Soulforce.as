@@ -122,8 +122,8 @@ public class Soulforce extends BaseContent
 				}
 			}
 		*/	menu();
-		if (player.hasPerk(PerkLib.EnergyDependent)) addButtonDisabled(0, "Cultivate", "You're unable to recover soulforce by cultivating.");
-		else addButton(0, "Cultivate", SoulforceRegeneration).hint("Spend some time on restoring some of the used soulforce.");
+		if (player.hasPerk(PerkLib.EnergyDependent)) addButtonDisabled(0, "Meditations", "You're unable to recover soulforce by meditating.");
+		else addButton(0, "Meditations", SoulforceRegeneration).hint("Spend some time on restoring some of the used soulforce.");
 		if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(1, "Contemplate", DaoContemplations).hint("Dao Contemplations");
 		else addButtonDisabled(1, "???", "Req.  successfully surviving 1st Tribulation.");
 		if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) {
@@ -150,6 +150,7 @@ public class Soulforce extends BaseContent
 		}
 		else addButtonDisabled(9, "???", "Req. Soul Apprentice stage.");
 		addButton(10, "Cheats", SoulforceCheats1, 0).hint("This should be obvious. ^^");//block this option at each public version
+		addButton(12, "Cultivation", Contemplations).hint("Contemplate mysteries of the world to try progress your soul cultivation path. Maybe even attain cultivation base breakthrou.");
 		if (canfaceTribulation()) addButton(13, "Tribulation", tribulationsPrompt).hint("To face it or not? That's the question.");
 		else addButtonDisabled(13, "Tribulation", "It's not (yet) time for this.");
 		addButton(14, "Back", playerMenu);
@@ -165,14 +166,14 @@ public class Soulforce extends BaseContent
 			var pLvl:int = 6;
 			var cLvlTier:int = 0;
 			var perkTier:PerkType;*/
-		var cultTier:Array = [PerkLib.JobSoulCultivator, PerkLib.SoulApprentice, PerkLib.SoulPersonage, PerkLib.SoulWarrior, PerkLib.SoulSprite, PerkLib.SoulScholar, PerkLib.SoulElder, PerkLib.SoulExalt, PerkLib.SoulOverlord, PerkLib.SoulTyrant, PerkLib.SoulKing, PerkLib.SoulEmperor, PerkLib.SoulAncestor];
+		/*var cultTier:Array = [PerkLib.JobSoulCultivator, PerkLib.SoulApprentice, PerkLib.SoulPersonage, PerkLib.SoulWarrior, PerkLib.SoulSprite, PerkLib.SoulScholar, PerkLib.SoulElder, PerkLib.SoulExalt, PerkLib.SoulOverlord, PerkLib.SoulTyrant, PerkLib.SoulKing, PerkLib.SoulEmperor, PerkLib.SoulAncestor];
 		var pLvlMax:int = 76;	//Should only need to change this and above array for future expansion.
 		var cultRankTier:Array = ["Late ", "Early ", "Middle "];
 		var lNeed:Boolean = true;
 		var pLvl:int = 6;
 		var cLvlTier:int = 0;
 		var cultStanding:String = "Mortal";
-		flags[kFLAGS.SOUL_CULTIVATION] = 0;
+		flags[kFLAGS.SOUL_CULTIVATION] = 0;*/
 		/*for (var i:int = 0; i < cultTier.length(); i++){	//This *should* work?
 				if (!player.hasPerk(cultTier[i])){
 					if (i == 0) break;
@@ -187,7 +188,7 @@ public class Soulforce extends BaseContent
 					break;
 				}
 			}*/
-		if (player.level >= 4 && player.hasPerk(cultTier[0])){	//Deprecating.
+		/*if (player.level >= 4 && player.hasPerk(cultTier[0])){	//Deprecating.
 			flags[kFLAGS.SOUL_CULTIVATION] +=3;
 		}
 		else if (player.level >= 2 && player.hasPerk(cultTier[0])){	//Actually.... I can also get rid of the checks for the cultTier here, since you have to have that perk beforehand to get to this menu in the first place...
@@ -213,7 +214,18 @@ public class Soulforce extends BaseContent
 			}
 			pLvl += 2;
 			cLvlTier += 1;
-		}
+		}*/
+		var cultStanding:String = "";
+		if (flags[kFLAGS.SOUL_CULTIVATION] >= 9) cultStanding = "Late Soul Warrior";
+		else if (flags[kFLAGS.SOUL_CULTIVATION] >= 8) cultStanding = "Middle Soul Warrior";
+		else if (flags[kFLAGS.SOUL_CULTIVATION] >= 7) cultStanding = "Early Soul Warrior";
+		else if (flags[kFLAGS.SOUL_CULTIVATION] >= 6) cultStanding = "Late Soul Personage";
+		else if (flags[kFLAGS.SOUL_CULTIVATION] >= 5) cultStanding = "Middle Soul Personage";
+		else if (flags[kFLAGS.SOUL_CULTIVATION] >= 4) cultStanding = "Early Soul Personage";
+		else if (flags[kFLAGS.SOUL_CULTIVATION] >= 3) cultStanding = "Late Soul Apprentice";
+		else if (flags[kFLAGS.SOUL_CULTIVATION] >= 2) cultStanding = "Middle Soul Apprentice";
+		else if (flags[kFLAGS.SOUL_CULTIVATION] >= 1) cultStanding = "Early Soul Apprentice";
+		else cultStanding = "Mortal";
 		outputText("<b>Cultivation stage:</b> " + cultStanding + "\n");
 	}
 
@@ -274,9 +286,14 @@ public class Soulforce extends BaseContent
 
 	private function applyHangover():void {
 		if (player.hasPerk(PerkLib.JobSoulCultivator)) player.removePerk(PerkLib.JobSoulCultivator);
+		if (player.hasKeyItem("Cultivation Manual: Duality") >= 0) player.removeKeyItem("Cultivation Manual: Duality");
 		if (player.hasPerk(PerkLib.SoulApprentice)) player.removePerk(PerkLib.SoulApprentice);
 		if (player.hasPerk(PerkLib.SoulPersonage)) player.removePerk(PerkLib.SoulPersonage);
-		if (player.hasPerk(PerkLib.SoulWarrior)) player.removePerk(PerkLib.SoulWarrior);
+		if (player.hasPerk(PerkLib.SoulWarrior)) player.removePerk(PerkLib.SoulWarrior);/*
+		if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.HclassHeavenTribulationSurvivor);
+		if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.GclassHeavenTribulationSurvivor);
+		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.FclassHeavenTribulationSurvivor);*/
+		if (flags[kFLAGS.SOUL_CULTIVATION] > 0) flags[kFLAGS.SOUL_CULTIVATION] = 0;
 		doNext(curry(SoulforceCheats1, 0));
 	}
 	public function FairyTest3():void {
@@ -2502,6 +2519,46 @@ public class Soulforce extends BaseContent
 				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring"
 				|| player.weaponFlyingSwordsName == "training soul flying sword";
 	}
+	public function Contemplations():void {
+		clearOutput();
+		outputText("You find a flat, comfortable rock to sit down on and begin to cultivated according to the manual.  Minute after minute you feel your inner soulforce slowly starting to circle inside your body.  It's very slowly circling within yourself.\n\n");
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 2 && player.level >= 6 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Late Soul Apprentice</b>\n\n");
+			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			flags[kFLAGS.SOUL_CULTIVATION] = 3;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 1 && player.level >= 3 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Middle Soul Apprentice</b>\n\n");
+			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			flags[kFLAGS.SOUL_CULTIVATION] = 2;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (player.wis >= 20 && player.soulforce >= player.maxSoulforce()) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Early Soul Apprentice</b>\n\n");
+			EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+			player.createPerk(PerkLib.SoulApprentice, 0, 0, 0, 0);
+			flags[kFLAGS.SOUL_CULTIVATION] = 1;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}/*
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 3 && player.wis >= 40 && player.level >= 9 && player.soulforce >= player.maxSoulforce() && player.hasPerk(PerkLib.Dantain)) {
+			outputText("\n\n");
+			outputText("\n\n");
+			EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+			player.createPerk(PerkLib.SoulPersonage, 0, 0, 0, 0);
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}*/
+		outputText("After two hours you not felt any change. A bit of shame but maybe next time you will gain some enlightenment.\n\n");
+		doNext(camp.returnToCampUseTwoHours);
+		//outputText("You find a flat, comfortable rock to sit down on and begin to cultivated according to the manual.  Minute after minute you feel immersed into world that surrounds you.  How they flow around you, how they change on their own and how they interact with each other.  All this while trying to understand, despite being insignificant while the great dao manifests around you.\n\n");
+	}
 	public function DaoContemplations():void {
 		clearOutput();
 		outputText("Which Dao would you try to comprehend?\n\n");
@@ -2542,6 +2599,7 @@ public class Soulforce extends BaseContent
 		clearOutput();
 		outputText("You find a flat, comfortable rock to sit down on and contemplate.  Minute after minute you feel immersed into elements that surrounds you.  How they flow around you, how they change on their own and how they interact with each other.  All this while trying to understand, despite being insignificant while the great dao manifests around you.\n\n");
 		var dao:Number = rand(6);
+		//uzycie w kontemplacji niebianskich skarbow zwiazanych z danym zywiolem daje bonusowe punkty
 		if (dao > 0) {
 			outputText("After the session ends you managed to progress in Dao of "+daoname+".");
 			if (player.hasStatusEffect(statusEffect)) {
@@ -2606,6 +2664,37 @@ public class Soulforce extends BaseContent
 			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 1st layer.</b>");
 		}
 	}
+	public function SoulforceRegeneration1():void {
+		clearOutput();
+		var soulforceamountrestored:int = 16;
+		soulforceamountrestored += SoulforceRegeneration00();
+		if (player.hasPerk(PerkLib.DaoistCultivator)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulApprentice)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulPersonage)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulWarrior)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulSprite)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulScholar)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulElder)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulExalt)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulOverlord)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulTyrant)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulKing)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulEmperor)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulAncestor)) soulforceamountrestored += 16;
+		player.soulforce += soulforceamountrestored;
+		if (SoulforceRegenerationCompatibileTrainingItems()) {
+			var bonussoulforce:Number = 0;
+			bonussoulforce += SoulforceGainedFromCultivation1();
+			flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
+			SoulforceGainedFromCultivation2();
+		}
+		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+		outputText("You find a flat, comfortable rock to sit down on and meditate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+		outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
+		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
+		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(20);
+		doNext(camp.returnToCampUseOneHour);
+	}
 	public function SoulforceRegeneration2():void {
 		clearOutput();
 		var soulforceamountrestored:int = 52;
@@ -2632,7 +2721,7 @@ public class Soulforce extends BaseContent
 			SoulforceGainedFromCultivation2();
 		}
 		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-		outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+		outputText("You find a flat, comfortable rock to sit down on and meditate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
 		outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
 		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(40);
@@ -2664,7 +2753,7 @@ public class Soulforce extends BaseContent
 			SoulforceGainedFromCultivation2();
 		}
 		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-		outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+		outputText("You find a flat, comfortable rock to sit down on and meditate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
 		outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
 		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(80);
@@ -2696,7 +2785,7 @@ public class Soulforce extends BaseContent
 			SoulforceGainedFromCultivation2();
 		}
 		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-		outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+		outputText("You find a flat, comfortable rock to sit down on and meditate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
 		outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
 		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(120);
@@ -2728,7 +2817,7 @@ public class Soulforce extends BaseContent
 			SoulforceGainedFromCultivation2();
 		}
 		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-		outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+		outputText("You find a flat, comfortable rock to sit down on and meditate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
 		outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
 		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(160);
@@ -2760,7 +2849,7 @@ public class Soulforce extends BaseContent
 			SoulforceGainedFromCultivation2();
 		}
 		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-		outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+		outputText("You find a flat, comfortable rock to sit down on and meditate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
 		outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
 		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(200);
@@ -2792,7 +2881,7 @@ public class Soulforce extends BaseContent
 			SoulforceGainedFromCultivation2();
 		}
 		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-		outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+		outputText("You find a flat, comfortable rock to sit down on and meditate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
 		outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
 		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(240);
@@ -2824,7 +2913,7 @@ public class Soulforce extends BaseContent
 			SoulforceGainedFromCultivation2();
 		}
 		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-		outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+		outputText("You find a flat, comfortable rock to sit down on and meditate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
 		outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
 		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(280);
@@ -2856,7 +2945,7 @@ public class Soulforce extends BaseContent
 			SoulforceGainedFromCultivation2();
 		}
 		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-		outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+		outputText("You find a flat, comfortable rock to sit down on and meditate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
 		outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
 		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(320);
@@ -2944,37 +3033,6 @@ public class Soulforce extends BaseContent
 		if (player.hasPerk(PerkLib.SoulAncestor)) costPercent += 250;
 		mod *= costPercent/100;
 		return mod;
-	}
-	public function SoulforceRegeneration1():void {
-		clearOutput();
-		var soulforceamountrestored:int = 16;
-		soulforceamountrestored += SoulforceRegeneration00();
-		if (player.hasPerk(PerkLib.DaoistCultivator)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulApprentice)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulPersonage)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulWarrior)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulSprite)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulScholar)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulElder)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulExalt)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulOverlord)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulTyrant)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulKing)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulEmperor)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulAncestor)) soulforceamountrestored += 16;
-		player.soulforce += soulforceamountrestored;
-		if (SoulforceRegenerationCompatibileTrainingItems()) {
-			var bonussoulforce:Number = 0;
-			bonussoulforce += SoulforceGainedFromCultivation1();
-			flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
-			SoulforceGainedFromCultivation2();
-		}
-		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-		outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
-		outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
-		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
-		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(20);
-		doNext(camp.returnToCampUseOneHour);
 	}
 	public function SelfSustain():void {
 		clearOutput();

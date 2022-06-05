@@ -134,6 +134,12 @@ public class AbstractSpell extends CombatAbility {
 		isAutocasting = false;
 		outputText("<b>"+name+" was autocasted successfully.</b>\n\n");
 	}
+	public var isSwiftcasting:Boolean = false;
+	public function swiftcast():void {
+		isSwiftcasting = true;
+		perform(true,false,false);
+		isSwiftcasting = false;
+	}
 	
 	///////////////////////////
 	// Shortcuts and utilities

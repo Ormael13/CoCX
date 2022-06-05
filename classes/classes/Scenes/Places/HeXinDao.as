@@ -873,13 +873,14 @@ public function soularena():void {
 		if (flags[kFLAGS.SPIRIT_STONES] < 3) addButtonDisabled(2, "Challange", "To go to the section of soul arena for challenges you need to give 3 spirit stones.");
 		else addButton(2, "Challenge", soularenaChallenge).hint("Go to the section of soul arena for challenges. (Who knows what rewards you may get after winning any of the challenges there...)");
 		if (flags[kFLAGS.IGNIS_ARENA_SEER] >= 1) addButton(10, "Ignis", ignisarenaseer.mainIgnisMenu);
-		if (player.gems >= 50 && !player.hasPerk(PerkLib.JobSoulCultivator)) addButton(11, "M.S.L.", mrsShigureLecturesBasics).hint("Mrs. Shigure Lectures about soul cultivation.");
+		if (player.gems >= 50 && player.wis >= 10 && !player.hasPerk(PerkLib.JobSoulCultivator)) addButton(11, "M.S.L.", mrsShigureLecturesBasics).hint("Mrs. Shigure Lectures about soul cultivation.");
 		else if (player.hasPerk(PerkLib.JobSoulCultivator)) addButtonDisabled(11, "M.S.L.", "You already learned basic to start your soul cultivation.");
+		else if (player.wis < 10) addButtonDisabled(11, "M.S.L.", "You not have enough high wisdom to understand those lectures.");
 		else addButtonDisabled(11, "M.S.L.", "You not have enough gems to listen to those lectures.");
-		if (!player.hasPerk(PerkLib.SoulWarrior) && player.hasPerk(PerkLib.JobSoulCultivator)) {
+		/*if (!player.hasPerk(PerkLib.SoulWarrior) && player.hasPerk(PerkLib.JobSoulCultivator)) {
 			if (flags[kFLAGS.SPIRIT_STONES] >= 5) addButton(12, "M.S.L.", mrsShigureLecturesFirstTrio).hint("Mrs. Shigure Lectures about first three steps of soul cultivation.");
 			else addButtonDisabled(12, "M.S.L.", "You not have enough spirit stones to listen to those lectures.");
-		}
+		}*/
 		addButton(14, "Back", riverislandVillageStuff);
 		statScreenRefresh();
 	}
@@ -1095,12 +1096,25 @@ public function soularena():void {
 	public function mrsShigureLecturesBasics():void {
 		clearOutput();
 		player.gems -= 50;
-		outputText("Placeholder about milf fluff telling all gathered about joys of (dual) cultivation.");
-		if (player.wis >= 10) {
-			outputText("Placeholder about PC avoiding been distracted by milf fluff. <b>Gained perk: Soul Cultivation</b>");
-			player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
-		}
-		else outputText("Placeholder about PC been distracted by milf fluff than what she was talking about.");
+		outputText("Placeholder about desc milf fluff look and introduction. (5 loooong paragraphs should be enough for look, right? Then 1 super short sentence on her self introduction ^^)\n\n");
+		outputText("\"<i>Now that we have boring part behind let start talk on main subject.</i>\" kitsune walks before the podium and sits on it putting one leg on another. Moving her left hand to the side a small flame forms above it. \"<i>It's Fox Fire. Ability that require both ability to use mana and soulforce.</i>\" She than close the hands causing the flame to vanish.\n\n");
+		outputText("\"<i>But i not here today to talk about mana. That things can tell you any averange mage up there. You all come today and paid to learn about other fuel than mana that was needed for that ability of mine to be used. Soulforce.</i>\" She looks around gathered before asking. \"<i>Does any of you have idea what is it soulforce or what is it source for each user?</i>\"\n\n");
+		outputText("After minute of silence some lizan rise it hand and when she signal him to speak he stands up and starts talking, while taking from time to time peek at the kitsune cleavage. \"<i>It's mystical energy that is much more pure than mana. It can be found nearly anywhere and gathered. It users calls themself cultivators. As for the source of it that cultivators use...</i>\" ");
+		outputText("Lizan stops as if trying to think about the answer. \"<i>...is each living being.</i>\" He finaly comes with answer and ends quite pleased with himself.\n\n");
+		outputText("\"<i>Hmmmm not bad not bad you got most of it right.</i>\" His smile become wider when the kitsune slightly shakes her head. \"<i>All living beings... then what about demons?</i>\" With that his smile freeze on his face. \"<i>De... mons... they...</i>\" he stutters.\n\n");
+		outputText("\"<i>Oh my i made you troubled doi i?</i>\" She smile like a vixen that found her toy. \"<i>No. They would never be able to use soulforce.</i>\" She looks around all gathered. \"<i>Does anyone have idea why?</i>\"\n\n");
+		outputText("Long silence fall at audience interrupted only by ocassional teacher sighs. \"<i>Noone? Fine. It's soul. without it demons couldn't gather soulforce like any of you could or would be able to soon.</i>\" She stood up. \"<i>Now let move on to more practical parts.</i>\"\n\n");
+		outputText("After that she started explaining how to try feel soulforce that was around gathered spectators. Also meantioning basic terms about dao that she thought listeners need to know and think over it.\n\n");
+		outputText("\"<i>From zero comes one</i>\"\n");
+		outputText("\"<i>From one comes two</i>\"\n");
+		outputText("\"<i>From two comes four</i>\"\n");
+		outputText("\"<i>The four are expressed through the eight</i>\"\n\n");
+		outputText("It went for most of the hour and she was walking between gathered stopping here or there to give some more in depth explanations.\n\n");
+		outputText("\"<i>Now my dear listeners iI done what i could now and all rest depends to you. Would any of you start walk the perilious path of cultivation and serching for your Dao or not.</i>\" She returned to the podium. \"<i>Come here eacxh of you so you can take cpy of this basic manual for cultivation. With it it would be up to Heavens if you can awaken to soulforce or not.</i>\"\n\n");
+		outputText("With this she started calling each gathered one by one and giving them copy of manual. Around time there was left a bit less than half people was your turn. Like others you walked and took the manual and left the arean area returning to the camp. You almost felt like you could sense that enigmatic force after listening for less than hour to the 'charismatic' teacher.\n\n");
+		outputText("<b>Gained perk: Soul Cultivation\n\nGained Key Item: Cultivation Manual: Duality</b>");
+		player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
+		player.createKeyItem("Cultivation Manual: Duality", 0, 0, 0, 0);
 		doNext(camp.returnToCampUseFourHours);
 	}
 	public function mrsShigureLecturesFirstTrio():void {
