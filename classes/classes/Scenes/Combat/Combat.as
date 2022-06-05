@@ -7050,7 +7050,7 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 1) lustDmgF *= 1.1;
         if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) lustDmgF *= 1.2;
         if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) lustDmgF *= 1.3;
-        if (player.perkv1(IMutationsLib.RaijuCathodeIM) >= 2) damage *= 1.2;
+        if (player.perkv1(IMutationsLib.RaijuCathodeIM) >= 2) lustDmgF *= 1.2;
         if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= RacialParagonAbilityBoost();
         if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
         lustDmgF = lustDmgF * monster.lustVuln;
@@ -16224,4 +16224,3 @@ public class Combat extends BaseContent {
     }
 }
 }
-

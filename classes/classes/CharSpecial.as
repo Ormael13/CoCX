@@ -1825,6 +1825,7 @@ import classes.Items.*;
 			// Metamorph, Magic Metabolism and Puppeteer suggested perks would be also nice addition to character, but they are not implemented yet
 			player.createPerk(PerkLib.GeneticMemory, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Metamorph, 0, 0, 0, 0);
+			player.createPerk(PerkLib.MetamorphEx, 0, 0, 0, 0);
 			player.createPerk(PerkLib.MagicMetabolism, 0, 0, 0, 0);
 			flags[kFLAGS.HUNGER_ENABLED] = 0.5;
 
