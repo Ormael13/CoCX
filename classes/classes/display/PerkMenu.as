@@ -1095,9 +1095,9 @@ public class PerkMenu extends BaseContent {
 			for each(var mutation:IMutationPerkType in mutationsArray) {
 				var pMutateLvl:int = player.perkv1(mutation);
 				if (pMutateLvl > 0) {	//Just checking if you have the base.
-					outputText("\n" + mutation.name() + ": <font color=\"#008000\">Acquired.</font>");
+					outputText("\n" + mutation.name() + ": [font-green]Acquired.[/font]");
 				} else {
-					outputText("\n" + mutation.name() + ": <font color=\"#800000\">Missing.</font>");
+					outputText("\n" + mutation.name() + ": [font-red]Missing.[/font]");
 				}
 				outputText("\nTier: " + pMutateLvl + " of " + mutation.maxLvl + ".");
 				var reqs:Array = [];
@@ -1110,11 +1110,11 @@ public class PerkMenu extends BaseContent {
 							var color:String = "";
 							if (!(reqStr.indexOf("Mutation") >= 0)) { //Ignores the "free mutation slot" note.
 								if (cond.fn(player)) {
-									color = "#008000";
+									color = "[font-green]";
 								} else {
-									color = "#800000";
+									color = "[font-red]";
 								}
-								reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
+								reqs.push(color+cond.text+"[/font]");
 							}
 						}
 					}
