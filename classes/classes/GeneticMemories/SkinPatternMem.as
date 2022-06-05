@@ -119,6 +119,18 @@ package classes.GeneticMemories {
 			info: "Includes Chitin skin"
 		});
 
+		public static const SHARK_STRIPES:int = 7;
+		EnumValue.add(Memories, SHARK_STRIPES, "SHARK_STRIPES", {
+		  id: "Tiger Shark Skin Pattern",
+		  name: "Shark Stripes",
+		  cost: 200,
+		  title: "Shark Stripes",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.SkinPatternTigerSharkStripes
+		  },
+		  info: "Includes Aqua Scales skin"
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}
