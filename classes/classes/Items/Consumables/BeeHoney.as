@@ -146,7 +146,7 @@ public class BeeHoney extends Consumable
 				else outputText("chest");
 				outputText(". The " + Appearance.nippleDescription(player, player.breastRows.length - 1) + "s even fade until nothing but ");
 				if (player.hasFur()) outputText(player.skin.coat.color + " " + player.skinDesc);
-				else outputText(player.skinTone + " " + player.skinDesc);
+				else outputText(player.skin.color + " " + player.skinDesc);
 				outputText(" remains. <b>You've lost a row of breasts!</b>");
 				dynStats("sen", -5);
 				player.removeBreastRow(player.breastRows.length - 1, 1);

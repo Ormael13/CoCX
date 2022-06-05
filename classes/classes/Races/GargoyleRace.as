@@ -18,7 +18,7 @@ public class GargoyleRace extends Race {
 		
 		addScores()
 				.hairColor(ANY(GargoyleHairColors), +1)
-				.skinBaseColor(ANY(GargoyleSkinColors), +1)
+				.skinMaterialColor(ANY(GargoyleSkinColors), +1)
 				.hairType(Hair.NORMAL, +1)
 				.skinBaseType(Skin.STONE, +1)
 				.hornType(Horns.GARGOYLE, +1)

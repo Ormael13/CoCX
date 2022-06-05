@@ -14,7 +14,7 @@ public class MantisRace extends Race {
 	public override function setup():void {
 		addScores()
 				.skinCoatType(Skin.CHITIN, +3)
-				.skinCoatColor(ANY(MantisChitinColors), +1)
+				.chitinColor(ANY(MantisChitinColors), +1)
 				.antennaeType(Antennae.MANTIS, +1)
 				.faceType(Face.HUMAN, +1)
 				.armType(Arms.MANTIS, +1)

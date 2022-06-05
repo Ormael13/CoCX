@@ -2329,7 +2329,7 @@ import flash.utils.getQualifiedClassName;
 			          Appearance.describeByScale(butt.type,Appearance.DEFAULT_BUTT_RATING_SCALES,"thinner than","wider than") + " butt.\n";
 			result += Pronoun3+" lower body is "+Object(LowerBody.Types[lowerBody]||{}).name;
 			result += ", "+pronoun3+" arms are "+Object(Arms.Types[arms.type]||{}).name;
-			result += ", "+pronoun1+" "+have+" "+skinTone+" "+skinAdj+" "+skinDesc+
+			result += ", "+pronoun1+" "+have+" "+skin.color+" "+skinAdj+" "+skinDesc+
 					  " (base "+Object(Skin.SkinTypes[skin.baseType()]||{}).id+")." +
 					  " (coat "+Object(Skin.SkinTypes[skin.coatType()]||{}).id+")." +
 					  "\n";

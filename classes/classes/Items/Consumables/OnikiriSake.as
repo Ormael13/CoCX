@@ -159,7 +159,7 @@ public class OnikiriSake extends Consumable {
 			changes++;
 		}
 		//Skin
-		if (player.skinTone != "red" && player.skinTone != "reddish-orange" && player.skinTone != "purple" && player.skinTone != "blue" && !player.isGargoyle() && changes < changeLimit && rand(4) == 0) {
+		if (player.skinMaterialColor != "red" && player.skinMaterialColor != "reddish-orange" && player.skinMaterialColor != "purple" && player.skinMaterialColor != "blue" && !player.isGargoyle() && changes < changeLimit && rand(4) == 0) {
 			var colorSkin:String;
 			colorSkin = randomChoice("purple","reddish-orange","red","blue");
 			player.skinTone = colorSkin;
@@ -167,7 +167,7 @@ public class OnikiriSake extends Consumable {
 			outputText("\n\nThe heat of the alcohol is getting to you; it's like if your ");
 			if (player.hasFur()) outputText("skin");
 			else outputText(player.skinDesc);
-			outputText(" changed to  " + player.skinTone + ". Wait, it really did!");
+			outputText(" changed to  " + player.skinMaterialColor + ". Wait, it really did!");
 		}
 		//mutationStep(player.skin.base.type == PLAIN && !player.skin.hasBattleTattoo(), 3, function(): void {
 		if (player.skin.base.type == Skin.PLAIN && !player.skin.hasBattleTattoo() && rand(3) == 0 && changes < changeLimit) {

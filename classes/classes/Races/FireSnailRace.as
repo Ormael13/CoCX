@@ -17,7 +17,7 @@ public class FireSnailRace extends Race {
 				.antennaeType(Antennae.FIRE_SNAIL, +1)
 				.hairType(Hair.BURNING, +1)
 				.eyeColor(ANY(FireSnailEyeColors), +1)
-				.skinBaseColor(ANY(FireSnailSkinColors), +1)
+				.skinMaterialColor(ANY(FireSnailSkinColors), +1)
 				.plainSkinOfAdj("sticky glistering", +1)
 				.customRequirement("","snail shell and no wings",
 						function (body:BodyData):Boolean {

@@ -1071,6 +1071,66 @@ public class Creature extends Utils
 			trace("[DEPRECATED] set skinType");
 			skin.type = value;
 		}
+		public function get skinMaterialColor():String {
+			return skin.base.color;
+		}
+		public function set skinMaterialColor(value:String):void {
+			skin.base.color = value;
+		}
+		public function get skinMaterialColor2():String {
+			return skin.base.color2;
+		}
+		public function set skinMaterialColor2(value:String):void {
+			skin.base.color2 = value;
+		}
+		public function get furColor():String {
+			return skin.coat.color;
+		}
+		public function set furColor(value:String):void {
+			skin.coat.color = value;
+		}
+		public function get furColor2():String {
+			return skin.coat.color2;
+		}
+		public function set furColor2(value:String):void {
+			skin.coat.color2 = value;
+		}
+		public function get scaleColor():String {
+			return skin.coat.color;
+		}
+		public function set scaleColor(value:String):void {
+			skin.coat.color = value;
+		}
+		public function get scaleColor2():String {
+			return skin.coat.color2;
+		}
+		public function set scaleColor2(value:String):void {
+			skin.coat.color2 = value;
+		}
+		public function get chitinColor():String {
+			return skin.coat.color;
+		}
+		public function set chitinColor(value:String):void {
+			skin.coat.color = value;
+		}
+		public function get chitinColor1():String {
+			return skin.coat.color;
+		}
+		public function set chitinColor1(value:String):void {
+			skin.coat.color = value;
+		}
+		public function get chitinColor2():String {
+			return skin.coat.color2;
+		}
+		public function set chitinColor2(value:String):void {
+			skin.coat.color2 = value;
+		}
+		public function get bodyColor():String {
+			return skin.color;
+		}
+		public function set bodyColor(value:String):void {
+			skin.color = value;
+		}
 		public function get skinTone():String { return skin.tone; }
 		public function hasCoat():Boolean { return skin.hasCoat(); }
 		public function hasFullCoat():Boolean { return skin.hasFullCoat(); }

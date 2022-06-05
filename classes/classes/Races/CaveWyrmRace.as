@@ -18,7 +18,7 @@ public class CaveWyrmRace extends Race {
 		addScores()
 				.skinCoatType(Skin.SCALES, +1)
 				.skinCoatTypeAndColor(Skin.SCALES, "midnight black", +1)
-				.skinBaseColor("grayish-blue", +1)
+				.skinMaterialColor("grayish-blue", +1)
 				.earType(Ears.CAVE_WYRM, +1)
 				.eyeType(Eyes.CAVE_WYRM, +1)
 				.eyeColor("neon blue", +1)

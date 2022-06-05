@@ -395,7 +395,7 @@ public class AbstractSpell extends CombatAbility {
         return oscOverGazer() ? omnicasterDamageFactor_osc() : omnicasterDamageFactor_gazer();
         */
         if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.OffensiveStaffChanneling)) {
-            if (player.hasPerk(PerkLib.Omnicaster) && !oscOverGazer()) 
+            if (player.hasPerk(PerkLib.Omnicaster) && !oscOverGazer())
                 return omnicasterDamageFactor_gazer() * 1.1;
                 /*
                 Because:

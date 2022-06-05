@@ -804,7 +804,7 @@ import coc.view.MainView;
 
 			outputText("You can finalize your appearance customization before you proceed to perk selection. You will be able to alter your appearance through the usage of certain items.\n\n");
 			outputText("Height: " + Math.floor(player.tallness / 12) + "'" + player.tallness % 12 + "\"\n");
-			outputText("Skin tone: " + player.skinTone + "\n");
+			outputText("Skin tone: " + player.skinMaterialColor + "\n");
 			outputText("Hair color: [haircolor]\n");
 			outputText("Eye color: [eyecolor]\n");
 			if (player.hasCock()) {

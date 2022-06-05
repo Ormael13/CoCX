@@ -28,7 +28,7 @@ public class RaccoonRace extends Race {
 				.legType(LowerBody.RACCOON, +1)
 				.noWings(+2)
 				.hasCock(+1)
-				.skinCoatColor(ANY(RaccoonFurColors), +1)
+				.furColor(ANY(RaccoonFurColors), +1)
 				.hairColor(ANY(RaccoonHairColors), +1)
 		addScoresAfter(1)
 				.hasBalls(+1)

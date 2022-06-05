@@ -638,7 +638,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "You double over suddenly as a harsh, stabbing pain runs across your skin, tattoos in the shape of scars forming on various parts of your body. Considering how you look now, you might as well proudly display your <b>Orc scar tattooed skin.</b>";
-	    player.skin.base.color2 = "black";
+	    player.skinMaterialColor2 = "black";
 	    player.skin.base.adj = "scar shaped tattooed";
 	    player.skin.base.pattern = Skin.PATTERN_SCAR_SHAPED_TATTOO;
 
@@ -696,7 +696,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    if (rand(2) == 0) desc += "angular";
 	    else desc += "curved";
 	    desc += " markings remain, as if etched into your skin. <b>You now have Kitsune tattoos on your skin.</b>";
-	    player.skin.base.color2 = "black";
+	    player.skinMaterialColor2 = "black";
 	    player.skin.base.adj = "tattooed";
 	    player.skin.base.pattern = Skin.PATTERN_MAGICAL_TATTOO;
 
@@ -739,8 +739,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    if (player.skin.base.color == "sable") desc += "white";
 	    if (player.skin.base.color == "white") desc += "black";
 	    desc += " veins.</b>";
-	    if (player.skin.base.color == "sable") player.skin.base.color2 = "white";
-	    if (player.skin.base.color == "white") player.skin.base.color2 = "black";
+	    if (player.skin.base.color == "sable") player.skinMaterialColor2 = "white";
+	    if (player.skin.base.color == "white") player.skinMaterialColor2 = "black";
 
 	    player.skin.base.pattern = Skin.PATTERN_WHITE_BLACK_VEINS;
 	    player.skin.base.adj = "veined";
@@ -813,10 +813,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			TransformationUtils.applyTFIfNotPresent(transformations.SkinChitin(Skin.COVERAGE_LOW, { color: "yellow" }), doOutput);
 			var desc:String = "A ripple spreads through your chitin as some patches change in color. After a few moments you're left with a yellow and black striped pattern, like a bee's! <b>You've got striped chitin!</b>";
 			player.skin.coat.pattern = Skin.PATTERN_BEE_STRIPES;
-			if (!InCollection(player.coatColor2, "black", "ebony"))
-				player.coatColor2 = randomChoice("black", "ebony");
-			if (player.coatColor2 != "yellow")
-				player.coatColor = "yellow";
+			if (!InCollection(player.chitinColor2, "black", "ebony"))
+				player.chitinColor2 = randomChoice("black", "ebony");
+			if (player.chitinColor1 != "yellow")
+				player.chitinColor1 = "yellow";
 			if (doOutput) outputText(desc);
 			Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.BEE_STRIPES));
 		},
@@ -5127,7 +5127,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny black carapace</b>. You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
 	    }
 
-	    player.coatColor2 = "black";
+	    player.chitinColor2 = "black";
 	    player.arms.type = Arms.SPIDER;
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.SPIDER));
@@ -5168,11 +5168,11 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>. A moment later the pain fades and you are able to turn your gaze down to your beautiful new arms, covered in shining black chitin from the upper arm down, and downy yellow fuzz along your upper arm.";
 	    }
 	    player.arms.type = Arms.BEE;
-		if (!InCollection(player.coatColor2, "black","ebony")){
-			player.coatColor2 = randomChoice("black","ebony");
+		if (!InCollection(player.chitinColor2, "black","ebony")){
+			player.chitinColor2 = randomChoice("black","ebony");
 		}
-		if (player.coatColor2 != "yellow"){
-			player.coatColor = "yellow";
+		if (player.chitinColor1 != "yellow"){
+			player.chitinColor1 = "yellow";
 		}
 
 	    if (doOutput) outputText(desc);
@@ -5406,8 +5406,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    desc += "The skin on your arms change a bit, as the " + player.skin.coat.color2 + " turning into soft, feline fur. Your palms and fingers acquire pink paw pads, while at the end of each one of your fingers, the talons sharpen and become prehensile, adopting a posture better suited to pounce over a unsuspecting victim.";
-	    desc += "From the fringe on your elbows to your armpits, your " + player.skin.coat.color + " colored plumage remains the same. <b>At the end, you’ve gotten gryphon-like arms!</b>.";
+	    desc += "The skin on your arms change a bit, as the " + player.skin.describe() + " turning into soft, feline fur. Your palms and fingers acquire pink paw pads, while at the end of each one of your fingers, the talons sharpen and become prehensile, adopting a posture better suited to pounce over a unsuspecting victim.";
+	    desc += "From the fringe on your elbows to your armpits, your " + player.furColor2 + " colored plumage remains the same. <b>At the end, you’ve gotten gryphon-like arms!</b>.";
 
 	    player.arms.type = Arms.GRYPHON;
 	    if (doOutput) outputText(desc);
@@ -5682,8 +5682,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      else desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a midnight purple carapace</b>. You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
 	    }
 	    if (doOutput) outputText(desc);
-	    player.coatColor = "midnight purple";
-	    player.coatColor2 = "midnight purple";
+	    player.chitinColor = "midnight purple";
+	    player.chitinColor2 = "";
 	    player.arms.type = Arms.SPIDER;
 	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.SPIDER));
 	  },
@@ -6379,11 +6379,11 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.lowerBody = LowerBody.BEE;
 	    player.legCount = 2;
-		if (!InCollection(player.coatColor2, "black","ebony")){
-			player.coatColor2 = randomChoice("black","ebony");
+		if (!InCollection(player.chitinColor2, "black","ebony")){
+			player.chitinColor2 = randomChoice("black","ebony");
 		}
-		if (player.coatColor2 != "yellow"){
-			player.coatColor = "yellow";
+		if (player.chitinColor1 != "yellow"){
+			player.chitinColor1 = "yellow";
 		}
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.BEE));
@@ -6524,7 +6524,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs. From the waist down, your strength completely deserts you, leaving you to fall hard on your [butt] in the dirt. With nothing else to do, you look down, only to be mesmerized by the sight of black exoskeleton creeping up a perfectly human-looking calf. It crests up your knee to envelop the joint in a many-faceted onyx coating. Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton. From a distance it would look almost like a black, thigh-high boot, but you know the truth. <b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>";
 
-	    player.coatColor2 = "black";
+	    player.chitinColor2 = "black";
 	    player.lowerBody = LowerBody.CHITINOUS_SPIDER_LEGS;
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.CHITINOUS_SPIDER_LEGS));
@@ -6547,7 +6547,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "You find yourself suddenly paralyzed below the waist. Your dark, reflective legs splay out and drop you flat on your back. Before you can sit up, you feel tiny feelers of pain mixed with warmth and tingling running through them. Terrified at the thought of all the horrible changes that could be wracking your body, you slowly sit up, expecting to find yourself turned into some incomprehensible monstrosity from the waist down. As if to confirm your suspicions, the first thing you see is that your legs have transformed into eight long, spindly legs. Instead of joining directly with your hips, they now connect with the spider-like body that has sprouted in place of where your legs would normally start. Your abdomen has gotten even larger as well. Once the strength returns to your new, eight-legged lower body, you struggle up onto your pointed 'feet', and wobble around, trying to get your balance. As you experiment with your new form, you find you're even able to twist the spider half of your body down between your legs in an emulation of your old, bipedal stance. That might prove useful should you ever want to engage in 'normal' sexual positions, particularly since your [butt] is still positioned just above the start of your arachnid half. <b>You're now a drider.</b>";
 
 	    player.legCount = 8;
-	    player.coatColor2 = "black";
+	    player.chitinColor2 = "black";
 	    player.lowerBody = LowerBody.DRIDER;
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.DRIDER));
@@ -7849,7 +7849,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	      // Case 1: Morph Taur legs without changing leg count
 	      if (player.isTaur() && legCount === 4) {
-	        desc += "A familiar numbness reaches your legs. The rough skin covering your lower legs and feet change into more usual, soft skin, and shortly after, it starts sprouting " + player.skin.coat.color2 + " colored fur over them.\n\nYour feet themselves reshape, losing their avian stance and gaining one much more feline, complete with soft pink paw pads. The talons at the end of each toe become retractile feline claws. Albeit walking with those seems initially tricky, you easily gain a hold on how using your <b>new gryphon-like legs.</b>";
+	        desc += "A familiar numbness reaches your legs. The rough skin covering your lower legs and feet change into more usual, soft skin, and shortly after, it starts sprouting " + player.furColor2 + " colored fur over them.\n\nYour feet themselves reshape, losing their avian stance and gaining one much more feline, complete with soft pink paw pads. The talons at the end of each toe become retractile feline claws. Albeit walking with those seems initially tricky, you easily gain a hold on how using your <b>new gryphon-like legs.</b>";
 	      }
 	      // Case 2: Bipedal TF
 	      else if (legCount === 2) {
@@ -7857,7 +7857,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	        // Display TF text if the player is obtaining this part instead of only changing leg count
 	        if (player.lowerBody !== LowerBody.GRYPHON) {
-	          desc += "A familiar numbness reaches your legs. The rough skin covering your lower legs and feet change into more usual, soft skin, and shortly after, it starts sprouting " + player.skin.coat.color2 + " colored fur over them.\n\nYour feet themselves reshape, losing their avian stance and gaining one much more feline, complete with soft pink paw pads. The talons at the end of each toe become retractile feline claws. Albeit walking with those seems initially tricky, you easily gain a hold on how using your <b>new gryphon-like legs.</b>";
+	          desc += "A familiar numbness reaches your legs. The rough skin covering your lower legs and feet change into more usual, soft skin, and shortly after, it starts sprouting " + player.furColor2 + " colored fur over them.\n\nYour feet themselves reshape, losing their avian stance and gaining one much more feline, complete with soft pink paw pads. The talons at the end of each toe become retractile feline claws. Albeit walking with those seems initially tricky, you easily gain a hold on how using your <b>new gryphon-like legs.</b>";
 	        }
 	      }
 	      // Case 3: Taur TF
@@ -7971,8 +7971,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs. From the waist down, your strength completely deserts you, leaving you to fall hard on your [ass] in the dirt. With nothing else to do, you look down, only to be mesmerized by the sight of midnight purple exoskeleton creeping up a perfectly human-looking calf. It crests up your knee to envelop the joint in a many-faceted onyx coating. Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton. From a distance it would look almost like a dark purple, thigh-high boot, but you know the truth. <b>You now have human-like legs covered in a midnight purple, arachnid exoskeleton.</b>";
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.LowerBodySpider, false);
-	    player.coatColor = "midnight purple";
-	    player.coatColor2 = "midnight purple";
+	    player.chitinColor = "midnight purple";
+	    player.chitinColor2 = "";
 	    if (doOutput) outputText(desc);
 	  },
 	  // is present
@@ -8504,7 +8504,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "A burst of pain hits you just above your [butt], coupled with a sensation of burning heat and pressure. You can feel your " + player.skinFurScales() + " tearing as something forces its way out of your body. Reaching back, you grab at it with your hands. It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape. The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen! With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones. That may prove useful. <b>You now have a spider's abdomen hanging from above your [butt]!</b>";
 
-	    player.coatColor2 = "black";
+	    player.chitinColor2 = "black";
 	    player.tailVenom = 5;
 	    player.tailRecharge = 5;
 	    player.tailType = Tail.SPIDER_ADBOMEN;
@@ -8554,11 +8554,11 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailVenom = 10;
 	    player.tailRecharge = 5;
 	    player.tailType = Tail.BEE_ABDOMEN;
-		if (!InCollection(player.coatColor2, "black","ebony")){
-			player.coatColor2 = randomChoice("black","ebony");
+		if (!InCollection(player.chitinColor2, "black","ebony")){
+			player.chitinColor2 = randomChoice("black","ebony");
 		}
-		if (player.coatColor2 != "yellow"){
-			player.coatColor = "yellow";
+		if (player.chitinColor1 != "yellow"){
+			player.chitinColor1 = "yellow";
 		}
 	    player.tailCount = 1;
 

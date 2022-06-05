@@ -18,7 +18,7 @@ public class GazerRace extends Race {
 		addScores()
 				.hairColor(ANY(GazerHairColors), +1)
 				.skinPlainOnly(+1)
-				.skinBaseColor(ANY(GazerSkinColors), +1)
+				.skinMaterialColor(ANY(GazerSkinColors), +1)
 				.skinBasePattern(Skin.PATTERN_OIL, +1)
 				.eyeType(Eyes.MONOEYE, +1)
 				.eyeColor("red", +1)

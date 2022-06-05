@@ -919,7 +919,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.cocks.length == 0) {
                     player.createCock(rand(3) + 4);
                     outputText("[pg]You shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
-                    outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinTone + " tone.");
+                    outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinMaterialColor + " tone.");
                     Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
                     if (tainted) {
                         dynStats("lus", 10, "cor", 5);
@@ -1006,7 +1006,7 @@ public final class Mutations extends MutationsHelper {
                     player.cocks[0].cockLength = rand(3) + 4;
                     player.cocks[0].cockThickness = 1;
                     outputText("[pg]You shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
-                    outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinTone + " tone.");
+                    outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinMaterialColor + " tone.");
                     Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
                     if (tainted) {
                         dynStats("lus", 10, "cor", 3);
@@ -1356,7 +1356,7 @@ public final class Mutations extends MutationsHelper {
                     default:
                         player.skin.base.color = "blue";
                 }
-                outputText("[pg]A tingling sensation runs across your skin in waves, growing stronger as <b>your skin's tone slowly shifts, darkening to become " + player.skinTone + " in color.</b>");
+                outputText("[pg]A tingling sensation runs across your skin in waves, growing stronger as <b>your skin's tone slowly shifts, darkening to become " + player.skinMaterialColor + " in color.</b>");
                 if (tainted) dynStats("cor", 1);
                 else dynStats("cor", 0);
             }
@@ -2385,7 +2385,7 @@ public final class Mutations extends MutationsHelper {
                 else outputText("[pg]Your [skin.type] ");
                 if (rand(2) == 0) player.skin.base.color = "red";
                 else player.skin.base.color = "orange";
-                outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinTone + ".");
+                outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinMaterialColor + ".");
 				changes++;
             }
             return;
@@ -2401,7 +2401,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("[pg]Your [skin.type] ");
             if (rand(2) == 0) player.skin.base.color = "red";
             else player.skin.base.color = "orange";
-            outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinTone + ".");
+            outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinMaterialColor + ".");
 			changes++;
         }
         //Shrinkage!
@@ -4241,7 +4241,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("chest");
             outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
             if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-            else outputText(player.skinTone + " " + player.skinDesc);
+            else outputText(player.skin.color + " " + player.skinDesc);
             outputText(" remains. <b>You've lost a row of breasts!</b>");
             dynStats("sen", -5);
             player.removeBreastRow(player.breastRows.length - 1, 1);
@@ -4259,7 +4259,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]Whoah, that was weird.  You just hallucinated that your ");
             if (player.hasFur()) outputText("skin");
             else outputText(player.skinDesc);
-            outputText(" turned " + player.skinTone + ".  No way!  It's staying, it really changed color!");
+            outputText(" turned " + player.skinMaterialColor + ".  No way!  It's staying, it really changed color!");
             changes++;
         }
         //Face!
@@ -4452,7 +4452,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("chest");
             outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
             if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-            else outputText(player.skinTone + " " + player.skinDesc);
+            else outputText(player.skin.color + " " + player.skinDesc);
             outputText(" remains. <b>You've lost a row of breasts!</b>");
             dynStats("sen", -5);
             player.removeBreastRow(player.breastRows.length - 1, 1);
@@ -4479,7 +4479,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]Whoah, that was weird.  You just hallucinated that your ");
             if (player.hasFur()) outputText("skin");
             else outputText(player.skinDesc);
-            outputText(" turned " + player.skinTone + ".  No way!  It's staying, it really changed color!");
+            outputText(" turned " + player.skinMaterialColor + ".  No way!  It's staying, it really changed color!");
         }
         //Face!
         if ((player.faceType != Face.HUMAN || player.faceType != Face.ANIMAL_TOOTHS) && changes < changeLimit && rand(4) == 0 && player.ears.type == Ears.ELFIN) {
@@ -5066,7 +5066,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("your " + player.skinDesc);
             outputText(" has changed to become ");
             player.skin.base.color = "light purple";
-            outputText(player.skinTone + " colored.</b>");
+            outputText(player.skinMaterialColor + " colored.</b>");
         }
 
         //Gain hood
@@ -5606,7 +5606,7 @@ public final class Mutations extends MutationsHelper {
                     player.skin.base.color = "light";
                     break;
             }
-            outputText(player.skinTone + " colored.</b>");
+            outputText(player.skinMaterialColor + " colored.</b>");
         }
         //Change skin to normal
         if (!player.hasPlainSkinOnly() && rand(3) == 0 && changes < changeLimit) {
@@ -5787,7 +5787,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("chest");
             outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
             if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-            else outputText(player.skinTone + " " + player.skinDesc);
+            else outputText(player.skin.color + " " + player.skinDesc);
             outputText(" remains. <b>You've lost a row of breasts!</b>");
             dynStats("sen", -5);
             player.removeBreastRow(player.breastRows.length - 1, 1);
@@ -8029,7 +8029,7 @@ public final class Mutations extends MutationsHelper {
             }
             //Libido over 60? FUCK YEAH!
             else if (player.lib < 80) {
-                outputText("[pg]You fan your neck and start to pant as your " + player.skinTone + " skin begins to flush red with heat");
+                outputText("[pg]You fan your neck and start to pant as your " + player.skinMaterialColor + " skin begins to flush red with heat");
                 if (player.hasCoat()) outputText(" through your " + player.skinDesc);
                 outputText(".  ");
                 if (player.gender == 1) outputText("Compression tightens down on " + sMultiCockDesc() + " as it strains against your [armor].  You struggle to fight down your heightened libido, but it's hard – so very hard.");
@@ -8324,7 +8324,7 @@ public final class Mutations extends MutationsHelper {
             }
             //Libido over 60? FUCK YEAH!
             else if (player.lib < 80) {
-                outputText("[pg]You fan your neck and start to pant as your " + player.skinTone + " skin begins to flush red with heat");
+                outputText("[pg]You fan your neck and start to pant as your " + player.skinMaterialColor + " skin begins to flush red with heat");
                 if (player.hasCoat()) outputText(" through your " + player.skinDesc);
                 outputText(".  ");
                 if (player.gender == 1) outputText("Compression tightens down on " + sMultiCockDesc() + " as it strains against your [armor].  You struggle to fight down your heightened libido, but it's hard – so very hard.");
@@ -8473,7 +8473,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("chest");
             outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
             if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-            else outputText(player.skinTone + " " + player.skinDesc);
+            else outputText(player.skin.color + " " + player.skinDesc);
             outputText(" remains. <b>You've lost a row of breasts!</b>");
             dynStats("sen", -5);
             player.removeBreastRow(player.breastRows.length - 1, 1);
@@ -8541,7 +8541,7 @@ public final class Mutations extends MutationsHelper {
                     player.skin.base.color = "light";
                     break;
             }
-            outputText(player.skinTone + " colored.</b>");
+            outputText(player.skinMaterialColor + " colored.</b>");
         }
         //-Grow hips out if narrow.
         if (player.hips.type < 10 && changes < changeLimit && rand(3) == 0) {
@@ -9773,8 +9773,8 @@ public final class Mutations extends MutationsHelper {
             var color:String;
             color = randomChoice("dark", "light", "tan");
             player.skin.base.color = color;
-            outputText("[pg]Your skin begins to change again, impurities, scars and bruises disappearing entirely as your skin color changes to a " + player.skinTone + " tone. You examine your body discovering with surprise your skin is now extremely sensitive but also flawless just like that of an elf. ");
-            outputText("It is beautiful and inviting to the touch, surely your opponents would beg for a chance to get but a single taste of your flawless body. <b>Your " + player.skinTone + " skin is now flawless just like that of the elves.</b>");
+            outputText("[pg]Your skin begins to change again, impurities, scars and bruises disappearing entirely as your skin color changes to a " + player.skinMaterialColor + " tone. You examine your body discovering with surprise your skin is now extremely sensitive but also flawless just like that of an elf. ");
+            outputText("It is beautiful and inviting to the touch, surely your opponents would beg for a chance to get but a single taste of your flawless body. <b>Your " + player.skinMaterialColor + " skin is now flawless just like that of the elves.</b>");
             if (!player.hasPerk(PerkLib.FlawlessBody)) {
                 player.createPerk(PerkLib.FlawlessBody, 0, 0, 0, 0);
                 outputText("[pg]<b>(Gained Perk: Flawless Body</b>)");
@@ -9902,7 +9902,7 @@ public final class Mutations extends MutationsHelper {
             var color:String;
             color = randomChoice("green", "gray", "brown", "red", "sandy tan");
             player.skin.base.color = color;
-            outputText("[pg]Whoah, that was weird.  You just hallucinated that your " + player.skinDesc + " turned " + player.skinTone + ".  No way!  It's staying, it really changed color!");
+            outputText("[pg]Whoah, that was weird.  You just hallucinated that your " + player.skinDesc + " turned " + player.skinMaterialColor + ".  No way!  It's staying, it really changed color!");
             changes++;
         }
         if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
@@ -10142,7 +10142,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("chest");
             outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
             if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-            else outputText(player.skinTone + " " + player.skinDesc);
+            else outputText(player.skin.color + " " + player.skinDesc);
             outputText(" remains. <b>You've lost a row of breasts!</b>");
             dynStats("sen", -5);
             player.removeBreastRow(player.breastRows.length - 1, 1);
@@ -11679,12 +11679,12 @@ public final class Mutations extends MutationsHelper {
                 && !InCollection(player.coatColor, ["orange and white", "black and white", "red and white", "tan", "brown"])
                 || !player.skin.hasFur() && player.skin.hasCoat(), mystic ? 1 : 2, function ():void {
             outputText("[pg]You begin to tingle all over your [skin], starting as a cool, pleasant sensation but gradually worsening until you are furiously itching all over.");
-            if (player.hasFur()) outputText("  You stare in horror as you pull your fingers away holding a handful of [skin coat.color] fur!  Your fur sloughs off your body in thick clumps, falling away to reveal patches of bare, " + player.skinTone + " skin.");
-            else if (player.hasScales()) outputText("  You stare in horror as you pull your fingers away holding a handful of dried up scales!  Your scales continue to flake and peel off your skin in thick patches, revealing the tender " + player.skinTone + " skin underneath.");
+            if (player.hasFur()) outputText("  You stare in horror as you pull your fingers away holding a handful of [skin coat.color] fur!  Your fur sloughs off your body in thick clumps, falling away to reveal patches of bare, " + player.skinMaterialColor + " skin.");
+            else if (player.hasScales()) outputText("  You stare in horror as you pull your fingers away holding a handful of dried up scales!  Your scales continue to flake and peel off your skin in thick patches, revealing the tender " + player.skinMaterialColor + " skin underneath.");
             outputText("  Your skin slowly turns raw and red under your severe scratching, the tingling sensations raising goosebumps across your whole body.  Over time, the itching fades, and your flushed skin resolves into a natural-looking ");
             player.skin.setBaseOnly({type: Skin.PLAIN});
             if (!InCollection(player.skin.base.color, tone)) player.skin.base.color = randomChoice(tone);
-            outputText(player.skinTone + " complexion.");
+            outputText(player.skinMaterialColor + " complexion.");
             outputText("  <b>You now have [skin]!</b>");
         });
         //Change skin tone if not changed you!
@@ -12509,7 +12509,7 @@ public final class Mutations extends MutationsHelper {
             else if (!player.hasPlainSkinOnly()) {
                 outputText("[pg]");
                 if (player.hasFur()) outputText("Your skin suddenly feels itchy as your fur begins falling out in clumps, <b>revealing inhumanly smooth skin</b> underneath.");
-                if (player.hasScales()) outputText("Your scales begin to itch as they begin falling out in droves, <b>revealing your inhumanly smooth " + player.skinTone + " skin</b> underneath.");
+                if (player.hasScales()) outputText("Your scales begin to itch as they begin falling out in droves, <b>revealing your inhumanly smooth " + player.skinMaterialColor + " skin</b> underneath.");
                 player.skin.setBaseOnly({type: Skin.PLAIN});
             }
             flags[kFLAGS.TIMES_TRANSFORMED]++;
@@ -13192,7 +13192,7 @@ public final class Mutations extends MutationsHelper {
                 else outputText("chest");
                 outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
                 if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-                else outputText(player.skinTone + " " + player.skinDesc);
+                else outputText(player.skin.color + " " + player.skinDesc);
                 outputText(" remains. <b>You've lost a row of breasts!</b>");
                 dynStats("sen", -5);
                 player.removeBreastRow(player.breastRows.length - 1, 1);
@@ -13590,7 +13590,7 @@ public final class Mutations extends MutationsHelper {
                 else outputText("chest");
                 outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
                 if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-                else outputText(player.skinTone + " " + player.skinDesc);
+                else outputText(player.skin.color + " " + player.skinDesc);
                 outputText(" remains. <b>You've lost a row of breasts!</b>");
                 dynStats("sen", -5);
                 player.removeBreastRow(player.breastRows.length - 1, 1);
@@ -13910,7 +13910,7 @@ public final class Mutations extends MutationsHelper {
         if (player.skin.base.color != "dark" && player.skin.base.color != "tan" && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
             if (rand(2) == 0) player.skin.base.color = "dark";
             else player.skin.base.color = "tan";
-            outputText("[pg]Your skin suddenly darkens. Doesn’t look like much, but darker skin will likely help soak up more sunlight and keep you warmer.<b> You now have " + player.skinTone + " skin.</b>");
+            outputText("[pg]Your skin suddenly darkens. Doesn’t look like much, but darker skin will likely help soak up more sunlight and keep you warmer.<b> You now have " + player.skinMaterialColor + " skin.</b>");
             changes++;
         }
         //Legs
@@ -14808,7 +14808,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("chest");
             outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
             if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-            else outputText(player.skinTone + " " + player.skinDesc);
+            else outputText(player.skinMaterialColor + " " + player.skinDesc);
             outputText(" remains. <b>You've lost a row of breasts!</b>");
             dynStats("sen", -5);
             player.removeBreastRow(player.breastRows.length - 1, 1);
@@ -15301,7 +15301,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("your " + player.skinDesc);
             outputText(" has changed to become ");
             player.skin.base.color = "caramel";
-            outputText(player.skinTone + " colored.</b>");
+            outputText(player.skinMaterialColor + " colored.</b>");
         }
 
         if (!player.hasPerk(PerkLib.DragonLustPoisonBreath)){
@@ -15521,7 +15521,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]Your [skin.type] ");
             if (rand(2) == 0) player.skin.base.color = "red";
             else player.skin.base.color = "orange";
-            outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinTone + ".");
+            outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinMaterialColor + ".");
         }
         //Legs
         if (player.skinAdj == "sticky glistering" && player.hasPlainSkinOnly() && player.lowerBody != LowerBody.FIRE_SNAIL && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
@@ -15626,7 +15626,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("chest");
             outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
             if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-            else outputText(player.skinTone + " " + player.skinDesc);
+            else outputText(player.skin.color + " " + player.skinDesc);
             outputText(" remains. <b>You've lost a row of breasts!</b>");
             dynStats("sen", -5);
             player.removeBreastRow(player.breastRows.length - 1, 1);
@@ -16224,7 +16224,7 @@ public final class Mutations extends MutationsHelper {
         }
         if ((type == 0 || type == 1 || type == 2) && player.hasPlainSkinOnly() && player.skin.base.color != "green" && changes < changeLimit && rand(3) == 0) {
             player.skin.base.color = "green";
-            outputText("[pg]Your skin tingles ever so slightly as you skin’s color changes before your eyes. As the tingling diminishes, you find that your skin has turned " + player.skinTone + ".");
+            outputText("[pg]Your skin tingles ever so slightly as you skin’s color changes before your eyes. As the tingling diminishes, you find that your skin has turned " + player.skinMaterialColor + ".");
             changes++;
         }
         if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
@@ -16532,7 +16532,7 @@ public final class Mutations extends MutationsHelper {
             var melkie_skinTone:Array = ["light", "fair", "pale"];
             if ((!InCollection(player.skin.base.color, melkie_skinTone) && changes < changeLimit && rand(4) == 0)) {
                 player.skin.base.color = randomChoice(melkie_skinTone);
-                outputText("[pg]Your skin suddenly lightens. While lighter skin won't help you against cold weither you got the feeling that, despite this and against all logic, you won't die from freezing either, must be something related to Melkies.<b> You now have " + player.skinTone + " skin.</b>");
+                outputText("[pg]Your skin suddenly lightens. While lighter skin won't help you against cold weither you got the feeling that, despite this and against all logic, you won't die from freezing either, must be something related to Melkies.<b> You now have " + player.skinMaterialColor + " skin.</b>");
                 changes++;
             }
 

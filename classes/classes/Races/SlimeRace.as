@@ -15,7 +15,7 @@ public class SlimeRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.skinBaseColor(ANY(SlimeSkinColors), +1)
+				.skinMaterialColor(ANY(SlimeSkinColors), +1)
 				.hairType(Hair.GOO, +1)
 				.armType(Arms.GOO, +1)
 				.legType(LowerBody.GOO, +3)

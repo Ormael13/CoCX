@@ -197,7 +197,7 @@ public class MaraFruit extends Consumable{
 			CoC.instance.transformations.SkinPlain.applyEffect();
 			changes++;
 		}
-		if (player.hasPlainSkinOnly() && player.skinTone != "leaf green" && player.skinTone != "lime green" && player.skinTone != "turquoise" && player.skinTone != "light green" && changes < changeLimit && rand(2) == 0) {
+		if (player.hasPlainSkinOnly() && player.skinMaterialColor != "leaf green" && player.skinMaterialColor != "lime green" && player.skinMaterialColor != "turquoise" && player.skinMaterialColor != "light green" && changes < changeLimit && rand(2) == 0) {
 			if (rand(10) == 0) player.skinTone = "turquoise";
 			else {
 				if (rand(7) == 0) player.skinTone = "lime green";
@@ -207,11 +207,11 @@ public class MaraFruit extends Consumable{
 				}
 			}
 			changes++;
-			outputText("\n\nWhoah, that was weird.  You just hallucinated that your skin turned " + player.skinTone + ".  No way!  It's staying, it really changed color!");
+			outputText("\n\nWhoah, that was weird.  You just hallucinated that your skin turned " + player.skinMaterialColor + ".  No way!  It's staying, it really changed color!");
 		}
 		//insert here turning into bark skin so it req. at least 2x use of mara fruit a także dodać wymaganie posiadanie już plant arms i legs
 		//Legs
-		if (player.skin.hasPlainSkinOnly() && (player.skinTone == "leaf green" || player.skinTone == "lime green" || player.skinTone == "turquoise" || player.skinTone == "light green") && changes < changeLimit && rand(3) == 0) {
+		if (player.skin.hasPlainSkinOnly() && (player.skinMaterialColor == "leaf green" || player.skinMaterialColor == "lime green" || player.skinMaterialColor == "turquoise" || player.skinMaterialColor == "light green") && changes < changeLimit && rand(3) == 0) {
 			//Males/genderless get clawed feet
 			if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
 				if (player.lowerBody != LowerBody.PLANT_ROOT_CLAWS) {

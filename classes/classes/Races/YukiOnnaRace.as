@@ -14,7 +14,7 @@ public class YukiOnnaRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.skinBaseColor(ANY(YukiOnnaSkinColors), +1)
+				.skinMaterialColor(ANY(YukiOnnaSkinColors), +1)
 				.skinBaseAdj("cold", +1)
 				.eyeColor("light purple", +1)
 				.hairColor(ANY(YukiOnnaHairColors), +1)

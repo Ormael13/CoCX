@@ -130,6 +130,18 @@ public class BodyData {
 		return data[SLOT_ARM_TYPE];
 	}
 	
+	public static const SLOT_CHITIN_COLOR:int = _slotid++;
+	EnumValue.add(Slots, SLOT_CHITIN_COLOR, "CHITIN_COLOR", {
+		name: "chitin color",
+		suffix: "chitin"
+	});
+	
+	public static const SLOT_CHITIN_COLOR2:int = _slotid++;
+	EnumValue.add(Slots, SLOT_CHITIN_COLOR2, "CHITIN_COLOR2", {
+		name: "chitin secondary color",
+		suffix: "chitin"
+	});
+	
 	public static const SLOT_EAR_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_EAR_TYPE, "EAR_TYPE", {
 		name:"ears",
@@ -169,6 +181,18 @@ public class BodyData {
 	public function get faceType():int {
 		return data[SLOT_FACE_TYPE];
 	}
+	
+	public static const SLOT_FUR_COLOR:int = _slotid++;
+	EnumValue.add(Slots, SLOT_FUR_COLOR, "FUR_COLOR", {
+		name: "fur color",
+		suffix: "fur"
+	});
+	
+	public static const SLOT_FUR_COLOR2:int = _slotid++;
+	EnumValue.add(Slots, SLOT_FUR_COLOR2, "FUR_COLOR2", {
+		name: "fur secondary color",
+		suffix: "fur"
+	});
 	
 	public static const SLOT_GILLS_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_GILLS_TYPE, "GILL_TYPE", {
@@ -249,6 +273,18 @@ public class BodyData {
 	public function get rearType():int {
 		return data[SLOT_REAR_TYPE];
 	}
+	
+	public static const SLOT_SCALE_COLOR:int = _slotid++;
+	EnumValue.add(Slots, SLOT_SCALE_COLOR, "SCALE_COLOR", {
+		name: "scale color",
+		suffix: "scales"
+	});
+	
+	public static const SLOT_SCALE_COLOR2:int = _slotid++;
+	EnumValue.add(Slots, SLOT_SCALE_COLOR2, "SCALE_COLOR2", {
+		name: "scale secondary color",
+		suffix: "scales"
+	});
 	
 	public static const SLOT_SKIN_COVERAGE:int = _slotid++;
 	
@@ -378,6 +414,18 @@ public class BodyData {
 	public function get skinCoatPattern():int {
 		return data[SLOT_SKIN_COAT_PATTERN];
 	}
+	
+	public static const SLOT_SKIN_MATERIAL_COLOR:int = _slotid++;
+	EnumValue.add(Slots, SLOT_SKIN_MATERIAL_COLOR, "SKIN_MATERIAL_COLOR", {
+		name: "skin color",
+		suffix: "skin"
+	});
+	
+	public static const SLOT_SKIN_MATERIAL_COLOR2:int = _slotid++;
+	EnumValue.add(Slots, SLOT_SKIN_MATERIAL_COLOR2, "SKIN_MATERIAL_COLOR2", {
+		name: "skin secondary color",
+		suffix: "skin"
+	});
 	
 	public static const SLOT_TAIL_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_TAIL_TYPE, "TAIL_TYPE", {
@@ -628,10 +676,14 @@ public class BodyData {
 		
 		data[SLOT_ANTENNAE_TYPE]     = player.antennae.type;
 		data[SLOT_ARM_TYPE]          = player.arms.type;
+		data[SLOT_CHITIN_COLOR]      = player.chitinColor;
+		data[SLOT_CHITIN_COLOR2]     = player.chitinColor2;
 		data[SLOT_EAR_TYPE]          = player.ears.type;
 		data[SLOT_EYE_TYPE]          = player.eyes.type;
 		data[SLOT_EYE_COLOR]         = player.eyes.colour;
 		data[SLOT_FACE_TYPE]         = player.facePart.type;
+		data[SLOT_FUR_COLOR]         = player.furColor;
+		data[SLOT_FUR_COLOR2]        = player.furColor2;
 		data[SLOT_GILLS_TYPE]        = player.gills.type;
 		data[SLOT_HAIR_TYPE]         = player.hairType;
 		data[SLOT_HAIR_COLOR]        = player.hairColor;
@@ -639,6 +691,8 @@ public class BodyData {
 		data[SLOT_HORN_COUNT]        = player.horns.count;
 		data[SLOT_LEG_TYPE]          = player.lowerBodyPart.type;
 		data[SLOT_REAR_TYPE]         = player.rearBody.type;
+		data[SLOT_SCALE_COLOR]       = player.scaleColor;
+		data[SLOT_SCALE_COLOR2]      = player.scaleColor2;
 		data[SLOT_SKIN_COVERAGE]     = player.skin.coverage;
 		data[SLOT_SKIN_TYPE]         = player.skin.type;
 		data[SLOT_SKIN_COLOR]        = player.skin.color;
@@ -657,11 +711,13 @@ public class BodyData {
 			data[SLOT_SKIN_COAT_COLOR2]  = "no";
 			data[SLOT_SKIN_COAT_PATTERN] = Skin.PATTERN_NONE;
 		}
-		data[SLOT_TAIL_TYPE]           = player.tail.type;
-		data[SLOT_TAIL_COUNT]          = player.tail.count;
-		data[SLOT_TONGUE_TYPE]         = player.tongue.type;
-		data[SLOT_VAGINA_TYPE]         = player.vaginaType();
-		data[SLOT_WING_TYPE]           = player.wings.type;
+		data[SLOT_SKIN_MATERIAL_COLOR]  = player.skinMaterialColor;
+		data[SLOT_SKIN_MATERIAL_COLOR2] = player.skinMaterialColor2;
+		data[SLOT_TAIL_TYPE]            = player.tail.type;
+		data[SLOT_TAIL_COUNT]           = player.tail.count;
+		data[SLOT_TONGUE_TYPE]          = player.tongue.type;
+		data[SLOT_VAGINA_TYPE]          = player.vaginaType();
+		data[SLOT_WING_TYPE]            = player.wings.type;
 		
 		data[SLOT_GENDER]              = player.gender;
 		data[SLOT_HEIGHT]              = player.tallness;

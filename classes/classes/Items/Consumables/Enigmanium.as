@@ -289,7 +289,7 @@ public class Enigmanium extends Consumable {
       }
       //sphinx color skin
       var SphinxSkinColor: Array = ["dark", "tan"];
-      if (!InCollection(player.skinTone, SphinxSkinColor) && player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+      if (!InCollection(player.skinMaterialColor, SphinxSkinColor) && player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
         outputText("[pg]You feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  Holding an arm up to your face, you discover that <b>you now have ");
         player.skin.base.color = randomChoice(SphinxSkinColor);
         outputText("[skin]!</b>");

@@ -30,7 +30,7 @@ public class UshiOniRace extends Race{
 				},
 				"plain skin;"
 		)
-				.skinBaseColor(ANY(UshiOniSkinColors), +1);
+				.skinMaterialColor(ANY(UshiOniSkinColors), +1);
 		
 		buildTier(11, "ushi-oni")
 				.customNamingFunction(function(body:BodyData):String {

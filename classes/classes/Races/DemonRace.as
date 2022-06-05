@@ -34,7 +34,7 @@ public class DemonRace extends Race {
 		}, "cor 50+;", 5)
 				.hornTypeAndCount(Horns.DEMON, GREATER_THAN(4), +4)
 				.plainSkinOfAdj(NOT("slippery"), +1)
-				.skinBaseColor(ANY(DemonSkinColors), +1)
+				.skinMaterialColor(ANY(DemonSkinColors), +1)
 				.faceType(ANY(Face.HUMAN, Face.ANIMAL_TOOTHS, Face.DEVIL_FANGS), +1)
 				.armType(Arms.HUMAN, +1);
 		
