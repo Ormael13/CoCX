@@ -7,9 +7,10 @@ import classes.display.SpriteDb;
 
 public class MinotaurScene extends BaseContent {
 
-		public function MinotaurScene()
-		{
-		}
+	public function minoRouter():void {
+		if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) minoAddictionFuck();
+		else getRapedByMinotaur();
+	}
 
 public function minoVictoryRapeChoices():void {
 	spriteSelect(SpriteDb.s_minotaur);

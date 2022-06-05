@@ -1315,9 +1315,9 @@ public static const UNKNOWN_FLAG_NUMBER_01306:int                               
 public static const UNKNOWN_FLAG_NUMBER_01307:int                                   = 1307;
 public static const UNKNOWN_FLAG_NUMBER_01308:int                                   = 1308;
 public static const UNKNOWN_FLAG_NUMBER_01309:int                                   = 1309;
-public static const UNKNOWN_FLAG_NUMBER_01310:int                                   = 1310;
-public static const UNKNOWN_FLAG_NUMBER_01311:int                                   = 1311;
-public static const UNKNOWN_FLAG_NUMBER_01312:int                                   = 1312;
+public static const COCKATRICES_UNLOCKED:int                                   		= 1310;
+public static const TIMES_ENCOUNTERED_COCKATRICES:int                               = 1311;
+public static const CODEX_ENTRY_COCKATRICES:int                                   	= 1312;
 public static const UNKNOWN_FLAG_NUMBER_01313:int                                   = 1313;
 public static const UNKNOWN_FLAG_NUMBER_01314:int                                   = 1314;
 public static const UNKNOWN_FLAG_NUMBER_01315:int                                   = 1315;
