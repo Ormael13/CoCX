@@ -624,6 +624,16 @@ public class SpriteDb {
 	public static function get s_oswald(): Class {
 		return is8bit ? s_oswald_8bit : s_oswald_16bit;
 	}
+	[Embed(source="../../../res/sprites/pablo.png")]
+	public static const s_pablo_16bit:Class;
+	public static function get s_pablo(): Class {
+		return is8bit ? s_imp_8bit : s_pablo_16bit;
+	}
+	[Embed(source="../../../res/sprites/pablo_nude.png")]
+	public static const s_pablo_nude_16bit:Class;
+	public static function get s_pablo_nude(): Class {
+		return is8bit ? s_imp_8bit : s_pablo_nude_16bit;
+	}
 	[Embed(source="../../../res/sprites/patts1.png")]
 	public static var s_patchouli_male:Class;
 	[Embed(source="../../../res/sprites/bimbo-cat.png")]
