@@ -83,7 +83,7 @@ public class Changelog extends BaseContent
 			outputText("-The closer you get to your maximum lust, the less physical and lust damage you take from enemies. Take 20% less at 50% Max Lust, up to 70% at maximum Lust. (25 training sessions)\n");
 			outputText("-After having all three driders in camp: Belisa, Lily and Tyrantia they would remodel each own residence into mini town called Drider Town. It would group all three under new menu within Lovers menu.\n");
 			outputText("-In Drider Town at evening can pick new option to spend night with all three girls (yet it can next time(s) ends as fuck session+sleep for cock wielders).\n");
-			outputText("-Aimozg did it again.... (insert Jurassic Park meme) and went making Race Page(s) prettier and more cool. It would now show more informations like specific bodypart that count to race score. And would show all tiers of race score at the end of each race score. Switching between seeing jsut race name to full info on it is done by clicking on race name.\n");
+			outputText("-Aimozg did it again.... (insert Jurassic Park meme) and went making Race Page(s) prettier and more cool. It would now show more informations like specific bodypart that count to race score. And would show all tiers of race score at the end of each race score. Switching between seeing just race name to full info on it is done by clicking on race name.\n");
 			outputText("-Added 'Back' buttons for Konstantin. (Svalkash)\n");
 			outputText("-Rearranged dragon face mutations - fangs first, then full muzzle. Just like the scales. (Svalkash)\n");
 			outputText("-Fixed weird skinCoat inheritance - now the coat inherits skin/hair type only once and needs to be dyed separately afterwards. Non-fur coatings inherit the skin color. (Svalkash)\n");
@@ -148,6 +148,9 @@ public class Changelog extends BaseContent
 			outputText("<b>Version 0.8s5:</b>\n\n");
 			outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk with full bonus to soulforce (+950). Effect: Opening more options to change PC body: cock types, ball count, pussie types, breast rows count. (also increase max SF by 50 + 100 each day up to 1,050)\n");
 			outputText("-Ascension: Natural Metamorph would grant Metamorph (Ex) perk too.\n");
+			outputText("-When Belisa Affection reach 80%+ PC can use 6 holy bands at once. If it reach 120% limit increase to 8 holy bands. Her affection cap is now 120% not 100% too.\n");
+			outputText("-Belisa texts for putting on and removing holy bands been added/expanded.\n");
+			outputText("-Basic and Advanced perks are label on perk selection now to help distinguish if player picking basic or advanced job perk.\n");
 			outputText("-(UEE import) Treasure chests added to some locations. (Svalkash)\n");
 			outputText("-Fixed combat issues: Corrupted Handmaidens, Doppelganger, Priscilla, Goblin Shaman. The latter two still need mana cost rebalancing, Vala 'Wake Up' scene, Lethice drops, Gnoll scene. (Svalkash)\n");
 			outputText("-Gargoyle's Body Ritual now lessens bodily curses. Effectiveness requires actually having the HP to be harmed. (Furrin Gok)\n");
@@ -161,11 +164,8 @@ public class Changelog extends BaseContent
 			//outputText("-Dinah would provide PC with HB Mech upgrade options after it's bought. They could boost mech defences, attack or even provide with specials. As with all other items upgrades cost can vary depending on her mood ^^\n");
 			//outputText("-HB Mech upgrade options includes: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Rapid Reload (+base ranged atk dmg), Internal Systems (increase mech SF capacity and lower it consumption during high activity), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special), ");
 			//outputText("Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)\n");
-			outputText("-When Belisa Affection reach 80%+ PC can use 6 holy bands at once. If it reach 120% limit increase to 8 holy bands. Her affection cap is now 120% not 100% too.\n");
-			outputText("-Basic and Advanced perks are lablel on perk selection now to help distinguish if player picking basic or advanced job perk.\n");
-			outputText("-Belisa texts for putting on and removing holy bands been added/expanded.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Metamorph menu: Yeti race all bodyparts, Yuki onna arms, Twin KAsha tails, Giant dragonfly wings, Tigershark Stripes, Shark skin (EragonX)\n");
+			outputText("-Blademaster and Grand Blademaster perks effect would cover weapons of scythe type too now.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
