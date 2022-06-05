@@ -260,8 +260,16 @@ public class Soulforce extends BaseContent
 		menuItems.push("TyrantPF", (TyrantiaFollower.TyrantiaFollowerStage == 5 && TyrantiaFollower.TyraniaCorrupteedLegendaries == 0)? FairyTest5: false, "Patching Tyrantia corrupted legendaries unlock");
 		menuItems.push("LilyPregF", (DriderTown.LilyKidsPCPregnancy != 0 && LilyFollower.LilyFollowerState)? FairyTest3: false, "Curing Lily Infertility ^^");
 		menuItems.push("NewSoulCult", applyHangover, "Cripple your cultivation base to start anew (with a bit more milf fluff in your life).");
+		menuItems.push("EvaMutateReq", mutateReqNope, "Turns on/off mutation requirements")
 		//menuItems.push("WeaponsXPtest", SceneLib.dilapidatedShrine.weaponsXPtrader, "");
 		menuGen(menuItems, page, accessSoulforceMenu);
+	}
+
+	private function mutateReqNope():void{
+		clearOutput();
+		flags[kFLAGS.EVA_MUTATIONS_BYPASS] = !flags[kFLAGS.EVA_MUTATIONS_BYPASS];
+		outputText("Mutation requirements are now " + (flags[kFLAGS.EVA_MUTATIONS_BYPASS] ? "off" : "on") + ".");
+		doNext(curry(SoulforceCheats1, 3));
 	}
 
 	private function applyHangover():void {

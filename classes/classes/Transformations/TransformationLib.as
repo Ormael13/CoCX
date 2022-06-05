@@ -521,6 +521,67 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  )
 	}
 
+    public function SkinAquaScales(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation {
+        return new SimpleTransformation("Aqua Scales Skin",
+                // apply effect
+                function (doOutput: Boolean): void {
+                    options = skinFormatOptions(options, false);
+
+                    const color: String = options.color;
+
+                    var desc: String = "";
+
+                    // Coverage
+                    if (player.hasCoatOfType(Skin.AQUA_SCALES)) {
+                        if (coverage > player.skin.coverage) {
+                            desc += "You suddenly feel a familiar itch on parts of your skin uncovered by scales. You're not surprised when <b>even more " + player.coatColor + " scales sprout, covering more of your body.</b>";
+                        } else if (coverage < player.skin.coverage) {
+                            desc += "Sections of your " + player.coatColor + " scales itch incessantly, and as you scratch yourself, they start falling off wholesale. <b>You still have " + player.coatColor + " scales on your body, but now they cover less of your skin.</b>";
+                        }
+
+                        if (coverage !== player.skin.coverage && color !== player.coatColor) {
+                            desc += "\n\n";
+                        }
+
+                        if (color !== player.coatColor) {
+                            desc += "You feel a strange sensation on your scales, and as soon as you glance at them, you're met with the sight of their hue slowly morphing from " + player.coatColor + " to " + color + ". <b>Your scales are now " + color + ".</b>"
+                        }
+                    } else {
+                        switch (coverage) {
+                            /*case Skin.COVERAGE_LOW:
+                                if (player.hasFur()) {
+                                    desc += "You scratch yourself, and come away with a large clump of [skin coat.color] fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. You feel your skin shift as " + color + " scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you. The rest of the fur is easy to remove. <b>Your body is now partially covered with small patches of scales!</b>";
+                                } else {
+                                    desc += "You feel your skin shift as scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you. <b>Your body is now partially covered with small patches of " + color + " scales.</b>";
+                                }
+                                break;*/
+                            case Skin.COVERAGE_HIGH:
+                                if (player.hasFur()) desc += "You scratch yourself, and come away with a large clump of [skin coat.color] fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + color + " scales covering most of your body. The rest of the fur is easy to remove.  ";
+                                else if (player.hasGooSkin()) desc += "Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Your skin feels incredibly smooth.  ";
+                                else if (player.hasScales()) desc += "Your " + player.coatColor + " scales itch incessantly, and as you scratch yourself, they start falling off wholesale.  ";
+                                else if (player.hasCoat()) desc += "Your skin itches and tingles, starting to shed your [skin coat].  ";
+                                else desc += "You idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard. A quick glance down reveals that scales are growing out of your " + player.skinTone + " skin with alarming speed. As you watch, the surface of your skin is covered in smooth scales. They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body. ";
+                                desc += "<b>You're covered from head to toe in shiny " + color + " aqua scales.</b>"
+                                break;
+                            default:
+                                desc += "ERROR: DESCRIPTION FOR THIS LEVEL OF SCALES COVERAGE DOES NOT EXIST"
+                        }
+                    }
+
+                    player.skinDesc = "skin";
+                    player.skin.growCoat(Skin.AQUA_SCALES, options, coverage);
+                    if (doOutput) outputText(desc);
+                    Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.AQUA_SCALES));
+                },
+                // is present
+                function (): Boolean {
+                    options = skinFormatOptions(options, false);
+
+                    return player.hasCoatOfType(Skin.AQUA_SCALES) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
+                }
+        )
+    }
+
 	private function skinFormatOptions(options: *, hairy:Boolean = false): * {
         if (!options) options = {};
         if (!options.adj) options.adj = "";
@@ -764,6 +825,21 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			return transformations.SkinChitin(Skin.COVERAGE_LOW).isPresent() && player.skin.coat.pattern === Skin.PATTERN_BEE_STRIPES;
 		}
 	);
+
+    public const SkinPatternTigerSharkStripes:Transformation = new SimpleTransformation("Shark Stripes Skin Pattern",
+            // apply effect
+            function (doOutput:Boolean):void {
+                TransformationUtils.applyTFIfNotPresent(transformations.SkinAquaScales(Skin.COVERAGE_HIGH, {color: "orange", color2: "black", pattern: Skin.PATTERN_TIGER_STRIPES}), doOutput);
+                var desc:String = "[pg]Your scales begins to tingle and itch, before rapidly shifting to a shiny orange color, marked by random black scales looking like a stripes. You take a quick look in a nearby pool of water, to see your skin has morphed in appearance and texture to become more like a tigershark!";
+                player.skin.base.color2 = "black";
+                if (doOutput) outputText(desc);
+                Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.SHARK_STRIPES));
+            },
+            // is present
+            function ():Boolean {
+                return transformations.SkinAquaScales(Skin.COVERAGE_HIGH).isPresent() && player.skin.coat.pattern === Skin.PATTERN_TIGER_STRIPES;
+            }
+    );
   /*
 */
 
@@ -9880,6 +9956,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 *	     ███     ██   ██  ██████  ██ ██   ███ ██   ██
 */
 
+/*
+    */
 	public function VaginaNone(vagina:int = 0): Transformation {
 		return new SimpleTransformation("Remove Vagina",
 			// apply effect
@@ -10317,8 +10395,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				}
 		);
 	}
-
-
+    /*
+*/
 
 /*
 *	  ██████  ██████   ██████ ██    ██
@@ -10326,8 +10404,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 *	 ██      ██    ██ ██      ████
 *	 ██      ██    ██ ██      ██  ██
 *	  ██████  ██████   ██████ ██    ██
- */
+*/
 
+/*
+    */
     public function UnlockCocks():void {
 		//noinspection FallThroughInSwitchStatementJS	// Fallthrough is intended for retroactively unlocking in Metamorph after getting GeneticMemory
         switch (player.cockTotal()) {
@@ -11492,8 +11572,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				}
 		);
 	}
-
-
+    /*
+*/
 
 /*
 *	 ██████   █████  ██     ██     ███████
@@ -11503,6 +11583,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 * 	 ██████  ██   ██ ██████ ██████ ███████
  */
 
+/*
+    */
 	public const BallsNone:Transformation = new SimpleTransformation("Remove Bals",
 			// apply
 			function (doOutput:Boolean):void {
@@ -11552,14 +11634,14 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (player.balls == 0) {
 						player.balls = 2;
 						player.ballSize = size;
-						desc += "You gasp in shock as a sudden pain racks your abdomen. Within seconds, two balls drop down into a new sack, your skin stretching out to accommodate them. Once the pain clears, you examine <b>your new set of testes.</b>[pg]";
+						desc += "You gasp in shock as a sudden pain racks your abdomen. Within seconds, two balls drop down into a new sack, your skin stretching out to accommodate them. Once the pain clears, you examine <b>your new set of testes.</b>";
 						if (forceQuad) {
-							desc += "After a minute, two more testes drop down into your [sack], your skin stretching even more to accommodate them. Once the pain clears, you examine <b>your new quartet of testes.</b>[pg]"
+							desc += "After a minute, two more testes drop down into your [sack], your skin stretching even more to accommodate them. Once the pain clears, you examine <b>your new quartet of testes.</b>"
 							player.balls = 4;
 						}
 					}
 					else {
-						desc += "You gasp in shock as a sudden pain racks your abdomen. Within seconds, two more testes drop down into your [sack], your skin stretching out to accommodate them. Once the pain clears, you examine <b>your new quartet of testes.</b>[pg]";
+						desc += "You gasp in shock as a sudden pain racks your abdomen. Within seconds, two more testes drop down into your [sack], your skin stretching out to accommodate them. Once the pain clears, you examine <b>your new quartet of testes.</b>";
 						player.balls = 4;
 					}
 
@@ -11604,6 +11686,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				return player.hasStatusEffect(StatusEffects.Uniball);
 			}
 	);
+    /*
+*/
 
 /*
 *    ███████ ██████  ███████  ██████ ██  █████  ██          ████████ ███████ ███████
