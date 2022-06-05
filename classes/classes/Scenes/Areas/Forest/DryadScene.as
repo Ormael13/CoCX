@@ -1,4 +1,7 @@
-//Dryad Scene
+/**
+ * @author melchi.
+ * Ported from UEE to CoCX by Svalkash.
+ */
 package classes.Scenes.Areas.Forest {
 import classes.BaseContent;
 import classes.display.SpriteDb;

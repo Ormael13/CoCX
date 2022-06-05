@@ -1,3 +1,8 @@
+/**
+ * @author kitteh660.
+ * Ported from UEE to CoCX by Svalkash
+ * Succubus, one of the classic encounters from Unnamed Text Game, now modified to be up to modern standards, with new fight.
+ */
 package classes.Scenes.Monsters {
 import classes.*;
 import classes.BodyParts.Butt;

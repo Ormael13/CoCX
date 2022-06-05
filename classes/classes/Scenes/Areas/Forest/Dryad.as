@@ -1,7 +1,8 @@
 /**
  * ...
  * @author melchi'is first attempt at making a monster
- * special thanks to ox and everyone for helping
+ * special thanks to ox and everyone for helping/**
+ * Ported from UEE to CoCX by Svalkash.
  */
 package classes.Scenes.Areas.Forest {
 import classes.*;
@@ -31,7 +32,7 @@ public class Dryad extends Monster {
         } else {
             outputText("You take a deep breath of the pollen!\n ");
             outputText("Your mind becomes a haze as a hot wave of arousal washes over you.");
-            player.takeLustDamage(player.lib / 10 + player.cor / 10 + 10, true);
+            player.takeLustDamage(player.lib / 10 + player.sens / 10 + 10, true);
         }
     }
 
