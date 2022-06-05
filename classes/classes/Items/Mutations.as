@@ -4703,14 +4703,7 @@ public final class Mutations extends MutationsHelper {
             //-TIGGERSHARK ONLY: Grow a cunt (guaranteed if no gender)
             if (type == 1 && (player.gender == 0 || (!player.hasVagina() && changes < changeLimit && rand(3) == 0))) {
                 changes++;
-                //(balls)
-                if (player.balls > 0) outputText("[pg]An itch starts behind your [balls], but before you can reach under to scratch it, the discomfort fades. A moment later a warm, wet feeling brushes your [sack], and curious about the sensation, <b>you lift up your balls to reveal your new vagina.</b>");
-                //(dick)
-                else if (player.hasCock()) outputText("[pg]An itch starts on your groin, just below your [cocks]. You pull the manhood aside to give you a better view, and you're able to watch as <b>your skin splits to give you a new vagina, complete with a tiny clit.</b>");
-                //(neither)
-                else outputText("[pg]An itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your [armor] to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>");
-                player.createVagina();
-                player.clitLength = .25;
+                transformations.VaginaHuman().applyEffect();
                 player.addCurse("sen", 10, 1);
             }
             //Shark Cunt
@@ -4723,12 +4716,11 @@ public final class Mutations extends MutationsHelper {
                 //Genderless:
                 transformations.CockHuman(7).applyEffect();
                 if (player.balls == 0) {
-                    outputText(" and a pair of balls");
+                    outputText(" And a new pair of balls!");
                     player.balls = 2;
                     player.ballSize = 2;
                     Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
                 }
-                outputText("!");
                 player.cocks[0].cockThickness = 1.4;
                 dynStats("lus", 20);
                 player.addCurse("sen", 5, 1);
@@ -4770,10 +4762,10 @@ public final class Mutations extends MutationsHelper {
             }
             //Gills TF
             if (player.gills.type != Gills.FISH && player.tailType == Tail.SHARK && player.faceType == Face.SHARK_TEETH && changes < changeLimit && rand(3) == 0) {
-            outputText("[pg]");
-            transformations.GillsFish.applyEffect();
-            changes++;
-        }
+                outputText("[pg]");
+                transformations.GillsFish.applyEffect();
+                changes++;
+            }
             //Hair
             if (player.hairColor != "silver" && player.tailType != Tail.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
                 changes++;
@@ -4781,32 +4773,21 @@ public final class Mutations extends MutationsHelper {
                 player.hairColorOnly = "silver";
             }
             //Skin
-            if (((player.coatColor != "rough gray" && player.coatColor != "dark gray" && player.coatColor != "grayish-blue" && player.coatColor != "iridescent gray" && player.coatColor != "ashen grayish-blue" && player.coatColor != "gray" && player.coatColor != "orange") || !player.hasScales()) && !player.isGargoyle() && rand(7) == 0 && changes < changeLimit) {
+            if ((!InCollection(player.coatColor, "rough gray", "dark gray", "grayish-blue", "iridescent gray", "ashen grayish-blue", "gray", "orange") || !player.hasScales()) && rand(7) == 0 && changes < changeLimit) {
                 outputText("[pg]");
-                if (player.hasFur()) outputText("Your [skin.type] falls out, collecting on the floor and exposing your scale covered skin underneath.  ");
-                else if (player.hasGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidy into a more normal form. ");
-                else if (player.hasScales()) outputText("Your skin itches and tingles starting to sheed your current scales. Underneath them you can see new smaller gray colored scales.  ");
-                else if (player.hasCoat()) outputText("Your skin itches and tingles starting to sheed your [skin coat]. Underneath them you can see new smaller gray colored scales.  ");
-                else outputText("You abruptly stop moving and gasp sharply as a shudder goes up your entire frame. Your skin begins to shift and morph, growing slightly thicker and became covered with a tiny shiny grey scales.  ");
                 if (type == 0) {
                     var color:String;
-                    if (rand(10) == 0) {
-                        color = randomChoice("rough gray");
-                    } else {
-                        color = randomChoice("dark gray", "grayish-blue", "iridescent gray", "ashen grayish-blue", "gray");
+                    if (!InCollection(player.coatColor, "rough gray", "dark gray", "grayish-blue", "iridescent gray", "ashen grayish-blue", "gray")) {
+                        if (rand(10) == 0) color = randomChoice("rough gray");
+                        else                    color = randomChoice("dark gray", "grayish-blue", "iridescent gray", "ashen grayish-blue", "gray");
                     }
+
+                    transformations.SkinAquaScales(Skin.COVERAGE_HIGH, {color:color}).applyEffect();
                     outputText("[pg]A tingling sensation runs across your skin in waves, growing stronger as <b>your skin's tone slowly shifts, darkening to become " + color + " in color.</b>");
                     outputText("It feels oddly rough too, comparable to that of a marine mammal. You smile and run your hands across your new shark skin.");
-                    player.skin.growCoat(Skin.AQUA_SCALES, {color: color});
                     changes++;
                 } else {
-                    outputText("Your scales begins to tingle and itch, before rapidly shifting to a shiny orange color, marked by random black scales looking like a stripes. You take a quick look in a nearby pool of water, to see your skin has morphed in appearance and texture to become more like a tigershark!");
-                    player.skin.growCoat(Skin.AQUA_SCALES, {
-                        color: "orange",
-                        color2: "black",
-                        pattern: Skin.PATTERN_TIGER_STRIPES
-                    });
-                    player.skin.base.color2 = "black";
+                    transformations.SkinPatternTigerSharkStripes.applyEffect();
                     changes++;
                 }
             }

@@ -106,6 +106,18 @@ package classes.GeneticMemories {
 			}
 		});
 
+	  public static const AQUA_SCALES:int = 5;
+	  EnumValue.add(Memories, AQUA_SCALES, "AQUA_SCALES", {
+		  id: "Aqua Scales",
+		  name: "Aqua Scales",
+		  cost: 100,
+		  title: "A.Scales",
+		  availableCoverages: [Skin.COVERAGE_HIGH],
+		  transformationCoverage: function(coverage: int): Transformation {
+			  return CoC.instance.transformations.SkinAquaScales(coverage);
+		  }
+	  });
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}
