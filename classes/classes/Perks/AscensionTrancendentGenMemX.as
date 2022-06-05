@@ -12,7 +12,7 @@ public class AscensionTrancendentGenMemX extends PerkType
 
     override public function desc(params:PerkClass = null):String {
         var pVal:Number = player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX);
-        return "Your body has learned to retain " + (5*pVal).toString() + " metamorphic adaptations.";
+        return "Your body has learned to retain " + (15*pVal).toString() + " metamorphic adaptations.";
     }
 
     override public function name(params:PerkClass=null):String {

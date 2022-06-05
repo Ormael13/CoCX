@@ -103,7 +103,7 @@ public class MimicScene extends BaseContent {
         if (itemRoll == 1) findSomeGems(); //find bag o gems
         if (itemRoll == 2) inventory.takeItem(consumables.NUMBOIL, camp.returnToCampUseOneHour); //find numbing oil
         if (itemRoll == 3) inventory.takeItem(consumables.HUMMUS_, camp.returnToCampUseOneHour); //find Hummanus
-        camp.returnToCampUseOneHour();
+        doNext(camp.returnToCampUseOneHour);
     }
 
     public function attackIt():void {
@@ -437,13 +437,13 @@ public class MimicScene extends BaseContent {
         dynStats("cor", 2);
         player.addCurse("int", 2, 2);
         player.addCurse("sen", 5, 2);
-        cleanupAfterCombat();
+        doNext(cleanupAfterCombat);
     }
 
     public function killTheMimic():void {
         clearOutput();
         outputText("The monster collapses, too brutally beaten to even harm you. You search the contents of the monster before heading off. ");
-        cleanupAfterCombat();
+        doNext(cleanupAfterCombat);
     }
 
     public function findSomeGems():void {

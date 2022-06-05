@@ -327,6 +327,7 @@ package classes.GeneticMemories {
 			  	return CoC.instance.transformations.FaceElf;
 		  	}
 	  	});
+
 	  	public static const WOLF_FACE:int = 26;
 	  	EnumValue.add(Memories, WOLF_FACE, "WOLF_FACE", {
 		  	id: "Wolf Face",
@@ -337,6 +338,7 @@ package classes.GeneticMemories {
 			  	return CoC.instance.transformations.FaceWolf;
 		  	}
 	  	});
+
 	  	public static const ANIMAL_TOOTHS:int = 27;
 	  	EnumValue.add(Memories, ANIMAL_TOOTHS, "ANIMAL_TOOTHS", {
 		  	id: "Animal Teeth",
@@ -347,6 +349,7 @@ package classes.GeneticMemories {
 			  	return CoC.instance.transformations.FaceAnimalTeeth;
 		  	}
 	  	});
+
 	  	public static const BUCKTEETH:int = 28;
 	  	EnumValue.add(Memories, BUCKTEETH, "BUCKTEETH", {
 		  	id: "Buck Teeth",
@@ -357,6 +360,7 @@ package classes.GeneticMemories {
 			  	return CoC.instance.transformations.FaceBuckteeth;
 		  	}
 	  	});
+
 	  	public static const MOUSE:int = 29;
 	  	EnumValue.add(Memories, MOUSE, "MOUSE", {
 		  	id: "Mouse Teeth",
@@ -367,6 +371,18 @@ package classes.GeneticMemories {
 			  	return CoC.instance.transformations.FaceMouse;
 		  	}
 	  	});
+
+		public static const YETI:int = 30;
+		EnumValue.add(Memories, YETI, "YETI", {
+		  id: "Yeti Fangs",
+		  name: "Yeti Fangs",
+		  cost: 100,
+		  title: "Yeti Fangs",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.FaceYetiFangs;
+		  }
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}
