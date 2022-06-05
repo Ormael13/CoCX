@@ -2020,81 +2020,78 @@ public class PerkLib
 		public static const JabbingStyle:PerkType = mk("Jabbing Style", "Jabbing Style",
 				"Make each unarmed successive blow deadlier by striking the same area multiple times. Damage of each successful attack when full attacking increases exponentially by a percentage based on your speed (up to 25%). This only works when fighting unarmed with no shield equipped.",
 				"You've chosen the 'Jabbing Style' perk, which makes each unarmed successive blow deadlier by striking the same area multiple times. Damage of each successful attack when full attacking increases exponentially by a percentage based on your speed (up to 10%). This only works when fighting unarmed with no shield equipped.");
-		public static const JobAllRounder:PerkType = mk("Job: All-Rounder", "Job: All-Rounder",
+		public static const JobAllRounder:PerkType = mk("Job: All-Rounder", "Basic Job: All-Rounder",
 				"You've combined all basic jobs training effects into an all-round fighting style. +10% to all stats",
-				"You've chosen the 'Job: All-Rounder' perk, to combine the effects of training in all eight basic jobs. +10% to all stats").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.10,'sens':6}, false);
-		public static const JobBeastWarrior:PerkType = mk("Job: Beast Warrior", "Job: Beast Warrior",
+				"You've chosen the 'Basic Job: All-Rounder' perk, to combine the effects of training in all eight basic jobs. +10% to all stats").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.10,'sens':6}, false);
+		public static const JobBeastWarrior:PerkType = mk("Job: Beast Warrior", "Basic Job: Beast Warrior",
 				"You've trained to use of your own body and natural weapons to their limits in fights.",
-				"You've chosen the 'Job: Beast Warrior' perk, training yourself in the art of feral combat.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05, "int.mult":-0.05, "wis.mult":-0.05,'maxwrath_base':+100});
-		public static const JobBrawler:PerkType = mk("Job: Brawler", "Job: Brawler",
+				"You've chosen the 'Basic Job: Beast Warrior' perk, training yourself in the art of feral combat.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05, "int.mult":-0.05, "wis.mult":-0.05,'maxwrath_base':+100});
+		public static const JobBrawler:PerkType = mk("Job: Brawler", "Advanced Job: Brawler",
 				"You've trained in unarmed combat.",
-				"You've chosen the 'Job: Brawler' perk, training yourself to become a(n) Brawler.").withBuffs({'str.mult':0.10});
-		public static const JobCourtesan:PerkType = mk("Job: Courtesan", "Job: Courtesan",
+				"You've chosen the 'Advanced Job: Brawler' perk, training yourself to become a(n) Brawler.").withBuffs({'str.mult':0.10});
+		public static const JobCourtesan:PerkType = mk("Job: Courtesan", "Advanced Job: Courtesan",
 				"You've mastered all various uses of tease.",
-				"You've chosen the 'Job: Courtesan' perk, training yourself to become a(n) Courtesan.").withBuffs({'lib.mult':0.15,'maxlust_base':+60});
-		public static const JobDefender:PerkType = mk("Job: Defender", "Job: Defender",
+				"You've chosen the 'Advanced Job: Courtesan' perk, training yourself to become a(n) Courtesan.").withBuffs({'lib.mult':0.15,'maxlust_base':+60});
+		public static const JobDefender:PerkType = mk("Job: Defender", "Advanced Job: Defender",
 				"You've trained in withstanding even the heaviest attacks head on.",
-				"You've chosen the 'Job: Defender' perk, training yourself to bocame a Defender.").withBuffs({'tou.mult':0.15});
-		public static const JobDervish:PerkType = mk("Job: Dervish", "Job: Dervish",
+				"You've chosen the 'Advanced Job: Defender' perk, training yourself to bocame a Defender.").withBuffs({'tou.mult':0.15});
+		public static const JobDervish:PerkType = mk("Job: Dervish", "Advanced Job: Dervish",
 				"You've trained in multi meele attacks combat and using of medium sized weapons.",
-				"You've chosen the 'Job: Dervish' perk, training yourself to become a(n) Dervish.").withBuffs({'spe.mult':0.10,'maxwrath_base':+100});
-		public static const JobElementalConjurer:PerkType = mk("Job: Elemental Conjurer", "Job: Elemental Conjurer",
+				"You've chosen the 'Advanced Job: Dervish' perk, training yourself to become a(n) Dervish.").withBuffs({'spe.mult':0.10,'maxwrath_base':+100});
+		public static const JobElementalConjurer:PerkType = mk("Job: Elemental Conjurer", "Advanced Job: Elemental Conjurer",
 				"You've trained in summoning various types of elementals.",
-				"You've chosen the 'Job: Elemental Conjurer' perk, training yourself to call elementals.").withBuffs({'wis.mult':0.05});
-		public static const JobEnchanter:PerkType = mk("Job: Enchanter", "Job: Enchanter",
+				"You've chosen the 'Advanced Job: Elemental Conjurer' perk, training yourself to call elementals.").withBuffs({'wis.mult':0.05});
+		public static const JobEnchanter:PerkType = mk("Job: Enchanter", "Advanced Job: Enchanter",
 				"You've trained in casting empowered buffs.",
-				"You've chosen the 'Job: Enchanter' perk, training yourself to become a(n) Enchanter.").withBuffs({'int.mult':0.15});
-		public static const JobEromancer:PerkType = mk("Job: Eromancer", "Job: Eromancer",
+				"You've chosen the 'Advanced Job: Enchanter' perk, training yourself to become a(n) Enchanter.").withBuffs({'int.mult':0.15});
+		public static const JobEromancer:PerkType = mk("Job: Eromancer", "Advanced Job: Eromancer",
 				"You've mastered the power of erotic magics.",
-				"You've chosen the 'Job: Eromancer' perk, training yourself to become a(n) Eromancer.").withBuffs({'int.mult':0.05,'lib.mult':0.05});
-		public static const JobGolemancer:PerkType = mk("Job: Golemancer", "Job: Golemancer",
+				"You've chosen the 'Advanced Job: Eromancer' perk, training yourself to become a(n) Eromancer.").withBuffs({'int.mult':0.05,'lib.mult':0.05});
+		public static const JobGolemancer:PerkType = mk("Job: Golemancer", "Advanced Job: Golemancer",
 				"You've mastered the art of making golems.",
-				"You've chosen the 'Job: Golemancer' perk, training yourself to become a(n) golems maker.").withBuffs({'int.mult':0.05,'wis.mult':0.05});
-		public static const JobGuardian:PerkType = mk("Job: Guardian", "Job: Guardian",
+				"You've chosen the 'Advanced Job: Golemancer' perk, training yourself to become a(n) golems maker.").withBuffs({'int.mult':0.05,'wis.mult':0.05});
+		public static const JobGuardian:PerkType = mk("Job: Guardian", "Basic Job: Guardian",
 				"You've trained in defensive combat.",
-				"You've chosen the 'Job: Guardian' perk, training yourself to become a(n) Guardian.").withBuffs({'tou.mult':0.05});
-		public static const JobGunslinger:PerkType = mk("Job: Gunslinger", "Job: Gunslinger",
+				"You've chosen the 'Basic Job: Guardian' perk, training yourself to become a(n) Guardian.").withBuffs({'tou.mult':0.05});
+		public static const JobGunslinger:PerkType = mk("Job: Gunslinger", "Advanced Job: Gunslinger",
 				"You've trained in ranged combat using firearms.",
-				"You've chosen the 'Job: Gunslinger' perk, training yourself to become a(n) Gunslinger.").withBuffs({'wis.mult':0.10,'maxfatigue_base':10});
-		public static const JobHealer:PerkType = mk("Job: Healer", "Job: Healer",
+				"You've chosen the 'Advanced Job: Gunslinger' perk, training yourself to become a(n) Gunslinger.").withBuffs({'wis.mult':0.10,'maxfatigue_base':10});
+		public static const JobHealer:PerkType = mk("Job: Healer", "Advanced Job: Healer",
 				"You've trained in using more effectively heal spells and effects.",
-				"You've chosen the 'Job: Healer' perk, training yourself to become a(n) Healer.").withBuffs({'int.mult':0.05,'wis.mult':0.05});
-		public static const JobHunter:PerkType = mk("Job: Hunter", "Job: Hunter",
+				"You've chosen the 'Advanced Job: Healer' perk, training yourself to become a(n) Healer.").withBuffs({'int.mult':0.05,'wis.mult':0.05});
+		public static const JobHunter:PerkType = mk("Job: Hunter", "Advanced Job: Hunter",
 				"You've trained in combat with traditional range weapons (like bows).",
-				"You've chosen the 'Job: Hunter' perk, training yourself to become a(n) Hunter.").withBuffs({'spe.mult':0.10,'int.mult':0.05,'maxfatigue_base':50});
-		public static const JobKnight:PerkType = mk("Job: Knight", "Job: Knight",
+				"You've chosen the 'Advanced Job: Hunter' perk, training yourself to become a(n) Hunter.").withBuffs({'spe.mult':0.10,'int.mult':0.05,'maxfatigue_base':50});
+		public static const JobKnight:PerkType = mk("Job: Knight", "Advanced Job: Knight",
 				"You've trained in combat using shields and heaviest armors.",
-				"You've chosen the 'Job: Knight' perk, training yourself to become a(n) Knight.").withBuffs({'tou.mult':0.10});
-		public static const JobLeader:PerkType = mk("Job: Leader", "Job: Leader",
+				"You've chosen the 'Advanced Job: Knight' perk, training yourself to become a(n) Knight.").withBuffs({'tou.mult':0.10});
+		public static const JobLeader:PerkType = mk("Job: Leader", "Basic Job: Leader",
 				"You've trained in ways to better lead combat companions or command minions.",
-				"You've chosen the 'Job: Leader' perk, training yourself to better lead your companions or command minions.").withBuffs({'int.mult':0.05,'wis.mult':0.05,'lib.mult':-0.05});
-		public static const JobMonk:PerkType = mk("Job: Monk", "Job: Monk",
+				"You've chosen the 'Basic Job: Leader' perk, training yourself to better lead your companions or command minions.").withBuffs({'int.mult':0.05,'wis.mult':0.05,'lib.mult':-0.05});
+		public static const JobMonk:PerkType = mk("Job: Monk", "Advanced Job: Monk",
 				"You've trained in unarmed combat.",
-				"You've chosen the 'Job: Monk' perk, training yourself to become a(n) Monk.").withBuffs({'wis.mult':0.15});
-		public static const JobRanger:PerkType = mk("Job: Ranger", "Job: Ranger",
+				"You've chosen the 'Advanced Job: Monk' perk, training yourself to become a(n) Monk.").withBuffs({'wis.mult':0.15});
+		public static const JobRanger:PerkType = mk("Job: Ranger", "Basic Job: Ranger",
 				"You've trained in ranged combat.",
-				"You've chosen the 'Job: Ranger' perk, training yourself to become a(n) Ranger.").withBuffs({'spe.mult':0.05,'maxfatigue_base':5});
-		public static const JobRogue:PerkType = mk("Job: Rogue", "Job: Rogue",
+				"You've chosen the 'Basic Job: Ranger' perk, training yourself to become a(n) Ranger.").withBuffs({'spe.mult':0.05,'maxfatigue_base':5});
+		public static const JobRogue:PerkType = mk("Job: Rogue", "Advanced Job: Rogue",
 				"You've trained in how to strike at your opponent's vital points and use various deadly tricks. (+5 to max str/spe - scalable)",
-				"You've chosen the 'Job: Rogue' perk, training yourself to become a(n) Rogue.").withBuffs({'str.mult':0.05,'spe.mult':0.05});
-		public static const JobSeducer:PerkType = mk("Job: Seducer", "Job: Seducer",
+				"You've chosen the 'Advanced Job: Rogue' perk, training yourself to become a(n) Rogue.").withBuffs({'str.mult':0.05,'spe.mult':0.05});
+		public static const JobSeducer:PerkType = mk("Job: Seducer", "Basic Job: Seducer",
 				"You've trained the art of seduction.",
-				"You've chosen the 'Job: Seducer' perk, training yourself to become a(n) Seducer.").withBuffs({'lib.mult':0.05,'maxlust_base':+30});
-		public static const JobSorcerer:PerkType = mk("Job: Sorcerer", "Job: Sorcerer",
+				"You've chosen the 'Basic Job: Seducer' perk, training yourself to become a(n) Seducer.").withBuffs({'lib.mult':0.05,'maxlust_base':+30});
+		public static const JobSorcerer:PerkType = mk("Job: Sorcerer", "Basic Job: Sorcerer",
 				"You've trained in magic combat.",
-				"You've chosen the 'Job: Sorcerer' perk, training yourself to become a(n) Sorcerer.").withBuffs({'int.mult':0.05});
-		public static const JobSoulCultivator:PerkType = mk("Job: Soul Cultivator", "Job: Soul Cultivator",
-				"You've cultivated powers of your soul.",
-				"You've chosen the 'Job: Soul Cultivator' perk, starting the journey of the soul cultivation path!").withBuffs({'wis.mult':0.05,'maxsf_base':+50});
-		public static const JobSwordsman:PerkType = mk("Job: Swordsman", "Job: Swordsman",
+				"You've chosen the 'Basic Job: Sorcerer' perk, training yourself to become a(n) Sorcerer.").withBuffs({'int.mult':0.05});
+		public static const JobSwordsman:PerkType = mk("Job: Swordsman", "Advanced Job: Swordsman",
 				"You've trained in using large weapons in fights.",
-				"You've chosen the 'Job: Swordsman' perk, training yourself to become a(n) Swordsman.").withBuffs({'str.mult':0.10,'maxwrath_base':+100});
-		public static const JobWarlord:PerkType = mk("Job: Warlord", "Job: Warlord",
+				"You've chosen the 'Advanced Job: Swordsman' perk, training yourself to become a(n) Swordsman.").withBuffs({'str.mult':0.10,'maxwrath_base':+100});
+		public static const JobWarlord:PerkType = mk("Job: Warlord", "Advanced Job: Warlord",
 				"You've trained in combat against group of enemies.",
-				"You've chosen the 'Job: Warlord' perk, training yourself to become a(n) Warlord.").withBuffs({'tou.mult':0.20,'maxwrath_base':+100});
-		public static const JobWarrior:PerkType = mk("Job: Warrior", "Job: Warrior",
+				"You've chosen the 'Advanced Job: Warlord' perk, training yourself to become a(n) Warlord.").withBuffs({'tou.mult':0.20,'maxwrath_base':+100});
+		public static const JobWarrior:PerkType = mk("Job: Warrior", "Basic Job: Warrior",
 				"You've trained in melee combat.",
-				"You've chosen the 'Job: Warrior' perk, training yourself to become a(n) Warrior.").withBuffs({'str.mult':0.05,'maxwrath_base':+50});
+				"You've chosen the 'Basic Job: Warrior' perk, training yourself to become a(n) Warrior.").withBuffs({'str.mult':0.05,'maxwrath_base':+50});
 		public static const Juggernaut:PerkType = mk("Juggernaut", "Juggernaut",
 				"When wearing heavy armor, you have extra 10% damage resistance and are immune to damage from being constricted/squeezed (req. 100+ tou).",
 				"You've chosen the 'Juggernaut' perk, granting extra 10% damage resistance when wearing heavy armor and immunity to damage from been constricted/squeezed.");
@@ -2852,9 +2849,6 @@ public class PerkLib
 		public static const SoulAncestor:PerkType = mk("Soul Ancestor", "Soul Ancestor",
 				"Allow reaching 12th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +140 max SF at lvl 72, 74, 76; +25% to max SF at lvl 72)",
 				"You've chosen the 'Soul Ancestor' perk, reaching 12th stage of soul cultivation! (+35 max Hunger, +140 max SF at lvl 72, 74, 76; +25% to max SF at lvl 72)").withBuffs({'wis.mult':0.05});
-		public static const SoulApprentice:PerkType = mk("Soul Apprentice", "Soul Apprentice",
-				"Allow reaching the 1st stage of soul cultivation. (+20 max Hunger, +5 to max Wis, +30 max SF at lvl 6, 8, 10; +10% to max SF at lvl 6)",
-				"You've chosen the 'Soul Apprentice' perk, reaching the 1st stage of soul cultivation! (+20 max Hunger, +30 max SF at lvl 6, 8, 10; +10% to max SF at lvl 6)").withBuffs({'wis.mult':0.05});
 		public static const SoulEmperor:PerkType = mk("Soul Emperor", "Soul Emperor",
 				"Allow reaching 11th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +130 max SF at lvl 66, 68, 70; +25% to max SF at lvl 66)",
 				"You've chosen the 'Soul Emperor' perk, reaching 11th stage of soul cultivation! (+35 max Hunger, +130 max SF at lvl 66, 68, 70; +25% to max SF at lvl 66)").withBuffs({'wis.mult':0.05});
@@ -2873,9 +2867,6 @@ public class PerkLib
 		public static const SoulOverlord:PerkType = mk("Soul Overlord", "Soul Overlord",
 				"Allow reaching 8th stage of soul cultivation. (+30 max Hunger, +5 to max Wis, +100 max SF at lvl 48, 50, 52; +20% to max SF at lvl 48)",
 				"You've chosen the 'Soul Overlord' perk, reaching 8th stage of soul cultivation! (+30 max Hunger, +100 max SF at lvl 48, 50, 52; +20% to max SF at lvl 48)").withBuffs({'wis.mult':0.05});
-		public static const SoulPersonage:PerkType = mk("Soul Personage", "Soul Personage",
-				"Allow reaching 2nd stage of soul cultivation. (+20 max Hunger, +5 to max Wis, +40 max SF at lvl 12, 14, 16; +10% to max SF at lvl 12)",
-				"You've chosen the 'Soul Personage' perk, reaching 2nd stage of soul cultivation! (+20 max Hunger, +40 max SF at lvl 12, 14, 16; +10% to max SF at lvl 12)").withBuffs({'wis.mult':0.05});
 		public static const SoulPowered:PerkType = mk("Soul Powered", "Soul Powered",
 				"You use your soul force more than anything else... increasing its size by 10%.",
 				"You've chosen the 'Soul Powered' perk, gaining +10% max Soulforce.")
@@ -2889,9 +2880,6 @@ public class PerkLib
 		public static const SoulTyrant:PerkType = mk("Soul Tyrant", "Soul Tyrant",
 				"Allow reaching 9th stage of soul cultivation. (+30 max Hunger, +5 to max Wis, +110 max SF at lvl 54, 56, 58; +20% to max SF at lvl 54)",
 				"You've chosen the 'Soul Tyrant' perk, reaching 9th stage of soul cultivation! (+30 max Hunger, +110 max SF at lvl 54, 56, 58; +20% to max SF at lvl 54)").withBuffs({'wis.mult':0.05});
-		public static const SoulWarrior:PerkType = mk("Soul Warrior", "Soul Warrior",
-				"Allow reaching 3rd stage of soul cultivation. (+20 max Hunger, +5 to max Wis, +50 max SF at lvl 18, 20, 22; +10% to max SF at lvl 18)",
-				"You've chosen the 'Soul Warrior' perk, reaching 3rd stage of soul cultivation! (+20 max Hunger, +50 max SF at lvl 18, 20, 22; +10% to max SF at lvl 18)").withBuffs({'wis.mult':0.05});
 		public static const Spectre:PerkType = mk("Spectre", "Spectre",
 				"You have mastered dematerialization, so now you can use it to avoid incoming attacks (+10% to dodge chance) and slip from enemy grasp (you can try to possess during struggle, and even if not successfull you'll escape from constriction).",
 				"You've chosen the 'Spectre' perk. You have mastered dematerialization, so now you can use it to avoid incoming attacks (+10% to dodge chance) and slip from enemy grasp (you can try to possess during struggle, and even if not successfull you'll escape from constriction).");
@@ -3566,6 +3554,28 @@ public class PerkLib
 		public static const SuperPerk3:PerkType = mk("Super Perk 3", "Super Perk 3",
 				".");
 
+		//Soul Cultivation perks
+		public static const EclassHeavenTribulationSurvivor:PerkType = mk("E class Heaven Tribulation Survivor", "E class Heaven Tribulation Survivor",
+				"You have survived the fourth trial on cultivation path: E class Heaven Tribulation. +25% to all stats.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,'int.mult':0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':125}, false);
+		public static const FclassHeavenTribulationSurvivor:PerkType = mk("F class Heaven Tribulation Survivor", "F class Heaven Tribulation Survivor",
+				"You have survived the third trial on cultivation path: F class Heaven Tribulation. +20% to all stats.").withBuffs({'str.mult':0.20,'tou.mult':0.20,'spe.mult':0.20,'int.mult':0.20,'wis.mult':0.20,'lib.mult':0.20,'sens':100}, false);
+		public static const GclassHeavenTribulationSurvivor:PerkType = mk("G class Heaven Tribulation Survivor", "G class Heaven Tribulation Survivor",
+				"You have survived the second trial on cultivation path: G class Heaven Tribulation. +15% to all stats.").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15,'int.mult':0.15,'wis.mult':0.15,'lib.mult':0.15,'sens':75}, false);
+		public static const HclassHeavenTribulationSurvivor:PerkType = mk("H class Heaven Tribulation Survivor", "H class Heaven Tribulation Survivor",
+				"You have survived the first trial on cultivation path: H class Heaven Tribulation. +10% to all stats.").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.10,'sens':50}, false);
+		public static const JobSoulCultivator:PerkType = mk("Job: Soul Cultivator", "Soul Cultivator",
+				"You've cultivated powers of your soul.")
+				.withBuffs({'wis.mult':0.05,'maxsf_base':+50});
+		public static const SoulApprentice:PerkType = mk("Soul Apprentice", "Soul Apprentice",
+				"You have reached 1st stage of soul cultivation. (+20 max Hunger, +30 max SF at lvl 0, 3, 6; +10% to max SF with Dantian perk)")
+				.withBuffs({'wis.mult':0.05});
+		public static const SoulPersonage:PerkType = mk("Soul Personage", "Soul Personage",
+				"You have reached 2nd stage of soul cultivation. (+20 max Hunger, +45 max SF at lvl 9, 12, 15; +10% to max SF with Dantian perk)")
+				.withBuffs({'wis.mult':0.05});
+		public static const SoulWarrior:PerkType = mk("Soul Warrior", "Soul Warrior",
+				"You have reached 3rd stage of soul cultivation. (+20 max Hunger, +60 max SF at lvl 18, 21, 24; +10% to max SF with Dantian perk)")
+				.withBuffs({'wis.mult':0.05});
+
 		// Mutation perks
 		public static const AcidSpit:PerkType = mk("Acid Spit", "Acid Spit",
 				"Allows access to a cave wyrm acid spit attack.");
@@ -3853,8 +3863,6 @@ public class PerkLib
 		public static const DemonSlayer:DemonSlayerPerk = new DemonSlayerPerk();
 		public static const DualMind:PerkType = mk("Dual Mind", "Dual Mind",
 				"Greatly empower the tease ability.");
-		public static const EclassHeavenTribulationSurvivor:PerkType = mk("E class Heaven Tribulation Survivor", "E class Heaven Tribulation Survivor",
-				"You have survived the fourth trial on cultivation path: E class Heaven Tribulation. +25% to all stats.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,'int.mult':0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':125}, false);
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
 				"You are currently in elemental form.");
 		public static const ELFArcherCovenant:PerkType = mk("Archer Covenant", "Archer Covenant",
@@ -3869,8 +3877,6 @@ public class PerkLib
 		public static const ElvenBounty:ElvenBountyPerk = new ElvenBountyPerk();
 		public static const ElvenRangerArmor:PerkType = mk("Elven Ranger Armor", "Elven Ranger Armor",
 				"+50% to Bow and spear damage, Count as naked, Slutty seduction +8.");
-		public static const FclassHeavenTribulationSurvivor:PerkType = mk("F class Heaven Tribulation Survivor", "F class Heaven Tribulation Survivor",
-				"You have survived the third trial on cultivation path: F class Heaven Tribulation. +20% to all stats.").withBuffs({'str.mult':0.20,'tou.mult':0.20,'spe.mult':0.20,'int.mult':0.20,'wis.mult':0.20,'lib.mult':0.20,'sens':100}, false);
 		public static const FeralHunter:FeralHunterPerk = new FeralHunterPerk();
 		public static const FerasBoonAlpha:PerkType = mk("Fera's Boon - Alpha", "Fera's Boon - Alpha",
 				"Increases the rate your cum builds up and cum production in general.");
@@ -3890,10 +3896,6 @@ public class PerkLib
 				"You need constant intakes of sexual fluids to stay alive.");
 		public static const GargoylePure:PerkType = mk("Gargoyle", "Pure Gargoyle",
 				"Need to gain sustenance from soulforce to stay alive.");
-		public static const GclassHeavenTribulationSurvivor:PerkType = mk("G class Heaven Tribulation Survivor", "G class Heaven Tribulation Survivor",
-				"You have survived the second trial on cultivation path: G class Heaven Tribulation. +15% to all stats.").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15,'int.mult':0.15,'wis.mult':0.15,'lib.mult':0.15,'sens':75}, false);
-		public static const HclassHeavenTribulationSurvivor:PerkType = mk("H class Heaven Tribulation Survivor", "H class Heaven Tribulation Survivor",
-				"You have survived the first trial on cultivation path: H class Heaven Tribulation. +10% to all stats.").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.10,'sens':50}, false);
 		public static const Hellfire:PerkType = mk("Hellfire", "Hellfire",
 				"Grants a corrupted fire breath attack, like the hellhounds in the mountains.");
 		public static const IntermediateLeadership:PerkType = mk("Intermediate Leadership", "Intermediate Leadership",
@@ -6213,9 +6215,6 @@ public class PerkLib
             // SOULFORCE
             //------------
             //Tier 0
-            JobSoulCultivator.requireWis(10);
-            SoulApprentice.requireWis(20)
-                    .requirePerk(JobSoulCultivator);
             Dantain.requirePerk(JobSoulCultivator)
                     .requireMaxSoulforce(100);
             BodyCultivator.requirePerk(JobSoulCultivator);
@@ -6225,9 +6224,6 @@ public class PerkLib
             FlyingSwordPath.requirePerk(JobSoulCultivator);
 			SoaringBlades.requirePerks(Dantain, FlyingSwordPath);
             //Tier 1
-            SoulPersonage.requireLevel(9)
-                    .requirePerk(SoulApprentice)
-                    .requireWis(40);
             InsightfulResourcesI.requireLevel(6)
                     .requireWis(50)
                     .requirePerk(JobSoulCultivator);
@@ -6258,9 +6254,6 @@ public class PerkLib
                     .requireLevel(22)
                     .requireNGPlus(5);
             //Tier 3
-            SoulWarrior.requirePerk(SoulPersonage)
-                    .requireWis(80)
-                    .requireLevel(18);
             //2nd perk for flying swords slots
             //Tier 4
             SoulSprite.requirePerks(SoulWarrior, HclassHeavenTribulationSurvivor)
@@ -6698,13 +6691,6 @@ public class PerkLib
                     }, "Twelve racial perks");
 			JobAllRounder.requireLevel(24)
                     .requirePerks(JobBeastWarrior , JobGuardian, JobLeader, JobRanger, JobSeducer, JobSorcerer, JobSoulCultivator, JobWarrior)
-                    //.requirePerk(JobGuardian)
-                    //.requirePerk(JobLeader)
-                    //.requirePerk(JobRanger)
-                    //.requirePerk(JobSeducer)
-                    //.requirePerk(JobSorcerer)
-                    //.requirePerk(JobSoulCultivator)
-                    //.requirePerk(JobWarrior)
                     .requireStr(75)
                     .requireTou(75)
                     .requireSpe(75)

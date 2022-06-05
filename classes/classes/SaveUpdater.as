@@ -1907,6 +1907,14 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.hasPerk(PerkLib.AscensionNaturalMetamorph) && !player.hasPerk(PerkLib.MetamorphEx)) player.createPerk(PerkLib.MetamorphEx, 0, 0, 0, 0);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.003;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.004) {
+				if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX) && !player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory)){
+					player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory,15 * player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX),0,0,0);
+					//trace("Hit!");
+				}
+				trace("Player has "+ player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory) + " slots, and " + player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) + " used.");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.004;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;
