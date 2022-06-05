@@ -1029,7 +1029,7 @@ public final class Mutations extends MutationsHelper {
             //High level change
             if (rando >= 93) {
                 if (player.cockTotal() < 10) {
-                    if (int(Math.random() * 10) < int(player.cor / 25)) {
+                    if (int(Math.random() * 10) < int(player.cor / (25+player.corruptionTolerance))) {
                         outputText("[pg]");
                         growDemonCock(rand(2) + 2);
                         if (tainted) {
@@ -1051,7 +1051,7 @@ public final class Mutations extends MutationsHelper {
                 }
             }
             //Demonic changes - higher chance with higher corruption.
-            if (rand(40) + player.cor / 2 > 40 && tainted) demonChanges(player);
+            if (rand(40) + (player.cor + player.corruptionTolerance) / 2 > 40 && tainted) demonChanges(player);
         }
         if (rand(4) == 0 && tainted) outputText(player.modFem(5, 2));
         if (rand(4) == 0 && tainted) outputText(player.modThickness(30, 2));
@@ -1362,7 +1362,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //Demonic changes - higher chance with higher corruption.
-        if (rand(40) + player.cor / 2 > 40 && tainted && changeLimit != 0) demonChanges(player);
+        if (rand(40) + (player.cor + player.corruptionTolerance) / 2 > 40 && tainted && changeLimit != 0) demonChanges(player);
         if (tainted) {
             outputText(player.modFem(100, 2));
             if (rand(3) == 0) outputText(player.modTone(15, 2));
@@ -3308,7 +3308,7 @@ public final class Mutations extends MutationsHelper {
             player.createPerk(PerkLib.Feeder, 0, 0, 0, 0);
             changes++;
         }
-        //UNFINISHED
+        //TODO:UNFINISHED
         //If player has addictive quality and drinks pure version, removes addictive quality.
         //if the player has a vagina and it is tight, it loosens.
         if (player.hasVagina()) {
@@ -10358,12 +10358,7 @@ public final class Mutations extends MutationsHelper {
             transformations.SkinPlain.applyEffect();
         }
 		if (type == 1) {
-			if (player.rearBody.type == RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) < 10 && changes < changeLimit && rand(3) == 0) {
-				player.addStatusValue(StatusEffects.GazerEyeStalksPlayer, 1, 2);
-				outputText("[pg]You gasp in alien pleasure as two new eye mounted tentacle stalks explode from your back joining your previous set. At first you're a little disoriented from being able to see in all those directions but eventually manage to adapt to the new change, the set dripping black oily fluids. <b>You now have "+player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer)+" eye mounted tentacle stalks on your back.</b>");
-				changes++;
-			}
-			if (player.rearBody.type != RearBody.TENTACLE_EYESTALKS && changes < changeLimit && rand(3) == 0) {
+			if (player.rearBody.type != RearBody.TENTACLE_EYESTALKS || (player.rearBody.type == RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) < 10) && changes < changeLimit && rand(3) == 0) {
 				outputText("[pg]");
                 transformations.RearBodyTentacleEyestalks.applyEffect();
 				changes++;
@@ -12543,17 +12538,17 @@ public final class Mutations extends MutationsHelper {
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         //Demon wings
-        if (((player.wings.type == Wings.DRACONIC_LARGE || player.wings.type == Wings.BEE_LARGE || player.wings.type == Wings.MANTIS_LARGE || player.wings.type == Wings.MANTICORE_LARGE) && player.cor >= 50 || player.wings.type == Wings.BAT_LIKE_TINY && player.cor >= 75) && rand(3) == 0) {
+        if ((InCollection(player.wings.type, Wings.DRACONIC_LARGE, Wings.BEE_LARGE, Wings.MANTIS_LARGE, Wings.MANTICORE_LARGE) && player.cor >= (50-player.corruptionTolerance) || player.wings.type == Wings.BAT_LIKE_TINY && player.cor >= (75-player.corruptionTolerance)) && rand(3) == 0) {
             outputText("[pg]");
             transformations.WingsDemonicLarge.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
-        if ((player.wings.type == Wings.DRACONIC_SMALL || player.wings.type == Wings.BEE_SMALL || player.wings.type == Wings.MANTIS_SMALL || player.wings.type == Wings.MANTICORE_SMALL) && player.cor >= 50 && rand(3) == 0) {
+        if ((player.wings.type == Wings.DRACONIC_SMALL || player.wings.type == Wings.BEE_SMALL || player.wings.type == Wings.MANTIS_SMALL || player.wings.type == Wings.MANTICORE_SMALL) && player.cor >= (50-player.corruptionTolerance) && rand(3) == 0) {
             outputText("[pg]");
             transformations.WingsDemonicTiny.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
-        if (player.wings.type == Wings.NONE && player.cor >= 50 && rand(3) == 0) {
+        if (player.wings.type == Wings.NONE && player.cor >= (50-player.corruptionTolerance) && rand(3) == 0) {
             outputText("[pg]");
             transformations.WingsDemonicTiny.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
@@ -15084,7 +15079,7 @@ public final class Mutations extends MutationsHelper {
         //wings
         if (rand(3) == 0 && changes < changeLimit && !InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.BAT_LIKE_LARGE) && (player.tailType == Tail.GOAT || player.tailType == Tail.DEMONIC)) {
             //grow smalls to large
-            if (player.wings.type == Wings.BAT_LIKE_TINY && player.cor >= 75) {
+            if (player.wings.type == Wings.BAT_LIKE_TINY && player.cor >= (75-player.corruptionTolerance)) {
                 outputText("[pg]");
                 transformations.WingsDemonicLarge.applyEffect();
             } else if (player.wings.type == Wings.BEE_SMALL) {
