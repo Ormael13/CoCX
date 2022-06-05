@@ -1156,7 +1156,7 @@ public class PerkMenu extends BaseContent {
 			for each(var mutation2:IMutationPerkType in mutationsArray) {
 				var pMutateLvl2:int = player.perkv1(mutation2);
 				if (player.hasMutation(mutation2)) {
-					outputText("\n" + mutation2.name() + ": <font color=\"#008000\">Acquired.</font>");
+					outputText("\n" + mutation2.name() + ": [font-green]Acquired.[/font]");
 					outputText("\nTier: " + player.perkv1(mutation2));
 					outputText("\nDescription: ");
 					if (mutation2.mDesc(player.getPerk(mutation2), pMutateLvl2).length <= 1) {	//Some desc. contains only "."
