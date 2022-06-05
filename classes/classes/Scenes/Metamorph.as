@@ -959,8 +959,10 @@ package classes.Scenes {
 				for (var i: int = 0; i  < totCock; i++) {
 					addButton(i, "Cock "+(i+1), accessCockMenu, 0, i).hint( player.cockDescript(i));
 				}
-				const cockUnlocked:Boolean = GeneticMemoryStorage[CockCountMem.Memories[totCock].id] && true;
-				addButtonIfTrue(totCock, "New Cock", curry(accessCockMenu, 0, totCock), "You need to get a cock first", cockUnlocked, "Add a cock");
+				if (totCock < 10) {
+					const cockUnlocked:Boolean = GeneticMemoryStorage[CockCountMem.Memories[totCock].id] && true;
+					addButtonIfTrue(totCock, "New Cock", curry(accessCockMenu, 0, totCock), "You need to get a cock first", cockUnlocked, "Add a cock");
+				}
 
 				addButton(14, "Back", accessMetamorphMenu);
 			}
