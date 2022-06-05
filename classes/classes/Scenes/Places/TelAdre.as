@@ -1640,7 +1640,7 @@ private function weightLifting():void {
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
 		if (flags[kFLAGS.DISABLED_SEX_MACHINE] == 0) {
-			addButton(0,"\"Showers\"",sexMachine.exploreShowers);
+			addButton(0,"''Showers''",sexMachine.exploreShowers);
 			addButton(1,"Showers",brooke.repeatChooseShower);
 			addButton(4, "Leave", camp.returnToCampUseOneHour);
 		}
@@ -1733,7 +1733,7 @@ private function goJogging():void {
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
 		if (flags[kFLAGS.DISABLED_SEX_MACHINE] == 0) {
-			addButton(0,"\"Showers\"",sexMachine.exploreShowers);
+			addButton(0,"''Showers''",sexMachine.exploreShowers);
 			addButton(1,"Showers",brooke.repeatChooseShower);
 			addButton(4, "Leave", camp.returnToCampUseOneHour);
 		}

@@ -97,20 +97,14 @@ public function meetBrookeFirstTime():void {
 public function repeatChooseShower():void {
 	clearOutput();
 	if (flags[kFLAGS.PABLO_AFFECTION] >= 60 && telAdre.pablo.pabloIntro(false) && rand(2) == 0) {
-		if (flags[kFLAGS.PABLO_SECRET_LEARNED] == 0) {
+		if (flags[kFLAGS.PABLO_SECRET_LEARNED] == 0)
 			telAdre.pablo.pabloSecret();
-			return;
-		}
-		else if (flags[kFLAGS.PABLO_AFFECTION] >= 100) {
+		else if (flags[kFLAGS.PABLO_AFFECTION] >= 100)
 			telAdre.pablo.pabloShowerSexIntro();
-			return;
-		}
-		if (flags[kFLAGS.PABLO_FREAKED_OUT_OVER_WORMS] > 0 && !player.hasStatusEffect(StatusEffects.Infested)) {
+		if (flags[kFLAGS.PABLO_FREAKED_OUT_OVER_WORMS] > 0 && !player.hasStatusEffect(StatusEffects.Infested))
 			telAdre.pablo.pabloComesBackAfterWormCure();
-			return;
-		}
+		return;
 	}
-	spriteSelect(SpriteDb.s_brooke_nude);
 	if(model.time.hours < 16 || model.time.hours > 18 || player.tone < 30) {
 		//Before 16:00/after 18:00, affection <= 19
 		if(brookeAffection() <= 19) {
@@ -130,10 +124,12 @@ public function repeatChooseShower():void {
 		}
 		doNext(camp.returnToCampUseOneHour);
 		fatigue(-5);
+		return;
 	}
+	spriteSelect(SpriteDb.s_brooke_nude);
 	//Between 16:00 and 18:00
 	//Third encounter; body tone 30 minimum
-	else if(flags[kFLAGS.BROOKE_GRUMPS_ABOUT_TA] == 0 && player.tone >= 30) {
+	if(flags[kFLAGS.BROOKE_GRUMPS_ABOUT_TA] == 0 && player.tone >= 30) {
 		brookeThirdEncounter();
 	}
 	//Affection <= 19
