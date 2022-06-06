@@ -7307,8 +7307,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    TransformationUtils.applyTFIfNotPresent(transformations.GillsNone, doOutput);
 
 	    desc += "You suddenly feel your legs giving in bellow you and you fall off to the ground unable to resume standing. You feel something weird down your legs as you notice they are literally boneless! No wonder you fell down there's no way those empty lump of flesh would be able to carry your weight around. As you think over how you will fix this annoying situation wracking pain hits you in waves as your legs seems to stretch to a ridiculous length up to twice your height. Just as you think this can't get any weirder your legs split apart dividing into four then again into eighths! You watch you toe disappearing turning your feet into what could have been described as eight very weird tails when your legs start to cover with what looks like suction cups similar to those of an octopus. <b>Your legs have turned into tentacles!</b>";
-	    if (player.gender == Gender.GENDER_FEMALE) desc += " Looking for your privates you notice your pussy is right under your 8 legs just like the center of a fleshy flower and became about huge like a mouth ready to engulf anything.";
-	    else if (player.gender == Gender.GENDER_HERM) desc += " Looking for your privates you notice your pussy is right under your 8 legs just like the center of a fleshy flower and became about huge like a mouth ready to engulf anything and your cock is right between your 2 front 'legs' looking almost like another tentacle.";
+	    if (player.gender == Gender.GENDER_FEMALE) desc += " Looking for your privates you notice your pussy is right under your 8 legs just like the center of a fleshy flower and became huge like a mouth ready to engulf anything.";
+	    else if (player.gender == Gender.GENDER_HERM) desc += " Looking for your privates you notice your pussy is right under your 8 legs just like the center of a fleshy flower and became huge like a mouth ready to engulf anything and your cock is right between your 2 front 'legs' looking almost like another tentacle.";
 	    else if (player.gender == Gender.GENDER_MALE) desc += " Looking for your privates you notice your cock is right between your 2 front 'legs' looking almost like another tentacle.";
 	    desc += " As you lift yourself standing on your tentacles not only can you still walk somewhat but heck don't you feel like grabbing something and squeezing it in your pleasurable new legs!";
 
@@ -7316,6 +7316,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 8;
 	    player.lowerBody = LowerBody.SCYLLA;
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.SCYLLA));
 	  },
 	  // is present
 	  function (): Boolean {
