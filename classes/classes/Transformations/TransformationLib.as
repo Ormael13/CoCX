@@ -5334,6 +5334,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // is present
 	  function (): Boolean {
 	    return player.arms.type === Arms.GOO;
+	  },
+		//is possible
+			function (): Boolean {
+				return player.arms.type != Arms.GOO;
 	  }
 	);
 
@@ -5940,6 +5944,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // apply effect
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
+		  TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyGoo,doOutput);
 
 	    desc += "You suddenly lose shape turning into a puddle on the ground. Confused you begin to try and stand up   At the center of the mass that is your translucent " + player.skinTone + " body, you actually do have something solid that allows you to shape your form, a heart, or more accurately, a core. You try and pull yourself back up, translucent liquid arms and torso shaping back from your body mass as you need them. Once you've recovered the top of your goey human shape you sigh in relief. Curious you begin to try out your new very malleable form reshaping yourself in various forms from a cube to a literal human dildo. Giggling you take back your standard shape thinking of the many naughty things you can do now with this gooey body of yours.";
 
@@ -5949,6 +5954,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // is present
 	  function (): Boolean {
 	    return player.rearBody.type === RearBody.METAMORPHIC_GOO;
+	  },
+		function (): Boolean {
+			return player.rearBody.type != RearBody.METAMORPHIC_GOO && player.lowerBody == LowerBody.GOO && (player.hasPerk(PerkLib.SlimeCore) || player.hasPerk(PerkLib.DarkSlimeCore));
 	  }
 	);
 
@@ -9850,6 +9858,40 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		}
 	);
 
+	public const BreastsShrinkToNothing:Transformation = new SimpleTransformation("Shrink breasts to nothing",
+		// apply effect
+		function (doOutput:Boolean):void {
+			var desc: String = "";
+
+			desc += "A tingle starts in your [nipples] before the tight buds grow warm, hot even.  ";
+			if (player.biggestLactation() >= 1) desc += "Somehow, you know that the milk you had been producing is gone, reabsorbed by your body.  ";
+			desc += "They pinch in towards your core, shrinking along with your flattening [allbreasts].  You shudder and flex in response.  Your chest isn't just shrinking, it's reforming, sculping itself into a massive pair of chiseled pecs.  ";
+			if (player.breastRows.length > 1) {
+				desc += "The breasts below vanish entirely.  ";
+				while (player.breastRows.length > 1) {
+					player.removeBreastRow(player.breastRows.length - 1, 1);
+				}
+			}
+			player.breastRows[0].breastRating = 0;
+			player.breastRows[0].nipplesPerBreast = 1;
+			player.breastRows[0].fuckable = false;
+			if (player.nippleLength > .5) player.nippleLength = .25;
+			player.breastRows[0].lactationMultiplier = 0;
+			player.removeStatusEffect(StatusEffects.Feeder);
+			if (player.hasPerk(PerkLib.Feeder)) {
+				outputText("<b>(Perk Lost - Feeder!)</b>\n");
+				player.removePerk(PerkLib.Feeder);
+			}
+			desc += "All too soon, your boobs are gone.  Whoa![pg]";
+
+			if (doOutput) outputText(desc);
+		},
+		// is present
+		function ():Boolean {
+			return player.smallestTitSize() >= 6;
+		}
+	);
+
 	public const BreastRowsRemoveToOne:Transformation = new SimpleTransformation("One pair of breasts",
 		// apply effect
 		function (doOutput:Boolean):void {
@@ -10058,6 +10100,16 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 /*
     */
+	public function UnlockVagina(): void {
+		//noinspection FallThroughInSwitchStatementJS	// Fallthrough is intended for retroactively unlocking in Metamorph after getting GeneticMemory
+		switch (player.vaginas.length) {
+			case 2: Metamorph.unlockMetamorphEx(VaginaCountMem.getMemory(VaginaCountMem.VAGINA2));
+			case 1: Metamorph.unlockMetamorphEx(VaginaCountMem.getMemory(VaginaCountMem.VAGINA1));
+				break;
+			default: break;
+		}
+	}
+
 	public function VaginaNone(vagina:int = 0): Transformation {
 		return new SimpleTransformation("Remove Vagina",
 			// apply effect
@@ -10070,6 +10122,38 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 					player.removeVagina(vagina, 1);
 				}
+			},
+			// is present
+			function ():Boolean {
+				return !player.hasVagina();
+			},
+			// is possible
+			function ():Boolean {
+				return !player.hasVagina();
+			}
+		);
+	}
+
+	public function CockToVagina(vagina:int = 0): Transformation {
+		return new SimpleTransformation("Remove Vagina",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc:String = "[pg]";
+
+				if (player.cockTotal() == 1 && !player.hasVagina()) {
+					desc += "Your [cock] suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.";
+					if (!flags[kFLAGS.HYPER_HAPPY]) {
+						if (player.balls > 0) desc += "  At the same time, your [balls] fall victim to the same sensation; eagerly swallowed whole by your crotch.";
+						desc += "  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>";
+						player.balls = 0;
+						player.ballSize = 1;
+						transformations.VaginaHuman().applyEffect(false);
+						player.removeCock(0, 1);
+					}
+				} else if (!flags[kFLAGS.HYPER_HAPPY]) {
+					player.killCocks(1);
+				}
+				if (doOutput) outputText(desc);
 			},
 			// is present
 			function ():Boolean {
@@ -10106,7 +10190,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 				player.vaginaType(VaginaClass.HUMAN, vagina);
 
-				Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.HUMAN));
+				UnlockVagina();
 			},
 			// is present
 			function ():Boolean {
@@ -10140,6 +10224,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.vaginaType(VaginaClass.EQUINE, vagina);
 					player.vaginas[vagina].vaginalLooseness = VaginaClass.LOOSENESS_GAPING;
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.EQUINE));
 				},
 				// is present
@@ -10177,6 +10262,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.BLACK_SAND_TRAP);
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.BLACK_SAND_TRAP));
 				},
 				// is present
@@ -10207,6 +10293,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.CAVE_WYRM);
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.CAVE_WYRM));
 				},
 				// is present
@@ -10247,6 +10334,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.VENOM_DRIPPING, vagina);
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.VENOM_DRIPPING));
 				},
 				// is present
@@ -10281,6 +10369,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.MANTICORE, vagina);
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.MANTICORE));
 				},
 				// is present
@@ -10317,6 +10406,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 					player.vaginaType(VaginaClass.CANCER, vagina);
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.CANCER));
 				},
 				// is present
@@ -10347,6 +10437,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.DEMONIC, vagina);
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.DEMONIC));
 				},
 				// is present
@@ -10381,6 +10472,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.vaginaType(VaginaClass.SCYLLA, vagina);
 					player.vaginas[vagina].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.SCYLLA));
 				},
 				// is present
@@ -10418,6 +10510,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.vaginas[vagina].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
 					player.vaginaType(VaginaClass.NAGA, vagina);
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.NAGA));
 				},
 				// is present
@@ -10456,6 +10549,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.SHARK, vagina);
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.SHARK));
 				},
 				// is present
@@ -10487,6 +10581,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.RAIJU, vagina);
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.RAIJU));
 				},
 				// is present

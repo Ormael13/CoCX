@@ -1237,8 +1237,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         if (player.vaginas.length == 0 && (rand(3) == 0 || (rando > 75 && rando < 90))) {
-            player.createVagina();
-            player.clitLength = .25;
+            transformations.VaginaHuman().applyEffect(false);
             if (player.fertility <= 5) player.fertility = 6;
             outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
         }
@@ -1317,9 +1316,7 @@ public final class Mutations extends MutationsHelper {
                     dynStats("lus", 8);
                     player.addCurse("sens", 3, 1);
                 } else {
-                    player.createVagina();
-                    player.clitLength = .25;
-                    outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
+                    transformations.VaginaHuman().applyEffect();
                 }
             } else {
                 switch (rand(10)) {
@@ -1524,12 +1521,8 @@ public final class Mutations extends MutationsHelper {
                                 outputText("\n");
                             }
                             outputText("\nYour ");
-                            if (choice == 0) outputText("first ");
-                            if (choice == 1) outputText("second ");
-                            if (choice == 2) outputText("third ");
-                            if (choice == 3) outputText("fourth ");
-                            if (choice == 4) outputText("fifth ");
                             if (choice > 4) outputText("");
+                            else outputText(num2Text2(choice));
                             outputText("row of " + breastDescript(choice) + " grows larger, as if jealous of the jiggling flesh above.");
                             temp2 = (player.breastRows[choice - 1].breastRating) - player.breastRows[choice].breastRating - 1;
                             if (temp2 > 5) temp2 = 5;
@@ -3123,28 +3116,11 @@ public final class Mutations extends MutationsHelper {
             temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
             player.lengthChange(temp3, 1);
             if (player.cocks[temp].cockLength < 2) {
-                outputText("  ");
-                if (player.cockTotal() == 1 && !player.hasVagina()) {
-                    outputText("Your [cock] suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.");
-                    if (player.balls > 0) outputText("  At the same time, your [balls] fall victim to the same sensation; eagerly swallowed whole by your crotch.");
-                    outputText("  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>");
-                    player.balls = 0;
-                    player.ballSize = 1;
-                    player.createVagina();
-                    player.clitLength = .25;
-                    player.removeCock(0, 1);
-                } else {
-                    player.killCocks(1);
-                }
+                transformations.CockToVagina().applyEffect();
             }
             //if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
             if (player.cocks.length == 0 && !player.hasVagina()) {
-                player.createVagina();
-                player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
-                player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
-                player.vaginas[0].virgin = true;
-                player.clitLength = .25;
-                outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
+                transformations.VaginaHuman().applyEffect();
                 changes++;
                 dynStats("lus", 10);
             }
@@ -3233,7 +3209,7 @@ public final class Mutations extends MutationsHelper {
         //apply an effect where the player really wants
         //to give their milk to other creatures
         //(capable of getting them addicted):
-        if (changes < changeLimit && !player.hasStatusEffect(StatusEffects.Feeder) && player.biggestLactation() >= 3 && rand(2) == 0 && player.biggestTitSize() >= 5 && player.cor >= 35) {
+        if (changes < changeLimit && !player.hasStatusEffect(StatusEffects.Feeder) && player.biggestLactation() >= 3 && rand(2) == 0 && player.biggestTitSize() >= 5 && player.cor >= (35-player.corruptionTolerance)) {
             outputText("[pg]You start to feel a strange desire to give your milk to other creatures.  For some reason, you know it will be very satisfying.[pg]<b>(You have gained the 'Feeder' perk!)</b>");
             player.createStatusEffect(StatusEffects.Feeder, 0, 0, 0, 0);
             player.createPerk(PerkLib.Feeder, 0, 0, 0, 0);
@@ -4538,13 +4514,13 @@ public final class Mutations extends MutationsHelper {
         }
         //DONE EXCEPT FOR TITS & MULTIDICKS (UNFINISHED KINDA)
         //4.Goo legs
-        if (player.skinAdj == "slimy" && player.skinDesc == "skin" && player.arms.type == Arms.GOO && player.lowerBody != LowerBody.GOO && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+        if (player.skinAdj == "slimy" && player.skinDesc == "skin" && player.arms.type == Arms.GOO && player.lowerBody != LowerBody.GOO && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.LowerBodyGoo.applyEffect();
             changes++;
         }
         //5 Goopy rear body
-        if (player.rearBody.type != RearBody.METAMORPHIC_GOO && player.lowerBody == LowerBody.GOO && (player.hasPerk(PerkLib.SlimeCore) || player.hasPerk(PerkLib.DarkSlimeCore)) && changes < changeLimit && rand(3) == 0) {
+        if (transformations.RearBodyMetamorphicGoo.isPossible() && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.RearBodyMetamorphicGoo.applyEffect();
             changes++;
@@ -4552,7 +4528,7 @@ public final class Mutations extends MutationsHelper {
         //6a. Grow vagina if none
         if (!player.hasVagina() && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]A wet warmth spreads through your slimey groin as a narrow gash appears on the surface of your groin.  <b>You have grown a vagina.</b>");
-            player.createVagina();
+            transformations.VaginaHuman().applyEffect(false);
             player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_DROOLING;
             player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING;
             player.clitLength = .4;
@@ -5455,8 +5431,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Reset vaginal virginity to correct state
         if (player.gender >= 2) {
-            player.createVagina();
-            player.vaginas[0].virgin = virgin;
+            transformations.VaginaHuman().applyEffect(false);
         }
         player.clitLength = .25;
         //Tighten butt!
@@ -7679,14 +7654,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Grow a cunt (guaranteed if no gender)
         if (player.gender == 0 || (!player.hasVagina() && changes < changeLimit && rand(3) == 0)) {
-            //(balls)
-            if (player.balls > 0) outputText("[pg]An itch starts behind your [balls], but before you can reach under to scratch it, the discomfort fades. A moment later a warm, wet feeling brushes your [sack], and curious about the sensation, <b>you lift up your balls to reveal your new vagina.</b>");
-            //(dick)
-            else if (player.hasCock()) outputText("[pg]An itch starts on your groin, just below your [cocks]. You pull the manhood aside to give you a better view, and you're able to watch as <b>your skin splits to give you a new vagina, complete with a tiny clit.</b>");
-            //(neither)
-            else outputText("[pg]An itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your [armor] to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>");
-            player.createVagina();
-            player.clitLength = .25;
+            transformations.VaginaHuman().applyEffect();
             player.addCurse("sen", 10, 1);
             changes++;
         }
@@ -9257,23 +9225,7 @@ public final class Mutations extends MutationsHelper {
 
         //(Tits b' gone)
         if (player.biggestTitSize() >= 1) {
-            outputText("A tingle starts in your " + nippleDescript(0) + "s before the tight buds grow warm, hot even.  ");
-            if (player.biggestLactation() >= 1) outputText("Somehow, you know that the milk you had been producing is gone, reabsorbed by your body.  ");
-            outputText("They pinch in towards your core, shrinking along with your flattening " + allChestDesc() + ".  You shudder and flex in response.  Your chest isn't just shrinking, it's reforming, sculping itself into a massive pair of chiseled pecs.  ");
-            if (player.breastRows.length > 1) {
-                outputText("The breasts below vanish entirely.  ");
-                while (player.breastRows.length > 1) {
-                    player.removeBreastRow(player.breastRows.length - 1, 1);
-                }
-            }
-            player.breastRows[0].breastRating = 0;
-            player.breastRows[0].nipplesPerBreast = 1;
-            player.breastRows[0].fuckable = false;
-            if (player.nippleLength > .5) player.nippleLength = .25;
-            player.breastRows[0].lactationMultiplier = 0;
-            player.removeStatusEffect(StatusEffects.Feeder);
-            player.removePerk(PerkLib.Feeder);
-            outputText("All too soon, your boobs are gone.  Whoa![pg]");
+            transformations.BreastsShrinkToNothing.applyEffect();
         }
 
         outputText("Starting at your hands, your muscles begin to contract and release, each time getting tighter, stronger, and more importantly - larger.  The oddness travels up your arms, thickens your biceps, and broadens your shoulders.  Soon, your neck and chest are as built as your arms.  You give a few experimental flexes as your abs ");
@@ -9312,9 +9264,8 @@ public final class Mutations extends MutationsHelper {
             transformations.CockHuman(0, 12, 3).applyEffect(false);
             outputText("[pg]");
             if (player.balls == 0) {
-                player.balls = 2;
+                transformations.BallsDuo.applyEffect(false);
                 player.ballSize = 3;
-                Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
             }
         }
         //(Pussy b gone)
@@ -9337,6 +9288,7 @@ public final class Mutations extends MutationsHelper {
         outputText("<b>(Bro Body - Perk Gained!)\n");
         outputText("(Bro Brains - Perk Gained!)</b>\n");//int to 20.  max int 50)
         if (player.hasPerk(PerkLib.Feeder)) {
+            player.removeStatusEffect(StatusEffects.Feeder);
             outputText("<b>(Perk Lost - Feeder!)</b>\n");
             player.removePerk(PerkLib.Feeder);
         }
@@ -13007,28 +12959,11 @@ public final class Mutations extends MutationsHelper {
             temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
             player.lengthChange(temp3, 1);
             if (player.cocks[temp].cockLength < 2) {
-                outputText("  ");
-                if (player.cockTotal() == 1 && !player.hasVagina()) {
-                    outputText("Your [cock] suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.");
-                    if (player.balls > 0) outputText("  At the same time, your [balls] fall victim to the same sensation; eagerly swallowed whole by your crotch.");
-                    outputText("  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>");
-                    player.balls = 0;
-                    player.ballSize = 1;
-                    player.createVagina();
-                    player.clitLength = .25;
-                    player.removeCock(0, 1);
-                } else {
-                    player.killCocks(1);
-                }
+                transformations.CockToVagina().applyEffect();
             }
             //if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
             if (player.cocks.length == 0 && !player.hasVagina()) {
-                player.createVagina();
-                player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
-                player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
-                player.vaginas[0].virgin = true;
-                player.clitLength = .25;
-                outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
+                transformations.VaginaHuman().applyEffect();
                 changes++;
                 dynStats("lus", 10);
             }
@@ -13397,19 +13332,7 @@ public final class Mutations extends MutationsHelper {
             temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
             player.lengthChange(temp3, 1);
             if (player.cocks[temp].cockLength < 2) {
-                outputText("  ");
-                if (player.cockTotal() == 1 && !player.hasVagina()) {
-                    outputText("Your [cock] suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.");
-                    if (player.balls > 0) outputText("  At the same time, your [balls] fall victim to the same sensation; eagerly swallowed whole by your crotch.");
-                    outputText("  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>");
-                    player.balls = 0;
-                    player.ballSize = 1;
-                    player.createVagina();
-                    player.clitLength = .25;
-                    player.removeCock(0, 1);
-                } else {
-                    player.killCocks(1);
-                }
+                transformations.CockToVagina().applyEffect();
             }
             //if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
             if (!player.hasCock() && !player.hasVagina()) {
@@ -13913,25 +13836,11 @@ public final class Mutations extends MutationsHelper {
             temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
             player.lengthChange(temp3, 1);
             if (player.cocks[temp].cockLength < 2) {
-                outputText("  ");
-                if (player.cockTotal() == 1 && !player.hasVagina()) {
-                    outputText("Your [cock] suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.");
-                    if (player.balls > 0) outputText("  At the same time, your [balls] fall victim to the same sensation; eagerly swallowed whole by your crotch.");
-                    outputText("  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>");
-                    player.balls = 0;
-                    player.ballSize = 1;
-                    player.createVagina();
-                    player.clitLength = .25;
-                    player.removeCock(0, 1);
-                } else {
-                    player.killCocks(1);
-                }
+                transformations.CockToVagina().applyEffect();
             }
             //if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
             if (player.cocks.length == 0 && !player.hasVagina()) {
-                player.createVagina();
-                player.clitLength = .25;
-                outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
+                transformations.VaginaHuman().applyEffect();
                 changes++;
                 dynStats("lus", 10);
             }
@@ -15850,25 +15759,11 @@ public final class Mutations extends MutationsHelper {
                 temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
                 player.lengthChange(temp3, 1);
                 if (player.cocks[temp].cockLength < 2) {
-                    outputText("  ");
-                    if (player.cockTotal() == 1 && !player.hasVagina()) {
-                        outputText("Your [cock] suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.");
-                        if (player.balls > 0) outputText("  At the same time, your [balls] fall victim to the same sensation; eagerly swallowed whole by your crotch.");
-                        outputText("  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>");
-                        player.balls = 0;
-                        player.ballSize = 1;
-                        player.createVagina();
-                        player.clitLength = .25;
-                        player.removeCock(0, 1);
-                    } else {
-                        player.killCocks(1);
-                    }
+                    transformations.CockToVagina().applyEffect();
                 }
                 //if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
                 if (player.cocks.length == 0 && !player.hasVagina()) {
-                    player.createVagina();
-                    player.clitLength = .25;
-                    outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
+                    transformations.VaginaHuman().applyEffect();
                     changes++;
                     dynStats("lus", 10);
                 }
@@ -16313,25 +16208,11 @@ public final class Mutations extends MutationsHelper {
                 temp3 += player.increaseCock(temp, (rand(4) + 1) * -1);
                 player.lengthChange(temp3, 1);
                 if (player.cocks[temp].cockLength < 2) {
-                    outputText("  ");
-                    if (player.cockTotal() == 1 && !player.hasVagina()) {
-                        outputText("Your [cock] suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.");
-                        if (player.balls > 0) outputText("  At the same time, your [balls] fall victim to the same sensation; eagerly swallowed whole by your crotch.");
-                        outputText("  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>");
-                        player.balls = 0;
-                        player.ballSize = 1;
-                        player.createVagina();
-                        player.clitLength = .25;
-                        player.removeCock(0, 1);
-                    } else {
-                        player.killCocks(1);
-                    }
+                    transformations.CockToVagina().applyEffect();
                 }
                 //if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
                 if (player.cocks.length == 0 && !player.hasVagina()) {
-                    player.createVagina();
-                    player.clitLength = .25;
-                    outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
+                    transformations.VaginaHuman().applyEffect();
                     changes++;
                     dynStats("lus", 10);
                 }

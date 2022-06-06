@@ -734,18 +734,7 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 		player.trainStat("lib", 1, 75);
 		outputText("\n\n");
 		//(Tits b' gone)
-		if(player.biggestTitSize() >= 1) {
-			if(player.breastRows.length > 1) {
-				while(player.breastRows.length > 1) {
-					player.removeBreastRow(player.breastRows.length-1,1);
-				}
-			}
-			player.breastRows[0].breastRating = 0;
-			player.breastRows[0].nipplesPerBreast = 1;
-			player.breastRows[0].fuckable = false;
-			if(player.nippleLength > .5) player.nippleLength = .25;
-			player.breastRows[0].lactationMultiplier = 0;
-		}
+		transformations.BreastsShrinkToNothing.applyEffect();
 		if(player.hasCock()) {
 			if(player.cocks[0].cockLength < 10) {
 				if(player.cocks[0].cockThickness < 2.75) {
@@ -777,7 +766,6 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 		}
 		dynStats("str", 33,"tou", 33, "int", -1, "lib", 4, "lus", 40);
 		changed = true;
-		player.removePerk(PerkLib.Feeder);
 	}
 	//[(if player received a change from brew)
 	if(changed) {
