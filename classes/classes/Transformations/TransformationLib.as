@@ -3985,7 +3985,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.EyesHuman, doOutput);
 
-	    TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["blue", "green", "turquoise", "light green"]), doOutput);
+	    TransformationUtils.applyTFIfNotPresent(transformations.EyesRaijuColors, doOutput);
 
 	    desc += "Bright lights flash into your vision as your eyes glow with electric light. Blinded, you rapidly shake your head around, trying to clear your vision. It takes a moment, but your vision eventually returns to normal. Curious, you go over to a nearby puddle and find <b>glowing [eyecolor] bestial slitted eyes staring back at you.</b>";
 
@@ -5334,6 +5334,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // is present
 	  function (): Boolean {
 	    return player.arms.type === Arms.GOO;
+	  },
+		//is possible
+			function (): Boolean {
+				return player.arms.type != Arms.GOO;
 	  }
 	);
 
@@ -5940,6 +5944,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // apply effect
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
+		  TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyGoo,doOutput);
 
 	    desc += "You suddenly lose shape turning into a puddle on the ground. Confused you begin to try and stand up   At the center of the mass that is your translucent " + player.skinTone + " body, you actually do have something solid that allows you to shape your form, a heart, or more accurately, a core. You try and pull yourself back up, translucent liquid arms and torso shaping back from your body mass as you need them. Once you've recovered the top of your goey human shape you sigh in relief. Curious you begin to try out your new very malleable form reshaping yourself in various forms from a cube to a literal human dildo. Giggling you take back your standard shape thinking of the many naughty things you can do now with this gooey body of yours.";
 
@@ -5949,6 +5954,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // is present
 	  function (): Boolean {
 	    return player.rearBody.type === RearBody.METAMORPHIC_GOO;
+	  },
+		function (): Boolean {
+			return player.rearBody.type != RearBody.METAMORPHIC_GOO && player.lowerBody == LowerBody.GOO && (player.hasPerk(PerkLib.SlimeCore) || player.hasPerk(PerkLib.DarkSlimeCore));
 	  }
 	);
 
@@ -5973,16 +5981,22 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    desc += "You gasp in alien pleasure as two large protrusions explode from your back freeing a pair of black tentacle stalks. The tips open to a set of eyes the same color as yours gazing at the world. These eyes share their vision with your central eye allowing you to see the world in a full peripheral view. <b>You now have two eye mounted tentacle stalks on your back.</b>";
+		  if (player.rearBody.type != RearBody.TENTACLE_EYESTALKS) {
+			  desc += "You gasp in alien pleasure as two large protrusions explode from your back freeing a pair of black tentacle stalks. The tips open to a set of eyes the same color as yours gazing at the world. These eyes share their vision with your central eye allowing you to see the world in a full peripheral view. <b>You now have two eye mounted tentacle stalks on your back.</b>";
 
-	    player.createStatusEffect(StatusEffects.GazerEyeStalksPlayer, 2, 0, 0, 0);
-	    player.rearBody.type = RearBody.TENTACLE_EYESTALKS;
+			  player.createStatusEffect(StatusEffects.GazerEyeStalksPlayer, 2, 0, 0, 0);
+			  player.rearBody.type = RearBody.TENTACLE_EYESTALKS;
+		  }
+		  else {
+			  player.addStatusValue(StatusEffects.GazerEyeStalksPlayer, 1, 2);
+			  desc +="You gasp in alien pleasure as two new eye mounted tentacle stalks explode from your back joining your previous set. At first you're a little disoriented from being able to see in all those directions but eventually manage to adapt to the new change, the set dripping black oily fluids. <b>You now have "+player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer)+" eye mounted tentacle stalks on your back.</b>";
+		  }
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.TENTACLE_EYESTALKS));
 	  },
 	  // is present
 	  function (): Boolean {
-	    return player.rearBody.type === RearBody.TENTACLE_EYESTALKS;
+	    return player.rearBody.type === RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) < 10;
 	  }
 	);
 
@@ -7301,8 +7315,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    TransformationUtils.applyTFIfNotPresent(transformations.GillsNone, doOutput);
 
 	    desc += "You suddenly feel your legs giving in bellow you and you fall off to the ground unable to resume standing. You feel something weird down your legs as you notice they are literally boneless! No wonder you fell down there's no way those empty lump of flesh would be able to carry your weight around. As you think over how you will fix this annoying situation wracking pain hits you in waves as your legs seems to stretch to a ridiculous length up to twice your height. Just as you think this can't get any weirder your legs split apart dividing into four then again into eighths! You watch you toe disappearing turning your feet into what could have been described as eight very weird tails when your legs start to cover with what looks like suction cups similar to those of an octopus. <b>Your legs have turned into tentacles!</b>";
-	    if (player.gender == Gender.GENDER_FEMALE) desc += " Looking for your privates you notice your pussy is right under your 8 legs just like the center of a fleshy flower and became about huge like a mouth ready to engulf anything.";
-	    else if (player.gender == Gender.GENDER_HERM) desc += " Looking for your privates you notice your pussy is right under your 8 legs just like the center of a fleshy flower and became about huge like a mouth ready to engulf anything and your cock is right between your 2 front 'legs' looking almost like another tentacle.";
+	    if (player.gender == Gender.GENDER_FEMALE) desc += " Looking for your privates you notice your pussy is right under your 8 legs just like the center of a fleshy flower and became huge like a mouth ready to engulf anything.";
+	    else if (player.gender == Gender.GENDER_HERM) desc += " Looking for your privates you notice your pussy is right under your 8 legs just like the center of a fleshy flower and became huge like a mouth ready to engulf anything and your cock is right between your 2 front 'legs' looking almost like another tentacle.";
 	    else if (player.gender == Gender.GENDER_MALE) desc += " Looking for your privates you notice your cock is right between your 2 front 'legs' looking almost like another tentacle.";
 	    desc += " As you lift yourself standing on your tentacles not only can you still walk somewhat but heck don't you feel like grabbing something and squeezing it in your pleasurable new legs!";
 
@@ -7310,11 +7324,16 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 8;
 	    player.lowerBody = LowerBody.SCYLLA;
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.SCYLLA));
 	  },
 	  // is present
 	  function (): Boolean {
 	    return player.lowerBody === LowerBody.SCYLLA;
-	  }
+	  },
+	  //is possible
+		function (): Boolean {
+			return !InCollection(player.lowerBody, LowerBody.SCYLLA, LowerBody.NAGA, LowerBody.CLOVEN_HOOFED);
+		}
 	);
 
 	public const LowerBodyKraken: Transformation = new SimpleTransformation("Kraken Lower Body",
@@ -8673,6 +8692,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.DOG));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -9213,7 +9233,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        desc += "Sensation fades from your [wings] slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.";
 	        break;
 	      case 1:
-	        desc += "A wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your	shoulder-blades. After a moment the pain passes, though your wings are gone!";
+	        desc += "A wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades. After a moment the pain passes, though your wings are gone!";
 	        break;
 	      }
 	    }
@@ -9838,6 +9858,40 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		}
 	);
 
+	public const BreastsShrinkToNothing:Transformation = new SimpleTransformation("Shrink breasts to nothing",
+		// apply effect
+		function (doOutput:Boolean):void {
+			var desc: String = "";
+
+			desc += "A tingle starts in your [nipples] before the tight buds grow warm, hot even.  ";
+			if (player.biggestLactation() >= 1) desc += "Somehow, you know that the milk you had been producing is gone, reabsorbed by your body.  ";
+			desc += "They pinch in towards your core, shrinking along with your flattening [allbreasts].  You shudder and flex in response.  Your chest isn't just shrinking, it's reforming, sculping itself into a massive pair of chiseled pecs.  ";
+			if (player.breastRows.length > 1) {
+				desc += "The breasts below vanish entirely.  ";
+				while (player.breastRows.length > 1) {
+					player.removeBreastRow(player.breastRows.length - 1, 1);
+				}
+			}
+			player.breastRows[0].breastRating = 0;
+			player.breastRows[0].nipplesPerBreast = 1;
+			player.breastRows[0].fuckable = false;
+			if (player.nippleLength > .5) player.nippleLength = .25;
+			player.breastRows[0].lactationMultiplier = 0;
+			player.removeStatusEffect(StatusEffects.Feeder);
+			if (player.hasPerk(PerkLib.Feeder)) {
+				outputText("<b>(Perk Lost - Feeder!)</b>\n");
+				player.removePerk(PerkLib.Feeder);
+			}
+			desc += "All too soon, your boobs are gone.  Whoa![pg]";
+
+			if (doOutput) outputText(desc);
+		},
+		// is present
+		function ():Boolean {
+			return player.smallestTitSize() >= 6;
+		}
+	);
+
 	public const BreastRowsRemoveToOne:Transformation = new SimpleTransformation("One pair of breasts",
 		// apply effect
 		function (doOutput:Boolean):void {
@@ -9876,9 +9930,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 
 			if (doOutput) outputText(desc);
-			for (var i:int = 0; i < player.breastRows.length; i++) {
+			for (var i:int = 0; i < player.breastRows.length; i++)
 				player.breastRows[i].nipplesPerBreast = 1;
-			}
 		},
 		// is present
 		function ():Boolean {
@@ -9890,10 +9943,72 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		}
 	);
 
+	public const NipplesPerBreastFour:Transformation = new SimpleTransformation("Four nipples per breast",
+		// apply effect
+		function (doOutput:Boolean):void {
+			var desc: String = "";
+
+			desc += "[pg]Your " + nippleDescript(0) + "s tingle and itch.  You pull back your [armor] and watch in shock as they split into four distinct nipples!  <b>You now have four nipples on each side of your chest!</b>";
+			if (player.breastRows.length >= 2 && player.breastRows[1].nipplesPerBreast == 1)
+				desc += "A moment later your second row of " + breastDescript(1) + " does the same.";
+			if (player.breastRows.length >= 3 && player.breastRows[2].nipplesPerBreast == 1) {
+				desc += "Finally, your ";
+				if (player.bRows() == 3) desc +="third row of " + breastDescript(2) + " mutates along with its sisters, sprouting into a wonderland of nipples.";
+				else desc +="everything from the third row down mutates, sprouting into a wonderland of nipples.";
+			}
+			if (doOutput) outputText(desc);
+			for (var i:int = 0; i < player.breastRows.length; i++)
+				player.breastRows[i].nipplesPerBreast = 4;
+			if (player.bRows() > 1)
+				outputText("  <b>You have a total of " + num2Text(player.totalNipples()) + " nipples.</b>");
+		},
+		// is present
+		function ():Boolean {
+			return player.averageNipplesPerBreast() == 4;
+		},
+		// is possible
+		function ():Boolean {
+				return player.averageNipplesPerBreast() < 4;
+			}
+	);
+
+	public const NipplesFuckable:Transformation = new SimpleTransformation("Fuckable nipples",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				var nowFuckable:Boolean;
+				//Set nipplecunts on every row.
+				for (var i:int = 0; i < player.breastRows.length; i++)
+					if (!player.breastRows[i].fuckable && player.nippleLength >= 2) {
+						player.breastRows[i].fuckable = true;
+						nowFuckable = true;
+					}
+				desc += "[pg]Your [allbreasts] tingle with warmth that slowly migrates to your nipples, filling them with warmth.  You pant and moan, rubbing them with your fingers.  A trickle of wetness suddenly coats your finger as it slips inside the nipple.  Shocked, you pull the finger free.  <b>You now have fuckable nipples!</b>";
+				//Talk about if anything was changed.
+				if (doOutput && nowFuckable) outputText(desc);
+			},
+			// is present
+			function ():Boolean {
+				return player.hasFuckableNipples();
+			},
+			// is possible
+			function ():Boolean {
+				return !player.hasFuckableNipples() && player.bRows() > 0 && player.nippleLength >= 2
+			}
+	);
+
 	public const NipplesBlack:Transformation = new SimpleTransformation("Black nipples",
 		// apply effect
 		function (doOutput:Boolean):void {
 			var desc: String = "";
+
+			//Cant have multicoloured nips...
+			if (player.hasStatusEffect(StatusEffects.GlowingNipples))
+			{
+				desc +="[pg]Something invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.";
+				player.removeStatusEffect(StatusEffects.GlowingNipples);
+			}
 
 			desc += "A tickling sensation plucks at your nipples and you cringe, trying not to giggle. Looking down you are in time to see the last spot of flesh tone disappear from your [nipples]. They have turned an onyx black!";
 
@@ -9902,12 +10017,39 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		},
 		// is present
 		function ():Boolean {
-			return player.hasStatusEffect(StatusEffects.BlackNipples)
+			return player.hasStatusEffect(StatusEffects.BlackNipples);
 		},
 		// is possible
 		function ():Boolean {
-			return !player.hasStatusEffect(StatusEffects.BlackNipples) && player.lowerBody !== LowerBody.GARGOYLE
+			return !player.hasStatusEffect(StatusEffects.BlackNipples) && !player.hasStatusEffect(StatusEffects.GlowingNipples) && player.lowerBody !== LowerBody.GARGOYLE;
 		}
+	);
+
+	public const NipplesGlowing:Transformation = new SimpleTransformation("Glowing nipples",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				//Cant have multicoloured nips...
+				if (player.hasStatusEffect(StatusEffects.BlackNipples))
+				{
+					desc +="[pg]Something invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.";
+					player.removeStatusEffect(StatusEffects.BlackNipples);
+				}
+
+				desc += "[pg]You suddenly feel an itch in your nipples and undress to check up on them. To your surprise they begin to glow with a fluorescent blue light as latent electricity build up within them. Well, this will be interesting.  <b>You now have neon blue nipples that glow in the dark.</b>";
+
+				if (doOutput) outputText(desc);
+				player.createStatusEffect(StatusEffects.GlowingNipples, 0, 0, 0, 0);
+			},
+			// is present
+			function ():Boolean {
+				return player.hasStatusEffect(StatusEffects.GlowingNipples);
+			},
+			// is possible
+			function ():Boolean {
+				return !player.hasStatusEffect(StatusEffects.BlackNipples) && !player.hasStatusEffect(StatusEffects.GlowingNipples);
+			}
 	);
 	/*
 */
@@ -9958,6 +10100,16 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 /*
     */
+	public function UnlockVagina(): void {
+		//noinspection FallThroughInSwitchStatementJS	// Fallthrough is intended for retroactively unlocking in Metamorph after getting GeneticMemory
+		switch (player.vaginas.length) {
+			case 2: Metamorph.unlockMetamorphEx(VaginaCountMem.getMemory(VaginaCountMem.VAGINA2));
+			case 1: Metamorph.unlockMetamorphEx(VaginaCountMem.getMemory(VaginaCountMem.VAGINA1));
+				break;
+			default: break;
+		}
+	}
+
 	public function VaginaNone(vagina:int = 0): Transformation {
 		return new SimpleTransformation("Remove Vagina",
 			// apply effect
@@ -9970,6 +10122,38 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 					player.removeVagina(vagina, 1);
 				}
+			},
+			// is present
+			function ():Boolean {
+				return !player.hasVagina();
+			},
+			// is possible
+			function ():Boolean {
+				return !player.hasVagina();
+			}
+		);
+	}
+
+	public function CockToVagina(vagina:int = 0): Transformation {
+		return new SimpleTransformation("Remove Vagina",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc:String = "[pg]";
+
+				if (player.cockTotal() == 1 && !player.hasVagina()) {
+					desc += "Your [cock] suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.";
+					if (!flags[kFLAGS.HYPER_HAPPY]) {
+						if (player.balls > 0) desc += "  At the same time, your [balls] fall victim to the same sensation; eagerly swallowed whole by your crotch.";
+						desc += "  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>";
+						player.balls = 0;
+						player.ballSize = 1;
+						transformations.VaginaHuman().applyEffect(false);
+						player.removeCock(0, 1);
+					}
+				} else if (!flags[kFLAGS.HYPER_HAPPY]) {
+					player.killCocks(1);
+				}
+				if (doOutput) outputText(desc);
 			},
 			// is present
 			function ():Boolean {
@@ -10006,7 +10190,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 				player.vaginaType(VaginaClass.HUMAN, vagina);
 
-				Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.HUMAN));
+				UnlockVagina();
 			},
 			// is present
 			function ():Boolean {
@@ -10040,6 +10224,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.vaginaType(VaginaClass.EQUINE, vagina);
 					player.vaginas[vagina].vaginalLooseness = VaginaClass.LOOSENESS_GAPING;
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.EQUINE));
 				},
 				// is present
@@ -10077,6 +10262,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.BLACK_SAND_TRAP);
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.BLACK_SAND_TRAP));
 				},
 				// is present
@@ -10107,6 +10293,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.CAVE_WYRM);
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.CAVE_WYRM));
 				},
 				// is present
@@ -10147,6 +10334,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.VENOM_DRIPPING, vagina);
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.VENOM_DRIPPING));
 				},
 				// is present
@@ -10181,6 +10369,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.MANTICORE, vagina);
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.MANTICORE));
 				},
 				// is present
@@ -10217,6 +10406,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 					player.vaginaType(VaginaClass.CANCER, vagina);
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.CANCER));
 				},
 				// is present
@@ -10247,6 +10437,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.DEMONIC, vagina);
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.DEMONIC));
 				},
 				// is present
@@ -10281,6 +10472,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.vaginaType(VaginaClass.SCYLLA, vagina);
 					player.vaginas[vagina].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.SCYLLA));
 				},
 				// is present
@@ -10318,6 +10510,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.vaginas[vagina].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
 					player.vaginaType(VaginaClass.NAGA, vagina);
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.NAGA));
 				},
 				// is present
@@ -10356,6 +10549,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.SHARK, vagina);
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.SHARK));
 				},
 				// is present
@@ -10387,6 +10581,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.RAIJU, vagina);
 
+					UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.RAIJU));
 				},
 				// is present
@@ -10473,7 +10668,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.HUMAN;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
 				},
 				// is present
 				function ():Boolean {
@@ -10526,7 +10720,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockDog(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockDog(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.4): Transformation {
 		return new SimpleTransformation("Dog Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -10565,7 +10759,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					if (thickness != 1)
 						player.cocks[cock].cockThickness = thickness;
-					if (player.cocks[cock].knotMultiplier < 1.5) player.cocks[cock].knotMultiplier = 1.5;
+					if (player.cocks[cock].knotMultiplier < knot) player.cocks[cock].knotMultiplier = knot;
 					player.cocks[cock].cockType = CockTypesEnum.DOG;
 
 					UnlockCocks();
@@ -10816,11 +11010,11 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 							outputText(" as the bulge lengthens, pushing out from your body.  Too surprised to react, you can only pant in pain and watch as the fleshy lump starts to take on a penis-like appearance.  <b>You're growing a second lizard-cock!</b>  It doesn't stop growing until it's just as long as its brother and the same shade of shiny purple.  A dribble of cum oozes from its tip, and you feel relief at last.");
 						} else {
 							if (player.isTaur()) desc += "You feel a sudden stabbing pain between your back legs" +(player.hasVagina()?" just below your [vagina]":"")+" and bend over, moaning in agony. falling on your back so you can get a stare at your hindquarters you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down,  ";
-						else if (!player.hasVagina() && !player.hasCock()) desc +="You feel a sudden stabbing pain in your groin and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
+							else if (!player.hasVagina() && !player.hasCock()) desc +="You feel a sudden stabbing pain in your groin and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
 							else if (!player.hasVagina()) desc += "You feel a sudden stabbing pain above your [cocks] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
 							else desc +="You feel a sudden stabbing pain just above your [vagina] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
 							desc += "It ripples loosely from "+
-									(player.hasSheath() ? "sheath " : "base ") + "to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your [cock "+(cock+1)+"] resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker "+
+									(player.hasSheath() ? "sheath " : "base ") + "to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your cock resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker "+
 									(player.cor < 33 ? "horrifies you." : (player.cor < 66 ?"is a little strange for your tastes." :"looks like it might be more fun to receive than use on others."));
 							if (player.hasVagina()) desc+= "Maybe you could find someone else with one to ride?"
 							else desc+= "Maybe you should test it out on someone and ask them exactly how it feels?";
@@ -11045,7 +11239,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockDisplacer(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockDisplacer(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.5): Transformation {
 		return new SimpleTransformation("Displacer Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -11071,7 +11265,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					if (thickness != 1)
 						player.cocks[cock].cockThickness = thickness;
-					if(player.cocks[cock].knotMultiplier < 1.5) player.cocks[cock].knotMultiplier = 1.5;
+					if(player.cocks[cock].knotMultiplier < knot) player.cocks[cock].knotMultiplier = knot;
 					player.cocks[cock].cockType = CockTypesEnum.DISPLACER;
 
 					UnlockCocks();
@@ -11084,7 +11278,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockFox(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockFox(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.25): Transformation {
 		return new SimpleTransformation("Fox Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -11123,7 +11317,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					if (thickness != 1)
 						player.cocks[cock].cockThickness = thickness;
-					if (player.cocks[cock].knotMultiplier < 1.5) player.cocks[cock].knotMultiplier = 1.25;
+					if (player.cocks[cock].knotMultiplier < knot) player.cocks[cock].knotMultiplier = knot;
 					player.cocks[cock].cockType = CockTypesEnum.FOX;
 
 					UnlockCocks();
@@ -11316,7 +11510,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockWolf(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockWolf(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.1): Transformation {
 		return new SimpleTransformation("Wolf Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -11342,7 +11536,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					if (thickness != 1)
 						player.cocks[cock].cockThickness = thickness;
-					if (player.cocks[cock].knotMultiplier < 1.1) player.cocks[cock].knotMultiplier = 1.1;
+					if (player.cocks[cock].knotMultiplier < knot) player.cocks[cock].knotMultiplier = knot;
 					player.cocks[cock].cockType = CockTypesEnum.WOLF;
 
 					UnlockCocks();
@@ -11516,7 +11710,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						else if (!player.hasVagina() && !player.hasCock()) desc +="You feel a sudden stabbing pain in your groin and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
 						else if (!player.hasVagina()) desc += "You feel a sudden stabbing pain above your [cocks] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
 						else desc +="You feel a sudden stabbing pain just above your [vagina] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
-						desc += "an irrepressible desire to masturbate takes hold of you. You keep stroking your twitching cock, moaning as you cum neon blue fluids. Wait, what? When you inspect your [cock] you discover its tip not only has changed color to neon blue but is now tappered with a sheath like that of a raiju. Furthermore it seems to naturally glow in the dark like the plasma that naturaly drips out of it. <b>You now have a neon blue raiju cock that glow in the dark.</b>";
+						desc += "an irrepressible desire to masturbate takes hold of you. You keep stroking your twitching cock, moaning as you cum neon blue fluids. Wait, what? When you inspect your cock you discover its tip not only has changed color to neon blue but is now tappered with a sheath like that of a raiju. Furthermore it seems to naturally glow in the dark like the plasma that naturaly drips out of it. <b>You now have a neon blue raiju cock that glow in the dark.</b>";
 						player.createCock();
 					}
 					if (doOutput) outputText(desc);
@@ -11609,7 +11803,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 				if (player.balls < 2) {
 					player.ballSize = 1;
-					desc += "You gasp in shock as a sudden pain racks your crotch. Within seconds, two balls drop down into a new sack, your skin stretching out to accommodate them. Once the pain clears, you examine <b>your new pair of testes.</b>[pg]";
+					if (rand(2) == 0) desc += "\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.";
+					else desc += "You gasp in shock as a sudden pain racks your crotch. Within seconds, two balls drop down into a new sack, your skin stretching out to accommodate them. Once the pain clears, you examine <b>your new pair of testes.</b>[pg]";
 				}
 				else
 					desc += "Your scrotum slowly shrinks until they seem to have reached a normal size. <b>It feels as if your extra balls have fused together, leaving you with a pair of balls.</b>[pg]";
