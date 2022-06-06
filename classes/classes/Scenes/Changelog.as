@@ -164,8 +164,10 @@ public class Changelog extends BaseContent
 			//outputText("-Dinah would provide PC with HB Mech upgrade options after it's bought. They could boost mech defences, attack or even provide with specials. As with all other items upgrades cost can vary depending on her mood ^^\n");
 			//outputText("-HB Mech upgrade options includes: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Rapid Reload (+base ranged atk dmg), Internal Systems (increase mech SF capacity and lower it consumption during high activity), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special), ");
 			//outputText("Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)\n");
-			outputText("-Metamorph menu: Yeti race all bodyparts, Yuki onna arms, Twin KAsha tails, Giant dragonfly wings, Tigershark Stripes, Shark skin (EragonX)\n");
+			outputText("-Metamorph menu: Yeti race all bodyparts, Yuki onna arms, Twin Kasha tails, Giant dragonfly wings, Tigershark Stripes, Shark skin (EragonX)\n");
 			outputText("-Blademaster and Grand Blademaster perks effect would cover weapons of scythe type too now.\n");
+			outputText("-Swift casting spells won't have cooldowns but their power will be lowered by 80%.\n");
+			outputText("-Spell-Knight str req. was lowered from 200 to 150.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -173,6 +175,20 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
+			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
+			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-Fixed Bugs: Akbal been weak to fire not ice\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -188,16 +204,6 @@ public class Changelog extends BaseContent
 			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
 			//outputText("-New soulskill: Devourer. Req. ... Devour up to 400 lust and wrath from enemy transfering 50% of it back to player. Cooldown: 3 turns.\n");
 			//outputText("-New enemy possible to encounter during Bog exploration: Dark Elf Ranger - lvl 39\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
-			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
-			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-Fixed Bugs: \n");/*ostatni punkt changelogu
 			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
 			//outputText("\n");cel na 0.8: dodać kitsune/nekomanta TF
 			//outputText("\n");cel na 0.8: dodać siren TF
@@ -284,9 +290,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

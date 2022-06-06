@@ -235,7 +235,7 @@ public class Akbal extends Monster
 				{call: akbalHeal, type: ABILITY_MAGIC, range: RANGE_SELF, tags:[TAG_HEAL]},
 			];
 			this.tailType = Tail.CAT;
-			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
+			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.createPerk(PerkLib.OverMaxHP, (20 + mod*6), 0, 0, 0);

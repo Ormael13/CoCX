@@ -1915,6 +1915,63 @@ public class SaveUpdater extends NPCAwareContent {
 				trace("Player has "+ player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory) + " slots, and " + player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) + " used.");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.004;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.005) {
+				outputText("\It will hurt a tiny bit fellow daoists but it's for greater good to cripple our cultivations to start anew.\n\nPS. I LIED IT HURTS LIKE NINE HELLS AND FOUR HEAVEND... MUAHAHAHAHAHA");
+				if (player.hasPerk(PerkLib.JobSoulCultivator)) {
+					player.removePerk(PerkLib.JobSoulCultivator);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.SoulApprentice)) {
+					player.removePerk(PerkLib.SoulApprentice);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.SoulPersonage)) {
+					player.removePerk(PerkLib.SoulPersonage);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.SoulWarrior)) {
+					player.removePerk(PerkLib.SoulWarrior);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.SoulSprite)) {
+					player.removePerk(PerkLib.SoulSprite);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.SoulScholar)) {
+					player.removePerk(PerkLib.SoulScholar);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.SoulElder)) {
+					player.removePerk(PerkLib.SoulElder);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.SoulExalt)) {
+					player.removePerk(PerkLib.SoulExalt);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.SoulOverlord)) {
+					player.removePerk(PerkLib.SoulOverlord);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.SoulTyrant)) {
+					player.removePerk(PerkLib.SoulTyrant);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.SoulKing)) {
+					player.removePerk(PerkLib.SoulKing);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.SoulEmperor)) {
+					player.removePerk(PerkLib.SoulEmperor);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.SoulAncestor)) {
+					player.removePerk(PerkLib.SoulAncestor);
+					player.perkPoints += 1;
+				}
+				if (flags[kFLAGS.SOUL_CULTIVATION] > 0) flags[kFLAGS.SOUL_CULTIVATION] = 0;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.005;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;
