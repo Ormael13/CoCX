@@ -63,7 +63,7 @@ public class VolcanicCrag extends BaseContent
 				return;
 			}
 			//Forgefather
-			if (flags[kFLAGS.ONYX_PATH] > 0 && flags[kFLAGS.SAPPHIRE_AFFECTION] >= 60 && (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) && flags[kFLAGS.FORGEFATHER_MOVED_TO_TEMPLE] != 1) {
+			if ((player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) && flags[kFLAGS.FORGEFATHER_MOVED_TO_TEMPLE] != 1) {
 				VolcanicCragConditions();
 				if (flags[kFLAGS.MET_FORGEFATHER] == 0) {
 					SceneLib.forgefatherScene.meetForgefather();
