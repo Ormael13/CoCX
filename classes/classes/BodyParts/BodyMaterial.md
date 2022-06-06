@@ -18,9 +18,11 @@ Coverage goes from none (base only), low/partial (patches of coat), medium (mix 
 
 Extract **body material** data from skin layers to creature. A creature would store information on all possible body materials, and body parts can access any of them.
 
-List of body material types should be kept short, but sufficient. Current needed types are: skin, fur, scales, and chitin. Candidates: hair, feathers.
+List of body material types should be kept short, but sufficient. Current needed types are: skin, fur, scales, and chitin. Candidates: hair, feathers, horns/claws.
 
 Body material would store `color1`, `color2`. See 'Dual color system rework' below. To be discussed: move `adj` too.
+
+Body parts indicate whether they have material or not. For example, scaly wings would return
 
 ### Dual color system rework
 
@@ -49,7 +51,32 @@ player.chitinColor2 === "black"
 
 ## Function changes
 
-* New r/w properties for body material colors: `skinColor/skinColor1/skinColor2`, `furColor/1/2`, `scaleColor/1/2`, `chitinColor/1/2`
-* Corresponding parser tags: `[skin/fur/scales/chitin color/1/2]`
-* `skinTone` (main skin color) will be named `bodyColor`
+For brevity, in following code `fur` means `fur/scales/chitin` or any other body material.
 
+* New r/w properties for body material colors: `skinColor/skinColor1/skinColor2`, `furColor/furColor1/furColor2`
+* Corresponding parser tags: `[skin/fur color/color1/color2]`
+* `skinTone` (main skin color) will be named `bodyColor`
+* `hasFur` will be renamed to `isFurCovered`
+* `hasFurMaterial` will check if any body part has material  
+
+## To Be Discussed
+
+### Body material types
+
+All materials w/o their own type would use colors from some other material (goo skin would use normal skin, dragon scales - normal scales).
+
+- skin
+- fur
+- scales
+- chitin
+- (?) hair - for unification
+- (?) feathers
+- (?) horns/claws - has its own tone but never used in-game
+- (?) bark/leaves/plant matter
+
+### Body material properties
+
+- `type` (never changes)
+- `color1`, `color2`, `color`
+- (?) `adj` - would propagate descriptions like "rubber skin" to other body parts
+- (???) `pattern` - probably not, as it could allow having multiple patterns, or patterns on small area
