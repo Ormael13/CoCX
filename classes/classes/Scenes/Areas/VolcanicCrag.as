@@ -8,7 +8,6 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.Areas.Forest.AlrauneScene;
 import classes.Scenes.Areas.HighMountains.PhoenixScene;
 import classes.Scenes.Areas.VolcanicCrag.*;
 import classes.Scenes.Holidays;
