@@ -200,8 +200,8 @@ public class HeXinDao extends BaseContent
 		addButton(1, "1st Stall", TierI).hint("Check out the first stall. This shop sells common items, for beginning soul cultivators.");
         if (player.hasPerk(PerkLib.SoulApprentice)) addButton(2, "2nd Stall", TierII).hint("Check out the second stall. This sells items for Soul Apprentices, Soul Personage and Soul Warrior stage cultivators.");
 		else addButtonDisabled(2, "2nd Stall", "You need to be at least a Soul Apprentice to check those items.");
-        if (player.hasPerk(PerkLib.SoulSprite)) addButton(3, "3rd Stall", TierIII).hint("Check out the third stall. This stall sells items for Soul Sprites, Soul Scholars and Soul Elder stage cultivators.");
-		else addButtonDisabled(3, "3rd Stall", "You need to be at least a Soul Sprite to check those items.");
+        /*if (player.hasPerk(PerkLib.SoulSprite)) */addButton(3, "3rd Stall", TierIII).hint("Check out the third stall. This stall sells items for Soul Sprites, Soul Scholars and Soul Elder stage cultivators.");
+		//else addButtonDisabled(3, "3rd Stall", "You need to be at least a Soul Sprite to check those items.");
 		function TierI():void {
 			menu();
             addButton(0, "LGSFRecovPill", buyItem1,consumables.LG_SFRP,
@@ -261,7 +261,7 @@ public class HeXinDao extends BaseContent
 					sayLine2(consumables.VPTRMAN,"It's a manual for Violet Pupil Transformation, this advanced technique allows you to channel soulforce into regenerative power, allowing you to recover even from the brink of death.  Its only flaw is that it constantly drains the cultivator's soulforce. "),
 					"\n\nIt seems like it's similar to a healing spell soul skill, but instead of being used immediately, with enough soulforce it could be kept active for a very long period of time.  It could give you an edge against the demons.  Additionally, the ability to heal from the brink of death could prove to be useful in future fights.  "
 			).hint("Violet Pupil Transformation Manual.");
-			if (player.hasPerk(PerkLib.SoulPersonage)) {
+			//if (player.hasPerk(PerkLib.SoulPersonage)) {
 				addButton(4, "Sextuple Thrust", buyItem2,consumables.SEXTMAN,
 						sayLine2(consumables.SEXTMAN,"It's a manual for Sextuple Thrust, this simple technique allows you to unleash six thrusts. As you train your body and soul, this skill will become stronger."),
 						"\n\nWhether you are going to go deeper into all that 'soulforce' stuff or not, at least you now have something to train with. The name of the manual seems like it could have been influenced by this realm...or it's just a coincidence.  " 
@@ -270,11 +270,11 @@ public class HeXinDao extends BaseContent
 						sayLine2(consumables.HOB2MAN,"It's a manual for Grandiose Hail of Blades, this technique allows you to form many etheral weapons traveling at extreme speeds. As you train your body and soul, this skill will become stronger."),
 						"\n\nWhether you are going to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you not certain.  "
 				).hint("Grandiose Hail of Blades Manual.");
-			}
-			if (player.hasPerk(PerkLib.SoulWarrior)) {
+			//}
+			//if (player.hasPerk(PerkLib.SoulWarrior)) {
 				addButton(7, "MGSFRecovPill", buyItem2,consumables.MG_SFRP,
 					sayLine2(consumables.MG_SFRP,"It's a rather useful item for all cultivators at Soul Warrior stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the low-grade one.")).hint("Mid-grade Soulforce Recovery Pill.");
-			}
+			//}
             addButton(14, "Back", golemmerchant);
             statScreenRefresh();
 		}
@@ -301,10 +301,10 @@ public class HeXinDao extends BaseContent
 					"\n\nYou already went so deep into becoming cultivator so why not?  'Few' more weapons formed will not hurt at this point, right?  "
 			).hint("Grandiose Heavenly Hail of Yin-Yang Blades: Endless Tide Manual.");
 		}*/
-		if (player.hasPerk(PerkLib.SoulOverlord)) {
+		//if (player.hasPerk(PerkLib.SoulOverlord)) {
 			addButton(10, "HGSFRecovPill", buyItem2,consumables.HG_SFRP,
 					sayLine2(consumables.HG_SFRP,"It's a rather useful item for all cultivators at Soul Overlord stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the mid-grade one.")).hint("High-grade Soulforce Recovery Pill.");
-		}
+		//}
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
     }

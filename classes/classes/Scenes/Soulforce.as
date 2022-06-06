@@ -150,7 +150,7 @@ public class Soulforce extends BaseContent
 		}
 		else addButtonDisabled(9, "???", "Req. Soul Apprentice stage.");
 		addButton(10, "Cheats", SoulforceCheats1, 0).hint("This should be obvious. ^^");//block this option at each public version
-		addButton(12, "Cultivation", Contemplations).hint("Contemplate mysteries of the world to try progress your soul cultivation path. Maybe even attain cultivation base breakthrou.");
+		addButton(12, "Cultivation", Contemplations).hint("Contemplate mysteries of the world to try progress your soul cultivation path. Maybe even attain cultivation base breakthrou. (Req. to have 100% or 30% of max SF for major/minor base breakthrou if all other req. are meet.)");
 		if (canfaceTribulation()) addButton(13, "Tribulation", tribulationsPrompt).hint("To face it or not? That's the question.");
 		else addButtonDisabled(13, "Tribulation", "It's not (yet) time for this.");
 		addButton(14, "Back", playerMenu);
@@ -2538,7 +2538,7 @@ public class Soulforce extends BaseContent
 			doNext(camp.returnToCampUseTwoHours);
 			return;
 		}
-		if (player.wis >= 20 && player.soulforce >= player.maxSoulforce()) {
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 0 && player.wis >= 20 && player.soulforce >= player.maxSoulforce()) {
 			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
 			outputText("<b>You're now Early Soul Apprentice</b>\n\n");
 			EngineCore.SoulforceChange(-player.maxSoulforce(), true);
