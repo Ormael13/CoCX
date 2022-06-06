@@ -110,16 +110,8 @@ public final class GroPlus extends Consumable {
 			game.player.nippleLength += (Utils.rand(2) + 3) / 10;
 			game.player.dynStats("lus", 15);
 			//NIPPLECUNTZZZ
-			if (!game.player.hasFuckableNipples() && Utils.rand(4) == 0) {
-				var nowFuckable:Boolean = false;
-				for (var x:int = 0; x < game.player.breastRows.length; x++) {
-					if (!game.player.breastRows[x].fuckable && game.player.nippleLength >= 2) {
-						game.player.breastRows[x].fuckable = true;
-						nowFuckable = true;
-					}
-				}
-				//Talk about if anything was changed.
-				if (nowFuckable) outputText("Your " + game.player.allBreastsDescript() + " tingle with warmth that slowly migrates to your nipples, filling them with warmth.  You pant and moan, rubbing them with your fingers.  A trickle of wetness suddenly coats your finger as it slips inside the nipple.  Shocked, you pull the finger free.  <b>You now have fuckable nipples!</b>\n\n");
+			if (game.transformations.NipplesFuckable.isPossible() && Utils.rand(4) == 0) {
+				game.transformations.NipplesFuckable.applyEffect();
 			}
 			SceneLib.inventory.itemGoNext();
 		}
