@@ -113,7 +113,7 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	}
 	//Lilium
 	if (lilium.LiliumText(false) != null) {
-		addButton(7, (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00267] > 0 ? "Lilium" : "Demon"), lilium.LiliumText(false));
+		addButton(7, (flags[kFLAGS.TIMES_FUCKED_LILIUM] > 0 ? "Lilium" : "Demon"), lilium.LiliumText(false));
 	}
 	//Roxanne
 	addButton(8, (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00221] > 0 ? "Roxanne" : "Lizans"), (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00221] > 0 ? roxanne.RoxanneChooseApproachOrRepeat : roxanne.Roxanne1stApproach));

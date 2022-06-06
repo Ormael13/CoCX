@@ -272,7 +272,7 @@ public static const UNKNOWN_FLAG_NUMBER_00263:int                               
 public static const UNKNOWN_FLAG_NUMBER_00264:int                                   =  264; // Nancy relationship level
 public static const UNKNOWN_FLAG_NUMBER_00265:int                                   =  265; // Talk Nancy
 public static const UNKNOWN_FLAG_NUMBER_00266:int                                   =  266; // Times boned
-public static const UNKNOWN_FLAG_NUMBER_00267:int                                   =  267; // Lilium Timed Boned
+public static const TIMES_FUCKED_LILIUM:int                                   =  267; // Lilium Timed Boned
 public static const PLAYER_DISARMED_WEAPON_ID:int                                   =  268; // weapon storage
 public static const PLAYER_DISARMED_WEAPON_ATTACK:int                               =  269; // weapon damage
 public static const TIMES_ENCOUNTERED_FEMALE_SPIDER:int                             =  270; // Times encountered spiderbitches
