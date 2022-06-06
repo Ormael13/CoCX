@@ -237,6 +237,11 @@ Lasts 4-8 hours.
 			}
 		}
 
+	public function sophieRouter():void {
+		if (flags[kFLAGS.MET_SOPHIE_COUNTER] == 0) meetSophie();
+		else meetSophieRepeat();
+	}
+
 //[Discovery]
 public function meetSophie():void {
 	sophieBimbo.sophieSprite();
