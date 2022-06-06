@@ -120,7 +120,7 @@ public class GnollScene extends BaseContent
 					"Fuck the gnoll's ass with your penis.");
 				addButtonIfTrue(2, "ShoveDicks", shoveMulticock,
 					"Req. at least 2 cocks, fitting " + monster.analCapacity() + " area.",
-					player.countCocks(-1, monster.analCapacity()) >= 0,
+					player.countCocks(-1, monster.analCapacity()) >= 2,
 					"Try to fit as many dicks in her ass as you can.");
 				addButtonIfTrue(3, "TakeHerClit", takeGnollClit, "Req. a vagina",
 					player.hasVagina(), "Put your vagina to use and ride the gnoll's clit.");
