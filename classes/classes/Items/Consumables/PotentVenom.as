@@ -2,29 +2,17 @@
  * Coded by Liadri 2020-04-01.
  */
 package classes.Items.Consumables {
-import classes.Appearance;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
-import classes.BodyParts.BodyPart;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
-import classes.BodyParts.Skin;
-import classes.BodyParts.Tail;
-import classes.BodyParts.Tongue;
-import classes.BodyParts.Wings;
-import classes.CockTypesEnum;
-import classes.EngineCore;
-import classes.GeneticMemories.CockMem;
-import classes.GeneticMemories.VaginaMem;
-import classes.Items.Consumable;
-import classes.Items.Mutations;
-import classes.PerkLib;
-import classes.Scenes.Metamorph;
-import classes.VaginaClass;
 import classes.CoC;
+import classes.CockTypesEnum;
+import classes.Items.Consumable;
+import classes.VaginaClass;
 
 public class PotentVenom extends Consumable {
 	public function PotentVenom() {
@@ -142,8 +130,7 @@ public class PotentVenom extends Consumable {
 					if (playerhadabnormalVagina) outputText("You ");
 					else outputText("and ");
 					outputText("moan out as your pussy tingles and clenches, drooling a strange dark purple liquid. ");
-					player.vaginaType(7);
-					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.VENOM_DRIPPING));
+					CoC.instance.transformations.VaginaCentipede().applyEffect(false);
 				}
 			}
 			//Male and herm area
@@ -174,8 +161,7 @@ public class PotentVenom extends Consumable {
 					if (playerhadasheath || playerhadmorethenonecock) outputText("You ");
 					else outputText("and ");
 					outputText("moan out, feeling your cock harden and tingle as it dribbles a strange dark purple liquid. ");
-					player.cocks[0].cockType = CockTypesEnum.OOMUKADE;
-					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.OOMUKADE));
+					CoC.instance.transformations.CockCentipede().applyEffect(false);
 				}
 			}
 			if (player.hasVagina() && player.hasCock())
@@ -211,12 +197,10 @@ public class PotentVenom extends Consumable {
 					}
 				}
 				if (player.vaginaType() != VaginaClass.VENOM_DRIPPING) {
-					player.vaginaType(VaginaClass.VENOM_DRIPPING);
-					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.VENOM_DRIPPING));
+					CoC.instance.transformations.VaginaCentipede().applyEffect(false);
 				}
 				if (player.cocks[0].cockType != CockTypesEnum.OOMUKADE) {
-					player.cocks[0].cockType = CockTypesEnum.OOMUKADE;
-					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.OOMUKADE));
+					CoC.instance.transformations.CockCentipede().applyEffect(false);
 				}
 			}
 			dynStats("lus", 10);

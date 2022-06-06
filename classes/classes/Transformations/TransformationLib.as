@@ -7321,7 +7321,11 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // is present
 	  function (): Boolean {
 	    return player.lowerBody === LowerBody.SCYLLA;
-	  }
+	  },
+	  //is possible
+		function (): Boolean {
+			return !InCollection(player.lowerBody, LowerBody.SCYLLA, LowerBody.NAGA, LowerBody.CLOVEN_HOOFED);
+		}
 	);
 
 	public const LowerBodyKraken: Transformation = new SimpleTransformation("Kraken Lower Body",
@@ -9938,8 +9942,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.breastRows[i].fuckable = true;
 						nowFuckable = true;
 					}
+				desc += "[pg]Your [allbreasts] tingle with warmth that slowly migrates to your nipples, filling them with warmth.  You pant and moan, rubbing them with your fingers.  A trickle of wetness suddenly coats your finger as it slips inside the nipple.  Shocked, you pull the finger free.  <b>You now have fuckable nipples!</b>";
 				//Talk about if anything was changed.
-				if (doOutput && nowFuckable) outputText("[pg]Your [allbreasts] tingle with warmth that slowly migrates to your nipples, filling them with warmth.  You pant and moan, rubbing them with your fingers.  A trickle of wetness suddenly coats your finger as it slips inside the nipple.  Shocked, you pull the finger free.  <b>You now have fuckable nipples!</b>");
+				if (doOutput && nowFuckable) outputText(desc);
 			},
 			// is present
 			function ():Boolean {
@@ -10568,7 +10573,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].cockType = CockTypesEnum.HUMAN;
 
 					UnlockCocks();
-					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
 				},
 				// is present
 				function ():Boolean {
@@ -10621,7 +10625,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockDog(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockDog(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.4): Transformation {
 		return new SimpleTransformation("Dog Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -10660,7 +10664,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					if (thickness != 1)
 						player.cocks[cock].cockThickness = thickness;
-					if (player.cocks[cock].knotMultiplier < 1.5) player.cocks[cock].knotMultiplier = 1.5;
+					if (player.cocks[cock].knotMultiplier < knot) player.cocks[cock].knotMultiplier = knot;
 					player.cocks[cock].cockType = CockTypesEnum.DOG;
 
 					UnlockCocks();
@@ -11140,7 +11144,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockDisplacer(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockDisplacer(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.5): Transformation {
 		return new SimpleTransformation("Displacer Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -11166,7 +11170,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					if (thickness != 1)
 						player.cocks[cock].cockThickness = thickness;
-					if(player.cocks[cock].knotMultiplier < 1.5) player.cocks[cock].knotMultiplier = 1.5;
+					if(player.cocks[cock].knotMultiplier < knot) player.cocks[cock].knotMultiplier = knot;
 					player.cocks[cock].cockType = CockTypesEnum.DISPLACER;
 
 					UnlockCocks();
@@ -11179,7 +11183,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockFox(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockFox(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.25): Transformation {
 		return new SimpleTransformation("Fox Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -11218,7 +11222,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					if (thickness != 1)
 						player.cocks[cock].cockThickness = thickness;
-					if (player.cocks[cock].knotMultiplier < 1.5) player.cocks[cock].knotMultiplier = 1.25;
+					if (player.cocks[cock].knotMultiplier < knot) player.cocks[cock].knotMultiplier = knot;
 					player.cocks[cock].cockType = CockTypesEnum.FOX;
 
 					UnlockCocks();
@@ -11411,7 +11415,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		);
 	}
 
-	public function CockWolf(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+	public function CockWolf(cock:int = 0, length:Number = 5.5, thickness:Number = 1, knot:Number = 1.1): Transformation {
 		return new SimpleTransformation("Wolf Cock",
 				// apply effect
 				function (doOutput:Boolean):void {
@@ -11437,7 +11441,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					if (thickness != 1)
 						player.cocks[cock].cockThickness = thickness;
-					if (player.cocks[cock].knotMultiplier < 1.1) player.cocks[cock].knotMultiplier = 1.1;
+					if (player.cocks[cock].knotMultiplier < knot) player.cocks[cock].knotMultiplier = knot;
 					player.cocks[cock].cockType = CockTypesEnum.WOLF;
 
 					UnlockCocks();
@@ -11704,7 +11708,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 				if (player.balls < 2) {
 					player.ballSize = 1;
-					desc += "You gasp in shock as a sudden pain racks your crotch. Within seconds, two balls drop down into a new sack, your skin stretching out to accommodate them. Once the pain clears, you examine <b>your new pair of testes.</b>[pg]";
+					if (rand(2) == 0) desc += "\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.";
+					else desc += "You gasp in shock as a sudden pain racks your crotch. Within seconds, two balls drop down into a new sack, your skin stretching out to accommodate them. Once the pain clears, you examine <b>your new pair of testes.</b>[pg]";
 				}
 				else
 					desc += "Your scrotum slowly shrinks until they seem to have reached a normal size. <b>It feels as if your extra balls have fused together, leaving you with a pair of balls.</b>[pg]";

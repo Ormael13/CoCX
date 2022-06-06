@@ -14,10 +14,7 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
-import classes.GeneticMemories.BallsMem;
-import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.*;
-import classes.Scenes.Metamorph;
 import classes.lists.Gender;
 
 /**
@@ -1455,15 +1452,13 @@ import classes.lists.Gender;
 			if (rand(3) == 0 && changes < changeLimit && player.hasVagina() && !player.hasCock()) {
 				outputText("\n\nYour vagina begins to feel hot. Removing your [armor], you look down and watch your vagina shrinks to nothing, <b>while your clitoris enlarges to form a human dick</b>.");
 				player.removeVagina();
-				player.createCock(6);
-				Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
+				transformations.CockHuman(0, 6).applyEffect(false);
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.hasCock() && player.balls <= 0) {
 				outputText("Without warning your body begins to tremble as just below [eachCock] you feel a warm trickling sensation of fluid sliding down your body. Before you can check it, the sensation becomes ovewhelming as [eachCock] grows hard and ejaculates " + player.clothedOrNaked("into your [armor]", "all over the ground") + ". Once you've recovered from your intense orgasm you " + player.clothedOrNakedLower("remove your [armor] to ") + "clean yourself and find a <b>new pair of balls</b> hanging just below [eachCock].");
-				player.balls = 2;
+				transformations.BallsDuo.applyEffect(false);
 				player.ballSize = 1;
-				Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 				player.orgasm();
 				changes++;
 			}

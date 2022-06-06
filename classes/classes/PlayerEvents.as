@@ -12,8 +12,6 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
-import classes.GeneticMemories.BallsMem;
-import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.*;
 import classes.IMutations.IMutationsLib;
 import classes.Items.*;
@@ -23,7 +21,6 @@ import classes.Scenes.Camp.UniqueCampScenes;
 import classes.Scenes.Dreams;
 import classes.Scenes.Dungeons.DeepCave.ValaScene;
 import classes.Scenes.Holidays;
-import classes.Scenes.Metamorph;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.DriderTown;
@@ -51,7 +48,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean {
-			var needNext:Boolean = false;
+			var needNext:Boolean;
 			checkedTurkey = 0;
 			checkedDream = 0;
 
@@ -2709,12 +2706,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (!player.hasCock()) { //(Dick regrowth)
 					player.createCock(10, 2.75);
 					outputText("\n<b>As time passes, your loins grow itchy for a moment.  A split-second later, a column of flesh erupts from your crotch.  Your new, 10-inch cock pulses happily.");
-					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
 					if (player.balls == 0) {
 						outputText("  A pair of heavy balls drop into place below it, churning to produce cum.");
-						player.balls = 2;
+						transformations.BallsDuo.applyEffect(false);
 						player.ballSize = 3;
-						Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 					}
 					player.dynStats("int", -1, "sen", 5, "lus", 15);
 					outputText("</b>\n");
@@ -2728,9 +2723,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (player.balls == 0) { //(Balls regrowth)
 					outputText("\n<b>As time passes, a pressure in your loins intensifies to near painful levels.  The skin beneath [eachcock] grows loose and floppy, and then two testicles roll down to fill your scrotum.</b>\n");
-					player.balls = 2;
+					transformations.BallsDuo.applyEffect(false);
 					player.ballSize = 3;
-					Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 					needNext = true;
 				}
 				if (player.breastRows[0].breastRating < 5) { //Tits!
@@ -2789,13 +2783,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (!player.hasCock()) { //(Dick regrowth)
 					player.createCock(10, 2.75);
 					outputText("\n<b>As time passes, your loins grow itchy for a moment.  A split-second later, a column of flesh erupts from your crotch.  Your new, 10-inch cock pulses happily.");
-					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
 
 					if (player.balls == 0) {
 						outputText("  A pair of heavy balls drop into place below it, churning to produce cum.");
-						player.balls = 2;
+						transformations.BallsDuo.applyEffect(false);
 						player.ballSize = 3;
-						Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 					}
 					outputText("</b>\n");
 					needNext = true;
@@ -2810,10 +2802,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (player.balls == 0) { //(Balls regrowth)
 					outputText("\n<b>As time passes, a pressure in your loins intensifies to near painful levels.  The skin beneath [eachcock] grows loose and floppy, and then two testicles roll down to fill your scrotum.</b>\n");
-					player.balls = 2;
+					transformations.BallsDuo.applyEffect(false);
 					player.ballSize = 3;
 					needNext = true;
-					Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 				}
 			}
 

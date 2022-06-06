@@ -2408,7 +2408,7 @@ public class Creature extends Utils
 			if (cocks.length == 0) return 0;
 			var counter:int = 0;
 			for (var x:int = 0; x < cocks.length; x++) {
-				if (cocks[x].cockType == CockTypesEnum.DOG || cocks[x].cockType == CockTypesEnum.FOX || cocks[x].cockType == CockTypesEnum.WOLF) counter++;
+				if (InCollection(cocks[x].cockType, CockTypesEnum.DOG, CockTypesEnum.FOX, CockTypesEnum.WOLF, CockTypesEnum.DISPLACER)) counter++;
 			}
 			return counter;
 		}
@@ -3474,6 +3474,8 @@ public class Creature extends Utils
 				case CockTypesEnum.CAT:
 				case CockTypesEnum.DEMON:
 				case CockTypesEnum.DISPLACER:
+				case CockTypesEnum.DOG:
+				case CockTypesEnum.FOX:
 				case CockTypesEnum.DRAGON:
 				case CockTypesEnum.HORSE:
 				case CockTypesEnum.KANGAROO:
@@ -3485,9 +3487,6 @@ public class Creature extends Utils
 				case CockTypesEnum.TENTACLE:
 					if (countCocksOfType(cocks[0].cockType) == cocks.length) return Appearance.cockNoun(cocks[0].cockType) + "s";
 					break;
-				case CockTypesEnum.DOG:
-				case CockTypesEnum.FOX:
-					if (dogCocks() == cocks.length) return Appearance.cockNoun(CockTypesEnum.DOG) + "s";
 			}
 			return Appearance.cockNoun(CockTypesEnum.HUMAN) + "s";
 		}

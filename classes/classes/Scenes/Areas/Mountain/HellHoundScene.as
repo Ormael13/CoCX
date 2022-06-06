@@ -5,9 +5,7 @@ package classes.Scenes.Areas.Mountain
 {
 import classes.*;
 import classes.BodyParts.LowerBody;
-import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.Metamorph;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -294,16 +292,11 @@ public class HellHoundScene extends BaseContent
 				if (player.cockTotal() > 2 || player.cockThatFits(60) < 0) {
 					outputText("He then reaches around your waist and takes a hold of your [cocks].  \"<i>Before we get started, let's make sure you're just right for Cremera.</i>\"  He then reforms your body to have twin doggy pricks of appropriately sized.  \"<i>Now.</i>\"\n\n");
 					//PC's dicks become two 14 by 3 inch dog dicks, all other dicks are removed
-					player.cocks[0].cockType = CockTypesEnum.DOG;
-					player.cocks[1].cockType = CockTypesEnum.DOG;
-					player.cocks[0].cockThickness = 3;
-					player.cocks[1].cockThickness = 3;
-					player.cocks[0].cockLength = 14;
-					player.cocks[1].cockLength = 14;
+					transformations.CockDog(0, 14, 3).applyEffect(false);
+					transformations.CockDog(1, 14, 3).applyEffect(false);
 					while (player.cocks.length > 2) {
 						player.removeCock(2, 1);
 					}
-					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
 				}
 				outputText("You don't hesitate.  You pounce on the horny barghest, slamming your two dog pricks inside her two cunts without hesitation.  The bitch responds with a low growl, and starts bucking her rear against you, while you thrust into her with abandon.  The pleasure of her interior drives you mad like no other that you've ever been in before.  The loud squelching and stimulation of her slobbering pussies don't give you a chance to do anything but thrust and lose yourself in the feeling.\n\n");
 

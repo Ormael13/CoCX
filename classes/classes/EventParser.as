@@ -2,6 +2,7 @@ package classes {
 import classes.BodyParts.Hair;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
+import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.ArmorLib;
@@ -14,6 +15,7 @@ import classes.Items.UndergarmentLib;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRangeLib;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
+import classes.Scenes.Metamorph;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
@@ -353,11 +355,14 @@ public class EventParser {
             var counter:Number = player.cockTotal() - 1;
             while (counter >= 0) {
                 if (player.cocks[counter].cockType == CockTypesEnum.DOG || player.cocks[counter].cockType == CockTypesEnum.FOX) {
-                    if (player.racialScore(Races.DOG) >= player.racialScore(Races.FOX))
+                    if (player.racialScore(Races.DOG) >= player.racialScore(Races.FOX)) {
                         player.cocks[counter].cockType = CockTypesEnum.DOG;
-                    else
+                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
+                    }
+                    else {
                         player.cocks[counter].cockType = CockTypesEnum.FOX;
-                }
+                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.FOX));
+                    }                }
                 counter--;
                 // trace("IMA LOOPIN", counter);
             }

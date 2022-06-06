@@ -15,7 +15,6 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GeneticMemories.BallsMem;
-import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
@@ -920,7 +919,6 @@ public final class Mutations extends MutationsHelper {
                     player.createCock(rand(3) + 4);
                     outputText("[pg]You shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
                     outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinTone + " tone.");
-                    Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
                     if (tainted) {
                         dynStats("lus", 10, "cor", 5);
                         player.addCurse("sens", 5, 1);
@@ -1002,12 +1000,9 @@ public final class Mutations extends MutationsHelper {
                     }
                 }
                 if (player.cocks.length == 0) {
-                    player.createCock();
-                    player.cocks[0].cockLength = rand(3) + 4;
-                    player.cocks[0].cockThickness = 1;
+                    transformations.CockHuman(0, rand(3) + 4).applyEffect(false);
                     outputText("[pg]You shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
                     outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinTone + " tone.");
-                    Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
                     if (tainted) {
                         dynStats("lus", 10, "cor", 3);
                         player.addCurse("sens", 5, 1);
@@ -1076,7 +1071,6 @@ public final class Mutations extends MutationsHelper {
             outputText("The skin bulges obscenely, darkening and splitting around " + num2Text(grown) + " of your new dicks.  For an instant they turn a demonic purple and dribble in thick spasms of scalding demon-cum.  After, they return to a more humanoid coloration.  ");
         }
         if (grown > 4) outputText("Your tender bundle of new cocks feels deliciously sensitive, and you cannot stop yourself from wrapping your hands around the slick demonic bundle and pleasuring them.[pg]Nearly an hour later, you finally pull your slick body away from the puddle you left on the ground.  When you look back, you notice it has already been devoured by the hungry earth.");
-        if (grown > 0) Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
         player.orgasm('Dick');
     }
 
@@ -1852,37 +1846,28 @@ public final class Mutations extends MutationsHelper {
                 if (player.dogCocks() == 0) {
                     //Dickless - grow two dogpeckers
                     if (player.cockTotal() == 0) {
-                        player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-                        player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
                         outputText("[pg]A painful lump forms on your groin, nearly doubling you over as it presses against your [armor].  You rip open your gear and watch, horrified as the discolored skin splits apart, revealing a pair of red-tipped points.  A feeling of relief, and surprising lust grows as they push forward, glistening red and thickening.  The skin bunches up into an animal-like sheath, while a pair of fat bulges pop free.  You now have two nice thick dog-cocks, with decent sized knots.  Both pulse and dribble animal-pre, arousing you in spite of your attempts at self-control.");
-                        player.cocks[0].knotMultiplier = 1.7;
-                        player.cocks[0].cockType = CockTypesEnum.DOG;
-                        player.cocks[1].knotMultiplier = 1.7;
-                        player.cocks[1].cockType = CockTypesEnum.DOG;
+                        transformations.CockDog(0, 7 + rand(7), 1.5 + rand(10) / 10, 1.7).applyEffect(false);
+                        transformations.CockDog(1, 7 + rand(7), 1.5 + rand(10) / 10, 1.7).applyEffect(false);
                         dynStats("lus", 50);
-                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
                     }
                     //1 dick - grow 1 and convert 1
                     else if (player.cockTotal() == 1) {
                         transformations.CockDog().applyEffect();
                         outputText("You feel something slippery wiggling inside the new sheath, and another red point peeks out.  In spite of yourself, you start getting turned on by the change, and the new dick slowly slides free, eventually stopping once the thick knot pops free.  The pair of dog-dicks hang there, leaking pre-cum and arousing you far beyond normal.");
-                        player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-                        player.cocks[1].knotMultiplier = 1.7;
-                        player.cocks[1].cockType = CockTypesEnum.DOG;
+                        transformations.CockDog(1, 7 + rand(7), 1.5 + rand(10) / 10, 1.7).applyEffect(false);
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
-                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
                     }
                     //2 dicks+ - convert first 2 to doggie-dom
                     else {
                         outputText("[pg]Your crotch twitches, and you pull open your [armor] to get a better look.  You watch in horror and arousal as your [cock] and [cock 2] both warp and twist, becoming red and pointed, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.");
-                        player.cocks[0].cockType = CockTypesEnum.DOG;
-                        player.cocks[1].cockType = CockTypesEnum.DOG;
-                        player.cocks[0].knotMultiplier = 1.4;
-                        player.cocks[1].knotMultiplier = 1.4;
+                        transformations.CockDog().applyEffect(false);
+                        transformations.CockDog(1).applyEffect(false);
+                        if (player.cocks[1].knotMultiplier < 1.4) player.cocks[0].knotMultiplier = 1.4;
+                        if (player.cocks[1].knotMultiplier < 1.4) player.cocks[1].knotMultiplier = 1.4;
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
-                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
                     }
                 }
                 //If player has 1 dogdicks
@@ -1890,30 +1875,26 @@ public final class Mutations extends MutationsHelper {
                     //if player has 1 total
                     if (player.cockTotal() == 1) {
                         outputText("[pg]You feel something slippery wiggling inside your sheath, and another red point peeks out.  In spite of yourself, you start getting turned on by the change, and the new dick slowly slides free, eventually stopping once the thick knot pops free.  The pair of dog-dicks hang there, leaking pre-cum and arousing you far beyond normal.");
-                        player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-                        player.cocks[1].cockType = CockTypesEnum.DOG;
-                        player.cocks[1].knotMultiplier = 1.4;
+                        transformations.CockDog(1, 7 + rand(7), 1.5 + rand(10) / 10, 1.4).applyEffect(false);
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
-                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
                     }
                     //if player has more
                     if (player.cockTotal() >= 1) {
                         //if first dick is already doggi'ed
                         if (player.cocks[0].cockType == CockTypesEnum.DOG) {
                             outputText("[pg]Your crotch twitches, and you pull open your [armor] to get a better look.  You watch in horror and arousal as your " + cockDescript(1) + " warps and twists, becoming red and pointed, just like other dog-dick, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.");
-                            player.cocks[1].cockType = CockTypesEnum.DOG;
-                            player.cocks[1].knotMultiplier = 1.4;
+                            transformations.CockDog(1).applyEffect(false);
+                            if (player.cocks[1].knotMultiplier < 1.4) player.cocks[1].knotMultiplier = 1.4;
                         }
                         //first dick is not dog
                         else {
                             outputText("[pg]Your crotch twitches, and you pull open your [armor] to get a better look.  You watch in horror and arousal as your [cock] warps and twists, becoming red and pointed, just like other dog-dick, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.");
-                            player.cocks[0].cockType = CockTypesEnum.DOG;
-                            player.cocks[0].knotMultiplier = 1.4;
+                            transformations.CockDog(0).applyEffect(false);
+                            if (player.cocks[0].knotMultiplier < 1.4) player.cocks[0].knotMultiplier = 1.4;
                         }
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
-                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
                     }
                 }
             }
@@ -1927,7 +1908,7 @@ public final class Mutations extends MutationsHelper {
                     choice = 0;
                     //set temp2 to first dogdick for initialization
                     while (choice < player.cocks.length) {
-                        if (player.cocks[choice].cockType == CockTypesEnum.DOG) {
+                        if (InCollection(player.cocks[choice].cockType, CockTypesEnum.DOG, CockTypesEnum.FOX, CockTypesEnum.WOLF, CockTypesEnum.DISPLACER)) {
                             temp2 = choice;
                             break;
                         } else choice++;
@@ -1937,7 +1918,7 @@ public final class Mutations extends MutationsHelper {
                     //Find smallest knot
                     while (choice > 0) {
                         choice--;
-                        if (player.cocks[choice].cockType == CockTypesEnum.DOG && player.cocks[choice].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = choice;
+                        if (InCollection(player.cocks[choice].cockType, CockTypesEnum.DOG, CockTypesEnum.FOX, CockTypesEnum.WOLF, CockTypesEnum.DISPLACER) && player.cocks[choice].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = choice;
                     }
                     //Have smallest knotted cock selected.
                     temp3 = (rand(2) + 5) / 20 * crit;
@@ -1946,18 +1927,17 @@ public final class Mutations extends MutationsHelper {
                     if (player.cocks[temp2].knotMultiplier >= 2) temp3 /= 5;
                     player.cocks[temp2].knotMultiplier += (temp3);
                     outputText("[pg]");
-                    if (temp3 < .06) outputText("Your " + Appearance.cockNoun(CockTypesEnum.DOG) + " feels unusually tight in your sheath as your knot grows.");
-                    if (temp3 >= .06 && temp3 <= .12) outputText("Your " + Appearance.cockNoun(CockTypesEnum.DOG) + " pops free of your sheath, thickening nicely into a bigger knot.");
-                    if (temp3 > .12) outputText("Your " + Appearance.cockNoun(CockTypesEnum.DOG) + " surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.");
+                    if (temp3 < .06) outputText("Your [cock " + temp2+1 + "] feels unusually tight in your sheath as your knot grows.");
+                    if (temp3 >= .06 && temp3 <= .12) outputText("Your [cock " + temp2+1 + "] pops free of your sheath, thickening nicely into a bigger knot.");
+                    if (temp3 > .12) outputText("Your [cock " + temp2+1 + "] surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.");
                     dynStats("lus", 5 * crit);
                     player.addCurse("sen", 1, 1);
                 }
                 //Grow dogdick with big knot
                 else {
                     outputText("[pg]Your [cock] twitches, reshaping itself.  The crown tapers down to a point while the base begins swelling.  It isn't painful in the slightest, actually kind of pleasant.  Your dog-like knot slowly fills up like a balloon, eventually stopping when it's nearly twice as thick as the rest.  You touch and shiver with pleasure, oozing pre-cum.");
-                    player.cocks[0].cockType = CockTypesEnum.DOG;
+                    transformations.CockDog(0).applyEffect(false);
                     player.cocks[0].knotMultiplier = 2.1;
-                    Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
                 }
             }
             //You wasted knot pepper!
@@ -2902,7 +2882,6 @@ public final class Mutations extends MutationsHelper {
 
     //Nipplezzzzz
     public function whiteEgg(large:Boolean, player:Player):void {
-        var temp2:Number = 0;
         clearOutput();
         outputText("You devour the egg, momentarily sating your hunger.");
         if (!large) {
@@ -13070,7 +13049,6 @@ public final class Mutations extends MutationsHelper {
                     if (player.cocks.length == 0) {
                         outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
                         player.createCock(player.clitLength + 2);
-                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
                         player.clitLength = .25;
                     }
                 }
@@ -13248,7 +13226,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Legs
-        if (player.faceType == Face.HUMAN && player.lowerBody != LowerBody.GARGOYLE && (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.CLOVEN_HOOFED || player.lowerBody != LowerBody.SCYLLA)) {
+        if (player.faceType == Face.HUMAN && (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.CLOVEN_HOOFED || player.lowerBody != LowerBody.SCYLLA)) {
             if (changes < changeLimit && rand(3) == 0) {
                 outputText("[pg]");
                 transformations.LowerBodyHuman.applyEffect();
@@ -13256,7 +13234,7 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
         }
-        if (((type == 0 && player.gender == 2) || (type == 1 && player.gender == 3) || (type == 2 && player.gender == 1)) && player.lowerBody != LowerBody.SCYLLA && player.lowerBody != LowerBody.GARGOYLE && (player.lowerBody != LowerBody.NAGA && player.lowerBody != LowerBody.CLOVEN_HOOFED) && changes < changeLimit && rand(3) == 0) {
+        if (((type == 0 && player.gender == 2) || (type == 1 && player.gender == 3) || (type == 2 && player.gender == 1)) && transformations.LowerBodyScylla.isPossible() && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.LowerBodyScylla.applyEffect();
             changes++;
@@ -13409,14 +13387,8 @@ public final class Mutations extends MutationsHelper {
         if (type == 0 && (player.gender == 1 || player.gender == 3) && player.cocks.length > 0 && rand(2) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
             //If the player has at least one dick, decrease the size of each slightly,
             outputText("[pg]");
-            temp = 0;
-            temp2 = player.cocks.length;
+            temp = player.longestCock();
             temp3 = 0;
-            //Find biggest cock
-            while (temp2 > 0) {
-                temp2--;
-                if (player.cocks[temp].cockLength <= player.cocks[temp2].cockLength) temp = temp2;
-            }
             //Shrink said cock
             if (player.cocks[temp].cockLength < 6 && player.cocks[temp].cockLength >= 2.9) {
                 player.cocks[temp].cockLength -= .5;
@@ -13440,14 +13412,8 @@ public final class Mutations extends MutationsHelper {
                 }
             }
             //if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
-            if (player.cocks.length == 0 && !player.hasVagina()) {
-                player.createVagina();
-                player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
-                player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
-                player.vaginas[0].virgin = true;
-                player.clitLength = .25;
-                outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
-
+            if (!player.hasCock() && !player.hasVagina()) {
+                transformations.VaginaHuman().applyEffect();
                 changes++;
                 dynStats("lus", 10);
             }
@@ -13467,8 +13433,7 @@ public final class Mutations extends MutationsHelper {
                     player.removeVagina(0, 1);
                     if (player.cocks.length == 0) {
                         outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
-                        player.createCock(player.clitLength + 2);
-                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
+                        transformations.CockHuman(0, player.clitLength + 2).applyEffect(false);
                         player.clitLength = .25;
                     }
                 }
@@ -16105,7 +16070,6 @@ public final class Mutations extends MutationsHelper {
                     if (player.cocks.length == 0) {
                         outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
                         player.createCock(player.clitLength + 2);
-                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
                         player.clitLength = .25;
                     }
                 }
