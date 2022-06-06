@@ -442,11 +442,11 @@ public class EventParser {
         var flags:DefaultDict = CoC.instance.flags;
 
         if (player.hasPerk(PerkLib.Diapause)) {
-            if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] <= 0 || player.pregnancyIncubation <= 0 && player.buttPregnancyIncubation <= 0) //no pregnancy, I guess?
+            if (flags[kFLAGS.DIAPAUSE_FLUID_STORE] <= 0 || player.pregnancyIncubation <= 0 && player.buttPregnancyIncubation <= 0) //no pregnancy, I guess?
                 return 0;
             //unique checks for diapause
-            if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] == 1) {
-                flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 0;
+            if (flags[kFLAGS.DIAPAUSE_DISPLAYED] == 1) {
+                flags[kFLAGS.DIAPAUSE_DISPLAYED] = 0;
                 EngineCore.outputText("\n\nYour body reacts to the influx of nutrition, accelerating your pregnancy. Your belly bulges outward slightly.");
                 needNext = true;
             }
@@ -454,7 +454,7 @@ public class EventParser {
                 flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
                 return 2;
             }
-            flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228]--;
+            flags[kFLAGS.DIAPAUSE_FLUID_STORE]--;
             if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
                 flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
