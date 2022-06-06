@@ -56,10 +56,13 @@ public class IvorySuccubus extends AbstractSuccubus {
         this.hairColor = "black";
         this.hairLength = 4;
         initStrTouSpeInte(25, 20, 35, 42);
-        initWisLibSensCor(75, 75, 45, 90);
+        initWisLibSensCor(75, 75, 45, 100);
         this.weaponName = "fists";
         this.weaponVerb = "punch";
         this.armorName = "skin";
+		this.armorDef = 12;
+		this.armorMDef = 2;
+		this.bonusLust = 123;
         this.lust = 50;
         this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
         this.level = 3;
@@ -70,9 +73,9 @@ public class IvorySuccubus extends AbstractSuccubus {
         this.special1 = kissAttack;
         this.special2 = seduceAttack;
         this.special3 = succubusBarrage;
+		this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+		this.createPerk(PerkLib.OverMaxHP, 3, 0, 0, 0);
         checkMonster();
     }
-
 }
-
 }

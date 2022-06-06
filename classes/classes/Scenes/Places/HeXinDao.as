@@ -1113,8 +1113,8 @@ public function soularena():void {
 		outputText("\"<i>Now my dear listeners iI done what i could now and all rest depends to you. Would any of you start walk the perilious path of cultivation and serching for your Dao or not.</i>\" She returned to the podium. \"<i>Come here eacxh of you so you can take cpy of this basic manual for cultivation. With it it would be up to Heavens if you can awaken to soulforce or not.</i>\"\n\n");
 		outputText("With this she started calling each gathered one by one and giving them copy of manual. Around time there was left a bit less than half people was your turn. Like others you walked and took the manual and left the arean area returning to the camp. You almost felt like you could sense that enigmatic force after listening for less than hour to the 'charismatic' teacher.\n\n");
 		outputText("<b>Gained perk: Soul Cultivation\n\nGained Key Item: Cultivation Manual: Duality</b>");
-		player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
 		player.createKeyItem("Cultivation Manual: Duality", 0, 0, 0, 0);
+		player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
 		doNext(camp.returnToCampUseFourHours);
 	}
 	public function mrsShigureLecturesFirstTrio():void {

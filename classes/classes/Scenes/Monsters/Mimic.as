@@ -100,16 +100,20 @@ public class Mimic extends Monster {
         if (type == 3) {
             this.armorName = "wooden surface";
             this.armorDef = 10;
+			this.armorMDef = 10;
         }
         if (type == 2 || type == 1) {
             this.armorName = "flesh";
             this.armorDef = 0;
+			this.armorMDef = 0;
         } else {
             this.armorName = "stone surface";
             this.armorDef = 25;
+			this.armorMDef = 25;
         }
         this.lust = 10;
         this.lustVuln = 0;
+		this.bonusLust = 96;
         this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
         this.level = 6;
         this.gems = rand(30) + 11;

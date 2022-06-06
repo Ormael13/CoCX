@@ -6690,14 +6690,14 @@ public class PerkLib
                         return player.internalChimeraScore() >= 12;
                     }, "Twelve racial perks");
 			JobAllRounder.requireLevel(24)
-                    .requirePerks(JobBeastWarrior , JobGuardian, JobLeader, JobRanger, JobSeducer, JobSorcerer, JobSoulCultivator, JobWarrior)
+                    .requirePerks(JobBeastWarrior , JobGuardian, JobLeader, JobRanger, JobSeducer, JobSorcerer, JobWarrior)
                     .requireStr(75)
                     .requireTou(75)
                     .requireSpe(75)
                     .requireInt(75)
                     .requireWis(75)
-                    .requireLib(45)
-					.requireSen(45);
+                    .requireLib(75)
+					.requireSen(50);
             Tornado.requireLevel(24)
                     .requireStr(75)
                     .requireTou(75)

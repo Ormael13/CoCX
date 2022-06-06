@@ -194,13 +194,15 @@ public class Cockatrice extends Monster {
         this.weaponAttack = 30;
         this.armorName = "scales and feathers";
         this.armorDef = 10;
+		this.armorMDef = 5;
         this.armorPerk = "";
         this.armorValue = 70;
         this.bonusHP = 200;
+		this.bonusLust = 112;
         this.lust = 30;
         this.lustVuln = .5;
         this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-        this.level = 14;
+        this.level = 22;
         this.gems = rand(10) + 10;
         this.drop = new WeightedDrop()
             .add(consumables.REPTLUM, 35)
@@ -208,6 +210,7 @@ public class Cockatrice extends Monster {
             //.add(consumables.TOTRICE, 20) //same.
             .add(null, 10);
         this.tail.recharge = 0;
+		this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
         this.createPerk(PerkLib.BasiliskResistance, 0, 0, 0, 0);
         checkMonster();
     }
