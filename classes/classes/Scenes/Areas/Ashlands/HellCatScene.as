@@ -5,11 +5,9 @@
 package classes.Scenes.Areas.Ashlands
 {
 import classes.*;
-import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Items.MutationsHelper;
-import classes.Scenes.Metamorph;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -215,12 +213,7 @@ public function WitchesSabbathThirdVisitYes():void {
 	if (!player.hasCock()) {
 		outputText("You mewl in pleasure as the flesh between your legs" + (player.hasVagina() ? " right above your pussy" : "") + " heats up and begins to pulse as something not unlike a sheath forms there. You clench your jaw as something slides out inches after inches and you catch glimpse of your newly formed cat cock ");
 		outputText("pulsing with an unholy purple glow as it grows bigger and bigger until it reaches a full 10 inches in length causing you to orgasm, covering your belly and face with cum.");
-		player.createCock();
-		player.cocks[0].cockLength = 10;
-		player.cocks[0].cockThickness = 2.5;
-		player.cocks[0].cockType = CockTypesEnum.CAT;
-		player.cocks[0].knotMultiplier = 1;
-		Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.CAT));
+		transformations.CockCat(0, 10, 2.5).applyEffect(false);
 	}
 	if (player.hasCock() && player.catCocks() < player.cockTotal()) {
 		outputText("Your cock" + (player.cockTotal() > 1 ? "s" : "") + " begins to feel strange as the warmth begins to warp " + (player.cockTotal() > 1 ? "them" : "it") + " against your will.");
@@ -229,7 +222,6 @@ public function WitchesSabbathThirdVisitYes():void {
 		if (player.catCocks() < player.cockTotal()) outputText(", barbs forming on " + (player.cockTotal() > 1 ? "their" : "the") + " originally smooth cleft until you are left with what appears to be a" + (player.cockTotal() > 1 ? " set of" : "") + " cat penis" + (player.cockTotal() > 1 ? "es" : "") + "");
 		outputText("It does not end there though as your cock" + (player.cockTotal() > 1 ? "s" : "") + " suddenly pulse with unholy purple light before[less than 10 inches: / gaining several extra inches of flesh as] devilish pleasure overcomes your kitty pecker" + (player.cockTotal() > 1 ? "s" : "") + " causing you to orgasm covering your belly and face with kitty cum.");
 		if (player.cockTotal() > 0 && player.catCocks() < player.cockTotal()) reformallcockstokittycocks();
-		Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.CAT));
 	}
 	outputText("\n\nWarmth then rampage all around body altering your shape in many lesser ways until you have something fit for a proper female.");
 	if (player.breastRows[0].breastRating < 1) player.breastRows[0].breastRating = 5 + rand(5);
@@ -326,32 +318,22 @@ public function WitchesSabbathFourthVisitNoWay():void {
 }
 public function reformallcockstokittycocks():void {
 	for (var i:Number = 0; i < (player.cockTotal()) && player.cocks[i].cockType == CockTypesEnum.CAT; i++) { }
-	player.cocks[i].cockType = CockTypesEnum.CAT;
-	player.cocks[i].knotMultiplier = 1;
-	if (player.cocks[i].cockLength < 10) player.cocks[i].cockLength = 10;
-	if (player.cocks[i].cockThickness < 2.5) player.cocks[i].cockThickness = 2.5;
+	transformations.CockCat(i, 10, 2.5).applyEffect(false);
+
 	if (player.cockTotal() > 0 && player.catCocks() < player.cockTotal()) reformallcockstokittycocks();
 }
 public function reformallcockstokittycocks2():void {
 	if (!player.hasCock()) {
 		outputText("a sheath forms between your legs. You mewl in pleasure as a brand new fat cat cock slowly slide out of your sheath, inches after inches, going erect within seconds and dripping hot drops of precum on the ground. It’s only as it reaches it’s full 10 inches the the throbbing heat build into a full blown orgasm your freshly grown cock splattering the volcanic ground with kitty spunk. ");
-		player.createCock();
-		player.cocks[0].cockLength = 10;
-		player.cocks[0].cockThickness = 2.5;
-		player.cocks[0].cockType = CockTypesEnum.CAT;
-		player.cocks[0].knotMultiplier = 1;
+		transformations.CockCat(0, 10, 2.5).applyEffect(false);
 	}
 	else {
 		outputText("your cock is wrapped in unholy warmth");
 		if (!player.hasSheath()) outputText(", slowly being pulled inside a forming sheath between your legs only to surge back out");
 		outputText(" as it reshape into a whole new form. You mewl in delight as your penis covers with sensitive barbs all ready to scratch the walls of a female vagina or, in your case, the palm of or your waiting hands as you begin to fiercely masturbate, your sensitive tool splattering several drop of cum everywhere. ");
 		for (var i:Number = 0; i < (player.cockTotal()) && player.cocks[i].cockType == CockTypesEnum.CAT; i++) { }
-		player.cocks[i].cockType = CockTypesEnum.CAT;
-		player.cocks[i].knotMultiplier = 1;
-		if (player.cocks[i].cockLength < 10) player.cocks[i].cockLength = 10;
-		if (player.cocks[i].cockThickness < 2.5) player.cocks[i].cockThickness = 2.5;
+		transformations.CockCat(i, 10, 2.5).applyEffect(false);
 	}
-	Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.CAT));
 }
 
 	}

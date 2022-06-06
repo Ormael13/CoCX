@@ -1,8 +1,6 @@
 ﻿package classes.Scenes.Areas.Forest{
 import classes.*;
-import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.Metamorph;
 import classes.display.SpriteDb;
 
 public class TentacleBeastScene extends BaseContent{
@@ -880,8 +878,7 @@ public function defeatedByAncientTentacleBeast():void {
         player.boostLactation(1.5);
         if (!player.hasCock()) {
             outputText(" Just as you were thinking about your breasts you feel a bump of flesh between your legs growing steadily until it breaks out standing erect. This… this thing is a penis!");
-            player.createCock(6, 1.5);
-			Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
+			transformations.CockHuman(0, 6, 1.5).applyEffect(false);
             player.clitLength = .25;
             if (player.hasVagina()) outputText(" Oh, no, you're a full herm now!");
         }
