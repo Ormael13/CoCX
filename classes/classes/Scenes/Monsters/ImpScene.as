@@ -38,8 +38,7 @@ use namespace CoC;
 			menu();
 			addButtonIfTrue(10, "Breastfeed", areImpsLactoseIntolerant, "Req. Feeder status", player.hasStatusEffect(StatusEffects.Feeder), "Give him a good fill of your milk. See if the imp is lactose tolerant.");
 			addButton(12, "Kill Him", killImp);
-			if (back == null) addButton(14, "Leave", cleanupAfterCombat);
-			addButton(14, "Back", back);
+			addButton(14, "Leave", back == null ? cleanupAfterCombat : back);
 			if (player.lust > 33) {
 				if (!player.isTaur()) {
 					addButtonIfTrue(0, "Male Rape", rapeImpWithDick, ("Req. dick with area smaller than " + monster.analCapacity()), player.cockThatFits(monster.analCapacity()) >= 0, "Teach the imp a lesson and ram his butt with your dick!");

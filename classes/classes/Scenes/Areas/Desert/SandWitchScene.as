@@ -579,6 +579,7 @@ internal function beatSandwitch():void {
     if (player.lust < 33) {
         outputText("\nYou're not aroused enough to rape her.");
         cleanupAfterCombat();
+		return;
     }
     //more text
     outputText("\nSadly you realize your own needs have not been met.  Of course you could always fuck the " + (monster.lust >= monster.maxLust() ? "horny " : "") + "witch... Will you rape her?");
