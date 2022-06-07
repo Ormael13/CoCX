@@ -107,6 +107,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+	  public static const GOO:int = 5;
+	  EnumValue.add(Memories, GOO, "GOO", {
+		  id: "Goo Hair",
+		  name: "Goo Hair",
+		  cost: 100,
+		  title: "Goo",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.HairGoo;
+		  }
+	  });
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

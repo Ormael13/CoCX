@@ -137,19 +137,16 @@ public class DarkSlimeScene extends BaseContent
         outputText("\n\n");
         CoC.instance.transformations.HairGoo.applyEffect(false);
         CoC.instance.transformations.ArmsGoo.applyEffect(false);
-        player.lowerBody = LowerBody.GOO;
-        player.rearBody.type = RearBody.METAMORPHIC_GOO;
-        player.skin.setBaseOnly({adj: "slimy", type: Skin.GOO, pattern: Skin.PATTERN_NONE});
-        var darkgooSkinColors:Array = ["indigo", "light purple", "purple", "purplish black", "dark purple"];
-        var choosencolor:String = randomChoice(darkgooSkinColors);
-        player.skin.base.color = choosencolor;
-        player.hairColor = choosencolor;
+        CoC.instance.transformations.LowerBodyGoo.applyEffect(false);
+        CoC.instance.transformations.RearBodyMetamorphicGoo.applyEffect(false);
+        CoC.instance.transformations.SkinGoo(Skin.COVERAGE_COMPLETE, 2).applyEffect(false);
+        player.hairColor = player.skinTone;
         CoC.instance.transformations.EyesFiendish.applyEffect(false);
         CoC.instance.transformations.EyesChangeColor(["red"]).applyEffect(false);
         CoC.instance.transformations.EarsElfin.applyEffect(false);
         CoC.instance.transformations.FaceHuman.applyEffect(false);
         CoC.instance.transformations.TongueHuman.applyEffect(false);
-        if (!player.hasVagina()) player.createVagina()
+        CoC.instance.transformations.VaginaHuman().applyEffect(false);
         if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity, 9000, 0, 0, 0);
         else player.addStatusValue(StatusEffects.BonusVCapacity, 1, 9000);
         CoC.instance.transformations.AntennaeNone.applyEffect(false);

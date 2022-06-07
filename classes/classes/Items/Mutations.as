@@ -4478,30 +4478,14 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //1.Goopy arms
-        if (player.arms.type != Arms.GOO && changes < changeLimit && rand(3) == 0 && changes < changeLimit) {
+        if (player.arms.type != Arms.GOO && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.ArmsGoo.applyEffect();
             changes++;
         }
         //2.Goopy skin
-        if (!player.hasGooSkin() && !player.isGargoyle() && rand(3) == 0 && changes < changeLimit) {
-            if (player.hasPlainSkinOnly()) outputText("[pg]You sigh, feeling your [armor] sink into you as your skin becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!");
-            else if (player.hasFur()) outputText("[pg]You sigh, suddenly feeling your fur become hot and wet.  You look down as your [armor] sinks partway into you.  With a start you realize your fur has melted away, melding into the slime-like coating that now serves as your skin.  You've become partly liquid and incredibly gooey!");
-            else if (player.hasScales()) outputText("[pg]You sigh, feeling slippery wetness over your scales.  You reach to scratch it and come away with a slippery wet coating.  Your scales have transformed into a slimy goop!  Looking closer, you realize your entire body has become far more liquid in nature, and is semi-solid.  Your [armor] has even sunk partway into you.");
-            else if (player.skin.base.type != Skin.GOO) outputText("[pg]You sigh, feeling your [armor] sink into you as your [skin] becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!");
-            player.skin.setBaseOnly({type: Skin.GOO, adj: "slimy"});
-            if (!InCollection(player.skin.base.color, gooSkinColors) && type == 0) {
-                player.skin.base.color = randomChoice(gooSkinColors);
-                outputText("  Stranger still, your skintone changes to [skin color]!");
-            }
-            if (!InCollection(player.skin.base.color, magmagooSkinColors) && type == 1) {
-                player.skin.base.color = randomChoice(magmagooSkinColors);
-                outputText("  Stranger still, your skintone changes to [skin color]!");
-            }
-            if (!InCollection(player.skin.base.color, darkgooSkinColors) && type == 2) {
-                player.skin.base.color = randomChoice(darkgooSkinColors);
-                outputText("  Stranger still, your skintone changes to [skin color]!");
-            }
+        if (!player.hasGooSkin() && rand(3) == 0 && changes < changeLimit) {
+            transformations.SkinGoo(Skin.COVERAGE_COMPLETE, type).applyEffect();
             changes++;
         }
         ////2a.Make alterations to dick/vaginal/nippular descriptors to match
@@ -4512,7 +4496,7 @@ public final class Mutations extends MutationsHelper {
             dynStats("lus", 10);
             changes++;
         }
-        //DONE EXCEPT FOR TITS & MULTIDICKS (UNFINISHED KINDA)
+        //DONE EXCEPT FOR TITS & MULTIDICKS TODO(UNFINISHED KINDA)
         //4.Goo legs
         if (player.skinAdj == "slimy" && player.skinDesc == "skin" && player.arms.type == Arms.GOO && player.lowerBody != LowerBody.GOO && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
@@ -4526,7 +4510,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //6a. Grow vagina if none
-        if (!player.hasVagina() && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+        if (!player.hasVagina() && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]A wet warmth spreads through your slimey groin as a narrow gash appears on the surface of your groin.  <b>You have grown a vagina.</b>");
             transformations.VaginaHuman().applyEffect(false);
             player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_DROOLING;
@@ -7007,33 +6991,14 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Lactation stoppage.
-        if (player.biggestLactation() >= 1 && changes < changeLimit && rand(4) == 0) {
-            if (player.totalNipples() == 2) outputText("[pg]Both of your");
-            else outputText("[pg]All of your many");
-            outputText(" nipples relax.  It's a strange feeling, and you pull back your top to touch one.  It feels fine, though there doesn't seem to be any milk leaking out.  You give it a squeeze and marvel when nothing ");
-            if (player.hasFuckableNipples()) outputText("but sexual fluid ");
-            outputText("escapes it.  <b>You are no longer lactating.</b>  That makes sense, only mammals lactate!  Smiling, you muse at how much time this will save you when cleaning your gear.");
-            if (player.hasPerk(PerkLib.Feeder) || player.hasStatusEffect(StatusEffects.Feeder)) {
-                outputText("[pg](<b>Feeder perk lost!</b>)");
-                player.removePerk(PerkLib.Feeder);
-                player.removeStatusEffect(StatusEffects.Feeder);
-            }
+        if (player.isLactating() && changes < changeLimit && rand(4) == 0) {
+            transformations.RemoveLactation.applyEffect();
             changes++;
-            //Loop through and reset lactation
-            for (temp2 = 0; temp2 < player.breastRows.length; temp2++) {
-                player.breastRows[temp2].lactationMultiplier = 0;
-            }
         }
         //-Nipples reduction to 1 per tit.
         if (player.averageNipplesPerBreast() > 1 && changes < changeLimit && rand(4) == 0) {
-            outputText("[pg]A chill runs over your [allbreasts] and vanishes.  You stick a hand under your [armor] and discover that your extra nipples are missing!  You're down to just one per ");
-            if (player.biggestTitSize() < 1) outputText("'breast'.");
-            else outputText("breast.");
+            transformations.NipplesPerBreastOne.applyEffect();
             changes++;
-            //Loop through and reset nipples
-            for (temp2 = 0; temp2 < player.breastRows.length; temp2++) {
-                player.breastRows[temp2].nipplesPerBreast = 1;
-            }
         }
         //-VAGs
         if (player.hasVagina() && !player.hasPerk(PerkLib.Oviposition) && changes < changeLimit && rand(5) == 0 && player.racialScore(Races.LIZARD) > 3) {
@@ -7045,9 +7010,9 @@ public final class Mutations extends MutationsHelper {
 
         //Physical changes:
         //-Existing horns become draconic, max of 4, max length of 1'
-        if (player.horns.type != Horns.DRACONIC_X4_12_INCH_LONG && player.horns.type != Horns.ORCHID && player.horns.type != Horns.GARGOYLE && changes < changeLimit && rand(5) == 0) {
+        if (player.horns.type != Horns.DRACONIC_X4_12_INCH_LONG && player.horns.type != Horns.ORCHID && changes < changeLimit && rand(5) == 0) {
             //No dragon horns yet.
-            if (player.horns.type != Horns.DRACONIC_X2 && player.horns.type != Horns.DRACONIC_X4_12_INCH_LONG) {
+            if (player.horns.type != Horns.DRACONIC_X2) {
                 //Already have horns
                 outputText("[pg]");
                 if (player.horns.count > 0) {
@@ -7068,7 +7033,6 @@ public final class Mutations extends MutationsHelper {
             }
             //ALREADY DRAGON
             else {
-                if (player.horns.type == Horns.DRACONIC_X2) {
                     if (player.horns.count < 12) {
                         if (rand(2) == 0) {
                             outputText("[pg]You get a headache as an inch of fresh horns escapes from your pounding skull.");
@@ -7087,7 +7051,6 @@ public final class Mutations extends MutationsHelper {
                         transformations.HornsDraconicQuadruple.applyEffect();
                         changes++;
                     }
-                }
             }
         }
         //-Hair stops growing!

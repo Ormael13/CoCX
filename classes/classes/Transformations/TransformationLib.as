@@ -521,7 +521,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  )
 	}
 
-    public function SkinAquaScales(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation {
+    public function SkinAquaScales(coverage: int = Skin.COVERAGE_HIGH, options: * = null): Transformation {
         return new SimpleTransformation("Aqua Scales Skin",
                 // apply effect
                 function (doOutput: Boolean): void {
@@ -581,6 +581,56 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
                 }
         )
     }
+
+	public function SkinGoo(coverage: int = Skin.COVERAGE_COMPLETE, type: int = 0, options: * = null): Transformation {
+		return new SimpleTransformation("Goo Skin",
+				//'type' refers to the variety of slime TF's.
+				//0 == normal slime
+				//1 == magma slime
+				//2 == dark slime
+				// apply effect
+				function (doOutput: Boolean): void {
+
+					const gooSkinColors:Array = ["green", "magenta", "blue", "cerulean", "emerald", "pink"];
+					const magmagooSkinColors:Array = ["red", "orange", "reddish orange"];
+					const darkgooSkinColors:Array = ["indigo", "light purple", "purple", "purplish black", "dark purple"];
+
+					//var desc: String = "";
+					if (player.hasPlainSkinOnly()) outputText("[pg]You sigh, feeling your [armor] sink into you as your skin becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!");
+					else if (player.hasFur()) outputText("[pg]You sigh, suddenly feeling your fur become hot and wet.  You look down as your [armor] sinks partway into you.  With a start you realize your fur has melted away, melding into the slime-like coating that now serves as your skin.  You've become partly liquid and incredibly gooey!");
+					else if (player.hasScales()) outputText("[pg]You sigh, feeling slippery wetness over your scales.  You reach to scratch it and come away with a slippery wet coating.  Your scales have transformed into a slimy goop!  Looking closer, you realize your entire body has become far more liquid in nature, and is semi-solid.  Your [armor] has even sunk partway into you.");
+					else if (player.skin.base.type != Skin.GOO) outputText("[pg]You sigh, feeling your [armor] sink into you as your [skin] becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!");
+					player.skin.setBaseOnly({type: Skin.GOO, adj: "slimy", pattern: Skin.PATTERN_NONE});
+					if (!InCollection(player.skin.base.color, gooSkinColors) && type == 0) {
+						player.skin.base.color = randomChoice(gooSkinColors);
+						outputText("  Stranger still, your skintone changes to [skin color]!");
+					}
+					if (!InCollection(player.skin.base.color, magmagooSkinColors) && type == 1) {
+						player.skin.base.color = randomChoice(magmagooSkinColors);
+						outputText("  Stranger still, your skintone changes to [skin color]!");
+					}
+					if (!InCollection(player.skin.base.color, darkgooSkinColors) && type == 2) {
+						player.skin.base.color = randomChoice(darkgooSkinColors);
+						outputText("  Stranger still, your skintone changes to [skin color]!");
+					}
+					//if (doOutput) outputText(desc);
+					switch (type) {
+						case 0: Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.SLIME));
+							break;
+						case 1: Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.DARK_SLIME));
+							break;
+						case 2: Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.MAGMA_SLIME));
+							break;
+					}
+				},
+				// is present
+				function (): Boolean {
+					options = skinFormatOptions(options, false);
+
+					return player.hasCoatOfType(Skin.CHITIN) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
+				}
+		)
+	}
 
 	private function skinFormatOptions(options: *, hairy:Boolean = false): * {
         if (!options) options = {};
@@ -1715,6 +1765,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (doOutput) outputText(desc);
 	    player.hairType = Hair.GOO;
+		  Metamorph.unlockMetamorph(HairMem.getMemory(HairMem.GOO));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5330,6 +5381,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.arms.type = Arms.GOO;
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.GOO));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5950,13 +6002,14 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.rearBody.type = RearBody.METAMORPHIC_GOO;
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(RearBodyMem.getMemory(RearBodyMem.METAMORPHIC_GOO));
 	  },
 	  // is present
 	  function (): Boolean {
 	    return player.rearBody.type === RearBody.METAMORPHIC_GOO;
 	  },
 		function (): Boolean {
-			return player.rearBody.type != RearBody.METAMORPHIC_GOO && player.lowerBody == LowerBody.GOO && (player.hasPerk(PerkLib.SlimeCore) || player.hasPerk(PerkLib.DarkSlimeCore));
+			return player.rearBody.type != RearBody.METAMORPHIC_GOO && player.lowerBody == LowerBody.GOO && (player.isSlime() || player.hasKeyItem("Ruby Heart") >= 0);
 	  }
 	);
 
@@ -7276,6 +7329,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 1;
 	    player.lowerBody = LowerBody.GOO;
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.GOO));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -9995,6 +10049,37 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			// is possible
 			function ():Boolean {
 				return !player.hasFuckableNipples() && player.bRows() > 0 && player.nippleLength >= 2
+			}
+	);
+
+	public const RemoveLactation:Transformation = new SimpleTransformation("Stop lactating",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				if (player.totalNipples() == 2) desc += "[pg]Both of your";
+				else desc += "[pg]All of your many";
+				desc += " nipples relax.  It's a strange feeling, and you pull back your top to touch one.  It feels fine, though there doesn't seem to be any milk leaking out.  You give it a squeeze and marvel when nothing ";
+				if (player.hasFuckableNipples()) desc += "but sexual fluid ";
+				desc += "escapes it.  <b>You are no longer lactating.</b>  That makes sense, only mammals lactate!  Smiling, you muse at how much time this will save you when cleaning your gear.";
+				if (player.hasPerk(PerkLib.Feeder) || player.hasStatusEffect(StatusEffects.Feeder)) {
+					desc += "[pg](<b>Feeder perk lost!</b>)";
+					player.removePerk(PerkLib.Feeder);
+					player.removeStatusEffect(StatusEffects.Feeder);
+				}
+				//Loop through and reset lactation
+				for (var i:int = 0; i < player.breastRows.length; i++) {
+					player.breastRows[i].lactationMultiplier = 0;
+				}
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function ():Boolean {
+				return !player.isLactating();
+			},
+			// is possible
+			function ():Boolean {
+				return player.isLactating();
 			}
 	);
 
