@@ -165,11 +165,16 @@ public class Changelog extends BaseContent
 			//outputText("-Dinah would provide PC with HB Mech upgrade options after it's bought. They could boost mech defences, attack or even provide with specials. As with all other items upgrades cost can vary depending on her mood ^^\n");
 			//outputText("-HB Mech upgrade options includes: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Rapid Reload (+base ranged atk dmg), Internal Systems (increase mech SF capacity and lower it consumption during high activity), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special), ");
 			//outputText("Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)\n");
-			outputText("-Metamorph menu: Yeti race all bodyparts, Yuki onna arms, Twin Kasha tails, Giant dragonfly wings, Tigershark Stripes, Shark skin, multi Gazer Eyestalks, Dog tail (EragonX)\n");
+			outputText("-Metamorph menu: Yeti race all bodyparts, Yuki onna arms, Twin Kasha tails, Giant dragonfly wings, Tigershark Stripes, Shark skin, multi Gazer Eyestalks, Dog tail, Goo bodyparts (EragonX)\n");
 			outputText("-Swift casting spells won't have cooldowns but their power will be lowered by 80%.\n");
 			outputText("-Spell-Knight str req. was lowered from 200 to 150.\n");
 			outputText("-Basic Job: All-Rounder no longer req. Job: Soul Cultivator but it lib and sens req. was increased to 75 and 50 respectively.\n");
 			outputText("-Demon tfs and Feeder perk use CorruptionTolerance now, Oni horn wont choose same horns. (EragonX)\n");
+			outputText("-Removed Sapphire/Onyx requirements from Forgefather encounter. (Svalkash)\n");
+			outputText("-SceneHunter - Cinnabar and some others. (Svalkash)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -256,9 +261,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -290,9 +293,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
