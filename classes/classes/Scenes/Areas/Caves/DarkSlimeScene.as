@@ -135,12 +135,11 @@ public class DarkSlimeScene extends BaseContent
         " You set out with a drooling pleasure addled smile looking for a fleshling to feed from.\n\n");
         outputText("<b>You have been transformed into a dark slime!</b>\n\n");
         outputText("\n\n");
+        CoC.instance.transformations.SkinGoo(Skin.COVERAGE_COMPLETE, 2).applyEffect(false);
         CoC.instance.transformations.HairGoo.applyEffect(false);
         CoC.instance.transformations.ArmsGoo.applyEffect(false);
         CoC.instance.transformations.LowerBodyGoo.applyEffect(false);
         CoC.instance.transformations.RearBodyMetamorphicGoo.applyEffect(false);
-        CoC.instance.transformations.SkinGoo(Skin.COVERAGE_COMPLETE, 2).applyEffect(false);
-        player.hairColor = player.skinTone;
         CoC.instance.transformations.EyesFiendish.applyEffect(false);
         CoC.instance.transformations.EyesChangeColor(["red"]).applyEffect(false);
         CoC.instance.transformations.EarsElfin.applyEffect(false);

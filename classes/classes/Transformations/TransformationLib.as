@@ -14,6 +14,9 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.CockTypesEnum;
+import classes.Races.DarkSlimeRace;
+import classes.Races.MagmaSlimeRace;
+import classes.Races.SlimeRace;
 import classes.VaginaClass;
 import classes.GeneticMemories.*;
 import classes.GlobalFlags.kFLAGS;
@@ -590,27 +593,22 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				//2 == dark slime
 				// apply effect
 				function (doOutput: Boolean): void {
-
-					const gooSkinColors:Array = ["green", "magenta", "blue", "cerulean", "emerald", "pink"];
-					const magmagooSkinColors:Array = ["red", "orange", "reddish orange"];
-					const darkgooSkinColors:Array = ["indigo", "light purple", "purple", "purplish black", "dark purple"];
-
 					//var desc: String = "";
 					if (player.hasPlainSkinOnly()) outputText("[pg]You sigh, feeling your [armor] sink into you as your skin becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!");
 					else if (player.hasFur()) outputText("[pg]You sigh, suddenly feeling your fur become hot and wet.  You look down as your [armor] sinks partway into you.  With a start you realize your fur has melted away, melding into the slime-like coating that now serves as your skin.  You've become partly liquid and incredibly gooey!");
 					else if (player.hasScales()) outputText("[pg]You sigh, feeling slippery wetness over your scales.  You reach to scratch it and come away with a slippery wet coating.  Your scales have transformed into a slimy goop!  Looking closer, you realize your entire body has become far more liquid in nature, and is semi-solid.  Your [armor] has even sunk partway into you.");
 					else if (player.skin.base.type != Skin.GOO) outputText("[pg]You sigh, feeling your [armor] sink into you as your [skin] becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!");
 					player.skin.setBaseOnly({type: Skin.GOO, adj: "slimy", pattern: Skin.PATTERN_NONE});
-					if (!InCollection(player.skin.base.color, gooSkinColors) && type == 0) {
-						player.skin.base.color = randomChoice(gooSkinColors);
+					if (!InCollection(player.skin.base.color, SlimeRace.SlimeSkinColors) && type == 0) {
+						player.skin.base.color = randomChoice(SlimeRace.SlimeSkinColors);
 						outputText("  Stranger still, your skintone changes to [skin color]!");
 					}
-					if (!InCollection(player.skin.base.color, magmagooSkinColors) && type == 1) {
-						player.skin.base.color = randomChoice(magmagooSkinColors);
+					if (!InCollection(player.skin.base.color, MagmaSlimeRace.MagmaSlimeSkinColors) && type == 1) {
+						player.skin.base.color = randomChoice(MagmaSlimeRace.MagmaSlimeSkinColors);
 						outputText("  Stranger still, your skintone changes to [skin color]!");
 					}
-					if (!InCollection(player.skin.base.color, darkgooSkinColors) && type == 2) {
-						player.skin.base.color = randomChoice(darkgooSkinColors);
+					if (!InCollection(player.skin.base.color, DarkSlimeRace.DarkSlimeSkinColors) && type == 2) {
+						player.skin.base.color = randomChoice(DarkSlimeRace.DarkSlimeSkinColors);
 						outputText("  Stranger still, your skintone changes to [skin color]!");
 					}
 					//if (doOutput) outputText(desc);
@@ -1751,7 +1749,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        desc += "Your oddly inorganic hair shifts, becoming partly molten as rivulets of liquid material roll down your back. How strange.";
 	      }
 	    }
-	    if (player.hairColor != "green" && player.hairColor != "purple" && player.hairColor != "blue" && player.hairColor != "cerulean" && player.hairColor != "emerald") {
+	    if (!InCollection(player.hairColor, SlimeRace.SlimeSkinColors, MagmaSlimeRace.MagmaSlimeSkinColors, DarkSlimeRace.DarkSlimeSkinColors)) {
 	      player.hairColor = player.skin.base.color;
 	      desc += " Stranger still, the hue of your semi-liquid hair changes to " + player.hairColor + ".";
 	    }
@@ -1770,7 +1768,11 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // is present
 	  function (): Boolean {
 	    return player.hairType === Hair.GOO;
-	  }
+	  },
+		// is possible
+		function (): Boolean {
+			return player.hairType != Hair.GOO && player.hasGooSkin();
+		}
 	);
 
 	public const HairGhost: Transformation = new SimpleTransformation("Ghost Hair",
