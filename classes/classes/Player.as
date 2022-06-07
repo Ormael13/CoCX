@@ -4,7 +4,6 @@ import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
-import classes.BodyParts.Hair;
 import classes.BodyParts.Horns;
 import classes.BodyParts.ISexyPart;
 import classes.BodyParts.LowerBody;
@@ -38,7 +37,6 @@ import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
 import classes.Items.WeaponRangeLib;
-import classes.Races.ElementalRace;
 import classes.Races.HumanRace;
 import classes.Scenes.Combat.CombatAbilities;
 import classes.Scenes.Combat.CombatAbility;
@@ -4132,8 +4130,8 @@ use namespace CoC;
 				slimeGrowth();
 			}
 			if (hasPerk(PerkLib.Diapause)) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] += 3 + rand(3);
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 1;
+				flags[kFLAGS.DIAPAUSE_FLUID_STORE] += 3 + rand(3);
+				flags[kFLAGS.DIAPAUSE_DISPLAYED] = 1;
 			}
 			if (isGargoyle() && hasPerk(PerkLib.GargoyleCorrupted)) refillGargoyleHunger(30);
 			if (isRace(Races.JIANGSHI) && hasPerk(PerkLib.EnergyDependent)) EnergyDependentRestore();
