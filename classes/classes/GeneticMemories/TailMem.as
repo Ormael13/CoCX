@@ -474,7 +474,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-	  public static const DOG:int = 37;
+	  public static const DOG:int = 38;
 	  EnumValue.add(Memories, DOG, "DOG", {
 		  id: "Dog Tail",
 		  name: "Dog Tail",

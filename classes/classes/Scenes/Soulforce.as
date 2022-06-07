@@ -718,6 +718,8 @@ public class Soulforce extends BaseContent
 //			Metamorph.GeneticMemoryStorage[breastMem.id] = true;
 //		}
 		Metamorph.GeneticMemoryStorage["Taur Lower Body"] = true;
+		clearOutput();
+		outputText("All metamorph options unlocked.");
 		doNext(curry(SoulforceCheats1, 0));
 	}
 	public function PerkGalore1():void {
