@@ -498,7 +498,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.hasKeyItem("Ruby Heart") >= 0) { //Regain slime core
-				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.SlimeCore) && player.isGoo() && player.racialScore(Races.SLIME) >= 4 && player.vaginalCapacity() >= 9000 && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.arms.type == Arms.GOO && LowerBody.isGoo(player)) {
+				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.SlimeCore) && player.isGoo() && player.racialScore(Races.SLIME) >= 4 && player.vaginalCapacity() >= 9000 && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.arms.type == Arms.GOO) {
 					outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n");
 					outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n");
 					//(Reduces Fluid Addiction to a 24 hour intake requirement).
@@ -537,7 +537,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 				else { //Slime core reduces fluid need rate
-					if (player.hasPerk(PerkLib.SlimeCore) || player.hasPerk(PerkLib.DarkSlimeCore))
+					if (player.isSlime())
 						player.addStatusValue(StatusEffects.SlimeCraving, 1, 0.5);
 					else player.addStatusValue(StatusEffects.SlimeCraving, 1, 1);
 					if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18) {

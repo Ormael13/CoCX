@@ -151,6 +151,17 @@ package classes.GeneticMemories {
 		  }
 	  });
 
+	  public static const METAMORPHIC_GOO:int = 10;
+	  EnumValue.add(Memories, METAMORPHIC_GOO, "METAMORPHIC_GOO", {
+		  id: "Metamorphic Goo",
+		  name: "Metamorphic Goo",
+		  cost: 100,
+		  title: "Metamorphic Goo",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.RearBodyMetamorphicGoo;
+		  }
+	  });
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}
