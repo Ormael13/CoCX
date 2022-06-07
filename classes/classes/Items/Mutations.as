@@ -15,7 +15,6 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GeneticMemories.BallsMem;
-import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
@@ -920,7 +919,6 @@ public final class Mutations extends MutationsHelper {
                     player.createCock(rand(3) + 4);
                     outputText("[pg]You shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
                     outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinTone + " tone.");
-                    Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
                     if (tainted) {
                         dynStats("lus", 10, "cor", 5);
                         player.addCurse("sens", 5, 1);
@@ -1002,12 +1000,9 @@ public final class Mutations extends MutationsHelper {
                     }
                 }
                 if (player.cocks.length == 0) {
-                    player.createCock();
-                    player.cocks[0].cockLength = rand(3) + 4;
-                    player.cocks[0].cockThickness = 1;
+                    transformations.CockHuman(0, rand(3) + 4).applyEffect(false);
                     outputText("[pg]You shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
                     outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinTone + " tone.");
-                    Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
                     if (tainted) {
                         dynStats("lus", 10, "cor", 3);
                         player.addCurse("sens", 5, 1);
@@ -1029,7 +1024,7 @@ public final class Mutations extends MutationsHelper {
             //High level change
             if (rando >= 93) {
                 if (player.cockTotal() < 10) {
-                    if (int(Math.random() * 10) < int(player.cor / 25)) {
+                    if (int(Math.random() * 10) < int(player.cor / (25+player.corruptionTolerance))) {
                         outputText("[pg]");
                         growDemonCock(rand(2) + 2);
                         if (tainted) {
@@ -1051,7 +1046,7 @@ public final class Mutations extends MutationsHelper {
                 }
             }
             //Demonic changes - higher chance with higher corruption.
-            if (rand(40) + player.cor / 2 > 40 && tainted) demonChanges(player);
+            if (rand(40) + (player.cor + player.corruptionTolerance) / 2 > 40 && tainted) demonChanges(player);
         }
         if (rand(4) == 0 && tainted) outputText(player.modFem(5, 2));
         if (rand(4) == 0 && tainted) outputText(player.modThickness(30, 2));
@@ -1076,7 +1071,6 @@ public final class Mutations extends MutationsHelper {
             outputText("The skin bulges obscenely, darkening and splitting around " + num2Text(grown) + " of your new dicks.  For an instant they turn a demonic purple and dribble in thick spasms of scalding demon-cum.  After, they return to a more humanoid coloration.  ");
         }
         if (grown > 4) outputText("Your tender bundle of new cocks feels deliciously sensitive, and you cannot stop yourself from wrapping your hands around the slick demonic bundle and pleasuring them.[pg]Nearly an hour later, you finally pull your slick body away from the puddle you left on the ground.  When you look back, you notice it has already been devoured by the hungry earth.");
-        if (grown > 0) Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
         player.orgasm('Dick');
     }
 
@@ -1243,8 +1237,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         if (player.vaginas.length == 0 && (rand(3) == 0 || (rando > 75 && rando < 90))) {
-            player.createVagina();
-            player.clitLength = .25;
+            transformations.VaginaHuman().applyEffect(false);
             if (player.fertility <= 5) player.fertility = 6;
             outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
         }
@@ -1323,9 +1316,7 @@ public final class Mutations extends MutationsHelper {
                     dynStats("lus", 8);
                     player.addCurse("sens", 3, 1);
                 } else {
-                    player.createVagina();
-                    player.clitLength = .25;
-                    outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
+                    transformations.VaginaHuman().applyEffect();
                 }
             } else {
                 switch (rand(10)) {
@@ -1362,7 +1353,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //Demonic changes - higher chance with higher corruption.
-        if (rand(40) + player.cor / 2 > 40 && tainted && changeLimit != 0) demonChanges(player);
+        if (rand(40) + (player.cor + player.corruptionTolerance) / 2 > 40 && tainted && changeLimit != 0) demonChanges(player);
         if (tainted) {
             outputText(player.modFem(100, 2));
             if (rand(3) == 0) outputText(player.modTone(15, 2));
@@ -1530,12 +1521,8 @@ public final class Mutations extends MutationsHelper {
                                 outputText("\n");
                             }
                             outputText("\nYour ");
-                            if (choice == 0) outputText("first ");
-                            if (choice == 1) outputText("second ");
-                            if (choice == 2) outputText("third ");
-                            if (choice == 3) outputText("fourth ");
-                            if (choice == 4) outputText("fifth ");
                             if (choice > 4) outputText("");
+                            else outputText(num2Text2(choice));
                             outputText("row of " + breastDescript(choice) + " grows larger, as if jealous of the jiggling flesh above.");
                             temp2 = (player.breastRows[choice - 1].breastRating) - player.breastRows[choice].breastRating - 1;
                             if (temp2 > 5) temp2 = 5;
@@ -1852,37 +1839,28 @@ public final class Mutations extends MutationsHelper {
                 if (player.dogCocks() == 0) {
                     //Dickless - grow two dogpeckers
                     if (player.cockTotal() == 0) {
-                        player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-                        player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
                         outputText("[pg]A painful lump forms on your groin, nearly doubling you over as it presses against your [armor].  You rip open your gear and watch, horrified as the discolored skin splits apart, revealing a pair of red-tipped points.  A feeling of relief, and surprising lust grows as they push forward, glistening red and thickening.  The skin bunches up into an animal-like sheath, while a pair of fat bulges pop free.  You now have two nice thick dog-cocks, with decent sized knots.  Both pulse and dribble animal-pre, arousing you in spite of your attempts at self-control.");
-                        player.cocks[0].knotMultiplier = 1.7;
-                        player.cocks[0].cockType = CockTypesEnum.DOG;
-                        player.cocks[1].knotMultiplier = 1.7;
-                        player.cocks[1].cockType = CockTypesEnum.DOG;
+                        transformations.CockDog(0, 7 + rand(7), 1.5 + rand(10) / 10, 1.7).applyEffect(false);
+                        transformations.CockDog(1, 7 + rand(7), 1.5 + rand(10) / 10, 1.7).applyEffect(false);
                         dynStats("lus", 50);
-                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
                     }
                     //1 dick - grow 1 and convert 1
                     else if (player.cockTotal() == 1) {
                         transformations.CockDog().applyEffect();
                         outputText("You feel something slippery wiggling inside the new sheath, and another red point peeks out.  In spite of yourself, you start getting turned on by the change, and the new dick slowly slides free, eventually stopping once the thick knot pops free.  The pair of dog-dicks hang there, leaking pre-cum and arousing you far beyond normal.");
-                        player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-                        player.cocks[1].knotMultiplier = 1.7;
-                        player.cocks[1].cockType = CockTypesEnum.DOG;
+                        transformations.CockDog(1, 7 + rand(7), 1.5 + rand(10) / 10, 1.7).applyEffect(false);
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
-                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
                     }
                     //2 dicks+ - convert first 2 to doggie-dom
                     else {
                         outputText("[pg]Your crotch twitches, and you pull open your [armor] to get a better look.  You watch in horror and arousal as your [cock] and [cock 2] both warp and twist, becoming red and pointed, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.");
-                        player.cocks[0].cockType = CockTypesEnum.DOG;
-                        player.cocks[1].cockType = CockTypesEnum.DOG;
-                        player.cocks[0].knotMultiplier = 1.4;
-                        player.cocks[1].knotMultiplier = 1.4;
+                        transformations.CockDog().applyEffect(false);
+                        transformations.CockDog(1).applyEffect(false);
+                        if (player.cocks[1].knotMultiplier < 1.4) player.cocks[0].knotMultiplier = 1.4;
+                        if (player.cocks[1].knotMultiplier < 1.4) player.cocks[1].knotMultiplier = 1.4;
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
-                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
                     }
                 }
                 //If player has 1 dogdicks
@@ -1890,30 +1868,26 @@ public final class Mutations extends MutationsHelper {
                     //if player has 1 total
                     if (player.cockTotal() == 1) {
                         outputText("[pg]You feel something slippery wiggling inside your sheath, and another red point peeks out.  In spite of yourself, you start getting turned on by the change, and the new dick slowly slides free, eventually stopping once the thick knot pops free.  The pair of dog-dicks hang there, leaking pre-cum and arousing you far beyond normal.");
-                        player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-                        player.cocks[1].cockType = CockTypesEnum.DOG;
-                        player.cocks[1].knotMultiplier = 1.4;
+                        transformations.CockDog(1, 7 + rand(7), 1.5 + rand(10) / 10, 1.4).applyEffect(false);
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
-                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
                     }
                     //if player has more
                     if (player.cockTotal() >= 1) {
                         //if first dick is already doggi'ed
                         if (player.cocks[0].cockType == CockTypesEnum.DOG) {
                             outputText("[pg]Your crotch twitches, and you pull open your [armor] to get a better look.  You watch in horror and arousal as your " + cockDescript(1) + " warps and twists, becoming red and pointed, just like other dog-dick, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.");
-                            player.cocks[1].cockType = CockTypesEnum.DOG;
-                            player.cocks[1].knotMultiplier = 1.4;
+                            transformations.CockDog(1).applyEffect(false);
+                            if (player.cocks[1].knotMultiplier < 1.4) player.cocks[1].knotMultiplier = 1.4;
                         }
                         //first dick is not dog
                         else {
                             outputText("[pg]Your crotch twitches, and you pull open your [armor] to get a better look.  You watch in horror and arousal as your [cock] warps and twists, becoming red and pointed, just like other dog-dick, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.");
-                            player.cocks[0].cockType = CockTypesEnum.DOG;
-                            player.cocks[0].knotMultiplier = 1.4;
+                            transformations.CockDog(0).applyEffect(false);
+                            if (player.cocks[0].knotMultiplier < 1.4) player.cocks[0].knotMultiplier = 1.4;
                         }
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
-                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
                     }
                 }
             }
@@ -1927,7 +1901,7 @@ public final class Mutations extends MutationsHelper {
                     choice = 0;
                     //set temp2 to first dogdick for initialization
                     while (choice < player.cocks.length) {
-                        if (player.cocks[choice].cockType == CockTypesEnum.DOG) {
+                        if (InCollection(player.cocks[choice].cockType, CockTypesEnum.DOG, CockTypesEnum.FOX, CockTypesEnum.WOLF, CockTypesEnum.DISPLACER)) {
                             temp2 = choice;
                             break;
                         } else choice++;
@@ -1937,7 +1911,7 @@ public final class Mutations extends MutationsHelper {
                     //Find smallest knot
                     while (choice > 0) {
                         choice--;
-                        if (player.cocks[choice].cockType == CockTypesEnum.DOG && player.cocks[choice].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = choice;
+                        if (InCollection(player.cocks[choice].cockType, CockTypesEnum.DOG, CockTypesEnum.FOX, CockTypesEnum.WOLF, CockTypesEnum.DISPLACER) && player.cocks[choice].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = choice;
                     }
                     //Have smallest knotted cock selected.
                     temp3 = (rand(2) + 5) / 20 * crit;
@@ -1946,18 +1920,17 @@ public final class Mutations extends MutationsHelper {
                     if (player.cocks[temp2].knotMultiplier >= 2) temp3 /= 5;
                     player.cocks[temp2].knotMultiplier += (temp3);
                     outputText("[pg]");
-                    if (temp3 < .06) outputText("Your " + Appearance.cockNoun(CockTypesEnum.DOG) + " feels unusually tight in your sheath as your knot grows.");
-                    if (temp3 >= .06 && temp3 <= .12) outputText("Your " + Appearance.cockNoun(CockTypesEnum.DOG) + " pops free of your sheath, thickening nicely into a bigger knot.");
-                    if (temp3 > .12) outputText("Your " + Appearance.cockNoun(CockTypesEnum.DOG) + " surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.");
+                    if (temp3 < .06) outputText("Your [cock " + temp2+1 + "] feels unusually tight in your sheath as your knot grows.");
+                    if (temp3 >= .06 && temp3 <= .12) outputText("Your [cock " + temp2+1 + "] pops free of your sheath, thickening nicely into a bigger knot.");
+                    if (temp3 > .12) outputText("Your [cock " + temp2+1 + "] surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.");
                     dynStats("lus", 5 * crit);
                     player.addCurse("sen", 1, 1);
                 }
                 //Grow dogdick with big knot
                 else {
                     outputText("[pg]Your [cock] twitches, reshaping itself.  The crown tapers down to a point while the base begins swelling.  It isn't painful in the slightest, actually kind of pleasant.  Your dog-like knot slowly fills up like a balloon, eventually stopping when it's nearly twice as thick as the rest.  You touch and shiver with pleasure, oozing pre-cum.");
-                    player.cocks[0].cockType = CockTypesEnum.DOG;
+                    transformations.CockDog(0).applyEffect(false);
                     player.cocks[0].knotMultiplier = 2.1;
-                    Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
                 }
             }
             //You wasted knot pepper!
@@ -2902,7 +2875,6 @@ public final class Mutations extends MutationsHelper {
 
     //Nipplezzzzz
     public function whiteEgg(large:Boolean, player:Player):void {
-        var temp2:Number = 0;
         clearOutput();
         outputText("You devour the egg, momentarily sating your hunger.");
         if (!large) {
@@ -2923,18 +2895,7 @@ public final class Mutations extends MutationsHelper {
                 dynStats("lus", 15);
             }
             //NIPPLECUNTZZZ
-            var index:int = player.breastRows.length;
-            //Set nipplecunts on every row.
-            while (index > 0) {
-                index--;
-                if (!player.breastRows[index].fuckable && player.nippleLength >= 2) {
-                    player.breastRows[index].fuckable = true;
-                    //Keep track of changes.
-                    temp2++;
-                }
-            }
-            //Talk about if anything was changed.
-            if (temp2 > 0) outputText("[pg]Your [allbreasts] tingle with warmth that slowly migrates to your nipples, filling them with warmth.  You pant and moan, rubbing them with your fingers.  A trickle of wetness suddenly coats your finger as it slips inside the nipple.  Shocked, you pull the finger free.  <b>You now have fuckable nipples!</b>");
+            transformations.NipplesFuckable.applyEffect();
             player.refillHunger(60);
         }
     }
@@ -3155,28 +3116,11 @@ public final class Mutations extends MutationsHelper {
             temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
             player.lengthChange(temp3, 1);
             if (player.cocks[temp].cockLength < 2) {
-                outputText("  ");
-                if (player.cockTotal() == 1 && !player.hasVagina()) {
-                    outputText("Your [cock] suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.");
-                    if (player.balls > 0) outputText("  At the same time, your [balls] fall victim to the same sensation; eagerly swallowed whole by your crotch.");
-                    outputText("  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>");
-                    player.balls = 0;
-                    player.ballSize = 1;
-                    player.createVagina();
-                    player.clitLength = .25;
-                    player.removeCock(0, 1);
-                } else {
-                    player.killCocks(1);
-                }
+                transformations.CockToVagina().applyEffect();
             }
             //if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
             if (player.cocks.length == 0 && !player.hasVagina()) {
-                player.createVagina();
-                player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
-                player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
-                player.vaginas[0].virgin = true;
-                player.clitLength = .25;
-                outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
+                transformations.VaginaHuman().applyEffect();
                 changes++;
                 dynStats("lus", 10);
             }
@@ -3211,46 +3155,9 @@ public final class Mutations extends MutationsHelper {
         //Quad nipples and other 'special enhanced things.
         if (changes < changeLimit && enhanced) {
             //QUAD DAMAGE!
-            if (player.breastRows[0].nipplesPerBreast == 1) {
+            if (transformations.NipplesPerBreastFour.isPossible()) {
                 changes++;
-                player.breastRows[0].nipplesPerBreast = 4;
-                outputText("[pg]Your " + nippleDescript(0) + "s tingle and itch.  You pull back your [armor] and watch in shock as they split into four distinct nipples!  <b>You now have four nipples on each side of your chest!</b>");
-                if (player.breastRows.length >= 2 && player.breastRows[1].nipplesPerBreast == 1) {
-                    outputText("A moment later your second row of " + breastDescript(1) + " does the same.  <b>You have sixteen nipples now!</b>");
-                    player.breastRows[1].nipplesPerBreast = 4;
-                }
-                if (player.breastRows.length >= 3 && player.breastRows[2].nipplesPerBreast == 1) {
-                    outputText("Finally, your ");
-                    if (player.bRows() == 3) outputText("third row of " + breastDescript(2) + " mutates along with its sisters, sprouting into a wonderland of nipples.");
-                    else if (player.bRows() >= 4) {
-                        outputText("everything from the third row down mutates, sprouting into a wonderland of nipples.");
-                        player.breastRows[3].nipplesPerBreast = 4;
-                        if (player.bRows() >= 5) player.breastRows[4].nipplesPerBreast = 4;
-                        if (player.bRows() >= 6) player.breastRows[5].nipplesPerBreast = 4;
-                        if (player.bRows() >= 7) player.breastRows[6].nipplesPerBreast = 4;
-                        if (player.bRows() >= 8) player.breastRows[7].nipplesPerBreast = 4;
-                        if (player.bRows() >= 9) player.breastRows[8].nipplesPerBreast = 4;
-                    }
-                    player.breastRows[2].nipplesPerBreast = 4;
-                    outputText("  <b>You have a total of " + num2Text(player.totalNipples()) + " nipples.</b>");
-                }
-            }
-            //QUAD DAMAGE IF WEIRD SHIT BROKE BEFORE
-            else if (player.breastRows.length > 1 && player.breastRows[1].nipplesPerBreast == 1) {
-                if (player.breastRows[1].nipplesPerBreast == 1) {
-                    outputText("[pg]Your second row of " + breastDescript(1) + " tingle and itch.  You pull back your [armor] and watch in shock as your " + nippleDescript(1) + " split into four distinct nipples!  <b>You now have four nipples on each breast in your second row of breasts</b>.");
-                    player.breastRows[1].nipplesPerBreast = 4;
-                }
-            } else if (player.breastRows.length > 2 && player.breastRows[2].nipplesPerBreast == 1) {
-                if (player.breastRows[2].nipplesPerBreast == 1) {
-                    outputText("[pg]Your third row of " + breastDescript(2) + " tingle and itch.  You pull back your [armor] and watch in shock as your " + nippleDescript(2) + " split into four distinct nipples!  <b>You now have four nipples on each breast in your third row of breasts</b>.");
-                    player.breastRows[2].nipplesPerBreast = 4;
-                }
-            } else if (player.breastRows.length > 3 && player.breastRows[3].nipplesPerBreast == 1) {
-                if (player.breastRows[3].nipplesPerBreast == 1) {
-                    outputText("[pg]Your fourth row of " + breastDescript(3) + " tingle and itch.  You pull back your [armor] and watch in shock as your " + nippleDescript(3) + " split into four distinct nipples!  <b>You now have four nipples on each breast in your fourth row of breasts</b>.");
-                    player.breastRows[3].nipplesPerBreast = 4;
-                }
+                transformations.NipplesPerBreastFour.applyEffect();
             } else if (player.biggestLactation() > 1) {
                 if (rand(2) == 0) outputText("[pg]A wave of pleasure passes through your chest as your [breasts] start leaking milk from a massive jump in production.");
                 else outputText("[pg]Something shifts inside your [breasts] and they feel MUCH fuller and riper.  You know that you've started producing much more milk.");
@@ -3302,13 +3209,13 @@ public final class Mutations extends MutationsHelper {
         //apply an effect where the player really wants
         //to give their milk to other creatures
         //(capable of getting them addicted):
-        if (changes < changeLimit && !player.hasStatusEffect(StatusEffects.Feeder) && player.biggestLactation() >= 3 && rand(2) == 0 && player.biggestTitSize() >= 5 && player.cor >= 35) {
+        if (changes < changeLimit && !player.hasStatusEffect(StatusEffects.Feeder) && player.biggestLactation() >= 3 && rand(2) == 0 && player.biggestTitSize() >= 5 && player.cor >= (35-player.corruptionTolerance)) {
             outputText("[pg]You start to feel a strange desire to give your milk to other creatures.  For some reason, you know it will be very satisfying.[pg]<b>(You have gained the 'Feeder' perk!)</b>");
             player.createStatusEffect(StatusEffects.Feeder, 0, 0, 0, 0);
             player.createPerk(PerkLib.Feeder, 0, 0, 0, 0);
             changes++;
         }
-        //UNFINISHED
+        //TODO:UNFINISHED
         //If player has addictive quality and drinks pure version, removes addictive quality.
         //if the player has a vagina and it is tight, it loosens.
         if (player.hasVagina()) {
@@ -4607,13 +4514,13 @@ public final class Mutations extends MutationsHelper {
         }
         //DONE EXCEPT FOR TITS & MULTIDICKS (UNFINISHED KINDA)
         //4.Goo legs
-        if (player.skinAdj == "slimy" && player.skinDesc == "skin" && player.arms.type == Arms.GOO && player.lowerBody != LowerBody.GOO && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+        if (player.skinAdj == "slimy" && player.skinDesc == "skin" && player.arms.type == Arms.GOO && player.lowerBody != LowerBody.GOO && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.LowerBodyGoo.applyEffect();
             changes++;
         }
         //5 Goopy rear body
-        if (player.rearBody.type != RearBody.METAMORPHIC_GOO && player.lowerBody == LowerBody.GOO && (player.hasPerk(PerkLib.SlimeCore) || player.hasPerk(PerkLib.DarkSlimeCore)) && changes < changeLimit && rand(3) == 0) {
+        if (transformations.RearBodyMetamorphicGoo.isPossible() && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.RearBodyMetamorphicGoo.applyEffect();
             changes++;
@@ -4621,7 +4528,7 @@ public final class Mutations extends MutationsHelper {
         //6a. Grow vagina if none
         if (!player.hasVagina() && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]A wet warmth spreads through your slimey groin as a narrow gash appears on the surface of your groin.  <b>You have grown a vagina.</b>");
-            player.createVagina();
+            transformations.VaginaHuman().applyEffect(false);
             player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_DROOLING;
             player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING;
             player.clitLength = .4;
@@ -5524,8 +5431,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Reset vaginal virginity to correct state
         if (player.gender >= 2) {
-            player.createVagina();
-            player.vaginas[0].virgin = virgin;
+            transformations.VaginaHuman().applyEffect(false);
         }
         player.clitLength = .25;
         //Tighten butt!
@@ -7748,14 +7654,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Grow a cunt (guaranteed if no gender)
         if (player.gender == 0 || (!player.hasVagina() && changes < changeLimit && rand(3) == 0)) {
-            //(balls)
-            if (player.balls > 0) outputText("[pg]An itch starts behind your [balls], but before you can reach under to scratch it, the discomfort fades. A moment later a warm, wet feeling brushes your [sack], and curious about the sensation, <b>you lift up your balls to reveal your new vagina.</b>");
-            //(dick)
-            else if (player.hasCock()) outputText("[pg]An itch starts on your groin, just below your [cocks]. You pull the manhood aside to give you a better view, and you're able to watch as <b>your skin splits to give you a new vagina, complete with a tiny clit.</b>");
-            //(neither)
-            else outputText("[pg]An itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your [armor] to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>");
-            player.createVagina();
-            player.clitLength = .25;
+            transformations.VaginaHuman().applyEffect();
             player.addCurse("sen", 10, 1);
             changes++;
         }
@@ -8445,7 +8344,6 @@ public final class Mutations extends MutationsHelper {
         if (changes < changeLimit && player.hairType == Hair.ANEMONE && rand(2) == 0) {
             //-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
             outputText("[pg]As you down the seed, your head begins to feel heavier.  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels soft and fluffy, almost feathery; you watch as it dissolves into many thin, feathery strands.  <b>Your hair is now like that of a harpy!</b>");
-		    outputText("[pg]");
 		    transformations.HairFeather.applyEffect(false);
             changes++;
         }
@@ -8455,28 +8353,13 @@ public final class Mutations extends MutationsHelper {
         //-Grow a cunt (guaranteed if no gender)
         if (player.gender == 0 || (!player.hasVagina() && changes < changeLimit && rand(3) == 0)) {
             changes++;
-            //(balls)
-            if (player.balls > 0) outputText("[pg]An itch starts behind your [balls], but before you can reach under to scratch it, the discomfort fades. A moment later a warm, wet feeling brushes your [sack], and curious about the sensation, <b>you lift up your balls to reveal your new vagina.</b>");
-            //(dick)
-            else if (player.hasCock()) outputText("[pg]An itch starts on your groin, just below your [cocks]. You pull your manhood aside to give you a better view, and you're able to watch as <b>your skin splits to give you a new vagina, complete with a tiny clit.</b>");
-            //(neither)
-            else outputText("[pg]An itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your [armor] to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>");
-            player.createVagina();
-            player.clitLength = .25;
+            transformations.VaginaHuman().applyEffect();
             player.addCurse("sen", 10, 1);
         }
         //-Remove extra breast rows
         if (changes < changeLimit && player.breastRows.length > 1 && rand(3) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
             changes++;
-            outputText("[pg]You stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
-            if (player.breastRows.length >= 3) outputText("abdomen");
-            else outputText("chest");
-            outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
-            if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-            else outputText(player.skinTone + " " + player.skinDesc);
-            outputText(" remains. <b>You've lost a row of breasts!</b>");
-            dynStats("sen", -5);
-            player.removeBreastRow(player.breastRows.length - 1, 1);
+            transformations.BreastRowsRemoveToOne.applyEffect();
         }
                 //-Shrink tits if above DDs.
         //Cannot happen at same time as row removal
@@ -8518,29 +8401,13 @@ public final class Mutations extends MutationsHelper {
             outputText(player.modFem(85, 3 + rand(5)));
         }
         //-Skin color change – tan, olive, dark, light
-        if ((player.skin.base.color != "tan" && player.skin.base.color != "olive" && player.skin.base.color != "dark" && player.skin.base.color != "light") && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(5) == 0) {
+        if (!InCollection(player.skinTone, "tan", "olive", "dark", "light") && changes < changeLimit && rand(5) == 0) {
             changes++;
             outputText("[pg]It takes a while for you to notice, but <b>");
             if (player.hasFur()) outputText("the skin under your " + player.coatColor + " " + player.skinDesc);
             else outputText("your " + player.skinDesc);
             outputText(" has changed to become ");
-            switch (rand(4)) {
-                case 0:
-                    player.skin.base.color = "tan";
-                    break;
-
-                case 1:
-                    player.skin.base.color = "olive";
-                    break;
-
-                case 2:
-                    player.skin.base.color = "dark";
-                    break;
-
-                case 3:
-                    player.skin.base.color = "light";
-                    break;
-            }
+            player.skin.base.color = randomChoice("tan", "olive", "dark", "light");
             outputText(player.skinTone + " colored.</b>");
         }
         //-Grow hips out if narrow.
@@ -8582,13 +8449,13 @@ public final class Mutations extends MutationsHelper {
         //Harpy Appearance:
         //****************
         //-Harpy legs
-        if (player.lowerBody != LowerBody.HARPY && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && (type == 1 || player.tailType == Tail.HARPY) && rand(4) == 0) {
+        if (player.lowerBody != LowerBody.HARPY && changes < changeLimit && (type == 1 || player.tailType == Tail.HARPY) && rand(4) == 0) {
             outputText("[pg]");
             transformations.LowerBodyHarpy.applyEffect();
             changes++;
         }
         //-Feathery Tail
-        if (player.tailType != Tail.HARPY && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && (type == 1 || player.wings.type == Wings.FEATHERED_LARGE) && rand(4) == 0) {
+        if (player.tailType != Tail.HARPY && changes < changeLimit && (type == 1 || player.wings.type == Wings.FEATHERED_LARGE) && rand(4) == 0) {
             outputText("[pg]");
             transformations.TailHarpy.applyEffect();
             changes++;
@@ -8600,20 +8467,20 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Remove old wings
-        if (player.wings.type != Wings.FEATHERED_LARGE && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (player.wings.type != Wings.FEATHERED_LARGE && player.wings.type > Wings.NONE && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             changes++;
         }
         //-Feathery Arms
-        if (!InCollection(player.arms.type, Arms.GARGOYLE, Arms.HARPY) && changes < changeLimit && (type == 1 || player.hairType == 1) && rand(4) == 0) {
+        if (player.arms.type != Arms.HARPY && changes < changeLimit && (type == 1 || player.hairType == 1) && rand(4) == 0) {
             outputText("[pg]You smile impishly as you lick the last bits of the nut from your teeth, but when you go to wipe your mouth, instead of the usual texture of your [skin.type] on your lips, you feel feathers! ");
             transformations.ArmsHarpy.applyEffect();
             changes++;
         }
 
         //-Feathery Hair
-        if (transformations.HairFeather.isPossible() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && (type == 1 || player.faceType == Face.HUMAN) && rand(4) == 0) {
+        if (transformations.HairFeather.isPossible() && changes < changeLimit && (type == 1 || player.faceType == Face.HUMAN) && rand(4) == 0) {
             outputText("[pg]");
             transformations.HairFeather.applyEffect();
             changes++;
@@ -8656,9 +8523,8 @@ public final class Mutations extends MutationsHelper {
             player.removeStatusEffect(StatusEffects.BlackNipples);
         }
         //Debugcunt
-        if (changes < changeLimit && rand(3) == 0 && (player.vaginaType() == 5 || player.vaginaType() == 6) && player.hasVagina()) {
-            outputText("[pg]Something invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your vagina and find that it has turned back to its natural flesh colour.");
-            player.vaginaType(0);
+        if (changes < changeLimit && rand(3) == 0 && player.hasVagina() && InCollection(player.vaginaType(), VaginaClass.BLACK_SAND_TRAP, VaginaClass.CAVE_WYRM)) {
+            transformations.VaginaHuman().applyEffect();
             changes++;
         }
         if (changes == 0) outputText("[pg]Aside from being a tasty treat, it doesn't seem to do anything to you this time.");
@@ -9359,23 +9225,7 @@ public final class Mutations extends MutationsHelper {
 
         //(Tits b' gone)
         if (player.biggestTitSize() >= 1) {
-            outputText("A tingle starts in your " + nippleDescript(0) + "s before the tight buds grow warm, hot even.  ");
-            if (player.biggestLactation() >= 1) outputText("Somehow, you know that the milk you had been producing is gone, reabsorbed by your body.  ");
-            outputText("They pinch in towards your core, shrinking along with your flattening " + allChestDesc() + ".  You shudder and flex in response.  Your chest isn't just shrinking, it's reforming, sculping itself into a massive pair of chiseled pecs.  ");
-            if (player.breastRows.length > 1) {
-                outputText("The breasts below vanish entirely.  ");
-                while (player.breastRows.length > 1) {
-                    player.removeBreastRow(player.breastRows.length - 1, 1);
-                }
-            }
-            player.breastRows[0].breastRating = 0;
-            player.breastRows[0].nipplesPerBreast = 1;
-            player.breastRows[0].fuckable = false;
-            if (player.nippleLength > .5) player.nippleLength = .25;
-            player.breastRows[0].lactationMultiplier = 0;
-            player.removeStatusEffect(StatusEffects.Feeder);
-            player.removePerk(PerkLib.Feeder);
-            outputText("All too soon, your boobs are gone.  Whoa![pg]");
+            transformations.BreastsShrinkToNothing.applyEffect();
         }
 
         outputText("Starting at your hands, your muscles begin to contract and release, each time getting tighter, stronger, and more importantly - larger.  The oddness travels up your arms, thickens your biceps, and broadens your shoulders.  Soon, your neck and chest are as built as your arms.  You give a few experimental flexes as your abs ");
@@ -9414,9 +9264,8 @@ public final class Mutations extends MutationsHelper {
             transformations.CockHuman(0, 12, 3).applyEffect(false);
             outputText("[pg]");
             if (player.balls == 0) {
-                player.balls = 2;
+                transformations.BallsDuo.applyEffect(false);
                 player.ballSize = 3;
-                Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
             }
         }
         //(Pussy b gone)
@@ -9439,6 +9288,7 @@ public final class Mutations extends MutationsHelper {
         outputText("<b>(Bro Body - Perk Gained!)\n");
         outputText("(Bro Brains - Perk Gained!)</b>\n");//int to 20.  max int 50)
         if (player.hasPerk(PerkLib.Feeder)) {
+            player.removeStatusEffect(StatusEffects.Feeder);
             outputText("<b>(Perk Lost - Feeder!)</b>\n");
             player.removePerk(PerkLib.Feeder);
         }
@@ -9966,7 +9816,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Physical
         //Glowing Raiju Cock:
-        if (player.cockTotal() > 0 && player.cocks[0].cockType != CockTypesEnum.RAIJU && rand(4) == 0 && changes < changeLimit) {
+        if (player.raijuCocks() < player.cockTotal() && rand(4) == 0 && changes < changeLimit) {
             for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
                 //Stop loopahn when dick be found
                 if (player.cocks[temp2].cockType != CockTypesEnum.RAIJU) break;
@@ -9977,7 +9827,7 @@ public final class Mutations extends MutationsHelper {
             MutagenBonus("lib", 3);
         }
         //Vagina Turns Glowing:
-        if (player.hasVagina() && player.vaginaType() != 16 && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+        if (player.hasVagina() && player.vaginaType() != 16 && rand(4) == 0 && changes < changeLimit) {
             transformations.VaginaRaiju().applyEffect();
             dynStats("lus", 10);
             player.addCurse("sen", 2, 1);
@@ -9985,9 +9835,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Physical changes:
         //Nipples Start Glowing:
-        if (!player.hasStatusEffect(StatusEffects.GlowingNipples) && !player.hasStatusEffect(StatusEffects.BlackNipples) && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]You suddenly feel an itch in your nipples and undress to check up on them. To your surprise they begin to glow with a fluorescent blue light as latent electricity build up within them. Well, this will be interesting.  <b>You now have neon blue nipples that glow in the dark.</b>");
-            player.createStatusEffect(StatusEffects.GlowingNipples, 0, 0, 0, 0);
+        if (transformations.NipplesGlowing.isPossible() && rand(4) == 0 && changes < changeLimit) {
+            transformations.NipplesGlowing.applyEffect();
             changes++;
         }
         //Nipples Turn Back:
@@ -9998,11 +9847,11 @@ public final class Mutations extends MutationsHelper {
         }
 
         var raiju_hair:Array = ["purple", "light blue", "yellow", "white", "lilac", "green", "stormy blue"];
-        if (!InCollection(player.hairColor, raiju_hair) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (!InCollection(player.hairColor, raiju_hair) && changes < changeLimit && rand(3) == 0) {
             player.hairColor = randomChoice(raiju_hair);
             outputText("[pg]Your hair stands up on end as bolts of lightning run through each strand, changing them to a <b>[haircolor] color!</b>");
         }
-        if (player.lowerBody != LowerBody.RAIJU && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.lowerBody != LowerBody.RAIJU && changes < changeLimit && rand(3) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
                 outputText("[pg]");
                 transformations.LowerBodyRaiju(2).applyEffect();
@@ -10046,7 +9895,7 @@ public final class Mutations extends MutationsHelper {
             transformations.WingsThunderousAura.applyEffect();
             changes++;
         }
-        if (player.wings.type != Wings.THUNDEROUS_AURA && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.wings.type != Wings.THUNDEROUS_AURA && player.wings.type > Wings.NONE && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             changes++;
@@ -10068,12 +9917,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.ears.type == Ears.RAIJU && transformations.EyesRaijuColors.isPossible() && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
-            if (player.eyes.type == Eyes.HUMAN) {
-                transformations.EyesRaijuColors.applyEffect();
-                transformations.EyesRaiju.applyEffect();
-            } else {
-                transformations.EyesHuman.applyEffect();
-            }
+            transformations.EyesRaiju.applyEffect();
             changes++;
         }
 
@@ -10087,7 +9931,7 @@ public final class Mutations extends MutationsHelper {
             transformations.SkinPatternRaiju.applyEffect();
             changes++;
         }
-        if (player.hairType != 4 && player.hairLength < 26 && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (player.hairType != 4 && player.hairLength < 26 && changes < changeLimit && rand(4) == 0) {
             temp2 += 1 + rand(3);
             outputText("[pg]Your hair tingles as it grows longer, adding " + temp2 + " inches of length to your scalp.");
             player.hairLength += temp2;
@@ -10137,15 +9981,7 @@ public final class Mutations extends MutationsHelper {
         //-Remove extra breast rows
         if (changes < changeLimit && player.breastRows.length > 1 && rand(3) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
             changes++;
-            outputText("[pg]You stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
-            if (player.breastRows.length >= 3) outputText("abdomen");
-            else outputText("chest");
-            outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
-            if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-            else outputText(player.skinTone + " " + player.skinDesc);
-            outputText(" remains. <b>You've lost a row of breasts!</b>");
-            dynStats("sen", -5);
-            player.removeBreastRow(player.breastRows.length - 1, 1);
+            transformations.BreastRowsRemoveToOne.applyEffect();
         }
                 //-Shrink tits if above DDs.
         //Cannot happen at same time as row removal
@@ -10187,7 +10023,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Harpy legs
-        if (player.lowerBody != LowerBody.HARPY && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.lowerBody != LowerBody.HARPY && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.LowerBodyHarpy.applyEffect();
             changes++;
@@ -10199,13 +10035,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Remove old wings
-        if (player.wings.type != Wings.FEATHERED_LARGE && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.wings.type != Wings.FEATHERED_LARGE && player.wings.type > Wings.NONE && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             changes++;
         }
         //-Feathery Arms
-        if (!InCollection(player.arms.type, Arms.GARGOYLE, Arms.HARPY) && changes < changeLimit && rand(3) == 0) {
+        if (!InCollection(player.arms.type, Arms.HARPY) && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]You smile impishly as you lick the last bits of the seed from your teeth, but when you go to wipe your mouth, instead of the usual texture of your [skin.type] on your lips, you feel feathers! ");
             transformations.ArmsHarpy.applyEffect();
             changes++;
@@ -10225,19 +10061,15 @@ public final class Mutations extends MutationsHelper {
             transformations.FaceHuman.applyEffect();
             changes++;
         }
-        if (player.faceType == Face.HUMAN && player.ears.type != Ears.ELFIN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.faceType == Face.HUMAN && player.ears.type != Ears.ELFIN && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
 			transformations.EarsElfin.applyEffect();
             changes++;
         }
 
         if (player.ears.type == Ears.ELFIN && transformations.EyesRaijuColors.isPossible() && changes < changeLimit && rand(3) == 0) {
-                outputText("[pg]");
-            if (player.eyes.type == Eyes.HUMAN) {
-                transformations.EyesRaijuColors.applyEffect();
-            } else {
-                transformations.EyesHuman.applyEffect();
-            }
+            outputText("[pg]");
+            transformations.EyesRaijuColors.applyEffect();
             changes++;
         }
 
@@ -10251,7 +10083,7 @@ public final class Mutations extends MutationsHelper {
             transformations.SkinPatternRaiju.applyEffect();
             changes++;
         }
-        if (player.hairType != 4 && player.hairLength < 26 && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (player.hairType != 4 && player.hairLength < 26 && changes < changeLimit && rand(4) == 0) {
             temp2 += 1 + rand(3);
             outputText("[pg]Your hair tingles as it grows longer, adding " + temp2 + " inches of length to your scalp.");
             player.hairLength += temp2;
@@ -10320,7 +10152,7 @@ public final class Mutations extends MutationsHelper {
             transformations.FaceAnimalTeeth.applyEffect();
             changes++;
         }
-		if (((!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.NONE) && type == 0) || (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.LEVITATION, Wings.NONE) && type == 1)) && rand(3) == 0 && changes < changeLimit) {
+		if (((player.wings.type != Wings.NONE && type == 0) || (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.LEVITATION, Wings.NONE) && type == 1)) && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             changes++;
@@ -10337,7 +10169,7 @@ public final class Mutations extends MutationsHelper {
             transformations.LowerBodyGazer.applyEffect();
             changes++;
         }
-		if (player.lowerBody != LowerBody.HUMAN && player.lowerBody != LowerBody.GARGOYLE && ((type == 0) || (player.lowerBody != LowerBody.GAZER && type == 1)) && changes < changeLimit && rand(3) == 0) {
+		if (player.lowerBody != LowerBody.HUMAN && ((type == 0) || (player.lowerBody != LowerBody.GAZER && type == 1)) && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.LowerBodyHuman.applyEffect();
             changes++;
@@ -10347,7 +10179,7 @@ public final class Mutations extends MutationsHelper {
 			transformations.ArmsGazer.applyEffect();
             changes++;
         }
-		if (changes < changeLimit && ((!InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && type == 0) || (!InCollection(player.arms.type, Arms.HUMAN, Arms.GAZER, Arms.GARGOYLE) && type == 1)) && rand(3) == 0) {
+		if (changes < changeLimit && ((player.arms.type != Arms.HUMAN && type == 0) || (!InCollection(player.arms.type, Arms.HUMAN, Arms.GAZER, Arms.GARGOYLE) && type == 1)) && rand(3) == 0) {
             outputText("[pg]");
             transformations.ArmsHuman.applyEffect();
             changes++;
@@ -10358,12 +10190,7 @@ public final class Mutations extends MutationsHelper {
             transformations.SkinPlain.applyEffect();
         }
 		if (type == 1) {
-			if (player.rearBody.type == RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) < 10 && changes < changeLimit && rand(3) == 0) {
-				player.addStatusValue(StatusEffects.GazerEyeStalksPlayer, 1, 2);
-				outputText("[pg]You gasp in alien pleasure as two new eye mounted tentacle stalks explode from your back joining your previous set. At first you're a little disoriented from being able to see in all those directions but eventually manage to adapt to the new change, the set dripping black oily fluids. <b>You now have "+player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer)+" eye mounted tentacle stalks on your back.</b>");
-				changes++;
-			}
-			if (player.rearBody.type != RearBody.TENTACLE_EYESTALKS && changes < changeLimit && rand(3) == 0) {
+			if (player.rearBody.type != RearBody.TENTACLE_EYESTALKS || (player.rearBody.type == RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) < 10) && changes < changeLimit && rand(3) == 0) {
 				outputText("[pg]");
                 transformations.RearBodyTentacleEyestalks.applyEffect();
 				changes++;
@@ -12088,11 +11915,7 @@ public final class Mutations extends MutationsHelper {
         if (player.averageNipplesPerBreast() < 4) {
             outputText("  At first you think nothing has changed, but a second look confirms that your breasts now sport the same quartet of cow-like nipples the bovine plant-girl bears.");
             if (player.nippleLength < 4) player.nippleLength = 4;
-            var rows:int = player.bRows();
-            while (rows > 0) {
-                rows--;
-                player.breastRows[rows].nipplesPerBreast = 4;
-            }
+            transformations.NipplesPerBreastFour.applyEffect(false);
         }
         //[Player gains quad nipples, milk production and libido way up]
         MutagenBonus("lib", 5);
@@ -12543,17 +12366,17 @@ public final class Mutations extends MutationsHelper {
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         //Demon wings
-        if (((player.wings.type == Wings.DRACONIC_LARGE || player.wings.type == Wings.BEE_LARGE || player.wings.type == Wings.MANTIS_LARGE || player.wings.type == Wings.MANTICORE_LARGE) && player.cor >= 50 || player.wings.type == Wings.BAT_LIKE_TINY && player.cor >= 75) && rand(3) == 0) {
+        if ((InCollection(player.wings.type, Wings.DRACONIC_LARGE, Wings.BEE_LARGE, Wings.MANTIS_LARGE, Wings.MANTICORE_LARGE) && player.cor >= (50-player.corruptionTolerance) || player.wings.type == Wings.BAT_LIKE_TINY && player.cor >= (75-player.corruptionTolerance)) && rand(3) == 0) {
             outputText("[pg]");
             transformations.WingsDemonicLarge.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
-        if ((player.wings.type == Wings.DRACONIC_SMALL || player.wings.type == Wings.BEE_SMALL || player.wings.type == Wings.MANTIS_SMALL || player.wings.type == Wings.MANTICORE_SMALL) && player.cor >= 50 && rand(3) == 0) {
+        if ((player.wings.type == Wings.DRACONIC_SMALL || player.wings.type == Wings.BEE_SMALL || player.wings.type == Wings.MANTIS_SMALL || player.wings.type == Wings.MANTICORE_SMALL) && player.cor >= (50-player.corruptionTolerance) && rand(3) == 0) {
             outputText("[pg]");
             transformations.WingsDemonicTiny.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
-        if (player.wings.type == Wings.NONE && player.cor >= 50 && rand(3) == 0) {
+        if (player.wings.type == Wings.NONE && player.cor >= (50-player.corruptionTolerance) && rand(3) == 0) {
             outputText("[pg]");
             transformations.WingsDemonicTiny.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
@@ -13136,28 +12959,11 @@ public final class Mutations extends MutationsHelper {
             temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
             player.lengthChange(temp3, 1);
             if (player.cocks[temp].cockLength < 2) {
-                outputText("  ");
-                if (player.cockTotal() == 1 && !player.hasVagina()) {
-                    outputText("Your [cock] suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.");
-                    if (player.balls > 0) outputText("  At the same time, your [balls] fall victim to the same sensation; eagerly swallowed whole by your crotch.");
-                    outputText("  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>");
-                    player.balls = 0;
-                    player.ballSize = 1;
-                    player.createVagina();
-                    player.clitLength = .25;
-                    player.removeCock(0, 1);
-                } else {
-                    player.killCocks(1);
-                }
+                transformations.CockToVagina().applyEffect();
             }
             //if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
             if (player.cocks.length == 0 && !player.hasVagina()) {
-                player.createVagina();
-                player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
-                player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
-                player.vaginas[0].virgin = true;
-                player.clitLength = .25;
-                outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
+                transformations.VaginaHuman().applyEffect();
                 changes++;
                 dynStats("lus", 10);
             }
@@ -13178,7 +12984,6 @@ public final class Mutations extends MutationsHelper {
                     if (player.cocks.length == 0) {
                         outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
                         player.createCock(player.clitLength + 2);
-                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
                         player.clitLength = .25;
                     }
                 }
@@ -13356,7 +13161,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Legs
-        if (player.faceType == Face.HUMAN && player.lowerBody != LowerBody.GARGOYLE && (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.CLOVEN_HOOFED || player.lowerBody != LowerBody.SCYLLA)) {
+        if (player.faceType == Face.HUMAN && (player.lowerBody == LowerBody.NAGA || player.lowerBody == LowerBody.CLOVEN_HOOFED || player.lowerBody != LowerBody.SCYLLA)) {
             if (changes < changeLimit && rand(3) == 0) {
                 outputText("[pg]");
                 transformations.LowerBodyHuman.applyEffect();
@@ -13364,7 +13169,7 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
         }
-        if (((type == 0 && player.gender == 2) || (type == 1 && player.gender == 3) || (type == 2 && player.gender == 1)) && player.lowerBody != LowerBody.SCYLLA && player.lowerBody != LowerBody.GARGOYLE && (player.lowerBody != LowerBody.NAGA && player.lowerBody != LowerBody.CLOVEN_HOOFED) && changes < changeLimit && rand(3) == 0) {
+        if (((type == 0 && player.gender == 2) || (type == 1 && player.gender == 3) || (type == 2 && player.gender == 1)) && transformations.LowerBodyScylla.isPossible() && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.LowerBodyScylla.applyEffect();
             changes++;
@@ -13517,14 +13322,8 @@ public final class Mutations extends MutationsHelper {
         if (type == 0 && (player.gender == 1 || player.gender == 3) && player.cocks.length > 0 && rand(2) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
             //If the player has at least one dick, decrease the size of each slightly,
             outputText("[pg]");
-            temp = 0;
-            temp2 = player.cocks.length;
+            temp = player.longestCock();
             temp3 = 0;
-            //Find biggest cock
-            while (temp2 > 0) {
-                temp2--;
-                if (player.cocks[temp].cockLength <= player.cocks[temp2].cockLength) temp = temp2;
-            }
             //Shrink said cock
             if (player.cocks[temp].cockLength < 6 && player.cocks[temp].cockLength >= 2.9) {
                 player.cocks[temp].cockLength -= .5;
@@ -13533,29 +13332,11 @@ public final class Mutations extends MutationsHelper {
             temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
             player.lengthChange(temp3, 1);
             if (player.cocks[temp].cockLength < 2) {
-                outputText("  ");
-                if (player.cockTotal() == 1 && !player.hasVagina()) {
-                    outputText("Your [cock] suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.");
-                    if (player.balls > 0) outputText("  At the same time, your [balls] fall victim to the same sensation; eagerly swallowed whole by your crotch.");
-                    outputText("  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>");
-                    player.balls = 0;
-                    player.ballSize = 1;
-                    player.createVagina();
-                    player.clitLength = .25;
-                    player.removeCock(0, 1);
-                } else {
-                    player.killCocks(1);
-                }
+                transformations.CockToVagina().applyEffect();
             }
             //if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
-            if (player.cocks.length == 0 && !player.hasVagina()) {
-                player.createVagina();
-                player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
-                player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
-                player.vaginas[0].virgin = true;
-                player.clitLength = .25;
-                outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
-
+            if (!player.hasCock() && !player.hasVagina()) {
+                transformations.VaginaHuman().applyEffect();
                 changes++;
                 dynStats("lus", 10);
             }
@@ -13575,8 +13356,7 @@ public final class Mutations extends MutationsHelper {
                     player.removeVagina(0, 1);
                     if (player.cocks.length == 0) {
                         outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
-                        player.createCock(player.clitLength + 2);
-                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
+                        transformations.CockHuman(0, player.clitLength + 2).applyEffect(false);
                         player.clitLength = .25;
                     }
                 }
@@ -14056,25 +13836,11 @@ public final class Mutations extends MutationsHelper {
             temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
             player.lengthChange(temp3, 1);
             if (player.cocks[temp].cockLength < 2) {
-                outputText("  ");
-                if (player.cockTotal() == 1 && !player.hasVagina()) {
-                    outputText("Your [cock] suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.");
-                    if (player.balls > 0) outputText("  At the same time, your [balls] fall victim to the same sensation; eagerly swallowed whole by your crotch.");
-                    outputText("  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>");
-                    player.balls = 0;
-                    player.ballSize = 1;
-                    player.createVagina();
-                    player.clitLength = .25;
-                    player.removeCock(0, 1);
-                } else {
-                    player.killCocks(1);
-                }
+                transformations.CockToVagina().applyEffect();
             }
             //if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
             if (player.cocks.length == 0 && !player.hasVagina()) {
-                player.createVagina();
-                player.clitLength = .25;
-                outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
+                transformations.VaginaHuman().applyEffect();
                 changes++;
                 dynStats("lus", 10);
             }
@@ -15084,7 +14850,7 @@ public final class Mutations extends MutationsHelper {
         //wings
         if (rand(3) == 0 && changes < changeLimit && !InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.BAT_LIKE_LARGE) && (player.tailType == Tail.GOAT || player.tailType == Tail.DEMONIC)) {
             //grow smalls to large
-            if (player.wings.type == Wings.BAT_LIKE_TINY && player.cor >= 75) {
+            if (player.wings.type == Wings.BAT_LIKE_TINY && player.cor >= (75-player.corruptionTolerance)) {
                 outputText("[pg]");
                 transformations.WingsDemonicLarge.applyEffect();
             } else if (player.wings.type == Wings.BEE_SMALL) {
@@ -15993,25 +15759,11 @@ public final class Mutations extends MutationsHelper {
                 temp3 += player.increaseCock(temp, (rand(3) + 1) * -1);
                 player.lengthChange(temp3, 1);
                 if (player.cocks[temp].cockLength < 2) {
-                    outputText("  ");
-                    if (player.cockTotal() == 1 && !player.hasVagina()) {
-                        outputText("Your [cock] suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.");
-                        if (player.balls > 0) outputText("  At the same time, your [balls] fall victim to the same sensation; eagerly swallowed whole by your crotch.");
-                        outputText("  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>");
-                        player.balls = 0;
-                        player.ballSize = 1;
-                        player.createVagina();
-                        player.clitLength = .25;
-                        player.removeCock(0, 1);
-                    } else {
-                        player.killCocks(1);
-                    }
+                    transformations.CockToVagina().applyEffect();
                 }
                 //if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
                 if (player.cocks.length == 0 && !player.hasVagina()) {
-                    player.createVagina();
-                    player.clitLength = .25;
-                    outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
+                    transformations.VaginaHuman().applyEffect();
                     changes++;
                     dynStats("lus", 10);
                 }
@@ -16213,7 +15965,6 @@ public final class Mutations extends MutationsHelper {
                     if (player.cocks.length == 0) {
                         outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
                         player.createCock(player.clitLength + 2);
-                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
                         player.clitLength = .25;
                     }
                 }
@@ -16457,25 +16208,11 @@ public final class Mutations extends MutationsHelper {
                 temp3 += player.increaseCock(temp, (rand(4) + 1) * -1);
                 player.lengthChange(temp3, 1);
                 if (player.cocks[temp].cockLength < 2) {
-                    outputText("  ");
-                    if (player.cockTotal() == 1 && !player.hasVagina()) {
-                        outputText("Your [cock] suddenly starts tingling.  It's a familiar feeling, similar to an orgasm.  However, this one seems to start from the top down, instead of gushing up from your loins.  You spend a few seconds frozen to the odd sensation, when it suddenly feels as though your own body starts sucking on the base of your shaft.  Almost instantly, your cock sinks into your crotch with a wet slurp.  The tip gets stuck on the front of your body on the way down, but your glans soon loses all volume to turn into a shiny new clit.");
-                        if (player.balls > 0) outputText("  At the same time, your [balls] fall victim to the same sensation; eagerly swallowed whole by your crotch.");
-                        outputText("  Curious, you touch around down there, to find you don't have any exterior organs left.  All of it got swallowed into the gash you now have running between two fleshy folds, like sensitive lips.  It suddenly occurs to you; <b>you now have a vagina!</b>");
-                        player.balls = 0;
-                        player.ballSize = 1;
-                        player.createVagina();
-                        player.clitLength = .25;
-                        player.removeCock(0, 1);
-                    } else {
-                        player.killCocks(1);
-                    }
+                    transformations.CockToVagina().applyEffect();
                 }
                 //if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
                 if (player.cocks.length == 0 && !player.hasVagina()) {
-                    player.createVagina();
-                    player.clitLength = .25;
-                    outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
+                    transformations.VaginaHuman().applyEffect();
                     changes++;
                     dynStats("lus", 10);
                 }

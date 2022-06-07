@@ -1697,6 +1697,7 @@ import coc.view.MainView;
 			if (player.biggestTitSize() >= 2) player.setUndergarment(undergarments.C_BRA);
 			else player.setUndergarment(undergarments.C_SHIRT);
 			if (player.hasPerk(PerkLib.HistoryCultivator) || (player.hasPerk(PerkLib.PastLifeCultivator) && player.hasKeyItem("PerksOverJobs") < 0)) {
+				player.createKeyItem("Cultivation Manual: Duality", 0, 0, 0, 0);
 				player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
 				player.perkPoints += 1;
 			}

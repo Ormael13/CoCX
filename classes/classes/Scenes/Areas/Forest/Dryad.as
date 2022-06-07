@@ -62,14 +62,16 @@ public class Dryad extends Monster {
         this.hairColor = "dark brown";
         this.hairLength = 4;
         initStrTouSpeInte(95, 75, 70, 100);
-        initWisLibSensCor(70, 55, 35, 45);
+        initWisLibSensCor(70, 55, 35, 75);
         this.weaponName = "claws";
         this.weaponVerb = "slash";
         this.weaponAttack = 25;
         this.armorName = "forest gown";
         this.armorDef = 24;
+		this.armorMDef = 2;
         this.fatigue = 0;
         this.bonusHP = 425;
+		this.bonusLust = 110;
         this.lust = 35;
         this.lustVuln = 0.4;
         this.level = 20;
@@ -79,7 +81,8 @@ public class Dryad extends Monster {
         //armor is not added (yet?), but has nice texts in UEE. Maybe...?
         this.special1 = slash;
         this.special2 = pollen;
-
+		this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
+		this.createPerk(PerkLib.EnemyPlantType, 0, 0, 0, 0);
         checkMonster();
     }
 }

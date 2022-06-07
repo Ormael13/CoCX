@@ -697,6 +697,26 @@ public class Soulforce extends BaseContent
 		for each (var tailMem: * in TailMem.Memories) {
 			Metamorph.GeneticMemoryStorage[tailMem.id] = true;
 		}
+		for each (var cockMem: * in CockMem.Memories) {
+			Metamorph.GeneticMemoryStorage[cockMem.id] = true;
+		}
+		for each (var cockCountMem: * in CockCountMem.Memories) {
+			Metamorph.GeneticMemoryStorage[cockCountMem.id] = true;
+		}
+		for each (var vaginaMem: * in VaginaMem.Memories) {
+			Metamorph.GeneticMemoryStorage[vaginaMem.id] = true;
+		}
+		for each (var vaginaCountMem: * in VaginaCountMem.Memories) {
+			//Filter out vagina after 1 //TODO:multiVag support? Will this break if 2nd vag unlocked?
+			if (vaginaCountMem.id == "One Vagina")
+				Metamorph.GeneticMemoryStorage[vaginaCountMem.id] = true;
+		}
+		for each (var ballsMem: * in BallsMem.Memories) {
+			Metamorph.GeneticMemoryStorage[ballsMem.id] = true;
+		}
+//		for each (var breastMem: * in BreastMem.Memories) {
+//			Metamorph.GeneticMemoryStorage[breastMem.id] = true;
+//		}
 		Metamorph.GeneticMemoryStorage["Taur Lower Body"] = true;
 		doNext(curry(SoulforceCheats1, 0));
 	}
