@@ -107,7 +107,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-	  public static const GOO:int = 5;
+	  public static const GOO:int = 6;
 	  EnumValue.add(Memories, GOO, "GOO", {
 		  id: "Goo Hair",
 		  name: "Goo Hair",
