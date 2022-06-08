@@ -7372,9 +7372,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Physical changes:
         //Nipples Start Glowing:
-        if (!player.hasStatusEffect(StatusEffects.GlowingNipples) && !player.hasStatusEffect(StatusEffects.BlackNipples) && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]You suddenly feel an itch in your nipples and undress to check up on them. To your surprise they begin to glow with a fluorescent blue light. Well, this will be interesting.  <b>You now have neon blue nipples that glow in the dark.</b>");
-            player.createStatusEffect(StatusEffects.GlowingNipples, 0, 0, 0, 0);
+        if (transformations.NipplesGlowing.isPossible() && rand(4) == 0 && changes < changeLimit) {
+            transformations.NipplesGlowing.applyEffect();
             changes++;
         }
         //Nipples Turn Back:
@@ -8947,7 +8946,7 @@ public final class Mutations extends MutationsHelper {
         //(Fur/Scales fall out replaced by chitin)
         if (!player.hasCoatOfType(Skin.CHITIN) && (player.ears.type == Ears.HUMAN || player.ears.type == Ears.ELFIN) && rand(3) == 0 && changes < changeLimit) {
 			outputText("[pg]");
-            transformations.SkinChitin(Skin.COVERAGE_COMPLETE, {colors: ["pale white", "green"]}).applyEffect();
+            transformations.SkinChitin(Skin.COVERAGE_LOW, {colors: ["pale white","brown", "black", "grey"]}).applyEffect();
             changes++;
         }
         //(Gain human face)

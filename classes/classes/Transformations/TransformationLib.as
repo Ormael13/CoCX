@@ -5442,7 +5442,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	public const ArmsAvian: Transformation = new SimpleTransformation("Avian Arms",
 	  // apply effect
-	  function (doOutput: Boolean): void {
+	  function (doOutput: Boolean): void {//TODO Metamorph
 	    var desc: String = "";
 
 	    if (player.skin.hasChitin()) {
@@ -7222,7 +7222,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	public const LowerBodyCentipede: Transformation = new SimpleTransformation("Centipede Lower Body",
 	  // apply effect
-	  function (doOutput: Boolean): void {
+	  function (doOutput: Boolean): void {//TODO Metamorph
 	    var desc: String = "";
 
 	    // Doesn't support tails
@@ -7462,7 +7462,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	public const LowerBodyAvian: Transformation = new SimpleTransformation("Avian Lower Body",
 	  // apply effect
-	  function (doOutput: Boolean): void {
+	  function (doOutput: Boolean): void {//TODO Metamorph
 	    var desc: String = "";
 
 	    if (player.isGoo()) {
@@ -9984,7 +9984,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		},
 		// is present
 		function ():Boolean {
-			return player.hasBreasts();
+			return !player.hasBreasts();
 		}
 	);
 
@@ -10242,7 +10242,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		// apply effect
 		function (doOutput:Boolean):void {
 			var desc: String = "";
-			TransformationUtils.applyTFIfNotPresent(NipplesUnfuck, doOutput);
+			TransformationUtils.applyTFIfNotPresent(transformations.NipplesUnfuck, doOutput);
 
 			desc += "[pg]Your " + nippleDescript(0) + "s tingle and itch.  You pull back your [armor] and watch in shock as they split into four distinct nipples!  <b>You now have four nipples on each side of your chest!</b>";
 			if (player.breastRows.length >= 2 && player.breastRows[1].nipplesPerBreast == 1)
@@ -10257,6 +10257,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				player.breastRows[i].nipplesPerBreast = 4;
 			if (player.bRows() > 1)
 				outputText("  <b>You have a total of " + num2Text(player.totalNipples()) + " nipples.</b>");
+			Metamorph.unlockMetamorph(BreastMem.getMemory(BreastMem.QUADNIPPLE));
 		},
 		// is present
 		function ():Boolean {
@@ -10278,7 +10279,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			}
 			if (doOutput) outputText(desc);
 
-			TransformationUtils.applyTFIfNotPresent(NipplesFuckable, doOutput);
+			TransformationUtils.applyTFIfNotPresent(transformations.NipplesFuckable, doOutput);
 		},
 		// is present
 		function ():Boolean {
@@ -10290,7 +10291,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			// apply effect
 			function (doOutput:Boolean):void {
 				var desc: String = "";
-				TransformationUtils.applyTFIfNotPresent(NipplesPerBreastOne, doOutput);
+				TransformationUtils.applyTFIfNotPresent(transformations.NipplesPerBreastOne, doOutput);
 
 				var nowFuckable:Boolean;
 				//Set nipplecunts on every row.
@@ -10302,6 +10303,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				desc += "[pg]Your [allbreasts] tingle with warmth that slowly migrates to your nipples, filling them with warmth.  You pant and moan, rubbing them with your fingers.  A trickle of wetness suddenly coats your finger as it slips inside the nipple.  Shocked, you pull the finger free.  <b>You now have fuckable nipples!</b>";
 				//Talk about if anything was changed.
 				if (doOutput && nowFuckable) outputText(desc);
+				Metamorph.unlockMetamorph(BreastMem.getMemory(BreastMem.FUCKNIPPLE));
 			},
 			// is present
 			function ():Boolean {
@@ -10376,7 +10378,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 			//Cant have multicoloured nips...
 			if (player.hasStatusEffect(StatusEffects.GlowingNipples) || player.hasStatusEffect(StatusEffects.BlackNipples))
-				desc +="[pg]Something invisible brushes against your [niplpes], making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.";
+				desc +="[pg]Something invisible brushes against your [nipples], making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.";
 			if (player.hasStatusEffect(StatusEffects.GlowingNipples))
 				player.removeStatusEffect(StatusEffects.GlowingNipples);
 			if (player.hasStatusEffect(StatusEffects.BlackNipples))
@@ -10400,12 +10402,13 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			var desc: String = "";
 
 			//Cant have multicoloured nips...
-			TransformationUtils.applyTFIfNotPresent(NipplesNoColor, doOutput);
+			TransformationUtils.applyTFIfNotPresent(transformations.NipplesNoColor, doOutput);
 
 			desc += "A tickling sensation plucks at your nipples and you cringe, trying not to giggle. Looking down you are in time to see the last spot of flesh tone disappear from your [nipples]. They have turned an onyx black!";
 
 			if (doOutput) outputText(desc);
 			player.createStatusEffect(StatusEffects.BlackNipples, 0, 0, 0, 0);
+			Metamorph.unlockMetamorph(BreastMem.getMemory(BreastMem.BLACKNIPPLE));
 		},
 		// is present
 		function ():Boolean {
@@ -10423,12 +10426,13 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			var desc: String = "";
 
 			//Cant have multicoloured nips...
-			TransformationUtils.applyTFIfNotPresent(NipplesNoColor, doOutput);
+			TransformationUtils.applyTFIfNotPresent(transformations.NipplesNoColor, doOutput);
 
 			desc += "[pg]You suddenly feel an itch in your nipples and undress to check up on them. To your surprise they begin to glow with a fluorescent blue light as latent electricity build up within them. Well, this will be interesting.  <b>You now have neon blue nipples that glow in the dark.</b>";
 
 			if (doOutput) outputText(desc);
 			player.createStatusEffect(StatusEffects.GlowingNipples, 0, 0, 0, 0);
+			Metamorph.unlockMetamorph(BreastMem.getMemory(BreastMem.GLOWINGNIPPLE));
 		},
 		// is present
 		function ():Boolean {
