@@ -2747,6 +2747,7 @@ public class DesertCave extends DungeonAbstractContent
 			if(player.bRows() == 1) {
 				outputText("  Plus an extra set of these to ensure you produce as much milk as the rest of your soon-to-be sisters.");
 				player.createBreastRow();
+				transformations.UnlockBreasts();
 			}
 			//if player has four breasts
 			else if(player.bRows() == 2) outputText("  Thankfully you're already endowed with enough breasts to begin immediate production of milk.");

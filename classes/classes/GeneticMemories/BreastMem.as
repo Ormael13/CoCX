@@ -42,54 +42,120 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, NONE, "NONE", {
 			id: "Unlocked Metamorph",
 			name: "No Breasts",
-			cost: 1000,
+			cost: 500,
+			title: "No Breasts",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.BreastsShrinkToNothing;
+			}
+		});
+
+		public static const BREAST1:int = 1;
+		EnumValue.add(Memories, BREAST1, "BREAST1", {
+			id: "One Breast Row",
+			name: "One Breast Row",
+			cost: 500,
+			title: "Breast row 1",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.BreastRowsOne;
+			}
+		});
+
+		public static const BREAST2:int = 2;
+		EnumValue.add(Memories, BREAST2, "BREAST2", {
+			id: "Two Breast Rows",
+			name: "Two Breast Rows",
+			cost: 500,
+			title: "Breast row 2",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.BreastRowsTwo;
+			}
+		});
+
+		public static const BREAST3:int = 3;
+		EnumValue.add(Memories, BREAST3, "BREAST3", {
+			id: "Three Breast Rows",
+			name: "Three Breast Rows",
+			cost: 500,
+			title: "Breast row 3",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.BreastRowsThree;
+			}
+		});
+
+		public static const BREAST4:int = 4;
+		EnumValue.add(Memories, BREAST4, "BREAST4", {
+			id: "Four Breast Rows",
+			name: "Four Breast Rows",
+			cost: 500,
+			title: "Breast row 4",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.BreastRowsFour;
+			}
+		});
+
+		public static const NOLACTATE:int = 5;
+		EnumValue.add(Memories, NONE, "NONE", {
+			id: "Unlocked Metamorph",
+			name: "No Breasts",
+			cost: 800,
 			title: "None",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.BreastsNone;
+				return CoC.instance.transformations.RemoveLactation;
 			}
 		});
 
-		public static const ONE:int = 1;
-		EnumValue.add(Memories, ONE, "ONE", {
-			id: "One row breasts",
-			name: "One row breasts",
-			cost: 500,
-			title: "One",
+		public static const ONENIPPLE:int = 6;
+		EnumValue.add(Memories, ONENIPPLE, "ONENIPPLE", {
+			id: "Unlocked Metamorph",
+			name: "One Nipple",
+			cost: 300,
+			title: "One Nipple",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.BreastsOne;
+				return CoC.instance.transformations.NipplesPerBreastOne;
 			}
 		});
 
-		public static const TWO:int = 2;
-		EnumValue.add(Memories, TWO, "TWO", {
-			id: "Two row breasts",
-			name: "Two row breasts",
+		public static const QUADNIPPLE:int = 7;
+		EnumValue.add(Memories, QUADNIPPLE, "QUADNIPPLE", {
+			id: "Quad Nipples",
+			name: "Quad Nipples",
 			cost: 500,
-			title: "Two",
+			title: "Quad Nipples",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.BreastsTwo;
+				return CoC.instance.transformations.NipplesPerBreastFour;
 			}
 		});
 
-		public static const THREE:int = 3;
-		EnumValue.add(Memories, THREE, "THREE", {
-			id: "Three row breasts",
-			name: "Three row breasts",
-			cost: 500,
-			title: "Three",
+		public static const FUCKNIPPLE:int = 8;
+		EnumValue.add(Memories, FUCKNIPPLE, "FUCKNIPPLE", {
+			id: "Fuckable Nipples",
+			name: "Fuckable Nipples",
+			cost: 800,
+			title: "Fuckable",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.BreastsThree;
+				return CoC.instance.transformations.NipplesFuckable;
 			}
 		});
 
-		public static const FOUR:int = 4;
-		EnumValue.add(Memories, FOUR, "FOUR", {
-			id: "Four row breasts",
-			name: "Four row breasts",
-			cost: 500,
-			title: "Four",
+		public static const BLACKNIPPLE:int = 9;
+		EnumValue.add(Memories, BLACKNIPPLE, "BLACKNIPPLE", {
+			id: "Black Nipples",
+			name: "Black Nipples",
+			cost: 300,
+			title: "Black Nipples",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.BreastsFour;
+				return CoC.instance.transformations.NipplesBlack;
+			}
+		});
+
+		public static const GLOWINGNIPPLE:int = 10;
+		EnumValue.add(Memories, GLOWINGNIPPLE, "GLOWINGNIPPLE", {
+			id: "Glowing Nipples",
+			name: "Glowing Nipples",
+			cost: 300,
+			title: "Glow Nipples",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.NipplesGlowing;
 			}
 		});
 

@@ -5,7 +5,10 @@ import classes.CockTypesEnum;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+
 public class FoxRace extends Race {
+	public static const FoxHairColors:Array = ["golden blonde", "reddish-orange", "silver", "white", "red", "black"];
+
 	public function FoxRace(id:int) {
 		super("Fox", id);
 	}

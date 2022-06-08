@@ -1753,10 +1753,10 @@ import coc.view.MainView;
 			player.perkPoints += 1;
 			//setupMutations();
 			Metamorph.resetMetamorph();
-			if (player.hasCock()) {
-				Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK1));
-			}
+			if (player.hasCock()) transformations.UnlockCocks();
 			if (player.balls > 0) Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
+			if (player.hasVagina()) transformations.UnlockVagina();
+			if (player.hasBreasts()) transformations.UnlockBreasts();
 			clearOutput();
 			statScreenRefresh();
 			outputText("Would you like to play through the " + (1 * (1 + player.newGamePlusMod())) + "-day"+(player.newGamePlusMod() > 0 ? "s":"")+" prologue in Ingnam or just skip?");

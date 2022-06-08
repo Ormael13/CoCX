@@ -19,6 +19,7 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Consumables.EmberTF;
+import classes.Races.FoxRace;
 import classes.Races.KitsuneRace;
 import classes.PerkLib;
 import classes.Scenes.Metamorph;
@@ -1203,8 +1204,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]");
             player.growTits(growth, player.breastRows.length, true, 3);
             if (player.breastRows.length == 0) {
-                outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
-                player.createBreastRow(2);
+                transformations.CreateBreastRow(2).applyEffect();
                 outputText("\n");
             }
             if (!flags[kFLAGS.HYPER_HAPPY]) {
@@ -1504,6 +1504,7 @@ public final class Mutations extends MutationsHelper {
                             player.addCurse("sens", 3, 1);
                         }
                     }
+                    transformations.UnlockBreasts();
                 }
                 //If already has max doggie breasts!
                 else if (rand(2) == 0) {
@@ -1535,9 +1536,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Grow tits if have NO breasts/nipples AT ALL
         else if (rand(2) == 0 && changes < changeLimit) {
-            outputText("[pg]Your chest tingles uncomfortably as your center of balance shifts.  <b>You now have a pair of B-cup breasts.</b>");
-            outputText("  A sensitive nub grows on the summit of each tit, becoming a new nipple.");
-            player.createBreastRow(2);
+            transformations.CreateBreastRow(2).applyEffect();
             dynStats("lus", 6);
             player.addCurse("sens", 4, 1);
             changes++;
@@ -2073,41 +2072,30 @@ public final class Mutations extends MutationsHelper {
             if (player.breastRows[0].breastRating > 0 && player.vaginas.length > 0) {
                 //Doggies only get 3 rows of tits! FENOXO HAS SPOKEN
                 if (player.breastRows.length < 3 && rand(2) == 0 && changes < changeLimit) {
-                    player.createBreastRow();
                     //Store choice to the index of the newest row
                     choice = player.breastRows.length - 1;
                     //Breasts are too small to grow a new row, so they get bigger first
                     //But ONLY if player has a vagina (dont want dudes weirded out)
-                    if (player.vaginas.length > 0 && player.breastRows[0].breastRating <= player.breastRows.length) {
+                    if (player.vaginas.length > 0 && player.breastRows[0].breastRating <= player.breastRows.length-1) {
                         outputText("[pg]Your [breasts] feel constrained and painful against your top as they grow larger by the moment, finally stopping as they reach ");
                         player.breastRows[0].breastRating += 2;
                         outputText(player.breastCup(0) + " size.  But it doesn't stop there, you feel a tightness beginning lower on your torso...");
                         changes++;
                     }
                     //Had 1 row to start
-                    if (player.breastRows.length == 2) {
+                    if (player.breastRows.length == 1) {
                         //1 size below primary breast row!
-                        player.breastRows[choice].breastRating = player.breastRows[0].breastRating - 1;
-                        if (player.breastRows[0].breastRating - 1 == 0) outputText("[pg]A second set of breasts forms under your current pair, stopping while they are still fairly flat and masculine looking.");
-                        else outputText("[pg]A second set of breasts bulges forth under your current pair, stopping as they reach " + player.breastCup(choice) + "s.");
-                        outputText("  A sensitive nub grows on the summit of each new tit, becoming a new nipple.");
+                        transformations.CopyBreastRow().applyEffect();
                         dynStats("lus", 5);
                         player.addCurse("sen", 6, 1);
                         changes++;
                     }
                     //Many breast Rows - requires larger primary tits...
-                    if (player.breastRows.length > 2 && player.breastRows[0].breastRating > player.breastRows.length) {
+                    if (player.breastRows.length > 1 && player.breastRows[0].breastRating > player.breastRows.length+1) {
                         dynStats("lus", 5);
                         player.addCurse("sen", 6, 1);
                         //New row's size = the size of the row above -1
-                        player.breastRows[choice].breastRating = player.breastRows[choice - 1].breastRating - 1;
-                        //If second row are super small but primary row is huge it could go negative.
-                        //This corrects that problem.
-                        if (player.breastRows[choice].breastRating < 0) player.breastRows[choice].breastRating = 0;
-                        if (player.breastRows[choice - 1].breastRating < 0) player.breastRows[choice - 1].breastRating = 0;
-                        if (player.breastRows[choice].breastRating == 0) outputText("[pg]Your abdomen tingles and twitches as a new row of breasts sprouts below the others.  Your new breasts stay flat and masculine, not growing any larger.");
-                        else outputText("[pg]Your abdomen tingles and twitches as a new row of " + player.breastCup(choice) + " " + breastDescript(choice) + " sprouts below your others.");
-                        outputText("  A sensitive nub grows on the summit of each new tit, becoming a new nipple.");
+                        transformations.CreateBreastRow(player.breastRows[choice - 1].breastRating - 1).applyEffect();
                         changes++;
                     }
                     //Extra sensitive if crit
@@ -2157,9 +2145,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Grow tits if have NO breasts/nipples AT ALL
         else if (rand(2) == 0 && changes < changeLimit) {
-            outputText("[pg]Your chest tingles uncomfortably as your center of balance shifts.  <b>You now have a pair of B-cup breasts.</b>");
-            outputText("  A sensitive nub grows on the summit of each tit, becoming a new nipple.");
-            player.createBreastRow(2);
+            transformations.CreateBreastRow(2).applyEffect();
             dynStats("lus", 6);
             player.addCurse("sen", 4, 1);
             changes++;
@@ -9507,8 +9493,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]");
             player.growTits(grown, player.breastRows.length, true, 3);
             if (player.breastRows.length == 0) {
-                outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
-                player.createBreastRow(2);
+                transformations.CreateBreastRow(2).applyEffect();
                 outputText("\n");
             }
         }
@@ -9772,8 +9757,7 @@ public final class Mutations extends MutationsHelper {
             player.growTits(1 + rand(2), 1, false, 3);
             outputText("[pg]You feel a surge of energy and heat deep in your [breasts]. They wobble and tingle before suddenly bursting forward, almost throwing you off balance. They jostle a bit before settling into their new size.");
             if (player.breastRows.length == 0) {
-                outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
-                player.createBreastRow(2);
+                transformations.CreateBreastRow(2).applyEffect();
                 outputText("\n");
             }
         }
@@ -10340,8 +10324,7 @@ public final class Mutations extends MutationsHelper {
             player.growTits(1 + rand(2), 1, false, 3);
             outputText("[pg]You feel a surge of energy and heat deep in your [breasts]. They wobble and tingle before suddenly bursting forward, almost throwing you off balance. They jostle a bit before settling into their new size.");
             if (player.breastRows.length == 0) {
-                outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
-                player.createBreastRow(2);
+                transformations.CreateBreastRow(2).applyEffect();
                 outputText("\n");
             }
         }
@@ -10677,13 +10660,11 @@ public final class Mutations extends MutationsHelper {
         }
 		if (player.blockingBodyTransformations()) changeLimit = 0;
 
-        //[Change Hair Color: Golden-blonde or Reddish-orange]
-        var fox_hair:Array = ["golden blonde", "reddish-orange", "silver", "white", "red", "black"];
-        if (!InCollection(player.hairColor, fox_hair) && !InCollection(player.hairColor, KitsuneRace.KitsuneHairColors) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (!InCollection(player.hairColor, FoxRace.FoxHairColors, KitsuneRace.KitsuneHairColors) && changes < changeLimit && rand(4) == 0) {
             if (player.tailType == Tail.FOX && player.tailCount > 1)
                 if (player.tailCount < 9) player.hairColor = randomChoice(KitsuneRace.BasicKitsuneHairColors);
                 else player.hairColor = randomChoice(KitsuneRace.ElderKitsuneColors);
-            else player.hairColor = randomChoice(fox_hair);
+            else player.hairColor = randomChoice(FoxRace.FoxHairColors);
             outputText("[pg]Your scalp begins to tingle, and you gently grasp a strand of hair, pulling it out to check it.  Your hair has become [haircolor]!");
         }
         //[Adjust hips toward 10 – wide/curvy/flared]
@@ -10736,8 +10717,8 @@ public final class Mutations extends MutationsHelper {
             counter = player.cockTotal();
             while (counter > 0) {
                 counter--;
-                //Add non-dog locations to the array
-                if (player.cocks[counter].cockType != CockTypesEnum.FOX) choices[choices.length] = counter;
+                //Add non-fox locations to the array
+                if (!InCollection(player.cocks[counter].cockType, CockTypesEnum.FOX, CockTypesEnum.DOG)) choices[choices.length] = counter;
             }
             if (choices.length != 0) {
                 var select:int = choices[rand(choices.length)];
@@ -10772,17 +10753,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Sprouting more!
         if (changes < changeLimit && enhanced && player.bRows() < 4 && player.breastRows[player.bRows() - 1].breastRating > 1) {
-            outputText("[pg]Your belly rumbles unpleasantly for a second as the drink settles deeper inside you.  A second later, the unpleasant gut-gurgle passes, and you let out a tiny burp of relief.  Before you finish taking a few breaths, there's an itching below your " + allChestDesc() + ".  You idly scratch at it, but gods be damned, it hurts!  You peel off part of your [armor] to inspect the unwholesome itch, ");
-            if (player.biggestTitSize() >= 8) outputText("it's difficult to see past the wall of tits obscuring your view.");
-            else outputText("it's hard to get a good look at.");
-            outputText("  A few gentle prods draw a pleasant gasp from your lips, and you realize that you didn't have an itch - you were growing new nipples!");
-            outputText("[pg]A closer examination reveals your new nipples to be just like the ones above in size and shape");
-            if (player.breastRows[player.bRows() - 1].nipplesPerBreast > 1) outputText(", not to mention number");
-            else if (player.hasFuckableNipples()) outputText(", not to mention penetrability");
-            outputText(".  While you continue to explore your body's newest addition, a strange heat builds behind the new nubs. Soft, jiggly breastflesh begins to fill your cupped hands.  Radiant warmth spreads through you, eliciting a moan of pleasure from your lips as your new breasts catch up to the pair above.  They stop at " + player.breastCup(player.bRows() - 1) + "s.  <b>You have " + num2Text(player.bRows() + 1) + " rows of breasts!</b>");
-            player.createBreastRow(player.breastRows[player.bRows() - 2].breastRating, player.breastRows[player.bRows() - 2].nipplesPerBreast);
-            if (player.hasFuckableNipples()) player.breastRows[player.bRows() - 1].fuckable = true;
-            player.breastRows[player.bRows() - 1].lactationMultiplier = player.breastRows[player.bRows() - 2].lactationMultiplier;
+            outputText("[pg]Your belly rumbles unpleasantly for a second as the drink settles deeper inside you.  A second later, the unpleasant gut-gurgle passes, and you let out a tiny burp of relief.  Before you finish taking a few breaths, something starts happening.  ");
+            transformations.CopyBreastRow(true).applyEffect();
             dynStats("lus", 30);
             player.addCurse("sen", 2, 1);
             changes++;
@@ -10826,7 +10798,7 @@ public final class Mutations extends MutationsHelper {
         }
         //[Grow Fur]
         //FOURTH
-        if ((enhanced || player.lowerBody == LowerBody.FOX) && !player.hasFur() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if ((enhanced || player.lowerBody == LowerBody.FOX) && !player.hasFur() && changes < changeLimit && rand(4) == 0) {
             if (player.racialScore(Races.KITSUNE) >= 4)
                 if (InCollection(player.hairColor, KitsuneRace.KitsuneFurColors)) {
                     player.skin.coat.color = player.hairColor;
@@ -10843,27 +10815,27 @@ public final class Mutations extends MutationsHelper {
         }
         //[Grow Fox Legs]
         //THIRD
-        if ((enhanced || player.ears.type == Ears.FOX) && player.lowerBody != LowerBody.FOX && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(5) == 0) {
+        if ((enhanced || player.ears.type == Ears.FOX) && player.lowerBody != LowerBody.FOX && changes < changeLimit && rand(5) == 0) {
             outputText("[pg]");
             transformations.LowerBodyFox(2).applyEffect();
             changes++;
         }
         //Grow Fox Arms
-        if (changes < changeLimit && player.arms.type == Arms.HUMAN && player.arms.type != Arms.FOX && player.lowerBody != LowerBody.GARGOYLE && rand(2) == 0) {
+        if (changes < changeLimit && player.arms.type == Arms.HUMAN && player.arms.type != Arms.FOX && rand(2) == 0) {
             outputText("[pg]");
             transformations.ArmsFox.applyEffect();
             changes++;
         }
         //Grow Fox Ears]
         //SECOND
-        if ((enhanced || player.tailType == Tail.FOX) && player.ears.type != Ears.FOX && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if ((enhanced || player.tailType == Tail.FOX) && player.ears.type != Ears.FOX && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
 			transformations.EarsFox.applyEffect();
             changes++;
         }
         //[Grow Fox Tail](fairly common)
         //FIRST
-        if (player.tailType != Tail.FOX && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (player.tailType != Tail.FOX && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.TailFox(1).applyEffect();
             changes++;
@@ -10887,10 +10859,9 @@ public final class Mutations extends MutationsHelper {
             player.tone -= 4;
         }
         //Nipples Turn Back:
-        if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
-            outputText("[pg]Something invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
+        if (transformations.NipplesNoColor.isPossible() && changes < changeLimit && rand(3) == 0) {
+            transformations.NipplesNoColor.applyEffect();
             changes++;
-            player.removeStatusEffect(StatusEffects.BlackNipples);
         }
         //Debugcunt
         if (changes < changeLimit && rand(3) == 0 && (player.vaginaType() == 5 || player.vaginaType() == 6) && player.hasVagina()) {
@@ -13817,8 +13788,7 @@ public final class Mutations extends MutationsHelper {
             player.addCurse("sen", 1, 1);
         }
         if (player.breastRows.length == 0) {
-            outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
-            player.createBreastRow(2);
+            transformations.CreateBreastRow(2).applyEffect();
             outputText("\n");
         }
         //Physical
@@ -14755,8 +14725,7 @@ public final class Mutations extends MutationsHelper {
                 player.addCurse("sen", 1, 1);
             }
             if (player.breastRows.length == 0) {
-                outputText("A perfect pair of A cup breasts, complete with tiny nipples, form on your chest.");
-                player.createBreastRow(1);
+                transformations.CreateBreastRow(1).applyEffect();
                 outputText("\n");
             }
         }
@@ -15628,8 +15597,7 @@ public final class Mutations extends MutationsHelper {
                 //boobsGrew = true;
             }
             if (player.breastRows.length == 0 && changes < changeLimit) {
-                outputText("A perfect pair of A cup breasts, complete with tiny nipples, form on your chest.");
-                player.createBreastRow(1);
+                transformations.CreateBreastRow(1).applyEffect();
                 outputText("\n");
                 changes++;
             }
@@ -15747,8 +15715,7 @@ public final class Mutations extends MutationsHelper {
                 //boobsGrew = true;
             }
             if (player.breastRows.length == 0 && changes < changeLimit) {
-                outputText("A perfect pair of A cup breasts, complete with tiny nipples, form on your chest.");
-                player.createBreastRow(1);
+                transformations.CreateBreastRow(1).applyEffect();
                 outputText("\n");
                 changes++;
             }
