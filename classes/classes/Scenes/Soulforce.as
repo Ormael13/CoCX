@@ -714,9 +714,9 @@ public class Soulforce extends BaseContent
 		for each (var ballsMem: * in BallsMem.Memories) {
 			Metamorph.GeneticMemoryStorage[ballsMem.id] = true;
 		}
-//		for each (var breastMem: * in BreastMem.Memories) {
-//			Metamorph.GeneticMemoryStorage[breastMem.id] = true;
-//		}
+		for each (var breastMem: * in BreastMem.Memories) {
+			Metamorph.GeneticMemoryStorage[breastMem.id] = true;
+		}
 		Metamorph.GeneticMemoryStorage["Taur Lower Body"] = true;
 		clearOutput();
 		outputText("All metamorph options unlocked.");

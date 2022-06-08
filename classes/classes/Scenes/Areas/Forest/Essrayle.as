@@ -381,6 +381,7 @@ private function acceptEssyPrizes():void {
 		player.breastRows[0].breastRating = 4;
 		if(player.bRows() == 1) player.createBreastRow();
 		player.breastRows[1].breastRating = 4;
+		transformations.UnlockBreasts();
 	}
 	//if two breasts:
 	else if(player.bRows() == 1) {
@@ -391,6 +392,7 @@ private function acceptEssyPrizes():void {
 		}
 		if(player.bRows() == 1) player.createBreastRow();
 		player.breastRows[1].breastRating = player.breastRows[0].breastRating;
+		transformations.UnlockBreasts();
 	}
 	//if four+ breasts: 
 	else {
