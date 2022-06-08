@@ -107,7 +107,7 @@ public class SceneLib {
 
     public static var amilyScene:AmilyScene = new AmilyScene();
 
-    public static var anemoneScene:AnemoneScene = new AnemoneScene();
+    public static var kidAScene:KidAScene = new KidAScene();
 
     public static var ariaScene:AriaFollower = new AriaFollower();
 

@@ -1,4 +1,4 @@
-package classes.Scenes.NPCs
+package classes.Scenes.Places.Boat
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -35,7 +35,7 @@ public class Anemone extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.anemoneScene.defeatAnemone();
+			SceneLib.boat.anemoneScene.defeatAnemone();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -44,7 +44,7 @@ public class Anemone extends Monster
 				outputText("\n\nYour foe doesn't seem to mind at all...");
 				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				SceneLib.anemoneScene.loseToAnemone();
+				SceneLib.boat.anemoneScene.loseToAnemone();
 			}
 		}
 

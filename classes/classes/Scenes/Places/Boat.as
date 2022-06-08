@@ -6,6 +6,7 @@ package classes.Scenes.Places
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Lake.*;
+import classes.Scenes.NPCs.AnemoneScene;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.Places.Boat.*;
 import classes.Scenes.SceneLib;
@@ -15,6 +16,7 @@ public class Boat extends AbstractLakeContent
 		public var sharkGirlScene:SharkGirlScene = new SharkGirlScene();
 		public var marae:MaraeScene = new MaraeScene();
 		public var kaiju:Kaiju = new Kaiju();
+		public var anemoneScene:AnemoneScene = new AnemoneScene();
 		public function Boat() {}
 
 		public function discoverBoat():void {
@@ -80,7 +82,7 @@ public class Boat extends AbstractLakeContent
 					return;
 				case 2:
 					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 1;
-					SceneLib.anemoneScene.mortalAnemoneeeeee();
+					anemoneScene.mortalAnemoneeeeee();
 					return;
 				case 3:
 				case 4:

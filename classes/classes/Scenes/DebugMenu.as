@@ -25,7 +25,6 @@ import classes.Scenes.NPCs.JojoScene;
 import classes.Transformations.PossibleEffect;
 import classes.Transformations.Transformation;
 import classes.internals.EnumValue;
-import classes.internals.race.RacialRequirement;
 
 import coc.view.Block;
 import coc.view.Color;
@@ -1409,7 +1408,7 @@ public class DebugMenu extends BaseContent
 
 		private function eventTriggerMenu():void {
 			menu();
-			addButton(0, "Anemone", SceneLib.anemoneScene.anemoneKidBirthPtII);
+			addButton(0, "Anemone", SceneLib.kidAScene.anemoneKidBirthPtII);
 			//addButton(0, "Marae Purify", CoC.instance.highMountains.minervaScene.minervaPurification.purificationByMarae);
 			//addButton(1, "Jojo Purify", CoC.instance.highMountains.minervaScene.minervaPurification.purificationByJojoPart1);
 			//addButton(2, "Rathazul Purify", CoC.instance.highMountains.minervaScene.minervaPurification.purificationByRathazul);

@@ -39,7 +39,7 @@ public class SeaAnemone extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.anemoneScene.defeatAnemone();
+			SceneLib.boat.anemoneScene.defeatAnemone();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -48,7 +48,7 @@ public class SeaAnemone extends Monster
 				outputText("\n\nYour foe doesn't seem to mind at all...");
 				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				SceneLib.anemoneScene.loseToAnemone();
+				SceneLib.boat.anemoneScene.loseToAnemone();
 			}
 		}
 

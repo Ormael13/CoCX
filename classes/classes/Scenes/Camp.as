@@ -530,7 +530,7 @@ public class Camp extends NPCAwareContent{
 		//Anemone birth followup!
 		if (player.hasStatusEffect(StatusEffects.CampAnemoneTrigger)) {
 			player.removeStatusEffect(StatusEffects.CampAnemoneTrigger);
-			anemoneScene.anemoneKidBirthPtII();
+			kidAScene.anemoneKidBirthPtII();
 			hideMenus();
 			return;
 		}
