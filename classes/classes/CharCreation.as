@@ -2789,6 +2789,10 @@ import coc.view.MainView;
 					func: accessTailMenu
 				},
 				{
+					name: "Breasts",
+					func: accessBreastsMenu
+				},
+				{
 					name: "Vagina",
 					func: accessVaginaMenu
 				},
@@ -2903,6 +2907,10 @@ import coc.view.MainView;
 
 		private function accessTailMenu(currentPage: int = 0): void {
 			openPaginatedMetamorphMenu("Tail", accessTailMenu, currentPage, TailMem.Memories);
+		}
+
+		private function accessBreastsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Breasts", accessBreastsMenu, currentPage, BreastMem.Memories);
 		}
 
 		private function accessVaginaMenu(currentPage: int = 0): void {
