@@ -4661,7 +4661,7 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
             //FINZ
-            if (player.rearBody.type != RearBody.SHARK_FIN & changes < changeLimit && rand(3) == 0) {
+            if (player.rearBody.type != RearBody.SHARK_FIN && changes < changeLimit && rand(3) == 0) {
                 outputText("[pg]");
                 transformations.RearBodySharkFin.applyEffect();
                 changes++;
