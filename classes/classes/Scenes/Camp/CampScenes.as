@@ -453,6 +453,7 @@ private function goblinsBirthScene2():void {
 	if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 	if (player.breastRows.length == 0) {
 		player.createBreastRow(1);
+		transformations.UnlockBreasts();
 	}
 	else player.breastRows[0].breastRating += 1;
 	player.hips.type += 1;

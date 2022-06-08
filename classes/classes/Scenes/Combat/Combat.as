@@ -14171,7 +14171,7 @@ public class Combat extends BaseContent {
     public function displacerCombatFeed():void {
         clearOutput();
         fatigue(50, USEFATG_PHYSICAL);
-        outputText("You lick your lips in anticipation as you hold your victim's arms to the ground and plug your two tentacle suckers to [the monster]'s breasts. She struggles, flushing red as you flood her nipples with your lactation inducing venom and begin to force the delicious milk out of her tits.\n\n");
+        outputText("You lick your lips in anticipation as you hold your victim's arms to the ground and plug your two tentacle suckers to [monster him]'s breasts. [monster he] struggles, flushing red as you flood [monster his] nipples with your lactation inducing venom and begin to force the delicious milk out of [monster his] chest.\n\n");
         monster.createStatusEffect(StatusEffects.DisplacerPlug, 1 + rand(3), 0, 0, 0);
         addButton(0, "Next", SceneLib.combat.combatMenu, false);
     }

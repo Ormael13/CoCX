@@ -156,7 +156,7 @@ package classes.GeneticMemories {
 		  id: "Metamorphic Goo",
 		  name: "Metamorphic Goo",
 		  cost: 100,
-		  title: "Metamorphic Goo",
+		  title: "'Morphic Goo",
 		  transformation: function(): Transformation {
 			  return CoC.instance.transformations.RearBodyMetamorphicGoo;
 		  }

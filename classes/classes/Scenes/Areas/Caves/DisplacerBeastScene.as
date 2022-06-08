@@ -54,6 +54,7 @@ public class DisplacerBeastScene extends BaseContent {
         if (player.breastRows[0].breastRating < 5) {
             if (player.breastRows.length == 0) {
                 player.createBreastRow(5);
+                transformations.UnlockBreasts();
             }
             else player.growTits(2, 1, true, 3);
         }

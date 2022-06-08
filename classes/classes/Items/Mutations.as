@@ -19,8 +19,14 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Consumables.EmberTF;
+import classes.Races.FoxRace;
+import classes.Races.GoblinRace;
+import classes.Races.GremlinRace;
 import classes.Races.KitsuneRace;
 import classes.PerkLib;
+import classes.Races.NagaRace;
+import classes.Races.SharkRace;
+import classes.Races.UshiOniRace;
 import classes.Scenes.Metamorph;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
@@ -29,11 +35,6 @@ import classes.Transformations.TransformationUtils;
 public final class Mutations extends MutationsHelper {
     public function Mutations() {
     }
-
-    public static const gooSkinColors:Array = ["green", "magenta", "blue", "cerulean", "emerald", "pink"];
-    public static const magmagooSkinColors:Array = ["red", "orange", "reddish orange"];
-    public static const darkgooSkinColors:Array = ["indigo", "light purple", "purple", "purplish black", "dark purple"];
-    // import classes.ItemSlotClass;
 
     //const FOX_BAD_END_WARNING:int = 477;
     //const TIMES_MET_CHICKEN_HARPY:int = 652;
@@ -1203,8 +1204,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]");
             player.growTits(growth, player.breastRows.length, true, 3);
             if (player.breastRows.length == 0) {
-                outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
-                player.createBreastRow(2);
+                transformations.CreateBreastRow(2).applyEffect();
                 outputText("\n");
             }
             if (!flags[kFLAGS.HYPER_HAPPY]) {
@@ -1504,6 +1504,7 @@ public final class Mutations extends MutationsHelper {
                             player.addCurse("sens", 3, 1);
                         }
                     }
+                    transformations.UnlockBreasts();
                 }
                 //If already has max doggie breasts!
                 else if (rand(2) == 0) {
@@ -1535,9 +1536,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Grow tits if have NO breasts/nipples AT ALL
         else if (rand(2) == 0 && changes < changeLimit) {
-            outputText("[pg]Your chest tingles uncomfortably as your center of balance shifts.  <b>You now have a pair of B-cup breasts.</b>");
-            outputText("  A sensitive nub grows on the summit of each tit, becoming a new nipple.");
-            player.createBreastRow(2);
+            transformations.CreateBreastRow(2).applyEffect();
             dynStats("lus", 6);
             player.addCurse("sens", 4, 1);
             changes++;
@@ -1672,13 +1671,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-        if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE, Arms.WOLF) && rand(4) == 0) {
+        if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.WOLF) && rand(4) == 0) {
             outputText("[pg]");
             transformations.ArmsHuman.applyEffect();
             changes++;
         }
         //Wolf paws
-        if (rand(2) == 0 && player.lowerBody != LowerBody.WOLF && player.tailType == Tail.WOLF && player.ears.type == Ears.WOLF && changes < changeLimit) {
+        if (rand(2) == 0 && transformations.LowerBodyWolf(2).isPossible() && changes < changeLimit) {
             if (player.isBiped() && player.lowerBody == LowerBody.HUMAN) {
                 outputText("[pg]");
                 transformations.LowerBodyWolf(2).applyEffect();
@@ -1691,7 +1690,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //Wolf ears
-        if (rand(2) == 0 && player.ears.type != Ears.WOLF && player.tailType == Tail.WOLF && changes < changeLimit) {
+        if (rand(2) == 0 && transformations.EarsWolf.isPossible() && changes < changeLimit) {
             if (player.ears.type == Ears.HUMAN) {
                 outputText("[pg]");
                 transformations.EarsWolf.applyEffect();
@@ -1704,7 +1703,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //Grow tail if not wolf-tailed
-        if (rand(2) == 0 && changes < changeLimit && player.tailType != Tail.WOLF && player.tailType != Tail.GARGOYLE) {
+        if (rand(2) == 0 && changes < changeLimit && player.tailType != Tail.WOLF) {
             if (player.tailType == Tail.NONE) {
                 outputText("[pg]");
                 transformations.TailWolf.applyEffect();
@@ -2073,41 +2072,30 @@ public final class Mutations extends MutationsHelper {
             if (player.breastRows[0].breastRating > 0 && player.vaginas.length > 0) {
                 //Doggies only get 3 rows of tits! FENOXO HAS SPOKEN
                 if (player.breastRows.length < 3 && rand(2) == 0 && changes < changeLimit) {
-                    player.createBreastRow();
                     //Store choice to the index of the newest row
                     choice = player.breastRows.length - 1;
                     //Breasts are too small to grow a new row, so they get bigger first
                     //But ONLY if player has a vagina (dont want dudes weirded out)
-                    if (player.vaginas.length > 0 && player.breastRows[0].breastRating <= player.breastRows.length) {
+                    if (player.vaginas.length > 0 && player.breastRows[0].breastRating <= player.breastRows.length-1) {
                         outputText("[pg]Your [breasts] feel constrained and painful against your top as they grow larger by the moment, finally stopping as they reach ");
                         player.breastRows[0].breastRating += 2;
                         outputText(player.breastCup(0) + " size.  But it doesn't stop there, you feel a tightness beginning lower on your torso...");
                         changes++;
                     }
                     //Had 1 row to start
-                    if (player.breastRows.length == 2) {
+                    if (player.breastRows.length == 1) {
                         //1 size below primary breast row!
-                        player.breastRows[choice].breastRating = player.breastRows[0].breastRating - 1;
-                        if (player.breastRows[0].breastRating - 1 == 0) outputText("[pg]A second set of breasts forms under your current pair, stopping while they are still fairly flat and masculine looking.");
-                        else outputText("[pg]A second set of breasts bulges forth under your current pair, stopping as they reach " + player.breastCup(choice) + "s.");
-                        outputText("  A sensitive nub grows on the summit of each new tit, becoming a new nipple.");
+                        transformations.CopyBreastRow().applyEffect();
                         dynStats("lus", 5);
                         player.addCurse("sen", 6, 1);
                         changes++;
                     }
                     //Many breast Rows - requires larger primary tits...
-                    if (player.breastRows.length > 2 && player.breastRows[0].breastRating > player.breastRows.length) {
+                    if (player.breastRows.length > 1 && player.breastRows[0].breastRating > player.breastRows.length+1) {
                         dynStats("lus", 5);
                         player.addCurse("sen", 6, 1);
                         //New row's size = the size of the row above -1
-                        player.breastRows[choice].breastRating = player.breastRows[choice - 1].breastRating - 1;
-                        //If second row are super small but primary row is huge it could go negative.
-                        //This corrects that problem.
-                        if (player.breastRows[choice].breastRating < 0) player.breastRows[choice].breastRating = 0;
-                        if (player.breastRows[choice - 1].breastRating < 0) player.breastRows[choice - 1].breastRating = 0;
-                        if (player.breastRows[choice].breastRating == 0) outputText("[pg]Your abdomen tingles and twitches as a new row of breasts sprouts below the others.  Your new breasts stay flat and masculine, not growing any larger.");
-                        else outputText("[pg]Your abdomen tingles and twitches as a new row of " + player.breastCup(choice) + " " + breastDescript(choice) + " sprouts below your others.");
-                        outputText("  A sensitive nub grows on the summit of each new tit, becoming a new nipple.");
+                        transformations.CreateBreastRow(player.breastRows[choice - 1].breastRating - 1).applyEffect();
                         changes++;
                     }
                     //Extra sensitive if crit
@@ -2157,9 +2145,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Grow tits if have NO breasts/nipples AT ALL
         else if (rand(2) == 0 && changes < changeLimit) {
-            outputText("[pg]Your chest tingles uncomfortably as your center of balance shifts.  <b>You now have a pair of B-cup breasts.</b>");
-            outputText("  A sensitive nub grows on the summit of each tit, becoming a new nipple.");
-            player.createBreastRow(2);
+            transformations.CreateBreastRow(2).applyEffect();
             dynStats("lus", 6);
             player.addCurse("sen", 4, 1);
             changes++;
@@ -2259,7 +2245,7 @@ public final class Mutations extends MutationsHelper {
         //Master Furry Appearance Order:
         //Tail -> Ears -> Paws -> Arms -> Fur -> Face
         //Dog-face requires fur & paws  Should be last morph to take place
-        if (rand(4) == 0 && changes < changeLimit && player.faceType != Face.DOG && player.hasFullCoatOfType(Skin.FUR) && player.lowerBody == LowerBody.DOG) {
+        if (rand(4) == 0 && changes < changeLimit && transformations.FaceDog.isPossible()) {
             outputText("[pg]");
             transformations.FaceDog.applyEffect();
             changes++;
@@ -2272,14 +2258,14 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (changes < changeLimit && type == 3 && player.hairColor != "midnight black" && player.lowerBody != LowerBody.GARGOYLE) {
+        if (changes < changeLimit && type == 3 && player.hairColor != "midnight black") {
             outputText("[pg]");
             transformations.HairChangeColor(["midnight black"]).applyEffect();
             outputText("[pg]");
             transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "midnight black", adj: "thick"}).applyEffect();
         }
         //Become furred - requires paws and tail
-        if (rand(4) == 0 && changes < changeLimit && player.lowerBody == LowerBody.DOG && player.tailType == Tail.DOG && !player.hasFur() && !player.isGargoyle()) {
+        if (rand(4) == 0 && changes < changeLimit && player.lowerBody == LowerBody.DOG && player.tailType == Tail.DOG && !player.hasFur()) {
             outputText("[pg]");
             if (rand(3) > 0) {
                 transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "black", "dark gray", "gray", "light gray", "silver", "white"]}).applyEffect();
@@ -2289,18 +2275,18 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Change to paws - requires tail and ears
-        if (rand(3) == 0 && player.lowerBody != LowerBody.DOG && player.tailType == Tail.DOG && player.ears.type == Ears.DOG && changes < changeLimit) {
+        if (rand(3) == 0 && transformations.LowerBodyDog(2).isPossible() && changes < changeLimit) {
             outputText("[pg]");
             transformations.LowerBodyDog(2).applyEffect();
             changes++;
         }
         //Change to dog-ears!  Requires dog-tail
-        if (rand(2) == 0 && player.ears.type != Ears.DOG && player.tailType == Tail.DOG && changes < changeLimit) {
+        if (rand(2) == 0 && transformations.EarsDog.isPossible() && changes < changeLimit) {
             transformations.EarsDog.applyEffect();
             changes++;
         }
         //Grow tail if not dog-tailed
-        if (rand(3) == 0 && changes < changeLimit && player.tailType != Tail.GARGOYLE && ((player.tailType != Tail.DOG && type != 6) || (player.tailType != Tail.WOLF && type == 6))) {
+        if (rand(3) == 0 && changes < changeLimit && ((player.tailType != Tail.DOG && type != 6) || (player.tailType != Tail.WOLF && type == 6))) {
             outputText("[pg]");
             if (type != 6) {
                 transformations.TailDog.applyEffect();
@@ -2353,7 +2339,7 @@ public final class Mutations extends MutationsHelper {
 				changes++;
             }
             //Red skin!
-            if (rand(30) == 0 && changes < changeLimit && player.skin.base.color != "red" && !player.isGargoyle()) {
+            if (rand(30) == 0 && changes < changeLimit && player.skin.base.color != "red") {
                 if (player.hasFur()) outputText("[pg]Underneath your fur, your skin ");
                 else outputText("[pg]Your [skin.type] ");
                 if (rand(2) == 0) player.skin.base.color = "red";
@@ -2369,7 +2355,7 @@ public final class Mutations extends MutationsHelper {
             dynStats("lus", 3, "cor", 1);
         }
         //Red skin!
-        if (rand(30) == 0 && changes < changeLimit && player.skin.base.color != "red" && !player.isGargoyle()) {
+        if (rand(30) == 0 && changes < changeLimit && player.skin.base.color != "red") {
             if (player.hasFur()) outputText("[pg]Underneath your fur, your skin ");
             else outputText("[pg]Your [skin.type] ");
             if (rand(2) == 0) player.skin.base.color = "red";
@@ -3129,7 +3115,7 @@ public final class Mutations extends MutationsHelper {
         var boobsGrew:Boolean = false;
         //Increase player's breast size, if they are HH or bigger
         //do not increase size, but do the other actions:
-        if (((tainted && player.biggestTitSize() <= 11) || (!tainted && player.biggestTitSize() <= 5)) && changes < changeLimit && (rand(3) == 0 || enhanced)) {
+        if (((tainted? player.biggestTitSize() <= 11 : player.biggestTitSize() <= 5)) && changes < changeLimit && (rand(3) == 0 || enhanced)) {
             if (rand(2) == 0) outputText("[pg]Your [breasts] tingle for a moment before becoming larger.");
             else outputText("[pg]You feel a little weight added to your chest as your [breasts] seem to inflate and settle in a larger size.");
             player.growTits(1 + rand(3), 1, false, 3);
@@ -3146,7 +3132,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //If breasts are D or bigger and are not lactating, they also start lactating:
-        if (player.biggestTitSize() >= 4 && player.breastRows[0].lactationMultiplier < 1 && changes < changeLimit && (rand(3) == 0 || boobsGrew || enhanced)) {
+        if (player.biggestTitSize() >= 4 && !player.isLactating() && changes < changeLimit && (rand(3) == 0 || boobsGrew || enhanced)) {
             outputText("[pg]You gasp as your [breasts] feel like they are filling up with something.  Within moments, a drop of milk leaks from your [breasts]; <b> you are now lactating</b>.");
             player.breastRows[0].lactationMultiplier = 1.25;
             changes++;
@@ -3158,12 +3144,12 @@ public final class Mutations extends MutationsHelper {
             if (transformations.NipplesPerBreastFour.isPossible()) {
                 changes++;
                 transformations.NipplesPerBreastFour.applyEffect();
-            } else if (player.biggestLactation() > 1) {
+            } else if (player.isLactating()) {
                 if (rand(2) == 0) outputText("[pg]A wave of pleasure passes through your chest as your [breasts] start leaking milk from a massive jump in production.");
                 else outputText("[pg]Something shifts inside your [breasts] and they feel MUCH fuller and riper.  You know that you've started producing much more milk.");
                 player.boostLactation(2.5);
-                if ((player.nippleLength < 1.5 && tainted) || (!tainted && player.nippleLength < 1)) {
-                    outputText("  Your " + nippleDescript(0) + "s swell up, growing larger to accommodate your increased milk flow.");
+                if (tainted? player.nippleLength < 1.5 : player.nippleLength < 1) {
+                    outputText("  Your [nipples] swell up, growing larger to accommodate your increased milk flow.");
                     player.nippleLength += .25;
                     player.addCurse("sen", 1, 1);
                 }
@@ -3233,7 +3219,7 @@ public final class Mutations extends MutationsHelper {
         }
         //General Appearance (Tail -> Ears -> Paws(fur stripper) -> Face -> Horns
         //Give the player a bovine tail, same as the minotaur
-        if (tainted && player.tailType != Tail.COW && player.tailType != Tail.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (tainted && player.tailType != Tail.COW && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.TailCow.applyEffect();
             changes++;
@@ -3269,7 +3255,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Give the player bovine horns, or increase their size, same as the minotaur
         //New horns or expanding mino horns
-        if (tainted && changes < changeLimit && rand(3) == 0 && player.tailType != Tail.GARGOYLE && player.lowerBody == LowerBody.HOOFED) {
+        if (tainted && changes < changeLimit && rand(3) == 0 && player.lowerBody == LowerBody.HOOFED) {
             //Get bigger or change horns
             if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.NONE) {
                 //Get bigger if player has horns
@@ -3300,7 +3286,7 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
         }
-        if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
+        if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN) && rand(4) == 0) {
             outputText("[pg]");
             transformations.ArmsHuman.applyEffect();
             changes++;
@@ -3313,14 +3299,14 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Cow hair oh my!
-        if (changes < changeLimit && enhanced && (player.hairColor != "snow white") && player.lowerBody != LowerBody.GARGOYLE) {
+        if (changes < changeLimit && enhanced && (player.hairColor != "snow white")) {
             outputText("[pg]");
             transformations.HairChangeColor(["snow white"]).applyEffect();
             transformations.HairCow.applyEffect();
             outputText("[pg]");
         }
         //enhanced get shitty fur
-        if (changes < changeLimit && enhanced && (player.skinDesc != "fur" || player.coatColor != "black and white spotted") && player.horns.type != Horns.COW_MINOTAUR && player.lowerBody != LowerBody.GARGOYLE) {
+        if (changes < changeLimit && enhanced && (player.skinDesc != "fur" || player.coatColor != "black and white spotted") && player.horns.type != Horns.COW_MINOTAUR) {
             outputText("[pg]");
             transformations.HairChangeColor(["White"]).applyEffect();
             transformations.HairCow.applyEffect();
@@ -3328,7 +3314,7 @@ public final class Mutations extends MutationsHelper {
             transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "black", color2: "white", pattern: Skin.PATTERN_SPOTTED}).applyEffect();
         }
         //if enhanced to probova give a shitty cow face
-        else if (changes < changeLimit && enhanced && player.faceType != Face.COW_MINOTAUR && player.tailType != Tail.GARGOYLE) {
+        else if (changes < changeLimit && enhanced && player.faceType != Face.COW_MINOTAUR) {
             outputText("[pg]");
             transformations.FaceCowMinotaur.applyEffect();
             changes++;
@@ -3358,14 +3344,12 @@ public final class Mutations extends MutationsHelper {
         }
         //Nipples Turn Back:
         if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
-            outputText("[pg]Something invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
+            transformations.NipplesNoColor.applyEffect();
             changes++;
-            player.removeStatusEffect(StatusEffects.BlackNipples);
         }
         //Debugcunt
         if (changes < changeLimit && rand(3) == 0 && (player.vaginaType() == 5 || player.vaginaType() == 6) && player.hasVagina()) {
-            outputText("[pg]Something invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your vagina and find that it has turned back to its natural flesh colour.");
-            player.vaginaType(0);
+            transformations.VaginaHuman().applyEffect();
             changes++;
         }
         if (changes < changeLimit && rand(2) == 0) outputText(player.modFem(79, 3));
@@ -4020,9 +4004,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Nipples Turn Back:
         if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
-            outputText("[pg]Something invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
+            transformations.NipplesNoColor.applyEffect();
             changes++;
-            player.removeStatusEffect(StatusEffects.BlackNipples);
         }
         //SEXYTIEMS
         //Multidick killa!
@@ -4048,8 +4031,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Debugcunt
         if (changes < changeLimit && rand(3) == 0 && (player.vaginaType() == 5 || player.vaginaType() == 6) && player.hasVagina()) {
-            outputText("[pg]Something invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your vagina and find that it has turned back to its natural flesh colour.");
-            player.vaginaType(0);
+            transformations.VaginaHuman().applyEffect();
             changes++;
         }
         if (changes < changeLimit && rand(4) == 0 && ((player.ass.analWetness > 0 && !player.hasPerk(PerkLib.MaraesGiftButtslut)) || player.ass.analWetness > 1)) {
@@ -4087,13 +4069,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-        if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
+        if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN) && rand(4) == 0) {
             outputText("[pg]");
             transformations.ArmsHuman.applyEffect();
             changes++;
         }
         //Removes wings!
-        if ((player.wings.type == Wings.BEE_SMALL || player.wings.type == Wings.BEE_LARGE || player.wings.type >= Wings.HARPY) && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(4) == 0) {
+        if ((player.wings.type == Wings.BEE_SMALL || player.wings.type == Wings.BEE_LARGE || player.wings.type >= Wings.HARPY) && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             changes++;
@@ -4134,35 +4116,25 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Dye those hairs
-        var gremlin_hair_color:Array = ["emerald", "dark green", "green", "aqua", "light green"];
-        if (player.hairType == Hair.CRAZY && player.hairColor != "emerald" && player.hairColor != "dark green" && player.hairColor != "green" && player.hairColor != "aqua" && player.hairColor != "light green" && changes < changeLimit && rand(3) == 0) {
-            player.hairColor = randomChoice(gremlin_hair_color);
+        if (player.hairType == Hair.CRAZY && !InCollection(player.hairColor, GremlinRace.GremlinHairColors) && changes < changeLimit && rand(3) == 0) {
+            player.hairColor = randomChoice(GremlinRace.GremlinHairColors);
             outputText("[pg]Gosh just while you were getting used to that new fucked up haircut of yours,  they began changing again. The strands glow for a moment before turning all " + player.hairColor + "! <b>Guess you won’t need to dye your hair color for it to match your weird haircut, you definitely look like what could pass for some crazy midget right now.</b>");
             changes++;
         }
         //-Remove extra breast rows
         if (changes < changeLimit && player.bRows() > 1 && rand(3) == 0) {
             changes++;
-            outputText("[pg]You stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
-            if (player.bRows() >= 3) outputText("abdomen");
-            else outputText("chest");
-            outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
-            if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-            else outputText(player.skinTone + " " + player.skinDesc);
-            outputText(" remains. <b>You've lost a row of breasts!</b>");
-            dynStats("sen", -5);
-            player.removeBreastRow(player.breastRows.length - 1, 1);
+            transformations.BreastRowsRemoveToOne.applyEffect();
         }
         //Skin/fur
-        if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.faceType == Face.HUMAN) {
+        if (!player.hasPlainSkinOnly() && changes < changeLimit && rand(4) == 0 && player.faceType == Face.HUMAN) {
             outputText("[pg]");
             transformations.SkinPlain.applyEffect();
             changes++;
         }
         //skinTone
-        var gremlin_skin_color:Array = ["light", "tan", "dark"];
-        if (player.skin.base.color != "light" && player.skin.base.color != "tan" && player.skin.base.color != "dark" && changes < changeLimit && rand(2) == 0) {
-            player.skin.base.color = randomChoice(gremlin_skin_color);
+        if (!InCollection(player.skin.base.color, GremlinRace.GremlinSkinColors) && changes < changeLimit && rand(2) == 0) {
+            player.skin.base.color = randomChoice(GremlinRace.GremlinSkinColors);
             outputText("[pg]Whoah, that was weird.  You just hallucinated that your ");
             if (player.hasFur()) outputText("skin");
             else outputText(player.skinDesc);
@@ -4182,7 +4154,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Ears!
-        if (player.ears.type != Ears.GREMLIN && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type != Ears.GREMLIN && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.EarsGremlin.applyEffect();
             changes++;
@@ -4213,6 +4185,7 @@ public final class Mutations extends MutationsHelper {
         changeLimit += player.additionalTransformationChances;
         clearOutput();
         outputText("You drink the ale, finding it to have a remarkably smooth yet potent taste.  You lick your lips and sneeze, feeling slightly tipsy.");
+        //STAT CHANGES
 		DrunkenPowerEmpowerIfPossible();
         dynStats("lus", 15);
         //Stronger
@@ -4245,9 +4218,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Nipples Turn Back:
         if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
-            outputText("[pg]Something invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
+            transformations.NipplesNoColor.applyEffect();
             changes++;
-            player.removeStatusEffect(StatusEffects.BlackNipples);
         }
         //SEXYTIEMS
         //Multidick killa!
@@ -4273,8 +4245,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Debugcunt
         if (changes < changeLimit && rand(3) == 0 && (player.vaginaType() == 5 || player.vaginaType() == 6) && player.hasVagina()) {
-            outputText("[pg]Something invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your vagina and find that it has turned back to its natural flesh colour.");
-            player.vaginaType(0);
+            transformations.VaginaHuman().applyEffect();
             changes++;
         }
         if (changes < changeLimit && rand(4) == 0 && ((player.ass.analWetness > 0 && !player.hasPerk(PerkLib.MaraesGiftButtslut)) || player.ass.analWetness > 1)) {
@@ -4312,13 +4283,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-        if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
+        if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN) && rand(4) == 0) {
             outputText("[pg]");
             transformations.ArmsHuman.applyEffect();
             changes++;
         }
         //Removes wings!
-        if ((player.wings.type == Wings.BEE_SMALL || player.wings.type == Wings.BEE_LARGE || player.wings.type >= Wings.HARPY) && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(4) == 0) {
+        if ((player.wings.type == Wings.BEE_SMALL || player.wings.type == Wings.BEE_LARGE || player.wings.type >= Wings.HARPY) && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             changes++;
@@ -4339,9 +4310,8 @@ public final class Mutations extends MutationsHelper {
             transformations.EyesGoblinColors.applyEffect();
             changes++;
         }
-        var goblin_hair_color:Array = ["red", "purple", "green", "blue", "pink", "orange"];
-        if (player.hairColor != "red" && player.hairColor != "purple" && player.hairColor != "green" && player.hairColor != "blue" && player.hairColor != "pink" && player.hairColor != "orange" && changes < changeLimit && rand(3) == 0) {
-            player.hairColor = randomChoice(goblin_hair_color);
+        if (!InCollection(player.hairColor, GoblinRace.GoblinHairColors) && changes < changeLimit && rand(3) == 0) {
+            player.hairColor = randomChoice(GoblinRace.GoblinHairColors);
             outputText("[pg]Your scalp tingles and when you check yourself in nearby steam it seems your <b>[hair] become " + player.hairColor + ".</b>");
             changes++;
         }
@@ -4354,25 +4324,18 @@ public final class Mutations extends MutationsHelper {
         //-Remove extra breast rows
         if (changes < changeLimit && player.bRows() > 1 && rand(3) == 0) {
             changes++;
-            outputText("[pg]You stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
-            if (player.bRows() >= 3) outputText("abdomen");
-            else outputText("chest");
-            outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
-            if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-            else outputText(player.skinTone + " " + player.skinDesc);
-            outputText(" remains. <b>You've lost a row of breasts!</b>");
-            dynStats("sen", -5);
-            player.removeBreastRow(player.breastRows.length - 1, 1);
+            transformations.BreastRowsRemoveToOne.applyEffect();
         }
         //Skin/fur
-        if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.faceType == Face.HUMAN) {
+        if (!player.hasPlainSkinOnly() && changes < changeLimit && rand(4) == 0 && player.faceType == Face.HUMAN) {
             outputText("[pg]");
             transformations.SkinPlain.applyEffect();
             changes++;
         }
         //skinTone
-        if (player.skin.base.color != "green" && player.skin.base.color != "grayish-blue" && player.skin.base.color != "dark green" && player.skin.base.color != "pale yellow" && player.skin.base.color != "emerald" && !player.isGargoyle() && changes < changeLimit && rand(2) == 0) {
-            if (rand(10) != 0) {
+        if (!InCollection(player.skin.base.color, GoblinRace.GoblinSkinColors) && changes < changeLimit && rand(2) == 0) {
+            
+            if (rand(10) != 0) {    //TODO Create a WeightedChoice util
                 if (rand(4) != 0) player.skin.base.color = "dark green";
                 else {
                     if (rand(5) < 2) player.skin.base.color = "emerald";
@@ -4401,7 +4364,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Ears!
-        if (player.ears.type != Ears.ELFIN && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type != Ears.ELFIN && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
 			transformations.EarsElfin.applyEffect();
             changes++;
@@ -4498,7 +4461,7 @@ public final class Mutations extends MutationsHelper {
         }
         //DONE EXCEPT FOR TITS & MULTIDICKS TODO(UNFINISHED KINDA)
         //4.Goo legs
-        if (player.skinAdj == "slimy" && player.skinDesc == "skin" && player.arms.type == Arms.GOO && player.lowerBody != LowerBody.GOO && rand(3) == 0 && changes < changeLimit) {
+        if (transformations.LowerBodyGoo.isPossible() && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.LowerBodyGoo.applyEffect();
             changes++;
@@ -4628,13 +4591,13 @@ public final class Mutations extends MutationsHelper {
             }
             //Transformations:
             //Mouth TF
-            if (player.faceType != Face.SHARK_TEETH && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+            if (player.faceType != Face.SHARK_TEETH && rand(3) == 0 && changes < changeLimit) {
                 outputText("[pg]");
                 transformations.FaceSharkTeeth.applyEffect();
                 changes++;
             }
             //Ear tf
-            if (player.faceType == Face.SHARK_TEETH && player.ears.type != Ears.SHARK && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+            if (player.faceType == Face.SHARK_TEETH && player.ears.type != Ears.SHARK && changes < changeLimit && rand(3) == 0) {
                 outputText("[pg]");
                 transformations.EarsShark.applyEffect();
                 changes++;
@@ -4646,7 +4609,7 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
             //Tail TF
-            if (player.tailType != Tail.SHARK && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+            if (player.tailType != Tail.SHARK && rand(3) == 0 && changes < changeLimit) {
                 outputText("[pg]");
                 transformations.TailShark.applyEffect();
                 changes++;
@@ -4658,20 +4621,18 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
             //Hair
-            if (player.hairColor != "silver" && player.tailType != Tail.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+            if (player.hairColor != "silver" && rand(4) == 0 && changes < changeLimit) {
                 changes++;
                 outputText("[pg]You feel a tingling in your scalp and reach up to your head to investigate. To your surprise, your hair color has changed into a silvery color, just like that of a shark girl!");
                 player.hairColorOnly = "silver";
             }
             //Skin
-            if ((!InCollection(player.coatColor, "rough gray", "dark gray", "grayish-blue", "iridescent gray", "ashen grayish-blue", "gray", "orange") || !player.hasScales()) && rand(7) == 0 && changes < changeLimit) {
+            if ((!InCollection(player.coatColor, SharkRace.SharkScaleColors, "orange") || !player.hasScales()) && rand(7) == 0 && changes < changeLimit) {
                 outputText("[pg]");
                 if (type == 0) {
                     var color:String;
-                    if (!InCollection(player.coatColor, "rough gray", "dark gray", "grayish-blue", "iridescent gray", "ashen grayish-blue", "gray")) {
-                        if (rand(10) == 0) color = randomChoice("rough gray");
-                        else                    color = randomChoice("dark gray", "grayish-blue", "iridescent gray", "ashen grayish-blue", "gray");
-                    }
+                    if (!InCollection(player.coatColor, SharkRace.SharkScaleColors))
+                        color = (rand(9) == 0)? "rough gray" : randomChoice(SharkRace.SharkScaleColors);
 
                     transformations.SkinAquaScales(Skin.COVERAGE_HIGH, {color:color}).applyEffect();
                     outputText("[pg]A tingling sensation runs across your skin in waves, growing stronger as <b>your skin's tone slowly shifts, darkening to become " + color + " in color.</b>");
@@ -4688,19 +4649,19 @@ public final class Mutations extends MutationsHelper {
                 transformations.LowerBodyShark(2).applyEffect();
                 changes++;
             }
-            if (!InCollection(player.lowerBody, LowerBody.HUMAN, LowerBody.SHARK, LowerBody.GARGOYLE) && changes < changeLimit && rand(3) == 0) {
+            if (!InCollection(player.lowerBody, LowerBody.HUMAN, LowerBody.SHARK) && changes < changeLimit && rand(3) == 0) {
                 outputText("[pg]");
                 transformations.LowerBodyHuman.applyEffect();
                 changes++;
             }
             //Arms
-            if (player.lowerBody == LowerBody.SHARK && !InCollection(player.arms.type, Arms.SHARK, Arms.GARGOYLE) && changes < changeLimit && rand(3) == 0) {
+            if (player.lowerBody == LowerBody.SHARK && !InCollection(player.arms.type, Arms.SHARK) && changes < changeLimit && rand(3) == 0) {
                 outputText("[pg]");
                 transformations.ArmsShark.applyEffect();
                 changes++;
             }
             //FINZ
-            if (player.rearBody.type != RearBody.SHARK_FIN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+            if (player.rearBody.type != RearBody.SHARK_FIN && changes < changeLimit && rand(3) == 0) {
                 outputText("[pg]");
                 transformations.RearBodySharkFin.applyEffect();
                 changes++;
@@ -4735,7 +4696,6 @@ public final class Mutations extends MutationsHelper {
      9a) Item Description
      "A vial the size of your fist made of dark brown glass. It contains what appears to be an oily, yellowish liquid. The odor is abominable."
      */
-
     public function snakeOil(type:Number, player:Player):void {
         player.slimeFeed();
         clearOutput();
@@ -4757,7 +4717,7 @@ public final class Mutations extends MutationsHelper {
             //(if outside combat)
             if (!CoC.instance.inCombat) outputText("  Minutes pass as you start wishing you had water with you, to get rid of the aftertaste.");
         }
-
+        //STAT CHANGES
         //+ speed to 70!
         if (rand(2) == 0 && MutagenBonus("spe", 2)) {
             outputText("[pg]Your muscles quiver, feeling ready to strike as fast as a snake!");
@@ -4781,7 +4741,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //Removes wings
-        if (!InCollection(player.wings.type, Wings.NONE, Wings.GARGOYLE_LIKE_LARGE) && rand(3) == 0 && changes < changeLimit) {
+        if (!InCollection(player.wings.type, Wings.NONE) && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             changes++;
@@ -4866,7 +4826,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //9c) I The tongue (sensitivity bonus, stored as a perk?)
-        if (player.tongue.type != Tongue.SNAKE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
+        if (player.tongue.type != Tongue.SNAKE && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TongueSnake.applyEffect();
             player.addCurse("sen", 5, 1);
@@ -4932,7 +4892,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         // Scale color
-        if (type == 1 && rand(4) == 0 && !InCollection(player.coatColor, ["black", "midnight", "midnight black"]) && changes < changeLimit) {
+        if (type == 1 && rand(4) == 0 && !InCollection(player.coatColor, NagaRace.SnakeScaleColors) && changes < changeLimit) {
             outputText("[pg]");
             color = randomChoice("black", "midnight", "midnight black");
             transformations.SkinScales(Skin.COVERAGE_LOW, {color: color}).applyEffect();
@@ -4941,7 +4901,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         // Hair color
-        if (type == 1 && rand(4) == 0 && !InCollection(player.hairColor, ["black", "midnight", "midnight black"]) && changes < changeLimit) {
+        if (type == 1 && rand(4) == 0 && !InCollection(player.hairColor, NagaRace.SnakeScaleColors) && changes < changeLimit) {
             outputText("[pg]");
             color = randomChoice("black", "midnight", "midnight black");
             outputText("[pg]Your hair suddenly tingles as "+color+" strands begins to cover your entire skalp and before long all of them are of same dark color.");
@@ -4950,7 +4910,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //Skin color
-        if (type == 1 && player.skin.base.color != "light purple" && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+        if (type == 1 && player.skin.base.color != "light purple" && changes < changeLimit && rand(3) == 0) {
             changes++;
             outputText("[pg]It takes a while for you to notice, but <b>");
             if (player.hasFur()) outputText("the skin under your [skin coat.color] " + player.skinDesc);
@@ -4993,7 +4953,8 @@ public final class Mutations extends MutationsHelper {
             if (type == 0) outputText("aftertaste.");
             if (type == 1 || type == 2) outputText("strange mixed taste.");
         }
-        if (type == 3) outputText("You apply the hydra scale against your chest, unsure of what will happen. It suddenly adheres and begins to merge into your body, vanishing beneath your skin.");
+        else outputText("You apply the hydra scale against your chest, unsure of what will happen. It suddenly adheres and begins to merge into your body, vanishing beneath your skin.");
+        //STAT CHANGES
         //Speed up to 80!
         if (rand(2) == 0 && MutagenBonus("spe", 3)) {
             outputText("[pg]Your muscles quiver, feeling ready to strike as fast as a snake!");
@@ -5086,14 +5047,14 @@ public final class Mutations extends MutationsHelper {
         }
 
         //Snake tounge
-        if (player.tongue.type != Tongue.SNAKE && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
+        if (player.tongue.type != Tongue.SNAKE && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TongueSnake.applyEffect();
             player.addCurse("sen", 5, 1);
             changes++;
         }
         //Dragon tongue
-        if (type == 1 && player.tongue.type != Tongue.DRACONIC && player.wings.type != Wings.GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
+        if (type == 1 && player.tongue.type != Tongue.DRACONIC && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TongueDraconic.applyEffect();
             changes++;
@@ -5281,12 +5242,12 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Remove old wings
-        if (type == 2 && player.wings.type != Wings.FEATHERED_LARGE && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (type == 2 && player.wings.type != Wings.FEATHERED_LARGE && player.wings.type > Wings.NONE && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             changes++;
         }
-        if (type == 3 && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (type == 3 && player.wings.type > Wings.NONE && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             changes++;
@@ -5298,13 +5259,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Feathery Arms
-        if (type == 2 && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.HARPY) && player.ears.type == Ears.SNAKE && changes < changeLimit && rand(4) == 0) {
+        if (type == 2 && !InCollection(player.arms.type, Arms.HARPY) && player.ears.type == Ears.SNAKE && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]When you go to wipe your mouth form remains of the oil, instead of the usual texture of your [skin.type] on your lips, you feel feathers! ");
             transformations.ArmsHarpy.applyEffect();
             changes++;
         }
         //Hydra Arms
-        if (type == 3 && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.HYDRA) && player.ears.type == Ears.SNAKE && changes < changeLimit && rand(4) == 0) {
+        if (type == 3 && !InCollection(player.arms.type, Arms.HYDRA) && player.ears.type == Ears.SNAKE && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.ArmsHydra.applyEffect();
             changes++;
@@ -5333,7 +5294,7 @@ public final class Mutations extends MutationsHelper {
             transformations.SkinDragonScales().applyEffect();
             changes++;
         }
-        if (type == 1 && player.wings.type == Wings.DRACONIC_LARGE && !player.hasDragonScales() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (type == 1 && player.wings.type == Wings.DRACONIC_LARGE && !player.hasDragonScales() && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.SkinDragonScales(Skin.COVERAGE_LOW).applyEffect();
             changes++;
@@ -5464,7 +5425,7 @@ public final class Mutations extends MutationsHelper {
         // MAJOR TRANSFORMATIONS
         //-----------------------
         //1st priority: Change lower body to bipedal.
-        if (player.lowerBody != LowerBody.HUMAN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.lowerBody != LowerBody.HUMAN && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.LowerBodyHuman.applyEffect();
             changes++;
@@ -5476,7 +5437,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Skin color change – tan, olive, dark, light
-        if ((player.skin.base.color != "tan" && player.skin.base.color != "olive" && player.skin.base.color != "dark" && player.skin.base.color != "light") && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+        if ((player.skin.base.color != "tan" && player.skin.base.color != "olive" && player.skin.base.color != "dark" && player.skin.base.color != "light") && changes < changeLimit && rand(3) == 0) {
             changes++;
             outputText("[pg]It takes a while for you to notice, but <b>");
             if (player.hasFur()) outputText("the skin under your [skin coat.color] " + player.skinDesc);
@@ -5515,7 +5476,7 @@ public final class Mutations extends MutationsHelper {
         // MINOR TRANSFORMATIONS
         //-----------------------
         //-Human arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-        if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(3) == 0) {
+        if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN) && rand(3) == 0) {
             outputText("[pg]");
             transformations.ArmsHuman.applyEffect();
             changes++;
@@ -5552,9 +5513,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Black Nipples Turn Back:
         if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
-            outputText("[pg]Something invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
+            transformations.NipplesNoColor.applyEffect();
             changes++;
-            player.removeStatusEffect(StatusEffects.BlackNipples);
         }
         //Glowing Nipples Turn Back:
         if (player.hasStatusEffect(StatusEffects.GlowingNipples) && changes < changeLimit && rand(3) == 0) {
@@ -5587,19 +5547,19 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Removes horns
-        if (changes < changeLimit && player.horns.count > 0 && player.horns.type != Horns.GARGOYLE && rand(3) == 0) {
+        if (changes < changeLimit && player.horns.count > 0 && rand(3) == 0) {
             outputText("[pg]");
             transformations.HornsNone.applyEffect();
             changes++;
         }
         //Removes wings
-        if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.NONE) && rand(3) == 0 && changes < changeLimit) {
+        if (!InCollection(player.wings.type, Wings.NONE) && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             changes++;
         }
         //Removes tail
-        if (player.tailType > Tail.NONE && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+        if (player.tailType > Tail.NONE && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TailNone.applyEffect();
             changes++;
@@ -5698,8 +5658,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Change vagina back to normal
         if (changes < changeLimit && rand(3) == 0 && (player.vaginaType() == 5 || player.vaginaType() == 6) && player.hasVagina()) {
-            outputText("[pg]Something invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your vagina and find that it has turned back to its natural flesh colour.");
-            player.vaginaType(0);
+            transformations.VaginaHuman().applyEffect();
             changes++;
         } else if (changes < changeLimit && rand(3) == 0 && (player.vaginaType() != 5 || player.vaginaType() != 6) && player.vaginaType() != VaginaClass.HUMAN && player.hasVagina()) {
             outputText("[pg]Something invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your vagina and find that it has turned back to its old human qualities.");
@@ -5931,7 +5890,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Body type changes
         //DA EARZ
-        if (player.ears.type != Ears.CAT && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+        if (player.ears.type != Ears.CAT && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
 			transformations.EarsCat.applyEffect();
             changes++;
@@ -6207,7 +6166,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Body type changes
         //DA EARZ
-        if (player.ears.type != Ears.CAT && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+        if (player.ears.type != Ears.CAT && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
 			transformations.EarsCat.applyEffect();
             changes++;
@@ -6485,7 +6444,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Body type changes
         //DA EARZ
-        if (player.ears.type != Ears.CAT && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+        if (player.ears.type != Ears.CAT && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
 			transformations.EarsCat.applyEffect();
             changes++;
@@ -6777,7 +6736,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Body type changes
         //DA EARZ
-        if (player.ears.type != Ears.DISPLACER && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+        if (player.ears.type != Ears.DISPLACER && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
 			transformations.EarsDisplacer.applyEffect();
             changes++;
@@ -6837,7 +6796,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //-Skin color change – dark gray
-        if (player.skin.base.color != "dark gray" && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+        if (player.skin.base.color != "dark gray" && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]It takes a while for you to notice, but ");
             if (player.hasFur()) outputText("the skin under your <b>[skin coat.color]</b>" + player.skinDesc);
             else outputText("your " + player.skinDesc);
@@ -7054,7 +7013,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //-Hair stops growing!
-        if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0 && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0 && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]Your scalp tingles oddly.  In a panic, you reach up to your [hair], but thankfully it appears unchanged.[pg]");
             outputText("(<b>Your hair has stopped growing.</b>)");
             changes++;
@@ -7069,7 +7028,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Big physical changes:
         //-Legs – Draconic, clawed feet
-        if (player.lowerBody != LowerBody.LIZARD && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(5) == 0) {
+        if (player.lowerBody != LowerBody.LIZARD && changes < changeLimit && rand(5) == 0) {
             outputText("[pg]");
             transformations.LowerBodyLizard(2).applyEffect();
             changes++;
@@ -7087,7 +7046,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Lizard eyes
-        if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.eyes.type == Eyes.HUMAN) {
+        if (changes < changeLimit && rand(3) == 0 && player.eyes.type == Eyes.HUMAN) {
             transformations.EyesLizard.applyEffect();
             changes++;
         }
@@ -7262,7 +7221,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Physical changes:
         //Tail - unlocks enhanced with fire tail whip attack
-        if (player.tailType != Tail.SALAMANDER && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.tailType != Tail.SALAMANDER && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.TailSalamander.applyEffect();
             changes++;
@@ -7274,13 +7233,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Arms
-        if (player.arms.type != Arms.SALAMANDER && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.SALAMANDER && changes < changeLimit && rand(3) == 0) {
+        if (player.arms.type != Arms.SALAMANDER && player.lowerBody == LowerBody.SALAMANDER && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.ArmsSalamander.applyEffect();
             changes++;
         }
         //Lizard eyes
-        if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.eyes.type == Eyes.HUMAN) {
+        if (changes < changeLimit && rand(3) == 0 && player.eyes.type == Eyes.HUMAN) {
             transformations.EyesLizard.applyEffect();
             changes++;
         }
@@ -7313,7 +7272,7 @@ public final class Mutations extends MutationsHelper {
             transformations.SkinScales(Skin.COVERAGE_LOW, {color: "red"}).applyEffect();
             changes++;
         }
-        if (changes < changeLimit && !player.hasPartialCoat(Skin.SCALES) && !player.isGargoyle() && rand(4) == 0) {
+        if (changes < changeLimit && !player.hasPartialCoat(Skin.SCALES) && rand(4) == 0) {
             outputText("[pg]");
             transformations.SkinPlain.applyEffect();
             changes++;
@@ -7405,7 +7364,7 @@ public final class Mutations extends MutationsHelper {
             MutagenBonus("lib", 3);
         }
         //Vagina Turns Glowing:
-        if (player.hasVagina() && player.vaginaType() != VaginaClass.CAVE_WYRM && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+        if (player.hasVagina() && player.vaginaType() != VaginaClass.CAVE_WYRM && rand(4) == 0 && changes < changeLimit) {
             transformations.VaginaCaveWyrm().applyEffect();
             dynStats("lus", 10);
             player.addCurse("sen", 2, 1);
@@ -7413,19 +7372,18 @@ public final class Mutations extends MutationsHelper {
         }
         //Physical changes:
         //Nipples Start Glowing:
-        if (!player.hasStatusEffect(StatusEffects.GlowingNipples) && !player.hasStatusEffect(StatusEffects.BlackNipples) && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+        if (!player.hasStatusEffect(StatusEffects.GlowingNipples) && !player.hasStatusEffect(StatusEffects.BlackNipples) && rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]You suddenly feel an itch in your nipples and undress to check up on them. To your surprise they begin to glow with a fluorescent blue light. Well, this will be interesting.  <b>You now have neon blue nipples that glow in the dark.</b>");
             player.createStatusEffect(StatusEffects.GlowingNipples, 0, 0, 0, 0);
             changes++;
         }
         //Nipples Turn Back:
         if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
-            outputText("[pg]Something invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
+            transformations.NipplesNoColor.applyEffect();
             changes++;
-            player.removeStatusEffect(StatusEffects.BlackNipples);
         }
         //Tail
-        if (player.tailType != Tail.CAVE_WYRM && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.tailType != Tail.CAVE_WYRM && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.TailCaveWyrm.applyEffect();
             changes++;
@@ -7437,7 +7395,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Arms
-        if (player.arms.type != Arms.CAVE_WYRM && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.CAVE_WYRM && changes < changeLimit && rand(3) == 0) {
+        if (player.arms.type != Arms.CAVE_WYRM && player.lowerBody == LowerBody.CAVE_WYRM && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.ArmsCaveWyrm.applyEffect();
             changes++;
@@ -7488,13 +7446,13 @@ public final class Mutations extends MutationsHelper {
             transformations.SkinScales(Skin.COVERAGE_LOW, {color: "midnight black"}).applyEffect();
             changes++;
         }
-        if (!player.hasPartialCoat(Skin.SCALES) && !player.isGargoyle() && rand(4) == 0) {
+        if (!player.hasPartialCoat(Skin.SCALES) && rand(4) == 0) {
             outputText("[pg]");
             transformations.SkinPlain.applyEffect();
             changes++;
         }
         //Skin color change
-        if (player.skin.base.color != "grayish-blue" && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (player.skin.base.color != "grayish-blue" && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]You skin begin to itch as it darkens taking on <b>a grayish-blue color.</b>");
             player.skin.base.color = "grayish-blue";
             changes++;
@@ -7683,7 +7641,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Physical changes:
         //Tail - unlocks enhanced with fire tail whip attack
-        if (player.tailType != Tail.SALAMANDER && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.tailType != Tail.SALAMANDER && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.TailSalamander.applyEffect();
             changes++;
@@ -7720,14 +7678,14 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Remove old wings
-        if (player.wings.type != Wings.FEATHERED_PHOENIX && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (player.wings.type != Wings.FEATHERED_PHOENIX && player.wings.type > Wings.NONE && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             changes++;
         }
 
         //-Feathery Hair
-        if (transformations.HairFeather.isPossible() && changes < changeLimit && player.faceType == Face.HUMAN && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0) {
+        if (transformations.HairFeather.isPossible() && changes < changeLimit && player.faceType == Face.HUMAN && rand(4) == 0) {
             outputText("[pg]A tingling starts in your scalp, getting worse and worse until you're itching like mad, the feathery strands of your hair tickling your fingertips while you scratch like a dog itching a flea. When you pull back your hand, you're treated to the sight of downy red fluff trailing from your fingernails. A realization dawns on you - you have feathers for hair, just like a phoenix!");
             player.hairColor = "platinum crimson";
             outputText("[pg]");
@@ -7735,7 +7693,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Lizard eyes
-        if (changes < changeLimit && rand(4) == 0 && player.lowerBody != LowerBody.GARGOYLE && transformations.EyesHuman.isPresent()) {
+        if (changes < changeLimit && rand(4) == 0 && transformations.EyesHuman.isPresent()) {
             transformations.EyesLizard.applyEffect();
             changes++;
         }
@@ -8075,7 +8033,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //Bunny feet! - requirez earz
-        if (player.lowerBody != LowerBody.BUNNY && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0 && player.ears.type == Ears.BUNNY) {
+        if (player.lowerBody != LowerBody.BUNNY && changes < changeLimit && rand(3) == 0 && player.ears.type == Ears.BUNNY) {
             outputText("[pg]");
             transformations.LowerBodyBunny.applyEffect();
             changes++;
@@ -8100,7 +8058,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //DAH BUNBUNTAILZ
-        if (player.tailType != Tail.RABBIT && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+        if (player.tailType != Tail.RABBIT && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TailRabbit.applyEffect();
             changes++;
@@ -8129,7 +8087,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Human arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-        if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(3) == 0) {
+        if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN) && rand(3) == 0) {
             outputText("[pg]");
             transformations.ArmsHuman.applyEffect();
             changes++;
@@ -8481,9 +8439,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Nipples Turn Back:
         if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
-            outputText("[pg]Something invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
+            transformations.NipplesNoColor.applyEffect();
             changes++;
-            player.removeStatusEffect(StatusEffects.BlackNipples);
         }
         //Debugcunt
         if (changes < changeLimit && rand(3) == 0 && player.hasVagina() && InCollection(player.vaginaType(), VaginaClass.BLACK_SAND_TRAP, VaginaClass.CAVE_WYRM)) {
@@ -8760,7 +8717,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-        if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
+        if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN) && rand(4) == 0) {
             outputText("[pg]");
             transformations.ArmsHuman.applyEffect();
             changes++;
@@ -8820,30 +8777,30 @@ public final class Mutations extends MutationsHelper {
         //type 1 ignores normal restrictions
         //****************
         //-Face (Req: Fur + Feet)
-        if (player.faceType != Face.KANGAROO && ((player.hasFur() && player.lowerBody == LowerBody.KANGAROO) || type == 1) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (player.faceType != Face.KANGAROO && ((player.hasFur() && player.lowerBody == LowerBody.KANGAROO) || type == 1) && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.FaceKangaroo.applyEffect();
             changes++;
         }
         //-Fur (Req: Footsies)
-        if (!player.hasFur() && (player.lowerBody == LowerBody.KANGAROO || type == 1) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (!player.hasFur() && (player.lowerBody == LowerBody.KANGAROO || type == 1) && changes < changeLimit && rand(4) == 0) {
             changes++;
             transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "brown"}).applyEffect();
         }
         //-Roo footsies (Req: Tail)
-        if (player.lowerBody != LowerBody.KANGAROO && player.lowerBody != LowerBody.GARGOYLE && (type == 1 || player.tailType == Tail.KANGAROO) && changes < changeLimit && rand(4) == 0) {
+        if (player.lowerBody != LowerBody.KANGAROO && (type == 1 || player.tailType == Tail.KANGAROO) && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.LowerBodyKangaroo.applyEffect();
             changes++;
         }
         //-Roo tail (Req: Ears)
-        if (player.tailType != Tail.KANGAROO && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0 && (type != 1 || player.ears.type == Ears.KANGAROO)) {
+        if (player.tailType != Tail.KANGAROO && changes < changeLimit && rand(4) == 0 && (type != 1 || player.ears.type == Ears.KANGAROO)) {
             outputText("[pg]");
             transformations.TailKangaroo.applyEffect();
             changes++;
         }
         //-Roo ears
-        if (player.ears.type != Ears.KANGAROO && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (player.ears.type != Ears.KANGAROO && changes < changeLimit && rand(4) == 0) {
             transformations.EarsKangaroo.applyEffect();
             changes++;
         }
@@ -8988,7 +8945,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //(Fur/Scales fall out replaced by chitin)
-        if (!player.hasCoatOfType(Skin.CHITIN) && (player.ears.type == Ears.HUMAN || player.ears.type == Ears.ELFIN) && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+        if (!player.hasCoatOfType(Skin.CHITIN) && (player.ears.type == Ears.HUMAN || player.ears.type == Ears.ELFIN) && rand(3) == 0 && changes < changeLimit) {
 			outputText("[pg]");
             transformations.SkinChitin(Skin.COVERAGE_COMPLETE, {colors: ["pale white", "green"]}).applyEffect();
             changes++;
@@ -9012,7 +8969,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Nipples Turn Black:
-        if (!player.hasStatusEffect(StatusEffects.BlackNipples) && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+        if (!player.hasStatusEffect(StatusEffects.BlackNipples) && rand(3) == 0 && changes < changeLimit) {
 			outputText("[pg]");
 			transformations.NipplesBlack.applyEffect();
             changes++;
@@ -9059,7 +9016,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //(Normal Biped Legs -> Carapace-Clad Legs)
-        if (((type == 1 && player.lowerBody != LowerBody.DRIDER && player.lowerBody != LowerBody.CHITINOUS_SPIDER_LEGS && player.lowerBody != LowerBody.ATLACH_NACHA) || (type != 1 && player.lowerBody != LowerBody.CHITINOUS_SPIDER_LEGS)) && (!player.isGoo() && !player.isNaga() && !player.isTaur() && !player.isScylla()) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (((type == 1 && player.lowerBody != LowerBody.DRIDER && player.lowerBody != LowerBody.CHITINOUS_SPIDER_LEGS && player.lowerBody != LowerBody.ATLACH_NACHA) || (type != 1 && player.lowerBody != LowerBody.CHITINOUS_SPIDER_LEGS)) && (!player.isGoo() && !player.isNaga() && !player.isTaur() && !player.isScylla()) && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.LowerBodySpider.applyEffect();
             changes++;
@@ -9321,7 +9278,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Skin
-        if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && (player.skin.base.color != "sable" && player.skin.base.color != "white")) {
+        if (rand(3) == 0 && changes < changeLimit && (player.skin.base.color != "sable" && player.skin.base.color != "white")) {
             outputText("[pg]A warmth begins in your belly, slowly spreading through your torso and appendages. The heat builds, becoming uncomfortable, then painful, then nearly unbearable. Your eyes unfocus from the pain, and by the time the burning sensation fades, you can already tell something's changed. ");
             var tone:String;
             var adj:String;
@@ -9354,7 +9311,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Arms
-        if (!InCollection(player.arms.type, Arms.GARGOYLE, Arms.GHOST) && player.lowerBody == LowerBody.GHOST && changes < changeLimit && rand(3) == 0) {
+        if (!InCollection(player.arms.type, Arms.GHOST) && player.lowerBody == LowerBody.GHOST && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.ArmsGhost.applyEffect();
             changes++;
@@ -9366,13 +9323,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Removes wings
-        if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.ETHEREAL, Wings.NONE) && rand(3) == 0 && changes < changeLimit) {
+        if (!InCollection(player.wings.type, Wings.ETHEREAL, Wings.NONE) && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             changes++;
         }
         //Removes tail
-        if (player.tailType > Tail.NONE && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+        if (player.tailType > Tail.NONE && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TailNone.applyEffect();
             changes++;
@@ -9420,7 +9377,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Transparent skin
-        if (player.hasPlainSkinOnly() && !player.hasGhostSkin() && !player.isGargoyle() && rand(3) == 0 && changes < changeLimit && type == 1) {
+        if (player.hasPlainSkinOnly() && !player.hasGhostSkin() && rand(3) == 0 && changes < changeLimit && type == 1) {
             outputText("[pg]You feel lightheaded all of a sudden. You bring your hands up to clutch your head only to find the color slowly fading from your skin or rather it’s losing its opacity altogether. You examine your body and see that you’ve become almost entirely transparent, adding to your ethereal appearance. <b>You now have transparent skin.</b>");
             player.skin.setBaseOnly({type: Skin.TRANSPARENT, adj: "transparent"});
             changes++;
@@ -9474,7 +9431,7 @@ public final class Mutations extends MutationsHelper {
             if (player.sens < 40) player.addCurse("sen", 2, 1);
             changes++;
         }
-        if ((player.hairLength > 26 || player.hairLength < 16) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if ((player.hairLength > 26 || player.hairLength < 16) && changes < changeLimit && rand(3) == 0) {
             if (player.hairLength < 16) {
                 player.hairLength += 1 + rand(4);
                 outputText("[pg]You experience a tingling sensation in your scalp.  Feeling a bit off-balance, you discover your hair has lengthened, becoming " + num2Text(Math.round(player.hairLength)) + " inches long.");
@@ -9507,13 +9464,12 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]");
             player.growTits(grown, player.breastRows.length, true, 3);
             if (player.breastRows.length == 0) {
-                outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
-                player.createBreastRow(2);
+                transformations.CreateBreastRow(2).applyEffect();
                 outputText("\n");
             }
         }
         //Physical
-        if (player.faceType != Face.ELF && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.faceType != Face.ELF && changes < changeLimit && rand(3) == 0) {
             if (player.faceType == Face.HUMAN) {
                 outputText("[pg]");
                 transformations.FaceElf.applyEffect();
@@ -9523,7 +9479,7 @@ public final class Mutations extends MutationsHelper {
             }
             changes++;
         }
-        if (player.lowerBody != LowerBody.ELF && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.lowerBody != LowerBody.ELF && changes < changeLimit && rand(3) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
                 outputText("[pg]");
                 transformations.LowerBodyElf.applyEffect();
@@ -9582,7 +9538,7 @@ public final class Mutations extends MutationsHelper {
             transformations.HairSilky.applyEffect();
             changes++;
         }
-        if (player.lowerBody == LowerBody.ELF && player.arms.type == Arms.ELF && player.hasPlainSkinOnly() && !player.isGargoyle() && player.skinAdj != "flawless" && changes < changeLimit && rand(3) == 0) {
+        if (player.lowerBody == LowerBody.ELF && player.arms.type == Arms.ELF && player.hasPlainSkinOnly() && player.skinAdj != "flawless" && changes < changeLimit && rand(3) == 0) {
             var color:String;
             color = randomChoice("dark", "light", "tan");
             player.skin.base.color = color;
@@ -9595,14 +9551,14 @@ public final class Mutations extends MutationsHelper {
             player.skinAdj = "flawless";
             changes++;
         }
-        if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+        if (!player.hasPlainSkinOnly() && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.SkinPlain.applyEffect();
             changes++;
         }
         //Hair Color
         var elf_hair:Array = ["silver", "golden blonde", "leaf green", "black"];
-        if (!InCollection(player.hairColor, elf_hair) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (!InCollection(player.hairColor, elf_hair) && changes < changeLimit && rand(3) == 0) {
             player.hairColorOnly = randomChoice(elf_hair);
             outputText("[pg]Your scalp begins to tingle, and you gently grasp a strand of hair, pulling it out to check it.  Your hair has become [haircolor]!");
         }
@@ -9669,7 +9625,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Physical
-        if (player.lowerBody != LowerBody.ORC && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.lowerBody != LowerBody.ORC && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             if (player.lowerBody == LowerBody.HUMAN) {
                 transformations.LowerBodyOrc.applyEffect();
@@ -9711,14 +9667,14 @@ public final class Mutations extends MutationsHelper {
             }
             changes++;
         }
-        if (player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+        if (player.hasPlainSkinOnly() && changes < changeLimit && rand(3) == 0) {
             var color:String;
             color = randomChoice("green", "gray", "brown", "red", "sandy tan");
             player.skin.base.color = color;
             outputText("[pg]Whoah, that was weird.  You just hallucinated that your " + player.skinDesc + " turned " + player.skinTone + ".  No way!  It's staying, it really changed color!");
             changes++;
         }
-        if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+        if (!player.hasPlainSkinOnly() && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.SkinPlain.applyEffect();
             changes++;
@@ -9772,8 +9728,7 @@ public final class Mutations extends MutationsHelper {
             player.growTits(1 + rand(2), 1, false, 3);
             outputText("[pg]You feel a surge of energy and heat deep in your [breasts]. They wobble and tingle before suddenly bursting forward, almost throwing you off balance. They jostle a bit before settling into their new size.");
             if (player.breastRows.length == 0) {
-                outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
-                player.createBreastRow(2);
+                transformations.CreateBreastRow(2).applyEffect();
                 outputText("\n");
             }
         }
@@ -9804,9 +9759,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Nipples Turn Back:
         if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
-            outputText("[pg]Something invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
+            transformations.NipplesNoColor.applyEffect();
             changes++;
-            player.removeStatusEffect(StatusEffects.BlackNipples);
         }
 
         var raiju_hair:Array = ["purple", "light blue", "yellow", "white", "lilac", "green", "stormy blue"];
@@ -9968,7 +9922,7 @@ public final class Mutations extends MutationsHelper {
             player.breastRows[0].breastRating = 2;
         }//Physical
         var raiju_hair:Array = ["purple", "light blue", "yellow", "white", "turquoise", "emerald"];
-        if (!InCollection(player.hairColor, raiju_hair) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (!InCollection(player.hairColor, raiju_hair) && changes < changeLimit && rand(3) == 0) {
             player.hairColor = randomChoice(raiju_hair);
             outputText("[pg]Your hair stands up on end as bolts of lightning run through each strand, changing them to a <b>[haircolor] color!</b>");
         }
@@ -10115,12 +10069,12 @@ public final class Mutations extends MutationsHelper {
             transformations.FaceAnimalTeeth.applyEffect();
             changes++;
         }
-		if (((player.wings.type != Wings.NONE && type == 0) || (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.LEVITATION, Wings.NONE) && type == 1)) && rand(3) == 0 && changes < changeLimit) {
+		if (((player.wings.type != Wings.NONE && type == 0) || (!InCollection(player.wings.type, Wings.LEVITATION, Wings.NONE) && type == 1)) && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             changes++;
         }
-        if (player.tailType > Tail.NONE && player.tailType != Tail.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+        if (player.tailType > Tail.NONE && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TailNone.applyEffect();
             changes++;
@@ -10142,7 +10096,7 @@ public final class Mutations extends MutationsHelper {
 			transformations.ArmsGazer.applyEffect();
             changes++;
         }
-		if (changes < changeLimit && ((player.arms.type != Arms.HUMAN && type == 0) || (!InCollection(player.arms.type, Arms.HUMAN, Arms.GAZER, Arms.GARGOYLE) && type == 1)) && rand(3) == 0) {
+		if (changes < changeLimit && ((player.arms.type != Arms.HUMAN && type == 0) || (!InCollection(player.arms.type, Arms.HUMAN, Arms.GAZER) && type == 1)) && rand(3) == 0) {
             outputText("[pg]");
             transformations.ArmsHuman.applyEffect();
             changes++;
@@ -10164,14 +10118,14 @@ public final class Mutations extends MutationsHelper {
 				changes++;
 			}
 			var tone:Array = ["snow white", "red", "pale white"];
-			if (!InCollection(player.skin.base.color, tone) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit) {
+			if (!InCollection(player.skin.base.color, tone) && changes < changeLimit) {
 				outputText("[pg]You feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  Holding an arm up to your face, you discover that <b>you now have ");
                 player.skin.base.color = randomChoice(tone);
 				outputText("[skin]!</b>");
 				changes++;
 			}
 			var Gazer_Colour:Array = ["black", "midnight", "midnight black"];
-			if (!InCollection(player.hairColor, Gazer_Colour) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+			if (!InCollection(player.hairColor, Gazer_Colour) && changes < changeLimit && rand(3) == 0) {
 				player.hairColor = randomChoice(Gazer_Colour);
 				outputText("[pg]Your hair tingles as the strands turns <b>[haircolor]!</b>");
 			}
@@ -10219,11 +10173,11 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //Physical
-        if (!InCollection(player.hairColor, Ratatoskr_Colour) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (!InCollection(player.hairColor, Ratatoskr_Colour) && changes < changeLimit && rand(3) == 0) {
             player.hairColor = randomChoice(Ratatoskr_Colour);
             outputText("[pg]Your hair tingles as the strands turns <b>[haircolor]!</b>");
         }
-        if (!player.hasFur() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (!player.hasFur() && changes < changeLimit && rand(3) == 0) {
             var color1:String = randomChoice(Ratatoskr_Colour);
             outputText("[pg]");
             transformations.SkinFur(Skin.COVERAGE_LOW, {color: color1}).applyEffect();
@@ -10241,7 +10195,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]Wait is it just you or did the ground get closer? No way, you did become smaller!");
             player.tallness -= (1 + rand(5));
         }
-        if (player.lowerBody != LowerBody.SQUIRREL && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.lowerBody != LowerBody.SQUIRREL && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             if (player.lowerBody == LowerBody.HUMAN) {
                 transformations.LowerBodySquirrel.applyEffect();
@@ -10340,18 +10294,17 @@ public final class Mutations extends MutationsHelper {
             player.growTits(1 + rand(2), 1, false, 3);
             outputText("[pg]You feel a surge of energy and heat deep in your [breasts]. They wobble and tingle before suddenly bursting forward, almost throwing you off balance. They jostle a bit before settling into their new size.");
             if (player.breastRows.length == 0) {
-                outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
-                player.createBreastRow(2);
+                transformations.CreateBreastRow(2).applyEffect();
                 outputText("\n");
             }
         }
         //Physical
-        if (!InCollection(player.hairColor, kamaitachi_hair) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (!InCollection(player.hairColor, kamaitachi_hair) && changes < changeLimit && rand(3) == 0) {
             player.hairColor = randomChoice(kamaitachi_hair);
             outputText("[pg]Your hair tingles as the strands turns <b>[haircolor]!</b>");
         }
 
-        if (!player.hasFur() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (!player.hasFur() && changes < changeLimit && rand(3) == 0) {
             var color1:String = randomChoice(kamaitachi_hair);
             outputText("[pg]");
             transformations.SkinFur(Skin.COVERAGE_LOW, {color: color1}).applyEffect();
@@ -10366,7 +10319,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (player.lowerBody != LowerBody.WEASEL && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.lowerBody != LowerBody.WEASEL && changes < changeLimit && rand(3) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
                 outputText("[pg]");
                 transformations.LowerBodyWeasel(2).applyEffect();
@@ -10400,7 +10353,7 @@ public final class Mutations extends MutationsHelper {
             transformations.WingsWindyAura.applyEffect();
             changes++;
         }
-        if (player.wings.type != Wings.WINDY_AURA && player.wings.type > Wings.NONE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.wings.type != Wings.WINDY_AURA && player.wings.type > Wings.NONE && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             changes++;
@@ -10597,7 +10550,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-[aphotic] skin tone (blue-black)
-        if (rand(5) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.skin.base.color != "aphotic blue-black") {
+        if (rand(5) == 0 && changes < changeLimit && player.skin.base.color != "aphotic blue-black") {
             outputText("[pg]You absently bite down on the last of the tentacle, then pull your hand away, wincing in pain.  How did you bite your finger so hard?  Looking down, the answer becomes obvious; <b>your hand, along with the rest of your skin, is now the same aphotic color as the dormant tentacle was!</b>");
             player.skin.base.color = "aphotic blue-black";
             changes++;
@@ -10677,13 +10630,11 @@ public final class Mutations extends MutationsHelper {
         }
 		if (player.blockingBodyTransformations()) changeLimit = 0;
 
-        //[Change Hair Color: Golden-blonde or Reddish-orange]
-        var fox_hair:Array = ["golden blonde", "reddish-orange", "silver", "white", "red", "black"];
-        if (!InCollection(player.hairColor, fox_hair) && !InCollection(player.hairColor, KitsuneRace.KitsuneHairColors) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (!InCollection(player.hairColor, FoxRace.FoxHairColors, KitsuneRace.KitsuneHairColors) && changes < changeLimit && rand(4) == 0) {
             if (player.tailType == Tail.FOX && player.tailCount > 1)
                 if (player.tailCount < 9) player.hairColor = randomChoice(KitsuneRace.BasicKitsuneHairColors);
                 else player.hairColor = randomChoice(KitsuneRace.ElderKitsuneColors);
-            else player.hairColor = randomChoice(fox_hair);
+            else player.hairColor = randomChoice(FoxRace.FoxHairColors);
             outputText("[pg]Your scalp begins to tingle, and you gently grasp a strand of hair, pulling it out to check it.  Your hair has become [haircolor]!");
         }
         //[Adjust hips toward 10 – wide/curvy/flared]
@@ -10712,7 +10663,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //[Adjust hair length toward range of 16-26 – very long to ass-length]
-        if (player.hairType != 4 && (player.hairLength > 26 || player.hairLength < 16) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (player.hairType != 4 && (player.hairLength > 26 || player.hairLength < 16) && changes < changeLimit && rand(4) == 0) {
             if (player.hairLength < 16) {
                 player.hairLength += 1 + rand(4);
                 outputText("[pg]You experience a tingling sensation in your scalp.  Feeling a bit off-balance, you discover your hair has lengthened, becoming " + num2Text(Math.round(player.hairLength)) + " inches long.");
@@ -10736,8 +10687,8 @@ public final class Mutations extends MutationsHelper {
             counter = player.cockTotal();
             while (counter > 0) {
                 counter--;
-                //Add non-dog locations to the array
-                if (player.cocks[counter].cockType != CockTypesEnum.FOX) choices[choices.length] = counter;
+                //Add non-fox locations to the array
+                if (!InCollection(player.cocks[counter].cockType, CockTypesEnum.FOX, CockTypesEnum.DOG)) choices[choices.length] = counter;
             }
             if (choices.length != 0) {
                 var select:int = choices[rand(choices.length)];
@@ -10772,17 +10723,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Sprouting more!
         if (changes < changeLimit && enhanced && player.bRows() < 4 && player.breastRows[player.bRows() - 1].breastRating > 1) {
-            outputText("[pg]Your belly rumbles unpleasantly for a second as the drink settles deeper inside you.  A second later, the unpleasant gut-gurgle passes, and you let out a tiny burp of relief.  Before you finish taking a few breaths, there's an itching below your " + allChestDesc() + ".  You idly scratch at it, but gods be damned, it hurts!  You peel off part of your [armor] to inspect the unwholesome itch, ");
-            if (player.biggestTitSize() >= 8) outputText("it's difficult to see past the wall of tits obscuring your view.");
-            else outputText("it's hard to get a good look at.");
-            outputText("  A few gentle prods draw a pleasant gasp from your lips, and you realize that you didn't have an itch - you were growing new nipples!");
-            outputText("[pg]A closer examination reveals your new nipples to be just like the ones above in size and shape");
-            if (player.breastRows[player.bRows() - 1].nipplesPerBreast > 1) outputText(", not to mention number");
-            else if (player.hasFuckableNipples()) outputText(", not to mention penetrability");
-            outputText(".  While you continue to explore your body's newest addition, a strange heat builds behind the new nubs. Soft, jiggly breastflesh begins to fill your cupped hands.  Radiant warmth spreads through you, eliciting a moan of pleasure from your lips as your new breasts catch up to the pair above.  They stop at " + player.breastCup(player.bRows() - 1) + "s.  <b>You have " + num2Text(player.bRows() + 1) + " rows of breasts!</b>");
-            player.createBreastRow(player.breastRows[player.bRows() - 2].breastRating, player.breastRows[player.bRows() - 2].nipplesPerBreast);
-            if (player.hasFuckableNipples()) player.breastRows[player.bRows() - 1].fuckable = true;
-            player.breastRows[player.bRows() - 1].lactationMultiplier = player.breastRows[player.bRows() - 2].lactationMultiplier;
+            outputText("[pg]Your belly rumbles unpleasantly for a second as the drink settles deeper inside you.  A second later, the unpleasant gut-gurgle passes, and you let out a tiny burp of relief.  Before you finish taking a few breaths, something starts happening.  ");
+            transformations.CopyBreastRow(true).applyEffect();
             dynStats("lus", 30);
             player.addCurse("sen", 2, 1);
             changes++;
@@ -10826,7 +10768,7 @@ public final class Mutations extends MutationsHelper {
         }
         //[Grow Fur]
         //FOURTH
-        if ((enhanced || player.lowerBody == LowerBody.FOX) && !player.hasFur() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if ((enhanced || player.lowerBody == LowerBody.FOX) && !player.hasFur() && changes < changeLimit && rand(4) == 0) {
             if (player.racialScore(Races.KITSUNE) >= 4)
                 if (InCollection(player.hairColor, KitsuneRace.KitsuneFurColors)) {
                     player.skin.coat.color = player.hairColor;
@@ -10843,27 +10785,27 @@ public final class Mutations extends MutationsHelper {
         }
         //[Grow Fox Legs]
         //THIRD
-        if ((enhanced || player.ears.type == Ears.FOX) && player.lowerBody != LowerBody.FOX && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(5) == 0) {
+        if ((enhanced || player.ears.type == Ears.FOX) && player.lowerBody != LowerBody.FOX && changes < changeLimit && rand(5) == 0) {
             outputText("[pg]");
             transformations.LowerBodyFox(2).applyEffect();
             changes++;
         }
         //Grow Fox Arms
-        if (changes < changeLimit && player.arms.type == Arms.HUMAN && player.arms.type != Arms.FOX && player.lowerBody != LowerBody.GARGOYLE && rand(2) == 0) {
+        if (changes < changeLimit && player.arms.type == Arms.HUMAN && player.arms.type != Arms.FOX && rand(2) == 0) {
             outputText("[pg]");
             transformations.ArmsFox.applyEffect();
             changes++;
         }
         //Grow Fox Ears]
         //SECOND
-        if ((enhanced || player.tailType == Tail.FOX) && player.ears.type != Ears.FOX && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if ((enhanced || player.tailType == Tail.FOX) && player.ears.type != Ears.FOX && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
 			transformations.EarsFox.applyEffect();
             changes++;
         }
         //[Grow Fox Tail](fairly common)
         //FIRST
-        if (player.tailType != Tail.FOX && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (player.tailType != Tail.FOX && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.TailFox(1).applyEffect();
             changes++;
@@ -10887,15 +10829,13 @@ public final class Mutations extends MutationsHelper {
             player.tone -= 4;
         }
         //Nipples Turn Back:
-        if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
-            outputText("[pg]Something invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
+        if (transformations.NipplesNoColor.isPossible() && changes < changeLimit && rand(3) == 0) {
+            transformations.NipplesNoColor.applyEffect();
             changes++;
-            player.removeStatusEffect(StatusEffects.BlackNipples);
         }
         //Debugcunt
         if (changes < changeLimit && rand(3) == 0 && (player.vaginaType() == 5 || player.vaginaType() == 6) && player.hasVagina()) {
-            outputText("[pg]Something invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your vagina and find that it has turned back to its natural flesh colour.");
-            player.vaginaType(0);
+            transformations.VaginaHuman().applyEffect();
             changes++;
         }
         if (changes == 0) {
@@ -11031,7 +10971,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Physical changes:
         //Tail - unlocks enhanced with fire tail whip attack
-        if (player.tailType != Tail.SALAMANDER && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.tailType != Tail.SALAMANDER && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.TailSalamander.applyEffect();
             changes++;
@@ -11043,13 +10983,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Arms
-        if (player.arms.type != Arms.SALAMANDER && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.SALAMANDER && changes < changeLimit && rand(3) == 0) {
+        if (player.arms.type != Arms.SALAMANDER && player.lowerBody == LowerBody.SALAMANDER && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.ArmsSalamander.applyEffect();
             changes++;
         }
         //Lizard eyes
-        if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LowerBody.GARGOYLE && transformations.EyesHuman.isPresent()) {
+        if (changes < changeLimit && rand(3) == 0 && transformations.EyesHuman.isPresent()) {
             transformations.EyesLizard.applyEffect();
             changes++;
         }
@@ -11082,7 +11022,7 @@ public final class Mutations extends MutationsHelper {
             transformations.SkinScales(Skin.COVERAGE_LOW, {color: "red"}).applyEffect();
             changes++;
         }
-        if (!player.hasPartialCoat(Skin.SCALES) && !player.isGargoyle() && rand(4) == 0) {
+        if (!player.hasPartialCoat(Skin.SCALES) && rand(4) == 0) {
             outputText("[pg]");
             transformations.SkinPlain.applyEffect();
             changes++;
@@ -11126,7 +11066,7 @@ public final class Mutations extends MutationsHelper {
             MutagenBonus("tou", 2);
         }
         //Grow Beard [ONLY if PC has a masculine face & a dick.)( -- Why? Bearded ladies are also a fetish [That's just nasty.] (I want a lady beard)): A sudden tingling runs along your chin. You rub it with your hand, and find a thin layer of bristles covering your lower face. You now sport a fine [player.HairColor] beard!
-        if (rand(6) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.beardLength < 4) {
+        if (rand(6) == 0 && player.beardLength < 4) {
             if (player.beardLength <= 0) outputText("A sudden tingling runs along your chin. You rub it with your hand, and find a thin layer of bristles covering your lower face. <b>You now sport a fine [haircolor] beard!</b>");
             else outputText("[pg]A sudden tingling runs along your chin. You stroke your beard proudly as it slowly grows in length and lustre.");
             player.beardLength += 0.5;
@@ -11159,7 +11099,7 @@ public final class Mutations extends MutationsHelper {
             MutagenBonus("tou", 10);
         }
         //Grow Beard [ONLY if PC has a masculine face & a dick.)( -- Why? Bearded ladies are also a fetish [That's just nasty.] (I want a lady beard)): A sudden tingling runs along your chin. You rub it with your hand, and find a thin layer of bristles covering your lower face. You now sport a fine [player.HairColor] beard!
-        if (rand(6) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.beardLength < 6) {
+        if (rand(6) == 0 && player.beardLength < 6) {
             if (player.beardLength <= 0) outputText("A sudden tingling runs along your chin. You rub it with your hand, and find a thin layer of bristles covering your lower face. <b>You now sport a fine [haircolor] beard!</b>");
             else outputText("[pg]A sudden tingling runs along your chin. You stroke your beard proudly as it slowly grows in length and lustre.");
             player.beardLength += 0.5;
@@ -11252,7 +11192,6 @@ public final class Mutations extends MutationsHelper {
     public function foxJewel(mystic:Boolean, player:Player):void {
         clearOutput();
         mutationStart("foxJewel" + (mystic ? "M" : ""), 3);
-        changeLimit += player.additionalTransformationChances;
         if (mystic) changeLimit += 2;
         if (mystic) outputText("You examine the jewel for a bit, rolling it around in your hand as you ponder its mysteries.  You hold it up to the light with fascinated curiosity, watching the eerie purple flame dancing within.  Without warning, the gem splits down the center, dissolving into nothing in your hand.  As the pale lavender flames swirl around you, the air is filled with a sickly sweet scent that drips with the bitter aroma of licorice, filling you with a dire warmth.");
         else outputText("You examine the jewel for a bit, rolling it around in your hand as you ponder its mysteries.  You hold it up to the light with fascinated curiosity, watching the eerie blue flame dancing within.  Without warning, the gem splits down the center, dissolving into nothing in your hand.  As the pale azure flames swirl around you, the air is filled with a sweet scent that drips with the aroma of wintergreen, sending chills down your spine.");
@@ -11329,7 +11268,7 @@ public final class Mutations extends MutationsHelper {
         });
 
         //[Adjust hair length toward range of 16-26 – very long to ass-length]
-        mutationStep((player.hairLength < 16 || player.hairLength > 26) && player.lowerBody != LowerBody.GARGOYLE, mystic ? 2 : 3, function ():void {
+        mutationStep((player.hairLength < 16 || player.hairLength > 26), mystic ? 2 : 3, function ():void {
             //from short to long
             if (player.hairLength < 16) {
                 player.hairLength += 3 + rand(3);
@@ -11362,7 +11301,7 @@ public final class Mutations extends MutationsHelper {
         //BIG APPEARANCE CHANGES
         //**********************
         //[Grow Fox Tail]
-        mutationStep(player.tailType != Tail.FOX && player.lowerBody != LowerBody.GARGOYLE, mystic ? 2 : 4, function ():void {
+        mutationStep(player.tailType != Tail.FOX, mystic ? 2 : 4, function ():void {
             outputText("[pg]");
             transformations.TailFox(1).applyEffect();
         });
@@ -11447,7 +11386,7 @@ public final class Mutations extends MutationsHelper {
             transformations.ArmsKitsune.applyEffect();
         });
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-        mutationStep(!InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE, Arms.FOX, Arms.KITSUNE), 4, function ():void {
+        mutationStep(!InCollection(player.arms.type, Arms.HUMAN, Arms.FOX, Arms.KITSUNE), 4, function ():void {
             outputText("[pg]");
             transformations.ArmsHuman.applyEffect();
         });
@@ -11457,7 +11396,7 @@ public final class Mutations extends MutationsHelper {
 			transformations.EarsFox.applyEffect();
         });
         //[Change Hair Color: Golden-blonde, SIlver Blonde, White, Black, Red]
-        mutationStep(!InCollection(player.hairColor, KitsuneRace.KitsuneHairColors) && player.lowerBody != LowerBody.GARGOYLE, mystic ? 2 : 4, function ():void {
+        mutationStep(!InCollection(player.hairColor, KitsuneRace.KitsuneHairColors), mystic ? 2 : 4, function ():void {
             if (player.tailType == Tail.FOX && player.tailCount == 9) player.hairColor = randomChoice(KitsuneRace.ElderKitsuneColors);
             else player.hairColor = randomChoice(KitsuneRace.BasicKitsuneHairColors);
             outputText("[pg]Your scalp begins to tingle, and you gently grasp a strand, pulling it forward to check it.  Your hair has become the same [haircolor] as a kitsune's!");
@@ -11478,7 +11417,7 @@ public final class Mutations extends MutationsHelper {
             outputText("  <b>You now have [skin]!</b>");
         });
         //Change skin tone if not changed you!
-        if (!changed) mutationStep(!InCollection(player.skin.base.color, tone) && player.lowerBody != LowerBody.GARGOYLE, mystic ? 2 : 3, function ():void {
+        if (!changed) mutationStep(!InCollection(player.skin.base.color, tone) && !player.blockingBodyTransformations(), mystic ? 2 : 3, function ():void {
             outputText("[pg]You feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  Holding an arm up to your face, you discover that <b>you now have ");
             player.skin.base.color = randomChoice(tone);
             outputText("[skin]!</b>");
@@ -11496,8 +11435,7 @@ public final class Mutations extends MutationsHelper {
         });
         //Debugcunt
         mutationStep((player.vaginaType() == 5 || player.vaginaType() == 6) && player.hasVagina(), 3, function ():void {
-            outputText("[pg]Something invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your vagina and find that it has turned back to its natural flesh colour.");
-            player.vaginaType(0);
+            transformations.VaginaHuman().applyEffect();
         });
         if (changes == 0) {
             outputText("[pg]Odd.  You don't feel any different.");
@@ -11825,7 +11763,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //Nipples Turn Black:
-        if (!player.hasStatusEffect(StatusEffects.BlackNipples) && player.lowerBody != LowerBody.GARGOYLE && rand(6) == 0 && changes < changeLimit) {
+        if (!player.hasStatusEffect(StatusEffects.BlackNipples) && rand(6) == 0 && changes < changeLimit) {
             transformations.NipplesBlack.applyEffect();
             changes++;
         }
@@ -11836,20 +11774,20 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //PC Trap Effects
-        if (transformations.EyesSandTrap.isPossible() && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+        if (transformations.EyesSandTrap.isPossible() && rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.EyesSandTrap.applyEffect();
             changes++;
         }
         //Vagina Turns Black:
-        if (player.hasVagina() && player.vaginaType() != VaginaClass.BLACK_SAND_TRAP && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+        if (player.hasVagina() && player.vaginaType() != VaginaClass.BLACK_SAND_TRAP && rand(4) == 0 && changes < changeLimit) {
             transformations.VaginaSandTrap().applyEffect();
             dynStats("lus", 10);
             player.addCurse("sen", 2, 1);
             changes++;
         }
         //Dragonfly Wings:
-        if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.GIANT_DRAGONFLY) && rand(4) == 0 && changes < changeLimit) {
+        if (!InCollection(player.wings.type, Wings.GIANT_DRAGONFLY) && rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.WingsGiantDragonfly.applyEffect();
             changes++;
@@ -11943,7 +11881,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //bodypart changes:
-        if (player.tailType != Tail.RACCOON && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+        if (player.tailType != Tail.RACCOON && rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TailRaccoon.applyEffect();
             changes++;
@@ -11983,14 +11921,14 @@ public final class Mutations extends MutationsHelper {
         }
 
         //Grow coon Arms
-        if (changes < changeLimit && player.arms.type == Arms.HUMAN && player.arms.type != Arms.RACCOON && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0) {
+        if (changes < changeLimit && player.arms.type == Arms.HUMAN && player.arms.type != Arms.RACCOON && rand(4) == 0) {
             outputText("[pg]");
             transformations.ArmsRaccoon.applyEffect();
             changes++;
         }
 
         //gain half-coon face (prevented if already full-coon)
-        if (player.faceType != Face.RACCOON_MASK && player.faceType != Face.RACCOON && (player.skin.coverage != Skin.COVERAGE_COMPLETE || player.skin.coverage != Skin.COVERAGE_HIGH) && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+        if (player.faceType != Face.RACCOON_MASK && player.faceType != Face.RACCOON && (player.skin.coverage != Skin.COVERAGE_COMPLETE || player.skin.coverage != Skin.COVERAGE_HIGH) && rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.FaceRaccoonMask.applyEffect();
             changes++;
@@ -12143,7 +12081,7 @@ public final class Mutations extends MutationsHelper {
         }
         //bodypart changes:
         //gain ears
-        if (player.ears.type != Ears.MOUSE && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type != Ears.MOUSE && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.EarsMouse.applyEffect();
             changes++;
@@ -12197,7 +12135,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //get fur
-        if ((!player.hasFur() || (player.hasFur() && (player.coatColor != "brown" && player.coatColor != "white"))) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if ((!player.hasFur() || (player.hasFur() && (player.coatColor != "brown" && player.coatColor != "white"))) && changes < changeLimit && rand(3) == 0) {
             if (rand(10) < 8) {
                 player.coatColor = "brown";
             } else {
@@ -12252,14 +12190,14 @@ public final class Mutations extends MutationsHelper {
     //Demon
     private function demonChanges(player:Player):void {
         //Change tail if already horned.
-        if (player.tailType != Tail.DEMONIC && player.lowerBody != LowerBody.GARGOYLE && player.horns.count > 0) {
+        if (player.tailType != Tail.DEMONIC && player.horns.count > 0) {
             outputText("[pg]");
             transformations.TailDemonic.applyEffect();
             dynStats("cor", 4);
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         //grow horns!
-        if (player.lowerBody != LowerBody.GARGOYLE && (player.horns.count == 0 || (rand(player.horns.count + 3) == 0))) {
+        if ((player.horns.count == 0 || (rand(player.horns.count + 3) == 0))) {
             if (player.horns.type == Horns.NONE) {
                 outputText("[pg]");
                 transformations.HornsDemonic.applyEffect();
@@ -12285,7 +12223,7 @@ public final class Mutations extends MutationsHelper {
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         //remove fur
-        if ((player.faceType != Face.HUMAN || !player.hasPlainSkinOnly()) && player.lowerBody != LowerBody.GARGOYLE && rand(2) == 0) {
+        if ((player.faceType != Face.HUMAN || !player.hasPlainSkinOnly()) && rand(2) == 0) {
             //Remove face before fur!
             if (player.faceType != Face.HUMAN) {
                 outputText("[pg]");
@@ -12307,7 +12245,7 @@ public final class Mutations extends MutationsHelper {
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         //-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-        if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN, Arms.GARGOYLE) && rand(4) == 0) {
+        if (changes < changeLimit && !InCollection(player.arms.type, Arms.HUMAN) && rand(4) == 0) {
             outputText("[pg]");
             transformations.ArmsHuman.applyEffect();
             changes++;
@@ -12344,7 +12282,7 @@ public final class Mutations extends MutationsHelper {
             transformations.WingsDemonicTiny.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
-        if (!InCollection(player.wings.type, [Wings.NONE, Wings.GARGOYLE_LIKE_LARGE, Wings.BAT_LIKE_LARGE, Wings.BAT_LIKE_TINY]) && rand(3) == 0) {
+        if (!InCollection(player.wings.type, [Wings.NONE, Wings.BAT_LIKE_LARGE, Wings.BAT_LIKE_TINY]) && rand(3) == 0) {
             outputText("[pg]");
             transformations.WingsNone.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
@@ -12503,13 +12441,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //If face is human:
-        if (player.faceType == 0 && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+        if (player.faceType == 0 && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.FaceFerretMask.applyEffect();
             changes++;
         }
         //If face is not ferret, has ferret ears, tail, and legs:
-        if (player.faceType != Face.HUMAN && player.faceType != Face.FERRET_MASK && player.faceType != Face.FERRET && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+        if (player.faceType != Face.HUMAN && player.faceType != Face.FERRET_MASK && player.faceType != Face.FERRET && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.FaceHuman.applyEffect();
             changes++;
@@ -12548,7 +12486,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //If ears are not ferret:
-        if (player.ears.type != Ears.FERRET && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+        if (player.ears.type != Ears.FERRET && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.EarsFerret.applyEffect();
             changes++;
@@ -12652,7 +12590,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Gain pig ears!
-        if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.ears.type != Ears.PIG) {
+        if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.ears.type != Ears.PIG) {
             outputText("[pg]");
 			transformations.EarsPig.applyEffect();
             changes++;
@@ -12721,7 +12659,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Change skin colour
-        if (rand(boar ? 2 : 3) == 0 && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit) {
+        if (rand(boar ? 2 : 3) == 0 && changes < changeLimit) {
             var skinChoose:int = rand(3);
             var skinToBeChosen:String;
             if (boar) {
@@ -12756,14 +12694,14 @@ public final class Mutations extends MutationsHelper {
         dynStats("lus", (10 + player.lib / 10), "scale", false);
 
         //[Optional, give the player antlers! (30% chance) Show this description if the player doesn't have horns already.]
-        if (player.horns.count == 0 && player.lowerBody != LowerBody.GARGOYLE && rand(2) == 0) {
+        if (player.horns.count == 0 && rand(2) == 0) {
             outputText("[pg]");
             //[Player horns type changed to Antlers.]
             transformations.HornsAntlers.applyEffect();
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         //[Show this description instead if the player already had horns when the transformation occurred.]
-        else if (player.horns.count > 0 && player.horns.type != Horns.ANTLERS && player.horns.type != Horns.ORCHID && player.lowerBody != LowerBody.GARGOYLE && rand(2) == 0) {
+        else if (player.horns.count > 0 && player.horns.type != Horns.ANTLERS && player.horns.type != Horns.ORCHID && rand(2) == 0) {
             outputText("[pg]");
             //[Player horns type changed to Antlers.]
             transformations.HornsAntlers.applyEffect();
@@ -13094,7 +13032,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Ears
-        if (player.faceType == Face.HUMAN && player.ears.type != Ears.ELFIN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.faceType == Face.HUMAN && player.ears.type != Ears.ELFIN && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
 			transformations.EarsElfin.applyEffect();
             changes++;
@@ -13650,14 +13588,14 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //Skin
-        if (player.skin.base.color != "dark" && player.skin.base.color != "tan" && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (player.skin.base.color != "dark" && player.skin.base.color != "tan" && changes < changeLimit && rand(4) == 0) {
             if (rand(2) == 0) player.skin.base.color = "dark";
             else player.skin.base.color = "tan";
             outputText("[pg]Your skin suddenly darkens. Doesn’t look like much, but darker skin will likely help soak up more sunlight and keep you warmer.<b> You now have " + player.skinTone + " skin.</b>");
             changes++;
         }
         //Legs
-        if (player.lowerBody != LowerBody.YETI && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (player.lowerBody != LowerBody.YETI && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             if (player.lowerBody == LowerBody.HUMAN) {
                 transformations.LowerBodyYeti.applyEffect();
@@ -13667,7 +13605,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Arms
-        if (player.lowerBody == LowerBody.YETI && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.YETI) && changes < changeLimit && rand(4) == 0) {
+        if (player.lowerBody == LowerBody.YETI && !InCollection(player.arms.type, Arms.YETI) && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.ArmsYeti.applyEffect();
             changes++;
@@ -13817,13 +13755,12 @@ public final class Mutations extends MutationsHelper {
             player.addCurse("sen", 1, 1);
         }
         if (player.breastRows.length == 0) {
-            outputText("A perfect pair of B cup breasts, complete with tiny nipples, form on your chest.");
-            player.createBreastRow(2);
+            transformations.CreateBreastRow(2).applyEffect();
             outputText("\n");
         }
         //Physical
         //Face
-        if (player.lowerBody != LowerBody.GARGOYLE && player.faceType != Face.YUKI_ONNA && changes < changeLimit && rand(4) == 0) {
+        if (player.faceType != Face.YUKI_ONNA && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.FaceYukiOnna.applyEffect();
             changes++;
@@ -13840,7 +13777,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Arms
-        if (player.lowerBody == LowerBody.YUKI_ONNA && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.YUKI_ONNA) && changes < changeLimit && rand(4) == 0) {
+        if (player.lowerBody == LowerBody.YUKI_ONNA && !InCollection(player.arms.type, Arms.YUKI_ONNA) && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.ArmsYukiOnna.applyEffect();
             changes++;
@@ -13870,7 +13807,7 @@ public final class Mutations extends MutationsHelper {
             transformations.RearBodyGlacialAura.applyEffect(false);
             changes++;
         }
-        if (player.hasPlainSkinOnly() && !player.isGargoyle() && player.skin.base.color != "glacial white" && player.skin.base.color != "light blue" && player.skin.base.color != "snow white" && player.skinAdj != "cold" && changes < changeLimit && rand(3) == 0) {
+        if (player.hasPlainSkinOnly() && player.skin.base.color != "glacial white" && player.skin.base.color != "light blue" && player.skin.base.color != "snow white" && player.skinAdj != "cold" && changes < changeLimit && rand(3) == 0) {
             if (rand(3) == 0) player.skin.base.color = "glacial white";
             else {
                 if (rand(2) == 0) player.skin.base.color = "light blue";
@@ -14064,7 +14001,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //skin
-        if ((player.skinAdj != "glossy" || !player.hasPlainSkinOnly()) && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && type == 0 && changes < changeLimit) {
+        if ((player.skinAdj != "glossy" || !player.hasPlainSkinOnly()) && rand(4) == 0 && type == 0 && changes < changeLimit) {
             outputText("[pg]");
             if (player.hasFur()) outputText("You suddenly start sweating abundantly as your [skin.type] fall off leaving bare the smooth skin underneath.  ");
             if (player.hasGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ");
@@ -14101,7 +14038,7 @@ public final class Mutations extends MutationsHelper {
         ]
 
         //skin sea dragon
-        if ((player.skinAdj != "glossy" || !player.hasPlainSkinOnly()) && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && type == 1 && changes < changeLimit) {
+        if ((player.skinAdj != "glossy" || !player.hasPlainSkinOnly()) && rand(4) == 0 && type == 1 && changes < changeLimit) {
             var colorPair:Number = rand(ColorList.length-1);
             var underBellyColor:String = ColorList[colorPair].underbellycolor;
             var bodyColor:String = ColorList[colorPair].color;
@@ -14119,7 +14056,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //legs
-        if (player.skinAdj == "glossy" && player.hasPlainSkinOnly() && player.lowerBody != LowerBody.ORCA && player.lowerBody != LowerBody.GARGOYLE && type == 0 && changes < changeLimit && rand(4) == 0) {
+        if (player.skinAdj == "glossy" && player.hasPlainSkinOnly() && player.lowerBody != LowerBody.ORCA && type == 0 && changes < changeLimit && rand(4) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
                 outputText("[pg]");
                 transformations.LowerBodyOrca(2).applyEffect();
@@ -14130,13 +14067,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //arms
-        if (player.lowerBody == LowerBody.ORCA && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.ORCA) && type == 0 && changes < changeLimit && rand(4) == 0) {
+        if (player.lowerBody == LowerBody.ORCA && !InCollection(player.arms.type, Arms.ORCA) && type == 0 && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.ArmsOrca.applyEffect();
             changes++;
         }
         //Dragon legs
-        if (player.skinAdj == "glossy" && player.hasPlainSkinOnly() && player.lowerBody != LowerBody.SEA_DRAGON && player.lowerBody != LowerBody.GARGOYLE && type == 1 && changes < changeLimit && rand(4) == 0) {
+        if (player.skinAdj == "glossy" && player.hasPlainSkinOnly() && player.lowerBody != LowerBody.SEA_DRAGON && type == 1 && changes < changeLimit && rand(4) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
                 outputText("[pg]");
                 transformations.LowerBodySeaDragon(2).applyEffect();
@@ -14147,7 +14084,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Dragon arms
-        if (player.lowerBody == LowerBody.SEA_DRAGON && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.SEA_DRAGON) && type == 1 && changes < changeLimit && rand(4) == 0) {
+        if (player.lowerBody == LowerBody.SEA_DRAGON && !InCollection(player.arms.type, Arms.SEA_DRAGON) && type == 1 && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.ArmsSeaDragon.applyEffect();
             changes++;
@@ -14217,7 +14154,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Gain Dragon Tongue
-        if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LowerBody.GARGOYLE && player.tongue.type != Tongue.DRACONIC && type == 1) {
+        if (changes < changeLimit && rand(3) == 0 && player.tongue.type != Tongue.DRACONIC && type == 1) {
             outputText("[pg]");
             transformations.TongueDraconic.applyEffect();
             changes++;
@@ -14532,15 +14469,7 @@ public final class Mutations extends MutationsHelper {
         //-Remove extra breast rows
         if (changes < changeLimit && player.bRows() > 1 && rand(3) == 0) {
             changes++;
-            outputText("[pg]You stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
-            if (player.bRows() >= 3) outputText("abdomen");
-            else outputText("chest");
-            outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
-            if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-            else outputText(player.skinTone + " " + player.skinDesc);
-            outputText(" remains. <b>You've lost a row of breasts!</b>");
-            dynStats("sen", -5);
-            player.removeBreastRow(player.breastRows.length - 1, 1);
+            transformations.BreastRowsRemoveToOne.applyEffect();
         }
         //Shrink boobages till they are normal
         else if (rand(2) == 0 && changes < changeLimit && player.breastRows.length > 0) {
@@ -14641,13 +14570,13 @@ public final class Mutations extends MutationsHelper {
         }
 
         //Antennae (nie wymaga innych body parts)
-        if (changes < changeLimit && player.hasCoatOfType(Skin.CHITIN) && player.lowerBody != LowerBody.GARGOYLE && player.antennae.type != Antennae.MANTIS && rand(3) == 0) {
+        if (changes < changeLimit && player.hasCoatOfType(Skin.CHITIN) && player.antennae.type != Antennae.MANTIS && rand(3) == 0) {
             outputText("[pg]");
             transformations.AntennaeMantis.applyEffect();
             changes++;
         }
         //Horns
-        if (changes < changeLimit && player.hasCoatOfType(Skin.CHITIN) && player.horns.count > 0 && player.horns.type != Horns.ORCHID && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0) {
+        if (changes < changeLimit && player.hasCoatOfType(Skin.CHITIN) && player.horns.count > 0 && player.horns.type != Horns.ORCHID && rand(3) == 0) {
             outputText("[pg]");
             transformations.HornsNone.applyEffect();
             changes++;
@@ -14662,14 +14591,14 @@ public final class Mutations extends MutationsHelper {
         }
 
         //Legs
-        if (player.lowerBody != LowerBody.MANTIS && player.hasCoatOfType(Skin.CHITIN) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.lowerBody != LowerBody.MANTIS && player.hasCoatOfType(Skin.CHITIN) && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.LowerBodyMantis(2).applyEffect();
             changes++;
         }
 
         //Arms
-        if (player.lowerBody == LowerBody.MANTIS && player.hasCoatOfType(Skin.CHITIN) && !InCollection(player.arms.type, Arms.GARGOYLE, Arms.MANTIS) && changes < changeLimit && rand(3) == 0) {
+        if (player.lowerBody == LowerBody.MANTIS && player.hasCoatOfType(Skin.CHITIN) && !InCollection(player.arms.type, Arms.MANTIS) && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.ArmsMantis.applyEffect();
             changes++;
@@ -14683,7 +14612,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //Wings
-        if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.MANTIS_LARGE) && changes < changeLimit && rand(4) == 0) {
+        if (!InCollection(player.wings.type, Wings.MANTIS_LARGE) && changes < changeLimit && rand(4) == 0) {
             //Grow bigger mantis wings!
             if (player.wings.type == Wings.MANTIS_SMALL) {
                 outputText("[pg]");
@@ -14755,8 +14684,7 @@ public final class Mutations extends MutationsHelper {
                 player.addCurse("sen", 1, 1);
             }
             if (player.breastRows.length == 0) {
-                outputText("A perfect pair of A cup breasts, complete with tiny nipples, form on your chest.");
-                player.createBreastRow(1);
+                transformations.CreateBreastRow(1).applyEffect();
                 outputText("\n");
             }
         }
@@ -14795,7 +14723,7 @@ public final class Mutations extends MutationsHelper {
         }
         //physical changes
         //legs
-        if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.lowerBody != LowerBody.HOOFED) {
+        if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.HOOFED) {
             outputText("[pg]");
             CoC.instance.transformations.LowerBodyHoofed(2).applyEffect();
             changes++;
@@ -14811,7 +14739,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //wings
-        if (rand(3) == 0 && changes < changeLimit && !InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.BAT_LIKE_LARGE) && (player.tailType == Tail.GOAT || player.tailType == Tail.DEMONIC)) {
+        if (rand(3) == 0 && changes < changeLimit && !InCollection(player.wings.type, Wings.BAT_LIKE_LARGE) && (player.tailType == Tail.GOAT || player.tailType == Tail.DEMONIC)) {
             //grow smalls to large
             if (player.wings.type == Wings.BAT_LIKE_TINY && player.cor >= (75-player.corruptionTolerance)) {
                 outputText("[pg]");
@@ -15123,7 +15051,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Physical changes
         //Ears
-        if (player.lowerBody != LowerBody.GARGOYLE && player.ears.type != Ears.BEAR && player.ears.type != Ears.PANDA && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type != Ears.BEAR && player.ears.type != Ears.PANDA && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             if (rand(2) == 0) {
                 transformations.EarsBear.applyEffect();
@@ -15145,7 +15073,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Arms
-        if (player.arms.type != Arms.BEAR && player.arms.type != Arms.GARGOYLE && player.eyes.type == Eyes.BEAR && changes < changeLimit && rand(3) == 0) {
+        if (player.arms.type != Arms.BEAR && player.eyes.type == Eyes.BEAR && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             if (player.arms.type == Arms.HUMAN) {
                 transformations.ArmsBear.applyEffect();
@@ -15235,25 +15163,25 @@ public final class Mutations extends MutationsHelper {
 
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //Skin
-        if (player.skinAdj != "sticky glistering" && player.hasPlainSkinOnly() && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+        if (player.skinAdj != "sticky glistering" && player.hasPlainSkinOnly() && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]Your sweating begins to intensify and before you know it you’re covered with sticky fluid all over your body just like a slug or a snail, your skin glistening under the sun.");
             player.skinAdj = "sticky glistering";
             changes++;
         }
-        if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+        if (!player.hasPlainSkinOnly() && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.SkinPlain.applyEffect();
             changes++;
         }
         //Red/Orange skin!
-        if ((player.skin.base.color != "red" || player.skin.base.color != "orange") && player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+        if ((player.skin.base.color != "red" || player.skin.base.color != "orange") && player.hasPlainSkinOnly() && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]Your [skin.type] ");
             if (rand(2) == 0) player.skin.base.color = "red";
             else player.skin.base.color = "orange";
             outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinTone + ".");
         }
         //Legs
-        if (player.skinAdj == "sticky glistering" && player.hasPlainSkinOnly() && player.lowerBody != LowerBody.FIRE_SNAIL && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.skinAdj == "sticky glistering" && player.hasPlainSkinOnly() && player.lowerBody != LowerBody.FIRE_SNAIL && changes < changeLimit && rand(3) == 0) {
             if (player.lowerBody == LowerBody.HUMAN) {
                 outputText("[pg]");
                 transformations.LowerBodyFireSnail.applyEffect();
@@ -15270,7 +15198,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Removes wings!
-        if (player.rearBody.type == RearBody.SNAIL_SHELL && !(player.wings.type == Wings.NONE || player.wings.type == Wings.GARGOYLE_LIKE_LARGE) && changes < changeLimit && rand(2) == 0) {
+        if (player.rearBody.type == RearBody.SNAIL_SHELL && player.wings.type != Wings.NONE && changes < changeLimit && rand(2) == 0) {
             outputText("[pg]To your utter disappointment your wings are absorbed back into your shell. Guess there's no such things as flying snails.");
             transformations.WingsNone.applyEffect(false);
             changes++;
@@ -15350,15 +15278,7 @@ public final class Mutations extends MutationsHelper {
         //-Remove extra breast rows
         if (changes < changeLimit && player.bRows() > 1 && rand(3) == 0) {
             changes++;
-            outputText("[pg]You stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
-            if (player.bRows() >= 3) outputText("abdomen");
-            else outputText("chest");
-            outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
-            if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-            else outputText(player.skinTone + " " + player.skinDesc);
-            outputText(" remains. <b>You've lost a row of breasts!</b>");
-            dynStats("sen", -5);
-            player.removeBreastRow(player.breastRows.length - 1, 1);
+            transformations.BreastRowsRemoveToOne.applyEffect();
         }
         if (player.butt.type > 5) {
             player.butt.type -= 2;
@@ -15601,9 +15521,6 @@ public final class Mutations extends MutationsHelper {
         outputText("You use all the courage you can muster and in one go, swallow the gossamer. At that very moment, your stomach groans as you feel your body changing...");
 		if (player.blockingBodyTransformations()) changeLimit = 0;
 
-        //public static const ushionnaSkinColors:Array = ["", "red", "gray", "sandy-tan", "pale", "purple"];
-        //public static const ushionnaHairColors:Array = ["", "dark red", "blue", "brown", "white", "black"];
-
         if (changes < changeLimit && rand(2) == 0 && player.tallness < 84) {
             temp = rand(5) + 3;
             //Slow rate of growth near ceiling
@@ -15618,7 +15535,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (type == 0 || type == 3 || type == 6 || type == 9 || type == 12 || type == 15) {		//female
+        if (type %3 == 0) {		//female
             if (player.biggestTitSize() <= 20 && changes < changeLimit && rand(3) == 0) {
                 if (rand(2) == 0) outputText("[pg]Your [breasts] tingle for a moment before becoming larger.");
                 else outputText("[pg]You feel a little weight added to your chest as your [breasts] seem to inflate and settle in a larger size.");
@@ -15628,8 +15545,7 @@ public final class Mutations extends MutationsHelper {
                 //boobsGrew = true;
             }
             if (player.breastRows.length == 0 && changes < changeLimit) {
-                outputText("A perfect pair of A cup breasts, complete with tiny nipples, form on your chest.");
-                player.createBreastRow(1);
+                transformations.CreateBreastRow(1).applyEffect();
                 outputText("\n");
                 changes++;
             }
@@ -15706,14 +15622,8 @@ public final class Mutations extends MutationsHelper {
             if (changes < changeLimit && player.cocks.length > 0 && rand(2) == 0) {
                 //If the player has at least one dick, decrease the size of each slightly,
                 outputText("[pg]");
-                temp = 0;
-                temp2 = player.cocks.length;
+                temp = player.longestCock();
                 temp3 = 0;
-                //Find biggest cock
-                while (temp2 > 0) {
-                    temp2--;
-                    if (player.cocks[temp].cockLength <= player.cocks[temp2].cockLength) temp = temp2;
-                }
                 //Shrink said cock
                 if (player.cocks[temp].cockLength < 6 && player.cocks[temp].cockLength >= 2.9) {
                     player.cocks[temp].cockLength -= .5;
@@ -15734,10 +15644,8 @@ public final class Mutations extends MutationsHelper {
             if (player.tone < 79) outputText(player.modTone(80, 2));
             if (player.thickness < 66) outputText(player.modThickness(70, 5));
             if (player.femininity < 100) player.modFem(100, rand(3));
-
-
         }
-        if (type == 1 || type == 4 || type == 7 || type == 10 || type == 13 || type == 16) {	//herm
+        if (type %3 == 1) {	//herm
             if (player.biggestTitSize() <= 22 && changes < changeLimit && rand(3) == 0) {
                 if (rand(2) == 0) outputText("[pg]Your [breasts] tingle for a moment before becoming larger.");
                 else outputText("[pg]You feel a little weight added to your chest as your [breasts] seem to inflate and settle in a larger size.");
@@ -15747,8 +15655,7 @@ public final class Mutations extends MutationsHelper {
                 //boobsGrew = true;
             }
             if (player.breastRows.length == 0 && changes < changeLimit) {
-                outputText("A perfect pair of A cup breasts, complete with tiny nipples, form on your chest.");
-                player.createBreastRow(1);
+                transformations.CreateBreastRow(1).applyEffect();
                 outputText("\n");
                 changes++;
             }
@@ -15822,23 +15729,15 @@ public final class Mutations extends MutationsHelper {
                 outputText("[pg]A feeling of tightness starts in your [butt], increasing gradually. The sensation grows and grows, but as it does your center of balance shifts. You reach back to feel yourself, and sure enough your massive booty is shrinking into a more manageable size.");
             }
 
-
             if (player.tone < player.maxToneCap()) outputText(player.modTone(player.maxToneCap(), 15));
             if (player.thickness < player.maxThicknessCap()) outputText(player.modThickness(player.maxThicknessCap(), 5));
             if (player.femininity < 85) player.modFem(85, rand(3));
-
-
         }
-        if (type == 2 || type == 5 || type == 8 || type == 11 || type == 14 || type == 17) {	//male
+        if (type %3 == 2) {	//male
             //-Remove extra breast rows
             if (changes < changeLimit && player.bRows() > 1 && rand(3) == 0) {
                 changes++;
-                outputText("[pg]You stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + player.breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
-                if (player.bRows() >= 3) outputText("abdomen");
-                else outputText("chest");
-                outputText(". The " + Appearance.nippleDescription(player, player.breastRows.length - 1) + "s even fade until nothing but [skin] remains. <b>You've lost a row of breasts!</b>");
-                dynStats("sen", -5);
-                player.removeBreastRow(player.breastRows.length - 1, 1);
+                transformations.BreastRowsRemoveToOne.applyEffect();
             }
             //Shrink boobages till they are normal
             if (rand(2) == 0 && changes < changeLimit && player.breastRows.length > 0) {
@@ -15909,11 +15808,9 @@ public final class Mutations extends MutationsHelper {
                 outputText("[pg]A feeling of tightness starts in your [butt], increasing gradually. The sensation grows and grows, but as it does your center of balance shifts. You reach back to feel yourself, and sure enough your massive booty is shrinking into a more manageable size.");
             }
 
-
             if (player.tone < player.maxToneCap()) outputText(player.modTone(player.maxToneCap(), 15));
             if (player.thickness < 30) outputText(player.modThickness(30, 5));
             if (player.femininity > 10) player.modFem(10, 20);
-
 
             //Kills vagina size (and eventually the whole vagina)
             if (player.vaginas.length > 0) {
@@ -15927,28 +15824,30 @@ public final class Mutations extends MutationsHelper {
                     player.removeVagina(0, 1);
                     if (player.cocks.length == 0) {
                         outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
-                        player.createCock(player.clitLength + 2);
+                        transformations.CockHuman().applyEffect(false);
                         player.clitLength = .25;
                     }
                 }
                 changes++;
             }
-
-
         }
-        if ((type == 0 || type == 1 || type == 2) && player.hasPlainSkinOnly() && player.skin.base.color != "green" && changes < changeLimit && rand(3) == 0) {
-            player.skin.base.color = "green";
+
+        var skinColor:String = UshiOniRace.UshiOniSkinColors[type%6];
+        if (player.hasPlainSkinOnly() && player.skinTone != skinColor && changes < changeLimit && rand(3) == 0) {
+            player.skin.base.color = skinColor;
             outputText("[pg]Your skin tingles ever so slightly as you skin’s color changes before your eyes. As the tingling diminishes, you find that your skin has turned " + player.skinTone + ".");
             changes++;
         }
-        if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+        if (!player.hasPlainSkinOnly() && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.SkinPlain.applyEffect();
             changes++;
         }
-        if ((type == 0 || type == 1 || type == 2) && player.hairType == Hair.NORMAL && player.hairColor != "dark green" && changes < changeLimit && rand(3) == 0) {
-            player.hairColor = "dark green";
-            outputText("[pg]Your head tingles as something in your hair change, the strands flashing for an instant before they turn " + player.hairColor + ".");
+
+        var hairColor: String = UshiOniRace.UshiOniHairColors[type%6]
+        if (player.hairType == Hair.NORMAL && player.hairColor != hairColor && changes < changeLimit && rand(3) == 0) {
+            player.hairColor = hairColor;
+            outputText("[pg]Your head tingles as something in your hair change, the strands flashing for an instant before they turn " + hairColor + ".");
             changes++;
         }
 
@@ -15958,7 +15857,7 @@ public final class Mutations extends MutationsHelper {
 		    transformations.HairHuman.applyEffect();
             changes++;
         }
-
+        //Ears
         if ((type == 0 || type == 1 || type == 2) && player.ears.type != Ears.COW && changes < changeLimit && rand(3) == 0) {
             if (player.hasStatusEffect(StatusEffects.UshiOnnaVariant)) {
                 player.removeStatusEffect(StatusEffects.UshiOnnaVariant);
@@ -15968,26 +15867,27 @@ public final class Mutations extends MutationsHelper {
 			transformations.EarsCow.applyEffect();
             changes++;
         }
+        //Tattoo
         if (player.skin.base.type == Skin.PLAIN && !player.skin.hasUshiOniTattoo() && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.SkinPatternUshiOniTattoo.applyEffect();
             changes++;
         }
-        if ((player.isTaur() || player.isGoo() || player.isNaga() || player.isScylla() || player.isAlraune()) && changes < changeLimit && rand(4) == 0) {
+        //Legs
+        if ((!player.isBiped() && player.lowerBody != LowerBody.DRIDER) && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.LowerBodyHuman.applyEffect();
             changes++;
         }
         //Normal Biped Legs -> Carapace-Clad Legs
-		if (
-				(
-						(type == 1 && player.lowerBody != LowerBody.DRIDER && player.lowerBody != LowerBody.ATLACH_NACHA && player.lowerBody != LowerBody.CHITINOUS_SPIDER_LEGS)
-						||
-						(type != 1 && player.lowerBody != LowerBody.CHITINOUS_SPIDER_LEGS)
-				) && (
-						!player.isGoo() && !player.isNaga() && !player.isTaur() && !player.isScylla()
-				) && player.lowerBody != LowerBody.GARGOYLE
-				&& changes < changeLimit && rand(4) == 0
+		if ((
+                (type == 1 && !InCollection(player.lowerBody, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.CHITINOUS_SPIDER_LEGS))
+                ||
+                (type != 1 && player.lowerBody != LowerBody.CHITINOUS_SPIDER_LEGS)
+            ) && (
+                !player.isGoo() && !player.isNaga() && !player.isTaur() && !player.isScylla()
+            )
+            && changes < changeLimit && rand(4) == 0
 		) {
             outputText("[pg]");
             transformations.LowerBodySpider.applyEffect();
@@ -16018,7 +15918,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //(Arms to carapace-covered arms)
-        if (!InCollection(Arms.GARGOYLE, Arms.SPIDER) && player.lowerBody == LowerBody.USHI_ONI && changes < changeLimit && rand(3) == 0) {
+        if (!InCollection(Arms.SPIDER) && player.lowerBody == LowerBody.USHI_ONI && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.ArmsSpider.applyEffect();
             changes++;
@@ -16047,34 +15947,10 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //eyes color change
-        if ((type == 0 || type == 1 || type == 2) && transformations.EyesChangeColor(["black"]).isPossible() && changes < changeLimit && rand(2) == 0) {
-            transformations.EyesChangeColor(["black"]).applyEffect(false);
-            outputText("[pg]Your vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now black.");
-            changes++;
-        }
-        if ((type == 3 || type == 4 || type == 5) && transformations.EyesChangeColor(["red"]).isPossible() && changes < changeLimit && rand(2) == 0) {
-            transformations.EyesChangeColor(["red"]).applyEffect(false);
-            outputText("[pg]Your vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now red.");
-            changes++;
-        }
-        if ((type == 6 || type == 7 || type == 8) && transformations.EyesChangeColor(["gray"]).isPossible() && changes < changeLimit && rand(2) == 0) {
-            transformations.EyesChangeColor(["gray"]).applyEffect(false);
-            outputText("[pg]Your vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now gray.");
-            changes++;
-        }
-        if ((type == 9 || type == 10 || type == 11) && transformations.EyesChangeColor(["brown"]).isPossible() && changes < changeLimit && rand(2) == 0) {
-            transformations.EyesChangeColor(["brown"]).applyEffect(false);
-            outputText("[pg]Your vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now brown.");
-            changes++;
-        }
-        if ((type == 12 || type == 13 || type == 14) && transformations.EyesChangeColor(["light blue"]).isPossible() && changes < changeLimit && rand(2) == 0) {
-            transformations.EyesChangeColor(["light blue"]).applyEffect(false);
-            outputText("[pg]Your vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now light blue.");
-            changes++;
-        }
-        if ((type == 15 || type == 16 || type == 17) && transformations.EyesChangeColor(["yellow"]).isPossible() && changes < changeLimit && rand(2) == 0) {
-            transformations.EyesChangeColor(["yellow"]).applyEffect(false);
-            outputText("[pg]Your vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now yellow.");
+        var eyeColor:String = UshiOniRace.UshiOniEyeColors[type%6];
+        if (transformations.EyesChangeColor([eyeColor]).isPossible() && changes < changeLimit && rand(2) == 0) {
+            transformations.EyesChangeColor([eyeColor]).applyEffect(false);
+            outputText("[pg]Your vision gets blurry and your eyes itch, you go to a barrel with water and put your head underwater, eyes wide open. After the pain has subsided you take your head out of the water and look at its surface, your eyes are now "+eyeColor+".");
             changes++;
         }
 
