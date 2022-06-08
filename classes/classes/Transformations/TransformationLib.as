@@ -7371,6 +7371,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // is present
 	  function (): Boolean {
 	    return player.lowerBody === LowerBody.FERRET;
+	  },
+		// is possible
+		function (): Boolean {
+			return player.hasGooSkin() && player.arms.type == Arms.GOO && player.lowerBody != LowerBody.GOO;
 	  }
 	);
 

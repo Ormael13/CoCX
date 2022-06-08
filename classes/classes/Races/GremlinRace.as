@@ -8,7 +8,7 @@ import classes.Race;
 public class GremlinRace extends Race {
 	public static const GremlinEyeColors:/*String*/Array = ["red", "yellow", "purple", "orange"];
 	public static const GremlinSkinColors:/*String*/Array = ["light", "tan", "dark"];
-	public static const GremlinHairColos:/*String*/Array = ["emerald", "green", "dark green", "aqua", "light green"];
+	public static const GremlinHairColors:/*String*/Array = ["emerald", "green", "dark green", "aqua", "light green"];
 	
 	public function GremlinRace(id:int) {
 		super("Gremlin", id);
@@ -49,7 +49,7 @@ public class GremlinRace extends Race {
 				},
 				"plain skin; ")
 				.skinBaseColor(ANY(GremlinSkinColors), +1, -1000)
-				.skinBaseColor(ANY(GremlinHairColos), +1)
+				.skinBaseColor(ANY(GremlinHairColors), +1)
 				.armType(Arms.HUMAN, +1)
 				.legType(LowerBody.HUMAN, +1)
 				.noWings(+1)
