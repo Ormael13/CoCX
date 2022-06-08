@@ -1916,7 +1916,7 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.004;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.005) {
-				outputText("\It will hurt a tiny bit fellow daoists but it's for greater good to cripple our cultivations to start anew.\n\nPS. I LIED IT HURTS LIKE NINE HELLS AND FOUR HEAVEND... MUAHAHAHAHAHA");
+				outputText("\n\nIt will hurt a tiny bit fellow daoists but it's for greater good to cripple our cultivations to start anew.\nPS. I LIED IT HURTS LIKE NINE HELLS AND FOUR HEAVEND... MUAHAHAHAHAHA");
 				if (player.hasPerk(PerkLib.JobSoulCultivator)) {
 					player.removePerk(PerkLib.JobSoulCultivator);
 					player.perkPoints += 1;

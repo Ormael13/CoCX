@@ -226,15 +226,15 @@ public static const UNKNOWN_FLAG_NUMBER_00217:int                               
 public static const CERAPH_OWNED_DICKS:int                                          =  218; // Number of Dicks Ceraph owns
 public static const CERAPH_OWNED_PUSSIES:int                                        =  219; // Number of Pussies Ceraph owns
 public static const CERAPH_OWNED_TITS:int                                           =  220; // Number of Tit's Ceraph owns
-public static const UNKNOWN_FLAG_NUMBER_00221:int                                   =  221; // -Met her?
-public static const UNKNOWN_FLAG_NUMBER_00222:int                                   =  222; // -Times Won Contest
-public static const UNKNOWN_FLAG_NUMBER_00223:int                                   =  223; // -Times Lost Contest
-public static const UNKNOWN_FLAG_NUMBER_00224:int                                   =  224; // -Who won contest last? (1 = pc, 2 = strahza)
-public static const UNKNOWN_FLAG_NUMBER_00225:int                                   =  225; // -How long has Strahza gone without sex?
-public static const UNKNOWN_FLAG_NUMBER_00226:int                                   =  226; // -Is PC losing the Roxanne's drinking contest intentionally?
-public static const UNKNOWN_FLAG_NUMBER_00227:int                                   =  227; // -Drinking Contest Bonus Score
-public static const UNKNOWN_FLAG_NUMBER_00228:int                                   =  228; // Diapause fluid store
-public static const UNKNOWN_FLAG_NUMBER_00229:int                                   =  229; // Diapause gain need displayed?
+public static const ROXANNE_MET:int                                   				=  221; // -Met her?
+public static const ROXANNE_TIMES_WON:int                                   		=  222; // -Times Won Contest
+public static const ROXANNE_TIMES_LOST:int                                   		=  223; // -Times Lost Contest
+public static const ROXANNE_LAST_RESULT:int                                   		=  224; // -Who won contest last? (1 = pc, 2 = strahza)
+public static const ROXANNE_DICK_SIZE:int                                   		=  225; // -How long has Strahza gone without sex?
+public static const UNKNOWN_FLAG_NUMBER_00226:int                                   =  226;
+public static const ROXANNE_BONUS_SCORE:int                                   		=  227; // -Drinking Contest Bonus Score
+public static const DIAPAUSE_FLUID_STORE:int                                   		=  228; // Diapause fluid store
+public static const DIAPAUSE_DISPLAYED:int                                   		=  229; // Diapause gain need displayed?
 public static const IZMA_ENCOUNTER_COUNTER:int                                   	=  230; // Sharkgirls met? (Izma counter)
 public static const IZMA_TIMES_FOUGHT_AND_WON:int                                   =  231; // Izma fight
 public static const IZMA_TALKED_AT_LAKE:int                                   		=  232; // Times Talked At shark pussy
@@ -272,7 +272,7 @@ public static const UNKNOWN_FLAG_NUMBER_00263:int                               
 public static const UNKNOWN_FLAG_NUMBER_00264:int                                   =  264; // Nancy relationship level
 public static const UNKNOWN_FLAG_NUMBER_00265:int                                   =  265; // Talk Nancy
 public static const UNKNOWN_FLAG_NUMBER_00266:int                                   =  266; // Times boned
-public static const UNKNOWN_FLAG_NUMBER_00267:int                                   =  267; // Lilium Timed Boned
+public static const TIMES_FUCKED_LILIUM:int                                   =  267; // Lilium Timed Boned
 public static const PLAYER_DISARMED_WEAPON_ID:int                                   =  268; // weapon storage
 public static const PLAYER_DISARMED_WEAPON_ATTACK:int                               =  269; // weapon damage
 public static const TIMES_ENCOUNTERED_FEMALE_SPIDER:int                             =  270; // Times encountered spiderbitches
