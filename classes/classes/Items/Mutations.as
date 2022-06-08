@@ -1677,7 +1677,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Wolf paws
-        if (rand(2) == 0 && player.lowerBody != LowerBody.WOLF && player.tailType == Tail.WOLF && player.ears.type == Ears.WOLF && changes < changeLimit) {
+        if (rand(2) == 0 && transformations.LowerBodyWolf(2).isPossible() && changes < changeLimit) {
             if (player.isBiped() && player.lowerBody == LowerBody.HUMAN) {
                 outputText("[pg]");
                 transformations.LowerBodyWolf(2).applyEffect();
@@ -1690,7 +1690,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //Wolf ears
-        if (rand(2) == 0 && player.ears.type != Ears.WOLF && player.tailType == Tail.WOLF && changes < changeLimit) {
+        if (rand(2) == 0 && transformations.EarsWolf.isPossible() && changes < changeLimit) {
             if (player.ears.type == Ears.HUMAN) {
                 outputText("[pg]");
                 transformations.EarsWolf.applyEffect();
@@ -1703,7 +1703,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //Grow tail if not wolf-tailed
-        if (rand(2) == 0 && changes < changeLimit && player.tailType != Tail.WOLF && player.tailType != Tail.GARGOYLE) {
+        if (rand(2) == 0 && changes < changeLimit && player.tailType != Tail.WOLF) {
             if (player.tailType == Tail.NONE) {
                 outputText("[pg]");
                 transformations.TailWolf.applyEffect();
@@ -2245,7 +2245,7 @@ public final class Mutations extends MutationsHelper {
         //Master Furry Appearance Order:
         //Tail -> Ears -> Paws -> Arms -> Fur -> Face
         //Dog-face requires fur & paws  Should be last morph to take place
-        if (rand(4) == 0 && changes < changeLimit && player.faceType != Face.DOG && player.hasFullCoatOfType(Skin.FUR) && player.lowerBody == LowerBody.DOG) {
+        if (rand(4) == 0 && changes < changeLimit && transformations.FaceDog.isPossible()) {
             outputText("[pg]");
             transformations.FaceDog.applyEffect();
             changes++;
@@ -2258,14 +2258,14 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (changes < changeLimit && type == 3 && player.hairColor != "midnight black" && player.lowerBody != LowerBody.GARGOYLE) {
+        if (changes < changeLimit && type == 3 && player.hairColor != "midnight black") {
             outputText("[pg]");
             transformations.HairChangeColor(["midnight black"]).applyEffect();
             outputText("[pg]");
             transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "midnight black", adj: "thick"}).applyEffect();
         }
         //Become furred - requires paws and tail
-        if (rand(4) == 0 && changes < changeLimit && player.lowerBody == LowerBody.DOG && player.tailType == Tail.DOG && !player.hasFur() && !player.isGargoyle()) {
+        if (rand(4) == 0 && changes < changeLimit && player.lowerBody == LowerBody.DOG && player.tailType == Tail.DOG && !player.hasFur()) {
             outputText("[pg]");
             if (rand(3) > 0) {
                 transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "black", "dark gray", "gray", "light gray", "silver", "white"]}).applyEffect();
@@ -2275,18 +2275,18 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Change to paws - requires tail and ears
-        if (rand(3) == 0 && player.lowerBody != LowerBody.DOG && player.tailType == Tail.DOG && player.ears.type == Ears.DOG && changes < changeLimit) {
+        if (rand(3) == 0 && transformations.LowerBodyDog(2).isPossible() && changes < changeLimit) {
             outputText("[pg]");
             transformations.LowerBodyDog(2).applyEffect();
             changes++;
         }
         //Change to dog-ears!  Requires dog-tail
-        if (rand(2) == 0 && player.ears.type != Ears.DOG && player.tailType == Tail.DOG && changes < changeLimit) {
+        if (rand(2) == 0 && transformations.EarsDog.isPossible() && changes < changeLimit) {
             transformations.EarsDog.applyEffect();
             changes++;
         }
         //Grow tail if not dog-tailed
-        if (rand(3) == 0 && changes < changeLimit && player.tailType != Tail.GARGOYLE && ((player.tailType != Tail.DOG && type != 6) || (player.tailType != Tail.WOLF && type == 6))) {
+        if (rand(3) == 0 && changes < changeLimit && ((player.tailType != Tail.DOG && type != 6) || (player.tailType != Tail.WOLF && type == 6))) {
             outputText("[pg]");
             if (type != 6) {
                 transformations.TailDog.applyEffect();
@@ -3115,7 +3115,7 @@ public final class Mutations extends MutationsHelper {
         var boobsGrew:Boolean = false;
         //Increase player's breast size, if they are HH or bigger
         //do not increase size, but do the other actions:
-        if (((tainted && player.biggestTitSize() <= 11) || (!tainted && player.biggestTitSize() <= 5)) && changes < changeLimit && (rand(3) == 0 || enhanced)) {
+        if (((tainted? player.biggestTitSize() <= 11 : player.biggestTitSize() <= 5)) && changes < changeLimit && (rand(3) == 0 || enhanced)) {
             if (rand(2) == 0) outputText("[pg]Your [breasts] tingle for a moment before becoming larger.");
             else outputText("[pg]You feel a little weight added to your chest as your [breasts] seem to inflate and settle in a larger size.");
             player.growTits(1 + rand(3), 1, false, 3);
@@ -3132,7 +3132,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //If breasts are D or bigger and are not lactating, they also start lactating:
-        if (player.biggestTitSize() >= 4 && player.breastRows[0].lactationMultiplier < 1 && changes < changeLimit && (rand(3) == 0 || boobsGrew || enhanced)) {
+        if (player.biggestTitSize() >= 4 && !player.isLactating() && changes < changeLimit && (rand(3) == 0 || boobsGrew || enhanced)) {
             outputText("[pg]You gasp as your [breasts] feel like they are filling up with something.  Within moments, a drop of milk leaks from your [breasts]; <b> you are now lactating</b>.");
             player.breastRows[0].lactationMultiplier = 1.25;
             changes++;
@@ -3144,12 +3144,12 @@ public final class Mutations extends MutationsHelper {
             if (transformations.NipplesPerBreastFour.isPossible()) {
                 changes++;
                 transformations.NipplesPerBreastFour.applyEffect();
-            } else if (player.biggestLactation() > 1) {
+            } else if (player.isLactating()) {
                 if (rand(2) == 0) outputText("[pg]A wave of pleasure passes through your chest as your [breasts] start leaking milk from a massive jump in production.");
                 else outputText("[pg]Something shifts inside your [breasts] and they feel MUCH fuller and riper.  You know that you've started producing much more milk.");
                 player.boostLactation(2.5);
-                if ((player.nippleLength < 1.5 && tainted) || (!tainted && player.nippleLength < 1)) {
-                    outputText("  Your " + nippleDescript(0) + "s swell up, growing larger to accommodate your increased milk flow.");
+                if (tainted? player.nippleLength < 1.5 : player.nippleLength < 1) {
+                    outputText("  Your [nipples] swell up, growing larger to accommodate your increased milk flow.");
                     player.nippleLength += .25;
                     player.addCurse("sen", 1, 1);
                 }
@@ -3219,7 +3219,7 @@ public final class Mutations extends MutationsHelper {
         }
         //General Appearance (Tail -> Ears -> Paws(fur stripper) -> Face -> Horns
         //Give the player a bovine tail, same as the minotaur
-        if (tainted && player.tailType != Tail.COW && player.tailType != Tail.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (tainted && player.tailType != Tail.COW && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.TailCow.applyEffect();
             changes++;

@@ -133,7 +133,7 @@ package classes.GeneticMemories {
 			cost: 800,
 			title: "Fuckable",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.NipplesFuckable;
+				return CoC.instance.transformations.NipplesFuckableForce;
 			}
 		});
 
