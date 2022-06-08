@@ -94,11 +94,11 @@ package classes.GeneticMemories {
 		});
 
 		public static const NOLACTATE:int = 5;
-		EnumValue.add(Memories, NONE, "NONE", {
+		EnumValue.add(Memories, NOLACTATE, "NOLACTATE", {
 			id: "Unlocked Metamorph",
-			name: "No Breasts",
+			name: "No Lactate",
 			cost: 800,
-			title: "None",
+			title: "No Lactation",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.RemoveLactation;
 			}

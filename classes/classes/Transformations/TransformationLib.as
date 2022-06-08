@@ -9888,6 +9888,14 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 */
 
 /*
+*    ███████ ███████ ██   ██ ██    ██  █████  ██
+*    ██      ██       ██ ██  ██    ██ ██   ██ ██
+*    ███████ █████     ███   ██    ██ ███████ ██
+*         ██ ██       ██ ██  ██    ██ ██   ██ ██
+*    ███████ ███████ ██   ██  ██████  ██   ██ ███████
+*/
+
+/*
 *    ██████  ██████  ███████  █████  ███████ ████████ ███████
 *    ██   ██ ██   ██ ██      ██   ██ ██         ██    ██
 *    ██████  ██████  █████   ███████ ███████    ██    ███████
@@ -9956,7 +9964,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		},
 		// is present
 		function ():Boolean {
-			return player.smallestTitSize() >= 6;
+			return player.hasBreasts();
 		}
 	);
 
@@ -9989,54 +9997,54 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	);
 
 	public const BreastRowsOne:Transformation = new SimpleTransformation("One pair of breasts ONLY",
-			// apply effect
-			function (doOutput:Boolean):void {
-				var desc: String = "";
+		// apply effect
+		function (doOutput:Boolean):void {
+			var desc: String = "";
 
-				while (player.bRows() > 1)
-					BreastRowsRemoveToOne.applyEffect(doOutput);
+			while (player.bRows() > 1)
+				BreastRowsRemoveToOne.applyEffect(doOutput);
 
-				if (player.bRows() == 0) {
-					CreateBreastRow(3).applyEffect(doOutput);
-				}
-
-				if (doOutput) outputText(desc);
-			},
-			// is present
-			function ():Boolean {
-				return player.breastRows.length == 1;
-			},
-			// is possible
-			function ():Boolean {
-				return player.breastRows.length != 1;
+			if (player.bRows() == 0) {
+				CreateBreastRow(3).applyEffect(doOutput);
 			}
+
+			if (doOutput) outputText(desc);
+		},
+		// is present
+		function ():Boolean {
+			return player.breastRows.length == 1;
+		},
+		// is possible
+		function ():Boolean {
+			return player.breastRows.length != 1;
+		}
 	);
 
 	public const BreastRowsTwo:Transformation = new SimpleTransformation("Two pairs of breasts ONLY",
-			// apply effect
-			function (doOutput:Boolean):void {
-				var desc: String = "";
+		// apply effect
+		function (doOutput:Boolean):void {
+			var desc: String = "";
 
-				while (player.bRows() > 2)
-					BreastRowsRemoveToOne.applyEffect(doOutput);
+			while (player.bRows() > 2)
+				BreastRowsRemoveToOne.applyEffect(doOutput);
 
-				if (player.bRows() == 0) {
-					CreateBreastRow(3).applyEffect(doOutput);
-					desc += "[pg]"
-				}
-				if (player.bRows() < 2)
-					CopyBreastRow().applyEffect();
-
-				if (doOutput) outputText(desc);
-			},
-			// is present
-			function ():Boolean {
-				return player.breastRows.length == 2;
-			},
-			// is possible
-			function ():Boolean {
-				return player.breastRows.length != 2;
+			if (player.bRows() == 0) {
+				CreateBreastRow(3).applyEffect(doOutput);
+				desc += "[pg]"
 			}
+			if (player.bRows() < 2)
+				CopyBreastRow().applyEffect();
+
+			if (doOutput) outputText(desc);
+		},
+		// is present
+		function ():Boolean {
+			return player.breastRows.length == 2;
+		},
+		// is possible
+		function ():Boolean {
+			return player.breastRows.length != 2;
+		}
 	);
 
 	public const BreastRowsThree:Transformation = new SimpleTransformation("Three pairs of breasts ONLY",
@@ -10101,92 +10109,90 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	);
 
 	public function CreateBreastRow(size:int = 2):Transformation { return new SimpleTransformation("Create a breast row",
-				// apply effect
-				function (doOutput:Boolean):void {
-					var desc:String = "[pg]";
+		// apply effect
+		function (doOutput:Boolean):void {
+			var desc:String = "[pg]";
 
-					if (size < 0) size = 0;
-					if (player.bRows() < 3)
-						desc += "Your chest tingles uncomfortably as your center of balance shifts.  <b>You now have a pair of " +breastSize(size)+ " breasts.</b>";
-					else {
-						if (size == 0) desc += "Your abdomen tingles and twitches as a new row of breasts sprouts below the others.";
-						else desc +="Your abdomen tingles and twitches as a new row of " + breastSize(size) + " " + breastDescript(player.bRows()-1) + " sprouts below your others.";
+			if (size < 0) size = 0;
+			if (player.bRows() < 3)
+				desc += "Your chest tingles uncomfortably as your center of balance shifts.  <b>You now have a pair of " +breastSize(size)+ " breasts.</b>";
+			else {
+				if (size == 0) desc += "Your abdomen tingles and twitches as a new row of breasts sprouts below the others.";
+				else desc +="Your abdomen tingles and twitches as a new row of " + breastSize(size) + " " + breastDescript(player.bRows()-1) + " sprouts below your others.";
 
-					}
-					if (player.bRows() == 0) {
-						desc += "  A sensitive nub grows on the summit of each tit, becoming a new nipple.";
-						player.createBreastRow(size);
-						if (player.nippleLength < .25) player.nippleLength = .25;
-					} else {
-						player.createBreastRow(size, player.breastRows[player.bRows() - 2].nipplesPerBreast);
-						if (player.breastRows[player.bRows() - 1].nipplesPerBreast == 1)
-							desc += "  A sensitive nub grows on the summit of each tit, becoming a new nipple.";
-						else
-							desc += "  A set of sensitive nubs grow on the summit of each tit, becoming new nipples.";
-						if (player.hasFuckableNipples()) {
-							player.breastRows[player.bRows() - 1].fuckable = true;
-							desc += "  Your new nipples are leaking and you can even press your finger inside, they are fuckable!"
-						}
-						player.breastRows[player.bRows() - 1].lactationMultiplier = player.breastRows[player.bRows() - 2].lactationMultiplier;
-						dynStats("lus", 30);
-						player.addCurse("sen", 2, 1);
-					}
-					if (doOutput) outputText(desc);
-					UnlockBreasts();
-				},
-				// is present
-				function ():Boolean {
-					return player.bRows() == 1;
-				},
-				// is possible
-				function ():Boolean {
-					return player.bRows() < 4;
+			}
+			if (player.bRows() == 0) {
+				desc += "  A sensitive nub grows on the summit of each tit, becoming a new nipple.";
+				player.createBreastRow(size);
+				if (player.nippleLength < .25) player.nippleLength = .25;
+			} else {
+				player.createBreastRow(size, player.breastRows[player.bRows() - 2].nipplesPerBreast);
+				if (player.breastRows[player.bRows() - 1].nipplesPerBreast == 1)
+					desc += "  A sensitive nub grows on the summit of each tit, becoming a new nipple.";
+				else
+					desc += "  A set of sensitive nubs grow on the summit of each tit, becoming new nipples.";
+				if (player.hasFuckableNipples()) {
+					player.breastRows[player.bRows() - 1].fuckable = true;
+					desc += "  Your new nipples are leaking and you can even press your finger inside, they are fuckable!"
 				}
-		);
-	}
+				player.breastRows[player.bRows() - 1].lactationMultiplier = player.breastRows[player.bRows() - 2].lactationMultiplier;
+				dynStats("lus", 30);
+				player.addCurse("sen", 2, 1);
+			}
+			if (doOutput) outputText(desc);
+			UnlockBreasts();
+		},
+		// is present
+		function ():Boolean {
+			return player.bRows() == 1;
+		},
+		// is possible
+		function ():Boolean {
+			return player.bRows() < 4;
+		}
+	); }
 
 	public function CopyBreastRow(keepSize:Boolean = false):Transformation { return new SimpleTransformation("Copy last breast row but shrink 1 size",
-				// apply effect
-				function (doOutput:Boolean):void {
-					var desc:String = "";
+		// apply effect
+		function (doOutput:Boolean):void {
+			var desc:String = "";
 
-					var size:int = player.breastRows[player.bRows() - 1].breastRating;
-					if (!keepSize) size--;
-					if (size < 0) size = 0;
-					desc += "There's an itching below your [allbreasts].  You idly scratch at it, but gods be damned, it hurts!  You peel off part of your [armor] to inspect the unwholesome itch, ";
-					if (player.biggestTitSize() >= 8) desc += "it's difficult to see past the wall of tits obscuring your view.";
-					else desc += "it's hard to get a good look at.";
-					desc += "  A few gentle prods draw a pleasant gasp from your lips, and you realize that you didn't have an itch - you were growing new nipples!";
-					desc += "[pg]A closer examination reveals your new nipples to be just like the ones above in size and shape";
-					if (player.breastRows[player.bRows() - 1].nipplesPerBreast > 1) desc += ", not to mention number";
-					else if (player.hasFuckableNipples()) desc += ", not to mention penetrability";
-					if (size > 0) {
-						desc += ".  While you continue to explore your body's newest addition, a strange heat builds behind the new nubs. Soft, jiggly breastflesh begins to fill your cupped hands.  Radiant warmth spreads through you, eliciting a moan of pleasure from your lips as your new breasts ";
-						if (keepSize) desc += "catch up to the pair above.";
-						else desc += "stop just short of the ones above.";
-						desc += "  They stop at " + breastSize(size) + "s.";
-					}
-					else desc += "  Your new breasts stay flat and masculine, not growing any larger.";
-					desc += "  <b>You have " + num2Text(player.bRows() + 1) + " rows of breasts!</b>";
-					if (doOutput) outputText(desc);
+			var size:int = player.breastRows[player.bRows() - 1].breastRating;
+			if (!keepSize) size--;
+			if (size < 0) size = 0;
+			desc += "There's an itching below your [allbreasts].  You idly scratch at it, but gods be damned, it hurts!  You peel off part of your [armor] to inspect the unwholesome itch, ";
+			if (player.biggestTitSize() >= 8) desc += "it's difficult to see past the wall of tits obscuring your view.";
+			else desc += "it's hard to get a good look at.";
+			desc += "  A few gentle prods draw a pleasant gasp from your lips, and you realize that you didn't have an itch - you were growing new nipples!";
+			desc += "[pg]A closer examination reveals your new nipples to be just like the ones above in size and shape";
+			if (player.breastRows[player.bRows() - 1].nipplesPerBreast > 1) desc += ", not to mention number";
+			else if (player.hasFuckableNipples()) desc += ", not to mention penetrability";
+			if (size > 0) {
+				desc += ".  While you continue to explore your body's newest addition, a strange heat builds behind the new nubs. Soft, jiggly breastflesh begins to fill your cupped hands.  Radiant warmth spreads through you, eliciting a moan of pleasure from your lips as your new breasts ";
+				if (keepSize) desc += "catch up to the pair above.";
+				else desc += "stop just short of the ones above.";
+				desc += "  They stop at " + breastSize(size) + "s.";
+			}
+			else desc += "  Your new breasts stay flat and masculine, not growing any larger.";
+			desc += "  <b>You have " + num2Text(player.bRows() + 1) + " rows of breasts!</b>";
+			if (doOutput) outputText(desc);
 
-					player.createBreastRow(size, player.breastRows[player.bRows() - 2].nipplesPerBreast);
-					if (player.hasFuckableNipples()) player.breastRows[player.bRows() - 1].fuckable = true;
-					player.breastRows[player.bRows() - 1].lactationMultiplier = player.breastRows[player.bRows() - 2].lactationMultiplier;
-					dynStats("lus", 30);
-					player.addCurse("sen", 2, 1);
-					UnlockBreasts();
-				},
-				// is present
-				function ():Boolean {
-					return player.bRows() >= 4;
-				},
-				// is possible
-				function ():Boolean {
-					return player.bRows() < 4;
-				}
-		);
-	}
+			player.createBreastRow(size, player.breastRows[player.bRows() - 2].nipplesPerBreast);
+			if (player.hasFuckableNipples()) player.breastRows[player.bRows() - 1].fuckable = true;
+			player.breastRows[player.bRows() - 1].lactationMultiplier = player.breastRows[player.bRows() - 2].lactationMultiplier;
+			dynStats("lus", 30);
+			player.addCurse("sen", 2, 1);
+			UnlockBreasts();
+		},
+		// is present
+		function ():Boolean {
+			return player.bRows() >= 4;
+		},
+		// is possible
+		function ():Boolean {
+			return player.bRows() < 4;
+		}
+	); }
 
 	public const NipplesPerBreastOne:Transformation = new SimpleTransformation("One nipple per breast",
 		// apply effect
@@ -10270,27 +10276,27 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	);
 
 	public const NipplesUnfuck:Transformation = new SimpleTransformation("Unfuck nipples",
-			// apply effect
-			function (doOutput:Boolean): void {
-				var desc: String = "";
-				var unfucked:Boolean;
-				for (var i:int = 0; i < player.breastRows.length; i++)
-					if (player.breastRows[i].fuckable) {
-						player.breastRows[i].fuckable = false;
-						unfucked = true;
-					}
-				desc += "[pg]Your [allbreasts] tingle with a chill that slowly migrates to your nipples.  You pant and moan, rubbing them with your fingers.  You notice that you can no longer penetrate your nipples like before.  ";
-				//Talk about if anything was changed.
-				if (doOutput && unfucked) outputText(desc);
-			},
-			// is present
-			function (): Boolean {
-				return !player.hasFuckableNipples();
-			},
-			// is possible
-			function (): Boolean {
-				return player.hasFuckableNipples();
-			}
+		// apply effect
+		function (doOutput:Boolean): void {
+			var desc: String = "";
+			var unfucked:Boolean;
+			for (var i:int = 0; i < player.breastRows.length; i++)
+				if (player.breastRows[i].fuckable) {
+					player.breastRows[i].fuckable = false;
+					unfucked = true;
+				}
+			desc += "[pg]Your [allbreasts] tingle with a chill that slowly migrates to your nipples.  You pant and moan, rubbing them with your fingers.  You notice that you can no longer penetrate your nipples like before.  ";
+			//Talk about if anything was changed.
+			if (doOutput && unfucked) outputText(desc);
+		},
+		// is present
+		function (): Boolean {
+			return !player.hasFuckableNipples();
+		},
+		// is possible
+		function (): Boolean {
+			return player.hasFuckableNipples();
+		}
 	);
 
 
@@ -10326,28 +10332,28 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	);
 
 	public const NipplesNoColor:Transformation = new SimpleTransformation("Black nipples",
-			// apply effect
-			function (doOutput:Boolean):void {
-				var desc: String = "";
+		// apply effect
+		function (doOutput:Boolean):void {
+			var desc: String = "";
 
-				//Cant have multicoloured nips...
-				if (player.hasStatusEffect(StatusEffects.GlowingNipples) || player.hasStatusEffect(StatusEffects.BlackNipples))
-					desc +="[pg]Something invisible brushes against your [niplpes], making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.";
-				if (player.hasStatusEffect(StatusEffects.GlowingNipples))
-					player.removeStatusEffect(StatusEffects.GlowingNipples);
-				if (player.hasStatusEffect(StatusEffects.BlackNipples))
-					player.removeStatusEffect(StatusEffects.BlackNipples);
+			//Cant have multicoloured nips...
+			if (player.hasStatusEffect(StatusEffects.GlowingNipples) || player.hasStatusEffect(StatusEffects.BlackNipples))
+				desc +="[pg]Something invisible brushes against your [niplpes], making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.";
+			if (player.hasStatusEffect(StatusEffects.GlowingNipples))
+				player.removeStatusEffect(StatusEffects.GlowingNipples);
+			if (player.hasStatusEffect(StatusEffects.BlackNipples))
+				player.removeStatusEffect(StatusEffects.BlackNipples);
 
-				if (doOutput) outputText(desc);
-			},
-			// is present
-			function ():Boolean {
-				return !player.hasStatusEffect(StatusEffects.BlackNipples) && !player.hasStatusEffect(StatusEffects.GlowingNipples);
-			},
-			// is possible
-			function ():Boolean {
-				return player.hasStatusEffect(StatusEffects.BlackNipples) || player.hasStatusEffect(StatusEffects.GlowingNipples);
-			}
+			if (doOutput) outputText(desc);
+		},
+		// is present
+		function ():Boolean {
+			return !player.hasStatusEffect(StatusEffects.BlackNipples) && !player.hasStatusEffect(StatusEffects.GlowingNipples);
+		},
+		// is possible
+		function ():Boolean {
+			return player.hasStatusEffect(StatusEffects.BlackNipples) || player.hasStatusEffect(StatusEffects.GlowingNipples);
+		}
 	);
 
 	public const NipplesBlack:Transformation = new SimpleTransformation("Black nipples",
@@ -10374,26 +10380,26 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	);
 
 	public const NipplesGlowing:Transformation = new SimpleTransformation("Glowing nipples",
-			// apply effect
-			function (doOutput:Boolean):void {
-				var desc: String = "";
+		// apply effect
+		function (doOutput:Boolean):void {
+			var desc: String = "";
 
-				//Cant have multicoloured nips...
-				TransformationUtils.applyTFIfNotPresent(NipplesNoColor, doOutput);
+			//Cant have multicoloured nips...
+			TransformationUtils.applyTFIfNotPresent(NipplesNoColor, doOutput);
 
-				desc += "[pg]You suddenly feel an itch in your nipples and undress to check up on them. To your surprise they begin to glow with a fluorescent blue light as latent electricity build up within them. Well, this will be interesting.  <b>You now have neon blue nipples that glow in the dark.</b>";
+			desc += "[pg]You suddenly feel an itch in your nipples and undress to check up on them. To your surprise they begin to glow with a fluorescent blue light as latent electricity build up within them. Well, this will be interesting.  <b>You now have neon blue nipples that glow in the dark.</b>";
 
-				if (doOutput) outputText(desc);
-				player.createStatusEffect(StatusEffects.GlowingNipples, 0, 0, 0, 0);
-			},
-			// is present
-			function ():Boolean {
-				return player.hasStatusEffect(StatusEffects.GlowingNipples);
-			},
-			// is possible
-			function ():Boolean {
-				return !player.hasStatusEffect(StatusEffects.BlackNipples) && !player.hasStatusEffect(StatusEffects.GlowingNipples);
-			}
+			if (doOutput) outputText(desc);
+			player.createStatusEffect(StatusEffects.GlowingNipples, 0, 0, 0, 0);
+		},
+		// is present
+		function ():Boolean {
+			return player.hasStatusEffect(StatusEffects.GlowingNipples);
+		},
+		// is possible
+		function ():Boolean {
+			return !player.hasStatusEffect(StatusEffects.BlackNipples) && !player.hasStatusEffect(StatusEffects.GlowingNipples);
+		}
 	);
 	/*
 */
@@ -10424,14 +10430,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		}
 	);
 	/*
-*/
-
-/*
-*    ███████ ███████ ██   ██ ██    ██  █████  ██
-*    ██      ██       ██ ██  ██    ██ ██   ██ ██
-*    ███████ █████     ███   ██    ██ ███████ ██
-*         ██ ██       ██ ██  ██    ██ ██   ██ ██
-*    ███████ ███████ ██   ██  ██████  ██   ██ ███████
 */
 
 /*
