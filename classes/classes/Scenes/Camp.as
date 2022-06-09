@@ -1992,7 +1992,7 @@ public class Camp extends NPCAwareContent{
 			}
 			//Ayane
 			if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) {
-				outputText("Ayane is tiddying your items to make sure everything is clean and well organised.\n\n");
+				outputText("Ayane is tidying your items to make sure everything is clean and well organised.\n\n");
 				buttons.add("Ayane", SceneLib.ayaneFollower.ayaneCampMenu).hint("Visit Ayane a kitsune priestess of Taoth.");
 			}
 			if (SceneLib.ayaneFollower.ayaneChildren() == 1){
