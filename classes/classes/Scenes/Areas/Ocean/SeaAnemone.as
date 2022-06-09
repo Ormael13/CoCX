@@ -45,7 +45,7 @@ public class SeaAnemone extends Monster
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if(pcCameWorms){
-				outputText("\n\nYour foe doesn't seem to mind at all...");
+				outputText("\n\nThe anemone, having reached out to try and catch some of the load but missing the grab, sets her face in an irate scowl and approaches you...");
 				doNext(SceneLib.combat.endLustLoss);
 			} else {
 				SceneLib.boat.anemoneScene.loseToAnemone();
