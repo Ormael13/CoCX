@@ -878,7 +878,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
             // apply effect
             function (doOutput:Boolean):void {
                 TransformationUtils.applyTFIfNotPresent(transformations.SkinAquaScales(Skin.COVERAGE_HIGH, {color: "orange", color2: "black", pattern: Skin.PATTERN_TIGER_STRIPES}), doOutput);
-                var desc:String = "[pg]Your scales begins to tingle and itch, before rapidly shifting to a shiny orange color, marked by random black scales looking like a stripes. You take a quick look in a nearby pool of water, to see your skin has morphed in appearance and texture to become more like a tigershark!";
+                var desc:String = "Your scales begins to tingle and itch, before rapidly shifting to a shiny orange color, marked by random black scales looking like a stripes. You take a quick look in a nearby pool of water, to see your skin has morphed in appearance and texture to become more like a tigershark!";
                 player.skin.base.color2 = "black";
                 if (doOutput) outputText(desc);
                 Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.SHARK_STRIPES));
@@ -10146,7 +10146,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				player.createBreastRow(size);
 				if (player.nippleLength < .25) player.nippleLength = .25;
 			} else {
-				player.createBreastRow(size, player.breastRows[player.bRows() - 2].nipplesPerBreast);
+				player.createBreastRow(size, player.breastRows[player.bRows() - 1].nipplesPerBreast);
 				if (player.breastRows[player.bRows() - 1].nipplesPerBreast == 1)
 					desc += "  A sensitive nub grows on the summit of each tit, becoming a new nipple.";
 				else
@@ -10175,9 +10175,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public function CopyBreastRow(keepSize:Boolean = false):Transformation { return new SimpleTransformation("Copy last breast row but shrink 1 size",
 		// apply effect
 		function (doOutput:Boolean):void {
-			var desc:String = "";
+			var desc:String = "[pg]";
 
-			var size:int = player.breastRows[player.bRows() - 1].breastRating;
+			var size:Number = player.breastRows[player.bRows() - 1].breastRating;
 			if (!keepSize) size--;
 			if (size < 0) size = 0;
 			desc += "There's an itching below your [allbreasts].  You idly scratch at it, but gods be damned, it hurts!  You peel off part of your [armor] to inspect the unwholesome itch, ";
@@ -10197,7 +10197,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			desc += "  <b>You have " + num2Text(player.bRows() + 1) + " rows of breasts!</b>";
 			if (doOutput) outputText(desc);
 
-			player.createBreastRow(size, player.breastRows[player.bRows() - 2].nipplesPerBreast);
+			player.createBreastRow(size, player.breastRows[player.bRows() - 1].nipplesPerBreast);
 			if (player.hasFuckableNipples()) player.breastRows[player.bRows() - 1].fuckable = true;
 			player.breastRows[player.bRows() - 1].lactationMultiplier = player.breastRows[player.bRows() - 2].lactationMultiplier;
 			dynStats("lus", 30);
@@ -10332,10 +10332,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		// is present
 		function (): Boolean {
 			return !player.hasFuckableNipples();
-		},
-		// is possible
-		function (): Boolean {
-			return player.hasFuckableNipples();
 		}
 	);
 
@@ -10364,10 +10360,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		// is present
 		function ():Boolean {
 			return !player.isLactating();
-		},
-		// is possible
-		function ():Boolean {
-			return player.isLactating();
 		}
 	);
 
@@ -10389,10 +10381,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		// is present
 		function ():Boolean {
 			return !player.hasStatusEffect(StatusEffects.BlackNipples) && !player.hasStatusEffect(StatusEffects.GlowingNipples);
-		},
-		// is possible
-		function ():Boolean {
-			return player.hasStatusEffect(StatusEffects.BlackNipples) || player.hasStatusEffect(StatusEffects.GlowingNipples);
 		}
 	);
 
@@ -10413,10 +10401,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		// is present
 		function ():Boolean {
 			return player.hasStatusEffect(StatusEffects.BlackNipples);
-		},
-		// is possible
-		function ():Boolean {
-			return !player.hasStatusEffect(StatusEffects.BlackNipples) && !player.hasStatusEffect(StatusEffects.GlowingNipples);
 		}
 	);
 
@@ -10437,10 +10421,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		// is present
 		function ():Boolean {
 			return player.hasStatusEffect(StatusEffects.GlowingNipples);
-		},
-		// is possible
-		function ():Boolean {
-			return !player.hasStatusEffect(StatusEffects.BlackNipples) && !player.hasStatusEffect(StatusEffects.GlowingNipples);
 		}
 	);
 	/*

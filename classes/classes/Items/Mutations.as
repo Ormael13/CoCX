@@ -1900,7 +1900,7 @@ public final class Mutations extends MutationsHelper {
                     choice = 0;
                     //set temp2 to first dogdick for initialization
                     while (choice < player.cocks.length) {
-                        if (InCollection(player.cocks[choice].cockType, CockTypesEnum.DOG, CockTypesEnum.FOX, CockTypesEnum.WOLF, CockTypesEnum.DISPLACER)) {
+                        if (player.isDogCock(choice)) {
                             temp2 = choice;
                             break;
                         } else choice++;
@@ -1910,7 +1910,7 @@ public final class Mutations extends MutationsHelper {
                     //Find smallest knot
                     while (choice > 0) {
                         choice--;
-                        if (InCollection(player.cocks[choice].cockType, CockTypesEnum.DOG, CockTypesEnum.FOX, CockTypesEnum.WOLF, CockTypesEnum.DISPLACER) && player.cocks[choice].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = choice;
+                        if (player.isDogCock(choice) && player.cocks[choice].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = choice;
                     }
                     //Have smallest knotted cock selected.
                     temp3 = (rand(2) + 5) / 20 * crit;
@@ -1919,9 +1919,9 @@ public final class Mutations extends MutationsHelper {
                     if (player.cocks[temp2].knotMultiplier >= 2) temp3 /= 5;
                     player.cocks[temp2].knotMultiplier += (temp3);
                     outputText("[pg]");
-                    if (temp3 < .06) outputText("Your [cock " + temp2+1 + "] feels unusually tight in your sheath as your knot grows.");
-                    if (temp3 >= .06 && temp3 <= .12) outputText("Your [cock " + temp2+1 + "] pops free of your sheath, thickening nicely into a bigger knot.");
-                    if (temp3 > .12) outputText("Your [cock " + temp2+1 + "] surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.");
+                    if (temp3 < .06) outputText("Your " + cockDescript(temp2) + " feels unusually tight in your sheath as your knot grows.");
+                    if (temp3 >= .06 && temp3 <= .12) outputText("Your " + cockDescript(temp2) + " pops free of your sheath, thickening nicely into a bigger knot.");
+                    if (temp3 > .12) outputText("Your " + cockDescript(temp2) + " surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.");
                     dynStats("lus", 5 * crit);
                     player.addCurse("sen", 1, 1);
                 }
@@ -1966,7 +1966,7 @@ public final class Mutations extends MutationsHelper {
                 choice = 0;
                 //set temp2 to first dogdick for initialization
                 while (choice < player.cocks.length) {
-                    if (player.cocks[choice].cockType == CockTypesEnum.DOG) {
+                    if (player.isDogCock(choice)) {
                         temp2 = choice;
                         break;
                     } else choice++;
@@ -1976,7 +1976,7 @@ public final class Mutations extends MutationsHelper {
                 //Find smallest knot
                 while (choice > 0) {
                     choice--;
-                    if (player.cocks[choice].cockType == CockTypesEnum.DOG && player.cocks[choice].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = choice;
+                    if (player.isDogCock(choice) && player.cocks[choice].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = choice;
                 }
                 //Have smallest knotted cock selected.
                 temp3 = (rand(2) + 1) / 20 * crit;
@@ -2095,14 +2095,14 @@ public final class Mutations extends MutationsHelper {
                         dynStats("lus", 5);
                         player.addCurse("sen", 6, 1);
                         //New row's size = the size of the row above -1
-                        transformations.CreateBreastRow(player.breastRows[choice - 1].breastRating - 1).applyEffect();
+                        transformations.CreateBreastRow(player.breastRows[choice].breastRating - 1).applyEffect();
                         changes++;
                     }
                     //Extra sensitive if crit
                     if (crit > 1 && type != 6) {
                         if (crit > 2) {
-                            outputText("  You heft your new chest experimentally, exploring the new flesh with tender touches.  Your eyes nearly roll back in your head from the intense feelings.");
-                            dynStats("lus", 15, "cor", 0)
+                            outputText("[pg]You heft your new chest experimentally, exploring the new flesh with tender touches.  Your eyes nearly roll back in your head from the intense feelings.");
+                            dynStats("lus", 15)
                             player.addCurse("sen", 6, 1);
                         } else {
                             outputText("  You touch your new nipples with a mixture of awe and desire, the experience arousing beyond measure.  You squeal in delight, nearly orgasming, but in time finding the willpower to stop yourself.");
@@ -8328,7 +8328,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("your " + player.skinDesc);
             outputText(" has changed to become ");
             player.skin.base.color = randomChoice("tan", "olive", "dark", "light");
-            outputText(player.skinTone + " colored.</b>");
+            outputText(player.skin.base.color + " colored.</b>");
         }
         //-Grow hips out if narrow.
         if (player.hips.type < 10 && changes < changeLimit && rand(3) == 0) {

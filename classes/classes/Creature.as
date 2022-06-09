@@ -1750,6 +1750,10 @@ public class Creature extends Utils
 			return cocks[index].cockLength;
 		}
 
+		public function isDogCock(x:int = 0): Boolean {
+			return InCollection(cocks[x].cockType, CockTypesEnum.DOG, CockTypesEnum.FOX, CockTypesEnum.WOLF, CockTypesEnum.DISPLACER);
+		}
+
 		public function twoDickRadarSpecial(width:int):Boolean
 		{
 			//No two dicks?  FUCK OFF
