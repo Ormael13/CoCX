@@ -19,6 +19,7 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Consumables.EmberTF;
+import classes.Races.CatRace;
 import classes.Races.FoxRace;
 import classes.Races.GoblinRace;
 import classes.Races.GremlinRace;
@@ -1791,7 +1792,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.inte > 30 && rand(3) == 0 && changes < changeLimit && type != 3) {
-            player.addCurse("int", (-1 * crit), 1);
+            player.addCurse("int", crit, 1);
             outputText("[pg]You feel ");
             if (crit > 1) outputText("MUCH ");
             outputText("dumber.");
@@ -5632,7 +5633,7 @@ public final class Mutations extends MutationsHelper {
         //Text go!
         clearOutput();
         outputText("You take a bite of the fruit and gulp it down. It's thick and juicy and has an almost overpowering sweetness. Nevertheless, it is delicious and you certainly could use a meal.  You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.");
-
+        //STAT CHANGES
         //Speed raises up to 75
         if (rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
@@ -5758,10 +5759,12 @@ public final class Mutations extends MutationsHelper {
         //Cat dangly-doo.
         if (player.cockTotal() > 0 && player.catCocks() < player.cockTotal() && (player.ears.type == Ears.CAT || rand(3) > 0) && (player.tailType == Tail.CAT || rand(3) > 0) && changes < changeLimit && rand(4) == 0) {
             //loop through and find a non-cat wang.
-            for (var i:Number = 0; i < (player.cockTotal()) && player.cocks[i].cockType == CockTypesEnum.CAT; i++) {
+            for (var i:Number = 0; i < player.cockTotal() && player.cocks[i].cockType == CockTypesEnum.CAT; i++) {
             }
-            transformations.CockCat(i).applyEffect();
-            changes++;
+            if (player.cocks[i].cockType != CockTypesEnum.CAT) {
+                transformations.CockCat(i).applyEffect();
+                changes++;
+            }
         }
         //Cat penorz shrink
         if (player.catCocks() > 0 && rand(4) == 0 && changes < changeLimit && !flags[kFLAGS.HYPER_HAPPY]) {
@@ -5818,14 +5821,14 @@ public final class Mutations extends MutationsHelper {
         }
 
         //DA TAIL (IF ALREADY HAZ URZ)
-        if (player.tailType != Tail.CAT && player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA && (player.ears.type == Ears.CAT || player.ears.type == Ears.DISPLACER) && rand(3) == 0 && changes < changeLimit) {
+        if (!InCollection(player.tailType, Tail.CAT, Tail.BURNING, Tail.TWINKASHA) && (player.ears.type == Ears.CAT || player.ears.type == Ears.DISPLACER) && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TailCat.applyEffect();
             changes++;
         }
 
         //Da paws (if already haz tail)
-        if ((player.tailType == Tail.CAT || player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3) && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT) {
+        if (InCollection(player.tailType, Tail.CAT, Tail.NEKOMATA_FORKED_1_3, Tail.NEKOMATA_FORKED_2_3) && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT) {
             outputText("[pg]");
             transformations.LowerBodyCat(2).applyEffect();
             changes++;
@@ -5858,7 +5861,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //CAT TOUNGE CUZ WHY NOT?
-        if ((player.faceType == Face.CAT || player.faceType == Face.CAT_CANINES || player.faceType == Face.CHESHIRE || player.faceType == Face.CHESHIRE_SMILE) && player.tongue.type != Tongue.CAT && rand(3) == 0 && changes < changeLimit) {
+        if (transformations.TongueCat.isPossible() && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TongueCat.applyEffect();
             changes++;
@@ -5891,7 +5894,7 @@ public final class Mutations extends MutationsHelper {
             }
 
             outputText("[pg]Your [skin.type] begins to tingle, then itch. ");
-            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"]}).applyEffect();
+            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: CatRace.catFurColors }).applyEffect();
 
             changes++;
         }
@@ -5930,7 +5933,7 @@ public final class Mutations extends MutationsHelper {
         //Text go!
         clearOutput();
         outputText("You take a bite of the fruit and gulp it down. It's thick and juicy and has an almost overpowering sweetness. Nevertheless, it is delicious and you certainly could use a meal.  You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.");
-
+        //STAT CHANGES
         //Speed raises up to 75
         if (rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
@@ -6093,7 +6096,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (player.tailType != Tail.CAT && player.tailType != Tail.NEKOMATA_FORKED_1_3 && player.tailType != Tail.NEKOMATA_FORKED_2_3 && player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA && player.ears.type == Ears.CAT && rand(3) == 0 && changes < changeLimit) {
+        if (!InCollection(player.tailType, Tail.CAT, Tail.NEKOMATA_FORKED_1_3, Tail.NEKOMATA_FORKED_2_3, Tail.BURNING, Tail.TWINKASHA) && player.ears.type == Ears.CAT && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TailCat.applyEffect();
             changes++;
@@ -6120,7 +6123,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Da paws (if already haz tail)
-        if ((player.tailType == Tail.CAT || player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3) && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT) {
+        if (InCollection(player.tailType, Tail.CAT, Tail.NEKOMATA_FORKED_1_3, Tail.NEKOMATA_FORKED_2_3) && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT) {
             outputText("[pg]");
             transformations.LowerBodyCat(2).applyEffect();
             changes++;
@@ -6140,20 +6143,21 @@ public final class Mutations extends MutationsHelper {
         }
 
         //CAT-FACE!
+        var wasCheshire:Boolean = player.faceType == Face.CHESHIRE;
         if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.CAT_CANINES) {
             outputText("[pg]");
             transformations.FaceCatCanines.applyEffect();
             changes++;
         }
 
-        if (rand(3) == 0 && changes < changeLimit && player.faceType == Face.CHESHIRE) {
+        if (rand(3) == 0 && changes < changeLimit && player.faceType == Face.CHESHIRE && !wasCheshire) {
             outputText("[pg]");
             transformations.FaceCheshireSmile.applyEffect();
             changes++;
         }
 
         //CAT TOUNGE CUZ WHY NOT?
-        if ((player.faceType == Face.CAT || player.faceType == Face.CAT_CANINES || player.faceType == Face.CHESHIRE || player.faceType == Face.CHESHIRE_SMILE) && player.tongue.type != Tongue.CAT && rand(3) == 0 && changes < changeLimit) {
+        if (InCollection(player.faceType, Face.CAT, Face.CAT_CANINES, Face.CHESHIRE, Face.CHESHIRE_SMILE) && player.tongue.type != Tongue.CAT && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TongueCat.applyEffect();
             changes++;
@@ -13772,7 +13776,7 @@ public final class Mutations extends MutationsHelper {
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
 
-    public function aquaSeed(player:Player):void {
+    public function aquaSeed(player:Player):void {//TODO
         player.slimeFeed();
         //init variables
         var changes:Number = 0;

@@ -3014,6 +3014,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // is present
 	  function (): Boolean {
 	    return player.tongue.type === Tongue.CAT;
+	  },
+		// is possible
+		function (): Boolean {
+			return InCollection(player.faceType, Face.CAT, Face.CAT_CANINES, Face.CHESHIRE, Face.CHESHIRE_SMILE) && player.tongue.type != Tongue.CAT;
 	  }
 	);
 
