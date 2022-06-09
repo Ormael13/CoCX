@@ -6,7 +6,7 @@ package classes.Scenes.Places
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Lake.*;
-import classes.Scenes.NPCs.AnemoneScene;
+import classes.Scenes.Places.Boat.AnemoneScene;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.Places.Boat.*;
 import classes.Scenes.SceneLib;

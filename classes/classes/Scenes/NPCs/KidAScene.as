@@ -6,6 +6,7 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Weapon;
+import classes.Scenes.Places.Boat.AnemoneScene;
 import classes.display.SpriteDb;
 
 public class KidAScene extends BaseContent implements TimeAwareInterface
