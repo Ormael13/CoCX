@@ -1367,7 +1367,6 @@ public final class Mutations extends MutationsHelper {
 
     public function chillyPepper(player:Player):void {
         var temp2:Number = 0;
-        var temp3:Number = 0;
         //Set up changes and changeLimit
         var changes:Number = 0;
         var changeLimit:Number = 1;
@@ -1412,33 +1411,8 @@ public final class Mutations extends MutationsHelper {
                 player.cocks[selectedCockValue].thickenCock(2);
                 changes++;
             }
-            if (player.wolfCocks() > 0 && changes < changeLimit && rand(2) == 0) {
-                var choice:int = 0;
-                //set temp2 to first wolfdick for initialization
-                while (choice < player.cocks.length) {
-                    if (player.cocks[choice].cockType == CockTypesEnum.WOLF) {
-                        temp2 = choice;
-                        break;
-                    } else choice++;
-                }
-                //Reset choice for nex tcheck
-                choice = player.cocks.length;
-                //Find smallest knot
-                while (choice > 0) {
-                    choice--;
-                    if (player.cocks[choice].cockType == CockTypesEnum.WOLF && player.cocks[choice].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = choice;
-                }
-                //Have smallest knotted cock selected.
-                temp3 = (rand(2) + 1) / 40;
-                if (player.cocks[temp2].knotMultiplier >= 1.5) temp3 /= 2;
-                if (player.cocks[temp2].knotMultiplier >= 1.75) temp3 /= 2;
-                if (player.cocks[temp2].knotMultiplier >= 2) temp3 /= 5;
-                player.cocks[temp2].knotMultiplier += (temp3);
-                if (temp3 < .06) outputText("[pg]Your " + cockDescript(temp2) + " feels unusually tight in your sheath as your knot grows.");
-                if (temp3 >= .06 && temp3 <= .12) outputText("[pg]Your " + cockDescript(temp2) + " pops free of your sheath, thickening nicely into a bigger knot.");
-                if (temp3 > .12) outputText("[pg]Your " + cockDescript(temp2) + " surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.");
-                dynStats("lus", 10);
-                player.addCurse("sens", 1, 1);
+            if (player.dogCocks() > 0 && changes < changeLimit && rand(2) == 0) {
+                transformations.GrowKnot(-1, 1, 1, 40).applyEffect();
                 changes++;
             }
         }
@@ -1457,7 +1431,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.breastRows.length < 3 && rand(2) == 0 && changes < changeLimit) {
                     player.createBreastRow();
                     //Store choice to the index of the newest row
-                    choice = player.breastRows.length - 1;
+                    var choice:int = player.breastRows.length - 1;
                     //Breasts are too small to grow a new row, so they get bigger first
                     //But ONLY if player has a vagina (dont want dudes weirded out)
                     if (player.vaginas.length > 0 && player.breastRows[0].breastRating <= player.breastRows.length) {
@@ -1856,8 +1830,6 @@ public final class Mutations extends MutationsHelper {
                         outputText("[pg]Your crotch twitches, and you pull open your [armor] to get a better look.  You watch in horror and arousal as your [cock] and [cock 2] both warp and twist, becoming red and pointed, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.");
                         transformations.CockDog().applyEffect(false);
                         transformations.CockDog(1).applyEffect(false);
-                        if (player.cocks[1].knotMultiplier < 1.4) player.cocks[0].knotMultiplier = 1.4;
-                        if (player.cocks[1].knotMultiplier < 1.4) player.cocks[1].knotMultiplier = 1.4;
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
                     }
@@ -1867,7 +1839,7 @@ public final class Mutations extends MutationsHelper {
                     //if player has 1 total
                     if (player.cockTotal() == 1) {
                         outputText("[pg]You feel something slippery wiggling inside your sheath, and another red point peeks out.  In spite of yourself, you start getting turned on by the change, and the new dick slowly slides free, eventually stopping once the thick knot pops free.  The pair of dog-dicks hang there, leaking pre-cum and arousing you far beyond normal.");
-                        transformations.CockDog(1, 7 + rand(7), 1.5 + rand(10) / 10, 1.4).applyEffect(false);
+                        transformations.CockDog(1, 7 + rand(7), 1.5 + rand(10) / 10).applyEffect(false);
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
                     }
@@ -1877,13 +1849,11 @@ public final class Mutations extends MutationsHelper {
                         if (player.cocks[0].cockType == CockTypesEnum.DOG) {
                             outputText("[pg]Your crotch twitches, and you pull open your [armor] to get a better look.  You watch in horror and arousal as your " + cockDescript(1) + " warps and twists, becoming red and pointed, just like other dog-dick, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.");
                             transformations.CockDog(1).applyEffect(false);
-                            if (player.cocks[1].knotMultiplier < 1.4) player.cocks[1].knotMultiplier = 1.4;
                         }
                         //first dick is not dog
                         else {
                             outputText("[pg]Your crotch twitches, and you pull open your [armor] to get a better look.  You watch in horror and arousal as your [cock] warps and twists, becoming red and pointed, just like other dog-dick, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.");
                             transformations.CockDog(0).applyEffect(false);
-                            if (player.cocks[0].knotMultiplier < 1.4) player.cocks[0].knotMultiplier = 1.4;
                         }
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
@@ -1897,33 +1867,8 @@ public final class Mutations extends MutationsHelper {
             if (player.cockTotal() > 0) {
                 //biggify knots
                 if (player.dogCocks() > 0) {
-                    choice = 0;
-                    //set temp2 to first dogdick for initialization
-                    while (choice < player.cocks.length) {
-                        if (player.isDogCock(choice)) {
-                            temp2 = choice;
-                            break;
-                        } else choice++;
-                    }
-                    //Reset choice for nex tcheck
-                    choice = player.cocks.length;
-                    //Find smallest knot
-                    while (choice > 0) {
-                        choice--;
-                        if (player.isDogCock(choice) && player.cocks[choice].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = choice;
-                    }
-                    //Have smallest knotted cock selected.
-                    temp3 = (rand(2) + 5) / 20 * crit;
-                    if (player.cocks[temp2].knotMultiplier >= 1.5) temp3 /= 2;
-                    if (player.cocks[temp2].knotMultiplier >= 1.75) temp3 /= 2;
-                    if (player.cocks[temp2].knotMultiplier >= 2) temp3 /= 5;
-                    player.cocks[temp2].knotMultiplier += (temp3);
-                    outputText("[pg]");
-                    if (temp3 < .06) outputText("Your " + cockDescript(temp2) + " feels unusually tight in your sheath as your knot grows.");
-                    if (temp3 >= .06 && temp3 <= .12) outputText("Your " + cockDescript(temp2) + " pops free of your sheath, thickening nicely into a bigger knot.");
-                    if (temp3 > .12) outputText("Your " + cockDescript(temp2) + " surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.");
-                    dynStats("lus", 5 * crit);
-                    player.addCurse("sen", 1, 1);
+                    transformations.GrowKnot(-1, crit, 5, 20).applyEffect();
+                    changes++
                 }
                 //Grow dogdick with big knot
                 else {
@@ -1963,32 +1908,8 @@ public final class Mutations extends MutationsHelper {
         if (changes < changeLimit && player.cocks.length > 0) {
             //Grow knot on smallest knotted dog cock
             if (type != 4 && player.dogCocks() > 0 && ((changes < changeLimit && rand(1.4) == 0) || type == 1)) {
-                choice = 0;
-                //set temp2 to first dogdick for initialization
-                while (choice < player.cocks.length) {
-                    if (player.isDogCock(choice)) {
-                        temp2 = choice;
-                        break;
-                    } else choice++;
-                }
-                //Reset choice for nex tcheck
-                choice = player.cocks.length;
-                //Find smallest knot
-                while (choice > 0) {
-                    choice--;
-                    if (player.isDogCock(choice) && player.cocks[choice].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = choice;
-                }
                 //Have smallest knotted cock selected.
-                temp3 = (rand(2) + 1) / 20 * crit;
-                if (player.cocks[temp2].knotMultiplier >= 1.5) temp3 /= 2;
-                if (player.cocks[temp2].knotMultiplier >= 1.75) temp3 /= 2;
-                if (player.cocks[temp2].knotMultiplier >= 2) temp3 /= 5;
-                player.cocks[temp2].knotMultiplier += (temp3);
-                if (temp3 < .06) outputText("[pg]Your " + cockDescript(temp2) + " feels unusually tight in your sheath as your knot grows.");
-                if (temp3 >= .06 && temp3 <= .12) outputText("[pg]Your " + cockDescript(temp2) + " pops free of your sheath, thickening nicely into a bigger knot.");
-                if (temp3 > .12) outputText("[pg]Your " + cockDescript(temp2) + " surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.");
-                dynStats("lus", 5 * crit);
-                player.addCurse("sen", 1, 1);
+                transformations.GrowKnot(-1, crit, 1, 20).applyEffect();
                 changes++;
             }
             //Cock Xform if player has free cocks.

@@ -11091,16 +11091,16 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						desc += " shudder as the crown of your [cock "+(cock+1)+"] reshapes into a point, the sensations nearly too much for you."
 						if (!player.hasSheath()) desc += "A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath. ";
 						if (player.cocks[cock].knotMultiplier <= 1) desc += "You cry out as you feel a swelling at the base of your cock and your new canine knot slowly slips out of your sheath. "
+						else if (player.cocks[cock].knotMultiplier < knot) desc += "The knot on your new red pecker grows extremely sensitive as it grows thicker than before. ";
 						desc += "You throw back your head as the transformation completes, your cock much thicker than it ever was before.  <b>You now have a dog-cock.</b>";
 
 					}
 					else {
 						desc += GrowCockGenericText();
-						desc += GrowCockGenericText();
-						desc += "Your [cock "+(cock+1)+"] clenches painfully, becoming achingly, throbbingly erect and turning a shiny red. You"+
-								"A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath. "+
-								"You cry out as you feel a swelling at the base of your cock and your new canine knot slowly slips out of your sheath. "+
-								"You throw back your head as the transformation completes, that was intense!  <b>You now have a dog-cock.</b>"
+						desc += "Your [cock "+(cock+1)+"] clenches painfully, becoming achingly, throbbingly erect and turning a shiny red. ";
+						if (!player.hasSheath()) desc += "A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath. ";
+						desc += "You cry out as you feel a swelling at the base of your cock and your new canine knot slowly slips out of your sheath. ";
+						desc += "You throw back your head as the transformation completes, that was intense!  <b>You now have a dog-cock.</b>"
 						player.createCock();
 					}
 					if (doOutput) outputText(desc);
@@ -11540,8 +11540,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 					if (player.cocks.length > cock){
 						desc += "Your " + player.cockDescript(cock) + " tingles as pins and needles sweep across it.  You pull open your [armor] to watch as it changes; the tip elongates and tapers, like a spear; a series of ridges form along the shaft, giving it an almost segmented look, and a prominent knot swells at its base.  You can't resist stroking it, until it begins dripping pre; ";
-						if (player.sens >= 50) desc += "however, it's not until you press on your new, sensitive knot that you manage to blow your load and enjoy the last few spasms of pleasure as it finally finishes changing.";
+						if (player.sens >= 50) desc += "however, it's not until you press on your"+(player.cocks[cock].hasKnot()?"":" new,")+" sensitive knot that you manage to blow your load and enjoy the last few spasms of pleasure as it finally finishes changing.";
 						else desc += "but you sternly rein in your hands and tuck them into your armpits as the arousing changes run their course.";
+						if (player.cocks[cock].knotMultiplier < 1.3 && player.cocks[cock].knotMultiplier > 1) desc += "The knot on your cock grows extremely sensitive as it grows thicker than before. ";
+						desc += "The knot on your cock grows extremely sensitive as it grows thicker than before. ";
 						desc += "  <b>You now have a dragon penis.</b>";
 					}
 					else {
@@ -11579,6 +11581,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (player.cocks.length > cock){
 						desc += "You feel an incessant hardness beneath you and realize your cock is dangling out of its sheath.";
 						if (!player.hasSheath()) desc += "  Wait... did you have a sheath before? Well you do now.";
+						if (player.cocks[cock].knotMultiplier < knot && player.cocks[cock].knotMultiplier > 1) desc += "The knot on your cock grows extremely sensitive as it grows thicker than before. ";
 						desc += "  You blink your eyes again... is something wrong with your dick?  At first glance, it appears to be a normal canine dick complete with a knot... but the tip seems to have five grooves along the sides.  When you think about it, you find the tip opening up, splaying out into something resembling a five-armed starfish, with the tips ending in wiggling tendrils, the inner-flesh covered in bumpy nodules that stiffen in the cool air.  With another thought, the cock returns to its normal, almost-canine like appearance, though it's definitely thicker around the tip than an actual canine dick.";
 						desc += "You give your <b>new coeurl cock</b> a few tentative strokes";
 					}
@@ -11626,15 +11629,16 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						desc += " shudder as the crown of your [cock "+(cock+1)+"] reshapes into a point, the sensations nearly too much for you."
 						if (!player.hasSheath()) desc += "A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath. ";
 						if (player.cocks[cock].knotMultiplier <= 1) desc += "You cry out as you feel a swelling at the base of your cock and your new canine knot slowly slips out of your sheath. "
+						else if (player.cocks[cock].knotMultiplier < knot) desc += "The knot on your new red pecker grows extremely sensitive as it grows thicker than before. ";
 						desc += "You throw back your head as the transformation completes, your cock much thicker than it ever was before.  <b>You now have a fox-cock.</b>";
 
 					}
 					else {
 						desc += GrowCockGenericText();
-						desc += "Your [cock "+(cock+1)+"] clenches painfully, becoming achingly, throbbingly erect and turning a shiny red. You"+
-								"A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath. "+
-								"You cry out as you feel a swelling at the base of your cock and your new canine knot slowly slips out of your sheath. "+
-								"You throw back your head as the transformation completes, that was intense!  <b>You now have a fox-cock.</b>"
+						desc += "Your [cock "+(cock+1)+"] clenches painfully, becoming achingly, throbbingly erect and turning a shiny red. ";
+						if (!player.hasSheath()) desc += "A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath. ";
+						desc += "You cry out as you feel a swelling at the base of your cock and your new canine knot slowly slips out of your sheath. ";
+						desc += "You throw back your head as the transformation completes, that was intense!  <b>You now have a fox-cock.</b>";
 						player.createCock();
 					}
 					if (doOutput) outputText(desc);
@@ -11827,8 +11831,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					var desc:String = "[pg]";
 
 					if (player.cocks.length > cock){
-						desc += "Your " + cockDescript(cock) + " clenches painfully, becoming achingly, throbbingly erect. A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath. ";
+						desc += "Your " + cockDescript(cock) + " clenches painfully, becoming achingly, throbbingly erect. ";
+						if (!player.hasSheath()) desc +="A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath. ";
 						desc += "You shudder as the crown of your prick reshapes into a point, the sensations nearly too much for you. You throw back your head as the transformation completes, your knotted wolf-cock much thicker than it ever was before.";
+						if (player.cocks[cock].knotMultiplier < knot) desc += "The knot on your new red pecker grows extremely sensitive as it grows thicker than before. ";
 						desc += "  <b>You now have a wolf-cock.</b>";
 					}
 					else {
@@ -11843,6 +11849,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					if (thickness != 1)
 						player.cocks[cock].cockThickness = thickness;
+					if (player.cocks[cock].cockThickness < 1.5)
+						player.cocks[cock].thicken(2);
 					if (player.cocks[cock].knotMultiplier < knot) player.cocks[cock].knotMultiplier = knot;
 					player.cocks[cock].cockType = CockTypesEnum.WOLF;
 
@@ -12061,6 +12069,49 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				}
 		);
 	}
+
+	public function GrowKnot(cock:int = 0, crit:Number = 1, mod:Number = 1, div:Number = 20): Transformation { return new SimpleTransformation( "Grow knot of cock",
+			// apply effect
+			function (doOutput:Boolean): void {
+				var desc:String = "[pg]";
+
+				if (cock == -1) { //choose smallest dog knot if not specified
+					var choice:int = 0;
+					//set temp2 to first wolfdick for initialization
+					while (choice < player.cocks.length) {
+						if (player.isDogCock(choice)) {
+							cock = choice;
+							break;
+						} else choice++;
+					}
+					//Reset choice for nex tcheck
+					choice = player.cocks.length;
+					//Find smallest knot
+					while (choice > 0) {
+						choice--;
+						if (player.isDogCock(choice) && player.cocks[choice].knotMultiplier < player.cocks[cock].knotMultiplier) cock = choice;
+					}
+					//Have smallest knotted cock selected.
+				}
+
+				var knot:Number = (rand(2) + mod) / div * crit;
+				if (player.cocks[cock].knotMultiplier >= 1.5) knot /= 2;
+				if (player.cocks[cock].knotMultiplier >= 1.75) knot /= 2;
+				if (player.cocks[cock].knotMultiplier >= 2) knot /= 5;
+				player.cocks[cock].knotMultiplier += (knot);
+				if (knot < .06) desc +="Your " + cockDescript(cock) + " feels unusually tight in your sheath as your knot grows.";
+				else if (knot <= .12) desc += "Your " + cockDescript(cock) + " pops free of your sheath, thickening nicely into a bigger knot.";
+				else  desc +="Your " + cockDescript(cock) + " surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.";
+				dynStats("lus", 5 * crit);
+				player.addCurse("sen", 1, 1);
+
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return !player.isDogCock(cock>0?cock:0);
+			}
+	 );}
     /*
 */
 
