@@ -10012,11 +10012,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		},
 		// is present
 		function ():Boolean {
-			return player.breastRows.length == 1;
-		},
-		// is possible
-		function ():Boolean {
-			return player.breastRows.length > 1;
+			return player.breastRows.length <= 1;
 		}
 	);
 
@@ -10037,10 +10033,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		// is present
 		function ():Boolean {
 			return player.breastRows.length == 1;
-		},
-		// is possible
-		function ():Boolean {
-			return player.breastRows.length != 1;
 		}
 	);
 
@@ -10064,10 +10056,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		// is present
 		function ():Boolean {
 			return player.breastRows.length == 2;
-		},
-		// is possible
-		function ():Boolean {
-			return player.breastRows.length != 2;
 		}
 	);
 
@@ -10096,10 +10084,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		// is present
 		function ():Boolean {
 			return player.breastRows.length == 3;
-		},
-		// is possible
-		function ():Boolean {
-			return player.breastRows.length != 3;
 		}
 	);
 
@@ -10125,10 +10109,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		// is present
 		function ():Boolean {
 			return player.breastRows.length == 4;
-		},
-		// is possible
-		function ():Boolean {
-			return player.breastRows.length != 4;
 		}
 	);
 
@@ -10168,11 +10148,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		},
 		// is present
 		function ():Boolean {
-			return player.bRows() == 1;
-		},
-		// is possible
-		function ():Boolean {
-			return player.bRows() < 4;
+			return player.bRows() >= 4;
 		}
 	); }
 
@@ -10211,10 +10187,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		// is present
 		function ():Boolean {
 			return player.bRows() >= 4;
-		},
-		// is possible
-		function ():Boolean {
-			return player.bRows() < 4;
 		}
 	); }
 
@@ -10235,10 +10207,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		// is present
 		function ():Boolean {
 			return player.averageNipplesPerBreast() == 1;
-		},
-		// is possible
-		function ():Boolean {
-			return player.averageNipplesPerBreast() > 1;
 		}
 	);
 
@@ -10266,11 +10234,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		// is present
 		function ():Boolean {
 			return player.averageNipplesPerBreast() == 4;
-		},
-		// is possible
-		function ():Boolean {
-				return player.averageNipplesPerBreast() < 4;
-			}
+		}
 	);
 
 	public const NipplesFuckableForce:Transformation = new SimpleTransformation("Increase Nipple size >= 2",
@@ -10339,6 +10303,23 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		}
 	);
 
+	public const StartLactation:Transformation = new SimpleTransformation("Start lactating",
+			// apply effect
+			function (doOutput:Boolean):void {
+				var desc: String = "[pg]";
+
+				desc += "You feel your [nipple]s become tight and engorged.  A single droplet of milk escapes each, rolling down the curves of your breasts.  <b>You are now lactating!</b>";
+				for (var i:int = 0; i < player.breastRows.length; i++) {
+					player.breastRows[i].lactationMultiplier += 2;
+				}
+
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function ():Boolean {
+				return player.isLactating();
+			}
+	);
 
 	public const RemoveLactation:Transformation = new SimpleTransformation("Stop lactating",
 		// apply effect
@@ -10494,10 +10475,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			// is present
 			function ():Boolean {
 				return !player.hasVagina();
-			},
-			// is possible
-			function ():Boolean {
-				return !player.hasVagina();
 			}
 		);
 	}
@@ -10525,11 +10502,11 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			},
 			// is present
 			function ():Boolean {
-				return !player.hasVagina();
+				return player.hasVagina();
 			},
 			// is possible
 			function ():Boolean {
-				return !player.hasVagina();
+				return !player.hasVagina() && player.hasCock();
 			}
 		);
 	}
@@ -10985,11 +10962,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			},
 			// is present
 			function ():Boolean {
-				return !player.hasCock() || cock >= player.cockTotal();
-			},
-			// is possible
-			function ():Boolean {
-				return cock < player.cockTotal();
+				return cock >= player.cockTotal();
 			}
 		);
 	}
