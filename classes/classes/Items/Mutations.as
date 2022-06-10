@@ -163,7 +163,7 @@ public final class Mutations extends MutationsHelper {
     public function coldFishSoup(player:Player):void {
         player.slimeFeed();
         clearOutput();
-        outputText("As you eat the soup you shiver as your bodily temperature drop. Not only that but the last thing on your mind right now is sex as you feel yourself freezing from the inside. The cold crisis eventualy passes but you remain relatively less libidinous afterward.");
+        outputText("As you eat the soup you shiver as your bodily temperature drop. Not only that but the last thing on your mind right now is sex as you feel yourself freezing from the inside. The cold crisis eventually passes but you remain relatively less libidinous afterward.");
         player.buff("Curse").addStats( {"lib.mult": -0.05} ).permanent();
 		if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) dynStats("lib", -4, "lus", -20);
         else dynStats("lus", -10);
@@ -476,7 +476,7 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
             if (!player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
         }
     }
@@ -495,7 +495,7 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
             if (!player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
         }
     }
@@ -504,7 +504,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         if (!player.hasStatusEffect(StatusEffects.KnowsYinYangBlast)) {
             outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Hail of Blades.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skills: Yin Palm, Yang Fist, Yin Yang Blast.</b>");//yin penetrating armor/mresist but weak maybe giving intenrnal bleed/dmg dot and yang high dmg but reduced by armor/mresist and stunning - combined yin yang blast giving internal bleeding and stun and damage that is sum of both attacks
+            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skills: Yin Palm, Yang Fist, Yin Yang Blast.</b>");//yin penetrating armor/mresist but weak maybe giving internal bleed/dmg dot and yang high dmg but reduced by armor/mresist and stunning - combined yin yang blast giving internal bleeding and stun and damage that is sum of both attacks
             player.createStatusEffect(StatusEffects.KnowsYinYangBlast, 0, 0, 0, 0);
             return;
         }
@@ -570,7 +570,7 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
             if (!player.hasStatusEffect(StatusEffects.KnowsHailOfBlades)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
         }
     }
@@ -589,7 +589,7 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
             if (!player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfBlades)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
         }
     }
@@ -608,7 +608,7 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
             if (!player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfMoonBlades)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
         }
     }
@@ -628,7 +628,7 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
         }
     }
 
@@ -647,7 +647,7 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
         }
     }
 
@@ -687,7 +687,7 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
         }
     }
 
@@ -720,7 +720,7 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
         }
     }
 
@@ -753,7 +753,7 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
         }
     }
 
@@ -786,32 +786,31 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
         }
     }
 
     public function devourermanual(player:Player):void {
         clearOutput();
-        outputText("You open the manual, and discover it seems to be almost unreadable.  It looks like it would teach reader to use some sort of soul skill but it seems all very fragmentary.  In no time at all you've read the whole thing and like others manuscripts it start to disappears into thin air.  Left without anything you thinking about next action when some new thought start to keep circling in your mind. The more it circle it seems to seemly literaly ");
-        outputText("'suck you in'.  You try stop it but it's too late.  last not devoured thought you have before blank out is.. 'would i at least not hit groun...'[pg]After unknown amount of time you wakes up on the floor with seared into your mind knowledge on <b>new soul skill: Devourer.</b>");
+        outputText("You open the manual, and discover it seems to be almost unreadable. It looks like it would teach the reader to use some sort of soul skill, but it seems all very fragmentary. In no time at all, you've read the whole thing, and like other manuscripts, it starts to disappear into thin air. When you are left with nothing to do, you are considering your next course of action when a new thought begins to circulate in your mind. The more it circles, it seems to literally'suck you in'. You try to stop it, but it's too late. 'Would I at least not hit the ground...' is the last not devoured thought you have before blanking out. [pg]After an unknown amount of time, you awake on the floor with the knowledge of a b>new soul skill: Devourer/b> seared into your mind.");
         player.createStatusEffect(StatusEffects.KnowsHeavensDevourer, 1, 0, 0, 0);
     }
 
     public function verydilutedarcaneregenconcotion(player:Player):void {
 		var verydilutedarcaneregen:Number = Math.round(player.maxMana() * 0.01) + 200;
-		outputText("You grab your mana potion, pull the cork off and swiftly chug it down.[pg](Recovered mana: "+verydilutedarcaneregen+")");
+		outputText("You grab your mana potion, pull the cork off, and swiftly chug it down.[pg](Mana recovered: "+verydilutedarcaneregen+")");
         EngineCore.ManaChange(verydilutedarcaneregen, false);
         statScreenRefresh();
     }
     public function dilutedarcaneregenconcotion(player:Player):void {
         var dilutedarcaneregen:Number = Math.round(player.maxMana() * 0.02) + 1200;
-		outputText("You grab your mana potion, pull the cork off and swiftly chug it down.[pg](Recovered mana: "+dilutedarcaneregen+")");
+		outputText("You grab your mana potion, pull the cork off, and swiftly chug it down.[pg](Mana recovered:: "+dilutedarcaneregen+")");
         EngineCore.ManaChange(dilutedarcaneregen, false);
         statScreenRefresh();
     }
     public function arcaneregenconcotion(player:Player):void {
         var arcaneregen:Number = Math.round(player.maxMana() * 0.03) + 7200;
-		outputText("You grab your mana potion, pull the cork off and swiftly chug it down.[pg](Recovered mana: "+arcaneregen+")");
+		outputText("You grab your mana potion, pull the cork off, and swiftly chug it down.[pg](Mana recovered:: "+arcaneregen+")");
         EngineCore.ManaChange(arcaneregen, false);
         statScreenRefresh();
     }
@@ -1762,7 +1761,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.hasPerk(PerkLib.MarblesMilk)) outputText("All you know is that there is a scent on the wind, it is time to hunt, and at the end of the day you need to come home for your milk.");
                 else outputText("All you know is that there is a scent on the wind, and it is time to hunt.");
             }
-            if (choice == 1) outputText("[pg]You devour the sweet pepper, carefully licking your fingers for all the succulent juices of the fruit, and are about to go on your way when suddenly a tightness begins to build in your chest and stomach, horrid cramps working their way first through your chest, then slowly flowing out to your extremities, the feeling soon joined by horrible, blood-curdling cracks as your bones begin to reform, twisting and shifting, your mind exploding with pain. You fall to the ground, reaching one hand forward. No... A paw, you realize in horror, as you try to push yourself back up. You watch in horror, looking down your foreleg as thicker fur erupts from your skin, a [haircolor] coat slowly creeping from your bare flesh to cover your body. Suddenly, you feel yourself slipping away, as if into a dream, your mind warping and twisting, your body finally settling into its new form. With one last crack of bone you let out a yelp, kicking free of the cloth that binds you, wresting yourself from its grasp and fleeing into the now setting sun, eager to find prey to dine on tonight.");
+            if (choice == 1) outputText("[pg]You devour the sweet pepper, carefuly licking your fingers for all the succulent juices of the fruit, and are about to go on your way when suddenly a tightness begins to build in your chest and stomach, horrid cramps working their way first through your chest, then slowly flowing out to your extremities, the feeling soon joined by horrible, blood-curdling cracks as your bones begin to reform, twisting and shifting, your mind exploding with pain. You fall to the ground, reaching one hand forward. No... A paw, you realize in horror, as you try to push yourself back up. You watch in horror, looking down your foreleg as thicker fur erupts from your skin, a [haircolor] coat slowly creeping from your bare flesh to cover your body. Suddenly, you feel yourself slipping away, as if into a dream, your mind warping and twisting, your body finally settling into its new form. With one last crack of bone you let out a yelp, kicking free of the cloth that binds you, wresting yourself from its grasp and fleeing into the now setting sun, eager to find prey to dine on tonight.");
             EventParser.gameOver();
             return;
         }
@@ -8977,12 +8976,12 @@ public final class Mutations extends MutationsHelper {
                 clearOutput();
                 if (player.hasStatusEffect(StatusEffects.LustStickApplied)) {
                     player.addStatusValue(StatusEffects.LustStickApplied, 1, 12 + rand(12));
-                    outputText("You carefully open the sweet-smelling tube and smear the lipstick over the coat you already have on your lips.  <b>No doubt another layer will make it last even longer!</b>  ");
+                    outputText("You carefuly open the sweet-smelling tube and smear the lipstick over the coat you already have on your lips.  <b>No doubt another layer will make it last even longer!</b>  ");
                     outputText("You finish and pucker your lips, feeling fairly sexy with your new, thicker makeup on.[pg]");
                 }
                 else {
                     player.createStatusEffect(StatusEffects.LustStickApplied, 24, 0, 0, 0);
-                    outputText("You carefully open the sweet-smelling tube and smear the lipstick over your lips.  ");
+                    outputText("You carefuly open the sweet-smelling tube and smear the lipstick over your lips.  ");
                     if (player.hasCock()) outputText("It tingles a little, but the drugs have little to no effect on you now.");
                     else outputText("Honestly, it amazes you that something as little as a kiss can make a man putty in your hands.");
                     outputText("  You finish and pucker your lips, feeling fairly sexy with your new makeup on.[pg]");
@@ -10515,7 +10514,7 @@ public final class Mutations extends MutationsHelper {
                 outputText("[pg]You scarf down the ");
                 if (enhanced) outputText("fluid ");
                 else outputText("berries ");
-                outputText("with an uncommonly voracious appetite, taking particular enjoyment in the succulent, tart flavor.  As you carefully suck the last drops of ochre juice from your fingers, you note that it tastes so much more vibrant than you remember.  Your train of thought is violently interrupted by the sound of bones snapping, and you cry out in pain, doubling over as a flaming heat boils through your ribs.");
+                outputText("with an uncommonly voracious appetite, taking particular enjoyment in the succulent, tart flavor.  As you carefuly suck the last drops of ochre juice from your fingers, you note that it tastes so much more vibrant than you remember.  Your train of thought is violently interrupted by the sound of bones snapping, and you cry out in pain, doubling over as a flaming heat boils through your ribs.");
                 outputText("[pg]Writhing on the ground, you clutch your hand to your chest, looking on in horror through tear-streaked eyes as the bones in your fingers pop and fuse, rearranging themselves into a dainty paw covered in coarse black fur, fading to a ruddy orange further up.  You desperately try to call out to someone - anyone - for help, but all that comes out is a high-pitched, ear-splitting yap.");
                 if (player.tailCount > 1) outputText("  Your tails thrash around violently as they begin to fuse painfully back into one, the fur bristling back out with a flourish.");
                 outputText("[pg]A sharp spark of pain jolts through your spinal column as the bones shift themselves around, the joints in your hips migrating forward.  You continue to howl in agony even as you feel your intelligence slipping away.  In a way, it's a blessing - as your thoughts grow muddied, the pain is dulled, until you are finally left staring blankly at the sky above, tilting your head curiously.");
@@ -10598,8 +10597,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (changes < changeLimit && rand(10) == 0) {
-            outputText("[pg]You sigh as the exotic flavor washes through you, and unbidden, you begin to daydream.  Sprinting through the thicket, you can feel the corners of your muzzle curling up into a mischievous grin.  You smell the scent of demons, and not far away either.  With your belly full and throat watered, now is the perfect time for a little bit of trickery.   As the odor intensifies, you slow your playful gait and begin to creep a bit more carefully.");
-            outputText("[pg]Suddenly, you are there, at a demonic camp, and you spy the forms of an incubus and a succubus, their bodies locked together at the hips and slowly undulating, even in sleep.  You carefully prance around their slumbering forms and find their supplies.  With the utmost care, you put your razor-sharp teeth to work, and slowly, meticulously rip through their packs - not with the intention of theft, but with mischief.  You make sure to leave small holes in the bottom of each, and after making sure your stealth remains unbroken, you urinate on their hooves.");
+            outputText("[pg]You sigh as the exotic flavor washes through you, and unbidden, you begin to daydream.  Sprinting through the thicket, you can feel the corners of your muzzle curling up into a mischievous grin.  You smell the scent of demons, and not far away either.  With your belly full and throat watered, now is the perfect time for a little bit of trickery.   As the odor intensifies, you slow your playful gait and begin to creep a bit more carefuly.");
+            outputText("[pg]Suddenly, you are there, at a demonic camp, and you spy the forms of an incubus and a succubus, their bodies locked together at the hips and slowly undulating, even in sleep.  You carefuly prance around their slumbering forms and find their supplies.  With the utmost care, you put your razor-sharp teeth to work, and slowly, meticulously rip through their packs - not with the intention of theft, but with mischief.  You make sure to leave small holes in the bottom of each, and after making sure your stealth remains unbroken, you urinate on their hooves.");
             outputText("[pg]They don't even notice, so lost in the subconscious copulation as they are.  Satisfied at your petty tricks, you scurry off into the night, a red blur amidst the foliage.");
             changes++;
             fatigue(-10);
@@ -11542,7 +11541,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Breast Gain: (towards A cup)
         if (player.biggestTitSize() < 1 || player.breastRows[0].breastRating < 1 && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]You feel a vague swelling sensation in your [fullChest], and you frown downwards.  You seem to have gained a little weight on your chest.  Not enough to stand out, but- you cup yourself carefully- certainly giving you the faintest suggestion of boobs.");
+            outputText("[pg]You feel a vague swelling sensation in your [fullChest], and you frown downwards.  You seem to have gained a little weight on your chest.  Not enough to stand out, but- you cup yourself carefuly- certainly giving you the faintest suggestion of boobs.");
             player.breastRows[0].breastRating = 1;
             if (player.bRows() > 1) {
                 index = 1;
@@ -14374,7 +14373,7 @@ public final class Mutations extends MutationsHelper {
         }
         //-Raises intelligence to 80.
         if (changes < changeLimit && rand(3) == 0 && MutagenBonus("int", 1)) {
-            outputText("[pg]Patience is the key to any successful behavior weither it is battle or carefull planing.");
+            outputText("[pg]Patience is the key to any successful behavior weither it is battle or careful planing.");
             outputText("\nYour mind keep readying new plans and strategy to ambush your future foes as your brain start processing logic way better then you used to.");
             changes++;
         }

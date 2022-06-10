@@ -301,9 +301,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      } else {
 	        switch (coverage) {
 	        case Skin.COVERAGE_LOW:
-	          if (!player.hasCoat()) desc += "Your skin itches intensely. You gaze down as more and more hairs break forth from your skin quickly transforming into a coat of " + color + " fur. <b>You are now partialy covered in " + color + " fur.</b>";
-	          else if (player.hasScales()) desc += "Your scales itch incessantly. You scratch, feeling them flake off to reveal a coat of " + color + " fur growing out from below!  <b>You are now partialy covered in " + color + " fur.</b>";
-	          else desc += "Your skin itch incessantly. You scratch, feeling it current form shifting into a coat of " + color + " fur. <b>You are now partialy covered in " + color + " fur.</b>";
+	          if (!player.hasCoat()) desc += "Your skin itches intensely. You gaze down as more and more hairs break forth from your skin quickly transforming into a coat of " + color + " fur. <b>You are now partially covered in " + color + " fur.</b>";
+	          else if (player.hasScales()) desc += "Your scales itch incessantly. You scratch, feeling them flake off to reveal a coat of " + color + " fur growing out from below!  <b>You are now partially covered in " + color + " fur.</b>";
+	          else desc += "Your skin itch incessantly. You scratch, feeling it current form shifting into a coat of " + color + " fur. <b>You are now partially covered in " + color + " fur.</b>";
 	          break;
 	        case Skin.COVERAGE_COMPLETE:
 	          if (player.skinType == Skin.SCALES) desc += "Your skin shifts and every scale stands on end, sending you into a mild panic. No matter how you tense, you can't seem to flatten them again. The uncomfortable sensation continues for some minutes until, as one, every scale falls from your body and a fine coat of fur pushes out. You briefly consider collecting them, but when you pick one up, it's already as dry and brittle as if it were hundreds of years old. <b>Oh well, at least you won't need to sun yourself as much with your new " + color + " fur.</b>";
@@ -878,7 +878,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
             // apply effect
             function (doOutput:Boolean):void {
                 TransformationUtils.applyTFIfNotPresent(transformations.SkinAquaScales(Skin.COVERAGE_HIGH, {color: "orange", color2: "black", pattern: Skin.PATTERN_TIGER_STRIPES}), doOutput);
-                var desc:String = "Your scales begins to tingle and itch, before rapidly shifting to a shiny orange color, marked by random black scales looking like a stripes. You take a quick look in a nearby pool of water, to see your skin has morphed in appearance and texture to become more like a tigershark!";
+                var desc:String = "Your scales begins to tingle and itch, before rapidly shifting to a shiny orange color, marked by random black scales looking like a stripes. You take a quick look in a nearby pool of water, to see your skin has morphed in appearance and texture to become more like a Tiger Shark!";
                 player.skin.base.color2 = "black";
                 if (doOutput) outputText(desc);
                 Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.SHARK_STRIPES));
@@ -966,7 +966,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    if (player.horns.type == Horns.NONE) desc += "You moan in pleasure as a pair of bony horns push forward out of your forehead,";
 	    else desc += "You begin to feel an odd itching sensation as you feel your horns repositioning,";
 	    desc += " the things are actually surprisingly sensitive and you reach orgasm just from them reaching full size,";
-	    if (player.gender == 1 || player.gender == 3) desc += " your [cock] splatering cum on the ground";
+	    if (player.gender == 1 || player.gender == 3) desc += " your [cock] splattering cum on the ground";
 	    if (player.gender == 3) desc += " and";
 	    if (player.gender == 2 || player.gender == 3) desc += " your pussy gushing with a copious amount of juice";
 	    desc += ". You would rather your opponent not know you have a G spot at the tip of your forehead and so you keep this information to yourself. <b>You now have a pair of horns just like an oni.</b>";
@@ -990,7 +990,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    if (player.horns.type == Horns.NONE) desc += "You moan in pleasure as a single bony horns push forward out of your forehead,";
 	    else desc += "You begin to feel an odd itching sensation as you feel your horns repositioning and merging into one,";
 	    desc += " the thing is actually surprisingly sensitive and you reach orgasm just from it reaching full size,";
-	    if (player.gender == 1 || player.gender == 3) desc += " your [cock] splatering cum on the ground";
+	    if (player.gender == 1 || player.gender == 3) desc += " your [cock] splattering cum on the ground";
 	    if (player.gender == 3) desc += " and";
 	    if (player.gender == 2 || player.gender == 3) desc += " your pussy gushing with a copious amount of juice";
 	    desc += ". You would rather your opponent not know you have a G spot at the tip of your forehead and so you keep this information to yourself. <b>You now have a horns just like an oni.</b>";
@@ -1014,7 +1014,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    if (player.horns.type == Horns.NONE) {
 	      desc += "You begin to feel a prickling sensation at the top of your head. Reaching up to inspect it, you find a pair of hard stubs. <b>You now have a pair of goat horns.</b>";
 	    } else if (player.horns.type == Horns.GOATQUAD) {
-	      desc += "You begin to feel an odd itching sensation as you feel your horns repositioning and merging back togueter. Once it's over, you reach up and find a pair of tall-standing goat horns where your four horns used to be. <b>You now have a pair of goat horns.</b>"
+	      desc += "You begin to feel an odd itching sensation as you feel your horns repositioning and merging back together. Once it's over, you reach up and find a pair of tall-standing goat horns where your four horns used to be. <b>You now have a pair of goat horns.</b>"
 	    } else desc += "You begin to feel an odd itching sensation as you feel your horns repositioning. Once it's over, you reach up and find a pair of hard stubs. <b>You now have a pair of goat horns.</b>";
 
 	    player.horns.count = 1;
@@ -1034,7 +1034,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    if (player.horns.type == Horns.GOAT) {
-	      desc += "You groan in pleasure mixed pains as your horns begins to split into a second pair ornating the side of your head. If the original pair made you look fiendish your four horns now definitively denounce your demonic nature. <b> You now have four devil horns curving backward behind your head.</b>"
+	      desc += "You groan in pleasure mixed with pain as your horns split into a second pair that ornaments the side of your head. If the original pair made you look fiendish, your four horns now definitively denounce your demonic nature. <b> You now have four devil horns curving backward behind your head.</b>"
 	    }
 
 	    player.horns.count = 1;
@@ -1538,41 +1538,41 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      }
 	      break;
 	    case Hair.ANEMONE:
-	      desc += "You feel something strange going in on your head. Before you can wonder about it, the tentacles you have for hair begin to recede back into your scalp, eventually leaving you with a bald head. Your head is not left bald for long, though. Within moments, a full head of hair sprouts from the skin of your scalp. <b>Your hair is normal again!</b>";
+	      desc += "You feel something strange going on on your head. Before you can wonder about it, the tentacles you have for hair begin to recede back into your scalp, eventually leaving you with a bald head. Your head is not left bald for long, though. Within moments, a full head of hair sprouts from the skin of your scalp. <b>Your hair is normal again!</b>";
 	      break;
 	    case Hair.GOO:
 	      desc += "Your gooey hair begins to fall out in globs, eventually leaving you with a bald head. Your head is not left bald for long, though. Within moments, a full head of hair sprouts from the skin of your scalp. <b>Your hair is normal again!</b>";
 	      break;
 	    case Hair.GORGON:
 	      player.hairLength = 1;
-	      desc += "As you finish the root, the scaled critters on your head shake wildly in displeasure. Then, a sudden heat envelopes your scalp. The transformative effects of your spicy meal make themselves notorious, as the writhing mess of snakes start hissing uncontrollably. Many of them go rigid, any kind of life that they could had taken away by the root effects. Soon all the snakes that made your hair are limp and lifeless.";
-	      desc += "Their dead bodies are separated from you head by a scorching sensation, and start falling to the ground, turning to dust in a matter of seconds. Examining your head on the stream, you realize that you have a normal, healthy scalp, though devoid of any kind of hair.";
-	      desc += "The effects don’t end here, though as the familiar sensation of hair returns to your head a moment later. After looking yourself on the stream again, you confirm that <b>your once bald head now has normal, short [haircolor] hair</b>.";
+	      desc += "As you finish the root, the scaled critters on your head shake wildly in displeasure. Then, a sudden heat envelopes your scalp. The transformative effects of your spicy meal make themselves notorious, as the writhing mess of snakes starts hissing uncontrollably. Many of them go rigid, any kind of life that they could have had taken away by the root effects. All of the snakes that made up your hair are soon limp and lifeless.";
+	      desc += "Their dead bodies are separated from your head by a scorching sensation, falling to the ground and turning to dust in a matter of seconds. Examining your head in the stream, you realize that you have a normal, healthy scalp, though devoid of any kind of hair.";
+	      desc += "The effects don’t end here, though, as the familiar sensation of hair returns to your head a moment later. Looking at yourself in the stream again, you confirm that <b>your once bald head now has normal, short [haircolor] hair</b>.";
 	      break;
 	    case Hair.WINDSWEPT:
-	      desc += "A sensation of weight assaults your scalp. You reach up and grab a handful of hair, confused. Your perplexion only heightens when you actually feel the follicles becoming heavier in your grasp. Plucking a strand, you hold it up before you, surprised to see... it's no longer transparent! You have normal hair!";
+	      desc += "A sensation of weight assaults your scalp. You reach up and grab a handful of hair, confused. Your perplexity only heightens when you actually feel the follicles becoming heavier in your grasp. Plucking a strand, you hold it up before you, surprised to see... it's no longer transparent! You have normal hair!";
 	      break;
 	    case Hair.LEAF:
 	      if (player.hairLength >= 6) {
 	        desc += "A lock of your leaf-hair droops over your eye. Before you can blow the offending down away, you realize the leaf is changing until all that remains is a normal strand of hair. <b>Your hair is no longer leaf-like!</b>";
 	      } else {
-	        desc += "You run your fingers through your leaf-hair while you await the effects of the item you just ingested. While your hand is up there, it detects a change in the texture of your leafs. They're completely disappearing, merging down into strands of regular hair. <b>Your hair is no longer leaf-like!</b>";
+	        desc += "You run your fingers through your leaf-hair while you await the effects of the item you just ingested. While your hand is up there, it detects a change in the texture of your leaves. They're completely disappearing, merging down into strands of regular hair. <b>Your hair is no longer leaf-like!</b>";
 	      }
 	      break;
 	    case Hair.FLUFFY:
-	      desc += "You feel something strange going in on your head. You reach your hands up to feel your fluffy hair, only to find out that they have vanished and replaced with normal hair. <b>Your hair is normal again!</b>";
+	      desc += "You feel something strange going on on your head. You reach your hands up to feel your fluffy hair, only to find out that it has vanished and been replaced with normal hair. <b>Your hair is normal again!</b>";
 	      break;
 	    case Hair.GRASS:
-	      desc += "You feel something strange going in on your head. You reach your hands up to feel your grass-hair, only to find out that the long, soft and leafy blades have vanished and replaced with normal hair. <b>Your hair is normal again!</b>";
+	      desc += "You feel something strange going on on your head. You reach your hands up to feel your grass-hair, only to find out that the long, soft and leafy blades have vanished and been replaced with normal hair. <b>Your hair is normal again!</b>";
 	      break;
 	    case Hair.SILKEN:
-	      desc += "You feel something strange going in on your head. You reach your hands up to feel your silken-hair, only to find out that they have changed back to normal hair. <b>Your hair is normal again!</b>";
-	      break;
-	    case Hair.BURNING:
-	      desc += "Your head begins to cool down until the flames entirely disappear, leaving you with ordinary hair. <b>Your hair is normal again!</b>";
-	      break;
-	    default:
-	      desc += "You feel a strange sensation on your head. Passing a hand on it, you realize it feels completely human. <b>Your hair is normal again!</b>";
+				desc += "You feel something strange going on on your head. You reach your hands up to feel your silken-hair, only to find out that it has changed back to normal hair. <b>Your hair is normal again!</b>";
+				break;
+			case Hair.BURNING:
+				desc += "Your head begins to cool down until the flames entirely disappear, leaving you with ordinary hair. <b>Your hair is normal again!</b>";
+				break;
+			default:
+				desc += "You feel a strange sensation on your head. Putting a hand to your hair, it feels completely normal. <b>Your hair is normal again!</b>";
 	    }
 
 	    flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
@@ -1616,7 +1616,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    } else {
 	      desc += "You run your fingers through your [hair], noticing a change in the texture. The strands are fusing together, becoming as thick as small ropes whilst being slowly covered by scales.";
 	      if (player.hairLength < 6) {
-	        desc += " Additionaly, its length seems to grow.";
+	        desc += " Additionally, its length seems to grow.";
 	        player.hairLength = 6;
 	      }
 	    }
@@ -1651,7 +1651,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const HairStorm: Transformation = new SimpleTransformation("Storm Hair",
 	  // apply effect
 	  function (doOutput: Boolean): void {
-	    var desc: String = "A strange zapping sound is the only warning you receive before a weak shock runs through the back of your head. Irritated and confused, you bring a hand to the spot and rub it, only for a sudden electical noise to make itself known at the contact.\n\nKnowing for a fact that your hair shouldn't sound like that, or like anything at all for that matter, you bring both your hands to explore it and make note of several glowing strands shaped like stylized lightning bolts. There's even a single strand that floats just off the side of your face, refusing to stay down no matter how many times you try to reposition it. With a sigh, you give up on it, deciding that it's not really important to defeat your own hair. <b>You now have electrical raiju hair!</b>";
+	    var desc: String = "A strange zapping sound is the only warning you receive before a weak shock runs through the back of your head. Irritated and confused, you bring a hand to the spot and rub it, only for a sudden electrical noise to make itself known at the contact.\n\nKnowing for a fact that your hair shouldn't sound like that, or like anything at all for that matter, you bring both your hands to explore it and make note of several glowing strands shaped like stylized lightning bolts. There's even a single strand that floats just off the side of your face, refusing to stay down no matter how many times you try to reposition it. With a sigh, you give up on it, deciding that it's not really important to defeat your own hair. <b>You now have electrical raiju hair!</b>";
 
 	    if (doOutput) outputText(desc);
 	    player.hairType = Hair.STORM;
@@ -1693,7 +1693,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      else player.hairColor = "platinum blonde";
 	    }
 
-	    desc += "The feeling of your hair against your skin suddenly changes and it is now cold against you. You notice wisps of snow sometime fallindown past your face and straining your eyes to look up you can see them slowly drifting down from your long snowy white hair.";
+	    desc += "The feeling of your hair against your skin suddenly changes and it is now cold against you. Wisps of snow occasionally fall down past your face, straining your eyes to look up, and you can see them slowly drifting down from your long snowy white hair.";
 
 	    if (player.hairLength < 25) player.hairLength = 25;
 
@@ -1778,7 +1778,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const HairGhost: Transformation = new SimpleTransformation("Ghost Hair",
 	  // apply effect
 	  function (doOutput: Boolean): void {
-	    var desc: String = "A sensation of weightlessness assaults your scalp. You reach up and grab a handful of hair, confused. Your perplexion only heightens when you actually feel the follicles becoming lighter in your grasp, before you can hardly tell you're holding anything. Plucking a strand, you hold it up before you, surprised to see... it's completely transparent! You have transparent hair!";
+	    var desc: String = "A sensation of weightlessness assaults your scalp. You reach up and grab a handful of hair, confused. Your perplexity only heightens when you actually feel the follicles becoming lighter in your grasp, before you can hardly tell you're holding anything. Plucking a strand, you hold it up before you, surprised to see... it's completely transparent! You have transparent hair!";
 
 	    if (doOutput) outputText(desc);
 	    player.hairType = Hair.GHOST;
@@ -1824,7 +1824,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const HairAnemone: Transformation = new SimpleTransformation("Anemone Hair",
 	  // apply effect
 	  function (doOutput: Boolean): void {
-	    var desc: String = "Your balance slides way off, and you plop down on the ground as mass concentrates on your head. Reaching up, you give a little shriekas you feel a disturbingly thick, squirming thing where your hair should be. Pulling it down in front of your eyes, you notice it's still attached toyour head; what's more, it's the same color as your hair used to be. <b>You now have squirming tentacles in place of hair!</b>  As you gaze at it, agentle heat starts to suffuse your hand. The tentacles must be developing their characteristic stingers!  You quickly let go; you'll have to take care tokeep them from rubbing on your skin at all hours. On the other hand, they're quite short and you find you can now flex and extend them as you would anyother muscle, so that shouldn't be too hard. You settle on a daring, windswept look for now.";
+	    var desc: String = "Your balance slides way off, and you plop down on the ground as mass concentrates on your head. Reaching up, you give a little shriek as you feel a disturbingly thick, squirming thing where your hair should be. Pulling it down in front of your eyes, you notice it's still attached to your head; what's more, it's the same color as your hair used to be. <b>You now have squirming tentacles in place of hair!</b>  As you gaze at it, a gentle heat starts to suffuse your hand. The tentacles must be developing their characteristic stingers!  You quickly let go; you'll have to take care to keep them from rubbing on your skin at all hours. On the other hand, they're quite short and you find you can now flex and extend them as you would any other muscle, so that shouldn't be too hard. You settle on a daring, windswept look for now.";
 
 	    if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
 	      desc += "  <b>(Your hair has stopped growing.)</b>";
@@ -2242,8 +2242,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      }
 	      desc += "Shaking your head a bit, you wait for your energy to return, then examine your appearance. ";
 	      if (((player.skin.base.color == "ebony" || player.skin.base.color == "black") && !player.hasCoat()) || ((player.hairColor == "black" || player.hairColor == "midnight") && (player.hasFur() || player.hasScales()))) {
-	        desc += "Nothing seems different at first. Strange... you look closer and discover a darker, mask-line outline on your already inky visage. Furthermore your canines have slightly alongated not unlike those of an animal. <b>You now have a barely-visible raccoon mask and sharp canines like those of a raccoon.</b>";
-	      } else desc += "A dark, almost black mask shades the " + player.skinFurScales() + " around your eyes and over the topmost portion of your nose, lending you a criminal air! Furthermore your canines have slightly alongated not unlike those of an animal. <b>You now have a raccoon mask and sharp canines like those of a raccoon!</b>";
+	        desc += "Nothing seems different at first. Strange... you look closer and discover a darker, mask-line outline on your already inky visage. Furthermore your canines have slightly elongated not unlike those of an animal. <b>You now have a barely-visible raccoon mask and sharp canines like those of a raccoon.</b>";
+	      } else desc += "A dark, almost black mask shades the " + player.skinFurScales() + " around your eyes and over the topmost portion of your nose, lending you a criminal air! Furthermore your canines have slightly elongated not unlike those of an animal. <b>You now have a raccoon mask and sharp canines like those of a raccoon!</b>";
 	    } else {
 	      desc += "A sudden migraine sweeps over you and you clutch your head in agony as your nose collapses back to human dimensions. A worrying numb spot grows around your eyes, and you entertain several horrible premonitions until it passes as suddenly as it came. Checking your reflection in your water barrel, you find ";
 	      //[(if black/midnight fur or if black scales)
@@ -2318,7 +2318,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    desc += "A horrible itching begins to encompass the area around your eyes. You grunt annoyedly, rubbing furiously at the afflicted area. Once the feeling passes, you make your way to the nearest reflective surface to see if anything has changed. Your suspicions are confirmed. The [skinFurScales] around your eyes has darkened. <b>You now have a ferret mask!</b>";
+	    desc += "A horrible itching begins to encompass the area around your eyes. You grunt in annoyance, rubbing furiously at the afflicted area. Once the feeling passes, you make your way to the nearest reflective surface to see if anything has changed. Your suspicions are confirmed. The [skinFurScales] around your eyes has darkened. <b>You now have a ferret mask!</b>";
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.FERRET_MASK;
@@ -2522,7 +2522,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "The familiar tingle of transformation spreads across your face. Your ";
 	    if (player.hasMuzzle()) desc += "muzzle";
 	    else desc += "face";
-	    desc += " shifts into a vaguely triangular shape, something that would look at home on a predatory reptile... or a dragon. You feel pride swell within you as you look at your reflection inh a puddle at your feet, your new look now resembles a majestic creature of the old myths. <b>Your face is now a dragonlike muzzle!</b>\n\n";
+	    desc += " shifts into a vaguely triangular shape, something that would look at home on a predatory reptile... or a dragon. You feel pride swell within you as you look at your reflection in a puddle at your feet, your new look now resembles a majestic creature of the old myths. <b>You now have a draconic muzzle!</b>\n\n";
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.PLANT_DRAGON;
@@ -2610,7 +2610,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    desc += "While you are busy laughing at the ridicule of this situation your bucktooth begin to pulse in accordance with your laughter growing almost to rabbit like size. You now have Jabberwocky buck tooths!";
+	    desc += "While you are busy laughing at the ridicule of this situation your bucktooth begin to pulse in accordance with your laughter growing almost to rabbit like size. You now have Jabberwocky buck teeths!";
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.BUCKTOOTH;
@@ -2912,7 +2912,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    desc += "Thinking on it, you’re smart, small and smuggly. The whole idea makes you laugh uncontrollably. But hey seriously since you’re the superior genius around here, might as well flash these idiots an unsettling smile, heck just thinking about how stupid everyone else is makes you smirk constantly, halfway to laughter. Well they might call you crazy but once you bury these primitive fools in the ground they'll all be the crazy ones. <b>You’re now constantly flashing a crazy grin just like a gremlin.</b>";
+	    desc += "Thinking on it, you’re smart, small and smugly. The whole idea makes you laugh uncontrollably. But hey seriously since you’re the superior genius around here, might as well flash these idiots an unsettling smile, heck just thinking about how stupid everyone else is makes you smirk constantly, halfway to laughter. Well they might call you crazy but once you bury these primitive fools in the ground they'll all be the crazy ones. <b>You’re now constantly flashing a crazy grin just like a gremlin.</b>";
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.CRAZY;
@@ -3006,7 +3006,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    desc += "Your tongue suddenly feels weird. You try to stick it out to see what’s going on and discover it changed to look similar to the tongue of a cat. At least you will be able to groom yourself properly with <b>your new cat tongue.</b>";
+	    desc += "Your tongue suddenly feels weird. You try to stick it out to see what’s going on and discover it has changed to look similar to the tongue of a cat. At least you will be able to groom yourself properly with <b>your new cat tongue.</b>";
 	    player.tongue.type = Tongue.CAT;
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(TongueMem.getMemory(TongueMem.CAT));
@@ -3026,7 +3026,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    desc += "Your throat starts to ache and your tongue tingles. You try to gasp for air, your eyes opening wide in surprise as the voice that exits your throat is entirely changed. Your words are notes, your sentence a melody. Your voice is like music to your ears and you realize it is because your body became closer to that of an elf, adapting even your tongue and voice. <b>You now have the beautiful voice of the elves.</b>";
+	    desc += "Your throat starts to ache and your tongue tingles. You try to gasp for air, your eyes opening wide in surprise as the voice that exits your throat is entirely changed. Your sentences are a melody, and your words are notes. Your voice is like music to your ears, and you realize it is because your body has become closer to that of an elf, adapting even your tongue and voice. <b>You now have the beautiful voice of the elves.</b>";
 	    player.tongue.type = Tongue.ELF;
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(TongueMem.getMemory(TongueMem.ELF));
@@ -3042,7 +3042,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    desc += "Your tongue suddenly falls out of your mouth and begins undulating as it grows longer. For a moment it swings wildly, completely out of control; but then settles down and you find you can control it at will, almost like a limb. You're able to stretch it to nearly 4 feet and retract it back into your mouth to the point it looks like a normal human tongue. <b>You now have a draconic tongue.</b>";
+	    desc += "Your tongue suddenly falls out of your mouth and begins undulating as it grows longer. For a moment it swings wildly, completely out of control; but then settles down and you find you can control it at will, almost like a limb. You're able to stretch it to nearly 4 feet and retract it back into your mouth to the point where it looks like a normal human tongue. <b>You now have a draconic tongue.</b>";
 
 	    player.tongue.type = Tongue.DRACONIC;
 	    if (doOutput) outputText(desc);
@@ -3059,7 +3059,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    if (player.tongue.type == Tongue.HUMAN) desc += "Your taste-buds start aching as they swell to an uncomfortably large size. Trying to understand what in the world could have provoked such a reaction, you bring your hands up to your mouth, your tongue feeling like it's trying to push its way past your lips. The soreness stops and you stick out your tongue to try and see what would have made it feel the way it did. As soon as you stick your tongue out you realize that it sticks out much further than it did before, and now appears to have split at the end, creating a forked tip. The scents in the air are much more noticeable to you with your snake-like tongue.";
+	    if (player.tongue.type == Tongue.HUMAN) desc += "Your taste-buds start aching as they swell to an uncomfortably large size. Trying to understand what in the world could have provoked such a reaction, you bring your hands up to your mouth, your tongue feeling like it's trying to push its way past your lips. The soreness stops and you stick out your tongue to try and see what would have made it feel the way it did. As soon as you stick your tongue out, you realize that it sticks out much further than it did before, and now appears to have split at the end, creating a forked tip. The scents in the air are much more noticeable to you with your snake-like tongue.";
 	    else desc += "Your inhuman tongue shortens, pulling tight in the very back of your throat. After a moment the bunched-up tongue-flesh begins to flatten out, then extend forwards. By the time the transformation has finished, your tongue has changed into a long, forked snake-tongue.";
 	    player.tongue.type = Tongue.SNAKE;
 	    if (doOutput) outputText(desc);
@@ -3078,7 +3078,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Your tongue tingles";
 	    if (player.tongue.type != Tongue.HUMAN) desc += ", thickening in your mouth until it feels more like your old human tongue, at least for the first few inches";
-	    desc += ". It bunches up inside you, and when you open up your mouth to release it, roughly two feet of tongue dangles out. You find it easy to move and control, as natural as walking. <b>You now have a long demon-tongue.</b>";
+	    desc += ". It bunches up inside you, and when you open your mouth to release it, roughly two feet of tongue dangles out. You find it easy to move and control, as natural as walking. <b>You now have a long demon-tongue.</b>";
 
 	    player.tongue.type = Tongue.DEMONIC;
 	    if (doOutput) outputText(desc);
@@ -3111,7 +3111,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    desc += "Something change in your mouth and you feel like you are about to choke! You stick your tongue out and discover to your surprise that it now glows with a neon blue light. Furthermore it stick out way further then it should, just like a lizard. <b>You now have a neon blue lizard tongue that glow in the dark.</b>";
+	    desc += "Something has changed in your mouth and you feel like you are about to choke! You stick your tongue out and discover, to your surprise, that it now glows with a neon blue light. Furthermore, it sticks out way further than it should, just like a lizard. <b> You now have a neon blue lizard tongue that glows in the dark.</b>";
 
 	    player.tongue.type = Tongue.CAVE_WYRM;
 	    if (doOutput) outputText(desc);
@@ -4163,7 +4163,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    desc += "You blink and stumble, a wave of vertigo threatening to pull your [feet] from under you. As you steady and open your eyes, all seems to be fine until at least it seems so. But when moment later, when you casualy look at your hands pondering if there is any other effect the numbing sensation starts to spread starting from your hands fingers. Worried you focus your gaze at them to notice, that they typical texture becoming grey colored much similar to that of... stone? And slowy you realize the more you look at them, the faster change. Panicked for a moment you look away and then this numbing feeling starting to slowly receed. But looking back at them causing it to return. After moment, and closing eyelids, you conclude that your eyes must have gained an useful ability. <b>Your eyes has turned into gorgon eyes.</b>";
+	    desc += "You blink and stumble, a wave of vertigo threatening to pull your [feet] from under you. As you steady and open your eyes, all seems to be fine until at least it seems so. But when moment later, when you casualy look at your hands pondering if there is any other effect the numbing sensation starts to spread starting from your hands fingers. Worried you focus your gaze at them to notice, that they typical texture becoming grey colored much similar to that of... stone? And slowly you realize the more you look at them, the faster change. Panicked for a moment you look away and then this numbing feeling starting to slowly recede. But looking back at them causing it to return. After moment, and closing eyelids, you conclude that your eyes must have gained an useful ability. <b>Your eyes has turned into gorgon eyes.</b>";
 
 	    player.eyes.type = Eyes.GORGON;
 	    if (doOutput) outputText(desc);
@@ -4197,7 +4197,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			function (doOutput: Boolean): void {
 				var desc: String = "";
 
-				desc += "You suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a snake with sinister black schlera that reflect the sorry state of your soul. <b>You now have fiendish snake eyes!</b>.";
+				desc += "You suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a snake with sinister black sclera that reflect the sorry state of your soul. <b>You now have fiendish snake eyes!</b>.";
 
 				player.eyes.type = Eyes.SNAKEFIENDISH;
 				player.eyes.colour = "yellow";
@@ -4305,7 +4305,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    desc += "You feel something fundamental change in your sight when you go check yourself in a puddle you notice that <b>they now have horizontal slit like those of an octupus.</b>";
+	    desc += "You feel something fundamental change in your sight when you go check yourself in a puddle you notice that <b>they now have horizontal slit like those of an octopus.</b>";
 
 	    player.eyes.type = Eyes.KRAKEN;
 	    if (doOutput) outputText(desc);
@@ -4471,7 +4471,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.EyesChangeColor(["golden"]), doOutput);
 
-	    desc += "Your eyes feel like they are burning. You try to soothe them, but to no avail. You endure the agony for a few minutes before it finally fades. You look at yourself in the nearest reflective surface and notice your eyes have taken on a goat like appearance with horizontal pupils in the middle, the schlera turning back to white. <b>You now have eyes with horizontal pupils just like those of a goat!</b>";
+	    desc += "Your eyes feel like they are burning. You try to soothe them, but to no avail. You endure the agony for a few minutes before it finally fades. You look at yourself in the nearest reflective surface and notice your eyes have taken on a goat like appearance with horizontal pupils in the middle, the sclera turning back to white. <b>You now have eyes with horizontal pupils just like those of a goat!</b>";
 
 	    player.eyes.type = Eyes.GOAT;
 	    if (doOutput) outputText(desc);
@@ -4756,7 +4756,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      break;
 	    case Arms.PLANT:
 	    case Arms.PLANT2:
-	      desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' vines are withering. Leaves also falling donw, leaving [skin base.type] behind.";
+	      desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' vines are withering. Leaves also falling down, leaving [skin base.type] behind.";
 	      break;
 	    case Arms.SALAMANDER:
 	    case Arms.LIZARD:
@@ -4768,7 +4768,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' chitinous covering and fuzz is flaking away. The glossy black and yellow coating is soon gone, leaving [skin base.type] behind.";
 	      break;
 	    case Arms.MANTIS:
-	      desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' chitinous covering is flaking away and scythe shrinking until it vanish completly. The glossy green coating is soon gone, leaving [skin base.type] behind.";
+	      desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' chitinous covering is flaking away and scythe shrinking until it vanish completely. The glossy green coating is soon gone, leaving [skin base.type] behind.";
 	      break;
 	    case Arms.SPIDER:
 	    case Arms.USHI_ONI:
@@ -4940,7 +4940,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
 
-	    desc += "Your finguers starts to feels like some bee stungs them as they inflates to a more chubby sizes yours nails tickening and darkening turning into clover-like claws. Aside of your now fat finguers and darker claws your arms remains about the same. <b>You now have pig arms.</b>";
+	    desc += "Your fingers starts to feels like some bee stings them as they inflates to a more chubby sizes yours nails tickening and darkening turning into clover-like claws. Aside of your now fat finguers and darker claws your arms remains about the same. <b>You now have pig arms.</b>";
 	    player.arms.type = Arms.PIG;
 
 	    if (doOutput) outputText(desc);
@@ -6100,7 +6100,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.SkinFur(Skin.COVERAGE_LOW, { color: "white" }), false);
 
-	    desc += "Your skin itches incessantly around your crotch and chest. You scratch it, feeling as a coat of white fur sprouts in those areas. <b>You are now partialy covered in white fur like a bikini.</b>";
+	    desc += "Your skin itches incessantly around your crotch and chest. You scratch it, feeling as a coat of white fur sprouts in those areas. <b>You are now partially covered in white fur like a bikini.</b>";
 
 	    player.rearBody.type = RearBody.YETI_FUR;
 	    if (doOutput) outputText(desc);
@@ -8476,7 +8476,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (player.tailType == Tail.NONE) desc += "You feel the flesh above your [butt] knotting and growing. It twists and writhes around itself before flopping straight down, now shaped into a distinctly bovine form. You have a <b>cow tail</b>.";
 	    else {
-	      if (player.tailType != Tail.SPIDER_ADBOMEN || player.tailType != Tail.BEE_ABDOMEN || player.tailType != Tail.SCORPION || player.tailType != Tail.MANTIS_ABDOMEN) {
+	      if (!InCollection(player.tailType, Tail.SPIDER_ADBOMEN, Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTIS_ABDOMEN)) {
 	        desc += "Your tail bunches uncomfortably, twisting and writhing around itself before flopping straight down, now shaped into a distinctly bovine form. You have a <b>cow tail</b>.";
 	      } else {
 	        desc += "Your insect-like abdomen tingles pleasantly as it begins shrinking and softening, chitin morphing and reshaping until it looks exactly like a <b>cow tail</b>.";
