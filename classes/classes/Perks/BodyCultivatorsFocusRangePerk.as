@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Perks 
+package classes.Perks
 {
 	import classes.PerkClass;
 	import classes.PerkType;
@@ -12,10 +12,11 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			return "(+" + params.value1 * 100 + "% Physical Soulskills Power)";
 		}
 		
-		public function BodyCultivatorsFocusRangePerk() 
+		public function BodyCultivatorsFocusRangePerk()
 		{
 			super("Body Cultivator's Focus (R)", "Body Cultivator's Focus (R)",
 					"Your body cultivator's range weapon grants you additional focus, increasing your physical soulskills power.");

@@ -1,4 +1,4 @@
-package classes.Perks 
+package classes.Perks
 {
 	import classes.PerkClass;
 	import classes.PerkType;
@@ -9,15 +9,16 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_MILK_FAUCET_LEVEL + ") Increases milk production by " + params.value1 * 200 + " mL.";
 		}
 		
-		public function AscensionMilkFaucetPerk() 
+		public function AscensionMilkFaucetPerk()
 		{
 			super("Ascension: Milk Faucet", "Ascension: Milk Faucet", "", "Increases milk production by 200 mL per level.");
 		}
 		
-		override public function keepOnAscension(respec:Boolean = false):Boolean 
+		override public function keepOnAscension(respec:Boolean = false):Boolean
 		{
 			return true;
 		}

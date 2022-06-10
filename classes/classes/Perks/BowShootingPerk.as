@@ -11,6 +11,7 @@ package classes.Perks
 
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			return "Reduces arrow shooting costs by " + params.value1 + "%.";
 		}
 

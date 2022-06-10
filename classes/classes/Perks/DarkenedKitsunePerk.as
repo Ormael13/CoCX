@@ -7,6 +7,7 @@ public class DarkenedKitsunePerk extends PerkType
 	{
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			return "The corruption has taken over your star sphere, driving you "+((player.cor >=90)?"completely insane":(player.cor >=75)?"rather unhinged":(player.cor >= 50)?"mildly paranoid":"")+". The higher the corruption, the higher the chance you may do an extra, randomly decided attack. Foes are also terrified of you, and do less damage.";
 		}
 

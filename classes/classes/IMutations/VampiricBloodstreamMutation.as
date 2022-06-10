@@ -85,8 +85,7 @@ public class VampiricBloodstreamMutation extends IMutationPerkType
         }
 
         public function VampiricBloodstreamMutation() {
-            super("Vampiric Bloodstream IM", "Vampiric Bloodstream", ".");
-            maxLvl = 3;
+            super("Vampiric Bloodstream IM", "Vampiric Bloodstream", SLOT_BLOODSTREAM, 3);
         }
 
     }

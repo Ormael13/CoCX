@@ -79,8 +79,7 @@ public class VenomGlandsMutation extends IMutationPerkType
         }
 
         public function VenomGlandsMutation() {
-            super("Venom Glands IM", "Venom Glands", ".");
-            maxLvl = 3;
+            super("Venom Glands IM", "Venom Glands", SLOT_MOUTH, 3);
         }
 
     }

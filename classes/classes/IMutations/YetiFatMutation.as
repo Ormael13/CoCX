@@ -72,8 +72,7 @@ public class YetiFatMutation extends IMutationPerkType
         }
 
         public function YetiFatMutation() {
-            super("Yeti Fat IM", "Yeti Fat", ".");
-            maxLvl = 3;
+            super("Yeti Fat IM", "Yeti Fat", SLOT_FAT, 3);
         }
     }
 }

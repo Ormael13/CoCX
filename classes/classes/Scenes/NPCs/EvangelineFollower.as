@@ -1111,112 +1111,112 @@ private function InternalMutations0(page:int = 0, GoM:int = 0):void {
 	function InternalMutationsHeart():void{
 		menu();
 		//Heart Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Heart"));
+		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_HEART));
 		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsMuscle():void{
 		menu();
 		//Muscle Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Muscle"));
+		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_MUSCLE));
 		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsMouth():void{
 		menu();
 		//Mouth Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Mouth"));
+		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_MOUTH));
 		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsAdrenals():void{
 		menu();
 		//Adrenal Glands Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Adrenals"));
+		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_ADRENALS));
 		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsBloodstream():void{
 		menu();
 		//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
-		mutationsAssistant(IMutationsLib.mutationsArray("Bloodstream"));
+		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_BLOODSTREAM));
 		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsFaTissue():void{
 		menu();
 		//Fat tissue Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("FaT"));
+		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_FAT));
 		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsLungs():void{
 		menu();
 		//Lungs Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Lungs"));
+		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_LUNGS));
 		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsMetabolism():void{
 		menu();
 		//Metabolism Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Metabolism"));
+		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_METABOLISM));
 		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsOvaries():void{
 		menu();
 		//Ovaries Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Ovaries"));
+		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_OVARIES));
 		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsTesticles():void{
 		menu();
 		//Testicle Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Testicles"));
+		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_TESTICLES));
 		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsEyes():void {
 		menu();
 		//Eyes Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Eyes"));
+		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_EYES));
 		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsBoneMarrow():void{
 		menu();
 		//Bones and Marrow Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Bone"));
+		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_BONE));
 		addButton(14, "Back", InternalMutations0, 0 , GoM);
 	}
 
 	function InternalMutationsPNervSys():void{
 		menu();
 		//Peripheral/NervSys Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Nerv/Sys"), 1);
+		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_NERVSYS), 1);
 		addButton(14, "Back", InternalMutations0, 1, GoM);
 	}
 
 	function InternalMutationsThyroidGlands():void{
 		menu();
 		//Thyroid Glands Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Thyroid"),1);
+		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_THYROID),1);
 		addButton(14, "Back", InternalMutations0, 1, GoM);
 	}
 
 	function InternalMutationsParathyroid():void{
 		menu();
 		//ParaThyroid Glands Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("PThyroid"),1);
+		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_PARATHYROID),1);
 		addButton(14, "Back", InternalMutations0, 1, GoM);
 	}
 
 	function InternalMutationsAdaptations():void{
 		menu();
 		//Adaptations Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Adaptations"),1);
+		mutationsAssistant(IMutationsLib.mutationsArray(IMutationPerkType.SLOT_ADAPTATIONS),1);
 		addButton(14, "Back", InternalMutations0, 1, GoM);
 	}
 

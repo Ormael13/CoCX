@@ -10,6 +10,18 @@ import classes.CoC;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
+import classes.IMutationPerkType;
 import classes.MutationsLib;
 import classes.IMutations.*;
 import classes.PerkClass;
@@ -20,6 +32,7 @@ import classes.Races;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
+import classes.Stats.StatUtils;
 import classes.StatusEffects;
 import flash.utils.Dictionary;
 import flash.events.TextEvent;
@@ -883,7 +896,7 @@ public class PerkMenu extends BaseContent {
 			outputText("Mutations Assistant is toggleable in settings, and hides/shows you available mutations. It is off by default.\n\n");
 
 			outputText("<b><i><u>Mutations used per bodypart:</u></i></b>\n");
-			var bPartlist:Array = ["Heart", "Muscle", "Mouth", "Adrenals", "Bloodstream", "FaT", "Lungs", "Metabolism", "Ovaries", "Testicles", "Eyes", "Bone", "Nerv/Sys", "Thyroid", "PThyroid", "Adaptations"]
+			var bPartlist:Array = keys(IMutationPerkType.Slots);
 			for each (var bodyPart:String in bPartlist){
 				var mCount:int = 0
 				var mPerkarray:Array = IMutationsLib.mutationsArray(bodyPart);
@@ -893,7 +906,7 @@ public class PerkMenu extends BaseContent {
 						if (bodyPart == "Adaptations") mutationCount++;
 					}
 				}
-				outputText(bodyPart + " mutations obtained: ");
+				outputText(IMutationPerkType.Slots[bodyPart].name + " mutations obtained: ");
 				if (mCount > mutationCount){
 					outputText("<font color=\"#800000\">");
 				}
@@ -915,132 +928,12 @@ public class PerkMenu extends BaseContent {
 			}
 		}
 
-		function mutationsDBHeart():void{
+		function mutationsDBSlot(slot:String):void{
 			clearOutput();
 			//Heart Mutations
-			displayHeader("Heart Mutations:");
-			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Heart"));
-			mutationsDatabase();
-		}
-
-		function mutationsDBMuscle():void{
-			clearOutput();
-			//Muscle Mutations
-			displayHeader("Muscle Mutations:");
-			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Muscle"));
-			mutationsDatabase();
-		}
-
-		function mutationsDBMouth():void{
-			clearOutput();
-			//Mouth Mutations
-			displayHeader("Mouth Mutations:");
-			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Mouth"));
-			mutationsDatabase();
-		}
-
-		function mutationsDBAdrenals():void{
-			clearOutput();
-			//Adrenal Glands Mutations
-			displayHeader("Adrenal Gland Mutations");
-			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Adrenals"));
-			mutationsDatabase();
-		}
-
-		function mutationsDBBloodstream():void{
-			clearOutput();
-			//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
-			displayHeader("Bloodstream Mutations");
-			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Bloodstream"));
-			mutationsDatabase();
-		}
-
-		function mutationsDBFaTissue():void{
-			clearOutput();
-			//Fat tissue Mutations
-			displayHeader("Fat and Tissue Mutations");
-			mutationsDatabaseVerify(IMutationsLib.mutationsArray("FaT"));
-			mutationsDatabase();
-		}
-
-		function mutationsDBLungs():void{
-			clearOutput();
-			//Lungs Mutations
-			displayHeader("Lungs Mutations");
-			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Lungs"));
-			mutationsDatabase();
-		}
-
-		function mutationsDBMetabolism():void{
-			clearOutput();
-			//Metabolism Mutations
-			displayHeader("Metabolism Mutations");
-			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Metabolism"));
-			mutationsDatabase();
-		}
-
-		function mutationsDBOvaries():void{
-			clearOutput();
-			//Ovaries Mutations
-			displayHeader("Ovaries Mutations");
-			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Ovaries"));
-			mutationsDatabase();
-		}
-
-		function mutationsDBTesticles():void{
-			clearOutput();
-			//Testicle Mutations
-			displayHeader("Balls Mutations");
-			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Testicles"));
-			mutationsDatabase();
-		}
-
-		function mutationsDBEyes():void{
-			clearOutput();
-			//Eyes Mutations
-			displayHeader("Eye Mutations");
-			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Eyes"));
-			mutationsDatabase();
-		}
-
-		function mutationsDBBoneMarrow():void{
-			clearOutput();
-			//Bones and Marrow Mutations
-			displayHeader("Bones and Marrow Mutations");
-			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Bone"));
-			mutationsDatabase();
-		}
-
-		function mutationsDBPNervSys():void{
-			clearOutput();
-			//Peripheral/NervSys Mutations
-			displayHeader("Peripheral Nervous System Mutations");
-			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Nerv/Sys"));
-			mutationsDatabase(1);
-		}
-
-		function mutationsDBThyroidGlands():void{
-			clearOutput();
-			//Thyroid Glands Mutations
-			displayHeader("Thyroid Gland Mutations");
-			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Thyroid"));
-			mutationsDatabase(1);
-		}
-
-		function mutationsDBParathyroid():void{
-			clearOutput();
-			//ParaThyroid Glands Mutations.
-			displayHeader("ParaThyroid Glands Mutations");
-			mutationsDatabaseVerify(IMutationsLib.mutationsArray("PThyroid"));
-			mutationsDatabase(1);
-		}
-
-		function mutationsDBAdaptations():void{
-			clearOutput();
-			//Adaptation Mutations.
-			displayHeader("Adaptation Mutations");
-			mutationsDatabaseVerify(IMutationsLib.mutationsArray("Adaptations"));
-			mutationsDatabase(1);
+			displayHeader(IMutationPerkType.Slots[slot].name+" Mutations:");
+			mutationsDatabaseVerify(IMutationsLib.mutationsArray(slot));
+			mutationsDatabase(mutDbPage);
 		}
 
 		function mutationsDBDragon():void{
@@ -1050,7 +943,7 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++");
 			mutationsDatabaseVerify([IMutationsLib.DraconicBonesIM, IMutationsLib.DraconicHeartIM, IMutationsLib.DraconicLungIM]);
-			mutationsDatabase(1);
+			mutationsDatabase(mutDbPage);
 		}
 
 		function mutationsDBKitsune():void{
@@ -1059,35 +952,34 @@ public class PerkMenu extends BaseContent {
 			displayHeader("Kitsune Mutations");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
 			mutationsDatabaseVerify([IMutationsLib.KitsuneThyroidGlandIM, IMutationsLib.KitsuneParathyroidGlandsIM]);
-			mutationsDatabase(1);
+			mutationsDatabase(mutDbPage);
 		}
 
 		menu();
 		var menuItems:Array = [];
 		//This was originally hard coded buttons. Which it can still be, I suppose.
-		menuItems.push("Heart", mutationsDBHeart, "Heart Mutations");
-		menuItems.push("Muscle", mutationsDBMuscle, "Muscle Mutations");
-		menuItems.push("Mouth", mutationsDBMouth, "Mouth Mutations");
-		menuItems.push("Adrenal Glands",mutationsDBAdrenals, "Adrenal Mutations");
-		menuItems.push("Bloodstream",mutationsDBBloodstream, "Bloodstream Mutations");
-		menuItems.push("Fat and Tissue", mutationsDBFaTissue, "FaT Mutations");
-		menuItems.push("Lungs",mutationsDBLungs, "Lungs Mutations");
-		menuItems.push("Metabolism", mutationsDBMetabolism, "Metabolism Mutations");
-		menuItems.push("Ovaries", mutationsDBOvaries, "Ovaries Mutations");
-		menuItems.push("Testicles", mutationsDBTesticles, "Testicle Mutations");
-		menuItems.push("Eyes", mutationsDBEyes, "Eyes Mutations");
-		menuItems.push("Bone/Marrow", mutationsDBBoneMarrow, "Bone Mutations");
-		// Due to not being able to return which page I am at in submenu,
-		// I cannot keep the menu to be at a specific page beyond this.
-		// Thus, hardcoded into the function.
-		menuItems.push("Nerv/Sys", mutationsDBPNervSys, "Nerv-Sys Mutations");
-		menuItems.push("Thyroid Gland", mutationsDBThyroidGlands, "Thyroid Mutations");
-		menuItems.push("Parathyroid Gland", mutationsDBParathyroid, "Parathyroid Mutations");
-		menuItems.push("Adaptations", mutationsDBAdaptations, "Adaptation Mutations");
+		menuItems.push("Heart",  curry(mutationsDBSlot, IMutationPerkType.SLOT_HEART), "Heart Mutations");
+		menuItems.push("Muscle",  curry(mutationsDBSlot, IMutationPerkType.SLOT_MUSCLE), "Muscle Mutations");
+		menuItems.push("Mouth",  curry(mutationsDBSlot, IMutationPerkType.SLOT_MOUTH), "Mouth Mutations");
+		menuItems.push("Adrenal Glands", curry(mutationsDBSlot, IMutationPerkType.SLOT_ADRENALS), "Adrenal Mutations");
+		menuItems.push("Bloodstream", curry(mutationsDBSlot, IMutationPerkType.SLOT_BLOODSTREAM), "Bloodstream Mutations");
+		menuItems.push("Fat and Tissue",  curry(mutationsDBSlot, IMutationPerkType.SLOT_FAT), "FaT Mutations");
+		menuItems.push("Lungs", curry(mutationsDBSlot, IMutationPerkType.SLOT_LUNGS), "Lungs Mutations");
+		menuItems.push("Metabolism",  curry(mutationsDBSlot, IMutationPerkType.SLOT_METABOLISM), "Metabolism Mutations");
+		menuItems.push("Ovaries",  curry(mutationsDBSlot, IMutationPerkType.SLOT_OVARIES), "Ovaries Mutations");
+		menuItems.push("Testicles",  curry(mutationsDBSlot, IMutationPerkType.SLOT_TESTICLES), "Testicle Mutations");
+		menuItems.push("Eyes",  curry(mutationsDBSlot, IMutationPerkType.SLOT_EYES), "Eyes Mutations");
+		menuItems.push("Bone/Marrow",  curry(mutationsDBSlot, IMutationPerkType.SLOT_BONE), "Bone Mutations");
+		menuItems.push("Nerv/Sys", curry(mutationsDBSlot, IMutationPerkType.SLOT_NERVSYS), "Nerv-Sys Mutations");
+		menuItems.push("Thyroid Gland", curry(mutationsDBSlot, IMutationPerkType.SLOT_THYROID), "Thyroid Mutations");
+		menuItems.push("Parathyroid Gland", curry(mutationsDBSlot, IMutationPerkType.SLOT_PARATHYROID), "Parathyroid Mutations");
+		menuItems.push("Adaptations", curry(mutationsDBSlot, IMutationPerkType.SLOT_ADAPTATIONS), "Adaptation Mutations");
 		menuItems.push("Dragons", mutationsDBDragon, "Dragon Mutations");
 		menuItems.push("Kitsunes", mutationsDBKitsune, "Kitsune Mutations");
+		mutDbPage = page;
 		menuGen(menuItems, page, displayPerks);
 	}
+	private var mutDbPage:int = 0;
 
 	//Mutations check helper. Cloned + stripped requirements logic from PerkMenuDB.
 	public function mutationsDatabaseVerify(mutationsArray:Array):void {
@@ -1147,7 +1039,7 @@ public class PerkMenu extends BaseContent {
 				outputText("\n\n")
 				var tempObj:Object = mutation.pBuffs(player)
 				for (var key:String in tempObj) {
-					outputText("Buffs " + key + ": " + tempObj[key] + "\n");
+					outputText("Buffs " + StatUtils.explainBuff(key, tempObj[key]) + "\n");
 				}
 				outputText("\n");
 			}
@@ -1168,7 +1060,7 @@ public class PerkMenu extends BaseContent {
 					outputText("\n\n");
 					var tempObj2:Object = mutation2.pBuffs(player);
 					for (var key2:String in tempObj2) {
-						outputText("Buffs " + key2 + ": " + tempObj2[key2] + "\n");
+						outputText("Buffs " + StatUtils.explainBuff(key2, tempObj2[key2]) + "\n");
 					}
 				} else {
 					outputText("\n???" + "\n Tier: ?" + "\nDescription: ???");
