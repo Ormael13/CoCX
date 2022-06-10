@@ -215,6 +215,7 @@ use namespace CoC;
 					if(player.bRows() == 0) {
 						player.createBreastRow();
 						outputText("Your chest tingles, revealing a pair of pink nipples on your new mammory glands.  ");
+						transformations.UnlockBreasts();
 					}
 					player.growTits(1, (2+rand(3)), true, 1);
 					outputText("  ");
@@ -1024,8 +1025,7 @@ use namespace CoC;
 			clearOutput();
 			//Grow if none
 			if(player.bRows() == 0) {
-				outputText("<b>Your chest swells out, forming rounded C-cup globes, capped with tiny erect nipples!</b>");
-				player.createBreastRow(3);
+				transformations.CreateBreastRow(3).applyEffect();
 				player.nippleLength = .25;
 			}
 			//Singular row - cup size + 3.  Nipple size to 1" if smaller.

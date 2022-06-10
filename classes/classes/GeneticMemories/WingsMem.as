@@ -272,7 +272,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-	  public static const GIANT_DRAGONFLY:int = 20
+	  public static const GIANT_DRAGONFLY:int = 21
 	  EnumValue.add(Memories, GIANT_DRAGONFLY, "GIANT_DRAGONFLY", {
 		  id: "Giant Dragonfly Wings",
 		  name: "Giant Dragonfly Wings",

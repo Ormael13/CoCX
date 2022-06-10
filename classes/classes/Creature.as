@@ -22,13 +22,12 @@ import classes.BodyParts.Tongue;
 import classes.BodyParts.UnderBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
-import classes.IMutationPerkType;
 import classes.IMutations.*;
 import classes.Items.ItemTags;
 import classes.Items.JewelryLib;
 import classes.Races.ElementalRace;
-import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.NPCs.TyrantiaFollower;
+import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.SceneLib;
 import classes.Stats.BuffBuilder;
 import classes.Stats.BuffableStat;
@@ -2019,7 +2018,7 @@ public class Creature extends Utils
 			}
 		}
 
-		public function vaginalCapacity():Number {
+		public function vaginalCapacity():int {
 			//If the player has no vaginas
 			if (vaginas.length == 0)
 				return 0;
@@ -2044,11 +2043,10 @@ public class Creature extends Utils
 				bonus += 25;
 			if(hasPerk(PerkLib.FerasBoonMilkingTwat))
 				bonus += 40;
-			total = (bonus + statusEffectv1(StatusEffects.BonusVCapacity) + 8 * vaginas[0].vaginalLooseness * vaginas[0].vaginalLooseness) * (1 + vaginas[0].vaginalWetness / 10);
-			return total;
+			return Math.floor((bonus + statusEffectv1(StatusEffects.BonusVCapacity) + 8 * vaginas[0].vaginalLooseness * vaginas[0].vaginalLooseness) * (1 + vaginas[0].vaginalWetness / 10));
 		}
 
-		public function analCapacity():Number {
+		public function analCapacity():int {
 			var bonus:Number = 0;
 			//Centaurs = +30 capacity
 			if (isTaur())
@@ -2061,7 +2059,7 @@ public class Creature extends Utils
 				bonus += 10;
 			if (ass.analWetness > 0)
 				bonus += 15;
-			return ((bonus + statusEffectv1(StatusEffects.BonusACapacity) + 6 * ass.analLooseness * ass.analLooseness) * (1 + ass.analWetness / 10));
+			return Math.floor((bonus + statusEffectv1(StatusEffects.BonusACapacity) + 6 * ass.analLooseness * ass.analLooseness) * (1 + ass.analWetness / 10));
 		}
 
 		public function hasFuckableNipples():Boolean {
@@ -2408,7 +2406,7 @@ public class Creature extends Utils
 			if (cocks.length == 0) return 0;
 			var counter:int = 0;
 			for (var x:int = 0; x < cocks.length; x++) {
-				if (cocks[x].cockType == CockTypesEnum.DOG || cocks[x].cockType == CockTypesEnum.FOX || cocks[x].cockType == CockTypesEnum.WOLF) counter++;
+				if (InCollection(cocks[x].cockType, CockTypesEnum.DOG, CockTypesEnum.FOX, CockTypesEnum.WOLF, CockTypesEnum.DISPLACER)) counter++;
 			}
 			return counter;
 		}
@@ -3474,6 +3472,8 @@ public class Creature extends Utils
 				case CockTypesEnum.CAT:
 				case CockTypesEnum.DEMON:
 				case CockTypesEnum.DISPLACER:
+				case CockTypesEnum.DOG:
+				case CockTypesEnum.FOX:
 				case CockTypesEnum.DRAGON:
 				case CockTypesEnum.HORSE:
 				case CockTypesEnum.KANGAROO:
@@ -3485,9 +3485,6 @@ public class Creature extends Utils
 				case CockTypesEnum.TENTACLE:
 					if (countCocksOfType(cocks[0].cockType) == cocks.length) return Appearance.cockNoun(cocks[0].cockType) + "s";
 					break;
-				case CockTypesEnum.DOG:
-				case CockTypesEnum.FOX:
-					if (dogCocks() == cocks.length) return Appearance.cockNoun(CockTypesEnum.DOG) + "s";
 			}
 			return Appearance.cockNoun(CockTypesEnum.HUMAN) + "s";
 		}

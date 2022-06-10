@@ -474,6 +474,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+	  public static const DOG:int = 38;
+	  EnumValue.add(Memories, DOG, "DOG", {
+		  id: "Dog Tail",
+		  name: "Dog Tail",
+		  cost: 100,
+		  title: "Dog",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.TailDog;
+		  }
+	  });
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

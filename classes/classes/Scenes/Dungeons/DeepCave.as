@@ -1229,8 +1229,8 @@ use namespace CoC;
 			}
 			else {
 				dungeons.setDungeonButtons(null, roomGatheringHall, null, roomSecretPassage);
+				if (player.hasKeyItem("Soul Gem Research") < 0) addButton(0, "Drawer", ZetazsBedroomDrawer); //no conditions. Drawer was ALREADY there!
 			}
-			if (player.hasKeyItem("Soul Gem Research") < 0) addButton(0, "Drawer", ZetazsBedroomDrawer); //no conditions. Drawer was ALREADY there!
 		}
 
 		public function ZetazsBedroomDrawer():void {

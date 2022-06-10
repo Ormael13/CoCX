@@ -74,6 +74,7 @@ public class NightmareScene extends BaseContent
 						if (!recalling) {
 							if (player.bRows() == 0) {
 								player.createBreastRow(7);
+								transformations.UnlockBreasts();
 							}
 							else player.breastRows[0].breastRating = 7;
 						}

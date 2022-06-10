@@ -308,5 +308,7 @@ public class SceneLib {
     public static var uniqueSexScene:UniqueSexScenes = new UniqueSexScenes();
 
     public static var mimicScene:MimicScene = new MimicScene();
+
+    public static var ivorySuccubusScene:IvorySuccubusScene = new IvorySuccubusScene();
 }
 }

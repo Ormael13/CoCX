@@ -1229,6 +1229,9 @@ private function InternalMutations0(page:int = 0, GoM:int = 0):void {
 			if (mutations.available(target) && mutations.maxLvl > target.perkv1(mutations)){
 				trace("Requirements met, adding in.");
 				menuItems.push(mutations.name(), curry(mutations.acquireMutation, player, costTaker), mutations.desc());	//This is witchcraft, not sure how acquirePerk still recalls which perk to give, but it does.
+			} else if (flags[kFLAGS.EVA_MUTATIONS_BYPASS]){
+				trace("Requirements bypassed, adding in.");
+				menuItems.push(mutations.name(), curry(mutations.acquireMutation, player, costTaker), mutations.desc());
 			}
 			else if(mutations.maxLvl == target.perkv1(mutations)){
 				trace("MaxTier acquired");

@@ -9,6 +9,8 @@ import classes.StatusEffects;
 import classes.VaginaClass;
 
 public class NagaRace extends Race {
+	public static const SnakeScaleColors:/*String*/Array = ["black", "midnight", "midnight black"];
+
 	public function NagaRace(id:int) {
 		super("Naga", id);
 	}

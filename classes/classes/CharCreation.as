@@ -1426,7 +1426,7 @@ import coc.view.MainView;
 					outputText("You spent some time as an alchemist's assistant, and alchemical items always seem to be more reactive in your hands.  Is this your history?");
 					break;
 				case PerkLib.HistoryCultivator:
-					outputText("You spent much of your time cultivating your soul, reaching the point where you successfully took the first step towards spiritual enlightment, as well as attaining an uncanny purity of soulforce. You will start with Job: Soul Cultivator perk. Your max soulforce will be roughly 10% higher. Is this your history?");
+					outputText("You spent much of your time cultivating your soul, reaching the point where you successfully took the first step towards spiritual enlightment, as well as attaining an uncanny purity of soulforce. You will start with Soul Cultivator perk & Cultivation Manual: Duality. Your max soulforce will be roughly 10% higher. Is this your history?");
 					break;
 				case PerkLib.HistoryFighter:
 					outputText("You spent much of your time fighting other children, and you had plans to find work as a guard when you grew up.  You do 10% more damage with physical melee attacks.  You will also start out with 50 gems and Job: Warrior perk.  Is this your history?");
@@ -1696,7 +1696,8 @@ import coc.view.MainView;
 			else player.setUndergarment(undergarments.C_LOIN);
 			if (player.biggestTitSize() >= 2) player.setUndergarment(undergarments.C_BRA);
 			else player.setUndergarment(undergarments.C_SHIRT);
-			if (player.hasPerk(PerkLib.HistoryCultivator) || (player.hasPerk(PerkLib.PastLifeCultivator) && player.hasKeyItem("PerksOverJobs") < 0)) {
+			if (player.hasPerk(PerkLib.HistoryCultivator) || player.hasPerk(PerkLib.PastLifeCultivator)) {
+				player.createKeyItem("Cultivation Manual: Duality", 0, 0, 0, 0);
 				player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
 				player.perkPoints += 1;
 			}
@@ -1712,7 +1713,6 @@ import coc.view.MainView;
 			if (player.hasPerk(PerkLib.HistoryReligious)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.HistorySlacker)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.HistorySlut)) player.perkPoints += 1;
-			if (player.hasPerk(PerkLib.PastLifeCultivator) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeFighter) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeScout) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeScholar) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
@@ -1752,10 +1752,10 @@ import coc.view.MainView;
 			player.perkPoints += 1;
 			//setupMutations();
 			Metamorph.resetMetamorph();
-			if (player.hasCock()) {
-				Metamorph.unlockMetamorphEx(CockCountMem.getMemory(CockCountMem.COCK1));
-			}
+			if (player.hasCock()) transformations.UnlockCocks();
 			if (player.balls > 0) Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
+			if (player.hasVagina()) transformations.UnlockVagina();
+			if (player.hasBreasts()) transformations.UnlockBreasts();
 			clearOutput();
 			statScreenRefresh();
 			outputText("Would you like to play through the " + (1 * (1 + player.newGamePlusMod())) + "-day"+(player.newGamePlusMod() > 0 ? "s":"")+" prologue in Ingnam or just skip?");
@@ -2788,6 +2788,10 @@ import coc.view.MainView;
 					func: accessTailMenu
 				},
 				{
+					name: "Breasts",
+					func: accessBreastsMenu
+				},
+				{
 					name: "Vagina",
 					func: accessVaginaMenu
 				},
@@ -2902,6 +2906,10 @@ import coc.view.MainView;
 
 		private function accessTailMenu(currentPage: int = 0): void {
 			openPaginatedMetamorphMenu("Tail", accessTailMenu, currentPage, TailMem.Memories);
+		}
+
+		private function accessBreastsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Breasts", accessBreastsMenu, currentPage, BreastMem.Memories);
 		}
 
 		private function accessVaginaMenu(currentPage: int = 0): void {

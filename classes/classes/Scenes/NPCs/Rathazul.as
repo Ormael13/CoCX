@@ -315,6 +315,7 @@ private function rathazulWorkOffer():Boolean {
 			if (player.hasItem(consumables.SMART_T, 5) && player.hasItem(consumables.VITAL_T, 5) && player.hasItem(consumables.S_WATER, 1) && player.hasItem(consumables.PURHONY, 1)) addButton(8, "Mitzi", cureMitzi).hint("Ask him to help Mitzi. \n\nNeeds five scholar teas, five vitality tinctures, one bottle of pure spring water, and one vial of pure honey");
 			else addButtonDisabled(8, "Mitzi", "Need to gather five scholar teas, five vitality tinctures, one bottle of pure spring water, and one vial of pure honey for this.");
 		}
+		else if (silly() && player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(8, "Flirt", getThatRatAss).hint("Try to score with Rathazul.");
 		if (flags[kFLAGS.SAMIRAH_FOLLOWER] == 7) {
 			if (player.hasItem(consumables.HUMMUS_, 1) && player.hasItem(consumables.REPTLUM, 1) && player.hasItem(consumables.OVIELIX, 1)) addButton(9, "ReptaTongue P", makeReptaTonguePotion).hint("Ask him to make Repta-Tongue Potion. \n\nNeeds 1 Hummus, 1 Reptilium and 1 Ovi Elixir");
 			else addButtonDisabled(9, "ReptaTongue P", "Need to gather 1 Hummus, 1 Reptilium and 1 Ovi Elixir for this potion.");
@@ -1088,6 +1089,36 @@ public function rathazulAprilFoolPart3():void {
     else
         player.addKeyValue("Rathazul's Purity Elixir", 1, 1);
 	doNext(returnToRathazulMenu);
+}
+
+private function getThatRatAss():void {
+	clearOutput();
+	outputText(images.showImage("rathazul-lab"));
+	outputText("You slide over to Rathazul's spot in camp and wink at him, saying, \"<i>Hey cutie, do you have 11 protons? Cause your sodium fine.</i>\"\n\n");
+	outputText("Rathazul looks up from the whatever it is he's working on and blinks wearily. \"<i>What?</i>\"\n\n");
+	outputText("\"<i>Oh, nothing.</i>\" You let out a soft laugh. \"<i>Just that we have chemistry, so I think it's time we try some biology.</i>\"\n\n");
+	outputText("There's a moment of silence, then he coughs. \"<i>I-I'm sorry, what are you trying to say?</i>\" There's a glimmer of a plea in his eyes, asking you to stop.\n\n");
+	outputText("No way. You are getting what you came here for. You puff your chest and declare, \"<i>I wanna fuck you.</i>\"\n\n");
+	doNext(getThatRatAss2);
+}
+private function getThatRatAss2():void {
+	clearOutput();
+	outputText(images.showImage("rathazul-accident"));
+	outputText("\"<i>Oh... Ohhhh no...</i>\" He takes a couple steps back, mumbling, \"<i>No, no no no no no no, no, no...</i>\" His eyes glaze over and his steps grow uncoordinated as his soul seems to leave his body. \"<i>No, no, no... No... No...</i>\"\n\n");
+	outputText("His foot steps in a bowl and he slips, crashing into the ground. His head slams into a rock along the way. You hear something crack that sounds like it shouldn't. You drop to all fours and put your hand on his shoulder, shouting his name. He doesn't respond. You put a hand to his neck. His pulse has stopped, and there is blood gathering around his head.\n\n");
+	outputText("You get up and very slowly back away. You have no idea what just happened, but you are sure of one thing-- You need to get out of here.\n\n");
+	doNext(getThatRatAss3);
+}
+private function getThatRatAss3():void {
+	spriteSelect(SpriteDb.s_rathazul);
+	clearOutput();
+	outputText(images.showImage("encounter-rathazul"));
+	outputText("An hour later, you muster up the courage to return to the scene of your crime. Much to your surprise, though, there is no scene. Rathazul is back on his feet, though distinctly avoiding looking at you. All he's offered is a note on the ground. You pick it up and read it.\n\n");
+	outputText("\"<i>No. And please do not ask me that again.\n- Rathazul</i>\"\n\n");
+	outputText("Sheesh, what a drama queen. A simple \"No thanks\" would've been fine. You toss the note aside with a huff and turn back to camp.\n\n");
+	outputText("Still though, thinking about that rat ass gets you turned on...");
+	dynStats("lus", 10);
+	doNext(camp.returnToCampUseOneHour);
 }
 }
 }
