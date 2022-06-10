@@ -7,6 +7,7 @@ import classes.PerkLib;
 import classes.Race;
 
 public class CatRace extends Race {
+	public static const catFurColors:/*String*/Array = ["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"];
 	
 	public function CatRace(id:int) {
 		super("Cat", id);

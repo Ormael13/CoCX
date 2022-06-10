@@ -10284,7 +10284,7 @@ public class Combat extends BaseContent {
                 outputText("<b>You feel your lifeforce slipping away, leaving you weaker, slower, your mind reeling.  This ailment is crippling, and getting worse. Finish this fight quickly!</b>\n\n");
                 player.takePhysDamage(500);
             } else */if (EvangelineFollower.EvangelineAffectionMeter >= 2) {
-                outputText("<b>You feel your lifeforce slipping away, leaving you weaker, slower, your mind reeling.  You better finsh this fight fast, or find a way to cure this ailment...You know you can't keep this up forever.</b>\n\n");
+                outputText("<b>You feel your lifeforce slipping away, leaving you weaker, slower, your mind reeling.  You better finish this fight fast, or find a way to cure this ailment...You know you can't keep this up forever.</b>\n\n");
                 if (player.maxHP() < 1000) player.takePhysDamage(player.maxHP() * 0.1);//maybe make them true damage?
                 else player.takePhysDamage(100);
 			}
@@ -11157,6 +11157,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.Necromancy)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
 		if (player.hasPerk(PerkLib.RecoveryMantra)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
 		if (player.hasKeyItem("Cultivation Manual: Duality") >= 0) gainedsoulforce += Math.round(player.maxSoulforce() * 0.01);
+		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
 		gainedsoulforce = Math.round(gainedsoulforce * 0.02 * minutes);
 		if (player.hasPerk(PerkLib.EnergyDependent)) gainedsoulforce = 0;
 		EngineCore.SoulforceChange(gainedsoulforce, false);

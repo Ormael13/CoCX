@@ -54,6 +54,8 @@ public class Soulforce extends BaseContent
 	public function accessSoulforceMenu():void {
 		clearOutput();
 		SoulCultivationLvL();
+		outputText("<b>Perk v1:</b> " + player.perkv1(PerkLib.JobSoulCultivator) + "\n");
+		outputText("<b>Perk v2:</b> " + player.perkv2(PerkLib.JobSoulCultivator) + "\n");
 		var dailySoulforceUsesLimit:Number = 0;
 		if (player.hasPerk(PerkLib.JobSoulCultivator)) dailySoulforceUsesLimit++;
 		if (player.hasPerk(PerkLib.SoulWarrior)) dailySoulforceUsesLimit++;
@@ -150,7 +152,8 @@ public class Soulforce extends BaseContent
 		}
 		else addButtonDisabled(9, "???", "Req. Soul Apprentice stage.");
 		addButton(10, "Cheats", SoulforceCheats1, 0).hint("This should be obvious. ^^");//block this option at each public version
-		addButton(12, "Cultivation", Contemplations).hint("Contemplate mysteries of the world to try progress your soul cultivation path. Maybe even attain cultivation base breakthrou. (Req. to have 100% or 30% of max SF for major/minor base breakthrou if all other req. are meet.)");
+		if (player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(12, "Cultivation", Contemplations).hint("Contemplate mysteries of the world to try progress your soul cultivation path. Maybe even attain cultivation base breakthrou.");
+		else addButtonDisabled(12, "Cultivation", "Req. to have 100% or 30% of max SF for major/minor base breakthrou if all other req. are meet.");
 		if (canfaceTribulation()) addButton(13, "Tribulation", tribulationsPrompt).hint("To face it or not? That's the question.");
 		else addButtonDisabled(13, "Tribulation", "It's not (yet) time for this.");
 		addButton(14, "Back", playerMenu);
@@ -216,15 +219,35 @@ public class Soulforce extends BaseContent
 			cLvlTier += 1;
 		}*/
 		var cultStanding:String = "";
-		if (flags[kFLAGS.SOUL_CULTIVATION] >= 9) cultStanding = "Late Soul Warrior";
-		else if (flags[kFLAGS.SOUL_CULTIVATION] >= 8) cultStanding = "Middle Soul Warrior";
-		else if (flags[kFLAGS.SOUL_CULTIVATION] >= 7) cultStanding = "Early Soul Warrior";
-		else if (flags[kFLAGS.SOUL_CULTIVATION] >= 6) cultStanding = "Late Soul Personage";
-		else if (flags[kFLAGS.SOUL_CULTIVATION] >= 5) cultStanding = "Middle Soul Personage";
-		else if (flags[kFLAGS.SOUL_CULTIVATION] >= 4) cultStanding = "Early Soul Personage";
-		else if (flags[kFLAGS.SOUL_CULTIVATION] >= 3) cultStanding = "Late Soul Apprentice";
-		else if (flags[kFLAGS.SOUL_CULTIVATION] >= 2) cultStanding = "Middle Soul Apprentice";
-		else if (flags[kFLAGS.SOUL_CULTIVATION] >= 1) cultStanding = "Early Soul Apprentice";
+		if (flags[kFLAGS.SOUL_CULTIVATION] >= 1) {
+			var prefix:String = "";
+			switch(player.perkv1(PerkLib.JobSoulCultivator)){
+				case 1:
+					prefix = "Early ";
+					break;
+				case 2:
+					prefix = "Middle ";
+					break;
+				case 3:
+					prefix = "Late ";
+					break;
+			}
+			var suffix:String = "";
+			switch(player.perkv2(PerkLib.JobSoulCultivator)){
+				case 1:
+					suffix = " Apprentice";
+					break;
+				case 2:
+					suffix = " Personage";
+					break;
+				case 3:
+					suffix = " Warrior";
+					break;
+			}
+			cultStanding += prefix;
+			cultStanding += "Soul";
+			cultStanding += suffix;
+		}
 		else cultStanding = "Mortal";
 		outputText("<b>Cultivation stage:</b> " + cultStanding + "\n");
 	}
@@ -272,6 +295,7 @@ public class Soulforce extends BaseContent
 		menuItems.push("TyrantPF", (TyrantiaFollower.TyrantiaFollowerStage == 5 && TyrantiaFollower.TyraniaCorrupteedLegendaries == 0)? FairyTest5: false, "Patching Tyrantia corrupted legendaries unlock");
 		menuItems.push("LilyPregF", (DriderTown.LilyKidsPCPregnancy != 0 && LilyFollower.LilyFollowerState)? FairyTest3: false, "Curing Lily Infertility ^^");
 		menuItems.push("NewSoulCult", applyHangover, "Cripple your cultivation base to start anew (with a bit more milf fluff in your life).");
+		menuItems.push("Refill SF", refillSoulforce, "Refill your Soulforce.");
 		menuItems.push("EvaMutateReq", mutateReqNope, "Turns on/off mutation requirements")
 		//menuItems.push("WeaponsXPtest", SceneLib.dilapidatedShrine.weaponsXPtrader, "");
 		menuGen(menuItems, page, accessSoulforceMenu);
@@ -284,10 +308,27 @@ public class Soulforce extends BaseContent
 		doNext(curry(SoulforceCheats1, 3));
 	}
 
+	private function refillSoulforce():void{
+		clearOutput();
+		player.soulforce = player.maxOverSoulforce();
+		outputText("Soulforce filled up.");
+		statScreenRefresh();
+		doNext(curry(SoulforceCheats1, 3));
+	}
+
 	private function applyHangover():void {
 		if (player.hasPerk(PerkLib.JobSoulCultivator)) player.removePerk(PerkLib.JobSoulCultivator);
 		if (player.hasKeyItem("Cultivation Manual: Duality") >= 0) player.removeKeyItem("Cultivation Manual: Duality");
 		if (player.hasPerk(PerkLib.SoulApprentice)) player.removePerk(PerkLib.SoulApprentice);
+		if (player.hasPerk(PerkLib.Dantain)) player.removePerk(PerkLib.Dantain);
+		if (player.hasPerk(PerkLib.DaoistCultivator)) player.removePerk(PerkLib.DaoistCultivator);
+		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) player.removePerk(PerkLib.DaoistApprenticeStage);
+		if (player.hasPerk(PerkLib.DaoistWarriorStage)) player.removePerk(PerkLib.DaoistWarriorStage);
+		if (player.hasPerk(PerkLib.DaoistElderStage)) player.removePerk(PerkLib.DaoistElderStage);
+		if (player.hasPerk(PerkLib.DaoistOverlordStage)) player.removePerk(PerkLib.DaoistOverlordStage);
+		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0) player.removeKeyItem("Cultivation Manual: My Dao Sticks are better than Yours");
+		if (player.hasKeyItem("Cultivation Manual: Body like a Coke Fiend") >= 0) player.removeKeyItem("Cultivation Manual: Body like a Coke Fiend");
+		if (player.hasKeyItem("Cultivation Manual: Heart-shaped Eyed She-Devil") >= 0) player.removeKeyItem("Cultivation Manual: Heart-shaped Eyed She-Devil");
 		if (player.hasPerk(PerkLib.SoulPersonage)) player.removePerk(PerkLib.SoulPersonage);
 		if (player.hasPerk(PerkLib.SoulWarrior)) player.removePerk(PerkLib.SoulWarrior);/*
 		if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.HclassHeavenTribulationSurvivor);
@@ -2544,39 +2585,64 @@ public class Soulforce extends BaseContent
 	public function Contemplations():void {
 		clearOutput();
 		outputText("You find a flat, comfortable rock to sit down on and begin to cultivated according to the manual.  Minute after minute you feel your inner soulforce slowly starting to circle inside your body.  It's very slowly circling within yourself.\n\n");
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 5 && player.level >= 15 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Late Soul Personage.</b>\n\n");
+			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 6;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 4 && player.level >= 12 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Middle Soul Personage.</b>\n\n");
+			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 5;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 3 && player.wis >= 40 && player.level >= 9 && player.soulforce >= player.maxSoulforce() && player.hasPerk(PerkLib.Dantain)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Early Soul Personage.</b>\n\n");
+			EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+			player.createPerk(PerkLib.SoulPersonage, 0, 0, 0, 0);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, -2);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 4;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
 		if (flags[kFLAGS.SOUL_CULTIVATION] == 2 && player.level >= 6 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
 			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
-			outputText("<b>You're now Late Soul Apprentice</b>\n\n");
+			outputText("<b>You're now Late Soul Apprentice.</b>\n\n");
 			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
 			flags[kFLAGS.SOUL_CULTIVATION] = 3;
 			doNext(camp.returnToCampUseTwoHours);
 			return;
 		}
 		if (flags[kFLAGS.SOUL_CULTIVATION] == 1 && player.level >= 3 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
 			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
-			outputText("<b>You're now Middle Soul Apprentice</b>\n\n");
+			outputText("<b>You're now Middle Soul Apprentice.</b>\n\n");
 			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
 			flags[kFLAGS.SOUL_CULTIVATION] = 2;
 			doNext(camp.returnToCampUseTwoHours);
 			return;
 		}
 		if (flags[kFLAGS.SOUL_CULTIVATION] == 0 && player.wis >= 20 && player.soulforce >= player.maxSoulforce()) {
 			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
-			outputText("<b>You're now Early Soul Apprentice</b>\n\n");
+			outputText("<b>You're now Early Soul Apprentice.</b>\n\n");
 			EngineCore.SoulforceChange(-player.maxSoulforce(), true);
 			player.createPerk(PerkLib.SoulApprentice, 0, 0, 0, 0);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
 			flags[kFLAGS.SOUL_CULTIVATION] = 1;
 			doNext(camp.returnToCampUseTwoHours);
 			return;
-		}/*
-		if (flags[kFLAGS.SOUL_CULTIVATION] == 3 && player.wis >= 40 && player.level >= 9 && player.soulforce >= player.maxSoulforce() && player.hasPerk(PerkLib.Dantain)) {
-			outputText("\n\n");
-			outputText("\n\n");
-			EngineCore.SoulforceChange(-player.maxSoulforce(), true);
-			player.createPerk(PerkLib.SoulPersonage, 0, 0, 0, 0);
-			doNext(camp.returnToCampUseTwoHours);
-			return;
-		}*/
+		}
 		outputText("After two hours you not felt any change. A bit of shame but maybe next time you will gain some enlightenment.\n\n");
 		doNext(camp.returnToCampUseTwoHours);
 		//outputText("You find a flat, comfortable rock to sit down on and begin to cultivated according to the manual.  Minute after minute you feel immersed into world that surrounds you.  How they flow around you, how they change on their own and how they interact with each other.  All this while trying to understand, despite being insignificant while the great dao manifests around you.\n\n");
@@ -3951,4 +4017,4 @@ public class Soulforce extends BaseContent
 		doNext(accessSoulforceMenu);
 	}
 }
-}
+}
