@@ -1972,6 +1972,33 @@ public class SaveUpdater extends NPCAwareContent {
 				if (flags[kFLAGS.SOUL_CULTIVATION] > 0) flags[kFLAGS.SOUL_CULTIVATION] = 0;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.005;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.006) {
+				if (player.hasPerk(PerkLib.Dantain)) {
+					player.removePerk(PerkLib.Dantain);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.DaoistCultivator)) {
+					player.removePerk(PerkLib.DaoistCultivator);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.DaoistApprenticeStage)) {
+					player.removePerk(PerkLib.DaoistApprenticeStage);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.DaoistWarriorStage)) {
+					player.removePerk(PerkLib.DaoistWarriorStage);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.DaoistElderStage)) {
+					player.removePerk(PerkLib.DaoistElderStage);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
+					player.removePerk(PerkLib.DaoistOverlordStage);
+					player.perkPoints += 1;
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.006;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;
