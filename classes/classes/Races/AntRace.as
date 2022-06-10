@@ -17,18 +17,22 @@ public class AntRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.faceType(NOT(Face.HUMAN), 0, -1)
-                .faceType(Face.ANT, +2)//Ant face suffers "not human" so plus 2 to counteract
-				.hornType(Horns.NONE), +1)
-                .earType(ANY(Ears.HoleEars, Ears.HUMAN), +1, -1)
-                .earType(NONE(Ears.HUMAN, Ears.AVIAN), 0, -1)//Avian and Human balance to 0
+				.faceType(ANY(Face.HUMAN, Face.ANT), 0, -1)
+                .faceType(Face.ANT, +1)
+				.hornType(Horns.NONE, +1)
+				.antennaeType(Antennae.ANT, +1)
+                .earType(Ears.INSECT, +1)
+                .earType(ANY(Ears.HUMAN, Ears.HoleEars), 0, -1)//
 				.skinCoatType(Skin.CHITIN, +1)
 				.armType(Arms.ANT, +1)
-				.legType(lowerBody.SPIDER, +1)
+				.legType(ANY(lowerBody.SPIDER, lowerBody.MANTIS), +1)
                 .legType(lowerBody.ANT, +2)
 				.hasCockOfType(CockTypesEnum.INSECT, +1)
 				.wingType(ANY(Wings.ANT_SMALL, Wings.BEE_SMALL, Wings.BEE_LARGE), +1)
 				.wingType(Wings.ANT_LARGE, +2)
+                .hasPerk(PerkLib.AntyDexterity, +1);
+
+        addMutation(IMutationsLib.TrachealSystemIM);
 				
 		
 		buildTier(8, "ant-morph")
@@ -40,12 +44,12 @@ public class AntRace extends Race {
 				})
 				.end();
 		
-		buildTier(5, "plant-morph")
+		buildTier(12, "formicidian")
 				.buffs({
-					"str.mult": +0.10,
-					"tou.mult": +0.50,
-					"spe.mult": -0.20,
-					"def": +4
+					"str.mult": +1.5,
+					"tou.mult": +1.20,
+					"int.mult": -0.70,
+                    "wis.mult": -0.60
 				})
 				.end();
 	}

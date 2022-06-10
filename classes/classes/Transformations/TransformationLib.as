@@ -1364,7 +1364,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    if (player.antennae.type == Antennae.BEE) desc += "Your head itches momentarily as your two floppy antennae changes slowly into long prehensile ones similar to those seen at mantis.";
+	    if (player.antennae.type == Antennae.BEE) desc += "Your head itches momentarily as your two floppy antennae changes slowly into long prehensile ones similar to those seen on mantis.";
+		else if (player.antennae.type == Antennae.ANT) desc += "Your head itches momentarily as your two rigid antennae loosen up, ending up more like those on a Mantis";
 	    else desc += "Your head itches momentarily as two long prehensile antennae sprout from your [hair].";
 	    player.antennae.type = Antennae.MANTIS;
 
@@ -1383,6 +1384,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    if (player.antennae.type == Antennae.MANTIS) desc += "Your head itches momentarily as your two long prehensile antennae changes slowly into floppy ones similar to those seen at bees.";
+		else if (player.antennae.type == Antennae.ANT) desc += "Your head itches momentarily as your two rigid antennae changes slowly into floppy ones similar to those seen on bees.";
 	    else desc += "Your head itches momentarily as two floppy antennae sprout from your " + hairDescript() + ".";
 	    player.antennae.type = Antennae.BEE;
 
@@ -1457,6 +1459,25 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			function (): Boolean {
 				return player.antennae.type === Antennae.JABBERWOCKY;
 			}
+	);
+
+		public const AntennaeAnt: Transformation = new SimpleTransformation("Ant Antennae",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+
+	    if (player.antennae.type == Antennae.BEE) desc += "Your head itches momentarily as your two floppy antennae changes slowly into long, stiff-yet-prehensile ones similar to those seen on ants.";
+		else if (player.antennae.type == Antennae.MANTIS) desc += "Your head itches momentarily as your two antennae stiffen up, ending up more like those on an ant";
+	    else desc += "Your head itches momentarily as two long prehensile antennae sprout from your [hair].";
+	    player.antennae.type = Antennae.ANT;
+
+	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(AntennaeMem.getMemory(AntennaeMem.ANT));
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.antennae.type === Antennae.ANT;
+	  }
 	);
   /*
 */
@@ -3476,6 +3497,22 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // is present
 	  function (): Boolean {
 	    return player.ears.type === Ears.LIZARD;
+	  }
+	);
+
+	public const EarsInsect: Transformation = new SimpleTransformation("Insect Ears",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+
+	    desc += "Tightness centers on your scalp, pulling your ears down from their normal, fleshy shape into small, chitin lumps with holes in their bottom. <b>You have insect ears!</b>";
+	    player.ears.type = Ears.INSECT;
+	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.INSECT));
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.ears.type === Ears.INSECT;
 	  }
 	);
 
@@ -9908,7 +9945,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.WingsAntSmall, doOutput);
 
-	    desc += "Your wings tingle as they grow, filling out until they are large enough to lift you from the ground and allow you to fly! <b>You now have large ant wings!</b> You give a few experimental flaps and begin hovering in place, a giddy smile plastered on your face by the thrill of flight.";
+		if (player.wings.type == Wings.BEE_LARGE) desc += "You wince as you feel your wings tearing in half, but after a short moment, they start to tingle and grow longer. <b>You now have four large ant wings</b>.";
+	    else desc += "Your wings tingle as they grow, filling out until they are large enough to lift you from the ground and allow you to fly! <b>You now have large ant wings!</b> You give a few experimental flaps and begin hovering in place, a giddy smile plastered on your face by the thrill of flight.";
 	    player.wings.desc = "large ant-like";
 	    player.wings.type = Wings.ANT_LARGE;
 
@@ -9926,7 +9964,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    desc += "You feel an itching between your shoulder-blades as something begins growing there. You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably. A sense of relief erupts from you as you feel something new grow out from your body. You hastily remove the top portion of your [armor] and marvel as four small ant-like wings sprout from your back. "+
+	    if (player.wings.type == Wings.BEE_SMALL) desc += "You wince as you feel your wings tearing in half, but after a short moment, they start to tingle as they grow into four small ant wings. You still can't fly with them, but <b>you now have small ant wings</b>."
+		else desc += "You feel an itching between your shoulder-blades as something begins growing there. You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably. A sense of relief erupts from you as you feel something new grow out from your body. You hastily remove the top portion of your [armor] and marvel as four small ant-like wings sprout from your back. "+
 				"Tenderly flexing your new muscles, you find you can flap them quite fast. Unfortunately you can't seem to flap your little wings fast enough to fly, but they would certainly slow a fall. A few quick modifications to your [armor] later and you are ready to continue your journey with <b>your new ant wings</b>.";
 	    player.wings.desc = "small ant-like";
 	    player.wings.type = Wings.ANT_SMALL;

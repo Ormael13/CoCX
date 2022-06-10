@@ -138,6 +138,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("You do not have enough venom to use spider bite right now!");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
+			//Ant Bite
+			if ((player.faceType == Face.ANT || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1) && !player.hasPerk(PerkLib.ElementalBody)) {
+				bd = buttons.add("Ant Bite", antBiteAttack).hint("Attempt to bite your opponent and inject formic acid. (deal fire dmg and lower toughness)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+				if (player.tailVenom < player.VenomWebCost() * 5) {
+					bd.disable("You do not have enough venom to use ant bite right now!");
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+
 			//Constrict
 			if (player.isNaga() && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Constrict", SceneLib.desert.nagaScene.nagaPlayerConstrict).hint("Attempt to bind an enemy in your long snake-tail.");
@@ -4229,6 +4236,41 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		else {
 			outputText("You lunge headfirst, fangs bared. Your attempt fails horrendously, as [themonster] manages to counter your lunge, pushing you back out of range.");
+		}
+		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
+		player.tailVenom -= player.VenomWebCost() * 5;
+		flags[kFLAGS.VENOM_TIMES_USED] += 1;
+		if (!combatIsOver()) enemyAI();
+	}
+	public function antBiteAttack():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		if (combat.checkConcentration()) return; //Amily concentration
+		if (monster is LivingStatue)
+		{
+			outputText("Your " ( player.faceType = Face.ANT ? "mandibles" : "fangs" ) " can't even penetrate the giant's flesh.");
+			enemyAI();
+			return;
+		}
+		//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
+		if(rand(player.spe/2 + 40) + 20 > monster.spe/1.5 {
+			//(if monster = demons)
+			if(monster.short == "demons") outputText("You look at the crowd for a moment, wondering which of their number you should bite. Your glance lands upon the leader of the group, easily spotted due to his snakeskin cloak. You quickly dart through the demon crowd as it closes in around you and lunge towards the broad form of the leader. You catch the demon off guard and sink your " ( player.faceType = Face.ANT ? "mandibles" : "fangs" ) " into his flesh. You quickly release your formic acid and retreat before he, or the rest of the group manage to react.");
+			//(Otherwise)
+			else outputText("You lunge at the foe headfirst, " ( player.faceType = Face.ANT ? "mandibles" : "fangs" ) " bared. You manage to catch [themonster] off guard, your " ( player.faceType = Face.ANT ? "mandibles" : "fangs" ) ", penetrating into [monster his] body. You quickly release your formic acid, and retreat before [monster he] manages to react.");
+			//The following is how the enemy reacts over time to formic acid. It is displayed after the description paragraph,instead of lust
+			var d4Bdcc:Number = 2;
+			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) d4Bdcc *= 2;
+			monster.statStore.addBuffObject({str:-d4Bdcc,spe:-d4Bdcc}, "Burn",{text:"Burn"});
+
+			//Check weither its snakebite or apophis
+			if (monster.hasStatusEffect(StatusEffects.AntFire)) monster.addStatusValue(StatusEffects.Antfire,1,1);
+			else monster.createStatusEffect(StatusEffects.Antfire,10,0.02,0,0);
+			checkAchievementDamage(damage);
+		}
+		else {
+			outputText("You lunge headfirst, " ( player.faceType = Face.ANT ? "mandibles out" : "fangs bared" ) ". Your attempt fails horrendously, as [themonster] manages to counter your lunge, knocking your head away with enough force to make your ears ring.");
 		}
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);
