@@ -743,6 +743,13 @@ public class LowerBody extends SaveableBodyPart {
 		canTaur: true
 	});
 
+	public static const ANT_LEGS:int = 74;
+	EnumValue.add(Types, ANT_LEGS, "ANT_LEGS", {
+		name: "ant",
+		appearanceDesc: "Your {legCount} legs are covered in a slightly reflective [skin coat.color], insectile carapace up to your upper-thigh, looking more like armor than natural body.",
+		canTaur: true
+	});
+
 	override public function set type(value:int):void {
 		super.type = value;
 		// Reset leg count

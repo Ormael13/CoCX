@@ -10,6 +10,7 @@ public class Ears extends BodyPart {
 	 * - name: human-readable name, ("human", "horse")
 	 */
 	public static var Types:/*EnumValue*/Array = [];
+	public static const HoleEars:/*String*/Array = ["LIZARD, DRAGON, ORCA2, AVIAN"];
 
 	public static const HUMAN: int = 0;
 	EnumValue.add(Types, HUMAN, "HUMAN", {

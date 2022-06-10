@@ -1885,7 +1885,7 @@ public class Creature extends Utils
             if (compareBy != "area" && compareBy != "length" && compareBy != "thickness") //sanity check
                 throw new Error("Wrong compareBy value!");
             var cnt:int = 0;
-            var tent:Boolean = (type == CockTypesEnum.STAMEN || type == CockTypesEnum.TENTACLE);
+            var tent:Boolean = (type == CockTypesEnum.STAMEN || type == CockTypesEnum.TENTACLE || type == CockTypesEnum.INSECT);
             for (var i:int = 0; i < cocks.length; ++i) {
                 var isize:Number = compareBy == "length" ? cocks[i].cockLength :
                                 compareBy == "thickness" ? cocks[i].cockThickness :
@@ -2441,11 +2441,11 @@ public class Creature extends Utils
 			return countCocksOfType(CockTypesEnum.CAVE_WYRM);
 		}
 
-		public function raijuCocks():int { //How many cave wyrm-cocks?
+		public function raijuCocks():int { //How many raiju-cocks?
 			return countCocksOfType(CockTypesEnum.RAIJU);
 		}
 
-		public function pigCocks():int { //How many lizard/snake-cocks?
+		public function pigCocks():int { //How many pig-cocks?
 			return countCocksOfType(CockTypesEnum.PIG);
 		}
 
@@ -2471,6 +2471,10 @@ public class Creature extends Utils
 
 		public function beeCocks():int { //How many beecocks?
 			return countCocksOfType(CockTypesEnum.BEE);
+		}
+
+		public function insectCocks():int { //How many insectcocks?
+			return countCocksOfType(CockTypesEnum.INSECT);
 		}
 
 
@@ -3483,6 +3487,7 @@ public class Creature extends Utils
 				case CockTypesEnum.PIG:
 				case CockTypesEnum.MINDBREAKER:
 				case CockTypesEnum.TENTACLE:
+				case CockTypesEnum.INSECT:
 					if (countCocksOfType(cocks[0].cockType) == cocks.length) return Appearance.cockNoun(cocks[0].cockType) + "s";
 					break;
 				case CockTypesEnum.DOG:
@@ -3505,6 +3510,7 @@ public class Creature extends Utils
 					case CockTypesEnum.KANGAROO:
 					case CockTypesEnum.AVIAN:
 					case CockTypesEnum.ECHIDNA:
+					case CockTypesEnum.INSECT:
 						return true; //If there's even one cock of any of these types then return true
 					default:
 				}
@@ -3581,6 +3587,7 @@ public class Creature extends Utils
 					if (rand(2) == 0) return "crown";
 					return "head";
 				case CockTypesEnum.TENTACLE:
+				case CockTypesEnum.INSECT:
 					if (rand(2) == 0) return "mushroom-like tip";
 					return "wide plant-like crown";
 				case CockTypesEnum.PIG:

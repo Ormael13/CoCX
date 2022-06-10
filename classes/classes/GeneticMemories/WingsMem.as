@@ -283,6 +283,28 @@ package classes.GeneticMemories {
 		  }
 	  });
 
+	  public static const ANT_SMALL:int = 22
+		EnumValue.add(Memories, ANT_SMALL, "ANT_SMALL", {
+			id: "Ant Small Wings",
+			name: "Small Ant Wings",
+			cost: 100,
+			title: "Ant(S)",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsAntSmall;
+			}
+		});
+
+		public static const ANT_LARGE:int = 23
+		EnumValue.add(Memories, ANT_LARGE, "ANT_LARGE", {
+			id: "Ant Large Wings",
+			name: "Large Ant Wings",
+			cost: 200,
+			title: "Ant(L)",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.WingsAntLarge;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}
