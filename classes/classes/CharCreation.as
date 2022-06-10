@@ -2300,13 +2300,13 @@ import coc.view.MainView;
 						addButtonDisabled(btn, "Gen. Memory", "You have acquired the highest tier available.");
 					}
 					else {
-						addButton(btn, "Gen. Memory", curry(perkRPConfirm, tier, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost *1, 2));
 						if (tier == 1){
 							player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15, 0, 0, 9000);
 						}
 						else{
 							player.changeStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 15 * tier);
 						}
+						addButton(btn, "Gen. Memory", curry(perkRPConfirm, tier, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost *1, 2));
 					}
 				}
 			}
