@@ -563,6 +563,7 @@ package classes.Scenes {
 					GeneticMemoryStorage["Fox 5th Tail"] = true;
 					GeneticMemoryStorage["Fox 6th Tail"] = true;
 				}
+				//noinspection FallThroughInSwitchStatementJS
 				if (player.tailType == Tail.FOX && player.tailCount < 7) {
 					switch (player.tailCount) {
 						case 6:
@@ -701,10 +702,10 @@ package classes.Scenes {
 			];
 
 			if (player.hasPerk(PerkLib.MetamorphEx)) {
-//				menusList.push({
-//					name: "Breasts",
-//					func: accessBreastsMenu
-//				},
+				menusList.push({
+						name: "Breasts",
+						func: accessBreastsMenu
+					});
 				menusList.push({
 						name: "Vagina",
 						func: accessVaginasMenu
@@ -926,7 +927,7 @@ package classes.Scenes {
 			openPaginatedMenu(title, accessTailMenu, currentPage, TailMem.Memories);
 		}
 
-		private function accessBreastsMenu(currentPage: int = 0): void {	//TODO: convert to BodyPart, opts for rows from 0 to 4
+		private function accessBreastsMenu(currentPage: int = 0): void {
 			const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Breasts</u></font>\n";
 
 			clearOutput();
@@ -937,7 +938,7 @@ package classes.Scenes {
 			outputText("[pg]Perhaps you'd like to change this?");
 
 			addButton(14, "Back", accessMetamorphMenu);
-			//openPaginatedMenu(title, accessBreastsMenu, currentPage, TailMem.Memories);
+			openPaginatedMenu(title, accessBreastsMenu, currentPage, BreastMem.Memories);
 		}
 
 		private function accessCocksMenu(currentPage: int = 0): void {
@@ -1064,7 +1065,7 @@ package classes.Scenes {
 				const enoughSF: Boolean = player.soulforce >= genMem.cost;
 
 				if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem, index).hint("Cost: " + genMem.cost + " SF" + (genMem.info ? "\n\n" + genMem.info : ""));
-				else if (unlocked && partsInUse) addButtonDisabled(currentButton, buttonStr, "You already have this, the metamorphosis would have no effect!");
+				else if (unlocked && partsInUse) addButtonDisabled(currentButton, buttonStr, (!genMem.hint? "You already have this, the metamorphosis would have no effect!":genMem.hint));
 				else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton, buttonStr, "Cost: " + genMem.cost + " SF (You don't have enough Soulforce for this metamorphosis!)");
 				else if (!unlocked) addButtonDisabled(currentButton, buttonStr, "You haven't unlocked this metamorphosis yet!" + (genMem.lockedInfo ? "\n\n" + genMem.lockedInfo : ""));
 				currentButton++;

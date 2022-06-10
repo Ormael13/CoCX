@@ -8,7 +8,6 @@ import classes.CockTypesEnum;
 import classes.DefaultDict;
 import classes.EngineCore;
 import classes.EventParser;
-import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.ItemType;
@@ -610,13 +609,10 @@ public class Holidays {
             player.orgasm();
             player.dynStats("lib", 10, "sen", 10, "cor", 3);
             //Grow a 10" human or tentacle dick! RANDOM!
-            if (int(Math.random() * 2) == 0) {
+            if (int(Math.random() * 2) == 0)
                 CoC.instance.transformations.CockTentacle(0, 10, 2.5).applyEffect(false);
-                Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.TENTACLE));
-            } else {
-                player.createCock(10, 2.5);
-                Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
-            }
+            else
+                CoC.instance.transformations.CockHuman(0, 10, 2.5).applyEffect(false);
             //Add five corruption.
             if (!player.hasPerk(PerkLib.FerasBoonSeeder)) {
                 player.createPerk(PerkLib.FerasBoonSeeder, 0, 0, 0, 0);

@@ -1118,11 +1118,6 @@ public class KitsuneScene extends BaseContent
 			addButtonIfTrue(4, "Tentacles...", kitsunesGetBonedBy3PlusTentacles, "Req. at least three 30-inch tentacle cocks", player.countCocksWithType(CockTypesEnum.TENTACLE, 30, -1, "length") >= 3);
 			//unique
 			if (monster.hairColor == "blonde") {
-				addButtonIfTrue(5, "FuckDraft", fuckDraftBlond, "Req. Fuck Draft", player.hasItem(consumables.F_DRAFT));
-				addButtonIfTrue(6, "Lactaid", fuckDraftBlond, "Req. Lactaid", player.hasItem(consumables.LACTAID));
-				addButtonIfTrue(7, "Ovi Elixir", fuckDraftBlond, "Req. Ovi Elixir", player.hasItem(consumables.OVIELIX));
-			}
-			if (monster.hairColor == "blonde") {
 				addButtonIfTrue(5, "FuckDraft", fuckDraftBlond, "Req. Fuck Draft", player.hasItem(consumables.F_DRAFT),
 					"Feed her a bottle of FuckDraft and copulate with her like animals.");
 				addButtonIfTrue(6, "Lactaid", lactaidDoseAKitSune, "Req. Lactaid", player.hasItem(consumables.LACTAID),

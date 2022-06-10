@@ -1034,14 +1034,8 @@ private function shouldraGivesYaSomeFukkinTeats():void {
 	if(!player.hasFuckableNipples() && rand(4) == 0) {
 		var i:int = player.breastRows.length;
 		//Set nipplecunts on every row.
-		while(i > 0) {
-			i--;
-			if(!player.breastRows[i].fuckable && player.nippleLength >= 2) {
-				player.breastRows[i].fuckable = true;
-				//Keep track of changes.
-				temp2++;
-			}
-		}
+		if (transformations.NipplesFuckable.isPossible()) temp2++;
+		transformations.NipplesFuckable.applyEffect(false);
 		//Talk about if anything was changed.
 		if(temp2 > 0) outputText("  While doing so, she manages to slip a few of your fingers within the engorged teats, ecstatcy flowing through you as your digits explore their inner workings.  \"<i>I may not be a doctor, Champ, but it looks to me like <b>you've managed to gain yourself a pair of fuckable nips.</b></i>\"  The ghost girl spends a few minutes running your fingers around your [nipples], inside and out, just to confirm her diagnosis.");
 	}

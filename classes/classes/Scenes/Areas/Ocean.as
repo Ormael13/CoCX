@@ -8,7 +8,6 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.Areas.Ocean.*;
 import classes.Scenes.NPCs.CeaniScene;
 import classes.Scenes.Places.Boat.SharkGirlScene;
@@ -53,7 +52,7 @@ use namespace CoC;
 					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 2;
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 					player.createStatusEffect(StatusEffects.InWater,0,0,0,0);
-					SceneLib.anemoneScene.mortalAnemoneeeeee();
+					SceneLib.boat.anemoneScene.mortalAnemoneeeeee();
 					break;
 				case 1:
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);

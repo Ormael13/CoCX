@@ -426,7 +426,18 @@ package classes.GeneticMemories {
 		  }
 		});
 
-		public static const ANT:int = 35;
+	  public static const GOO:int = 35;
+	  EnumValue.add(Memories, GOO, "GOO", {
+		  id: "Goo Arms",
+		  name: "Goo Arms",
+		  cost: 100,
+		  title: "Goo",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.ArmsGoo;
+		  }
+	  });
+  
+    public static const ANT:int = 36;
 		EnumValue.add(Memories, ANT, "ANT", {
 			id: "Ant Arms",
 			name: "Ant Arms",

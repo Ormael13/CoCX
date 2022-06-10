@@ -18,7 +18,6 @@ import classes.internals.ChainedDrop;
 	 */
 	public class Basilisk extends Monster 
 	{
-
 		public static function basiliskSpeed(player:Player,amount:Number = 0):void {
 			var bse:BasiliskSlowDebuff = player.createOrFindStatusEffect(StatusEffects.BasiliskSlow) as BasiliskSlowDebuff;
 			bse.applyEffect(amount);
@@ -57,9 +56,8 @@ import classes.internals.ChainedDrop;
 		//Special 3: basilisk tail swipe (Small physical damage):
 		private function basiliskTailSwipe():void {
 			outputText("The basilisk suddenly whips its tail at you, swiping your [feet] from under you!  You quickly stagger upright, being sure to hold the creature's feet in your vision.  ");
-			if(damage == 0) outputText("The fall didn't harm you at all.  ");
-			var damage:Number = int((str + 20) - Math.random()*(player.tou+player.armorDef));
-			damage = player.takePhysDamage(damage, true);			
+			if (player.takePhysDamage(int((str + 20) - Math.random()*(player.tou+player.armorDef)), true) == 0)
+				outputText("The fall didn't harm you at all.  ");
 		}
 
 		//basilisk physical attack: With lightning speed, the basilisk slashes you with its index claws!

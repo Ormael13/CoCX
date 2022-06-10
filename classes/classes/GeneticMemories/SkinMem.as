@@ -118,6 +118,42 @@ package classes.GeneticMemories {
 		  }
 	  });
 
+	  public static const SLIME:int = 6;
+	  EnumValue.add(Memories, SLIME, "SLIME", {
+		  id: "Slime Skin",
+		  name: "Slime Skin",
+		  cost: 100,
+		  title: "Slime",
+		  availableCoverages: [Skin.COVERAGE_COMPLETE],
+		  transformationCoverage: function(coverage: int): Transformation {
+			  return CoC.instance.transformations.SkinGoo(coverage, 0);
+		  }
+	  });
+
+	  public static const DARK_SLIME:int = 7;
+	  EnumValue.add(Memories, DARK_SLIME, "DARK_SLIME", {
+		  id: "Dark Slime skin",
+		  name: "Dark Slime skin",
+		  cost: 100,
+		  title: "Dark Slime",
+		  availableCoverages: [Skin.COVERAGE_COMPLETE],
+		  transformationCoverage: function(coverage: int): Transformation {
+			  return CoC.instance.transformations.SkinGoo(coverage, 2);
+		  }
+	  });
+
+	  public static const MAGMA_SLIME:int = 8;
+	  EnumValue.add(Memories, MAGMA_SLIME, "MAGMA_SLIME", {
+		  id: "Magma Slime Skin",
+		  name: "Magma Slime skin",
+		  cost: 100,
+		  title: "Magma Slime",
+		  availableCoverages: [Skin.COVERAGE_COMPLETE],
+		  transformationCoverage: function(coverage: int): Transformation {
+			  return CoC.instance.transformations.SkinGoo(coverage, 1);
+		  }
+	  });
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

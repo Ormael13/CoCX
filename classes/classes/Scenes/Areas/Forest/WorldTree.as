@@ -200,7 +200,6 @@ public class WorldTree extends BaseContent
 							}
 							i = choices3[rand(choices3.length)];
 							transformations.CockStamen(i).applyEffect();
-							player.cocks[i].knotMultiplier = 1.3;
 							dynStats("sen", 3, "lus", 10);
 							changes++;
 						}
@@ -216,7 +215,6 @@ public class WorldTree extends BaseContent
 						}
 						i = choices4[rand(choices4.length)];
 						transformations.CockStamen(i).applyEffect();
-						player.cocks[i].knotMultiplier = 1.3;
 						dynStats("sen", 3, "lus", 10);
 						changes++;
 					}

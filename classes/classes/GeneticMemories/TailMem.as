@@ -474,7 +474,18 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const ANT_ABDOMEN:int = 38;
+	  public static const DOG:int = 38;
+	  EnumValue.add(Memories, DOG, "DOG", {
+		  id: "Dog Tail",
+		  name: "Dog Tail",
+		  cost: 100,
+		  title: "Dog",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.TailDog;
+		  }
+	  });
+
+		public static const ANT_ABDOMEN:int = 39;
 		EnumValue.add(Memories, ANT_ABDOMEN, "ANT_ABDOMEN", {
 			id: "Ant Tail",
 			name: "Ant Tail",

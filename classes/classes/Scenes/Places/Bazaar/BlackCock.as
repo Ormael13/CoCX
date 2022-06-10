@@ -14,10 +14,7 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
-import classes.GeneticMemories.BallsMem;
-import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.*;
-import classes.Scenes.Metamorph;
 import classes.lists.Gender;
 
 /**
@@ -1405,17 +1402,7 @@ import classes.lists.Gender;
 		//------------
 		public function satyrTFs():void {
 			var changes:int = 0;
-			var changeLimit:int = 3;
-			if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
-			if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
-			if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
-			if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
-			if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
-			if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
-			if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
-			if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
-			if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
-			if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
+			var changeLimit:int = 3 + player.additionalTransformationChances;
 			//Stats and genital changes
 			if (rand(2) == 0) {
 				outputText("\n\nHeat floods your loins as thoughts of tight round asses and dripping pussies flood your mind.");
@@ -1455,15 +1442,13 @@ import classes.lists.Gender;
 			if (rand(3) == 0 && changes < changeLimit && player.hasVagina() && !player.hasCock()) {
 				outputText("\n\nYour vagina begins to feel hot. Removing your [armor], you look down and watch your vagina shrinks to nothing, <b>while your clitoris enlarges to form a human dick</b>.");
 				player.removeVagina();
-				player.createCock(6);
-				Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
+				transformations.CockHuman(0, 6).applyEffect(false);
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.hasCock() && player.balls <= 0) {
 				outputText("Without warning your body begins to tremble as just below [eachCock] you feel a warm trickling sensation of fluid sliding down your body. Before you can check it, the sensation becomes ovewhelming as [eachCock] grows hard and ejaculates " + player.clothedOrNaked("into your [armor]", "all over the ground") + ". Once you've recovered from your intense orgasm you " + player.clothedOrNakedLower("remove your [armor] to ") + "clean yourself and find a <b>new pair of balls</b> hanging just below [eachCock].");
-				player.balls = 2;
+				transformations.BallsDuo.applyEffect(false);
 				player.ballSize = 1;
-				Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 				player.orgasm();
 				changes++;
 			}
@@ -1533,17 +1518,7 @@ import classes.lists.Gender;
 
 		public function rhinoTFs():void {
 			var changes:int = 0;
-			var changeLimit:int = 3;
-			if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
-			if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
-			if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
-			if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
-			if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
-			if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
-			if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
-			if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
-			if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
-			if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
+			var changeLimit:int = 3 + player.additionalTransformationChances;
 			// Stats Changes
 			//------------
 			if (rand(3) == 0 && player.str < 100) {
@@ -1818,17 +1793,7 @@ import classes.lists.Gender;
 
 		public function echidnaTFs():void {
 			var changes:int = 0;
-			var changeLimit:int = 3;
-			if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
-			if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
-			if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
-			if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
-			if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
-			if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
-			if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
-			if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
-			if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
-			if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
+			var changeLimit:int = 3 + player.additionalTransformationChances;
 			var i:int = 0;
 			// Stats Changes
 			//------------

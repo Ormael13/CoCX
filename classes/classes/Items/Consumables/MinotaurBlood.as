@@ -11,12 +11,9 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.CockTypesEnum;
 import classes.EngineCore;
-import classes.GeneticMemories.BallsMem;
-import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
 import classes.PerkLib;
-import classes.Scenes.Metamorph;
 import classes.StatusEffects;
 import classes.VaginaClass;
 import classes.CoC;
@@ -36,8 +33,8 @@ public class MinotaurBlood extends Consumable {
 		if (rand(2) == 0) changeLimit++;
 		if (rand(3) == 0) changeLimit++;
 		if (rand(3) == 0) changeLimit++;
-		changeLimit += player.additionalTransformationChances;
 		if (changeLimit == 1) changeLimit = 2;
+		changeLimit += player.additionalTransformationChances;
 		//Temporary storage
 		var temp:Number = 0;
 		var temp2:Number = 0;
@@ -89,12 +86,9 @@ public class MinotaurBlood extends Consumable {
 		if (changes < changeLimit && rand(2) == 0 && player.ballSize <= 5 && player.horseCocks() > 0) {
 			//Chance of ball growth if not 3" yet
 			if (player.balls == 0) {
-				player.balls = 2;
-				player.ballSize = 1;
-				outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.");
+				CoC.instance.transformations.BallsDuo.applyEffect();
 				dynStats("lus", 5);
 				player.MutagenBonus("lib", 2);
-				Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 			}
 			else {
 				player.ballSize++;
@@ -120,13 +114,8 @@ public class MinotaurBlood extends Consumable {
 					player.removeVagina(0, 1);
 					if (player.cocks.length == 0) {
 						outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment... shifting into the shape of a small ribbed minotaur-like penis!  <b>You now have a horse-cock!</b>");
-						player.createCock();
-						player.cocks[0].cockLength = player.clitLength + 2;
-						player.cocks[0].cockThickness = 1;
-						player.cocks[0].cockType = CockTypesEnum.HORSE;
+						CoC.instance.transformations.CockHorse(0, player.clitLength + 2).applyEffect(false);
 						player.clitLength = .25;
-
-						Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HORSE));
 					}
 				}
 				changes++;

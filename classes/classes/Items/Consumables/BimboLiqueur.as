@@ -40,8 +40,7 @@ public class BimboLiqueur extends Consumable {
 				if (!game.player.hasVagina()) {
 					outputText("  Before you can even take a breath, an extremely peculiar sensation emanates from your crotch.  You can't see through your " + game.player.armorName + ", but you can certainly feel the vagina splitting " + (game.player.balls > 0 ? "from behind your testicles" : "your groin") + ".  Luckily, the cunt-forming doesn't yield any discomfort - on the contrary, you feel yourself falling farther into your chemically-dulled, libido-fueled rut.");
 					if (game.player.hips.type < 12 || game.player.butt.type < 12) outputText("  As if realizing the necessity of womanly proportions to attract the hard cocks your body now craves, your waist pinches slightly inward and your hips and butt swell.  You can't help but run a hand across your newly-feminized pelvis, admiring it.");
-					game.player.createVagina();
-					game.player.clitLength = 0.25;
+					CoC.instance.transformations.VaginaHuman().applyEffect(false);
 					if (game.player.hips.type < 12) game.player.hips.type = 12;
 					if (game.player.butt.type < 12) game.player.butt.type = 12;
 				}
@@ -75,8 +74,7 @@ public class BimboLiqueur extends Consumable {
 
 				outputText("Moaning lewdly, you begin to sway your hips from side to side, putting on a show for anyone who might manage to see you.   You just feel so... sexy.  Too sexy to hide it.  Your body aches to show itself and feel the gaze of someone, anyone upon it.  Mmmm, it makes you so wet!  ");
 				if (!game.player.hasVagina()) {
-					game.player.createVagina();
-					game.player.clitLength = 0.25;
+					CoC.instance.transformations.VaginaHuman().applyEffect(false);
 					game.player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_SLICK;
 					if (game.player.isTaur()) outputText("Wait!? Wet? You wish you could touch yourself between the " + game.player.legs() + ", but you can tell from the fluid running down your hind-legs just how soaked your new vagina is.");
 					else outputText("Wait!?  Wet?  You touch yourself between the " + game.player.legs() + " and groan when your fingers sink into a sloppy, wet cunt.");

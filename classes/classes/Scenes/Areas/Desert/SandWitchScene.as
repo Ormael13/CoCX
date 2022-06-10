@@ -59,11 +59,7 @@ public class SandWitchScene extends BaseContent implements TimeAwareInterface {
 			if (player.hairColor == "sandy blonde") {
 				outputText("She smiles wickedly and intones, \"<i>Tresed eht retaw llahs klim ruoy.</i>\"\n\n");
 				if (player.breastRows.length == 0 || player.biggestTitSize() == 0) {
-					outputText("You grow a perfectly rounded pair of C-cup breasts!  ");
-					if (player.breastRows.length == 0) player.createBreastRow();
-					player.breastRows[0].breasts = 2;
-					player.breastRows[0].breastRating = 3;
-					if (player.breastRows[0].nipplesPerBreast < 1) player.breastRows[0].nipplesPerBreast = 1;
+					transformations.CreateBreastRow(3).applyEffect();
 					dynStats("sen", 2, "lus", 1);
 				}
 				if (player.biggestTitSize() >= 1 && player.biggestTitSize() <= 2) {
@@ -579,6 +575,7 @@ internal function beatSandwitch():void {
     if (player.lust < 33) {
         outputText("\nYou're not aroused enough to rape her.");
         cleanupAfterCombat();
+		return;
     }
     //more text
     outputText("\nSadly you realize your own needs have not been met.  Of course you could always fuck the " + (monster.lust >= monster.maxLust() ? "horny " : "") + "witch... Will you rape her?");

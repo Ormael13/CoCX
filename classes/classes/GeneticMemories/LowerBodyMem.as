@@ -552,7 +552,29 @@ package classes.GeneticMemories {
 		  }
 	  });
 
-	  public static const ANT: int = 45;
+	  public static const SCYLLA: int = 45;
+	  EnumValue.add(Memories, SCYLLA, "SCYLLA", {
+		  id: "Scylla Lower Body",
+		  name: "Scylla Tentacles",
+		  cost: 200,
+		  title: "Scylla",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.LowerBodyScylla
+		  }
+	  });
+
+	  public static const GOO: int = 46;
+	  EnumValue.add(Memories, GOO, "GOO", {
+		  id: "Goo Lower Body",
+		  name: "Goo Lower Body",
+		  cost: 100,
+		  title: "Goo",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.LowerBodyGoo
+		  }
+	  });
+    
+    	  public static const ANT: int = 47;
 	  EnumValue.add(Memories, ANT, "ANT", {
 		  id: "Ant Lower Body",
 		  name: "Ant Legs",
@@ -560,8 +582,6 @@ package classes.GeneticMemories {
 		  title: "Ant",
 		  transformation: function(): Transformation {
 			  return CoC.instance.transformations.LowerBodyAnt;
-		  }
-	  });
 
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];

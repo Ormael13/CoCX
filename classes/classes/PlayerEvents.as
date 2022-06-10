@@ -12,8 +12,6 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
-import classes.GeneticMemories.BallsMem;
-import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.*;
 import classes.IMutations.IMutationsLib;
 import classes.Items.*;
@@ -23,7 +21,6 @@ import classes.Scenes.Camp.UniqueCampScenes;
 import classes.Scenes.Dreams;
 import classes.Scenes.Dungeons.DeepCave.ValaScene;
 import classes.Scenes.Holidays;
-import classes.Scenes.Metamorph;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.DriderTown;
@@ -51,7 +48,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean {
-			var needNext:Boolean = false;
+			var needNext:Boolean;
 			checkedTurkey = 0;
 			checkedDream = 0;
 
@@ -306,7 +303,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			needNext = hourlyCheckRacialPerks();
 			End("PlayerEvents","hourlyCheckRacialPerks");
 			if (player.hasStatusEffect(StatusEffects.Feeder)) { //Feeder checks
-				if (player.cor <= 20) { //Go away if pure
+				if (player.cor <= (20-player.corruptionTolerance)) { //Go away if pure
 					outputText("\nThe desire to breastfeed fades into the background.  It must have been associated with the corruption inside you.\n\n(<b>You have lost the 'Feeder' perk.</b>)\n");
 					player.removeStatusEffect(StatusEffects.Feeder);
 					player.removePerk(PerkLib.Feeder);
@@ -501,7 +498,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.hasKeyItem("Ruby Heart") >= 0) { //Regain slime core
-				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.SlimeCore) && player.isGoo() && player.racialScore(Races.SLIME) >= 4 && player.vaginalCapacity() >= 9000 && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.arms.type == Arms.GOO && LowerBody.isGoo(player)) {
+				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.SlimeCore) && player.isGoo() && player.racialScore(Races.SLIME) >= 4 && player.vaginalCapacity() >= 9000 && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.arms.type == Arms.GOO) {
 					outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n");
 					outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n");
 					//(Reduces Fluid Addiction to a 24 hour intake requirement).
@@ -540,7 +537,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 				else { //Slime core reduces fluid need rate
-					if (player.hasPerk(PerkLib.SlimeCore) || player.hasPerk(PerkLib.DarkSlimeCore))
+					if (player.isSlime())
 						player.addStatusValue(StatusEffects.SlimeCraving, 1, 0.5);
 					else player.addStatusValue(StatusEffects.SlimeCraving, 1, 1);
 					if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18) {
@@ -1761,8 +1758,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Levitation wing slot
 			if (player.wings.type == Wings.LEVITATION && player.rearBody.type != RearBody.GLACIAL_AURA && player.lowerBody != LowerBody.WENDIGO && player.lowerBody != LowerBody.GAZER) {
+				outputText("\nAs you do not meet the requirements, you also lose the knowledge on how to levitate!\nHint: Aura of the Yuki Onna or legs of the Wendigo or Gazer");
 				player.wings.type = Wings.NONE;
 				player.wings.desc = "non-existant";
+				needNext = true;
 			}
 			//Wendigo stuff
 			if (player.hasStatusEffect(StatusEffects.WendigoPsychosis) && !player.hasPerk(PerkLib.EndlessHunger) && ((flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger <= 0) || (flags[kFLAGS.HUNGER_ENABLED] <= 0 && player.lust >= player.maxLust()))) SceneLib.glacialRift.wendigoScene.becomeWendigo();
@@ -2709,12 +2708,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (!player.hasCock()) { //(Dick regrowth)
 					player.createCock(10, 2.75);
 					outputText("\n<b>As time passes, your loins grow itchy for a moment.  A split-second later, a column of flesh erupts from your crotch.  Your new, 10-inch cock pulses happily.");
-					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
 					if (player.balls == 0) {
 						outputText("  A pair of heavy balls drop into place below it, churning to produce cum.");
-						player.balls = 2;
+						transformations.BallsDuo.applyEffect(false);
 						player.ballSize = 3;
-						Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 					}
 					player.dynStats("int", -1, "sen", 5, "lus", 15);
 					outputText("</b>\n");
@@ -2728,9 +2725,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (player.balls == 0) { //(Balls regrowth)
 					outputText("\n<b>As time passes, a pressure in your loins intensifies to near painful levels.  The skin beneath [eachcock] grows loose and floppy, and then two testicles roll down to fill your scrotum.</b>\n");
-					player.balls = 2;
+					transformations.BallsDuo.applyEffect(false);
 					player.ballSize = 3;
-					Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 					needNext = true;
 				}
 				if (player.breastRows[0].breastRating < 5) { //Tits!
@@ -2789,13 +2785,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (!player.hasCock()) { //(Dick regrowth)
 					player.createCock(10, 2.75);
 					outputText("\n<b>As time passes, your loins grow itchy for a moment.  A split-second later, a column of flesh erupts from your crotch.  Your new, 10-inch cock pulses happily.");
-					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
 
 					if (player.balls == 0) {
 						outputText("  A pair of heavy balls drop into place below it, churning to produce cum.");
-						player.balls = 2;
+						transformations.BallsDuo.applyEffect(false);
 						player.ballSize = 3;
-						Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 					}
 					outputText("</b>\n");
 					needNext = true;
@@ -2810,10 +2804,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (player.balls == 0) { //(Balls regrowth)
 					outputText("\n<b>As time passes, a pressure in your loins intensifies to near painful levels.  The skin beneath [eachcock] grows loose and floppy, and then two testicles roll down to fill your scrotum.</b>\n");
-					player.balls = 2;
+					transformations.BallsDuo.applyEffect(false);
 					player.ballSize = 3;
 					needNext = true;
-					Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 				}
 			}
 
@@ -2994,8 +2987,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
                     SceneLib.telAdre.dominika.fellatrixDream();
                     return true;
 				}
-                if (SceneLib.anemoneScene.kidAXP() >= 40 && flags[kFLAGS.HAD_KID_A_DREAM] == 0 && player.gender > 0) {
-                    SceneLib.anemoneScene.kidADreams();
+                if (SceneLib.kidAScene.kidAXP() >= 40 && flags[kFLAGS.HAD_KID_A_DREAM] == 0 && player.gender > 0) {
+                    SceneLib.kidAScene.kidADreams();
                     flags[kFLAGS.HAD_KID_A_DREAM] = 1;
 					return true;
 				}
