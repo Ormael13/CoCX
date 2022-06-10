@@ -152,7 +152,7 @@ public class Changelog extends BaseContent
 			outputText("-Belisa texts for putting on and removing holy bands been added/expanded.\n");
 			outputText("-Basic and Advanced perks are label on perk selection now to help distinguish if player picking basic or advanced job perk.\n");
 			outputText("-Blademaster and Grand Blademaster perks effect would cover weapons of scythe type too now.\n");
-			outputText("-(UEE import) Treasure chests added to some locations, Ivory Succubus, Dryad, Cockatrices (+ pregnancy & codex entry), Pablo (Tel'Adre gym), Rathazul special scene ;), new LOOONG Minotaur scene. (Svalkash)\n");
+			outputText("-(UEE import) Treasure chests added to some locations, Ivory Succubus, Dryad, Cockatrices (+ pregnancy & codex entry), Pablo (Tel'Adre gym), Rathazul special scene ;), new LOOONG Minotaur scene, Imported Demon Soldiers from UEE to Defiled Ravine. (Svalkash)\n");
 			outputText("-Fixed combat issues: Corrupted Handmaidens, Doppelganger, Priscilla, Goblin Shaman. The latter two still need mana cost rebalancing, Vala 'Wake Up' scene, Lethice drops, Gnoll scene. (Svalkash)\n");
 			outputText("-Gargoyle's Body Ritual now lessens bodily curses. Effectiveness requires actually having the HP to be harmed. (Furrin Gok)\n");
 			outputText("-Camp upgrades prioritizes ant children. Rewrote golem codex. (Furrin Gok)\n");
@@ -171,7 +171,7 @@ public class Changelog extends BaseContent
 			outputText("-Basic Job: All-Rounder no longer req. Job: Soul Cultivator but it lib and sens req. was increased to 75 and 50 respectively.\n");
 			outputText("-Demon tfs and Feeder perk use CorruptionTolerance now, Oni horn wont choose same horns. (EragonX)\n");
 			outputText("-Removed Sapphire/Onyx requirements from Forgefather encounter. (Svalkash)\n");
-			outputText("-SceneHunter - Cinnabar and some others. (Svalkash)\n");
+			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!). (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -2970,7 +2970,7 @@ public class Changelog extends BaseContent
 			outputText("-New item (by Zavos): Warding Tome - can be found in one of factory rooms by intelligent enough PC. Reading it can teach PC how to make magic wards and Charge Armor spell if it still not learned. It would open option to build such ward in camp. It function like any camp guarding npc.\n");
 			outputText("-Switched Carpenter and Clinic button in Shop submenu in Tel'Adre. Also Carpenter no longer req. starting work on Cabin to be accesable.\n");
 			outputText("-New tier 0 sensitivity lvl-up perk: Sense Wrath. Req. 25+ sens. Effect: Show in combat enemy current wrath\n");
-			outputText("-New event perk: Mighty Fist. Gained form finshing second part of training sessions with Chi Chi. Increase fists and gaunlets atk value by 5 (scalable) and allow them to have 20% chance to stun enemy with each hit.\n");
+			outputText("-New event perk: Mighty Fist. Gained form finishing second part of training sessions with Chi Chi. Increase fists and gaunlets atk value by 5 (scalable) and allow them to have 20% chance to stun enemy with each hit.\n");
 			outputText("-Seeing current enemy mana will req. now having Job: Sorcerer perk (non-mage PC's can't feel how much mana enemy body hold ^^) and for enemy soulforce is required Soul Sense perk (same reason as with enemy mana).\n");
 			outputText("-Process of sculpting gargoyle body in basement of Temple of divine can be finished. Description of finished statue can be a little...off in some areas but all choices will be properly carried over to new PC body at time last step in quest would be added (it 'may be' in 0.8h if all went good).\n");
 			outputText("-Naming nameless Gargoyle from Cathedral will give small chance to discover new dungeon in Blight Ridge. Chances for that rise to around 50% when PC is on quest to become gargoyle aka Gargoyle TF Quest (actualy it's only needed to proceed to around 50-70% of whole Gargoyle TF quest to trigger scene in camp with Rathazul that is need for that increased dicover chance).\n");
