@@ -1976,6 +1976,29 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX) && !player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory)){
 					var permedMetamorphCount:int = Metamorph.PermanentMemoryStorage.length;
 					player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory,15 * player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX),permedMetamorphCount,0,0);
+				if (player.hasPerk(PerkLib.Dantain)) {
+					player.removePerk(PerkLib.Dantain);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.DaoistCultivator)) {
+					player.removePerk(PerkLib.DaoistCultivator);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.DaoistApprenticeStage)) {
+					player.removePerk(PerkLib.DaoistApprenticeStage);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.DaoistWarriorStage)) {
+					player.removePerk(PerkLib.DaoistWarriorStage);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.DaoistElderStage)) {
+					player.removePerk(PerkLib.DaoistElderStage);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
+					player.removePerk(PerkLib.DaoistOverlordStage);
+					player.perkPoints += 1;
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.006;
 			}
