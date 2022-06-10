@@ -2985,8 +2985,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
                     SceneLib.telAdre.dominika.fellatrixDream();
                     return true;
 				}
-                if (SceneLib.anemoneScene.kidAXP() >= 40 && flags[kFLAGS.HAD_KID_A_DREAM] == 0 && player.gender > 0) {
-                    SceneLib.anemoneScene.kidADreams();
+                if (SceneLib.kidAScene.kidAXP() >= 40 && flags[kFLAGS.HAD_KID_A_DREAM] == 0 && player.gender > 0) {
+                    SceneLib.kidAScene.kidADreams();
                     flags[kFLAGS.HAD_KID_A_DREAM] = 1;
 					return true;
 				}

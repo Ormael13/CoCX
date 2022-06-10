@@ -8,41 +8,6 @@ import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class SharkGirlScene extends AbstractBoatContent{
-
-		public function SharkGirlScene()
-	{
-	}
-
-	/*Codex: Shark girls and tiger shark girls
-
-Gender: Mostly female, though there are males and herms. Due to the nature of their conception, the vast majority of tiger sharks are herms.
-
-Height: 5-6 feet tall. Tiger sharks are primarily in the 6 foot region.
-Build: Well-toned and athletic.
-Skin tone: Grey. Light orange with stripes for tiger sharks.
-Hair color: Silver and in rare cases, Black.
-Eye color: Red for both species.
-
-Typical dress: Ridiculously skimpy swimwear, which they use to entice victims. Some tiger shark girls will wear grass hula skirts when on land to hide their endowments.
-
-Weaponry: Fangs, tail and their bare hands.
-Notable features: Retractable shark teeth, a large fin between their shoulders and a shark tail dangling off of their backsides.
-
-Sexual characteristics: Despite their slutty nature, shark girls have rather modest endowments in comparison to other such creatures; the majority of them are C-cups, D-cups at most. Though, their hips and buttocks are nice and curvy. Tiger shark girls possess wildly varying bustlines that are larger than their 'sisters', and usually are hyper-endowed with male genitalia.
-
-Loot:
-Shark Tooth
-T.Shark Tooth (Tiger shark girls only)
-Slutty Swimwear
-L.Draft
-
-History: Before the corruption truly began, the Shark people were a normal fishing community that lived by the lake. They respected and admired marine life so much that they used magic to morph their forms, allowing them to live both under the sea and on dry land. As the demons began to take control, the Shark people retreated into the lake water to avoid the taint. It was only through sheer bad luck that they wound up as they are now; when the factory was constructed, the chemical run-off was funnelled into the lake, causing a drastic change to the mindset of the Shark people and making them near-constantly horny. Those who swam too close to the pollutants found their bodies morphed in unexpected ways, becoming what are now known as tiger shark girls. Even if the factory were to be destroyed, it would take generations for the shark girls to fully lose the effects.
-
-Social Structure: Most shark girls travel in small groups, ruled over by one tiger shark girl. However, there are larger communities that can be found in the lake. Males are generally kept chained up, being abnormally aggressive even for sharks. But as they are more virile and fertile than tiger sharks girls, every once in a while they are unchained to help with reproduction. The Shark people spend most of their time either hunting for food or hunting for sex.
-
-Sex Life: The shark girls treat sex like a game or a sport, constantly battling for dominance against their opponents and using them as sex toys if they win. As they're horny most of the time, shark girls often look for 'playmates', regardless if their victims want to 'play' or not!
-----------------------------------
-*/
 //[Explore Lake]
 public function sharkGirlEncounter(exploreLoc:Number = 0):void {
 	//Set 'PC met Sharkgirls' for Izma stuff
@@ -106,15 +71,15 @@ internal function sharkWinChoices():void {
 	//HP Win
 	clearOutput();
 	if(monster.HP <= monster.minHP()) {
-		outputText("The shark-girl falls, clearly defeated.");
+		outputText("The shark-girl falls, clearly defeated.\n\n");
 	}
 	//Lust win
 	else {
-		outputText("The shark-girl begins masturbating, giving up on dominating you.  The sight is truly entrancing.");
+		outputText("The shark-girl begins masturbating, giving up on dominating you.  The sight is truly entrancing.\n\n");
 		dynStats("lus", 15);
 	}
 	if(player.lust >= 33 && player.gender > 0) {
-		outputText("  Do you have your way with her or leave?");
+		outputText("Do you have your way with her or leave?");
         var dildo:Function = (player.hasKeyItem("Deluxe Dildo") >= 0 ? sharkGirlGetsDildoed : null);
 		var temp3:Function =null;
 		if (player.gender == 1)
@@ -129,7 +94,11 @@ internal function sharkWinChoices():void {
 		}
         SceneLib.uniqueSexScene.pcUSSPreChecksV2(sharkWinChoices2);
 	}
-	else cleanupAfterCombat();
+	else {
+		if (player.gender == 0) outputText("You lack the required parts to fuck her.");
+		else outputText("You're not aroused enough to rape her.");
+		cleanupAfterCombat();
+	}
 }
 public function sharkWinChoices2():void{
 	outputText("  Do you have your way with her or leave?");

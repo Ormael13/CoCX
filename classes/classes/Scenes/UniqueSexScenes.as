@@ -4,18 +4,18 @@
  */
 package classes.Scenes
 {
-	import classes.*;
-	import classes.BodyParts.LowerBody;
-	import classes.BodyParts.Tail;
-	import classes.Scenes.Areas.Mountain.HellHound;
-	import classes.Scenes.Areas.Mountain.InfestedHellhound;
-	import classes.Scenes.Areas.Mountain.Minotaur;
-	import classes.Scenes.Areas.Ocean.SeaAnemone;
-	import classes.Scenes.NPCs.Anemone;
-	import classes.Scenes.Places.Mindbreaker;
-	import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
+import classes.*;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.Scenes.Areas.Mountain.HellHound;
+import classes.Scenes.Areas.Mountain.InfestedHellhound;
+import classes.Scenes.Areas.Mountain.Minotaur;
+import classes.Scenes.Areas.Ocean.SeaAnemone;
+import classes.Scenes.Places.Boat.Anemone;
+import classes.Scenes.Places.Mindbreaker;
+import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 
-	public class UniqueSexScenes extends BaseContent
+public class UniqueSexScenes extends BaseContent
 	{
 
 		public function UniqueSexScenes()
