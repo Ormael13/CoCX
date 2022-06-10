@@ -15,6 +15,7 @@ public class Boat extends AbstractLakeContent
 		public var sharkGirlScene:SharkGirlScene = new SharkGirlScene();
 		public var marae:MaraeScene = new MaraeScene();
 		public var kaiju:Kaiju = new Kaiju();
+		public var anemoneScene:AnemoneScene = new AnemoneScene();
 		public function Boat() {}
 
 		public function discoverBoat():void {
@@ -80,7 +81,7 @@ public class Boat extends AbstractLakeContent
 					return;
 				case 2:
 					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 1;
-					SceneLib.anemoneScene.mortalAnemoneeeeee();
+					anemoneScene.mortalAnemoneeeeee();
 					return;
 				case 3:
 				case 4:

@@ -2656,7 +2656,7 @@ public function izmaKidsPlaytime():void {
 	//Select correct scene!
 	var choice:Number = choices[rand(choices.length)];
 	if(model.time.hours < 10 && flags[kFLAGS.ANEMONE_KID] > 0 && rand(2) == 0) {
-		anemoneScene.kidAWatchesSharks();
+		kidAScene.kidAWatchesSharks();
 		return;
 	}
 
