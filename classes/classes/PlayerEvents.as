@@ -1758,8 +1758,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Levitation wing slot
 			if (player.wings.type == Wings.LEVITATION && player.rearBody.type != RearBody.GLACIAL_AURA && player.lowerBody != LowerBody.WENDIGO && player.lowerBody != LowerBody.GAZER) {
+				outputText("\nAs you do not meet the requirements, you also lose the knowledge on how to levitate!\nHint: Aura of the Yuki Onna or legs of the Wendigo or Gazer");
 				player.wings.type = Wings.NONE;
 				player.wings.desc = "non-existant";
+				needNext = true;
 			}
 			//Wendigo stuff
 			if (player.hasStatusEffect(StatusEffects.WendigoPsychosis) && !player.hasPerk(PerkLib.EndlessHunger) && ((flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger <= 0) || (flags[kFLAGS.HUNGER_ENABLED] <= 0 && player.lust >= player.maxLust()))) SceneLib.glacialRift.wendigoScene.becomeWendigo();
@@ -2985,8 +2987,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
                     SceneLib.telAdre.dominika.fellatrixDream();
                     return true;
 				}
-                if (SceneLib.anemoneScene.kidAXP() >= 40 && flags[kFLAGS.HAD_KID_A_DREAM] == 0 && player.gender > 0) {
-                    SceneLib.anemoneScene.kidADreams();
+                if (SceneLib.kidAScene.kidAXP() >= 40 && flags[kFLAGS.HAD_KID_A_DREAM] == 0 && player.gender > 0) {
+                    SceneLib.kidAScene.kidADreams();
                     flags[kFLAGS.HAD_KID_A_DREAM] = 1;
 					return true;
 				}

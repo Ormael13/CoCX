@@ -19,6 +19,7 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Consumables.EmberTF;
+import classes.Races.CatRace;
 import classes.Races.FoxRace;
 import classes.Races.GoblinRace;
 import classes.Races.GremlinRace;
@@ -162,7 +163,7 @@ public final class Mutations extends MutationsHelper {
     public function coldFishSoup(player:Player):void {
         player.slimeFeed();
         clearOutput();
-        outputText("As you eat the soup you shiver as your bodily temperature drop. Not only that but the last thing on your mind right now is sex as you feel yourself freezing from the inside. The cold crisis eventualy passes but you remain relatively less libidinous afterward.");
+        outputText("As you eat the soup you shiver as your bodily temperature drop. Not only that but the last thing on your mind right now is sex as you feel yourself freezing from the inside. The cold crisis eventually passes but you remain relatively less libidinous afterward.");
         player.buff("Curse").addStats( {"lib.mult": -0.05} ).permanent();
 		if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) dynStats("lib", -4, "lus", -20);
         else dynStats("lus", -10);
@@ -475,7 +476,7 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
             if (!player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
         }
     }
@@ -494,7 +495,7 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
             if (!player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
         }
     }
@@ -503,7 +504,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         if (!player.hasStatusEffect(StatusEffects.KnowsYinYangBlast)) {
             outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Hail of Blades.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skills: Yin Palm, Yang Fist, Yin Yang Blast.</b>");//yin penetrating armor/mresist but weak maybe giving intenrnal bleed/dmg dot and yang high dmg but reduced by armor/mresist and stunning - combined yin yang blast giving internal bleeding and stun and damage that is sum of both attacks
+            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skills: Yin Palm, Yang Fist, Yin Yang Blast.</b>");//yin penetrating armor/mresist but weak maybe giving internal bleed/dmg dot and yang high dmg but reduced by armor/mresist and stunning - combined yin yang blast giving internal bleeding and stun and damage that is sum of both attacks
             player.createStatusEffect(StatusEffects.KnowsYinYangBlast, 0, 0, 0, 0);
             return;
         }
@@ -569,7 +570,7 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
             if (!player.hasStatusEffect(StatusEffects.KnowsHailOfBlades)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
         }
     }
@@ -588,7 +589,7 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
             if (!player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfBlades)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
         }
     }
@@ -607,7 +608,7 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
             if (!player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfMoonBlades)) outputText(" Or the one that require other less complicated soulskill used as a base to learn the more advanced one.");
         }
     }
@@ -627,7 +628,7 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
         }
     }
 
@@ -646,7 +647,7 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
         }
     }
 
@@ -686,7 +687,7 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
         }
     }
 
@@ -719,7 +720,7 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
         }
     }
 
@@ -752,7 +753,7 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
         }
     }
 
@@ -785,32 +786,31 @@ public final class Mutations extends MutationsHelper {
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
-            outputText("You should be more carefull next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
+            outputText("You should be more careful next time to not waste any new manual by trying to learn soulskill you can't handle yet.");
         }
     }
 
     public function devourermanual(player:Player):void {
         clearOutput();
-        outputText("You open the manual, and discover it seems to be almost unreadable.  It looks like it would teach reader to use some sort of soul skill but it seems all very fragmentary.  In no time at all you've read the whole thing and like others manuscripts it start to disappears into thin air.  Left without anything you thinking about next action when some new thought start to keep circling in your mind. The more it circle it seems to seemly literaly ");
-        outputText("'suck you in'.  You try stop it but it's too late.  last not devoured thought you have before blank out is.. 'would i at least not hit groun...'[pg]After unknown amount of time you wakes up on the floor with seared into your mind knowledge on <b>new soul skill: Devourer.</b>");
+        outputText("You open the manual, and discover it seems to be almost unreadable. It looks like it would teach the reader to use some sort of soul skill, but it seems all very fragmentary. In no time at all, you've read the whole thing, and like other manuscripts, it starts to disappear into thin air. When you are left with nothing to do, you are considering your next course of action when a new thought begins to circulate in your mind. The more it circles, it seems to literally 'suck you in'. You try to stop it, but it's too late. 'Would I at least not hit the ground...' is the last not devoured thought you have before blanking out. [pg]After an unknown amount of time, you awake on the floor with the knowledge of a b>new soul skill: Devourer/b> seared into your mind.");
         player.createStatusEffect(StatusEffects.KnowsHeavensDevourer, 1, 0, 0, 0);
     }
 
     public function verydilutedarcaneregenconcotion(player:Player):void {
 		var verydilutedarcaneregen:Number = Math.round(player.maxMana() * 0.01) + 200;
-		outputText("You grab your mana potion, pull the cork off and swiftly chug it down.[pg](Recovered mana: "+verydilutedarcaneregen+")");
+		outputText("You grab your mana potion, pull the cork off, and swiftly chug it down.[pg](Mana recovered: "+verydilutedarcaneregen+")");
         EngineCore.ManaChange(verydilutedarcaneregen, false);
         statScreenRefresh();
     }
     public function dilutedarcaneregenconcotion(player:Player):void {
         var dilutedarcaneregen:Number = Math.round(player.maxMana() * 0.02) + 1200;
-		outputText("You grab your mana potion, pull the cork off and swiftly chug it down.[pg](Recovered mana: "+dilutedarcaneregen+")");
+		outputText("You grab your mana potion, pull the cork off, and swiftly chug it down.[pg](Mana recovered:: "+dilutedarcaneregen+")");
         EngineCore.ManaChange(dilutedarcaneregen, false);
         statScreenRefresh();
     }
     public function arcaneregenconcotion(player:Player):void {
         var arcaneregen:Number = Math.round(player.maxMana() * 0.03) + 7200;
-		outputText("You grab your mana potion, pull the cork off and swiftly chug it down.[pg](Recovered mana: "+arcaneregen+")");
+		outputText("You grab your mana potion, pull the cork off, and swiftly chug it down.[pg](Mana recovered:: "+arcaneregen+")");
         EngineCore.ManaChange(arcaneregen, false);
         statScreenRefresh();
     }
@@ -1367,7 +1367,6 @@ public final class Mutations extends MutationsHelper {
 
     public function chillyPepper(player:Player):void {
         var temp2:Number = 0;
-        var temp3:Number = 0;
         //Set up changes and changeLimit
         var changes:Number = 0;
         var changeLimit:Number = 1;
@@ -1412,33 +1411,8 @@ public final class Mutations extends MutationsHelper {
                 player.cocks[selectedCockValue].thickenCock(2);
                 changes++;
             }
-            if (player.wolfCocks() > 0 && changes < changeLimit && rand(2) == 0) {
-                var choice:int = 0;
-                //set temp2 to first wolfdick for initialization
-                while (choice < player.cocks.length) {
-                    if (player.cocks[choice].cockType == CockTypesEnum.WOLF) {
-                        temp2 = choice;
-                        break;
-                    } else choice++;
-                }
-                //Reset choice for nex tcheck
-                choice = player.cocks.length;
-                //Find smallest knot
-                while (choice > 0) {
-                    choice--;
-                    if (player.cocks[choice].cockType == CockTypesEnum.WOLF && player.cocks[choice].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = choice;
-                }
-                //Have smallest knotted cock selected.
-                temp3 = (rand(2) + 1) / 40;
-                if (player.cocks[temp2].knotMultiplier >= 1.5) temp3 /= 2;
-                if (player.cocks[temp2].knotMultiplier >= 1.75) temp3 /= 2;
-                if (player.cocks[temp2].knotMultiplier >= 2) temp3 /= 5;
-                player.cocks[temp2].knotMultiplier += (temp3);
-                if (temp3 < .06) outputText("[pg]Your " + cockDescript(temp2) + " feels unusually tight in your sheath as your knot grows.");
-                if (temp3 >= .06 && temp3 <= .12) outputText("[pg]Your " + cockDescript(temp2) + " pops free of your sheath, thickening nicely into a bigger knot.");
-                if (temp3 > .12) outputText("[pg]Your " + cockDescript(temp2) + " surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.");
-                dynStats("lus", 10);
-                player.addCurse("sens", 1, 1);
+            if (player.dogCocks() > 0 && changes < changeLimit && rand(2) == 0) {
+                transformations.GrowKnot(-1, 1, 1, 40).applyEffect();
                 changes++;
             }
         }
@@ -1457,7 +1431,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.breastRows.length < 3 && rand(2) == 0 && changes < changeLimit) {
                     player.createBreastRow();
                     //Store choice to the index of the newest row
-                    choice = player.breastRows.length - 1;
+                    var choice:int = player.breastRows.length - 1;
                     //Breasts are too small to grow a new row, so they get bigger first
                     //But ONLY if player has a vagina (dont want dudes weirded out)
                     if (player.vaginas.length > 0 && player.breastRows[0].breastRating <= player.breastRows.length) {
@@ -1817,7 +1791,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.inte > 30 && rand(3) == 0 && changes < changeLimit && type != 3) {
-            player.addCurse("int", (-1 * crit), 1);
+            player.addCurse("int", crit, 1);
             outputText("[pg]You feel ");
             if (crit > 1) outputText("MUCH ");
             outputText("dumber.");
@@ -1856,8 +1830,6 @@ public final class Mutations extends MutationsHelper {
                         outputText("[pg]Your crotch twitches, and you pull open your [armor] to get a better look.  You watch in horror and arousal as your [cock] and [cock 2] both warp and twist, becoming red and pointed, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.");
                         transformations.CockDog().applyEffect(false);
                         transformations.CockDog(1).applyEffect(false);
-                        if (player.cocks[1].knotMultiplier < 1.4) player.cocks[0].knotMultiplier = 1.4;
-                        if (player.cocks[1].knotMultiplier < 1.4) player.cocks[1].knotMultiplier = 1.4;
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
                     }
@@ -1867,7 +1839,7 @@ public final class Mutations extends MutationsHelper {
                     //if player has 1 total
                     if (player.cockTotal() == 1) {
                         outputText("[pg]You feel something slippery wiggling inside your sheath, and another red point peeks out.  In spite of yourself, you start getting turned on by the change, and the new dick slowly slides free, eventually stopping once the thick knot pops free.  The pair of dog-dicks hang there, leaking pre-cum and arousing you far beyond normal.");
-                        transformations.CockDog(1, 7 + rand(7), 1.5 + rand(10) / 10, 1.4).applyEffect(false);
+                        transformations.CockDog(1, 7 + rand(7), 1.5 + rand(10) / 10).applyEffect(false);
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
                     }
@@ -1877,13 +1849,11 @@ public final class Mutations extends MutationsHelper {
                         if (player.cocks[0].cockType == CockTypesEnum.DOG) {
                             outputText("[pg]Your crotch twitches, and you pull open your [armor] to get a better look.  You watch in horror and arousal as your " + cockDescript(1) + " warps and twists, becoming red and pointed, just like other dog-dick, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.");
                             transformations.CockDog(1).applyEffect(false);
-                            if (player.cocks[1].knotMultiplier < 1.4) player.cocks[1].knotMultiplier = 1.4;
                         }
                         //first dick is not dog
                         else {
                             outputText("[pg]Your crotch twitches, and you pull open your [armor] to get a better look.  You watch in horror and arousal as your [cock] warps and twists, becoming red and pointed, just like other dog-dick, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.");
                             transformations.CockDog(0).applyEffect(false);
-                            if (player.cocks[0].knotMultiplier < 1.4) player.cocks[0].knotMultiplier = 1.4;
                         }
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
@@ -1897,33 +1867,8 @@ public final class Mutations extends MutationsHelper {
             if (player.cockTotal() > 0) {
                 //biggify knots
                 if (player.dogCocks() > 0) {
-                    choice = 0;
-                    //set temp2 to first dogdick for initialization
-                    while (choice < player.cocks.length) {
-                        if (InCollection(player.cocks[choice].cockType, CockTypesEnum.DOG, CockTypesEnum.FOX, CockTypesEnum.WOLF, CockTypesEnum.DISPLACER)) {
-                            temp2 = choice;
-                            break;
-                        } else choice++;
-                    }
-                    //Reset choice for nex tcheck
-                    choice = player.cocks.length;
-                    //Find smallest knot
-                    while (choice > 0) {
-                        choice--;
-                        if (InCollection(player.cocks[choice].cockType, CockTypesEnum.DOG, CockTypesEnum.FOX, CockTypesEnum.WOLF, CockTypesEnum.DISPLACER) && player.cocks[choice].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = choice;
-                    }
-                    //Have smallest knotted cock selected.
-                    temp3 = (rand(2) + 5) / 20 * crit;
-                    if (player.cocks[temp2].knotMultiplier >= 1.5) temp3 /= 2;
-                    if (player.cocks[temp2].knotMultiplier >= 1.75) temp3 /= 2;
-                    if (player.cocks[temp2].knotMultiplier >= 2) temp3 /= 5;
-                    player.cocks[temp2].knotMultiplier += (temp3);
-                    outputText("[pg]");
-                    if (temp3 < .06) outputText("Your [cock " + temp2+1 + "] feels unusually tight in your sheath as your knot grows.");
-                    if (temp3 >= .06 && temp3 <= .12) outputText("Your [cock " + temp2+1 + "] pops free of your sheath, thickening nicely into a bigger knot.");
-                    if (temp3 > .12) outputText("Your [cock " + temp2+1 + "] surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.");
-                    dynStats("lus", 5 * crit);
-                    player.addCurse("sen", 1, 1);
+                    transformations.GrowKnot(-1, crit, 5, 20).applyEffect();
+                    changes++
                 }
                 //Grow dogdick with big knot
                 else {
@@ -1963,32 +1908,8 @@ public final class Mutations extends MutationsHelper {
         if (changes < changeLimit && player.cocks.length > 0) {
             //Grow knot on smallest knotted dog cock
             if (type != 4 && player.dogCocks() > 0 && ((changes < changeLimit && rand(1.4) == 0) || type == 1)) {
-                choice = 0;
-                //set temp2 to first dogdick for initialization
-                while (choice < player.cocks.length) {
-                    if (player.cocks[choice].cockType == CockTypesEnum.DOG) {
-                        temp2 = choice;
-                        break;
-                    } else choice++;
-                }
-                //Reset choice for nex tcheck
-                choice = player.cocks.length;
-                //Find smallest knot
-                while (choice > 0) {
-                    choice--;
-                    if (player.cocks[choice].cockType == CockTypesEnum.DOG && player.cocks[choice].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = choice;
-                }
                 //Have smallest knotted cock selected.
-                temp3 = (rand(2) + 1) / 20 * crit;
-                if (player.cocks[temp2].knotMultiplier >= 1.5) temp3 /= 2;
-                if (player.cocks[temp2].knotMultiplier >= 1.75) temp3 /= 2;
-                if (player.cocks[temp2].knotMultiplier >= 2) temp3 /= 5;
-                player.cocks[temp2].knotMultiplier += (temp3);
-                if (temp3 < .06) outputText("[pg]Your " + cockDescript(temp2) + " feels unusually tight in your sheath as your knot grows.");
-                if (temp3 >= .06 && temp3 <= .12) outputText("[pg]Your " + cockDescript(temp2) + " pops free of your sheath, thickening nicely into a bigger knot.");
-                if (temp3 > .12) outputText("[pg]Your " + cockDescript(temp2) + " surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.");
-                dynStats("lus", 5 * crit);
-                player.addCurse("sen", 1, 1);
+                transformations.GrowKnot(-1, crit, 1, 20).applyEffect();
                 changes++;
             }
             //Cock Xform if player has free cocks.
@@ -2095,14 +2016,14 @@ public final class Mutations extends MutationsHelper {
                         dynStats("lus", 5);
                         player.addCurse("sen", 6, 1);
                         //New row's size = the size of the row above -1
-                        transformations.CreateBreastRow(player.breastRows[choice - 1].breastRating - 1).applyEffect();
+                        transformations.CreateBreastRow(player.breastRows[choice].breastRating - 1).applyEffect();
                         changes++;
                     }
                     //Extra sensitive if crit
                     if (crit > 1 && type != 6) {
                         if (crit > 2) {
-                            outputText("  You heft your new chest experimentally, exploring the new flesh with tender touches.  Your eyes nearly roll back in your head from the intense feelings.");
-                            dynStats("lus", 15, "cor", 0)
+                            outputText("[pg]You heft your new chest experimentally, exploring the new flesh with tender touches.  Your eyes nearly roll back in your head from the intense feelings.");
+                            dynStats("lus", 15)
                             player.addCurse("sen", 6, 1);
                         } else {
                             outputText("  You touch your new nipples with a mixture of awe and desire, the experience arousing beyond measure.  You squeal in delight, nearly orgasming, but in time finding the willpower to stop yourself.");
@@ -2454,7 +2375,7 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(10);
     }
 
-    public function succubisDream(player:Player):void {
+    public function succubusDream(player:Player):void {
         player.slimeFeed();
         var changes:Number = 0;
         var crit:Number = 1;
@@ -2534,7 +2455,7 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(15);
     }
 
-    //Oviposition Elixer!
+    //Oviposition Elixir!
     /*
      v1 = egg type.
      v2 = size - 0 for normal, 1 for large
@@ -2549,7 +2470,7 @@ public final class Mutations extends MutationsHelper {
      6 -
      */
     /* Now handled by OvipositionElixir.as
-            public function ovipositionElixer(player:Player):void
+            public function ovipositionElixir(player:Player):void
             {
                 player.slimeFeed();
                 var changes:Number = 0;
@@ -2568,7 +2489,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
                     if (player.hasStatusEffect(StatusEffects.Eggs)) {
                         //If eggs are small, chance of increase!
-                        if (player.statusEffectv2(StatusEffects.Eggs) == 0) {
+                        if (player.statusEffective2(StatusEffects.Eggs) == 0) {
                             //1 in 2 chance!
                             if (rand(3) == 0) {
                                 player.addStatusValue(StatusEffects.Eggs,2,1);
@@ -2999,7 +2920,7 @@ public final class Mutations extends MutationsHelper {
         //Increases addiction by 5, up to a max of 50 before the player becomes addicted, no max after the player is addicted.
         SceneLib.marbleScene.marbleStatusChange(0, 5);
         //Does not apply the 'Marble's Milk' effect
-        //Purge withdrawl
+        //Purge withdrawal
         if (player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
             player.removeStatusEffect(StatusEffects.MarbleWithdrawl);
             MutagenBonus("tou", 5);
@@ -4554,7 +4475,7 @@ public final class Mutations extends MutationsHelper {
         if (!player.blockingBodyTransformations()) {
 
             //Smexual stuff!
-            //-TIGGERSHARK ONLY: Grow a cunt (guaranteed if no gender)
+            //-TIGERSHARK ONLY: Grow a cunt (guaranteed if no gender)
             if (type == 1 && (player.gender == 0 || (!player.hasVagina() && changes < changeLimit && rand(3) == 0))) {
                 changes++;
                 transformations.VaginaHuman().applyEffect();
@@ -5208,19 +5129,19 @@ public final class Mutations extends MutationsHelper {
         }
         if (type == 1 && player.racialScore(Races.DRAGON) >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonFireBreath)) {
             outputText("[pg]You feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
-            outputText("[pg]It seems vouivre oil has awaked some kind of power within you... your throat and chest feel very sore, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon fire breath!</b>)");
+            outputText("[pg]It seems vouivre oil has awoken some kind of power within you... your throat and chest feel very sore. However, you doubt you'll be able to force out more than one such blast before resting.  (<b>Gained Perk: Dragon fire breath!</b>)");
             player.createPerk(PerkLib.DragonFireBreath, 0, 0, 0, 0);
             changes++;
         }/*
         if (type == 1 && player.dragonScore() >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonIceBreath)) {
             outputText("[pg]You feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
-            outputText("[pg]It seems vouivre oil has awaked some kind of power within you... your throat and chest feel very cold, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon ice breath!</b>)");
+            outputText("[pg]It seems vouivre oil has awoken some kind of power within you... your throat and chest feel very cold, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon ice breath!</b>)");
             player.createPerk(PerkLib.DragonIceBreath, 0, 0, 0, 0);
             changes++;
         }
         if (type == 1 && player.dragonScore() >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonLightningBreath)) {
             outputText("[pg]You feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
-            outputText("[pg]It seems vouivre oil has awaked some kind of power within you... your throat and chest feel like it was electrocuted, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon fire breath!</b>)");
+            outputText("[pg]It seems vouivre oil has awoken some kind of power within you... your throat and chest feel like it was electrocuted, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon fire breath!</b>)");
             player.createPerk(PerkLib.DragonLightningBreath, 0, 0, 0, 0);
             changes++;
         }
@@ -5711,7 +5632,7 @@ public final class Mutations extends MutationsHelper {
         //Text go!
         clearOutput();
         outputText("You take a bite of the fruit and gulp it down. It's thick and juicy and has an almost overpowering sweetness. Nevertheless, it is delicious and you certainly could use a meal.  You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.");
-
+        //STAT CHANGES
         //Speed raises up to 75
         if (rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
@@ -5837,10 +5758,12 @@ public final class Mutations extends MutationsHelper {
         //Cat dangly-doo.
         if (player.cockTotal() > 0 && player.catCocks() < player.cockTotal() && (player.ears.type == Ears.CAT || rand(3) > 0) && (player.tailType == Tail.CAT || rand(3) > 0) && changes < changeLimit && rand(4) == 0) {
             //loop through and find a non-cat wang.
-            for (var i:Number = 0; i < (player.cockTotal()) && player.cocks[i].cockType == CockTypesEnum.CAT; i++) {
+            for (var i:Number = 0; i < player.cockTotal() && player.cocks[i].cockType == CockTypesEnum.CAT; i++) {
             }
-            transformations.CockCat(i).applyEffect();
-            changes++;
+            if (player.cocks[i].cockType != CockTypesEnum.CAT) {
+                transformations.CockCat(i).applyEffect();
+                changes++;
+            }
         }
         //Cat penorz shrink
         if (player.catCocks() > 0 && rand(4) == 0 && changes < changeLimit && !flags[kFLAGS.HYPER_HAPPY]) {
@@ -5897,14 +5820,14 @@ public final class Mutations extends MutationsHelper {
         }
 
         //DA TAIL (IF ALREADY HAZ URZ)
-        if (player.tailType != Tail.CAT && player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA && (player.ears.type == Ears.CAT || player.ears.type == Ears.DISPLACER) && rand(3) == 0 && changes < changeLimit) {
+        if (!InCollection(player.tailType, Tail.CAT, Tail.BURNING, Tail.TWINKASHA) && (player.ears.type == Ears.CAT || player.ears.type == Ears.DISPLACER) && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TailCat.applyEffect();
             changes++;
         }
 
         //Da paws (if already haz tail)
-        if ((player.tailType == Tail.CAT || player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3) && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT) {
+        if (InCollection(player.tailType, Tail.CAT, Tail.NEKOMATA_FORKED_1_3, Tail.NEKOMATA_FORKED_2_3) && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT) {
             outputText("[pg]");
             transformations.LowerBodyCat(2).applyEffect();
             changes++;
@@ -5937,7 +5860,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //CAT TOUNGE CUZ WHY NOT?
-        if ((player.faceType == Face.CAT || player.faceType == Face.CAT_CANINES || player.faceType == Face.CHESHIRE || player.faceType == Face.CHESHIRE_SMILE) && player.tongue.type != Tongue.CAT && rand(3) == 0 && changes < changeLimit) {
+        if (transformations.TongueCat.isPossible() && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TongueCat.applyEffect();
             changes++;
@@ -5970,7 +5893,7 @@ public final class Mutations extends MutationsHelper {
             }
 
             outputText("[pg]Your [skin.type] begins to tingle, then itch. ");
-            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"]}).applyEffect();
+            transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: CatRace.catFurColors }).applyEffect();
 
             changes++;
         }
@@ -6009,7 +5932,7 @@ public final class Mutations extends MutationsHelper {
         //Text go!
         clearOutput();
         outputText("You take a bite of the fruit and gulp it down. It's thick and juicy and has an almost overpowering sweetness. Nevertheless, it is delicious and you certainly could use a meal.  You devour the fruit, stopping only when the hard, nubby pit is left; which you toss aside.");
-
+        //STAT CHANGES
         //Speed raises up to 75
         if (rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
@@ -6172,7 +6095,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (player.tailType != Tail.CAT && player.tailType != Tail.NEKOMATA_FORKED_1_3 && player.tailType != Tail.NEKOMATA_FORKED_2_3 && player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA && player.ears.type == Ears.CAT && rand(3) == 0 && changes < changeLimit) {
+        if (!InCollection(player.tailType, Tail.CAT, Tail.NEKOMATA_FORKED_1_3, Tail.NEKOMATA_FORKED_2_3, Tail.BURNING, Tail.TWINKASHA) && player.ears.type == Ears.CAT && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TailCat.applyEffect();
             changes++;
@@ -6199,7 +6122,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Da paws (if already haz tail)
-        if ((player.tailType == Tail.CAT || player.tailType == Tail.NEKOMATA_FORKED_1_3 || player.tailType == Tail.NEKOMATA_FORKED_2_3) && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT) {
+        if (InCollection(player.tailType, Tail.CAT, Tail.NEKOMATA_FORKED_1_3, Tail.NEKOMATA_FORKED_2_3) && rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.CAT) {
             outputText("[pg]");
             transformations.LowerBodyCat(2).applyEffect();
             changes++;
@@ -6219,20 +6142,21 @@ public final class Mutations extends MutationsHelper {
         }
 
         //CAT-FACE!
+        var wasCheshire:Boolean = player.faceType == Face.CHESHIRE;
         if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.CAT_CANINES) {
             outputText("[pg]");
             transformations.FaceCatCanines.applyEffect();
             changes++;
         }
 
-        if (rand(3) == 0 && changes < changeLimit && player.faceType == Face.CHESHIRE) {
+        if (rand(3) == 0 && changes < changeLimit && player.faceType == Face.CHESHIRE && !wasCheshire) {
             outputText("[pg]");
             transformations.FaceCheshireSmile.applyEffect();
             changes++;
         }
 
         //CAT TOUNGE CUZ WHY NOT?
-        if ((player.faceType == Face.CAT || player.faceType == Face.CAT_CANINES || player.faceType == Face.CHESHIRE || player.faceType == Face.CHESHIRE_SMILE) && player.tongue.type != Tongue.CAT && rand(3) == 0 && changes < changeLimit) {
+        if (InCollection(player.faceType, Face.CAT, Face.CAT_CANINES, Face.CHESHIRE, Face.CHESHIRE_SMILE) && player.tongue.type != Tongue.CAT && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TongueCat.applyEffect();
             changes++;
@@ -7372,9 +7296,8 @@ public final class Mutations extends MutationsHelper {
         }
         //Physical changes:
         //Nipples Start Glowing:
-        if (!player.hasStatusEffect(StatusEffects.GlowingNipples) && !player.hasStatusEffect(StatusEffects.BlackNipples) && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]You suddenly feel an itch in your nipples and undress to check up on them. To your surprise they begin to glow with a fluorescent blue light. Well, this will be interesting.  <b>You now have neon blue nipples that glow in the dark.</b>");
-            player.createStatusEffect(StatusEffects.GlowingNipples, 0, 0, 0, 0);
+        if (transformations.NipplesGlowing.isPossible() && rand(4) == 0 && changes < changeLimit) {
+            transformations.NipplesGlowing.applyEffect();
             changes++;
         }
         //Nipples Turn Back:
@@ -8329,7 +8252,7 @@ public final class Mutations extends MutationsHelper {
             else outputText("your " + player.skinDesc);
             outputText(" has changed to become ");
             player.skin.base.color = randomChoice("tan", "olive", "dark", "light");
-            outputText(player.skinTone + " colored.</b>");
+            outputText(player.skin.base.color + " colored.</b>");
         }
         //-Grow hips out if narrow.
         if (player.hips.type < 10 && changes < changeLimit && rand(3) == 0) {
@@ -8947,7 +8870,7 @@ public final class Mutations extends MutationsHelper {
         //(Fur/Scales fall out replaced by chitin)
         if (!player.hasCoatOfType(Skin.CHITIN) && (player.ears.type == Ears.HUMAN || player.ears.type == Ears.ELFIN) && rand(3) == 0 && changes < changeLimit) {
 			outputText("[pg]");
-            transformations.SkinChitin(Skin.COVERAGE_COMPLETE, {colors: ["pale white", "green"]}).applyEffect();
+            transformations.SkinChitin(Skin.COVERAGE_LOW, {colors: ["pale white","brown", "black", "grey"]}).applyEffect();
             changes++;
         }
         //(Gain human face)
@@ -9243,7 +9166,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Effect script 2:  (lower sensitivity)
         if (player.sens >= 20 && rand(3) == 0 && changes < changeLimit) {
-            outputText("[pg]Woah, what the... you pinch your " + player.skinFurScales() + " to confirm your suspicions; the ghostly snack has definitely lowered your sensitivity.");
+            outputText("[pg]Woah, what the... you pinch your " + player.skinFurScales() + " to confirm your suspicions; the ghostly snack has definitely definitely dulled your senses.");
             dynStats("sen", -2);
             if (player.sens >= 75) dynStats("sen", -2);
             changes++;
@@ -9285,9 +9208,9 @@ public final class Mutations extends MutationsHelper {
             if (rand(2) == 0) {
                 tone = "white";
                 adj = "milky";
-                outputText("You raise a hand, staring at the milky-white flesh. Your eyes are drawn to the veins in the back of your hand, darkening to a jet black as you watch. <b>You have white skin, with black veins!</b>");
+                outputText("You raise your hand, staring at the milky-white flesh. Your eyes are drawn to the veins in the back of your hand, darkening to jet black as you watch. <b>You have white skin, with black veins!</b>");
             } else {
-                outputText("You raise a hand, staring at the sable flesh. Your eyes are drawn to the veins in the back of your hand, brightening to an ashen tone as you watch.  <b>You have black skin, with white veins!</b>");
+                outputText("You raise your hand, staring at the sable flesh. Your eyes are drawn to the veins in the back of your hand, lightening to an ashen tone as you watch.  <b>You have black skin, with white veins!</b>");
                 tone = "sable";
                 adj = "ashen";
             }
@@ -10602,7 +10525,7 @@ public final class Mutations extends MutationsHelper {
         }
         //[increase Intelligence, Libido and Sensitivity]
         if (changes < changeLimit && rand(3) == 0) {
-            outputText("[pg]You close your eyes, smirking to yourself mischievously as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental picture of them helpless before your cleverness makes you shudder a bit, and you lick your lips and stroke yourself as you feel your skin tingling from an involuntary arousal.");
+            outputText("[pg]You close your eyes, smirking mischievously, as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental picture of them helpless before your cleverness makes you shudder a bit, and you lick your lips and stroke yourself as you feel your skin tingling from an involuntary arousal.");
             if (MutagenBonus("int", 4) || MutagenBonus("lib", 1))
                 changes++; //sounds fair
             if (player.sens < 80) player.addCurse("sen", 1, 1);
@@ -10742,7 +10665,7 @@ public final class Mutations extends MutationsHelper {
                     if (select2 == 1) outputText("[pg]A faint warmth buzzes to the surface of your " + breastDescript(counter) + ", the fluttering tingles seeming to vibrate faster and faster just underneath your [skin].  Soon, the heat becomes uncomfortable, and that row of chest-flesh begins to feel tight, almost thrumming like a newly-stretched drum.  You " + nippleDescript(counter) + "s go rock hard, and though the discomforting feeling of being stretched fades, the pleasant, warm buzz remains.  It isn't until you cup your tingly tits that you realize they've grown larger, almost in envy of the pair above.");
                     else if (select2 == 2) outputText("[pg]A faintly muffled gurgle emanates from your " + breastDescript(counter) + " for a split-second, just before your flesh shudders and shakes, stretching your " + player.skinFurScales() + " outward with newly grown breast.  Idly, you cup your hands to your swelling bosom, and though it stops soon, you realize that your breasts have grown closer in size to the pair above.");
                     else {
-                        outputText("[pg]An uncomfortable stretching sensation spreads its way across the curves of your " + breastDescript(counter) + ", threads of heat tingling through your flesh.  It feels as though your heartbeat has been magnified tenfold within the expanding mounds, your [skin] growing flushed with arousal and your " + nippleDescript(counter) + " filling with warmth.  As the tingling heat gradually fades, a few more inches worth of jiggling breast spill forth.  Cupping them experimentally, you confirm that they have indeed grown to be a bit more in line with the size of the pair above.")
+                        outputText("[pg]An uncomfortable stretching sensation spreads its way across the curves of your " + breastDescript(counter) + ", threads of heat tingling through your flesh.  Your heartbeat feels tenfold magnified within the expanding mounds, your [skin] flushed with arousal, and your " + nippleDescript(counter) + " filling with warmth.  As the tingling heat gradually fades, a few more inches of jiggling breast spill forth.  Cupping them experimentally, you confirm that they have indeed grown to be a bit more in line with the size of the pair above.")
                     }
                 }
                 //Bigger change!
@@ -11201,7 +11124,7 @@ public final class Mutations extends MutationsHelper {
         //**********************
         //[increase Intelligence, Libido and Sensitivity]
         mutationStep(1 == 1, mystic ? 2 : 4, function ():void {
-            outputText("[pg]You close your eyes, smirking to yourself mischievously as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental image of them helpless before your cleverness makes you shudder a bit, and you lick your lips and stroke yourself as you feel your skin tingling from an involuntary arousal.");
+            outputText("[pg]You close your eyes, smirking mischievously, as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental image of them helpless before your cleverness makes you shudder a bit, and you lick your lips and stroke yourself as you feel your skin tingling from an involuntary arousal.");
             //Raise INT, Lib, Sens. and +10 LUST
             dynStats("sen", 2, "lus", 10);
             MutagenBonus("int", 2);
@@ -13852,7 +13775,7 @@ public final class Mutations extends MutationsHelper {
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
 
-    public function aquaSeed(player:Player):void {
+    public function aquaSeed(player:Player):void {//TODO
         player.slimeFeed();
         //init variables
         var changes:Number = 0;
@@ -14450,7 +14373,7 @@ public final class Mutations extends MutationsHelper {
         }
         //-Raises intelligence to 80.
         if (changes < changeLimit && rand(3) == 0 && MutagenBonus("int", 1)) {
-            outputText("[pg]Patience is the key to any successful behavior weither it is battle or carefull planing.");
+            outputText("[pg]Patience is the key to any successful behavior weither it is battle or careful planing.");
             outputText("\nYour mind keep readying new plans and strategy to ambush your future foes as your brain start processing logic way better then you used to.");
             changes++;
         }

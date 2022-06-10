@@ -2194,7 +2194,7 @@ private function marbleKidsPlaytime():void {
 		return;
 	}
 	if(select == 6) {
-		anemoneScene.repeatCowSitting();
+		kidAScene.repeatCowSitting();
 	}
 	if(flags[kFLAGS.MARBLE_PLAYED_WITH_KIDS_TODAY] > 0) dynStats("lus", -10);
 	else dynStats("lib", -1, "lus", -10, "cor", -1);

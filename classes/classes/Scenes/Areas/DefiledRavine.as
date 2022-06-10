@@ -8,9 +8,8 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.Areas.BlightRidge.DemonScene;
-import classes.Scenes.Areas.DefiledRavine.*;
+import classes.Scenes.Areas.DefiledRavine.DemonSoldierScene;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.SceneLib;
 
@@ -19,6 +18,7 @@ use namespace CoC;
 	public class DefiledRavine extends BaseContent
 	{
 		public var demonScene:DemonScene = new DemonScene();
+		public var demonSoldierScene:DemonSoldierScene = new DemonSoldierScene();
 		
 		public function DefiledRavine() 
 		{
@@ -55,8 +55,8 @@ use namespace CoC;
 			choice[choice.length] = 2; //Imp Food
             if (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained)
 			    choice[choice.length] = 3; //Marble
-			if (rand(4) == 0) choice[choice.length] = 4; //Find nothing! The rand will be removed from this once the Defiled Ravine is populated with more encounters.
-			
+			choice[choice.length] = 4;
+			if (rand(4) == 0) choice[choice.length] = 5; //Find nothing! The rand will be removed from this once the Defiled Ravine is populated with more encounters.
 			select = choice[rand(choice.length)];
 			switch(select) {
 				/*case 0:
@@ -87,6 +87,9 @@ use namespace CoC;
                     menu();
                     addButton(0, "Yes", defiledRavineSiteMine);
                     addButton(1, "No", camp.returnToCampUseOneHour);
+					break;
+				case 4:
+					demonSoldierScene.encounterTheSoldierz();
 					break;
 				default:
 					clearOutput();

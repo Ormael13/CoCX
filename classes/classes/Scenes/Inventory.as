@@ -242,8 +242,8 @@ use namespace CoC;
 						addButton(3, "Egg", SceneLib.emberScene.emberEggInteraction);
 					}
 					if (flags[kFLAGS.ANEMONE_KID] > 0) {
-						SceneLib.anemoneScene.anemoneBarrelDescription();
-						if (model.time.hours >= 6) addButton(4, "Anemone", SceneLib.anemoneScene.approachAnemoneBarrel);
+						SceneLib.kidAScene.anemoneBarrelDescription();
+						if (model.time.hours >= 6) addButton(4, "Anemone", SceneLib.kidAScene.approachAnemoneBarrel);
 					}
 					if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
 						outputText("\nYou have " + flags[kFLAGS.ALRAUNE_SEEDS] + " alraune seeds planted in your garden.");

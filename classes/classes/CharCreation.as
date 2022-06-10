@@ -379,6 +379,8 @@ import coc.view.MainView;
             //keep settings flags
 			if (player.hasKeyItem("Ascension") >= 0) {
 				for each(var flag:int in [
+					kFLAGS.BACKGROUND_STYLE,
+					kFLAGS.CUSTOM_FONT_SIZE,
                     kFLAGS.NEW_GAME_PLUS_LEVEL,
                     kFLAGS.HUNGER_ENABLED,
                     kFLAGS.HARDCORE_MODE,

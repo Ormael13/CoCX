@@ -797,7 +797,7 @@ public class PlayerInfo extends BaseContent {
 		}
 
 		if (flags[kFLAGS.ANEMONE_KID] > 0)
-            interpersonStats += "<b>Kid A's Confidence:</b> " + SceneLib.anemoneScene.kidAXP() + "%\n";
+            interpersonStats += "<b>Kid A's Confidence:</b> " + SceneLib.kidAScene.kidAXP() + "%\n";
         if (flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 2) {
             if (SceneLib.kihaFollower.followerKiha())
                 interpersonStats += "<b>Kiha Affection:</b> " + 100 + "%\n";

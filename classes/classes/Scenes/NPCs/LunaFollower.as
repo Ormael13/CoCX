@@ -333,8 +333,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 					}
 				}
 				if (selectedCockValue != -1) {
-					player.cocks[selectedCockValue].cockType = CockTypesEnum.WOLF;
-					player.cocks[selectedCockValue].knotMultiplier = 1.1;
+					transformations.CockWolf(selectedCockValue).applyEffect(false);
 					player.cocks[selectedCockValue].thickenCock(2);
 				}
 			}
@@ -719,8 +718,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 					}
 				}
 				if (selectedCockValue != -1) {
-					player.cocks[selectedCockValue].cockType = CockTypesEnum.WOLF;
-					player.cocks[selectedCockValue].knotMultiplier = 1.1;
+					transformations.CockWolf(selectedCockValue).applyEffect(false);
 					player.cocks[selectedCockValue].thickenCock(2);
 				}
 			}

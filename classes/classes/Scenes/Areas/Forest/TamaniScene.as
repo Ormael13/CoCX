@@ -453,7 +453,7 @@ internal function tamaniSexLetHer():void {
 	}
 
 	function others(x:int):void {
-		outputText("She gets down on all fours, crawling up your legs until her gloss-covered lips reach your [cocks].   Warm wetness slides along your length as the gobbo-slut gets you slick and wet with her saliva.   It has quite the effect on you, turning your [cock "+x+"] into a hard trembling pleasure-center.  You sigh, enjoying the attention but more than ready to release your pent-up sexual need into the willing girl.\n\n");
+		outputText("She gets down on all fours, crawling up your legs until her gloss-covered lips reach your [cocks].   Warm wetness slides along your length as the gobbo-slut gets you slick and wet with her saliva.   It has quite the effect on you, turning your [cock "+(x+1)+"] into a hard trembling pleasure-center.  You sigh, enjoying the attention but more than ready to release your pent-up sexual need into the willing girl.\n\n");
 
 		if(player.cockArea(x) <= 90) othersFit(x);
 		else othersNofit(x);

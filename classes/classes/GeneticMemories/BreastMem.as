@@ -97,14 +97,25 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, NOLACTATE, "NOLACTATE", {
 			id: "Unlocked Metamorph",
 			name: "No Lactate",
-			cost: 800,
+			cost: 500,
 			title: "No Lactation",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.RemoveLactation;
 			}
 		});
 
-		public static const ONENIPPLE:int = 6;
+		public static const STARTLACTATE:int = 6;
+		EnumValue.add(Memories, STARTLACTATE, "STARTLACTATE", {
+			id: "Unlocked Metamorph",
+			name: "Start Lactate",
+			cost: 800,
+			title: "Lactation",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.StartLactation;
+			}
+		});
+
+		public static const ONENIPPLE:int = 7;
 		EnumValue.add(Memories, ONENIPPLE, "ONENIPPLE", {
 			id: "Unlocked Metamorph",
 			name: "One Nipple",
@@ -115,7 +126,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const QUADNIPPLE:int = 7;
+		public static const QUADNIPPLE:int = 8;
 		EnumValue.add(Memories, QUADNIPPLE, "QUADNIPPLE", {
 			id: "Quad Nipples",
 			name: "Quad Nipples",
@@ -126,7 +137,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FUCKNIPPLE:int = 8;
+		public static const FUCKNIPPLE:int = 9;
 		EnumValue.add(Memories, FUCKNIPPLE, "FUCKNIPPLE", {
 			id: "Fuckable Nipples",
 			name: "Fuckable Nipples",
@@ -137,7 +148,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BLACKNIPPLE:int = 9;
+		public static const BLACKNIPPLE:int = 10;
 		EnumValue.add(Memories, BLACKNIPPLE, "BLACKNIPPLE", {
 			id: "Black Nipples",
 			name: "Black Nipples",
@@ -148,7 +159,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const GLOWINGNIPPLE:int = 10;
+		public static const GLOWINGNIPPLE:int = 11;
 		EnumValue.add(Memories, GLOWINGNIPPLE, "GLOWINGNIPPLE", {
 			id: "Glowing Nipples",
 			name: "Glowing Nipples",

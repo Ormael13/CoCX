@@ -46,7 +46,7 @@ public class PotentVenom extends Consumable {
 
 		if (player.wis > 20 && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nSomehow everything around seems so much duller. The world around you just seems so much more bland and uneventful.\n");
-			player.addCurse("wis",-5,1);
+			player.addCurse("wis",5,1);
 			changes++;
 		}
 		//end of stat change list and starts of body changes
