@@ -729,7 +729,7 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 			Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 		}
 		if(player.inte > 35) {
-			player.addCurse("int", -0.1, 2);
+			player.addCurse("int", 0.1, 2);
 		}
 		player.trainStat("lib", 1, 75);
 		outputText("\n\n");

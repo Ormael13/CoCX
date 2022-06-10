@@ -1065,7 +1065,7 @@ package classes.Scenes {
 				const enoughSF: Boolean = player.soulforce >= genMem.cost;
 
 				if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem, index).hint("Cost: " + genMem.cost + " SF" + (genMem.info ? "\n\n" + genMem.info : ""));
-				else if (unlocked && partsInUse) addButtonDisabled(currentButton, buttonStr, "You already have this, the metamorphosis would have no effect!");
+				else if (unlocked && partsInUse) addButtonDisabled(currentButton, buttonStr, (!genMem.hint? "You already have this, the metamorphosis would have no effect!":genMem.hint));
 				else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton, buttonStr, "Cost: " + genMem.cost + " SF (You don't have enough Soulforce for this metamorphosis!)");
 				else if (!unlocked) addButtonDisabled(currentButton, buttonStr, "You haven't unlocked this metamorphosis yet!" + (genMem.lockedInfo ? "\n\n" + genMem.lockedInfo : ""));
 				currentButton++;

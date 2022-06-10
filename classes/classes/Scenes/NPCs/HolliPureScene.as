@@ -437,7 +437,6 @@ private function eatHolliFruit():void {
 		}
 		i = choices[rand(choices.length)];
 		transformations.CockTentacle(i).applyEffect();
-		player.cocks[i].knotMultiplier = 1.3;
 		dynStats("sen", 3, "lus", 10);
 	}
 	flags[kFLAGS.HOLLI_FRUIT]--;
