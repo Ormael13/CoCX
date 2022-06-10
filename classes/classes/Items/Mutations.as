@@ -792,7 +792,7 @@ public final class Mutations extends MutationsHelper {
 
     public function devourermanual(player:Player):void {
         clearOutput();
-        outputText("You open the manual, and discover it seems to be almost unreadable. It looks like it would teach the reader to use some sort of soul skill, but it seems all very fragmentary. In no time at all, you've read the whole thing, and like other manuscripts, it starts to disappear into thin air. When you are left with nothing to do, you are considering your next course of action when a new thought begins to circulate in your mind. The more it circles, it seems to literally'suck you in'. You try to stop it, but it's too late. 'Would I at least not hit the ground...' is the last not devoured thought you have before blanking out. [pg]After an unknown amount of time, you awake on the floor with the knowledge of a b>new soul skill: Devourer/b> seared into your mind.");
+        outputText("You open the manual, and discover it seems to be almost unreadable. It looks like it would teach the reader to use some sort of soul skill, but it seems all very fragmentary. In no time at all, you've read the whole thing, and like other manuscripts, it starts to disappear into thin air. When you are left with nothing to do, you are considering your next course of action when a new thought begins to circulate in your mind. The more it circles, it seems to literally 'suck you in'. You try to stop it, but it's too late. 'Would I at least not hit the ground...' is the last not devoured thought you have before blanking out. [pg]After an unknown amount of time, you awake on the floor with the knowledge of a b>new soul skill: Devourer/b> seared into your mind.");
         player.createStatusEffect(StatusEffects.KnowsHeavensDevourer, 1, 0, 0, 0);
     }
 
@@ -1761,7 +1761,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.hasPerk(PerkLib.MarblesMilk)) outputText("All you know is that there is a scent on the wind, it is time to hunt, and at the end of the day you need to come home for your milk.");
                 else outputText("All you know is that there is a scent on the wind, and it is time to hunt.");
             }
-            if (choice == 1) outputText("[pg]You devour the sweet pepper, carefuly licking your fingers for all the succulent juices of the fruit, and are about to go on your way when suddenly a tightness begins to build in your chest and stomach, horrid cramps working their way first through your chest, then slowly flowing out to your extremities, the feeling soon joined by horrible, blood-curdling cracks as your bones begin to reform, twisting and shifting, your mind exploding with pain. You fall to the ground, reaching one hand forward. No... A paw, you realize in horror, as you try to push yourself back up. You watch in horror, looking down your foreleg as thicker fur erupts from your skin, a [haircolor] coat slowly creeping from your bare flesh to cover your body. Suddenly, you feel yourself slipping away, as if into a dream, your mind warping and twisting, your body finally settling into its new form. With one last crack of bone you let out a yelp, kicking free of the cloth that binds you, wresting yourself from its grasp and fleeing into the now setting sun, eager to find prey to dine on tonight.");
+            if (choice == 1) outputText("[pg]You devour the sweet pepper, carefully licking your fingers for all the succulent juices of the fruit, and are about to go on your way when suddenly a tightness begins to build in your chest and stomach, horrid cramps working their way first through your chest, then slowly flowing out to your extremities, the feeling soon joined by horrible, blood-curdling cracks as your bones begin to reform, twisting and shifting, your mind exploding with pain. You fall to the ground, reaching one hand forward. No... A paw, you realize in horror, as you try to push yourself back up. You watch in horror, looking down your foreleg as thicker fur erupts from your skin, a [haircolor] coat slowly creeping from your bare flesh to cover your body. Suddenly, you feel yourself slipping away, as if into a dream, your mind warping and twisting, your body finally settling into its new form. With one last crack of bone you let out a yelp, kicking free of the cloth that binds you, wresting yourself from its grasp and fleeing into the now setting sun, eager to find prey to dine on tonight.");
             EventParser.gameOver();
             return;
         }
@@ -2375,7 +2375,7 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(10);
     }
 
-    public function succubisDream(player:Player):void {
+    public function succubusDream(player:Player):void {
         player.slimeFeed();
         var changes:Number = 0;
         var crit:Number = 1;
@@ -2455,7 +2455,7 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(15);
     }
 
-    //Oviposition Elixer!
+    //Oviposition Elixir!
     /*
      v1 = egg type.
      v2 = size - 0 for normal, 1 for large
@@ -2470,7 +2470,7 @@ public final class Mutations extends MutationsHelper {
      6 -
      */
     /* Now handled by OvipositionElixir.as
-            public function ovipositionElixer(player:Player):void
+            public function ovipositionElixir(player:Player):void
             {
                 player.slimeFeed();
                 var changes:Number = 0;
@@ -2489,7 +2489,7 @@ public final class Mutations extends MutationsHelper {
                 if (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
                     if (player.hasStatusEffect(StatusEffects.Eggs)) {
                         //If eggs are small, chance of increase!
-                        if (player.statusEffectv2(StatusEffects.Eggs) == 0) {
+                        if (player.statusEffective2(StatusEffects.Eggs) == 0) {
                             //1 in 2 chance!
                             if (rand(3) == 0) {
                                 player.addStatusValue(StatusEffects.Eggs,2,1);
@@ -2920,7 +2920,7 @@ public final class Mutations extends MutationsHelper {
         //Increases addiction by 5, up to a max of 50 before the player becomes addicted, no max after the player is addicted.
         SceneLib.marbleScene.marbleStatusChange(0, 5);
         //Does not apply the 'Marble's Milk' effect
-        //Purge withdrawl
+        //Purge withdrawal
         if (player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
             player.removeStatusEffect(StatusEffects.MarbleWithdrawl);
             MutagenBonus("tou", 5);
@@ -4475,7 +4475,7 @@ public final class Mutations extends MutationsHelper {
         if (!player.blockingBodyTransformations()) {
 
             //Smexual stuff!
-            //-TIGGERSHARK ONLY: Grow a cunt (guaranteed if no gender)
+            //-TIGERSHARK ONLY: Grow a cunt (guaranteed if no gender)
             if (type == 1 && (player.gender == 0 || (!player.hasVagina() && changes < changeLimit && rand(3) == 0))) {
                 changes++;
                 transformations.VaginaHuman().applyEffect();
@@ -5129,19 +5129,19 @@ public final class Mutations extends MutationsHelper {
         }
         if (type == 1 && player.racialScore(Races.DRAGON) >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonFireBreath)) {
             outputText("[pg]You feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
-            outputText("[pg]It seems vouivre oil has awaked some kind of power within you... your throat and chest feel very sore, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon fire breath!</b>)");
+            outputText("[pg]It seems vouivre oil has awoken some kind of power within you... your throat and chest feel very sore. However, you doubt you'll be able to force out more than one such blast before resting.  (<b>Gained Perk: Dragon fire breath!</b>)");
             player.createPerk(PerkLib.DragonFireBreath, 0, 0, 0, 0);
             changes++;
         }/*
         if (type == 1 && player.dragonScore() >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonIceBreath)) {
             outputText("[pg]You feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
-            outputText("[pg]It seems vouivre oil has awaked some kind of power within you... your throat and chest feel very cold, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon ice breath!</b>)");
+            outputText("[pg]It seems vouivre oil has awoken some kind of power within you... your throat and chest feel very cold, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon ice breath!</b>)");
             player.createPerk(PerkLib.DragonIceBreath, 0, 0, 0, 0);
             changes++;
         }
         if (type == 1 && player.dragonScore() >= 4 && changes < changeLimit && !player.hasPerk(PerkLib.DragonLightningBreath)) {
             outputText("[pg]You feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
-            outputText("[pg]It seems vouivre oil has awaked some kind of power within you... your throat and chest feel like it was electrocuted, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon fire breath!</b>)");
+            outputText("[pg]It seems vouivre oil has awoken some kind of power within you... your throat and chest feel like it was electrocuted, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon fire breath!</b>)");
             player.createPerk(PerkLib.DragonLightningBreath, 0, 0, 0, 0);
             changes++;
         }
@@ -8976,12 +8976,12 @@ public final class Mutations extends MutationsHelper {
                 clearOutput();
                 if (player.hasStatusEffect(StatusEffects.LustStickApplied)) {
                     player.addStatusValue(StatusEffects.LustStickApplied, 1, 12 + rand(12));
-                    outputText("You carefuly open the sweet-smelling tube and smear the lipstick over the coat you already have on your lips.  <b>No doubt another layer will make it last even longer!</b>  ");
+                    outputText("You carefully open the sweet-smelling tube and smear the lipstick over the coat you already have on your lips.  <b>No doubt another layer will make it last even longer!</b>  ");
                     outputText("You finish and pucker your lips, feeling fairly sexy with your new, thicker makeup on.[pg]");
                 }
                 else {
                     player.createStatusEffect(StatusEffects.LustStickApplied, 24, 0, 0, 0);
-                    outputText("You carefuly open the sweet-smelling tube and smear the lipstick over your lips.  ");
+                    outputText("You carefully open the sweet-smelling tube and smear the lipstick over your lips.  ");
                     if (player.hasCock()) outputText("It tingles a little, but the drugs have little to no effect on you now.");
                     else outputText("Honestly, it amazes you that something as little as a kiss can make a man putty in your hands.");
                     outputText("  You finish and pucker your lips, feeling fairly sexy with your new makeup on.[pg]");
@@ -9166,7 +9166,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Effect script 2:  (lower sensitivity)
         if (player.sens >= 20 && rand(3) == 0 && changes < changeLimit) {
-            outputText("[pg]Woah, what the... you pinch your " + player.skinFurScales() + " to confirm your suspicions; the ghostly snack has definitely lowered your sensitivity.");
+            outputText("[pg]Woah, what the... you pinch your " + player.skinFurScales() + " to confirm your suspicions; the ghostly snack has definitely definitely dulled your senses.");
             dynStats("sen", -2);
             if (player.sens >= 75) dynStats("sen", -2);
             changes++;
@@ -9208,9 +9208,9 @@ public final class Mutations extends MutationsHelper {
             if (rand(2) == 0) {
                 tone = "white";
                 adj = "milky";
-                outputText("You raise a hand, staring at the milky-white flesh. Your eyes are drawn to the veins in the back of your hand, darkening to a jet black as you watch. <b>You have white skin, with black veins!</b>");
+                outputText("You raise your hand, staring at the milky-white flesh. Your eyes are drawn to the veins in the back of your hand, darkening to jet black as you watch. <b>You have white skin, with black veins!</b>");
             } else {
-                outputText("You raise a hand, staring at the sable flesh. Your eyes are drawn to the veins in the back of your hand, brightening to an ashen tone as you watch.  <b>You have black skin, with white veins!</b>");
+                outputText("You raise your hand, staring at the sable flesh. Your eyes are drawn to the veins in the back of your hand, lightening to an ashen tone as you watch.  <b>You have black skin, with white veins!</b>");
                 tone = "sable";
                 adj = "ashen";
             }
@@ -10514,7 +10514,7 @@ public final class Mutations extends MutationsHelper {
                 outputText("[pg]You scarf down the ");
                 if (enhanced) outputText("fluid ");
                 else outputText("berries ");
-                outputText("with an uncommonly voracious appetite, taking particular enjoyment in the succulent, tart flavor.  As you carefuly suck the last drops of ochre juice from your fingers, you note that it tastes so much more vibrant than you remember.  Your train of thought is violently interrupted by the sound of bones snapping, and you cry out in pain, doubling over as a flaming heat boils through your ribs.");
+                outputText("with an uncommonly voracious appetite, taking particular enjoyment in the succulent, tart flavor.  As you carefully suck the last drops of ochre juice from your fingers, you note that it tastes so much more vibrant than you remember.  Your train of thought is violently interrupted by the sound of bones snapping, and you cry out in pain, doubling over as a flaming heat boils through your ribs.");
                 outputText("[pg]Writhing on the ground, you clutch your hand to your chest, looking on in horror through tear-streaked eyes as the bones in your fingers pop and fuse, rearranging themselves into a dainty paw covered in coarse black fur, fading to a ruddy orange further up.  You desperately try to call out to someone - anyone - for help, but all that comes out is a high-pitched, ear-splitting yap.");
                 if (player.tailCount > 1) outputText("  Your tails thrash around violently as they begin to fuse painfully back into one, the fur bristling back out with a flourish.");
                 outputText("[pg]A sharp spark of pain jolts through your spinal column as the bones shift themselves around, the joints in your hips migrating forward.  You continue to howl in agony even as you feel your intelligence slipping away.  In a way, it's a blessing - as your thoughts grow muddied, the pain is dulled, until you are finally left staring blankly at the sky above, tilting your head curiously.");
@@ -10525,7 +10525,7 @@ public final class Mutations extends MutationsHelper {
         }
         //[increase Intelligence, Libido and Sensitivity]
         if (changes < changeLimit && rand(3) == 0) {
-            outputText("[pg]You close your eyes, smirking to yourself mischievously as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental picture of them helpless before your cleverness makes you shudder a bit, and you lick your lips and stroke yourself as you feel your skin tingling from an involuntary arousal.");
+            outputText("[pg]You close your eyes, smirking mischievously, as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental picture of them helpless before your cleverness makes you shudder a bit, and you lick your lips and stroke yourself as you feel your skin tingling from an involuntary arousal.");
             if (MutagenBonus("int", 4) || MutagenBonus("lib", 1))
                 changes++; //sounds fair
             if (player.sens < 80) player.addCurse("sen", 1, 1);
@@ -10597,8 +10597,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (changes < changeLimit && rand(10) == 0) {
-            outputText("[pg]You sigh as the exotic flavor washes through you, and unbidden, you begin to daydream.  Sprinting through the thicket, you can feel the corners of your muzzle curling up into a mischievous grin.  You smell the scent of demons, and not far away either.  With your belly full and throat watered, now is the perfect time for a little bit of trickery.   As the odor intensifies, you slow your playful gait and begin to creep a bit more carefuly.");
-            outputText("[pg]Suddenly, you are there, at a demonic camp, and you spy the forms of an incubus and a succubus, their bodies locked together at the hips and slowly undulating, even in sleep.  You carefuly prance around their slumbering forms and find their supplies.  With the utmost care, you put your razor-sharp teeth to work, and slowly, meticulously rip through their packs - not with the intention of theft, but with mischief.  You make sure to leave small holes in the bottom of each, and after making sure your stealth remains unbroken, you urinate on their hooves.");
+            outputText("[pg]You sigh as the exotic flavor washes through you, and unbidden, you begin to daydream.  Sprinting through the thicket, you can feel the corners of your muzzle curling up into a mischievous grin.  You smell the scent of demons, and not far away either.  With your belly full and throat watered, now is the perfect time for a little bit of trickery.   As the odor intensifies, you slow your playful gait and begin to creep a bit more carefully.");
+            outputText("[pg]Suddenly, you are there, at a demonic camp, and you spy the forms of an incubus and a succubus, their bodies locked together at the hips and slowly undulating, even in sleep.  You carefully prance around their slumbering forms and find their supplies.  With the utmost care, you put your razor-sharp teeth to work, and slowly, meticulously rip through their packs - not with the intention of theft, but with mischief.  You make sure to leave small holes in the bottom of each, and after making sure your stealth remains unbroken, you urinate on their hooves.");
             outputText("[pg]They don't even notice, so lost in the subconscious copulation as they are.  Satisfied at your petty tricks, you scurry off into the night, a red blur amidst the foliage.");
             changes++;
             fatigue(-10);
@@ -10665,7 +10665,7 @@ public final class Mutations extends MutationsHelper {
                     if (select2 == 1) outputText("[pg]A faint warmth buzzes to the surface of your " + breastDescript(counter) + ", the fluttering tingles seeming to vibrate faster and faster just underneath your [skin].  Soon, the heat becomes uncomfortable, and that row of chest-flesh begins to feel tight, almost thrumming like a newly-stretched drum.  You " + nippleDescript(counter) + "s go rock hard, and though the discomforting feeling of being stretched fades, the pleasant, warm buzz remains.  It isn't until you cup your tingly tits that you realize they've grown larger, almost in envy of the pair above.");
                     else if (select2 == 2) outputText("[pg]A faintly muffled gurgle emanates from your " + breastDescript(counter) + " for a split-second, just before your flesh shudders and shakes, stretching your " + player.skinFurScales() + " outward with newly grown breast.  Idly, you cup your hands to your swelling bosom, and though it stops soon, you realize that your breasts have grown closer in size to the pair above.");
                     else {
-                        outputText("[pg]An uncomfortable stretching sensation spreads its way across the curves of your " + breastDescript(counter) + ", threads of heat tingling through your flesh.  It feels as though your heartbeat has been magnified tenfold within the expanding mounds, your [skin] growing flushed with arousal and your " + nippleDescript(counter) + " filling with warmth.  As the tingling heat gradually fades, a few more inches worth of jiggling breast spill forth.  Cupping them experimentally, you confirm that they have indeed grown to be a bit more in line with the size of the pair above.")
+                        outputText("[pg]An uncomfortable stretching sensation spreads its way across the curves of your " + breastDescript(counter) + ", threads of heat tingling through your flesh.  Your heartbeat feels tenfold magnified within the expanding mounds, your [skin] flushed with arousal, and your " + nippleDescript(counter) + " filling with warmth.  As the tingling heat gradually fades, a few more inches of jiggling breast spill forth.  Cupping them experimentally, you confirm that they have indeed grown to be a bit more in line with the size of the pair above.")
                     }
                 }
                 //Bigger change!
@@ -11124,7 +11124,7 @@ public final class Mutations extends MutationsHelper {
         //**********************
         //[increase Intelligence, Libido and Sensitivity]
         mutationStep(1 == 1, mystic ? 2 : 4, function ():void {
-            outputText("[pg]You close your eyes, smirking to yourself mischievously as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental image of them helpless before your cleverness makes you shudder a bit, and you lick your lips and stroke yourself as you feel your skin tingling from an involuntary arousal.");
+            outputText("[pg]You close your eyes, smirking mischievously, as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental image of them helpless before your cleverness makes you shudder a bit, and you lick your lips and stroke yourself as you feel your skin tingling from an involuntary arousal.");
             //Raise INT, Lib, Sens. and +10 LUST
             dynStats("sen", 2, "lus", 10);
             MutagenBonus("int", 2);
@@ -11541,7 +11541,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Breast Gain: (towards A cup)
         if (player.biggestTitSize() < 1 || player.breastRows[0].breastRating < 1 && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]You feel a vague swelling sensation in your [fullChest], and you frown downwards.  You seem to have gained a little weight on your chest.  Not enough to stand out, but- you cup yourself carefuly- certainly giving you the faintest suggestion of boobs.");
+            outputText("[pg]You feel a vague swelling sensation in your [fullChest], and you frown downwards.  You seem to have gained a little weight on your chest.  Not enough to stand out, but- you cup yourself carefully- certainly giving you the faintest suggestion of boobs.");
             player.breastRows[0].breastRating = 1;
             if (player.bRows() > 1) {
                 index = 1;
