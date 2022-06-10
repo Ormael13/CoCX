@@ -24,22 +24,16 @@ public class AntRace extends Race {
                 .earType(NONE(Ears.HUMAN, Ears.AVIAN), 0, -1)//Avian and Human balance to 0
 				.skinCoatType(Skin.CHITIN, +1)
 				.armType(Arms.ANT, +1)
-				.customScoreRequirement("legs", "spider legs, +1; ant legs, +1 per pair",
-						function (body:BodyData):Boolean {
-							return body.legType == (lowerBody.ANT || lowerBody.CHITINOUS_SPIDER_LEGS);
-						},
-						function (body:BodyData):int {
-							return (body.legCount / 2);
-						}
-				)
+				.legType(lowerBody.SPIDER, +1)
+                .legType(lowerBody.ANT, +2)
 				.hasCockOfType(CockTypesEnum.INSECT, +1)
 				.wingType(ANY(Wings.ANT_SMALL, Wings.BEE_SMALL, Wings.BEE_LARGE), +1)
 				.wingType(Wings.ANT_LARGE, +2)
 				
 		
-		buildTier(6, "ant-morph")
+		buildTier(8, "ant-morph")
 				.buffs({
-					"str.mult": +1.25
+					"str.mult": +1.00
                     "tou.mult": +0.70,
 					"int.mult": -0.70,
                     "wis.mult": -0.60
@@ -52,26 +46,6 @@ public class AntRace extends Race {
 					"tou.mult": +0.50,
 					"spe.mult": -0.20,
 					"def": +4
-				})
-				.end();
-		
-		buildTier(6, "treant")
-				.namesMaleFemaleTaur("treant", "dryad", "treant-taur", "dryad-taur")
-				.buffs({
-					"str.mult": +0.20,
-					"tou.mult": +0.80,
-					"spe.mult": -0.40,
-					"def": +8
-				})
-				.end();
-		
-		buildTier(7, "treant")
-				.namesMaleFemaleTaur("treant", "dryad", "treant-taur", "dryad-taur")
-				.buffs({
-					"str.mult": +0.25,
-					"tou.mult": +1.00,
-					"spe.mult": -0.50,
-					"def": +10
 				})
 				.end();
 	}

@@ -8289,7 +8289,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      desc += "Feeling an uncomfortable sensation on your butt, you stretch yourself, attributing it to having sat on a rough surface. A burning sensation runs through your body, similar to the one that you had after eating the root. When it migrates to your back, your attention goes to a mass of fluff that has erupted from your backside. Before you can check it properly, it seems to move on its own, following the heated sensation that now pulsates through your body, and when the heated pulses seem to have stopped, it has become a long, fluffy tube";
 	      desc += "Shortly after, the feel of that spicy root returns, but now the heat is felt only in your tail, which shakes wildly while it elongates and becomes more bushy. Soon it has become almost as long as you. A very thick mass of soft, fluffy furs covers it in a matter of seconds. It acquires a lovely ringed pattern of red-russet and copperish-orange.";
 	      desc += "When the effects finally subside, you decide to test the tail, making it coil around your body, realizing soon that you can control its movements with ease, and that its fur feels wonderful at the touch. Anyways, <b>you now have a long, bushy, red-panda tail!</b>";
-	    } else if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.MANTIS_ABDOMEN) {
+	    } else if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.MANTIS_ABDOMEN || ) {
 	      desc += "Your insectile backside seems affected by the root properties, as your venom production suddenly stops. The flesh within the abdomen retracts into your backside, the chiting covering falling, leaving exposed a layer of soft, bare skin. When the abdomen disappears, your left with a comically sized butt, that soon reverts to its usual size.";
 	      desc += "The root keeps doing its thing, as you feel an uncomfortable sensation on your butt. A burning sensation runs through your body, similar to the one that you had after eating the root. When it migrates to your back, your attention goes to a mass of fluff that has erupted from your backside. Before you can check it properly, it seems to move on its own, following the heated sensation that now pulsates through your body, and when the heated pulses seem to have stopped, it has become a long, fluffy tube, quite different from your former abdomen.";
 	      desc += "Shortly after, the feel of that spicy root returns, but now the heat is felt only in your tail, which shakes wildly while it elongates and becomes more bushy. Soon it has become almost as long as you. A very thick mass of soft, fluffy furs covers it in a matter of seconds. It acquires a lovely ringed pattern of red-russet and copperish-orange.";
@@ -8445,7 +8445,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (player.tailType == Tail.NONE) desc += "You feel the flesh above your [butt] knotting and growing. It twists and writhes around itself before flopping straight down, now shaped into a distinctly bovine form. You have a <b>cow tail</b>.";
 	    else {
-	      if (player.tailType != Tail.SPIDER_ADBOMEN || player.tailType != Tail.BEE_ABDOMEN || player.tailType != Tail.SCORPION || player.tailType != Tail.MANTIS_ABDOMEN) {
+	      if (!InCollection(player.tailType, Tail.SPIDER_ADBOMEN, Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTIS_ABDOMEN, Tail.ANT_ABDOMEN)) {
 	        desc += "Your tail bunches uncomfortably, twisting and writhing around itself before flopping straight down, now shaped into a distinctly bovine form. You have a <b>cow tail</b>.";
 	      } else {
 	        desc += "Your insect-like abdomen tingles pleasantly as it begins shrinking and softening, chitin morphing and reshaping until it looks exactly like a <b>cow tail</b>.";
@@ -9268,15 +9268,15 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "A burst of pain hits you just above your [butt], coupled with a sensation of burning heat and pressure. You can feel your " + player.skinFurScales() + " tearing as something forces its way out of your body. Reaching back, you grab at it with your hands. It's huge... and you can feel it toughening under your touches, firming up until the whole tail has become quite hard and elliptical in shape. The heat fades, leaving behind a gentle warmth, and you realize your tail has become an ant's abdomen! As you start to shift your seat, however, you feel a sudden tug, and feel like something was just spat out--you must have a small stinger back there as well. <b>You now have an ant's abdomen.</b>".
 		player.tailVenom = 10;
 	    player.tailRecharge = 5;
-	    player.tailType = Tail.ANT_ADBOMEN;
+	    player.tailType = Tail.ANT_ABDOMEN;
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.ANT_ADBOMEN));
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.ANT_ABDOMEN));
 	  },
 	  // is present
 	  function (): Boolean {
-	    return player.tailType === Tail.ANT_ADBOMEN;
+	    return player.tailType === Tail.ANT_ABDOMEN;
 	  }
 	);
   /*

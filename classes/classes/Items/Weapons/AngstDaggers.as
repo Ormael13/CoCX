@@ -27,7 +27,7 @@ package classes.Items.Weapons
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.DualWield)) return super.canUse();
+			if (game.player.hasPerk(PerkLib.DualWield) || gameplayer.hasPerk(PerkLib.AntyDexterity)) return super.canUse();
 			outputText("You aren't skilled enough to handle this pair of weapons!  ");
 			return false;
 		}

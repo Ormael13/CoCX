@@ -743,11 +743,10 @@ public class LowerBody extends SaveableBodyPart {
 		canTaur: true
 	});
 
-	public static const ANT_LEGS:int = 74;
-	EnumValue.add(Types, ANT_LEGS, "ANT_LEGS", {
+	public static const ANT:int = 74;
+	EnumValue.add(Types, ANT, "ANT", {
 		name: "ant",
-		appearanceDesc: "Your {legCount} legs are covered in a slightly reflective [skin coat.color], insectile carapace up to your upper-thigh, looking more like armor than natural body.",
-		canTaur: true
+		appearanceDesc: "Your {legCount} legs are covered in a slightly reflective [skin coat.color], insectile carapace up to your hips, looking more like armor than natural body.",
 	});
 
 	override public function set type(value:int):void {

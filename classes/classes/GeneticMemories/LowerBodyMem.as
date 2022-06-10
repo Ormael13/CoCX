@@ -544,11 +544,22 @@ package classes.GeneticMemories {
 	  public static const YETI: int = 44;
 	  EnumValue.add(Memories, YETI, "YETI", {
 		  id: "Yeti Lower Body",
-		  name: "Yeti wyrm Lower Body",
+		  name: "Yeti Lower Body",
 		  cost: 100,
 		  title: "Yeti",
 		  transformation: function(): Transformation {
 			  return CoC.instance.transformations.LowerBodyYeti;
+		  }
+	  });
+
+	  public static const ANT: int = 45;
+	  EnumValue.add(Memories, ANT, "ANT", {
+		  id: "Ant Lower Body",
+		  name: "Ant Legs",
+		  cost: 100,
+		  title: "Ant",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.LowerBodyAnt;
 		  }
 	  });
 
