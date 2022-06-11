@@ -12086,7 +12086,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			},
 			// is present
 			function (): Boolean {
-				return !player.isDogCock(cock>0?cock:0);
+				return !player.isDogCock(cock);
 			}
 	 );}
     /*

@@ -1751,7 +1751,7 @@ public class Creature extends Utils
 		}
 
 		public function isDogCock(x:int = 0): Boolean {
-			return InCollection(cocks[x].cockType, CockTypesEnum.DOG, CockTypesEnum.FOX, CockTypesEnum.WOLF, CockTypesEnum.DISPLACER);
+			return x < cockTotal() && InCollection(cocks[x].cockType, CockTypesEnum.DOG, CockTypesEnum.FOX, CockTypesEnum.WOLF, CockTypesEnum.DISPLACER);
 		}
 
 		public function twoDickRadarSpecial(width:int):Boolean
