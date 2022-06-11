@@ -8,11 +8,13 @@ import classes.BodyParts.Face;
 import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
+import classes.GeneticMemories.BallsMem;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Scenes.Dungeons.Factory.*;
-import classes.lists.Gender;
+import classes.Scenes.Metamorph;
 import classes.display.SpriteDb;
+import classes.lists.Gender;
 
 use namespace CoC;
 
@@ -210,9 +212,10 @@ use namespace CoC;
 					}
 					//Grow chest
 					//(If player has 0 bewbs)
-					if(player.breastRows.length == 0) {
+					if(player.bRows() == 0) {
 						player.createBreastRow();
 						outputText("Your chest tingles, revealing a pair of pink nipples on your new mammory glands.  ");
+						transformations.UnlockBreasts();
 					}
 					player.growTits(1, (2+rand(3)), true, 1);
 					outputText("  ");
@@ -303,16 +306,14 @@ use namespace CoC;
 			outputText("Advancing slowly, the succubus gives you a hungry look.  She extends a hand, allowing her fingers to lengthen into razor-sharp claws.  With a single expert slash, she cuts away everything holding together your [armor].  They fall into a discarded pile, already forgotten as your ");
 			//[genderless]
 			if(player.gender == 0) {
-				outputText("entire body blushes read before the sexy seductress.  She looks at you, frowning as she murmers, \"<i>Now this just won't do.  You look more like a " + player.mf("boy", "girl") + " to me, so why don't I make the plumbing match the exterior?</i>\"\n\n");
+				outputText("entire body blushes red before the sexy seductress.  She looks at you, frowning as she murmers, \"<i>Now this just won't do.  You look more like a " + player.mf("boy", "girl") + " to me, so why don't I make the plumbing match the exterior?</i>\"\n\n");
 				outputText("Her palm caresses your crotch, stoking the warmth inside you until it blazes white-hot with new sensation.  Your skin ripples and parts, ");
 				if(player.biggestTitSize() <= 1) {
 					outputText("pushed apart the thick flesh of a powerful demonic member, complete with two swollen balls.");
-					player.createCock();
-					player.cocks[0].cockLength = 10;
-					player.cocks[0].cockThickness = 2;
-					player.cocks[0].cockType = CockTypesEnum.DEMON;
+					transformations.CockDemon(0, 10, 2).applyEffect(false);
 					player.balls = 2;
 					player.ballSize = 3;
+					Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 				}
 				else {
 					outputText("gushing with fluids as it shapes itself into a hungry demonic cunt.");
@@ -467,7 +468,7 @@ use namespace CoC;
 				if(player.cockArea(x) > monster.vaginalCapacity()) {
 					outputText("But the pleasure is short-lived, as even her altered physiology can't accommodate your massive tool. With a grunt of frustration you yank your hungry demonic cock away from your goal.  She smiles knowingly and massages her breasts, releasing streams of the same black fluid from her tumescent nipples. It coats the valley of her pornstar-sized breasts, allowing the fluid to flow down and pool in her tight little belly button.\n\n");
 					outputText("\"<i>This will, like, be even better anyways stud!</i>\" coos a higher pitched you, smashing her tits together wetly for emphasis.  Viscous strings of lubricants form a mesmerizing lattice between her mountainous tits as she puts on a show for you.  Entirely of its own accord, your [cock "+x1+"] drags you into her web of corruption, plopping itself firmly into the river of desire that fountains from the peaks on either side. With a steady rhythm, you rock your " + hipDescript() + " back and forwards, plunging into her delicious fuckpillows without abandon. With an inhuman strength, she pushes them together, forcing them to completely encircle your over-sized pole with a tight ring of corruption-dripping tit-flesh.\n\n");
-					if (!recalling) player.cocks[0].cockType = CockTypesEnum.DEMON;
+					if (!recalling) transformations.CockDemon().applyEffect(false);
 					//[normal]
 					if(player.cumQ() < 50) outputText("Droplets of pre begin to escape your cock-slit every time your sensitive nodules pass between your fem-clone's wondrous pleasure-tits.  You fuck harder, no longer caring if it's your choice or your cock's, mashing your purplish head against her lips with every stroke.  The flash-fire of an orgasm sweeps over you, over-engorging the nodules all over your cock and doubling their size.  Your hips resort to tiny rocking motions as you rub your cock-slit into your fem-self's open mouth, blasting thick ropes of tainted black cum into her mouth. Though you quickly empty of cum and collapse onto her, your " + hipDescript() + " continue to fuck like a machine.  All you can do is hang on to your meat and try to stay conscious as your demonic prick feasts on your double.\n\n");
 					//[high]
@@ -492,7 +493,7 @@ use namespace CoC;
 					if(player.biggestTitSize() > 0) outputText("Your female double reaches down to pinch your nipple, spurring you on, \"<i>Please, could you like, cum for me?</i>\"");
 					//New PG
 					outputText("\n\n");
-					if (!recalling) player.cocks[0].cockType = CockTypesEnum.DEMON;
+					if (!recalling) transformations.CockDemon().applyEffect(false);
 					outputText("The succubus bucks her hips weakly, still clearly defeated, but egging on your orgasm as dark fluids squelch free from her quim.  \"<i>Please... can't you see how hot you're making me?  I've made your cock perfect, so please make me cum!</i>\" she begs as she quivers with delight.  ");
 					outputText("You pause to think about it, not noticing that your groin is pounding away with furious energy, splattering cum and pre over her thighs as your new cock's instincts take control from your waist down.  Gasping with sudden pleasure, you feel a flash of heat pass through your tainted meatstick as an orgasm builds.");
 					//New PG
@@ -1020,10 +1021,8 @@ use namespace CoC;
 			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
 			//Grow if none
-			if(player.breastRows.length == 0) {
-				outputText("<b>Your chest swells out, forming rounded C-cup globes, capped with tiny erect nipples!</b>");
-				player.createBreastRow();
-				player.breastRows[0].breastRating = 3;
+			if(player.bRows() == 0) {
+				transformations.CreateBreastRow(3).applyEffect();
 				player.nippleLength = .25;
 			}
 			//Singular row - cup size + 3.  Nipple size to 1" if smaller.
@@ -1064,24 +1063,13 @@ use namespace CoC;
 			clearOutput();
 			//No dick?  Grow one!
 			if(player.cocks.length == 0) {
-				outputText("A sudden pressure builds in your groin.  You look down in wonder, more than a little turned on by the prospect of growing your own penis.  Your skin ripples and bulges outwards, the sensation turning from pressure to feelings of intense warmth.  The bump distends, turning purple near the tip as it reaches three inches in size.  You touch it and cry out with pleasure, watching it leap forwards another inch in response.  Your tiny dick's crown becomes more and more defined as it grows larger, until you have what looks like a normal six inch dick.  You sigh with happiness and desire at your new addition.  Before you can enjoy it, another wave of heat washes through you, making your new addition respond.  It grows painfully hard as it crests eight inches in length.  ");
-				if(player.cor < 80) outputText("In horror you watch the skin turn a shiny-dark purple.  Tiny wriggling nodules begin to erupt from the purplish skin, making your cock look more like a crazed sex-toy than a proper penis.  You pant and nearly cum as it lengthens one last time, peaking at ten inches long.  One last ring of nodules forms around the edge of your demon-dick's crown, pulsating darkly with each beat of your horrified heart.");
-				else outputText("Curious, you watch the skin turn a shiny-dark purple.  Tiny wriggling nodules begin to erupt from the purplish skin, making your penis look more like those amazing cocks you saw on demons!  You pant and moan in happiness as it lengthens one last time, peaking at ten inches long.  The excitement of possessing such a magnificent pleasure tool makes you cum.  As one last ring of nodules forms around the edge of your new demon-dick's crown, you notice to your surprise that the liquid you ejaculated is pitch black!  But as your new cock pulsates darkly with each beat of your heart, the only thing you have on your mind is to try it out as soon as possible...");
-				player.createCock();
-				player.cocks[0].cockType = CockTypesEnum.DEMON;
-				player.cocks[0].cockLength = 10;
-				player.cocks[0].cockThickness = 2;
+				transformations.CockDemon(0, 10).applyEffect();
 			}
 			if(player.cocks.length == 1) {
 				if(player.demonCocks() < 1) {
-					outputText("You smile, watching your [cock] grow longer.  Inches of newfound dick-flesh erupt from your crotch in response to omnibus' dark magics.  Before you can play with your transformed tool, a wave of burning desire passes through you.  ");
-					if(player.cor < 80) outputText("You watch in horror as the skin of your [cock] turns shiny and purplish-black.  ");
-					else outputText("Curious, you watch the skin of your [cock] turn a shiny-dark purple.  ");
+					transformations.CockDemon().applyEffect();
 					player.cocks[0].cockLength += 3 + rand(5);
 					player.cocks[0].thickenCock(2);
-					player.cocks[0].cockType = CockTypesEnum.DEMON;
-					if(player.cor < 50) outputText("Corrupt nodules begin to spring up over its entire length.  <b>Your penis is transforming into a [cock]!</b>  The new nubs wriggle about as they sprout over every inch of surface, save for the head.  Unable to do anything but groan with forced pleasure and horror, you can only watch.  One last batch of nodules forms in a ring around the crown of your [cock], seemingly completing its transformation, until you notice, almost throwing up, that your testicles are also getting covered in black veins under your powerless eyes!  ");
-					else outputText("As you watch expectantly, tiny wriggling nodules begin to erupt from the purplish skin, like those magnificent cocks you saw on demons!  <b>Your penis is transforming into a [cock]!</b>  You pant and moan in happiness as it lengthens one last time.  As you stroke all of its amazing length with both hands, the excitement of possessing such a beautiful pleasure tool makes you cum.  As one last ring of nodules forms around the edge of your [cock]'s crown, you notice that the squirts getting out of your cock-slit are not completely white and gradually become darker, the last drops being pitch-black! Your new [cock] pulsates darkly with each beat of your heart, but the thick, throbbing veins that are finishing to cover your testicles do not contain blood, but a black liquid, which apparently has perverted them. You ponder what its purpose might be, but then you decide, as you stroke the huge, dark, bumpy shaft, that if this feels as good as this looks, it doesn't really matter.  ");
 				}
 				else {
 					outputText("Your [cock] leaps forwards, taking to the dark magic with ease.  Inch after inch of new length erupts from your groin as your [cock] gets longer and thicker.  It pulsates, as if promising dark pleasure as it settles into its new enhanced size.");
@@ -1111,7 +1099,7 @@ use namespace CoC;
 						i--;
 						player.cocks[i].cockLength += 3 + rand(5);
 						player.cocks[i].thickenCock(2);
-						player.cocks[i].cockType = CockTypesEnum.DEMON;
+						transformations.CockDemon(i).applyEffect(false);
 					}
 					if(player.cor < 50) outputText("<b>Your dicks are transforming into [cocks]!</b>  The new nubs wriggle about as they sprout over every inch of surface, save for the heads.  Unable to do anything but groan with forced pleasure and horror, you can only watch.  One last batch of nodules forms in a ring around the crowns of your [cocks], seemingly completing its transformation, until you notice, almost throwing up, that your testicles are also getting covered in black veins under your powerless eyes!  ");
 					else outputText("<b>Your dicks are transforming into [cocks]!</b>  The new nubs wriggle about as they sprout over every inch of surface, save for the heads.  You pant and moan in happiness as they lengthen one last time.  As you stroke all of their amazing length with both hands, the excitement of possessing such a magnificent pleasure tool makes you cum. You lick your fingers eagerly, tasting your new cum, while a last ring of nodules forms around the crowns of your beautiful [cocks].   Your new [cocks] pulsate darkly with each beat of your heart, but the thick, throbbing veins that are finishing to cover your testicles do not contain blood, but a black liquid, which apparently has perverted them. You ponder what its purpose might be, but then you decide, as you stroke a huge, dark, bumpy shaft, that if they feel as good as they look, it doesn't really matter.  ");
@@ -1241,18 +1229,8 @@ use namespace CoC;
 			//Being genderless isn't normal too...
 			if (player.gender == Gender.GENDER_NONE) {
 				if (player.balls > 0 || player.femininity < 35 || rand(3) == 0) {
-					player.createCock();
-					player.cocks[0].cockType = CockTypesEnum.DEMON;
-					player.cocks[0].cockLength = 10;
-					player.cocks[0].cockThickness = 2;
-					outputText("A sudden pressure builds in your groin.  You look down in wonder, more than a little turned on by the prospect of growing your own penis.  Your skin ripples and bulges outwards, the sensation turning from pressure to feelings of intense warmth.  The bump distends, turning purple near the tip as it reaches three inches in size.  You touch it and cry out with pleasure, watching it leap forwards another inch in response.  Your tiny dick's crown becomes more and more defined as it grows larger, until you have what looks like a normal six-inch dick.  You sigh with happiness and desire at your new addition.  Before you can enjoy it, another wave of heat washes through you, making your new addition respond.  It grows painfully hard as it crests eight inches in length.  ");
-					if (player.cor < 80) outputText("In horror you watch the skin turn a shiny-dark purple.  Tiny wriggling nodules begin to erupt from the purplish skin, making your cock look more like a crazed sex-toy than a proper penis.  You pant and nearly cum as it lengthens one last time, peaking at ten inches long.  One last ring of nodules forms around the edge of your demon-dick's crown, pulsating darkly with each beat of your horrified heart.");
-					else outputText("Curious, you watch the skin turn a shiny-dark purple.  Tiny wriggling nodules begin to erupt from the purplish skin, making your penis look more like those amazing cocks you saw on demons!  You pant and moan in happiness as it lengthens one last time, peaking at ten inches long.  The excitement of possessing such a magnificent pleasure tool makes you cum.  As one last ring of nodules forms around the edge of your new demon-dick's crown, you notice to your surprise that the liquid you ejaculated is pitch black!  But as your new cock pulsates darkly with each beat of your heart, the only thing you have on your mind is to try it out as soon as possible...");
-					if (player.balls == 0) {
-						player.balls = 2;
-						outputText("\n\nIncredible pain scythes through your crotch, doubling you over.  In shock, you barely register the sight before your eyes: <b>You have balls!</b>");
-						player.ballSize = 1;
-					}
+					transformations.CockDemon(0,10).applyEffect();
+					transformations.BallsDuo.applyEffect();
 				}
 				else {
 					player.createVagina();
@@ -1689,10 +1667,7 @@ use namespace CoC;
 					outputText("!</i>\"  She stops, sniffing the air, a curious expression on her face as she slowly circles you, her heals clicking loudly on the floor.  A knowing grin blooms across her face as understanding hits her.\n\n");
 					outputText("She exclaims, \"<i>Omigawsh!  You're the champion!  Your, like, soul is still there and everything!  But, you're like, completely corrupt an' stuff!  Ya know what'd be fun?  I could fuck you 'til you cum so hard your soul melts out an' you turn into a demon.  Wouldn't that be great?</i>\"\n\n");
 					outputText("The secretarial demoness pulls out a file and fiddles with her nails, murmuring, \"<i>I guess if you don't wanna, we could just hook you up in the factory.  What's it gonna be?</i>\"");
-					if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
-						outputText("<b>New codex entry unlocked: Succubus!</b>\n\n")
-					}
+					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SUCCUBUS);
 					simpleChoices("Fight", doFightSuccubus, "Go Demon", goDemon, "Hook Up", talkSuccubusYes, "", null, "", null);
 					return;
 				}
@@ -1707,10 +1682,7 @@ use namespace CoC;
 					else if(player.hasVagina()) outputText("lick your honeypot 'til you soak my face");
 					else outputText("give you a new addition and show you how to use it");
 					outputText(".</i>\"\n\nThe succubus turns away from you and makes a show of tweaking her make-up, ignoring you for the moment.");
-					if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
-						outputText("<b>New codex entry unlocked: Succubus!</b>\n\n")
-					}
+					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SUCCUBUS);
 					simpleChoices("Fight", doFightSuccubus, "It's Me!", talkSuccubusItsMe, "Leave", roomLobby, "", null, "", null);
 				}
 				else {
@@ -1718,10 +1690,7 @@ use namespace CoC;
 					if(player.gender == 1) outputText("stud");
 					else outputText("sexy");
 					outputText("!  What's a cute little morsel like you doing by yourself out here?</i>\"");
-					if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] <= 0) {
-						flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
-						outputText("<b>New codex entry unlocked: Succubus!</b>\n\n")
-					}
+					camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SUCCUBUS);
 					simpleChoices("Fight", doFightSuccubus, "Talk", talkSuccubus, "Run", roomLobby, "", null, "", null);
 				}
 			}

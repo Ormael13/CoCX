@@ -217,7 +217,6 @@ private function drinkFountainEndowment():void {
 				//If not then the dick was eligible.
 				else exgartuanInfestDick();
 			}
-			changed = true;
 		}
 	}
 	//(+Big Tits)
@@ -229,7 +228,6 @@ private function drinkFountainEndowment():void {
 			i--;
 			player.breastRows[i].breastRating += 4;
 		}
-		changed = true;
 	}
 	//(+Big dick)
 	if(rand(3) == 0 && player.cockTotal() > 0) {
@@ -240,7 +238,6 @@ private function drinkFountainEndowment():void {
 			player.cocks[i].cockLength += 3;
 			player.cocks[i].cockThickness += .3;
 		}
-		changed = true;
 	}
 	//(+Big Clit)
 	if(rand(4) == 0 && player.hasVagina()) {
@@ -249,7 +246,6 @@ private function drinkFountainEndowment():void {
 		if(player.clitLength < 6) outputText("gets as big as a cock");
 		else outputText("gets bigger than most cocks");
 		outputText(" now!");
-		changed = true;
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -264,7 +260,7 @@ private function exgartuanInfestDick():void {
 		outputText("\n\n\"<i>Yes I am.  You should consider yourself lucky – you're now the host of the great demon Exgartuan, and you'd best please me every few hours, or I'll make sure your body finds someone to relieve my building pressure.  But I think you'll do fine.  Come now, I can see a wonderful camp in your mind that we can paint white,</i>\" it suggests.");
 		outputText("\n\nWell now... this was certainly unexpected.  Perhaps there's a way to be rid of this thing?");
 		dynStats("lib", 5, "lus", 10, "cor", 10);
-		player.cocks[0].cockType = CockTypesEnum.DEMON;
+		transformations.CockDemon().applyEffect(false);
 		player.cocks[0].cockLength += 1;
 		player.cocks[0].cockThickness += .5;
 	}

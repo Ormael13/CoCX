@@ -31,7 +31,7 @@ public function timeChange():Boolean
 	return false;
 }
 public function timeChangeLarge():Boolean {
-	if (model.time.hours == 6 && flags[kFLAGS.NEISA_FOLLOWER] >= 14 && !prison.inPrison) {
+	if (model.time.hours == 6 && model.time.minutes == 0 && flags[kFLAGS.NEISA_FOLLOWER] >= 14 && !prison.inPrison) {
 		//spriteSelect(SpriteDb.s_isabella);
 		neisaMorningPaycheckCall();
 		return true;
@@ -105,6 +105,7 @@ public function neisaMorningPaycheckCall():void {
 			outputText("\"<i>Heh, I don't mind if you are paying late, mistakes happen. Just make sure you got my pay for tomorrow as well as the missing spirit stones of today.</i>\"\n\n");
 		}
 	}
+	eachMinuteCount(5);
 	doNext(playerMenu);
 }
 

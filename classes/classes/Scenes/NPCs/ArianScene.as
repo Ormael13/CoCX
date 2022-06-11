@@ -230,10 +230,7 @@ private function helpArianWhenYouMeetHim():void {
 	outputText("\n\n\"<i>Just... help me up,</i>\" a masculine voice asks, between coughs.");
 	
 	outputText("\n\nYou lean down and offer the stranger your shoulder, letting them place their arm across your neck before you stand upright, helping pull them to their feet.  Once the hooded figure is standing, the hood slides off [Arian eir] head, to reveal a reptilian muzzle that could only belong to some sort of lizard.  His scales are white, almost absurdly so, and he takes deep breaths, trying to calm down his coughing fit.");
-	if (flags[kFLAGS.CODEX_ENTRY_LIZANS] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_LIZANS] = 1;
-		outputText("\n\n<b>New codex entry unlocked: Lizans!</b>")
-	}		
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_LIZANS);
 	outputText("\n\nOnce it seems like he's calmed down, he looks at you and you gaze at his auburn slitted eyes.  \"<i>Thank you very much.</i>\"  He politely nods at you.  \"<i>Would you mind helping me one more time though?  I'm trying to avoid some people and I'd really appreciate it if you could help me go to a park nearby.</i>\"");
 	
 	outputText("\n\nYou ask him if he's in some kind of trouble first.  \"<i>No, of course not.  My aides are just a tad overprotective, that's all,</i>\" he insists, coughing a bit.");

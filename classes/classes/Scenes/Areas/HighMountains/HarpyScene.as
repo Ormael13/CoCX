@@ -7,11 +7,20 @@ import classes.*;
 import classes.BodyParts.Face;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class HarpyScene extends BaseContent
 	{
 				public function HarpyScene()
 		{
+		}
+
+		public function encounter():void {
+			clearOutput();
+			outputText("A harpy wings out of the sky and attacks!");
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_HARPIES);
+			startCombat(new Harpy());
+			spriteSelect(SpriteDb.s_harpy);
 		}
 
 //*If male/shemale, rape options are Pussy, Ass, Breasts*

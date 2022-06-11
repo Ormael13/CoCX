@@ -15,7 +15,6 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
-import classes.Scenes.Codex;
 import classes.Scenes.Dungeons.D3.Doppleganger;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.LivingStatue;
@@ -31,7 +30,6 @@ import coc.view.ButtonData;
 import coc.view.ButtonDataList;
 
 public class MagicSpecials extends BaseCombatContent {
-	public var codex:Codex = new Codex();
 	public function MagicSpecials() {}
 	internal function applyAutocast2():void {
 		outputText("\n\n");
@@ -769,6 +767,15 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 					bd.disable("Your current soulforce is too low.");
 				}
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) == 5) {
+					bd = buttons.add("True Evasion", FusionSpecialTrueEvasion).hint("Cooldown: 10 turns.\n\nSoulforce cost: " + Math.round(20 * soulskillCost() * soulskillcostmulti()));
+					if (player.soulforce < 20 * soulskillCost() * soulskillcostmulti()) {
+						bd.disable("Your current soulforce is too low.");
+					}
+					else if (player.hasStatusEffect(StatusEffects.CooldownTrueEvasion)) {
+						bd.disable("You need more time before you can use True Evasion again.");
+					}
+				}
 			}
 			if (player.perkv1(PerkLib.ElementalBody) == 2) {//gnome
 				bd = buttons.add("Wild Growth", curry(FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsEarthE), 2)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
@@ -782,6 +789,15 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 					bd.disable("Your current soulforce is too low.");
 				}
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) == 5) {
+					bd = buttons.add("Adamantine Shell", FusionSpecialAdamantineShell).hint("Cooldown: 10 turns.\n\nSoulforce cost: " + Math.round(20 * soulskillCost() * soulskillcostmulti()));
+					if (player.soulforce < 20 * soulskillCost() * soulskillcostmulti()) {
+						bd.disable("Your current soulforce is too low.");
+					}
+					else if (player.hasStatusEffect(StatusEffects.CooldownAdamantineShell)) {
+						bd.disable("You need more time before you can use True Evasion again.");
+					}
+				}
 			}
 			if (player.perkv1(PerkLib.ElementalBody) == 3) {//ignis
 				bd = buttons.add("Pyroblast", curry(FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsFireE), 3)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
@@ -792,6 +808,13 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 					bd.disable("Your current soulforce is too low.");
 				}
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) == 5) {
+					if (player.hasStatusEffect(StatusEffects.FieryRage)) {
+						bd = buttons.add("Fiery Rage(Off)", FusionSpecialFieryRageDeactivate).hint("Deactivate Fiery Rage.");
+					} else {
+						bd = buttons.add("Fiery Rage(On)", FusionSpecialFieryRageActivate).hint("Double your melee damage for a time, by ignoring your body's limits, pushing past them. This technique drain 5% of max soulforce per round, but also increases lust resistance.");
+					}
+				}
 			}
 			if (player.perkv1(PerkLib.ElementalBody) == 4) {//undine
 				bd = buttons.add("Hydraulic Torrent", curry(FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
@@ -801,6 +824,15 @@ public class MagicSpecials extends BaseCombatContent {
 				bd = buttons.add("Lifewater", curry(FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
 				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 					bd.disable("Your current soulforce is too low.");
+				}
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 5) {
+					bd = buttons.add("Moment of Clarity", FusionSpecialMomentOfClarity).hint("Cooldown: 6 turns.\n\nSoulforce cost: " + Math.round(20 * soulskillCost() * soulskillcostmulti()));
+					if (player.soulforce < 20 * soulskillCost() * soulskillcostmulti()) {
+						bd.disable("Your current soulforce is too low.");
+					}
+					else if (player.hasStatusEffect(StatusEffects.CooldownMomentOfClarity)) {
+						bd.disable("You need more time before you can use True Evasion again.");
+					}
 				}
 			}
 		}
@@ -3047,7 +3079,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else player.createStatusEffect(StatusEffects.CooldownKnowledgeOverload,KOCD,0,0,0);
 		outputText("You share some of your well earned knowledge with [themonster] who stands there blankly listening to your spiel in confusion. It's going to take [monster him] a moment to come down from the absurd amount of info you forced into [monster his] tiny head"+(monster.plural?"s":"")+".\n\n");
 		var overloadduration:Number = 0;
-		overloadduration += Math.round(codex.checkUnlocked() / 10);
+		overloadduration += Math.round(camp.codex.checkUnlocked() / 10);
 		monster.createStatusEffect(StatusEffects.Stunned, overloadduration, 0, 0, 0);
 		enemyAI();
 	}
@@ -3065,7 +3097,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var armordebuff:Number = monster.armorDef;
 		var provokeornah:Number = 1.2;
 		monster.armorDef -= armordebuff;
-		provokeornah += Math.round(codex.checkUnlocked() / 100);
+		provokeornah += Math.round(camp.codex.checkUnlocked() / 100);
 		monster.createStatusEffect(StatusEffects.Provoke, 3, provokeornah, armordebuff, 0);
 		enemyAI();
 	}
@@ -3079,7 +3111,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalInstincts)) WWCD -= 1;
 		player.createStatusEffect(StatusEffects.CooldownWeirdWords,WWCD,0,0,0);
 		var damage:Number = scalingBonusIntelligence() * spellMod() * 4;
-		damage *= 1 + (codex.checkUnlocked() * 0.01);
+		damage *= 1 + (camp.codex.checkUnlocked() * 0.01);
 		if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 2) damage *= 1.2;
 		if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) damage *= 1.25;
 		//Determine if critical hit!
@@ -6046,6 +6078,39 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		enemyAI();
 	}
+	public function FusionSpecialTrueEvasion():void {
+		clearOutput();
+		outputText("You disperse with the ambient air letting things run through you rather than blocking them. Good fucking luck to whoever would want to strike you right now.\n\n");
+		player.createStatusEffect(StatusEffects.CooldownTrueEvasion, 10, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.TrueEvasion, 3, 0, 0, 0);
+		enemyAI();
+	}
+	public function FusionSpecialAdamantineShell():void {
+		clearOutput();
+		outputText("You draw strength from the earth, your rock body turning to the metallic sheen and hardness of pure adamantium.\n\n");
+		player.createStatusEffect(StatusEffects.CooldownAdamantineShell, 10, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.AdamantineShell, 7, 0, 0, 0);
+		enemyAI();
+	}
+	public function FusionSpecialFieryRageActivate():void {
+		clearOutput();
+		outputText("You let the flame of anger consume you entering a fiery rage.\n\n");
+		player.createStatusEffect(StatusEffects.FieryRage, 0, 0, 0, 0);
+		enemyAI();
+	}
+	public function FusionSpecialFieryRageDeactivate():void {
+		clearOutput();
+		outputText("You extinguish your flames, calming down from your fiery rage.\n\n");
+		player.removeStatusEffect(StatusEffects.FieryRage);
+		enemyAI();
+	}
+	public function FusionSpecialMomentOfClarity():void {
+		clearOutput();
+		outputText("You empty your mind from needless thought turning yourself calm like the immobile water of a pond, only letting the ripple of the moment bother you. Thanks to your inner calm you manage to shrug off the desires that plagues you to concentrate on the ongoing battle with perfect clarity.\n\n");
+		player.createStatusEffect(StatusEffects.CooldownMomentOfClarity, 6, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.MomentOfClarity, 3, 0, 0, 0);
+		enemyAI();
+	}
 
 	//Arian's stuff
 //Using the Talisman in combat
@@ -6102,3 +6167,4 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 }
 }
+

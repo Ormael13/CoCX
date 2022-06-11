@@ -272,6 +272,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+	  public static const GIANT_DRAGONFLY:int = 21
+	  EnumValue.add(Memories, GIANT_DRAGONFLY, "GIANT_DRAGONFLY", {
+		  id: "Giant Dragonfly Wings",
+		  name: "Giant Dragonfly Wings",
+		  cost: 100,
+		  title: "Dragonfly",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.WingsLevitation;
+		  }
+	  });
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

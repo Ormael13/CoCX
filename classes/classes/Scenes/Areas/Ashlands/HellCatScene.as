@@ -5,18 +5,11 @@
 package classes.Scenes.Areas.Ashlands
 {
 import classes.*;
-import classes.BodyParts.Eyes;
-import classes.BodyParts.Hair;
-import classes.BodyParts.Skin;
-import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
-import classes.Items.Armors.SuccubusArmor;
 import classes.Items.MutationsHelper;
-import classes.Scenes.Areas.Ashlands.HellCat;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
-import classes.CoC;
 
 public class HellCatScene extends BaseContent
 	{
@@ -31,10 +24,7 @@ public function HellCatIntro():void {
 	clearOutput();
 	outputText("As you explore the crag you run into a strange sight. You spot a hooded figure with a cape walking silently toward you. Only when it's finally up close does it throw its cape open revealing the ashen naked skin of a human woman inside or what could have been a human if not for the swishing tail of fire, black furry cat legs and pawed hands with sharp claws. The hood now pulled back reveals a somewhat human face with eyes and hair ");
 	outputText("of literal fire and feline ears to top it off. Well, guess you have seen everything now including pyrocatgirls. Speaking of pyro, the intent of the cat girl manifest as a large fireball which she proceeds to throw at you. Barely dodging this surprise assault you steady yourself just in time to see her grin wide as a 10 inch spiked cat cock slides out of the sheath just above her drooling pussy. You ready your [weapon] for a fight!");
-	if (flags[kFLAGS.CODEX_ENTRY_HELLCATS] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_HELLCATS] = 1;
-		outputText("\n\n<b>New codex entry unlocked: Hellcats!</b>");
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_HELLCATS);
 	if (flags[kFLAGS.WITCHES_SABBATH] < 1) flags[kFLAGS.WITCHES_SABBATH] = 1;
 	startCombat(new HellCat());
 }
@@ -223,11 +213,7 @@ public function WitchesSabbathThirdVisitYes():void {
 	if (!player.hasCock()) {
 		outputText("You mewl in pleasure as the flesh between your legs" + (player.hasVagina() ? " right above your pussy" : "") + " heats up and begins to pulse as something not unlike a sheath forms there. You clench your jaw as something slides out inches after inches and you catch glimpse of your newly formed cat cock ");
 		outputText("pulsing with an unholy purple glow as it grows bigger and bigger until it reaches a full 10 inches in length causing you to orgasm, covering your belly and face with cum.");
-		player.createCock();
-		player.cocks[0].cockLength = 10;
-		player.cocks[0].cockThickness = 2.5;
-		player.cocks[0].cockType = CockTypesEnum.CAT;
-		player.cocks[0].knotMultiplier = 1;
+		transformations.CockCat(0, 10, 2.5).applyEffect(false);
 	}
 	if (player.hasCock() && player.catCocks() < player.cockTotal()) {
 		outputText("Your cock" + (player.cockTotal() > 1 ? "s" : "") + " begins to feel strange as the warmth begins to warp " + (player.cockTotal() > 1 ? "them" : "it") + " against your will.");
@@ -332,30 +318,21 @@ public function WitchesSabbathFourthVisitNoWay():void {
 }
 public function reformallcockstokittycocks():void {
 	for (var i:Number = 0; i < (player.cockTotal()) && player.cocks[i].cockType == CockTypesEnum.CAT; i++) { }
-	player.cocks[i].cockType = CockTypesEnum.CAT;
-	player.cocks[i].knotMultiplier = 1;
-	if (player.cocks[i].cockLength < 10) player.cocks[i].cockLength = 10;
-	if (player.cocks[i].cockThickness < 2.5) player.cocks[i].cockThickness = 2.5;
+	transformations.CockCat(i, 10, 2.5).applyEffect(false);
+
 	if (player.cockTotal() > 0 && player.catCocks() < player.cockTotal()) reformallcockstokittycocks();
 }
 public function reformallcockstokittycocks2():void {
 	if (!player.hasCock()) {
 		outputText("a sheath forms between your legs. You mewl in pleasure as a brand new fat cat cock slowly slide out of your sheath, inches after inches, going erect within seconds and dripping hot drops of precum on the ground. It’s only as it reaches it’s full 10 inches the the throbbing heat build into a full blown orgasm your freshly grown cock splattering the volcanic ground with kitty spunk. ");
-		player.createCock();
-		player.cocks[0].cockLength = 10;
-		player.cocks[0].cockThickness = 2.5;
-		player.cocks[0].cockType = CockTypesEnum.CAT;
-		player.cocks[0].knotMultiplier = 1;
+		transformations.CockCat(0, 10, 2.5).applyEffect(false);
 	}
 	else {
 		outputText("your cock is wrapped in unholy warmth");
 		if (!player.hasSheath()) outputText(", slowly being pulled inside a forming sheath between your legs only to surge back out");
 		outputText(" as it reshape into a whole new form. You mewl in delight as your penis covers with sensitive barbs all ready to scratch the walls of a female vagina or, in your case, the palm of or your waiting hands as you begin to fiercely masturbate, your sensitive tool splattering several drop of cum everywhere. ");
 		for (var i:Number = 0; i < (player.cockTotal()) && player.cocks[i].cockType == CockTypesEnum.CAT; i++) { }
-		player.cocks[i].cockType = CockTypesEnum.CAT;
-		player.cocks[i].knotMultiplier = 1;
-		if (player.cocks[i].cockLength < 10) player.cocks[i].cockLength = 10;
-		if (player.cocks[i].cockThickness < 2.5) player.cocks[i].cockThickness = 2.5;
+		transformations.CockCat(i, 10, 2.5).applyEffect(false);
 	}
 }
 

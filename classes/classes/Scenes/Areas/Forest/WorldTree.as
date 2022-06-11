@@ -170,11 +170,7 @@ public class WorldTree extends BaseContent
 							i++;
 						}
 						i = choices[rand(choices.length)];
-						outputText("Your " + num2Text2(i+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your " + cockDescript(i) + " has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a");
-						if(player.tentacleCocks() > 0) outputText("nother");
-						outputText(" tentacle-cock!</b>\n\n");
-						player.cocks[i].cockType = CockTypesEnum.TENTACLE;
-						player.cocks[i].knotMultiplier = 1.3;
+						transformations.CockTentacle(i).applyEffect();
 						dynStats("sen", 3, "lus", 10);
 						changes++;
 					}
@@ -189,11 +185,7 @@ public class WorldTree extends BaseContent
 								i++;
 							}
 							i = choices2[rand(choices2.length)];
-							outputText("Your " + num2Text2(i+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your " + cockDescript(i) + " has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a");
-							if(player.tentacleCocks() > 0) outputText("nother");
-							outputText(" tentacle-cock!</b>\n\n");
-							player.cocks[i].cockType = CockTypesEnum.TENTACLE;
-							player.cocks[i].knotMultiplier = 1.3;
+							transformations.CockTentacle(i);
 							dynStats("sen", 3, "lus", 10);
 							changes++;
 						}
@@ -207,11 +199,7 @@ public class WorldTree extends BaseContent
 								i++;
 							}
 							i = choices3[rand(choices3.length)];
-							outputText("You feel a strange tingling in your " + num2Text2(i+1) + " cock. You remove your [armor] and look down and witness your cock shifting into a peculiar form. Its tapered, " + player.skinTone + " and crowned by several colorful balls that look sort of like knots. Its covered in sweet smelling dust...  you're secreting pollen!  <b>You now have a");
-							if(player.tentacleCocks() > 0) outputText("nother");
-							outputText(" plantlike stamen cock!</b>\n\n");
-							player.cocks[i].cockType = CockTypesEnum.STAMEN;
-							player.cocks[i].knotMultiplier = 1.3;
+							transformations.CockStamen(i).applyEffect();
 							dynStats("sen", 3, "lus", 10);
 							changes++;
 						}
@@ -226,11 +214,7 @@ public class WorldTree extends BaseContent
 							i++;
 						}
 						i = choices4[rand(choices4.length)];
-						outputText("You feel a strange tingling in your " + num2Text2(i+1) + " cock. You remove your [armor] and look down and witness your cock shifting into a peculiar form. Its tapered, " + player.skinTone + " and crowned by several colorful balls that look sort of like knots. Its covered in sweet smelling dust...  you're secreting pollen!  <b>You now have a");
-						if(player.tentacleCocks() > 0) outputText("nother");
-						outputText(" plantlike stamen cock!</b>\n\n");
-						player.cocks[i].cockType = CockTypesEnum.STAMEN;
-						player.cocks[i].knotMultiplier = 1.3;
+						transformations.CockStamen(i).applyEffect();
 						dynStats("sen", 3, "lus", 10);
 						changes++;
 					}

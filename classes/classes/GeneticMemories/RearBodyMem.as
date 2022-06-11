@@ -140,6 +140,28 @@ package classes.GeneticMemories {
 			}
 		});
 
+	  public static const YETI:int = 9;
+	  EnumValue.add(Memories, YETI, "YETI", {
+		  id: "Yeti Rear Body",
+		  name: "Yeti Fur",
+		  cost: 100,
+		  title: "Yeti",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.RearBodyYetiFur;
+		  }
+	  });
+
+	  public static const METAMORPHIC_GOO:int = 10;
+	  EnumValue.add(Memories, METAMORPHIC_GOO, "METAMORPHIC_GOO", {
+		  id: "Metamorphic Goo",
+		  name: "Metamorphic Goo",
+		  cost: 100,
+		  title: "'Morphic Goo",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.RearBodyMetamorphicGoo;
+		  }
+	  });
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

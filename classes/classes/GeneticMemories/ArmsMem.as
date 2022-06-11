@@ -404,6 +404,39 @@ package classes.GeneticMemories {
 		  }
 	  	});
 
+		public static const YETI:int = 33;
+		EnumValue.add(Memories, YETI, "YETI", {
+		  id: "Yeti Arms",
+		  name: "Yeti Arms",
+		  cost: 100,
+		  title: "Yeti",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.ArmsYeti;
+		  }
+		});
+
+		public static const YUKI_ONNA:int = 34;
+		EnumValue.add(Memories, YUKI_ONNA, "YUKI_ONNA", {
+		  id: "Yuki Onna Arms",
+		  name: "Yuki Onna Arms",
+		  cost: 100,
+		  title: "Yuki Onna",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.ArmsYukiOnna;
+		  }
+		});
+
+	  public static const GOO:int = 35;
+	  EnumValue.add(Memories, GOO, "GOO", {
+		  id: "Goo Arms",
+		  name: "Goo Arms",
+		  cost: 100,
+		  title: "Goo",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.ArmsGoo;
+		  }
+	  });
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

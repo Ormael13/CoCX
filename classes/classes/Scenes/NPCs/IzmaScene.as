@@ -84,10 +84,7 @@ public function meetIzmaAtLake():void {
 	if(flags[kFLAGS.IZMA_WORMS_SCARED] == 1) {
 		//(Check PC for worm infestation, if yes then suppress Izma encounter; if no then output:)
 		outputText("Izma sees you coming from a long way off and picks up her locker, moving toward the waterline.  \"<i>Hey...</i>\" she says, cautiously, as you get close.  \"<i>You don't smell like worms anymore... did you get rid of them?</i>\"  You nod, somewhat apologetically.  She looks relieved.  \"<i>That's good.  Truth be told, I missed your company a bit.  So, want to chat, or maybe look at my books?  Or... did you want to do the other thing?  I'm almost always in the mood for that, too,</i>\" Izma says, with a wink.");
-		if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] <= 0) {
-			flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] = 1;
-			outputText("<b>New codex entry unlocked: Shark-girls & Tigershark-girls!</b>\n\n")
-		}
+		camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SHARKGIRLS);
 		//(set Izmacounter to 5)
 		flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] = 5;
 		//Clear 'worms' toggle
@@ -108,10 +105,7 @@ public function meetIzmaAtLake():void {
 		outputText("\"<i>I'm Izma, a tigershark,</i>\" she replies.\n\n");
 
 		outputText("\"<i>Tigershark?</i>\" you ask.\n\n");
-		if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] <= 0) {
-			flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] = 1;
-			outputText("<b>New codex entry unlocked: Shark-girls & Tigershark-girls!</b>\n\n")
-		}
+		camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SHARKGIRLS);
 		outputText("\"<i>It's a mutation among shark-people.  We're stronger, tougher, faster... and we have some other... err, 'qualities' our sisters lack,</i>\" she explains, with a glance to subtly discourage you from probing the matter further.  Instead, you follow up by asking her where she got her books.  \"<i>These?  Scavenged from around the place.  It's so hard to find recorded knowledge around here, and even some of this stuff isn't in great condition... you know?</i>\"  You agree; that meager pile of books in the chest is still the biggest library you've seen ");
 		if(player.statusEffectv1(StatusEffects.TelAdre) >= 1) outputText("outside the safety of Tel'Adre");
 		else outputText("since you arrived");
@@ -131,10 +125,7 @@ public function meetIzmaAtLake():void {
 	//[After 3 encounters] (Izmacounter = 4)
 	else if(flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] == 4) {
 		outputText("Your exploration of the lakeshore has brought you to Izma's tiny camp once again.  You greet each other normally, but you can't help but notice Izma seems even more distracted than normal.  \"<i>Hey, uh... we're friends, right?</i>\" Izma asks eventually, winning a nod from you.  The tigershark has given you some good company, which you find a rarity in this world.  \"<i>Good, good.  I, uh, have this 'problem' and I need a friend to help me out with it.</i>\"  At first you surmise she's referring to some sort of errand too far from the lake to do on her own, but once she pulls her grass skirt open you understand full well what her 'problem' is.\n\n");
-		if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] <= 0) {
-			flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] = 1;
-			outputText("<b>New codex entry unlocked: Shark-girls & Tigershark-girls!</b>\n\n")
-		}
+		camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SHARKGIRLS);
 		outputText("A fifteen-inch-long, semi-erect shaft flops free from Izma's skirt, with a quartet of baseball-sized gonads swinging beneath it.  It seems roughly like a human's in appearance, though the red skin does make for a noticeable difference.  How Izma was hiding that is beyond you.  You can only guess at its girth once it's fully erect...\n\n");
 		outputText("\"<i>Don't get the wrong idea here, I'm not gonna jump you or anything, I'm just offering.  I mean I could easily catch myself another shark girl or a cultist if I wanted to.  Just... offering, is all,</i>\" Izma says, looking skyward and avoiding eye contact.\n\n");
 		outputText("You roll the idea around in your head for a few seconds before asking just what's in it for you.  Izma smiles, happy to see you're at least pondering the offer.  \"<i>I can pay you,</i>\" she says proudly, earning a raised eyebrow from you.  Izma rummages around her oak chest, pulling out something that looks like a shark tooth.  One thing that catches your eye is the strange purple glow it's giving off.\n\n");
@@ -148,10 +139,7 @@ public function meetIzmaAtLake():void {
 		//[[Encountering Izma after telling her to stay]
 		if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] == -1) {
 			outputText("As you stroll along the lake, you find yourself coming across a familiar looking sea-chest.  It looks like you've stumbled into the path of your tigershark lover, Izma, and sure enough, she promptly emerges dripping from the waters of the lake.  She smiles in delighted surprise at seeing you.\n\n");
-			if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] = 1;
-				outputText("<b>New codex entry unlocked: Shark-girls & Tigershark-girls!</b>\n\n")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SHARKGIRLS);
 			outputText("\"<i>[name]! It's so good to see you!</i>\" she greets, both of you exchanging a quick hug. She sits on a rock beside her trunk, grinning from ear to ear. \"<i>So, what do you want to do today?  Have you thought about bringing your beta with you?</i>\"\n\n");
 			menu();
 			addButton(0, "Borrow", tradeWithFuckingSharkBitches).hint("Borrow a book from Izma of your choice.");
@@ -1710,10 +1698,7 @@ public function izmaFollowerMenu():void {
 		izmaelScene.izmaelMenu();
 		return;
 	}
-	if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] = 1;
-		outputText("<b>New codex entry unlocked: Shark-girls & Tigershark-girls!</b>\n\n")
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SHARKGIRLS);
 	menu();
 	addButton(0, "Appearance", izmaPearance).hint("Examine the tigershark's appearance.");
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 1) {
@@ -2671,7 +2656,7 @@ public function izmaKidsPlaytime():void {
 	//Select correct scene!
 	var choice:Number = choices[rand(choices.length)];
 	if(model.time.hours < 10 && flags[kFLAGS.ANEMONE_KID] > 0 && rand(2) == 0) {
-		anemoneScene.kidAWatchesSharks();
+		kidAScene.kidAWatchesSharks();
 		return;
 	}
 

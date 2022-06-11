@@ -4,12 +4,12 @@
  */
 package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-    import classes.display.SpriteDb;
-	import classes.Scenes.SceneLib;
-	
-	public class ElectraFollower extends NPCAwareContent
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
+
+public class ElectraFollower extends NPCAwareContent
 	{
 		
 		public function ElectraFollower()
@@ -33,10 +33,7 @@ public function firstEnc():void {
 	outputText("She suddenly realizes you are there and her eyes glimmer with a hint of barely contained madness. She stands up, still playing with her pussy, and eyes you up with a manic smile on her face as electricity starts to dance in the air around her.\n\n");
 	outputText("\"<i>You will be my lightning rod!!!!</i>\"");
 	outputText("\n\nYou are under attack by a Raiju!");
-	if (flags[kFLAGS.CODEX_ENTRY_RAIJU] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_RAIJU] = 1;
-		outputText("\n\n<b>New codex entry unlocked: Raiju!</b>")
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_RAIJU);
 	startCombat(new Electra());
 	doNext(playerMenu);
 }

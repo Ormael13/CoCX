@@ -4,29 +4,28 @@
 	 */
 
 package classes.Scenes.NPCs	{
-	
-	import classes.*;
-	import classes.BodyParts.Antennae;
-	import classes.BodyParts.Arms;
-	import classes.BodyParts.Ears;
-	import classes.BodyParts.Eyes;
-	import classes.BodyParts.Face;
-	import classes.BodyParts.Gills;
-	import classes.BodyParts.Hair;
-	import classes.BodyParts.Horns;
-	import classes.BodyParts.LowerBody;
-	import classes.BodyParts.RearBody;
-	import classes.BodyParts.Skin;
-	import classes.BodyParts.Tail;
-	import classes.BodyParts.Tongue;
-	import classes.BodyParts.Wings;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.internals.SaveableState;
-	import classes.Scenes.SceneLib;
-	
-	public class Forgefather extends NPCAwareContent implements SaveableState	{
-		
-		public static var statueProgress:int;
+
+import classes.*;
+import classes.BodyParts.Antennae;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Face;
+import classes.BodyParts.Gills;
+import classes.BodyParts.Hair;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.RearBody;
+import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
+import classes.BodyParts.Wings;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.SaveableState;
+
+public class Forgefather extends NPCAwareContent implements SaveableState	{
+
 		public static var hairLength:int;
 		public static var gender:int;
 		public static var wings:int;
@@ -155,6 +154,21 @@ package classes.Scenes.NPCs	{
 		
 		public function stateObjectName():String {
 			return "ForgeFatherScenes";
+		}
+
+		public static function get statueProgress():int {
+			var p:int = 0;
+			if (Forgefather.gender > 0) ++p;
+			if (Forgefather.wings > 0) ++p;
+			if (Forgefather.tail > 0) ++p;
+			if (Forgefather.lowerBody > 0) ++p;
+			if (Forgefather.arms > 0) ++p;
+			if (Forgefather.hairLength > 0) ++p;
+			if (Forgefather.chest > 0) ++p;
+			if (Forgefather.vagina > 0) ++p;
+			if (Forgefather.cock > 0) ++p;
+			if (Forgefather.balls > 0) ++p;
+			return p;
 		}
 		
 		public function meetForgefather():void	{

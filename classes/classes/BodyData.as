@@ -97,7 +97,7 @@ public class BodyData {
 			return ""+value;
 		};
 		return function(operator:String, value:*):String {
-			return defaultPhrase(operator, value, nameFn,suffix?" " + slotName:"");
+			return defaultPhrase(operator, value, nameFn,suffix?Utils.trimRight(" " + slotName):"");
 		}
 	}
 	
@@ -394,8 +394,8 @@ public class BodyData {
 	}
 	public static const SLOT_TAIL_COUNT:int = _slotid++;
 	EnumValue.add(Slots,SLOT_TAIL_COUNT, "TAIL_COUNT", {
-		suffix:"tail count",
-		name:"tail(s)",
+		name:"tail count",
+		suffix:"tail(s)",
 		nameFn: function(value:int):String {
 			if (value == 0) return "no";
 			return Utils.num2Text(value);
@@ -430,7 +430,7 @@ public class BodyData {
 		}
 	});
 	public function get vaginaType():int {
-		return data[SLOT_TONGUE_TYPE];
+		return data[SLOT_VAGINA_TYPE];
 	}
 	
 	public static const SLOT_WING_TYPE:int = _slotid++;

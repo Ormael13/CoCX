@@ -15,6 +15,7 @@ public class CentaurRace extends Race {
 	public override function setup():void {
 		addScores()
 				.hornType(NONE(Horns.UNICORN,Horns.BICORN), 0, -1000)
+				.isTaur(+2, -1000)
 				.legType(ANY(LowerBody.HOOFED,LowerBody.CLOVEN_HOOFED),+1)
 				.tailType(Tail.HORSE,+1)
 				.skinPlainOnly(+1)

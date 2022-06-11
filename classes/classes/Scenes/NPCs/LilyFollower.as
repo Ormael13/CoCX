@@ -707,6 +707,24 @@ import classes.display.SpriteDb;
 			}
 			//addButton(3, "Izma/el", LilyExIzma);
 			if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_COCK_SIZE] < 1) addButton(4, "Joy", LilyExJoy);
+			addButton(14, "End", LilyExhibitionEnd);
+		}
+		public function LilyExhibitionEnd():void {
+			clearOutput();
+			outputText("You decide that you’ve had enough fun for now, telling your assembled allies as such. You take your Spider-slut by the silk threads binding her, pulling her back towards your "+(flags[kFLAGS.CAMP_BUILT_CABIN] >= 1?"cabin":"bedroll")+". As you remove the bindings, Lily’s ragged breathing slows, and she gives you a hungry moan. Clearly your Drider-slut is still raring to go. Do you have yourself a private session before ending things for now?\n\n");
+			menu();
+			//if (player.hasCock()) addButton(1, "Fuck", name);
+			//if (player.hasVagina()) addButton(2, "LickYou", name);
+			if (LilySubmissivenessMeter >= 40) addButton(3, "Bondage", LilyBondage);
+			else addButtonDisabled(3, "Bondage", "Req. 40%+ submissiveness.");
+			addButton(4, "M.Her", LilyJillOff);
+			addButton(5, "R.Play", LilyRape);
+			addButton(14, "Leave", LilyExhibitionEndLeave)
+		}
+		public function LilyExhibitionEndLeave():void {
+			clearOutput();
+			outputText("You decide to leave Lily as she is for now. She protests, but you give her a grin, heading back out to camp.\n\n");
+			doNext(camp.returnToCampUseOneHour);
 		}
 		public function LilyExEtna():void {
 			clearOutput();

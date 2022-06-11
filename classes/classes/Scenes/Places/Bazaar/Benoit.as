@@ -774,33 +774,28 @@ private function talkToBenoit():void {
 			menu();
 			doYesNo(femoitFirstTimeYes, femoitFirstTimeNo);
 		}
-
-		return;
 	}
 	else if (flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY] != 0 && benoitAffection() >= 40 && (flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 0 || sceneHunter.other) && flags[kFLAGS.FEMOIT_UNLOCKED] == 0)
 	{
 		femoitInitialTalk();
 		doNext(camp.returnToCampUseOneHour);
-		return;
 	}
 	//Subsequent Talk
 	else {
 		var choice:int;
-
 		/* BUILD ZE CHOICES!*/
-		var choices:Array = [0,1,2,3,4,5,6,7,8];
+		var choices:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 		//option 9 is non-lover non-fem only
-		if(!benoitLover() && benoitMF("he","she") == "he") choices[choices.length] = 9;
+		if (!benoitLover() && benoitMF("he", "she") == "he") choices[choices.length] = 9;
 		//Special male benoit fucker only talks
-		if(benoitLover() && benoitMF("he","she") == "he" && player.hasVagina()) {
+		if (benoitLover() && benoitMF("he", "she") == "he" && player.hasVagina()) {
 			choices[choices.length] = 10;
 			choices[choices.length] = 11;
 			choices[choices.length] = 12;
 			choices[choices.length] = 13;
 		}
 		// Femoit specials
-		if (flags[kFLAGS.BENOIT_STATUS] != 0)
-		{
+		if (flags[kFLAGS.BENOIT_STATUS] != 0) {
 			choices.push(14);
 			choices.push(15);
 			if (benoitLover()) choices.push(16);
@@ -809,134 +804,127 @@ private function talkToBenoit():void {
 		//Pick one and go!
 		choice = choices[rand(choices.length)];
 		//(Randomly generated)
-		if(choice == 0) {
-			outputText("You ask if all basilisks talk as [benoit ey] does.");
-			outputText("\n\n\"<i>Only on zis side of ze mountain,</i>\" comes the reply.  \"<i>Ze uzzer side are all stuck-up snobs who speak 'orribly.  Zey are all pale and flabby too, and zeir cooking is terrible.  Pwah!</i>\"  [benoit Ey] makes an exasperated gesture with a claw.");
-		}
-		else if(choice == 1) {
-			outputText("You ask [benoit name] about the dog.");
-			outputText("\n\n\"<i>Pierre 'asn't been giving you trouble, as 'e?  Big stupid mutt does not know 'is mouth from 'is arse.  Which is why 'e checks so often,</i>\" says the basilisk fondly, rubbing the Alsatian behind his ear.  \"<i>I found 'im prowling around eating scraps from ze food sellers when I first got ere; I sink 'e must 'ave belonged to anuzzer trader 'oo left [benoit em] behind.  I do not sink I could run this shop without [benoit em] - every evening I go out into the wilds with [benoit em] and 'unt down more salvage.  'Ee is so good at finding perfectly good sings other people 'ave left behind.  Particularly cloze.  'E loves robes, Pierre.  Don't you, boy?</i>\"  Pierre whines.");
-		}
-		else if(choice == 2) {
-			outputText("You ask [benoit em] about the sign above the shop.");
-			outputText("\n\n\"<i>It's good, isn't it?</i>\"  the trader says proudly.  \"<i>I got a catguy to do it when I first got 'ere and didn't know ze language so well.  'E suggested...</i>\"  [benoit Ey] spreads [benoit eir] claws expressively.  \"<i>'Salamander's Salubrious Salvage'.  Because, everyone likes salamanders, and once zey get in and realize I am not a salamander and it is just a play on words, zey would be so entranced by what I am selling zey would not care.</i>\"  [benoit name] taps the counter happily.  \"<i>In gold print, too!  It is a surprise it has not brought more customers in.</i>\"");
-			outputText("\n\nYou decide not to disillusion the blind basilisk.");
-		}
-		else if(choice == 3) {
-			outputText("You ask if [benoit ey] has always been blind.");
-			outputText("\n\n\"<i>I don't know,</i>\" [benoit ey] says. \"<i>Ask me what red is.</i>\"");
-			outputText("\n\nYou ask what red is.");
-			outputText("\n\n\"<i>'Ow ze fuck should I know?</i>\" the basilisk replies, deadpan.  \"<i>Stop asking stupid questions.</i>\"");
-			outputText("\n\nYou decide not to pursue the subject.");
-		}
-		else if(choice == 4) {
-			outputText("You ask [benoit name] how [benoit ey] got into this line of work.");
-			outputText("\n\n\"<i>I 'ave always worked with salvage,</i>\" [benoit ey] shrugs.  \"<i>Back in ze mountains I worked in ze magpie room - obviously, because I was no good on ze outside.  You can tell from ze weight of sings, and 'ow zey smell, what it is and 'ow much it is worth.  More zan zat you can tell... what it meant to its last owner.  Zat is ze true worse of an object.</i>\"  [benoit Ey] taps his claws on the counter, lost in thought.  \"<i>Ze magpie room is amazing, [name], I wish I could show it to you.  Such good acoustics, filled with ze sound and smell of a thousand pieces of junk - every day a new symphony.  And 'oo would ever steal ze demons' treasures?  You would 'ave to be mad to try to steal from a hall full of basilisks.  Or blind.</i>\"");
-			outputText("\n\n[benoit Ey] laughs throatily, then sighs.  \"<i>Ah, but it was rotten, really - always a sour note underneath everysing.  A thousand basilisks, driven by nussing but greed and lust.  I got sick of it, being stuck in zat place with zose thoughts, zat 'opeless cycle, and one day ran away.  I took what I could carry and used zat to start up here.  Away from ze mountains, I can zink clearly.  I can say what ze uzzer basilisks only know at ze back of zeir minds.</i>\"  [benoit name] slams a fist into the counter, making you jump.  \"<i>Don't ever make a deal with a demon, [name],</i>\" [benoit ey] says, voice thick with rage.  \"<i>Even when you sink it is a win-win?  Zey will still find a way to fuck you good.</i>\"");
-			dynStats("cor", -1);
-		}
-		else if(choice == 5) {
-			outputText("You ask Benoit if [benoit ey] can tell you anything about the Bazaar.");
+		switch (choice) {
+			case 0:
+				outputText("You ask if all basilisks talk as [benoit ey] does.");
+				outputText("\n\n\"<i>Only on zis side of ze mountain,</i>\" comes the reply.  \"<i>Ze uzzer side are all stuck-up snobs who speak 'orribly.  Zey are all pale and flabby too, and zeir cooking is terrible.  Pwah!</i>\"  [benoit Ey] makes an exasperated gesture with a claw.");
+				break;
+			case 1:
+				outputText("You ask [benoit name] about the dog.");
+				outputText("\n\n\"<i>Pierre 'asn't been giving you trouble, as 'e?  Big stupid mutt does not know 'is mouth from 'is arse.  Which is why 'e checks so often,</i>\" says the basilisk fondly, rubbing the Alsatian behind his ear.  \"<i>I found 'im prowling around eating scraps from ze food sellers when I first got ere; I sink 'e must 'ave belonged to anuzzer trader 'oo left [benoit em] behind.  I do not sink I could run this shop without [benoit em] - every evening I go out into the wilds with [benoit em] and 'unt down more salvage.  'Ee is so good at finding perfectly good sings other people 'ave left behind.  Particularly cloze.  'E loves robes, Pierre.  Don't you, boy?</i>\"  Pierre whines.");
+				break;
+			case 2:
+				outputText("You ask [benoit em] about the sign above the shop.");
+				outputText("\n\n\"<i>It's good, isn't it?</i>\"  the trader says proudly.  \"<i>I got a catguy to do it when I first got 'ere and didn't know ze language so well.  'E suggested...</i>\"  [benoit Ey] spreads [benoit eir] claws expressively.  \"<i>'Salamander's Salubrious Salvage'.  Because, everyone likes salamanders, and once zey get in and realize I am not a salamander and it is just a play on words, zey would be so entranced by what I am selling zey would not care.</i>\"  [benoit name] taps the counter happily.  \"<i>In gold print, too!  It is a surprise it has not brought more customers in.</i>\"");
+				outputText("\n\nYou decide not to disillusion the blind basilisk.");
+				break;
+			case 3:
+				outputText("You ask if [benoit ey] has always been blind.");
+				outputText("\n\n\"<i>I don't know,</i>\" [benoit ey] says. \"<i>Ask me what red is.</i>\"");
+				outputText("\n\nYou ask what red is.");
+				outputText("\n\n\"<i>'Ow ze fuck should I know?</i>\" the basilisk replies, deadpan.  \"<i>Stop asking stupid questions.</i>\"");
+				outputText("\n\nYou decide not to pursue the subject.");
+				break;
+			case 4:
+				outputText("You ask [benoit name] how [benoit ey] got into this line of work.");
+				outputText("\n\n\"<i>I 'ave always worked with salvage,</i>\" [benoit ey] shrugs.  \"<i>Back in ze mountains I worked in ze magpie room - obviously, because I was no good on ze outside.  You can tell from ze weight of sings, and 'ow zey smell, what it is and 'ow much it is worth.  More zan zat you can tell... what it meant to its last owner.  Zat is ze true worse of an object.</i>\"  [benoit Ey] taps his claws on the counter, lost in thought.  \"<i>Ze magpie room is amazing, [name], I wish I could show it to you.  Such good acoustics, filled with ze sound and smell of a thousand pieces of junk - every day a new symphony.  And 'oo would ever steal ze demons' treasures?  You would 'ave to be mad to try to steal from a hall full of basilisks.  Or blind.</i>\"");
+				outputText("\n\n[benoit Ey] laughs throatily, then sighs.  \"<i>Ah, but it was rotten, really - always a sour note underneath everysing.  A thousand basilisks, driven by nussing but greed and lust.  I got sick of it, being stuck in zat place with zose thoughts, zat 'opeless cycle, and one day ran away.  I took what I could carry and used zat to start up here.  Away from ze mountains, I can zink clearly.  I can say what ze uzzer basilisks only know at ze back of zeir minds.</i>\"  [benoit name] slams a fist into the counter, making you jump.  \"<i>Don't ever make a deal with a demon, [name],</i>\" [benoit ey] says, voice thick with rage.  \"<i>Even when you sink it is a win-win?  Zey will still find a way to fuck you good.</i>\"");
+				dynStats("cor", -1);
+				break;
+			case 5:
+				outputText("You ask Benoit if [benoit ey] can tell you anything about the Bazaar.");
 
-			outputText("\n\n\"<i>You are really asking zis question to a blind person?</i>\" comes the reply.  \"<i>Ok, I will tell you what I know, for what it is worth.  Over zeir by ze fire, I know zeir are lizans having a good time, because zey shout insults when zey get really drunk.  Zey would get violent with me I sink, if it weren't for Pierre.  Zeir leader has a big problem with her male hormones, judging from ze way she smells.</i>\"  [benoit Ey] sniggers with a distinct lack of sympathy.  \"<i>In ze uzzer direction, I can smell a lot of males together in one place.  Smell like zey are doing something very macho - and a bit painful, from ze sound of zeir walk afterwards.</i>\"  [benoit Ey] points in the opposite direction.  \"<i>Zerr are plenty of, ow you say, crumpets who work around here.  Some of zem can do some pretty wild sings for you, for a fee.  Or so I'm told.</i>\"  [benoit Ey] coughs.");
-		}
-		else if(choice == 6) {
-			outputText("You ask [benoit name] for any rumors going around.");
-			//[Deep cave cleared:
-			if(flags[kFLAGS.DEFEATED_ZETAZ] > 0) outputText("\n\n\"<i>Somesing strange did 'appen ze uzzer day, now you mention it,</i>\" [benoit ey] says, tapping a curved tooth.  \"<i>I got a big group of imps in ere.  I normally don't serve zem because zey are always stealing sings whilst one of zem is paying, but zese guys seemed too worked up to even sink about lifting ze shop - zey smelt of fear.  Zey were buying lots of food and survival gear - one of zem kept going on and on about ze fact zey left \"<i>ze fairy</i>\" behind, until one of ze uzzers slapped 'im and said if 'ee didn't shut up, 'ee would be ze fairy.</i>\"  [benoit name] shrugs.  \"<i>Nasty little sings.  Tasty, though.</i>\"");
-			//[Factory not cleared:
-			else if(flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) outputText("\n\n\"<i>Not anysing very interesting,</i>\" [benoit ey] shrugs.  \"<i>I get a few customers from ze desert city, Tel'Adre, coming in 'ere in secret to pick up a few sings zey cannot find back 'ome.  So zey are still a sing.  You 'ave to wonder ow much longer zey can keep hiding, though.</i>\"");
-			else {
-				//[Factory destroyed:
-				if(flags[kFLAGS.FACTORY_SHUTDOWN] == 2){
-					outputText("\n\n\"<i>I don't know what is 'appening exactly,</i>\" [benoit ey] says, leaning over the counter. \"<i>But ze demons 'oo I trade with, zey seem very worked up about sumsing.  Sumsing went wrong at one of zeir facilities, I sink.  I also get a number of shark ladies coming in ere, asking if I sell fresh water.  Zey also seem very unhappy.</i>\"");
-				}
+				outputText("\n\n\"<i>You are really asking zis question to a blind person?</i>\" comes the reply.  \"<i>Ok, I will tell you what I know, for what it is worth.  Over zeir by ze fire, I know zeir are lizans having a good time, because zey shout insults when zey get really drunk.  Zey would get violent with me I sink, if it weren't for Pierre.  Zeir leader has a big problem with her male hormones, judging from ze way she smells.</i>\"  [benoit Ey] sniggers with a distinct lack of sympathy.  \"<i>In ze uzzer direction, I can smell a lot of males together in one place.  Smell like zey are doing something very macho - and a bit painful, from ze sound of zeir walk afterwards.</i>\"  [benoit Ey] points in the opposite direction.  \"<i>Zerr are plenty of, ow you say, crumpets who work around here.  Some of zem can do some pretty wild sings for you, for a fee.  Or so I'm told.</i>\"  [benoit Ey] coughs.");
+				break;
+			case 6:
+				outputText("You ask [benoit name] for any rumors going around.");
+				//[Deep cave cleared:
+				if (flags[kFLAGS.DEFEATED_ZETAZ] > 0) outputText("\n\n\"<i>Somesing strange did 'appen ze uzzer day, now you mention it,</i>\" [benoit ey] says, tapping a curved tooth.  \"<i>I got a big group of imps in ere.  I normally don't serve zem because zey are always stealing sings whilst one of zem is paying, but zese guys seemed too worked up to even sink about lifting ze shop - zey smelt of fear.  Zey were buying lots of food and survival gear - one of zem kept going on and on about ze fact zey left \"<i>ze fairy</i>\" behind, until one of ze uzzers slapped 'im and said if 'ee didn't shut up, 'ee would be ze fairy.</i>\"  [benoit name] shrugs.  \"<i>Nasty little sings.  Tasty, though.</i>\"");
+				//[Factory not cleared:
+				else if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) outputText("\n\n\"<i>Not anysing very interesting,</i>\" [benoit ey] shrugs.  \"<i>I get a few customers from ze desert city, Tel'Adre, coming in 'ere in secret to pick up a few sings zey cannot find back 'ome.  So zey are still a sing.  You 'ave to wonder ow much longer zey can keep hiding, though.</i>\"");
+				else if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText("\n\n\"<i>I don't know what is 'appening exactly,</i>\" [benoit ey] says, leaning over the counter. \"<i>But ze demons 'oo I trade with, zey seem very worked up about sumsing.  Sumsing went wrong at one of zeir facilities, I sink.  I also get a number of shark ladies coming in ere, asking if I sell fresh water.  Zey also seem very unhappy.</i>\"");
 				else outputText("\n\n\"<i>I don't know what is 'appening exactly,</i>\" [benoit ey] says, leaning over the counter.  \"<i>But ze demons 'oo I trade with, zey seem very worked up about somesing.  Sumsing went wrong at one of zeir facilities, I sink.  I also hear a number of passers-by talking about ze lake.  Apparently it is much cleaner now; many are going back to use it for water.  Now if only someone could make zose crazy cultists go away, eh?</i>\"");
-			}
-		}
-		else if(choice == 7) {
-			outputText("You ask if [benoit ey]'s ever had any trouble with the demons who frequent the Bazaar.");
-			outputText("\n\n\"<i>Not really,</i>\" [benoit ey] replies.  \"<i>I don't like zem, but zey are my main source of income.  Zey are always coming in here to sell zeir fluids.  The truth is it's worthless - I pour most of ze disgusting stuff away.  But it is worth paying for zeir custom because zey are always buying many more potions.  It isn't a good demon party unless you 'ave sprouted two new dicks and four new nipples for it, apparently.  Always one of zem is asking if zey can 'do ze dinosaur' as way of payment.  I 'ate zem so much.</i>\"");
-			if(silly()) outputText("\n\nThe basilisk rubs Pierre behind the ear as [benoit ey] thinks.  \"<i>I did once get a group of demons coming in ere, asking me what 'cheese omelette' is in basilisk.  When I told zem, zey ran away laughing, shouting 'Zat is all you can say! Zat is all you can say!'</i>\"  [benoit Ey] shrugs, irritated.  \"<i>Arseholes.</i>\"");
-		}
-		else if(choice == 8) {
-			outputText("You ask [benoit name] what results when basilisks mate with harpies.");
-			outputText("\n\n\"<i>Most of ze time?  Basilisks,</i>\" [benoit ey] replies, carefully counting gems with [benoit eir] fingers.  \"<i>Some of ze time?  'Arpies.  But ze arpies feed zeir basilisk children to zeir chicks if ze former do not get away in time, so it works out.  Really, we are doing zem and ze world a favor by stealing zeir eggs - if we weren't around ze 'ole world would be drowned in guano by now.</i>\"  Satisfied with the takings, [benoit ey] stows the money away underneath the counter.  \"<i>Very rarely, you get cockatrices.  Now ZEY are weird-looking.</i>\"");
-		}
-		else if(choice == 9) {
-			//non-lover non-fem only
-			outputText("You ask if [benoit name] really can tell who you are just by smell.");
+				break;
+			case 7:
+				outputText("You ask if [benoit ey]'s ever had any trouble with the demons who frequent the Bazaar.");
+				outputText("\n\n\"<i>Not really,</i>\" [benoit ey] replies.  \"<i>I don't like zem, but zey are my main source of income.  Zey are always coming in here to sell zeir fluids.  The truth is its worthless - I pour most of ze disgusting stuff away.  But it is worth paying for zeir custom because zey are always buying many more potions.  It isn't a good demon party unless you 'ave sprouted two new dicks and four new nipples for it, apparently.  Always one of zem is asking if zey can 'do ze dinosaur' as way of payment.  I 'ate zem so much.</i>\"");
+				if (silly()) outputText("\n\nThe basilisk rubs Pierre behind the ear as [benoit ey] thinks.  \"<i>I did once get a group of demons coming in ere, asking me what 'cheese omelette' is in basilisk.  When I told zem, zey ran away laughing, shouting 'Zat is all you can say! Zat is all you can say!'</i>\"  [benoit Ey] shrugs, irritated.  \"<i>Arseholes.</i>\"");
+				break;
+			case 8:
+				outputText("You ask [benoit name] what results when basilisks mate with harpies.");
+				outputText("\n\n\"<i>Most of ze time? Basilisks,</i>\" [benoit ey] replies, carefully counting gems with [benoit eir] fingers."
+					+ " \"<i>Some of ze time? 'Arpies. But ze arpies feed zeir basilisk children to zeir chicks if ze former do not get away"
+					+ " in time, so it works out. Really, we are doing zem and ze world a favor by stealing zeir eggs - if we weren't around ze"
+					+ " 'ole world would be drowned in guano by now.</i>\" Satisfied with the takings, [benoit ey] stows the money away underneath"
+					+ " the counter. \"<i>Very rarely, you get cockatrices. Now ZEY are weird-looking.</i>\"");
+				if (flags[kFLAGS.COCKATRICES_UNLOCKED] <= 0) {
+					outputText("\n\n<b>Perhaps you should try to find one of these elusive hybrids."
+						+ " You suspect the high mountains would be the best place to look.</b>");
+					flags[kFLAGS.COCKATRICES_UNLOCKED] = 1;
+				}
+				break;
+			case 9:
+				//non-lover non-fem only
+				outputText("You ask if [benoit name] really can tell who you are just by smell.");
 
-			if(player.race() == "human") outputText("\n\n\"<i>Certainly!</i>\" [benoit ey] smiles.  \"<i>Ze smell of shaved monkey is distinctive.  I get very few 'uman customers, you know.</i>\"  The basilisk scratches [benoit eir] jaw absent-mindedly.  \"<i>If you do not mind me saying so, [name], you also smell... different.  Like you do not really belong 'ere.  In ze nicest possible way, of course.</i>\"");
-			else outputText("\n\n\"<i>Certainly!</i>\" [benoit ey] smiles.  \"<i>Ze smell of shaved monkey is distinctive.  I get very few 'uman customers, you know.</i>\"  You look down at yourself, then back at the basilisk suspiciously, before saying you don't much look or feel human.  \"<i>Oh, I do not doubt zat,</i>\" says the trader.  \"<i>You 'umans and your flexible genes - zat makes you very alluring, as I am sure you 'ave already noticed, eh?  I am sure somebody 'oo relied upon sight would not be able to tell you are 'uman.  But 'oo you are underneath all zat, zat never changes, and I can smell zat.  All you are doing really is dressing up as something else.  If you wanted to, you could change back tomorrow, if you 'ad ze right ingredienns.</i>\"");
-			//[(male Benoit only)
-			if(benoitMF("he","she") == "he") outputText("  There's a hint of longing jealousy in the basilisk's voice and when [benoit ey] lapses into silence you decide not to push the subject.");
+				if (player.race() == "human") outputText("\n\n\"<i>Certainly!</i>\" [benoit ey] smiles.  \"<i>Ze smell of shaved monkey is distinctive.  I get very few 'uman customers, you know.</i>\"  The basilisk scratches [benoit eir] jaw absent-mindedly.  \"<i>If you do not mind me saying so, [name], you also smell... different.  Like you do not really belong 'ere.  In ze nicest possible way, of course.</i>\"");
+				else outputText("\n\n\"<i>Certainly!</i>\" [benoit ey] smiles.  \"<i>Ze smell of shaved monkey is distinctive.  I get very few 'uman customers, you know.</i>\"  You look down at yourself, then back at the basilisk suspiciously, before saying you don't much look or feel human.  \"<i>Oh, I do not doubt zat,</i>\" says the trader.  \"<i>You 'umans and your flexible genes - zat makes you very alluring, as I am sure you 'ave already noticed, eh?  I am sure somebody 'oo relied upon sight would not be able to tell you are 'uman.  But 'oo you are underneath all zat, zat never changes, and I can smell zat.  All you are doing really is dressing up as something else.  If you wanted to, you could change back tomorrow, if you 'ad ze right ingredienns.</i>\"");
+				//[(male Benoit only)
+				if (benoitMF("he", "she") == "he") outputText("  There's a hint of longing jealousy in the basilisk's voice and when [benoit ey] lapses into silence you decide not to push the subject.");
+				break;
+			//Male Benoit Lover Talk options
+			//(Randomly generated.  Added to normal talk options after PC has had sex with Benoit two times or more regardless of womb quest.)
+			case 10:
+				outputText("You ask Benoit there is anything useful [benoit ey] can tell you about the demon strongholds.");
+				outputText("\n\n\"<i>I'm afraid I cannot be very 'elpful zeir, [name],</i>\" [benoit ey] sighs.  \"<i>Unless you want me to tell you what zey smell like.  I do not sink you want to be knowing zis.  Ze demons, zey were not much in ze business of telling us what zeir plans were, and zey did not much like 'anging around us, which is understandable.   Zair is every treasure you can ever imagine in ze magpie room, but zeir is no way you could ever get at zem unless you could work out some way of making many undreds of basilisks close zeir eyes at once.</i>\"");
+				break;
+			case 11:
+				outputText("You ask Benoit if [benoit ey] can suggest anything to help you fight his brethren in the high mountains.");
+				outputText("\n\n\"<i>You could carry a mirror with you,</i>\" [benoit ey] says, pointing.  \"<i>There's one over zair, isn't zair?</i>\" You report that it is cracked badly - at any rate, you're not carrying a bulky mirror up a mountain two or three times a day.  \"<i>I will give it to you half price,</i>\" [benoit ey] says hopefully.  \"<i>Sink 'ow useful it will be to check for transformations!  You could get somebody else to carry it for you... ok, alright, so you don't want ze mirror.  Most prey, my bruzzers are expecting zem to lash out in a panic.  So use sings which do not involve approaching.  We do not like magic or ranged sings, zey are too unpredictable - I suggest using zem.</i>\"");
+				break;
+			case 12:
+				outputText("\"<i>Gnoll.</i>\"");
+				outputText("\n\n You make a gentle humming noise.");
+				outputText("\n\n\"<i>Bee maiden,</i>\" says Benoit after a moment.");
+				outputText("\n\nYou stamp your feet and snuffle and snort.");
+				outputText("\n\n\"<i>Minotaur,</i>\" says Benoit immediately.  You sigh - [benoit ey]'s too good at this game, and you're running out of creatures.  Thinking briefly, you make a clop-clopping whilst slapping the counter, throwing in a bit of heavy breathing for good measure.");
+				outputText("\n\n\"<i>What ze 'ell is zat supposed to be?</i>\" says Benoit, looking alarmed.  You tell " + benoitMF("him", "her") + " it's a ");
+				outputText("Unitaur.");
+				outputText("\n\n\"<i>A what?</i>\"");
+				outputText("\n\nYou explain that an Unitaur is like a white centaur, only it has a horse's face.  It has massively strong human arms though, and it can cast magic better than anyone, and it can go faster than a cheetah, and... you can't help yourself and begin to giggle at the expression of terror that has emerged on Benoit's face.");
+				outputText("\n\n\"<i>Oh, I see.  You are pulling my tail.  Very amusing.</i>\"  You laugh even harder at the expression of wounded dignity which replaces the terror.");
+				break;
+			case 13:
+				outputText("You ask Benoit if [benoit ey] really, <b>really</b> can tell who you are just by smell.");
+				outputText("\n\n\"<i>Well, of course I can,</i>\" [benoit ey] says teasingly.  \"<i>When you end up smelling like someone else for several hours, it is a difficult sing to mistake.  It is a memento of you and it reminds me of 'appiness; I wish I could smell zat way for longer.  My sexy little shaved monkey.</i>\"");
+				break;
+			case 14:
+				outputText("You ask Benoite how she’s getting on with being the opposite sex.  Benoite stops cleaning the tarnished silver plate in her hands to think.");
+				outputText("\n\n\"<i>It is... different,</i>\" she says eventually, before laughing at the platitude.  \"<i>Ze ‘ole wizzing situation, zis is terrible for instance.  I do not know [name], I am so busy during ze day and it ‘appened so suddenly, it is difficult to properly reflect.  Sometimes I am sinking somesing, like ‘ow somesing smells, and zen I catch myself sinking... would Benoit ‘ave sought zat? Is my perception different because I ‘ave different ‘ormones swirling around my ‘ead?</i>\" She turns the plate around in her hands absently. \"<i>Zerr are... uzzer sings, too.  Sometimes I am smelling a customer is finding me strange, and I realize I am doing somesing which is... male.  Like, somesing I would never ‘ave sought about before, walking with feet splayed instead of in a line.  A ‘undred and one sings to remember to not stand out.  Zat is wearying.</i>\"");
+				if (benoitLover() && player.hasCock() && player.hasVagina()) outputText("\n\nShe smiles shyly at you. \"<i>I am very lucky in one respect zo, because I ‘ave not ‘ad to resink what I find attractive to lie wizz you.  Whatever you ‘ave between your legs you smell and feel female to me, and zat is a comfort.</i>\"");
+				else if (benoitLover() && player.hasCock() && !player.hasVagina()) {
+					outputText("She smiles shyly at you. \"<i>One sing I ‘ave definitely ‘ad to resink is what I find attractive.  I did not find ze male form attractive before, so for my body to... respond... when you are close, zat is when I most feel ze disconnect between my experience and what I am now.  Per’aps zis is also why I ‘ave not sought about it too much; it is better just to rely on instinct.</i>\"");
+					outputText("\n\nCharming, you say.");
+					outputText("\n\nBenoite grins wider at your affected hurt. \"<i>Oh do not worry [name], you ‘ave a beautiful personality.  And ow important exactly do you sink your personal appearance is to me?</i>\"");
+				} else {
+					outputText("\n\nShe smiles shyly at you. \"<i>Listen to me, ow you say, riveting on.  You I am guessing do not see what ze big fuss is- you ‘umans can chop and change whenever you feel like, so to speak.  Must be nice.</i>\"");
+					outputText("\n\nYou point out that your mutability is not always an advantage- it can be used against you, and this land is full of types who would be only too keen to do so.");
+					outputText("\n\nBenoite nods thoughtfully. \"<i>I never sought about it like zat.  Ze demons just love slaves zey can change wizzer a few potions, don’t zey? You are right [name], I will count my blessings in ze future.</i>\"");
+				}
+				break;
+			case 15:
+				outputText("\n\nYou ask Benoite if she isn’t worried that demon customers won’t notice what she is.");
+				outputText("\n\n\"<i>Zat is why I am wearing zis cunning disguise,</i>\" she says, patting her large beret.  She lowers her voice to a growl. \"<i>And I talk like zis when I am serving zem.  Grr.  To be honest I do not sink I ‘ave to be worrying much,</i>\" she goes on in her normal tone, tightening her apron. \"<i>Most of ze demons 'oo come 'ere are not very bright, zey are not very interested in anysing except when zey are next banging zair bits together.  Also I sink most mammals are 'aving trouble telling ze difference between male and female reptiles wizzout looking closely.  Am I right?</i>\" She grins her long, meandering smile at you and you take her point.");
+				break;
+			case 16:
+				outputText("You ask Benoite if she really can tell who you are just by smell.");
+				outputText("\n\n\"<i>Well, of course I can, zilly,</i>\" she says teasingly. \"<i>When you end up smelling like someone else for several hours, it is a difficult sing to mistake.  It is a memento of you and it reminds me of appiness; I wish I could smell zat way for longer.  My sexy little shaved monkey.</i>\"");
+				break;
+			default:
+				CoC_Settings.error("Benoit talk is broken");
 		}
-		//Male Benoit Lover Talk options
-		//(Randomly generated.  Added to normal talk options after PC has had sex with Benoit two times or more regardless of womb quest.)
-		else if(choice == 10) {
-			outputText("You ask Benoit there is anything useful [benoit ey] can tell you about the demon strongholds.");
-
-			outputText("\n\n\"<i>I'm afraid I cannot be very 'elpful zeir, [name],</i>\" [benoit ey] sighs.  \"<i>Unless you want me to tell you what zey smell like.  I do not sink you want to be knowing zis.  Ze demons, zey were not much in ze business of telling us what zeir plans were, and zey did not much like 'anging around us, which is understandable.   Zair is every treasure you can ever imagine in ze magpie room, but zeir is no way you could ever get at zem unless you could work out some way of making many undreds of basilisks close zeir eyes at once.</i>\"");
-		}
-		else if(choice == 11) {
-			outputText("You ask Benoit if [benoit ey] can suggest anything to help you fight his brethren in the high mountains.");
-			outputText("\n\n\"<i>You could carry a mirror with you,</i>\" [benoit ey] says, pointing.  \"<i>There's one over zair, isn't zair?</i>\" You report that it is cracked badly - at any rate, you're not carrying a bulky mirror up a mountain two or three times a day.  \"<i>I will give it to you half price,</i>\" [benoit ey] says hopefully.  \"<i>Sink 'ow useful it will be to check for transformations!  You could get somebody else to carry it for you... ok, alright, so you don't want ze mirror.  Most prey, my bruzzers are expecting zem to lash out in a panic.  So use sings which do not involve approaching.  We do not like magic or ranged sings, zey are too unpredictable - I suggest using zem.</i>\"");
-		}
-		else if(choice == 12) {
-			outputText("\"<i>Gnoll.</i>\"");
-			outputText("\n\n You make a gentle humming noise.");
-			outputText("\n\n\"<i>Bee maiden,</i>\" says Benoit after a moment.");
-			outputText("\n\nYou stamp your feet and snuffle and snort.");
-			outputText("\n\n\"<i>Minotaur,</i>\" says Benoit immediately.  You sigh - [benoit ey]'s too good at this game, and you're running out of creatures.  Thinking briefly, you make a clop-clopping whilst slapping the counter, throwing in a bit of heavy breathing for good measure.");
-
-			outputText("\n\n\"<i>What ze 'ell is zat supposed to be?</i>\" says Benoit, looking alarmed.  You tell " + benoitMF("him","her") + " it's a ");
-			outputText("Unitaur.");
-			outputText("\n\n\"<i>A what?</i>\"");
-
-			outputText("\n\nYou explain that a Unitaur is like a white centaur, only it has a horse's face.  It has massively strong human arms though, and it can cast magic better than anyone, and it can go faster than a cheetah, and... you can't help yourself and begin to giggle at the expression of terror that has emerged on Benoit's face.");
-
-			outputText("\n\n\"<i>Oh, I see.  You are pulling my tail.  Very amusing.</i>\"  You laugh even harder at the expression of wounded dignity which replaces the terror.");
-		}
-		else if(choice == 13) {
-			outputText("You ask Benoit if [benoit ey] really, <b>really</b> can tell who you are just by smell.");
-
-			outputText("\n\n\"<i>Well, of course I can,</i>\" [benoit ey] says teasingly.  \"<i>When you end up smelling like someone else for several hours, it is a difficult sing to mistake.  It is a memento of you and it reminds me of 'appiness; I wish I could smell zat way for longer.  My sexy little shaved monkey.</i>\"");
-		}
-		else if (choice == 14)
-		{
-			outputText("You ask Benoite how she’s getting on with being the opposite sex.  Benoite stops cleaning the tarnished silver plate in her hands to think.");
-
-			outputText("\n\n\"<i>It is... different,</i>\" she says eventually, before laughing at the platitude.  \"<i>Ze ‘ole wizzing situation, zis is terrible for instance.  I do not know [name], I am so busy during ze day and it ‘appened so suddenly, it is difficult to properly reflect.  Sometimes I am sinking somesing, like ‘ow somesing smells, and zen I catch myself sinking... would Benoit ‘ave sought zat? Is my perception different because I ‘ave different ‘ormones swirling around my ‘ead?</i>\" She turns the plate around in her hands absently. \"<i>Zerr are... uzzer sings, too.  Sometimes I am smelling a customer is finding me strange, and I realize I am doing somesing which is... male.  Like, somesing I would never ‘ave sought about before, walking with feet splayed instead of in a line.  A ‘undred and one sings to remember to not stand out.  Zat is wearying.</i>\"");
-
-			if (benoitLover() && player.hasCock() && player.hasVagina()) outputText("\n\nShe smiles shyly at you. \"<i>I am very lucky in one respect zo, because I ‘ave not ‘ad to resink what I find attractive to lie wizz you.  Whatever you ‘ave between your legs you smell and feel female to me, and zat is a comfort.</i>\"");
-			else if (benoitLover() && player.hasCock() && !player.hasVagina())
-			{
-				outputText("She smiles shyly at you. \"<i>One sing I ‘ave definitely ‘ad to resink is what I find attractive.  I did not find ze male form attractive before, so for my body to... respond... when you are close, zat is when I most feel ze disconnect between my experience and what I am now.  Per’aps zis is also why I ‘ave not sought about it too much; it is better just to rely on instinct.</i>\"");
-				outputText("\n\nCharming, you say.");
-				outputText("\n\nBenoite grins wider at your affected hurt. \"<i>Oh do not worry [name], you ‘ave a beautiful personality.  And ow important exactly do you sink your personal appearance is to me?</i>\"");
+		doNext(camp.returnToCampUseOneHour);
 	}
-			else
-			{
-				outputText("\n\nShe smiles shyly at you. \"<i>Listen to me, ow you say, riveting on.  You I am guessing do not see what ze big fuss is- you ‘umans can chop and change whenever you feel like, so to speak.  Must be nice.</i>\"");
-				outputText("\n\nYou point out that your mutability is not always an advantage- it can be used against you, and this land is full of types who would be only too keen to do so.");
-				outputText("\n\nBenoite nods thoughtfully. \"<i>I never sought about it like zat.  Ze demons just love slaves zey can change wizzer a few potions, don’t zey? You are right [name], I will count my blessings in ze future.</i>\"");
-			}
-		}
-		else if (choice == 15)
-		{
-			outputText("\n\nYou ask Benoite if she isn’t worried that demon customers won’t notice what she is.");
-
-			outputText("\n\n\"<i>Zat is why I am wearing zis cunning disguise,</i>\" she says, patting her large beret.  She lowers her voice to a growl. \"<i>And I talk like zis when I am serving zem.  Grr.  To be honest I do not sink I ‘ave to be worrying much,</i>\" she goes on in her normal tone, tightening her apron. \"<i>Most of ze demons 'oo come 'ere are not very bright, zey are not very interested in anysing except when zey are next banging zair bits together.  Also I sink most mammals are 'aving trouble telling ze difference between male and female reptiles wizzout looking closely.  Am I right?</i>\" She grins her long, meandering smile at you and you take her point.");
-		}
-		else if (choice == 16)
-		{
-			outputText("You ask Benoite if she really can tell who you are just by smell.");
-
-			outputText("\n\n\"<i>Well, of course I can, zilly,</i>\" she says teasingly. \"<i>When you end up smelling like someone else for several hours, it is a difficult sing to mistake.  It is a memento of you and it reminds me of appiness; I wish I could smell zat way for longer.  My sexy little shaved monkey.</i>\"");
-		}
-	}
-	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -1448,7 +1436,7 @@ public function femoitInitialTalk():void
 
 		outputText("\n\n\"<i>Well... if you got a double dose of purified zuccubus milk, a large pink egg, zome ovi-elixir and some reptilum, you could probably do it...</i>\"");
 
-		outputText("\n\n(\"<i>Feminize</i>\" option added to [benoit name]'s menu.)");
+		outputText("\n\n(\"<b>Feminize</b>\" option added to [benoit name]'s menu.)");
 
 		flags[kFLAGS.FEMOIT_UNLOCKED] = 1;
 	}
@@ -1761,7 +1749,7 @@ public function femoitSexIntro():void
 		outputText("\n\nYou encourage her to breathe deeply, to try and focus on pushing in time with the contractions.  Benoite groans but does as you instruct, and within moments she is gritting her teeth as the unmistakable form of an egg bulges from her pussy");
 		if (silly()) outputText(".  It's shaped like a complex rhomboidal polygon with 15 sides.");
 		else outputText(", the smoothly curved peak of a jade egg beginning to crest.");
-		outputText("  With a strangled cry of orgasm tinged with pained relief, Benoite pushes it from her passage into your hands. Slick with juices, the egg makes for quite a handful and you find yourself struggling to safely cradle it within your grasp. You quickly place it into the makeshift next at her feet.");
+		outputText("  With a strangled cry of orgasm tinged with pained relief, Benoite pushes it from her passage into your hands. Slick with juices, the egg makes for quite a handful and you find yourself struggling to safely cradle it within your grasp. You quickly place it into the makeshift nest at her feet.");
 
 		if (flags[kFLAGS.FEMOIT_EGGS] >= 2)
 		{
@@ -1769,7 +1757,7 @@ public function femoitSexIntro():void
 
 			if (benoitRegularPreggers())
 			{
-				outputText("\n\nHer labors are over quickly; the clutch isn't that big, and her muscles are already well prepared.  Soon, she's squatting over a pile of" + num2Text(flags[kFLAGS.FEMOIT_EGGS]) + " eggs.");
+				outputText("\n\nHer labors are over quickly; the clutch isn't that big, and her muscles are already well prepared.  Soon, she's squatting over a pile of " + num2Text(flags[kFLAGS.FEMOIT_EGGS]) + " eggs.");
 			}
 			else if (benoitHeavyPreggers())
 			{

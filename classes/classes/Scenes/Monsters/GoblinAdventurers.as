@@ -7,11 +7,10 @@ package classes.Scenes.Monsters
 import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
-import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
-	public class GoblinAdventurers extends Monster
+public class GoblinAdventurers extends Monster
 	{
 		protected function goblinDrugAttack():void {
 			var temp2:Number = rand(5);
@@ -59,11 +58,10 @@ import classes.internals.*;
 				outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n");
 				EngineCore.fatigue(30 + rand(30));
 			}
-			return;
 		}
 		//Lust Needle
 		protected function lustNeedle():void {
-			outputText("With a swift step, of of adventurers vanishes, her movements too quick for you to follow. You take a sharp breath as you feel her ample thighs clench your head in between them, her slick cunt in full view as you take in her scent.");
+			outputText("With a swift step, one of adventurers vanishes, her movements too quick for you to follow. You take a sharp breath as you feel her ample thighs clench your head in between them, her slick cunt in full view as you take in her scent.");
 			//Miss
 			if (player.getEvasionRoll()) 
 			{
@@ -84,7 +82,7 @@ import classes.internals.*;
 			//Miss: 
 			if (player.getEvasionRoll()) 
 			{
-				outputText("\nYou jump backwards, far enough to avoid quick thrust upwards as the middle one attempts to lick the area in which your crotch once stood. Realising situation, they quickly removes themself from the ground and faces you, more determined than before.");
+				outputText("\nYou jump backwards, far enough to avoid quick thrust upwards as the middle one attempts to lick the area in which your crotch once stood. Realising situation, they quickly remove themselves from the ground and faces you, more determined than before.");
 			}
 			//Hit: 
 			else {
@@ -99,8 +97,8 @@ import classes.internals.*;
 		}
 		//Explosion
 		protected function goblinExplosion():void {
-			outputText("Without a second thought, few of the adventurers pulls a thin needle from the belt wrapped around their chest and strikes them against the ground, causing a flame to erupt on the tip. They twirls forward, launching the needle in your direction which subsequently bursts apart and showers you with heat.");
-			outputText("\nYou shield yourself from the explosion, though the goblins has already lit a second one needles which they throws behind you, launching your body forwards as they explodes behind your back. ");
+			outputText("Without a second thought, few of the adventurers pulls a thin needle from the belt wrapped around their chest and strikes them against the ground, causing a flame to erupt on the tip. They twirl forward, launching the needle in your direction which subsequently bursts apart and showers you with heat.");
+			outputText("\nYou shield yourself from the explosion, though the goblins has already lit a second one needles which they throws behind you, launching your body forwards as they explode behind your back. ");
 			//(High HP loss, no lust gain)
 			var damage:int = 50 + rand(50);
 			damage *= 5;
@@ -116,17 +114,11 @@ import classes.internals.*;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.goblinAssassinScene.gobboAssassinRapeIntro2();
+			SceneLib.goblinScene.gobboRapeIntro();
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.gender == 0) {
-				outputText("You collapse in front of the goblins, too wounded to fight.  They growls and kicks you in the head, making your vision swim. As your sight fades, you hear them murmur, \"<i>Fucking dicks can't even bother to grow a dick or cunt.</i>\"");
-				SceneLib.combat.cleanupAfterCombatImpl();
-			} 
-			else {
-				SceneLib.goblinAssassinScene.gobboAssassinBeatYaUp2();
-			}
+			SceneLib.goblinScene.gobboSpecialBeatYaUp();
 		}
 		
 		public function GoblinAdventurers() 

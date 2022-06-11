@@ -10,7 +10,6 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
-import classes.Races.HumanRace;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 import classes.internals.SaveableState;
@@ -179,7 +178,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			outputText("\n\nWhat would you like to do to her?");
             menu();
 			addButtonIfTrue(0, "Use", useVala, "Not genderless!", player.gender > 0, "Fuck the poor fairy while she's asleep.");
-			addButton(1, "Wake", wakeValaUpBeforeYouGoGo, "Not genderless!", player.gender > 0, "Wake the girl up to have some fun.");
+			addButtonIfTrue(1, "Wake", wakeValaUpBeforeYouGoGo, "Not genderless!", player.gender > 0, "Wake the girl up to have some fun.");
             if (SceneLib.shouldraFollower.followerShouldra())
                 addButtonIfTrue(2, "Shouldra?", SceneLib.shouldraFollower.shouldraMeetsCorruptVala, "Not horny enough.",
                     player.lust >= 33, "Ask Shouldra if she has any ideas. Are you sure you want to wake <i>her</i> up too?");

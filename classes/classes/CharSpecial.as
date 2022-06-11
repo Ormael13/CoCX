@@ -1681,6 +1681,7 @@ import classes.Items.*;
 			player.itemSlot1.setItemAndQty(consumables.H_BISCU, 5);
 			if (!player.hasPerk(PerkLib.PastLifeScholar)) player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PastLifeHealer)) player.createPerk(PerkLib.HistoryHealer, 0, 0, 0, 0);
+			player.createKeyItem("Cultivation Manual: Duality", 0, 0, 0, 0);
 			player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
 			player.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);
@@ -1825,6 +1826,7 @@ import classes.Items.*;
 			// Metamorph, Magic Metabolism and Puppeteer suggested perks would be also nice addition to character, but they are not implemented yet
 			player.createPerk(PerkLib.GeneticMemory, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Metamorph, 0, 0, 0, 0);
+			player.createPerk(PerkLib.MetamorphEx, 0, 0, 0, 0);
 			player.createPerk(PerkLib.MagicMetabolism, 0, 0, 0, 0);
 			flags[kFLAGS.HUNGER_ENABLED] = 0.5;
 

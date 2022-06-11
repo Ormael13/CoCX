@@ -72,11 +72,9 @@ public class NightmareScene extends BaseContent
 					if (player.biggestTitSize() < 7) {
 						outputText("Your breasts follow suit, inflating up to an E cup and if you weren't forced down on all fours, you would be groping them yourself to savor their shape.");
 						if (!recalling) {
-							if (player.breastRows.length == 0) {
-								player.createBreastRow();
-								player.breastRows[0].breasts = 2;
-								player.breastRows[0].nipplesPerBreast = 1;
-								player.breastRows[0].breastRating = 7;
+							if (player.bRows() == 0) {
+								player.createBreastRow(7);
+								transformations.UnlockBreasts();
 							}
 							else player.breastRows[0].breastRating = 7;
 						}

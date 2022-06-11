@@ -195,7 +195,7 @@ public function DriderTownEnter():void {
 	//addButton(2, "Children", DriderTownKids);
 	//only at night
 	if (model.time.hours > 20 && BelisaFollower.BelisaAffectionMeter >= 100 && LilyFollower.LilyAffectionMeter >= 100 && TyrantiaFollower.TyrantiaAffectionMeter >= 100) {//
-		if (SisterBangEnabled) {
+		if (SisterBangEnabled && player.hasCock()) {//remove later on req. to have cock
 			if (player.gender > 0) addButton(3, "Bonding", FamilySex);
 			else addButtonDisabled(3, "Bonding", "No bonding for genderless one.");
 		}

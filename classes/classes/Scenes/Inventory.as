@@ -5,7 +5,6 @@ package classes.Scenes
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Items.Armor;
 import classes.Items.ArmorLib;
 import classes.Items.Consumable;
@@ -243,8 +242,8 @@ use namespace CoC;
 						addButton(3, "Egg", SceneLib.emberScene.emberEggInteraction);
 					}
 					if (flags[kFLAGS.ANEMONE_KID] > 0) {
-						SceneLib.anemoneScene.anemoneBarrelDescription();
-						if (model.time.hours >= 6) addButton(4, "Anemone", SceneLib.anemoneScene.approachAnemoneBarrel);
+						SceneLib.kidAScene.anemoneBarrelDescription();
+						if (model.time.hours >= 6) addButton(4, "Anemone", SceneLib.kidAScene.approachAnemoneBarrel);
 					}
 					if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
 						outputText("\nYou have " + flags[kFLAGS.ALRAUNE_SEEDS] + " alraune seeds planted in your garden.");
@@ -602,10 +601,9 @@ use namespace CoC;
 			spriteSelect(null);
 			menu();
 			outputText("You walk inside your warehouse");
-			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) outputText(", looking at the goods stored inside.");
-            else outputText(".")
-			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4) outputText(" and connected to it medium-sized granary looking at the goods and food stored inside.");
-			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("s and connecting them medium-sized granary looking at the goods and food stored inside.");
+			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 2 && flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] < 4) outputText(", looking at the goods stored inside.");
+			else if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 4 && flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] < 6) outputText(" and connected to it medium-sized granary looking at the goods and food stored inside.");
+			else if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("s and connecting them medium-sized granary looking at the goods and food stored inside.");
 			//Warehouse part 1 and 2
 			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 2) {
 				addButton(0, "Warehouse P1", pickItemToPlaceInWarehouse1).hint("Put item in 1st Warehouse.");

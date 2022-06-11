@@ -1,11 +1,9 @@
 package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
-
 
 public class HelScene extends NPCAwareContent implements TimeAwareInterface {
 
@@ -144,10 +142,7 @@ public function encounterAJerkInThePlains():void {
 
 		outputText("\"<i>Hey there, ace!</i>\" she says, grinning through her teeth as she assumes a battle stance.  \"<i>Who's ready for a re-match!?</i>\"");
 	}
-	if (flags[kFLAGS.CODEX_ENTRY_SALAMANDERS] <= 0) {
-		flags[kFLAGS.CODEX_ENTRY_SALAMANDERS] = 1;
-		outputText("<b>New codex entry unlocked: Salamanders!</b>")
-	}
+	camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SALAMANDERS);
 	//FIRST COMBAT – Main Screen
 	startCombat(new Hel());
 }

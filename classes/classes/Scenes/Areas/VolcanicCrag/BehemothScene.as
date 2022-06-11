@@ -93,10 +93,7 @@ public class BehemothScene extends BaseContent
 			clearOutput();
 			outputText("You ask the behemoth about himself. What is he, exactly?");
 			outputText("\n\n\"<i>I don't have an actual name but everybody calls me Behemoth. We were a proud race known for incredible strength, feats, and contests. Here, let me show you something,</i>\" the behemoth says and shows you the codex entry on behemoths.");
-			if (flags[kFLAGS.CODEX_ENTRY_BEHEMOTH] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_BEHEMOTH] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Behemoths!</b>");
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_BEHEMOTH);
 			outputText("\n\n\"<i>I suggest you read the codex entry; it contains detailed information,</i>\" the behemoth says.");
 			outputText("\n\nYou thank him for the codex entry. \"<i>You're always welcome,</i>\" the behemoth says with a smile. His face begins to shift from a happy to a sad look. \"<i>Something wrong?</i>\" you ask. The behemoth replies, \"<i>Well... I had a rough past. I'd rather not talk about it for now. Why not come back later?</i>\" You nod and wrap your arms around the behemoth, giving him a hug before you say farewell and make your way back to camp.");
 			if (flags[kFLAGS.BEHEMOTH_TALK_LEVEL] <= 1) flags[kFLAGS.BEHEMOTH_TALK_LEVEL]++;

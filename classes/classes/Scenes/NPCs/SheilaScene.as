@@ -3881,7 +3881,7 @@ private function talkToDemonSheilaAboutWhatNow():void {
 private function demonSheilaTalkAnotherQuestion():void {
 	clearOutput();
 	//(if lust <=99)
-	if(player.lust <= 99) {
+	if(player.lust < player.maxLust()) {
 		outputText("Sheila reaches farther down, ");
 		//(cock)
 		if(player.hasCock()) outputText("slipping more of her finger and thumb around your penis");

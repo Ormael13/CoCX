@@ -12,6 +12,7 @@ public class RaceTier {
 	public var minScore:int;
 	protected var _buffs:Object;
 	public var extraBonuses:/*String*/Array;
+	public var requiresPreviousTier:Boolean = false;
 	
 	public function RaceTier(
 			tierNumber:int,

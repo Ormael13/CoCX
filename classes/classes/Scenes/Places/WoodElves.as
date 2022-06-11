@@ -110,7 +110,7 @@ package classes.Scenes.Places{
 			clearOutput();
 			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("As you explore the forest, you hear giggling. You feel a rush of air and barely have time to duck before an arrow misses you by an inch. It's the elves again! You try and run for it but a tree vine has firmly attached itself to your left leg, holding you in place and slowly attempting to drag you towards the giggling elves.");
-			outputText("\n\n\"<i>Good day mister adventurer, how kind of you to come to us. Just sit down and relax; let us take great care of you.~♥</i>\"");
+			outputText("\n\n\"<i>Good day " +player.mf("mister", "mis")+ " adventurer, how kind of you to come to us. Just sit down and relax; let us take great care of you.~♥</i>\"");
 			outputText("\n\nHell no! <b>IT'S A FIGHT!</b>");
 			startCombat(new WoodElvesHuntingParty());
 		}
@@ -180,33 +180,22 @@ package classes.Scenes.Places{
 					"A vine wraps around your mouth, silencing any further objections you might have. Your restraints prevent you from looking anywhere but straight ahead, but you feel a great load of sticky resin fall on you from above," +
 					" presumably from the tree. you feel it even more than you might have expected, as the vines grappling you are joined by more, smaller tendrils. They begin removing your clothing, sliding underneath and peeling it off you. As if galvanized by the warm" +
 					", golden ooze now covering you the vines begin swirling and slithering over your now naked body, teasing and tickling you until you begin to feel sensitive and aroused despite your situation." +
-					" You clench in anticipation as one explores between the cheeks of your "+player.assDescript()+", then pushes its way into your "+player.assholeDescript()+"" +
+					" You clench in anticipation as one explores between the cheeks of your [ass], then pushes its way into your [asshole]" +
 					", its tapered end swirling about provocatively inside. The vine already gagging you stifles your cry of indignation as it works its way into your mouth, acting much the same way.\n\n As it does, it begins releasing a sticky, faintly sweet sap that trickles down your throat and coats your tongue, making you feel dizzy and flushed.");
-			if (player.hasVagina()) outputText("You continue to thrash helplessly as a third tentacle winds its way into your "+player.vaginaDescript()+", and despite yourself your hips start to twitch and buck as it eagerly explores your wet cavity, tickling your sensitive places and slowly filling you with  more sticky fluid; it clings to your walls and makes them feel warm and tingly, and before long your slit is engorged and drooling with a mixture of the plant’s secretions and your own feminine fluids.");
+			if (player.hasVagina()) outputText("You continue to thrash helplessly as a third tentacle winds its way into your [vagina], and despite yourself your hips start to twitch and buck as it eagerly explores your wet cavity, tickling your sensitive places and slowly filling you with  more sticky fluid; it clings to your walls and makes them feel warm and tingly, and before long your slit is engorged and drooling with a mixture of the plant’s secretions and your own feminine fluids.");
 			outputText("With a muffled gasp of terror and arousal you realize yet another tentacle is pressing against your belly-button, and you squeal against the tentacle invading your throat as it actually penetrates through you and begins, impossibly, to move about inside your stomach, tickling and teasing you from inside. Insanely, rather than the pain of your stomach being impaled it brings a feeling of soothing warmth - almost relief. ");
-			if (player.hasCoat()) outputText("With a shock you look down at your body to see your "+player.coatType()+" melting away and washing off, replaced by smooth, silky skin. ");
+			if (player.hasCoat()) outputText("With a shock you look down at your body to see your [skinfurscales] melting away and washing off, replaced by smooth, silky skin. ");
 			if (player.tailType != Tail.NONE || player.wings.type != Wings.NONE || player.legCount != 2) outputText("Soon after, your other extra, unneeded appendages begin to shrivel and melt away as well. ");
 			if (player.hasCoat() || player.tailType != Tail.NONE || player.wings.type != Wings.NONE || player.legCount != 2) outputText("despite the radical changes your form is undergoing, ");
 			else outputText("Despite being violated in every hole you have, and some you don’t, ");
 			outputText("a wave of peace and well-being comes over you, dispelling your panic and all sense of urgency as it does. How can this be a violation when it feels so <b>good</b>? ");
 			if (player.cocks.length >= 1){
 				outputText("You sigh in pleasure as you feel a vine wrapping slowly about the base of your male organ");
-				if (player.cocks.length >= 2) outputText("s");
-				outputText(", and don’t even flinch as it pulls ");
-				if (player.cocks.length == 1) outputText("it ");
-				if (player.cocks.length >= 2) outputText("them ");
-				outputText("off as easily as one might pluck a ripe fruit from a tree. You never needed ");
-				if (player.cocks.length == 1) outputText("it ");
-				if (player.cocks.length >= 2) outputText("them ");
-				outputText("anyway, ridiculous, ugly thing");
-				if (player.cocks.length >= 2) outputText("s");
-				outputText("; you’re much better off without ");
-				if (player.cocks.length == 1) outputText("it.");
-				if (player.cocks.length >= 2) outputText("them.");
+				if (player.cocks.length >= 2) outputText("s, and don’t even flinch as it pulls them off as easily as one might pluck a ripe fruit from a tree. You never needed them anyway, ridiculous, ugly things; you’re much better off without them.");
+				else outputText(", and don’t even flinch as it pulls it off as easily as one might pluck a ripe fruit from a tree. You never needed it anyway, ridiculous, ugly thing; you’re much better off without it.");
 				if (!player.hasVagina()) {
 					outputText(" Instead you feel a rising sense of ecstatic rightness as a new slit forms where ");
-					if (player.cocks.length == 1) outputText("it");
-					if (player.cocks.length >= 2 ) outputText("they");
+					outputText(player.cocks.length == 1 ? "it" : "they");
 					outputText(" once hideously stuck out of you. Ah, this is much more fitting! And <b>so</b> much more pleasurable!");
 				}
 			}

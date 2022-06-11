@@ -7,10 +7,7 @@ package classes.Scenes
 import classes.*;
 import classes.BodyParts.*;
 import classes.GeneticMemories.*;
-import classes.IMutationPerkType;
-import classes.IMutations.IMutationsLib;
 import classes.GlobalFlags.kFLAGS;
-import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Areas.Desert.NagaScene;
@@ -41,8 +38,6 @@ import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.NPCs.WaizAbi;
 import classes.Scenes.Places.Boat.Marae;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
-import classes.Items.*;
-import classes.Scenes.Places.TrollVillage;
 import classes.Stats.Buff;
 
 use namespace CoC;
@@ -59,6 +54,8 @@ public class Soulforce extends BaseContent
 	public function accessSoulforceMenu():void {
 		clearOutput();
 		SoulCultivationLvL();
+		outputText("<b>Perk v1:</b> " + player.perkv1(PerkLib.JobSoulCultivator) + "\n");
+		outputText("<b>Perk v2:</b> " + player.perkv2(PerkLib.JobSoulCultivator) + "\n");
 		var dailySoulforceUsesLimit:Number = 0;
 		if (player.hasPerk(PerkLib.JobSoulCultivator)) dailySoulforceUsesLimit++;
 		if (player.hasPerk(PerkLib.SoulWarrior)) dailySoulforceUsesLimit++;
@@ -127,8 +124,8 @@ public class Soulforce extends BaseContent
 				}
 			}
 		*/	menu();
-		if (player.hasPerk(PerkLib.EnergyDependent)) addButtonDisabled(0, "Cultivate", "You're unable to recover soulforce by cultivating.");
-		else addButton(0, "Cultivate", SoulforceRegeneration).hint("Spend some time on restoring some of the used soulforce.");
+		if (player.hasPerk(PerkLib.EnergyDependent)) addButtonDisabled(0, "Meditations", "You're unable to recover soulforce by meditating.");
+		else addButton(0, "Meditations", SoulforceRegeneration).hint("Spend some time on restoring some of the used soulforce.");
 		if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(1, "Contemplate", DaoContemplations).hint("Dao Contemplations");
 		else addButtonDisabled(1, "???", "Req.  successfully surviving 1st Tribulation.");
 		if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) {
@@ -155,6 +152,8 @@ public class Soulforce extends BaseContent
 		}
 		else addButtonDisabled(9, "???", "Req. Soul Apprentice stage.");
 		addButton(10, "Cheats", SoulforceCheats1, 0).hint("This should be obvious. ^^");//block this option at each public version
+		if (player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(12, "Cultivation", Contemplations).hint("Contemplate mysteries of the world to try progress your soul cultivation path. Maybe even attain cultivation base breakthrou.");
+		else addButtonDisabled(12, "Cultivation", "Req. to have 100% or 30% of max SF for major/minor base breakthrou if all other req. are meet.");
 		if (canfaceTribulation()) addButton(13, "Tribulation", tribulationsPrompt).hint("To face it or not? That's the question.");
 		else addButtonDisabled(13, "Tribulation", "It's not (yet) time for this.");
 		addButton(14, "Back", playerMenu);
@@ -170,14 +169,14 @@ public class Soulforce extends BaseContent
 			var pLvl:int = 6;
 			var cLvlTier:int = 0;
 			var perkTier:PerkType;*/
-		var cultTier:Array = [PerkLib.JobSoulCultivator, PerkLib.SoulApprentice, PerkLib.SoulPersonage, PerkLib.SoulWarrior, PerkLib.SoulSprite, PerkLib.SoulScholar, PerkLib.SoulElder, PerkLib.SoulExalt, PerkLib.SoulOverlord, PerkLib.SoulTyrant, PerkLib.SoulKing, PerkLib.SoulEmperor, PerkLib.SoulAncestor];
+		/*var cultTier:Array = [PerkLib.JobSoulCultivator, PerkLib.SoulApprentice, PerkLib.SoulPersonage, PerkLib.SoulWarrior, PerkLib.SoulSprite, PerkLib.SoulScholar, PerkLib.SoulElder, PerkLib.SoulExalt, PerkLib.SoulOverlord, PerkLib.SoulTyrant, PerkLib.SoulKing, PerkLib.SoulEmperor, PerkLib.SoulAncestor];
 		var pLvlMax:int = 76;	//Should only need to change this and above array for future expansion.
 		var cultRankTier:Array = ["Late ", "Early ", "Middle "];
 		var lNeed:Boolean = true;
 		var pLvl:int = 6;
 		var cLvlTier:int = 0;
 		var cultStanding:String = "Mortal";
-		flags[kFLAGS.SOUL_CULTIVATION] = 0;
+		flags[kFLAGS.SOUL_CULTIVATION] = 0;*/
 		/*for (var i:int = 0; i < cultTier.length(); i++){	//This *should* work?
 				if (!player.hasPerk(cultTier[i])){
 					if (i == 0) break;
@@ -192,7 +191,7 @@ public class Soulforce extends BaseContent
 					break;
 				}
 			}*/
-		if (player.level >= 4 && player.hasPerk(cultTier[0])){	//Deprecating.
+		/*if (player.level >= 4 && player.hasPerk(cultTier[0])){	//Deprecating.
 			flags[kFLAGS.SOUL_CULTIVATION] +=3;
 		}
 		else if (player.level >= 2 && player.hasPerk(cultTier[0])){	//Actually.... I can also get rid of the checks for the cultTier here, since you have to have that perk beforehand to get to this menu in the first place...
@@ -218,7 +217,38 @@ public class Soulforce extends BaseContent
 			}
 			pLvl += 2;
 			cLvlTier += 1;
+		}*/
+		var cultStanding:String = "";
+		if (flags[kFLAGS.SOUL_CULTIVATION] >= 1) {
+			var prefix:String = "";
+			switch(player.perkv1(PerkLib.JobSoulCultivator)){
+				case 1:
+					prefix = "Early ";
+					break;
+				case 2:
+					prefix = "Middle ";
+					break;
+				case 3:
+					prefix = "Late ";
+					break;
+			}
+			var suffix:String = "";
+			switch(player.perkv2(PerkLib.JobSoulCultivator)){
+				case 1:
+					suffix = " Apprentice";
+					break;
+				case 2:
+					suffix = " Personage";
+					break;
+				case 3:
+					suffix = " Warrior";
+					break;
+			}
+			cultStanding += prefix;
+			cultStanding += "Soul";
+			cultStanding += suffix;
 		}
+		else cultStanding = "Mortal";
 		outputText("<b>Cultivation stage:</b> " + cultStanding + "\n");
 	}
 
@@ -264,28 +294,49 @@ public class Soulforce extends BaseContent
 		menuItems.push("LustBreath", (player.hasPerk(PerkLib.DragonPoisonBreath))? FairyTest: false, "Replacing 1 perk with another");
 		menuItems.push("TyrantPF", (TyrantiaFollower.TyrantiaFollowerStage == 5 && TyrantiaFollower.TyraniaCorrupteedLegendaries == 0)? FairyTest5: false, "Patching Tyrantia corrupted legendaries unlock");
 		menuItems.push("LilyPregF", (DriderTown.LilyKidsPCPregnancy != 0 && LilyFollower.LilyFollowerState)? FairyTest3: false, "Curing Lily Infertility ^^");
+		menuItems.push("NewSoulCult", applyHangover, "Cripple your cultivation base to start anew (with a bit more milf fluff in your life).");
+		menuItems.push("Refill SF", refillSoulforce, "Refill your Soulforce.");
+		menuItems.push("EvaMutateReq", mutateReqNope, "Turns on/off mutation requirements")
 		//menuItems.push("WeaponsXPtest", SceneLib.dilapidatedShrine.weaponsXPtrader, "");
-		menuItems.push("HangoverTest", applyHangover, "");
 		menuGen(menuItems, page, accessSoulforceMenu);
 	}
 
-private function applyHangover():void {
-	//Status: Hangover.
-	//v1 = hours left.
-	//v2 = strength taken
-	//v3 = speed taken
-	//v4 = intelligence
-
-	if(player.statStore.hasBuff('Hangover')) {
-		player.statStore.removeBuffs('Hangover');
+	private function mutateReqNope():void{
+		clearOutput();
+		flags[kFLAGS.EVA_MUTATIONS_BYPASS] = !flags[kFLAGS.EVA_MUTATIONS_BYPASS];
+		outputText("Mutation requirements are now " + (flags[kFLAGS.EVA_MUTATIONS_BYPASS] ? "off" : "on") + ".");
+		doNext(curry(SoulforceCheats1, 3));
 	}
-	player.statStore.addBuffObject({'str':-5,'spe':-10,'int':-15},'Hangover',{text:'Hangover', rate:Buff.RATE_HOURS, tick: 8});
-	showStatDown('str');
-	showStatDown('spe');
-	showStatDown('int');
-	statScreenRefresh();
-	doNext(curry(SoulforceCheats1, 0));
-}
+
+	private function refillSoulforce():void{
+		clearOutput();
+		player.soulforce = player.maxOverSoulforce();
+		outputText("Soulforce filled up.");
+		statScreenRefresh();
+		doNext(curry(SoulforceCheats1, 3));
+	}
+
+	private function applyHangover():void {
+		if (player.hasPerk(PerkLib.JobSoulCultivator)) player.removePerk(PerkLib.JobSoulCultivator);
+		if (player.hasKeyItem("Cultivation Manual: Duality") >= 0) player.removeKeyItem("Cultivation Manual: Duality");
+		if (player.hasPerk(PerkLib.SoulApprentice)) player.removePerk(PerkLib.SoulApprentice);
+		if (player.hasPerk(PerkLib.Dantain)) player.removePerk(PerkLib.Dantain);
+		if (player.hasPerk(PerkLib.DaoistCultivator)) player.removePerk(PerkLib.DaoistCultivator);
+		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) player.removePerk(PerkLib.DaoistApprenticeStage);
+		if (player.hasPerk(PerkLib.DaoistWarriorStage)) player.removePerk(PerkLib.DaoistWarriorStage);
+		if (player.hasPerk(PerkLib.DaoistElderStage)) player.removePerk(PerkLib.DaoistElderStage);
+		if (player.hasPerk(PerkLib.DaoistOverlordStage)) player.removePerk(PerkLib.DaoistOverlordStage);
+		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0) player.removeKeyItem("Cultivation Manual: My Dao Sticks are better than Yours");
+		if (player.hasKeyItem("Cultivation Manual: Body like a Coke Fiend") >= 0) player.removeKeyItem("Cultivation Manual: Body like a Coke Fiend");
+		if (player.hasKeyItem("Cultivation Manual: Heart-shaped Eyed She-Devil") >= 0) player.removeKeyItem("Cultivation Manual: Heart-shaped Eyed She-Devil");
+		if (player.hasPerk(PerkLib.SoulPersonage)) player.removePerk(PerkLib.SoulPersonage);
+		if (player.hasPerk(PerkLib.SoulWarrior)) player.removePerk(PerkLib.SoulWarrior);/*
+		if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.HclassHeavenTribulationSurvivor);
+		if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.GclassHeavenTribulationSurvivor);
+		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.FclassHeavenTribulationSurvivor);*/
+		if (flags[kFLAGS.SOUL_CULTIVATION] > 0) flags[kFLAGS.SOUL_CULTIVATION] = 0;
+		doNext(curry(SoulforceCheats1, 0));
+	}
 	public function FairyTest3():void {
 		DriderTown.LilyKidsPCPregnancy = 0;
 		doNext(curry(SoulforceCheats1, 0));
@@ -360,7 +411,6 @@ private function applyHangover():void {
 		else
 			outputText("\nNo shards, go complete quests :(");
 	}
-
 	public function cheatRemoveRP():void {
 		clearOutput();
 		if (player.removePerk(PerkLib.RacialParagon)) {
@@ -371,7 +421,6 @@ private function applyHangover():void {
 			outputText("No such perk.");
 		doNext(camp.doCamp);
 	}
-
 	public function cheatRemoveShard():void {
 		if(player.keyItemvX("Radiant shard", 1) == 1)
 			player.removeKeyItem("Radiant shard");
@@ -380,7 +429,6 @@ private function applyHangover():void {
 		outputText("\n\n<b>You currently have "+ player.keyItemvX("Radiant shard", 1) +" radiant shards.</b>");
 		doNext(curry(SoulforceCheats1, 2));
 	}
-
 	public function cheatAddShard(cnt:int = 1):void {
 		if (player.hasKeyItem("Radiant shard") >= 0)
 			player.addKeyValue("Radiant shard", 1, cnt);
@@ -389,7 +437,6 @@ private function applyHangover():void {
 		outputText("\n\n<b>You currently have "+ player.keyItemvX("Radiant shard", 1) + " radiant shards.</b>");
 		doNext(curry(SoulforceCheats1,2));
 	}
-
 	private function jiangshiBuggedItemsCleanUpCrew0():void {
 		if (player.weapon != WeaponLib.FISTS) {
 			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
@@ -691,7 +738,29 @@ private function applyHangover():void {
 		for each (var tailMem: * in TailMem.Memories) {
 			Metamorph.GeneticMemoryStorage[tailMem.id] = true;
 		}
+		for each (var cockMem: * in CockMem.Memories) {
+			Metamorph.GeneticMemoryStorage[cockMem.id] = true;
+		}
+		for each (var cockCountMem: * in CockCountMem.Memories) {
+			Metamorph.GeneticMemoryStorage[cockCountMem.id] = true;
+		}
+		for each (var vaginaMem: * in VaginaMem.Memories) {
+			Metamorph.GeneticMemoryStorage[vaginaMem.id] = true;
+		}
+		for each (var vaginaCountMem: * in VaginaCountMem.Memories) {
+			//Filter out vagina after 1 //TODO:multiVag support? Will this break if 2nd vag unlocked?
+			if (vaginaCountMem.id == "One Vagina")
+				Metamorph.GeneticMemoryStorage[vaginaCountMem.id] = true;
+		}
+		for each (var ballsMem: * in BallsMem.Memories) {
+			Metamorph.GeneticMemoryStorage[ballsMem.id] = true;
+		}
+		for each (var breastMem: * in BreastMem.Memories) {
+			Metamorph.GeneticMemoryStorage[breastMem.id] = true;
+		}
 		Metamorph.GeneticMemoryStorage["Taur Lower Body"] = true;
+		clearOutput();
+		outputText("All metamorph options unlocked.");
 		doNext(curry(SoulforceCheats1, 0));
 	}
 	public function PerkGalore1():void {
@@ -1031,15 +1100,15 @@ private function applyHangover():void {
 	public function StatsAscensionMenu():void {
 		menu();
 		addButton(0, "Ascension", StatsAscensionMenu2);
-		addButton(5, "Str", StatsMenuStr).hint("Adj Str.");
-		addButton(6, "Tou", StatsMenuTou).hint("Adj Tou.");
-		addButton(7, "Spe", StatsMenuSpe).hint("Adj Spe.");
-		addButton(8, "Inte", StatsMenuInte).hint("Adj Inte.");
-		addButton(9, "Wis", StatsMenuWis).hint("Adj Wis.");
+		addButton(5, "Str", StatsMenuCore, "Str").hint("Adj Str.");
+		addButton(6, "Tou", StatsMenuCore, "Tou").hint("Adj Tou.");
+		addButton(7, "Spe", StatsMenuCore, "Spe").hint("Adj Spe.");
+		addButton(8, "Int", StatsMenuCore, "Int").hint("Adj Int.");
+		addButton(9,"Wis", StatsMenuCore, "Wis").hint("Adj Wis.");
 		addButton(10, "Tone/Thicc/Fem", StatsMenuToneThicknessFeminity).hint("Adj Tone/Thickness/Feminity.");
-		addButton(11, "Lib", StatsMenuLib).hint("Adj Lib.");
-		addButton(12, "Sen", StatsMenuSen).hint("Adj Sen.");
-		addButton(13, "Cor", StatsMenuCor).hint("Adj Cor.");
+		addButton(11,"Lib", StatsMenuCore, "Lib").hint("Adj Lib.");
+		addButton(12,"Sen", StatsMenuCore, "Sen").hint("Adj Sens.");
+		addButton(13,"Cor", StatsMenuCore, "Cor").hint("Adj Cor.");
 		addButton(14, "Back", curry(SoulforceCheats1, 0));
 	}
 	public function StatsAscensionMenu2():void {
@@ -1047,155 +1116,65 @@ private function applyHangover():void {
 		addButton(0, "EarlyAscension", EarlyAscension).hint("Allowing to premature ascension.");
 		addButton(1, "NG tier ++", IncreaseAscensionCounter).hint("Allowing to increase ascension counter.");
 		if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) addButton(2, "NG tier --", DecreaseAscensionCounter).hint("Allowing to decrease ascension counter.");
-		addButton(5, "AscenPerks01", AddAscensionPerkPoints1).hint("Add 1 ascension perk point for use during ascending to the next NG+ tier.");
-		addButton(6, "AscenPerks05", AddAscensionPerkPoints2).hint("Add 5 ascension perk points for use during ascending to the next NG+ tier.");
-		addButton(7, "AscenPerks10", AddAscensionPerkPoints3).hint("Add 10 ascension perk points for use during ascending to the next NG+ tier.");
-		addButton(8, "AscenPerks50", AddAscensionPerkPoints4).hint("Add 50 ascension perk points for use during ascending to the next NG+ tier.");
-		addButton(9, "AscenPerks100", AddAscensionPerkPoints5).hint("Add 100 ascension perk points for use during ascending to the next NG+ tier.");
+		addButton(5, "AscenPerks01", AddAscenionPerkPoints, 1).hint("Add 1 ascension perk point for use during ascending to the next NG+ tier.");
+		addButton(6, "AscenPerks05", AddAscenionPerkPoints, 5).hint("Add 5 ascension perk points for use during ascending to the next NG+ tier.");
+		addButton(7, "AscenPerks10", AddAscenionPerkPoints, 10).hint("Add 10 ascension perk points for use during ascending to the next NG+ tier.");
+		addButton(8, "AscenPerks50", AddAscenionPerkPoints, 50).hint("Add 50 ascension perk points for use during ascending to the next NG+ tier.");
+		addButton(9, "AscenPerks100", AddAscenionPerkPoints, 100).hint("Add 100 ascension perk points for use during ascending to the next NG+ tier.");
 		addButton(14, "Back", StatsAscensionMenu);
 	}
-	public function StatsMenuStr():void {
+
+	public function StatsMenuCore(type:String = "Str"):void{
 		menu();
-		addButton(0, "Str Up 1", AddStr1).hint("Add 1 to Str.");
-		addButton(5, "Str Down 1", SubStr1).hint("Substract 1 from Str.");
-		addButton(1, "Str Up 2", AddStr2).hint("Add 10 to Str.");
-		addButton(6, "Str Down 2", SubStr2).hint("Substract 10 from Str.");
-		addButton(2, "Str Up 3", AddStr3).hint("Add 50 to Str.");
-		addButton(7, "Str Down 3", SubStr3).hint("Substract 50 from Str.");
-		addButton(3, "Str Up 4", AddStr4).hint("Add 200 to Str.");
-		addButton(8, "Str Down 4", SubStr4).hint("Substract 200 from Str.");
-		addButton(4, "Str Up 5", AddStr5).hint("Add 1000 to Str.");
-		addButton(9, "Str Down 5", SubStr5).hint("Substract 1000 from Str.");
+		addButton(0, "Inc +1", ModCoreStats,type,1).hint("Add 1 to " + type +".");
+		addButton(5, "Dec -1", ModCoreStats,type,-1).hint("Substract 1 from " + type +".");
+		addButton(1, "Inc +10", ModCoreStats,type,10).hint("Add 10 to " + type +".");
+		addButton(6, "Dec -10", ModCoreStats,type,-10).hint("Substract 10 from " + type +".");
+		if (type != "Tone" || type != "Thicc" || type != "Fem") {
+			addButton(2, "Inc +50", ModCoreStats,type,50).hint("Add 50 to " + type +".");
+			addButton(7, "Dec -50", ModCoreStats,type,-50).hint("Substract 50 from " + type +".");
+			addButton(3, "Inc +200", ModCoreStats,type,200).hint("Add 200 to " + type +".");
+			addButton(8, "Dec -200", ModCoreStats,type,-200).hint("Substract 200 from " + type +".");
+			addButton(4, "Inc +1000", ModCoreStats,type,1000).hint("Add 1000 to " + type +".");
+			addButton(9, "Dec -1000", ModCoreStats,type,-1000).hint("Substract 1000 from " + type +".");
+		}
 		addButton(14, "Back", StatsAscensionMenu);
 	}
-	public function StatsMenuTou():void {
-		menu();
-		addButton(0, "Tou Up 1", AddTou1).hint("Add 1 to Tou.");
-		addButton(5, "Tou Down 1", SubTou1).hint("Substract 1 from Tou.");
-		addButton(1, "Tou Up 2", AddTou2).hint("Add 10 to Tou.");
-		addButton(6, "Tou Down 2", SubTou2).hint("Substract 10 from Tou.");
-		addButton(2, "Tou Up 3", AddTou3).hint("Add 50 to Tou.");
-		addButton(7, "Tou Down 3", SubTou3).hint("Substract 50 from Tou.");
-		addButton(3, "Tou Up 4", AddTou4).hint("Add 200 to Tou.");
-		addButton(8, "Tou Down 4", SubTou4).hint("Substract 200 from Tou.");
-		addButton(4, "Tou Up 5", AddTou5).hint("Add 1000 to Tou.");
-		addButton(9, "Tou Down 5", SubTou5).hint("Substract 1000 from Tou.");
-		addButton(14, "Back", StatsAscensionMenu);
-	}
-	public function StatsMenuSpe():void {
-		menu();
-		addButton(0, "Spe Up 1", AddSpe1).hint("Add 1 to Spe.");
-		addButton(5, "Spe Down 1", SubSpe1).hint("Substract 1 from Spe.");
-		addButton(1, "Spe Up 2", AddSpe2).hint("Add 10 to Spe.");
-		addButton(6, "Spe Down 2", SubSpe2).hint("Substract 10 from Spe.");
-		addButton(2, "Spe Up 3", AddSpe3).hint("Add 50 to Spe.");
-		addButton(7, "Spe Down 3", SubSpe3).hint("Substract 50 from Spe.");
-		addButton(3, "Spe Up 4", AddSpe4).hint("Add 200 to Spe.");
-		addButton(8, "Spe Down 4", SubSpe4).hint("Substract 200 from Spe.");
-		addButton(4, "Spe Up 5", AddSpe5).hint("Add 1000 to Spe.");
-		addButton(9, "Spe Down 5", SubSpe5).hint("Substract 1000 from Spe.");
-		addButton(14, "Back", StatsAscensionMenu);
-	}
-	public function StatsMenuInte():void {
-		menu();
-		addButton(0, "Inte Up 1", AddInte1).hint("Add 1 to Inte.");
-		addButton(5, "Inte Down 1", SubInte1).hint("Substract 1 from Inte.");
-		addButton(1, "Inte Up 2", AddInte2).hint("Add 10 to Inte.");
-		addButton(6, "Inte Down 2", SubInte2).hint("Substract 10 from Inte.");
-		addButton(2, "Inte Up 3", AddInte3).hint("Add 50 to Inte.");
-		addButton(7, "Inte Down 3", SubInte3).hint("Substract 50 from Inte.");
-		addButton(3, "Inte Up 4", AddInte4).hint("Add 200 to Inte.");
-		addButton(8, "Inte Down 4", SubInte4).hint("Substract 200 from Inte.");
-		addButton(4, "Inte Up 5", AddInte5).hint("Add 1000 to Inte.");
-		addButton(9, "Inte Down 5", SubInte5).hint("Substract 1000 from Inte.");
-		addButton(14, "Back", StatsAscensionMenu);
-	}
-	public function StatsMenuWis():void {
-		menu();
-		addButton(0, "Wis Up 1", AddWis1).hint("Add 1 to Wis.");
-		addButton(5, "Wis Down 1", SubWis1).hint("Substract 1 from Wis.");
-		addButton(1, "Wis Up 2", AddWis2).hint("Add 10 to Wis.");
-		addButton(6, "Wis Down 2", SubWis2).hint("Substract 10 from Wis.");
-		addButton(2, "Wis Up 3", AddWis3).hint("Add 50 to Wis.");
-		addButton(7, "Wis Down 3", SubWis3).hint("Substract 50 from Wis.");
-		addButton(3, "Wis Up 4", AddWis4).hint("Add 200 to Wis.");
-		addButton(8, "Wis Down 4", SubWis4).hint("Substract 200 from Wis.");
-		addButton(4, "Wis Up 5", AddWis5).hint("Add 1000 to Wis.");
-		addButton(9, "Wis Down 5", SubWis5).hint("Substract 1000 from Wis.");
-		addButton(14, "Back", StatsAscensionMenu);
-	}
-	public function StatsMenuLib():void {
-		menu();
-		addButton(0, "Lib Up 1", AddLib1).hint("Add 1 to Lib.");
-		addButton(5, "Lib Down 1", SubLib1).hint("Substract 1 from Lib.");
-		addButton(1, "Lib Up 2", AddLib2).hint("Add 10 to Lib.");
-		addButton(6, "Lib Down 2", SubLib2).hint("Substract 10 from Lib.");
-		addButton(2, "Lib Up 3", AddLib3).hint("Add 50 to Lib.");
-		addButton(7, "Lib Down 3", SubLib3).hint("Substract 50 from Lib.");
-		addButton(3, "Lib Up 4", AddLib4).hint("Add 200 to Lib.");
-		addButton(8, "Lib Down 4", SubLib4).hint("Substract 200 from Lib.");
-		addButton(4, "Lib Up 5", AddLib5).hint("Add 1000 to Lib.");
-		addButton(9, "Lib Down 5", SubLib5).hint("Substract 1000 from Lib.");
-		addButton(14, "Back", StatsAscensionMenu);
-	}
-	public function StatsMenuSen():void {
-		menu();
-		addButton(0, "Sen Up 1", AddSen1).hint("Add 1 to Sen.");
-		addButton(5, "Sen Down 1", SubSen1).hint("Substract 1 from Sen.");
-		addButton(1, "Sen Up 2", AddSen2).hint("Add 10 to Sen.");
-		addButton(6, "Sen Down 2", SubSen2).hint("Substract 10 from Sen.");
-		addButton(2, "Sen Up 3", AddSen3).hint("Add 50 to Sen.");
-		addButton(7, "Sen Down 3", SubSen3).hint("Substract 50 from Sen.");
-		addButton(3, "Sen Up 4", AddSen4).hint("Add 200 to Sen.");
-		addButton(8, "Sen Down 4", SubSen4).hint("Substract 200 from Sen.");
-		addButton(4, "Sen Up 5", AddSen5).hint("Add 1000 to Sen.");
-		addButton(9, "Sen Down 5", SubSen5).hint("Substract 1000 from Sen.");
-		addButton(14, "Back", StatsAscensionMenu);
-	}
-	public function StatsMenuCor():void {
-		menu();
-		addButton(0, "Cor Up 1", AddCor1).hint("Add 1 to Cor.");
-		addButton(5, "Cor Down 1", SubCor1).hint("Substract 1 from Cor.");
-		addButton(1, "Cor Up 2", AddCor2).hint("Add 5 to Cor.");
-		addButton(6, "Cor Down 2", SubCor2).hint("Substract 5 from Cor.");
-		addButton(2, "Cor Up 3", AddCor3).hint("Add 10 to Cor.");
-		addButton(7, "Cor Down 3", SubCor3).hint("Substract 10 from Cor.");
-		addButton(3, "Cor Up 4", AddCor4).hint("Add 50 to Cor.");
-		addButton(8, "Cor Down 4", SubCor4).hint("Substract 50 from Cor.");
-		addButton(14, "Back", StatsAscensionMenu);
-	}
+
 	public function StatsMenuToneThicknessFeminity():void {
 		menu();
-		addButton(0, "Tone Up 1", AddTone1).hint("Add 1 to Tone.");
-		addButton(2, "Tone Down 1", SubTone1).hint("Substract 1 from Tone.");
-		addButton(1, "Tone Up 2", AddTone2).hint("Add 10 to Tone.");
-		addButton(3, "Tone Down 2", SubTone2).hint("Substract 10 from Tone.");
-		addButton(5, "Thickness Up 1", AddThickness1).hint("Add 1 to Thickness.");
-		addButton(7, "Thickness Down 1", SubThickness1).hint("Substract 1 from Thickness.");
-		addButton(6, "Thickness Up 2", AddThickness2).hint("Add 10 to Thickness.");
-		addButton(8, "Thickness Down 2", SubThickness2).hint("Substract 10 from Thickness.");
-		addButton(10, "Feminity Up 1", AddFeminity1).hint("Add 1 to Feminity.");
-		addButton(12, "Feminity Down 1", SubFeminity1).hint("Substract 1 from Feminity.");
-		addButton(11, "Feminity Up 2", AddFeminity2).hint("Add 10 to Feminity.");
-		addButton(13, "Feminity Down 2", SubFeminity2).hint("Substract 10 from Feminity.");
+		addButton(0, "Tone +1", ModCoreStats, "Tone", 1).hint("Add 1 to Tone.");
+		addButton(1, "Tone +10", ModCoreStats, "Tone", 10).hint("Add 10 to Tone.");
+		addButton(2, "Tone -1", ModCoreStats, "Tone", -1).hint("Substract 1 from Tone.");
+		addButton(3, "Tone -10", ModCoreStats, "Tone", -10).hint("Substract 10 from Tone.");
+		addButton(5, "Thicc +1", ModCoreStats, "Thickness", 1).hint("Add 1 to Thicc.");
+		addButton(6, "Thicc +10", ModCoreStats, "Thickness", 10).hint("Add 10 to Thicc.");
+		addButton(7, "Thicc -1", ModCoreStats, "Thickness", -1).hint("Substract 1 from Thicc.");
+		addButton(8, "Thicc -10", ModCoreStats, "Thickness", -10).hint("Substract 10 from Thicc.");
+		addButton(10, "Fem +1", ModCoreStats, "Feminity", 1).hint("Add 1 to Feminity.");
+		addButton(11, "Fem +10", ModCoreStats, "Feminity", 10).hint("Add 10 to Feminity.");
+		addButton(12, "Fem -1", ModCoreStats, "Feminity", -1).hint("Substract 1 from Feminity.");
+		addButton(13, "Fem -10", ModCoreStats, "Feminity", -10).hint("Substract 10 from Feminity.");
 		addButton(14, "Back", StatsAscensionMenu);
 	}
+
 	public function PerksGemsEXPLvL():void {
+		statScreenRefresh();
 		menu();
-		addButton(0, "Add 1 PerkP", AddPerkPoint).hint("Add 1 perk point.");
-		addButton(1, "Add 5 PerkP", AddPerkPoints).hint("Add 5 perk points.");
-		addButton(2, "Sub 10 PerkP", SubPerkPoints).hint("Substract 10 perk points.");
-		addButton(3, "Add Gems 1", AddGems1).hint("Add 100 gems.");
-		addButton(4, "Add Gems 2", AddGems2).hint("Add 1,000 gems.");
-		addButton(5, "Add EXP 1", AddEXP1).hint("Add 100 EXP.");
-		addButton(6, "Add EXP 2", AddEXP2).hint("Add 1,000 EXP.");
-		addButton(7, "Add EXP 3", AddEXP3).hint("Add 10,000 EXP.");
-		addButton(8, "Add EXP 4", AddEXP4).hint("Add 100,000 EXP.");
-		addButton(4, "Add Gems 3", AddGems3).hint("Add 10,000 gems.");
-		if (player.hasPerk(PerkLib.SoulAncestor)) addButton(10, "10-12 St.", Stage10to12SoulPerks).hint("Remove all soul cultivator related perks for stages 10-12 of cultivation to keep save compatibility with public build saves.");
-		if (!player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(11, "Trib Perk", TribulationPerks).hint("Add E class Tribulation survivor perk.");
-		if (player.level < CoC.instance.levelCap) addButton(12, "Add 1 LvL", AddLvL1).hint("Add 1 Level (with stat and perk points).");
-		if (player.level < CoC.instance.levelCap - 9) addButton(13, "Add 10 LvL's", AddLvL2).hint("Add 10 Levels (with stat and perk points).");
+		addButton(0, "Add 1 PerkP", perkPointsCheat, 1).hint("Add 1 perk point.");
+		addButton(1, "Add 5 PerkP", perkPointsCheat, 5).hint("Add 5 perk points.");
+		addButton(2, "Sub 10 PerkP", perkPointsCheat, -10).hint("Substract 10 perk points.");
+		addButton(5, "Add Gems 1", addGemsXPLvl, "Gems", 100).hint("Add 100 gems.");
+		addButton(6, "Add Gems 2", addGemsXPLvl, "Gems", 1000).hint("Add 1,000 gems.");
+		addButton(7, "Add Gems 3", addGemsXPLvl, "Gems", 10000).hint("Add 10,000 gems.");
+		addButton(10, "Add EXP 1", addGemsXPLvl, "XP", 100).hint("Add 100 EXP.");
+		addButton(11, "Add EXP 2", addGemsXPLvl, "XP", 1000).hint("Add 1,000 EXP.");
+		addButton(12, "Add EXP 3", addGemsXPLvl, "XP", 10000).hint("Add 10,000 EXP.");
+		addButton(13, "Add EXP 4", addGemsXPLvl, "XP", 100000).hint("Add 100,000 EXP.");
+		if (player.hasPerk(PerkLib.SoulAncestor)) addButton(13, "10-12 St.", Stage10to12SoulPerks).hint("Remove all soul cultivator related perks for stages 10-12 of cultivation to keep save compatibility with public build saves.");
+		if (!player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(14, "Trib Perk", TribulationPerks).hint("Add E class Tribulation survivor perk.");
+		if (player.level < CoC.instance.levelCap) addButton(8, "Add 1 LvL", addGemsXPLvl, "Lvl", 1).hint("Add 1 Level (with stat and perk points).");
+		if (player.level < CoC.instance.levelCap - 9) addButton(9, "Add 10 LvL's", addGemsXPLvl, "Lvl", 10).hint("Add 10 Levels (with stat and perk points).");
 		addButton(14, "Back", curry(SoulforceCheats1, 0));
 	}
 	public function BodyStateMenu():void {
@@ -1247,10 +1226,7 @@ private function applyHangover():void {
 		BodyStateMenu();
 	}
 	public function AddCockBalls():void {
-		player.createCock();
-		player.cocks[0].cockLength = 4;
-		player.cocks[0].cockThickness = 1;
-		player.cocks[0].cockType = CockTypesEnum.HUMAN;
+		player.createCock(4);
 		player.clitLength = .25;
 		if (player.balls <= 1) {
 			player.balls = 2;
@@ -2143,528 +2119,79 @@ private function applyHangover():void {
 		flags[kFLAGS.NEW_GAME_PLUS_LEVEL] -= 1;
 		doNext(StatsAscensionMenu2);
 	}
-	public function AddAscensionPerkPoints1():void {
-		outputText("\n\n<b>You gained 1 Ascension Perk Point!</b>");
-		player.ascensionPerkPoints += 1;
+
+	public function AddAscenionPerkPoints(incAmt:int):void{
+		outputText("\n\n<b>You have gained " + incAmt + " Ascension perk points!</b>");
+		player.ascensionPerkPoints += incAmt;
 		doNext(StatsAscensionMenu2);
 	}
-	public function AddAscensionPerkPoints2():void {
-		outputText("\n\n<b>You gained 5 Ascension Perk Points!</b>");
-		player.ascensionPerkPoints += 5;
-		doNext(StatsAscensionMenu2);
-	}
-	public function AddAscensionPerkPoints3():void {
-		outputText("\n\n<b>You gained 10 Ascension Perk Points!</b>");
-		player.ascensionPerkPoints += 10;
-		doNext(StatsAscensionMenu2);
-	}
-	public function AddAscensionPerkPoints4():void {
-		outputText("\n\n<b>You gained 50 Ascension Perk Points!</b>");
-		player.ascensionPerkPoints += 50;
-		doNext(StatsAscensionMenu2);
-	}
-	public function AddAscensionPerkPoints5():void {
-		outputText("\n\n<b>You gained 100 Ascension Perk Points!</b>");
-		player.ascensionPerkPoints += 100;
-		doNext(StatsAscensionMenu2);
-	}
-	public function AddStr1():void {
-		player.strStat.core.value += 1;
-		statScreenRefresh();
-		StatsMenuStr();
-	}
-	public function AddStr2():void {
-		player.strStat.core.value += 10;
-		statScreenRefresh();
-		StatsMenuStr();
-	}
-	public function AddStr3():void {
-		player.strStat.core.value += 50;
-		statScreenRefresh();
-		StatsMenuStr();
-	}
-	public function AddStr4():void {
-		player.strStat.core.value += 200;
-		statScreenRefresh();
-		StatsMenuStr();
-	}
-	public function AddStr5():void {
-		player.strStat.core.value += 1000;
-		statScreenRefresh();
-		StatsMenuStr();
-	}
-	public function AddTou1():void {
-		player.touStat.core.value += 1;
-		statScreenRefresh();
-		StatsMenuTou();
-	}
-	public function AddTou2():void {
-		player.touStat.core.value += 10;
-		statScreenRefresh();
-		StatsMenuTou();
-	}
-	public function AddTou3():void {
-		player.touStat.core.value += 50;
-		statScreenRefresh();
-		StatsMenuTou();
-	}
-	public function AddTou4():void {
-		player.touStat.core.value += 200;
-		statScreenRefresh();
-		StatsMenuTou();
-	}
-	public function AddTou5():void {
-		player.touStat.core.value += 1000;
-		statScreenRefresh();
-		StatsMenuTou();
-	}
-	public function AddSpe1():void {
-		player.speStat.core.value += 1;
-		statScreenRefresh();
-		StatsMenuSpe();
-	}
-	public function AddSpe2():void {
-		player.speStat.core.value += 10;
-		statScreenRefresh();
-		StatsMenuSpe();
-	}
-	public function AddSpe3():void {
-		player.speStat.core.value += 50;
-		statScreenRefresh();
-		StatsMenuSpe();
-	}
-	public function AddSpe4():void {
-		player.speStat.core.value += 200;
-		statScreenRefresh();
-		StatsMenuSpe();
-	}
-	public function AddSpe5():void {
-		player.speStat.core.value += 1000;
-		statScreenRefresh();
-		StatsMenuSpe();
-	}
-	public function AddInte1():void {
-		player.intStat.core.value += 1;
-		statScreenRefresh();
-		StatsMenuInte();
-	}
-	public function AddInte2():void {
-		player.intStat.core.value += 10;
-		statScreenRefresh();
-		StatsMenuInte();
-	}
-	public function AddInte3():void {
-		player.intStat.core.value += 50;
-		statScreenRefresh();
-		StatsMenuInte();
-	}
-	public function AddInte4():void {
-		player.intStat.core.value += 200;
-		statScreenRefresh();
-		StatsMenuInte();
-	}
-	public function AddInte5():void {
-		player.intStat.core.value += 1000;
-		statScreenRefresh();
-		StatsMenuInte();
-	}
-	public function AddWis1():void {
-		player.wisStat.core.value += 1;
-		statScreenRefresh();
-		StatsMenuWis();
-	}
-	public function AddWis2():void {
-		player.wisStat.core.value += 10;
-		statScreenRefresh();
-		StatsMenuWis();
-	}
-	public function AddWis3():void {
-		player.wisStat.core.value += 50;
-		statScreenRefresh();
-		StatsMenuWis();
-	}
-	public function AddWis4():void {
-		player.wisStat.core.value += 200;
-		statScreenRefresh();
-		StatsMenuWis();
-	}
-	public function AddWis5():void {
-		player.wisStat.core.value += 1000;
-		statScreenRefresh();
-		StatsMenuWis();
-	}
-	public function AddLib1():void {
-		player.libStat.core.value += 1;
-		statScreenRefresh();
-		StatsMenuLib();
-	}
-	public function AddLib2():void {
-		player.libStat.core.value += 10;
-		statScreenRefresh();
-		StatsMenuLib();
-	}
-	public function AddLib3():void {
-		player.libStat.core.value += 50;
-		statScreenRefresh();
-		StatsMenuLib();
-	}
-	public function AddLib4():void {
-		player.libStat.core.value += 200;
-		statScreenRefresh();
-		StatsMenuLib();
-	}
-	public function AddLib5():void {
-		player.libStat.core.value += 1000;
-		statScreenRefresh();
-		StatsMenuLib();
-	}
-	public function AddSen1():void {
-		dynStats("sen", 1);
-		statScreenRefresh();
-		StatsMenuSen();
-	}
-	public function AddSen2():void {
-		dynStats("sen", 10);
-		statScreenRefresh();
-		StatsMenuSen();
-	}
-	public function AddSen3():void {
-		dynStats("sen", 50);
-		statScreenRefresh();
-		StatsMenuSen();
-	}
-	public function AddSen4():void {
-		dynStats("sen", 200);
-		statScreenRefresh();
-		StatsMenuSen();
-	}
-	public function AddSen5():void {
-		dynStats("sen", 1000);
-		statScreenRefresh();
-		StatsMenuSen();
-	}
-	public function AddCor1():void {
-		dynStats("cor", 1);
-		statScreenRefresh();
-		StatsMenuCor();
-	}
-	public function AddCor2():void {
-		dynStats("cor", 5);
-		statScreenRefresh();
-		StatsMenuCor();
-	}
-	public function AddCor3():void {
-		dynStats("cor", 10);
-		statScreenRefresh();
-		StatsMenuCor();
-	}
-	public function AddCor4():void {
-		dynStats("cor", 50);
-		statScreenRefresh();
-		StatsMenuCor();
-	}
-	public function AddTone1():void {
-		player.tone = player.tone + 1;
-		statScreenRefresh();
-		StatsMenuToneThicknessFeminity();
-	}
-	public function AddTone2():void {
-		player.tone = player.tone + 10;
-		statScreenRefresh();
-		StatsMenuToneThicknessFeminity();
-	}
-	public function AddThickness1():void {
-		player.thickness = player.thickness + 1;
-		statScreenRefresh();
-		StatsMenuToneThicknessFeminity();
-	}
-	public function AddThickness2():void {
-		player.thickness = player.thickness + 10;
-		statScreenRefresh();
-		StatsMenuToneThicknessFeminity();
-	}
-	public function AddFeminity1():void {
-		player.femininity = player.femininity + 1;
-		statScreenRefresh();
-		StatsMenuToneThicknessFeminity();
-	}
-	public function AddFeminity2():void {
-		player.femininity = player.femininity + 10;
-		statScreenRefresh();
-		StatsMenuToneThicknessFeminity();
-	}
-	public function SubStr1():void {
-		player.strStat.core.value -= 1;
-		statScreenRefresh();
-		StatsMenuStr();
-	}
-	public function SubStr2():void {
-		player.strStat.core.value -= 10;
-		statScreenRefresh();
-		StatsMenuStr();
-	}
-	public function SubStr3():void {
-		player.strStat.core.value -= 50;
-		statScreenRefresh();
-		StatsMenuStr();
-	}
-	public function SubStr4():void {
-		player.strStat.core.value -= 200;
-		statScreenRefresh();
-		StatsMenuStr();
-	}
-	public function SubStr5():void {
-		player.strStat.core.value -= 1000;
-		statScreenRefresh();
-		StatsMenuStr();
-	}
-	public function SubTou1():void {
-		player.touStat.core.value -= 1;
-		statScreenRefresh();
-		StatsMenuTou();
-	}
-	public function SubTou2():void {
-		player.touStat.core.value -= 10;
-		statScreenRefresh();
-		StatsMenuTou();
-	}
-	public function SubTou3():void {
-		player.touStat.core.value -= 50;
-		statScreenRefresh();
-		StatsMenuTou();
-	}
-	public function SubTou4():void {
-		player.touStat.core.value -= 200;
-		statScreenRefresh();
-		StatsMenuTou();
-	}
-	public function SubTou5():void {
-		player.touStat.core.value -= 1000;
-		statScreenRefresh();
-		StatsMenuTou();
-	}
-	public function SubSpe1():void {
-		player.speStat.core.value -= 1;
-		statScreenRefresh();
-		StatsMenuSpe();
-	}
-	public function SubSpe2():void {
-		player.speStat.core.value -= 10;
-		statScreenRefresh();
-		StatsMenuSpe();
-	}
-	public function SubSpe3():void {
-		player.speStat.core.value -= 50;
-		statScreenRefresh();
-		StatsMenuSpe();
-	}
-	public function SubSpe4():void {
-		player.speStat.core.value -= 200;
-		statScreenRefresh();
-		StatsMenuSpe();
-	}
-	public function SubSpe5():void {
-		player.speStat.core.value -= 1000;
-		statScreenRefresh();
-		StatsMenuSpe();
-	}
-	public function SubInte1():void {
-		player.intStat.core.value -= 1;
-		statScreenRefresh();
-		StatsMenuInte();
-	}
-	public function SubInte2():void {
-		player.intStat.core.value -= 10;
-		statScreenRefresh();
-		StatsMenuInte();
-	}
-	public function SubInte3():void {
-		player.intStat.core.value -= 50;
-		statScreenRefresh();
-		StatsMenuInte();
-	}
-	public function SubInte4():void {
-		player.intStat.core.value -= 200;
-		statScreenRefresh();
-		StatsMenuInte();
-	}
-	public function SubInte5():void {
-		player.intStat.core.value -= 1000;
-		statScreenRefresh();
-		StatsMenuInte();
-	}
-	public function SubWis1():void {
-		player.wisStat.core.value -= 1;
-		statScreenRefresh();
-		StatsMenuWis();
-	}
-	public function SubWis2():void {
-		player.wisStat.core.value -= 10;
-		statScreenRefresh();
-		StatsMenuWis();
-	}
-	public function SubWis3():void {
-		player.wisStat.core.value -= 50;
-		statScreenRefresh();
-		StatsMenuWis();
-	}
-	public function SubWis4():void {
-		player.wisStat.core.value -= 200;
-		statScreenRefresh();
-		StatsMenuWis();
-	}
-	public function SubWis5():void {
-		player.wisStat.core.value -= 1000;
-		statScreenRefresh();
-		StatsMenuWis();
-	}
-	public function SubLib1():void {
-		player.libStat.core.value -= 1;
-		statScreenRefresh();
-		StatsMenuLib();
-	}
-	public function SubLib2():void {
-		player.libStat.core.value -= 10;
-		statScreenRefresh();
-		StatsMenuLib();
-	}
-	public function SubLib3():void {
-		player.libStat.core.value -= 50;
-		statScreenRefresh();
-		StatsMenuLib();
-	}
-	public function SubLib4():void {
-		player.libStat.core.value -= 200;
-		statScreenRefresh();
-		StatsMenuLib();
-	}
-	public function SubLib5():void {
-		player.libStat.core.value -= 1000;
-		statScreenRefresh();
-		StatsMenuLib();
-	}
-	public function SubSen1():void {
-		dynStats("sen", -1);
-		statScreenRefresh();
-		StatsMenuSen();
-	}
-	public function SubSen2():void {
-		dynStats("sen", -10);
-		statScreenRefresh();
-		StatsMenuSen();
-	}
-	public function SubSen3():void {
-		dynStats("sen", -50);
-		statScreenRefresh();
-		StatsMenuSen();
-	}
-	public function SubSen4():void {
-		dynStats("sen", -200);
-		statScreenRefresh();
-		StatsMenuSen();
-	}
-	public function SubSen5():void {
-		dynStats("sen", -1000);
-		statScreenRefresh();
-		StatsMenuSen();
-	}
-	public function SubCor1():void {
-		dynStats("cor", -1);
-		statScreenRefresh();
-		StatsMenuCor();
-	}
-	public function SubCor2():void {
-		dynStats("cor", -5);
-		statScreenRefresh();
-		StatsMenuCor();
-	}
-	public function SubCor3():void {
-		dynStats("cor", -10);
-		statScreenRefresh();
-		StatsMenuCor();
-	}
-	public function SubCor4():void {
-		dynStats("cor", -50);
-		statScreenRefresh();
-		StatsMenuCor();
-	}
-	public function SubTone1():void {
-		player.tone = player.tone - 1;
-		statScreenRefresh();
-		StatsMenuToneThicknessFeminity();
-	}
-	public function SubTone2():void {
-		player.tone = player.tone - 10;
-		statScreenRefresh();
-		StatsMenuToneThicknessFeminity();
-	}
-	public function SubThickness1():void {
-		player.thickness = player.thickness - 1;
-		statScreenRefresh();
-		StatsMenuToneThicknessFeminity();
-	}
-	public function SubThickness2():void {
-		player.thickness = player.thickness - 10;
-		statScreenRefresh();
-		StatsMenuToneThicknessFeminity();
-	}
-	public function SubFeminity1():void {
-		player.femininity = player.femininity - 1;
-		statScreenRefresh();
-		StatsMenuToneThicknessFeminity();
-	}
-	public function SubFeminity2():void {
-		player.femininity = player.femininity - 10;
-		statScreenRefresh();
-		StatsMenuToneThicknessFeminity();
-	}
-	public function AddPerkPoint():void {
-		player.perkPoints = player.perkPoints + 1;
-		PerksGemsEXPLvL();
-	}
-	public function AddPerkPoints():void {
-		player.perkPoints = player.perkPoints + 5;
-		PerksGemsEXPLvL();
-	}
-	public function SubPerkPoints():void {
-		player.perkPoints = player.perkPoints - 10;
-		PerksGemsEXPLvL();
-	}
-	public function AddGems1():void {
-		player.gems = player.gems + 100;
-		statScreenRefresh();
-		PerksGemsEXPLvL();
-	}
-	public function AddGems2():void {
-		player.gems = player.gems + 1000;
-		statScreenRefresh();
-		PerksGemsEXPLvL();
-	}
-	public function AddEXP1():void {
-		player.XP = player.XP + 100;
-		statScreenRefresh();
-		PerksGemsEXPLvL();
-	}
-	public function AddEXP2():void {
-		player.XP = player.XP + 1000;
-		statScreenRefresh();
-		PerksGemsEXPLvL();
-	}
-	public function AddEXP3():void {
-		player.XP = player.XP + 10000;
-		statScreenRefresh();
-		PerksGemsEXPLvL();
-	}
-	public function AddEXP4():void {
-		player.XP = player.XP + 100000;
-		statScreenRefresh();
-		PerksGemsEXPLvL();
-	}
-	public function AddGems3():void {
-		player.gems = player.gems + 10000;
-		statScreenRefresh();
-		PerksGemsEXPLvL();
-	}
+
+	public function ModCoreStats(core:String, incAmt:int):void{
+		switch(core){
+			case "Str":
+				player.strStat.core.value += incAmt;
+				break;
+			case "Tou":
+				player.touStat.core.value += incAmt;
+				break;
+			case "Spe":
+				player.speStat.core.value += incAmt;
+				break;
+			case "Int":
+				player.intStat.core.value += incAmt;
+				break;
+			case "Wis":
+				player.wisStat.core.value += incAmt;
+				break;
+			case "Lib":
+				player.libStat.core.value += incAmt;
+				break;
+			case "Sen":
+				dynStats("sen", incAmt);
+				break;
+			case "Cor":
+				dynStats("cor", incAmt);
+				break;
+			case "Tone":
+				player.tone += incAmt;
+				break;
+			case "Thickness":
+				player.thickness += incAmt;
+				break;
+			case "Feminity":
+				player.femininity += incAmt;
+				break;
+		}
+		statScreenRefresh();
+		StatsAscensionMenu();
+	}
+
+	public function perkPointsCheat(cAmt:int):void{
+		clearOutput();
+		player.perkPoints += cAmt;
+		outputText("\n\n<b>You now have " + player.perkPoints + " perk points!</b>");
+		doNext(PerksGemsEXPLvL);
+	}
+
+	public function addGemsXPLvl(type:String, cAmt:int):void{
+		clearOutput();
+		if (type == "Gems"){
+			player.gems += cAmt;
+			outputText("\n\n<b>You now have " + player.gems + " gems!</b>");
+		}
+		else if (type == "XP"){
+			player.XP += cAmt;
+			outputText("\n\n<b>You have gained " + cAmt + " XP!</b>");
+		}
+		else if (type == "Lvl"){
+			player.level += cAmt;
+			player.statPoints += 5*cAmt;
+			player.perkPoints += cAmt;
+			outputText("\n\n<b>You now have " + player.level + " levels!</b>");
+		}
+		doNext(PerksGemsEXPLvL);
+	}
+
 	public function Stage10to12SoulPerks():void {
 		if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
 			player.removePerk(PerkLib.FleshBodyOverlordStage);
@@ -2694,20 +2221,6 @@ private function applyHangover():void {
 			outputText("\n\n<b>(Gained Perk: E class Heaven Tribulation Survivor!)</b>");
 		}
 		doNext(curry(SoulforceCheats1, 0));
-	}
-	public function AddLvL1():void {
-		player.level = player.level + 1;
-		player.statPoints += 5;
-		player.perkPoints = player.perkPoints + 1;
-		statScreenRefresh();
-		PerksGemsEXPLvL();
-	}
-	public function AddLvL2():void {
-		player.level = player.level + 10;
-		player.statPoints += 50;
-		player.perkPoints = player.perkPoints + 10;
-		statScreenRefresh();
-		PerksGemsEXPLvL();
 	}
 	public function AddWhiteBook():void {
 		outputText("\n\n<b>(Gained 1 White Book!)</b>\n\n");
@@ -3028,6 +2541,8 @@ private function applyHangover():void {
 		}
 		doNext(curry(SoulforceCheats1, 0));
 	}
+
+
 	public function SoulforceRegeneration():void {
 		menu();
 		addButton(0, "1 hour", SoulforceRegeneration1).hint("Cultivate for 1 hour (Allow to recover ~" + AmountOfSoulforceRecoveredDuringCultivation(20) + " soulforce).");//x1
@@ -3066,6 +2581,71 @@ private function applyHangover():void {
 		return player.weaponName == "training soul axe" || player.weaponRangeName == "training soul crossbow" || player.shieldName == "training soul buckler" || player.armorName == "training soul armor" || player.upperGarmentName == "soul training shirt" || player.lowerGarmentName == "soul training panties"
 				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring"
 				|| player.weaponFlyingSwordsName == "training soul flying sword";
+	}
+	public function Contemplations():void {
+		clearOutput();
+		outputText("You find a flat, comfortable rock to sit down on and begin to cultivated according to the manual.  Minute after minute you feel your inner soulforce slowly starting to circle inside your body.  It's very slowly circling within yourself.\n\n");
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 5 && player.level >= 15 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Late Soul Personage.</b>\n\n");
+			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 6;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 4 && player.level >= 12 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Middle Soul Personage.</b>\n\n");
+			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 5;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 3 && player.wis >= 40 && player.level >= 9 && player.soulforce >= player.maxSoulforce() && player.hasPerk(PerkLib.Dantain)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Early Soul Personage.</b>\n\n");
+			EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+			player.createPerk(PerkLib.SoulPersonage, 0, 0, 0, 0);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, -2);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 4;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 2 && player.level >= 6 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Late Soul Apprentice.</b>\n\n");
+			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 3;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 1 && player.level >= 3 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Middle Soul Apprentice.</b>\n\n");
+			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 2;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 0 && player.wis >= 20 && player.soulforce >= player.maxSoulforce()) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Early Soul Apprentice.</b>\n\n");
+			EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+			player.createPerk(PerkLib.SoulApprentice, 0, 0, 0, 0);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 1;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		outputText("After two hours you not felt any change. A bit of shame but maybe next time you will gain some enlightenment.\n\n");
+		doNext(camp.returnToCampUseTwoHours);
+		//outputText("You find a flat, comfortable rock to sit down on and begin to cultivated according to the manual.  Minute after minute you feel immersed into world that surrounds you.  How they flow around you, how they change on their own and how they interact with each other.  All this while trying to understand, despite being insignificant while the great dao manifests around you.\n\n");
 	}
 	public function DaoContemplations():void {
 		clearOutput();
@@ -3107,6 +2687,7 @@ private function applyHangover():void {
 		clearOutput();
 		outputText("You find a flat, comfortable rock to sit down on and contemplate.  Minute after minute you feel immersed into elements that surrounds you.  How they flow around you, how they change on their own and how they interact with each other.  All this while trying to understand, despite being insignificant while the great dao manifests around you.\n\n");
 		var dao:Number = rand(6);
+		//uzycie w kontemplacji niebianskich skarbow zwiazanych z danym zywiolem daje bonusowe punkty
 		if (dao > 0) {
 			outputText("After the session ends you managed to progress in Dao of "+daoname+".");
 			if (player.hasStatusEffect(statusEffect)) {
@@ -3171,6 +2752,37 @@ private function applyHangover():void {
 			outputText("\n<b>Due to your clone contemplations your comprehension in Dao of "+daoname+" reached 1st layer.</b>");
 		}
 	}
+	public function SoulforceRegeneration1():void {
+		clearOutput();
+		var soulforceamountrestored:int = 16;
+		soulforceamountrestored += SoulforceRegeneration00();
+		if (player.hasPerk(PerkLib.DaoistCultivator)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulApprentice)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulPersonage)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulWarrior)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulSprite)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulScholar)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulElder)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulExalt)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulOverlord)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulTyrant)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulKing)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulEmperor)) soulforceamountrestored += 16;
+		if (player.hasPerk(PerkLib.SoulAncestor)) soulforceamountrestored += 16;
+		player.soulforce += soulforceamountrestored;
+		if (SoulforceRegenerationCompatibileTrainingItems()) {
+			var bonussoulforce:Number = 0;
+			bonussoulforce += SoulforceGainedFromCultivation1();
+			flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
+			SoulforceGainedFromCultivation2();
+		}
+		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+		outputText("You find a flat, comfortable rock to sit down on and meditate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+		outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
+		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
+		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(20);
+		doNext(camp.returnToCampUseOneHour);
+	}
 	public function SoulforceRegeneration2():void {
 		clearOutput();
 		var soulforceamountrestored:int = 52;
@@ -3197,7 +2809,7 @@ private function applyHangover():void {
 			SoulforceGainedFromCultivation2();
 		}
 		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-		outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+		outputText("You find a flat, comfortable rock to sit down on and meditate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
 		outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
 		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(40);
@@ -3229,7 +2841,7 @@ private function applyHangover():void {
 			SoulforceGainedFromCultivation2();
 		}
 		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-		outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+		outputText("You find a flat, comfortable rock to sit down on and meditate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
 		outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
 		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(80);
@@ -3261,7 +2873,7 @@ private function applyHangover():void {
 			SoulforceGainedFromCultivation2();
 		}
 		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-		outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+		outputText("You find a flat, comfortable rock to sit down on and meditate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
 		outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
 		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(120);
@@ -3293,7 +2905,7 @@ private function applyHangover():void {
 			SoulforceGainedFromCultivation2();
 		}
 		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-		outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+		outputText("You find a flat, comfortable rock to sit down on and meditate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
 		outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
 		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(160);
@@ -3325,7 +2937,7 @@ private function applyHangover():void {
 			SoulforceGainedFromCultivation2();
 		}
 		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-		outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+		outputText("You find a flat, comfortable rock to sit down on and meditate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
 		outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
 		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(200);
@@ -3357,7 +2969,7 @@ private function applyHangover():void {
 			SoulforceGainedFromCultivation2();
 		}
 		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-		outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+		outputText("You find a flat, comfortable rock to sit down on and meditate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
 		outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
 		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(240);
@@ -3389,7 +3001,7 @@ private function applyHangover():void {
 			SoulforceGainedFromCultivation2();
 		}
 		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-		outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+		outputText("You find a flat, comfortable rock to sit down on and meditate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
 		outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
 		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(280);
@@ -3421,7 +3033,7 @@ private function applyHangover():void {
 			SoulforceGainedFromCultivation2();
 		}
 		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-		outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
+		outputText("You find a flat, comfortable rock to sit down on and meditate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
 		outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
 		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(320);
@@ -3509,37 +3121,6 @@ private function applyHangover():void {
 		if (player.hasPerk(PerkLib.SoulAncestor)) costPercent += 250;
 		mod *= costPercent/100;
 		return mod;
-	}
-	public function SoulforceRegeneration1():void {
-		clearOutput();
-		var soulforceamountrestored:int = 16;
-		soulforceamountrestored += SoulforceRegeneration00();
-		if (player.hasPerk(PerkLib.DaoistCultivator)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulApprentice)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulPersonage)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulWarrior)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulSprite)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulScholar)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulElder)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulExalt)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulOverlord)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulTyrant)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulKing)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulEmperor)) soulforceamountrestored += 16;
-		if (player.hasPerk(PerkLib.SoulAncestor)) soulforceamountrestored += 16;
-		player.soulforce += soulforceamountrestored;
-		if (SoulforceRegenerationCompatibileTrainingItems()) {
-			var bonussoulforce:Number = 0;
-			bonussoulforce += SoulforceGainedFromCultivation1();
-			flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING_2] = bonussoulforce;
-			SoulforceGainedFromCultivation2();
-		}
-		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
-		outputText("You find a flat, comfortable rock to sit down on and cultivate.  Minute after minute you feel how lost earlier soulforce starting to be slowly replenished.\n\n");
-		outputText("Spent time allowed you to restore " + soulforceamountrestored + " soulforce.\n\n");
-		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
-		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(20);
-		doNext(camp.returnToCampUseOneHour);
 	}
 	public function SelfSustain():void {
 		clearOutput();
@@ -4309,7 +3890,7 @@ private function applyHangover():void {
 		if (player.soulforce >= 320) {
 			player.soulforce -= 320;
 			statScreenRefresh();
-			SceneLib.goblinElderScene.goblinElderEncounter();
+			SceneLib.priscillaScene.goblinElderEncounter();
 		}
 		else {
 			outputText("\n\nYour current soulforce is too low.");
@@ -4436,5 +4017,4 @@ private function applyHangover():void {
 		doNext(accessSoulforceMenu);
 	}
 }
-}
-
+}

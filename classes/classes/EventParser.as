@@ -2,6 +2,7 @@ package classes {
 import classes.BodyParts.Hair;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
+import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.ArmorLib;
@@ -14,6 +15,7 @@ import classes.Items.UndergarmentLib;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRangeLib;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
+import classes.Scenes.Metamorph;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
@@ -353,11 +355,14 @@ public class EventParser {
             var counter:Number = player.cockTotal() - 1;
             while (counter >= 0) {
                 if (player.cocks[counter].cockType == CockTypesEnum.DOG || player.cocks[counter].cockType == CockTypesEnum.FOX) {
-                    if (player.racialScore(Races.DOG) >= player.racialScore(Races.FOX))
+                    if (player.racialScore(Races.DOG) >= player.racialScore(Races.FOX)) {
                         player.cocks[counter].cockType = CockTypesEnum.DOG;
-                    else
+                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
+                    }
+                    else {
                         player.cocks[counter].cockType = CockTypesEnum.FOX;
-                }
+                        Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.FOX));
+                    }                }
                 counter--;
                 // trace("IMA LOOPIN", counter);
             }
@@ -442,11 +447,11 @@ public class EventParser {
         var flags:DefaultDict = CoC.instance.flags;
 
         if (player.hasPerk(PerkLib.Diapause)) {
-            if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] <= 0 || player.pregnancyIncubation <= 0 && player.buttPregnancyIncubation <= 0) //no pregnancy, I guess?
+            if (flags[kFLAGS.DIAPAUSE_FLUID_STORE] <= 0 || player.pregnancyIncubation <= 0 && player.buttPregnancyIncubation <= 0) //no pregnancy, I guess?
                 return 0;
             //unique checks for diapause
-            if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] == 1) {
-                flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 0;
+            if (flags[kFLAGS.DIAPAUSE_DISPLAYED] == 1) {
+                flags[kFLAGS.DIAPAUSE_DISPLAYED] = 0;
                 EngineCore.outputText("\n\nYour body reacts to the influx of nutrition, accelerating your pregnancy. Your belly bulges outward slightly.");
                 needNext = true;
             }
@@ -454,7 +459,7 @@ public class EventParser {
                 flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
                 return 2;
             }
-            flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228]--;
+            flags[kFLAGS.DIAPAUSE_FLUID_STORE]--;
             if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
             if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
                 flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
@@ -521,7 +526,7 @@ public class EventParser {
         if (flags[kFLAGS.CAMP_WALL_SKULLS] > 0) chance *= 1 - (flags[kFLAGS.CAMP_WALL_SKULLS] / 100);
         if (CoC.instance.model.time.hours == 2) {
             if (CoC.instance.model.time.days % 30 == 0 && flags[kFLAGS.ANEMONE_KID] > 0 && player.hasCock() && flags[kFLAGS.ANEMONE_WATCH] > 0 && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 40) {
-                SceneLib.anemoneScene.goblinNightAnemone();
+                SceneLib.kidAScene.goblinNightAnemone();
                 return 1;
             } else if (chance > Utils.rand(100) && !player.hasStatusEffect(StatusEffects.DefenseCanopy)) {
                 if (player.gender > 0 && (!player.hasStatusEffect(StatusEffects.JojoNightWatch) || !player.hasStatusEffect(StatusEffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !SceneLib.helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !SceneLib.kihaFollower.followerKiha()) && !(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "")) &&

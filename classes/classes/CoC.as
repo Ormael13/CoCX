@@ -11,11 +11,7 @@ package classes
 // BREAKING ALL THE RULES.
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Items.*;
-import classes.Parser.Parser;
-import classes.Scenes.*;
-import classes.Scenes.NPCs.JojoScene;
 import classes.Transformations.TransformationLib;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
@@ -69,7 +65,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 35.020;
+    public var modSaveVersion:Number = 36.006;
     public var levelCap:Number = 185;
 
     //Used to restrict random drops from overlapping uniques
@@ -253,7 +249,7 @@ public class CoC extends MovieClip
         debug = false;
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8s4";
+			ver = "1.0.2_mod_Xianxia_0.8s5";
 			version = ver + " (<b></b>)";
 
         this.images = new ImageManager(stage, mainView);
@@ -386,6 +382,7 @@ public class CoC extends MovieClip
         Races.load();
         trace("Initializing perks");
         PerkLib.initDependencies();
+		perkTree = new PerkTree();
         mainMenu.mainMenu();
         this.stop();
 

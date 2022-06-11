@@ -18,9 +18,11 @@ import classes.CoC_Settings;
 import classes.CockTypesEnum;
 import classes.EngineCore;
 import classes.EventParser;
+import classes.GeneticMemories.BallsMem;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
 import classes.PerkLib;
+import classes.Scenes.Metamorph;
 import classes.StatusEffects;
 import classes.VaginaClass;
 import classes.CoC;
@@ -210,70 +212,14 @@ public class AbstractEquinum extends Consumable {
 		//MALENESS.
 		if ((player.gender == 1 || player.gender == 3) && rand(1.5) == 0 && changes < changeLimit) {
 			//If cocks that aren't horsified!
-			if ((player.horseCocks() + player.demonCocks()) < player.cocks.length) {
-				//Transform a cock and store it's index value to talk about it.
-				//Single cock
-				if (player.cocks.length == 1) {
-					temp  = 0;
-					//Use temp3 to track whether or not anything is changed.
-					temp3 = 0;
-					if (player.cocks[0].cockType == CockTypesEnum.HUMAN) {
-						outputText("\n\nYour " + player.cockDescript(0) + " begins to feel strange... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.");
-						temp  = player.addHorseCock();
-						temp2 = player.increaseCock(temp, rand(4) + 4);
-						temp3 = 1;
-						dynStats("lus", 35);
-						player.addCurse("sen", 4, 1);
-						player.MutagenBonus("lib", 5);
-					}
-					if (player.cocks[0].cockType == CockTypesEnum.DOG) {
-						temp = player.addHorseCock();
-						outputText("\n\nYour " + Appearance.cockNoun(CockTypesEnum.DOG) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + Appearance.cockNoun(CockTypesEnum.DOG) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond it's traditional size.  You notice your knot vanishing, the extra flesh pushing more horsecock out from your sheath.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
-						temp2 = player.increaseCock(temp, rand(4) + 4);
-						temp3 = 1;
-						dynStats("lus", 35);
-						player.addCurse("sen", 4, 1);
-						player.MutagenBonus("lib", 5);
-					}
-					if (player.cocks[0].cockType == CockTypesEnum.TENTACLE) {
-						temp = player.addHorseCock();
-						outputText("\n\nYour " + player.cockDescript(0) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + player.cockDescript(0) + " as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
-						temp2 = player.increaseCock(temp, rand(4) + 4);
-						temp3 = 1;
-						dynStats("lus", 35);
-						player.addCurse("sen", 4, 1);
-						player.MutagenBonus("lib", 5);
-					}
-					if (player.cocks[0].cockType.Index > 4) {
-						outputText("\n\nYour " + player.cockDescript(0) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + player.cockDescript(0) + " as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.");
-						temp  = player.addHorseCock();
-						temp2 = player.increaseCock(temp, rand(4) + 4);
-						temp3 = 1;
-						dynStats("lus", 35);
-						player.addCurse("sen", 4, 1);
-						player.MutagenBonus("lib", 5);
-					}
-					if (temp3 == 1) outputText("  <b>Your penis has transformed into a horse's!</b>");
-				}
-				//MULTICOCK
-				else {
-					dynStats("lus", 35);
-					player.addCurse("sen", 4, 1);
-					player.MutagenBonus("lib", 5);
-					temp = player.addHorseCock();
-					outputText("\n\nOne of your penises begins to feel strange.  You pull down your clothes to take a look and see the skin of your " + player.cockDescript(temp) + " darkening to a mottled brown and black pattern.");
-					if (temp == -1) {
-						CoC_Settings.error("");
-						clearOutput();
-						outputText("FUKKKK ERROR NO COCK XFORMED");
-					}
-					//Already have a sheath
-					if (player.horseCocks() > 1 || player.dogCocks() > 0) outputText("  Your sheath tingles and begins growing larger as the cock's base shifts to lie inside it.");
-					else outputText("  You feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your " + player.cockDescript(temp) + "'s root, tightening and pulling your " + player.cockDescript(temp) + " inside its depths.");
-					temp2 = player.increaseCock(temp, rand(4) + 4);
-					outputText("  The shaft suddenly explodes with movement, growing longer and developing a thick flared head leaking steady stream of animal-cum.");
-					outputText("  <b>You now have a horse-cock.</b>");
-				}
+			if ((player.horseCocks() + player.demonCocks()) < player.cockTotal()) {
+				temp = player.findFirstCockNotInType([CockTypesEnum.HORSE,CockTypesEnum.DEMON]);
+				CoC.instance.transformations.CockHorse(temp).applyEffect();
+				temp2 = player.increaseCock(temp, rand(4) + 4);
+
+				dynStats("lus", 35);
+				player.addCurse("sen", 4, 1);
+				player.MutagenBonus("lib", 5);
 				//Make cock thicker if not thick already!
 				if (player.cocks[temp].cockThickness <= 2) player.cocks[temp].thickenCock(1);
 				changes++;
@@ -347,6 +293,7 @@ public class AbstractEquinum extends Consumable {
 					outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.");
 					dynStats("lus", 5);
 					player.MutagenBonus("lib", 2);
+					Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 				}
 				else {
 					player.ballSize++;
@@ -360,12 +307,8 @@ public class AbstractEquinum extends Consumable {
 		}
 		//Unicorn grows cocks
 		if ((type == 1 || type == 2) && (!player.hasCock()) && player.isTaur() && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nYou feel a sudden stabbing pain between your back legs");
-			if (player.hasVagina()) outputText(" just below your [vagina]");
-			outputText(" and bend over, moaning in agony. falling on your back so you can get a stare at your hindquarters you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, you are the proud owner of ");
-			if (player.hasVagina()) outputText(" not only a [vagina], but");
-			outputText( " a new human-shaped penis!");
-			player.createCock(7, 1.4);
+			CoC.instance.transformations.CockHuman(7).applyEffect();
+			player.cocks[0].cockThickness = 1.4;
 			dynStats("lus", 20);
 			player.addCurse("sen", 5, 1);
 			player.MutagenBonus("lib", 4);
@@ -374,13 +317,7 @@ public class AbstractEquinum extends Consumable {
 		//Unicorn grows vag
 		if ((type == 1 || type == 2) && (!player.hasVagina()) && player.isTaur() && changes < changeLimit && rand(3) == 0) {
 			changes++;
-			//(balls)
-			if (player.balls > 0) outputText("\n\nAn itch starts behind your [balls], but before you can reach under to scratch it, the discomfort fades. A moment later a warm, wet feeling brushes your [sack], and curious about the sensation, <b>you lift up your balls to reveal your new vagina.</b>");
-			//(dick)
-			else if (player.hasCock()) outputText("\n\nAn itch starts on your groin, just below your [cocks]. You pull the manhood aside to give you a better view, and you're able to watch as <b>your skin splits to give you a new vagina, complete with a tiny clit.</b>");
-			//(neither)
-			else outputText("\n\nAn itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your [armor] to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>");
-			player.createVagina();
+			CoC.instance.transformations.VaginaHuman().applyEffect();
 			player.clitLength = .25;
 			player.addCurse("sen", 10, 1);
 		}
@@ -389,12 +326,12 @@ public class AbstractEquinum extends Consumable {
 			//Single vag
 			if (player.vaginas.length == 1) {
 				if (player.vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_GAPING && changes < changeLimit && rand(2) == 0) {
-					outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your " + Appearance.vaginaDescript(player,0) + " has grown larger, in depth AND size.");
+					outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your [vagina] has grown larger, in depth AND size.");
 					player.vaginas[0].vaginalLooseness++;
 					changes++;
 				}
 				if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_NORMAL && changes < changeLimit && rand(2) == 0) {
-					outputText("\n\nYour " + Appearance.vaginaDescript(player,0) + " moistens perceptably, giving off an animalistic scent.");
+					outputText("\n\nYour [vagina] moistens perceptably, giving off an animalistic scent.");
 					player.vaginas[0].vaginalWetness++;
 					changes++;
 				}
@@ -416,7 +353,7 @@ public class AbstractEquinum extends Consumable {
 					}
 				}
 				if (player.vaginas[temp].vaginalWetness <= VaginaClass.WETNESS_NORMAL && changes < changeLimit && rand(2) == 0) {
-					outputText("\n\nOne of your " + Appearance.vaginaDescript(player,temp) + " moistens perceptably, giving off an animalistic scent.");
+					outputText("Your [vagina "+(temp+1)+"] moistens perceptably, giving off an animalistic scent.");
 					player.vaginas[temp].vaginalWetness++;
 					changes++;
 				}
@@ -498,11 +435,7 @@ public class AbstractEquinum extends Consumable {
 		//Hoofed legs
 
 		if (player.hasVagina() && player.vaginaType() != VaginaClass.EQUINE && changes < changeLimit && rand(3) == 0) {
-			outputText("\n\nYou grip your gut in pain as you feel your organs shift slightly.  When the pressure passes, you realize your " + Appearance.vaginaDescript(player,0) + " has grown larger, in depth AND size. To your absolute surprise it suddenly resume deepening inside your body. " +
-					"When you finally take a look you discover your vagina is now not unlike that of a horse, capable of taking the largest cock with ease." +
-					"<b>  You now have a equine vagina!</b>");
-			player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_GAPING;
-			player.vaginaType(VaginaClass.EQUINE);
+			CoC.instance.transformations.VaginaHorse().applyEffect();
 		}
 
 		if (player.lowerBody != LowerBody.HOOFED && player.lowerBody != LowerBody.GARGOYLE) {

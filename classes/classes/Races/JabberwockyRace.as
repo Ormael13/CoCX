@@ -12,7 +12,7 @@ public class JabberwockyRace extends Race {
 	
 	public function JabberwockyRace(id:int) {
 		super("Jabberwocky", id);
-		mutationThreshold = 5;
+		mutationThreshold = 6;
 	}
 	
 	public override function setup():void {

@@ -281,10 +281,7 @@ import classes.lists.Gender;
 			else {
 				outputText("You catch Anita's eye and wave her over. With a big smile she struts, her soft tits rising and falling with every step, toward your table. She leans in, proudly displaying her bust and crushing them against your table as she smiles big and says, \"<i>Well if it ain't my favorite customer, [name]. What can I do ya for, hun?</i>\"");
 			}
-			if (flags[kFLAGS.CODEX_ENTRY_HARPIES] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_HARPIES] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Harpies!</b>\n\n");
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_HARPIES);
 			menu();
 			addButton(0, "Song", listenToAnitaSong).hint("Listen to Anita's performance. This will cost you five gems.");
 			if (player.lust >= 33) addButton(1, "Sex", rompUpAnitaOffer);
@@ -569,10 +566,7 @@ import classes.lists.Gender;
 				outputText("You call Andy over and when he sees you his face pulls into a warm inviting smile.");
 				outputText("\n\n\"<i>Hey [name], so what'll it be today?</i>\" he asks, pen poised.");
 			}
-			if (flags[kFLAGS.CODEX_ENTRY_SATYRS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_SATYRS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Satyrs!</b>\n\n");
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SATYRS);
 			menu();
 			addButton(0, "Stash", checkAndyStash).hint("Go out the back of the tent and check out Andy's stash?");
 			addButtonIfTrue(1, "Sex", rompUpWithAndyTheSatyr, "You aren't aroused enough to consider this.", player.lust >= 33, "Proposition to have sex with the satyr.");
@@ -1146,10 +1140,7 @@ import classes.lists.Gender;
 				outputText("\n\nHearing your entrance Harry Roswell turns his head towards you and smiles big.");
 				outputText("\n\n\"<i>Hey [name], what can I do ya for?</i>\"");
 			}
-			if (flags[kFLAGS.CODEX_ENTRY_RHINOS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_RHINOS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Rhino-Morphs!</b>\n\n");
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_RHINOS);
 			menu();
 			if (player.lust >= 33) addButton(0, "Sex", rompUpWithHarry);
 			else addButtonDisabled(0, "Sex", "You aren't horny enough to consider this.");
@@ -1265,10 +1256,7 @@ import classes.lists.Gender;
 				if (flags[kFLAGS.BLACK_COCK_FRIDAS_CAKE_EATEN_COUNTER] > 0) outputText("\n\n\"</i>You come here for another piece of cake?</i>\"");
 				else outputText("\n\n\"<i>You ready for a piece of cake now, hun?</i>\"");
 			}
-			if (flags[kFLAGS.CODEX_ENTRY_ECHIDNAS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_ECHIDNAS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Echidna-Morphs!</b>\n\n");
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_ECHIDNAS);
 			doYesNo(orderFridasCake, noThanksToCake);
 		}
 
@@ -1414,17 +1402,7 @@ import classes.lists.Gender;
 		//------------
 		public function satyrTFs():void {
 			var changes:int = 0;
-			var changeLimit:int = 3;
-			if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
-			if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
-			if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
-			if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
-			if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
-			if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
-			if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
-			if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
-			if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
-			if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
+			var changeLimit:int = 3 + player.additionalTransformationChances;
 			//Stats and genital changes
 			if (rand(2) == 0) {
 				outputText("\n\nHeat floods your loins as thoughts of tight round asses and dripping pussies flood your mind.");
@@ -1464,12 +1442,12 @@ import classes.lists.Gender;
 			if (rand(3) == 0 && changes < changeLimit && player.hasVagina() && !player.hasCock()) {
 				outputText("\n\nYour vagina begins to feel hot. Removing your [armor], you look down and watch your vagina shrinks to nothing, <b>while your clitoris enlarges to form a human dick</b>.");
 				player.removeVagina();
-				player.createCock(6, 1, CockTypesEnum.HUMAN);
+				transformations.CockHuman(0, 6).applyEffect(false);
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.hasCock() && player.balls <= 0) {
 				outputText("Without warning your body begins to tremble as just below [eachCock] you feel a warm trickling sensation of fluid sliding down your body. Before you can check it, the sensation becomes ovewhelming as [eachCock] grows hard and ejaculates " + player.clothedOrNaked("into your [armor]", "all over the ground") + ". Once you've recovered from your intense orgasm you " + player.clothedOrNakedLower("remove your [armor] to ") + "clean yourself and find a <b>new pair of balls</b> hanging just below [eachCock].");
-				player.balls = 2;
+				transformations.BallsDuo.applyEffect(false);
 				player.ballSize = 1;
 				player.orgasm();
 				changes++;
@@ -1531,13 +1509,8 @@ import classes.lists.Gender;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.cockTotal() > 1 && (player.cockTotal() - player.countCocksOfType(CockTypesEnum.HUMAN)) > 0) {
-				outputText("One of your penises begins to feel strange. You " + player.clothedOrNakedLower("pull it out from your [armor], releasing", "notice") + " a plume of thick smoke. When you look down, you see it has <b>become a human dick</b>.");
-				for (var i:int = 0; i < player.cockTotal(); i++) {
-					if (player.cocks[i].cockType != CockTypesEnum.HUMAN) {
-						player.cocks[i].cockType = CockTypesEnum.HUMAN;
-						break;
-					}
-				}
+				outputText("One of your penises begins to feel strange. You " + player.clothedOrNakedLower("pull it out from your [armor], releasing", "notice") + " a plume of thick smoke. When you look down you see it has <b>become a human dick</b>.");
+				player.cocks[player.findFirstCockNotInType([CockTypesEnum.HUMAN])].cockType = CockTypesEnum.HUMAN;
 				changes++;
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -1545,17 +1518,7 @@ import classes.lists.Gender;
 
 		public function rhinoTFs():void {
 			var changes:int = 0;
-			var changeLimit:int = 3;
-			if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
-			if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
-			if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
-			if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
-			if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
-			if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
-			if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
-			if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
-			if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
-			if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
+			var changeLimit:int = 3 + player.additionalTransformationChances;
 			// Stats Changes
 			//------------
 			if (rand(3) == 0 && player.str < 100) {
@@ -1687,12 +1650,9 @@ import classes.lists.Gender;
 			//------------
 			//Change a cock to rhino.
 			if (rand(4) == 0 && changes < changeLimit && player.hasCock() && player.countCocksOfType(CockTypesEnum.RHINO) < player.cockTotal()) {
-				if (player.cockTotal() == 1) outputText("\n\nYou feel a stirring in your loins as your cock grows rock hard. ");
-				else outputText("\n\nOne of your penises begins to feel strange. ");
-				outputText("You " + player.clothedOrNakedLower("pull it out from your [armor]", "lean over") + ", right there in the center of The Black Cock, to take a look. You watch as the skin of your cock becomes a smooth, tough pink colored phallus. It takes on a long and narrow shape with an oval shaped bulge along the center. You feel a tightness near the base where your skin seems to be bunching up. A sheath begins forming around your flared rhino cock’s root, tightening as your stiff rhino dick elongates and settles, the thick flared head leaking a steady stream of funky animal-cum. <b>You now have a rhino-dick.</b>");
 				for (var i:int = 0; i < player.cocks.length; i++) {
 					if (player.cocks[i].cockType != CockTypesEnum.RHINO) {
-						player.cocks[i].cockType = CockTypesEnum.RHINO;
+						transformations.CockRhino(i, player.cocks[i].cockLength, player.cocks[i].cockThickness, true).applyEffect();
 						break;
 					}
 				}
@@ -1833,17 +1793,7 @@ import classes.lists.Gender;
 
 		public function echidnaTFs():void {
 			var changes:int = 0;
-			var changeLimit:int = 3;
-			if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
-			if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
-			if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
-			if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
-			if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
-			if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
-			if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
-			if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
-			if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
-			if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
+			var changeLimit:int = 3 + player.additionalTransformationChances;
 			var i:int = 0;
 			// Stats Changes
 			//------------
@@ -2012,13 +1962,9 @@ import classes.lists.Gender;
 			}
 			//Gain Echidna cock
 			if (rand(3) == 0 && changes < changeLimit && player.hasCock() && player.countCocksOfType(CockTypesEnum.ECHIDNA) < player.cockTotal()) {
-				outputText("\n\n");
-				if (player.cockTotal() == 1) outputText("Your [cock] suddenly becomes rock hard out of nowhere. You " + player.clothedOrNakedLower("pull it out from your [armor], right in the middle of the food tent, watching", "watch") + " as it begins to shift and change. It becomes pink in color, and you feel a pinch at the head as it splits to become four heads. " + (player.hasSheath() ? "" : "The transformation finishes off with a fleshy sheath forming at the base.") + " It ejaculates before going limp, retreating into your sheath.");
-				else outputText("One of your penises begins to feel strange. You " + player.clothedOrNakedLower("pull the offending cock out from your [armor], right in the middle of the food tent, watching", "watch") + " as it begins to shift and change. It becomes pink in color, and you feel a pinch at the head as it splits to become four heads. " + (player.hasSheath() ? "" : "The transformation finishes off with a fleshy sheath forming at the base.") + " It ejaculates before going limp, retreating into your sheath.");
-				outputText(" <b>You now have an echidna penis!</b>");
 				for (i = 0; i < player.cocks.length; i++) {
 					if (player.cocks[i].cockType != CockTypesEnum.ECHIDNA) {
-						player.cocks[i].cockType = CockTypesEnum.ECHIDNA;
+						transformations.CockEchidna(i, player.cocks[i].cockLength, player.cocks[i].cockThickness, true).applyEffect();
 						break;
 					}
 				}

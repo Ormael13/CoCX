@@ -262,7 +262,18 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const CAT:int = 20;
+	  public static const TWINKASKA:int = 20;
+	  EnumValue.add(Memories, TWINKASKA, "TWINKASKA", {
+		  id: "Twin Burning Tail",
+		  name: "Twin Burning Tail",
+		  cost: 100,
+		  title: "Twin Burning",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.TailTwinkasha;
+		  }
+	  });
+
+		public static const CAT:int = 21;
 		EnumValue.add(Memories, CAT, "CAT", {
 			id: "Cat Tail",
 			name: "Cat Tail",
@@ -273,7 +284,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const NEKOMATA_FORKED_1_3:int = 21;
+		public static const NEKOMATA_FORKED_1_3:int = 22;
 		EnumValue.add(Memories, NEKOMATA_FORKED_1_3, "NEKOMATA_FORKED_1_3", {
 			id: "Forked 1/3 Tail",
 			name: "Forked 1/3 Nekomata Tail",
@@ -285,7 +296,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const NEKOMATA_FORKED_2_3:int = 22;
+		public static const NEKOMATA_FORKED_2_3:int = 23;
 		EnumValue.add(Memories, NEKOMATA_FORKED_2_3, "NEKOMATA_FORKED_2_3", {
 			id: "Forked 2/3 Tail",
 			name: "Forked 2/3 Nekomata Tail",
@@ -297,7 +308,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const CAT_2:int = 23;
+		public static const CAT_2:int = 24;
 		EnumValue.add(Memories, CAT_2, "CAT_2", {
 			id: "Cat 2nd Tail",
 			name: "2nd Cat Tail (Nekomata)",
@@ -309,7 +320,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FOX:int = 24;
+		public static const FOX:int = 25;
 		EnumValue.add(Memories, FOX, "FOX", {
 			id: "Fox Tail",
 			name: "Fox Tail",
@@ -320,7 +331,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FOX_2:int = 25;
+		public static const FOX_2:int = 26;
 		EnumValue.add(Memories, FOX_2, "FOX_2", {
 			id: "Fox 2nd Tail",
 			name: "2nd Fox Tail",
@@ -332,7 +343,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FOX_3:int = 26;
+		public static const FOX_3:int = 27;
 		EnumValue.add(Memories, FOX_3, "FOX_3", {
 			id: "Fox 3rd Tail",
 			name: "3rd Fox Tail",
@@ -344,7 +355,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FOX_4:int = 27;
+		public static const FOX_4:int = 28;
 		EnumValue.add(Memories, FOX_4, "FOX_4", {
 			id: "Fox 4th Tail",
 			name: "4th Fox Tail",
@@ -356,7 +367,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FOX_5:int = 28;
+		public static const FOX_5:int = 29;
 		EnumValue.add(Memories, FOX_5, "FOX_5", {
 			id: "Fox 5th Tail",
 			name: "5th Fox Tail",
@@ -368,7 +379,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FOX_6:int = 29;
+		public static const FOX_6:int = 30;
 		EnumValue.add(Memories, FOX_6, "FOX_6", {
 			id: "Fox 6th Tail",
 			name: "6th Fox Tail",
@@ -380,7 +391,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FOX_7:int = 30;
+		public static const FOX_7:int = 31;
 		EnumValue.add(Memories, FOX_7, "FOX_7", {
 			id: "Fox 7th Tail",
 			name: "7th Fox Tail",
@@ -393,7 +404,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FOX_8:int = 31;
+		public static const FOX_8:int = 32;
 		EnumValue.add(Memories, FOX_8, "FOX_8", {
 			id: "Fox 8th Tail",
 			name: "8th Fox Tail",
@@ -406,7 +417,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FOX_9:int = 32;
+		public static const FOX_9:int = 33;
 		EnumValue.add(Memories, FOX_9, "FOX_9", {
 			id: "Fox 9th Tail",
 			name: "9th Fox Tail",
@@ -419,7 +430,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const WOLF:int = 33;
+		public static const WOLF:int = 34;
 		EnumValue.add(Memories, WOLF, "WOLF", {
 			id: "Wolf Tail",
 			name: "Wolf Tail",
@@ -430,7 +441,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const CAVE_WYRM:int = 34;
+		public static const CAVE_WYRM:int = 35;
 		EnumValue.add(Memories, CAVE_WYRM, "CAVE_WYRM", {
 			id: "Cave Wyrm Tail",
 			name: "Cave Wyrm Tail",
@@ -441,7 +452,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const MOUSE:int = 35;
+		public static const MOUSE:int = 36;
 		EnumValue.add(Memories, MOUSE, "MOUSE", {
 			id: "Mouse Tail",
 			name: "Mouse Tail",
@@ -452,7 +463,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const HINEZUMI:int = 36;
+		public static const HINEZUMI:int = 37;
 		EnumValue.add(Memories, HINEZUMI, "HINEZUMI", {
 			id: "Hinezumi Tail",
 			name: "Hinezumi Tail",
@@ -462,6 +473,17 @@ package classes.GeneticMemories {
 				return CoC.instance.transformations.TailHinezumi;
 			}
 		});
+
+	  public static const DOG:int = 38;
+	  EnumValue.add(Memories, DOG, "DOG", {
+		  id: "Dog Tail",
+		  name: "Dog Tail",
+		  cost: 100,
+		  title: "Dog",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.TailDog;
+		  }
+	  });
 
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];

@@ -2,7 +2,6 @@ package classes {
 import classes.GlobalFlags.*;
 import classes.IMutations.IMutationsLib;
 import classes.Scenes.Combat.CombatAbility;
-import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.DriderTown;
 import classes.Scenes.NPCs.EvangelineFollower;
@@ -11,6 +10,7 @@ import classes.Scenes.NPCs.IsabellaScene;
 import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.NPCs.ZenjiScenes;
+import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.VampireThirstEffect;
@@ -118,7 +118,7 @@ public class PlayerInfo extends BaseContent {
 			if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18)
 				bodyStats += "<b>Slime Craving:</b> Active! You are currently losing strength and speed.  You should find fluids.\n";
 			else {
-				if (player.hasPerk(PerkLib.SlimeCore) || player.hasPerk(PerkLib.DarkSlimeCore))
+				if (player.isSlime())
 					bodyStats += "<b>Slime Stored:</b> " + ((17 - player.statusEffectv1(StatusEffects.SlimeCraving)) * 2) + " hours until you start losing strength.\n";
 				else
 					bodyStats += "<b>Slime Stored:</b> " + (17 - player.statusEffectv1(StatusEffects.SlimeCraving)) + " hours until you start losing strength.\n";
@@ -161,7 +161,7 @@ public class PlayerInfo extends BaseContent {
 		miscStats += "<b>Marble:</b> " + Forgefather.marble + "/" + Forgefather.matCap + "\n";
 		miscStats += "<b>Sandstone:</b> " + Forgefather.sandstone + "/" + Forgefather.matCap + "\n";
 
-		miscStats += "<b>Basic Jobs:</b> " + player.currentBasicJobs() + " / 9\n";
+		miscStats += "<b>Basic Jobs:</b> " + player.currentBasicJobs() + " / 8\n";//9\n";
 		miscStats += "<b>Advanced Jobs:</b> " + player.currentAdvancedJobs() + " / " + player.maxAdvancedJobs() + "\n";
 		miscStats += "<b>Hidden Jobs:</b> " + player.currentHiddenJobs() + " / " + player.maxHiddenJobs() + "\n";
 		miscStats += "<b>Prestige Jobs:</b> " + player.currentPrestigeJobs() + " / " + player.maxPrestigeJobs() + "\n";
@@ -797,7 +797,7 @@ public class PlayerInfo extends BaseContent {
 		}
 
 		if (flags[kFLAGS.ANEMONE_KID] > 0)
-            interpersonStats += "<b>Kid A's Confidence:</b> " + SceneLib.anemoneScene.kidAXP() + "%\n";
+            interpersonStats += "<b>Kid A's Confidence:</b> " + SceneLib.kidAScene.kidAXP() + "%\n";
         if (flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 2) {
             if (SceneLib.kihaFollower.followerKiha())
                 interpersonStats += "<b>Kiha Affection:</b> " + 100 + "%\n";
@@ -899,6 +899,9 @@ public class PlayerInfo extends BaseContent {
 		}
 		if (flags[kFLAGS.OWCAS_ATTITUDE] > 0)
 			interpersonStats += "<b>Owca's Attitude:</b> " + flags[kFLAGS.OWCAS_ATTITUDE] + "\n";
+
+		if (SceneLib.telAdre.pablo.pabloAffection() > 0)
+			interpersonStats += "<b>Pablo's Affection:</b> " + flags[kFLAGS.PABLO_AFFECTION] + "%\n";
 
 		if (SceneLib.telAdre.rubi.rubiAffection() > 0)
             interpersonStats += "<b>Rubi's Affection:</b> " + Math.round(SceneLib.telAdre.rubi.rubiAffection()) + "%\n" + "<b>Rubi's Orifice Capacity:</b> " + Math.round(SceneLib.telAdre.rubi.rubiCapacity()) + "%\n";
@@ -1550,33 +1553,17 @@ public class PlayerInfo extends BaseContent {
 	}
 
 	//Sub-menus for limited levelling.
-	public function lvlUpFastSubMenu():void{
+	public function lvlUpFastSubMenu():void {
 		spriteSelect(null);
 		outputText("Fast levelling, just keep clicking on the button to level up by that number. Or press LvlMax to just get all the levels.");
 		outputText("\n\nPressing \"Done\" will bring you to stat/perk allocation.");
 		menu();
-		addButton(0,"Lvl +1", lUFSM1);
-		addButton(1,"Lvl +2", lUFSM2);
-		addButton(2,"Lvl +5", lUFSM5);
-		addButton(3,"Lvl +10", lUFSM10);
-		addButton(4,"LvlMax", lUFSMX);
+		addButton(0, "Lvl +1", lUFSMM, 1);
+		addButton(1, "Lvl +2", lUFSMM, 2);
+		addButton(2, "Lvl +5", lUFSMM, 5);
+		addButton(3, "Lvl +10", lUFSMM, 10);
+		addButton(4, "LvlMax", lUFSMM, 999);
 		addButton(14, "Done", lUFSMAP);
-	}
-
-	public function lUFSM1():void{
-		lUFSMM(1);
-	}
-	public function lUFSM2():void{
-		lUFSMM(2);
-	}
-	public function lUFSM5():void{
-		lUFSMM(5);
-	}
-	public function lUFSM10():void{
-		lUFSMM(10);
-	}
-	public function lUFSMX():void{
-		lUFSMM(999);
 	}
 
 	public function lUFSMM(incmax:int = 999):void{
@@ -1916,11 +1903,9 @@ public class PlayerInfo extends BaseContent {
 	}
 	public function mutationsClear(perks:Array):Array{
 		var temp:Array = [];
-		var compMutate:Array = MutationsLib.mutationsArray("", true);
-		var compMutate2:Array = MutationsLib.mutationsArray("Deprecated", true);
-		var compMutate3:Array = IMutationsLib.mutationsArray("");
-		var compMutate4:Array = IMutationsLib.mutationsArray("Deprecated");
-		var mArray:Array = PerkMenu.arrMerge(compMutate, compMutate2, compMutate3, compMutate4);
+		var compMutate:Array = MutationsLib.mutationsArray("All", true);
+		var compMutate2:Array = IMutationsLib.mutationsArray("All");
+		var mArray:Array = PerkMenu.arrMerge(compMutate, compMutate2);
 		for each (var playerPerk:PerkType in perks){
 			if (!(mArray.indexOf(playerPerk) >= 0)){
 				temp.push(playerPerk);
@@ -2003,9 +1988,13 @@ public class PlayerInfo extends BaseContent {
 			HPChange(player.spe, false);
 			statScreenRefresh();
 		}
-		//if (perk.ptype == PerkLib.RacialParagon) {
-		//	flags[kFLAGS.APEX_SELECTED_RACE] = Race.ALL_RACES[player.race];	//How do I get the current race id....
-		//}
+		if (perk.ptype == PerkLib.RacialParagon) {
+			var list:Array = Races.AllRacesByName;
+			list = sortedBy(list, function (a:Race):int {
+				return player.racialScoreCached(a);
+			}, true);
+			flags[kFLAGS.APEX_SELECTED_RACE] = list[0].id;
+		}
 		if (player.perkPoints > 0) {
 			doNext(perkBuyMenu);
 		} else {

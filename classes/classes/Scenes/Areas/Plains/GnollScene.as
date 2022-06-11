@@ -3,11 +3,11 @@
  */
 package classes.Scenes.Areas.Plains
 {
-	import classes.*;
-	import classes.Scenes.SceneLib;
-    import classes.display.SpriteDb;
+import classes.*;
+import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
-	public class GnollScene extends BaseContent
+public class GnollScene extends BaseContent
 	{
 				public function GnollScene()
 		{
@@ -120,7 +120,7 @@ package classes.Scenes.Areas.Plains
 					"Fuck the gnoll's ass with your penis.");
 				addButtonIfTrue(2, "ShoveDicks", shoveMulticock,
 					"Req. at least 2 cocks, fitting " + monster.analCapacity() + " area.",
-					player.countCocks(-1, monster.analCapacity()) >= 0,
+					player.countCocks(-1, monster.analCapacity()) >= 2,
 					"Try to fit as many dicks in her ass as you can.");
 				addButtonIfTrue(3, "TakeHerClit", takeGnollClit, "Req. a vagina",
 					player.hasVagina(), "Put your vagina to use and ride the gnoll's clit.");
@@ -161,11 +161,11 @@ package classes.Scenes.Areas.Plains
 			cleanupAfterCombat();
 		}
 
-		private function shoveMulticock():void {
+		public function shoveMulticock():void {
 			var usedCocks:Array = [];
 			var capacityLeft:Number = monster.analCapacity();
 			function findNext():Boolean { //find next cock
-				if (capacityLeft <= 0) {
+				if (capacityLeft <= 0 && !sceneHunter.other) {
 					sceneHunter.print("No fitting dick. <i>But it's hard to grow so many dicks, which will fit together... Maybe just enable 'Other' in SceneHunter options?</i>");
 					return false;
 				}
@@ -180,6 +180,7 @@ package classes.Scenes.Areas.Plains
 			}
 
 			clearOutput();
+			findNext();
 			outputText("The gnoll must be taught a lesson, but you're staying the hell away from her freaky anatomy.  You roughly roll her onto her belly and pull her lean ass up into the air.  You line up your " + cockDescript(usedCocks[0]) + " and ram it home into her tiny puckered entrance, eliciting a half-conscious gasp from the hyena girl.\n\n");
 			if (findNext()) {
 				outputText("\n\nWith a smirk, you pound away for a few minutes to get her loosened up.  Then you reach down and slap another " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " alongside the first.  With a grunt and a thrust, you shove both of them inside.");

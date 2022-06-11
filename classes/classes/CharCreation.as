@@ -16,20 +16,18 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
+import classes.GeneticMemories.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.IMutations.IMutationsLib;
 import classes.Items.*;
 import classes.Scenes.Areas.Desert.SandWitchScene;
+import classes.Scenes.Metamorph;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
-import classes.Scenes.Metamorph;
+import classes.display.SpriteDb;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
-import classes.display.SpriteDb;
-
-import classes.GeneticMemories.*;
 
 import coc.view.MainView;
 
@@ -331,7 +329,7 @@ import coc.view.MainView;
 					trace("1 vagina purged.");
 				}
 				//Keep gender and normalize genitals.
-				if (hadOldCock) player.createCock(5.5, 1, CockTypesEnum.HUMAN);
+				if (hadOldCock) player.createCock();
 				if (hadOldVagina) player.createVagina(true);
 				if (player.balls > 2) player.balls = 2;
 				if (player.ballSize > 2) player.ballSize = 2;
@@ -381,6 +379,8 @@ import coc.view.MainView;
             //keep settings flags
 			if (player.hasKeyItem("Ascension") >= 0) {
 				for each(var flag:int in [
+					kFLAGS.BACKGROUND_STYLE,
+					kFLAGS.CUSTOM_FONT_SIZE,
                     kFLAGS.NEW_GAME_PLUS_LEVEL,
                     kFLAGS.HUNGER_ENABLED,
                     kFLAGS.HARDCORE_MODE,
@@ -555,9 +555,6 @@ import coc.view.MainView;
 			player.balls = 2;
 			player.ballSize = 1;
 			player.createCock();
-			player.cocks[0].cockLength = 5.5;
-			player.cocks[0].cockThickness = 1;
-			player.cocks[0].cockType = CockTypesEnum.HUMAN;
 			player.cocks[0].knotMultiplier = 1;
 
 			//Breasts
@@ -614,9 +611,6 @@ import coc.view.MainView;
 			player.createVagina();
 			player.clitLength = .5;
 			player.createCock();
-			player.cocks[0].cockLength = 5.5;
-			player.cocks[0].cockThickness = 1;
-			player.cocks[0].cockType = CockTypesEnum.HUMAN;
 			player.cocks[0].knotMultiplier = 1;
 
 			//Breasts
@@ -1434,7 +1428,7 @@ import coc.view.MainView;
 					outputText("You spent some time as an alchemist's assistant, and alchemical items always seem to be more reactive in your hands.  Is this your history?");
 					break;
 				case PerkLib.HistoryCultivator:
-					outputText("You spent much of your time cultivating your soul, reaching the point where you successfully took the first step towards spiritual enlightment, as well as attaining an uncanny purity of soulforce. You will start with Job: Soul Cultivator perk. Your max soulforce will be roughly 10% higher. Is this your history?");
+					outputText("You spent much of your time cultivating your soul, reaching the point where you successfully took the first step towards spiritual enlightment, as well as attaining an uncanny purity of soulforce. You will start with Soul Cultivator perk & Cultivation Manual: Duality. Your max soulforce will be roughly 10% higher. Is this your history?");
 					break;
 				case PerkLib.HistoryFighter:
 					outputText("You spent much of your time fighting other children, and you had plans to find work as a guard when you grew up.  You do 10% more damage with physical melee attacks.  You will also start out with 50 gems and Job: Warrior perk.  Is this your history?");
@@ -1704,7 +1698,11 @@ import coc.view.MainView;
 			else player.setUndergarment(undergarments.C_LOIN);
 			if (player.biggestTitSize() >= 2) player.setUndergarment(undergarments.C_BRA);
 			else player.setUndergarment(undergarments.C_SHIRT);
-			if (player.hasPerk(PerkLib.HistoryCultivator) || (player.hasPerk(PerkLib.PastLifeCultivator) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.HistoryCultivator) || player.hasPerk(PerkLib.PastLifeCultivator)) {
+				player.createKeyItem("Cultivation Manual: Duality", 0, 0, 0, 0);
+				player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.HistoryFighter) || (player.hasPerk(PerkLib.PastLifeFighter) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryScout) || (player.hasPerk(PerkLib.PastLifeScout) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobRanger, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryScholar) || (player.hasPerk(PerkLib.PastLifeScholar) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
@@ -1717,7 +1715,6 @@ import coc.view.MainView;
 			if (player.hasPerk(PerkLib.HistoryReligious)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.HistorySlacker)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.HistorySlut)) player.perkPoints += 1;
-			if (player.hasPerk(PerkLib.PastLifeCultivator) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeFighter) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeScout) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeScholar) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
@@ -1752,15 +1749,20 @@ import coc.view.MainView;
 			if (player.hasPerk(PerkLib.AscensionNaturalMetamorph)) {
 				player.createPerk(PerkLib.GeneticMemory, 0, 0, 0, 0);
 				player.createPerk(PerkLib.Metamorph, 0, 0, 0, 0);
+				player.createPerk(PerkLib.MetamorphEx, 0, 0, 0, 0);
 			}
 			player.perkPoints += 1;
 			//setupMutations();
+			Metamorph.resetMetamorph();
+			if (player.hasCock()) transformations.UnlockCocks();
+			if (player.balls > 0) Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
+			if (player.hasVagina()) transformations.UnlockVagina();
+			if (player.hasBreasts()) transformations.UnlockBreasts();
 			clearOutput();
 			statScreenRefresh();
 			outputText("Would you like to play through the " + (1 * (1 + player.newGamePlusMod())) + "-day"+(player.newGamePlusMod() > 0 ? "s":"")+" prologue in Ingnam or just skip?");
 			player.updateRacialAndPerkBuffs();
 			player.HP = player.maxHP();
-			Metamorph.resetMetamorph();
 			//doYesNo(goToIngnam, arrival);
 			menu();
 			addButton(0, "Ingnam", goToIngnam);
@@ -2119,13 +2121,15 @@ import coc.view.MainView;
 			}
 		}
 
-		private function perkRPConfirm(tier:int, perk:PerkType, pCost:int):void{
+		private function perkRPConfirm(tier:int, perk:PerkType, pCost:int, RPP:int = 1):void{
 			player.ascensionPerkPoints -= pCost* tier;
 			if (tier == 1) player.createPerk(perk,1,0,0,1);
 			else player.setPerkValue(perk,1,player.perkv1(perk) + 1);
 			clearOutput();
 			outputText("You have acquired "+ perk.name() + "!");
-			doNext(rarePerks1);
+			if (RPP == 1) doNext(rarePerks1);
+			else doNext(rarePerks2);
+
 		}
 
 		private function perkBloodlineHeritage():void {
@@ -2177,9 +2181,10 @@ import coc.view.MainView;
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			menu();
 			var btn:int = 0;
-			//perkMetamorphAscCheck(btn);
-			//btn++
+			perkMetamorphAscCheck(btn);
+			btn++
 			//Deprecating on next public Build.
+			/*
 			if (player.ascensionPerkPoints >= 30 && !player.hasPerk(PerkLib.AscensionNaturalMetamorph)) addButton(btn, "N.Metamorph", perkNaturalMetamorph).hint("Perk allowing you to start with perks Genetic Memory and Metamorph.\n\nCost: 30 points");
 			else if (player.ascensionPerkPoints < 30 && !player.hasPerk(PerkLib.AscensionNaturalMetamorph)) addButtonDisabled(btn, "N.Metamorph", "You do not have enough ascension perk points!");
 			else addButtonDisabled(btn, "N.Metamorph", "You already bought Natural Metamorph perk.");
@@ -2223,6 +2228,7 @@ import coc.view.MainView;
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)) addButtonDisabled(btn, "T.G.M.(S5)", "You need to buy Transcendental Genetic Memory (Stage 4) perk first.");
 			else addButtonDisabled(btn, "T.G.M.(S5)", "You need ascend more times to buy this perk.");
 			btn++;
+			*/
 			//End of deprecation.
 			if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionUnderdog)) addButton(btn, "Underdog", perkUnderdog).hint("Perk allowing you to double base exp gains for fighting enemies above PC level, increasing max lvl diff when bonus is in effect will still increase from 20 to 40 above current PC lvl.\n\nCost: 5 points");// And... to live up to underdog role PC will 'accidentally' find few places to further power-up.
 			else if (player.ascensionPerkPoints < 5 && !player.hasPerk(PerkLib.AscensionUnderdog)) addButtonDisabled(btn, "Underdog", "You do not have enough ascension perk points!");
@@ -2264,14 +2270,14 @@ import coc.view.MainView;
 		}
 
 		//Unused for now
-		/*
+
 		private function perkMetamorphAscCheck(btn:int):void{
 			if (!player.hasPerk(PerkLib.AscensionNaturalMetamorph)){
 				if (player.ascensionPerkPoints < 30){
 					addButtonDisabled(btn, "Nat.MetaMph", "You do not have enough point to acquire Natural Metamorph.");
 				}
 				else{
-					perkRPConfirm(1,PerkLib.AscensionNaturalMetamorph, 30);
+					perkRPConfirm(1,PerkLib.AscensionNaturalMetamorph, 30, 2);
 				}
 			}
 			else{
@@ -2281,7 +2287,7 @@ import coc.view.MainView;
 						addButtonDisabled(btn, "Gen. Memory", "You do not have enough point to acquire Genetic Memory.");
 					}
 					else{
-						addButton(btn, "Gen. Memory", perkRPConfirm, 1, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost *1);
+						addButton(btn, "Gen. Memory", curry(perkRPConfirm, 1, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost *1, 2));
 					}
 				}
 				else {
@@ -2296,21 +2302,22 @@ import coc.view.MainView;
 						addButtonDisabled(btn, "Gen. Memory", "You have acquired the highest tier available.");
 					}
 					else {
-						addButton(btn, "Gen. Memory", perkRPConfirm, tier, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost * tier);
 						if (tier == 1){
 							player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15, 0, 0, 9000);
 						}
 						else{
-							player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 15 * tier);
+							player.changeStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 15 * tier);
 						}
+						addButton(btn, "Gen. Memory", curry(perkRPConfirm, tier, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost *1, 2));
 					}
 				}
 			}
 
 		}
-		*/
+
 
 		//Deprecating on next public build.
+		/*
 		private function perkNaturalMetamorph():void {
 			player.ascensionPerkPoints -= 30;
 			player.createPerk(PerkLib.AscensionNaturalMetamorph,0,0,0,1);
@@ -2781,6 +2788,26 @@ import coc.view.MainView;
 				{
 					name: "Tail",
 					func: accessTailMenu
+				},
+				{
+					name: "Breasts",
+					func: accessBreastsMenu
+				},
+				{
+					name: "Vagina",
+					func: accessVaginaMenu
+				},
+				{
+					name: "PenisCount",
+					func: accessCockCountMenu
+				},
+				{
+					name: "Penis",
+					func: accessCockMenu
+				},
+				{
+					name: "Balls",
+					func: accessBallsMenu
 				}
 			];
 
@@ -2883,6 +2910,26 @@ import coc.view.MainView;
 			openPaginatedMetamorphMenu("Tail", accessTailMenu, currentPage, TailMem.Memories);
 		}
 
+		private function accessBreastsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Breasts", accessBreastsMenu, currentPage, BreastMem.Memories);
+		}
+
+		private function accessVaginaMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Vagina", accessVaginaMenu, currentPage, VaginaMem.Memories);
+		}
+
+		private function accessCockMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Cock", accessCockMenu, currentPage, CockMem.Memories);
+		}
+
+		private function accessCockCountMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Cock Count", accessCockCountMenu, currentPage, CockCountMem.Memories);
+		}
+
+		private function accessBallsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Balls", accessBallsMenu, currentPage, BallsMem.Memories);
+		}
+
 		private function openPaginatedMetamorphMenu (title: String, thisMenu: *, currentPage: int, memArray:Array): void {
 			clearOutput();
 			outputText("<font size=\"36\" face=\"Georgia\"><u>Permanentize Metamorphs - " + title +"</u></font>\n");
@@ -2945,7 +2992,7 @@ import coc.view.MainView;
 			} else {
 				clearOutput();
 				outputText("<font size=\"36\" face=\"Georgia\"><u>Permanentize Metamorphs</u></font>\n");
-				outputText("<b>You've permanentized the maximum amount of of metamorphs available for your current stage of Transcedental Genetic Memory!</b>");
+				outputText("<b>You've permanentized the maximum amount of metamorphs available for your current stage of Transcedental Genetic Memory!</b>");
 				menu();
 				doNext(ascensionMenu);
 			}

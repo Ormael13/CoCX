@@ -107,49 +107,41 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
-			var needNext:Boolean = false;
 			pregnancy.pregnancyAdvance();
 			if (flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] > 0) flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO]--;
 			if (flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER] > 0 && flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER] < 30 * 24) flags[kFLAGS.AMILY_INCEST_COUNTDOWN_TIMER]++;
+			if (flags[kFLAGS.AMILY_FOLLOWER] == 1 && model.time.hours == 6 && flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 && flags[kFLAGS.CAMP_WALL_SKULLS] < 100 && rand(3) == 0)
+				flags[kFLAGS.CAMP_WALL_SKULLS]++;
+			if (model.time.hours > 23 && flags[kFLAGS.AMILY_X_JOJO_COOLDOWN] > 0) flags[kFLAGS.AMILY_X_JOJO_COOLDOWN]--;
+			return false;
+		}
+
+		public function timeChangeLarge():Boolean {
 			if (flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 				if (pregnancy.isPregnant && pregnancy.incubation == 0) {
-					outputText("\n");
 					amilyPopsOutKidsInCamp();
-					pregnancy.knockUpForce(); //Clear Pregnancy
-					outputText("\n");
-					needNext = true;
+					return true;
 				}
 				if (pregnancy.isButtPregnant && pregnancy.buttIncubation == 0) {
 					amilyLaysEggsLikeABitch();
-					pregnancy.buttKnockUpForce(); //Clear Pregnancy
-					needNext = true;
+					return true;
 				}
 			}
 			if (model.time.hours == 6) {
+				if (!SceneLib.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 2) {
+					SceneLib.followerInteractions.amilyUrtaMorningAfter();
+					return true;
+				}
 				//Pure amily flips her shit and moves out!
 				if (flags[kFLAGS.AMILY_FOLLOWER] == 1 && player.cor >= 66 + player.corruptionTolerance && flags[kFLAGS.AMILY_WARNING] > 0) {
 					amilyScene.farewellNote();
-					needNext = true;
+					return true;
 				}
 				//Amily moves back in once uncorrupt.
 				if (flags[kFLAGS.AMILY_TREE_FLIPOUT] == 0 && flags[kFLAGS.AMILY_WARNING] > 0 && player.cor <= 25 + player.corruptionTolerance && flags[kFLAGS.AMILY_FOLLOWER] == 0) {
 					amilyScene.amilyReturns();
-					needNext = true;
+					return true;
 				}
-			}
-			else if (model.time.hours > 23) {
-				if (flags[kFLAGS.AMILY_X_JOJO_COOLDOWN] > 0) flags[kFLAGS.AMILY_X_JOJO_COOLDOWN]--;
-			}
-			return needNext;
-		}
-
-		public function timeChangeLarge():Boolean {
-			if (!SceneLib.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 2 && model.time.hours == 6) {
-				SceneLib.followerInteractions.amilyUrtaMorningAfter();
-				return true;
-			}
-			if (flags[kFLAGS.AMILY_FOLLOWER] == 1 && model.time.hours == 6 && flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 && flags[kFLAGS.CAMP_WALL_SKULLS] < 100 && rand(3) == 0) {
-				flags[kFLAGS.CAMP_WALL_SKULLS]++;
 			}
 			return false;
 		}
@@ -2482,7 +2474,6 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if (pregnancy.isPregnant && pregnancy.incubation == 0 && flags[kFLAGS.AMILY_FOLLOWER] == 2) {
 				clearOutput();
 				amilyPopsOutKidsInCamp();
-				pregnancy.knockUpForce(); //Clear Pregnancy
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
@@ -5591,9 +5582,11 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("Amily nuzzles your crotch affectionately before saying, \"<i>Look " + player.mf("master","mistress") + ", our children are already eager to serve you.</i>\" You look down at her and she looks up at you. Then finally Amily turns to address the gathered children, \"<i>Sorry, my dears, but you're not yet ready to serve the " + player.mf("master","mistress") + ". If you want some of this...</i>\" She says, nuzzling your crotch once more, \"<i>You will need to have some experience first.</i>\"  The children all look down and whine in disappointment, sad that they won't get anywhere near their mother's treasure. \"<i>Now, now, don't despair, my beautiful budding sluts. If you go out into the world, I'm sure you'll gather the experience needed to serve the " + player.mf("master","mistress") + " in no time. Now give mommy a goodbye kiss.</i>\"\n\n");
 
 				outputText("The mice quickly perk up and rush towards Amily, and she takes turns giving each of them a kiss; then sending each of them off towards the jungle with a playful slap on their little butts. When the last one has left, you congratulate Amily on being a good slut and giving birth to so many cute potential toys, \"<i>Thank you " + player.mf("master","mistress") + "!</i>\" she says happily. Then she nuzzles your crotch once more and adds, \"<i>If " + player.mf("master","mistress") + " wants to knock me up again, just say so. Your mousey cunt-slut is always ready to receive and deliver even more sluts to worship you and join your harem, my " + player.mf("master","mistress") + ".</i>\" You pat her head and leave to attend to other affairs.");
-				player.orgasm();
+				player.sexReward("saliva", "Default");
 				dynStats("cor", 3);
 			}
+			pregnancy.knockUpForce(); //Clear Pregnancy
+			doNext(playerMenu);
 		}
 
 		//"Make Children" Lovemaking Option:
@@ -6959,6 +6952,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
 			//Change to plain mouse birth!
 			if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
+			doNext(playerMenu);
 		}
 
 		//Amily's Return:
@@ -6978,6 +6972,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			flags[kFLAGS.AMILY_WARNING] = 0;
 			//Disable village encounters
 			flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
+			doNext(playerMenu);
 		}
 
 
@@ -7739,6 +7734,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 		//Amily Laying
 		public function amilyLaysEggsLikeABitch():void {
+			amilySprite();
 			outputText("\nWhilst wandering around your camp, you heard a flurry of soft squeaks from the direction of Amily's nest.  Intrigued, you sidle over to see what the commotion is.  When you get there, your eyes widen at the sight of your oft-restrained lover relaxing in her soft bedding, completely bottomless.  Her legs are spread wide, giving you a perfect view of both her holes as she rapidly ");
 			if(flags[kFLAGS.AMILY_WANG_LENGTH] == 0) outputText("teases her clit");
 			else outputText("squeezes her shaft");
@@ -7755,6 +7751,8 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			else outputText("though a distinct heat in your nethers leaves you wishing you had another clutch to unload right now\n");
 			dynStats("lus", (5+player.lib/10), "scale", false);
 			flags[kFLAGS.AMILY_OVIPOSITED_COUNT] = 0;
+			pregnancy.buttKnockUpForce(); //Clear Pregnancy
+			doNext(playerMenu);
 		}
 
 

@@ -125,11 +125,7 @@ public class MaraFruit extends Consumable{
 					temp++;
 				}
 				temp = choices[rand(choices.length)];
-				outputText("\n\nYour " + num2Text2(temp+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your " + player.cockDescript(temp) + " has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a");
-				if(player.tentacleCocks() > 0) outputText("nother");
-				outputText(" tentacle-cock!</b>");
-				player.cocks[temp].cockType = CockTypesEnum.TENTACLE;
-				player.cocks[temp].knotMultiplier = 1.3;
+				CoC.instance.transformations.CockTentacle(temp).applyEffect();
 				dynStats("lus", 10);
 				player.addCurse("sen", 3,1);
 			}

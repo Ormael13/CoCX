@@ -42,10 +42,7 @@ public class GooGirlScene extends AbstractLakeContent
 			GooLocation = "lake";
 			outputText("As you walk around the "+GooLocation+", you notice a pale red light pulsing in the " + (flags[kFLAGS.FACTORY_SHUTDOWN] == 1 ? "sapphire" : "murky") + " waters. You pause, trying to figure out what the shape might be. Just under the surface of the water, there appears to be a fist-sized heart shedding a crimson glow. Leaning closer, you gaze down into your reflection only to find your face rising up with pursed lips, trying to kiss you! You jerk backwards, and the pseudo-head quivers, resolving its face into a gooey-looking girl, her ");
 			outputText(gooColor() + " slime body sculpting itself into a humanoid shape. The girl curiously tilts her head to one side, as if trying to figure out why you're backing away, before she happily surges forward!");
-			if (flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Goo Girls!</b>")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOOGIRLS);
 			startCombat(monster);
 			doNext(playerMenu);
 		}
@@ -58,10 +55,7 @@ public class GooGirlScene extends AbstractLakeContent
 			GooLocation = "beach";
 			outputText("As you walk around the "+GooLocation+", you notice a pale red light pulsing in the waters. You pause, trying to figure out what the shape might be. Just under the surface of the seawater, there appears to be a fist-sized heart shedding a crimson glow. Leaning closer, you gaze down into your reflection only to find your face rising up with pursed lips, trying to kiss you! You jerk backwards, and the pseudo-head quivers, resolving its face into a gooey-looking girl, her ");
 			outputText(gooColor() + " slime body sculpting itself into a humanoid shape. The girl curiously tilts her head to one side, as if trying to figure out why you're backing away, before she happily surges forward!");
-			if (flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] <= 0) {
-				flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] = 1;
-				outputText("\n\n<b>New codex entry unlocked: Goo Girls!</b>")
-			}
+			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_GOOGIRLS);
 			startCombat(monster);
 			doNext(playerMenu);
 		}
@@ -69,7 +63,7 @@ public class GooGirlScene extends AbstractLakeContent
 		//New Perk – Slime Core (requires goo player, random drop rate?)
 		private function coreDropChance():void
 		{
-			if (rand(4) == 0 && player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.SlimeCore) && !player.hasPerk(PerkLib.DarkSlimeCore) && player.isGoo() && player.racialScore(Races.SLIME) >= 4) {
+			if (rand(4) == 0 && player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.isSlime() && player.isGoo() && player.racialScore(Races.SLIME) >= 4) {
 				outputText("\n\nAs the goo-girl slithers away, into the "+GooLocation+"'s placid waves, you notice she seems to have left behind a small blob. Upon investigation, it appears to be a tiny, ruby heart, encased in a slimy " + gooColor8() + " membrane. As you reach to pick it up, the jelly ball quivers and pulses with a warm, cheerful light. Your fingers close on it, and the nucleus slides through your palm, into your body!\n\n");
 
 				outputText("There is a momentary pressure in your chest, and a few memories that are not your own flicker before your eyes. The dizzying sight passes, and the slime core settles within your body, imprinted with your personality and experiences. There is a comforting calmness from your new nucleus, and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n\n");

@@ -10,9 +10,6 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.Races;
-import classes.Scenes.SceneLib;
-import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.Scenes.Areas.BlightRidge.Incubus;
 import classes.Scenes.Areas.BlightRidge.Omnibus;
 import classes.Scenes.Areas.BlightRidge.Succubus;
@@ -456,10 +453,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             clearOutput();
             outputText("You turn around the corner and come face to face with a greyish six armed catgirl. She would be terrifying already even without the two tentacles on her back that writhe in excitation. Readying for battle is the best you can do as the beast woman charges you with a gleam of hunger in her feral eyes.");
         }
-        if (flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] <= 0) {
-            flags[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST] = 1;
-            outputText("\n\n<b>New codex entry unlocked: Displacer beast!</b>")
-        }
+        camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_DISPLACER_BEAST);
         startCombat(new DisplacerBeast(), true);
     }
     private function darkSlimeEL(print:Boolean = true):void {
@@ -468,7 +462,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
                 minotaurEL(false); //replace - slime won't attack another slime
                 return;
             }
-            spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
+            spriteSelect(SpriteDb.s_darkgoogirlsprite);
             clearOutput();
             outputText("You take the turn at the end of the corridor and run right into a dark slime. For a few second the both of you consider each other before the slime shrugs and simply asks.\n\n");
             outputText("\"<i>No luck finding fluids that way?</i>\"");
@@ -477,7 +471,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             outputText("Well that was easy… you can only guess slimes don’t get much out of other slimes’ bodies. You proceed deeper into the labyrinth unhindered, though, you wish you indeed had found someone to milk the fluids off.\n\n");
         }
         else {
-            spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
+            spriteSelect(SpriteDb.s_darkgoogirlsprite);
             if (print) {
                 clearOutput();
                 outputText("As you wander into a new corridor, you come face to face with a purplish jelly-like woman. She giggles upon spotting you, her small, sphere-shaped core emitting an ominous light as she surges toward you with a gooey smile.\n\n");
@@ -490,10 +484,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         if (print) {
             clearOutput();
             outputText("You run right into a demon. The fiend look at you confused, then attacks with glee.");
-            if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] <= 0) {
-                flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
-                outputText("\n\n<b>New codex entry unlocked: Succubus!</b>")
-            }
+            camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SUCCUBUS);
         }
         startCombat(new Succubus(), true);
     }

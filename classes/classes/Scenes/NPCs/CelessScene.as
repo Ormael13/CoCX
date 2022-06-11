@@ -532,6 +532,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			case 2:
 				if (player.bRows() == 0) {
 					player.createBreastRow();
+					transformations.UnlockBreasts();
 				}
 				player.growTits(3, 1, false, 1);
 				celessGuardOkayMale();
@@ -591,6 +592,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				if (!player.blockingBodyTransformations()) {
 					if (player.bRows() == 0) {
 						player.createBreastRow();
+						transformations.UnlockBreasts();
 					}
 					player.growTits(3, 1, false, 1);
 				}

@@ -4,7 +4,6 @@ import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
-import classes.BodyParts.Hair;
 import classes.BodyParts.Horns;
 import classes.BodyParts.ISexyPart;
 import classes.BodyParts.LowerBody;
@@ -38,7 +37,6 @@ import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
 import classes.Items.WeaponRangeLib;
-import classes.Races.ElementalRace;
 import classes.Races.HumanRace;
 import classes.Scenes.Combat.CombatAbilities;
 import classes.Scenes.Combat.CombatAbility;
@@ -2187,7 +2185,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.PureAndLoving)) lust *= 0.95;
 			//Berseking reduces lust gains by 10%
 			if (hasStatusEffect(StatusEffects.Berzerking)) lust *= 0.9;
-			if (hasStatusEffect(StatusEffects.Overlimit)) lust *= 0.9;
+			if (hasStatusEffect(StatusEffects.Overlimit) || hasStatusEffect(StatusEffects.FieryRage)) lust *= 0.9;
 			if (TyrantiaFollower.TyrantiaTrainingSessions >= 25 && lust100 >= 50) {
 				if (lust100 >= 100) lust *= 0.3;
 				else if (lust100 >= 51) lust *= (1 - ((lust100 - 30) * 0.01));
@@ -2222,7 +2220,7 @@ use namespace CoC;
 			if (hasStatusEffect(StatusEffects.Aegis)) lust *= 0.5;
 			lust = Math.round(lust);
 			if (hasStatusEffect(StatusEffects.Lustzerking) && !hasPerk(PerkLib.ColdLust)) lust = 100;
-			if (hasStatusEffect(StatusEffects.BlazingBattleSpirit)) lust = 0;
+			if (hasStatusEffect(StatusEffects.BlazingBattleSpirit) || hasStatusEffect(StatusEffects.MomentOfClarity)) lust = 0;
 			return lust;
 		}
 
@@ -2366,6 +2364,8 @@ use namespace CoC;
 				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
 					damage = bloodShieldAbsorb(damage, display);
 				}
+				if (hasStatusEffect(StatusEffects.AdamantineShell)) damage *= 0.25;
+				if (hasStatusEffect(StatusEffects.TrueEvasion)) damage = 0;
 				if (damage > 0) {
 					switch (damagetype) {
 						case 0: // physical
@@ -3440,10 +3440,6 @@ use namespace CoC;
 		public function isPureHuman():Boolean {
 			return humanScore() >= HumanRace.maxScore;
 		}
-
-		public function finalRacialScore(score: Number, race:Race):Number {
-			return race.finalizeScore(bodyData(), score);
-		}
 		
 		public function racialScore(race:Race):int {
 			return race.totalScore(bodyData());
@@ -4134,8 +4130,8 @@ use namespace CoC;
 				slimeGrowth();
 			}
 			if (hasPerk(PerkLib.Diapause)) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] += 3 + rand(3);
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 1;
+				flags[kFLAGS.DIAPAUSE_FLUID_STORE] += 3 + rand(3);
+				flags[kFLAGS.DIAPAUSE_DISPLAYED] = 1;
 			}
 			if (isGargoyle() && hasPerk(PerkLib.GargoyleCorrupted)) refillGargoyleHunger(30);
 			if (isRace(Races.JIANGSHI) && hasPerk(PerkLib.EnergyDependent)) EnergyDependentRestore();
@@ -4366,10 +4362,7 @@ use namespace CoC;
 					else amount /= 1.5;
 				}
 			}
-			/*if(breastRows[0].breastRating > 12) {
-				if(hasPerk("Big Tits") < 0) amount/=2;
-				else amount /= 1.5;
-			}*/
+
 			if(growthType == 2) {
 				temp = 0;
 				//Start at top and keep growing down, back to top if hit bottom before done.
@@ -4650,8 +4643,9 @@ use namespace CoC;
 					minCap += jewelryEffectMagnitude;
 				}
 			}
-			if (armorName == "lusty maiden's armor") min += Math.round(minCap * 0.3);
+			if (armorName == "lusty maiden's armor" || armorName == "Succubus armor") min += Math.round(minCap * 0.3);
 			if (armorName == "tentacled bark armor") min += Math.round(minCap * 0.2);
+			if (hasPerk(PerkLib.HotNCold) && min > Math.round(minCap * 0.75)) min = Math.round(minCap * 0.75); 
 			//Constrain values
 			if (min < 0) min = 0;
 			if (min > minCap) min = minCap;
