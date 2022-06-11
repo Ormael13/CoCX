@@ -569,7 +569,11 @@ public class SceneHunter extends BaseContent {
         //Venus cock scenes
         if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && flags[kFLAGS.KAIJU_COCK] == 1)
             addButton(9, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus).hint("Venus discovers her new cock.");
-
+        //Venus cock scenes
+        if (flags[kFLAGS.MET_MARAE_CORRUPTED] > 0 && player.gender > 0)
+            addButton(10, "C.Marae(1)", SceneLib.boat.marae.firstCorruptEncounter).hint("Repeat your encounters with the corrupted goddess.");
+        if (flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] > 0 && player.gender > 0)
+            addButton(11, "C.Marae(2)", SceneLib.boat.marae.level2MaraeEncounter).hint("Repeat your encounters with the corrupted goddess.");
 
         addButton(13, "CampNPCs", recallScenes_NPCs);
         addButton(13, "Dungeons", recallScenes_dungeons);
@@ -650,7 +654,7 @@ public class SceneHunter extends BaseContent {
     private function recallScenes_phoenixTower():void {
         menu();
         //Harpy defeat is checked earlier. Kiri disappears after it too.
-        addButton(0, "Kiri", /*clearWrapper,*/ SceneLib.dungeons.heltower.kiriInteraction).hint("If you were too busy slaughtering phoenixes and didn't have time to properly 'interact' with Kiri, here's your new chance.");
+        addButton(0, "Kiri", SceneLib.dungeons.heltower.kiriInteraction).hint("If you were too busy slaughtering phoenixes and didn't have time to properly 'interact' with Kiri, here's your new chance.");
         addButton(1, "HarpyQueen", SceneLib.dungeons.heltower.fuckHarpyQueen).hint("Oops. Harpy queen is dead already. But she'll live forever in your memories. For <i>any</i> purposes.");
         addButton(14, "Back", recallScenes_dungeons);
     }
@@ -661,14 +665,5 @@ public class SceneHunter extends BaseContent {
         recalling = false; //EVERY recall scene must return here to clear the flag.
         doNext(camp.returnToCampUseOneHour);
     }
-
-    //I'll delete it soon if I don't find another place to use it.
-    /*
-    //clears output before going to menu
-    public function clearWrapper(fun:Function, ...args):void {
-        clearOutput();
-        fun.apply(null,args);
-    }
-    */
 }
 }

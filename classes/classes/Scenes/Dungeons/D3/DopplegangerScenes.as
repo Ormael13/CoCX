@@ -65,7 +65,7 @@ import classes.Races;
 			outputText("\n\n\"<i>No...</i>\" your mirror image snivels in front of you. \"<i>Ten years, ten years I waited for this. You can’t put me back in there, you can’t!</i>\" You gaze down at what you look like when you are defeated: mouth open, eyes glazed, [hair] muddled, your flesh trembling and clenching, the very picture of a bitch awaiting further subjugation. No wonder 90% of Mareth is so keen on wanting to make this sight happen. The doppelganger chances a look-up, catches your expression, and freezes. \"<i>You... you wouldn’t.</i>\"");
 			
 			menu();
-			addButtonIfTrue(0, "Oh Really?", fuckYourself, "Not for taurs!", player.isTaur());
+			addButtonIfTrue(0, "Oh, Really?", fuckYourself, "Not for taurs!", !player.isTaur());
 			addButton(1, "End It", killYourself);
 		}
 		

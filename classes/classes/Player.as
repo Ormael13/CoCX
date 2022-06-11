@@ -6852,7 +6852,7 @@ use namespace CoC;
 					CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 					CoC.instance.mainView.statsView.showStatUp('spe');
 					outputText("\n\nAs your bottled up voltage ramps up you begin to lose yourself to lust turning increasingly feral as your overwhelming need to discharge override any rational thinking. FUCK… you need someone to fuck that voltage out of you!");
-					if(game.inCombat) outputText(" [monster] gulp as [he] see's your lust crazed expression. Should you win [he] won't get off the hook so easily!");
+					if(game.inCombat) outputText(" [themonster] gulps as [monster he] see's your lust crazed expression. Should you win [he] won't get off the hook so easily!");
 					outputText("\n\n<b>You entered the supercharged state!</b>\n\n");
 				}
 				if(lust100 >= 100){

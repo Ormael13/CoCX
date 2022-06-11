@@ -9908,7 +9908,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 		if (rand(3) == 0 && changes < changeLimit && type == 1 && MutagenBonus("int", 3)) {
-            outputText("[pg]It seems not only your eyes see better, your mind is clearer too. A paranoid thought suddenly comes to you as you realise just about anyone you know could be plotting your demise in secret"+((flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 || flags[kFLAGS.MET_MARAE_CORRUPTED] >= 1) ? " after all your village elders sold you off to the demons as a sacrifice":"")+". Come to think of it, who are your true friends even?");
+            outputText("[pg]It seems not only your eyes see better, your mind is clearer too. A paranoid thought suddenly comes to you as you realise just about anyone you know could be plotting your demise in secret"+((flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 || flags[kFLAGS.MET_MARAE_CORRUPTED] == 1) ? " after all your village elders sold you off to the demons as a sacrifice":"")+". Come to think of it, who are your true friends even?");
             changes++;
         }
         if (changes < changeLimit && rand(3) == 0 && player.spe > 15 && type == 1) {

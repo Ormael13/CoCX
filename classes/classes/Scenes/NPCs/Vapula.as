@@ -356,7 +356,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 			if (SceneLib.farm.farmCorruption.hasTattoo("vapula"))
 			{
 				outputText("\n\n");
-				if (SceneLib.farm.farmCorruption.vapulaFullTribalTats())
+				if (SceneLib.farm.farmCorruption.fullTribalTats("vapula"))
 				{
 					outputText("She is covered from head to tail in tribal tattoos, erotic lines snaking all over her naked frame, giving her the look of a barely tamed savage.")
 				}
