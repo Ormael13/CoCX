@@ -1973,9 +1973,10 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.005;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.006) { //Cloning this down.
-				if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX) && !player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory)){
+				if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX) && !player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory)) {
 					var permedMetamorphCount:int = Metamorph.PermanentMemoryStorage.length;
-					player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory,15 * player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX),permedMetamorphCount,0,0);
+					player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15 * player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX), permedMetamorphCount, 0, 0);
+				}
 				if (player.hasPerk(PerkLib.Dantain)) {
 					player.removePerk(PerkLib.Dantain);
 					player.perkPoints += 1;

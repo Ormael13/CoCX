@@ -476,7 +476,8 @@ public final class Mutations extends MutationsHelper {
     }
     public function nonuplethrustmanual(player:Player):void {
         clearOutput();
-        if (player.hasPerk(PerkLib.SoulSprite) && player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) {
+        if (player.hasPerk(PerkLib.SoulPersonage) && player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) {
+        //if (player.hasPerk(PerkLib.SoulSprite) && player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsNonupleThrust)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Nonuple Thrust.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skill: Nonuple Thrust.</b>");
@@ -609,7 +610,8 @@ public final class Mutations extends MutationsHelper {
 
     public function cometmanual(player:Player):void {
         clearOutput();
-        if (player.hasPerk(PerkLib.SoulWarrior)) {
+        //if (player.hasPerk(PerkLib.SoulWarrior)) {
+        if (player.hasPerk(PerkLib.SoulPersonage)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsComet)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Comet.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skill: Comet.</b>");
@@ -628,7 +630,8 @@ public final class Mutations extends MutationsHelper {
 
     public function violetpupiltransformationmanual(player:Player):void {
         clearOutput();
-        if (player.hasPerk(PerkLib.SoulWarrior)) {
+        //if (player.hasPerk(PerkLib.SoulWarrior)) {
+        if (player.hasPerk(PerkLib.SoulPersonage)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Violet Pupil Transformation.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skill: Violet Pupil Transformation.</b>");
