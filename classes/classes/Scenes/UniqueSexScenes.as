@@ -391,7 +391,7 @@ public class UniqueSexScenes extends BaseContent
 						"Before [he] can make any further protest, you plug yourself into [his] "+monster.assholeOrPussy()+", thrusting with wanton abandon as your charge quickly builds up within you. In a moment, you quickly begin unloading surge after surge of electricity into them. The air crackles around you with latent, lustful shocks. You can't help but growl in pleasure.\n\n" +
 						"Your poor victim's hole reflexively tightens around you as you continue bucking into them eagerly, the sheer force of your electricity causing them to spasm and quiver beneath your presence. You bring more of your weight upon them as you can feel yourself getting closer to the release that you so crave. Your eyes roll back, causing your vision to white out as you continue unloading all your charge into the make-shift lightning rod.\n\n" +
 						"[themonster] continues clenching against you as a familiar pressure and heat builds up within your loins. You let loose a loud grunt as you finally release your load into [him]. Shot after shot of raiju plasma fills up your hapless victim as you steadily regain your senses, and your erection deflates.\n\n" +
-						"Finally, you slowly unplug yourself from them, cum slowly seeping out of the broken, twitching mess you've left the [monster] in. Your partner will be a fumbling mess for a while with all that lingering charge in them. Electricity courses around their form as [he] clenches [his] body, still cumming.\n\n" +
+						"Finally, you slowly unplug yourself from them, cum slowly seeping out of the broken, twitching mess you've left [themonster] in. Your partner will be a fumbling mess for a while with all that lingering charge in them. Electricity courses around their form as [he] clenches [his] body, still cumming.\n\n" +
 						"You no longer have any need to stick around now that your vision is cleared, and your mind is no longer stuck in a fog. You decide to head back to your camp, satisfied.");
 				if (monster.hasVagina())
 					player.sexReward("vaginalFluids","Dick");
@@ -433,7 +433,7 @@ public class UniqueSexScenes extends BaseContent
 							"[themonster] continues flailing randomly as a familiar pressure and heat builds up within your loins." +
 							" You let loose a loud grunt as you finally achieve release, shooting all the remaining voltage into your victim's body as a pool of raiju plasma floods into [his] open mouth." +
 							" Emptied from your overwhelming lust, you steadily regain your senses as your orgasm ebbs down and that of your victim heads up.\n\n" +
-							"Finally, you slowly unplug yourself from them plasma slowly dripping out of your outlet as you give one last glance at the broken, twitching mess you've left the [monster] in." +
+							"Finally, you slowly unplug yourself from them plasma slowly dripping out of your outlet as you give one last glance at the broken, twitching mess you've left [themonster] in." +
 							" Your unfortunate partner will be a fumbling mess for a while with all that lingering charge in them, let alone you're not sure they are going to be able to speak again for a while." +
 							" Electricity courses around their form as [he] clenches [his] body, still cumming.\n\n" +
 							"You no longer have any need to stick around now that your vision is cleared, and your mind is no longer stuck in a fog. You decide to head back to your camp, satisfied.");

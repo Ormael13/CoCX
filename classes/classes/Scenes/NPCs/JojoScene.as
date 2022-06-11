@@ -148,7 +148,7 @@ public function corruptCampJojo():void {
 		if (SceneLib.farm.farmCorruption.hasTattoo("jojo"))
 		{
 			outputText("\n\n");
-			if (SceneLib.farm.farmCorruption.jojoFullTribalTats())
+			if (SceneLib.farm.farmCorruption.fullTribalTats("jojo"))
 			{
 				outputText("He is covered from head to tail in tribal tattoos, erotic lines snaking all over his naked frame, giving him the look of a barely tamed savage.")
 			}
