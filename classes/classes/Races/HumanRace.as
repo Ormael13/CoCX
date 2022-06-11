@@ -7,6 +7,8 @@ import classes.Race;
 import classes.VaginaClass;
 
 public class HumanRace extends Race {
+	public static const HumanSkinColors:/*String*/Array = ["tan", "olive", "dark", "light"];
+
 	public function HumanRace(id:int) {
 		super("Human", id);
 		chimeraTier = 0;

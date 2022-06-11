@@ -21,10 +21,12 @@ public class KitsuneRace extends Race {
 	public static const BasicKitsuneHairColorSet:/*String*/Array = ["white", "black", "red"];
 	public static const BasicKitsuneFurColors:/*String*/Array = ["orange and white", "black", "black and white", "red", "red and white", "white"];
 	public static const ElderKitsuneColors:/*String*/Array = ["metallic golden", "golden blonde", "metallic silver", "silver blonde", "snow white", "iridescent gray"];
-	
+	public static const BasicKitsuneSkinColors:/*String*/Array = ["tan", "olive", "light"];
+	public static const ElderKitsuneSkinColors:/*String*/Array = ["dark", "ebony", "ashen", "sable", "milky white"];
+
 	public static const KitsuneHairColors:/*String*/Array = BasicKitsuneHairColorSet.concat(ElderKitsuneColors);
 	public static const KitsuneFurColors:/*String*/Array = BasicKitsuneFurColors.concat(ElderKitsuneColors);
-	
+
 	public function KitsuneRace(id:int) {
 		super("Kitsune", id);
 		mutationThreshold = 6;
