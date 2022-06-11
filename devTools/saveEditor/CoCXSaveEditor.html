@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <title>CoCX Save Editor</title>
+    <style>
+        .colorbox {
+            display: inline-block;
+            height: 16px;
+            width: 16px;
+            border: 1px solid black;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <v-app id="inspire">
+        <v-navigation-drawer permanent app>
+            <v-list-item>
+                <v-list-item-content>
+                    <v-list-item-title class="text-h6">
+                        <template v-if="loaded">
+                            Editing {{save.short}}
+                        </template>
+                        <template v-else>
+                            No save loaded
+                        </template>
+                    </v-list-item-title>
+                    <v-list-item-subtitle>
+                        {{fileName}}
+                    </v-list-item-subtitle>
+                </v-list-item-content>
+            </v-list-item>
+
+            <v-divider></v-divider>
+
+            <v-list dense nav>
+                <nav-tab v-model="tab" code="open" icon="mdi-folder-open" label="Load"></nav-tab>
+                <nav-tab v-model="tab" code="save" :disabled="!loaded" icon="mdi-floppy" label="Save"></nav-tab>
+            </v-list>
+            <v-divider></v-divider>
+            <v-list dense nav v-if="loaded">
+                <nav-tab v-model="tab" code="stats" icon="mdi-dice-multiple" label="Stats"></nav-tab>
+                <nav-tab v-model="tab" code="body" icon="mdi-human" label="Body"></nav-tab>
+                <nav-tab v-model="tab" code="perks" icon="mdi-file-tree" label="Perks"></nav-tab>
+                <nav-tab v-model="tab" code="mutations" icon="mdi-dna" label="Mutations"></nav-tab>
+                <nav-tab v-model="tab" code="items" icon="mdi-sword" label="Items"></nav-tab>
+                <nav-tab v-model="tab" code="statuses" icon="mdi-format-list-bulleted-type" label="Statuses"></nav-tab>
+                <nav-tab v-model="tab" code="flags" icon="mdi-flag" label="Flags"></nav-tab>
+                <nav-tab v-model="tab" code="world" icon="mdi-earth" label="World"></nav-tab>
+                <nav-tab v-model="tab" code="other" icon="mdi-dots-horizontal" label="Other"></nav-tab>
+            </v-list>
+        </v-navigation-drawer>
+
+        <v-main>
+            <v-container style="max-width:960px">
+                <div v-if="tab==='open'">
+                    <h1>Load file</h1>
+                    <v-label>Drop your CoCX save file here:</v-label>
+                    <div
+                            v-on:dragover.prevent
+                            v-on:drop="fileDrop"
+                            v-on:change="fileLoad">
+                        <v-file-input
+                                truncate-length="15"
+                        ></v-file-input>
+                    </div>
+                    <v-alert type="success" v-if="loaded">
+                        Successfully loaded file '{{fileName}}'!
+                    </v-alert>
+                    <v-alert type="warning" v-if="loaded && saveVersion < minSupportedVersion">
+                        Warning: The save is for game version {{saveVersion}}, oldest supported is {{minSupportedVersion}}.
+                    </v-alert>
+                    <v-alert type="warning" v-if="loaded && saveVersion > maxSupportedVersion">
+                        Warning: The save is for game version {{saveVersion}}, latest supported is {{maxSupportedVersion}}.
+                    </v-alert>
+                    <v-alert type="warning" v-if="loaded && saveSol">
+                        "Save to slot" and "Save to file" have different formats.
+                        You've loaded former, but this editor can only save latter.
+                        Do not overwrite the file, save under a different name and use "Load File" game option.
+                    </v-alert>
+                </div>
+                <div v-if="tab==='save'">
+                    <h1>Save file</h1>
+                    <a :download="fileName" :href="saveUrl">Click to download modified save file</a>
+                    <v-alert type="info">
+                        Save to same folder with SWF file and use "Load File" game option.
+                    </v-alert>
+                </div>
+                <div v-if="tab==='stats'">
+                    <h1>Stats</h1>
+                    <v-tabs v-model="statsTab">
+                        <v-tab>Main</v-tab>
+                        <v-tab>Primary</v-tab>
+                        <v-tab>Buffs</v-tab>
+                        <v-tab>Resources</v-tab>
+                        <v-tab>Skills</v-tab>
+                    </v-tabs>
+                    <v-tabs-items v-model="statsTab">
+                        <v-tab-item><!--Main-->
+                            <value-editors :stats="Gamedata.setup.values.stats_main"></value-editors>
+                            <div v-for="stat in Gamedata.stats" v-if="stat.type==='raw'">
+                                <v-text-field
+                                        v-model="save.stats[stat.id].value"
+                                        :label="stat.name"
+                                        :min="stat.min??1"
+                                        :max="stat.max"
+                                        :step="stat.step??1"></v-text-field>
+                            </div>
+                        </v-tab-item>
+                        <v-tab-item><!--Primary-->
+                            <div v-for="stat in Gamedata.stats" v-if="stat.type==='primary'">
+                                <h3>{{stat.name}}</h3>
+                                <slider
+                                        dense
+                                        class="ml-10"
+                                        hide-details
+                                        v-model="save.stats[stat.id].core.value"
+                                        label="Core"
+                                        :min="0"
+                                        :max="Gamedata.maxCoreStatValue"
+                                        :step="1"></slider>
+                                <buffable-stat-editor
+                                        :stat="save.stats[stat.id].mult"
+                                        :percentage="true"
+                                        label="Multiplier"
+                                ></buffable-stat-editor>
+                                <buffable-stat-editor
+                                        :stat="save.stats[stat.id].bonus"
+                                        label="Bonus"
+                                ></buffable-stat-editor>
+                            </div>
+                        </v-tab-item>
+                        <v-tab-item><!--Buffs-->
+                            <div v-for="stat in Gamedata.stats" v-if="stat.type==='buffable'&&save.stats[stat.id]">
+                                <buffable-stat-editor
+                                        :stat="save.stats[stat.id]"
+                                        :percentage="stat.isPercentage"
+                                        :label="stat.name+(stat.isPercentage?' (%)':'')"
+                                ></buffable-stat-editor>
+                            </div>
+                        </v-tab-item>
+                        <v-tab-item><!--Resources-->
+                            <value-editors :stats="Gamedata.setup.values.stats_resources"></value-editors>
+                        </v-tab-item>
+                        <v-tab-item><!--Skills-->
+                            <value-editors :stats="Gamedata.setup.values.stats_skills"></value-editors>
+                        </v-tab-item>
+                    </v-tabs-items>
+                </div>
+                <div v-if="tab==='body'">
+                    <h1>Body</h1>
+                    <v-tabs v-model="bodyTab">
+                        <v-tab>Stats</v-tab>
+                        <v-tab>Parts</v-tab>
+                        <v-tab>Skin</v-tab>
+                        <v-tab>Breasts & Genitals</v-tab>
+                        <v-tab>Piercings</v-tab>
+                    </v-tabs>
+                    <v-tabs-items v-model="bodyTab">
+                        <v-tab-item><!--stats-->
+                            <value-editors :stats="Gamedata.setup.values.body_stats"></value-editors>
+                        </v-tab-item>
+                        <v-tab-item><!--parts-->
+                            <v-row>
+                                <v-col cols="12">
+                                    <bp-select
+                                            label="Antennae"
+                                            v-model="save.antennae"
+                                            :map="Gamedata.bptypes.antennae"></bp-select>
+                                </v-col>
+                                <v-col cols="12">
+                                    <bp-select
+                                            label="Arms"
+                                            v-model="save.armType"
+                                            :map="Gamedata.bptypes.arms"></bp-select>
+                                </v-col>
+                                <v-col cols="6">
+                                    <bp-select
+                                            label="Beard style"
+                                            v-model="save.beardStyle"
+                                            :map="Gamedata.bptypes.beard"></bp-select>
+                                </v-col>
+                                <v-col cols="6">
+                                    <v-text-field
+                                            label="Beard length"
+                                            v-model="save.beardLength"
+                                            :min="0"
+                                            :max="200"
+                                            type="number"
+                                            :step="0.1"
+                                            persistent-hint
+                                            hint="inches"
+                                    ></v-text-field>
+                                </v-col>
+                                <v-col cols="6">
+                                    <bp-select
+                                            label="Claw type"
+                                            v-model="save.clawsPart.type"
+                                            :map="Gamedata.bptypes.claws"></bp-select>
+                                </v-col>
+                                <v-col cols="6">
+                                    <select-color
+                                            label="Claw tone"
+                                            v-model="save.clawsPart.tone"></select-color>
+                                </v-col>
+                                <v-col cols="12">
+                                    <bp-select
+                                            label="Ears"
+                                            v-model="save.earType"
+                                            :map="Gamedata.bptypes.ears"></bp-select>
+                                </v-col>
+                                <v-col cols="6">
+                                    <bp-select
+                                            label="Eye type"
+                                            v-model="save.eyeType"
+                                            :map="Gamedata.bptypes.eyes"></bp-select>
+                                </v-col>
+                                <v-col cols="6">
+                                    <select-color
+                                            label="Eye color"
+                                            v-model="save.eyeColor"></select-color>
+                                </v-col>
+                                <v-col cols="12">
+                                    <bp-select
+                                            label="Face"
+                                            v-model="save.facePart.type"
+                                            :map="Gamedata.bptypes.face"></bp-select>
+                                </v-col>
+                                <v-col cols="12">
+                                    <bp-select
+                                            label="Gills"
+                                            v-model="save.gillType"
+                                            :map="Gamedata.bptypes.gills"></bp-select>
+                                </v-col>
+                                <v-col cols="3">
+                                    <bp-select
+                                            label="Hair type"
+                                            v-model="save.hairType"
+                                            :map="Gamedata.bptypes.hair"></bp-select>
+                                </v-col>
+                                <v-col cols="3">
+                                    <bp-select
+                                            label="Hair style"
+                                            v-model="save.hairStyle"
+                                            :map="Gamedata.bptypes.hairstyle"></bp-select>
+                                </v-col>
+                                <v-col cols="3">
+                                    <select-color
+                                            label="Hair color"
+                                            v-model="save.hairColor"></select-color>
+                                </v-col>
+                                <v-col cols="3">
+                                    <v-text-field
+                                            label="Hair length"
+                                            v-model="save.hairLength"
+                                            :min="0"
+                                            :max="200"
+                                            type="number"
+                                            :step="0.1"
+                                            persistent-hint
+                                            hint="inches"
+                                    ></v-text-field>
+                                </v-col>
+                                <v-col cols="6">
+                                    <bp-select
+                                            label="Horn type"
+                                            v-model="save.hornType"
+                                            :map="Gamedata.bptypes.horns"></bp-select>
+                                </v-col>
+                                <v-col cols="6">
+                                    <v-text-field
+                                            label="Horn size/count"
+                                            v-model="save.horns"
+                                            :min="0"
+                                            :max="16"
+                                            type="number"
+                                            :step="1"
+                                            persistent-hint
+                                    ></v-text-field>
+                                </v-col>
+                                <v-col cols="6">
+                                    <bp-select
+                                            label="Lower body type"
+                                            v-model="save.lowerBodyPart.type"
+                                            v-on:input="updateLegType($event)"
+                                            :map="Gamedata.bptypes.legs"></bp-select>
+                                </v-col>
+                                <v-col cols="6">
+                                    <v-select
+                                            label="Leg count"
+                                            v-model="save.lowerBodyPart.legCount"
+                                            :items="legCountItems"
+                                    ></v-select>
+                                </v-col>
+                                <v-col cols="12">
+                                    <bp-select
+                                            label="Tongue"
+                                            v-model="save.tongueType"
+                                            :map="Gamedata.bptypes.tongue"></bp-select>
+                                </v-col>
+                                <v-col cols="12">
+                                    <bp-select
+                                            label="Rear body"
+                                            v-model="save.rearBody"
+                                            :map="Gamedata.bptypes.rear"></bp-select>
+                                </v-col>
+                                <v-col cols="3">
+                                    <bp-select
+                                            label="Tail type"
+                                            v-model="save.tail.type"
+                                            :map="Gamedata.bptypes.tail"></bp-select>
+                                </v-col>
+                                <v-col cols="3">
+                                    <v-text-field
+                                            label="Tail count"
+                                            type="number"
+                                            :min="0"
+                                            :max="12"
+                                            v-model="save.tail.count"></v-text-field>
+                                </v-col>
+                                <v-col cols="3">
+                                    <v-text-field
+                                            label="Tail venom"
+                                            type="number"
+                                            :min="0"
+                                            :max="100"
+                                            v-model="save.tail.venom"></v-text-field>
+                                </v-col>
+                                <v-col cols="3">
+                                    <v-text-field
+                                            label="Venom recharge"
+                                            type="number"
+                                            :min="0"
+                                            v-model="save.tail.recharge"></v-text-field>
+                                </v-col>
+                                <v-col>
+                                    <bp-select
+                                            label="Wing type"
+                                            v-model="save.wingType"
+                                            :map="Gamedata.bptypes.wings"></bp-select>
+                                </v-col>
+                                <v-col>
+                                    <!-- TODO select from ex -->
+                                    <v-text-field
+                                            label="Wing description"
+                                            v-model="save.wingDesc"></v-text-field>
+                                </v-col>
+                            </v-row>
+                        </v-tab-item>
+                        <v-tab-item><!--skin-->
+                            <v-row>
+                                <v-col cols="12"><h3>Base layer:</h3></v-col>
+                                <v-col cols="4">
+                                    <bp-select
+                                            label="Type"
+                                            v-model="save.skin.base.type"
+                                            v-on:input="setSkinType('base',$event)"
+                                            :map="Gamedata.bptypes.skin_base"></bp-select>
+                                </v-col>
+                                <v-col cols="4">
+                                    <!-- TODO select from ex -->
+                                    <v-text-field
+                                            label="Adjective"
+                                            v-model="save.skin.base.adj"></v-text-field>
+                                </v-col>
+                                <v-col cols="4">
+                                    <!-- TODO select from ex -->
+                                    <v-text-field
+                                            label="Noun"
+                                            v-model="save.skin.base.desc"></v-text-field>
+                                </v-col>
+                                <v-col cols="4">
+                                    <select-color
+                                            label="Color 1"
+                                            v-model="save.skin.base.color"></select-color>
+                                </v-col>
+                                <v-col cols="4">
+                                    <select-color
+                                            label="Color 2"
+                                            v-model="save.skin.base.color2"></select-color>
+                                </v-col>
+                                <v-col cols="4">
+                                    <bp-select
+                                            label="Pattern"
+                                            v-model="save.skin.base.pattern"
+                                            :map="Gamedata.bptypes.pattern_base"></bp-select>
+                                </v-col>
+                                <v-col cols="8"><h3>Coat layer:</h3></v-col>
+                                <v-col cols="4">
+                                    <v-select
+                                            label="Coverage"
+                                            v-model="save.skin.coverage"
+                                            :items="Gamedata.skin_coverage"></v-select>
+                                </v-col>
+                                <v-col cols="4">
+                                    <bp-select
+                                            :disabled="save.skin.coverage===0"
+                                            label="Type"
+                                            v-model="save.skin.coat.type"
+                                            v-on:input="setSkinType('coat',$event)"
+                                            :map="Gamedata.bptypes.skin_coat"></bp-select>
+                                </v-col>
+                                <v-col cols="4">
+                                    <!-- TODO select from ex -->
+                                    <v-text-field
+                                            :disabled="save.skin.coverage===0"
+                                            label="Adjective"
+                                            v-model="save.skin.coat.adj"></v-text-field>
+                                </v-col>
+                                <v-col cols="4">
+                                    <!-- TODO select from ex -->
+                                    <v-text-field
+                                            :disabled="save.skin.coverage===0"
+                                            label="Noun"
+                                            v-model="save.skin.coat.desc"></v-text-field>
+                                </v-col>
+                                <v-col cols="4">
+                                    <select-color
+                                            :disabled="save.skin.coverage===0"
+                                            label="Color 1"
+                                            v-model="save.skin.coat.color"></select-color>
+                                </v-col>
+                                <v-col cols="4">
+                                    <select-color
+                                            :disabled="save.skin.coverage===0"
+                                            label="Color 2"
+                                            v-model="save.skin.coat.color2"></select-color>
+                                </v-col>
+                                <v-col cols="4">
+                                    <bp-select
+                                            :disabled="save.skin.coverage===0"
+                                            label="Pattern"
+                                            v-model="save.skin.coat.pattern"
+                                            :map="Gamedata.bptypes.pattern_coat"></bp-select>
+                                </v-col>
+                            </v-row>
+                        </v-tab-item>
+                        <v-tab-item>
+                            <v-row>
+                                <v-col cols="12">
+                                    <h3>Breast rows</h3>
+                                </v-col>
+                                <v-col cols="12">
+                                    <v-simple-table>
+                                        <template v-slot:default>
+                                            <thead>
+                                            <tr>
+                                                <!-- always 2
+                                                <th>Count</th>
+                                                -->
+                                                <th>Size</th>
+                                                <th># nipples</th>
+                                                <th>Lactation</th>
+                                                <!-- these are unused
+                                                <th>milkFullness</th>
+                                                <th>fullness</th>
+                                                -->
+                                                <th>Fuckable</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr v-for="(row,index) in save.breastRows">
+                                                <!-- <td> {{row.breasts}} </td>> -->
+                                                <td>
+                                                    <tier-slider
+                                                            dense
+                                                            v-model="row.breastRating"
+                                                            :min="0"
+                                                            :max="Gamedata.maxBreastCup"
+                                                            :tiers="Gamedata.breastCups.map((a,i)=>[i,a])"></tier-slider>
+                                                </td>
+                                                <td>
+                                                    <v-select
+                                                        dense
+                                                        hide-details
+                                                        v-model="row.nipplesPerBreast"
+                                                        :items="[2,4]"></v-select>
+                                                </td>
+                                                <td>
+                                                    <v-text-field
+                                                        dense
+                                                        hide-details
+                                                        v-model="row.lactationMultiplier"
+                                                        :min="0"
+                                                        :step="0.05"></v-text-field>
+                                                </td>
+                                                <!--
+                                                <td> {{row.milkFullness}} </td>
+                                                <td> {{row.fullness}} </td>
+                                                -->
+                                                <td>
+                                                    <v-simple-checkbox v-model="row.fuckable"></v-simple-checkbox>
+                                                </td>
+                                                <!--
+                                                nippleLength
+                                                breastRows:{
+                                                    milkFullness
+                                                    fuckable
+                                                    fullness
+                                                }[]
+                                                -->
+                                            </tr>
+                                            </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <td colspan="4">
+                                                    <v-btn icon v-on:click="addBreastRow">
+                                                        <v-icon>mdi-plus</v-icon>
+                                                    </v-btn>
+                                                    <v-btn icon
+                                                           :disabld="save.breastRows.length<=1"
+                                                           v-on:click="removeBreastRow"
+                                                    >
+                                                        <v-icon>mdi-minus</v-icon>
+                                                    </v-btn>
+                                                </td>
+                                            </tr>
+                                            </tfoot>
+                                        </template>
+                                    </v-simple-table>
+                                </v-col>
+                                <v-col cols="6">
+                                    <v-text-field
+                                            dense
+                                            label="Nipple length"
+                                            hint="(inches)"
+                                            :min="0.01"
+                                            :step="0.01"
+                                            v-model="save.nippleLength"></v-text-field>
+                                </v-col>
+                                <v-col cols="12">
+                                    <h3>Anus</h3>
+                                </v-col>
+                                <v-col cols="6">
+                                    <tier-slider
+                                        label="Wetness"
+                                        v-model="analWetness"
+                                        :tiers="Gamedata.analWetness"></tier-slider>
+                                </v-col>
+                                <v-col cols="6">
+                                    <tier-slider
+                                        label="Looseness"
+                                        v-model="analLooseness"
+                                        :tiers="Gamedata.analLooseness"></tier-slider>
+                                </v-col>
+                                <v-col cols="6">
+                                    <v-select
+                                        label="Pregnancy type"
+                                        v-model="save.buttPregnancyType"
+                                        :items="Gamedata.pregnancyType"></v-select>
+                                </v-col>
+                                <v-col cols="6">
+                                    <v-slider
+                                        label="Pregnancy incubation"
+                                        hint="(hours)"
+                                        :min="0"
+                                        :max="Gamedata.maxPregnancyIncubation"></v-slider>
+                                </v-col>
+                                <!-- ass.fullness - not used in game -->
+                                <v-col cols="12">
+                                    <h3>Vaginas</h3>
+                                </v-col>
+                                <!-- TODO
+                                vaginas:{
+                                    type vaginalWetness vaginalLooseness fullness virgin labiaPierced labiaPShort labiaPLong clitPierced clitPShort clitPLong clitLength recoveryProgress
+                                    pregnancyIncubation
+                                    pregnancyType
+                                    fertility
+                                }[]
+                                -->
+                                <v-col cols="12">
+                                    <h3>Cocks</h3>
+                                </v-col>
+                                <!-- TODO
+                                cocks:{
+                                    cockThickness cockLength cockType knotMultiplier pierced pShortDesc pLongDesc sock
+                                }[]
+                                balls ballSize
+                                cumMultiplier
+                                hoursSinceCum
+                                -->
+                            </v-row>
+                        </v-tab-item>
+                        <v-tab-item><!--TODO Piercings-->
+                            TODO
+                            <!--
+                            nipplesPierced
+                            nipplesPShort
+                            nipplesPLong
+                            lipPierced
+                            lipPShort
+                            lipPLong
+                            tonguePierced
+                            tonguePShort
+                            tonguePLong
+                            eyebrowPierced
+                            eyebrowPShort
+                            eyebrowPLong
+                            earsPierced
+                            earsPShort
+                            earsPLong
+                            nosePierced
+                            nosePShort
+                            nosePLong
+                            -->
+                        </v-tab-item>
+                        <v-tab-item>
+                            <!--TODO other body parts (tracked by seffects and similar)-->
+                            TODO
+                        </v-tab-item>
+                    </v-tabs-items>
+                </div>
+                <div v-if="tab==='perks'">
+                    <h1>Perks</h1>
+                    <v-data-table
+                            dense
+                            :headers="perksHeaders"
+                            sort-by="name"
+                            :search="perksSearch+','+perksTagsItems"
+                            :items="perks"
+                            :items-per-page="15"
+                            :custom-filter="perksFilterFunction"
+                    >
+                        <template v-slot:top>
+                            <v-row>
+                                <v-col cols="6">
+                                    <v-text-field v-model="perksSearch" label="Search"></v-text-field>
+                                </v-col>
+                                <v-col cols="3">
+                                    <v-checkbox v-model="perksShowDesc" label="Descriptions"></v-checkbox>
+                                </v-col>
+                                <v-col cols="3">
+                                    <v-select label="Show perks"
+                                              v-model="perksShowTags"
+                                              multiple
+                                              :items="perksTagsItems"
+                                    >
+                                    </v-select>
+                                </v-col>
+                            </v-row>
+                        </template>
+                        <template v-slot:item.present="{item}">
+                            <v-simple-checkbox style="min-width:42px" v-model="item.present"></v-simple-checkbox>
+                        </template>
+                        <template v-slot:item.name="{item}">
+                            {{item.name}}
+                            <div v-if="perksShowDesc && item.desc" class="text-caption grey--text">{{item.desc}}</div>
+                        </template>
+                        <template v-slot:item.value1="{item}">
+                            <v-text-field dense
+                                          hide-details="auto"
+                                          :hint="item.v1desc"
+                                          persistent-hint
+                                          v-model="item.value1"
+                                          v-if="item.present&&item.hasv1"
+                            ></v-text-field>
+                        </template>
+                        <template v-slot:item.value2="{item}">
+                            <v-text-field dense
+                                          hide-details="auto"
+                                          :hint="item.v2desc"
+                                          persistent-hint
+                                          v-model="item.value2"
+                                          v-if="item.present&&item.hasv2"
+                            ></v-text-field>
+                        </template>
+                        <template v-slot:item.value3="{item}">
+                            <v-text-field dense
+                                          hide-details="auto"
+                                          :hint="item.v3desc"
+                                          persistent-hint
+                                          v-model="item.value3"
+                                          v-if="item.present&&item.hasv3"
+                            ></v-text-field>
+                        </template>
+                        <template v-slot:item.value4="{item}">
+                            <v-text-field dense
+                                          hide-details="auto"
+                                          :hint="item.v4desc"
+                                          persistent-hint
+                                          v-model="item.value4"
+                                          v-if="item.present&&item.hasv4"
+                            ></v-text-field>
+                        </template>
+                    </v-data-table>
+                </div>
+                <div v-if="tab==='mutations'">
+                    <h1>Mutations</h1>
+                    <div v-for="slotid in Object.keys(Gamedata.mutation_slots).sort()" :key="slotid">
+                        <h2>{{Gamedata.mutation_slots[slotid].name}}</h2>
+                        <div v-for="(mutation,id) in mutations[slotid]">
+                            <slider
+                                    :label="mutation.name"
+                                    v-model="mutation.level"
+                                    min-width="200px"
+                                    color="green"
+                                    :min="0"
+                                    :max="mutation.level"
+                            ></slider>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="tab==='items'">
+                    <h1>Items</h1>
+                    <v-tabs v-model="itemsTab">
+                        <v-tab>Inventory</v-tab>
+                        <v-tab>Storage</v-tab>
+                        <v-tab>Equipment</v-tab>
+                        <v-tab>Potions</v-tab>
+                        <v-tab>Key items</v-tab>
+                    </v-tabs>
+                    <v-tabs-items v-model="itemsTab">
+                        <v-tab-item><!--Inventory-->
+                            TODO
+                            <!-- TODO
+                            itemSlots:{id quantity unlocked}[]
+                            -->
+                        </v-tab-item>
+                        <v-tab-item><!--Storage-->
+                            TODO
+                            <!-- TODO
+                            itemStorage:{id quantity unlocked}[]
+                            pearlStorage:{id quantity unlocked}[]
+                            gearStorage:{id quantity unlocked}[]
+                            -->
+                        </v-tab-item>
+                        <v-tab-item><!--Equipment-->
+                            <template v-for="slot in Gamedata.equipmentSlots">
+                                <v-select
+                                    :label="slot.label"
+                                    v-model="save[slot.ref]"
+                                    :items="itemsOfCategory(slot.category)"></v-select>
+                            </template>
+                            <!-- TODO armorName -->
+                        </v-tab-item>
+                        <v-tab-item><!--Potions-->
+                            TODO
+                            <!-- TODO potions:{id count}[] -->
+                        </v-tab-item>
+                        <v-tab-item>
+                            TODO
+                            <!-- TODO keyItems:{keyName value1 value2 value3 value4}[] -->
+                        </v-tab-item>
+                    </v-tabs-items>
+                </div>
+                <div v-if="tab==='statuses'">
+                    TODO
+                    <!--TODO statusAffects:{statusAffectName value1 value2 value3 value4}[] -->
+                </div>
+                <div v-if="tab==='flags'">
+                    <v-data-table
+                            dense
+                            :headers="flagsHeaders"
+                            :search="flagsFilter+flagsNoUnknown+flagsSetOnly"
+                            :items="flagsItems"
+                            :items-per-page="15"
+                            :custom-filter="flagsFilterFunction"
+                    >
+                        <template v-slot:top>
+                            <v-row>
+                                <v-col>
+                                    <v-text-field v-model="flagsFilter" label="Search"></v-text-field>
+                                </v-col>
+                                <v-col>
+                                    <v-checkbox v-model="flagsNoUnknown" label="Known only"></v-checkbox>
+                                </v-col>
+                                <v-col>
+                                    <v-checkbox v-model="flagsSetOnly" label="Changed only"></v-checkbox>
+                                </v-col>
+                            </v-row>
+                        </template>
+                        <template v-slot:item.value="{item}">
+                            <v-text-field dense
+                                          hide-details="auto"
+                                          :hint="item.desc"
+                                          persistent-hint
+                                          v-model="item.value"
+                                          v-on:input="setFlag(item.id,item.value)"
+                            ></v-text-field>
+                        </template>
+                    </v-data-table>
+                </div>
+                <div v-if="tab==='world'">
+                    TODO
+                    <!--
+                    TODO world vars
+                    monk
+                    sand
+                    beeProgress
+                    exploredLake
+                    exploredMountain
+                    exploredForest
+                    exploredDesert
+                    explored
+                    isabellaOffspringData
+                    world.x:[]
+                    ss:{}
+                    -->
+                </div>
+                <div v-if="tab==='other'">
+                    TODO
+                    <!--
+                    TODO other
+                    gameState
+                    minutes
+                    hours
+                    days
+                    autoSave
+                    controls
+                    -->
+                </div>
+            </v-container>
+        </v-main>
+    </v-app>
+</div>
+<template id="nav-tab">
+    <v-list-item
+            link
+            v-on:click="$emit('input',code)"
+            :input-value="value===code"
+            :disabled="disabled"
+    >
+        <v-list-item-icon>
+            <v-icon>{{icon}}</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+            <v-list-item-title>{{label}}</v-list-item-title>
+        </v-list-item-content>
+    </v-list-item>
+</template>
+<template id="bp-select">
+    <v-select
+            :label="label"
+            :value="value"
+            v-on:input="$emit('input',$event)"
+            persistent-hint
+            :hint="hint"
+            :items="items"
+            item-text="id"
+            item-value="value"
+    ></v-select>
+</template>
+<template id="select-color">
+    <v-select
+            :items="colors"
+            :label="label"
+            :value="value"
+            v-on:input="$emit('input',$event)"
+            item-text="name"
+            item-value="name">
+        <template v-slot:item="{item}">
+            <span :style="{background:item.rgb}" class="colorbox mx-2"></span>
+            {{item.name}}
+        </template>
+        <template v-slot:selection="{item}">
+            <span :style="{background:item.rgb}" class="colorbox mx-2"></span>
+            {{item.name}}
+        </template>
+    </v-select>
+</template>
+<template id="slider">
+    <v-slider
+            :value="value"
+            v-on:input="$emit('input',$event)"
+            :color="color"
+            :label="label"
+            :dense="dense"
+            :hide-details="hideDetails"
+            :persistent-hint="persistentHint"
+            :hint="hint"
+            :min="min"
+            :max="max"
+            :step="step"
+    >
+        <template v-slot:label>
+            <span :style="{minWidth:minWidth??'100px',display:'block'}">
+            {{label}}
+            </span>
+        </template>
+        <template v-slot:append>
+            <v-text-field
+                    :value="value"
+                    v-on:input="$emit('input',$event)"
+                    class="mt-0 pt-0"
+                    hide-details
+                    single-line
+                    :min="min"
+                    :max="max"
+                    :step="step"
+                    type="number"
+                    style="width: 60px"
+            ></v-text-field>
+        </template>
+    </v-slider>
+</template>
+<template id="tier-slider">
+    <slider
+            :value="value"
+            v-on:input="$emit('input', $event)"
+            :dense="dense"
+            :label="label"
+            :hide-details="false"
+            :persistent-hint="true"
+            :hint="tier+' ('+value+')'"
+            :color="color"
+            :min="defaultMin"
+            :max="defaultMax"
+            :step="step ?? 1"
+    ></slider>
+</template>
+<template id="buffable-stat-editor">
+    <div>
+        <h4>
+            <v-btn icon v-on:click="expanded=!expanded">
+                <v-icon>{{expanded ? "mdi-arrow-collapse-vertical" : "mdi-arrow-expand-vertical"}}</v-icon>
+            </v-btn>
+            [{{stat.effects.length}}] {{label}}
+        </h4>
+        <v-simple-table dense v-if="expanded">
+            <template v-slot:default>
+                <thead>
+                <tr>
+                    <th style="width:100px">Value <span v-if="percentage">(%)</span></th>
+                    <th>Tag</th>
+                    <th>Text</th>
+                    <th style="width:80px">Duration</th>
+                    <th style="width:150px"></th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="item in stat.effects">
+                    <td>
+                        <v-text-field
+                                v-if="percentage"
+                                dense
+                                type="number"
+                                :value="Math.floor(item[0]*100)"
+                                v-on:input="item[0]=$event*100"
+                        ></v-text-field>
+                        <v-text-field
+                                v-else
+                                dense
+                                type="number"
+                                v-model="item[0]"
+                                :step="0.01"
+                        ></v-text-field>
+                    </td>
+                    <td>
+                        <v-text-field
+                                dense
+                                v-model="item[1]"></v-text-field>
+                    </td>
+                    <td>
+                        <v-text-field
+                                dense
+                                v-model="item[2].text"></v-text-field>
+                    </td>
+                    <td>
+                        <v-text-field
+                                dense
+                                v-if="item[2].rate !== 0"
+                                type="number"
+                                v-model="item[2].tick"></v-text-field>
+                    </td>
+                    <td>
+                        <v-select
+                                dense
+                                :items="tickTypes"
+                                v-model="item[2].rate"></v-select>
+                    </td>
+                    <td>
+                        <!--<v-btn icon small v-on:click="item[2].show=!item[2].show">
+                            <v-icon>{{item[2].show ? "mdi-eye" : "mdi-eye-off"}}</v-icon>
+                        </v-btn>-->
+                        <v-btn icon small v-on:click="deleteBuff(item[1])">
+                            <v-icon>mdi-trash-can</v-icon>
+                        </v-btn>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="5">
+                    </th>
+                    <th>
+                        <v-btn icon v-on:click="addBuff">
+                            <v-icon>mdi-plus</v-icon>
+                        </v-btn>
+                    </th>
+                </tr>
+                </tfoot>
+            </template>
+        </v-simple-table>
+    </div>
+</template>
+<template id="value-editors">
+    <v-row no-gutters>
+        <value-editor
+                v-for="stat in stats"
+                :stat="stat"
+                :key="stat.id"
+        ></value-editor>
+    </v-row>
+</template>
+<template id="value-editor">
+    <v-col :cols="stat.cols??12" class="px-4">
+        <h2 v-if="typeof stat==='string'">{{stat}}</h2>
+        <v-text-field
+                v-else-if="stat.type==='text'"
+                v-model="value"
+                :label="stat.label"
+                persistent-hint
+                :hint="stat.hint"
+        ></v-text-field>
+        <v-text-field
+                v-else-if="stat.type==='number'"
+                v-model="value"
+                :label="stat.label"
+                persistent-hint
+                :hint="stat.hint"
+                :min="stat.min"
+                :max="stat.max"
+                type="number"
+        ></v-text-field>
+        <v-text-field
+                v-else-if="stat.type==='bignumber'"
+                v-model="value"
+                :label="stat.label"
+                persistent-hint
+                :hint="stat.hint"
+                :min="stat.min"
+                :max="stat.max"
+                type="number"
+        >
+        </v-text-field>
+        <slider
+                v-else-if="stat.type==='slider'"
+                v-model="value"
+                :label="stat.label"
+                persistent-hint
+                :hint="stat.hint"
+                :color="stat.color"
+                :min="stat.min"
+                :max="stat.max"
+        ></slider>
+        <tier-slider
+                v-else-if="stat.type==='tierSlider'"
+                v-model="value"
+                :label="stat.label"
+                :tiers="stat.tiers"
+                :color="stat.color"
+                :min="stat.min"
+                :max="stat.max"
+        ></tier-slider>
+        <v-alert type="error" v-else>
+            Unknown stat type {{stat.type}} for {{stat.label}}
+        </v-alert>
+    </v-col>
+</template>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script type="text/javascript">
+	Object.defineProperty(Array.prototype, "sortBy", {
+		enumerable: false,
+		configurable: false,
+		writable: false,
+		value(key, descending = false) {
+			const f = descending ? -1 : 1;
+			return this.sort((a, b) => {
+				a = a[key];
+				b = b[key];
+				return f * ((a > b) - (b > a))
+			});
+		}
+	});
+</script>
+<script type="text/javascript" src="js/ByteArray.js"></script>
+<script type="text/javascript" src="js/AMF3.js"></script>
+<script type="text/javascript" src="js/AMFUtils.js"></script>
+<script type="text/javascript" src="gamedata.js"></script>
+<script type="text/javascript" src="gamedata-ex.js"></script>
+<script>
+	// Gamedata post-processing
+	Gamedata.bptypes.skin_base = {};
+	Gamedata.bptypes.skin_coat = {};
+	for (let skin of Object.values(Gamedata.bptypes.skin)) {
+		if (skin.base) Gamedata.bptypes.skin_base[skin.value] = skin;
+		if (skin.coat) Gamedata.bptypes.skin_coat[skin.value] = skin;
+	}
+	Gamedata.bptypes.pattern_base = {};
+	Gamedata.bptypes.pattern_coat = {};
+	for (let pattern of Object.values(Gamedata.bptypes.pattern)) {
+		if (pattern.base) Gamedata.bptypes.pattern_base[pattern.value] = pattern;
+		if (pattern.coat) Gamedata.bptypes.pattern_coat[pattern.value] = pattern;
+	}
+
+
+	let app;
+	// noinspection JSAnnotator
+	Vue.component('nav-tab', {
+		props: {
+			value: String,
+			code: String,
+			label: String,
+			icon: String,
+			disabled: {
+				type: Boolean,
+				default: false
+			}
+		},
+		template: '#nav-tab',
+		data() {
+			return {}
+		}
+	});
+	// noinspection JSAnnotator
+	Vue.component('select-color', {
+		props: ['value', 'label'],
+		template: '#select-color',
+		data() {
+			return {
+				colors: Gamedata.colors
+			}
+		}
+	});
+	// noinspection JSAnnotator
+	Vue.component('bp-select', {
+		props: ['label', 'value', 'map'],
+		template: '#bp-select',
+		data() {
+			return {
+				items: Object.values(this.map)
+			}
+		},
+		computed: {
+			hint() {
+				let value = this.value;
+				let e = this.map[value];
+				return "(" + value + ")" + (e ? " " + e.name : "");
+			}
+		}
+	});
+	// noinspection JSAnnotator
+	Vue.component('slider', {
+		props: ['value', 'label', 'persistentHint', 'hint', 'min', 'max', 'step', 'color', 'minWidth', 'hideDetails', 'dense'],
+		template: '#slider',
+		data() {
+			return {}
+		}
+	});
+	// noinspection JSAnnotator
+	Vue.component('buffable-stat-editor', {
+		props: ['stat', 'label', 'percentage'],
+		template: '#buffable-stat-editor',
+		data() {
+			return {
+				expanded: false,
+				items: this.stat.effects,
+				tickTypes: [
+					{value: 0, text: "Permanent"},
+					{value: 3, text: "Days"},
+					{value: 2, text: "Hours"},
+					{value: 1, text: "Combat Rounds"},
+				]
+			}
+		},
+		methods: {
+			deleteBuff(tag) {
+				this.items.splice(this.items.findIndex(buff => buff.tag === tag), 1);
+			},
+			addBuff() {
+				this.items.push([
+					0,
+					"New Item",
+					{text: "Buff", show: true, rate: 0, tick: 0}
+				])
+			}
+		}
+	});
+	// noinspection JSAnnotator
+	Vue.component('tier-slider',{
+		props: ['value','label','min','max','step','tiers','color','dense'],
+        template: '#tier-slider',
+        data() {
+			return {
+				defaultMin: this.min ?? 0,
+				defaultMax: this.max ?? this.tiers[this.tiers.length-1][0]
+            }
+        },
+        watch: {
+			value(newValue,oldValue) {
+				console.log(this.label,newValue,oldValue);
+            }
+        },
+		computed: {
+			tier() {
+				let tier = this.tiers[0][1];
+				for (let i of this.tiers) {
+					if (this.value >= i[0]) tier = i[1];
+				}
+				return tier;
+            }
+        }
+    });
+	// noinspection JSAnnotator
+	Vue.component('value-editor', {
+		props: ['stat'],
+		template: '#value-editor',
+		data() {
+			return {}
+		},
+		computed: {
+			value: {
+				get() {
+					return app['cv_' + this.stat.id];
+				},
+				set(value) {
+					app['cv_' + this.stat.id] = value;
+				}
+			}
+		}
+	});
+	// noinspection JSAnnotator
+	Vue.component('value-editors', {
+		props: ['stats'],
+		template: '#value-editors',
+		data() {
+			return {}
+		}
+	});
+
+	/**
+	 * Generates object with custom value getters and setters
+	 */
+	function generateCustomValues() {
+		let def = {};
+		for (let group of Object.values(Gamedata.setup.values)) {
+			for (let stat of group) {
+				if (typeof stat === "string") continue;
+				let propname = 'cv_' + (stat.id);
+				let ref = stat.ref;
+				if (typeof ref === "object") {
+					def[propname] = ref;
+				} else if (ref.indexOf('.') > 0) {
+					let parts = ref.split('.');
+					def[propname] = {
+						get() {
+							return parts.reduce((acc, prop) => acc[prop], this.save);
+						},
+						set(value) {
+							// in ['a', 'b', 'c'] take save['a']['b'] then do save['a']['b'] = value
+							parts.reduce((acc, prop, i) =>
+									(i === parts.length - 1) ? acc[prop] = value : acc[prop],
+								this.save)
+						}
+					}
+				} else {
+					def[propname] = {
+						get() {
+							return this.save[ref];
+						},
+						set(value) {
+							this.save[ref] = value;
+						}
+					}
+				}
+			}
+		}
+		return def;
+	}
+
+	app = new Vue({
+		el: '#app',
+		vuetify: new Vuetify(),
+		data: {
+			// app config
+			debug: true,
+			minSupportedVersion: 36.000,
+			maxSupportedVersion: 36.005,
+			Gamedata: Gamedata,
+			// globals
+			tab: "open",
+			fileName: "",
+			loaded: false,
+			save: {},
+			saveSol: false,
+			saveVersion: 0,
+			// Load tab
+			loadError: "",
+			// Save tab
+			saveUrl: "",
+			// Stats tab
+			statsTab: 0,
+			// Body tab
+			bodyTab: 0,
+			// Perks tab
+			/**
+			 * @type {{[index:string]:{
+			 *     present:boolean,
+			 *     name:string,
+			 *     desc:string,
+			 *     value1:number,
+			 *     value2:number,
+			 *     value3:number,
+			 *     value4:number
+			 * }}}
+			 */
+			perks: {},
+			perksShowDesc: false,
+			perksShowTags: ['levelup'],
+			perksTagsItems: [
+				{value: 'levelup', text: 'Level-up'},
+				{value: 'monster', text: 'Monster'},
+				{value: 'item', text: 'Equipment'},
+				{value: 'unobtainable', text: 'Special'},
+				{value: 'other', text: 'Other'},
+			],
+			perksSearch: '',
+			perksHeaders: [{
+				text: 'Own',
+				value: 'present'
+			}, {
+				text: 'Name',
+				value: 'name'
+			}, {
+				text: 'Value1',
+				value: 'value1',
+				sortable: false,
+				filterable: false
+			}, {
+				text: 'Value2',
+				value: 'value2',
+				sortable: false,
+				filterable: false
+			}, {
+				text: 'Value3',
+				value: 'value3',
+				sortable: false,
+				filterable: false
+			}, {
+				text: 'Value4',
+				value: 'value4',
+				sortable: false,
+				filterable: false
+			}],
+			// Mutations tab
+			mutationsTab: 0,
+			mutations: {},
+			// Items tab
+            itemsTab: 0,
+            itemSlots: [],
+			// Statuses tab
+			// Flags tab
+			flagsFilter: '',
+			flagsNoUnknown: true,
+			flagsSetOnly: false,
+			flagsHeaders: [{
+				text: 'ID',
+				value: 'id'
+			}, {
+				text: 'Name',
+				value: 'name',
+				filter(value) {
+					return !this.flagsNoUnknown || value.indexOf('UNKNOWN_FLAG_NUMBER_') < 0
+				}
+			}, {
+				text: 'Value',
+				value: 'value',
+				sortable: false,
+				filterable: false
+			}],
+			flagsItems: Object.entries(Gamedata.flags).map(([id, fd]) => ({
+				id: id,
+				name: fd.name,
+				desc: fd.desc,
+				value: 0,
+				set: false,
+				type: 'number'
+			})),
+		},
+		watch: {
+			tab(newValue) {
+				if (newValue === 'save') this.fileSave();
+			}
+		},
+		computed: {
+			// save.ass is a non-empty array with string values
+            // these values are not observable in Vue 2
+			analLooseness: {
+				get() {
+					return this.save.ass.analLooseness
+                },
+                set(value) {
+					this.save.ass.analLooseness = value;
+                }
+            },
+			analWetness: {
+				get() {
+					return this.save.ass.analWetness
+                },
+                set(value) {
+					this.save.ass.analWetness = value;
+                }
+            },
+			legCountItems() {
+				let enumValue = Gamedata.bptypes.legs[this.save.lowerBodyPart.type];
+				if (enumValue.canTaur) return [2, 4];
+				return [enumValue.legCount ?? 2];
+			},
+			...generateCustomValues()
+		},
+		methods: {
+			/**
+			 * @param {DragEvent} e
+			 */
+			fileDrop(e) {
+				e.preventDefault();
+				if (e.dataTransfer.items) {
+					for (let i of e.dataTransfer.items) {
+						if (i.kind === "file") {
+							let f = i.getAsFile();
+							if (!f) continue;
+							this.fileLoad([f]);
+							break;
+						}
+					}
+				}
+			},
+			/**
+			 * @param {File[]} files
+			 */
+			async fileLoad(files) {
+				if (files.length !== 1) return;
+				this.loaded = false;
+				this.saveSol = false;
+				this.save = {};
+				try {
+					let file = files[0];
+					let buffer = await file.arrayBuffer();
+					let ba = new ByteArray(buffer);
+					let saveData;
+					try {
+						let sol = amfLoadSOL(ba);
+						if (this.debug) console.log("Loaded SOL", sol);
+						this.saveSol = true;
+						let data = sol.find(e => e.type === 2).body;
+						saveData = amfUnwrap(data);
+					} catch (e) {
+						if (this.debug) console.log("Not a SOL", e.message);
+						ba.position = 0;
+						let amf3 = new AMF3();
+						let data = amf3.readData(ba);
+						if (this.debug) console.log('AMF3 raw data', data);
+						data = amfUnwrap(data);
+						if (!data || !data.data || typeof data.data !== "object") throw new Error("Malformed save " + JSON.stringify(data));
+						saveData = data.data;
+					}
+					this.afterLoad(saveData);
+					this.save = saveData;
+					this.fileName = file.name;
+					this.loaded = true;
+				} catch (e) {
+					this.loadError = e instanceof Error ? e.stack : ("" + e);
+					console.error(e);
+				}
+			},
+			afterLoad(data) {
+				this.saveVersion = data.flags[2066];
+				for (let [k, v] of Object.entries(data.flags)) {
+					let ex = this.flagItem(k);
+					ex.value = v;
+					ex.set = true;
+					ex.type = typeof v;
+				}
+				let perkmap = {}
+				for (let [id, perk] of Object.entries(Gamedata.perks)) {
+					perkmap[id] = {
+						present: false,
+						id: id,
+						value1: 0,
+						value2: 0,
+						value3: 0,
+						value4: 0,
+						...perk
+					}
+				}
+				for (let [id, mutation] of Object.entries(Gamedata.mutations)) {
+					this.mutations[mutation.slot] ??= {};
+					this.mutations[mutation.slot][id] = {
+						level: 0,
+						id: id,
+						...mutation
+					}
+				}
+				for (let perk of data.perks) {
+					if (perk.id in Gamedata.mutations) {
+						let m = Gamedata.mutations[perk.id];
+						this.mutations[m.slot][perk.id].level = perk.value1;
+					} else {
+						perkmap[perk.id] ??= {
+							present: true,
+							id: perk.id,
+							name: perk.id,
+							desc: "Unknown perk!",
+							tags: ['special'],
+							hasv1: true,
+							hasv2: true,
+							hasv3: true,
+							hasv4: true,
+							value1: 0,
+							value2: 0,
+							value3: 0,
+							value4: 0
+						}
+						let entry = perkmap[perk.id];
+						entry.present = true;
+						entry.value1 = perk.value1;
+						entry.value2 = perk.value2;
+						entry.value3 = perk.value3;
+						entry.value4 = perk.value4;
+						if (perk.value1 !== 0) entry.hasv1 = true
+						if (perk.value2 !== 0) entry.hasv2 = true
+						if (perk.value3 !== 0) entry.hasv3 = true
+						if (perk.value4 !== 0) entry.hasv4 = true
+					}
+				}
+				this.perks = Object.values(perkmap);
+				this.itemSlots.splice(0);
+				for (let i = 0; i < Gamedata.itemSlotCount; i++) {
+                    this.itemSlots.push(this.save['itemSlot'+(i+1)]);
+                }
+			},
+			beforeSave() {
+				this.save.perks = [];
+				for (let perk of this.perks) {
+					if (!perk.present) continue;
+					this.save.perks.push({
+						id: perk.id,
+						value1: perk.value1,
+						value2: perk.value2,
+						value3: perk.value3,
+						value4: perk.value4,
+					})
+				}
+				for (let slot of Object.values(this.mutations)) {
+					for (let mutation of Object.values(slot)) {
+						if (mutation.level <= 0) continue;
+						this.save.perks.push({
+							id: mutation.id,
+							value1: mutation.level,
+							value2: 0,
+							value3: 0,
+							value4: 0,
+						})
+					}
+				}
+			},
+			fileSave() {
+				if (this.saveUrl) {
+					URL.revokeObjectURL(this.saveUrl);
+					this.saveUrl = "";
+				}
+				this.beforeSave();
+				let saveData = amfWrap({data: this.save});
+				let ba = new ByteArray();
+				new AMF3().writeData(ba, saveData);
+				let blob = new Blob([ba._buffer.slice(0, ba.length)], {type: 'octet/stream'});
+				this.saveUrl = URL.createObjectURL(blob);
+			},
+			flagsFilterFunction(value, search, item) {
+				if (this.flagsNoUnknown && item.name.indexOf('UNKNOWN_FLAG_NUMBER_') >= 0) return false;
+				if (this.flagsSetOnly && !item.set) return false;
+				return !this.flagsFilter || item.id == this.flagsFilter || item.name.toUpperCase().indexOf(this.flagsFilter.toUpperCase()) !== -1
+			},
+			perksFilterFunction(value, search, item) {
+				if (!this.perksShowTags.some(tag => item.tags.includes(tag))) return false;
+				return !this.perksSearch || item.name.toUpperCase().indexOf(this.perksSearch.toUpperCase()) !== -1
+			},
+			flagItem(k) {
+				let ex = this.flagsItems[k];
+				if (!ex || ex.id !== k) {
+					ex = this.flagsItems.find(fi => fi.id === k);
+					if (!ex) {
+						ex = {
+							id: k,
+							name: '',
+							value: 0,
+							set: false,
+							type: 'number'
+						};
+						this.flagsItems.push(ex);
+					}
+				}
+				return ex;
+			},
+			setFlag(id, value) {
+				this.save.flags[id] = value;
+				let fi = this.flagItem(id);
+				fi.value = value;
+				fi.set = true;
+			},
+			updateLegType(newValue) {
+				let lc = this.save.lowerBodyPart.legCount;
+				let enumValue = Gamedata.bptypes.legs[newValue];
+				if (enumValue.canTaur) {
+					if (lc !== 2 && lc !== 4) {
+						this.save.lowerBodyPart.legCount = 2;
+					}
+				} else {
+					this.save.lowerBodyPart.legCount = enumValue.legCount ?? 2;
+				}
+			},
+			setSkinType(layer, type) {
+				this.save.skin[layer].adj = Gamedata.bptypes.skin[type].adj ?? "";
+				this.save.skin[layer].desc = Gamedata.bptypes.skin[type].desc ?? "skin";
+			},
+            addBreastRow() {
+	            this.save.breastRows.push(
+					Object.assign({},
+                        this.save.breastRows[this.save.breastRows.length - 1]
+                    )
+                );
+            },
+            removeBreastRow() {
+				this.save.breastRows.splice(-1, 1);
+            },
+            itemsOfCategory(category) {
+				return Object.values(Gamedata.items[category]).map(item=>({
+                    value: item.id,
+                    text: '('+item.id.trim()+') ' + item.name
+                })).sortBy("text");
+            }
+		}
+	})
+</script>
+</body>
+</html>
