@@ -796,9 +796,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 				}
 				//Daily regeneration of soulforce for non soul cultivators && Metamorph bonus SF gain till cap
-				if (!player.hasPerk(PerkLib.JobSoulCultivator) && (player.soulforce < player.maxSoulforce())) {
+				if (!player.hasPerk(PerkLib.JobSoulCultivator) && (player.soulforce < player.maxOverSoulforce())) {
 					player.soulforce += 50;
-					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+					if (player.soulforce > player.maxOverSoulforce()) player.soulforce = player.maxOverSoulforce();
 				}
 				if (player.hasPerk(PerkLib.Metamorph) && player.perkv1(PerkLib.Metamorph) < 18) player.addPerkValue(PerkLib.Metamorph, 1, 1);
 				if (player.hasPerk(PerkLib.MetamorphEx) && player.perkv1(PerkLib.MetamorphEx) < 10) player.addPerkValue(PerkLib.MetamorphEx, 1, 1);
@@ -1394,7 +1394,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					EngineCore.ManaChange(100 + (player.inte*2), true);
 				}
 				EngineCore.changeFatigue(-(100 + (player.spe*2)));
-				if (player.soulforce < player.maxSoulforce()) {
+				if (player.soulforce < player.maxOverSoulforce()) {
 					EngineCore.SoulforceChange(500 + (player.wis*2), true);
 				}
 				outputText("You feel energised and empowered by the life force drained out of the fluids of your recent blind date. What a meal!");
@@ -1923,9 +1923,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Soul Sense
-			if (player.maxSoulforce() >= 200 && player.hasPerk(PerkLib.SoulApprentice) && !player.hasPerk(PerkLib.SoulSense)) {
+			if (player.hasKeyItem("'Soul Sense and You' Manual") >= 0 && player.hasPerk(PerkLib.SoulPersonage) && !player.hasPerk(PerkLib.SoulSense)) {
 				outputText("\nDuring a casual walk around your camp you suddenly notice, or rather feel, something unexpected. Your surrounding blurs for a moment, to be replaced with a forest. You notice a goblin strolling nearby. Suddenly, she stops and slowly looks around, staring directly at you. A moment later, your vision of the forest becomes blurry, eventually fading away to be replaced by your camp and its surroundings. ");
-				outputText("You shake your head, trying to figure out what had just happened. The only solution that you find within yourself is something that the soul cultivators you met in He’Xin’Dao mentioned. Another sense that they had developed, which allowed them to perceive distant places or find specific people over long distances. It looks as though you developed it, even without training.\n");
+				outputText("You shake your head, trying to figure out what had just happened. The only solution that you find within yourself is something that mrs Shigure you met in He’Xin’Dao at lectures mentioned. Another sense that they had developed, which allowed them to perceive distant places or find specific people over long distances. It looks as though you finaly developed it too.\n");
+				player.removeKeyItem("'Soul Sense and You' Manual");
 				player.createPerk(PerkLib.SoulSense, 0, 0, 0, 0);
 				needNext = true;
 			}
