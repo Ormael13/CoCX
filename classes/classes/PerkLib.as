@@ -3567,7 +3567,7 @@ public class PerkLib
 				"You have reached 5th stage of soul cultivation. (+25 max Hunger, +120 max SF at lvl 36, 39, 42; +15% to max SF)")
 				.withBuffs({'wis.mult':0.10});
 		public static const SoulSense:PerkType = mk("Soul Sense", "Soul Sense",
-				"Your strong affinity toward soullforce helped to denvelop another sense called 'Soul Sense' by a fellow soul cultivators.");
+				"Your strong affinity toward soulforce helped you to develop another sense called 'Soul Sense' by fellow soul cultivators.");
 		public static const SoulSprite:PerkType = mk("Soul Sprite", "Soul Sprite",
 				"You have reached 4th stage of soul cultivation. (+25 max Hunger, +90 max SF at lvl 27, 30, 33; +15% to max SF)")
 				.withBuffs({'wis.mult':0.10});
