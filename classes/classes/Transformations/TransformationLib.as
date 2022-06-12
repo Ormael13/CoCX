@@ -1,28 +1,13 @@
 package classes.Transformations {
-import classes.BodyParts.Antennae;
-import classes.BodyParts.Arms;
-import classes.BodyParts.Ears;
-import classes.BodyParts.Eyes;
-import classes.BodyParts.Face;
-import classes.BodyParts.Gills;
-import classes.BodyParts.Hair;
-import classes.BodyParts.Horns;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.RearBody;
-import classes.BodyParts.Skin;
-import classes.BodyParts.Tail;
-import classes.BodyParts.Tongue;
-import classes.BodyParts.Wings;
+import classes.BodyParts.*;
 import classes.CockTypesEnum;
-import classes.Races.DarkSlimeRace;
-import classes.Races.MagmaSlimeRace;
-import classes.Races.SlimeRace;
 import classes.VaginaClass;
 import classes.GeneticMemories.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.MutationsHelper;
 import classes.PerkLib;
 import classes.Races;
+import classes.Races.*;
 import classes.Scenes.Metamorph;
 import classes.StatusEffects;
 import classes.internals.EnumValue;
@@ -12098,7 +12083,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 * 	 ██████  ███████ ██     ██     ███████
 * 	 ██   ██ ██   ██ ██     ██          ██
 * 	 ██████  ██   ██ ██████ ██████ ███████
- */
+*/
 
 /*
     */
@@ -12187,7 +12172,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					desc += "You gasp in shock as a sudden pain racks your abdomen. Within seconds, two balls drop down into a new sack, your skin stretching out to accommodate them. Once the pain clears, you examine <b>your new pair of testes.</b>[pg]";
 				}
 				else
-					desc += "You feel a delicate tightening sensation around your [balls].  The sensation upon this most sensitive part of your anatomy isn't painful, but the feeling of your balls getting smaller is intense enough that you stifle anything more than a sharp intake of breath only with difficulty.[pg]";
+					if (player.ballSize > 1) desc += "You feel a delicate tightening sensation around your [balls].  The sensation upon this most sensitive part of your anatomy isn't painful, but the feeling of your balls getting smaller is intense enough that you stifle anything more than a sharp intake of breath only with difficulty.[pg]";
 				player.ballSize = 1;
 				if (!player.hasStatusEffect(StatusEffects.Uniball))
 					desc += "You whimper as once again, your balls tighten and shrink.  Your eyes widen when you feel the gentle weight of your testicles pushing against your crotch, and a few hesitant swings of your [butt] confirm what you can feel - you've tightened your balls up so much they no longer hang beneath your [cocks], but press perkily upwards.  Heat ringing your ears, you explore your new sack with a careful hand.  "+

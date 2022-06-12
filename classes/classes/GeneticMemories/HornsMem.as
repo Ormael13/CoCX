@@ -40,8 +40,9 @@ package classes.GeneticMemories {
 	 */
 
     public static var Memories:/*EnumValue*/ Array = [];
+	  private static var _partid:int = 0;
 
-		public static const NONE:int = 0;
+		public static const NONE:int = _partid++;
 		EnumValue.add(Memories, NONE, "NONE", {
 			id: "Unlocked Metamorph",
 			name: "No Horns",
@@ -52,7 +53,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DEMON:int = 1;
+		public static const DEMON:int = _partid++;
 		EnumValue.add(Memories, DEMON, "DEMON", {
 			id: "Demon Horns",
 			name: "Demon Horns",
@@ -63,7 +64,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const COW_MINOTAUR:int = 2;
+		public static const COW_MINOTAUR:int = _partid++;
 		EnumValue.add(Memories, COW_MINOTAUR, "COW_MINOTAUR", {
 			id: "Cow Minotaur Horns",
 			name: "Bovine Horns",
@@ -74,7 +75,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DRACONIC_X2:int = 3;
+		public static const DRACONIC_X2:int = _partid++;
 		EnumValue.add(Memories, DRACONIC_X2, "DRACONIC_X2", {
 			id: "Draconic Dual Horns",
 			name: "Draconic Dual Horns",
@@ -85,7 +86,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DRACONIC_X4:int = 4;
+		public static const DRACONIC_X4:int = _partid++;
 		EnumValue.add(Memories, DRACONIC_X4, "DRACONIC_X4", {
 			id: "Draconic Quadruple Horns",
 			name: "Draconic Quadruple Horns",
@@ -96,7 +97,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const GOAT:int = 5;
+		public static const GOAT:int = _partid++;
 		EnumValue.add(Memories, GOAT, "GOAT", {
 			id: "Goat Horns",
 			name: "Goat Horns",
@@ -107,7 +108,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const UNICORN:int = 6;
+		public static const UNICORN:int = _partid++;
 		EnumValue.add(Memories, UNICORN, "UNICORN", {
 			id: "Unicorn Horn",
 			name: "Unicorn Horn",
@@ -118,7 +119,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const ONI:int = 7;
+		public static const ONI:int = _partid++;
 		EnumValue.add(Memories, ONI, "ONI", {
 			id: "Oni Horn",
 			name: "Oni Horn",
@@ -129,7 +130,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const ONI_X2:int = 8;
+		public static const ONI_X2:int = _partid++;
 		EnumValue.add(Memories, ONI_X2, "ONI_X2", {
 			id: "Oni Dual Horns",
 			name: "Oni Dual Horns",
@@ -140,7 +141,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BICORN:int = 9;
+		public static const BICORN:int = _partid++;
 		EnumValue.add(Memories, BICORN, "BICORN", {
 			id: "Bicorn Horns",
 			name: "Bicorn Horns",
@@ -151,7 +152,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FROSTWYRM:int = 10;
+		public static const FROSTWYRM:int = _partid++;
 		EnumValue.add(Memories, FROSTWYRM, "FROSTWYRM", {
 			id: "Frostwyrm Horns",
 			name: "Frostwyrm Horns",

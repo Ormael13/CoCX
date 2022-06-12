@@ -40,8 +40,9 @@ package classes.GeneticMemories {
 	 */
 
     public static var Memories:/*EnumValue*/ Array = [];
+	  private static var _partid:int = 0;
 
-		public static const HUMAN:int = 0;
+		public static const HUMAN:int = _partid++;
 		EnumValue.add(Memories, HUMAN, "HUMAN", {
 			id: "Unlocked Metamorph",
 			name: "Human Tongue",
@@ -52,7 +53,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const SNAKE:int = 1;
+		public static const SNAKE:int = _partid++;
 		EnumValue.add(Memories, SNAKE, "SNAKE", {
 			id: "Snake Tongue",
 			name: "Snake Tongue",
@@ -63,7 +64,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DEMONIC:int = 2;
+		public static const DEMONIC:int = _partid++;
 		EnumValue.add(Memories, DEMONIC, "DEMONIC", {
 			id: "Demon Tongue",
 			name: "Demon Tongue",
@@ -74,7 +75,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DRACONIC:int = 3;
+		public static const DRACONIC:int = _partid++;
 		EnumValue.add(Memories, DRACONIC, "DRACONIC", {
 			id: "Draconic Tongue",
 			name: "Draconic Tongue",
@@ -85,7 +86,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const CAT:int = 4;
+		public static const CAT:int = _partid++;
 		EnumValue.add(Memories, CAT, "CAT", {
 			id: "Cat Tongue",
 			name: "Cat Tongue",
@@ -96,7 +97,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const ELF:int = 5;
+		public static const ELF:int = _partid++;
 		EnumValue.add(Memories, ELF, "ELF", {
 			id: "Elf Tongue",
 			name: "Elf Tongue",
@@ -107,7 +108,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const CAVE_WYRM:int = 6;
+		public static const CAVE_WYRM:int = _partid++;
 		EnumValue.add(Memories, CAVE_WYRM, "CAVE_WYRM", {
 			id: "Cave Wyrm Tongue",
 			name: "Cave Wyrm Tongue",

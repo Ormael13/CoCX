@@ -192,14 +192,8 @@ public class BeeHoney extends Consumable
 			}
 			//-Nipples reduction to 1 per tit.
 			if (player.averageNipplesPerBreast() > 1 && changes < changeLimit && Utils.rand(4) == 0) {
-				outputText("\n\nA chill runs over your " + Appearance.allBreastsDescript(player) + " and vanishes.  You stick a hand under your [armor] and discover that your extra nipples are missing!  You're down to just one per ");
-				if (player.biggestTitSize() < 1) outputText("'breast'.");
-				else outputText("breast.");
+				CoC.instance.transformations.NipplesPerBreastOne.applyEffect();
 				changes++;
-				//Loop through and reset nipples
-				for (var temp:int = 0; temp < player.breastRows.length; temp++) {
-					player.breastRows[temp].nipplesPerBreast = 1;
-				}
 			}
 			//Gain oviposition!
 			if (changes < changeLimit && !player.hasPerk(PerkLib.BeeOvipositor) && player.tailType == Tail.BEE_ABDOMEN && Utils.rand(2) == 0) {

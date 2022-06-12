@@ -37,8 +37,9 @@ public class VaginaMem extends BaseContent {
 	 */
 
     public static var Memories:/*EnumValue*/ Array = [];
+	private static var _partid:int = 0;
 
-		public static const NONE:int = 0;
+		public static const NONE:int = _partid++;
 		EnumValue.add(Memories, NONE, "NONE", {
 		  id: "Unlocked Metamorph",
 		  name: "No Vagina",
@@ -49,7 +50,7 @@ public class VaginaMem extends BaseContent {
 		  }
 		});
 
-		public static const HUMAN:int = 1;
+		public static const HUMAN:int = _partid++;
 		EnumValue.add(Memories, HUMAN, "HUMAN", {
 			id: "Unlocked Metamorph",
 			name: "Human Vagina",
@@ -60,7 +61,7 @@ public class VaginaMem extends BaseContent {
 			}
 		});
 
-		public static const EQUINE:int = 2;
+		public static const EQUINE:int = _partid++;
 		EnumValue.add(Memories, EQUINE, "EQUINE", {
 			id: "Equine Vagina",
 			name: "Equine Vagina",
@@ -71,7 +72,7 @@ public class VaginaMem extends BaseContent {
 			}
 		});
 
-		public static const BLACK_SAND_TRAP:int = 3;
+		public static const BLACK_SAND_TRAP:int = _partid++;
 		EnumValue.add(Memories, BLACK_SAND_TRAP, "BLACK_SAND_TRAP", {
 			id: "Black Sand Trap Vagina",
 			name: "Black Sand Trap Vagina",
@@ -82,7 +83,7 @@ public class VaginaMem extends BaseContent {
 			}
 		});
 
-		public static const CAVE_WYRM:int = 4;
+		public static const CAVE_WYRM:int = _partid++;
 		EnumValue.add(Memories, CAVE_WYRM, "CAVE_WYRM", {
 			id: "Cave Wyrm Vagina",
 			name: "Cave Wyrm Vagina",
@@ -93,7 +94,7 @@ public class VaginaMem extends BaseContent {
 			}
 		});
 
-		public static const VENOM_DRIPPING:int = 5;
+		public static const VENOM_DRIPPING:int = _partid++;
 		EnumValue.add(Memories, VENOM_DRIPPING, "VENOM_DRIPPING", {
 			id: "Centipede Vagina",
 			name: "Centipede Vagina",
@@ -104,7 +105,7 @@ public class VaginaMem extends BaseContent {
 			}
 		});
 
-		public static const MANTICORE:int = 6;
+		public static const MANTICORE:int = _partid++;
 		EnumValue.add(Memories, MANTICORE, "MANTICORE", {
 			id: "Manticore Vagina",
 			name: "Manticore Vagina",
@@ -115,7 +116,7 @@ public class VaginaMem extends BaseContent {
 			}
 		});
 
-		public static const CANCER:int = 7;
+		public static const CANCER:int = _partid++;
 		EnumValue.add(Memories, CANCER, "CANCER", {
 			id: "Cancer Vagina",
 			name: "Cancer Vagina",
@@ -126,7 +127,7 @@ public class VaginaMem extends BaseContent {
 			}
 		});
 
-		public static const DEMONIC:int = 8;
+		public static const DEMONIC:int = _partid++;
 		EnumValue.add(Memories, DEMONIC, "DEMONIC", {
 			id: "Demon Vagina",
 			name: "Demon Vagina",
@@ -137,7 +138,7 @@ public class VaginaMem extends BaseContent {
 			}
 		});
 
-		public static const SCYLLA:int = 9;
+		public static const SCYLLA:int = _partid++;
 		EnumValue.add(Memories, SCYLLA, "SCYLLA", {
 			id: "Scylla Vagina",
 			name: "Scylla Vagina",
@@ -148,7 +149,7 @@ public class VaginaMem extends BaseContent {
 			}
 		});
 
-		public static const NAGA:int = 10;
+		public static const NAGA:int = _partid++;
 		EnumValue.add(Memories, NAGA, "NAGA", {
 			id: "Naga Vagina",
 			name: "Naga Vagina",
@@ -159,7 +160,7 @@ public class VaginaMem extends BaseContent {
 			}
 		});
 
-		public static const SHARK:int = 11;
+		public static const SHARK:int = _partid++;
 		EnumValue.add(Memories, SHARK, "SHARK", {
 			id: "Shark Vagina",
 			name: "Shark Vagina",
@@ -170,7 +171,7 @@ public class VaginaMem extends BaseContent {
 			}
 		});
 
-		public static const RAIJU:int = 12;
+		public static const RAIJU:int = _partid++;
 		EnumValue.add(Memories, RAIJU, "RAIJU", {
 			id: "Raiju Vagina",
 			name: "Raiju Vagina",

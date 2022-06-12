@@ -37,8 +37,9 @@ package classes.GeneticMemories {
 		*/
 
 		public static var Memories:/*EnumValue*/ Array = [];
+		private static var _partid:int = 0;
 
-		public static const NONE:int = 0;
+		public static const NONE:int = _partid++;
 		EnumValue.add(Memories, NONE, "NONE", {
 			id: "Unlocked Metamorph",
 			name: "No Breasts",
@@ -49,7 +50,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BREAST1:int = 1;
+		public static const BREAST1:int = _partid++;
 		EnumValue.add(Memories, BREAST1, "BREAST1", {
 			id: "One Breast Row",
 			name: "One Breast Row",
@@ -60,40 +61,43 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BREAST2:int = 2;
+		public static const BREAST2:int = _partid++;
 		EnumValue.add(Memories, BREAST2, "BREAST2", {
 			id: "Two Breast Rows",
 			name: "Two Breast Rows",
 			cost: 500,
 			title: "Breast row 2",
+			permReq: "One Breast Row",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.BreastRowsTwo;
 			}
 		});
 
-		public static const BREAST3:int = 3;
+		public static const BREAST3:int = _partid++;
 		EnumValue.add(Memories, BREAST3, "BREAST3", {
 			id: "Three Breast Rows",
 			name: "Three Breast Rows",
 			cost: 500,
 			title: "Breast row 3",
+			permReq: "Two Breast Rows",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.BreastRowsThree;
 			}
 		});
 
-		public static const BREAST4:int = 4;
+		public static const BREAST4:int = _partid++;
 		EnumValue.add(Memories, BREAST4, "BREAST4", {
 			id: "Four Breast Rows",
 			name: "Four Breast Rows",
 			cost: 500,
 			title: "Breast row 4",
+			permReq: "Three Breast Rows",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.BreastRowsFour;
 			}
 		});
 
-		public static const NOLACTATE:int = 5;
+		public static const NOLACTATE:int = _partid++;
 		EnumValue.add(Memories, NOLACTATE, "NOLACTATE", {
 			id: "Unlocked Metamorph",
 			name: "No Lactate",
@@ -104,7 +108,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const STARTLACTATE:int = 6;
+		public static const STARTLACTATE:int = _partid++;
 		EnumValue.add(Memories, STARTLACTATE, "STARTLACTATE", {
 			id: "Unlocked Metamorph",
 			name: "Start Lactate",
@@ -115,7 +119,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const ONENIPPLE:int = 7;
+		public static const ONENIPPLE:int = _partid++;
 		EnumValue.add(Memories, ONENIPPLE, "ONENIPPLE", {
 			id: "Unlocked Metamorph",
 			name: "One Nipple",
@@ -126,7 +130,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const QUADNIPPLE:int = 8;
+		public static const QUADNIPPLE:int = _partid++;
 		EnumValue.add(Memories, QUADNIPPLE, "QUADNIPPLE", {
 			id: "Quad Nipples",
 			name: "Quad Nipples",
@@ -137,7 +141,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FUCKNIPPLE:int = 9;
+		public static const FUCKNIPPLE:int = _partid++;
 		EnumValue.add(Memories, FUCKNIPPLE, "FUCKNIPPLE", {
 			id: "Fuckable Nipples",
 			name: "Fuckable Nipples",
@@ -148,7 +152,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BLACKNIPPLE:int = 10;
+		public static const BLACKNIPPLE:int = _partid++;
 		EnumValue.add(Memories, BLACKNIPPLE, "BLACKNIPPLE", {
 			id: "Black Nipples",
 			name: "Black Nipples",
@@ -159,7 +163,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const GLOWINGNIPPLE:int = 11;
+		public static const GLOWINGNIPPLE:int = _partid++;
 		EnumValue.add(Memories, GLOWINGNIPPLE, "GLOWINGNIPPLE", {
 			id: "Glowing Nipples",
 			name: "Glowing Nipples",

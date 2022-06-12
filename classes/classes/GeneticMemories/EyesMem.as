@@ -40,8 +40,9 @@ package classes.GeneticMemories {
 	 */
 
     public static var Memories:/*EnumValue*/ Array = [];
+	private static var _partid:int = 0;
 
-		public static const HUMAN:int = 0;
+		public static const HUMAN:int = _partid++;
 		EnumValue.add(Memories, HUMAN, "HUMAN", {
 			id: "Unlocked Metamorph",
 			name: "Human Eyes",
@@ -52,7 +53,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const SPIDER:int = 1;
+		public static const SPIDER:int = _partid++;
 		EnumValue.add(Memories, SPIDER, "SPIDER", {
 			id: "Spider Eyes",
 			name: "Spider Eyes",
@@ -63,7 +64,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const CAT:int = 2;
+		public static const CAT:int = _partid++;
 		EnumValue.add(Memories, CAT, "CAT", {
 			id: "Cat Eyes",
 			name: "Cat Eyes",
@@ -74,7 +75,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const GORGON:int = 3;
+		public static const GORGON:int = _partid++;
 		EnumValue.add(Memories, GORGON, "GORGON", {
 			id: "Gorgon Eyes",
 			name: "Gorgon Eyes",
@@ -85,7 +86,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const MANTICORE:int = 4;
+		public static const MANTICORE:int = _partid++;
 		EnumValue.add(Memories, MANTICORE, "MANTICORE", {
 			id: "Manticore Eyes",
 			name: "Manticore Eyes",
@@ -96,7 +97,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FOX:int = 5;
+		public static const FOX:int = _partid++;
 		EnumValue.add(Memories, FOX, "FOX", {
 			id: "Fox Eyes",
 			name: "Fox Eyes",
@@ -107,7 +108,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const LIZARD:int = 6;
+		public static const LIZARD:int = _partid++;
 		EnumValue.add(Memories, LIZARD, "LIZARD", {
 			id: "Lizard Eyes",
 			name: "Lizard Eyes",
@@ -118,7 +119,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const SNAKE:int = 7;
+		public static const SNAKE:int = _partid++;
 		EnumValue.add(Memories, SNAKE, "SNAKE", {
 			id: "Snake Eyes",
 			name: "Snake Eyes",
@@ -129,7 +130,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DRACONIC:int = 8;
+		public static const DRACONIC:int = _partid++;
 		EnumValue.add(Memories, DRACONIC, "DRACONIC", {
 			id: "Draconic Eyes",
 			name: "Draconic Eyes",
@@ -140,7 +141,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DEVIL:int = 9;
+		public static const DEVIL:int = _partid++;
 		EnumValue.add(Memories, DEVIL, "DEVIL", {
 			id: "Devil Eyes",
 			name: "Devil Eyes",
@@ -151,7 +152,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const ONI:int = 10;
+		public static const ONI:int = _partid++;
 		EnumValue.add(Memories, ONI, "ONI", {
 			id: "Oni Eyes",
 			name: "Oni Eyes",
@@ -162,7 +163,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const ELF:int = 11;
+		public static const ELF:int = _partid++;
 		EnumValue.add(Memories, ELF, "ELF", {
 			id: "Elf Eyes",
 			name: "Elf Eyes",
@@ -173,7 +174,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const RAIJU:int = 12;
+		public static const RAIJU:int = _partid++;
 		EnumValue.add(Memories, RAIJU, "RAIJU", {
 			id: "Raiju Eyes",
 			name: "Raiju Eyes",
@@ -184,7 +185,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const VAMPIRE:int = 13;
+		public static const VAMPIRE:int = _partid++;
 		EnumValue.add(Memories, VAMPIRE, "VAMPIRE", {
 			id: "Vampire Eyes",
 			name: "Vampire Eyes",
@@ -195,7 +196,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const INFERNAL:int = 14;
+		public static const INFERNAL:int = _partid++;
 		EnumValue.add(Memories, INFERNAL, "INFERNAL", {
 			id: "Infernal Eyes",
 			name: "Infernal Eyes",
@@ -206,7 +207,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const ORC:int = 15;
+		public static const ORC:int = _partid++;
 		EnumValue.add(Memories, ORC, "ORC", {
 			id: "Orc Eyes",
 			name: "Orc Eyes",
@@ -217,7 +218,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DISPLACER:int = 16;
+		public static const DISPLACER:int = _partid++;
 		EnumValue.add(Memories, DISPLACER, "DISPLACER", {
 			id: "Displacer Eyes",
 			name: "Displacer Eyes",
@@ -228,7 +229,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const CAVE_WYRM:int = 17;
+		public static const CAVE_WYRM:int = _partid++;
 		EnumValue.add(Memories, CAVE_WYRM, "CAVE_WYRM", {
 			id: "Cave Wyrm Eyes",
 			name: "Cave Wyrm Eyes",
@@ -239,7 +240,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const HINEZUMI:int = 18;
+		public static const HINEZUMI:int = _partid++;
 		EnumValue.add(Memories, HINEZUMI, "HINEZUMI", {
 			id: "Hinezumi Eyes",
 			name: "Hinezumi Eyes",
@@ -250,7 +251,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const MONOEYE:int = 19;
+		public static const MONOEYE:int = _partid++;
 		EnumValue.add(Memories, MONOEYE, "MONOEYE", {
 			id: "Monoeye",
 			name: "Monoeye",
@@ -261,7 +262,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BLACK_EYES_SAND_TRAP:int = 20;
+		public static const BLACK_EYES_SAND_TRAP:int = _partid++;
 		EnumValue.add(Memories, BLACK_EYES_SAND_TRAP, "BLACK_EYES_SAND_TRAP", {
 			id: "Black Eyes",
 			name: "Black Eyes",
@@ -272,7 +273,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FROSTWYRM:int = 21;
+		public static const FROSTWYRM:int = _partid++;
 		EnumValue.add(Memories, FROSTWYRM, "FROSTWYRM", {
 			id: "Frost wyrm Eyes",
 			name: "Frost wyrm Eyes",
