@@ -454,27 +454,6 @@ public class SceneHunter extends BaseContent {
             outputText("\n<b>" + text + "</b>\n");
     }
 
-    //Some common checks for easier access
-
-    //Prints dick requirements if not found
-    public function checkDickWithType(type:CockTypesEnum, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", moreText:String = ""):void {
-        if (printChecks && player.findCockWithType(type, 1, minSize, maxSize, compareBy) < 0) {
-            outputText("\n\n<b>FAILED DICK CHECK:")
-            if (type != CockTypesEnum.UNDEFINED)
-                outputText("\n    Type: " + Appearance.cockNoun(type));
-            if (minSize != -1)
-                outputText("\n    Min " + compareBy + ": " + minSize);
-            if (maxSize != -1)
-                outputText("\n    Max " + compareBy + ": " + maxSize);
-            if (moreText)
-                outputText("\n" + moreText);
-            outputText("</b>\n\n")
-        }
-    }
-    public function checkDick(minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", moreText:String = ""):void {
-        checkDickWithType(CockTypesEnum.UNDEFINED, minSize, maxSize, compareBy, moreText);
-    }
-
     //--------------------------------------------------------------------------------------------------
     // Other
     //--------------------------------------------------------------------------------------------------
@@ -544,6 +523,31 @@ public class SceneHunter extends BaseContent {
         outputText("\n<b>Recalling wastes some in-game time, but it will never change any of your stats. If such occasion occurs, please report it as a bug.</b></i>");
         recalling = true; //Setting the flag to disable everything but text
         menu();
+
+        //Tamani first time
+        if (flags[kFLAGS.TAMANI_MET] == 1 && player.hasCock())
+            addButton(0, "TamaniFirst", SceneLib.forest.tamaniScene.tamaniFirstTimeConsentual).hint("First time with Tamani.");
+        //Tamani first time
+        if (player.hasKeyItem("Deluxe Dildo") >= 0 && player.hasVagina())
+            addButton(1, "TamaniLes", SceneLib.forest.tamaniScene.preferTamaniFemdom).hint("Girl-on-girl event with Tamani.");
+        //Erlking revenge
+        if (player.hasKeyItem("Golden Antlers") >= 0 && player.gender > 0)
+            addButton(2, "Erlk.Revenge", SceneLib.forest.erlkingScene.howDareYou).hint("You show Erlking <b>who</b> is the hunter here.");
+        //Nightmare
+        if (CelessScene.instance.questFinishedNightmare)
+            addButton(3, "Nightmare", SceneLib.forest.nightmareScene.nightmareVictory).hint("Demonic bicorn fucks you into a pile of mess.");
+        //Venus cock scenes
+        if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && flags[kFLAGS.KAIJU_COCK] == 1)
+            addButton(4, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus).hint("Venus discovers her new cock.");
+
+        addButton(11, "Places", recallScenes_places);
+        addButton(12, "CampNPCs", recallScenes_NPCs);
+        addButton(13, "Dungeons", recallScenes_dungeons);
+        addButton(14, "Wake Up", recallWakeUpImpl);
+    }
+
+    private function recallScenes_places():void {
+        menu();
         //Benoit stuff
         if (flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] > 0)
             addButton(0, "Benoit1stEgg", SceneLib.bazaar.benoit.eggySuggest).hint("Benoit's first egging.");
@@ -551,34 +555,38 @@ public class SceneHunter extends BaseContent {
             addButton(1, "BenoitBWomb", SceneLib.bazaar.benoit.tryToConvertToBassyWomb).hint("Your first Basilisk Womb test.");
         if (flags[kFLAGS.TIMES_FUCKED_FEMOIT] > 0)
             addButton(2, "Femoit1st", SceneLib.bazaar.benoit.femoitFirstTimeYes).hint("First Benoite experience.");
-        //2, 3 - empty
-        //Tamani first time
-        if (flags[kFLAGS.TAMANI_MET] == 1 && player.hasCock())
-            addButton(4, "TamaniFirst", SceneLib.forest.tamaniScene.tamaniFirstTimeConsentual).hint("First time with Tamani.");
-        //Tamani first time
-        if (player.hasKeyItem("Deluxe Dildo") >= 0 && player.hasVagina())
-            addButton(5, "TamaniLes", SceneLib.forest.tamaniScene.preferTamaniFemdom).hint("Girl-on-girl event with Tamani.");
-        //Erlking revenge
-        if (player.hasKeyItem("Golden Antlers") >= 0 && player.gender > 0)
-            addButton(6, "Erlk.Revenge", SceneLib.forest.erlkingScene.howDareYou).hint("You show Erlking <b>who</b> is the hunter here.");
-        //Nightmare
-        if (CelessScene.instance.questFinishedNightmare)
-            addButton(7, "Nightmare", SceneLib.forest.nightmareScene.nightmareVictory).hint("Demonic bicorn fucks you into a pile of mess.");
+        //Corrupted Marae
+        if (flags[kFLAGS.MET_MARAE_CORRUPTED] > 0 && player.gender > 0)
+            addButton(3, "C.Marae(1)", SceneLib.boat.marae.firstCorruptEncounter).hint("Repeat your encounters with the corrupted goddess.");
+        if (flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] > 0 && player.gender > 0)
+            addButton(4, "C.Marae(2)", SceneLib.boat.marae.level2MaraeEncounter).hint("Repeat your encounters with the corrupted goddess.");
         //Sapphire
         if (flags[kFLAGS.SAPPHIRE_AFFECTION] == 100)
-            addButton(8, "SapphireFirst", SceneLib.templeofdivine.sapphire.sapphireFirstTime).hint("Sapphire discovers carnal pleasures");
-        //Venus cock scenes
-        if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && flags[kFLAGS.KAIJU_COCK] == 1)
-            addButton(9, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus).hint("Venus discovers her new cock.");
-        //Venus cock scenes
-        if (flags[kFLAGS.MET_MARAE_CORRUPTED] > 0 && player.gender > 0)
-            addButton(10, "C.Marae(1)", SceneLib.boat.marae.firstCorruptEncounter).hint("Repeat your encounters with the corrupted goddess.");
-        if (flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] > 0 && player.gender > 0)
-            addButton(11, "C.Marae(2)", SceneLib.boat.marae.level2MaraeEncounter).hint("Repeat your encounters with the corrupted goddess.");
+            addButton(5, "SapphireFirst", SceneLib.templeofdivine.sapphire.sapphireFirstTime).hint("Sapphire discovers carnal pleasures");
+        //Sub-pages
+        if (player.hasStatusEffect(StatusEffects.MetWhitney) && player.statusEffectv1(StatusEffects.MetWhitney) > 1)
+            addButton(10, "Farm", recallScenes_farm);
+        addButton(14, "Back", recallScenes);
+    }
 
-        addButton(13, "CampNPCs", recallScenes_NPCs);
-        addButton(13, "Dungeons", recallScenes_dungeons);
-        addButton(14, "Wake Up", recallWakeUpImpl);
+    private function recallScenes_farm():void {
+        if (player.hasStatusEffect(StatusEffects.KeltOff)) //allowing for Kelly in 'Other' because I want!
+            addButton(0, "KeltRape", SceneLib.farm.keltScene.fuckKeltsShitUp).hint("Your revenge for Kelt.");
+        else if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) {
+            if (sceneHunter.other) addButton(0, "KeltRape", SceneLib.farm.keltScene.fuckKeltsShitUp).hint("Alt. Kelt revenge. <b>Available because I want. Not a bug.</b>");
+            else addButtonDisabled(0, "KeltRape", "Enable 'Other' in SH to see it too.");
+        }
+        if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 1)
+            addButton(1, "KeltBreak1", SceneLib.farm.kelly.breakKeltGo).hint("Kelt Breaking - Stage 1.</b>");
+                SceneLib.farm.kelly.breakKeltGo();
+        if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 2)
+            addButton(2, "KeltBreak2", SceneLib.farm.kelly.secondKeltBreaking).hint("Kelt Breaking - Stage 2.</b>");
+        if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 3)
+            addButton(3, "KeltBreak3", SceneLib.farm.kelly.breakingKeltNumeroThree).hint("Kelt Breaking - Stage 3.</b>");
+        if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4)
+            addButton(4, "KeltBreak4", SceneLib.farm.kelly.finalKeltBreaking).hint("Kelt Breaking - Stage 4.</b>");
+        SceneLib.farm.kelly.breakKeltGo();
+        addButton(14, "Back", recallScenes_places);
     }
 
     private function recallScenes_NPCs():void {
