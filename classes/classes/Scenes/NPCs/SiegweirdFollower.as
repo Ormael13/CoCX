@@ -7,7 +7,6 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Monsters.ImpLord;
-import classes.Scenes.NPCs.Siegweird;
 import classes.display.SpriteDb;
 
 public class SiegweirdFollower extends NPCAwareContent
@@ -364,7 +363,7 @@ public function siegweirdAdvancedStudy_0():void {
             outputText("</i>You tell him that you have already found Marae, and describe her state when you met her.\n\n<i>");
             if (flags[kFLAGS.FACTORY_SHUTDOWN] == 0) outputText("She's still alive... but to finish her purification, you must shut down the factory. There are no other options.");
             else if (flags[kFLAGS.MARAE_QUEST_COMPLETE] == 1) outputText("You have disabled the factory? Excellent! And that pearl you mentioned will be an excellent replacement for the bark!");
-            else if (flags[kFLAGS.MET_MARAE_CORRUPTED] == 2) outputText("So... she's fallen to it too. Forget about it then. Even if you manage to obtain her bark, it will probably be tainted too... Unless you've got some <b>before</b> she'd become corrupted. But I don't think it's possible...");
+            else if (flags[kFLAGS.MET_MARAE_CORRUPTED] > 0) outputText("So... she's fallen to it too. Forget about it then. Even if you manage to obtain her bark, it will probably be tainted too... Unless you've got some <b>before</b> she'd become corrupted. But I don't think it's possible...");
         }
         outputText("\n\nYou also need to find a silver ingot; the material would serve as the casing. Finally, a perfect diamond will be the ornament. You should get going and start looking for these items, I wish you good luck in that.</i>\"\n\n");
         player.createStatusEffect(StatusEffects.SiegweirdTraining2, 0, 0, 0, 0);

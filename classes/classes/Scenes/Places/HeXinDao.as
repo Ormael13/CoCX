@@ -261,7 +261,7 @@ public class HeXinDao extends BaseContent
 					sayLine2(consumables.VPTRMAN,"It's a manual for Violet Pupil Transformation, this advanced technique allows you to channel soulforce into regenerative power, allowing you to recover even from the brink of death.  Its only flaw is that it constantly drains the cultivator's soulforce. "),
 					"\n\nIt seems like it's similar to a healing spell soul skill, but instead of being used immediately, with enough soulforce it could be kept active for a very long period of time.  It could give you an edge against the demons.  Additionally, the ability to heal from the brink of death could prove to be useful in future fights.  "
 			).hint("Violet Pupil Transformation Manual.");
-			//if (player.hasPerk(PerkLib.SoulPersonage)) {
+			if (player.hasPerk(PerkLib.SoulPersonage)) {
 				addButton(4, "Sextuple Thrust", buyItem2,consumables.SEXTMAN,
 						sayLine2(consumables.SEXTMAN,"It's a manual for Sextuple Thrust, this simple technique allows you to unleash six thrusts. As you train your body and soul, this skill will become stronger."),
 						"\n\nWhether you are going to go deeper into all that 'soulforce' stuff or not, at least you now have something to train with. The name of the manual seems like it could have been influenced by this realm...or it's just a coincidence.  " 
@@ -270,11 +270,11 @@ public class HeXinDao extends BaseContent
 						sayLine2(consumables.HOB2MAN,"It's a manual for Grandiose Hail of Blades, this technique allows you to form many etheral weapons traveling at extreme speeds. As you train your body and soul, this skill will become stronger."),
 						"\n\nWhether you are going to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you not certain.  "
 				).hint("Grandiose Hail of Blades Manual.");
-			//}
-			//if (player.hasPerk(PerkLib.SoulWarrior)) {
+			}
+			if (player.hasPerk(PerkLib.SoulWarrior)) {
 				addButton(7, "MGSFRecovPill", buyItem2,consumables.MG_SFRP,
 					sayLine2(consumables.MG_SFRP,"It's a rather useful item for all cultivators at Soul Warrior stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the low-grade one.")).hint("Mid-grade Soulforce Recovery Pill.");
-			//}
+			}
             addButton(14, "Back", golemmerchant);
             statScreenRefresh();
 		}
@@ -1092,11 +1092,21 @@ public function soularena():void {
 		else if (player.hasPerk(PerkLib.JobSoulCultivator)) addButtonDisabled(0, "1st", "You already learned basic to start your soul cultivation.");
 		else if (player.wis < 10) addButtonDisabled(0, "1st", "You not have enough high wisdom to understand those lectures.");
 		else addButtonDisabled(0, "1st", "You not have enough gems to listen to those lectures.");
-		if (!player.hasPerk(PerkLib.Dantain) && player.hasPerk(PerkLib.JobSoulCultivator)) {
+		if (!player.hasPerk(PerkLib.Dantain) && player.hasPerk(PerkLib.SoulApprentice)) {
 			if (flags[kFLAGS.SPIRIT_STONES] >= 5) addButton(1, "2nd", mrsShigureLecturesFirst).hint("Mrs. Shigure Lectures about first step of soul cultivation.");
-			else addButtonDisabled(1, "2nd", "You not have enough spirit stones to listen to those lectures.");
+			else addButtonDisabled(1, "2nd", "You not have enough spirit stones (5) to listen to those lectures.");
 		}
 		else if (player.hasPerk(PerkLib.Dantain)) addButtonDisabled(1, "2nd", "You already learned about first step of soul cultivation.");
+		if (!player.hasPerk(PerkLib.SoulSense) && player.hasPerk(PerkLib.SoulPersonage)) {
+			if (flags[kFLAGS.SPIRIT_STONES] >= 10) addButton(2, "3rd", mrsShigureLecturesSecond).hint("Mrs. Shigure Lectures about second step of soul cultivation.");
+			else addButtonDisabled(2, "3rd", "You not have enough spirit stones (10) to listen to those lectures.");
+		}
+		else if (player.hasPerk(PerkLib.Dantain)) addButtonDisabled(2, "3rd", "You already learned about second step of soul cultivation.");
+		if (!player.hasPerk(PerkLib.SoulSense) && player.hasPerk(PerkLib.SoulWarrior)) {
+			if (flags[kFLAGS.SPIRIT_STONES] >= 15) addButton(3, "4th", mrsShigureLecturesThird).hint("Mrs. Shigure Lectures about third step of soul cultivation.");
+			else addButtonDisabled(3, "4th", "You not have enough spirit stones (15) to listen to those lectures.");
+		}
+		else if (player.hasPerk(PerkLib.Dantain)) addButtonDisabled(3, "4th", "You already learned about third step of soul cultivation.");
 		if (player.hasPerk(PerkLib.Dantain)) addButton(13, "MissKyiana", missKyianaManualsShop);
 		else addButtonDisabled(13, "???", "After attending 2nd Lecture.");
 		addButton(14, "Back", soularena);
@@ -1145,6 +1155,44 @@ public function soularena():void {
 		player.createPerk(PerkLib.Dantain, 0, 0, 0, 0);
 		doNext(camp.returnToCampUseFourHours);
 	}
+	public function mrsShigureLecturesSecond():void {
+		clearOutput();
+		flags[kFLAGS.SPIRIT_STONES] -= 10;
+		outputText("Placeholder on milf floof casual greeting.\n\n");
+		outputText("\"<i>It's good to see so many of you still interested in lectures that ol' me giving. Or maybe you come here for different reason.... who knows,</i>\" Shigure says correcting her robes that been showing way too much of her body.\n\n");
+		outputText("\"<i>Been here today mean you all managed to ascend above been merely Soul Apprentice and succesfuly cultivated with that simple technique i taught you all last time.</i>\" She nods and then turns around, giving everyone good look on her shaply back and tails, reaching for some small booklet.\n\n");
+		outputText("\"<i>Now some of you may start to feel high after expiriencing your powers growing and doing things that your peers may not yet able too. It's good.... unless it gets to your heads and make you ends up as some demon sex toy or worse...</i>\" she hang up her voice for a moment, \"<i>there are much more scary things out there in wildness of those lands.</i>\" ");
+		outputText("She then looks at the ground, \"<i>or beneath your feet, which you probably not wanna stir from 'it' slumber.</i>\" Shigure emphased last part of her sentence and then went silent for a moment.\n\n");
+		outputText("\"<i>Ah well it's all still ahead of you so i shall teach oyu on something new that would make youir progress in cultivation and in general normal life a bit easier. It's Soul Sense.</i>\" She looks over the audience. \"<i>Anyone know anything on it?</i>\" She waits for few minutes but noone speaks.\n\n");
+		outputText("\"<i>Well then due to noone knowing much or unwqilling to share it thoughts with us I shall speak myself.</i>\" She sigh a bit as if expected that someone would step up. What follow is her lengthy explanation, bit different form previous ones, that relay lots of vital informations what soul sense is and what it could be used for. For example to find someone who soul signature user get familiar with. ");
+		outputText("Or about limitations it have, for example unability to track demons due to their lack of soul. Ending that explanation she once again taught everyone simple excersise to help with awakening soul sense even giving thin manual on matters regarding soul sense.\n\n");
+		outputText("\"<i>That was interesting lecture, don't you all think? I hope next time we all meet we could speak about some trials that each cultivator would have to survive.</i>\" She makes a deep bow allowing those in first rows see very deep in her cleavage.\n\n");
+		outputText("<b>Gained Key Item: 'Soul Sense and You' Manual</b>");
+		player.createKeyItem("'Soul Sense and You' Manual", 0, 0, 0, 0);
+		doNext(camp.returnToCampUseTwoHours);
+	}
+	public function mrsShigureLecturesThird():void {
+		clearOutput();
+		flags[kFLAGS.SPIRIT_STONES] -= 15;
+		outputText("Placeholder on milf floof casual greeting.\n\n");
+		outputText("\"<i>Today we shall discuss about tribulations. It's something that each of us must face in their life at least once. Well if you don;t then sad to say your potential to cultivate was already pitful so it may been mistake to even start it.</i>\" She siyts comfortable behind the desk.\n\n");
+		outputText("\"<i>Each time us cultivators face it what is needed is to simply survive. Dead cultivator can't do anything right? So taking even extreme measures to survive it are all fine as long it lead to survival. And when each of you do it it will reward you not only with possibility to progress futher on the enless road but maybe even leave some small boon.</i>\" She looks over the gathered before continuing.\n\n");
+		outputText("\"<i>Some may noticed something but i would tell it regardless. It'\s sometimes possible to fight actively back than simply passively trying to survive tribulation. Each cultivator that done it would tell you it was worth it.</i>\" At that moment some lizan interrupts rising his hand. When she lets him ask the question is naturaly if teracher itself done this.\n\n");
+		outputText("\"<i>Hmmmm...</i>\" she pause as she smiles, \"<i>yes i do fighted against tribulation i faces few times... and i not felt it was bad to do it.</i>\" She continue lecture describing what could cultivators preapre for this event. Various formation to support or defend from tribulation lightnings.\n\n");
+		outputText("\"<i>When the time will come each of you should fell the approaching tribulation. Luckly for us it not come right away... well beside some super exceptional cases it would take at least few hours until it arrive. So be sure to find some good spot to face it. Ahh and not forget to not involve bystriders in it. Tribulations tends to 'rise up' difficulty of itself if it sense more than one challanger that facing it. Pets or minions are fine but not other cultivators.</i>\"\n\n");
+		outputText("It continue for next houir or so as kitsune tells few cases of tribulations as references making sure to emphase fact that the one tribulation each of gathered may face could be totlay unlike anything before any cultivator faced.\n\n");
+		outputText("\"<i>At the ending i would like to once again bestow you all with minor fortune in form of this humble manual that summarise all our today talks. I hope we would be all bale to meet again for next lecture after each of you succesfuly survive your very first tribulation in life.</i>\" She ends the meeting and leave the arean leaving behind pile of manuals at the desk.\n\n");
+		outputText("<b>Gained Key Item: Heavenly Tribulation: Myths and Facts</b>");
+		player.createKeyItem("Heavenly Tribulation: Myths and Facts", 0, 0, 0, 0);
+		doNext(camp.returnToCampUseTwoHours);
+	}
+	public function mrsShigureLecturesFourth():void {
+		clearOutput();
+		flags[kFLAGS.SPIRIT_STONES] -= 5;
+		outputText("\"<i></i>\"\n\n");
+		outputText("\"<i></i>\"\n\n");
+		doNext(camp.returnToCampUseFourHours);
+	}
 	public function missKyianaManualsShop():void {
 		clearOutput();
 		outputText("\"<i>Five Spirit Stones per manual.</i>\" Youngful kitsune states prices firmly giving impression they aren't negotionable.\n\n");
@@ -1189,24 +1237,6 @@ public function soularena():void {
 		outputText("<b>Gained Key Item: Cultivation Manual: Heart-shaped Eyed She-Devil</b>");
 		player.createKeyItem("Cultivation Manual: Heart-shaped Eyed She-Devil", 0, 0, 0, 0);
 		doNext(missKyianaManualsShop);
-	}
-	public function mrsShigureLecturesSecond():void {
-		clearOutput();
-		flags[kFLAGS.SPIRIT_STONES] -= 5;
-		outputText("Placeholder about milf fluff telling all gathered about joys of (dual) cultivation or becoming Soul Personage.");
-		outputText("\"<i></i>\"\n\n");
-		outputText("\"<i></i>\"\n\n");
-		if (player.wis >= 40 && player.level >= 9) player.createPerk(PerkLib.SoulPersonage, 0, 0, 0, 0);
-		doNext(camp.returnToCampUseFourHours);
-	}
-	public function mrsShigureLecturesThird():void {
-		clearOutput();
-		flags[kFLAGS.SPIRIT_STONES] -= 5;
-		outputText("Placeholder about milf fluff telling all gathered about joys of (dual) cultivation or becoming Soul Warrior.");
-		outputText("\"<i></i>\"\n\n");
-		outputText("\"<i></i>\"\n\n");
-		if (player.wis >= 80 && player.level >= 18) player.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
-		doNext(camp.returnToCampUseFourHours);
 	}
 	
 	private function golemancershop():void {

@@ -707,7 +707,7 @@ private function kellyAppearance():void {
 	if (farm.farmCorruption.hasTattoo("kelly"))
 	{
 		outputText("\n\n");
-		if (farm.farmCorruption.kellyFullTribalTats())
+		if (farm.farmCorruption.fullTribalTats("kelly"))
 		{
 			outputText("She is covered from head to tail in tribal tattoos, erotic lines snaking all over her naked frame, giving her the look of a barely tamed savage.")
 		}
