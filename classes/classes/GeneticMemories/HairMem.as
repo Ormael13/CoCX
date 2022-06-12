@@ -40,8 +40,9 @@ package classes.GeneticMemories {
 	 */
 
     public static var Memories:/*EnumValue*/ Array = [];
+	  private static var _partid:int = 0;
 
-		public static const NORMAL:int = 0;
+		public static const NORMAL:int = _partid++;
 		EnumValue.add(Memories, NORMAL, "NORMAL", {
 			id: "Unlocked Metamorph",
 			name: "Human Hair",
@@ -52,7 +53,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FEATHER:int = 1;
+		public static const FEATHER:int = _partid++;
 		EnumValue.add(Memories, FEATHER, "FEATHER", {
 			id: "Feather Hair",
 			name: "Feather Hair",
@@ -63,7 +64,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const GORGON:int = 2;
+		public static const GORGON:int = _partid++;
 		EnumValue.add(Memories, GORGON, "GORGON", {
 			id: "Gorgon Hair",
 			name: "Gorgon \"Hair\" (Snakes)",
@@ -74,7 +75,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const ELF:int = 3;
+		public static const ELF:int = _partid++;
 		EnumValue.add(Memories, ELF, "ELF", {
 			id: "Silky Hair",
 			name: "Silky Hair",
@@ -85,7 +86,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const STORM:int = 4;
+		public static const STORM:int = _partid++;
 		EnumValue.add(Memories, STORM, "STORM", {
 			id: "Storm Hair",
 			name: "Storm Hair",
@@ -96,7 +97,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BURNING:int = 5;
+		public static const BURNING:int = _partid++;
 		EnumValue.add(Memories, BURNING, "BURNING", {
 			id: "Burning Hair",
 			name: "Burning Hair",
@@ -107,7 +108,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-	  public static const GOO:int = 6;
+	  public static const GOO:int = _partid++;
 	  EnumValue.add(Memories, GOO, "GOO", {
 		  id: "Goo Hair",
 		  name: "Goo Hair",

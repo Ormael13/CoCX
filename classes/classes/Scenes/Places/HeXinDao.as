@@ -1102,11 +1102,11 @@ public function soularena():void {
 			else addButtonDisabled(2, "3rd", "You not have enough spirit stones (10) to listen to those lectures.");
 		}
 		else if (player.hasPerk(PerkLib.Dantain)) addButtonDisabled(2, "3rd", "You already learned about second step of soul cultivation.");
-		if (!player.hasPerk(PerkLib.SoulSense) && player.hasPerk(PerkLib.SoulWarrior)) {
+		if (player.hasKeyItem("Heavenly Tribulation: Myths and Facts") < 0 && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor) && player.hasPerk(PerkLib.SoulWarrior)) {
 			if (flags[kFLAGS.SPIRIT_STONES] >= 15) addButton(3, "4th", mrsShigureLecturesThird).hint("Mrs. Shigure Lectures about third step of soul cultivation.");
 			else addButtonDisabled(3, "4th", "You not have enough spirit stones (15) to listen to those lectures.");
 		}
-		else if (player.hasPerk(PerkLib.Dantain)) addButtonDisabled(3, "4th", "You already learned about third step of soul cultivation.");
+		else if (player.hasKeyItem("Heavenly Tribulation: Myths and Facts") >= 0 || player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButtonDisabled(3, "4th", "You already learned about third step of soul cultivation.");
 		if (player.hasPerk(PerkLib.Dantain)) addButton(13, "MissKyiana", missKyianaManualsShop);
 		else addButtonDisabled(13, "???", "After attending 2nd Lecture.");
 		addButton(14, "Back", soularena);

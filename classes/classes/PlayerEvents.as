@@ -2484,20 +2484,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.hasPerk(PerkLib.SpiderOvipositor) || player.hasPerk(PerkLib.BeeOvipositor) || player.hasPerk(PerkLib.MantisOvipositor)) { //Spider, Bee and Mantis ovipositor updates
-				if (player.hasPerk(PerkLib.SpiderOvipositor) && (!player.isDrider() || player.tailType != Tail.SPIDER_ADBOMEN)) { //Remove dat shit!
-					outputText("\n<b>Your ovipositor (and eggs) vanish since your body has become less spider-like.</b>\n");
-					player.removePerk(PerkLib.SpiderOvipositor);
-					needNext = true;
-				}
-				else if (player.hasPerk(PerkLib.BeeOvipositor) && player.tailType != Tail.BEE_ABDOMEN) { //Remove dat shit!
-					outputText("\n<b>Your ovipositor (and eggs) vanish since your body has become less bee-like.</b>\n");
-					player.removePerk(PerkLib.BeeOvipositor);
-					needNext = true;
-				}
-				else if (player.hasPerk(PerkLib.MantisOvipositor) && player.tailType != Tail.MANTIS_ABDOMEN) { //Remove dat shit!
-					outputText("\n<b>Your ovipositor (and eggs) vanish since your body has become less mantis-like.</b>\n");
-					player.removePerk(PerkLib.MantisOvipositor);
-					needNext = true;
+				if (transformations.RemoveOvipositor.isPossible()) { //Remove dat shit!
+						transformations.RemoveOvipositor.applyEffect();
 				}
 				else { //Update stuff!
 					var prevEggs:int = player.eggs();
