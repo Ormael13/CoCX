@@ -43,7 +43,7 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, NO_OVIPOSITOR, "NO_OVIPOSITOR", {
 			id: "Unlocked Metamorph",
 			name: "Remove Ovipositor",
-			cost: 500,
+			cost: 400,
 			title: "No Ovipositor",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.RemoveOvipositor;
@@ -54,7 +54,7 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, OVIPOSITOR, "OVIPOSITOR", {
 			id: "Gain Ovipositor",
 			name: "Gain Ovipositor",
-			cost: 500,
+			cost: 400,
 			title: "Ovipositor",
 			hint: "Need to get any ovipositor first",
 			transformation: function(): Transformation {
