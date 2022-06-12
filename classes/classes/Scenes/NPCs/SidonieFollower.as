@@ -136,6 +136,9 @@ package classes.Scenes.NPCs
 				if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) outputText("\"<i>I also met that cow-looking girl, Izzy. It’s nice to know that I’m not the only tough looking gal at camp, huh? We even had the chance to have a little strength contest.</i>\"\n\n");
 			}
 			outputText("(<b>Sidonie has been added to the Followers menu!</b>)\n\n");
+			if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+			else player.createKeyItem("Radiant shard", 1,0,0,0);
+			outputText("\n\n<b>Before fully settling in your camp as if remembering something Sidonie pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 			flags[kFLAGS.SIDONIE_FOLLOWER] = 1;
 			doNext(camp.returnToCampUseFourHours);
 		}

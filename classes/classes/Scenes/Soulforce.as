@@ -30,6 +30,7 @@ import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.Carrera;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.DriderTown;
+import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.Lilith;
 import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.NPCs.RyuBiDragon;
@@ -61,7 +62,7 @@ public class Soulforce extends BaseContent
 		if (player.hasPerk(PerkLib.SoulTyrant)) dailySoulforceUsesLimit++;
 		if (player.hasPerk(PerkLib.SoulAncestor)) dailySoulforceUsesLimit++;//dodawać kolejne co 3 level-e
 		outputText("<b>Cultivation level:</b> " + flags[kFLAGS.SOUL_CULTIVATION] + "\n");
-		outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " / 2330\n");
+		outputText("<b>Additional Soulforce from training:</b> " + flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] + " % / 2330 %\n");
 		if (player.hasPerk(PerkLib.Dantain)) {
 			if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor) && player.perkv1(PerkLib.Dantain) == 0) player.addPerkValue(PerkLib.Dantain, 1, 1);
 			if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor) && player.perkv1(PerkLib.Dantain) == 1) player.addPerkValue(PerkLib.Dantain, 1, 1);
@@ -419,9 +420,93 @@ public class Soulforce extends BaseContent
 	public function fixShards2nd():void {
 		var cnt2:int = 0;
 		outputText("Received shards for: ");
-		if (flags[kFLAGS.KIHA_FOLLOWER] == 1) {
+		if (flags[kFLAGS.ARIAN_FOLLOWER] == 1) {
 			++cnt2;
-			outputText("\nKiha");
+			outputText("\nArian");
+		}
+		if (BelisaFollower.BelisaInCamp) {
+			++cnt2;
+			outputText("\nBelisa");
+		}
+		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) {
+			++cnt2;
+			outputText("\nCeani");
+		}
+		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5) {
+			++cnt2;
+			outputText("\nChi Chi");
+		}
+		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6) {
+			++cnt2;
+			outputText("\nDiana");
+		}
+		if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) {
+			++cnt2;
+			outputText("\nIzma");
+		}
+		if (LilyFollower.LilyFollowerState) {
+			++cnt2;
+			outputText("\nLily");
+		}
+		if (player.hasStatusEffect(StatusEffects.CampMarble)) {
+			++cnt2;
+			outputText("\nMarble");
+		}
+		if (flags[kFLAGS.ANT_WAIFU] > 0) {
+			++cnt2;
+			outputText("\nPhylla");
+		}
+		if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) {
+			++cnt2;
+			outputText("\nSamirah");
+		}
+		if (TyrantiaFollower.TyrantiaFollowerStage >= 4) {
+			++cnt2;
+			outputText("\nTyrantia");
+		}
+		if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 5) {
+			++cnt2;
+			outputText("\nPatchouli");
+		}
+		if (flags[kFLAGS.AURORA_LVL] >= 1) {
+			++cnt2;
+			outputText("\nAurora");
+		}
+		if (flags[kFLAGS.DINAH_LVL_UP] >= 1) {
+			++cnt2;
+			outputText("\nDinah");
+		}
+		if (flags[kFLAGS.EMBER_HATCHED] > 0) {
+			++cnt2;
+			outputText("\nEmber");
+		}
+		if (EvangelineFollower.EvangelineFollowerStage >= 1) {
+			++cnt2;
+			outputText("\nEvangeline");
+		}
+		if (flags[kFLAGS.LUNA_FOLLOWER] >= 4) {
+			++cnt2;
+			outputText("\nLuna");
+		}
+		if (flags[kFLAGS.KINDRA_FOLLOWER] >= 1) {
+			++cnt2;
+			outputText("\nKindra");
+		}
+		if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) {
+			++cnt2;
+			outputText("\nKonstantin");
+		}
+		if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) {
+			++cnt2;
+			outputText("\nMichiko");
+		}
+		if (flags[kFLAGS.SIDONIE_FOLLOWER] >= 1) {
+			++cnt2;
+			outputText("\nSidonie");
+		}
+		if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) {
+			++cnt2;
+			outputText("\nSiegweird");
 		}
 		if (cnt2) {
 			outputText("\nReceived " + cnt2 + " shards.");

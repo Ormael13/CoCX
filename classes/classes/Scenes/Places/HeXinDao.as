@@ -1107,6 +1107,16 @@ public function soularena():void {
 			else addButtonDisabled(3, "4th", "You not have enough spirit stones (15) to listen to those lectures.");
 		}
 		else if (player.hasKeyItem("Heavenly Tribulation: Myths and Facts") >= 0 || player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButtonDisabled(3, "4th", "You already learned about third step of soul cultivation.");
+		/*if (!player.hasPerk(PerkLib.SoulSense) && player.hasPerk(PerkLib.SoulSprite)) {
+			if (flags[kFLAGS.SPIRIT_STONES] >= 20) addButton(4, "5th", mrsShigureLecturesFourth).hint("Mrs. Shigure Lectures about fourth step of soul cultivation.");
+			else addButtonDisabled(4, "5th", "You not have enough spirit stones (20) to listen to those lectures.");
+		}
+		else if (player.hasPerk(PerkLib.Dantain)) addButtonDisabled(4, "5th", "You already learned about fourth step of soul cultivation.");
+		if (!player.hasPerk(PerkLib.SoulSense) && player.hasPerk(PerkLib.SoulScholar)) {
+			if (flags[kFLAGS.SPIRIT_STONES] >= 25) addButton(5, "6th", mrsShigureLecturesFifth).hint("Mrs. Shigure Lectures about fifth step of soul cultivation.");
+			else addButtonDisabled(5, "6th", "You not have enough spirit stones (25) to listen to those lectures.");
+		}
+		else if (player.hasPerk(PerkLib.Dantain)) addButtonDisabled(5, "6th", "You already learned about fifth step of soul cultivation.");*/
 		if (player.hasPerk(PerkLib.Dantain)) addButton(13, "MissKyiana", missKyianaManualsShop);
 		else addButtonDisabled(13, "???", "After attending 2nd Lecture.");
 		addButton(14, "Back", soularena);
@@ -1188,7 +1198,14 @@ public function soularena():void {
 	}
 	public function mrsShigureLecturesFourth():void {
 		clearOutput();
-		flags[kFLAGS.SPIRIT_STONES] -= 5;
+		flags[kFLAGS.SPIRIT_STONES] -= 20;
+		outputText("\"<i></i>\"\n\n");
+		outputText("\"<i></i>\"\n\n");
+		doNext(camp.returnToCampUseFourHours);
+	}
+	public function mrsShigureLecturesFifth():void {
+		clearOutput();
+		flags[kFLAGS.SPIRIT_STONES] -= 25;
 		outputText("\"<i></i>\"\n\n");
 		outputText("\"<i></i>\"\n\n");
 		doNext(camp.returnToCampUseFourHours);

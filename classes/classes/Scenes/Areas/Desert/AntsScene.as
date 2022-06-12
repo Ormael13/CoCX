@@ -935,6 +935,9 @@ public class AntsScene extends BaseContent
 			clearOutput();
 			outputText("You smile at her and tell her you would love for her to join you at your camp.  Her face brightens like the sun and she quickly gathers the very few possessions she owns - mostly clothing, the pillows, and some jewelry.  Together you promptly leave the colony and head back to camp.");
 			outputText("\n\n(<b>Phylla has moved in!  She can be found in the lovers tab!</b>)");
+			if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+			else player.createKeyItem("Radiant shard", 1,0,0,0);
+			outputText("\n\n<b>Before fully settling in your camp as if remembering something Phylla pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 			flags[kFLAGS.ANT_WAIFU] = 1;
 			doNext(camp.returnToCampUseOneHour);
 		}
