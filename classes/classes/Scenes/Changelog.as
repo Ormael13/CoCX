@@ -172,8 +172,8 @@ public class Changelog extends BaseContent
 			outputText("-Demon tfs and Feeder perk use CorruptionTolerance now, Oni horn wont choose same horns. (EragonX)\n");
 			outputText("-Removed Sapphire/Onyx requirements from Forgefather encounter. (Svalkash)\n");
 			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!), Marae, Shark girls. (Svalkash)\n");
-			outputText("-Soul Sense unlock req. chganged to having 'Soul Sense and You' Manual and reaching at least Early Soul Personagem stage.\n");
-			outputText("-\n");
+			outputText("-Soul Sense unlock req. chganged to having 'Soul Sense and You' Manual and reaching at least Early Soul Personage stage.\n");
+			outputText("-Using Wait or Defend w/ Defense Pose perk move will increase fatigue recovery 2x.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -193,7 +193,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point\n");/*ostatni punkt changelogu
+			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD

@@ -1046,7 +1046,7 @@ public class PerkLib
 				"Allows you to perform ten melee attacks with small weapons per round.",
 				"You've chosen the 'Deca Attack (Small)' perk. This allows you to make ten melee attacks with small weapons.");
 		public static const DefenceStance:PerkType = mk("Defence Stance", "Defence Stance",
-				"Defend move now reduce incoming damage a littl more and allow recovering fatigue/mana/soulforce.",
+				"Defend move now reduce incoming damage a little more and allow recovering fatigue/mana/soulforce.",
 				"You've chosen the 'Defence Stance' perk, training to master you defence pose.");
 		public static const DemonicDesireI:PerkType = mk("Demonic Desire I", "Demonic Desire I",
 				"Raises max lust by 5% of base value.",

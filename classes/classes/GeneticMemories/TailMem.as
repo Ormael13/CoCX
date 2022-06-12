@@ -40,8 +40,9 @@ package classes.GeneticMemories {
 	 */
 
     public static var Memories:/*EnumValue*/ Array = [];
+	  private static var _partid:int = 0;
 
-		public static const NONE:int = 0;
+		public static const NONE:int = _partid++;
 		EnumValue.add(Memories, NONE, "NONE", {
 			id: "Unlocked Metamorph",
 			name: "No Tail",
@@ -52,7 +53,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const HORSE:int = 1;
+		public static const HORSE:int = _partid++;
 		EnumValue.add(Memories, HORSE, "HORSE", {
 			id: "Horse Tail",
 			name: "Horse Tail",
@@ -63,7 +64,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DEMONIC:int = 2;
+		public static const DEMONIC:int = _partid++;
 		EnumValue.add(Memories, DEMONIC, "DEMONIC", {
 			id: "Demon Tail",
 			name: "Demon Tail",
@@ -74,7 +75,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const COW:int = 3;
+		public static const COW:int = _partid++;
 		EnumValue.add(Memories, COW, "COW", {
 			id: "Cow Tail",
 			name: "Cow Tail",
@@ -85,7 +86,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const SPIDER_ADBOMEN:int = 4;
+		public static const SPIDER_ADBOMEN:int = _partid++;
 		EnumValue.add(Memories, SPIDER_ADBOMEN, "SPIDER_ADBOMEN", {
 			id: "Spider Tail",
 			name: "Spider Tail",
@@ -96,7 +97,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BEE_ABDOMEN:int = 5;
+		public static const BEE_ABDOMEN:int = _partid++;
 		EnumValue.add(Memories, BEE_ABDOMEN, "BEE_ABDOMEN", {
 			id: "Bee Tail",
 			name: "Bee Tail",
@@ -107,7 +108,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const SHARK:int = 6;
+		public static const SHARK:int = _partid++;
 		EnumValue.add(Memories, SHARK, "SHARK", {
 			id: "Shark Tail",
 			name: "Shark Tail",
@@ -118,7 +119,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const LIZARD:int = 7;
+		public static const LIZARD:int = _partid++;
 		EnumValue.add(Memories, LIZARD, "LIZARD", {
 			id: "Lizard Tail",
 			name: "Lizard Tail",
@@ -129,7 +130,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const HARPY:int = 8;
+		public static const HARPY:int = _partid++;
 		EnumValue.add(Memories, HARPY, "HARPY", {
 			id: "Harpy Tail",
 			name: "Harpy Feather Tail",
@@ -140,7 +141,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DRACONIC:int = 9;
+		public static const DRACONIC:int = _partid++;
 		EnumValue.add(Memories, DRACONIC, "DRACONIC", {
 			id: "Draconic Tail",
 			name: "Draconic Tail",
@@ -151,7 +152,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const PIG:int = 10;
+		public static const PIG:int = _partid++;
 		EnumValue.add(Memories, PIG, "PIG", {
 			id: "Pig Tail",
 			name: "Pig Tail",
@@ -162,7 +163,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const SCORPION:int = 11;
+		public static const SCORPION:int = _partid++;
 		EnumValue.add(Memories, SCORPION, "SCORPION", {
 			id: "Scorpion Tail",
 			name: "Scorpion Stinger",
@@ -173,7 +174,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const MANTICORE:int = 12;
+		public static const MANTICORE:int = _partid++;
 		EnumValue.add(Memories, MANTICORE, "MANTICORE", {
 			id: "Manticore Tail",
 			name: "Manticore Pussytail",
@@ -185,7 +186,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const GOAT:int = 13;
+		public static const GOAT:int = _partid++;
 		EnumValue.add(Memories, GOAT, "GOAT", {
 			id: "Goat Tail",
 			name: "Goat Tail",
@@ -196,7 +197,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const SALAMANDER:int = 14;
+		public static const SALAMANDER:int = _partid++;
 		EnumValue.add(Memories, SALAMANDER, "SALAMANDER", {
 			id: "Salamander Tail",
 			name: "Salamander Tail",
@@ -207,7 +208,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const MANTIS_ABDOMEN:int = 15;
+		public static const MANTIS_ABDOMEN:int = _partid++;
 		EnumValue.add(Memories, MANTIS_ABDOMEN, "MANTIS_ABDOMEN", {
 			id: "Mantis Tail",
 			name: "Mantis Tail",
@@ -218,7 +219,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const ORCA:int = 16;
+		public static const ORCA:int = _partid++;
 		EnumValue.add(Memories, ORCA, "ORCA", {
 			id: "Orca Tail",
 			name: "Orca Tail",
@@ -229,7 +230,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const RAIJU:int = 17;
+		public static const RAIJU:int = _partid++;
 		EnumValue.add(Memories, RAIJU, "RAIJU", {
 			id: "Raiju Tail",
 			name: "Raiju Tail",
@@ -240,7 +241,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const RED_PANDA:int = 18;
+		public static const RED_PANDA:int = _partid++;
 		EnumValue.add(Memories, RED_PANDA, "RED_PANDA", {
 			id: "Red Panda Tail",
 			name: "Red Panda Tail",
@@ -251,7 +252,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BURNING:int = 19;
+		public static const BURNING:int = _partid++;
 		EnumValue.add(Memories, BURNING, "BURNING", {
 			id: "Burning Tail",
 			name: "Burning Tail",
@@ -262,7 +263,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-	  public static const TWINKASKA:int = 20;
+	  public static const TWINKASKA:int = _partid++;
 	  EnumValue.add(Memories, TWINKASKA, "TWINKASKA", {
 		  id: "Twin Burning Tail",
 		  name: "Twin Burning Tail",
@@ -273,7 +274,7 @@ package classes.GeneticMemories {
 		  }
 	  });
 
-		public static const CAT:int = 21;
+		public static const CAT:int = _partid++;
 		EnumValue.add(Memories, CAT, "CAT", {
 			id: "Cat Tail",
 			name: "Cat Tail",
@@ -284,7 +285,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const NEKOMATA_FORKED_1_3:int = 22;
+		public static const NEKOMATA_FORKED_1_3:int = _partid++;
 		EnumValue.add(Memories, NEKOMATA_FORKED_1_3, "NEKOMATA_FORKED_1_3", {
 			id: "Forked 1/3 Tail",
 			name: "Forked 1/3 Nekomata Tail",
@@ -296,7 +297,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const NEKOMATA_FORKED_2_3:int = 23;
+		public static const NEKOMATA_FORKED_2_3:int = _partid++;
 		EnumValue.add(Memories, NEKOMATA_FORKED_2_3, "NEKOMATA_FORKED_2_3", {
 			id: "Forked 2/3 Tail",
 			name: "Forked 2/3 Nekomata Tail",
@@ -308,7 +309,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const CAT_2:int = 24;
+		public static const CAT_2:int = _partid++;
 		EnumValue.add(Memories, CAT_2, "CAT_2", {
 			id: "Cat 2nd Tail",
 			name: "2nd Cat Tail (Nekomata)",
@@ -320,7 +321,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FOX:int = 25;
+		public static const FOX:int = _partid++;
 		EnumValue.add(Memories, FOX, "FOX", {
 			id: "Fox Tail",
 			name: "Fox Tail",
@@ -331,7 +332,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FOX_2:int = 26;
+		public static const FOX_2:int = _partid++;
 		EnumValue.add(Memories, FOX_2, "FOX_2", {
 			id: "Fox 2nd Tail",
 			name: "2nd Fox Tail",
@@ -343,7 +344,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FOX_3:int = 27;
+		public static const FOX_3:int = _partid++;
 		EnumValue.add(Memories, FOX_3, "FOX_3", {
 			id: "Fox 3rd Tail",
 			name: "3rd Fox Tail",
@@ -355,7 +356,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FOX_4:int = 28;
+		public static const FOX_4:int = _partid++;
 		EnumValue.add(Memories, FOX_4, "FOX_4", {
 			id: "Fox 4th Tail",
 			name: "4th Fox Tail",
@@ -367,7 +368,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FOX_5:int = 29;
+		public static const FOX_5:int = _partid++;
 		EnumValue.add(Memories, FOX_5, "FOX_5", {
 			id: "Fox 5th Tail",
 			name: "5th Fox Tail",
@@ -379,7 +380,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FOX_6:int = 30;
+		public static const FOX_6:int = _partid++;
 		EnumValue.add(Memories, FOX_6, "FOX_6", {
 			id: "Fox 6th Tail",
 			name: "6th Fox Tail",
@@ -391,7 +392,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FOX_7:int = 31;
+		public static const FOX_7:int = _partid++;
 		EnumValue.add(Memories, FOX_7, "FOX_7", {
 			id: "Fox 7th Tail",
 			name: "7th Fox Tail",
@@ -404,7 +405,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FOX_8:int = 32;
+		public static const FOX_8:int = _partid++;
 		EnumValue.add(Memories, FOX_8, "FOX_8", {
 			id: "Fox 8th Tail",
 			name: "8th Fox Tail",
@@ -417,7 +418,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FOX_9:int = 33;
+		public static const FOX_9:int = _partid++;
 		EnumValue.add(Memories, FOX_9, "FOX_9", {
 			id: "Fox 9th Tail",
 			name: "9th Fox Tail",
@@ -430,7 +431,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const WOLF:int = 34;
+		public static const WOLF:int = _partid++;
 		EnumValue.add(Memories, WOLF, "WOLF", {
 			id: "Wolf Tail",
 			name: "Wolf Tail",
@@ -441,7 +442,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const CAVE_WYRM:int = 35;
+		public static const CAVE_WYRM:int = _partid++;
 		EnumValue.add(Memories, CAVE_WYRM, "CAVE_WYRM", {
 			id: "Cave Wyrm Tail",
 			name: "Cave Wyrm Tail",
@@ -452,7 +453,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const MOUSE:int = 36;
+		public static const MOUSE:int = _partid++;
 		EnumValue.add(Memories, MOUSE, "MOUSE", {
 			id: "Mouse Tail",
 			name: "Mouse Tail",
@@ -463,7 +464,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const HINEZUMI:int = 37;
+		public static const HINEZUMI:int = _partid++;
 		EnumValue.add(Memories, HINEZUMI, "HINEZUMI", {
 			id: "Hinezumi Tail",
 			name: "Hinezumi Tail",
@@ -474,7 +475,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-	  public static const DOG:int = 38;
+	  public static const DOG:int = _partid++;
 	  EnumValue.add(Memories, DOG, "DOG", {
 		  id: "Dog Tail",
 		  name: "Dog Tail",

@@ -1,28 +1,13 @@
 package classes.Transformations {
-import classes.BodyParts.Antennae;
-import classes.BodyParts.Arms;
-import classes.BodyParts.Ears;
-import classes.BodyParts.Eyes;
-import classes.BodyParts.Face;
-import classes.BodyParts.Gills;
-import classes.BodyParts.Hair;
-import classes.BodyParts.Horns;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.RearBody;
-import classes.BodyParts.Skin;
-import classes.BodyParts.Tail;
-import classes.BodyParts.Tongue;
-import classes.BodyParts.Wings;
+import classes.BodyParts.*;
 import classes.CockTypesEnum;
-import classes.Races.DarkSlimeRace;
-import classes.Races.MagmaSlimeRace;
-import classes.Races.SlimeRace;
 import classes.VaginaClass;
 import classes.GeneticMemories.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.MutationsHelper;
 import classes.PerkLib;
 import classes.Races;
+import classes.Races.*;
 import classes.Scenes.Metamorph;
 import classes.StatusEffects;
 import classes.internals.EnumValue;
@@ -10971,7 +10956,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		var desc:String = "";
 		if (player.isTaur()) desc += "You feel a sudden stabbing pain between your back legs" +(player.hasVagina()?" just below your [vagina]":"")+" and bend over, moaning in agony. falling on your back so you can get a stare at your hindquarters you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
 		else if (!player.hasVagina() && !player.hasCock()) desc +="You feel a sudden stabbing pain in your groin and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
-		else if (!player.hasVagina()) desc += "You feel a sudden stabbing pain above your [cocks] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
+		else if (player.hasCock()) desc += "You feel a sudden stabbing pain above your [cocks] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
 		else desc +="You feel a sudden stabbing pain just above your [vagina] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
 		return desc;
 	}
@@ -11115,7 +11100,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					}
 					else {
 						if (!player.hasVagina() && !player.hasCock()) desc +="A sudden pressure builds in your groin ";
-						else if (!player.hasVagina()) desc += "A sudden pressure build above your [cocks] ";
+						else if (player.hasCock()) desc += "A sudden pressure builds above your [cocks] ";
 						else desc +="A sudden pressure builds just above your [vagina] ";
 						desc += "and you bend over, stripping off your clothes.You look down in wonder, more than a little turned on by the prospect of growing your own penis.  Your skin ripples and bulges outwards, the sensation turning from pressure to feelings of intense warmth.  The bump distends, turning purple near the tip as it reaches three inches in size.  You touch it and cry out with pleasure, watching it leap forwards another inch in response.  Your tiny dick's crown becomes more and more defined as it grows larger, until you have what looks like a normal six inch dick.  You sigh with happiness and desire at your new addition.  Before you can enjoy it, another wave of heat washes through you, making your new addition respond.  It grows painfully hard as it crests eight inches in length.  ";
 						if(player.cor < 80) desc += "In horror you watch the skin turn a shiny-dark purple.  Tiny wriggling nodules begin to erupt from the purplish skin, making your cock look more like a crazed sex-toy than a proper penis.  You pant and nearly cum as it lengthens one last time, peaking at ten inches long.  One last ring of nodules forms around the edge of your demon-dick's crown, pulsating darkly with each beat of your horrified heart.";
@@ -11325,7 +11310,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						} else {
 							if (player.isTaur()) desc += "You feel a sudden stabbing pain between your back legs" +(player.hasVagina()?" just below your [vagina]":"")+" and bend over, moaning in agony. falling on your back so you can get a stare at your hindquarters you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down,  ";
 							else if (!player.hasVagina() && !player.hasCock()) desc +="You feel a sudden stabbing pain in your groin and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
-							else if (!player.hasVagina()) desc += "You feel a sudden stabbing pain above your [cocks] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
+							else if (player.hasCock()) desc += "You feel a sudden stabbing pain above your [cocks] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
 							else desc +="You feel a sudden stabbing pain just above your [vagina] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
 							desc += "It ripples loosely from "+
 									(player.hasSheath() ? "sheath " : "base ") + "to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your cock resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker "+
@@ -11360,18 +11345,18 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					var desc:String = "[pg]";
 
 					if (player.cocks.length > cock){
-						desc += "You feel a sudden itch in your cock and undress as an irrepressible desire to masturbate takes hold of you. You keep stroking your twitching cock, moaning as you cum neon blue fluids. Wait, what? When you inspect your \"cock descript\" you discover it has not only changed color to neon blue but reshaped into a lizard cock. Furthermore it seems to naturally glow in the dark like the fluids that comes out of it. <b>You now have a neon blue lizard cock that glow in the dark.</b>";
+						desc += "You feel a sudden itch in your cock and undress as an irrepressible desire to masturbate takes hold of you. You keep stroking your twitching cock, moaning as you cum neon blue fluids. Wait, what? When you inspect your [cock "+(cock+1)+"] you discover it has not only changed color to neon blue but reshaped into a lizard cock. Furthermore it seems to naturally glow in the dark like the fluids that comes out of it. <b>You now have a neon blue lizard cock that glow in the dark.</b>";
 						//(REMOVE SHEATH IF NECESSARY)
 						if (player.hasSheath()) {
 							player.cocks[cock].cockType = CockTypesEnum.CAVE_WYRM;
 							if (!player.hasSheath()) desc += "[pg]Your sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(cock) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>";
-						} else player.cocks[cock].cockType = CockTypesEnum.CAVE_WYRM;
+						}
 					}
 					else {
 						if (!player.hasVagina() && !player.hasCock()) desc +="You feel a sudden stabbing pain in your groin and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down. ";
-						else if (!player.hasVagina()) desc += "You feel a sudden stabbing pain above your [cocks] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down. ";
+						else if (player.hasCock()) desc += "You feel a sudden stabbing pain above your [cocks] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down. ";
 						else desc +="You feel a sudden stabbing pain just above your [vagina] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, . ";
-						desc += "An irrepressible desire to masturbate takes hold of you. You keep stroking your twitching cock, moaning as you cum neon blue fluids. Wait, what? When you inspect your \"cock descript\" you discover it has not only changed color to neon blue but reshaped into a lizard cock. Furthermore it seems to naturally glow in the dark like the fluids that comes out of it. <b>You now have a neon blue lizard cock that glow in the dark.</b>";
+						desc += "An irrepressible desire to masturbate takes hold of you. You keep stroking your twitching cock, moaning as you cum neon blue fluids. Wait, what? When you inspect your "+player.cockDescript(cock)+" you discover it has not only changed color to neon blue but reshaped into a lizard cock. Furthermore it seems to naturally glow in the dark like the fluids that comes out of it. <b>You now have a neon blue lizard cock that glow in the dark.</b>";
 						player.createCock();
 					}
 					if (doOutput) outputText(desc);
@@ -11887,7 +11872,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					}
 					else {
 						if (!player.hasVagina() && !player.hasCock()) desc +="You feel a sudden stabbing pain in your groin and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! ";
-						else if (!player.hasVagina()) desc += "You feel a sudden stabbing pain above your [cocks] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! ";
+						else if (player.hasCock()) desc += "You feel a sudden stabbing pain above your [cocks] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! ";
 						else desc +="You feel a sudden stabbing pain just above your [vagina] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! ";
 						desc += "The skin surrounding your penis folds, encapsulating it and turning itself into a protective sheath.  ";
 						desc += "<b>You now have a red-panda cock!</b>";
@@ -11960,7 +11945,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					}
 					else {
 						if (!player.hasVagina() && !player.hasCock()) desc +="You feel a sudden stabbing pain in your groin and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! ";
-						else if (!player.hasVagina()) desc += "You feel a sudden stabbing pain above your [cocks] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! ";
+						else if (player.hasCock()) desc += "You feel a sudden stabbing pain above your [cocks] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! ";
 						else desc +="You feel a sudden stabbing pain just above your [vagina] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! ";
 						desc += "You moan out, feeling your cock harden and tingle as it dribbles a strange dark purple liquid. <b>You now have a venom dripping, centipede cock.</b>";
 						player.createCock();
@@ -12098,7 +12083,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 * 	 ██████  ███████ ██     ██     ███████
 * 	 ██   ██ ██   ██ ██     ██          ██
 * 	 ██████  ██   ██ ██████ ██████ ███████
- */
+*/
 
 /*
     */
@@ -12187,7 +12172,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					desc += "You gasp in shock as a sudden pain racks your abdomen. Within seconds, two balls drop down into a new sack, your skin stretching out to accommodate them. Once the pain clears, you examine <b>your new pair of testes.</b>[pg]";
 				}
 				else
-					desc += "You feel a delicate tightening sensation around your [balls].  The sensation upon this most sensitive part of your anatomy isn't painful, but the feeling of your balls getting smaller is intense enough that you stifle anything more than a sharp intake of breath only with difficulty.[pg]";
+					if (player.ballSize > 1) desc += "You feel a delicate tightening sensation around your [balls].  The sensation upon this most sensitive part of your anatomy isn't painful, but the feeling of your balls getting smaller is intense enough that you stifle anything more than a sharp intake of breath only with difficulty.[pg]";
 				player.ballSize = 1;
 				if (!player.hasStatusEffect(StatusEffects.Uniball))
 					desc += "You whimper as once again, your balls tighten and shrink.  Your eyes widen when you feel the gentle weight of your testicles pushing against your crotch, and a few hesitant swings of your [butt] confirm what you can feel - you've tightened your balls up so much they no longer hang beneath your [cocks], but press perkily upwards.  Heat ringing your ears, you explore your new sack with a careful hand.  "+
@@ -12205,6 +12190,178 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			}
 	);
     /*
+*/
+
+/*
+* 	   █████  ████████ ██    ██ ██████ ██████
+*  	 ██    ██    ██    ██    ██ ██     ██   ██
+*  	 ██    ██    ██    ████████ █████  ██████
+*  	 ██    ██    ██    ██    ██ ██     ██   ██
+*  	  ██████     ██    ██    ██ ██████ ██   ██
+*/
+
+/*
+	*/
+	public const RemoveOvipositor:Transformation = new SimpleTransformation("Remove Oviposition",
+			// apply
+			function (doOutput:Boolean):void {
+				var desc: String = "[pg]";
+
+				if (player.hasPerk(PerkLib.SpiderOvipositor)) { //Remove dat shit!
+					desc += "<b>Your ovipositor (and eggs) vanish since your body has become less spider-like.</b>";
+					player.removePerk(PerkLib.SpiderOvipositor);
+				}
+				else if (player.hasPerk(PerkLib.BeeOvipositor)) { //Remove dat shit!
+					desc += "<b>Your ovipositor (and eggs) vanish since your body has become less bee-like.</b>";
+					player.removePerk(PerkLib.BeeOvipositor);
+				}
+				else if (player.hasPerk(PerkLib.MantisOvipositor)) { //Remove dat shit!
+					desc += "<b>Your ovipositor (and eggs) vanish since your body has become less mantis-like.</b>";
+					player.removePerk(PerkLib.MantisOvipositor);
+				}
+				/*else if (player.hasPerk(PerkLib.AntOvipositor)) { //Remove dat shit!
+					desc += "<b>Your ovipositor (and eggs) vanish since your body has become less ant-like.</b>";
+					player.removePerk(PerkLib.AntOvipositor);
+				}*/
+
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function ():Boolean {
+				return !player.hasPerk(PerkLib.BeeOvipositor) && !player.hasPerk(PerkLib.SpiderOvipositor) && !player.hasPerk(PerkLib.MantisOvipositor)/* && !player.hasPerk(PerkLib.AntOvipositor)*/;
+			},
+			// is possible
+			function ():Boolean {
+				return ((player.hasPerk(PerkLib.SpiderOvipositor) && (!player.isDrider() || player.tailType != Tail.SPIDER_ADBOMEN)) ||
+						(player.hasPerk(PerkLib.BeeOvipositor) && player.tailType != Tail.BEE_ABDOMEN) ||
+						(player.hasPerk(PerkLib.MantisOvipositor) && player.tailType != Tail.MANTIS_ABDOMEN));
+			}
+	);
+
+	public const GainOvipositor:Transformation = new SimpleTransformation("Remove Oviposition",
+			// apply
+			function (doOutput:Boolean):void {
+				if (player.tailType === Tail.BEE_ABDOMEN)
+						TransformationUtils.applyTFIfNotPresent(transformations.OvipositionBee, doOutput);
+				if (player.tailType === Tail.SPIDER_ADBOMEN)
+						TransformationUtils.applyTFIfNotPresent(transformations.OvipositionSpider, doOutput);
+				if (player.tailType === Tail.MANTIS_ABDOMEN)
+						TransformationUtils.applyTFIfNotPresent(transformations.OvipositionMantis, doOutput);
+			},
+			// is present
+			function ():Boolean {
+				return ((player.hasPerk(PerkLib.SpiderOvipositor) && (player.isDrider() || player.tailType == Tail.SPIDER_ADBOMEN)) ||
+						(player.hasPerk(PerkLib.BeeOvipositor) && player.tailType != Tail.BEE_ABDOMEN) ||
+						(player.hasPerk(PerkLib.MantisOvipositor) && player.tailType != Tail.MANTIS_ABDOMEN));
+			}
+	);
+
+	public const OvipositionBee:Transformation = new SimpleTransformation("Bee Oviposition",
+			// apply
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.RemoveOvipositor, doOutput);
+				TransformationUtils.applyTFIfNotPresent(transformations.TailBee, doOutput);
+
+				outputText("\n\nAn odd swelling starts in your insectile abdomen, somewhere along the underside.  Curling around, you reach back to your extended, bulbous bee part and run your fingers along the underside.  You gasp when you feel a tender, yielding slit near the stinger.  As you probe this new orifice, a shock of pleasure runs through you, and a tubular, black, semi-hard appendage drops out, pulsating as heavily as any sexual organ.  <b>The new organ is clearly an ovipositor!</b>  A few gentle prods confirm that it's just as sensitive; you can already feel your internals changing, adjusting to begin the production of unfertilized eggs.  You idly wonder what laying them with your new bee ovipositor will feel like...");
+				outputText("\n\n(<b>Perk Gained:  Bee Ovipositor - Allows you to lay eggs in your foes!</b>)");
+				player.createPerk(PerkLib.BeeOvipositor, 0, 0, 0, 0);
+
+				if (doOutput) outputText(desc);
+				//Metamorph.unlockMetamorph(SpecialsMem.getMemory(SpecialsMem.OVIPOSITOR));
+			},
+			// is present
+			function ():Boolean {
+				return player.hasPerk(PerkLib.BeeOvipositor);
+			},
+			// is possible
+			function ():Boolean {
+				return !player.hasPerk(PerkLib.BeeOvipositor) && player.tailType == Tail.BEE_ABDOMEN;
+			}
+	);
+
+	public const OvipositionSpider:Transformation = new SimpleTransformation("Spider Oviposition",
+			// apply
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.RemoveOvipositor, doOutput);
+				TransformationUtils.applyTFIfNotPresent(transformations.TailSpider, doOutput);
+				TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyDrider, doOutput);
+
+				desc += "[pg]An odd swelling sensation floods your spider half.  Curling your abdomen underneath you for a better look, you gasp in recognition at your new 'equipment'!  Your semi-violent run-ins with the swamp's population have left you <i>intimately</i> familiar with the new appendage.  <b>It's a drider ovipositor!</b>  A few light prods confirm that it's just as sensitive as any of your other sexual organs.  You idly wonder what laying eggs with this thing will feel like..."+
+						"[pg](<b>Perk Gained:  Spider Ovipositor - Allows you to lay eggs in your foes!</b>)";
+				//V1 - Egg Count
+				//V2 - Fertilized Count
+				player.createPerk(PerkLib.SpiderOvipositor, 0, 0, 0, 0);
+
+				if (doOutput) outputText(desc);
+				//Metamorph.unlockMetamorph(SpecialsMem.getMemory(SpecialsMem.OVIPOSITOR));
+			},
+			// is present
+			function ():Boolean {
+				return player.hasPerk(PerkLib.SpiderOvipositor);
+			},
+			// is possible
+			function ():Boolean {
+				return !player.hasPerk(PerkLib.SpiderOvipositor) && player.isDrider() && player.tailType == Tail.SPIDER_ADBOMEN;
+			}
+	);
+
+	public const OvipositionMantis:Transformation = new SimpleTransformation("Mantis Oviposition",
+			// apply
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.RemoveOvipositor, doOutput);
+				TransformationUtils.applyTFIfNotPresent(transformations.SkinChitin(Skin.COVERAGE_LOW, {colors: MantisRace.MantisChitinColors}), doOutput);
+				TransformationUtils.applyTFIfNotPresent(transformations.TailMantis, doOutput);
+
+				desc +="[pg]An odd swelling starts in your insectile abdomen, somewhere along the underside.  Curling around, you reach back to your extended, bulbous mantis part and run your fingers along the underside.  You gasp when you feel a tender, yielding slit near the end.  As you probe this new orifice, a shock of pleasure runs through you, and a tubular, green, semi-hard appendage drops out, pulsating as heavily as any sexual organ.  <b>The new organ is clearly an ovipositor!</b>  A few gentle prods confirm that it's just as sensitive; you can already feel your internals changing, adjusting to begin the production of unfertilized eggs.  You idly wonder what laying them with your new mantis ovipositor will feel like..."+
+						"[pg](<b>Perk Gained:  Mantis Ovipositor - Allows you to lay eggs in your foes!</b>)";
+				player.createPerk(PerkLib.MantisOvipositor, 0, 0, 0, 0);
+
+				if (doOutput) outputText(desc);
+				//Metamorph.unlockMetamorph(SpecialsMem.getMemory(SpecialsMem.OVIPOSITOR));
+			},
+			// is present
+			function ():Boolean {
+				return player.hasPerk(PerkLib.MantisOvipositor);
+			},
+			// is possible
+			function ():Boolean {
+				return player.hasCoatOfType(Skin.CHITIN) && !player.hasPerk(PerkLib.MantisOvipositor) && player.tailType == Tail.MANTIS_ABDOMEN;
+			}
+	);
+
+	/*public const OvipositionAnt:Transformation = new SimpleTransformation("Mantis Oviposition",
+			// apply
+			function (doOutput:Boolean):void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.RemoveOvipositor, doOutput);
+				TransformationUtils.applyTFIfNotPresent(transformations.TailAnt, doOutput);
+
+				outputText("\n\nAn odd swelling starts in your insectile abdomen, somewhere along the underside.  Curling around, you reach back to your extended, bulbous bee part and run your fingers along the underside.  You gasp when you feel a tender, yielding slit near the stinger.  As you probe this new orifice, a shock of pleasure runs through you, and a tubular, black, semi-hard appendage drops out, pulsating as heavily as any sexual organ.  <b>The new organ is clearly an ovipositor!</b>  A few gentle prods confirm that it's just as sensitive; you can already feel your internals changing, adjusting to begin the production of unfertilized eggs.  You idly wonder what laying them with your new bee ovipositor will feel like...");
+				outputText("\n\n(<b>Perk Gained:  Ant Ovipositor - Allows you to lay eggs in your foes!</b>)");
+				player.createPerk(PerkLib.AntOvipositor, 0, 0, 0, 0);
+
+				if (doOutput) outputText(desc);
+				//Metamorph.unlockMetamorph(SpecialsMem.getMemory(SpecialsMem.OVIPOSITOR));
+			},
+			// is present
+			function ():Boolean {
+				return player.hasPerk(PerkLib.AntOvipositor);
+			},
+			// is possible
+			function ():Boolean {
+				return !player.hasPerk(PerkLib.AntOvipositor) && player.tailType == Tail.ANT_ABDOMEN;
+			}
+	);*/
+
+
+	/*
 */
 
 /*

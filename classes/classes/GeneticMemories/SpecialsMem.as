@@ -4,7 +4,7 @@ package classes.GeneticMemories {
 	import classes.Transformations.Transformation;
 	import classes.CoC;
 
-	public class BallsMem extends BaseContent {
+	public class SpecialsMem extends BaseContent {
 		/**
 		* Entry properties:
 		* - id: the identificator of the Metamorph inside GeneticStorage
@@ -39,47 +39,26 @@ package classes.GeneticMemories {
 		public static var Memories:/*EnumValue*/ Array = [];
 		private static var _partid:int = 0;
 
-		public static const NONE:int = _partid++;
-		EnumValue.add(Memories, NONE, "NONE", {
+		public static const NO_OVIPOSITOR:int = _partid++;
+		EnumValue.add(Memories, NO_OVIPOSITOR, "NO_OVIPOSITOR", {
 			id: "Unlocked Metamorph",
-			name: "No Balls",
+			name: "Remove Ovipositor",
 			cost: 500,
-			title: "None",
+			title: "No Ovipositor",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.BallsNone;
+				return CoC.instance.transformations.RemoveOvipositor;
 			}
 		});
 
-		public static const DUO:int = _partid++;
-		EnumValue.add(Memories, DUO, "DUO", {
-			id: "Duo balls",
-			name: "Duo balls",
-			cost: 100,
-			title: "Duo",
+		public static const OVIPOSITOR:int = _partid++;
+		EnumValue.add(Memories, OVIPOSITOR, "OVIPOSITOR", {
+			id: "Gain Ovipositor",
+			name: "Gain Ovipositor",
+			cost: 500,
+			title: "Ovipositor",
+			hint: "Need to get any ovipositor first",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.BallsDuo;
-			}
-		});
-
-		public static const QUAD:int = _partid++;
-		EnumValue.add(Memories, QUAD, "QUAD", {
-			id: "Quad balls",
-			name: "Quad balls",
-			cost: 200,
-			title: "Quad",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.BallsQuad(1,true);
-			}
-		});
-
-		public static const TRAP:int = _partid++;
-		EnumValue.add(Memories, TRAP, "TRAP", {
-			id: "Trap balls",
-			name: "Trap balls",
-			cost: 200,
-			title: "Trap",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.BallsTrap;
+				return CoC.instance.transformations.GainOvipositor;
 			}
 		});
 
