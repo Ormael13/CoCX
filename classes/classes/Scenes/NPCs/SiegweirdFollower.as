@@ -73,6 +73,9 @@ public function siegweirdFirstEncounterPostFightJoinYes():void
 	outputText("\n\n You guide Siegweird to your camp, he smiles softly as he surveys the area.\n\n Once he’s found a place he’s content with he quickly builds a fire pit before reaching into his knapsack and pulling out a large cast iron pot.\n\n");
 	outputText("He sets everything up before igniting the flame.\n\n\"<i>I got some Soup! Call it a hero's feast, [name]. Feel free to ask me for some if you’re ever hungry.</i>\"");
 	outputText("\n\n<b>Siegweird has joined you as a follower.</b>\n\n");
+	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Siegweird pulls a shining shard from his inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	flags[kFLAGS.ALVINA_FOLLOWER] = 12;
 	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 2.5) {
 		flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 4;
