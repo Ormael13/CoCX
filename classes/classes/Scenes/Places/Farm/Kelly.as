@@ -770,24 +770,20 @@ private function approachKelly():void {
 	if(player.lust < 33) outputText("\n<b>You aren't aroused enough to pursue sex with your toy right now.</b>");
 	else addButton(1,"Sex",kellySexMenu);
 	if(flags[kFLAGS.KELLY_CUNT_TYPE] == 0) {
-		if(player.hasItem(consumables.EQUINUM)) {
-			addButton(5,"Give Equinum",giveKellyEquinum);
-			outputText("\nYou could give her equinum to gift her with a proper horse-cunt.");
-		}
+		addButtonIfTrue(5,"Give Equinum",giveKellyEquinum, "", player.hasItem(consumables.EQUINUM));
+		if (player.hasItem(consumables.EQUINUM)) outputText("\nYou could give her equinum to gift her with a proper horse-cunt.");
 		else outputText("\nIf you had equinum, you could give her a proper horse-cunt.");
 	}
 	else if(flags[kFLAGS.KELLY_CUNT_TYPE] == 1) {
-		if(player.hasItem(consumables.SUCMILK)) {
-			addButton(5,"Give SucMilk",giveKellySuccubiMilk);
-			outputText("\nYou could give her a succubi milk to get rid of that horse-pussy you gave her before.");
-		}
+		addButtonIfTrue(5,"Give SucMilk",giveKellySuccubiMilk, "", player.hasItem(consumables.SUCMILK));
+		if (player.hasItem(consumables.SUCMILK)) outputText("\nYou could give her a succubi milk to get rid of that horse-pussy you gave her before.");
 		else outputText("\nIf you had succubi milk, you could use that to give her a more human-like vagina.");
 	}
+	addButtonIfTrue(6,"Give CanineP",giveKellyAPepper, "", player.hasItem(consumables.CANINEP));
 	if(player.hasItem(consumables.CANINEP)) {
 		outputText("\nYou could give her a canine pepper");
 		if(flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] == 0) outputText(", but who knows how it will change her");
 		outputText(".");
-		addButton(6,"Give CanineP",giveKellyAPepper);
 	}
 	if(flags[kFLAGS.KELLY_VAGINALLY_FUCKED_COUNT] > 0 && flags[kFLAGS.KELLY_DISOBEYING_COUNTER] >= 3 && player.hasCock()) {
 		outputText("\n<b>It looks like Kelly has taken to pleasuring herself again in your absense.  Do you want to take care of that?</b>");
