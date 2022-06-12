@@ -2003,6 +2003,10 @@ public class SaveUpdater extends NPCAwareContent {
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.006;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.007) { //Cloning this down.
+				flags[kFLAGS.WHITNEY_ORAL_TRAINING_VAG] = flags[kFLAGS.WHITNEY_ORAL_TRAINING_COCK]; //new flag!
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.007;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;
