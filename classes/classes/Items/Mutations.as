@@ -4621,27 +4621,26 @@ public final class Mutations extends MutationsHelper {
         //Snek Penis and Gina
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
             //Find the first non-lizzy dick
-            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType != CockTypesEnum.LIZARD; temp2++) { }
+            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType == CockTypesEnum.LIZARD; temp2++) { }
             transformations.CockLizard(temp2).applyEffect();
-            changes++;
             dynStats("lus", 10);
             MutagenBonus("lib", 3);
+            changes++;
         }
         //(CHANGE OTHER DICK)
         //Requires 1 lizard cock, multiple cocks
         if (player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
             transformations.CockLizard(player.findFirstCockNotInType([CockTypesEnum.LIZARD])).applyEffect();
-            changes++;
             dynStats("lus", 10);
             MutagenBonus("lib", 3);
+            changes++;
         }
         //-Grows second lizard dick if only 1 dick
         if (player.lizardCocks() == 1 && player.cocks.length == 1 && rand(4) == 0 && changes < changeLimit) {
-            transformations.CockLizard(1, player.cocks[0].cockLength).applyEffect();
-            player.cocks[1].cockThickness = player.cocks[0].cockThickness;
-            changes++;
+            transformations.CockLizard(1, player.cocks[0].cockLength, player.cocks[0].cockThickness).applyEffect();
             dynStats("lus", 10);
             MutagenBonus("lib", 3);
+            changes++;
         }
         //--Worms leave if 100% lizard dicks?
         //Require mammals?
@@ -4849,7 +4848,7 @@ public final class Mutations extends MutationsHelper {
         //Snek Penis and Gina
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
             //Find the first non-lizzy dick
-            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType != CockTypesEnum.LIZARD; temp2++) { }
+            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType == CockTypesEnum.LIZARD; temp2++) { }
             transformations.CockLizard(temp2).applyEffect();
             changes++;
             dynStats("lus", 10);
@@ -5503,10 +5502,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Remove extra nipples
         if (player.averageNipplesPerBreast() > 1 && rand(3) == 0 && changes < changeLimit) {
-            outputText("[pg]A tightness arises in your nipples as three out of four on each breast recede completely, the leftover nipples migrating to the middle of your breasts.  <b>You are left with only one nipple on each breast.</b>");
-            for (var x:int = 0; x < player.bRows(); x++) {
-                player.breastRows[x].nipplesPerBreast = 1;
-            }
+            transformations.NipplesPerBreastOne.applyEffect();
             changes++;
         }
         //Shrink tits!
@@ -6759,7 +6755,7 @@ public final class Mutations extends MutationsHelper {
         //-Lizard dick - first one
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
             //Find the first non-lizzy dick
-            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType != CockTypesEnum.LIZARD; temp2++) { }
+            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType == CockTypesEnum.LIZARD; temp2++) { }
             transformations.CockLizard(temp2).applyEffect();
             changes++;
             dynStats("lus", 10);
@@ -7021,7 +7017,7 @@ public final class Mutations extends MutationsHelper {
         //-Lizard dick - first one
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
             //Find the first non-lizzy dick
-            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType != CockTypesEnum.LIZARD; temp2++) { }
+            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType == CockTypesEnum.LIZARD; temp2++) { }
             transformations.CockLizard(temp2).applyEffect();
             changes++;
             dynStats("lus", 10);
@@ -7065,14 +7061,8 @@ public final class Mutations extends MutationsHelper {
         }
         //-Nipples reduction to 1 per tit.
         if (player.averageNipplesPerBreast() > 1 && changes < changeLimit && rand(4) == 0) {
-            outputText("[pg]A chill runs over your [allbreasts] and vanishes.  You stick a hand under your [armor] and discover that your extra nipples are missing!  You're down to just one per ");
-            if (player.biggestTitSize() < 1) outputText("'breast'.");
-            else outputText("breast.");
+            transformations.NipplesPerBreastOne.applyEffect();
             changes++;
-            //Loop through and reset nipples
-            for (temp2 = 0; temp2 < player.breastRows.length; temp2++) {
-                player.breastRows[temp2].nipplesPerBreast = 1;
-            }
         }
         //Increase player's breast size, if they are big DD or smaller
         if (player.smallestTitSize() <= 5 && player.gender == 2 && changes < changeLimit && rand(4) == 0) {
@@ -7218,7 +7208,7 @@ public final class Mutations extends MutationsHelper {
 
         //Glowing Lizard Cock:
         if (player.cockTotal() > 0 && player.cocks[0].cockType != CockTypesEnum.CAVE_WYRM && rand(4) == 0 && changes < changeLimit) {
-            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType != CockTypesEnum.CAVE_WYRM; temp2++) { }
+            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType == CockTypesEnum.CAVE_WYRM; temp2++) { }
             transformations.CockCaveWyrm(temp2).applyEffect();
             changes++;
             dynStats("lus", 10);
@@ -7411,7 +7401,7 @@ public final class Mutations extends MutationsHelper {
         //-Lizard dick - first one
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
             //Find the first non-lizzy dick
-            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType != CockTypesEnum.LIZARD; temp2++) { }
+            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType == CockTypesEnum.LIZARD; temp2++) { }
             transformations.CockLizard(temp2).applyEffect();
             changes++;
             dynStats("lus", 10);
@@ -10758,7 +10748,7 @@ public final class Mutations extends MutationsHelper {
         //-Lizard dick - first one
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
             //Find the first non-lizzy dick
-            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType != CockTypesEnum.LIZARD; temp2++) { }
+            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType == CockTypesEnum.LIZARD; temp2++) { }
             transformations.CockLizard(temp2).applyEffect();
             changes++;
             dynStats("lus", 10);
@@ -10802,14 +10792,8 @@ public final class Mutations extends MutationsHelper {
         }
         //-Nipples reduction to 1 per tit.
         if (player.averageNipplesPerBreast() > 1 && changes < changeLimit && rand(4) == 0) {
-            outputText("[pg]A chill runs over your [allbreasts] and vanishes.  You stick a hand under your [armor] and discover that your extra nipples are missing!  You're down to just one per ");
-            if (player.biggestTitSize() < 1) outputText("'breast'.");
-            else outputText("breast.");
+            transformations.NipplesPerBreastOne.applyEffect();
             changes++;
-            //Loop through and reset nipples
-            for (temp2 = 0; temp2 < player.breastRows.length; temp2++) {
-                player.breastRows[temp2].nipplesPerBreast = 1;
-            }
         }
         //Increase player's breast size, if they are big DD or smaller
         if (player.smallestTitSize() <= 5 && player.gender == 2 && changes < changeLimit && rand(4) == 0) {
@@ -12240,10 +12224,7 @@ public final class Mutations extends MutationsHelper {
         }
         //-If the PC has quad nipples:
         if (player.averageNipplesPerBreast() > 1 && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]A tightness arises in your nipples as three out of four on each breast recede completely, the leftover nipples migrating to the middle of your breasts.  <b>You are left with only one nipple on each breast.</b>");
-            for (x = 0; x < player.bRows(); x++) {
-                player.breastRows[x].nipplesPerBreast = 1;
-            }
+            transformations.NipplesPerBreastOne.applyEffect();
             changes++;
         }
         //If the PC has gills:
@@ -15095,10 +15076,7 @@ public final class Mutations extends MutationsHelper {
         //sexual changes
         //-If the PC has quad nipples:
         if (player.averageNipplesPerBreast() > 1 && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]A tightness arises in your nipples as three out of four on each breast recede completely, the leftover nipples migrating to the middle of your breasts.  <b>You are left with only one nipple on each breast.</b>");
-            for (x = 0; x < player.bRows(); x++) {
-                player.breastRows[x].nipplesPerBreast = 1;
-            }
+            transformations.NipplesPerBreastOne.applyEffect();
             changes++;
         }
         //-Remove extra breast rows

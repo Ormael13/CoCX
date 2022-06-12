@@ -54,7 +54,7 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, BREAST1, "BREAST1", {
 			id: "One Breast Row",
 			name: "One Breast Row",
-			cost: 500,
+			cost: 200,
 			title: "Breast row 1",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.BreastRowsOne;
@@ -65,7 +65,7 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, BREAST2, "BREAST2", {
 			id: "Two Breast Rows",
 			name: "Two Breast Rows",
-			cost: 500,
+			cost: 200,
 			title: "Breast row 2",
 			permReq: "One Breast Row",
 			transformation: function(): Transformation {
@@ -77,7 +77,7 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, BREAST3, "BREAST3", {
 			id: "Three Breast Rows",
 			name: "Three Breast Rows",
-			cost: 500,
+			cost: 200,
 			title: "Breast row 3",
 			permReq: "Two Breast Rows",
 			transformation: function(): Transformation {
@@ -89,7 +89,7 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, BREAST4, "BREAST4", {
 			id: "Four Breast Rows",
 			name: "Four Breast Rows",
-			cost: 500,
+			cost: 200,
 			title: "Breast row 4",
 			permReq: "Three Breast Rows",
 			transformation: function(): Transformation {
@@ -101,7 +101,7 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, NOLACTATE, "NOLACTATE", {
 			id: "Unlocked Metamorph",
 			name: "No Lactate",
-			cost: 500,
+			cost: 200,
 			title: "No Lactation",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.RemoveLactation;
@@ -112,7 +112,7 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, STARTLACTATE, "STARTLACTATE", {
 			id: "Unlocked Metamorph",
 			name: "Start Lactate",
-			cost: 800,
+			cost: 200,
 			title: "Lactation",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.StartLactation;
@@ -123,7 +123,7 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, ONENIPPLE, "ONENIPPLE", {
 			id: "Unlocked Metamorph",
 			name: "One Nipple",
-			cost: 300,
+			cost: 200,
 			title: "One Nipple",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.NipplesPerBreastOne;
@@ -134,7 +134,7 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, QUADNIPPLE, "QUADNIPPLE", {
 			id: "Quad Nipples",
 			name: "Quad Nipples",
-			cost: 500,
+			cost: 200,
 			title: "Quad Nipples",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.NipplesPerBreastFour;
@@ -145,7 +145,7 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, FUCKNIPPLE, "FUCKNIPPLE", {
 			id: "Fuckable Nipples",
 			name: "Fuckable Nipples",
-			cost: 800,
+			cost: 200,
 			title: "Fuckable",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.NipplesFuckableForce;
@@ -156,7 +156,7 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, BLACKNIPPLE, "BLACKNIPPLE", {
 			id: "Black Nipples",
 			name: "Black Nipples",
-			cost: 300,
+			cost: 200,
 			title: "Black Nipples",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.NipplesBlack;
@@ -167,7 +167,7 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, GLOWINGNIPPLE, "GLOWINGNIPPLE", {
 			id: "Glowing Nipples",
 			name: "Glowing Nipples",
-			cost: 300,
+			cost: 200,
 			title: "Glow Nipples",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.NipplesGlowing;

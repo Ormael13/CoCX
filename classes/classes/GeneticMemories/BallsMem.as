@@ -43,7 +43,7 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, NONE, "NONE", {
 			id: "Unlocked Metamorph",
 			name: "No Balls",
-			cost: 1000,
+			cost: 500,
 			title: "None",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.BallsNone;
@@ -54,7 +54,7 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, DUO, "DUO", {
 			id: "Duo balls",
 			name: "Duo balls",
-			cost: 500,
+			cost: 100,
 			title: "Duo",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.BallsDuo;
@@ -65,7 +65,7 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, QUAD, "QUAD", {
 			id: "Quad balls",
 			name: "Quad balls",
-			cost: 800,
+			cost: 200,
 			title: "Quad",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.BallsQuad(1,true);
@@ -76,7 +76,7 @@ package classes.GeneticMemories {
 		EnumValue.add(Memories, TRAP, "TRAP", {
 			id: "Trap balls",
 			name: "Trap balls",
-			cost: 800,
+			cost: 200,
 			title: "Trap",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.BallsTrap;
