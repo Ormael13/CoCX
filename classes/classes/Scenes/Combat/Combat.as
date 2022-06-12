@@ -2608,7 +2608,7 @@ public class Combat extends BaseContent {
     internal function wait():void {
         var skipMonsterAction:Boolean = false; // If false, enemyAI() will be called. If true, combatRoundOver()
         flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 1;
-        fatigue(-5);
+        fatigueRecovery1();
         wrathregeneration1();
         manaregeneration1();
         soulforceregeneration1();
@@ -4978,7 +4978,7 @@ public class Combat extends BaseContent {
             manaregeneration1();
             soulforceregeneration1();
 			venomCombatRecharge1();
-        }
+        } 
         enemyAI();
     }
 
@@ -8966,6 +8966,7 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1 && (player.isTaur() || player.isDrider())) multi += 0.6;
         if (player.perkv1(IMutationsLib.TwinHeartIM) >= 2 && (player.isTaur() || player.isDrider())) multi += 0.6;
         if (player.perkv1(IMutationsLib.TwinHeartIM) >= 3 && (player.isTaur() || player.isDrider())) multi += 0.6;
+		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1 || (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.DefenceStance))) multi *= 2;
         return multi;
     }
 
