@@ -4087,4 +4087,4 @@ public class Soulforce extends BaseContent
 		doNext(accessSoulforceMenu);
 	}
 }
-}
+}
