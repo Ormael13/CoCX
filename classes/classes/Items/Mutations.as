@@ -1,27 +1,11 @@
 package classes.Items {
 import classes.*;
-import classes.BodyParts.Antennae;
-import classes.BodyParts.Arms;
-import classes.BodyParts.Ears;
-import classes.BodyParts.Eyes;
-import classes.BodyParts.Face;
-import classes.BodyParts.Gills;
-import classes.BodyParts.Hair;
-import classes.BodyParts.Horns;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.RearBody;
-import classes.BodyParts.Skin;
-import classes.BodyParts.Tail;
-import classes.BodyParts.Tongue;
-import classes.BodyParts.Wings;
-import classes.GeneticMemories.BallsMem;
+import classes.BodyParts.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Consumables.EmberTF;
 import classes.Races.*;
-import classes.Scenes.Areas.Forest.KitsuneScene;
-import classes.Scenes.Metamorph;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.Transformations.TransformationUtils;
@@ -4459,9 +4443,8 @@ public final class Mutations extends MutationsHelper {
                 transformations.CockHuman(7).applyEffect();
                 if (player.balls == 0) {
                     outputText(" And a new pair of balls!");
-                    player.balls = 2;
+                    transformations.BallsDuo.applyEffect(false);
                     player.ballSize = 2;
-                    Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
                 }
                 player.cocks[0].cockThickness = 1.4;
                 dynStats("lus", 20);
@@ -4638,27 +4621,26 @@ public final class Mutations extends MutationsHelper {
         //Snek Penis and Gina
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
             //Find the first non-lizzy dick
-            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType != CockTypesEnum.LIZARD; temp2++) { }
+            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType == CockTypesEnum.LIZARD; temp2++) { }
             transformations.CockLizard(temp2).applyEffect();
-            changes++;
             dynStats("lus", 10);
             MutagenBonus("lib", 3);
+            changes++;
         }
         //(CHANGE OTHER DICK)
         //Requires 1 lizard cock, multiple cocks
         if (player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
             transformations.CockLizard(player.findFirstCockNotInType([CockTypesEnum.LIZARD])).applyEffect();
-            changes++;
             dynStats("lus", 10);
             MutagenBonus("lib", 3);
+            changes++;
         }
         //-Grows second lizard dick if only 1 dick
         if (player.lizardCocks() == 1 && player.cocks.length == 1 && rand(4) == 0 && changes < changeLimit) {
-            transformations.CockLizard(1, player.cocks[0].cockLength).applyEffect();
-            player.cocks[1].cockThickness = player.cocks[0].cockThickness;
-            changes++;
+            transformations.CockLizard(1, player.cocks[0].cockLength, player.cocks[0].cockThickness).applyEffect();
             dynStats("lus", 10);
             MutagenBonus("lib", 3);
+            changes++;
         }
         //--Worms leave if 100% lizard dicks?
         //Require mammals?
@@ -4866,7 +4848,7 @@ public final class Mutations extends MutationsHelper {
         //Snek Penis and Gina
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
             //Find the first non-lizzy dick
-            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType != CockTypesEnum.LIZARD; temp2++) { }
+            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType == CockTypesEnum.LIZARD; temp2++) { }
             transformations.CockLizard(temp2).applyEffect();
             changes++;
             dynStats("lus", 10);
@@ -5520,10 +5502,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Remove extra nipples
         if (player.averageNipplesPerBreast() > 1 && rand(3) == 0 && changes < changeLimit) {
-            outputText("[pg]A tightness arises in your nipples as three out of four on each breast recede completely, the leftover nipples migrating to the middle of your breasts.  <b>You are left with only one nipple on each breast.</b>");
-            for (var x:int = 0; x < player.bRows(); x++) {
-                player.breastRows[x].nipplesPerBreast = 1;
-            }
+            transformations.NipplesPerBreastOne.applyEffect();
             changes++;
         }
         //Shrink tits!
@@ -6776,7 +6755,7 @@ public final class Mutations extends MutationsHelper {
         //-Lizard dick - first one
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
             //Find the first non-lizzy dick
-            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType != CockTypesEnum.LIZARD; temp2++) { }
+            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType == CockTypesEnum.LIZARD; temp2++) { }
             transformations.CockLizard(temp2).applyEffect();
             changes++;
             dynStats("lus", 10);
@@ -7038,7 +7017,7 @@ public final class Mutations extends MutationsHelper {
         //-Lizard dick - first one
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
             //Find the first non-lizzy dick
-            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType != CockTypesEnum.LIZARD; temp2++) { }
+            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType == CockTypesEnum.LIZARD; temp2++) { }
             transformations.CockLizard(temp2).applyEffect();
             changes++;
             dynStats("lus", 10);
@@ -7082,14 +7061,8 @@ public final class Mutations extends MutationsHelper {
         }
         //-Nipples reduction to 1 per tit.
         if (player.averageNipplesPerBreast() > 1 && changes < changeLimit && rand(4) == 0) {
-            outputText("[pg]A chill runs over your [allbreasts] and vanishes.  You stick a hand under your [armor] and discover that your extra nipples are missing!  You're down to just one per ");
-            if (player.biggestTitSize() < 1) outputText("'breast'.");
-            else outputText("breast.");
+            transformations.NipplesPerBreastOne.applyEffect();
             changes++;
-            //Loop through and reset nipples
-            for (temp2 = 0; temp2 < player.breastRows.length; temp2++) {
-                player.breastRows[temp2].nipplesPerBreast = 1;
-            }
         }
         //Increase player's breast size, if they are big DD or smaller
         if (player.smallestTitSize() <= 5 && player.gender == 2 && changes < changeLimit && rand(4) == 0) {
@@ -7235,7 +7208,7 @@ public final class Mutations extends MutationsHelper {
 
         //Glowing Lizard Cock:
         if (player.cockTotal() > 0 && player.cocks[0].cockType != CockTypesEnum.CAVE_WYRM && rand(4) == 0 && changes < changeLimit) {
-            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType != CockTypesEnum.CAVE_WYRM; temp2++) { }
+            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType == CockTypesEnum.CAVE_WYRM; temp2++) { }
             transformations.CockCaveWyrm(temp2).applyEffect();
             changes++;
             dynStats("lus", 10);
@@ -7428,7 +7401,7 @@ public final class Mutations extends MutationsHelper {
         //-Lizard dick - first one
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
             //Find the first non-lizzy dick
-            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType != CockTypesEnum.LIZARD; temp2++) { }
+            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType == CockTypesEnum.LIZARD; temp2++) { }
             transformations.CockLizard(temp2).applyEffect();
             changes++;
             dynStats("lus", 10);
@@ -7461,9 +7434,8 @@ public final class Mutations extends MutationsHelper {
             transformations.CockHuman(0, 7).applyEffect();
             if (player.balls == 0) {
                 outputText(" and a pair of balls");
-                player.balls = 2;
+                transformations.BallsDuo.applyEffect(false);
                 player.ballSize = 2;
-                Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
             }
             player.cocks[0].cockThickness = 1.4;
             dynStats("lus", 20);
@@ -7847,8 +7819,7 @@ public final class Mutations extends MutationsHelper {
             if (player.balls == 0) {
                 outputText("a heavy flesh bag not unlike a pair of ball form beneath your cock. " +
                         "At first you think this is a standard set of balls but no this is something else altogether. ");
-                player.balls = 2;
-                Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
+                transformations.BallsDuo.applyEffect(false);
             }
             outputText("You are proven right a few second later when they begin to inflate, " +
                     "gaining in weight. Overcome by lust you begin jerking your cock, something large and pleasurable sliding out of your nuts and running down the length of your [cock]. " +
@@ -8877,12 +8848,10 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Drider butt
-        if (type == 1 && !player.hasPerk(PerkLib.SpiderOvipositor) && player.isDrider() && player.tailType == Tail.SPIDER_ADBOMEN && changes < changeLimit && rand(3) == 0 && (player.hasVagina() || rand(2) == 0)) {
-            outputText("[pg]An odd swelling sensation floods your spider half.  Curling your abdomen underneath you for a better look, you gasp in recognition at your new 'equipment'!  Your semi-violent run-ins with the swamp's population have left you <i>intimately</i> familiar with the new appendage.  <b>It's a drider ovipositor!</b>  A few light prods confirm that it's just as sensitive as any of your other sexual organs.  You idly wonder what laying eggs with this thing will feel like...");
-            outputText("[pg](<b>Perk Gained:  Spider Ovipositor - Allows you to lay eggs in your foes!</b>)");
+        if (type == 1 && transformations.OvipositionSpider.isPossible() && changes < changeLimit && rand(3) == 0 && (player.hasVagina() || rand(2) == 0)) {
             //V1 - Egg Count
             //V2 - Fertilized Count
-            player.createPerk(PerkLib.SpiderOvipositor, 0, 0, 0, 0);
+            transformations.OvipositionSpider.applyEffect();
             //Opens up drider ovipositor scenes from available mobs. The character begins producing unfertilized eggs in their arachnid abdomen. Egg buildup raises minimum lust and eventually lowers speed until the player has gotten rid of them.  This perk may only be used with the drider lower body, so your scenes should reflect that.
             //Any PC can get an Ovipositor perk, but it will be much rarer for characters without vaginas.
             //Eggs are unfertilized by default, but can be fertilized:
@@ -8983,16 +8952,14 @@ public final class Mutations extends MutationsHelper {
                 transformations.CockHuman(0, 10, 2).applyEffect(false);
                 if (player.balls == 0) {
                     outputText("  Right on cue, two cum-laden testicles drop in behind it, their contents swirling and churning.");
-                    player.balls = 2;
+                    transformations.BallsDuo.applyEffect(false);
                     player.ballSize = 3;
-                    Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
                 }
                 outputText("[pg]");
             } else if (player.balls == 0) {
                 outputText("A swelling begins behind your man-meat, and you're assailed with an incredibly peculiar sensation as two sperm-filled balls drop into a newly-formed scrotum.  Frikkin' sweet![pg]");
-                player.balls = 2;
+                transformations.BallsDuo.applyEffect(false);
                 player.ballSize = 3;
-                Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
             }
             outputText("Finally, you feel the transformation skittering to a halt, leaving you to openly roam your new chiseled and sex-ready body.  So what if you can barely form coherent sentences anymore?  A body like this does all the talking you need, you figure!");
             MutagenBonus("lib", .1);
@@ -9048,9 +9015,8 @@ public final class Mutations extends MutationsHelper {
                 outputText("Churning audibly, your [sack] sways, but doesn't show any outward sign of change.  Oh well, it's probably just like, getting more endurance or something.");
             } else {
                 outputText("Two rounded orbs drop down below, filling out a new, fleshy sac above your [legs].  Sweet!  You can probably cum buckets with balls like these.");
-                player.balls = 2;
+                transformations.BallsDuo.applyEffect(false);
                 player.ballSize = 3;
-                Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
             }
             outputText("[pg]");
         }
@@ -10782,7 +10748,7 @@ public final class Mutations extends MutationsHelper {
         //-Lizard dick - first one
         if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
             //Find the first non-lizzy dick
-            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType != CockTypesEnum.LIZARD; temp2++) { }
+            for (temp2 = 0; temp2 < player.cocks.length && player.cocks[temp2].cockType == CockTypesEnum.LIZARD; temp2++) { }
             transformations.CockLizard(temp2).applyEffect();
             changes++;
             dynStats("lus", 10);
@@ -10826,14 +10792,8 @@ public final class Mutations extends MutationsHelper {
         }
         //-Nipples reduction to 1 per tit.
         if (player.averageNipplesPerBreast() > 1 && changes < changeLimit && rand(4) == 0) {
-            outputText("[pg]A chill runs over your [allbreasts] and vanishes.  You stick a hand under your [armor] and discover that your extra nipples are missing!  You're down to just one per ");
-            if (player.biggestTitSize() < 1) outputText("'breast'.");
-            else outputText("breast.");
+            transformations.NipplesPerBreastOne.applyEffect();
             changes++;
-            //Loop through and reset nipples
-            for (temp2 = 0; temp2 < player.breastRows.length; temp2++) {
-                player.breastRows[temp2].nipplesPerBreast = 1;
-            }
         }
         //Increase player's breast size, if they are big DD or smaller
         if (player.smallestTitSize() <= 5 && player.gender == 2 && changes < changeLimit && rand(4) == 0) {
@@ -11540,11 +11500,8 @@ public final class Mutations extends MutationsHelper {
             if (player.ballSize > 20) player.ballSize--;
             //Testicle Reduction final:
             if (player.ballSize < 1 && !player.hasStatusEffect(StatusEffects.Uniball)) {
-                outputText("  You whimper as once again, your balls tighten and shrink.  Your eyes widen when you feel the gentle weight of your testicles pushing against your crotch, and a few hesitant swings of your rear confirm what you can feel - you've tightened your balls up so much they no longer hang beneath your [cocks], but press perkily upwards.  Heat ringing your ears, you explore your new sack with a careful hand.  You are deeply grateful you apparently haven't reversed puberty, but you discover that though you still have " + num2Text(player.balls) + ", your balls now look and feel like one: one cute, tight little sissy parcel, its warm, insistent pressure upwards upon the joining of your thighs a never-ending reminder of it.");
                 //[Note: Balls description should no longer say \"swings heavily beneath\".  For simplicity's sake sex scenes should continue to assume two balls]
-                player.ballSize = 1;
-                player.createStatusEffect(StatusEffects.Uniball, 0, 0, 0, 0);
-                Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.TRAP));
+                transformations.BallsDuo.applyEffect(false);
             } else if (player.ballSize < 1) player.ballSize = 1;
             changes++;
         }
@@ -11739,9 +11696,8 @@ public final class Mutations extends MutationsHelper {
             //gain balls up to 2 (only if full-coon face and fur; no dick required)
             if (player.balls == 0 && player.hasFur() && 9999 == 9999 && rand(3) == 0 && changes < changeLimit) {
                 outputText("[pg]As you eat, you contemplate your masked appearance; it strikes you that you're dangerously close to the classic caricature of a thief.  Really, all it would take is a big, nondescript sack and a hurried gait and everyone would immediately think the worst of you.  In a brief fit of pique, you wish you had such a bag to store your things in, eager to challenge a few assumptions.  A few minutes into that line of thought, a twisting ache in your crotch bends you double, and you expose yourself hurriedly to examine the region.  As you watch, a balloon of flesh forms on your crotch, and two lumps migrate from below your navel down into it.  <b>Looks like you have a sack, after all.</b>");
-                player.balls = 2;
+                transformations.BallsDuo.applyEffect(false);
                 player.ballSize = 1;
-                Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
                 changes++;
             }
         }
@@ -12268,10 +12224,7 @@ public final class Mutations extends MutationsHelper {
         }
         //-If the PC has quad nipples:
         if (player.averageNipplesPerBreast() > 1 && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]A tightness arises in your nipples as three out of four on each breast recede completely, the leftover nipples migrating to the middle of your breasts.  <b>You are left with only one nipple on each breast.</b>");
-            for (x = 0; x < player.bRows(); x++) {
-                player.breastRows[x].nipplesPerBreast = 1;
-            }
+            transformations.NipplesPerBreastOne.applyEffect();
             changes++;
         }
         //If the PC has gills:
@@ -14420,10 +14373,9 @@ public final class Mutations extends MutationsHelper {
 
         //Physical Changes:
         //PartialCoatChitin skin
-        var MantisColor:Array = ["green", "turquoise", "emerald"];
         if (changes < changeLimit && !player.hasPartialCoat(Skin.CHITIN) && rand(2) == 0) {
             outputText("[pg]");
-            transformations.SkinChitin(Skin.COVERAGE_LOW, {colors: MantisColor}).applyEffect();
+            transformations.SkinChitin(Skin.COVERAGE_LOW, {colors: MantisRace.MantisChitinColors}).applyEffect();
             changes++;
         }
 
@@ -14441,10 +14393,8 @@ public final class Mutations extends MutationsHelper {
         }
 
         //oviposition (prawdopodobnie podobne do wersji dla bee niż dridera)
-        if (changes < changeLimit && player.hasCoatOfType(Skin.CHITIN) && !player.hasPerk(PerkLib.MantisOvipositor) && player.tailType == Tail.MANTIS_ABDOMEN && rand(2) == 0) {
-            outputText("[pg]An odd swelling starts in your insectile abdomen, somewhere along the underside.  Curling around, you reach back to your extended, bulbous mantis part and run your fingers along the underside.  You gasp when you feel a tender, yielding slit near the end.  As you probe this new orifice, a shock of pleasure runs through you, and a tubular, green, semi-hard appendage drops out, pulsating as heavily as any sexual organ.  <b>The new organ is clearly an ovipositor!</b>  A few gentle prods confirm that it's just as sensitive; you can already feel your internals changing, adjusting to begin the production of unfertilized eggs.  You idly wonder what laying them with your new mantis ovipositor will feel like...");
-            outputText("[pg](<b>Perk Gained:  Mantis Ovipositor - Allows you to lay eggs in your foes!</b>)");
-            player.createPerk(PerkLib.MantisOvipositor, 0, 0, 0, 0);
+        if (changes < changeLimit && transformations.OvipositionMantis.isPossible() && rand(2) == 0) {
+            transformations.OvipositionMantis.applyEffect();
             changes++;
         }
 
@@ -14492,7 +14442,7 @@ public final class Mutations extends MutationsHelper {
         //Chitin skin
         if (changes < changeLimit && player.hasPartialCoat(Skin.CHITIN) && player.tailType == Tail.MANTIS_ABDOMEN && rand(2) == 0) {
             outputText("[pg]");
-            transformations.SkinChitin(Skin.COVERAGE_COMPLETE, {colors: MantisColor}).applyEffect();
+            transformations.SkinChitin(Skin.COVERAGE_COMPLETE, {colors: MantisRace.MantisChitinColors}).applyEffect();
             changes++;
         }
 
@@ -15126,10 +15076,7 @@ public final class Mutations extends MutationsHelper {
         //sexual changes
         //-If the PC has quad nipples:
         if (player.averageNipplesPerBreast() > 1 && rand(4) == 0 && changes < changeLimit) {
-            outputText("[pg]A tightness arises in your nipples as three out of four on each breast recede completely, the leftover nipples migrating to the middle of your breasts.  <b>You are left with only one nipple on each breast.</b>");
-            for (x = 0; x < player.bRows(); x++) {
-                player.breastRows[x].nipplesPerBreast = 1;
-            }
+            transformations.NipplesPerBreastOne.applyEffect();
             changes++;
         }
         //-Remove extra breast rows

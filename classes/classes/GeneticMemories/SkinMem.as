@@ -46,8 +46,9 @@ package classes.GeneticMemories {
 	 */
 
     public static var Memories:/*EnumValue*/ Array = [];
+	  private static var _partid:int = 0;
 
-		public static const PLAIN:int = 0;
+		public static const PLAIN:int = _partid++;
 		EnumValue.add(Memories, PLAIN, "PLAIN", {
 			id: "Unlocked Metamorph",
 			name: "Human Skin",
@@ -58,7 +59,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FUR:int = 1;
+		public static const FUR:int = _partid++;
 		EnumValue.add(Memories, FUR, "FUR", {
 			id: "Fur Skin",
 			name: "Fur",
@@ -70,7 +71,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const SCALES:int = 2;
+		public static const SCALES:int = _partid++;
 		EnumValue.add(Memories, SCALES, "SCALES", {
 			id: "Scales Skin",
 			name: "Scales",
@@ -82,7 +83,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DRAGON_SCALES:int = 3;
+		public static const DRAGON_SCALES:int = _partid++;
 		EnumValue.add(Memories, DRAGON_SCALES, "DRAGON_SCALES", {
 			id: "Dragon Scales Skin",
 			name: "Dragon Scales",
@@ -94,7 +95,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const CHITIN:int = 4;
+		public static const CHITIN:int = _partid++;
 		EnumValue.add(Memories, CHITIN, "CHITIN", {
 			id: "Chitin Skin",
 			name: "Chitin",
@@ -106,7 +107,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-	  public static const AQUA_SCALES:int = 5;
+	  public static const AQUA_SCALES:int = _partid++;
 	  EnumValue.add(Memories, AQUA_SCALES, "AQUA_SCALES", {
 		  id: "Aqua Scales",
 		  name: "Aqua Scales",
@@ -118,7 +119,7 @@ package classes.GeneticMemories {
 		  }
 	  });
 
-	  public static const SLIME:int = 6;
+	  public static const SLIME:int = _partid++;
 	  EnumValue.add(Memories, SLIME, "SLIME", {
 		  id: "Slime Skin",
 		  name: "Slime Skin",
@@ -130,7 +131,7 @@ package classes.GeneticMemories {
 		  }
 	  });
 
-	  public static const DARK_SLIME:int = 7;
+	  public static const DARK_SLIME:int = _partid++;
 	  EnumValue.add(Memories, DARK_SLIME, "DARK_SLIME", {
 		  id: "Dark Slime skin",
 		  name: "Dark Slime skin",
@@ -142,7 +143,7 @@ package classes.GeneticMemories {
 		  }
 	  });
 
-	  public static const MAGMA_SLIME:int = 8;
+	  public static const MAGMA_SLIME:int = _partid++;
 	  EnumValue.add(Memories, MAGMA_SLIME, "MAGMA_SLIME", {
 		  id: "Magma Slime Skin",
 		  name: "Magma Slime skin",
