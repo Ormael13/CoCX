@@ -773,13 +773,16 @@ public class Soulforce extends BaseContent
 		for each (var vaginaCountMem: * in VaginaCountMem.Memories) {
 			//Filter out vagina after 1 //TODO:multiVag support? Will this break if 2nd vag unlocked?
 			if (vaginaCountMem.id == "One Vagina")
-				Metamorph.GeneticMemoryStorage[vaginaCountMem.id] = true;
+				Metamorph.GeneticMemoryStorage["One Vagina"] = true;
 		}
 		for each (var ballsMem: * in BallsMem.Memories) {
 			Metamorph.GeneticMemoryStorage[ballsMem.id] = true;
 		}
 		for each (var breastMem: * in BreastMem.Memories) {
 			Metamorph.GeneticMemoryStorage[breastMem.id] = true;
+		}
+		for each (var specialMem: * in SpecialsMem.Memories) {
+			Metamorph.GeneticMemoryStorage[specialMem.id] = true;
 		}
 		Metamorph.GeneticMemoryStorage["Taur Lower Body"] = true;
 		clearOutput();

@@ -2815,6 +2815,10 @@ import coc.view.MainView;
 				{
 					name: "Balls",
 					func: accessBallsMenu
+				},
+				{
+					name: "Specials",
+					func: accessSexSpecialsMenu
 				}
 			];
 
@@ -2935,6 +2939,10 @@ import coc.view.MainView;
 
 		private function accessBallsMenu(currentPage: int = 0): void {
 			openPaginatedMetamorphMenu("Balls", accessBallsMenu, currentPage, BallsMem.Memories);
+		}
+
+		private function accessSexSpecialsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Specials", accessSexSpecialsMenu, currentPage, SpecialsMem.Memories);
 		}
 
 		private function openPaginatedMetamorphMenu (title: String, thisMenu: *, currentPage: int, memArray:Array): void {
