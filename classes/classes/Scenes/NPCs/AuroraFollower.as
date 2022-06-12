@@ -29,6 +29,9 @@ public function putInTheJadeTalismanEpilogue():void {
 	outputText("After a moment of thinking you tell her to find some place to stay and you will come by later to tell her what role she will perform in the camp.\n\n");
 	outputText("(<b>Aurora has been added to the Followers menu!</b>)\n\n");
 	flags[kFLAGS.AURORA_LVL] = 1;
+	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Aurora pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	doNext(camp.returnToCampUseOneHour);
 }
 

@@ -359,6 +359,9 @@ import classes.display.SpriteDb;
 				outputText("<i>\"Lucky? No.\"</i> Belisa says, anger in her gaze. <i>\"I had two strong sisters who taught me how to hide, to use my gifts.\"</i> She breaks into tears, leaning on Lily. <i>\"Who stayed behind in the village, fought to the bitter end…So that I had a fighting chance to live.\"</i> She puts a palm on Lily’s pale cheek, a smile on her face. <i>\"And now, I have you back.\"</i>\n\n");
 			}
 			outputText("<b>Lily has joined you as a lover.</b>\n\n");
+			if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+			else player.createKeyItem("Radiant shard", 1,0,0,0);
+			outputText("\n\n<b>Before fully settling in your camp as if remembering something Lily pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 			LilyFollowerState = true;
 			DriderTown.LilyKidsPCPregnancy = 0;
 			cleanupAfterCombat(camp.returnToCampUseOneHour);

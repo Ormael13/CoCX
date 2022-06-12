@@ -12269,7 +12269,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				player.createPerk(PerkLib.BeeOvipositor, 0, 0, 0, 0);
 
 				if (doOutput) outputText(desc);
-				//Metamorph.unlockMetamorph(SpecialsMem.getMemory(SpecialsMem.OVIPOSITOR));
+				Metamorph.unlockMetamorph(SpecialsMem.getMemory(SpecialsMem.OVIPOSITOR));
 			},
 			// is present
 			function ():Boolean {
@@ -12297,7 +12297,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				player.createPerk(PerkLib.SpiderOvipositor, 0, 0, 0, 0);
 
 				if (doOutput) outputText(desc);
-				//Metamorph.unlockMetamorph(SpecialsMem.getMemory(SpecialsMem.OVIPOSITOR));
+				Metamorph.unlockMetamorph(SpecialsMem.getMemory(SpecialsMem.OVIPOSITOR));
 			},
 			// is present
 			function ():Boolean {
@@ -12323,7 +12323,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				player.createPerk(PerkLib.MantisOvipositor, 0, 0, 0, 0);
 
 				if (doOutput) outputText(desc);
-				//Metamorph.unlockMetamorph(SpecialsMem.getMemory(SpecialsMem.OVIPOSITOR));
+				Metamorph.unlockMetamorph(SpecialsMem.getMemory(SpecialsMem.OVIPOSITOR));
 			},
 			// is present
 			function ():Boolean {

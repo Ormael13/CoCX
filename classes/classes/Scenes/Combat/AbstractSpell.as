@@ -55,6 +55,11 @@ public class AbstractSpell extends CombatAbility {
 		combat.spellPerkUnlock();
 	}
 	
+	override public function get currentCooldown():int {
+		if (isSwiftcasting) return 0;
+		return player.cooldowns[id];
+	}
+	
 	override protected function usabilityCheck():String {
 		
 		// Run all check applicable to all abilities

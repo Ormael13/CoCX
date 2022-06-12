@@ -48,8 +48,7 @@ public class StalagmiteSpell extends AbstractGreySpell {
 	}
 	
 	override public function calcCooldown():int {
-		if (isSwiftcasting) return 0;
-		else return spellGreyCooldown();
+		return spellGreyCooldown();
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)

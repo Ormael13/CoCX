@@ -176,6 +176,9 @@ package classes.Scenes.NPCs
 			outputText("Seems like he thought ahead, and brought a large tent, thrice as wide as yours, and twice as big, no doubt to fit his large frame with ease. The outsides are covered in furs and pelts, held by sturdy pieces of wood Since you’re helping him to set it, you manage to see its insides. While it contains no luxuries, it’s well furnished and has a homey feel, having a large bed wrapped in red linen, a small kitchen where a teapot fumes, and lacquered boxes with tools, books and clothing. Some small statues carved in wood ornate the area, some serving as lamps.\n\n");
 			outputText("Once the tent is done, you rush to a secluded side of the camp, where the smoke of the ovens won’t bother anyone, and close enough to the stream. There, Konstantin handily re-assembles his oven and puts his anvil in place, as well as the rest of the working stuff.\n\n");
 			outputText("(<b>Konstantin has been added to the Followers menu!</b>)\n\n");
+			if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+			else player.createKeyItem("Radiant shard", 1,0,0,0);
+			outputText("\n\n<b>Before fully settling in your camp as if remembering something Konstantin pulls a shining shard from his inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 			flags[kFLAGS.KONSTANTIN_FOLLOWER] = 2;
 			doNext(camp.returnToCampUseTwoHours);
 		}
@@ -1297,4 +1300,4 @@ package classes.Scenes.NPCs
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}
-}
+}
