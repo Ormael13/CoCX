@@ -343,6 +343,10 @@ public class Soulforce extends BaseContent
 			++cnt;
 			outputText("\nC.Amily");
 		}
+		if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) {
+			++cnt;
+			outputText("\nIzma");
+		}
 		if (DivaScene.instance.status == -1) {
 			++cnt;
 			outputText("\nDiva");
