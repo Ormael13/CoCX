@@ -68,6 +68,9 @@ public class CoC extends MovieClip
     public var modSaveVersion:Number = 36.007;
     public var levelCap:Number = 185;
 
+    //Lock cheats menus from public builds.
+    public var lockCheats:Boolean = false;
+
     //Used to restrict random drops from overlapping uniques
     public var plotFight:Boolean = false;
     public var timeQ:Number = 0; // Queued hours

@@ -225,7 +225,7 @@ public class PlayerInfo extends BaseContent {
 		miscStats += "<b>Exp needed to lvl up:</b> ";
 		if (player.level < CoC.instance.levelCap) miscStats += "" + player.requiredXP() + "\n";
 		else miscStats += "N/A (You already at max lvl)\n";
-		miscStats += "<b>Ascension points (curently possesed):</b> " + player.ascensionPerkPoints + "\n";
+		miscStats += "<b>Ascension points (currently possessed):</b> " + player.ascensionPerkPoints + "\n";
 		miscStats += "<b>Ascension points (possible to gain during next ascension):</b> " + camp.possibleToGainAscensionPoints() + "\n";
 		miscStats += "<b>Ascensions:</b> " + flags[kFLAGS.NEW_GAME_PLUS_LEVEL] + "\n";
 

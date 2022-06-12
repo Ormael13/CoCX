@@ -19,14 +19,8 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Consumables.EmberTF;
-import classes.Races.CatRace;
-import classes.Races.FoxRace;
-import classes.Races.GoblinRace;
-import classes.Races.GremlinRace;
-import classes.Races.KitsuneRace;
-import classes.Races.NagaRace;
-import classes.Races.SharkRace;
-import classes.Races.UshiOniRace;
+import classes.Races.*;
+import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Metamorph;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
@@ -615,8 +609,7 @@ public final class Mutations extends MutationsHelper {
 
     public function cometmanual(player:Player):void {
         clearOutput();
-        //if (player.hasPerk(PerkLib.SoulWarrior)) {
-        if (player.hasPerk(PerkLib.SoulPersonage)) {
+        if (player.hasPerk(PerkLib.SoulWarrior)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsComet)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Comet.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skill: Comet.</b>");
@@ -635,8 +628,7 @@ public final class Mutations extends MutationsHelper {
 
     public function violetpupiltransformationmanual(player:Player):void {
         clearOutput();
-        //if (player.hasPerk(PerkLib.SoulWarrior)) {
-        if (player.hasPerk(PerkLib.SoulPersonage)) {
+        if (player.hasPerk(PerkLib.SoulWarrior)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Violet Pupil Transformation.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skill: Violet Pupil Transformation.</b>");
@@ -1306,7 +1298,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         if (rando >= 90 && changeLimit != 0) {
-            if (player.skin.base.color == "blue" || player.skin.base.color == "gray" || player.skin.base.color == "red" || player.skin.base.color == "purple" || player.skin.base.color == "light purple" || player.skin.base.color == "ghostly white" || player.skin.base.color == "indigo" || player.skin.base.color == "sky blue" || player.skin.base.color == "shiny black") {
+            if (InCollection(player.skin.base.color, DemonRace.DemonSkinColors)) {
                 if (player.vaginas.length > 0) {
                     outputText("[pg]Your heart begins beating harder and harder as heat floods to your groin.  You feel your clit peeking out from under its hood, growing larger and longer as it takes in more and more blood.");
                     if (player.clitLength > 3 && !player.hasPerk(PerkLib.BigClit)) outputText("  After some time it shrinks, returning to its normal aroused size.  You guess it can't get any bigger.");
@@ -1321,34 +1313,7 @@ public final class Mutations extends MutationsHelper {
                     transformations.VaginaHuman().applyEffect();
                 }
             } else {
-                switch (rand(10)) {
-                    case 0:
-                        player.skin.base.color = "shiny black";
-                        break;
-                    case 1:
-                        player.skin.base.color = "sky blue";
-                        break;
-                    case 2:
-                        player.skin.base.color = "indigo";
-                        break;
-                    case 3:
-                        player.skin.base.color = "ghostly white";
-                        break;
-                    case 4:
-                        player.skin.base.color = "light purple";
-                        break;
-                    case 5:
-                        player.skin.base.color = "purple";
-                        break;
-                    case 6:
-                        player.skin.base.color = "red";
-                        break;
-                    case 7:
-                        player.skin.base.color = "gray";
-                        break;
-                    default:
-                        player.skin.base.color = "blue";
-                }
+                player.skin.base.color = randomChoice(DemonRace.DemonSkinColors);
                 outputText("[pg]A tingling sensation runs across your skin in waves, growing stronger as <b>your skin's tone slowly shifts, darkening to become " + player.skinTone + " in color.</b>");
                 if (tainted) dynStats("cor", 1);
                 else dynStats("cor", 0);
@@ -1822,7 +1787,7 @@ public final class Mutations extends MutationsHelper {
                     //1 dick - grow 1 and convert 1
                     else if (player.cockTotal() == 1) {
                         transformations.CockDog().applyEffect();
-                        outputText("You feel something slippery wiggling inside the new sheath, and another red point peeks out.  In spite of yourself, you start getting turned on by the change, and the new dick slowly slides free, eventually stopping once the thick knot pops free.  The pair of dog-dicks hang there, leaking pre-cum and arousing you far beyond normal.");
+                        outputText("[pg]You feel something slippery wiggling inside the new sheath, and another red point peeks out.  In spite of yourself, you start getting turned on by the change, and the new dick slowly slides free, eventually stopping once the thick knot pops free.  The pair of dog-dicks hang there, leaking pre-cum and arousing you far beyond normal.");
                         transformations.CockDog(1, 7 + rand(7), 1.5 + rand(10) / 10, 1.7).applyEffect(false);
                         dynStats("lus", 50);
                         MutagenBonus("lib", 2);
@@ -3805,7 +3770,7 @@ public final class Mutations extends MutationsHelper {
 			if (player.wis >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBloodRequiemSF)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood soulskill: (Soulforce infused) Blood Requiem.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBloodRequiemSF, 0, 0, 0, 0);
-				return;
+				//return;
 			}/*
 			//Smart enough for SF Infused Scarlet Spirit Charge and doesnt have it
 			if (player.wis >= 70 && !player.hasStatusEffect(StatusEffects.KnowsScarletSpiritChargeSF)) {
@@ -3838,10 +3803,10 @@ public final class Mutations extends MutationsHelper {
                 outputText(multiCockDescriptLight() + " erupts in front of you, liberally spraying the ground around you");
             }
             if (player.cocks.length > 0 && player.vaginas.length > 0) {
-                outputText("At the same time your ");
+                outputText(". At the same time your ");
             }
             if (player.vaginas.length > 0) {
-                outputText(vaginaDescript(0) + " soaks your thighs");
+                outputText(vaginaDescript() + " soaks your thighs");
             }
             if (player.gender == 0) outputText("body begins to quiver with orgasmic bliss");
             if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) outputText(" with charged, glowing, plasma");
@@ -4817,7 +4782,7 @@ public final class Mutations extends MutationsHelper {
         // Scale color
         if (type == 1 && rand(4) == 0 && !InCollection(player.coatColor, NagaRace.SnakeScaleColors) && changes < changeLimit) {
             outputText("[pg]");
-            color = randomChoice("black", "midnight", "midnight black");
+            color = randomChoice(NagaRace.SnakeScaleColors);
             transformations.SkinScales(Skin.COVERAGE_LOW, {color: color}).applyEffect();
             player.coatColor2 = "purplish black";
             changes++;
@@ -4826,7 +4791,7 @@ public final class Mutations extends MutationsHelper {
         // Hair color
         if (type == 1 && rand(4) == 0 && !InCollection(player.hairColor, NagaRace.SnakeScaleColors) && changes < changeLimit) {
             outputText("[pg]");
-            color = randomChoice("black", "midnight", "midnight black");
+            color = randomChoice(NagaRace.SnakeScaleColors);
             outputText("[pg]Your hair suddenly tingles as "+color+" strands begins to cover your entire skalp and before long all of them are of same dark color.");
             player.hairColorOnly = color;
             changes++;
@@ -5360,26 +5325,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Skin color change – tan, olive, dark, light
-        if ((player.skin.base.color != "tan" && player.skin.base.color != "olive" && player.skin.base.color != "dark" && player.skin.base.color != "light") && changes < changeLimit && rand(3) == 0) {
+        if (!InCollection(player.skin.base.color, HumanRace.HumanSkinColors) && changes < changeLimit && rand(3) == 0) {
             changes++;
             outputText("[pg]It takes a while for you to notice, but <b>");
             if (player.hasFur()) outputText("the skin under your [skin coat.color] " + player.skinDesc);
             else outputText("your " + player.skinDesc);
             outputText(" has changed to become ");
-            switch (rand(4)) {
-                case 0:
-                    player.skin.base.color = "tan";
-                    break;
-                case 1:
-                    player.skin.base.color = "olive";
-                    break;
-                case 2:
-                    player.skin.base.color = "dark";
-                    break;
-                case 3:
-                    player.skin.base.color = "light";
-                    break;
-            }
+            player.skin.base.color = randomChoice(HumanRace.HumanSkinColors)
             outputText(player.skinTone + " colored.</b>");
         }
         //Change skin to normal
@@ -8247,13 +8199,13 @@ public final class Mutations extends MutationsHelper {
             outputText(player.modFem(85, 3 + rand(5)));
         }
         //-Skin color change – tan, olive, dark, light
-        if (!InCollection(player.skinTone, "tan", "olive", "dark", "light") && changes < changeLimit && rand(5) == 0) {
+        if (!InCollection(player.skinTone, HumanRace.HumanSkinColors) && changes < changeLimit && rand(5) == 0) {
             changes++;
             outputText("[pg]It takes a while for you to notice, but <b>");
             if (player.hasFur()) outputText("the skin under your " + player.coatColor + " " + player.skinDesc);
             else outputText("your " + player.skinDesc);
             outputText(" has changed to become ");
-            player.skin.base.color = randomChoice("tan", "olive", "dark", "light");
+            player.skin.base.color = randomChoice(HumanRace.HumanSkinColors);
             outputText(player.skin.base.color + " colored.</b>");
         }
         //-Grow hips out if narrow.
@@ -9465,7 +9417,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.lowerBody == LowerBody.ELF && player.arms.type == Arms.ELF && player.hasPlainSkinOnly() && player.skinAdj != "flawless" && changes < changeLimit && rand(3) == 0) {
             var color:String;
-            color = randomChoice("dark", "light", "tan");
+            color = randomChoice(ElfRace.ElfSkinColors);
             player.skin.base.color = color;
             outputText("[pg]Your skin begins to change again, impurities, scars and bruises disappearing entirely as your skin color changes to a " + player.skinTone + " tone. You examine your body discovering with surprise your skin is now extremely sensitive but also flawless just like that of an elf. ");
             outputText("It is beautiful and inviting to the touch, surely your opponents would beg for a chance to get but a single taste of your flawless body. <b>Your " + player.skinTone + " skin is now flawless just like that of the elves.</b>");
@@ -9482,9 +9434,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Hair Color
-        var elf_hair:Array = ["silver", "golden blonde", "leaf green", "black"];
-        if (!InCollection(player.hairColor, elf_hair) && changes < changeLimit && rand(3) == 0) {
-            player.hairColorOnly = randomChoice(elf_hair);
+        if (!InCollection(player.hairColor, ElfRace.ElfHairColors) && changes < changeLimit && rand(3) == 0) {
+            player.hairColorOnly = randomChoice(ElfRace.ElfHairColors);
             outputText("[pg]Your scalp begins to tingle, and you gently grasp a strand of hair, pulling it out to check it.  Your hair has become [haircolor]!");
         }
         //wings tf for high elfs xD
@@ -9592,10 +9543,8 @@ public final class Mutations extends MutationsHelper {
             }
             changes++;
         }
-        if (player.hasPlainSkinOnly() && changes < changeLimit && rand(3) == 0) {
-            var color:String;
-            color = randomChoice("green", "gray", "brown", "red", "sandy tan");
-            player.skin.base.color = color;
+        if (player.hasPlainSkinOnly() && !InCollection(player.skin.base.color, OrcRace.OrcSkinColors) && changes < changeLimit && rand(3) == 0) {
+            player.skin.base.color = randomChoice(OrcRace.OrcSkinColors);
             outputText("[pg]Whoah, that was weird.  You just hallucinated that your " + player.skinDesc + " turned " + player.skinTone + ".  No way!  It's staying, it really changed color!");
             changes++;
         }
@@ -10042,16 +9991,14 @@ public final class Mutations extends MutationsHelper {
                 transformations.SkinPatternOil.applyEffect();
 				changes++;
 			}
-			var tone:Array = ["snow white", "red", "pale white"];
-			if (!InCollection(player.skin.base.color, tone) && changes < changeLimit) {
+			if (!InCollection(player.skin.base.color, GazerRace.GazerSkinColors) && changes < changeLimit) {
 				outputText("[pg]You feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  Holding an arm up to your face, you discover that <b>you now have ");
-                player.skin.base.color = randomChoice(tone);
+                player.skin.base.color = randomChoice(GazerRace.GazerSkinColors);
 				outputText("[skin]!</b>");
 				changes++;
 			}
-			var Gazer_Colour:Array = ["black", "midnight", "midnight black"];
-			if (!InCollection(player.hairColor, Gazer_Colour) && changes < changeLimit && rand(3) == 0) {
-				player.hairColor = randomChoice(Gazer_Colour);
+			if (!InCollection(player.hairColor, GazerRace.GazerHairColors) && changes < changeLimit && rand(3) == 0) {
+				player.hairColor = randomChoice(GazerRace.GazerHairColors);
 				outputText("[pg]Your hair tingles as the strands turns <b>[haircolor]!</b>");
 			}
 		}
@@ -11326,11 +11273,10 @@ public final class Mutations extends MutationsHelper {
             else player.hairColor = randomChoice(KitsuneRace.BasicKitsuneHairColors);
             outputText("[pg]Your scalp begins to tingle, and you gently grasp a strand, pulling it forward to check it.  Your hair has become the same [haircolor] as a kitsune's!");
         });
-        var tone:Array = mystic ? ["dark", "ebony", "ashen", "sable", "milky white"] : ["tan", "olive", "light"];
+        var tone:Array = mystic ? KitsuneRace.ElderKitsuneSkinColors : KitsuneRace.BasicKitsuneSkinColors;
         //[Change Skin Type: remove fur or scales, change skin to Tan, Olive, or Light]
         var changed:Boolean = mutationStep(player.skin.hasFur()
-                && !InCollection(player.coatColor, KitsuneRace.KitsuneFurColors)
-                && !InCollection(player.coatColor, ["orange and white", "black and white", "red and white", "tan", "brown"])
+                && !InCollection(player.coatColor, KitsuneRace.KitsuneFurColors,["tan", "brown"])
                 || !player.skin.hasFur() && player.skin.hasCoat(), mystic ? 1 : 2, function ():void {
             outputText("[pg]You begin to tingle all over your [skin], starting as a cool, pleasant sensation but gradually worsening until you are furiously itching all over.");
             if (player.hasFur()) outputText("  You stare in horror as you pull your fingers away holding a handful of [skin coat.color] fur!  Your fur sloughs off your body in thick clumps, falling away to reveal patches of bare, " + player.skinTone + " skin.");
@@ -11355,8 +11301,7 @@ public final class Mutations extends MutationsHelper {
         });
         //Nipples Turn Back:
         mutationStep(player.hasStatusEffect(StatusEffects.BlackNipples), 3, function ():void {
-            outputText("[pg]Something invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
-            player.removeStatusEffect(StatusEffects.BlackNipples);
+            transformations.NipplesNoColor.applyEffect();
         });
         //Debugcunt
         mutationStep((player.vaginaType() == 5 || player.vaginaType() == 6) && player.hasVagina(), 3, function ():void {
@@ -12585,17 +12530,9 @@ public final class Mutations extends MutationsHelper {
         }
         //Change skin colour
         if (rand(boar ? 2 : 3) == 0 && changes < changeLimit) {
-            var skinChoose:int = rand(3);
             var skinToBeChosen:String;
-            if (boar) {
-                if (skinChoose == 0) skinToBeChosen = "pink";
-                else if (skinChoose == 1) skinToBeChosen = "dark blue";
-                else skinToBeChosen = "black";
-            } else {
-                if (skinChoose == 0) skinToBeChosen = "pink";
-                else if (skinChoose == 1) skinToBeChosen = "tan";
-                else skinToBeChosen = "sable";
-            }
+            if (boar) skinToBeChosen = randomChoice("pink", "dark blue", "black");
+            else skinToBeChosen = randomChoice("pink", "tan", "sable");
             outputText("[pg]Your skin tingles ever so slightly as you skin’s color changes before your eyes. As the tingling diminishes, you find that your skin has turned " + skinToBeChosen + ".");
             player.skin.base.color = skinToBeChosen;
             changes++;
@@ -13732,12 +13669,8 @@ public final class Mutations extends MutationsHelper {
             transformations.RearBodyGlacialAura.applyEffect(false);
             changes++;
         }
-        if (player.hasPlainSkinOnly() && player.skin.base.color != "glacial white" && player.skin.base.color != "light blue" && player.skin.base.color != "snow white" && player.skinAdj != "cold" && changes < changeLimit && rand(3) == 0) {
-            if (rand(3) == 0) player.skin.base.color = "glacial white";
-            else {
-                if (rand(2) == 0) player.skin.base.color = "light blue";
-                else player.skin.base.color = "snow white";
-            }
+        if (player.hasPlainSkinOnly() && !InCollection(player.skin.base.color, YukiOnnaRace.YukiOnnaSkinColors) && player.skinAdj != "cold" && changes < changeLimit && rand(3) == 0) {
+            player.skin.base.color = randomChoice(YukiOnnaRace.YukiOnnaSkinColors);
             player.skinAdj = "cold";
             outputText("[pg]You feel a rush of goosebumps spreading over your body. When you look down at yourself you see that your skin has been bleached of all color, not unlike someone who froze to death. <b>You now have snow white skin.</b>");
             changes++;
@@ -15099,10 +15032,9 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Red/Orange skin!
-        if ((player.skin.base.color != "red" || player.skin.base.color != "orange") && player.hasPlainSkinOnly() && changes < changeLimit && rand(3) == 0) {
+        if (!InCollection(player.skin.base.color, "red", "orange") && player.hasPlainSkinOnly() && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]Your [skin.type] ");
-            if (rand(2) == 0) player.skin.base.color = "red";
-            else player.skin.base.color = "orange";
+            player.skin.base.color = randomChoice("red", "orange");
             outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinTone + ".");
         }
         //Legs
@@ -15760,7 +15692,7 @@ public final class Mutations extends MutationsHelper {
         var skinColor:String = UshiOniRace.UshiOniSkinColors[type%6];
         if (player.hasPlainSkinOnly() && player.skinTone != skinColor && changes < changeLimit && rand(3) == 0) {
             player.skin.base.color = skinColor;
-            outputText("[pg]Your skin tingles ever so slightly as you skin’s color changes before your eyes. As the tingling diminishes, you find that your skin has turned " + player.skinTone + ".");
+            outputText("[pg]Your skin tingles ever so slightly as the color changes before your eyes. As the tingling diminishes, you find that your skin has turned " + player.skinTone + ".");
             changes++;
         }
         if (!player.hasPlainSkinOnly() && changes < changeLimit && rand(3) == 0) {
@@ -15772,7 +15704,7 @@ public final class Mutations extends MutationsHelper {
         var hairColor: String = UshiOniRace.UshiOniHairColors[type%6]
         if (player.hairType == Hair.NORMAL && player.hairColor != hairColor && changes < changeLimit && rand(3) == 0) {
             player.hairColor = hairColor;
-            outputText("[pg]Your head tingles as something in your hair change, the strands flashing for an instant before they turn " + hairColor + ".");
+            outputText("[pg]Your head tingles as something in your hair changes, the strands flashing for an instant before they turn " + hairColor + ".");
             changes++;
         }
 
@@ -16030,9 +15962,8 @@ public final class Mutations extends MutationsHelper {
                 outputText("[pg]You shiver as cold wind passes over your face. Something’s changed in your vision, and though you’re not sure what, you press on regardless. After going out and checking your reflection in a puddle, you discover your pupil color has changed to a blue as cold as ice. <b>You now have cold blue eyes.\n</b>");
                 changes++;
             }
-            var melkie_skinTone:Array = ["light", "fair", "pale"];
-            if ((!InCollection(player.skin.base.color, melkie_skinTone) && changes < changeLimit && rand(4) == 0)) {
-                player.skin.base.color = randomChoice(melkie_skinTone);
+            if ((!InCollection(player.skin.base.color, MelkieRace.MelkieSkinColors) && changes < changeLimit && rand(4) == 0)) {
+                player.skin.base.color = randomChoice(MelkieRace.MelkieSkinColors);
                 outputText("[pg]Your skin suddenly lightens. While lighter skin won't help you against cold weither you got the feeling that, despite this and against all logic, you won't die from freezing either, must be something related to Melkies.<b> You now have " + player.skinTone + " skin.</b>");
                 changes++;
             }
@@ -16045,10 +15976,9 @@ public final class Mutations extends MutationsHelper {
             }
 
             //Change hair color
-            var melkie_hair:Array = ["blonde", "platinum blonde"];
-            if ((!InCollection(player.hairColor, melkie_hair) || player.hairType == Hair.NORMAL) && changes < changeLimit && rand(2) == 0) {
-                if (!InCollection(player.hairColor, melkie_hair)) {
-                    player.hairColorOnly = randomChoice(melkie_hair);
+            if ((!InCollection(player.hairColor, MelkieRace.MelkieHairColors) || player.hairType == Hair.NORMAL) && changes < changeLimit && rand(2) == 0) {
+                if (!InCollection(player.hairColor, MelkieRace.MelkieHairColors)) {//TODO is there a Melkie hair type?
+                    player.hairColorOnly = randomChoice(MelkieRace.MelkieHairColors);
                     outputText("[pg]Your head tingles as something in your hair change, the strands flashing for an instant before they turn " + player.hairColor + " just like those of a Melkie.\n<");
                     changes++;
                 }
@@ -16105,15 +16035,14 @@ public final class Mutations extends MutationsHelper {
                 changes++;
             }
             //Partial fur
-            var melkie_FurColor:Array = ["gray", "silver", "white", "glacial white", "light gray"];
             if (!player.hasPartialCoat(Skin.FUR) && player.lowerBody == LowerBody.MELKIE && changes < changeLimit && rand(4) == 0) {
                 outputText("[pg]");
-                transformations.SkinFur(Skin.COVERAGE_LOW, {colors: melkie_FurColor}).applyEffect();
+                transformations.SkinFur(Skin.COVERAGE_LOW, {colors: MelkieRace.MelkieFurColors}).applyEffect();
                 changes++;
             }
-            if (player.hasPartialCoat(Skin.FUR) && !InCollection(player.coatColor, melkie_FurColor) && changes < changeLimit && rand(4) == 0) {
+            if (player.hasPartialCoat(Skin.FUR) && !InCollection(player.coatColor, MelkieRace.MelkieFurColors) && changes < changeLimit && rand(4) == 0) {
                 outputText("[pg]");
-                transformations.SkinFur(Skin.COVERAGE_LOW, {colors: melkie_FurColor}).applyEffect();
+                transformations.SkinFur(Skin.COVERAGE_LOW, {colors: MelkieRace.MelkieFurColors}).applyEffect();
                 changes++;
             }
             //Arms
