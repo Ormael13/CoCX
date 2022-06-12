@@ -2393,7 +2393,7 @@ public class KitsuneScene extends BaseContent
 		private function meditateLikeAKitsuneEhQuestionMark():void
 		{
 			var tailz:int = meditateAtKitsuneShrine();
-			trace("tails: " + tailz);
+			//trace("tails: " + tailz);
 			if (tailz == 9 && flags[kFLAGS.AYANE_FOLLOWER] == 0) {
 				outputText("\n\nAyane approaches and bows to you in reverence. \"<i>You have acquired a near deific status [name], as a priestess of Taoth it would be an honor to serve as your attendant. That is, if you would allow me to follow and assist you.</i>\"");
 				outputText("\n\nA little surprised, you ask Ayane why she wants to serve you.");
