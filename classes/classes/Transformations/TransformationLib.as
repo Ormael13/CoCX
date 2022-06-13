@@ -5431,7 +5431,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	public const ArmsAvian: Transformation = new SimpleTransformation("Avian Arms",
 	  // apply effect
-	  function (doOutput: Boolean): void {//TODO Metamorph
+	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
 	    if (player.skin.hasChitin()) {
@@ -5453,6 +5453,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.arms.type = Arms.AVIAN;
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.AVIAN));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5837,6 +5838,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.gills.type = Gills.ANEMONE;
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(GillsMem.getMemory(GillsMem.ANEMONE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -10256,7 +10258,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				desc += "[pg]Your [allbreasts] tingle with warmth that slowly migrates to your nipples, filling them with warmth.  You pant and moan, rubbing them with your fingers.  A trickle of wetness suddenly coats your finger as it slips inside the nipple.  Shocked, you pull the finger free.  <b>You now have fuckable nipples!</b>";
 				//Talk about if anything was changed.
 				if (doOutput && nowFuckable) outputText(desc);
-				Metamorph.unlockMetamorph(BreastMem.getMemory(BreastMem.FUCKNIPPLE));
+				if (nowFuckable) Metamorph.unlockMetamorph(BreastMem.getMemory(BreastMem.FUCKNIPPLE));
 			},
 			// is present
 			function ():Boolean {
@@ -11137,7 +11139,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						desc += "Your " + num2Text2(cock+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your [cock "+(cock+1)+"] has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a";
 
 						if(player.tentacleCocks() > 0) outputText("nother");
-						outputText(" tentacle-cock!</b>");
+						desc +=" tentacle-cock!</b>";
 					}
 					else {
 						desc += GrowCockGenericText();
@@ -11812,7 +11814,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (thickness != 1)
 						player.cocks[cock].cockThickness = thickness;
 					if (player.cocks[cock].cockThickness < 1.5)
-						player.cocks[cock].thicken(2);
+						player.cocks[cock].thickenCock(2);
 					if (player.cocks[cock].knotMultiplier < knot) player.cocks[cock].knotMultiplier = knot;
 					player.cocks[cock].cockType = CockTypesEnum.WOLF;
 

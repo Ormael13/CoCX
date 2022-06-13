@@ -9510,7 +9510,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasPlainSkinOnly() && !InCollection(player.skin.base.color, OrcRace.OrcSkinColors) && changes < changeLimit && rand(3) == 0) {
             player.skin.base.color = randomChoice(OrcRace.OrcSkinColors);
-            outputText("[pg]Whoah, that was weird.  You just hallucinated that your " + player.skinDesc + " turned " + player.skinTone + ".  No way!  It's staying, it really changed color!");
+            outputText("[pg]Whoah, that was weird.  You just hallucinated that your " + player.skinDesc + " turned " + player.skin.base.color + ".  No way!  It's staying, it really changed color!");
             changes++;
         }
         if (!player.hasPlainSkinOnly() && changes < changeLimit && rand(3) == 0) {
