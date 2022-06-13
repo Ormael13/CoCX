@@ -177,7 +177,7 @@ public class Changelog extends BaseContent
 			outputText("-More npc's (21) when recruited to camp will give radiant shard.\n");
 			outputText("-Additional Soulforce from training was changed form adding flat value to % - so instead of 2,330 it will increase SF cap by 2,330 %.\n");
 			outputText("-Pawnshop added bulk sale gem bonus from Merchant outfit. Improved Amily Efficiency (hermify) option. (EragonX)\n");
-			outputText("-\n");
+			outputText("-Many typo corrections by Pyromania.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
