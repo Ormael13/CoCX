@@ -39,9 +39,9 @@ import classes.Scenes.SceneLib;
 			return SceneLib.amilyScene.amilyFollower();
 		}
 		// Anemone
-		protected function get anemoneScene():AnemoneScene
+		protected function get kidAScene():KidAScene
 		{
-			return SceneLib.anemoneScene;
+			return SceneLib.kidAScene;
 		}
 		// Arian
 		protected function get arianScene():ArianScene

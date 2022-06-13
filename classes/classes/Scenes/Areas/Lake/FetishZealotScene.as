@@ -316,6 +316,7 @@ public class FetishZealotScene extends AbstractLakeContent
 
 		private function mindbreakMaleCultist():void{
 			clearOutput();
+			if (silly()) outputText("<b>ASSUMING DIRECT CONTROL</b>\n\n");
 			outputText("As the fetish cultist drops to the ground, it occurs to you that Kaerb-Dnim wants you to invite more people to the ‘game’." +
 					" This guy doesn’t even need you in his brain to blabber insanity." +
 					" He's likely already insane, but perhaps you can fix him still." +

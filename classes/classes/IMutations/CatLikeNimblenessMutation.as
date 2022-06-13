@@ -53,8 +53,9 @@ public class CatLikeNimblenessMutation extends IMutationPerkType
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requirePerk(PerkLib.Flexibility)
-                            .requireRacialGroup(Races.CatlikeRaces, "Any cat race");
+                    this.requireAdaptationsMutationSlot()
+                    .requirePerk(PerkLib.Flexibility)
+                    .requireRacialGroup(Races.CatlikeRaces, "Any cat race");
                 }
                 else{
                     var pLvl:int = pTier * 30;

@@ -378,6 +378,8 @@ import coc.view.MainView;
             //keep settings flags
 			if (player.hasKeyItem("Ascension") >= 0) {
 				for each(var flag:int in [
+					kFLAGS.BACKGROUND_STYLE,
+					kFLAGS.CUSTOM_FONT_SIZE,
                     kFLAGS.NEW_GAME_PLUS_LEVEL,
                     kFLAGS.HUNGER_ENABLED,
                     kFLAGS.HARDCORE_MODE,
@@ -1821,6 +1823,7 @@ import coc.view.MainView;
 			addButton(2, "Rare Perks(1)", rarePerks1).hint("Spend Ascension Points on rare special perks!", "Perk Selection");
 			addButton(3, "Rare Perks(2)", rarePerks2).hint("Spend Ascension Points on rare special perks!", "Perk Selection");
 			addButton(5, "Perm Perks", ascensionPermeryMenu).hint("Spend Ascension Perk Points to make certain perks permanent (5/10 points).", "Perk Selection");
+			genMemPatch();
 			if (player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory)) {
 				if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) < player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) {
 					addButton(6, "Perm Met.", ascensionMetamorphPermMenu).hint("Spend Ascension Perk Points to make certain Metamorphs permanent.", "Permanent Metamorphs");
@@ -1839,6 +1842,12 @@ import coc.view.MainView;
 			addButton(10, "Rename", renamePrompt).hint("Change your name at no charge.");
 			if (!migration) addButton(14, "Reincarnate", reincarnatePrompt).hint("Reincarnate and start an entirely new adventure.");
 			else addButton(14, "Return", returnFromUpdateAscension).hint("Go back to your camp after updating your Ascension perks. (Only available during updates that refund points like this)");
+		}
+		private function genMemPatch():void{	//Cause for some fuckall rason the status gets wiped on ascending.
+			if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX) && !player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory)) {
+				var permedMetamorphCount:int = Metamorph.PermanentMemoryStorage.length;
+				player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15 * player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX), permedMetamorphCount, 0, 0);
+			}
 		}
 		private function ascensionPerkMenu():void {
 			clearOutput();
@@ -2299,13 +2308,13 @@ import coc.view.MainView;
 						addButtonDisabled(btn, "Gen. Memory", "You have acquired the highest tier available.");
 					}
 					else {
-						addButton(btn, "Gen. Memory", curry(perkRPConfirm, tier, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost *1, 2));
 						if (tier == 1){
 							player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15, 0, 0, 9000);
 						}
 						else{
 							player.changeStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 15 * tier);
 						}
+						addButton(btn, "Gen. Memory", curry(perkRPConfirm, tier, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost *1, 2));
 					}
 				}
 			}
@@ -2805,6 +2814,10 @@ import coc.view.MainView;
 				{
 					name: "Balls",
 					func: accessBallsMenu
+				},
+				{
+					name: "Specials",
+					func: accessSexSpecialsMenu
 				}
 			];
 
@@ -2925,6 +2938,10 @@ import coc.view.MainView;
 
 		private function accessBallsMenu(currentPage: int = 0): void {
 			openPaginatedMetamorphMenu("Balls", accessBallsMenu, currentPage, BallsMem.Memories);
+		}
+
+		private function accessSexSpecialsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Specials", accessSexSpecialsMenu, currentPage, SpecialsMem.Memories);
 		}
 
 		private function openPaginatedMetamorphMenu (title: String, thisMenu: *, currentPage: int, memArray:Array): void {

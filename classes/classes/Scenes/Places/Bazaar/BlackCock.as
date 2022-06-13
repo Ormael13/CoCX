@@ -1402,17 +1402,7 @@ import classes.lists.Gender;
 		//------------
 		public function satyrTFs():void {
 			var changes:int = 0;
-			var changeLimit:int = 3;
-			if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
-			if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
-			if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
-			if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
-			if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
-			if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
-			if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
-			if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
-			if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
-			if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
+			var changeLimit:int = 3 + player.additionalTransformationChances;
 			//Stats and genital changes
 			if (rand(2) == 0) {
 				outputText("\n\nHeat floods your loins as thoughts of tight round asses and dripping pussies flood your mind.");
@@ -1528,17 +1518,7 @@ import classes.lists.Gender;
 
 		public function rhinoTFs():void {
 			var changes:int = 0;
-			var changeLimit:int = 3;
-			if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
-			if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
-			if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
-			if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
-			if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
-			if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
-			if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
-			if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
-			if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
-			if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
+			var changeLimit:int = 3 + player.additionalTransformationChances;
 			// Stats Changes
 			//------------
 			if (rand(3) == 0 && player.str < 100) {
@@ -1813,17 +1793,7 @@ import classes.lists.Gender;
 
 		public function echidnaTFs():void {
 			var changes:int = 0;
-			var changeLimit:int = 3;
-			if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
-			if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
-			if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
-			if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
-			if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
-			if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
-			if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
-			if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
-			if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
-			if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
+			var changeLimit:int = 3 + player.additionalTransformationChances;
 			var i:int = 0;
 			// Stats Changes
 			//------------
@@ -1856,11 +1826,8 @@ import classes.lists.Gender;
 				player.eyes.type = Eyes.HUMAN;
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.averageNipplesPerBreast() > 4) {
-				outputText("\n\nA tightness arises in your nipples as three out of four on each breast recede completely, the leftover nipples migrating to the middle of your breasts. <b>You are left with only one nipple on each breast.</b>");
-				for (i = 0; i < player.breastRows.length; i++) {
-					player.breastRows[i].nipplesPerBreast = 1;
-				}
+			if (rand(3) == 0 && changes < changeLimit && player.averageNipplesPerBreast() >= 4) {
+				transformations.NipplesPerBreastOne.applyEffect();
 				changes++;
 			}
 			// Main TFs

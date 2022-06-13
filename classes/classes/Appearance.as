@@ -2415,33 +2415,17 @@ public class Appearance extends Utils
 			var descript:String = "";
 			var currCock:Number = 0;
 			var totCock:Number = creature.cocks.length;
-			var dogCocks:Number = 0;
-			var horseCocks:Number = 0;
 			var normalCocks:Number = 0;
-			var normalCockKey:Number = 0;
-			var dogCockKey:Number = 0;
-			var horseCockKey:Number = 0;
 			var averageLength:Number = 0;
 			var averageThickness:Number = 0;
 			var same:Boolean = true;
 			//For temp14 random values
 			var rando:Number = 0;
-			var descripted:Boolean = false;
 			//Count cocks & Prep average totals
 			while (currCock <= totCock - 1) {
 				//trace("Counting cocks!");
-				if (creature.cocks[currCock].cockType == CockTypesEnum.HUMAN) {
+				if (creature.cocks[currCock].cockType == CockTypesEnum.HUMAN)
 					normalCocks++;
-					normalCockKey = currCock;
-				}
-				if (creature.cocks[currCock].cockType == CockTypesEnum.HORSE) {
-					horseCocks++;
-					horseCockKey = currCock;
-				}
-				if (creature.cocks[currCock].cockType == CockTypesEnum.DOG) {
-					dogCocks++;
-					dogCockKey = currCock;
-				}
 				averageLength += creature.cocks[currCock].cockLength;
 				averageThickness += creature.cocks[currCock].cockThickness;
 				//If cocks are matched make sure they still are
@@ -2453,23 +2437,15 @@ public class Appearance extends Utils
 			averageThickness /= currCock;
 			//Quantity descriptors
 			if (currCock == 1) {
-				if (dogCocks == 1) return cockNoun(CockTypesEnum.DOG);
-				if (horseCocks == 1) return cockNoun(CockTypesEnum.HORSE);
-				if (normalCocks == 1) return cockDescript(creature,0);
-				//Catch-all for when I add more cocks.  Let cock descript do the sorting.
-				if (creature.cocks.length == 1) return cockDescript(creature,0);
+				return cockDescript(creature,0);
 			}
 			if (currCock == 2) {
 				//For cocks that are the same
 				if (same) {
 					descript += randomChoice("a pair of ", "two ", "a brace of ", "matching ", "twin ");
 					descript += cockAdjectives(averageLength, averageThickness, creature.cocks[0].cockType, creature);
-					if (normalCocks == 2) descript += " " + cockNoun(CockTypesEnum.HUMAN) + "s";
-					if (horseCocks == 2) descript += ", " + cockNoun(CockTypesEnum.HORSE) + "s";
-					if (dogCocks == 2) descript += ", " + cockNoun(CockTypesEnum.DOG) + "s";
-					//Tentacles
-					if (creature.cocks[0].cockType.Index > 2)
-						descript += ", " + cockNoun(creature.cocks[0].cockType) + "s";
+					if (normalCocks != 2) descript += ",";
+					descript += " " + cockNoun(creature.cocks[0].cockType) + "s";
 				}
 				//Nonidentical
 				else {
@@ -2483,14 +2459,8 @@ public class Appearance extends Utils
 				if (same) {
 					descript += randomChoice("three ", "a group of ", "a <i>ménage à trois</i> of ", "a triad of ", "a triumvirate of ");
 					descript += cockAdjectives(averageLength, averageThickness, creature.cocks[currCock - 1].cockType, creature);
-					if (normalCocks == 3)
-						descript += " " + cockNoun(CockTypesEnum.HUMAN) + "s";
-					if (horseCocks == 3)
-						descript += ", " + cockNoun(CockTypesEnum.HORSE) + "s";
-					if (dogCocks == 3)
-						descript += ", " + cockNoun(CockTypesEnum.DOG) + "s";
-					//Tentacles
-					if (creature.cocks[0].cockType.Index > 2) descript += ", " + cockNoun(creature.cocks[0].cockType) + "s";   // Not sure what's going on here, referencing index *may* be a bug.
+					if (normalCocks != 3) descript += ",";
+					descript += " " + cockNoun(creature.cocks[0].cockType) + "s";
 
 				}
 				else {
@@ -2503,34 +2473,15 @@ public class Appearance extends Utils
 			if (currCock > 3) {
 				descript += randomChoice("a bundle of ", "an obscene group of ", "a cluster of ", "a wriggling group of ");
 				//Cock adjectives and nouns
-				descripted = false;
 				//If same types...
 				if (same) {
-					if (creature.cocks[0].cockType == CockTypesEnum.HUMAN) {
-						descript += cockAdjectives(averageLength, averageThickness, CockTypesEnum.HUMAN, creature) + " ";
-						descript += cockNoun(CockTypesEnum.HUMAN) + "s";
-						descripted = true;
-					}
-					if (creature.cocks[0].cockType == CockTypesEnum.DOG) {
-						descript += cockAdjectives(averageLength, averageThickness, CockTypesEnum.DOG, creature) + ", ";
-						descript += cockNoun(CockTypesEnum.DOG) + "s";
-						descripted = true;
-					}
-					if (creature.cocks[0].cockType == CockTypesEnum.HORSE) {
-						descript += cockAdjectives(averageLength, averageThickness, CockTypesEnum.HORSE, creature) + ", ";
-						descript += cockNoun(CockTypesEnum.HORSE) + "s";
-						descripted = true;
-					}
-					if (creature.cocks[0].cockType.Index > 2) {
-						descript += cockAdjectives(averageLength, averageThickness, CockTypesEnum.HUMAN, creature) + ", ";
-						descript += cockNoun(creature.cocks[0].cockType) + "s";
-						descripted = true;
-					}
+					descript += cockAdjectives(averageLength, averageThickness, CockTypesEnum.HUMAN, creature);
+					if (normalCocks == 0) descript += ","
+					descript += " " + cockNoun(creature.cocks[0].cockType) + "s";
 				}
 				//If mixed
-				if (!descripted) {
+				else {
 					descript += cockAdjectives(averageLength, averageThickness, creature.cocks[0].cockType, creature) + ", ";
-					rando = rand(4);
 					descript += randomChoice("mutated cocks", "mutated dicks", "mixed cocks", "mismatched dicks");
 				}
 			}

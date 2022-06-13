@@ -33,6 +33,7 @@ import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.NPCs.*;
+import classes.Scenes.Places.Boat.Anemone;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
@@ -2607,7 +2608,7 @@ public class Combat extends BaseContent {
     internal function wait():void {
         var skipMonsterAction:Boolean = false; // If false, enemyAI() will be called. If true, combatRoundOver()
         flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 1;
-        fatigue(-5);
+        fatigueRecovery1();
         wrathregeneration1();
         manaregeneration1();
         soulforceregeneration1();
@@ -4977,7 +4978,7 @@ public class Combat extends BaseContent {
             manaregeneration1();
             soulforceregeneration1();
 			venomCombatRecharge1();
-        }
+        } 
         enemyAI();
     }
 
@@ -8965,6 +8966,7 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.TwinHeartIM) >= 1 && (player.isTaur() || player.isDrider())) multi += 0.6;
         if (player.perkv1(IMutationsLib.TwinHeartIM) >= 2 && (player.isTaur() || player.isDrider())) multi += 0.6;
         if (player.perkv1(IMutationsLib.TwinHeartIM) >= 3 && (player.isTaur() || player.isDrider())) multi += 0.6;
+		if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1 || (player.hasStatusEffect(StatusEffects.Defend) && player.hasPerk(PerkLib.DefenceStance))) multi *= 2;
         return multi;
     }
 
@@ -10283,7 +10285,7 @@ public class Combat extends BaseContent {
                 outputText("<b>You feel your lifeforce slipping away, leaving you weaker, slower, your mind reeling.  This ailment is crippling, and getting worse. Finish this fight quickly!</b>\n\n");
                 player.takePhysDamage(500);
             } else */if (EvangelineFollower.EvangelineAffectionMeter >= 2) {
-                outputText("<b>You feel your lifeforce slipping away, leaving you weaker, slower, your mind reeling.  You better finsh this fight fast, or find a way to cure this ailment...You know you can't keep this up forever.</b>\n\n");
+                outputText("<b>You feel your lifeforce slipping away, leaving you weaker, slower, your mind reeling.  You better finish this fight fast, or find a way to cure this ailment...You know you can't keep this up forever.</b>\n\n");
                 if (player.maxHP() < 1000) player.takePhysDamage(player.maxHP() * 0.1);//maybe make them true damage?
                 else player.takePhysDamage(100);
 			}
@@ -11156,6 +11158,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.Necromancy)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
 		if (player.hasPerk(PerkLib.RecoveryMantra)) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
 		if (player.hasKeyItem("Cultivation Manual: Duality") >= 0) gainedsoulforce += Math.round(player.maxSoulforce() * 0.01);
+		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0) gainedsoulforce += Math.round(player.maxSoulforce() * 0.02);
 		gainedsoulforce = Math.round(gainedsoulforce * 0.02 * minutes);
 		if (player.hasPerk(PerkLib.EnergyDependent)) gainedsoulforce = 0;
 		EngineCore.SoulforceChange(gainedsoulforce, false);

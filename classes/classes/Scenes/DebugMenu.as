@@ -25,7 +25,6 @@ import classes.Scenes.NPCs.JojoScene;
 import classes.Transformations.PossibleEffect;
 import classes.Transformations.Transformation;
 import classes.internals.EnumValue;
-import classes.internals.race.RacialRequirement;
 
 import coc.view.Block;
 import coc.view.Color;
@@ -1173,52 +1172,12 @@ public class DebugMenu extends BaseContent
 		];
 		private function AlrauneDebug():void {
 			outputText("\n\nSet all cocks to tentacle and lower body to alraune!");
+			if (player.cocks.length > 0)
+				player.killCocks(-1);
 			if (player.cocks.length == 0) {
 				if (player.balls > 0) player.balls = 0;
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.cocks[0].cockType = CockTypesEnum.STAMEN;
-				player.cocks[1].cockType = CockTypesEnum.STAMEN;
-				player.cocks[2].cockType = CockTypesEnum.STAMEN;
-				player.cocks[3].cockType = CockTypesEnum.STAMEN;
-				player.cocks[4].cockType = CockTypesEnum.STAMEN;
-				player.cocks[5].cockType = CockTypesEnum.STAMEN;
-				player.cocks[6].cockType = CockTypesEnum.STAMEN;
-				player.cocks[7].cockType = CockTypesEnum.STAMEN;
-				player.cocks[8].cockType = CockTypesEnum.STAMEN;
-				player.cocks[9].cockType = CockTypesEnum.STAMEN;
-			}
-			if (player.cocks.length > 0) {
-				player.killCocks(-1);
-				if (player.balls > 0) player.balls = 0;
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-				player.cocks[0].cockType = CockTypesEnum.STAMEN;
-				player.cocks[1].cockType = CockTypesEnum.STAMEN;
-				player.cocks[2].cockType = CockTypesEnum.STAMEN;
-				player.cocks[3].cockType = CockTypesEnum.STAMEN;
-				player.cocks[4].cockType = CockTypesEnum.STAMEN;
-				player.cocks[5].cockType = CockTypesEnum.STAMEN;
-				player.cocks[6].cockType = CockTypesEnum.STAMEN;
-				player.cocks[7].cockType = CockTypesEnum.STAMEN;
-				player.cocks[8].cockType = CockTypesEnum.STAMEN;
-				player.cocks[9].cockType = CockTypesEnum.STAMEN;
+				for (var i:int = 0; i<10; i++)
+					transformations.CockStamen(i, 7 + rand(7), 1.5 + rand(10) / 10).applyEffect(false);
 			}
 			if (!player.hasStatusEffect(StatusEffects.AlrauneFlower)) player.createStatusEffect(StatusEffects.AlrauneFlower,0,0,0,0);
 			if (player.wings.type == Wings.PLANT) player.wings.type = Wings.NONE;
@@ -1409,7 +1368,7 @@ public class DebugMenu extends BaseContent
 
 		private function eventTriggerMenu():void {
 			menu();
-			addButton(0, "Anemone", SceneLib.anemoneScene.anemoneKidBirthPtII);
+			addButton(0, "Anemone", SceneLib.kidAScene.anemoneKidBirthPtII);
 			//addButton(0, "Marae Purify", CoC.instance.highMountains.minervaScene.minervaPurification.purificationByMarae);
 			//addButton(1, "Jojo Purify", CoC.instance.highMountains.minervaScene.minervaPurification.purificationByJojoPart1);
 			//addButton(2, "Rathazul Purify", CoC.instance.highMountains.minervaScene.minervaPurification.purificationByRathazul);
