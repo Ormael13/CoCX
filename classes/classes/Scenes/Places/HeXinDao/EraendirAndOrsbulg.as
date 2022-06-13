@@ -4,11 +4,9 @@
  */
 package classes.Scenes.Places.HeXinDao 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.SceneLib;
-	
-	public class EraendirAndOrsbulg extends HeXinDaoAbstractContent
+import classes.*;
+
+public class EraendirAndOrsbulg extends HeXinDaoAbstractContent
 	{
 		
 		public function EraendirAndOrsbulg() 
