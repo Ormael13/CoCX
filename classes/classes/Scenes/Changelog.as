@@ -4026,4 +4026,4 @@ public class Changelog extends BaseContent
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 	}
-}
+}

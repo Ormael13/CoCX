@@ -1499,7 +1499,7 @@ import classes.lists.Gender;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.antennae.type != Antennae.NONE) {
-				outputText("You feel heat blooming in your head, centered at your antennae.type. It is a feeling similar to the burn of alcohol. When you reach up to inspect them your hands find nothing but quickly dispersing smoke. <b>You no longer have a pair of antennae.type.</b>");
+				outputText("You feel heat blooming in your head, centered at your [antennae]. It is a feeling similar to the burn of alcohol. When you reach up to inspect them your hands find nothing but quickly dispersing smoke. <b>You no longer have a pair of antennae.type.</b>");
 				player.antennae.type = Antennae.NONE;
 				changes++;
 			}
@@ -1621,7 +1621,7 @@ import classes.lists.Gender;
 			}
 			//Removes antennaes!
 			if (rand(3) == 0 && changes < changeLimit && player.antennae.type > Antennae.NONE) {
-				outputText("\n\nYour " + hairDescript() + " itches so you give it a scratch, only to have your antennae.type fall to the ground. What a relief. <b>You've lost your antennae.type!</b>");
+				outputText("\n\nYour " + hairDescript() + " itches so you give it a scratch, only to have your [antennae] fall to the ground. What a relief. <b>You've lost your [antennae]!</b>");
 				changes++;
 				player.antennae.type = Antennae.NONE;
 			}

@@ -90,6 +90,7 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Benoite ('Femoit'): when impregnating her, you can select the size of the resultant clutch.");
         outputText("\n- Imps - 'regular' imp menu now accesible from imp lord/overlord menu.");
         outputText("\n- Whitney - can switch between sub and dom and reset oral training stages.");
+        outputText("\n- 'Recall' - opens up alt versions of some scenes that probably nobody wants to see normally, but still might be interesting.")
         outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical and you don't get nonsense like Amily living with corrupt Jojo), but be warned that the original writers probably intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
 
@@ -511,6 +512,12 @@ public class SceneHunter extends BaseContent {
     */
     public var _recalling:Boolean = false; //set to true when a scene is recalled.
 
+    /*
+    * TODO: My list for adding stuff to "new recall" for NPCs
+    * rapeZeVapula
+    * enslaveVapulaAsSomething
+    *  */
+
     public function recallScenes():void {
         clearOutput();
         outputText("You close your eyes, remembering all this life put you through. All your fights, friends... lovers.\n\n");
@@ -563,6 +570,11 @@ public class SceneHunter extends BaseContent {
         //Sapphire
         if (flags[kFLAGS.SAPPHIRE_AFFECTION] == 100)
             addButton(5, "SapphireFirst", SceneLib.templeofdivine.sapphire.sapphireFirstTime).hint("Sapphire discovers carnal pleasures");
+        if (flags[kFLAGS.OWCA_SACRIFICE_DISABLED])
+            addButton(6, "OwcaDemons", SceneLib.owca.loseOrSubmitToVapula).hint("Why not submit to lusty demons again, huh?");
+        if (flags[kFLAGS.OWCA_UNLOCKED] == -1 || sceneHunter.other && flags[kFLAGS.OWCA_SACRIFICE_DISABLED])
+            addButton(7, "RapeRebecc", SceneLib.owca.loseOrSubmitToVapula).hint("Payback for the sheep-girl.");
+
         //Sub-pages
         if (player.hasStatusEffect(StatusEffects.MetWhitney) && player.statusEffectv1(StatusEffects.MetWhitney) > 1)
             addButton(10, "Farm", recallScenes_farm);
@@ -570,12 +582,8 @@ public class SceneHunter extends BaseContent {
     }
 
     private function recallScenes_farm():void {
-        if (player.hasStatusEffect(StatusEffects.KeltOff)) //allowing for Kelly in 'Other' because I want!
-            addButton(0, "KeltRape", SceneLib.farm.keltScene.fuckKeltsShitUp).hint("Your revenge for Kelt.");
-        else if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) {
-            if (sceneHunter.other) addButton(0, "KeltRape", SceneLib.farm.keltScene.fuckKeltsShitUp).hint("Alt. Kelt revenge. <b>Available because I want. Not a bug.</b>");
-            else addButtonDisabled(0, "KeltRape", "Enable 'Other' in SH to see it too.");
-        }
+        if (player.hasStatusEffect(StatusEffects.KeltOff) || sceneHunter.other && flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) //allowing for Kelly in 'Other' because I want!
+            addButton(0, "KeltRape", SceneLib.farm.keltScene.fuckKeltsShitUp).hint("Revenge for the arrogant centaur.");
         if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 1)
             addButton(1, "KeltBreak1", SceneLib.farm.kelly.breakKeltGo).hint("Kelt Breaking - Stage 1.</b>");
                 SceneLib.farm.kelly.breakKeltGo();
