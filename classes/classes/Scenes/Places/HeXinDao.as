@@ -16,14 +16,12 @@ import classes.Scenes.Dungeons.HiddenCave.BossGolems;
 import classes.Scenes.Dungeons.RiverDungeon;
 import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.ChiChiFollower;
-import classes.Scenes.NPCs.NeisaFollower;
 import classes.Scenes.Places.HeXinDao.*;
 import classes.Scenes.SceneLib;
 
 public class HeXinDao extends BaseContent
 {
     public var ignisarenaseer:IgnisArenaSeerScene = new IgnisArenaSeerScene();
-    public var neisaScene:NeisaFollower = new NeisaFollower();
     public var chichiScene:ChiChiFollower = new ChiChiFollower();
     public var riverdungeon:RiverDungeon = new RiverDungeon();
 	public var eraendirorsbulg:EraendirAndOrsbulg = new EraendirAndOrsbulg();
@@ -114,7 +112,7 @@ public class HeXinDao extends BaseContent
     }
 	public function riverislandVillageStuffLunarFireworks():void {
 		clearOutput();
-		outputText("There are some extravagantly beautiful fireworks exploding in the sky above town. Red rockets are regularly shot up, exploding in bright flashes. You chuckle inside pondering what would happen if some harpy were to fly into one of those fireworks… would it become roasted chicken? Speaking of chickens while you were thinking about harpies a few imps indeed drop dead from the sky. They must've got a little too close to the explosion and got caught in the blast.");
+		outputText("There are some extravagantly beautiful fireworks exploding in the sky above town. Red rockets are regularly shot up, exploding in bright flashes. You chuckle inside pondering what would happen if some harpy were to fly into one of those fireworks… would it become roasted chicken? Speaking of chickens while you were thinking about harpies a few imps indeed drop-dead from the sky. They must've got a little too close to the explosion and got caught in the blast.");
 		doNext(camp.returnToCampUseFourHours);
 	}
 	public function riverislandVillageStuffLunarChiChi():void {
@@ -148,8 +146,8 @@ public class HeXinDao extends BaseContent
         spriteSelect(null);
         clearOutput();
         outputText("He'Xin'Dao is a large village connected and assembled between many smaller islands in the middle of large river that flows from the east to the west. In addition to the bridges connecting each of the islands together, two larger bridges connects them as a whole to both sides of the river, serving as the only points of access to the village.  The village is strategically laid out, preventing anyone from entering by swimming directly from the river to any of the islands, forcing anyone who can't fly to use the bridges if they wish to enter.\n");
-        outputText("\n\nNear one of major bridges is a wide variety of shops, ranging from a few shops with vicious-looking weapons, to one shop with a goblin out front, hawking what appears to be golem-making materials. On the opposite side of village, near other bridge is a medium sized shop with a large 'Currency Transfer' sign. A market chock full of seemingly random items is in the same building, and as you get closer, you recognize several transformative items from your travels in this realm.");
-        outputText("\n\nAt the West end of He'Xin'Dao you see one of biggest buildings here. The roar of a crowd rises up from it occasionally, and when you listen close, you can hear the rasping of blades, and various other sounds of combat. You assume it's a local arena.");	//Side question, why can't the ones with wings fly in? Answered: Because flying cultivators would kick their asses. 
+        outputText("\n\nNear one of major bridges is a wide variety of shops, ranging from a few shops with vicious-looking weapons, to one shop with a goblin out front, hawking what appears to be golem-making materials. On the opposite side of village, near other bridge is a medium-sized shop with a large 'Currency Transfer' sign. A market chock-full of seemingly random items is in the same building, and as you get closer, you recognize several transformative items from your travels in this realm.");
+        outputText("\n\nAt the West end of He'Xin'Dao you see one of the biggest buildings here. The roar of a crowd rises up from it occasionally, and when you listen close, you can hear the rasping of blades, and various other sounds of combat. You assume it's a local arena.");	//Side question, why can't the ones with wings fly in? Answered: Because flying cultivators would kick their asses.
         outputText("You notice several towers, positioned at central points on some of the larger islands. These hardy-looking wood and stone constructions have open, flat roofs, and several people perch on each. \n\n.");
 	outputText("While at first glance, these people seem random. Some wield bows, others daggers, a few with no weapons at all...But as you focus on them, you can <i> feel </i> their soulforce, almost reacting to your attention. \n\n");
 	outputText("As you look even closer into the sky, you see a few glints of light, something metal in the sky reflecting the sun's rays. Are those...people riding on flying swords? \n\n"); 
@@ -221,7 +219,7 @@ public class HeXinDao extends BaseContent
 				).hint("Triple Thrust Manual.");
 				addButton(6, "Draco Sweep", buyItem2,consumables.DRASMAN,
 						sayLine2(consumables.DRASMAN,"It's a manual for Draco Sweep. This simple technique allows you to unleash an attack that would strike in wide arc before you, perfect for when you are fighting a group of enemies. It also becomes more powerful as long you train your body and soul."),
-						"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when fighting a group of enemies.  You don't often meet more than one enemy at at a time, but you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once and would need something to deal with them.  "
+						"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when fighting a group of enemies.  You don't often meet more than one enemy at a time, but you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once and would need something to deal with them.  "
 				).hint("Draco Sweep Manual.");
 				addButton(7, "Many Birds", buyItem2,consumables.MABIMAN,
 						sayLine2(consumables.MABIMAN,"It's a manual for Many Birds. This simple technique allows you to project a figment of your soulforce as a crystal, firing it at extreme speeds. As you train your body and soul, this skill will become stronger."),
@@ -452,7 +450,7 @@ public class HeXinDao extends BaseContent
                 case 5:outputText("You count out the gems before giving them to the merchant. With barely noticable mumbling about the customer being stingy he slowly finishes the transaction, giving you five spirit stones.");break;
                 case 10:outputText("You count out the gems before giving them to the merchant. He finishes the transaction, giving you ten spirit stones.");break;
                 case 50:outputText("You count out the gems before giving them to the merchant. With slight haste he finishes the transaction, giving you fifty spirit stones.");break;
-                case 100:outputText("You count out the gems before giving them to the merchant. With haste he finishes the transaction, giving you hundred spirit stones.");break;
+                case 100:outputText("You count out the gems before giving them to the merchant. With haste, he finishes the transaction, giving you a hundred spirit stones.");break;
             }
             player.gems -= 20*value;
             flags[kFLAGS.SPIRIT_STONES]+=value;
@@ -764,7 +762,7 @@ public class HeXinDao extends BaseContent
 			outputText("As you approach the cave a bunch of heavily armored guards stops you. You can barely see their faces under their helmets.\n\n");
 			outputText("\"<i>Hey, you there! Hold! This cave is dangerous, we can’t just let you head in by yourself. You must go with someone else, where is your partner?</i>\"\n\n");
 			outputText("Partner? What partner?\n\n");
-			outputText("\"<i>Your teammate you moron. This place has claimed more adventurers lives then the wilds of Mareth by now. No one goes in there alone.</i>\"\n\n");
+			outputText("\"<i>Your teammate you moron. This place has claimed more adventurers lives than the wilds of Mareth by now. No one goes in there alone.</i>\"\n\n");
 			outputText("It seems like these people won’t let you go in the cave without a teammate.\n\n");
 			flags[kFLAGS.NEISA_FOLLOWER] = 1;
 			outputText("You decide to play by the rules and go find another hero to team with. The problem is, where would you even look for one?\n\n");
@@ -981,7 +979,7 @@ public function soularena():void {
         outputText("You register for the gauntlet challenge, and wait patiently until you are called. You're motioned forward quickly, and move out beyond the arena gate to face your opponent. The crowd is big, you certainly have quite the audience! A man with a necktie and a weird stick screams across the area.\n\n");
         outputText("\"<i>Ladies and gentlemen! Today a new gladiator enters the arena seeking the glory of the gauntlet! A triple battle for gold and fame!</i>\"\n\n");
         outputText("The crowd cheers for you loudly.\n\n");
-        outputText("\"<i>We start with an old timer everyone knows about. Even if this is only the warm up, don't count these statues out! Beware... the Dummy golems!!!</i>\"\n\n");
+        outputText("\"<i>We start with an old timer everyone knows about. Even if this is only the warm-up, don't count these statues out! Beware... the Dummy golems!!!</i>\"\n\n");
         outputText("A set of walking stone statues enter the arena, ready for battle. It seems you are to fight these first.\n\n");
         player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
         player.createStatusEffect(StatusEffects.SoulArenaGaunlet, 0, 0, 0, 0);
@@ -1190,12 +1188,13 @@ public function soularena():void {
 		outputText("\"<i>Some may noticed something but i would tell it regardless. It'\s sometimes possible to fight actively back than simply passively trying to survive tribulation. Each cultivator that done it would tell you it was worth it.</i>\" At that moment some lizan interrupts rising his hand. When she lets him ask the question is naturaly if teracher itself done this.\n\n");
 		outputText("\"<i>Hmmmm...</i>\" she pause as she smiles, \"<i>yes i do fighted against tribulation i faces few times... and i not felt it was bad to do it.</i>\" She continue lecture describing what could cultivators preapre for this event. Various formation to support or defend from tribulation lightnings.\n\n");
 		outputText("\"<i>When the time will come each of you should fell the approaching tribulation. Luckly for us it not come right away... well beside some super exceptional cases it would take at least few hours until it arrive. So be sure to find some good spot to face it. Ahh and not forget to not involve bystriders in it. Tribulations tends to 'rise up' difficulty of itself if it sense more than one challanger that facing it. Pets or minions are fine but not other cultivators.</i>\"\n\n");
-		outputText("It continue for next houir or so as kitsune tells few cases of tribulations as references making sure to emphase fact that the one tribulation each of gathered may face could be totlay unlike anything before any cultivator faced.\n\n");
+		outputText("It continues for next houir or so as kitsune tells few cases of tribulations as references making sure to emphase fact that the one tribulation each of gathered may face could be totlay unlike anything before any cultivator faced.\n\n");
 		outputText("\"<i>At the ending i would like to once again bestow you all with minor fortune in form of this humble manual that summarise all our today talks. I hope we would be all bale to meet again for next lecture after each of you succesfuly survive your very first tribulation in life.</i>\" She ends the meeting and leave the arean leaving behind pile of manuals at the desk.\n\n");
 		outputText("<b>Gained Key Item: Heavenly Tribulation: Myths and Facts</b>");
 		player.createKeyItem("Heavenly Tribulation: Myths and Facts", 0, 0, 0, 0);
 		doNext(camp.returnToCampUseTwoHours);
 	}
+    /*
 	public function mrsShigureLecturesFourth():void {
 		clearOutput();
 		flags[kFLAGS.SPIRIT_STONES] -= 20;
@@ -1210,6 +1209,7 @@ public function soularena():void {
 		outputText("\"<i></i>\"\n\n");
 		doNext(camp.returnToCampUseFourHours);
 	}
+	*/
 	public function missKyianaManualsShop():void {
 		clearOutput();
 		outputText("\"<i>Five Spirit Stones per manual.</i>\" Youngful kitsune states prices firmly giving impression they aren't negotionable.\n\n");
