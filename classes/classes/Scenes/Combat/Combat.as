@@ -702,10 +702,8 @@ public class Combat extends BaseContent {
         enemyAI();
     }
 
-    public function get isEnnemyInvisible():Boolean {
-        var isEnnemyInvisible:Boolean = false;
-        if (player.hasStatusEffect(StatusEffects.MonsterInvisible)) isEnnemyInvisible = true;
-        return isEnnemyInvisible;
+    public function get isEnemyInvisible():Boolean {
+        return player.hasStatusEffect(StatusEffects.MonsterInvisible);
     }
 
     public function isPlayerSilenced():Boolean {
