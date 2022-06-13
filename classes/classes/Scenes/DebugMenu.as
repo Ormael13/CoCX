@@ -936,14 +936,14 @@ public class DebugMenu extends BaseContent
 			);
 			addBeComboBox("Base adj", SKIN_ADJ_CONSTANTS, player.skin.base.adj,
 					function (item:*):void {
-						player.skin.base.adj = item.data;
+						player.skin.base.adj = item.data === "(none)" ? "" : item.data;
 						dumpPlayerData();
 						tagDemosSkin();
 					}
 			);
 			addBeComboBox("Base desc", SKIN_DESC_CONSTANTS, player.skin.base.descRaw,
 					function (item:*):void {
-						player.skin.base.descRaw = item.data;
+						player.skin.base.descRaw = item.data === "(default)" ? "" : item.data;
 						dumpPlayerData();
 						tagDemosSkin();
 					}
@@ -1002,14 +1002,14 @@ public class DebugMenu extends BaseContent
 			);
 			addBeComboBox("Coat adj", SKIN_ADJ_CONSTANTS, player.skin.coat.adj,
 					function (item:*):void {
-						player.skin.coat.adj = item.data;
+						player.skin.coat.adj = item.data === "(none)" ? "" : item.data;
 						dumpPlayerData();
 						tagDemosSkin();
 					}
 			);
 			addBeComboBox("Coat desc", SKIN_DESC_CONSTANTS, player.skin.coat.descRaw,
 					function (item:*):void {
-						player.skin.coat.descRaw = item.data;
+						player.skin.coat.descRaw = item.data === "(default)" ? "" : item.data;
 						dumpPlayerData();
 						tagDemosSkin();
 					}

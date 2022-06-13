@@ -5338,7 +5338,6 @@ public final class Mutations extends MutationsHelper {
         player.lowerBody = LowerBody.HUMAN;
         player.legCount = 2;
         player.wings.type = Wings.NONE;
-        player.wings.desc = "non-existant";
         player.tailType = Tail.NONE;
         player.tailRecharge = 0;
         player.horns.count = 0;

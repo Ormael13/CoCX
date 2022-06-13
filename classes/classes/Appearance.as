@@ -1945,42 +1945,6 @@ public class Appearance extends Utils
 					[Gender.GENDER_HERM, "hermaphrodite"]
 				]
 		);
-		public static const DEFAULT_WING_DESCS:Object = createMapFromPairs(
-				[
-					[Wings.NONE, "non-existant"],
-					[Wings.BEE_SMALL, "small bee-like"],
-					[Wings.BEE_LARGE, "large bee-like"],
-					[Wings.HARPY, "large feathery"],
-					[Wings.IMP, "small"],
-					[Wings.BAT_LIKE_TINY, "tiny, bat-like"],
-					[Wings.BAT_LIKE_LARGE, "large, bat-like"],
-				//	[SHARK_FIN, ""],
-					[Wings.FEATHERED_LARGE, "large, feathered"],
-					[Wings.DRACONIC_SMALL, "small, draconic"],
-					[Wings.DRACONIC_LARGE, "large, draconic"],
-					[Wings.SEA_DRAGON, "large, aquatic"],
-					[Wings.GIANT_DRAGONFLY, "giant dragonfly"],
-					[Wings.BAT_LIKE_LARGE_2, "two large pairs of bat-like"],
-					[Wings.DRACONIC_HUGE, "large, majestic draconic"],
-					[Wings.FEATHERED_PHOENIX, "large crimson feathered"],
-					[Wings.FEATHERED_ALICORN, "large white feathered"],
-					[Wings.FEATHERED_SPHINX, "large feathered"],
-					[Wings.MANTIS_SMALL, "small mantis-like"],
-					[Wings.MANTIS_LARGE, "large mantis-like"],
-					[Wings.MANTIS_LARGE_2, "two large pairs of mantis-like"],
-					[Wings.GARGOYLE_LIKE_LARGE, "large stony"],
-					[Wings.PLANT, "three pairs of cockvines"],
-					[Wings.MANTICORE_SMALL, "small manticore-like"],
-					[Wings.MANTICORE_LARGE, "large manticore-like"],
-					[Wings.FEY_DRAGON, "large majestic fey draconic"],
-					[Wings.FEATHERED_AVIAN, "large feathery"],
-					[Wings.NIGHTMARE, "large leathery"],
-					[Wings.ETHEREAL, "etheral tendrils"],
-					[Wings.THUNDEROUS_AURA, "thunderous aura"],
-					[Wings.LEVITATION, "levitation"],
-					[Wings.FAIRY, "butterfly"],
-				]
-		);
 		// <mod name="Dragon patch" author="Stadler76">
 		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(
 				[

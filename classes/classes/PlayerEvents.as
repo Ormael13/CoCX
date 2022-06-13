@@ -1759,7 +1759,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Levitation wing slot
 			if (player.wings.type == Wings.LEVITATION && player.rearBody.type != RearBody.GLACIAL_AURA && player.lowerBody != LowerBody.WENDIGO && player.lowerBody != LowerBody.GAZER) {
 				player.wings.type = Wings.NONE;
-				player.wings.desc = "non-existant";
 			}
 			//Wendigo stuff
 			if (player.hasStatusEffect(StatusEffects.WendigoPsychosis) && !player.hasPerk(PerkLib.EndlessHunger) && ((flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger <= 0) || (flags[kFLAGS.HUNGER_ENABLED] <= 0 && player.lust >= player.maxLust()))) SceneLib.glacialRift.wendigoScene.becomeWendigo();

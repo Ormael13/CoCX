@@ -9314,7 +9314,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      }
 	    }
 
-	    player.wings.desc = "non-existant";
 	    player.wings.type = Wings.NONE;
 
 	    if (doOutput) outputText(desc);
@@ -9334,7 +9333,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Pain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. "+
 				"Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, [haircolor] wings.</b>";
-	    player.wings.desc = "large feathered";
 	    player.wings.type = Wings.FEATHERED_SPHINX;
 
 	    if (doOutput) outputText(desc);
@@ -9354,7 +9352,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    TransformationUtils.applyTFIfNotPresent(transformations.WingsManticoreSmall, doOutput);
 
 	    desc += "Your feel your wings growing larger by the second. They keep growing until they reach three times their original size. The transformation finally stops as your wings reach a span of twice your arms length. These will be really useful should you want to fly around in search of a meal. <b>You now have fully grown manticore wings.</b>";
-	    player.wings.desc = "large manticore-like";
 	    player.wings.type = Wings.MANTICORE_LARGE;
 
 	    if (doOutput) outputText(desc);
@@ -9376,7 +9373,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "You scream something akin to a roar from the tremendous amount of pain you're suddenly experiencing as something starts to push out from your back. Your claws start digging large marks into the ground as the things stretch out and burst through your skin. "+
 				"Large bones covered in a thin, yet sturdy layer of skin, forming a pair of small bat-like wings slowly push out before finally staying in place. They are too small right now to allow you to take flight but they sure look good on you. <b>You now have small manticore wings.</b>";
-	    player.wings.desc = "small manticore-like";
 	    player.wings.type = Wings.MANTICORE_SMALL;
 
 	    if (doOutput) outputText(desc);
@@ -9397,7 +9393,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Pain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. "+
 				"Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, white wings.</b>";
-	    player.wings.desc = "large black leathery";
 	    player.wings.type = Wings.NIGHTMARE;
 
 	    if (doOutput) outputText(desc);
@@ -9418,7 +9413,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Pain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. "+
 				"Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, white wings.</b>";
-	    player.wings.desc = "large white feathered";
 	    player.wings.type = Wings.FEATHERED_ALICORN;
 
 	    if (doOutput) outputText(desc);
@@ -9436,7 +9430,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "You've become so charged in electricity that your movements are sometimes accompanied by the sound of static. <b>It's going to be difficult to hide your presence with that thunderous aura of yours.</b>";
-	    player.wings.desc = "thunderous aura";
 	    player.wings.type = Wings.THUNDEROUS_AURA;
 
 	    if (doOutput) outputText(desc);
@@ -9456,7 +9449,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    TransformationUtils.applyTFIfNotPresent(transformations.WingsMantisSmall, doOutput);
 
 	    desc += "Your wings tingle as they grow, filling out covering your back abdomen until they are large enough to lift you from the ground and allow you to fly! You give a few experimental flaps and begin hovering in place, a giddy smile plastered on your face by the thrill of flight. <b>You now have large Mantis wings!</b>";
-	    player.wings.desc = "large mantis-like";
 	    player.wings.type = Wings.MANTIS_LARGE;
 
 	    if (doOutput) outputText(desc);
@@ -9478,7 +9470,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "You feel an itching between your shoulder-blades as something begins growing there. You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably. A sense of relief erupts from you as you feel something new grow out from your body.";
 	    desc += "\nYou hastily remove the top portion of your [armor] and marvel as a pair of small Insectile wings sprout from your back. Tenderly flexing your new muscles, you find you can flap them quite fast. Unfortunately you can’t seem to flap your little wings fast enough to fly, but they would certainly slow a fall. "+
 				"A few quick modifications to your [armor] later and you are ready to continue your journey with <b>your new mantis wings</b>.";
-	    player.wings.desc = "small mantis-like";
 	    player.wings.type = Wings.MANTIS_SMALL;
 
 	    if (doOutput) outputText(desc);
@@ -9499,7 +9490,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "A not-unpleasant tingling sensation again fills your wings, almost but not quite drowning out the odd, tickly feeling as they swell larger and stronger than before. You spread them wide - they stretch now more than twice further than your arms do - and beat them experimentally, the powerful thrusts sending gusts of wind, and lifting you off your feet effortlesly. "+
 				"<b>You now have fully-grown majestic dragon wings, capable of winging you through the air elegantly!</b>";
-	    player.wings.desc = "large, majestic draconic";
 	    player.wings.type = Wings.DRACONIC_HUGE;
 
 	    if (doOutput) outputText(desc);
@@ -9520,7 +9510,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "A not-unpleasant tingling sensation fills your wings, almost but not quite drowning out the odd, tickly feeling as they swell larger and stronger. You spread them wide - they stretch further than your arms do - and beat them experimentally, the powerful thrusts sending gusts of wind, and almost lifting you off your feet. "+
 				"<b>You now have fully-grown dragon wings, capable of winging you through the air elegantly!</b>";
-	    player.wings.desc = "large, draconic";
 	    player.wings.type = Wings.DRACONIC_LARGE;
 
 	    if (doOutput) outputText(desc);
@@ -9540,7 +9529,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    if (player.wings.type == Wings.NONE) desc += "You double over as waves of pain suddenly fill your shoulderblades; your back feels like it's swelling, flesh and muscles ballooning. A sudden sound of tearing brings with it relief and you straighten up. Upon your back now sit small, leathery wings, not unlike a bat's. "+
 				"<b>You now have small dragon wings. They're not big enough to fly with, but they look adorable.</b>";
 	    else desc += "A sensation of numbness suddenly fills your wings. When it dies away, they feel... different. Looking back, you realize that they have been replaced by new, small wings, ones that you can only describe as draconic. <b>Your wings have changed into dragon wings.</b>";
-	    player.wings.desc = "small, draconic";
 	    player.wings.type = Wings.DRACONIC_SMALL;
 
 	    if (doOutput) outputText(desc);
@@ -9560,7 +9548,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "Pain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. "+
 				"Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, crimson wings.</b>";
 
-	    player.wings.desc = "large crimson feathered";
 	    player.wings.type = Wings.FEATHERED_PHOENIX;
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.FEATHERED_PHOENIX));
@@ -9579,7 +9566,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    if (player.wings.type > Wings.NONE) desc += "Sensation fades from your " + player.wings.desc + " wings slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.";
 	    desc += "Pain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. "+
 				"Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, [haircolor] wings.</b>";
-	    player.wings.desc = "large, feathered";
 	    player.wings.type = Wings.FEATHERED_LARGE;
 
 	    if (doOutput) outputText(desc);
@@ -9599,7 +9585,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    TransformationUtils.applyTFIfNotPresent(transformations.WingsBeeSmall, doOutput);
 
 	    desc += "Your wings tingle as they grow, filling out until they are large enough to lift you from the ground and allow you to fly! <b>You now have large bee wings!</b> You give a few experimental flaps and begin hovering in place, a giddy smile plastered on your face by the thrill of flight.";
-	    player.wings.desc = "large bee-like";
 	    player.wings.type = Wings.BEE_LARGE;
 
 	    if (doOutput) outputText(desc);
@@ -9618,7 +9603,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "You feel an itching between your shoulder-blades as something begins growing there. You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably. A sense of relief erupts from you as you feel something new grow out from your body. You hastily remove the top portion of your [armor] and marvel as a pair of small bee-like wings sprout from your back. "+
 				"Tenderly flexing your new muscles, you find you can flap them quite fast. Unfortunately you can't seem to flap your little wings fast enough to fly, but they would certainly slow a fall. A few quick modifications to your [armor] later and you are ready to continue your journey with <b>your new bee wings</b>.";
-	    player.wings.desc = "small bee-like";
 	    player.wings.type = Wings.BEE_SMALL;
 
 	    if (doOutput) outputText(desc);
@@ -9664,7 +9648,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      desc += "Your small demonic wings stretch and grow, tingling with the pleasure of being attached to such a tainted body. You stretch over your shoulder to stroke them as they unfurl, turning into full-sized demon-wings. <b>Your demonic wings have grown!</b>";
 	    }
 
-	    player.wings.desc = "large, bat-like";
 	    player.wings.type = Wings.BAT_LIKE_LARGE;
 
 	    if (doOutput) outputText(desc);
@@ -9684,7 +9667,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    TransformationUtils.applyTFIfNotPresent(transformations.WingsNone, doOutput);
 
 	    desc += "A knot of pain forms in your shoulders as they tense up. With a surprising force, a pair of small demonic wings sprout from your back, ripping a pair of holes in the back of your [armor]. <b>You now have tiny demonic wings</b>.";
-	    player.wings.desc = "tiny, bat-like";
 	    player.wings.type = Wings.BAT_LIKE_TINY;
 
 	    if (doOutput) outputText(desc);
@@ -9704,7 +9686,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "A terrible pain flares in the center of your back, a pain so intense that you black out briefly, coming back to your senses as you hit your head against the ground. You hear a horrifying ripping noise as your back stretches and tears to allow new bones to expand, black as tar and far lighter than most of the bones in your body. "+
 				"These new bones shift under your shoulder blade skin as you fall on all groaning in pain and clawing at the ground. In a flash of pain they violently break out of your skin sending blood everywhere as you make a chilling scream your wounds slowly closing on their own. Still panting from the pain, you take a look at your new appendage. "+
 				"It's a pair of large vampire wings of impressive size. Feeling chilly you fold them back on your body and you ought to admit they indeed look like a large cape. <b>You will be able to enjoy nightly flight using your brand new vampire wings.</b>";
-	    player.wings.desc = "large bat";
 	    player.wings.type = Wings.VAMPIRE;
 
 	    if (doOutput) outputText(desc);
@@ -9735,7 +9716,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      desc += "When everything finishes, you take a look at your backside, noticing two shapes sprouting from your upper back. They grow and grow, and when you recognize them as wings, they’ve already grown to carry with your body ease through the skies. Once the growth stops, you extend them and flex your newly gained bones and muscles. <b>Seems like you’ve gained a pair of avian wings!</b>";
 	    }
 
-	    player.wings.desc = "large, feathered";
 	    player.wings.type = Wings.FEATHERED_AVIAN;
 
 	    if (doOutput) outputText(desc);
@@ -9754,7 +9734,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "Your body feels lighter than usual, almost as if you’re floating on air. Unintentionally you lean forward, finding yourself floating a few feet off the ground. Confused as to what is happening, you try to move, floating a few paces in the direction you want to go. That’s when you notice three pairs of wispy otherworldly tendrils growing out of your back. "+
 				"They glow faintly and almost appear as though they’re moving with the wind. They don’t even hold any weight. <b>You can get used to floating like this with your ethereal wings.</b>";
 
-	    player.wings.desc = "ethereal tendrils";
 	    player.wings.type = Wings.ETHEREAL;
 	    if (doOutput) outputText(desc);
 	  },
@@ -9771,7 +9750,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "You feel so tired you could fall on your knees but to your surprise you don't. Instead of actually hitting the ground you simply float in the air. <b>You are now naturally levitating.</b>";
 
-	    player.wings.desc = "levitation";
 	    player.wings.type = Wings.LEVITATION;
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.LEVITATION));
@@ -9790,7 +9768,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "Winds begin to amass around you as if the prelude to a gathering storm. At first you think you are about to be attacked before you realise it’s all your doing. Merely by thinking about it the wind suddenly blows into a raging tornado carrying you up before you seize control and give it just enough strength to uplift you into its currents. "+
 				"It would seem you have gained the infamous wind control power of the kamaitachi achieving mastery over it. Well this is going to be fun to play with. <b>You now have the ability to control winds as the Kamaitachi do using your windy aura!</b>";
 
-	    player.wings.desc = "windy aura";
 	    player.wings.type = Wings.WINDY_AURA;
 	    if (doOutput) outputText(desc);
 	  },
@@ -9809,7 +9786,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				"Eventually the sensation passes and you groggily get to your feet. You can barely believe what you can see by craning your neck behind you - <b>you've grown a set of four giant dragonfly wings</b>, thinner, longer and more pointed than the ones you've seen upon the forest bee girls, but no less diaphanous and beautiful. "+
 				"You cautiously flex the new muscle groups in your shoulder blades and gasp as your new wings whirr and lift you several inches off the ground. What fun this is going to be!";
 
-	    player.wings.desc = "giant dragonfly";
 	    player.wings.type = Wings.GIANT_DRAGONFLY;
 	    if (doOutput) outputText(desc);
 		  Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.GIANT_DRAGONFLY));
@@ -9828,7 +9804,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "You keel in pain as you feel something penetrating your back. No, nothing is stabbing your back. More so, something is about to burst from within you. The trauma subsides as large bones emerge. A thin yet sturdy layer of skin covers your wings are covered as they fall into place behind you.\n\nAs you examine the fleshy appendage, you realize it's webbed. "+
 				"It seems to resemble more of a giant aquatic flipper than wings. The insides are not only colorful but also display several minute light specks. Not unlike those of a deep-sea beast. <b>You can now fly and swim at great speed with your brand new sea dragon wings!</b>";
 
-	    player.wings.desc = "large majestic aquatic";
 	    player.wings.type = Wings.SEA_DRAGON;
 	    if (doOutput) outputText(desc);
 	  },
@@ -9853,7 +9828,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      desc += "A knot of pain forms in your shoulders as they tense up. With a surprising force, a pair of black feathered wings sprout from your back, ripping a pair of holes in the back of your [armor]. <b>You now have black, feathered wings!</b>";
 	    }
 
-	    player.wings.desc = "black, feathered";
 	    player.wings.type = Wings.DEVILFEATHER;
 	    if (doOutput) outputText(desc);
 	  },
@@ -9874,7 +9848,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		if ((player.wings.type != Wings.NONE)) {
 			desc += "You ain't even noticing as something messed up happen in your wings. They shrivel and change taking on a delicate almost fairy like appearance and you flap them in awe as they not only feel strong but also agile. You now have a set of <b>fey dragon wings.</b>";
 		}
-	    player.wings.desc = "large majestic fey draconic";
 	    player.wings.type = Wings.FEY_DRAGON;
 	    if (doOutput) outputText(desc);
 	  },
@@ -9895,7 +9868,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				"The hot, thick, vine-like growths thrust their way into being, feet of oily green tentacles, alarmingly energetic and prehensile, thrashing around your [hips]. After a moment of concentration you cause one of these growths to rear around into your hand to take a closer look at it. "+
 				"It feels unmistakably dick-like - bulging, tender flesh under the fibrous skin, with quite a bit of flexible, able to bend all along its length and dart its wet, distended head in any direction you wish. <b>You now have cockvine wings.</b>";
 
-	    player.wings.desc = "cockvine";
 	    player.wings.type = Wings.PLANT;
 	    if (doOutput) outputText(desc);
 	  },
