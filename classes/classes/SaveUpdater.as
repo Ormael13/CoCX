@@ -1907,14 +1907,14 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.hasPerk(PerkLib.AscensionNaturalMetamorph) && !player.hasPerk(PerkLib.MetamorphEx)) player.createPerk(PerkLib.MetamorphEx, 0, 0, 0, 0);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.003;
 			}
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.004) {
+			/*
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.004) { //Cloning this down.
 				if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX) && !player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory)){
 					player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory,15 * player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX),0,0,0);
-					//trace("Hit!");
 				}
-				trace("Player has "+ player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory) + " slots, and " + player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) + " used.");
+				//trace("Player has "+ player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory) + " slots, and " + player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) + " used.");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.004;
-			}
+			}*/
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.005) {
 				outputText("\n\nIt will hurt a tiny bit fellow daoists but it's for greater good to cripple our cultivations to start anew.\nPS. I LIED IT HURTS LIKE NINE HELLS AND FOUR HEAVEND... MUAHAHAHAHAHA");
 				if (player.hasPerk(PerkLib.JobSoulCultivator)) {
@@ -1972,6 +1972,46 @@ public class SaveUpdater extends NPCAwareContent {
 				if (flags[kFLAGS.SOUL_CULTIVATION] > 0) flags[kFLAGS.SOUL_CULTIVATION] = 0;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.005;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.006) { //Cloning this down.
+				if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX) && !player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory)) {
+					var permedMetamorphCount:int = Metamorph.PermanentMemoryStorage.length;
+					player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15 * player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX), permedMetamorphCount, 0, 0);
+				}
+				if (player.hasPerk(PerkLib.Dantain)) {
+					player.removePerk(PerkLib.Dantain);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.DaoistCultivator)) {
+					player.removePerk(PerkLib.DaoistCultivator);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.DaoistApprenticeStage)) {
+					player.removePerk(PerkLib.DaoistApprenticeStage);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.DaoistWarriorStage)) {
+					player.removePerk(PerkLib.DaoistWarriorStage);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.DaoistElderStage)) {
+					player.removePerk(PerkLib.DaoistElderStage);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
+					player.removePerk(PerkLib.DaoistOverlordStage);
+					player.perkPoints += 1;
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.006;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.007) { //Cloning this down.
+				flags[kFLAGS.WHITNEY_ORAL_TRAINING_VAG] = flags[kFLAGS.WHITNEY_ORAL_TRAINING_COCK]; //new flag!
+				camp.soulforce.fixShards2nd();
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.007;
+			}/*
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.008) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.008;
+			}*/
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;

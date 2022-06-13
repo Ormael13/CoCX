@@ -1141,7 +1141,7 @@ public static const WHITNEY_TATTOO_BUTT:int                                     
 public static const FARM_CORRUPTION_BRANDING_MENU_UNLOCKED:int                      = 1133;
 public static const QUEUE_BRANDING_UPGRADE:int                                      = 1134;
 public static const QUEUE_BRANDING_AVAILABLE_TALK:int                               = 1135;
-public static const WHITNEY_ORAL_TRAINING:int                                       = 1136;
+public static const WHITNEY_ORAL_TRAINING_COCK:int                                       = 1136;
 public static const AMILY_TATTOO_COLLARBONE:int                                     = 1137;
 public static const AMILY_TATTOO_SHOULDERS:int                                      = 1138;
 public static const AMILY_TATTOO_LOWERBACK:int                                      = 1139;
@@ -1318,7 +1318,7 @@ public static const UNKNOWN_FLAG_NUMBER_01309:int                               
 public static const COCKATRICES_UNLOCKED:int                                   		= 1310;
 public static const TIMES_ENCOUNTERED_COCKATRICES:int                               = 1311;
 public static const CODEX_ENTRY_COCKATRICES:int                                   	= 1312;
-public static const UNKNOWN_FLAG_NUMBER_01313:int                                   = 1313;
+public static const WHITNEY_ORAL_TRAINING_VAG:int                                   = 1313;
 public static const UNKNOWN_FLAG_NUMBER_01314:int                                   = 1314;
 public static const UNKNOWN_FLAG_NUMBER_01315:int                                   = 1315;
 public static const UNKNOWN_FLAG_NUMBER_01316:int                                   = 1316;
@@ -1929,8 +1929,8 @@ public static const UNKNOWN_FLAG_NUMBER_01920:int                               
 public static const UNKNOWN_FLAG_NUMBER_01921:int                                   = 1921;
 public static const UNKNOWN_FLAG_NUMBER_01922:int                                   = 1922;
 public static const UNKNOWN_FLAG_NUMBER_01923:int                                   = 1923;
-public static const UNKNOWN_FLAG_NUMBER_01924:int                                   = 1924;
-public static const UNKNOWN_FLAG_NUMBER_01925:int                                   = 1925;
+public static const DEMON_SOLDIERS_ENCOUNTERED:int                                  = 1924;
+public static const DEMON_SOLDIERS_KILLED:int                                   	= 1925;
 public static const BELISA_DEFEATS_COUNTER:int                                   	= 1926;
 public static const BELISA_LVL_UP:int                                   			= 1927;
 public static const LILY_DEFEATS_COUNTER:int                                  		= 1928;

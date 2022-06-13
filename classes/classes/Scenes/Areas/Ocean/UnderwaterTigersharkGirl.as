@@ -8,8 +8,8 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.Scenes.SceneLib;
-import classes.internals.*;
 import classes.display.SpriteDb;
+import classes.internals.*;
 
 public class UnderwaterTigersharkGirl extends Monster
 	{
@@ -44,7 +44,7 @@ public class UnderwaterTigersharkGirl extends Monster
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.sharkgirlScene.tigersharkLossOceanRape();
+			SceneLib.sharkgirlScene.sharkLossOceanRape();
 		}
 		
 		public function UnderwaterTigersharkGirl() 

@@ -233,6 +233,9 @@ public function timeChangeLarge():Boolean {
                 outputText("\nMarble looks horrified at your words and exclaims \"<i>You told me you would always want my milk!  How could you do this to me?</i>\"  You try to explain yourself to her, telling her how important your task is and how everyone is counting on you.  As you speak, her expression slowly softens and eventually she calms down.  \"<i>Alright,</i>\" she says \"<i>I guess I shouldn't have worried about my milk so much.  It's probably best if people don't drink it anyway.</i>\"  You agree with her and she smiles, suddenly looking down.  \"<i>Without someone like you, I don't think things would have turned out this way.  I..</i>\" she hesitates, \"<i>I'll stay with you at camp from now on!</i>\"\n");
                 //(Marble now appears at the camp)
                 player.createStatusEffect(StatusEffects.CampMarble, 0, 0, 0, 0);
+				if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+				else player.createKeyItem("Radiant shard", 1,0,0,0);
+				outputText("\n\n<b>Before fully settling in your camp as if remembering something Marble pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
                 flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
                 if (SceneLib.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
                 //if amily is there, tag it for freakout
@@ -274,6 +277,9 @@ public function timeChangeLarge():Boolean {
                 marbleAddictionSex(false);
                 outputText("\n");
                 player.createStatusEffect(StatusEffects.CampMarble, 0, 0, 0, 0);
+				if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+				else player.createKeyItem("Radiant shard", 1,0,0,0);
+				outputText("\n\n<b>Before fully settling in your camp as if remembering something Marble pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
                 flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
                 if (SceneLib.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
                 //if amily is there, tag it for freakout
@@ -338,6 +344,9 @@ public function timeChangeLarge():Boolean {
                 outputText("\n");
                 //(Marble now appears at the camp)
                 player.createStatusEffect(StatusEffects.CampMarble, 0, 0, 0, 0);
+				if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+				else player.createKeyItem("Radiant shard", 1,0,0,0);
+				outputText("\n\n<b>Before fully settling in your camp as if remembering something Marble pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
                 flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
                 if (SceneLib.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
                 player.createStatusEffect(StatusEffects.NoMoreMarble,0,0,0,0);
@@ -377,6 +386,9 @@ public function timeChangeLarge():Boolean {
                 outputText("\n");
                 //(Marble now appears at the camp)
                 player.createStatusEffect(StatusEffects.CampMarble, 0, 0, 0, 0);
+				if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+				else player.createKeyItem("Radiant shard", 1,0,0,0);
+				outputText("\n\n<b>Before fully settling in your camp as if remembering something Marble pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
                 flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
                 if (SceneLib.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 1;
                 player.createStatusEffect(StatusEffects.NoMoreMarble,0,0,0,0);
@@ -2194,7 +2206,7 @@ private function marbleKidsPlaytime():void {
 		return;
 	}
 	if(select == 6) {
-		anemoneScene.repeatCowSitting();
+		kidAScene.repeatCowSitting();
 	}
 	if(flags[kFLAGS.MARBLE_PLAYED_WITH_KIDS_TODAY] > 0) dynStats("lus", -10);
 	else dynStats("lib", -1, "lus", -10, "cor", -1);
