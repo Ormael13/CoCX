@@ -127,181 +127,56 @@ public class Combat extends BaseContent {
     public function masteryFeralCombatLevel():Number {
         return player.masteryFeralCombatLevel;
     }
-    public function maxFeralCombatLevel():Number {
-        return player.maxFeralCombatLevel();
-    }
-    public function FeralCombatExpToLevelUp():Number {
-        return player.FeralCombatExpToLevelUp();
-    }
-
     public function masteryGauntletLevel():Number {
         return player.masteryGauntletLevel;
     }
-    public function maxGauntletLevel():Number {
-        return player.maxGauntletLevel();
-    }
-    public function GauntletExpToLevelUp():Number {
-        return player.GauntletExpToLevelUp();
-    }
-
 	public function masteryDaggerLevel():Number {
         return player.masteryDaggerLevel;
     }
-    public function maxDaggerLevel():Number {
-        return player.maxDaggerLevel();
-    }
-    public function DaggerExpToLevelUp():Number {
-        return player.DaggerExpToLevelUp();
-    }
-
     public function masterySwordLevel():Number {
         return player.masterySwordLevel;
     }
-    public function maxSwordLevel():Number {
-        return player.maxSwordLevel();
-    }
-    public function SwordExpToLevelUp():Number {
-        return player.SwordExpToLevelUp();
-    }
-
 	public function masteryAxeLevel():Number {
         return player.masteryAxeLevel;
     }
-    public function maxAxeLevel():Number {
-        return player.maxAxeLevel();
-    }
-    public function AxeExpToLevelUp():Number {
-        return player.AxeExpToLevelUp();
-    }
-
     public function masteryMaceHammerLevel():Number {
         return player.masteryMaceHammerLevel;
     }
-    public function maxMaceHammerLevel():Number {
-        return player.maxMaceHammerLevel();
-    }
-    public function MaceHammerExpToLevelUp():Number {
-        return player.MaceHammerExpToLevelUp();
-    }
-
 	public function masteryDuelingSwordLevel():Number {
         return player.masteryDuelingSwordLevel;
     }
-    public function maxDuelingSwordLevel():Number {
-        return player.maxDuelingSwordLevel();
-    }
-    public function DuelingSwordExpToLevelUp():Number {
-        return player.DuelingSwordExpToLevelUp();
-    }
-
 	public function masteryPolearmLevel():Number {
         return player.masteryPolearmLevel;
     }
-    public function maxPolearmLevel():Number {
-        return player.maxPolearmLevel();
-    }
-    public function PolearmExpToLevelUp():Number {
-        return player.PolearmExpToLevelUp();
-    }
-
 	public function masterySpearLevel():Number {
         return player.masterySpearLevel;
     }
-    public function maxSpearLevel():Number {
-        return player.maxSpearLevel();
-    }
-    public function SpearExpToLevelUp():Number {
-        return player.SpearExpToLevelUp();
-    }
-
 	public function masteryWhipLevel():Number {
         return player.masteryWhipLevel;
     }
-    public function maxWhipLevel():Number {
-        return player.maxWhipLevel();
-    }
-    public function WhipExpToLevelUp():Number {
-        return player.WhipExpToLevelUp();
-    }
-
 	public function masteryExoticLevel():Number {
         return player.masteryExoticLevel;
     }
-    public function maxExoticLevel():Number {
-        return player.maxExoticLevel();
-    }
-    public function ExoticExpToLevelUp():Number {
-        return player.ExoticExpToLevelUp();
-    }
-
 	public function masteryArcheryLevel():Number {
         return player.masteryArcheryLevel;
     }
-    public function maxArcheryLevel():Number {
-        return player.maxArcheryLevel();
-    }
-    public function ArcheryExpToLevelUp():Number {
-        return player.ArcheryExpToLevelUp();
-    }
-
 	public function masteryThrowingLevel():Number {
         return player.masteryThrowingLevel;
     }
-    public function maxThrowingLevel():Number {
-        return player.maxThrowingLevel();
-    }
-    public function ThrowingExpToLevelUp():Number {
-        return player.ThrowingExpToLevelUp();
-    }
-
 	public function masteryFirearmsLevel():Number {
         return player.masteryFirearmsLevel;
     }
-    public function maxFirearmsLevel():Number {
-        return player.maxFirearmsLevel();
-    }
-    public function FirearmsExpToLevelUp():Number {
-        return player.FirearmsExpToLevelUp();
-    }
-
 	public function dualWSLevel():Number {
         return player.dualWSLevel;
     }
-    public function maxDualWieldSmallLevel():Number {
-        return player.maxDualWieldSmallLevel();
-    }
-    public function DualWieldSmallExpToLevelUp():Number {
-        return player.DualWieldSmallExpToLevelUp();
-    }
-
     public function dualWNLevel():Number {
         return player.dualWNLevel;
     }
-    public function maxDualWieldNormalLevel():Number {
-        return player.maxDualWieldNormalLevel();
-    }
-    public function DualWieldNormalExpToLevelUp():Number {
-        return player.DualWieldNormalExpToLevelUp();
-    }
-
     public function dualWLLevel():Number {
         return player.dualWLLevel;
     }
-    public function maxDualWieldLargeLevel():Number {
-        return player.maxDualWieldLargeLevel();
-    }
-    public function DualWieldLargeExpToLevelUp():Number {
-        return player.DualWieldLargeExpToLevelUp();
-    }
-
     public function dualWFLevel():Number {
         return player.dualWFLevel;
-    }
-    public function maxDualWieldFirearmsLevel():Number {
-        return player.maxDualWieldFirearmsLevel();
-    }
-    public function DualWieldFirearmsExpToLevelUp():Number {
-        return player.DualWieldFirearmsExpToLevelUp();
     }
 
     public function maxTeaseLevel():Number {
@@ -5996,14 +5871,9 @@ public class Combat extends BaseContent {
     	if (rand(100) < accMelee) {
 			if (meleeDamageNoLag != 0) damage += meleeDamageNoLag;
 			else {
-				if (IsFeralCombat) {
-					meleeDamageNoLag += meleeDamageNoLagSingle(IsFeralCombat);
-					damage += meleeDamageNoLagSingle(IsFeralCombat);
-				}
-				else {
-					meleeDamageNoLag += meleeDamageNoLagSingle();
-					damage += meleeDamageNoLagSingle();
-				}
+                var temp:Number = meleeDamageNoLagSingle(IsFeralCombat);
+                meleeDamageNoLag += temp;
+                damage += temp;
 			}
 			//Determine if critical hit!
             var crit:Boolean = false;

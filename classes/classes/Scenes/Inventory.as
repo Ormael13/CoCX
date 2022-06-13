@@ -1562,7 +1562,7 @@ use namespace CoC;
 
 		private function armorAcceptable(itype:ItemType):Boolean { return itype is Armor; }
 
-		private function weaponAcceptable(itype:ItemType):Boolean { return itype is (Weapon || WeaponRange); }
+		private function weaponAcceptable(itype:ItemType):Boolean { return (itype is Weapon) || (itype is WeaponRange); }
 
 		private function shieldAcceptable(itype:ItemType):Boolean { return itype is Shield; }
 
