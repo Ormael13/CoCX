@@ -60,7 +60,7 @@ private function cinnabarGreeting():void {
 	menu();
 	addButtonIfTrue(0, "Buy1Hour", cinnabarNonHugeDickings, "Unlocked again by SH DickSelect feature, if you have small enough dick!",
 		sceneHunter.dickSelect && player.findCock(1, -1, 100) >= 0 || !big);
-	addButtonIfTrue(1, "Fuck Her", cinnabarGetsFUKKKKED, "Req. cock with area greater than 100.", big);
+	addButtonIfTrue(1, "Fuck Her", cinnabarBigRouter, "Req. cock with area greater than 100.", big);
 	addButtonIfTrue(2, "Multi-Fuck", cinnabarMultiCockPortalFuckFest, "Req. one cock with area greater than 100 and at least one more bigger than 75.", multi);
 }
 

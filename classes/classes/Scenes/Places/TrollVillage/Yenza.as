@@ -86,7 +86,7 @@ public class Yenza extends TrollVillageAbstractContent{
             }
         }
         else{
-            if (player.femininity > 30){
+            if (player.femininity > 30 && !flags[kFLAGS.LOW_STANDARDS_FOR_ALL]){
                 outputText("As you near in, her gaze shifts towards you and she rolls her eyes. She stands up and leaves, not even bothering to look at your direction again.\n" +
                         "\n" +
                         "Once she’s gone you figure there’s nothing left for you to do and you leave the diner as well.\n");
@@ -115,7 +115,7 @@ public class Yenza extends TrollVillageAbstractContent{
                     "Zenji is adamant about not going to her house. It’s probably for the best, it’d only stir more trouble.\n");
         }
         else{
-            if (player.hasBreasts() || player.femininity > 30){
+            if ((player.hasBreasts() || player.femininity > 30) && !flags[kFLAGS.LOW_STANDARDS_FOR_ALL]){
                 outputText("You knock on the door. After a few minutes of waiting, nobody responds, so you decide to take your leave\n");
             }
             else{
