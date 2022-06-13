@@ -8,6 +8,7 @@ import classes.display.SpriteDb;
 public class MinotaurScene extends BaseContent {
 
 	public function minoRouter():void {
+		monster = new Minotaur();
 		if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) minoAddictionFuck();
 		else getRapedByMinotaur();
 	}
@@ -585,7 +586,7 @@ private function getOralRapedByMinotaur():void {
 	//new pg
 	outputText("With no warning the minotaur yanks your [legs] off of the ledge and grabs your waist. He shoves you down hard on his shaft while slamming his hips foward. Your eyes go wide in shock as the minotaur rams the massive tip of its cock past your mouth and into your throat. Grunting and moaning the minotaur forces its cock into your throat, inch by inch as it grinds you around its shaft. Your throat bulges as the first ridge around the minotaur's cock approaches your lips.\n\n");
 	//new pg
-	outputText("The minotaur bellows and slams its hips forward, forcing the ridge past your lips. You're almost out of air, and the edges of your vision are starting to fade. All you can see is the minotaur's belly. Its " + monster.ballsDescriptLight() + " spasm just below your head, pumping hot come through its " + monster.cockDescriptShort(0) + ". The first wave of minotaur cum swells his cock and pushes past your teeth. The bull-man cums deep in your throat, inflating your stomach with hot seed. All you can feel is the minotaur's bloated shaft rammed deep into your throat, blast after blast of thick cum forcing its way down his cock and into your belly.\n\n");
+	outputText("The minotaur bellows and slams its hips forward, forcing the ridge past your lips. You're almost out of air, and the edges of your vision are starting to fade. All you can see is the minotaur's belly. Its " + monster.ballsDescriptLight() + " spasm just below your head, pumping hot cum through its " + monster.cockDescriptShort(0) + ". The first wave of minotaur cum swells his cock and pushes past your teeth. The bull-man cums deep in your throat, inflating your stomach with hot seed. All you can feel is the minotaur's bloated shaft rammed deep into your throat, blast after blast of thick cum forcing its way down his cock and into your belly.\n\n");
 	player.refillHunger(50, false);
 	//last pg
 	outputText("The minotaur grunts a few last times.  Finished with you, it lifts your [leg] and pulls you off its " + monster.cockDescriptShort(0) + ". The huge cock-head slides through your throat, gets jammed behind your teeth, and finally pulls free with a loud sucking sound. Cum pours from your throat and over your face, and the minotaur sprays a few final loads across your bloated stomach. The minotaur drops you in the cum-pool and walks away, leaving you to cradle your distended belly and swoon as his drug-like sperm addles your mind.  You pass out with a blissful smile.");

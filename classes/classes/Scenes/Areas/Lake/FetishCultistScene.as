@@ -721,6 +721,7 @@ public class FetishCultistScene extends AbstractLakeContent
 
 		private function mindbreakFemaleCultist():void{
 			clearOutput();
+			if (silly()) outputText("<b>ASSUMING DIRECT CONTROL</b>\n\n");
 			outputText("She looks quite desperate for a fuck already." +
 					" It wouldn’t be too hard to just rape her and go back to your things, but why rape when you can enslave and convert her already weak mind to the will of the sorority?" +
 					" Leaving her to the Church of the Fetish would be a shame, especially because of how easy it would be to break those attachments and make her switch her allegiance." +

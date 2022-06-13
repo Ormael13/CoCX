@@ -681,7 +681,6 @@ import classes.CoC;
 				if (hasPerk(PerkLib.SoulEmperor)) max += 150;
 				if (hasPerk(PerkLib.SoulAncestor)) max += 150;
 			}
-			if (flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] > 0) max += flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING];//+310
 			if (hasPerk(PerkLib.AscensionSoulPurity)) max += perkv1(PerkLib.AscensionSoulPurity) * 50;
 			if (jewelryEffectId == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude;//+100
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude2;//+100
@@ -718,9 +717,9 @@ import classes.CoC;
 				if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) multimax += 0.15;
 				if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) multimax += 0.2;
 				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) multimax += 0.25;
+				if (flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] > 0) multimax += (flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING]) * 0.01;
 				//if (flags[kFLAGS.UNLOCKED_MERIDIANS] > 0) multimax += flags[kFLAGS.UNLOCKED_MERIDIANS] * 0.05;
 				//if (hasPerk(PerkLib.Ascension)) multimax += perkv1(PerkLib.Ascension) * 0.01;
-
 			}
 			max *= multimax;
 			max = Math.round(max);

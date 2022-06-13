@@ -2739,7 +2739,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				if (SceneLib.farm.farmCorruption.hasTattoo("amily"))
 				{
 					outputText("\n");
-					if (SceneLib.farm.farmCorruption.amilyFullTribalTats())
+					if (SceneLib.farm.farmCorruption.fullTribalTats("amily"))
 					{
 						outputText("She is covered from head to tail in tribal tattoos, erotic lines snaking all over her naked frame, giving her the look of a barely tamed savage.\n")
 					}

@@ -24,7 +24,7 @@ public class BeeRace extends Race {
 				.wingType(Wings.BEE_SMALL, +1)
 				.wingType(Wings.BEE_LARGE, +4)
 				.noRearBody(+1)
-				.skinBasePattern(Skin.PATTERN_BEE_STRIPES, +1)
+				.skinCoatPattern(Skin.PATTERN_BEE_STRIPES, +1)
 				.hasPerk(PerkLib.BeeOvipositor, +1)
 				.customRequirement("","vagina or bee cock",
 						function (body:BodyData):Boolean {

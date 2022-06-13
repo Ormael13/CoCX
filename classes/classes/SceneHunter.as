@@ -89,6 +89,7 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Benoit: can be feminized even after having sex with. The talk should start automatically when PC has a vagina & Benoit's affection is higher than 40.");
         outputText("\n- Benoite / Femoit: when impregnating her, you can select the size of the resultant clutch.");
         outputText("\n- Imps - 'regular' imp menu now accesible from imp lord/overlord menu.");
+        outputText("\n- Whitney - can switch between sub and dom and reset oral training stages.");
         outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical and you don't get nonsense like Amily living with corrupt Jojo), but be warned that the original writers probably intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
 
@@ -569,7 +570,11 @@ public class SceneHunter extends BaseContent {
         //Venus cock scenes
         if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && flags[kFLAGS.KAIJU_COCK] == 1)
             addButton(9, "VenusCock", SceneLib.boat.kaiju.kaijuGrowsWangus).hint("Venus discovers her new cock.");
-
+        //Venus cock scenes
+        if (flags[kFLAGS.MET_MARAE_CORRUPTED] > 0 && player.gender > 0)
+            addButton(10, "C.Marae(1)", SceneLib.boat.marae.firstCorruptEncounter).hint("Repeat your encounters with the corrupted goddess.");
+        if (flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] > 0 && player.gender > 0)
+            addButton(11, "C.Marae(2)", SceneLib.boat.marae.level2MaraeEncounter).hint("Repeat your encounters with the corrupted goddess.");
 
         addButton(13, "CampNPCs", recallScenes_NPCs);
         addButton(13, "Dungeons", recallScenes_dungeons);
@@ -650,7 +655,7 @@ public class SceneHunter extends BaseContent {
     private function recallScenes_phoenixTower():void {
         menu();
         //Harpy defeat is checked earlier. Kiri disappears after it too.
-        addButton(0, "Kiri", /*clearWrapper,*/ SceneLib.dungeons.heltower.kiriInteraction).hint("If you were too busy slaughtering phoenixes and didn't have time to properly 'interact' with Kiri, here's your new chance.");
+        addButton(0, "Kiri", SceneLib.dungeons.heltower.kiriInteraction).hint("If you were too busy slaughtering phoenixes and didn't have time to properly 'interact' with Kiri, here's your new chance.");
         addButton(1, "HarpyQueen", SceneLib.dungeons.heltower.fuckHarpyQueen).hint("Oops. Harpy queen is dead already. But she'll live forever in your memories. For <i>any</i> purposes.");
         addButton(14, "Back", recallScenes_dungeons);
     }
@@ -661,14 +666,5 @@ public class SceneHunter extends BaseContent {
         recalling = false; //EVERY recall scene must return here to clear the flag.
         doNext(camp.returnToCampUseOneHour);
     }
-
-    //I'll delete it soon if I don't find another place to use it.
-    /*
-    //clears output before going to menu
-    public function clearWrapper(fun:Function, ...args):void {
-        clearOutput();
-        fun.apply(null,args);
-    }
-    */
 }
 }

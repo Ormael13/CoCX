@@ -717,8 +717,11 @@ package classes.Scenes {
 				menusList.push({
 						name: "Balls",
 						func: accessBallsMenu
-					}
-				);
+					});
+				menusList.push({
+							name: "Special",
+							func: accessSexSpecialMenu
+					});
 			}
 
 			const menusPerPage: int = menusList.length > 14 ? 12 : 14;
@@ -992,6 +995,19 @@ package classes.Scenes {
 			outputText("[pg]Perhaps you'd like to change this?");
 
 			openPaginatedMenu(title, accessBallsMenu, currentPage, BallsMem.Memories);
+		}
+
+		private function accessSexSpecialMenu(currentPage: int = 0): void {
+			const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Genitals Special</u></font>\n";
+
+			clearOutput();
+			outputText(title);
+
+			const desc: String = "Ovipositors and other stuff"//CoC.instance.playerAppearance.describeBalls();
+			outputText(desc ?  desc : "You have no specials.");
+			outputText("[pg]Perhaps you'd like to change this?");
+
+			openPaginatedMenu(title, accessSexSpecialMenu, currentPage, SpecialsMem.Memories);
 		}
 
 		private function accessVaginasMenu(currentPage: int = 0): void {

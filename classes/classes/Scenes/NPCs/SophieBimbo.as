@@ -332,7 +332,7 @@ private function sophieBimboAppearance():void {
 	if (SceneLib.farm.farmCorruption.hasTattoo("sophie"))
 	{
 		outputText("\n\n");
-		if (SceneLib.farm.farmCorruption.sophieFullTribalTats())
+		if (SceneLib.farm.farmCorruption.fullTribalTats("sophie"))
 		{
 			outputText("She is covered from head to tail in tribal tattoos, erotic lines snaking all over her naked frame, giving her the look of a barely tamed savage.")
 		}

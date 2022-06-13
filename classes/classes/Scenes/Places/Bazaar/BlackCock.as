@@ -1826,11 +1826,8 @@ import classes.lists.Gender;
 				player.eyes.type = Eyes.HUMAN;
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.averageNipplesPerBreast() > 4) {
-				outputText("\n\nA tightness arises in your nipples as three out of four on each breast recede completely, the leftover nipples migrating to the middle of your breasts. <b>You are left with only one nipple on each breast.</b>");
-				for (i = 0; i < player.breastRows.length; i++) {
-					player.breastRows[i].nipplesPerBreast = 1;
-				}
+			if (rand(3) == 0 && changes < changeLimit && player.averageNipplesPerBreast() >= 4) {
+				transformations.NipplesPerBreastOne.applyEffect();
 				changes++;
 			}
 			// Main TFs

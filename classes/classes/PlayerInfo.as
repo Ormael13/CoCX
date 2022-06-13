@@ -225,7 +225,7 @@ public class PlayerInfo extends BaseContent {
 		miscStats += "<b>Exp needed to lvl up:</b> ";
 		if (player.level < CoC.instance.levelCap) miscStats += "" + player.requiredXP() + "\n";
 		else miscStats += "N/A (You already at max lvl)\n";
-		miscStats += "<b>Ascension points (curently possesed):</b> " + player.ascensionPerkPoints + "\n";
+		miscStats += "<b>Ascension points (currently possessed):</b> " + player.ascensionPerkPoints + "\n";
 		miscStats += "<b>Ascension points (possible to gain during next ascension):</b> " + camp.possibleToGainAscensionPoints() + "\n";
 		miscStats += "<b>Ascensions:</b> " + flags[kFLAGS.NEW_GAME_PLUS_LEVEL] + "\n";
 
@@ -1008,7 +1008,6 @@ public class PlayerInfo extends BaseContent {
 		if (EvangelineFollower.EvangelineAffectionMeter >= 5) {
 			var spellsCasted:Number = flags[kFLAGS.EVANGELINE_SPELLS_CASTED];
 			evangelineStats += "<b>Gems Purse:</b> " + EvangelineFollower.EvangelineGemsPurse + " gems\n";
-			evangelineStats += "<b>Spells Casted:</b> " + flags[kFLAGS.EVANGELINE_SPELLS_CASTED] + "\n";
 			evangelineStats += "<b>Spells Casted:</b> " + spellsCasted + "\n";
 			if (spellsCasted >= 0) {
 				if (spellsCasted >= 310) evangelineStats += "<b>Spells Cost:</b> 50%\n";
@@ -2301,3 +2300,4 @@ public class PlayerInfo extends BaseContent {
 	}
 }
 }
+

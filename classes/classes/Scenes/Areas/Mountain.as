@@ -58,7 +58,10 @@ public class Mountain extends BaseContent
 								   && (player.level >= 20);
 						},
 						chance: 0.5,
-						call  : SceneLib.etnaScene.repeatYandereEnc
+						call  : function ():void {
+							if (flags[kFLAGS.ETNA_AFFECTION] < 2) SceneLib.etnaScene.firstEnc();
+							else SceneLib.etnaScene.repeatYandereEnc();
+						}
 					}, {
 						name  : "alvina1",
 						when  : function():Boolean {
