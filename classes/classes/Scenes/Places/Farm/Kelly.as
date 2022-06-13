@@ -197,9 +197,10 @@ private function neverBreakKeltIntoKelly():void {
 }
 
 
-private function breakKeltGo():void {
+public function breakKeltGo():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_kelt);
+	if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 	outputText("You approach the uppity centaur with glinting eyes, determined to take him down.  Kelt mistakes your anger for desire and sneers.");
 	
 	outputText("\n\n\"<i>What do you want, you little "+ player.mf("sissy", "bitch") +"?  I'm done with you.  I'm already doing you a favor by teaching you a skill sluts like you will never use nor master.</i>\"");
@@ -303,33 +304,34 @@ private function breakKeltGo():void {
 	outputText("\n\n\"<i>Well, that was mediocre.  When I come back you better be able to give a decent blowjob.  Until then, piss off, slut.</i>\"");
 	
 	outputText("\n\nYou walk away before she can uncover her eyes; you don't have any business here now that you've used her.");
-	//consume items for 1x scene.
-	if(hasPinkEgg()) {
-		if(player.hasItem(consumables.PINKEGG)) player.consumeItem(consumables.PINKEGG);
-		else player.consumeItem(consumables.L_PNKEG);
-		if (player.hasItem(consumables.SUCMILK,10))
-			player.consumeItem(consumables.SUCMILK,10);
-		else 
-			player.consumeItem(consumables.P_S_MLK,10);
+	if (!recalling) {
+		//consume items for 1x scene.
+		if (hasPinkEgg()) {
+			if (player.hasItem(consumables.PINKEGG)) player.consumeItem(consumables.PINKEGG);
+			else player.consumeItem(consumables.L_PNKEG);
+			if (player.hasItem(consumables.SUCMILK, 10))
+				player.consumeItem(consumables.SUCMILK, 10);
+			else
+				player.consumeItem(consumables.P_S_MLK, 10);
 
+		} else {
+			if (player.hasItem(consumables.SUCMILK, 15))
+				player.consumeItem(consumables.SUCMILK, 15);
+			else
+				player.consumeItem(consumables.P_S_MLK, 15);
+		}
+
+		player.sexReward("Default", "Dick", true, false);
+		dynStats("cor", 5);
+		flags[kFLAGS.KELT_BREAK_LEVEL] = 1;
+		doNext(camp.returnToCampUseOneHour);
 	}
-	else
-	{
-		if (player.hasItem(consumables.SUCMILK,15))
-			player.consumeItem(consumables.SUCMILK,15);
-		else 
-			player.consumeItem(consumables.P_S_MLK,15);
-	}
-		
-	player.orgasm();
-	dynStats("cor", 5);
-	flags[kFLAGS.KELT_BREAK_LEVEL] = 1;
-	doNext(camp.returnToCampUseOneHour);
+	else doNext(recallWakeUp);
 }
 
 //Second encounter
 /*10 succubi milk (or 1 pink egg - large or small - and 5 succubi milk) */
-private function secondKeltBreaking():void {
+public function secondKeltBreaking():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_kelt);
 	outputText("You stroll up to Kelt, not afraid to tame the beastman a second time.  As soon as he spots you, he snorts and tramples the floor furiously.  At the same time, he turns his head back as if he was ready to gallop at any moment.  Torn between his fear of you and his desire for revenge, he doesn't dare charge you, but he doesn't move away either.  You profit from his indecision to walk straight up to him until you are face to face.  But his masculine visage doesn't appeal to you, for your main focus is the tool hanging between his hind legs.");
@@ -343,19 +345,18 @@ private function secondKeltBreaking():void {
 	outputText("\n\n\"<i>No, you did.  Last time I checked you were an eager big-tittied whore lusting after my cock.  You cried because you couldn't deepthroat it properly, remember?</i>\"");
 	
 	outputText("\n\n\"<i>You sneaky little prick, I'm going to make you pay for this.</i>\"");
-	
-	outputText("\n\nIt's a fight!");
-	startCombat(new Kelt());
-	spriteSelect(SpriteDb.s_kelt);
+
+	if (!recalling) {
+		outputText("\n\nIt's a fight!");
+		startCombat(new Kelt());
+	} else doNext(defeatKellyNDBREAKHIM);
 }
 
 
 //Defeat Him In Fight #1
 internal function defeatKellyNDBREAKHIM():void {
 	clearOutput();
-	//Cut these: You swing your [weapon], ready to use force against the restless centaur if necessary.
-	//Cut these: \"<i>Easy now, okay? You don't have your bow, and you know what I can do with my [weapon]. Now if you just calm down I promise I'll be much nicer this time.</i>\"
-	//lust/HP: 
+	if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 	if(monster.lust >= monster.maxLust()) outputText("Kelt moans, mauling at his mantits in his lust before he realizes what's going on");
 	else outputText("Kelt groans, slumping slightly from all the damage you've done to him");
 	outputText(".  You close in, saying, \"<i>Easy now, okay?  You know what I can do with my [weapon].  Now if you just calm down, I promise I'll be much nicer this time.</i>\"");
@@ -373,23 +374,7 @@ internal function defeatKellyNDBREAKHIM():void {
 	}
 	//NOT BIPEDAL
 	else {
-		var raceType:String;
-		if (player.isTaur()) {
-			raceType = "Centaur"
-		}
-		else if (player.isNaga()){
-			raceType = silly()? "Snek":"Snake"
-		}
-		else if (player.isDrider()){
-			raceType = silly()? "Spooder":"Spider"
-		}
-		else if (player.isGoo()){
-			raceType = "Goo"
-		}
-		else{
-			raceType = "[race]"
-		}
-		outputText("Of course, you can keep up with the four-legged warrior as a " + raceType +", but you don't actually need to outrun him - not for long.  You come up alongside the defeated archer and lean into him, pushing to the side and causing him to flounder in the mud, hooves flailing.  He can barely even try to right himself before you're towering overtop of him and looking down victoriously.");
+		outputText("Of course, you can keep up with the four-legged warrior as a [race], but you don't actually need to outrun him - not for long.  You come up alongside the defeated archer and lean into him, pushing to the side and causing him to flounder in the mud, hooves flailing.  He can barely even try to right himself before you're towering overtop of him and looking down victoriously.");
 		if (player.isDrider()){
 			outputText("\n\nYou spin out some thread from your spinneret, fashioning it into a strong rope, and tie it around his body.")
 		}
@@ -454,36 +439,34 @@ internal function defeatKellyNDBREAKHIM():void {
 	outputText("\n\nYou fuck her tits faster and faster until your [cock biggest] can't take any more boobflesh: it quivers on its own, the ultimate signal of your incoming climax.  Before you know it, you blast Kelly's face with your spooge.  A seemingly endless stream pours from your dong and paints the centaur-slut white, even moreso than before.  The few ropes that make it into her mouth are quickly swallowed down by the eager whore, and her tongue shamelessly slurps all the cum she can reach from her mouth.  She's getting addicted to your juices, wherever they come from.  A couple more days with this treatment and she'll turn into a complete cumslut, only craving your baby-batter.  This sure would be a nice change from the arrogant dick you used to see before, you think to yourself as you squeeze out the last drops of goo onto her face.");
 	
 	outputText("\n\nYou don't bother to speak anymore, just walking away as you pick up your [armor] and consider the future possibilities.  The bitch obviously enjoyed this 'lesson' more than she did last time.  Could it be that she's finally learning her true place?  Now all you need is another bunch of succubi milk, just in case the old Kelt within her stirs up in your absence...");
-	player.orgasm();
-	dynStats("cor", 5);
-	//consume items for 1x scene.
-	if(hasPinkEgg()) {
-		if(player.hasItem(consumables.PINKEGG)) player.consumeItem(consumables.PINKEGG);
-		else player.consumeItem(consumables.L_PNKEG);
-		if (player.hasItem(consumables.SUCMILK,5))
-			player.consumeItem(consumables.SUCMILK,5);
-		else 
-			player.consumeItem(consumables.P_S_MLK,5);
+	if (!recalling) {
+		//consume items for 1x scene.
+		if (hasPinkEgg()) {
+			if (player.hasItem(consumables.PINKEGG)) player.consumeItem(consumables.PINKEGG);
+			else player.consumeItem(consumables.L_PNKEG);
+			if (player.hasItem(consumables.SUCMILK, 5))
+				player.consumeItem(consumables.SUCMILK, 5);
+			else
+				player.consumeItem(consumables.P_S_MLK, 5);
 
+		} else {
+			if (player.hasItem(consumables.SUCMILK, 10))
+				player.consumeItem(consumables.SUCMILK, 10);
+			else
+				player.consumeItem(consumables.P_S_MLK, 10);
+		}
+		player.sexReward("Default", "Dick", true, false);
+		dynStats("cor", 5);
+		flags[kFLAGS.KELT_BREAK_LEVEL] = 2;
+		cleanupAfterCombat();
 	}
-	else 
-	{
-
-		if (player.hasItem(consumables.SUCMILK,10))
-			player.consumeItem(consumables.SUCMILK,10);
-		else 
-			player.consumeItem(consumables.P_S_MLK,10);
-	}
-
-	player.orgasm();
-	dynStats("cor", 5);
-	flags[kFLAGS.KELT_BREAK_LEVEL] = 2;
-	cleanupAfterCombat();
+	else doNext(recallWakeUp);
 }
 
 //Win Second Fight (Third Feminizing Encounter):
-internal function breakingKeltNumeroThree():void {
+public function breakingKeltNumeroThree():void {
 	clearOutput();
+	if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 	if(monster.HP <= monster.minHP()) outputText("Slumping down, ");
 	else outputText("Moaning, ");
 	outputText("he doesn't attempt to escape or attack you.  Before he can do anything, you're already on him. His reactions appear to be a lot slower since he began discovering his new craving for your dick.  He just stares at you nervously, waiting for your next move.");
@@ -527,7 +510,7 @@ internal function breakingKeltNumeroThree():void {
 	
 	outputText("\n\n\"<i>That's better.  That's much better, Kelly.  Now you are a decent cocksucker.  But that's still not enough.  I am not content with meek obedience, nor even with the most abject submission.  When you suck my dick, it must be of your own free will.  I want you to crave it. I want you to grovel at my feet and beg for one more drop of my spunk.  When I finally give it to you, it must be the greatest present you've ever had.  I don't want you to try your damn best to please your [master]; I want you to get off to it.  Do you see what I mean?</i>\"");
 	
-outputText("\n\nKelly remains quiet for a couple of seconds before slowly muttering, \"<i>Please [Master], give me your cock.  I want nothing more in the world.  I'll squeeze you until you're milked dry.  Please, let me suck your dick!</i>\"");
+	outputText("\n\nKelly remains quiet for a couple of seconds before slowly muttering, \"<i>Please [Master], give me your cock.  I want nothing more in the world.  I'll squeeze you until you're milked dry.  Please, let me suck your dick!</i>\"");
 	
 	outputText("\n\n\"<i>You're making a great effort, slut.  But I know you're not genuine.  You're ready to be a good cumslut, but not my good cumslut.  But don't worry, I'll take care of this in a minute.  Now jerk me off.</i>\"");
 	
@@ -555,24 +538,26 @@ outputText("\n\nKelly remains quiet for a couple of seconds before slowly mutter
 	outputText("\n\nShe obeys, albeit a little too slowly.  Impatient, you lift the keg and forcibly make her gulp down the sticky substance until she can barely breathe.  You spill some juice to the side and onto her legs but she's drunk most of it.  The potion has quick effects on her, rapidly taking over her body and making feel her dizzy.");
 	
 	outputText("\n\n\"<i>Ohhh...</i>\" Her breasts expand further, her pussy drips even more rivulets in sheer arousal.  Her eyes roll back and her breath grows short as she stares longingly at you.  You marvel at the effects: she's finally being turned into a horny cumslut!  Now all you have to do is wait for her to digest the hefty potion and come back to deliver the last dose.");
-	//consume items for 1x scene.
+	if (!recalling) {
+		//consume items for 1x scene.
+		if (player.hasItem(consumables.SUCMILK, 5))
+			player.consumeItem(consumables.SUCMILK, 5);
+		else
+			player.consumeItem(consumables.P_S_MLK, 5);
 
-	if (player.hasItem(consumables.SUCMILK,5))
-		player.consumeItem(consumables.SUCMILK,5);
-	else 
-		player.consumeItem(consumables.P_S_MLK,5);
-
-	player.orgasm();
-	dynStats("cor", 5);
-	flags[kFLAGS.KELT_BREAK_LEVEL] = 3;
-	cleanupAfterCombat();
+		player.sexReward("Default", "Dick", true, false);
+		dynStats("cor", 5);
+		flags[kFLAGS.KELT_BREAK_LEVEL] = 3;
+		cleanupAfterCombat();
+	} else doNext(recallWakeUp);
 }
 
 //Fourth encounter
 /*This one requires you not to have lost any corruption since the last encounter you had with her (so if you did, just get back to your former corruption level).*/
-private function finalKeltBreaking():void {
+public function finalKeltBreaking():void {
 	clearOutput();
     kellySprite();
+	if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 	outputText("You resolutely walk up to the centaur slut for her final lesson.  This time you don't even need to find her: she rushes to you on her own, her eyes glinting with need.");
 	outputText("\n\n\"<i>[Master], [Master]!  You're finally here.  I-I haven't been sleeping well since you left.  I've been dreaming about you... about your cock.  I haven't been able to eat properly, it's like I'm in a state of constant hunger that can't be satisfied... except by you.</i>\"");
 	
@@ -642,10 +627,13 @@ private function finalKeltBreaking():void {
 	outputText("\n\n\"<i>Good girl.</i>\"");
 	
 	outputText("\n\nSatisfied, you pat Kelly's butt and walk away, still recovering from the supernatural orgasm.  Now that you've acquired a new pet, there's a whole new range of possibilities that are open for you...");
-	player.orgasm();
-	dynStats("cor", 8);
-	flags[kFLAGS.KELT_BREAK_LEVEL] = 4;
-	doNext(camp.returnToCampUseOneHour);
+	if (!recalling) {
+		player.sexReward("Default", "Dick", true, false);
+		dynStats("cor", 8);
+		flags[kFLAGS.KELT_BREAK_LEVEL] = 4;
+		doNext(camp.returnToCampUseOneHour);
+	}
+	else doNext(recallWakeUp);
 }
 
 
@@ -782,24 +770,20 @@ private function approachKelly():void {
 	if(player.lust < 33) outputText("\n<b>You aren't aroused enough to pursue sex with your toy right now.</b>");
 	else addButton(1,"Sex",kellySexMenu);
 	if(flags[kFLAGS.KELLY_CUNT_TYPE] == 0) {
-		if(player.hasItem(consumables.EQUINUM)) {
-			addButton(5,"Give Equinum",giveKellyEquinum);
-			outputText("\nYou could give her equinum to gift her with a proper horse-cunt.");
-		}
+		addButtonIfTrue(5,"Give Equinum",giveKellyEquinum, "", player.hasItem(consumables.EQUINUM));
+		if (player.hasItem(consumables.EQUINUM)) outputText("\nYou could give her equinum to gift her with a proper horse-cunt.");
 		else outputText("\nIf you had equinum, you could give her a proper horse-cunt.");
 	}
 	else if(flags[kFLAGS.KELLY_CUNT_TYPE] == 1) {
-		if(player.hasItem(consumables.SUCMILK)) {
-			addButton(5,"Give SucMilk",giveKellySuccubiMilk);
-			outputText("\nYou could give her a succubi milk to get rid of that horse-pussy you gave her before.");
-		}
+		addButtonIfTrue(5,"Give SucMilk",giveKellySuccubiMilk, "", player.hasItem(consumables.SUCMILK));
+		if (player.hasItem(consumables.SUCMILK)) outputText("\nYou could give her a succubi milk to get rid of that horse-pussy you gave her before.");
 		else outputText("\nIf you had succubi milk, you could use that to give her a more human-like vagina.");
 	}
+	addButtonIfTrue(6,"Give CanineP",giveKellyAPepper, "", player.hasItem(consumables.CANINEP));
 	if(player.hasItem(consumables.CANINEP)) {
 		outputText("\nYou could give her a canine pepper");
 		if(flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] == 0) outputText(", but who knows how it will change her");
 		outputText(".");
-		addButton(6,"Give CanineP",giveKellyAPepper);
 	}
 	if(flags[kFLAGS.KELLY_VAGINALLY_FUCKED_COUNT] > 0 && flags[kFLAGS.KELLY_DISOBEYING_COUNTER] >= 3 && player.hasCock()) {
 		outputText("\n<b>It looks like Kelly has taken to pleasuring herself again in your absense.  Do you want to take care of that?</b>");
@@ -1186,8 +1170,9 @@ private function rideKellyForPunishment():void {
 	if(x < 0) x = player.smallestCockIndex();
 	clearOutput();
 	flags[kFLAGS.TIMES_RIDDEN_KELLY_FOR_PUNISHMENT]++;
-	//First Time: 
-	if(flags[kFLAGS.TIMES_RIDDEN_KELLY_FOR_PUNISHMENT] == 1) 
+	//First Time:
+	if(player.tallness < 78 && !player.isTaur()) sceneHunter.print("Fork: taller than 6'5\" or taur body.");
+		if(flags[kFLAGS.TIMES_RIDDEN_KELLY_FOR_PUNISHMENT] == 1)
 	{
 		outputText("You stroke Kelly's side thoughtfully.  What would be a good punishment for a centaur? Several ideas immediately occur, but all require... equipment.  You tap your chin as a plan of action falls into place.");
 		//[PC is 6'5</i>\" or less, not a centaur:
@@ -1409,7 +1394,7 @@ private function rideKellyForPunishment():void {
 		
 		outputText("\n\n\"<i>Thank you, [Master],</i>\" she says, smiling at you devotedly.  Her voice hardens. \"<i>You were right.  I deserved that punishment, because from it I will learn to make sure you never have to do it again.  I will be the most obedient cumslut there ever was!</i>\" You smile and tell her to run along for now.  Your grin widens as you watch the girl who never learns leave.");
 	}
-	player.orgasm();
+	player.sexReward("saliva", "Dick");
 	dynStats("sen", -1, "cor", .5);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1596,7 +1581,7 @@ private function kellyPreggers():void {
 	var x:int = Math.round(player.cumQ() / 20);
 	if (x > 80) x = 80;
 	if (flags[kFLAGS.KELLY_HEAT_TIME] > 0) x += 15;
-	if (rand(100) + 1 <= 80) {
+	if (x <= 80) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_CENTAUR - 84);
 		trace("Kelly knocked up.");
 	}
@@ -1770,7 +1755,7 @@ private function talkNHandToKelly():void {
 		{
 			outputText("\n\nYou ask if she has had much to do with Whitney, before or now.");
 			
-			outputText("\n\n\"<i>Not really,</i>\" says Kelly.  There's a hard note in her voice as she works her arms, masturbating your bulging meat.  \"<i>Before we just kept away from each other.  She knew about my wives and my aura but she didn't care, as long as I kept the imps and gnolls away and I didn't try it on her.  Of course it occurred to me, but... there's a cold edge to that woman.  Keeps it hidden, but there is - how else has she lived out here on her own for this long?  I didn't want to find out what she's hiding, plus I really needed the job.</i>\"  She's definitely pumping you aggressively, jerking your [cocks] with brisk movements until the flesh under her tight grasp is singing with blood.");
+			outputText("\n\n\"<i>Not really,</i>\" says Kelly.  There's a hard note in her voice as she works her arms, masturbating your bulging meat.  \"<i>Before we just kept away from each other.  She knew about my wives and my aura but she didn't care, as long as I kept the imps and gnolls away and I didn't try it on her.  Of course, it occurred to me, but... there's a cold edge to that woman.  Keeps it hidden, but there is - how else has she lived out here on her own for this long?  I didn't want to find out what she's hiding, plus I really needed the job.</i>\"  She's definitely pumping you aggressively, jerking your [cocks] with brisk movements until the flesh under her tight grasp is singing with blood.");
 			outputText("\n\nYou close your eyes and arch your neck to the sensation.  \"<i>Now when she sees me, she just gives me this really disgusted look.  Fucking bitch.  She thinks I'm so terrible now but thought everything was just great back when I was her pet demon-tainted rapist?  Bitch!</i>\"  She's really rubbing you furiously now and you groan as you surge to your high, trapped in a warm, smooth paint-shaker of a handjob.  She keeps up her growl as you tense and cum, opening your mouth as you ride it, flexing out buckets of spunk ");
 			if(!player.isTaur()) outputText("into the air");
 			else outputText("onto the ground");
@@ -1820,17 +1805,21 @@ private function rewardKelly():void {
 	}
 	flags[kFLAGS.KELLY_TIMES_REWARDED]++;
 	//*Don't know how the current \"punish\" system works so leave the function up to you.  Ideally each option should turn up 50% of the time after first punish
-	
+
 	menu();
 	//Hair Dye/Apple Sauce
-	//[chestnut brown/sable black/garish purple/bright pink/slutty blonde) 
-	if(player.cockThatFits(300) >= 0 && player.hasCock()) addButton(0,"Applesauce",giveKellyAppleSauce);
-	if(player.hasItem(consumables.BLACK_D) && flags[kFLAGS.KELLY_HAIR_COLOR] != "sable black") addButton(1,"Black Dye",dyeKellysBitchAssHair,consumables.BLACK_D);
-	if(player.hasItem(consumables.BLOND_D) && flags[kFLAGS.KELLY_HAIR_COLOR] != "slutty blonde") addButton(2,"Blond Dye",dyeKellysBitchAssHair,consumables.BLOND_D);
-	if(player.hasItem(consumables.PURPDYE) && flags[kFLAGS.KELLY_HAIR_COLOR] != "garish purple") addButton(3,"Purple Dye",dyeKellysBitchAssHair,consumables.PURPDYE);
-	if(player.hasItem(consumables.PINKDYE) && flags[kFLAGS.KELLY_HAIR_COLOR] != "bright pink") addButton(4,"Pink Dye",dyeKellysBitchAssHair,consumables.PINKDYE);
-	if(player.hasItem(consumables.BROWN_D) && flags[kFLAGS.KELLY_HAIR_COLOR] != "chestnut brown") addButton(5,"Brown Dye",dyeKellysBitchAssHair,consumables.BROWN_D);
-	
+	//[chestnut brown/sable black/garish purple/bright pink/slutty blonde)
+	if(flags[kFLAGS.KELLY_HAIR_COLOR] != "sable black")
+		addButtonIfTrue(0,"Black Dye", curry(dyeKellysBitchAssHair,consumables.BLACK_D), "", player.hasItem(consumables.BLACK_D));
+	if(flags[kFLAGS.KELLY_HAIR_COLOR] != "slutty blonde")
+		addButtonIfTrue(1,"Blond Dye",curry(dyeKellysBitchAssHair,consumables.BLOND_D), "", player.hasItem(consumables.BLOND_D));
+	if(flags[kFLAGS.KELLY_HAIR_COLOR] != "garish purple")
+		addButtonIfTrue(2,"Purple Dye",curry(dyeKellysBitchAssHair,consumables.PURPDYE), "", player.hasItem(consumables.PURPDYE));
+	if(flags[kFLAGS.KELLY_HAIR_COLOR] != "bright pink")
+		addButtonIfTrue(3,"Pink Dye",curry(dyeKellysBitchAssHair,consumables.PINKDYE), "", player.hasItem(consumables.PINKDYE));
+	if(flags[kFLAGS.KELLY_HAIR_COLOR] != "chestnut brown")
+		addButtonIfTrue(4,"Brown Dye",curry(dyeKellysBitchAssHair,consumables.BROWN_D), "", player.hasItem(consumables.BROWN_D));
+	addButtonIfTrue(5,"Applesauce",giveKellyAppleSauce, "Req. a fitting cock.", player.cockThatFits(300) >= 0);
 	addButton(14,"Back",approachKelly);
 }
 
@@ -1849,7 +1838,6 @@ private function dyeKellysBitchAssHair(color:ItemType):void {
 	if(color == consumables.BLACK_D) {
 		outputText("\n\nKelly whips her jet black hair to look at it, trotting back and forth and considering, swishing her equally black tail.\n\n\"<i>Mmm.  Not sure how much I like this, [Master],</i>\" she says eventually.  \"<i>It's very... severe, isn't it?</i>\"  You say you picked it because you think it will contrast well with the substance she's most often covered in.  Kelly laughs fondly as she begins the long process of retying her braid.\n\n\"<i>Oh, [Master].  Always thinking two moves ahead.  Thank you for your reward!</i>\"");
 		flags[kFLAGS.KELLY_HAIR_COLOR] = "sable black";
-		player.consumeItem(consumables.BLACK_D);
 	}
 	//Blonde dye: 
 	else if(color == consumables.BLOND_D) {
@@ -1857,7 +1845,6 @@ private function dyeKellysBitchAssHair(color:ItemType):void {
 		outputText("\n\n\"<i>This feels... right, [Master].  Very right.</i>\"  She looks at you lustfully.  \"<i>Wanna see if we have more fun?</i>\"  You say you'll definitely be back later to test that theory out.");
 		
 		outputText("\n\n\"<i>Don't stay away too long,</i>\" she purrs, as she begins the long process of retying her braid.  You feel your bottle blonde bitch's eyes on you for a long time after you head out of the field.");
-		player.consumeItem(consumables.BLOND_D);
 		flags[kFLAGS.KELLY_HAIR_COLOR] = "slutty blonde";
 	}
 	//Purple dye: 
@@ -1866,14 +1853,12 @@ private function dyeKellysBitchAssHair(color:ItemType):void {
 		outputText("\n\n\"<i>Like the goblins, I guess?  I don't know how much I like this color, [Master].</i>\"  You say it'll serve as a constant reminder to her that she's a cock hungry breeding machine.  Kelly nods thoughtfully as she begins the long process of retying her braid.");
 		outputText("\n\n\"<i>You're right [Master], I would hate to ever forget that.  Thank you for your reward!</i>\"");
 		flags[kFLAGS.KELLY_HAIR_COLOR] = "garish purple";
-		player.consumeItem(consumables.PURPDYE);
 	}
 	//Pink dye:
 	else if(color == consumables.PINKDYE) {
 		outputText("\n\nKelly smiles with delight as she whips her bubblegum pink hair around to look at it, even prancing a bit so that her equally pink tail bounces.");
 		outputText("\n\n\"<i>Ooh I like this, it makes me feel so... girly.  I feel pink inside!</i>\"  You certainly do, you say.  Kelly giggles as she begins the long process of retying her braid.  She even sounds bubblier.");
 		outputText("\n\n\"<i>Thank you for your reward, [Master]!</i>\"");
-		player.consumeItem(consumables.PINKDYE);
 		flags[kFLAGS.KELLY_HAIR_COLOR] = "bright pink";
 	}
 	//Brown dye: Kelly smiles as she examines the regained chestnut brown color of her hair and tail.
@@ -1881,9 +1866,9 @@ private function dyeKellysBitchAssHair(color:ItemType):void {
 		outputText("\n\n\"<i>I'd almost forgotten what it looked like.</i>\"  She sighs, twisting a lock of it in a finger.  She looks quite different with her hair down - it reaches almost to her flanks.  \"<i>You'll bring more dye, right?  I'd love to do more colors.</i>\"  That depends, you say, on her being good.  Kelly sets her jaw determinedly as she begins the long process of retying her braid.");
 		outputText("\n\n\"<i>Of course, [Master].  Thank you for your reward!</i>\"");
 		flags[kFLAGS.KELLY_HAIR_COLOR] = "chestnut brown";
-		player.consumeItem(consumables.BROWN_D);
 	}
 	else outputText("\n\nYO dog, " + color + " is definitely not working right. Please report this to Ormael/Aimozg using the link to mod thread on the fenoxo forum.");
+	player.consumeItem(color);
 	menu();
 	addButton(0,"Next",approachKelly);
 }
@@ -1955,9 +1940,10 @@ private function giveKellyAppleSauce():void {
 	var y:int = player.cockThatFits2(300);
 	//Not Centaur: 
 	if(!player.isTaur()) {
+		sceneHunter.print("Check failed: taur body.");
 		outputText("\n\nThe mere smell of the apple sauce has got Kelly's vagina dribbling, and in the close, warm environment of the barn the cloying, sweet smell radiating off her has got [eachCock] rock hard again, and your arousal urges you to work quickly.  You lead her to a shelf roughly level with her collarbone and place the bowl of apples sauce on it.  Transfixed by it, swallowing audibly, the centaur reaches for it automatically.  You catch her hand.");
 		outputText("\n\n\"<i>No.  Put them here.</i>\"  You set each one on either side of the bowl so she is clasping it.  \"<i>Don't lift it until you have to.  That's it...</i>\"  You watch, pulling off piece after piece of your [armor], as she dips her head into the bowl, scoops up a long lap of the green mash with her tongue and guides it into her wet mouth.  Her throat works and she closes her eyes.  Behind her, the intermittent dripping of her femcum on the straw turns into a steady trickle and you shake off the last of your underclothes in a hurry, stride over to her hindquarters and push your " + cockDescript(x) + " against her sopping pussy gently, gripping her " + flags[kFLAGS.KELLY_HAIR_COLOR] + " tail to her side so she doesn't inadvertently flick you with it.");
-		outputText("\n\nShe is radiating heat and her wet depths suck at your " + player.cockHead(x) + " deliciously.  Still, you hold back on your pulsing need to bury your cock into her, pressing at her entrance softly until you see her head go down again, and the sloppy sound of a centaur trying to draw as much apple sauce into her mouth as she can reaches your ears.  With a contented sigh, you slide your " + cockDescript(x) + " into her, exulting in the hot slickness which envelops your sex bit by bit.");
+		outputText("\n\nShe is radiating heat and her wet depths suck at your " + player.cockHead(x) + " deliciously.  Still, you hold back on your pulsing need to bury your cock into her, pressing at her entrance softly until you see her head go down again, and the sloppy sound of a centaur trying to draw as much apple sauce into her mouth as she can reach your ears.  With a contented sigh, you slide your " + cockDescript(x) + " into her, exulting in the hot slickness which envelops your sex bit by bit.");
 		if(player.cocks[x].cockThickness >= 4) outputText("  Your girth spreads her fuck tunnel wide and you grunt at the delicious tightness of it as you pack her full of cock.");
 		
 		outputText("\n\n\"<i>Oh [Master]...</i>\" Kelly groans, arching her head back from her feed.  A series of clenches grip your [cock] and a sudden gush of fluid warms your ");
@@ -2021,7 +2007,7 @@ private function giveKellyAppleSauce():void {
 		outputText("\"<i>That tastes better every time you make it [Master],</i>\" she purrs when you break away, gazing into your eyes lovingly.  \"<i>You should go into business with it.</i>\"  You grin at the idea and say who knows?  Maybe Mareth will eventually behave well enough to appreciate it as much as she does.  \"<i>I long for that day every moment of every day,</i>\" your slave replies fervently, stroking the hand you're holding her face with.");
 		outputText("\n\nYou dress yourself and amble back out of the stable with her before sending her on her way with a loving, jiggling swat to her boobs.");
 	}
-	player.orgasm();
+	player.sexReward("vaginalFluids", "Dick");
 	dynStats("sen", -2);
 	flags[kFLAGS.KELLY_TIMES_APPLESAUCED]++;
 	doNext(camp.returnToCampUseOneHour);
@@ -2038,6 +2024,7 @@ private function kellyBJsAhoy():void {
 	
 	//Not Centaur: 
 	if(!player.isTaur()) {
+		sceneHunter.print("Check failed: taur body");
 		outputText("\n\nYour [cock biggest] strains outwards as you slide out of your [armor], and you grin as you draw in close to Kelly's face, letting the heavy, demanding smell of your musk envelop her.  Her skin flushes and her breath comes more rapidly as you brush her cheek with it.  You smile and gently but firmly tell her to put her hands under her tits, close her eyes, open her mouth and then be still.  You admire the sight as you languidly rub yourself, your pretty centaur slave presenting her big round breasts to you and her tongue out, waiting to take your load whole.");
 		outputText("\n\nYou step in and tease her with your [cock biggest], softly brushing her face with your [cockHead biggest], working the musky smell deep into her head.  She closes her eyes and breathes out deeply, enveloping your crotch in warm air.");
 		if(player.cocks[player.biggestCockIndex()].cockType == CockTypesEnum.HORSE) outputText("  You wonder whether the fact it is a horse cock, protruding proudly out of its sheath, makes it particularly difficult for her to resist, that it triggers some deep urge hardwired into her.  There's no way to really judge, but it seems like you've only just begun to tantalize her with it that the air below you is filled with bitten off grunts and moans, her mouth and head unconsciously bending towards your flared stallion prick as you rub it into her, always keeping it tantalizingly out of reach of her mouth.");
@@ -2251,7 +2238,7 @@ private function kellyBJsAhoy():void {
 		
 		outputText("\n\n\"<i>See?  I'm a good girl, [Master].  Never doubt it!</i>\" she says with a wide grin, putting her arms around your waist and gazing up at you, profoundly proud of herself.  You suppose you should be mad at her for taking advantage of your out-of-control libido, but it's difficult to get really angry with a slave who sucks dick quite as well as she does.  After you've rested for a short while, you say goodbye to your cumslut centaur with a fond kiss on the forehead and a slap on the ass, before leaving the farm behind you.");
 	}
-	player.orgasm();
+	player.sexReward("saliva", "Default");
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }

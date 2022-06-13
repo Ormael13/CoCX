@@ -8,8 +8,8 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.ArmorLib;
 import classes.Items.UndergarmentLib;
 import classes.Scenes.NPCs.ZenjiScenes;
-import classes.Scenes.SceneLib;
 import classes.Scenes.Places.TrollVillage;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class Yenza extends TrollVillageAbstractContent{
@@ -20,7 +20,7 @@ public class Yenza extends TrollVillageAbstractContent{
         clearOutput();
         if (TrollVillage.YenzaUnlocked == 0){
             if (!TrollVillage.ZenjiFollowing){
-                if (player.femininity > 30 || player.hasBreasts()){
+                if ((player.femininity > 30 || player.hasBreasts()) && !flags[kFLAGS.LOW_STANDARDS_FOR_ALL]){
                     outputText("Your eyes roam around until you decide to approach the rather beautiful looking troll sitting by herself.\n" +
                             "\n" +
                             "As you approach she notices you. She scrunches her face in disgust. As you get closer she scoffs and turns away from you.\n" +
@@ -150,6 +150,7 @@ public class Yenza extends TrollVillageAbstractContent{
         if (player.cockThatFits(40)) addButton(2, "Cowgirl", YenzaCowgirl);
         else addButtonDisabled(2,"Cowgirl","Your dick is too big for her.");
         if (TrollVillage.YenzaUnlocked >= 4) addButton(3, "Submit", YenzaSubmit);
+        else addButtonDisabled(3, "???", "Req. to know her better.");
     }
 
     private function YenzaAppearance():void{

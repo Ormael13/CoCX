@@ -468,7 +468,7 @@ public class Combat extends BaseContent {
 				else if (player.wings.type == Wings.THUNDEROUS_AURA) outputText("You take flight, letting the raging storm carry you into the air.");
 				else if (player.wings.type == Wings.ETHEREAL) outputText("You take flight, ascending through the storm.");
 				else if (player.wings.type == Wings.LEVITATION) outputText("You focus your kinetic abilities, willing yourself into the air.");
-				else outputText("You open you wing taking flight.");
+				else outputText("You open your wings and take flight.");
 				player.createStatusEffect(StatusEffects.Flying, flightDurationNatural(), 0, 0, 0);
 			}
 			else if (flags[kFLAGS.AUTO_FLIGHT] == 2 && player.soulforce >= flyingSwordUseCost() && player.weaponFlyingSwordsName != "nothing") {
