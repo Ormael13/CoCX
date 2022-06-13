@@ -1433,6 +1433,9 @@ private function takeYerLizardHomePartII():void {
 	//flag arian as follower
 	flags[kFLAGS.ARIAN_FOLLOWER] = 1;
 	flags[kFLAGS.ARIAN_SCALES] = 1;
+	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Arian pulls a shining shard from [Arian eir] inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	doNext(camp.returnToCampUseOneHour);
 }
 

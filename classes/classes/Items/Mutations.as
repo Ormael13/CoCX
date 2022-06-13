@@ -459,8 +459,7 @@ public final class Mutations extends MutationsHelper {
     }
     public function nonuplethrustmanual(player:Player):void {
         clearOutput();
-        if (player.hasPerk(PerkLib.SoulPersonage) && player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) {
-        //if (player.hasPerk(PerkLib.SoulSprite) && player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) {
+        if (player.hasPerk(PerkLib.SoulSprite) && player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) {
             if (!player.hasStatusEffect(StatusEffects.KnowsNonupleThrust)) {
                 outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Nonuple Thrust.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new soul skill: Nonuple Thrust.</b>");

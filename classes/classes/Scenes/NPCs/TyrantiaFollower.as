@@ -758,6 +758,9 @@ public function TyrantiaReactions2():void {
 	}
 	TyrantiaFollowerStage = 4;
 	outputText("<b>Tyrantia has joined you as a lover.</b>\n\n");
+	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Tyrantia pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	doNext(camp.returnToCampUseOneHour);
 }
 public function AmilyReaction():void {
@@ -1400,4 +1403,4 @@ public function JojoReaction():void {
 doNext(camp.returnToCamp);
 }*/
 }
-}
+}

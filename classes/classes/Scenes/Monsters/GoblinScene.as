@@ -1097,6 +1097,7 @@ public class GoblinScene extends BaseContent {
 
     private function mindbreakGoblin():void {
         clearOutput();
+        if (silly()) outputText("<b>ASSUMING DIRECT CONTROL</b>\n\n");
         outputText("You muse about what you will do to the annoying little wretch when you remember your sister Kaerb-Dnim's wishes and grin." +
             " You approach the defeated slut, your mind already going wild with excitement as you grab her and proceed to fuck her in a way she would have never predicted." +
             " You insert your tentacles and prod for the part of her brain which processes reasoning. The sensation of fucking her mind is very pleasurable to you." +
