@@ -3552,13 +3552,13 @@ public class PerkLib
 				"You have reached 6th stage of soul cultivation. (+25 max Hunger, +150 max SF at lvl 45, 48, 51; +15% to max SF)")
 				.withBuffs({'wis.mult':0.10});
 		public static const SoulExalt:PerkType = mk("Soul Exalt", "Soul Exalt",
-				"You have reached 7th stage of soul cultivation. (+30 max Hunger, +5 to max Wis, +90 max SF at lvl 42, 44, 46; +20% to max SF at lvl 42)")
+				"You have reached 7th stage of soul cultivation. (+30 max Hunger, +210 max SF at lvl 54, 57, 60, 63; +20% to max SF)")
 				.withBuffs({'wis.mult':0.15});
 		public static const SoulKing:PerkType = mk("Soul King", "Soul King",
 				"You have reached 10th stage of soul cultivation. (+35 max Hunger, +5 to max Wis, +120 max SF at lvl 60, 62, 64; +25% to max SF at lvl 60)")
 				.withBuffs({'wis.mult':0.20});
 		public static const SoulOverlord:PerkType = mk("Soul Overlord", "Soul Overlord",
-				"You have reached 8th stage of soul cultivation. (+30 max Hunger, +5 to max Wis, +100 max SF at lvl 48, 50, 52; +20% to max SF at lvl 48)")
+				"You have reached 8th stage of soul cultivation. (+30 max Hunger, +270 max SF at lvl 66, 69, 72, 75; +20% to max SF)")
 				.withBuffs({'wis.mult':0.15});
 		public static const SoulPersonage:PerkType = mk("Soul Personage", "Soul Personage",
 				"You have reached 2nd stage of soul cultivation. (+20 max Hunger, +45 max SF at lvl 9, 12, 15; +10% to max SF)")
@@ -3573,7 +3573,7 @@ public class PerkLib
 				.withBuffs({'wis.mult':0.10});
 		public static const SoulTempering:SoulTemperingPerk = new SoulTemperingPerk();
 		public static const SoulTyrant:PerkType = mk("Soul Tyrant", "Soul Tyrant",
-				"You have reached 9th stage of soul cultivation. (+30 max Hunger, +5 to max Wis, +110 max SF at lvl 54, 56, 58; +20% to max SF at lvl 54)")
+				"You have reached 9th stage of soul cultivation. (+30 max Hunger, +330 max SF at lvl 78, 81, 84, 87; +20% to max SF)")
 				.withBuffs({'wis.mult':0.15});
 		public static const SoulWarrior:PerkType = mk("Soul Warrior", "Soul Warrior",
 				"You have reached 3rd stage of soul cultivation. (+20 max Hunger, +60 max SF at lvl 18, 21, 24; +10% to max SF)")
@@ -6250,40 +6250,22 @@ public class PerkLib
             //Tier 3
             //2nd perk for flying swords slots
             //Tier 4
-            /*SoulSprite.requirePerks(SoulWarrior, HclassHeavenTribulationSurvivor)
-					.requireWis(100)
-                    .requireLevel(27);*/
             FleshBodyWarriorStage.requireLevel(24)
                     .requirePerk(FleshBodyApprenticeStage);
             //Tier 5
 			//Tier 6
-            /*SoulScholar.requirePerk(SoulSprite)
-                    .requireWis(140)
-                    .requireLevel(36);
             //Tier 7
-            SoulElder.requirePerk(SoulScholar)
-                    .requireWis(160)
-                    .requireLevel(45);
             //Tier 8
             //Tier 9
-            SoulExalt.requirePerks(SoulElder, GclassHeavenTribulationSurvivor)
-                    .requireWis(200)
-                    .requireLevel(54);*/
             //Tier 10
             FleshBodyElderStage.requireLevel(60)
                     .requirePerk(FleshBodyWarriorStage);
             //Tier 11
-            /*SoulOverlord.requirePerk(SoulExalt)
-                    .requireWis(240)
-                    .requireLevel(66);
             //Tier 12
             //Tier 13
-            SoulTyrant.requirePerks(SoulOverlord, FclassHeavenTribulationSurvivor)
-                    .requireWis(280)
-					.requireLevel(78);
             //Tier 14
             //Tier 15
-     		SoulKing.requirePerk(SoulTyrant)
+     		/*SoulKing.requirePerk(SoulTyrant, FclassHeavenTribulationSurvivor)
                     .requireWis(320)
                     .requireLevel(90);*/
             //Tier 16
