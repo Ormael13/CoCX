@@ -1105,16 +1105,11 @@ public function soularena():void {
 			else addButtonDisabled(3, "4th", "You not have enough spirit stones (15) to listen to those lectures.");
 		}
 		else if (player.hasKeyItem("Heavenly Tribulation: Myths and Facts") >= 0 || player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButtonDisabled(3, "4th", "You already learned about third step of soul cultivation.");
-		/*if (!player.hasPerk(PerkLib.SoulSense) && player.hasPerk(PerkLib.SoulSprite)) {
+		if (player.hasKeyItem("A summary of Marethian Sects") < 0 && player.hasPerk(PerkLib.SoulSprite)) {
 			if (flags[kFLAGS.SPIRIT_STONES] >= 20) addButton(4, "5th", mrsShigureLecturesFourth).hint("Mrs. Shigure Lectures about fourth step of soul cultivation.");
 			else addButtonDisabled(4, "5th", "You not have enough spirit stones (20) to listen to those lectures.");
 		}
 		else if (player.hasPerk(PerkLib.Dantain)) addButtonDisabled(4, "5th", "You already learned about fourth step of soul cultivation.");
-		if (!player.hasPerk(PerkLib.SoulSense) && player.hasPerk(PerkLib.SoulScholar)) {
-			if (flags[kFLAGS.SPIRIT_STONES] >= 25) addButton(5, "6th", mrsShigureLecturesFifth).hint("Mrs. Shigure Lectures about fifth step of soul cultivation.");
-			else addButtonDisabled(5, "6th", "You not have enough spirit stones (25) to listen to those lectures.");
-		}
-		else if (player.hasPerk(PerkLib.Dantain)) addButtonDisabled(5, "6th", "You already learned about fifth step of soul cultivation.");*/
 		if (player.hasPerk(PerkLib.Dantain)) addButton(13, "MissKyiana", missKyianaManualsShop);
 		else addButtonDisabled(13, "???", "After attending 2nd Lecture.");
 		addButton(14, "Back", soularena);
@@ -1194,22 +1189,21 @@ public function soularena():void {
 		player.createKeyItem("Heavenly Tribulation: Myths and Facts", 0, 0, 0, 0);
 		doNext(camp.returnToCampUseTwoHours);
 	}
-    /*
+    
 	public function mrsShigureLecturesFourth():void {
 		clearOutput();
 		flags[kFLAGS.SPIRIT_STONES] -= 20;
-		outputText("\"<i></i>\"\n\n");
-		outputText("\"<i></i>\"\n\n");
+		outputText("Placeholder on milf floof casual greeting.\n\n");
+		outputText("\"<i>Congratulation everyone for surviving tribulation. But not feel all powerfull over surviving 'weakest of the whole pack'. After each three major realms there will be awaiting you another one such event. ANd it would be stronger and more cunning each tiome to test your mantle.</i>\" Shigure starts explaining after applauding everyone on minor success.\n\n");
+		outputText("\"<i>Now some of you may feel like they feel stronger connection to some of world energies. It's called Dao and you can find it in anything be it sky, ground or even living beings. Some of the races gains stronger affinity to their element making it easier to comprehend it in form of elemental dao. So not be affraid to spend some time on comprehending elemental energies as it would be beneficial. It would make you elemental attacks stronger for the dao you compreheanded and");
+		outputText(" even could give some minor protection from it. But the last part may be not noticable until ending early stages of comprehension.</i>\" She continue her explanations on elemental daos giving even some examples.\n\n");
+		outputText("\"<i>Second matter i would like to meantion is sects. Some maybe heard about them or maybe not. In simpler words it's groups of similar minded cultivators with patriarch leader, it direct subordinates like elders and common members been disciplines. Now that you all are behind first major trial you could try your luck to join one of those sects. It would reduce your freedom you enjoy now as rogue cultivators but instead will give access to better materials or");
+		outputText("various manuals. Even could give some measure of protection. And not all of them getting well along with others maybe aside tiems that called for it like the massive battle with demons that devastated large area of mareth. SOme may know that area now as simply Battlefield.</i>\" She goes on for another ten to twenty minutes talking about benefits or obligations that comes with been sect member.\n\n");
+		outputText("\"<i>As parting gift for our last lecture i would give you all this small booklet that giving info on local sects. And if fate allow we may meet again somewhere in State of Azoh. May your dao be endless,</i>\" with this she ends lecture and leave the arean but not before meantioning againabout possible to pick booklet about sects.\n\n");
+		outputText("<b>Gained Key Item: A summary of Marethian Sects</b>");
+		player.createKeyItem("A summary of Marethian Sects", 0, 0, 0, 0);
 		doNext(camp.returnToCampUseFourHours);
 	}
-	public function mrsShigureLecturesFifth():void {
-		clearOutput();
-		flags[kFLAGS.SPIRIT_STONES] -= 25;
-		outputText("\"<i></i>\"\n\n");
-		outputText("\"<i></i>\"\n\n");
-		doNext(camp.returnToCampUseFourHours);
-	}
-	*/
 	public function missKyianaManualsShop():void {
 		clearOutput();
 		outputText("\"<i>Five Spirit Stones per manual.</i>\" Youngful kitsune states prices firmly giving impression they aren't negotionable.\n\n");
