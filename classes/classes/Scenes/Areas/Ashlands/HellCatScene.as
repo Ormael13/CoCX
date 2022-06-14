@@ -217,12 +217,7 @@ public function WitchesSabbathThirdVisitYes():void {
 	if (!player.hasCock()) {
 		outputText("You mewl in pleasure as the flesh between your legs" + (player.hasVagina() ? ", right above your pussy," : "") + " heats up and begins to pulse as something not unlike a sheath forms there. You clench your jaw as something slides out inch after inch and you catch glimpse of your newly formed cat cock ");
 		outputText("pulsing with an unholy purple glow as it grows bigger and bigger until it reaches a full 10 inches in length, causing you to orgasm, covering your belly and face with cum.");
-		player.createCock();
-		player.cocks[0].cockLength = 10;
-		player.cocks[0].cockThickness = 2.5;
-		player.cocks[0].cockType = CockTypesEnum.CAT;
-		player.cocks[0].knotMultiplier = 1;
-		Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.CAT));
+		transformations.CockCat(0, 10, 2.5).applyEffect(false);
 	}
 	if (player.hasCock() && player.catCocks() < player.cockTotal()) {
 		outputText("Your cock" + (player.cockTotal() > 1 ? "s" : "") + " begin" + (player.cockTotal() > 1 ? "" : "s") + " to feel strange as the warmth begins to warp " + (player.cockTotal() > 1 ? "them" : "it") + " against your will.");
@@ -335,11 +330,7 @@ public function reformallcockstokittycocks2():void {
 	//outputText("You moan, feeling overwhelming heat build in your nethers as ");
 	if (!player.hasCock()) {
 		outputText("a sheath forms between your legs. You mewl in pleasure as a brand new fat cat cock slowly slide out of your sheath, inch after inch, going erect within seconds and dripping hot drops of precum on the ground. It’s only as it reaches its full 10 inches that the the throbbing heat builds into a full blown orgasm, your freshly grown cock splattering the volcanic ground with kitty spunk. ");
-		player.createCock();
-		player.cocks[0].cockLength = 10;
-		player.cocks[0].cockThickness = 2.5;
-		player.cocks[0].cockType = CockTypesEnum.CAT;
-		player.cocks[0].knotMultiplier = 1;
+		transformations.CockCat(0, 10, 2.5).applyEffect(false);
 	}
 	else {
 		outputText("your cock is wrapped in unholy warmth");
