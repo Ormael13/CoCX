@@ -7117,9 +7117,9 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Partial scaled skin
-        if (changes < changeLimit && player.hasPlainSkinOnly() && rand(3) == 0) {
+        if (changes < changeLimit && (player.hasPlainSkinOnly() || player.hasCoatOfType(Skin.SCALES)) && rand(3) == 0) {
             outputText("[pg]");
-            transformations.SkinScales(Skin.COVERAGE_LOW, {color: "red"}).applyEffect();
+            transformations.SkinScales(Skin.COVERAGE_LOW, {colors: SalamanderRace.SalamanderScaleColors}).applyEffect();
             changes++;
         }
         if (changes < changeLimit && !player.hasPartialCoat(Skin.SCALES) && rand(4) == 0) {
