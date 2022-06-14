@@ -87,7 +87,7 @@ public class AbstractSpell extends CombatAbility {
 			if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				return "You can only use buff magic while underground."
 			}
-			if (combat.isEnnemyInvisible) {
+			if (combat.isEnemyInvisible) {
 				return "You cannot use offensive spells against an opponent you cannot see or target."
 			}
 		}

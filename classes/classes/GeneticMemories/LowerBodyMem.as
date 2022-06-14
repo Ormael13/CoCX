@@ -545,7 +545,7 @@ package classes.GeneticMemories {
 	  public static const YETI: int = _partid++;
 	  EnumValue.add(Memories, YETI, "YETI", {
 		  id: "Yeti Lower Body",
-		  name: "Yeti wyrm Lower Body",
+		  name: "Yeti Lower Body",
 		  cost: 100,
 		  title: "Yeti",
 		  transformation: function(): Transformation {
@@ -561,6 +561,28 @@ package classes.GeneticMemories {
 		  title: "Scylla",
 		  transformation: function(): Transformation {
 			  return CoC.instance.transformations.LowerBodyScylla
+		  }
+	  });
+
+	  public static const KRAKEN: int = _partid++;
+	  EnumValue.add(Memories, KRAKEN, "KRAKEN", {
+		  id: "Kraken Lower Body",
+		  name: "Kraken Tentacles",
+		  cost: 300,
+		  title: "Kraken",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.LowerBodyKraken
+		  }
+	  });
+
+	  public static const HYDRA: int = _partid++;
+	  EnumValue.add(Memories, HYDRA, "HYDRA", {
+		  id: "Hydra Lower Body",
+		  name: "Hydra Lower body",
+		  cost: 200,
+		  title: "Hydra",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.LowerBodyHydra
 		  }
 	  });
 
