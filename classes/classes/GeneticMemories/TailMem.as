@@ -439,6 +439,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const DOG:int = _partid++;
+		EnumValue.add(Memories, DOG, "DOG", {
+			id: "Dog Tail",
+			name: "Dog Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "Dog",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailDog;
+			}
+		});
+
 		public static const CAVE_WYRM:int = _partid++;
 		EnumValue.add(Memories, CAVE_WYRM, "CAVE_WYRM", {
 			id: "Cave Wyrm Tail",
@@ -472,16 +483,16 @@ package classes.GeneticMemories {
 			}
 		});
 
-	  public static const DOG:int = _partid++;
-	  EnumValue.add(Memories, DOG, "DOG", {
-		  id: "Dog Tail",
-		  name: "Dog Tail",
-		  cost: function():Number { return getTailCost(player.tailCount, 1);},
-		  title: "Dog",
-		  transformation: function(): Transformation {
-			  return CoC.instance.transformations.TailDog;
-		  }
-	  });
+		public static const HYDRA:int = _partid++;
+		EnumValue.add(Memories, HYDRA, "HYDRA", {
+			id: "Hydra Lower Body",
+			name: "Hydra Tail",
+			cost: 200,
+			title: "Hydra",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailHydra;
+			}
+		});
 
 	  public static function getTailCost(startTails:int, endTails:int):int {
 		  return Math.abs(startTails - endTails)*100 || 100;

@@ -7392,7 +7392,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 8;
 	    player.lowerBody = LowerBody.SCYLLA;
 	    if (doOutput) outputText(desc);
-		  Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.SCYLLA));
+		Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.SCYLLA));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7400,7 +7400,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  },
 	  //is possible
 		function (): Boolean {
-			return !InCollection(player.lowerBody, LowerBody.SCYLLA, LowerBody.NAGA, LowerBody.CLOVEN_HOOFED);
+			return !InCollection(player.lowerBody, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.CLOVEN_HOOFED);
 		}
 	);
 
@@ -7409,7 +7409,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    // Doesn't support tails
+		TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyScylla, doOutput);
+
+		// Doesn't support tails
 	    TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.GillsNone, doOutput);
@@ -7420,10 +7422,15 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 10;
 	    player.lowerBody = LowerBody.KRAKEN;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.KRAKEN));
 	  },
 	  // is present
 	  function (): Boolean {
 	    return player.lowerBody === LowerBody.KRAKEN;
+	  },
+	  // is possible
+	  function (): Boolean {
+	    return player.lowerBody == LowerBody.SCYLLA;
 	  }
 	);
 
@@ -7445,6 +7452,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 2;
 	    player.lowerBody = LowerBody.HYDRA;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.HYDRA));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8553,6 +8561,27 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // is present
 	  function (): Boolean {
 	    return player.tailType === Tail.SALAMANDER;
+	  }
+	);
+
+	public const TailHydra: Transformation = new SimpleTransformation("Hydra Tails",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+		TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHydra, doOutput);
+
+		player.addStatusValue(StatusEffects.HydraTailsPlayer, 1, 1);
+		desc +="[pg]You groan in discomfort as your tail splits again, a new snake head growing from the bloodied flesh lump to join the others. <b>You now have " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " hydra heads below your waist.</b>";
+
+		if (doOutput) outputText(desc);
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.lowerBody != LowerBody.HYDRA || player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 12;
+	  },
+	  // is possible
+	  function (): Boolean {
+	    return player.lowerBody == LowerBody.HYDRA && player.statusEffectv1(StatusEffects.HydraTailsPlayer) < 12;
 	  }
 	);
 
