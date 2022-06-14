@@ -62,6 +62,7 @@ private function cinnabarGreeting():void {
 		sceneHunter.dickSelect && player.findCock(1, -1, 100) >= 0 || !big);
 	addButtonIfTrue(1, "Fuck Her", cinnabarBigRouter, "Req. cock with area greater than 100.", big);
 	addButtonIfTrue(2, "Multi-Fuck", cinnabarMultiCockPortalFuckFest, "Req. one cock with area greater than 100 and at least one more bigger than 75.", multi);
+	addButton(4, "Leave", bazaar.enterTheBazaarAndMenu);
 }
 
 
