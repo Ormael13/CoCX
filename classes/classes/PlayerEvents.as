@@ -2199,7 +2199,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nA sudden wave of pleasure strike you making you moan");
 				if (player.horns.type == Horns.UNICORN) {
 					outputText(" as your horn begins to split in two");
-					player.horns.type = Horns.BICORN;
+					transformations.HornsBicorn.applyEffect(false);
 				}
 				if (!InCollection(player.hairColor, bicornHairPalette)) {
 					CurentColor = randomChoice(bicornHairPalette);

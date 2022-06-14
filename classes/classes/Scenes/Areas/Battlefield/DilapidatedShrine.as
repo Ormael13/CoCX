@@ -180,7 +180,7 @@ public class DilapidatedShrine extends BaseContent
 		public function weaponsXPtrader():void{
 			clearOutput();
 			//Firearms and Archery is not supported yet cause classification is a bit blurry still.
-			var weaponClasses:Array = ["Gauntlet", "Sword", "Axe", "Mace/Hammer", "Dueling", "Polearm", "Spear", "Dagger", "Whip", "Exotic"]; //, "Thrown",  "Scythe", "Staff", "Tetsubo", "Ribbon"
+			var weaponClasses:Array = ["Gauntlet", "Sword", "Axe", "Mace/Hammer", "Dueling", "Polearm", "Spear", "Dagger", "Whip", "Exotic", "Throwing", "Bow", "Crossbow", "2H Firearm", "Rifle", "Pistol", "Dual Firearms", "Exotic", "Ribbon"]; // "Scythe", "Staff", "Tetsubo", "Ribbon", "Tome"
 			var btnInt:int = 0;
 			var tempAry:Array = [];
 			outputText("Welcome. Here, you can offer your weapons to the god of war, consuming the weapon to gain knowledge of the battles its seen.\n");
@@ -190,12 +190,12 @@ public class DilapidatedShrine extends BaseContent
 				try{
 					if (player.itemSlot(i).itype is Weapon){
 						itemClassReplace = player.itemSlot(i).itype as Weapon;
-						weaponType = itemClassReplace['type'];
+						weaponType = itemClassReplace['type'].split(',')[0];
 						//outputText(weaponType + "\n");
 					}
 					else if (player.itemSlot(i).itype is WeaponRange){
 						itemClassReplace = player.itemSlot(i).itype as WeaponRange;
-						weaponType = itemClassReplace['type'];
+						weaponType = itemClassReplace['perk'].split(',')[0];
 						//outputText(weaponType + "\n");
 					}
 					else{//I don't know why I decided to go with German with this. But it's funny.
@@ -205,6 +205,7 @@ public class DilapidatedShrine extends BaseContent
 					if (weaponClasses.indexOf(weaponType) >= 0){
 						tempAry.push([player.itemSlot(i).itype,weaponType])
 					}
+					else if (weaponType) outputText("\nYou canot offer "+player.itemSlot(i).itype.longName +" to the shrine.");
 				}
 				catch (e:Error){
 					outputText(e + "\n");
@@ -225,36 +226,61 @@ public class DilapidatedShrine extends BaseContent
 					outputText("Would you like to do that?");
 					doYesNo(curry(conv2mastery, wType, true),weaponsXPtrader);
 				}
-				else{
+				else{//"Staff", "Tome", "Scythe", "Ribbon"
 					switch (wType[1]){
-						case weaponClasses[0]:
+						case "Gauntlet":
 							player.gauntletXP(40);
 							break;
-						case weaponClasses[1]:
+						case "Sword":
 							player.swordXP(40);
 							break;
-						case weaponClasses[2]:
+						case "Axe":
 							player.axeXP(40);
 							break;
-						case weaponClasses[3]:
+						case "Mace/Hammer":
 							player.macehammerXP(40);
 							break;
-						case weaponClasses[4]:
+						case "Dueling":
 							player.duelingswordXP(40);
 							break;
-						case weaponClasses[5]:
+						case "Polearm":
 							player.polearmXP(40);
 							break;
-						case weaponClasses[6]:
+						case "Spear":
 							player.spearXP(40);
 							break;
-						case weaponClasses[7]:
+						case "Dagger":
 							player.daggerXP(40);
 							break;
-						case weaponClasses[8]:
+						case "Whip":
 							player.whipXP(40);
 							break;
-						case weaponClasses[9]:
+						case "Throwing":
+							player.throwingXP(40);
+							break;
+						case "Bow":
+							player.archeryXP(40);
+							break;
+						case "Crossbow":
+							player.archeryXP(40);
+							break;
+						case "2H Firearm":
+							player.firearmsXP(40);
+							break;
+						case "Rifle":
+							player.firearmsXP(40);
+							break;
+						case "Pistol":
+							player.firearmsXP(40);
+							break;
+						case "Dual Firearms":
+							player.firearmsXP(40);
+							player.dualWieldFirearmsXP(40);
+							break;
+						case "Exotic":
+							player.exoticXP(40);
+							break;
+						case "Ribbon":
 							player.exoticXP(40);
 							break;
 						}
