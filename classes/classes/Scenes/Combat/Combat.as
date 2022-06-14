@@ -5257,71 +5257,12 @@ public class Combat extends BaseContent {
             outputText(".");
             ExtraNaturalWeaponAttack(biteMultiplier);
             outputText(".\n");
-            if (player.hasStatusEffect(StatusEffects.HydraTailsPlayer)){ //WTF, This can be so much simplier.
+            if (player.hasStatusEffect(StatusEffects.HydraTailsPlayer)){ //WTF, This can be so much simplier.   //There I simplified it :)
                 biteMultiplier = 1;
-                if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 2){
-                    biteMultiplier *= 2;
-                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
-                    ExtraNaturalWeaponAttack(biteMultiplier);
-                    outputText("\n");
-                }
-                else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 3){
-                    biteMultiplier *= 3;
-                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
-                    ExtraNaturalWeaponAttack(biteMultiplier);
-                    outputText("\n");
-                }
-                else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 4){
-                    biteMultiplier *= 4;
-                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
-                    ExtraNaturalWeaponAttack(biteMultiplier);
-                    outputText("\n");
-                }
-                else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 5){
-                    biteMultiplier *= 5;
-                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
-                    ExtraNaturalWeaponAttack(biteMultiplier);
-                    outputText("\n");
-                }
-                else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 6){
-                    biteMultiplier *= 6;
-                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
-                    ExtraNaturalWeaponAttack(biteMultiplier);
-                    outputText("\n");
-                }
-                else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 7){
-                    biteMultiplier *= 7;
-                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
-                    ExtraNaturalWeaponAttack(biteMultiplier);
-                    outputText("\n");
-                }
-                else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 8){
-                    biteMultiplier *= 8;
-                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
-                    ExtraNaturalWeaponAttack(biteMultiplier);
-                    outputText("\n");
-                }
-                else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 9){
-                    biteMultiplier *= 9;
-                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
-                    ExtraNaturalWeaponAttack(biteMultiplier);
-                    outputText("\n");
-                }
-                else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 10){
-                    biteMultiplier *= 10;
-                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
-                    ExtraNaturalWeaponAttack(biteMultiplier);
-                    outputText("\n");
-                }
-                else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 11){
-                    biteMultiplier *= 11;
-                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
-                    ExtraNaturalWeaponAttack(biteMultiplier);
-                    outputText("\n");
-                }
-                else if (player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 12){
-                    biteMultiplier *= 12;
-                    outputText("You stand up erect and pull back for a second only to dart out with all your " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
+                var heads:Number = player.statusEffectv1(StatusEffects.HydraTailsPlayer);
+                if (heads >= 2) {
+                    biteMultiplier *= heads;
+                    outputText("You stand up erect and pull back for a second only to dart out with all your " + heads + " heads at [themonster] rending flesh and delivering your deadly venom in the process. ");
                     ExtraNaturalWeaponAttack(biteMultiplier);
                     outputText("\n");
                 }
@@ -5578,7 +5519,7 @@ public class Combat extends BaseContent {
             }
         }
         //Unique attack Mantis Prayer
-        if (player.isRace(Races.MANTIS) && player.arms.type == Arms.MANTIS){
+        if (player.isRaceCached(Races.MANTIS) && player.arms.type == Arms.MANTIS){
             if(player.hasStatusEffect(StatusEffects.InvisibleOrStealth)){
                 outputText("Taking advantage of your opponent's obliviousness you strike four more times with your scythes.");
                 ExtraNaturalWeaponAttack();
@@ -5595,7 +5536,7 @@ public class Combat extends BaseContent {
             }
         }
         //Unique attack Kamaitachi Three way Cut
-        if (player.isRace(Races.KAMAITACHI) && player.arms.type == Arms.KAMAITACHI){
+        if (player.isRaceCached(Races.KAMAITACHI) && player.arms.type == Arms.KAMAITACHI){
             outputText("You strike at blinding speed, seeming to divide yourself into multiple copies, and slash with your scythes again. You cut once, twice, then finish it with a double scythe strike for a three-hit combo. \n");
             ExtraNaturalWeaponAttack(1, "KamaitachiScythe");
             if (player.hasABiteAttack()) {
@@ -5777,7 +5718,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-			if (player.isRace(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+			if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 			else damage *= 2;
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
@@ -8751,9 +8692,9 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.ManaAffinityIV)) multi += 0.25;
         if (player.hasPerk(PerkLib.ManaAffinityV)) multi += 0.25;
         if (player.hasPerk(PerkLib.ManaAffinityVI)) multi += 0.25;
-        if (player.isRace(Races.ALICORN,2)) multi += 0.1;
-        if (player.isRace(Races.KITSUNE, 2)) multi += 1.5;
-        if (player.isRace(Races.UNICORN, 2)) multi += 0.05;
+        if (player.isRaceCached(Races.ALICORN,2)) multi += 0.1;
+        if (player.isRaceCached(Races.KITSUNE, 2)) multi += 1.5;
+        if (player.isRaceCached(Races.UNICORN, 2)) multi += 0.05;
         return multi;
     }
 
@@ -9356,7 +9297,7 @@ public class Combat extends BaseContent {
             }
         }
         //Apophis Unholy Aura
-        if (player.isRace(Races.APOPHIS)){
+        if (player.isRaceCached(Races.APOPHIS)){
             outputText("Your unholy aura seeps into [monster a] [monster name], slowly and insidiously eroding its resiliance to your unholy charms.\n\n");
             monster.lustVuln += 0.10;
         }
@@ -9632,7 +9573,7 @@ public class Combat extends BaseContent {
             if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
         }
         //Black Frost Aura
-        if (player.hasPerk(PerkLib.IceQueenGown) && player.isRace(Races.YUKIONNA)) {
+        if (player.hasPerk(PerkLib.IceQueenGown) && player.isRaceCached(Races.YUKIONNA)) {
             if (!monster.hasPerk(PerkLib.IceNature)) {
                 var damageBFA:Number = scalingBonusIntelligence();
                 //Determine if critical hit!
@@ -10037,8 +9978,8 @@ public class Combat extends BaseContent {
                 var soulforcecost:int = 100;
                 player.soulforce -= soulforcecost;
                 var hpChange1:int = 200;
-                if (player.isRace(Races.UNICORN, 2)) hpChange1 += 150;
-                if (player.isRace(Races.ALICORN, 2)) hpChange1 += 200;
+                if (player.isRaceCached(Races.UNICORN, 2)) hpChange1 += 150;
+                if (player.isRaceCached(Races.ALICORN, 2)) hpChange1 += 200;
                 outputText("<b>As your soulforce is drained you can feel Violet Pupil Transformation's regenerative power spreading throughout your body. (<font color=\"#008000\">+" + hpChange1 + "</font>)</b>\n\n");
                 HPChange(hpChange1, false);
             }
@@ -10905,7 +10846,7 @@ public class Combat extends BaseContent {
         if (player.armor == armors.NURSECL) maxPercentRegen += 0.5;
         if (player.armor == armors.BLIZZ_K) {
             if (!player.hasPerk(PerkLib.ColdAffinity)) maxPercentRegen -= 10;
-            if (player.isRace(Races.YUKIONNA)) maxPercentRegen += 5;
+            if (player.isRaceCached(Races.YUKIONNA)) maxPercentRegen += 5;
         }
         if (player.weapon == weapons.SESPEAR) maxPercentRegen += 2;
         if (player.hasPerk(PerkLib.LustyRegeneration)) maxPercentRegen += 0.5;
@@ -10972,7 +10913,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) maxRegen += 0.5;
         if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) maxRegen += 0.5;
         if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) maxRegen += 0.5;
-        if (player.armor == armors.BLIZZ_K && player.isRace(Races.YUKIONNA)) maxRegen += 5;
+        if (player.armor == armors.BLIZZ_K && player.isRaceCached(Races.YUKIONNA)) maxRegen += 5;
         if (combat && player.headJewelry == headjewelries.CUNDKIN && player.HP < 1) maxRegen += 1;
         if (player.hasKeyItem("M.G.S. bracer") >= 0) maxRegen += 2;
         return maxRegen;
@@ -11083,9 +11024,9 @@ public class Combat extends BaseContent {
         var multi:Number = 1;
         if (player.hasPerk(PerkLib.DaoistCultivator)) multi += 0.5;
         if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
-        if (player.isRace(Races.ALICORN, 2)) multi += 0.1;
-        if (player.isRace(Races.KITSUNE)) multi += 1;
-        if (player.isRace(Races.UNICORN, 2)) multi += 0.05;
+        if (player.isRaceCached(Races.ALICORN, 2)) multi += 0.1;
+        if (player.isRaceCached(Races.KITSUNE)) multi += 1;
+        if (player.isRaceCached(Races.UNICORN, 2)) multi += 0.05;
         return multi;
     }
 
@@ -11878,7 +11819,7 @@ public class Combat extends BaseContent {
 
 	private function weaponmasteryXPMulti():Number {
 		var multi:Number = 1;
-		if (player.isRace(Races.HUMAN)) {
+		if (player.isRaceCached(Races.HUMAN)) {
 			multi += 1;
 			if (player.isPureHuman()) multi += 1;
 		}
@@ -12597,7 +12538,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.ElectrifiedDesire)) TeaseFunctionList.push(RandomTeaseRaiju);
         if (player.hasPerk(PerkLib.DragonLustPoisonBreath) && player.tailVenom >= player.VenomWebCost()) TeaseFunctionList.push(RandomTeaseJabberwocky);
         if (player.isAnyRace(Races.HarpylikeRaces)) TeaseFunctionList.push(RandomTeaseHarpy);
-        if (player.isRace(Races.KITSUNE)) TeaseFunctionList.push(RandomTeaseKitsune);
+        if (player.isRaceCached(Races.KITSUNE)) TeaseFunctionList.push(RandomTeaseKitsune);
         if (player.perkv1(IMutationsLib.BlackHeartIM) > 0) TeaseFunctionList.push(RandomTeaseLustStrike);
         if (monster.hasBreasts()) TeaseFunctionList.push(RandomTeaseViolateOpponentBreast);
         if (monster.hasVagina()) {
@@ -14270,7 +14211,7 @@ public class Combat extends BaseContent {
             addButton(0, "Next", combatMenu, false);
             return;
         }
-        if (player.isRace(Races.JIANGSHI)) {
+        if (player.isRaceCached(Races.JIANGSHI)) {
             outputText("Your cadaverous rigidity prevents any form of escape in battle!");
             //Pass false to combatMenu instead:		menuLoc = 3;
             //		doNext(combatMenu);
@@ -15225,7 +15166,7 @@ public class Combat extends BaseContent {
 		damage += scalingBonusStrength() * 0.25;
 		if (damage < 50) damage = 50;
 		if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-			if (player.isRace(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+			if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 			else damage *= 2;
 		}
 		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= historyFighterBonus();
