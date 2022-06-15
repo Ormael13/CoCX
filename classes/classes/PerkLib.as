@@ -3587,6 +3587,8 @@ public class PerkLib
 		public static const AntyDexterity:PerkType = mk("Anty-Dexterity", "Anty-Dexterity",
 				"Strong ant arms boost your strength and allow wielding dual weapons <i>or</i> large weapons.")
 				.withBuffs({'str.mult':0.25});
+		public static const AntOvipositor:PerkType = mk("Ant Ovipositor", "Ant Ovipositor",
+				"Allows you to lay eggs through a special organ on your insect abdomen, though you need at least 10 eggs to lay.");
 		public static const AquaticAffinity:PerkType = mk("Aquatic Affinity", "Aquatic Affinity",
 				"When in an aquatic battle you gains a +30 to strength and speed.");
 		public static const AvatorOfCorruption:PerkType = mk("Avatar of Corruption", "Avatar of Corruption",

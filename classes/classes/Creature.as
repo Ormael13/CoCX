@@ -3147,26 +3147,33 @@ public class Creature extends Utils
 			return eggs() >= 10 && hasPerk(PerkLib.MantisOvipositor) && tail.type == Tail.MANTIS_ABDOMEN;
 		}
 
+		public function canOvipositAnt():Boolean
+		{
+			return eggs() >= 10 && hasPerk(PerkLib.AntOvipositor) && tail.type == Tail.ANT_ABDOMEN;
+		}
+
 		public function canOviposit():Boolean
 		{
-			return canOvipositSpider() || canOvipositBee() || canOvipositMantis();
+			return canOvipositSpider() || canOvipositBee() || canOvipositMantis() || canOvipositAnt();
 		}
 
 		public function eggs():int
 		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
 				return -1;
 			else if (hasPerk(PerkLib.SpiderOvipositor))
 				return perkv1(PerkLib.SpiderOvipositor);
 			else if (hasPerk(PerkLib.BeeOvipositor))
 				return perkv1(PerkLib.BeeOvipositor);
-			else
+			else if (hasPerk(PerkLib.MantisOvipositor))
 				return perkv1(PerkLib.MantisOvipositor);
-		}
+			else
+				return perkv1(PerkLib.AntOvipositor);
+			}
 
 		public function addEggs(arg:int = 0):int
 		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
 				return -1;
 			else {
 				if (hasPerk(PerkLib.SpiderOvipositor)) {
@@ -3181,18 +3188,24 @@ public class Creature extends Utils
 						setPerkValue(PerkLib.BeeOvipositor, 1, 50);
 					return perkv1(PerkLib.BeeOvipositor);
 				}
-				else {
+				else if (hasPerk(PerkLib.MantisOvipositor)) {
 					addPerkValue(PerkLib.MantisOvipositor, 1, arg);
 					if (eggs() > 50)
 						setPerkValue(PerkLib.MantisOvipositor, 1, 50);
 					return perkv1(PerkLib.MantisOvipositor);
+				}
+				else {
+					addPerkValue(PerkLib.AntOvipositor, 1, arg);
+					if (eggs() > 50)
+						setPerkValue(PerkLib.AntOvipositor, 1, 50);
+					return perkv1(PerkLib.AntOvipositor);
 				}
 			}
 		}
 
 		public function dumpEggs():void
 		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
 				return;
 			setEggs(0);
 			//Sets fertile eggs = regular eggs (which are 0)
@@ -3201,7 +3214,7 @@ public class Creature extends Utils
 
 		public function setEggs(arg:int = 0):int
 		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
 				return -1;
 			else {
 				if (hasPerk(PerkLib.SpiderOvipositor)) {
@@ -3216,37 +3229,47 @@ public class Creature extends Utils
 						setPerkValue(PerkLib.BeeOvipositor, 1, 50);
 					return perkv1(PerkLib.BeeOvipositor);
 				}
-				else {
+				else if (hasPerk(PerkLib.MantisOvipositor)) {
 					setPerkValue(PerkLib.MantisOvipositor, 1, arg);
 					if (eggs() > 50)
 						setPerkValue(PerkLib.MantisOvipositor, 1, 50);
 					return perkv1(PerkLib.MantisOvipositor);
+				}
+				else {
+					setPerkValue(PerkLib.AntOvipositor, 1, arg);
+					if (eggs() > 50)
+						setPerkValue(PerkLib.AntOvipositor, 1, 50);
+					return perkv1(PerkLib.AntOvipositor);
 				}
 			}
 		}
 
 		public function fertilizedEggs():int
 		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
 				return -1;
 			else if (hasPerk(PerkLib.SpiderOvipositor))
 				return perkv2(PerkLib.SpiderOvipositor);
 			else if (hasPerk(PerkLib.BeeOvipositor))
 				return perkv2(PerkLib.BeeOvipositor);
-			else
+			else if (hasPerk(PerkLib.MantisOvipositor))
 				return perkv2(PerkLib.MantisOvipositor);
+			else
+				return perkv2(PerkLib.AntOvipositor)
 		}
 
 		public function fertilizeEggs():int
 		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
 				return -1;
 			else if (hasPerk(PerkLib.SpiderOvipositor))
 				setPerkValue(PerkLib.SpiderOvipositor, 2, eggs());
 			else if (hasPerk(PerkLib.BeeOvipositor))
 				setPerkValue(PerkLib.BeeOvipositor, 2, eggs());
-			else
+			else if (hasPerk(PerkLib.MantisOvipositor))
 				setPerkValue(PerkLib.MantisOvipositor, 2, eggs());
+			else
+				setPerkValue(PerkLib.AntOvipositor, 2, eggs())
 			return fertilizedEggs();
 		}
 
