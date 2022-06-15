@@ -40,8 +40,9 @@ package classes.GeneticMemories {
 	 */
 
     public static var Memories:/*EnumValue*/ Array = [];
+	  private static var _partid:int = 0;
 
-		public static const NONE:int = 0;
+		public static const NONE:int = _partid++;
 		EnumValue.add(Memories, NONE, "NONE", {
 			id: "Unlocked Metamorph",
 			name: "No Antennae",
@@ -52,7 +53,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const MANTIS:int = 1;
+		public static const MANTIS:int = _partid++;
 		EnumValue.add(Memories, MANTIS, "MANTIS", {
 			id: "Mantis Antennae",
 			name: "Mantis Antennae",
@@ -63,7 +64,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BEE:int = 2;
+		public static const BEE:int = _partid++;
 		EnumValue.add(Memories, BEE, "BEE", {
 			id: "Bee Antennae",
 			name: "Bee Antennae",

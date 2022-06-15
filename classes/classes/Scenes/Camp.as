@@ -773,7 +773,7 @@ public class Camp extends NPCAwareContent{
 			else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3) outputText("large");
 			else outputText("small");
 			outputText(" ring toward side of your [camp].");
-			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 3) outputText(" Given how large the sparring ring, maybe it's a little excessive for even the largest of people around..");
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 3) outputText(" Given how large the sparring ring, maybe it's a little excessive for even the largest of people around.");
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 4) outputText(" A small stand rests adjacent, allowing spectators to cheer on any duels taking place.");
 			outputText("\n\n");
 		}
@@ -1037,7 +1037,7 @@ public class Camp extends NPCAwareContent{
 		if (slavesCount() > 0) addButton(7, "Slaves", campSlavesMenu).hint("Check up on any slaves you have received and interact with them.");
 		addButton(8, "Camp Actions", campActions).hint("Read your codex, questlog or interact with the [camp] surroundings.");
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(9, "Enter Cabin", cabinProgress.initiateCabin).hint("Enter your cabin."); //Enter cabin for furnish.
-		if (player.hasPerk(PerkLib.JobSoulCultivator) || debug) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation, or spend some of the soulforce.");
+		if (player.hasPerk(PerkLib.JobSoulCultivator) || !CoC.instance.lockCheats) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation, or spend some of the soulforce.");
 		else if (!player.hasPerk(PerkLib.JobSoulCultivator) && player.hasPerk(PerkLib.Metamorph)) addButton(10, "Metamorph", SceneLib.metamorph.openMetamorph).hint("Use your soulforce to mold your body.");
 		if (player.lust >= 30) {
 			addButton(11, "Masturbate", SceneLib.masturbation.masturbateMenu);
@@ -4106,20 +4106,15 @@ public class Camp extends NPCAwareContent{
 
 	private function maraeIsland():void {
 		menu();
-		if (flags[kFLAGS.MARAE_QUEST_COMPLETE] < 1 && flags[kFLAGS.MET_MARAE_CORRUPTED] < 2 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] < 1) addButton(0, "Visit", SceneLib.boat.marae.encounterMarae).hint("Normal visit on godess island.");
-		else addButtonDisabled(0, "Visit", "Visitation hours are closed till futher notice.");
-		if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] != 1 && flags[kFLAGS.LETHICE_DEFEATED] > 0 && flags[kFLAGS.PURE_MARAE_ENDGAME] < 2) addButton(1, "P. Marae", SceneLib.boat.marae.encounterPureMaraeEndgame).hint("");
-		else addButtonDisabled(1, "P. Marae", "");
-		if (flags[kFLAGS.MET_MARAE_CORRUPTED] > 0 && player.gender > 0 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] <= 0) {
-			if (flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 2) addButton(2, "C. Marae", SceneLib.boat.marae.level3MaraeEncounter).hint("");
-			if (flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 0) addButton(2, "C. Marae", SceneLib.boat.marae.level2MaraeEncounter).hint("");
-		}
-		else addButtonDisabled(2, "C. Marae", "");
-		if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] == 1) addButton(3, "Minerva", SceneLib.boat.marae.talkToMaraeAboutMinervaPurification).hint("Visit godess island to talk about help for Minerva.");
-		else addButtonDisabled(3, "Minerva", "");
-		if (player.isRace(Races.PLANT, 4) && (player.gender == 2 || player.gender == 3) && flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4 || flags[kFLAGS.FLOWER_LEVEL] == 4) && flags[kFLAGS.CORRUPTED_MARAE_KILLED] == 0) addButton(4, "Alraune", SceneLib.boat.marae.alraunezeMe).hint("Visit godess island to turn yourself into Alraune.");
-		else addButtonDisabled(4, "Alraune", "");
-		addButton(14, "Back", places);
+		addButtonIfTrue(0, "Visit", SceneLib.boat.marae.visitSelector, "You can't do that currently.", SceneLib.boat.marae.canVisit(), "Normal visit.");
+		addButtonIfTrue(1, "Minerva", SceneLib.boat.marae.talkToMaraeAboutMinervaPurification, "",
+			flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] == 1,
+			"Visit godess island to talk about help for Minerva.");
+		addButtonIfTrue(2, "Alraune", SceneLib.boat.marae.alraunezeMe, "Req. to have a fully grown Holli and to have high Alraune racial score. Also, don't kill Marae please.",
+			player.isRace(Races.PLANT, 4) && (player.gender == 2 || player.gender == 3) && flags[kFLAGS.FACTORY_SHUTDOWN] > 0 &&
+			(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4 || flags[kFLAGS.FLOWER_LEVEL] == 4) && flags[kFLAGS.CORRUPTED_MARAE_KILLED] == 0,
+			"Visit godess island to turn yourself into Alraune.");
+		addButton(4, "Back", places);
 	}
 
 	private function exgartuanCampUpdate():void {

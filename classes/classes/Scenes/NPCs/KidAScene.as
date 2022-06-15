@@ -314,11 +314,7 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 
 			//duel effects by weapon, output in new PG
 			//[Pipe] or [Wizard Staff] or [Eldritch Staff]
-			if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.PIPE.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.MACE.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.W_STAFF.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.E_STAFF.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.L_STAFF.id) {
+			if (InCollection(flags[kFLAGS.ANEMONE_WEAPON_ID], weapons.PIPE.id, weapons.MACE.id, weapons.W_STAFF.id, weapons.E_STAFF.id, weapons.L_STAFF.id)) {
 				outputText("\n\nThough she acts like she's not serious and pulls her swings more often than not, the heft of the ");
 				if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.PIPE.id) outputText("pipe");
 				else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.MACE.id) outputText("mace");
@@ -372,20 +368,14 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 				//(no effect, señorita)
 			}
 			//[Large Axe], [Large Hammer], [Large Claymore], or [Huge Warhammer]
-			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.L__AXE.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.L_HAMMR.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.WARHAMR.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.L__AXE.id) {
+			else if (InCollection(flags[kFLAGS.ANEMONE_WEAPON_ID], weapons.L__AXE.id, weapons.L_HAMMR.id, weapons.WARHAMR.id, weapons.L__AXE.id)) {
 				outputText("\n\nShe can barely lift the weapon you've given her, although for a while she does manage to support one end with the ground and tilt it by the haft to ward off your blows with cleverness.  Distracting her by way of a feint, you part her from it and advance with a smile full of playful menace... whereupon she shrieks and pushes you backwards, causing you to trip over the weapon and fall with a crash.");
 				//(HP - 5, KidXP - 4)
 				kidAXP(-4);
 				HPChange(-5, false);
 			}
 			//[Katana] or [Spellsword]
-			else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.KATANA.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.S_BLADE.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.SCIMITR.id ||
-					flags[kFLAGS.ANEMONE_WEAPON_ID] == weapons.B_SCARB.id ) {
+			else if (InCollection(flags[kFLAGS.ANEMONE_WEAPON_ID], weapons.KATANA.id, weapons.S_BLADE.id, weapons.SCIMITR.id, weapons.B_SCARB.id )) {
 				outputText("\n\nThe light sword and the light anemone seem to be a good match, and she actually manages to make several deft moves with it after your instruction.  One is a bit too deft, as she fails to rein in her swing and delivers a long, drawing cut that connects with your [leg].");
 				//(HP - 20, KidXP + 2)
 				kidAXP(4);

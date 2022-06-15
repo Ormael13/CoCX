@@ -1119,7 +1119,7 @@ public function naggaTease():void {
 	clearOutput();
 	//(if poisoned)
 	if (monster.hasStatusEffect(StatusEffects.NagaVenom) || monster.gender == 0 || monster.lustVuln == 0) {
-		if (monster.hasStatusEffect(StatusEffects.NagaVenom)) outputText("You attempt to stimulate [themonster] by rubbing [monster his] nether regions, but [monster his] seems too affected by your poison to react.\n\n");
+		if (monster.hasStatusEffect(StatusEffects.NagaVenom)) outputText("You attempt to stimulate [themonster] by rubbing [monster his] nether regions, but [monster he] seems too affected by your poison to react.\n\n");
 		if (monster.gender == 0) outputText("You look over [themonster], but can't figure out how to tease such an unusual foe.\n\n");
 		if (monster.lustVuln == 0) outputText("You attempt to stimulate [themonster] by rubbing [monster his] nether regions, but it has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
         enemyAI();

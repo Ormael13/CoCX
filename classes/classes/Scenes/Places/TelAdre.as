@@ -356,25 +356,24 @@ private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
 	spriteSelect(SpriteDb.s_oswald);
 	var itemValue:int = int(player.itemSlots[slot].itype.value / 2);
 	clearOutput();
+	if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
+	if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
+	if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your items for double the amount.");
+	if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your items for four times the amount.");
 	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
 		if (itemValue == 0)
 			outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to Oswald.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
 		else outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to Oswald.  He nervously pulls out " + num2Text(itemValue * player.itemSlots[slot].quantity)  + " gems and drops them into your waiting hand.");
 		while (player.itemSlots[slot].quantity > 0){
 			player.itemSlots[slot].removeOneItem();
-			if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
 			player.gems += itemValue;
 		}
 	}
 	else {
-		if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
-		if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
 		if (itemValue == 0)
-		outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
+			outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
 		else outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He nervously pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
 		player.itemSlots[slot].removeOneItem();
-		if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for double the amount.");
-		if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four times the amount.");
 		player.gems += itemValue;
 	}
 	statScreenRefresh();
@@ -1830,6 +1829,9 @@ public function meetingLunaCamp():void {
 	outputText("\"<i>As I told you before, my name is Luna, " + player.mf("Master","Mistress") + " [name]. From now on, I will serve you to the best of my abilities. Please do not hesitate to call on me for anything... anything at all</i>\"\n\n");
 	outputText("She gives you one last gaze with damp eyes, then bows and immediately begins rushing about the camp, neatening things, removing debris and rocks from the main concourse, and gathering laundry for washing. It would seem that life in the camp is going to be significantly easier, and you smile, sure that you've made the correct choice and will suffer no unforeseen consequences whatsoever from this.\n\n");
 	outputText("(<b>Luna has been added to the Followers menu!</b>)\n\n");
+	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Luna pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	flags[kFLAGS.LUNA_FOLLOWER] = 4;
 	flags[kFLAGS.LUNA_LVL_UP] = 0;
 	flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;

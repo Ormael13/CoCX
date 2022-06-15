@@ -6,8 +6,9 @@ package classes.Scenes.Places.TrollVillage {
 import classes.*;
 import classes.Items.ArmorLib;
 import classes.Items.UndergarmentLib;
-import classes.Scenes.SceneLib;
 import classes.Scenes.Places.TrollVillage;
+import classes.Scenes.SceneLib;
+
 public class Kalji extends TrollVillageAbstractContent{
     public function Kalji() {
     }
@@ -141,8 +142,18 @@ public class Kalji extends TrollVillageAbstractContent{
 
     private function KaljiSex():void{
         clearOutput();
-        menu();
-        if (!player.hasCock() || (player.gender == 0  && player.smallestTitSize() >= 3 && player.femininity >= 45)){
+        if (sceneHunter.uniHerms) {
+            outputText("How would you pose yourself?\n\n");
+            menu();
+            addButtonIfTrue(0, "As Male", maleF, "Req. a cock OR low femininity.",
+                player.hasCock() || player.looksMale());
+            addButtonIfTrue(1, "As Female", femF, "Req. a vagina OR high femininity.",
+                player.hasVagina() || player.looksFemale());
+        }
+        else if (player.gender == 1 || !(player.gender == 2) && player.looksMale()) maleF();
+        else femF();
+        //===================================================
+        function femF():void {
             outputText("You ask Kal'ji if he’s willing to get a little more intimate with you.\n" +
                     "\n" +
                     "Kal'ji gives you a small smile, \"<i>Thanks [name]. I am very flattered, but I can’t say I’m too interested in you, you’re just… not my type…</i>\"\n" +
@@ -153,23 +164,23 @@ public class Kalji extends TrollVillageAbstractContent{
                     "\n" +
                     "\"<i>Get on your knees and service me.</i>\"\n" +
                     "\n" +
-                    "You consider for a moment, this is all you’re gonna get out of him. Do you accept his offer?\n")
+                    "You consider for a moment, this is all you’re gonna get out of him. Do you accept his offer?\n");
+            menu();
             addButton(0,"Blow Him", KjBJFY);
             addButton(1,"Do not", KjBJNF1);
         }
-        else if (!player.hasVagina() || (player.gender == 0  && player.smallestTitSize() <= 1 && player.femininity < 45)){
+        function maleF():void {
             outputText("You tell Kal'ji that you’d like to get a little more intimate with him.\n" +
                     "\n" +
                     "Kal'ji eyes you up and down before giving you a sneering grin. \"<i>Sure, but I’ll warn you… I’m kind of into rope… Hope you don’t mind.</i>\"\n" +
                     "\n" +
                     "Well, everyone has their kinks, are you willing to join in his idea?\n");
+            menu();
             addButton(0,"Get Tied", KjBDG);
             addButton(1,"Blow Him", KjBJMY);
             addButton(2,"Do not", KjBJMN);
-        } else{
-            outputText("")
         }
-
+        //========================================================
         function KjBJFY(resist:Boolean = false):void{
             clearOutput();
             outputText("You crawl onto your knees before him, pulling down his leather pants as all 7 inches of his glorious manhood is revealed to you. As his pants are pulled down, you see him pull out a dagger hidden from within them, he places it behind him. You gulp slightly at the sight of it.\n" +

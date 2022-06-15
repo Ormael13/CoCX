@@ -4,12 +4,12 @@
  */
 package classes.Scenes.Places.HeXinDao 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.SceneLib;
-	import classes.internals.SaveableState;
-	
-	public class AdventurerGuild extends HeXinDaoAbstractContent implements SaveableState
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.SaveableState;
+
+public class AdventurerGuild extends HeXinDaoAbstractContent implements SaveableState
 	{
 		public static var Slot01:Number;
 		public static var Slot01Cap:Number;//imp skulls
@@ -856,6 +856,7 @@ package classes.Scenes.Places.HeXinDao
 			outputText("\"<i>Guess there is no helping it then make sure she does not cause trouble.</i>\"\n\n");
 			doNext(SceneLib.galiaFollower.bringBackTheFemImp);
 		}
+		/*
 		public function BoardkeeperYangQuestEzekiel2():void {
 			clearOutput();
 			outputText("Placeholder for lazyLia writing ^^\n\n");//feral tentacle beasts capture
@@ -883,6 +884,7 @@ package classes.Scenes.Places.HeXinDao
 			outputText("Placeholder for lazyLia writing ^^\n\n");
 			doNext(BoardkeeperYangQuest);
 		}
+		*/
 		public function BoardkeeperYangGolemRetrievalJob():void {
 			clearOutput();
 			if (flags[kFLAGS.AURORA_LVL] == 0.3) {
@@ -928,11 +930,13 @@ package classes.Scenes.Places.HeXinDao
 			outputText("\"<i>Me? No dear no I’m just the guild poster girl. I’m actually paid to stand there. That said there’s a few perk to it as I get to meet some of Mareth’s biggest badass face to face and sometime closer, if you catch my drift.</i>\"\n\n");
 			doNext(BoardkeeperYangTalk);
 		}
+		/*
 		public function BoardkeeperYangTalkHeXinDao():void {
 			clearOutput();
 			outputText("Placeholder for lazyLia writing ^^\n\n");
 			doNext(BoardkeeperYangTalk);
 		}
+		*/
 		public function BoardkeeperYangTalkRequests():void {
 			clearOutput();
 			outputText("Ok, you are a member now, how do you take on a job?\n\n");

@@ -1128,6 +1128,9 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 			outputText("Your two Driders walk towards the silky bubble, side-by side. Moments like this make you feel like a champion!\n\n");
 		}
 		outputText("<b>Belisa has joined you as a lover.</b>\n\n");
+		if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+		else player.createKeyItem("Radiant shard", 1,0,0,0);
+		outputText("\n\n<b>Before fully settling in your camp as if remembering something Belisa pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 		BelisaFollowerStage = 3;
 		BelisaInCamp = true;
 		doNext(camp.returnToCampUseOneHour);

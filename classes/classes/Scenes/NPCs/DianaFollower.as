@@ -600,6 +600,9 @@ public function breakingInYourMare2():void {
 	outputText("After resting a bit. You help your new mare clean up, teasing each other a little, and then help her gather up her stuff. The two of you head back to a small camp near the forest, where your new mare packs up her things.\n\n");
 	outputText("After you make sure she has everything she needs, the two of you head back to your camp.\n\n");
 	outputText("(<b>Diana has been added to the Lovers menu!</b>)\n\n");
+	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Diana pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	flags[kFLAGS.DIANA_FOLLOWER] = 6;
 	doNext(playerMenu);
 }

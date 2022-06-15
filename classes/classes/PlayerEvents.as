@@ -796,9 +796,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 				}
 				//Daily regeneration of soulforce for non soul cultivators && Metamorph bonus SF gain till cap
-				if (!player.hasPerk(PerkLib.JobSoulCultivator) && (player.soulforce < player.maxSoulforce())) {
+				if (!player.hasPerk(PerkLib.JobSoulCultivator) && (player.soulforce < player.maxOverSoulforce())) {
 					player.soulforce += 50;
-					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+					if (player.soulforce > player.maxOverSoulforce()) player.soulforce = player.maxOverSoulforce();
 				}
 				if (player.hasPerk(PerkLib.Metamorph) && player.perkv1(PerkLib.Metamorph) < 18) player.addPerkValue(PerkLib.Metamorph, 1, 1);
 				if (player.hasPerk(PerkLib.MetamorphEx) && player.perkv1(PerkLib.MetamorphEx) < 10) player.addPerkValue(PerkLib.MetamorphEx, 1, 1);
@@ -1394,7 +1394,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					EngineCore.ManaChange(100 + (player.inte*2), true);
 				}
 				EngineCore.changeFatigue(-(100 + (player.spe*2)));
-				if (player.soulforce < player.maxSoulforce()) {
+				if (player.soulforce < player.maxOverSoulforce()) {
 					EngineCore.SoulforceChange(500 + (player.wis*2), true);
 				}
 				outputText("You feel energised and empowered by the life force drained out of the fluids of your recent blind date. What a meal!");
@@ -1429,7 +1429,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			else if (player.isRaceCached(Races.SALAMANDER) < 9 && !player.isRaceCached(Races.PHOENIX) && player.hasPerk(PerkLib.Lustzerker) && player.perkv4(PerkLib.Lustzerker) == 0 && !player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 1) { //Remove lustzerker perk if not meeting requirements
+			else if (!player.isRaceCached(Races.SALAMANDER) && !player.isRaceCached(Races.PHOENIX) && player.hasPerk(PerkLib.Lustzerker) && player.perkv4(PerkLib.Lustzerker) == 0 && !player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 1) { //Remove lustzerker perk if not meeting requirements
 				outputText("\nAll of sudden something change inside your body.  You think about a long while, until it dawned on you.  You can't feel that slight warm feeling inside your body anymore meaning for now no more lustzerking.\n\n(<b>Lost Perk: Lustzerker</b>)");
 				player.removePerk(PerkLib.Lustzerker);
 				needNext = true;
@@ -1923,9 +1923,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Soul Sense
-			if (player.maxSoulforce() >= 200 && player.hasPerk(PerkLib.SoulApprentice) && !player.hasPerk(PerkLib.SoulSense)) {
+			if (player.hasKeyItem("'Soul Sense and You' Manual") >= 0 && player.hasPerk(PerkLib.SoulPersonage) && !player.hasPerk(PerkLib.SoulSense)) {
 				outputText("\nDuring a casual walk around your camp you suddenly notice, or rather feel, something unexpected. Your surrounding blurs for a moment, to be replaced with a forest. You notice a goblin strolling nearby. Suddenly, she stops and slowly looks around, staring directly at you. A moment later, your vision of the forest becomes blurry, eventually fading away to be replaced by your camp and its surroundings. ");
-				outputText("You shake your head, trying to figure out what had just happened. The only solution that you find within yourself is something that the soul cultivators you met in He’Xin’Dao mentioned. Another sense that they had developed, which allowed them to perceive distant places or find specific people over long distances. It looks as though you developed it, even without training.\n");
+				outputText("You shake your head, trying to figure out what had just happened. The only solution that you find within yourself is something that mrs Shigure you met in He’Xin’Dao at lectures mentioned. Another sense that they had developed, which allowed them to perceive distant places or find specific people over long distances. It looks as though you finaly developed it too.\n");
+				player.removeKeyItem("'Soul Sense and You' Manual");
 				player.createPerk(PerkLib.SoulSense, 0, 0, 0, 0);
 				needNext = true;
 			}
@@ -2198,7 +2199,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nA sudden wave of pleasure strike you making you moan");
 				if (player.horns.type == Horns.UNICORN) {
 					outputText(" as your horn begins to split in two");
-					player.horns.type = Horns.BICORN;
+					transformations.HornsBicorn.applyEffect(false);
 				}
 				if (!InCollection(player.hairColor, bicornHairPalette)) {
 					CurentColor = randomChoice(bicornHairPalette);
@@ -2482,21 +2483,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			if (player.hasPerk(PerkLib.SpiderOvipositor) || player.hasPerk(PerkLib.BeeOvipositor) || player.hasPerk(PerkLib.MantisOvipositor) || player.hasPerk(PerkLib.AntOvipositor)) { //Spider, Bee, Mantis and Ant ovipositor updates
-				if (player.hasPerk(PerkLib.SpiderOvipositor) && (!player.isDrider() || player.tailType != Tail.SPIDER_ADBOMEN)) { //Remove dat shit!
-					outputText("\n<b>Your ovipositor (and eggs) vanish since your body has become less spider-like.</b>\n");
-					player.removePerk(PerkLib.SpiderOvipositor);
-					needNext = true;
-				}
-				else if (player.hasPerk(PerkLib.BeeOvipositor) && player.tailType != Tail.BEE_ABDOMEN) { //Remove dat shit!
-					outputText("\n<b>Your ovipositor (and eggs) vanish since your body has become less bee-like.</b>\n");
-					player.removePerk(PerkLib.BeeOvipositor);
-					needNext = true;
-				}
-				else if (player.hasPerk(PerkLib.MantisOvipositor) && player.tailType != Tail.MANTIS_ABDOMEN) { //Remove dat shit!
-					outputText("\n<b>Your ovipositor (and eggs) vanish since your body has become less mantis-like.</b>\n");
-					player.removePerk(PerkLib.MantisOvipositor);
-					needNext = true;
+			if (player.hasPerk(PerkLib.SpiderOvipositor) || player.hasPerk(PerkLib.BeeOvipositor) || player.hasPerk(PerkLib.MantisOvipositor || player.hasPerk(PerkLib.AntOvipositor)) { //Spider, Bee and Mantis ovipositor updates
+				if (transformations.RemoveOvipositor.isPossible()) { //Remove dat shit!
+						transformations.RemoveOvipositor.applyEffect();
 				}
 				else if (player.hasPerk(PerkLib.AntOvipositor) && player.tailType != Tail.ANT_ABDOMEN) { //Remove dat shit!
 					outputText("\n<b>Your ovipositor (and eggs) vanish since your body has become less mantis-like.</b>\n");
@@ -2922,7 +2911,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					//To Wong Foo, Thanks for Everything, Julie Newmar
 					outputText("\nYou sit atop your favorite flower, enjoying the smell of verdure and the sounds of the forest.  The sun is shining brightly and it feels wonderful on your chitin.  Your wings twitch happily in the soft breeze, and it feels good to be alive and doing the colony's work... the only sour note is your heavy, bloated abdomen, so full of unfertilized eggs that it droops, so full it strains your back and pinches your nerves.  Still, it's too nice a day to let that depress you, and you take up your customary song, humming tunelessly but mellifluously as you wait for passers-by.");
 
-					outputText("\n\nYour antennae.type bob - was that someone?  Peering between the trees from the corner of your eye, you can see the figure of another person, and you intensify your hypnotic buzz, trying to draw it closer.  The figure steps into your clearing and out of the shadow; clad in [armor], " + player.mf("he","she") + " is yourself!  Confused, you stop humming and stare into your own face, and the other you takes the opportunity to open " + player.mf("his","her") + " garments, exposing " + player.mf("his","her") + " [cock]!");
+					outputText("\n\nYour [antennae] bob - was that someone?  Peering between the trees from the corner of your eye, you can see the figure of another person, and you intensify your hypnotic buzz, trying to draw it closer.  The figure steps into your clearing and out of the shadow; clad in [armor], " + player.mf("he","she") + " is yourself!  Confused, you stop humming and stare into your own face, and the other you takes the opportunity to open " + player.mf("his","her") + " garments, exposing " + player.mf("his","her") + " [cock]!");
 
 					outputText("\n\nStartled, you slip down from your seat and try to run, but the other you has already crossed the clearing and seizes you by the fuzz on your hefty, swollen abdomen; your leg slips, propelling you face-first to the ground.  " + player.mf("He","She") + " pulls you back toward " + player.mf("his","her") + "self and, grabbing one of your chitinous legs, turns you over.  The other you spreads your fuzzed thighs, revealing your soft, wet pussy, and the sweet smell of honey hits your noses.  " + player.mf("His","Her") + " prick hardens intensely and immediately at the aroma of your pheromone-laden nectar, and " + player.mf("he","she") + " pushes it into you without so much as a word of apology, groaning as " + player.mf("he","she") + " begins to rut you mercilessly.  You can feel the sensations of " + player.mf("his","her") + " burning cock as if it were your own, and your legs wrap around your other self instinctively even as your mind recoils in confusion.");
 

@@ -59,7 +59,8 @@ public class TrachealSystemMutation extends IMutationPerkType
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requireAnyRace(Races.MANTIS, Races.SCORPION, Races.SPIDER, Races.CANCER, Races.ATLACH_NACHA, Races.ANT);
+                    this.requireAdaptationsMutationSlot()
+                    .requireAnyRace(Races.MANTIS, Races.SCORPION, Races.SPIDER, Races.CANCER, Races.ATLACH_NACHA, Races.ANT);
                 }
                 else{
                     var pLvl:int = pTier * 30;

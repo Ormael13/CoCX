@@ -37,23 +37,24 @@ package classes.GeneticMemories {
 		 */
 
 		public static var Memories:/*EnumValue*/ Array = [];
+		private static var _partid:int = 0;
 
-		public static const NONE:int = 0;
+		public static const NONE:int = _partid++;
 		EnumValue.add(Memories, NONE, "NONE", {
 			id: "Unlocked Metamorph",
 			name: "No Cock",
-			cost: 1000,
+			cost: 500,
 			title: "None",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockNone(cockIndex);
 			}
 		});
 
-		public static const KNOT:int = 1;
+		public static const KNOT:int = _partid++;
 		EnumValue.add(Memories, KNOT, "KNOT", {
 			id: "Unlocked Metamorph",
 			name: "Increase Knot",
-			cost: 500,
+			cost: 200,
 			title: "Knot",
 			hint: "You need a dog-like dick",
 			transformation: function(cockIndex:int): Transformation {
@@ -61,297 +62,297 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const HUMAN:int = 2;
+		public static const HUMAN:int = _partid++;
 		EnumValue.add(Memories, HUMAN, "HUMAN", {
 			id: "Unlocked Metamorph",
 			name: "Human cock",
-			cost: 500,
+			cost: 200,
 			title: "Human",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockHuman(cockIndex);
 			}
 		});
 
-		public static const HORSE:int = 3;
+		public static const HORSE:int = _partid++;
 		EnumValue.add(Memories, HORSE, "HORSE", {
 			id: "Horse cock",
 			name: "Horse cock",
-			cost: 500,
+			cost: 200,
 			title: "Horse",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockHorse(cockIndex);
 			}
 		});
 
-		public static const DOG:int = 4;
+		public static const DOG:int = _partid++;
 		EnumValue.add(Memories, DOG, "DOG", {
 			id: "Dog cock",
 			name: "Dog cock",
-			cost: 500,
+			cost: 200,
 			title: "Dog",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockDog(cockIndex);
 			}
 		});
 
-		public static const DEMON:int = 5;
+		public static const DEMON:int = _partid++;
 		EnumValue.add(Memories, DEMON, "DEMON", {
 			id: "Demon cock",
 			name: "Demon cock",
-			cost: 500,
+			cost: 200,
 			title: "Demon",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockDemon(cockIndex);
 			}
 		});
 
-		public static const TENTACLE:int = 6;
+		public static const TENTACLE:int = _partid++;
 		EnumValue.add(Memories, TENTACLE, "TENTACLE", {
 			id: "Tentacle cock",
 			name: "Tentacle cock",
-			cost: 500,
+			cost: 200,
 			title: "Tentacle",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockTentacle(cockIndex);
 			}
 		});
 
-		public static const SCYLLATENTACLE:int = 7;
+		public static const SCYLLATENTACLE:int = _partid++;
 		EnumValue.add(Memories, SCYLLATENTACLE, "SCYLLATENTACLE", {
 			id: "Scylla tentacle cock",
 			name: "Scylla tentacle cock",
-			cost: 500,
+			cost: 200,
 			title: "Scylla",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockScylla(cockIndex);
 			}
 		});
 
-		public static const CAT:int = 8;
+		public static const CAT:int = _partid++;
 		EnumValue.add(Memories, CAT, "CAT", {
 			id: "Cat cock",
 			name: "Cat cock",
-			cost: 500,
+			cost: 200,
 			title: "Cat",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockCat(cockIndex);
 			}
 		});
 
-		public static const CANCER:int = 9;
+		public static const CANCER:int = _partid++;
 		EnumValue.add(Memories, CANCER, "CANCER", {
 			id: "Cancer cock",
 			name: "Cancer cock",
-			cost: 500,
+			cost: 200,
 			title: "Cancer",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockCancer(cockIndex);
 			}
 		});
 
-		public static const LIZARD:int = 10;
+		public static const LIZARD:int = _partid++;
 		EnumValue.add(Memories, LIZARD, "LIZARD", {
 			id: "Lizard cock",
 			name: "Lizard cock",
-			cost: 500,
+			cost: 200,
 			title: "Lizard",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockLizard(cockIndex);
 			}
 		});
 
-		public static const CAVE_WYRM:int = 11;
+		public static const CAVE_WYRM:int = _partid++;
 		EnumValue.add(Memories, CAVE_WYRM, "CAVE_WYRM", {
 			id: "Cave Wyrm cock",
 			name: "Cave Wyrm cock",
-			cost: 500,
+			cost: 200,
 			title: "Cave Wyrm",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockCaveWyrm(cockIndex);
 			}
 		});
 
-		public static const ANEMONE:int = 12;
+		public static const ANEMONE:int = _partid++;
 		EnumValue.add(Memories, ANEMONE, "ANEMONE", {
 			id: "Anemone cock",
 			name: "Anemone cock",
-			cost: 500,
+			cost: 200,
 			title: "Anemone",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockAnemone(cockIndex);
 			}
 		});
 
-		public static const KANGAROO:int = 13;
+		public static const KANGAROO:int = _partid++;
 		EnumValue.add(Memories, KANGAROO, "KANGAROO", {
 			id: "Kangaroo cock",
 			name: "Kangaroo cock",
-			cost: 500,
+			cost: 200,
 			title: "Kangaroo",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockKangaroo(cockIndex);
 			}
 		});
 
-		public static const DRAGON:int = 14;
+		public static const DRAGON:int = _partid++;
 		EnumValue.add(Memories, DRAGON, "DRAGON", {
 			id: "Dragon cock",
 			name: "Dragon cock",
-			cost: 500,
+			cost: 200,
 			title: "Dragon",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockDragon(cockIndex);
 			}
 		});
 
-		public static const DISPLACER:int = 15;
+		public static const DISPLACER:int = _partid++;
 		EnumValue.add(Memories, DISPLACER, "DISPLACER", {
 			id: "Displacer cock",
 			name: "Displacer cock",
-			cost: 500,
+			cost: 200,
 			title: "Displacer",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockDisplacer(cockIndex);
 			}
 		});
 
-		public static const FOX:int = 16;
+		public static const FOX:int = _partid++;
 		EnumValue.add(Memories, FOX, "FOX", {
 			id: "Fox cock",
 			name: "Fox cock",
-			cost: 500,
+			cost: 200,
 			title: "Fox",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockFox(cockIndex);
 			}
 		});
 
-		public static const BEE:int = 17;
+		public static const BEE:int = _partid++;
 		EnumValue.add(Memories, BEE, "BEE", {
 			id: "Bee cock",
 			name: "Bee cock",
-			cost: 500,
+			cost: 200,
 			title: "Bee",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockBee(cockIndex);
 			}
 		});
 
-		public static const PIG:int = 18;
+		public static const PIG:int = _partid++;
 		EnumValue.add(Memories, PIG, "PIG", {
 			id: "Pig cock",
 			name: "Pig cock",
-			cost: 500,
+			cost: 200,
 			title: "Pig",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockPig(cockIndex);
 			}
 		});
 
-		public static const AVIAN:int = 19;
+		public static const AVIAN:int = _partid++;
 		EnumValue.add(Memories, AVIAN, "AVIAN", {
 			id: "Avian cock",
 			name: "Avian cock",
-			cost: 500,
+			cost: 200,
 			title: "Avian",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockAvian(cockIndex);
 			}
 		});
 
-		public static const RHINO:int = 20;
+		public static const RHINO:int = _partid++;
 		EnumValue.add(Memories, RHINO, "RHINO", {
 			id: "Rhino cock",
 			name: "Rhino cock",
-			cost: 500,
+			cost: 200,
 			title: "Rhino",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockRhino(cockIndex);
 			}
 		});
 
-		public static const ECHIDNA:int = 21;
+		public static const ECHIDNA:int = _partid++;
 		EnumValue.add(Memories, ECHIDNA, "ECHIDNA", {
 			id: "Echidna cock",
 			name: "Echidna cock",
-			cost: 500,
+			cost: 200,
 			title: "Echidna",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockEchidna(cockIndex);
 			}
 		});
 
-		public static const WOLF:int = 22;
+		public static const WOLF:int = _partid++;
 		EnumValue.add(Memories, WOLF, "WOLF", {
 			id: "Wolf cock",
 			name: "Wolf cock",
-			cost: 500,
+			cost: 200,
 			title: "Wolf",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockWolf(cockIndex);
 			}
 		});
 
-		public static const STAMEN:int = 23;
+		public static const STAMEN:int = _partid++;
 		EnumValue.add(Memories, STAMEN, "STAMEN", {
 			id: "Stamen cock",
 			name: "Stamen cock",
-			cost: 500,
+			cost: 200,
 			title: "Stamen",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockStamen(cockIndex);
 			}
 		});
 
-		public static const RED_PANDA:int = 24;
+		public static const RED_PANDA:int = _partid++;
 		EnumValue.add(Memories, RED_PANDA, "RED_PANDA", {
 			id: "Red Panda cock",
 			name: "Red Panda cock",
-			cost: 500,
+			cost: 200,
 			title: "Red Panda",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockRedPanda(cockIndex);
 			}
 		});
 
-		public static const GRYPHON:int = 25;
+		public static const GRYPHON:int = _partid++;
 		EnumValue.add(Memories, GRYPHON, "GRYPHON", {
 			id: "Gryphon cock",
 			name: "Gryphon cock",
-			cost: 500,
+			cost: 200,
 			title: "Gryphon",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockGryphon(cockIndex);
 			}
 		});
 
-		public static const OOMUKADE:int = 26;
+		public static const OOMUKADE:int = _partid++;
 		EnumValue.add(Memories, OOMUKADE, "OOMUKADE", {
 			id: "Ookamude cock",
 			name: "Ookamude cock",
-			cost: 500,
+			cost: 200,
 			title: "Centipede",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockCentipede(cockIndex);
 			}
 		});
 
-		public static const RAIJU:int = 27;
+		public static const RAIJU:int = _partid++;
 		EnumValue.add(Memories, RAIJU, "RAIJU", {
 			id: "Raiju cock",
 			name: "Raiju cock",
-			cost: 500,
+			cost: 200,
 			title: "Raiju",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockRaiju(cockIndex);
 			}
 		});
 
-		public static const USHI_ONI:int = 28;
+		public static const USHI_ONI:int = _partid++;
 		EnumValue.add(Memories, USHI_ONI, "USHI_ONI", {
 			id: "Ushi Oni cock",
 			name: "Ushi Oni cock",
-			cost: 500,
+			cost: 200,
 			title: "Ushi Oni",
 			transformation: function(cockIndex:int): Transformation {
 				return CoC.instance.transformations.CockUshiOni(cockIndex);
