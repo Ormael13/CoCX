@@ -64,6 +64,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const ANEMONE:int = _partid++;
+		EnumValue.add(Memories, ANEMONE, "ANEMONE", {
+			id: "Anemone Gills",
+			name: "Anemone Gills",
+			cost: 100,
+			title: "Anemone",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.GillsAnemone;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

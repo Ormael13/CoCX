@@ -320,8 +320,8 @@ public function GclassHTintro():void {
 }
 public function GclassHTbeaten():void {
 	clearOutput();
-	outputText("After your attack, the clouds part, the clear sky showing through. The hole widens, clouds scattered every which way by your counterattacks. Looking upward with contempt, you feel pride welling up within you. Your body feels lighter, stronger, your SoulForce pumping like blood through you. You kneel, feeling your SoulForce breaking through blockages in your body"+(player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3 ? " and soul":"")+"\n\n");
-	outputText("<b>You can now freely fly.\n");
+	outputText("After your attack, the clouds part, the clear sky showing through. The hole widens, clouds scattered every which way by your counterattacks. Looking upward with contempt, you feel pride welling up within you. Your body feels lighter, stronger, your SoulForce pumping like blood through you. You kneel, feeling your SoulForce breaking through blockages in your body"+(player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3 ? " and soul":"")+". You also feel silent 'pop' inside your body as cultivation base makes a breakthrou.\n\n");
+	outputText("<b>You're now Early Soul Exalt.\nYou can now freely fly.\n");
 	if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 0) {
 		var BTB:Number = 1;
 		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 1) BTB += 2;
@@ -342,15 +342,23 @@ public function GclassHTbeaten():void {
 	}
 	outputText("(Gained Perk: G class Heaven Tribulation Survivor)</b>\n");
 	player.createPerk(PerkLib.GclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+	player.createPerk(PerkLib.SoulExalt, 0, 0, 0, 0);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 1, -2);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
+	flags[kFLAGS.SOUL_CULTIVATION] = 19;
 	player.XP = player.XP + 27000;
 	cleanupAfterCombat();
 }
 public function GclassHTsurvived():void {
 	clearOutput();
-	outputText("You survived. You're in rough shape, but things could be worse. The Tribulation clouds disperse now that your trial has ended.\n\n");
-	outputText("<b>You can now freely fly.\n");
+	outputText("You survived. You're in rough shape, but things could be worse. The Tribulation clouds disperse now that your trial has ended. You also feel silent 'pop' inside your body as cultivation base makes a breakthrou.\n\n");
+	outputText("<b>You're now Early Soul Exalt.\nYou can now freely fly.\n");
 	outputText("(Gained Perk: G class Heaven Tribulation Survivor)</b>\n");
 	player.createPerk(PerkLib.GclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+	player.createPerk(PerkLib.SoulExalt, 0, 0, 0, 0);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 1, -2);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
+	flags[kFLAGS.SOUL_CULTIVATION] = 19;
 	cleanupAfterCombat();
 }
 public function FclassHTintro():void {

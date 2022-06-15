@@ -890,9 +890,9 @@ public class PerkMenu extends BaseContent {
 				for each (var mutations:IMutationPerkType in mPerkarray){
 					if (player.perkv1(mutations) > 0){
 						mCount++;
-						if (bodyPart == "Adaptations") mutationCount++;
 					}
 				}
+				if (bodyPart == "Adaptations") mutationCount++;
 				outputText(bodyPart + " mutations obtained: ");
 				if (mCount > mutationCount){
 					outputText("<font color=\"#800000\">");
