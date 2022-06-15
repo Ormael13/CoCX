@@ -33,7 +33,7 @@ public function cinnabarAppearance(output:Boolean = true):Function {
 //Approach
 private function cinnabarGreeting():void {
 	var big:Boolean = player.hasCock() && player.biggestCockArea() >= 100;
-	var multi:Boolean = big && player.cockTotal() > 1 && player.biggestCockArea2() >= 75;
+	var multi:Boolean = big && player.cockTotal() >= 3 && player.biggestCockArea2() >= 75;
 
 	clearOutput();
 	spriteSelect(SpriteDb.s_cinnabar);
@@ -61,7 +61,7 @@ private function cinnabarGreeting():void {
 	addButtonIfTrue(0, "Buy1Hour", cinnabarNonHugeDickings, "Unlocked again by SH DickSelect feature, if you have small enough dick!",
 		sceneHunter.dickSelect && player.findCock(1, -1, 100) >= 0 || !big);
 	addButtonIfTrue(1, "Fuck Her", cinnabarBigRouter, "Req. cock with area greater than 100.", big);
-	addButtonIfTrue(2, "Multi-Fuck", cinnabarMultiCockPortalFuckFest, "Req. one cock with area greater than 100 and at least one more bigger than 75.", multi);
+	addButtonIfTrue(2, "Multi-Fuck", cinnabarMultiCockPortalFuckFest, "Req. at least three cocks in total; one cock with area greater than 100 and another one bigger than 75.", multi);
 	addButton(4, "Leave", bazaar.enterTheBazaarAndMenu);
 }
 
@@ -449,9 +449,9 @@ private function cinnabarMultiCockPortalFuckFest():void {
 	var x:Number = player.biggestCockIndex();
 	var y:Number = player.biggestCockIndex2();
 	var z:Number = player.biggestCockIndex3();
-	if (z <= 0) sceneHunter.print("Failed check: up to 4 cocks usable!");
+	if (player.cockTotal() < 4) sceneHunter.print("Failed check: up to 4 cocks usable!");
 	outputText("Cinnabar's hands fly through your [armor], diving through your undergarments to squeeze " + sMultiCockDesc() + ".  ");
-	if(player.lust >= 70) outputText("She groans when she feels the full, turgid masses in her fingers, shivering as her padded finger-tips become slippery with your dripping pre-cum.");
+	if(player.lust >= 70) outputText("She groans when she feels the full, turgid masses in her fingers, shivering as her padded fingertips become slippery with your dripping pre-cum.");
 	else outputText("She sighs blissfully when she feels the size and number of your half-hard members, squeezing them with gentle pressure until they start to expand, engulfing her hand.");
 	outputText("  Your [legs] go wobbly from the delicate touches dancing through your [cocks], making it hard to stand.  Cinnabar slides ");
 	if(player.tallness >= 72) outputText("under your arm");
