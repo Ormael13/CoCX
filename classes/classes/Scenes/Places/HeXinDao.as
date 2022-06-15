@@ -1109,7 +1109,7 @@ public function soularena():void {
 			if (flags[kFLAGS.SPIRIT_STONES] >= 20) addButton(4, "5th", mrsShigureLecturesFourth).hint("Mrs. Shigure Lectures about fourth step of soul cultivation.");
 			else addButtonDisabled(4, "5th", "You not have enough spirit stones (20) to listen to those lectures.");
 		}
-		else if (player.hasPerk(PerkLib.Dantain)) addButtonDisabled(4, "5th", "You already learned about fourth step of soul cultivation.");
+		else if (player.hasKeyItem("A summary of Marethian Sects") >= 0) addButtonDisabled(4, "5th", "You already learned about fourth step of soul cultivation.");
 		if (player.hasPerk(PerkLib.Dantain)) addButton(13, "MissKyiana", missKyianaManualsShop);
 		else addButtonDisabled(13, "???", "After attending 2nd Lecture.");
 		addButton(14, "Back", soularena);
