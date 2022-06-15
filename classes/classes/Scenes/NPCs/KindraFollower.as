@@ -183,6 +183,7 @@ public function fight2Kindra():void {
 
 public function trainingArcheryWithKindra():void {
 	clearOutput();
+	if (!player.hasStatusEffect(StatusEffects.Kelt)) player.createStatusEffect(StatusEffects.Kelt, 5, 0, 0, 0);
 	if (flags[kFLAGS.KINDRA_DAILY_TRAINING] < 1) {
 		if (player.statusEffectv1(StatusEffects.Kindra) >= 140) {
 			if (player.isArtifactBow()) {
@@ -201,7 +202,7 @@ public function trainingArcheryWithKindra():void {
 			flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
 			doNext(camp.returnToCampUseFourHours);
 		}
-		if (player.statusEffectv1(StatusEffects.Kindra) >= 100 && player.statusEffectv1(StatusEffects.Kindra) < 140) {
+		else if (player.statusEffectv1(StatusEffects.Kindra) >= 100) {
 			if (flags[kFLAGS.KINDRA_ADV_ARCHERY] == 4) {
 				outputText("You head back to the archery field to resume training.\n\n");
 			}
@@ -227,7 +228,7 @@ public function trainingArcheryWithKindra():void {
 			flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
 			doNext(camp.returnToCampUseFourHours);
 		}
-		if (player.statusEffectv1(StatusEffects.Kindra) >= 50 && player.statusEffectv1(StatusEffects.Kindra) < 100) {
+		else if (player.statusEffectv1(StatusEffects.Kindra) >= 50) {
 			if (flags[kFLAGS.KINDRA_ADV_ARCHERY] == 2) {
 				outputText("You head to the training field with Kindra to resume shooting.\n\n");
 			}
@@ -255,9 +256,9 @@ public function trainingArcheryWithKindra():void {
 			flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
 			doNext(camp.returnToCampUseFourHours);
 		}
-		if (player.statusEffectv1(StatusEffects.Kelt) >= 100 && player.statusEffectv1(StatusEffects.Kindra) < 50) {
+		else if (player.statusEffectv1(StatusEffects.Kelt) >= 100 && player.statusEffectv1(StatusEffects.Kindra) < 50) {
 			if (flags[kFLAGS.KINDRA_ADV_ARCHERY] == 1) {
-				outputText("\"<i>I see you here for more archery training pup... lets see what you can do.</i>\"\n\n");
+				outputText("\"<i>I see you're here for more archery training pup... lets see what you can do.</i>\"\n\n");
 			}
 			else {
 				outputText("You ask Kindra if she would mind to teach you how to properly use a bow. She’s quite skilled. She ask a few question then nod satisfied.\n\n");
@@ -279,8 +280,7 @@ public function trainingArcheryWithKindra():void {
 			else bowSkill(10);
 			flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
 			doNext(camp.returnToCampUseFourHours);
-		}
-		if (player.statusEffectv1(StatusEffects.Kelt) < 100) {
+		} else {
 			outputText("You ask Kindra if she would mind to teach you how to properly use a bow. She’s quite skilled. She ask a few question then sigh in disappointment.\n\n");
 			outputText("\"<i>You don’t seem to have any proper training. You will need to learn the base from someone else as I don’t teach to beginners.</i>\"\n\n");
 			doNext(meet2Kindra);
