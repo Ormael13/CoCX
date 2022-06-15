@@ -16,14 +16,12 @@ import classes.Scenes.Dungeons.HiddenCave.BossGolems;
 import classes.Scenes.Dungeons.RiverDungeon;
 import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.ChiChiFollower;
-import classes.Scenes.NPCs.NeisaFollower;
 import classes.Scenes.Places.HeXinDao.*;
 import classes.Scenes.SceneLib;
 
 public class HeXinDao extends BaseContent
 {
     public var ignisarenaseer:IgnisArenaSeerScene = new IgnisArenaSeerScene();
-    public var neisaScene:NeisaFollower = new NeisaFollower();
     public var chichiScene:ChiChiFollower = new ChiChiFollower();
     public var riverdungeon:RiverDungeon = new RiverDungeon();
 	public var eraendirorsbulg:EraendirAndOrsbulg = new EraendirAndOrsbulg();
@@ -148,8 +146,8 @@ public class HeXinDao extends BaseContent
         spriteSelect(null);
         clearOutput();
         outputText("He'Xin'Dao is a large village connected and assembled between many smaller islands in the middle of large river that flows from the east to the west. In addition to the bridges connecting each of the islands together, two larger bridges connects them as a whole to both sides of the river, serving as the only points of access to the village.  The village is strategically laid out, preventing anyone from entering by swimming directly from the river to any of the islands, forcing anyone who can't fly to use the bridges if they wish to enter.\n");
-        outputText("\n\nNear one of major bridges is a wide variety of shops, ranging from a few shops with vicious-looking weapons, to one shop with a goblin out front, hawking what appears to be golem-making materials. On the opposite side of village, near other bridge is a medium sized shop with a large 'Currency Transfer' sign. A market chock full of seemingly random items is in the same building, and as you get closer, you recognize several transformative items from your travels in this realm.");
-        outputText("\n\nAt the West end of He'Xin'Dao you see one of biggest buildings here. The roar of a crowd rises up from it occasionally, and when you listen close, you can hear the rasping of blades, and various other sounds of combat. You assume it's a local arena.");	//Side question, why can't the ones with wings fly in? Answered: Because flying cultivators would kick their asses. 
+        outputText("\n\nNear one of major bridges is a wide variety of shops, ranging from a few shops with vicious-looking weapons, to one shop with a goblin out front, hawking what appears to be golem-making materials. On the opposite side of village, near other bridge is a medium-sized shop with a large 'Currency Transfer' sign. A market chock-full of seemingly random items is in the same building, and as you get closer, you recognize several transformative items from your travels in this realm.");
+        outputText("\n\nAt the West end of He'Xin'Dao you see one of the biggest buildings here. The roar of a crowd rises up from it occasionally, and when you listen close, you can hear the rasping of blades, and various other sounds of combat. You assume it's a local arena.");	//Side question, why can't the ones with wings fly in? Answered: Because flying cultivators would kick their asses.
         outputText("You notice several towers, positioned at central points on some of the larger islands. These hardy-looking wood and stone constructions have open, flat roofs, and several people perch on each. \n\n.");
 	outputText("While at first glance, these people seem random. Some wield bows, others daggers, a few with no weapons at all...But as you focus on them, you can <i> feel </i> their soulforce, almost reacting to your attention. \n\n");
 	outputText("As you look even closer into the sky, you see a few glints of light, something metal in the sky reflecting the sun's rays. Are those...people riding on flying swords? \n\n"); 
@@ -221,7 +219,7 @@ public class HeXinDao extends BaseContent
 				).hint("Triple Thrust Manual.");
 				addButton(6, "Draco Sweep", buyItem2,consumables.DRASMAN,
 						sayLine2(consumables.DRASMAN,"It's a manual for Draco Sweep. This simple technique allows you to unleash an attack that would strike in wide arc before you, perfect for when you are fighting a group of enemies. It also becomes more powerful as long you train your body and soul."),
-						"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when fighting a group of enemies.  You don't often meet more than one enemy at at a time, but you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once and would need something to deal with them.  "
+						"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when fighting a group of enemies.  You don't often meet more than one enemy at a time, but you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once and would need something to deal with them.  "
 				).hint("Draco Sweep Manual.");
 				addButton(7, "Many Birds", buyItem2,consumables.MABIMAN,
 						sayLine2(consumables.MABIMAN,"It's a manual for Many Birds. This simple technique allows you to project a figment of your soulforce as a crystal, firing it at extreme speeds. As you train your body and soul, this skill will become stronger."),
@@ -452,7 +450,7 @@ public class HeXinDao extends BaseContent
                 case 5:outputText("You count out the gems before giving them to the merchant. With barely noticable mumbling about the customer being stingy he slowly finishes the transaction, giving you five spirit stones.");break;
                 case 10:outputText("You count out the gems before giving them to the merchant. He finishes the transaction, giving you ten spirit stones.");break;
                 case 50:outputText("You count out the gems before giving them to the merchant. With slight haste he finishes the transaction, giving you fifty spirit stones.");break;
-                case 100:outputText("You count out the gems before giving them to the merchant. With haste he finishes the transaction, giving you a hundred spirit stones.");break;
+                case 100:outputText("You count out the gems before giving them to the merchant. With haste, he finishes the transaction, giving you a hundred spirit stones.");break;
             }
             player.gems -= 20*value;
             flags[kFLAGS.SPIRIT_STONES]+=value;
@@ -764,7 +762,7 @@ public class HeXinDao extends BaseContent
 			outputText("As you approach the cave a bunch of heavily armored guards stops you. You can barely see their faces under their helmets.\n\n");
 			outputText("\"<i>Hey, you there! Hold! This cave is dangerous, we can’t just let you head in by yourself. You must go with someone else, where is your partner?</i>\"\n\n");
 			outputText("Partner? What partner?\n\n");
-			outputText("\"<i>Your teammate you moron. This place has claimed more adventurer's lives then the wilds of Mareth by now. No one goes in there alone.</i>\"\n\n");
+			outputText("\"<i>Your teammate you moron. This place has claimed more adventurers lives than the wilds of Mareth by now. No one goes in there alone.</i>\"\n\n");
 			outputText("It seems like these people won’t let you go in the cave without a teammate.\n\n");
 			flags[kFLAGS.NEISA_FOLLOWER] = 1;
 			outputText("You decide to play by the rules and go find another hero to team with. The problem is, where would you even look for one?\n\n");
@@ -1197,18 +1195,19 @@ public function soularena():void {
 		player.createKeyItem("Heavenly Tribulation: Myths and Facts", 0, 0, 0, 0);
 		doNext(camp.returnToCampUseTwoHours);
 	}
+    
 	public function mrsShigureLecturesFourth():void {
 		clearOutput();
 		flags[kFLAGS.SPIRIT_STONES] -= 20;
-		outputText("\"<i></i>\"\n\n");
-		outputText("\"<i></i>\"\n\n");
-		doNext(camp.returnToCampUseFourHours);
-	}
-	public function mrsShigureLecturesFifth():void {
-		clearOutput();
-		flags[kFLAGS.SPIRIT_STONES] -= 25;
-		outputText("\"<i></i>\"\n\n");
-		outputText("\"<i></i>\"\n\n");
+		outputText("Placeholder on milf floof casual greeting.\n\n");
+		outputText("\"<i>Congratulation everyone for surviving tribulation. But not feel all powerfull over surviving 'weakest of the whole pack'. After each three major realms there will be awaiting you another one such event. ANd it would be stronger and more cunning each tiome to test your mantle.</i>\" Shigure starts explaining after applauding everyone on minor success.\n\n");
+		outputText("\"<i>Now some of you may feel like they feel stronger connection to some of world energies. It's called Dao and you can find it in anything be it sky, ground or even living beings. Some of the races gains stronger affinity to their element making it easier to comprehend it in form of elemental dao. So not be affraid to spend some time on comprehending elemental energies as it would be beneficial. It would make you elemental attacks stronger for the dao you compreheanded and");
+		outputText(" even could give some minor protection from it. But the last part may be not noticable until ending early stages of comprehension.</i>\" She continue her explanations on elemental daos giving even some examples.\n\n");
+		outputText("\"<i>Second matter i would like to meantion is sects. Some maybe heard about them or maybe not. In simpler words it's groups of similar minded cultivators with patriarch leader, it direct subordinates like elders and common members been disciplines. Now that you all are behind first major trial you could try your luck to join one of those sects. It would reduce your freedom you enjoy now as rogue cultivators but instead will give access to better materials or");
+		outputText("various manuals. Even could give some measure of protection. And not all of them getting well along with others maybe aside tiems that called for it like the massive battle with demons that devastated large area of mareth. SOme may know that area now as simply Battlefield.</i>\" She goes on for another ten to twenty minutes talking about benefits or obligations that comes with been sect member.\n\n");
+		outputText("\"<i>As parting gift for our last lecture i would give you all this small booklet that giving info on local sects. And if fate allow we may meet again somewhere in State of Azoh. May your dao be endless,</i>\" with this she ends lecture and leave the arean but not before meantioning againabout possible to pick booklet about sects.\n\n");
+		outputText("<b>Gained Key Item: A summary of Marethian Sects</b>");
+		player.createKeyItem("A summary of Marethian Sects", 0, 0, 0, 0);
 		doNext(camp.returnToCampUseFourHours);
 	}
 	public function missKyianaManualsShop():void {

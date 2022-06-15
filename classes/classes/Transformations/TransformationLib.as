@@ -911,6 +911,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    if (player.horns.type == Horns.NONE) desc += "With painful pressure, the skin on your forehead splits around two tiny nub-like horn, a little bit similar to that you would see on the cattle back in your homeland.";
+		else if (player.horns.type == Horns.UNICORN) desc += "A sudden wave of pleasure strike you making you moan as your horn begins to split in two";
 	    else desc += "Your horns vibrate and shift as if made of clay, reforming into horns with a bicorn-like shape.";
 	    player.horns.count = 2;
 	    player.horns.type = Horns.BICORN;
@@ -5431,7 +5432,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	public const ArmsAvian: Transformation = new SimpleTransformation("Avian Arms",
 	  // apply effect
-	  function (doOutput: Boolean): void {//TODO Metamorph
+	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
 	    if (player.skin.hasChitin()) {
@@ -5453,6 +5454,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.arms.type = Arms.AVIAN;
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.AVIAN));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5837,6 +5839,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.gills.type = Gills.ANEMONE;
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(GillsMem.getMemory(GillsMem.ANEMONE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -6396,6 +6399,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // is present
 	  function (): Boolean {
 	    return player.lowerBody === LowerBody.NAGA;
+	  },
+	  // is possible
+	  function (): Boolean {
+	    return player.faceType == Face.SNAKE_FANGS && player.lowerBody != LowerBody.NAGA && player.lowerBody != LowerBody.HYDRA;
 	  }
 	);
 
@@ -7389,7 +7396,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 8;
 	    player.lowerBody = LowerBody.SCYLLA;
 	    if (doOutput) outputText(desc);
-		  Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.SCYLLA));
+		Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.SCYLLA));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7397,7 +7404,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  },
 	  //is possible
 		function (): Boolean {
-			return !InCollection(player.lowerBody, LowerBody.SCYLLA, LowerBody.NAGA, LowerBody.CLOVEN_HOOFED);
+			return !InCollection(player.lowerBody, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.CLOVEN_HOOFED);
 		}
 	);
 
@@ -7406,7 +7413,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    // Doesn't support tails
+		TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyScylla, doOutput);
+
+		// Doesn't support tails
 	    TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.GillsNone, doOutput);
@@ -7417,10 +7426,15 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 10;
 	    player.lowerBody = LowerBody.KRAKEN;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.KRAKEN));
 	  },
 	  // is present
 	  function (): Boolean {
 	    return player.lowerBody === LowerBody.KRAKEN;
+	  },
+	  // is possible
+	  function (): Boolean {
+	    return player.lowerBody == LowerBody.SCYLLA;
 	  }
 	);
 
@@ -7442,6 +7456,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 2;
 	    player.lowerBody = LowerBody.HYDRA;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.HYDRA));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8550,6 +8565,27 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // is present
 	  function (): Boolean {
 	    return player.tailType === Tail.SALAMANDER;
+	  }
+	);
+
+	public const TailHydra: Transformation = new SimpleTransformation("Hydra Tails",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+		TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHydra, doOutput);
+
+		player.addStatusValue(StatusEffects.HydraTailsPlayer, 1, 1);
+		desc +="[pg]You groan in discomfort as your tail splits again, a new snake head growing from the bloodied flesh lump to join the others. <b>You now have " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " hydra heads below your waist.</b>";
+
+		if (doOutput) outputText(desc);
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.lowerBody != LowerBody.HYDRA || player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 12;
+	  },
+	  // is possible
+	  function (): Boolean {
+	    return player.lowerBody == LowerBody.HYDRA && player.statusEffectv1(StatusEffects.HydraTailsPlayer) < 12;
 	  }
 	);
 
@@ -10256,7 +10292,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				desc += "[pg]Your [allbreasts] tingle with warmth that slowly migrates to your nipples, filling them with warmth.  You pant and moan, rubbing them with your fingers.  A trickle of wetness suddenly coats your finger as it slips inside the nipple.  Shocked, you pull the finger free.  <b>You now have fuckable nipples!</b>";
 				//Talk about if anything was changed.
 				if (doOutput && nowFuckable) outputText(desc);
-				Metamorph.unlockMetamorph(BreastMem.getMemory(BreastMem.FUCKNIPPLE));
+				if (nowFuckable) Metamorph.unlockMetamorph(BreastMem.getMemory(BreastMem.FUCKNIPPLE));
 			},
 			// is present
 			function ():Boolean {
@@ -11137,7 +11173,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						desc += "Your " + num2Text2(cock+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your [cock "+(cock+1)+"] has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a";
 
 						if(player.tentacleCocks() > 0) outputText("nother");
-						outputText(" tentacle-cock!</b>");
+						desc +=" tentacle-cock!</b>";
 					}
 					else {
 						desc += GrowCockGenericText();
@@ -11812,7 +11848,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (thickness != 1)
 						player.cocks[cock].cockThickness = thickness;
 					if (player.cocks[cock].cockThickness < 1.5)
-						player.cocks[cock].thicken(2);
+						player.cocks[cock].thickenCock(2);
 					if (player.cocks[cock].knotMultiplier < knot) player.cocks[cock].knotMultiplier = knot;
 					player.cocks[cock].cockType = CockTypesEnum.WOLF;
 

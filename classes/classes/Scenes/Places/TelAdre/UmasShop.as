@@ -565,30 +565,24 @@ import classes.Scenes.SceneLib;
 		public static const NEEDLEWORK_MAGIC:int = 3;
 		public static const NEEDLEWORK_ATTACK:int = 4;
 
-		public const NEEDLEWORK_SPEED_PERK:PerkType = PerkLib.ChiReflowSpeed;
 		public static const NEEDLEWORK_SPEED_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Speed' perk. As a result your strength is capped but speed reductions are halved.";
 		public static const NEEDLEWORK_SPEED_STRENGTH_CAP:int = 60;
-		public static const NEEDLEWORK_SPEED_SPEED_MULTI:Number = 0.5;
 
-		public const NEEDLEWORK_LUST_PERK:PerkType = PerkLib.ChiReflowLust;
 		public static const NEEDLEWORK_LUST_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Lust' perk. As a result your Lust resistance and Tease attack are enhanced, but Libido and Sensitivity gains are increased.";
 		public static const NEEDLEWORK_LUST_LUST_RESIST:int = 10;
 		public static const NEEDLEWORK_LUST_TEASE_MULTI:Number = 10;
 		public static const NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI:Number = 1.1;
 		public static const NEEDLEWORK_LUST_LIBSENSE_MULTI:Number = 1.1;
 
-		public const NEEDLEWORK_DEFENSE_PERK:PerkType = PerkLib.ChiReflowDefense;
 		public static const NEEDLEWORK_DEFENSE_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Defense' perk. As a result your body has gained passive damage resistance and extra health, but speed is capped.";
 		public static const NEEDLEWORK_DEFENSE_DEFENSE_MULTI:Number = 1.1;
 		public static const NEEDLEWORK_DEFENSE_EXTRA_HP:int = 50;
 		public static const NEEDLEWORK_DEFENSE_SPEED_CAP:int = 60;
 
-		public const NEEDLEWORK_MAGIC_PERK:PerkType = PerkLib.ChiReflowMagic;
 		public static const NEEDLEWORK_MAGIC_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Magic' perk. As a result your spells are now more powerful, but regular attacks are weaker.";
 		public static const NEEDLEWORK_MAGIC_SPELL_MULTI:Number = 0.25; // Additive bonus to the other magic damage bonuses
 		public static const NEEDLEWORK_MAGIC_REGULAR_MULTI:Number = 0.75; // Multiplier tagged onto the end of damage calculations for the player.
 
-		public const NEEDLEWORK_ATTACK_PERK:PerkType = PerkLib.ChiReflowAttack;
 		public static const NEEDLEWORK_ATTACK_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Attack' perk. As a result your regular attacks are more powerful, but your damage reduction is decreased.";
 		public static const NEEDLEWORK_ATTACK_REGULAR_MULTI:Number = 1.1;
 		public static const NEEDLEWORK_ATTACK_DEFENSE_MULTI:Number = 0.9;
@@ -622,37 +616,6 @@ import classes.Scenes.SceneLib;
 			}
 
 			return "<b>Somethin' dun fucked up.  Please insert bugreport!</b> ";
-		}
-
-		/**
-		 * To save having to bullshit around with the perk list description stuff, the functions been modified to call this function to get
-		 * descriptions about accpuncture PerkLib. Let's us contain all of the related content together in a neater manner.
-		 * @param	perkName	PerkName currently being searched for
-		 * @return				Description of what the perk does.
-		 */
-		public function listPerkDescription(perkName:String):String
-		{
-			switch(perkName)
-			{
-				case PerkLib.ChiReflowAttack.name():
-					return PerkLib.ChiReflowAttack.desc();
-					break;
-				case PerkLib.ChiReflowDefense.name():
-					return PerkLib.ChiReflowDefense.desc();
-					break;
-				case PerkLib.ChiReflowLust.name():
-					return PerkLib.ChiReflowLust.desc();
-					break;
-				case PerkLib.ChiReflowMagic.name():
-					return PerkLib.ChiReflowMagic.desc();
-					break;
-				case PerkLib.ChiReflowSpeed.name():
-					return PerkLib.ChiReflowSpeed.desc();
-					break;
-				default:
-					return "";
-					break;
-			}
 		}
 
 		/**
@@ -982,8 +945,6 @@ import classes.Scenes.SceneLib;
 			// random call to one of the loppeTalks functors
 			_loppeTalks[rand(_loppeTalks.length)]();
 		}
-
-		private var _sceneNum:int = 0;
 
 		/**
 		 * Centralise the end-of-talk loppe stuffs

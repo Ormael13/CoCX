@@ -1078,9 +1078,10 @@ package classes.Scenes {
 				const buttonStr: String = genMem.title || "";
 				const unlocked: Boolean = GeneticMemoryStorage[genMem.id] && (genMem.taurVariant ? GeneticMemoryStorage["Taur Lower Body"] : true);
 				const partsInUse: Boolean = (index==-1? genMem.transformation().isPresent() : genMem.transformation(index).isPresent());
-				const enoughSF: Boolean = player.soulforce >= genMem.cost;
+				const cost:Number=(genMem.cost is Function? genMem.cost() : genMem.cost);
+				const enoughSF: Boolean = player.soulforce >= cost;
 
-				if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem, index).hint("Cost: " + genMem.cost + " SF" + (genMem.info ? "\n\n" + genMem.info : ""));
+				if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem, index).hint("Cost: " + cost + " SF" + (genMem.info ? "\n\n" + genMem.info : ""));
 				else if (unlocked && partsInUse) addButtonDisabled(currentButton, buttonStr, (!genMem.hint? "You already have this, the metamorphosis would have no effect!":genMem.hint));
 				else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton, buttonStr, "Cost: " + genMem.cost + " SF (You don't have enough Soulforce for this metamorphosis!)");
 				else if (!unlocked) addButtonDisabled(currentButton, buttonStr, "You haven't unlocked this metamorphosis yet!" + (genMem.lockedInfo ? "\n\n" + genMem.lockedInfo : ""));
@@ -1104,7 +1105,7 @@ package classes.Scenes {
 				genMem.transformation(index).applyEffect();
 			else
 				genMem.transformation().applyEffect();
-			player.soulforce -= genMem.cost;
+			player.soulforce -= (genMem.cost is Function? genMem.cost() : genMem.cost);
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			doNext(accessMetamorphMenu);
 		}

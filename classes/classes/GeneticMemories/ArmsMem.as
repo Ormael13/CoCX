@@ -438,6 +438,17 @@ package classes.GeneticMemories {
 		  }
 	  });
 
+	  public static const AVIAN:int = _partid++;
+	  EnumValue.add(Memories, AVIAN, "AVIAN", {
+		  id: "Avian Arms",
+		  name: "Avian Arms",
+		  cost: 100,
+		  title: "Avian",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.ArmsAvian;
+		  }
+	  });
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}
