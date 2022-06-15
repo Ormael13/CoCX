@@ -778,18 +778,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 			else damage *= 2;
 		}
-		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
-		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
-		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
-		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
-		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
+		damage = combat.itemsBonusDamageDamage(damage);
 		damage *= combat.meleePhysicalForce();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -919,18 +909,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
 		else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
 		else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
-		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
-		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
-		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
-		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
-		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
+		damage = combat.itemsBonusDamageDamage(damage);
 		if (monster.hasPerk(PerkLib.EnemyGroupType)) damage *= 3;
 		if (monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
 		damage *= combat.meleePhysicalForce();
@@ -1026,18 +1006,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
 		else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
 		else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
-		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
-		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
-		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
-		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
-		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
+		damage = combat.itemsBonusDamageDamage(damage);
 		damage *= combat.meleePhysicalForce();
 		damage *= SAMulti;
 		var crit:Boolean = false;
@@ -1385,18 +1355,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.isMeetingNaturalJousterReq()) damage *= 3*JousterDamageMod;
 			if (player.isMeetingNaturalJousterMasterGradeReq()) damage *= 5*JousterDamageMod;
 		}
-		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
-		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
-		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
-		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
-		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
+		damage = combat.itemsBonusDamageDamage(damage);
 		if (player.isTaur() || player.isDrider()) {
 			if (player.perkv1(IMutationsLib.TwinHeartIM) >= 2) {
 				if (player.perkv1(IMutationsLib.TwinHeartIM) >= 3) damage *= 1.8;
@@ -1491,15 +1451,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//other bonuses
 		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
-		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
-		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
-		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
-		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
-		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
+		damage = combat.itemsBonusDamageDamage(damage);
 		if (player.hasPerk(PerkLib.PowerSweep)) {
 			if (player.isWeaponForWhirlwind()) damage *= 1.25;
 			else damage *= 0.75;
@@ -1509,9 +1462,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else damage *= 1.25;
 		}
 		if (player.hasPerk(PerkLib.GiantsReach) && (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large") || (player.hasPerk(PerkLib.GigantGripEx) && player.weaponSpecials("Massive")))) damage *= 1.25;
-		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
 		damage *= combat.meleePhysicalForce();
 		//crit
 		var crit:Boolean = false;
@@ -1589,23 +1539,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//other bonuses
 		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
-		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
-		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
-		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
-		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
-		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
+		damage = combat.itemsBonusDamageDamage(damage);
 		if (player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large")) {
 			if (player.hasPerk(PerkLib.MakeItDouble)) damage *= 2;
 			else damage *= 1.25;
 		}
 		if (player.hasPerk(PerkLib.GiantsReach) && (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large") || (player.hasPerk(PerkLib.GigantGripEx) && player.weaponSpecials("Massive")))) damage *= 1.25;
-		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
 		damage *= combat.meleePhysicalForce();
 		//crit
 		var crit:Boolean = false;
@@ -1702,18 +1642,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		//other bonuses
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
-		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
-		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
-		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
-		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
-		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
+		damage = combat.itemsBonusDamageDamage(damage);
 		damage *= combat.meleePhysicalForce();
 		//crit
 		var crit:Boolean = false;
@@ -1878,9 +1808,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
 			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
 			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
-			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-			if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
+			damage = combat.statusEffectBonusDamage(damage);
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
@@ -2180,9 +2108,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//if (tu jak byłyby 4th tier wings dodane) damage += unarmedAttack();
 			damage += player.str;
 			if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) damage += player.str;
-			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-			if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
+			damage = combat.statusEffectBonusDamage(damage);
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
@@ -4056,18 +3982,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) HBD *= 2;
 		HBD += combat.unarmedAttack();
 		if (HBD < 10) HBD = 10;
-		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) HBD *= combat.historyFighterBonus();
-		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) HBD *= 1 + player.perkv1(PerkLib.DemonSlayer);
-		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) HBD *= 1 + player.perkv1(PerkLib.FeralHunter);
-		if (player.hasPerk(PerkLib.JobWarrior)) HBD *= 1.05;
-		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) HBD *= 2;
+		HBD = combat.itemsBonusDamageDamage(HBD);
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) HBD *= 1.5;
-		if (player.armor == armors.SPKIMO) HBD *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) HBD *= 1.4;
-		if (player.necklace == necklaces.OBNECK) HBD *= 1.2;
-		if (player.hasStatusEffect(StatusEffects.OniRampage)) HBD *= combat.oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) HBD *= 2;
-		if (player.hasStatusEffect(StatusEffects.TyrantState)) HBD *= combat.tyrantStagePowerMulti();
 		if (player.hasPerk(PerkLib.RacialParagon)) HBD *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) HBD *= 1.50;
 		HBD *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
@@ -4343,16 +4259,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		//other bonuses
 		damage += player.weaponAttack;
-		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
-		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
-		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
-		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
-		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
-		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
+		damage = combat.itemsBonusDamageDamage(damage);
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage *= combat.meleePhysicalForce();
@@ -4486,20 +4393,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (damage < 0) damage = 5;
 			//Deal damage and update based on perks
 			if (damage > 0) {
-				if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
-				if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
-				if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
-				if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-				if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 				if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-				if (player.armor == armors.SPKIMO) damage *= 1.2;
-				if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
-				if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-				if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
-				if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
-				if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-				if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-				if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
+				damage = combat.itemsBonusDamageDamage(damage);
 				if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 					if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 					else damage *= 2;
@@ -4617,17 +4512,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//CAP 'DAT SHIT
 			if (damage > player.level * 10 + 100) damage = player.level * 10 + 100;
 			if (damage > 0) {
-				if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
-				if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
-				if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
-				if (player.armor == armors.SPKIMO) damage *= 1.2;
-				if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
-				if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-				if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
-				if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
-				if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-				if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-				if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
+				damage = combat.itemsBonusDamageDamage(damage);
 				if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 					if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 					else damage *= 2;
@@ -4771,9 +4656,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage += player.str;
 		damage += scalingBonusSpeed() * 0.2;
 		if (damage < 10) damage = 10;
-		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
+		damage = combat.statusEffectBonusDamage(damage);
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.perkv1(IMutationsLib.ManticoreMetabolismIM) >= 3) damage *= 2;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -5047,20 +4930,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		//Deal damage and update based on perks
 		if(damage > 0) {
-			if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
-			if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
-			if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
-			if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-			if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 			if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-			if (player.armor == armors.SPKIMO) damage *= 1.2;
-			if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
-			if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-			if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
-			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
-			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-			if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
+			damage = combat.itemsBonusDamageDamage(damage);
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
@@ -5211,20 +5082,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else if (player.lowerBody == LowerBody.KANGAROO) damage += 50;
 		if (player.isTaur()) damage += 10;
 		//Damage post processing!
-		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
-		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
-		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
-		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
-		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
-		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-		if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
-		if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
-		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
+		damage = combat.itemsBonusDamageDamage(damage);
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
@@ -5289,9 +5148,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:int = 10 + (player.str / 1.5) + rand(player.str / 2) + (player.shieldBlock * 2);
 		if (player.hasPerk(PerkLib.ShieldSlam)) damage *= 1.2;
 		if (player.hasPerk(PerkLib.SteelImpact)) damage += ((player.tou - 50) * 0.3);
-		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
+		damage = combat.statusEffectBonusDamage(damage);
 		if (player.shieldPerk == "Large") damage *= 2;
 		if (player.shieldPerk == "Massive") damage *= 5;
 		damage *= (monster.damagePercent() / 100);
