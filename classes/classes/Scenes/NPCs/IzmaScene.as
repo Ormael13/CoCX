@@ -60,6 +60,12 @@ public class IzmaScene extends NPCAwareContent implements TimeAwareInterface
 				izmaDomsLatexy();
 				return true;
 			}
+			if (izmaFollower()) {
+				if (pregnancy.isPregnant && pregnancy.incubation == 0) {
+					IzmaPoopsBabies();
+					return true;
+				}
+			}
 			return false;
 		}
 		//End of Interface Implementation

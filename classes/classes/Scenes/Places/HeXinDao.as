@@ -1045,8 +1045,8 @@ public function soularena():void {
 	public function gaunletchallange2fight3():void {
 		clearOutput();
 		gaunletsinbetween();
-		outputText("\n\nThe mutt falls defeated to the floor as the crowd screams your name. The announcer announce the next contestant.\n\n");
-        outputText("\"<i>The next opponent is a crowd favorite. You've heard her name told in shallow whispers. The silken jailer, the Bondswebber...The Bitch Breaker... That's right...Our next opponent is an expert of the dreaded art known as BDSM. Will the challenger hold her back? Or will the Mistress claim another victim?! Please welcome...Mistress...Malady!!!</i>\"\n\n");
+		outputText("\n\nThe mutt falls to the floor as the crowd screams your name. The announcer announces the next contestant.\n\n");
+        outputText("\"<i>The next opponent is a crowd favorite. You've heard her name told in shallow whispers. The silken jailer, the Bondswebber... The Bitch Breaker! That's right, our next opponent is an expert of the dreaded art known as BDSM. Will the challenger hold her back? Or will the Mistress claim another victim?! Please welcome...Mistress...Malady!!!</i>\"\n\n");
         outputText("A drider in a bondage suit comes out of the gate and eyes you, amused.\n\n");
         outputText("\"<i>So... you are my opponent? You don’t look like much, little pet. By the time I’m done binding you, you will be calling me mistress!</i>\"\n\n");
         startCombat(new CorruptedDrider());
