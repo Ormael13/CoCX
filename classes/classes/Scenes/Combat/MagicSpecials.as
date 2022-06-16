@@ -942,7 +942,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = player.takeIceDamage(damage);
-				outputText("Your own ice wave smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+				outputText("Your own ice wave smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
 		}
@@ -1039,7 +1039,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = player.takeIceDamage(damage);
-				outputText("Your own ice wave smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+				outputText("Your own ice wave smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
 		}
@@ -1595,7 +1595,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = player.takeFireDamage(damage);
-				outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+				outputText("Your own fire smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
 		}
@@ -1855,7 +1855,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = player.takeAcidDamage(damage);
-				outputText("Your own spit smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+				outputText("Your own spit smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
 		}
@@ -1951,7 +1951,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = player.takeFireDamage(damage);
-				outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+				outputText("Your own fire smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
 		}
@@ -2066,7 +2066,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = player.takeFireDamage(damage);
-				outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+				outputText("Your own fire smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
 		}
@@ -2164,7 +2164,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = player.takeIceDamage(damage);
-				outputText("Your own ice smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+				outputText("Your own ice smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
 		}
@@ -2252,7 +2252,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = player.takeLightningDamage(damage);
-				outputText("Your own lightning smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+				outputText("Your own lightning smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
 		}
@@ -2339,7 +2339,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = player.takeDarknessDamage(damage);
-				outputText("Your own darkness smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+				outputText("Your own darkness smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
 		}
@@ -2425,7 +2425,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			else {
 				damage = player.takeWaterDamage(damage);
-				outputText("Your own water smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+				outputText("Your own water smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
 			}
 			outputText("\n\n");
 		}
@@ -2528,7 +2528,7 @@ public class MagicSpecials extends BaseCombatContent {
 				}
 				else {
 					damage = player.takeMagicDamage(damage);
-					outputText("Your own elemental energy blast smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+					outputText("Your own elemental energy blast smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
 				}
 				outputText("\n\n");
 			}
@@ -2650,7 +2650,7 @@ public class MagicSpecials extends BaseCombatContent {
 					combatRoundOver();
 					return;
 				}
-				outputText("Your own fire smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+				outputText("Your own fire smacks into your face! <b>([font-damage]" + damage + "</font>)</b>");
 				player.takeFireDamage(damage);
 			}
 			outputText("\n\n");
@@ -5404,7 +5404,7 @@ public class MagicSpecials extends BaseCombatContent {
 		temp += scalingBonusIntelligence() * multiInt;
 		temp += scalingBonusWisdom() * multiWis;
 		temp = Math.round(temp);
-		outputText("Your elemental encases your body within a bubble of curative spring water, slowly closing your wounds. The bubbles pop leaving you wet, but on the way to full recovery. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>");
+		outputText("Your elemental encases your body within a bubble of curative spring water, slowly closing your wounds. The bubbles pop leaving you wet, but on the way to full recovery. <b>([font-heal]+" + temp + "</font>)</b>");
 		HPChange(temp,false);
 		outputText("\n\n");
 		enemyAI();
@@ -5556,7 +5556,7 @@ public class MagicSpecials extends BaseCombatContent {
 		temp += scalingBonusIntelligence() * multiInt;
 		temp += scalingBonusWisdom() * multiWis;
 		temp = Math.round(temp);
-		outputText("Your elemental temporarily covers your skin with bark, shielding you against strikes. This is the bark of medicinal plants and as such you recover from your injuries. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>");
+		outputText("Your elemental temporarily covers your skin with bark, shielding you against strikes. This is the bark of medicinal plants and as such you recover from your injuries. <b>([font-heal]+" + temp + "</font>)</b>");
 		HPChange(temp,false);
 		outputText("\n\n");
 		enemyAI();
@@ -6068,7 +6068,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (type == 2) outputText("You gather energy from sunlight into the vines covering your body, converting the nutrients and repairing some of your sustained damage.");
 		if (type == 3) outputText("You channel warmth into your wounds soothing the pain and repairing the damages you sustained.");
 		if (type == 4) outputText("You relax and concentrate on your liquid form closing breaches and repairing any damage you sustained.");
-		outputText(" <b>(<font color=\"#008000\">+" + temp + "</font>)</b>");
+		outputText(" <b>([font-heal]+" + temp + "</font>)</b>");
 		HPChange(temp,false);
 		outputText("\n\n");
 		enemyAI();
