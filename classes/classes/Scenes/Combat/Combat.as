@@ -10,8 +10,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
 import classes.ItemType;
 import classes.Items.Armors.ScandalousSuccubusClothing;
-import classes.Items.JewelryLib;
-import classes.Items.Shields.AetherS;
+import classes.Items.Shields.*;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
@@ -32,23 +31,16 @@ import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Areas.Lake.GreenSlime;
 import classes.Scenes.Areas.Mountain.*;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
-import classes.Scenes.Areas.Plains.Gnoll;
-import classes.Scenes.Areas.Plains.GnollSpearThrower;
-import classes.Scenes.Areas.Plains.Satyr;
+import classes.Scenes.Areas.Plains.*;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
 import classes.Scenes.Camp.TrainingDummy;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
-import classes.Scenes.Monsters.Goblin;
-import classes.Scenes.Monsters.GoblinAssassin;
-import classes.Scenes.Monsters.Imp;
-import classes.Scenes.Monsters.ImpLord;
-import classes.Scenes.Monsters.ImpWarlord;
+import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.*;
-import classes.Scenes.Places.Boat.Anemone;
-import classes.Scenes.Places.Boat.Marae;
+import classes.Scenes.Places.Boat.*
 import classes.Scenes.Places.Farm.Kelt;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Quests.UrtaQuest.Sirius;
@@ -2260,7 +2252,7 @@ public class Combat extends BaseContent {
             return;
         }
         //Determine if dodged!
-        if ((player.playerIsBlinded() && rand(2) == 0) || monsterIsFast()) {
+        if ((player.playerIsBlinded() && rand(2) == 0) || monster.speedDodge(player) > 0) {
             //Akbal dodges special education
             if (monster.short == "Akbal") outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
             else if (monster.short == "plain girl") outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your " + weapon + " against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your " + weapon + " as if betrayed.\n");
@@ -2409,8 +2401,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
         if (player.necklace == necklaces.OBNECK) damage *= 1.2;
         if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
-        if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
-        damage = statusEffectBonusDamage(damage);
+        damage *= player.jewelryAttackModifier();
         return damage;
     }
 
@@ -3329,7 +3320,7 @@ public class Combat extends BaseContent {
             }
             if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= historyScoutBonus();
             if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
-            if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+            damage *= player.jewelryRangeModifier();
             if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
                 if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
                 else {
@@ -3674,11 +3665,7 @@ public class Combat extends BaseContent {
 			//Thunderous Strikes
 			if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 			if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
-			if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
-			if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
-			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
-            damage = statusEffectBonusDamage(damage);
-			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
+			//if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
             damage = itemsBonusDamageDamage(damage);
             if (player.hasPerk(PerkLib.GoblinoidBlood)) {
 				if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
@@ -3721,7 +3708,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.PrestigeJobStalker)) damage *= 1.2;
 			if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= historyScoutBonus();
 			if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
-			if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+			damage *= player.jewelryRangeModifier();
 			damage = statusEffectBonusDamage(damage);
             if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
             if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
@@ -3864,7 +3851,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
                 if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
                 if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
-                if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+                damage *= player.jewelryRangeModifier();
                 damage = statusEffectBonusDamage(damage);
                 if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
                     if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
@@ -4028,7 +4015,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
             if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
             if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
-            if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+            damage *= player.jewelryRangeModifier();
             damage = statusEffectBonusDamage(damage);
             if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
                 if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
@@ -4307,7 +4294,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
             if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
 			if (player.hasPerk(PerkLib.SilverForMonsters) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1.2;
-            if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+            damage *= player.jewelryRangeModifier();
             if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
                 if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
                 else {
@@ -4906,7 +4893,7 @@ public class Combat extends BaseContent {
         }
 
         //Determine if dodged!
-        if ((player.playerIsBlinded() && rand(2) == 0) || monsterIsFast()) {
+        if ((player.playerIsBlinded() && rand(2) == 0) || monster.speedDodge(player) > 0) {
             //Akbal dodges special education
             if (monster.short == "Akbal") outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
             else if (monster.short == "plain girl") outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your [weapon] against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your [weapon] as if betrayed.\n");
@@ -4953,10 +4940,6 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.LightningClaw)){
             outputText(" The residual electricity leaves your foe's skin tingling with pleasure.");
         }
-    }
-
-    private function monsterIsFast():Boolean {
-        return monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80;
     }
 
     public function attack2():void {
@@ -5067,7 +5050,7 @@ public class Combat extends BaseContent {
         }
 
         //Determine if dodged!
-        if ((player.playerIsBlinded() && rand(2) == 0) || monsterIsFast()) {
+        if ((player.playerIsBlinded() && rand(2) == 0) || monster.speedDodge(player) > 0) {
             //Akbal dodges special education
             if (monster is Akbal) outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
             else if (monster is Shouldra) outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your [weapon] against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your [weapon] as if betrayed.\n");
@@ -5642,24 +5625,20 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
-			var damage1:Number = damage;
-			if (monster.hasPerk(PerkLib.IceNature)) damage1 += (damage1 * 0.5);
-			if (monster.hasPerk(PerkLib.FireVulnerability)) damage1 += (damage1 * 0.2);
-			if (monster.hasPerk(PerkLib.IceVulnerability)) damage1 += (damage1 * 0.05);
-			if (monster.hasPerk(PerkLib.FireNature)) damage1 += (damage1 * 0.02);
-			if (player.hasPerk(PerkLib.FireAffinity)) damage1 *= 2;
+			if (monster.hasPerk(PerkLib.IceNature)) damage *= 1.5;
+			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 1.2;
+			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 1.05;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 1.02;
+			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
-			damage += damage1;
 		}
 		if ((player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade)) {
-			var damage2:Number = damage;
-			if (monster.hasPerk(PerkLib.IceNature)) damage2 += (damage2 * 0.5);
-			if (monster.hasPerk(PerkLib.FireVulnerability)) damage2 += (damage2 * 0.2);
-			if (monster.hasPerk(PerkLib.IceVulnerability)) damage2 += (damage2 * 0.05);
-			if (monster.hasPerk(PerkLib.FireNature)) damage2 += (damage2 * 0.02);
-			if (player.hasPerk(PerkLib.FireAffinity)) damage2 *= 2;
-			damage += scalingBonusLibido() * 0.20;
-			damage += damage2;
+            damage += scalingBonusLibido() * 0.20;
+			if (monster.hasPerk(PerkLib.IceNature)) damage *= 1.5;
+			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 1.2;
+			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 1.05;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 1.02;
+			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 		}
 		if (player.weapon == weapons.BFGAUNT || (player.shield is AetherS && player.weapon is AetherD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets")) damage *= 4;
 		if (player.weapon == weapons.FRTAXE && monster.isFlying()) damage *= 1.5;
@@ -5683,7 +5662,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
 		if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
-		if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+        damage *= player.jewelryAttackModifier();
 		if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 		damage = statusEffectBonusDamage(damage);
 		if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) {
@@ -5796,6 +5775,7 @@ public class Combat extends BaseContent {
                 if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
                     if (damage > 0) {
                         damage = itemsBonusDamageDamage(damage);
+                        damage = statusEffectBonusDamage(damage);
                         if (player.hasPerk(PerkLib.GoblinoidBlood)) {
                             if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
                             if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
@@ -6477,6 +6457,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
             if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
             damage = itemsBonusDamageDamage(damage);
+            damage = statusEffectBonusDamage(damage);
             if (player.hasPerk(PerkLib.GoblinoidBlood)) {
                 if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
                 if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
@@ -11595,6 +11576,7 @@ public class Combat extends BaseContent {
             if (damage < 10) damage = 10;
             if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
             damage = itemsBonusDamageDamage(damage);
+            damage = statusEffectBonusDamage(damage);
             if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
             if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
                 damage *= 1.50;
@@ -11679,6 +11661,7 @@ public class Combat extends BaseContent {
             if (damage < 10) damage = 10;
             if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
             damage = itemsBonusDamageDamage(damage);
+            damage = statusEffectBonusDamage(damage);
             if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
                 damage *= 1.50;
                 monster.addStatusValue(StatusEffects.OrcaHasSmashed, 1, -1);
@@ -11717,6 +11700,7 @@ public class Combat extends BaseContent {
             damage = weaponAttackModifier(damage);
             if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
             damage = itemsBonusDamageDamage(damage);
+            damage = statusEffectBonusDamage(damage);
             if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
                 damage *= 1.50;
                 monster.addStatusValue(StatusEffects.OrcaHasSmashed, 1, -1);
@@ -11764,6 +11748,7 @@ public class Combat extends BaseContent {
             damage = weaponAttackModifier(damage);
             if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
             damage = itemsBonusDamageDamage(damage);
+            damage = statusEffectBonusDamage(damage);
             if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
                 damage *= 1.50;
                 monster.addStatusValue(StatusEffects.OrcaHasSmashed, 1, -1);
@@ -14736,6 +14721,7 @@ public class Combat extends BaseContent {
 		}
         if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
         damage = itemsBonusDamageDamage(damage);
+        damage = statusEffectBonusDamage(damage);
 		damage *= (1 + SFoDMulti);
 		var crit:Boolean = false;
 		var critChance:int = 65;

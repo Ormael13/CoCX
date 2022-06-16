@@ -2224,6 +2224,30 @@ use namespace CoC;
 			return lust;
 		}
 
+		public function jewelryAttackModifier():Number {
+			var attackMod:Number = 1;
+			if(jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(jewelryEffectId2 == JewelryLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(jewelryEffectId3 == JewelryLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(jewelryEffectId4 == JewelryLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(headjewelryEffectId == HeadJewelryLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(necklaceEffectId == NecklaceLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+
+			return attackMod;
+		}
+
+		public function jewelryRangeModifier():Number {
+			var attackMod:Number = 1;
+			if(jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(jewelryEffectId2 == JewelryLib.MODIFIER_R_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(jewelryEffectId3 == JewelryLib.MODIFIER_R_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(jewelryEffectId4 == JewelryLib.MODIFIER_R_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(headjewelryEffectId == HeadJewelryLib.MODIFIER_R_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(necklaceEffectId == NecklaceLib.MODIFIER_R_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+
+			return attackMod;
+		}
+
 		public function effectiveLibido():Number {
 			var mins:Object = getAllMinStats();
 			var baseLib:Number = lib;
@@ -3166,19 +3190,6 @@ use namespace CoC;
 				outputText(" Zenji grits his teeth as he shields you, enduring several strikes from your opponent.");
 				addStatusValue(StatusEffects.CombatFollowerZenji, 3, 1);
 			}
-		}
-
-		/**
-		 * @return 0: did not avoid; 1-3: avoid with varying difference between
-		 * speeds (1: narrowly avoid, 3: deftly avoid)
-		 */
-		public function speedDodge(monster:Monster):int{
-			var diff:Number = spe - monster.spe;
-			var rnd:int = int(Math.random() * ((diff / 4) + 80));
-			if (rnd<=80) return 0;
-			else if (diff<8) return 1;
-			else if (diff<20) return 2;
-			else return 3;
 		}
 
 		//Body Type
