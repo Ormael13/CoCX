@@ -9,8 +9,8 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
 import classes.ItemType;
-import classes.Items.JewelryLib;
-import classes.Items.Shields.AetherS;
+import classes.Items.Armors.ScandalousSuccubusClothing;
+import classes.Items.Shields.*;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
@@ -31,15 +31,16 @@ import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Areas.Lake.GreenSlime;
 import classes.Scenes.Areas.Mountain.*;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
+import classes.Scenes.Areas.Plains.*;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
 import classes.Scenes.Camp.TrainingDummy;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
+import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.*;
-import classes.Scenes.Places.Boat.Anemone;
-import classes.Scenes.Places.Boat.Marae;
+import classes.Scenes.Places.Boat.*
 import classes.Scenes.Places.Farm.Kelt;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Quests.UrtaQuest.Sirius;
@@ -534,7 +535,7 @@ public class Combat extends BaseContent {
                     statScreenRefresh();
                     return;
                 }
-                if (monster.short == "Ember") {
+                if (monster is Ember) {
                     inCombat = false;
                     player.HP = player.minHP()+1;
                     statScreenRefresh();
@@ -551,9 +552,9 @@ public class Combat extends BaseContent {
                     if (player.hasStatusEffect(StatusEffects.SoulArena) || monster.hasPerk(PerkLib.NoGemsLost)) gemsLost = 0;
 				    //Keep gems from going below zero.
                     if (gemsLost > player.gems) gemsLost = player.gems;
-                    if (monster.short == "manticore") gemsLost = 0;
+                    if (monster is Etna) gemsLost = 0;
                     var timePasses:int = monster.handleCombatLossText(inDungeon, gemsLost); //Allows monsters to customize the loss text and the amount of time lost
-                    if (player.hasStatusEffect(StatusEffects.SoulArena) || (monster.short == "Hellfire Snail" && (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)))) timePasses = 1;
+                    if (player.hasStatusEffect(StatusEffects.SoulArena) || (monster is HellfireSnail && (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)))) timePasses = 1;
                     player.gems -= gemsLost;
                     if (monster.perkv3(PerkLib.NoGemsLost) > 0) player.gems += monster.perkv3(PerkLib.NoGemsLost);
                 }
@@ -561,7 +562,7 @@ public class Combat extends BaseContent {
                 if (player.hasStatusEffect(StatusEffects.SoulArena)) player.removeStatusEffect(StatusEffects.SoulArena);
                 if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) player.removeStatusEffect(StatusEffects.SoulArenaGaunlet);
                 //Prison is unfinished, shit is old, I'm not adding new monsties here.
-                if (!prison.inPrison && flags[kFLAGS.PRISON_CAPTURE_CHANCE] > 0 && rand(100) < flags[kFLAGS.PRISON_CAPTURE_CHANCE] && (prison.trainingFeed.prisonCaptorFeedingQuestTrainingIsTimeUp() || !prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists()) && (monster.short == "goblin" || monster.short == "goblin assassin" || monster.short == "imp" || monster.short == "imp lord" || monster.short == "imp warlord" || monster.short == "hellhound" || monster.short == "minotaur" || monster.short == "satyr" || monster.short == "gnoll" || monster.short == "gnoll spear-thrower" || monster.short == "basilisk")) {
+                if (!prison.inPrison && flags[kFLAGS.PRISON_CAPTURE_CHANCE] > 0 && rand(100) < flags[kFLAGS.PRISON_CAPTURE_CHANCE] && (prison.trainingFeed.prisonCaptorFeedingQuestTrainingIsTimeUp() || !prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists()) && (monster is Goblin || monster is GoblinAssassin || monster is Imp || monster is ImpLord || monster is ImpWarlord || monster is HellHound || monster.short == "minotaur" || monster is Satyr || monster is Gnoll || monster is GnollSpearThrower || monster is Basilisk)) {
                     outputText("  You feel yourself being dragged and carried just before you black out.");
                     doNext(prison.prisonIntro);
                     return;
@@ -652,44 +653,7 @@ public class Combat extends BaseContent {
         clearOutput();
         outputText("You close the distance between you and [monster a] [monster name] as quickly as possible.\n\n");
         player.removeStatusEffect(StatusEffects.KnockedBack);
-        if (player.weaponRange == weaponsrange.LBLASTR) {
-            var milkAmmo:Number = Math.round(player.lactationQ() / 100);
-			if (milkAmmo > 20) milkAmmo = 20;
-            player.ammo = milkAmmo;
-        }
-        if (player.weaponRange == weaponsrange.TWINGRA) player.ammo = 12;
-        if (player.weaponRange == weaponsrange.IVIARG_) player.ammo = 12;
-        if (player.weaponRange == weaponsrange.BLUNDER) player.ammo = 9;
-        if (player.weaponRange == weaponsrange.TDPISTO) player.ammo = 6;
-        if (player.weaponRange == weaponsrange.DESEAGL) player.ammo = 4;
-        if (player.weaponRange == weaponsrange.DPISTOL) player.ammo = 3;
-        if (player.weaponRange == weaponsrange.ADBSHOT) player.ammo = 2;
-        if (player.weaponRange == weaponsrange.ADBSCAT) player.ammo = 2;
-		if (player.weaponRange == weaponsrange.DBDRAGG) player.ammo = 2;
-        if (player.weaponRange == weaponsrange.FLINTLK) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.DUEL_P_) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.M1CERBE) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.HARPGUN) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.TRFATBI) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.SNIPPLE) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.TOUHOM3) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.DERPLAU) player.ammo = 1;
-        if (player.weaponRange == weaponsrange.HARKON1) player.ammo = 1;
-		if (player.hasPerk(PerkLib.TaintedMagazine)) player.ammo *= 2;
-		if (player.hasPerk(PerkLib.PrimedClipWarp)) player.ammo *= 3;
-        if (player.weaponRange == weaponsrange.LBLASTR) {
-            outputText("At the same time, you moo in pleasure as milk flows from your udders, pumped by the suction cup all the way to the tank on your back.");
-            var lustDmg:int = rand(player.lib / 10) + 20;
-            player.dynStats("lus", lustDmg);
-        }
-        else outputText("At the same time, you open the magazine of your " + player.weaponRangeName + " to reload.");
-        if (!player.hasPerk(PerkLib.RapidReload)) {
-            outputText("  This takes some time, giving your enemy a chance to act.\n\n");
-            enemyAI();
-        } else {
-            outputText("\n\n");
-            doNext(curry(combatMenu, false));
-        }
+        reloadWeapon1();
     }
 
     public function approachAfterKnockback2():void {
@@ -2269,7 +2233,7 @@ public class Combat extends BaseContent {
             if (rand(100) + player.inte / 3 >= 50) {
                 var dam:int = int(player.str / 5 - rand(5));
                 if (dam == 0) dam = 1;
-                outputText("You strike at the amalgamation, crushing countless worms into goo, dealing <b><font color=\"#800000\">" + dam + "</font></b> damage.\n\n");
+                outputText("You strike at the amalgamation, crushing countless worms into goo, dealing <b>[font-damage]" + dam + "[/font]</b> damage.\n\n");
                 monster.HP -= dam;
                 if (monster.HP <= monster.minHP()) {
                     doNext(endHpVictory);
@@ -2288,7 +2252,7 @@ public class Combat extends BaseContent {
             return;
         }
         //Determine if dodged!
-        if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+        if ((player.playerIsBlinded() && rand(2) == 0) || monster.speedDodge(player) > 0) {
             //Akbal dodges special education
             if (monster.short == "Akbal") outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
             else if (monster.short == "plain girl") outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your " + weapon + " against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your " + weapon + " as if betrayed.\n");
@@ -2437,8 +2401,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
         if (player.necklace == necklaces.OBNECK) damage *= 1.2;
         if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
-        if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
-        damage = statusEffectBonusDamage(damage);
+        damage *= player.jewelryAttackModifier();
         return damage;
     }
 
@@ -3357,7 +3320,7 @@ public class Combat extends BaseContent {
             }
             if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= historyScoutBonus();
             if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
-            if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+            damage *= player.jewelryRangeModifier();
             if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
                 if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
                 else {
@@ -3478,7 +3441,7 @@ public class Combat extends BaseContent {
                     lustArrowDmg *= 0.25;
                     lustArrowDmg = Math.round(lustArrowDmg);
                     monster.lust += lustArrowDmg;
-                    outputText("<b>(<font color=\"#ff00ff\">" + lustArrowDmg + "</font>)</b>");
+                    outputText("<b>([font-lust]" + lustArrowDmg + "[/font])</b>");
                     if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
                 }
             }
@@ -3702,11 +3665,7 @@ public class Combat extends BaseContent {
 			//Thunderous Strikes
 			if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 			if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
-			if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
-			if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
-			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
-            damage = statusEffectBonusDamage(damage);
-			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
+			//if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
             damage = itemsBonusDamageDamage(damage);
             if (player.hasPerk(PerkLib.GoblinoidBlood)) {
 				if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
@@ -3749,7 +3708,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.PrestigeJobStalker)) damage *= 1.2;
 			if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= historyScoutBonus();
 			if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
-			if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+			damage *= player.jewelryRangeModifier();
 			damage = statusEffectBonusDamage(damage);
             if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
             if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
@@ -3892,7 +3851,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
                 if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
                 if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
-                if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+                damage *= player.jewelryRangeModifier();
                 damage = statusEffectBonusDamage(damage);
                 if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
                     if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
@@ -4056,7 +4015,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
             if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
             if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
-            if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+            damage *= player.jewelryRangeModifier();
             damage = statusEffectBonusDamage(damage);
             if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
                 if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
@@ -4335,7 +4294,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
             if (player.hasPerk(PerkLib.PhantomShooting)) damage *= 1.05;
 			if (player.hasPerk(PerkLib.SilverForMonsters) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1.2;
-            if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+            damage *= player.jewelryRangeModifier();
             if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
                 if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
                 else {
@@ -4903,18 +4862,18 @@ public class Combat extends BaseContent {
             }
         }
         if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
-            if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(0);
-            if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(0);
+            if (monster is FrostGiant) (monster as FrostGiant).giantBoulderHit(0);
+            else                       (monster as YoungFrostGiant).youngGiantBoulderHit(0);
             enemyAI();
             return;
         }
         //Worms are special
-        if (monster.short == "worms") {
+        if (monster is WormMass) {
             //50% chance of hit (int boost)
             if (rand(100) + player.inte / 3 >= 50) {
                 var dam:int = int(player.str / 5 - rand(5));
                 if (dam == 0) dam = 1;
-                outputText("You strike at the amalgamation, crushing countless worms into goo, dealing <b><font color=\"#800000\">" + dam + "</font></b> damage.\n\n");
+                outputText("You strike at the amalgamation, crushing countless worms into goo, dealing <b>[font-damage]" + dam + "[/font]</b> damage.\n\n");
                 monster.HP -= dam;
                 if (monster.HP <= monster.minHP()) {
                     doNext(endHpVictory);
@@ -4934,7 +4893,7 @@ public class Combat extends BaseContent {
         }
 
         //Determine if dodged!
-        if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+        if ((player.playerIsBlinded() && rand(2) == 0) || monster.speedDodge(player) > 0) {
             //Akbal dodges special education
             if (monster.short == "Akbal") outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
             else if (monster.short == "plain girl") outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your [weapon] against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your [weapon] as if betrayed.\n");
@@ -5071,7 +5030,7 @@ public class Combat extends BaseContent {
             if (rand(100) + player.inte / 3 >= 50) {
                 var dam:int = int(player.str / 5 - rand(5));
                 if (dam == 0) dam = 1;
-                outputText("You strike at the amalgamation, crushing countless worms into goo, dealing <b><font color=\"#800000\">" + dam + "</font></b> damage.\n\n");
+                outputText("You strike at the amalgamation, crushing countless worms into goo, dealing <b>[font-damage]" + dam + "[/font]</b> damage.\n\n");
                 monster.HP -= dam;
                 if (monster.HP <= monster.minHP()) {
                     doNext(endHpVictory);
@@ -5091,22 +5050,20 @@ public class Combat extends BaseContent {
         }
 
         //Determine if dodged!
-        if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+        if ((player.playerIsBlinded() && rand(2) == 0) || monster.speedDodge(player) > 0) {
             //Akbal dodges special education
-            if (monster.short == "Akbal") outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
-            else if (monster.short == "plain girl") outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your [weapon] against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your [weapon] as if betrayed.\n");
-            else if (monster.short == "kitsune") {
-                //Player Miss:
-                outputText("You swing your [weapon] ferociously, confident that you can strike a crushing blow.  To your surprise, you stumble awkwardly as the attack passes straight through her - a mirage!  You curse as you hear a giggle behind you, turning to face her once again.\n\n");
-            } else {
+            if (monster is Akbal) outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
+            else if (monster is Shouldra) outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your [weapon] against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your [weapon] as if betrayed.\n");
+            else if (monster is Kitsune) outputText("You swing your [weapon] ferociously, confident that you can strike a crushing blow.  To your surprise, you stumble awkwardly as the attack passes straight through her - a mirage!  You curse as you hear a giggle behind you, turning to face her once again.\n");
+            else {
                 if (player.weapon is HuntsmansCane && rand(2) == 0) {
                     if (rand(2) == 0) outputText("You slice through the air with your cane, completely missing your enemy.");
                     else outputText("You lunge at your enemy with the cane.  It glows with a golden light but fails to actually hit anything.");
                 }
                 if (!MSGControll) {
-                    if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your attack!");
-                    if (monster.spe - player.spe >= 8 && monster.spe - player.spe < 20) outputText("[Themonster] dodges your attack with superior speed!");
                     if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your attack.");
+                    else if (monster.spe - player.spe >= 8 && monster.spe - player.spe < 20) outputText("[Themonster] dodges your attack with superior speed!");
+                    else outputText("[Themonster] narrowly avoids your attack!");
                 }
                 outputText("\n");
                 if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
@@ -5575,7 +5532,7 @@ public class Combat extends BaseContent {
                 if (j != 0) outputText(",");
                 k = 3;
             }
-            outputText("<b><font color=\"#800000\">" + String(damagemsg[damagemsg.length - j - 1]) + "</font></b>");
+            outputText("<b>[font-damage]" + String(damagemsg[damagemsg.length - j - 1]) + "[/font]</b>");
             k--;
         }
         outputText("<b>)</b>");
@@ -5668,24 +5625,20 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
-			var damage1:Number = damage;
-			if (monster.hasPerk(PerkLib.IceNature)) damage1 += (damage1 * 0.5);
-			if (monster.hasPerk(PerkLib.FireVulnerability)) damage1 += (damage1 * 0.2);
-			if (monster.hasPerk(PerkLib.IceVulnerability)) damage1 += (damage1 * 0.05);
-			if (monster.hasPerk(PerkLib.FireNature)) damage1 += (damage1 * 0.02);
-			if (player.hasPerk(PerkLib.FireAffinity)) damage1 *= 2;
+			if (monster.hasPerk(PerkLib.IceNature)) damage *= 1.5;
+			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 1.2;
+			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 1.05;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 1.02;
+			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
-			damage += damage1;
 		}
 		if ((player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade)) {
-			var damage2:Number = damage;
-			if (monster.hasPerk(PerkLib.IceNature)) damage2 += (damage2 * 0.5);
-			if (monster.hasPerk(PerkLib.FireVulnerability)) damage2 += (damage2 * 0.2);
-			if (monster.hasPerk(PerkLib.IceVulnerability)) damage2 += (damage2 * 0.05);
-			if (monster.hasPerk(PerkLib.FireNature)) damage2 += (damage2 * 0.02);
-			if (player.hasPerk(PerkLib.FireAffinity)) damage2 *= 2;
-			damage += scalingBonusLibido() * 0.20;
-			damage += damage2;
+            damage += scalingBonusLibido() * 0.20;
+			if (monster.hasPerk(PerkLib.IceNature)) damage *= 1.5;
+			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 1.2;
+			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 1.05;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 1.02;
+			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 		}
 		if (player.weapon == weapons.BFGAUNT || (player.shield is AetherS && player.weapon is AetherD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets")) damage *= 4;
 		if (player.weapon == weapons.FRTAXE && monster.isFlying()) damage *= 1.5;
@@ -5709,7 +5662,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
 		if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
-		if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+        damage *= player.jewelryAttackModifier();
 		if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 		damage = statusEffectBonusDamage(damage);
 		if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) {
@@ -5822,6 +5775,7 @@ public class Combat extends BaseContent {
                 if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
                     if (damage > 0) {
                         damage = itemsBonusDamageDamage(damage);
+                        damage = statusEffectBonusDamage(damage);
                         if (player.hasPerk(PerkLib.GoblinoidBlood)) {
                             if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
                             if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
@@ -6503,6 +6457,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
             if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
             damage = itemsBonusDamageDamage(damage);
+            damage = statusEffectBonusDamage(damage);
             if (player.hasPerk(PerkLib.GoblinoidBlood)) {
                 if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
                 if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
@@ -7622,9 +7577,9 @@ public class Combat extends BaseContent {
         if (display) {
             if (damage > 0) {
                 if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
-            } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
+                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
+            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
+            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
         }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
@@ -7702,9 +7657,9 @@ public class Combat extends BaseContent {
         if (display) {
             if (damage > 0) {
                 if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
-            } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
+                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
+            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
+            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
         }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
@@ -7713,25 +7668,22 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-    public function doFireDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
-        MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
-        damage *= doDamageReduction();
-		if (damage < 1) damage = 1;
+    private function doElementalDamageMultiplier(damage:Number):Number {
+        if (damage < 1) damage = 1;
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
-            if (player.armorName == "Scandalous Succubus Clothing") {
+            if (player.armor is ScandalousSuccubusClothing) {
                 damage *= 1.2;
                 dynStats("lus", 3);
             }
         }
-		if (player.weapon == weapons.R_STAFF) damage *= 1.4;
-		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
-			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
-			else damage *= 1 + (0.01 * (100 - player.cor));
-		}
+        if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
+            if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
+            else damage *= 1 + (0.01 * (100 - player.cor));
+        }
         if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
         if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
             var bonusDamageFromMissingHP:Number = 1;
@@ -7744,7 +7696,15 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
         if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
         if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
-		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
+        if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
+        return damage;
+    }
+
+    public function doFireDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+        MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
+        damage *= doDamageReduction();
+        damage = doElementalDamageMultiplier(damage);
+        if (player.weapon is RubyStaff) damage *= 1.4;
 		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.925;
         if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
         if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
@@ -7784,9 +7744,9 @@ public class Combat extends BaseContent {
         if (display) {
             if (damage > 0) {
                 if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
-            } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
+                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
+            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
+            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
         }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
@@ -7809,35 +7769,8 @@ public class Combat extends BaseContent {
     public function doIceDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
-		if (damage < 1) damage = 1;
-        if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
-        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
-        if (player.hasPerk(PerkLib.Sadist)) {
-            damage *= 1.2;
-            dynStats("lus", 3);
-            if (player.armorName == "Scandalous Succubus Clothing") {
-                damage *= 1.2;
-                dynStats("lus", 3);
-            }
-        }
-		if (player.weapon == weapons.S_STAFF) damage *= 1.4;
-		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
-			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
-			else damage *= 1 + (0.01 * (100 - player.cor));
-		}
-        if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
-        if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-            var bonusDamageFromMissingHP:Number = 1;
-            if (player.hp100 < 100) {
-                if (player.hp100 < 1) bonusDamageFromMissingHP += 0.99;
-                else bonusDamageFromMissingHP += (1 - (player.hp100 * 0.01));
-            }
-            damage *= bonusDamageFromMissingHP;
-        }
-        if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
-        if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
-        if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
-		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
+        damage = doElementalDamageMultiplier(damage);
+		if (player.weapon is SapphireStaff) damage *= 1.4;
         if (monster.hasStatusEffect(StatusEffects.FrostburnDoT) && monster.statusEffectv3(StatusEffects.FrostburnDoT) > 0) damage *= (1 + (0.5 * monster.statusEffectv3(StatusEffects.FrostburnDoT)));
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
         if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
@@ -7875,9 +7808,9 @@ public class Combat extends BaseContent {
         if (display) {
             if (damage > 0) {
                 if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
-            } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
+                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
+            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
+            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
         }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
@@ -7893,36 +7826,9 @@ public class Combat extends BaseContent {
     public function doLightingDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
-		if (damage < 1) damage = 1;
-        if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
-        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
-        if (player.hasPerk(PerkLib.Sadist)) {
-            damage *= 1.2;
-            dynStats("lus", 3);
-            if (player.armorName == "Scandalous Succubus Clothing") {
-                damage *= 1.2;
-                dynStats("lus", 3);
-            }
-        }
-		if (player.weapon == weapons.T_STAFF) damage *= 1.4;
-		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
-			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
-			else damage *= 1 + (0.01 * (100 - player.cor));
-		}
-        if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
-        if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-            var bonusDamageFromMissingHP:Number = 1;
-            if (player.hp100 < 100) {
-                if (player.hp100 < 1) bonusDamageFromMissingHP += 0.99;
-                else bonusDamageFromMissingHP += (1 - (player.hp100 * 0.01));
-            }
-            damage *= bonusDamageFromMissingHP;
-        }
-        if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
-        if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
-        if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
-		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
-        if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
+        damage = doElementalDamageMultiplier(damage);
+        if (player.weapon == weapons.T_STAFF) damage *= 1.4;
+		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
         if (monster.hasPerk(PerkLib.LightningNature)) damage *= 0.2;
         if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 0.5;
         if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 2;
@@ -7965,9 +7871,9 @@ public class Combat extends BaseContent {
         if (display) {
             if (damage > 0) {
                 if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
-            } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
+                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
+            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
+            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
         }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
@@ -7979,36 +7885,9 @@ public class Combat extends BaseContent {
     public function doDarknessDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
-		if (damage < 1) damage = 1;
-        if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
-        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
-        if (player.hasPerk(PerkLib.Sadist)) {
-            damage *= 1.2;
-            dynStats("lus", 3);
-            if (player.armorName == "Scandalous Succubus Clothing") {
-                damage *= 1.2;
-                dynStats("lus", 3);
-            }
-        }
-		if (player.weapon == weapons.A_STAFF) damage *= 1.4;
-		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
-			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
-			else damage *= 1 + (0.01 * (100 - player.cor));
-		}
-        if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
-        if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-            var bonusDamageFromMissingHP:Number = 1;
-            if (player.hp100 < 100) {
-                if (player.hp100 < 1) bonusDamageFromMissingHP += 0.99;
-                else bonusDamageFromMissingHP += (1 - (player.hp100 * 0.01));
-            }
-            damage *= bonusDamageFromMissingHP;
-        }
-        if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
-        if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
-        if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
-		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
-        if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
+        damage = doElementalDamageMultiplier(damage);
+        if (player.weapon == weapons.A_STAFF) damage *= 1.4;
+		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
         if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 0.2;
         if (monster.hasPerk(PerkLib.LightningVulnerability)) damage *= 0.5;
         if (monster.hasPerk(PerkLib.DarknessVulnerability)) damage *= 2;
@@ -8044,9 +7923,9 @@ public class Combat extends BaseContent {
         if (display) {
             if (damage > 0) {
                 if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
-            } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
+                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
+            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
+            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
         }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
@@ -8058,34 +7937,7 @@ public class Combat extends BaseContent {
     public function doPoisonDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
-		if (damage < 1) damage = 1;
-        if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
-        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
-        if (player.hasPerk(PerkLib.Sadist)) {
-            damage *= 1.2;
-            dynStats("lus", 3);
-            if (player.armorName == "Scandalous Succubus Clothing") {
-                damage *= 1.2;
-                dynStats("lus", 3);
-            }
-        }
-		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
-			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
-			else damage *= 1 + (0.01 * (100 - player.cor));
-		}
-        if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
-        if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-            var bonusDamageFromMissingHP:Number = 1;
-            if (player.hp100 < 100) {
-                if (player.hp100 < 1) bonusDamageFromMissingHP += 0.99;
-                else bonusDamageFromMissingHP += (1 - (player.hp100 * 0.01));
-            }
-            damage *= bonusDamageFromMissingHP;
-        }
-        if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
-        if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
-        if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
-		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
+        damage = doElementalDamageMultiplier(damage);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
@@ -8117,9 +7969,9 @@ public class Combat extends BaseContent {
         if (display) {
             if (damage > 0) {
                 if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
-            } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
+                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
+            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
+            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
         }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
@@ -8131,34 +7983,7 @@ public class Combat extends BaseContent {
     public function doWindDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
-		if (damage < 1) damage = 1;
-        if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
-        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
-        if (player.hasPerk(PerkLib.Sadist)) {
-            damage *= 1.2;
-            dynStats("lus", 3);
-            if (player.armorName == "Scandalous Succubus Clothing") {
-                damage *= 1.2;
-                dynStats("lus", 3);
-            }
-        }
-		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
-			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
-			else damage *= 1 + (0.01 * (100 - player.cor));
-		}
-        if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
-        if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-            var bonusDamageFromMissingHP:Number = 1;
-            if (player.hp100 < 100) {
-                if (player.hp100 < 1) bonusDamageFromMissingHP += 0.99;
-                else bonusDamageFromMissingHP += (1 - (player.hp100 * 0.01));
-            }
-            damage *= bonusDamageFromMissingHP;
-        }
-        if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
-        if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
-        if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
-		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
+        damage = doElementalDamageMultiplier(damage);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
@@ -8186,9 +8011,9 @@ public class Combat extends BaseContent {
         if (display) {
             if (damage > 0) {
                 if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
-            } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
+                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
+            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
+            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
         }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
@@ -8200,34 +8025,7 @@ public class Combat extends BaseContent {
     public function doWaterDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
-		if (damage < 1) damage = 1;
-        if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
-        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
-        if (player.hasPerk(PerkLib.Sadist)) {
-            damage *= 1.2;
-            dynStats("lus", 3);
-            if (player.armorName == "Scandalous Succubus Clothing") {
-                damage *= 1.2;
-                dynStats("lus", 3);
-            }
-        }
-		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
-			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
-			else damage *= 1 + (0.01 * (100 - player.cor));
-		}
-        if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
-        if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-            var bonusDamageFromMissingHP:Number = 1;
-            if (player.hp100 < 100) {
-                if (player.hp100 < 1) bonusDamageFromMissingHP += 0.99;
-                else bonusDamageFromMissingHP += (1 - (player.hp100 * 0.01));
-            }
-            damage *= bonusDamageFromMissingHP;
-        }
-        if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
-        if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
-        if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
-		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
+        damage = doElementalDamageMultiplier(damage);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
@@ -8259,9 +8057,9 @@ public class Combat extends BaseContent {
         if (display) {
             if (damage > 0) {
                 if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
-            } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
+                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
+            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
+            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
         }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
@@ -8273,34 +8071,7 @@ public class Combat extends BaseContent {
     public function doEarthDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
-		if (damage < 1) damage = 1;
-        if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
-        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
-        if (player.hasPerk(PerkLib.Sadist)) {
-            damage *= 1.2;
-            dynStats("lus", 3);
-            if (player.armorName == "Scandalous Succubus Clothing") {
-                damage *= 1.2;
-                dynStats("lus", 3);
-            }
-        }
-		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
-			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
-			else damage *= 1 + (0.01 * (100 - player.cor));
-		}
-        if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
-        if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-            var bonusDamageFromMissingHP:Number = 1;
-            if (player.hp100 < 100) {
-                if (player.hp100 < 1) bonusDamageFromMissingHP += 0.99;
-                else bonusDamageFromMissingHP += (1 - (player.hp100 * 0.01));
-            }
-            damage *= bonusDamageFromMissingHP;
-        }
-        if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
-        if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
-        if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
-		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
+        damage = doElementalDamageMultiplier(damage);
         if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
@@ -8328,9 +8099,9 @@ public class Combat extends BaseContent {
         if (display) {
             if (damage > 0) {
                 if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
-            } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
+                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
+            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
+            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
         }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
@@ -8342,35 +8113,8 @@ public class Combat extends BaseContent {
     public function doAcidDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
-		if (damage < 1) damage = 1;
-        if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
-        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
-        if (player.hasPerk(PerkLib.Sadist)) {
-            damage *= 1.2;
-            dynStats("lus", 3);
-            if (player.armorName == "Scandalous Succubus Clothing") {
-                damage *= 1.2;
-                dynStats("lus", 3);
-            }
-        }
-		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
-			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
-			else damage *= 1 + (0.01 * (100 - player.cor));
-		}
-        if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
-        if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-            var bonusDamageFromMissingHP:Number = 1;
-            if (player.hp100 < 100) {
-                if (player.hp100 < 1) bonusDamageFromMissingHP += 0.99;
-                else bonusDamageFromMissingHP += (1 - (player.hp100 * 0.01));
-            }
-            damage *= bonusDamageFromMissingHP;
-        }
-        if (monster.hasStatusEffect(StatusEffects.IceArmor)) damage *= 0.1;
-        if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) damage *= (1 - monster.statusEffectv2(StatusEffects.DefendMonsterVer));
-        if (monster.hasStatusEffect(StatusEffects.AcidDoT)) damage *= (1 + (0.3 * monster.statusEffectv3(StatusEffects.AcidDoT)));
-		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
-        if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
+        damage = doElementalDamageMultiplier(damage);
+		if (monster.hasPerk(PerkLib.TrollResistance)) damage *= 0.85;
 		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
@@ -8397,9 +8141,9 @@ public class Combat extends BaseContent {
         if (display) {
             if (damage > 0) {
                 if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
-            } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
+                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
+            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
+            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
         }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
@@ -8477,9 +8221,9 @@ public class Combat extends BaseContent {
         if (display) {
             if (damage > 0) {
                 if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
-            } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
+                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
+            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
+            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
         }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
@@ -9070,7 +8814,7 @@ public class Combat extends BaseContent {
 				if (player.statStore.hasBuff("Crossed Holy Band")) bleed *= 0.5;
                 bleed *= player.HP;
                 bleed = player.takePhysDamage(bleed);
-                outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. (<font color=\"#800000\">" + bleed + "</font>)</b>\n\n");
+                outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. ([font-damage]" + bleed + "[/font])</b>\n\n");
             }
         }
         if (player.hasStatusEffect(StatusEffects.Hemorrhage)) {
@@ -9085,7 +8829,7 @@ public class Combat extends BaseContent {
                 hemorrhage += player.maxHP() * player.statusEffectv2(StatusEffects.Hemorrhage);
 				if (player.statStore.hasBuff("Crossed Holy Band")) hemorrhage *= 0.5;
                 hemorrhage = player.takePhysDamage(hemorrhage);
-                outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. (<font color=\"#800000\">" + hemorrhage + "</font>)</b>\n\n");
+                outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. ([font-damage]" + hemorrhage + "[/font])</b>\n\n");
             }
         }
         if (player.hasStatusEffect(StatusEffects.BurnDoT)) {
@@ -9100,7 +8844,7 @@ public class Combat extends BaseContent {
                 burndot += player.maxHP() * player.statusEffectv2(StatusEffects.BurnDoT);
 				if (player.statStore.hasBuff("Crossed Holy Band")) burndot *= 0.5;
                 burndot = player.takeFireDamage(burndot);
-                outputText("<b>You gasp and wince in pain, feeling fire still searing your wounds. (<font color=\"#800000\">" + burndot + "</font>)</b>\n\n");
+                outputText("<b>You gasp and wince in pain, feeling fire still searing your wounds. ([font-damage]" + burndot + "[/font])</b>\n\n");
             }
         }
         if (player.hasStatusEffect(StatusEffects.Polymorphed)) {
@@ -9136,13 +8880,13 @@ public class Combat extends BaseContent {
             var deoxigen:Number = 0;
             deoxigen += (player.maxHP() * 0.05);
             deoxigen = player.takePhysDamage(deoxigen);
-            outputText("<b>You are running out of oxygen. You need to finish this fight and fast before you lose consciousness. <b>(<font color=\"#800000\">" + deoxigen + "</font>)</b></b>\n\n");
+            outputText("<b>You are running out of oxygen. You need to finish this fight and fast before you lose consciousness. <b>([font-damage]" + deoxigen + "[/font])</b></b>\n\n");
         }
 		if (player.hasStatusEffect(StatusEffects.UnderwaterAndIgnis)) {
 			var ignishurt:Number = 0;
             ignishurt += (player.maxHP() * 0.05);
             ignishurt = player.takeWaterDamage(ignishurt);
-            outputText("<b>Your entire body is wracked with pain, steam curling from where the water touches your form. Maybe submerging your fiery body in water was a bad idea. <b>(<font color=\"#800000\">" + ignishurt + "</font>)</b></b>\n\n");
+            outputText("<b>Your entire body is wracked with pain, steam curling from where the water touches your form. Maybe submerging your fiery body in water was a bad idea. <b>([font-damage]" + ignishurt + "[/font])</b></b>\n\n");
 		}
         if (player.hasStatusEffect(StatusEffects.HeroBane)) {
             player.addStatusValue(StatusEffects.HeroBane, 1, -1);
@@ -9157,7 +8901,7 @@ public class Combat extends BaseContent {
 				var slap:Number = 3 + (player.maxHP() * 0.02);
 				if (player.statStore.hasBuff("Crossed Holy Band")) slap *= 0.5;
 				slap = player.takeAcidDamage(slap);
-				outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"#800000\">" + slap + "</font>)</b></b>\n\n");
+				outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>([font-damage]" + slap + "[/font])</b></b>\n\n");
 			}
         }
         if (monster.hasStatusEffect(StatusEffects.AuraOfMadness) && !player.hasPerk(PerkLib.Insanity) && !player.hasStatusEffect(StatusEffects.AlterBindScroll3)) {
@@ -9594,8 +9338,8 @@ public class Combat extends BaseContent {
             dynStats("lus", (rand(player.lib / 5) + 3 + rand(5)));
             if (player.cockTotal() > 1) outputText("Each of y");
             else outputText("Y");
-            if (monster.plural) outputText("our [cocks] dribbles pre-cum as you think about plowing [monster a] [monster name] right here and now, fucking [monster his] " + monster.vaginaDescript() + "s until they're totally fertilized and pregnant.\n\n");
-            else outputText("our [cocks] dribbles pre-cum as you think about plowing [monster a] [monster name] right here and now, fucking [monster his] " + monster.vaginaDescript() + " until it's totally fertilized and pregnant.\n\n");
+            if (monster.plural) outputText("our [cocks] dribbles pre-cum as you think about plowing [monster a] [monster name] right here and now, fucking [monster his] [monster cunt]s until they're totally fertilized and pregnant.\n\n");
+            else outputText("our [cocks] dribbles pre-cum as you think about plowing [monster a] [monster name] right here and now, fucking [monster his] [monster cunt] until it's totally fertilized and pregnant.\n\n");
         }
         if (player.hasStatusEffect(StatusEffects.NagaVenom)) {
             //Chance to cleanse!
@@ -9853,7 +9597,7 @@ public class Combat extends BaseContent {
                 var hpChange1:int = 200;
                 if (player.isRaceCached(Races.UNICORN, 2)) hpChange1 += 150;
                 if (player.isRaceCached(Races.ALICORN, 2)) hpChange1 += 200;
-                outputText("<b>As your soulforce is drained you can feel Violet Pupil Transformation's regenerative power spreading throughout your body. (<font color=\"#008000\">+" + hpChange1 + "</font>)</b>\n\n");
+                outputText("<b>As your soulforce is drained you can feel Violet Pupil Transformation's regenerative power spreading throughout your body. ([font-heal]+" + hpChange1 + "[/font])</b>\n\n");
                 HPChange(hpChange1, false);
             }
         }
@@ -9865,7 +9609,7 @@ public class Combat extends BaseContent {
             } else {
                 player.addStatusValue(StatusEffects.GoblinMechStimpack, 1, -1);
                 var hpChange3:int = player.statusEffectv2(StatusEffects.GoblinMechStimpack);
-                outputText("<b>" + (player.hasKeyItem("Medical Dispenser 2.0") >= 0 ? "Medical Dispenser 2.0" : "Stimpack Dispenser 1.0") + " healing power spreading throughout your body. (<font color=\"#008000\">+" + hpChange3 + "</font>)</b>\n\n");
+                outputText("<b>" + (player.hasKeyItem("Medical Dispenser 2.0") >= 0 ? "Medical Dispenser 2.0" : "Stimpack Dispenser 1.0") + " healing power spreading throughout your body. ([font-heal]+" + hpChange3 + "[/font])</b>\n\n");
                 var selfLust:Number = player.maxLust() * 0.01;
                 if (player.hasKeyItem("Medical Dispenser 2.0") >= 0) selfLust *= 0.5;
                 if (selfLust < 1) selfLust = 1;
@@ -11656,14 +11400,14 @@ public class Combat extends BaseContent {
         } else {
             if (monster.plural) {
                 if (monster.lust100 >= 85 && monster.cocks.length > 0) outputText("[Themonster] are panting and softly whining, each movement seeming to make [monster his] bulges more pronounced.  You don't think [monster he] can hold out much longer.  ");
-                else if (monster.lust100 >= 85 && monster.vaginas.length > 0) outputText("[Themonster]' " + monster.vaginaDescript() + "s are practically soaked with their lustful secretions.  ");
+                else if (monster.lust100 >= 85 && monster.vaginas.length > 0) outputText("[Themonster]' [monster cunt]s are practically soaked with their lustful secretions.  ");
                 else if (monster.lust100 >= 70 && monster.cocks.length > 0) outputText("[Themonster] are having trouble moving due to the rigid protrusion in [monster his] groins.  ");
                 else if (monster.lust100 >= 70 && monster.vaginas.length > 0) outputText("[Themonster] are obviously turned on, you can smell [monster his] arousal in the air.  ");
                 else if (monster.lust100 >= 60) outputText("[Themonster]' eyes constantly dart over your most sexual parts, betraying [monster his] lust.  ");
                 else if (monster.lust100 >= 50) outputText("[Themonster]' skin remains flushed with the beginnings of arousal.  ");
             } else {
                 if (monster.lust100 >= 85 && monster.cocks.length > 0) outputText("[Themonster] is panting and softly whining, each movement seeming to make [monster his] bulge more pronounced.  You don't think [monster he] can hold out much longer.  ");
-                else if (monster.lust100 >= 85 && monster.vaginas.length > 0) outputText("[Themonster]'s " + monster.vaginaDescript() + " is practically soaked with her lustful secretions.  ");
+                else if (monster.lust100 >= 85 && monster.vaginas.length > 0) outputText("[Themonster]'s [monster cunt] is practically soaked with her lustful secretions.  ");
                 else if (monster.lust100 >= 70 && monster.cocks.length > 0) outputText("[Themonster] is having trouble moving due to the rigid protrusion in [monster his] groin.  ");
                 else if (monster.lust100 >= 70 && monster.vaginas.length > 0) outputText("[Themonster] is obviously turned on, you can smell [monster his] arousal in the air.  ");
                 else if (monster.lust100 >= 60) outputText("[Themonster]'s eyes constantly dart over your most sexual parts, betraying [monster his] lust.  ");
@@ -11832,6 +11576,7 @@ public class Combat extends BaseContent {
             if (damage < 10) damage = 10;
             if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
             damage = itemsBonusDamageDamage(damage);
+            damage = statusEffectBonusDamage(damage);
             if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
             if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
                 damage *= 1.50;
@@ -11916,6 +11661,7 @@ public class Combat extends BaseContent {
             if (damage < 10) damage = 10;
             if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
             damage = itemsBonusDamageDamage(damage);
+            damage = statusEffectBonusDamage(damage);
             if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
                 damage *= 1.50;
                 monster.addStatusValue(StatusEffects.OrcaHasSmashed, 1, -1);
@@ -11954,6 +11700,7 @@ public class Combat extends BaseContent {
             damage = weaponAttackModifier(damage);
             if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
             damage = itemsBonusDamageDamage(damage);
+            damage = statusEffectBonusDamage(damage);
             if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
                 damage *= 1.50;
                 monster.addStatusValue(StatusEffects.OrcaHasSmashed, 1, -1);
@@ -12001,6 +11748,7 @@ public class Combat extends BaseContent {
             damage = weaponAttackModifier(damage);
             if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
             damage = itemsBonusDamageDamage(damage);
+            damage = statusEffectBonusDamage(damage);
             if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
                 damage *= 1.50;
                 monster.addStatusValue(StatusEffects.OrcaHasSmashed, 1, -1);
@@ -12457,7 +12205,7 @@ public class Combat extends BaseContent {
     }
 
     public function RandomTeaseViolateOpponentPussy():void {
-        outputText("You mischievously begin to finger [monster a] [monster name] " + monster.vaginaDescript() + " forcing a surprised moan out of [monster him] as you attack [monster his] clitoris relentlessly. " +
+        outputText("You mischievously begin to finger [monster a] [monster name] [monster cunt] forcing a surprised moan out of [monster him] as you attack [monster his] clitoris relentlessly. " +
                 "clear, sticky pre coats your hand, a clear sign of your victim's pleasure as you rub their clit." +
                 "It takes great effort from [monster a] [monster name], [monster he] lets loose a cry, breaking your hold and forcing your fingers from [monster his] tormented cunt. You back off, but you see their blushing cheeks.");
         monster.teased(StraddleDamage, false);
@@ -12466,7 +12214,7 @@ public class Combat extends BaseContent {
 
     public function RandomTeaseLongTongue():void {
         outputText("Oh god, [monster a] [monster name] had it coming as you prepare yourself to use your strongest weapon. " +
-                "Your long prehensile tongue slides into [monster a] [monster name] " + monster.vaginaDescript() + " like a tentacle, striking the sweet spot with unerring precision. " +
+                "Your long prehensile tongue slides into [monster a] [monster name] [monster cunt] like a tentacle, striking the sweet spot with unerring precision. " +
                 "Your almost jerk your victim's clit with your flexible tongue, forcing out delirious moans from [monster a] [monster name] as [monster his] knee goes weak from your ministration. " +
                 "In desperation [monster he] punches you in the face. Your head whipped back, you're forced to pull your tongue out of [monster his] tormented cunt. You back off, but your foe is blushing madly, beads of sweat" +
                 "on [monster his] forehead. Your opponent is so staggered by your expert tongueing that you easily keep [monster him] pinned. ");
@@ -13757,7 +13505,7 @@ public class Combat extends BaseContent {
         }
         damage = Math.round(damage);
         doPhysicalDamage(damage);
-        outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
+        outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
         if (crit) outputText(" <b>Critical!</b>");
         if (player.hasPerk(PerkLib.PhantomStrike)) doPhysicalDamage(damage, true, true);
     }
@@ -14306,7 +14054,7 @@ public class Combat extends BaseContent {
 		}
         //FAIL FLEE
         else {
-            if (monster.short == "Holli") {
+            if (monster is Holli) {
                 (monster as Holli).escapeFailWithHolli();
                 return;
             }
@@ -14329,25 +14077,25 @@ public class Combat extends BaseContent {
                     //FOR PLAYERS WITH GIANT BREASTS
                     if (player.biggestTitSize() >= 35 && player.biggestTitSize() < 66) {
                         if (player.hips.type >= 20) {
-                            outputText("Your " + hipDescript() + " forces your gait to lurch slightly side to side, which causes the fat of your " + player.skinTone + " ");
-                            if (player.butt.type >= 20) outputText(buttDescript() + " and ");
+                            outputText("Your [hips] forces your gait to lurch slightly side to side, which causes the fat of your [skintone] ");
+                            if (player.butt.type >= 20) outputText("[butt] and ");
                             outputText(chestDesc() + " to wobble immensely, throwing you off balance and preventing you from moving quick enough to escape.");
-                        } else if (player.butt.type >= 20) outputText("Your " + player.skinTone + buttDescript() + " and " + chestDesc() + " wobble and bounce heavily, throwing you off balance and preventing you from escaping.");
-                        else outputText("Your " + chestDesc() + " jiggle and wobble side to side like the " + player.skinTone + " sacks of milky fat they are, with enough force to constantly throw you off balance, preventing you from escaping.");
+                        } else if (player.butt.type >= 20) outputText("Your [skintone] [butt] and [chest] wobble and bounce heavily, throwing you off balance and preventing you from escaping.");
+                        else outputText("Your [chest] jiggle and wobble side to side like the [skintone] sacks of milky fat they are, with enough force to constantly throw you off balance, preventing you from escaping.");
                     }
                     //FOR PLAYERS WITH MASSIVE BREASTS
                     else if (player.biggestTitSize() >= 66) {
                         if (player.hips.type >= 20) {
-                            outputText("Your " + chestDesc() + " nearly drag along the ground while your " + hipDescript() + " swing side to side ");
-                            if (player.butt.type >= 20) outputText("causing the fat of your " + player.skinTone + buttDescript() + " to wobble, ");
+                            outputText("Your [chest] nearly drag along the ground while your [hips] swing side to side ");
+                            if (player.butt.type >= 20) outputText("causing the fat of your [skintone] [butt] to wobble, ");
                             outputText("forcing you off balance and preventing you from escaping.");
-                        } else if (player.butt.type >= 20) outputText("Your " + chestDesc() + " nearly drag along the ground while the fat of your " + player.skinTone + buttDescript() + " wobbles heavily from side to side, forcing your body off balance and preventing you from moving quick enough to escape.");
-                        else outputText("Your " + chestDesc() + " nearly drag along the ground, preventing you from moving quick enough to get escape.");
+                        } else if (player.butt.type >= 20) outputText("Your [chest] nearly drag along the ground while the fat of your [skintone] [butt] wobbles heavily from side to side, forcing your body off balance and preventing you from moving quick enough to escape.");
+                        else outputText("Your [chest] nearly drag along the ground, preventing you from moving quick enough to get escape.");
                     }
                     //FOR PLAYERS WITH EITHER GIANT HIPS OR BUTT BUT NOT THE BREASTS
                     else if (player.hips.type >= 20) {
-                        outputText("Your " + hipDescript() + " swing heavily from side to side ");
-                        if (player.butt.type >= 20) outputText("causing your " + player.skinTone + buttDescript() + " to wobble obscenely ");
+                        outputText("Your [hips] swing heavily from side to side ");
+                        if (player.butt.type >= 20) outputText("causing your [skintone] [butt] to wobble obscenely ");
                         outputText(", forcing your body into an awkward gait that prevents you from escaping.");
                     }
                     //JUST DA BOOTAH
@@ -14948,7 +14696,7 @@ public class Combat extends BaseContent {
 			heal *= 1.75;
 		}
 		heal = Math.round(heal);
-		outputText("Gathering all you wrath you unleash howl while your wounds healing a bit. <b>(<font color=\"#008000\">+" + heal + "</font>)</b>.");
+		outputText("Gathering all you wrath you unleash howl while your wounds healing a bit. <b>([font-heal]+" + heal + "[/font])</b>.");
 		if (crit) outputText(" <b>*Critical Heal!*</b>");
 		HPChange(heal,false);
 		basemeleeattacks();
@@ -14973,6 +14721,7 @@ public class Combat extends BaseContent {
 		}
         if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
         damage = itemsBonusDamageDamage(damage);
+        damage = statusEffectBonusDamage(damage);
 		damage *= (1 + SFoDMulti);
 		var crit:Boolean = false;
 		var critChance:int = 65;
@@ -15576,7 +15325,7 @@ public class Combat extends BaseContent {
 	public function rangeMasteryEXPgained(crit:Boolean = false):Number {
 		var rangeMasteryEXPgains:Number = 1;
 		if (player.hasPerk(PerkLib.RangeWeaponsMastery)) rangeMasteryEXPgains += 2;
-		if (monster.short == "training dummy" && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) {
+		if (monster is TrainingDummy && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) {
 			rangeMasteryEXPgains *= 2;
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 2) rangeMasteryEXPgains *= 2.5;
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 3) rangeMasteryEXPgains *= 2;
@@ -15664,6 +15413,7 @@ public class Combat extends BaseContent {
     }
     private function ghostRealStrengthCompanion():Number {
         var ghostRealStrCompanion:Number = 0;
+        if (!player.companionsInPCParty()) return ghostRealStrCompanion;
         if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerAlvina);
         if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerAlvina);
         if (flags[kFLAGS.PLAYER_COMPANION_3] == "Alvina") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerAlvina);
@@ -15738,6 +15488,7 @@ public class Combat extends BaseContent {
 
     private function ghostRealIntelligenceCompanion():Number {
         var ghostRealInteCompanion:Number = 0;
+        if (!player.companionsInPCParty()) return ghostRealInteCompanion;
         if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") ghostRealInteCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
         if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina") ghostRealInteCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
         if (flags[kFLAGS.PLAYER_COMPANION_3] == "Alvina") ghostRealInteCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
