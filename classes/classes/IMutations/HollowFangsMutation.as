@@ -79,8 +79,7 @@ public class HollowFangsMutation extends IMutationPerkType
         }
 
         public function HollowFangsMutation() {
-            super("Hollow Fangs IM", "Hollow Fangs", ".");
-            maxLvl = 3;
+            super("Hollow Fangs IM", "Hollow Fangs", SLOT_MOUTH, 3);
         }
         
     }

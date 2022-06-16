@@ -84,8 +84,7 @@ public class LactaBovinaOvariesMutation extends IMutationPerkType
         }
 
         public function LactaBovinaOvariesMutation() {
-            super("Lacta Bovina Ovaries IM", "Lacta Bovina Ovaries", ".");
-            maxLvl = 3;
+            super("Lacta Bovina Ovaries IM", "Lacta Bovina Ovaries", SLOT_OVARIES, 3);
         }
 
     }

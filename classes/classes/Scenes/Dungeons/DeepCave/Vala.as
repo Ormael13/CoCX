@@ -143,11 +143,10 @@ public class Vala extends Monster
 			this.special1 = special1;
 			this.special2 = special2;
 			this.special3 = special3;
-			var wingDesc:String = "shimmering wings";
 			if(flags[kFLAGS.TIMES_PC_DEFEATED_VALA] == 0) this.drop = new WeightedDrop(consumables.NUMBROX);
 			else this.drop = NO_DROP;
 			this.wings.type = Wings.BEE_LARGE;
-			this.wings.desc = wingDesc;
+			this.wings.desc = "shimmering";
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			checkMonster();
 		}

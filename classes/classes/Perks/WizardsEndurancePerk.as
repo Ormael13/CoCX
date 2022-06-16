@@ -11,6 +11,7 @@ package classes.Perks
 
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			return "Reduces mana cost of spells by " + params.value1 + "%.";
 		}
 
@@ -20,9 +21,9 @@ package classes.Perks
 					"Your spellcasting equipment makes you use less mana for spell-casting!");
 		}
 		
-		override public function keepOnAscension(respec:Boolean = false):Boolean 
+		override public function keepOnAscension(respec:Boolean = false):Boolean
 		{
 			return true;
-		}		
+		}
 	}
 }

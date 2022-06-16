@@ -79,8 +79,7 @@ public class WhaleFatMutation extends IMutationPerkType
         }
 
         public function WhaleFatMutation() {
-            super("Whale Fat IM", "Whale Fat", ".");
-            maxLvl = 3;
+            super("Whale Fat IM", "Whale Fat", SLOT_FAT, 3);
         }
         
     }

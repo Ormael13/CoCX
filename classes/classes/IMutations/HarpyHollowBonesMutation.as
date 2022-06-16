@@ -84,8 +84,7 @@ public class HarpyHollowBonesMutation extends IMutationPerkType
         }
 
         public function HarpyHollowBonesMutation() {
-            super("Harpy Hollow Bones IM", "Harpy Hollow Bones", ".");
-            maxLvl = 3;
+            super("Harpy Hollow Bones IM", "Harpy Hollow Bones", SLOT_BONE, 3);
         }
         
     }

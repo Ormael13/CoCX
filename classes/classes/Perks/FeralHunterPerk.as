@@ -1,7 +1,7 @@
 /**
  * Created by Ormael on 25.07.18.
  */
-package classes.Perks 
+package classes.Perks
 {
 	import classes.PerkClass;
 	import classes.PerkType;
@@ -11,12 +11,13 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			return "Deal " + params.value1 * 100 + "% more physical melee damage to Feral type enemies. (Rank: " + params.value1 * 10 + ")";
 		}
 
-		public function FeralHunterPerk() 
+		public function FeralHunterPerk()
 		{
 			super("Feral Hunter","Feral Hunter", "Deal more physical melee damage to Feral type enemies.");
-		}		
+		}
 	}
 }
