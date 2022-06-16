@@ -153,7 +153,7 @@ public class Ceraph extends Monster
 				outputText(capitalA + short + " completely misses you with a blind attack!");
 			}
 			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			else if (player.speedDodge(this)>0) {
 				if (player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!");
 				if (player.spe - spe >= 8 && player.spe - spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!");
 				if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".");
@@ -200,7 +200,7 @@ public class Ceraph extends Monster
 				outputText(capitalA + short + " completely misses you with a blind attack!");
 			}
 			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			else if (player.speedDodge(this)>0) {
 				if (player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!");
 				if (player.spe - spe >= 8 && player.spe - spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!");
 				if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".");

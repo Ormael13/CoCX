@@ -69,7 +69,7 @@ import classes.internals.*;
 				outputText("She misses completely due to their blindness. As she spins back around, your opponent…seems to be looking at the strands in disappointment. Is it your imagination, or does she seem to regret the loss of silk?");
 			}
 			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			else if (player.speedDodge(this)>0) {
 				outputText("You dodge away, avoiding the sticky strands! As she spins back around, your opponent…seems to be looking at the strands in disappointment. Is it your imagination, or does she seem to regret the loss of silk?");
 			}
 			//Determine if evaded

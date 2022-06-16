@@ -21,7 +21,7 @@ public class Akbal extends Monster
 				outputText(capitalA + short + " seems to have no problem guiding his attacks towards you, despite his blindness.\n");
 			}
 			//Determine if dodged!
-			if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			if (player.speedDodge(this)>0) {
 				if (player.spe - spe < 8)
 					outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!");
 				if (player.spe - spe >= 8 && player.spe - spe < 20)
@@ -125,7 +125,7 @@ public class Akbal extends Monster
 				outputText("Akbal releases an ear-splitting roar, hurling a torrent of emerald green flames towards you.\n");
 				//(high HP damage)
 				//Determine if dodged!
-				if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80)
+				if (player.speedDodge(this)>0)
 				{
 					if (player.spe - spe < 8)
 						outputText("You narrowly avoid " + a + short + "'s fire!");

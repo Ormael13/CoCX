@@ -18,7 +18,7 @@ public class TentacleBeast extends Monster
 			if (inDungeon) temp += str + weaponAttack;
 			if(temp < 0) temp = 0;
 			//Miss
-			if(temp == 0 || (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80)) {
+			if(temp == 0 || (player.speedDodge(this)>0)) {
 				outputText("However, you quickly evade the clumsy efforts of the abomination to strike you.");
 			}
 			//Hit
