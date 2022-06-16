@@ -2481,14 +2481,18 @@ public final class Mutations extends MutationsHelper {
     public function brownEgg(large:Boolean, player:Player):void {
         clearOutput();
         outputText("You devour the egg, momentarily sating your hunger.[pg]");
+        if (!large)player.refillHunger(20);
+        else player.refillHunger(60);
+        if (player.blockingBodyTransformations()) {
+            outputText("[pg]Your hips begin to tingles but as you are immunised to transformatives, nothing happens.");
+            return;
+        }
         if (!large) {
             outputText("You feel a bit of additional weight on your backside as your [butt] gains a bit more padding.");
             player.butt.type++;
-            player.refillHunger(20);
         } else {
             outputText("Your [butt] wobbles, nearly throwing you off balance as it grows much bigger!");
             player.butt.type += 2 + rand(3);
-            player.refillHunger(60);
         }
         if (rand(3) == 0) {
             if (large) outputText(player.modThickness(player.maxThicknessCap(), 8));
@@ -2501,14 +2505,18 @@ public final class Mutations extends MutationsHelper {
     public function purpleEgg(large:Boolean, player:Player):void {
         clearOutput();
         outputText("You devour the egg, momentarily sating your hunger.[pg]");
+        if (!large)player.refillHunger(20);
+        else player.refillHunger(60);
+        if (player.blockingBodyTransformations()) {
+            outputText("[pg]Your hips begin to tingle but as you are immunised to transformatives, nothing happens.");
+            return;
+        }
         if (!large || player.hips.type > 20) {
             outputText("You stumble as you feel your [hips] widen, altering your gait slightly.");
             player.hips.type++;
-            player.refillHunger(20);
         } else {
             outputText("You stagger wildly as your hips spread apart, widening by inches.  When the transformation finishes you feel as if you have to learn to walk all over again.");
             player.hips.type += 2 + rand(2);
-            player.refillHunger(60);
         }
         if (rand(3) == 0) {
             if (large) outputText(player.modThickness(80, 8));
@@ -2520,6 +2528,12 @@ public final class Mutations extends MutationsHelper {
     public function pinkEgg(large:Boolean, player:Player):void {
         clearOutput();
         outputText("You devour the egg, momentarily sating your hunger.[pg]");
+        if (!large)player.refillHunger(20);
+        else player.refillHunger(60);
+        if (player.blockingBodyTransformations()) {
+            outputText("[pg]Your groin begins to tingle but as you are immunised to transformatives, nothing happens.");
+            return;
+        }
         if (!large) {
             //Remove a dick
             if (player.cocks.length > 0) {
@@ -2542,7 +2556,6 @@ public final class Mutations extends MutationsHelper {
                 outputText("You feel a tingle deep inside your body, just above your [vagina], as if you were becoming more fertile.[pg]");
                 player.fertility += 5;
             }
-            player.refillHunger(20);
         }
         //LARGE
         else {
@@ -2561,7 +2574,6 @@ public final class Mutations extends MutationsHelper {
                 outputText("You feel a powerful tingle deep inside your body, just above your [vagina]. Instinctively you know you have become more fertile.[pg]");
                 player.fertility += 10;
             }
-            player.refillHunger(60);
         }
         if (rand(3) == 0) {
             if (large) outputText(player.modFem(100, 8));
@@ -2575,6 +2587,12 @@ public final class Mutations extends MutationsHelper {
         var temp3:Number = 0;
         clearOutput();
         outputText("You devour the egg, momentarily sating your hunger.");
+        if (!large)player.refillHunger(20);
+        else player.refillHunger(60);
+        if (player.blockingBodyTransformations()) {
+            outputText("[pg]Your groin begins to tingle but as you are immunised to transformatives, nothing happens.");
+            return;
+        }
         if (!large) {
             //Kill pussies!
             if (player.vaginas.length > 0) {
@@ -2634,9 +2652,7 @@ public final class Mutations extends MutationsHelper {
                     player.addCurse("sen", 1, 1);
                     MutagenBonus("lib", 1);
                 }
-
             }
-            player.refillHunger(20);
         }
         //LARGE
         else {
@@ -2722,7 +2738,6 @@ public final class Mutations extends MutationsHelper {
                     MutagenBonus("lib", 1);
                 }
             }
-            player.refillHunger(60);
         }
         if (rand(3) == 0) {
             if (large) outputText(player.modFem(0, 8));
@@ -2734,6 +2749,12 @@ public final class Mutations extends MutationsHelper {
     public function whiteEgg(large:Boolean, player:Player):void {
         clearOutput();
         outputText("You devour the egg, momentarily sating your hunger.");
+        if (!large)player.refillHunger(20);
+        else player.refillHunger(60);
+        if (player.blockingBodyTransformations()) {
+            outputText("[pg]Your nipples begin to tingle but as you are immunised to transformatives, nothing happens.");
+            return;
+        }
         if (!large) {
             //Grow nipples
             if (player.nippleLength < 3 && player.biggestTitSize() > 0) {
@@ -2741,7 +2762,6 @@ public final class Mutations extends MutationsHelper {
                 player.nippleLength += .2;
                 dynStats("lus", 15);
             }
-            player.refillHunger(20);
         }
         //LARGE
         else {
@@ -2753,13 +2773,18 @@ public final class Mutations extends MutationsHelper {
             }
             //NIPPLECUNTZZZ
             transformations.NipplesFuckable.applyEffect();
-            player.refillHunger(60);
         }
     }
 
     public function blackRubberEgg(large:Boolean, player:Player):void {
         clearOutput();
         outputText("You devour the egg, momentarily sating your hunger.");
+        if (!large)player.refillHunger(20);
+        else player.refillHunger(60);
+        if (player.blockingBodyTransformations()) {
+            outputText("[pg]Your skin begins to tingle but as you are immunised to transformatives, nothing happens.");
+            return;
+        }
         //Small
         if (!large) {
             //Change skin to normal if not flawless!
@@ -2775,7 +2800,7 @@ public final class Mutations extends MutationsHelper {
             //chance of hair change
             else {
                 //If hair isn't rubbery/latex yet
-                if (player.hairColor.indexOf("rubbery") == -1 && player.hairColor.indexOf("latex-textured") && player.hairLength != 0) {
+                if (player.hairColor.indexOf("rubbery") == -1 && player.hairColor.indexOf("latex-textured") == -1 && player.hairLength != 0) {
                     //if skin is already one...
                     if (player.skinDesc == "skin" && player.skinAdj == "rubber") {
                         outputText("[pg]Your scalp tingles and your [hair] thickens, the strands merging into ");
@@ -2791,10 +2816,9 @@ public final class Mutations extends MutationsHelper {
                     }
                 }
             }
-            player.refillHunger(20);
         }
         //Large
-        if (large) {
+        else {
             //Change skin to latex if smooth.
             if (player.skinDesc == "skin" && player.skinAdj == "smooth") {
                 outputText("[pg]Your already flawless smooth skin begins to tingle as it changes again.  It becomes shinier as its texture changes subtly.  You gasp as you touch yourself and realize your skin has become ");
@@ -2815,7 +2839,7 @@ public final class Mutations extends MutationsHelper {
                 player.addCurse("sen", 8, 1);
             }
             //Change skin to normal if not flawless!
-            if ((player.skinAdj != "smooth" && player.skinAdj != "latex" && player.skinAdj != "rubber") || player.skinDesc != "skin") {
+            if (!InCollection(player.skinAdj, "smooth", "latex", "rubber") || player.skinDesc != "skin") {
                 outputText("[pg]Your [skin.type] tingles delightfully as it ");
                 if (player.hasPlainSkinOnly()) outputText(" loses its blemishes, becoming flawless smooth skin.");
                 else if (player.hasFur()) outputText(" falls out in clumps, revealing smooth skin underneath.");
@@ -2843,7 +2867,6 @@ public final class Mutations extends MutationsHelper {
                     }
                 }
             }
-            player.refillHunger(60);
         }
     }
 
@@ -4710,7 +4733,7 @@ public final class Mutations extends MutationsHelper {
         }
         //9c) III The tail ( http://tvtropes.org/pmwiki/pmwiki.php/Main/TransformationIsAFreeAction ) (Shouldn't we try to avert this? -Ace)
         //Should the enemy "kill" you during the transformation, it skips the scene and immediately goes to the rape scene. (Now that I'm thinking about it, we should add some sort of appendix where the player realizes how much he's/she's changed. -Ace)
-        if (player.faceType == Face.SNAKE_FANGS && player.lowerBody != LowerBody.NAGA && rand(4) == 0 && changes < changeLimit) {
+        if (transformations.LowerBodySnake.isPossible() && rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]");
             CoC.instance.transformations.LowerBodySnake.applyEffect();
             changes++;
@@ -4936,14 +4959,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Snake lower body
-        if (player.faceType == Face.SNAKE_FANGS && player.lowerBody != LowerBody.NAGA && player.lowerBody != LowerBody.HYDRA && rand(4) == 0 && changes < changeLimit) {
+        if (transformations.LowerBodySnake.isPossible() && rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]");
-            CoC.instance.transformations.LowerBodySnake.applyEffect();
+            transformations.LowerBodySnake.applyEffect();
             changes++;
         }
-        if (player.lowerBody == LowerBody.HYDRA && player.statusEffectv1(StatusEffects.HydraTailsPlayer) < 12 && rand(4) == 0 && changes < changeLimit && type == 3) {
-            player.addStatusValue(StatusEffects.HydraTailsPlayer, 1, 1);
-            outputText("[pg]You groan in discomfort as your tail splits again, a new snake head growing from the bloodied flesh lump to join the others. <b>You now have " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " hydra heads below your waist.</b>");
+        if (transformations.TailHydra.isPossible() && rand(4) == 0 && changes < changeLimit && type == 3) {
+            transformations.TailHydra.applyEffect();
             changes++;
         }
         if (player.lowerBody == LowerBody.NAGA && player.lowerBody != LowerBody.HYDRA && rand(4) == 0 && changes < changeLimit && type == 3) {
@@ -7116,9 +7138,9 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Partial scaled skin
-        if (changes < changeLimit && player.hasPlainSkinOnly() && rand(3) == 0) {
+        if (changes < changeLimit && (player.hasPlainSkinOnly() || player.hasCoatOfType(Skin.SCALES)) && rand(3) == 0) {
             outputText("[pg]");
-            transformations.SkinScales(Skin.COVERAGE_LOW, {color: "red"}).applyEffect();
+            transformations.SkinScales(Skin.COVERAGE_LOW, {colors: SalamanderRace.SalamanderScaleColors}).applyEffect();
             changes++;
         }
         if (changes < changeLimit && !player.hasPartialCoat(Skin.SCALES) && rand(4) == 0) {
@@ -9509,7 +9531,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasPlainSkinOnly() && !InCollection(player.skin.base.color, OrcRace.OrcSkinColors) && changes < changeLimit && rand(3) == 0) {
             player.skin.base.color = randomChoice(OrcRace.OrcSkinColors);
-            outputText("[pg]Whoah, that was weird.  You just hallucinated that your " + player.skinDesc + " turned " + player.skinTone + ".  No way!  It's staying, it really changed color!");
+            outputText("[pg]Whoah, that was weird.  You just hallucinated that your " + player.skinDesc + " turned " + player.skin.base.color + ".  No way!  It's staying, it really changed color!");
             changes++;
         }
         if (!player.hasPlainSkinOnly() && changes < changeLimit && rand(3) == 0) {

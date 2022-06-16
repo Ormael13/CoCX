@@ -12,6 +12,7 @@ import classes.Scenes.Metamorph;
 import classes.StatusEffects;
 import classes.internals.EnumValue;
 import classes.internals.Utils;
+import classes.lists.BreastCup;
 import classes.lists.Gender;
 
 public class TransformationLib extends MutationsHelper {
@@ -911,6 +912,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    if (player.horns.type == Horns.NONE) desc += "With painful pressure, the skin on your forehead splits around two tiny nub-like horn, a little bit similar to that you would see on the cattle back in your homeland.";
+		else if (player.horns.type == Horns.UNICORN) desc += "A sudden wave of pleasure strike you making you moan as your horn begins to split in two";
 	    else desc += "Your horns vibrate and shift as if made of clay, reforming into horns with a bicorn-like shape.";
 	    player.horns.count = 2;
 	    player.horns.type = Horns.BICORN;
@@ -5431,7 +5433,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	public const ArmsAvian: Transformation = new SimpleTransformation("Avian Arms",
 	  // apply effect
-	  function (doOutput: Boolean): void {//TODO Metamorph
+	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
 	    if (player.skin.hasChitin()) {
@@ -5453,6 +5455,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.arms.type = Arms.AVIAN;
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.AVIAN));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -5837,6 +5840,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.gills.type = Gills.ANEMONE;
 	    if (doOutput) outputText(desc);
+		  Metamorph.unlockMetamorph(GillsMem.getMemory(GillsMem.ANEMONE));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -6396,6 +6400,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // is present
 	  function (): Boolean {
 	    return player.lowerBody === LowerBody.NAGA;
+	  },
+	  // is possible
+	  function (): Boolean {
+	    return player.faceType == Face.SNAKE_FANGS && player.lowerBody != LowerBody.NAGA && player.lowerBody != LowerBody.HYDRA;
 	  }
 	);
 
@@ -7389,7 +7397,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 8;
 	    player.lowerBody = LowerBody.SCYLLA;
 	    if (doOutput) outputText(desc);
-		  Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.SCYLLA));
+		Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.SCYLLA));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -7397,7 +7405,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  },
 	  //is possible
 		function (): Boolean {
-			return !InCollection(player.lowerBody, LowerBody.SCYLLA, LowerBody.NAGA, LowerBody.CLOVEN_HOOFED);
+			return !InCollection(player.lowerBody, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.CLOVEN_HOOFED);
 		}
 	);
 
@@ -7406,7 +7414,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    // Doesn't support tails
+		TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyScylla, doOutput);
+
+		// Doesn't support tails
 	    TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.GillsNone, doOutput);
@@ -7417,10 +7427,15 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 10;
 	    player.lowerBody = LowerBody.KRAKEN;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.KRAKEN));
 	  },
 	  // is present
 	  function (): Boolean {
 	    return player.lowerBody === LowerBody.KRAKEN;
+	  },
+	  // is possible
+	  function (): Boolean {
+	    return player.lowerBody == LowerBody.SCYLLA;
 	  }
 	);
 
@@ -7442,6 +7457,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.legCount = 2;
 	    player.lowerBody = LowerBody.HYDRA;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.HYDRA));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -8550,6 +8566,27 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // is present
 	  function (): Boolean {
 	    return player.tailType === Tail.SALAMANDER;
+	  }
+	);
+
+	public const TailHydra: Transformation = new SimpleTransformation("Hydra Tails",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+		TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHydra, doOutput);
+
+		player.addStatusValue(StatusEffects.HydraTailsPlayer, 1, 1);
+		desc +="[pg]You groan in discomfort as your tail splits again, a new snake head growing from the bloodied flesh lump to join the others. <b>You now have " + player.statusEffectv1(StatusEffects.HydraTailsPlayer) + " hydra heads below your waist.</b>";
+
+		if (doOutput) outputText(desc);
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.lowerBody != LowerBody.HYDRA || player.statusEffectv1(StatusEffects.HydraTailsPlayer) >= 12;
+	  },
+	  // is possible
+	  function (): Boolean {
+	    return player.lowerBody == LowerBody.HYDRA && player.statusEffectv1(StatusEffects.HydraTailsPlayer) < 12;
 	  }
 	);
 
@@ -9965,7 +10002,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			if (doOutput) outputText(desc);
 			dynStats("sen", -5);
 			player.removeBreastRow(player.breastRows.length - 1, 1);
-			UnlockBreasts();
+			transformations.UnlockBreasts();
 		},
 		// is present
 		function ():Boolean {
@@ -9979,17 +10016,17 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			var desc: String = "";
 
 			while (player.bRows() > 1)
-				BreastRowsRemoveToOne.applyEffect(doOutput);
+				transformations.BreastRowsRemoveToOne.applyEffect(doOutput);
 
 			if (player.bRows() == 0) {
-				CreateBreastRow(3).applyEffect(doOutput);
+				transformations.CreateBreastRow(3).applyEffect(doOutput);
 			}
 
 			if (doOutput) outputText(desc);
 		},
 		// is present
 		function ():Boolean {
-			return player.breastRows.length == 1;
+			return player.breastRows.length == 1 && (player.breastRows[0].breastRating > BreastCup.FLAT);
 		}
 	);
 
@@ -9999,14 +10036,14 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			var desc: String = "";
 
 			while (player.bRows() > 2)
-				BreastRowsRemoveToOne.applyEffect(doOutput);
+				transformations.BreastRowsRemoveToOne.applyEffect(doOutput);
 
 			if (player.bRows() == 0) {
-				CreateBreastRow(3).applyEffect(doOutput);
+				transformations.CreateBreastRow(3).applyEffect(doOutput);
 				desc += "[pg]"
 			}
 			if (player.bRows() < 2)
-				CopyBreastRow().applyEffect();
+				transformations.CopyBreastRow().applyEffect();
 
 			if (doOutput) outputText(desc);
 		},
@@ -10021,16 +10058,16 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		function (doOutput:Boolean):void {
 			var desc: String = "";
 
-			if (player.bRows() > 3)
-				BreastRowsRemoveToOne.applyEffect(doOutput);
+			while (player.bRows() > 3)
+				transformations.BreastRowsRemoveToOne.applyEffect(doOutput);
 
 			if (player.bRows() == 0) {
-				CreateBreastRow(3).applyEffect(doOutput);
+				transformations.CreateBreastRow(3).applyEffect(doOutput);
 				desc += "[pg]"
 			}
 			var first:Boolean = true;
 			while (player.bRows() < 3) {
-				CopyBreastRow().applyEffect(first);
+				transformations.CopyBreastRow().applyEffect(first);
 				if (!first)
 					desc += "[pg]Another row of breasts grow in at " + player.breastCup(player.bRows()-1) + ", looking just like the row above";
 				first = false;
@@ -10049,13 +10086,16 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		function (doOutput:Boolean):void {
 			var desc: String = "";
 
+			while (player.bRows() > 4)
+				transformations.BreastRowsRemoveToOne.applyEffect(doOutput);
+
 			if (player.bRows() == 0) {
-				CreateBreastRow(3).applyEffect(doOutput);
+				transformations.CreateBreastRow(3).applyEffect(doOutput);
 				desc += "[pg]"
 			}
 			var first:Boolean = true;
 			while (player.bRows() < 4) {
-				CopyBreastRow().applyEffect(first);
+				transformations.CopyBreastRow().applyEffect(first);
 				if (!first)
 					desc += "[pg]Another row of breasts grow in at " + player.breastCup(player.bRows()-1) + ", looking just like the row above";
 				first = false;
@@ -10075,7 +10115,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			var desc:String = "[pg]";
 
 			if (size < 0) size = 0;
-			if (player.bRows() < 3)
+			if (player.bRows() < 3 || player.breastRows[0].breastRating < size)
 				desc += "Your chest tingles uncomfortably as your center of balance shifts.  <b>You now have a pair of " +breastSize(size)+ " breasts.</b>";
 			else {
 				if (size == 0) desc += "Your abdomen tingles and twitches as a new row of breasts sprouts below the others.";
@@ -10086,6 +10126,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				desc += "  A sensitive nub grows on the summit of each tit, becoming a new nipple.";
 				player.createBreastRow(size);
 				if (player.nippleLength < .25) player.nippleLength = .25;
+			} else if (player.breastRows[0].breastRating == BreastCup.FLAT) {
+				player.breastRows[0].breastRating = size;
 			} else {
 				player.createBreastRow(size, player.breastRows[player.bRows() - 1].nipplesPerBreast);
 				if (player.breastRows[player.bRows() - 1].nipplesPerBreast == 1)
@@ -10101,7 +10143,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				player.addCurse("sen", 2, 1);
 			}
 			if (doOutput) outputText(desc);
-			UnlockBreasts();
+			transformations.UnlockBreasts();
 		},
 		// is present
 		function ():Boolean {
@@ -10114,32 +10156,34 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		function (doOutput:Boolean):void {
 			var desc:String = "[pg]";
 
-			var size:Number = player.breastRows[player.bRows() - 1].breastRating;
-			if (!keepSize) size--;
-			if (size < 0) size = 0;
-			desc += "There's an itching below your [allbreasts].  You idly scratch at it, but gods be damned, it hurts!  You peel off part of your [armor] to inspect the unwholesome itch, ";
-			if (player.biggestTitSize() >= 8) desc += "it's difficult to see past the wall of tits obscuring your view.";
-			else desc += "it's hard to get a good look at.";
-			desc += "  A few gentle prods draw a pleasant gasp from your lips, and you realize that you didn't have an itch - you were growing new nipples!";
-			desc += "[pg]A closer examination reveals your new nipples to be just like the ones above in size and shape";
-			if (player.breastRows[player.bRows() - 1].nipplesPerBreast > 1) desc += ", not to mention number";
-			else if (player.hasFuckableNipples()) desc += ", not to mention penetrability";
-			if (size > 0) {
-				desc += ".  While you continue to explore your body's newest addition, a strange heat builds behind the new nubs. Soft, jiggly breastflesh begins to fill your cupped hands.  Radiant warmth spreads through you, eliciting a moan of pleasure from your lips as your new breasts ";
-				if (keepSize) desc += "catch up to the pair above.";
-				else desc += "stop just short of the ones above.";
-				desc += "  They stop at " + breastSize(size) + "s.";
-			}
-			else desc += "  Your new breasts stay flat and masculine, not growing any larger.";
-			desc += "  <b>You have " + num2Text(player.bRows() + 1) + " rows of breasts!</b>";
-			if (doOutput) outputText(desc);
+			if (player.breastRows[player.bRows() - 1].breastRating > BreastCup.FLAT) {
+				var size:Number = player.breastRows[player.bRows() - 1].breastRating;
+				if (!keepSize) size--;
+				if (size < 0) size = 0;
+				desc += "There's an itching below your [allbreasts].  You idly scratch at it, but gods be damned, it hurts!  You peel off part of your [armor] to inspect the unwholesome itch, ";
+				if (player.biggestTitSize() >= 8) desc += "it's difficult to see past the wall of tits obscuring your view.";
+				else desc += "it's hard to get a good look at.";
+				desc += "  A few gentle prods draw a pleasant gasp from your lips, and you realize that you didn't have an itch - you were growing new nipples!";
+				desc += "[pg]A closer examination reveals your new nipples to be just like the ones above in size and shape";
+				if (player.breastRows[player.bRows() - 1].nipplesPerBreast > 1) desc += ", not to mention number";
+				else if (player.hasFuckableNipples()) desc += ", not to mention penetrability";
+				if (size > 0) {
+					desc += ".  While you continue to explore your body's newest addition, a strange heat builds behind the new nubs. Soft, jiggly breastflesh begins to fill your cupped hands.  Radiant warmth spreads through you, eliciting a moan of pleasure from your lips as your new breasts ";
+					if (keepSize) desc += "catch up to the pair above.";
+					else desc += "stop just short of the ones above.";
+					desc += "  They stop at " + breastSize(size) + "s.";
+				} else desc += "  Your new breasts stay flat and masculine, not growing any larger.";
+				desc += "  <b>You have " + num2Text(player.bRows() + 1) + " rows of breasts!</b>";
+				if (doOutput) outputText(desc);
 
-			player.createBreastRow(size, player.breastRows[player.bRows() - 1].nipplesPerBreast);
-			if (player.hasFuckableNipples()) player.breastRows[player.bRows() - 1].fuckable = true;
-			player.breastRows[player.bRows() - 1].lactationMultiplier = player.breastRows[player.bRows() - 2].lactationMultiplier;
-			dynStats("lus", 30);
-			player.addCurse("sen", 2, 1);
-			UnlockBreasts();
+				player.createBreastRow(size, player.breastRows[player.bRows() - 1].nipplesPerBreast);
+				if (player.hasFuckableNipples()) player.breastRows[player.bRows() - 1].fuckable = true;
+				player.breastRows[player.bRows() - 1].lactationMultiplier = player.breastRows[player.bRows() - 2].lactationMultiplier;
+				dynStats("lus", 30);
+				player.addCurse("sen", 2, 1);
+			}
+			else transformations.CreateBreastRow(2).applyEffect(doOutput);
+			transformations.UnlockBreasts();
 		},
 		// is present
 		function ():Boolean {
@@ -10213,31 +10257,31 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	);
 
 	public const NipplesFuckable:Transformation = new SimpleTransformation("Fuckable nipples",
-			// apply effect
-			function (doOutput:Boolean):void {
-				var desc: String = "";
-				TransformationUtils.applyTFIfNotPresent(transformations.NipplesPerBreastOne, doOutput);
+		// apply effect
+		function (doOutput:Boolean):void {
+			var desc: String = "";
+			TransformationUtils.applyTFIfNotPresent(transformations.NipplesPerBreastOne, doOutput);
 
-				var nowFuckable:Boolean;
-				//Set nipplecunts on every row.
-				for (var i:int = 0; i < player.breastRows.length; i++)
-					if (!player.breastRows[i].fuckable && player.nippleLength >= 2) {
-						player.breastRows[i].fuckable = true;
-						nowFuckable = true;
-					}
-				desc += "[pg]Your [allbreasts] tingle with warmth that slowly migrates to your nipples, filling them with warmth.  You pant and moan, rubbing them with your fingers.  A trickle of wetness suddenly coats your finger as it slips inside the nipple.  Shocked, you pull the finger free.  <b>You now have fuckable nipples!</b>";
-				//Talk about if anything was changed.
-				if (doOutput && nowFuckable) outputText(desc);
-				Metamorph.unlockMetamorph(BreastMem.getMemory(BreastMem.FUCKNIPPLE));
-			},
-			// is present
-			function ():Boolean {
-				return player.hasFuckableNipples();
-			},
-			// is possible
-			function ():Boolean {
-				return !player.hasFuckableNipples() && player.bRows() > 0 && player.averageNipplesPerBreast() == 1 && player.nippleLength >= 2
-			}
+			var nowFuckable:Boolean;
+			//Set nipplecunts on every row.
+			for (var i:int = 0; i < player.breastRows.length; i++)
+				if (!player.breastRows[i].fuckable && player.nippleLength >= 2) {
+					player.breastRows[i].fuckable = true;
+					nowFuckable = true;
+				}
+			desc += "[pg]Your [allbreasts] tingle with warmth that slowly migrates to your nipples, filling them with warmth.  You pant and moan, rubbing them with your fingers.  A trickle of wetness suddenly coats your finger as it slips inside the nipple.  Shocked, you pull the finger free.  <b>You now have fuckable nipples!</b>";
+			//Talk about if anything was changed.
+			if (doOutput && nowFuckable) outputText(desc);
+			if (nowFuckable) Metamorph.unlockMetamorph(BreastMem.getMemory(BreastMem.FUCKNIPPLE));
+		},
+		// is present
+		function ():Boolean {
+			return player.hasFuckableNipples() || player.biggestTitSize() == 0;
+		},
+		// is possible
+		function ():Boolean {
+			return !player.hasFuckableNipples() && player.bRows() > 0 && player.averageNipplesPerBreast() == 1 && player.nippleLength >= 2
+		}
 	);
 
 	public const NipplesUnfuck:Transformation = new SimpleTransformation("Unfuck nipples",
@@ -10498,7 +10542,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 				player.vaginaType(VaginaClass.HUMAN, vagina);
 
-				UnlockVagina();
+				transformations.UnlockVagina();
 			},
 			// is present
 			function ():Boolean {
@@ -10530,7 +10574,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.vaginaType(VaginaClass.EQUINE, vagina);
 					player.vaginas[vagina].vaginalLooseness = VaginaClass.LOOSENESS_GAPING;
 
-					UnlockVagina();
+					transformations.UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.EQUINE));
 				},
 				// is present
@@ -10566,7 +10610,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.BLACK_SAND_TRAP);
 
-					UnlockVagina();
+					transformations.UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.BLACK_SAND_TRAP));
 				},
 				// is present
@@ -10595,7 +10639,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.CAVE_WYRM);
 
-					UnlockVagina();
+					transformations.UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.CAVE_WYRM));
 				},
 				// is present
@@ -10634,7 +10678,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.VENOM_DRIPPING, vagina);
 
-					UnlockVagina();
+					transformations.UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.VENOM_DRIPPING));
 				},
 				// is present
@@ -10667,7 +10711,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.MANTICORE, vagina);
 
-					UnlockVagina();
+					transformations.UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.MANTICORE));
 				},
 				// is present
@@ -10702,7 +10746,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 					player.vaginaType(VaginaClass.CANCER, vagina);
 
-					UnlockVagina();
+					transformations.UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.CANCER));
 				},
 				// is present
@@ -10731,7 +10775,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.DEMONIC, vagina);
 
-					UnlockVagina();
+					transformations.UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.DEMONIC));
 				},
 				// is present
@@ -10764,7 +10808,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.vaginaType(VaginaClass.SCYLLA, vagina);
 					player.vaginas[vagina].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
 
-					UnlockVagina();
+					transformations.UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.SCYLLA));
 				},
 				// is present
@@ -10800,7 +10844,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.vaginas[vagina].vaginalLooseness = VaginaClass.LOOSENESS_GAPING_WIDE;
 					player.vaginaType(VaginaClass.NAGA, vagina);
 
-					UnlockVagina();
+					transformations.UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.NAGA));
 				},
 				// is present
@@ -10837,7 +10881,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.SHARK, vagina);
 
-					UnlockVagina();
+					transformations.UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.SHARK));
 				},
 				// is present
@@ -10867,7 +10911,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (doOutput) outputText(desc);
 					player.vaginaType(VaginaClass.RAIJU, vagina);
 
-					UnlockVagina();
+					transformations.UnlockVagina();
 					Metamorph.unlockMetamorphEx(VaginaMem.getMemory(VaginaMem.RAIJU));
 				},
 				// is present
@@ -10955,7 +10999,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.HUMAN;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 				},
 				// is present
 				function ():Boolean {
@@ -10995,7 +11039,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].knotMultiplier = 1;
 					if (doOutput) outputText("<b>  Your hands are drawn to the strange new [cock "+(cock+1)+"]</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.");
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HORSE));
 				},
 				// is present
@@ -11045,7 +11089,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (player.cocks[cock].knotMultiplier < knot) player.cocks[cock].knotMultiplier = knot;
 					player.cocks[cock].cockType = CockTypesEnum.DOG;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DOG));
 				},
 				// is present
@@ -11089,7 +11133,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[0].cockThickness = 2;
 					player.cocks[cock].cockType = CockTypesEnum.DEMON;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DEMON));
 				},
 				// is present
@@ -11109,7 +11153,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						desc += "Your " + num2Text2(cock+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your [cock "+(cock+1)+"] has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a";
 
 						if(player.tentacleCocks() > 0) outputText("nother");
-						outputText(" tentacle-cock!</b>");
+						desc +=" tentacle-cock!</b>";
 					}
 					else {
 						desc += GrowCockGenericText();
@@ -11124,7 +11168,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (player.cocks[cock].knotMultiplier < 1.3) player.cocks[cock].knotMultiplier = 1.3;
 					player.cocks[cock].cockType = CockTypesEnum.TENTACLE;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.TENTACLE));
 				},
 				// is present
@@ -11155,7 +11199,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.SCYLLATENTACLE;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.SCYLLATENTACLE));
 				},
 				// is present
@@ -11197,7 +11241,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.cocks[cock].knotMultiplier = 1;
 					player.cocks[cock].cockType = CockTypesEnum.CAT;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.CAT));
 				},
 				// is present
@@ -11231,7 +11275,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.CANCER;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.CANCER));
 				},
 				// is present
@@ -11300,7 +11344,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.LIZARD;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.LIZARD));
 				},
 				// is present
@@ -11338,7 +11382,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.CAVE_WYRM;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.CAVE_WYRM));
 				},
 				// is present
@@ -11419,7 +11463,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (thickness != 1)
 						player.cocks[cock].cockThickness = thickness;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.ANEMONE));
 				},
 				// is present
@@ -11456,7 +11500,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.KANGAROO;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.KANGAROO));
 				},
 				// is present
@@ -11496,7 +11540,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (player.cocks[cock].knotMultiplier < 1.3) player.cocks[cock].knotMultiplier = 1.3;
 					player.cocks[cock].cockType = CockTypesEnum.DRAGON;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DRAGON));
 				},
 				// is present
@@ -11533,7 +11577,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if(player.cocks[cock].knotMultiplier < knot) player.cocks[cock].knotMultiplier = knot;
 					player.cocks[cock].cockType = CockTypesEnum.DISPLACER;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DISPLACER));
 				},
 				// is present
@@ -11583,7 +11627,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (player.cocks[cock].knotMultiplier < knot) player.cocks[cock].knotMultiplier = knot;
 					player.cocks[cock].cockType = CockTypesEnum.FOX;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.FOX));
 				},
 				// is present
@@ -11618,7 +11662,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.BEE;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.BEE));
 				},
 				// is present
@@ -11649,7 +11693,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.PIG;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.PIG));
 				},
 				// is present
@@ -11681,7 +11725,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.AVIAN;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.AVIAN));
 				},
 				// is present
@@ -11715,7 +11759,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.RHINO;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.RHINO));
 				},
 				// is present
@@ -11748,7 +11792,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.ECHIDNA;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.ECHIDNA));
 				},
 				// is present
@@ -11784,11 +11828,11 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (thickness != 1)
 						player.cocks[cock].cockThickness = thickness;
 					if (player.cocks[cock].cockThickness < 1.5)
-						player.cocks[cock].thicken(2);
+						player.cocks[cock].thickenCock(2);
 					if (player.cocks[cock].knotMultiplier < knot) player.cocks[cock].knotMultiplier = knot;
 					player.cocks[cock].cockType = CockTypesEnum.WOLF;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.WOLF));
 				},
 				// is present
@@ -11822,7 +11866,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (player.cocks[cock].knotMultiplier < 1.3) player.cocks[cock].knotMultiplier = 1.3;
 					player.cocks[cock].cockType = CockTypesEnum.STAMEN;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.STAMEN));
 				},
 				// is present
@@ -11857,7 +11901,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.RED_PANDA;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.RED_PANDA));
 				},
 				// is present
@@ -11890,7 +11934,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.GRYPHON;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.GRYPHON));
 				},
 				// is present
@@ -11929,7 +11973,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.OOMUKADE;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.OOMUKADE));
 				},
 				// is present
@@ -11961,7 +12005,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					if (player.cocks[cock].knotMultiplier < 1.25) player.cocks[cock].knotMultiplier = 1.25;
 					player.cocks[cock].cockType = CockTypesEnum.RAIJU;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.RAIJU));
 				},
 				// is present
@@ -11994,7 +12038,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockThickness = thickness;
 					player.cocks[cock].cockType = CockTypesEnum.USHI_ONI;
 
-					UnlockCocks();
+					transformations.UnlockCocks();
 					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.USHI_ONI));
 				},
 				// is present
@@ -12222,9 +12266,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			},
 			// is present
 			function ():Boolean {
-				return ((player.hasPerk(PerkLib.SpiderOvipositor) && (player.isDrider() || player.tailType == Tail.SPIDER_ADBOMEN)) ||
-						(player.hasPerk(PerkLib.BeeOvipositor) && player.tailType != Tail.BEE_ABDOMEN) ||
-						(player.hasPerk(PerkLib.MantisOvipositor) && player.tailType != Tail.MANTIS_ABDOMEN));
+				return !InCollection(player.tailType, Tail.BEE_ABDOMEN, Tail.SPIDER_ADBOMEN, Tail.MANTIS_ABDOMEN) ||
+							player.hasPerk(PerkLib.SpiderOvipositor) || player.hasPerk(PerkLib.BeeOvipositor) || player.hasPerk(PerkLib.MantisOvipositor);
 			}
 	);
 

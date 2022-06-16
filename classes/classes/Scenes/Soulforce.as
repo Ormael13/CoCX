@@ -230,6 +230,9 @@ public class Soulforce extends BaseContent
 				case 3:
 					prefix = "Late ";
 					break;
+				case 4:
+					prefix = "Peak ";
+					break;
 			}
 			var suffix:String = "";
 			switch(player.perkv2(PerkLib.JobSoulCultivator)){
@@ -244,6 +247,21 @@ public class Soulforce extends BaseContent
 					break;
 				case 4:
 					suffix = " Sprite";
+					break;
+				case 5:
+					suffix = " Scholar";
+					break;
+				case 6:
+					suffix = " Elder";
+					break;
+				case 7:
+					suffix = " Exalt";
+					break;
+				case 8:
+					suffix = " Overlord";
+					break;
+				case 9:
+					suffix = " Tyrant";
 					break;
 			}
 			cultStanding += prefix;
@@ -333,7 +351,7 @@ public class Soulforce extends BaseContent
 		if (player.hasKeyItem("Heavenly Tribulation: Myths and Facts") >= 0) player.removeKeyItem("Heavenly Tribulation: Myths and Facts");
 		if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.HclassHeavenTribulationSurvivor);
 		if (player.hasPerk(PerkLib.SoulSprite)) player.removePerk(PerkLib.SoulSprite);
-		//if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.GclassHeavenTribulationSurvivor);
+		if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.GclassHeavenTribulationSurvivor);
 		//if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.FclassHeavenTribulationSurvivor);
 		if (player.hasPerk(PerkLib.DaoistCultivator)) player.removePerk(PerkLib.DaoistCultivator);
 		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) player.removePerk(PerkLib.DaoistApprenticeStage);
@@ -2696,7 +2714,168 @@ public class Soulforce extends BaseContent
 	public function Contemplations():void {
 		clearOutput();
 		outputText("You find a flat, comfortable rock to sit down on and begin to cultivated according to the manual.  Minute after minute you feel your inner soulforce slowly starting to circle inside your body.  It's very slowly circling within yourself.\n\n");
-		if (flags[kFLAGS.SOUL_CULTIVATION] == 11 && player.level >= 24 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 29 && player.level >= 87 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Peak Soul Tyrant.</b>\n\n");
+			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 30;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 28 && player.level >= 84 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Late Soul Tyrant.</b>\n\n");
+			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 29;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 27 && player.level >= 81 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Middle Soul Tyrant.</b>\n\n");
+			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 28;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 26 && player.wis >= 200 && player.level >= 78 && player.soulforce >= player.maxSoulforce()) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Early Soul Tyrant.</b>\n\n");
+			EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+			player.createPerk(PerkLib.SoulTyrant, 0, 0, 0, 0);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, -3);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 27;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 25 && player.level >= 75 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Peak Soul Overlord.</b>\n\n");
+			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 26;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 24 && player.level >= 72 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Late Soul Overlord.</b>\n\n");
+			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 25;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 23 && player.level >= 69 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Middle Soul Overlord.</b>\n\n");
+			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 24;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 22 && player.wis >= 170 && player.level >= 66 && player.soulforce >= player.maxSoulforce()) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Early Soul Overlord.</b>\n\n");
+			EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+			player.createPerk(PerkLib.SoulOverlord, 0, 0, 0, 0);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, -3);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 23;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 21 && player.level >= 63 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Peak Soul Exalt.</b>\n\n");
+			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 22;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 20 && player.level >= 60 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Late Soul Exalt.</b>\n\n");
+			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 21;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 19 && player.level >= 57 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Middle Soul Exalt.</b>\n\n");
+			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 20;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 17 && player.level >= 51 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Late Soul Elder.</b>\n\n");
+			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 18;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 16 && player.level >= 48 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Middle Soul Elder.</b>\n\n");
+			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 17;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 15 && player.wis >= 120 && player.level >= 45 && player.soulforce >= player.maxSoulforce()) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Early Soul Elder.</b>\n\n");
+			EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+			player.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, -2);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 16;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 14 && player.level >= 42 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Late Soul Scholar.</b>\n\n");
+			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 15;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 13 && player.level >= 39 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Middle Soul Scholar.</b>\n\n");
+			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 14;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 12 && player.wis >= 100 && player.level >= 36 && player.soulforce >= player.maxSoulforce()) {
+			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
+			outputText("<b>You're now Early Soul Scholar.</b>\n\n");
+			EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+			player.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 1, -2);
+			player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
+			flags[kFLAGS.SOUL_CULTIVATION] = 13;
+			doNext(camp.returnToCampUseTwoHours);
+			return;
+		}
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 11 && player.level >= 33 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
 			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
 			outputText("<b>You're now Late Soul Sprite.</b>\n\n");
 			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
@@ -2705,7 +2884,7 @@ public class Soulforce extends BaseContent
 			doNext(camp.returnToCampUseTwoHours);
 			return;
 		}
-		if (flags[kFLAGS.SOUL_CULTIVATION] == 10 && player.level >= 21 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 10 && player.level >= 30 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) {
 			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
 			outputText("<b>You're now Middle Soul Sprite.</b>\n\n");
 			EngineCore.SoulforceChange(-Math.round(player.maxSoulforce() * 0.3), true);
@@ -2732,7 +2911,7 @@ public class Soulforce extends BaseContent
 			doNext(camp.returnToCampUseTwoHours);
 			return;
 		}
-		if (flags[kFLAGS.SOUL_CULTIVATION] == 6 && player.wis >= 80 && player.level >= 18 && player.soulforce >= player.maxSoulforce() && player.hasPerk(PerkLib.SoulSense)) {
+		if (flags[kFLAGS.SOUL_CULTIVATION] == 6 && player.wis >= 60 && player.level >= 18 && player.soulforce >= player.maxSoulforce() && player.hasPerk(PerkLib.SoulSense)) {
 			outputText("Near the end you feel silent 'pop' inside your body and your cultivation base made breakthrou.\n\n");
 			outputText("<b>You're now Early Soul Warrior.</b>\n\n");
 			EngineCore.SoulforceChange(-player.maxSoulforce(), true);
@@ -4146,9 +4325,9 @@ public class Soulforce extends BaseContent
 	}
 	
 	private function canfaceTribulation():Boolean {
-		return (player.level >= 27 && flags[kFLAGS.SOUL_CULTIVATION] == 9 && player.hasKeyItem("Heavenly Tribulation: Myths and Facts") >= 0 && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor))/* ||
-				(player.level >= 54 && player.hasPerk(PerkLib.SoulElder) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) ||
-				(player.level >= 78 && player.hasPerk(PerkLib.SoulOverlord) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor))*/;
+		return (player.level >= 27 && flags[kFLAGS.SOUL_CULTIVATION] == 9 && player.wis >= 80 && player.hasKeyItem("Heavenly Tribulation: Myths and Facts") >= 0 && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) ||
+				(player.level >= 54 && flags[kFLAGS.SOUL_CULTIVATION] == 18 && player.wis >= 140 && player.hasPerk(PerkLib.SoulElder) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor))/* ||
+				(player.level >= 78 && flags[kFLAGS.SOUL_CULTIVATION] == 18 && player.wis >= 140 && player.hasPerk(PerkLib.SoulOverlord) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor))*/;
 	}
 	public function tribulationsPrompt():void {
 		clearOutput();
@@ -4175,4 +4354,4 @@ public class Soulforce extends BaseContent
 		doNext(accessSoulforceMenu);
 	}
 }
-}
+}
