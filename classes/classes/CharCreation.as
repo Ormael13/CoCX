@@ -278,7 +278,7 @@ import coc.view.MainView;
 				vagina.clitPLong = "";
 			}
 			//PLOTZ
-			JojoScene.monk                               = 0;
+			JojoScene.monk                               = JojoScene.JOJO_NOT_MET;
 			SandWitchScene.rapedBefore = false;
 			//Replaced by flag	CoC.instance.beeProgress = 0;
 			SceneLib.isabellaScene.isabellaOffspringData = []; //CLEAR!

@@ -267,6 +267,32 @@ Gamedata.skin_coverage = [
 ];
 
 /**
+ * Source: various transformations
+ */
+Gamedata.skinAdjs = [
+	"",
+	// skin lotions
+	"tough", "smooth", "rough", "sexy",
+	// pattern-related
+	"tattooed", "battle tattooed", "scar shaped tattooed", "venomous markings-covered",
+	"veined", "oily skin", "windswept scars", "black spider glyph-tattooed",
+	// type-related
+	"flawless", "slippery rubber-like",
+	// mutations
+	"latex", "rubber", "cold", "sticky glistering",
+	// other
+	"freckled", "glistering", "shiny", "slimy", "goopey",
+];
+
+Gamedata.skinDescs = [
+	"", "covering", "feathers", "hide",
+	"shell", "plastic", "skin", "fur",
+	"scales", "bark", "stone", "chitin"
+];
+
+Gamedata.maxBreastRows = 5;
+
+/**
  * Source: classes/AssClass.as
  */
 Gamedata.analLooseness = [
@@ -289,6 +315,51 @@ Gamedata.analWetness = [
 	[4, "DROOLING"],
 	[5, "SLIME_DROOLING"],
 ];
+
+/**
+ * Source: VaginaClass.as
+ */
+Gamedata.defaultVagina = {
+	type: 0,
+	vaginalWetness: 0,
+	vaginalLooseness: 0,
+	fullness: 0,
+	virgin: true,
+	labiaPierced: 0,
+	labiaPShort: "",
+	labiaPLong: "",
+	clitPierced: 0,
+	clitPShort: "",
+	clitPLong: "",
+	clitLength: 0.5,
+	recoveryProgress: 0,
+};
+
+Gamedata.maxVaginas = 2;
+
+/**
+ * Source: VaginaClass.as
+ */
+Gamedata.vaginalWetness = [
+	[0, "DRY"],
+	[1, "NORMAL"],
+	[2, "WET"],
+	[3, "SLICK"],
+	[4, "DROOLING"],
+	[5, "SLAVERING"],
+]
+
+/**
+ * Source: VaginaClass.as
+ */
+Gamedata.vaginalLooseness = [
+	[0, "TIGHT"],
+	[1, "NORMAL"],
+	[2, "LOOSE"],
+	[3, "GAPING"],
+	[4, "GAPING_WIDE"],
+	[5, "LEVEL_CLOWN_CAR"],
+]
 
 /**
  * Source: classes/PregnancyStore.as
@@ -413,237 +484,762 @@ Gamedata.equipmentSlots = [{
 	category: "vehicle"
 }];
 
+Gamedata.itemCategoryNames = {
+	armor: "Armor",
+	consumable: "Consumable",
+	flyingsword: "Flying Sword",
+	jewelry: "Jewelry",
+	headjewelry: "Jewelry (Head)",
+	miscjewelry: "Jewelry (Misc)",
+	necklace: "Necklace",
+	other: "Other",
+	shield: "Shield",
+	undergarment: "Undergarment",
+	useable: "Useable",
+	vehicle: "Vehicle",
+	weapon: "Weapon",
+	weaponrange: "Weapon (Ranged)",
+};
+
+Gamedata.maxItemsInSlot = 5;
+
+/**
+ * Source: Inventory.as
+ */
+Gamedata.gearStorages = [{
+	name: "Weapon Rack",
+	start: 0,
+	end: 9,
+	categories: ["weapon", "weaponrange"]
+}, {
+	name: "Armor Rack",
+	start: 9,
+	end: 18,
+	categories: ["armor"]
+}, {
+	name: "Jewelry Box",
+	start: 18,
+	end: 27,
+	categories: ["jewelry"]
+}, {
+	name: "Dresser",
+	start: 27,
+	end: 36,
+	categories: ["undergarment"]
+}, {
+	name: "Shield Rack",
+	start: 36,
+	end: 45,
+	categories: ["shield"]
+}, {
+	name: "Warehouse 1",
+	start: 57,
+	end: 69
+}, {
+	name: "Granary",
+	start: 69,
+	end: 78,
+	categories: ["consumable"]
+}, {
+	name: "Warehouse 2",
+	start: 78,
+	end: 90
+}];
+
 /**
  * Editable values
  */
-Gamedata.setup = {
-	values: {
-		stats_main: [
-			{
-				id: 'name',
-				ref: 'short',
-				type: 'text',
-				label: 'Name',
-				cols: 6
-			}, {
-				id: 'startingRace',
-				ref: 'startingRace',
-				type: 'text',
-				label: 'Starting race',
-				cols: 6
-			}, {
-				id: 'cor',
-				ref: 'cor',
-				type: 'slider',
-				min: 0,
-				max: 100,
-				color: 'purple',
-				label: 'Corruption'
-			}, {
-				id: 'gems',
-				ref: 'gems',
-				type: 'number',
-				min: 0,
-				max: 1_000_000_000,
-				label: "Gems"
-			},
-			"Progression",
-			{
-				id: 'level',
-				ref: 'level',
-				type: 'number',
-				min: 0,
-				max: 185,
-				label: 'Level',
-				cols: 6
-			}, {
-				id: 'xp',
-				ref: 'XP',
-				type: 'number',
-				min: 0,
-				label: 'XP',
-				cols: 6
-			}, {
-				id: 'perkPoints',
-				ref: 'perkPoints',
-				type: 'number',
-				min: 0,
-				label: 'Perk points',
-				cols: 6
-			}, {
-				id: 'statPoints',
-				ref: 'statPoints',
-				type: 'number',
-				min: 0,
-				label: 'Stat points',
-				cols: 6
-			}, {
-				id: 'superPerkPoints',
-				ref: 'superPerkPoints',
-				type: 'number',
-				min: 0,
-				label: 'Super perk points',
-				cols: 6
-			}, {
-				id: 'ascensionPerkPoints',
-				ref: 'ascensionPerkPoints',
-				type: 'number',
-				min: 0,
-				label: 'Ascension perk points',
-				cols: 6
-			}
-		],
-		stats_resources: [
-			{
-				id: 'hp',
-				ref: 'HP',
-				type: 'bignumber',
-				label: 'HP'
-			}, {
-				id: 'lust',
-				ref: 'lust',
-				type: 'bignumber',
-				label: 'Lust',
-				min: 0
-			}, {
-				id: 'fatigue',
-				ref: 'fatigue',
-				type: 'bignumber',
-				label: 'Fatigue',
-				min: 0
-			}, {
-				id: 'mana',
-				ref: 'mana',
-				type: 'bignumber',
-				label: 'Mana',
-				min: 0
-			}, {
-				id: 'soulforce',
-				ref: 'soulforce',
-				type: 'bignumber',
-				label: 'Soulforce',
-				min: 0
-			}, {
-				id: 'wrath',
-				ref: 'wrath',
-				type: 'bignumber',
-				label: 'Wrath',
-				min: 0
-			}
-		],
-		stats_skills: [
-			{
-				prefix: "tease",
-				max: 70,
-				label: "Tease"
-			}, {
-				prefix: "mining",
-				max: 20,
-				label: "Mining"
-			}, {
-				prefix: "herbalism",
-				max: 20,
-				label: "Herbalism"
-			},
-			{prefix: 'masteryArchery', label: "Archery mastery"},
-			{prefix: 'masteryAxe', label: "Axe mastery"},
-			{prefix: 'masteryDagger', label: "Dagger mastery"},
-			{prefix: 'dualWS', label: "Dual Wielding (Small) mastery"},
-			{prefix: 'dualWN', label: "Dual Wielding (Normal) mastery"},
-			{prefix: 'dualWL', label: "Dual Wielding (Large) mastery"},
-			{prefix: 'dualWF', label: "Dual Wielding (Firearms) mastery"},
-			{prefix: 'masteryDuelingSword', label: "Dueling Sword mastery"},
-			{prefix: 'masteryExotic', label: "Exotic mastery"},
-			{prefix: 'masteryFeralCombat', label: "Feral combat mastery"},
-			{prefix: 'masteryFirearms', label: "Firearms mastery"},
-			{prefix: 'masteryGauntlet', label: "Gauntlet mastery"},
-			{prefix: 'masteryMaceHammer', label: "Mace&Hammer mastery"},
-			{prefix: 'masteryPolearm', label: "Polearm mastery"},
-			{prefix: 'masterySpear', label: "Spear mastery"},
-			{prefix: 'masterySword', label: "Sword mastery"},
-			{prefix: 'masteryThrowing', label: "Throwing mastery"},
-			{prefix: 'masteryWhip', label: "Whip mastery"},
-		].flatMap(x=>[{
-			id: x.prefix+"Level",
-			ref: x.levelRef ?? x.prefix+"Level",
-			min: 0,
-			max: x.max ?? 150,
-			type: "number",
-			label: x.label+" level",
+
+/**
+ * Array of pairs [key in Gamedata.values, displayed tab name]
+ */
+Gamedata.storyGroups = [
+	["story_misc", "Misc"],
+	["ss_adventurer_guild", "Adventurer Guild"],
+	["ss_aether_twins", "Aether Twins"],
+	["ss_belisa", "Belisa"],
+	["x_celess", "Celess"],
+	["ss_crafting", "Crafting"],
+	["x_diva", "Diva"],
+	["ss_drider_town", "Drider Town"],
+	["ss_evangeline", "Evangeline"],
+	["ss_forgefather", "Forgefather"],
+	["ss_harvestmoon", "Harvest"],
+	["ss_jtte", "Journey To The East"],
+	["ss_lily", "Lily"],
+	["ss_luna", "Luna"],
+	["ss_mindbreaker", "Mindbreaker"],
+	["ss_trollvillage", "Troll Village"],
+	["ss_tyrantia", "Tyrantia"],
+	["ss_vala", "Vala"],
+	["ss_waizabi", "WaizAbiFollower"],
+	["ss_woodelves", "Wood Elves"],
+	["ss_zenji", "Zenji"],
+];
+
+Gamedata.values = {
+	stats_main: [
+		{
+			id: 'name',
+			ref: 'short',
+			type: 'text',
+			label: 'Name',
 			cols: 6
 		}, {
-			id: x.prefix+"XP",
-			ref: x.xpRef ?? x.prefix+"XP",
-			min: 0,
-			type: "number",
-			label: x.label+" XP",
+			id: 'startingRace',
+			ref: 'startingRace',
+			type: 'text',
+			label: 'Starting race',
 			cols: 6
-		}]),
-		body_stats: [
-			{
-				id: 'femininity',
-				ref: "femininity",
-				type: "slider",
-				min: 0,
-				max: 100,
-				label: "Femininity"
-			}, {
-				id: 'thickness',
-				ref: "thickness",
-				type: "slider",
-				min: 0,
-				max: 170,
-				label: "Thickness"
-			}, {
-				id: 'tone',
-				ref: "tone",
-				type: "slider",
-				min: 0,
-				max: 170,
-				label: "Muscle tone"
-			}, {
-				id: 'height',
-				ref: "tallness",
-				type: "slider",
-				min: 42,
-				max: 144,
-				label: "Height",
-				hint: "inches"
-			}, {
-				id: "hipRating",
-				ref: 'hipRating',
-				type: "tierSlider",
-				min: 0,
-				max: 20,
-				label: "Hip width",
-				tiers: [
-					[0, "boyish"],
-					[2, "slender"],
-					[4, "average"],
-					[6, "ample"],
-					[10, "curvy"],
-					[15, "fertile"],
-					[20, "inhumanly wide"],
-				]
-			}, {
-				id: "buttRating",
-				ref: 'buttRating',
-				type: "tierSlider",
-				min: 0,
-				max: 20,
-				label: "Butt size",
-				tiers: [
-					[0, "buttless"],
-					[2, "tight"],
-					[4, "average"],
-					[6, "noticeable"],
-					[8, "large"],
-					[10, "jiggly"],
-					[13, "expansive"],
-					[15, "huge"],
-					[20, "inconceivably big"],
-				]
-			}
+		}, {
+			id: 'cor',
+			ref: 'cor',
+			type: 'slider',
+			min: 0,
+			max: 100,
+			color: 'purple',
+			label: 'Corruption'
+		}, {
+			id: 'gems',
+			ref: 'gems',
+			type: 'number',
+			min: 0,
+			max: 1_000_000_000,
+			label: "Gems"
+		},
+		"Progression",
+		{
+			id: 'level',
+			ref: 'level',
+			type: 'number',
+			min: 0,
+			max: 185,
+			label: 'Level',
+			cols: 6
+		}, {
+			id: 'xp',
+			ref: 'XP',
+			type: 'number',
+			min: 0,
+			label: 'XP',
+			cols: 6
+		}, {
+			id: 'perkPoints',
+			ref: 'perkPoints',
+			type: 'number',
+			min: 0,
+			label: 'Perk points',
+			cols: 6
+		}, {
+			id: 'statPoints',
+			ref: 'statPoints',
+			type: 'number',
+			min: 0,
+			label: 'Stat points',
+			cols: 6
+		}, {
+			id: 'superPerkPoints',
+			ref: 'superPerkPoints',
+			type: 'number',
+			min: 0,
+			label: 'Super perk points',
+			cols: 6
+		}, {
+			id: 'ascensionPerkPoints',
+			ref: 'ascensionPerkPoints',
+			type: 'number',
+			min: 0,
+			label: 'Ascension perk points',
+			cols: 6
+		}
+	],
+	stats_resources: [
+		{
+			id: 'hp',
+			ref: 'HP',
+			type: 'bignumber',
+			label: 'HP'
+		}, {
+			id: 'lust',
+			ref: 'lust',
+			type: 'bignumber',
+			label: 'Lust',
+			min: 0
+		}, {
+			id: 'fatigue',
+			ref: 'fatigue',
+			type: 'bignumber',
+			label: 'Fatigue',
+			min: 0
+		}, {
+			id: 'mana',
+			ref: 'mana',
+			type: 'bignumber',
+			label: 'Mana',
+			min: 0
+		}, {
+			id: 'soulforce',
+			ref: 'soulforce',
+			type: 'bignumber',
+			label: 'Soulforce',
+			min: 0
+		}, {
+			id: 'wrath',
+			ref: 'wrath',
+			type: 'bignumber',
+			label: 'Wrath',
+			min: 0
+		}
+	],
+	stats_skills: [
+		{
+			prefix: "tease",
+			max: 70,
+			label: "Tease"
+		}, {
+			prefix: "mining",
+			max: 20,
+			label: "Mining"
+		}, {
+			prefix: "herbalism",
+			max: 20,
+			label: "Herbalism"
+		},
+		{prefix: 'masteryArchery', label: "Archery mastery"},
+		{prefix: 'masteryAxe', label: "Axe mastery"},
+		{prefix: 'masteryDagger', label: "Dagger mastery"},
+		{prefix: 'dualWS', label: "Dual Wielding (Small) mastery"},
+		{prefix: 'dualWN', label: "Dual Wielding (Normal) mastery"},
+		{prefix: 'dualWL', label: "Dual Wielding (Large) mastery"},
+		{prefix: 'dualWF', label: "Dual Wielding (Firearms) mastery"},
+		{prefix: 'masteryDuelingSword', label: "Dueling Sword mastery"},
+		{prefix: 'masteryExotic', label: "Exotic mastery"},
+		{prefix: 'masteryFeralCombat', label: "Feral combat mastery"},
+		{prefix: 'masteryFirearms', label: "Firearms mastery"},
+		{prefix: 'masteryGauntlet', label: "Gauntlet mastery"},
+		{prefix: 'masteryMaceHammer', label: "Mace&Hammer mastery"},
+		{prefix: 'masteryPolearm', label: "Polearm mastery"},
+		{prefix: 'masterySpear', label: "Spear mastery"},
+		{prefix: 'masterySword', label: "Sword mastery"},
+		{prefix: 'masteryThrowing', label: "Throwing mastery"},
+		{prefix: 'masteryWhip', label: "Whip mastery"},
+	].flatMap(x=>[{
+		id: x.prefix+"Level",
+		ref: x.levelRef ?? x.prefix+"Level",
+		min: 0,
+		max: x.max ?? 150,
+		type: "number",
+		label: x.label+" level",
+		cols: 6
+	}, {
+		id: x.prefix+"XP",
+		ref: x.xpRef ?? x.prefix+"XP",
+		min: 0,
+		type: "number",
+		label: x.label+" XP",
+		cols: 6
+	}]),
+	body_stats: [
+		{
+			id: 'femininity',
+			ref: "femininity",
+			type: "slider",
+			min: 0,
+			max: 100,
+			label: "Femininity"
+		}, {
+			id: 'thickness',
+			ref: "thickness",
+			type: "slider",
+			min: 0,
+			max: 170,
+			label: "Thickness"
+		}, {
+			id: 'tone',
+			ref: "tone",
+			type: "slider",
+			min: 0,
+			max: 170,
+			label: "Muscle tone"
+		}, {
+			id: 'height',
+			ref: "tallness",
+			type: "slider",
+			min: 42,
+			max: 144,
+			label: "Height",
+			hint: "inches"
+		}, {
+			id: "hipRating",
+			ref: 'hipRating',
+			type: "tierslider",
+			min: 0,
+			max: 20,
+			label: "Hip width",
+			tiers: [
+				[0, "boyish"],
+				[2, "slender"],
+				[4, "average"],
+				[6, "ample"],
+				[10, "curvy"],
+				[15, "fertile"],
+				[20, "inhumanly wide"],
+			]
+		}, {
+			id: "buttRating",
+			ref: 'buttRating',
+			type: "tierslider",
+			min: 0,
+			max: 20,
+			label: "Butt size",
+			tiers: [
+				[0, "buttless"],
+				[2, "tight"],
+				[4, "average"],
+				[6, "noticeable"],
+				[8, "large"],
+				[10, "jiggly"],
+				[13, "expansive"],
+				[15, "huge"],
+				[20, "inconceivably big"],
+			]
+		}
+	],
+	story_misc: [{
+		id: "story_misc_jojo",
+		ref: "monk",
+		label: "Jojo corruption status",
+		type: "enum",
+		items: [
+			{value:0, text:"(0) Not met"},
+			{value:1, text:"(1) Met"},
+			{value:2, text:"(2) Corrupt x1"},
+			{value:3, text:"(3) Corrupt x2"},
+			{value:4, text:"(4) Corrupt x3"},
+			{value:5, text:"(5) Corrupt fully"},
+			{value:-1, text:"(-1) Denied sex first time"},
+			{value:-2, text:"(-2) Denied sex at high affection"},
+			{value:-3, text:"(-3) Had sex"},
 		]
+	}, {
+		id: "story_misc_sand",
+		ref: "sand",
+		label: "Was raped by Sand Witch",
+		type: "checkbox"
+	}, {
+		id: "story_misc_explored",
+		ref: "explored",
+		label: "Times explored",
+		type: "number"
+	}, {
+		id: "story_misc_exploredLake",
+		ref: "exploredLake",
+		label: "Times explored Lake",
+		type: "number"
+	}, {
+		id: "story_misc_exploredMountain",
+		ref: "exploredMountain",
+		label: "Times explored Mountain",
+		type: "number"
+	}, {
+		id: "story_misc_exploredDesert",
+		ref: "exploredDesert",
+		label: "Times explored Desert",
+		type: "number"
+	}, {
+		id: "story_misc_exploredForest",
+		ref: "exploredForest",
+		label: "Times explored Forest",
+		type: "number"
+	}],
+	ss_adventurer_guild: [
+		...Array.from(Array(30).keys()).map(i=>(i+1)).map(i=>i<10?"0"+i:""+i).flatMap(i=>[
+			cvOfSs("AdventurerGuild", "Slot"+i, "number"),
+			cvOfSs("AdventurerGuild", "Slot"+i+"Cap", "number")
+		])
+	],
+	ss_aether_twins: customValuesOfSaveableState("AetherTwinsScenes",{
+		"AetherTwinsShape": "text",
+		"AetherTwinsCount": "number",
+		"AetherTwinsTalkMenu": "number",
+		"AetherTwinsFoodMenuTin": "number",
+		"AetherTwinsFoodMenuTinCap": "number",
+		"AetherTwinsFoodMenuCopper": "number",
+		"AetherTwinsFoodMenuCopperCap": "number",
+		"AetherTwinsFoodMenuIron": "number",
+		"AetherTwinsFoodMenuIronCap": "number",
+		"AetherTwinsFoodMenuSilver": "number",
+		"AetherTwinsFoodMenuSilverCap": "number",
+		"AetherTwinsFoodMenuGold": "number",
+		"AetherTwinsFoodMenuGoldCap": "number",
+		"AetherTwinsFoodMenuWorldTreeBranch": "number",
+		"AetherTwinsFoodMenuWorldTreeBranchCap": "number",
+		"AetherTwinsFoodMenuDiamond": "number",
+		"AetherTwinsFoodMenuDiamondCap": "number",
+		"AetherTwinsFoodMenuAmethyst": "number",
+		"AetherTwinsFoodMenuAmethystCap": "number",
+		"AetherTwinsFoodMenuMoonstone": "number",
+		"AetherTwinsFoodMenuMoonstoneCap": "number",
+		"AetherTwinsFoodMenuSkymetal": "number",
+		"AetherTwinsFoodMenuSkymetalCap": "number",
+		"AetherTwinsFoodMenuAdamantine": "number",
+		"AetherTwinsFoodMenuAdamantineCap": "number",
+		"AetherTwinsFoodMenuOrichalcum": "number",
+		"AetherTwinsFoodMenuOrichalcumCap": "number",
+		"AetherTwinsFoodMenu": "checkbox",
+		"AetherTwinsFoodMenuBuckler": "checkbox",
+		"AetherTwinsFoodMenuSpikeLShield": "checkbox",
+		"AetherTwinsFoodMenuSGauntlet": "checkbox",
+		"AetherTwinsFoodMenuClaws": "checkbox",
+		"AetherTwinsFoodMenuHGaunt": "checkbox",
+		"AetherTwinsFoodMenuBFGauntlets": "checkbox",
+		"AetherTwinsFoodMenuLustyClaws": "checkbox",
+		"AetherTwinsFoodMenu2": "checkbox",
+		"AetherTwinsFoodMenu1": "checkbox"
+	}),
+	ss_belisa: customValuesOfSaveableState("BelisaFollower", {
+		"BelisaEncounternum": "number",
+		"BelisaAffectionMeter": "number",
+		"BelisaInGame": "checkbox",
+		"BelisaFollowerStage": "number",
+		"BelisaVirgin": "checkbox",
+		"BelisaShopOpen": "checkbox",
+		"BelisaQuestOn": "checkbox",
+		"BelisaRalthTalked":"checkbox",
+		"BelisaQuestComp": "checkbox",
+		"BelisaConfessed": "checkbox",
+		"BelisaToldTyrantia": "checkbox",
+		"BelisaInCamp": "checkbox",
+		"HolyBand1": "number",
+		"HolyBand1Cap": "number",
+		"HolyBand2": "number",
+		"HolyBand2Cap": "number",
+		"HolyBand3": "number",
+		"HolyBand3Cap": "number",
+		"HolyBand4": "number",
+		"HolyBand4Cap": "number",
+		"HolyBand5": "number",
+		"HolyBand5Cap": "number",
+		"HolyBand6": "number",
+		"HolyBand6Cap": "number",
+		"HolyBand7": "number",
+		"HolyBand7Cap": "number"
+	}),
+	ss_crafting: [
+		...Array.from(Array(40).keys()).map(i=>(i+1)).map(i=>i<10?"0"+i:""+i).flatMap(i=>[
+			cvOfSs("Crafting","BagSlot"+i,"number"),
+			cvOfSs("Crafting","BagSlot"+i+"Cap","number"),
+		])
+	],
+	ss_drider_town: customValuesOfSaveableState("DriderTown", {
+		"DriderTownComplete": "checkbox",
+		"SisterBangEnabled": "checkbox",
+		"BelisaKids": "number",
+		"BelisaPregnancy": "number",
+		"BelisaKidsEggs": "number",
+		"BelisaKidsEggs1": "number",
+		"BelisaKidsEggs2": "number",
+		"BelisaKidsEggsHatching": "number",
+		"BelisaKidsEggsHatching1": "number",
+		"BelisaKidsEggsHatching2": "number",
+		"LilyKidsPC": "number",
+		"LilyKidsPCPregnancy": "number",
+		"LilyKidsPCEggs": "number",
+		"LilyKidsPCEggs1": "number",
+		"LilyKidsPCEggs2": "number",
+		"LilyKidsPCEggsHatching": "number",
+		"LilyKidsPCEggsHatching1": "number",
+		"LilyKidsPCEggsHatching2": "number",
+		"LilyKidsIzma": "number",
+		"LilyKidsIzmaPregnancy": "number",
+		"LilyKidsSidone": "number",
+		"LilyKidsSidonePregnancy": "number",
+		"TyrantiaMaleKids": "number",
+		"TyrantiaFemaleKids": "number",
+		"TyrantiaPregnancy": "number",
+		"TyrantiaKidsEggs": "number",
+		"TyrantiaKidsEggs1": "number",
+		"TyrantiaKidsEggs2": "number",
+		"TyrantiaKidsEggsHatching": "number",
+		"TyrantiaKidsEggsHatching1": "number",
+		"TyrantiaKidsEggsHatching2": "number"
+	}),
+	ss_evangeline: customValuesOfSaveableState("EvangelineFollower", {
+		"EvangelinePeepTalkOnInternalMutations": "number",
+		"EvangelineGemsPurse": "number",
+		"EvangelineTalks": "number",
+		"EvangelineAffectionMeter": "number",
+		"EvangelineFollowerStage": "number"
+	}),
+	ss_forgefather: customValuesOfSaveableState("ForgeFatherScenes", {
+		"hairLength": "number",
+		"gender": "number",
+		"wings": "number",
+		"arms": "number",
+		"tail": "number",
+		"lowerBody": "number",
+		"chest": "number",
+		"vagina": "number",
+		"cock": "number",
+		"balls": "number",
+		"granite": "number",
+		"ebony": "number",
+		"marble": "number",
+		"sandstone": "number",
+		"alabaster": "number",
+		"material": ["enum", {
+			items: [
+				"",
+				"granite",
+				"ebony",
+				"alabaster",
+				"marble",
+				"sandstone"
+			]
+		}],
+		"refinement": "number",
+		"channelInlay": ["enum", {
+			items: [
+				"",
+				"amethyst",
+				"emerald",
+				"ruby",
+				"sapphire",
+				"topaz"
+			]
+		}],
+		"gem": ["enum", {
+			items: [
+				"",
+				"amethyst",
+				"emerald",
+				"ruby",
+				"sapphire",
+				"topaz"
+			]
+		}],
+		"rarityAbsorbed": "text",
+		"purePearlEaten": "checkbox",
+		"lethiciteEaten": "checkbox",
+		"materialsExplained": "checkbox",
+		"refinementExplained": "checkbox",
+		"inlaysExplained": "checkbox",
+		"gemstonesExplained": "checkbox"
+	}),
+	ss_harvestmoon: customValuesOfSaveableState("CampScenes", {
+		"stageHH": "number",
+		"stageMG": "number",
+		"stageSB": "number",
+		"stageIW": "number",
+		"stageBF": "number"
+	}),
+	ss_jtte: customValuesOfSaveableState("JourneyToTheEast", {
+		"AhriStatsToPerksConvertCounter": "number",
+		"AhriTavernTalks": "checkbox",
+		"EvelynnPerksToStatsConvertCounter": "number",
+		"EvelynnTavernTalks": "checkbox"
+	}),
+	ss_lily: customValuesOfSaveableState("LilyFollower", {
+		"LilyHairColor": "text",
+		"LilySkinTone": "text",
+		"LilyAffectionMeter": "number",
+		"LilySubmissivenessMeter": "number",
+		"LilyTalked": "number",
+		"LilyFollowerState": "checkbox",
+		"LilyExhibitionAble": "checkbox",
+		"Lily3SomeSidonie": "checkbox",
+		"Lily3SomeIzma": "checkbox",
+	}),
+	ss_luna: customValuesOfSaveableState("LunaFollower", {
+		"LunaNursed": "checkbox",
+		"LunaNursedCooldown": "number",
+		"LunaSated": "checkbox",
+		"LunaSatedCooldown": "number",
+	}),
+	ss_mindbreaker: customValuesOfSaveableState("Mindbreaker", {
+		"stage": "number",
+		"numberOfConvert": "number",
+		"numberOfConvertGoal": "number",
+		"numberOfGoblinConvert": "number",
+		"numberOfFetishFemaleConvert": "number",
+		"numberOfFetishMaleConvert": "number",
+
+		"numberOfFullConvert": "number",
+		"numberOfFullFemaleConvert": "number",
+		"numberOfMaleFullConvert": "number",
+		"numberOfMiniFullConvert": "number",
+
+		"playerEggIsFertile": "checkbox",
+		"mindbreakerPrisoner": "checkbox",
+		"mindbreakerPrisonerCooldown": "number",
+	}),
+	ss_trollvillage: customValuesOfSaveableState("TrollVillage", {
+		"ZenjiVillageStage": "number",
+		"JabalaUnlocked": "checkbox",
+		"YenzaUnlocked": "checkbox",
+		"KaljiUnlocked": "number",
+		"ZenjiFollowing": "checkbox",
+		"KuruUnlocked": "checkbox",
+		"HalkanoUnlocked": "checkbox",
+		"ZenjiBerated": "checkbox",
+		"YenzaLockdown": "number",
+		"ZenjiTrollVillageTimeChk": "number",
+		"YubiUnlocked": "checkbox",
+		"KaljiMBJDeny": "number",
+		"ZenjiMoneyHelp": "number",
+		"JabalaLoveChat": "checkbox",
+		"ZenjiSleep": "checkbox",
+		"ZenjiMarriageDress": "number",
+	}),
+	ss_tyrantia: customValuesOfSaveableState("TyrantiaFollower", {
+		"TyraniaIsRemovedFromThewGame": "checkbox",
+		"TyraniaPostFinalKissScene": "checkbox",
+		"TyraniaSeenFlitzy": "checkbox",
+		"TyraniaAndIzumi": "checkbox",
+		"TyrantiaAffectionMeter": "number",
+		"TyrantiaFollowerStage": "number",
+		"TyrantiaTrainingSessions": "number",
+		"TyraniaThePhalluspear": "checkbox",
+		"TyraniaDriderJuggernautPlate": "checkbox",
+		"TyraniaCorrupteedLegendaries": "number",
+	}),
+	ss_vala: customValuesOfSaveableState("ValaScene", {
+		"stage": "number",
+	}),
+	ss_waizabi: customValuesOfSaveableState("WaizAbiFollower", {
+		"WaizAbiState": "number",
+		"WaizAbiAffection": "number",
+		"WaizAbiWrathMulti": "number",
+		"WaizAbiHPMulti": "number",
+		"WaizAbiSoulforceMulti": "number",
+		"WaizAbiLustMulti": "number",
+		"WaizAbiOtherSecondaryBarsMulti": "number",
+		"WaizAbiStrMulti": "number",
+		"WaizAbiSpeMulti": "number",
+		"WaizAbiTouMulti": "number",
+		"WaizAbiWisMulti": "number",
+		"WaizAbiIntMulti": "number",
+		"WaizAbiLibMulti": "number",
+		"WaizAbiSensMulti": "number",
+	}),
+	ss_woodelves: customValuesOfSaveableState("WoodElves", {
+		"stage": "number",
+		"stageBow": "number",
+		"stageSpear": "number",
+		"elfHasTrainedToday": "checkbox",
+		"elfHasTrainedTodayCooldown": "number",
+	}),
+	ss_zenji: customValuesOfSaveableState("ZenjiScenes", {
+		"Z1stKid": "text",
+		"Z2ndKid": "text",
+		"ZenjiNightWatch": "number",
+		"ZenjiFood": "checkbox",
+		"ZenjiMarae": "checkbox",
+		"ZenjiHolli": "checkbox",
+		"ZenjiMarried": "checkbox",
+		"ZenjiFigMulti": "number",
+		"ZenjiSleepCount": "number",
+		"ZenjiLoverDays": "number",
+		"ZenjiLoverDaysTracker" : "number",
+		"ZenjiTalkCount": "number",
+	}),
+	x_celess: [{
+		id: "celess_age",
+		ref: "world.x.celess.age",
+		label: "Age",
+		type: "number"
+	}, {
+		id: "celess_corruption",
+		ref: "world.x.celess.corruption",
+		label: "Corruption",
+		type: "number"
+	}, {
+		id: "celess_name",
+		ref: "world.x.celess.name",
+		label: "Name",
+		type: "text"
+	}, {
+		id: "celess_armorFound",
+		ref: "world.x.celess.armorFound",
+		label: "Armor Found",
+		type: "checkbox"
+	}, {
+		id: "celess_questFinished",
+		ref: "world.x.celess.questFinished",
+		label: "Quest Finished",
+		type: "enum",
+		items: [
+			{value:0, text:"Not finished"},
+			{value:1, text:"Finished (Unicorn)"},
+			{value:-1, text:"Finished (Nightmare)"},
+		]
+	}],
+	x_diva: [{
+		id: "diva_status",
+		ref: "world.x.diva.status",
+		label: "Status",
+		type: "number"
+	}, {
+		id: "diva_firstLoss",
+		ref: "world.x.diva.firstLoss",
+		label: "First Loss",
+		type: "checkbox"
+	}, {
+		id: "diva_tookVialToday",
+		ref: "world.x.diva.tookVialToday",
+		label: "Took Vial Today",
+		type: "checkbox"
+	}, {
+		id: "diva_timesReduced",
+		ref: "world.x.diva.timesReduced",
+		label: "Times Reduced",
+		type: "number"
+	}, {
+		id: "diva_bloodUsed",
+		ref: "world.x.diva.bloodUsed",
+		label: "Blood Used",
+		type: "checkbox"
+	}],
+};
+/*
+TODO
+isabellaOffspringData
+ */
+
+/////////////////////////////
+// Utilities
+/////////////////////////////
+
+/**
+ * Create a IGDCustomValue for saveable state
+ * @param ssName Name of SaveableState object
+ * @param varName SaveableState saved variable
+ * @param varType IGDCustomValue type
+ * @param extraProps Extra IGDCustomValue props
+ * @return {IGDCustomValue}
+ */
+function cvOfSs(ssName,varName,varType,extraProps={}) {
+	return {
+		id: "ss_"+ssName+"_"+varName,
+		ref: "ss."+ssName+"."+varName,
+		label: varName,
+		type: varType,
+		...extraProps
 	}
+}
+
+/**
+ * Create a multiple IGDCustomValue from
+ * @param ssName
+ * @param {Record<string,IGDSSDef>} items
+ */
+function customValuesOfSaveableState(ssName,items) {
+	return Object.entries(items).map(([id,def])=>{
+		// id: "type"
+		if (typeof def === "string") return cvOfSs(ssName,id,def);
+		// id: ["type", "label"]
+		if (typeof def[1] === "string") return cvOfSs(ssName,id,def[0],{label:def[1]});
+		// id: ["type", props]
+		return cvOfSs(ssName,id,def[0],def[1]);
+	})
 }

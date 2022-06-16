@@ -175,6 +175,8 @@ public class GameSettings extends BaseContent {
 		var bytes:ByteArray = new ByteArray();
 		// see devTools/saveEditor/js/gamedata.d.ts
 		var gamedata:Object = {
+			version: CoC.instance.ver,
+			versionNumber: CoC.instance.modSaveVersion,
 			/** key: flag_id, value: IGDFlag */
 			flags: {},
 			/** key: perk_id, value: IGDPerk */
@@ -231,6 +233,7 @@ public class GameSettings extends BaseContent {
 				pattern: {},
 				tail: {},
 				tongue: {},
+				vagina: {},
 				wings: {}
 			},
 			// value: { name:string, rgb:string }
@@ -338,6 +341,8 @@ public class GameSettings extends BaseContent {
 			}
 		}
 		// body part types
+		// [target, enumValues, extraProperties]
+		// extra props - array of propname or [nameInSource, nameInTarget]
 		var bprec:Array = [
 			[gamedata.bptypes.antennae, Antennae.Types],
 			[gamedata.bptypes.arms, Arms.Types],
@@ -356,7 +361,8 @@ public class GameSettings extends BaseContent {
 			[gamedata.bptypes.pattern, Skin.PatternTypes, ["base","coat"]],
 			[gamedata.bptypes.tail, Tail.Types],
 			[gamedata.bptypes.tongue, Tongue.Types],
-			[gamedata.bptypes.wings, Wings.Types]
+			[gamedata.bptypes.vagina, VaginaClass.Types],
+			[gamedata.bptypes.wings, Wings.Types, ["desc"]]
 		];
 		for each (var a:Array in bprec) {
 			// a = [ target, EnumValue[], extra_props ]
@@ -423,8 +429,8 @@ public class GameSettings extends BaseContent {
 		
 		bytes.writeUTFBytes(
 				"// GENERATED FOR " + CoC.instance.version + "\n" +
-				"/** @type {IExtendedGameData} */\n" +
-				"let Gamedata=");
+				"/** @type {IExportedGameData} */\n" +
+				"let ExportedGamedata=");
 		bytes.writeUTFBytes(JSON.stringify(gamedata));
 		file.save(bytes, "gamedata.js");
 	}

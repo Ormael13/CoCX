@@ -8,6 +8,8 @@
 declare var Gamedata:IExtendedGamedata;
 
 declare interface IExportedGamedata {
+	version: string;
+	versionNumber: number;
 	/** index: flag_number */
 	flags: Record<number, IGDFlag>;
 	/** index: perk_id */
@@ -25,7 +27,8 @@ declare interface IExportedGamedata {
 			Record<string, IGDItem>> & IGDSpecialItemTypes;
 	statuses: Record<string, IGDStatusEffect>;
 	bptypes: Record<
-			Exclude<IGDBodySlot, keyof IGDSpecialBodyParts>, IGDBodyPart> & IGDSpecialBodyParts;
+			Exclude<IGDBodySlot, keyof IGDSpecialBodyParts>,
+			Record<string, IGDBodyPart>> & IGDSpecialBodyParts;
 	colors: IGDColor[];
 	stats: IGDStat[];
 	maxBreastCup: number;
@@ -42,18 +45,43 @@ declare interface IExtendedGamedata extends IExportedGamedata {
 	maxCoreStatValue: number;
 
 	skin_coverage: {value:number,text:string}[];
+	skinAdjs: string[];
+	skinDescs: string[];
+	maxBreastRows: number;
 	analWetness: [number, string][];
 	analLooseness: [number, string][];
+	defaultVagina: object;
+	maxVaginas: number;
+	vaginalWetness: [number, string][];
+	vaginalLooseness: [number, string][];
 
 	maxPregnanyIncubation: number;
-	pregnancyType: {value:number,text:string}[];
+	pregnancyType: VSelectItem<number>[];
 
 	equipmentSlots: IGDEquipmentSlot[];
+	itemCategoryNames: Record<IGDItemCategory, string>;
+	anyItemSelector: VSelectItem<string>[];
+	maxItemsInSlot: number;
+	gearStorages: IGDGearStorage[];
 
-	setup: {
-		values: Record<string, IGDCustomValue>;
-	}
+	/**
+	 * Array of ["key in Gamedata.values", "displayed name"]
+	 */
+	storyGroups: [string,string][],
+	values: {
+		stats_main: IGDCustomValue[];
+		stats_resources: IGDCustomValue[];
+		stats_skills: IGDCustomValue[];
+		body_stats: IGDCustomValue[];
+		[index:string]: IGDCustomValue[];
+	},
 }
+
+declare type VSelectItem<T> = {
+	value: T;
+	text: string;
+	disabled?: boolean;
+} | { divider: true } | { header: string } | T;
 
 declare interface IGDEquipmentSlot {
 	/** Reference in the save data */
@@ -163,6 +191,16 @@ declare interface IGDItemUndergarment extends IGDItem {
 declare type IGDSpecialItemTypes = {
 	undergarment: IGDItemUndergarment;
 }
+declare interface IGDGearStorage {
+	/** start index (inclusive) in gearStorage array */
+	start:number;
+	/** end index (exclusive) in gearStorage array */
+	end:number;
+	/** displayed name */
+	name:string;
+	/** valid item categories, or undefined if any item */
+	categories?: IGDItemCategory[];
+}
 
 declare interface IGDKeyItem {
 	/** (gamedata.js) key item name - same as id */
@@ -187,11 +225,12 @@ declare interface IGDKeyItem {
 	v4desc?:string;
 }
 
-declare type IGDBodySlot = "antennase"|"arms"|"beard"|"claws"|"ears"|"eyes"|"face"|"gills"|"hair"|"hairstyle"|"horns"|"legs"|"rear"|"skin"|"skin_base"|"skin_coat"|"pattern"|"pattern_base"|"pattern_coat"|"tail"|"tongue"|"wings";
+declare type IGDBodySlot = "antennase"|"arms"|"beard"|"claws"|"ears"|"eyes"|"face"|"gills"|"hair"|"hairstyle"|"horns"|"legs"|"rear"|"skin"|"skin_base"|"skin_coat"|"pattern"|"pattern_base"|"pattern_coat"|"tail"|"tongue"|"vagina"|"wings";
 declare interface IGDSpecialBodyParts {
 	legs: IGDBodyLegType;
 	skin: IGDBodySkinType;
 	pattern: IGDBodyPatternType;
+	wings: IGDBodyWingType;
 }
 declare interface IGDBodyPart {
 	/** (exported) enum name ("HUMAN", "FOX") */
@@ -226,6 +265,10 @@ declare interface IGDBodyPatternType extends IGDBodyPart {
 	base:boolean;
 	/** (exported) this pattern can be applied to coat layer */
 	coat:boolean;
+}
+declare interface IGDBodyWingType extends IGDBodyPart {
+	/** (exported) default wing description */
+	desc?:string;
 }
 
 declare interface IGDStatusEffect {
@@ -262,8 +305,9 @@ declare interface IGDStat {
 // Custom values
 /////////////////////////////////
 
-
+declare type ICustomValueType = "text"|"slider"|"tierslider"|"number"|"bignumber"|"enum"|"checkbox";
 declare interface ICustomValue {
+	type: ICustomValueType;
 	/**
 	 * Unique id. A r/w property named "cv_"+id is created in the app
 	 */
@@ -299,7 +343,7 @@ declare interface CVSlider extends ICustomValue {
 	color?: string;
 }
 declare interface CVTierSlider extends ICustomValue {
-	type: "slider";
+	type: "tierslider";
 	min: number;
 	max: number;
 	step?: number;
@@ -313,6 +357,15 @@ declare interface CVNumber extends ICustomValue {
 	step?: number;
 	color?: string;
 }
+declare interface CVEnum<T> extends ICustomValue {
+	type: "enum";
+	items: VSelectItem<T>[];
+}
+declare interface CVCheckbox extends ICustomValue {
+	type: "checkbox"
+}
 
-declare type IGDCustomValue = CVDelimiter | CVText;
+declare type IGDCustomValue = CVDelimiter | CVText | CVSlider | CVTierSlider | CVNumber | CVEnum<string> | CVEnum<number> | CVCheckbox;
 declare type CVDelimiter = string;
+
+declare type IGDSSDef = string | [string,string] | [string,Partial<IGDCustomValue>];

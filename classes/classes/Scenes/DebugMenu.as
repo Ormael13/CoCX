@@ -1450,7 +1450,7 @@ public class DebugMenu extends BaseContent
 			clearOutput();
 			if (JojoScene.monk > 1) {
 				outputText("Jojo is no longer corrupted!  ");
-				JojoScene.monk = 0;
+				JojoScene.monk = JojoScene.JOJO_NOT_MET;
 			}
 			if (flags[kFLAGS.JOJO_DEAD_OR_GONE] > 0) {
 				outputText("Jojo has respawned.  ");
