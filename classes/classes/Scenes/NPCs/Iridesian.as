@@ -2,7 +2,7 @@
  * ...
  * @author Ormael (for now)
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -265,7 +265,7 @@ import classes.internals.*;
 			return str;
 		}
 		
-		public function Iridesian() 
+		public function Iridesian()
 		{
 			initStrTouSpeInte(32, 259, 97, 112);
             initWisLibSensCor(270, 160, 103, 0);
@@ -298,7 +298,7 @@ import classes.internals.*;
 			this.lowerBody = LowerBody.HOOFED;
 			this.faceType = Face.ANIMAL_TOOTHS;
 			this.tailType = Tail.HORSE;
-			this.skinTone = "light grey";
+			this.bodyColor = "light grey";
 			this.hairColor = "black";
 			this.hairLength = 10;
 			this.weaponName = "fist";

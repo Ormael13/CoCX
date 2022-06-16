@@ -59,6 +59,13 @@ For brevity, in following code `fur` means `fur/scales/chitin` or any other body
 * `hasFur` will be renamed to `isFurCovered`
 * `hasFurMaterial` will check if any body part has material  
 
+## Parser Tags
+
+* `[color]` - main body color.
+
+These are DEPRECATED:
+* `[skintone]` (use `[color]`)
+
 ## To Be Discussed
 
 ### Body material types

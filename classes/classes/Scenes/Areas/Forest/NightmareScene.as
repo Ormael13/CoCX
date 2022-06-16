@@ -144,19 +144,19 @@ public class NightmareScene extends BaseContent
 					if (!recalling) {
 						switch (rand(10)) {
 							case 0:
-								player.skinTone = "shiny black";
+								player.skinMaterialColor = "shiny black";
 								break;
 							case 1:
 							case 2:
-								player.skinTone = "indigo";
+								player.skinMaterialColor = "indigo";
 								break;
 							case 3:
 							case 4:
 							case 5:
-								player.skinTone = "purple";
+								player.skinMaterialColor = "purple";
 								break;
 							default:
-								player.skinTone = "blue";
+								player.skinMaterialColor = "blue";
 						}
 					}
 					outputText(" You try to meekly crawl away, but the centauress is too fast for you. She has you easily pinned to the ground by her hoof as she lowers herself on your prone body aligning her meat with your hole. You try to scream for help, but she cuts the air out with a swift blow now squeezing you between her horse body and the grass. You can only beg her as you feel her flare prod for the entrance of your cunt, smearing pre on your slit, she's clearly going to break you. ");
@@ -169,7 +169,7 @@ public class NightmareScene extends BaseContent
 					if (player.wings.type > Wings.NONE) outputText(" replacing your old ones");
 					outputText(". This is all too much pleasure for your mind to handle, you’re slowly turning into a demon, and you don’t even care. Your partner however is at her limit.\n\n");
 					outputText("\"<i>Here it comes girl... take it all!</i>\"\n\n");
-					outputText("The nightmare’s cock begins to pulse violently as the both of you finally reach climax, her horsecock flooding your womb to the brim with hot, tainted cum. Your body’s reaction is swift, your head growing a pair of large demonic horns and your skin pigmentation slowly shifting to a " + player.skinTone + " hue ");
+					outputText("The nightmare’s cock begins to pulse violently as the both of you finally reach climax, her horsecock flooding your womb to the brim with hot, tainted cum. Your body’s reaction is swift, your head growing a pair of large demonic horns and your skin pigmentation slowly shifting to a " + player.skinMaterialColor + " hue ");
 					outputText("as you reach the end of your transformation but strangely, despite how defiled you are, your soul does not seem to be coming out. The nightmare pulls out of your body leaving you stranded on the ground trying to regain your composure.\n\n");
 					outputText("\"<i>You are a lucky girl... I feel generous and since you're such a cutie I actually stopped only short of making you cum out your soul. Demons can only give births to imps anyway, and I need a strong body like yours to carry my offspring into the world. Do take care of her will you?</i>\"\n\n");
 					outputText("You nod weakly with a confused lust addled expression. Yea, whatever she says... You don’t care, you're in nirvana, trying to reconnect with your body right now, and so your vision fades to black.\n\n");

@@ -9,6 +9,7 @@ import classes.Races.*;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.Transformations.TransformationUtils;
+import classes.internals.WeightedDrop;
 
 public final class Mutations extends MutationsHelper {
     public function Mutations() {
@@ -4026,9 +4027,9 @@ public final class Mutations extends MutationsHelper {
             transformations.SkinPlain.applyEffect();
             changes++;
         }
-        //skinTone
-        if (!InCollection(player.skin.base.color, GremlinRace.GremlinSkinColors) && changes < changeLimit && rand(2) == 0) {
-            player.skin.base.color = randomChoice(GremlinRace.GremlinSkinColors);
+        //skin tone
+        if (!InCollection(player.skinMaterialColor, GremlinRace.GremlinSkinColors) && changes < changeLimit && rand(2) == 0) {
+            player.skinMaterialColor = randomChoice(GremlinRace.GremlinSkinColors);
             outputText("[pg]Whoah, that was weird.  You just hallucinated that your ");
             if (player.hasFur()) outputText("skin");
             else outputText(player.skinDesc);
@@ -4226,19 +4227,15 @@ public final class Mutations extends MutationsHelper {
             transformations.SkinPlain.applyEffect();
             changes++;
         }
-        //skinTone
-        if (!InCollection(player.skin.base.color, GoblinRace.GoblinSkinColors) && changes < changeLimit && rand(2) == 0) {
-            
-            if (rand(10) != 0) {    //TODO Create a WeightedChoice util
-                if (rand(4) != 0) player.skin.base.color = "dark green";
-                else {
-                    if (rand(5) < 2) player.skin.base.color = "emerald";
-                    else player.skin.base.color = "green";
-                }
-            } else {
-                if (rand(2) == 0) player.skin.base.color = "pale yellow";
-                else player.skin.base.color = "grayish-blue";
-            }
+        //skin tone
+        if (!InCollection(player.skinMaterialColor, GoblinRace.GoblinSkinColors) && changes < changeLimit && rand(2) == 0) {
+            player.skinMaterialColor = weightedRandom([
+                    [13, "dark green"],
+                    [2, "emerald"],
+                    [3, "green"],
+                    [1, "pale yellow"],
+                    [1, "grayish-blue"]
+            ]);
             changes++;
             outputText("[pg]Whoah, that was weird.  You just hallucinated that your ");
             if (player.hasFur()) outputText("skin");
@@ -8191,14 +8188,14 @@ public final class Mutations extends MutationsHelper {
             outputText(player.modFem(85, 3 + rand(5)));
         }
         //-Skin color change – tan, olive, dark, light
-        if (!InCollection(player.skinTone, HumanRace.HumanSkinColors) && changes < changeLimit && rand(5) == 0) {
+        if (!InCollection(player.skinMaterialColor, HumanRace.HumanSkinColors) && changes < changeLimit && rand(5) == 0) {
             changes++;
             outputText("[pg]It takes a while for you to notice, but <b>");
-            if (player.hasFur()) outputText("the skin under your " + player.coatColor + " " + player.skinDesc);
+            if (player.hasCoat()) outputText("the skin under your " + player.coatColor + " " + player.skinDesc);
             else outputText("your " + player.skinDesc);
             outputText(" has changed to become ");
-            player.skin.base.color = randomChoice(HumanRace.HumanSkinColors);
-            outputText(player.skin.base.color + " colored.</b>");
+            player.skinMaterialColor = randomChoice(HumanRace.HumanSkinColors);
+            outputText(player.skinMaterialColor + " colored.</b>");
         }
         //-Grow hips out if narrow.
         if (player.hips.type < 10 && changes < changeLimit && rand(3) == 0) {
@@ -15658,8 +15655,8 @@ public final class Mutations extends MutationsHelper {
         }
 
         var skinColor:String = UshiOniRace.UshiOniSkinColors[type%6];
-        if (player.hasPlainSkinOnly() && player.skinTone != skinColor && changes < changeLimit && rand(3) == 0) {
-            player.skin.base.color = skinColor;
+        if (player.hasPlainSkinOnly() && player.skinMaterialColor != skinColor && changes < changeLimit && rand(3) == 0) {
+            player.skinMaterialColor = skinColor;
             outputText("[pg]Your skin tingles ever so slightly as the color changes before your eyes. As the tingling diminishes, you find that your skin has turned " + player.skinMaterialColor + ".");
             changes++;
         }

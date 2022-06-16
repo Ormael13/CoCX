@@ -245,7 +245,7 @@ public function WitchesSabbathThirdVisitYes():void {
 	outputText(" In a final spectacular explosion your hair is set ablaze, the fire refusing to be put out until it literally replaces it.");
 	outputText("\n\n");
 	outputText(" Your skin tingles with residual heat as well, progressively and delightfully burning toward a ashen hue.");
-	player.skinTone = "ashen";
+	player.skinMaterialColor = "ashen";
 	player.hairColor = "midnight black";
 	player.coatColor = "midnight black";
 	outputText(" Speaking of fire, you're having some hellishly hot thoughts right now. You really wish you could stick that cock of yours in some cunt or get yourself filled good, and hell, with a body like yours, going into heat likely is going to be a recurring two sided joke. <b>You were altered and transformed into a Hellcat!</b>");
@@ -295,7 +295,7 @@ public function WitchesSabbathFourthVisitYeahSure2():void {
 	outputText(" All of these pleasurable changes are driving you insane with desire to the point you would try to cry, but just as soon as a tear pearls out of your eye, it evaporates as two small flames leak from their corners instead.");
 	outputText(" In a final spectacular explosion, your hair is set ablaze, the fire refusing to be put out until it literally replaces it.");
 	outputText(" Your skin tingles with residual heat as well, progressively and delightfully burning toward a ashen hue.");
-	player.skinTone = "ashen";
+	player.skinMaterialColor = "ashen";
 	player.hairColor = "midnight black";
 	player.coatColor = "midnight black";
 	outputText(" Speaking of fire, you're having some hellishly hot thoughts right now. You really wish you could stick that cock of yours in some cunt or get yourself filled good.");

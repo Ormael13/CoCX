@@ -98,7 +98,7 @@ public class BeeGirl extends Monster {
 			this.hips.type = Hips.RATING_CURVY + 3;
 			this.butt.type = Butt.RATING_EXPANSIVE;
 			this.lowerBody = LowerBody.BEE;
-			this.skinTone = "yellow";
+			this.bodyColor = "yellow";
 			this.hairColor = randomChoice("black","black and yellow");
 			this.hairLength = 6;
 			initStrTouSpeInte(30, 50, 30, 20);

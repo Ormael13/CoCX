@@ -275,7 +275,7 @@ public class Minerva extends Monster
 			this.tallness = 8*12+4;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE + 1;
-			this.skinTone = "blue";
+			this.bodyColor = "blue";
 			this.hairColor = "red";
 			this.hairLength = 25;
 			if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) cor = 0; //Set to 0 corruption if purified.

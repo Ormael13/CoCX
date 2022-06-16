@@ -1601,7 +1601,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Goos burn
 		else if(monster.short == "goo-girl") {
-			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer. ");
+			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.bodyColor + " skin has lost some of its shimmer. ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 			damage = Math.round(damage * 1.5 * combat.fireDamageBoostedByDao());
 			doFireDamage(damage, true, true);
@@ -1666,7 +1666,7 @@ public class MagicSpecials extends BaseCombatContent {
 		doIceDamage(damage, true, true);
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
-		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
+		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.bodyColor + " skin has lost some of its shimmer.");
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -1733,7 +1733,7 @@ public class MagicSpecials extends BaseCombatContent {
 		doIceDamage(damage, true, true);
 		//Using fire attacks on the goo]
 		//if(monster.short == "goo-girl") {
-		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
+		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.bodyColor + " skin has lost some of its shimmer.");
 		//if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		//}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -1957,7 +1957,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Goos burn
 		else if(monster.short == "goo-girl") {
-			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer. ");
+			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.bodyColor + " skin has lost some of its shimmer. ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 			damage = Math.round(damage * 1.5 * combat.fireDamageBoostedByDao());
 			doFireDamage(damage, true, true);
@@ -2072,7 +2072,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//Goos burn
 		else if(monster.short == "goo-girl") {
-			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer. ");
+			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.bodyColor + " skin has lost some of its shimmer. ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 			damage = Math.round(damage * 1.5 * combat.fireDamageBoostedByDao());
 			doFireDamage(damage, true, true);
@@ -2677,7 +2677,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else {
 			//Using fire attacks on the goo]
 			if(monster.short == "goo-girl") {
-				outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer. ");
+				outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.bodyColor + " skin has lost some of its shimmer. ");
 				if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 				damage = Math.round(damage * 1.5);
 			}
@@ -3303,7 +3303,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
-			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.");
+			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.bodyColor + " skin has lost some of its shimmer.");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
 		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
@@ -3451,7 +3451,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
-			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
+			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.bodyColor + " skin has lost some of its shimmer.  ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
 		damage *= 2;
@@ -3562,7 +3562,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
-			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
+			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.bodyColor + " skin has lost some of its shimmer.  ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
 		damage *= 4;
@@ -3681,7 +3681,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
-			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
+			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.bodyColor + " skin has lost some of its shimmer.  ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
 		if (player.headjewelryName == "fox hairpin") damage *= 1.2;
@@ -3798,7 +3798,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
-			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
+			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.bodyColor + " skin has lost some of its shimmer.  ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
 		damage *= 4;
@@ -3918,7 +3918,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		//Using fire attacks on the goo]
 		if(monster.short == "goo-girl") {
-			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
+			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.bodyColor + " skin has lost some of its shimmer.  ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
 		damage *= 4;

@@ -10,7 +10,7 @@ import classes.internals.*;
 	 * ...
 	 * @author ...
 	 */
-	public class Shouldra extends Monster 
+	public class Shouldra extends Monster
 	{
 
 		private function shouldrattack():void {
@@ -118,7 +118,7 @@ import classes.internals.*;
 			this.tallness = 65;
 			this.hips.type = Hips.RATING_AMPLE;
 			this.butt.type = Butt.RATING_AVERAGE + 1;
-			this.skinTone = "white";
+			this.bodyColor = "white";
 			this.hairColor = "white";
 			this.hairLength = 3;
 			initStrTouSpeInte(55, 40, 10, 140);

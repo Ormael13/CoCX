@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 	import classes.*;
 	import classes.BodyParts.Butt;
@@ -17,7 +17,7 @@ package classes.Scenes.Monsters
 	public class CorruptedFleshGolemAdvanced extends CorruptedFleshGolemBasic
 	{
 		
-		public function CorruptedFleshGolemAdvanced() 
+		public function CorruptedFleshGolemAdvanced()
 		{
 			
 			this.createCock(18,2.5,CockTypesEnum.DEMON);
@@ -35,7 +35,7 @@ package classes.Scenes.Monsters
 			this.tallness = 108;
 			this.hips.type = Hips.RATING_FERTILE;
 			this.butt.type = Butt.RATING_EXPANSIVE + 2;
-			this.skinTone = "pink";
+			this.bodyColor = "pink";
 			this.weaponName = "dual swords";
 			this.weaponVerb = "slash";
 			this.weaponAttack = 50;

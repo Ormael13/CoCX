@@ -1067,7 +1067,7 @@ public class DebugMenu extends BaseContent
 							"skin color", "skin base.color", "skin coat.color",
 							"skin isare", "skin base.isare", "skin coat.isare",
 							"skin vs","skin base.vs", "skin coat.vs",
-							"skinfurscales", "skintone") + ".\n");
+							"skinfurscales", "color") + ".\n");
 		}
 		private function bodyPartEditorHead():void {
 			clearBeElements();

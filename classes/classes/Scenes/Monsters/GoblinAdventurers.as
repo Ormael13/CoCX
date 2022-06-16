@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -63,14 +63,14 @@ public class GoblinAdventurers extends Monster
 		protected function lustNeedle():void {
 			outputText("With a swift step, one of adventurers vanishes, her movements too quick for you to follow. You take a sharp breath as you feel her ample thighs clench your head in between them, her slick cunt in full view as you take in her scent.");
 			//Miss
-			if (player.getEvasionRoll()) 
+			if (player.getEvasionRoll())
 			{
-				//Miss: 
+				//Miss:
 				outputText("\nYou’ve already prepared, however, as you hold your breath and grab the goblin by her sides. Unhindered by her advance, you take the opportunity to move backwards, throwing the goblin off balance and leaving you only faintly smelling of her pussy.");
 				player.dynStats("lus", rand(player.lib/10)+4);
 			}
-			//Hit: 
-			else 
+			//Hit:
+			else
 			{
 				outputText("\nYou’re far too distracted to notice few needle injected into your back and neck, but by the time she flips back into her original position you already feel the contents of the syringe beginning to take effect.");
 				player.dynStats("lus", rand(player.lib)+50);
@@ -79,12 +79,12 @@ public class GoblinAdventurers extends Monster
 		//Dual Shot
 		protected function dualShot():void {
 			outputText("Three adventurers throws a syringe onto the ground, shattering it and allowing the dissipating smoke from its contents to distract you long enough for them to slip underneath you or to your sides. With a quick flick of wrists two needles are placed into their hands, though you’ve already caught wind of their movements.");
-			//Miss: 
-			if (player.getEvasionRoll()) 
+			//Miss:
+			if (player.getEvasionRoll())
 			{
 				outputText("\nYou jump backwards, far enough to avoid quick thrust upwards as the middle one attempts to lick the area in which your crotch once stood. Realising situation, they quickly remove themselves from the ground and faces you, more determined than before.");
 			}
-			//Hit: 
+			//Hit:
 			else {
 				outputText("\nBefore you can do anything to stop them, the middle one lifts her head and takes a swift lick of your crotch, taking a small moan from you and giving her, and her two companions, enough time to stab into the back of your knees. They all rolls out of the way just as you pluck the needles out and throw them back to the ground. They didn’t seem to have anything in them, but the pain is enough to make you stagger. ");
 				//(Medium HP loss, small lust gain)
@@ -121,7 +121,7 @@ public class GoblinAdventurers extends Monster
 			SceneLib.goblinScene.gobboSpecialBeatYaUp();
 		}
 		
-		public function GoblinAdventurers() 
+		public function GoblinAdventurers()
 		{
 			this.a = "the ";
 			this.short = "goblin adventurers";
@@ -137,7 +137,7 @@ public class GoblinAdventurers extends Monster
 			this.tallness = 35 + rand(4);
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "dark green";
+			this.bodyColor = "dark green";
 			this.hairColor = "blue";
 			this.hairLength = 7;
 			initStrTouSpeInte(60, 77, 125, 100);
@@ -164,6 +164,6 @@ public class GoblinAdventurers extends Monster
 							consumables.PURPDYE);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			checkMonster();
-		}	
+		}
 	}
 }

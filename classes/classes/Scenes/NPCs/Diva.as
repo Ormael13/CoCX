@@ -32,7 +32,7 @@ public class Diva extends Monster {
         this.tallness = (5*12)+6;
         this.hips.type = Hips.RATING_CURVY;
         this.butt.type = Butt.RATING_NOTICEABLE;
-        this.skinTone = "pale";
+        this.bodyColor = "pale";
         this.hairColor = "blonde";
         this.hairLength = 16;
         initWisLibSensCor(4.5*levelBonus,40,50,60);

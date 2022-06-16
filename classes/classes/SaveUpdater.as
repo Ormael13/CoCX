@@ -924,7 +924,7 @@ public class SaveUpdater extends NPCAwareContent {
 				player.setShield(shields.DRGNSHL);
 				player.setArmor(armors.LAYOARM);
 				flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
-				player.skinTone = "light";
+				player.skinMaterialColor = "light";
 				player.faceType = Face.HUMAN;
 				player.eyes.type = Eyes.HUMAN;
 				player.horns.type = Horns.NONE;

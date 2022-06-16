@@ -164,7 +164,7 @@ use namespace CoC;
 			this.tallness = 72;
 			this.hips.type = Hips.RATING_CURVY + 3;
 			this.butt.type = Butt.RATING_LARGE + 2;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = "red";
 			this.hairLength = 13;
 			initStrTouSpeInte(130, 195, 330, 200);

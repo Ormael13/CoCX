@@ -114,7 +114,7 @@ public class Vala extends Monster
 			this.tallness = 4*12;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "fair";
+			this.bodyColor = "fair";
 			this.hairColor = "purple";
 			this.hairLength = 22;
 			initStrTouSpeInte(75, 90, 90, 90);

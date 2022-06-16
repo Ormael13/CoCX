@@ -197,15 +197,8 @@ public class MaraFruit extends Consumable{
 			CoC.instance.transformations.SkinPlain.applyEffect();
 			changes++;
 		}
-		if (player.hasPlainSkinOnly() && player.skinMaterialColor != "leaf green" && player.skinMaterialColor != "lime green" && player.skinMaterialColor != "turquoise" && player.skinMaterialColor != "light green" && changes < changeLimit && rand(2) == 0) {
-			if (rand(10) == 0) player.skinTone = "turquoise";
-			else {
-				if (rand(7) == 0) player.skinTone = "lime green";
-				else {
-					if (rand(4) == 0) player.skinTone = "leaf green";
-					else player.skinTone = "light green";
-				}
-			}
+		if (player.hasPlainSkinOnly() && !InCollection(player.skinMaterialColor, "leaf green", "lime green", "turquoise", "light green") && changes < changeLimit && rand(2) == 0) {
+			player.skinMaterialColor = randomChoice("turquoise", "lime green", "leaf green", "light green");
 			changes++;
 			outputText("\n\nWhoah, that was weird.  You just hallucinated that your skin turned " + player.skinMaterialColor + ".  No way!  It's staying, it really changed color!");
 		}

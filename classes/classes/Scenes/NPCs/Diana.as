@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.BodyParts.Butt;
@@ -320,7 +320,7 @@ package classes.Scenes.NPCs
 			else dianaScene.lostToDiana();
 		}
 		
-		public function Diana() 
+		public function Diana()
 		{
 			if (flags[kFLAGS.DIANA_LVL_UP] == 0) {
 				initStrTouSpeInte(25, 25, 25, 75);
@@ -623,7 +623,7 @@ package classes.Scenes.NPCs
 			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.lowerBody = LowerBody.HOOFED;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = "white";
 			this.weaponName = "staff";
 			this.weaponVerb="smack";

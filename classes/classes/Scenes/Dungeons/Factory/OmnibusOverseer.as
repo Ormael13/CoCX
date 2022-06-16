@@ -86,7 +86,7 @@ public class OmnibusOverseer extends Monster
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
-			this.skinTone = "light purple";
+			this.bodyColor = "light purple";
 			this.hairColor = "purple";
 			this.hairLength = 42;
 			initStrTouSpeInte(100, 70, 45, 85);

@@ -251,7 +251,7 @@ public class Forgefather extends NPCAwareContent implements SaveableState	{
 		
 		public function createGargoyleState(): void {
 			player.skin.setBaseOnly({type:Skin.STONE});
-			player.skinTone = "dark gray";
+			player.skinMaterialColor = "dark gray";
 			player.hairColor = "dark gray";
 			material = "stone";
 			refinement = 1;
@@ -496,7 +496,7 @@ public class Forgefather extends NPCAwareContent implements SaveableState	{
 					if (refinement < 3){
 						if (granite >= (100 * (refinement + 1))) addButton(0, "Refine", refineFunc);
 						else addButtonDisabled(0, "Refine", "Not enough materials");
-					} 
+					}
 					else if (refinement == 3){
 						if (hasChannelMats) addButton(0, "Carve Channel", refineFunc);
 						else addButtonDisabled(0, "Carve Channel", "Not enough materials");
@@ -571,35 +571,35 @@ public class Forgefather extends NPCAwareContent implements SaveableState	{
 					refinement = 1;
 					granite -= 100;
 					material = "granite";
-					player.skinTone = "gray";
+					player.skinMaterialColor = "gray";
 					player.hairColor = "gray";
 					break;
 				case "ebony":
 					refinement = 1;
 					ebony  -= 100;
 					material = "ebony";
-					player.skinTone = "black";
+					player.skinMaterialColor = "black";
 					player.hairColor = "black";
 					break;
 				case "alabaster":
 					refinement = 1;
 					alabaster -= 100;
 					material = "alabaster";
-					player.skinTone = "quartz white";
+					player.skinMaterialColor = "quartz white";
 					player.hairColor = "quartz white";
 					break;
 				case "marble":
 					refinement = 1;
 					marble -= 100;
 					material = "marble";
-					player.skinTone = "light gray";
+					player.skinMaterialColor = "light gray";
 					player.hairColor = "light gray";
 					break;
 				case "sandstone":
 					refinement = 1;
 					sandstone -= 100;
 					material = "sandstone";
-					player.skinTone = "caramel";
+					player.skinMaterialColor = "caramel";
 					player.hairColor = "caramel";
 					break;
 			}

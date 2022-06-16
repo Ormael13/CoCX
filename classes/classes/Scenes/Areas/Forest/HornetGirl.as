@@ -140,7 +140,7 @@ import classes.internals.ChainedDrop;
 			this.hips.type = Hips.RATING_FERTILE + 1;
 			this.butt.type = Butt.RATING_HUGE;
 			this.lowerBody = LowerBody.BEE;
-			this.skinTone = "yellow";
+			this.bodyColor = "yellow";
 			this.hairColor = randomChoice("black","black and yellow");
 			this.hairLength = 6;
 			initStrTouSpeInte(30, 50, 30, 20);

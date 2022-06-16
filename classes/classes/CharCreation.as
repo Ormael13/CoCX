@@ -193,7 +193,7 @@ import coc.view.MainView;
 			player.wings.type = Wings.NONE;
 			player.wings.desc = "non-existant";
 			//Default
-			player.skinTone = "light";
+			player.skinMaterialColor = "light";
 			player.hairColor = "brown";
 			player.hairStyle = 0;
 			player.hairType = Hair.NORMAL;
@@ -749,7 +749,7 @@ import coc.view.MainView;
 		}
 
 		private function setComplexion(choice:String):void { //And choose hair
-			player.skinTone = choice;
+			player.skinMaterialColor = choice;
 			clearOutput();
 			outputText("You selected a " + choice + " complexion.\n\nWhat color is your hair?");
 			menu();
@@ -846,7 +846,7 @@ import coc.view.MainView;
 			addButton(14, "Back", genericStyleCustomizeMenu);
 		}
 		private function confirmComplexion(complexion:String):void {
-			player.skinTone = complexion;
+			player.skinMaterialColor = complexion;
 			genericStyleCustomizeMenu();
 		}
 

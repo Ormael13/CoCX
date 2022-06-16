@@ -1130,7 +1130,6 @@ public class Creature extends Utils
 		public function set bodyColor(value:String):void {
 			skin.color = value;
 		}
-		public function get skinTone():String { return skin.tone; }
 		public function hasCoat():Boolean { return skin.hasCoat(); }
 		public function hasFullCoat():Boolean { return skin.hasFullCoat(); }
 		/**
@@ -1139,12 +1138,6 @@ public class Creature extends Utils
 		public function coatType():int { return skin.coatType(); }
 		public function hasCoatOfType(...types:Array):Boolean { return skin.hasCoatOfType.apply(skin,types); }
 		public function hasFullCoatOfType(...types:Array):Boolean { return skin.hasFullCoatOfType.apply(skin,types); }
-	//	[Deprecated]
-		public function set skinTone(value:String):void {
-			trace("[DEPRECATED] set skinTone");
-			if (skin.coverage >= Skin.COVERAGE_HIGH) skin.coat.color = value;
-			else skin.base.color = value;
-		}
 		public function get skinDesc():String { return skin.desc; }
 	//	[Deprecated]
 		public function set skinDesc(value:String):void {

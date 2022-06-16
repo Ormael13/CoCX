@@ -197,14 +197,14 @@ public class Arms extends BodyPart {
 	public static const AVIAN:int = 26;
 	EnumValue.add(Types, AVIAN, "AVIAN", {
 		name:"avian",
-		appearanceDesc: "Your arms are covered by [skin coat.color] colored feathers just a bit past your elbow. Your humanoid hands have [skinTone], slightly rough skin, and end in short claws.",
+		appearanceDesc: "Your arms are covered by [skin coat.color] colored feathers just a bit past your elbow. Your humanoid hands have [color], slightly rough skin, and end in short claws.",
 		claw: true
 	});
 
 	public static const GRYPHON:int = 27;
 	EnumValue.add(Types, GRYPHON, "GRYPHON", {
 		name:"gryphon",
-		appearanceDesc: "The feathers on your arms reach a bit past your elbows, with a fringe of [skin coat.color] plumage leading to your [skinTone], slightly rough-skinned hands equipped with short, avian claws.",
+		appearanceDesc: "The feathers on your arms reach a bit past your elbows, with a fringe of [skin coat.color] plumage leading to your [color], slightly rough-skinned hands equipped with short, avian claws.",
 		claw: true
 	});
 

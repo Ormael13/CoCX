@@ -282,9 +282,6 @@ public class Skin extends SaveableBodyPart {
 	public function set coverage(value:int):void {
 		_coverage = boundInt(COVERAGE_NONE, value, COVERAGE_COMPLETE);
 	}
-	public function get tone():String {
-		return color;
-	}
 	public function get color():String {
 		return skinValue(base.color, coat.color);
 	}
@@ -705,7 +702,7 @@ public class Skin extends SaveableBodyPart {
 		savedata.skinType    = type;
 		savedata.skinDesc    = desc;
 		savedata.skinAdj     = adj;
-		savedata.skinTone    = tone;
+		savedata.skinTone    = color;
 		savedata.furColor    = coat.color;
 		savedata.scalesColor = coat.color;
 		savedata.chitinColor = coat.color;

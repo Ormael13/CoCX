@@ -470,10 +470,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			outputText("You let him fall limply on the ground and look at him, he has foam at the mouth. Geeze your nails are poisonous too? While you doubt you killed him, you don't want him to just get away with this either so you dump him in the box he originally reserved for you and lock him up.\n\n");
 			outputText("Thinking your problems to be over, you attempt to remove the cursed spell tag on your forehead. You pull hard, but to your surprise it just doesn't come off. Guess you're stuck into this weird zombie like existence until you can find someone to help you with this. You literally hop out of the mage’s house, arm stretched forward, and head back to camp.\n\n");
 			outputText("(<b>Gained Perks: Halted vitals, Super strength, Poison nails, Rigidity, Life leech, Undeath, Energy dependent</b>)\n\n");
-			var skincolor:Number = rand(3);
-			if (skincolor == 0) player.skinTone = "snow white";
-			else if (skincolor == 1) player.skinTone = "ghostly pale";
-			else player.skinTone = "light blue";
+			player.skinMaterialColor = randomChoice("snow white", "ghostly pale", "light blue");
 			CoC.instance.transformations.FaceJiangshi.applyEffect(false);
 			player.eyes.type = Eyes.JIANGSHI;
 			CoC.instance.transformations.EyesChangeColor(["turquoise"]).applyEffect(false);

@@ -373,7 +373,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	          if (player.hasFur()) {
 	            desc += "You scratch yourself, and come away with a large clump of [skin coat.color] fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + color + " scales covering most of your body. The rest of the fur is easy to remove. <b>You're now covered in scales from head to toe.</b>";
 	          } else {
-	            desc += "You idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard. A quick glance down reveals that scales are growing out of your " + player.skinTone + " skin with alarming speed. As you watch, the surface of your skin is covered in smooth scales. They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body. <b>You're covered from head to toe in shiny " + color + " scales.</b>";
+	            desc += "You idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard. A quick glance down reveals that scales are growing out of your [color] skin with alarming speed. As you watch, the surface of your skin is covered in smooth scales. They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body. <b>You're covered from head to toe in shiny " + color + " scales.</b>";
 	          }
 	          break;
 	        default:
@@ -549,7 +549,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
                                 else if (player.hasGooSkin()) desc += "Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Your skin feels incredibly smooth.  ";
                                 else if (player.hasScales()) desc += "Your " + player.coatColor + " scales itch incessantly, and as you scratch yourself, they start falling off wholesale.  ";
                                 else if (player.hasCoat()) desc += "Your skin itches and tingles, starting to shed your [skin coat].  ";
-                                else desc += "You idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard. A quick glance down reveals that scales are growing out of your " + player.skinTone + " skin with alarming speed. As you watch, the surface of your skin is covered in smooth scales. They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body. ";
+                                else desc += "You idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard. A quick glance down reveals that scales are growing out of your [color] skin with alarming speed. As you watch, the surface of your skin is covered in smooth scales. They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body. ";
                                 desc += "<b>You're covered from head to toe in shiny " + color + " aqua scales.</b>"
                                 break;
                             default:
@@ -587,15 +587,15 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					player.skin.setBaseOnly({type: Skin.GOO, adj: "slimy", pattern: Skin.PATTERN_NONE});
 					if (!InCollection(player.skin.base.color, SlimeRace.SlimeSkinColors) && type == 0) {
 						player.skin.base.color = randomChoice(SlimeRace.SlimeSkinColors);
-						outputText("  Stranger still, your skintone changes to [skin color]!");
+						outputText("  Stranger still, your skin tone changes to [skin color]!");
 					}
 					if (!InCollection(player.skin.base.color, MagmaSlimeRace.MagmaSlimeSkinColors) && type == 1) {
 						player.skin.base.color = randomChoice(MagmaSlimeRace.MagmaSlimeSkinColors);
-						outputText("  Stranger still, your skintone changes to [skin color]!");
+						outputText("  Stranger still, your skin tone changes to [skin color]!");
 					}
 					if (!InCollection(player.skin.base.color, DarkSlimeRace.DarkSlimeSkinColors) && type == 2) {
 						player.skin.base.color = randomChoice(DarkSlimeRace.DarkSlimeSkinColors);
-						outputText("  Stranger still, your skintone changes to [skin color]!");
+						outputText("  Stranger still, your skin tone changes to [skin color]!");
 					}
 					//if (doOutput) outputText(desc);
 					switch (type) {
@@ -5382,7 +5382,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    desc += "Your arms become increasingly wet, as if they were sweating heavily, until eventually you're unsure whether or not they are even solid. The sweat clears up, turning to [skintone] slime. At first, it feels weird, because they are neither entirely solid or liquid, but the simple act of lengthening your limbs to ridiculous reach amuses you. Furthermore you can see right through your hands as if looking through water. Perhaps there's some use to your <b>new goo dripping arms.</b>";
+	    desc += "Your arms become increasingly wet, as if they were sweating heavily, until eventually you're unsure whether or not they are even solid. The sweat clears up, turning to [color] slime. At first, it feels weird, because they are neither entirely solid or liquid, but the simple act of lengthening your limbs to ridiculous reach amuses you. Furthermore you can see right through your hands as if looking through water. Perhaps there's some use to your <b>new goo dripping arms.</b>";
 
 	    player.arms.type = Arms.GOO;
 	    if (doOutput) outputText(desc);
@@ -6005,7 +6005,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 		  TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyGoo,doOutput);
 
-	    desc += "You suddenly lose shape turning into a puddle on the ground. Confused you begin to try and stand up   At the center of the mass that is your translucent " + player.skinTone + " body, you actually do have something solid that allows you to shape your form, a heart, or more accurately, a core. You try and pull yourself back up, translucent liquid arms and torso shaping back from your body mass as you need them. Once you've recovered the top of your goey human shape you sigh in relief. Curious you begin to try out your new very malleable form reshaping yourself in various forms from a cube to a literal human dildo. Giggling you take back your standard shape thinking of the many naughty things you can do now with this gooey body of yours.";
+	    desc += "You suddenly lose shape turning into a puddle on the ground. Confused you begin to try and stand up   At the center of the mass that is your translucent [color] body, you actually do have something solid that allows you to shape your form, a heart, or more accurately, a core. You try and pull yourself back up, translucent liquid arms and torso shaping back from your body mass as you need them. Once you've recovered the top of your goey human shape you sigh in relief. Curious you begin to try out your new very malleable form reshaping yourself in various forms from a cube to a literal human dildo. Giggling you take back your standard shape thinking of the many naughty things you can do now with this gooey body of yours.";
 
 	    player.rearBody.type = RearBody.METAMORPHIC_GOO;
 	    if (doOutput) outputText(desc);
@@ -10024,7 +10024,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			else desc += "chest";
 				desc += ". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ";
 			//if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-			//else outputText(player.skinTone + " " + player.skinDesc);
+			//else outputText(player.bodyColor + " " + player.skinDesc);
 			desc += "[skin full] remains. <b>You've lost a row of breasts!</b>";
 
 			if (doOutput) outputText(desc);
@@ -11877,13 +11877,13 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					var desc:String = "[pg]";
 
 					if (player.cocks.length > cock){
-						desc += "You feel a strange tingling in your " + num2Text2(cock+1) + " cock. You remove your [armor] and look down and witness your cock shifting into a peculiar form. Its tapered, [skinTone] and crowned by several colorful balls that look sort of like knots. Its covered in sweet smelling dust...  you're secreting pollen!  <b>You now have a";
+						desc += "You feel a strange tingling in your " + num2Text2(cock+1) + " cock. You remove your [armor] and look down and witness your cock shifting into a peculiar form. Its tapered, [color] and crowned by several colorful balls that look sort of like knots. Its covered in sweet smelling dust...  you're secreting pollen!  <b>You now have a";
 						if(player.tentacleCocks() > 0) desc += "nother";
 						desc +=" plantlike stamen cock!</b>";
 					}
 					else {
 						desc += GrowCockGenericText();
-						desc += "You feel a strange tingling in your " + num2Text2(cock+1) + " cock. You remove your [armor] and look down and witness your cock shifting into a peculiar form. Its tapered, [skinTone] and crowned by several colorful balls that look sort of like knots. Its covered in sweet smelling dust...  you're secreting pollen!  <b>You now have a plantlike stamen cock!</b>";
+						desc += "You feel a strange tingling in your " + num2Text2(cock+1) + " cock. You remove your [armor] and look down and witness your cock shifting into a peculiar form. Its tapered, [color] and crowned by several colorful balls that look sort of like knots. Its covered in sweet smelling dust...  you're secreting pollen!  <b>You now have a plantlike stamen cock!</b>";
 						player.createCock();
 					}
 					if (doOutput) outputText(desc);

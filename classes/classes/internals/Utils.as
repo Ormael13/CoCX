@@ -498,6 +498,46 @@ public class Utils extends Object
 
 			return tar[rand(tar.length)];
 		}
+		
+		/**
+		 * Pick a weighted random item.
+		 * Weights <= 0 or NaN are ignored.
+		 * Weight of Infinity means "return this value"
+		 * If no suitable item, return null
+		 * @param {[][]} pairs Pairs of [weight, value]
+		 * @example
+		 * weightedRandom([
+		 *   [1, "ketchup"],
+		 *   [5, "mayo"],
+		 *   [14, "cum"]
+		 * ])
+		 * // would return "ketchup" with 5% chance, "mayo" with 25%, and "cum" with 70%
+		 */
+		public static function weightedRandom(...pairs):* {
+			var sum:Number = 0;
+			if (pairs.length == 0) {
+				return null;
+			}
+			for each (var item:Array in pairs) {
+				if (item.length != 2) {
+					throw new Error("Invalid weightedRandom item");
+				}
+				var weight:Number = item[0];
+				if (weight === Infinity) return item[1];
+				if (isFinite(weight) && weight > 0) {
+					sum += weight;
+				}
+			}
+			var roll:Number = Math.random()*sum;
+			item = null;
+			for each (item in pairs) {
+				weight = item[0];
+				if (!isFinite(weight) || weight <= 0) continue;
+				roll -= weight;
+				if (roll <= 0) break;
+			}
+			return item;
+		}
 
 		/**
 		 * Utility function to search for a specific value within a target array or collection of values.

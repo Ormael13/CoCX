@@ -2535,7 +2535,7 @@ public class Soulforce extends BaseContent
 	}
 	public function MarbleGargoyleForm():void {
 		flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 1;
-		player.skinTone = "light grey";
+		player.skinMaterialColor = "light grey";
 		player.hairColor = "light grey";
 		clearOutput();
 		outputText("You have become marble gargoyle. Now choose your wings shape.");
@@ -2543,7 +2543,7 @@ public class Soulforce extends BaseContent
 	}
 	public function AlabasterGargoyleForm():void {
 		flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 2;
-		player.skinTone = "quartz white";
+		player.skinMaterialColor = "quartz white";
 		player.hairColor = "quartz white";
 		clearOutput();
 		outputText("You have become alabaster gargoyle. Now choose your wings shape.");
@@ -2638,11 +2638,11 @@ public class Soulforce extends BaseContent
 	}
 	public function GargoyleBodyChanges():void {
 		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
-			player.skinTone = "light grey";
+			player.skinMaterialColor = "light grey";
 			player.hairColor = "light grey";
 		}
 		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) {
-			player.skinTone = "quartz white";
+			player.skinMaterialColor = "quartz white";
 			player.hairColor = "quartz white";
 		}
 		player.skin.setBaseOnly({type:Skin.STONE});

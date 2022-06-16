@@ -846,7 +846,7 @@ import classes.lists.Gender;
 			outputText("\n\nAndy actually blushes, \"<i>Don't say it like that. I feel like you're teasing me.</i>\" he chuckles, \"<i>...but yeah. I love it, nothing like it. I can lick and stick and play in an ass all day long.</i>\" Then with a mischievous grin you tell him to prove it.");
 			outputText("\n\nAndy bites his lip as you begin to shed your [armor], revealing your body with exaggerated slowness as you watch his dog cock twitch in anticipation.");
 			outputText("\n\n\"<i>Oh hell yes.</i>\" He gasps, licking his lips as his eyes travel southward. Turning away you present your [ass] for his viewing pleasure.");
-			outputText("\n\nYou feel hands glide onto your waist. Soft fingers slide against your " + player.skinFurScales() + " and lift your [ass] spreading your " + player.skinTone + " cheeks apart to reveal your [asshole]. You feel a cool dollop of spit silently land on your [ass] and slide down your crack, a teasing tingle of wetness that makes your ass flex. Before the spit slides much lower than your pucker you feel a tongue press into your taint and lick upwards, wiping a wet swath up your [ass].");
+			outputText("\n\nYou feel hands glide onto your waist. Soft fingers slide against your " + player.skinFurScales() + " and lift your [ass] spreading your [color] cheeks apart to reveal your [asshole]. You feel a cool dollop of spit silently land on your [ass] and slide down your crack, a teasing tingle of wetness that makes your ass flex. Before the spit slides much lower than your pucker you feel a tongue press into your taint and lick upwards, wiping a wet swath up your [ass].");
 			outputText("\n\nYou bite your lip as he begins to lick up and down, his tongue playing in your [ass] like a kid at a playground. He kisses your exposed cheeks, he nibbles at your taint with soft wet lips. You tremble, you gasp and you can't help pushing backward as he teases you into frenzy. A hand lands on your [ass] with a hard smack, and then another. He grabs as much extra skin between his hands as he can and stiffens his tongue.");
 			outputText("\n\nAs he begins tongue fucking your [asshole] you can't help pushing back against his tongue, against that wet elation inducing muscle so talented you're singing. Those wet lips begin to nibble and suck, coming off your [asshole] with hard pop before repeating the process. It is bliss unending as he continues to loudly pop, pop, pop against your quivering [asshole].");
 			outputText("\n\nYou're cringing and convulsing, you're out of control and every sensation is a reminder of who really runs this show. Not Andy or you or your ass… it's that tongue, it's those lips, it's the mind-blowing waves of pleasure breaking through your body like a tidal wave. The sloppy slurp, slurp, slurps and tingling shudders have you almost crazed with need.");
@@ -1574,7 +1574,7 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Fur/scales fall out
-			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && (player.hasCoat() || player.skinTone != "gray" || player.skinAdj != "tough")) {
+			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && (player.hasCoat() || player.skinMaterialColor != "gray" || player.skinAdj != "tough")) {
 				outputText("\n\n");
 				if (player.hasCoat()) {
 					switch (player.coatType()) {
@@ -1666,7 +1666,7 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Change face to rhino
-			if (rand(4) == 0 && changes < changeLimit && player.ears.type == Ears.RHINO && player.skinTone == "gray" && player.faceType != Face.RHINO) {
+			if (rand(4) == 0 && changes < changeLimit && player.ears.type == Ears.RHINO && player.skinMaterialColor == "gray" && player.faceType != Face.RHINO) {
 				outputText("\n\n");
         CoC.instance.transformations.FaceRhino.applyEffect();
 				changes++;

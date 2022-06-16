@@ -71,7 +71,7 @@ public class SandMother extends Monster
 			damage = player.takeFireDamage(damage, true);
 			removeStatusEffect(StatusEffects.Gigafire);
 		}
-			
+		
 		//*Telekinesis
 		//Throws the PC against the wall.  Does more damage to shorter, thinner PCs.
 		public function sandMotherTelekinesis():void {
@@ -141,7 +141,7 @@ public class SandMother extends Monster
 			this.tallness = 8*12+6;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "bronzed";
+			this.bodyColor = "bronzed";
 			this.hairColor = "platinum-blonde";
 			this.hairLength = 15;
 			initStrTouSpeInte(64, 80, 55, 64);

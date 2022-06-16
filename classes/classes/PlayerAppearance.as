@@ -496,7 +496,7 @@ public class PlayerAppearance extends BaseContent {
 			if(player.skinType == Skin.FUR) {
 				return "You have no hair, only a thin layer of fur atop of your head.";
 			} else {
-				return "You are completely bald, displaying [skintone] [skin.type] where your hair would otherwise be.";
+				return "You are completely bald, displaying [color] [skin.type] where your hair would otherwise be.";
 			}
 		}
 	}

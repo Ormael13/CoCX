@@ -74,7 +74,7 @@ public class SeaAnemone extends Monster
 			this.tallness = 5*12+5;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_NOTICEABLE;
-			this.skinTone = "purple";
+			this.bodyColor = "purple";
 			this.hairColor = "purplish-black";
 			this.hairLength = 20;
 			this.hairType = Hair.ANEMONE;

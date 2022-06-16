@@ -4689,9 +4689,9 @@ private function urtasRuinedOrgasmsFromGooPartII():void {
 		flags[kFLAGS.MET_OLIVIA]++;
 	}
 	//(Goo skin not white?)
-	if(player.skinTone != "milky white") {
+	if(player.skinMaterialColor != "milky white") {
 		outputText("\n\nThen you catch sight of your body...  You hold up a hand in surprise.  Your skin has changed color!  Your time inside Urta's balls has taken its toll, it seems.  <b>You now have milky white skin!</b>");
-		player.skinTone = "milky white";
+		player.skinMaterialColor = "milky white";
 		player.cumMultiplier += 10;
 	}
 	outputText("\n\nUrta and ");

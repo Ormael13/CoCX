@@ -2,7 +2,7 @@
  * ...
  * @author Canadian Snas
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.Appearance;
 import classes.AssClass;
@@ -213,7 +213,7 @@ public class Belisa extends Monster
 			return str;
 		}
 		
-		public function Belisa() 
+		public function Belisa()
 		{
 			if (flags[kFLAGS.BELISA_LVL_UP] < 1) {
 				initStrTouSpeInte(80, 90, 100, 250);
@@ -260,7 +260,7 @@ public class Belisa extends Monster
 			this.tallness = 8*12+5;
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
-			this.skinTone = "pale";
+			this.bodyColor = "pale";
 			this.hairColor = "black";
 			this.hairLength = 24;
 			this.weaponName = "daggers";
@@ -301,7 +301,7 @@ public class Belisa extends Monster
 				this.createPerk(PerkLib.NaturalHealingMajor, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.BELISA_LVL_UP] >= 8) this.createPerk(PerkLib.PeerlessSpirituality, 0, 0, 0, 0);
-			checkMonster();	
+			checkMonster();
 		}
 	}
 }

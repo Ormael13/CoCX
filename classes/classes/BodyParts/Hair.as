@@ -298,7 +298,7 @@ public class Hair extends BodyPart {
 			if(creature.skinType == Skin.FUR)
 				return "You have no hair, only a thin layer of fur atop of your head.";
 			else {
-				return "You have a completely " + getHairLength(creature) + " head, showing only shiny [skintone] [skin.type].";
+				return "You have a completely " + getHairLength(creature) + " head, showing only shiny [color] [skin.type].";
 			}
 		}
 

@@ -141,7 +141,7 @@ public class Tail extends SaveableBodyPart {
 			if (player.hasFur()) {
 				desc += "furry, and [skin coat.color] ";
 			} else {
-				desc += "gooey, and [skintone] ";
+				desc += "gooey, and [color] ";
 			}
 			desc += "tail extends from your [butt], bouncing up and down as you move to assist in your balance.";
 		},
@@ -178,7 +178,7 @@ public class Tail extends SaveableBodyPart {
 	public static const MOUSE: int = 16;
 	EnumValue.add(Types, MOUSE, "MOUSE", {
 		name:"mouse",
-		appearanceDesc: "A naked, [skintone] mouse tail pokes from your butt, dragging on the ground and twitching occasionally.",
+		appearanceDesc: "A naked, [color] mouse tail pokes from your butt, dragging on the ground and twitching occasionally.",
 		isLong: true
 	});
 	public static const FERRET: int = 17;
@@ -344,7 +344,7 @@ public class Tail extends SaveableBodyPart {
 	public static const HINEZUMI: int = 43;
 	EnumValue.add(Types, HINEZUMI, "HINEZUMI", {
 		name:"hinezumi",
-		appearanceDesc: "A blazing, [skintone] mouse tail pokes out from your [butt]. It has a tendency to light things on fire if you are not careful."
+		appearanceDesc: "A blazing, [color] mouse tail pokes out from your [butt]. It has a tendency to light things on fire if you are not careful."
 	});
 	public static const THUNDERBIRD: int = 44;
 	EnumValue.add(Types, THUNDERBIRD, "THUNDERBIRD", {

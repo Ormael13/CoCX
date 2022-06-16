@@ -100,7 +100,7 @@ import classes.Items.*;
 			player.cocks[0].knotMultiplier = 2.2;
 			//Butt: Loose"	"Skin: Purple
 			player.ass.analLooseness = 3;
-			player.skinTone = "purple";
+			player.skinMaterialColor = "purple";
 			//Hair: Back length orange
 			player.hairLength = 30;
 			player.hairColor = "orange";
@@ -225,7 +225,7 @@ import classes.Items.*;
 			player.nipplesPShort = "silver studs";
 			player.nipplesPLong = "Silver studs";
 
-			player.skinTone = "ghostly pale";
+			player.skinMaterialColor = "ghostly pale";
 			player.createPerk(PerkLib.Incorporeality, 0, 0, 0, 0);
 			player.setArmor(armors.I_CORST);
 			player.level = 5;
@@ -305,7 +305,7 @@ import classes.Items.*;
 			player.fertility = 5;
 			player.hairLength= 26;
 			player.hairColor = "blond";
-			player.skinTone = "light";
+			player.skinMaterialColor = "light";
 			player.nippleLength = 0.2;
 			player.createBreastRow();
 			player.breastRows[0].breastRating = 0;
@@ -503,7 +503,7 @@ import classes.Items.*;
 			//- fox ears
 			player.ears.type = Ears.FOX;
 			//- olive complexion
-			player.skinTone = "olive";
+			player.skinMaterialColor = "olive";
 			//- demon tongue (oral fetish ;d)
 			player.tongue.type = Tongue.DEMONIC;
 			//- 5 foot 9 inch tall
@@ -573,7 +573,7 @@ import classes.Items.*;
 			player.beardStyle = 0;
 			player.tone = 30;
 			player.thickness = 50;
-			player.skinTone = "olive";
+			player.skinMaterialColor = "olive";
 			player.hairColor = "black";
 			player.balls = 0;
 			player.cumMultiplier = 1;
@@ -610,7 +610,7 @@ import classes.Items.*;
 			player.hairLength = 30;
 			player.hairColor = "light blonde";
 			player.breastRows[0].breastRating = 4;
-			player.skinTone = "light";
+			player.skinMaterialColor = "light";
 			//Bow skill 100 (Sorry Kelt, I can't hear your insults over my mad Robin Hood skillz)
 			player.createStatusEffect(StatusEffects.Kelt,100,0,0,0);
 			//player.createKeyItem("Bow",0,0,0,0);
@@ -701,7 +701,7 @@ import classes.Items.*;
 			player.createPerk(PerkLib.BigTits, 1.5, 0, 0, 0);
 			player.ears.type = Ears.BUNNY;
 			player.tailType = Tail.RABBIT;
-			player.skinTone = "tan";
+			player.skinMaterialColor = "tan";
 			player.hairColor = "platinum blonde";
 			player.teaseLevel = 3;
 		}
@@ -796,7 +796,7 @@ import classes.Items.*;
 			//Face = Horse
 			player.faceType = Face.HORSE;
 			//Skin type = Black Fur
-			player.skinTone = "brown";
+			player.furColor = "brown";
 			player.hairColor = "black";
 			player.skin.growFur({});
 			//Legs/Feet = Digigrade hooved
@@ -857,7 +857,7 @@ import classes.Items.*;
 			player.hairLength = 16;
 			//Hair Color- Black
 			//Skin Color- Light
-			player.skinTone = "light";
+			player.skinMaterialColor = "light";
 			//Starting Equipment: Wizard's Robe, Wizards Staff, and one White and one Black book in inventory.
 			//equipArmor("inquisitor's corset",false);
 			player.setArmor(armors.W_ROBES);
@@ -901,7 +901,7 @@ import classes.Items.*;
 			player.fertility = 20;
 			//Appearence: 7ft 9in tall covered in thick shining silver fur, has a vulpine head and ears, eight breast all the same size at DD, dragon like wings, tail, and legs. With a large mare like pussy, 6 dicks, two equine, two dragon, two vulpine, all 15in long and 3 in wide, and four nuts 5 in across
 			player.tallness = 93;
-			player.skinTone = "black";
+			player.furColor = "black";
 			player.hairColor = "silver";
 			player.skin.growFur({});
 			player.faceType = Face.FOX;
@@ -1028,9 +1028,9 @@ import classes.Items.*;
 			//25 thickness
 			player.thickness = 25;
 			player.skin.growFur({});
-			player.skinTone = "light";
+			player.skinMaterialColor = "light";
 			player.hairColor = "silver";
-			player.coatColor = "white";
+			player.furColor = "white";
 			player.hairLength=10;
 			//shoulder length silver hair
 			player.balls = 0;
@@ -1083,7 +1083,7 @@ import classes.Items.*;
 			player.butt.type = 8;
 			player.thickness = 25;
 			player.tone = 40;
-			player.skinTone = "olive";
+			player.skinMaterialColor = "olive";
 			player.hairLength = 30;
 			player.hairColor = "deep red";
 			player.femininity = 90;
@@ -1127,7 +1127,7 @@ import classes.Items.*;
 			player.fertility = 5;
 			player.hairLength= 26;
 			player.hairColor = "white";
-			player.skinTone = "light";
+			player.skinMaterialColor = "light";
 			player.nippleLength = 0.2;
 			player.createBreastRow();
 			player.createBreastRow();
@@ -1200,7 +1200,7 @@ import classes.Items.*;
 			player.thickness = 0;
 			//Fallen Angel gear (complete with flaming sword and light arrows)
 			//dark skin tone
-			player.skinTone = "dark";
+			player.skinMaterialColor = "dark";
 			player.setWeapon(weapons.S_BLADE);
 			//Elfin ears
 			player.ears.type = Ears.ELFIN;
@@ -1372,7 +1372,7 @@ import classes.Items.*;
 			player.beardStyle = 0;
 			player.tone = 0;
 			player.thickness = 100;
-			player.skinTone = "pale";
+			player.skinMaterialColor = "pale";
 			player.hairColor = "black";
 			player.balls = 2;
 			player.cumMultiplier = 1;
@@ -1515,7 +1515,7 @@ import classes.Items.*;
 			//Butt: Just as loose
 			player.ass.analLooseness = 5;
 			//"Skin: Tanned
-			player.skinTone = "tan";
+			player.skinMaterialColor = "tan";
 			//Hair: Ridiculously long red
 			player.hairLength = 80;
 			player.hairColor = "red";
@@ -1571,7 +1571,7 @@ import classes.Items.*;
 			player.beardStyle = 0;
 			player.tone = 30;
 			player.thickness = 50;
-			player.skinTone = "light";
+			player.skinMaterialColor = "light";
 			player.hairColor = "brown";
 			player.balls = 0;
 			player.cumMultiplier = 1;
@@ -1602,7 +1602,7 @@ import classes.Items.*;
 			player.hairColor = "dark blue";
 			player.hairType = Hair.GHOST;
 			player.skinAdj = "smooth";
-			player.skinTone = "sanguine";
+			player.skinMaterialColor = "sanguine";
 			player.tallness = 68;
 			player.hips.type = 7;
 			player.butt.type = 6;
@@ -1671,7 +1671,7 @@ import classes.Items.*;
 			player.butt.type = 3;
 			player.hips.type = 3;
 			player.createBreastRow();
-			player.skinTone = "fair";
+			player.skinMaterialColor = "fair";
 			player.setArmor(armors.H_GARB_);
 			player.setShield(shields.BLASPHE);
 			player.setJewelry(jewelries.MSIGNIT);
@@ -1948,7 +1948,7 @@ import classes.Items.*;
 			player.butt.type = Butt.RATING_TIGHT;
 			player.thickness = rand(10)+10; // lithe
 			player.tone = rand(10)+10; // not in a good shape...
-			player.skinTone = "light";
+			player.skinMaterialColor = "light";
 			player.hairColor = "black";
 			player.hairLength = rand(50)+5;
 			player.femininity = rand(30)+35;

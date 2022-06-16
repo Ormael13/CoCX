@@ -1,4 +1,4 @@
-package classes.Scenes.Areas.Plains 
+package classes.Scenes.Areas.Plains
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
@@ -9,7 +9,7 @@ import classes.internals.*;
 	 * ...
 	 * @author Kitteh6660
 	 */
-	public class BazaarGatekeeper extends Monster 
+	public class BazaarGatekeeper extends Monster
 	{
 		
 		public function scimitarSpecial():void {
@@ -135,7 +135,7 @@ import classes.internals.*;
 			doNext(cleanupAfterCombat);
 		}
 		
-		public function BazaarGatekeeper() 
+		public function BazaarGatekeeper()
 		{
 			this.a = "the ";
 			this.short = "guard";
@@ -148,7 +148,7 @@ import classes.internals.*;
 			this.tallness = 10*12;
 			this.hips.type = 2;
 			this.butt.type = 0;
-			this.skinTone = "crimson";
+			this.bodyColor = "crimson";
 			this.hairColor = "black";
 			this.hairLength = 8;
 			initStrTouSpeInte(124, 150, 104, 70);
