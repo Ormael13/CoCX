@@ -32,12 +32,11 @@ public class SkinLayer extends BodyPart {
 	}
 	public function defaultDesc():String {
         //if it throws an error hear, it means Svalkash fucked up again.
-        // Add the check like "if (Skin.SkinTypes[type])" then to check for undefined        
+        // Add the check like "if (Skin.SkinTypes[type])" then to check for undefined
 		return Skin.SkinTypes[type].name || "skin";
 	}
 	public function defaultAdj():String {
-		if (type === Skin.GOO) return "goopey";
-		return "";
+		return Skin.SkinTypes[type].adj || "";
 	}
 	public function get desc():String {
 		return _desc || defaultDesc();

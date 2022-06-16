@@ -79,8 +79,7 @@ public class PigBoarFatMutation extends IMutationPerkType
         }
 
         public function PigBoarFatMutation() {
-            super("Pig Boar Fat IM", "Pig Boar Fat", ".");
-            maxLvl = 3;
+            super("Pig Boar Fat IM", "Pig Boar Fat", SLOT_FAT, 3);
         }
 
     }

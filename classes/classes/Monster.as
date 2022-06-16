@@ -1560,9 +1560,6 @@ import flash.utils.getQualifiedClassName;
 		public function checkMonster():Boolean
 		{
 			_checkCalled = true;
-			if(this.wings.type != Wings.NONE && this.wings.desc == "non-existant"){
-				this.wings.desc = Appearance.DEFAULT_WING_DESCS[this.wings.type]
-			}
 			checkError = validate();
 			if (checkError.length>0) CoC_Settings.error("Monster not initialized:"+checkError);
 			return checkError.length == 0;
