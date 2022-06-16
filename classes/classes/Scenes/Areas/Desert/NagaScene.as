@@ -1086,9 +1086,7 @@ public function naggaSqueeze():void {
 	outputText("Your coils wrap tighter around your prey, leaving [monster him] short of breath. You can feel it in your tail as [monster his] struggles are briefly intensified. ");
 	var damageBonus:int = 0;
 	var damage:int = monster.maxHP() * (.10 + rand(15) / 100);
-	if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= SceneLib.combat.oniRampagePowerMulti();
-	if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-	if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= SceneLib.combat.tyrantStagePowerMulti();
+    damage = combat.statusEffectBonusDamage(damage);
 	if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
 	if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 	if (player.lowerBody == LowerBody.FROSTWYRM) {
