@@ -3984,7 +3984,6 @@ public function letKatKnotYourCuntPussyFuck():void {
 	outputText("ou get dressed, thank her, and head back to your camp.");
 	//minus lust, slimefeed, Player returns to camp
 	player.sexReward("cum", "Vaginal");
-	player.orgasm();
 	orgasm();
 	dynStats("sen", -1);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
@@ -4227,8 +4226,6 @@ public function suckedNFuckedByKat():void {
 	//lust -100, slimefeed, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
 	player.sexReward("cum", "Vaginal");
 	player.sexReward("cum", "Anal");
-	player.slimeFeed();
-	player.orgasm();
 	orgasm();
 	dynStats("sen", -1);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
@@ -4528,7 +4525,7 @@ private function katherineGoesDownOnTheGirlsOhYahBabyLesbo():void {
 	outputText("You simply groan at the absolutely terrible pun and get back up, redressing yourself and heading back into the streets after a quick peck to thank her for the time.");
 	doNext(camp.returnToCampUseOneHour);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
-	player.orgasm();
+	player.sexReward("saliva", "Vaginal");
 }
 
 //[Male/Herm]
@@ -4566,7 +4563,7 @@ private function katherineLicksAllTheBoyPenises():void {
 
 	outputText("Weakly, she collapses onto her " + catGirl("smooth", "furry") + "  behind on the ground, smiling up at you.  \"<i>I take it you enjoyed that?</i>\" she teases.  You admit she did very well, " + (isAt(KLOC_KATHS_APT) ? "gently stroking her hair in thanks" : "helping her up and to her own 'bed'") + ", then get dressed and head back out into Tel'Adre's streets.");
 	//lust -100 regardless of sex, return to wherever
-	player.orgasm();
+	player.sexReward("saliva", "Dick");
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -6020,10 +6017,10 @@ private function drunkFuck():void {
 		outputText("It was fucking good.  It’s been a while since you got dominated like that and it’s so unlike Kath.  Secretly you wonder if you could get her to do this again, but out loud you tell her that you’re going to come up with some appropriate punishment for this.  Kath just nods her head.  Apparently fading alcohol and the orgasm have turned her back to her usual submissive self.");
 
 	outputText("\n\nWhen the knot" + (dPen ? "s finally come" : " finally comes") + " free you get up, get dressed and walk out into the bar.  Several patrons, many sporting erections, give you applause.  Kath, still lying on the floor in a puddle of cum, tries to shrink down to nothing.  Even though she’s almost fully clothed she pulls a broken chair in front of her to try and hide from the bar.\n\n");
-
-	if (player.cor < 25)
+	if (player.cor < 75 - player.corruptionTolerance) sceneHunter.print("Check failed - not corrupt enough!");
+	if (player.cor < 25 - player.corruptionTolerance)
 		outputText("You blow Kath a kiss, resulting in a few more cat calls.  Then you close the door mouthing ‘later’ to her.  She nods and starts to collect herself, happy to be out of the public eye right now.");
-	else if (player.cor < 75)
+	else if (player.cor < 75 - player.corruptionTolerance)
 		outputText("You take a bow and blow Kath a kiss.  The other patrons love it and you prop the door wide open so that Kath will be embarrassed long after you leave.");
 	else {
 		outputText("You give Katherine an evil grin and stride back into the room.  The other patrons watch, some stroking their erections or slipping fingers into their pussies.  \"<i>" + playerText() + " - what are you doing?</i>\" she asks, quite worried.  You pull her up in front of you and stand behind her, much as she stood behind you moments ago." + (player.hasCock() ? "  Your partially deflated cock rubs against her backside, but that’s not what she should be worried about." : ""));
@@ -6037,6 +6034,7 @@ private function drunkFuck():void {
 			outputText("After a few minutes of playing with her you finally let Kath go.  There’s a definite feeling of disappointment from the bar, but you don’t think you could get Kath to do something in front of other people.  Maybe someday you’ll have her so enthralled that she’ll do it.\n\n");
 
 			outputText("You give her a quick kiss and leave the bar, whistling.");
+			sceneHunter.print("Check failed - not submissive enough!");
 		}
 		else {
 			outputText("You ignore her of course.  " + (doneSubmissive(KBIT_SUB_PUBLIC_EXHIBITION) ? "You know your pet loves it when you force her to do things." : "It’s time for Kath to learn a new trick.  You’ve always thought her body could please a crowd, but after today’s behavior you’ve decided to prove it!"));
