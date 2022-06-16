@@ -1128,6 +1128,7 @@
 <template id="bp-select">
     <v-select
             :label="label"
+            :disabled="disabled"
             :value="value"
             v-on:input="$emit('input',$event)"
             persistent-hint
@@ -1140,6 +1141,7 @@
 <template id="select-color">
     <v-select
             :items="colors"
+            :disabled="disabled"
             :label="label"
             :value="value"
             v-on:input="$emit('input',$event)"
@@ -1157,6 +1159,7 @@
 </template>
 <template id="slider">
     <v-slider
+            :disabled="disabled"
             :value="value"
             v-on:input="$emit('input',$event)"
             :color="color"
@@ -1193,6 +1196,7 @@
 </template>
 <template id="tier-slider">
     <slider
+            :disabled="disabled"
             :value="value"
             v-on:input="$emit('input', $event)"
             :dense="dense"
@@ -1442,7 +1446,7 @@
 	});
 	// noinspection JSAnnotator
 	Vue.component('select-color', {
-		props: ['value', 'label'],
+		props: ['value', 'label', 'disabled'],
 		template: '#select-color',
 		data() {
 			return {
@@ -1452,7 +1456,7 @@
 	});
 	// noinspection JSAnnotator
 	Vue.component('bp-select', {
-		props: ['label', 'value', 'map'],
+		props: ['label', 'value', 'map', 'disabled'],
 		template: '#bp-select',
 		data() {
 			return {
@@ -1469,7 +1473,7 @@
 	});
 	// noinspection JSAnnotator
 	Vue.component('slider', {
-		props: ['value', 'label', 'persistentHint', 'hint', 'min', 'max', 'step', 'color', 'minWidth', 'hideDetails', 'dense', 'input'],
+		props: ['value', 'label', 'persistentHint', 'hint', 'min', 'max', 'step', 'color', 'minWidth', 'hideDetails', 'dense', 'input', 'disabled'],
 		template: '#slider',
 		data() {
 			return {
@@ -1508,7 +1512,7 @@
 	});
 	// noinspection JSAnnotator
 	Vue.component('tier-slider', {
-		props: ['value', 'label', 'min', 'max', 'step', 'tiers', 'color', 'dense', 'input', 'minWidth'],
+		props: ['value', 'label', 'min', 'max', 'step', 'tiers', 'color', 'dense', 'input', 'minWidth', 'disabled'],
 		template: '#tier-slider',
 		data() {
 			return {
