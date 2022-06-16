@@ -1086,9 +1086,7 @@ public function naggaSqueeze():void {
 	outputText("Your coils wrap tighter around your prey, leaving [monster him] short of breath. You can feel it in your tail as [monster his] struggles are briefly intensified. ");
 	var damageBonus:int = 0;
 	var damage:int = monster.maxHP() * (.10 + rand(15) / 100);
-	if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= SceneLib.combat.oniRampagePowerMulti();
-	if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-	if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= SceneLib.combat.tyrantStagePowerMulti();
+    damage = combat.statusEffectBonusDamage(damage);
 	if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
 	if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 	if (player.lowerBody == LowerBody.FROSTWYRM) {
@@ -1119,7 +1117,7 @@ public function naggaTease():void {
 	clearOutput();
 	//(if poisoned)
 	if (monster.hasStatusEffect(StatusEffects.NagaVenom) || monster.gender == 0 || monster.lustVuln == 0) {
-		if (monster.hasStatusEffect(StatusEffects.NagaVenom)) outputText("You attempt to stimulate [themonster] by rubbing [monster his] nether regions, but [monster his] seems too affected by your poison to react.\n\n");
+		if (monster.hasStatusEffect(StatusEffects.NagaVenom)) outputText("You attempt to stimulate [themonster] by rubbing [monster his] nether regions, but [monster he] seems too affected by your poison to react.\n\n");
 		if (monster.gender == 0) outputText("You look over [themonster], but can't figure out how to tease such an unusual foe.\n\n");
 		if (monster.lustVuln == 0) outputText("You attempt to stimulate [themonster] by rubbing [monster his] nether regions, but it has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
         enemyAI();

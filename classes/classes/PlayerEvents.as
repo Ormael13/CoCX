@@ -12,8 +12,6 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
-import classes.GeneticMemories.BallsMem;
-import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.*;
 import classes.IMutations.IMutationsLib;
 import classes.Items.*;
@@ -23,7 +21,6 @@ import classes.Scenes.Camp.UniqueCampScenes;
 import classes.Scenes.Dreams;
 import classes.Scenes.Dungeons.DeepCave.ValaScene;
 import classes.Scenes.Holidays;
-import classes.Scenes.Metamorph;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.DriderTown;
@@ -51,7 +48,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean {
-			var needNext:Boolean = false;
+			var needNext:Boolean;
 			checkedTurkey = 0;
 			checkedDream = 0;
 
@@ -306,7 +303,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			needNext = hourlyCheckRacialPerks();
 			End("PlayerEvents","hourlyCheckRacialPerks");
 			if (player.hasStatusEffect(StatusEffects.Feeder)) { //Feeder checks
-				if (player.cor <= 20) { //Go away if pure
+				if (player.cor <= (20-player.corruptionTolerance)) { //Go away if pure
 					outputText("\nThe desire to breastfeed fades into the background.  It must have been associated with the corruption inside you.\n\n(<b>You have lost the 'Feeder' perk.</b>)\n");
 					player.removeStatusEffect(StatusEffects.Feeder);
 					player.removePerk(PerkLib.Feeder);
@@ -501,7 +498,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.hasKeyItem("Ruby Heart") >= 0) { //Regain slime core
-				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.SlimeCore) && player.isGoo() && player.racialScore(Races.SLIME) >= 4 && player.vaginalCapacity() >= 9000 && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.arms.type == Arms.GOO && LowerBody.isGoo(player)) {
+				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.SlimeCore) && player.isGoo() && player.racialScore(Races.SLIME) >= 4 && player.vaginalCapacity() >= 9000 && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.arms.type == Arms.GOO) {
 					outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n");
 					outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n");
 					//(Reduces Fluid Addiction to a 24 hour intake requirement).
@@ -540,7 +537,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 				else { //Slime core reduces fluid need rate
-					if (player.hasPerk(PerkLib.SlimeCore) || player.hasPerk(PerkLib.DarkSlimeCore))
+					if (player.isSlime())
 						player.addStatusValue(StatusEffects.SlimeCraving, 1, 0.5);
 					else player.addStatusValue(StatusEffects.SlimeCraving, 1, 1);
 					if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18) {
@@ -799,9 +796,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 				}
 				//Daily regeneration of soulforce for non soul cultivators && Metamorph bonus SF gain till cap
-				if (!player.hasPerk(PerkLib.JobSoulCultivator) && (player.soulforce < player.maxSoulforce())) {
+				if (!player.hasPerk(PerkLib.JobSoulCultivator) && (player.soulforce < player.maxOverSoulforce())) {
 					player.soulforce += 50;
-					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+					if (player.soulforce > player.maxOverSoulforce()) player.soulforce = player.maxOverSoulforce();
 				}
 				if (player.hasPerk(PerkLib.Metamorph) && player.perkv1(PerkLib.Metamorph) < 18) player.addPerkValue(PerkLib.Metamorph, 1, 1);
 				if (player.hasPerk(PerkLib.MetamorphEx) && player.perkv1(PerkLib.MetamorphEx) < 10) player.addPerkValue(PerkLib.MetamorphEx, 1, 1);
@@ -1397,7 +1394,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					EngineCore.ManaChange(100 + (player.inte*2), true);
 				}
 				EngineCore.changeFatigue(-(100 + (player.spe*2)));
-				if (player.soulforce < player.maxSoulforce()) {
+				if (player.soulforce < player.maxOverSoulforce()) {
 					EngineCore.SoulforceChange(500 + (player.wis*2), true);
 				}
 				outputText("You feel energised and empowered by the life force drained out of the fluids of your recent blind date. What a meal!");
@@ -1432,7 +1429,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			else if (player.isRaceCached(Races.SALAMANDER) < 9 && !player.isRaceCached(Races.PHOENIX) && player.hasPerk(PerkLib.Lustzerker) && player.perkv4(PerkLib.Lustzerker) == 0 && !player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 1) { //Remove lustzerker perk if not meeting requirements
+			else if (!player.isRaceCached(Races.SALAMANDER) && !player.isRaceCached(Races.PHOENIX) && player.hasPerk(PerkLib.Lustzerker) && player.perkv4(PerkLib.Lustzerker) == 0 && !player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 1) { //Remove lustzerker perk if not meeting requirements
 				outputText("\nAll of sudden something change inside your body.  You think about a long while, until it dawned on you.  You can't feel that slight warm feeling inside your body anymore meaning for now no more lustzerking.\n\n(<b>Lost Perk: Lustzerker</b>)");
 				player.removePerk(PerkLib.Lustzerker);
 				needNext = true;
@@ -1761,8 +1758,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Levitation wing slot
 			if (player.wings.type == Wings.LEVITATION && player.rearBody.type != RearBody.GLACIAL_AURA && player.lowerBody != LowerBody.WENDIGO && player.lowerBody != LowerBody.GAZER) {
+				outputText("\nAs you do not meet the requirements, you also lose the knowledge on how to levitate!\nHint: Aura of the Yuki Onna or legs of the Wendigo or Gazer");
 				player.wings.type = Wings.NONE;
 				player.wings.desc = "non-existant";
+				needNext = true;
 			}
 			//Wendigo stuff
 			if (player.hasStatusEffect(StatusEffects.WendigoPsychosis) && !player.hasPerk(PerkLib.EndlessHunger) && ((flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger <= 0) || (flags[kFLAGS.HUNGER_ENABLED] <= 0 && player.lust >= player.maxLust()))) SceneLib.glacialRift.wendigoScene.becomeWendigo();
@@ -1924,9 +1923,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Soul Sense
-			if (player.maxSoulforce() >= 200 && player.hasPerk(PerkLib.SoulApprentice) && !player.hasPerk(PerkLib.SoulSense)) {
+			if (player.hasKeyItem("'Soul Sense and You' Manual") >= 0 && player.hasPerk(PerkLib.SoulPersonage) && !player.hasPerk(PerkLib.SoulSense)) {
 				outputText("\nDuring a casual walk around your camp you suddenly notice, or rather feel, something unexpected. Your surrounding blurs for a moment, to be replaced with a forest. You notice a goblin strolling nearby. Suddenly, she stops and slowly looks around, staring directly at you. A moment later, your vision of the forest becomes blurry, eventually fading away to be replaced by your camp and its surroundings. ");
-				outputText("You shake your head, trying to figure out what had just happened. The only solution that you find within yourself is something that the soul cultivators you met in He’Xin’Dao mentioned. Another sense that they had developed, which allowed them to perceive distant places or find specific people over long distances. It looks as though you developed it, even without training.\n");
+				outputText("You shake your head, trying to figure out what had just happened. The only solution that you find within yourself is something that mrs Shigure you met in He’Xin’Dao at lectures mentioned. Another sense that they had developed, which allowed them to perceive distant places or find specific people over long distances. It looks as though you finaly developed it too.\n");
+				player.removeKeyItem("'Soul Sense and You' Manual");
 				player.createPerk(PerkLib.SoulSense, 0, 0, 0, 0);
 				needNext = true;
 			}
@@ -2199,7 +2199,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nA sudden wave of pleasure strike you making you moan");
 				if (player.horns.type == Horns.UNICORN) {
 					outputText(" as your horn begins to split in two");
-					player.horns.type = Horns.BICORN;
+					transformations.HornsBicorn.applyEffect(false);
 				}
 				if (!InCollection(player.hairColor, bicornHairPalette)) {
 					CurentColor = randomChoice(bicornHairPalette);
@@ -2484,20 +2484,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.hasPerk(PerkLib.SpiderOvipositor) || player.hasPerk(PerkLib.BeeOvipositor) || player.hasPerk(PerkLib.MantisOvipositor)) { //Spider, Bee and Mantis ovipositor updates
-				if (player.hasPerk(PerkLib.SpiderOvipositor) && (!player.isDrider() || player.tailType != Tail.SPIDER_ADBOMEN)) { //Remove dat shit!
-					outputText("\n<b>Your ovipositor (and eggs) vanish since your body has become less spider-like.</b>\n");
-					player.removePerk(PerkLib.SpiderOvipositor);
-					needNext = true;
-				}
-				else if (player.hasPerk(PerkLib.BeeOvipositor) && player.tailType != Tail.BEE_ABDOMEN) { //Remove dat shit!
-					outputText("\n<b>Your ovipositor (and eggs) vanish since your body has become less bee-like.</b>\n");
-					player.removePerk(PerkLib.BeeOvipositor);
-					needNext = true;
-				}
-				else if (player.hasPerk(PerkLib.MantisOvipositor) && player.tailType != Tail.MANTIS_ABDOMEN) { //Remove dat shit!
-					outputText("\n<b>Your ovipositor (and eggs) vanish since your body has become less mantis-like.</b>\n");
-					player.removePerk(PerkLib.MantisOvipositor);
-					needNext = true;
+				if (transformations.RemoveOvipositor.isPossible()) { //Remove dat shit!
+						transformations.RemoveOvipositor.applyEffect();
 				}
 				else { //Update stuff!
 					var prevEggs:int = player.eggs();
@@ -2709,12 +2697,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (!player.hasCock()) { //(Dick regrowth)
 					player.createCock(10, 2.75);
 					outputText("\n<b>As time passes, your loins grow itchy for a moment.  A split-second later, a column of flesh erupts from your crotch.  Your new, 10-inch cock pulses happily.");
-					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
 					if (player.balls == 0) {
 						outputText("  A pair of heavy balls drop into place below it, churning to produce cum.");
-						player.balls = 2;
+						transformations.BallsDuo.applyEffect(false);
 						player.ballSize = 3;
-						Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 					}
 					player.dynStats("int", -1, "sen", 5, "lus", 15);
 					outputText("</b>\n");
@@ -2728,9 +2714,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (player.balls == 0) { //(Balls regrowth)
 					outputText("\n<b>As time passes, a pressure in your loins intensifies to near painful levels.  The skin beneath [eachcock] grows loose and floppy, and then two testicles roll down to fill your scrotum.</b>\n");
-					player.balls = 2;
+					transformations.BallsDuo.applyEffect(false);
 					player.ballSize = 3;
-					Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 					needNext = true;
 				}
 				if (player.breastRows[0].breastRating < 5) { //Tits!
@@ -2789,13 +2774,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (!player.hasCock()) { //(Dick regrowth)
 					player.createCock(10, 2.75);
 					outputText("\n<b>As time passes, your loins grow itchy for a moment.  A split-second later, a column of flesh erupts from your crotch.  Your new, 10-inch cock pulses happily.");
-					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
 
 					if (player.balls == 0) {
 						outputText("  A pair of heavy balls drop into place below it, churning to produce cum.");
-						player.balls = 2;
+						transformations.BallsDuo.applyEffect(false);
 						player.ballSize = 3;
-						Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 					}
 					outputText("</b>\n");
 					needNext = true;
@@ -2810,10 +2793,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (player.balls == 0) { //(Balls regrowth)
 					outputText("\n<b>As time passes, a pressure in your loins intensifies to near painful levels.  The skin beneath [eachcock] grows loose and floppy, and then two testicles roll down to fill your scrotum.</b>\n");
-					player.balls = 2;
+					transformations.BallsDuo.applyEffect(false);
 					player.ballSize = 3;
 					needNext = true;
-					Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 				}
 			}
 
@@ -2921,7 +2903,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					//To Wong Foo, Thanks for Everything, Julie Newmar
 					outputText("\nYou sit atop your favorite flower, enjoying the smell of verdure and the sounds of the forest.  The sun is shining brightly and it feels wonderful on your chitin.  Your wings twitch happily in the soft breeze, and it feels good to be alive and doing the colony's work... the only sour note is your heavy, bloated abdomen, so full of unfertilized eggs that it droops, so full it strains your back and pinches your nerves.  Still, it's too nice a day to let that depress you, and you take up your customary song, humming tunelessly but mellifluously as you wait for passers-by.");
 
-					outputText("\n\nYour antennae.type bob - was that someone?  Peering between the trees from the corner of your eye, you can see the figure of another person, and you intensify your hypnotic buzz, trying to draw it closer.  The figure steps into your clearing and out of the shadow; clad in [armor], " + player.mf("he","she") + " is yourself!  Confused, you stop humming and stare into your own face, and the other you takes the opportunity to open " + player.mf("his","her") + " garments, exposing " + player.mf("his","her") + " [cock]!");
+					outputText("\n\nYour [antennae] bob - was that someone?  Peering between the trees from the corner of your eye, you can see the figure of another person, and you intensify your hypnotic buzz, trying to draw it closer.  The figure steps into your clearing and out of the shadow; clad in [armor], " + player.mf("he","she") + " is yourself!  Confused, you stop humming and stare into your own face, and the other you takes the opportunity to open " + player.mf("his","her") + " garments, exposing " + player.mf("his","her") + " [cock]!");
 
 					outputText("\n\nStartled, you slip down from your seat and try to run, but the other you has already crossed the clearing and seizes you by the fuzz on your hefty, swollen abdomen; your leg slips, propelling you face-first to the ground.  " + player.mf("He","She") + " pulls you back toward " + player.mf("his","her") + "self and, grabbing one of your chitinous legs, turns you over.  The other you spreads your fuzzed thighs, revealing your soft, wet pussy, and the sweet smell of honey hits your noses.  " + player.mf("His","Her") + " prick hardens intensely and immediately at the aroma of your pheromone-laden nectar, and " + player.mf("he","she") + " pushes it into you without so much as a word of apology, groaning as " + player.mf("he","she") + " begins to rut you mercilessly.  You can feel the sensations of " + player.mf("his","her") + " burning cock as if it were your own, and your legs wrap around your other self instinctively even as your mind recoils in confusion.");
 
@@ -2994,8 +2976,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
                     SceneLib.telAdre.dominika.fellatrixDream();
                     return true;
 				}
-                if (SceneLib.anemoneScene.kidAXP() >= 40 && flags[kFLAGS.HAD_KID_A_DREAM] == 0 && player.gender > 0) {
-                    SceneLib.anemoneScene.kidADreams();
+                if (SceneLib.kidAScene.kidAXP() >= 40 && flags[kFLAGS.HAD_KID_A_DREAM] == 0 && player.gender > 0) {
+                    SceneLib.kidAScene.kidADreams();
                     flags[kFLAGS.HAD_KID_A_DREAM] = 1;
 					return true;
 				}

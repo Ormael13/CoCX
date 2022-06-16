@@ -136,6 +136,9 @@ package classes.Scenes.NPCs
 				if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) outputText("\"<i>I also met that cow-looking girl, Izzy. It’s nice to know that I’m not the only tough looking gal at camp, huh? We even had the chance to have a little strength contest.</i>\"\n\n");
 			}
 			outputText("(<b>Sidonie has been added to the Followers menu!</b>)\n\n");
+			if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+			else player.createKeyItem("Radiant shard", 1,0,0,0);
+			outputText("\n\n<b>Before fully settling in your camp as if remembering something Sidonie pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 			flags[kFLAGS.SIDONIE_FOLLOWER] = 1;
 			doNext(camp.returnToCampUseFourHours);
 		}
@@ -185,7 +188,7 @@ package classes.Scenes.NPCs
 			outputText(" With the demon menaces there’s few people that ventures out of the city, but the Guard members, as well as merchants, have to do that from time to time, so we procure to aid them from the horrors out there with the best of our work.</i>\"\n\n");
 			outputText("\"<i>My father insisted on what I had to learn early, to absorb the knowledge of the workmanship while my mind was still fresh and young, so I was an apprentice there for six years. At eighteen, I finally earned my place among the workers.</i>\"\n\n");
 			outputText("\"<i>Everything went fine until one day, more or less two years after, a couple of guys from the Watch came to the shop and asked for someone who could aid them repairing an outpost near the outskirts of the desert. None of the workers agreed, since venturing out of the city, even for a noble cause such aiding some members of the Watch in need, was too dangerous for them.</i>\"\n\n");
-			outputText("\"<i>Of course, a young and foolish twenty-years old Sidonie was nothing but overjoyed to accompany two guards on an important mission, so I volunteered. If my father or some of my uncles were at the moment, they would’ve stopped me in the act, but that wasn’t the case, so I was walking through the desert with the Watch guys shortly after.</i>\"\n\n");
+			outputText("\"<i>Of course, a young and foolish twenty-years old Sidonie was nothing but overjoyed to accompany two guards on an important mission, so I volunteered. If my father or some of my uncles were there at that moment, they would’ve stopped me in the act, but that wasn’t the case, so I was walking through the desert with the Watch guys shortly after.</i>\"\n\n");
 			outputText("\"<i>We arrived the post a couple of hours later. It looked a bit weary and broken, especially since it was exposed to the sand and heat from the desert. Fixing the damaged post for the  guys wasn’t a difficult task in the end, since it only needed replacements on the outer walls and some new flooring.</i>\"\n\n");
 			outputText("You ask her if the Watch recruits that came to her shop couldn’t simply have bought planks and then do the repairs themselves?\n\n");
 			outputText("\"<i>Because not matter how strong or brave they are, there are things that require a carpenter’s skilled hands to be done properly. If they had fixed the outpost themselves, well the outpost would be repaired...a bit crudely, and probably fall apart a couple of months later, hence they opted to ask one of us to make the repairs in-site.</i>\"\n\n");

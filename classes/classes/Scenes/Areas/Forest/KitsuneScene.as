@@ -1118,11 +1118,6 @@ public class KitsuneScene extends BaseContent
 			addButtonIfTrue(4, "Tentacles...", kitsunesGetBonedBy3PlusTentacles, "Req. at least three 30-inch tentacle cocks", player.countCocksWithType(CockTypesEnum.TENTACLE, 30, -1, "length") >= 3);
 			//unique
 			if (monster.hairColor == "blonde") {
-				addButtonIfTrue(5, "FuckDraft", fuckDraftBlond, "Req. Fuck Draft", player.hasItem(consumables.F_DRAFT));
-				addButtonIfTrue(6, "Lactaid", fuckDraftBlond, "Req. Lactaid", player.hasItem(consumables.LACTAID));
-				addButtonIfTrue(7, "Ovi Elixir", fuckDraftBlond, "Req. Ovi Elixir", player.hasItem(consumables.OVIELIX));
-			}
-			if (monster.hairColor == "blonde") {
 				addButtonIfTrue(5, "FuckDraft", fuckDraftBlond, "Req. Fuck Draft", player.hasItem(consumables.F_DRAFT),
 					"Feed her a bottle of FuckDraft and copulate with her like animals.");
 				addButtonIfTrue(6, "Lactaid", lactaidDoseAKitSune, "Req. Lactaid", player.hasItem(consumables.LACTAID),
@@ -2385,19 +2380,20 @@ public class KitsuneScene extends BaseContent
 				}
 			} else {
 				//Normal:
-				outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.  As you open your eyes again, you feel as if a great burden has been lifted from your shoulders.\n\nWith a renewed vigor for your quest, you stand up and set off for camp.");
+				outputText("As you open your eyes again, you feel as if a great burden has been lifted from your shoulders.\n\nWith a renewed vigor for your quest, you stand up and set off for camp.");
 				player.statStore.replaceBuffObject({"wis.mult":0.10,"int.mult":0.10}, "KitsuneShrine",{text:"Kitsune shrine Meditation", rate:Buff.RATE_DAYS, tick:7});
 				dynStats("wis", 5,"int", 5, "lus", -50, "cor", -2);
-				doNext(camp.returnToCampUseOneHour);
+				//doNext(camp.returnToCampUseOneHour);
 			}
 			var tailzAfter:int = player.tail.count;
-			if (player.tailType == Tail.FOX && tailzBefore < tailzAfter) return tailzAfter;
+			if (player.tailType == Tail.FOX) return tailzAfter;
 			return 0;
 		}
 
 		private function meditateLikeAKitsuneEhQuestionMark():void
 		{
 			var tailz:int = meditateAtKitsuneShrine();
+			//trace("tails: " + tailz);
 			if (tailz == 9 && flags[kFLAGS.AYANE_FOLLOWER] == 0) {
 				outputText("\n\nAyane approaches and bows to you in reverence. \"<i>You have acquired a near deific status [name], as a priestess of Taoth it would be an honor to serve as your attendant. That is, if you would allow me to follow and assist you.</i>\"");
 				outputText("\n\nA little surprised, you ask Ayane why she wants to serve you.");

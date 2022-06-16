@@ -55,6 +55,11 @@ public class AbstractSpell extends CombatAbility {
 		combat.spellPerkUnlock();
 	}
 	
+	override public function get currentCooldown():int {
+		if (isSwiftcasting) return 0;
+		return player.cooldowns[id];
+	}
+	
 	override protected function usabilityCheck():String {
 		
 		// Run all check applicable to all abilities
@@ -82,7 +87,7 @@ public class AbstractSpell extends CombatAbility {
 			if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				return "You can only use buff magic while underground."
 			}
-			if (combat.isEnnemyInvisible) {
+			if (combat.isEnemyInvisible) {
 				return "You cannot use offensive spells against an opponent you cannot see or target."
 			}
 		}
@@ -133,6 +138,12 @@ public class AbstractSpell extends CombatAbility {
 		backfireEnabled = canBackfire;
 		isAutocasting = false;
 		outputText("<b>"+name+" was autocasted successfully.</b>\n\n");
+	}
+	public var isSwiftcasting:Boolean = false;
+	public function swiftcast():void {
+		isSwiftcasting = true;
+		perform(true,false,false);
+		isSwiftcasting = false;
 	}
 	
 	///////////////////////////

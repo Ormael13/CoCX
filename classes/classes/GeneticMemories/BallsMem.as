@@ -37,45 +37,46 @@ package classes.GeneticMemories {
 		*/
 
 		public static var Memories:/*EnumValue*/ Array = [];
+		private static var _partid:int = 0;
 
-		public static const NONE:int = 0;
+		public static const NONE:int = _partid++;
 		EnumValue.add(Memories, NONE, "NONE", {
 			id: "Unlocked Metamorph",
 			name: "No Balls",
-			cost: 1000,
+			cost: 500,
 			title: "None",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.BallsNone;
 			}
 		});
 
-		public static const DUO:int = 1;
+		public static const DUO:int = _partid++;
 		EnumValue.add(Memories, DUO, "DUO", {
 			id: "Duo balls",
 			name: "Duo balls",
-			cost: 500,
+			cost: 100,
 			title: "Duo",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.BallsDuo;
 			}
 		});
 
-		public static const QUAD:int = 2;
+		public static const QUAD:int = _partid++;
 		EnumValue.add(Memories, QUAD, "QUAD", {
 			id: "Quad balls",
 			name: "Quad balls",
-			cost: 800,
+			cost: 200,
 			title: "Quad",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.BallsQuad(1,true);
 			}
 		});
 
-		public static const TRAP:int = 3;
+		public static const TRAP:int = _partid++;
 		EnumValue.add(Memories, TRAP, "TRAP", {
 			id: "Trap balls",
 			name: "Trap balls",
-			cost: 800,
+			cost: 200,
 			title: "Trap",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.BallsTrap;

@@ -31,6 +31,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	internal function buildMenu(buttons:ButtonDataList):void {
 		var bloodForBloodGod:Number = (player.HP - player.minHP());
 		var bd:ButtonData;
+		var isEnemyInvisible:Boolean = combat.isEnemyInvisible;
 		if (player.hasPerk(PerkLib.CleansingPalm)) {
 			bd = buttons.add("C.Palm", CleansingPalm).hint("Unleash the power of your cleansing aura! More effective against corrupted opponents. Doesn't work on the pure.  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(30 * soulskillCost() * soulskillcostmulti()));
 			if (player.cor >= (10 + player.corruptionTolerance)) {
@@ -325,7 +326,7 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("You need more time before you can cast this soulskill again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff soulskills while underground.");
-			} else if (combat.isEnnemyInvisible) {
+			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
 				bd.disable("You cannot use blood soulskills if you not have blood at all.");
@@ -343,7 +344,7 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("You need more time before you can cast this soulskill again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff soulskills while underground.");
-			} else if (combat.isEnnemyInvisible) {
+			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
 				bd.disable("You cannot use blood soulskills if you not have blood at all.");
@@ -359,7 +360,7 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("You need more time before you can cast this soulskill again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff soulskills while underground.");
-			} else if (combat.isEnnemyInvisible) {
+			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
 				bd.disable("You cannot use blood soulskills if you not have blood at all.");
@@ -377,7 +378,7 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("You need more time before you can cast this soulskill again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff soulskills while underground.");
-			} else if (combat.isEnnemyInvisible) {
+			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
 				bd.disable("You cannot use blood soulskills if you not have blood at all.");
@@ -393,7 +394,7 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("You need more time before you can cast this soulskill again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff soulskills while underground.");
-			} else if (combat.isEnnemyInvisible) {
+			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
 				bd.disable("You cannot use blood soulskills if you not have blood at all.");
@@ -411,7 +412,7 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("You need more time before you can cast this soulskill again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff soulskills while underground.");
-			} else if (combat.isEnnemyInvisible) {
+			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
 				bd.disable("You cannot use blood soulskills if you not have blood at all.");
@@ -427,7 +428,7 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("You need more time before you can cast this soulskill again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff soulskills while underground.");
-			} else if (combat.isEnnemyInvisible) {
+			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
 				bd.disable("You cannot use blood soulskills if you not have blood at all.");
@@ -445,7 +446,7 @@ public class CombatSoulskills extends BaseCombatContent {
 				bd.disable("You need more time before you can cast this soulskill again.");
 			} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				bd.disable("You can only use buff soulskills while underground.");
-			} else if (combat.isEnnemyInvisible) {
+			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
 				bd.disable("You cannot use blood soulskills if you not have blood at all.");
@@ -621,7 +622,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			else damage = Math.round(damage * 1.4);
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-			if (player.isRace(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+			if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 			else damage *= 2;
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
@@ -653,9 +654,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
+		damage = combat.statusEffectBonusDamage(damage);
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) damage *= 2;
 		return damage;
 	}
@@ -770,7 +769,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			else damage = Math.round(damage * 1.4);
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-			if (player.isRace(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+			if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 			else damage *= 2;
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
@@ -796,17 +795,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		//other bonuses
 		if (player.hasPerk(PerkLib.HoldWithBothHands) && player.weapon != WeaponLib.FISTS && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
-		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
-		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
-		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
-		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
-		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
-		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
+		damage = combat.itemsBonusDamageDamage(damage);
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		if (player.isSwordTypeWeapon()) critChance += 10;
@@ -1117,7 +1106,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		var damage:Number = int(10 + (player.wis / 3 + rand(player.wis / 2)));
 		damage += unarmedAttack();
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-			if (player.isRace(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+			if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 			else damage *= 2;
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
@@ -1266,7 +1255,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		damage += player.wis;
 		damage += scalingBonusWisdom();
 		if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-			if (player.isRace(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+			if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 			else damage *= 2;
 		}
 		//other bonuses
@@ -1354,7 +1343,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		damage += player.wis;
 		damage += scalingBonusWisdom();
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-			if (player.isRace(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+			if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 			else damage *= 2;
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;

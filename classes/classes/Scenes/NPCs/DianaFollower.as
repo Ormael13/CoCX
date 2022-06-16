@@ -5,11 +5,9 @@
 package classes.Scenes.NPCs 
 {
 	import classes.*;
-import classes.GeneticMemories.CockMem;
 	import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.Metamorph;
-	
-	public class DianaFollower extends NPCAwareContent
+
+public class DianaFollower extends NPCAwareContent
 	{
 		
 		public function DianaFollower() 
@@ -497,9 +495,7 @@ public function breakingInYourMare():void {
 	clearOutput();
 	if (!player.hasCock()) {
 		outputText("You take the mixture, groaning as you suddenly feel a sizeable cock growing between your legs.\n\n");
-		player.createCock(10 + rand(7), 2 + rand(10) / 10);
-		player.cocks[0].cockType = CockTypesEnum.HORSE;
-		Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HORSE));
+		transformations.CockHorse(0, 10 + rand(7), 2 + rand(10) / 10);
 	}
 	outputText("Diana, in a fit of excitement, suddenly climbs onto her knees and hands before turning around and presenting her rear for you to fuck, moving her tail out of the way of her virgin sex and her equally virgin arsehole, her whole body trembling in excitement.\n\n");
 	outputText("\"<i>Thank you!</i>\" Diana says, her voice full of happiness, as she shakes her behind temptingly. \"<i>I’ll be a good mare to you, but please fuck me!! I really can’t take it anymore, I just need your cock in me now!!</i>\" her voice desperate.\n\n");
@@ -604,6 +600,9 @@ public function breakingInYourMare2():void {
 	outputText("After resting a bit. You help your new mare clean up, teasing each other a little, and then help her gather up her stuff. The two of you head back to a small camp near the forest, where your new mare packs up her things.\n\n");
 	outputText("After you make sure she has everything she needs, the two of you head back to your camp.\n\n");
 	outputText("(<b>Diana has been added to the Lovers menu!</b>)\n\n");
+	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Diana pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	flags[kFLAGS.DIANA_FOLLOWER] = 6;
 	doNext(playerMenu);
 }

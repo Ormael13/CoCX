@@ -70,7 +70,7 @@ public class Enigmanium extends Consumable {
         //Cat dicked folks
         if (player.catCocks() > 0) {
           choice = player.findFirstCockType(CockTypesEnum.CAT);
-          outputText("[pg]You feel your [cock"+(choice+1)+"] growing hard, the barbs becoming more sensitive. You gently run your hands down them and imagine the feeling of raking the insides of a cunt as you pull.  The fantasy continues, and after ejaculating and hearing the female yowl with pleasure, you shake your head and try to drive off the image.  ");
+          outputText("[pg]You feel your [cock "+(choice+1)+"] growing hard, the barbs becoming more sensitive. You gently run your hands down them and imagine the feeling of raking the insides of a cunt as you pull.  The fantasy continues, and after ejaculating and hearing the female yowl with pleasure, you shake your head and try to drive off the image.  ");
           if (player.cor < 33) outputText("You need to control yourself better.");
           else if (player.cor < 66) outputText("You're not sure how you feel about the fantasy.");
           else outputText("You hope to find a willing partner to make this a reality.");

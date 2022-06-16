@@ -1,13 +1,11 @@
 package classes
 {
-	import classes.CoC;
-	import flash.system.System;
-	
-	public class PregnancyStore extends Object
+public class PregnancyStore extends Object
 	{
 		//Pregancy types. Both butt and normal. Each type represents the father of this baby.
 		public static const PREGNANCY_IMP:int                   =   1;
 		public static const PREGNANCY_MINOTAUR:int              =   2;
+		public static const PREGNANCY_COCKATRICE:int            =   3;
 		public static const PREGNANCY_MOUSE:int                 =   4;
 		public static const PREGNANCY_OVIELIXIR_EGGS:int        =   5; //Also caused by Phoenixes apparently
 		public static const PREGNANCY_HELL_HOUND:int            =   6;
@@ -64,6 +62,7 @@ package classes
 //Old Value, replaced in Saves.unFuckSave()		public static const PREGNANCY_BUTT_DRIDER:int           =   3;
 //Old Value, replaced in Saves.unFuckSave()		public static const PREGNANCY_BUTT_SANDTRAP_FERTILE:int =   4;
 //Old Value, replaced in Saves.unFuckSave()		public static const PREGNANCY_BUTT_SANDTRAP:int         =   5; //Sandtrap did not have fertilized eggs
+		//TODO: clear this shit!
 
 		public static const INCUBATION_IMP:int                  = 432; //Time for standard imps. Imp lords, Ceraph, Lilium and the imp horde cause slightly faster pregnancies
 		public static const INCUBATION_MINOTAUR:int             = 432;
@@ -78,6 +77,7 @@ package classes
 		public static const INCUBATION_IZMA:int                 = 300;
 		public static const INCUBATION_SPIDER:int               = 400;
 		public static const INCUBATION_BASILISK:int             = 250;
+		public static const INCUBATION_COCKATRICE:int           = 225;
 		public static const INCUBATION_DRIDER:int               = 400;
 		public static const INCUBATION_GOO_GIRL:int             =  85;
 		public static const INCUBATION_EMBER:int                = 336;

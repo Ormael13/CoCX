@@ -5,9 +5,7 @@ package classes.Scenes.Areas.Lake
 {
 import classes.*;
 import classes.BodyParts.LowerBody;
-import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.Metamorph;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
@@ -268,10 +266,9 @@ public class FetishCultistScene extends AbstractLakeContent
 					clearOutput();
 					outputText("The smile disappears from her lips, and she says, 'Now if I understand it correctly, you are beset by random panic attacks due to an unusually sized clitoris, coupled with a lack of breasts.  To address this issue, I will be giving you a special injection at the site.'  She briefly steps out of the room before returning with a syringe.  'It'll be ok, the good news is that the pain for this injection will quickly subside, just take nice easy breaths, and you'll be fine.  In fact, you might find this quite enjoyable after the first hurdle.'  She leans down and pushes the needle into your clitoris.  The pain is quite intense, but thankfully it does not last long.  'This injection will address your unnatural body shape by turning your clitoris into a penis. It even has the added benefit of removing the unneeded vagina.' she says to you in a pleasant voice while pulling the needle out.  You look down to see that you " + clitDescript() + " is indeed growing larger, and you can feel your womb disappearing within you.\n\n");
 					player.knockUpForce(); //The only event I can find anywhere that removes a pregnancy
-					player.createCock();
+					transformations.CockHuman().applyEffect(false);
 					player.removeVagina(0, 1);
 					outputText("Soon you have a fully formed [cock] standing tall and proud where your old femininity used to lie.  The nurse sets the syringe aside and climbs on top of your legs. She giggles softly before lowering herself and taking your [cock] between her breasts and starts rubbing and playing with them while running your [cock] between them.  It is an exquisite experience having her tit fuck your brand new [cock], and you notice that she seems to be enjoying it just as much as you are.  It doesn't take long for her ministrations to make you cum between her breasts, and cum you do.  Satisfied, the nurse rises from you and says \"<i>Looks to me like its working properly.  For now, I've got to go take care of another patient. Don't run until I get back, ok?  I'll be back to check on your progress as soon as I'm able!</i>\"  She gives you a wink, and turns to walk out the door.");
-					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
 					dynStats("sen", 3);
 					afterRape();
 				}
@@ -279,9 +276,8 @@ public class FetishCultistScene extends AbstractLakeContent
 				function nothing():void {
 					clearOutput();
 					outputText("The smile disappears from her lips, and she says, 'Now if I understand it correctly, you are beset by random panic attacks due to a lack of genitals.'  To address this issue, I will be giving you a special injection at the site.'  She briefly steps out of the room before returning with a syringe.  'It'll be ok, the good news is that the pain for this injection will quickly subside, just take nice easy breaths, and you'll be fine.  In fact, you might find this quite enjoyable after the first hurdle.'  She leans down and pushes the needle into your crotch.  The pain is quite intense, but thankfully it does not last long.  'This injection will address your unnatural body shape by giving you a penis,' she says to you, smiling while pulling the needle out, 'and then, I get to be the first to play with it!'.  You look down to see that the flesh, where she injected you, is pushing out of your body, becoming larger and more defined as the seconds tick by.\n\n");
-					player.createCock();
+					transformations.CockHuman().applyEffect(false);
 					outputText("Soon you have a fully formed [cock] standing tall and proud where your bare crotch used to lie.  The nurse sets the syringe aside and climbs on top of your legs. She giggles softly before lowering herself and taking your [cock] between her breasts and starts rubbing and playing with them while running your [cock] between them.  It is an exquisite experience having her tit fuck your brand new [cock], and you notice that she seems to be enjoying it just as much as you are.  It doesn't take long for her ministrations to make you cum between her breasts, and cum you do.  Satisfied, the nurse rises from you and says \"<i>That was fun, maybe later we can practice more.  For now, I've got to go take care of another patient. Don't run until I get back, ok?  I'll be back to check on your progress as soon as I'm able!</i>\"  She gives you a wink, and turns to walk out the door.");
-					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.HUMAN));
 					dynStats("sen", 3);
 					afterRape();
 				}
@@ -725,6 +721,7 @@ public class FetishCultistScene extends AbstractLakeContent
 
 		private function mindbreakFemaleCultist():void{
 			clearOutput();
+			if (silly()) outputText("<b>ASSUMING DIRECT CONTROL</b>\n\n");
 			outputText("She looks quite desperate for a fuck already." +
 					" It wouldn’t be too hard to just rape her and go back to your things, but why rape when you can enslave and convert her already weak mind to the will of the sorority?" +
 					" Leaving her to the Church of the Fetish would be a shame, especially because of how easy it would be to break those attachments and make her switch her allegiance." +

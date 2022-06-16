@@ -7,6 +7,7 @@ import classes.StatusEffects;
 public class UshiOniRace extends Race{
 	public static const UshiOniSkinColors:/*String*/Array = ["green", "red", "grey", "sandy-tan", "pale", "purple"];
 	public static const UshiOniHairColors:/*String*/Array = ["dark green", "dark red", "blue", "brown", "white", "black"];
+	public static const UshiOniEyeColors:/*String*/Array = ["black", "red", "gray", "brown", "light blue","yellow"];
 	
 	public function UshiOniRace(id:int) {
 		super("Ushi-Onna", id);

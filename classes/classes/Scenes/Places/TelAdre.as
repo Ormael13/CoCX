@@ -32,6 +32,7 @@ import classes.display.SpriteDb;
 		public var lottie:Lottie = new Lottie();
 		public var maddie:Maddie = new Maddie();
 		public var niamh:Niamh = new Niamh();
+		public var pablo:PabloScene = new PabloScene();
 		public var rubi:Rubi = new Rubi();
 		public var scylla:Scylla = new Scylla();
 		public var sexMachine:SexMachine = new SexMachine();
@@ -355,25 +356,24 @@ private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
 	spriteSelect(SpriteDb.s_oswald);
 	var itemValue:int = int(player.itemSlots[slot].itype.value / 2);
 	clearOutput();
+	if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
+	if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
+	if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your items for double the amount.");
+	if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your items for four times the amount.");
 	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
 		if (itemValue == 0)
 			outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to Oswald.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
 		else outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to Oswald.  He nervously pulls out " + num2Text(itemValue * player.itemSlots[slot].quantity)  + " gems and drops them into your waiting hand.");
 		while (player.itemSlots[slot].quantity > 0){
 			player.itemSlots[slot].removeOneItem();
-			if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
 			player.gems += itemValue;
 		}
 	}
 	else {
-		if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
-		if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
 		if (itemValue == 0)
-		outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
+			outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
 		else outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He nervously pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
 		player.itemSlots[slot].removeOneItem();
-		if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for double the amount.");
-		if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four times the amount.");
 		player.gems += itemValue;
 	}
 	statScreenRefresh();
@@ -1454,22 +1454,19 @@ private function buyItemT3No():void {
 	doNext(tripxiShopMainMenu2c);
 }
 
-private function tripxiShopTalk():void {
+private function tripxiShopTalk(talkOver:int = 1):void {
 	clearOutput();
 	menu();
-	outputText("You tell the goblin shopkeeper you would like to have a talk with her.\n\n")
-	outputText("\"<i>Just wanted a chat? Well okay fine but make it quick, my time is both researches and gems and I would rather not waste either.</i>\"\n\n");
+	if (talkOver == 1){
+		outputText("You tell the goblin shopkeeper you would like to have a talk with her.\n\n")
+		outputText("\"<i>Just wanted a chat? Well okay, fine but make it quick, my time is mostly for either researching or gems and I would rather not waste either.</i>\"\n\n");
+	}
+	else{
+		outputText("Tripxi looks semi bored but tries to keep the professional attitude.\n\n")
+		outputText("\"<i>Well now that's sorted, is there anything else you wanted to talk about?</i>\"\n\n");
+	}
 	addButton(3, "Goblins", tripxiShopTalkGoblins);
 	addButton(4, "Tel'adre", tripxiShopTalkTelAdre);
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxi) > 0) addButtonDisabled(5, "Small Selection", "You already talked about this subject.");
-	else addButton(5, "SmallSelection", tripxiShopTalkSmallSelection);
-	addButton(14, "Leave", tripxiShopInside);
-}
-private function tripxiShopTalk2():void {
-	clearOutput();
-	menu();
-	outputText("Tripxi looks semi bored but try and keep the professionnal attitude.\n\n")
-	outputText("\"<i>Well now that this is sorted is there anything else you wanted to talk about?</i>\"\n\n");
 	if (player.statusEffectv1(StatusEffects.TelAdreTripxi) > 0) addButtonDisabled(5, "Small Selection", "You already talked about this subject.");
 	else addButton(5, "SmallSelection", tripxiShopTalkSmallSelection);
 	addButton(14, "Leave", tripxiShopInside);
@@ -1481,13 +1478,13 @@ private function tripxiShopTalkGoblins():void {
 	outputText("\"<i>By all mean goblin civilisation was THE thing. You guys marvels at magic swords and spells but we had the true power of technology on our side. I wouldn't want to mean offense but the lot of you people might as well be savages and barbarians. When the demons knocked to our doors we laughed them off or blasted them with artillery ");
 	outputText("however the demons aren't stupid they knew if they couldn't get in they could destroy us through our surounding. Inevitably it was not the demon themselves who toppled down the goblin civilisation but contaminated waters. Our geniuses fell into madness or breeding frenzy and not long after everything our society meant fell into a race ");
 	outputText("to see who could breed faster. There may be only a few goblins left on Mareth that is not obsessed with getting impregnated by everything. You're looking at one of them.</i>\"\n\n");
-	doNext(tripxiShopTalk2);
+	doNext(curry(tripxiShopTalk, 2));
 }
 private function tripxiShopTalkTelAdre():void {
 	clearOutput();
 	outputText("Last you checked the majority of the goblin population has gone prego freak mode. How was she accepted in Tel Adre?\n\n\"<i>It's simple, I've simply always been there! ");
 	outputText("While my peers were busy drinking drugged water back at our capital I was managing my shop here. I didn't made weapon until now though only explosives. I began working as a standard issue firearm vendor when Tel'adre guards requested I procure them pistols. Ain't like those idiots can use anything more advanced than that anyway.</i>\"\n\n");
-	doNext(tripxiShopTalk2);
+	doNext(curry(tripxiShopTalk, 2));
 }
 private function tripxiShopTalkSmallSelection():void {
 	clearOutput();
@@ -1502,7 +1499,7 @@ private function tripxiShopTalkSmallSelection():void {
 	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns5, 0, 0, 0, 0);
 	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns6, 0, 0, 0, 0);
 	player.addStatusValue(StatusEffects.TelAdreTripxi, 1, 1);
-	doNext(tripxiShopTalk2);
+	doNext(curry(tripxiShopTalk, 2));
 }
 
 //[Invetigate]
@@ -1562,49 +1559,23 @@ public function gymDesc():void {
 }
 
 private function gymMenu():void {
-
-	var membership:Function =null;
-	var cotton2:Function =null;
-	var cottonB:String = "Horsegirl";
-	var hyena:Function =null;
-	var hyenaB:String = "Hyena";
-	var ifris2:Function =null;
-	var ifrisB:String = "Girl";
-	var lottie2:Function = lottie.lottieAppearance(false);
-	var lottieB:String = "Pig-Lady";
-	var loppe2:Function =null;
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0)
-		lottieB = "Lottie";
-	if(ifris.ifrisIntro())
-		ifris2 = ifris.approachIfris;
-	if(flags[kFLAGS.MET_IFRIS] > 0)
-		ifrisB = "Ifris";
-	if(model.time.hours > 9 && model.time.hours <= 15) {
-		hyena = heckel.greetHeckel;
-		if(flags[kFLAGS.MET_HECKEL] > 0)
-			hyenaB = "Heckel";
-	}
-	if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0 && player.gems >= 500)
-		membership = buyGymLifeTimeMembership;
-	if(flags[kFLAGS.PC_IS_A_DEADBEAT_COTTON_DAD] == 0) {
-		if(cotton.cottonsIntro())
-			cotton2 = cotton.cottonGreeting;
-	}
-	if(flags[kFLAGS.COTTON_MET_FUCKED] > 0)
-		cottonB = "Cotton";
-	if(flags[kFLAGS.LOPPE_MET] > 0 && flags[kFLAGS.LOPPE_DISABLED] == 0)
-		loppe2 = loppe.loppeGenericMeetings;
-
-	choices("ChangeRoom",jasun.changingRoom,
-			cottonB,cotton2,
-			hyenaB,hyena,
-			ifrisB,ifris2,
-			"Jog",goJogging,
-			"LiftWeights",weightLifting,
-			"Life Member",membership,
-			lottieB,lottie2,
-			"Loppe",loppe2,
-			"Leave",telAdreMenu);
+	menu();
+	//Core gym interactions
+	addButton(0, "ChangeRoom", jasun.changingRoom).hint("Investigate the change room. Maybe you'll find somebody interesting?");
+	addButton(1, "Jog", goJogging).hint("Jog on the track and improve your speed.");
+	addButton(2, "LiftWeights", weightLifting).hint("Build up your strength with the weights.", "Lift Weight");
+	if (flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0)
+		addButtonIfTrue(4, "Life Member", buyGymLifeTimeMembership,
+			"You cannot afford to purchase the lifetime membership for the gym. You need 500 gems.", player.gems >= 500,
+			"Buy lifetime membership for 500 gems? It could save you gems in the long run.", "Lifetime Membership");
+	//NPCs
+	if (flags[kFLAGS.PC_IS_A_DEADBEAT_COTTON_DAD] == 0 && cotton.cottonsIntro()) addButton(5, flags[kFLAGS.COTTON_MET_FUCKED] > 0 ? "Cotton" : "Horsegirl", cotton.cottonGreeting);
+	if (model.time.hours > 9 && model.time.hours <= 15) addButton(6, flags[kFLAGS.MET_HECKEL] > 0 ? "Heckel" : "Hyena", heckel.greetHeckel);
+	if (ifris.ifrisIntro()) addButton(7, flags[kFLAGS.MET_IFRIS] > 0 ? "Ifris" : "Demon-Girl", ifris.approachIfris);
+	addButton(8, flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0 ? "Lottie" : "Pig-Girl", lottie.lottieAppearance(false));
+	if (flags[kFLAGS.LOPPE_MET] > 0 && flags[kFLAGS.LOPPE_DISABLED] == 0) addButton(9, "Loppe", loppe.loppeGenericMeetings);
+	if (pablo.pabloIntro() && flags[kFLAGS.PABLO_FREAKED_OUT_OVER_WORMS] != 1) addButton(10, flags[kFLAGS.PABLO_MET] > 0 ? "Pablo" : "Imp?", pablo.approachPablo);
+	addButton(14, "Leave", telAdreMenu);
 }
 
 private function buyGymLifeTimeMembership():void {
@@ -1665,7 +1636,7 @@ private function weightLifting():void {
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
 		if (flags[kFLAGS.DISABLED_SEX_MACHINE] == 0) {
-			addButton(0,"\"Showers\"",sexMachine.exploreShowers);
+			addButton(0,"''Showers''",sexMachine.exploreShowers);
 			addButton(1,"Showers",brooke.repeatChooseShower);
 			addButton(4, "Leave", camp.returnToCampUseOneHour);
 		}
@@ -1758,7 +1729,7 @@ private function goJogging():void {
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
 		if (flags[kFLAGS.DISABLED_SEX_MACHINE] == 0) {
-			addButton(0,"\"Showers\"",sexMachine.exploreShowers);
+			addButton(0,"''Showers''",sexMachine.exploreShowers);
 			addButton(1,"Showers",brooke.repeatChooseShower);
 			addButton(4, "Leave", camp.returnToCampUseOneHour);
 		}
@@ -1858,6 +1829,9 @@ public function meetingLunaCamp():void {
 	outputText("\"<i>As I told you before, my name is Luna, " + player.mf("Master","Mistress") + " [name]. From now on, I will serve you to the best of my abilities. Please do not hesitate to call on me for anything... anything at all</i>\"\n\n");
 	outputText("She gives you one last gaze with damp eyes, then bows and immediately begins rushing about the camp, neatening things, removing debris and rocks from the main concourse, and gathering laundry for washing. It would seem that life in the camp is going to be significantly easier, and you smile, sure that you've made the correct choice and will suffer no unforeseen consequences whatsoever from this.\n\n");
 	outputText("(<b>Luna has been added to the Followers menu!</b>)\n\n");
+	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Luna pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	flags[kFLAGS.LUNA_FOLLOWER] = 4;
 	flags[kFLAGS.LUNA_LVL_UP] = 0;
 	flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;

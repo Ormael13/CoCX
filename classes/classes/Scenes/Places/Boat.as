@@ -15,6 +15,7 @@ public class Boat extends AbstractLakeContent
 		public var sharkGirlScene:SharkGirlScene = new SharkGirlScene();
 		public var marae:MaraeScene = new MaraeScene();
 		public var kaiju:Kaiju = new Kaiju();
+		public var anemoneScene:AnemoneScene = new AnemoneScene();
 		public function Boat() {}
 
 		public function discoverBoat():void {
@@ -76,16 +77,16 @@ public class Boat extends AbstractLakeContent
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				case 1:
-					sharkGirlScene.sharkGirlEncounter(1);
+					sharkGirlScene.sharkGirlEncounter();
 					return;
 				case 2:
 					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 1;
-					SceneLib.anemoneScene.mortalAnemoneeeeee();
+					anemoneScene.mortalAnemoneeeeee();
 					return;
 				case 3:
 				case 4:
 					if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && player.level > 2) lake.fetishZealotScene.zealotBoat();
-					else sharkGirlScene.sharkGirlEncounter(1);
+					else sharkGirlScene.sharkGirlEncounter();
 					return;
 				case 5:
 					outputText("This is a calm day at the lake, you managed to hold your boat in place and, while you found nothing of note, couldn’t help yourself but to enjoy a few hour using your newly acquired fishing pole. You even spotted Calu in the distance doing the same thing from her usual sitting spot.\n\n");

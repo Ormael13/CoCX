@@ -65,8 +65,11 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 36.004;
+    public var modSaveVersion:Number = 36.007;
     public var levelCap:Number = 185;
+
+    //Lock cheats menus from public builds.
+    public var lockCheats:Boolean = true;
 
     //Used to restrict random drops from overlapping uniques
     public var plotFight:Boolean = false;
@@ -185,7 +188,6 @@ public class CoC extends MovieClip
 
     public function CoC()
     {
-        // Cheatmode.
         _instance = this;
         context = new StoryContext(this);
 
@@ -208,6 +210,11 @@ public class CoC extends MovieClip
         this.mainView.name = "mainView";
         this.mainView.addEventListener("addedToStage",_postInit);
         this.stage.addChild( this.mainView );
+        //unlock cheats for debug versions
+        CONFIG::debug
+        {
+            lockCheats = false;
+        }
     }
     private function _postInit(e:Event):void {
         // Hooking things to MainView.

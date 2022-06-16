@@ -40,8 +40,9 @@ package classes.GeneticMemories {
 	 */
 
     public static var Memories:/*EnumValue*/ Array = [];
+	  private static var _partid:int = 0;
 
-		public static const NONE:int = 0;
+		public static const NONE:int = _partid++;
 		EnumValue.add(Memories, NONE, "NONE", {
 			id: "Unlocked Metamorph",
 			name: "No Rear Body",
@@ -52,7 +53,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const LION_MANE:int = 1;
+		public static const LION_MANE:int = _partid++;
 		EnumValue.add(Memories, LION_MANE, "LION_MANE", {
 			id: "Lion Mane Rear Body",
 			name: "Lion Mane",
@@ -63,7 +64,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const SHARK_FIN:int = 2;
+		public static const SHARK_FIN:int = _partid++;
 		EnumValue.add(Memories, SHARK_FIN, "SHARK_FIN", {
 			id: "Shark Fin Rear Body",
 			name: "Shark Fin",
@@ -74,7 +75,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const ORCA_BLOWHOLE:int = 3;
+		public static const ORCA_BLOWHOLE:int = _partid++;
 		EnumValue.add(Memories, ORCA_BLOWHOLE, "ORCA_BLOWHOLE", {
 			id: "Orca Blowhole Rear Body",
 			name: "Orca Blowhole",
@@ -85,7 +86,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const RAIJU_MANE:int = 4;
+		public static const RAIJU_MANE:int = _partid++;
 		EnumValue.add(Memories, RAIJU_MANE, "RAIJU_MANE", {
 			id: "Raiju Mane Rear Body",
 			name: "Raiju Mane",
@@ -96,7 +97,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BAT_COLLAR:int = 5;
+		public static const BAT_COLLAR:int = _partid++;
 		EnumValue.add(Memories, BAT_COLLAR, "BAT_COLLAR", {
 			id: "Bat Collar Rear Body",
 			name: "Bat Collar",
@@ -107,7 +108,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DISPLACER_TENTACLES:int = 6;
+		public static const DISPLACER_TENTACLES:int = _partid++;
 		EnumValue.add(Memories, DISPLACER_TENTACLES, "DISPLACER_TENTACLES", {
 			id: "Displacer Tentacles Rear Body",
 			name: "Displacer Tentacles",
@@ -118,7 +119,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const TENTACLE_EYESTALKS:int = 7;
+		public static const TENTACLE_EYESTALKS:int = _partid++;
 		EnumValue.add(Memories, TENTACLE_EYESTALKS, "TENTACLE_EYESTALKS", {
 			id: "Gazer Tentacle Eyestalks Rear Body",
 			name: "Gazer Tentacle Eyestalks",
@@ -129,7 +130,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FROSTWYRM:int = 8;
+		public static const FROSTWYRM:int = _partid++;
 		EnumValue.add(Memories, FROSTWYRM, "FROSTWYRM", {
 			id: "Frostwyrm Rear Body",
 			name: "Frostwyrm Collar",
@@ -140,7 +141,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-	  public static const YETI:int = 9;
+	  public static const YETI:int = _partid++;
 	  EnumValue.add(Memories, YETI, "YETI", {
 		  id: "Yeti Rear Body",
 		  name: "Yeti Fur",
@@ -148,6 +149,17 @@ package classes.GeneticMemories {
 		  title: "Yeti",
 		  transformation: function(): Transformation {
 			  return CoC.instance.transformations.RearBodyYetiFur;
+		  }
+	  });
+
+	  public static const METAMORPHIC_GOO:int = _partid++;
+	  EnumValue.add(Memories, METAMORPHIC_GOO, "METAMORPHIC_GOO", {
+		  id: "Metamorphic Goo",
+		  name: "Metamorphic Goo",
+		  cost: 100,
+		  title: "'Morphic Goo",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.RearBodyMetamorphicGoo;
 		  }
 	  });
 

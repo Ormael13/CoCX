@@ -37,59 +37,140 @@ package classes.GeneticMemories {
 		*/
 
 		public static var Memories:/*EnumValue*/ Array = [];
+		private static var _partid:int = 0;
 
-		public static const NONE:int = 0;
+		public static const NONE:int = _partid++;
 		EnumValue.add(Memories, NONE, "NONE", {
 			id: "Unlocked Metamorph",
 			name: "No Breasts",
-			cost: 1000,
-			title: "None",
+			cost: 500,
+			title: "No Breasts",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.BreastsNone;
+				return CoC.instance.transformations.BreastsShrinkToNothing;
 			}
 		});
 
-		public static const ONE:int = 1;
-		EnumValue.add(Memories, ONE, "ONE", {
-			id: "One row breasts",
-			name: "One row breasts",
-			cost: 500,
-			title: "One",
+		public static const BREAST1:int = _partid++;
+		EnumValue.add(Memories, BREAST1, "BREAST1", {
+			id: "One Breast Row",
+			name: "One Breast Row",
+			cost: 200,
+			title: "Breast row 1",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.BreastsOne;
+				return CoC.instance.transformations.BreastRowsOne;
 			}
 		});
 
-		public static const TWO:int = 2;
-		EnumValue.add(Memories, TWO, "TWO", {
-			id: "Two row breasts",
-			name: "Two row breasts",
-			cost: 500,
-			title: "Two",
+		public static const BREAST2:int = _partid++;
+		EnumValue.add(Memories, BREAST2, "BREAST2", {
+			id: "Two Breast Rows",
+			name: "Two Breast Rows",
+			cost: 200,
+			title: "Breast row 2",
+			permReq: "One Breast Row",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.BreastsTwo;
+				return CoC.instance.transformations.BreastRowsTwo;
 			}
 		});
 
-		public static const THREE:int = 3;
-		EnumValue.add(Memories, THREE, "THREE", {
-			id: "Three row breasts",
-			name: "Three row breasts",
-			cost: 500,
-			title: "Three",
+		public static const BREAST3:int = _partid++;
+		EnumValue.add(Memories, BREAST3, "BREAST3", {
+			id: "Three Breast Rows",
+			name: "Three Breast Rows",
+			cost: 200,
+			title: "Breast row 3",
+			permReq: "Two Breast Rows",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.BreastsThree;
+				return CoC.instance.transformations.BreastRowsThree;
 			}
 		});
 
-		public static const FOUR:int = 4;
-		EnumValue.add(Memories, FOUR, "FOUR", {
-			id: "Four row breasts",
-			name: "Four row breasts",
-			cost: 500,
-			title: "Four",
+		public static const BREAST4:int = _partid++;
+		EnumValue.add(Memories, BREAST4, "BREAST4", {
+			id: "Four Breast Rows",
+			name: "Four Breast Rows",
+			cost: 200,
+			title: "Breast row 4",
+			permReq: "Three Breast Rows",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.BreastsFour;
+				return CoC.instance.transformations.BreastRowsFour;
+			}
+		});
+
+		public static const NOLACTATE:int = _partid++;
+		EnumValue.add(Memories, NOLACTATE, "NOLACTATE", {
+			id: "Unlocked Metamorph",
+			name: "No Lactate",
+			cost: 200,
+			title: "No Lactation",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.RemoveLactation;
+			}
+		});
+
+		public static const STARTLACTATE:int = _partid++;
+		EnumValue.add(Memories, STARTLACTATE, "STARTLACTATE", {
+			id: "Unlocked Metamorph",
+			name: "Start Lactate",
+			cost: 200,
+			title: "Lactation",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.StartLactation;
+			}
+		});
+
+		public static const ONENIPPLE:int = _partid++;
+		EnumValue.add(Memories, ONENIPPLE, "ONENIPPLE", {
+			id: "Unlocked Metamorph",
+			name: "One Nipple",
+			cost: 200,
+			title: "One Nipple",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.NipplesPerBreastOne;
+			}
+		});
+
+		public static const QUADNIPPLE:int = _partid++;
+		EnumValue.add(Memories, QUADNIPPLE, "QUADNIPPLE", {
+			id: "Quad Nipples",
+			name: "Quad Nipples",
+			cost: 200,
+			title: "Quad Nipples",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.NipplesPerBreastFour;
+			}
+		});
+
+		public static const FUCKNIPPLE:int = _partid++;
+		EnumValue.add(Memories, FUCKNIPPLE, "FUCKNIPPLE", {
+			id: "Fuckable Nipples",
+			name: "Fuckable Nipples",
+			cost: 200,
+			title: "Fuckable",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.NipplesFuckableForce;
+			}
+		});
+
+		public static const BLACKNIPPLE:int = _partid++;
+		EnumValue.add(Memories, BLACKNIPPLE, "BLACKNIPPLE", {
+			id: "Black Nipples",
+			name: "Black Nipples",
+			cost: 200,
+			title: "Black Nipples",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.NipplesBlack;
+			}
+		});
+
+		public static const GLOWINGNIPPLE:int = _partid++;
+		EnumValue.add(Memories, GLOWINGNIPPLE, "GLOWINGNIPPLE", {
+			id: "Glowing Nipples",
+			name: "Glowing Nipples",
+			cost: 200,
+			title: "Glow Nipples",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.NipplesGlowing;
 			}
 		});
 

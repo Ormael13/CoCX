@@ -5,9 +5,9 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
-import classes.display.SpriteDb;
 
 public class Katherine extends TelAdreAbstractContent implements TimeAwareInterface {
 
@@ -1801,18 +1801,22 @@ private function talkMilkLimitation():void {
 	var doneHighLactation:Boolean = doneSubmissive(KBIT_SUB_HIGH_LACTATION);
 	outputText("\n\n<b>At the moment Kath's been told ");
 	switch (breasts.preventLactationIncrease) {
-		case BreastStore.LACTATION_LIGHT:		outputText("to keep her breasts in check.  She won't allow more than light");
-												break;
-		case BreastStore.LACTATION_STRONG:		outputText("to keep her breasts in check.  She won't allow more than strong");
-												break;
-		case BreastStore.LACTATION_HEAVY:		outputText("to keep her breasts in check.  She won't allow more than heavy");
-												break;
-		case BreastStore.LACTATION_MODERATE:	if (doneHighLactation) {
-													outputText("to keep her breasts in check.  She won't allow more than moderate");
-													break;
-												}
+		case BreastStore.LACTATION_LIGHT:
+			outputText("to keep her breasts in check.  She won't allow more than light");
+			break;
+		case BreastStore.LACTATION_STRONG:
+			outputText("to keep her breasts in check.  She won't allow more than strong");
+			break;
+		case BreastStore.LACTATION_HEAVY:
+			outputText("to keep her breasts in check.  She won't allow more than heavy");
+			break;
+		case BreastStore.LACTATION_MODERATE:
+			if (doneHighLactation) {
+				outputText("to keep her breasts in check.  She won't allow more than moderate");
+				break;
+			}
 		default:
-												outputText("not to keep her breasts in check.  There's no limit on her");
+			outputText("not to keep her breasts in check.  There's no limit on her");
 	}
 	outputText(" lactation.</b>\n\nIn the future what should she limit herself to?");
 	menu();
@@ -2069,7 +2073,7 @@ private function useReductoOnKat():void {
 		var knot:Function = (knotSize > 2 ? useRedoctoOnKatsKnot : null);
 		var leng:Function = (cockLength > dickMin ? useReductoOnKatsKock : null);
 		var balls:Function = (ballSize > 1 ? reductoBallSize : null);
-		var breasts:Function = (breasts.cupSize > BreastCup.A ? useRreductoOnKatsBreasts : null);
+		var breastsF:Function = (breasts.cupSize > BreastCup.A ? useRreductoOnKatsBreasts : null);
 		outputText("You extract the small jar of salve and offer it to her.   Her face lights up in delight.  \"<i>Reducto?!  For me?  It's so expensive!</i>\"  At your nod, she yowls happily and snatches it up, " + clothesLowerChoice("yanking down her shorts", "raising her skirt and pulling down her panties", "opening the folds of her bodysuit", "raising her dress and pulling down her panties", "untying her robe and pulling down her panties") + " to expose her sheath.  All of a sudden, she stops abruptly and looks up at you, a dangerous gleam in her eye.  \"<i>Would you like to... help me apply it?</i>\" she asks, softly.  You nod your head");
 		if (player.lib > 50) outputText(" with a salacious grin");
 		outputText(" and she happily plunks down on ");
@@ -2081,7 +2085,7 @@ private function useReductoOnKat():void {
 		if (player.lib > 50)
 			outputText("and planning exactly what you're going to do to it.");
 		else outputText("and wondering how to begin.");
-		simpleChoices("Knot", knot, "Length", leng, "Balls", balls, "Breasts", breasts, "Back", giveKatherineAnItem);
+		simpleChoices("Knot", knot, "Length", leng, "Balls", balls, "Breasts", breastsF, "Back", giveKatherineAnItem);
     }
 }
 
@@ -3867,7 +3871,6 @@ public function suckNFuck():void {
 
 //Get Penetrated
 private function letKatKnotYou():void {
-	var x:Number;
 	clearOutput();
 	if (isAt(KLOC_BAR) || isAt(KLOC_BAR_DRUNK) || isAt(KLOC_BAR_URTA_REFUSED)) { //At the bar
 		outputText("As you wait for Katherine to finish off her drink you start rubbing " + (player.isNaga() ? "the tip of your tail" : "your toe") + " up and down her leg.\n\n");

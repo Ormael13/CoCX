@@ -563,6 +563,7 @@ package classes.Scenes {
 					GeneticMemoryStorage["Fox 5th Tail"] = true;
 					GeneticMemoryStorage["Fox 6th Tail"] = true;
 				}
+				//noinspection FallThroughInSwitchStatementJS
 				if (player.tailType == Tail.FOX && player.tailCount < 7) {
 					switch (player.tailCount) {
 						case 6:
@@ -701,10 +702,10 @@ package classes.Scenes {
 			];
 
 			if (player.hasPerk(PerkLib.MetamorphEx)) {
-//				menusList.push({
-//					name: "Breasts",
-//					func: accessBreastsMenu
-//				},
+				menusList.push({
+						name: "Breasts",
+						func: accessBreastsMenu
+					});
 				menusList.push({
 						name: "Vagina",
 						func: accessVaginasMenu
@@ -716,8 +717,11 @@ package classes.Scenes {
 				menusList.push({
 						name: "Balls",
 						func: accessBallsMenu
-					}
-				);
+					});
+				menusList.push({
+							name: "Special",
+							func: accessSexSpecialMenu
+					});
 			}
 
 			const menusPerPage: int = menusList.length > 14 ? 12 : 14;
@@ -926,7 +930,7 @@ package classes.Scenes {
 			openPaginatedMenu(title, accessTailMenu, currentPage, TailMem.Memories);
 		}
 
-		private function accessBreastsMenu(currentPage: int = 0): void {	//TODO: convert to BodyPart, opts for rows from 0 to 4
+		private function accessBreastsMenu(currentPage: int = 0): void {
 			const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Breasts</u></font>\n";
 
 			clearOutput();
@@ -937,7 +941,7 @@ package classes.Scenes {
 			outputText("[pg]Perhaps you'd like to change this?");
 
 			addButton(14, "Back", accessMetamorphMenu);
-			//openPaginatedMenu(title, accessBreastsMenu, currentPage, TailMem.Memories);
+			openPaginatedMenu(title, accessBreastsMenu, currentPage, BreastMem.Memories);
 		}
 
 		private function accessCocksMenu(currentPage: int = 0): void {
@@ -991,6 +995,19 @@ package classes.Scenes {
 			outputText("[pg]Perhaps you'd like to change this?");
 
 			openPaginatedMenu(title, accessBallsMenu, currentPage, BallsMem.Memories);
+		}
+
+		private function accessSexSpecialMenu(currentPage: int = 0): void {
+			const title: String = "<font size=\"36\" face=\"Georgia\"><u>Soulforce Metamorph - Genitals Special</u></font>\n";
+
+			clearOutput();
+			outputText(title);
+
+			const desc: String = "Ovipositors and other stuff"//CoC.instance.playerAppearance.describeBalls();
+			outputText(desc ?  desc : "You have no specials.");
+			outputText("[pg]Perhaps you'd like to change this?");
+
+			openPaginatedMenu(title, accessSexSpecialMenu, currentPage, SpecialsMem.Memories);
 		}
 
 		private function accessVaginasMenu(currentPage: int = 0): void {
@@ -1061,10 +1078,11 @@ package classes.Scenes {
 				const buttonStr: String = genMem.title || "";
 				const unlocked: Boolean = GeneticMemoryStorage[genMem.id] && (genMem.taurVariant ? GeneticMemoryStorage["Taur Lower Body"] : true);
 				const partsInUse: Boolean = (index==-1? genMem.transformation().isPresent() : genMem.transformation(index).isPresent());
-				const enoughSF: Boolean = player.soulforce >= genMem.cost;
+				const cost:Number=(genMem.cost is Function? genMem.cost() : genMem.cost);
+				const enoughSF: Boolean = player.soulforce >= cost;
 
-				if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem, index).hint("Cost: " + genMem.cost + " SF" + (genMem.info ? "\n\n" + genMem.info : ""));
-				else if (unlocked && partsInUse) addButtonDisabled(currentButton, buttonStr, "You already have this, the metamorphosis would have no effect!");
+				if (unlocked && !partsInUse && enoughSF) addButton(currentButton, buttonStr, doMetamorph, title, genMem, index).hint("Cost: " + cost + " SF" + (genMem.info ? "\n\n" + genMem.info : ""));
+				else if (unlocked && partsInUse) addButtonDisabled(currentButton, buttonStr, (!genMem.hint? "You already have this, the metamorphosis would have no effect!":genMem.hint));
 				else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton, buttonStr, "Cost: " + genMem.cost + " SF (You don't have enough Soulforce for this metamorphosis!)");
 				else if (!unlocked) addButtonDisabled(currentButton, buttonStr, "You haven't unlocked this metamorphosis yet!" + (genMem.lockedInfo ? "\n\n" + genMem.lockedInfo : ""));
 				currentButton++;
@@ -1087,7 +1105,7 @@ package classes.Scenes {
 				genMem.transformation(index).applyEffect();
 			else
 				genMem.transformation().applyEffect();
-			player.soulforce -= genMem.cost;
+			player.soulforce -= (genMem.cost is Function? genMem.cost() : genMem.cost);
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			doNext(accessMetamorphMenu);
 		}

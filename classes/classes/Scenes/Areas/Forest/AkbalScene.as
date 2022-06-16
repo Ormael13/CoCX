@@ -69,7 +69,7 @@ public class AkbalScene extends BaseContent {
 					addButton(14, "Leave", cleanupAfterCombat);
 				}
 				else {
-					outputText("You're not aroused enough to rape hum");
+					outputText("You're not aroused enough to take advantage of him");
 					cleanupAfterCombat();
 				}
 			}

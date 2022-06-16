@@ -4,7 +4,7 @@ package classes.GeneticMemories {
 	import classes.Transformations.Transformation;
 	import classes.CoC;
 
-	public class BreastCountMem extends BaseContent {
+	public class SpecialsMem extends BaseContent {
 		/**
 		* Entry properties:
 		* - id: the identificator of the Metamorph inside GeneticStorage
@@ -37,34 +37,31 @@ package classes.GeneticMemories {
 		*/
 
 		public static var Memories:/*EnumValue*/ Array = [];
+		private static var _partid:int = 0;
 
-		public static const BREAST1:int = 0;
-		EnumValue.add(Memories, BREAST1, "BREAST1", {
-			id: "One Breast Row",
-			name: "One Breast Row",
-			title: "BREAST1"
+		public static const NO_OVIPOSITOR:int = _partid++;
+		EnumValue.add(Memories, NO_OVIPOSITOR, "NO_OVIPOSITOR", {
+			id: "Unlocked Metamorph",
+			name: "Remove Ovipositor",
+			cost: 400,
+			title: "No Ovipositor",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.RemoveOvipositor;
+			}
 		});
 
-		public static const BREAST2:int = 1;
-		EnumValue.add(Memories, BREAST2, "BREAST2", {
-			id: "Two Breast Rows",
-			name: "Two Breast Rows",
-			title: "BREAST2"
+		public static const OVIPOSITOR:int = _partid++;
+		EnumValue.add(Memories, OVIPOSITOR, "OVIPOSITOR", {
+			id: "Gain Ovipositor",
+			name: "Gain Ovipositor",
+			cost: 400,
+			title: "Ovipositor",
+			hint: "Need to get any ovipositor, or a compatible abdomen [bee, spider, mantis] first",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.GainOvipositor;
+			}
 		});
 
-		public static const BREAST3:int = 2;
-		EnumValue.add(Memories, BREAST3, "BREAST3", {
-			id: "Three Breast Rows",
-			name: "Three Breast Rows",
-			title: "BREAST3"
-		});
-
-		public static const BREAST4:int = 3;
-		EnumValue.add(Memories, BREAST4, "BREAST4", {
-			id: "Four Breast Rows",
-			name: "Four Breast Rows",
-			title: "BREAST4"
-		});
 
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];

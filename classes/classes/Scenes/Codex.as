@@ -34,7 +34,7 @@ import coc.view.ButtonDataList;
 			headerSub("Header6");
 			outputText("Lorem ipsum dolor sit amet");
 		 */
-		
+
 		//Current state
 		private var currentPage:String = "";
 		private var currentEntry:int = 0;
@@ -110,6 +110,7 @@ import coc.view.ButtonDataList;
 				[kFLAGS.CODEX_ENTRY_BEHEMOTH, "Behemoth", codexEntryBehemoth],
 				[kFLAGS.CODEX_ENTRY_CHESHIRE_CAT, "Cheshire Cat", codexEntryCheshireCat],
 				[kFLAGS.CODEX_ENTRY_CHIMERA, "Chimera", codexEntryChimera],
+				[kFLAGS.CODEX_ENTRY_COCKATRICES, "Cockatrices", codexEntryCockatrices],
 				[kFLAGS.CODEX_ENTRY_DEVIL, "Devil", codexEntryDevil],
 				[kFLAGS.CODEX_ENTRY_DISPLACER_BEAST, "Displacers", codexEntryDisplacerBeast],
 				[kFLAGS.CODEX_ENTRY_GOOGIRLS, "Goo Girls", codexEntryGooGirls],
@@ -267,6 +268,71 @@ import coc.view.ButtonDataList;
 			headerSub("History");
 			outputText("Ever since transformatives appeared on Mareth, chimeric abominations roamed the land. It only became even worse when the demons started experimenting and creating even deadlier beasts. True chimera almost always loses to their many conflicting instincts, turning savage and aggressive before long, something demonic corruption only makes worse.");
 			outputText("\n\n(Written By: Liadri)");
+		}
+
+		private function codexEntryCockatrices():void {
+			headerMain("Cockatrices");
+			outputText("<b>Genders:</b> Male, female and hermaphrodite. On average 55% of the cockatrices are male, with 35% being female"
+				+" and 10% being natural herms.\n");
+			outputText("<b>Height:</b> Cockatrices can grow between 5 foot 7 and 6 foot 8,"
+				+" though their long tails and feathered ears tend to make them look larger.\n");
+			outputText("<b>Build:</b> Cockatrices tend to have light and athletic builds, with their muscle mass being noticeable particularly"
+				+" around the chest and stomach. Similar to harpies females have small busts, while their behinds tends to be small,"
+				+" often described as pert or tight. Regardless of gender they have somewhat wider hips, perfect for egg laying.\n");
+			outputText("<b>Hair/Feathers:</b> Cockatrices have a layer of feathers coating most of their body, leaving only the belly, tail, forearms"
+				+" and calves free of feathers. Their feathers come in several colors, often vibrant or exotic, with lighter coloured accents"
+				+" in most cases. Some examples of these combinations are Blue/Turquoise, Orange/Red, Green/Yellow, Purple/Pink, Black/White,"
+				+" (Sandy)Blonde/Brown, White/Grey. The scales of a cockatrice’s arms and legs are either black or yellow, while the tail"
+				+" matches their feathers. Their ‘hair’ is also made of feathers so often cannot be distinguished as separate.\n");
+			outputText("<b>Skin tone:</b> Cockatrice skin tones are unknown. See ‘Hair/Feathers’ for closest info\n");
+			outputText("<b>Facial structure:</b> Cockatrices have bird-like faces complete with beaks. Their face is covered in the same feathered"
+				+" coat as the rest of them, with longer ones on their ears. Their ears are at the side of their head,"
+				+" in a similar shape to elf ears. Their ear tufts are usually longer than the top of their head,"
+				+" and usually stand on their own, though some are known to be droopy. Their eyes are a remarkable feature,"
+				+" possessing the same petrification skill of basilisks, while taking on a color similar to their lighter feathers."
+				+" Their slit pupils can dilate similar to those of a cat, usually when excited.\n");
+			headerSub("Appearance");
+			outputText("Cockatrices have vibrant feathers covering the majority of their body, with only the belly, forearms, calves and tail being"
+				+" devoid of feathers. Their plumage tends to be one dark colour with a lighter shade or similar complementary color accenting"
+				+" their appearance. They appear mostly avian, with beaked faces, tufted feathered ears, and vestigial wing feathers at the"
+				+" elbow. These vestigial wings aid with jumping and allow some slight control in the air. Some, but not all Cockatrices will"
+				+" also have fully functional wings on their backs.");
+			outputText("\n\nAround their neck, they have a ruff of lighter feathers which tends to be thicker and fluffier than their body feathers."
+				+" It is usually used for the communication of emotion, puffing out and settling straight with their feelings."
+				+" They have athletic frames with slight muscle definition, which is evident on their cream scaled underbelly,"
+				+" with females and herms having up to D cup breasts at maximum. They usually have slightly wide hips and tight behinds,"
+				+" their bodies surprisingly lithe.");
+			outputText("\n\nThe upper portions of their arms and legs are also covered with feathers, which then grow into a cuff at the forearms"
+				+" and calves, where their scaled reptile arms and legs begin. Usually these scales are black or yellow."
+				+" Their hands are tipped with sharp claws, while their digitigrade reptile feet have sharp talons on each of their 3 toes,"
+				+" their 4th hind claw being somewhat smaller. Above their rump they have a long,thick reptile tail which is the same color"
+				+" as their feathers. Their feathers grow down it from their rear about 4 inches before terminating in a v-shape and their"
+				+" scales begin. Their tails are usually close to half their body length.");
+			outputText("\n\nA Cockatrice’s genitals are contained within a genital slit when not aroused, making their scaly underbelly seem smooth"
+				+" regardless of gender. When aroused, the male’s penis emerges from the slit, usually between 6 and 12 inches long"
+				+" and up to 2 inches thick. The Cockatrice’s member is usually a deep purple and similar in structure to that of a reptile.");
+			headerSub("Reproduction");
+			outputText("Female Cockatrices lay eggs, usually in a clutch of up to 4, once every 3 months. While any male can try to fertilize"
+				+" a Cockatrice, and during her time with clutch she will aggressively pursue males so she can breed, they are not the most"
+				+" fertile race due to being hybrids.If a male fertilizes them, the eggs grow to the size of large ostrich eggs in the womb."
+				+" They remain in the womb for one week before being laid, their eggshells usually a pale powder blue. These eggs hatch after"
+				+" 3 days, the ‘chicks’ already developed to the mentality of a 7-year-old, even at this small size. Due to their boundless"
+				+" energy they are hard for the mother to keep track of, them only stopping when they collapse for a nap. Over the next month,"
+				+" the ‘chicks’ will grow into adults, their minds and bodies developing rapidly, though their energy levels remain similar."
+				+" By the time they have fully grown, they will still be very playful and excitable, easily jumping and gliding from rock to"
+				+" rock in their mountain homes as they find others to play with.");
+			outputText("\n\nIf a female isn’t fertilised, her eggs pass after a few days and are usually eaten. Cockatrice numbers are few enough"
+				+" thanks to their hybrid nature, but also because of the difficulty in ensuring a ‘chicks’ safety. Cockatrices are known for"
+				+" having prefered partners, and while they are not usually monogamous,"
+				+" these prefered partners are the closest thing in cocktrice society to a romantic partner.");
+			headerSub("Petrification");
+			outputText("While Cockatrice’s share the petrifying gaze of their basilisk father's, they use it very differently."
+				+" They do not rely on it as a weapon, their playful and upbeat nature means they use it in very creative ways. They trap their"
+				+" lovers with their gaze, often in an intimate way such as during a hug, so that they can play with them longer,"
+				+" having sex in many difficult and obscure positions thanks to the paralysis they inflict. The commonest use is so they can"
+				+" hold around their partner’s neck in an embrace while wrapping their legs around their waist.  This way they can have full"
+				+" control of the pace without having to worry about their partner falling over or being too weak to support them.");
+			outputText("\n\n(Written by MissBlackthorne)");
 		}
 
 		private function codexEntryDevil():void {

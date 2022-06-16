@@ -239,6 +239,10 @@ public class RaceScoreBuilder {
 		);
 		return this;
 	}
+	public function skinCoatPattern(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_SKIN_COAT_PATTERN, value, score, failScore, customName);
+		return this;
+	}
 	public function skinPlainOnly(score:int, failScore:int=0):RaceScoreBuilder {
 		return customRequirement(
 				"skin",

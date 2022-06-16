@@ -1643,8 +1643,8 @@ import flash.utils.getQualifiedClassName;
 		{
 			if (damage > 0) {
 				if (lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
-					if (!plural) outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.");
-					else outputText("\n" + capitalA + short + " brush against your exposed skin and jerk back in surprise, coloring slightly from seeing so much of you revealed.");
+					if (!plural) outputText("\n[Themonster] brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.");
+					else outputText("\n[Themonster] brush against your exposed skin and jerk back in surprise, coloring slightly from seeing so much of you revealed.");
 					lust += 5 * lustVuln;
 				}
 			}
@@ -1656,23 +1656,23 @@ import flash.utils.getQualifiedClassName;
 				//Due to toughness or armor...
 				if (rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + (player.armor != ArmorLib.NOTHING ? player.armor.name : player.armorName) + ".");
 				else {
-					if (plural) outputText("You deflect and block every " + weaponVerb + " " + a + short + " throw at you. ");
-					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you. ");
+					if (plural) outputText("You deflect and block every " + weaponVerb + " [themonster] throw at you. ");
+					else outputText("You deflect and block every " + weaponVerb + " [themonster] throws at you. ");
 				}
 			}
-			else if (damage < 6) outputText("You are struck a glancing blow by " + a + short + "! ");
+			else if (damage < 6) outputText("You are struck a glancing blow by [themonster]! ");
 			else if (damage < 11) {
-				outputText(capitalA + short + " wound");
+				outputText("[Themonster] wound");
 				if (!plural) outputText("s");
 				outputText(" you! ");
 			}
 			else if (damage < 21) {
-				outputText(capitalA + short + " stagger");
+				outputText("[Themonster] stagger");
 				if (!plural) outputText("s");
 				outputText(" you with the force of " + pronoun3 + " " + weaponVerb + "! ");
 			}
 			else if (damage > 20) {
-				outputText(capitalA + short + " <b>mutilate");
+				outputText("[Themonster] <b>mutilate");
 				if (!plural) outputText("s");
 				outputText("</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ");
 			}
@@ -1689,13 +1689,13 @@ import flash.utils.getQualifiedClassName;
 		protected function handleBlind():Boolean
 		{
 			if (hasStatusEffect(StatusEffects.LoweredAccuracy) && rand(100) < statusEffectv1(StatusEffects.LoweredAccuracy)) {
-				if (weaponVerb == "tongue-slap") outputText(capitalA + short + " completely misses you with a thrust from "+pronoun3+" tongue!\n");
-				else outputText(capitalA + short + " completely misses you with an attack!\n");
+				if (weaponVerb == "tongue-slap") outputText("[Themonster] completely misses you with a thrust from "+pronoun3+" tongue!\n");
+				else outputText("[Themonster] completely misses you with an attack!\n");
 				return false;
 			}
 			else if (rand(3) < 2) {
-				if (weaponVerb == "tongue-slap") outputText(capitalA + short + " completely misses you with a thrust from "+pronoun3+" tongue!\n");
-				else outputText(capitalA + short + " completely misses you with a blind attack!\n");
+				if (weaponVerb == "tongue-slap") outputText("[Themonster] completely misses you with a thrust from "+pronoun3+" tongue!\n");
+				else outputText("[Themonster] completely misses you with a blind attack!\n");
 				return false;
 			}
 			return true;
@@ -1706,8 +1706,8 @@ import flash.utils.getQualifiedClassName;
 		 */
 		protected function outputPlayerDodged(dodge:int):void
 		{
-			if (dodge==1) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!\n");
-			else if (dodge==2) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!\n");
+			if (dodge==1) outputText("You narrowly avoid [themonster]'s " + weaponVerb + "!\n");
+			else if (dodge==2) outputText("You dodge [themonster]'s " + weaponVerb + " with superior quickness!\n");
 			else {
 				outputText("You deftly avoid " + a + short);
 				if (plural) outputText("'");
@@ -1747,19 +1747,19 @@ import flash.utils.getQualifiedClassName;
 				var evasionResult:String = player.getEvasionReason(false); // use separate function for speed dodge for expanded dodge description
 				//Determine if evaded
 				if (evasionResult == EVASION_EVADE) {
-					outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'");
+					outputText("Using your skills at evading attacks, you anticipate and sidestep [themonster]'");
 					if (!plural) outputText("s");
 					outputText(" attack.\n");
 					return true;
 				}
 				//("Misdirection"
 				if (evasionResult == EVASION_MISDIRECTION) {
-					outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
+					outputText("Using Raphael's teachings, you anticipate and sidestep [themonster]' attacks.\n");
 					return true;
 				}
 				//Determine if cat'ed
 				if (evasionResult == EVASION_FLEXIBILITY) {
-					outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
+					outputText("With your incredible flexibility, you squeeze out of the way of [themonster]");
 					if (plural) outputText("' attacks.\n");
 					else outputText("'s attack.\n");
 					return true;
@@ -1773,7 +1773,7 @@ import flash.utils.getQualifiedClassName;
 					var parryChance:Number = 25;
 					if (player.statusEffectv4(StatusEffects.CombatFollowerZenji) > 1) parryChance += 15;
 					if (rand(100) > parryChance) {
-						outputText("" + capitalA + short + " goes in for a strike, but Zenji is able to intervene, blocking any opening they have on you, leaving you safe behind him.\n\n");
+						outputText("[Themonster] goes in for a strike, but Zenji is able to intervene, blocking any opening they have on you, leaving you safe behind him.\n\n");
 						outputText("\"<i>You’re gonna have ta try harda dan dat!</i>\" Zenji shouts.");
 						return true;
 					}
@@ -1781,7 +1781,7 @@ import flash.utils.getQualifiedClassName;
 
 				//Parry with weapon
 				if (combatParry()) {
-					outputText("You manage to block " + a + short + "");
+					outputText("You manage to block [themonster]");
 					if (plural) outputText("' attacks ");
 					else outputText("'s attack ");
 					outputText("with your [weapon].\n");
@@ -1798,7 +1798,7 @@ import flash.utils.getQualifiedClassName;
 				}
 				//Block with shield
 				if (combatBlock(true)) {
-					outputText("You block " + a + short + "'s " + weaponVerb + " with your [shield]! ");
+					outputText("You block [themonster]'s " + weaponVerb + " with your [shield]! ");
 					if (game.player.hasPerk(PerkLib.ShieldCombat) && game.player.fatigue >= 20) {
 						player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
 						SceneLib.combat.pspecials.shieldBash();
@@ -1913,9 +1913,9 @@ import flash.utils.getQualifiedClassName;
 		protected function handleConstricted():Boolean
 		{
 			if (hasStatusEffect(StatusEffects.MysticWeb)) {
-				EngineCore.outputText("" + capitalA + short + " struggle to get free from your web!");
+				EngineCore.outputText("[Themonster] struggle to get free from your web!");
 				if (statusEffectv1(StatusEffects.MysticWeb) <= 0) {
-					EngineCore.outputText("" + capitalA + short + " struggle to get free and manage to shove you break off your webbing.");
+					EngineCore.outputText("[Themonster] struggle to get free and manage to shove you break off your webbing.");
 					if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
 					removeStatusEffect(StatusEffects.MysticWeb);
 				}
@@ -1924,9 +1924,9 @@ import flash.utils.getQualifiedClassName;
 				return false;
 			}
 			if (hasStatusEffect(StatusEffects.Pounce)) {
-				EngineCore.outputText("" + capitalA + short + " struggle to get free.");
+				EngineCore.outputText("[Themonster] struggle to get free.");
 				if (statusEffectv1(StatusEffects.Pounce) <= 0) {
-					EngineCore.outputText("" + capitalA + short + " struggle to get free and manage to shove you off.");
+					EngineCore.outputText("[Themonster] struggle to get free and manage to shove you off.");
 					if (hasStatusEffect(StatusEffects.DisplacerPlug)) removeStatusEffect(StatusEffects.DisplacerPlug);
 					removeStatusEffect(StatusEffects.Pounce);
 				}
@@ -1934,16 +1934,16 @@ import flash.utils.getQualifiedClassName;
 				return false;
 			}
 			if (hasStatusEffect(StatusEffects.PouncedByCompanion)) {
-				EngineCore.outputText("" + capitalA + short + " struggle to get free.");
+				EngineCore.outputText("[Themonster] struggle to get free.");
 				if (statusEffectv1(StatusEffects.PouncedByCompanion) <= 0) {
-					EngineCore.outputText("" + capitalA + short + " struggle to get free and manage to shove your companion off.");
+					EngineCore.outputText("[Themonster] struggle to get free and manage to shove your companion off.");
 					removeStatusEffect(StatusEffects.PouncedByCompanion);
 				}
 				addStatusValue(StatusEffects.PouncedByCompanion, 1, -1);
 				return false;
 			}
 			if (hasStatusEffect(StatusEffects.ManticorePlug)) {
-				EngineCore.outputText("" + capitalA + short + " pulls to unplug your tail from [monster his] "+cockDescriptShort()+".");
+				EngineCore.outputText("[Themonster] pulls to unplug your tail from [monster his] "+cockDescriptShort()+".");
 				if (statusEffectv1(StatusEffects.ManticorePlug) <= 0) {
 					EngineCore.outputText("" + capitalA + short +" pulls to unplug your tail from [monster his] "+cockDescriptShort()+" and manages with great efforts to get it off.");
 					if (statusEffectv3(StatusEffects.ManticorePlug) >= 1) {
@@ -1958,7 +1958,7 @@ import flash.utils.getQualifiedClassName;
 				return false;
 			}
 			if (hasStatusEffect(StatusEffects.DisplacerPlug)) {
-				EngineCore.outputText("" + capitalA + short + " struggle to unplug your tentacles suckers.");
+				EngineCore.outputText("[Themonster] struggle to unplug your tentacles suckers.");
 				if (statusEffectv1(StatusEffects.DisplacerPlug) <= 0) {
 					EngineCore.outputText("" + capitalA + short +" struggle to unplug your tentacles suckers from [monster his] "+breastDescript(0)+" and manages with great efforts to get them off.");
 					if (statusEffectv3(StatusEffects.DisplacerPlug) >= 1) {
@@ -1972,7 +1972,7 @@ import flash.utils.getQualifiedClassName;
 				return false;
 			}
 			if (hasStatusEffect(StatusEffects.SlimeInsert)) {
-				EngineCore.outputText("" + capitalA + short + " struggle to force you out of [monster his] body.");
+				EngineCore.outputText("[Themonster] struggle to force you out of [monster his] body.");
 				if (statusEffectv1(StatusEffects.SlimeInsert) <= 0) {
 					EngineCore.outputText("" + capitalA + short +" struggle to force you out of [monster his] body.");
 					if (statusEffectv3(StatusEffects.SlimeInsert) >= 1) {
@@ -1989,7 +1989,7 @@ import flash.utils.getQualifiedClassName;
 			else if (LowerBody.hasTentacles(player)) {
 			EngineCore.outputText("Your prey pushes at your tentacles, twisting and writhing in an effort to escape from your tentacle's tight bonds.");
 			if (statusEffectv1(StatusEffects.ConstrictedScylla) <= 0) {
-				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
+				EngineCore.outputText("  [Themonster] proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
 				if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
 				removeStatusEffect(StatusEffects.ConstrictedScylla);
 			}
@@ -2000,16 +2000,16 @@ import flash.utils.getQualifiedClassName;
 			else if (LowerBody.hasPincers(player)) {
 				EngineCore.outputText("Your prey pushes at your pincer, twisting and writhing in an effort to escape from your iron grip.");
 				if (statusEffectv1(StatusEffects.CancerGrab) <= 0) {
-					EngineCore.outputText("  " + capitalA + short + " proves to be too much for your pincer to handle, breaking free of your iron grip.");
+					EngineCore.outputText("  [Themonster] proves to be too much for your pincer to handle, breaking free of your iron grip.");
 					removeStatusEffect(StatusEffects.CancerGrab);
 				}
 				addStatusValue(StatusEffects.CancerGrab, 1, -1);
 				return false;
 			}
 			else if (LowerBody.isGoo(player)) {
-			EngineCore.outputText("" + capitalA + short + " struggle in your fluid form kicking and screaming to try and get out.");
+			EngineCore.outputText("[Themonster] struggle in your fluid form kicking and screaming to try and get out.");
 			if (statusEffectv1(StatusEffects.GooEngulf) <= 0) {
-				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your slimy body to handle, breaking free of your fluids.");
+				EngineCore.outputText("  [Themonster] proves to be too much for your slimy body to handle, breaking free of your fluids.");
 				if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
 				removeStatusEffect(StatusEffects.GooEngulf);
 			}
@@ -2018,9 +2018,9 @@ import flash.utils.getQualifiedClassName;
 			return false;
 			}
 			else if (hasStatusEffect(StatusEffects.ConstrictedWhip)) {
-			EngineCore.outputText("" + capitalA + short + " pushes, twisting and writhing in an effort to escape from your whip's tight bonds.");
+			EngineCore.outputText("[Themonster] pushes, twisting and writhing in an effort to escape from your whip's tight bonds.");
 			if (statusEffectv1(StatusEffects.ConstrictedWhip) <= 0) {
-				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your whip to handle, breaking free of your tightly bound whip coils.");
+				EngineCore.outputText("  [Themonster] proves to be too much for your whip to handle, breaking free of your tightly bound whip coils.");
 				if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
 				removeStatusEffect(StatusEffects.ConstrictedWhip);
 			}
@@ -2030,26 +2030,26 @@ import flash.utils.getQualifiedClassName;
 			}
 			else if (hasStatusEffect(StatusEffects.EmbraceVampire)) {
 			if (statusEffectv1(StatusEffects.EmbraceVampire) <= 0) {
-				EngineCore.outputText("You try to maintain your grip but " + a + short + " shove you off escaping your embrace!");
+				EngineCore.outputText("You try to maintain your grip but [themonster] shove you off escaping your embrace!");
 				removeStatusEffect(StatusEffects.EmbraceVampire);
 			}
-			else EngineCore.outputText("" + capitalA + short + " struggle but you manage to maintain the embrace.");
+			else EngineCore.outputText("[Themonster] struggle but you manage to maintain the embrace.");
 			addStatusValue(StatusEffects.EmbraceVampire, 1, -1);
 			return false;
 			}
 			else if (hasStatusEffect(StatusEffects.GrabBear)) {
 			if (statusEffectv1(StatusEffects.GrabBear) <= 0) {
-				EngineCore.outputText("You try to maintain your grip but " + a + short + " shove you off escaping your grab!");
+				EngineCore.outputText("You try to maintain your grip but [themonster] shove you off escaping your grab!");
 				removeStatusEffect(StatusEffects.GrabBear);
 			}
-			else EngineCore.outputText("" + capitalA + short + " struggle but you manage to maintain the grab.");
+			else EngineCore.outputText("[Themonster] struggle but you manage to maintain the grab.");
 			addStatusValue(StatusEffects.GrabBear, 1, -1);
 			return false;
 			}
 			else {
 			EngineCore.outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.");
 			if (statusEffectv1(StatusEffects.Constricted) <= 0) {
-				EngineCore.outputText("  " + capitalA + short + " proves to be too much for your tail to handle, breaking free of your tightly bound coils.");
+				EngineCore.outputText("  [Themonster] proves to be too much for your tail to handle, breaking free of your tightly bound coils.");
 				if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
 				removeStatusEffect(StatusEffects.Constricted);
 			}
@@ -2082,8 +2082,8 @@ import flash.utils.getQualifiedClassName;
 			}
 			else {
 				addStatusValue(StatusEffects.Fear, 1, -1);
-				if (plural) EngineCore.outputText(capitalA + short + " are too busy shivering with fear to fight.");
-				else EngineCore.outputText(capitalA + short + " is too busy shivering with fear to fight.");
+				if (plural) EngineCore.outputText("[Themonster] are too busy shivering with fear to fight.");
+				else EngineCore.outputText("[Themonster] is too busy shivering with fear to fight.");
 			}
 			return false;
 		}
@@ -2100,7 +2100,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.Stunned,1,-5);
 			if (statusEffectv1(StatusEffects.StunnedTornado) <= 0) removeStatusEffect(StatusEffects.StunnedTornado);
 			else {
-				EngineCore.outputText(capitalA + short + " is still caught in the tornado.");
+				EngineCore.outputText("[Themonster] is still caught in the tornado.");
 				addStatusValue(StatusEffects.StunnedTornado, 1, -1);
 				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.StunnedTornado,1,-5);
 			}
@@ -2125,8 +2125,8 @@ import flash.utils.getQualifiedClassName;
 				if (plural) EngineCore.outputText("Your foes are still looking for you, swearing in annoyance.");
 				else EngineCore.outputText("Your foe is still looking for you, swearing in annoyance.");
 			}
-			else if (hasStatusEffect(StatusEffects.Polymorphed)) EngineCore.outputText(capitalA + short + " is fighting against the curse.");
-			else if (hasStatusEffect(StatusEffects.MonsterAttacksDisabled)) EngineCore.outputText(capitalA + short + " try to hit you but is unable to reach you!");
+			else if (hasStatusEffect(StatusEffects.Polymorphed)) EngineCore.outputText("[Themonster] is fighting against the curse.");
+			else if (hasStatusEffect(StatusEffects.MonsterAttacksDisabled)) EngineCore.outputText("[Themonster] try to hit you but is unable to reach you!");
 			else {
 				if (plural) EngineCore.outputText("Your foes are too dazed from your last hit to strike back!");
 				else {
@@ -2277,31 +2277,31 @@ import flash.utils.getQualifiedClassName;
 		protected function outputDefaultTeaseReaction(lustDelta:Number):void
 		{
 			if (plural) {
-				if (lustDelta == 0) outputText("\n\n" + capitalA + short + " seem unimpressed.");
-				if (lustDelta > 0 && lustDelta < 4) outputText("\n" + capitalA + short + " look intrigued by what " + pronoun1 + " see.");
-				if (lustDelta >= 4 && lustDelta < 10) outputText("\n" + capitalA + short + " definitely seem to be enjoying the show.");
-				if (lustDelta >= 10 && lustDelta < 15) outputText("\n" + capitalA + short + " openly stroke " + pronoun2 + "selves as " + pronoun1 + " watch you.");
-				if (lustDelta >= 15 && lustDelta < 20) outputText("\n" + capitalA + short + " flush hotly with desire, " + pronoun3 + " eyes filled with longing.");
-				if (lustDelta >= 20) outputText("\n" + capitalA + short + " lick " + pronoun3 + " lips in anticipation, " + pronoun3 + " hands idly stroking " + pronoun3 + " bodies.");
+				if (lustDelta == 0) outputText("\n\n[Themonster] seem unimpressed.");
+				if (lustDelta > 0 && lustDelta < 4) outputText("\n[Themonster] look intrigued by what " + pronoun1 + " see.");
+				if (lustDelta >= 4 && lustDelta < 10) outputText("\n[Themonster] definitely seem to be enjoying the show.");
+				if (lustDelta >= 10 && lustDelta < 15) outputText("\n[Themonster] openly stroke " + pronoun2 + "selves as " + pronoun1 + " watch you.");
+				if (lustDelta >= 15 && lustDelta < 20) outputText("\n[Themonster] flush hotly with desire, " + pronoun3 + " eyes filled with longing.");
+				if (lustDelta >= 20) outputText("\n[Themonster] lick " + pronoun3 + " lips in anticipation, " + pronoun3 + " hands idly stroking " + pronoun3 + " bodies.");
 			}
 			else {
-				if (lustDelta == 0) outputText("\n" + capitalA + short + " seems unimpressed.");
+				if (lustDelta == 0) outputText("\n[Themonster] seems unimpressed.");
 				if (lustDelta > 0 && lustDelta < 4) {
-					if (plural) outputText("\n" + capitalA + short + " looks intrigued by what " + pronoun1 + " see.");
-					else outputText("\n" + capitalA + short + " looks intrigued by what " + pronoun1 + " sees.");
+					if (plural) outputText("\n[Themonster] looks intrigued by what " + pronoun1 + " see.");
+					else outputText("\n[Themonster] looks intrigued by what " + pronoun1 + " sees.");
 				}
-				if (lustDelta >= 4 && lustDelta < 10) outputText("\n" + capitalA + short + " definitely seems to be enjoying the show.");
+				if (lustDelta >= 4 && lustDelta < 10) outputText("\n[Themonster] definitely seems to be enjoying the show.");
 				if (lustDelta >= 10 && lustDelta < 15) {
-					if (plural) outputText("\n" + capitalA + short + " openly strokes " + pronoun2 + "selves as " + pronoun1 + " watch you.");
-					else outputText("\n" + capitalA + short + " openly strokes " + pronoun2 + "self as " + pronoun1 + " watches you.");
+					if (plural) outputText("\n[Themonster] openly strokes " + pronoun2 + "selves as " + pronoun1 + " watch you.");
+					else outputText("\n[Themonster] openly strokes " + pronoun2 + "self as " + pronoun1 + " watches you.");
 				}
 				if (lustDelta >= 15 && lustDelta < 20) {
-					if (plural) outputText("\n" + capitalA + short + " flush hotly with desire, " + pronoun3 + " eyes filling with longing.");
-					else outputText("\n" + capitalA + short + " flushes hotly with desire, " + pronoun3 + " eyes filled with longing.");
+					if (plural) outputText("\n[Themonster] flush hotly with desire, " + pronoun3 + " eyes filling with longing.");
+					else outputText("\n[Themonster] flushes hotly with desire, " + pronoun3 + " eyes filled with longing.");
 				}
 				if (lustDelta >= 20) {
-					if (plural) outputText("\n" + capitalA + short + " licks " + pronoun3 + " lips in anticipation, " + pronoun3 + " hands idly stroking " + pronoun3 + " own bodies.");
-					else outputText("\n" + capitalA + short + " licks " + pronoun3 + " lips in anticipation, " + pronoun3 + " hands idly stroking " + pronoun3 + " own body.");
+					if (plural) outputText("\n[Themonster] licks " + pronoun3 + " lips in anticipation, " + pronoun3 + " hands idly stroking " + pronoun3 + " own bodies.");
+					else outputText("\n[Themonster] licks " + pronoun3 + " lips in anticipation, " + pronoun3 + " hands idly stroking " + pronoun3 + " own body.");
 				}
 			}
 		}
@@ -2636,10 +2636,10 @@ import flash.utils.getQualifiedClassName;
 				addStatusValue(StatusEffects.Polymorphed,1,-1);
 				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.Polymorphed,1,-5);
 				if(statusEffectv1(StatusEffects.Polymorphed) <= 0) {
-					outputText("<b>" + capitalA + short + " has freed " + pronoun2 + "self from the curse!</b>\n\n");
+					outputText("<b>[Themonster] has freed " + pronoun2 + "self from the curse!</b>\n\n");
 					removeStatusEffect(StatusEffects.Polymorphed);
 				}
-				else outputText("<b>" + capitalA + short + " is fighting against the curse.</b>\n\n");
+				else outputText("<b>[Themonster] is fighting against the curse.</b>\n\n");
 			}
 			if(hasStatusEffect(StatusEffects.Sleep)) {
 				addStatusValue(StatusEffects.Sleep,1,-1);
@@ -2678,13 +2678,13 @@ import flash.utils.getQualifiedClassName;
 				addStatusValue(StatusEffects.HypnosisNaga,1,-1);
 				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.HypnosisNaga,1,-5);
 				if(statusEffectv1(StatusEffects.HypnosisNaga) <= 0) {
-					outputText("<b>You try to prolong the trance but " + a + short + " finally snaps out.</b>\n\n");
+					outputText("<b>You try to prolong the trance but [themonster] finally snaps out.</b>\n\n");
 					removeStatusEffect(StatusEffects.HypnosisNaga);
 				}
-				else outputText("<b>" + capitalA + short + " is lost in your gaze unable to act.</b>\n\n");
+				else outputText("<b>[Themonster] is lost in your gaze unable to act.</b>\n\n");
 			}
 			if(hasStatusEffect(StatusEffects.Earthshield)) {
-				outputText("<b>" + capitalA + short + " is protected by a shield of rocks!</b>\n\n");
+				outputText("<b>[Themonster] is protected by a shield of rocks!</b>\n\n");
 			}
 			if(hasStatusEffect(StatusEffects.Flying)) {
 				addStatusValue(StatusEffects.Flying,1,-1);
@@ -2720,21 +2720,21 @@ import flash.utils.getQualifiedClassName;
 				addStatusValue(StatusEffects.Sandstorm,1,1);
 			}
 			if(hasStatusEffect(StatusEffects.Stunned)) {
-				outputText("<b>" + capitalA + short + " is still stunned!</b>\n\n");
+				outputText("<b>[Themonster] is still stunned!</b>\n\n");
 			}
 			if(hasStatusEffect(StatusEffects.Shell)) {
 				if(statusEffectv1(StatusEffects.Shell) >= 0) {
-					outputText("<b>A wall of many hues shimmers around " + a + short + ".</b>\n\n");
+					outputText("<b>A wall of many hues shimmers around [themonster].</b>\n\n");
 					addStatusValue(StatusEffects.Shell,1,-1);
 				}
 				else {
-					outputText("<b>The magical barrier " + a + short + " erected fades away to nothing at last.</b>\n\n");
+					outputText("<b>The magical barrier [themonster] erected fades away to nothing at last.</b>\n\n");
 					removeStatusEffect(StatusEffects.Shell);
 				}
 			}
 			if(hasStatusEffect(StatusEffects.Hypermode)) {
 				if (statusEffectv1(StatusEffects.Hypermode) <= 0) {
-					outputText("<b>" + capitalA + short + " is no longer rampaging!</b>\n\n");
+					outputText("<b>[Themonster] is no longer rampaging!</b>\n\n");
 					removeStatusEffect(StatusEffects.Hypermode);
 				}
 				addStatusValue(StatusEffects.Hypermode,1,-1);
@@ -2747,7 +2747,7 @@ import flash.utils.getQualifiedClassName;
 				if (statusEffectv4(StatusEffects.IzmaBleed) == 1) addStatusValue(StatusEffects.IzmaBleed, 4, -1);
 				//Heal wounds
 				if (statusEffectv1(StatusEffects.IzmaBleed) <= 0) {
-					outputText("The wounds you left on " + a + short + " stop bleeding so profusely.\n\n");
+					outputText("The wounds you left on [themonster] stop bleeding so profusely.\n\n");
 					removeStatusEffect(StatusEffects.IzmaBleed);
 				}
 				//Deal damage if still wounded.
@@ -2762,8 +2762,8 @@ import flash.utils.getQualifiedClassName;
 					procentvalue = Math.round(procentvalue);
 					var store:Number = maxHP() * (procentvalue) / 100;
 					store = SceneLib.combat.doDamage(store);
-					if (plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
-					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
+					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
 				}
 			}
 			if(hasStatusEffect(StatusEffects.SharkBiteBleed)) {
@@ -2772,7 +2772,7 @@ import flash.utils.getQualifiedClassName;
 				else addStatusValue(StatusEffects.SharkBiteBleed,1,-1);
 				//Heal wounds
 				if(statusEffectv1(StatusEffects.SharkBiteBleed) <= 0) {
-					outputText("The bite wounds you left on " + a + short + " stop bleeding so profusely.\n\n");
+					outputText("The bite wounds you left on [themonster] stop bleeding so profusely.\n\n");
 					removeStatusEffect(StatusEffects.SharkBiteBleed);
 				}
 				//Deal damage if still wounded.
@@ -2789,8 +2789,8 @@ import flash.utils.getQualifiedClassName;
 					store3 = Math.round(store3);
 					if (statusEffectv2(StatusEffects.SharkBiteBleed) > 0) store3 *= statusEffectv2(StatusEffects.SharkBiteBleed);
 					store3 = SceneLib.combat.doDamage(store3);
-					if(plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your bite left behind. <b>(<font color=\"#800000\">" + store3 + "</font>)</b>\n\n");
-					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your bite left behind. <b>(<font color=\"#800000\">" + store3 + "</font>)</b>\n\n");
+					if(plural) outputText("[Themonster] bleed profusely from the jagged wounds your bite left behind. <b>(<font color=\"#800000\">" + store3 + "</font>)</b>\n\n");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds your bite left behind. <b>(<font color=\"#800000\">" + store3 + "</font>)</b>\n\n");
 				}
 			}
 			if(hasStatusEffect(StatusEffects.CouatlHurricane)) {
@@ -2802,8 +2802,8 @@ import flash.utils.getQualifiedClassName;
 				store14 += statusEffectv1(StatusEffects.CouatlHurricane); //Stacks on itself growing ever stronger
 				store14 += maxHP()*0.02;
 				store14 = SceneLib.combat.doDamage(store14);
-				if(plural) outputText(capitalA + short + " is violently struck by the ever intensifying windstorm. <b>(<font color=\"#800000\">" + store14 + "</font>)</b>\n\n");
-				else outputText(capitalA + short + " are violently struck by the ever intensifying windstorm. <b>(<font color=\"#800000\">" + store14 + "</font>)</b>\n\n");
+				if(plural) outputText("[Themonster] is violently struck by the ever intensifying windstorm. <b>(<font color=\"#800000\">" + store14 + "</font>)</b>\n\n");
+				else outputText("[Themonster] are violently struck by the ever intensifying windstorm. <b>(<font color=\"#800000\">" + store14 + "</font>)</b>\n\n");
 				temp = rand(4);
 				if(temp == 3) createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0); outputText("<b>A random flying object caught in the hurricane rams into your opponent, stunning it!</b>\n\n");
 			}
@@ -2818,8 +2818,8 @@ import flash.utils.getQualifiedClassName;
 				store13 += statusEffectv1(StatusEffects.KamaitachiBleed); //Kamaitachi bleed stacks on itself growing ever stronger
 				store13 += maxHP()*0.02;
 				store13 = SceneLib.combat.doDamage(store13);
-				if(plural) outputText(capitalA + short + " bleed profusely from the deep wounds your scythes left behind. <b>(<font color=\"#800000\">" + store13 + "</font>)</b>\n\n");
-				else outputText(capitalA + short + " bleeds profusely from the deep wounds your scythes left behind. <b>(<font color=\"#800000\">" + store13 + "</font>)</b>\n\n");
+				if(plural) outputText("[Themonster] bleed profusely from the deep wounds your scythes left behind. <b>(<font color=\"#800000\">" + store13 + "</font>)</b>\n\n");
+				else outputText("[Themonster] bleeds profusely from the deep wounds your scythes left behind. <b>(<font color=\"#800000\">" + store13 + "</font>)</b>\n\n");
 			}
 			if(hasStatusEffect(StatusEffects.GoreBleed)) {
 				//Countdown to heal
@@ -2830,7 +2830,7 @@ import flash.utils.getQualifiedClassName;
 					outputText("The ");
 					if (player.horns.type == Horns.COW_MINOTAUR) outputText("horns wounds");
 					else outputText("horns wound");
-					outputText(" you left on " + a + short + " stop bleeding so profusely.\n\n");
+					outputText(" you left on [themonster] stop bleeding so profusely.\n\n");
 					removeStatusEffect(StatusEffects.GoreBleed);
 				}
 				//Deal damage if still wounded.
@@ -2847,13 +2847,13 @@ import flash.utils.getQualifiedClassName;
 					store5 = Math.round(store5);
 					store5 = SceneLib.combat.doDamage(store5);
 					if (plural) {
-						outputText(capitalA + short + " bleed profusely from the jagged ");
+						outputText("[Themonster] bleed profusely from the jagged ");
 						if (player.horns.type == Horns.COW_MINOTAUR) outputText("wounds your horns");
 						else outputText("wound your horns");
 						outputText(" left behind. <b>(<font color=\"#800000\">" + store5 + "</font>)</b>\n\n");
 					}
 					else {
-						outputText(capitalA + short + " bleeds profusely from the jagged ");
+						outputText("[Themonster] bleeds profusely from the jagged ");
 						if (player.horns.type == Horns.COW_MINOTAUR) outputText("wounds your horns");
 						else outputText("wound your horns");
 						outputText(" left behind. <b>(<font color=\"#800000\">" + store5 + "</font>)</b>\n\n");
@@ -2876,7 +2876,7 @@ import flash.utils.getQualifiedClassName;
 				}
 				//Heal wounds
 				if (statusEffectv1(StatusEffects.Hemorrhage) <= 0 || statusEffectv1(StatusEffects.HemorrhageArmor) <= 0 || statusEffectv1(StatusEffects.HemorrhageShield) <= 0) {
-					outputText("The wounds you left on " + a + short + " stop bleeding so profusely.\n\n");
+					outputText("The wounds you left on [themonster] stop bleeding so profusely.\n\n");
 					if (statusEffectv1(StatusEffects.Hemorrhage) <= 0) removeStatusEffect(StatusEffects.Hemorrhage);
 					if (statusEffectv1(StatusEffects.HemorrhageArmor) <= 0) removeStatusEffect(StatusEffects.HemorrhageArmor);
 					if (statusEffectv1(StatusEffects.HemorrhageShield) <= 0) removeStatusEffect(StatusEffects.HemorrhageShield);
@@ -2889,8 +2889,8 @@ import flash.utils.getQualifiedClassName;
 					if (statusEffectv1(StatusEffects.HemorrhageShield) > 0) hemorrhage += maxHP() * statusEffectv2(StatusEffects.HemorrhageShield);
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage *= 1.2;
 					hemorrhage = SceneLib.combat.doDamage(hemorrhage);
-					if (plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your attack left behind. <b>(<font color=\"#800000\">" + hemorrhage + "</font>)</b>\n\n");
-					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your attack left behind. <b>(<font color=\"#800000\">" + hemorrhage + "</font>)</b>\n\n");
+					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your attack left behind. <b>(<font color=\"#800000\">" + hemorrhage + "</font>)</b>\n\n");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds your attack left behind. <b>(<font color=\"#800000\">" + hemorrhage + "</font>)</b>\n\n");
 				}
 			}
 			if(hasStatusEffect(StatusEffects.Hemorrhage2)) {
@@ -2899,7 +2899,7 @@ import flash.utils.getQualifiedClassName;
 				else addStatusValue(StatusEffects.Hemorrhage2, 1, -1);
 				//Heal wounds
 				if (statusEffectv1(StatusEffects.Hemorrhage2) <= 0) {
-					outputText("The wounds your companion left on " + a + short + " stop bleeding so profusely.\n\n");
+					outputText("The wounds your companion left on [themonster] stop bleeding so profusely.\n\n");
 					removeStatusEffect(StatusEffects.Hemorrhage2);
 				}
 				//Deal damage if still wounded.
@@ -2908,8 +2908,8 @@ import flash.utils.getQualifiedClassName;
 					hemorrhage2 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage2);
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage2 *= 1.2;
 					hemorrhage2 = SceneLib.combat.doDamage(hemorrhage2);
-					if (plural) outputText(capitalA + short + " bleed profusely from the jagged wounds your companion attack left behind. <b>(<font color=\"#800000\">" + hemorrhage2 + "</font>)</b>\n\n");
-					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your companion attack left behind. <b>(<font color=\"#800000\">" + hemorrhage2 + "</font>)</b>\n\n");
+					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your companion attack left behind. <b>(<font color=\"#800000\">" + hemorrhage2 + "</font>)</b>\n\n");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds your companion attack left behind. <b>(<font color=\"#800000\">" + hemorrhage2 + "</font>)</b>\n\n");
 				}
 			}
 			if (hasStatusEffect(StatusEffects.Bloodlust)) {
@@ -2952,28 +2952,28 @@ import flash.utils.getQualifiedClassName;
 				switch(statusEffectv1(StatusEffects.LustStick)) {
 					//First:
 					case 1:
-						if(plural) outputText("One of " + a + short + " pants and crosses " + mf("his","her") + " eyes for a moment.  " + mf("His","Her") + " dick flexes and bulges, twitching as " + mf("he","she") + " loses himself in a lipstick-fueled fantasy.  When " + mf("he","she") + " recovers, you lick your lips and watch " + mf("his","her") + " blush spread.\n\n");
-						else outputText(capitalA + short + " pants and crosses " + pronoun3 + " eyes for a moment.  " + mf("His","Her") + " dick flexes and bulges, twitching as " + pronoun1 + " loses " + mf("himself", "herself") + " in a lipstick-fueled fantasy.  When " + pronoun1 + " recovers, you lick your lips and watch " + mf("his","her") + " blush spread.\n\n");
+						if(plural) outputText("One of [themonster] pants and crosses " + mf("his","her") + " eyes for a moment.  " + mf("His","Her") + " dick flexes and bulges, twitching as " + mf("he","she") + " loses himself in a lipstick-fueled fantasy.  When " + mf("he","she") + " recovers, you lick your lips and watch " + mf("his","her") + " blush spread.\n\n");
+						else outputText("[Themonster] pants and crosses " + pronoun3 + " eyes for a moment.  " + mf("His","Her") + " dick flexes and bulges, twitching as " + pronoun1 + " loses " + mf("himself", "herself") + " in a lipstick-fueled fantasy.  When " + pronoun1 + " recovers, you lick your lips and watch " + mf("his","her") + " blush spread.\n\n");
 						break;
 					//Second:
 					case 2:
-						if(plural) outputText(capitalA + short + " moan out loud, " + pronoun3 + " dicks leaking and dribbling while " + pronoun1 + " struggle not to touch " + pronoun2 + ".\n\n");
-						else outputText(capitalA + short + " moans out loud, " + pronoun3 + " dick leaking and dribbling while " + pronoun1 + " struggles not to touch it.\n\n");
+						if(plural) outputText("[Themonster] moan out loud, " + pronoun3 + " dicks leaking and dribbling while " + pronoun1 + " struggle not to touch " + pronoun2 + ".\n\n");
+						else outputText("[Themonster] moans out loud, " + pronoun3 + " dick leaking and dribbling while " + pronoun1 + " struggles not to touch it.\n\n");
 						break;
 					//Third:
 					case 3:
-						if(plural) outputText(capitalA + short + " pump " + pronoun3 + " hips futilely, air-humping non-existent partners.  Clearly your lipstick is getting to " + pronoun2 + ".\n\n");
-						else outputText(capitalA + short + " pumps " + pronoun3 + " hips futilely, air-humping a non-existent partner.  Clearly your lipstick is getting to " + pronoun2 + ".\n\n");
+						if(plural) outputText("[Themonster] pump " + pronoun3 + " hips futilely, air-humping non-existent partners.  Clearly your lipstick is getting to " + pronoun2 + ".\n\n");
+						else outputText("[Themonster] pumps " + pronoun3 + " hips futilely, air-humping a non-existent partner.  Clearly your lipstick is getting to " + pronoun2 + ".\n\n");
 						break;
 					//Fourth:
 					case 4:
-						if(plural) outputText(capitalA + short + " close " + pronoun3 + " eyes and grunt, " + pronoun3 + " cocks twitching, bouncing, and leaking pre-cum.\n\n");
-						else outputText(capitalA + short + " closes " + pronoun2 + " eyes and grunts, " + pronoun3 + " cock twitching, bouncing, and leaking pre-cum.\n\n");
+						if(plural) outputText("[Themonster] close " + pronoun3 + " eyes and grunt, " + pronoun3 + " cocks twitching, bouncing, and leaking pre-cum.\n\n");
+						else outputText("[Themonster] closes " + pronoun2 + " eyes and grunts, " + pronoun3 + " cock twitching, bouncing, and leaking pre-cum.\n\n");
 						break;
 					//Fifth and repeat:
 					default:
 						if(plural) outputText("Drops of pre-cum roll steadily out of their dicks.  It's a marvel " + pronoun1 + " haven't given in to " + pronoun3 + " lusts yet.\n\n");
-						else outputText("Drops of pre-cum roll steadily out of " + a + short + "'s dick.  It's a marvel " + pronoun1 + " hasn't given in to " + pronoun3 + " lust yet.\n\n");
+						else outputText("Drops of pre-cum roll steadily out of [themonster]'s dick.  It's a marvel " + pronoun1 + " hasn't given in to " + pronoun3 + " lust yet.\n\n");
 						break;
 				}
 				addStatusValue(StatusEffects.LustStick,1,1);
@@ -2993,9 +2993,9 @@ import flash.utils.getQualifiedClassName;
 			}
 			if(this is SecretarialSuccubus || this is MilkySuccubus) {
 				if(player.lust < (player.maxLust() * 0.45)) outputText("There is something in the air around your opponent that makes you feel warm.\n\n");
-				if(player.lust >= (player.maxLust() * 0.45) && player.lust < (player.maxLust() * 0.70)) outputText("You aren't sure why but you have difficulty keeping your eyes off your opponent's lewd form.\n\n");
-				if(player.lust >= (player.maxLust() * 0.70) && player.lust < (player.maxLust() * 0.90)) outputText("You blush when you catch yourself staring at your foe's rack, watching it wobble with every step she takes.\n\n");
-				if(player.lust >= (player.maxLust() * 0.90)) outputText("You have trouble keeping your greedy hands away from your groin.  It would be so easy to just lay down and masturbate to the sight of your curvy enemy.  The succubus looks at you with a sexy, knowing expression.\n\n");
+				else if(player.lust < (player.maxLust() * 0.70)) outputText("You aren't sure why but you have difficulty keeping your eyes off your opponent's lewd form.\n\n");
+				else if(player.lust < (player.maxLust() * 0.90)) outputText("You blush when you catch yourself staring at your foe's rack, watching it wobble with every step she takes.\n\n");
+				else outputText("You have trouble keeping your greedy hands away from your groin.  It would be so easy to just lay down and masturbate to the sight of your curvy enemy.  The succubus looks at you with a sexy, knowing expression.\n\n");
 				player.dynStats("lus", 1+rand(8));
 			}
 			//[LUST GAINED PER ROUND] - Omnibus
@@ -3025,7 +3025,7 @@ import flash.utils.getQualifiedClassName;
 				addStatusValue(StatusEffects.ImmolationDoT,1,-1);
 				//Heal wounds
 				if(statusEffectv1(StatusEffects.ImmolationDoT) <= 0) {
-					outputText("Flames left by immolation spell on " + a + short + " finally stop burning.\n\n");
+					outputText("Flames left by immolation spell on [themonster] finally stop burning.\n\n");
 					removeStatusEffect(StatusEffects.ImmolationDoT);
 				}
 				//Deal damage if still wounded.
@@ -3033,9 +3033,10 @@ import flash.utils.getQualifiedClassName;
 					var store2:Number = int(50 + (player.inte / 10));
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store2 *= 1.2;
 					store2 = Math.round(store2 * SceneLib.combat.fireDamageBoostedByDao());
+					if(plural) outputText("[Themonster] burn from lingering immolination after-effect. ");
+					else outputText("[Themonster] burns from lingering immolination after-effect. ");
 					store2 = SceneLib.combat.doFireDamage(store2);
-					if(plural) outputText(capitalA + short + " burn from lingering immolination after-effect. <b>(<font color=\"#800000\">" + store2 + "</font>)</b>\n\n");
-					else outputText(capitalA + short + " burns from lingering immolination after-effect. <b>(<font color=\"#800000\">" + store2 + "</font>)</b>\n\n");
+					outputText("\n\n");
 				}
 			}
 			//Burn DoT
@@ -3044,7 +3045,7 @@ import flash.utils.getQualifiedClassName;
 				addStatusValue(StatusEffects.BurnDoT,1,-1);
 				//Heal wounds
 				if(statusEffectv1(StatusEffects.BurnDoT) <= 0) {
-					outputText("Flames left by Burn on " + a + short + " finally stop burning.\n\n");
+					outputText("Flames left by Burn on [themonster] finally stop burning.\n\n");
 					removeStatusEffect(StatusEffects.BurnDoT);
 				}
 				//Deal damage if still wounded.
@@ -3053,9 +3054,10 @@ import flash.utils.getQualifiedClassName;
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store4 *= 1.2;
 					store4 = Math.round(store4 * SceneLib.combat.fireDamageBoostedByDao());
 					store4 += maxHP() * statusEffectv2(StatusEffects.BurnDoT);
-					store4 = SceneLib.combat.doFireDamage(store4);
-					if(plural) outputText(capitalA + short + " burn from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store4 + "</font>)</b>\n\n");
-					else outputText(capitalA + short + " burns from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store4 + "</font>)</b>\n\n");
+					if(plural) outputText("[Themonster] burn from lingering Burn after-effect. ");
+					else outputText("[Themonster] burns from lingering Burn after-effect. ");
+					store4 = SceneLib.combat.doFireDamage(store4, true, true);
+					outputText("\n\n");
 				}
 			}
 			//Burn DoT
@@ -3064,7 +3066,7 @@ import flash.utils.getQualifiedClassName;
 				addStatusValue(StatusEffects.BurnDoT2,1,-1);
 				//Heal wounds
 				if(statusEffectv1(StatusEffects.BurnDoT2) <= 0) {
-					outputText("Flames left by Burn on " + a + short + " finally stop burning.\n\n");
+					outputText("Flames left by Burn on [themonster] finally stop burning.\n\n");
 					removeStatusEffect(StatusEffects.BurnDoT2);
 				}
 				//Deal damage if still wounded.
@@ -3073,9 +3075,10 @@ import flash.utils.getQualifiedClassName;
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store8 *= 1.2;
 					store8 = Math.round(store8 * SceneLib.combat.fireDamageBoostedByDao());
 					store8 += maxHP() * statusEffectv2(StatusEffects.BurnDoT2);
-					store8 = SceneLib.combat.doFireDamage(store8);
-					if(plural) outputText(capitalA + short + " burn from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store8 + "</font>)</b>\n\n");
-					else outputText(capitalA + short + " burns from lingering Burn after-effect. <b>(<font color=\"#800000\">" + store8 + "</font>)</b>\n\n");
+					if(plural) outputText("[Themonster] burn from lingering Burn after-effect. ");
+					else outputText("[Themonster] burns from lingering Burn after-effect. ");
+					store8 = SceneLib.combat.doFireDamage(store8, true, true);
+					outputText("\n\n");
 				}
 			}
 			//Fire Punch Burn DoT
@@ -3084,7 +3087,7 @@ import flash.utils.getQualifiedClassName;
 				addStatusValue(StatusEffects.FirePunchBurnDoT,1,-1);
 				//Heal wounds
 				if(statusEffectv1(StatusEffects.FirePunchBurnDoT) <= 0) {
-					outputText("Flames left by Fire Punch on " + a + short + " finally stop burning.\n\n");
+					outputText("Flames left by Fire Punch on [themonster] finally stop burning.\n\n");
 					removeStatusEffect(StatusEffects.FirePunchBurnDoT);
 				}
 				//Deal damage if still wounded.
@@ -3092,9 +3095,10 @@ import flash.utils.getQualifiedClassName;
 					var store6:Number = (player.spe + player.inte) * SceneLib.combat.soulskillMod() * 0.5;
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store6 *= 1.2;
 					store6 = Math.round(store6 * SceneLib.combat.fireDamageBoostedByDao());
-					store6 = SceneLib.combat.doFireDamage(store6);
-					if(plural) outputText(capitalA + short + " burn from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
-					else outputText(capitalA + short + " burns from lingering Fire Punch after-effect. <b>(<font color=\"#800000\">" + store6 + "</font>)</b>\n\n");
+					if(plural) outputText("[Themonster] burn from lingering Fire Punch after-effect. ");
+					else outputText("[Themonster] burns from lingering Fire Punch after-effect. ");
+					store6 = SceneLib.combat.doFireDamage(store6, true, true);
+					outputText("\n\n");
 				}
 			}
 			//Regen Inhibitor
@@ -3103,7 +3107,7 @@ import flash.utils.getQualifiedClassName;
 				addStatusValue(StatusEffects.RegenInhibitor,1,-1);
 				//Heal wounds
 				if (statusEffectv1(StatusEffects.RegenInhibitor) <= 0) {
-					outputText(capitalA + short + " sighs in relief as " + pronoun3 + " wounds resume regenerating!\n\n");
+					outputText("[Themonster] sighs in relief as " + pronoun3 + " wounds resume regenerating!\n\n");
 					removeStatusEffect(StatusEffects.RegenInhibitor);
 				}
 			}
@@ -3113,7 +3117,7 @@ import flash.utils.getQualifiedClassName;
 				addStatusValue(StatusEffects.HydraRegenerationDisabled,1,-1);
 				//Heal wounds
 				if (statusEffectv1(StatusEffects.HydraRegenerationDisabled) <= 0) {
-					if (this is Hydra) outputText(capitalA + short + " sighs in relief as " + pronoun3 + " wounds resume regenerating!\n\n");
+					if (this is Hydra) outputText("[Themonster] sighs in relief as " + pronoun3 + " wounds resume regenerating!\n\n");
 					removeStatusEffect(StatusEffects.HydraRegenerationDisabled);
 				}
 			}
@@ -3125,7 +3129,7 @@ import flash.utils.getQualifiedClassName;
 					if (statusEffectv1(StatusEffects.FrostburnDoT) > 1) addStatusValue(StatusEffects.FrostburnDoT, 1, -1);
 					//Heal wounds
 					if (statusEffectv1(StatusEffects.FrostburnDoT) <= 0) {
-						outputText("Wound left by frostburn on " + a + short + " finally close ups.\n\n");
+						outputText("Wound left by frostburn on [themonster] finally close ups.\n\n");
 						removeStatusEffect(StatusEffects.FrostburnDoT);
 					}
 					//Deal damage if still wounded.
@@ -3134,8 +3138,8 @@ import flash.utils.getQualifiedClassName;
 						if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store12 *= 1.2;
 						store12 = Math.round(store12 * SceneLib.combat.iceDamageBoostedByDao());
 						store12 += maxHP() * statusEffectv2(StatusEffects.FrostburnDoT);
-						if(plural) outputText(capitalA + short + " are hurt by lingering Frostburn after-effect. ");
-						else outputText(capitalA + short + " is hurt by lingering Frostburn after-effect. ");
+						if(plural) outputText("[Themonster] are hurt by lingering Frostburn after-effect. ");
+						else outputText("[Themonster] is hurt by lingering Frostburn after-effect. ");
 						store12 = SceneLib.combat.doIceDamage(store12, true, true);
 						outputText("\n\n");
 					}
@@ -3149,7 +3153,7 @@ import flash.utils.getQualifiedClassName;
 					if (statusEffectv1(StatusEffects.AcidDoT) > 1) addStatusValue(StatusEffects.AcidDoT, 1, -1);
 					//Heal wounds
 					if (statusEffectv1(StatusEffects.AcidDoT) <= 0) {
-						outputText("Wound left by acid on " + a + short + " finally close ups.\n\n");
+						outputText("Wound left by acid on [themonster] finally close ups.\n\n");
 						removeStatusEffect(StatusEffects.AcidDoT);
 					}
 					//Deal damage if still wounded.
@@ -3157,8 +3161,8 @@ import flash.utils.getQualifiedClassName;
 						var store7:Number = (player.str + player.spe + player.tou) * 2.5;
 						if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store7 *= 1.2;
 						store7 += maxHP() * statusEffectv2(StatusEffects.AcidDoT);
-						if(plural) outputText(capitalA + short + " are hurt by lingering Acid after-effect. ");
-						else outputText(capitalA + short + " is hurt by lingering Acid after-effect. ");
+						if(plural) outputText("[Themonster] are hurt by lingering Acid after-effect. ");
+						else outputText("[Themonster] is hurt by lingering Acid after-effect. ");
 						store7 = SceneLib.combat.doAcidDamage(store7, true, true);
 						outputText("\n\n");
 					}
@@ -3172,7 +3176,7 @@ import flash.utils.getQualifiedClassName;
 					if (statusEffectv1(StatusEffects.PoisonDoT) > 1) addStatusValue(StatusEffects.PoisonDoT, 1, -1);
 					//Heal wounds
 					if (statusEffectv1(StatusEffects.PoisonDoT) <= 0) {
-						outputText("Wound left by poison on " + a + short + " finally close ups.\n\n");
+						outputText("Wound left by poison on [themonster] finally close ups.\n\n");
 						removeStatusEffect(StatusEffects.PoisonDoT);
 					}
 					//Deal damage if still wounded.
@@ -3180,8 +3184,8 @@ import flash.utils.getQualifiedClassName;
 						var store10:Number = (player.str + player.spe + player.tou) * 2.5;
 						if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store10 *= 1.2;
 						store10 += maxHP() * statusEffectv2(StatusEffects.PoisonDoT);
-						if(plural) outputText(capitalA + short + " are hurt by lingering Poison after-effect. ");
-						else outputText(capitalA + short + " is hurt by lingering Poison after-effect. ");
+						if(plural) outputText("[Themonster] are hurt by lingering Poison after-effect. ");
+						else outputText("[Themonster] is hurt by lingering Poison after-effect. ");
 						store10 = SceneLib.combat.doPoisonDamage(store10, true, true);
 						outputText("\n\n");
 					}
@@ -3194,15 +3198,15 @@ import flash.utils.getQualifiedClassName;
 					if (statusEffectv1(StatusEffects.PoisonDoTH) > 1) addStatusValue(StatusEffects.PoisonDoTH, 1, -1);
 					//Heal wounds
 					if (statusEffectv1(StatusEffects.PoisonDoTH) <= 0) {
-						outputText("Wound left by poison on " + a + short + " finally close ups.\n\n");
+						outputText("Wound left by poison on [themonster] finally close ups.\n\n");
 						removeStatusEffect(StatusEffects.PoisonDoTH);
 					}
 					//Deal damage if still wounded.
 					else {
 						var store9:Number = 0;
 						store9 += maxHP() * statusEffectv2(StatusEffects.PoisonDoTH);
-						if(plural) outputText(capitalA + short + " are hurt by lingering Poison after-effect. ");
-						else outputText(capitalA + short + " is hurt by lingering Poison after-effect. ");
+						if(plural) outputText("[Themonster] are hurt by lingering Poison after-effect. ");
+						else outputText("[Themonster] is hurt by lingering Poison after-effect. ");
 						store9 = SceneLib.combat.doPoisonDamage(store9, true, true);
 						outputText("\n\n");
 					}
@@ -3216,7 +3220,7 @@ import flash.utils.getQualifiedClassName;
 					if (statusEffectv1(StatusEffects.LustDoT) > 1) addStatusValue(StatusEffects.LustDoT, 1, -1);
 					//Heal wounds
 					if (statusEffectv1(StatusEffects.LustDoT) <= 0) {
-						outputText("Lingering lust-induncing after-effect on " + a + short + " finally ends.\n\n");
+						outputText("Lingering lust-induncing after-effect on [themonster] finally ends.\n\n");
 						removeStatusEffect(StatusEffects.LustDoT);
 					}
 					//Deal damage if still wounded.
@@ -3225,8 +3229,8 @@ import flash.utils.getQualifiedClassName;
 						if (game.player.hasPerk(PerkLib.KingOfTheJungle)) lustDmg1 *= 1.2;
 						lustDmg1 += maxLust() * statusEffectv2(StatusEffects.LustDoT);
 						lustDmg1 = Math.round(lustDmg1);
-						if(plural) outputText(capitalA + short + " are aroused by lingering lust-induncing after-effect. ");
-						else outputText(capitalA + short + " is aroused by lingering lust-induncing after-effect. ");
+						if(plural) outputText("[Themonster] are aroused by lingering lust-induncing after-effect. ");
+						else outputText("[Themonster] is aroused by lingering lust-induncing after-effect. ");
 						teased(lustDmg1, false);
 						outputText("\n\n");
 					}
@@ -3239,15 +3243,15 @@ import flash.utils.getQualifiedClassName;
 					if (statusEffectv1(StatusEffects.LustDoTH) > 1) addStatusValue(StatusEffects.LustDoTH, 1, -1);
 					//Heal wounds
 					if (statusEffectv1(StatusEffects.LustDoTH) <= 0) {
-						outputText("Lingering lust-induncing after-effect on " + a + short + " finally ends.\n\n");
+						outputText("Lingering lust-induncing after-effect on [themonster] finally ends.\n\n");
 						removeStatusEffect(StatusEffects.LustDoTH);
 					}
 					//Deal damage if still wounded.
 					else {
 						var lustDmg2:Number = 0;
 						lustDmg2 += maxLust() * statusEffectv2(StatusEffects.LustDoTH);
-						if(plural) outputText(capitalA + short + " are aroused by lingering lust-induncing after-effect. ");
-						else outputText(capitalA + short + " is aroused by lingering lust-induncing after-effect. ");
+						if(plural) outputText("[Themonster] are aroused by lingering lust-induncing after-effect. ");
+						else outputText("[Themonster] is aroused by lingering lust-induncing after-effect. ");
 						teased(lustDmg2, false);
 						outputText("\n\n");
 					}
@@ -3264,7 +3268,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasStatusEffect(StatusEffects.IceArmor)) {
 				if (statusEffectv1(StatusEffects.IceArmor) <= 0) {
 					removeStatusEffect(StatusEffects.IceArmor);
-					outputText("<b>" + capitalA + short + " ice armor has thawed out.</b>\n\n");
+					outputText("<b>[Themonster] ice armor has thawed out.</b>\n\n");
 				}
 				else addStatusValue(StatusEffects.IceArmor,1,-1);
 			}
@@ -3273,7 +3277,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasStatusEffect(StatusEffects.FlameBlade)) {
 				if (statusEffectv1(StatusEffects.FlameBlade) <= 0) {
 					removeStatusEffect(StatusEffects.FlameBlade);
-					outputText("<b>" + capitalA + short + "'s Flame Blade effect wore off.</b>\n\n");
+					outputText("<b>[Themonster]'s Flame Blade effect wore off.</b>\n\n");
 				}
 				else addStatusValue(StatusEffects.FlameBlade,1,-1);
 			}

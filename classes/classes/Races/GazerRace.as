@@ -48,7 +48,7 @@ public class GazerRace extends Race {
 		buildTier(14, "gazer")
 				.require("6+ eye stalks",
 						function (body:BodyData):Boolean {
-							return body.player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10;
+							return body.player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 6;
 						})
 				.buffs({
 					"tou.mult": +0.80,
