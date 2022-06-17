@@ -654,9 +654,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
+		damage = combat.statusEffectBonusDamage(damage);
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) damage *= 2;
 		return damage;
 	}
@@ -797,17 +795,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		//other bonuses
 		if (player.hasPerk(PerkLib.HoldWithBothHands) && player.weapon != WeaponLib.FISTS && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
-		if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= combat.historyFighterBonus();
-		if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
-		if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
-		if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
-		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
-		if (player.armor == armors.SPKIMO) damage *= 1.2;
-		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
-		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
-		if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) damage *= 2;
-		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= combat.tyrantStagePowerMulti();
+		damage = combat.itemsBonusDamageDamage(damage);
 		var crit:Boolean = false;
 		var critChance:int = 5;
 		if (player.isSwordTypeWeapon()) critChance += 10;

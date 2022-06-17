@@ -585,14 +585,16 @@ public class SceneHunter extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.KeltOff) || sceneHunter.other && flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) //allowing for Kelly in 'Other' because I want!
             addButton(0, "KeltRape", SceneLib.farm.keltScene.fuckKeltsShitUp).hint("Revenge for the arrogant centaur.");
         if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 1)
-            addButton(1, "KeltBreak1", SceneLib.farm.kelly.breakKeltGo).hint("Kelt Breaking - Stage 1.</b>");
+            addButton(1, "KeltBreak1", SceneLib.farm.kelly.breakKeltGo).hint("Kelt Breaking - Stage 1.");
                 SceneLib.farm.kelly.breakKeltGo();
         if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 2)
-            addButton(2, "KeltBreak2", SceneLib.farm.kelly.secondKeltBreaking).hint("Kelt Breaking - Stage 2.</b>");
+            addButton(2, "KeltBreak2", SceneLib.farm.kelly.secondKeltBreaking).hint("Kelt Breaking - Stage 2.");
         if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 3)
-            addButton(3, "KeltBreak3", SceneLib.farm.kelly.breakingKeltNumeroThree).hint("Kelt Breaking - Stage 3.</b>");
+            addButton(3, "KeltBreak3", SceneLib.farm.kelly.breakingKeltNumeroThree).hint("Kelt Breaking - Stage 3.");
         if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4)
-            addButton(4, "KeltBreak4", SceneLib.farm.kelly.finalKeltBreaking).hint("Kelt Breaking - Stage 4.</b>");
+            addButton(4, "KeltBreak4", SceneLib.farm.kelly.finalKeltBreaking).hint("Kelt Breaking - Stage 4.");
+        if (flags[kFLAGS.KELLY_VAGINALLY_FUCKED_COUNT] > 0)
+            addButton(5, "KellyVirgin", SceneLib.farm.kelly.takeKellysVirginity).hint("Virgin Fuck!");
         SceneLib.farm.kelly.breakKeltGo();
         addButton(14, "Back", recallScenes_places);
     }
