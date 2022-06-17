@@ -77,8 +77,7 @@ public class ScyllaInkGlandsMutation extends IMutationPerkType
         }
 
         public function ScyllaInkGlandsMutation() {
-            super("Scylla Ink Glands IM", "Scylla Ink Glands", ".");
-            maxLvl = 1;
+            super("Scylla Ink Glands IM", "Scylla Ink Glands", SLOT_ADAPTATIONS, 1);
         }
         
     }

@@ -11,6 +11,7 @@ package classes.Perks
 
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			return "Increases odds of successfully teasing and lust damage of successful teases by " + params.value1 + " points."
 		}
 
@@ -20,9 +21,9 @@ package classes.Perks
 					"Your armor allows you access to 'Seduce', an improved form of 'Tease'.");
 		}
 		
-		override public function keepOnAscension(respec:Boolean = false):Boolean 
+		override public function keepOnAscension(respec:Boolean = false):Boolean
 		{
 			return true;
-		}		
+		}
 	}
 }

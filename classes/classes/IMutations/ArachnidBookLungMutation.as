@@ -77,8 +77,7 @@ import classes.Races;
         }
 
         public function ArachnidBookLungMutation() {
-            super("Arachnid Book Lung IM", "Arachnid Book Lung", ".");
-            maxLvl = 3;
+            super("Arachnid Book Lung IM", "Arachnid Book Lung", SLOT_ADAPTATIONS, 3);
         }
         
     }

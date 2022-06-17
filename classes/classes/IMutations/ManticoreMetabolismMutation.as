@@ -73,8 +73,7 @@ public class ManticoreMetabolismMutation extends IMutationPerkType
         }
 
         public function ManticoreMetabolismMutation() {
-            super("Manticore Metabolism IM", "Manticore Metabolism", ".");
-            maxLvl = 3;
+            super("Manticore Metabolism IM", "Manticore Metabolism", SLOT_METABOLISM, 3);
         }
 
     }

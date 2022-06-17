@@ -2224,6 +2224,30 @@ use namespace CoC;
 			return lust;
 		}
 
+		public function jewelryAttackModifier():Number {
+			var attackMod:Number = 1;
+			if(jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(jewelryEffectId2 == JewelryLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(jewelryEffectId3 == JewelryLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(jewelryEffectId4 == JewelryLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(headjewelryEffectId == HeadJewelryLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(necklaceEffectId == NecklaceLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+
+			return attackMod;
+		}
+
+		public function jewelryRangeModifier():Number {
+			var attackMod:Number = 1;
+			if(jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(jewelryEffectId2 == JewelryLib.MODIFIER_R_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(jewelryEffectId3 == JewelryLib.MODIFIER_R_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(jewelryEffectId4 == JewelryLib.MODIFIER_R_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(headjewelryEffectId == HeadJewelryLib.MODIFIER_R_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(necklaceEffectId == NecklaceLib.MODIFIER_R_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+
+			return attackMod;
+		}
+
 		public function effectiveLibido():Number {
 			var mins:Object = getAllMinStats();
 			var baseLib:Number = lib;
@@ -2284,8 +2308,8 @@ use namespace CoC;
 			if (damage * magicmult <= mana) {
 				mana -= (damage * magicmult);
 				if (display) {
-					if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-					else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
+					if (damage > 0) outputText("<b>([font-damage]Absorbed " + damage + "</font>)</b>");
+					else outputText("<b>([font-miss]Absorbed " + damage + "</font>)</b>");
 				}
 				game.mainView.statsView.showStatDown('mana');
 				dynStats("lus", 0); //Force display arrow.
@@ -2295,8 +2319,8 @@ use namespace CoC;
 				var partial:Number = Math.round(mana / magicmult);
 				damage -= partial;
 				if (display) {
-					if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + partial + "</font>)</b>");
-					else outputText("<b>(<font color=\"#000080\">Absorbed " + partial + "</font>)</b>");
+					if (damage > 0) outputText("<b>([font-damage]Absorbed " + partial + "</font>)</b>");
+					else outputText("<b>([font-miss]Absorbed " + partial + "</font>)</b>");
 				}
 				mana = 0;
 				game.mainView.statsView.showStatDown('mana');
@@ -2308,8 +2332,8 @@ use namespace CoC;
 			if (damage <= statusEffectv1(StatusEffects.BloodShield)) {
 				addStatusValue(StatusEffects.BloodShield,1,-damage);
 				if (display) {
-					if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-					else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
+					if (damage > 0) outputText("<b>([font-damage]Absorbed " + damage + "</font>)</b>");
+					else outputText("<b>([font-miss]Absorbed " + damage + "</font>)</b>");
 				}
 				return 0;
 			}
@@ -2317,8 +2341,8 @@ use namespace CoC;
 				var partial:Number = statusEffectv1(StatusEffects.BloodShield);
 				damage -= partial;
 				if (display) {
-					if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + partial + "</font>)</b>");
-					else outputText("<b>(<font color=\"#000080\">Absorbed " + partial + "</font>)</b>");
+					if (damage > 0) outputText("<b>([font-damage]Absorbed " + partial + "</font>)</b>");
+					else outputText("<b>([font-miss]Absorbed " + partial + "</font>)</b>");
 				}
 				removeStatusEffect(StatusEffects.BloodShield);
 				return damage;
@@ -2421,8 +2445,8 @@ use namespace CoC;
 					damage = Math.round(damage);
 					HP -= damage;
 					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
+						if (damage > 0) outputText("<b>([font-damage]" + damage + "</font>)</b>");
+						else outputText("<b>([font-miss]" + damage + "</font>)</b>");
 					}
 					game.mainView.statsView.showStatDown('hp');
 					dynStats("lus", 0); //Force display arrow.
@@ -3168,19 +3192,6 @@ use namespace CoC;
 			}
 		}
 
-		/**
-		 * @return 0: did not avoid; 1-3: avoid with varying difference between
-		 * speeds (1: narrowly avoid, 3: deftly avoid)
-		 */
-		public function speedDodge(monster:Monster):int{
-			var diff:Number = spe - monster.spe;
-			var rnd:int = int(Math.random() * ((diff / 4) + 80));
-			if (rnd<=80) return 0;
-			else if (diff<8) return 1;
-			else if (diff<20) return 2;
-			else return 3;
-		}
-
 		//Body Type
 		public function bodyType():String
 		{
@@ -3764,117 +3775,86 @@ use namespace CoC;
 			return hiddenJobs3;
 		}
 
-		public function maxHeartMutations():Number {
-			var heartMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Heart")){
-				if (hasMutation(mutation)) heartMutations--;
+		public function countMutationsInSlot(slot:String):int {
+			var count:int = 0;
+			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray(slot)){
+				if (hasMutation(mutation)) count++;
 			}
-			return heartMutations;
+			return count
+		}
+		public function maxTotalMutationsInSlot(slot:String):int {
+			switch (slot) {
+				case IMutationPerkType.SLOT_ADAPTATIONS:
+					return 2 + maxAscensionBoost();
+				case IMutationPerkType.SLOT_HEART:
+				case IMutationPerkType.SLOT_MUSCLE:
+				case IMutationPerkType.SLOT_MOUTH:
+				case IMutationPerkType.SLOT_ADRENALS:
+				case IMutationPerkType.SLOT_BLOODSTREAM:
+				case IMutationPerkType.SLOT_FAT:
+				case IMutationPerkType.SLOT_LUNGS:
+				case IMutationPerkType.SLOT_METABOLISM:
+				case IMutationPerkType.SLOT_OVARIES:
+				case IMutationPerkType.SLOT_TESTICLES:
+				case IMutationPerkType.SLOT_EYES:
+				case IMutationPerkType.SLOT_BONE:
+				case IMutationPerkType.SLOT_NERVSYS:
+				case IMutationPerkType.SLOT_THYROID:
+				case IMutationPerkType.SLOT_PARATHYROID:
+				default:
+					return 1 + maxAscensionBoost();
+			}
+		}
+		public function maxCurrentMutationsInSlot(slot:String):int {
+			return maxTotalMutationsInSlot(slot) - countMutationsInSlot(slot);
+		}
+		public function maxHeartMutations():Number {
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_HEART);
 		}
 		public function maxMusclesMutations():Number {
-			var musclesMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Muscle")){
-				if (hasMutation(mutation)) musclesMutations--;
-			}
-			return musclesMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_MUSCLE);
 		}
 		public function maxMouthMutations():Number {
-			var mouthMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Mouth")){
-				if (hasMutation(mutation)) mouthMutations--;
-			}
-			return mouthMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_MOUTH);
 		}
 		public function maxAdrenalGlandsMutations():Number {
-			var adrenalglandsMutations:Number = 1  + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Adrenals")){
-				if (hasMutation(mutation)) adrenalglandsMutations--;
-			}
-			return adrenalglandsMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_ADRENALS);
 		}
 		public function maxBloodstreamMutations():Number {
-			var bloodstreamMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Bloodstream")){
-				if (hasMutation(mutation)) bloodstreamMutations--;
-			}
-			return bloodstreamMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_BLOODSTREAM);
 		}
 		public function maxFatTissueMutations():Number {
-			var fattissueMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("FaT")){
-				if (hasMutation(mutation)) fattissueMutations--;
-			}
-			return fattissueMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_FAT);
 		}
 		public function maxLungsMutations():Number {
-			var lungsMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Lungs")){
-				if (hasMutation(mutation)) lungsMutations--;
-			}
-			return lungsMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_LUNGS);
 		}
 		public function maxMetabolismMutations():Number {
-			var metabolismMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Metabolism")){
-				if (hasMutation(mutation)) metabolismMutations--;
-			}
-			return metabolismMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_METABOLISM);
 		}
 		public function maxOvariesMutations():Number {
-			var ovariesMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Ovaries")){
-				if (hasMutation(mutation)) ovariesMutations--;
-			}
-			return ovariesMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_OVARIES);
 		}
 		public function maxBallsMutations():Number {
-			var ballsMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Testicles")){
-				if (hasMutation(mutation)) ballsMutations--;
-			}
-			return ballsMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_TESTICLES);
 		}
 		public function maxEyesMutations():Number {
-			var eyesMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Eyes")){
-				if (hasMutation(mutation)) eyesMutations--;
-			}
-			return eyesMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_EYES);
 		}
 		public function maxPeripheralNervSysMutations():Number {
-			var nervsysMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Nerv/Sys")){
-				if (hasMutation(mutation)) nervsysMutations--;
-			}
-			return nervsysMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_NERVSYS);
 		}
 		public function maxBonesAndMarrowMutations():Number {
-			var bonesandmarrowMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Bone")){
-				if (hasMutation(mutation)) bonesandmarrowMutations--;
-			}
-			return bonesandmarrowMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_BONE);
 		}
 		public function maxThyroidGlandMutations():Number {
-			var thyroidglandMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Thyroid")){
-				if (hasMutation(mutation)) thyroidglandMutations--;
-			}
-			return thyroidglandMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_THYROID);
 		}
 		public function maxParathyroidGlandMutations():Number {
-			var parathyroidglandMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("PThyroid")){
-				if (hasMutation(mutation)) parathyroidglandMutations--;
-			}
-			return parathyroidglandMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_PARATHYROID);
 		}
 		public function maxAdaptationsMutations():Number {
-			var adaptationsMutations:Number = 2 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Adaptations")){
-				if (hasMutation(mutation)) adaptationsMutations--;
-			}
-			return adaptationsMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_ADAPTATIONS);
 		}
 		public function maxDragonMutations():Number {
 			var dragonMutations:Number = 1;
@@ -4645,7 +4625,7 @@ use namespace CoC;
 			}
 			if (armorName == "lusty maiden's armor" || armorName == "Succubus armor") min += Math.round(minCap * 0.3);
 			if (armorName == "tentacled bark armor") min += Math.round(minCap * 0.2);
-			if (hasPerk(PerkLib.HotNCold) && min > Math.round(minCap * 0.75)) min = Math.round(minCap * 0.75); 
+			if (hasPerk(PerkLib.HotNCold) && min > Math.round(minCap * 0.75)) min = Math.round(minCap * 0.75);
 			//Constrain values
 			if (min < 0) min = 0;
 			if (min > minCap) min = minCap;

@@ -86,8 +86,7 @@ public class TwinHeartMutation extends IMutationPerkType
         }
 
         public function TwinHeartMutation() {
-            super("Twin Heart IM", "Twin Heart", ".");
-            maxLvl = 3;
+            super("Twin Heart IM", "Twin Heart", SLOT_ADAPTATIONS, 3);
         }
 
     }

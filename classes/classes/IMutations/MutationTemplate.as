@@ -80,8 +80,8 @@ import classes.PerkClass;
         }
 
         public function MutationTemplate() {
-            super("PerkName Here IM", "PerkName Here", ".");
-            maxLvl = 3;
+            // replace SLOT_NONE with other SLOT_XXXX constant
+            super("PerkName Here IM", "PerkName Here", SLOT_NONE, 3);
         }
 
     }
