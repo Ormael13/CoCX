@@ -69,8 +69,7 @@ import classes.Creature;
         }
 
         public function CaveWyrmLungsMutation() {
-            super("Cave Wyrm Lungs IM", "Cave Wyrm Lungs", ".");
-            maxLvl = 3;
+            super("Cave Wyrm Lungs IM", "Cave Wyrm Lungs", SLOT_NONE, 3);
         }
         
     }

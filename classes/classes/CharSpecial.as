@@ -320,7 +320,6 @@ import classes.Items.*;
 			player.teaseLevel = 1;
 			//Large feathered wings (Any chance in heck I could get 'angel' as the race descriptor? Just asking. I'm fine if the answer is 'no')
 			player.wings.type = Wings.FEATHERED_LARGE;
-			player.wings.desc = "large, feathered";
 
 			//While we're on the subject, would glowing eyes be possible? I'll take normal eyes if not.
 			//Beautiful Sword
@@ -590,7 +589,6 @@ import classes.Items.*;
 			player.tailVenom = 0;
 			player.tailRecharge = 0;
 			player.wings.type = Wings.NONE;
-			player.wings.desc = "non-existant";
 			player.tone = 30;
 			player.thickness = 65;
 		}
@@ -660,7 +658,6 @@ import classes.Items.*;
 			player.tailVenom = 0;
 			player.tailRecharge = 0;
 			player.wings.type = Wings.NONE;
-			player.wings.desc = "non-existant";
 			//"dog face, dog ears, draconic tail, blue fur.
 			player.faceType = Face.DOG;
 			player.ears.type = Ears.DOG;
@@ -803,7 +800,6 @@ import classes.Items.*;
 			player.lowerBody = LowerBody.HOOFED;
 			//Wing type = Dragon
 			player.wings.type = Wings.DRACONIC_LARGE;
-			player.wings.desc = "large, draconic";
 			//Tail type = Dragon
 			player.tailType = Tail.DRACONIC;
 			//Cock type = Equine
@@ -965,7 +961,6 @@ import classes.Items.*;
 			player.createStatusEffect(StatusEffects.BonusVCapacity,132,0,0,0);
 			//Virgin, high fertility like in the email I sent before.  dragon wings, nine fox tails,  dragon legs, eight DD breasts with four fuckable nipples each, dragon tongue, waist length hair, large dragon wings.
 			player.wings.type = Wings.DRACONIC_LARGE;
-			player.wings.desc = "large, draconic";
 			player.tailType = Tail.FOX;
 			player.tailCount = 9;
 			player.lowerBody = LowerBody.DRAGON;
@@ -1048,7 +1043,6 @@ import classes.Items.*;
 			player.tailVenom = 0;
 			player.tailRecharge = 0;
 			player.wings.type = Wings.NONE;
-			player.wings.desc = "non-existant";
 			//6' 10"" german-shepherd morph, face ears hands feet tail, the whole nine yards
 			player.faceType = Face.DOG;
 			player.lowerBody = LowerBody.DOG;
@@ -1089,7 +1083,6 @@ import classes.Items.*;
 			player.femininity = 90;
 			//She has a demonic tail and small demonic wings thanks to some encounters early on with succubus milk (that stuff is delicious!) but is otherwise still human.
 			player.wings.type = Wings.BAT_LIKE_LARGE;
-			player.wings.desc = "large, bat-like";
 			player.tailType = Tail.DEMONIC;
 			//I feel really weird talking about all this, so if there's anything you need to change or can't do, or if I totally misinterpreted this, just shoot me an email! jordie.wierenga@gmail.com . Thanks in advance... I'm a big fan. "	Prismere
 		}
@@ -1166,7 +1159,6 @@ import classes.Items.*;
 			//Appearance: Cat Ears, Large Bat Like Wings, 3 Rows of breasts (C cub, 0,2 nipples)
 			player.ears.type = Ears.CAT;
 			player.wings.type = Wings.BAT_LIKE_LARGE;
-			player.wings.desc = "large, bat-like";
 			//Items: Katana, Leather Armor
 			player.setWeapon(weapons.KATANA);
 			player.setArmor(armors.URTALTA);
@@ -1389,7 +1381,6 @@ import classes.Items.*;
 			player.tailVenom = 0;
 			player.tailRecharge = 0;
 			player.wings.type = Wings.DRACONIC_LARGE;
-			player.wings.desc = "non-existant";
 			player.ears.type = Ears.HUMAN;
 			player.lowerBody = LowerBody.HUMAN;
 			player.arms.type = Arms.HUMAN;
@@ -1588,7 +1579,6 @@ import classes.Items.*;
 			player.tailVenom = 0;
 			player.tailRecharge = 0;
 			player.wings.type = Wings.NONE;
-			player.wings.desc = "non-existant";
 			player.ears.type = Ears.CAT;
 			player.lowerBody = LowerBody.CAT;
 			player.tailType = Tail.CAT;
@@ -1762,7 +1752,6 @@ import classes.Items.*;
 			player.horns.type = Horns.DRACONIC_X2; // draconic horns adds to your exotic look, counts towards dragon score and keeps your tentacle hair out of your face! and your partners can use them as handles on occasions, letting your delicate ears uncrumpled!
 			player.horns.count = 12;
 			player.wings.type = Wings.DRACONIC_LARGE; // wings! to fly!
-			player.wings.desc = "large, draconic";
 			player.strStat.core.value = 5; // strength? not a kitsune way, besides, you are small and really neglected physical training
 			player.speStat.core.value += 5; // can take some advantage from small frame
 			player.intStat.core.value = 55; // your mind is your power!
@@ -2039,18 +2028,15 @@ import classes.Items.*;
 				player.horns.count = 2;}
 
 			var wings:Number = rand(4); // always have wings to fly... small boon to make up for lack of fighting power
-			if(wings == 0){
+			if(wings == 0) {
 				player.wings.type = Wings.BAT_LIKE_LARGE;
-				player.wings.desc = "large, bat-like";}
-			else if(wings == 1){
+			} else if(wings == 1) {
 				player.wings.type = Wings.FEATHERED_LARGE;
-				player.wings.desc = "large, feathered";}
-			else if(wings == 2){
+			} else if(wings == 2) {
 				player.wings.type = Wings.DRACONIC_LARGE;
-				player.wings.desc = "large, draconic";}
-			else{
+			} else {
 				player.wings.type = Wings.GIANT_DRAGONFLY;
-				player.wings.desc = "giant dragonfly";}
+			}
 
 
 			var arms:Number = rand(100); // if have harpy wings 33% chance to have harpy hands, otherwise 5% to have spider hands

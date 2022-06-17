@@ -191,7 +191,6 @@ import coc.view.MainView;
 			player.gills.type = Gills.NONE;
 			player.rearBody.type = RearBody.NONE;
 			player.wings.type = Wings.NONE;
-			player.wings.desc = "non-existant";
 			//Default
 			player.skinMaterialColor = "light";
 			player.hairColor = "brown";
@@ -279,7 +278,7 @@ import coc.view.MainView;
 				vagina.clitPLong = "";
 			}
 			//PLOTZ
-			JojoScene.monk                               = 0;
+			JojoScene.monk                               = JojoScene.JOJO_NOT_MET;
 			SandWitchScene.rapedBefore = false;
 			//Replaced by flag	CoC.instance.beeProgress = 0;
 			SceneLib.isabellaScene.isabellaOffspringData = []; //CLEAR!
@@ -3096,7 +3095,6 @@ import coc.view.MainView;
 			player.gills.type = Gills.NONE;
 			player.arms.type = Arms.HUMAN;
 			player.wings.type = Wings.NONE;
-			player.wings.desc = "non-existant";
 			player.rearBody.type = RearBody.NONE;
 			player.lowerBody = LowerBody.HUMAN;
 			player.skin.base.pattern = Skin.PATTERN_NONE;

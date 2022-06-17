@@ -77,8 +77,8 @@ import classes.internals.*;
 		}
 		
 		//Harpy-Boating (Only used on males)
-		//Takes off and flies directly at PC, locking her hips 
-		//around PC's torso and smothering the PC with breasts 
+		//Takes off and flies directly at PC, locking her hips
+		//around PC's torso and smothering the PC with breasts
 		//for a few moments.
 		//Easily dodged with evade or flexibility.
 		private function sophieHarpyBoatsPC():void {
@@ -301,7 +301,6 @@ import classes.internals.*;
 			this.drop = new ChainedDrop().add(armors.W_ROBES,1/10)
 					.elseDrop(consumables.GLDSEED);
 			this.wings.type = Wings.HARPY;
-			this.wings.desc = "large feathery";
 			this.special1 = harpyUberCharge;
 			this.special2 = harpyTease;
 			checkMonster();

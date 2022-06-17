@@ -9,6 +9,7 @@ package classes.Perks
 
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			if (CoC.instance.player.cor >= (30 + CoC.instance.player.corruptionTolerance)) return "<b>DISABLED</b> - Corruption too high!";
 			else return super.desc(params);
 		}

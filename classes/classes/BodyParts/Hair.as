@@ -202,51 +202,61 @@ public class Hair extends BodyPart {
 
 	public static const PLAIN:int  = 0;
 	EnumValue.add(Styles, PLAIN, "PLAIN", {
+		name: "plain",
 		adjective: ""
 	});
 
 	public static const WILD:int = 1;
 	EnumValue.add(Styles, WILD, "WILD", {
+		name: "wild",
 		adjective: "wild"
 	});
 
 	public static const PONYTAIL:int  = 2;
 	EnumValue.add(Styles, PONYTAIL, "PONYTAIL", {
+		name: "ponytail",
 		adjective: "ponytailed"
 	});
 
 	public static const LONGTRESSES:int  = 3;
 	EnumValue.add(Styles, LONGTRESSES, "LONGTRESSES", {
+		name: "low ponytail",
 		adjective: "low-ponytailed"
 	});
 
 	public static const TWINTAILS:int  = 4;
 	EnumValue.add(Styles, TWINTAILS, "TWINTAILS", {
+		name: "twintails",
 		adjective: "twintailed"
 	});
 
 	public static const DWARVEN:int  = 5;
 	EnumValue.add(Styles, DWARVEN, "DWARVEN", {
+		name: "dwarven",
 		adjective: "Dwarven"
 	});
 
 	public static const SNOWLILY:int  = 6;
 	EnumValue.add(Styles, SNOWLILY, "SNOWLILY", {
+		name: "snowlily",
 		adjective: "snowlily"
 	});
 
 	public static const FOURWIND:int  = 7;
 	EnumValue.add(Styles, FOURWIND, "FOURWIND", {
+		name: "fourwind",
 		adjective: "fourwind"
 	});
 
 	public static const FOURWINDL:int  = 8;
 	EnumValue.add(Styles, FOURWINDL, "FOURWINDL", {
+		name: "long fourwind",
 		adjective: "long fourwind"
 	});
 
 	public static const TAURPONYTAIL:int  = 9;
 	EnumValue.add(Styles, TAURPONYTAIL, "TAURPONYTAIL", {
+		name: "centaur ponytail",
 		adjective: "centaur ponytail"
 	});
 

@@ -77,8 +77,7 @@ public class BlackHeartMutation extends IMutationPerkType
         }
 
         public function BlackHeartMutation() {
-            super("Black Heart IM", "Black Heart", ".");
-            maxLvl = 3;
+            super("Black Heart IM", "Black Heart", SLOT_HEART, 3);
         }
 
         

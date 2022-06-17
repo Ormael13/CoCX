@@ -70,8 +70,7 @@ public class MantislikeAgilityMutation extends IMutationPerkType
         }
 
         public function MantislikeAgilityMutation() {
-            super("Mantislike Agility IM", "Mantislike Agility", ".");
-            maxLvl = 3;
+            super("Mantislike Agility IM", "Mantislike Agility", SLOT_MUSCLE, 3);
         }
 
     }

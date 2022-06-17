@@ -1,7 +1,7 @@
 /**
  * Created by Ormael
  */
-package classes.Perks 
+package classes.Perks
 {
 	import classes.PerkClass;
 	import classes.PerkType;
@@ -11,10 +11,11 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			return "Mold your own body even further than before using genetic memory and soulforce: cock types, ball count, pussie types, breast rows count. (+" + params.value1 * 100 + " soulforce)";
 		}
 		
-		public function MetamorphExPerk() 
+		public function MetamorphExPerk()
 		{
 			super("Metamorph (Ex)", "Metamorph (Ex)",
 				"Mold your own body even further than before using genetic memory and soulforce. (cock types, ball count, pussie types, breast rows count)",

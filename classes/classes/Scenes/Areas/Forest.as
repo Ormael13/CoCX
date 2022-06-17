@@ -732,7 +732,7 @@ use namespace CoC;
 			clearOutput();
 			if (JojoScene.monk == 0 && !player.hasStatusEffect(StatusEffects.PureCampJojo)) {
 				if (player.cor < 25) {
-					JojoScene.monk = 1;
+					JojoScene.monk = JojoScene.JOJO_MET;
 					SceneLib.jojoScene.lowCorruptionJojoEncounter();
 				}
 				else SceneLib.jojoScene.highCorruptionJojoEncounter();
