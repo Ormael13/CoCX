@@ -73,8 +73,7 @@ public class LizanMarrowMutation extends IMutationPerkType
         }
 
         public function LizanMarrowMutation() {
-            super("Lizan Marrow IM", "Lizan Marrow", ".");
-            maxLvl = 3;
+            super("Lizan Marrow IM", "Lizan Marrow", SLOT_BONE, 3);
         }
 
     }

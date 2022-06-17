@@ -73,8 +73,7 @@ public class FrozenHeartMutation extends IMutationPerkType
         }
 
         public function FrozenHeartMutation() {
-            super("Frozen Heart IM", "Frozen Heart", ".");
-            maxLvl = 3;
+            super("Frozen Heart IM", "Frozen Heart", SLOT_HEART, 3);
         }
 
     }

@@ -11,6 +11,7 @@ package classes.Perks
 
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			return "(+" + Math.round(params.value1 * 100) + "% Spell Power)";
 		}
 
@@ -20,9 +21,9 @@ package classes.Perks
 					"Your wizard's weapon grants you additional focus, increasing your spells power.");
 		}
 		
-		override public function keepOnAscension(respec:Boolean = false):Boolean 
+		override public function keepOnAscension(respec:Boolean = false):Boolean
 		{
 			return true;
-		}		
+		}
 	}
 }

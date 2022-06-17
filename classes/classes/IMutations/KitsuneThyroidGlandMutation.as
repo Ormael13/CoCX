@@ -89,8 +89,7 @@ import classes.BodyParts.Tail;
 
         //Mutations Buffs
         public function KitsuneThyroidGlandMutation() {
-            super("Kitsune Thyroid Gland IM", "Kitsune Thyroid Gland", ".")
-            maxLvl = 3;
+            super("Kitsune Thyroid Gland IM", "Kitsune Thyroid Gland", SLOT_THYROID, 3)
         }
 
     }

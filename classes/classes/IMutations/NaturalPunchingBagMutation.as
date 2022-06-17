@@ -80,8 +80,7 @@ public class NaturalPunchingBagMutation extends IMutationPerkType
         }
 
         public function NaturalPunchingBagMutation() {
-            super("Natural Punching Bag IM", "Natural Punching Bag", ".");
-            maxLvl = 3;
+            super("Natural Punching Bag IM", "Natural Punching Bag", SLOT_FAT, 3);
         }
 
     }
