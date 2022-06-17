@@ -5742,7 +5742,8 @@ public class PerkLib
                     .requireWis(200)
                     .requireLevel(54);
 			PrestigeJobNecromancer.requirePrestigeJobSlot()
-                    .requirePerks(DaoistApprenticeStage, JobGolemancer)
+                    .requirePerks(SoulApprentice, JobGolemancer)
+                    //.requirePerks(DaoistApprenticeStage, JobGolemancer)
 					.requireInt(125)
 					.requireWis(175)
                     .requireLevel(54);
