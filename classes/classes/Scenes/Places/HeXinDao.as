@@ -1133,7 +1133,7 @@ public function soularena():void {
 		outputText("Lizan stops as if trying to think about the answer. \"<i>...They use their life force.</i>\" He finaly comes with an answer and ends quite pleased with himself.\n\n");
 		outputText("\"<i>Hmmmm not bad, not bad. You got most of it right.</i>\" His smile becomes wider when the kitsune slightly shakes her head. \"<i>All living beings... then what about demons?</i>\" With that his smile freezes, shrinking as he looks down at his feet. \"<i>De... mons... they...</i>\" he stutters.\n\n");
 		outputText("\"<i>Oh my, are you troubled?</i>\" She smile like a vixen with her toy. \"<i>No. They would never be able to use soulforce.</i>\" She looks around all gathered. \"<i>Does anyone have idea why?</i>\"\n\n");
-		outputText("Long silence fall at audience interrupted only by ocassional teacher sighs. \"<i>Nobody? Fine. It's soul. without it demons couldn't gather soulforce like any of you could or would be able to soon.</i>\" She stood up. \"<i>Now let move on to more...practical applications.</i>\"\n\n");
+		outputText("Long silence fall at audience interrupted only by ocassional teacher sighs. \"<i>Nobody? Fine. It's soul. Without it demons couldn't gather soulforce like any of you could or would be able to soon.</i>\" She stood up. \"<i>Now let move on to more...practical applications.</i>\"\n\n");
 		outputText("After that she started explaining how SoulForce can be detected, going over the basics of detecting the energy around you. After giving the crowd a few minutes to try, she continues, talking about the various daos, and how some students have been able to use them.\n\n");
 		outputText("\"<i>From zero comes one</i>\"\n");
 		outputText("\"<i>From one comes two</i>\"\n");

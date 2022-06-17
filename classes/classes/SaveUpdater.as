@@ -1679,7 +1679,7 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.hasKeyItem("Radiant shard") < 0) {
 					outputText("\n\nNow legendary weapon is crafted from radiant shards. You deserve these!\n");
 					outputText("\n\n(If you already have some, please remove them, heh..)\n");
-					camp.soulforce.fixShards();
+					camp.testmenu.fixShards();
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.001;
 			}
@@ -2005,7 +2005,7 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.007) { //Cloning this down.
 				flags[kFLAGS.WHITNEY_ORAL_TRAINING_VAG] = flags[kFLAGS.WHITNEY_ORAL_TRAINING_COCK]; //new flag!
-				camp.soulforce.fixShards2nd();
+				camp.testmenu.fixShards2nd();
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.007;
 			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.008) {
