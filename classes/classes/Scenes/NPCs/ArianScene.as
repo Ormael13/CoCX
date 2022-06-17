@@ -1090,7 +1090,7 @@ private function TyrantiaEggQuestArian():void {
 private function arianScalesTalk():void {
 	clearOutput();
 	if (flags[kFLAGS.ARIAN_SCALES] < 1) {
-		outputText("You ask Arian if [Arian ey]’d like to bring some color on [Arian em] life, because, given that [Arian ey]’s totally recover of [Arian em] past sickness, bringing a bit of color in [Arian em] scales could improve [Arian em] looks a bit.\n\n");
+		outputText("You ask Arian if [arian ey]’d like to bring some color into [arian eir] life, because, given that [arian ey]’s totally recovered from [arian eir] past sickness, bringing a bit of color to [arian eir] scales could improve [arian eir] looks a bit.\n\n");
 		outputText("\"<i>I’d never thought about it. The white coloration on my scales was with me my entire life, so I got quite accustomed to them being that way.</i>\"\n\n");
 		outputText("\"<i>Even when I recovered from my condition, I still saw it as something normal. Actually, I’m not even sure if their color was something related to my sickness, or their natural hue. Now, since I’m fully recovered, I’m not opposed to a color change, to, celebrate my recovering, but...</i>\"\n\n");
 		outputText("But?\n\n");
