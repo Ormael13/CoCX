@@ -176,7 +176,7 @@ public function telAdreMenu():void {
 		SceneLib.urtaPregs.urtaSpecialDeliveries();
 		return;
 	}
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] == -1) {
+	if(flags[kFLAGS.MADDIE_QUEST_STATE] == -1) {
 		maddie.runAwayMaddieFollowup();
 		return;
 	}
