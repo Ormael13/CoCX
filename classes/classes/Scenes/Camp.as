@@ -246,6 +246,9 @@ public class Camp extends NPCAwareContent{
 			SceneLib.tyrania.unlockingCorruptLegendariesOption();
 			return;
 		}
+		if ((model.time.hours >= 7 && model.time.hours <= 9) && flags[kFLAGS.AMILY_AFFECTION] >= 40 && flags[kFLAGS.AMILY_FOLLOWER] = 1 && AbandonedTownRebuilt.RebuildStarted = false {
+
+		}
 		if (marbleScene.marbleFollower()) {
 			//Cor < 50
 			//No corrupt: Jojo, Amily, or Vapula
