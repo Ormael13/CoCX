@@ -419,7 +419,7 @@ public class Face extends SaveableBodyPart {
 	public static const JABBERWOCKY: int = 36;
 	EnumValue.add(Types, JABBERWOCKY, "JABBERWOCKY", {
 		name: "jabberwocky",
-		appearanceDesc: "Your face is a narrow, reptilian muzzle. It looks like a predatory lizard's, at first glance, but with an unusual array of spikes along the under-jaw. It gives you a regal but fierce visage. Opening your mouth reveals two buck tooth, which are abnormally large. Like a rabbit or rather a Jabberwocky. The fearsome visage is decorated by [skin coat].",
+		appearanceDesc: "Your face is a narrow, reptilian muzzle. It looks like a predatory lizard's, at first glance, but with an unusual array of spikes along the under-jaw. It gives you a regal but fierce visage. Opening your mouth reveals two buck tooth, which are abnormally large, like a rabbit, or rather a Jabberwocky. The fearsome visage is decorated by [skin coat].",
 		bite: true
 	});
 	public static const RED_PANDA: int = 37;
@@ -628,6 +628,13 @@ public class Face extends SaveableBodyPart {
 		name: "elf",
 		appearanceDesc: "You have an enchanting smile and faultless pearlescent white teeth, so unnaturally perfect it makes you seem as though you came straight from a painting rather than real life.",
 		humanShaped: true
+	});
+	public static const ANT: int = 58;
+	EnumValue.add(Types, ANT, "ANT", {
+		name: "ant",
+		appearanceDesc: "Your face looks largely human, except for the mandibles sticking out from your jawline.",
+		humanShaped: true
+		bite:true
 	});
 
 	public function Face(creature:Creature) {

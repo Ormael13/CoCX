@@ -391,6 +391,11 @@ public class Tail extends SaveableBodyPart {
 		name:"wendigo",
 		appearanceDesc: "Your silky tail extends out from just above your [butt]. Its fur is lovely to the touch and warm, and it protects you well against the cold."
 	});
+	public static const ANT_ABDOMEN: int = 52;
+	EnumValue.add(Types, ANT_ABDOMEN, "ANT_ABDOMEN", {
+		name:"ant abdomen",
+		appearanceDesc: "A large insectile ant abdomen dangles from just above your backside, bobbing with its own weight as you shift. It is covered in hard [skin coat.color] chitinous material."
+	});
 
 	override public function set type(value:int):void {
 		var old:int = type;

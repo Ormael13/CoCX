@@ -3064,6 +3064,27 @@ import flash.utils.getQualifiedClassName;
 					outputText("\n\n");
 				}
 			}
+			//Formic Acid DoT
+			if (hasStatusEffect(StatusEffects.AntFire)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.AntFire,1,-1);
+				//Heal wounds
+				if(statusEffectv1(StatusEffects.AntFire) <= 0) {
+					outputText("The formic acid burning " + a + short + " finally wore out.\n\n");
+					removeStatusEffect(StatusEffects.AntFire);
+				}
+				//Deal damage if still wounded.
+				else {
+					var store15:Number = (player.str + player.tou) * 2.5;
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store15 *= 1.2;
+					if (player.racialScore(Races.ANT) <= 4) store15 *= 0.75
+					store15 = Math.round(store15 * SceneLib.combat.poisonDamageBoostedByDao());
+					store15 += maxHP() * statusEffectv2(StatusEffects.AntFire);
+					store15 = SceneLib.combat.doFireDamage(store15);
+					if(plural) outputText(capitalA + short + " burn from lingering formic acid. <b>([font-red]" + store15 + "[/font])</b>\n\n");
+					else outputText(capitalA + short + " burns from lingering formic acid. <b>([font-red]" + store15 + "[/font])</b>\n\n");
+				}
+			}
 			//Burn DoT
 			if (hasStatusEffect(StatusEffects.BurnDoT2)) {
 				//Countdown to heal

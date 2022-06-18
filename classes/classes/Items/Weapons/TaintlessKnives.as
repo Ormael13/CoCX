@@ -29,7 +29,7 @@ package classes.Items.Weapons
 			if (!super.canUse()) {
 				return false;
 			}
-			else if (!game.player.hasPerk(PerkLib.DualWield)) {
+			else if (!game.player.hasPerk(PerkLib.DualWield) && !game.player.hasPerk(PerkLib.AntyDexterity)) {
 				outputText("You aren't skilled enough to handle this pair of weapons!  ");
 				return false;
 			}
