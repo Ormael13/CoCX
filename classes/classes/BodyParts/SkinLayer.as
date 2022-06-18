@@ -36,6 +36,10 @@ public class SkinLayer extends BodyPart {
 	public function set color2raw(value:String):void {
 		_color2 = value;
 	}
+	override public function hasMaterial(type:int):Boolean {
+		return Skin.SkinTypes[this.type].material == type;
+	}
+	
 	public function defaultDesc():String {
         //if it throws an error hear, it means Svalkash fucked up again.
         // Add the check like "if (Skin.SkinTypes[type])" then to check for undefined

@@ -4,6 +4,8 @@ package classes
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Beard;
+import classes.BodyParts.BodyMaterial;
+import classes.BodyParts.BodyPart;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Claws;
 import classes.BodyParts.Ears;
@@ -1060,7 +1062,6 @@ public class Creature extends Utils
 
 		public function set hairColor(value:String):void {
 			_hairColor = value;
-			if (!skin.hasCoat()) skin.coat.color = value;
 		}
 
 		public function get coatColor():String {
@@ -1171,6 +1172,61 @@ public class Creature extends Utils
 		public function set bodyColor(value:String):void {
 			skin.color = value;
 		}
+		public function bodyMaterialColor(type:int):String {
+			switch (type) {
+				case BodyMaterial.SKIN:
+					return skinMaterialColor;
+				case BodyMaterial.HAIR:
+					return hairColor;
+				case BodyMaterial.FUR:
+				case BodyMaterial.SCALES:
+				case BodyMaterial.CHITIN:
+				default:
+					return skin.coat.color;
+			}
+		}
+		public function setBodyMaterialColor(type:int, value:String):void {
+			switch (type) {
+				case BodyMaterial.SKIN:
+					skinMaterialColor = value;
+					break;
+				case BodyMaterial.HAIR:
+					hairColor = value;
+					break;
+				case BodyMaterial.FUR:
+				case BodyMaterial.SCALES:
+				case BodyMaterial.CHITIN:
+				default:
+					skin.coat.color = value;
+					break;
+			}
+		}
+		public function hasBodyMaterial(type:int):Boolean {
+			if (type == BodyMaterial.SKIN) return true; // right?
+			if (type == BodyMaterial.HAIR) {
+				if (hairLength > 0 || beardLength > 0) return true;
+			}
+			for each (var bp:BodyPart in bodyParts) {
+				if (bp.hasMaterial(type)) return true;
+			}
+			return false;
+		}
+		public function hasSkinMaterial():Boolean {
+			return hasBodyMaterial(BodyMaterial.SKIN);
+		}
+		public function hasHairMaterial():Boolean {
+			return hasBodyMaterial(BodyMaterial.HAIR);
+		}
+		public function hasFurMaterial():Boolean {
+			return hasBodyMaterial(BodyMaterial.FUR);
+		}
+		public function hasScaleMaterial():Boolean {
+			return hasBodyMaterial(BodyMaterial.SCALES);
+		}
+		public function hasChitinMaterial():Boolean {
+			return hasBodyMaterial(BodyMaterial.CHITIN);
+		}
+		public var bodyParts:/*BodyPart*/Array = [];
 		public function hasCoat():Boolean { return skin.hasCoat(); }
 		public function hasFullCoat():Boolean { return skin.hasFullCoat(); }
 		/**
@@ -1206,9 +1262,9 @@ public class Creature extends Utils
 		public function set clawType(value:int):void { this.clawsPart.type = value; }
 		// </mod>
 		public var underBody:UnderBody;
-		public var ears:Ears = new Ears();
-		public var horns:Horns = new Horns();
-		public var wings:Wings = new Wings();
+		public var ears:Ears;
+		public var horns:Horns;
+		public var wings:Wings;
 
 		/* lowerBody: see LOWER_BODY_TYPE_ */
 		public var lowerBodyPart:LowerBody;
@@ -1228,8 +1284,8 @@ public class Creature extends Utils
 		public function set tailRecharge(value:Number):void { tail.recharge = value; }
 
 
-		public var hips:Hips = new Hips();
-		public var butt:Butt = new Butt();
+		public var hips:Hips;
+		public var butt:Butt;
 
 		//Piercings
 		public var nipplesPierced:Number = 0;
@@ -1252,15 +1308,15 @@ public class Creature extends Utils
 		public var nosePLong:String = "";
 
 		//Head ornaments. Definitely need to convert away from hard coded types.
-		public var antennae:Antennae = new Antennae();
-		public var eyes:Eyes = new Eyes();
-		public var tongue:Tongue = new Tongue();
-		public var arms:Arms = new Arms();
+		public var antennae:Antennae;
+		public var eyes:Eyes;
+		public var tongue:Tongue;
+		public var arms:Arms;
 
-		public var gills:Gills = new Gills();
+		public var gills:Gills;
 		public function hasGills():Boolean { return gills.type != Gills.NONE; }
 
-		public var rearBody:RearBody = new RearBody();
+		public var rearBody:RearBody;
 
 		//Sexual Stuff
 		//MALE STUFF
@@ -1381,13 +1437,24 @@ public class Creature extends Utils
 				defStat,
 				mdefStat
 			]);
-
-			skin = new Skin(this);
-			underBody = new UnderBody(this);
-			lowerBodyPart = new LowerBody(this);
+			
+			antennae = new Antennae(this);
+			arms = new Arms(this);
+			butt = new Butt(this);
 			clawsPart = new Claws(this);
+			ears = new Ears(this);
+			eyes = new Eyes(this);
 			facePart = new Face(this);
+			gills = new Gills(this);
+			horns = new Horns(this);
+			hips = new Hips(this);
+			lowerBodyPart = new LowerBody(this);
+			rearBody = new RearBody(this);
+			skin = new Skin(this);
 			tail = new Tail(this);
+			tongue = new Tongue(this);
+			underBody = new UnderBody(this);
+			wings = new Wings(this);
 			//cocks = new Array();
 			//The world isn't ready for typed Arrays just yet.
 			cocks         = [];

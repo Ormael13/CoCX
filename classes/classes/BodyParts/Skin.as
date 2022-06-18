@@ -49,6 +49,7 @@ public class Skin extends SaveableBodyPart {
 	 * - plural: is name a plural noun phrase (false, false, true)
 	 * - base: is valid base layer type (true, false, false)
 	 * - coat: is valid coat layer type (false, true, true)
+	 * - material: BodyMaterial this is made of
 	 */
 	public static var SkinTypes:/*EnumValue*/Array = [];
 
@@ -57,20 +58,23 @@ public class Skin extends SaveableBodyPart {
 		name:"skin",
 		appearanceDesc: "Your [skin base] has a completely normal texture, at least for your original world.",
 		plural: false,
-		base:true
+		base:true,
+		material: BodyMaterial.SKIN
 	});
 	public static const FUR: int = 1;
 	EnumValue.add(SkinTypes, FUR, "FUR", {
 		name:"fur",
 		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: false,
-		coat:true
+		coat:true,
+		material: BodyMaterial.FUR
 	});
 	public static const SCALES: int = 2;
 	EnumValue.add(SkinTypes, SCALES, "SCALES", {
 		name:"scales",
 		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
-		plural: true
+		plural: true,
+		material: BodyMaterial.SCALES
 	});
 	public static const GOO: int = 3;
 	EnumValue.add(SkinTypes, GOO, "GOO", {
@@ -78,7 +82,8 @@ public class Skin extends SaveableBodyPart {
 		adj: "goopey",
 		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} made of [skin coat].",
 		plural: false,
-		base:true
+		base:true,
+		material: BodyMaterial.SKIN
 	});
 	public static const UNDEFINED: int = 4;//[Deprecated] Silently discarded upon loading save
 	public static const CHITIN: int = 5;
@@ -86,21 +91,24 @@ public class Skin extends SaveableBodyPart {
 		name:"chitin",
 		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: false,
-		coat:true
+		coat:true,
+		material: BodyMaterial.CHITIN
 	});
 	public static const BARK: int = 6;
 	EnumValue.add(SkinTypes, BARK, "BARK", {
 		name:"bark",
 		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: false,
-		coat:true
+		coat:true,
+		material: BodyMaterial.SKIN
 	});
 	public static const STONE: int = 7;
 	EnumValue.add(SkinTypes, STONE, "STONE", {
 		name:"stone",
 		appearanceDesc: "Your [skin base] is completely made of [gargoylematerial].",
 		plural: false,
-		base:true
+		base:true,
+		material: BodyMaterial.SKIN
 	});
 	public static const TATTOED: int = 8; // [Deprecated] Replaced on load with PLAIN + pattern
 	public static const AQUA_SCALES: int = 9;
@@ -108,7 +116,8 @@ public class Skin extends SaveableBodyPart {
 		name:"scales",
 		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: true,
-		coat:true
+		coat:true,
+		material: BodyMaterial.SCALES
 	});
 	public static const PARTIAL_FUR: int = 10; // [Deprecated] Replaced on load with PLAIN + FUR
 	public static const PARTIAL_SCALES: int = 11; // [Deprecated] Replaced on load with PLAIN + SCALES
@@ -119,14 +128,16 @@ public class Skin extends SaveableBodyPart {
 		name:"dragon scales",
 		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: false,
-		coat:true
+		coat:true,
+		material: BodyMaterial.SCALES
 	});
 	public static const MOSS: int = 15;
 	EnumValue.add(SkinTypes, MOSS, "MOSS", {
 		name:"moss",
 		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: false,
-		coat:true
+		coat:true,
+		material: BodyMaterial.SKIN
 	});
 	public static const PARTIAL_DRAGON_SCALES: int = 16; // [Deprecated] Replaced on load with PLAIN + DRAGON_SCALES
 	public static const PARTIAL_STONE: int = 17; // [Deprecated] Replaced on load with PLAIN + STONE
@@ -136,7 +147,8 @@ public class Skin extends SaveableBodyPart {
 		name:"slippery rubber-like skin",
 		appearanceDesc: "Your [skin base] has a rubber-like texture.",
 		plural: false,
-		base:true
+		base:true,
+		material: BodyMaterial.SKIN
 	});
 	public static const TATTOED_ONI: int = 20; // [Deprecated] Replaced on load with PLAIN + pattern
 	public static const FEATHER: int = 21;
@@ -144,14 +156,16 @@ public class Skin extends SaveableBodyPart {
 		name:"feather",
 		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: false,
-		base:true
+		base:true,
+		material: BodyMaterial.HAIR
 	});
 	public static const TRANSPARENT: int = 22;
 	EnumValue.add(SkinTypes, TRANSPARENT, "TRANSPARENT", {
 		name:"transparent",
 		appearanceDesc: "Your [skin base] is completely transparent, like a ghost's.",
 		plural: false,
-		base:true
+		base:true,
+		material: BodyMaterial.SKIN
 	});
 
 	/**
@@ -320,7 +334,11 @@ public class Skin extends SaveableBodyPart {
     public function isHairy():Boolean {
         return (type == FUR || type == MOSS || type == FEATHER);
     }
-
+	
+	override public function hasMaterial(type:int):Boolean {
+		return base.hasMaterial(type) || coat.hasMaterial(type);
+	}
+	
 	/**
 	 * Checks both layers against property set
 	 * @param p {color, type, adj, desc}

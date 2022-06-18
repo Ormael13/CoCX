@@ -1,4 +1,5 @@
 package classes.BodyParts {
+import classes.Creature;
 import classes.internals.EnumValue;
 import classes.internals.Utils;
 import classes.Measurements;
@@ -310,8 +311,8 @@ public class Horns extends BodyPart {
 		}
 	});
 
-	public function Horns() {
-		super(null, null);
+	public function Horns(creature:Creature) {
+		super(creature, null);
 	}
 	public var count:int = 0;
 

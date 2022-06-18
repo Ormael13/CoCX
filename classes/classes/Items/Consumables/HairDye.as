@@ -1,12 +1,12 @@
-package classes.Items.Consumables 
+package classes.Items.Consumables
 {
-import classes.Appearance;
+import classes.BodyParts.BodyMaterial;
 import classes.BodyParts.Skin;
 import classes.CoC;
 import classes.EngineCore;
+import classes.ItemType;
 import classes.Items.Consumable;
 import classes.Scenes.SceneLib;
-import classes.ItemType;
 
 public class HairDye extends Consumable
 	{
@@ -30,87 +30,74 @@ public class HairDye extends Consumable
 			EngineCore.menu();
 			if (player.blockingBodyTransformations()){
 				EngineCore.addButtonDisabled(0, "Immune", "Your body is immune to any and all transformations.");
-			}
-			else{
-                //hair
-				if (game.player.hairLength > 0) {
-					outputText("You have " + game.player.hairColor + " hair.");
-					if (game.player.hairColor != _color) EngineCore.addButton(0, "Hair", dyeHair);
-					else EngineCore.addButtonDisabled(0, "Hair", "Your already have " + game.player.hairColor + " hair!");
-				} else {
-					outputText("You don't have any hair.");
-					EngineCore.addButtonDisabled(0, "Hair", "You are bald!");
+			} else {
+				var i:int = 0;
+				for each (var type:int in [
+						BodyMaterial.HAIR,
+						BodyMaterial.FUR,
+						BodyMaterial.SCALES,
+						BodyMaterial.CHITIN,
+				]) {
+					var name:String = BodyMaterial.Types[type].name;
+					var itemReq:ItemType = game.useables.REAGENT;
+					var itemCnt:int = 0;
+					if (type == BodyMaterial.SCALES) {
+						itemCnt = 1;
+						if (player.coatType() == Skin.DRAGON_SCALES) itemCnt = 2;
+					} else if (type == BodyMaterial.CHITIN) {
+						itemCnt = 2;
+					}
+					
+					var present:Boolean = player.hasBodyMaterial(type);
+					if (present) {
+						outputText("\nYou have " + player.bodyMaterialColor(type) + " " + name + ". ");
+					} else {
+						outputText("\nYou have no " + name + ". ");
+					}
+					var hint:String = "";
+					if (itemReq != ItemType.NOTHING && itemCnt > 0) {
+						hint = "You'll need "+itemReq.shortName+" x "+itemCnt+" to dye your "+name;
+						if (present) {
+							outputText("You'll need " + itemReq.shortName + " x " + itemCnt + " to dye your " + name + ".");
+						}
+					}
+					
+					EngineCore.button(i++)
+							.show(
+									capitalizeFirstLetter(name),
+									curry(dye, type, itemReq, itemCnt),
+									hint)
+							.disableIf(itemReq != ItemType.NOTHING && itemCnt > 0 && !player.hasItem(itemReq, itemCnt),
+									"You don't have enough "+itemReq.shortName+" ("+itemCnt+" needed)")
+							.disableIf(player.bodyMaterialColor(type) == _color,
+									"You already have "+_color+" "+name+"!")
+							.disableIf(!present,
+									"You don't have any "+name+" on your body!");
 				}
-                //coat
-                var coatShort:String = player.hasCoat() ? player.skin.shortName : "coat";
-                var coatText:String = "You rub the dye into your "+ coatShort + ", then use a bucket of cool lakewater to rinse it off a few minutes later.  ";
-                var itemReq:ItemType = game.useables.REAGENT;
-                var itemCnt:int = 0;
-                var alreadyText:String = "You already have " + _color + " " + coatText;
-                switch(game.player.coatType()) {
-                    case Skin.FUR:
-                        break;
-                    case Skin.SCALES:
-                        itemCnt = 1;
-                        break;
-                    case Skin.CHITIN:
-                        itemCnt = 2;
-                        break;
-                    case Skin.DRAGON_SCALES:
-                        itemCnt = 2;
-                        break;
-                }
-                if (game.player.hasCoat())
-				    outputText("\n\nYou have [skin coat].");
-                else
-				    outputText("\n\nYou don't have any skin coat (yet?), but maybe some parts of your body are still coated?");
-                if (itemReq != ItemType.NOTHING && itemCnt > 0)
-                    outputText("\n\nYou'll need " + itemReq.shortName + " x " + itemCnt + " to dye your coat.");
-                //button
-                if (game.player.hasCoat() && game.player.coatColor == _color)
-                    EngineCore.addButtonDisabled(1, "Coat", alreadyText);
-                else if (itemReq != ItemType.NOTHING && itemCnt > 0 && !game.player.hasItem(itemReq, itemCnt))
-                    EngineCore.addButtonDisabled(1, "Coat", "You don't have enough " + itemReq.shortName + "!");
-                else
-                    EngineCore.addButton(1, "Coat", dyeCoat, coatText, itemReq, itemCnt);
 			}
 			EngineCore.addButton(14, "Nevermind", dyeCancel);
 			return true;
 		}
-		
-		private function dyeHair():void {
+		private function dye(material:int, itemReq:ItemType, itemCnt:int):void {
 			clearOutput();
-			if (game.player.hairLength == 0) {
-				outputText("You rub the dye into your bald head, but it has no effect.");
-			}
-			else if (game.player.hairColor.indexOf("rubbery") != -1 || game.player.hairColor.indexOf("latex-textured") != -1) {
-				outputText("You massage the dye into your " + Appearance.hairDescription(player) + " but the dye cannot penetrate the impermeable material your hair is composed of.");
-			}
-			else {
-				outputText("You rub the dye into your " + Appearance.hairDescription(player) + ", then use a bucket of cool lakewater to rinse it off a few minutes later.  ");
-				game.player.hairColorOnly = _color;
-				outputText("You now have " + Appearance.hairDescription(player) + "!");
-				if (game.player.lust > 50) {
-					outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
-					game.player.dynStats("lus", -15);
+			if (material == BodyMaterial.HAIR) {
+				// TODO should check hairAdj
+				if (player.hairColor.indexOf("rubbery") != -1 || player.hairColor.indexOf("latex-textured") != -1) {
+					outputText("You massage the dye into your [hair] but the dye cannot penetrate the impermeable material your hair is composed of.");
+					return;
 				}
+				outputText("You rub the dye into your [hair], then use a bucket of cool lakewater to rinse it off a few minutes later.  ");
+				player.hairColor = _color;
+				outputText("You now have [hair]!");
+			} else {
+				outputText("You rub the dye into your " + BodyMaterial.Types[material].name + ", then use a bucket of cool lakewater to rinse it off a few minutes later.  ");
+				player.setBodyMaterialColor(material, _color);
 			}
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
-			SceneLib.inventory.itemGoNext();
-		}
-
-		private function dyeCoat(text:String, itemReq:ItemType, itemCnt:int):void {
-			clearOutput();
-			outputText(text);
-			game.player.skin.coat.color = _color;
-            if (itemReq != ItemType.NOTHING && itemCnt > 0)
-			    player.consumeItem(itemReq, itemCnt);
-            if (game.player.hasCoat())
-			    outputText("You now have [skin coat]!");
 			if (game.player.lust > 50) {
 				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
 				game.player.dynStats("lus", -15);
 			}
+			if (itemReq != ItemType.NOTHING && itemCnt > 0) player.consumeItem(itemReq, itemCnt);
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			SceneLib.inventory.itemGoNext();
 		}

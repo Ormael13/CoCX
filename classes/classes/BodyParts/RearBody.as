@@ -1,4 +1,5 @@
 package classes.BodyParts {
+import classes.Creature;
 import classes.internals.EnumValue;
 import classes.StatusEffects;
 import classes.PerkLib;
@@ -161,8 +162,8 @@ public class RearBody extends BodyPart {
 		}
 	});
 
-	public function RearBody() {
-		super(null, null);
+	public function RearBody(creature:Creature) {
+		super(creature, null);
 	}
 
 	public static function getAppearanceDescription(player: *):String {

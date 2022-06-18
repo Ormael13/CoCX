@@ -1,4 +1,5 @@
 package classes.BodyParts {
+import classes.Creature;
 import classes.internals.EnumValue;
 import classes.CoC;
 import classes.Scenes.NPCs.Forgefather;
@@ -17,6 +18,10 @@ public class Wings extends SaveableBodyPart {
 	 *
 	 * - wingSlap: enables use of arms for wing slap
 	 * - canFly: special arms type that enables flying even without wings
+	 * - fur: has fur material
+	 * - feathers: has feathers (hair body material)
+	 * - scales: has scales material
+	 * - chitin: has chitin material
 	 */
 	public static var Types:/*EnumValue*/Array = [];
 
@@ -71,13 +76,15 @@ public class Wings extends SaveableBodyPart {
 		desc:"large, feathered",
 		appearanceDesc: "A pair of large, feathery wings sprout from your back. Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as a harpy.",
 		wingSlap: true,
-		canFly: true
+		canFly: true,
+		feathers: true
 	});
 	public static const DRACONIC_SMALL: int = 10;
 	EnumValue.add(Types, DRACONIC_SMALL, "DRACONIC_SMALL", {
 		name:"small draconic",
 		desc:"small, draconic",
-		appearanceDesc: "Small, vestigial wings sprout from your shoulders. They might look like bat's wings, but the membranes are covered in fine, delicate scales."
+		appearanceDesc: "Small, vestigial wings sprout from your shoulders. They might look like bat's wings, but the membranes are covered in fine, delicate scales.",
+		scales: true
 	});
 	public static const DRACONIC_LARGE: int = 11;
 	EnumValue.add(Types, DRACONIC_LARGE, "DRACONIC_LARGE", {
@@ -85,7 +92,8 @@ public class Wings extends SaveableBodyPart {
 		desc:"large, draconic",
 		appearanceDesc: "Large wings sprout from your shoulders. When unfurled they stretch further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone.",
 		wingSlap: true,
-		canFly: true
+		canFly: true,
+		scales: true
 	});
 	public static const GIANT_DRAGONFLY: int = 12;
 	EnumValue.add(Types, GIANT_DRAGONFLY, "GIANT_DRAGONFLY", {
@@ -106,7 +114,8 @@ public class Wings extends SaveableBodyPart {
 		desc:"large, majestic draconic",
 		appearanceDesc: "Magnificent huge wings sprout from your shoulders. When unfurled they stretch over twice further than your arm span, and a single beat of them is all you need to set out toward the sky. They look a bit like bat's wings, but the membranes are covered in fine, delicate scales and a wicked talon juts from the end of each bone.",
 		wingSlap: true,
-		canFly: true
+		canFly: true,
+		scales: true
 	});
 	public static const FEATHERED_PHOENIX: int = 15;//button 0 on 2nd page of metamorph
 	EnumValue.add(Types, FEATHERED_PHOENIX, "FEATHERED_PHOENIX", {
@@ -114,7 +123,8 @@ public class Wings extends SaveableBodyPart {
 		desc:"large crimson feathered",
 		appearanceDesc: "A pair of large, feathery wings sprout from your back. Though you usually keep the crimson-colored wings folded close, they can unfurl to allow you to soar as gracefully as a phoenix.",
 		wingSlap: true,
-		canFly: true
+		canFly: true,
+		feathers: true
 	});
 	public static const FEATHERED_ALICORN: int = 16;
 	EnumValue.add(Types, FEATHERED_ALICORN, "FEATHERED_ALICORN", {
@@ -122,7 +132,8 @@ public class Wings extends SaveableBodyPart {
 		desc: "large white feathered",
 		appearanceDesc: "A pair of large, feathery wings sprout from your back. Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as an alicorn.",
 		wingSlap: true,
-		canFly: true
+		canFly: true,
+		feathers: true
 	});
 	public static const MANTIS_SMALL: int = 17;
 	EnumValue.add(Types, MANTIS_SMALL, "MANTIS_SMALL", {
@@ -196,7 +207,8 @@ public class Wings extends SaveableBodyPart {
 		desc:"large, feathered",
 		appearanceDesc: "A pair of large, feathery wings sprout from your back. Though you usually keep the [feather color] wings folded close, they can unfurl to allow you to soar as gracefully as a bird.",
 		wingSlap: true,
-		canFly: true
+		canFly: true,
+		feathers: true
 	});
 	public static const NIGHTMARE: int = 28;
 	EnumValue.add(Types, NIGHTMARE, "NIGHTMARE", {
@@ -212,7 +224,8 @@ public class Wings extends SaveableBodyPart {
 		desc:"large feathered",
 		appearanceDesc: "A pair of large, feathery wings sprout from your back. Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as a sphinx.",
 		wingSlap: true,
-		canFly: true
+		canFly: true,
+		feathers: true
 	});
 	public static const ETHEREAL: int = 30;
 	EnumValue.add(Types, ETHEREAL, "ETHEREAL", {
@@ -261,7 +274,7 @@ public class Wings extends SaveableBodyPart {
 	});
 
 	public var desc:String = "non-existant";
-	public function Wings() {
+	public function Wings(creature:Creature) {
 		super(creature, "wings", []);
 	}
 	
@@ -270,6 +283,23 @@ public class Wings extends SaveableBodyPart {
 		this.desc = stringOr(Types[value].desc, Types[value].name);
 	}
 	
+	override public function hasMaterial(type:int):Boolean {
+		switch (type) {
+			case BodyMaterial.SKIN:
+				return true;
+			case BodyMaterial.HAIR:
+				return Types[this.type].feathers;
+			case BodyMaterial.FUR:
+				return Types[this.type].fur;
+			case BodyMaterial.SCALES:
+				return Types[this.type].scales;
+			case BodyMaterial.CHITIN:
+				return Types[this.type].chitin;
+			default:
+				return false;
+		}
+	}
+
 	override protected function loadFromOldSave(savedata:Object):void {
 		// For the Arms to be properly replaced, in the loadGameObject function of Saves.as, player.wings.loadFromSaveData must be called *before* saveFile.data.armType is checked
 		// Otherwise, the new savedata.armType won't be checked as the arm's type was already extracted from the save file

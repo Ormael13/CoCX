@@ -57,7 +57,8 @@ For brevity, in following code `fur` means `fur/scales/chitin` or any other body
 * Corresponding parser tags: `[skin/fur color/color1/color2]`
 * `skinTone` (main skin color) will be named `bodyColor`
 * `hasFur` will be renamed to `isFurCovered`
-* `hasFurMaterial` will check if any body part has material  
+* `hasFurMaterial` will check if any body part has material
+* Function that take body material ID as an argument: `hasBodyMaterial`, `bodyMaterialColor`, `setBodyMaterialColor`
 
 ## Parser Tags
 
