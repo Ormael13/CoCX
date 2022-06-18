@@ -81,11 +81,6 @@ public class Soulforce extends BaseContent
 			addButtonDisabled(4, "Adj. Corr.", "Wait till new day arrive to use this option again.");
 		}
 		//addButton(5, "Upgrade", UpgradeItems).hint("."); //ulepszanie itemów
-		if (player.hasPerk(PerkLib.Metamorph)) {
-			if (player.blockingBodyTransformations()) addButtonDisabled(6, "Metamorph", "Your current body state prevents you from using Metamorph. (Either cure it or ascend to gain access to metamorph menu again)");
-			else addButton(6, "Metamorph", SceneLib.metamorph.openMetamorph).hint("Use your soulforce to mold your body.");//używanie metamorfowania z użyciem soulforce
-		}
-		else addButtonDisabled(6, "???", "Req. Metamorph.");
 		if (player.hasPerk(PerkLib.SoulSense)) addButton(7, "Soul Sense", SoulSense).hint("Use your soul sense to trigger specific encounters."); //używanie divine sense aby znaleść określone event encounters: Tamani (lvl 6+), Tamani daugthers (lvl 6+), Kitsune mansion (lvl 12+), Izumi (lvl 18/24+), itp.
 		else addButtonDisabled(7, "???", "Req. Soul Sense.");
 		if (player.hasPerk(PerkLib.SoulApprentice)) {
@@ -94,6 +89,11 @@ public class Soulforce extends BaseContent
 		}
 		else addButtonDisabled(9, "???", "Req. Soul Apprentice stage.");
 		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0 || player.hasKeyItem("Cultivation Manual: Body like a Coke Fiend") >= 0 || player.hasKeyItem("Cultivation Manual: Heart-shaped Eyed She-Devil") >= 0) addButton(12, "Sub-paths", SubPaths).hint("Contemplate mysteries on your choosen sub-path(s).");
+		if (player.hasPerk(PerkLib.Metamorph)) {
+			if (player.blockingBodyTransformations()) addButtonDisabled(10, "Metamorph", "Your current body state prevents you from using Metamorph. (Either cure it or ascend to gain access to metamorph menu again)");
+			else addButton(10, "Metamorph", SceneLib.metamorph.openMetamorph).hint("Use your soulforce to mold your body.");//używanie metamorfowania z użyciem soulforce
+		}
+		else addButtonDisabled(10, "???", "Req. Metamorph.");
 		addButton(13, "Cultivation", Contemplations).hint("Contemplate mysteries of the world to try progress your soul cultivation path. Maybe even attain cultivation base breakthrou. (Req. 100% or 30% of max Soulforce + high enough wisdom / level + sometimes some additional req.)");
 		addButton(14, "Back", playerMenu);
 	}

@@ -604,7 +604,9 @@ package classes.GeneticMemories {
 		  cost: 100,
 		  title: "Ant",
 		  transformation: function(): Transformation {
-			  return CoC.instance.transformations.LowerBodyAnt;
+			  return CoC.instance.transformations.LowerBodyAnt
+		  }
+	  });
 
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];

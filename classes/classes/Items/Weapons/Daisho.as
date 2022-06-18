@@ -16,8 +16,8 @@ package classes.Items.Weapons
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.DualWield) && (game.player.hasPerk(PerkLib.GigantGrip) || gameplayer.hasPerk(PerkLib.AntyDexterity))) || (game.player.hasPerk(PerkLib.GigantGrip) && gameplayer.hasPerk(PerkLib.AntyDexterity)) return super.canUse();
-			else if (game.player.hasPerk(PerkLib.GigantGrip) || gameplayer.hasPerk(PerkLib.AntyDexterity)) outputText("You aren't skilled in handling large weapons with one hand yet to effectively use this katanas & wakizashi pair. Unless you want to hurt yourself instead enemies when trying to use them...  ");
+			if ((game.player.hasPerk(PerkLib.DualWield) && (game.player.hasPerk(PerkLib.GigantGrip) || game.player.hasPerk(PerkLib.AntyDexterity))) || (game.player.hasPerk(PerkLib.GigantGrip) && game.player.hasPerk(PerkLib.AntyDexterity))) return super.canUse();
+			else if (game.player.hasPerk(PerkLib.GigantGrip) || game.player.hasPerk(PerkLib.AntyDexterity)) outputText("You aren't skilled in handling large weapons with one hand yet to effectively use this katanas & wakizashi pair. Unless you want to hurt yourself instead enemies when trying to use them...  ");
 			else outputText("You aren't skilled enough to handle this katanas & wakizashi pair!  ");
 			return false;
 		}

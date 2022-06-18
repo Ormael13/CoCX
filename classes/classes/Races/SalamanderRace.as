@@ -27,6 +27,7 @@ public class SalamanderRace extends Race {
 				}, +1)
 				.eyeType(Eyes.LIZARD, +1)
 				.armType(Arms.SALAMANDER, +1)
+				.legType(LowerBody.SALAMANDER, +1)
 				.tailType(Tail.SALAMANDER, +2)
 				.hasCockOfType(CockTypesEnum.LIZARD,+1)
 				.hasPerk(PerkLib.Lustzerker, +1)
@@ -48,9 +49,10 @@ public class SalamanderRace extends Race {
 		buildTier(7, "salamander")
 				.namesTauric("salamander", "salamander-taur")
 				.buffs({
-					"str.mult": +0.25,
-					"tou.mult": +0.25,
+					"str.mult": +0.55,
+					"tou.mult": +0.35,
 					"lib.mult": +0.40,
+					"sens": +15,
 					"maxlust_base": +25
 				})
 				.end();
@@ -58,9 +60,9 @@ public class SalamanderRace extends Race {
 		buildTier(16, "primordial salamander")
 				.namesTauric("primordial salamander", "primordial salamander-taur")
 				.buffs({
-					"str.mult": +1.05,
-					"tou.mult": +0.80,
-					"lib.mult": +0.40,
+					"str.mult": +1.20,
+					"tou.mult": +0.90,
+					"lib.mult": +1.05,
 					"sens": +75,
 					"maxlust_base": +25
 				})
