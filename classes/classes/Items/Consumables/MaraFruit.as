@@ -268,7 +268,7 @@ public class MaraFruit extends Consumable{
 		if (player.hairColor != "green" && !player.isGargoyle() && rand(3) == 0 && changes < changeLimit)
 		{
 			outputText("\n\nAt first it looks like nothing changed but then you realize all the hair on your body has shifted to a verdant green color.  <b>You now have green hair.</b>");
-			player.hairColorOnly = "green";
+			player.hairColor = "green";
 		}
 		//Horns
 		if ((player.hairType == Hair.LEAF || player.hairType == Hair.GRASS) && changes < changeLimit && rand(2) == 0) {

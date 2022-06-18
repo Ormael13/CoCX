@@ -1032,45 +1032,26 @@ public class Creature extends Utils
 		private var _tallness:Number = 0;
 		public function get tallness():Number { return _tallness; }
 		public function set tallness(value:Number):void { _tallness = value; }
-
-		/*Hairtype
-		0- normal
-		1- feather
-		2- ghost
-		3- goo!
-		4- anemononeoenoeneo!*/
-		public var hairType:Number = Hair.NORMAL;
-		public var hairStyle:Number = Hair.NORMAL;
-		private var _hairColor:String = "no";
-		public var hairLength:Number = 0;
+		
+		public var bodyMaterials:/*BodyMaterial*/Array = [];
+		public var hairType:Number                     = Hair.NORMAL;
+		public var hairStyle:Number                    = Hair.NORMAL;
+		public var hairLength:Number                   = 0;
 		public function get hairColor():String {
-			return _hairColor;
+			return bodyMaterials[BodyMaterial.HAIR].color;
 		}
 		public function get hairColor1():String {
-			var i:int = _hairColor.indexOf(" and ");
-			if (i == -1) return _hairColor;
-			return _hairColor.slice(0, i);
+			return bodyMaterials[BodyMaterial.HAIR].color1;
 		}
 		public function get hairColor2():String {
-			var i:int = _hairColor.indexOf(" and ");
-			if (i == -1) return _hairColor;
-			return _hairColor.slice(i+" and ".length);
+			return bodyMaterials[BodyMaterial.HAIR].color2;
 		}
-		public function set hairColorOnly(value:String):void {
-			_hairColor = value;
-		}
-
 		public function set hairColor(value:String):void {
-			_hairColor = value;
+			bodyMaterials[BodyMaterial.HAIR].color = value;
 		}
 
 		public function get coatColor():String {
-			//if (!skin.hasCoat()) return hairColor;
 			return skin.coat.color;
-		}
-		public function get coatColor2():String {
-			if (!skin.hasCoat()) return hairColor;
-			return skin.coat.color2;
 		}
 		public function get nakedCoatColor():String {
 			return skin.coat.color;
@@ -1078,10 +1059,6 @@ public class Creature extends Utils
 		public function set coatColor(value:String):void {
 			if (!skin.hasCoat()) trace("[WARNING] set coatColor() called with no coat");
 			skin.coat.color = value;
-		}
-		public function set coatColor2(value:String):void {
-			if (!skin.hasCoat()) trace("[WARNING] set coatColor() called with no coat");
-			skin.coat.color2 = value;
 		}
 
 		public var beardStyle:Number = Beard.NORMAL;
@@ -1095,76 +1072,76 @@ public class Creature extends Utils
 			skin.type = value;
 		}
 		public function get skinMaterialColor():String {
-			return skin.base.color;
+			return bodyMaterials[BodyMaterial.SKIN].color;
 		}
 		public function set skinMaterialColor(value:String):void {
-			skin.base.color = value;
+			bodyMaterials[BodyMaterial.SKIN].color = value;
 		}
 		public function get skinMaterialColor1():String {
-			return skin.base.color;
+			return bodyMaterials[BodyMaterial.SKIN].color1;
 		}
 		public function set skinMaterialColor1(value:String):void {
-			skin.base.color = value;
+			bodyMaterials[BodyMaterial.SKIN].color1 = value;
 		}
 		public function get skinMaterialColor2():String {
-			return skin.base.color2;
+			return bodyMaterials[BodyMaterial.SKIN].color2;
 		}
 		public function set skinMaterialColor2(value:String):void {
-			skin.base.color2 = value;
+			bodyMaterials[BodyMaterial.SKIN].color2 = value;
 		}
 		public function get furColor():String {
-			return skin.coat.color;
+			return bodyMaterials[BodyMaterial.FUR].color;
 		}
 		public function set furColor(value:String):void {
-			skin.coat.color = value;
+			bodyMaterials[BodyMaterial.FUR].color = value;
 		}
 		public function get furColor1():String {
-			return skin.coat.color;
+			return bodyMaterials[BodyMaterial.FUR].color1;
 		}
 		public function set furColor1(value:String):void {
-			skin.coat.color = value;
+			bodyMaterials[BodyMaterial.FUR].color1 = value;
 		}
 		public function get furColor2():String {
-			return skin.coat.color2;
+			return bodyMaterials[BodyMaterial.FUR].color2;
 		}
 		public function set furColor2(value:String):void {
-			skin.coat.color2 = value;
+			bodyMaterials[BodyMaterial.FUR].color2 = value;
 		}
 		public function get scaleColor():String {
-			return skin.coat.color;
+			return bodyMaterials[BodyMaterial.SCALES].color;
 		}
 		public function set scaleColor(value:String):void {
-			skin.coat.color = value;
+			bodyMaterials[BodyMaterial.SCALES].color = value;
 		}
 		public function get scaleColor1():String {
-			return skin.coat.color;
+			return bodyMaterials[BodyMaterial.SCALES].color1;
 		}
 		public function set scaleColor1(value:String):void {
-			skin.coat.color = value;
+			bodyMaterials[BodyMaterial.SCALES].color1 = value;
 		}
 		public function get scaleColor2():String {
-			return skin.coat.color2;
+			return bodyMaterials[BodyMaterial.SCALES].color2;
 		}
 		public function set scaleColor2(value:String):void {
-			skin.coat.color2 = value;
+			bodyMaterials[BodyMaterial.SCALES].color2 = value;
 		}
 		public function get chitinColor():String {
-			return skin.coat.color;
+			return bodyMaterials[BodyMaterial.CHITIN].color;
 		}
 		public function set chitinColor(value:String):void {
-			skin.coat.color = value;
+			bodyMaterials[BodyMaterial.CHITIN].color = value;
 		}
 		public function get chitinColor1():String {
-			return skin.coat.color;
+			return bodyMaterials[BodyMaterial.CHITIN].color1;
 		}
 		public function set chitinColor1(value:String):void {
-			skin.coat.color = value;
+			bodyMaterials[BodyMaterial.CHITIN].color1 = value;
 		}
 		public function get chitinColor2():String {
-			return skin.coat.color2;
+			return bodyMaterials[BodyMaterial.CHITIN].color2;
 		}
 		public function set chitinColor2(value:String):void {
-			skin.coat.color2 = value;
+			bodyMaterials[BodyMaterial.CHITIN].color2 = value;
 		}
 		public function get bodyColor():String {
 			return skin.color;
@@ -1173,33 +1150,10 @@ public class Creature extends Utils
 			skin.color = value;
 		}
 		public function bodyMaterialColor(type:int):String {
-			switch (type) {
-				case BodyMaterial.SKIN:
-					return skinMaterialColor;
-				case BodyMaterial.HAIR:
-					return hairColor;
-				case BodyMaterial.FUR:
-				case BodyMaterial.SCALES:
-				case BodyMaterial.CHITIN:
-				default:
-					return skin.coat.color;
-			}
+			return bodyMaterials[type].color;
 		}
 		public function setBodyMaterialColor(type:int, value:String):void {
-			switch (type) {
-				case BodyMaterial.SKIN:
-					skinMaterialColor = value;
-					break;
-				case BodyMaterial.HAIR:
-					hairColor = value;
-					break;
-				case BodyMaterial.FUR:
-				case BodyMaterial.SCALES:
-				case BodyMaterial.CHITIN:
-				default:
-					skin.coat.color = value;
-					break;
-			}
+			bodyMaterials[type].color = value;
 		}
 		public function hasBodyMaterial(type:int):Boolean {
 			if (type == BodyMaterial.SKIN) return true; // right?
@@ -1438,6 +1392,9 @@ public class Creature extends Utils
 				mdefStat
 			]);
 			
+			for (var i:int = 0; i<BodyMaterial.Types.length; i++) {
+				bodyMaterials[i] = new BodyMaterial(this, i);
+			}
 			antennae = new Antennae(this);
 			arms = new Arms(this);
 			butt = new Butt(this);

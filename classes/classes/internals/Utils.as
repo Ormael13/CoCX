@@ -518,6 +518,15 @@ public class Utils extends Object
 			if (pairs.length == 0) {
 				return null;
 			}
+			if (pairs.length == 1) {
+				// imitate spread
+				// 1st argument could be the list of pairs
+				if (pairs[0].length != 2) return weightedRandom.apply(null, pairs[0]);
+				// 2 options here:
+				// pairs = [ [weight, value] ]
+				// pairs = [ [pair1,  pair2] ]
+				if (pairs[0][0] is Array) return weightedRandom.apply(null, pairs[0]);
+			}
 			for each (var item:Array in pairs) {
 				if (item.length != 2) {
 					throw new Error("Invalid weightedRandom item");

@@ -1,7 +1,8 @@
 package classes.BodyParts {
+import classes.Creature;
 import classes.internals.EnumValue;
 
-public class BodyMaterial {
+public class BodyMaterial extends BodyPart {
 	/**
 	 * Entry properties:
 	 * - value: numerical id (0, 3)
@@ -39,7 +40,58 @@ public class BodyMaterial {
 		defaultColors: ["black", "purple", "green", "yellow"]
 	});
 	
-	public function BodyMaterial() {
+	// these 4 values are kept in sync in setters
+	private var _color:String;
+	private var _color1:String;
+	private var _color2:String;
+	private var _binary:Boolean;
+	
+	public function get color():String {
+		return _color;
+	}
+	public function set color(value:String):void {
+		var i:int = value.indexOf(" and ");
+		_color = value;
+		if (i >= 0) {
+			_binary = true;
+			_color1 = value.substr(0, i);
+			_color2 = value.substr(i+" and ".length);
+		} else {
+			_binary = false;
+			_color1 = value;
+			_color2 = value;
+		}
+	}
+	public function get color1():String {
+		return _color;
+	}
+	public function set color1(value:String):void {
+		_color1 = value;
+		_binary = _color1 === _color2;
+		if (_binary) {
+			_color = value+" and "+_color2;
+		} else {
+			_color2 = value;
+			_color = value;
+		}
+	}
+	public function get color2():String {
+		return _color2;
+	}
+	public function set color2(value:String):void {
+		_color2 = value;
+		_binary = _color1 === _color2;
+		if (_binary) {
+			_color = value+" and "+_color2;
+		} else {
+			_color = value;
+		}
+	}
+	
+	public function BodyMaterial(creature: Creature, type:int) {
+		super(creature,["color1","color2"]);
+		this.type = type;
+		this.color = randomChoice(Types[type].defaultColors);
 	}
 }
 }

@@ -897,7 +897,7 @@ public class DebugMenu extends BaseContent
 			);
 			addBeComboBox("Hair color", COLOR_CONSTANTS, player.hairColor,
 					function (item:*):void {
-						player.hairColorOnly = item.data;
+						player.hairColor = item.data;
 						dumpPlayerData();
 						tagDemosSkin();
 					}
@@ -954,9 +954,9 @@ public class DebugMenu extends BaseContent
 						tagDemosSkin();
 					}
 			);
-			addBeComboBox("Base color 2", COLOR_CONSTANTS, player.skin.base.color2raw,
+			addBeComboBox("Base color 2", COLOR_CONSTANTS, player.skin.base.color2,
 					function (item:*):void {
-						player.skin.base.color2raw = item.data;
+						player.skin.base.color2 = item.data;
 						dumpPlayerData();
 						tagDemosSkin();
 					}
@@ -992,9 +992,9 @@ public class DebugMenu extends BaseContent
 						tagDemosSkin();
 					}
 			);
-			addBeComboBox("Coat color 2", COLOR_CONSTANTS, player.skin.coat.color2raw,
+			addBeComboBox("Coat color 2", COLOR_CONSTANTS, player.skin.coat.color2,
 					function (item:*):void {
-						player.skin.coat.color2raw = item.data;
+						player.skin.coat.color2 = item.data;
 						dumpPlayerData();
 						tagDemosSkin();
 					}

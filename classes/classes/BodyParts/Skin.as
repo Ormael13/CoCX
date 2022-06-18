@@ -305,9 +305,6 @@ public class Skin extends SaveableBodyPart {
 		if (_coverage <= COVERAGE_MEDIUM) base.color = value;
 		if (_coverage >= COVERAGE_MEDIUM) coat.color = value;
 	}
-	public function get color2():String {
-		return skinValue(base.color2, coat.color2);
-	}
 	public function get desc():String {
 		return skinValue(base.desc, coat.desc);
 	}
@@ -329,11 +326,6 @@ public class Skin extends SaveableBodyPart {
 		if (coverage > COVERAGE_NONE) return coat.type;
 		return base.type;
 	}
-
-    //used to determine default coat color -
-    public function isHairy():Boolean {
-        return (type == FUR || type == MOSS || type == FEATHER);
-    }
 	
 	override public function hasMaterial(type:int):Boolean {
 		return base.hasMaterial(type) || coat.hasMaterial(type);
@@ -353,12 +345,6 @@ public class Skin extends SaveableBodyPart {
 	public function growCoat(type:int,options:Object=null,coverage:int=COVERAGE_HIGH):SkinLayer {
 		this.coverage = coverage;
 		this.coat.type = type;
-        if (!this.coat.color) {
-            if (isHairy()) //select default color
-		        this.coat.color = creature.hairColor;
-            else
-                this.coat.color = this.base.color;
-        }
 		if (options) this.coat.setProps(options);
 		return this.coat;
 	}
@@ -367,7 +353,7 @@ public class Skin extends SaveableBodyPart {
 	 */
 	public function growFur(options:Object=null,coverage:int=COVERAGE_HIGH):SkinLayer {
 		this.coverage = coverage;
-		this.coat.setProps({color: creature.hairColor, type: FUR});
+		this.coat.type = FUR;
 		if (options) this.coat.setProps(options);
 		return this.coat;
 	}
@@ -682,22 +668,13 @@ public class Skin extends SaveableBodyPart {
 				}
 			}
 		}
-		var tone:String        = stringOr(savedata.skinTone, "albino");
-		var furColor:String    = stringOr(savedata.furColor, stringOr(savedata.hairColor, ""));
-		var chitinColor:String = stringOr(savedata.chitinColor, "");
-		var scalesColor:String = stringOr(savedata.scalesColor, "");
-		if (furColor === "no") furColor = "";
-		if (chitinColor === "no") chitinColor = "";
-		if (scalesColor === "no") scalesColor = "";
 		//noinspection JSDeprecatedSymbols
 		if (InCollection(type, PLAIN, GOO, TATTOED, STONE, SCALES, AQUA_SCALES, PARTIAL_DRAGON_SCALES, AQUA_RUBBER_LIKE, TATTOED_ONI)) {
 			coverage   = COVERAGE_NONE;
 			base.type  = type;
-			base.color = (type == SCALES && scalesColor) ? scalesColor : tone;
 			base.adj   = adj;
 			base.desc  = desc;
 			coat.type  = FUR;
-			if (coat.color == "no") coat.color = savedata.hairColor;
 		} else {
 			coverage = COVERAGE_HIGH;
 			if (type in PARTIAL_TO_FULL) {
@@ -707,15 +684,6 @@ public class Skin extends SaveableBodyPart {
 			coat.type  = type;
 			coat.adj   = adj;
 			coat.desc  = desc;
-			base.color = tone;
-			if (type === FUR) {
-				coat.color = furColor;
-			} else if (type === SCALES) {
-				coat.color = scalesColor;
-			} else if (type === CHITIN) {
-				coat.color = chitinColor;
-			}
-			if (!coat.color) coat.color = furColor || scalesColor || chitinColor || "white";
 		}
 	}
 	override protected function saveToOldSave(savedata:Object):void {
