@@ -3587,6 +3587,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.DOG;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.DOG));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3627,6 +3628,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.SHARK;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.SHARK));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3660,6 +3662,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.BUNNY;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.BUNNY));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3676,6 +3679,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.AVIAN;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.AVIAN));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3725,6 +3729,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.RAIJU;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.RAIJU));
 	  },
 	  // is present
 	  function (): Boolean {
