@@ -9,16 +9,58 @@ import flash.utils.Dictionary;
 
 	public class ItemType extends Utils
 	{
+		/**
+		 * Unique item DB
+		 */
 		private static var ITEM_LIBRARY:Dictionary = new Dictionary();
+		/**
+		 * Templated item cache
+		 */
+		private static var TEMPLATED_ITEM_LIBRARY:Dictionary = new Dictionary();
+		/**
+		 * Short name -> Item mapping. Used for button labeling.
+		 */
 		private static var ITEM_SHORT_LIBRARY:Dictionary = new Dictionary();
 		public static const NOTHING:ItemType = new ItemType("NOTHING!");
+		/**
+		 * "Old id" -> "New id" mapping
+		 */
+		private static const LEGACY_REMAP:Object = {
+			"AuburnD": templatedItemId("HairDye", {color:"Auburn",rarity:1}),
+			"Black D": templatedItemId("HairDye", {color:"Black",rarity:1}),
+			"Blond D": templatedItemId("HairDye", {color:"Blond",rarity:1}),
+			"BlueDye": templatedItemId("HairDye", {color:"Blue",rarity:1}),
+			"Brown D": templatedItemId("HairDye", {color:"Brown",rarity:1}),
+			"GrayDye": templatedItemId("HairDye", {color:"Gray",rarity:1}),
+			"Green D": templatedItemId("HairDye", {color:"Green",rarity:1}),
+			"OrangDy": templatedItemId("HairDye", {color:"Orange",rarity:1}),
+			"PinkDye": templatedItemId("HairDye", {color:"Pink",rarity:1}),
+			"PurpDye": templatedItemId("HairDye", {color:"Purple",rarity:1}),
+			"RainDye": templatedItemId("HairDye", {color:"Rainbow",rarity:4}),
+			"Red Dye": templatedItemId("HairDye", {color:"Red",rarity:1}),
+			"WhiteDy": templatedItemId("HairDye", {color:"White",rarity:1}),
+			"RussetD": templatedItemId("HairDye", {color:"Russet",rarity:1}),
+			"SnowW D": templatedItemId("HairDye", {color:"Snow White",rarity:2}),
+			"QWhiteD": templatedItemId("HairDye", {color:"Quartz White",rarity:3})
+		};
 
+		public static function templatedItemId(templateId:String, parameters:Object):String {
+			return templateId+";"+JSON.stringify(parameters);
+		}
+		
 		/**
 		 * Looks up item by <b>ID</b>.
-		 * @param	id 7-letter string that identifies an item.
+		 * @param	id item id, or a (template_id + ";" + template_params_json)
 		 * @return  ItemType
 		 */
 		public static function lookupItem(id:String):ItemType{
+			if (id in LEGACY_REMAP) id = LEGACY_REMAP[id];
+			var i:int = id.indexOf(";");
+			if (i >= 0) {
+				var it:ItemType = TEMPLATED_ITEM_LIBRARY[id];
+				if (it) return it;
+				return ItemTemplate.createTemplatedItem(id.substr(0, i), id.substr(i+1));
+			}
 			return ITEM_LIBRARY[id];
 		}
 
@@ -97,13 +139,17 @@ import flash.utils.Dictionary;
 			this._description = _description || this.longName;
 			this._value = _value;
 			this._tags = {};
-			if (ITEM_LIBRARY[_id] != null) {
-				CoC_Settings.error("Duplicate itemid "+_id+", old item is "+(ITEM_LIBRARY[_id] as ItemType).longName);
+			if (_id.indexOf(";") > 0) {
+				TEMPLATED_ITEM_LIBRARY[_id] = this;
+			} else {
+				if (ITEM_LIBRARY[_id] != null) {
+					CoC_Settings.error("Duplicate itemid " + _id + ", old item is " + (ITEM_LIBRARY[_id] as ItemType).longName);
+				}
+				if (ITEM_SHORT_LIBRARY[_shortName] != null) {
+					trace("WARNING: Item with duplicate shortname: '" + _id + "' and '" + (ITEM_SHORT_LIBRARY[this._shortName] as ItemType)._id + "' share " + this._shortName);
+				}
+				ITEM_LIBRARY[_id] = this;
 			}
-			if (ITEM_SHORT_LIBRARY[_shortName] != null){
-				trace("WARNING: Item with duplicate shortname: '"+_id+"' and '"+(ITEM_SHORT_LIBRARY[this._shortName] as ItemType)._id+"' share "+this._shortName);
-			}
-			ITEM_LIBRARY[_id] = this;
 			ITEM_SHORT_LIBRARY[this._shortName] = this;
 		}
 

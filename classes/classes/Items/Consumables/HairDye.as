@@ -11,14 +11,23 @@ import classes.Scenes.SceneLib;
 public class HairDye extends Consumable
 	{
 		private var _color:String;
-
-		public function HairDye(id:String, color:String, value:int = 6)
+		
+		public static const RARITY_TO_VALUE:Object = {
+			1: 6,
+			2: 10,
+			3: 50,
+			4: 100
+		};
+		
+		public function HairDye(id:String, params:Object)
 		{
+			var color:String = params.color;
+			var rarity:int = params.rarity;
 			_color = color.toLowerCase();
 			var shortName:String = color + " Dye";
 			var longName:String = "a vial of " + _color + " hair dye";
 			var description:String = "This bottle of dye will allow you to change the color of your hair, fur, scales, chitin, or feathers.";
-			super(id, shortName, longName, value, description);
+			super(id, shortName, longName, RARITY_TO_VALUE[rarity] || 6, description);
 		}
 		
 		override public function canUse():Boolean {

@@ -28,6 +28,7 @@ import classes.Transformations.Transformation;
 import classes.internals.EnumValue;
 
 import coc.view.Block;
+import coc.view.ButtonDataList;
 import coc.view.Color;
 import coc.view.MainView;
 
@@ -211,7 +212,101 @@ public class DebugMenu extends BaseContent
 			addButton(8, "Undergarments", displayItemPage, undergarmentArray, 1);
 			addButton(9, "Accessories", displayItemPage, accessoryArray, 1);
 			addButton(10,"ConsumableLib",displayItemPage,testArray,1);
+			addButton(12, "Templated", templatedItemMenu);
 			addButton(14, "Back", accessDebugMenu);
+		}
+		
+		private function templatedItemMenu():void {
+			hideItemParams();
+			clearOutput();
+			menu();
+			var buttons:ButtonDataList = new ButtonDataList();
+			buttons.add("HairDye", curry(
+					configureTemplate,
+					templatedItems.THairDye,
+					[
+						{name: "color", type: "text", value: "white"},
+						{name: "rarity", type: "number", value: 1},
+					])
+			);
+			submenu(buttons, itemSpawnMenu);
+		}
+		private var itemParamsBlock:Block;
+		private function hideItemParams():void {
+			if (itemParamsBlock) {
+				mainView.removeElement(itemParamsBlock);
+				itemParamsBlock = null;
+			}
+		}
+		private function configureTemplate(template:ItemTemplate, paramsDef:Array):void {
+			clearOutput();
+			outputText(template.name + " parameters:\n");
+			flushOutputTextToGUI();
+			
+			var parameters:Object = {};
+			
+			itemParamsBlock = new Block({
+				layoutConfig: {
+					type: "flow",
+					direction: "column",
+					gap: 1
+				},
+				x: mainView.mainText.x,
+				y: mainView.mainText.y + 24,
+				width: mainView.mainText.width,
+				height: mainView.mainText.height - 24
+			});
+			mainView.hotkeysDisabled = true;
+			mainView.addElement(itemParamsBlock);
+			for each (var def:Object in paramsDef) {
+				parameters[def.name] = def.value;
+				var row:Block = new Block({height: 24});
+				row.addTextField({text: def.label || def.name});
+				var element:DisplayObject;
+				switch (def.type) {
+					case "text":
+						element = (function(def:Object):DisplayObject{
+							return row.addTextInput({
+								text: def.value,
+								onchange: function(event:Event):void {
+									parameters[def.name] = (this as TextInput).text;
+								}
+							})
+						})(def);
+						break;
+					case "number":
+						element = (function(def:Object):DisplayObject{
+							return row.addTextInput({
+								text: ""+def.value,
+								onchange: function(event:Event):void {
+									var x:Number = parseFloat((this as TextInput).text);
+									if (!isNaN(x)) {
+										parameters[def.name] = x;
+									}
+								}
+							})
+						})(def);
+						break;
+					default:
+						element = row.addTextField({text:"Bad type "+def.type});
+				}
+				if (element) {
+					element.x       = itemParamsBlock.width * 1 / 5;
+					element.width   = itemParamsBlock.width * 4 / 5;
+					element.visible = true;
+					row.addElement(element);
+					itemParamsBlock.addElement(row);
+				}
+			}
+			
+			menu();
+			addButton(0, "Create", createTemplatedItem, template, parameters);
+			addButton(14, "Back", templatedItemMenu);
+		}
+		private function createTemplatedItem(template:ItemTemplate, parameters:Object):void {
+			clearOutput();
+			hideItemParams();
+			inventory.takeItem(template.createItem(parameters), templatedItemMenu);
 		}
 
 		private function displayItemPage(array:Array, page:int):void {
