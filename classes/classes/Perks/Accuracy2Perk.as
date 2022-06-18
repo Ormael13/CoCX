@@ -12,6 +12,7 @@ package classes.Perks
 
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			return "Lower your accuracy by " + params.value1 * 0.5 + "%.";
 		}
 
@@ -19,6 +20,6 @@ package classes.Perks
 		{
 			super("Accuracy-", "Accuracy-",
 					"Your range weapon lowering your accuracy when shooting.");
-		}		
+		}
 	}
 }

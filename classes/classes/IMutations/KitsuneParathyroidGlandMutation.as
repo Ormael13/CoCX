@@ -87,8 +87,7 @@ public class KitsuneParathyroidGlandMutation extends IMutationPerkType
         }
 
         public function KitsuneParathyroidGlandMutation() {
-            super("Kitsune Parathyroid Gland IM", "Kitsune Parathyroid Gland", ".");
-            maxLvl = 3;
+            super("Kitsune Parathyroid Gland IM", "Kitsune Parathyroid Gland", SLOT_PARATHYROID, 3);
         }
         
     }

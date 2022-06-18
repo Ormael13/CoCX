@@ -76,8 +76,7 @@ public class RatatoskrSmartsMutation extends IMutationPerkType
         }
 
         public function RatatoskrSmartsMutation() {
-            super("Ratatoskr Smarts IM", "Ratatoskr Smarts", ".");
-            maxLvl = 3;
+            super("Ratatoskr Smarts IM", "Ratatoskr Smarts", SLOT_NERVSYS, 3);
         }
         
     }

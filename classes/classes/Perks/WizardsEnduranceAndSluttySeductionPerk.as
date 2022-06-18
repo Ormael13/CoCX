@@ -2,7 +2,7 @@
  * ...
  * @author Zavos
  */
-package classes.Perks 
+package classes.Perks
 {
 	import classes.PerkClass;
 	import classes.PerkType;
@@ -12,6 +12,7 @@ package classes.Perks
 
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			return "Reduces mana cost of spells by " + params.value1 + "% and increases odds of successfully teasing and lust damage of successful teases by " + params.value2 + " points.";
 		}
 
@@ -21,10 +22,10 @@ package classes.Perks
 					"Your spellcasting equipment makes your spell-casting cost less mana you and allows access to 'Seduce', an improved form of 'Tease'.!");
 		}
 		
-		override public function keepOnAscension(respec:Boolean = false):Boolean 
+		override public function keepOnAscension(respec:Boolean = false):Boolean
 		{
 			return true;
-		}		
+		}
 	}
 
 }
