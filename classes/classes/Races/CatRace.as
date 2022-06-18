@@ -72,7 +72,7 @@ public class CatRace extends Race {
 				|| body.tailType == Tail.TWINKASHA;
 	}
 	public static function isCheshireLike(body:BodyData):Boolean {
-		return (body.hairColor == "lilac and white striped" && body.skinCoatColor == "lilac and white striped");
+		return (body.hairColor == "lilac and white striped" && body.furColor == "lilac and white striped");
 	}
 	public static function isSphinxLike(body:BodyData):Boolean {
 		return body.armType == Arms.SPHINX

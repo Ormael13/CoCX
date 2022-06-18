@@ -1282,7 +1282,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         if (rando >= 90 && changeLimit != 0) {
-            if (InCollection(player.skin.base.color, DemonRace.DemonSkinColors)) {
+            if (InCollection(player.skinMaterialColor, DemonRace.DemonSkinColors)) {
                 if (player.vaginas.length > 0) {
                     outputText("[pg]Your heart begins beating harder and harder as heat floods to your groin.  You feel your clit peeking out from under its hood, growing larger and longer as it takes in more and more blood.");
                     if (player.clitLength > 3 && !player.hasPerk(PerkLib.BigClit)) outputText("  After some time it shrinks, returning to its normal aroused size.  You guess it can't get any bigger.");
@@ -1297,8 +1297,8 @@ public final class Mutations extends MutationsHelper {
                     transformations.VaginaHuman().applyEffect();
                 }
             } else {
-                player.skin.base.color = randomChoice(DemonRace.DemonSkinColors);
-                outputText("[pg]A tingling sensation runs across your skin in waves, growing stronger as <b>your skin's tone slowly shifts, darkening to become " + player.skinMaterialColor + " in color.</b>");
+                player.skinMaterialColor = randomChoice(DemonRace.DemonSkinColors);
+                outputText("[pg]A tingling sensation runs across your skin in waves, growing stronger as <b>your skin's tone slowly shifts, darkening to become [skin color] in color.</b>");
                 if (tainted) dynStats("cor", 1);
                 else dynStats("cor", 0);
             }
@@ -1566,7 +1566,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Winter wolf fur partial fur
-        if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.ears.type == Ears.WOLF && !player.hasPartialCoat(Skin.FUR) && (player.hairColor != "glacial white" || player.coatColor != "glacial white")) {
+        if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.ears.type == Ears.WOLF && !player.hasPartialCoat(Skin.FUR) && (player.hairColor != "glacial white" || player.furColor != "glacial white")) {
             if (player.hairColor != "glacial white") {
                 outputText("[pg]");
                 transformations.HairChangeColor(["glacial white"]).applyEffect();
@@ -1576,7 +1576,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Winter wolf full fur
-        if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.ears.type == Ears.WOLF && player.hasPartialCoat(Skin.FUR) && (player.hairColor != "glacial white" || player.coatColor != "glacial white")) {
+        if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.ears.type == Ears.WOLF && player.hasPartialCoat(Skin.FUR) && (player.hairColor != "glacial white" || player.furColor != "glacial white")) {
             if (player.hairColor != "glacial white") {
                 outputText("[pg]");
                 transformations.HairChangeColor(["glacial white"]).applyEffect();
@@ -1584,10 +1584,10 @@ public final class Mutations extends MutationsHelper {
             transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "glacial white"}).applyEffect();
             changes++;
         }
-        if (rand(2) == 0 && changes < changeLimit && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.ears.type == Ears.WOLF && player.hasFullCoatOfType(Skin.FUR) && (player.hairColor != "glacial white" || player.coatColor != "glacial white")) {
+        if (rand(2) == 0 && changes < changeLimit && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.ears.type == Ears.WOLF && player.hasFullCoatOfType(Skin.FUR) && (player.hairColor != "glacial white" || player.furColor != "glacial white")) {
             outputText("<b>[pg]Your fur and hair tingles, growing in thicker than ever as coldness begins to spread from the roots, turning it glacial white.</b>");
             player.hairColor = "glacial white";
-            player.skin.coat.color = player.hairColor;
+            player.furColor = player.hairColor;
             changes++;
         }
         if (changes < changeLimit && player.arms.type == Arms.HUMAN && rand(2) == 0) {
@@ -2211,11 +2211,11 @@ public final class Mutations extends MutationsHelper {
 				changes++;
             }
             //Red skin!
-            if (rand(30) == 0 && changes < changeLimit && player.skin.base.color != "red") {
+            if (rand(30) == 0 && changes < changeLimit && player.skinMaterialColor != "red") {
                 if (player.hasFur()) outputText("[pg]Underneath your fur, your skin ");
                 else outputText("[pg]Your [skin.type] ");
-                if (rand(2) == 0) player.skin.base.color = "red";
-                else player.skin.base.color = "orange";
+                if (rand(2) == 0) player.skinMaterialColor = "red";
+                else player.skinMaterialColor = "orange";
                 outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinMaterialColor + ".");
 				changes++;
             }
@@ -2227,12 +2227,12 @@ public final class Mutations extends MutationsHelper {
             dynStats("lus", 3, "cor", 1);
         }
         //Red skin!
-        if (rand(30) == 0 && changes < changeLimit && player.skin.base.color != "red") {
+        if (rand(30) == 0 && changes < changeLimit && player.skinMaterialColor != "red") {
             if (player.hasFur()) outputText("[pg]Underneath your fur, your skin ");
             else outputText("[pg]Your [skin.type] ");
-            if (rand(2) == 0) player.skin.base.color = "red";
-            else player.skin.base.color = "orange";
-            outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinMaterialColor + ".");
+            if (rand(2) == 0) player.skinMaterialColor = "red";
+            else player.skinMaterialColor = "orange";
+            outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely [skin color].");
 			changes++;
         }
         //Shrinkage!
@@ -2796,7 +2796,7 @@ public final class Mutations extends MutationsHelper {
                 else if (player.hasScales()) outputText(" begins dropping to the ground in a pile around you, revealing smooth skin underneath.");
                 else outputText(" shifts and changes into flawless smooth skin.");
                 player.skin.setBaseOnly({type: Skin.PLAIN, adj: "smooth"});
-                if (player.skin.base.color == "rough gray") player.skin.base.color = "gray";
+                if (player.skinMaterialColor == "rough gray") player.skinMaterialColor = "gray";
             }
             //chance of hair change
             else {
@@ -2847,7 +2847,7 @@ public final class Mutations extends MutationsHelper {
                 else if (player.hasScales()) outputText(" begins dropping to the ground in a pile around you, revealing smooth skin underneath.");
                 else outputText(" shifts and changes into flawless smooth skin.");
                 player.skin.setBaseOnly({type: Skin.PLAIN, adj: "smooth"});
-                if (player.skin.base.color == "rough gray") player.skin.base.color = "gray";
+                if (player.skinMaterialColor == "rough gray") player.skinMaterialColor = "gray";
             }
             //chance of hair change
             else {
@@ -3201,7 +3201,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]");
         }
         //enhanced get shitty fur
-        if (changes < changeLimit && enhanced && (player.skinDesc != "fur" || player.coatColor != "black and white spotted") && player.horns.type != Horns.COW_MINOTAUR) {
+        if (changes < changeLimit && enhanced && (player.skinDesc != "fur" || player.furColor != "black and white spotted") && player.horns.type != Horns.COW_MINOTAUR) {
             outputText("[pg]");
             transformations.HairChangeColor(["White"]).applyEffect();
             transformations.HairCow.applyEffect();
@@ -4517,11 +4517,11 @@ public final class Mutations extends MutationsHelper {
                 player.hairColorOnly = "silver";
             }
             //Skin
-            if ((!InCollection(player.coatColor, SharkRace.SharkScaleColors, "orange") || !player.hasScales()) && rand(7) == 0 && changes < changeLimit) {
+            if ((!InCollection(player.scaleColor, SharkRace.SharkScaleColors, "orange") || !player.hasScales()) && rand(7) == 0 && changes < changeLimit) {
                 outputText("[pg]");
                 if (type == 0) {
                     var color:String;
-                    if (!InCollection(player.coatColor, SharkRace.SharkScaleColors))
+                    if (!InCollection(player.scaleColor, SharkRace.SharkScaleColors))
                         color = (rand(9) == 0)? "rough gray" : randomChoice(SharkRace.SharkScaleColors);
 
                     transformations.SkinAquaScales(Skin.COVERAGE_HIGH, {color:color}).applyEffect();
@@ -4781,11 +4781,10 @@ public final class Mutations extends MutationsHelper {
         }
 
         // Scale color
-        if (type == 1 && rand(4) == 0 && !InCollection(player.coatColor, NagaRace.SnakeScaleColors) && changes < changeLimit) {
+        if (type == 1 && rand(4) == 0 && !InCollection(player.scaleColor, NagaRace.SnakeScaleColors) && changes < changeLimit) {
             outputText("[pg]");
             color = randomChoice(NagaRace.SnakeScaleColors);
             transformations.SkinScales(Skin.COVERAGE_LOW, {color: color}).applyEffect();
-            player.coatColor2 = "purplish black";
             changes++;
         }
 
@@ -4794,7 +4793,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]");
             color = randomChoice(NagaRace.SnakeScaleColors);
             outputText("[pg]Your hair suddenly tingles as "+color+" strands begins to cover your entire skalp and before long all of them are of same dark color.");
-            player.hairColorOnly = color;
+            player.hairColor = color;
             changes++;
         }
 
@@ -4802,11 +4801,11 @@ public final class Mutations extends MutationsHelper {
         if (type == 1 && player.skin.base.color != "light purple" && changes < changeLimit && rand(3) == 0) {
             changes++;
             outputText("[pg]It takes a while for you to notice, but <b>");
-            if (player.hasFur()) outputText("the skin under your [fur color] " + player.skinDesc);
-            else outputText("your " + player.skinDesc);
+            if (player.hasCoat()) outputText("the skin under your [fur color] [skin coat.desc]");
+            else outputText("your [skin desc]" + player.skinDesc);
             outputText(" has changed to become ");
-            player.skin.base.color = "light purple";
-            outputText(player.skinMaterialColor + " colored.</b>");
+            player.skinMaterialColor = "light purple";
+            outputText("[skin color] colored.</b>");
         }
 
         //Gain hood
@@ -5324,13 +5323,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Skin color change – tan, olive, dark, light
-        if (!InCollection(player.skin.base.color, HumanRace.HumanSkinColors) && changes < changeLimit && rand(3) == 0) {
+        if (!InCollection(player.skinMaterialColor, HumanRace.HumanSkinColors) && changes < changeLimit && rand(3) == 0) {
             changes++;
             outputText("[pg]It takes a while for you to notice, but <b>");
             if (player.hasFur()) outputText("the skin under your [fur color] " + player.skinDesc);
             else outputText("your " + player.skinDesc);
             outputText(" has changed to become ");
-            player.skin.base.color = randomChoice(HumanRace.HumanSkinColors)
+            player.skinMaterialColor = randomChoice(HumanRace.HumanSkinColors)
             outputText(player.skinMaterialColor + " colored.</b>");
         }
         //Change skin to normal

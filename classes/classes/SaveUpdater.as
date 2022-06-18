@@ -671,11 +671,11 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			//Update chitin
 			if (player.hasCoatOfType(Skin.CHITIN)) {
-				if (player.isRace(Races.MANTIS)) player.skin.coat.color = "green";
-				if (player.isRace(Races.SPIDER)) player.skin.coat.color = "pale white";
+				if (player.isRace(Races.MANTIS)) player.chitinColor = "green";
+				if (player.isRace(Races.SPIDER)) player.chitinColor = "pale white";
 				if (player.isRace(Races.MANTIS) && !player.isRace(Races.SPIDER)) {
-					if (rand(2) == 1) player.skin.coat.color = "green";
-					else player.skin.coat.color = "pale white";
+					if (rand(2) == 1) player.chitinColor = "green";
+					else player.chitinColor = "pale white";
 				}
 			}
 			doNext(camp.doCamp);
@@ -740,7 +740,7 @@ public class SaveUpdater extends NPCAwareContent {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 21;
 			if (player.hasPerk(PerkLib.Lycanthropy)) {
 				player.skin.coverage = Skin.COVERAGE_LOW;
-				player.coatColor = player.hairColor;
+				player.furColor = player.hairColor;
 				player.removePerk(PerkLib.Lycanthropy);
 				var bonusStats:Number = 0;
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats += 10;
@@ -2058,7 +2058,7 @@ public class SaveUpdater extends NPCAwareContent {
 	private function chooseFurColorSaveUpdate(color:String):void {
 		clearOutput();
 		outputText("You now have " + color + " fur. You will be returned to your [camp] now and you can continue your usual gameplay.");
-		player.skin.coat.color = color;
+		player.furColor = color;
 		doNext(camp.doCamp);
 	}
 

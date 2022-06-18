@@ -335,7 +335,7 @@ public class WorldTree extends BaseContent
 			}
 			//Moss (fur)/else Bark skin
 			if ((player.skinType != Skin.BARK || player.skinType != Skin.PARTIAL_BARK) && !player.isGargoyle() && changes < changeLimit && player.faceType == Face.PLANT_DRAGON) {
-				if (player.hasFur()) outputText("You scratch yourself, and come away with a large clump of " + player.coatColor + " fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, removing the fur to see the changes beneath.");
+				if (player.hasFur()) outputText("You scratch yourself, and come away with a large clump of " + player.furColor + " fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, removing the fur to see the changes beneath.");
 				else outputText("You idly scratch an itch, but recoil when you feel the wrong texture in the wrong place.");
 				outputText(" You watch as flakes of skin peel away to reveal...  scales?  On closer examination, it appears that your \"scales\" are actually some form of bark. <b>You are now covered by scale-like bark from head to toe.</b>\n\n");
 				CoC.instance.transformations.SkinScales(Skin.COVERAGE_COMPLETE, {color:"mahogany", adj:"bark-like"}).applyEffect(false);

@@ -274,7 +274,8 @@ import classes.Items.*;
 			//if possible with fur, Hair color: "midnight black", Skin/Fur color: "ashen grayish-blue",  Height: 65", Tone: 100, Thickness: 0, Hip rating: 6, Butt rating: 3,Feminimity: 50,  ( 4 rows of breasts (Descending from the top ones: D,C,B,A), nipple length: 0.1", Fuckable, 1 nipple per breast, Tongue type: demon
 			player.hairColor = "midnight black";
 			player.skin.growFur({});
-			player.skin.base.color = "ashen grayish-blue";
+			player.skinMaterialColor = "ashen grayish-blue";
+			player.furColor = "ashen grayish-blue";
 			player.tallness = 65;
 			player.tone = 100;
 			player.thickness = 0;
@@ -382,7 +383,7 @@ import classes.Items.*;
 			//-Cat with (black and orange tiger fur if possible) if not just Orange fur
 			player.hairColor = "black and orange";
 			player.skin.growFur({});
-			player.coatColor = "black and orange";
+			player.furColor = "black and orange";
 			//-Chainmail armor
 			player.setArmor(armors.FULLCHN);
 			//-Large Claymore (i understand 40 Strength is need so if he could start with that would be great if not hit the gyms)"

@@ -401,6 +401,23 @@ public class Tail extends SaveableBodyPart {
 			venom = 0;
 		}
 	}
+	
+	override public function hasMaterial(type:int):Boolean {
+		switch (type) {
+			case BodyMaterial.SKIN:
+				return true;
+			case BodyMaterial.HAIR:
+				return Types[this.type].feathers;
+			case BodyMaterial.FUR:
+				return Types[this.type].fur;
+			case BodyMaterial.SCALES:
+				return Types[this.type].scales;
+			case BodyMaterial.CHITIN:
+				return Types[this.type].chitin;
+			default:
+				return false;
+		}
+	}
 
 	public function Tail(creature:Creature) {
 		super(creature,"tail",["count","venom","recharge"]);

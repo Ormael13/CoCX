@@ -201,7 +201,7 @@ public class RaceScoreBuilder {
 		return this;
 	}
 	public function skinColor(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_SKIN_COLOR, value, score, failScore, customName);
+		addSlotRequirement(BodyData.SLOT_BODY_COLOR, value, score, failScore, customName);
 		return this;
 	}
 	public function skinBaseType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
@@ -272,7 +272,7 @@ public class RaceScoreBuilder {
 				"skin",
 				oo.name,
 				function(body:BodyData):Boolean {
-					return body.player.hasPlainSkinOnly() && oo.operatorFn(body.skinBaseColor);
+					return body.player.hasPlainSkinOnly() && oo.operatorFn(body.skinColor);
 				},
 				score,
 				failScore

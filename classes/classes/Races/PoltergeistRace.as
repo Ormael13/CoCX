@@ -36,8 +36,8 @@ public class PoltergeistRace extends Race{
 						"milky white or ashen sable, plain skin",
 						function (body:BodyData):Boolean {
 							return body.player.hasPlainSkinOnly() &&
-									(body.skinBaseAdj == "milky" && body.skinBaseColor == "white" ||
-											body.skinBaseAdj == "ashen" && body.skinBaseColor == "sable")
+									(body.skinBaseAdj == "milky" && body.skinColor == "white" ||
+											body.skinBaseAdj == "ashen" && body.skinColor == "sable")
 						}, +1
 						)
 				.customRequirement("skin",

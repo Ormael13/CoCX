@@ -131,9 +131,10 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	var dragon_coat_color:Array = ["red", "golden", "metallic golden", "metallic silver", "silver", "snow white", "green", "blue", "bronzed", "black", "midnight"];
 	//Gain Dragon Scales
 	if (player.hasPartialCoat(Skin.DRAGON_SCALES) && changes < changeLimit && rand(3) == 0) {
-		player.coatColor = randomChoice(dragon_coat_color);
 		outputText("\n\n");
-		CoC.instance.transformations.SkinDragonScales().applyEffect();
+		CoC.instance.transformations.SkinDragonScales(Skin.COVERAGE_COMPLETE, {
+			color: randomChoice(dragon_coat_color)
+		}).applyEffect();
 		changes++;
 	}
 	if (!player.hasDragonScales() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
@@ -143,7 +144,7 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 		} else {
 			color = randomChoice("red","green","white","blue","black");
 		}
-		player.coatColor = color;
+		player.scaleColor = color;
 		outputText("\n\n");
 		CoC.instance.transformations.SkinDragonScales(Skin.COVERAGE_LOW).applyEffect();
 		changes++;

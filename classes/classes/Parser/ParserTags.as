@@ -543,6 +543,7 @@ public class ParserTags {
         "scales": scaleLookups,
         "chitin": chitinLookups,
         "feather": featherLookups,
+        "feathers": featherLookups,
         
         "face": faceLookups
     };

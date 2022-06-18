@@ -119,6 +119,15 @@ public class BodyData {
 		return data[SLOT_ANTENNAE_TYPE];
 	}
 	
+	public static const SLOT_BODY_COLOR:int = _slotid++;
+	EnumValue.add(Slots,SLOT_BODY_COLOR, "BODY_COLOR", {
+		name:"body color",
+		suffix:"skin"
+	});
+	public function get bodyColor():String {
+		return data[SLOT_BODY_COLOR];
+	}
+	
 	public static const SLOT_ARM_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_ARM_TYPE, "ARM_TYPE", {
 		name:"arms",
@@ -187,12 +196,18 @@ public class BodyData {
 		name: "fur color",
 		suffix: "fur"
 	});
+	public function get furColor():String {
+		return data[SLOT_FUR_COLOR];
+	}
 	
 	public static const SLOT_FUR_COLOR2:int = _slotid++;
 	EnumValue.add(Slots, SLOT_FUR_COLOR2, "FUR_COLOR2", {
 		name: "fur secondary color",
 		suffix: "fur"
 	});
+	public function get furColor2():String {
+		return data[SLOT_FUR_COLOR2];
+	}
 	
 	public static const SLOT_GILLS_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_GILLS_TYPE, "GILL_TYPE", {
@@ -279,12 +294,36 @@ public class BodyData {
 		name: "scale color",
 		suffix: "scales"
 	});
+	public function get scaleColor():String {
+		return data[SLOT_SCALE_COLOR];
+	}
 	
 	public static const SLOT_SCALE_COLOR2:int = _slotid++;
 	EnumValue.add(Slots, SLOT_SCALE_COLOR2, "SCALE_COLOR2", {
 		name: "scale secondary color",
 		suffix: "scales"
 	});
+	public function get scaleColor2():String {
+		return data[SLOT_SCALE_COLOR2];
+	}
+	
+	public static const SLOT_SKIN_COLOR:int = _slotid++;
+	EnumValue.add(Slots, SLOT_SKIN_COLOR, "SKIN_COLOR", {
+		name: "skin color",
+		suffix: "skin"
+	});
+	public function get skinColor():String {
+		return data[SLOT_SKIN_COLOR];
+	}
+	
+	public static const SLOT_SKIN_COLOR2:int = _slotid++;
+	EnumValue.add(Slots, SLOT_SKIN_COLOR2, "SKIN_COLOR2", {
+		name: "skin secondary color",
+		suffix: "skin"
+	});
+	public function get skinColor2():String {
+		return data[SLOT_SKIN_COLOR2];
+	}
 	
 	public static const SLOT_SKIN_COVERAGE:int = _slotid++;
 	
@@ -319,15 +358,6 @@ public class BodyData {
 	});
 	public function get skinType():int {
 		return data[SLOT_SKIN_TYPE];
-	}
-	
-	public static const SLOT_SKIN_COLOR:int = _slotid++;
-	EnumValue.add(Slots,SLOT_SKIN_COLOR, "SKIN_COLOR", {
-		name:"skin color",
-		suffix:"skin"
-	});
-	public function get skinColor():String {
-		return data[SLOT_SKIN_COLOR];
 	}
 	
 	public static const SLOT_SKIN_BASE_TYPE:int = _slotid++;
@@ -676,6 +706,7 @@ public class BodyData {
 		
 		data[SLOT_ANTENNAE_TYPE]     = player.antennae.type;
 		data[SLOT_ARM_TYPE]          = player.arms.type;
+		data[SLOT_BODY_COLOR]        = player.skin.color;
 		data[SLOT_CHITIN_COLOR]      = player.chitinColor;
 		data[SLOT_CHITIN_COLOR2]     = player.chitinColor2;
 		data[SLOT_EAR_TYPE]          = player.ears.type;
@@ -693,9 +724,10 @@ public class BodyData {
 		data[SLOT_REAR_TYPE]         = player.rearBody.type;
 		data[SLOT_SCALE_COLOR]       = player.scaleColor;
 		data[SLOT_SCALE_COLOR2]      = player.scaleColor2;
+		data[SLOT_SKIN_COLOR]        = player.skinMaterialColor;
+		data[SLOT_SKIN_COLOR2]       = player.skinMaterialColor2;
 		data[SLOT_SKIN_COVERAGE]     = player.skin.coverage;
 		data[SLOT_SKIN_TYPE]         = player.skin.type;
-		data[SLOT_SKIN_COLOR]        = player.skin.color;
 		data[SLOT_SKIN_BASE_TYPE]    = player.skin.base.type;
 		data[SLOT_SKIN_BASE_COLOR]   = player.skin.base.color;
 		data[SLOT_SKIN_BASE_PATTERN] = player.skin.base.pattern;

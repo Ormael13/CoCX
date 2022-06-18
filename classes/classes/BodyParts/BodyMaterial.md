@@ -67,7 +67,7 @@ For brevity, in following code `fur` means `fur/scales/chitin` or any other body
   - `[skin color]`, `[skin color1]`, `[skin color2]`
   - `[hair color]`, `[hair color1]`, `[hair color2]`
   - `[fur color]`, `[fur color1]`, `[fur color2]`
-  - `[scale color]`, `[scale color1]`, `[scale color2]`
+  - `[scales color]`, `[scales color1]`, `[scales color2]` (or `scale`)
   - `[chitin color]`, `[chitin color1]`, `[chitin color2]`
   - `[feather color]`, `[feather color1]`, `[feather color2]` (alias for hair)
 * layer-specific colors:

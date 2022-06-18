@@ -116,9 +116,9 @@ public class NightmareScene extends BaseContent
 					outputText("\"<i>Wow girl you're taking charge now, are you? At this rate I won’t be able to hold any much longer.</i>\"\n\n");
 					outputText("You moan in delight as the fiend corruption spreads from her cock to you, staining your body and soul as black as her own.");
 
-					if (player.hasFur() && player.coatColor != InCollection("black", "midnight black", "midnight")) {
-						if (!recalling) player.coatColor = randomChoice("black", "midnight black", "midnight");
-						outputText(" Your pelt color swiftly change color to "+player.coatColor+" as every single trust pushes you forward down into your breeding frenzy.");
+					if (player.hasFur() && !InCollection(player.furColor, "black", "midnight black", "midnight")) {
+						if (!recalling) player.furColor = randomChoice("black", "midnight black", "midnight");
+						outputText(" Your pelt color swiftly change color to [fur color] as every single trust pushes you forward down into your breeding frenzy.");
 					}
 					if (player.horns.type != Horns.BICORN) {
 						outputText(" Just as you are about to achieve orgasm a pair of small parallel nub begins forming on your forehead.");

@@ -2205,10 +2205,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText(" You feel a tingling in your hairs as the strands turns "+CurentColor+".");
 					player.hairColor = CurentColor;
 				}
-				if (!InCollection(player.coatColor, bicornColorPalette)) {
+				if (!InCollection(player.furColor, bicornColorPalette)) {
 					CurentColor = randomChoice(bicornColorPalette);
 					outputText(" Your fur tingle and you coo in delight as it turn "+CurentColor+".");
-					player.coatColor = CurentColor;
+					player.furColor = CurentColor;
 				}
 				if (CoC.instance.transformations.EyesChangeColor(["red"]).isPossible()) {
 					outputText(" Meanwhile your eyes shine with malice as they take on a red corrupted tone reflecting the sorry state of your soul.");
@@ -2267,10 +2267,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText(" You feel a tingling in your hairs as the strands turns "+CurentColor+".");
 					player.hairColor = CurentColor;
 				}
-				if (!InCollection(player.coatColor, unicornColorPalette)) {
+				if (!InCollection(player.furColor, unicornColorPalette)) {
 					CurentColor = randomChoice(unicornColorPalette);
 					outputText(" You sigh in relief as your fur turns "+CurentColor+".");
-					player.coatColor = CurentColor;
+					player.furColor = CurentColor;
 				}
 				if (CoC.instance.transformations.EyesChangeColor(["blue"]).isPossible()) {
 					outputText(" Meanwhile your irises shift toward the sapphire blue as your mind clears off.");

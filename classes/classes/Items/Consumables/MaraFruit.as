@@ -297,7 +297,7 @@ public class MaraFruit extends Consumable{
 			CoC.instance.transformations.TailNone.applyEffect(false);
 			CoC.instance.transformations.WingsNone.applyEffect(false);
 			CoC.instance.transformations.LowerBodyPlantFlower.applyEffect(false);
-			player.coatColor = "pink";
+			player.coatColor = "pink"; // TODO flower color
 			changes++;
 		}
 		player.refillHunger(10);
