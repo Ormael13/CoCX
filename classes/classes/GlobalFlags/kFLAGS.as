@@ -245,10 +245,10 @@ public static const IZMA_AMILY_FREAKOUT_STATUS:int                              
 public static const IZMA_MARBLE_FREAKOUT_STATUS:int                                 =  237; // Izma + Marble Freakout Status = (Above)
 public static const IZMA_FOLLOWER_STATUS:int                                  		=  238; // Izma Follower Toggle (-1 = stay at lake, 0 = neutral, 1 = live in camp)
 public static const IZMA_TALK_LEVEL:int                                  			=  239; // Izma Talk level
-public static const UNKNOWN_FLAG_NUMBER_00240:int                                   =  240; // Mino Chef First Meeting Happen?
-public static const UNKNOWN_FLAG_NUMBER_00241:int                                   =  241; // mino explained what he needs yet?
-public static const UNKNOWN_FLAG_NUMBER_00242:int                                   =  242; // , 3 =stayed, 4 = epilogue'ed
-public static const UNKNOWN_FLAG_NUMBER_00243:int                                   =  243; // Counter for minotaur chef baker procs - Maddie present at bakery.    Mod%8=0, present
+public static const MINOCHEF_FIRST_MEETING:int                                   	=  240; // Mino Chef First Meeting Happen?
+public static const MADDIE_QUEST_STARTED:int                                   		=  241; // mino explained what he needs yet?
+public static const MADDIE_QUEST_STATE:int                                   		=  242; // , 3 =stayed, 4 = epilogue'ed
+public static const MADDIE_OFFER_COUNTER:int                                   		=  243; // Counter for minotaur chef baker procs - Maddie present at bakery.    Mod%8=0, present
 public static const COTTON_UNUSUAL_YOGA_BOOK_TRACKER:int                            =  244; // Cotton Unusual Yoga Guidebook tracker
 public static const COTTON_BREAKFAST_CLUB:int                                       =  245; // Cotton Breakfast Club
 public static const GOT_STOOTH_FROM_IZMA_TODAY:int                                  =  246; // Tiger Tooth Countdown

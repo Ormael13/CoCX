@@ -7,6 +7,7 @@ import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.TelAdre.*;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
+//import classes.Scenes.Places.AbandonedTownRebuilt;
 
 /**
  * The lovely town of Tel Adre
@@ -176,7 +177,7 @@ public function telAdreMenu():void {
 		SceneLib.urtaPregs.urtaSpecialDeliveries();
 		return;
 	}
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] == -1) {
+	if(flags[kFLAGS.MADDIE_QUEST_STATE] == -1) {
 		maddie.runAwayMaddieFollowup();
 		return;
 	}
@@ -474,7 +475,14 @@ public function barTelAdre():void {
 	//AMILY!
 	if(flags[kFLAGS.AMILY_VISITING_URTA] == 1) {
 		button = anotherButton(button,"Ask4Amily",SceneLib.followerInteractions.askAboutAmily);
+	}/*
+	if (AbandonedTownRebuilt.AmilyAtWetBitch = true && AbandonedTownRebuilt.AmilyAngerCooldown > 0) {
+		button = anotherButton(button, "AmilyTalk",AbandonedTownRebuilt.AmilyMadBar);
 	}
+	if (AbandonedTownRebuilt.AmilyAtWetBitch = true && AbandonedTownRebuilt.AmilyAngerCooldown = 0) {
+		button = anotherButton(button, "AmilyTalk",AbandonedTownRebuilt.AmilyBarTalk);
+	}*/
+
 	//DOMINIKA
 	if(model.time.hours > 17 && model.time.hours < 20 && flags[kFLAGS.DOMINIKA_MET] != -1) {
 		button = anotherButton(button,"Dominika",dominika.fellatrixBarApproach);
