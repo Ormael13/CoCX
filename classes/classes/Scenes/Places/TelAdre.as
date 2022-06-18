@@ -7,7 +7,7 @@ import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.TelAdre.*;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
-import classes.Scenes.Places.AbandonedTownRebuilt;
+//import classes.Scenes.Places.AbandonedTownRebuilt;
 
 /**
  * The lovely town of Tel Adre
@@ -475,13 +475,13 @@ public function barTelAdre():void {
 	//AMILY!
 	if(flags[kFLAGS.AMILY_VISITING_URTA] == 1) {
 		button = anotherButton(button,"Ask4Amily",SceneLib.followerInteractions.askAboutAmily);
-	}
+	}/*
 	if (AbandonedTownRebuilt.AmilyAtWetBitch = true && AbandonedTownRebuilt.AmilyAngerCooldown > 0) {
 		button = anotherButton(button, "AmilyTalk",AbandonedTownRebuilt.AmilyMadBar);
 	}
 	if (AbandonedTownRebuilt.AmilyAtWetBitch = true && AbandonedTownRebuilt.AmilyAngerCooldown = 0) {
 		button = anotherButton(button, "AmilyTalk",AbandonedTownRebuilt.AmilyBarTalk);
-	}
+	}*/
 
 	//DOMINIKA
 	if(model.time.hours > 17 && model.time.hours < 20 && flags[kFLAGS.DOMINIKA_MET] != -1) {

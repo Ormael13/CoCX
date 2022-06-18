@@ -705,7 +705,7 @@ private function rubiIsAShe():void {
 //(available for players with cocks or large clits (at least 4</i>\")) (If Orgasm Denial is activated, adds 1 to Blue Balls)
 public function fuckRubiRouter():void {
 	clearOutput();
-	if (!player.hasCock) fuckRubi(-1);
+	if (!player.hasCock()) fuckRubi(-1);
 	else sceneHunter.callFitNofit(fuckRubi, rubiCapacity());
 }
 
