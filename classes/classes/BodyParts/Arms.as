@@ -17,8 +17,10 @@ public class Arms extends BodyPart {
 	 * - armSlam: whether the arms enable armSlam
 	 * - canFly: [for winged arms] whether allows flight at the expense of using both arms
 	 * - wingSlap: [for winged arms] whether part allows a wing slap
+	 *
+	 * - hairy: has hair material
 	 * - fur: has fur material
-	 * - feathers: has feathers (hair body material)
+	 * - feathers: has feathers material
 	 * - scales: has scales material
 	 * - chitin: has chitin material
 	 * */
@@ -457,13 +459,15 @@ public class Arms extends BodyPart {
 			case BodyMaterial.SKIN:
 				return true;
 			case BodyMaterial.HAIR:
-				return Types[this.type].feathers;
+				return Types[this.type].hairy;
 			case BodyMaterial.FUR:
 				return Types[this.type].fur;
 			case BodyMaterial.SCALES:
 				return Types[this.type].scales;
 			case BodyMaterial.CHITIN:
 				return Types[this.type].chitin;
+			case BodyMaterial.FEATHERS:
+				return Types[this.type].feathers;
 			default:
 				return false;
 		}

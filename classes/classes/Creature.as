@@ -1053,9 +1053,6 @@ public class Creature extends Utils
 		public function get coatColor():String {
 			return skin.coat.color;
 		}
-		public function get nakedCoatColor():String {
-			return skin.coat.color;
-		}
 		public function set coatColor(value:String):void {
 			if (!skin.hasCoat()) trace("[WARNING] set coatColor() called with no coat");
 			skin.coat.color = value;
@@ -1143,6 +1140,24 @@ public class Creature extends Utils
 		public function set chitinColor2(value:String):void {
 			bodyMaterials[BodyMaterial.CHITIN].color2 = value;
 		}
+		public function get featherColor():String {
+			return bodyMaterials[BodyMaterial.FEATHERS].color;
+		}
+		public function set featherColor(value:String):void {
+			bodyMaterials[BodyMaterial.FEATHERS].color = value;
+		}
+		public function get featherColor1():String {
+			return bodyMaterials[BodyMaterial.FEATHERS].color1;
+		}
+		public function set featherColor1(value:String):void {
+			bodyMaterials[BodyMaterial.FEATHERS].color1 = value;
+		}
+		public function get featherColor2():String {
+			return bodyMaterials[BodyMaterial.FEATHERS].color2;
+		}
+		public function set featherColor2(value:String):void {
+			bodyMaterials[BodyMaterial.FEATHERS].color2 = value;
+		}
 		public function get bodyColor():String {
 			return skin.color;
 		}
@@ -1191,6 +1206,9 @@ public class Creature extends Utils
 		}
 		public function hasChitinMaterial():Boolean {
 			return hasBodyMaterial(BodyMaterial.CHITIN);
+		}
+		public function hasFeatherMaterial():Boolean {
+			return hasBodyMaterial(BodyMaterial.FEATHERS);
 		}
 		public var bodyParts:/*BodyPart*/Array = [];
 		public function hasCoat():Boolean { return skin.hasCoat(); }

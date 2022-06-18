@@ -157,7 +157,7 @@ public class Skin extends SaveableBodyPart {
 		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: false,
 		base:true,
-		material: BodyMaterial.HAIR
+		material: BodyMaterial.FEATHERS
 	});
 	public static const TRANSPARENT: int = 22;
 	EnumValue.add(SkinTypes, TRANSPARENT, "TRANSPARENT", {

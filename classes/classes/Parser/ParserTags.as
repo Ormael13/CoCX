@@ -73,7 +73,7 @@ public class ParserTags {
         "font-lust"             : function ():* { return '<font color="'+"#ff00ff"+'">'; },
         "font-default"          : function ():* { return '<font>'; },
         "/font"                 : function ():* { return '</font>'; },
-        "flowercolor"           : function ():* { return CoC.instance.player.nakedCoatColor; },
+        "flowercolor"           : function ():* { return CoC.instance.player.featherColor; },
         "fullchest"             : function ():* { return CoC.instance.player.allChestDesc(); },
         "gargoylematerial"      : function ():* { return Forgefather.material; },
         "hair"                  : function ():* { return CoC.instance.player.hairDescript(); },
@@ -475,7 +475,6 @@ public class ParserTags {
         "coat.color"  : function ():* {return CoC.instance.player.coatColor;},
         "coat.color1" : function ():* {return CoC.instance.player.skin.coat.color1;},
         "coat.color2" : function ():* {return CoC.instance.player.skin.coat.color2;},
-        "nakedcoatcolor.color"  : function ():* {return CoC.instance.player.nakedCoatColor;},
         "full"        : skinDescriptionFn("full", false, false),
         "full.noadj"  : skinDescriptionFn("full", true, false),
         "full.notone" : skinDescriptionFn("full", false, true),
@@ -503,9 +502,9 @@ public class ParserTags {
         "color2"      : function ():* { return CoC.instance.player.chitinColor2}
     };
     internal static var featherLookups:Object = {
-        "color"       : function ():* { return CoC.instance.player.hairColor},
-        "color1"      : function ():* { return CoC.instance.player.hairColor1},
-        "color2"      : function ():* { return CoC.instance.player.hairColor2}
+        "color"       : function ():* { return CoC.instance.player.featherColor},
+        "color1"      : function ():* { return CoC.instance.player.featherColor1},
+        "color2"      : function ():* { return CoC.instance.player.featherColor2}
     };
 
     internal static var faceLookups:Object = {

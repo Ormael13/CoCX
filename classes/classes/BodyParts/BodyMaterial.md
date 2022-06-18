@@ -1,6 +1,6 @@
 # BodyMaterial system _(design draft and partial implementation)_
 
-## Current state of affairs
+## Old system
 
 Creature body has 2 skin layers (base and coat) + coverage level.
 
@@ -12,17 +12,18 @@ Coverage goes from none (base only), low/partial (patches of coat), medium (mix 
 
 1. Description-wise, a body part can have material different from "main skin" (torso). For example, "chitinous spider legs" are assumed to be covered with chitin, however, if character's torso is covered with fur, there is no place to store chitin color.
 
-## Proposal
+## New system
 
 ### Body materials
 
 Extract **body material** data from skin layers to creature. A creature would store information on all possible body materials, and body parts can access any of them.
 
-List of body material types should be kept short, but sufficient. Current needed types are: skin, fur, scales, and chitin. Candidates: hair, feathers, horns/claws.
+List of body material types should be kept short, but sufficient. Current needed types are: skin, hair, fur, scales, chitin and feathers.
 
-Body material would store `color1`, `color2`. See 'Dual color system rework' below. To be discussed: move `adj` too.
+Body material stores `color1`, `color2`. See 'Dual color system rework' below. 
+To be discussed: move `adj` too.
 
-Body parts indicate whether they have material or not. For example, scaly wings would return
+Body parts indicate whether they have material or not. For example, scaly wings would return `true` for `hasMaterial(BodyMaterial.SCALES)`.
 
 ### Dual color system rework
 
@@ -51,7 +52,7 @@ player.chitinColor2 === "black"
 
 ## Function changes
 
-For brevity, in following code `fur` means `fur/scales/chitin` or any other body material.
+For brevity, in following code `fur` means `fur/scales/chitin/feathers` or any other body material.
 
 * New r/w properties for body material colors: `skinColor/skinColor1/skinColor2`, `furColor/furColor1/furColor2`
 * Corresponding parser tags: `[skin/fur color/color1/color2]`
@@ -69,7 +70,7 @@ For brevity, in following code `fur` means `fur/scales/chitin` or any other body
   - `[fur color]`, `[fur color1]`, `[fur color2]`
   - `[scales color]`, `[scales color1]`, `[scales color2]` (or `scale`)
   - `[chitin color]`, `[chitin color1]`, `[chitin color2]`
-  - `[feather color]`, `[feather color1]`, `[feather color2]` (alias for hair)
+  - `[feather color]`, `[feather color1]`, `[feather color2]` (or `feathers`)
 * layer-specific colors:
   - `[skin base.color]`, `[skin base.color1]`, `[skin base.color2]`  
   - `[skin coat.color]`, `[skin coat.color1]`, `[skin coat.color2]` 
@@ -92,8 +93,8 @@ All materials w/o their own type would use colors from some other material (goo 
 - fur
 - scales
 - chitin
-- (?) hair - for unification
-- (?) feathers
+- hair - for unification
+- feathers
 - (?) horns/claws - has its own tone but never used in-game
 - (?) bark/leaves/plant matter
 

@@ -14,8 +14,9 @@ public class LowerBody extends SaveableBodyPart {
 	 * - id: name of the constant ("HUMAN", "HOOFED")
 	 * - name: human-readable default name, ("human", "hoofed")
 	 *
+	 * - hairy: has hair material
 	 * - fur: has fur material
-	 * - feathers: has feathers (hair body material)
+	 * - feathers: has feathers material
 	 * - scales: has scales material
 	 * - chitin: has chitin material
 	 *
@@ -802,18 +803,21 @@ public class LowerBody extends SaveableBodyPart {
 				if (!legCount) legCount = 2;
 		}
 	}
+	
 	override public function hasMaterial(type:int):Boolean {
 		switch (type) {
 			case BodyMaterial.SKIN:
 				return true;
 			case BodyMaterial.HAIR:
-				return Types[this.type].feathers;
+				return Types[this.type].hairy;
 			case BodyMaterial.FUR:
 				return Types[this.type].fur;
 			case BodyMaterial.SCALES:
 				return Types[this.type].scales;
 			case BodyMaterial.CHITIN:
 				return Types[this.type].chitin;
+			case BodyMaterial.FEATHERS:
+				return Types[this.type].feathers;
 			default:
 				return false;
 		}

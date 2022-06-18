@@ -17,7 +17,7 @@ public class HairDye extends Consumable
 			_color = color.toLowerCase();
 			var shortName:String = color + " Dye";
 			var longName:String = "a vial of " + _color + " hair dye";
-			var description:String = "This bottle of dye will allow you to change the color of your hair, fur, scales or chitin.";
+			var description:String = "This bottle of dye will allow you to change the color of your hair, fur, scales, chitin, or feathers.";
 			super(id, shortName, longName, value, description);
 		}
 		
@@ -38,6 +38,7 @@ public class HairDye extends Consumable
 						BodyMaterial.FUR,
 						BodyMaterial.SCALES,
 						BodyMaterial.CHITIN,
+						BodyMaterial.FEATHERS,
 				]) {
 					var name:String = BodyMaterial.Types[type].name;
 					var itemReq:ItemType = game.useables.REAGENT;
@@ -79,8 +80,25 @@ public class HairDye extends Consumable
 			EngineCore.addButton(14, "Nevermind", dyeCancel);
 			return true;
 		}
-		private function dye(material:int, itemReq:ItemType, itemCnt:int):void {
+		private function dye(material:int, itemReq:ItemType, itemCnt:int, slot:String=""):void {
 			clearOutput();
+
+			var bm:BodyMaterial = player.bodyMaterials[material];
+			if (slot == "") {
+				if (bm.binary) {
+					clearOutput();
+					outputText("Do you want to dye primary color (" + bm.color1 + "), secondary (" + bm.color2 + "), or both?");
+					EngineCore.menu();
+					EngineCore.addButton(0, "Primary", curry(dye, material, itemReq, itemCnt, "color1"));
+					EngineCore.addButton(1, "Secondary", curry(dye, material, itemReq, itemCnt, "color2"));
+					EngineCore.addButton(2, "Both", curry(dye, material, itemReq, itemCnt, "color"));
+					EngineCore.addButton(14, "Nevermind", dyeCancel);
+					return;
+				} else {
+					slot = "color";
+				}
+			}
+			
 			if (material == BodyMaterial.HAIR) {
 				// TODO should check hairAdj
 				if (player.hairColor.indexOf("rubbery") != -1 || player.hairColor.indexOf("latex-textured") != -1) {
@@ -88,12 +106,11 @@ public class HairDye extends Consumable
 					return;
 				}
 				outputText("You rub the dye into your [hair], then use a bucket of cool lakewater to rinse it off a few minutes later.  ");
-				player.hairColor = _color;
-				outputText("You now have [hair]!");
 			} else {
 				outputText("You rub the dye into your " + BodyMaterial.Types[material].name + ", then use a bucket of cool lakewater to rinse it off a few minutes later.  ");
-				player.setBodyMaterialColor(material, _color);
 			}
+			bm[slot] = _color;
+			outputText("You now have " +bm.color+" "+bm.name+"!");
 			if (game.player.lust > 50) {
 				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
 				game.player.dynStats("lus", -15);

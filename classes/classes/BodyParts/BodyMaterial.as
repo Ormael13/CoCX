@@ -39,6 +39,12 @@ public class BodyMaterial extends BodyPart {
 		name: "chitin",
 		defaultColors: ["black", "purple", "green", "yellow"]
 	});
+	public static const FEATHERS:int = 5;
+	EnumValue.add(Types, FEATHERS, "SCALES", {
+		name: "feathers",
+		plural: true,
+		defaultColors: ["red", "green", "blue", "purple", "pink", "white", "brown", "silver", "gray", "black"]
+	});
 	
 	// these 4 values are kept in sync in setters
 	private var _color:String;
@@ -46,6 +52,15 @@ public class BodyMaterial extends BodyPart {
 	private var _color2:String;
 	private var _binary:Boolean;
 	
+	public function get name():String {
+		return Types[type].name;
+	}
+	/**
+	 * Two different colors
+	 */
+	public function get binary():Boolean {
+		return _binary;
+	}
 	public function get color():String {
 		return _color;
 	}

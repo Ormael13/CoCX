@@ -203,6 +203,10 @@
         </property>
         <property name="fur2" src="furColor2" default="#ffffff">
         </property>
+        <property name="feather" src="featherColor1" default="#ffffff">
+        </property>
+        <property name="feather2" src="featherColor2" default="#ffffff">
+        </property>
         <property name="scales" src="scaleColor1" default="#ffffff">
         </property>
         <property name="scales2" src="scaleColor2" default="#ffffff">
@@ -230,6 +234,15 @@
         <key src="#CCCC00" base="hair2"/>
         <key src="#999900" base="hair2" transform="darken(25)"/>
         <key src="#333300" base="hair2" transform="darken(50)"/>
+        <key src="#FFA54C" base="feather" transform="lighten(25)"/>
+		<key src="#FF8000" base="feather" transform="lighten(10)"/>
+        <key src="#CC6600" base="feather"/>
+        <key src="#994C00" base="feather" transform="darken(25)"/>
+        <key src="#663300" base="feather" transform="darken(50)"/>
+        <key src="#FFB2F4" base="feather2" transform="lighten(25)"/>
+        <key src="#FF7FED" base="feather2"/>
+        <key src="#CC66BE" base="feather2" transform="darken(25)"/>
+        <key src="#994C8E" base="feather2" transform="darken(50)"/>
         <key src="#88FF88" base="fur" transform="lighten(25)"/>
         <key src="#00CC00" base="fur"/>
 		<key src="#00ac00" base="fur" transform="darken(15)"/>

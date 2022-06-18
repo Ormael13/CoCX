@@ -9,8 +9,12 @@ public class Ears extends BodyPart {
 	 * - value: numerical id (0, 10)
 	 * - id: name of the constant ("HUMAN", "HORSE")
 	 * - name: human-readable name, ("human", "horse")
+	 *
+	 * - hairy: has hair material
 	 * - fur: has fur material
+	 * - feathers: has feathers material
 	 * - scales: has scales material
+	 * - chitin: has chitin material
 	 * */
 	public static var Types:/*EnumValue*/Array = [];
 
@@ -263,10 +267,16 @@ public class Ears extends BodyPart {
 		switch (type) {
 			case BodyMaterial.SKIN:
 				return true;
+			case BodyMaterial.HAIR:
+				return Types[this.type].hairy;
 			case BodyMaterial.FUR:
 				return Types[this.type].fur;
 			case BodyMaterial.SCALES:
 				return Types[this.type].scales;
+			case BodyMaterial.CHITIN:
+				return Types[this.type].chitin;
+			case BodyMaterial.FEATHERS:
+				return Types[this.type].feathers;
 			default:
 				return false;
 		}
