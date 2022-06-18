@@ -18,33 +18,36 @@ import classes.internals.*;
 	{
 		public function soulskillCostHailofBlades():Number {
 			var cost:Number = 50;
-			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 5;
+			if (hasPerk(PerkLib.DaoistApprenticeStage)) cost -= 5;
+			if (hasPerk(PerkLib.DaoistWarriorStage)) cost -= 5;
 			return cost;
 		}
 		public function soulskillCostGrandioseHailofBlades():Number {
 			var cost:Number = 200;
-			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 20;
+			if (hasPerk(PerkLib.DaoistApprenticeStage)) cost -= 20;
+			if (hasPerk(PerkLib.DaoistWarriorStage)) cost -= 20;
 			return cost;
 		}
 		public function soulskillCostGrandioseHailofMoonBlades():Number {
 			var cost:Number = 800;
-			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 80;
+			if (hasPerk(PerkLib.DaoistApprenticeStage)) cost -= 80;
+			if (hasPerk(PerkLib.DaoistWarriorStage)) cost -= 80;
 			return cost;
 		}
 		public function soulskillCostEnergyProjection():Number {
 			var cost:Number = 20;
-			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 2;
+			if (hasPerk(PerkLib.DaoistApprenticeStage)) cost -= 2;
+			if (hasPerk(PerkLib.DaoistWarriorStage)) cost -= 2;
 			if (hasStatusEffect(StatusEffects.TrueFormAngel)) cost *= 2;
 			return cost;
 		}
 		
 		public function SoulskillMod():Number {
 			var mod1:Number = 1;
-			if (hasPerk(PerkLib.DaoistCultivator)) mod1 += .2;
 			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) mod1 += .4;
-				if (hasPerk(PerkLib.SoulPersonage)) mod1 += .4;
-				if (hasPerk(PerkLib.SoulWarrior)) mod1 += .4;
+				if (hasPerk(PerkLib.SoulApprentice)) mod1 += .3;
+				if (hasPerk(PerkLib.SoulPersonage)) mod1 += .3;
+				if (hasPerk(PerkLib.SoulWarrior)) mod1 += .3;
 			}
 			if (hasPerk(PerkLib.DaoistWarriorStage)) {
 				if (hasPerk(PerkLib.SoulSprite)) mod1 += .6;
@@ -317,7 +320,6 @@ import classes.internals.*;
 			this.createPerk(PerkLib.DieHardHP, 10, 0, 0, 0);
 			this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
 			this.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
-			this.createPerk(PerkLib.DaoistCultivator, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DaoistApprenticeStage, 0, 0, 0, 0);
 			this.createPerk(PerkLib.SoulApprentice, 0, 0, 0, 0);
 			this.createPerk(PerkLib.SoulPersonage, 0, 0, 0, 0);

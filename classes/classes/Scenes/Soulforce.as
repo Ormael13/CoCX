@@ -252,7 +252,7 @@ public class Soulforce extends BaseContent
 				|| player.headjewelryName == "training soul hairpin" || player.necklaceName == "training soul necklace" || player.jewelryName == "training soul ring" || player.jewelryName2 == "training soul ring" || player.jewelryName3 == "training soul ring" || player.jewelryName4 == "training soul ring"
 				|| player.weaponFlyingSwordsName == "training soul flying sword";
 	}
-	public function Contemplations(page:int = 0):void {
+	public function Contemplations(page:int = 1):void {
 		menu();
 		if (page == 1) {
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 0 && player.wis >= 20 && player.soulforce >= player.maxSoulforce()) addButton(0, "E.S.A.", Contemplations1, 1).hint("Attempt breakthrou to Early Soul Apprentice stage.");
@@ -282,7 +282,6 @@ public class Soulforce extends BaseContent
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 12 && player.wis >= 100 && player.level >= 36 && player.soulforce >= player.maxSoulforce()) addButton(12, "E.S.S.", Contemplations1, 4).hint("Attempt breakthrou to Early Soul Scholar stage.");
 			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 13) addButtonDisabled(12, "E.S.W.", "You already reached Early Soul Scholar.");
 			addButton(13, "-2-", Contemplations, page + 1);
-			addButton(14, "Back", accessSoulforceMenu);
 		}
 		if (page == 2)  {
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 13 && player.level >= 39 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(0, "M.S.S.", Contemplations2, 9).hint("Attempt breakthrou to Middle Soul Scholar stage.");
@@ -311,7 +310,6 @@ public class Soulforce extends BaseContent
 			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 25) addButtonDisabled(11, "L.S.O.", "You already reached Late Soul Overlord.");
 			addButton(12, "-1-", Contemplations, page - 1);
 			addButton(13, "-3-", Contemplations, page + 1);
-			addButton(14, "Back", accessSoulforceMenu);
 		}
 		if (page == 3) {
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 25 && player.level >= 75 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(0, "P.S.O.", Contemplations2, 18).hint("Attempt breakthrou to Peak Soul Overlord stage.");
@@ -329,8 +327,8 @@ public class Soulforce extends BaseContent
 			//else if (flags[kFLAGS.SOUL_CULTIVATION] >= 2) addButtonDisabled(12, "L.S.E.", "You already reached Late Soul Exalt.");
 			//else if (flags[kFLAGS.SOUL_CULTIVATION] >= 2) addButtonDisabled(13, "P.S.E.", "You already reached Peak Soul Exalt.");
 			addButton(12, "-2-", Contemplations, page - 1);
-			addButton(14, "Back", accessSoulforceMenu);
 		}
+		addButton(14, "Back", accessSoulforceMenu);
 		//outputText("You find a flat, comfortable rock to sit down on and begin to cultivated according to the manual.  Minute after minute you feel immersed into world that surrounds you.  How they flow around you, how they change on their own and how they interact with each other.  All this while trying to understand, despite being insignificant while the great dao manifests around you.\n\n");
 	}
 	public function Contemplations1(breakthrou:Number):void {
