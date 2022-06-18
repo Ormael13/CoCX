@@ -178,13 +178,13 @@ public class Changelog extends BaseContent
 			outputText("-Additional Soulforce from training was changed form adding flat value to % - so instead of 2,330 it will increase SF cap by 2,330 %.\n");
 			outputText("-Pawnshop added bulk sale gem bonus from Merchant outfit. Improved Amily Efficiency (hermify) option. More weapons for Dilapidated Shrine. Make Metamorph tails cost dependent on current tail count. Eggs tf now checks for player blocking body tfs. (EragonX)\n");
 			outputText("-Many typo corrections by Pyromania.\n");
-			outputText("-Fixed issues: Hydra tails feral attack multiplier bugfix, Weapon Rack bug. (EragonX)\n");
+			outputText("-Fixed issues: Hydra tails feral attack multiplier bugfix, Weapon Rack bug. (EragonX)\n");// (EragonX)
 			outputText("-Added low standards for Uma. (Svalkash)\n");
-			outputText("-\n");// (EragonX)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New consumable item: a bottle of high-grade Soulforce Recovery Pills. Costs 3610 gems. It's gained by putting in empty pills bottle 10 high-grade soulfroce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
+			outputText("-Daoist: Apprentice Stage perk effects changed to: +30% soulskill/m.soulskill power, -10% soulskills cost, +50 max SF at S.Apprentice, S.Personage, S.Warrior stages, +5% to max, +50% base soulforce recovery multiplier\n");
+			outputText("-Daoist: Warrior Stage perk effects changed to: +60% soulskill/m.soulskill power, -10% soulskills cost, +100 max SF at S.Apprentice, S.Personage, S.Warrior stages, +5% to max, +50% base soulforce recovery multiplier\n");
+			outputText("-Daoist: Elder Stage perk effects changed to: +100% soulskill/m.soulskill power, -10% soulskills cost, +200 max SF at S.Apprentice, S.Personage, S.Warrior stages, +10% to max, +100% base soulforce recovery multiplier\n");
+			outputText("-Daoist: Overlord Stage perk effects changed to: +150% soulskill/m.soulskill power, -10% soulskills cost, +300 max SF at S.Apprentice, S.Personage, S.Warrior stages, +10% to max, +00% base soulforce recovery multiplier\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -2009,7 +2009,7 @@ public class Changelog extends BaseContent
 			outputText("-New head jewelery/accesory/misc (by Liadri): S.A Tech Goggle - craftable at goblin workshop (10 metal pieces, 500 nails, 5 Energy core, Scanner goggle and BP). Cost 11105 gems, immunise against blind, increase critical chance with spell and attack by 10%.\n");
 			outputText("-New consumable item: Airweed - buyable at Pinchou shop. Cost 10 gems and grants water breathing for 24 hours.\n");
 			outputText("-New consumable item: a bottle of low-grade Soulforce Recovery Pills. Costs 110 gems. It's gained by putting in empty pills bottle 10 low-grade soulfroce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle).\n");
-			outputText("-New consumable item: a bottle of mid-grade Soulforce Recovery Pills. Costs 610 gems. It's gained by putting in empty pills bottle 10 low-grade soulfroce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
+			outputText("-New consumable item: a bottle of mid-grade Soulforce Recovery Pills. Costs 610 gems. It's gained by putting in empty pills bottle 10 mid-grade soulfroce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
 			outputText("-New consumable item: a Fasting Pill. Costs 100 gems and buyable at golem shop for anyone with Job: Soul Cultivator perk. Req. to have hunger mode enabled to show up in golem shop offer. Would cause hunger decrease slower for 3 days (2 less points of hunger per hour and if it will be more that current rate of decreasing hunger it may even very slowly increase increase satiety). Using pills in succession would only extend duration by 1 day per additional pill.\n");
 			outputText("-New usable item: Empty Pills Bottle. Costing 10 gems and it's buyable at golem merchant in HXD. Used to store 10 pills of any kind. Due to manufacture process and realm interferances after opening full bottle all pills must be used in a span of few minutes or they would loose all effectivness.\n");
 			outputText("-New usable item: Energy Core. Costing 1015 gems and it's craftable by goblin PC. Req. 5 metal pieces and 3 golem cores. A power source for devices.\n");
