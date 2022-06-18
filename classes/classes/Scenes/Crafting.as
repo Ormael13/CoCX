@@ -608,5 +608,41 @@ private function craftingMaterialsMoonstone1Down():void {
 			if (item4 != null) player.destroyItems(item4, item4Quantity);
 			inventory.takeItem(itemResult, accessCraftingMenu);
 		}*/
+
+
+		public function roomInExistingStack(itype:ItemType):Number {
+			switch (itype) {
+				case useables.COP_ORE: if (BagSlot01 < BagSlot01Cap) return BagSlot01;
+					break;
+				case useables.TIN_ORE: if (BagSlot02 < BagSlot02Cap) return BagSlot02;
+					break;
+				case useables.BRONZEB: if (BagSlot03 < BagSlot03Cap) return BagSlot03;
+					break;
+				case useables.IRONORE: if (BagSlot04 < BagSlot04Cap) return BagSlot04;
+					break;
+				case useables.EBONING: if (BagSlot06 < BagSlot06Cap) return BagSlot06;
+					break;
+				case useables.MOONSTO: if (BagSlot07 < BagSlot07Cap) return BagSlot07;
+					break;
+			}
+			return -1;
+		}
+		public function placeItemInStack(itype:ItemType):Number {
+			switch (itype) {
+				case useables.COP_ORE: craftingMaterialsCopperOre1UP();
+					break;
+				case useables.TIN_ORE: craftingMaterialsTinOre1UP();
+					break;
+				case useables.BRONZEB: craftingMaterialsBronzeBar1UP();
+					break;
+				case useables.IRONORE: craftingMaterialsIronOre1UP();
+					break;
+				case useables.EBONING: craftingMaterialsEbonIngot1UP();
+					break;
+				case useables.MOONSTO: craftingMaterialsMoonstone1UP();
+					break;
+			}
+			return -1;
+		}
 	}
 }
