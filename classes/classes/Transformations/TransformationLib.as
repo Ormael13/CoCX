@@ -1399,7 +1399,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    if (player.antennae.type == Antennae.BEE) desc += "Your head itches momentarily as your two floppy antennae changes slowly into long prehensile ones similar to those seen at mantis.";
+	    if (player.antennae.type == Antennae.BEE) desc += "Your head itches momentarily as your two floppy antennae changes slowly into long prehensile ones similar to those seen on mantis.";
+		else if (player.antennae.type == Antennae.ANT) desc += "Your head itches momentarily as your two rigid antennae loosen up, ending up more like those on a Mantis";
 	    else desc += "Your head itches momentarily as two long prehensile antennae sprout from your [hair].";
 	    player.antennae.type = Antennae.MANTIS;
 
@@ -1418,6 +1419,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    if (player.antennae.type == Antennae.MANTIS) desc += "Your head itches momentarily as your two long prehensile antennae changes slowly into floppy ones similar to those seen at bees.";
+		else if (player.antennae.type == Antennae.ANT) desc += "Your head itches momentarily as your two rigid antennae changes slowly into floppy ones similar to those seen on bees.";
 	    else desc += "Your head itches momentarily as two floppy antennae sprout from your " + hairDescript() + ".";
 	    player.antennae.type = Antennae.BEE;
 
@@ -1492,6 +1494,25 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			function (): Boolean {
 				return player.antennae.type === Antennae.JABBERWOCKY;
 			}
+	);
+
+		public const AntennaeAnt: Transformation = new SimpleTransformation("Ant Antennae",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+
+	    if (player.antennae.type == Antennae.BEE) desc += "Your head itches momentarily as your two floppy antennae changes slowly into long, stiff-yet-prehensile ones similar to those seen on ants.";
+		else if (player.antennae.type == Antennae.MANTIS) desc += "Your head itches momentarily as your two antennae stiffen up, ending up more like those on an ant";
+	    else desc += "Your head itches momentarily as two long prehensile antennae sprout from your [hair].";
+	    player.antennae.type = Antennae.ANT;
+
+	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(AntennaeMem.getMemory(AntennaeMem.ANT));
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.antennae.type === Antennae.ANT;
+	  }
 	);
   /*
 */
@@ -2960,6 +2981,21 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    return player.faceType === Face.ELF;
 	  }
 	);
+
+	public const FaceAnt: Transformation = new SimpleTransformation("Ant Face",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "Tension builds at the back of your cheeks, just behind your cheekbones. You reach to touch the affected area, pricking your finger on a sharpening bone. It slides forward while you're touching it, lengthening into an ant-like mandible. You check the other side and confirm your suspicions. <b>You now have a pair of mandibles, complete with their own formic acid!</b>";
+
+	    if (doOutput) outputText(desc);
+	    player.faceType = Face.ANT;
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.ANT));
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.faceType === Face.ANT;
+	  }
+	);
   /*
 */
 
@@ -3509,6 +3545,22 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // is present
 	  function (): Boolean {
 	    return player.ears.type === Ears.LIZARD;
+	  }
+	);
+
+	public const EarsInsect: Transformation = new SimpleTransformation("Insect Ears",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+
+	    desc += "Tightness centers on your scalp, pulling your ears down from their normal, fleshy shape into small, chitin lumps with holes in their bottom. <b>You have insect ears!</b>";
+	    player.ears.type = Ears.INSECT;
+	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.INSECT));
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.ears.type === Ears.INSECT;
 	  }
 	);
 
@@ -4777,6 +4829,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    case Arms.BAT:
 	      desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your bones are breaking down and reforming in a frenzy. Your parchment-like skin begins to fall off in clumps, leaving the mess of malformed bones that are your arms right now naked for all to see. However, even as you watch, dark blood creeps over the bone, properly aligning them before healing them over, although not in their old form. Within seconds, your bones are remade into ones alike those you were born with, in structure if nothing else, the eldritch power of your blood finally ebbing away, but not before the last of it settles and turns into a brand new patch of skin.";
 	      break;
+		case Arms.ANT:
+			desc += "You double over, a sudden pain just below your shoulders. Finding you cannot reach your lower arms to feel at each other, you look down and realize that they're shrinking back into your torso."
+			if (!player.skin.hasChitin()) { desc += " Because you are shocked over your lower arms going away, you don't even notice the carapace of your primary arms softening into [skin coat]."
 	    default:
 	      desc += "You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form.";
 	      break;
@@ -5759,6 +5814,32 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    return player.arms.type === Arms.SPIDER;
 	  }
 	);
+
+	public const ArmsAnt: Transformation = new SimpleTransformation("Ant Arms",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+
+	    if (player.arms.type == Arms.HARPY) desc += "The feathers covering your arms fall away, leaving them to return to a far more human appearance. You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny carapace</b>.  A second pair has even begun sprouting just underneath, forming these same traits. You touch the exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
+	    else if (player.arms.type == Arms.BEE) desc += "A second pair of arms starts sprouting underneath your original pair, and the fizz covering your upper arms starting to fall down leaving only four shiny chitin clad arms.";
+	    else if (player.arms.type == Arms.SALAMANDER || player.arms.type == Arms.LIZARD || player.arms.type == Arms.DRACONIC) desc += "A second pair of arms starts sprouting underneath your original pair, and the scales covering your upper arms starting to fall down leaving only four shiny chitin clad arms.";
+	    else if (player.arms.type == Arms.MANTIS) desc += "The long scythe extending from your wrist crumbling, leaving you with shiny, chitonous but humanoid arms. A second pair then starts to sprout out below";
+		else if (player.arms.type == Arms.SPIDER) desc += "There's a sudden swelling below your armpits, and you look to see a second pair of chitinous arms sprouting below your main pair."
+	    else {
+				TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+				desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny  carapace</b>. A econd pair has even begun sprouting just underneath, forming these same traits. You touch the exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
+	    }
+
+	    player.arms.type = Arms.ANT;
+	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.ANT));
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.arms.type === Arms.ANT;
+	  }
+	);
   /*
 */
 
@@ -6605,7 +6686,12 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 	    TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHuman, doOutput);
 
-	    desc += "Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs. From the waist down, your strength completely deserts you, leaving you to fall hard on your [butt] in the dirt. With nothing else to do, you look down, only to be mesmerized by the sight of black exoskeleton creeping up a perfectly human-looking calf. It crests up your knee to envelop the joint in a many-faceted onyx coating. Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton. From a distance it would look almost like a black, thigh-high boot, but you know the truth. <b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>";
+		if (player.lowerBody == LowerBody.ANT) {
+			desc += "Feeling as though something is crawling down your legs, you glance down and realize the chitin covering your hips drops to only cover up to your thighs. ";
+			if (!player.coatColor2 == black) desc += "You also realize that the color changes to black. ";
+			desc += "<b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>"
+		}
+	    else desc += "Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs. From the waist down, your strength completely deserts you, leaving you to fall hard on your [butt] in the dirt. With nothing else to do, you look down, only to be mesmerized by the sight of black exoskeleton creeping up a perfectly human-looking calf. It crests up your knee to envelop the joint in a many-faceted onyx coating. Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton. From a distance it would look almost like a black, thigh-high boot, but you know the truth. <b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>";
 
 	    player.coatColor2 = "black";
 	    player.lowerBody = LowerBody.CHITINOUS_SPIDER_LEGS;
@@ -8099,6 +8185,25 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    return player.lowerBody === LowerBody.ATLACH_NACHA;
 	  }
 	);
+
+	public const LowerBodyAnt: Transformation = new SimpleTransformation("Ant Lower Body",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+	    TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHuman, doOutput);
+
+		if (player.lowerBody == LowerBody.SPIDER) desc += "Feeling as though something is crawling up your legs, you glance down and realize the chitin covering your thighs rises to also cover up to your hips. <b>You now have human-like legs covered in a shiny, ant-like exoskeleton.</b>";
+	    else desc += "Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your hips. From the waist down, your strength completely deserts you, leaving you to fall hard on your [butt] in the dirt. With nothing else to do, you look down, only to be mesmerized by the sight of shiny exoskeleton creeping up a perfectly human-looking calf. It crests up your knee to envelop the joint in a many-faceted coating. Then, it resumes its slow upward crawl, not stopping until it has girded your hips in shiny exoskeleton. <b>You now have human-like legs covered in a shiny, ant-like exoskeleton.</b>";
+
+	    player.lowerBody = LowerBody.ANT_LEGS;
+	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ANT_LEGS));
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.lowerBody === LowerBody.ANT_LEGS && player.legCount === 2;
+	  }
+	);
   /*
 */
 
@@ -8326,7 +8431,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      desc += "Feeling an uncomfortable sensation on your butt, you stretch yourself, attributing it to having sat on a rough surface. A burning sensation runs through your body, similar to the one that you had after eating the root. When it migrates to your back, your attention goes to a mass of fluff that has erupted from your backside. Before you can check it properly, it seems to move on its own, following the heated sensation that now pulsates through your body, and when the heated pulses seem to have stopped, it has become a long, fluffy tube";
 	      desc += "Shortly after, the feel of that spicy root returns, but now the heat is felt only in your tail, which shakes wildly while it elongates and becomes more bushy. Soon it has become almost as long as you. A very thick mass of soft, fluffy furs covers it in a matter of seconds. It acquires a lovely ringed pattern of red-russet and copperish-orange.";
 	      desc += "When the effects finally subside, you decide to test the tail, making it coil around your body, realizing soon that you can control its movements with ease, and that its fur feels wonderful at the touch. Anyways, <b>you now have a long, bushy, red-panda tail!</b>";
-	    } else if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.MANTIS_ABDOMEN) {
+	    } else if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.MANTIS_ABDOMEN || ) {
 	      desc += "Your insectile backside seems affected by the root properties, as your venom production suddenly stops. The flesh within the abdomen retracts into your backside, the chiting covering falling, leaving exposed a layer of soft, bare skin. When the abdomen disappears, your left with a comically sized butt, that soon reverts to its usual size.";
 	      desc += "The root keeps doing its thing, as you feel an uncomfortable sensation on your butt. A burning sensation runs through your body, similar to the one that you had after eating the root. When it migrates to your back, your attention goes to a mass of fluff that has erupted from your backside. Before you can check it properly, it seems to move on its own, following the heated sensation that now pulsates through your body, and when the heated pulses seem to have stopped, it has become a long, fluffy tube, quite different from your former abdomen.";
 	      desc += "Shortly after, the feel of that spicy root returns, but now the heat is felt only in your tail, which shakes wildly while it elongates and becomes more bushy. Soon it has become almost as long as you. A very thick mass of soft, fluffy furs covers it in a matter of seconds. It acquires a lovely ringed pattern of red-russet and copperish-orange.";
@@ -8482,7 +8587,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (player.tailType == Tail.NONE) desc += "You feel the flesh above your [butt] knotting and growing. It twists and writhes around itself before flopping straight down, now shaped into a distinctly bovine form. You have a <b>cow tail</b>.";
 	    else {
-	      if (!InCollection(player.tailType, Tail.SPIDER_ADBOMEN, Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTIS_ABDOMEN)) {
+	      if (!InCollection(player.tailType, Tail.SPIDER_ADBOMEN, Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTIS_ABDOMEN, Tail.ANT_ABDOMEN)) {
 	        desc += "Your tail bunches uncomfortably, twisting and writhing around itself before flopping straight down, now shaped into a distinctly bovine form. You have a <b>cow tail</b>.";
 	      } else {
 	        desc += "Your insect-like abdomen tingles pleasantly as it begins shrinking and softening, chitin morphing and reshaping until it looks exactly like a <b>cow tail</b>.";
@@ -9314,6 +9419,30 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    return player.tailType === Tail.SPIDER_ADBOMEN;
 	  }
 	);
+
+	public const TailAnt: Transformation = new SimpleTransformation("Ant Tail",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+
+	    TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
+
+	    TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
+
+	    desc += "A burst of pain hits you just above your [butt], coupled with a sensation of burning heat and pressure. You can feel your " + player.skinFurScales() + " tearing as something forces its way out of your body. Reaching back, you grab at it with your hands. It's huge... and you can feel it toughening under your touches, firming up until the whole tail has become quite hard and elliptical in shape. The heat fades, leaving behind a gentle warmth, and you realize your tail has become an ant's abdomen! As you start to shift your seat, however, you feel a sudden tug, and feel like something was just spat out--you must have a small stinger back there as well. <b>You now have an ant's abdomen.</b>".
+		player.tailVenom = 10;
+	    player.tailRecharge = 5;
+	    player.tailType = Tail.ANT_ABDOMEN;
+	    player.tailCount = 1;
+
+	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.ANT_ABDOMEN));
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.tailType === Tail.ANT_ABDOMEN;
+	  }
+	);
   /*
 */
 
@@ -9905,6 +10034,47 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // is present
 	  function (): Boolean {
 	    return player.wings.type === Wings.PLANT;
+	  }
+	);
+
+	public const WingsAntLarge: Transformation = new SimpleTransformation("Ant Large Wings",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+
+	    TransformationUtils.applyTFIfNotPresent(transformations.WingsAntSmall, doOutput);
+
+		if (player.wings.type == Wings.BEE_LARGE) desc += "You wince as you feel your wings tearing in half, but after a short moment, they start to tingle and grow longer. <b>You now have four large ant wings</b>.";
+	    else desc += "Your wings tingle as they grow, filling out until they are large enough to lift you from the ground and allow you to fly! <b>You now have large ant wings!</b> You give a few experimental flaps and begin hovering in place, a giddy smile plastered on your face by the thrill of flight.";
+	    player.wings.desc = "large ant-like";
+	    player.wings.type = Wings.ANT_LARGE;
+
+	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.ANT_LARGE));
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.wings.type === Wings.ANT_LARGE;
+	  }
+	);
+
+	public const WingsAntSmall: Transformation = new SimpleTransformation("Ant Small Wings",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+
+	    if (player.wings.type == Wings.BEE_SMALL) desc += "You wince as you feel your wings tearing in half, but after a short moment, they start to tingle as they grow into four small ant wings. You still can't fly with them, but <b>you now have small ant wings</b>."
+		else desc += "You feel an itching between your shoulder-blades as something begins growing there. You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably. A sense of relief erupts from you as you feel something new grow out from your body. You hastily remove the top portion of your [armor] and marvel as four small ant-like wings sprout from your back. "+
+				"Tenderly flexing your new muscles, you find you can flap them quite fast. Unfortunately you can't seem to flap your little wings fast enough to fly, but they would certainly slow a fall. A few quick modifications to your [armor] later and you are ready to continue your journey with <b>your new ant wings</b>.";
+	    player.wings.desc = "small ant-like";
+	    player.wings.type = Wings.ANT_SMALL;
+
+	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.ANT_SMALL));
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.wings.type === Wings.ANT_SMALL;
 	  }
 	);
   /*
@@ -11929,7 +12099,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					else {
 						desc += GrowCockGenericText();
 						desc += "your cock becames a bit ticker, but albeit it retained it’s avian, tapered shape, it’s slightly wavy form became more straight. " +
-								"It’s reddish-pink color became pink and it’s tip became more conical. Nevertheless, the main chance manifested across its length, where small, soft barbs grew, giving your member an the appearance of an avian-feline hybrid one.  <b>You'll have to try around your new gryphon cock to know how’ they’ll feel to use,</b> but you’re sure that it’ll be pleasant both for you and your partners.";
+								"It’s reddish-pink color became pink and it’s tip became more conical. Nevertheless, the main chance manifested across its length, where small, soft barbs grew, giving your member an the appearance of an avian-feline hybrid one.  <b>You'll have to try around your new gryphon cock to know how they’ll feel to use,</b> but you’re sure that it’ll be pleasant both for you and your partners.";
 						player.createCock();
 					}
 					if (doOutput) outputText(desc);
@@ -12095,6 +12265,46 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				return !player.isDogCock(cock);
 			}
 	 );}
+
+	public function CockInsect(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+		return new SimpleTransformation("Insect Cock",
+				// apply effect
+				function (doOutput:Boolean):void {
+					var desc:String = "[pg]";
+
+					if (player.cocks.length > cock){
+						desc += "Your " + num2Text2(cock+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer";
+						desc += player.hasSheath(?) "" : " out of its new sheath";
+						desc += ", all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your [cock "+(cock+1)+"] has become a tentacle!  As you watch, it withdraws back into its sheath; it's colored a dull white, and evidence seems to suggest you can make it extend out at will.  <b>You now have a";
+						
+						if(player.tentacleCocks() > 0) outputText("nother");
+						outputText(" tentacle-cock!</b>");
+					}
+					else {
+						if (player.isTaur()) desc += "You feel a sudden stabbing pain between your back legs" +(player.hasVagina()?" just below your [vagina]":"")+" and bend over, moaning in agony. falling on your back so you can get a stare at your hindquarters you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
+						else if (!player.hasVagina() && !player.hasCock()) desc +="You feel a sudden stabbing pain in your groin and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
+						else if (!player.hasVagina()) desc += "You feel a sudden stabbing pain above your [cocks] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
+						else desc +="You feel a sudden stabbing pain just above your [vagina] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
+						desc += "Your feel it bending and flexing of its own volition... looking down, you see it morph into a white vine-like shape.  <b>You now have an insect cock!</b>";
+						player.createCock();
+					}
+					if (doOutput) outputText(desc);
+					if (length != 5.5)
+						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
+					if (player.cocks[cock].knotMultiplier > 1) player.cocks[cock].knotMultiplier = 1;
+					player.cocks[cock].cockType = CockTypesEnum.INSECT;
+
+					UnlockCocks();
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.INSECT));
+				},
+				// is present
+				function ():Boolean {
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.INSECT;
+				}
+		);
+	}
     /*
 */
 

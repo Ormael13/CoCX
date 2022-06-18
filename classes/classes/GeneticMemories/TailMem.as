@@ -498,6 +498,17 @@ package classes.GeneticMemories {
 		  return Math.abs(startTails - endTails)*100 || 100;
 	  }
 
+		public static const ANT_ABDOMEN:int = 39;
+		EnumValue.add(Memories, ANT_ABDOMEN, "ANT_ABDOMEN", {
+			id: "Ant Tail",
+			name: "Ant Tail",
+			cost: 100,
+			title: "Ant",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailAnt;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}
