@@ -34,19 +34,19 @@ public class Arms extends BodyPart {
 	public static const SPIDER:int = 2;
 	EnumValue.add(Types, SPIDER, "SPIDER", {
 		name:"spider",
-		appearanceDesc: "A shining [skin coat.color] exoskeleton covers your arms from the biceps down, resembling a pair of long [skin coat.color] gloves from a distance."
+		appearanceDesc: "A shining [chitin color1] exoskeleton covers your arms from the biceps down, resembling a pair of long [chitin color1] gloves from a distance."
 	});
 
 	public static const MANTIS:int = 3;
 	EnumValue.add(Types, MANTIS, "MANTIS", {
 		name:"mantis", scythe: true,
-		appearanceDesc: "A shining [skin coat.color] exoskeleton covers your arms from the biceps down, with long and sharp scythes extending from the wrists."
+		appearanceDesc: "A shining [chitin color1] exoskeleton covers your arms from the biceps down, with long and sharp scythes extending from the wrists."
 	});
 
 	public static const BEE:int = 4;
 	EnumValue.add(Types, BEE, "BEE", {
 		name:"bee",
-		appearanceDesc: "A shining [skin coat.color2] exoskeleton covers your arms from the biceps down, resembling a pair of long [skin coat.color2] gloves ending with a [skin coat.color] fuzz from a distance."
+		appearanceDesc: "A shining [chitin color2] exoskeleton covers your arms from the biceps down, resembling a pair of long [chitin color2] gloves ending with a [chitin color1] fuzz from a distance."
 	});
 
 	public static const SALAMANDER:int = 5;
@@ -92,7 +92,7 @@ public class Arms extends BodyPart {
 	public static const LION:int = 11;
 	EnumValue.add(Types, LION, "LION", {
 		name:"lion",
-		appearanceDesc: "Your arms are covered by [skin coat.color] fur up to your shoulders, where it turns white, and end in a pair of five-toed lion paws armed with lethal claws.",
+		appearanceDesc: "Your arms are covered by [fur color] fur up to your shoulders, where it turns white, and end in a pair of five-toed lion paws armed with lethal claws.",
 		claw: true,
 		canPounce: true
 	});
@@ -189,7 +189,7 @@ public class Arms extends BodyPart {
 	public static const CAT:int = 25;
 	EnumValue.add(Types, CAT, "CAT", {
 		name:"cat",
-		appearanceDesc: "Your arms are covered by [skin coat.color] fur up to your shoulder. They end in a pair of five-toed cat paws armed with lethal claws.",
+		appearanceDesc: "Your arms are covered by [fur color] fur up to your shoulder. They end in a pair of five-toed cat paws armed with lethal claws.",
 		claw: true,
 		canPounce: true
 	});
@@ -197,21 +197,21 @@ public class Arms extends BodyPart {
 	public static const AVIAN:int = 26;
 	EnumValue.add(Types, AVIAN, "AVIAN", {
 		name:"avian",
-		appearanceDesc: "Your arms are covered by [skin coat.color] colored feathers just a bit past your elbow. Your humanoid hands have [color], slightly rough skin, and end in short claws.",
+		appearanceDesc: "Your arms are covered by [feather color] colored feathers just a bit past your elbow. Your humanoid hands have [skin color], slightly rough skin, and end in short claws.",
 		claw: true
 	});
 
 	public static const GRYPHON:int = 27;
 	EnumValue.add(Types, GRYPHON, "GRYPHON", {
 		name:"gryphon",
-		appearanceDesc: "The feathers on your arms reach a bit past your elbows, with a fringe of [skin coat.color] plumage leading to your [color], slightly rough-skinned hands equipped with short, avian claws.",
+		appearanceDesc: "The feathers on your arms reach a bit past your elbows, with a fringe of [feather color] plumage leading to your [skin color], slightly rough-skinned hands equipped with short, avian claws.",
 		claw: true
 	});
 
 	public static const SPHINX:int = 28;
 	EnumValue.add(Types, SPHINX, "SPHINX", {
 		name:"sphinx",
-		appearanceDesc: "Your arms are covered by [skin coat.color] fur. They end in somewhat human-like hands armed with lethal claws.",
+		appearanceDesc: "Your arms are covered by [fur color] fur. They end in somewhat human-like hands armed with lethal claws.",
 		claw: true
 	});
 
@@ -224,7 +224,7 @@ public class Arms extends BodyPart {
 	public static const BOAR:int = 30;
 	EnumValue.add(Types, BOAR, "BOAR", {
 		name:"boar",
-		appearanceDesc: "Your arms are covered by thick [skin coat.color] fur, ending in hands with sharp black nails."
+		appearanceDesc: "Your arms are covered by thick [fur color] fur, ending in hands with sharp black nails."
 	});
 
 	public static const ORC:int = 31;
@@ -236,7 +236,7 @@ public class Arms extends BodyPart {
 	public static const DISPLACER:int = 32;
 	EnumValue.add(Types, DISPLACER, "DISPLACER", {
 		name:"displacer",
-		appearanceDesc: "Where a normal creature would have only two arms, you instead have four [skin coat.color] furred appendages, all of which end in a pair of five-toed lion paws armed with lethal claws.",
+		appearanceDesc: "Where a normal creature would have only two arms, you instead have four [fur color] furred appendages, all of which end in a pair of five-toed lion paws armed with lethal claws.",
 		claw: true,
 		canPounce: true
 	});
@@ -257,7 +257,7 @@ public class Arms extends BodyPart {
 	public static const BEAR:int = 35;
 	EnumValue.add(Types, BEAR, "BEAR", {
 		name:"bear",
-		appearanceDesc: "You have [skin coat.color] furry arms, ending in a pair of powerful five-toed bear paws armed with lethal claws.",
+		appearanceDesc: "You have [fur color] furry arms, ending in a pair of powerful five-toed bear paws armed with lethal claws.",
 		claw: true
 	});
 
@@ -341,7 +341,7 @@ public class Arms extends BodyPart {
 	public static const KAMAITACHI:int = 48;
 	EnumValue.add(Types, KAMAITACHI, "KAMAITACHI", {
 		name:"kamaitachi",
-		appearanceDesc: "Your arms are covered by [skin coat.color] fur up to your shoulders. They end in a pair of five-toed weasel paws armed with claws. Your forearms' fur part ways slightly as a pair of long scythes-like blades curves outward toward your elbow, sharper than any sword.",
+		appearanceDesc: "Your arms are covered by [fur color] fur up to your shoulders. They end in a pair of five-toed weasel paws armed with claws. Your forearms' fur part ways slightly as a pair of long scythes-like blades curves outward toward your elbow, sharper than any sword.",
 		scythe: true
 	});
 
@@ -368,7 +368,7 @@ public class Arms extends BodyPart {
 	public static const SQUIRREL:int = 52;
 	EnumValue.add(Types, SQUIRREL, "SQUIRREL", {
 		name:"squirrel",
-		appearanceDesc: "Your arms are covered by [skin coat.color] fur up to your shoulders. They end in a pair of five-toed squirrel paws, armed with claws which can assist you when climbing trees.",
+		appearanceDesc: "Your arms are covered by [fur color] fur up to your shoulders. They end in a pair of five-toed squirrel paws, armed with claws which can assist you when climbing trees.",
 		claw: true
 	});
 

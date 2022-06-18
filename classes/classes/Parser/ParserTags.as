@@ -73,6 +73,7 @@ public class ParserTags {
         "font-lust"             : function ():* { return '<font color="'+"#ff00ff"+'">'; },
         "font-default"          : function ():* { return '<font>'; },
         "/font"                 : function ():* { return '</font>'; },
+        "flowercolor"           : function ():* { return CoC.instance.player.nakedCoatColor; },
         "fullchest"             : function ():* { return CoC.instance.player.allChestDesc(); },
         "gargoylematerial"      : function ():* { return Forgefather.material; },
         "hair"                  : function ():* { return CoC.instance.player.hairDescript(); },
@@ -121,7 +122,6 @@ public class ParserTags {
         "skin.isare"            : function ():* { return CoC.instance.player.skin.isAre(); },
         "skin.vs"               : function ():* { return CoC.instance.player.skin.isAre("s", ""); },
         "skinfurscales"         : function ():* { return CoC.instance.player.skin.describe('coat'); },
-        "skintone"              : function ():* { return CoC.instance.player.bodyColor; },
         "tallness"              : function ():* { return Measurements.footInchOrMetres(CoC.instance.player.tallness); },
         "doubletallness"        : function ():* { return Measurements.footInchOrMetres(CoC.instance.player.tallness * 2); },
         "quadrupletallness"     : function ():* { return Measurements.footInchOrMetres(CoC.instance.player.tallness * 4); },
@@ -443,15 +443,16 @@ public class ParserTags {
         }
 
     };
-
+    
     internal static var skinLookups:Object = {
         "skin"        : skinDescriptionFn("skin", false, false),
         "noadj"       : skinDescriptionFn("skin", true, false),
         "notone"      : skinDescriptionFn("skin", false, true),
         "nocolor"     : skinDescriptionFn("skin", false, true),
         "type"        : skinDescriptionFn("skin", true, true),
-        "color"       : function ():* {return CoC.instance.player.skin.color;},
-        "color2"      : function ():* {return CoC.instance.player.skin.color2;},
+        "color"       : function ():* {return CoC.instance.player.skinMaterialColor;},
+        "color1"      : function ():* {return CoC.instance.player.skinMaterialColor1;},
+        "color2"      : function ():* {return CoC.instance.player.skinMaterialColor2;},
         "isare"       : function ():* {return CoC.instance.player.skin.isAre();},
         "vs"          : function ():* {return CoC.instance.player.skin.isAre("s", "");},
         "base"        : skinDescriptionFn("base", false, false),
@@ -460,6 +461,7 @@ public class ParserTags {
         "base.nocolor": skinDescriptionFn("base", false, true),
         "base.type"   : skinDescriptionFn("base", true, true),
         "base.color"  : function ():* {return CoC.instance.player.skin.base.color;},
+        "base.color1" : function ():* {return CoC.instance.player.skin.base.color1;},
         "base.color2" : function ():* {return CoC.instance.player.skin.base.color2;},
         "base.vs"     : function ():* {return CoC.instance.player.skin.base.isAre("s", "");},
         "base.isare"  : function ():* {return CoC.instance.player.skin.base.isAre();},
@@ -471,6 +473,7 @@ public class ParserTags {
         "coat.vs"     : function ():* {return CoC.instance.player.skin.coat.isAre("s", "");},
         "coat.isare"  : function ():* {return CoC.instance.player.skin.coat.isAre();},
         "coat.color"  : function ():* {return CoC.instance.player.coatColor;},
+        "coat.color1" : function ():* {return CoC.instance.player.skin.coat.color1;},
         "coat.color2" : function ():* {return CoC.instance.player.skin.coat.color2;},
         "nakedcoatcolor.color"  : function ():* {return CoC.instance.player.nakedCoatColor;},
         "full"        : skinDescriptionFn("full", false, false),
@@ -478,6 +481,31 @@ public class ParserTags {
         "full.notone" : skinDescriptionFn("full", false, true),
         "full.nocolor": skinDescriptionFn("full", false, true),
         "full.type"   : skinDescriptionFn("full", true, true)
+    };
+    internal static var hairLookups:Object = {
+        "color"       : function ():* { return CoC.instance.player.hairColor},
+        "color1"      : function ():* { return CoC.instance.player.hairColor1},
+        "color2"      : function ():* { return CoC.instance.player.hairColor2}
+    };
+    internal static var furLookups:Object = {
+        "color"       : function ():* { return CoC.instance.player.furColor},
+        "color1"      : function ():* { return CoC.instance.player.furColor1},
+        "color2"      : function ():* { return CoC.instance.player.furColor2}
+    };
+    internal static var scaleLookups:Object = {
+        "color"       : function ():* { return CoC.instance.player.scaleColor},
+        "color1"      : function ():* { return CoC.instance.player.scaleColor1},
+        "color2"      : function ():* { return CoC.instance.player.scaleColor2}
+    };
+    internal static var chitinLookups:Object = {
+        "color"       : function ():* { return CoC.instance.player.chitinColor},
+        "color1"      : function ():* { return CoC.instance.player.chitinColor1},
+        "color2"      : function ():* { return CoC.instance.player.chitinColor2}
+    };
+    internal static var featherLookups:Object = {
+        "color"       : function ():* { return CoC.instance.player.hairColor},
+        "color1"      : function ():* { return CoC.instance.player.hairColor1},
+        "color2"      : function ():* { return CoC.instance.player.hairColor2}
     };
 
     internal static var faceLookups:Object = {
@@ -509,6 +537,13 @@ public class ParserTags {
         "cockhead": cockHeadLookups,
 
         "skin": skinLookups,
+        "hair": hairLookups,
+        "fur": furLookups,
+        "scale": scaleLookups,
+        "scales": scaleLookups,
+        "chitin": chitinLookups,
+        "feather": featherLookups,
+        
         "face": faceLookups
     };
 

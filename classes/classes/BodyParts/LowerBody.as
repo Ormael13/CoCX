@@ -73,11 +73,11 @@ public class LowerBody extends SaveableBodyPart {
 			var desc: String = ""
 
 			if (player.isBiped()) {
-				desc += "Your two legs are muscled and jointed oddly, covered in [skin coat.color] fur, and end in a bestial hooves.";
+				desc += "Your two legs are muscled and jointed oddly, covered in [fur color] fur, and end in a bestial hooves.";
 			}
 
 			if (player.isTaur()) {
-				desc += "From the waist down, you have the body of a horse, with four muscled legs which are jointed oddly, covered in [skin coat.color] fur, and end in a bestial hooves."
+				desc += "From the waist down, you have the body of a horse, with four muscled legs which are jointed oddly, covered in [fur color] fur, and end in a bestial hooves."
 			}
 
 			return desc;
@@ -145,7 +145,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const BEE:int = 7;
 	EnumValue.add(Types, BEE, "BEE", {
 		name: "bee",
-		appearanceDesc: "Your {legCount} legs are covered in a [skin coat.color2] shimmering insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than an exoskeleton. A bit of downy [skin coat.color] fur fuzzes your upper thighs, just like a bee."
+		appearanceDesc: "Your {legCount} legs are covered in a [chitin color2] shimmering insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than an exoskeleton. A bit of downy [chitin color1] fur fuzzes your upper thighs, just like a bee."
 	});
 
 	public static const GOO:int = 8;
@@ -230,7 +230,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const CHITINOUS_SPIDER_LEGS:int = 15;//button 0 on 2nd page of metamorph
 	EnumValue.add(Types, CHITINOUS_SPIDER_LEGS, "CHITINOUS_SPIDER_LEGS", {
 		name: "chitinous spider",
-		appearanceDesc: "Your {legCount} legs are covered in a reflective [skin coat.color], insectile carapace up to your mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton."
+		appearanceDesc: "Your {legCount} legs are covered in a reflective [chitin color1], insectile carapace up to your mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton."
 	});
 
 	public static const DRIDER:int = 16;
@@ -346,7 +346,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const MANTIS:int = 27;
 	EnumValue.add(Types, MANTIS, "MANTIS", {
 		name: "mantis",
-		appearanceDesc: "Your {legCount} legs are covered in a shimmering [skin coat.color], insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.",
+		appearanceDesc: "Your {legCount} legs are covered in a shimmering [chitin color1], insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.",
 		canTaur: true
 	});
 
@@ -402,7 +402,7 @@ public class LowerBody extends SaveableBodyPart {
 		name: "plant flower",
 		legCount: 12,
 		legs: "vine-like tentacle stamens",
-		appearanceDesc: "Around your waist, the petals of a large [skin nakedcoatcolor.color] orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the centre, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud.  While you don't technically have legs anymore, you can still move around on your {legCount} vine-like stamens.",
+		appearanceDesc: "Around your waist, the petals of a large [flowercolor] orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the centre, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud.  While you don't technically have legs anymore, you can still move around on your {legCount} vine-like stamens.",
 		tentacle: true,
 		isAlraune: true
 	});
@@ -410,7 +410,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const LION:int = 35;
 	EnumValue.add(Types, LION, "LION", {
 		name: "lion",
-		appearanceDesc: "Your four legs are covered in [skin coat.color] fur up to the thigh where it fades to white. They end with digitigrade lion paws. You can dash on all fours as gracefully as you would on two legs.",
+		appearanceDesc: "Your four legs are covered in [fur color] fur up to the thigh where it fades to white. They end with digitigrade lion paws. You can dash on all fours as gracefully as you would on two legs.",
 		canPounce: true,
 		feline: true,
 		canTaur: true
@@ -457,7 +457,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const RED_PANDA:int = 42;
 	EnumValue.add(Types, RED_PANDA, "RED_PANDA", {
 		name: "red panda",
-		appearanceDesc: "Your {legCount} legs are equally covered in [skin coat.color] fur, ending on red-panda paws with short claws. They have a nimble and strong build, in case you need to escape from something."
+		appearanceDesc: "Your {legCount} legs are equally covered in [fur color] fur, ending on red-panda paws with short claws. They have a nimble and strong build, in case you need to escape from something."
 	});
 
 	public static const GARGOYLE_2:int = 43;
@@ -469,14 +469,14 @@ public class LowerBody extends SaveableBodyPart {
 	public static const AVIAN:int = 44;
 	EnumValue.add(Types, AVIAN, "AVIAN", {
 		name: "avian",
-		appearanceDesc: "You have strong thighs perfect for launching you into the air which end in slender, bird-like legs, covered with a [skin coat.color] plumage down to your knees and slightly rough, [skin] below. You have digitigrade feet, with toes that end in sharp talons.",
+		appearanceDesc: "You have strong thighs perfect for launching you into the air which end in slender, bird-like legs, covered with a [feather color] plumage down to your knees and slightly rough, [skin] below. You have digitigrade feet, with toes that end in sharp talons.",
 		canTaur: true
 	});
 
 	public static const GRYPHON:int = 45;
 	EnumValue.add(Types, GRYPHON, "GRYPHON", {
 		name: "gryphon",
-		appearanceDesc: "You have strong thighs perfect for launching you into the air ending in furred, feline legs, covered with a coat of soft, [skin coat.color2] fur. Your have digitigrade feet, lion-like, with soft, pink soles and paw pads, with feline toes ending in sharp, retractile claws.",
+		appearanceDesc: "You have strong thighs perfect for launching you into the air ending in furred, feline legs, covered with a coat of soft, [fur color2] fur. Your have digitigrade feet, lion-like, with soft, pink soles and paw pads, with feline toes ending in sharp, retractile claws.",
 		canTaur: true
 	});
 
@@ -507,7 +507,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const BEAR:int = 50;
 	EnumValue.add(Types, BEAR, "BEAR", {
 		name: "bear",
-		appearanceDesc: "Your {legCount} legs are covered with [skin coat.color] fur. They end with powerful bear-like paws.",
+		appearanceDesc: "Your {legCount} legs are covered with [fur color] fur. They end with powerful bear-like paws.",
 		canTaur: true
 	});
 
@@ -617,7 +617,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const CRAB:int = 60;
 	EnumValue.add(Types, CRAB, "CRAB", {
 		name: "crab",
-		appearanceDesc: "Your {legCount} legs are covered in a reflective [skin coat.color], crab like carapace up to your mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton."
+		appearanceDesc: "Your {legCount} legs are covered in a reflective [chitin color], crab like carapace up to your mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton."
 	});
 
 	public static const CANCER:int = 61;
@@ -634,7 +634,7 @@ public class LowerBody extends SaveableBodyPart {
 	EnumValue.add(Types, FROSTWYRM, "FROSTWYRM", {
 		name: "frost wyrm",
 		appearanceDescFunc: function(player: *): String {
-			var desc: String = "Below your waist your flesh is fused together into a very long snake-like tail easily [quadrupletallness] feet long. Your entire tail length up to the waist is covered with thick snow white fur, and underneath is a whole layer of [skin coat.color] dragon scales, harder than steel and capable of deflecting most weapons.";
+			var desc: String = "Below your waist your flesh is fused together into a very long snake-like tail easily [quadrupletallness] feet long. Your entire tail length up to the waist is covered with thick snow white fur, and underneath is a whole layer of [scale color] dragon scales, harder than steel and capable of deflecting most weapons.";
 
 			if (player.tallness > 120) {
 				desc += " Your body is so large it's no wonder your passage underground can cause tremors.";
@@ -671,7 +671,7 @@ public class LowerBody extends SaveableBodyPart {
 	EnumValue.add(Types, FLOWER_LILIRAUNE, "FLOWER_LILIRAUNE", {
 		name: "liliraune flower",
 		tentacle: true,
-		appearanceDesc: "Around your waist, the petals of a large [skin nakedcoatcolor.color] orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the center, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud. While you don't technically have legs anymore, you can still move around on your {legCount} vine-like stamens. You used to be alone in the pitcher, but you now share space with your twin sister, taking turns with her whether it's for battle or sex.",
+		appearanceDesc: "Around your waist, the petals of a large [flowercolor] orchid expand, big enough to engulf you entirely on their own, coupled with a pitcher-like structure in the center, which is filled with syrupy nectar straight from your loins. When you wish to rest, these petals draw up around you, encapsulating you in a beautiful bud. While you don't technically have legs anymore, you can still move around on your {legCount} vine-like stamens. You used to be alone in the pitcher, but you now share space with your twin sister, taking turns with her whether it's for battle or sex.",
 		isAlraune: true,
 		isLiliraune: true,
 		hasTentacles: true
@@ -693,7 +693,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const SQUIRREL:int = 67;
 	EnumValue.add(Types, SQUIRREL, "SQUIRREL", {
 		name: "squirrel",
-		appearanceDesc: "You have {legCount} fluffy, furred legs are covered in [skin coat.color] fur up to the thigh. They end with digitigrade squirrel paws.",
+		appearanceDesc: "You have {legCount} fluffy, furred legs are covered in [fur color] fur up to the thigh. They end with digitigrade squirrel paws.",
 		canTaur: true
 	});
 

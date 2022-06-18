@@ -1044,6 +1044,16 @@ public class Creature extends Utils
 		public function get hairColor():String {
 			return _hairColor;
 		}
+		public function get hairColor1():String {
+			var i:int = _hairColor.indexOf(" and ");
+			if (i == -1) return _hairColor;
+			return _hairColor.slice(0, i);
+		}
+		public function get hairColor2():String {
+			var i:int = _hairColor.indexOf(" and ");
+			if (i == -1) return _hairColor;
+			return _hairColor.slice(i+" and ".length);
+		}
 		public function set hairColorOnly(value:String):void {
 			_hairColor = value;
 		}

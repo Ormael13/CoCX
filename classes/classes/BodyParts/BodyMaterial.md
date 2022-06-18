@@ -61,10 +61,25 @@ For brevity, in following code `fur` means `fur/scales/chitin` or any other body
 
 ## Parser Tags
 
-* `[color]` - main body color.
+* `[color]`,`[color1]`,`[color2]` - main body color (and its components).
+* body material colors:
+  - `[skin color]`, `[skin color1]`, `[skin color2]`
+  - `[hair color]`, `[hair color1]`, `[hair color2]`
+  - `[fur color]`, `[fur color1]`, `[fur color2]`
+  - `[scale color]`, `[scale color1]`, `[scale color2]`
+  - `[chitin color]`, `[chitin color1]`, `[chitin color2]`
+  - `[feather color]`, `[feather color1]`, `[feather color2]` (alias for hair)
+* layer-specific colors:
+  - `[skin base.color]`, `[skin base.color1]`, `[skin base.color2]`  
+  - `[skin coat.color]`, `[skin coat.color1]`, `[skin coat.color2]` 
+* special:
+  - `[flowercolor]` - alraune orchid color
 
-These are DEPRECATED:
-* `[skintone]` (use `[color]`)
+These are REMOVED:
+* `[skintone]`,`[skin.color]` (use `[color]`)
+
+These WORK DIFFERENTLY:
+* `[skin color]`/`[skin color2]` (use `[color]`), now it means "skin material color"
 
 ## To Be Discussed
 

@@ -180,19 +180,19 @@ public class Skin extends SaveableBodyPart {
 	public static const PATTERN_ORCA_UNDERBODY: int = 2;
 	EnumValue.add(PatternTypes, PATTERN_ORCA_UNDERBODY, "ORCA_UNDERBODY", {
 		name:"orca underbody",
-		appearanceDesc: "A [skin color2] underbelly runs on the underside of your limbs bearing a glossy shine, similar to that of an orca.",
+		appearanceDesc: "A [skin base.color2] underbelly runs on the underside of your limbs bearing a glossy shine, similar to that of an orca.",
 		base:true
 	});
 	public static const PATTERN_BEE_STRIPES: int = 3;
 	EnumValue.add(PatternTypes, PATTERN_BEE_STRIPES, "BEE_STRIPES", {
 		name:"bee stripes",
-		appearanceDesc: "You have [skin color] [skin base] covered by a bee-like [skin color2] stripe pattern.",
+		appearanceDesc: "You have [skin coat.color1] [skin coat] covered by a bee-like [skin coat.color2] stripe pattern.",
 		coat:true
 	});
 	public static const PATTERN_TIGER_STRIPES: int = 4;
 	EnumValue.add(PatternTypes, PATTERN_TIGER_STRIPES, "TIGER_STRIPES", {
 		name:"tiger stripes",
-		appearanceDesc: "You have [skin color] [skin base] covered by a tiger-like [skin color2] stripe pattern.",
+		appearanceDesc: "You have [skin coat.color1] [skin coat] covered by a tiger-like [skin coat.color2] stripe pattern.",
 		coat:true
 	});
 	public static const PATTERN_BATTLE_TATTOO: int = 5;
@@ -204,7 +204,7 @@ public class Skin extends SaveableBodyPart {
 	public static const PATTERN_SPOTTED: int = 6;
 	EnumValue.add(PatternTypes, PATTERN_SPOTTED, "SPOTTED", {
 		name:"spotted",
-		appearanceDesc: "You have many [skin color2] spots around your [skin color] fur.",
+		appearanceDesc: "You have many [fur color2] spots around your [fur color1] fur.",
 		coat:true
 	});
 	public static const PATTERN_LIGHTNING_SHAPED_TATTOO: int = 7;
@@ -216,7 +216,7 @@ public class Skin extends SaveableBodyPart {
 	public static const PATTERN_RED_PANDA_UNDERBODY: int = 8;
 	EnumValue.add(PatternTypes, PATTERN_RED_PANDA_UNDERBODY, "RED_PANDA_UNDERBODY", {
 		name:"red panda underbody",
-		appearanceDesc: "You have an underbelly colored [skin color2].",
+		appearanceDesc: "You have an underbelly colored [skin coat.color2].",
 		coat:true
 	});
 	public static const PATTERN_SCAR_SHAPED_TATTOO: int = 9;
@@ -258,7 +258,7 @@ public class Skin extends SaveableBodyPart {
 	public static const PATTERN_SEA_DRAGON_UNDERBODY: int = 15;
 	EnumValue.add(PatternTypes, PATTERN_SEA_DRAGON_UNDERBODY, "SEA_DRAGON_UNDERBODY", {
 		name:"sea dragon underbody",
-		appearanceDesc: "An underbelly colored [skin color2] runs on the underside of your limbs bearing a glossy shine, on top of being lined up with bioluminescent dots like those of a deep sea fish.",
+		appearanceDesc: "An underbelly colored [skin base.color2] runs on the underside of your limbs bearing a glossy shine, on top of being lined up with bioluminescent dots like those of a deep sea fish.",
 		base:true
 	});
 	// Don't forget to add new types in DebugMenu.as lists SKIN_BASE_TYPES or SKIN_COAT_TYPES

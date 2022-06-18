@@ -165,12 +165,12 @@ public class Wings extends SaveableBodyPart {
 	public static const MANTICORE_SMALL: int = 22;
 	EnumValue.add(Types, MANTICORE_SMALL, "MANTICORE_SMALL", {
 		name:"small manticore-like",
-		appearanceDesc: "A pair of small leathery wings covered with [skin coat.color] fur rest on your back. Despite being too small to allow flight they at least look cute on you."
+		appearanceDesc: "A pair of small leathery wings covered with [fur color] fur rest on your back. Despite being too small to allow flight they at least look cute on you."
 	});
 	public static const MANTICORE_LARGE: int = 23;
 	EnumValue.add(Types, MANTICORE_LARGE, "MANTICORE_LARGE", {
 		name:"large manticore-like",
-		appearanceDesc: "A pair of large ominous leathery wings covered with [skin coat.color] fur expand from your back. You can open them wide to soar high in search of your next prey.",
+		appearanceDesc: "A pair of large ominous leathery wings covered with [fur color] fur expand from your back. You can open them wide to soar high in search of your next prey.",
 		wingSlap: true,
 		canFly: true
 	});
@@ -194,7 +194,7 @@ public class Wings extends SaveableBodyPart {
 	EnumValue.add(Types, FEATHERED_AVIAN, "FEATHERED_AVIAN", {
 		name:"avian",
 		desc:"large, feathered",
-		appearanceDesc: "A pair of large, feathery wings sprout from your back. Though you usually keep the [skin coat.color] wings folded close, they can unfurl to allow you to soar as gracefully as a bird.",
+		appearanceDesc: "A pair of large, feathery wings sprout from your back. Though you usually keep the [feather color] wings folded close, they can unfurl to allow you to soar as gracefully as a bird.",
 		wingSlap: true,
 		canFly: true
 	});

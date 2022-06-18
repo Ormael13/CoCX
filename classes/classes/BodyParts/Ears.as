@@ -119,7 +119,7 @@ public class Ears extends BodyPart {
 	public static const ORCA: int = 21;
 	EnumValue.add(Types, ORCA, "ORCA", {
 		name: "orca",
-		appearanceDesc: "A pair of very large fin at least twice as large as your head which help you orient yourself underwater have sprouted from the top of your head. Their underside is [skin color2] while the top is [skin color]."
+		appearanceDesc: "A pair of very large fin at least twice as large as your head which help you orient yourself underwater have sprouted from the top of your head. Their underside is [skin color2] while the top is [skin color1]."
 	});
 	public static const ORCA2: int = 22;
 	EnumValue.add(Types, ORCA2, "ORCA2", {
@@ -174,7 +174,7 @@ public class Ears extends BodyPart {
 	public static const GRYPHON: int = 32;
 	EnumValue.add(Types, GRYPHON, "GRYPHON", {
 		name: "gryphon",
-		appearanceDesc: "A duo of triangular, streamlined ears are located at each side of your head, helping you to pinpoint sounds. They’re covered in soft, [skin coat.color] fur and end in tufts."
+		appearanceDesc: "A duo of triangular, streamlined ears are located at each side of your head, helping you to pinpoint sounds. They’re covered in soft, [fur color] fur and end in tufts."
 	});
 	public static const CAVE_WYRM: int = 33;
 	EnumValue.add(Types, CAVE_WYRM, "CAVE_WYRM", {
@@ -184,7 +184,7 @@ public class Ears extends BodyPart {
 	public static const BEAR: int = 34;
 	EnumValue.add(Types, BEAR, "BEAR", {
 		name: "bear",
-		appearanceDesc: "A pair of two round fuzzy bear ears covered with [skin coat.color] and alert to sound stick out from your head."
+		appearanceDesc: "A pair of two round fuzzy bear ears covered with [fur color] and alert to sound stick out from your head."
 	});
 	public static const PANDA: int = 35;
 	EnumValue.add(Types, PANDA, "PANDA", {
@@ -218,7 +218,7 @@ public class Ears extends BodyPart {
 	public static const WEASEL: int = 40;
 	EnumValue.add(Types, WEASEL, "WEASEL", {
 		name: "weasel",
-		appearanceDesc: "A pair of two round fuzzy weasel ears covered with [skin coat.color] and alert to sound stick out from your head."
+		appearanceDesc: "A pair of two round fuzzy weasel ears covered with [fur color] and alert to sound stick out from your head."
 	});
 	public static const SQUIRREL: int = 41;
 	EnumValue.add(Types, SQUIRREL, "SQUIRREL", {

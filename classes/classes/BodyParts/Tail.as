@@ -39,12 +39,12 @@ public class Tail extends SaveableBodyPart {
 	public static const HORSE: int = 1;
 	EnumValue.add(Types, HORSE, "HORSE", {
 		name:"horse",
-		appearanceDesc: "A long [skin coat.color] horse tail hangs from your [butt], smooth and shiny."
+		appearanceDesc: "A long [fur color] horse tail hangs from your [butt], smooth and shiny."
 	});
 	public static const DOG: int = 2;
 	EnumValue.add(Types, DOG, "DOG", {
 		name:"dog",
-		appearanceDesc: "A fuzzy [skin coat.color] dog tail sprouts just above your [butt], wagging to and fro whenever you're happy.",
+		appearanceDesc: "A fuzzy [fur color] dog tail sprouts just above your [butt], wagging to and fro whenever you're happy.",
 		isLong: true
 	});
 	public static const DEMONIC: int = 3;
@@ -63,7 +63,7 @@ public class Tail extends SaveableBodyPart {
 	EnumValue.add(Types, SPIDER_ADBOMEN, "SPIDER_ADBOMEN", {
 		name:"spider abdomen",
 		appearanceDescFunc: function(player: *): String {
-			var desc: String = "A large, spherical spider abdomen has grown out from your backside, covered in shiny [skin coat.color] chitin. Though it's heavy and bobs with every motion, it doesn't seem to slow you down."
+			var desc: String = "A large, spherical spider abdomen has grown out from your backside, covered in shiny [chitin color] chitin. Though it's heavy and bobs with every motion, it doesn't seem to slow you down."
 
 			if (player.tailVenom > (player.maxVenom() * 0.5) && player.tailVenom < (player.maxVenom() * 0.8)) {
 				desc += " Your bulging arachnid posterior feels fairly full of webbing.";
@@ -105,10 +105,10 @@ public class Tail extends SaveableBodyPart {
 	EnumValue.add(Types, CAT, "CAT", {
 		name:"cat",
 		appearanceDescFunc: function(player: *): String {
-			var desc: String = "A soft [skin coat.color] cat tail sprouts just above your [butt], curling and twisting with every step to maintain perfect balance."
+			var desc: String = "A soft [fur color] cat tail sprouts just above your [butt], curling and twisting with every step to maintain perfect balance."
 
 			if (player.tailCount == 2) {
-				desc = "A pair of soft [skin coat.color] cat tails sprout just above your [butt], curling and twisting with every step to maintain perfect balance."
+				desc = "A pair of soft [fur color] cat tails sprout just above your [butt], curling and twisting with every step to maintain perfect balance."
 			}
 
 			return desc;
@@ -139,7 +139,7 @@ public class Tail extends SaveableBodyPart {
 			var desc: String = "A conical, ";
 
 			if (player.hasFur()) {
-				desc += "furry, and [skin coat.color] ";
+				desc += "furry, and [fur color] ";
 			} else {
 				desc += "gooey, and [color] ";
 			}
@@ -151,10 +151,10 @@ public class Tail extends SaveableBodyPart {
 	EnumValue.add(Types, FOX, "FOX", {
 		name:"fox",
 		appearanceDescFunc: function(player: *): String {
-			var desc: String = "A swishing [skin coat.color] fox brush extends from your [butt], curling around your body; the soft fur feels lovely, and you wonder how many would be enticed by it."
+			var desc: String = "A swishing [fur color] fox brush extends from your [butt], curling around your body; the soft fur feels lovely, and you wonder how many would be enticed by it."
 
 			if (player.tailCount > 1) {
-				desc = "[TailCount] swishing [skin coat.color] fox tails extend from your [butt], curling around your body; the soft fur feels lovely, and you wonder how many would be enticed by it."
+				desc = "[TailCount] swishing [fur color] fox tails extend from your [butt], curling around your body; the soft fur feels lovely, and you wonder how many would be enticed by it."
 			}
 
 			return desc;
@@ -172,7 +172,7 @@ public class Tail extends SaveableBodyPart {
 	public static const RACCOON: int = 15;
 	EnumValue.add(Types, RACCOON, "RACCOON", {
 		name:"raccoon",
-		appearanceDesc: "A black-and-[skin coat.color]-ringed raccoon tail waves behind you.",
+		appearanceDesc: "A black-and-[fur color]-ringed raccoon tail waves behind you.",
 		isLong: true
 	});
 	public static const MOUSE: int = 16;
@@ -253,7 +253,7 @@ public class Tail extends SaveableBodyPart {
 	public static const MANTIS_ABDOMEN: int = 27;
 	EnumValue.add(Types, MANTIS_ABDOMEN, "MANTIS_ABDOMEN", {
 		name:"mantis abdomen",
-		appearanceDesc: "A large insectile mantis abdomen dangles from just above your backside, bobbing with its own weight as you shift. It is covered in hard [skin coat.color] chitinous material."
+		appearanceDesc: "A large insectile mantis abdomen dangles from just above your backside, bobbing with its own weight as you shift. It is covered in hard [chitin color] chitinous material."
 	});
 	public static const MANTICORE_PUSSYTAIL: int = 28;
 	EnumValue.add(Types, MANTICORE_PUSSYTAIL, "MANTICORE_PUSSYTAIL", {
@@ -264,7 +264,7 @@ public class Tail extends SaveableBodyPart {
 	public static const WOLF: int = 29;
 	EnumValue.add(Types, WOLF, "WOLF", {
 		name:"wolf",
-		appearanceDesc: "A bushy [skin coat.color] wolf tail sprouts just above your [butt], wagging to and fro whenever you are happy.",
+		appearanceDesc: "A bushy [fur color] wolf tail sprouts just above your [butt], wagging to and fro whenever you are happy.",
 		isLong: true
 	});
 	public static const GARGOYLE: int = 30;
@@ -294,7 +294,7 @@ public class Tail extends SaveableBodyPart {
 	public static const RED_PANDA: int = 34;
 	EnumValue.add(Types, RED_PANDA, "RED_PANDA", {
 		name:"red-panda",
-		appearanceDesc: "Sprouting from your [ass] is a long, bushy tail adorned by a beautiful pattern of [skin coat.color] rings. It waves playfully as you walk, giving your step a mesmerizing touch."
+		appearanceDesc: "Sprouting from your [ass] is a long, bushy tail adorned by a beautiful pattern of [fur color] rings. It waves playfully as you walk, giving your step a mesmerizing touch."
 	});
 	public static const GARGOYLE_2: int = 35;
 	EnumValue.add(Types, GARGOYLE_2, "GARGOYLE_2", {
@@ -305,17 +305,17 @@ public class Tail extends SaveableBodyPart {
 	public static const AVIAN: int = 36;
 	EnumValue.add(Types, AVIAN, "AVIAN", {
 		name:"avian",
-		appearanceDesc: "A fan-like tail made of [skin coat.color] feathers rests above your [butt], twitching instinctively to help guide you if you were to take flight."
+		appearanceDesc: "A fan-like tail made of [feather color] feathers rests above your [butt], twitching instinctively to help guide you if you were to take flight."
 	});
 	public static const GRIFFIN: int = 37;
 	EnumValue.add(Types, GRIFFIN, "GRIFFIN", {
 		name:"griffin",
-		appearanceDesc: "From your backside hangs a long tail, leonine in shape and covered mostly by a layer of [skin coat.color2] fur, featuring a tip made of a tuft of [skin coat.color] feathers. It moves sinuously as you walk."
+		appearanceDesc: "From your backside hangs a long tail, leonine in shape and covered mostly by a layer of [fur color2] fur, featuring a tip made of a tuft of [fur color] feathers. It moves sinuously as you walk."
 	});
 	public static const LION: int = 38;
 	EnumValue.add(Types, LION, "LION", {
 		name:"lion",
-		appearanceDesc: "A soft [skin coat.color] lion tail sprouts just above your [butt], curling and twisting with every step to maintain perfect balance. It ends in a small puffy hair.",
+		appearanceDesc: "A soft [fur color] lion tail sprouts just above your [butt], curling and twisting with every step to maintain perfect balance. It ends in a small puffy hair.",
 		isLong: true
 	});
 	public static const BURNING: int = 39;
@@ -327,12 +327,12 @@ public class Tail extends SaveableBodyPart {
 	public static const NEKOMATA_FORKED_1_3: int = 40;
 	EnumValue.add(Types, NEKOMATA_FORKED_1_3, "NEKOMATA_FORKED_1_3", {
 		name:"forked cat",
-		appearanceDesc: "A soft [skin coat.color] cat-tail, forked on its one-third length, sprouts just above your [butt], curling and twisting with every step to maintain perfect balance."
+		appearanceDesc: "A soft [fur color] cat-tail, forked on its one-third length, sprouts just above your [butt], curling and twisting with every step to maintain perfect balance."
 	});
 	public static const NEKOMATA_FORKED_2_3: int = 41;
 	EnumValue.add(Types, NEKOMATA_FORKED_2_3, "NEKOMATA_FORKED_2_3", {
 		name:"forked cat",
-		appearanceDesc: "A soft [skin coat.color] cat-tail, forked on its two-thirds length, sprouts just above your [butt], curling and twisting with every step to maintain perfect balance."
+		appearanceDesc: "A soft [fur color] cat-tail, forked on its two-thirds length, sprouts just above your [butt], curling and twisting with every step to maintain perfect balance."
 	});
 	public static const CAVE_WYRM: int = 42;
 	EnumValue.add(Types, CAVE_WYRM, "CAVE_WYRM", {

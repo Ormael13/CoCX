@@ -2315,7 +2315,7 @@ public class KitsuneScene extends BaseContent
 								player.hairColor       = randomChoice(KitsuneRace.ElderKitsuneColors);
 								fur.color = player.hairColor;
 								if (player.hairLength > 0) outputText("\n\nNow you have [haircolor] fur and hair, like true kitsune elder. You look really regal!");
-								else outputText("\n\nNow you have [skin coat.color] fur, like true kitsune elder. You look really regal!");
+								else outputText("\n\nNow you have [fur color] fur, like true kitsune elder. You look really regal!");
 							}
 						} else {
 							// no fur

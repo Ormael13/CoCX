@@ -56,7 +56,7 @@ public class Belisa extends Monster
 			if (flags[kFLAGS.BELISA_LVL_UP] >= 4) slashes = "ten";
 			if (flags[kFLAGS.BELISA_LVL_UP] >= 6) slashes = "twelve";
 			if (flags[kFLAGS.BELISA_LVL_UP] >= 8) slashes = "fourteen";
-			outputText("The nimble drider-girl leaps towards you. You raise your [weapon] to intercept, but she shoots a web above and into the trees with a sharp thwip, nimbly evading your block. She gets inside your guard. \"<i>Hya, Hya! Heeeyah!!</i>\" She slashes "+slashes+" times, cutting cleanly through your [skin.color] [skin.type] before leaping backwards and out of your reach. Blood begins to flow from your injuries.");
+			outputText("The nimble drider-girl leaps towards you. You raise your [weapon] to intercept, but she shoots a web above and into the trees with a sharp thwip, nimbly evading your block. She gets inside your guard. \"<i>Hya, Hya! Heeeyah!!</i>\" She slashes "+slashes+" times, cutting cleanly through your [color] [skin.type] before leaping backwards and out of your reach. Blood begins to flow from your injuries.");
 			var bleedP:Number = 0.05;
 			var dmg0:Number = 0;
 			dmg0 += this.str;

@@ -107,7 +107,7 @@ public class Face extends SaveableBodyPart {
 			if (!creature.hasCoat()) {
 				desc += "You have a cat-like face, complete with a cute, moist nose and whiskers. The [skin] that is revealed by your lack of fur looks quite unusual on so feline a face.";
 			} else if (creature.hasFullCoatOfType(Skin.FUR)) {
-				desc += "You have a cat-like face, complete with moist nose and whiskers. Your [skin coat.nocolor] is [skin coat.color], hiding your [skin base] underneath.";
+				desc += "You have a cat-like face, complete with moist nose and whiskers. Your [skin coat.nocolor] is [fur color], hiding your [skin base] underneath.";
 			} else {
 				desc += "Your facial structure blends humanoid features with those of a cat. A moist nose and whiskers are included, but overlaid with glittering patches of [skin coat].";
 			}

@@ -4802,7 +4802,7 @@ public final class Mutations extends MutationsHelper {
         if (type == 1 && player.skin.base.color != "light purple" && changes < changeLimit && rand(3) == 0) {
             changes++;
             outputText("[pg]It takes a while for you to notice, but <b>");
-            if (player.hasFur()) outputText("the skin under your [skin coat.color] " + player.skinDesc);
+            if (player.hasFur()) outputText("the skin under your [fur color] " + player.skinDesc);
             else outputText("your " + player.skinDesc);
             outputText(" has changed to become ");
             player.skin.base.color = "light purple";
@@ -5327,7 +5327,7 @@ public final class Mutations extends MutationsHelper {
         if (!InCollection(player.skin.base.color, HumanRace.HumanSkinColors) && changes < changeLimit && rand(3) == 0) {
             changes++;
             outputText("[pg]It takes a while for you to notice, but <b>");
-            if (player.hasFur()) outputText("the skin under your [skin coat.color] " + player.skinDesc);
+            if (player.hasFur()) outputText("the skin under your [fur color] " + player.skinDesc);
             else outputText("your " + player.skinDesc);
             outputText(" has changed to become ");
             player.skin.base.color = randomChoice(HumanRace.HumanSkinColors)
@@ -6672,7 +6672,7 @@ public final class Mutations extends MutationsHelper {
         //-Skin color change – dark gray
         if (player.skin.base.color != "dark gray" && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]It takes a while for you to notice, but ");
-            if (player.hasFur()) outputText("the skin under your <b>[skin coat.color]</b>" + player.skinDesc);
+            if (player.hasFur()) outputText("the skin under your <b>[fur color]</b> " + player.skinDesc);
             else outputText("your " + player.skinDesc);
             outputText(" has changed to become <b>dark gray</b> colored.");
             player.skin.base.color = "dark gray";
@@ -11256,7 +11256,7 @@ public final class Mutations extends MutationsHelper {
                 && !InCollection(player.coatColor, KitsuneRace.KitsuneFurColors,["tan", "brown"])
                 || !player.skin.hasFur() && player.skin.hasCoat(), mystic ? 1 : 2, function ():void {
             outputText("[pg]You begin to tingle all over your [skin], starting as a cool, pleasant sensation but gradually worsening until you are furiously itching all over.");
-            if (player.hasFur()) outputText("  You stare in horror as you pull your fingers away holding a handful of [skin coat.color] fur!  Your fur sloughs off your body in thick clumps, falling away to reveal patches of bare, " + player.skinMaterialColor + " skin.");
+            if (player.hasFur()) outputText("  You stare in horror as you pull your fingers away holding a handful of [fur color] fur!  Your fur sloughs off your body in thick clumps, falling away to reveal patches of bare, " + player.skinMaterialColor + " skin.");
             else if (player.hasScales()) outputText("  You stare in horror as you pull your fingers away holding a handful of dried up scales!  Your scales continue to flake and peel off your skin in thick patches, revealing the tender " + player.skinMaterialColor + " skin underneath.");
             outputText("  Your skin slowly turns raw and red under your severe scratching, the tingling sensations raising goosebumps across your whole body.  Over time, the itching fades, and your flushed skin resolves into a natural-looking ");
             player.skin.setBaseOnly({type: Skin.PLAIN});
@@ -13870,15 +13870,13 @@ public final class Mutations extends MutationsHelper {
             var colorPair:Number = rand(ColorList.length-1);
             var underBellyColor:String = ColorList[colorPair].underbellycolor;
             var bodyColor:String = ColorList[colorPair].color;
-            player.skin.setBaseOnly({
-                color: bodyColor,
-                color2: underBellyColor
-            });
+            player.skinMaterialColor1 = bodyColor;
+            player.skinMaterialColor2 = underBellyColor;
             outputText("[pg]");
             if (player.hasFur()) outputText("You suddenly start sweating abundantly as your [skin.type] fall off leaving bare the smooth skin underneath.  ");
             if (player.hasGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ");
             if (player.hasScales()) outputText("You suddenly start sweating abundantly as your scales fall off leaving bare the smooth skin underneath.  ");
-            outputText("Your skin starts to change, turning [skin color]. Your underbelly, on the other hand , turns [skin color2]. Just as you thought it was over, your skin takes on a glossy shine. When you thought it was finaly over specks of light starts to form underneath your arms, spreading to your underbelly. The bioluminescence gives you an appearance akin to those of a deep-sea creature. <b>Your body is now [skin color] with a [skin color2] underbelly running on the underside of your limbs and up to your mouth with bioluminescent patterns on the belly just like those of a sea dragon!.</b>");
+            outputText("Your skin starts to change, turning [skin color1]. Your underbelly, on the other hand , turns [skin color2]. Just as you thought it was over, your skin takes on a glossy shine. When you thought it was finaly over specks of light starts to form underneath your arms, spreading to your underbelly. The bioluminescence gives you an appearance akin to those of a deep-sea creature. <b>Your body is now [skin color] with a [skin color2] underbelly running on the underside of your limbs and up to your mouth with bioluminescent patterns on the belly just like those of a sea dragon!.</b>");
             changes++;
             player.skin.setBaseOnly({type: Skin.PLAIN, adj: "glossy", pattern: Skin.PATTERN_SEA_DRAGON_UNDERBODY});
         }
@@ -14779,7 +14777,7 @@ public final class Mutations extends MutationsHelper {
         if (player.skin.base.color != "caramel" && changeLimit > 0) {
             changes++;
             outputText("[pg]It takes a while for you to notice, but <b>");
-            if (player.hasFur()) outputText("the skin under your [skin coat.color] " + player.skinDesc);
+            if (player.hasFur()) outputText("the skin under your [fur color] " + player.skinDesc);
             else outputText("your " + player.skinDesc);
             outputText(" has changed to become ");
             player.skin.base.color = "caramel";
@@ -15994,7 +15992,7 @@ public final class Mutations extends MutationsHelper {
             }
             //Reset fur if fully coated
             if (player.hasFullCoatOfType(Skin.FUR) && !player.hasPartialCoat(Skin.FUR)) {
-                outputText("[pg]You scratch yourself, and come away with a large clump of [skin coat.color] fur.  Panicked, you look down and realize that your chitin is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. To your surprise you are back to being furless just like your old human self.");
+                outputText("[pg]You scratch yourself, and come away with a large clump of [fur color] fur.  Panicked, you look down and realize that your chitin is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. To your surprise you are back to being furless just like your old human self.");
                 player.skin.growCoat(Skin.COVERAGE_NONE);
                 changes++;
             }

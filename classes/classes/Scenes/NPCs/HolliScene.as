@@ -6,7 +6,7 @@ import classes.Scenes.SceneLib;
 
 public class HolliScene extends NPCAwareContent {
 
-		
+	
 	public function HolliScene()
 	{
 	}
@@ -123,11 +123,11 @@ public function treeMenu(output:Boolean = true):void {
 				else outputText("Do you want to play?  Come on, taste Mother Marae's finest creation.");
 				outputText("</i>\"");
 			}
-			//Extra line on description:  
+			//Extra line on description:
 			if(flags[kFLAGS.HOLLI_FRUIT] > 0) {
 				if(flags[kFLAGS.HOLLI_FRUIT] == 1) outputText("\n\nA large, purple fruit hangs from Holli's branches, twisting softly in the breeze.  It looks succulent and ripe.");
 				else outputText("\n\n" + Num2Text(flags[kFLAGS.HOLLI_FRUIT]) + " large, purple fruits hang from Holli's branches, twisting softly in the breeze.  They look succulent and ripe.");
-				//Optional Addition: 
+				//Optional Addition:
 				if(flags[kFLAGS.HOLLI_FRUIT_EXPLAINED] > 0) outputText("  A very small, strange part of you actually feels proud to have made something like that with the tree-woman.");
 			}
 		}
@@ -708,7 +708,7 @@ private function fuckHolliInZeFlowerPuss():void {
 	outputText("\n\nA geyser of spunk rockets out into ");
 	if(player.cockArea(x) >= 100) outputText("the air, where it hangs for a moment before splattering down atop the plant-girl's leaf-colored hair and face, forming a gossamer shroud.");
 	else outputText("her mouth, which works noisily to swallow the hot load even as you inject it into her.  After a few swallows, she leans back and lets you shoot it up into the air, so that it can fall down over her face and hair, into a gossamer shroud.");
-	//highish cum:  
+	//highish cum:
 	if(player.cumQ() >= 500) outputText("  You keep blasting heavy ropes of seed until her body and trunk are painted with goo, and then you cum some more, smattering spunk until she looks more like a gooey waterfall than a fey creature.");
 	if(player.cumQ() >= 1500) outputText("  Before you know it, there's a lake around the two of you and a small river running downhill away from camp.");
 	outputText("  A mischievous grin breaks out under the goopy facial, followed by an unnaturally long tongue that pulls gobs of the stuff into the dryad's hungry mouth.  Once she can see again, the girl gives her tits a squeeze and affectionately kisses your cock, practically worshipping it with sloppy-sweet licks.");
@@ -762,7 +762,7 @@ private function haveAMapleSyrupSnack():void {
 	fatigue(-100);
 	doNext(camp.returnToCampUseOneHour);
 }
-	
+
 //Tentacle Ride (looks ok)(C)
 private function level4RideHollisTentacruels():void {
 	clearOutput();
@@ -873,7 +873,7 @@ private function begHolli4Watches():void {
 	flags[kFLAGS.HOLLI_DEFENSE_ON] = 1;
 	doNext(treeMenu);
 }
-	
+
 //Donation Day Dominate Holli Content
 //Started by choosing "assert" at the prompt where you can beg.
 //If PC is too low level, Holli closes up and nothing happens.
@@ -891,7 +891,7 @@ private function domUpSomeHolli():void {
 	domPowah += player.tallness/12;
 	if(player.horns.count > 0) domPowah += 3;
 	if(player.cor > 66) domPowah += 2;
-	//{fail} 
+	//{fail}
 	if(domPowah < 20) {
 		outputText("\n\nRolling her eyes, Holli sinks back into her arboreal core, the bark 'lips' slowly pulling together, creaking ominously.  You grab hold of them and try to wrench them open, but inexorably, each continues on to meet the other.  An inch before the wood crushes around your fingers, you let go, reminded of a tree back home that somehow split a stone with its growth.  The demonic dryad's home is closed to you.  Perhaps, if you were a little more intimidating, it would have worked.");
 		doNext(camp.returnToCampUseOneHour);
@@ -1192,7 +1192,7 @@ internal function defeatHolli():void {
 	player.createKeyItem("Holli's Ashes",0,0,0,0);
 	cleanupAfterCombat();
 }
-	
+
 //[yes gimme monk pls]
 private function recruitJojoToCamp():void {
 	clearOutput();
@@ -1212,7 +1212,7 @@ private function dontRecruitJojoToCamp():void {
 	player.createKeyItem("Holli's Ashes",0,0,0,0);
 	cleanupAfterCombat();
 }
-	
+
 //>Lose
 internal function enjoyYourBadEndBIYAAAATCH():void {
 	clearOutput();
@@ -1533,7 +1533,7 @@ private function holliAndGenderlessSittingInATree():void {
 	outputText("The tall, fit traveler steps through the portal, and its swirling colors dissolve to empty air behind him.  The blasted red landscape that welcomes him does so grudgingly, filling his face with a cloud of blown dust that sets him to coughing and sputtering.  Peering through a teary squint, the man looks around for a place that might provide some shelter from the wind and allow him to get his bearings, and a pair of scraggly trees nearby would seem to fill the bill.");
 	
 	outputText("\n\nAs he draws closer, though, it becomes evident that he's not the only one with the idea: two figures are already leaning on the trees.  Both nude, one is a gorgeous woman, albeit green-skinned and with horns, while the other appears to be ");
-	if(!player.hasCoat()) outputText("[skin.color]-colored");
+	if(!player.hasCoat()) outputText("[skin base.color]-colored");
 	else outputText("covered in [skin.coat]");
 	outputText(" and wrapping its body around the tree in a way that makes determining its sex impossible.  No... it's not wrapping around the tree, but embedded in it up to the hips!");
 	

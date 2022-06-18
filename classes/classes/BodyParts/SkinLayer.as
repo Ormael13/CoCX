@@ -18,6 +18,12 @@ public class SkinLayer extends BodyPart {
 	public function set color(value:String):void {
 		_color = value;
 	}
+	public function get color1():String {
+		return _color;
+	}
+	public function set color1(value:String):void {
+		_color = value;
+	}
 	public function get color2():String {
 		return _color2 || color;
 	}
