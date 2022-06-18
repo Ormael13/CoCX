@@ -590,27 +590,31 @@ import flash.utils.getQualifiedClassName;
 				if (this.level >= 51) temp += 150;
 			}
 			if (hasPerk(PerkLib.InsightfulResourcesI)) temp += Math.round((this.wis*5) * (1 + newGamePlusMod()));
+			var multimax:Number = 1;
 			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) temp += 40;
-				if (hasPerk(PerkLib.SoulPersonage)) temp += 40;
-				if (hasPerk(PerkLib.SoulWarrior)) temp += 40;
+				if (hasPerk(PerkLib.SoulApprentice)) temp += 50;
+				if (hasPerk(PerkLib.SoulPersonage)) temp += 50;
+				if (hasPerk(PerkLib.SoulWarrior)) temp += 50;
+				multimax += 0.05;
 			}
 			if (hasPerk(PerkLib.DaoistWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) temp += 60;
-				if (hasPerk(PerkLib.SoulScholar)) temp += 60;
-				if (hasPerk(PerkLib.SoulElder)) temp += 60;
+				if (hasPerk(PerkLib.SoulSprite)) temp += 100;
+				if (hasPerk(PerkLib.SoulScholar)) temp += 100;
+				if (hasPerk(PerkLib.SoulElder)) temp += 100;
+				multimax += 0.05;
 			}
 			if (hasPerk(PerkLib.DaoistElderStage)) {
-				if (hasPerk(PerkLib.SoulExalt)) temp += 100;
-				if (hasPerk(PerkLib.SoulOverlord)) temp += 100;
-				if (hasPerk(PerkLib.SoulTyrant)) temp += 100;
+				if (hasPerk(PerkLib.SoulExalt)) temp += 200;
+				if (hasPerk(PerkLib.SoulOverlord)) temp += 200;
+				if (hasPerk(PerkLib.SoulTyrant)) temp += 200;
+				multimax += 0.1;
 			}
 			if (hasPerk(PerkLib.DaoistOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) temp += 150;
-				if (hasPerk(PerkLib.SoulEmperor)) temp += 150;
-				if (hasPerk(PerkLib.SoulAncestor)) temp += 150;
+				if (hasPerk(PerkLib.SoulKing)) temp += 300;
+				if (hasPerk(PerkLib.SoulEmperor)) temp += 300;
+				if (hasPerk(PerkLib.SoulAncestor)) temp += 300;
+				multimax += 0.1;
 			}
-			var multimax:Number = 1;
 			if (hasPerk(PerkLib.DeityJobMunchkin)) multimax += 0.1;
 			if (hasPerk(PerkLib.LimitBreakerSoul1stStage)) multimax += 0.05;
 			if (hasPerk(PerkLib.LimitBreakerSoul2ndStage)) multimax += 0.1;
@@ -2522,7 +2526,10 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.SoulKing)) soulforceRecovery += 5;
 				if (hasPerk(PerkLib.SoulEmperor)) soulforceRecovery += 5;
 				if (hasPerk(PerkLib.SoulAncestor)) soulforceRecovery += 5;
-				if (hasPerk(PerkLib.DaoistCultivator)) soulforceRecoveryMulti += 0.5;
+				if (hasPerk(PerkLib.DaoistApprenticeStage)) soulforceRecoveryMulti += 0.5;
+				if (hasPerk(PerkLib.DaoistWarriorStage)) soulforceRecoveryMulti += 0.5;
+				if (hasPerk(PerkLib.DaoistElderStage)) soulforceRecoveryMulti += 1;
+				if (hasPerk(PerkLib.DaoistOverlordStage)) soulforceRecoveryMulti += 1;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 1) soulforceRecovery += 4;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 2) soulforceRecovery += 4;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceRecovery += 4;

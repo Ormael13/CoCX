@@ -54,12 +54,12 @@ public class AbstractSpell extends CombatAbility {
 		if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
 		combat.spellPerkUnlock();
 	}
-	
+	/*
 	override public function get currentCooldown():int {
 		if (isSwiftcasting) return 0;
 		return player.cooldowns[id];
 	}
-	
+	*/
 	override protected function usabilityCheck():String {
 		
 		// Run all check applicable to all abilities
