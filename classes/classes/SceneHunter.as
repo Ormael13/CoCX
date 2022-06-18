@@ -578,10 +578,15 @@ public class SceneHunter extends BaseContent {
         //Sub-pages
         if (player.hasStatusEffect(StatusEffects.MetWhitney) && player.statusEffectv1(StatusEffects.MetWhitney) > 1)
             addButton(10, "Farm", recallScenes_farm);
+        if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) {
+            addButton(11, "TelAdre", recallScenes_telAdre);
+        }
+
         addButton(14, "Back", recallScenes);
     }
 
     private function recallScenes_farm():void {
+        menu();
         if (player.hasStatusEffect(StatusEffects.KeltOff) || sceneHunter.other && flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) //allowing for Kelly in 'Other' because I want!
             addButton(0, "KeltRape", SceneLib.farm.keltScene.fuckKeltsShitUp).hint("Revenge for the arrogant centaur.");
         if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 1)
@@ -596,6 +601,13 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.KELLY_VAGINALLY_FUCKED_COUNT] > 0)
             addButton(5, "KellyVirgin", SceneLib.farm.kelly.takeKellysVirginity).hint("Virgin Fuck!");
         SceneLib.farm.kelly.breakKeltGo();
+        addButton(14, "Back", recallScenes_places);
+    }
+
+    private function recallScenes_telAdre():void {
+        menu();
+        if (flags[kFLAGS.MADDIE_QUEST_STATE] >= 3)
+            addButton(0, "Maddie", SceneLib.telAdre.maddie.talkToMaddie).hint("Meet the cupcake-girl again!");
         addButton(14, "Back", recallScenes_places);
     }
 
