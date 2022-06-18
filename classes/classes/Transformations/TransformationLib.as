@@ -288,7 +288,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        switch (coverage) {
 	        case Skin.COVERAGE_LOW:
 	          if (!player.hasCoat()) desc += "Your skin itches intensely. You gaze down as more and more hairs break forth from your skin quickly transforming into a coat of " + color + " fur. <b>You are now partially covered in " + color + " fur.</b>";
-	          else if (player.hasScales()) desc += "Your scales itch incessantly. You scratch, feeling them flake off to reveal a coat of " + color + " fur growing out from below!  <b>You are now partially covered in " + color + " fur.</b>";
+	          else if (player.isScaleCovered()) desc += "Your scales itch incessantly. You scratch, feeling them flake off to reveal a coat of " + color + " fur growing out from below!  <b>You are now partially covered in " + color + " fur.</b>";
 	          else desc += "Your skin itch incessantly. You scratch, feeling it current form shifting into a coat of " + color + " fur. <b>You are now partially covered in " + color + " fur.</b>";
 	          break;
 	        case Skin.COVERAGE_COMPLETE:
@@ -363,14 +363,14 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      } else {
 	        switch (coverage) {
 	        case Skin.COVERAGE_LOW:
-	          if (player.hasFur()) {
+	          if (player.isFurCovered()) {
 	            desc += "You scratch yourself, and come away with a large clump of [fur color] fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. You feel your skin shift as " + color + " scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you. The rest of the fur is easy to remove. <b>Your body is now partially covered with small patches of scales!</b>";
 	          } else {
 	            desc += "You feel your skin shift as scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you. <b>Your body is now partially covered with small patches of " + color + " scales.</b>";
 	          }
 	          break;
 	        case Skin.COVERAGE_COMPLETE:
-	          if (player.hasFur()) {
+	          if (player.isFurCovered()) {
 	            desc += "You scratch yourself, and come away with a large clump of [fur color] fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + color + " scales covering most of your body. The rest of the fur is easy to remove. <b>You're now covered in scales from head to toe.</b>";
 	          } else {
 	            desc += "You idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard. A quick glance down reveals that scales are growing out of your [color] skin with alarming speed. As you watch, the surface of your skin is covered in smooth scales. They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body. <b>You're covered from head to toe in shiny " + color + " scales.</b>";
@@ -538,16 +538,16 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
                     } else {
                         switch (coverage) {
                             /*case Skin.COVERAGE_LOW:
-                                if (player.hasFur()) {
+                                if (player.isFurCovered()) {
                                     desc += "You scratch yourself, and come away with a large clump of [fur color] fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. You feel your skin shift as " + color + " scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you. The rest of the fur is easy to remove. <b>Your body is now partially covered with small patches of scales!</b>";
                                 } else {
                                     desc += "You feel your skin shift as scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you. <b>Your body is now partially covered with small patches of " + color + " scales.</b>";
                                 }
                                 break;*/
                             case Skin.COVERAGE_HIGH:
-                                if (player.hasFur()) desc += "You scratch yourself, and come away with a large clump of [fur color] fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + color + " scales covering most of your body. The rest of the fur is easy to remove.  ";
-                                else if (player.hasGooSkin()) desc += "Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Your skin feels incredibly smooth.  ";
-                                else if (player.hasScales()) desc += "Your [scales color] scales itch incessantly, and as you scratch yourself, they start falling off wholesale.  ";
+                                if (player.isFurCovered()) desc += "You scratch yourself, and come away with a large clump of [fur color] fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + color + " scales covering most of your body. The rest of the fur is easy to remove.  ";
+                                else if (player.isGooSkin()) desc += "Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Your skin feels incredibly smooth.  ";
+                                else if (player.isScaleCovered()) desc += "Your [scales color] scales itch incessantly, and as you scratch yourself, they start falling off wholesale.  ";
                                 else if (player.hasCoat()) desc += "Your skin itches and tingles, starting to shed your [skin coat].  ";
                                 else desc += "You idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard. A quick glance down reveals that scales are growing out of your [color] skin with alarming speed. As you watch, the surface of your skin is covered in smooth scales. They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body. ";
                                 desc += "<b>You're covered from head to toe in shiny " + color + " aqua scales.</b>"
@@ -581,20 +581,20 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				function (doOutput: Boolean): void {
 					//var desc: String = "";
 					if (player.hasPlainSkinOnly()) outputText("[pg]You sigh, feeling your [armor] sink into you as your skin becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!");
-					else if (player.hasFur()) outputText("[pg]You sigh, suddenly feeling your fur become hot and wet.  You look down as your [armor] sinks partway into you.  With a start you realize your fur has melted away, melding into the slime-like coating that now serves as your skin.  You've become partly liquid and incredibly gooey!");
-					else if (player.hasScales()) outputText("[pg]You sigh, feeling slippery wetness over your scales.  You reach to scratch it and come away with a slippery wet coating.  Your scales have transformed into a slimy goop!  Looking closer, you realize your entire body has become far more liquid in nature, and is semi-solid.  Your [armor] has even sunk partway into you.");
+					else if (player.isFurCovered()) outputText("[pg]You sigh, suddenly feeling your fur become hot and wet.  You look down as your [armor] sinks partway into you.  With a start you realize your fur has melted away, melding into the slime-like coating that now serves as your skin.  You've become partly liquid and incredibly gooey!");
+					else if (player.isScaleCovered()) outputText("[pg]You sigh, feeling slippery wetness over your scales.  You reach to scratch it and come away with a slippery wet coating.  Your scales have transformed into a slimy goop!  Looking closer, you realize your entire body has become far more liquid in nature, and is semi-solid.  Your [armor] has even sunk partway into you.");
 					else if (player.skin.base.type != Skin.GOO) outputText("[pg]You sigh, feeling your [armor] sink into you as your [skin] becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!");
 					player.skin.setBaseOnly({type: Skin.GOO, adj: "slimy", pattern: Skin.PATTERN_NONE});
-					if (!InCollection(player.skinMaterialColor, SlimeRace.SlimeSkinColors) && type == 0) {
-						player.skinMaterialColor = randomChoice(SlimeRace.SlimeSkinColors);
+					if (!InCollection(player.skinColor, SlimeRace.SlimeSkinColors) && type == 0) {
+						player.skinColor = randomChoice(SlimeRace.SlimeSkinColors);
 						outputText("  Stranger still, your skin tone changes to [skin color]!");
 					}
-					if (!InCollection(player.skinMaterialColor, MagmaSlimeRace.MagmaSlimeSkinColors) && type == 1) {
-						player.skinMaterialColor = randomChoice(MagmaSlimeRace.MagmaSlimeSkinColors);
+					if (!InCollection(player.skinColor, MagmaSlimeRace.MagmaSlimeSkinColors) && type == 1) {
+						player.skinColor = randomChoice(MagmaSlimeRace.MagmaSlimeSkinColors);
 						outputText("  Stranger still, your skin tone changes to [skin color]!");
 					}
-					if (!InCollection(player.skinMaterialColor, DarkSlimeRace.DarkSlimeSkinColors) && type == 2) {
-						player.skinMaterialColor = randomChoice(DarkSlimeRace.DarkSlimeSkinColors);
+					if (!InCollection(player.skinColor, DarkSlimeRace.DarkSlimeSkinColors) && type == 2) {
+						player.skinColor = randomChoice(DarkSlimeRace.DarkSlimeSkinColors);
 						outputText("  Stranger still, your skin tone changes to [skin color]!");
 					}
 					//if (doOutput) outputText(desc);
@@ -611,7 +611,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				function (): Boolean {
 					options = skinFormatOptions(options, Skin.GOO);
 
-					return player.skin.base.type == Skin.GOO && InCollection(player.skinMaterialColor, options.colors) && player.skin.coverage == coverage;
+					return player.skin.base.type == Skin.GOO && InCollection(player.skinColor, options.colors) && player.skin.coverage == coverage;
 				}
 		)
 	}
@@ -666,7 +666,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "You double over suddenly as a harsh, stabbing pain runs across your skin, tattoos in the shape of scars forming on various parts of your body. Considering how you look now, you might as well proudly display your <b>Orc scar tattooed skin.</b>";
-	    player.skinMaterialColor2 = "black";
+	    player.skinColor2    = "black";
 	    player.skin.base.adj = "scar shaped tattooed";
 	    player.skin.base.pattern = Skin.PATTERN_SCAR_SHAPED_TATTOO;
 
@@ -724,7 +724,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    if (rand(2) == 0) desc += "angular";
 	    else desc += "curved";
 	    desc += " markings remain, as if etched into your skin. <b>You now have Kitsune tattoos on your skin.</b>";
-	    player.skinMaterialColor2 = "black";
+	    player.skinColor2    = "black";
 	    player.skin.base.adj = "tattooed";
 	    player.skin.base.pattern = Skin.PATTERN_MAGICAL_TATTOO;
 
@@ -761,14 +761,14 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "Your skin tingles and itches faintly. You look down to see ";
-	    if (player.skinMaterialColor1 == "sable") desc += "white";
-	    if (player.skinMaterialColor1 == "white") desc += "black";
+	    if (player.skinColor1 == "sable") desc += "white";
+	    if (player.skinColor1 == "white") desc += "black";
 	    desc += " veins etching deep into your skin across the entirety of your body. <b>You now have ";
-	    if (player.skinMaterialColor1 == "sable") desc += "white";
-	    if (player.skinMaterialColor1 == "white") desc += "black";
+	    if (player.skinColor1 == "sable") desc += "white";
+	    if (player.skinColor1 == "white") desc += "black";
 	    desc += " veins.</b>";
-	    if (player.skinMaterialColor1 == "sable") player.skinMaterialColor2 = "white";
-	    if (player.skinMaterialColor1 == "white") player.skinMaterialColor2 = "black";
+	    if (player.skinColor1 == "sable") player.skinColor2 = "white";
+	    if (player.skinColor1 == "white") player.skinColor2 = "black";
 
 	    player.skin.base.pattern = Skin.PATTERN_WHITE_BLACK_VEINS;
 	    player.skin.base.adj = "veined";
@@ -1731,7 +1731,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      }
 	    }
 	    if (!InCollection(player.hairColor, SlimeRace.SlimeSkinColors, MagmaSlimeRace.MagmaSlimeSkinColors, DarkSlimeRace.DarkSlimeSkinColors)) {
-	      player.hairColor = player.skinMaterialColor;
+	      player.hairColor = player.skinColor;
 	      desc += " Stranger still, the hue of your semi-liquid hair changes to " + player.hairColor + ".";
 	    }
 
@@ -1752,7 +1752,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  },
 		// is possible
 		function (): Boolean {
-			return player.hairType != Hair.GOO && player.hasGooSkin();
+			return player.hairType != Hair.GOO && player.isGooSkin();
 		}
 	);
 
@@ -2222,14 +2222,14 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        desc += "Your prominent teeth chatter noisily at first, then with diminishing violence, until you can no longer feel them jutting past the rest!  ";
 	      }
 	      desc += "Shaking your head a bit, you wait for your energy to return, then examine your appearance. ";
-	      if (((player.skinMaterialColor == "ebony" || player.skinMaterialColor == "black") && !player.hasCoat()) || ((player.hairColor == "black" || player.hairColor == "midnight") && (player.hasFur() || player.hasScales()))) {
+	      if (((player.skinColor == "ebony" || player.skinColor == "black") && !player.hasCoat()) || ((player.hairColor == "black" || player.hairColor == "midnight") && (player.isFurCovered() || player.isScaleCovered()))) {
 	        desc += "Nothing seems different at first. Strange... you look closer and discover a darker, mask-line outline on your already inky visage. Furthermore your canines have slightly elongated not unlike those of an animal. <b>You now have a barely-visible raccoon mask and sharp canines like those of a raccoon.</b>";
 	      } else desc += "A dark, almost black mask shades the " + player.skinFurScales() + " around your eyes and over the topmost portion of your nose, lending you a criminal air! Furthermore your canines have slightly elongated not unlike those of an animal. <b>You now have a raccoon mask and sharp canines like those of a raccoon!</b>";
 	    } else {
 	      desc += "A sudden migraine sweeps over you and you clutch your head in agony as your nose collapses back to human dimensions. A worrying numb spot grows around your eyes, and you entertain several horrible premonitions until it passes as suddenly as it came. Checking your reflection in your water barrel, you find ";
 	      //[(if black/midnight fur or if black scales)
-	      if (((player.hairColor == "black" || player.hairColor == "midnight") && (player.hasFur() || player.hasScales()))) desc += "your face apparently returned to normal shape, albeit still covered in " + player.skinFurScales() + ". You look closer and discover a darker, mask-line outline on your already inky visage. <b>You now have a barely-visible raccoon mask on your otherwise normal human face.</b>";
-	      else if ((player.skinMaterialColor == "ebony" || player.skinMaterialColor == "black") && (!player.hasCoat())) desc += "your face apparently returned to normal shape. You look closer and discover a darker, mask-line outline on your already inky visage. <b>You now have a barely-visible raccoon mask on your normal human face.</b>";
+	      if (((player.hairColor == "black" || player.hairColor == "midnight") && (player.isFurCovered() || player.isScaleCovered()))) desc += "your face apparently returned to normal shape, albeit still covered in " + player.skinFurScales() + ". You look closer and discover a darker, mask-line outline on your already inky visage. <b>You now have a barely-visible raccoon mask on your otherwise normal human face.</b>";
+	      else if ((player.skinColor == "ebony" || player.skinColor == "black") && (!player.hasCoat())) desc += "your face apparently returned to normal shape. You look closer and discover a darker, mask-line outline on your already inky visage. <b>You now have a barely-visible raccoon mask on your normal human face.</b>";
 	      else desc += "your face returned to human dimensions, but shaded by a black mask around the eyes and over the nose!  <b>You now have a humanoid face with a raccoon mask!</b>";
 	    }
 
@@ -3535,7 +3535,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "A weird tingling runs through your scalp as your [hair] shifts slightly. You reach up to touch and bump <b>your new pointed elfin ears</b>!";
 
-	    if (player.hasFur()) desc += " As you examine your new elfin ears you feel fur grow around them, matching the rest of you.";
+	    if (player.isFurCovered()) desc += " As you examine your new elfin ears you feel fur grow around them, matching the rest of you.";
 
 	    player.ears.type = Ears.ELFIN;
 	    if (doOutput) outputText(desc);
@@ -5428,15 +5428,15 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    if (player.skin.hasChitin()) {
+	    if (player.skin.isChitinCovered()) {
 	      desc += "Ughh, was that seed good for your body? You wince in pain, as some part of you is obviously not happy of being subjected to the fruit mysterious properties. As you direct your attention to your arms, you’re alarmed by their increasingly rigid feeling, and, to make things worse, the process continues, as the worrying sensation creeps up your arms until it reaches your shoulders. Soon, no matter how much you try, you aren’t able to move your arms in any way.";
 	      desc += "Just when you thought that nothing could feel worse, you see how the chitin on your arms fissures, falling to the ground like pieces of a broken vase and leaving a mellified tissue beneath. To you relief, the ‘jelly’ also fall, leaving only normal skin on your arms.";
 	      desc += "Then, a cloak of soft, [feather color], colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. When the growing stops, the skin over your hands changes too, turning into a layer of [skin], skin, albeit rougher than the usual, and made of thousands of diminutive scales. The structure of your palm and fingers remain the same, tough your fingernails turn into short talons.";
-	    } else if (player.hasFur()) {
+	    } else if (player.isFurCovered()) {
 	      desc += "A bit weary about the possible effects of the seed on your body, you quickly notice when the fur covering your starts thickening, some patches merging an thickening, first forming barbs, and then straight-out feathers. To your surprise, your hand and forearms become strangely numb, and, to make things worse, the process continues, as the worrying sensation creeps up your arms until it reaches your shoulders. Soon, no matter how much you try, you aren’t able to move your arms in any way.";
 	      desc += "The newly formed feathers keep growing making the excess fur fall, until you’ve gained a cloak of soft, [feather colors], colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. Once the effects on that area end, the fur over your hands changes too, falling quickly and leaving behind soft, bare skin, that quickly turns into a layer of [skin], skin, ";
 	      desc += "albeit rougher than the usual, made of thousands of diminutive scales. The structure of your palm and fingers remain the same, though your fingernails turn into short talons.";
-	    } else if (player.hasScales()) {
+	    } else if (player.isScaleCovered()) {
 	      desc += "Undoubtedly affected by the dry fruit reactives, the layer of scales covering your arms falls like snowflakes, leaving only a soft layer of [skin] behind. To your surprise, your hand and forearms become strangely numb, and, to make things worse, the process continues, as the worrying sensation creeps up your arms until it reaches your shoulders. Soon, no matter how much you try, you aren’t able to move your arms in any way.";
 	      desc += "Then, a cloak of soft, [feather color], colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. When the growing stops, the skin over your hands changes too, turning into a layer of [skin], skin, albeit rougher than the usual, and made of thousands of diminutive scales. The structure of your palm and fingers remain the same, though your fingernails turn into short talons.";
 	    } else {
@@ -7362,7 +7362,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  },
 		// is possible
 		function (): Boolean {
-			return player.hasGooSkin() && player.arms.type == Arms.GOO && player.lowerBody != LowerBody.GOO;
+			return player.isGooSkin() && player.arms.type == Arms.GOO && player.lowerBody != LowerBody.GOO;
 	  }
 	);
 
@@ -7734,7 +7734,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      desc += "<b>You now have two fuzzy, long-toed raccoon legs.</b>";
 	    } else {
 	      desc += "Your toes wiggle of their own accord, drawing your attention.  Looking down, you can see them changing from their current shape, stretching into oblongs.  When they finish, your foot appears humanoid, but with long, prehesile toes!  ";
-	      if ((player.lowerBody == LowerBody.HUMAN || player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.PLANT_HIGH_HEELS) && !player.hasFur()) desc += "The sensation of walking around on what feels like a second pair of hands is so weird that you miss noticing the itchy fur growing in over your legs... <b>You now have raccoon paws!</b>";
+	      if ((player.lowerBody == LowerBody.HUMAN || player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.PLANT_HIGH_HEELS) && !player.isFurCovered()) desc += "The sensation of walking around on what feels like a second pair of hands is so weird that you miss noticing the itchy fur growing in over your legs... <b>You now have raccoon paws!</b>";
 	    }
 
 	    player.legCount = 2;
@@ -9986,7 +9986,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			if (player.bRows() >= 3) desc += "abdomen";
 			else desc += "chest";
 				desc += ". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ";
-			//if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
+			//if (player.isFurCovered()) outputText(player.hairColor + " " + player.skinDesc);
 			//else outputText(player.bodyColor + " " + player.skinDesc);
 			desc += "[skin full] remains. <b>You've lost a row of breasts!</b>";
 

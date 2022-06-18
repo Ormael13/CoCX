@@ -43,7 +43,7 @@ public class PoltergeistRace extends Race{
 				.customRequirement("skin",
 						"milky or ashen ghost skin",
 						function (body:BodyData):Boolean {
-							return body.player.hasGhostSkin() &&
+							return body.player.isGhostSkin() &&
 									(body.skinBaseAdj == "milky" || body.skinBaseAdj == "ashen")
 						}, +1
 						)

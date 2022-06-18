@@ -533,7 +533,7 @@ public class SaveUpdater extends NPCAwareContent {
 		}
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 8) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 9;
-			if (!player.hasFur()) {
+			if (!player.isFurCovered()) {
 				camp.doCamp();
 				return; //No fur? Return to camp.
 			}
@@ -924,8 +924,8 @@ public class SaveUpdater extends NPCAwareContent {
 				player.setShield(shields.DRGNSHL);
 				player.setArmor(armors.LAYOARM);
 				flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
-				player.skinMaterialColor = "light";
-				player.faceType = Face.HUMAN;
+				player.skinColor                                 = "light";
+				player.faceType                                  = Face.HUMAN;
 				player.eyes.type = Eyes.HUMAN;
 				player.horns.type = Horns.NONE;
 				player.horns.count = 0;

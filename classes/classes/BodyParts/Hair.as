@@ -324,7 +324,7 @@ public class Hair extends BodyPart {
 		var hair:String = "hair";
 
 		//If furry and longish hair sometimes call it a mane (50%)
-		if (creature.hasFur() == 1 && creature.hairLength > 3 && rand(2) == 0) {
+		if (creature.isFurCovered() == 1 && creature.hairLength > 3 && rand(2) == 0) {
 			hair = "mane";
 		}
 
@@ -343,7 +343,7 @@ public class Hair extends BodyPart {
 		var hair:String = "hair";
 
 		//If furry and longish hair sometimes call it a mane (50%)
-		if (creature.hasFur() == 1 && creature.hairLength > 3 && rand(2) == 0) {
+		if (creature.isFurCovered() == 1 && creature.hairLength > 3 && rand(2) == 0) {
 			hair = "mane";
 		}
 

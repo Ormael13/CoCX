@@ -137,7 +137,7 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 		}).applyEffect();
 		changes++;
 	}
-	if (!player.hasDragonScales() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+	if (!player.isDagonScaleCovered() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
 		var color:String;
 		if (rand(10) == 0) {
 			color = randomChoice("purple","silver");

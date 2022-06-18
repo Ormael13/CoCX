@@ -1165,7 +1165,7 @@ use namespace CoC;
 				changes++;
 			}
 			if(!player.skin.hasPlainSkinOnly()) {
-				outputText("The skin on your body itches intensely as it sheds it's [skin.type], revealing " + player.skinMaterialColor + " skin.  ");
+				outputText("The skin on your body itches intensely as it sheds it's [skin.type], revealing " + player.skinColor + " skin.  ");
 				player.skin.restore();
 				changes++;
 			}

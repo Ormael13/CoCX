@@ -970,7 +970,7 @@ private function curingJiangshi():void {
 			flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = 0;
 		}
 		flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
-		player.skinMaterialColor = "light";
+		player.skinColor                                 = "light";
 		CoC.instance.transformations.FaceHuman.applyEffect(false);
 		player.eyes.type = Eyes.HUMAN;
 		player.horns.type = Horns.NONE;

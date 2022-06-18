@@ -26,7 +26,7 @@ public class GoblinRace extends Race {
 				.hasPerk(PerkLib.GoblinoidBlood, +1)
 				.hasPerk(PerkLib.BouncyBody, +1)
 				.skinPlainOnly(+1)
-				.skinMaterialColor(ANY(GoblinSkinColors), +1, -1000)
+				.skinColor(ANY(GoblinSkinColors), +1, -1000)
 				.hasVagina(+1);
 		addConditionedScores(
 				function (body:BodyData):Boolean {

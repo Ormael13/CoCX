@@ -1071,22 +1071,22 @@ public class Creature extends Utils
 			trace("[DEPRECATED] set skinType");
 			skin.type = value;
 		}
-		public function get skinMaterialColor():String {
+		public function get skinColor():String {
 			return bodyMaterials[BodyMaterial.SKIN].color;
 		}
-		public function set skinMaterialColor(value:String):void {
+		public function set skinColor(value:String):void {
 			bodyMaterials[BodyMaterial.SKIN].color = value;
 		}
-		public function get skinMaterialColor1():String {
+		public function get skinColor1():String {
 			return bodyMaterials[BodyMaterial.SKIN].color1;
 		}
-		public function set skinMaterialColor1(value:String):void {
+		public function set skinColor1(value:String):void {
 			bodyMaterials[BodyMaterial.SKIN].color1 = value;
 		}
-		public function get skinMaterialColor2():String {
+		public function get skinColor2():String {
 			return bodyMaterials[BodyMaterial.SKIN].color2;
 		}
-		public function set skinMaterialColor2(value:String):void {
+		public function set skinColor2(value:String):void {
 			bodyMaterials[BodyMaterial.SKIN].color2 = value;
 		}
 		public function get furColor():String {
@@ -1152,8 +1152,20 @@ public class Creature extends Utils
 		public function bodyMaterialColor(type:int):String {
 			return bodyMaterials[type].color;
 		}
+		public function bodyMaterialColor1(type:int):String {
+			return bodyMaterials[type].color1;
+		}
+		public function bodyMaterialColor2(type:int):String {
+			return bodyMaterials[type].color2;
+		}
 		public function setBodyMaterialColor(type:int, value:String):void {
 			bodyMaterials[type].color = value;
+		}
+		public function setBodyMaterialColor1(type:int, value:String):void {
+			bodyMaterials[type].color1 = value;
+		}
+		public function setBodyMaterialColor2(type:int, value:String):void {
+			bodyMaterials[type].color2 = value;
 		}
 		public function hasBodyMaterial(type:int):Boolean {
 			if (type == BodyMaterial.SKIN) return true; // right?
@@ -3199,22 +3211,22 @@ public class Creature extends Utils
 			return (bonusFertility() + fertility);
 		}
 
-		public function hasScales():Boolean { return skin.hasScales(); }
-		public function hasReptileScales():Boolean { return skin.hasReptileScales(); }
-		public function hasDragonScales():Boolean { return skin.hasDragonScales(); }
-		public function hasLizardScales():Boolean { return skin.hasLizardScales(); }
-		public function hasNonLizardScales():Boolean { return skin.hasNonLizardScales(); }
-		public function hasFur():Boolean { return skin.hasFur(); }
-		public function hasChitin():Boolean { return skin.hasChitin(); }
-		public function hasFeather():Boolean { return skin.hasFeather(); }
+		public function isScaleCovered():Boolean { return skin.isScaleCovered(); }
+		public function isReptileScaleCovered():Boolean { return skin.isReptileScaleCovered(); }
+		public function isDagonScaleCovered():Boolean { return skin.isDragonScaleCovered(); }
+		public function isLizardScaleCovered():Boolean { return skin.isLizardScaleCovered(); }
+		public function isNonLizardScaleCovered():Boolean { return skin.isNonLizardScaleCovered(); }
+		public function isFurCovered():Boolean { return skin.isFurCovered(); }
+		public function isChitinCovered():Boolean { return skin.isChitinCovered(); }
+		public function isFeatherCovered():Boolean { return skin.isFeatherCovered(); }
 		public function hasMostlyPlainSkin():Boolean { return skin.hasMostlyPlainSkin(); }
 		public function hasPlainSkinOnly():Boolean { return skin.hasPlainSkinOnly(); }
 		public function hasPartialCoat(coat_type:int):Boolean { return skin.hasPartialCoatOfType(coat_type); }
-		public function hasPartialCoatNoTypeDeclaration():Boolean { return skin.hasPartialCoat(); }
+		public function hasAnyPartialCoat():Boolean { return skin.hasPartialCoat(); }
 		public function hasRubberSkin():Boolean { return skin.hasRubberSkin(); }
 		public function hasPlainSkin():Boolean { return skin.hasPlainSkin(); }
-		public function hasGooSkin():Boolean { return skin.hasGooSkin(); }
-		public function hasGhostSkin():Boolean { return skin.hasGhostSkin(); }
+		public function isGooSkin():Boolean { return skin.isGooSkin(); }
+		public function isGhostSkin():Boolean { return skin.isGhostSkin(); }
 		public function isGargoyle():Boolean { return skin.hasBaseOnly(Skin.STONE); }
 		public function skinDescript():String { return skin.describe('base'); }
 		public function skinFurScales():String { return skin.describe('coat'); }

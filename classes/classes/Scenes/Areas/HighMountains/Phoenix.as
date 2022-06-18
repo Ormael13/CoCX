@@ -137,7 +137,7 @@ public class Phoenix extends Monster
 			this.butt.type = Butt.RATING_JIGGLY;
 			this.lowerBody = LowerBody.SALAMANDER;
 			this.skin.growCoat(Skin.SCALES,{color:"crimson"});
-			this.skinMaterialColor = "light";
+			this.skinColor = "light";
 			this.hairColor = "red";
 			this.hairLength = 16;
 			initStrTouSpeInte(125, 110, 120, 84);

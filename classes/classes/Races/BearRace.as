@@ -22,7 +22,7 @@ public class BearRace extends Race {
 				.eyeType(Eyes.BEAR, +1)
 				.skinCoatType(Skin.FUR, +1)
 				.furColor(ANY(BearFurColors), +1)
-				.furColorPair("white", "black", +1)
+				.furColor("white and black", +1)
 				.height(GREATER_THAN(72), +2);
 		
 		buildTier(10,"bear")

@@ -1833,7 +1833,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (!player.hasPerk(PerkLib.FlawlessBody)) {
 					outputText("\nYou examine your body discovering with surprise your skin is now extremely sensitive but also flawless just like that of an elf. ");
-					outputText("It is beautiful and inviting to the touch, surely your opponents would beg for a chance to get but a single taste of your flawless body. <b>Your " + player.skinMaterialColor + " skin is now flawless just like that of the elves.</b>");
+					outputText("It is beautiful and inviting to the touch, surely your opponents would beg for a chance to get but a single taste of your flawless body. <b>Your " + player.skinColor + " skin is now flawless just like that of the elves.</b>");
 					player.createPerk(PerkLib.FlawlessBody, 0, 0, 0, 0);
 					outputText("\n\n<b>(Gained Perk: Flawless Body</b>)");
 				}

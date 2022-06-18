@@ -1,4 +1,4 @@
-# BodyMaterial system _(design draft)_
+# BodyMaterial system _(design draft and partial implementation)_
 
 ## Current state of affairs
 

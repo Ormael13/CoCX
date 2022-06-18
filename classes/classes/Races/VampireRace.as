@@ -22,7 +22,7 @@ public class VampireRace extends Race {
 				.faceType(Face.VAMPIRE, +2)
 				.eyeType(Eyes.VAMPIRE, +1)
 				.eyeColor("blood-red", +1)
-				.skinMaterialColor("pale", +1)
+				.skinColor("pale", +1)
 				.noTail(+1)
 				.noHorns(+1)
 				.noAntennae(+1);

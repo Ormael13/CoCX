@@ -338,8 +338,8 @@ public class Kiha extends Monster
 			this.butt.type = Butt.RATING_AVERAGE + 1;
 			this.lowerBody = LowerBody.HOOFED;
 			this.skin.coverage = Skin.COVERAGE_MEDIUM;
-			this.skinMaterialColor = "dark";
-			this.scaleColor = "red";
+			this.skinColor     = "dark";
+			this.scaleColor    = "red";
 			this.skin.coat.type = Skin.SCALES;
 			this.hairColor = "red";
 			this.hairLength = 3;

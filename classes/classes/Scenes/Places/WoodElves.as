@@ -219,8 +219,8 @@ package classes.Scenes.Places{
 			if (player.skin.base.pattern != Skin.PATTERN_NONE) {
 				CoC.instance.transformations.SkinPatternNone.applyEffect(false);
 			}
-			player.skinMaterialColor = "light";
-			player.skinType = Skin.PLAIN;
+			player.skinColor = "light";
+			player.skinType  = Skin.PLAIN;
 			player.skin.base.adj = "flawless";
 			player.tone = 0;
 			player.thickness = 20;

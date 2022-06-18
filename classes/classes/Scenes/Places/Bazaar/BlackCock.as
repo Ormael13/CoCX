@@ -1574,7 +1574,7 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Fur/scales fall out
-			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && (player.hasCoat() || player.skinMaterialColor != "gray" || player.skinAdj != "tough")) {
+			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && (player.hasCoat() || player.skinColor != "gray" || player.skinAdj != "tough")) {
 				outputText("\n\n");
 				if (player.hasCoat()) {
 					switch (player.coatType()) {
@@ -1666,7 +1666,7 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Change face to rhino
-			if (rand(4) == 0 && changes < changeLimit && player.ears.type == Ears.RHINO && player.skinMaterialColor == "gray" && player.faceType != Face.RHINO) {
+			if (rand(4) == 0 && changes < changeLimit && player.ears.type == Ears.RHINO && player.skinColor == "gray" && player.faceType != Face.RHINO) {
 				outputText("\n\n");
         CoC.instance.transformations.FaceRhino.applyEffect();
 				changes++;
@@ -1833,7 +1833,7 @@ import classes.lists.Gender;
 			// Main TFs
 			//------------
 			//Change to fur
-			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && !player.hasFur()) {
+			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && !player.isFurCovered()) {
 				outputText("\n\nYou shiver, feeling a bit cold. Just as you begin to wish for something to cover up with, it seems your request is granted; <b>fur begins to grow all over your body!</b> You tug at the tufts in alarm, but they're firmly rooted and... actually pretty soft. Huh. ");
 				CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: "brown"}).applyEffect(false);
 				changes++;
@@ -1980,7 +1980,7 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Gain Echidna face if you have the right conditions.
-			if (rand(4) == 0 && changes < changeLimit && player.hasFur() && player.ears.type == Ears.ECHIDNA && player.tailType == Tail.ECHIDNA && player.tongue.type == Tongue.ECHIDNA) {
+			if (rand(4) == 0 && changes < changeLimit && player.isFurCovered() && player.ears.type == Ears.ECHIDNA && player.tailType == Tail.ECHIDNA && player.tongue.type == Tongue.ECHIDNA) {
 				outputText("\n\n");
         CoC.instance.transformations.FaceEchidna.applyEffect();
 				changes++;

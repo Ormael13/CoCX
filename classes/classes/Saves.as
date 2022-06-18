@@ -2223,8 +2223,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				player.skin.base.color = data.skin.base.color;
 				player.skin.coat.color = data.skin.coat.color;
 			} else {
-				player.skinMaterialColor = stringOr(data.skinTone, player.skinMaterialColor);
-				player.furColor          = stringOr(data.furColor, player.furColor);
+				player.skinColor = stringOr(data.skinTone, player.skinColor);
+				player.furColor  = stringOr(data.furColor, player.furColor);
 				player.chitinColor       = stringOr(data.chitinColor, player.chitinColor);
 				player.scaleColor        = stringOr(data.scalesColor, player.scaleColor);
 			}

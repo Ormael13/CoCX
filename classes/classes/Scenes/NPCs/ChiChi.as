@@ -223,7 +223,7 @@ use namespace CoC;
 			this.tallness = 72;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_NOTICEABLE + 1;
-			this.skinMaterialColor = "light";
+			this.skinColor = "light";
 			this.hairColor = "pinkish red";
 			this.hairLength = 13;
 			this.weaponName = "master gloves";

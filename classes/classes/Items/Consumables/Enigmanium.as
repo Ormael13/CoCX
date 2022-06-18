@@ -167,7 +167,7 @@ public class Enigmanium extends Consumable {
             else outputText("[pg]The need inside your [vagina] grows even stronger.  You desperately need to find a mate to 'scratch your itch' and fill your womb with kittens.  It's difficult NOT to think about a cock slipping inside your moist fuck-tunnel, and at this point you'll have a hard time resisting ANY male who approaches.");
           } else {
             outputText("[pg]The interior of your [vagina] clenches tightly, squeezing with reflexive, aching need.  Your skin flushes hot ");
-            if (player.hasFur()) outputText("underneath your fur ");
+            if (player.isFurCovered()) outputText("underneath your fur ");
             outputText("as images and fantasies ");
             if (player.cor < 50) outputText("assault ");
             else outputText("fill ");
@@ -289,7 +289,7 @@ public class Enigmanium extends Consumable {
       }
       //sphinx color skin
       var SphinxSkinColor: Array = ["dark", "tan"];
-      if (!InCollection(player.skinMaterialColor, SphinxSkinColor) && player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+      if (!InCollection(player.skinColor, SphinxSkinColor) && player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
         outputText("[pg]You feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  Holding an arm up to your face, you discover that <b>you now have ");
         player.furColor = randomChoice(SphinxSkinColor);
         outputText("[skin]!</b>");
@@ -349,7 +349,7 @@ public class Enigmanium extends Consumable {
       }
 
       //DAT EYES
-      if (player.tailType == Tail.CAT && player.ears.type == Ears.LION && rand(4) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CAT && (player.hasFur() || (player.hasCoatOfType(Skin.SCALES) && player.racialScore(Races.DRAGONNE) >= 4)) && player.faceType == Face.CAT && player.eyes.type != Eyes.CAT) {
+      if (player.tailType == Tail.CAT && player.ears.type == Ears.LION && rand(4) == 0 && changes < changeLimit && player.lowerBody == LowerBody.CAT && (player.isFurCovered() || (player.hasCoatOfType(Skin.SCALES) && player.racialScore(Races.DRAGONNE) >= 4)) && player.faceType == Face.CAT && player.eyes.type != Eyes.CAT) {
         outputText("\n\n");
         CoC.instance.transformations.EyesCat.applyEffect();
         changes++;

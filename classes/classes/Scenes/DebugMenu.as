@@ -4,6 +4,7 @@ import classes.*;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Beard;
+import classes.BodyParts.BodyMaterial;
 import classes.BodyParts.Claws;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
@@ -895,13 +896,6 @@ public class DebugMenu extends BaseContent
 						}
 					}
 			);
-			addBeComboBox("Hair color", COLOR_CONSTANTS, player.hairColor,
-					function (item:*):void {
-						player.hairColor = item.data;
-						dumpPlayerData();
-						tagDemosSkin();
-					}
-			);
 			addBeComboBox("Skin coverage", SKIN_COVERAGE_CONSTANTS, player.skin.coverage,
 					function (item:*):void {
 						player.skin.coverage = item.data;
@@ -940,27 +934,13 @@ public class DebugMenu extends BaseContent
 						tagDemosSkin();
 					}
 			);
-			addBeComboBox("Base desc", SKIN_DESC_CONSTANTS, player.skin.base.descRaw,
+			/*addBeComboBox("Base desc", SKIN_DESC_CONSTANTS, player.skin.base.descRaw,
 					function (item:*):void {
 						player.skin.base.descRaw = item.data === "(default)" ? "" : item.data;
 						dumpPlayerData();
 						tagDemosSkin();
 					}
-			);
-			addBeComboBox("Base color", COLOR_CONSTANTS, player.skin.base.color,
-					function (item:*):void {
-						player.skin.base.color = item.data;
-						dumpPlayerData();
-						tagDemosSkin();
-					}
-			);
-			addBeComboBox("Base color 2", COLOR_CONSTANTS, player.skin.base.color2,
-					function (item:*):void {
-						player.skin.base.color2 = item.data;
-						dumpPlayerData();
-						tagDemosSkin();
-					}
-			);
+			);*/
 			addBeComboBox("Coat type",
 					mapForComboBox(
 							filterByProp(Skin.SkinTypes,"coat",true),
@@ -985,20 +965,6 @@ public class DebugMenu extends BaseContent
 						tagDemosSkin();
 					}
 			);
-			addBeComboBox("Coat color", COLOR_CONSTANTS, player.skin.coat.color,
-					function (item:*):void {
-						player.skin.coat.color = item.data;
-						dumpPlayerData();
-						tagDemosSkin();
-					}
-			);
-			addBeComboBox("Coat color 2", COLOR_CONSTANTS, player.skin.coat.color2,
-					function (item:*):void {
-						player.skin.coat.color2 = item.data;
-						dumpPlayerData();
-						tagDemosSkin();
-					}
-			);
 			addBeComboBox("Coat adj", SKIN_ADJ_CONSTANTS, player.skin.coat.adj,
 					function (item:*):void {
 						player.skin.coat.adj = item.data === "(none)" ? "" : item.data;
@@ -1006,13 +972,33 @@ public class DebugMenu extends BaseContent
 						tagDemosSkin();
 					}
 			);
-			addBeComboBox("Coat desc", SKIN_DESC_CONSTANTS, player.skin.coat.descRaw,
+			/*addBeComboBox("Coat desc", SKIN_DESC_CONSTANTS, player.skin.coat.descRaw,
 					function (item:*):void {
 						player.skin.coat.descRaw = item.data === "(default)" ? "" : item.data;
 						dumpPlayerData();
 						tagDemosSkin();
 					}
-			);
+			);*/
+			for each (var type:EnumValue in BodyMaterial.Types) {
+				addBeComboBox(capitalizeFirstLetter(type.name)+" color1",
+						COLOR_CONSTANTS,
+						player.bodyMaterialColor1(type.value),
+						curry(function (id:int,item:*):void {
+							player.setBodyMaterialColor1(id, item.data);
+							dumpPlayerData();
+							tagDemosSkin();
+						}, type.value)
+				);
+				addBeComboBox(capitalizeFirstLetter(type.name)+" color2",
+						COLOR_CONSTANTS,
+						player.bodyMaterialColor2(type.value),
+						curry(function (id:int,item:*):void {
+							player.setBodyMaterialColor2(id, item.data);
+							dumpPlayerData();
+							tagDemosSkin();
+						}, type.value)
+				);
+			}
 			menu();
 			dumpPlayerData();
 			tagDemosSkin();

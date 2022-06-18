@@ -25,7 +25,7 @@ public class JabberwockyRace extends Race {
 				.hairColor("purplish-pink", +1)
 				.scaleColor(ANY(JabberwockyScaleColors), +1)
 				.skinCoatType(Skin.DRAGON_SCALES, +1)
-				.skinMaterialColor("caramel", +1)
+				.skinColor("caramel", +1)
 				.hornType(Horns.JABBERWOCKY, +2)
 				.earType(Ears.BUNNY, +1)
 				.tailType(Tail.DRACONIC, +1)

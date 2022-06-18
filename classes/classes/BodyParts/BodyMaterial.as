@@ -63,11 +63,15 @@ public class BodyMaterial extends BodyPart {
 		}
 	}
 	public function get color1():String {
-		return _color;
+		return _color1;
 	}
 	public function set color1(value:String):void {
+		if (!_binary) {
+			color = value;
+			return;
+		}
 		_color1 = value;
-		_binary = _color1 === _color2;
+		_binary = _color1 !== _color2;
 		if (_binary) {
 			_color = value+" and "+_color2;
 		} else {
@@ -80,9 +84,9 @@ public class BodyMaterial extends BodyPart {
 	}
 	public function set color2(value:String):void {
 		_color2 = value;
-		_binary = _color1 === _color2;
+		_binary = _color1 !== _color2;
 		if (_binary) {
-			_color = value+" and "+_color2;
+			_color = _color1+" and "+value;
 		} else {
 			_color = value;
 		}

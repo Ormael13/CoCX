@@ -251,7 +251,7 @@ public class Forgefather extends NPCAwareContent implements SaveableState	{
 		
 		public function createGargoyleState(): void {
 			player.skin.setBaseOnly({type:Skin.STONE});
-			player.skinMaterialColor = "dark gray";
+			player.skinColor = "dark gray";
 			player.hairColor = "dark gray";
 			material = "stone";
 			refinement = 1;
@@ -570,36 +570,36 @@ public class Forgefather extends NPCAwareContent implements SaveableState	{
 				case "granite":
 					refinement = 1;
 					granite -= 100;
-					material = "granite";
-					player.skinMaterialColor = "gray";
+					material         = "granite";
+					player.skinColor = "gray";
 					player.hairColor = "gray";
 					break;
 				case "ebony":
 					refinement = 1;
 					ebony  -= 100;
-					material = "ebony";
-					player.skinMaterialColor = "black";
+					material         = "ebony";
+					player.skinColor = "black";
 					player.hairColor = "black";
 					break;
 				case "alabaster":
 					refinement = 1;
 					alabaster -= 100;
-					material = "alabaster";
-					player.skinMaterialColor = "quartz white";
+					material         = "alabaster";
+					player.skinColor = "quartz white";
 					player.hairColor = "quartz white";
 					break;
 				case "marble":
 					refinement = 1;
 					marble -= 100;
-					material = "marble";
-					player.skinMaterialColor = "light gray";
+					material         = "marble";
+					player.skinColor = "light gray";
 					player.hairColor = "light gray";
 					break;
 				case "sandstone":
 					refinement = 1;
 					sandstone -= 100;
-					material = "sandstone";
-					player.skinMaterialColor = "caramel";
+					material         = "sandstone";
+					player.skinColor = "caramel";
 					player.hairColor = "caramel";
 					break;
 			}

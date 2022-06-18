@@ -130,7 +130,7 @@ import classes.Scenes.SceneLib;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_JIGGLY;
 			this.skin.growCoat(Skin.SCALES,{color:"crimson"});
-			this.skinMaterialColor = "light";
+			this.skinColor = "light";
 			this.hairColor = "red";
 			this.hairLength = 16;
 			initStrTouSpeInte(135, 115, 170, 100);

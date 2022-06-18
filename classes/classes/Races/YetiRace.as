@@ -15,7 +15,7 @@ public class YetiRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.skinMaterialColor(ANY(YetiSkinColors), +1)
+				.skinColor(ANY(YetiSkinColors), +1)
 				.eyeColor(ANY(YetiEyeColors), +1)
 				.legType(LowerBody.YETI, +1)
 				.armType(Arms.YETI, +1)

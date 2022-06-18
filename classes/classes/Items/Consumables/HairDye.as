@@ -17,7 +17,7 @@ public class HairDye extends Consumable
 			_color = color.toLowerCase();
 			var shortName:String = color + " Dye";
 			var longName:String = "a vial of " + _color + " hair dye";
-			var description:String = "This bottle of dye will allow you to change the color of your hair.  Of course, if you don't have hair, using this would be a waste.";
+			var description:String = "This bottle of dye will allow you to change the color of your hair, fur, scales or chitin.";
 			super(id, shortName, longName, value, description);
 		}
 		
@@ -31,6 +31,7 @@ public class HairDye extends Consumable
 			if (player.blockingBodyTransformations()){
 				EngineCore.addButtonDisabled(0, "Immune", "Your body is immune to any and all transformations.");
 			} else {
+				outputText("What do you want to dye "+_color+"?\n");
 				var i:int = 0;
 				for each (var type:int in [
 						BodyMaterial.HAIR,

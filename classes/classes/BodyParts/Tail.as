@@ -20,6 +20,11 @@ public class Tail extends SaveableBodyPart {
 	 * - id: name of the constant ("NONE", "HORSE")
 	 * - name: human-readable default name, ("non-existant", "horse")
 	 *
+	 * - fur: has fur material
+	 * - feathers: has feathers (hair body material)
+	 * - scales: has scales material
+	 * - chitin: has chitin material
+	 *
 	 * - appearanceDesc: description for PlayerAppearance.as
 	 * - appearanceDescFunc: a function that returns a description for PlayerAppearance.as (appearanceDesc is ignored if this exists)
 	 *
@@ -39,13 +44,15 @@ public class Tail extends SaveableBodyPart {
 	public static const HORSE: int = 1;
 	EnumValue.add(Types, HORSE, "HORSE", {
 		name:"horse",
-		appearanceDesc: "A long [fur color] horse tail hangs from your [butt], smooth and shiny."
+		appearanceDesc: "A long [fur color] horse tail hangs from your [butt], smooth and shiny.",
+		fur: true
 	});
 	public static const DOG: int = 2;
 	EnumValue.add(Types, DOG, "DOG", {
 		name:"dog",
 		appearanceDesc: "A fuzzy [fur color] dog tail sprouts just above your [butt], wagging to and fro whenever you're happy.",
-		isLong: true
+		isLong: true,
+		fur: true
 	});
 	public static const DEMONIC: int = 3;
 	EnumValue.add(Types, DEMONIC, "DEMONIC", {
@@ -92,7 +99,8 @@ public class Tail extends SaveableBodyPart {
 
 			return desc;
 		},
-		stinger: true
+		stinger: true,
+		chitin: true
 	});
 	public static const SHARK: int = 7;
 	EnumValue.add(Types, SHARK, "SHARK", {
@@ -113,24 +121,28 @@ public class Tail extends SaveableBodyPart {
 
 			return desc;
 		},
-		isLong: true
+		isLong: true,
+		fur: true
 	});
 	public static const LIZARD: int = 9;
 	EnumValue.add(Types, LIZARD, "LIZARD", {
 		name:"lizard",
 		appearanceDesc: "A tapered tail hangs down from just above your [butt]. It sways back and forth, assisting you in keeping your balance.",
 		tailSlam: true,
-		isLong: true
+		isLong: true,
+		scales: true
 	});
 	public static const RABBIT: int = 10;
 	EnumValue.add(Types, RABBIT, "RABBIT", {
 		name:"rabbit",
-		appearanceDesc: "A short, soft bunny tail sprouts just above your [butt], twitching constantly even when you don't think about it."
+		appearanceDesc: "A short, soft bunny tail sprouts just above your [butt], twitching constantly even when you don't think about it.",
+		fur: true
 	});
 	public static const HARPY: int = 11;
 	EnumValue.add(Types, HARPY, "HARPY", {
 		name:"harpy",
-		appearanceDesc: "A tail of feathers fans out from just above your [butt], twitching instinctively to help guide you if you were to take flight."
+		appearanceDesc: "A tail of feathers fans out from just above your [butt], twitching instinctively to help guide you if you were to take flight.",
+		feathers: true
 	});
 	public static const KANGAROO: int = 12;
 	EnumValue.add(Types, KANGAROO, "KANGAROO", {
@@ -138,12 +150,13 @@ public class Tail extends SaveableBodyPart {
 		appearanceDescFunc: function(player: *): String {
 			var desc: String = "A conical, ";
 
-			if (player.hasFur()) {
+			if (player.isFurCovered()) {
 				desc += "furry, and [fur color] ";
 			} else {
 				desc += "gooey, and [color] ";
 			}
 			desc += "tail extends from your [butt], bouncing up and down as you move to assist in your balance.";
+			return desc;
 		},
 		isLong: true
 	});
@@ -159,7 +172,8 @@ public class Tail extends SaveableBodyPart {
 
 			return desc;
 		},
-		isLong: true
+		isLong: true,
+		fur: true
 	});
 	public static const DRACONIC: int = 14;
 	EnumValue.add(Types, DRACONIC, "DRACONIC", {
@@ -167,13 +181,15 @@ public class Tail extends SaveableBodyPart {
 		appearanceDesc: "A thin, scaly, prehensile reptilian tail, almost as long as you are tall, swings behind you like a living bullwhip. The end of its tip is equipped with spikes of bone, meant to deliver painful blows.",
 		draconic: true,
 		tailSlam: true,
-		isLong: true
+		isLong: true,
+		scales: true
 	});
 	public static const RACCOON: int = 15;
 	EnumValue.add(Types, RACCOON, "RACCOON", {
 		name:"raccoon",
 		appearanceDesc: "A black-and-[fur color]-ringed raccoon tail waves behind you.",
-		isLong: true
+		isLong: true,
+		fur: true
 	});
 	public static const MOUSE: int = 16;
 	EnumValue.add(Types, MOUSE, "MOUSE", {
@@ -221,7 +237,8 @@ public class Tail extends SaveableBodyPart {
 	public static const GOAT: int = 21;
 	EnumValue.add(Types, GOAT, "GOAT", {
 		name:"goat",
-		appearanceDesc: "A stubby goat tail sprouts from just above your butt."
+		appearanceDesc: "A stubby goat tail sprouts from just above your butt.",
+		fur: true
 	});
 	public static const RHINO: int = 22;
 	EnumValue.add(Types, RHINO, "RHINO", {
@@ -236,14 +253,16 @@ public class Tail extends SaveableBodyPart {
 	public static const DEER: int = 24;
 	EnumValue.add(Types, DEER, "DEER", {
 		name:"deer",
-		appearanceDesc: "A stubby deer tail sprouts from just above your butt."
+		appearanceDesc: "A stubby deer tail sprouts from just above your butt.",
+		fur: true
 	});
 	public static const SALAMANDER: int = 25;
 	EnumValue.add(Types, SALAMANDER, "SALAMANDER", {
 		name:"salamander",
 		appearanceDesc: "A tapered tail covered in red scales hangs down from just above your [butt]. It sways back and forth, improving your balance, and you can set it ablaze in red-hot fire whenever you want.",
 		tailSlam: true,
-		isLong: true
+		isLong: true,
+		scales: true
 	});
 	public static const KITSHOO: int = 26;
 	EnumValue.add(Types, KITSHOO, "KITSHOO", {
@@ -253,7 +272,8 @@ public class Tail extends SaveableBodyPart {
 	public static const MANTIS_ABDOMEN: int = 27;
 	EnumValue.add(Types, MANTIS_ABDOMEN, "MANTIS_ABDOMEN", {
 		name:"mantis abdomen",
-		appearanceDesc: "A large insectile mantis abdomen dangles from just above your backside, bobbing with its own weight as you shift. It is covered in hard [chitin color] chitinous material."
+		appearanceDesc: "A large insectile mantis abdomen dangles from just above your backside, bobbing with its own weight as you shift. It is covered in hard [chitin color] chitinous material.",
+		chitin: true
 	});
 	public static const MANTICORE_PUSSYTAIL: int = 28;
 	EnumValue.add(Types, MANTICORE_PUSSYTAIL, "MANTICORE_PUSSYTAIL", {
@@ -265,7 +285,8 @@ public class Tail extends SaveableBodyPart {
 	EnumValue.add(Types, WOLF, "WOLF", {
 		name:"wolf",
 		appearanceDesc: "A bushy [fur color] wolf tail sprouts just above your [butt], wagging to and fro whenever you are happy.",
-		isLong: true
+		isLong: true,
+		fur: true
 	});
 	public static const GARGOYLE: int = 30;
 	EnumValue.add(Types, GARGOYLE, "GARGOYLE", {
@@ -289,12 +310,14 @@ public class Tail extends SaveableBodyPart {
 	EnumValue.add(Types, RAIJU, "RAIJU", {
 		name:"raiju",
 		appearanceDesc: "Your silky tail extends out from just above your [butt]. Its fur is lovely to the touch and glows with lightning at the tip.",
-		energy: true
+		energy: true,
+		fur: true
 	});
 	public static const RED_PANDA: int = 34;
 	EnumValue.add(Types, RED_PANDA, "RED_PANDA", {
 		name:"red-panda",
-		appearanceDesc: "Sprouting from your [ass] is a long, bushy tail adorned by a beautiful pattern of [fur color] rings. It waves playfully as you walk, giving your step a mesmerizing touch."
+		appearanceDesc: "Sprouting from your [ass] is a long, bushy tail adorned by a beautiful pattern of [fur color] rings. It waves playfully as you walk, giving your step a mesmerizing touch.",
+		fur: true
 	});
 	public static const GARGOYLE_2: int = 35;
 	EnumValue.add(Types, GARGOYLE_2, "GARGOYLE_2", {
@@ -305,34 +328,40 @@ public class Tail extends SaveableBodyPart {
 	public static const AVIAN: int = 36;
 	EnumValue.add(Types, AVIAN, "AVIAN", {
 		name:"avian",
-		appearanceDesc: "A fan-like tail made of [feather color] feathers rests above your [butt], twitching instinctively to help guide you if you were to take flight."
+		appearanceDesc: "A fan-like tail made of [feather color] feathers rests above your [butt], twitching instinctively to help guide you if you were to take flight.",
+		feathers: true
 	});
 	public static const GRIFFIN: int = 37;
 	EnumValue.add(Types, GRIFFIN, "GRIFFIN", {
 		name:"griffin",
-		appearanceDesc: "From your backside hangs a long tail, leonine in shape and covered mostly by a layer of [fur color2] fur, featuring a tip made of a tuft of [fur color] feathers. It moves sinuously as you walk."
+		appearanceDesc: "From your backside hangs a long tail, leonine in shape and covered mostly by a layer of [fur color2] fur, featuring a tip made of a tuft of [fur color] feathers. It moves sinuously as you walk.",
+		fur: true
 	});
 	public static const LION: int = 38;
 	EnumValue.add(Types, LION, "LION", {
 		name:"lion",
 		appearanceDesc: "A soft [fur color] lion tail sprouts just above your [butt], curling and twisting with every step to maintain perfect balance. It ends in a small puffy hair.",
-		isLong: true
+		isLong: true,
+		fur: true
 	});
 	public static const BURNING: int = 39;
 	EnumValue.add(Types, BURNING, "BURNING", {
 		name:"burning",
 		appearanceDesc: "A blazing cat tail pokes out from your [butt]. It has a tendency to light things on fire if you are not careful, but at least it assists with your balance.",
-		isLong: true
+		isLong: true,
+		fur: true
 	});
 	public static const NEKOMATA_FORKED_1_3: int = 40;
 	EnumValue.add(Types, NEKOMATA_FORKED_1_3, "NEKOMATA_FORKED_1_3", {
 		name:"forked cat",
-		appearanceDesc: "A soft [fur color] cat-tail, forked on its one-third length, sprouts just above your [butt], curling and twisting with every step to maintain perfect balance."
+		appearanceDesc: "A soft [fur color] cat-tail, forked on its one-third length, sprouts just above your [butt], curling and twisting with every step to maintain perfect balance.",
+		fur: true
 	});
 	public static const NEKOMATA_FORKED_2_3: int = 41;
 	EnumValue.add(Types, NEKOMATA_FORKED_2_3, "NEKOMATA_FORKED_2_3", {
 		name:"forked cat",
-		appearanceDesc: "A soft [fur color] cat-tail, forked on its two-thirds length, sprouts just above your [butt], curling and twisting with every step to maintain perfect balance."
+		appearanceDesc: "A soft [fur color] cat-tail, forked on its two-thirds length, sprouts just above your [butt], curling and twisting with every step to maintain perfect balance.",
+		fur: true
 	});
 	public static const CAVE_WYRM: int = 42;
 	EnumValue.add(Types, CAVE_WYRM, "CAVE_WYRM", {
@@ -350,12 +379,14 @@ public class Tail extends SaveableBodyPart {
 	EnumValue.add(Types, THUNDERBIRD, "THUNDERBIRD", {
 		name:"thunderbird",
 		appearanceDesc: "From just above your [butt] extends a long thin sinuous tail, tipped with feathers shaped like a lightning bolt.",
-		energy: true
+		energy: true,
+		feathers: true
 	});
 	public static const BEAR: int = 45;
 	EnumValue.add(Types, BEAR, "BEAR", {
 		name:"bear",
-		appearanceDesc: "A cute, furry ursan tail sits up from your backside."
+		appearanceDesc: "A cute, furry ursan tail sits up from your backside.",
+		fur: true
 	});
 	public static const TWINKASHA: int = 46;
 	EnumValue.add(Types, TWINKASHA, "TWINKASHA", {
@@ -374,12 +405,14 @@ public class Tail extends SaveableBodyPart {
 	public static const WEASEL: int = 48;
 	EnumValue.add(Types, WEASEL, "WEASEL", {
 		name:"weasel",
-		appearanceDesc: "Your short, silky weasel tail extends out from just above your [butt]. Its fur is lovely to the touch."
+		appearanceDesc: "Your short, silky weasel tail extends out from just above your [butt]. Its fur is lovely to the touch.",
+		fur: true
 	});
 	public static const SQUIRREL: int = 49;
 	EnumValue.add(Types, SQUIRREL, "SQUIRREL", {
 		name:"squirrel",
-		appearanceDesc: "From your back sprouts a furry, striped squirrel tail that curves upwards."
+		appearanceDesc: "From your back sprouts a furry, striped squirrel tail that curves upwards.",
+		fur: true
 	});
 	public static const MONKEY: int = 50;
 	EnumValue.add(Types, MONKEY, "MONKEY", {

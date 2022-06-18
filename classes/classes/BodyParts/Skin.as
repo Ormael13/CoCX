@@ -464,43 +464,43 @@ public class Skin extends SaveableBodyPart {
 	public function hasPartialCoatOfType(coat_type:int):Boolean {
 		return coverage == COVERAGE_LOW && coat.type == coat_type;
 	}
-	public function hasFur():Boolean {
+	public function isFurCovered():Boolean {
 		return hasCoatOfType(FUR);
 	}
 	public function get fur():SkinLayer {
-		return hasFur() ? coat : null;
+		return isFurCovered() ? coat : null;
 	}
-	public function hasChitin():Boolean {
+	public function isChitinCovered():Boolean {
 		return hasCoatOfType(CHITIN);
 	}
-	public function hasScales():Boolean {
+	public function isScaleCovered():Boolean {
 		return hasCoatOfType(SCALES, AQUA_SCALES, DRAGON_SCALES);
 	}
-	public function hasReptileScales():Boolean {
+	public function isReptileScaleCovered():Boolean {
 		return hasCoatOfType(SCALES, DRAGON_SCALES);
 	}
-	public function hasDragonScales():Boolean {
+	public function isDragonScaleCovered():Boolean {
 		return hasCoatOfType(DRAGON_SCALES);
 	}
-	public function hasLizardScales():Boolean {
+	public function isLizardScaleCovered():Boolean {
 		return hasCoatOfType(SCALES);
 	}
-	public function hasNonLizardScales():Boolean {
-		return hasScales() && !hasLizardScales();
+	public function isNonLizardScaleCovered():Boolean {
+		return isScaleCovered() && !isLizardScaleCovered();
 	}
 	public function hasBark():Boolean {
 		return coat.isAny(BARK);
 	}
-	public function hasGooSkin():Boolean {
+	public function isGooSkin():Boolean {
 		return base.isAny(GOO);
 	}
 	public function hasRubberSkin():Boolean {
 		return base.isAny(AQUA_RUBBER_LIKE);
 	}
-	public function hasGhostSkin():Boolean {
+	public function isGhostSkin():Boolean {
 		return base.isAny(TRANSPARENT);
 	}
-	public function hasFeather():Boolean {
+	public function isFeatherCovered():Boolean {
 		return coat.isAny(FEATHER);
 	}
 	public function hasMostlyPlainSkin():Boolean {

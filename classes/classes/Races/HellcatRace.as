@@ -24,7 +24,7 @@ public class HellcatRace extends Race{
 				.legType(LowerBody.CAT, +1)
 				.skinCoatType(Skin.FUR, +1)
 				.furColor("midnight black", +1)
-				.skinMaterialColor("ashen", +1)
+				.skinColor("ashen", +1)
 				.hasPerk(PerkLib.Flexibility, +1)
 				.customRequirement("","not other magical feline race",
 						function (body:BodyData):Boolean {

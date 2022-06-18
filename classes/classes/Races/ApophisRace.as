@@ -23,7 +23,7 @@ public class ApophisRace extends Race {
 				.isNaga(+3, -1000)
 				.armType(Arms.HUMAN, +1)
 				.hairColor(ANY(ApophisHairColors), +1)
-				.skinMaterialColor("light purple", +1)
+				.skinColor("light purple", +1)
 				.skinCoatType(Skin.SCALES, +1)
 				.scaleColor(ANY(ApophisScaleColors), +1)
 				.tongueType(Tongue.SNAKE, +1)

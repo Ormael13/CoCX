@@ -26,7 +26,7 @@ public class ScyllaRace extends Race {
 						function (body:BodyData): Boolean {
 							return body.player.hasPlainSkinOnly() && body.skinBaseAdj == "slippery"
 						}, +1)
-				.skinMaterialColor("ghostly pale", +1)
+				.skinColor("ghostly pale", +1)
 				.rearType(RearBody.KRAKEN, +1)
 				.height(GREATER_THAN(96), +1)
 				.vaginaType(VaginaClass.SCYLLA, +1)

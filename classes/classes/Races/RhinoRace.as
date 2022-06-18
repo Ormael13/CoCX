@@ -18,7 +18,7 @@ public class RhinoRace extends Race {
 				.faceType(Face.RHINO, +1)
 				.hornType(Horns.RHINO, +1);
 		addScoresAfter(2)
-				.skinMaterialColor("gray", +1)
+				.skinColor("gray", +1)
 				.hasCockOfType(CockTypesEnum.RHINO, +1);
 		
 		buildTier(4, "rhino")
