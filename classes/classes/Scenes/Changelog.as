@@ -185,6 +185,12 @@ public class Changelog extends BaseContent
 			outputText("-Daoist: Warrior Stage perk effects changed to: +60% soulskill/m.soulskill power, -10% soulskills cost, +100 max SF at S.Apprentice, S.Personage, S.Warrior stages, +5% to max, +50% base soulforce recovery multiplier\n");
 			outputText("-Daoist: Elder Stage perk effects changed to: +100% soulskill/m.soulskill power, -10% soulskills cost, +200 max SF at S.Apprentice, S.Personage, S.Warrior stages, +10% to max, +100% base soulforce recovery multiplier\n");
 			outputText("-Daoist: Overlord Stage perk effects changed to: +150% soulskill/m.soulskill power, -10% soulskills cost, +300 max SF at S.Apprentice, S.Personage, S.Warrior stages, +10% to max, +00% base soulforce recovery multiplier\n");
+			outputText("-Machine Greatsword, Ripper 1.0, Ripper 2.0 gained classification as Exotic type weapons for mastery purposes.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -265,7 +271,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -294,8 +302,18 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
 			outputText("\n");cel na 0.8(/9): dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
-			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
-			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
+			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
