@@ -1089,6 +1089,12 @@ public class Creature extends Utils
 		public function set skinMaterialColor(value:String):void {
 			skin.base.color = value;
 		}
+		public function get skinMaterialColor1():String {
+			return skin.base.color;
+		}
+		public function set skinMaterialColor1(value:String):void {
+			skin.base.color = value;
+		}
 		public function get skinMaterialColor2():String {
 			return skin.base.color2;
 		}
@@ -1101,6 +1107,12 @@ public class Creature extends Utils
 		public function set furColor(value:String):void {
 			skin.coat.color = value;
 		}
+		public function get furColor1():String {
+			return skin.coat.color;
+		}
+		public function set furColor1(value:String):void {
+			skin.coat.color = value;
+		}
 		public function get furColor2():String {
 			return skin.coat.color2;
 		}
@@ -1111,6 +1123,12 @@ public class Creature extends Utils
 			return skin.coat.color;
 		}
 		public function set scaleColor(value:String):void {
+			skin.coat.color = value;
+		}
+		public function get scaleColor1():String {
+			return skin.coat.color;
+		}
+		public function set scaleColor1(value:String):void {
 			skin.coat.color = value;
 		}
 		public function get scaleColor2():String {
