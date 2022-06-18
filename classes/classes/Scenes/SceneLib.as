@@ -267,6 +267,8 @@ public class SceneLib {
 
     public static var telAdre:TelAdre = new TelAdre();
 
+    public static var ruinedTown:RuinedTownRebuilt = new RuinedTownRebuilt();
+
     public static var dungeons:DungeonEngine = new DungeonEngine();
 
     public static var ingnam:Ingnam = new Ingnam();

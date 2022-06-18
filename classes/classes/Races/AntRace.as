@@ -2,11 +2,12 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.IMutations.IMutationsLib;
+import classes.PerkLib;
 import classes.Race;
-import classes.Races;
 
 public class AntRace extends Race {
-    public static const AntBadEar:/*String*/Array = ["Avian"];
+    public static const AntChitinColors:/*String*/Array = ["brown", "black"];
     	
 	public function AntRace(id:int) {
 		super("Ant", id);
@@ -25,8 +26,8 @@ public class AntRace extends Race {
                 .earType(ANY(Ears.HUMAN, Ears.HoleEars), 0, -1)//
 				.skinCoatType(Skin.CHITIN, +1)
 				.armType(Arms.ANT, +1)
-				.legType(ANY(lowerBody.SPIDER, lowerBody.MANTIS), +1)
-                .legType(lowerBody.ANT, +2)
+				.legType(ANY(LowerBody.CHITINOUS_SPIDER_LEGS, LowerBody.MANTIS), +1)
+                .legType(LowerBody.ANT, +2)
 				.hasCockOfType(CockTypesEnum.INSECT, +1)
 				.wingType(ANY(Wings.ANT_SMALL, Wings.BEE_SMALL, Wings.BEE_LARGE), +1)
 				.wingType(Wings.ANT_LARGE, +2)
@@ -38,7 +39,7 @@ public class AntRace extends Race {
 		
 		buildTier(8, "ant-morph")
 				.buffs({
-					"str.mult": +1.00
+					"str.mult": +1.00,
                     "tou.mult": +0.70,
 					"int.mult": -0.70,
                     "wis.mult": -0.60

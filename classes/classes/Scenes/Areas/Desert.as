@@ -171,7 +171,7 @@ use namespace CoC;
 					}, {
 						name  : "desertloot",
 						chance: 0.3,
-						call  : finddesertloot
+						call  : findDesertLoot
 					});
 			story = ZoneStmt.wrap(_desertEncounter,game.rootStory).bind(game.context);
 		}
