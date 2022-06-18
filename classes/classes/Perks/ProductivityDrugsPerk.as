@@ -8,6 +8,7 @@ package classes.Perks
 
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			return "Libido increased by " + int(params.value1) + "%, minimum corruption increased by 10, cum production (if applicable) increased by "
 			+ int(params.value3) + "mL, and milk production (if applicable) increased by " + int(params.value3) + "mL.";
 		}

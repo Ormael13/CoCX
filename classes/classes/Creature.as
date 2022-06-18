@@ -1000,6 +1000,19 @@ public class Creature extends Utils
 			return maxFatigue() - fatigue;
 		}
 
+		/**
+		 * @return 0: did not avoid; 1-3: avoid with varying difference between
+		 * speeds (1: narrowly avoid, 3: deftly avoid)
+		 */
+		public function speedDodge(creature:Creature):int{
+			var diff:Number = spe - creature.spe;
+			var rnd:int = int(Math.random() * ((diff / 4) + 80));
+			if (rnd<=80) return 0;
+			else if (diff<8) return 1;
+			else if (diff<20) return 2;
+			else return 3;
+		}
+
 		/*
 
 		[    A P P E A R A N C E    ]

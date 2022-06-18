@@ -2,7 +2,7 @@
  * ...
  * @author Zevos
  */
-package classes.Perks 
+package classes.Perks
 {
 	import classes.PerkClass;
 	import classes.PerkType;
@@ -12,16 +12,17 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			return "Increases your spell effect modifier by " + params.value1 * 100 + "%.";
 		}
 
-		public function SagesKnowledgePerk() 
+		public function SagesKnowledgePerk()
 		{
 			super("Sage's Knowledge", "Sage's Knowledge",
 					"Your tome grants you additional focus, increasing your spells power.");
 		}
 		
-		override public function keepOnAscension(respec:Boolean = false):Boolean 
+		override public function keepOnAscension(respec:Boolean = false):Boolean
 		{
 			return true;
 		}

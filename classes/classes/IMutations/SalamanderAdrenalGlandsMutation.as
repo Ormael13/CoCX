@@ -90,8 +90,7 @@ public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
         }
 
         public function SalamanderAdrenalGlandsMutation() {
-            super("Salamander Adrenal Glands IM", "Salamander Adrenal Glands", ".");
-            maxLvl = 3;
+            super("Salamander Adrenal Glands IM", "Salamander Adrenal Glands", SLOT_ADRENALS, 3);
         }
 
     }

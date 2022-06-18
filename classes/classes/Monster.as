@@ -590,27 +590,31 @@ import flash.utils.getQualifiedClassName;
 				if (this.level >= 51) temp += 150;
 			}
 			if (hasPerk(PerkLib.InsightfulResourcesI)) temp += Math.round((this.wis*5) * (1 + newGamePlusMod()));
+			var multimax:Number = 1;
 			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) temp += 40;
-				if (hasPerk(PerkLib.SoulPersonage)) temp += 40;
-				if (hasPerk(PerkLib.SoulWarrior)) temp += 40;
+				if (hasPerk(PerkLib.SoulApprentice)) temp += 50;
+				if (hasPerk(PerkLib.SoulPersonage)) temp += 50;
+				if (hasPerk(PerkLib.SoulWarrior)) temp += 50;
+				multimax += 0.05;
 			}
 			if (hasPerk(PerkLib.DaoistWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) temp += 60;
-				if (hasPerk(PerkLib.SoulScholar)) temp += 60;
-				if (hasPerk(PerkLib.SoulElder)) temp += 60;
+				if (hasPerk(PerkLib.SoulSprite)) temp += 100;
+				if (hasPerk(PerkLib.SoulScholar)) temp += 100;
+				if (hasPerk(PerkLib.SoulElder)) temp += 100;
+				multimax += 0.05;
 			}
 			if (hasPerk(PerkLib.DaoistElderStage)) {
-				if (hasPerk(PerkLib.SoulExalt)) temp += 100;
-				if (hasPerk(PerkLib.SoulOverlord)) temp += 100;
-				if (hasPerk(PerkLib.SoulTyrant)) temp += 100;
+				if (hasPerk(PerkLib.SoulExalt)) temp += 200;
+				if (hasPerk(PerkLib.SoulOverlord)) temp += 200;
+				if (hasPerk(PerkLib.SoulTyrant)) temp += 200;
+				multimax += 0.1;
 			}
 			if (hasPerk(PerkLib.DaoistOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) temp += 150;
-				if (hasPerk(PerkLib.SoulEmperor)) temp += 150;
-				if (hasPerk(PerkLib.SoulAncestor)) temp += 150;
+				if (hasPerk(PerkLib.SoulKing)) temp += 300;
+				if (hasPerk(PerkLib.SoulEmperor)) temp += 300;
+				if (hasPerk(PerkLib.SoulAncestor)) temp += 300;
+				multimax += 0.1;
 			}
-			var multimax:Number = 1;
 			if (hasPerk(PerkLib.DeityJobMunchkin)) multimax += 0.1;
 			if (hasPerk(PerkLib.LimitBreakerSoul1stStage)) multimax += 0.05;
 			if (hasPerk(PerkLib.LimitBreakerSoul2ndStage)) multimax += 0.1;
@@ -1560,9 +1564,6 @@ import flash.utils.getQualifiedClassName;
 		public function checkMonster():Boolean
 		{
 			_checkCalled = true;
-			if(this.wings.type != Wings.NONE && this.wings.desc == "non-existant"){
-				this.wings.desc = Appearance.DEFAULT_WING_DESCS[this.wings.type]
-			}
 			checkError = validate();
 			if (checkError.length>0) CoC_Settings.error("Monster not initialized:"+checkError);
 			return checkError.length == 0;
@@ -1678,9 +1679,9 @@ import flash.utils.getQualifiedClassName;
 			}
 			if (damage > 0) {
 				if (flags[kFLAGS.ENEMY_CRITICAL] > 0) outputText("<b>Critical hit! </b>");
-				outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+				outputText("<b>([font-damage]" + damage + "</font>)</b>");
 			}
-			else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
+			else outputText("<b>([font-miss]" + damage + "</font>)</b>");
 		}
 
 		/**
@@ -2309,7 +2310,7 @@ import flash.utils.getQualifiedClassName;
 		protected function applyTease(lustDelta:Number):void{
 			lust += lustDelta;
 			lustDelta = Math.round(lustDelta * 10)/10;
-			outputText(" <b>(<font color=\"#ff00ff\">" + lustDelta + "</font>)</b>");
+			outputText(" <b>([font-lust]" + lustDelta + "</font>)</b>");
 		}
 
 		public function generateDebugDescription():String {
@@ -2497,13 +2498,13 @@ import flash.utils.getQualifiedClassName;
 				if (temp2 > 0) {
 					temp2 = Math.round(temp2);
 					if (this is ChiChi && (flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2 || hasStatusEffect(StatusEffects.MonsterRegen))) {
-						outputText("To your surprise, Chi Chi’s wounds start closing! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
+						outputText("To your surprise, Chi Chi’s wounds start closing! <b>([font-heal]+" + temp2 + "</font>)</b>.\n\n");
 					}
 					else {
 						outputText("Due to natural regeneration " + short + " recover");
 						if (plural) outputText("s");
 						else outputText("ed");
-						outputText(" some HP! <b>(<font color=\"#008000\">+" + temp2 + "</font>)</b>.\n\n");
+						outputText(" some HP! <b>([font-heal]+" + temp2 + "</font>)</b>.\n\n");
 					}
 					addHP(temp2);
 				}
@@ -2525,7 +2526,10 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.SoulKing)) soulforceRecovery += 5;
 				if (hasPerk(PerkLib.SoulEmperor)) soulforceRecovery += 5;
 				if (hasPerk(PerkLib.SoulAncestor)) soulforceRecovery += 5;
-				if (hasPerk(PerkLib.DaoistCultivator)) soulforceRecoveryMulti += 0.5;
+				if (hasPerk(PerkLib.DaoistApprenticeStage)) soulforceRecoveryMulti += 0.5;
+				if (hasPerk(PerkLib.DaoistWarriorStage)) soulforceRecoveryMulti += 0.5;
+				if (hasPerk(PerkLib.DaoistElderStage)) soulforceRecoveryMulti += 1;
+				if (hasPerk(PerkLib.DaoistOverlordStage)) soulforceRecoveryMulti += 1;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 1) soulforceRecovery += 4;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 2) soulforceRecovery += 4;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceRecovery += 4;
@@ -2762,8 +2766,8 @@ import flash.utils.getQualifiedClassName;
 					procentvalue = Math.round(procentvalue);
 					var store:Number = maxHP() * (procentvalue) / 100;
 					store = SceneLib.combat.doDamage(store);
-					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
-					else outputText("[Themonster] bleeds profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n");
+					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your weapon left behind. <b>([font-damage]" + store + "</font>)</b>\n\n");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds your weapon left behind. <b>([font-damage]" + store + "</font>)</b>\n\n");
 				}
 			}
 			if(hasStatusEffect(StatusEffects.SharkBiteBleed)) {
@@ -2789,8 +2793,8 @@ import flash.utils.getQualifiedClassName;
 					store3 = Math.round(store3);
 					if (statusEffectv2(StatusEffects.SharkBiteBleed) > 0) store3 *= statusEffectv2(StatusEffects.SharkBiteBleed);
 					store3 = SceneLib.combat.doDamage(store3);
-					if(plural) outputText("[Themonster] bleed profusely from the jagged wounds your bite left behind. <b>(<font color=\"#800000\">" + store3 + "</font>)</b>\n\n");
-					else outputText("[Themonster] bleeds profusely from the jagged wounds your bite left behind. <b>(<font color=\"#800000\">" + store3 + "</font>)</b>\n\n");
+					if(plural) outputText("[Themonster] bleed profusely from the jagged wounds your bite left behind. <b>([font-damage]" + store3 + "</font>)</b>\n\n");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds your bite left behind. <b>([font-damage]" + store3 + "</font>)</b>\n\n");
 				}
 			}
 			if(hasStatusEffect(StatusEffects.CouatlHurricane)) {
@@ -2802,8 +2806,8 @@ import flash.utils.getQualifiedClassName;
 				store14 += statusEffectv1(StatusEffects.CouatlHurricane); //Stacks on itself growing ever stronger
 				store14 += maxHP()*0.02;
 				store14 = SceneLib.combat.doDamage(store14);
-				if(plural) outputText("[Themonster] is violently struck by the ever intensifying windstorm. <b>(<font color=\"#800000\">" + store14 + "</font>)</b>\n\n");
-				else outputText("[Themonster] are violently struck by the ever intensifying windstorm. <b>(<font color=\"#800000\">" + store14 + "</font>)</b>\n\n");
+				if(plural) outputText("[Themonster] is violently struck by the ever intensifying windstorm. <b>([font-damage]" + store14 + "</font>)</b>\n\n");
+				else outputText("[Themonster] are violently struck by the ever intensifying windstorm. <b>([font-damage]" + store14 + "</font>)</b>\n\n");
 				temp = rand(4);
 				if(temp == 3) createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0); outputText("<b>A random flying object caught in the hurricane rams into your opponent, stunning it!</b>\n\n");
 			}
@@ -2818,8 +2822,8 @@ import flash.utils.getQualifiedClassName;
 				store13 += statusEffectv1(StatusEffects.KamaitachiBleed); //Kamaitachi bleed stacks on itself growing ever stronger
 				store13 += maxHP()*0.02;
 				store13 = SceneLib.combat.doDamage(store13);
-				if(plural) outputText("[Themonster] bleed profusely from the deep wounds your scythes left behind. <b>(<font color=\"#800000\">" + store13 + "</font>)</b>\n\n");
-				else outputText("[Themonster] bleeds profusely from the deep wounds your scythes left behind. <b>(<font color=\"#800000\">" + store13 + "</font>)</b>\n\n");
+				if(plural) outputText("[Themonster] bleed profusely from the deep wounds your scythes left behind. <b>([font-damage]" + store13 + "</font>)</b>\n\n");
+				else outputText("[Themonster] bleeds profusely from the deep wounds your scythes left behind. <b>([font-damage]" + store13 + "</font>)</b>\n\n");
 			}
 			if(hasStatusEffect(StatusEffects.GoreBleed)) {
 				//Countdown to heal
@@ -2850,13 +2854,13 @@ import flash.utils.getQualifiedClassName;
 						outputText("[Themonster] bleed profusely from the jagged ");
 						if (player.horns.type == Horns.COW_MINOTAUR) outputText("wounds your horns");
 						else outputText("wound your horns");
-						outputText(" left behind. <b>(<font color=\"#800000\">" + store5 + "</font>)</b>\n\n");
+						outputText(" left behind. <b>([font-damage]" + store5 + "</font>)</b>\n\n");
 					}
 					else {
 						outputText("[Themonster] bleeds profusely from the jagged ");
 						if (player.horns.type == Horns.COW_MINOTAUR) outputText("wounds your horns");
 						else outputText("wound your horns");
-						outputText(" left behind. <b>(<font color=\"#800000\">" + store5 + "</font>)</b>\n\n");
+						outputText(" left behind. <b>([font-damage]" + store5 + "</font>)</b>\n\n");
 					}
 				}
 			}
@@ -2889,8 +2893,8 @@ import flash.utils.getQualifiedClassName;
 					if (statusEffectv1(StatusEffects.HemorrhageShield) > 0) hemorrhage += maxHP() * statusEffectv2(StatusEffects.HemorrhageShield);
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage *= 1.2;
 					hemorrhage = SceneLib.combat.doDamage(hemorrhage);
-					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your attack left behind. <b>(<font color=\"#800000\">" + hemorrhage + "</font>)</b>\n\n");
-					else outputText("[Themonster] bleeds profusely from the jagged wounds your attack left behind. <b>(<font color=\"#800000\">" + hemorrhage + "</font>)</b>\n\n");
+					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your attack left behind. <b>([font-damage]" + hemorrhage + "</font>)</b>\n\n");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds your attack left behind. <b>([font-damage]" + hemorrhage + "</font>)</b>\n\n");
 				}
 			}
 			if(hasStatusEffect(StatusEffects.Hemorrhage2)) {
@@ -2908,8 +2912,8 @@ import flash.utils.getQualifiedClassName;
 					hemorrhage2 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage2);
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage2 *= 1.2;
 					hemorrhage2 = SceneLib.combat.doDamage(hemorrhage2);
-					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your companion attack left behind. <b>(<font color=\"#800000\">" + hemorrhage2 + "</font>)</b>\n\n");
-					else outputText("[Themonster] bleeds profusely from the jagged wounds your companion attack left behind. <b>(<font color=\"#800000\">" + hemorrhage2 + "</font>)</b>\n\n");
+					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your companion attack left behind. <b>([font-damage]" + hemorrhage2 + "</font>)</b>\n\n");
+					else outputText("[Themonster] bleeds profusely from the jagged wounds your companion attack left behind. <b>([font-damage]" + hemorrhage2 + "</font>)</b>\n\n");
 				}
 			}
 			if (hasStatusEffect(StatusEffects.Bloodlust)) {

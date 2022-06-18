@@ -77,8 +77,7 @@ public class DraconicLungMutation extends IMutationPerkType
         }
 
         public function DraconicLungMutation() {
-            super("Draconic Lung IM", "Draconic Lung", ".");
-            maxLvl = 3;
+            super("Draconic Lung IM", "Draconic Lung", SLOT_LUNGS, 3);
         }
 
     }

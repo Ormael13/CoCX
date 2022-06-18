@@ -11,6 +11,7 @@ import classes.BodyParts.Wings;
 import classes.CoC_Settings;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
+import classes.Items.Weapons.MoonlightGreatsword;
 import classes.PerkLib;
 import classes.Races;
 import classes.Scenes.Areas.Beach.CancerAttack;
@@ -18,13 +19,8 @@ import classes.Scenes.Areas.Desert.SandTrap;
 import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 import classes.Scenes.Areas.HighMountains.Izumi;
-import classes.Scenes.Dungeons.D3.DriderIncubus;
-import classes.Scenes.Dungeons.D3.Lethice;
-import classes.Scenes.Dungeons.D3.MinotaurKing;
-import classes.Scenes.Dungeons.D3.SuccubusGardener;
-import classes.Scenes.NPCs.Ceraph;
-import classes.Scenes.NPCs.Tyrantia;
-import classes.Scenes.NPCs.Yamata;
+import classes.Scenes.Dungeons.D3.*;
+import classes.Scenes.NPCs.*;
 import classes.Scenes.SceneLib;
 import classes.StatusEffectClass;
 import classes.StatusEffects;
@@ -195,7 +191,7 @@ public class CombatUI extends BaseCombatContent {
 			else btnRanged.disable("Your range weapon is not compatibile to be used with current piloted mech.");
 		}
 		if (player.hasPerk(PerkLib.ElementalBody) && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("Throw", combat.throwElementalAttack, "Attack enemy with range elemental attack.  Damage done is determined by your strength.");
-		if (player.weapon == weapons.MGSWORD && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("MoonWave", combat.throwElementalAttack, "Attack enemy with wave of moonlight.  Damage done is determined by your intelligence and weapon.");
+		if (player.weapon is MoonlightGreatsword && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("MoonWave", combat.throwElementalAttack, "Attack enemy with wave of moonlight.  Damage done is determined by your intelligence and weapon.");
 		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful, as this leaves you open to a counterattack when in combat.");
 
 		// Submenus

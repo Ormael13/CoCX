@@ -88,8 +88,7 @@ public class SharkOlfactorySystemMutation extends IMutationPerkType
         }
 
         public function SharkOlfactorySystemMutation() {
-            super("Shark Olfactory System IM", "Shark Olfactory System", ".");
-            maxLvl = 3;
+            super("Shark Olfactory System IM", "Shark Olfactory System", SLOT_NERVSYS, 3);
         }
 
     }
