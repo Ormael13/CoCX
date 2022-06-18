@@ -2162,6 +2162,8 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(5, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
 		if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(6, "Fill bottle", fillUpPillBottle01).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
 		else addButtonDisabled(6, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
+		if (player.hasItem(consumables.HG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(7, "Fill bottle", fillUpPillBottle02).hint("Fill up one of your pill bottles with high-grade soulforce recovery pills.");
+		else addButtonDisabled(7, "Fill bottle", "You need one empty pill bottle and ten high-grade soulforce recovery pills.");
 		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", VisitClone).hint("Check on your clone.");
 		else addButtonDisabled(10, "Clone", "Would you kindly go face F class Heaven Tribulation first?");
 		if (player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 200) addButton(12, "E.Core", convertingEnergyCoreIntoFlagValue).hint("Convert Energy Core item into flag value.");
@@ -2761,6 +2763,13 @@ public class Camp extends NPCAwareContent{
 		player.destroyItems(useables.E_P_BOT, 1);
 		player.destroyItems(consumables.MG_SFRP, 10);
 		inventory.takeItem(consumables.MGSFRPB, campMiscActions);
+	}
+	private function fillUpPillBottle02():void {
+		clearOutput();
+		outputText("You pick up one of your empty pills bottle and starts to put in some of your loose high-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
+		player.destroyItems(useables.E_P_BOT, 1);
+		player.destroyItems(consumables.HG_SFRP, 10);
+		inventory.takeItem(consumables.HGSFRPB, campMiscActions);
 	}
 
 	private function questItemsBag():void {
