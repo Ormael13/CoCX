@@ -997,5 +997,133 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 			}
 			doNext(BoardkeeperYangMain);
 		}
+
+		public function questItemsBag():void {
+			clearOutput();
+			outputText("Would you like to put some quest items into the bag, and if so, with ones?\n\n");
+			if (Slot01Cap > 0) outputText("<b>Imp Skulls:</b> "+Slot01+" / "+Slot01Cap+"\n");
+			if (Slot02Cap > 0) outputText("<b>Feral Imp Skulls:</b> "+Slot02+" / "+Slot02Cap+"\n");
+			if (Slot03Cap > 0) outputText("<b>Minotaur Horns:</b> "+Slot03+" / "+Slot03Cap+"\n");
+			if (Slot04Cap > 0) outputText("<b>Demon Skulls:</b> "+Slot04+" / "+Slot04Cap+"\n");
+			if (Slot05Cap > 0) outputText("<b>Severed Tentacles:</b> "+Slot05+" / "+Slot05Cap+"\n");
+			menu();
+			if (Slot01 < Slot01Cap) {
+				if (player.hasItem(useables.IMPSKLL, 1)) addButton(0, "ImpSkull", questItemsBagImpSkull1UP);
+				else addButtonDisabled(0, "ImpSkull", "You not have any imp skulls to store.");
+			}
+			else addButtonDisabled(0, "ImpSkull", "You can't store more imp skulls in your bag.");
+			if (Slot01 > 0) addButton(1, "ImpSkull", questItemsBagImpSkull1Down);
+			else addButtonDisabled(1, "ImpSkull", "You not have any imp skulls in your bag.");
+			if (Slot02 < Slot02Cap) {
+				if (player.hasItem(useables.FIMPSKL, 1)) addButton(2, "FeralImpS.", questItemsBagFeralImpSkull1Up);
+				else addButtonDisabled(2, "FeralImpS.", "You not have any feral imp skulls to store.");
+			}
+			else addButtonDisabled(2, "FeralImpS.", "You can't store more feral imp skulls in your bag.");
+			if (Slot02 > 0) addButton(3, "FeralImpS.", questItemsBagFeralImpSkull1Down);
+			else addButtonDisabled(3, "FeralImpS.", "You not have any feral imp skulls in your bag.");
+			if (Slot03 < Slot03Cap) {
+				if (player.hasItem(useables.MINOHOR, 1)) addButton(5, "MinoHorns", questItemsBagMinotaurHorns1Up);
+				else addButtonDisabled(5, "MinoHorns", "You not have any minotaur horns to store.");
+			}
+			else addButtonDisabled(5, "MinoHorns", "You can't store more minotaur horns in your bag.");
+			if (Slot03 > 0) addButton(6, "MinoHorns", questItemsBagMinotaurHorns1Down);
+			else addButtonDisabled(6, "MinoHorns", "You not have any minotaur horns in your bag.");
+			if (Slot04 < Slot04Cap) {
+				if (player.hasItem(useables.DEMSKLL, 1)) addButton(7, "DemonSkull", questItemsBagDemonSkull1Up);
+				else addButtonDisabled(7, "DemonSkull", "You not have any demon skulls to store.");
+			}
+			else addButtonDisabled(7, "DemonSkull", "You can't store more demon skulls in your bag.");
+			if (Slot04 > 0) addButton(8, "DemonSkull", questItemsBagDemonSkull1Down);
+			else addButtonDisabled(8, "DemonSkull", "You not have any demon skulls in your bag.");
+			if (Slot05 < Slot05Cap) {
+				if (player.hasItem(useables.SEVTENT, 1)) addButton(10, "SeveredTent", questItemsBagSeveredTentacle1Up);
+				else addButtonDisabled(10, "SeveredTent", "You not have any severed tentacles to store.");
+			}
+			else addButtonDisabled(10, "SeveredTent", "You can't store more severed tentacles in your bag.");
+			if (Slot05 > 0) addButton(11, "SeveredTent", questItemsBagSeveredTentacle1Down);
+			else addButtonDisabled(11, "SeveredTent", "You not have any severed tentacles in your bag.");
+			addButton(14, "Back", camp.campActions);
+		}
+		private function questItemsBagImpSkull1UP():void {
+			player.destroyItems(useables.IMPSKLL, 1);
+			Slot01 += 1;
+			doNext(questItemsBag);
+		}
+		private function questItemsBagImpSkull1Down():void {
+			outputText("\n");
+			Slot01 -= 1;
+			inventory.takeItem(useables.IMPSKLL, questItemsBag);
+		}
+		private function questItemsBagFeralImpSkull1Up():void {
+			player.destroyItems(useables.FIMPSKL, 1);
+			Slot02 += 1;
+			doNext(questItemsBag);
+		}
+		private function questItemsBagFeralImpSkull1Down():void {
+			outputText("\n");
+			Slot02 -= 1;
+			inventory.takeItem(useables.FIMPSKL, questItemsBag);
+		}
+		private function questItemsBagMinotaurHorns1Up():void {
+			player.destroyItems(useables.MINOHOR, 1);
+			Slot03 += 1;
+			doNext(questItemsBag);
+		}
+		private function questItemsBagMinotaurHorns1Down():void {
+			outputText("\n");
+			Slot03 -= 1;
+			inventory.takeItem(useables.MINOHOR, questItemsBag);
+		}
+		private function questItemsBagDemonSkull1Up():void {
+			player.destroyItems(useables.DEMSKLL, 1);
+			Slot04 += 1;
+			doNext(questItemsBag);
+		}
+		private function questItemsBagDemonSkull1Down():void {
+			outputText("\n");
+			Slot04 -= 1;
+			inventory.takeItem(useables.DEMSKLL, questItemsBag);
+		}
+		private function questItemsBagSeveredTentacle1Up():void {
+			player.destroyItems(useables.SEVTENT, 1);
+			Slot05 += 1;
+			doNext(questItemsBag);
+		}
+		private function questItemsBagSeveredTentacle1Down():void {
+			outputText("\n");
+			Slot05 -= 1;
+			inventory.takeItem(useables.SEVTENT, questItemsBag);
+		}
+
+		public function roomInExistingStack(itype:ItemType):Number {
+			switch (itype) {
+				case useables.IMPSKLL: if (Slot01 < Slot01Cap) return Slot01;
+					break;
+				case useables.FIMPSKL: if (Slot02 < Slot02Cap) return Slot02;
+					break;
+				case useables.MINOHOR: if (Slot03 < Slot03Cap) return Slot03;
+					break;
+				case useables.DEMSKLL: if (Slot04 < Slot04Cap) return Slot04;
+					break;
+				case useables.SEVTENT: if (Slot05 < Slot05Cap) return Slot05;
+					break;
+			}
+			return -1;
+		}
+		public function placeItemInStack(itype:ItemType):Number {
+			switch (itype) {
+				case useables.IMPSKLL: questItemsBagImpSkull1UP();
+					break;
+				case useables.FIMPSKL: questItemsBagFeralImpSkull1Up();
+					break;
+				case useables.MINOHOR: questItemsBagMinotaurHorns1Up();
+					break;
+				case useables.DEMSKLL: questItemsBagDemonSkull1Up();
+					break;
+				case useables.SEVTENT: questItemsBagSeveredTentacle1Up();
+					break;
+			}
+			return -1;
+		}
 	}
 }
