@@ -34,7 +34,8 @@ public class IceSpikeSpell extends AbstractBlackSpell {
 	}
 	
 	override public function calcCooldown():int {
-		return spellBlackCooldown();
+		if (isSwiftcasting) return 0;
+		else return spellBlackCooldown();
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
