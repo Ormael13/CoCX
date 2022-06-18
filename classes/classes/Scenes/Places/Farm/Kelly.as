@@ -1015,7 +1015,7 @@ private function giveKellyEquinum():void {
 	
 	outputText("\n\nAt first, all you observe is a disappointed moan.  Kelly backs up, hooves stamping impatiently as she tries to bring her pussy closer to you, eager for more.  \"<i>What did you put in me, [Master]?  That didn't feel like cum,</i>\"  she dares to ask.  You swat her square across her equine ass, sending her scampering a few feet away, still trailing dripping fem-slime.  She moans immediately, her plump pussy lips shining with a reflective sheen.  Her feminine odor gets slightly stronger as well, though each time you catch a whiff of it, it's a little bit different - less human and somehow more... potent.  Her glossy pink lips begin to bulge, thickening before your eyes.  Her slit lengthens as well, the clit growing bigger and harder than before to match the larger curtains that are her labia.  Bigger and bigger, her vulvae swell, until those plump, soaked outer lips leave you no doubt that they were designed to part for the biggest, fattest erections possible.  Their coloration darkens to purple, then jet black, a sloppy onyx veil just begging for a cock.");
 	flags[kFLAGS.KELLY_CUNT_TYPE] = 1;
-	outputText("\n\n<b>Kelly has now has a soaking-wet horsecunt!</b>");
+	outputText("\n\n<b>Kelly now has a soaking-wet horsecunt!</b>");
 	player.consumeItem(consumables.EQUINUM);
 	menu();
 	addButton(0,"Next",approachKelly);

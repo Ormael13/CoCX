@@ -12,7 +12,7 @@ use namespace CoC;
 
 public class RuinedTownRebuilt extends BaseContent extends NPCAwareContent implements TimeAwareInterface implements SaveableState
 {
-	public static var RebuildStarted:Boolean;
+	public static var RebuildState: int; //0 for uninitiated, 1 for Waiting, 2 for denied, 3 for started
 	public static var ShouldraSeenTown:Boolean;
 	public static var HouseNumber:int; //The more houses, the more the town can grow
 	public static var Housecap:int; //How many houses the town can safely have. Equal to Wallnumber*2, not including the first 20 houses.
@@ -28,15 +28,19 @@ public class RuinedTownRebuilt extends BaseContent extends NPCAwareContent imple
 	public static var ChiChiSeenHere:Boolean;
 	public static var ChiChiLitters:Boolean; //same as above, but Chi Chi. 
 	public static var GrowthRate:int; //how many new mouselets will be born in town each week. 
-	public static var MouseTownPopCap; //House number times...I dunno, 15? 
+	public static var MouseTownPopCap; //Each house adds 15
 	public static var WallNumber; //Determines HouseCap
 	public static var MiceArcherySessions:int;
+	public static var logbuilt:Boolean;
+	public static var AmilyAtWetBitch:Boolean;
+	public static var AmilyAngerCooldown:int;
+
 
 	public function resetState():void {
-RebuildStarted = false;
+RebuildState = 0
 ShouldraSeenTown = false;
 HouseNumber = 0;
-Housecap = 10;
+Housecap = 20;
 YourHouse = false;
 WellBuilt = false;
 ShopBuilt = 0;
@@ -49,14 +53,17 @@ JojoyLitters = 0;
 ChiChiSeenHere = false;
 ChiChiLitters = 0;
 GrowthRate = 1;
-MouseTownPopCap = 60;
+MouseTownPopCap = 70;
 WallNumber = 0;
 MiceArcherySessions = 0;
+logbuilt = false;
+AmilyAtWetBitch = false;
+AmilyAngerCooldown = 0;
 		}
 		
 public function saveToObject():Object {
 			return {
-"RebuildStarted":RebuildStarted,
+"RebuildState":RebuildState,
 "ShouldraSeenTown":ShouldraSeenTown,
 	"HouseNumber":HouseNumber,
 	"Housecap":Housecap,
@@ -75,12 +82,15 @@ public function saveToObject():Object {
 	"MouseTownPopCap":MouseTownPopCap,
 	"WallNumber":WallNumber,
 	"MiceArcherySessions":MiceArcherySessions,
+	"logbuilt":logbuilt,
+	"AmilyAtWetBitch":AmilyAtWetBitch
+	"AmilyAngerCooldown":AmilyAngerCooldown
 	
 			};
 }
 		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 			if (o) {
-			RebuildStarted=o ["RebuildStarted"];
+			RebuildState=o ["RebuildState"];
 			ShouldraSeenTown=o ["ShouldraSeenTown"];
 			HouseNumber=o ["HouseNumber"];
 			Housecap=o ["Housecap"];
@@ -98,6 +108,9 @@ public function saveToObject():Object {
 			MouseTownPopCap=o ["MouseTownPopCap"];
 			WallNumber=o ["WallNumber"];
 			MiceArcherySessions=o ["MiceArcherySessions"];
+			logbuilt=o ["logbuilt"];
+			AmilyAtWetBitch=o ["AmilyAtWetBitch"];
+			AmilyAngerCooldown=o ["AmilyAngerCooldown"]
 			} else {
 				// loading from old save
 				resetState();
@@ -139,7 +152,7 @@ public function EnterVillage():void {
 		outputText("A single wolfman, out of place among the mice, sits on a makeshift chair outside the wall. He nods once at you, but makes no motion to leave his chair. Your kids on watch seem to be used to him, but they still watch him out of the corners of their eyes.  \n\n");	
 		}
 		outputText("Your oldest mouse-children seem to be everywhere. Some stand guard, and as you walk by, a few break from their watch. Some are content to nod respectfully at you, while a few others seem to take more after their mother, bounding up to you and wrapping their arms around you. Shooing the more affectionate of your children away, you enter the village, a small smile on your face.  \n\n"); 
-		
+
 		//if pure Jojo is in camp
 		//outputText("on the outskirts of the training grounds, you see a familiar mousey monk leading a small group of your children in meditation.  \n\n");
 		if (JojoyLitters = true) {
@@ -147,7 +160,7 @@ public function EnterVillage():void {
 		//if Shouldra isn't with you
 		outputText ("A small shack sits on the outskirts of the village. Your mousey children avoid it for some reason. You strongly suspect that Shouldra is inside it.  ")
 		}
-		
+}
 		public function ReturnVillage():void {
 		clearOutput();
 		outputText("Since your children moved in, the old village has taken on new life. You decide to head over to where your mousey brood now live.\n\n");
@@ -167,7 +180,7 @@ public function EnterVillage():void {
 		outputText("A solidly built well sits near the middle of town. It evidently sees a lot of traffic, judging by the line-up around it. \n\n");
 		}
 		if (ShopBuilt>0) {
-		outputText(" "ShopBuilt" Shops line the main road of the town, with a loud mouse morph hawking their wares in each. \n\n");
+		outputText(" "ShopBuilt" Several stalls line the main road of the town, with a loud mouse morph hawking their wares in each. \n\n");
 		}
 		if (SmithBuilt=true) {
 		outputText("The loud ringing of iron fills the air, and two mouselets operate stalls nearby the smithery. They’re hawking their wares to anyone around to hear, weapons and armor made by your children. You wonder how their gear compares to that of Tel’adre. \n\n");
@@ -217,14 +230,14 @@ public function AmilyRebuildInit():void {
 		outputText("You tell Amily that you’ll be there for your kids. Her face brightens, her whiskers twitching happily and she all but tackles you in a warm, fuzzy hug. <i>“Well, no time like the present, right?</i>” She gently pulls you away from the camp, and you find yourself gently amused as she leads you back to the Old Town Ruins. As you near it, she wipes tears from her eyes. You stop, asking her if she’s alright, and she nods.  \n\n");
 		outputText("<i>“Just some mixed feelings, you know? It’s...hard to be back here again, but...We’re rebuilding. It’s everything I wanted.</i>” She wipes her tears on your shoulder, and as you get closer to the ruins, you notice your kids already hard at work. Amily picks herself up, and the two of you walk over. Your older kids nod respectfully, and make a spot for you as they divvy up tasks. You throw your back into it, gathering stones for a fireplace, setting up tents and carting water alongside your kids.  \n\n"); 
 		outputText("Soon enough, most of the day has passed, but every kid has a tent or A-frame to share. It’s not much, but it’s a start. Amily joins you and you head back to camp together, exhausted, but the tired joy on her face makes it worthwhile. The poor woman’s nearly dead on her feet and by the time you get back to camp. She dives into her bedroll, falling asleep almost instantly. \n\n"); 
-		
+	RebuildStarted = true;	
 }
 
 public function AmilyRebuildNotNow():void {
 		clearOutput();
 		outputText("You tell Amily that you will help, but you need time since you’re pretty busy right now. She nods, giving you a hug, but the look on her face is pure disappointment. She walks away, to her usual spot at camp.\n\n"); 
 //Make a thing for Amily 
-doNext(camp.returnToCampUseOneHour);
+doNext(camp.returnToCamp);
 }
 
 public function AmilyGoAway():void {
@@ -238,15 +251,39 @@ addButton (2, "Walk Away", AmilyWalkAway);
 public function AmilyReassure():void {
 		clearOutput();
 		outputText("You turn back around, kneeling down beside the crying woman. She raises her head and you wrap your arms around her. As she cries into your shoulder, you explain that you really do care about the family you started together, but that your entire village back home is depending on you as well. She seems to understand, but when you pull back, she seems despondent. As you back away, she looks up at you. <i>“I’m sorry</i>”, she says simply. You apologise too, but she shakes her head. <i>“I’m heading to Tel’adre for a while. Don’t come looking for me, please</i>”. \n\n"); 
+		AmilyAtWetBitch = true;
+		AmilyAngerCooldown = 168;
 doNext(camp.returnToCampUseOneHour);
-//(Amily will be in the Wet Bitch and will talk to you again after two weeks ingame. You have the option to salvage your relationship with her, or lose her forever if you refuse to help a second time).
+//(Amily will be in the Wet Bitch and will talk to you again after a week ingame. You have the option to salvage your relationship with her, or lose her forever if you refuse to help a second time).
 }
 
 public function AmilyWalkAway():void {
 		clearOutput();
 		outputText("Amily’s been too needy lately. You need some space. When you get back to your camp, her bedroll is gone. You have the feeling that she left to be with your kids, but you don’t really know.\n\n"); 
-//Remove Amily from the game
+flags[kFLAGS.AMILY_FOLLOWER] == 0;
+
 }
+public function AmilyMadBar():void {
+		clearOutput();
+		outputText("You notice Amily sitting down in front of the bar, nursing a drink. You sit down wordlessly beside her, but as Amily looks over at you, her eyes burn, red from crying. She doesn’t say anything, but she clenches her fists, clearly still mad at you. You decide to leave your angry mouse-morph alone, especially since some of the bar’s patrons are giving you the stink-eye. You leave the bar and head back to camp. \n\n"); 
+doNext(camp.returnToCampUseOneHour);
+}
+
+public function AmilyBarTalk():void {
+		clearOutput();
+		outputText("You notice Amily at the bar, nursing some kind of fruit juice. She seems much calmer, and as you sit down, she sighs heavily. For a few seconds, neither of you speak, the silence building between you.  \n\n"); 
+		outputText("“...Hey.” She breaks the ice, voice low, but not angry. “...Are you doing alright?” Taken aback by her question, you fumble your answer, eventually telling Amily that yes, you’re alright, but you’re more worried about her.  \n\n");
+		outputText("“I suppose that’s fair.” Amily says. “...I’m not going to lie, [name], the first few days were hell. You…You’ve been good to me, and…I guess I just, kind of expected you to keep helping.” You open your mouth to speak, and Amily puts a finger over your mouth. “...Shh…Let me get through this, okay?” You nod, and she continues, leaning over the counter. “...But I’ve had a lot of time to think, and…I realised that I’ve…been putting a lot of pressure on you. You came here with your own quest, your own goals, and…I guess I needed you to refuse me, before it really sunk in.” Amily puts a hand on your shoulder. “I’m sorry. For demanding so much, and then…blowing up on you when you refused.” She hangs her head. “I love you…So much, and I…almost blew it.” Amily looks into your eyes, giving you a hopeful look. “I was able to find a place for now, near the farm. Demons don’t go there, and our kids can get work from Whitney, in exchange for shelter. It’s not a good long-term solution, but…Until we can start construction on the ruins, it’ll do.” She gives you a pleading look, eyes damp. \n\n");
+		outputText("“We can wait for now, until you’ve got the time…But please, our kids need a proper home…and I don’t think we can do it without you.”   \n\n");
+		outputText("You wrap your arms around Amily, letting the mouse-morph bury her head into your chest. Soothingly, you tell Amily that you missed her. That you just need some time, but once you’re ready, you’ll be there to ensure that your offspring have a safe town to call home. 
+ \n\n"); 
+		outputText("Shaking, Amily sobs into you, tension bleeding from her muscles. “I love you.”  \n\n");
+		outputText("Together, you and Amily stand, leaving Tel’Adre and heading back to camp. \n\n");
+(flags[kFLAGS.AMILY_FOLLOWER] == 1)
+AmilyAtWetBitch = false;
+doNext(camp.returnToCampUseOneHour);
+}
+
 
 
 public function WolfMan():void {
@@ -385,9 +422,14 @@ public function StayTheNight():void {
 		outputText("You pick your lover up in your (arms), carrying her to the tower. Amily giggles girlishly, her curly tail wrapping around your arms as you carry her in. As you enter your home, she gives you a warm, loving look, her eyes sparkling. Her tail seems to have a mind of its own, but right now, as she reaches up, brushing your cheek with one hand, it wraps around your waist, quivering with excitement.  \n\n"); 
 		outputText("You don’t disrobe here, in the hallway, no. You decide to have some more fun, taking the stairs at a run. Amily gasps, holding onto you for dear life, but you roar playfully as you push the door to your shared bedroom open with your shoulder, leaping into your nest like bed, still holding Amily. You bounce off the springy mattress, still holding her, and she begins laughing hysterically, playfully slapping at you with both hands.  \n\n"); 
 		outputText("<i>“What was that?</i>” She asks, still laughing. You grin, telling her that you wanted to get here as quickly as possible. And if you got to hold her the whole way, well, you aren’t complaining there, either. The look she gives you could wake a dead man, and her tail brushes your inner thigh.  \n\n"); 
-		outputText("<i>“Oh, is that so?</i>” She asks, hands idly playing with your (Armor/clothing). <i>“And why were you in such a rush to get to bed, exactly?</i>” Her tail slides inside the leg of your (clothing/armour) and she watches the look on your face, her smile growing. <i>“Well?</i>”  Her small breasts are pressing against you, and (If dick) You harden, your [cock] tenting your (armour/clothing).[If both, add as here?] (If vagina) Your lower lips begin to drool, and she smiles a little more, her tail taking the moisture and tickling your twat with it.  \n\n");
-		outputText("Amily’s rags moisten, betraying her own lust, not that you needed that to tell. You notice, your own lustful smile growing, and you kiss Amily full on the mouth, hands flying to her rags. Amily lets out a little squeal, her own hands flying to your (armour/clothing). It takes a bit longer for her to undress you, but before long, you’re staring at her, her A-cup breasts rubbing against your [breasts]. Your mouse-girl’s clearly raring to go, and as she finishes, she pulls her lips back. <i>“We’re staying the night,</i>” she declares, licking her lips. <i>“And I’m gonna enjoy every second.</i>”  \n\n"); 
-		//if player is male or herm
+		outputText("<i>“Oh, is that so?</i>” She asks, hands idly playing with your (Armor/clothing). <i>“And why were you in such a rush to get to bed, exactly?</i>” Her tail slides inside the leg of your (clothing/armour) and she watches the look on your face, her smile growing. <i>“Well?</i>”  Her small breasts are pressing against you.\n\n");
+		if (player.hasCock()) {
+		outputText("You harden, your [cock] tenting your [armor]. \n\n");
+		}  
+		if (player.hasVagina()) {
+		outputText(" Your lower lips begin to drool, and she smiles a little more, her tail taking the moisture and tickling your twat with it.  \n\n");
+		outputText("Amily’s rags moisten, betraying her own lust, not that you needed that to tell. You notice, your own lustful smile growing, and you kiss Amily full on the mouth, hands flying to her rags. Amily lets out a little squeal, her own hands flying to your [armor]. It takes a bit longer for her to undress you, but before long, you’re staring at her, her A-cup breasts rubbing against your [breasts]. Your mouse-girl’s clearly raring to go, and as she finishes, she pulls her lips back. <i>“We’re staying the night,</i>” she declares, licking her lips. <i>“And I’m gonna enjoy every second.</i>”  \n\n"); 
+		if (player.hasCock()) {
 		outputText("Amily’s eyes drop to your erection. She playfully shoves your shoulder, putting you on your back. Curious as to what she’ll do, you let her have her fun. Amily pumps your [cock] a few times, slathering your pre all over your shaft, before pressing her engorged lips against your tip. She slowly slides it in, moaning slightly as you get about halfway in.  \n\n"); 
 		outputText("Straddling you, Amily lies down on top of you, kissing your shoulder, neck and lips as she moves her whole body up and down yours. Not only can you feel her tight, slick pussy, but the warm scraping of her fur up and down your stomach and chest. You bring your [arms] up, running your hands up and down your furry lover’s sides, which only serves to intensify her. Amily’s rock-hard nipples bounce off your chest and abs as she runs them up and down you. \n\n"); 
 		outputText("After a few minutes of this, she slows down, resting her weight on top of you and moving her hips. Her tail wraps around your hand, guiding it to her full ass. You knead her assflesh, and you’re rewarded with a groan. Amily brings her face back to yours, eyes smouldering. <i>“Hmm...This was nice, but I think you’re being a bit lazy here</i>”, she teases. \n\n");
@@ -395,16 +437,30 @@ public function StayTheNight():void {
 		outputText("<i>“Yes. yes. Yes.</i>” That’s all you needed to hear! You begin pounding her in earnest, silencing her screams with your mouth. She moans and pants into your lips, paw-hands wrapped around your shoulders as you slide in and out of her channel. Amily squeals in delight, tongue lolling out, but as she arches her back, her vagina squeezing your member, you realise you aren’t done.  \n\n"); 
 		outputText("You take her shoulders, one in each hand, and pull your lover to the side of the bed.. You spread her legs wide, and Amily blushes, almost embarrassed by this position. You don’t give her time to react, yanking her legs up and lining her vagina back up with your member. Amily’s eyes widen, and your mouse-girl grips the bed instinctively as you plunge back into her warm passage.  \n\n"); 
 		outputText("<i>“Ooh! Oh! Oh!</i>” Amily’s still bright red, but her tail is lashed around your leg, and her vaginal walls are clamping tighter and tighter around you. You pick up the pace, ravaging your lover’s cunt, and before long, she lets out a final, extremely high-pitched wail before your mouse lover squirts, legs in the air, flailing. Her juices hit you in the chest and face, and the smell fills your nostrils. You cum hard, [legs] buckling as you pump your lover full of your juices. You remain on your feet for over a minute as your orgasm racks you. Eventually, you can’t take it anymore. You collapse on the bed beside Amily, Your [cock] still plugging her cunt. Her belly is noticeably larger, and despite your dick in the way, a steady stream of your cum trickles from her hole.  \n\n");
+		}
 		//if you or Amily are herm
-		outputText("(If you’re herm) Your own vagina drips a steady stream of lubricant, staining the bed with your juices. <i>“Alright, [name]. You made me feel...hmm...really good. Now it’s my turn to play</i>”. You’re barely able to sit up, after your orgasm, but you do so, Amily diddling your twat.\n\n"); 
-		outputText(" \n\n"); 
-		outputText("(If she’s herm) Amily opens one eye, looking at your moist cunt. She sits up, tweaking your button.  \n\n"); 
-		//if Amily has a dick, and PC is female/Herm
-		outputText("Amily’s erection looks really good right now, and your needy cunt hasn’t been seen to. Your mouse-lover chuckles, wrapping her tail around your waist and pulling you towards her. (If you’re herm) <i>“Don’t worry, [name]. I’ll give you some time to recover before the main event.</i>”  \n\n"); 
+		 if (player.gender >= 3) {
+		outputText("Your own vagina drips a steady stream of lubricant, staining the bed with your juices. <i>“Alright, [name]. You made me feel...hmm...really good. Now it’s my turn to play</i>”. You’re barely able to sit up, after your orgasm, but you do so, Amily diddling your twat.\n\n"); 
+		outputText(" \n\n");
+		}
+		if (flags[AMILY_WANG_LENGTH] > 0) && (player.gender >= 2){
+		outputText("Amily opens one eye, looking at your moist cunt. She sits up, tweaking your button.  \n\n"); 
+		outputText("Amily’s erection looks really good right now, and your needy cunt hasn’t been seen to. Your mouse-lover chuckles, wrapping her tail around your waist and pulling you towards her \n\n")
+		if (player.gender >= 3) { outputText("<i>“Don’t worry, [name]. I’ll give you some time to recover before the main event.</i>”  \n\n"); 
+		}
 		outputText("Amily runs a paw-hand along your cheek, down past your [breasts] and along your stomach, light as a feather. It tickles, and she notices, tickling your stomach before suddenly dropping a hand to your [vagina]. She sticks one finger in, slowly wriggling it around in you, then two, then three, slowly building the intensity as you breathe heavily under her ministrations. She leans you up against the side of the bed, sitting you up, and you spread your legs for your mousey herm, giving her a lusty grin. As you present yourself, she blushes, smiling at you.  \n\n");
 		outputText("Amily leans in, bringing herself to both your mouths at the same time. Your lips meet, tongues wrapping around each other as she presses at your entrance. Amily slides in without issue, and your moan hits the back of her throat. She pulls her head back, sliding deeper into you, and she almost purrs. <i>“Marae, I love you</i>”, she whispers, ramming herself home. You gasp as she slips under you, pulling you onto her lap. Your own weight drives her home, and you clench around her, arching your back against the sudden pleasure. <i>“That’s it, that’s it</i>”. Amily soothes, making little thrusts, pushing you up only to let gravity slide you right back down.  \n\n"); 
-		outputText("<i>“[name], my lover, mother to our kids.</i>” You tighten even further around her, and she chuckles. <i>“Oh, you liked that?</i>” She whispers, a soft, light voice in your ear. <i>“You want more?</i>” She accompanies this with a thrust, bigger than the others. <i>“More little ones?</i>” (If you’re herm) <i>“Two little litters, at the same time?</i>” (branch end) <i>“Cause I do.</i>” She keeps thrusting, her member trembling inside you. Your muscles clench as you try to hold back your orgasm. <i>“Come for me, [name]?</i>” \n\n"); 
+		if (flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] > 0) {
+		outputText("<i>“[name], my lover, mother to our kids.</i>” \n\n");
+		}
+		if (flags[AMILY_BIRTH_TOTAL:int] > 0) {
+		outputText("<i>“[name], my lover, father to our children.</i>” \n\n");
+		outputText("You tighten even further around her, and she chuckles. <i>“Oh, you liked that?</i>” She whispers, a soft, light voice in your ear. <i>“You want more?</i>” She accompanies this with a thrust, bigger than the others. <i>“More little ones?</i>”\n\n"); 
+		if (player.gender >= 3) {
+		outputText("<i>“Two little litters, at the same time?</i>” <i>“Cause I do.</i>”\n\n"); 
+		outputText("She keeps thrusting, her member trembling inside you. Your muscles clench as you try to hold back your orgasm. <i>“Come for me, [name]?</i>” \n\n"); 
 		outputText("At her increased pace and gentle requests, you can’t hold back anymore. With a cry that would wake up half the camp had you been back home, you cum on your mouse-herm’s cock, your walls milking her for all you’re worth. You arch your back, toes curling, as she follows right after, filling your womb with her warm seed. Her tail, around your thigh, curls tight as she clings to you, filling your belly. After a good thirty seconds, the flow of cum stops, and you begin to feel lightheaded. You fall back onto the bed, Amily still clinging to you, and you both lie there, breathing heavily.  \n\n"); 
+		}
 		//Significant Chance for Amily and/or the PC to get pregnant. 
 		menu();
 addButton (1, "Next", AmilyAfterSex);
@@ -457,7 +513,9 @@ addButton (4, "TrainGrounds", BuildTrainingGrounds);
 if (SmithBuilt=false) {
 addButton (5, "Smith", BuildHouse);
 }
+if (logbuilt=false) {
 addButton (6, "Logging", BuildLogging);
+}
 addButton (7, "back", ReturnVillage);
 }
 
@@ -469,12 +527,16 @@ public function BuildHouse():void {
 		outputText("To your surprise, more of your kids come in, toting buckets of water and clay. Between each piece of lumber, they slather the top with the clay, sealing the holes between the wood. \n\n"); 
 		outputText("The roof comes next, and a half-dozen mice clamber onto the supporting beams while another climbs up the central pillar with a saw. You help your kids feed pieces of wood to lay across, making support beams for the roof. They fill in the roof with shocking speed, and within an hour, the structure of the house is done. The floor inside is still dirt, but your children show no signs of stopping. She waves you off.  \n\n"); 
 		outputText("<i>“We’ll handle the rest of this”,</i> she says cheerfully, handing you a glass of water. You down it, and Amily gives you a hug. “For real, the heavy lifting is done. Thank you.” You give her back the glass, excusing yourself. You head back to camp, slightly winded from your work. \n\n"); 
+HouseNumber += 1;
+MouseTownPopCap += 15;
 		doNext(camp.returnToCampUseOneHour);	
 }
 
 public function BuildWall():void {
 		clearOutput();
 		outputText("You call out, and Amily echoes you, calling your children to gather round. As a dozen or so join you, you explain to them the job at hand.  \n\n");
+		WallNumber +=1;
+		HouseCap +=2;
 		doNext(camp.returnToCampUseOneHour);	
 }
 
@@ -498,5 +560,10 @@ public function BuildSmith():void {
 public function BuildLogging():void {
 		clearOutput();
 		outputText("You call out, and Amily echoes you, calling your children to gather round. As a dozen or so join you, you explain to them the job at hand.  \n\n");
+		logbuilt = true;
 		doNext(camp.returnToCampUseOneHour);	
+}
+
+		}
+		}
 }
