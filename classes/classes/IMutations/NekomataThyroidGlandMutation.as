@@ -69,8 +69,7 @@ import classes.Creature;
         }
 
         public function NekomataThyroidGlandMutation() {
-            super("Nekomata Thyroid Gland IM", "Nekomata Thyroid Gland", ".");
-            maxLvl = 3;
+            super("Nekomata Thyroid Gland IM", "Nekomata Thyroid Gland", SLOT_NONE, 3);
         }
         
     }

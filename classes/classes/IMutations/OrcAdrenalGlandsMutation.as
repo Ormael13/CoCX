@@ -75,8 +75,7 @@ public class OrcAdrenalGlandsMutation extends IMutationPerkType
         }
 
         public function OrcAdrenalGlandsMutation() {
-            super("Orc Adrenal Glands IM", "Orc Adrenal Glands", ".");
-            maxLvl = 3;
+            super("Orc Adrenal Glands IM", "Orc Adrenal Glands", SLOT_ADRENALS, 3);
         }
         
     }

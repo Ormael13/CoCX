@@ -662,24 +662,28 @@ import classes.CoC;
 			if (hasPerk(PerkLib.Metamorph)) max += (50 * (1 + perkv1(PerkLib.Metamorph)));
 			if (hasPerk(PerkLib.MetamorphEx)) max += (50 + (100 * perkv1(PerkLib.MetamorphEx)));
 			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) max += 40;
-				if (hasPerk(PerkLib.SoulPersonage)) max += 40;
-				if (hasPerk(PerkLib.SoulWarrior)) max += 40;
+				if (hasPerk(PerkLib.SoulApprentice)) max += 50;
+				if (hasPerk(PerkLib.SoulPersonage)) max += 50;
+				if (hasPerk(PerkLib.SoulWarrior)) max += 50;
+				multimax += 0.05;
 			}
 			if (hasPerk(PerkLib.DaoistWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) max += 60;
-				if (hasPerk(PerkLib.SoulScholar)) max += 60;
-				if (hasPerk(PerkLib.SoulElder)) max += 60;
+				if (hasPerk(PerkLib.SoulSprite)) max += 100;
+				if (hasPerk(PerkLib.SoulScholar)) max += 100;
+				if (hasPerk(PerkLib.SoulElder)) max += 100;
+				multimax += 0.05;
 			}
 			if (hasPerk(PerkLib.DaoistElderStage)) {
-				if (hasPerk(PerkLib.SoulExalt)) max += 100;
-				if (hasPerk(PerkLib.SoulOverlord)) max += 100;
-				if (hasPerk(PerkLib.SoulTyrant)) max += 100;
+				if (hasPerk(PerkLib.SoulExalt)) max += 200;
+				if (hasPerk(PerkLib.SoulOverlord)) max += 200;
+				if (hasPerk(PerkLib.SoulTyrant)) max += 200
+				multimax += 0.1;
 			}
 			if (hasPerk(PerkLib.DaoistOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) max += 150;
-				if (hasPerk(PerkLib.SoulEmperor)) max += 150;
-				if (hasPerk(PerkLib.SoulAncestor)) max += 150;
+				if (hasPerk(PerkLib.SoulKing)) max += 300;
+				if (hasPerk(PerkLib.SoulEmperor)) max += 300;
+				if (hasPerk(PerkLib.SoulAncestor)) max += 300;
+				multimax += 0.1;
 			}
 			if (hasPerk(PerkLib.AscensionSoulPurity)) max += perkv1(PerkLib.AscensionSoulPurity) * 50;
 			if (jewelryEffectId == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude;//+100

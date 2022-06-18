@@ -74,8 +74,7 @@ public class DisplacerMetabolismMutation extends IMutationPerkType
         }
 
         public function DisplacerMetabolismMutation() {
-            super("Displacer Metabolism IM", "Displacer Metabolism", ".");
-            maxLvl = 3;
+            super("Displacer Metabolism IM", "Displacer Metabolism", SLOT_METABOLISM, 3);
         }
         
     }

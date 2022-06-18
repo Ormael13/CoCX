@@ -94,6 +94,9 @@ public class CoCLoader {
 		var o:BitmapData = c ? ((new c() as Bitmap).bitmapData) : null;
 		if (o) IMAGE_BUNDLE[key] = o;
 	}
+	public static function getEmbedText(path:String):String {
+		return TEXT_BUNDLE[path];
+	}
 	/**
 	 * @param path
 	 * @param callback Function (success:Boollean, result:*,event:Event):*

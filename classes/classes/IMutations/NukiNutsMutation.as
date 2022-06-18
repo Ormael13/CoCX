@@ -77,8 +77,7 @@ public class NukiNutsMutation extends IMutationPerkType
         }
 
         public function NukiNutsMutation() {
-            super("Nuki Nuts IM", "Nuki Nuts", ".");
-            maxLvl = 3;
+            super("Nuki Nuts IM", "Nuki Nuts", SLOT_TESTICLES, 3);
         }
 
     }

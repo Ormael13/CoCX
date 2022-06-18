@@ -98,8 +98,7 @@ public class TrachealSystemMutation extends IMutationPerkType
         }
 
         public function TrachealSystemMutation() {
-            super("Tracheal System IM", "Tracheal System", ".");
-            maxLvl = 4;
+            super("Tracheal System IM", "Tracheal System", SLOT_ADAPTATIONS, 4);
         }
 
     }

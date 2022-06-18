@@ -532,6 +532,7 @@ public class LowerBody extends SaveableBodyPart {
 
 			return desc;
 		},
+		tail: true,
 		bite: true,
 		isNaga: true
 	});

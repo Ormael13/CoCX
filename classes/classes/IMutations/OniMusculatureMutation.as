@@ -78,8 +78,7 @@ public class OniMusculatureMutation extends IMutationPerkType
         }
 
         public function OniMusculatureMutation() {
-            super("Oni Musculature IM", "Oni Musculature", ".");
-            maxLvl = 3;
+            super("Oni Musculature IM", "Oni Musculature", SLOT_MUSCLE, 3);
         }
         
     }
