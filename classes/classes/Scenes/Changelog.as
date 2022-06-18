@@ -165,20 +165,20 @@ public class Changelog extends BaseContent
 			//outputText("-Dinah would provide PC with HB Mech upgrade options after it's bought. They could boost mech defences, attack or even provide with specials. As with all other items upgrades cost can vary depending on her mood ^^\n");
 			//outputText("-HB Mech upgrade options includes: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Rapid Reload (+base ranged atk dmg), Internal Systems (increase mech SF capacity and lower it consumption during high activity), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special), ");
 			//outputText("Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)\n");
-			outputText("-Metamorph menu: Yeti race all bodyparts, Yuki onna arms, Twin Kasha tails, Giant dragonfly wings, Tigershark Stripes, Shark skin, multi Gazer Eyestalks, Dog tail, Goo bodyparts, Avian arms, Anemone gills, Kraken & Hydra lower body, Hydra tails (EragonX)\n");
+			outputText("-Metamorph menu: Yeti race all bodyparts, Yuki onna arms, Twin Kasha tails, Giant dragonfly wings, Tigershark Stripes, Shark skin, multi Gazer Eyestalks, Dog tail, Goo bodyparts, Avian arms, Anemone gills, Kraken & Hydra lower body, Hydra tails, Ears: Dog, Avian, Raiju, Shark, Bunny; . (EragonX)\n");
 			outputText("-Swift casting spells won't have cooldowns but their power will be lowered by 80%.\n");
 			outputText("-Spell-Knight str req. was lowered from 200 to 150.\n");
 			outputText("-Basic Job: All-Rounder no longer req. Job: Soul Cultivator but it lib and sens req. was increased to 75 and 50 respectively.\n");
 			outputText("-Demon tfs and Feeder perk use CorruptionTolerance now, Oni horn wont choose same horns. (EragonX)\n");
 			outputText("-Removed Sapphire/Onyx requirements from Forgefather encounter. (Svalkash)\n");
-			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!), Marae, Shark girls, (Whitney corruption. With 'Other' option you can switch her between dom and sub. And reset her oral training too.), Kelly & Kelt(New 'Recall' options for Kelt breaking!). (Svalkash)\n");
+			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!), Marae, Shark girls, (Whitney corruption. With 'Other' option you can switch her between dom and sub. And reset her oral training too.), Kelly & Kelt(New 'Recall' options for Kelt breaking!), Kath, Rubi. (Svalkash)\n");
 			outputText("-Soul Sense unlock req. chganged to having 'Soul Sense and You' Manual and reaching at least Early Soul Personage stage.\n");
 			outputText("-Using Wait or Defend w/ Defense Pose perk move will increase fatigue recovery 2x.\n");
 			outputText("-More npc's (21) when recruited to camp will give radiant shard.\n");
 			outputText("-Additional Soulforce from training was changed form adding flat value to % - so instead of 2,330 it will increase SF cap by 2,330 %.\n");
 			outputText("-Pawnshop added bulk sale gem bonus from Merchant outfit. Improved Amily Efficiency (hermify) option. More weapons for Dilapidated Shrine. Make Metamorph tails cost dependent on current tail count. Eggs tf now checks for player blocking body tfs. (EragonX)\n");
 			outputText("-Many typo corrections by Pyromania.\n");
-			outputText("-Fixed issues: Hydra tails feral attack multiplier bugfix, Weapon Rack bug. (EragonX)\n");// (EragonX)
+			outputText("-Fixed issues: Hydra tails feral attack multiplier bugfix, Weapon Rack bug, Isabella pregnancy, hydra lower body allowing to have tails. (EragonX)\n");// (EragonX)
 			outputText("-Added low standards for Uma. (Svalkash)\n");
 			outputText("-New consumable item: a bottle of high-grade Soulforce Recovery Pills. Costs 3610 gems. It's gained by putting in empty pills bottle 10 high-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
 			outputText("-Daoist: Apprentice Stage perk effects changed to: +30% soulskill/m.soulskill power, -10% soulskills cost, +50 max SF at S.Apprentice, S.Personage, S.Warrior stages, +5% to max, +50% base soulforce recovery multiplier\n");
