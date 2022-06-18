@@ -75,6 +75,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const ANT:int = 3;
+		EnumValue.add(Memories, ANT, "ANT", {
+			id: "Ant Antennae",
+			name: "Ant Antennae",
+			cost: 100,
+			title: "Ant",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.AntennaeAnt;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

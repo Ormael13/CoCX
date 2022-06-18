@@ -359,6 +359,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const INSECT:int = 28;
+		EnumValue.add(Memories, INSECT, "INSECT", {
+			id: "Insect cock",
+			name: "Insect cock",
+			cost: 500,
+			title: "Insect",
+			transformation: function(cockIndex:int): Transformation {
+				return CoC.instance.transformations.CockInsect(cockIndex);
+			}
+		});
+
 
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];

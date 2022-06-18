@@ -1901,7 +1901,7 @@ public class Creature extends Utils
             if (compareBy != "area" && compareBy != "length" && compareBy != "thickness") //sanity check
                 throw new Error("Wrong compareBy value!");
             var cnt:int = 0;
-            var tent:Boolean = (type == CockTypesEnum.STAMEN || type == CockTypesEnum.TENTACLE);
+            var tent:Boolean = (type == CockTypesEnum.STAMEN || type == CockTypesEnum.TENTACLE || type == CockTypesEnum.INSECT);
             for (var i:int = 0; i < cocks.length; ++i) {
                 var isize:Number = compareBy == "length" ? cocks[i].cockLength :
                                 compareBy == "thickness" ? cocks[i].cockThickness :
@@ -2456,11 +2456,11 @@ public class Creature extends Utils
 			return countCocksOfType(CockTypesEnum.CAVE_WYRM);
 		}
 
-		public function raijuCocks():int { //How many cave wyrm-cocks?
+		public function raijuCocks():int { //How many raiju-cocks?
 			return countCocksOfType(CockTypesEnum.RAIJU);
 		}
 
-		public function pigCocks():int { //How many lizard/snake-cocks?
+		public function pigCocks():int { //How many pig-cocks?
 			return countCocksOfType(CockTypesEnum.PIG);
 		}
 
@@ -2486,6 +2486,10 @@ public class Creature extends Utils
 
 		public function beeCocks():int { //How many beecocks?
 			return countCocksOfType(CockTypesEnum.BEE);
+		}
+
+		public function insectCocks():int { //How many insectcocks?
+			return countCocksOfType(CockTypesEnum.INSECT);
 		}
 
 
@@ -3156,26 +3160,33 @@ public class Creature extends Utils
 			return eggs() >= 10 && hasPerk(PerkLib.MantisOvipositor) && tail.type == Tail.MANTIS_ABDOMEN;
 		}
 
+		public function canOvipositAnt():Boolean
+		{
+			return eggs() >= 10 && hasPerk(PerkLib.AntOvipositor) && tail.type == Tail.ANT_ABDOMEN;
+		}
+
 		public function canOviposit():Boolean
 		{
-			return canOvipositSpider() || canOvipositBee() || canOvipositMantis();
+			return canOvipositSpider() || canOvipositBee() || canOvipositMantis() || canOvipositAnt();
 		}
 
 		public function eggs():int
 		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
 				return -1;
 			else if (hasPerk(PerkLib.SpiderOvipositor))
 				return perkv1(PerkLib.SpiderOvipositor);
 			else if (hasPerk(PerkLib.BeeOvipositor))
 				return perkv1(PerkLib.BeeOvipositor);
-			else
+			else if (hasPerk(PerkLib.MantisOvipositor))
 				return perkv1(PerkLib.MantisOvipositor);
-		}
+			else
+				return perkv1(PerkLib.AntOvipositor);
+			}
 
 		public function addEggs(arg:int = 0):int
 		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
 				return -1;
 			else {
 				if (hasPerk(PerkLib.SpiderOvipositor)) {
@@ -3190,18 +3201,24 @@ public class Creature extends Utils
 						setPerkValue(PerkLib.BeeOvipositor, 1, 50);
 					return perkv1(PerkLib.BeeOvipositor);
 				}
-				else {
+				else if (hasPerk(PerkLib.MantisOvipositor)) {
 					addPerkValue(PerkLib.MantisOvipositor, 1, arg);
 					if (eggs() > 50)
 						setPerkValue(PerkLib.MantisOvipositor, 1, 50);
 					return perkv1(PerkLib.MantisOvipositor);
+				}
+				else {
+					addPerkValue(PerkLib.AntOvipositor, 1, arg);
+					if (eggs() > 50)
+						setPerkValue(PerkLib.AntOvipositor, 1, 50);
+					return perkv1(PerkLib.AntOvipositor);
 				}
 			}
 		}
 
 		public function dumpEggs():void
 		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
 				return;
 			setEggs(0);
 			//Sets fertile eggs = regular eggs (which are 0)
@@ -3210,7 +3227,7 @@ public class Creature extends Utils
 
 		public function setEggs(arg:int = 0):int
 		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
 				return -1;
 			else {
 				if (hasPerk(PerkLib.SpiderOvipositor)) {
@@ -3225,37 +3242,47 @@ public class Creature extends Utils
 						setPerkValue(PerkLib.BeeOvipositor, 1, 50);
 					return perkv1(PerkLib.BeeOvipositor);
 				}
-				else {
+				else if (hasPerk(PerkLib.MantisOvipositor)) {
 					setPerkValue(PerkLib.MantisOvipositor, 1, arg);
 					if (eggs() > 50)
 						setPerkValue(PerkLib.MantisOvipositor, 1, 50);
 					return perkv1(PerkLib.MantisOvipositor);
+				}
+				else {
+					setPerkValue(PerkLib.AntOvipositor, 1, arg);
+					if (eggs() > 50)
+						setPerkValue(PerkLib.AntOvipositor, 1, 50);
+					return perkv1(PerkLib.AntOvipositor);
 				}
 			}
 		}
 
 		public function fertilizedEggs():int
 		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
 				return -1;
 			else if (hasPerk(PerkLib.SpiderOvipositor))
 				return perkv2(PerkLib.SpiderOvipositor);
 			else if (hasPerk(PerkLib.BeeOvipositor))
 				return perkv2(PerkLib.BeeOvipositor);
-			else
+			else if (hasPerk(PerkLib.MantisOvipositor))
 				return perkv2(PerkLib.MantisOvipositor);
+			else
+				return perkv2(PerkLib.AntOvipositor)
 		}
 
 		public function fertilizeEggs():int
 		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
 				return -1;
 			else if (hasPerk(PerkLib.SpiderOvipositor))
 				setPerkValue(PerkLib.SpiderOvipositor, 2, eggs());
 			else if (hasPerk(PerkLib.BeeOvipositor))
 				setPerkValue(PerkLib.BeeOvipositor, 2, eggs());
-			else
+			else if (hasPerk(PerkLib.MantisOvipositor))
 				setPerkValue(PerkLib.MantisOvipositor, 2, eggs());
+			else
+				setPerkValue(PerkLib.AntOvipositor, 2, eggs())
 			return fertilizedEggs();
 		}
 
@@ -3500,6 +3527,7 @@ public class Creature extends Utils
 				case CockTypesEnum.PIG:
 				case CockTypesEnum.MINDBREAKER:
 				case CockTypesEnum.TENTACLE:
+				case CockTypesEnum.INSECT:
 					if (countCocksOfType(cocks[0].cockType) == cocks.length) return Appearance.cockNoun(cocks[0].cockType) + "s";
 					break;
 			}
@@ -3519,6 +3547,7 @@ public class Creature extends Utils
 					case CockTypesEnum.KANGAROO:
 					case CockTypesEnum.AVIAN:
 					case CockTypesEnum.ECHIDNA:
+					case CockTypesEnum.INSECT:
 						return true; //If there's even one cock of any of these types then return true
 					default:
 				}
@@ -3595,6 +3624,7 @@ public class Creature extends Utils
 					if (rand(2) == 0) return "crown";
 					return "head";
 				case CockTypesEnum.TENTACLE:
+				case CockTypesEnum.INSECT:
 					if (rand(2) == 0) return "mushroom-like tip";
 					return "wide plant-like crown";
 				case CockTypesEnum.PIG:
