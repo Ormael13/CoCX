@@ -75,8 +75,7 @@ public class FloralOvariesMutation extends IMutationPerkType
         }
 
         public function FloralOvariesMutation() {
-            super("Floral Ovaries IM", "Floral Ovaries", ".");
-            maxLvl = 3;
+            super("Floral Ovaries IM", "Floral Ovaries", SLOT_OVARIES, 3);
         }
 
     }

@@ -18,11 +18,16 @@ import classes.Items.JewelryLib;
 import classes.Items.WeaponLib;
 import classes.PerkLib;
 import classes.Races;
+import classes.Scenes.Areas.Bog.LizanRogue;
 import classes.Scenes.Areas.Caves.DisplacerBeast;
+import classes.Scenes.Areas.Forest.Akbal;
+import classes.Scenes.Areas.Lake.GooGirl;
+import classes.Scenes.Areas.Mountain.WormMass;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
+import classes.Scenes.Dungeons.DeepCave.Vala;
 import classes.Scenes.NPCs.AetherTwinsFollowers;
 import classes.Scenes.Places.Boat.Anemone;
 import classes.Scenes.Places.TelAdre.UmasShop;
@@ -834,7 +839,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else damage *= (5.5 + ((player.weaponRangeAttack - 200) * 0.01));
 		if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= combat.historyScoutBonus();
 		if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
-		if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+		damage *= player.jewelryRangeModifier();
 		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
 			if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
 			else {
@@ -887,7 +892,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
-			outputText("You are too tired to attack " + monster.a + " " + monster.short + ".");
+			outputText("You are too tired to attack [themonster].");
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
@@ -982,7 +987,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		sneakAttack1();
 	}
 	public function sneakAttack1():void {
-		outputText("You strike " + monster.a + " " + monster.short + " vitals with your [weapon]. ");
+		outputText("You strike [themonster] vitals with your [weapon]. ");
 		var damage:Number = 0;
 		var SAMulti:Number = 2;
 		if (player.weapon == weapons.ANGSTD) SAMulti += 2;
@@ -1026,10 +1031,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		damage = Math.round(damage);
 		doDamage(damage);
-		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> ");
+		outputText("<b>([font-damage]" + damage + "</font>)</b> ");
 		if (player.hasPerk(PerkLib.PhantomStrike)) {
 			doDamage(damage);
-			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b> ");
+			outputText("<b>([font-damage]" + damage + "</font>)</b> ");
 			damage *= 2;
 		}
 		if (crit) {
@@ -1177,8 +1182,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function feint():void {
 		clearOutput();
-		outputText("You attempt to feint " + monster.a + " " + monster.short + " into dropping [monster his] guards. It ");
-		if (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80) outputText("failed.");
+		outputText("You attempt to feint [themonster] into dropping [monster his] guards. It ");
+		if (monster.speedDodge(player) > 0) outputText("failed.");
 		else {
 			var feintduration:Number = 2;
 			if (player.hasPerk(PerkLib.GreaterFeint)) feintduration += 2;
@@ -1208,7 +1213,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		sneakAttackRange1();
 	}
 	public function sneakAttackRange1():void {
-		outputText("You shoot " + monster.a + " " + monster.short + " vitals with your [weaponrange]. ");
+		outputText("You shoot [themonster] vitals with your [weaponrange]. ");
 		var damage:Number = 0;
 		var SAMulti:Number = 2;
 		if (player.weaponRange == weaponsrange.M1CERBE) SAMulti += 4;
@@ -1237,7 +1242,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else damage *= (5.5 + ((player.weaponRangeAttack - 200) * 0.01));
 		if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= combat.historyScoutBonus();
 		if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
-		if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+		damage *= player.jewelryRangeModifier();
 		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
 			if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
 			else {
@@ -1427,16 +1432,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
-			outputText("You are too tired to attack " + monster.a + " " + monster.short + ".");
+			outputText("You are too tired to attack [themonster].");
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
 		fatigue(50, USEFATG_PHYSICAL);
 		outputText("You ready your [weapon] and prepare to spin it around trying to hit as many [themonster] as possible.  ");
-		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
-			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
-			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
-			if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
+		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+			if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your attack!");
+			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText("[Themonster] dodges your attack with superior quickness!");
+			if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attack.");
 			enemyAI();
 			return;
 		}
@@ -1515,16 +1520,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
-			outputText("You are too tired to attack " + monster.a + " " + monster.short + ".");
+			outputText("You are too tired to attack [themonster].");
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
 		fatigue(50, USEFATG_PHYSICAL);
 		outputText("You ready your [weapon] and prepare to spin it around trying to whip as many [themonster] as possible.  ");
-		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
-			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
-			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
-			if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
+		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+			if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your attack!");
+			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText("[Themonster] dodges your attack with superior quickness!");
+			if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attack.");
 			enemyAI();
 			return;
 		}
@@ -1603,15 +1608,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
-			outputText("You are too tired to attack " + monster.a + " " + monster.short + ".");
+			outputText("You are too tired to attack [themonster].");
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
 		outputText("You ready your claws and prepare to spin it around trying to hit as many [themonster] as possible.  ");
-		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
-			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
-			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
-			if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
+		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+			if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your attack!");
+			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText("[Themonster] dodges your attack with superior quickness!");
+			if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attack.");
 			enemyAI();
 			return;
 		}
@@ -1764,7 +1769,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		//miss
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
 			outputText("Twirling like a top, you swing your tail, but connect with only empty air.");
 		}
 		else {
@@ -1792,7 +1797,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else fatigue(40, USEFATG_PHYSICAL);
 		outputText("With a simple thought you set your tail ablaze.");
 		//miss
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
 			outputText("  Twirling like a top, you swing your tail, but connect with only empty air.");
 		}
 		else {
@@ -1843,7 +1848,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownTailSmack,5,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownTailSmack,5,0,0,0);
 		//miss
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
 			outputText("You smash your tail at [themonster], but connect with only empty air.");
 		}
 		else {
@@ -2097,7 +2102,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(80, USEFATG_PHYSICAL);
 		else fatigue(40, USEFATG_PHYSICAL);
 		//miss
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
 			outputText("Twirling like a top, you swing your wings, but connect with only empty air.");
 		}
 		else {
@@ -2358,7 +2363,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= dmgamp;
 		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
 		damage = Math.round(damage);
-		outputText("Your stone golems slams into " + monster.a + monster.short + ". ");
+		outputText("Your stone golems slams into [themonster]. ");
 		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
 		else doDamage(damage, true, true);
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
@@ -2390,7 +2395,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= dmgamp;
 		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
 		damage = Math.round(damage);
-		outputText("Your stone golems slams into " + monster.a + monster.short + ". ");
+		outputText("Your stone golems slams into [themonster]. ");
 		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
 		else doDamage(damage, true, true);
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
@@ -2422,7 +2427,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= dmgamp;
 		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
 		damage = Math.round(damage);
-		outputText("Your stone golems slams into " + monster.a + monster.short + ". ");
+		outputText("Your stone golems slams into [themonster]. ");
 		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
 		else doDamage(damage, true, true);
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
@@ -2601,7 +2606,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//mult-round
 		damage *= dmgamp;
 		damage = Math.round(damage);
-		outputText((cnt > 1 ? "Your stone golems slam" : "Your stone golem slams") + " into " + monster.a + monster.short + ". ");
+		outputText((cnt > 1 ? "Your stone golems slam" : "Your stone golem slams") + " into [themonster]. ");
 		golemsDunks(damage);
 		outputText("\n\n");
 		//set flag that golems attacked
@@ -2642,7 +2647,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//mult-round
 		damage *= dmgamp;
 		damage = Math.round(damage);
-		outputText((cnt > 1 ? "Your improved stone golems slam" : "Your stone golem slams") + " into " + monster.a + monster.short + ". ");
+		outputText((cnt > 1 ? "Your improved stone golems slam" : "Your stone golem slams") + " into [themonster]. ");
 		golemsDunks(damage);
 		outputText(" And then attack" + (cnt > 1 ? "" : "s") + " once again. ");
 		golemsDunks(damage);
@@ -2681,7 +2686,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
 		damage *= dmgamp;
 		damage = Math.round(damage);
-		outputText("Your steel golem slam into " + monster.a + monster.short + ". ");
+		outputText("Your steel golem slam into [themonster]. ");
 		golemsDunks(damage);
 		outputText("\n\n");
 		//set flag that golems attacked
@@ -2728,7 +2733,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if ((player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv2(StatusEffects.GolemUpgrades1) > 0)) damage *= (1 + (player.statusEffectv2(StatusEffects.GolemUpgrades1) * 0.25));
 		damage *= dmgamp;
 		damage = Math.round(damage);
-		outputText("Your improved steel golem slam into " + monster.a + monster.short + ". ");
+		outputText("Your improved steel golem slam into [themonster]. ");
 		golemsDunks(damage);
 		outputText(" Then attack second time. ");
 		golemsDunks(damage);
@@ -2900,7 +2905,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		else {
-			outputText("<b>(<font color=\"#000080\">Miss!</font>)</b>");
+			outputText("<b>([font-miss]Miss!</font>)</b>");
 		}
 		flags[kFLAGS.EASTER_BUNNY_EGGS_STORED]--;
 		combat.bonusExpAfterSuccesfullTease();
@@ -3403,7 +3408,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		player.tailVenom -= player.VenomWebCost() * 5;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		if (combat.checkConcentration()) return; //Amily concentration
-		if (monster.short == "lizan rogue") {
+		if (monster is LizanRogue) {
 			outputText("As your webbing flies at him the lizan flips back, slashing at the adhesive strands with the claws on his hands and feet with practiced ease.  It appears he's used to countering this tactic.");
 			enemyAI();
 			return;
@@ -3414,7 +3419,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		else outputText("Turning and clenching muscles that no human should have, you expel a spray of sticky webs at [themonster]!  ");
 		//Determine if dodged!
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
 			outputText("You miss [themonster] completely - ");
 			if(monster.plural) outputText("they");
 			else outputText(monster.mf("he","she") + " moved out of the way!\n\n");
@@ -3423,8 +3428,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		//Over-webbed
 		if(monster.spe < 1) {
-			if(!monster.plural) outputText(monster.capitalA + monster.short + " is completely covered in webbing, but you hose " + monster.mf("him","her") + " down again anyway.");
-			else outputText(monster.capitalA + monster.short + " are completely covered in webbing, but you hose them down again anyway.");
+			if(!monster.plural) outputText("[Themonster] is completely covered in webbing, but you hose " + monster.mf("him","her") + " down again anyway.");
+			else outputText("[Themonster] are completely covered in webbing, but you hose them down again anyway.");
 		}
 		//LAND A HIT!
 		else {
@@ -3460,7 +3465,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		if(monster.short == "pod") {
+		if(monster is EncapsulationPod) {
 			clearOutput();
 			outputText("You can't constrict something you're trapped inside of!");
 			//Gone		menuLoc = 1;
@@ -3504,7 +3509,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		if(monster.short == "pod") {
+		if(monster is EncapsulationPod) {
 			clearOutput();
 			outputText("You can't constrict something you're trapped inside of!");
 			//Gone		menuLoc = 1;
@@ -3550,7 +3555,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				addButton(0, "Next", combatMenu, false);
 				return;
 			}
-			if(monster.short == "pod") {
+			if(monster is EncapsulationPod) {
 				clearOutput();
 				outputText("You can't play with something you are inside off!");
 				//Gone		menuLoc = 1;
@@ -3583,7 +3588,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		if(monster.short == "pod") {
+		if(monster is EncapsulationPod) {
 			clearOutput();
 			outputText("You can't engulf something you're trapped inside of!");
 			//Gone		menuLoc = 1;
@@ -3624,7 +3629,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		if(monster.short == "pod") {
+		if(monster is EncapsulationPod) {
 			clearOutput();
 			outputText("You can't wrap your wings around something you're trapped inside of!");
 			//Gone		menuLoc = 1;
@@ -4221,10 +4226,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (combat.checkConcentration()) return; //Amily concentration
 		outputText("You ready your wrists mounted scythes and prepare to sweep them towards [themonster].\n\n");
-		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
-			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attacks!\n\n");
-			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attacks with superior quickness!\n\n");
-			if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attacks.\n\n");
+		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+			if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your attacks!\n\n");
+			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText("[Themonster] dodges your attacks with superior quickness!\n\n");
+			if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attacks.\n\n");
 			enemyAI();
 			return;
 		}
@@ -4315,7 +4320,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		if (monster.short == "worms") {
+		if (monster is WormMass) {
 			outputText("Taking advantage of your new natural ");
 			if (player.horns.type == Horns.COW_MINOTAUR || player.horns.type == Horns.BICORN || player.horns.type == Horns.FROSTWYRM) outputText("weapons, ");
 			else outputText("weapon, ");
@@ -4350,7 +4355,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			chance = 80;
 		}
 		//Vala dodgy bitch!
-		if(monster.short == "Vala") {
+		if(monster is Vala) {
 			chance = 20;
 		}
 		//Account for monster speed - up to -50%.
@@ -4435,7 +4440,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Miss
 		else {
 			//Special vala changes
-			if(monster.short == "Vala") {
+			if(monster is Vala) {
 				outputText("You lower your head and charge Vala, but she just flutters up higher, grabs hold of your horn"+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "s":"")+" as you close the distance, and smears her juicy, fragrant cunt against your nose.  ");
 				outputText("The sensual smell and her excited moans stun you for a second, allowing her to continue to use you as a masturbation aid, but she quickly tires of such foreplay and flutters back with a wink.\n\n");
 				dynStats("lus", 5);
@@ -4459,7 +4464,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function upheavalAttack():void {
 		clearOutput();
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-		if (monster.short == "worms") {
+		if (monster is WormMass) {
 			outputText("Taking advantage of your new natural weapon, you quickly charge at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your horns to stab only at air.\n\n");
 			enemyAI();
 			return;
@@ -4482,7 +4487,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			chance = 80;
 		}
 		//Vala dodgy bitch!
-		if(monster.short == "Vala") {
+		if(monster is Vala) {
 			chance = 20;
 		}
 		//Account for monster speed - up to -50%.
@@ -4552,7 +4557,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Miss
 		else {
 			//Special vala changes
-			if(monster.short == "Vala") {
+			if(monster is Vala) {
 				outputText("You lower your head and charge Vala, but she just flutters up higher, grabs hold of your horns as you close the distance, and smears her juicy, fragrant cunt against your nose.  The sensual smell and her excited moans stun you for a second, allowing her to continue to use you as a masturbation aid, but she quickly tires of such foreplay and flutters back with a wink.\n\n");
 				dynStats("lus", 5);
 			}
@@ -4577,7 +4582,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		clearOutput();
 		//Keep logic sane if this attack brings victory
 		//Worms are immune!
-		if (monster.short == "worms") {
+		if (monster is WormMass) {
 			outputText("Taking advantage of your new natural weapons, you quickly thrust your stinger at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving you to stab only at air.\n\n");
 			enemyAI();
 			return;
@@ -4585,9 +4590,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Determine if dodged!
 		if (combat.checkConcentration()) return; //Amily concentration
 		if(monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80) {
-			if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your stinger!\n\n");
-			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your stinger with superior quickness!\n\n");
-			if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attempts to sting [monster him].\n\n");
+			if(monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your stinger!\n\n");
+			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText("[Themonster] dodges your stinger with superior quickness!\n\n");
+			if(monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attempts to sting [monster him].\n\n");
 			enemyAI();
 			return;
 		}
@@ -4708,7 +4713,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		//Worms are immune!
-		if (monster.short == "worms") {
+		if (monster is WormMass) {
 			outputText("Taking advantage of your new natural weapons, you quickly shoot an envenomed spike at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your spike impale the ground behind.\n\n");
 			enemyAI();
 			return;
@@ -4716,9 +4721,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Determine if dodged!
 		if (combat.checkConcentration()) return; //Amily concentration
 		if(monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80) {
-			if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your spike!\n\n");
-			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your spike with superior quickness!\n\n");
-			if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attempts to hit with a spike [monster him].\n\n");
+			if(monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your spike!\n\n");
+			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText("[Themonster] dodges your spike with superior quickness!\n\n");
+			if(monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attempts to hit with a spike [monster him].\n\n");
 			enemyAI();
 			return;
 		}
@@ -4740,17 +4745,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function playerOmniTailSpike():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
-		if (monster.short == "worms") {
+		if (monster is WormMass) {
 			outputText("Taking advantage of your new natural weapons, you quickly shoot a flurry of envenomed spike at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your spike impale the ground behind.\n\n");
 			enemyAI();
 			return;
 		}
 		//Determine if dodged!
 		if (combat.checkConcentration()) return; //Amily concentration
-		if(monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80) {
-			if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your spike!\n\n");
-			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your spike with superior quickness!\n\n");
-			if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attempts to hit with a spike [monster him].\n\n");
+		if (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80) {
+			if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attempts to hit with a spike [monster him].\n\n");
+			else if (monster.spe - player.spe >= 8) outputText("[Themonster] dodges your spike with superior quickness!\n\n");
+			else outputText("[Themonster] narrowly avoids your spike!\n\n");
 			enemyAI();
 			return;
 		}
@@ -4895,7 +4900,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		//Worms are special
-		if (monster.short == "worms") {
+		if (monster is WormMass) {
 			clearOutput();
 			outputText("There is no way those are going anywhere near your mouth!\n\n");
 			menu();
@@ -4913,10 +4918,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if(player.playerIsBlinded()) outputText("In hindsight, trying to bite someone while blind was probably a bad idea... ");
 		var damage:Number = 0;
 		//Determine if dodged!
-		if((player.playerIsBlinded() && rand(3) != 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
-			if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
-			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
-			if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
+		if((player.playerIsBlinded() && rand(3) != 0) || (monster.speedDodge(player) > 0)) {
+			if(monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your attack!");
+			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText("[Themonster] dodges your attack with superior quickness!");
+			if(monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attack.");
 			outputText("\n\n");
 			enemyAI();
 			return;
@@ -4955,7 +4960,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			outputText("Your powerful bite <b>mutilates</b> [themonster]! ");
 		}
 		if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-		else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
+		else outputText("<b>([font-miss]" + damage + "</font>)</b>");
 		outputText(" [Themonster] bleeds profusely from the many bloody bite marks you leave behind.");
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);
@@ -4974,7 +4979,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function Dig():void {
 		clearOutput();
-		if(monster.short == "pod") {
+		if(monster is EncapsulationPod) {
 			outputText("You can't grab something you're trapped inside of!");
 			menu();
 			addButton(0, "Next", combatMenu, false);
@@ -5035,7 +5040,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
 		}
 		//Worms are special
-		if (monster.short == "worms") {
+		if (monster is WormMass) {
 			//50% chance of hit (int boost)
 			if (rand(100) + player.inte/3 >= 50) {
 				var dam:int = int(player.str / 5 - rand(5));
@@ -5056,11 +5061,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		//Determine if dodged!
-		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
+		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
 			//Akbal dodges special education
-			if (monster.short == "Akbal") outputText("Akbal moves like lightning, weaving in and out of your furious attack with the speed and grace befitting his jaguar body.\n");
+			if (monster is Akbal) outputText("Akbal moves like lightning, weaving in and out of your furious attack with the speed and grace befitting his jaguar body.\n");
 			else {
-				outputText(monster.capitalA + monster.short + " manage");
+				outputText("[Themonster] manage");
 				if(!monster.plural) outputText("s");
 				outputText(" to dodge your kick!");
 				outputText("\n\n");
@@ -5114,13 +5119,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (damage > 0) {
 			//Lust raised by anemone contact!
-			if (monster.short == "anemone") {
+			if (monster is Anemone) {
 				outputText("\nThough you managed to hit the anemone, several of the tentacles surrounding her body sent home jolts of venom when your swing brushed past them.");
 				//(gain lust, temp lose str/spd)
 				(monster as Anemone).applyVenom((1+rand(2)));
 			}
 			//Lust raised by sea anemone contact!
-			if (monster.short == "sea anemone") {
+			if (monster is SeaAnemone) {
 				outputText("\nThough you managed to hit the sea anemone, several of the tentacles surrounding her body sent home jolts of venom when your swing brushed past them.");
 				//(gain lust, temp lose str/spd)
 				(monster as SeaAnemone).applyVenom((1+rand(2)));
@@ -5138,10 +5143,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		clearOutput();
 		EngineCore.WrathChange(-shieldbashcostly(), true);
 		outputText("You ready your [shield] and prepare to slam it towards [themonster].  ");
-		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
-			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
-			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
-			if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
+		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+			if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attack.");
+			else if (monster.spe - player.spe >= 8) outputText("[Themonster] dodges your attack with superior quickness!");
+			else outputText("[Themonster] narrowly avoids your attack!");
 			enemyAI();
 			return;
 		}
@@ -5238,7 +5243,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= combat.rangePhysicalForce();
 			if (damage == 0) {
 				if (monster.inte > 0) {
-					outputText(monster.capitalA + monster.short + " shrugs as the " + ammoWord + " bounces off them harmlessly.\n\n");
+					outputText("[Themonster] shrugs as the " + ammoWord + " bounces off them harmlessly.\n\n");
 				} else {
 					outputText("The " + ammoWord + " bounces harmlessly off [monster a] [monster name].\n\n");
 				}
@@ -5266,7 +5271,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= combat.historyScoutBonus();
 			if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
-			if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+			damage *= player.jewelryRangeModifier();
 			if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
 				if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
 				else {
@@ -5327,7 +5332,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			damage = Math.round(damage);
 			if (monster.HP <= monster.minHP()) {
-				if (monster.short == "pod")
+				if (monster is EncapsulationPod)
 					outputText(". ");
 				else if (monster.plural)
 					outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
@@ -5379,20 +5384,20 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if ((combat.MDOCount == combat.maxCurrentRangeAttacks()) && (combat.MSGControll)) outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 				} else {
 					var lustArrowDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
-					if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects [monster him].  ");
+					if (monster.lust < (monster.maxLust() * 0.3)) outputText("[Themonster] squirms as the magic affects [monster him].  ");
 					if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
-						if (monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
-						else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
+						if (monster.plural) outputText("[Themonster] stagger, suddenly weak and having trouble focusing on staying upright.  ");
+						else outputText("[Themonster] staggers, suddenly weak and having trouble focusing on staying upright.  ");
 					}
 					if (monster.lust >= (monster.maxLust() * 0.6)) {
-						outputText(monster.capitalA + monster.short + "'");
+						outputText("[Themonster]'");
 						if (!monster.plural) outputText("s");
 						outputText(" eyes glaze over with desire for a moment.  ");
 					}
 					lustArrowDmg *= 0.25;
 					lustArrowDmg = Math.round(lustArrowDmg);
 					monster.lust += lustArrowDmg;
-					outputText("<b>(<font color=\"#ff00ff\">" + lustArrowDmg + "</font>)</b>");
+					outputText("<b>([font-lust]" + lustArrowDmg + "</font>)</b>");
 					if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
 				}
 			}
@@ -5569,7 +5574,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else if (player.hasPerk(PerkLib.TripleStrike)) costSidewinder += 2;
 		else if (player.hasPerk(PerkLib.DoubleStrike)) costSidewinder += 1;
 		if (player.fatigue + bowCost(200 * costSidewinder) > player.maxFatigue()) {
-			outputText("You are too tired to attack " + monster.a + " " + monster.short + ".");
+			outputText("You are too tired to attack [themonster].");
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
@@ -5598,7 +5603,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType)) damage *= (10 * costSidewinder);
 		if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= combat.historyScoutBonus();
 		if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
-		if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+		damage *= player.jewelryRangeModifier();
 		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
 			if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
 			else {
@@ -5684,19 +5689,19 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			else {
 				var lustArrowDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
-				if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects [monster him].  ");
+				if (monster.lust < (monster.maxLust() * 0.3)) outputText("[Themonster] squirms as the magic affects [monster him].  ");
 				if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
-					if (monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
-					else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
+					if (monster.plural) outputText("[Themonster] stagger, suddenly weak and having trouble focusing on staying upright.  ");
+					else outputText("[Themonster] staggers, suddenly weak and having trouble focusing on staying upright.  ");
 				}
 				if (monster.lust >= (monster.maxLust() * 0.6)) {
-					outputText(monster.capitalA + monster.short + "'");
+					outputText("[Themonster]'");
 					if(!monster.plural) outputText("s");
 					outputText(" eyes glaze over with desire for a moment.  ");
 				}
 				lustArrowDmg = Math.round(lustArrowDmg);
 				monster.lust += lustArrowDmg;
-				outputText("<b>(<font color=\"#ff00ff\">" + lustArrowDmg + "</font>)</b>");
+				outputText("<b>([font-lust]" + lustArrowDmg + "</font>)</b>");
 			}
 		}
 		outputText("\n\n");
@@ -5719,7 +5724,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.isElf() && player.hasPerk(PerkLib.ELFMasterShot) && player.weaponRangePerk == "Bow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 1;
 		clearOutput();
 		if (player.fatigue + bowCost(200) > player.maxFatigue()) {
-			outputText("You are too tired to attack " + monster.a + " " + monster.short + ".");
+			outputText("You are too tired to attack [themonster].");
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
@@ -5752,19 +5757,19 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			else {
 				var lustArrowDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
-				if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects [monster him].  ");
+				if (monster.lust < (monster.maxLust() * 0.3)) outputText("[Themonster] squirms as the magic affects [monster him].  ");
 				if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
-					if (monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
-					else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
+					if (monster.plural) outputText("[Themonster] stagger, suddenly weak and having trouble focusing on staying upright.  ");
+					else outputText("[Themonster] staggers, suddenly weak and having trouble focusing on staying upright.  ");
 				}
 				if (monster.lust >= (monster.maxLust() * 0.6)) {
-					outputText(monster.capitalA + monster.short + "'");
+					outputText("[Themonster]'");
 					if(!monster.plural) outputText("s");
 					outputText(" eyes glaze over with desire for a moment.  ");
 				}
 				lustArrowDmg = Math.round(lustArrowDmg);
 				monster.lust += lustArrowDmg;
-				outputText("<b>(<font color=\"#ff00ff\">" + lustArrowDmg + "</font>)</b>");
+				outputText("<b>([font-lust]" + lustArrowDmg + "</font>)</b>");
 			}
 		}
 		flags[kFLAGS.ARROWS_SHOT] += 6;
@@ -5837,19 +5842,19 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			else {
 				var lustArrowDmg:Number = monster.lustVuln * (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
-				if (monster.lust < (monster.maxLust() * 0.3)) outputText(monster.capitalA + monster.short + " squirms as the magic affects [monster him].  ");
+				if (monster.lust < (monster.maxLust() * 0.3)) outputText("[Themonster] squirms as the magic affects [monster him].  ");
 				if (monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
-					if (monster.plural) outputText(monster.capitalA + monster.short + " stagger, suddenly weak and having trouble focusing on staying upright.  ");
-					else outputText(monster.capitalA + monster.short + " staggers, suddenly weak and having trouble focusing on staying upright.  ");
+					if (monster.plural) outputText("[Themonster] stagger, suddenly weak and having trouble focusing on staying upright.  ");
+					else outputText("[Themonster] staggers, suddenly weak and having trouble focusing on staying upright.  ");
 				}
 				if (monster.lust >= (monster.maxLust() * 0.6)) {
-					outputText(monster.capitalA + monster.short + "'");
+					outputText("[Themonster]'");
 					if(!monster.plural) outputText("s");
 					outputText(" eyes glaze over with desire for a moment.  ");
 				}
 				lustArrowDmg = Math.round(lustArrowDmg);
 				monster.lust += lustArrowDmg;
-				outputText("<b>(<font color=\"#ff00ff\">" + lustArrowDmg + "</font>)</b>");
+				outputText("<b>([font-lust]" + lustArrowDmg + "</font>)</b>");
 			}
 		}
 		outputText("\n\n");
@@ -5877,7 +5882,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		dmgBarrage *= 6;
 		if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) dmgBarrage *= combat.historyScoutBonus();
 		if (player.hasPerk(PerkLib.JobRanger)) dmgBarrage *= 1.05;
-		if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) dmgBarrage *= 1 + (player.jewelryEffectMagnitude / 100);
+		dmgBarrage *= player.jewelryRangeModifier();
 		if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
 			if (player.statusEffectv1(StatusEffects.Kelt) < 100) dmgBarrage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
 			else {
@@ -6286,7 +6291,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
+		if (monster is GooGirl) damage = Math.round(damage * 1.5);
 		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
 		damage = Math.round(damage);
 		doFireDamage(damage, true, true);

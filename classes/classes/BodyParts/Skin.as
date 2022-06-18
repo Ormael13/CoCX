@@ -45,6 +45,7 @@ public class Skin extends SaveableBodyPart {
 	 * - value: numerical id (0, 1, 2)
 	 * - id: name of the constant ("PLAIN", "FUR", "SCALES")
 	 * - name: human-readable default name, ("skin", "fur", "scales")
+	 * - adj: default adjective
 	 * - plural: is name a plural noun phrase (false, false, true)
 	 * - base: is valid base layer type (true, false, false)
 	 * - coat: is valid coat layer type (false, true, true)
@@ -74,6 +75,7 @@ public class Skin extends SaveableBodyPart {
 	public static const GOO: int = 3;
 	EnumValue.add(SkinTypes, GOO, "GOO", {
 		name:"skin",
+		adj: "goopey",
 		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} made of [skin coat].",
 		plural: false,
 		base:true

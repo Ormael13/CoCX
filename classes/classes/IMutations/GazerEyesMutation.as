@@ -85,8 +85,7 @@ public class GazerEyesMutation extends IMutationPerkType
         }
 
         public function GazerEyesMutation() {
-            super("Gazer Eyes IM", "Gazer Eyes", ".");
-            maxLvl = 3;
+            super("Gazer Eyes IM", "Gazer Eyes", SLOT_EYES, 3);
         }
 
     }

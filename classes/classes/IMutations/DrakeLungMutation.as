@@ -77,8 +77,7 @@ public class DrakeLungMutation extends IMutationPerkType
         }
 
         public function DrakeLungMutation() {
-            super("Drake Lung IM", "Drake Lung", ".");
-            maxLvl = 3;
+            super("Drake Lung IM", "Drake Lung", SLOT_LUNGS, 3);
         }
 
     }

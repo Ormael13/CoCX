@@ -76,8 +76,7 @@ public class DraconicHeartMutation extends IMutationPerkType
         }
 
         public function DraconicHeartMutation() {
-            super("Draconic Heart IM", "Draconic Heart", ".");
-            maxLvl = 3;
+            super("Draconic Heart IM", "Draconic Heart", SLOT_HEART, 3);
         }
 
     }
