@@ -3556,7 +3556,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "Tightness centers on your scalp, pulling your ears down from their normal, fleshy shape into small, chitin lumps with holes in their bottom. <b>You have insect ears!</b>";
 	    player.ears.type = Ears.INSECT;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.INSECT));
+	    //Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.INSECT));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4830,8 +4830,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your bones are breaking down and reforming in a frenzy. Your parchment-like skin begins to fall off in clumps, leaving the mess of malformed bones that are your arms right now naked for all to see. However, even as you watch, dark blood creeps over the bone, properly aligning them before healing them over, although not in their old form. Within seconds, your bones are remade into ones alike those you were born with, in structure if nothing else, the eldritch power of your blood finally ebbing away, but not before the last of it settles and turns into a brand new patch of skin.";
 	      break;
 		case Arms.ANT:
-			desc += "You double over, a sudden pain just below your shoulders. Finding you cannot reach your lower arms to feel at each other, you look down and realize that they're shrinking back into your torso."
-			if (!player.skin.hasChitin()) { desc += " Because you are shocked over your lower arms going away, you don't even notice the carapace of your primary arms softening into [skin coat]."
+		  desc += "You double over, a sudden pain just below your shoulders. Finding you cannot reach your lower arms to feel at each other, you look down and realize that they're shrinking back into your torso."
+		  if (!player.skin.hasChitin()) desc += " Because you are shocked over your lower arms going away, you don't even notice the carapace of your primary arms softening into [skin coat]."
+	      break;
 	    default:
 	      desc += "You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form.";
 	      break;
@@ -6688,7 +6689,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 		if (player.lowerBody == LowerBody.ANT) {
 			desc += "Feeling as though something is crawling down your legs, you glance down and realize the chitin covering your hips drops to only cover up to your thighs. ";
-			if (!player.coatColor2 == black) desc += "You also realize that the color changes to black. ";
+			if (!player.coatColor2 == "black") desc += "You also realize that the color changes to black. ";
 			desc += "<b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>"
 		}
 	    else desc += "Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs. From the waist down, your strength completely deserts you, leaving you to fall hard on your [butt] in the dirt. With nothing else to do, you look down, only to be mesmerized by the sight of black exoskeleton creeping up a perfectly human-looking calf. It crests up your knee to envelop the joint in a many-faceted onyx coating. Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton. From a distance it would look almost like a black, thigh-high boot, but you know the truth. <b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>";
@@ -8192,16 +8193,16 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 	    TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHuman, doOutput);
 
-		if (player.lowerBody == LowerBody.SPIDER) desc += "Feeling as though something is crawling up your legs, you glance down and realize the chitin covering your thighs rises to also cover up to your hips. <b>You now have human-like legs covered in a shiny, ant-like exoskeleton.</b>";
+		if (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS) desc += "Feeling as though something is crawling up your legs, you glance down and realize the chitin covering your thighs rises to also cover up to your hips. <b>You now have human-like legs covered in a shiny, ant-like exoskeleton.</b>";
 	    else desc += "Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your hips. From the waist down, your strength completely deserts you, leaving you to fall hard on your [butt] in the dirt. With nothing else to do, you look down, only to be mesmerized by the sight of shiny exoskeleton creeping up a perfectly human-looking calf. It crests up your knee to envelop the joint in a many-faceted coating. Then, it resumes its slow upward crawl, not stopping until it has girded your hips in shiny exoskeleton. <b>You now have human-like legs covered in a shiny, ant-like exoskeleton.</b>";
 
-	    player.lowerBody = LowerBody.ANT_LEGS;
+	    player.lowerBody = LowerBody.ANT;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ANT_LEGS));
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ANT));
 	  },
 	  // is present
 	  function (): Boolean {
-	    return player.lowerBody === LowerBody.ANT_LEGS && player.legCount === 2;
+	    return player.lowerBody === LowerBody.ANT && player.legCount === 2;
 	  }
 	);
   /*
@@ -8431,7 +8432,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      desc += "Feeling an uncomfortable sensation on your butt, you stretch yourself, attributing it to having sat on a rough surface. A burning sensation runs through your body, similar to the one that you had after eating the root. When it migrates to your back, your attention goes to a mass of fluff that has erupted from your backside. Before you can check it properly, it seems to move on its own, following the heated sensation that now pulsates through your body, and when the heated pulses seem to have stopped, it has become a long, fluffy tube";
 	      desc += "Shortly after, the feel of that spicy root returns, but now the heat is felt only in your tail, which shakes wildly while it elongates and becomes more bushy. Soon it has become almost as long as you. A very thick mass of soft, fluffy furs covers it in a matter of seconds. It acquires a lovely ringed pattern of red-russet and copperish-orange.";
 	      desc += "When the effects finally subside, you decide to test the tail, making it coil around your body, realizing soon that you can control its movements with ease, and that its fur feels wonderful at the touch. Anyways, <b>you now have a long, bushy, red-panda tail!</b>";
-	    } else if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.MANTIS_ABDOMEN || ) {
+	    } else if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.MANTIS_ABDOMEN || player.tailType == Tail.ANT_ABDOMEN) {
 	      desc += "Your insectile backside seems affected by the root properties, as your venom production suddenly stops. The flesh within the abdomen retracts into your backside, the chiting covering falling, leaving exposed a layer of soft, bare skin. When the abdomen disappears, your left with a comically sized butt, that soon reverts to its usual size.";
 	      desc += "The root keeps doing its thing, as you feel an uncomfortable sensation on your butt. A burning sensation runs through your body, similar to the one that you had after eating the root. When it migrates to your back, your attention goes to a mass of fluff that has erupted from your backside. Before you can check it properly, it seems to move on its own, following the heated sensation that now pulsates through your body, and when the heated pulses seem to have stopped, it has become a long, fluffy tube, quite different from your former abdomen.";
 	      desc += "Shortly after, the feel of that spicy root returns, but now the heat is felt only in your tail, which shakes wildly while it elongates and becomes more bushy. Soon it has become almost as long as you. A very thick mass of soft, fluffy furs covers it in a matter of seconds. It acquires a lovely ringed pattern of red-russet and copperish-orange.";
@@ -9429,7 +9430,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
 
-	    desc += "A burst of pain hits you just above your [butt], coupled with a sensation of burning heat and pressure. You can feel your " + player.skinFurScales() + " tearing as something forces its way out of your body. Reaching back, you grab at it with your hands. It's huge... and you can feel it toughening under your touches, firming up until the whole tail has become quite hard and elliptical in shape. The heat fades, leaving behind a gentle warmth, and you realize your tail has become an ant's abdomen! As you start to shift your seat, however, you feel a sudden tug, and feel like something was just spat out--you must have a small stinger back there as well. <b>You now have an ant's abdomen.</b>".
+	    desc += "A burst of pain hits you just above your [butt], coupled with a sensation of burning heat and pressure. You can feel your " + player.skinFurScales() + " tearing as something forces its way out of your body. Reaching back, you grab at it with your hands. It's huge... and you can feel it toughening under your touches, firming up until the whole tail has become quite hard and elliptical in shape. The heat fades, leaving behind a gentle warmth, and you realize your tail has become an ant's abdomen! As you start to shift your seat, however, you feel a sudden tug, and feel like something was just spat out--you must have a small stinger back there as well. <b>You now have an ant's abdomen.</b>";
 		player.tailVenom = 10;
 	    player.tailRecharge = 5;
 	    player.tailType = Tail.ANT_ABDOMEN;
@@ -12274,7 +12275,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 					if (player.cocks.length > cock){
 						desc += "Your " + num2Text2(cock+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer";
-						desc += player.hasSheath(?) "" : " out of its new sheath";
+						desc += player.hasSheath()? "" : " out of its new sheath";
 						desc += ", all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your [cock "+(cock+1)+"] has become a tentacle!  As you watch, it withdraws back into its sheath; it's colored a dull white, and evidence seems to suggest you can make it extend out at will.  <b>You now have a";
 						
 						if(player.tentacleCocks() > 0) outputText("nother");

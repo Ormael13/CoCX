@@ -633,7 +633,7 @@ public class Face extends SaveableBodyPart {
 	EnumValue.add(Types, ANT, "ANT", {
 		name: "ant",
 		appearanceDesc: "Your face looks largely human, except for the mandibles sticking out from your jawline.",
-		humanShaped: true
+		humanShaped: true,
 		bite:true
 	});
 

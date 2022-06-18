@@ -892,11 +892,11 @@ private function laySomeEggsInThatWitchFinally():void {
 	if (player.fertilizedEggs() > 0) {
 		if (player.canOvipositBee())
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_BEE_EGGS, 192);
-		else if (player.canOvipositSpider)
+		else if (player.canOvipositSpider())
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_DRIDER_EGGS, 192);
-		else if (player.canOvipositMantis)
+		else if (player.canOvipositMantis())
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_MANTIS_EGGS, 192);
-		else if (player.canOvipositAnt)
+		else if (player.canOvipositAnt())
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_ANT_EGGS, 192);
 		else outputText ("A little ghost pops up. \"<i>Looks like something went wrong determining what kind of ovipositor you have. You should report this to the coders, along with what race you are.</i>\"");
 	}
