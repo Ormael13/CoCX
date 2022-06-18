@@ -122,6 +122,7 @@ public class Races {
 	public static const APOPHIS:ApophisRace                = new ApophisRace(100);
 	public static const CYCLOP:CyclopRace                  = new CyclopRace(101);
 	public static const ALICORN:AlicornRace                = new AlicornRace(102);
+	public static const ANT:AntRace						   = new AntRace(103);
 	
 	// Racial groups
 	public static const CatlikeRaces:/*Race*/Array   = [
@@ -131,7 +132,7 @@ public class Races {
 			NAGA, GORGON, VOUIVRE, COUATL, HYDRA, APOPHIS
 	];
 	public static const InsectRaces:/*Race*/Array = [
-			BEE, MANTIS, SCORPION, SPIDER, CANCER, ATLACH_NACHA
+			BEE, MANTIS, SCORPION, SPIDER, CANCER, ATLACH_NACHA, ANT
 	];
 	public static const GoblinoidRaces:/*Race*/Array = [
 			GOBLIN, GREMLIN
