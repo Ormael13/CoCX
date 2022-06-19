@@ -4825,7 +4825,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      break;
 		case Arms.ANT:
 		  desc += "You double over, a sudden pain just below your shoulders. Finding you cannot reach your lower arms to feel at each other, you look down and realize that they're shrinking back into your torso."
-		  if (!player.skin.hasChitin()) desc += " Because you are shocked over your lower arms going away, you don't even notice the carapace of your primary arms softening into [skin coat]."
+		  if (!player.isChitinCovered()) desc += " Because you are shocked over your lower arms going away, you don't even notice the carapace of your primary arms softening into [skin coat]."
 	      break;
 	    default:
 	      desc += "You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form.";

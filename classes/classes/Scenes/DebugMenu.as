@@ -232,7 +232,7 @@ public class DebugMenu extends BaseContent
 			}
 		}
 		private function configureTemplate(template:ItemTemplate, paramsDef:Array=null):void {
-			paramsDef ||= template.metadata.params;;;;;;;;;;;;;;;;;
+			paramsDef ||= template.metadata.params;
 			clearOutput();
 			outputText(template.name + " parameters:\n");
 			flushOutputTextToGUI();
@@ -885,6 +885,7 @@ public class DebugMenu extends BaseContent
 		}
 		private var bodyEditorControls:Block;
 		public function bodyPartEditorRoot():void {
+			clearOutput();
 			menu();
 			if (bodyEditorControls) {
 				mainView.removeElement(bodyEditorControls);
