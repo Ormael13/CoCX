@@ -165,8 +165,8 @@ public class RaceTierBuilder {
 		addSlotRequirement(BodyData.SLOT_SKIN_COAT_TYPE, type);
 		return this;
 	}
-	public function requireSkinCoatColor(color:*):RaceTierBuilder {
-		addSlotRequirement(BodyData.SLOT_SKIN_COAT_COLOR, color);
+	public function requireFurColor(color:*):RaceTierBuilder {
+		addSlotRequirement(BodyData.SLOT_FUR_COLOR, color);
 		return this;
 	}
 	public function requireTailType(type:*):RaceTierBuilder {

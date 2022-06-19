@@ -183,7 +183,7 @@ public class Cockatrice extends Monster {
         this.tail.type = Tail.COCKATRICE;
         */
         this.hairType = Hair.FEATHER;
-        this.skinTone = "midnight blue";
+        this.bodyColor = "midnight blue";
         this.skinType = Skin.SCALES;
         this.hairColor = "blue";
         this.hairLength = 2;

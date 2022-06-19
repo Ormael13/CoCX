@@ -265,6 +265,24 @@ public class Utils extends Object
 		public static function shallowCopy(src:Object):Object {
 			return copyObject({},src);
 		}
+		
+		/**
+		 * Returns a deep copy of `src`
+		 */
+		public static function deepCopy(src:Object):Object {
+			var dst:Object = {};
+			for (var k:String in src) {
+				if (src.hasOwnProperty(k)) {
+					var v:* = src[k];
+					if (typeof v === "object" && v !== null) {
+						dst[k] = deepCopy(v);
+					} else {
+						dst[k] = v;
+					}
+				}
+			}
+			return dst;
+		}
 		/**
 		 * Performs a shallow copy of properties from `src` to `dest`.
 		 * If `properties` is supplied, only listed properties are copied.
@@ -497,6 +515,55 @@ public class Utils extends Object
 			else throw new Error("RandomInCollection could not determine usage pattern.");
 
 			return tar[rand(tar.length)];
+		}
+		
+		/**
+		 * Pick a weighted random item.
+		 * Weights <= 0 or NaN are ignored.
+		 * Weight of Infinity means "return this value"
+		 * If no suitable item, return null
+		 * @param {[][]} pairs Pairs of [weight, value]
+		 * @example
+		 * weightedRandom([
+		 *   [1, "ketchup"],
+		 *   [5, "mayo"],
+		 *   [14, "cum"]
+		 * ])
+		 * // would return "ketchup" with 5% chance, "mayo" with 25%, and "cum" with 70%
+		 */
+		public static function weightedRandom(...pairs):* {
+			var sum:Number = 0;
+			if (pairs.length == 0) {
+				return null;
+			}
+			if (pairs.length == 1) {
+				// imitate spread
+				// 1st argument could be the list of pairs
+				if (pairs[0].length != 2) return weightedRandom.apply(null, pairs[0]);
+				// 2 options here:
+				// pairs = [ [weight, value] ]
+				// pairs = [ [pair1,  pair2] ]
+				if (pairs[0][0] is Array) return weightedRandom.apply(null, pairs[0]);
+			}
+			for each (var item:Array in pairs) {
+				if (item.length != 2) {
+					throw new Error("Invalid weightedRandom item");
+				}
+				var weight:Number = item[0];
+				if (weight === Infinity) return item[1];
+				if (isFinite(weight) && weight > 0) {
+					sum += weight;
+				}
+			}
+			var roll:Number = Math.random()*sum;
+			item = null;
+			for each (item in pairs) {
+				weight = item[0];
+				if (!isFinite(weight) || weight <= 0) continue;
+				roll -= weight;
+				if (roll <= 0) break;
+			}
+			return item;
 		}
 
 		/**

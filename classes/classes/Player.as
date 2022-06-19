@@ -573,7 +573,7 @@ use namespace CoC;
 		//Natural Armor (need at least to partialy covering whole body)
 		public function haveNaturalArmor():Boolean
 		{
-			return hasPerk(PerkLib.ThickSkin) || skin.hasFur() || skin.hasChitin() || skin.hasScales() || skin.hasBark() || skin.hasDragonScales() || skin.hasBaseOnly(Skin.STONE);
+			return hasPerk(PerkLib.ThickSkin) || skin.isFurCovered() || skin.isChitinCovered() || skin.isScaleCovered() || skin.hasBark() || skin.isDragonScaleCovered() || skin.hasBaseOnly(Skin.STONE);
 		}
 		//Unhindered related acceptable armor types
 		public function meetUnhinderedReq():Boolean
@@ -618,11 +618,11 @@ use namespace CoC;
 			}
 			//Stacks on top of Thick Skin perk.
 			var p:Boolean = skin.isCoverLowMid();
-			if (skin.hasFur()) armorDef += (p?1:2) * newGamePlusMod;
-			if (hasGooSkin() && skinAdj == "slimy") armorDef += (2 * newGamePlusMod);
-			if (skin.hasChitin()) armorDef += (p?2:4)*newGamePlusMod;
-			if (skin.hasScales()) armorDef += (p?3:6)*newGamePlusMod; //bee-morph (), mantis-morph (), scorpion-morph (wpisane), spider-morph (wpisane)
-			if (skin.hasBark() || skin.hasDragonScales()) armorDef += (p?4:8)*newGamePlusMod;
+			if (skin.isFurCovered()) armorDef += (p?1:2) * newGamePlusMod;
+			if (isGooSkin() && skinAdj == "slimy") armorDef += (2 * newGamePlusMod);
+			if (skin.isChitinCovered()) armorDef += (p?2:4)*newGamePlusMod;
+			if (skin.isScaleCovered()) armorDef += (p?3:6)*newGamePlusMod; //bee-morph (), mantis-morph (), scorpion-morph (wpisane), spider-morph (wpisane)
+			if (skin.hasBark() || skin.isDragonScaleCovered()) armorDef += (p?4:8)*newGamePlusMod;
 			if (skin.hasBaseOnly(Skin.STONE)) armorDef += (10 * newGamePlusMod);
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorDef += (1 * newGamePlusMod);
@@ -823,11 +823,11 @@ use namespace CoC;
 			}
 			//Stacks on top of Thick Skin perk.
 			var p:Boolean = skin.isCoverLowMid();
-			if (skin.hasFur()) armorMDef += (p?1:2)*newGamePlusMod;
-			if (hasGooSkin() && skinAdj == "slimy") armorMDef += (2 * newGamePlusMod);
-			if (skin.hasChitin()) armorMDef += (p?2:4)*newGamePlusMod;
-			if (skin.hasScales()) armorMDef += (p?3:6)*newGamePlusMod; //bee-morph (), mantis-morph (), scorpion-morph (wpisane), spider-morph (wpisane)
-			if (skin.hasBark() || skin.hasDragonScales()) armorMDef += (p?4:8)*newGamePlusMod;
+			if (skin.isFurCovered()) armorMDef += (p?1:2)*newGamePlusMod;
+			if (isGooSkin() && skinAdj == "slimy") armorMDef += (2 * newGamePlusMod);
+			if (skin.isChitinCovered()) armorMDef += (p?2:4)*newGamePlusMod;
+			if (skin.isScaleCovered()) armorMDef += (p?3:6)*newGamePlusMod; //bee-morph (), mantis-morph (), scorpion-morph (wpisane), spider-morph (wpisane)
+			if (skin.hasBark() || skin.isDragonScaleCovered()) armorMDef += (p?4:8)*newGamePlusMod;
 			if (skin.hasBaseOnly(Skin.STONE)) armorMDef += (10 * newGamePlusMod);/*
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorMDef += (1 * newGamePlusMod);/*
@@ -3612,14 +3612,14 @@ use namespace CoC;
 				mutantCounter++;
 			if (faceType == Face.HORSE)
 			{
-				if (hasFur())
+				if (isFurCovered())
 					mutantCounter--;
 				if (tailType == Tail.HORSE)
 					mutantCounter--;
 			}
 			if (faceType == Face.DOG)
 			{
-				if (hasFur())
+				if (isFurCovered())
 					mutantCounter--;
 				if (tailType == Tail.DOG)
 					mutantCounter--;

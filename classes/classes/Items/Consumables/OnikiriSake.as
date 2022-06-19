@@ -159,13 +159,13 @@ public class OnikiriSake extends Consumable {
 			changes++;
 		}
 		//Skin
-		if (!InCollection(player.skinTone, "red", "reddish-orange", "purple", "blue") && changes < changeLimit && rand(4) == 0) {
-			player.skinTone = randomChoice("purple","reddish-orange","red","blue");
+		if (!InCollection(player.skinColor, "red", "reddish-orange", "purple", "blue") && changes < changeLimit && rand(4) == 0) {
+			player.skinColor = randomChoice("purple","reddish-orange","red","blue");
 			changes++;
 			outputText("\n\nThe heat of the alcohol is getting to you; it's like if your ");
-			if (player.hasFur()) outputText("skin");
+			if (player.isFurCovered()) outputText("skin");
 			else outputText(player.skinDesc);
-			outputText(" changed to  " + player.skinTone + ". Wait, it really did!");
+			outputText(" changed to  " + player.skinColor + ". Wait, it really did!");
 		}
 		//mutationStep(player.skin.base.type == PLAIN && !player.skin.hasBattleTattoo(), 3, function(): void {
 		if (player.skin.base.type == Skin.PLAIN && !player.skin.hasBattleTattoo() && rand(3) == 0 && changes < changeLimit) {

@@ -247,13 +247,13 @@ public class Appearance extends Utils
 				else description += "pierced ";
 				haveDescription = true;
 			}
-			if (!haveDescription && i_creature.hasGooSkin()) {
+			if (!haveDescription && i_creature.isGooSkin()) {
 				options = ["slime-slick ",
 					"goopy ",
 					"slippery "];
 				description += randomChoice(options);
 			}
-			if (!haveDescription && i_creature.hasGhostSkin()) {
+			if (!haveDescription && i_creature.isGhostSkin()) {
 				options = ["transparent "];
 				description += randomChoice(options);
 			}
@@ -393,8 +393,8 @@ public class Appearance extends Utils
 			}
 			var isPierced:Boolean = (creature.cocks.length == 1) && (creature.cocks[cockIndex].isPierced); //Only describe as pierced or sock covered if the creature has just one cock
 			var hasSock:Boolean = (creature.cocks.length == 1) && (creature.cocks[cockIndex].sock != "");
-			var isGooey:Boolean = (creature.skin.hasGooSkin());
-			var isGhastly:Boolean = (creature.skin.hasGhostSkin());
+			var isGooey:Boolean = (creature.skin.isGooSkin());
+			var isGhastly:Boolean = (creature.skin.isGhostSkin());
 			return cockDescription(cockType, creature.cocks[cockIndex].cockLength, creature.cocks[cockIndex].cockThickness, creature.lust, creature.cumQ(), isPierced, hasSock, isGooey, isGhastly);
 		}
 
@@ -1181,7 +1181,7 @@ public class Appearance extends Utils
 
 			}
 			//Slimy skin
-			if (i_creature.hasGooSkin()) {
+			if (i_creature.isGooSkin()) {
 				if (description) description += " ";
 				options = ["goopey",
 					"gooey",
@@ -1189,7 +1189,7 @@ public class Appearance extends Utils
 				description += randomChoice(options);
 			}
 			//Ghost skin
-			if (i_creature.hasGhostSkin()) {
+			if (i_creature.isGhostSkin()) {
 				if (description) description += " ";
 				options = ["transparent"];
 				description += randomChoice(options);
@@ -1300,7 +1300,7 @@ public class Appearance extends Utils
 				if (description != "") description += ", ";
 				description += "pierced";
 			}
-			if (description == "" && i_creature.hasGooSkin()) {
+			if (description == "" && i_creature.isGooSkin()) {
 				if (description != "")
 					description += ", ";
 				if (rand(2) == 0)
@@ -1308,7 +1308,7 @@ public class Appearance extends Utils
 				else
 					description += "slimy";
 			}
-			if (description == "" && i_creature.hasGhostSkin()) {
+			if (description == "" && i_creature.isGhostSkin()) {
 				if (description != "")
 					description += ", ";
 				description += "transparent";
@@ -1391,7 +1391,7 @@ public class Appearance extends Utils
 			//Descriptive descriptions - 50% chance of being called
 			if (rand(2) == 0) {
 				//Doggie descriptors - 50%
-				if (i_creature.hasFur() > 2 && !haveDescription && rand(2) == 0) {
+				if (i_creature.isFurCovered() > 2 && !haveDescription && rand(2) == 0) {
 					description += "bitch-";
 					haveDescription = true;
 				}

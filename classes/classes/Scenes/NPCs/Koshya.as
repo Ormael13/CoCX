@@ -2,7 +2,7 @@
  * ...
  * @author Ormael (for now)
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -107,7 +107,7 @@ import classes.internals.*;
 			return str;
 		}
 		
-		public function Koshya() 
+		public function Koshya()
 		{
 			this.a = "the ";
 			this.short = "angel";
@@ -124,7 +124,7 @@ import classes.internals.*;
 			this.butt.type = Butt.RATING_AVERAGE;
 			initStrTouSpeInte(45, 100, 110, 50);
 			initWisLibSensCor(110, 25, 15, 0);
-			this.skinTone = "pale blue";
+			this.bodyColor = "pale blue";
 			this.hairColor = "white";
 			this.hairLength = 16;
 			this.weaponName = "fist";

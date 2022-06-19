@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -298,7 +298,7 @@ public class Evangeline2 extends Monster
 			}
 		}
 		
-		public function Evangeline2() 
+		public function Evangeline2()
 		{
 			this.a = "";
 			this.short = "Evangeline";
@@ -432,7 +432,7 @@ public class Evangeline2 extends Monster
 			this.createVagina(false, VaginaClass.WETNESS_DRY, VaginaClass.LOOSENESS_TIGHT);
 			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
-			this.skinTone = "olive";
+			this.bodyColor = "olive";
 			this.hairLength = 36;
 			initWisLibSensCor(15, 25, 35, 100);
 			this.fatigue = 0;

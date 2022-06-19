@@ -13,7 +13,7 @@ import classes.internals.*;
 
 public class DarkElfSniperCaves extends DarkElfSniper
 	{
-		public function DarkElfSniperCaves() 
+		public function DarkElfSniperCaves()
 		{
 			this.a = "the ";
 			this.short = "dark elf sniper";
@@ -28,7 +28,7 @@ public class DarkElfSniperCaves extends DarkElfSniper
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE + 1;
 			this.lowerBody = LowerBody.ELF;
-			this.skinTone = "dark";
+			this.bodyColor = "dark";
 			this.hairColor = "silver";
 			this.hairLength = 13;
 			initStrTouSpeInte(165, 250, 290, 160);

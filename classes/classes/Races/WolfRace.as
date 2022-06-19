@@ -26,7 +26,7 @@ public class WolfRace extends Race {
 				.legType(LowerBody.WOLF, +1)
 				.tailType(Tail.WOLF, +1)
 				.skinCoatType(Skin.FUR, +2)
-				.skinCoatColor("glacial white", +1)
+				.furColor("glacial white", +1)
 				.hairColor("glacial white", +1)
 				.wingType(Wings.NONE, +1)
 				.rearType(RearBody.FENRIR_ICE_SPIKES, +6)
@@ -44,7 +44,7 @@ public class WolfRace extends Race {
 		buildTier(10, "winter wolf")
 				.namesMaleFemaleTaur("winter wolf", "winter wolf", "winter wolf-taur")
 				.requireSkinCoatType(Skin.FUR)
-				.requireSkinCoatColor("glacial white")
+				.requireFurColor("glacial white")
 				.buffs({
 					"str.mult": +0.65,
 					"tou.mult": +0.40,

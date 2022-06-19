@@ -2306,16 +2306,16 @@ public class KitsuneScene extends BaseContent
 					if (!InCollection(player.hairColor, KitsuneRace.ElderKitsuneColors)) {
 						// wrong hair color
 						if (fur) {
-							if (InCollection(fur.color, KitsuneRace.ElderKitsuneColors)) {
+							if (InCollection(player.furColor, KitsuneRace.ElderKitsuneColors)) {
 								// right fur color
-								player.hairColor = fur.color;
+								player.hairColor = player.furColor;
 								if (player.hairLength > 0) outputText("\n\nNow you have [haircolor] hair matching your fur, like true kitsune elder. You look really regal!");
 							} else {
 								// wrong fur color
 								player.hairColor       = randomChoice(KitsuneRace.ElderKitsuneColors);
-								fur.color = player.hairColor;
+								player.furColor = player.hairColor;
 								if (player.hairLength > 0) outputText("\n\nNow you have [haircolor] fur and hair, like true kitsune elder. You look really regal!");
-								else outputText("\n\nNow you have [skin coat.color] fur, like true kitsune elder. You look really regal!");
+								else outputText("\n\nNow you have [fur color] fur, like true kitsune elder. You look really regal!");
 							}
 						} else {
 							// no fur
@@ -2324,9 +2324,9 @@ public class KitsuneScene extends BaseContent
 						}
 					} else {
 						// right hair color
-						if (fur && !InCollection(fur.color, KitsuneRace.ElderKitsuneColors)) {
+						if (fur && !InCollection(player.furColor, KitsuneRace.ElderKitsuneColors)) {
 							// wrong fur color
-							fur.color = player.hairColor;
+							player.furColor = player.hairColor;
 							outputText("\n\nNow you have [haircolor] fur matching your hair, like true kitsune elder. You look really regal!");
 						}
 					}

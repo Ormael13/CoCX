@@ -261,7 +261,7 @@ public class Kitsune extends Monster
 			this.tallness = rand(24) + 60;
 			this.hips.type = Hips.RATING_AMPLE;
 			this.butt.type = Butt.RATING_AVERAGE + 1;
-			this.skinTone = "pale";
+			this.bodyColor = "pale";
 			this.skin.base.pattern = Skin.PATTERN_MAGICAL_TATTOO;
 			this.hairColor = hairColor;
 			this.hairLength = 13 + rand(20);

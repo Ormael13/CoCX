@@ -288,7 +288,7 @@ public class Sheila extends Monster
 			this.hips.type = Hips.RATING_AVERAGE;
 			this.butt.type = Butt.RATING_AVERAGE + 1;
 			this.lowerBody = LowerBody.KANGAROO;
-			this.skinTone = "tan";
+			this.bodyColor = "tan";
 			this.hairColor = "auburn";
 			this.hairLength = 11;
 			initStrTouSpeInte(90, 45, 105, 50);

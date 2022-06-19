@@ -82,11 +82,11 @@ public class Mimic extends Monster {
         this.hips.type = Hips.RATING_BOYISH;
         this.butt.type = Butt.RATING_TIGHT;
         if (type == 3)
-            this.skinTone = "brown";
+            this.bodyColor = "brown";
         if (type == 1 || type == 2)
-            this.skinTone = "light";
+            this.bodyColor = "light";
         else
-            this.skinTone = "gray";
+            this.bodyColor = "gray";
         this.hairColor = "none";
         this.hairLength = 0;
         this.pronoun1 = "it";

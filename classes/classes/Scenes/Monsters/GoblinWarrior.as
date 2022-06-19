@@ -68,7 +68,7 @@ public class GoblinWarrior extends Goblin
 			this.tallness = 44 + rand(7);
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "dark green";
+			this.bodyColor = "dark green";
 			this.hairColor = "red";
 			this.hairLength = 4;
 			initStrTouSpeInte(75, 60, 70, 72);

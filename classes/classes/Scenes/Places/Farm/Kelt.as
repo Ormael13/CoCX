@@ -152,7 +152,7 @@ public class Kelt extends Monster
 			this.butt.type = Butt.RATING_AVERAGE + 1;
 			this.lowerBody = LowerBody.HOOFED;
 			this.legCount = 4;
-			this.skinTone = "tan";
+			this.bodyColor = "tan";
 			this.hairColor = randomChoice("black","brown");
 			this.hairLength = 3;
 			initStrTouSpeInte(70, 80, 50, 20);

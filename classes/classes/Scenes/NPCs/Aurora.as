@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -445,7 +445,7 @@ use namespace CoC;
 			SceneLib.auroraFollower.AuroraWonSparring();
 		}
 		
-		public function Aurora() 
+		public function Aurora()
 		{
 			if (flags[kFLAGS.AURORA_LVL] == 1) {
 				initStrTouSpeInte(10, 300, 30, 80);
@@ -603,7 +603,7 @@ use namespace CoC;
 			this.tallness = 108;//9 feet
 			this.hips.type = Hips.RATING_CURVY + 4;
 			this.butt.type = Butt.RATING_EXPANSIVE + 1;
-			this.skinTone = "turquoise";
+			this.bodyColor = "turquoise";
 			this.hairColor = "navy blue";
 			this.hairLength = 20;
 			this.weaponName = "claws";
@@ -681,6 +681,6 @@ use namespace CoC;
 			}
 			//prestige job sentinel? next step after epic tou/spe/str/lib?
 			checkMonster();
-		}	
+		}
 	}
 }

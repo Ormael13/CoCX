@@ -148,7 +148,7 @@ public class Goblin extends Monster
 			this.tallness = 35 + rand(4);
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "dark green";
+			this.bodyColor = "dark green";
 			this.hairColor = "purple";
 			this.hairLength = 4;
 			initStrTouSpeInte(14, 17, 30, 38);

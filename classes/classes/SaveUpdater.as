@@ -533,7 +533,7 @@ public class SaveUpdater extends NPCAwareContent {
 		}
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 8) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 9;
-			if (!player.hasFur()) {
+			if (!player.isFurCovered()) {
 				camp.doCamp();
 				return; //No fur? Return to camp.
 			}
@@ -671,11 +671,11 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			//Update chitin
 			if (player.hasCoatOfType(Skin.CHITIN)) {
-				if (player.isRace(Races.MANTIS)) player.skin.coat.color = "green";
-				if (player.isRace(Races.SPIDER)) player.skin.coat.color = "pale white";
+				if (player.isRace(Races.MANTIS)) player.chitinColor = "green";
+				if (player.isRace(Races.SPIDER)) player.chitinColor = "pale white";
 				if (player.isRace(Races.MANTIS) && !player.isRace(Races.SPIDER)) {
-					if (rand(2) == 1) player.skin.coat.color = "green";
-					else player.skin.coat.color = "pale white";
+					if (rand(2) == 1) player.chitinColor = "green";
+					else player.chitinColor = "pale white";
 				}
 			}
 			doNext(camp.doCamp);
@@ -740,7 +740,7 @@ public class SaveUpdater extends NPCAwareContent {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 21;
 			if (player.hasPerk(PerkLib.Lycanthropy)) {
 				player.skin.coverage = Skin.COVERAGE_LOW;
-				player.coatColor = player.hairColor;
+				player.furColor = player.hairColor;
 				player.removePerk(PerkLib.Lycanthropy);
 				var bonusStats:Number = 0;
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats += 10;
@@ -924,8 +924,8 @@ public class SaveUpdater extends NPCAwareContent {
 				player.setShield(shields.DRGNSHL);
 				player.setArmor(armors.LAYOARM);
 				flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
-				player.skinTone = "light";
-				player.faceType = Face.HUMAN;
+				player.skinColor                                 = "light";
+				player.faceType                                  = Face.HUMAN;
 				player.eyes.type = Eyes.HUMAN;
 				player.horns.type = Horns.NONE;
 				player.horns.count = 0;
@@ -2011,6 +2011,11 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.008) {
 				if (flags[kFLAGS.APEX_SELECTED_RACE] >= 18) flags[kFLAGS.APEX_SELECTED_RACE] += 1;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.008;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.009) {
+				if (player.furColor == "lilac and white striped") player.furColor = "lilac and white";
+				if (player.hairColor == "lilac and white striped") player.hairColor = "lilac and white";
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.009;
 			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.008) {
 				if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.HclassHeavenTribulationSurvivor);
@@ -2062,7 +2067,7 @@ public class SaveUpdater extends NPCAwareContent {
 	private function chooseFurColorSaveUpdate(color:String):void {
 		clearOutput();
 		outputText("You now have " + color + " fur. You will be returned to your [camp] now and you can continue your usual gameplay.");
-		player.skin.coat.color = color;
+		player.furColor = color;
 		doNext(camp.doCamp);
 	}
 
@@ -2136,4 +2141,4 @@ public class SaveUpdater extends NPCAwareContent {
 	}
 
 }
-}
+}

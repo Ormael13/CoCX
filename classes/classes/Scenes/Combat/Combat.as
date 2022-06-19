@@ -4759,7 +4759,7 @@ public class Combat extends BaseContent {
             manaregeneration1();
             soulforceregeneration1();
 			venomCombatRecharge1();
-        } 
+        }
         enemyAI();
     }
 
@@ -14080,29 +14080,29 @@ public class Combat extends BaseContent {
                     //FOR PLAYERS WITH GIANT BREASTS
                     if (player.biggestTitSize() >= 35 && player.biggestTitSize() < 66) {
                         if (player.hips.type >= 20) {
-                            outputText("Your [hips] forces your gait to lurch slightly side to side, which causes the fat of your [skintone] ");
+                            outputText("Your [hips] forces your gait to lurch slightly side to side, which causes the fat of your [color] ");
                             if (player.butt.type >= 20) outputText("[butt] and ");
                             outputText(chestDesc() + " to wobble immensely, throwing you off balance and preventing you from moving quick enough to escape.");
-                        } else if (player.butt.type >= 20) outputText("Your [skintone] [butt] and [chest] wobble and bounce heavily, throwing you off balance and preventing you from escaping.");
-                        else outputText("Your [chest] jiggle and wobble side to side like the [skintone] sacks of milky fat they are, with enough force to constantly throw you off balance, preventing you from escaping.");
+                        } else if (player.butt.type >= 20) outputText("Your [color] [butt] and [chest] wobble and bounce heavily, throwing you off balance and preventing you from escaping.");
+                        else outputText("Your [chest] jiggle and wobble side to side like the [color] sacks of milky fat they are, with enough force to constantly throw you off balance, preventing you from escaping.");
                     }
                     //FOR PLAYERS WITH MASSIVE BREASTS
                     else if (player.biggestTitSize() >= 66) {
                         if (player.hips.type >= 20) {
                             outputText("Your [chest] nearly drag along the ground while your [hips] swing side to side ");
-                            if (player.butt.type >= 20) outputText("causing the fat of your [skintone] [butt] to wobble, ");
+                            if (player.butt.type >= 20) outputText("causing the fat of your [color] [butt] to wobble, ");
                             outputText("forcing you off balance and preventing you from escaping.");
-                        } else if (player.butt.type >= 20) outputText("Your [chest] nearly drag along the ground while the fat of your [skintone] [butt] wobbles heavily from side to side, forcing your body off balance and preventing you from moving quick enough to escape.");
+                        } else if (player.butt.type >= 20) outputText("Your [chest] nearly drag along the ground while the fat of your [color] [butt] wobbles heavily from side to side, forcing your body off balance and preventing you from moving quick enough to escape.");
                         else outputText("Your [chest] nearly drag along the ground, preventing you from moving quick enough to get escape.");
                     }
                     //FOR PLAYERS WITH EITHER GIANT HIPS OR BUTT BUT NOT THE BREASTS
                     else if (player.hips.type >= 20) {
                         outputText("Your [hips] swing heavily from side to side ");
-                        if (player.butt.type >= 20) outputText("causing your [skintone] [butt] to wobble obscenely ");
+                        if (player.butt.type >= 20) outputText("causing your [color] [butt] to wobble obscenely ");
                         outputText(", forcing your body into an awkward gait that prevents you from escaping.");
                     }
                     //JUST DA BOOTAH
-                    else if (player.butt.type >= 20) outputText("Your " + player.skinTone + buttDescript() + " wobbles so heavily that you're unable to move quick enough to escape.");
+                    else if (player.butt.type >= 20) outputText("Your " + player.bodyColor + buttDescript() + " wobbles so heavily that you're unable to move quick enough to escape.");
                 }
                 //NORMAL RUN FAIL MESSAGES
                 else if (monster.plural) outputText("[Themonster] stay hot on your heels, denying you a chance at escape!");

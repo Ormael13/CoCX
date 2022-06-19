@@ -18,7 +18,7 @@ public class Satyr extends Monster
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind punch!\n");
 			}
-			//Evade: 
+			//Evade:
 			else if(player.getEvasionRoll()) {
 				outputText("He snarls as you duck his blow and it swishes harmlessly through the air.");
 			}
@@ -31,7 +31,7 @@ public class Satyr extends Monster
 				else outputText("You successfully block it.");
 			}
 		}
-				
+		
 		private function satyrBate():void {
 			outputText("He glares at you, panting while his tongue hangs out and begins to masturbate.  You can nearly see his lewd thoughts reflected in his eyes, as beads of pre form on his massive cock and begin sliding down the erect shaft.");
 			//(small Libido based Lust increase, and increase lust)
@@ -78,7 +78,7 @@ public class Satyr extends Monster
 				}
 			}
 		}
-			
+		
 		private function bottleChug():void {
 			outputText("He whips a bottle of wine seemingly from nowhere and begins chugging it down, then lets out a bellowing belch towards you.  The smell is so horrible you cover your nose in disgust, yet you feel hot as you inhale some of the fetid scent.");
 			//(damage PC lust very slightly and raise the satyr's lust.)
@@ -86,7 +86,7 @@ public class Satyr extends Monster
 			lust += 5;
 		}
 		
-		//5:(Only executed at high lust) 
+		//5:(Only executed at high lust)
 		private function highLustChugRape():void {
 			outputText("Panting with barely-contained lust, the Satyr charges at you and tries to ram you into the ground.  ");
 			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
@@ -153,7 +153,7 @@ public class Satyr extends Monster
 			this.hips.type = Hips.RATING_AVERAGE;
 			this.butt.type = Butt.RATING_AVERAGE + 1;
 			this.lowerBody = LowerBody.HOOFED;
-			this.skinTone = "tan";
+			this.bodyColor = "tan";
 			this.hairColor = randomChoice("black","brown");
 			this.hairLength = 3+rand(20);
 			this.faceType = Face.COW_MINOTAUR;

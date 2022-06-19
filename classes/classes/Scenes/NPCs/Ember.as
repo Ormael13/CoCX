@@ -61,7 +61,7 @@ public class Ember extends Monster
 		//Dragon Breath: Very rare attack, very high damage
 		private function embersSupahSpecialDragonBreath():void {
 			if(hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) {
-				//Blind Ember: 
+				//Blind Ember:
 				outputText("The blinded dragon tracks you with difficulty as you sprint around the landscape; seeing an opportunity, you strafe around " + emberMF("his","her") + " side, planting yourself behind a large flat boulder near " + emberMF("him","her") + " and pelting " + emberMF("him","her") + " with a small rock.  The scream as the dragon turns the magical conflagration toward you, only to have it hit the rock and blow up in " + emberMF("his","her") + " face, is quite satisfying.");
 				//(Ember HP damage)
 				SceneLib.combat.doDamage(50);
@@ -114,7 +114,7 @@ public class Ember extends Monster
 				damage3 = player.takePhysDamage(damage3, true);
 			}
 		}
-				
+		
 		//Dragon Force: Tainted Ember only
 		private function dragonFarce():void {
 			//Effect: Stuns the PC for one turn and deals some damage, not much though. (Note: PC's version of this does something different and Ember has no cooldown to use this again. Obviously do not spam or peeps will rage.)
@@ -343,7 +343,7 @@ public class Ember extends Monster
 			this.tallness = rand(8) + 70;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
 			this.weaponName = "claws";
