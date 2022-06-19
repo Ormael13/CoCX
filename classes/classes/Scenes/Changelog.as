@@ -165,26 +165,32 @@ public class Changelog extends BaseContent
 			//outputText("-Dinah would provide PC with HB Mech upgrade options after it's bought. They could boost mech defences, attack or even provide with specials. As with all other items upgrades cost can vary depending on her mood ^^\n");
 			//outputText("-HB Mech upgrade options includes: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Rapid Reload (+base ranged atk dmg), Internal Systems (increase mech SF capacity and lower it consumption during high activity), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special), ");
 			//outputText("Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)\n");
-			outputText("-Metamorph menu: Yeti race all bodyparts, Yuki onna arms, Twin Kasha tails, Giant dragonfly wings, Tigershark Stripes, Shark skin, multi Gazer Eyestalks, Dog tail, Goo bodyparts, Avian arms, Anemone gills, Kraken & Hydra lower body, Hydra tails (EragonX)\n");
+			outputText("-Metamorph menu: Yeti race all bodyparts, Yuki onna arms, Twin Kasha tails, Giant dragonfly wings, Tigershark Stripes, Shark skin, multi Gazer Eyestalks, Dog tail, Goo bodyparts, Avian arms, Anemone gills, Kraken & Hydra lower body, Hydra tails, Ears: Dog, Avian, Raiju, Shark, Bunny; . (EragonX)\n");
 			outputText("-Swift casting spells won't have cooldowns but their power will be lowered by 80%.\n");
 			outputText("-Spell-Knight str req. was lowered from 200 to 150.\n");
 			outputText("-Basic Job: All-Rounder no longer req. Job: Soul Cultivator but it lib and sens req. was increased to 75 and 50 respectively.\n");
 			outputText("-Demon tfs and Feeder perk use CorruptionTolerance now, Oni horn wont choose same horns. (EragonX)\n");
 			outputText("-Removed Sapphire/Onyx requirements from Forgefather encounter. (Svalkash)\n");
-			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!), Marae, Shark girls, (Whitney corruption. With 'Other' option you can switch her between dom and sub. And reset her oral training too.), Kelly & Kelt(New 'Recall' options for Kelt breaking!). (Svalkash)\n");
+			outputText("-SceneHunter - Cinnabar and some others, Anemone (a lot there!), Marae, Shark girls, (Whitney corruption. With 'Other' option you can switch her between dom and sub. And reset her oral training too.), Kelly & Kelt(New 'Recall' options for Kelt breaking!), Kath, Rubi. (Svalkash)\n");
 			outputText("-Soul Sense unlock req. chganged to having 'Soul Sense and You' Manual and reaching at least Early Soul Personage stage.\n");
 			outputText("-Using Wait or Defend w/ Defense Pose perk move will increase fatigue recovery 2x.\n");
 			outputText("-More npc's (21) when recruited to camp will give radiant shard.\n");
 			outputText("-Additional Soulforce from training was changed form adding flat value to % - so instead of 2,330 it will increase SF cap by 2,330 %.\n");
 			outputText("-Pawnshop added bulk sale gem bonus from Merchant outfit. Improved Amily Efficiency (hermify) option. More weapons for Dilapidated Shrine. Make Metamorph tails cost dependent on current tail count. Eggs tf now checks for player blocking body tfs. (EragonX)\n");
 			outputText("-Many typo corrections by Pyromania.\n");
-			outputText("-Fixed issues: Hydra tails feral attack multiplier bugfix, Weapon Rack bug. (EragonX)\n");// (EragonX)
+			outputText("-Fixed issues: Hydra tails feral attack multiplier bugfix, Weapon Rack bug, Isabella pregnancy, hydra lower body allowing to have tails. (EragonX)\n");// (EragonX)
 			outputText("-Added low standards for Uma. (Svalkash)\n");
-			outputText("-New consumable item: a bottle of high-grade Soulforce Recovery Pills. Costs 3610 gems. It's gained by putting in empty pills bottle 10 high-grade soulfroce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
+			outputText("-New consumable item: a bottle of high-grade Soulforce Recovery Pills. Costs 3610 gems. It's gained by putting in empty pills bottle 10 high-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
 			outputText("-Daoist: Apprentice Stage perk effects changed to: +30% soulskill/m.soulskill power, -10% soulskills cost, +50 max SF at S.Apprentice, S.Personage, S.Warrior stages, +5% to max, +50% base soulforce recovery multiplier\n");
 			outputText("-Daoist: Warrior Stage perk effects changed to: +60% soulskill/m.soulskill power, -10% soulskills cost, +100 max SF at S.Apprentice, S.Personage, S.Warrior stages, +5% to max, +50% base soulforce recovery multiplier\n");
 			outputText("-Daoist: Elder Stage perk effects changed to: +100% soulskill/m.soulskill power, -10% soulskills cost, +200 max SF at S.Apprentice, S.Personage, S.Warrior stages, +10% to max, +100% base soulforce recovery multiplier\n");
 			outputText("-Daoist: Overlord Stage perk effects changed to: +150% soulskill/m.soulskill power, -10% soulskills cost, +300 max SF at S.Apprentice, S.Personage, S.Warrior stages, +10% to max, +00% base soulforce recovery multiplier\n");
+			outputText("-Machine Greatsword, Ripper 1.0, Ripper 2.0 gained classification as Exotic type weapons for mastery purposes.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -265,7 +271,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -294,8 +302,18 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
 			outputText("\n");cel na 0.8(/9): dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
-			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
-			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
+			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -472,7 +490,7 @@ public class Changelog extends BaseContent
 			outputText("-Clearing out Factory can be achieved also after bribing incubus mechanic (so PC no longer need to beat him to mark the dungeon done).\n");
 			outputText("-Motivation perk effect changed to decrease idle action chance for henchman by 30% (20%) and would also make their attacks ~50% stronger. Motivation (Ex) perk effect changed to futher decrease idle action chance by 19% (1%) and increase their attacks power by 50% each time PC reach specific lvl (up to 4 times currently). ");
 			outputText("Motivation (Su) perk effect changed to make each henchman do 2 actions in their turn and increase power of their attacks 150% of currently boost provided by previous Motivcation perks.\n");
-			outputText("-Soul Cultivation perks are now showing less often (each 9 or 12 levels). First one is moved to be avialable at lvl 0+. Pills to recover SF would give more. On top of previous fixed amount they will restore 1/2/3% of max soulfroce per pill grade. Using bottle of 10 would mean it will be even up to 10/20/30% of max SF + fixed amount gained.\n");
+			outputText("-Soul Cultivation perks are now showing less often (each 9 or 12 levels). First one is moved to be avialable at lvl 0+. Pills to recover SF would give more. On top of previous fixed amount they will restore 1/2/3% of max soulforce per pill grade. Using bottle of 10 would mean it will be even up to 10/20/30% of max SF + fixed amount gained.\n");
 			outputText("-Mana potions also would restorte 1/2/3% of max mana + fixed amount it was giving before.\n");
 			outputText("-Training Dummy stats when sparring ring is upgraded to 2nd and 3rd stage got much better both in HP, Lust caps or phys/mag defence values. Still some (many?) of you will be able to annihilate it with casual attack :(\n");
 			outputText("-Pernament Golems base damage would scale now with PC int/wis stats and it will be also doubled before adding others effects increasing dmg output.\n");
@@ -2008,8 +2026,8 @@ public class Changelog extends BaseContent
 			outputText("-New head jewelery/accesory/misc (by Liadri): Scanner goggle - craftable at goblin workshop (5 metal pieces, 200 nails, 2 energy core, Machinist Goggles and BP). Cost 4030 gems, immunise against blind, increase critical chance with spell and attack by 5%.\n");
 			outputText("-New head jewelery/accesory/misc (by Liadri): S.A Tech Goggle - craftable at goblin workshop (10 metal pieces, 500 nails, 5 Energy core, Scanner goggle and BP). Cost 11105 gems, immunise against blind, increase critical chance with spell and attack by 10%.\n");
 			outputText("-New consumable item: Airweed - buyable at Pinchou shop. Cost 10 gems and grants water breathing for 24 hours.\n");
-			outputText("-New consumable item: a bottle of low-grade Soulforce Recovery Pills. Costs 110 gems. It's gained by putting in empty pills bottle 10 low-grade soulfroce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle).\n");
-			outputText("-New consumable item: a bottle of mid-grade Soulforce Recovery Pills. Costs 610 gems. It's gained by putting in empty pills bottle 10 mid-grade soulfroce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
+			outputText("-New consumable item: a bottle of low-grade Soulforce Recovery Pills. Costs 110 gems. It's gained by putting in empty pills bottle 10 low-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle).\n");
+			outputText("-New consumable item: a bottle of mid-grade Soulforce Recovery Pills. Costs 610 gems. It's gained by putting in empty pills bottle 10 mid-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
 			outputText("-New consumable item: a Fasting Pill. Costs 100 gems and buyable at golem shop for anyone with Job: Soul Cultivator perk. Req. to have hunger mode enabled to show up in golem shop offer. Would cause hunger decrease slower for 3 days (2 less points of hunger per hour and if it will be more that current rate of decreasing hunger it may even very slowly increase increase satiety). Using pills in succession would only extend duration by 1 day per additional pill.\n");
 			outputText("-New usable item: Empty Pills Bottle. Costing 10 gems and it's buyable at golem merchant in HXD. Used to store 10 pills of any kind. Due to manufacture process and realm interferances after opening full bottle all pills must be used in a span of few minutes or they would loose all effectivness.\n");
 			outputText("-New usable item: Energy Core. Costing 1015 gems and it's craftable by goblin PC. Req. 5 metal pieces and 3 golem cores. A power source for devices.\n");
@@ -3194,7 +3212,7 @@ public class Changelog extends BaseContent
 			outputText("-Kitsune tattooed skin was changed into new type of body property: pattern (all thanks to out amazing Aimozg) that will now apply this patter over any other skin type so... kitsune tattoo over fur/scales or even chitin will be not weird.\n");
 			outputText("-Golems made by Golemancer PC can be used in varipus amount to attack enemies. One or more if enemy is group type and PC have enough prepared golems. That way can be send 3 or 5 golems at once.\n");
 			outputText("-New option at Soul Arena in 3rd submenu: fight with 3 enemies in a row to get Guided Bow at first win or 20 spirit stones for each win after first.\n");
-			outputText("-logosK made few under the hood changes plus added new option for PC to choose after beating Omnibus in Factory - it would make PC demon score rise by 1, add 10 min corruption and boost max Soulfroce (+1 for each point of Libido)\n");
+			outputText("-logosK made few under the hood changes plus added new option for PC to choose after beating Omnibus in Factory - it would make PC demon score rise by 1, add 10 min corruption and boost max soulforce (+1 for each point of Libido)\n");
 			outputText("-New enc on Beach: Pinchou’s waterwear and tools’ shop run by... Pinchou the crab-girl ^^\n");
 			outputText("-Spell buffs are no longer for whole combat. They only last 5 rounds beofre it's needed to recast them. Also bosts they giving was lowered to those values that was before accesable in debug mode.\n");
 			outputText("-New M. Special in buffs subpage: Crinos Shape. Req. perk Job: Beast Warrior. Using 5 wrath per turn untill player not deactivate it. Boosting PC str, tou, spe by 5% of current value (IF PC for ex. use Might before... Crinos Shape boost will account for increased stats at moment of activating) and generate 1 point of wrath per turn.\n");

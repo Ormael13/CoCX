@@ -275,6 +275,19 @@ public class Wings extends SaveableBodyPart {
 		canFly: true
 	});
 
+	public static const ANT_SMALL: int = 37;
+	EnumValue.add(Types, ANT_SMALL, "ANT_SMALL", {
+		name:"small ant-like",
+		appearanceDesc: "Four skinny but beautiful ant-wings sprout from your back, too small to allow you to fly."
+	});
+
+	public static const ANT_LARGE: int = 38;
+	EnumValue.add(Types, ANT_LARGE, "ANT_LARGE", {
+		name:"large ant-like",
+		appearanceDesc: "Four long, skinny ant-wings sprout from your back, reflecting the light through their clear membranes beautifully. They flap quickly, allowing you to easily hover in place or fly.",
+		canFly: true
+	});
+
 	public var desc:String = "non-existant";
 	public function Wings(creature:Creature) {
 		super(creature, "wings", []);

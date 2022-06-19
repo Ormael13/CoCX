@@ -437,6 +437,17 @@ package classes.GeneticMemories {
 			  return CoC.instance.transformations.ArmsGoo;
 		  }
 	  });
+  
+    public static const ANT:int = _partid++;
+		EnumValue.add(Memories, ANT, "ANT", {
+			id: "Ant Arms",
+			name: "Ant Arms",
+			cost: 100,
+			title: "Ant",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.ArmsAnt;
+			}
+		});
 
 	  public static const AVIAN:int = _partid++;
 	  EnumValue.add(Memories, AVIAN, "AVIAN", {

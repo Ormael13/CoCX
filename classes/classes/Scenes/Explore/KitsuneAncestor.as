@@ -31,12 +31,11 @@ import classes.internals.*;
 		}
 		
 		public function kitsunesoulskillMod():Number {
-			var kmodss:Number = 1;
-			if (hasPerk(PerkLib.DaoistCultivator) && wis >= 20) kmodss += .2;
-			if (hasPerk(PerkLib.DaoistApprenticeStage)) kmodss += .12;
+			var kmodss:Number = 1;//bonusy 3x
+			if (hasPerk(PerkLib.DaoistApprenticeStage)) kmodss += .9;
 			if (hasPerk(PerkLib.DaoistWarriorStage)) kmodss += 1.8;
-			if (hasPerk(PerkLib.DaoistElderStage)) kmodss += 2.4;
-			if (hasPerk(PerkLib.DaoistOverlordStage)) kmodss += 3;
+			if (hasPerk(PerkLib.DaoistElderStage)) kmodss += 3;
+			if (hasPerk(PerkLib.DaoistOverlordStage)) kmodss += 4.2;
 			return kmodss;
 		}
 		
@@ -213,7 +212,6 @@ import classes.internals.*;
 			this.createPerk(PerkLib.SoulKing, 0, 0, 0, 0);
 			this.createPerk(PerkLib.SoulEmperor, 0, 0, 0, 0);
 			this.createPerk(PerkLib.SoulAncestor, 0, 0, 0, 0);
-			this.createPerk(PerkLib.DaoistCultivator, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DaoistApprenticeStage, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DaoistWarriorStage, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DaoistElderStage, 0, 0, 0, 0);

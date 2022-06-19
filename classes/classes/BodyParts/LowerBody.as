@@ -562,6 +562,7 @@ public class LowerBody extends SaveableBodyPart {
 
 			return desc;
 		},
+		tail: true,
 		bite: true,
 		isNaga: true
 	});
@@ -777,6 +778,12 @@ public class LowerBody extends SaveableBodyPart {
 		appearanceDesc: "Your {legCount} legs thicken below the waist as they turn into soft-furred rabbit-like legs. You even have large bunny feet that make hopping around a little easier than walking. Unlike a normal bunny thought your toe ends up with vicious dragon claws capable of rending about just anything.",
 		canTaur: true,
 		fur: true
+	});
+
+	public static const ANT:int = 74;
+	EnumValue.add(Types, ANT, "ANT", {
+		name: "ant",
+		appearanceDesc: "Your {legCount} legs are covered in a slightly reflective [skin coat.color], insectile carapace up to your hips, looking more like armor than natural body."
 	});
 
 	override public function set type(value:int):void {

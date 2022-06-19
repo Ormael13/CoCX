@@ -15,18 +15,18 @@ import classes.internals.*;
 	{
 		public function soulskillCostEnergyProjection():Number {
 			var cost:Number = 20;
-			//if (hasPerk(PerkLib.DaoistCultivator)) cost -= 2;
+			//if (hasPerk(PerkLib.DaoistApprenticeStage)) cost -= 2;
+			//if (hasPerk(PerkLib.DaoistWarriorStage)) cost -= 2;
 			if (hasStatusEffect(StatusEffects.TrueFormAngel)) cost *= 2;
 			return cost;
 		}
 		/*
 		public function SoulskillMod():Number {
 			var mod1:Number = 1;
-			if (hasPerk(PerkLib.DaoistCultivator)) mod1 += .2;
 			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) mod1 += .4;
-				if (hasPerk(PerkLib.SoulPersonage)) mod1 += .4;
-				if (hasPerk(PerkLib.SoulWarrior)) mod1 += .4;
+				if (hasPerk(PerkLib.SoulApprentice)) mod1 += .3;
+				if (hasPerk(PerkLib.SoulPersonage)) mod1 += .3;
+				if (hasPerk(PerkLib.SoulWarrior)) mod1 += .3;
 			}
 			if (hasPerk(PerkLib.DaoistWarriorStage)) {
 				if (hasPerk(PerkLib.SoulSprite)) mod1 += .6;
@@ -78,7 +78,7 @@ import classes.internals.*;
 			bonusWrath += 1000;
 			bonusSoulforce += 2000;
 			outputText("Staggering back, woman lands in a bit ungracefull pose buit it saved her from falling down unstylish. When you think she gave up her halo starts to glow much more intensively, spreading then to her whole body triggering transformation. After half minute maybe bit longer cocoon of the light fade to reveal her new form.");
-			outputText("\n\nActualy the parts of what supposed to be 'cocoon' are her newly grown five pairs of wings with three to four eye-like organs located on each of it. Her main body not change alot aside from having similar to the ones on wings eyeball growns. On her forhead opened two additional eyes. Halo that was hovering above her head expanded and split into two with some additional eyes on them starting to retate around her.");
+			outputText("\n\nActualy the parts of what supposed to be 'cocoon' are her newly grown five pairs of wings with three to four eye-like organs located on each of it. Her main body not change alot aside from having similar to the ones on wings eyeball growns. On her forhead opened two additional eyes. Halo that was hovering above her head expanded and split into two with some additional eyes on them starting to rotate around her.");
 			outputText("\n\n\"<i>It's unfortunate to me unravel this form!!!</i>\" she speaks with noticable dissapointed as she fly up ready to continue fight.");
 			createStatusEffect(StatusEffects.TrueFormAngel, 0, 0, 0, 0);
 			SceneLib.combat.combatRoundOver();

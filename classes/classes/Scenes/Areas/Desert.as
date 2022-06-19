@@ -168,6 +168,10 @@ use namespace CoC;
 						name: "mimic",
 						when: fn.ifLevelMin(3),
 						call: curry(SceneLib.mimicScene.mimicTentacleStart, 1)
+					}, {
+						name  : "desertloot",
+						chance: 0.3,
+						call  : findDesertLoot
 					});
 			story = ZoneStmt.wrap(_desertEncounter,game.rootStory).bind(game.context);
 		}
@@ -276,5 +280,11 @@ use namespace CoC;
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}
+
+		private function findDesertLoot():void {
+			clearOutput();
+			outputText("Miraculously, you spot a lone pouch lying in the sand. Opening it, you find a neatly wraped cake!\n");
+				inventory.takeItem(consumables.HDEWCAK, camp.returnToCampUseOneHour);
+			}
 	}
 }

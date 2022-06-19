@@ -227,7 +227,7 @@ use namespace CoC;
 
 		public function manageEquipmentmiscitemsMenu():void {
 			menu();
-			if (inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
+			if (!inDungeon && !inRoomedDungeon && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
 				var miscNieve:Boolean = Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5;
                 var miscHolli:Boolean = flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 || flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4);
 				if (miscNieve || miscHolli || player.hasKeyItem("Dragon Egg") >= 0 || (player.hasKeyItem("Rathazul's Purity Elixir") >= 0 && player.perkv1(PerkLib.PurityElixir) < 5)
@@ -661,6 +661,26 @@ use namespace CoC;
 				outputText("You place " + itype.longName + " in your " + inventorySlotName[temp] + " pouch, giving you " + player.itemSlots[temp].quantity + " of them.");
 				itemGoNext();
 				return;
+			}
+			//Check for room in Ore bag and return the itemcount for it.
+			if (InCollection(itype, useables.COP_ORE, useables.TIN_ORE, useables.BRONZEB, useables.IRONORE, useables.EBONING, useables.MOONSTO) && nextAction != SceneLib.crafting.accessCraftingMaterialsBag) {
+				temp = SceneLib.crafting.roomInExistingStack(itype);
+				if (temp >= 0) {
+					SceneLib.crafting.placeItemInStack(itype);
+					outputText("You place " + itype.longName + " in your Ore bag, giving you "+ (temp+1) +" of them.");
+					itemGoNext();
+					return;
+				}
+			}
+			//Check for room in Guild quest bag and return the itemcount for it.
+			if (InCollection(itype, useables.IMPSKLL, useables.FIMPSKL, useables.MINOHOR, useables.DEMSKLL, useables.SEVTENT) && nextAction != SceneLib.adventureGuild.questItemsBag) {
+				temp = SceneLib.adventureGuild.roomInExistingStack(itype);
+				if (temp >= 0) {
+					SceneLib.adventureGuild.placeItemInStack(itype);
+					outputText("You place " + itype.longName + " in your quest materials pouch, giving you "+ (temp+1) +" of them.");
+					itemGoNext();
+					return;
+				}
 			}
 			//If not done, then put it in an empty spot!
 			//Throw in slot 1 if there is room

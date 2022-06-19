@@ -17,6 +17,7 @@ public class Ears extends BodyPart {
 	 * - chitin: has chitin material
 	 * */
 	public static var Types:/*EnumValue*/Array = [];
+	public static const HoleEars:/*String*/Array = ["LIZARD, DRAGON, ORCA2, AVIAN, INSECT"];
 
 	public static const HUMAN: int = 0;
 	EnumValue.add(Types, HUMAN, "HUMAN", {
@@ -257,6 +258,11 @@ public class Ears extends BodyPart {
 		name: "squirrel",
 		appearanceDesc: "A pair of sideways round squirrel ears stick out from the side of your head, they flick toward every slight sound.",
 		fur: true
+	});
+	public static const INSECT: int = 42;
+	EnumValue.add(Types, INSECT, "INSECT", {
+		name: "insect",
+		appearanceDesc: "A pair of rounded chitin plates with small holes in their bottom on the sides of your head serve as your ears."
 	});
 
 	public function Ears(creature:Creature) {

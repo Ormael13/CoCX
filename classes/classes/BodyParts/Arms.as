@@ -26,6 +26,8 @@ public class Arms extends BodyPart {
 	 * */
 	public static var Types:/*EnumValue*/Array = [];
 
+	public var armCount:int = 2;
+
 	public static const HUMAN:int = 0;
 	EnumValue.add(Types, HUMAN, "HUMAN", {
 		name:"human",
@@ -265,6 +267,7 @@ public class Arms extends BodyPart {
 	EnumValue.add(Types, DISPLACER, "DISPLACER", {
 		name:"displacer",
 		appearanceDesc: "Where a normal creature would have only two arms, you instead have four [fur color] furred appendages, all of which end in a pair of five-toed lion paws armed with lethal claws.",
+		armCount: 4,
 		claw: true,
 		canPounce: true,
 		fur: true
@@ -444,6 +447,14 @@ public class Arms extends BodyPart {
 		appearanceDesc: "Your forearms are covered by scales which themselves are covered by fur, ending in five fingered clawed hands. Your claws are strong enough to rip and tear through next to anything though you tend to use your arms as a mean to keep your partners pinned down so they don't move during sex.",
 		claw: true,
 		scales: true
+	});
+
+	public static const ANT:int = 58;
+	EnumValue.add(Types, ANT, "ANT", {
+		name:"ant",
+		appearanceDesc: "Where a normal creature would have only two arms, you instead have four, with shining [skin coat.color] exoskeleton covering them from the biceps down, resembling a pair of long [skin coat.color] gloves from a distance.",
+		armCount: 4,
+		claw: true
 	});
 
 	public static function canFly(id: int): Boolean {

@@ -7,13 +7,12 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.BlightRidge.DemonPackBlightRidge;
-import classes.Scenes.Areas.DefiledRavine.DemonPackDefiledRavine;
 import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
 
 import coc.view.ButtonDataList;
 
-	public class TyrantiaFollower extends NPCAwareContent implements SaveableState
+public class TyrantiaFollower extends NPCAwareContent implements SaveableState
 	{
 		public static var TyraniaIsRemovedFromThewGame:Boolean;
 		public static var TyraniaPostFinalKissScene:Boolean;
@@ -1403,4 +1402,4 @@ public function JojoReaction():void {
 doNext(camp.returnToCamp);
 }*/
 }
-}
+}

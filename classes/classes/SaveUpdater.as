@@ -2007,6 +2007,10 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.WHITNEY_ORAL_TRAINING_VAG] = flags[kFLAGS.WHITNEY_ORAL_TRAINING_COCK]; //new flag!
 				camp.testmenu.fixShards2nd();
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.007;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.008) {
+				if (flags[kFLAGS.APEX_SELECTED_RACE] >= 18) flags[kFLAGS.APEX_SELECTED_RACE] += 1;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.008;
 			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.008) {
 				if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.HclassHeavenTribulationSurvivor);

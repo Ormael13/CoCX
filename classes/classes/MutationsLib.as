@@ -681,7 +681,7 @@ public class MutationsLib
 				.requireRace(Races.PIG);
 				RaijuCathode.requirePeripheralNervSysMutationSlot().requireRace(Races.RAIJU);
 				RatatoskrSmarts.requirePeripheralNervSysMutationSlot().requirePerk(PerkLib.KnowledgeIsPower).requireRace(Races.RATATOSKR);
-				SalamanderAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(PerkLib.Lustzerker).requireAnyRace(Races.SALAMANDER, Races.PHOENIX);
+				SalamanderAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(PerkLib.Lustzerker).requireAnyRace(Races.SALAMANDER, Races.PHOENIX, Races.KITSHOO);
 				SharkOlfactorySystem.requirePeripheralNervSysMutationSlot().requireRace(Races.SHARK);
 				ScyllaInkGlands.requirePerk(PerkLib.InkSpray).requireRace(Races.SCYLLA);
 				TrachealSystem.requireAnyRace(Races.BEE, Races.MANTIS, Races.SCORPION, Races.SPIDER, Races.CANCER, Races.ATLACH_NACHA);
