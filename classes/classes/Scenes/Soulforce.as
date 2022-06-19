@@ -351,7 +351,7 @@ public class Soulforce extends BaseContent
 				print = "Early Soul Personage";
 				break;
 			case 3:
-				player.createPerk(PerkLib.SoulPersonage, 0, 0, 0, 0);
+				player.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
 				player.addPerkValue(PerkLib.JobSoulCultivator, 1, -2);
 				print = "Early Soul Warrior";
 				break;
@@ -457,7 +457,7 @@ public class Soulforce extends BaseContent
 	}
 	public function SubPaths():void {
 		menu();
-		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0) addButton(0, "Daoist", Contemplations0).hint("Contemplate mysteries from 'My Dao Sticks are better than Yours' cultivation manual.");
+		if (player.hasKeyItem("Cultivation Manual: My Dao Sticks are better than Yours") >= 0) addButton(0, "Daoist", daoistSubPath).hint("Contemplate mysteries from 'My Dao Sticks are better than Yours' cultivation manual.");
 		//if (player.hasKeyItem("Cultivation Manual: Body like a Coke Fiend") >= 0) addButton(5, "BodyCult", );
 		//if (player.hasKeyItem("Cultivation Manual: Heart-shaped Eyed She-Devil") >= 0) addButton(10, "HeartCult", );
 		addButton(14, "Back", accessSoulforceMenu);

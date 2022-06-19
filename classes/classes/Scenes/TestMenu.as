@@ -161,8 +161,13 @@ public class TestMenu extends BaseContent
 		if (player.hasKeyItem("Heavenly Tribulation: Myths and Facts") >= 0) player.removeKeyItem("Heavenly Tribulation: Myths and Facts");
 		if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.HclassHeavenTribulationSurvivor);
 		if (player.hasPerk(PerkLib.SoulSprite)) player.removePerk(PerkLib.SoulSprite);
+		if (player.hasPerk(PerkLib.SoulScholar)) player.removePerk(PerkLib.SoulScholar);
+		if (player.hasPerk(PerkLib.SoulElder)) player.removePerk(PerkLib.SoulElder);
 		if (player.hasKeyItem("A summary of Marethian Sects") >= 0) player.removeKeyItem("A summary of Marethian Sects");
 		if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.GclassHeavenTribulationSurvivor);
+		if (player.hasPerk(PerkLib.SoulExalt)) player.removePerk(PerkLib.SoulExalt);
+		if (player.hasPerk(PerkLib.SoulOverlord)) player.removePerk(PerkLib.SoulOverlord);
+		if (player.hasPerk(PerkLib.SoulTyrant)) player.removePerk(PerkLib.SoulTyrant);
 		//if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.FclassHeavenTribulationSurvivor);
 		if (player.hasPerk(PerkLib.DaoistCultivator)) player.removePerk(PerkLib.DaoistCultivator);
 		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) player.removePerk(PerkLib.DaoistApprenticeStage);
