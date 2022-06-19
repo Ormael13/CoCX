@@ -14,6 +14,9 @@ public class ItemTemplate extends Utils {
 	public static function lookupTemplate(templateId:String):ItemTemplate {
 		return TEMPLATES[templateId];
 	}
+	public static function getLibrary():Dictionary {
+		return TEMPLATES;
+	}
 	
 	/**
 	 * Unique id
@@ -23,10 +26,19 @@ public class ItemTemplate extends Utils {
 	 * Display name (mostly for debugging)
 	 */
 	public var name:String;
+	/**
+	 * Description of parameters and created items
+	 *
+	 * @property {String} category Item category ("weapon"|"armor"|...)
+	 * @property {Array} params Parameter desciptions
+	 * @property
+	 */
+	public var metadata:Object;
 	
-	public function ItemTemplate(templateId:String, name:String) {
+	public function ItemTemplate(templateId:String, name:String, metadata:Object) {
 		this.templateId = templateId;
 		this.name       = name;
+		this.metadata   = metadata || {};
 		if (templateId in TEMPLATES) {
 			CoC_Settings.error("Duplicate ItemTemplate "+templateId);
 		}

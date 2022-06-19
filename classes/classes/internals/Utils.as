@@ -265,6 +265,24 @@ public class Utils extends Object
 		public static function shallowCopy(src:Object):Object {
 			return copyObject({},src);
 		}
+		
+		/**
+		 * Returns a deep copy of `src`
+		 */
+		public static function deepCopy(src:Object):Object {
+			var dst:Object = {};
+			for (var k:String in src) {
+				if (src.hasOwnProperty(k)) {
+					var v:* = src[k];
+					if (typeof v === "object" && v !== null) {
+						dst[k] = deepCopy(v);
+					} else {
+						dst[k] = v;
+					}
+				}
+			}
+			return dst;
+		}
 		/**
 		 * Performs a shallow copy of properties from `src` to `dest`.
 		 * If `properties` is supplied, only listed properties are copied.

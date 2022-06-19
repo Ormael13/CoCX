@@ -169,12 +169,14 @@ public class GameSettings extends BaseContent {
 		addButton(14, "Back", settingsScreenMain);
 	}
 	private function exportGameDataJs():void {
-		var p:Player = new Player();
+		var p:Player           = new Player();
 		var k:String;
+		var entry:Object;
+		var subentry:Object;
 		var file:FileReference = new FileReference();
-		var bytes:ByteArray = new ByteArray();
+		var bytes:ByteArray    = new ByteArray();
 		// see devTools/saveEditor/js/gamedata.d.ts
-		var gamedata:Object = {
+		var gamedata:Object    = {
 			version: CoC.instance.ver,
 			versionNumber: CoC.instance.modSaveVersion,
 			/** key: flag_id, value: IGDFlag */
@@ -206,6 +208,7 @@ public class GameSettings extends BaseContent {
 				
 				other: {}
 			},
+			itemTemplates: {},
 			// key: status_id
 			statuses: {},
 			// key: keyitem_id
@@ -226,6 +229,7 @@ public class GameSettings extends BaseContent {
 				horns: {},
 				// extra properties: legCount, taur, noTail, tail
 				legs: {},
+				materials: {},
 				rear: {},
 				// extra properties: base, coat
 				skin: {},
@@ -240,12 +244,12 @@ public class GameSettings extends BaseContent {
 			colors: [],
 			// value: { id, name, type="primary"|"buffable"|"raw", isPercentage }
 			stats: [],
-			maxBreastCup: Appearance.BREAST_CUP_NAMES.length-1,
+			maxBreastCup: Appearance.BREAST_CUP_NAMES.length - 1,
 			breastCups: Appearance.BREAST_CUP_NAMES,
 			itemSlotCount: p.itemSlots.length
 		};
 		// flags
-		for each(k in keys(kFLAGS,true)) {
+		for each(k in keys(kFLAGS, true)) {
 			if (kFLAGS[k] is Number) {
 				gamedata.flags[kFLAGS[k]] = {id: kFLAGS[k], name: k, desc: ""};
 			}
@@ -253,10 +257,47 @@ public class GameSettings extends BaseContent {
 		// perks & mutations
 		var monsterPerks:Array = PerkLib.enemyPerkList();
 		var levelupPerks:Array = PerkTree.obtainablePerks();
+		// perk requirement type -> list of extra properties
+		const perkRequirementMappings:Object = {
+			"custom":[],
+			"level": ["value"],
+			"attr": ["attr", "value"],
+			"attr-lt": ["attr", "value"],
+			"ng+": ["value"],
+			"minlust": ["value"],
+			"minsensitivity": ["value"],
+			"soulforce": ["value"], // max soulforce
+			"mana": ["value"], // max mana
+			"venom_web": ["value"], // max venom/web
+			"advanced": [], // free advanced job slot
+			"prestige": [], // free prestige job slot
+			"mutationslot": ["slot"],
+			"dragonmutation": [], // free dragon mutation slot
+			"kitsunemutation": [], // free kitsune mutation slot
+			"hungerflag": [], // hunger enabled
+			"effect": ["effect"],
+			"race": ["race", "tier"],
+			"anyrace": ["races"],
+			"perk": ["perk"],
+			"anyperk": ["perks"],
+			"allperks": ["perks"],
+			"mutation": ["perk"]
+		};
+		function exportValue(v:*):* {
+			if (v is StatusEffectType) {
+				return (v as StatusEffectType).id;
+			} else if (v is Race) {
+				return (v as Race).id;
+			} else if (v is Array) {
+				return v.map(varargify(exportValue));
+			} else {
+				return v;
+			}
+		}
 		for (k in PerkType.getPerkLibrary()) {
-			var pt:PerkType = PerkType.lookupPerk(k);
+			var pt:PerkType          = PerkType.lookupPerk(k);
 			var mt:IMutationPerkType = pt as IMutationPerkType;
-			var tags:Array = [];
+			var tags:Array           = [];
 			if (mt) {
 				gamedata.mutations[k] = {
 					id: k,
@@ -270,13 +311,31 @@ public class GameSettings extends BaseContent {
 				if (monsterPerks.indexOf(pt) >= 0) tags.push('monster');
 				else if (levelupPerks.indexOf(pt) >= 0) tags.push('levelup');
 				else tags.push('unobtainable');
-				gamedata.perks[k] = {
+				entry = {
 					id: k,
 					name: pt.name(null),
 					desc: pt.desc(null),
 					tags: tags,
-					defaultValues: [pt.defaultValue1, pt.defaultValue2, pt.defaultValue3, pt.defaultValue4]
+					defaultValues: [pt.defaultValue1, pt.defaultValue2, pt.defaultValue3, pt.defaultValue4],
+					requirements: [],
+					unlocks: []
+				};
+				for each (var pt2:PerkType in CoC.instance.perkTree.listUnlocks(pt)) {
+					entry.unlocks.push(pt2.id);
 				}
+				for each (var r:Object in pt.requirements) {
+					subentry = {
+						text: r.text is String ? r.text : r.statictext,
+						type: r.type
+					};
+					if (r.type in perkRequirementMappings) {
+						for each (var k2:String in perkRequirementMappings[r.type]) {
+							subentry[k2] = exportValue(r[k2]);
+						}
+					}
+					entry.requirements.push(subentry);
+				}
+				gamedata.perks[k] = entry;
 			}
 		}
 		// mutation slots
@@ -286,7 +345,7 @@ public class GameSettings extends BaseContent {
 		// items
 		for (k in ItemType.getItemLibrary()) {
 			var it:ItemType = ItemType.lookupItem(k);
-			var entry:Object = { name: it.longName, id: k }
+			entry = {name: it.longName, id: k};
 			if (it is Armor) {
 				entry.category = "armor";
 				gamedata.items.armor[k] = entry;
@@ -332,6 +391,15 @@ public class GameSettings extends BaseContent {
 				gamedata.items.other[k] = entry;
 			}
 		}
+		// item templates
+		for (k in ItemTemplate.getLibrary()) {
+			var tem:ItemTemplate = ItemTemplate.lookupTemplate(k);
+			gamedata.itemTemplates[tem.templateId] = {
+				id: tem.templateId,
+				name: tem.name,
+				metadata: deepCopy(tem.metadata)
+			}
+		}
 		// statuses
 		for (k in StatusEffectType.getStatusEffectLibrary()) {
 			var st:StatusEffectType = StatusEffectType.lookupStatusEffect(k);
@@ -356,6 +424,7 @@ public class GameSettings extends BaseContent {
 			[gamedata.bptypes.hairstyle, Hair.Styles],
 			[gamedata.bptypes.horns, Horns.Types],
 			[gamedata.bptypes.legs, LowerBody.Types, ["legCount","canTaur","noTail","tail"]],
+			[gamedata.bptypes.materials, BodyMaterial.Types],
 			[gamedata.bptypes.rear, RearBody.Types],
 			[gamedata.bptypes.skin, Skin.SkinTypes, ["base","coat",["name","desc"],"adj"]],
 			[gamedata.bptypes.pattern, Skin.PatternTypes, ["base","coat"]],

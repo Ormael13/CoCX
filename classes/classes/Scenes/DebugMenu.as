@@ -221,14 +221,7 @@ public class DebugMenu extends BaseContent
 			clearOutput();
 			menu();
 			var buttons:ButtonDataList = new ButtonDataList();
-			buttons.add("HairDye", curry(
-					configureTemplate,
-					templatedItems.THairDye,
-					[
-						{name: "color", type: "text", value: "white"},
-						{name: "rarity", type: "number", value: 1},
-					])
-			);
+			buttons.add("HairDye", curry(configureTemplate, itemTemplates.THairDye));
 			submenu(buttons, itemSpawnMenu);
 		}
 		private var itemParamsBlock:Block;
@@ -238,7 +231,8 @@ public class DebugMenu extends BaseContent
 				itemParamsBlock = null;
 			}
 		}
-		private function configureTemplate(template:ItemTemplate, paramsDef:Array):void {
+		private function configureTemplate(template:ItemTemplate, paramsDef:Array=null):void {
+			paramsDef ||= template.metadata.params;;;;;;;;;;;;;;;;;
 			clearOutput();
 			outputText(template.name + " parameters:\n");
 			flushOutputTextToGUI();

@@ -27,22 +27,22 @@ public final class ConsumableLib extends BaseContent
 		public const PSDELIT:SimpleConsumable = mk("PSDelit", "PSDelit", "an untainted bottle of \"Succubi's Delight\"", 20, "This precious fluid is often given to men a succubus intends to play with for a long time.  It has been partially purified by Rathazul to prevent corruption.", curry(m.succubisDelight, false));
 
 		//DYES
-		public const AUBURND:HairDye = templatedItems.createHairDye("Black", 1);
-		public const BLACK_D:HairDye = templatedItems.createHairDye("Black", 1);
-		public const BLOND_D:HairDye = templatedItems.createHairDye("Blond", 1);
-		public const BLUEDYE:HairDye = templatedItems.createHairDye("Blue", 1);
-		public const BROWN_D:HairDye = templatedItems.createHairDye("Brown", 1);
-		public const GRAYDYE:HairDye = templatedItems.createHairDye("Gray", 1);
-		public const GREEN_D:HairDye = templatedItems.createHairDye("Green", 1);
-		public const ORANGDY:HairDye = templatedItems.createHairDye("Orange", 1);
-		public const PINKDYE:HairDye = templatedItems.createHairDye("Pink", 1);
-		public const PURPDYE:HairDye = templatedItems.createHairDye("Purple", 1);
-		public const RAINDYE:HairDye = templatedItems.createHairDye("Rainbow", 4);
-		public const RED_DYE:HairDye = templatedItems.createHairDye("Red", 1);
-		public const WHITEDY:HairDye = templatedItems.createHairDye("White", 1);
-		public const RUSSDYE:HairDye = templatedItems.createHairDye("Russet", 1);
-		public const SNOWW_D:HairDye = templatedItems.createHairDye("Snow White", 2);
-		public const QWHITED:HairDye = templatedItems.createHairDye("Quartz White", 3);
+		public const AUBURND:HairDye = itemTemplates.createHairDye("Black", 1);
+		public const BLACK_D:HairDye = itemTemplates.createHairDye("Black", 1);
+		public const BLOND_D:HairDye = itemTemplates.createHairDye("Blond", 1);
+		public const BLUEDYE:HairDye = itemTemplates.createHairDye("Blue", 1);
+		public const BROWN_D:HairDye = itemTemplates.createHairDye("Brown", 1);
+		public const GRAYDYE:HairDye = itemTemplates.createHairDye("Gray", 1);
+		public const GREEN_D:HairDye = itemTemplates.createHairDye("Green", 1);
+		public const ORANGDY:HairDye = itemTemplates.createHairDye("Orange", 1);
+		public const PINKDYE:HairDye = itemTemplates.createHairDye("Pink", 1);
+		public const PURPDYE:HairDye = itemTemplates.createHairDye("Purple", 1);
+		public const RAINDYE:HairDye = itemTemplates.createHairDye("Rainbow", 4);
+		public const RED_DYE:HairDye = itemTemplates.createHairDye("Red", 1);
+		public const WHITEDY:HairDye = itemTemplates.createHairDye("White", 1);
+		public const RUSSDYE:HairDye = itemTemplates.createHairDye("Russet", 1);
+		public const SNOWW_D:HairDye = itemTemplates.createHairDye("Snow White", 2);
+		public const QWHITED:HairDye = itemTemplates.createHairDye("Quartz White", 3);
 
 		//SKIN OILS & BODY LOTIONS
 		public const DARK_OL:SkinOil = new SkinOil("DarkOil", "Dark");

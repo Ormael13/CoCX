@@ -154,6 +154,7 @@ public class PerkType extends BaseContent
 					if(player.hasPerk(PerkLib.HaltedVitals)) Attribute = "libido";
 					return Attribute +" "+ value;
 				},
+				statictext: "Toughness "+value,
 				type: "attr",
 				attr: "tou",
 				value: value

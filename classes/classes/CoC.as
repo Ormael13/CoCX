@@ -86,7 +86,7 @@ public class CoC extends MovieClip
     public var mutations:Mutations                 = new Mutations();
     public var transformations:TransformationLib   = new TransformationLib();
     // Items/
-    public var templatedItems:TemplatedItemsLib    = new TemplatedItemsLib();
+    public var itemTemplates:ItemTemplateLib       = new ItemTemplateLib();
     public var consumables:ConsumableLib           = new ConsumableLib();
     public var useables:UseableLib;
     public var weapons:WeaponLib                   = new WeaponLib();

@@ -25,6 +25,7 @@ declare interface IExportedGamedata {
 	items: Record<
 			Exclude<IGDItemCategory, keyof IGDSpecialItemTypes>,
 			Record<string, IGDItem>> & IGDSpecialItemTypes;
+	itemTemplates: Record<string, IGDItemTemplate>;
 	statuses: Record<string, IGDStatusEffect>;
 	bptypes: Record<
 			Exclude<IGDBodySlot, keyof IGDSpecialBodyParts>,
@@ -40,6 +41,9 @@ declare interface IExportedGamedata {
  * Extra data added in gamedata-ex.js
  */
 declare interface IExtendedGamedata extends IExportedGamedata {
+	minVersion: number;
+	maxVersion: number;
+
 	keyitems: Record<string, IGDKeyItem>;
 
 	maxCoreStatValue: number;
@@ -128,6 +132,10 @@ declare interface IGDPerk {
 	desc: string;
 	/** (exported but customizable) */
 	tags: IGDPerkTag[];
+	/** (exported but customizable) */
+	requirements: IGDPerkRequirement[];
+	/** (exported) Unlocked perk ids */
+	unlocks: string[];
 	/** (exported) default value1-4 */
 	defaultValues: [number, number, number, number];
 	/** (gamedata.js) Perk has meaningful value1 */
@@ -146,6 +154,51 @@ declare interface IGDPerk {
 	v3desc?:string;
 	/** (gamedata.js) value4 description */
 	v4desc?:string;
+}
+
+declare type IGDPerkRequirement = IGDPerkRequirementNoArgs | IGDPerkRequirementOneValue | IGDPerkRequirementAttr |
+	IGDPerkRequirementMutationSlot | IGDPerkRequirementEffect | IGDPerkRequirementRace | IGDPerkRequirementAnyRace |
+	IGDPerkRequirementPerk | IGDPerkRequirementPerks;
+declare interface IPerkRequirement {
+	type: string;
+	text: string;
+}
+declare interface IGDPerkRequirementNoArgs extends IPerkRequirement {
+	type: "custom"|"advanced"|"prestige"|"dragonmutation"|"kitsunemutation"|"hungerflag";
+}
+declare interface IGDPerkRequirementOneValue extends IPerkRequirement {
+	type: "level"|"ng+"|"minlust"|"minsensitivity"|"soulforce"|"mana"|"venom_web";
+	value: number;
+}
+declare interface IGDPerkRequirementAttr extends IPerkRequirement {
+	type: "attr"|"attr-lt";
+	attr: string;
+	value: number;
+}
+declare interface IGDPerkRequirementMutationSlot extends IPerkRequirement {
+	type: "mutationslot";
+	slot: string;
+}
+declare interface IGDPerkRequirementEffect extends IPerkRequirement {
+	type: "effect";
+	effect: string;
+}
+declare interface IGDPerkRequirementRace extends IPerkRequirement {
+	type: "race";
+	race: number;
+	tier: number;
+}
+declare interface IGDPerkRequirementAnyRace extends IPerkRequirement {
+	type: "anyrace";
+	races: number[];
+}
+declare interface IGDPerkRequirementPerk extends IPerkRequirement {
+	type: "perk";
+	perk: string;
+}
+declare interface IGDPerkRequirementPerks extends IPerkRequirement {
+	type: "anyperk"|"allperks";
+	perks: string[];
 }
 
 /** Mutation metadata */
@@ -191,6 +244,22 @@ declare interface IGDItemUndergarment extends IGDItem {
 declare type IGDSpecialItemTypes = {
 	undergarment: IGDItemUndergarment;
 }
+declare interface IGDItemTemplate {
+	id: string;
+	name: string;
+	metadata: {
+		category: IGDItemCategory;
+		params: IGDItemTemplateParam[];
+	}
+}
+declare interface IGDItemTemplateParam {
+	name: string;
+	label?: string;
+	type: "text"|"number";
+	value: any;
+	min?: number;
+	max?: number;
+}
 declare interface IGDGearStorage {
 	/** start index (inclusive) in gearStorage array */
 	start:number;
@@ -225,7 +294,7 @@ declare interface IGDKeyItem {
 	v4desc?:string;
 }
 
-declare type IGDBodySlot = "antennase"|"arms"|"beard"|"claws"|"ears"|"eyes"|"face"|"gills"|"hair"|"hairstyle"|"horns"|"legs"|"rear"|"skin"|"skin_base"|"skin_coat"|"pattern"|"pattern_base"|"pattern_coat"|"tail"|"tongue"|"vagina"|"wings";
+declare type IGDBodySlot = "antennase"|"arms"|"beard"|"claws"|"ears"|"eyes"|"face"|"gills"|"hair"|"hairstyle"|"horns"|"legs"|"material"|"rear"|"skin"|"skin_base"|"skin_coat"|"pattern"|"pattern_base"|"pattern_coat"|"tail"|"tongue"|"vagina"|"wings";
 declare interface IGDSpecialBodyParts {
 	legs: IGDBodyLegType;
 	skin: IGDBodySkinType;
