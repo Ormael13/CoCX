@@ -67,9 +67,12 @@
                         <div
                                 v-on:dragover.prevent
                                 v-on:drop="fileDrop"
-                                v-on:change="fileLoad">
+                        >
                             <v-file-input
+                                    v-model="files"
                                     truncate-length="15"
+                                    v-on:change="fileLoad"
+                                    v-on:input="fileLoad"
                             ></v-file-input>
                         </div>
                         <v-alert type="error" v-if="loadError" style="white-space: pre-wrap">{{loadError}}</v-alert>
@@ -1438,9 +1441,9 @@
     </v-col>
 </template>
 <!-- Production: -->
-<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js"></script>-->
 <!-- Development: -->
-<!--<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
 <script type="text/javascript">
 	Object.defineProperty(Array.prototype, "sortBy", {
@@ -1685,6 +1688,7 @@
 			saveVersion: 0,
 			// Load tab
 			loadError: "",
+            files: [],
 			// Save tab
 			saveUrl: "",
 			// Stats tab
@@ -1857,7 +1861,9 @@
 						if (i.kind === "file") {
 							let f = i.getAsFile();
 							if (!f) continue;
-							this.fileLoad([f]);
+							this.files.splice(0);
+							this.files.push(f);
+							this.fileLoad();
 							break;
 						}
 					}
@@ -1866,7 +1872,9 @@
 			/**
 			 * @param {File[]} files
 			 */
-			async fileLoad(files) {
+			async fileLoad(files=this.files) {
+				if (!files) return;
+				if (files instanceof File) files = [files];
 				if (files.length !== 1) return;
 				this.loaded = false;
 				this.saveSol = false;
