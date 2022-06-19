@@ -1099,7 +1099,7 @@ public function soularena():void {
 			if (flags[kFLAGS.SPIRIT_STONES] >= 10) addButton(2, "3rd", mrsShigureLecturesSecond).hint("Mrs. Shigure's lecture on the second step of soul cultivation.");
 			else addButtonDisabled(2, "3rd", "You don't have enough spirit stones (10) to listen to today's lecture.");
 		}
-		else if (player.hasPerk(PerkLib.Dantain)) addButtonDisabled(2, "3rd", "You've already taken the second step of soul cultivation.");
+		else if (player.hasPerk(PerkLib.SoulSense)) addButtonDisabled(2, "3rd", "You've already taken the second step of soul cultivation.");
 		if (player.hasKeyItem("Heavenly Tribulation: Myths and Facts") < 0 && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor) && player.hasPerk(PerkLib.SoulWarrior)) {
 			if (flags[kFLAGS.SPIRIT_STONES] >= 15) addButton(3, "4th", mrsShigureLecturesThird).hint("Mrs. Shigure's lecture on the third step of soul cultivation.");
 			else addButtonDisabled(3, "4th", "You don't have enough spirit stones (15) to listen to today's lecture.");
@@ -1481,3 +1481,4 @@ public function soularena():void {
     }
 }
 }
+
