@@ -80,7 +80,7 @@ public class AtlachNachaRace extends Race{
 				&& player.faceType == Face.SPIDER_FANGS
 				&& player.hasCoatOfType(Skin.CHITIN)
 				&& player.eyes.colour == "red"
-				&& player.coatColor == "midnight purple"
+				&& player.chitinColor == "midnight purple"
 				&& player.hairColor == "midnight purple";
 	}
 }

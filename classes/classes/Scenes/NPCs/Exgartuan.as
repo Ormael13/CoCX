@@ -369,9 +369,9 @@ public function exgartuanMasturbation():void {
 			outputText("You shrug off your top eagerly, ready to cooperate with the demon inside your [allbreasts] and enjoy a relaxing tit-massage.  You slide the offending material to the side and marvel at the wondrously large orbs on your chest.  Truly any place that can give you such wonderful endowments can't be evil.  You lean back, enjoying the warmth in the air as it flows over every extra-sensitive inch of your mounds, more than ready to get started.\n\n");
 		}
 		outputText("Both hands rise unbidden and begin to caress your " + breastDescript(0) + ".  They slide over every sensitive inch of ");
-		if(player.hasFur() == Skin.FUR) outputText("furry-covered flesh");
-		else if(player.hasScales() == Skin.SCALES) outputText("soft scaley flesh");
-		else if(player.hasGooSkin()) outputText("gooey surface");
+		if(player.isFurCovered() == Skin.FUR) outputText("furry-covered flesh");
+		else if(player.isScaleCovered() == Skin.SCALES) outputText("soft scaley flesh");
+		else if(player.isGooSkin()) outputText("gooey surface");
 		else outputText("flesh");
 		outputText(", pausing to gently squeeze and caress any particularly sensitive spots.  Soft sighs escape your lips from the self-imposed pleasure-assault.  Your body relaxes totally, slouching down against a rock while you continue to happily play with your [allbreasts].  The entire time your hands never touch one of your " + nippleDescript(0) + "s, merely circling them from time to time, making you arch your back in need.\n\n");
 		outputText("A voice taunts, \"<i>Oh, does my champion tit-massager need a little nipple-play?  And to think I thought I was the one needing to get off.  Go ahead then, submit to your desires and play with your nipples.  Wallow in the pleasure that I can give you and remember who your true master is!</i>\"\n\n");
@@ -900,7 +900,7 @@ private function exgartuanSleepSurprise():void {
 				else if(player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_DROOLING) outputText("glistening");
 				else outputText("dripping");
 				outputText(" skin of your outer lips is engorged and ready, but there's no pleasure to be had for your greedy gash.  Cool night air washes over the exposed ");
-				if(player.hasScales()) outputText("scales");
+				if(player.isScaleCovered()) outputText("scales");
 				else outputText("skin");
 				outputText(" surrounding your sex, teasing you with the barest hint of sensation while your ignorant hands maul your [cock] at Exgartuan's behest.  If only you had taken care of yourself earlier, you might have had the control to slip a digit into your " + vaginaDescript(0));
 				if(player.clitLength > 3) outputText(" or stroke your " + clitDescript());

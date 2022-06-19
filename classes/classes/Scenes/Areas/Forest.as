@@ -659,7 +659,7 @@ use namespace CoC;
 				}
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
 				if (player.balls > 0) {
-					outputText("  Your " + player.skinTone + " " + sackDescript() + " rests beneath your raised [butt].  Your [balls] pulse with the need to release their sperm through your [cocks] and ");
+					outputText("  Your [color] " + sackDescript() + " rests beneath your raised [butt].  Your [balls] pulse with the need to release their sperm through your [cocks] and ");
 					if (lake) outputText("into the waters of the nearby lake.");
 					else outputText("onto the fertile soil of the forest.");
 				}
@@ -684,7 +684,7 @@ use namespace CoC;
 				}
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
 				if (player.balls > 0) {
-					outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised [butt].  Your [balls] pulse with the need to release their sperm through your [cocks] and ");
+					outputText("  Your " + player.bodyColor + sackDescript() + " rests beneath your raised [butt].  Your [balls] pulse with the need to release their sperm through your [cocks] and ");
 					if (lake) outputText("into the waters of the nearby lake.");
 					else outputText("onto the fertile soil of the forest floor.");
 				}

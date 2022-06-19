@@ -846,7 +846,7 @@ import classes.lists.Gender;
 			outputText("\n\nAndy actually blushes, \"<i>Don't say it like that. I feel like you're teasing me.</i>\" he chuckles, \"<i>...but yeah. I love it, nothing like it. I can lick and stick and play in an ass all day long.</i>\" Then with a mischievous grin you tell him to prove it.");
 			outputText("\n\nAndy bites his lip as you begin to shed your [armor], revealing your body with exaggerated slowness as you watch his dog cock twitch in anticipation.");
 			outputText("\n\n\"<i>Oh hell yes.</i>\" He gasps, licking his lips as his eyes travel southward. Turning away you present your [ass] for his viewing pleasure.");
-			outputText("\n\nYou feel hands glide onto your waist. Soft fingers slide against your " + player.skinFurScales() + " and lift your [ass] spreading your " + player.skinTone + " cheeks apart to reveal your [asshole]. You feel a cool dollop of spit silently land on your [ass] and slide down your crack, a teasing tingle of wetness that makes your ass flex. Before the spit slides much lower than your pucker you feel a tongue press into your taint and lick upwards, wiping a wet swath up your [ass].");
+			outputText("\n\nYou feel hands glide onto your waist. Soft fingers slide against your " + player.skinFurScales() + " and lift your [ass] spreading your [color] cheeks apart to reveal your [asshole]. You feel a cool dollop of spit silently land on your [ass] and slide down your crack, a teasing tingle of wetness that makes your ass flex. Before the spit slides much lower than your pucker you feel a tongue press into your taint and lick upwards, wiping a wet swath up your [ass].");
 			outputText("\n\nYou bite your lip as he begins to lick up and down, his tongue playing in your [ass] like a kid at a playground. He kisses your exposed cheeks, he nibbles at your taint with soft wet lips. You tremble, you gasp and you can't help pushing backward as he teases you into frenzy. A hand lands on your [ass] with a hard smack, and then another. He grabs as much extra skin between his hands as he can and stiffens his tongue.");
 			outputText("\n\nAs he begins tongue fucking your [asshole] you can't help pushing back against his tongue, against that wet elation inducing muscle so talented you're singing. Those wet lips begin to nibble and suck, coming off your [asshole] with hard pop before repeating the process. It is bliss unending as he continues to loudly pop, pop, pop against your quivering [asshole].");
 			outputText("\n\nYou're cringing and convulsing, you're out of control and every sensation is a reminder of who really runs this show. Not Andy or you or your ass… it's that tongue, it's those lips, it's the mind-blowing waves of pleasure breaking through your body like a tidal wave. The sloppy slurp, slurp, slurps and tingling shudders have you almost crazed with need.");
@@ -1574,7 +1574,7 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Fur/scales fall out
-			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && (player.hasCoat() || player.skinTone != "gray" || player.skinAdj != "tough")) {
+			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && (player.hasCoat() || player.skinColor != "gray" || player.skinAdj != "tough")) {
 				outputText("\n\n");
 				if (player.hasCoat()) {
 					switch (player.coatType()) {
@@ -1666,15 +1666,15 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Change face to rhino
-			if (rand(4) == 0 && changes < changeLimit && player.ears.type == Ears.RHINO && player.skinTone == "gray" && player.faceType != Face.RHINO) {
+			if (rand(4) == 0 && changes < changeLimit && player.ears.type == Ears.RHINO && player.skinColor == "gray" && player.faceType != Face.RHINO) {
 				outputText("\n\n");
         CoC.instance.transformations.FaceRhino.applyEffect();
 				changes++;
 			}
 			//Change tail to rhino
 			if (rand(3) == 0 && changes < changeLimit && player.isBiped() && player.lowerBody != LowerBody.GARGOYLE && player.tailType != Tail.RHINO) {
-				if (player.tailType > 0) outputText("\n\nYou [tail] suddenly goes numb. Looking back you see it changing, twisting and reforming into a long ropy tail with a little [skin coat.color] tuft at the end. <b>You now have a rhino tail.</b>");
-				else outputText("\n\nYou feel an odd itchy sensation just above your [ass]. Twisting around to inspect it you find a long ropy tail with a little [skin coat.color] tuft on the end. <b>You now have a rhino tail.</b>");
+				if (player.tailType > 0) outputText("\n\nYou [tail] suddenly goes numb. Looking back you see it changing, twisting and reforming into a long ropy tail with a little [fur color] tuft at the end. <b>You now have a rhino tail.</b>");
+				else outputText("\n\nYou feel an odd itchy sensation just above your [ass]. Twisting around to inspect it you find a long ropy tail with a little [fur color] tuft on the end. <b>You now have a rhino tail.</b>");
 				player.tailType = Tail.RHINO;
 				changes++;
 			}
@@ -1833,7 +1833,7 @@ import classes.lists.Gender;
 			// Main TFs
 			//------------
 			//Change to fur
-			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && !player.hasFur()) {
+			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && !player.isFurCovered()) {
 				outputText("\n\nYou shiver, feeling a bit cold. Just as you begin to wish for something to cover up with, it seems your request is granted; <b>fur begins to grow all over your body!</b> You tug at the tufts in alarm, but they're firmly rooted and... actually pretty soft. Huh. ");
 				CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: "brown"}).applyEffect(false);
 				changes++;
@@ -1980,7 +1980,7 @@ import classes.lists.Gender;
 				changes++;
 			}
 			//Gain Echidna face if you have the right conditions.
-			if (rand(4) == 0 && changes < changeLimit && player.hasFur() && player.ears.type == Ears.ECHIDNA && player.tailType == Tail.ECHIDNA && player.tongue.type == Tongue.ECHIDNA) {
+			if (rand(4) == 0 && changes < changeLimit && player.isFurCovered() && player.ears.type == Ears.ECHIDNA && player.tailType == Tail.ECHIDNA && player.tongue.type == Tongue.ECHIDNA) {
 				outputText("\n\n");
         CoC.instance.transformations.FaceEchidna.applyEffect();
 				changes++;

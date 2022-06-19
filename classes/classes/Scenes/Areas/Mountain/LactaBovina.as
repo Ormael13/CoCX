@@ -2,7 +2,7 @@
  * ...
  * @author ...
  */
-package classes.Scenes.Areas.Mountain 
+package classes.Scenes.Areas.Mountain
 {
 
 import classes.*;
@@ -62,7 +62,7 @@ import classes.internals.*;
 			SceneLib.mountain.lactabovinaScene.lactaBovinaRape();
 		}
 		
-		public function LactaBovina() 
+		public function LactaBovina()
 		{
 			var furColor:String = randomChoice("black","brown");
 			this.a = "the ";
@@ -78,7 +78,7 @@ import classes.internals.*;
 			this.tallness = rand(27) + 69;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE + 1;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = furColor;
 			this.hairLength = 13;
 			this.horns.type = Horns.COW_MINOTAUR;

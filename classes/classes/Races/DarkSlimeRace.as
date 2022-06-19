@@ -15,13 +15,13 @@ public class DarkSlimeRace extends Race {
 	public override function setup():void {
 		
 		addScores()
-				.skinBaseColor(ANY(DarkSlimeSkinColors), +1)
+				.skinColor(ANY(DarkSlimeSkinColors), +1)
 				.hairType(Hair.GOO, +1)
 				.armType(Arms.GOO, +1)
 				.legType(LowerBody.GOO, +3)
 				.rearType(RearBody.METAMORPHIC_GOO, +2)
 				.customRequirement("skin", "slimy goo skin", function (body:BodyData):Boolean {
-					return body.player.hasGooSkin() && body.skinBaseAdj == "slimy"
+					return body.player.isGooSkin() && body.skinBaseAdj == "slimy"
 				}, +1)
 				.customRequirement("vagina", "Vag of Holding",
 						function (body:BodyData):Boolean {
@@ -32,7 +32,7 @@ public class DarkSlimeRace extends Race {
 				.hasPerk(PerkLib.DarkSlimeCore, +1);
 		
 		addConditionedScores(function (body:BodyData):Boolean {
-			return body.player.hasGooSkin() && body.skinBaseAdj == "slimy"
+			return body.player.isGooSkin() && body.skinBaseAdj == "slimy"
 		}, "slimy goo skin;")
 				.faceType(Face.HUMAN, +1)
 				.eyeType(ANY(Eyes.HUMAN, Eyes.FIENDISH), +1)

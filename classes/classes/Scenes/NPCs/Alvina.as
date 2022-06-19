@@ -302,7 +302,7 @@ import classes.internals.*;
 			this.hips.type = Hips.RATING_AVERAGE;
 			this.butt.type = Butt.RATING_AVERAGE;
 			this.lowerBody = LowerBody.HOOFED;
-			this.skinTone = "purple";
+			this.bodyColor = "purple";
 			this.hairColor = "black";
 			this.hairLength = 20;
 			initStrTouSpeInte(375, 455, 390, 480);

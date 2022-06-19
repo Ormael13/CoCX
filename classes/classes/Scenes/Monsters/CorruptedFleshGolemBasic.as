@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 	import classes.*;
 	import classes.BodyParts.Butt;
@@ -48,7 +48,7 @@ package classes.Scenes.Monsters
 			}
 		}
 		
-		public function CorruptedFleshGolemBasic() 
+		public function CorruptedFleshGolemBasic()
 		{
 			super(false);
 			this.a = "the ";
@@ -70,7 +70,7 @@ package classes.Scenes.Monsters
 			this.tallness = 84;
 			this.hips.type = Hips.RATING_AVERAGE + 1;
 			this.butt.type = Butt.RATING_AVERAGE + 1;
-			this.skinTone = "pink";
+			this.bodyColor = "pink";
 			this.weaponName = "dual swords";
 			this.weaponVerb = "slash";
 			this.weaponAttack = 50;

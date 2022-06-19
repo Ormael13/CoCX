@@ -67,7 +67,7 @@ public class SandWitchMob extends Monster
 					outputText("\n\nThey crawl up your [legs].  You try to swat them all off, but there are too many.");
 					//If PC has 1 cock:
 					if(player.cockTotal() == 1) outputText("  A stone crawls onto your [cock].");
-					//[If PC has multi-cocks: 
+					//[If PC has multi-cocks:
 					if(player.cockTotal() > 1) outputText("  A bunch of the stones crawl onto your [cocks].");
 					if(player.hasCock()) bonus++;
 					//[If PC has cunt]
@@ -165,7 +165,7 @@ public class SandWitchMob extends Monster
 			this.tallness = rand(12) + 55;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "bronzed";
+			this.bodyColor = "bronzed";
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;
 			initStrTouSpeInte(30, 45, 35, 45);

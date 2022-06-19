@@ -228,7 +228,7 @@ public function tamaniFirstTimeConsentual():void {
 			else {
 				if (player.balls > 0) outputText("licks all over your balls");
 				else if (player.hasVagina()) outputText("sneaks between your folds to tease your now-hardening clit");
-				else outputText("licks the sensitive " + player.skinTone + " [skin.type] of your inner thighs");
+				else outputText("licks the sensitive [color] [skin.type] of your inner thighs");
 			}
 			outputText("\n\n");
 			outputText("Her cunt grinds on your crown, smearing it with a mixture of the drooling cunt-lubricant and your own drizzles of pre-cum.  As your dick becomes slick and wet, the feeling of her arms and legs wrapped around you feels better and better.   She even squeezes her arms tight around you like a cock-ring, making your dick pulse and swell with blood for a few seconds before she releases.  Your inner abdominal muscles begin clenching and squeezing, sending a wave of heat through your groin as your baby-batter begins its journey to freedom.\n\n");
@@ -375,7 +375,7 @@ internal function tamaniSexLetHer():void {
 	
 	if(player.isTaur()) sceneHunter.callFitNofit(taur, 18, "length");
 	else sceneHunter.callFitNofit(others, 90, "area");
-		
+	
 	//PARTS
 	//==============================================================================================================
 	function taur(x:int):void {

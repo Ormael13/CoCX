@@ -1,4 +1,4 @@
-package classes.Scenes.Areas.Bog 
+package classes.Scenes.Areas.Bog
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -49,7 +49,7 @@ public class LizanRogue extends Monster
 				player.takePhysDamage(damage, true);
 			}
 		}
-				
+		
 		public function tongueAttack():void {
 			if (player.getEvasionRoll()) {
 				outputText("All you see is a flash of pink and without even thinking you twist out of its way and watch the lizan’s long tongue snap back into his mouth.");
@@ -77,14 +77,14 @@ public class LizanRogue extends Monster
 		
 		private const SKIN_VARIATIONS:Array = ["emerald", "azure", "scarlet", "violet", "obsidian", "amber", "silver"];
 		
-		public function LizanRogue() 
+		public function LizanRogue()
 		{
 			var skinToneAdj:String = randomChoice(SKIN_VARIATIONS);
 			this.skin.growCoat(Skin.SCALES,{color:skinToneAdj});
 			this.a = "the ";
 			this.short = "lizan rogue";
 			this.imageName = "lizanrogue";
-			this.long = "A rogue lizan male stands before you, watching your every move with quick yellow eyes. His slim body is covered in glistening " + skinTone + " scales. His strong tail swings back and forth as he shifts his weight, a fluid movement that hints at his speed.  He wears a simple loincloth to protect his modesty to which a small pack is belted.";
+			this.long = "A rogue lizan male stands before you, watching your every move with quick yellow eyes. His slim body is covered in glistening " + bodyColor + " scales. His strong tail swings back and forth as he shifts his weight, a fluid movement that hints at his speed.  He wears a simple loincloth to protect his modesty to which a small pack is belted.";
 			// this.plural = false;
 			createBreastRow(Appearance.breastCupInverse("flat"));
 			this.createCock(8, 3, CockTypesEnum.LIZARD);

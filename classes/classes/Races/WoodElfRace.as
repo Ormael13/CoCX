@@ -24,7 +24,7 @@ public class WoodElfRace extends Race{
 				.noWings(+1)
 				.hairColor("golden blonde", +1, -1000)
 				.eyeColor("light green",+1, -1000)
-				.skinBaseColor("light", +1)
+				.skinColor("light", +1)
 				.customRequirement("skin","flawless skin",
 						function (body:BodyData):Boolean {
 							return body.player.skinType == Skin.PLAIN && body.skinBaseAdj == "flawless"

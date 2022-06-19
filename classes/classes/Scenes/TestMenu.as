@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes 
+package classes.Scenes
 {
 import classes.*;
 import classes.BodyParts.*;
@@ -40,7 +40,7 @@ use namespace CoC;
 public class TestMenu extends BaseContent
 	{
 		
-		public function TestMenu() 
+		public function TestMenu()
 		{}
 		//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić
 	public function SoulforceCheats1(page:int = 0):void{
@@ -2346,16 +2346,16 @@ public class TestMenu extends BaseContent
 	}
 	public function MarbleGargoyleForm():void {
 		flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 1;
-		player.skinTone = "light grey";
-		player.hairColor = "light grey";
+		player.skinColor                     = "light grey";
+		player.hairColor                     = "light grey";
 		clearOutput();
 		outputText("You have become marble gargoyle. Now choose your wings shape.");
 		doNext(WingShapeChoices);
 	}
 	public function AlabasterGargoyleForm():void {
 		flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 2;
-		player.skinTone = "quartz white";
-		player.hairColor = "quartz white";
+		player.skinColor                     = "quartz white";
+		player.hairColor                     = "quartz white";
 		clearOutput();
 		outputText("You have become alabaster gargoyle. Now choose your wings shape.");
 		doNext(WingShapeChoices);
@@ -2449,11 +2449,11 @@ public class TestMenu extends BaseContent
 	}
 	public function GargoyleBodyChanges():void {
 		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
-			player.skinTone = "light grey";
+			player.skinColor = "light grey";
 			player.hairColor = "light grey";
 		}
 		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) {
-			player.skinTone = "quartz white";
+			player.skinColor = "quartz white";
 			player.hairColor = "quartz white";
 		}
 		player.skin.setBaseOnly({type:Skin.STONE});

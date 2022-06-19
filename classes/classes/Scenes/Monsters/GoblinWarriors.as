@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -126,7 +126,7 @@ public class GoblinWarriors extends Goblin
 			SceneLib.goblinScene.gobboSpecialBeatYaUp();
 		}
 		
-		public function GoblinWarriors() 
+		public function GoblinWarriors()
 		{
 			this.a = "the ";
 			this.short = "goblin warriors";
@@ -143,7 +143,7 @@ public class GoblinWarriors extends Goblin
 			this.tallness = 44 + rand(7);
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "dark green";
+			this.bodyColor = "dark green";
 			this.hairColor = "red";
 			this.hairLength = 4;
 			initStrTouSpeInte(175, 250, 170, 172);

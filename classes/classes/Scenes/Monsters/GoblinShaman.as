@@ -1,4 +1,4 @@
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -142,7 +142,7 @@ public class GoblinShaman extends Goblin
 			this.tallness = 44 + rand(7);
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "dark green";
+			this.bodyColor = "dark green";
 			this.hairColor = "indigo";
 			this.hairLength = 4;
 			initStrTouSpeInte(79, 60, 80, 97);

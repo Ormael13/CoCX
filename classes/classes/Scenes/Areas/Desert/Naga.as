@@ -13,7 +13,7 @@ public class Naga extends Monster
 	{
 		//2a) Ability - Poison Bite - poisons player
 		protected function nagaPoisonBiteAttack():void {
-			//(Deals damage over 4-5 turns, invariably reducing 
+			//(Deals damage over 4-5 turns, invariably reducing
 			//your speed. It wears off once combat is over.)
 			outputText("The " + this.short + " strikes with the speed of a cobra, sinking her fangs into your flesh!  ");
 			if(!player.hasStatusEffect(StatusEffects.NagaVenom)) {
@@ -55,7 +55,7 @@ public class Naga extends Monster
 			}
 		}
 		
-		//2c) Abiliy - Tail Whip - minus ??? HP 
+		//2c) Abiliy - Tail Whip - minus ??? HP
 		//(base it on toughness?)
 		protected function nagaTailWhip():void {
 			outputText("The naga tenses and twists herself forcefully.  ");
@@ -137,7 +137,7 @@ public class Naga extends Monster
 			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.NAGA;
 			this.faceType = Face.SNAKE_FANGS;
-			this.skinTone = "mediterranean-toned";
+			this.bodyColor = "mediterranean-toned";
 			this.hairColor = "brown";
 			this.hairLength = 16;
 			initStrTouSpeInte(38, 50, 55, 42);

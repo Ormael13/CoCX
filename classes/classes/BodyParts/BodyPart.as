@@ -17,7 +17,12 @@ public class BodyPart extends SimpleJsonable {
 	public function get creature():Creature {
 		return _creature;
 	}
+	public function hasMaterial(type:int):Boolean {
+		return false;
+	}
 	public function BodyPart(creature:Creature,publicPrimitives:Array) {
+		if (creature == null) trace("[ERROR] "+this+" has no host");
+		else creature.bodyParts.push(this);
 		addPublicPrimitives(["type"]);
 		addPublicPrimitives(publicPrimitives);
 		this._creature       = creature;
@@ -45,7 +50,7 @@ public class BodyPart extends SimpleJsonable {
 	public function setProps(p:Object):void {
 		copyObjectEx(this, p, myPublicPrimitives);
 	}
-
+	
 	public function setAllProps(p:Object, keepTone:Boolean = true):void {
 		restore(keepTone);
 		setProps(p);

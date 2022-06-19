@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Beach 
+package classes.Scenes.Areas.Beach
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -149,7 +149,7 @@ public class CancerAttack extends Monster
 			this.tallness = rand(8) + 70;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = "pale brown";
 			this.hairLength = 15;
 			initStrTouSpeInte(167, 185, 149, 42);

@@ -105,7 +105,7 @@ public class ChameleonGirl extends Monster
 		}
 
 		/**
-		 * Pairs of skinTone/skinAdj
+		 * Pairs of bodyColor/skinAdj
 		 */
 		private const SKIN_VARIATIONS:Array = [
 			["red", "black"],

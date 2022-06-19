@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
@@ -12,7 +12,7 @@ import classes.Items.Weapon;
 	public class AuroraFollower extends NPCAwareContent
 	{
 		
-		public function AuroraFollower() 
+		public function AuroraFollower()
 		{}
 
 public function putInTheJadeTalismanEpilogue():void {
@@ -143,7 +143,7 @@ public function auroraHenchmanOption():void
 				strAurora += 160;
 				touAurora += 40;
 				meleeAtkAurora += 28;
-			} 
+			}
 			if (flags[kFLAGS.AURORA_LVL] == 6) {
 				strAurora += 200;
 				touAurora += 40;
@@ -191,7 +191,7 @@ public function auroraHenchmanOption():void
 //9 feet tall THICC bat gargoyle gurl ^^ (mk 2 ma 4 feet a Ted ma 6 and half feet czyli po miedzy wzrostami mk 2 i mk 3 xD)
 //green eyes
 //very long/flowing locks of [hair]
-//skinTone = "turquoise"; - turkusowa + białe podbrzusze i etc.
+//bodyColor = "turquoise"; - turkusowa + białe podbrzusze i etc.
 //hairColor = "navy blue"; - granatowe
 	}
 }
