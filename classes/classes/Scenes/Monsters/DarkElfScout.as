@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -108,7 +108,7 @@ public class DarkElfScout extends Monster
 			}
 		}
 		
-		public function DarkElfScout() 
+		public function DarkElfScout()
 		{
 			this.a = "the ";
 			this.short = "dark elf scout";
@@ -123,7 +123,7 @@ public class DarkElfScout extends Monster
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE + 1;
 			this.lowerBody = LowerBody.ELF;
-			this.skinTone = "dark";
+			this.bodyColor = "dark";
 			this.hairColor = "silver";
 			this.hairLength = 13;
 			initStrTouSpeInte(30, 30, 90, 40);

@@ -182,7 +182,7 @@ public class CumWitch extends Monster
 			this.tallness = rand(12) + 55;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "black";
+			this.bodyColor = "black";
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;
 			initStrTouSpeInte(50, 60, 45, 85);

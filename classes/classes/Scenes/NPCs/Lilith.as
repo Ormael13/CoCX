@@ -2,7 +2,7 @@
  * ...
  * @author Ormael (for now)
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -94,7 +94,7 @@ import classes.internals.*;
 		
 		override public function get long():String
 		{
-			var str:String = "";//You're fighting pale skinned woman with snow black hair. Even her eyes or lips are pitch black. And you would mistake her for normal human woman wearing catsuit if not noticable goat-like horns, small bat wings or arrow tipped tail. 
+			var str:String = "";//You're fighting pale skinned woman with snow black hair. Even her eyes or lips are pitch black. And you would mistake her for normal human woman wearing catsuit if not noticable goat-like horns, small bat wings or arrow tipped tail.
 			if (hasStatusEffect(StatusEffects.TrueFormAngel)) str += "</i>";
 			else {
 				str += "You're fighting devilish cute goth girl. She stands about nine feet tall and is hugely voluptuous, with breasts two times the size of her head. Her hips flare out into an exaggerated hourglass shape, with a long tail tipped with a fleshy arrow-head spade that waves above her spankable butt. ";
@@ -109,7 +109,7 @@ import classes.internals.*;
 			return str;
 		}
 		
-		public function Lilith() 
+		public function Lilith()
 		{
 			createBreastRow(Appearance.breastCupInverse("RR"));//G_BIG ?K - 1 head size, RR - 2 heads size, ZZ - 3 heads size?
 			this.tallness = 9*12+2;
@@ -138,7 +138,7 @@ import classes.internals.*;
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 30, 0, 0, 0);
 			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = "raven";
 			this.weaponName = "fist";
 			this.weaponVerb="punch";

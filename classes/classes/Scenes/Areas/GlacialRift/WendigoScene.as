@@ -107,11 +107,11 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("Still hungry you resume eating out the imp dick for the next few hours until the poor thing just passes out unable to cum any further. In frustration, you head back to camp your hunger still nagging at you. You console yourself knowing that there's plenty of cock to suck and pussy to eat out, you will find some around, you just need to keep searching.\n\n");
 			player.removeStatusEffect(StatusEffects.WendigoPsychosis);
 			player.hairColor = "silver-white";
-			player.coatColor = "snow white";
+			player.furColor = "snow white";
 			if (player.faceType == Face.ANIMAL_TOOTHS) {
 				CoC.instance.transformations.FaceDeer.applyEffect(false);
 				if (!player.hasPlainSkinOnly() && !player.hasPartialCoat(Skin.FUR)) CoC.instance.transformations.SkinPlain.applyEffect(false);
-				else if (player.hasPlainSkinOnly()) CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: player.coatColor}).applyEffect(false);
+				else if (player.hasPlainSkinOnly()) CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW).applyEffect(false);
 			}
 			else {
 				CoC.instance.transformations.FaceAnimalTeeth.applyEffect(false);

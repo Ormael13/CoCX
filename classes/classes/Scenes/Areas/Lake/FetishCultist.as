@@ -153,7 +153,7 @@ public class FetishCultist extends Monster
 			this.tallness = 5*12+7;
 			this.hips.type = Hips.RATING_AMPLE;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "pale";
+			this.bodyColor = "pale";
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(40, 25, 30, 1);

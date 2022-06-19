@@ -11,7 +11,7 @@ import classes.internals.*;
 public class GreenSlime extends Monster
 	{
 		public var floor1:RiverDungeon = new RiverDungeon();
-				
+		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
@@ -86,7 +86,7 @@ public class GreenSlime extends Monster
 			this.hips.type = Hips.RATING_AMPLE;
 			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.GOO;
-			this.skinTone = "green";
+			this.bodyColor = "green";
 			this.weaponName = "hands";
 			this.weaponVerb = "slap";
 			this.armorName = "gelatinous skin";

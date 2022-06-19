@@ -324,7 +324,7 @@ public class Kiha extends Monster
 			this.long = "Kiha is standing across from you, holding a double-bladed axe that's nearly as big as she is.  She's six feet tall, and her leathery wings span nearly twelve feet extended.  Her eyes are pure crimson, save for a black slit in the center, and a pair of thick draconic horns sprout from her forehead, arcing over her ruby-colored hair to point behind her.  Dim red scales cover her arms, legs, back, and strong-looking tail, providing what protection they might to large areas of her body.  The few glimpses of exposed skin are dark, almost chocolate in color, broken only by a few stray scales on the underside of her bosom and on her cheekbones.  ";
 			if (game.flags[kFLAGS.KIHA_UNDERGARMENTS] > 0)
 				this.long += "Damp patch forms in her silk " + (game.flags[kFLAGS.KIHA_UNDERGARMENTS] == 1 ? "panties" : "loincloth") + ", regardless of her state of arousal.  Despite her near nudity, Kiha stands with the confidence and poise of a trained fighter.";
-			else 
+			else
 				this.long += "Her vagina constantly glistens with moisture, regardless of her state of arousal.  Despite her nudity, Kiha stands with the confidence and poise of a trained fighter.";
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_NORMAL);
@@ -338,8 +338,8 @@ public class Kiha extends Monster
 			this.butt.type = Butt.RATING_AVERAGE + 1;
 			this.lowerBody = LowerBody.HOOFED;
 			this.skin.coverage = Skin.COVERAGE_MEDIUM;
-			this.skin.base.color = "dark";
-			this.skin.coat.color = "red";
+			this.skinColor     = "dark";
+			this.scaleColor    = "red";
 			this.skin.coat.type = Skin.SCALES;
 			this.hairColor = "red";
 			this.hairLength = 3;
@@ -355,21 +355,21 @@ public class Kiha extends Monster
 			this.wings.type = Wings.DRACONIC_LARGE;
 			this.wings.desc = "huge";
 			this.tailType = Tail.LIZARD;
-			if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] == 1) ( 
+			if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] == 1) (
 				this.abilities = [
 					{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
 					{call: kihaTimeWaster, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
 					{call: kihaFireBreath, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_BODY]},
 					{call: sillyModeKihaAttack(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_FIRE], condition: function():Boolean { return EngineCore.silly() } },
-				] 
+				]
 			);
-			else ( 
+			else (
 				this.abilities = [
 					{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
 					{call: kihaTimeWaster, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
 					{call: kihaFireBreath, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_BODY]},
 					{call: kihaFirePunch(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_FIRE], condition: function():Boolean { return !EngineCore.silly() } },
-				] 
+				]
 			);
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) {
 				this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);

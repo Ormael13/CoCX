@@ -1,4 +1,4 @@
-package classes.Scenes.Areas.Battlefield 
+package classes.Scenes.Areas.Battlefield
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -13,7 +13,7 @@ import classes.internals.*;
 	public class GhastlyDragon extends Monster
 	{
 		
-		public function GhastlyDragon() 
+		public function GhastlyDragon()
 		{
 			this.a = "the ";
 			this.short = "ghastly dragon";
@@ -31,7 +31,7 @@ import classes.internals.*;
 			this.tallness = 78;
 			this.hips.type = Hips.RATING_SLENDER;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skinTone = "white";
+			this.bodyColor = "white";
 			this.hairColor = "white";
 			this.hairLength = 3;
 			initStrTouSpeInte(55, 40, 10, 140);

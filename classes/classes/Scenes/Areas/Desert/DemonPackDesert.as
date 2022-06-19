@@ -102,7 +102,7 @@ public class DemonPackDesert extends Monster
 			this.tallness = rand(8) + 70;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(50, 30, 10, 5);

@@ -305,7 +305,7 @@ public class Ceraph extends Monster
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_NOTICEABLE;
 			this.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
-			this.skinTone = "purple";
+			this.bodyColor = "purple";
 			this.hairColor = "black";
 			this.hairLength = 20;
 			initStrTouSpeInte(75, 55, 90, 80);

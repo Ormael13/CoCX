@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Arms;
@@ -120,7 +120,7 @@ use namespace CoC;
 			SceneLib.ceaniScene.sparringWithCeaniLost();
 		}
 		
-		public function Ceani() 
+		public function Ceani()
 		{
 			if (flags[kFLAGS.CEANI_LVL_UP] < 5) {
 				this.armorDef = 25;
@@ -218,7 +218,7 @@ use namespace CoC;
 			this.tallness = 132;
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
-			this.skinTone = "black with a white underside";
+			this.bodyColor = "black with a white underside";
 			this.hairColor = "blue";
 			this.hairLength = 13;
 			this.weaponName = "harpoon";

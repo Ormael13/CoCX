@@ -100,7 +100,7 @@ public class DemonSoldier extends Monster {
         }
         //Skin colour!
 
-        this.skinTone = SKIN_COLORS_LIST[(seed + Math.floor(seed / 94) + SEED_SKIN_OFFSET) % SKIN_COLORS_LIST.length];
+        this.bodyColor = SKIN_COLORS_LIST[(seed + Math.floor(seed / 94) + SEED_SKIN_OFFSET) % SKIN_COLORS_LIST.length];
         //Now set gender!
         if (this.hasBreasts()) { //Feminine with tits
             if (this.hasCock() && this.hasVagina()) this.demonGender = DEMON_GENDER_HERM;

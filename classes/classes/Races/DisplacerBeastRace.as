@@ -24,8 +24,8 @@ public class DisplacerBeastRace extends Race {
 				.armType(Arms.DISPLACER, +3, -1000)
 				.rearType(RearBody.DISPLACER_TENTACLES, +2, -1000)
 				.skinCoatType(Skin.FUR, +1)
-				.skinCoatColor(ANY(DisplacerFurColors), +1)
-				.skinBaseColor("dark gray", +1)
+				.furColor(ANY(DisplacerFurColors), +1)
+				.skinColor("dark gray", +1)
 				.hasPerk(PerkLib.Flexibility, +1)
 				.customRequirement("","not other magical feline race",
 						function (body:BodyData):Boolean {

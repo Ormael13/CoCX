@@ -1398,14 +1398,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Lustzerker perk
-			if (!player.hasPerk(PerkLib.Lustzerker) && (player.isRaceCached(Races.SALAMANDER) || player.isRaceCached(Races.PHOENIX))) { //Check for gain of lustzerker - requires legs, arms and tail
+			if (!player.hasPerk(PerkLib.Lustzerker) && (player.isRaceCached(Races.SALAMANDER) || player.isRaceCached(Races.PHOENIX) || player.isRaceCached(Races.KITSHOO))) { //Check for gain of lustzerker - requires legs, arms and tail
 				if (!player.hasPerk(PerkLib.Lustzerker)) {
 					outputText("\nYou start to feel a weird, slightly unpleasant feeling inside your body. Like many tiny flames coursing through your veins, making you ponder what is happening with your body. Remembering about salamanders' natural talent for entering a berserk-like state, you quess that should be it. [pg](Gained Perk: Lustzerker)");
 					player.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
 					needNext = true;
 				}
 			}
-			else if (player.hasPerk(PerkLib.Lustzerker) && !player.isRaceCached(Races.SALAMANDER) && !player.isRaceCached(Races.PHOENIX) && player.perkv4(PerkLib.Lustzerker) == 0 && !player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 1) { //Remove lustzerker perk if not meeting requirements
+			else if (player.hasPerk(PerkLib.Lustzerker) && !player.isRaceCached(Races.SALAMANDER) && !player.isRaceCached(Races.PHOENIX) && !player.isRaceCached(Races.KITSHOO) && player.perkv4(PerkLib.Lustzerker) == 0 && !player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 1) { //Remove lustzerker perk if not meeting requirements
 				outputText("\nAll of a sudden, something changes inside your body. You think about it for a long time until it dawns on you. You can't feel that fire in your veins anymore, meaning for now, no more lustzerking. [pg](Lost Perk: Lustzerker)");
 				player.removePerk(PerkLib.Lustzerker);
 				needNext = true;
@@ -1802,7 +1802,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				if (!player.hasPerk(PerkLib.FlawlessBody)) {
 					outputText("\nYou examine your body discovering with surprise your skin is now extremely sensitive but also flawless just like that of an elf. ");
-					outputText("It is beautiful and inviting to the touch, surely your opponents would beg for a chance to get but a single taste of your flawless body. <b>Your " + player.skinTone + " skin is now flawless just like that of the elves.</b>");
+					outputText("It is beautiful and inviting to the touch, surely your opponents would beg for a chance to get but a single taste of your flawless body. <b>Your " + player.skinColor + " skin is now flawless just like that of the elves.</b>");
 					player.createPerk(PerkLib.FlawlessBody, 0, 0, 0, 0);
 					outputText("\n\n<b>(Gained Perk: Flawless Body</b>)");
 				}
@@ -2181,10 +2181,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText(" You feel a tingling in your hairs as the strands turns "+CurentColor+".");
 					player.hairColor = CurentColor;
 				}
-				if (!InCollection(player.coatColor, UnicornRace.BicornFurColors)) {
+				if (!InCollection(player.furColor, UnicornRace.BicornFurColors)) {
 					CurentColor = randomChoice(bicornColorPalette);
 					outputText(" Your fur tingle and you coo in delight as it turn "+CurentColor+".");
-					player.coatColor = CurentColor;
+					player.furColor = CurentColor;
 				}
 				if (CoC.instance.transformations.EyesChangeColor(["red"]).isPossible()) {
 					outputText(" Meanwhile your eyes shine with malice as they take on a red corrupted tone reflecting the sorry state of your soul.");
@@ -2243,10 +2243,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText(" You feel a tingling in your hairs as the strands turns "+CurentColor+".");
 					player.hairColor = CurentColor;
 				}
-				if (!InCollection(player.coatColor, unicornColorPalette)) {
+				if (!InCollection(player.furColor, unicornColorPalette)) {
 					CurentColor = randomChoice(unicornColorPalette);
 					outputText(" You sigh in relief as your fur turns "+CurentColor+".");
-					player.coatColor = CurentColor;
+					player.furColor = CurentColor;
 				}
 				if (CoC.instance.transformations.EyesChangeColor(["blue"]).isPossible()) {
 					outputText(" Meanwhile your irises shift toward the sapphire blue as your mind clears off.");

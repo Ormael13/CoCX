@@ -2,7 +2,7 @@
  * ...
  * @author ...
  */
-package classes.Scenes.Explore 
+package classes.Scenes.Explore
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -155,7 +155,7 @@ import classes.internals.*;
 					"His left hand is lit up by an aura of blue flames, ready to flare up into gouts of foxfire at a moment’s notice. In his right hand is his metal staff, foxfire burning at it’s tip.";
 		}
 		
-		public function KitsuneAncestor() 
+		public function KitsuneAncestor()
 		{
 			this.a = "a ";
 			this.short = "kitsune ancestor";
@@ -173,7 +173,7 @@ import classes.internals.*;
 			this.tallness = rand(14) + 70;
 			this.hips.type = Hips.RATING_SLENDER;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skinTone = "grey";
+			this.bodyColor = "grey";
 			this.hairColor = "grey";
 			this.hairLength = 31 + rand(10);
 			initStrTouSpeInte(95, 160, 420, 330);
@@ -227,6 +227,6 @@ import classes.internals.*;
 			this.createPerk(PerkLib.GreyArchmage, 0, 0, 0, 0);
 			this.createPerk(PerkLib.GrandGreyArchmage, 0, 0, 0, 0);
 			checkMonster();
-		}	
+		}
 	}
 }

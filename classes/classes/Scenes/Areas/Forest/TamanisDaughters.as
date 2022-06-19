@@ -115,7 +115,7 @@ public class TamanisDaughters extends Goblin
 			this.tallness = 40;
 			this.hips.type = Hips.RATING_AMPLE + 1;
 			this.butt.type = Butt.RATING_NOTICEABLE + 1;
-			this.skinTone = "greenish gray";
+			this.bodyColor = "greenish gray";
 			this.hairColor = "pink";
 			this.hairLength = 16;
 			initStrTouSpeInte(55, 30, 45, 50);

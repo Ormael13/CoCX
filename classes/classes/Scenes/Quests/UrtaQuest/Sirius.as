@@ -112,7 +112,7 @@ public class Sirius extends Naga
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.NAGA;
-			this.skinTone = "mediterranean-toned";
+			this.bodyColor = "mediterranean-toned";
 			this.hairColor = "orange";
 			this.hairLength = 16;
 			initStrTouSpeInte(110, 90, 125, 92);

@@ -212,7 +212,7 @@ public class ImpHorde extends Monster
 			this.tallness = 36;
 			this.hips.type = Hips.RATING_SLENDER;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 1;
 			initStrTouSpeInte(50, 30, 25, 12);

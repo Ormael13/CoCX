@@ -354,8 +354,7 @@ package classes.Scenes.Places{
 				player.wings.type = Wings.NONE;
 				if (player.cocks.length > 1) player.killCocks( player.cocks.length - 1 )
 				player.cocks[0].cockType = CockTypesEnum.MINDBREAKER;
-				player.skin.base.color = "eldritch purple";
-				player.skin.base.color2 = "eldritch purple";
+				player.skinColor         = "eldritch purple";
 				if (player.skin.base.pattern != Skin.PATTERN_NONE) {
 					CoC.instance.transformations.SkinPatternNone.applyEffect(false);
 				}
@@ -421,9 +420,8 @@ package classes.Scenes.Places{
 				if (!player.hasVagina()) player.createVagina();
 				player.vaginaType(14);
 				var color:String = randomChoice("pale", "ghostly white", "light purple");
-				player.skin.base.color = color;
-				player.skin.base.color2 = color;
-				player.skinType = Skin.PLAIN;
+				player.skinColor = color;
+				player.skinType  = Skin.PLAIN;
 				if (player.skin.base.pattern != Skin.PATTERN_NONE) {
 					CoC.instance.transformations.SkinPatternNone.applyEffect(false);
 				}

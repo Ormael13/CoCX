@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Forest 
+package classes.Scenes.Areas.Forest
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -140,21 +140,21 @@ public class Alraune extends Monster
 			SceneLib.forest.alrauneScene.alrauneDeepwoodsLost();
 		}
 		
-		public function Alraune() 
+		public function Alraune()
 		{
 			super();
 			if (Holidays.isHalloween()) {
 				this.a = "";
 				this.short = "Jack-O-Raune";
 				this.long = "You are fighting against a Jack-O-Raune, an intelligent plant with the torso of a woman and the lower body of a giant pumpkin with snaking tentacle vines. She seems really keen on raping you.";
-				this.skinTone = "pale orange";
+				this.bodyColor = "pale orange";
 				this.hairColor = "green";
 			}
 			else {
 				this.a = "an ";
 				this.short = "alraune";
 				this.long = "You are fighting against an Alraune, an intelligent plant with the torso of a woman and the lower body of a giant flower. She seems really keen on raping you.";
-				this.skinTone = "light green";
+				this.bodyColor = "light green";
 				this.hairColor = "dark green";
 			}
 			this.imageName = "alraune";

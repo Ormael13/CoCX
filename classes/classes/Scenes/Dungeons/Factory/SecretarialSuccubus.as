@@ -43,7 +43,7 @@ public class SecretarialSuccubus extends AbstractSuccubus
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE + 1;
 			this.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
-			this.skinTone = "blue";
+			this.bodyColor = "blue";
 			this.hairColor = "blond";
 			this.hairLength = 13;
 			initStrTouSpeInte(60, 50, 85, 35);

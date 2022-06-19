@@ -21,7 +21,7 @@ public class JiangshiRace extends Race {
 		addScores()
 				.skinPlainOnly(+1)
 				.skinBaseAdj(NOT("slippery"), 0, -1)
-				.skinBaseColor(ANY(JiangshiSkinColors), +1)
+				.skinColor(ANY(JiangshiSkinColors), +1)
 				.hairType(Hair.NORMAL, +1)
 				.faceType(Face.JIANGSHI, +1)
 				.eyeType(Eyes.JIANGSHI, +2)

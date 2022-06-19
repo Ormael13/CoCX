@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Areas.Ashlands 
+package classes.Scenes.Areas.Ashlands
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -77,7 +77,7 @@ import classes.internals.WeightedDrop;
 			}
 		}
 		
-		public function PhoenixSquadAshland() 
+		public function PhoenixSquadAshland()
 		{
 			this.a = "the ";
 			this.short = "phoenix squad";
@@ -99,7 +99,7 @@ import classes.internals.WeightedDrop;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.SALAMANDER;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(253, 204, 225, 120);

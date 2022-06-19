@@ -18,7 +18,7 @@ import classes.Scenes.Dungeons.DeepCave.ValaScene;
 public class Phouka extends Monster
 	{
 		protected function phoukaFightAttack():void
-		{ 
+		{
 			var damage:int;
 			//Only the bunny, goat and horse forms make physical attacks
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
@@ -146,7 +146,7 @@ public class Phouka extends Monster
 				outputText("\n\nThe " + this.short + " hesitates and slows down.  You see its cock twitch and then it readies for the next attack.");
 			applyTease(lustDelta);
 		}
-        
+  
 		override public function defeated(hpVictory:Boolean):void
 		{
 			SceneLib.bog.phoukaScene.phoukaPlayerWins(hpVictory);
@@ -285,7 +285,7 @@ public class Phouka extends Monster
 			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.HUMAN;
 			this.arms.type = Arms.HUMAN;
-			this.skinTone = "black";
+			this.bodyColor = "black";
 			this.hairColor = "black";
 			this.hairLength = 1;
 			this.ears.type = Ears.ELFIN;

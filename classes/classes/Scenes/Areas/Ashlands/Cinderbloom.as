@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Ashlands 
+package classes.Scenes.Areas.Ashlands
 {
 import classes.*;
 import classes.GlobalFlags.*;
@@ -24,19 +24,19 @@ public class Cinderbloom extends Alraune
 			SceneLib.forest.alrauneScene.alrauneDeepwoodsLost();
 		}
 		
-		public function Cinderbloom() 
+		public function Cinderbloom()
 		{
 			super();
 			if (Holidays.isHalloween()) {
 				this.short = "Jack-O-Raune";
 				this.long = "You are fighting against a Jack-O-Raune, an intelligent plant with the torso of a woman and the lower body of a giant pumpkin with snaking tentacle vines. She seems really keen on raping you.";
-				this.skinTone = "pale orange";
+				this.bodyColor = "pale orange";
 				this.hairColor = "dark green";
 			}
 			else {
 				this.short = "cinderbloom alraune";
 				this.long = "You are fighting against a Cinderbloom, an intelligent plant with the torso of a woman and the lower body of a giant flower. She seems really keen on raping you.";
-				this.skinTone = "chocolate";
+				this.bodyColor = "chocolate";
 				this.hairColor = "blonde";
 			}
 			this.imageName = "cinderbloom alraune";

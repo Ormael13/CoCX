@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Dungeons.DenOfDesire 
+package classes.Scenes.Dungeons.DenOfDesire
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -150,7 +150,7 @@ public class HeroslayerOmnibus extends Monster
 			SceneLib.dungeons.denofdesire.defeatedByHeroslayerOmnibus();
 		}
 		
-		public function HeroslayerOmnibus() 
+		public function HeroslayerOmnibus()
 		{
 			this.a = "the";
 			this.short = "hero slayer omnibus";
@@ -168,7 +168,7 @@ public class HeroslayerOmnibus extends Monster
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_NOTICEABLE;
 			this.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
-			this.skinTone = "black";
+			this.bodyColor = "black";
 			this.hairColor = "red";
 			this.hairLength = 20;
 			initStrTouSpeInte(104, 100, 90, 150);

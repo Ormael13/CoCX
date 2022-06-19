@@ -104,7 +104,7 @@ use namespace CoC;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE + 1;
 			this.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
-			this.skinTone = "blue";
+			this.bodyColor = "blue";
 			this.hairColor = "black";
 			this.hairLength = 13;
 			initStrTouSpeInte(130, 100, 180, 120);

@@ -46,7 +46,8 @@
             <v-list dense nav v-if="loaded">
                 <nav-tab v-model="tab" code="stats" icon="mdi-dice-multiple" label="Stats"></nav-tab>
                 <nav-tab v-model="tab" code="body" icon="mdi-human" label="Body"></nav-tab>
-                <nav-tab v-model="tab" code="perks" icon="mdi-file-tree" label="Perks"></nav-tab>
+                <nav-tab v-model="tab" code="perks" icon="mdi-format-list-numbered" label="Perks"></nav-tab>
+                <nav-tab v-model="tab" code="perktree" icon="mdi-file-tree" label="Perk Tree"></nav-tab>
                 <nav-tab v-model="tab" code="mutations" icon="mdi-biohazard" label="Mutations"></nav-tab>
                 <nav-tab v-model="tab" code="metamorph" icon="mdi-dna" label="Metamorph"></nav-tab>
                 <nav-tab v-model="tab" code="items" icon="mdi-sword" label="Items"></nav-tab>
@@ -75,11 +76,11 @@
                         <v-alert type="success" v-if="loaded">
                             Successfully loaded file '{{fileName}}'!
                         </v-alert>
-                        <v-alert type="warning" v-if="loaded && saveVersion < minSupportedVersion">
-                            Warning: The save is for game version {{saveVersion}}, oldest supported is {{minSupportedVersion}}.
+                        <v-alert type="warning" v-if="loaded && saveVersion < Gamedata.minVersion">
+                            Warning: The save is for game version {{saveVersion}}, oldest supported is {{Gamedata.minVersion}}.
                         </v-alert>
-                        <v-alert type="warning" v-if="loaded && saveVersion > maxSupportedVersion">
-                            Warning: The save is for game version {{saveVersion}}, latest supported is {{maxSupportedVersion}}.
+                        <v-alert type="warning" v-if="loaded && saveVersion > Gamedata.maxVersion">
+                            Warning: The save is for game version {{saveVersion}}, latest supported is {{Gamedata.maxVersion}}.
                         </v-alert>
                         <v-alert type="warning" v-if="loaded && saveSol">
                             "Save to slot" and "Save to file" have different formats.
@@ -358,49 +359,39 @@
                             <v-tab-item><!--skin-->
                                 <v-row>
                                     <v-col cols="12"><h3>Base layer:</h3></v-col>
-                                    <v-col cols="4">
+                                    <v-col cols="3">
                                         <bp-select
                                                 label="Type"
                                                 v-model="save.skin.base.type"
                                                 v-on:input="setSkinType('base',$event)"
                                                 :map="Gamedata.bptypes.skin_base"></bp-select>
                                     </v-col>
-                                    <v-col cols="4">
+                                    <v-col cols="3">
                                         <v-combobox
                                                 label="Adjective"
                                                 :items="Gamedata.skinAdjs"
                                                 v-model="save.skin.base.adj"></v-combobox>
                                     </v-col>
-                                    <v-col cols="4">
+                                    <v-col cols="3">
                                         <v-combobox
                                                 label="Noun"
                                                 :items="Gamedata.skinDescs"
                                                 v-model="save.skin.base.desc"></v-combobox>
                                     </v-col>
-                                    <v-col cols="4">
-                                        <select-color
-                                                label="Color 1"
-                                                v-model="save.skin.base.color"></select-color>
-                                    </v-col>
-                                    <v-col cols="4">
-                                        <select-color
-                                                label="Color 2"
-                                                v-model="save.skin.base.color2"></select-color>
-                                    </v-col>
-                                    <v-col cols="4">
+                                    <v-col cols="3">
                                         <bp-select
                                                 label="Pattern"
                                                 v-model="save.skin.base.pattern"
                                                 :map="Gamedata.bptypes.pattern_base"></bp-select>
                                     </v-col>
-                                    <v-col cols="8"><h3>Coat layer:</h3></v-col>
-                                    <v-col cols="4">
+                                    <v-col cols="9"><h3>Coat layer:</h3></v-col>
+                                    <v-col cols="3">
                                         <v-select
                                                 label="Coverage"
                                                 v-model="save.skin.coverage"
                                                 :items="Gamedata.skin_coverage"></v-select>
                                     </v-col>
-                                    <v-col cols="4">
+                                    <v-col cols="3">
                                         <bp-select
                                                 :disabled="save.skin.coverage===0"
                                                 label="Type"
@@ -408,39 +399,40 @@
                                                 v-on:input="setSkinType('coat',$event)"
                                                 :map="Gamedata.bptypes.skin_coat"></bp-select>
                                     </v-col>
-                                    <v-col cols="4">
+                                    <v-col cols="3">
                                         <v-combobox
                                                 :disabled="save.skin.coverage===0"
                                                 label="Adjective"
                                                 :items="Gamedata.skinAdjs"
                                                 v-model="save.skin.coat.adj"></v-combobox>
                                     </v-col>
-                                    <v-col cols="4">
+                                    <v-col cols="3">
                                         <v-combobox
                                                 :disabled="save.skin.coverage===0"
                                                 :items="Gamedata.skinDescs"
                                                 label="Noun"
                                                 v-model="save.skin.coat.desc"></v-combobox>
                                     </v-col>
-                                    <v-col cols="4">
-                                        <select-color
-                                                :disabled="save.skin.coverage===0"
-                                                label="Color 1"
-                                                v-model="save.skin.coat.color"></select-color>
-                                    </v-col>
-                                    <v-col cols="4">
-                                        <select-color
-                                                :disabled="save.skin.coverage===0"
-                                                label="Color 2"
-                                                v-model="save.skin.coat.color2"></select-color>
-                                    </v-col>
-                                    <v-col cols="4">
+                                    <v-col cols="3">
                                         <bp-select
                                                 :disabled="save.skin.coverage===0"
                                                 label="Pattern"
                                                 v-model="save.skin.coat.pattern"
                                                 :map="Gamedata.bptypes.pattern_coat"></bp-select>
                                     </v-col>
+                                    <v-col cols="12"><h3>Materials:</h3></v-col>
+                                    <template v-for="material in Object.values(Gamedata.bptypes.materials)">
+                                        <v-col cols="3">
+                                            <select-color
+                                                    :label="material.name+' color 1'"
+                                                    v-model="save.bodyMaterials[material.value].color1"></select-color>
+                                        </v-col>
+                                        <v-col cols="3">
+                                            <select-color
+                                                    :label="material.name+' color 2'"
+                                                    v-model="save.bodyMaterials[material.value].color2"></select-color>
+                                        </v-col>
+                                    </template>
                                 </v-row>
                             </v-tab-item>
                             <v-tab-item>
@@ -781,6 +773,80 @@
                             </template>
                         </v-data-table>
                     </v-tab-item>
+                    <v-tab-item value="perktree" v-if="loaded">
+                        <h1>Perk Tree</h1>
+                        <v-row>
+                            <v-col cols="6" style="max-height: calc(100vh - 72px);overflow-y: auto;">
+                                <v-treeview
+                                        dense
+                                        :active.sync="perkTreeActive"
+                                        activatable
+                                        :items="perkTreeItems"
+                                        :open.sync="perkTreeOpen"
+                                >
+                                    <template v-slot:prepend="{item,open}">
+                                        <v-simple-checkbox v-model="item.present"></v-simple-checkbox>
+                                    </template>
+                                </v-treeview>
+                            </v-col>
+                            <v-divider vertical></v-divider>
+                            <v-col cols="6">
+                                <v-card v-if="selectedPerk" flat>
+                                    <v-card-text>
+                                        <h3>{{selectedPerk.name}}</h3>
+                                        {{selectedPerk.desc}}
+                                    </v-card-text>
+                                    <v-divider v-if="selectedPerk.requirements.length>0"></v-divider>
+                                    <v-card-text>
+                                        <h4 v-if="selectedPerk.requirements.length>0">Requirements:</h4>
+                                        <div v-for="requirement in selectedPerk.requirements">
+                                            {{requirement.text}}
+                                        </div>
+                                    </v-card-text>
+                                    <v-divider></v-divider>
+                                    <v-card-text>
+                                        <v-checkbox label="Owned" v-model="selectedPerk.present"></v-checkbox>
+                                        <v-text-field dense
+                                                      type="number"
+                                                      label="Value1"
+                                                      hide-details="auto"
+                                                      :hint="selectedPerk.v1desc"
+                                                      persistent-hint
+                                                      v-model="selectedPerk.value1"
+                                                      v-if="selectedPerk.present&&selectedPerk.hasv1"
+                                        ></v-text-field>
+                                        <v-text-field dense
+                                                      type="number"
+                                                      label="Value2"
+                                                      hide-details="auto"
+                                                      :hint="selectedPerk.v2desc"
+                                                      persistent-hint
+                                                      v-model="selectedPerk.value2"
+                                                      v-if="selectedPerk.present&&selectedPerk.hasv2"
+                                        ></v-text-field>
+                                        <v-text-field dense
+                                                      type="number"
+                                                      label="Value3"
+                                                      hide-details="auto"
+                                                      :hint="selectedPerk.v3desc"
+                                                      persistent-hint
+                                                      v-model="selectedPerk.value3"
+                                                      v-if="selectedPerk.present&&selectedPerk.hasv3"
+                                        ></v-text-field>
+                                        <v-text-field dense
+                                                      type="number"
+                                                      label="Value4"
+                                                      hide-details="auto"
+                                                      :hint="selectedPerk.v4desc"
+                                                      persistent-hint
+                                                      v-model="selectedPerk.value4"
+                                                      v-if="selectedPerk.present&&selectedPerk.hasv4"
+                                        ></v-text-field>
+                                    </v-card-text>
+                                </v-card>
+                            </v-col>
+                        </v-row>
+                    </v-tab-item>
                     <v-tab-item value="mutations" v-if="loaded">
                         <h1>Mutations</h1>
                         <div v-for="slotid in Object.keys(Gamedata.mutation_slots).sort()" :key="slotid">
@@ -1052,7 +1118,8 @@
         </v-main>
         <v-footer fixed style="padding-left:264px;">
             <div>
-                Gamedata version: {{Gamedata.version}}/{{Gamedata.versionNumber}}.
+                Gamedata version: {{Gamedata.version}}/{{Gamedata.versionNumber.toFixed(3)}}.
+                Supported versions: {{Gamedata.minVersion.toFixed(3)}}-{{Gamedata.maxVersion.toFixed(3)}}.
                 <v-dialog
                         v-model="showErrors"
                         width="500"
@@ -1425,6 +1492,7 @@
 	}
 
 	Gamedata.anyItemSelector = itemSelector(Object.keys(Gamedata.items));
+	Gamedata.colors.sortBy("name");
 
 	let app;
 	// noinspection JSAnnotator
@@ -1605,8 +1673,6 @@
 		data: {
 			// app config
 			debug: false,
-			minSupportedVersion: 36.000,
-			maxSupportedVersion: 36.007,
 			Gamedata: Gamedata,
 			// globals
 			errors: [],
@@ -1627,6 +1693,7 @@
 			bodyTab: 0,
 			// Perks tab
 			perks: [],
+            perkmap: {},
 			perksShowDesc: false,
 			perksShowTags: ['levelup'],
 			perksTagsItems: [
@@ -1668,6 +1735,10 @@
 				sortable: false,
 				filterable: false
 			}],
+			// Perk tree tab
+			perkTreeItems: [],
+            perkTreeActive: [],
+            perkTreeOpen: [],
 			// Mutations tab
 			mutationsTab: 0,
 			mutations: {},
@@ -1769,6 +1840,10 @@
 				if (enumValue.canTaur) return [2, 4];
 				return [enumValue.legCount ?? 2];
 			},
+            selectedPerk() {
+				if (this.perkTreeActive.length === 0) return undefined;
+				return this.perkmap[this.perkTreeActive[0]];
+            },
 			...generateCustomValues()
 		},
 		methods: {
@@ -1889,6 +1964,17 @@
 					}
 				}
 				this.perks = Object.values(perkmap);
+				this.perkmap = perkmap;
+				for (let entry of Object.values(perkmap)) {
+					let unlocks = Gamedata.perks[entry.id].unlocks;
+					if (unlocks && unlocks.length>0) {
+						entry.children = unlocks.map(id=>perkmap[id]).sortBy("name");
+					}
+				}
+				this.perkTreeItems = Object.values(Gamedata.perks).filter(f =>
+					f.tags.includes("levelup") && f.requirements.every(r =>
+						r.type !== "anyperk" && r.type !== "allperks" && r.type !== "perk")
+				).map(perk => perkmap[perk.id]).sortBy("name");
 				// this.save.itemSlot(1-20) -> this.itemSlots
 				this.itemSlots.splice(0);
 				for (let i = 0; i < Gamedata.itemSlotCount; i++) {
@@ -2092,6 +2178,11 @@
 		if (app && error) {
 			app.onerror(error);
 		}
+	}
+	Vue.config.errorHandler = function (err, vm, info) {
+		if (app) {
+			app.onerror(err);
+        }
 	}
 </script>
 </body>

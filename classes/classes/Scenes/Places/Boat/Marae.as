@@ -1,4 +1,4 @@
-package classes.Scenes.Places.Boat 
+package classes.Scenes.Places.Boat
 {
 import classes.*;
 import classes.GlobalFlags.*;
@@ -121,7 +121,7 @@ public class Marae extends Monster
 			SceneLib.boat.marae.loseAgainstMarae();
 		}
 		
-		public function Marae() 
+		public function Marae()
 		{
 			this.a = "";
 			this.short = "Marae";
@@ -174,7 +174,7 @@ public class Marae extends Monster
 			this.tallness = 10*12;
 			this.hips.type = 10;
 			this.butt.type = 8;
-			this.skin.base.color = "white";
+			this.bodyColor = "white";
 			this.hairColor = "green";
 			this.hairLength = 36;
 			this.weaponPerk = "";

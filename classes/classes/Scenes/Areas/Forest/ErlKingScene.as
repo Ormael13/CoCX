@@ -1027,13 +1027,13 @@ public class ErlKingScene extends BaseContent
 				changes++;
 			}
 			//Gain deer face
-			if (rand(4) == 0 && changes < changeLimit && player.hasFur() && player.ears.type == Ears.DEER && player.tailType == Tail.DEER && player.faceType != Face.DEER) {
+			if (rand(4) == 0 && changes < changeLimit && player.isFurCovered() && player.ears.type == Ears.DEER && player.tailType == Tail.DEER && player.faceType != Face.DEER) {
 				outputText("\n\n");
 				CoC.instance.transformations.FaceDeer.applyEffect();
 				changes++;
 			}
 			//Change legs to cloven hooves
-			if (rand(4) == 0 && changes < changeLimit && player.ears.type == Ears.DEER && player.tailType == Tail.DEER && player.hasFur() && (player.lowerBody != LowerBody.DEERTAUR && player.lowerBody != LowerBody.CLOVEN_HOOFED)) {
+			if (rand(4) == 0 && changes < changeLimit && player.ears.type == Ears.DEER && player.tailType == Tail.DEER && player.isFurCovered() && (player.lowerBody != LowerBody.DEERTAUR && player.lowerBody != LowerBody.CLOVEN_HOOFED)) {
 				if (player.lowerBody == LowerBody.HOOFED) {
 					outputText("\n\nYou feel a sharp stinging sensation from your hooves, accompanied by a loud CRACK.  You look down in alarm, prancing from one hooved foot to another, realizing that your solid, heavy hooves have been replaced with delicate, cloven hooves.  You squint, also noting a subtle thinness across your legs in general--if you had to guess, you’d hazard that you’re looking <b>more deer-like than horse-like</b>.");
 				}

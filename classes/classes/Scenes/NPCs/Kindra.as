@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -510,7 +510,7 @@ use namespace CoC;
 			this.tallness = 64;
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skinTone = "white";
+			this.bodyColor = "white";
 			this.hairColor = "white";
 			this.hairLength = 4;
 			this.weaponVerb= "stab";

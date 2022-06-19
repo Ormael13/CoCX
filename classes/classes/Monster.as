@@ -1291,7 +1291,7 @@ import flash.utils.getQualifiedClassName;
 			///*OPTIONAL*/ //this.arms.type = ARM_TYPE_; // default human
 
 			//// 6. Skin
-			///*OPTIONAL*/ //this.skinTone = "skinTone"; // default "albino"
+			///*OPTIONAL*/ //this.bodyColor = "bodyColor"; // default "albino"
 			///*OPTIONAL*/ //this.skinType = SKIN_TYPE_; // default PLAIN
 			///*OPTIONAL*/ //this.skinDesc = "skinDesc"; // default "skin" if this.skinType is not set, else Appearance.DEFAULT_SKIN_DESCS[skinType]
 			///*OPTIONAL*/ //this.skinAdj = "skinAdj"; // default ""
@@ -2330,7 +2330,7 @@ import flash.utils.getQualifiedClassName;
 			          Appearance.describeByScale(butt.type,Appearance.DEFAULT_BUTT_RATING_SCALES,"thinner than","wider than") + " butt.\n";
 			result += Pronoun3+" lower body is "+Object(LowerBody.Types[lowerBody]||{}).name;
 			result += ", "+pronoun3+" arms are "+Object(Arms.Types[arms.type]||{}).name;
-			result += ", "+pronoun1+" "+have+" "+skinTone+" "+skinAdj+" "+skinDesc+
+			result += ", "+pronoun1+" "+have+" "+bodyColor+" "+skinAdj+" "+skinDesc+
 					  " (base "+Object(Skin.SkinTypes[skin.baseType()]||{}).id+")." +
 					  " (coat "+Object(Skin.SkinTypes[skin.coatType()]||{}).id+")." +
 					  "\n";
