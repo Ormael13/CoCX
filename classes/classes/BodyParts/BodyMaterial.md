@@ -11,55 +11,72 @@ Coverage goes from none (base only), low/partial (patches of coat), medium (mix 
 ### Problems
 
 1. Description-wise, a body part can have material different from "main skin" (torso). For example, "chitinous spider legs" are assumed to be covered with chitin, however, if character's torso is covered with fur, there is no place to store chitin color.
+2. Referencing fur (scale/...) color without a coat required hacks.
+3. Charviewer sprites had colors for different materials, but they were kept in sync.
 
 ## New system
 
 ### Body materials
 
-Extract **body material** data from skin layers to creature. A creature would store information on all possible body materials, and body parts can access any of them.
+Colors now belong not to skin layers, but to **body material** types. A creature would store information on all possible body materials, and body parts can access any of them.
 
-List of body material types should be kept short, but sufficient. Current needed types are: skin, hair, fur, scales, chitin and feathers.
+Current body materials types: skin, hair, fur, scales, chitin and feathers.
+Keep list short, but sufficient.
+* This allows dual-colored hair.
 
-Body material stores `color1`, `color2`. See 'Dual color system rework' below. 
-To be discussed: move `adj` too.
+Body material stores `color1`, `color2` (see 'Dual color system rework' below). 
 
-Body parts indicate whether they have material or not. For example, scaly wings would return `true` for `hasMaterial(BodyMaterial.SCALES)`.
+Body parts indicate whether they have material or not. 
+For example, scaly wings would return `true` for `hasMaterial(BodyMaterial.SCALES)`.
 
 ### Dual color system rework
 
-Currently, layers have "color" and "color2" properties for primary and secondary colors. Secondary, if empty, defaults to primary. In rare cases, color is not split to two, but a dual-color name like "white and black" is stored in a primary color, keeping secondary empty.
+Old system: layers have "color" and "color2" properties for primary and secondary colors. 
+Secondary, if empty, defaults to primary. 
+In rare cases, color is not split to two, but a dual-color name like "white and black" is stored in a primary color, keeping secondary empty.
 
-Proposed change is to have 3 properties:
-* color1 and color2 are primary and secondary separate colors. If color2 is same as color1, it changes in sync
-* "color" is either "color1" or "color1 or color2", and this is maintained both on reading and writing.
+In the new system there are 3 synchronized properties:
+* `color1` and `color2` are primary and secondary separate colors. If color2 is the same as color1, it changes in sync.
+* `color` is either "color1" or "color1 and color2", and this is maintained both on reading and writing.
 
 For example:
 ```js
 player.furColor1 = "red"
 player.furColor2 = "blue"
-player.furColor === "red and blue"
+       furColor === "red and blue"
+
 // If color has 'and', it's split 
 player.chitinColor = "yellow and black"
-player.chitinColor1 === "yellow"
-player.chitinColor2 === "black"
-// Setting secondary same as primary makes it single-colored
+       chitinColor1 === "yellow"
+       chitinColor2 === "black"
+       chitinColor  === "yellow and black"
+// Setting secondary to same as primary makes it single-colored
 player.chitinColor2 = "yellow"
-player.chitinColor === "yellow"
+       chitinColor1 === "yellow"
+       chitinColor2 === "yellow"
+       chitinColor  === "yellow"
 // For single-colored material, changing color1 changes color2
 player.chitinColor1 = "black"
-player.chitinColor2 === "black"
+       chitinColor1 === "black"
+       chitinColor2 === "black"
+       chitinColor  === "black"
+// Changing color2 to new value makes it dual-colored again
+player.chitinColor2 = "yellow"
+       chitinColor1 === "yellow"
+       chitinColor2 === "black"
+       chitinColor  === "yellow and black"
 ```
 
 ## Function changes
 
-For brevity, in following code `fur` means `fur/scales/chitin/feathers` or any other body material.
+(For brevity, in following code `fur` means any other body material).
 
 * New r/w properties for body material colors: `skinColor/skinColor1/skinColor2`, `furColor/furColor1/furColor2`
 * Corresponding parser tags: `[skin/fur color/color1/color2]`
-* `skinTone` (main skin color) will be named `bodyColor`
-* `hasFur` will be renamed to `isFurCovered`
-* `hasFurMaterial` will check if any body part has material
-* Function that take body material ID as an argument: `hasBodyMaterial`, `bodyMaterialColor`, `setBodyMaterialColor`
+* `skinTone` (main skin color) renamed to `bodyColor`
+* `hasFur` renamed to `isFurCovered`
+* `hasFurMaterial` checks if any body part has material
+* Functions that take body material ID as an argument: `hasBodyMaterial`, `bodyMaterialColor`, `setBodyMaterialColor`
 
 ## Parser Tags
 
@@ -95,7 +112,7 @@ All materials w/o their own type would use colors from some other material (goo 
 - chitin
 - hair - for unification
 - feathers
-- (?) horns/claws - has its own tone but never used in-game
+- (?) horns/claws - has its own tone but never used in-game. could use chitin?
 - (?) bark/leaves/plant matter
 
 ### Body material properties
