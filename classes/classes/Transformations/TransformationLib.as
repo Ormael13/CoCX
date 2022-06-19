@@ -390,7 +390,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    function (): Boolean {
 	      options = skinFormatOptions(options, Skin.SCALES);
 
-	      return player.hasCoatOfType(Skin.SCALES) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
+	      return player.hasCoatOfType(Skin.SCALES) && InCollection(player.scaleColor, options.colors) && player.skin.coverage == coverage;
 	    }
 	  )
 	}
@@ -5589,7 +5589,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Your arms begins cover with fur and you watch spellbound as your nails elongate into small sharp animal claws. They aren't exactly strong enough to deal damage but they'll be fine if you ever want to scratch yourself. <b>You now have furry animal arms with paw-like hands not unlike those of a weasel.</b>";
 
-	    if (player.coatColor == "") player.coatColor = player.hairColor;
 	    player.arms.type = Arms.WEASEL;
 	    if (doOutput) outputText(desc);
 	  },
@@ -5606,7 +5605,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Something in your arm bones begins to shift as they suddenly curve and grow awkwardly through the skin, piercing through your fur like a spike. Now juting outside of your wrists like a pair of natural tonfas. the bones begin to reshape, polish and alter itself, fully taking on the consistency of steel! You admire your two Kamaitachi scythes with stupor, they are sharp and hard enough to leave clean deep cuts even in the hardest material and light enough that you can swing them around as if they weren't even there to begin with, lighter than air indeed. Enemies better fear you now that you got those <b>Kamaitachi arm-scythes.</b>";
 
-	    if (player.coatColor == "") player.coatColor = player.hairColor;
 	    player.arms.type = Arms.KAMAITACHI;
 	    if (doOutput) outputText(desc);
 	  },
@@ -5755,7 +5753,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Your onyx exoskeleton begins to itch. You begin to scratch at it incessantly until you can see [haircolor] fur begin to sprout from your arms from the biceps down, forming a diamond spiral where the fur meets skin. Your fingers begin to shake and sink into your hands as 4 huge strong claws grow in their places. <b>After the painful experience you see that you now have Ushi-Oni bestial arms.</b>";
 
-	    player.coatColor = "black";
+	    player.furColor = "black";
 	    player.arms.type = Arms.USHI_ONI;
 	    if (doOutput) outputText(desc);
 	  },
@@ -6145,7 +6143,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "As you look at yourself for a second, you notice some small glowing pink dot appearing on your skin as it starts to change hue toward a ghostly white. You think of the deep sea predators using light to confound and capture prey. You realise that you now have <b>bioluminescent ghostly pale skin that will glow slightly even in the darkest reach of the ocean.</b>";
 
-	    player.coatColor = "ghostly pale";
+	    player.skinColor = "ghostly pale";
 
 	    player.rearBody.type = RearBody.KRAKEN;
 	    if (doOutput) outputText(desc);
@@ -6219,7 +6217,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Your back begins to hurt as you feel like your flesh and bones are being torn out. You lie down, screaming in pain as your back keeps on expanding, breathing heavily. Not just that but you feel eviscerated as your guts and organs shift places within your body, causing you to puke from the growing nausea. Eventually it all stops and you take a glimpse behind you. A massive shell has grown behind your back, your organs relocating to inside its safety. Geez, what a deep breath! it's like your lungs doubled in size. You finally manage to calm down and crawl your way to a resting spot in order to finish coping with the transformation and the now massive weight on your back. <b>You now have a Shell.</b>";
 
-	    player.coatColor = "brown";
+	    player.chitinColor = "brown";
 	    player.rearBody.type = RearBody.SNAIL_SHELL;
 	    if (doOutput) outputText(desc);
 	  },
@@ -6680,7 +6678,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 		if (player.lowerBody == LowerBody.ANT) {
 			desc += "Feeling as though something is crawling down your legs, you glance down and realize the chitin covering your hips drops to only cover up to your thighs. ";
-			if (!player.coatColor2 == "black") desc += "You also realize that the color changes to black. ";
+			if (!player.chitinColor2 == "black") desc += "You also realize that the color changes to black. ";
 			desc += "<b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>"
 		}
 	    else desc += "Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs. From the waist down, your strength completely deserts you, leaving you to fall hard on your [butt] in the dirt. With nothing else to do, you look down, only to be mesmerized by the sight of black exoskeleton creeping up a perfectly human-looking calf. It crests up your knee to envelop the joint in a many-faceted onyx coating. Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton. From a distance it would look almost like a black, thigh-high boot, but you know the truth. <b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>";
@@ -7611,7 +7609,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Your spider body trembles, an intense pressure forming under the chitin, at the same time your plates fall to the ground and [haircolor] fur begins to sprout all over your abdomen. You wince in pain from the sudden growth, your drider legs chitin falls off as well, getting thicker and harder turning into bone. After the torturous session, you look back to see <b>you now have an Ushi-Oni lower body with an internal skeleton and fur.</b>";
 
-	    player.coatColor = "black";
+	    player.furColor = "black";
 	    player.lowerBody = LowerBody.USHI_ONI;
 	    if (doOutput) outputText(desc);
 	  },
@@ -7784,9 +7782,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "Wondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.";
 	    if (player.balls > 0 && player.ballSize > 10) desc += " You're happy not to have to drag those testicles around with you anymore.";
 	    if (!player.hasCoatOfType(Skin.DRAGON_SCALES)) {
-	      player.coatColor = randomChoice(wyrmCoatColor);
+	      player.scaleColor = randomChoice(wyrmCoatColor);
 	    }
-	    desc += " But then, " + player.coatColor + " armored scales start to form on the surface of your skin, slowly becoming visible, recoloring all of your body from the waist down in a snake-like pattern. The feeling is... not that bad actually, kind of like callous, except on your whole lower body. The transformation complete, you get up, standing on your newly formed snake tail. You can't help feeling proud of this majestic new body of yours. This said, it doesn't end there as warm snowy white fur covers up the scale up to your thigh area, seems you are dressed for the winter now. <b>You now have a long, warm and fluffy frost wyrm tail.</b>";
+	    desc += " But then, [scale color] armored scales start to form on the surface of your skin, slowly becoming visible, recoloring all of your body from the waist down in a snake-like pattern. The feeling is... not that bad actually, kind of like callous, except on your whole lower body. The transformation complete, you get up, standing on your newly formed snake tail. You can't help feeling proud of this majestic new body of yours. This said, it doesn't end there as warm snowy white fur covers up the scale up to your thigh area, seems you are dressed for the winter now. <b>You now have a long, warm and fluffy frost wyrm tail.</b>";
 
 	    player.legCount = 1;
 	    player.lowerBody = LowerBody.FROSTWYRM;
@@ -9404,7 +9402,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    TransformationUtils.applyTFIfNotPresent(transformations.TailSpider, false);
 	    player.tailVenom = 5;
 	    player.tailRecharge = 5;
-	    player.coatColor = "midnight purple";
+	    player.chitinColor = "midnight purple";
 	  },
 	  // is present
 	  function (): Boolean {

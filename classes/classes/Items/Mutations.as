@@ -6388,8 +6388,8 @@ public final class Mutations extends MutationsHelper {
         //cheshire fur color
         if (rand(4) == 0 && changes < changeLimit && player.hasCoatOfType(Skin.FUR)) {
             outputText("[pg]Your fur and hair color are suddenly changing as lilac fur covered with white stripe begins to cover every area you have fur on. Your hair also changed color to match it turning to lilac strands separated by white strands every now and then. This change makes you feel like smiling at the absurdity of it all.");
-            player.hairColor = "lilac and white striped";
-            player.coatColor = "lilac and white striped";
+            player.hairColor = "lilac and white";
+            player.furColor = "lilac and white";
             changes++;
         }
         //switching between low and high coverage of fur
@@ -13236,14 +13236,11 @@ public final class Mutations extends MutationsHelper {
             outputText("You suddenly start sweating abundantly.  ");
             outputText("As much as you try to dry your skin using a cloth it remains slimy and slippery to the touch as if constantly wet! Your skin is now slippery like the one of a sea creature!");
             outputText("[pg]Meanwhile your body is hit by a quake of sensation as your body shift into something more fitting for underwater swimming, your flesh becoming rubbery like the flesh of octopus and squid. <b>You now have rubber like skin same as a scylla or a kraken.</b>");
-            var color:String = player.skin.color;
-            player.skin.growCoat(Skin.AQUA_RUBBER_LIKE);
-            player.skin.setProps({adj: "slippery"});
-            player.coatColor = color;
+            player.skin.setBaseOnly({type: Skin.AQUA_RUBBER_LIKE, adj: "slippery"});
             changes++;
         }
         //SkinColor
-        if (player.coatColor != "ghostly white" && player.skinType == Skin.AQUA_RUBBER_LIKE && changes < changeLimit && rand(4) == 0) {
+        if (player.skinColor != "ghostly white" && player.skinType == Skin.AQUA_RUBBER_LIKE && changes < changeLimit && rand(4) == 0) {
             outputText("[pg]");
             transformations.RearBodyKraken.applyEffect();
             changes++;

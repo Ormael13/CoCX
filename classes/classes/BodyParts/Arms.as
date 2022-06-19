@@ -452,7 +452,7 @@ public class Arms extends BodyPart {
 	public static const ANT:int = 58;
 	EnumValue.add(Types, ANT, "ANT", {
 		name:"ant",
-		appearanceDesc: "Where a normal creature would have only two arms, you instead have four, with shining [skin coat.color] exoskeleton covering them from the biceps down, resembling a pair of long [skin coat.color] gloves from a distance.",
+		appearanceDesc: "Where a normal creature would have only two arms, you instead have four, with shining [chitin color] exoskeleton covering them from the biceps down, resembling a pair of long [chitin color] gloves from a distance.",
 		armCount: 4,
 		claw: true
 	});

@@ -22,10 +22,10 @@ public class CheshireRace extends Race{
 				.armType(Arms.CAT, +1)
 				.legType(LowerBody.CAT, +1)
 				.skinCoatType(Skin.FUR, +1)
-				.customRequirement("", "lilac and white striped hair and fur",
+				.customRequirement("", "lilac and white hair and fur",
 						function (body:BodyData):Boolean {
-							return body.hairColor == "lilac and white striped" &&
-									body.furColor == "lilac and white striped"
+							return body.hairColor == "lilac and white" &&
+									body.furColor == "lilac and white"
 						}, +2)
 				.hasPerk(PerkLib.Flexibility, +1)
 				.customRequirement("","not other magical feline race",

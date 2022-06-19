@@ -2011,6 +2011,11 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.008) {
 				if (flags[kFLAGS.APEX_SELECTED_RACE] >= 18) flags[kFLAGS.APEX_SELECTED_RACE] += 1;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.008;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.009) {
+				if (player.furColor == "lilac and white striped") player.furColor = "lilac and white";
+				if (player.hairColor == "lilac and white striped") player.hairColor = "lilac and white";
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.009;
 			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.008) {
 				if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.HclassHeavenTribulationSurvivor);

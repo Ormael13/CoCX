@@ -7,7 +7,7 @@
 let Gamedata = ExportedGamedata;
 
 Gamedata.minVersion = 36.007;
-Gamedata.maxVersion = 36.007;
+Gamedata.maxVersion = 36.099;
 
 /**
  * Flag descriptions
