@@ -563,7 +563,7 @@ public class Utils extends Object
 				roll -= weight;
 				if (roll <= 0) break;
 			}
-			return item;
+			return item[1];
 		}
 
 		/**
