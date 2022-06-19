@@ -186,8 +186,8 @@ public class Changelog extends BaseContent
 			outputText("-Daoist: Elder Stage perk effects changed to: +100% soulskill/m.soulskill power, -10% soulskills cost, +200 max SF at S.Apprentice, S.Personage, S.Warrior stages, +10% to max, +100% base soulforce recovery multiplier\n");
 			outputText("-Daoist: Overlord Stage perk effects changed to: +150% soulskill/m.soulskill power, -10% soulskills cost, +300 max SF at S.Apprentice, S.Personage, S.Warrior stages, +10% to max, +00% base soulforce recovery multiplier\n");
 			outputText("-Machine Greatsword, Ripper 1.0, Ripper 2.0 gained classification as Exotic type weapons for mastery purposes.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Separated skin, hair, fur, scales, chitin, feather colos from skin layers. (aimozg)\n");
+			outputText("-Added support for dynamic item generation from template id + properties. See hair dye for example. (aimozg)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
