@@ -1,4 +1,4 @@
-# BodyMaterial system _(design draft and partial implementation)_
+# BodyMaterial system
 
 ## Old system
 
