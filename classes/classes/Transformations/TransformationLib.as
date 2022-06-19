@@ -1496,12 +1496,12 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			}
 	);
 
-		public const AntennaeAnt: Transformation = new SimpleTransformation("Ant Antennae",
+	public const AntennaeAnt: Transformation = new SimpleTransformation("Ant Antennae",
 	  // apply effect
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    if (player.antennae.type == Antennae.BEE) desc += "Your head itches momentarily as your two floppy antennae changes slowly into long, stiff-yet-prehensile ones similar to those seen on ants.";
+	    if (player.antennae.type == Antennae.BEE) desc += "Your head itches momentarily as your two floppy antennae change slowly into long, stiff-yet-prehensile ones similar to those seen on ants.";
 		else if (player.antennae.type == Antennae.MANTIS) desc += "Your head itches momentarily as your two antennae stiffen up, ending up more like those on an ant";
 	    else desc += "Your head itches momentarily as two long prehensile antennae sprout from your [hair].";
 	    player.antennae.type = Antennae.ANT;
@@ -3556,7 +3556,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "Tightness centers on your scalp, pulling your ears down from their normal, fleshy shape into small, chitin lumps with holes in their bottom. <b>You have insect ears!</b>";
 	    player.ears.type = Ears.INSECT;
 	    if (doOutput) outputText(desc);
-	    //Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.INSECT));
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.INSECT));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -12031,7 +12031,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					}
 					else {
 						desc += GrowCockGenericText();
-						desc += "You feel a strange tingling in your " + num2Text2(cock+1) + " cock. You remove your [armor] and look down and witness your cock shifting into a peculiar form. Its tapered, [skinTone] and crowned by several colorful balls that look sort of like knots. Its covered in sweet smelling dust...  you're secreting pollen!  <b>You now have a plantlike stamen cock!</b>";
+						desc += "You feel a strange tingling in your " + num2Text2(cock+1) + " cock and look down to witness your cock shifting into a peculiar form. Its tapered, [skinTone] and crowned by several colorful balls that look sort of like knots. Its covered in sweet smelling dust...  you're secreting pollen!  <b>You now have a plantlike stamen cock!</b>";
 						player.createCock();
 					}
 					if (doOutput) outputText(desc);
@@ -12282,10 +12282,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						outputText(" tentacle-cock!</b>");
 					}
 					else {
-						if (player.isTaur()) desc += "You feel a sudden stabbing pain between your back legs" +(player.hasVagina()?" just below your [vagina]":"")+" and bend over, moaning in agony. falling on your back so you can get a stare at your hindquarters you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
-						else if (!player.hasVagina() && !player.hasCock()) desc +="You feel a sudden stabbing pain in your groin and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
-						else if (!player.hasVagina()) desc += "You feel a sudden stabbing pain above your [cocks] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
-						else desc +="You feel a sudden stabbing pain just above your [vagina] and bend over, moaning in agony. Your hands clasp protectively over the surface - which is swelling in an alarming fashion under your fingers! Stripping off your clothes, you are presented with the shocking site of once-smooth flesh swelling and flowing like self-animate clay, resculpting itself into the form of male genitalia! When the pain dies down, ";
+						desc += GrowCockGenericText();
 						desc += "Your feel it bending and flexing of its own volition... looking down, you see it morph into a white vine-like shape.  <b>You now have an insect cock!</b>";
 						player.createCock();
 					}
@@ -12294,7 +12291,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						player.cocks[cock].cockLength = length;
 					if (thickness != 1)
 						player.cocks[cock].cockThickness = thickness;
-					if (player.cocks[cock].knotMultiplier > 1) player.cocks[cock].knotMultiplier = 1;
+					player.cocks[cock].knotMultiplier = 1;
 					player.cocks[cock].cockType = CockTypesEnum.INSECT;
 
 					UnlockCocks();
@@ -12451,22 +12448,23 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					desc += "<b>Your ovipositor (and eggs) vanish since your body has become less mantis-like.</b>";
 					player.removePerk(PerkLib.MantisOvipositor);
 				}
-				/*else if (player.hasPerk(PerkLib.AntOvipositor)) { //Remove dat shit!
+				else if (player.hasPerk(PerkLib.AntOvipositor)) { //Remove dat shit!
 					desc += "<b>Your ovipositor (and eggs) vanish since your body has become less ant-like.</b>";
 					player.removePerk(PerkLib.AntOvipositor);
-				}*/
+				}
 
 				if (doOutput) outputText(desc);
 			},
 			// is present
 			function ():Boolean {
-				return !player.hasPerk(PerkLib.BeeOvipositor) && !player.hasPerk(PerkLib.SpiderOvipositor) && !player.hasPerk(PerkLib.MantisOvipositor)/* && !player.hasPerk(PerkLib.AntOvipositor)*/;
+				return !player.hasPerk(PerkLib.BeeOvipositor) && !player.hasPerk(PerkLib.SpiderOvipositor) && !player.hasPerk(PerkLib.MantisOvipositor) && !player.hasPerk(PerkLib.AntOvipositor);
 			},
 			// is possible
 			function ():Boolean {
 				return ((player.hasPerk(PerkLib.SpiderOvipositor) && (!player.isDrider() || player.tailType != Tail.SPIDER_ADBOMEN)) ||
 						(player.hasPerk(PerkLib.BeeOvipositor) && player.tailType != Tail.BEE_ABDOMEN) ||
-						(player.hasPerk(PerkLib.MantisOvipositor) && player.tailType != Tail.MANTIS_ABDOMEN));
+						(player.hasPerk(PerkLib.MantisOvipositor) && player.tailType != Tail.MANTIS_ABDOMEN) ||
+						(player.hasPerk(PerkLib.AntOvipositor) && player.tailType != Tail.ANT_ABDOMEN));
 			}
 	);
 
@@ -12479,6 +12477,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						TransformationUtils.applyTFIfNotPresent(transformations.OvipositionSpider, doOutput);
 				if (player.tailType === Tail.MANTIS_ABDOMEN)
 						TransformationUtils.applyTFIfNotPresent(transformations.OvipositionMantis, doOutput);
+				if (player.tailType === Tail.ANT_ABDOMEN)
+					TransformationUtils.applyTFIfNotPresent(transformations.OvipositionAnt, doOutput);
 			},
 			// is present
 			function ():Boolean {
@@ -12566,7 +12566,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			}
 	);
 
-	/*public const OvipositionAnt:Transformation = new SimpleTransformation("Mantis Oviposition",
+	public const OvipositionAnt:Transformation = new SimpleTransformation("Mantis Oviposition",
 			// apply
 			function (doOutput:Boolean):void {
 				var desc: String = "";
@@ -12574,12 +12574,12 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				TransformationUtils.applyTFIfNotPresent(transformations.RemoveOvipositor, doOutput);
 				TransformationUtils.applyTFIfNotPresent(transformations.TailAnt, doOutput);
 
-				outputText("\n\nAn odd swelling starts in your insectile abdomen, somewhere along the underside.  Curling around, you reach back to your extended, bulbous bee part and run your fingers along the underside.  You gasp when you feel a tender, yielding slit near the stinger.  As you probe this new orifice, a shock of pleasure runs through you, and a tubular, black, semi-hard appendage drops out, pulsating as heavily as any sexual organ.  <b>The new organ is clearly an ovipositor!</b>  A few gentle prods confirm that it's just as sensitive; you can already feel your internals changing, adjusting to begin the production of unfertilized eggs.  You idly wonder what laying them with your new bee ovipositor will feel like...");
+				outputText("[pg]An odd swelling starts in your insectile abdomen, somewhere along the underside.  Curling around, you reach back to your extended, bulbous ant part and run your fingers along the underside.  You gasp when you feel a tender, yielding slit near the end.  As you probe this new orifice, a shock of pleasure runs through you, and a tubular, tan, semi-hard appendage drops out, pulsating as heavily as any sexual organ.  <b>The new organ is clearly an ovipositor!</b>  A few gentle prods confirm that it's just as sensitive; you can already feel your internals changing, adjusting to begin the production of unfertilized eggs.  You idly wonder what laying them with your new ant ovipositor will feel like...");
 				outputText("\n\n(<b>Perk Gained:  Ant Ovipositor - Allows you to lay eggs in your foes!</b>)");
 				player.createPerk(PerkLib.AntOvipositor, 0, 0, 0, 0);
 
 				if (doOutput) outputText(desc);
-				//Metamorph.unlockMetamorph(SpecialsMem.getMemory(SpecialsMem.OVIPOSITOR));
+				Metamorph.unlockMetamorph(SpecialsMem.getMemory(SpecialsMem.OVIPOSITOR));
 			},
 			// is present
 			function ():Boolean {
@@ -12589,7 +12589,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			function ():Boolean {
 				return !player.hasPerk(PerkLib.AntOvipositor) && player.tailType == Tail.ANT_ABDOMEN;
 			}
-	);*/
+	);
 
 
 	/*

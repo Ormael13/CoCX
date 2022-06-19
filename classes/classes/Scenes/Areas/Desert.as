@@ -284,7 +284,7 @@ use namespace CoC;
 		private function findDesertLoot():void {
 			clearOutput();
 			outputText("Miraculously, you spot a lone pouch lying in the sand. Opening it, you find a neatly wraped cake!\n");
-				inventory.takeItem(consumables.HDEWCAK, camp.returnToCampUseOneHour);
-			}
+			inventory.takeItem(consumables.HDEWCAK, camp.returnToCampUseOneHour);
+		}
 	}
 }
