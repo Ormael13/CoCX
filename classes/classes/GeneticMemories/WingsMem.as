@@ -284,7 +284,7 @@ package classes.GeneticMemories {
 		  }
 	  });
 
-	  public static const ANT_SMALL:int = 22
+	  public static const ANT_SMALL:int = _partid++;
 		EnumValue.add(Memories, ANT_SMALL, "ANT_SMALL", {
 			id: "Ant Small Wings",
 			name: "Small Ant Wings",
@@ -295,7 +295,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const ANT_LARGE:int = 23
+		public static const ANT_LARGE:int = _partid++;
 		EnumValue.add(Memories, ANT_LARGE, "ANT_LARGE", {
 			id: "Ant Large Wings",
 			name: "Large Ant Wings",

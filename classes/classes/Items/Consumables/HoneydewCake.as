@@ -1,18 +1,13 @@
 // Consumable by Furrin GOk
 package classes.Items.Consumables {
-import classes.Appearance;
 import classes.BodyParts.*;
-import classes.GeneticMemories.CockMem;
-import classes.Races.AntRace;
-import classes.CoC_Settings;
+import classes.CoC;
 import classes.CockTypesEnum;
 import classes.EngineCore;
-import classes.PerkLib;
-import classes.Player;
+import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
-import classes.Scenes.Metamorph;
-import classes.StatusEffects;
-import classes.CoC;
+import classes.PerkLib;
+import classes.Races.AntRace;
 
 public class HoneydewCake extends Consumable {
 	public function HoneydewCake() {
@@ -26,8 +21,6 @@ public class HoneydewCake extends Consumable {
         if (rand(2) == 0) changeLimit++;
 		changeLimit += player.additionalTransformationChances;
 		//Temporary storage
-		var temp2:Number = 0;
-		var temp3:Number = 0;
         var counter:int = 0;
 		player.slimeFeed();
 		clearOutput();
@@ -71,7 +64,7 @@ public class HoneydewCake extends Consumable {
             }
         }
         //Ant Legs
-        if (player.lowerBody != LowerBody.ANT && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
+        if (player.hasCoatOfType(Skin.CHITIN) && player.lowerBody != LowerBody.ANT && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
 			CoC.instance.transformations.LowerBodyAnt.applyEffect();
 			player.MutagenBonus("spe", 3);
@@ -79,19 +72,17 @@ public class HoneydewCake extends Consumable {
 		}
         //oviposition 
         if (changes < changeLimit && player.hasCoatOfType(Skin.CHITIN) && !player.hasPerk(PerkLib.AntOvipositor) && player.tailType == Tail.ANT_ABDOMEN && rand(2) == 0) {
-            outputText("[pg]An odd swelling starts in your insectile abdomen, somewhere along the underside.  Curling around, you reach back to your extended, bulbous ant part and run your fingers along the underside.  You gasp when you feel a tender, yielding slit near the end.  As you probe this new orifice, a shock of pleasure runs through you, and a tubular, tan, semi-hard appendage drops out, pulsating as heavily as any sexual organ.  <b>The new organ is clearly an ovipositor!</b>  A few gentle prods confirm that it's just as sensitive; you can already feel your internals changing, adjusting to begin the production of unfertilized eggs.  You idly wonder what laying them with your new ant ovipositor will feel like...");
-            outputText("[pg](<b>Perk Gained:  Ant Ovipositor - Allows you to lay eggs in your foes!</b>)");
-            player.createPerk(PerkLib.AntOvipositor, 0, 0, 0, 0);
+            CoC.instance.transformations.OvipositionAnt.applyEffect();
             changes++;
         }
 		//Ant Abdomen
-		if (player.lowerBody == LowerBody.ANT && player.tailType != Tail.GARGOYLE && player.tailType != Tail.ANT_ABDOMEN && changes < changeLimit && rand(3) == 0) {
+		if (player.lowerBody == LowerBody.ANT && player.tailType != Tail.ANT_ABDOMEN && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
 			CoC.instance.transformations.TailAnt.applyEffect();
 			changes++;
 		}
         //Wings
-        if (!InCollection(player.wings.type, Wings.GARGOYLE_LIKE_LARGE, Wings.ANT_LARGE) && changes < changeLimit && rand(4) == 0) {
+        if (!InCollection(player.wings.type, Wings.ANT_LARGE) && changes < changeLimit && rand(4) == 0) {
             //Grow bigger ant wings or convert bee wings into ant
             if (player.wings.type == Wings.ANT_SMALL || player.wings.type == Wings.BEE_LARGE) {
                 outputText("[pg]");
@@ -116,9 +107,9 @@ public class HoneydewCake extends Consumable {
             changes++;
         }
 		//(Fur/Scales fall out replaced by chitin)
-        if (!player.hasCoatOfType(Skin.CHITIN) && (player.ears.type == Ears.HUMAN || player.ears.type == Ears.ELFIN) && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+        if (!player.hasCoatOfType(Skin.CHITIN) && InCollection(player.ears.type, Ears.HUMAN, Ears.ELFIN, Ears.INSECT) && rand(3) == 0 && changes < changeLimit) {
 			outputText("[pg]");
-            CoC.instance.transformations.SkinChitin(Skin.COVERAGE_COMPLETE, {colors: ["pale white", "green"]}).applyEffect();
+            CoC.instance.transformations.SkinChitin(Skin.COVERAGE_LOW, {colors: AntRace.AntChitinColors}).applyEffect();
             changes++;
         }
 		//Insect ears
@@ -134,29 +125,30 @@ public class HoneydewCake extends Consumable {
 			changes++;
 		}
         //Arms
-        if (player.arms.type != Arms.ANT && changes < changeLimit && rand(3) == 0) {
+        if (player.hasCoatOfType(Skin.CHITIN) && player.arms.type != Arms.ANT && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
 			CoC.instance.transformations.ArmsAnt.applyEffect();
             changes++;
         }
         //Removes horns
-        if (changes < changeLimit && player.horns.count > 0 && player.horns.type != Horns.GARGOYLE && rand(3) == 0) {
+        if (changes < changeLimit && player.horns.count > 0 && rand(3) == 0) {
             outputText("[pg]");
             CoC.instance.transformations.HornsNone.applyEffect();
             changes++;
         }
         //Antennae
-        if (changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.antennae.type != Antennae.ANT && rand(3) == 0) {
-			outputText("\n\n");
+        if (changes < changeLimit && player.antennae.type != Antennae.ANT && rand(3) == 0) {
+			outputText("[pg]");
 			CoC.instance.transformations.AntennaeAnt.applyEffect();
 			changes++;
 		}
 		//FAILSAFE CHANGE
 		if (changes == 0) {
-			outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n");
+			outputText("[pg]Inhuman vitality spreads through your body, invigorating you!\n");
 			EngineCore.HPChange(50, true);
 		}
 		player.refillHunger(20);
+        flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		return false;
 	}
 }

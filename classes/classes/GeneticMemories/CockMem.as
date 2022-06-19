@@ -359,7 +359,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const INSECT:int = 28;
+		public static const INSECT:int = _partid++;
 		EnumValue.add(Memories, INSECT, "INSECT", {
 			id: "Insect cock",
 			name: "Insect cock",
