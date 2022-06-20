@@ -16,7 +16,7 @@ public class MutationsLib
 		public static var processedMutations:Object = {};
 
 		public static function mutationsUpdate(id:String):Boolean{
-			if (CoC.instance.flags[kFLAGS.MOD_SAVE_VERSION] >= 36) return [];
+			if (CoC.instance.flags[kFLAGS.MOD_SAVE_VERSION] >= 36) return false;
 			//Special mutations counts.
 			//Displacer, Gorgon = 2, Scylla = 1, Tracheal = 4.
 			var id2:String = id;
