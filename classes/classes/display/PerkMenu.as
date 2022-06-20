@@ -870,7 +870,7 @@ public class PerkMenu extends BaseContent {
 	//MutationsDB!
 	public function mutationsDatabase(page:int = 0, review:Boolean = false):void{
 		/*
-		Source: MutationsLib.as for all mutations.
+		Source: IMutationsLib.as for all mutations.
  		*/
 		if (review) {	//Initial screen for user to know how many points they have per part
 			clearOutput();
@@ -928,12 +928,12 @@ public class PerkMenu extends BaseContent {
 			}
 		}
 
-		function mutationsDBSlot(slot:String):void{
+		function mutationsDBSlot(slot:String, pageAdd:int = 0):void{
 			clearOutput();
 			//Heart Mutations
 			displayHeader(IMutationPerkType.Slots[slot].name+" Mutations:");
 			mutationsDatabaseVerify(IMutationsLib.mutationsArray(slot));
-			mutationsDatabase(mutDbPage);
+			mutationsDatabase(pageAdd);
 		}
 
 		function mutationsDBDragon():void{
@@ -943,7 +943,7 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++");
 			mutationsDatabaseVerify([IMutationsLib.DraconicBonesIM, IMutationsLib.DraconicHeartIM, IMutationsLib.DraconicLungIM]);
-			mutationsDatabase(mutDbPage);
+			mutationsDatabase(1);
 		}
 
 		function mutationsDBKitsune():void{
@@ -952,7 +952,7 @@ public class PerkMenu extends BaseContent {
 			displayHeader("Kitsune Mutations");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
 			mutationsDatabaseVerify([IMutationsLib.KitsuneThyroidGlandIM, IMutationsLib.KitsuneParathyroidGlandsIM]);
-			mutationsDatabase(mutDbPage);
+			mutationsDatabase(1);
 		}
 
 		menu();
@@ -970,16 +970,16 @@ public class PerkMenu extends BaseContent {
 		menuItems.push("Testicles",  curry(mutationsDBSlot, IMutationPerkType.SLOT_TESTICLES), "Testicle Mutations");
 		menuItems.push("Eyes",  curry(mutationsDBSlot, IMutationPerkType.SLOT_EYES), "Eyes Mutations");
 		menuItems.push("Bone/Marrow",  curry(mutationsDBSlot, IMutationPerkType.SLOT_BONE), "Bone Mutations");
-		menuItems.push("Nerv/Sys", curry(mutationsDBSlot, IMutationPerkType.SLOT_NERVSYS), "Nerv-Sys Mutations");
-		menuItems.push("Thyroid Gland", curry(mutationsDBSlot, IMutationPerkType.SLOT_THYROID), "Thyroid Mutations");
-		menuItems.push("Parathyroid Gland", curry(mutationsDBSlot, IMutationPerkType.SLOT_PARATHYROID), "Parathyroid Mutations");
-		menuItems.push("Adaptations", curry(mutationsDBSlot, IMutationPerkType.SLOT_ADAPTATIONS), "Adaptation Mutations");
+		menuItems.push("Nerv/Sys", curry(mutationsDBSlot, IMutationPerkType.SLOT_NERVSYS, 1), "Nerv-Sys Mutations");
+		menuItems.push("Thyroid Gland", curry(mutationsDBSlot, IMutationPerkType.SLOT_THYROID, 1), "Thyroid Mutations");
+		menuItems.push("Parathyroid Gland", curry(mutationsDBSlot, IMutationPerkType.SLOT_PARATHYROID, 1), "Parathyroid Mutations");
+		menuItems.push("Adaptations", curry(mutationsDBSlot, IMutationPerkType.SLOT_ADAPTATIONS, 1), "Adaptation Mutations");
 		menuItems.push("Dragons", mutationsDBDragon, "Dragon Mutations");
 		menuItems.push("Kitsunes", mutationsDBKitsune, "Kitsune Mutations");
-		mutDbPage = page;
+		//mutDbPage = page;
 		menuGen(menuItems, page, displayPerks);
 	}
-	private var mutDbPage:int = 0;
+	//private var mutDbPage:int = 0;
 
 	//Mutations check helper. Cloned + stripped requirements logic from PerkMenuDB.
 	public function mutationsDatabaseVerify(mutationsArray:Array):void {
