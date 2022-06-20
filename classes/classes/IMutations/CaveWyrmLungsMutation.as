@@ -15,7 +15,7 @@ import classes.Creature;
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "";
+                descS += "";//Your lung has became accustomed to the presence of acid in your biology improving the corrosiveness and volatility of your biochemical weapons.
             }
             if (pTier >= 2){
                 descS += ", ";

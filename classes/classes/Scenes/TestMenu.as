@@ -126,9 +126,23 @@ public class TestMenu extends BaseContent
 		menuItems.push("LilyPregF", (DriderTown.LilyKidsPCPregnancy != 0 && LilyFollower.LilyFollowerState)? FairyTest3: false, "Curing Lily Infertility ^^");
 		menuItems.push("NewSoulCult", applyHangover, "Cripple your cultivation base to start anew (with a bit more milf fluff in your life).");
 		menuItems.push("Refill SF", refillSoulforce, "Refill your Soulforce.");
-		menuItems.push("EvaMutateReq", mutateReqNope, "Turns on/off mutation requirements")
+		menuItems.push("NY(S/NS)MA-D", anTrigger, "Now you see or not see me.\n\n<i><b>(Anty-Dexterity)</b></i>");
+		menuItems.push("EvaMutateReq", mutateReqNope, "Turns on/off mutation requirements");
 		//menuItems.push("WeaponsXPtest", SceneLib.dilapidatedShrine.weaponsXPtrader, "");
 		menuGen(menuItems, page, playerMenu);
+	}
+	
+	private function anTrigger():void {
+		clearOutput();
+		if (player.hasPerk(PerkLib.AntyDexterity)) {
+			player.removePerk(PerkLib.AntyDexterity);
+			outputText("Now you don't see me.\n\n<i><b>(Anty-Dexterity)</b></i>");
+		}
+		else {
+			player.createPerk(PerkLib.AntyDexterity, 0, 0, 0, 0);
+			outputText("Now you see me.\n\n<i><b>(Anty-Dexterity)</b></i>");
+		}
+		doNext(curry(SoulforceCheats1, 3));
 	}
 
 	private function mutateReqNope():void{
@@ -175,7 +189,7 @@ public class TestMenu extends BaseContent
 		if (player.hasPerk(PerkLib.DaoistElderStage)) player.removePerk(PerkLib.DaoistElderStage);
 		if (player.hasPerk(PerkLib.DaoistOverlordStage)) player.removePerk(PerkLib.DaoistOverlordStage);
 		if (flags[kFLAGS.SOUL_CULTIVATION] > 0) flags[kFLAGS.SOUL_CULTIVATION] = 0;
-		doNext(curry(SoulforceCheats1, 0));
+		doNext(curry(SoulforceCheats1, 3));
 	}
 	public function FairyTest3():void {
 		DriderTown.LilyKidsPCPregnancy = 0;
