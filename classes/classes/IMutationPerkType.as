@@ -55,6 +55,24 @@ public class IMutationPerkType extends PerkType
 			[SLOT_PARATHYROID, {name: "Parathyroid Gland"}],
 			[SLOT_ADAPTATIONS, {name: "Adaptations"}],
 		]);
+		public static const SlotList:/*String*/Array = [
+			SLOT_HEART,
+			SLOT_MUSCLE,
+			SLOT_MOUTH,
+			SLOT_ADRENALS,
+			SLOT_BLOODSTREAM,
+			SLOT_FAT,
+			SLOT_LUNGS,
+			SLOT_METABOLISM,
+			SLOT_OVARIES,
+			SLOT_TESTICLES,
+			SLOT_EYES,
+			SLOT_BONE,
+			SLOT_NERVSYS,
+			SLOT_THYROID,
+			SLOT_PARATHYROID,
+			SLOT_ADAPTATIONS,
+		];
 		
 		/**
 		 * key: SLOT_XXXX

@@ -64,7 +64,7 @@ public class SalamanderRace extends Race {
 					"tou.mult": +0.90,
 					"lib.mult": +1.05,
 					"sens": +75,
-					"maxlust_base": +25
+					"maxlust_base": +50
 				})
 				.end();
 	}

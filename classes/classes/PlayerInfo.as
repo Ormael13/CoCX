@@ -1907,11 +1907,9 @@ public class PlayerInfo extends BaseContent {
 	}
 	public function mutationsClear(perks:Array):Array{
 		var temp:Array = [];
-		var compMutate:Array = MutationsLib.mutationsArray("All", true);
 		var compMutate2:Array = IMutationsLib.mutationsArray("All");
-		var mArray:Array = PerkMenu.arrMerge(compMutate, compMutate2);
 		for each (var playerPerk:PerkType in perks){
-			if (!(mArray.indexOf(playerPerk) >= 0)){
+			if (!(compMutate2.indexOf(playerPerk) >= 0)){
 				temp.push(playerPerk);
 			}
 		}
@@ -2305,4 +2303,3 @@ public class PlayerInfo extends BaseContent {
 	}
 }
 }
-

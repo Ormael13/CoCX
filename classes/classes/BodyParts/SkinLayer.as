@@ -34,6 +34,12 @@ public class SkinLayer extends BodyPart {
 	override public function hasMaterial(type:int):Boolean {
 		return material == type;
 	}
+	override public function setProps(p:Object):void {
+		super.setProps(p);
+		if ("color" in p) color = p.color;
+		if ("color1" in p) color1 = p.color1;
+		if ("color2" in p) color2 = p.color2;
+	}
 	
 	public function defaultDesc():String {
         //if it throws an error hear, it means Svalkash fucked up again.

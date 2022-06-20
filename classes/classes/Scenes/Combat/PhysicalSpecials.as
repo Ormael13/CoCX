@@ -305,8 +305,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.tail.isAny(Tail.SHARK, Tail.LIZARD, Tail.KANGAROO, Tail.DRACONIC, Tail.RACCOON, Tail.RED_PANDA) && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Tail Whip", tailWhipAttack).hint("Whip your foe with your tail to enrage them and lower their defense!");
 			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
-			if (player.tailType == Tail.SALAMANDER && !player.hasPerk(PerkLib.ElementalBody)) {
-				bd = buttons.add("Tail Slap", tailSlapAttack).hint("Set ablaze in red-hot flames your tail to whip your foe with it to hurt and burn them!  \n\n<b>AoE attack.</b>");
+			if ((player.tailType == Tail.SALAMANDER || player.tailType == Tail.KITSHOO) && !player.hasPerk(PerkLib.ElementalBody)) {
+				var kishoo:String = "";
+				if (player.tailType == Tail.KITSHOO && player.tailCount > 1) kishoo = "s"
+				bd = buttons.add("Tail Slap", tailSlapAttack).hint("Set ablaze in red-hot flames your tail"+kishoo+" to whip your foe with it to hurt and burn them!  \n\n<b>AoE attack.</b>");
 				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(80));
 				else bd.requireFatigue(physicalCost(40));
 				if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -1802,14 +1804,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 		clearOutput();
 		if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(80, USEFATG_PHYSICAL);
 		else fatigue(40, USEFATG_PHYSICAL);
-		outputText("With a simple thought you set your tail ablaze.");
+		var kishoo:String = "";
+		if (player.tailType == Tail.KITSHOO && player.tailCount > 1) kishoo = "s"
+		outputText("With a simple thought you set your tail"+kishoo+" ablaze.");
 		//miss
 		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
-			outputText("  Twirling like a top, you swing your tail, but connect with only empty air.");
+			outputText("  Twirling like a top, you swing your tail"+kishoo+", but connect with only empty air.");
 		}
 		else {
-			if(!monster.plural) outputText("  Twirling like a top, you bat your opponent with your tail.");
-			else outputText("  Twirling like a top, you bat your opponents with your tail.");
+			if(!monster.plural) outputText("  Twirling like a top, you bat your opponent with your tail"+kishoo+".");
+			else outputText("  Twirling like a top, you bat your opponents with your tail"+kishoo+".");
 			var damage:Number = unarmedAttack();
 			damage += player.str;
 			if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) damage += player.str;
@@ -1827,18 +1831,26 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= monster.damagePercent() / 100;
 			if (damage < 5) damage = 5;
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
-			outputText("  Your tail slams against [themonster], dealing ");
+			outputText("  Your tail"+kishoo+" slams against [themonster], dealing ");
 			doFireDamage(damage, true, true);
+			if (player.tailType == Tail.KITSHOO && player.tailCount > 1) {
+				var multismack:Number = (player.tailCount - 1);
+				while (multismack-->0) doFireDamage(damage, true, true);
+			}
 			outputText(" damage! ");
 			if (player.hasPerk(PerkLib.PhantomStrike)) {
-				doDamage(damage);
 				outputText("  Phantom strike dealing additional ");
 				doFireDamage(damage, true, true);
+				if (player.tailType == Tail.KITSHOO && player.tailCount > 1) {
+					var psmultismack:Number = (player.tailCount - 1);
+					while (psmultismack-->0) doFireDamage(damage, true, true);
+				}
 				outputText(" damage! ");
 				damage *= 2;
 			}
 			if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
 			else monster.createStatusEffect(StatusEffects.BurnDoT,10,0.02,0,0);
+			if (player.tailType == Tail.KITSHOO && player.tailCount > 1) damage *= player.tailCount;
 			checkAchievementDamage(damage);
 		}
 		outputText("\n\n");

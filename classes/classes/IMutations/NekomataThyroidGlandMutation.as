@@ -15,13 +15,13 @@ import classes.Creature;
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "";
+                descS += "";//lower cooldowns for Illusion and Terror by three turns, increase speed of the recovery after using magic and slightly boost PC speed
             }
             if (pTier >= 2){
-                descS += ", ";
+                descS += ", ";//lower cooldowns for Illusion and Terror by three turns, increase speed of the recovery after using magic and slightly boost PC speed
             }
             if (pTier >= 3){
-                descS += ", ";
+                descS += ", ";//grant bonus soulforce/mana regen depending on Star Sphere rank, increase max Star Sphere rank to 20. Increase speed debuff of Terror to 50, increase evasion boost from Illusion to 20%. Boost PC speed, wisdom and intelligence
             }
             if (descS != "")descS += ".";
             return descS;
