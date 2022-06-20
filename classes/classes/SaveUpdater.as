@@ -1471,49 +1471,7 @@ public class SaveUpdater extends NPCAwareContent {
 				if (Crafting.BagSlot01Cap > 0) player.createKeyItem("Tarnished Ore Bag (Lowest grade)", 0, 0, 0, 0);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.014;
 			}
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.015) {
-				//MutationsPorting
-				/*
-				updateMutationsv3("Heart");
-				updateMutationsv3("Muscle");
-				updateMutationsv3("Mouth");
-				updateMutationsv3("Adrenals");
-				updateMutationsv3("Bloodstream");
-				updateMutationsv3("FaT");
-				updateMutationsv3("Lungs");
-				updateMutationsv3("Metabolism");
-				updateMutationsv3("Ovaries");
-				updateMutationsv3("Testicles");
-				updateMutationsv3("Eyes");
-				updateMutationsv3("Bone");
-				updateMutationsv3("Nerv/Sys");
-				updateMutationsv3("Thyroid");
-				updateMutationsv3("PThyroid");
-				updateMutationsv3("Adaptations");
-				function updateMutationsv3(type:String):void{
-					var arrayVal:int = 0;
-					var array1:Array = MutationsLib.mutationsArray(type);
-					var array2:Array = IMutationsLib.mutationsArray(type);
-					for each(var pPerkArray:Array in array1){
-						var x:int = pPerkArray.length;
-						while (x > 0){
-							if (player.hasPerk(pPerkArray[x-1])){
-								array2[arrayVal].acquireMutation(player, "none", x);
-								x--;
-								break;
-							}
-							x--;
-						}
-						while (x > 0){
-							player.removePerk(pPerkArray[x]);
-							x--;
-						}
-						arrayVal++;
-					}
-				}*/
-				//CoC.instance.charCreation.setupMutations();
-				flags[kFLAGS.MOD_SAVE_VERSION] = 35.015;
-			}
+			//35.015 Removed, code is now handled in MutationLib for Mutations Migration.
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.016) {
 				if (player.hasMutation(IMutationsLib.GorgonEyesIM)){
 					player.HP = player.maxOverHP();
