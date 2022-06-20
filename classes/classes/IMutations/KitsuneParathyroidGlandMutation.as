@@ -55,8 +55,8 @@ public class KitsuneParathyroidGlandMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireParathyroidGlandMutationSlot()
-                    .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune)
-                    .requireRace(Races.KITSUNE);
+                    .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune, PerkLib.StarSphereMastery)
+                    .requireAnyRace(Races.KITSUNE, Races.KITSHOO);
                 }
                 else{
                     var pLvl:int = pTier * 30;

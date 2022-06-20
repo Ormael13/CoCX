@@ -148,7 +148,7 @@ public class MagicSpecials extends BaseCombatContent {
 					bd.disable("You cannot focus to use this ability while you're having so much difficult breathing.");
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.tailType == Tail.FOX && player.tailCount >= 2 && player.tailCount < 7) {
+			if ((player.tailType == Tail.FOX && player.tailCount >= 2 && player.tailCount < 7) || (player.tailType == Tail.KITSHOO && player.tailCount >= 2)) {
 				bd = buttons.add("Fox Fire", basicFoxFire, "Unleash fox flame at your opponent for high damage. \n");
 				bd.requireSoulforce(30 * soulskillCost() * soulskillcostmulti());
 				bd.requireMana(spellCost(60 * kitsuneskillCost()));
@@ -577,7 +577,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You already cauterizing your wounds!");
 			}
 		}
-		if ((player.racialScore(Races.SALAMANDER) >= 12 || player.racialScore(Races.PHOENIX) >= 15) && player.tail.type == Tail.SALAMANDER && (player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon())) {
+		if ((((player.racialScore(Races.SALAMANDER) >= 12 || player.racialScore(Races.PHOENIX) >= 15) && player.tail.type == Tail.SALAMANDER) || (player.racialScore(Races.KITSHOO) >= 12 && player.tail.type == Tail.KITSHOO)) && (player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon())) {
 			bd = buttons.add("Flame Blade", flameBlade).hint("Set your weapon on fire. \n", "Flame Blade");
 			if (player.hasStatusEffect(StatusEffects.FlameBlade)) {
 				bd.disable("Your weapon is already on fire!");
