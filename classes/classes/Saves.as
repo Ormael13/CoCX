@@ -2410,15 +2410,11 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 
 		//This below is some weird witchcraft.... It doesn't update/swap anything, but somehow this fixes the id mismatch from mutations?
 		var mutationsShift:Array = [];
-		for each (var pperk1:PerkType in MutationsLib.mutationsArray("All",true)){
-			mutationsShift.push(pperk1.id);
-		}
 		for each (var pPerk2:IMutationPerkType in IMutationsLib.mutationsArray("All")){
 			mutationsShift.push(pPerk2.id);
 		}
 		mutationsShift.push(IMutationsLib.MutationsTemplateIM.id);
 		//Possibly ID updating.
-
 
 		//Populate Perk Array
 		for (i = 0; i < saveFile.data.perks.length; i++)
@@ -2442,15 +2438,17 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				id = "Lusty Regeneration";
 				hasLustyRegenPerk = true;
 			}
-
 			// Some shit checking to track if the incoming data has an available History perk
 			if (id.indexOf("History:") != -1) {
 				hasHistoryPerk = true;
 			}
 
+			//Mutations will be handled there instead.
+			if (MutationsLib.mutationsUpdate(id)) continue;
+
 			var ptype:PerkType = PerkType.lookupPerk(id);
 			if (ptype == null) {
-				CoC_Settings.error("Unknown perk id=" + id);
+				CoC_Settings.error("Unknown perk id: " + id);
 				//(saveFile.data.perks as Array).splice(i,1);
 				// NEVER EVER EVER MODIFY DATA IN THE SAVE FILE LIKE THIS. EVER. FOR ANY REASON.
 			} else {
@@ -2891,7 +2889,6 @@ public function unFuckSave():void
 		}
 	}
 	while (player.perkDuplicated(PerkLib.NinetailsKitsuneOfBalance)) player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
-	while (player.perkDuplicated(MutationsLib.KitsuneThyroidGland)) player.removePerk(MutationsLib.KitsuneThyroidGland);
 
 	if (player.hasStatusEffect(StatusEffects.KnockedBack))
 	{

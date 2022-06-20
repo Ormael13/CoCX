@@ -1054,7 +1054,7 @@ public class SaveUpdater extends NPCAwareContent {
 				player.ascensionPerkPoints += refund1;
 			}
 			var SphereMastery:Number = 10;
-			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) SphereMastery += 15;
+			if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3) SphereMastery += 15;
 			if (player.perkv1(PerkLib.StarSphereMastery) > SphereMastery) {
 				player.gems += (1000 * (player.perkv1(PerkLib.StarSphereMastery) - SphereMastery));
 				player.removePerk(PerkLib.StarSphereMastery);
@@ -1243,12 +1243,6 @@ public class SaveUpdater extends NPCAwareContent {
 				outputText("\n\nIt doesn't seem as though you qualify for a refund, though.");
 				doNext(SceneLib.camp.campAfterMigration);
 			}
-			outputText("Also, Mutations no longer are obtained via Level up perks, instead, find Evangeline for the mutations. Existing perks will have their costs refunded!");
-			for each(var mutref:PerkType in MutationsLib.mutationsArray("", true)) {
-				if (player.hasPerk(mutref)) {
-					player.perkPoints++;
-				}
-			}
 			doNext(camp.doCamp);
 			return;
 		}
@@ -1262,6 +1256,7 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] == 1) flags[kFLAGS.DINAH_ASS_HIPS_SIZE] = 1;
 			if (flags[kFLAGS.TOUGHNESS_SCALING] != 0) flags[kFLAGS.TOUGHNESS_SCALING] = 0;
+			/*
 			if (player.hasPerk(MutationsLib.ArachnidBookLungEvolved)) {
 				player.removePerk(MutationsLib.ArachnidBookLungEvolved);
 				player.createPerk(MutationsLib.ArachnidBookLungPrimitive, 0, 0, 0, 0);
@@ -1549,7 +1544,7 @@ public class SaveUpdater extends NPCAwareContent {
 			if (player.hasPerk(MutationsLib.YetiFatFinalForm)) {
 				player.removePerk(MutationsLib.YetiFatFinalForm);
 				player.createPerk(MutationsLib.YetiFatEvolved, 0, 0, 0, 0);
-			}
+			}*/
 			doNext(camp.doCamp);
 			return;
 		}
@@ -1767,6 +1762,7 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.015) {
 				//MutationsPorting
+				/*
 				updateMutationsv3("Heart");
 				updateMutationsv3("Muscle");
 				updateMutationsv3("Mouth");
@@ -1803,7 +1799,7 @@ public class SaveUpdater extends NPCAwareContent {
 						}
 						arrayVal++;
 					}
-				}
+				}*/
 				//CoC.instance.charCreation.setupMutations();
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.015;
 			}
@@ -1833,9 +1829,6 @@ public class SaveUpdater extends NPCAwareContent {
 					flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = 0;
 				}
 				outputText("\nWeapons duplication from woodelves hunting party should now be fixed.... again.");
-				for each (var mutation:PerkType in MutationsLib.mutationsArray("", true)){
-					player.removePerk(mutation);
-				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.018;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.019) {
