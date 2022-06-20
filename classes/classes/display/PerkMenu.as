@@ -896,8 +896,7 @@ public class PerkMenu extends BaseContent {
 			outputText("Mutations Assistant is toggleable in settings, and hides/shows you available mutations. It is off by default.\n\n");
 
 			outputText("<b><i><u>Mutations used per bodypart:</u></i></b>\n");
-			var bPartlist:Array = keys(IMutationPerkType.Slots);
-			for each (var bodyPart:String in bPartlist){
+			for each (var bodyPart:String in IMutationPerkType.SlotList){
 				var mCount:int = 0
 				var mPerkarray:Array = IMutationsLib.mutationsArray(bodyPart);
 				for each (var mutations:IMutationPerkType in mPerkarray){
@@ -905,7 +904,7 @@ public class PerkMenu extends BaseContent {
 						mCount++;
 					}
 				}
-				if (bodyPart == "Adaptations") mutationCount++;
+				mutationCount = player.maxTotalMutationsInSlot(bodyPart);
 				outputText(IMutationPerkType.Slots[bodyPart].name + " mutations obtained: ");
 				if (mCount > mutationCount){
 					outputText("<font color=\"#800000\">");
