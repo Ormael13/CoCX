@@ -418,7 +418,7 @@ private function evangelineAlchemyMenu(page:int = 1):void {
 		addButton(2, "Couatl Oil", MakingCouatlPotion).hint("Ask her to brew a special potion that could aid in becoming a couatl. \n\nCost: 10 Gems \nNeeds 1 Snake Oil and 1 Golden Seed.");
 		addButton(3, "Nocello Liq", MakingNocelloLiqueur).hint("Ask her to brew a special potion that could aid in becoming a phoenix. \n\nCost: 10 Gems \nNeeds 1 Golden Seed and 1 Salamander Firewater.");//Hybryd race TF
 		addButton(4, "Unicornum", MakingUnicornumPotion).hint("Ask her to brew a special potion that could aid in becoming a unicorn. \n\nCost: 20 Gems \nNeeds 1 Equinum and 4 Low-grade Soulforce Recovery Pills.");//1st stage Soul evolution race TF
-		//addButton(5, "", ).hint(".");kitsune/salamander TF//Hybryd race TF
+		addButton(5, "RubyCrystal", MakingRubyCrystal).hint("Ask her to brew a special potion that could aid in becoming a kishoo. \n\nCost: 10 Gems \nNeeds 1 Fox Jewel and 1 Salamander Firewater.");//Hybryd race TF
 		//6
 		//addButton(7, "", ).hint(".");siren TF//Hybryd race TF
 		//8
@@ -580,6 +580,27 @@ private function MakingAlicornumPotion():void {
 	outputText(" Low-grade Soulforce Recovery Pills and fifty gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
 	outputText("\n\nAfter a while, she hands you a vial labeled \"Alicornum\".  ");
 	inventory.takeItem(consumables.ALICORN, curry(evangelineAlchemyMenu, 1));
+	cheatTime(1/6);
+}
+private function MakingRubyCrystal():void {
+	clearOutput();
+	if (player.gems < 10) {
+		outputText("\"<i>I'm sorry but you don't have the gems for this potion,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	else if (!(player.hasItem(consumables.FOXJEWL, 1) && player.hasItem(consumables.SALAMFW, 1))) {
+		outputText("\"<i>I'm sorry but you don't have the materials I need. I need Fox Jewel and hip flask of Salamander Firewater,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	player.destroyItems(consumables.FOXJEWL, 1);
+	player.destroyItems(consumables.SALAMFW, 1);
+	player.gems -= 10;
+	statScreenRefresh();
+	outputText("You hand over one Fox Jewel, one hip flask of Salamander Firewater and ten gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
+	outputText("\n\nAfter a while, she hands you a ruby crystal.  ");
+	inventory.takeItem(consumables.RUBYCRY, curry(evangelineAlchemyMenu, 1));
 	cheatTime(1/6);
 }
 private function MakingGreyInkPotion():void {

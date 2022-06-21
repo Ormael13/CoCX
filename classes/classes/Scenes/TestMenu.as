@@ -1604,7 +1604,7 @@ public class TestMenu extends BaseContent
 			addButton(1, "F.Fish", AddFreshFish).hint("Add 1 Fresh Fish.");
 			addButton(2, "BehemothCum", AddBehemothCum).hint("Add 1 bottle of Behemoth Cum.");
 			addButton(3, "TGOGossamer", AddThickGreenOnnaGossamer).hint("Add 1 Thick Green Onna Gossamer.");
-			//addButton(4, "LeviSun.", AddLeviathanSunscreen).hint("Add 1 Leviathan Sunscreen");
+			addButton(4, "Ruby Crystal", AddRubyCrystal).hint("Add 1 kishoo TF.");//addButton(4, "LeviSun.", AddLeviathanSunscreen).hint("Add 1 Leviathan Sunscreen");
 			addButton(5, "Enigmanium", AddEnigmanium).hint("Add 1 vial of Enigmanium.");
 			//addButton(6, "Skelp", AddSkelp).hint("Add 1 Skelp (WIP Melkie TF).");
 			addButton(6, "dragonshit", AddDragonShit).hint("Add dragon stuff for jabberwocky test.");
@@ -1833,6 +1833,10 @@ public class TestMenu extends BaseContent
 		//inventory.takeItem(consumables.TROLFIG, curry(NonEquipmentMenu, 1));
 		outputText("\n\n<b>(Gained 1 Cyclop TF)</b>\n\n");
 		inventory.takeItem(consumables.EYEDROP, curry(NonEquipmentMenu, 1));
+	}
+	public function AddRubyCrystal():void {
+		outputText("\n\n<b>(Gained 1 Kishoo TF)</b>\n\n");
+		inventory.takeItem(consumables.RUBYCRY, curry(NonEquipmentMenu, 2));
 	}
 	public function AddVoltageTopaz():void {
 		outputText("\n\n<b>(Gained 1 Voltage Topaz!)</b>\n\n");

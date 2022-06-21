@@ -329,7 +329,7 @@ public final class ConsumableLib extends BaseContent
 		public const RESNOIL:SimpleConsumable = mk("R.SnakOil", "R.SnakOil", "a vial of refined snake oil", 6, "A vial the size of your fist made of dark brown glass. It contains what appears to be an oily, blackish liquid. The odor is even more abominable then that of regular snake oil.", curry(m.snakeOil, 1));
 		public const RINGFIG:SimpleConsumable = mk("RingFig", "RingFig", "a ringtail fig", 6, "A dried fig with two lobes and thin dark rings just below its stem.  The skin is wrinkly and it looks vaguely like a bulging scrotum.", m.ringtailFig);
 		public const RIZZART:RizzaRoot			= new RizzaRoot();
-		public const RUBYCRY:SimpleConsumable = mk("RubyCry", "RubyCryst", "a ruby crystal", 6, "A shining teardrop-shaped jewel.  An eerie red fluid dances beneath the surface.", m.rubycrystal);//kishoo tf
+		public const RUBYCRY:SimpleConsumable = mk("RubyCry", "RubyCryst", "a ruby crystal", 6, "A shining teardrop-shaped jewel.  An eerie red fluid dances beneath the surface.", m.rubycrystal);
 		public const S_GOSSR:SimpleConsumable = mk("S.Gossr", "S.Gossr", "a bundle of pink, gossamer webbing", 6, "These strands of gooey pink gossamer seem quite unlike the normal silk that spider-morphs produce.  It smells sweet and is clearly edible, but who knows what it might do to you?", curry(m.sweetGossamer, 0));
 		public const SALAMFW:SimpleConsumable = mk("SalamFW", "SalamFW", "a hip flask of Salamander Firewater", 6, "This hip flask contain high-proof beverage called 'Salamander Firewater', which one sip can makes your throat feel like it been set on fire.  What whould happen if you drink whole flask content?", m.salamanderfirewater);
 		public const SATYR_W:SatyrWine        = new SatyrWine();
