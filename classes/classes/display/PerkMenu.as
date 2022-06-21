@@ -1038,7 +1038,7 @@ public class PerkMenu extends BaseContent {
 				outputText("\n\n")
 				var tempObj:Object = mutation.pBuffs(player)
 				for (var key:String in tempObj) {
-					outputText("Buffs " + StatUtils.explainBuff(key, tempObj[key]) + "\n");
+					outputText("" + StatUtils.explainBuff(key, tempObj[key]) + "\n");
 				}
 				outputText("\n");
 			}
