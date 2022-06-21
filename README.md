@@ -1,7 +1,3 @@
-# Repository moved to https://github.com/Ormael13/CoCX
-
-----
-
 Corruption-of-Champions
 =======================
 
