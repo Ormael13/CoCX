@@ -56,7 +56,7 @@ package classes.GeneticMemories {
 			name: "Gain Ovipositor",
 			cost: 400,
 			title: "Ovipositor",
-			hint: "Need to get any ovipositor, or a compatible abdomen [bee, spider, mantis] first",
+			hint: "Need to get any ovipositor and a compatible abdomen first (bee, spider, mantis, ant)",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.GainOvipositor;
 			}

@@ -113,7 +113,7 @@ public class Skin extends SaveableBodyPart {
 	public static const TATTOED: int = 8; // [Deprecated] Replaced on load with PLAIN + pattern
 	public static const AQUA_SCALES: int = 9;
 	EnumValue.add(SkinTypes, AQUA_SCALES, "AQUA_SCALES", {
-		name:"scales",
+		name:"aqua scales",
 		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: true,
 		coat:true,
@@ -206,7 +206,7 @@ public class Skin extends SaveableBodyPart {
 	public static const PATTERN_TIGER_STRIPES: int = 4;
 	EnumValue.add(PatternTypes, PATTERN_TIGER_STRIPES, "TIGER_STRIPES", {
 		name:"tiger stripes",
-		appearanceDesc: "You have [skin coat.color1] [skin coat] covered by a tiger-like [skin coat.color2] stripe pattern.",
+		appearanceDesc: "You have [skin coat] covered by a tiger-like [skin coat.color2] stripe pattern.",
 		coat:true
 	});
 	public static const PATTERN_BATTLE_TATTOO: int = 5;
@@ -516,7 +516,7 @@ public class Skin extends SaveableBodyPart {
 		return coverage < COVERAGE_COMPLETE && base.type == PLAIN;
 	}
 	public function hasNoPattern():Boolean {
-		return base.pattern == PATTERN_NONE;
+		return base.pattern == PATTERN_NONE && coat.pattern == PATTERN_NONE;
 	}
 	public function hasMagicalTattoo():Boolean {
 		return base.pattern == PATTERN_MAGICAL_TATTOO;
@@ -706,7 +706,7 @@ public class Skin extends SaveableBodyPart {
 	}
 
 	public static function getSkinPatternAppearanceDescription(creature: *):String {
-		const id: int = creature.skin.base.pattern;
+		const id: int = creature.skin.pattern;
 
 		return formatDescription((PatternTypes[id].appearanceDescFunc ? PatternTypes[id].appearanceDescFunc(creature) : PatternTypes[id].appearanceDesc) || "", creature);
 	}

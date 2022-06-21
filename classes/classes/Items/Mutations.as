@@ -4459,20 +4459,19 @@ public final class Mutations extends MutationsHelper {
             //WANG GROWTH - TIGGERSHARK ONLY
             if (type == 1 && (!player.hasCock()) && changes < changeLimit && rand(3) == 0) {
                 //Genderless:
-                transformations.CockHuman(7).applyEffect();
+                transformations.CockHuman(0, 7, 1.4).applyEffect();
                 if (player.balls == 0) {
                     outputText(" And a new pair of balls!");
                     transformations.BallsDuo.applyEffect(false);
                     player.ballSize = 2;
                 }
-                player.cocks[0].cockThickness = 1.4;
                 dynStats("lus", 20);
                 player.addCurse("sen", 5, 1);
                 MutagenBonus("lib", 4);
                 changes++;
             }
             //(Requires the player having two testicles)
-            if (type == 1 && (player.balls == 0 || player.balls == 2) && player.hasCock() && changes < changeLimit && rand(3) == 0) {
+            if (type == 1 && player.balls <4 && player.hasCock() && changes < changeLimit && rand(3) == 0) {
                 transformations.BallsQuad(2).applyEffect();
                 dynStats("lus", 10);
                 player.addCurse("sen", 3, 1);

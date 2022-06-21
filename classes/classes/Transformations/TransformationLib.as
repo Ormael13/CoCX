@@ -517,7 +517,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
                     options = skinFormatOptions(options, Skin.AQUA_SCALES);
 
                     const color: String = options.color;
-
                     var desc: String = "";
 
                     // Coverage
@@ -559,6 +558,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
                     player.skinDesc = "skin";
                     player.skin.growCoat(Skin.AQUA_SCALES, options, coverage);
+					//player.scaleColor = options.color;
                     if (doOutput) outputText(desc);
                     Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.AQUA_SCALES));
                 },
@@ -620,14 +620,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
         if (!options) options = {};
         if (!options.adj) options.adj = "";
         if (!options.pattern) options.pattern = "";
-        if (!options.color && !options.colors) {
-			options.color  = randomChoice(
-					BodyMaterial.Types[Skin.SkinTypes[type].material].defaultColors);
-			options.colors = [options.color];
-		} else {
-			if (!options.color && options.colors)
-				options.color = randomChoice(options.colors);
-		}
+        if (!options.colors) options.colors = BodyMaterial.Types[Skin.SkinTypes[type].material].defaultColors;
+		if (!options.color && options.colors)
+			options.color = randomChoice(options.colors);
         return options;
 	}
   /*
@@ -648,15 +643,16 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    desc += "Your skin patterns itches incessantly, and as you scratch they shifts and changes, becoming less and less visible till they gone. <b>Your skin is without any skin patterns!</b>";
+	    desc += "Your skin patterns itche incessantly, and as you scratch, they shift and change, becoming less and less visible till they are gone. <b>Your skin is without any skin patterns!</b>";
 	    player.skin.base.adj = "";
 	    player.skin.base.pattern = Skin.PATTERN_NONE;
+	    player.skin.coat.pattern = Skin.PATTERN_NONE;
 
 	    if (doOutput) outputText(desc);
 	  },
 	  // is present
 	  function (): Boolean {
-	    return player.skin.base.pattern === Skin.PATTERN_NONE;
+	    return player.skin.pattern === Skin.PATTERN_NONE;
 	  }
 	);
 
@@ -857,15 +853,16 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const SkinPatternTigerSharkStripes:Transformation = new SimpleTransformation("Shark Stripes Skin Pattern",
             // apply effect
             function (doOutput:Boolean):void {
-                TransformationUtils.applyTFIfNotPresent(transformations.SkinAquaScales(Skin.COVERAGE_HIGH, {color: "orange", color2: "black", pattern: Skin.PATTERN_TIGER_STRIPES}), doOutput);
-                var desc:String = "Your scales begins to tingle and itch, before rapidly shifting to a shiny orange color, marked by random black scales looking like a stripes. You take a quick look in a nearby pool of water, to see your skin has morphed in appearance and texture to become more like a Tiger Shark!";
-                player.scaleColor2 = "black";
+				TransformationUtils.applyTFIfNotPresent(transformations.SkinAquaScales(Skin.COVERAGE_HIGH, {color: "orange", color2: "black", pattern: Skin.PATTERN_TIGER_STRIPES}), doOutput);
+                var desc:String = "[pg]Your scales begins to tingle and itch, before rapidly shifting to a shiny orange color, marked by random black scales looking like tiger stripes. You take a quick look in a nearby pool of water, to see your skin has morphed in appearance and texture to become more like a Tiger Shark!";
+				//player.scaleColor = "orange";
+                //player.scaleColor2 = "black";
                 if (doOutput) outputText(desc);
                 Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.SHARK_STRIPES));
             },
             // is present
             function ():Boolean {
-                return transformations.SkinAquaScales(Skin.COVERAGE_HIGH).isPresent() && player.skin.coat.pattern === Skin.PATTERN_TIGER_STRIPES;
+                return transformations.SkinAquaScales(Skin.COVERAGE_HIGH).isPresent() && player.skin.pattern === Skin.PATTERN_TIGER_STRIPES;
             }
     );
   /*
@@ -12328,7 +12325,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 				if (player.balls < 2) {
 					player.ballSize = 1;
-					if (rand(2) == 0) desc += "\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.";
+					if (rand(2) == 0) desc += "A nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.";
 					else desc += "You gasp in shock as a sudden pain racks your crotch. Within seconds, two balls drop down into a new sack, your skin stretching out to accommodate them. Once the pain clears, you examine <b>your new pair of testes.</b>[pg]";
 				}
 				else
