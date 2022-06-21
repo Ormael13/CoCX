@@ -8,6 +8,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Shield;
 import classes.Items.Weapon;
+import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
 
 	public class AetherTwinsFollowers extends NPCAwareContent implements SaveableState
@@ -327,7 +328,7 @@ public function aethertwinsFollowersFeed():void {
 		else addButtonDisabled(btn, useables.G_INGOT.shortName, "They can't eat this type of metal before first evolution.");
 		btn++;
 	}
-	if (player.hasItem(useables.TIN_ORE, 1)) {
+	if (player.hasItem(useables.TIN_ORE, 1) || SceneLib.crafting.hasMaterial(useables.TIN_ORE) > 0) {
 		if (AetherTwinsTalkMenu > 0) {
 			if (AetherTwinsFoodMenuTin < AetherTwinsFoodMenuTinCap) addButton(btn, useables.TIN_ORE.shortName, aethertwinsFollowersFeedMaterial, useables.TIN_ORE);
 			else addButtonDisabled(btn, useables.TIN_ORE.shortName, "They can't eat more of this type of metal without undergoing evolution.");
@@ -335,7 +336,7 @@ public function aethertwinsFollowersFeed():void {
 		else addButtonDisabled(btn, useables.TIN_ORE.shortName, "They can't eat this type of metal before first evolution.");
 		btn++;
 	}
-	if (player.hasItem(useables.COP_ORE, 1)) {
+	if (player.hasItem(useables.COP_ORE, 1) || SceneLib.crafting.hasMaterial(useables.COP_ORE) > 0) {
 		if (AetherTwinsTalkMenu > 0) {
 			if (AetherTwinsFoodMenuCopper < AetherTwinsFoodMenuCopperCap) addButton(btn, useables.COP_ORE.shortName, aethertwinsFollowersFeedMaterial, useables.COP_ORE);
 			else addButtonDisabled(btn, useables.COP_ORE.shortName, "They can't eat more of this type of metal without undergoing evolution.");
@@ -343,7 +344,7 @@ public function aethertwinsFollowersFeed():void {
 		else addButtonDisabled(btn, useables.COP_ORE.shortName, "They can't eat this type of metal before first evolution.");
 		btn++;
 	}
-	if (player.hasItem(useables.IRONORE, 1)) {
+	if (player.hasItem(useables.IRONORE, 1) || SceneLib.crafting.hasMaterial(useables.IRONORE) > 0) {
 		if (AetherTwinsTalkMenu > 0) {
 			if (AetherTwinsFoodMenuIron < AetherTwinsFoodMenuIronCap) addButton(btn, useables.IRONORE.shortName, aethertwinsFollowersFeedMaterial, useables.IRONORE);
 			else addButtonDisabled(btn, useables.IRONORE.shortName, "They can't eat more of this type of metal without undergoing evolution.");
@@ -397,7 +398,8 @@ public function aethertwinsFollowersFeedMaterial(itype:ItemType):void {
 		case useables.S_INGOT: AetherTwinsFoodMenuSilver += 1;	break;
 		case useables.G_INGOT: AetherTwinsFoodMenuGold += 1;	break;
 	}
-	player.destroyItems(itype, 1);
+	if (!(SceneLib.crafting.hasMaterial(itype) && SceneLib.crafting.useMaterial(itype)))
+		player.destroyItems(itype, 1);
 	doNext(aethertwinsFollowersFeed);
 	cheatTime(1/4);
 }
