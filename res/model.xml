@@ -187,7 +187,7 @@
             <color name="abyssal black">#000000</color>
             <color name="white and black">#eff3f6</color>
         </common>
-        <property name="hair" src="hairColor" default="#ffffff">
+        <property name="hair" src="hairColor1" default="#ffffff">
             <color name="red">#d85741</color>
             <color name="flaxen">#e1ba94</color>
             <color name="brown">#674f42</color>
@@ -197,24 +197,28 @@
             <color name="raven">#101728</color>
             <color name="snowy">#dddfe4</color>
         </property>
-        <property name="hair2" src="hairColor" default="#ffffff">
+        <property name="hair2" src="hairColor2" default="#ffffff">
         </property>
-        <property name="fur" src="skin.coat.color" default="#ffffff">
+        <property name="fur" src="furColor1" default="#ffffff">
         </property>
-        <property name="fur2" src="skin.coat.color2" default="#ffffff">
+        <property name="fur2" src="furColor2" default="#ffffff">
         </property>
-        <property name="scales" src="skin.coat.color" default="#ffffff">
+        <property name="feather" src="featherColor1" default="#ffffff">
         </property>
-        <property name="scales2" src="skin.coat.color2" default="#ffffff">
+        <property name="feather2" src="featherColor2" default="#ffffff">
         </property>
-        <property name="chitin" src="skin.coat.color" default="#ffffff">
+        <property name="scales" src="scaleColor1" default="#ffffff">
         </property>
-        <property name="chitin2" src="skin.coat.color2" default="#ffffff">
+        <property name="scales2" src="scaleColor2" default="#ffffff">
         </property>
-        <property name="skin" src="skinTone" default="#ffffff">
+        <property name="chitin" src="chitinColor1" default="#ffffff">
+        </property>
+        <property name="chitin2" src="chitinColor2" default="#ffffff">
+        </property>
+        <property name="skin" src="skinColor1" default="#ffffff">
             <color name="pale">#f2e8e3</color>
         </property>
-        <property name="skin2" src="skin.base.color2" default="#ffffff">
+        <property name="skin2" src="skinColor2" default="#ffffff">
             <color name="pale">#f2e8e3</color>
         </property>
         <property name="iris" src="eyes.colour" default="#0000ff">
@@ -230,6 +234,15 @@
         <key src="#CCCC00" base="hair2"/>
         <key src="#999900" base="hair2" transform="darken(25)"/>
         <key src="#333300" base="hair2" transform="darken(50)"/>
+        <key src="#FFA54C" base="feather" transform="lighten(25)"/>
+		<key src="#FF8000" base="feather" transform="lighten(10)"/>
+        <key src="#CC6600" base="feather"/>
+        <key src="#994C00" base="feather" transform="darken(25)"/>
+        <key src="#663300" base="feather" transform="darken(50)"/>
+        <key src="#FFB2F4" base="feather2" transform="lighten(25)"/>
+        <key src="#FF7FED" base="feather2"/>
+        <key src="#CC66BE" base="feather2" transform="darken(25)"/>
+        <key src="#994C8E" base="feather2" transform="darken(50)"/>
         <key src="#88FF88" base="fur" transform="lighten(25)"/>
         <key src="#00CC00" base="fur"/>
 		<key src="#00ac00" base="fur" transform="darken(15)"/>
@@ -1722,7 +1735,7 @@
 							<show part="weaponBuff/rapierFireBuff"/>
 						</if>
 					</if>
-					
+
 					<!-- Dagger -->
 					<if test="PlayerHasDagger">
 						<if test="PlayerHasDaggerHoly or PlayerHasDaggerUnholy">
@@ -3774,7 +3787,7 @@
 								<show part="tail_bg/spider"/>
 							</else>
 						</if>
-					</else>		
+					</else>
 				</if>
             </case>
             <case values="Tail.BEE_ABDOMEN">
@@ -4111,7 +4124,7 @@
                         </else>
                     </if>
                 </case>
-				
+
 				<case values="CockTypesEnum.MINDBREAKERMALE">
                     <if test="big">
                         <show part="penis$taur/humanbig$taur"/>
@@ -4120,7 +4133,7 @@
                             <show part="penis$taur/humanbig$taur"/>
                         </else>
                     </if>
-                </case>	
+                </case>
 
 				<case values="CockTypesEnum.DOG,CockTypesEnum.RAIJU">
                     <if test="big">
@@ -4130,11 +4143,11 @@
                         </else>
                     </if>
                 </case>
-				
+
                 <!-- <case values="CockTypesEnum.HUMAN"></case> use default -->
                 <default>
 					<if test="skin.type == Skin.AQUA_SCALES or skin.base.pattern==Pattern.ORCA_UNDERBODY or skin.base.pattern==Pattern.SEA_DRAGON_UNDERBODY">
-						<if test="skin.base.pattern==Pattern.ORCA_UNDERBODY or skin.base.pattern==Pattern.SEA_DRAGON_UNDERBODY">		
+						<if test="skin.base.pattern==Pattern.ORCA_UNDERBODY or skin.base.pattern==Pattern.SEA_DRAGON_UNDERBODY">
 							<if test="big">
 								<show part="penis$taur/human2big$taur"/>
 								<else>
@@ -4158,7 +4171,7 @@
 								</else>
 							</if>
 						</else>
-					</if>								
+					</if>
                 </default>
             </switch>
             <if test="lowerBody == LowerBody.CANCER or lowerBody == LowerBody.PLANT_FLOWER or lowerBody == LowerBody.FLOWER_LILIRAUNE or lowerBody == LowerBody.GAZER or (lowerBody == LowerBody.HINEZUMI and arms.type == Arms.HINEZUMI)">
@@ -4728,7 +4741,7 @@
 					<show part="panty/goblinTechnomancerPanty"/>
 					<hide part="penis/*"/>
 					<hide part="balls/*"/>
-				</if>	
+				</if>
 			</if>
 		</if>
 
@@ -4880,7 +4893,7 @@
 					<hide part="penis/*"/>
 					<hide part="balls/*"/>
 				</if>
-			</if>	
+			</if>
 		</if>
 
 		<!--Bikini set -->
@@ -5148,7 +5161,7 @@
 				</if>
 			</if>
 		</if>
-		
+
 		<!--Cow Undergarment-->
 		<if test="cowBra">
 			<if test="breastRows.length gt 0">
@@ -5727,9 +5740,9 @@
 		<if test="showClothing == false">
 			<hide part="panty/*"/>
 		</if>
-		
+
 		<!-- FULL BODY AREA -->
-		
+
 		<!-- Earth Elemental -->
 		<if test="IsEarthElemental">
 			<!-- Hide everything else -->
@@ -5788,7 +5801,7 @@
                 </else>
 			</if>
 		</if>
-		
+
 		<!-- Fire elemental -->
 		<if test="IsFireElemental">
 			<!-- Hide everything else -->
@@ -5846,7 +5859,7 @@
                 </else>
 			</if>
 		</if>
-		
+
 		<!-- Water elemental -->
 		<if test="IsWaterElemental">
 			<!-- Hide everything else -->
@@ -5906,7 +5919,7 @@
                 </else>
 			</if>
 		</if>
-		
+
 		<!-- Wind elemental -->
 		<if test="IsWindElemental">
 			<!-- Hide everything else -->

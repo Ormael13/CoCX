@@ -9,7 +9,7 @@ import classes.Scenes.SceneLib;
 	 * ...
 	 * @author ...
 	 */
-	public class Izma extends Monster 
+	public class Izma extends Monster
 	{
 
 		//[Special Attacks]
@@ -158,7 +158,7 @@ import classes.Scenes.SceneLib;
 			this.tallness = 5*12+5;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_NOTICEABLE;
-			this.skinTone = "striped orange";
+			this.bodyColor = "striped orange";
 			this.hairColor = "silver";
 			this.hairLength = 20;
 			initStrTouSpeInte(100, 110, 106, 74);

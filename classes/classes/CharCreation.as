@@ -192,7 +192,7 @@ import coc.view.MainView;
 			player.rearBody.type = RearBody.NONE;
 			player.wings.type = Wings.NONE;
 			//Default
-			player.skinTone = "light";
+			player.skinColor = "light";
 			player.hairColor = "brown";
 			player.hairStyle = 0;
 			player.hairType = Hair.NORMAL;
@@ -748,7 +748,7 @@ import coc.view.MainView;
 		}
 
 		private function setComplexion(choice:String):void { //And choose hair
-			player.skinTone = choice;
+			player.skinColor = choice;
 			clearOutput();
 			outputText("You selected a " + choice + " complexion.\n\nWhat color is your hair?");
 			menu();
@@ -805,7 +805,7 @@ import coc.view.MainView;
 
 			outputText("You can finalize your appearance customization before you proceed to perk selection. You will be able to alter your appearance through the usage of certain items.\n\n");
 			outputText("Height: " + Math.floor(player.tallness / 12) + "'" + player.tallness % 12 + "\"\n");
-			outputText("Skin tone: " + player.skinTone + "\n");
+			outputText("Skin tone: " + player.skinColor + "\n");
 			outputText("Hair color: [haircolor]\n");
 			outputText("Eye color: [eyecolor]\n");
 			if (player.hasCock()) {
@@ -845,7 +845,7 @@ import coc.view.MainView;
 			addButton(14, "Back", genericStyleCustomizeMenu);
 		}
 		private function confirmComplexion(complexion:String):void {
-			player.skinTone = complexion;
+			player.skinColor = complexion;
 			genericStyleCustomizeMenu();
 		}
 

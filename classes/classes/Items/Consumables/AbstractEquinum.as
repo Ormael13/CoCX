@@ -60,7 +60,7 @@ public class AbstractEquinum extends Consumable {
 		outputText("You down the potion, grimacing at the strong taste.");
 		//CHANCE OF BAD END - 20% if face/tail/skin/cock are appropriate.
 		//If hooved bad end doesn't appear till centaured
-		if (type == 0 && player.hasFur() && player.faceType == Face.HORSE && player.tailType == Tail.HORSE && (player.lowerBody != LowerBody.HOOFED)) {
+		if (type == 0 && player.isFurCovered() && player.faceType == Face.HORSE && player.tailType == Tail.HORSE && (player.lowerBody != LowerBody.HOOFED)) {
 			//WARNINGS
 			//Repeat warnings
 			if (player.hasStatusEffect(StatusEffects.HorseWarning) && rand(3) == 0) {
@@ -466,13 +466,13 @@ public class AbstractEquinum extends Consumable {
 			changes++;
 		}
 		//HorseFace - Req's Fur && Ears
-		if (player.faceType != Face.HORSE && !player.isGargoyle() && player.hasFur() && changes < changeLimit && rand(4) == 0 && player.ears.type == Ears.HORSE) {
+		if (player.faceType != Face.HORSE && !player.isGargoyle() && player.isFurCovered() && changes < changeLimit && rand(4) == 0 && player.ears.type == Ears.HORSE) {
 			outputText("\n\n");
 			CoC.instance.transformations.FaceHorse.applyEffect();
 			changes++;
 		}
 		//Fur - if has horsetail && ears and not at changelimit
-		if (!player.hasFur() && !player.isTaur() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.tailType == Tail.HORSE) {
+		if (!player.isFurCovered() && !player.isTaur() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.tailType == Tail.HORSE) {
 			outputText("\n\n");
 			if (type == 0) 	CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "chocolate", "auburn", "sandy brown", "caramel", "peach", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "brown and white", "black and white"]}).applyEffect();
 			else CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["platinum blonde", "silver", "white", "pure white"]}).applyEffect();

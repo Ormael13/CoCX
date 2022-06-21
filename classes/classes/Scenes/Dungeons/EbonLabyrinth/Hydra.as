@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Dungeons.EbonLabyrinth 
+package classes.Scenes.Dungeons.EbonLabyrinth
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -84,7 +84,7 @@ use namespace CoC;
 			SceneLib.dungeons.ebonlabyrinth.hydraScene.defeatedBy();
 		}
 		
-		public function Hydra() 
+		public function Hydra()
 		{
             var mod:int = inDungeon ? SceneLib.dungeons.ebonlabyrinth.enemyLevelMod : 0;
 			initStrTouSpeInte(136 + 38*mod, 250 + 40*mod, 158 + 28*mod, 142 + 21*mod);
@@ -113,7 +113,7 @@ use namespace CoC;
 			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.HYDRA;
 			this.faceType = Face.SNAKE_FANGS;
-			this.skinTone = "mediterranean-toned";
+			this.bodyColor = "mediterranean-toned";
 			this.hairColor = "brown";
 			this.hairLength = 16;
 			this.weaponName = "fist";

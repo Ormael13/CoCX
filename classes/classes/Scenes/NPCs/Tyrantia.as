@@ -2,7 +2,7 @@
  * ...
  * @author Canadian Snas
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -15,7 +15,7 @@ import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 import classes.internals.*;
 import classes.Monster;
-	
+
 public class Tyrantia extends Monster
 	{
 		private function lustFromHits():Number {
@@ -166,7 +166,7 @@ public class Tyrantia extends Monster
 				}
 			}
 			if (TyrantiaFollower.TyrantiaFollowerStage < 2 || (player.hasStatusEffect(StatusEffects.SparingTyrantia) && player.statusEffectv1(StatusEffects.SparingTyrantia) > 0)) tyrantiaLustAura();
-			//if () 
+			//if ()
 			//else {
 				var choice0:Number = rand(6);
 				switch (choice0) {
@@ -212,7 +212,7 @@ public class Tyrantia extends Monster
 			return str;
 		}
 		
-		public function Tyrantia() 
+		public function Tyrantia()
 		{
 			if (flags[kFLAGS.TYRANTIA_LVL_UP] < 2) {
 				initStrTouSpeInte(295, 310, 190, 150);
@@ -260,7 +260,7 @@ public class Tyrantia extends Monster
 			this.tallness = 14*12;
 			this.hips.type = Hips.RATING_CURVY + 3;
 			this.butt.type = Butt.RATING_JIGGLY;
-			this.skinTone = "brown";
+			this.bodyColor = "brown";
 			this.hairColor = "black";
 			this.hairLength = 24;
 			this.weaponName = "Dick";

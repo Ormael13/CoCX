@@ -94,7 +94,7 @@ public class WormMass extends Monster
 			this.tallness = 1;
 			this.hips.type = Hips.RATING_SLENDER;
 			this.butt.type = Butt.RATING_BUTTLESS;
-			this.skinTone = "white";
+			this.bodyColor = "white";
 			initStrTouSpeInte(40, 10, 10, 1);
 			initWisLibSensCor(1, 90, 60, 90);
 			this.weaponName = "worm";

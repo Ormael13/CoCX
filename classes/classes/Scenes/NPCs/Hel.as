@@ -170,7 +170,7 @@ public class Hel extends Monster
 			this.tallness = 84;
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
-			this.skinTone = "dusky";
+			this.bodyColor = "dusky";
 			this.hairColor = "red";
 			this.hairLength = 13;
 			initStrTouSpeInte(90, 80, 75, 60);

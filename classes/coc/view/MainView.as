@@ -285,6 +285,7 @@ public class MainView extends Block {
 	 * Is reset on `clearOutput()`
 	 */
 	public var linkHandler:Function;
+	public var hotkeysDisabled:Boolean = false;
 
 	public var charView:CharView;
 	public function MainView():void {
@@ -815,6 +816,7 @@ public class MainView extends Block {
 
 	public function clearOutputText():void {
 		this.linkHandler = null;
+		this.hotkeysDisabled = false;
 		this.mainText.htmlText = '';
 		this.scrollBar.update();
 	}

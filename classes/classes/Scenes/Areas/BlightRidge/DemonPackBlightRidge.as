@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Areas.BlightRidge 
+package classes.Scenes.Areas.BlightRidge
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -68,7 +68,7 @@ public class DemonPackBlightRidge extends Monster
 			cleanupAfterCombat();
 		}
 		
-		public function DemonPackBlightRidge() 
+		public function DemonPackBlightRidge()
 		{
 			this.a = "the ";
 			this.short = "demons pack";
@@ -92,7 +92,7 @@ public class DemonPackBlightRidge extends Monster
 			this.tallness = rand(8) + 70;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(110, 120, 50, 90);

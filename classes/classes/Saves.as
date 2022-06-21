@@ -1,5 +1,6 @@
 ﻿package classes
 {
+import classes.BodyParts.BodyMaterial;
 import classes.BodyParts.Hair;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
@@ -8,6 +9,7 @@ import classes.BodyParts.Eyes;
 import classes.BodyParts.Gills;
 import classes.BodyParts.Horns;
 import classes.BodyParts.RearBody;
+import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kACHIEVEMENTS;
@@ -972,7 +974,6 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.thickness = player.thickness;
 		saveFile.data.tone = player.tone;
 		saveFile.data.tallness = player.tallness;
-		saveFile.data.hairColor = player.hairColor;
 		saveFile.data.hairType = player.hairType;
 		saveFile.data.hairStyle = player.hairStyle;
 		saveFile.data.gillType = player.gills.type;
@@ -988,6 +989,10 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.horns = player.horns.count;
 		saveFile.data.hornType = player.horns.type;
 		saveFile.data.rearBody = player.rearBody.type;
+		saveFile.data.bodyMaterials = [];
+		for (i = 0; i < player.bodyMaterials.length; i++) {
+			saveFile.data.bodyMaterials[i] = player.bodyMaterials[i].saveToObject();
+		}
 		player.facePart.saveToSaveData(saveFile.data);
 		//player.underBody.saveToSaveData(saveFile.data);
 		player.lowerBodyPart.saveToSaveData(saveFile.data);
@@ -2190,7 +2195,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.thickness = saveFile.data.thickness;
 
 		player.tallness = saveFile.data.tallness;
-		player.hairColor = saveFile.data.hairColor;
 		if (saveFile.data.hairType == undefined)
 			player.hairType = Hair.NORMAL;
 		else
@@ -2212,6 +2216,26 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.clawsPart.loadFromSaveData(data);
 		player.facePart.loadFromSaveData(data);
 		player.tail.loadFromSaveData(data);
+		if (data.bodyMaterials == undefined) {
+			player.hairColor = data.hairColor;
+			if (data.skin && data.skin.base && data.skin.coat) {
+				player.furColor        = player.hairColor;
+				player.skin.base.color = data.skin.base.color;
+				player.skin.coat.color = data.skin.coat.color;
+			} else {
+				player.skinColor = stringOr(data.skinTone, player.skinColor);
+				player.furColor  = stringOr(data.furColor, player.furColor);
+				player.chitinColor       = stringOr(data.chitinColor, player.chitinColor);
+				player.scaleColor        = stringOr(data.scalesColor, player.scaleColor);
+			}
+			
+		} else {
+			for (i = 0; i < player.bodyMaterials.length; i++) {
+				if (data.bodyMaterials[i]) {
+					player.bodyMaterials[i].loadFromObject(data.bodyMaterials[i], false);
+				}
+			}
+		}
 		if (saveFile.data.armType == undefined)
 			player.arms.type = Arms.HUMAN;
 		else
@@ -2386,15 +2410,11 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 
 		//This below is some weird witchcraft.... It doesn't update/swap anything, but somehow this fixes the id mismatch from mutations?
 		var mutationsShift:Array = [];
-		for each (var pperk1:PerkType in MutationsLib.mutationsArray("All",true)){
-			mutationsShift.push(pperk1.id);
-		}
 		for each (var pPerk2:IMutationPerkType in IMutationsLib.mutationsArray("All")){
 			mutationsShift.push(pPerk2.id);
 		}
 		mutationsShift.push(IMutationsLib.MutationsTemplateIM.id);
 		//Possibly ID updating.
-
 
 		//Populate Perk Array
 		for (i = 0; i < saveFile.data.perks.length; i++)
@@ -2418,15 +2438,17 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				id = "Lusty Regeneration";
 				hasLustyRegenPerk = true;
 			}
-
 			// Some shit checking to track if the incoming data has an available History perk
 			if (id.indexOf("History:") != -1) {
 				hasHistoryPerk = true;
 			}
 
+			//Mutations will be handled there instead.
+			if (MutationsLib.mutationsUpdate(id)) continue;
+
 			var ptype:PerkType = PerkType.lookupPerk(id);
 			if (ptype == null) {
-				CoC_Settings.error("Unknown perk id=" + id);
+				CoC_Settings.error("Unknown perk id: " + id);
 				//(saveFile.data.perks as Array).splice(i,1);
 				// NEVER EVER EVER MODIFY DATA IN THE SAVE FILE LIKE THIS. EVER. FOR ANY REASON.
 			} else {
@@ -2867,7 +2889,6 @@ public function unFuckSave():void
 		}
 	}
 	while (player.perkDuplicated(PerkLib.NinetailsKitsuneOfBalance)) player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
-	while (player.perkDuplicated(MutationsLib.KitsuneThyroidGland)) player.removePerk(MutationsLib.KitsuneThyroidGland);
 
 	if (player.hasStatusEffect(StatusEffects.KnockedBack))
 	{

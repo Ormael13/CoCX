@@ -1,4 +1,4 @@
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -58,7 +58,7 @@ public class ImpWarlord extends Imp
 			SceneLib.impScene.loseToAnImpLord();
 		}
 		
-		public function ImpWarlord() 
+		public function ImpWarlord()
 		{
 			super(true);
 			this.a = "the ";
@@ -81,7 +81,7 @@ public class ImpWarlord extends Imp
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.HOOFED;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			initStrTouSpeInte(80, 71, 75, 56);
 			initWisLibSensCor(56, 71, 35, 100);
 			this.weaponName = "sword";

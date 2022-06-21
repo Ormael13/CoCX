@@ -55,7 +55,7 @@ public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireAdrenalGlandsMutationSlot()
-                    .requirePerk(PerkLib.Lustzerker).requireAnyRace(Races.SALAMANDER, Races.PHOENIX);
+                    .requirePerk(PerkLib.Lustzerker).requireAnyRace(Races.SALAMANDER, Races.PHOENIX, Races.KITSHOO);
                 }
                 else{
                     var pLvl:int = pTier * 30;

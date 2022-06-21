@@ -78,8 +78,8 @@ public class FetishZealot extends Monster
 		if(armorName == RELIGIOUS_CLOTHES) {
 			//The zealot is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none that included the large slit at the front that lets his above average sized human dick stick out the front.
 			outputText("The zealot cries out \"<i>Child, are you ready to present your offering to the holy rod?</i>\" while indicating his cock sliding between his robes.  The whole scene leaves you distracted for a few moments and significantly aroused.");
-		}	
-		//A pirate costume; 
+		}
+		//A pirate costume;
 		if(armorName == PIRATE_CLOTHES) {
 			//You are faced with one of the strangest things you have ever seen in your life.  A stereotypical pirate, who has not replaced his hand with a hook, but rather a collection of sex toys.  You can see at least two dildos, a fleshlight, and numerous other toys that you're incapable of recognizing.
 			outputText("The zealot turns to the side holding his prosthetic towards you and doing something that sends the devices spinning and clicking.  <i>So that's how that would work...</i> you find yourself thinking for a few moments before realizing that he had both distracted and aroused you.");
@@ -88,9 +88,9 @@ public class FetishZealot extends Monster
 		if(armorName == MILITARY_CLOTHES) {
 			//In front of you is someone wearing a green military uniform.  They obviously aren't in any military you've ever heard of, as on his shoulder he has emblazoned <i>FF Army Sex Instructor</i>.  It seems you are his latest Recruit...
 			outputText("He suddenly barks, \"<i>Let's see those genitals, soldier!</i>\" ");
-			//[player is corrupt] 
+			//[player is corrupt]
 			if(player.cor > 50) outputText("You eagerly cry out \"<i>Yes, sir!</i>\" and show yourself off to the best of your ability.  The whole act is extremely arousing.");
-			//[player is not corrupt] 
+			//[player is not corrupt]
 			else outputText("You have no idea why, but you promptly display yourself in the most provocative way possible.  After a moment you realize what you're doing and quickly stop, flushed with embarrassment and arousal.");
 		}
 		//Gimp gear;
@@ -105,8 +105,8 @@ public class FetishZealot extends Monster
 		}
 		player.dynStats("lus", (7+rand(player.lib/20+player.cor/20)));
 	}
-	//Special2: Lust transfer spell, it becomes more and 
-	//more likely that he will use this power as his lust gets 
+	//Special2: Lust transfer spell, it becomes more and
+	//more likely that he will use this power as his lust gets
 	//higher, but he can use it at any time (like the cultist).
 	private function zealotSpecial2():void {
 		outputText("The zealot suddenly cries out and extends his arms towards you; your mind is suddenly overwhelmed with a massive wave of arousal as images of every kind of fetish you can imagine wash over you, all blended together.  After a moment you are able to recover, but you notice that the Zealot doesn't seem to be as aroused as before.");
@@ -158,7 +158,7 @@ public class FetishZealot extends Monster
 			this.tallness = 6*12;
 			this.hips.type = Hips.RATING_BOYISH + 1;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skinTone = "tan";
+			this.bodyColor = "tan";
 			this.hairColor = "black";
 			this.hairLength = 4;
 			initStrTouSpeInte(45, 55, 40, 1);

@@ -79,7 +79,7 @@ public class Brigid extends Monster
 			this.tallness = rand(8) + 82;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(140, 110, 140, 50);

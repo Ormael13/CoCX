@@ -1,4 +1,4 @@
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -204,7 +204,7 @@ public class Priscilla extends Goblin
 			this.tallness = 48;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "yellowish-green";
+			this.bodyColor = "yellowish-green";
 			this.hairColor = "dark green";
 			this.hairLength = 4;
 			this.weaponName = "primal sword";

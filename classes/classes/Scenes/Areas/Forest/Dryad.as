@@ -58,7 +58,7 @@ public class Dryad extends Monster {
         this.tallness = 60;
         this.hips.type = Hips.RATING_AMPLE + 2;
         this.butt.type = Butt.RATING_LARGE;
-        this.skinTone = "birch-white";
+        this.bodyColor = "birch-white";
         this.hairColor = "dark brown";
         this.hairLength = 4;
         initStrTouSpeInte(95, 75, 70, 100);

@@ -131,7 +131,7 @@ public class SandTrap extends Monster
 			this.tallness = rand(8) + 150;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "fair";
+			this.bodyColor = "fair";
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(55, 15, 45, 55);

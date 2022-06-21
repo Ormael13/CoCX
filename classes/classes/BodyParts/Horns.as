@@ -1,4 +1,5 @@
 package classes.BodyParts {
+import classes.Creature;
 import classes.internals.EnumValue;
 import classes.internals.Utils;
 import classes.Measurements;
@@ -162,7 +163,7 @@ public class Horns extends BodyPart {
 		appearanceDescFunc: function(player: *): String {
 			var desc: String = "";
 
-			if (player.horns.count > 0) desc += " A huge pair of "+player.nakedCoatColor+" orchids grows on each side of your head, their big long petals flopping gaily when you move.";
+			if (player.horns.count > 0) desc += " A huge pair of [flowercolor] orchids grows on each side of your head, their big long petals flopping gaily when you move.";
 
 			return desc;
 		}
@@ -310,8 +311,8 @@ public class Horns extends BodyPart {
 		}
 	});
 
-	public function Horns() {
-		super(null, null);
+	public function Horns(creature:Creature) {
+		super(creature, null);
 	}
 	public var count:int = 0;
 

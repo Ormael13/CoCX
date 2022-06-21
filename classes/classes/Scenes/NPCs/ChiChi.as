@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -140,7 +140,7 @@ use namespace CoC;
 			return str;
 		}
 		
-		public function ChiChi() 
+		public function ChiChi()
 		{
 			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 3 && flags[kFLAGS.CHI_CHI_LVL_UP] < 2) {
 				initStrTouSpeInte(90, 90, 80, 110);
@@ -223,7 +223,7 @@ use namespace CoC;
 			this.tallness = 72;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_NOTICEABLE + 1;
-			this.skinTone = "light";
+			this.skinColor = "light";
 			this.hairColor = "pinkish red";
 			this.hairLength = 13;
 			this.weaponName = "master gloves";

@@ -57,7 +57,7 @@ public class SharkGirl extends Monster
 			this.tallness = 5*12+5;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "gray";
+			this.bodyColor = "gray";
 			this.hairColor = "silver";
 			this.hairLength = 16;
 			initStrTouSpeInte(90, 90, 60, 42);

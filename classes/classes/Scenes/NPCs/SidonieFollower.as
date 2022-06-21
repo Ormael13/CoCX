@@ -2,7 +2,7 @@
  * ...
  * @author Coalsack
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
@@ -14,9 +14,9 @@ package classes.Scenes.NPCs
 	public class SidonieFollower extends NPCAwareContent
 	{
 		
-		public function SidonieFollower() 
+		public function SidonieFollower()
 		{
-			
+		
 		}
 		
 		private function buildedAnythingInCamp():Boolean {
@@ -337,7 +337,7 @@ package classes.Scenes.NPCs
 				outputText("Seeking again for another session in the loving horse-morph companionship, you enter her tent again, and spot her on the usual spot. She locks you in a tight embrace, and says.\n\n");
 				outputText("\"<i>Coming for a bit more of horsey loving?, sweetheart?</i>\"\n\n");
 				outputText("You nod eagerly, and jump to her side on the couch. Both of you stripe each other, some gropes exchanged as clothes are tossed away. You rest your head on Sidonie’s bosom, sniffing on her very pleasant smell, a bit reminiscent of nature and wilderness. Then, both of you lie on her couch, groping at each other lustily, the contact between her caramel fur and your ");
-				if (player.hasFur()) outputText("own ");
+				if (player.isFurCovered()) outputText("own ");
 				else outputText("" + player.skinFurScales() + " ");
 				outputText("fueling the desire between you two even more. Once you’ve foreplayed enough, you lie on Sidonie’s arms, her erection poking your thigh.\n\n");
 				outputText("\"<i>Okay, frisky " + player.mf("boy", "girl") + ".</i>\" she ask you, planting a soft kiss on your neck \"<i>What’s on your mind?</i>\"\n\n");
@@ -378,7 +378,7 @@ package classes.Scenes.NPCs
 				if (player.hasCock()) outputText("[cock]");
 				if (player.hasVagina()) outputText("[vagina]");
 				outputText(".\n\nBoth of you lie on her couch, groping at each other bodies lustily, the contact between her caramel fur and your ");
-				if (player.hasFur()) outputText("own ");
+				if (player.isFurCovered()) outputText("own ");
 				else outputText("" + player.skinFurScales() + " ");
 				outputText("fueling the desire between you two even more. Once you’ve foreplayed enough, you lie on Sidonie’s arms, her erection poking your thigh.\n\n");
 				outputText("\"<i>Okay, frisky " + player.mf("boy","girl") + ".</i>\" she ask you, planting a soft kiss on your neck \"<i>What’s on your mind?</i>\"\n\n");

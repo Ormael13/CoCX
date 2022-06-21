@@ -125,7 +125,7 @@ public class ImpLord extends Imp
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.HOOFED;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			initStrTouSpeInte(55, 40, 45, 42);
 			initWisLibSensCor(42, 55, 35, 100);
 			if (player.hasStatusEffect(StatusEffects.SiegweirdImp)) {

@@ -578,7 +578,10 @@ import classes.display.SpriteDb;
 			//addButton(1, "Sidonie",LilySidonie3Some);
 			//addButton(2, "Izma",LilyIzma3Some);
 			//addButton(3, "Kiha",LilyKiha3Some);
-			addButton(4, "Tyrantia", LilyTyrantia3some);
+			if (TyrantiaFollower.TyrantiaFollowerStage >= 4) addButton(4, "Tyrantia", LilyTyrantia3some);
+			else addButtonDisabled(4, "Tyrantia", "Need Tyrantia in camp for this one.");
+			if (LilyFollowerState) addButton(14, "Back", LilyFollowerSex);
+			else addButton(14, "Back", LilySex);
 		}/*
 		public function LilySidonie3Some():void {
 			clearOutput();

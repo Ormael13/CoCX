@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Areas.DefiledRavine 
+package classes.Scenes.Areas.DefiledRavine
 {
 	import classes.*;
 	import classes.internals.*;
@@ -19,7 +19,7 @@ package classes.Scenes.Areas.DefiledRavine
 	public class DemonCentauress extends Monster
 	{
 		
-		public function DemonCentauress() 
+		public function DemonCentauress()
 		{
 			this.a = "the ";
 			this.short = "demon centauress";
@@ -33,7 +33,7 @@ package classes.Scenes.Areas.DefiledRavine
 			this.ballSize = 3;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_JIGGLY;
-			this.skinTone = "purple";
+			this.bodyColor = "purple";
 			this.hairColor = "blond";
 			this.hairLength = 6;
 			initStrTouSpeInte(210, 210, 120, 120);

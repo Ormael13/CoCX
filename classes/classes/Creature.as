@@ -4,6 +4,8 @@ package classes
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Beard;
+import classes.BodyParts.BodyMaterial;
+import classes.BodyParts.BodyPart;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Claws;
 import classes.BodyParts.Ears;
@@ -1030,47 +1032,30 @@ public class Creature extends Utils
 		private var _tallness:Number = 0;
 		public function get tallness():Number { return _tallness; }
 		public function set tallness(value:Number):void { _tallness = value; }
-
-		/*Hairtype
-		0- normal
-		1- feather
-		2- ghost
-		3- goo!
-		4- anemononeoenoeneo!*/
-		public var hairType:Number = Hair.NORMAL;
-		public var hairStyle:Number = Hair.NORMAL;
-		private var _hairColor:String = "no";
-		public var hairLength:Number = 0;
+		
+		public var bodyMaterials:/*BodyMaterial*/Array = [];
+		public var hairType:Number                     = Hair.NORMAL;
+		public var hairStyle:Number                    = Hair.NORMAL;
+		public var hairLength:Number                   = 0;
 		public function get hairColor():String {
-			return _hairColor;
+			return bodyMaterials[BodyMaterial.HAIR].color;
 		}
-		public function set hairColorOnly(value:String):void {
-			_hairColor = value;
+		public function get hairColor1():String {
+			return bodyMaterials[BodyMaterial.HAIR].color1;
 		}
-
+		public function get hairColor2():String {
+			return bodyMaterials[BodyMaterial.HAIR].color2;
+		}
 		public function set hairColor(value:String):void {
-			_hairColor = value;
-			if (!skin.hasCoat()) skin.coat.color = value;
+			bodyMaterials[BodyMaterial.HAIR].color = value;
 		}
 
 		public function get coatColor():String {
-			//if (!skin.hasCoat()) return hairColor;
-			return skin.coat.color;
-		}
-		public function get coatColor2():String {
-			if (!skin.hasCoat()) return hairColor;
-			return skin.coat.color2;
-		}
-		public function get nakedCoatColor():String {
 			return skin.coat.color;
 		}
 		public function set coatColor(value:String):void {
 			if (!skin.hasCoat()) trace("[WARNING] set coatColor() called with no coat");
 			skin.coat.color = value;
-		}
-		public function set coatColor2(value:String):void {
-			if (!skin.hasCoat()) trace("[WARNING] set coatColor() called with no coat");
-			skin.coat.color2 = value;
 		}
 
 		public var beardStyle:Number = Beard.NORMAL;
@@ -1083,7 +1068,149 @@ public class Creature extends Utils
 			trace("[DEPRECATED] set skinType");
 			skin.type = value;
 		}
-		public function get skinTone():String { return skin.tone; }
+		public function get skinColor():String {
+			return bodyMaterials[BodyMaterial.SKIN].color;
+		}
+		public function set skinColor(value:String):void {
+			bodyMaterials[BodyMaterial.SKIN].color = value;
+		}
+		public function get skinColor1():String {
+			return bodyMaterials[BodyMaterial.SKIN].color1;
+		}
+		public function set skinColor1(value:String):void {
+			bodyMaterials[BodyMaterial.SKIN].color1 = value;
+		}
+		public function get skinColor2():String {
+			return bodyMaterials[BodyMaterial.SKIN].color2;
+		}
+		public function set skinColor2(value:String):void {
+			bodyMaterials[BodyMaterial.SKIN].color2 = value;
+		}
+		public function get furColor():String {
+			return bodyMaterials[BodyMaterial.FUR].color;
+		}
+		public function set furColor(value:String):void {
+			bodyMaterials[BodyMaterial.FUR].color = value;
+		}
+		public function get furColor1():String {
+			return bodyMaterials[BodyMaterial.FUR].color1;
+		}
+		public function set furColor1(value:String):void {
+			bodyMaterials[BodyMaterial.FUR].color1 = value;
+		}
+		public function get furColor2():String {
+			return bodyMaterials[BodyMaterial.FUR].color2;
+		}
+		public function set furColor2(value:String):void {
+			bodyMaterials[BodyMaterial.FUR].color2 = value;
+		}
+		public function get scaleColor():String {
+			return bodyMaterials[BodyMaterial.SCALES].color;
+		}
+		public function set scaleColor(value:String):void {
+			bodyMaterials[BodyMaterial.SCALES].color = value;
+		}
+		public function get scaleColor1():String {
+			return bodyMaterials[BodyMaterial.SCALES].color1;
+		}
+		public function set scaleColor1(value:String):void {
+			bodyMaterials[BodyMaterial.SCALES].color1 = value;
+		}
+		public function get scaleColor2():String {
+			return bodyMaterials[BodyMaterial.SCALES].color2;
+		}
+		public function set scaleColor2(value:String):void {
+			bodyMaterials[BodyMaterial.SCALES].color2 = value;
+		}
+		public function get chitinColor():String {
+			return bodyMaterials[BodyMaterial.CHITIN].color;
+		}
+		public function set chitinColor(value:String):void {
+			bodyMaterials[BodyMaterial.CHITIN].color = value;
+		}
+		public function get chitinColor1():String {
+			return bodyMaterials[BodyMaterial.CHITIN].color1;
+		}
+		public function set chitinColor1(value:String):void {
+			bodyMaterials[BodyMaterial.CHITIN].color1 = value;
+		}
+		public function get chitinColor2():String {
+			return bodyMaterials[BodyMaterial.CHITIN].color2;
+		}
+		public function set chitinColor2(value:String):void {
+			bodyMaterials[BodyMaterial.CHITIN].color2 = value;
+		}
+		public function get featherColor():String {
+			return bodyMaterials[BodyMaterial.FEATHERS].color;
+		}
+		public function set featherColor(value:String):void {
+			bodyMaterials[BodyMaterial.FEATHERS].color = value;
+		}
+		public function get featherColor1():String {
+			return bodyMaterials[BodyMaterial.FEATHERS].color1;
+		}
+		public function set featherColor1(value:String):void {
+			bodyMaterials[BodyMaterial.FEATHERS].color1 = value;
+		}
+		public function get featherColor2():String {
+			return bodyMaterials[BodyMaterial.FEATHERS].color2;
+		}
+		public function set featherColor2(value:String):void {
+			bodyMaterials[BodyMaterial.FEATHERS].color2 = value;
+		}
+		public function get bodyColor():String {
+			return skin.color;
+		}
+		public function set bodyColor(value:String):void {
+			skin.color = value;
+		}
+		public function bodyMaterialColor(type:int):String {
+			return bodyMaterials[type].color;
+		}
+		public function bodyMaterialColor1(type:int):String {
+			return bodyMaterials[type].color1;
+		}
+		public function bodyMaterialColor2(type:int):String {
+			return bodyMaterials[type].color2;
+		}
+		public function setBodyMaterialColor(type:int, value:String):void {
+			bodyMaterials[type].color = value;
+		}
+		public function setBodyMaterialColor1(type:int, value:String):void {
+			bodyMaterials[type].color1 = value;
+		}
+		public function setBodyMaterialColor2(type:int, value:String):void {
+			bodyMaterials[type].color2 = value;
+		}
+		public function hasBodyMaterial(type:int):Boolean {
+			if (type == BodyMaterial.SKIN) return true; // right?
+			if (type == BodyMaterial.HAIR) {
+				if (hairLength > 0 || beardLength > 0) return true;
+			}
+			for each (var bp:BodyPart in bodyParts) {
+				if (bp.hasMaterial(type)) return true;
+			}
+			return false;
+		}
+		public function hasSkinMaterial():Boolean {
+			return hasBodyMaterial(BodyMaterial.SKIN);
+		}
+		public function hasHairMaterial():Boolean {
+			return hasBodyMaterial(BodyMaterial.HAIR);
+		}
+		public function hasFurMaterial():Boolean {
+			return hasBodyMaterial(BodyMaterial.FUR);
+		}
+		public function hasScaleMaterial():Boolean {
+			return hasBodyMaterial(BodyMaterial.SCALES);
+		}
+		public function hasChitinMaterial():Boolean {
+			return hasBodyMaterial(BodyMaterial.CHITIN);
+		}
+		public function hasFeatherMaterial():Boolean {
+			return hasBodyMaterial(BodyMaterial.FEATHERS);
+		}
+		public var bodyParts:/*BodyPart*/Array = [];
 		public function hasCoat():Boolean { return skin.hasCoat(); }
 		public function hasFullCoat():Boolean { return skin.hasFullCoat(); }
 		/**
@@ -1092,12 +1219,6 @@ public class Creature extends Utils
 		public function coatType():int { return skin.coatType(); }
 		public function hasCoatOfType(...types:Array):Boolean { return skin.hasCoatOfType.apply(skin,types); }
 		public function hasFullCoatOfType(...types:Array):Boolean { return skin.hasFullCoatOfType.apply(skin,types); }
-	//	[Deprecated]
-		public function set skinTone(value:String):void {
-			trace("[DEPRECATED] set skinTone");
-			if (skin.coverage >= Skin.COVERAGE_HIGH) skin.coat.color = value;
-			else skin.base.color = value;
-		}
 		public function get skinDesc():String { return skin.desc; }
 	//	[Deprecated]
 		public function set skinDesc(value:String):void {
@@ -1125,9 +1246,9 @@ public class Creature extends Utils
 		public function set clawType(value:int):void { this.clawsPart.type = value; }
 		// </mod>
 		public var underBody:UnderBody;
-		public var ears:Ears = new Ears();
-		public var horns:Horns = new Horns();
-		public var wings:Wings = new Wings();
+		public var ears:Ears;
+		public var horns:Horns;
+		public var wings:Wings;
 
 		/* lowerBody: see LOWER_BODY_TYPE_ */
 		public var lowerBodyPart:LowerBody;
@@ -1147,8 +1268,8 @@ public class Creature extends Utils
 		public function set tailRecharge(value:Number):void { tail.recharge = value; }
 
 
-		public var hips:Hips = new Hips();
-		public var butt:Butt = new Butt();
+		public var hips:Hips;
+		public var butt:Butt;
 
 		//Piercings
 		public var nipplesPierced:Number = 0;
@@ -1171,15 +1292,15 @@ public class Creature extends Utils
 		public var nosePLong:String = "";
 
 		//Head ornaments. Definitely need to convert away from hard coded types.
-		public var antennae:Antennae = new Antennae();
-		public var eyes:Eyes = new Eyes();
-		public var tongue:Tongue = new Tongue();
-		public var arms:Arms = new Arms();
+		public var antennae:Antennae;
+		public var eyes:Eyes;
+		public var tongue:Tongue;
+		public var arms:Arms;
 
-		public var gills:Gills = new Gills();
+		public var gills:Gills;
 		public function hasGills():Boolean { return gills.type != Gills.NONE; }
 
-		public var rearBody:RearBody = new RearBody();
+		public var rearBody:RearBody;
 
 		//Sexual Stuff
 		//MALE STUFF
@@ -1300,13 +1421,27 @@ public class Creature extends Utils
 				defStat,
 				mdefStat
 			]);
-
-			skin = new Skin(this);
-			underBody = new UnderBody(this);
-			lowerBodyPart = new LowerBody(this);
+			
+			for (var i:int = 0; i<BodyMaterial.Types.length; i++) {
+				bodyMaterials[i] = new BodyMaterial(this, i);
+			}
+			antennae = new Antennae(this);
+			arms = new Arms(this);
+			butt = new Butt(this);
 			clawsPart = new Claws(this);
+			ears = new Ears(this);
+			eyes = new Eyes(this);
 			facePart = new Face(this);
+			gills = new Gills(this);
+			horns = new Horns(this);
+			hips = new Hips(this);
+			lowerBodyPart = new LowerBody(this);
+			rearBody = new RearBody(this);
+			skin = new Skin(this);
 			tail = new Tail(this);
+			tongue = new Tongue(this);
+			underBody = new UnderBody(this);
+			wings = new Wings(this);
 			//cocks = new Array();
 			//The world isn't ready for typed Arrays just yet.
 			cocks         = [];
@@ -1901,7 +2036,7 @@ public class Creature extends Utils
             if (compareBy != "area" && compareBy != "length" && compareBy != "thickness") //sanity check
                 throw new Error("Wrong compareBy value!");
             var cnt:int = 0;
-            var tent:Boolean = (type == CockTypesEnum.STAMEN || type == CockTypesEnum.TENTACLE);
+            var tent:Boolean = (type == CockTypesEnum.STAMEN || type == CockTypesEnum.TENTACLE || type == CockTypesEnum.INSECT);
             for (var i:int = 0; i < cocks.length; ++i) {
                 var isize:Number = compareBy == "length" ? cocks[i].cockLength :
                                 compareBy == "thickness" ? cocks[i].cockThickness :
@@ -2456,11 +2591,11 @@ public class Creature extends Utils
 			return countCocksOfType(CockTypesEnum.CAVE_WYRM);
 		}
 
-		public function raijuCocks():int { //How many cave wyrm-cocks?
+		public function raijuCocks():int { //How many raiju-cocks?
 			return countCocksOfType(CockTypesEnum.RAIJU);
 		}
 
-		public function pigCocks():int { //How many lizard/snake-cocks?
+		public function pigCocks():int { //How many pig-cocks?
 			return countCocksOfType(CockTypesEnum.PIG);
 		}
 
@@ -2486,6 +2621,10 @@ public class Creature extends Utils
 
 		public function beeCocks():int { //How many beecocks?
 			return countCocksOfType(CockTypesEnum.BEE);
+		}
+
+		public function insectCocks():int { //How many insectcocks?
+			return countCocksOfType(CockTypesEnum.INSECT);
 		}
 
 
@@ -3094,22 +3233,22 @@ public class Creature extends Utils
 			return (bonusFertility() + fertility);
 		}
 
-		public function hasScales():Boolean { return skin.hasScales(); }
-		public function hasReptileScales():Boolean { return skin.hasReptileScales(); }
-		public function hasDragonScales():Boolean { return skin.hasDragonScales(); }
-		public function hasLizardScales():Boolean { return skin.hasLizardScales(); }
-		public function hasNonLizardScales():Boolean { return skin.hasNonLizardScales(); }
-		public function hasFur():Boolean { return skin.hasFur(); }
-		public function hasChitin():Boolean { return skin.hasChitin(); }
-		public function hasFeather():Boolean { return skin.hasFeather(); }
+		public function isScaleCovered():Boolean { return skin.isScaleCovered(); }
+		public function isReptileScaleCovered():Boolean { return skin.isReptileScaleCovered(); }
+		public function isDagonScaleCovered():Boolean { return skin.isDragonScaleCovered(); }
+		public function isLizardScaleCovered():Boolean { return skin.isLizardScaleCovered(); }
+		public function isNonLizardScaleCovered():Boolean { return skin.isNonLizardScaleCovered(); }
+		public function isFurCovered():Boolean { return skin.isFurCovered(); }
+		public function isChitinCovered():Boolean { return skin.isChitinCovered(); }
+		public function isFeatherCovered():Boolean { return skin.isFeatherCovered(); }
 		public function hasMostlyPlainSkin():Boolean { return skin.hasMostlyPlainSkin(); }
 		public function hasPlainSkinOnly():Boolean { return skin.hasPlainSkinOnly(); }
 		public function hasPartialCoat(coat_type:int):Boolean { return skin.hasPartialCoatOfType(coat_type); }
-		public function hasPartialCoatNoTypeDeclaration():Boolean { return skin.hasPartialCoat(); }
+		public function hasAnyPartialCoat():Boolean { return skin.hasPartialCoat(); }
 		public function hasRubberSkin():Boolean { return skin.hasRubberSkin(); }
 		public function hasPlainSkin():Boolean { return skin.hasPlainSkin(); }
-		public function hasGooSkin():Boolean { return skin.hasGooSkin(); }
-		public function hasGhostSkin():Boolean { return skin.hasGhostSkin(); }
+		public function isGooSkin():Boolean { return skin.isGooSkin(); }
+		public function isGhostSkin():Boolean { return skin.isGhostSkin(); }
 		public function isGargoyle():Boolean { return skin.hasBaseOnly(Skin.STONE); }
 		public function skinDescript():String { return skin.describe('base'); }
 		public function skinFurScales():String { return skin.describe('coat'); }
@@ -3156,26 +3295,33 @@ public class Creature extends Utils
 			return eggs() >= 10 && hasPerk(PerkLib.MantisOvipositor) && tail.type == Tail.MANTIS_ABDOMEN;
 		}
 
+		public function canOvipositAnt():Boolean
+		{
+			return eggs() >= 10 && hasPerk(PerkLib.AntOvipositor) && tail.type == Tail.ANT_ABDOMEN;
+		}
+
 		public function canOviposit():Boolean
 		{
-			return canOvipositSpider() || canOvipositBee() || canOvipositMantis();
+			return canOvipositSpider() || canOvipositBee() || canOvipositMantis() || canOvipositAnt();
 		}
 
 		public function eggs():int
 		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
 				return -1;
 			else if (hasPerk(PerkLib.SpiderOvipositor))
 				return perkv1(PerkLib.SpiderOvipositor);
 			else if (hasPerk(PerkLib.BeeOvipositor))
 				return perkv1(PerkLib.BeeOvipositor);
-			else
+			else if (hasPerk(PerkLib.MantisOvipositor))
 				return perkv1(PerkLib.MantisOvipositor);
-		}
+			else
+				return perkv1(PerkLib.AntOvipositor);
+			}
 
 		public function addEggs(arg:int = 0):int
 		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
 				return -1;
 			else {
 				if (hasPerk(PerkLib.SpiderOvipositor)) {
@@ -3190,18 +3336,24 @@ public class Creature extends Utils
 						setPerkValue(PerkLib.BeeOvipositor, 1, 50);
 					return perkv1(PerkLib.BeeOvipositor);
 				}
-				else {
+				else if (hasPerk(PerkLib.MantisOvipositor)) {
 					addPerkValue(PerkLib.MantisOvipositor, 1, arg);
 					if (eggs() > 50)
 						setPerkValue(PerkLib.MantisOvipositor, 1, 50);
 					return perkv1(PerkLib.MantisOvipositor);
+				}
+				else {
+					addPerkValue(PerkLib.AntOvipositor, 1, arg);
+					if (eggs() > 50)
+						setPerkValue(PerkLib.AntOvipositor, 1, 50);
+					return perkv1(PerkLib.AntOvipositor);
 				}
 			}
 		}
 
 		public function dumpEggs():void
 		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
 				return;
 			setEggs(0);
 			//Sets fertile eggs = regular eggs (which are 0)
@@ -3210,7 +3362,7 @@ public class Creature extends Utils
 
 		public function setEggs(arg:int = 0):int
 		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
 				return -1;
 			else {
 				if (hasPerk(PerkLib.SpiderOvipositor)) {
@@ -3225,37 +3377,47 @@ public class Creature extends Utils
 						setPerkValue(PerkLib.BeeOvipositor, 1, 50);
 					return perkv1(PerkLib.BeeOvipositor);
 				}
-				else {
+				else if (hasPerk(PerkLib.MantisOvipositor)) {
 					setPerkValue(PerkLib.MantisOvipositor, 1, arg);
 					if (eggs() > 50)
 						setPerkValue(PerkLib.MantisOvipositor, 1, 50);
 					return perkv1(PerkLib.MantisOvipositor);
+				}
+				else {
+					setPerkValue(PerkLib.AntOvipositor, 1, arg);
+					if (eggs() > 50)
+						setPerkValue(PerkLib.AntOvipositor, 1, 50);
+					return perkv1(PerkLib.AntOvipositor);
 				}
 			}
 		}
 
 		public function fertilizedEggs():int
 		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
 				return -1;
 			else if (hasPerk(PerkLib.SpiderOvipositor))
 				return perkv2(PerkLib.SpiderOvipositor);
 			else if (hasPerk(PerkLib.BeeOvipositor))
 				return perkv2(PerkLib.BeeOvipositor);
-			else
+			else if (hasPerk(PerkLib.MantisOvipositor))
 				return perkv2(PerkLib.MantisOvipositor);
+			else
+				return perkv2(PerkLib.AntOvipositor)
 		}
 
 		public function fertilizeEggs():int
 		{
-			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor))
+			if (!hasPerk(PerkLib.SpiderOvipositor) && !hasPerk(PerkLib.BeeOvipositor) && !hasPerk(PerkLib.MantisOvipositor) && !hasPerk(PerkLib.AntOvipositor))
 				return -1;
 			else if (hasPerk(PerkLib.SpiderOvipositor))
 				setPerkValue(PerkLib.SpiderOvipositor, 2, eggs());
 			else if (hasPerk(PerkLib.BeeOvipositor))
 				setPerkValue(PerkLib.BeeOvipositor, 2, eggs());
-			else
+			else if (hasPerk(PerkLib.MantisOvipositor))
 				setPerkValue(PerkLib.MantisOvipositor, 2, eggs());
+			else
+				setPerkValue(PerkLib.AntOvipositor, 2, eggs())
 			return fertilizedEggs();
 		}
 
@@ -3500,6 +3662,7 @@ public class Creature extends Utils
 				case CockTypesEnum.PIG:
 				case CockTypesEnum.MINDBREAKER:
 				case CockTypesEnum.TENTACLE:
+				case CockTypesEnum.INSECT:
 					if (countCocksOfType(cocks[0].cockType) == cocks.length) return Appearance.cockNoun(cocks[0].cockType) + "s";
 					break;
 			}
@@ -3519,6 +3682,7 @@ public class Creature extends Utils
 					case CockTypesEnum.KANGAROO:
 					case CockTypesEnum.AVIAN:
 					case CockTypesEnum.ECHIDNA:
+					case CockTypesEnum.INSECT:
 						return true; //If there's even one cock of any of these types then return true
 					default:
 				}
@@ -3595,6 +3759,7 @@ public class Creature extends Utils
 					if (rand(2) == 0) return "crown";
 					return "head";
 				case CockTypesEnum.TENTACLE:
+				case CockTypesEnum.INSECT:
 					if (rand(2) == 0) return "mushroom-like tip";
 					return "wide plant-like crown";
 				case CockTypesEnum.PIG:

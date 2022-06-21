@@ -870,7 +870,7 @@ public class PerkMenu extends BaseContent {
 	//MutationsDB!
 	public function mutationsDatabase(page:int = 0, review:Boolean = false):void{
 		/*
-		Source: MutationsLib.as for all mutations.
+		Source: IMutationsLib.as for all mutations.
  		*/
 		if (review) {	//Initial screen for user to know how many points they have per part
 			clearOutput();
@@ -896,8 +896,7 @@ public class PerkMenu extends BaseContent {
 			outputText("Mutations Assistant is toggleable in settings, and hides/shows you available mutations. It is off by default.\n\n");
 
 			outputText("<b><i><u>Mutations used per bodypart:</u></i></b>\n");
-			var bPartlist:Array = keys(IMutationPerkType.Slots);
-			for each (var bodyPart:String in bPartlist){
+			for each (var bodyPart:String in IMutationPerkType.SlotList){
 				var mCount:int = 0
 				var mPerkarray:Array = IMutationsLib.mutationsArray(bodyPart);
 				for each (var mutations:IMutationPerkType in mPerkarray){
@@ -905,7 +904,7 @@ public class PerkMenu extends BaseContent {
 						mCount++;
 					}
 				}
-				if (bodyPart == "Adaptations") mutationCount++;
+				mutationCount = player.maxTotalMutationsInSlot(bodyPart);
 				outputText(IMutationPerkType.Slots[bodyPart].name + " mutations obtained: ");
 				if (mCount > mutationCount){
 					outputText("<font color=\"#800000\">");
@@ -928,12 +927,12 @@ public class PerkMenu extends BaseContent {
 			}
 		}
 
-		function mutationsDBSlot(slot:String):void{
+		function mutationsDBSlot(slot:String, pageAdd:int = 0):void{
 			clearOutput();
 			//Heart Mutations
 			displayHeader(IMutationPerkType.Slots[slot].name+" Mutations:");
 			mutationsDatabaseVerify(IMutationsLib.mutationsArray(slot));
-			mutationsDatabase(mutDbPage);
+			mutationsDatabase(pageAdd);
 		}
 
 		function mutationsDBDragon():void{
@@ -943,7 +942,7 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++");
 			mutationsDatabaseVerify([IMutationsLib.DraconicBonesIM, IMutationsLib.DraconicHeartIM, IMutationsLib.DraconicLungIM]);
-			mutationsDatabase(mutDbPage);
+			mutationsDatabase(1);
 		}
 
 		function mutationsDBKitsune():void{
@@ -952,7 +951,7 @@ public class PerkMenu extends BaseContent {
 			displayHeader("Kitsune Mutations");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
 			mutationsDatabaseVerify([IMutationsLib.KitsuneThyroidGlandIM, IMutationsLib.KitsuneParathyroidGlandsIM]);
-			mutationsDatabase(mutDbPage);
+			mutationsDatabase(1);
 		}
 
 		menu();
@@ -970,16 +969,16 @@ public class PerkMenu extends BaseContent {
 		menuItems.push("Testicles",  curry(mutationsDBSlot, IMutationPerkType.SLOT_TESTICLES), "Testicle Mutations");
 		menuItems.push("Eyes",  curry(mutationsDBSlot, IMutationPerkType.SLOT_EYES), "Eyes Mutations");
 		menuItems.push("Bone/Marrow",  curry(mutationsDBSlot, IMutationPerkType.SLOT_BONE), "Bone Mutations");
-		menuItems.push("Nerv/Sys", curry(mutationsDBSlot, IMutationPerkType.SLOT_NERVSYS), "Nerv-Sys Mutations");
-		menuItems.push("Thyroid Gland", curry(mutationsDBSlot, IMutationPerkType.SLOT_THYROID), "Thyroid Mutations");
-		menuItems.push("Parathyroid Gland", curry(mutationsDBSlot, IMutationPerkType.SLOT_PARATHYROID), "Parathyroid Mutations");
-		menuItems.push("Adaptations", curry(mutationsDBSlot, IMutationPerkType.SLOT_ADAPTATIONS), "Adaptation Mutations");
+		menuItems.push("Nerv/Sys", curry(mutationsDBSlot, IMutationPerkType.SLOT_NERVSYS, 1), "Nerv-Sys Mutations");
+		menuItems.push("Thyroid Gland", curry(mutationsDBSlot, IMutationPerkType.SLOT_THYROID, 1), "Thyroid Mutations");
+		menuItems.push("Parathyroid Gland", curry(mutationsDBSlot, IMutationPerkType.SLOT_PARATHYROID, 1), "Parathyroid Mutations");
+		menuItems.push("Adaptations", curry(mutationsDBSlot, IMutationPerkType.SLOT_ADAPTATIONS, 1), "Adaptation Mutations");
 		menuItems.push("Dragons", mutationsDBDragon, "Dragon Mutations");
 		menuItems.push("Kitsunes", mutationsDBKitsune, "Kitsune Mutations");
-		mutDbPage = page;
+		//mutDbPage = page;
 		menuGen(menuItems, page, displayPerks);
 	}
-	private var mutDbPage:int = 0;
+	//private var mutDbPage:int = 0;
 
 	//Mutations check helper. Cloned + stripped requirements logic from PerkMenuDB.
 	public function mutationsDatabaseVerify(mutationsArray:Array):void {
@@ -1072,12 +1071,11 @@ public class PerkMenu extends BaseContent {
 
 	public function perkDatabase(page:int=0, count:int=50):void {
 		var allPerks:Array = PerkTree.obtainablePerks().sort();
-		var mutationList:Array = MutationsLib.mutationsArray("All",true);
 		var mutationList2:Array = IMutationsLib.mutationsArray("All");
 
 		var temp:Array = [];
 		for each(var pPerks:PerkType in allPerks) {
-			if (!(mutationList.indexOf(pPerks) >= 0) && !(mutationList2.indexOf(pPerks) >= 0)){
+			if (!(mutationList2.indexOf(pPerks) >= 0)){
 				//allPerks.splice(allPerks.indexOf(pPerks), 1);
 				temp.push(pPerks)
 			}
@@ -1136,13 +1134,12 @@ public class PerkMenu extends BaseContent {
 		//var pCount:int = 0;
 
 		function pDictPrep():void{	//Perk Dictionary preperations/Filter
-			var pList1:Array = MutationsLib.mutationsArray("All",true); //No Mutations Perks
 			var pList2:Array = PerkLib.enemyPerkList(); //No Enemy Perks.
 			var pList3:Array = PerkLib.gearPerks();	//No Gear Perks.
 			var pList4:Array = PerkLib.weaPerks();	//No Weapons Perks.
 			//function pSpecialRem = No Ascension/History/Bloodline/PastLife Perks
 			var pList5:Array = IMutationsLib.mutationsArray("All");
-			var mArray:Array = arrMerge(pList1, pList2, pList3, pList4, pList5);
+			var mArray:Array = arrMerge(pList2, pList3, pList4, pList5);
 			for each (var perkTrue:PerkType in perkDict){
 				if (!(mArray.indexOf(perkTrue) >= 0) && pSpecialRem(perkTrue)){
 					tPerkList.push(perkTrue);
@@ -1425,13 +1422,10 @@ public class PerkMenu extends BaseContent {
 		var maxpPerks:int = 0;					//DebugLine
 
 		function initSet():void {
-			var mutationList:Array = MutationsLib.mutationsArray("All",true);
 			var mutationList2:Array = IMutationsLib.mutationsArray("All");
-			var mArray:Array = arrMerge(mutationList, mutationList2);
-
 
 			for each(var pPerks:PerkClass in pPerkList) { //Cleans up the list of mutations and no-perk requiring perks
-				if (!(mArray.indexOf(pPerks.ptype) >= 0)){
+				if (!(mutationList2.indexOf(pPerks.ptype) >= 0)){
 					//maxpPerks++
 					var pPerkReq:PerkType = pPerks.ptype
 					var perkno:Boolean = true;

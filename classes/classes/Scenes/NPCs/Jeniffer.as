@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.BodyParts.Butt;
@@ -82,7 +82,7 @@ package classes.Scenes.NPCs
 			}
 		}
 		
-		public function Jeniffer() 
+		public function Jeniffer()
 		{
 			this.a = "the ";
 			if (flags[kFLAGS.JENIFFER_LVL_UP] < 1) {
@@ -177,7 +177,7 @@ package classes.Scenes.NPCs
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_BUTTLESS;
-			this.skinTone = "dark green";
+			this.bodyColor = "dark green";
 			this.hairColor = "purple";
 			this.hairLength = 4;
 			this.drop = NO_DROP;

@@ -60,7 +60,7 @@ public class TrachealSystemMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireAdaptationsMutationSlot()
-                    .requireAnyRace(Races.MANTIS, Races.SCORPION, Races.SPIDER, Races.CANCER, Races.ATLACH_NACHA);
+                    .requireAnyRace(Races.MANTIS, Races.SCORPION, Races.SPIDER, Races.CANCER, Races.ATLACH_NACHA, Races.ANT);
                 }
                 else{
                     var pLvl:int = pTier * 30;

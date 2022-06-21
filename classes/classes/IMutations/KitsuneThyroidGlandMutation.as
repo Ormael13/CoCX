@@ -18,7 +18,7 @@ import classes.BodyParts.Tail;
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "Illusion & Terror -3CD";
+                descS += "50% reduced mana costs of FoxFire";
             }
             if (pTier >= 2){
                 descS += ", FoxFire +50% damage (fire and lust)";
@@ -54,10 +54,10 @@ import classes.BodyParts.Tail;
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireThyroidGlandMutationSlot()
-                    .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune)
+                    .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune, PerkLib.StarSphereMastery)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.tailType == Tail.FOX && player.tailCount >= 2;
-                    }, "2+ fox tails");
+                        return (player.tailType == Tail.FOX || player.tailType == Tail.KITSHOO) && player.tailCount >= 2;
+                    }, "2+ fox/kishoo tails");
                 }
                 else{
                     var pLvl:int = pTier * 30;

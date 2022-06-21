@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Areas.VolcanicCrag 
+package classes.Scenes.Areas.VolcanicCrag
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -78,7 +78,7 @@ import classes.internals.WeightedDrop;
 			}
 		}
 		
-		public function PhoenixPlatoon() 
+		public function PhoenixPlatoon()
 		{
 			this.a = "the ";
 			this.short = "phoenix platoon";
@@ -100,7 +100,7 @@ import classes.internals.WeightedDrop;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.SALAMANDER;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(283, 234, 255, 140);

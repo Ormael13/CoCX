@@ -4759,7 +4759,7 @@ public class Combat extends BaseContent {
             manaregeneration1();
             soulforceregeneration1();
 			venomCombatRecharge1();
-        } 
+        }
         enemyAI();
     }
 
@@ -10639,7 +10639,10 @@ public class Combat extends BaseContent {
 
     public function soulforceRecoveryMultiplier():Number {
         var multi:Number = 1;
-        if (player.hasPerk(PerkLib.DaoistCultivator)) multi += 0.5;
+        if (player.hasPerk(PerkLib.DaoistApprenticeStage)) multi += 0.5;
+        if (player.hasPerk(PerkLib.DaoistWarriorStage)) multi += 0.5;
+        if (player.hasPerk(PerkLib.DaoistElderStage)) multi += 1;
+        if (player.hasPerk(PerkLib.DaoistOverlordStage)) multi += 1;
         if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
         if (player.isRaceCached(Races.ALICORN, 2)) multi += 0.1;
         if (player.isRaceCached(Races.KITSUNE)) multi += 1;
@@ -14077,29 +14080,29 @@ public class Combat extends BaseContent {
                     //FOR PLAYERS WITH GIANT BREASTS
                     if (player.biggestTitSize() >= 35 && player.biggestTitSize() < 66) {
                         if (player.hips.type >= 20) {
-                            outputText("Your [hips] forces your gait to lurch slightly side to side, which causes the fat of your [skintone] ");
+                            outputText("Your [hips] forces your gait to lurch slightly side to side, which causes the fat of your [color] ");
                             if (player.butt.type >= 20) outputText("[butt] and ");
                             outputText(chestDesc() + " to wobble immensely, throwing you off balance and preventing you from moving quick enough to escape.");
-                        } else if (player.butt.type >= 20) outputText("Your [skintone] [butt] and [chest] wobble and bounce heavily, throwing you off balance and preventing you from escaping.");
-                        else outputText("Your [chest] jiggle and wobble side to side like the [skintone] sacks of milky fat they are, with enough force to constantly throw you off balance, preventing you from escaping.");
+                        } else if (player.butt.type >= 20) outputText("Your [color] [butt] and [chest] wobble and bounce heavily, throwing you off balance and preventing you from escaping.");
+                        else outputText("Your [chest] jiggle and wobble side to side like the [color] sacks of milky fat they are, with enough force to constantly throw you off balance, preventing you from escaping.");
                     }
                     //FOR PLAYERS WITH MASSIVE BREASTS
                     else if (player.biggestTitSize() >= 66) {
                         if (player.hips.type >= 20) {
                             outputText("Your [chest] nearly drag along the ground while your [hips] swing side to side ");
-                            if (player.butt.type >= 20) outputText("causing the fat of your [skintone] [butt] to wobble, ");
+                            if (player.butt.type >= 20) outputText("causing the fat of your [color] [butt] to wobble, ");
                             outputText("forcing you off balance and preventing you from escaping.");
-                        } else if (player.butt.type >= 20) outputText("Your [chest] nearly drag along the ground while the fat of your [skintone] [butt] wobbles heavily from side to side, forcing your body off balance and preventing you from moving quick enough to escape.");
+                        } else if (player.butt.type >= 20) outputText("Your [chest] nearly drag along the ground while the fat of your [color] [butt] wobbles heavily from side to side, forcing your body off balance and preventing you from moving quick enough to escape.");
                         else outputText("Your [chest] nearly drag along the ground, preventing you from moving quick enough to get escape.");
                     }
                     //FOR PLAYERS WITH EITHER GIANT HIPS OR BUTT BUT NOT THE BREASTS
                     else if (player.hips.type >= 20) {
                         outputText("Your [hips] swing heavily from side to side ");
-                        if (player.butt.type >= 20) outputText("causing your [skintone] [butt] to wobble obscenely ");
+                        if (player.butt.type >= 20) outputText("causing your [color] [butt] to wobble obscenely ");
                         outputText(", forcing your body into an awkward gait that prevents you from escaping.");
                     }
                     //JUST DA BOOTAH
-                    else if (player.butt.type >= 20) outputText("Your " + player.skinTone + buttDescript() + " wobbles so heavily that you're unable to move quick enough to escape.");
+                    else if (player.butt.type >= 20) outputText("Your " + player.bodyColor + buttDescript() + " wobbles so heavily that you're unable to move quick enough to escape.");
                 }
                 //NORMAL RUN FAIL MESSAGES
                 else if (monster.plural) outputText("[Themonster] stay hot on your heels, denying you a chance at escape!");
@@ -15114,26 +15117,25 @@ public class Combat extends BaseContent {
 
     public function soulskillMod():Number {
         var modss:Number = 1;
-        if (player.hasPerk(PerkLib.DaoistCultivator) && player.wis >= 20) modss += .2;
-        if (player.hasPerk(PerkLib.DaoistApprenticeStage)) {
-            if (player.hasPerk(PerkLib.SoulApprentice) && player.wis >= 30) modss += .4;
-            if (player.hasPerk(PerkLib.SoulPersonage) && player.wis >= 40) modss += .4;
-            if (player.hasPerk(PerkLib.SoulWarrior) && player.wis >= 50) modss += .4;
+		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) {
+            if (player.hasPerk(PerkLib.SoulApprentice)) modss += .3;
+            if (player.hasPerk(PerkLib.SoulPersonage)) modss += .3;
+            if (player.hasPerk(PerkLib.SoulWarrior)) modss += .3;
         }
         if (player.hasPerk(PerkLib.DaoistWarriorStage)) {
-            if (player.hasPerk(PerkLib.SoulSprite) && player.wis >= 60) modss += .6;
-            if (player.hasPerk(PerkLib.SoulScholar) && player.wis >= 70) modss += .6;
-            if (player.hasPerk(PerkLib.SoulElder) && player.wis >= 80) modss += .6;
+            if (player.hasPerk(PerkLib.SoulSprite)) modss += .6;
+            if (player.hasPerk(PerkLib.SoulScholar)) modss += .6;
+            if (player.hasPerk(PerkLib.SoulElder)) modss += .6;
         }
         if (player.hasPerk(PerkLib.DaoistElderStage)) {
-            if (player.hasPerk(PerkLib.SoulExalt) && player.wis >= 90) modss += .8;
-            if (player.hasPerk(PerkLib.SoulOverlord) && player.wis >= 100) modss += .8;
-            if (player.hasPerk(PerkLib.SoulTyrant) && player.wis >= 110) modss += .8;
+            if (player.hasPerk(PerkLib.SoulExalt)) modss += 1;
+            if (player.hasPerk(PerkLib.SoulOverlord)) modss += 1;
+            if (player.hasPerk(PerkLib.SoulTyrant)) modss += 1;
         }
         if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
-            if (player.hasPerk(PerkLib.SoulKing) && player.wis >= 120) modss += 1;
-            if (player.hasPerk(PerkLib.SoulEmperor) && player.wis >= 130) modss += 1;
-            if (player.hasPerk(PerkLib.SoulAncestor) && player.wis >= 140) modss += 1;
+            if (player.hasPerk(PerkLib.SoulKing)) modss += 1.4;
+            if (player.hasPerk(PerkLib.SoulEmperor)) modss += 1.4;
+            if (player.hasPerk(PerkLib.SoulAncestor)) modss += 1.4;
         }
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modss += .3;
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modss += .4;
@@ -15209,26 +15211,25 @@ public class Combat extends BaseContent {
 
     public function soulskillMagicalMod():Number {
         var modssm:Number = 1;
-        if (player.hasPerk(PerkLib.DaoistCultivator) && player.wis >= 20) modssm += .2;
         if (player.hasPerk(PerkLib.DaoistApprenticeStage)) {
-            if (player.hasPerk(PerkLib.SoulApprentice) && player.wis >= 30) modssm += .4;
-            if (player.hasPerk(PerkLib.SoulPersonage) && player.wis >= 40) modssm += .4;
-            if (player.hasPerk(PerkLib.SoulWarrior) && player.wis >= 50) modssm += .4;
+            if (player.hasPerk(PerkLib.SoulApprentice)) modssm += .3;
+            if (player.hasPerk(PerkLib.SoulPersonage)) modssm += .3;
+            if (player.hasPerk(PerkLib.SoulWarrior)) modssm += .3;
         }
         if (player.hasPerk(PerkLib.DaoistWarriorStage)) {
-            if (player.hasPerk(PerkLib.SoulSprite) && player.wis >= 60) modssm += .6;
-            if (player.hasPerk(PerkLib.SoulScholar) && player.wis >= 70) modssm += .6;
-            if (player.hasPerk(PerkLib.SoulElder) && player.wis >= 80) modssm += .6;
+            if (player.hasPerk(PerkLib.SoulSprite)) modssm += .6;
+            if (player.hasPerk(PerkLib.SoulScholar)) modssm += .6;
+            if (player.hasPerk(PerkLib.SoulElder)) modssm += .6;
         }
         if (player.hasPerk(PerkLib.DaoistElderStage)) {
-            if (player.hasPerk(PerkLib.SoulExalt) && player.wis >= 90) modssm += .8;
-            if (player.hasPerk(PerkLib.SoulOverlord) && player.wis >= 100) modssm += .8;
-            if (player.hasPerk(PerkLib.SoulTyrant) && player.wis >= 110) modssm += .8;
+            if (player.hasPerk(PerkLib.SoulExalt)) modssm += 1;
+            if (player.hasPerk(PerkLib.SoulOverlord)) modssm += 1;
+            if (player.hasPerk(PerkLib.SoulTyrant)) modssm += 1;
         }
         if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
-            if (player.hasPerk(PerkLib.SoulKing) && player.wis >= 120) modssm += 1;
-            if (player.hasPerk(PerkLib.SoulEmperor) && player.wis >= 130) modssm += 1;
-            if (player.hasPerk(PerkLib.SoulAncestor) && player.wis >= 140) modssm += 1;
+            if (player.hasPerk(PerkLib.SoulKing)) modssm += 1.4;
+            if (player.hasPerk(PerkLib.SoulEmperor)) modssm += 1.4;
+            if (player.hasPerk(PerkLib.SoulAncestor)) modssm += 1.4;
         }
         if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) modssm += .3;
         if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) modssm += .4;
@@ -15280,7 +15281,10 @@ public class Combat extends BaseContent {
 
     public function soulskillCost():Number {
         var modssc:Number = 1;
-        if (player.hasPerk(PerkLib.DaoistCultivator)) modssc -= .1;
+        if (player.hasPerk(PerkLib.DaoistApprenticeStage)) modssc -= .1;
+        if (player.hasPerk(PerkLib.DaoistWarriorStage)) modssc -= .1;
+        if (player.hasPerk(PerkLib.DaoistElderStage)) modssc -= .1;
+        if (player.hasPerk(PerkLib.DaoistOverlordStage)) modssc -= .1;
         if (player.hasPerk(PerkLib.WizardsAndDaoistsEndurance)) modssc -= (0.01 * player.perkv2(PerkLib.WizardsAndDaoistsEndurance));
         if (player.hasPerk(PerkLib.SeersInsight)) modssc -= player.perkv1(PerkLib.SeersInsight);
         if (player.jewelryName == "fox hairpin") modssc -= .2;

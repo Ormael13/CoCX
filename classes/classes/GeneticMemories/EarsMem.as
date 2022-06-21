@@ -218,6 +218,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const RAIJU:int = _partid++;
+		EnumValue.add(Memories, RAIJU, "RAIJU", {
+			id: "Raiju Ears",
+			name: "Raiju Ears",
+			cost: 100,
+			title: "Raiju",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.EarsRaiju;
+			}
+		});
+
 		public static const BAT:int = _partid++;
 		EnumValue.add(Memories, BAT, "BAT", {
 			id: "Bat Ears",
@@ -303,6 +314,61 @@ package classes.GeneticMemories {
 		  title: "Yeti",
 		  transformation: function(): Transformation {
 			  return CoC.instance.transformations.EarsYeti;
+		  }
+		});
+
+		public static const DOG:int = _partid++;
+		EnumValue.add(Memories, DOG, "DOG", {
+		  id: "Dog Ears",
+		  name: "Dog Ears",
+		  cost: 100,
+		  title: "Dog",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsDog;
+		  }
+		});
+
+		public static const SHARK:int = _partid++;
+		EnumValue.add(Memories, SHARK, "SHARK", {
+		  id: "Shark Ears",
+		  name: "Shark Ears",
+		  cost: 100,
+		  title: "Shark",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsShark;
+		  }
+		});
+
+		public static const BUNNY:int = _partid++;
+		EnumValue.add(Memories, BUNNY, "BUNNY", {
+		  id: "Bunny Ears",
+		  name: "Bunny Ears",
+		  cost: 100,
+		  title: "Bunny",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsBunny;
+		  }
+		});
+
+		public static const AVIAN:int = _partid++;
+		EnumValue.add(Memories, AVIAN, "AVIAN", {
+		  id: "Avian Ears",
+		  name: "Avian Ears",
+		  cost: 100,
+		  title: "Avian",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsAvian;
+		  }
+		});
+
+		public static const INSECT:int = _partid++;
+		EnumValue.add(Memories, INSECT, "INSECT", {
+		  id: "Insect Ears",
+		  name: "Insect Ears",
+		  cost: 100,
+		  title: "Insect",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.EarsInsect;
 		  }
 		});
 

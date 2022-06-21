@@ -20,7 +20,7 @@ public class GooGirl extends Monster
 		override public function postPlayerAbility(ability:CombatAbility):void {
 			//[Using fire attacks on the goo]
 			if (ability.hasTag(CombatAbility.TAG_DAMAGING) && ability.hasTag(CombatAbility.TAG_FIRE)) {
-				outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + skinTone + " skin has lost some of its shimmer.");
+				outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + bodyColor + " skin has lost some of its shimmer.");
 				if(!hasPerk(PerkLib.Acid)) createPerk(PerkLib.Acid,0,0,0,0);
 			}
 		}
@@ -114,7 +114,7 @@ public class GooGirl extends Monster
 //Engulf –
 		private function gooEngulph():void
 		{
-			outputText("The goo-girl gleefully throws her entire body at you and, before you can get out of the way, she has engulfed you in her oozing form! Tendrils of " + skinTone + " slime slide up your nostrils and through your lips, filling your lungs with the girl's muck. You begin suffocating!");
+			outputText("The goo-girl gleefully throws her entire body at you and, before you can get out of the way, she has engulfed you in her oozing form! Tendrils of " + bodyColor + " slime slide up your nostrils and through your lips, filling your lungs with the girl's muck. You begin suffocating!");
 			if (!player.hasStatusEffect(StatusEffects.GooBind)) player.createStatusEffect(StatusEffects.GooBind, 0, 0, 0, 0);
 		}
 
@@ -150,7 +150,7 @@ public class GooGirl extends Monster
 				else if (lustDelta < maxLust() * 0.13) outputText("\nThe curious goo has begun stroking herself openly, trying to understand the meaning of your actions by imitating you.");
 				else outputText("\nThe girl begins to understand your intent. She opens and closes her mouth, as if panting, while she works slimy fingers between her thighs and across her jiggling nipples.");
 			}
-			else outputText("\nIt appears the goo-girl has gotten lost in her mimicry, squeezing her breasts and jilling her shiny " + skinTone + " clit, her desire to investigate you forgotten.");
+			else outputText("\nIt appears the goo-girl has gotten lost in her mimicry, squeezing her breasts and jilling her shiny " + bodyColor + " clit, her desire to investigate you forgotten.");
 			applyTease(lustDelta);
 		}
 
@@ -204,86 +204,86 @@ public class GooGirl extends Monster
 		public function gooColor():String
 		{
 			//blue, purple, or crystal
-			return skinTone;
+			return bodyColor;
 		}
 
 //[azure/plum/crystalline]
 		public function gooColor2():String
 		{
-			if (skinTone == "blue") return "azure";
-			else if (skinTone == "purple") return "plum";
+			if (bodyColor == "blue") return "azure";
+			else if (bodyColor == "purple") return "plum";
 			else return "crystalline";
 		}
 
 //[cerulean/violet/clear]
 		public function gooColor3():String
 		{
-			if (skinTone == "blue") return "cerulean";
-			else if (skinTone == "purple") return "violet";
+			if (bodyColor == "blue") return "cerulean";
+			else if (bodyColor == "purple") return "violet";
 			else return "clear";
 		}
 
 //[teal/lavender/glassy]
 		public function gooColor4():String
 		{
-			if (skinTone == "blue") return "teal";
-			else if (skinTone == "purple") return "lavender";
+			if (bodyColor == "blue") return "teal";
+			else if (bodyColor == "purple") return "lavender";
 			else return "glassy";
 		}
 
 //[sapphire/amethyst/diamond]
 		public function gooColor5():String
 		{
-			if (skinTone == "blue") return "sapphire";
-			else if (skinTone == "purple") return "amethyst";
+			if (bodyColor == "blue") return "sapphire";
+			else if (bodyColor == "purple") return "amethyst";
 			else return "diamond";
 		}
 
 //[lapis/periwinkle/pure]
 		public function gooColor6():String
 		{
-			if (skinTone == "blue") return "sapphire";
-			else if (skinTone == "purple") return "amethyst";
+			if (bodyColor == "blue") return "sapphire";
+			else if (bodyColor == "purple") return "amethyst";
 			else return "diamond";
 		}
 
 //[blue berry/grape/crystal]
 		public function gooColor7():String
 		{
-			if (skinTone == "blue") return "blueberry";
-			else if (skinTone == "purple") return "grape";
+			if (bodyColor == "blue") return "blueberry";
+			else if (bodyColor == "purple") return "grape";
 			else return "crystal";
 		}
 
 //[aquamarine/plum/transparent]
 		public function gooColor8():String
 		{
-			if (skinTone == "blue") return "aquamarine";
-			else if (skinTone == "purple") return "plum";
+			if (bodyColor == "blue") return "aquamarine";
+			else if (bodyColor == "purple") return "plum";
 			else return "transparent";
 		}
 
 //[an aquamarine/a lilac/a translucent]
 		public function gooColor9():String
 		{
-			if (skinTone == "blue") return "an aquamarine";
-			else if (skinTone == "purple") return "a plum";
+			if (bodyColor == "blue") return "an aquamarine";
+			else if (bodyColor == "purple") return "a plum";
 			else return "a translucent";
 		}
 
 //[blueberries/grapes/strawberries]
 		public function gooColor10():String
 		{
-			if (skinTone == "blue") return "blueberries";
-			else if (skinTone == "purple") return "grapes";
+			if (bodyColor == "blue") return "blueberries";
+			else if (bodyColor == "purple") return "grapes";
 			else return "strawberries";
 		}
 
 //[cerulean tint/violet tint/clear body]
 		public function gooColor11():String
 		{
-			if (skinTone == "blue") return "cerulean tint";
-			else if (skinTone == "purple") return "violet tint";
+			if (bodyColor == "blue") return "cerulean tint";
+			else if (bodyColor == "purple") return "violet tint";
 			else return "clear body";
 		}
 	}

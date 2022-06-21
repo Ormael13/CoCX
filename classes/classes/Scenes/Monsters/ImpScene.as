@@ -194,7 +194,7 @@ use namespace CoC;
 			//Differing cocksleeve texts
 			if(player.skinDesc == "fur") outputText("furry cock-sleeve");
 			else {
-				if(player.skinTone == "purple" || player.skinTone == "blue" || player.skinTone == "shiny black") outputText("demonic cock-sleeve");
+				if(player.bodyColor == "purple" || player.bodyColor == "blue" || player.bodyColor == "shiny black") outputText("demonic cock-sleeve");
 				else outputText("human cock-sleeve");
 			}
 			//Bonus boob shake or period if no boobs.
@@ -705,7 +705,7 @@ use namespace CoC;
             //cor check
             if (player.cor < 80)
                 outputText("and you begin moving your breast in circles around the thrusting member.");
-            else 
+            else
                 outputText(" and you lower your breast against a rock, letting the imp squish your breast under his weight, grinding it into the rough stone as it continues to fuck it.");
             outputText("\n\nThe imp seems to really enjoy this and after a few more minutes of intense pleasure it begins pouring his cum inside of your chest.  Without anywhere to go the cum pours back out, mixed with torrents of milk that are being stimulated out of you. Exhausted the imp falls to the ground, ");
             //another one
@@ -719,7 +719,7 @@ use namespace CoC;
             else if (player.cor < 50) {
                 outputText("before it can see you bringing your nipples to your mouth and sucking on the spermy mixture until you bring yourself to orgasm.");
             }
-            else 
+            else
                 outputText("before it can see you bringing your nipples to your mouth.  You suck hard to get to as much of his sperm as you can, shoving your tongue deep into yourself and digging around wih your fingers.  When this is not enough to bring you to orgasm you slap and bite your [nipples], crying out as the intensity and perversion finally proves enough to push you over the edge.");
 			player.sexReward("cum", "Lips"); //accurate
             player.refillHunger(20);
