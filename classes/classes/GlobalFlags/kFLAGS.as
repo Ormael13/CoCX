@@ -20,7 +20,7 @@ public static const TIMES_FUCKED_URTA:int                                       
 public static const URTA_COMFORTABLE_WITH_OWN_BODY:int                              =   12; // URTA - horsecock comfort level (-1 = hates self, no luvs)
 public static const URTA_TIME_SINCE_LAST_CAME:int                                   =   13; // URTA - hours until can be horny again
 public static const PC_SEEN_URTA_SEX_TOYS:int                                       =   14; // URTA - seen Urta's toyz?
-public static const UNKNOWN_FLAG_NUMBER_0015:int                                    =   15;
+public static const FROSTY_TIMES_SPANKED:int                                    	=   15;
 public static const AKBAL_SUBMISSION_COUNTER:int                                    =   16; // Akbal submission counter (resisting resets it
 public static const AKBAL_SUBMISSION_STATE:int                                      =   17; // Akbal submission state. -1=Lost to him, 1=Beaten him, 2=Akbal is your bitch
 public static const MINOTAUR_CUM_ADDICTION_TRACKER:int                              =   18; // Minotaur cum Addiction Tracker

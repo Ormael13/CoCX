@@ -1678,7 +1678,12 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.furColor == "lilac and white striped") player.furColor = "lilac and white";
 				if (player.hairColor == "lilac and white striped") player.hairColor = "lilac and white";
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.009;
-			}/*
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.010) {
+				flags[kFLAGS.FROSTY_TIMES_SPANKED] = 0; //reset the flag
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.010;
+			}
+			/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.008) {
 				if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.HclassHeavenTribulationSurvivor);
 				if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.GclassHeavenTribulationSurvivor);
