@@ -1,7 +1,9 @@
 package classes.Scenes.Dungeons.D3
 {
+import classes.Appearance;
 import classes.BaseContent;
 import classes.BodyParts.LowerBody;
+import classes.CockTypesEnum;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.WeaponLib;
@@ -509,7 +511,7 @@ public class DriderIncubusScenes extends BaseContent
 			if (player.biggestCockArea() >= 100) outputText(" Sometimes she even plants a few more kisses on your [cockHead biggest] or just below. Other times she licks you like a lollipop - at least the parts not buried in bust.");
 			outputText("\n\nYour head is swimming. No wonder that drider demon kept this girl around! She’s so good with her breasts that they may as well be infused with black magic, transformed into tanks so overloaded with eroticism that they spark and fizz with it.");
 			outputText("\n\nThe worst (or best) part is that she was right. You’re already feeling better than when you were at your peak. The desire to climax is still there, clawing at the back of your mind, but it’s buried behind a thicker wall of pleasure, numbed by the knowledge that her cutting you off once more might lead to further bliss.");
-			outputText("\n\nMitzi’s dusky eyes flick up at you as she works, favoring you with a smile. <i>\"Somebody’s getting into it now, isn’t "+ player.mf("he", "she") +"?\"</i> She bounces her boobs around a little faster, thrilling you with more excitement than you can handle. <i>\"Yeah, you’re so close to blowing it, aren’t you?\"</i> She smushes them down on either side, twisting her torso to drag them laterally across your overfull [cockNoun biggest], surrounding you in a vortex that threatens to wring every drop of cum from your body. <i>\"So close to just giving in.\"</i>");
+			outputText("\n\nMitzi’s dusky eyes flick up at you as she works, favoring you with a smile. <i>\"Somebody’s getting into it now, isn’t "+ player.mf("he", "she") +"?\"</i> She bounces her boobs around a little faster, thrilling you with more excitement than you can handle. <i>\"Yeah, you’re so close to blowing it, aren’t you?\"</i> She smushes them down on either side, twisting her torso to drag them laterally across your overfull " + Appearance.cockNoun(CockTypesEnum.HUMAN) + ", surrounding you in a vortex that threatens to wring every drop of cum from your body. <i>\"So close to just giving in.\"</i>");
 			outputText("\n\nMuscles in your abdomen twitch.");
 			if (player.balls > 0) outputText(" Your [balls] feel like they’re going to burst, clenching tight beneath your [cocks].");
 			outputText(" The edge is right there. You could go over now - just one hard thrust, and you could do it.");

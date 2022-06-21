@@ -32,7 +32,7 @@ public class MutationsLib
 			"Arachnid Book Lung", "Cat-like Nimbleness", "Scylla Ink Glands", "Tracheal System", "Twin Heart"];
 
 		public static function mutationsUpdate(id:String):Boolean{
-			if (CoC.instance.flags[kFLAGS.MOD_SAVE_VERSION] >= 36) return false;
+			if (CoC.instance.flags[kFLAGS.MOD_SAVE_VERSION] >= 35.015) return false;
 
 			//Special mutations counts.
 			//Displacer, Gorgon = 2, Scylla = 1, Tracheal = 4.
@@ -84,7 +84,9 @@ public class MutationsLib
 			}
 
 			if(changed){
-				var ptype:IMutationPerkType = IMutationPerkType(PerkType.lookupPerk(id2));
+				if (!(PerkType.lookupPerk(id2) is IMutationPerkType))
+					throw new Error("IM still broken!");
+				var ptype:IMutationPerkType = PerkType.lookupPerk(id2) as IMutationPerkType;
 				ptype.acquireMutation(CoC.instance.player, "none", idT);
 			}
 
