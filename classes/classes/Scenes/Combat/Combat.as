@@ -3241,11 +3241,7 @@ public class Combat extends BaseContent {
 			}
             if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);
             //Weapon addition!
-            if (player.weaponRangeAttack < 51) damage *= (1 + (player.weaponRangeAttack * 0.03));
-            else if (player.weaponRangeAttack < 101) damage *= (2.5 + ((player.weaponRangeAttack - 50) * 0.025));
-            else if (player.weaponRangeAttack < 151) damage *= (3.75 + ((player.weaponRangeAttack - 100) * 0.02));
-            else if (player.weaponRangeAttack < 201) damage *= (4.75 + ((player.weaponRangeAttack - 150) * 0.015));
-            else damage *= (5.5 + ((player.weaponRangeAttack - 200) * 0.01));
+            damage = rangeAttackModifier(damage);
 			if (player.isInNonGoblinMech()) {
 				if (player.vehicles == vehicles.HB_MECH) {
 					if (player.armor == armors.HBARMOR) damage *= 1.5;
@@ -3820,11 +3816,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
 				damage *= 1.5;
                 //Weapon addition!
-                if (player.weaponRangeAttack < 51) damage *= (1 + (player.weaponRangeAttack * 0.03));
-                else if (player.weaponRangeAttack >= 51 && player.weaponRangeAttack < 101) damage *= (2.5 + ((player.weaponRangeAttack - 50) * 0.025));
-                else if (player.weaponRangeAttack >= 101 && player.weaponRangeAttack < 151) damage *= (3.75 + ((player.weaponRangeAttack - 100) * 0.02));
-                else if (player.weaponRangeAttack >= 151 && player.weaponRangeAttack < 201) damage *= (4.75 + ((player.weaponRangeAttack - 150) * 0.015));
-                else damage *= (5.5 + ((player.weaponRangeAttack - 200) * 0.01));
+                damage = rangeAttackModifier(damage);
                 if (player.weaponRange == weaponsrange.KSLHARP) {
                     if (monster.cor < 33) damage = Math.round(damage * 1.0);
                     else if (monster.cor < 50) damage = Math.round(damage * 1.1);
@@ -3950,11 +3942,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
 			damage *= 1.5;
             //Weapon addition!
-            if (player.weaponRangeAttack < 51) damage *= (1 + (player.weaponRangeAttack * 0.03));
-            else if (player.weaponRangeAttack >= 51 && player.weaponRangeAttack < 101) damage *= (2.5 + ((player.weaponRangeAttack - 50) * 0.025));
-            else if (player.weaponRangeAttack >= 101 && player.weaponRangeAttack < 151) damage *= (3.75 + ((player.weaponRangeAttack - 100) * 0.02));
-            else if (player.weaponRangeAttack >= 151 && player.weaponRangeAttack < 201) damage *= (4.75 + ((player.weaponRangeAttack - 150) * 0.015));
-            else damage *= (5.5 + ((player.weaponRangeAttack - 200) * 0.01));
+            damage = rangeAttackModifier(damage);
             if (player.weaponRange == weaponsrange.KSLHARP) {
                 if (monster.cor < 33) damage = Math.round(damage * 1.0);
                 else if (monster.cor < 50) damage = Math.round(damage * 1.1);
@@ -4156,12 +4144,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.AlchemicalCartridge)) damage += scalingBonusIntelligence() * 0.25;
             if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);
             //Weapon addition!
-            if (player.weaponRangeAttack < 51) damage *= (1 + (player.weaponRangeAttack * 0.03));
-            else if (player.weaponRangeAttack >= 51 && player.weaponRangeAttack < 101) damage *= (2.5 + ((player.weaponRangeAttack - 50) * 0.025));
-            else if (player.weaponRangeAttack >= 101 && player.weaponRangeAttack < 151) damage *= (3.75 + ((player.weaponRangeAttack - 100) * 0.02));
-            else if (player.weaponRangeAttack >= 151 && player.weaponRangeAttack < 201) damage *= (4.75 + ((player.weaponRangeAttack - 150) * 0.015));
-            else if (player.weaponRangeAttack >= 201 && player.weaponRangeAttack < 251) damage *= (5.5 + ((player.weaponRangeAttack - 200) * 0.01));
-            else damage *= (6 + ((player.weaponRangeAttack - 250) * 0.005));
+            damage = rangeAttackModifier(damage);
 			if (player.weaponRangePerk == "Dual Firearms") damage *= firearmsDualWieldDamagePenalty();
             //any aoe effect from firearms
             if (monster.plural) {
@@ -6583,6 +6566,16 @@ public class Combat extends BaseContent {
 		venomCombatRecharge1();
     }
 
+    private function flyingSwordAttackModifier(damage:Number):Number {
+        var wAttack:Number = player.weaponFlyingSwordsAttack;
+        if (wAttack < 51) damage *= (1 + (wAttack * 0.03));
+        else if (wAttack < 101) damage *= (2.5 + ((wAttack - 50) * 0.025));
+        else if (wAttack < 151) damage *= (3.75 + ((wAttack - 100) * 0.02));
+        else if (wAttack < 201) damage *= (4.75 + ((wAttack - 150) * 0.015));
+        else damage *= (5.5 + ((wAttack - 200) * 0.01));
+        return damage;
+    }
+
     private function weaponAttackModifier(damage:Number):Number {
         var wAttack:Number = player.weaponAttack;
         if (wAttack < 51) damage *= (1 + (wAttack * 0.03));
@@ -6590,6 +6583,17 @@ public class Combat extends BaseContent {
         else if (wAttack < 151) damage *= (3.75 + ((wAttack - 100) * 0.02));
         else if (wAttack < 201) damage *= (4.75 + ((wAttack - 150) * 0.015));
         else damage *= (5.5 + ((wAttack - 200) * 0.01));
+        return damage;
+    }
+
+    private function rangeAttackModifier(damage:Number):Number {
+        var wAttack:Number = player.weaponRangeAttack;
+        if (wAttack < 51) damage *= (1 + (wAttack * 0.03));
+        else if (wAttack < 101) damage *= (2.5 + ((wAttack - 50) * 0.025));
+        else if (wAttack < 151) damage *= (3.75 + ((wAttack - 100) * 0.02));
+        else if (wAttack < 201) damage *= (4.75 + ((wAttack - 150) * 0.015));
+        else if (wAttack < 251) damage *= (5.5 + ((wAttack - 200) * 0.01));
+        else damage *= (6 + ((wAttack - 250) * 0.005));
         return damage;
     }
 
@@ -14183,11 +14187,7 @@ public class Combat extends BaseContent {
         damage += player.weaponFlyingSwordsAttack * 10;
 		damage += scalingBonusWisdom() * 0.2;
 		//Weapon addition!
-        if (player.weaponFlyingSwordsAttack < 51) damage *= (1 + (player.weaponFlyingSwordsAttack * 0.03));
-        else if (player.weaponFlyingSwordsAttack < 101) damage *= (2.5 + ((player.weaponFlyingSwordsAttack - 50) * 0.025));
-        else if (player.weaponFlyingSwordsAttack < 151) damage *= (3.75 + ((player.weaponFlyingSwordsAttack - 100) * 0.02));
-        else if (player.weaponFlyingSwordsAttack < 201) damage *= (4.75 + ((player.weaponFlyingSwordsAttack - 150) * 0.015));
-        else damage *= (5.5 + ((player.weaponFlyingSwordsAttack - 200) * 0.01));
+        damage = flyingSwordAttackModifier(damage);
 		if (player.weaponFlyingSwordsPerk == "Massive") damage *= 1.5;
 		//if (player.hasPerk(PerkLib.SoaringBlades)) damage *= 1;
 		//damage *= (1 + (0.01 * masteryArcheryLevel()));
@@ -14201,7 +14201,7 @@ public class Combat extends BaseContent {
             damage *= 1.75;
         }
         damage = Math.round(damage);
-		outputText("You send a bit of soulforce to " + player.weaponFlyingSwordsName+" and sends it towards [themonster]. "+(player.usingSingleFlyingSword()?"It":"They")+" slash target leaving minor wound"+(player.usingSingleFlyingSword()?"":"s")+". ");
+		outputText("You send a bit of soulforce to " + player.weaponFlyingSwordsName+" and direct it towards [themonster]. "+(player.usingSingleFlyingSword()?"It slashes":"They slash")+" the target, leaving minor wound"+(player.usingSingleFlyingSword()?"":"s")+". ");
 		if (player.weaponFlyingSwords == weaponsflyingswords.W_HALFM) doFireDamage(damage, true, true);
 		else if (player.weaponFlyingSwords == weaponsflyingswords.B_HALFM) doIceDamage(damage, true, true);
 		else if (player.weaponFlyingSwords == weaponsflyingswords.S_HALFM) doLightingDamage(damage, true, true);
@@ -14256,17 +14256,13 @@ public class Combat extends BaseContent {
 			else outputText("the rest of your body collides against your target" + (monster.plural?"s":"") + "");
             if (player.statusEffectv2(StatusEffects.Flying) > 0 && player.weaponFlyingSwordsName != "nothing") {
 				outputText(". At the same time " + player.weaponFlyingSwordsName+" impales your target" + (monster.plural?"s":"") + "");
-				if (player.weaponFlyingSwordsAttack < 51) damage *= (1 + (player.weaponFlyingSwordsAttack * 0.03));
-				else if (player.weaponFlyingSwordsAttack < 101) damage *= (2.5 + ((player.weaponFlyingSwordsAttack - 50) * 0.025));
-				else if (player.weaponFlyingSwordsAttack < 151) damage *= (3.75 + ((player.weaponFlyingSwordsAttack - 100) * 0.02));
-				else if (player.weaponFlyingSwordsAttack < 201) damage *= (4.75 + ((player.weaponFlyingSwordsAttack - 150) * 0.015));
-				else damage *= (5.5 + ((player.weaponFlyingSwordsAttack - 200) * 0.01));
+                damage = flyingSwordAttackModifier(damage);
 			}
             if (player.haveWeaponForJouster()) {
                 var JousterDamageMod:Number = 1;
                 //if (player.isPolearmTypeWeapon()) JousterDamageMod = 0.75;
-                if ((((player.isTaur() || player.isDrider() || player.canFly()) && player.spe >= 60) && player.hasPerk(PerkLib.Naturaljouster)) || (player.spe >= 150 && player.hasPerk(PerkLib.Naturaljouster))) damage *= 3*JousterDamageMod;
-                if ((((player.isTaur() || player.isDrider() || player.canFly()) && player.spe >= 180) && player.hasPerk(PerkLib.NaturaljousterMastergrade)) || (player.spe >= 450 && player.hasPerk(PerkLib.NaturaljousterMastergrade))) damage *= 5*JousterDamageMod;
+                if (player.hasPerk(PerkLib.Naturaljouster) && (((player.isTaur() || player.isDrider() || player.canFly()) && player.spe >= 60) || player.spe >= 150)) damage *= 3*JousterDamageMod;
+                if (player.hasPerk(PerkLib.NaturaljousterMastergrade) && (((player.isTaur() || player.isDrider() || player.canFly()) && player.spe >= 180) || player.spe >= 450)) damage *= 5*JousterDamageMod;
 
             }
 			damage *= (1 + PASPAS());
@@ -14278,11 +14274,7 @@ public class Combat extends BaseContent {
 			else outputText(" hitting your target with violence");
 			if (player.statusEffectv2(StatusEffects.Flying) > 0 && player.weaponFlyingSwordsName != "nothing") {
 				outputText(". At the same time " + player.weaponFlyingSwordsName+" impales your target" + (monster.plural?"s":"") + "");
-				if (player.weaponFlyingSwordsAttack < 51) damage *= (1 + (player.weaponFlyingSwordsAttack * 0.03));
-				else if (player.weaponFlyingSwordsAttack < 101) damage *= (2.5 + ((player.weaponFlyingSwordsAttack - 50) * 0.025));
-				else if (player.weaponFlyingSwordsAttack < 151) damage *= (3.75 + ((player.weaponFlyingSwordsAttack - 100) * 0.02));
-				else if (player.weaponFlyingSwordsAttack < 201) damage *= (4.75 + ((player.weaponFlyingSwordsAttack - 150) * 0.015));
-				else damage *= (5.5 + ((player.weaponFlyingSwordsAttack - 200) * 0.01));
+                damage = flyingSwordAttackModifier(damage);
 			}
         }
         if (player.hasPerk(PerkLib.SpiritedDive)) {
@@ -14875,114 +14867,72 @@ public class Combat extends BaseContent {
 
 	public function fireDamageBoostedByDao():Number {
 		var boostF:Number = 1;
-		if (player.hasStatusEffect(StatusEffects.DaoOfFire)) {
-			if (player.statusEffectv2(StatusEffects.DaoOfFire) == 5) boostF += 0.7;
-			if (player.statusEffectv2(StatusEffects.DaoOfFire) == 4) boostF += 0.5;
-			if (player.statusEffectv2(StatusEffects.DaoOfFire) == 3) boostF += 0.3;
-			if (player.statusEffectv2(StatusEffects.DaoOfFire) == 2) boostF += 0.2;
-			if (player.statusEffectv2(StatusEffects.DaoOfFire) == 1) boostF += 0.1;
-		}
+		if (player.hasStatusEffect(StatusEffects.DaoOfFire))
+            boostF += daoModifier(player.statusEffectv2(StatusEffects.DaoOfFire));
 		return boostF;
 	}
 	public function iceDamageBoostedByDao():Number {
 		var boostI:Number = 1;
-		if (player.hasStatusEffect(StatusEffects.DaoOfIce)) {
-			if (player.statusEffectv2(StatusEffects.DaoOfIce) == 5) boostI += 0.7;
-			if (player.statusEffectv2(StatusEffects.DaoOfIce) == 4) boostI += 0.5;
-			if (player.statusEffectv2(StatusEffects.DaoOfIce) == 3) boostI += 0.3;
-			if (player.statusEffectv2(StatusEffects.DaoOfIce) == 2) boostI += 0.2;
-			if (player.statusEffectv2(StatusEffects.DaoOfIce) == 1) boostI += 0.1;
-		}
+		if (player.hasStatusEffect(StatusEffects.DaoOfIce))
+            boostI += daoModifier(player.statusEffectv2(StatusEffects.DaoOfIce));
 		return boostI;
 	}
 	public function lightningDamageBoostedByDao():Number {
 		var boostL:Number = 1;
-		if (player.hasStatusEffect(StatusEffects.DaoOfLightning)) {
-			if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 5) boostL += 0.7;
-			if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 4) boostL += 0.5;
-			if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 3) boostL += 0.3;
-			if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 2) boostL += 0.2;
-			if (player.statusEffectv2(StatusEffects.DaoOfLightning) == 1) boostL += 0.1;
-		}
+		if (player.hasStatusEffect(StatusEffects.DaoOfLightning))
+            boostL += daoModifier(player.statusEffectv2(StatusEffects.DaoOfLightning));
 		return boostL;
 	}
 	public function darknessDamageBoostedByDao():Number {
 		var boostD:Number = 1;
-		if (player.hasStatusEffect(StatusEffects.DaoOfDarkness)) {
-			if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 5) boostD += 0.7;
-			if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 4) boostD += 0.5;
-			if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 3) boostD += 0.3;
-			if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 2) boostD += 0.2;
-			if (player.statusEffectv2(StatusEffects.DaoOfDarkness) == 1) boostD += 0.1;
-		}
+		if (player.hasStatusEffect(StatusEffects.DaoOfDarkness))
+            boostD += daoModifier(player.statusEffectv2(StatusEffects.DaoOfDarkness));
 		return boostD;
 	}
 	public function poisonDamageBoostedByDao():Number {
 		var boostP:Number = 1;
-		if (player.hasStatusEffect(StatusEffects.DaoOfPoison)) {
-			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 5) boostP += 0.7;
-			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 4) boostP += 0.5;
-			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 3) boostP += 0.3;
-			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 2) boostP += 0.2;
-			if (player.statusEffectv2(StatusEffects.DaoOfPoison) == 1) boostP += 0.1;
-		}
+		if (player.hasStatusEffect(StatusEffects.DaoOfPoison))
+            boostP += daoModifier(player.statusEffectv2(StatusEffects.DaoOfPoison));
 		return boostP;
 	}
 	public function windDamageBoostedByDao():Number {
 		var boostWi:Number = 1;
-		if (player.hasStatusEffect(StatusEffects.DaoOfWind)) {
-			if (player.statusEffectv2(StatusEffects.DaoOfWind) == 5) boostWi += 0.7;
-			if (player.statusEffectv2(StatusEffects.DaoOfWind) == 4) boostWi += 0.5;
-			if (player.statusEffectv2(StatusEffects.DaoOfWind) == 3) boostWi += 0.3;
-			if (player.statusEffectv2(StatusEffects.DaoOfWind) == 2) boostWi += 0.2;
-			if (player.statusEffectv2(StatusEffects.DaoOfWind) == 1) boostWi += 0.1;
-		}
+		if (player.hasStatusEffect(StatusEffects.DaoOfWind))
+            boostWi += daoModifier(player.statusEffectv2(StatusEffects.DaoOfWind));
 		return boostWi;
 	}
 	public function bloodDamageBoostedByDao():Number {
 		var boostBl:Number = 1;
-		if (player.hasStatusEffect(StatusEffects.DaoOfBlood)) {
-			if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 5) boostBl += 0.7;
-			if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 4) boostBl += 0.5;
-			if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 3) boostBl += 0.3;
-			if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 2) boostBl += 0.2;
-			if (player.statusEffectv2(StatusEffects.DaoOfBlood) == 1) boostBl += 0.1;
-		}
+		if (player.hasStatusEffect(StatusEffects.DaoOfBlood))
+            boostBl += daoModifier(player.statusEffectv2(StatusEffects.DaoOfBlood));
 		return boostBl;
 	}
 	public function waterDamageBoostedByDao():Number {
 		var boostWa:Number = 1;
-		if (player.hasStatusEffect(StatusEffects.DaoOfWater)) {
-			if (player.statusEffectv2(StatusEffects.DaoOfWater) == 5) boostWa += 0.7;
-			if (player.statusEffectv2(StatusEffects.DaoOfWater) == 4) boostWa += 0.5;
-			if (player.statusEffectv2(StatusEffects.DaoOfWater) == 3) boostWa += 0.3;
-			if (player.statusEffectv2(StatusEffects.DaoOfWater) == 2) boostWa += 0.2;
-			if (player.statusEffectv2(StatusEffects.DaoOfWater) == 1) boostWa += 0.1;
-		}
+		if (player.hasStatusEffect(StatusEffects.DaoOfWater))
+            boostWa += daoModifier(player.statusEffectv2(StatusEffects.DaoOfWater));
 		return boostWa;
 	}
 	public function earthDamageBoostedByDao():Number {
 		var boostEa:Number = 1;
-		if (player.hasStatusEffect(StatusEffects.DaoOfEarth)) {
-			if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 5) boostEa += 0.7;
-			if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 4) boostEa += 0.5;
-			if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 3) boostEa += 0.3;
-			if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 2) boostEa += 0.2;
-			if (player.statusEffectv2(StatusEffects.DaoOfEarth) == 1) boostEa += 0.1;
-		}
+		if (player.hasStatusEffect(StatusEffects.DaoOfEarth))
+            boostEa += daoModifier(player.statusEffectv2(StatusEffects.DaoOfEarth));
 		return boostEa;
 	}
 	public function acidDamageBoostedByDao():Number {
 		var boostAc:Number = 1;
-		if (player.hasStatusEffect(StatusEffects.DaoOfAcid)) {
-			if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 5) boostAc += 0.7;
-			if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 4) boostAc += 0.5;
-			if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 3) boostAc += 0.3;
-			if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 2) boostAc += 0.2;
-			if (player.statusEffectv2(StatusEffects.DaoOfAcid) == 1) boostAc += 0.1;
-		}
+		if (player.hasStatusEffect(StatusEffects.DaoOfAcid))
+            boostAc += daoModifier(player.statusEffectv2(StatusEffects.DaoOfAcid));
 		return boostAc;
 	}
+    public function daoModifier(daoLevel:Number):Number {
+        if (daoLevel == 5) return 0.7;
+        if (daoLevel == 4) return 0.5;
+        if (daoLevel == 3) return 0.3;
+        if (daoLevel == 2) return 0.2;
+        if (daoLevel == 1) return 0.1;
+        return 0;
+    }
 	
 	public function purityScalingDA():Number {
 		var purityScalingDA:Number = 1;
