@@ -22,7 +22,7 @@ public class Isabella extends Monster
 				outputText("Isabella blindly tries to charge at you, but misses completely.\n");
 			}
 			//Determine if dodged!
-			else if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			else if(player.speedDodge(this)>0) {
 				outputText("You duck aside at the last moment, relying entirely on your speed.\n");
 			}
 			//Determine if evaded
@@ -80,7 +80,7 @@ public class Isabella extends Monster
 				outputText("Isabella blindly tries to charge at you, but misses completely.\n");
 			}
 			//Determine if dodged!
-			else if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			else if(player.speedDodge(this)>0) {
 				outputText("You duck aside at the last moment, relying entirely on your speed.\n");
 			}
 			//Determine if evaded
@@ -125,7 +125,7 @@ public class Isabella extends Monster
 				outputText("Isabella blindly tries to charge at you, but misses completely.\n");
 			}
 			//Determine if dodged!
-			else if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			else if(player.speedDodge(this)>0) {
 				outputText("You duck aside at the last moment, relying entirely on your speed.\n");
 			}
 			//Determine if evaded

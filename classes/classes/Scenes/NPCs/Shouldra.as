@@ -18,7 +18,7 @@ import classes.internals.*;
 			//return to combat menu when finished
 			doNext(EventParser.playerMenu);
 			//Determine if dodged!
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if(player.speedDodge(this)>0) {
 				outputText("The girl wades in for a swing, but you deftly dodge to the side. She recovers quickly, spinning back at you.");
 				return;
 			}

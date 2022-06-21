@@ -97,7 +97,7 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 				dodged++;
 			}
 			//Determine if dodged!
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if(player.speedDodge(this)>0) {
 				dodged++;
 			}
 			//Determine if evaded
@@ -150,7 +150,7 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 				return;
 			}
 			//Determine if dodged!
-			if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			if (player.speedDodge(this)>0) {
 				dodged = 1;
 			}
 			//Determine if evaded

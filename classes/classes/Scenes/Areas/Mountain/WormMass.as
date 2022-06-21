@@ -9,7 +9,7 @@ public class WormMass extends Monster
 	{
 		public function wormAttack():void {
 			//Dodged!
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if(player.speedDodge(this)>0) {
 				outputText("The worm colony flails at you with its simulated arms, but its lack of coordination allows you to easily dodge its attack.\n");
 				return;
 			}

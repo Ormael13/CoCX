@@ -23,7 +23,7 @@ import classes.internals.*;
 				outputText("She's too blind to get anywhere near you.\n");
 			}
 			//Dodge
-			else if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			else if(player.speedDodge(this)>0) {
 				outputText("Somehow, you manage to drag yourself out of the way.  She sighs and licks her lips.  \"<i>");
 				temp = rand(4);
 				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n");

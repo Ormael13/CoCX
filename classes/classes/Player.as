@@ -1127,7 +1127,7 @@ use namespace CoC;
 		}
 		//Exotic-type weapons
 		public function isExoticTypeWeapon():Boolean {
-			return isRibbonTypeWeapon() || (weaponClass("Exotic"));
+			return (isRibbonTypeWeapon() || weaponClass("Exotic") || weaponClass("Scythe"));
 		}
 		//Partial staff type weapons
 		public function isPartiallyStaffTypeWeapon():Boolean {

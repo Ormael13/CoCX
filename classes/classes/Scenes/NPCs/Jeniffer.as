@@ -31,7 +31,7 @@ package classes.Scenes.NPCs
 				return;
 			}
 			//Determine if dodged!
-			if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if (player.speedDodge(this)>0) {
 				outputText("J1c tries to clinch you, but you use your speed to keep just out of reach.\n");
 				return;
 			}
