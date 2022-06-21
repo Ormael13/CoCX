@@ -178,7 +178,7 @@ public class Changelog extends BaseContent
 			outputText("-Additional Soulforce from training was changed form adding flat value to % - so instead of 2,330 it will increase SF cap by 2,330 %.\n");
 			outputText("-Pawnshop added bulk sale gem bonus from Merchant outfit. Improved Amily Efficiency (hermify) option. More weapons for Dilapidated Shrine. Make Metamorph tails cost dependent on current tail count. Eggs tf now checks for player blocking body tfs. (EragonX)\n");
 			outputText("-Many typo corrections by Pyromania.\n");
-			outputText("-Fixed issues: Hydra tails feral attack multiplier bugfix, Weapon Rack bug, Isabella pregnancy, hydra lower body allowing to have tails. (EragonX)\n");// (EragonX)
+			outputText("-Fixed issues: Hydra tails feral attack multiplier bugfix, Weapon Rack bug, Isabella pregnancy, hydra lower body allowing to have tails, for skin tfs to use correct colors, for Metamorph descs. (EragonX)\n");
 			outputText("-Added low standards for Uma. (Svalkash)\n");
 			outputText("-New consumable item: a bottle of high-grade Soulforce Recovery Pills. Costs 3610 gems. It's gained by putting in empty pills bottle 10 high-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
 			outputText("-Daoist: Apprentice Stage perk effects changed to: +30% soulskill/m.soulskill power, -10% soulskills cost, +50 max SF at S.Apprentice, S.Personage, S.Warrior stages, +5% to max, +50% base soulforce recovery multiplier\n");
@@ -189,8 +189,8 @@ public class Changelog extends BaseContent
 			outputText("-Separated skin, hair, fur, scales, chitin, feather colos from skin layers. (aimozg)\n");
 			outputText("-Added support for dynamic item generation from template id + properties. See hair dye for example. (aimozg)\n");
 			outputText("-For Kitsune thyroid gland or parathyroid glands req. perks would include Star Sphere Mastery perk too and Kishoo race (paratyr) or Kishoo tails (thyr).\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Use material bags materials directly. Add Scythe to exotic Mastery & combat cleanup. (EragonX)\n");
+			outputText("-Flame blade special can be used on scythe type of weapons too.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

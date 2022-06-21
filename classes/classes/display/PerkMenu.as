@@ -104,7 +104,7 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can choose and adjust various misc effects.</b>");
 			addButton(8, "Misc Opt",MiscOption);
 		}
-		addButton (9, "PerkDB2", perkDatabase2); //WIP.
+		//addButton (9, "PerkDB2", perkDatabase2); //WIP. //Apparently conflicts with Racial Score display
 		if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
 			outputText("\n<b>You can adjust your elemental summons behaviour during combat.</b>");
 			addButton(10, "Elementals",summonsbehaviourOptions);
@@ -1038,7 +1038,7 @@ public class PerkMenu extends BaseContent {
 				outputText("\n\n")
 				var tempObj:Object = mutation.pBuffs(player)
 				for (var key:String in tempObj) {
-					outputText("Buffs " + StatUtils.explainBuff(key, tempObj[key]) + "\n");
+					outputText("" + StatUtils.explainBuff(key, tempObj[key]) + "\n");
 				}
 				outputText("\n");
 			}
@@ -1311,7 +1311,7 @@ public class PerkMenu extends BaseContent {
 
 		function pInfoDP(tPVal:int, e:TextEvent):void{	//Perk Display Information
 			clearOutput();
-			var selected:PerkClass = fPerkCList[e.text].perk;
+			var selected:PerkClass = fPerkCList[e.text].perk;	///For some reason, this is triggering and faulting here when opening racial scores from Aimozg.....what???
 			var tempStr:String = "";
 			var pPerkGDesc:Array = ["\nRequires (All of these perks): ", "\nRequires (Any of these perks): ", "\nUnlocks: "]
 			var pPerkGroup:Array = pRelations[selected.ptype];
@@ -1348,8 +1348,10 @@ public class PerkMenu extends BaseContent {
 			addButton(14, "Back", displayMenu, tPVal);
 		}
 
+		var lhVal:int = 0;
 		function dMenuLinker(tPVal:int, srcArr:Array):void{	//Interaction linking
-			fPerkCList = [];
+			var fPerkCList:Array = [];
+			lhVal = tPVal;
 			mainView.mainText.addEventListener(TextEvent.LINK, curry(pInfoDP, tPVal));
 			for each(var perk:PerkType in srcArr.sort()) {
 				var p:PerkClass = new PerkClass(perk,
@@ -1358,6 +1360,11 @@ public class PerkMenu extends BaseContent {
 				fPerkCList.push(lab);
 				outputText("<u><a href=\"event:"+fPerkCList.indexOf(lab)+"\">"+p.perkName+"</a></u>\n");
 			}
+		}
+
+		function cleanupBeforeReturns():void{
+			mainView.mainText.removeEventListener(TextEvent.LINK, curry(pInfoDP, lhVal));
+			displayPerks();
 		}
 
 		function displayMenu(tPVal:int = 0):void{	//Main Perk Database Display
@@ -1399,7 +1406,7 @@ public class PerkMenu extends BaseContent {
 			} else{
 				addButtonDisabled(4,"Next Page", "Highest Tier.")
 			}
-			addButton(14, "Back", displayPerks);
+			addButton(14, "Back", cleanupBeforeReturns);
 		}
 
 		displayMenu();

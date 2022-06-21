@@ -664,9 +664,9 @@ use namespace CoC;
 			}
 			//Check for room in Ore bag and return the itemcount for it.
 			if (InCollection(itype, useables.COP_ORE, useables.TIN_ORE, useables.BRONZEB, useables.IRONORE, useables.EBONING, useables.MOONSTO) && nextAction != SceneLib.crafting.accessCraftingMaterialsBag) {
-				temp = SceneLib.crafting.roomInExistingStack(itype);
+				temp = SceneLib.crafting.roomForMaterial(itype);
 				if (temp >= 0) {
-					SceneLib.crafting.placeItemInStack(itype);
+					SceneLib.crafting.placeMaterialInBag(itype);
 					outputText("You place " + itype.longName + " in your Ore bag, giving you "+ (temp+1) +" of them.");
 					itemGoNext();
 					return;

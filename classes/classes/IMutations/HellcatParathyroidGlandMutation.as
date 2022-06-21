@@ -70,7 +70,7 @@ import classes.Creature;
         }
 
         public function HellcatParathyroidGlandMutation() {
-            super("Hellcat Parathyroid Glands IM", "Hellcat Parathyroid Glands", SLOT_PARATHYROID, 3);
+            super("Hellcat Parathyroid Glands IM", "Hellcat Parathyroid Glands", SLOT_NONE, 3);
         }
 
     }

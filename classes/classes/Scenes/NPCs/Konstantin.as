@@ -977,13 +977,13 @@ package classes.Scenes.NPCs
 			outputText("Konstantin eyes you expectantly.\n\n");
 			outputText("\"<i>So [name], do you have anything special for me today?</i>\"\n\n");
 			menu();
-			if (player.hasItem(useables.COP_ORE) && player.hasItem(useables.TIN_ORE)) addButton(0, "Copper/Tin", KonstantinSmeltingMenuCopperAndTin);
+			if ((player.hasItem(useables.COP_ORE) && player.hasItem(useables.TIN_ORE)) || (SceneLib.crafting.hasMaterial(useables.COP_ORE) && SceneLib.crafting.hasMaterial(useables.TIN_ORE))) addButton(0, "Copper/Tin", KonstantinSmeltingMenuCopperAndTin);
 			if (player.hasItem(useables.EBONBLO)) addButton(1, "Ebonbloom", KonstantinSmeltingMenuEbonbloom);
 			addButton(14, "No", KonstantinSmeltingMenuNo);
 		}
 		private function KonstantinSmeltingMenuCopperAndTin():void {
 			menu();
-			if (player.hasItem(useables.COP_ORE) && player.hasItem(useables.TIN_ORE)) addButton(0, "One", KonstantinSmeltingMenuProcess, "copper and tin", 1);
+			if ((player.hasItem(useables.COP_ORE) && player.hasItem(useables.TIN_ORE)) || (SceneLib.crafting.hasMaterial(useables.COP_ORE) && SceneLib.crafting.hasMaterial(useables.TIN_ORE))) addButton(0, "One", KonstantinSmeltingMenuProcess, "copper and tin", 1);
 			//if (player.hasItem(useables.COP_ORE, 5) && player.hasItem(useables.TIN_ORE, 5)) addButton(1, "Five", KonstantinSmeltingMenuProcess, "copper and tin", 2, true);
 			addButton(14, "Back", KonstantinSmeltingMenu);
 		}
@@ -1007,8 +1007,10 @@ package classes.Scenes.NPCs
 			var itype:ItemType;
 			switch(craft) {
 			case 1: //1 Copper+Tin ore
-				player.destroyItems(useables.COP_ORE, 1);
-				player.destroyItems(useables.TIN_ORE, 1);
+				if (!(SceneLib.crafting.hasMaterial(useables.COP_ORE) > 0 && SceneLib.crafting.useMaterial(useables.COP_ORE)))
+					player.destroyItems(useables.COP_ORE, 1);
+				if (!(SceneLib.crafting.hasMaterial(useables.TIN_ORE) > 0 && SceneLib.crafting.useMaterial(useables.TIN_ORE)))
+					player.destroyItems(useables.TIN_ORE, 1);
 				itype = useables.BRONZEB;
 				break;
 			case 2: //5 Copper+Tin ores
@@ -1300,4 +1302,4 @@ package classes.Scenes.NPCs
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}
-}
+}
