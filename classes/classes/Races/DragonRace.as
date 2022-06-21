@@ -13,6 +13,7 @@ import classes.lists.Gender;
  * Tier 3: ancient dragon
  */
 public class DragonRace extends Race {
+	public static const DragonScaleColors:Array = ["red", "golden", "metallic golden", "metallic silver", "silver", "snow white", "green", "blue", "bronzed", "black", "midnight"];
 	public function DragonRace(id:int) {
 		super("Dragon", id);
 		mutationThreshold = 6;
