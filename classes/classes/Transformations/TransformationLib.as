@@ -263,7 +263,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  return new SimpleTransformation("Fur Skin",
 	    // apply effect
 	    function (doOutput: Boolean): void {
-	      options = skinFormatOptions(options, true);
+	      options = skinFormatOptions(options, Skin.FUR);
 
 	      const color: String = options.color;
 
@@ -272,23 +272,23 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      // Coverage
 	      if (player.hasCoatOfType(Skin.FUR)) {
 	        if (coverage > player.skin.coverage) {
-	          desc += "You suddenly feel a familiar itch on parts of your skin uncovered by fur. You're not surprised when <b>even more " + player.coatColor + " fur sprouts, covering more of your body.</b>";
+	          desc += "You suddenly feel a familiar itch on parts of your skin uncovered by fur. You're not surprised when <b>even more [fur color] fur sprouts, covering more of your body.</b>";
 	        } else if (coverage < player.skin.coverage) {
-	          desc += "Sections of your " + player.coatColor + " fur itch incessantly, and as you scratch yourself, it starts coming off in big clumps. <b>You still have " + player.coatColor + " fur on your body, but now it covers less of your skin.</b>";
+	          desc += "Sections of your [fur color] fur itch incessantly, and as you scratch yourself, it starts coming off in big clumps. <b>You still have [fur color] fur on your body, but now it covers less of your skin.</b>";
 	        }
 
-	        if (coverage !== player.skin.coverage && color !== player.coatColor) {
+	        if (coverage !== player.skin.coverage && color !== player.furColor) {
 	          desc += "\n\n";
 	        }
 
-	        if (color !== player.coatColor) {
-	          desc += "You feel a strange sensation on your fur, and as soon as you glance at it, you're met with the sight of its hue slowly morphing from " + player.coatColor + " to " + color + ". <b>Your fur is now " + color + ".</b>"
+	        if (color !== player.furColor) {
+	          desc += "You feel a strange sensation on your fur, and as soon as you glance at it, you're met with the sight of its hue slowly morphing from [fur color] to " + color + ". <b>Your fur is now " + color + ".</b>"
 	        }
 	      } else {
 	        switch (coverage) {
 	        case Skin.COVERAGE_LOW:
 	          if (!player.hasCoat()) desc += "Your skin itches intensely. You gaze down as more and more hairs break forth from your skin quickly transforming into a coat of " + color + " fur. <b>You are now partially covered in " + color + " fur.</b>";
-	          else if (player.hasScales()) desc += "Your scales itch incessantly. You scratch, feeling them flake off to reveal a coat of " + color + " fur growing out from below!  <b>You are now partially covered in " + color + " fur.</b>";
+	          else if (player.isScaleCovered()) desc += "Your scales itch incessantly. You scratch, feeling them flake off to reveal a coat of " + color + " fur growing out from below!  <b>You are now partially covered in " + color + " fur.</b>";
 	          else desc += "Your skin itch incessantly. You scratch, feeling it current form shifting into a coat of " + color + " fur. <b>You are now partially covered in " + color + " fur.</b>";
 	          break;
 	        case Skin.COVERAGE_COMPLETE:
@@ -328,9 +328,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    },
 	    // is present
 	    function (): Boolean {
-	      options = skinFormatOptions(options, true);
+	      options = skinFormatOptions(options, Skin.FUR);
 
-	      return player.hasCoatOfType(Skin.FUR) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
+	      return player.hasCoatOfType(Skin.FUR) && InCollection(player.furColor, options.colors) && player.skin.coverage == coverage;
 	    }
 	  )
 	}
@@ -339,7 +339,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  return new SimpleTransformation("Scales Skin",
 	    // apply effect
 	    function (doOutput: Boolean): void {
-	      options = skinFormatOptions(options, false);
+	      options = skinFormatOptions(options, Skin.SCALES);
 
 	      const color: String = options.color;
 
@@ -348,32 +348,32 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      // Coverage
 	      if (player.hasCoatOfType(Skin.SCALES)) {
 	        if (coverage > player.skin.coverage) {
-	          desc += "You suddenly feel a familiar itch on parts of your skin uncovered by scales. You're not surprised when <b>even more " + player.coatColor + " scales sprout, covering more of your body.</b>";
+	          desc += "You suddenly feel a familiar itch on parts of your skin uncovered by scales. You're not surprised when <b>even more [scales color] scales sprout, covering more of your body.</b>";
 	        } else if (coverage < player.skin.coverage) {
-	          desc += "Sections of your " + player.coatColor + " scales itch incessantly, and as you scratch yourself, they start falling off wholesale. <b>You still have " + player.coatColor + " scales on your body, but now they cover less of your skin.</b>";
+	          desc += "Sections of your [scales color] scales itch incessantly, and as you scratch yourself, they start falling off wholesale. <b>You still have [scales color] scales on your body, but now they cover less of your skin.</b>";
 	        }
 
-	        if (coverage !== player.skin.coverage && color !== player.coatColor) {
+	        if (coverage !== player.skin.coverage && color !== player.scaleColor) {
 	          desc += "\n\n";
 	        }
 
-	        if (color !== player.coatColor) {
-	          desc += "You feel a strange sensation on your scales, and as soon as you glance at them, you're met with the sight of their hue slowly morphing from " + player.coatColor + " to " + color + ". <b>Your scales are now " + color + ".</b>"
+	        if (color !== player.scaleColor) {
+	          desc += "You feel a strange sensation on your scales, and as soon as you glance at them, you're met with the sight of their hue slowly morphing from [scale color] to " + color + ". <b>Your scales are now " + color + ".</b>"
 	        }
 	      } else {
 	        switch (coverage) {
 	        case Skin.COVERAGE_LOW:
-	          if (player.hasFur()) {
-	            desc += "You scratch yourself, and come away with a large clump of [skin coat.color] fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. You feel your skin shift as " + color + " scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you. The rest of the fur is easy to remove. <b>Your body is now partially covered with small patches of scales!</b>";
+	          if (player.isFurCovered()) {
+	            desc += "You scratch yourself, and come away with a large clump of [fur color] fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. You feel your skin shift as " + color + " scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you. The rest of the fur is easy to remove. <b>Your body is now partially covered with small patches of scales!</b>";
 	          } else {
 	            desc += "You feel your skin shift as scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you. <b>Your body is now partially covered with small patches of " + color + " scales.</b>";
 	          }
 	          break;
 	        case Skin.COVERAGE_COMPLETE:
-	          if (player.hasFur()) {
-	            desc += "You scratch yourself, and come away with a large clump of [skin coat.color] fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + color + " scales covering most of your body. The rest of the fur is easy to remove. <b>You're now covered in scales from head to toe.</b>";
+	          if (player.isFurCovered()) {
+	            desc += "You scratch yourself, and come away with a large clump of [fur color] fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + color + " scales covering most of your body. The rest of the fur is easy to remove. <b>You're now covered in scales from head to toe.</b>";
 	          } else {
-	            desc += "You idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard. A quick glance down reveals that scales are growing out of your " + player.skinTone + " skin with alarming speed. As you watch, the surface of your skin is covered in smooth scales. They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body. <b>You're covered from head to toe in shiny " + color + " scales.</b>";
+	            desc += "You idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard. A quick glance down reveals that scales are growing out of your [color] skin with alarming speed. As you watch, the surface of your skin is covered in smooth scales. They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body. <b>You're covered from head to toe in shiny " + color + " scales.</b>";
 	          }
 	          break;
 	        default:
@@ -388,9 +388,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    },
 	    // is present
 	    function (): Boolean {
-	      options = skinFormatOptions(options, false);
+	      options = skinFormatOptions(options, Skin.SCALES);
 
-	      return player.hasCoatOfType(Skin.SCALES) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
+	      return player.hasCoatOfType(Skin.SCALES) && InCollection(player.scaleColor, options.colors) && player.skin.coverage == coverage;
 	    }
 	  )
 	}
@@ -399,7 +399,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  return new SimpleTransformation("Dragon Scales Skin",
 	    // apply effect
 	    function (doOutput: Boolean): void {
-	      options = skinFormatOptions(options, false);
+	      options = skinFormatOptions(options, Skin.DRAGON_SCALES);
 
 	      const color: String = options.color;
 
@@ -408,17 +408,17 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      // Coverage
 	      if (player.hasCoatOfType(Skin.DRAGON_SCALES)) {
 	        if (coverage > player.skin.coverage) {
-	          desc += "You suddenly feel a familiar itch on parts of your skin uncovered by dragon scales. You're not surprised when <b>even more " + player.coatColor + " dragon scales sprout, covering more of your body.</b>";
+	          desc += "You suddenly feel a familiar itch on parts of your skin uncovered by dragon scales. You're not surprised when <b>even more [scales color] dragon scales sprout, covering more of your body.</b>";
 	        } else if (coverage < player.skin.coverage) {
-	          desc += "Sections of your " + player.coatColor + " dragon scales itch incessantly, and as you scratch yourself, they start falling off wholesale. <b>You still have " + player.coatColor + " dragon scales on your body, but now they cover less of your skin.</b>";
+	          desc += "Sections of your [scales color] dragon scales itch incessantly, and as you scratch yourself, they start falling off wholesale. <b>You still have [scales color] dragon scales on your body, but now they cover less of your skin.</b>";
 	        }
 
-	        if (coverage !== player.skin.coverage && color !== player.coatColor) {
+	        if (coverage !== player.skin.coverage && color !== player.scaleColor) {
 	          desc += "\n\n";
 	        }
 
-	        if (color !== player.coatColor) {
-	          desc += "You feel a strange sensation on your dragon scales, and as soon as you glance at them, you're met with the sight of their hue slowly morphing from " + player.coatColor + " to " + color + ". <b>Your dragon scales are now " + color + ".</b>"
+	        if (color !== player.scaleColor) {
+	          desc += "You feel a strange sensation on your dragon scales, and as soon as you glance at them, you're met with the sight of their hue slowly morphing from " + player.scaleColor + " to " + color + ". <b>Your dragon scales are now " + color + ".</b>"
 	        }
 	      } else {
 	        switch (coverage) {
@@ -440,9 +440,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    },
 	    // is present
 	    function (): Boolean {
-	      options = skinFormatOptions(options, false);
+	      options = skinFormatOptions(options, Skin.DRAGON_SCALES);
 
-	      return player.hasCoatOfType(Skin.DRAGON_SCALES) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
+	      return player.hasCoatOfType(Skin.DRAGON_SCALES) && InCollection(player.scaleColor, options.colors) && player.skin.coverage == coverage;
 	    }
 	  )
 	}
@@ -451,7 +451,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  return new SimpleTransformation("Chitin Skin",
 	    // apply effect
 	    function (doOutput: Boolean): void {
-	      options = skinFormatOptions(options, false);
+	      options = skinFormatOptions(options, Skin.CHITIN);
 
 	      const color: String = options.color;
 
@@ -460,17 +460,17 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      // Coverage
 	      if (player.hasCoatOfType(Skin.CHITIN)) {
 	        if (coverage > player.skin.coverage) {
-	          desc += "You suddenly feel a familiar itch on parts of your skin uncovered by chitin. When you scratch yourself, your skin starts to harden, becoming chitin in the same color as what was already on your body. <b>Even more " + player.coatColor + " chitin is covering your body now.</b>";
+	          desc += "You suddenly feel a familiar itch on parts of your skin uncovered by chitin. When you scratch yourself, your skin starts to harden, becoming chitin in the same color as what was already on your body. <b>Even more " + player.chitinColor + " chitin is covering your body now.</b>";
 	        } else if (coverage < player.skin.coverage) {
-	          desc += "Sections of your " + player.coatColor + " chitin itch incessantly, and as you scratch yourself, you feel it softening and becoming normal skin again. <b>You still have " + player.coatColor + " chitin on your body, but now it covers less.</b>";
+	          desc += "Sections of your " + player.chitinColor + " chitin itch incessantly, and as you scratch yourself, you feel it softening and becoming normal skin again. <b>You still have " + player.chitinColor + " chitin on your body, but now it covers less.</b>";
 	        }
 
-	        if (coverage !== player.skin.coverage && color !== player.coatColor) {
+	        if (coverage !== player.skin.coverage && color !== player.chitinColor) {
 	          desc += "\n\n";
 	        }
 
-	        if (color !== player.coatColor) {
-	          desc += "You feel a strange sensation on the chitin covering your skin, and as soon as you glance at it, you're met with the sight of its hue slowly morphing from " + player.coatColor + " to " + color + ". <b>Your chitin is now " + color + ".</b>"
+	        if (color !== player.chitinColor) {
+	          desc += "You feel a strange sensation on the chitin covering your skin, and as soon as you glance at it, you're met with the sight of its hue slowly morphing from " + player.chitinColor + " to " + color + ". <b>Your chitin is now " + color + ".</b>"
 	        }
 	      } else {
 	        switch (coverage) {
@@ -503,9 +503,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    },
 	    // is present
 	    function (): Boolean {
-	      options = skinFormatOptions(options, false);
+	      options = skinFormatOptions(options, Skin.CHITIN);
 
-	      return player.hasCoatOfType(Skin.CHITIN) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
+	      return player.hasCoatOfType(Skin.CHITIN) && InCollection(player.chitinColor, options.colors) && player.skin.coverage == coverage;
 	    }
 	  )
 	}
@@ -514,42 +514,41 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
         return new SimpleTransformation("Aqua Scales Skin",
                 // apply effect
                 function (doOutput: Boolean): void {
-                    options = skinFormatOptions(options, false);
+                    options = skinFormatOptions(options, Skin.AQUA_SCALES);
 
                     const color: String = options.color;
-
                     var desc: String = "";
 
                     // Coverage
                     if (player.hasCoatOfType(Skin.AQUA_SCALES)) {
                         if (coverage > player.skin.coverage) {
-                            desc += "You suddenly feel a familiar itch on parts of your skin uncovered by scales. You're not surprised when <b>even more " + player.coatColor + " scales sprout, covering more of your body.</b>";
+                            desc += "You suddenly feel a familiar itch on parts of your skin uncovered by scales. You're not surprised when <b>even more " + player.scaleColor + " scales sprout, covering more of your body.</b>";
                         } else if (coverage < player.skin.coverage) {
-                            desc += "Sections of your " + player.coatColor + " scales itch incessantly, and as you scratch yourself, they start falling off wholesale. <b>You still have " + player.coatColor + " scales on your body, but now they cover less of your skin.</b>";
+                            desc += "Sections of your " + player.scaleColor + " scales itch incessantly, and as you scratch yourself, they start falling off wholesale. <b>You still have " + player.scaleColor + " scales on your body, but now they cover less of your skin.</b>";
                         }
 
-                        if (coverage !== player.skin.coverage && color !== player.coatColor) {
+                        if (coverage !== player.skin.coverage && color !== player.scaleColor) {
                             desc += "\n\n";
                         }
 
-                        if (color !== player.coatColor) {
-                            desc += "You feel a strange sensation on your scales, and as soon as you glance at them, you're met with the sight of their hue slowly morphing from " + player.coatColor + " to " + color + ". <b>Your scales are now " + color + ".</b>"
+                        if (color !== player.scaleColor) {
+                            desc += "You feel a strange sensation on your scales, and as soon as you glance at them, you're met with the sight of their hue slowly morphing from " + player.scaleColor + " to " + color + ". <b>Your scales are now " + color + ".</b>"
                         }
                     } else {
                         switch (coverage) {
                             /*case Skin.COVERAGE_LOW:
-                                if (player.hasFur()) {
-                                    desc += "You scratch yourself, and come away with a large clump of [skin coat.color] fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. You feel your skin shift as " + color + " scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you. The rest of the fur is easy to remove. <b>Your body is now partially covered with small patches of scales!</b>";
+                                if (player.isFurCovered()) {
+                                    desc += "You scratch yourself, and come away with a large clump of [fur color] fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. You feel your skin shift as " + color + " scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you. The rest of the fur is easy to remove. <b>Your body is now partially covered with small patches of scales!</b>";
                                 } else {
                                     desc += "You feel your skin shift as scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you. <b>Your body is now partially covered with small patches of " + color + " scales.</b>";
                                 }
                                 break;*/
                             case Skin.COVERAGE_HIGH:
-                                if (player.hasFur()) desc += "You scratch yourself, and come away with a large clump of [skin coat.color] fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + color + " scales covering most of your body. The rest of the fur is easy to remove.  ";
-                                else if (player.hasGooSkin()) desc += "Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Your skin feels incredibly smooth.  ";
-                                else if (player.hasScales()) desc += "Your " + player.coatColor + " scales itch incessantly, and as you scratch yourself, they start falling off wholesale.  ";
+                                if (player.isFurCovered()) desc += "You scratch yourself, and come away with a large clump of [fur color] fur. Panicked, you look down and realize that your fur is falling out in huge clumps. It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed. Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + color + " scales covering most of your body. The rest of the fur is easy to remove.  ";
+                                else if (player.isGooSkin()) desc += "Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Your skin feels incredibly smooth.  ";
+                                else if (player.isScaleCovered()) desc += "Your [scales color] scales itch incessantly, and as you scratch yourself, they start falling off wholesale.  ";
                                 else if (player.hasCoat()) desc += "Your skin itches and tingles, starting to shed your [skin coat].  ";
-                                else desc += "You idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard. A quick glance down reveals that scales are growing out of your " + player.skinTone + " skin with alarming speed. As you watch, the surface of your skin is covered in smooth scales. They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body. ";
+                                else desc += "You idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard. A quick glance down reveals that scales are growing out of your [color] skin with alarming speed. As you watch, the surface of your skin is covered in smooth scales. They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body. ";
                                 desc += "<b>You're covered from head to toe in shiny " + color + " aqua scales.</b>"
                                 break;
                             default:
@@ -559,14 +558,15 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
                     player.skinDesc = "skin";
                     player.skin.growCoat(Skin.AQUA_SCALES, options, coverage);
+					//player.scaleColor = options.color;
                     if (doOutput) outputText(desc);
                     Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.AQUA_SCALES));
                 },
                 // is present
                 function (): Boolean {
-                    options = skinFormatOptions(options, false);
+                    options = skinFormatOptions(options, Skin.AQUA_SCALES);
 
-                    return player.hasCoatOfType(Skin.AQUA_SCALES) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
+                    return player.hasCoatOfType(Skin.AQUA_SCALES) && InCollection(player.scaleColor, options.colors) && player.skin.coverage == coverage;
                 }
         )
     }
@@ -581,21 +581,21 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				function (doOutput: Boolean): void {
 					//var desc: String = "";
 					if (player.hasPlainSkinOnly()) outputText("[pg]You sigh, feeling your [armor] sink into you as your skin becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!");
-					else if (player.hasFur()) outputText("[pg]You sigh, suddenly feeling your fur become hot and wet.  You look down as your [armor] sinks partway into you.  With a start you realize your fur has melted away, melding into the slime-like coating that now serves as your skin.  You've become partly liquid and incredibly gooey!");
-					else if (player.hasScales()) outputText("[pg]You sigh, feeling slippery wetness over your scales.  You reach to scratch it and come away with a slippery wet coating.  Your scales have transformed into a slimy goop!  Looking closer, you realize your entire body has become far more liquid in nature, and is semi-solid.  Your [armor] has even sunk partway into you.");
+					else if (player.isFurCovered()) outputText("[pg]You sigh, suddenly feeling your fur become hot and wet.  You look down as your [armor] sinks partway into you.  With a start you realize your fur has melted away, melding into the slime-like coating that now serves as your skin.  You've become partly liquid and incredibly gooey!");
+					else if (player.isScaleCovered()) outputText("[pg]You sigh, feeling slippery wetness over your scales.  You reach to scratch it and come away with a slippery wet coating.  Your scales have transformed into a slimy goop!  Looking closer, you realize your entire body has become far more liquid in nature, and is semi-solid.  Your [armor] has even sunk partway into you.");
 					else if (player.skin.base.type != Skin.GOO) outputText("[pg]You sigh, feeling your [armor] sink into you as your [skin] becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!");
 					player.skin.setBaseOnly({type: Skin.GOO, adj: "slimy", pattern: Skin.PATTERN_NONE});
-					if (!InCollection(player.skin.base.color, SlimeRace.SlimeSkinColors) && type == 0) {
-						player.skin.base.color = randomChoice(SlimeRace.SlimeSkinColors);
-						outputText("  Stranger still, your skintone changes to [skin color]!");
+					if (!InCollection(player.skinColor, SlimeRace.SlimeSkinColors) && type == 0) {
+						player.skinColor = randomChoice(SlimeRace.SlimeSkinColors);
+						outputText("  Stranger still, your skin tone changes to [skin color]!");
 					}
-					if (!InCollection(player.skin.base.color, MagmaSlimeRace.MagmaSlimeSkinColors) && type == 1) {
-						player.skin.base.color = randomChoice(MagmaSlimeRace.MagmaSlimeSkinColors);
-						outputText("  Stranger still, your skintone changes to [skin color]!");
+					if (!InCollection(player.skinColor, MagmaSlimeRace.MagmaSlimeSkinColors) && type == 1) {
+						player.skinColor = randomChoice(MagmaSlimeRace.MagmaSlimeSkinColors);
+						outputText("  Stranger still, your skin tone changes to [skin color]!");
 					}
-					if (!InCollection(player.skin.base.color, DarkSlimeRace.DarkSlimeSkinColors) && type == 2) {
-						player.skin.base.color = randomChoice(DarkSlimeRace.DarkSlimeSkinColors);
-						outputText("  Stranger still, your skintone changes to [skin color]!");
+					if (!InCollection(player.skinColor, DarkSlimeRace.DarkSlimeSkinColors) && type == 2) {
+						player.skinColor = randomChoice(DarkSlimeRace.DarkSlimeSkinColors);
+						outputText("  Stranger still, your skin tone changes to [skin color]!");
 					}
 					//if (doOutput) outputText(desc);
 					switch (type) {
@@ -609,31 +609,20 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				},
 				// is present
 				function (): Boolean {
-					options = skinFormatOptions(options, false);
+					options = skinFormatOptions(options, Skin.GOO);
 
-					return player.hasCoatOfType(Skin.CHITIN) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
+					return player.skin.base.type == Skin.GOO && InCollection(player.skinColor, options.colors) && player.skin.coverage == coverage;
 				}
 		)
 	}
 
-	private function skinFormatOptions(options: *, hairy:Boolean = false): * {
+	private function skinFormatOptions(options: *, type:int): * {
         if (!options) options = {};
         if (!options.adj) options.adj = "";
         if (!options.pattern) options.pattern = "";
-        if (!options.color && !options.colors)
-            if (player.coatColor == "" || (!player.skin.isHairy() && hairy) || (player.skin.isHairy() && !hairy)) {
-                //WHY THE F*** DOESN'T THIS TRASH LANGUAGE HAVE LOGICAL XOR?!
-                //the third condition - if need fur, and skin is NOT hairy, reset to hair color, and vice versa
-                options.color = hairy ? player.hairColor : player.skin.base.color;
-                options.colors = [options.color];
-            }
-            else {
-                options.color = player.coatColor;
-                options.colors = [options.color];
-            }
-        else if (!options.color && options.colors)
-            options.color = randomChoice(options.colors);
-
+        if (!options.colors) options.colors = BodyMaterial.Types[Skin.SkinTypes[type].material].defaultColors;
+		if (!options.color && options.colors)
+			options.color = randomChoice(options.colors);
         return options;
 	}
   /*
@@ -654,15 +643,16 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    desc += "Your skin patterns itches incessantly, and as you scratch they shifts and changes, becoming less and less visible till they gone. <b>Your skin is without any skin patterns!</b>";
+	    desc += "Your skin patterns itche incessantly, and as you scratch, they shift and change, becoming less and less visible till they are gone. <b>Your skin is without any skin patterns!</b>";
 	    player.skin.base.adj = "";
 	    player.skin.base.pattern = Skin.PATTERN_NONE;
+	    player.skin.coat.pattern = Skin.PATTERN_NONE;
 
 	    if (doOutput) outputText(desc);
 	  },
 	  // is present
 	  function (): Boolean {
-	    return player.skin.base.pattern === Skin.PATTERN_NONE;
+	    return player.skin.pattern === Skin.PATTERN_NONE;
 	  }
 	);
 
@@ -672,7 +662,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "You double over suddenly as a harsh, stabbing pain runs across your skin, tattoos in the shape of scars forming on various parts of your body. Considering how you look now, you might as well proudly display your <b>Orc scar tattooed skin.</b>";
-	    player.skin.base.color2 = "black";
+	    player.skinColor2    = "black";
 	    player.skin.base.adj = "scar shaped tattooed";
 	    player.skin.base.pattern = Skin.PATTERN_SCAR_SHAPED_TATTOO;
 
@@ -730,7 +720,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    if (rand(2) == 0) desc += "angular";
 	    else desc += "curved";
 	    desc += " markings remain, as if etched into your skin. <b>You now have Kitsune tattoos on your skin.</b>";
-	    player.skin.base.color2 = "black";
+	    player.skinColor2    = "black";
 	    player.skin.base.adj = "tattooed";
 	    player.skin.base.pattern = Skin.PATTERN_MAGICAL_TATTOO;
 
@@ -767,14 +757,14 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "Your skin tingles and itches faintly. You look down to see ";
-	    if (player.skin.base.color == "sable") desc += "white";
-	    if (player.skin.base.color == "white") desc += "black";
+	    if (player.skinColor1 == "sable") desc += "white";
+	    if (player.skinColor1 == "white") desc += "black";
 	    desc += " veins etching deep into your skin across the entirety of your body. <b>You now have ";
-	    if (player.skin.base.color == "sable") desc += "white";
-	    if (player.skin.base.color == "white") desc += "black";
+	    if (player.skinColor1 == "sable") desc += "white";
+	    if (player.skinColor1 == "white") desc += "black";
 	    desc += " veins.</b>";
-	    if (player.skin.base.color == "sable") player.skin.base.color2 = "white";
-	    if (player.skin.base.color == "white") player.skin.base.color2 = "black";
+	    if (player.skinColor1 == "sable") player.skinColor2 = "white";
+	    if (player.skinColor1 == "white") player.skinColor2 = "black";
 
 	    player.skin.base.pattern = Skin.PATTERN_WHITE_BLACK_VEINS;
 	    player.skin.base.adj = "veined";
@@ -847,10 +837,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			TransformationUtils.applyTFIfNotPresent(transformations.SkinChitin(Skin.COVERAGE_LOW, { color: "yellow" }), doOutput);
 			var desc:String = "A ripple spreads through your chitin as some patches change in color. After a few moments you're left with a yellow and black striped pattern, like a bee's! <b>You've got striped chitin!</b>";
 			player.skin.coat.pattern = Skin.PATTERN_BEE_STRIPES;
-			if (!InCollection(player.coatColor2, "black", "ebony"))
-				player.coatColor2 = randomChoice("black", "ebony");
-			if (player.coatColor2 != "yellow")
-				player.coatColor = "yellow";
+			if (!InCollection(player.chitinColor2, "black", "ebony"))
+				player.chitinColor2 = randomChoice("black", "ebony");
+			if (player.chitinColor1 != "yellow")
+				player.chitinColor1 = "yellow";
 			if (doOutput) outputText(desc);
 			Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.BEE_STRIPES));
 		},
@@ -863,15 +853,16 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const SkinPatternTigerSharkStripes:Transformation = new SimpleTransformation("Shark Stripes Skin Pattern",
             // apply effect
             function (doOutput:Boolean):void {
-                TransformationUtils.applyTFIfNotPresent(transformations.SkinAquaScales(Skin.COVERAGE_HIGH, {color: "orange", color2: "black", pattern: Skin.PATTERN_TIGER_STRIPES}), doOutput);
-                var desc:String = "Your scales begins to tingle and itch, before rapidly shifting to a shiny orange color, marked by random black scales looking like a stripes. You take a quick look in a nearby pool of water, to see your skin has morphed in appearance and texture to become more like a Tiger Shark!";
-                player.skin.base.color2 = "black";
+				TransformationUtils.applyTFIfNotPresent(transformations.SkinAquaScales(Skin.COVERAGE_HIGH, {color: "orange", color2: "black", pattern: Skin.PATTERN_TIGER_STRIPES}), doOutput);
+                var desc:String = "[pg]Your scales begins to tingle and itch, before rapidly shifting to a shiny orange color, marked by random black scales looking like tiger stripes. You take a quick look in a nearby pool of water, to see your skin has morphed in appearance and texture to become more like a Tiger Shark!";
+				//player.scaleColor = "orange";
+                //player.scaleColor2 = "black";
                 if (doOutput) outputText(desc);
                 Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.SHARK_STRIPES));
             },
             // is present
             function ():Boolean {
-                return transformations.SkinAquaScales(Skin.COVERAGE_HIGH).isPresent() && player.skin.coat.pattern === Skin.PATTERN_TIGER_STRIPES;
+                return transformations.SkinAquaScales(Skin.COVERAGE_HIGH).isPresent() && player.skin.pattern === Skin.PATTERN_TIGER_STRIPES;
             }
     );
   /*
@@ -1399,7 +1390,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    if (player.antennae.type == Antennae.BEE) desc += "Your head itches momentarily as your two floppy antennae changes slowly into long prehensile ones similar to those seen at mantis.";
+	    if (player.antennae.type == Antennae.BEE) desc += "Your head itches momentarily as your two floppy antennae changes slowly into long prehensile ones similar to those seen on mantis.";
+		else if (player.antennae.type == Antennae.ANT) desc += "Your head itches momentarily as your two rigid antennae loosen up, ending up more like those on a Mantis";
 	    else desc += "Your head itches momentarily as two long prehensile antennae sprout from your [hair].";
 	    player.antennae.type = Antennae.MANTIS;
 
@@ -1418,6 +1410,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    if (player.antennae.type == Antennae.MANTIS) desc += "Your head itches momentarily as your two long prehensile antennae changes slowly into floppy ones similar to those seen at bees.";
+		else if (player.antennae.type == Antennae.ANT) desc += "Your head itches momentarily as your two rigid antennae changes slowly into floppy ones similar to those seen on bees.";
 	    else desc += "Your head itches momentarily as two floppy antennae sprout from your " + hairDescript() + ".";
 	    player.antennae.type = Antennae.BEE;
 
@@ -1492,6 +1485,25 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			function (): Boolean {
 				return player.antennae.type === Antennae.JABBERWOCKY;
 			}
+	);
+
+	public const AntennaeAnt: Transformation = new SimpleTransformation("Ant Antennae",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+
+	    if (player.antennae.type == Antennae.BEE) desc += "Your head itches momentarily as your two floppy antennae change slowly into long, stiff-yet-prehensile ones similar to those seen on ants.";
+		else if (player.antennae.type == Antennae.MANTIS) desc += "Your head itches momentarily as your two antennae stiffen up, ending up more like those on an ant";
+	    else desc += "Your head itches momentarily as two long prehensile antennae sprout from your [hair].";
+	    player.antennae.type = Antennae.ANT;
+
+	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(AntennaeMem.getMemory(AntennaeMem.ANT));
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.antennae.type === Antennae.ANT;
+	  }
 	);
   /*
 */
@@ -1737,7 +1749,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      }
 	    }
 	    if (!InCollection(player.hairColor, SlimeRace.SlimeSkinColors, MagmaSlimeRace.MagmaSlimeSkinColors, DarkSlimeRace.DarkSlimeSkinColors)) {
-	      player.hairColor = player.skin.base.color;
+	      player.hairColor = player.skinColor;
 	      desc += " Stranger still, the hue of your semi-liquid hair changes to " + player.hairColor + ".";
 	    }
 
@@ -1758,7 +1770,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  },
 		// is possible
 		function (): Boolean {
-			return player.hairType != Hair.GOO && player.hasGooSkin();
+			return player.hairType != Hair.GOO && player.isGooSkin();
 		}
 	);
 
@@ -1925,7 +1937,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    // apply effect
 	    function (doOutput: Boolean): void {
 	      var color: String = randomChoice(colors);
-	      player.hairColorOnly = color;
+	      player.hairColor = color;
 	      var desc: String = "";
 
 	      desc += "Your scalp begins to tingle, and you gently grasp a strand of hair, pulling it out to check it. Your hair has become [haircolor]!";
@@ -2228,14 +2240,14 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	        desc += "Your prominent teeth chatter noisily at first, then with diminishing violence, until you can no longer feel them jutting past the rest!  ";
 	      }
 	      desc += "Shaking your head a bit, you wait for your energy to return, then examine your appearance. ";
-	      if (((player.skin.base.color == "ebony" || player.skin.base.color == "black") && !player.hasCoat()) || ((player.hairColor == "black" || player.hairColor == "midnight") && (player.hasFur() || player.hasScales()))) {
+	      if (((player.skinColor == "ebony" || player.skinColor == "black") && !player.hasCoat()) || ((player.hairColor == "black" || player.hairColor == "midnight") && (player.isFurCovered() || player.isScaleCovered()))) {
 	        desc += "Nothing seems different at first. Strange... you look closer and discover a darker, mask-line outline on your already inky visage. Furthermore your canines have slightly elongated not unlike those of an animal. <b>You now have a barely-visible raccoon mask and sharp canines like those of a raccoon.</b>";
 	      } else desc += "A dark, almost black mask shades the " + player.skinFurScales() + " around your eyes and over the topmost portion of your nose, lending you a criminal air! Furthermore your canines have slightly elongated not unlike those of an animal. <b>You now have a raccoon mask and sharp canines like those of a raccoon!</b>";
 	    } else {
 	      desc += "A sudden migraine sweeps over you and you clutch your head in agony as your nose collapses back to human dimensions. A worrying numb spot grows around your eyes, and you entertain several horrible premonitions until it passes as suddenly as it came. Checking your reflection in your water barrel, you find ";
 	      //[(if black/midnight fur or if black scales)
-	      if (((player.hairColor == "black" || player.hairColor == "midnight") && (player.hasFur() || player.hasScales()))) desc += "your face apparently returned to normal shape, albeit still covered in " + player.skinFurScales() + ". You look closer and discover a darker, mask-line outline on your already inky visage. <b>You now have a barely-visible raccoon mask on your otherwise normal human face.</b>";
-	      else if ((player.skin.base.color == "ebony" || player.skin.base.color == "black") && (!player.hasCoat())) desc += "your face apparently returned to normal shape. You look closer and discover a darker, mask-line outline on your already inky visage. <b>You now have a barely-visible raccoon mask on your normal human face.</b>";
+	      if (((player.hairColor == "black" || player.hairColor == "midnight") && (player.isFurCovered() || player.isScaleCovered()))) desc += "your face apparently returned to normal shape, albeit still covered in " + player.skinFurScales() + ". You look closer and discover a darker, mask-line outline on your already inky visage. <b>You now have a barely-visible raccoon mask on your otherwise normal human face.</b>";
+	      else if ((player.skinColor == "ebony" || player.skinColor == "black") && (!player.hasCoat())) desc += "your face apparently returned to normal shape. You look closer and discover a darker, mask-line outline on your already inky visage. <b>You now have a barely-visible raccoon mask on your normal human face.</b>";
 	      else desc += "your face returned to human dimensions, but shaded by a black mask around the eyes and over the nose!  <b>You now have a humanoid face with a raccoon mask!</b>";
 	    }
 
@@ -2960,6 +2972,21 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    return player.faceType === Face.ELF;
 	  }
 	);
+
+	public const FaceAnt: Transformation = new SimpleTransformation("Ant Face",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "Tension builds at the back of your cheeks, just behind your cheekbones. You reach to touch the affected area, pricking your finger on a sharpening bone. It slides forward while you're touching it, lengthening into an ant-like mandible. You check the other side and confirm your suspicions. <b>You now have a pair of mandibles, complete with their own formic acid!</b>";
+
+	    if (doOutput) outputText(desc);
+	    player.faceType = Face.ANT;
+	    Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.ANT));
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.faceType === Face.ANT;
+	  }
+	);
   /*
 */
 
@@ -3216,7 +3243,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    desc += "Your ears begin to prickle and burn as the skin tears and stretches migrating to the top of your head as they change into long wide, deep ears, perfect for catching any stray sound. Which becomes apparent when your hearing becomes far more clear than it has ever been. <b>Sound has become an entirely new experience now that you have displacer beast ears!</b>";
-	    player.coatColor = "midnight";
+	    player.furColor = "midnight";
 	    player.ears.type = Ears.DISPLACER;
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.DISPLACER));
@@ -3512,6 +3539,22 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  }
 	);
 
+	public const EarsInsect: Transformation = new SimpleTransformation("Insect Ears",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+
+	    desc += "Tightness centers on your scalp, pulling your ears down from their normal, fleshy shape into small, chitin lumps with holes in their bottom. <b>You have insect ears!</b>";
+	    player.ears.type = Ears.INSECT;
+	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.INSECT));
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.ears.type === Ears.INSECT;
+	  }
+	);
+
 	public const EarsFox: Transformation = new SimpleTransformation("Fox Ears",
 	  // apply effect
 	  function (doOutput: Boolean): void {
@@ -3541,7 +3584,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "A weird tingling runs through your scalp as your [hair] shifts slightly. You reach up to touch and bump <b>your new pointed elfin ears</b>!";
 
-	    if (player.hasFur()) desc += " As you examine your new elfin ears you feel fur grow around them, matching the rest of you.";
+	    if (player.isFurCovered()) desc += " As you examine your new elfin ears you feel fur grow around them, matching the rest of you.";
 
 	    player.ears.type = Ears.ELFIN;
 	    if (doOutput) outputText(desc);
@@ -3587,6 +3630,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.DOG;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.DOG));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3627,6 +3671,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.SHARK;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.SHARK));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3660,6 +3705,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.BUNNY;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.BUNNY));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3676,6 +3722,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.AVIAN;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.AVIAN));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -3725,6 +3772,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.RAIJU;
 	    if (doOutput) outputText(desc);
+		Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.RAIJU));
 	  },
 	  // is present
 	  function (): Boolean {
@@ -4723,10 +4771,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    case Arms.BOAR:
 	    case Arms.BEAR:
 	    case Arms.RAIJU_PAWS:
-	      desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving [skin base.type] behind. Also the claws on your fingers reverts back into ordinary nails.";
+	      desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' [fur color] fur is flaking away, leaving [skin base.type] behind. Also the claws on your fingers reverts back into ordinary nails.";
 	      break;
 	    case Arms.DISPLACER:
-	      desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving [skin base.type] behind. Also the claws on your fingers reverts back into ordinary nails.\n\nYou feel highly uncomfortable as your extra set of arms vanishes into your body following the loss of your leonine paw hands. Guess your back with only two arms now.";
+	      desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' [fur color] fur is flaking away, leaving [skin base.type] behind. Also the claws on your fingers reverts back into ordinary nails.\n\nYou feel highly uncomfortable as your extra set of arms vanishes into your body following the loss of your leonine paw hands. Guess your back with only two arms now.";
 	      break;
 	    case Arms.ELF:
 	    case Arms.KITSUNE:
@@ -4772,6 +4820,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    case Arms.BAT:
 	      desc += "You scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your bones are breaking down and reforming in a frenzy. Your parchment-like skin begins to fall off in clumps, leaving the mess of malformed bones that are your arms right now naked for all to see. However, even as you watch, dark blood creeps over the bone, properly aligning them before healing them over, although not in their old form. Within seconds, your bones are remade into ones alike those you were born with, in structure if nothing else, the eldritch power of your blood finally ebbing away, but not before the last of it settles and turns into a brand new patch of skin.";
 	      break;
+		case Arms.ANT:
+		  desc += "You double over, a sudden pain just below your shoulders. Finding you cannot reach your lower arms to feel at each other, you look down and realize that they're shrinking back into your torso."
+		  if (!player.isChitinCovered()) desc += " Because you are shocked over your lower arms going away, you don't even notice the carapace of your primary arms softening into [skin coat]."
+	      break;
 	    default:
 	      desc += "You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form.";
 	      break;
@@ -4814,7 +4866,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
 
-	    desc += "Your hands suddenly start to hurt as your arms grows a thick coat of [skin coat.color] fur up to your shoulders where it turns [haircolor]. You watch enthralled as your nails fall off your fingers, feline claws taking their place on your now five-fingered paw-like hands. <b>You now have leonine paw hands.</b>";
+	    desc += "Your hands suddenly start to hurt as your arms grows a thick coat of [fur color] fur up to your shoulders where it turns [haircolor]. You watch enthralled as your nails fall off your fingers, feline claws taking their place on your now five-fingered paw-like hands. <b>You now have leonine paw hands.</b>";
 	    player.arms.type = Arms.LION;
 
 	    if (doOutput) outputText(desc);
@@ -4852,7 +4904,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
 
-	    desc += "Your hands suddenly start to hurt as your arms grows a thick coat of [skin coat.color] fur up to your shoulders. You watch enthralled as your nails fall off your fingers, feline claws taking their place on your now five-fingered paw-like hands. <b>You now have cat paw hands.</b>";
+	    desc += "Your hands suddenly start to hurt as your arms grows a thick coat of [fur color] fur up to your shoulders. You watch enthralled as your nails fall off your fingers, feline claws taking their place on your now five-fingered paw-like hands. <b>You now have cat paw hands.</b>";
 	    player.arms.type = Arms.CAT;
 
 	    if (doOutput) outputText(desc);
@@ -4908,7 +4960,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
 
 	    desc += "Your arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive. Furthermore your nails become increasingly pointed turning black just like a set of claws. <b>You now have boar arms.</b>";
-	    player.skin.coat.color = player.hairColor;
 	    player.arms.type = Arms.BOAR;
 
 	    if (doOutput) outputText(desc);
@@ -4966,7 +5017,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
 
 	    desc += "You shiver in delight as fur begins to form on your forearms, high voltage running along from your shoulders to your fingertips. Before you know it your hands turned to paws and your sharp nails to vicious looking claws coated with electricity. You can't wait to wrap those around a juicy cock or dip them into a waiting snatch.";
-	    if (player.coatColor == "") player.coatColor = player.hairColor;
 	    player.arms.type = Arms.RAIJU_PAWS;
 
 	    if (doOutput) outputText(desc);
@@ -5183,7 +5233,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny black carapace</b>. You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
 	    }
 
-	    player.coatColor2 = "black";
+	    player.chitinColor2 = "black";
 	    player.arms.type = Arms.SPIDER;
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.SPIDER));
@@ -5224,11 +5274,11 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>. A moment later the pain fades and you are able to turn your gaze down to your beautiful new arms, covered in shining black chitin from the upper arm down, and downy yellow fuzz along your upper arm.";
 	    }
 	    player.arms.type = Arms.BEE;
-		if (!InCollection(player.coatColor2, "black","ebony")){
-			player.coatColor2 = randomChoice("black","ebony");
+		if (!InCollection(player.chitinColor2, "black","ebony")){
+			player.chitinColor2 = randomChoice("black","ebony");
 		}
-		if (player.coatColor2 != "yellow"){
-			player.coatColor = "yellow";
+		if (player.chitinColor1 != "yellow"){
+			player.chitinColor1 = "yellow";
 		}
 
 	    if (doOutput) outputText(desc);
@@ -5382,7 +5432,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    desc += "Your arms become increasingly wet, as if they were sweating heavily, until eventually you're unsure whether or not they are even solid. The sweat clears up, turning to [skintone] slime. At first, it feels weird, because they are neither entirely solid or liquid, but the simple act of lengthening your limbs to ridiculous reach amuses you. Furthermore you can see right through your hands as if looking through water. Perhaps there's some use to your <b>new goo dripping arms.</b>";
+	    desc += "Your arms become increasingly wet, as if they were sweating heavily, until eventually you're unsure whether or not they are even solid. The sweat clears up, turning to [color] slime. At first, it feels weird, because they are neither entirely solid or liquid, but the simple act of lengthening your limbs to ridiculous reach amuses you. Furthermore you can see right through your hands as if looking through water. Perhaps there's some use to your <b>new goo dripping arms.</b>";
 
 	    player.arms.type = Arms.GOO;
 	    if (doOutput) outputText(desc);
@@ -5436,20 +5486,20 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    if (player.skin.hasChitin()) {
+	    if (player.skin.isChitinCovered()) {
 	      desc += "Ughh, was that seed good for your body? You wince in pain, as some part of you is obviously not happy of being subjected to the fruit mysterious properties. As you direct your attention to your arms, you’re alarmed by their increasingly rigid feeling, and, to make things worse, the process continues, as the worrying sensation creeps up your arms until it reaches your shoulders. Soon, no matter how much you try, you aren’t able to move your arms in any way.";
 	      desc += "Just when you thought that nothing could feel worse, you see how the chitin on your arms fissures, falling to the ground like pieces of a broken vase and leaving a mellified tissue beneath. To you relief, the ‘jelly’ also fall, leaving only normal skin on your arms.";
-	      desc += "Then, a cloak of soft, " + player.skin.coat.color + ", colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. When the growing stops, the skin over your hands changes too, turning into a layer of [skin], skin, albeit rougher than the usual, and made of thousands of diminutive scales. The structure of your palm and fingers remain the same, tough your fingernails turn into short talons.";
-	    } else if (player.hasFur()) {
+	      desc += "Then, a cloak of soft, [feather color], colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. When the growing stops, the skin over your hands changes too, turning into a layer of [skin], skin, albeit rougher than the usual, and made of thousands of diminutive scales. The structure of your palm and fingers remain the same, tough your fingernails turn into short talons.";
+	    } else if (player.isFurCovered()) {
 	      desc += "A bit weary about the possible effects of the seed on your body, you quickly notice when the fur covering your starts thickening, some patches merging an thickening, first forming barbs, and then straight-out feathers. To your surprise, your hand and forearms become strangely numb, and, to make things worse, the process continues, as the worrying sensation creeps up your arms until it reaches your shoulders. Soon, no matter how much you try, you aren’t able to move your arms in any way.";
-	      desc += "The newly formed feathers keep growing making the excess fur fall, until you’ve gained a cloak of soft, " + player.skin.coat.color + ", colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. Once the effects on that area end, the fur over your hands changes too, falling quickly and leaving behind soft, bare skin, that quickly turns into a layer of [skin], skin, ";
+	      desc += "The newly formed feathers keep growing making the excess fur fall, until you’ve gained a cloak of soft, [feather colors], colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. Once the effects on that area end, the fur over your hands changes too, falling quickly and leaving behind soft, bare skin, that quickly turns into a layer of [skin], skin, ";
 	      desc += "albeit rougher than the usual, made of thousands of diminutive scales. The structure of your palm and fingers remain the same, though your fingernails turn into short talons.";
-	    } else if (player.hasScales()) {
+	    } else if (player.isScaleCovered()) {
 	      desc += "Undoubtedly affected by the dry fruit reactives, the layer of scales covering your arms falls like snowflakes, leaving only a soft layer of [skin] behind. To your surprise, your hand and forearms become strangely numb, and, to make things worse, the process continues, as the worrying sensation creeps up your arms until it reaches your shoulders. Soon, no matter how much you try, you aren’t able to move your arms in any way.";
-	      desc += "Then, a cloak of soft, " + player.skin.coat.color + ", colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. When the growing stops, the skin over your hands changes too, turning into a layer of [skin], skin, albeit rougher than the usual, and made of thousands of diminutive scales. The structure of your palm and fingers remain the same, though your fingernails turn into short talons.";
+	      desc += "Then, a cloak of soft, [feather color], colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. When the growing stops, the skin over your hands changes too, turning into a layer of [skin], skin, albeit rougher than the usual, and made of thousands of diminutive scales. The structure of your palm and fingers remain the same, though your fingernails turn into short talons.";
 	    } else {
 	      desc += "Just after finishing the fruit, your hand and forearms become strangely numb, and, to make things worse, the process continues, as the worrying sensation creeps up your arms until it reaches your shoulders. Soon, no matter how much you try, you aren’t able to move your arms in any way.";
-	      desc += "Then, a cloak of soft, " + player.skin.coat.color + ", colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. When the growing stops, the skin over your hands changes too, turning into a layer of [skin], skin, albeit rougher than the usual, and made of thousands of diminutive scales. The structure of your palm and fingers remain the same, though your fingernails turn into short talons.";
+	      desc += "Then, a cloak of soft, [feather color], colored feathers start sprouting from your armpits, covering every bare inch of skin up your elbows, stopping a few inches before your hands. When the growing stops, the skin over your hands changes too, turning into a layer of [skin], skin, albeit rougher than the usual, and made of thousands of diminutive scales. The structure of your palm and fingers remain the same, though your fingernails turn into short talons.";
 	    }
 	    desc += "Luckily, the sensation returns to your arms, and you’re able to use them with normalcy, with the difference that <b>they’re now avian looking ones!</b>.";
 
@@ -5468,8 +5518,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    desc += "The skin on your arms change a bit, as the " + player.skin.coat.color2 + " turning into soft, feline fur. Your palms and fingers acquire pink paw pads, while at the end of each one of your fingers, the talons sharpen and become prehensile, adopting a posture better suited to pounce over a unsuspecting victim.";
-	    desc += "From the fringe on your elbows to your armpits, your " + player.skin.coat.color + " colored plumage remains the same. <b>At the end, you’ve gotten gryphon-like arms!</b>.";
+	    desc += "The skin on your arms change a bit, as the " + player.skin.describe() + " turning into soft, feline fur. Your palms and fingers acquire pink paw pads, while at the end of each one of your fingers, the talons sharpen and become prehensile, adopting a posture better suited to pounce over a unsuspecting victim.";
+	    desc += "From the fringe on your elbows to your armpits, your " + player.furColor2 + " colored plumage remains the same. <b>At the end, you’ve gotten gryphon-like arms!</b>.";
 
 	    player.arms.type = Arms.GRYPHON;
 	    if (doOutput) outputText(desc);
@@ -5520,7 +5570,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Your nails tingle as they elongate into white claws. A coat of fur then begins to form up from your wrist to your elbows, coating your forearms like bracers. Your hands feels stronger in every way, heck <b>with these new claws you could just climb and stick to any surface just like a squirrel.</b>";
 
-	    if (player.coatColor == "") player.coatColor = player.hairColor;
 	    player.arms.type = Arms.SQUIRREL;
 	    if (doOutput) outputText(desc);
 	  },
@@ -5537,7 +5586,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Your arms begins cover with fur and you watch spellbound as your nails elongate into small sharp animal claws. They aren't exactly strong enough to deal damage but they'll be fine if you ever want to scratch yourself. <b>You now have furry animal arms with paw-like hands not unlike those of a weasel.</b>";
 
-	    if (player.coatColor == "") player.coatColor = player.hairColor;
 	    player.arms.type = Arms.WEASEL;
 	    if (doOutput) outputText(desc);
 	  },
@@ -5554,7 +5602,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Something in your arm bones begins to shift as they suddenly curve and grow awkwardly through the skin, piercing through your fur like a spike. Now juting outside of your wrists like a pair of natural tonfas. the bones begin to reshape, polish and alter itself, fully taking on the consistency of steel! You admire your two Kamaitachi scythes with stupor, they are sharp and hard enough to leave clean deep cuts even in the hardest material and light enough that you can swing them around as if they weren't even there to begin with, lighter than air indeed. Enemies better fear you now that you got those <b>Kamaitachi arm-scythes.</b>";
 
-	    if (player.coatColor == "") player.coatColor = player.hairColor;
 	    player.arms.type = Arms.KAMAITACHI;
 	    if (doOutput) outputText(desc);
 	  },
@@ -5685,7 +5732,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    desc += "Your hands suddenly start to hurt as your arms grows a thick coat of [skin coat.color] fur up to your shoulders. You watch enthralled as your nails turn into large ursan claws on your now five-fingered paw-like hands. <b>You now have bear-like paw hands.</b>";
+	    desc += "Your hands suddenly start to hurt as your arms grows a thick coat of [fur color] fur up to your shoulders. You watch enthralled as your nails turn into large ursan claws on your now five-fingered paw-like hands. <b>You now have bear-like paw hands.</b>";
 
 	    player.arms.type = Arms.BEAR;
 	    if (doOutput) outputText(desc);
@@ -5703,7 +5750,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Your onyx exoskeleton begins to itch. You begin to scratch at it incessantly until you can see [haircolor] fur begin to sprout from your arms from the biceps down, forming a diamond spiral where the fur meets skin. Your fingers begin to shake and sink into your hands as 4 huge strong claws grow in their places. <b>After the painful experience you see that you now have Ushi-Oni bestial arms.</b>";
 
-	    player.coatColor = "black";
+	    player.furColor = "black";
 	    player.arms.type = Arms.USHI_ONI;
 	    if (doOutput) outputText(desc);
 	  },
@@ -5744,14 +5791,40 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      else desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a midnight purple carapace</b>. You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
 	    }
 	    if (doOutput) outputText(desc);
-	    player.coatColor = "midnight purple";
-	    player.coatColor2 = "midnight purple";
+	    player.chitinColor = "midnight purple";
+	    player.chitinColor2 = "";
 	    player.arms.type = Arms.SPIDER;
 	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.SPIDER));
 	  },
 	  // is present
 	  function (): Boolean {
 	    return player.arms.type === Arms.SPIDER;
+	  }
+	);
+
+	public const ArmsAnt: Transformation = new SimpleTransformation("Ant Arms",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+
+	    if (player.arms.type == Arms.HARPY) desc += "The feathers covering your arms fall away, leaving them to return to a far more human appearance. You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny carapace</b>.  A second pair has even begun sprouting just underneath, forming these same traits. You touch the exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
+	    else if (player.arms.type == Arms.BEE) desc += "A second pair of arms starts sprouting underneath your original pair, and the fizz covering your upper arms starting to fall down leaving only four shiny chitin clad arms.";
+	    else if (player.arms.type == Arms.SALAMANDER || player.arms.type == Arms.LIZARD || player.arms.type == Arms.DRACONIC) desc += "A second pair of arms starts sprouting underneath your original pair, and the scales covering your upper arms starting to fall down leaving only four shiny chitin clad arms.";
+	    else if (player.arms.type == Arms.MANTIS) desc += "The long scythe extending from your wrist crumbling, leaving you with shiny, chitonous but humanoid arms. A second pair then starts to sprout out below";
+		else if (player.arms.type == Arms.SPIDER) desc += "There's a sudden swelling below your armpits, and you look to see a second pair of chitinous arms sprouting below your main pair."
+	    else {
+				TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+
+				desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the [skinfurscales] into a shiny  carapace</b>. A econd pair has even begun sprouting just underneath, forming these same traits. You touch the exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.";
+	    }
+
+	    player.arms.type = Arms.ANT;
+	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.ANT));
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.arms.type === Arms.ANT;
 	  }
 	);
   /*
@@ -6005,7 +6078,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 		  TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyGoo,doOutput);
 
-	    desc += "You suddenly lose shape turning into a puddle on the ground. Confused you begin to try and stand up   At the center of the mass that is your translucent " + player.skinTone + " body, you actually do have something solid that allows you to shape your form, a heart, or more accurately, a core. You try and pull yourself back up, translucent liquid arms and torso shaping back from your body mass as you need them. Once you've recovered the top of your goey human shape you sigh in relief. Curious you begin to try out your new very malleable form reshaping yourself in various forms from a cube to a literal human dildo. Giggling you take back your standard shape thinking of the many naughty things you can do now with this gooey body of yours.";
+	    desc += "You suddenly lose shape turning into a puddle on the ground. Confused you begin to try and stand up   At the center of the mass that is your translucent [color] body, you actually do have something solid that allows you to shape your form, a heart, or more accurately, a core. You try and pull yourself back up, translucent liquid arms and torso shaping back from your body mass as you need them. Once you've recovered the top of your goey human shape you sigh in relief. Curious you begin to try out your new very malleable form reshaping yourself in various forms from a cube to a literal human dildo. Giggling you take back your standard shape thinking of the many naughty things you can do now with this gooey body of yours.";
 
 	    player.rearBody.type = RearBody.METAMORPHIC_GOO;
 	    if (doOutput) outputText(desc);
@@ -6067,7 +6140,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "As you look at yourself for a second, you notice some small glowing pink dot appearing on your skin as it starts to change hue toward a ghostly white. You think of the deep sea predators using light to confound and capture prey. You realise that you now have <b>bioluminescent ghostly pale skin that will glow slightly even in the darkest reach of the ocean.</b>";
 
-	    player.coatColor = "ghostly pale";
+	    player.skinColor = "ghostly pale";
 
 	    player.rearBody.type = RearBody.KRAKEN;
 	    if (doOutput) outputText(desc);
@@ -6141,7 +6214,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Your back begins to hurt as you feel like your flesh and bones are being torn out. You lie down, screaming in pain as your back keeps on expanding, breathing heavily. Not just that but you feel eviscerated as your guts and organs shift places within your body, causing you to puke from the growing nausea. Eventually it all stops and you take a glimpse behind you. A massive shell has grown behind your back, your organs relocating to inside its safety. Geez, what a deep breath! it's like your lungs doubled in size. You finally manage to calm down and crawl your way to a resting spot in order to finish coping with the transformation and the now massive weight on your back. <b>You now have a Shell.</b>";
 
-	    player.coatColor = "brown";
+	    player.chitinColor = "brown";
 	    player.rearBody.type = RearBody.SNAIL_SHELL;
 	    if (doOutput) outputText(desc);
 	  },
@@ -6457,11 +6530,11 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.lowerBody = LowerBody.BEE;
 	    player.legCount = 2;
-		if (!InCollection(player.coatColor2, "black","ebony")){
-			player.coatColor2 = randomChoice("black","ebony");
+		if (!InCollection(player.chitinColor2, "black","ebony")){
+			player.chitinColor2 = randomChoice("black","ebony");
 		}
-		if (player.coatColor2 != "yellow"){
-			player.coatColor = "yellow";
+		if (player.chitinColor1 != "yellow"){
+			player.chitinColor1 = "yellow";
 		}
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.BEE));
@@ -6600,9 +6673,14 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 	    TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHuman, doOutput);
 
-	    desc += "Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs. From the waist down, your strength completely deserts you, leaving you to fall hard on your [butt] in the dirt. With nothing else to do, you look down, only to be mesmerized by the sight of black exoskeleton creeping up a perfectly human-looking calf. It crests up your knee to envelop the joint in a many-faceted onyx coating. Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton. From a distance it would look almost like a black, thigh-high boot, but you know the truth. <b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>";
+		if (player.lowerBody == LowerBody.ANT) {
+			desc += "Feeling as though something is crawling down your legs, you glance down and realize the chitin covering your hips drops to only cover up to your thighs. ";
+			if (!player.chitinColor2 == "black") desc += "You also realize that the color changes to black. ";
+			desc += "<b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>"
+		}
+	    else desc += "Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs. From the waist down, your strength completely deserts you, leaving you to fall hard on your [butt] in the dirt. With nothing else to do, you look down, only to be mesmerized by the sight of black exoskeleton creeping up a perfectly human-looking calf. It crests up your knee to envelop the joint in a many-faceted onyx coating. Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton. From a distance it would look almost like a black, thigh-high boot, but you know the truth. <b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>";
 
-	    player.coatColor2 = "black";
+	    player.chitinColor2 = "black";
 	    player.lowerBody = LowerBody.CHITINOUS_SPIDER_LEGS;
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.CHITINOUS_SPIDER_LEGS));
@@ -6625,7 +6703,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "You find yourself suddenly paralyzed below the waist. Your dark, reflective legs splay out and drop you flat on your back. Before you can sit up, you feel tiny feelers of pain mixed with warmth and tingling running through them. Terrified at the thought of all the horrible changes that could be wracking your body, you slowly sit up, expecting to find yourself turned into some incomprehensible monstrosity from the waist down. As if to confirm your suspicions, the first thing you see is that your legs have transformed into eight long, spindly legs. Instead of joining directly with your hips, they now connect with the spider-like body that has sprouted in place of where your legs would normally start. Your abdomen has gotten even larger as well. Once the strength returns to your new, eight-legged lower body, you struggle up onto your pointed 'feet', and wobble around, trying to get your balance. As you experiment with your new form, you find you're even able to twist the spider half of your body down between your legs in an emulation of your old, bipedal stance. That might prove useful should you ever want to engage in 'normal' sexual positions, particularly since your [butt] is still positioned just above the start of your arachnid half. <b>You're now a drider.</b>";
 
 	    player.legCount = 8;
-	    player.coatColor2 = "black";
+	    player.chitinColor2 = "black";
 	    player.lowerBody = LowerBody.DRIDER;
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.DRIDER));
@@ -7371,7 +7449,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  },
 		// is possible
 		function (): Boolean {
-			return player.hasGooSkin() && player.arms.type == Arms.GOO && player.lowerBody != LowerBody.GOO;
+			return player.isGooSkin() && player.arms.type == Arms.GOO && player.lowerBody != LowerBody.GOO;
 	  }
 	);
 
@@ -7471,21 +7549,21 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    if (player.isGoo()) {
-	      desc += "Trying to advance, you see your goo pseudopod stuck on the ground. Reaching around to look for the cause, you’re surprised to find the goo solidifying, turning into flesh and skin before your eyes.Bones occupy their places on your new legs and feet, and the excess goo evaporates, leaving you with a duo of fully functional, normal legs.\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, " + player.skin.coat.color + "-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>";
+	      desc += "Trying to advance, you see your goo pseudopod stuck on the ground. Reaching around to look for the cause, you’re surprised to find the goo solidifying, turning into flesh and skin before your eyes.Bones occupy their places on your new legs and feet, and the excess goo evaporates, leaving you with a duo of fully functional, normal legs.\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>";
 	    } else if (player.isTaur()) {
-	      desc += "An strange sensation overcomes your front legs, and even before you realize it, you found them receding on your body! Standing against a rock to not fall at this change to a more bipedal posture, you contemplate how your spine rearranges itself, and soon, you’re left with the usual set of two legs and a standing spine.\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, you realize that they are changing. Before your eyes, your hooves seem to recede, turning back into regular human feet. They don’t last long, though, as your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, " + player.skin.coat.color + "-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>\n\nYour tail splits in two, and eventually reshapes into the more familiar form of two legs. These are far different from the ones that you expected, however; instead of the usual human legs, these have an array of small, shiny golden scales from the knee down, with " + player.skin.coat.color + "-colored feathers taking over the area between your knees and crotch, looking not unlike a bird’s.\n\nYour toes are unusually shaped, too; four of them are in the front, and one of them is on the back of each foot. The toenails have become sharp, menacing talons, best used for snatching prey and the occasional unwilling partner. Looks like <b>you have a new set of avian legs!</b>";
+	      desc += "An strange sensation overcomes your front legs, and even before you realize it, you found them receding on your body! Standing against a rock to not fall at this change to a more bipedal posture, you contemplate how your spine rearranges itself, and soon, you’re left with the usual set of two legs and a standing spine.\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, you realize that they are changing. Before your eyes, your hooves seem to recede, turning back into regular human feet. They don’t last long, though, as your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>\n\nYour tail splits in two, and eventually reshapes into the more familiar form of two legs. These are far different from the ones that you expected, however; instead of the usual human legs, these have an array of small, shiny golden scales from the knee down, with [feather color]-colored feathers taking over the area between your knees and crotch, looking not unlike a bird’s.\n\nYour toes are unusually shaped, too; four of them are in the front, and one of them is on the back of each foot. The toenails have become sharp, menacing talons, best used for snatching prey and the occasional unwilling partner. Looks like <b>you have a new set of avian legs!</b>";
 	    } else if (player.lowerBody == LowerBody.MELKIE) desc += "Your body straightens and telescopes suddenly and without the length of your seal half to anchor you, you're left with your face in the dirt.  A shuffling and scraping of falling scales sounds and a terrible cramp takes you as your back half continues migrating, subducting under your [butt] and making you feel extremely bloated. As your once prominent tail dwindles to roughly the length of your torso, a sickly ripping noise fills your head and it bursts apart, revealing two new bird like legs wish sharp claws! Looks like <b>you have a new set of avian legs!</b";
 	    else if (player.isScylla()) {
-	      desc += "An strange sensation overcomes your " + player.legCount + " tentacles, and even before you realize it, you found that " + (player.legCount - 2) + " of them are receding on your body! Not only that, the ones that remain normal are reshaping themselves into something resembling more an average set of legs. Standing against a rock to not fall at this change to a more bipedal posture, you contemplate how your spine rearranges itself, and soon, you’re left with the usual set of two legs and a standing spine.\n\nBut the changes continue, as your rearranged pair of feet feel strangely tired, so you sit down and let them rest, noticing that you’ve now a set of human-looking feet. They don’t last that way long, though, as your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, " + player.skin.coat.color + "-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>";
+	      desc += "An strange sensation overcomes your " + player.legCount + " tentacles, and even before you realize it, you found that " + (player.legCount - 2) + " of them are receding on your body! Not only that, the ones that remain normal are reshaping themselves into something resembling more an average set of legs. Standing against a rock to not fall at this change to a more bipedal posture, you contemplate how your spine rearranges itself, and soon, you’re left with the usual set of two legs and a standing spine.\n\nBut the changes continue, as your rearranged pair of feet feel strangely tired, so you sit down and let them rest, noticing that you’ve now a set of human-looking feet. They don’t last that way long, though, as your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>";
 	    } else if (player.isAlraune()) {
-	      desc += "Trying to advance, you see your floral appendage stuck on the ground. Reaching around to look for the cause, you’re surprised to find the verdant foliage decaying, leaving behind mellified shapes that turn quickly into flesh and skin before your eyes.Bones occupy their places on your new legs and feet, and the excess goo evaporates, leaving you with a duo of fully functional, normal legs.\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, " + player.skin.coat.color + "-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>";
+	      desc += "Trying to advance, you see your floral appendage stuck on the ground. Reaching around to look for the cause, you’re surprised to find the verdant foliage decaying, leaving behind mellified shapes that turn quickly into flesh and skin before your eyes.Bones occupy their places on your new legs and feet, and the excess goo evaporates, leaving you with a duo of fully functional, normal legs.\n\nBut, the changes continue as your rearranged pair of feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>";
 	    } else if (player.lowerBody == LowerBody.HOOFED) {
-	      desc += "Your feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, you realize that they are changing. Before your eyes, your hooves seem to recede, turning back into regular human feet. They don’t last long, though, as your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, " + player.skin.coat.color + "-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>";
+	      desc += "Your feet feel strangely tired, so you sit down and let them rest.  As you shift your attention to them, you realize that they are changing. Before your eyes, your hooves seem to recede, turning back into regular human feet. They don’t last long, though, as your toes reshape again, four of them remaining in the the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage, while the skin below your knees grows an array of small, shiny golden scales. Looks like <b>you have a new set of avian legs!</b>";
 	    } else if (player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS) {
-	      desc += "Your feet feel strangely tired, so you sit down and let them rest. As you shift your attention to them, you realize that they are changing. The skin below your knees grows an array of small, shiny golden scales and your demonic high-heels recede into your body. Your toes reshape, four of them remaining in the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, " + player.skin.coat.color + "-colored feathers sprouting all over the area between your knees and crotch, giving them a more avian visage. Looks like <b>you have a new set of avian legs!</b>";
+	      desc += "Your feet feel strangely tired, so you sit down and let them rest. As you shift your attention to them, you realize that they are changing. The skin below your knees grows an array of small, shiny golden scales and your demonic high-heels recede into your body. Your toes reshape, four of them remaining in the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.\n\nThe rest of your legs change too, [feather color]-colored feathers sprouting all over the area between your knees and crotch, giving them a more avian visage. Looks like <b>you have a new set of avian legs!</b>";
 	    } else {
 	      desc += "Your [feet] feel strangely tired, so you sit down and let them rest. As you shift your attention to them, you realize that they are changing. The fur on them below your knees falls off, but is quickly replaced by an array of small, shiny golden scales. Your toes reshape, four of them remaining in the front and one of them going to the back of each foot. Your toenails lengthen, turning into sharp, menacing talons, best used for snatching prey and the occasional unwilling partner.";
-	      desc += "The rest of your legs change too, " + player.skin.coat.color + "-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage. Looks like <b>you have a new set of avian legs!</b>";
+	      desc += "The rest of your legs change too, [feather color]-colored feathers taking over the fur covering the area between your knees and crotch, giving them a more avian visage. Looks like <b>you have a new set of avian legs!</b>";
 	    }
 
 	    player.legCount = 2;
@@ -7528,7 +7606,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Your spider body trembles, an intense pressure forming under the chitin, at the same time your plates fall to the ground and [haircolor] fur begins to sprout all over your abdomen. You wince in pain from the sudden growth, your drider legs chitin falls off as well, getting thicker and harder turning into bone. After the torturous session, you look back to see <b>you now have an Ushi-Oni lower body with an internal skeleton and fur.</b>";
 
-	    player.coatColor = "black";
+	    player.furColor = "black";
 	    player.lowerBody = LowerBody.USHI_ONI;
 	    if (doOutput) outputText(desc);
 	  },
@@ -7701,9 +7779,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "Wondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.";
 	    if (player.balls > 0 && player.ballSize > 10) desc += " You're happy not to have to drag those testicles around with you anymore.";
 	    if (!player.hasCoatOfType(Skin.DRAGON_SCALES)) {
-	      player.coatColor = randomChoice(wyrmCoatColor);
+	      player.scaleColor = randomChoice(wyrmCoatColor);
 	    }
-	    desc += " But then, " + player.coatColor + " armored scales start to form on the surface of your skin, slowly becoming visible, recoloring all of your body from the waist down in a snake-like pattern. The feeling is... not that bad actually, kind of like callous, except on your whole lower body. The transformation complete, you get up, standing on your newly formed snake tail. You can't help feeling proud of this majestic new body of yours. This said, it doesn't end there as warm snowy white fur covers up the scale up to your thigh area, seems you are dressed for the winter now. <b>You now have a long, warm and fluffy frost wyrm tail.</b>";
+	    desc += " But then, [scale color] armored scales start to form on the surface of your skin, slowly becoming visible, recoloring all of your body from the waist down in a snake-like pattern. The feeling is... not that bad actually, kind of like callous, except on your whole lower body. The transformation complete, you get up, standing on your newly formed snake tail. You can't help feeling proud of this majestic new body of yours. This said, it doesn't end there as warm snowy white fur covers up the scale up to your thigh area, seems you are dressed for the winter now. <b>You now have a long, warm and fluffy frost wyrm tail.</b>";
 
 	    player.legCount = 1;
 	    player.lowerBody = LowerBody.FROSTWYRM;
@@ -7743,7 +7821,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      desc += "<b>You now have two fuzzy, long-toed raccoon legs.</b>";
 	    } else {
 	      desc += "Your toes wiggle of their own accord, drawing your attention.  Looking down, you can see them changing from their current shape, stretching into oblongs.  When they finish, your foot appears humanoid, but with long, prehesile toes!  ";
-	      if ((player.lowerBody == LowerBody.HUMAN || player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.PLANT_HIGH_HEELS) && !player.hasFur()) desc += "The sensation of walking around on what feels like a second pair of hands is so weird that you miss noticing the itchy fur growing in over your legs... <b>You now have raccoon paws!</b>";
+	      if ((player.lowerBody == LowerBody.HUMAN || player.lowerBody == LowerBody.DEMONIC_HIGH_HEELS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.DEMONIC_CLAWS || player.lowerBody == LowerBody.PLANT_HIGH_HEELS) && !player.isFurCovered()) desc += "The sensation of walking around on what feels like a second pair of hands is so weird that you miss noticing the itchy fur growing in over your legs... <b>You now have raccoon paws!</b>";
 	    }
 
 	    player.legCount = 2;
@@ -7949,7 +8027,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	      // Case 1: Morph Taur legs without changing leg count
 	      if (player.isTaur() && legCount === 4) {
-	        desc += "A familiar numbness reaches your legs. The rough skin covering your lower legs and feet change into more usual, soft skin, and shortly after, it starts sprouting " + player.skin.coat.color2 + " colored fur over them.\n\nYour feet themselves reshape, losing their avian stance and gaining one much more feline, complete with soft pink paw pads. The talons at the end of each toe become retractile feline claws. Albeit walking with those seems initially tricky, you easily gain a hold on how using your <b>new gryphon-like legs.</b>";
+	        desc += "A familiar numbness reaches your legs. The rough skin covering your lower legs and feet change into more usual, soft skin, and shortly after, it starts sprouting " + player.furColor2 + " colored fur over them.\n\nYour feet themselves reshape, losing their avian stance and gaining one much more feline, complete with soft pink paw pads. The talons at the end of each toe become retractile feline claws. Albeit walking with those seems initially tricky, you easily gain a hold on how using your <b>new gryphon-like legs.</b>";
 	      }
 	      // Case 2: Bipedal TF
 	      else if (legCount === 2) {
@@ -7957,7 +8035,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	        // Display TF text if the player is obtaining this part instead of only changing leg count
 	        if (player.lowerBody !== LowerBody.GRYPHON) {
-	          desc += "A familiar numbness reaches your legs. The rough skin covering your lower legs and feet change into more usual, soft skin, and shortly after, it starts sprouting " + player.skin.coat.color2 + " colored fur over them.\n\nYour feet themselves reshape, losing their avian stance and gaining one much more feline, complete with soft pink paw pads. The talons at the end of each toe become retractile feline claws. Albeit walking with those seems initially tricky, you easily gain a hold on how using your <b>new gryphon-like legs.</b>";
+	          desc += "A familiar numbness reaches your legs. The rough skin covering your lower legs and feet change into more usual, soft skin, and shortly after, it starts sprouting " + player.furColor2 + " colored fur over them.\n\nYour feet themselves reshape, losing their avian stance and gaining one much more feline, complete with soft pink paw pads. The talons at the end of each toe become retractile feline claws. Albeit walking with those seems initially tricky, you easily gain a hold on how using your <b>new gryphon-like legs.</b>";
 	        }
 	      }
 	      // Case 3: Taur TF
@@ -8071,8 +8149,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    desc += "Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your thighs. From the waist down, your strength completely deserts you, leaving you to fall hard on your [ass] in the dirt. With nothing else to do, you look down, only to be mesmerized by the sight of midnight purple exoskeleton creeping up a perfectly human-looking calf. It crests up your knee to envelop the joint in a many-faceted onyx coating. Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton. From a distance it would look almost like a dark purple, thigh-high boot, but you know the truth. <b>You now have human-like legs covered in a midnight purple, arachnid exoskeleton.</b>";
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.LowerBodySpider, false);
-	    player.coatColor = "midnight purple";
-	    player.coatColor2 = "midnight purple";
+	    player.chitinColor = "midnight purple";
+	    player.chitinColor2 = "";
 	    if (doOutput) outputText(desc);
 	  },
 	  // is present
@@ -8092,6 +8170,25 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // is present
 	  function (): Boolean {
 	    return player.lowerBody === LowerBody.ATLACH_NACHA;
+	  }
+	);
+
+	public const LowerBodyAnt: Transformation = new SimpleTransformation("Ant Lower Body",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+	    TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHuman, doOutput);
+
+		if (player.lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS) desc += "Feeling as though something is crawling up your legs, you glance down and realize the chitin covering your thighs rises to also cover up to your hips. <b>You now have human-like legs covered in a shiny, ant-like exoskeleton.</b>";
+	    else desc += "Starting at your [feet], a tingle runs up your [legs], not stopping until it reaches your hips. From the waist down, your strength completely deserts you, leaving you to fall hard on your [butt] in the dirt. With nothing else to do, you look down, only to be mesmerized by the sight of shiny exoskeleton creeping up a perfectly human-looking calf. It crests up your knee to envelop the joint in a many-faceted coating. Then, it resumes its slow upward crawl, not stopping until it has girded your hips in shiny exoskeleton. <b>You now have human-like legs covered in a shiny, ant-like exoskeleton.</b>";
+
+	    player.lowerBody = LowerBody.ANT;
+	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ANT));
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.lowerBody === LowerBody.ANT && player.legCount === 2;
 	  }
 	);
   /*
@@ -8226,7 +8323,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      choice = rand(3);
 	      if (choice == 0) desc += "A pressure builds in your backside. You feel under your [armor] and discover an odd bump that seems to be growing larger by the moment. In seconds it passes between your fingers, bursts out the back of your clothes and grows most of the way to the ground. A thick coat of fur springs up to cover your new tail. You instinctively keep adjusting it to improve your balance. <b>You now have a cat-tail.</b>";
 	      if (choice == 1) desc += "You feel your backside shift and change, flesh molding and displacing into a long, flexible tail! <b>You now have a cat tail.</b>";
-	      if (choice == 2) desc += "You feel an odd tingling in your spine and your tail bone starts to throb and then swell. Within a few moments it begins to grow, adding new bones to your spine. Before you know it, you have a tail. Just before you think it's over, the tail begins to sprout soft, glossy [skin coat.color] fur. <b>You now have a cat tail.</b>";
+	      if (choice == 2) desc += "You feel an odd tingling in your spine and your tail bone starts to throb and then swell. Within a few moments it begins to grow, adding new bones to your spine. Before you know it, you have a tail. Just before you think it's over, the tail begins to sprout soft, glossy [fur color] fur. <b>You now have a cat tail.</b>";
 	    } else desc += "You pause and tilt your head... something feels different. Ah, that's what it is; you turn around and look down at your tail as it starts to change shape, narrowing and sprouting glossy fur. <b>You now have a cat tail.</b>";
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
@@ -8321,7 +8418,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      desc += "Feeling an uncomfortable sensation on your butt, you stretch yourself, attributing it to having sat on a rough surface. A burning sensation runs through your body, similar to the one that you had after eating the root. When it migrates to your back, your attention goes to a mass of fluff that has erupted from your backside. Before you can check it properly, it seems to move on its own, following the heated sensation that now pulsates through your body, and when the heated pulses seem to have stopped, it has become a long, fluffy tube";
 	      desc += "Shortly after, the feel of that spicy root returns, but now the heat is felt only in your tail, which shakes wildly while it elongates and becomes more bushy. Soon it has become almost as long as you. A very thick mass of soft, fluffy furs covers it in a matter of seconds. It acquires a lovely ringed pattern of red-russet and copperish-orange.";
 	      desc += "When the effects finally subside, you decide to test the tail, making it coil around your body, realizing soon that you can control its movements with ease, and that its fur feels wonderful at the touch. Anyways, <b>you now have a long, bushy, red-panda tail!</b>";
-	    } else if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.MANTIS_ABDOMEN) {
+	    } else if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.MANTIS_ABDOMEN || player.tailType == Tail.ANT_ABDOMEN) {
 	      desc += "Your insectile backside seems affected by the root properties, as your venom production suddenly stops. The flesh within the abdomen retracts into your backside, the chiting covering falling, leaving exposed a layer of soft, bare skin. When the abdomen disappears, your left with a comically sized butt, that soon reverts to its usual size.";
 	      desc += "The root keeps doing its thing, as you feel an uncomfortable sensation on your butt. A burning sensation runs through your body, similar to the one that you had after eating the root. When it migrates to your back, your attention goes to a mass of fluff that has erupted from your backside. Before you can check it properly, it seems to move on its own, following the heated sensation that now pulsates through your body, and when the heated pulses seem to have stopped, it has become a long, fluffy tube, quite different from your former abdomen.";
 	      desc += "Shortly after, the feel of that spicy root returns, but now the heat is felt only in your tail, which shakes wildly while it elongates and becomes more bushy. Soon it has become almost as long as you. A very thick mass of soft, fluffy furs covers it in a matter of seconds. It acquires a lovely ringed pattern of red-russet and copperish-orange.";
@@ -8477,7 +8574,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (player.tailType == Tail.NONE) desc += "You feel the flesh above your [butt] knotting and growing. It twists and writhes around itself before flopping straight down, now shaped into a distinctly bovine form. You have a <b>cow tail</b>.";
 	    else {
-	      if (!InCollection(player.tailType, Tail.SPIDER_ADBOMEN, Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTIS_ABDOMEN)) {
+	      if (!InCollection(player.tailType, Tail.SPIDER_ADBOMEN, Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTIS_ABDOMEN, Tail.ANT_ABDOMEN)) {
 	        desc += "Your tail bunches uncomfortably, twisting and writhing around itself before flopping straight down, now shaped into a distinctly bovine form. You have a <b>cow tail</b>.";
 	      } else {
 	        desc += "Your insect-like abdomen tingles pleasantly as it begins shrinking and softening, chitin morphing and reshaping until it looks exactly like a <b>cow tail</b>.";
@@ -8625,7 +8722,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "A burst of pain hits you just above your [butt], coupled with a sensation of burning heat and pressure. You can feel your " + player.skinFurScales() + " tearing as something forces its way out of your body. Reaching back, you grab at it with your hands. It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape. The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen! With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones. That may prove useful. <b>You now have a spider's abdomen hanging from above your [butt]!</b>";
 
-	    player.coatColor2 = "black";
+	    player.chitinColor2 = "black";
 	    player.tailVenom = 5;
 	    player.tailRecharge = 5;
 	    player.tailType = Tail.SPIDER_ADBOMEN;
@@ -8675,11 +8772,11 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailVenom = 10;
 	    player.tailRecharge = 5;
 	    player.tailType = Tail.BEE_ABDOMEN;
-		if (!InCollection(player.coatColor2, "black","ebony")){
-			player.coatColor2 = randomChoice("black","ebony");
+		if (!InCollection(player.chitinColor2, "black","ebony")){
+			player.chitinColor2 = randomChoice("black","ebony");
 		}
-		if (player.coatColor2 != "yellow"){
-			player.coatColor = "yellow";
+		if (player.chitinColor1 != "yellow"){
+			player.chitinColor1 = "yellow";
 		}
 	    player.tailCount = 1;
 
@@ -8860,12 +8957,12 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    if (player.tailType !== Tail.NONE) {
 	      if (player.tailCount > 1) {
-	        desc += "You feel an odd itch down your tail. It’s kind of a familiar feeling, as when you work a muscle to strengthen it. As you’re musing on what could be the cause, something changes on your tails, as they tense and twitch, so you look back to examine what’s happening to them.\n\nWhen you lay your eyes on them, the first thing that you notice if that is they’re entwining in a mess of curls and knots, the flesh on them merging until you have a single one. Then, the lone tail left starts shortening quickly. Soon, it has reduced into a short, fleshy bump of a tail. It doesn’t keep that way long, as it lengthens and wides a little, and start sprouting large, " + player.skin.coat.color + " colored feathers, shaped as wide fan. Some of then are very long, while others, near you [ass], are soft and downy.";
+	        desc += "You feel an odd itch down your tail. It’s kind of a familiar feeling, as when you work a muscle to strengthen it. As you’re musing on what could be the cause, something changes on your tails, as they tense and twitch, so you look back to examine what’s happening to them.\n\nWhen you lay your eyes on them, the first thing that you notice if that is they’re entwining in a mess of curls and knots, the flesh on them merging until you have a single one. Then, the lone tail left starts shortening quickly. Soon, it has reduced into a short, fleshy bump of a tail. It doesn’t keep that way long, as it lengthens and wides a little, and start sprouting large, [feather color] colored feathers, shaped as wide fan. Some of then are very long, while others, near you [ass], are soft and downy.";
 	      } else {
-	        desc += "You feel an odd itch down your tail. It’s kind of a familiar feeling, as when you work a muscle to strengthen it. As you’re musing on what could be the cause, something changes on your tail, as it tenses and twitches, so you look back to examine what’s happening.\n\nWhen you lay your eyes on it, the first thing that you notice if that is shortening quickly. Soon, it has reduced into a short, fleshy bump of a tail. It doesn’t keep that way long, as it lengthens and wides a little, and start sprouting large, " + player.skin.coat.color + " colored feathers, shaped as wide fan. Some of then are very long, while others, near you butt, are soft and downy.";
+	        desc += "You feel an odd itch down your tail. It’s kind of a familiar feeling, as when you work a muscle to strengthen it. As you’re musing on what could be the cause, something changes on your tail, as it tenses and twitches, so you look back to examine what’s happening.\n\nWhen you lay your eyes on it, the first thing that you notice if that is shortening quickly. Soon, it has reduced into a short, fleshy bump of a tail. It doesn’t keep that way long, as it lengthens and wides a little, and start sprouting large, [feather color] colored feathers, shaped as wide fan. Some of then are very long, while others, near you butt, are soft and downy.";
 	      }
 	    } else {
-	      desc += "You feel an odd itch down your spine. It’s kind of a familiar feeling, as when you work a muscle to strengthen it. As you’re musing on what could be the cause, something sprouts just above your butt and you take of your lower clothing so you can examine it.\n\nWhen you lay your eyes on it, you notice a short, fleshy bump of a tail. It doesn’t keep that way long, as it lengthens and wides a little, and start sprouting large, " + player.skin.coat.color + " colored feathers, shaped as wide fan. Some of then are very long, while others, near you butt, are soft and downy.";
+	      desc += "You feel an odd itch down your spine. It’s kind of a familiar feeling, as when you work a muscle to strengthen it. As you’re musing on what could be the cause, something sprouts just above your butt and you take of your lower clothing so you can examine it.\n\nWhen you lay your eyes on it, you notice a short, fleshy bump of a tail. It doesn’t keep that way long, as it lengthens and wides a little, and start sprouting large, [feather color] colored feathers, shaped as wide fan. Some of then are very long, while others, near you butt, are soft and downy.";
 	    }
 	    desc += " <b>In any case, you have now a full, fan-shaped avian tail above your [butt]!</b>";
 
@@ -8889,7 +8986,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
 
-	    desc += "The fan of feathers at your backside reacts under the statue magic effects. An otherworldly magic envelopes it, making the feathers twist and converge in an odd fashion, at the same time that the small bump of your tail elongates until becoming long enough to reach far past your knee.\n\nBefore you notice it, the long feathers have merged into a tuft of " + player.skin.coat.color + " at the end of your now long tail, while the short, downy ones now cover every inch of bare skin that the elongated appendage now have. <b>Well, seems like you gained a griffin-like tail!</b> It’s quite leonine in shape, but its appearance remains a bit avian.";
+	    desc += "The fan of feathers at your backside reacts under the statue magic effects. An otherworldly magic envelopes it, making the feathers twist and converge in an odd fashion, at the same time that the small bump of your tail elongates until becoming long enough to reach far past your knee.\n\nBefore you notice it, the long feathers have merged into a tuft of [fur color] at the end of your now long tail, while the short, downy ones now cover every inch of bare skin that the elongated appendage now have. <b>Well, seems like you gained a griffin-like tail!</b> It’s quite leonine in shape, but its appearance remains a bit avian.";
 
 	    player.tailVenom = 0;
 	    player.tailRecharge = 0;
@@ -8963,7 +9060,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
 
-	    if (player.tailType == Tail.NONE) desc += "A pressure builds in your backside. You feel under your clothes and discover an odd bump that seems to be growing larger by the moment. In seconds it passes between your fingers and bursts out the back of your clothes, it grows most of the way to the ground before suddenly curving back up, turning easily twice as big as you are. A thick coat of light and [skin coat.color] striped fur covers it entirely from the base to the tip. Well it's going to be hard to hide this huge thing, especially since it curls and puffs up just <b>like a squirrel tail.</b>";
+	    if (player.tailType == Tail.NONE) desc += "A pressure builds in your backside. You feel under your clothes and discover an odd bump that seems to be growing larger by the moment. In seconds it passes between your fingers and bursts out the back of your clothes, it grows most of the way to the ground before suddenly curving back up, turning easily twice as big as you are. A thick coat of light and [fur color] striped fur covers it entirely from the base to the tip. Well it's going to be hard to hide this huge thing, especially since it curls and puffs up just <b>like a squirrel tail.</b>";
 	    else desc += "Something weird happens with your tail as it begins to change into something else. Within seconds the shape and coverage becomes closer to what you would expect of a squirrel tail. <b>You now have a squirrel tail!</b>";
 
 	    player.tailVenom = 0;
@@ -9302,11 +9399,35 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    TransformationUtils.applyTFIfNotPresent(transformations.TailSpider, false);
 	    player.tailVenom = 5;
 	    player.tailRecharge = 5;
-	    player.coatColor = "midnight purple";
+	    player.chitinColor = "midnight purple";
 	  },
 	  // is present
 	  function (): Boolean {
 	    return player.tailType === Tail.SPIDER_ADBOMEN;
+	  }
+	);
+
+	public const TailAnt: Transformation = new SimpleTransformation("Ant Tail",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+
+	    TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
+
+	    TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
+
+	    desc += "A burst of pain hits you just above your [butt], coupled with a sensation of burning heat and pressure. You can feel your " + player.skinFurScales() + " tearing as something forces its way out of your body. Reaching back, you grab at it with your hands. It's huge... and you can feel it toughening under your touches, firming up until the whole tail has become quite hard and elliptical in shape. The heat fades, leaving behind a gentle warmth, and you realize your tail has become an ant's abdomen! As you start to shift your seat, however, you feel a sudden tug, and feel like something was just spat out--you must have a small stinger back there as well. <b>You now have an ant's abdomen.</b>";
+		player.tailVenom = 10;
+	    player.tailRecharge = 5;
+	    player.tailType = Tail.ANT_ABDOMEN;
+	    player.tailCount = 1;
+
+	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.ANT_ABDOMEN));
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.tailType === Tail.ANT_ABDOMEN;
 	  }
 	);
   /*
@@ -9902,6 +10023,47 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    return player.wings.type === Wings.PLANT;
 	  }
 	);
+
+	public const WingsAntLarge: Transformation = new SimpleTransformation("Ant Large Wings",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+
+	    TransformationUtils.applyTFIfNotPresent(transformations.WingsAntSmall, doOutput);
+
+		if (player.wings.type == Wings.BEE_LARGE) desc += "You wince as you feel your wings tearing in half, but after a short moment, they start to tingle and grow longer. <b>You now have four large ant wings</b>.";
+	    else desc += "Your wings tingle as they grow, filling out until they are large enough to lift you from the ground and allow you to fly! <b>You now have large ant wings!</b> You give a few experimental flaps and begin hovering in place, a giddy smile plastered on your face by the thrill of flight.";
+	    player.wings.desc = "large ant-like";
+	    player.wings.type = Wings.ANT_LARGE;
+
+	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.ANT_LARGE));
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.wings.type === Wings.ANT_LARGE;
+	  }
+	);
+
+	public const WingsAntSmall: Transformation = new SimpleTransformation("Ant Small Wings",
+	  // apply effect
+	  function (doOutput: Boolean): void {
+	    var desc: String = "";
+
+	    if (player.wings.type == Wings.BEE_SMALL) desc += "You wince as you feel your wings tearing in half, but after a short moment, they start to tingle as they grow into four small ant wings. You still can't fly with them, but <b>you now have small ant wings</b>."
+		else desc += "You feel an itching between your shoulder-blades as something begins growing there. You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably. A sense of relief erupts from you as you feel something new grow out from your body. You hastily remove the top portion of your [armor] and marvel as four small ant-like wings sprout from your back. "+
+				"Tenderly flexing your new muscles, you find you can flap them quite fast. Unfortunately you can't seem to flap your little wings fast enough to fly, but they would certainly slow a fall. A few quick modifications to your [armor] later and you are ready to continue your journey with <b>your new ant wings</b>.";
+	    player.wings.desc = "small ant-like";
+	    player.wings.type = Wings.ANT_SMALL;
+
+	    if (doOutput) outputText(desc);
+	    Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.ANT_SMALL));
+	  },
+	  // is present
+	  function (): Boolean {
+	    return player.wings.type === Wings.ANT_SMALL;
+	  }
+	);
   /*
 */
 
@@ -9995,8 +10157,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			if (player.bRows() >= 3) desc += "abdomen";
 			else desc += "chest";
 				desc += ". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ";
-			//if (player.hasFur()) outputText(player.hairColor + " " + player.skinDesc);
-			//else outputText(player.skinTone + " " + player.skinDesc);
+			//if (player.isFurCovered()) outputText(player.hairColor + " " + player.skinDesc);
+			//else outputText(player.bodyColor + " " + player.skinDesc);
 			desc += "[skin full] remains. <b>You've lost a row of breasts!</b>";
 
 			if (doOutput) outputText(desc);
@@ -11849,13 +12011,13 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					var desc:String = "[pg]";
 
 					if (player.cocks.length > cock){
-						desc += "You feel a strange tingling in your " + num2Text2(cock+1) + " cock. You remove your [armor] and look down and witness your cock shifting into a peculiar form. Its tapered, [skinTone] and crowned by several colorful balls that look sort of like knots. Its covered in sweet smelling dust...  you're secreting pollen!  <b>You now have a";
+						desc += "You feel a strange tingling in your " + num2Text2(cock+1) + " cock. You remove your [armor] and look down and witness your cock shifting into a peculiar form. Its tapered, [color] and crowned by several colorful balls that look sort of like knots. Its covered in sweet smelling dust...  you're secreting pollen!  <b>You now have a";
 						if(player.tentacleCocks() > 0) desc += "nother";
 						desc +=" plantlike stamen cock!</b>";
 					}
 					else {
 						desc += GrowCockGenericText();
-						desc += "You feel a strange tingling in your " + num2Text2(cock+1) + " cock. You remove your [armor] and look down and witness your cock shifting into a peculiar form. Its tapered, [skinTone] and crowned by several colorful balls that look sort of like knots. Its covered in sweet smelling dust...  you're secreting pollen!  <b>You now have a plantlike stamen cock!</b>";
+						desc += "You feel a strange tingling in your " + num2Text2(cock+1) + " cock and look down to witness your cock shifting into a peculiar form. Its tapered, [color] and crowned by several colorful balls that look sort of like knots. Its covered in sweet smelling dust...  you're secreting pollen!  <b>You now have a plantlike stamen cock!</b>";
 						player.createCock();
 					}
 					if (doOutput) outputText(desc);
@@ -11924,7 +12086,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					else {
 						desc += GrowCockGenericText();
 						desc += "your cock becames a bit ticker, but albeit it retained it’s avian, tapered shape, it’s slightly wavy form became more straight. " +
-								"It’s reddish-pink color became pink and it’s tip became more conical. Nevertheless, the main chance manifested across its length, where small, soft barbs grew, giving your member an the appearance of an avian-feline hybrid one.  <b>You'll have to try around your new gryphon cock to know how’ they’ll feel to use,</b> but you’re sure that it’ll be pleasant both for you and your partners.";
+								"It’s reddish-pink color became pink and it’s tip became more conical. Nevertheless, the main chance manifested across its length, where small, soft barbs grew, giving your member an the appearance of an avian-feline hybrid one.  <b>You'll have to try around your new gryphon cock to know how they’ll feel to use,</b> but you’re sure that it’ll be pleasant both for you and your partners.";
 						player.createCock();
 					}
 					if (doOutput) outputText(desc);
@@ -12090,6 +12252,42 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				return !player.isDogCock(cock);
 			}
 	 );}
+
+	public function CockInsect(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation {
+		return new SimpleTransformation("Insect Cock",
+				// apply effect
+				function (doOutput:Boolean):void {
+					var desc:String = "[pg]";
+
+					if (player.cocks.length > cock){
+						desc += "Your " + num2Text2(cock+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer";
+						desc += player.hasSheath()? "" : " out of its new sheath";
+						desc += ", all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your [cock "+(cock+1)+"] has become a tentacle!  As you watch, it withdraws back into its sheath; it's colored a dull white, and evidence seems to suggest you can make it extend out at will.  <b>You now have a";
+						if(player.tentacleCocks() > 0) desc += outputText("nother");
+						desc += outputText(" tentacle-cock!</b>");
+					}
+					else {
+						desc += GrowCockGenericText();
+						desc += "Your feel it bending and flexing of its own volition... looking down, you see it morph into a white vine-like shape.  <b>You now have an insect cock!</b>";
+						player.createCock();
+					}
+					if (doOutput) outputText(desc);
+					if (length != 5.5)
+						player.cocks[cock].cockLength = length;
+					if (thickness != 1)
+						player.cocks[cock].cockThickness = thickness;
+					player.cocks[cock].knotMultiplier = 1;
+					player.cocks[cock].cockType = CockTypesEnum.INSECT;
+
+					UnlockCocks();
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.INSECT));
+				},
+				// is present
+				function ():Boolean {
+					return cock < player.cocks.length && player.cocks[cock].cockType == CockTypesEnum.INSECT;
+				}
+		);
+	}
     /*
 */
 
@@ -12127,7 +12325,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 				if (player.balls < 2) {
 					player.ballSize = 1;
-					if (rand(2) == 0) desc += "\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.";
+					if (rand(2) == 0) desc += "A nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.";
 					else desc += "You gasp in shock as a sudden pain racks your crotch. Within seconds, two balls drop down into a new sack, your skin stretching out to accommodate them. Once the pain clears, you examine <b>your new pair of testes.</b>[pg]";
 				}
 				else
@@ -12235,22 +12433,23 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 					desc += "<b>Your ovipositor (and eggs) vanish since your body has become less mantis-like.</b>";
 					player.removePerk(PerkLib.MantisOvipositor);
 				}
-				/*else if (player.hasPerk(PerkLib.AntOvipositor)) { //Remove dat shit!
+				else if (player.hasPerk(PerkLib.AntOvipositor)) { //Remove dat shit!
 					desc += "<b>Your ovipositor (and eggs) vanish since your body has become less ant-like.</b>";
 					player.removePerk(PerkLib.AntOvipositor);
-				}*/
+				}
 
 				if (doOutput) outputText(desc);
 			},
 			// is present
 			function ():Boolean {
-				return !player.hasPerk(PerkLib.BeeOvipositor) && !player.hasPerk(PerkLib.SpiderOvipositor) && !player.hasPerk(PerkLib.MantisOvipositor)/* && !player.hasPerk(PerkLib.AntOvipositor)*/;
+				return !player.hasPerk(PerkLib.BeeOvipositor) && !player.hasPerk(PerkLib.SpiderOvipositor) && !player.hasPerk(PerkLib.MantisOvipositor) && !player.hasPerk(PerkLib.AntOvipositor);
 			},
 			// is possible
 			function ():Boolean {
 				return ((player.hasPerk(PerkLib.SpiderOvipositor) && (!player.isDrider() || player.tailType != Tail.SPIDER_ADBOMEN)) ||
 						(player.hasPerk(PerkLib.BeeOvipositor) && player.tailType != Tail.BEE_ABDOMEN) ||
-						(player.hasPerk(PerkLib.MantisOvipositor) && player.tailType != Tail.MANTIS_ABDOMEN));
+						(player.hasPerk(PerkLib.MantisOvipositor) && player.tailType != Tail.MANTIS_ABDOMEN) ||
+						(player.hasPerk(PerkLib.AntOvipositor) && player.tailType != Tail.ANT_ABDOMEN));
 			}
 	);
 
@@ -12263,6 +12462,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 						TransformationUtils.applyTFIfNotPresent(transformations.OvipositionSpider, doOutput);
 				if (player.tailType === Tail.MANTIS_ABDOMEN)
 						TransformationUtils.applyTFIfNotPresent(transformations.OvipositionMantis, doOutput);
+				if (player.tailType === Tail.ANT_ABDOMEN)
+					TransformationUtils.applyTFIfNotPresent(transformations.OvipositionAnt, doOutput);
 			},
 			// is present
 			function ():Boolean {
@@ -12350,7 +12551,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			}
 	);
 
-	/*public const OvipositionAnt:Transformation = new SimpleTransformation("Mantis Oviposition",
+	public const OvipositionAnt:Transformation = new SimpleTransformation("Mantis Oviposition",
 			// apply
 			function (doOutput:Boolean):void {
 				var desc: String = "";
@@ -12358,12 +12559,12 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 				TransformationUtils.applyTFIfNotPresent(transformations.RemoveOvipositor, doOutput);
 				TransformationUtils.applyTFIfNotPresent(transformations.TailAnt, doOutput);
 
-				outputText("\n\nAn odd swelling starts in your insectile abdomen, somewhere along the underside.  Curling around, you reach back to your extended, bulbous bee part and run your fingers along the underside.  You gasp when you feel a tender, yielding slit near the stinger.  As you probe this new orifice, a shock of pleasure runs through you, and a tubular, black, semi-hard appendage drops out, pulsating as heavily as any sexual organ.  <b>The new organ is clearly an ovipositor!</b>  A few gentle prods confirm that it's just as sensitive; you can already feel your internals changing, adjusting to begin the production of unfertilized eggs.  You idly wonder what laying them with your new bee ovipositor will feel like...");
+				outputText("[pg]An odd swelling starts in your insectile abdomen, somewhere along the underside.  Curling around, you reach back to your extended, bulbous ant part and run your fingers along the underside.  You gasp when you feel a tender, yielding slit near the end.  As you probe this new orifice, a shock of pleasure runs through you, and a tubular, tan, semi-hard appendage drops out, pulsating as heavily as any sexual organ.  <b>The new organ is clearly an ovipositor!</b>  A few gentle prods confirm that it's just as sensitive; you can already feel your internals changing, adjusting to begin the production of unfertilized eggs.  You idly wonder what laying them with your new ant ovipositor will feel like...");
 				outputText("\n\n(<b>Perk Gained:  Ant Ovipositor - Allows you to lay eggs in your foes!</b>)");
 				player.createPerk(PerkLib.AntOvipositor, 0, 0, 0, 0);
 
 				if (doOutput) outputText(desc);
-				//Metamorph.unlockMetamorph(SpecialsMem.getMemory(SpecialsMem.OVIPOSITOR));
+				Metamorph.unlockMetamorph(SpecialsMem.getMemory(SpecialsMem.OVIPOSITOR));
 			},
 			// is present
 			function ():Boolean {
@@ -12373,7 +12574,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			function ():Boolean {
 				return !player.hasPerk(PerkLib.AntOvipositor) && player.tailType == Tail.ANT_ABDOMEN;
 			}
-	);*/
+	);
 
 
 	/*

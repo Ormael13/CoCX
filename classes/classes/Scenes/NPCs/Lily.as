@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -69,7 +69,7 @@ import classes.internals.*;
 				outputText("She misses completely due to their blindness. As she spins back around, your opponent…seems to be looking at the strands in disappointment. Is it your imagination, or does she seem to regret the loss of silk?");
 			}
 			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			else if (player.speedDodge(this)>0) {
 				outputText("You dodge away, avoiding the sticky strands! As she spins back around, your opponent…seems to be looking at the strands in disappointment. Is it your imagination, or does she seem to regret the loss of silk?");
 			}
 			//Determine if evaded
@@ -158,7 +158,7 @@ import classes.internals.*;
 			else SceneLib.lily.LilyAfterBattle();
 		}
 		
-		public function Lily() 
+		public function Lily()
 		{
 			if (flags[kFLAGS.LILY_LVL_UP] < 2) {
 				initStrTouSpeInte(70, 75, 110, 100);
@@ -195,7 +195,7 @@ import classes.internals.*;
 				this.level = 70;
 			}
 			this.imageName = "corrupteddrider";
-			if (LilyFollower.LilyTalked > 0) { 
+			if (LilyFollower.LilyTalked > 0) {
 				this.a = "";
 				this.short = "Lily";
 				this.long = "Lily is a drider - a creature with a humanoid top half and the lower body of a giant arachnid.  From a quick glance, you can tell that this one has fallen deeply to corruption.  She is utterly nude, exposing her four well-rounded, DD-cup breasts with their shiny black nipples.  Gold piercings and chains link the curvy tits together, crossing in front of her four mounds in an 'x' pattern.  On her face and forehead, a sextet of lust-filled, " + LilyFollower.LilySkinTone + " eyes gaze back at you.  Behind her, the monster-girl's " + LilyFollower.LilyHairColor + " hair drapes down her back like a cloak.  The drider's lips seem to shine with a light all their own, and a steady trickle of purple, reflective fluid beads and drips from them.  At her waist, there's a juicy looking snatch with a large, highly visible clit.  Her spider-half has eight spindly legs with black and " + LilyFollower.LilyHairColor + " stripes - a menacing display if ever you've seen one.";
@@ -216,7 +216,7 @@ import classes.internals.*;
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
 			this.lowerBody = LowerBody.DRIDER;
-			this.skinTone = LilyFollower.LilySkinTone;
+			this.bodyColor = LilyFollower.LilySkinTone;
 			this.hairColor = LilyFollower.LilyHairColor;
 			this.hairLength = 24;
 			this.weaponName = "claws";

@@ -496,7 +496,7 @@ public class PlayerAppearance extends BaseContent {
 			if(player.skinType == Skin.FUR) {
 				return "You have no hair, only a thin layer of fur atop of your head.";
 			} else {
-				return "You are completely bald, displaying [skintone] [skin.type] where your hair would otherwise be.";
+				return "You are completely bald, displaying [color] [skin.type] where your hair would otherwise be.";
 			}
 		}
 	}
@@ -793,9 +793,9 @@ public class PlayerAppearance extends BaseContent {
 				if (player.cockTotal() == 0) swingsWhere = " where a penis would normally grow.";
 				else swingsWhere = " under your [cocks].";
 
-				if (player.hasFur()) ballsDesc += "A fuzzy [sack] filled with [ballsarticle]," + ballsSizeDesc + " each, swings low" + swingsWhere;
+				if (player.isFurCovered()) ballsDesc += "A fuzzy [sack] filled with [ballsarticle]," + ballsSizeDesc + " each, swings low" + swingsWhere;
 				else if (player.hasCoatOfType(Skin.CHITIN)) ballsDesc += "A chitin [sack] hugs your [balls]," + ballsSizeDesc + " each, tightly against your body.";
-				else if (player.hasScales()) ballsDesc += "A scaly [sack] hugs your [balls]," + ballsSizeDesc + " each, tightly against your body.";
+				else if (player.isScaleCovered()) ballsDesc += "A scaly [sack] hugs your [balls]," + ballsSizeDesc + " each, tightly against your body.";
 				else if (player.skinType == Skin.STONE) ballsDesc += "A stone-solid sack with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
 				else if (player.skinType == Skin.GOO) ballsDesc += "An oozing, semi-solid sack with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;
 				else ballsDesc += "A [sack] with [ballsarticle]," + ballsSizeDesc + " each, swings heavily" + swingsWhere;

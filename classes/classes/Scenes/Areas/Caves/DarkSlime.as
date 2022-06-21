@@ -25,7 +25,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Acid)) outputText("Her body quivering from your flames, the dark slime ");
 			else outputText("The dark slime holds its hands up and they morph into a replica of your [weapon].  Happily, she swings at you");
 			//Determine if dodged!
-			if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			if (player.speedDodge(this)>0) {
 				if (hasPerk(PerkLib.Acid)) outputText("tries to slap you, but you dodge her attack.");
 				else outputText(", missing as you dodge aside.");
 				return;

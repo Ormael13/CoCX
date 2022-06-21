@@ -92,7 +92,7 @@ public class Marble extends Monster
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.HOOFED;
-			this.skinTone = "pale";
+			this.bodyColor = "pale";
 			this.hairColor = "brown";
 			this.hairLength = 13;
 			initStrTouSpeInte(85, 80, 45, 40);

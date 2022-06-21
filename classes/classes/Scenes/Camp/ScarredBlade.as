@@ -1,4 +1,4 @@
-package classes.Scenes.Camp 
+package classes.Scenes.Camp
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
@@ -16,7 +16,7 @@ public class ScarredBlade extends Monster
 			SceneLib.sheilaScene.breakScarredBlade();
 		}
 		
-		public function ScarredBlade() 
+		public function ScarredBlade()
 		{
 			this.a = "the ";
 			this.short = "scarred blade";
@@ -25,7 +25,7 @@ public class ScarredBlade extends Monster
 			this.balls = 0;
 			this.ballSize = 0;
 			this.tallness = 36;
-			this.skinTone = "metallic";
+			this.bodyColor = "metallic";
 			this.long = "The sword you're fighting is a no ordinary sword. It's a lethicite-infused metal curved saber etched with scars. It seems to eagerly seek flesh.";
 			this.pronoun1 = "it";
 			this.pronoun2 = "it";

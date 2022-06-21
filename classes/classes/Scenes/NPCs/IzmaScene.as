@@ -60,6 +60,12 @@ public class IzmaScene extends NPCAwareContent implements TimeAwareInterface
 				izmaDomsLatexy();
 				return true;
 			}
+			if (izmaFollower()) {
+				if (pregnancy.isPregnant && pregnancy.incubation == 0) {
+					IzmaPoopsBabies();
+					return true;
+				}
+			}
 			return false;
 		}
 		//End of Interface Implementation
@@ -2551,7 +2557,8 @@ private function IzmaPoopsBabies():void {
 	outputText(", which nuzzles affectionately against its mother before latching onto her nipple and starting to drink.  As it drinks, it grows; by the time it empties Izma's first breast, it's easily the size of a five year old.  When it's finished its meal and belches loudly in satisfaction, it's the size of a pre-teen.  Izma takes its rapid development in stride, mother and daughter happily embracing each other.\n\n");
 
 	outputText("You help Izma climb back onto shore with your new baby, then lay them both down to rest.  Once they're settled down comfortably, cuddling up against each other, you turn and head back to camp, looking to dry yourself off and catch a quick nap.");
-	doNext(camp.returnToCampUseOneHour);
+	pregnancy.knockUpForce(); //Clear Pregnancy
+	doNext(playerMenu);
 }
 
 //PC gives birth (alone): used if PC gets pregnant from vaginal and refusing herbs before recruiting Izma or possibly later if a way to force her out is written

@@ -269,7 +269,7 @@ public function startUrtaQuest():void {
 	player.skin.growFur({color:"silky"});
 	player.createBreastRow(7);
 	player.nippleLength = .75;
-	player.skinTone = "black";
+	player.furColor = "black";
 	player.lowerBody = LowerBody.FOX;
 	player.legCount = 2;
 	player.ears.type = Ears.FOX;

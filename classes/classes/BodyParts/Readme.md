@@ -180,7 +180,7 @@ Let's say, we intend to have some kind of turtle girl TF in CoC, the TF code *co
 
 ```as3
 // First step: The player grows lizard scales on his/her skin and/or underbody
-if ((!player.hasLizardScales() || [UNDER_BODY_TYPE_LIZARD, UNDER_BODY_TYPE_TURTLE].indexOf(player.underBody.type) == -1) && player.lowerBody == LOWER_BODY_TYPE_TURTLE /* && ... */) {
+if ((!player.isLizardScaleCovered() || [UNDER_BODY_TYPE_LIZARD, UNDER_BODY_TYPE_TURTLE].indexOf(player.underBody.type) == -1) && player.lowerBody == LOWER_BODY_TYPE_TURTLE /* && ... */) {
 	outputText("... You grow " + player.skin.tone + " scales on your skin!");
 	player.skin.setProps({
 		type: SKIN_TYPE_LIZARD_SCALES,
@@ -195,7 +195,7 @@ if ((!player.hasLizardScales() || [UNDER_BODY_TYPE_LIZARD, UNDER_BODY_TYPE_TURTL
 }
 
 // Second step: The player grows the signature turtle shell on his/her belly
-if (player.hasLizardScales() && player.underBody.type == UNDER_BODY_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_TURTLE /* && ... */) {
+if (player.isLizardScaleCovered() && player.underBody.type == UNDER_BODY_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_TURTLE /* && ... */) {
 	outputText("... The [underBody.skinFurScales] on your belly start to harden to become a sturdy frontal shell to protect your body as a natural armor");
 	player.underBody.type = UNDER_BODY_TYPE_TURTLE; // We're done, yay!
 	changes++;

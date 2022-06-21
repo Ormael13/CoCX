@@ -1,4 +1,5 @@
 package classes.BodyParts {
+import classes.Creature;
 import classes.internals.EnumValue;
 
 public class Tongue extends BodyPart{
@@ -90,8 +91,8 @@ public class Tongue extends BodyPart{
 		appearanceDesc: "Over your mouth are several tentacles, but underneath that is your long tentacle-like tongue, ready to probe the mouth of others."
 	});
 
-	public function Tongue() {
-		super(null, null);
+	public function Tongue(creature:Creature) {
+		super(creature, null);
 	}
 
 	public static function getAppearanceDescription(creature: *):String {

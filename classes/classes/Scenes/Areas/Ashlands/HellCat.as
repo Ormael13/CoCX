@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Ashlands 
+package classes.Scenes.Areas.Ashlands
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -87,7 +87,7 @@ import classes.internals.*;
 			SceneLib.ashlands.hellcatScene.DefeatedByHellCat();
 		}
 		
-		public function HellCat() 
+		public function HellCat()
 		{
 			this.a = "the ";
 			this.short = "hellcat";
@@ -105,7 +105,7 @@ import classes.internals.*;
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
 			this.tailType = Tail.BURNING;
-			this.skinTone = "ashen";
+			this.bodyColor = "ashen";
 			this.hairColor = "midnight black";
 			this.hairLength = 13;
 			initStrTouSpeInte(70, 70, 150, 210);

@@ -533,7 +533,7 @@ public class SaveUpdater extends NPCAwareContent {
 		}
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 8) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 9;
-			if (!player.hasFur()) {
+			if (!player.isFurCovered()) {
 				camp.doCamp();
 				return; //No fur? Return to camp.
 			}
@@ -671,11 +671,11 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			//Update chitin
 			if (player.hasCoatOfType(Skin.CHITIN)) {
-				if (player.isRace(Races.MANTIS)) player.skin.coat.color = "green";
-				if (player.isRace(Races.SPIDER)) player.skin.coat.color = "pale white";
+				if (player.isRace(Races.MANTIS)) player.chitinColor = "green";
+				if (player.isRace(Races.SPIDER)) player.chitinColor = "pale white";
 				if (player.isRace(Races.MANTIS) && !player.isRace(Races.SPIDER)) {
-					if (rand(2) == 1) player.skin.coat.color = "green";
-					else player.skin.coat.color = "pale white";
+					if (rand(2) == 1) player.chitinColor = "green";
+					else player.chitinColor = "pale white";
 				}
 			}
 			doNext(camp.doCamp);
@@ -740,7 +740,7 @@ public class SaveUpdater extends NPCAwareContent {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 21;
 			if (player.hasPerk(PerkLib.Lycanthropy)) {
 				player.skin.coverage = Skin.COVERAGE_LOW;
-				player.coatColor = player.hairColor;
+				player.furColor = player.hairColor;
 				player.removePerk(PerkLib.Lycanthropy);
 				var bonusStats:Number = 0;
 				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats += 10;
@@ -924,8 +924,8 @@ public class SaveUpdater extends NPCAwareContent {
 				player.setShield(shields.DRGNSHL);
 				player.setArmor(armors.LAYOARM);
 				flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
-				player.skinTone = "light";
-				player.faceType = Face.HUMAN;
+				player.skinColor                                 = "light";
+				player.faceType                                  = Face.HUMAN;
 				player.eyes.type = Eyes.HUMAN;
 				player.horns.type = Horns.NONE;
 				player.horns.count = 0;
@@ -1054,7 +1054,7 @@ public class SaveUpdater extends NPCAwareContent {
 				player.ascensionPerkPoints += refund1;
 			}
 			var SphereMastery:Number = 10;
-			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) SphereMastery += 15;
+			if (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 3) SphereMastery += 15;
 			if (player.perkv1(PerkLib.StarSphereMastery) > SphereMastery) {
 				player.gems += (1000 * (player.perkv1(PerkLib.StarSphereMastery) - SphereMastery));
 				player.removePerk(PerkLib.StarSphereMastery);
@@ -1243,12 +1243,6 @@ public class SaveUpdater extends NPCAwareContent {
 				outputText("\n\nIt doesn't seem as though you qualify for a refund, though.");
 				doNext(SceneLib.camp.campAfterMigration);
 			}
-			outputText("Also, Mutations no longer are obtained via Level up perks, instead, find Evangeline for the mutations. Existing perks will have their costs refunded!");
-			for each(var mutref:PerkType in MutationsLib.mutationsArray("", true)) {
-				if (player.hasPerk(mutref)) {
-					player.perkPoints++;
-				}
-			}
 			doNext(camp.doCamp);
 			return;
 		}
@@ -1262,294 +1256,6 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] == 1) flags[kFLAGS.DINAH_ASS_HIPS_SIZE] = 1;
 			if (flags[kFLAGS.TOUGHNESS_SCALING] != 0) flags[kFLAGS.TOUGHNESS_SCALING] = 0;
-			if (player.hasPerk(MutationsLib.ArachnidBookLungEvolved)) {
-				player.removePerk(MutationsLib.ArachnidBookLungEvolved);
-				player.createPerk(MutationsLib.ArachnidBookLungPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.ArachnidBookLungFinalForm)) {
-				player.removePerk(MutationsLib.ArachnidBookLungFinalForm);
-				player.createPerk(MutationsLib.ArachnidBookLungEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.BlackHeartEvolved)) {
-				player.removePerk(MutationsLib.BlackHeartEvolved);
-				player.createPerk(MutationsLib.BlackHeartPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.BlackHeartFinalForm)) {
-				player.removePerk(MutationsLib.BlackHeartFinalForm);
-				player.createPerk(MutationsLib.BlackHeartEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.DisplacerMetabolismEvolved)) {
-				player.removePerk(MutationsLib.DisplacerMetabolismEvolved);
-				player.createPerk(MutationsLib.DisplacerMetabolismPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.DraconicBonesEvolved)) {
-				player.removePerk(MutationsLib.DraconicBonesEvolved);
-				player.createPerk(MutationsLib.DraconicBonesPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.DraconicBonesFinalForm)) {
-				player.removePerk(MutationsLib.DraconicBonesFinalForm);
-				player.createPerk(MutationsLib.DraconicBonesEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.DraconicHeartEvolved)) {
-				player.removePerk(MutationsLib.DraconicHeartEvolved);
-				player.createPerk(MutationsLib.DraconicHeartPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.DraconicHeartFinalForm)) {
-				player.removePerk(MutationsLib.DraconicHeartFinalForm);
-				player.createPerk(MutationsLib.DraconicHeartEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) {
-				player.removePerk(MutationsLib.DraconicLungsEvolved);
-				player.createPerk(MutationsLib.DraconicLungsPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.DraconicLungsFinalForm)) {
-				player.removePerk(MutationsLib.DraconicLungsFinalForm);
-				player.createPerk(MutationsLib.DraconicLungsEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) {
-				player.removePerk(MutationsLib.DrakeLungsEvolved);
-				player.createPerk(MutationsLib.DrakeLungsPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) {
-				player.removePerk(MutationsLib.DrakeLungsFinalForm);
-				player.createPerk(MutationsLib.DrakeLungsEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.EasterBunnyEggBagEvolved)) {
-				player.removePerk(MutationsLib.EasterBunnyEggBagEvolved);
-				player.createPerk(MutationsLib.EasterBunnyEggBagPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.EasterBunnyEggBagFinalForm)) {
-				player.removePerk(MutationsLib.EasterBunnyEggBagFinalForm);
-				player.createPerk(MutationsLib.EasterBunnyEggBagEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) {
-				player.removePerk(MutationsLib.ElvishPeripheralNervSysEvolved);
-				player.createPerk(MutationsLib.ElvishPeripheralNervSysPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.ElvishPeripheralNervSysFinalForm)) {
-				player.removePerk(MutationsLib.ElvishPeripheralNervSysFinalForm);
-				player.createPerk(MutationsLib.ElvishPeripheralNervSysEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.FeyArcaneBloodstreamEvolved)) {
-				player.removePerk(MutationsLib.FeyArcaneBloodstreamEvolved);
-				player.createPerk(MutationsLib.FeyArcaneBloodstreamPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.FeyArcaneBloodstreamFinalForm)) {
-				player.removePerk(MutationsLib.FeyArcaneBloodstreamFinalForm);
-				player.createPerk(MutationsLib.FeyArcaneBloodstreamEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.FloralOvariesEvolved)) {
-				player.removePerk(MutationsLib.FloralOvariesEvolved);
-				player.createPerk(MutationsLib.FloralOvariesPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.FloralOvariesFinalForm)) {
-				player.removePerk(MutationsLib.FloralOvariesFinalForm);
-				player.createPerk(MutationsLib.FloralOvariesEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.FrozenHeartEvolved)) {
-				player.removePerk(MutationsLib.FrozenHeartEvolved);
-				player.createPerk(MutationsLib.FrozenHeartPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.FrozenHeartFinalForm)) {
-				player.removePerk(MutationsLib.FrozenHeartFinalForm);
-				player.createPerk(MutationsLib.FrozenHeartEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.GazerEyeEvolved)) {
-				player.removePerk(MutationsLib.GazerEyeEvolved);
-				player.createPerk(MutationsLib.GazerEyePrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.GazerEyeFinalForm)) {
-				player.removePerk(MutationsLib.GazerEyeFinalForm);
-				player.createPerk(MutationsLib.GazerEyeEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.GorgonsEyesEvolved)) {
-				player.removePerk(MutationsLib.GorgonsEyesEvolved);
-				player.createPerk(MutationsLib.GorgonsEyesPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.GorgonsEyesFinalForm)) {
-				player.removePerk(MutationsLib.GorgonsEyesFinalForm);
-				player.createPerk(MutationsLib.GorgonsEyesEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.HarpyHollowBonesEvolved)) {
-				player.removePerk(MutationsLib.HarpyHollowBonesEvolved);
-				player.createPerk(MutationsLib.HarpyHollowBonesPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.HarpyHollowBonesFinalForm)) {
-				player.removePerk(MutationsLib.HarpyHollowBonesFinalForm);
-				player.createPerk(MutationsLib.HarpyHollowBonesEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) {
-				player.removePerk(MutationsLib.HeartOfTheStormEvolved);
-				player.createPerk(MutationsLib.HeartOfTheStormPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.HeartOfTheStormFinalForm)) {
-				player.removePerk(MutationsLib.HeartOfTheStormFinalForm);
-				player.createPerk(MutationsLib.HeartOfTheStormEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.HinezumiBurningBloodEvolved)) {
-				player.removePerk(MutationsLib.HinezumiBurningBloodEvolved);
-				player.createPerk(MutationsLib.HinezumiBurningBloodPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.HinezumiBurningBloodFinalForm)) {
-				player.removePerk(MutationsLib.HinezumiBurningBloodFinalForm);
-				player.createPerk(MutationsLib.HinezumiBurningBloodEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.HollowFangsEvolved)) {
-				player.removePerk(MutationsLib.HollowFangsEvolved);
-				player.createPerk(MutationsLib.HollowFangsPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.HollowFangsFinalForm)) {
-				player.removePerk(MutationsLib.HollowFangsFinalForm);
-				player.createPerk(MutationsLib.HollowFangsEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) {
-				player.removePerk(MutationsLib.KitsuneThyroidGlandEvolved);
-				player.createPerk(MutationsLib.KitsuneThyroidGlandPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandFinalForm)) {
-				player.removePerk(MutationsLib.KitsuneThyroidGlandFinalForm);
-				player.createPerk(MutationsLib.KitsuneThyroidGlandEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.LactaBovinaOvariesEvolved)) {
-				player.removePerk(MutationsLib.LactaBovinaOvariesEvolved);
-				player.createPerk(MutationsLib.LactaBovinaOvariesPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.LactaBovinaOvariesFinalForm)) {
-				player.removePerk(MutationsLib.LactaBovinaOvariesFinalForm);
-				player.createPerk(MutationsLib.LactaBovinaOvariesEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.LizanMarrowEvolved)) {
-				player.removePerk(MutationsLib.LizanMarrowEvolved);
-				player.createPerk(MutationsLib.LizanMarrowPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.LizanMarrowFinalForm)) {
-				player.removePerk(MutationsLib.LizanMarrowFinalForm);
-				player.createPerk(MutationsLib.LizanMarrowEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.ManticoreMetabolismEvolved)) {
-				player.removePerk(MutationsLib.ManticoreMetabolismEvolved);
-				player.createPerk(MutationsLib.ManticoreMetabolismPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved)) {
-				player.removePerk(MutationsLib.MantislikeAgilityEvolved);
-				player.createPerk(MutationsLib.MantislikeAgilityPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.MantislikeAgilityFinalForm)) {
-				player.removePerk(MutationsLib.MantislikeAgilityFinalForm);
-				player.createPerk(MutationsLib.MantislikeAgilityEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.MelkieLungEvolved)) {
-				player.removePerk(MutationsLib.MelkieLungEvolved);
-				player.createPerk(MutationsLib.MelkieLungPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.MelkieLungFinalForm)) {
-				player.removePerk(MutationsLib.MelkieLungFinalForm);
-				player.createPerk(MutationsLib.MelkieLungEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.MinotaurTesticlesEvolved)) {
-				player.removePerk(MutationsLib.MinotaurTesticlesEvolved);
-				player.createPerk(MutationsLib.MinotaurTesticlesPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.MinotaurTesticlesFinalForm)) {
-				player.removePerk(MutationsLib.MinotaurTesticlesFinalForm);
-				player.createPerk(MutationsLib.MinotaurTesticlesEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) {
-				player.removePerk(MutationsLib.NaturalPunchingBagEvolved);
-				player.createPerk(MutationsLib.NaturalPunchingBagPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.NaturalPunchingBagFinalForm)) {
-				player.removePerk(MutationsLib.NaturalPunchingBagFinalForm);
-				player.createPerk(MutationsLib.NaturalPunchingBagEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.NukiNutsEvolved)) {
-				player.removePerk(MutationsLib.NukiNutsEvolved);
-				player.createPerk(MutationsLib.NukiNutsPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.NukiNutsFinalForm)) {
-				player.removePerk(MutationsLib.NukiNutsFinalForm);
-				player.createPerk(MutationsLib.NukiNutsEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.ObsidianHeartEvolved)) {
-				player.removePerk(MutationsLib.ObsidianHeartEvolved);
-				player.createPerk(MutationsLib.ObsidianHeartPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.ObsidianHeartFinalForm)) {
-				player.removePerk(MutationsLib.ObsidianHeartFinalForm);
-				player.createPerk(MutationsLib.ObsidianHeartEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.OniMusculatureEvolved)) {
-				player.removePerk(MutationsLib.OniMusculatureEvolved);
-				player.createPerk(MutationsLib.OniMusculaturePrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.OniMusculatureFinalForm)) {
-				player.removePerk(MutationsLib.OniMusculatureFinalForm);
-				player.createPerk(MutationsLib.OniMusculatureEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.OrcAdrenalGlandsEvolved)) {
-				player.removePerk(MutationsLib.OrcAdrenalGlandsEvolved);
-				player.createPerk(MutationsLib.OrcAdrenalGlandsPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.OrcAdrenalGlandsFinalForm)) {
-				player.removePerk(MutationsLib.OrcAdrenalGlandsFinalForm);
-				player.createPerk(MutationsLib.OrcAdrenalGlandsEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.PigBoarFatEvolved)) {
-				player.removePerk(MutationsLib.PigBoarFatEvolved);
-				player.createPerk(MutationsLib.PigBoarFatPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.PigBoarFatFinalForm)) {
-				player.removePerk(MutationsLib.PigBoarFatFinalForm);
-				player.createPerk(MutationsLib.PigBoarFatEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) {
-				player.removePerk(MutationsLib.SalamanderAdrenalGlandsEvolved);
-				player.createPerk(MutationsLib.SalamanderAdrenalGlandsPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsFinalForm)) {
-				player.removePerk(MutationsLib.SalamanderAdrenalGlandsFinalForm);
-				player.createPerk(MutationsLib.SalamanderAdrenalGlandsEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.TwinHeartEvolved)) {
-				player.removePerk(MutationsLib.TwinHeartEvolved);
-				player.createPerk(MutationsLib.TwinHeartPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.TwinHeartFinalForm)) {
-				player.removePerk(MutationsLib.TwinHeartFinalForm);
-				player.createPerk(MutationsLib.TwinHeartEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.VampiricBloodsteamEvolved)) {
-				player.removePerk(MutationsLib.VampiricBloodsteamEvolved);
-				player.createPerk(MutationsLib.VampiricBloodsteamPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.VampiricBloodsteamFinalForm)) {
-				player.removePerk(MutationsLib.VampiricBloodsteamFinalForm);
-				player.createPerk(MutationsLib.VampiricBloodsteamEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.VenomGlandsEvolved)) {
-				player.removePerk(MutationsLib.VenomGlandsEvolved);
-				player.createPerk(MutationsLib.VenomGlandsPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.VenomGlandsFinalForm)) {
-				player.removePerk(MutationsLib.VenomGlandsFinalForm);
-				player.createPerk(MutationsLib.VenomGlandsEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.WhaleFatEvolved)) {
-				player.removePerk(MutationsLib.WhaleFatEvolved);
-				player.createPerk(MutationsLib.WhaleFatPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.WhaleFatFinalForm)) {
-				player.removePerk(MutationsLib.WhaleFatFinalForm);
-				player.createPerk(MutationsLib.WhaleFatEvolved, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.YetiFatEvolved)) {
-				player.removePerk(MutationsLib.YetiFatEvolved);
-				player.createPerk(MutationsLib.YetiFatPrimitive, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(MutationsLib.YetiFatFinalForm)) {
-				player.removePerk(MutationsLib.YetiFatFinalForm);
-				player.createPerk(MutationsLib.YetiFatEvolved, 0, 0, 0, 0);
-			}
 			doNext(camp.doCamp);
 			return;
 		}
@@ -1765,48 +1471,7 @@ public class SaveUpdater extends NPCAwareContent {
 				if (Crafting.BagSlot01Cap > 0) player.createKeyItem("Tarnished Ore Bag (Lowest grade)", 0, 0, 0, 0);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.014;
 			}
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.015) {
-				//MutationsPorting
-				updateMutationsv3("Heart");
-				updateMutationsv3("Muscle");
-				updateMutationsv3("Mouth");
-				updateMutationsv3("Adrenals");
-				updateMutationsv3("Bloodstream");
-				updateMutationsv3("FaT");
-				updateMutationsv3("Lungs");
-				updateMutationsv3("Metabolism");
-				updateMutationsv3("Ovaries");
-				updateMutationsv3("Testicles");
-				updateMutationsv3("Eyes");
-				updateMutationsv3("Bone");
-				updateMutationsv3("Nerv/Sys");
-				updateMutationsv3("Thyroid");
-				updateMutationsv3("PThyroid");
-				updateMutationsv3("Adaptations");
-				function updateMutationsv3(type:String):void{
-					var arrayVal:int = 0;
-					var array1:Array = MutationsLib.mutationsArray(type);
-					var array2:Array = IMutationsLib.mutationsArray(type);
-					for each(var pPerkArray:Array in array1){
-						var x:int = pPerkArray.length;
-						while (x > 0){
-							if (player.hasPerk(pPerkArray[x-1])){
-								array2[arrayVal].acquireMutation(player, "none", x);
-								x--;
-								break;
-							}
-							x--;
-						}
-						while (x > 0){
-							player.removePerk(pPerkArray[x]);
-							x--;
-						}
-						arrayVal++;
-					}
-				}
-				//CoC.instance.charCreation.setupMutations();
-				flags[kFLAGS.MOD_SAVE_VERSION] = 35.015;
-			}
+			//35.015 Removed, code is now handled in MutationLib for Mutations Migration.
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.016) {
 				if (player.hasMutation(IMutationsLib.GorgonEyesIM)){
 					player.HP = player.maxOverHP();
@@ -1833,9 +1498,6 @@ public class SaveUpdater extends NPCAwareContent {
 					flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = 0;
 				}
 				outputText("\nWeapons duplication from woodelves hunting party should now be fixed.... again.");
-				for each (var mutation:PerkType in MutationsLib.mutationsArray("", true)){
-					player.removePerk(mutation);
-				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.018;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.019) {
@@ -2007,6 +1669,15 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.WHITNEY_ORAL_TRAINING_VAG] = flags[kFLAGS.WHITNEY_ORAL_TRAINING_COCK]; //new flag!
 				camp.testmenu.fixShards2nd();
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.007;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.008) {
+				if (flags[kFLAGS.APEX_SELECTED_RACE] >= 18) flags[kFLAGS.APEX_SELECTED_RACE] += 1;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.008;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.009) {
+				if (player.furColor == "lilac and white striped") player.furColor = "lilac and white";
+				if (player.hairColor == "lilac and white striped") player.hairColor = "lilac and white";
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.009;
 			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.008) {
 				if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.HclassHeavenTribulationSurvivor);
@@ -2058,7 +1729,7 @@ public class SaveUpdater extends NPCAwareContent {
 	private function chooseFurColorSaveUpdate(color:String):void {
 		clearOutput();
 		outputText("You now have " + color + " fur. You will be returned to your [camp] now and you can continue your usual gameplay.");
-		player.skin.coat.color = color;
+		player.furColor = color;
 		doNext(camp.doCamp);
 	}
 

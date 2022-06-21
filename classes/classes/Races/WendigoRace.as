@@ -15,7 +15,7 @@ public class WendigoRace extends Race {
 		
 		addScores()
 				.hairColor("silver-white", +1)
-				.skinCoatColor("snow white", +1)
+				.furColor("snow white", +1)
 				.eyeType(Eyes.DEAD, +1)
 				.eyeColor("spectral blue", +1)
 				.tongueType(Tongue.RAVENOUS_TONGUE, +1)

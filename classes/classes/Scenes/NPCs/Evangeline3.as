@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -201,7 +201,7 @@ public class Evangeline3 extends Monster
 			}
 		}//HPRatio() > .5 - to używać jeśli coś ma być użyte powyżej lub poniżej x% max HP Evangeline
 		
-		public function Evangeline3() 
+		public function Evangeline3()
 		{
 			this.a = "";
 			this.short = "Evangeline";
@@ -368,7 +368,7 @@ public class Evangeline3 extends Monster
 			this.createVagina(false, VaginaClass.WETNESS_DRY, VaginaClass.LOOSENESS_TIGHT);
 			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
-			this.skinTone = "olive";
+			this.bodyColor = "olive";
 			this.hairColor = "crimson platinum";
 			this.hairLength = 36;
 			this.fatigue = 0;

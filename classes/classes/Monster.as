@@ -590,27 +590,31 @@ import flash.utils.getQualifiedClassName;
 				if (this.level >= 51) temp += 150;
 			}
 			if (hasPerk(PerkLib.InsightfulResourcesI)) temp += Math.round((this.wis*5) * (1 + newGamePlusMod()));
+			var multimax:Number = 1;
 			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) temp += 40;
-				if (hasPerk(PerkLib.SoulPersonage)) temp += 40;
-				if (hasPerk(PerkLib.SoulWarrior)) temp += 40;
+				if (hasPerk(PerkLib.SoulApprentice)) temp += 50;
+				if (hasPerk(PerkLib.SoulPersonage)) temp += 50;
+				if (hasPerk(PerkLib.SoulWarrior)) temp += 50;
+				multimax += 0.05;
 			}
 			if (hasPerk(PerkLib.DaoistWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) temp += 60;
-				if (hasPerk(PerkLib.SoulScholar)) temp += 60;
-				if (hasPerk(PerkLib.SoulElder)) temp += 60;
+				if (hasPerk(PerkLib.SoulSprite)) temp += 100;
+				if (hasPerk(PerkLib.SoulScholar)) temp += 100;
+				if (hasPerk(PerkLib.SoulElder)) temp += 100;
+				multimax += 0.05;
 			}
 			if (hasPerk(PerkLib.DaoistElderStage)) {
-				if (hasPerk(PerkLib.SoulExalt)) temp += 100;
-				if (hasPerk(PerkLib.SoulOverlord)) temp += 100;
-				if (hasPerk(PerkLib.SoulTyrant)) temp += 100;
+				if (hasPerk(PerkLib.SoulExalt)) temp += 200;
+				if (hasPerk(PerkLib.SoulOverlord)) temp += 200;
+				if (hasPerk(PerkLib.SoulTyrant)) temp += 200;
+				multimax += 0.1;
 			}
 			if (hasPerk(PerkLib.DaoistOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) temp += 150;
-				if (hasPerk(PerkLib.SoulEmperor)) temp += 150;
-				if (hasPerk(PerkLib.SoulAncestor)) temp += 150;
+				if (hasPerk(PerkLib.SoulKing)) temp += 300;
+				if (hasPerk(PerkLib.SoulEmperor)) temp += 300;
+				if (hasPerk(PerkLib.SoulAncestor)) temp += 300;
+				multimax += 0.1;
 			}
-			var multimax:Number = 1;
 			if (hasPerk(PerkLib.DeityJobMunchkin)) multimax += 0.1;
 			if (hasPerk(PerkLib.LimitBreakerSoul1stStage)) multimax += 0.05;
 			if (hasPerk(PerkLib.LimitBreakerSoul2ndStage)) multimax += 0.1;
@@ -1287,7 +1291,7 @@ import flash.utils.getQualifiedClassName;
 			///*OPTIONAL*/ //this.arms.type = ARM_TYPE_; // default human
 
 			//// 6. Skin
-			///*OPTIONAL*/ //this.skinTone = "skinTone"; // default "albino"
+			///*OPTIONAL*/ //this.bodyColor = "bodyColor"; // default "albino"
 			///*OPTIONAL*/ //this.skinType = SKIN_TYPE_; // default PLAIN
 			///*OPTIONAL*/ //this.skinDesc = "skinDesc"; // default "skin" if this.skinType is not set, else Appearance.DEFAULT_SKIN_DESCS[skinType]
 			///*OPTIONAL*/ //this.skinAdj = "skinAdj"; // default ""
@@ -2326,7 +2330,7 @@ import flash.utils.getQualifiedClassName;
 			          Appearance.describeByScale(butt.type,Appearance.DEFAULT_BUTT_RATING_SCALES,"thinner than","wider than") + " butt.\n";
 			result += Pronoun3+" lower body is "+Object(LowerBody.Types[lowerBody]||{}).name;
 			result += ", "+pronoun3+" arms are "+Object(Arms.Types[arms.type]||{}).name;
-			result += ", "+pronoun1+" "+have+" "+skinTone+" "+skinAdj+" "+skinDesc+
+			result += ", "+pronoun1+" "+have+" "+bodyColor+" "+skinAdj+" "+skinDesc+
 					  " (base "+Object(Skin.SkinTypes[skin.baseType()]||{}).id+")." +
 					  " (coat "+Object(Skin.SkinTypes[skin.coatType()]||{}).id+")." +
 					  "\n";
@@ -2522,7 +2526,10 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.SoulKing)) soulforceRecovery += 5;
 				if (hasPerk(PerkLib.SoulEmperor)) soulforceRecovery += 5;
 				if (hasPerk(PerkLib.SoulAncestor)) soulforceRecovery += 5;
-				if (hasPerk(PerkLib.DaoistCultivator)) soulforceRecoveryMulti += 0.5;
+				if (hasPerk(PerkLib.DaoistApprenticeStage)) soulforceRecoveryMulti += 0.5;
+				if (hasPerk(PerkLib.DaoistWarriorStage)) soulforceRecoveryMulti += 0.5;
+				if (hasPerk(PerkLib.DaoistElderStage)) soulforceRecoveryMulti += 1;
+				if (hasPerk(PerkLib.DaoistOverlordStage)) soulforceRecoveryMulti += 1;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 1) soulforceRecovery += 4;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 2) soulforceRecovery += 4;
 				if (perkv1(IMutationsLib.DraconicHeartIM) >= 3) soulforceRecovery += 4;
@@ -3055,6 +3062,27 @@ import flash.utils.getQualifiedClassName;
 					else outputText("[Themonster] burns from lingering Burn after-effect. ");
 					store4 = SceneLib.combat.doFireDamage(store4, true, true);
 					outputText("\n\n");
+				}
+			}
+			//Formic Acid DoT
+			if (hasStatusEffect(StatusEffects.AntFire)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.AntFire,1,-1);
+				//Heal wounds
+				if(statusEffectv1(StatusEffects.AntFire) <= 0) {
+					outputText("The formic acid burning " + a + short + " finally wore out.\n\n");
+					removeStatusEffect(StatusEffects.AntFire);
+				}
+				//Deal damage if still wounded.
+				else {
+					var store15:Number = (player.str + player.tou) * 2.5;
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store15 *= 1.2;
+					if (player.racialScore(Races.ANT) <= 4) store15 *= 0.75
+					store15 = Math.round(store15 * SceneLib.combat.poisonDamageBoostedByDao());
+					store15 += maxHP() * statusEffectv2(StatusEffects.AntFire);
+					store15 = SceneLib.combat.doFireDamage(store15);
+					if(plural) outputText(capitalA + short + " burn from lingering formic acid. <b>([font-red]" + store15 + "[/font])</b>\n\n");
+					else outputText(capitalA + short + " burns from lingering formic acid. <b>([font-red]" + store15 + "[/font])</b>\n\n");
 				}
 			}
 			//Burn DoT

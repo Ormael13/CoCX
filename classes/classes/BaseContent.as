@@ -645,6 +645,9 @@ import coc.xxc.StoryContext;
 		protected function get transformations():TransformationLib {
 			return CoC.instance.transformations;
 		}
+		protected function get itemTemplates():ItemTemplateLib{
+			return ItemTemplateLib.instance;
+		}
 		protected function get consumables():ConsumableLib{
 			return CoC.instance.consumables;
 		}

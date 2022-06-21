@@ -36,7 +36,7 @@ public class BeeGirl extends Monster {
 				return;
 			}
 			//Determine if dodged!
-			if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			if (player.speedDodge(this)>0) {
 				if (player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s stinger!");
 				if (player.spe - spe >= 8 && player.spe - spe < 20) outputText("You dodge " + a + short + "'s stinger with superior quickness!");
 				if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow attempts to sting you.");
@@ -98,7 +98,7 @@ public class BeeGirl extends Monster {
 			this.hips.type = Hips.RATING_CURVY + 3;
 			this.butt.type = Butt.RATING_EXPANSIVE;
 			this.lowerBody = LowerBody.BEE;
-			this.skinTone = "yellow";
+			this.bodyColor = "yellow";
 			this.hairColor = randomChoice("black","black and yellow");
 			this.hairLength = 6;
 			initStrTouSpeInte(30, 50, 30, 20);

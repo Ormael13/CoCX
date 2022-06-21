@@ -15,7 +15,7 @@ package classes.Items.Weapons
 		
 		public function AetherD() 
 		{
-			super("AetherD", "AetherD", "Aether (Dex)", "an Aether (Dex)", "punch", 0, 0, "Aether - dexter part of mysterious sentient weapons pair rumored to be forged by the god of blacksmiths.");
+			super("AetherD", "AetherD", "Aether (Dex)", "an Aether (Dex)", "punch", 0, 0, "Aether - dexter part of mysterious sentient weapons pair rumored to be forged by the god of blacksmiths.", "", "Gauntlet");
 		}
 		
 		override public function get description():String {

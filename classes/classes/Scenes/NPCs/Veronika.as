@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Arms;
@@ -36,7 +36,7 @@ import classes.internals.*;
 			if (choice == 2) eAttack();
 		}
 		
-		public function Veronika() 
+		public function Veronika()
 		{
 			this.a = "the ";
 			this.short = "nekomata";
@@ -50,7 +50,7 @@ import classes.internals.*;
 			this.tallness = 92;
 			this.hips.type = Hips.RATING_CURVY + 4;
 			this.butt.type = Butt.RATING_JIGGLY + 1;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = "red";//or crimson (red)?
 			this.hairLength = 39;
 			//if (flags[kFLAGS.RANGIKU_LVL_UP] < 1) {

@@ -73,7 +73,7 @@ public class Hel extends Monster
 				return;
 			}
 			//Determine if dodged!
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 83) {
+			if(player.speedDodge(this)>0) {
 				outputText("The salamander rushes at you, knocking aside your defensive feint and trying to close the distance between you.  She lashes out at your feet with her tail, and you're only just able to dodge the surprise attack.");
 				return;
 			}
@@ -117,7 +117,7 @@ public class Hel extends Monster
 
 		private function helCleavage():void {
 			//FAIL
-			if((player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) || (player.hasPerk(PerkLib.Evade) && rand(100) < 10) || (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80)) {
+			if((player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) || (player.hasPerk(PerkLib.Evade) && rand(100) < 10) || (player.speedDodge(this)>0)) {
 				outputText("To your surprise, the salamander suddenly pulls up her top, letting her hefty breasts hang free in the air; her small, bright pink nipples quickly harden from either arousal or temperature.  Before you can take your eyes off her impressive rack, she jumps at you.  One of her scaled arms reaches around your waist, and the other toward your head, but you roll away from her grip and push her bodily away.  She staggers a moment, but then quickly yanks the jangling bikini top back down with a glare.\n");
 			}
 			//Attack 3 – Lust – Cleavage (Failure)
@@ -170,7 +170,7 @@ public class Hel extends Monster
 			this.tallness = 84;
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
-			this.skinTone = "dusky";
+			this.bodyColor = "dusky";
 			this.hairColor = "red";
 			this.hairLength = 13;
 			initStrTouSpeInte(90, 80, 75, 60);

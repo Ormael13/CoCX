@@ -1,4 +1,5 @@
 package classes.BodyParts {
+import classes.Creature;
 
 public class Butt extends BodyPart {
 	public static const RATING_BUTTLESS:int = 0;
@@ -11,8 +12,8 @@ public class Butt extends BodyPart {
 	public static const RATING_HUGE:int = 16;
 	public static const RATING_INCONCEIVABLY_BIG:int = 20;
 
-	public function Butt() {
-		super(null, null);
+	public function Butt(creature:Creature) {
+		super(creature, null);
 	}
 }
 }

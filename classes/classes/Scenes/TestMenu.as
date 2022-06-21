@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes 
+package classes.Scenes
 {
 import classes.*;
 import classes.BodyParts.*;
@@ -40,7 +40,7 @@ use namespace CoC;
 public class TestMenu extends BaseContent
 	{
 		
-		public function TestMenu() 
+		public function TestMenu()
 		{}
 		//w lini 28 w oOnLoadVariables zmian wprowadzić i w lini conditionalConverters w folderze parser zmian dot. wraith wprowadzić
 	public function SoulforceCheats1(page:int = 0):void{
@@ -126,9 +126,23 @@ public class TestMenu extends BaseContent
 		menuItems.push("LilyPregF", (DriderTown.LilyKidsPCPregnancy != 0 && LilyFollower.LilyFollowerState)? FairyTest3: false, "Curing Lily Infertility ^^");
 		menuItems.push("NewSoulCult", applyHangover, "Cripple your cultivation base to start anew (with a bit more milf fluff in your life).");
 		menuItems.push("Refill SF", refillSoulforce, "Refill your Soulforce.");
-		menuItems.push("EvaMutateReq", mutateReqNope, "Turns on/off mutation requirements")
+		menuItems.push("NY(S/NS)MA-D", anTrigger, "Now you see or not see me.\n\n<i><b>(Anty-Dexterity)</b></i>");
+		menuItems.push("EvaMutateReq", mutateReqNope, "Turns on/off mutation requirements");
 		//menuItems.push("WeaponsXPtest", SceneLib.dilapidatedShrine.weaponsXPtrader, "");
 		menuGen(menuItems, page, playerMenu);
+	}
+	
+	private function anTrigger():void {
+		clearOutput();
+		if (player.hasPerk(PerkLib.AntyDexterity)) {
+			player.removePerk(PerkLib.AntyDexterity);
+			outputText("Now you don't see me.\n\n<i><b>(Anty-Dexterity)</b></i>");
+		}
+		else {
+			player.createPerk(PerkLib.AntyDexterity, 0, 0, 0, 0);
+			outputText("Now you see me.\n\n<i><b>(Anty-Dexterity)</b></i>");
+		}
+		doNext(curry(SoulforceCheats1, 3));
 	}
 
 	private function mutateReqNope():void{
@@ -161,8 +175,13 @@ public class TestMenu extends BaseContent
 		if (player.hasKeyItem("Heavenly Tribulation: Myths and Facts") >= 0) player.removeKeyItem("Heavenly Tribulation: Myths and Facts");
 		if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.HclassHeavenTribulationSurvivor);
 		if (player.hasPerk(PerkLib.SoulSprite)) player.removePerk(PerkLib.SoulSprite);
+		if (player.hasPerk(PerkLib.SoulScholar)) player.removePerk(PerkLib.SoulScholar);
+		if (player.hasPerk(PerkLib.SoulElder)) player.removePerk(PerkLib.SoulElder);
 		if (player.hasKeyItem("A summary of Marethian Sects") >= 0) player.removeKeyItem("A summary of Marethian Sects");
 		if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.GclassHeavenTribulationSurvivor);
+		if (player.hasPerk(PerkLib.SoulExalt)) player.removePerk(PerkLib.SoulExalt);
+		if (player.hasPerk(PerkLib.SoulOverlord)) player.removePerk(PerkLib.SoulOverlord);
+		if (player.hasPerk(PerkLib.SoulTyrant)) player.removePerk(PerkLib.SoulTyrant);
 		//if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) player.removePerk(PerkLib.FclassHeavenTribulationSurvivor);
 		if (player.hasPerk(PerkLib.DaoistCultivator)) player.removePerk(PerkLib.DaoistCultivator);
 		if (player.hasPerk(PerkLib.DaoistApprenticeStage)) player.removePerk(PerkLib.DaoistApprenticeStage);
@@ -170,7 +189,7 @@ public class TestMenu extends BaseContent
 		if (player.hasPerk(PerkLib.DaoistElderStage)) player.removePerk(PerkLib.DaoistElderStage);
 		if (player.hasPerk(PerkLib.DaoistOverlordStage)) player.removePerk(PerkLib.DaoistOverlordStage);
 		if (flags[kFLAGS.SOUL_CULTIVATION] > 0) flags[kFLAGS.SOUL_CULTIVATION] = 0;
-		doNext(curry(SoulforceCheats1, 0));
+		doNext(curry(SoulforceCheats1, 3));
 	}
 	public function FairyTest3():void {
 		DriderTown.LilyKidsPCPregnancy = 0;
@@ -2346,16 +2365,16 @@ public class TestMenu extends BaseContent
 	}
 	public function MarbleGargoyleForm():void {
 		flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 1;
-		player.skinTone = "light grey";
-		player.hairColor = "light grey";
+		player.skinColor                     = "light grey";
+		player.hairColor                     = "light grey";
 		clearOutput();
 		outputText("You have become marble gargoyle. Now choose your wings shape.");
 		doNext(WingShapeChoices);
 	}
 	public function AlabasterGargoyleForm():void {
 		flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 2;
-		player.skinTone = "quartz white";
-		player.hairColor = "quartz white";
+		player.skinColor                     = "quartz white";
+		player.hairColor                     = "quartz white";
 		clearOutput();
 		outputText("You have become alabaster gargoyle. Now choose your wings shape.");
 		doNext(WingShapeChoices);
@@ -2449,11 +2468,11 @@ public class TestMenu extends BaseContent
 	}
 	public function GargoyleBodyChanges():void {
 		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
-			player.skinTone = "light grey";
+			player.skinColor = "light grey";
 			player.hairColor = "light grey";
 		}
 		if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) {
-			player.skinTone = "quartz white";
+			player.skinColor = "quartz white";
 			player.hairColor = "quartz white";
 		}
 		player.skin.setBaseOnly({type:Skin.STONE});

@@ -596,6 +596,17 @@ package classes.GeneticMemories {
 			  return CoC.instance.transformations.LowerBodyGoo
 		  }
 	  });
+    
+	  public static const ANT: int = _partid++;
+	  EnumValue.add(Memories, ANT, "ANT", {
+		  id: "Ant Lower Body",
+		  name: "Ant Legs",
+		  cost: 100,
+		  title: "Ant",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.LowerBodyAnt
+		  }
+	  });
 
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];

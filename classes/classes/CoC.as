@@ -65,7 +65,7 @@ public class CoC extends MovieClip
     public var date:Date = new Date();
 
     //Mod save version.
-    public var modSaveVersion:Number = 36.007;
+    public var modSaveVersion:Number = 36.009;
     public var levelCap:Number = 185;
 
     //Lock cheats menus from public builds.
@@ -86,6 +86,7 @@ public class CoC extends MovieClip
     public var mutations:Mutations                 = new Mutations();
     public var transformations:TransformationLib   = new TransformationLib();
     // Items/
+    public var itemTemplates:ItemTemplateLib       = new ItemTemplateLib();
     public var consumables:ConsumableLib           = new ConsumableLib();
     public var useables:UseableLib;
     public var weapons:WeaponLib                   = new WeaponLib();

@@ -2,7 +2,7 @@
  * ...
  * @author Ormael & Pyromania
  */
-package classes.Scenes.Dungeons.RiverDungeon 
+package classes.Scenes.Dungeons.RiverDungeon
 {
 import classes.*;
 import classes.BodyParts.Arms;
@@ -175,7 +175,7 @@ use namespace CoC;
 			return str;
 		}
 
-		public function Vegot() 
+		public function Vegot()
 		{
 			this.a = "";
 			this.short = "Vegot";
@@ -191,7 +191,7 @@ use namespace CoC;
 			this.tallness = 120;
 			this.hips.type = Hips.RATING_AVERAGE;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = "white";
 			this.hairLength = 10;
 			initStrTouSpeInte(130, 195, 230, 200);

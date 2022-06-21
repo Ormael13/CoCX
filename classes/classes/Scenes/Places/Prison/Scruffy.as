@@ -1,4 +1,4 @@
-package classes.Scenes.Places.Prison 
+package classes.Scenes.Places.Prison
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -19,7 +19,7 @@ public class Scruffy extends Imp
 			SceneLib.prison.scruffyScene.prisonCaptorRandomEventJizzJanitorLoss();
 		}
 		
-		public function Scruffy() 
+		public function Scruffy()
 		{
 			this.a = "";
 			this.short = "Scruffy";
@@ -35,7 +35,7 @@ public class Scruffy extends Imp
 			this.tallness = 40;
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 5;
 			initStrTouSpeInte(40, 30, 40, 28);

@@ -5,6 +5,7 @@ package classes.Scenes.Areas.Swamp
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Items.Armors.FairyQueenRegalia;
 	import classes.Items.WeaponLib;
 	import classes.StatusEffects.Combat.WebDebuff;
 
@@ -34,13 +35,13 @@ public class AbstractSpiderMorph extends Monster
 		 * flight once hit.*/
 		public function spiderMorphWebAttack():void
 		{
-			outputText("Turning to the side, " + a + short + " raises " + mf("his", "her") + " abdomen and unleashes a spray of webbing in your direction!  ");
+			outputText("Turning to the side, [themonster] raises [monster his] abdomen and unleashes a spray of webbing in your direction!  ");
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + " misses completely due to their blindness.");
+				outputText("[Themonster] misses completely due to their blindness.");
 			}
 			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			else if (player.speedDodge(this)>0) {
 				outputText("You dodge away, avoiding the sticky strands!");
 			}
 			//Determine if evaded
@@ -48,7 +49,7 @@ public class AbstractSpiderMorph extends Monster
 				outputText("You evade, avoiding the sticky strands!");
 			}
 			//("Misdirection"
-			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armor is FairyQueenRegalia)) {
 				outputText("Your misleading movements allow you to easily sidestep the sticky strands!");
 			}
 			//Determine if cat'ed
@@ -99,7 +100,7 @@ public class AbstractSpiderMorph extends Monster
 				outputText(capitalA + short + " misses completely due to their blindness.");
 			}
 			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			else if (player.speedDodge(this)>0) {
 				outputText("You dodge away, avoiding " + mf("his", "her") + " bite!");
 			}
 			//Determine if evaded
@@ -138,7 +139,7 @@ public class AbstractSpiderMorph extends Monster
 				outputText("The blind web-shot goes horribly wide, missing you entirely.");
 			}
 			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			else if (player.speedDodge(this)>0) {
 				outputText("You pull your weapon back and the webbing goes wide, missing entirely.");
 			}
 			//Determine if evaded
@@ -181,7 +182,7 @@ public class AbstractSpiderMorph extends Monster
 				outputText("The blind web-shot goes horribly wide, missing you entirely.");
 			}
 			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			else if (player.speedDodge(this)>0) {
 				outputText("You lean back and let them pass harmlessly overhead, avoiding the attack.");
 			}
 			//Determine if evaded

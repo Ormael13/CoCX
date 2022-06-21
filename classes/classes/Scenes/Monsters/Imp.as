@@ -151,7 +151,7 @@ public class Imp extends Monster
 			this.tallness = rand(24) + 25;
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 5;
 			initStrTouSpeInte(18, 9, 18, 11);

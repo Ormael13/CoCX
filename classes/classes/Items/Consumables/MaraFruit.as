@@ -197,21 +197,14 @@ public class MaraFruit extends Consumable{
 			CoC.instance.transformations.SkinPlain.applyEffect();
 			changes++;
 		}
-		if (player.hasPlainSkinOnly() && player.skinTone != "leaf green" && player.skinTone != "lime green" && player.skinTone != "turquoise" && player.skinTone != "light green" && changes < changeLimit && rand(2) == 0) {
-			if (rand(10) == 0) player.skinTone = "turquoise";
-			else {
-				if (rand(7) == 0) player.skinTone = "lime green";
-				else {
-					if (rand(4) == 0) player.skinTone = "leaf green";
-					else player.skinTone = "light green";
-				}
-			}
+		if (player.hasPlainSkinOnly() && !InCollection(player.skinColor, "leaf green", "lime green", "turquoise", "light green") && changes < changeLimit && rand(2) == 0) {
+			player.skinColor = randomChoice("turquoise", "lime green", "leaf green", "light green");
 			changes++;
-			outputText("\n\nWhoah, that was weird.  You just hallucinated that your skin turned " + player.skinTone + ".  No way!  It's staying, it really changed color!");
+			outputText("\n\nWhoah, that was weird.  You just hallucinated that your skin turned " + player.skinColor + ".  No way!  It's staying, it really changed color!");
 		}
 		//insert here turning into bark skin so it req. at least 2x use of mara fruit a także dodać wymaganie posiadanie już plant arms i legs
 		//Legs
-		if (player.skin.hasPlainSkinOnly() && (player.skinTone == "leaf green" || player.skinTone == "lime green" || player.skinTone == "turquoise" || player.skinTone == "light green") && changes < changeLimit && rand(3) == 0) {
+		if (player.skin.hasPlainSkinOnly() && (player.skinColor == "leaf green" || player.skinColor == "lime green" || player.skinColor == "turquoise" || player.skinColor == "light green") && changes < changeLimit && rand(3) == 0) {
 			//Males/genderless get clawed feet
 			if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
 				if (player.lowerBody != LowerBody.PLANT_ROOT_CLAWS) {
@@ -275,7 +268,7 @@ public class MaraFruit extends Consumable{
 		if (player.hairColor != "green" && !player.isGargoyle() && rand(3) == 0 && changes < changeLimit)
 		{
 			outputText("\n\nAt first it looks like nothing changed but then you realize all the hair on your body has shifted to a verdant green color.  <b>You now have green hair.</b>");
-			player.hairColorOnly = "green";
+			player.hairColor = "green";
 		}
 		//Horns
 		if ((player.hairType == Hair.LEAF || player.hairType == Hair.GRASS) && changes < changeLimit && rand(2) == 0) {
@@ -304,7 +297,7 @@ public class MaraFruit extends Consumable{
 			CoC.instance.transformations.TailNone.applyEffect(false);
 			CoC.instance.transformations.WingsNone.applyEffect(false);
 			CoC.instance.transformations.LowerBodyPlantFlower.applyEffect(false);
-			player.coatColor = "pink";
+			player.featherColor = "pink";
 			changes++;
 		}
 		player.refillHunger(10);

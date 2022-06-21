@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Areas.Beach 
+package classes.Scenes.Areas.Beach
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -25,7 +25,7 @@ public class DemonPackBeach extends Monster
 			applyTease(lustDelta);
 		}
 		
-		public function DemonPackBeach() 
+		public function DemonPackBeach()
 		{
 			this.a = "the ";
 			this.short = "beach demons";
@@ -48,7 +48,7 @@ public class DemonPackBeach extends Monster
 			this.tallness = rand(8) + 70;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(170, 190, 80, 40);
