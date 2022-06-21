@@ -104,7 +104,7 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can choose and adjust various misc effects.</b>");
 			addButton(8, "Misc Opt",MiscOption);
 		}
-		addButton (9, "PerkDB2", perkDatabase2); //WIP.
+		//addButton (9, "PerkDB2", perkDatabase2); //WIP. //Apparently conflicts with Racial Score display
 		if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
 			outputText("\n<b>You can adjust your elemental summons behaviour during combat.</b>");
 			addButton(10, "Elementals",summonsbehaviourOptions);
