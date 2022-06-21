@@ -610,7 +610,7 @@ private function craftingMaterialsMoonstone1Down():void {
 		}*/
 
 
-		public function roomInExistingStack(itype:ItemType):Number {
+		public function roomForMaterial(itype:ItemType):Number {
 			switch (itype) {
 				case useables.COP_ORE: if (BagSlot01 < BagSlot01Cap) return BagSlot01;
 					break;
@@ -627,7 +627,7 @@ private function craftingMaterialsMoonstone1Down():void {
 			}
 			return -1;
 		}
-		public function placeItemInStack(itype:ItemType):Number {
+		public function placeMaterialInBag(itype:ItemType):Number {
 			switch (itype) {
 				case useables.COP_ORE: craftingMaterialsCopperOre1UP();
 					break;
@@ -643,6 +643,46 @@ private function craftingMaterialsMoonstone1Down():void {
 					break;
 			}
 			return -1;
+		}
+		public function hasMaterial(itype:ItemType):Number {
+			switch (itype) {
+				case useables.COP_ORE: return BagSlot01;
+				case useables.TIN_ORE: return BagSlot02;
+				case useables.BRONZEB: return BagSlot03;
+				case useables.IRONORE: return BagSlot04;
+				case useables.EBONING: return BagSlot06;
+				case useables.MOONSTO: return BagSlot07;
+			}
+			return -1;
+		}
+		public function useMaterial(itype:ItemType, amount:Number = 1):Boolean {
+			switch (itype) {
+				case useables.COP_ORE: if (BagSlot01 >= amount) {
+					BagSlot01 -= amount;
+					return true;
+				} else return false;
+				case useables.TIN_ORE: if (BagSlot02 >= amount) {
+					BagSlot02 -= amount;
+					return true;
+				} else return false;
+				case useables.BRONZEB: if (BagSlot03 >= amount) {
+					BagSlot03 -= amount;
+					return true;
+				} else return false;
+				case useables.IRONORE: if (BagSlot04 >= amount) {
+					BagSlot04 -= amount;
+					return true;
+				} else return false;
+				case useables.EBONING: if (BagSlot06 >= amount) {
+					BagSlot06 -= amount;
+					return true;
+				} else return false;
+				case useables.MOONSTO: if (BagSlot07 >= amount) {
+					BagSlot07 -= amount;
+					return true;
+				} else return false;
+			}
+			return false;
 		}
 	}
 }
